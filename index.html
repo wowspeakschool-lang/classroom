@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WowSpeak Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   WowSpeak Study — single-file app
+   v1 · скелет: auth + библиотека + курс с юнитами + заготовки
+   ================================================================ */
+
+:root {
+    --cream: #FFFBF2;
+    --cream-deep: #F1EFE8;
+    --white: #FFFFFF;
+
+    --purple:       #7F77DD;
+    --purple-dark:  #3C3489;
+    --purple-light: #EEEDFE;
+
+    --orange:       #BA7517;
+    --orange-light: #FAEEDA;
+    --orange-dark:  #854F0B;
+
+    --green:        #639922;
+    --green-dark:   #27500A;
+    --green-light:  #EAF3DE;
+
+    --red:          #A32D2D;
+    --red-light:    #FCEBEB;
+    --red-mid:      #F0997B;
+
+    --teal:         #0F6E56;
+    --teal-light:   #E1F5EE;
+    --teal-mid:     #5DCAA5;
+
+    --blue-light:   #E6F1FB;
+    --blue-dark:    #0C447C;
+
+    --coral-light:  #FAECE7;
+    --coral-dark:   #712B13;
+
+    --pink-light:   #FBEAF0;
+    --pink-dark:    #72243E;
+
+    --text:         #2C2C2A;
+    --text-soft:    #5F5E5A;
+    --text-mute:    #888780;
+
+    --border:       #E8E3D6;
+    --border-soft:  #C8C4B6;
+
+    --font-heading: 'Fredoka', system-ui, -apple-system, sans-serif;
+    --font-body:    'Nunito', system-ui, -apple-system, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', Menlo, monospace;
+
+    --r-sm: 8px;
+    --r-md: 12px;
+    --r-lg: 16px;
+    --r-xl: 22px;
+    --r-pill: 999px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--cream);
+    background-image: radial-gradient(circle, rgba(120,80,40,0.08) 1px, transparent 1px);
+    background-size: 20px 20px;
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    margin: 0;
+    color: var(--text);
+}
+
+button { font-family: inherit; }
+input, textarea, select { font-family: inherit; }
+
+a { color: var(--purple-dark); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ============== LOGIN ============== */
+
+.login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.login-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    padding: 40px 36px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 4px 20px rgba(60,40,20,0.04);
+}
+.login-logo {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--purple-dark);
+    text-align: center;
+    margin-bottom: 6px;
+}
+.login-logo .accent { color: var(--orange); }
+.login-sub {
+    text-align: center;
+    color: var(--text-mute);
+    font-size: 13px;
+    margin-bottom: 28px;
+}
+.form-group {
+    margin-bottom: 14px;
+}
+.form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-soft);
+    margin-bottom: 4px;
+}
+.form-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    font-size: 15px;
+    background: var(--white);
+    transition: border-color .15s, box-shadow .15s;
+}
+.form-input:focus {
+    outline: none;
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px var(--purple-light);
+}
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-radius: var(--r-pill);
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: transform .12s, background .15s, opacity .15s;
+}
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-primary {
+    background: var(--purple);
+    color: var(--white);
+}
+.btn-primary:hover { background: var(--purple-dark); }
+.btn-secondary {
+    background: transparent;
+    color: var(--text-soft);
+    border: 1px solid var(--border);
+}
+.btn-secondary:hover { background: var(--cream-deep); }
+.btn-ghost {
+    background: transparent;
+    color: var(--text-soft);
+}
+.btn-ghost:hover { background: var(--cream-deep); }
+.btn-danger {
+    background: transparent;
+    color: var(--red);
+    border: 1px solid var(--red-mid);
+}
+.btn-danger:hover { background: var(--red-light); }
+.btn-full { width: 100%; }
+.btn-large { padding: 12px 24px; font-size: 15px; }
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+
+.login-actions { margin-top: 22px; }
+.login-foot {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--text-mute);
+}
+.login-foot a {
+    color: var(--purple-dark);
+    cursor: pointer;
+}
+
+/* ============== HEADER ============== */
+
+#mainApp { display: none; }
+
+.app-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.app-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--purple-dark);
+}
+.app-logo .badge {
+    width: 26px;
+    height: 26px;
+    background: var(--purple);
+    color: var(--white);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+.app-logo .study {
+    color: var(--orange);
+    font-weight: 500;
+}
+
+.subsite-switch {
+    display: flex;
+    gap: 4px;
+    background: var(--cream-deep);
+    padding: 3px;
+    border-radius: var(--r-pill);
+    margin-left: auto;
+}
+.subsite-btn {
+    padding: 5px 12px;
+    border-radius: var(--r-pill);
+    border: none;
+    background: transparent;
+    color: var(--text-soft);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.subsite-btn:hover { background: rgba(255,255,255,0.5); text-decoration: none; }
+.subsite-btn.active {
+    background: var(--white);
+    color: var(--purple-dark);
+    box-shadow: 0 1px 3px rgba(60,40,20,0.08);
+}
+
+.user-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+}
+.user-name { font-weight: 600; color: var(--text); }
+.user-role-badge {
+    background: var(--purple-light);
+    color: var(--purple-dark);
+    padding: 2px 9px;
+    border-radius: var(--r-pill);
+    font-size: 10px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    text-transform: lowercase;
+}
+.user-role-badge.teacher {
+    background: var(--green-light);
+    color: var(--green-dark);
+}
+.logout-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-mute);
+    padding: 4px 8px;
+    border-radius: var(--r-sm);
+    font-size: 18px;
+}
+.logout-btn:hover { background: var(--cream-deep); color: var(--text); }
+
+/* ============== MAIN CONTAINER ============== */
+
+.app-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.page-title {
+    font-size: 24px;
+    font-family: var(--font-heading);
+    font-weight: 500;
+}
+
+/* ============== TABS ============== */
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+.tab {
+    padding: 8px 16px;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-soft);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.tab:hover { background: var(--white); }
+.tab.active {
+    background: var(--purple);
+    color: var(--white);
+    border-color: var(--purple);
+}
+
+/* ============== COURSE GRID ============== */
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.course-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform .15s, box-shadow .15s;
+    text-decoration: none;
+}
+.course-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(60,40,20,0.08);
+    text-decoration: none;
+}
+.course-cover {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+}
+.course-body {
+    padding: 14px 16px;
+}
+.course-title {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 4px;
+    color: var(--text);
+}
+.course-meta {
+    font-size: 12px;
+    color: var(--text-mute);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.level-badge {
+    background: var(--purple-light);
+    color: var(--purple-dark);
+    padding: 2px 9px;
+    border-radius: var(--r-pill);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.course-card-create {
+    background: transparent;
+    border: 2px dashed var(--border-soft);
+    border-radius: var(--r-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--text-mute);
+    cursor: pointer;
+    min-height: 170px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--font-body);
+    transition: border-color .15s, color .15s;
+}
+.course-card-create:hover {
+    border-color: var(--purple);
+    color: var(--purple-dark);
+}
+.course-card-create .plus { font-size: 32px; line-height: 1; }
+
+/* ============== COURSE DETAIL ============== */
+
+.crumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--text-mute);
+}
+.crumbs a {
+    color: var(--text-soft);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.course-hero {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 18px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.course-hero-cover {
+    width: 90px;
+    height: 90px;
+    border-radius: var(--r-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    flex-shrink: 0;
+}
+.course-hero-body { flex: 1; min-width: 0; }
+.course-hero-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-mute);
+}
+.course-hero-title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 500;
+    margin: 2px 0 6px;
+}
+.course-hero-desc {
+    font-size: 13px;
+    color: var(--text-soft);
+    margin: 0 0 8px;
+}
+.course-hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-soft);
+}
+
+/* ============== UNITS ============== */
+
+.unit-section { margin-bottom: 20px; }
+.unit-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 4px 10px;
+    cursor: pointer;
+    user-select: none;
+}
+.unit-emoji { font-size: 22px; }
+.unit-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-mute);
+}
+.unit-title {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 500;
+}
+.unit-count {
+    font-size: 12px;
+    color: var(--text-mute);
+}
+.unit-actions { margin-left: auto; display: flex; gap: 4px; }
+
+.lesson-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 12px;
+}
+.lesson-row {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 10px 14px;
+}
+.lesson-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--cream-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-soft);
+}
+.lesson-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text);
+}
+.lesson-meta {
+    font-size: 11px;
+    color: var(--text-mute);
+    margin: 2px 0 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.lesson-meta span { display: inline-flex; align-items: center; gap: 3px; }
+.lesson-actions { display: flex; gap: 6px; align-items: center; }
+
+.icon-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    cursor: pointer;
+    color: var(--text-mute);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+.icon-btn:hover { background: var(--cream-deep); color: var(--text); }
+
+.add-row {
+    background: transparent;
+    border: 2px dashed var(--border-soft);
+    border-radius: var(--r-md);
+    padding: 8px;
+    font-size: 12px;
+    color: var(--text-mute);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    align-self: flex-start;
+    margin-left: 12px;
+}
+.add-row:hover { border-color: var(--purple); color: var(--purple-dark); }
+.add-row.wide { align-self: stretch; padding: 14px; margin-left: 0; }
+
+/* ============== EMPTY / LOADING ============== */
+
+.empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-mute);
+}
+.empty .emoji { font-size: 48px; margin-bottom: 12px; }
+.empty .title {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+.loader {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-mute);
+    font-size: 13px;
+}
+
+/* ============== UTILS ============== */
+
+.hidden { display: none !important; }
+.muted { color: var(--text-mute); }
+.kicker { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-mute); }
+
+/* ============== TOAST ============== */
+
+#toastContainer {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+}
+.toast {
+    background: var(--text);
+    color: var(--white);
+    padding: 10px 16px;
+    border-radius: var(--r-md);
+    font-size: 13px;
+    max-width: 320px;
+    pointer-events: auto;
+    animation: toastIn .25s ease-out;
+}
+.toast.error { background: var(--red); }
+.toast.success { background: var(--green); }
+@keyframes toastIn {
+    from { transform: translateX(20px); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============== LOGIN ============== -->
+<div id="loginScreen" class="login-screen">
+    <div class="login-card">
+        <div class="login-logo">WowSpeak <span class="accent">Study</span></div>
+        <div class="login-sub">Платформа уроков</div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-input" type="email" id="email" autocomplete="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <input class="form-input" type="password" id="password" autocomplete="current-password"
+                   onkeydown="if(event.key==='Enter') doLogin()">
+        </div>
+
+        <div class="login-actions">
+            <button class="btn btn-primary btn-full btn-large" id="loginBtn" onclick="doLogin()">Войти</button>
+        </div>
+        <div class="login-foot">
+            <a onclick="alert('Сброс пароля скоро будет. Пока обратитесь к супер-админу.')">Забыли пароль?</a>
+        </div>
+    </div>
+</div>
+
+<!-- ============== MAIN APP ============== -->
+<div id="mainApp">
+    <header class="app-header">
+        <div class="app-logo">
+            <span class="badge">W</span>
+            <span>WowSpeak</span>
+            <span class="study">Study</span>
+        </div>
+
+        <nav class="subsite-switch" aria-label="Переключатель сабсайтов">
+            <a class="subsite-btn" href="https://app.wowteach.ru" title="Админ-панель">⚙️ Admin</a>
+            <a class="subsite-btn" href="https://train.wowteach.ru" title="Тренажёр">⚡ Train</a>
+            <button class="subsite-btn active" disabled>📚 Study</button>
+        </nav>
+
+        <div class="user-block">
+            <span class="user-name" id="hdrUserName">—</span>
+            <span class="user-role-badge" id="hdrUserRole">…</span>
+            <button class="logout-btn" onclick="doLogout()" title="Выйти" aria-label="Выйти">↩</button>
+        </div>
+    </header>
+
+    <main class="app-main" id="appMain">
+        <div class="loader">Загружаю…</div>
+    </main>
+</div>
+
+<!-- ============== TOAST ============== -->
+<div id="toastContainer"></div>
+
+<!-- ============== SDK ============== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+/* ================================================================
+   CONFIG
+   ================================================================ */
+
+const APP_VERSION = 1;
+window.APP_VERSION = APP_VERSION;
+
+const SUPABASE_URL = 'https://api.wowteach.ru';
+const SUPABASE_KEY = 'sb_publishable_nZIl9kzPNhkd9Gbsm7aAgA_cAeY1s4x';
+
+/* ================================================================
+   SHARED COOKIE STORAGE (для shared session между .wowteach.ru)
+   На github.io fallback на localStorage.
+   ================================================================ */
+
+const isWowteachDomain = location.hostname.endsWith('.wowteach.ru');
+
+const sharedCookieStorage = {
+    getItem: (key) => {
+        const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const m = document.cookie.match(new RegExp('(?:^|; )' + escaped + '=([^;]+)'));
+        return m ? decodeURIComponent(m[1]) : null;
+    },
+    setItem: (key, value) => {
+        document.cookie = `${key}=${encodeURIComponent(value)}; domain=.wowteach.ru; path=/; max-age=31536000; secure; samesite=lax`;
+    },
+    removeItem: (key) => {
+        document.cookie = `${key}=; domain=.wowteach.ru; path=/; max-age=0; secure; samesite=lax`;
+    }
+};
+
+const sb = isWowteachDomain
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { storage: sharedCookieStorage } })
+    : window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/* ================================================================
+   STATE
+   ================================================================ */
+
+let currentUser = null;       // запись users { id, name, email, roles, is_active }
+let currentTab  = 'library';  // 'library' | 'my'
+const cache = {
+    courses: null,
+    coursesById: {},
+    unitsByCourseId: {},
+    lessonsByUnitId: {}
+};
+
+/* ================================================================
+   UTIL
+   ================================================================ */
+
+function $(id) { return document.getElementById(id); }
+function esc(s) {
+    if (s === null || s === undefined) return '';
+    return String(s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function toast(msg, type) {
+    const c = $('toastContainer');
+    const t = document.createElement('div');
+    t.className = 'toast' + (type ? ' ' + type : '');
+    t.textContent = msg;
+    c.appendChild(t);
+    setTimeout(() => t.remove(), 3000);
+}
+function hasEditAccess(u) {
+    if (!u) return false;
+    const roles = Array.isArray(u.roles) ? u.roles : (u.roles ? [u.roles] : []);
+    return roles.includes('super_admin') || roles.includes('methodist');
+}
+function pluralize(n, one, few, many) {
+    n = Math.abs(n) % 100;
+    const n1 = n % 10;
+    if (n > 10 && n < 20) return many;
+    if (n1 > 1 && n1 < 5) return few;
+    if (n1 === 1) return one;
+    return many;
+}
+function fmtLessons(n)  { return n + ' ' + pluralize(n, 'урок',   'урока',  'уроков');  }
+function fmtUnits(n)    { return n + ' ' + pluralize(n, 'юнит',   'юнита',  'юнитов'); }
+function fmtSlides(n)   { return n + ' ' + pluralize(n, 'слайд',  'слайда', 'слайдов'); }
+function fmtMin(n)      { return n + ' мин'; }
+
+/* ================================================================
+   BOOT
+   ================================================================ */
+
+document.addEventListener('DOMContentLoaded', init);
+
+async function init() {
+    // 1) сессия
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) {
+        showLogin();
+        return;
+    }
+    // 2) пользователь
+    const ok = await loadCurrentUser(session.user.id);
+    if (!ok) { showLogin(); return; }
+    // 3) приложение
+    showApp();
+}
+
+async function loadCurrentUser(authUid) {
+    const { data, error } = await sb.from('users')
+        .select('id, name, email, roles, is_active')
+        .eq('auth_id', authUid)
+        .maybeSingle();
+    if (error || !data) {
+        console.error('Не удалось загрузить пользователя:', error);
+        alert('Не удалось загрузить профиль. Обратитесь к супер-админу.');
+        return false;
+    }
+    if (data.is_active === false) {
+        alert('Учётная запись отключена. Обратитесь к супер-админу.');
+        await sb.auth.signOut();
+        return false;
+    }
+    currentUser = data;
+    return true;
+}
+
+function showLogin() {
+    $('loginScreen').style.display = 'flex';
+    $('mainApp').style.display = 'none';
+    setTimeout(() => $('email').focus(), 100);
+}
+
+function showApp() {
+    $('loginScreen').style.display = 'none';
+    $('mainApp').style.display = 'block';
+
+    // Заполняем header
+    $('hdrUserName').textContent = currentUser.name || currentUser.email;
+    const role = hasEditAccess(currentUser)
+        ? (Array.isArray(currentUser.roles) && currentUser.roles.includes('super_admin') ? 'super_admin' : 'methodist')
+        : 'teacher';
+    const rb = $('hdrUserRole');
+    rb.textContent = role;
+    rb.className = 'user-role-badge' + (role === 'teacher' ? ' teacher' : '');
+
+    // запускаем роутер
+    handleRoute();
+}
+
+/* ================================================================
+   AUTH
+   ================================================================ */
+
+async function doLogin() {
+    const email = $('email').value.trim();
+    const password = $('password').value;
+    if (!email || !password) { alert('Заполните email и пароль'); return; }
+
+    const btn = $('loginBtn');
+    btn.disabled = true;
+    const orig = btn.textContent;
+    btn.textContent = 'Вхожу…';
+
+    try {
+        const { error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        const { data: { session } } = await sb.auth.getSession();
+        const ok = await loadCurrentUser(session.user.id);
+        if (ok) showApp();
+    } catch (e) {
+        let msg = e.message || String(e);
+        if (/invalid.+(login|credentials)/i.test(msg)) msg = 'Неверный email или пароль';
+        alert(msg);
+    } finally {
+        btn.disabled = false;
+        btn.textContent = orig;
+    }
+}
+
+async function doLogout() {
+    await sb.auth.signOut();
+    currentUser = null;
+    location.hash = '';
+    location.reload();
+}
+
+/* ================================================================
+   ROUTER
+   ================================================================ */
+
+window.addEventListener('hashchange', handleRoute);
+
+function navigateTo(hash) {
+    if (window.location.hash === hash) {
+        handleRoute(); // forced re-render
+    } else {
+        window.location.hash = hash;
+    }
+}
+
+function handleRoute() {
+    if (!currentUser) return;
+    const hash = (window.location.hash || '#/').slice(1) || '/';
+    const parts = hash.split('/').filter(Boolean);
+
+    if (parts.length === 0) {
+        return showLibrary();
+    }
+    if (parts[0] === 'course' && parts[1]) {
+        return showCourse(parseInt(parts[1]));
+    }
+    if (parts[0] === 'lesson' && parts[1]) {
+        const lessonId = parseInt(parts[1]);
+        const mode = parts[2] || 'edit';
+        if (mode === 'run')  return showRunMode(lessonId);
+        if (mode === 'edit') return showEditor(lessonId);
+    }
+    // fallback
+    showLibrary();
+}
+
+/* ================================================================
+   SCREEN · LIBRARY
+   ================================================================ */
+
+async function showLibrary() {
+    const main = $('appMain');
+    main.innerHTML = `<div class="loader">Загружаю учебники…</div>`;
+
+    if (!cache.courses) {
+        const { data, error } = await sb.from('courses')
+            .select('id, title, description, level, cover_emoji, cover_image_url, is_school_library, author_id, "order"')
+            .is('deleted_at', null)
+            .order('"order"', { ascending: true })
+            .order('id', { ascending: true });
+        if (error) { main.innerHTML = `<div class="empty"><div class="emoji">😕</div><div class="title">Ошибка загрузки</div><div>${esc(error.message)}</div></div>`; return; }
+        cache.courses = data || [];
+        for (const c of cache.courses) cache.coursesById[c.id] = c;
+    }
+
+    const canEdit = hasEditAccess(currentUser);
+    const myId = currentUser.id;
+
+    const libCourses = cache.courses.filter(c => c.is_school_library);
+    const myCourses  = cache.courses.filter(c => c.author_id === myId && !c.is_school_library);
+
+    const tabs = canEdit ? `
+        <div class="tabs">
+            <button class="tab ${currentTab==='library'?'active':''}" onclick="switchTab('library')">📚 Библиотека школы</button>
+            <button class="tab ${currentTab==='my'?'active':''}" onclick="switchTab('my')">📝 Мои учебники</button>
+        </div>
+    ` : '';
+
+    const list = currentTab === 'my' ? myCourses : libCourses;
+
+    let grid = '';
+    for (const c of list) grid += renderCourseCard(c);
+    if (canEdit && currentTab === 'my') {
+        grid += `
+            <button class="course-card-create" onclick="onCreateCourse()">
+                <span class="plus">+</span>
+                <span>Создать учебник</span>
+            </button>`;
+    }
+    if (!list.length && !(canEdit && currentTab === 'my')) {
+        grid = `<div class="empty" style="grid-column: 1/-1;">
+            <div class="emoji">📚</div>
+            <div class="title">Пока пусто</div>
+            <div>Здесь появятся учебники.</div>
+        </div>`;
+    }
+
+    main.innerHTML = `
+        <div class="page-header">
+            <h1 class="page-title">Учебники</h1>
+        </div>
+        ${tabs}
+        <div class="course-grid">${grid}</div>
+    `;
+}
+
+function switchTab(t) {
+    currentTab = t;
+    showLibrary();
+}
+
+function renderCourseCard(c) {
+    const coverBg = pickCourseCoverColor(c.id);
+    return `
+        <a class="course-card" onclick="navigateTo('#/course/${c.id}')">
+            <div class="course-cover" style="background:${coverBg};">${esc(c.cover_emoji || '📘')}</div>
+            <div class="course-body">
+                <h3 class="course-title">${esc(c.title)}</h3>
+                <div class="course-meta">
+                    ${c.level ? `<span class="level-badge">${esc(c.level)}</span>` : ''}
+                    ${c.description ? `<span>${esc(c.description.slice(0, 40))}${c.description.length > 40 ? '…' : ''}</span>` : ''}
+                </div>
+            </div>
+        </a>
+    `;
+}
+
+// Палитра soft-обложек, выбирается по hash от id курса
+function pickCourseCoverColor(id) {
+    const palette = [
+        'var(--purple-light)', 'var(--blue-light)',  'var(--green-light)',
+        'var(--orange-light)', 'var(--coral-light)', 'var(--pink-light)',
+        'var(--teal-light)',   'var(--red-light)'
+    ];
+    return palette[id % palette.length];
+}
+
+async function onCreateCourse() {
+    const title = prompt('Название учебника:');
+    if (!title) return;
+    const { data, error } = await sb.from('courses')
+        .insert({ title: title.trim(), author_id: currentUser.id, is_school_library: false })
+        .select().single();
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    cache.courses = null; // сбрасываем кэш
+    toast('Учебник создан', 'success');
+    navigateTo('#/course/' + data.id);
+}
+
+/* ================================================================
+   SCREEN · COURSE DETAIL
+   ================================================================ */
+
+async function showCourse(courseId) {
+    const main = $('appMain');
+    main.innerHTML = `<div class="loader">Загружаю учебник…</div>`;
+
+    // курс
+    let course = cache.coursesById[courseId];
+    if (!course) {
+        const { data, error } = await sb.from('courses').select('*').eq('id', courseId).maybeSingle();
+        if (error || !data) { main.innerHTML = `<div class="empty"><div class="emoji">😕</div><div class="title">Учебник не найден</div></div>`; return; }
+        course = data;
+        cache.coursesById[courseId] = data;
+    }
+
+    // юниты
+    const { data: units, error: uErr } = await sb.from('units')
+        .select('id, title, description, cover_emoji, unit_number, "order"')
+        .eq('course_id', courseId)
+        .is('deleted_at', null)
+        .order('"order"', { ascending: true })
+        .order('id', { ascending: true });
+    if (uErr) { main.innerHTML = `<div class="empty"><div class="emoji">😕</div><div class="title">Ошибка</div><div>${esc(uErr.message)}</div></div>`; return; }
+    cache.unitsByCourseId[courseId] = units || [];
+
+    // уроки всех юнитов одним запросом
+    const unitIds = (units || []).map(u => u.id);
+    let lessons = [];
+    if (unitIds.length) {
+        const { data: lData, error: lErr } = await sb.from('lessons')
+            .select('id, unit_id, title, lesson_number, cover_emoji, duration_min, slide_count, is_published, "order"')
+            .in('unit_id', unitIds)
+            .is('deleted_at', null)
+            .order('"order"', { ascending: true })
+            .order('id', { ascending: true });
+        if (lErr) { main.innerHTML = `<div class="empty"><div class="emoji">😕</div><div class="title">Ошибка</div><div>${esc(lErr.message)}</div></div>`; return; }
+        lessons = lData || [];
+    }
+    const lessonsByUnit = {};
+    for (const l of lessons) {
+        if (!lessonsByUnit[l.unit_id]) lessonsByUnit[l.unit_id] = [];
+        lessonsByUnit[l.unit_id].push(l);
+    }
+
+    const canEdit = hasEditAccess(currentUser);
+    const totalLessons = lessons.length;
+
+    let unitsHtml = '';
+    for (const u of (units || [])) {
+        unitsHtml += renderUnitSection(u, lessonsByUnit[u.id] || [], canEdit);
+    }
+    if (!units || !units.length) {
+        unitsHtml = `<div class="empty">
+            <div class="emoji">📂</div>
+            <div class="title">В учебнике пока нет юнитов</div>
+            ${canEdit ? '<div>Создай первый юнит ниже.</div>' : ''}
+        </div>`;
+    }
+
+    main.innerHTML = `
+        <div class="crumbs">
+            <a onclick="navigateTo('#/')"><span>←</span> К учебникам</a>
+        </div>
+
+        <div class="course-hero">
+            <div class="course-hero-cover" style="background:${pickCourseCoverColor(course.id)};">
+                ${esc(course.cover_emoji || '📘')}
+            </div>
+            <div class="course-hero-body">
+                <div class="course-hero-kicker">Учебник</div>
+                <h2 class="course-hero-title">${esc(course.title)}</h2>
+                ${course.description ? `<p class="course-hero-desc">${esc(course.description)}</p>` : ''}
+                <div class="course-hero-meta">
+                    ${course.level ? `<span class="level-badge">${esc(course.level)}</span><span>·</span>` : ''}
+                    <span>${fmtUnits((units||[]).length)}</span>
+                    <span>·</span>
+                    <span>${fmtLessons(totalLessons)}</span>
+                </div>
+            </div>
+            ${canEdit ? `<button class="icon-btn" title="Меню учебника" onclick="alert('TODO: меню учебника')">⋯</button>` : ''}
+        </div>
+
+        ${unitsHtml}
+
+        ${canEdit ? `
+            <button class="add-row wide" onclick="onCreateUnit(${course.id})">
+                <span>+</span> Создать юнит
+            </button>
+        ` : ''}
+    `;
+}
+
+function renderUnitSection(unit, lessons, canEdit) {
+    let rows = '';
+    for (const l of lessons) rows += renderLessonRow(l, canEdit);
+    if (canEdit) {
+        rows += `<button class="add-row" onclick="onCreateLesson(${unit.id})"><span>+</span> Урок</button>`;
+    }
+    if (!lessons.length && !canEdit) {
+        rows = `<div class="muted" style="padding:8px 14px; font-size:13px;">В юните пока нет уроков.</div>`;
+    }
+    return `
+        <section class="unit-section">
+            <div class="unit-header">
+                <span class="unit-emoji">${esc(unit.cover_emoji || '📂')}</span>
+                <span class="unit-kicker">UNIT ${unit.unit_number ?? unit.order}</span>
+                <span class="unit-title">${esc(unit.title)}</span>
+                <span class="unit-count">· ${fmtLessons(lessons.length)}</span>
+                <span class="unit-actions">
+                    ${canEdit ? `<button class="icon-btn" title="Меню юнита" onclick="alert('TODO: меню юнита')">⋯</button>` : ''}
+                </span>
+            </div>
+            <div class="lesson-list">
+                ${rows}
+            </div>
+        </section>
+    `;
+}
+
+function renderLessonRow(l, canEdit) {
+    return `
+        <div class="lesson-row">
+            <div class="lesson-num">${l.lesson_number ?? l.order ?? ''}</div>
+            <div>
+                <p class="lesson-title">${esc(l.title)}</p>
+                <p class="lesson-meta">
+                    ${l.duration_min ? `<span>🕐 ${fmtMin(l.duration_min)}</span>` : ''}
+                    <span>📑 ${fmtSlides(l.slide_count || 0)}</span>
+                    ${!l.is_published ? `<span style="color:var(--orange-dark);">черновик</span>` : ''}
+                </p>
+            </div>
+            <div class="lesson-actions">
+                <button class="btn btn-primary btn-sm" onclick="navigateTo('#/lesson/${l.id}/run')">▶ Запустить</button>
+                ${canEdit ? `<button class="icon-btn" title="Редактировать" onclick="navigateTo('#/lesson/${l.id}/edit')">✏</button>` : ''}
+                ${canEdit ? `<button class="icon-btn" title="Меню урока" onclick="alert('TODO: меню урока')">⋯</button>` : ''}
+            </div>
+        </div>
+    `;
+}
+
+async function onCreateUnit(courseId) {
+    const title = prompt('Название юнита:');
+    if (!title) return;
+    // подсчёт текущих юнитов для unit_number и order
+    const units = cache.unitsByCourseId[courseId] || [];
+    const nextNum = units.length + 1;
+    const { error } = await sb.from('units').insert({
+        course_id: courseId,
+        title: title.trim(),
+        unit_number: nextNum,
+        order: nextNum
+    });
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    toast('Юнит создан', 'success');
+    showCourse(courseId);
+}
+
+async function onCreateLesson(unitId) {
+    const title = prompt('Название урока:');
+    if (!title) return;
+    // получаем текущее количество уроков в юните для lesson_number
+    const { count } = await sb.from('lessons')
+        .select('*', { count: 'exact', head: true })
+        .eq('unit_id', unitId).is('deleted_at', null);
+    const next = (count || 0) + 1;
+    const { data, error } = await sb.from('lessons').insert({
+        unit_id: unitId,
+        title: title.trim(),
+        lesson_number: next,
+        order: next,
+        author_id: currentUser.id
+    }).select().single();
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    toast('Урок создан', 'success');
+    navigateTo('#/lesson/' + data.id + '/edit');
+}
+
+/* ================================================================
+   SCREEN · EDITOR (заглушка, реализуем дальше)
+   ================================================================ */
+
+async function showEditor(lessonId) {
+    const main = $('appMain');
+    main.innerHTML = `
+        <div class="crumbs">
+            <a onclick="history.back()"><span>←</span> Назад</a>
+        </div>
+        <div class="empty">
+            <div class="emoji">✏️</div>
+            <div class="title">Редактор урока · #${lessonId}</div>
+            <div>В разработке. Здесь будет лента слайдов + превью + форма.</div>
+            <div style="margin-top:20px;">
+                <button class="btn btn-primary" onclick="navigateTo('#/lesson/${lessonId}/run')">▶ Запустить</button>
+            </div>
+        </div>
+    `;
+}
+
+/* ================================================================
+   SCREEN · RUN MODE (заглушка, реализуем дальше)
+   ================================================================ */
+
+async function showRunMode(lessonId) {
+    const main = $('appMain');
+
+    // подгружаем урок и слайды для превью каркаса
+    const { data: lesson, error: lErr } = await sb.from('lessons').select('id, title').eq('id', lessonId).maybeSingle();
+    if (lErr || !lesson) {
+        main.innerHTML = `<div class="empty"><div class="emoji">😕</div><div class="title">Урок не найден</div></div>`;
+        return;
+    }
+    const { data: slides } = await sb.from('slides')
+        .select('id, "order", slide_type, title, body, cover_emoji')
+        .eq('lesson_id', lessonId)
+        .order('"order"', { ascending: true })
+        .order('id', { ascending: true });
+
+    main.innerHTML = `
+        <div class="crumbs">
+            <a onclick="history.back()"><span>←</span> Назад</a>
+        </div>
+        <div class="empty">
+            <div class="emoji">▶️</div>
+            <div class="title">Режим ведения · ${esc(lesson.title)}</div>
+            <div>В разработке. ${fmtSlides((slides||[]).length)} в уроке.</div>
+            <div style="margin-top:14px; font-size:12px; opacity:0.7;">
+                ${(slides||[]).map(s => `${s.order}. ${esc(s.cover_emoji || '')} ${esc(s.title || s.slide_type)}`).join('<br>')}
+            </div>
+        </div>
+    `;
+}
+
+</script>
+</body>
+</html>
