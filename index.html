@@ -1,0 +1,4131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WowSpeak Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   WowSpeak Study — single-file app
+   v1 · скелет: auth + библиотека + курс с юнитами + заготовки
+   ================================================================ */
+
+:root {
+    --cream: #FFFBF2;
+    --cream-deep: #F1EFE8;
+    --white: #FFFFFF;
+
+    --purple:       #7F77DD;
+    --purple-dark:  #3C3489;
+    --purple-light: #EEEDFE;
+
+    --orange:       #BA7517;
+    --orange-light: #FAEEDA;
+    --orange-dark:  #854F0B;
+
+    --green:        #639922;
+    --green-dark:   #27500A;
+    --green-light:  #EAF3DE;
+
+    --red:          #A32D2D;
+    --red-light:    #FCEBEB;
+    --red-mid:      #F0997B;
+
+    --teal:         #0F6E56;
+    --teal-light:   #E1F5EE;
+    --teal-mid:     #5DCAA5;
+
+    --blue-light:   #E6F1FB;
+    --blue-dark:    #0C447C;
+
+    --coral-light:  #FAECE7;
+    --coral-dark:   #712B13;
+
+    --pink-light:   #FBEAF0;
+    --pink-dark:    #72243E;
+
+    --text:         #2C2C2A;
+    --text-soft:    #5F5E5A;
+    --text-mute:    #888780;
+
+    --border:       #E8E3D6;
+    --border-soft:  #C8C4B6;
+
+    --font-heading: 'Fredoka', system-ui, -apple-system, sans-serif;
+    --font-body:    'Nunito', system-ui, -apple-system, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', Menlo, monospace;
+
+    --r-sm: 8px;
+    --r-md: 12px;
+    --r-lg: 16px;
+    --r-xl: 22px;
+    --r-pill: 999px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--cream);
+    background-image: radial-gradient(circle, rgba(120,80,40,0.08) 1px, transparent 1px);
+    background-size: 20px 20px;
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    margin: 0;
+    color: var(--text);
+}
+
+button { font-family: inherit; }
+input, textarea, select { font-family: inherit; }
+
+a { color: var(--purple-dark); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ============== LOGIN ============== */
+
+.login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.login-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    padding: 40px 36px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 4px 20px rgba(60,40,20,0.04);
+}
+.login-logo {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--purple-dark);
+    text-align: center;
+    margin-bottom: 6px;
+}
+.login-logo .accent { color: var(--orange); }
+.login-sub {
+    text-align: center;
+    color: var(--text-mute);
+    font-size: 13px;
+    margin-bottom: 28px;
+}
+.form-group {
+    margin-bottom: 14px;
+}
+.form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-soft);
+    margin-bottom: 4px;
+}
+.form-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    font-size: 15px;
+    background: var(--white);
+    transition: border-color .15s, box-shadow .15s;
+}
+.form-input:focus {
+    outline: none;
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px var(--purple-light);
+}
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-radius: var(--r-pill);
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: transform .12s, background .15s, opacity .15s;
+}
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-primary {
+    background: var(--purple);
+    color: var(--white);
+}
+.btn-primary:hover { background: var(--purple-dark); }
+.btn-secondary {
+    background: transparent;
+    color: var(--text-soft);
+    border: 1px solid var(--border);
+}
+.btn-secondary:hover { background: var(--cream-deep); }
+.btn-ghost {
+    background: transparent;
+    color: var(--text-soft);
+}
+.btn-ghost:hover { background: var(--cream-deep); }
+.btn-danger {
+    background: transparent;
+    color: var(--red);
+    border: 1px solid var(--red-mid);
+}
+.btn-danger:hover { background: var(--red-light); }
+.btn-full { width: 100%; }
+.btn-large { padding: 12px 24px; font-size: 15px; }
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+
+.login-actions { margin-top: 22px; }
+.login-foot {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--text-mute);
+}
+.login-foot a {
+    color: var(--purple-dark);
+    cursor: pointer;
+}
+
+/* ============== HEADER ============== */
+
+#mainApp { display: none; }
+
+.app-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.app-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--purple-dark);
+}
+.app-logo .badge {
+    width: 26px;
+    height: 26px;
+    background: var(--purple);
+    color: var(--white);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+.app-logo .study {
+    color: var(--orange);
+    font-weight: 500;
+}
+
+.subsite-switch {
+    display: flex;
+    gap: 4px;
+    background: var(--cream-deep);
+    padding: 3px;
+    border-radius: var(--r-pill);
+    margin-left: auto;
+}
+.subsite-btn {
+    padding: 5px 12px;
+    border-radius: var(--r-pill);
+    border: none;
+    background: transparent;
+    color: var(--text-soft);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.subsite-btn:hover { background: rgba(255,255,255,0.5); text-decoration: none; }
+.subsite-btn.active {
+    background: var(--white);
+    color: var(--purple-dark);
+    box-shadow: 0 1px 3px rgba(60,40,20,0.08);
+}
+
+.user-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+}
+.user-name { font-weight: 600; color: var(--text); }
+.user-role-badge {
+    background: var(--purple-light);
+    color: var(--purple-dark);
+    padding: 2px 9px;
+    border-radius: var(--r-pill);
+    font-size: 10px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    text-transform: lowercase;
+}
+.user-role-badge.teacher {
+    background: var(--green-light);
+    color: var(--green-dark);
+}
+.logout-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-mute);
+    padding: 4px 8px;
+    border-radius: var(--r-sm);
+    font-size: 18px;
+}
+.logout-btn:hover { background: var(--cream-deep); color: var(--text); }
+
+/* ============== MAIN CONTAINER ============== */
+
+.app-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.page-title {
+    font-size: 24px;
+    font-family: var(--font-heading);
+    font-weight: 500;
+}
+
+/* ============== TABS ============== */
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+.tab {
+    padding: 8px 16px;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-soft);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.tab:hover { background: var(--white); }
+.tab.active {
+    background: var(--purple);
+    color: var(--white);
+    border-color: var(--purple);
+}
+
+/* ============== COURSE GRID ============== */
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.course-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform .15s, box-shadow .15s;
+    text-decoration: none;
+}
+.course-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(60,40,20,0.08);
+    text-decoration: none;
+}
+.course-cover {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+}
+.course-body {
+    padding: 14px 16px;
+}
+.course-title {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 4px;
+    color: var(--text);
+}
+.course-meta {
+    font-size: 12px;
+    color: var(--text-mute);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.level-badge {
+    background: var(--purple-light);
+    color: var(--purple-dark);
+    padding: 2px 9px;
+    border-radius: var(--r-pill);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.course-card-create {
+    background: transparent;
+    border: 2px dashed var(--border-soft);
+    border-radius: var(--r-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--text-mute);
+    cursor: pointer;
+    min-height: 170px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--font-body);
+    transition: border-color .15s, color .15s;
+}
+.course-card-create:hover {
+    border-color: var(--purple);
+    color: var(--purple-dark);
+}
+.course-card-create .plus { font-size: 32px; line-height: 1; }
+
+/* ============== COURSE DETAIL ============== */
+
+.crumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--text-mute);
+}
+.crumbs a {
+    color: var(--text-soft);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.course-hero {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 18px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.course-hero-cover {
+    width: 90px;
+    height: 90px;
+    border-radius: var(--r-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    flex-shrink: 0;
+}
+.course-hero-body { flex: 1; min-width: 0; }
+.course-hero-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-mute);
+}
+.course-hero-title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 500;
+    margin: 2px 0 6px;
+}
+.course-hero-desc {
+    font-size: 13px;
+    color: var(--text-soft);
+    margin: 0 0 8px;
+}
+.course-hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-soft);
+}
+
+/* ============== UNITS ============== */
+
+.unit-section { margin-bottom: 20px; }
+.unit-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 4px 10px;
+    cursor: pointer;
+    user-select: none;
+}
+.unit-emoji { font-size: 22px; }
+.unit-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-mute);
+}
+.unit-title {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 500;
+}
+.unit-count {
+    font-size: 12px;
+    color: var(--text-mute);
+}
+.unit-actions { margin-left: auto; display: flex; gap: 4px; }
+
+.lesson-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 12px;
+}
+.lesson-row {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 10px 14px;
+}
+.lesson-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--cream-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-soft);
+}
+.lesson-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text);
+}
+.lesson-meta {
+    font-size: 11px;
+    color: var(--text-mute);
+    margin: 2px 0 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.lesson-meta span { display: inline-flex; align-items: center; gap: 3px; }
+.lesson-actions { display: flex; gap: 6px; align-items: center; }
+
+.icon-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    cursor: pointer;
+    color: var(--text-mute);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+.icon-btn:hover { background: var(--cream-deep); color: var(--text); }
+
+.add-row {
+    background: transparent;
+    border: 2px dashed var(--border-soft);
+    border-radius: var(--r-md);
+    padding: 8px;
+    font-size: 12px;
+    color: var(--text-mute);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    align-self: flex-start;
+    margin-left: 12px;
+}
+.add-row:hover { border-color: var(--purple); color: var(--purple-dark); }
+.add-row.wide { align-self: stretch; padding: 14px; margin-left: 0; }
+
+/* ============== EDITOR ============== */
+
+.editor-shell {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: visible;
+}
+.editor-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+}
+.editor-crumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-mute);
+    flex-wrap: wrap;
+}
+.editor-crumbs a { color: var(--text-soft); cursor: pointer; }
+.editor-crumbs .here { color: var(--text); font-weight: 600; }
+.editor-tools { display: flex; align-items: center; gap: 14px; }
+
+.save-ind {
+    font-size: 12px;
+    color: var(--text-mute);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.save-ind.saved   { color: var(--green-dark); }
+.save-ind.saving  { color: var(--orange-dark); }
+.save-ind.error   { color: var(--red); }
+
+.editor-3pane {
+    display: grid;
+    grid-template-columns: 100px 1fr 380px;
+    gap: 16px;
+    padding: 16px;
+    min-height: 520px;
+}
+@media (max-width: 1100px) {
+    .editor-3pane { grid-template-columns: 90px 1fr 320px; }
+}
+@media (max-width: 880px) {
+    .editor-3pane { grid-template-columns: 80px 1fr; }
+    .form-pane { grid-column: 1 / -1; }
+}
+
+.ribbon {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+.ribbon-slide {
+    position: relative;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    height: 68px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+    transition: border-color .12s, background .12s;
+}
+.ribbon-slide:hover { border-color: var(--border-soft); }
+.ribbon-slide.sel {
+    border: 2px solid var(--purple);
+    background: var(--purple-light);
+}
+.ribbon-slide.dragging  { opacity: 0.35; }
+.ribbon-slide.drag-over { border: 2px dashed var(--purple); transform: scale(1.04); }
+.rs-num {
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    font-size: 10px;
+    color: var(--text-mute);
+    font-family: var(--font-mono);
+    font-weight: 600;
+}
+.rs-typeicon {
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
+    font-size: 11px;
+}
+.ribbon-add {
+    background: transparent;
+    border: 2px dashed var(--border-soft);
+    border-radius: var(--r-md);
+    padding: 10px;
+    color: var(--text-mute);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: var(--font-body);
+    flex-shrink: 0;
+}
+.ribbon-add:hover { border-color: var(--purple); color: var(--purple-dark); }
+
+.add-picker {
+    /* position задаётся через JS (fixed) — чтобы не клипался overflow ленты */
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 6px;
+    z-index: 1000;
+    box-shadow: 0 8px 28px rgba(60,40,20,0.15);
+    width: 280px;
+}
+.add-pick-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-mute);
+    padding: 6px 10px 4px;
+}
+.add-pick-row {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 10px;
+    align-items: center;
+    padding: 7px 10px;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    text-align: left;
+    width: 100%;
+    font-family: var(--font-body);
+}
+.add-pick-row:hover { background: var(--cream-deep); }
+.add-pick-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+.add-pick-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+    display: block;
+}
+.add-pick-desc {
+    font-size: 11px;
+    color: var(--text-mute);
+    line-height: 1.2;
+    margin-top: 2px;
+    display: block;
+}
+
+.preview-pane, .form-pane {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+.preview-stage {
+    flex: 1;
+    background: var(--cream);
+    background-image: radial-gradient(circle, rgba(120,80,40,0.08) 1px, transparent 1px);
+    background-size: 16px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 24px;
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.preview-stage:hover { border-color: var(--border-soft); }
+
+.slide-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    padding: 24px 26px;
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.slide-type-chip {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: var(--r-pill);
+    font-size: 11px;
+    font-weight: 600;
+}
+.slide-card h2 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    margin: 0;
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.2;
+}
+.slide-emoji-block {
+    background: var(--cream-deep);
+    border-radius: var(--r-lg);
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 84px;
+    line-height: 1;
+}
+.slide-card .subtitle {
+    text-align: center;
+    font-size: 17px;
+    color: var(--text-soft);
+    margin: 0;
+}
+.slide-card .markdown {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.7;
+}
+.slide-card .markdown strong { font-weight: 600; }
+.slide-card .markdown em { font-style: italic; }
+.slide-card .markdown code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--cream-deep);
+    padding: 1px 6px;
+    border-radius: 4px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+.form-field label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.form-field label .hint {
+    font-weight: 400;
+    color: var(--text-mute);
+    font-size: 11px;
+}
+.form-input.select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23888780' stroke-width='1.5'%3e%3cpath d='m4 6 4 4 4-4'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 14px;
+    padding-right: 32px;
+}
+
+.row-type-emoji {
+    display: grid;
+    grid-template-columns: 1fr 60px;
+    gap: 8px;
+}
+.form-field-emoji {
+    height: 38px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+}
+.form-field-emoji:hover { background: var(--cream-deep); }
+
+textarea.form-input { resize: vertical; min-height: 38px; padding: 8px 14px; line-height: 1.5; }
+
+.form-pane-foot {
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+}
+.form-pane-foot button { width: auto; }
+
+/* ============== TASK / SUBTYPES ============== */
+
+.subtype-pills {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+.subtype-pill {
+    padding: 5px 12px;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-soft);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font-body);
+}
+.subtype-pill.active {
+    background: var(--green-light);
+    color: var(--green-dark);
+    border-color: var(--green);
+}
+.subtype-pill:hover:not(.active) { background: var(--cream-deep); }
+
+.list-add-btn {
+    background: transparent;
+    border: 1.5px dashed var(--border-soft);
+    border-radius: var(--r-md);
+    padding: 6px 10px;
+    font-size: 12px;
+    color: var(--text-mute);
+    cursor: pointer;
+    width: 100%;
+    font-family: var(--font-body);
+    font-weight: 600;
+    margin-top: 4px;
+}
+.list-add-btn:hover { border-color: var(--purple); color: var(--purple-dark); }
+.list-add-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.x-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-mute);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 2px;
+    line-height: 1;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+}
+.x-btn:hover { color: var(--red); background: var(--red-light); }
+
+.opt-edit-row {
+    display: grid;
+    grid-template-columns: 22px 1fr 28px;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 6px;
+}
+.opt-edit-row input[type=radio] {
+    width: 16px; height: 16px;
+    accent-color: var(--green-dark);
+    cursor: pointer;
+    margin: 0;
+    justify-self: center;
+}
+
+.pair-edit-row {
+    display: grid;
+    grid-template-columns: 1fr 18px 1fr 28px;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 6px;
+}
+.pair-edit-row .arrow { color: var(--text-mute); text-align: center; font-size: 13px; }
+
+.word-edit-row {
+    display: grid;
+    grid-template-columns: 24px 1fr 28px;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 6px;
+}
+.word-order-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-mute);
+    font-weight: 600;
+    text-align: center;
+    background: var(--cream-deep);
+    border-radius: 4px;
+    padding: 2px 0;
+}
+
+/* === Preview: task subtypes === */
+
+.task-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.task-option-box {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 9px 14px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.task-option-letter {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--purple);
+    width: 18px;
+}
+.task-option-box.correct {
+    background: var(--green-light);
+    border-color: var(--green);
+}
+.task-option-box.correct .task-option-letter { color: var(--green-dark); }
+
+.task-pairs {
+    display: grid;
+    grid-template-columns: 1fr 18px 1fr;
+    gap: 8px 12px;
+    align-items: center;
+}
+.task-pair-side {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 14px;
+}
+.task-pairs .arrow { color: var(--text-mute); text-align: center; font-size: 14px; }
+
+.task-sentence {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text);
+    margin: 0;
+}
+.task-blank {
+    display: inline-block;
+    min-width: 80px;
+    border-bottom: 2px dashed var(--border-soft);
+    text-align: center;
+    color: var(--text-mute);
+    padding: 0 8px;
+    margin: 0 4px;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.task-target-line {
+    border: 1.5px dashed var(--border-soft);
+    border-radius: var(--r-md);
+    min-height: 44px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    color: var(--text-mute);
+    font-size: 12px;
+    font-style: italic;
+}
+.task-word-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.task-word-chip {
+    background: var(--cream-deep);
+    padding: 6px 14px;
+    border-radius: var(--r-pill);
+    font-size: 14px;
+    color: var(--text);
+    cursor: grab;
+}
+
+.task-check-btn {
+    align-self: flex-start;
+    background: var(--purple-light);
+    color: var(--purple-dark);
+    border: none;
+    padding: 6px 16px;
+    border-radius: var(--r-pill);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+.task-instruction {
+    font-size: 13px;
+    color: var(--text-mute);
+    margin: 0;
+}
+
+.editor-warning {
+    background: var(--orange-light);
+    color: var(--orange-dark);
+    padding: 8px 12px;
+    border-radius: var(--r-sm);
+    font-size: 12px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+/* ============== RUN MODE ============== */
+
+.run-shell {
+    position: fixed;
+    inset: 0;
+    background: var(--cream);
+    background-image: radial-gradient(circle, rgba(120,80,40,0.10) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 200;
+    display: flex;
+    flex-direction: row;
+    padding: 14px;
+    gap: 14px;
+    overflow: hidden;
+}
+.run-ribbon {
+    width: 88px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+.run-ribbon-slide {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    height: 66px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    position: relative;
+    flex-shrink: 0;
+    transition: border-color .12s, background .12s, transform .1s;
+}
+.run-ribbon-slide:hover { transform: scale(1.05); }
+.run-ribbon-slide.current {
+    border: 2px solid var(--purple);
+    background: var(--purple-light);
+}
+.run-ribbon-slide .rs-num {
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    font-size: 10px;
+    color: var(--text-mute);
+    font-family: var(--font-mono);
+    font-weight: 600;
+}
+.run-ribbon-slide.completed::after {
+    content: '✓';
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
+    font-size: 11px;
+    color: var(--green-dark);
+}
+
+.run-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.run-progress {
+    height: 6px;
+    background: var(--cream-deep);
+    border-radius: var(--r-pill);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.run-progress-bar {
+    height: 100%;
+    background: var(--purple);
+    border-radius: var(--r-pill);
+    transition: width .3s ease-out;
+}
+.run-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    gap: 14px;
+    flex-shrink: 0;
+}
+.run-counter {
+    font-size: 14px;
+    color: var(--text-soft);
+    font-weight: 600;
+}
+.run-student-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--purple-light);
+    color: var(--purple-dark);
+    padding: 5px 14px 5px 5px;
+    border-radius: var(--r-pill);
+    font-size: 14px;
+    font-weight: 600;
+}
+.run-student-chip .avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--purple);
+    color: var(--white);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+}
+.run-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--white);
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--text-soft);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.run-close:hover { background: var(--cream-deep); }
+
+.run-stage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    min-height: 0;
+    overflow-y: auto;
+}
+.run-stage .slide-card {
+    max-width: 1100px;
+    padding: 36px 48px;
+    width: 100%;
+    gap: 22px;
+}
+.run-stage .slide-card h2 {
+    font-size: 42px;
+    line-height: 1.1;
+}
+.run-stage .slide-emoji-block {
+    font-size: 180px;
+    min-height: 280px;
+    line-height: 1;
+}
+.run-stage .slide-card .subtitle {
+    font-size: 22px;
+    line-height: 1.4;
+}
+.run-stage .task-options { gap: 10px; }
+.run-stage .task-option-box {
+    cursor: pointer;
+    padding: 14px 20px;
+    font-size: 17px;
+    transition: background .15s, border-color .15s;
+}
+.run-stage .task-option-box:hover { background: var(--white); }
+.run-stage .task-option-box.selected {
+    border-color: var(--purple) !important;
+    border-width: 2px !important;
+    background: var(--purple-light);
+}
+.run-stage .task-option-box.revealed-correct {
+    background: var(--green-light);
+    border-color: var(--green);
+    border-width: 2px;
+}
+.run-stage .task-option-box.revealed-wrong {
+    background: var(--red-light);
+    border-color: var(--red-mid);
+    border-width: 2px;
+}
+.run-stage .task-pair-side {
+    cursor: pointer;
+    padding: 14px 18px;
+    font-size: 17px;
+    transition: background .15s, border-color .15s;
+}
+.run-stage .task-pair-side:hover { background: var(--white); }
+.run-stage .task-pair-side.selected {
+    border-color: var(--purple) !important;
+    border-width: 2px !important;
+    background: var(--purple-light);
+}
+.run-stage .task-pair-side.matched {
+    background: var(--green-light);
+    border-color: var(--green);
+}
+.task-pair-num {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--purple);
+    color: var(--white);
+    font-size: 11px;
+    line-height: 22px;
+    text-align: center;
+    margin-right: 8px;
+    font-weight: 700;
+}
+.run-stage textarea.open-answer {
+    width: 100%;
+    min-height: 100px;
+    padding: 14px 18px;
+    font-size: 18px;
+    border: 2px dashed var(--border-soft);
+    border-radius: var(--r-md);
+    font-family: var(--font-body);
+    background: var(--cream);
+    resize: vertical;
+    line-height: 1.5;
+}
+.run-stage textarea.open-answer:focus {
+    border-style: solid;
+    border-color: var(--purple);
+    background: var(--white);
+    outline: none;
+}
+
+.run-bottombar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 0 6px;
+    flex-shrink: 0;
+}
+.run-nav {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--white);
+    cursor: pointer;
+    font-size: 26px;
+    color: var(--text-soft);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.run-nav:hover { background: var(--cream-deep); }
+.run-nav.next {
+    background: var(--purple);
+    color: var(--white);
+    border: none;
+}
+.run-nav.next:hover { background: var(--purple-dark); }
+.run-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.run-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.run-timer {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-pill);
+    padding: 5px 12px 5px 14px;
+}
+.run-timer .clock-icon { color: var(--orange-dark); font-size: 16px; }
+.run-timer .time {
+    font-family: var(--font-mono);
+    font-size: 17px;
+    font-weight: 600;
+    min-width: 50px;
+    text-align: center;
+}
+.run-timer .time.warn { color: var(--red); }
+.run-timer .timer-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--orange-light);
+    border: none;
+    color: var(--orange-dark);
+    cursor: pointer;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.run-points {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-body);
+    transition: transform .12s;
+}
+.run-points:active { transform: scale(0.94); }
+.run-points.p1  { background: var(--green-light); color: var(--green-dark); }
+.run-points.p5  { background: #C0DD97; color: #173404; }
+.run-points.p10 { background: var(--green); color: var(--white); }
+
+.run-notes-tab {
+    background: transparent;
+    border: 1px dashed var(--border-soft);
+    border-radius: var(--r-md);
+    padding: 6px 16px;
+    font-size: 13px;
+    color: var(--text-mute);
+    cursor: pointer;
+    align-self: center;
+    font-family: var(--font-body);
+    font-weight: 600;
+    flex-shrink: 0;
+}
+.run-notes-tab:hover { background: var(--white); color: var(--text-soft); }
+.run-notes-drawer {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 14px 18px;
+    max-height: 28vh;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+    white-space: pre-wrap;
+    flex-shrink: 0;
+}
+.run-notes-drawer .empty { color: var(--text-mute); font-style: italic; }
+
+.points-flash {
+    position: fixed;
+    pointer-events: none;
+    font-size: 64px;
+    font-weight: 800;
+    color: var(--green);
+    z-index: 9999;
+    animation: pointsFlash 1s ease-out forwards;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+@keyframes pointsFlash {
+    0%   { opacity: 0; transform: translateY(0) scale(0.5); }
+    25%  { opacity: 1; transform: translateY(-20px) scale(1.3); }
+    100% { opacity: 0; transform: translateY(-100px) scale(1); }
+}
+
+.run-iframe-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+.run-iframe-modal iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: var(--r-lg);
+    background: white;
+    max-width: 1100px;
+    max-height: 800px;
+}
+.run-iframe-modal .close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* ============== EMPTY / LOADING ============== */
+
+.empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-mute);
+}
+.empty .emoji { font-size: 48px; margin-bottom: 12px; }
+.empty .title {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+.loader {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-mute);
+    font-size: 13px;
+}
+
+/* ============== UTILS ============== */
+
+.hidden { display: none !important; }
+.muted { color: var(--text-mute); }
+.kicker { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-mute); }
+
+/* ============== TOAST ============== */
+
+#toastContainer {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+}
+.toast {
+    background: var(--text);
+    color: var(--white);
+    padding: 10px 16px;
+    border-radius: var(--r-md);
+    font-size: 13px;
+    max-width: 320px;
+    pointer-events: auto;
+    animation: toastIn .25s ease-out;
+}
+.toast.error { background: var(--red); }
+.toast.success { background: var(--green); }
+@keyframes toastIn {
+    from { transform: translateX(20px); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============== LOGIN ============== -->
+<div id="loginScreen" class="login-screen">
+    <div class="login-card">
+        <div class="login-logo">WowSpeak <span class="accent">Study</span></div>
+        <div class="login-sub">Платформа уроков</div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-input" type="email" id="email" autocomplete="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <input class="form-input" type="password" id="password" autocomplete="current-password"
+                   onkeydown="if(event.key==='Enter') doLogin()">
+        </div>
+
+        <div class="login-actions">
+            <button class="btn btn-primary btn-full btn-large" id="loginBtn" onclick="doLogin()">Войти</button>
+        </div>
+        <div class="login-foot">
+            <a onclick="alert('Сброс пароля скоро будет. Пока обратитесь к супер-админу.')">Забыли пароль?</a>
+        </div>
+    </div>
+</div>
+
+<!-- ============== MAIN APP ============== -->
+<div id="mainApp">
+    <header class="app-header">
+        <div class="app-logo">
+            <span class="badge">W</span>
+            <span>WowSpeak</span>
+            <span class="study">Study</span>
+        </div>
+
+        <nav class="subsite-switch" aria-label="Переключатель сабсайтов">
+            <a class="subsite-btn" href="https://app.wowteach.ru" title="Админ-панель">⚙️ Admin</a>
+            <a class="subsite-btn" href="https://train.wowteach.ru" title="Тренажёр">⚡ Train</a>
+            <button class="subsite-btn active" disabled>📚 Study</button>
+        </nav>
+
+        <div class="user-block">
+            <span class="user-name" id="hdrUserName">—</span>
+            <span class="user-role-badge" id="hdrUserRole">…</span>
+            <button class="logout-btn" onclick="doLogout()" title="Выйти" aria-label="Выйти">↩</button>
+        </div>
+    </header>
+
+    <main class="app-main" id="appMain">
+        <div class="loader">Загружаю…</div>
+    </main>
+</div>
+
+<!-- ============== TOAST ============== -->
+<div id="toastContainer"></div>
+
+<!-- ============== SDK ============== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+/* ================================================================
+   CONFIG
+   ================================================================ */
+
+const APP_VERSION = 1;
+window.APP_VERSION = APP_VERSION;
+
+const SUPABASE_URL = 'https://api.wowteach.ru';
+const SUPABASE_KEY = 'sb_publishable_nZIl9kzPNhkd9Gbsm7aAgA_cAeY1s4x';
+
+/* ================================================================
+   SHARED COOKIE STORAGE (для shared session между .wowteach.ru)
+   На github.io fallback на localStorage.
+   ================================================================ */
+
+const isWowteachDomain = location.hostname.endsWith('.wowteach.ru');
+
+const sharedCookieStorage = {
+    getItem: (key) => {
+        const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const m = document.cookie.match(new RegExp('(?:^|; )' + escaped + '=([^;]+)'));
+        return m ? decodeURIComponent(m[1]) : null;
+    },
+    setItem: (key, value) => {
+        document.cookie = `${key}=${encodeURIComponent(value)}; domain=.wowteach.ru; path=/; max-age=31536000; secure; samesite=lax`;
+    },
+    removeItem: (key) => {
+        document.cookie = `${key}=; domain=.wowteach.ru; path=/; max-age=0; secure; samesite=lax`;
+    }
+};
+
+const sb = isWowteachDomain
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { storage: sharedCookieStorage } })
+    : window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/* ================================================================
+   STATE
+   ================================================================ */
+
+let currentUser = null;       // запись users { id, name, email, roles, is_active }
+let currentTab  = 'library';  // 'library' | 'my'
+const cache = {
+    courses: null,
+    coursesById: {},
+    unitsByCourseId: {},
+    lessonsByUnitId: {}
+};
+
+// Метаинформация по типам слайдов: для ленты, превью-чипа, и picker'а
+const SLIDE_TYPE_META = {
+    intro:       { label: 'Вступление',  icon: '🚩', defaultEmoji: '🌅', bg: 'var(--purple-light)', fg: 'var(--purple-dark)', desc: 'открывает урок'           },
+    explanation: { label: 'Объяснение',  icon: 'ⓘ',  defaultEmoji: '📝', bg: 'var(--blue-light)',   fg: 'var(--blue-dark)',   desc: 'правила, грамматика'      },
+    text:        { label: 'Текст',       icon: '☰',  defaultEmoji: '📄', bg: 'var(--cream-deep)',   fg: 'var(--text-soft)',   desc: 'reading / writing'        },
+    vocab:       { label: 'Словарь',     icon: '📖', defaultEmoji: '📖', bg: 'var(--orange-light)', fg: 'var(--orange-dark)', desc: 'слово с переводом'        },
+    task:        { label: 'Задание',     icon: '✓',  defaultEmoji: '✏️', bg: 'var(--green-light)',  fg: 'var(--green-dark)',  desc: 'choice · matching · fill · order' },
+    deck:        { label: 'Тренажёр',    icon: '⚡', defaultEmoji: '📚', bg: 'var(--coral-light)',  fg: 'var(--coral-dark)',  desc: 'встроенная колода'        },
+    video:       { label: 'Видео',       icon: '▶',  defaultEmoji: '🎥', bg: 'var(--pink-light)',   fg: 'var(--pink-dark)',   desc: 'YouTube, GDrive, Rutube'  },
+    outro:       { label: 'Заключение',  icon: '🎊', defaultEmoji: '🎉', bg: 'var(--teal-light)',   fg: 'var(--teal)',        desc: 'итог урока'               }
+};
+const SLIDE_TYPES_ORDERED = ['intro', 'explanation', 'text', 'vocab', 'task', 'deck', 'video', 'outro'];
+
+// Подтипы task
+const TASK_SUBTYPE_META = {
+    open:       { label: 'Открытый ответ',   short: 'Открытый', desc: 'Свободный ответ — нет правильного, ученик говорит/пишет сам' },
+    choice:     { label: 'Выбор ответа',     short: 'Выбор',    desc: 'Один правильный из вариантов'        },
+    matching:   { label: 'Соединить пары',   short: 'Пары',     desc: 'Свободные пары: слово↔перевод и т.д.' },
+    fill_blank: { label: 'Заполни пропуск',  short: 'Пропуск',  desc: 'Предложение с ___ и варианты'        },
+    ordering:   { label: 'Составь порядок',  short: 'Порядок',  desc: 'Перетащи слова в правильном порядке' }
+};
+const TASK_SUBTYPES_ORDERED = ['open', 'choice', 'matching', 'fill_blank', 'ordering'];
+
+// Короткий случайный id для опций/пар/слов (стабилен между сессиями)
+function newId() {
+    return Math.random().toString(36).slice(2, 8);
+}
+
+// Создаёт свежую meta для нового подтипа задания
+function initTaskMeta(subtype) {
+    if (subtype === 'open') {
+        return { task_type: 'open', helper_words: [] };
+    }
+    if (subtype === 'choice') {
+        const o1 = { id: newId(), text: '' };
+        const o2 = { id: newId(), text: '' };
+        return { task_type: 'choice', options: [o1, o2], correct_id: o1.id };
+    }
+    if (subtype === 'matching') {
+        return { task_type: 'matching', pairs: [
+            { id: newId(), left: '', right: '' },
+            { id: newId(), left: '', right: '' }
+        ]};
+    }
+    if (subtype === 'fill_blank') {
+        const o1 = { id: newId(), text: '' };
+        const o2 = { id: newId(), text: '' };
+        return { task_type: 'fill_blank', options: [o1, o2], correct_id: o1.id };
+    }
+    if (subtype === 'ordering') {
+        return { task_type: 'ordering', words: [
+            { id: newId(), text: '' },
+            { id: newId(), text: '' },
+            { id: newId(), text: '' }
+        ]};
+    }
+    return {};
+}
+
+function getTaskSubtype(slide) {
+    return (slide && slide.meta && slide.meta.task_type) || null;
+}
+
+// Состояние редактора
+const editorState = {
+    lessonId: null,
+    lesson: null,   // { id, title, unit:{ id, title, unit_number, course:{id, title} } }
+    slides: [],
+    selectedId: null,
+    saveStatus: 'idle', // 'idle' | 'dirty' | 'saving' | 'saved' | 'error'
+    saveTimer: null,
+    pickerOpen: false
+};
+
+// Кэш библиотеки колод из тренажёра (word_decks + deck_folders, без study_ префикса)
+let deckLibraryCache = null;
+
+async function loadDeckLibrary() {
+    if (deckLibraryCache) return deckLibraryCache;
+    const [foldersRes, decksRes] = await Promise.all([
+        sb.from('deck_folders')
+            .select('id, title, parent_folder_id, cover_emoji, "order"')
+            .is('deleted_at', null)
+            .eq('is_school_library', true)
+            .order('"order"', { ascending: true }),
+        sb.from('word_decks')
+            .select('id, title, level, cover_emoji, folder_id, word_count')
+            .is('deleted_at', null)
+            .eq('is_school_library', true)
+            .order('title', { ascending: true })
+    ]);
+    if (foldersRes.error || decksRes.error) {
+        console.error('Deck library load error', foldersRes.error || decksRes.error);
+        deckLibraryCache = { folders: [], decks: [], folderPaths: {} };
+        return deckLibraryCache;
+    }
+    const folders = foldersRes.data || [];
+    const decks   = decksRes.data || [];
+    // Строим путь от корня для каждой папки: "Super Minds / SM1"
+    const byId = {};
+    folders.forEach(f => byId[f.id] = f);
+    const folderPaths = {};
+    function pathFor(id) {
+        if (!id) return '';
+        if (folderPaths[id]) return folderPaths[id];
+        const f = byId[id];
+        if (!f) return '';
+        const parent = f.parent_folder_id ? pathFor(f.parent_folder_id) : '';
+        folderPaths[id] = parent ? `${parent} / ${f.title}` : f.title;
+        return folderPaths[id];
+    }
+    folders.forEach(f => pathFor(f.id));
+    deckLibraryCache = { folders, decks, folderPaths };
+    return deckLibraryCache;
+}
+
+// Парсер URL для video-слайдов
+function parseVideoUrl(url) {
+    if (!url) return null;
+    let m;
+    m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    if (m) return { provider: 'youtube', id: m[1] };
+    m = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (m) return { provider: 'gdrive', id: m[1] };
+    m = url.match(/rutube\.ru\/video\/([a-zA-Z0-9]+)/);
+    if (m) return { provider: 'rutube', id: m[1] };
+    return null;
+}
+
+/* ================================================================
+   UTIL
+   ================================================================ */
+
+function $(id) { return document.getElementById(id); }
+function esc(s) {
+    if (s === null || s === undefined) return '';
+    return String(s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function toast(msg, type) {
+    const c = $('toastContainer');
+    const t = document.createElement('div');
+    t.className = 'toast' + (type ? ' ' + type : '');
+    t.textContent = msg;
+    c.appendChild(t);
+    setTimeout(() => t.remove(), 3000);
+}
+function hasEditAccess(u) {
+    if (!u) return false;
+    const roles = Array.isArray(u.roles) ? u.roles : (u.roles ? [u.roles] : []);
+    return roles.includes('super_admin') || roles.includes('methodist');
+}
+function pluralize(n, one, few, many) {
+    n = Math.abs(n) % 100;
+    const n1 = n % 10;
+    if (n > 10 && n < 20) return many;
+    if (n1 > 1 && n1 < 5) return few;
+    if (n1 === 1) return one;
+    return many;
+}
+function fmtLessons(n)  { return n + ' ' + pluralize(n, 'урок',   'урока',  'уроков');  }
+function fmtUnits(n)    { return n + ' ' + pluralize(n, 'юнит',   'юнита',  'юнитов'); }
+function fmtSlides(n)   { return n + ' ' + pluralize(n, 'слайд',  'слайда', 'слайдов'); }
+function fmtMin(n)      { return n + ' мин'; }
+
+/* ================================================================
+   BOOT
+   ================================================================ */
+
+document.addEventListener('DOMContentLoaded', init);
+
+async function init() {
+    // 1) сессия
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) {
+        showLogin();
+        return;
+    }
+    // 2) пользователь
+    const ok = await loadCurrentUser(session.user.id);
+    if (!ok) { showLogin(); return; }
+    // 3) приложение
+    showApp();
+}
+
+async function loadCurrentUser(authUid) {
+    const { data, error } = await sb.from('users')
+        .select('id, name, email, roles, is_active')
+        .eq('auth_id', authUid)
+        .maybeSingle();
+    if (error || !data) {
+        console.error('Не удалось загрузить пользователя:', error);
+        alert('Не удалось загрузить профиль. Обратитесь к супер-админу.');
+        return false;
+    }
+    if (data.is_active === false) {
+        alert('Учётная запись отключена. Обратитесь к супер-админу.');
+        await sb.auth.signOut();
+        return false;
+    }
+    currentUser = data;
+    return true;
+}
+
+function showLogin() {
+    $('loginScreen').style.display = 'flex';
+    $('mainApp').style.display = 'none';
+    setTimeout(() => $('email').focus(), 100);
+}
+
+function showApp() {
+    $('loginScreen').style.display = 'none';
+    $('mainApp').style.display = 'block';
+
+    // Заполняем header
+    $('hdrUserName').textContent = currentUser.name || currentUser.email;
+    const role = hasEditAccess(currentUser)
+        ? (Array.isArray(currentUser.roles) && currentUser.roles.includes('super_admin') ? 'super_admin' : 'methodist')
+        : 'teacher';
+    const rb = $('hdrUserRole');
+    rb.textContent = role;
+    rb.className = 'user-role-badge' + (role === 'teacher' ? ' teacher' : '');
+
+    // запускаем роутер
+    handleRoute();
+}
+
+/* ================================================================
+   AUTH
+   ================================================================ */
+
+async function doLogin() {
+    const email = $('email').value.trim();
+    const password = $('password').value;
+    if (!email || !password) { alert('Заполните email и пароль'); return; }
+
+    const btn = $('loginBtn');
+    btn.disabled = true;
+    const orig = btn.textContent;
+    btn.textContent = 'Вхожу…';
+
+    try {
+        const { error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        const { data: { session } } = await sb.auth.getSession();
+        const ok = await loadCurrentUser(session.user.id);
+        if (ok) showApp();
+    } catch (e) {
+        let msg = e.message || String(e);
+        if (/invalid.+(login|credentials)/i.test(msg)) msg = 'Неверный email или пароль';
+        alert(msg);
+    } finally {
+        btn.disabled = false;
+        btn.textContent = orig;
+    }
+}
+
+async function doLogout() {
+    await sb.auth.signOut();
+    currentUser = null;
+    location.hash = '';
+    location.reload();
+}
+
+/* ================================================================
+   ROUTER
+   ================================================================ */
+
+window.addEventListener('hashchange', handleRoute);
+
+function navigateTo(hash) {
+    if (window.location.hash === hash) {
+        handleRoute(); // forced re-render
+    } else {
+        window.location.hash = hash;
+    }
+}
+
+function handleRoute() {
+    if (!currentUser) return;
+    const hash = (window.location.hash || '#/').slice(1) || '/';
+
+    // Если уходим из run mode — гасим таймер и слушатель клавиш + закрываем модалки
+    const inRun = hash.includes('/run');
+    if (!inRun) {
+        if (runState.timer && runState.timer.intervalId) {
+            clearInterval(runState.timer.intervalId);
+            runState.timer.intervalId = null;
+            runState.timer.running = false;
+        }
+        detachRunKeyboard();
+        document.querySelectorAll('.run-iframe-modal').forEach(m => m.remove());
+    }
+
+    const parts = hash.split('/').filter(Boolean);
+
+    if (parts.length === 0) {
+        return showLibrary();
+    }
+    if (parts[0] === 'course' && parts[1]) {
+        return showCourse(parseInt(parts[1]));
+    }
+    if (parts[0] === 'lesson' && parts[1]) {
+        const lessonId = parseInt(parts[1]);
+        const mode = parts[2] || 'edit';
+        if (mode === 'run')  return showRunMode(lessonId);
+        if (mode === 'edit') return showEditor(lessonId);
+    }
+    // fallback
+    showLibrary();
+}
+
+/* ================================================================
+   SCREEN · LIBRARY
+   ================================================================ */
+
+async function showLibrary() {
+    const main = $('appMain');
+    main.innerHTML = `<div class="loader">Загружаю учебники…</div>`;
+
+    if (!cache.courses) {
+        const { data, error } = await sb.from('study_courses')
+            .select('id, title, description, level, cover_emoji, cover_image_url, is_school_library, author_id, "order"')
+            .is('deleted_at', null)
+            .order('"order"', { ascending: true })
+            .order('id', { ascending: true });
+        if (error) { main.innerHTML = `<div class="empty"><div class="emoji">😕</div><div class="title">Ошибка загрузки</div><div>${esc(error.message)}</div></div>`; return; }
+        cache.courses = data || [];
+        for (const c of cache.courses) cache.coursesById[c.id] = c;
+    }
+
+    const canEdit = hasEditAccess(currentUser);
+    const myId = currentUser.id;
+
+    const libCourses = cache.courses.filter(c => c.is_school_library);
+    const myCourses  = cache.courses.filter(c => c.author_id === myId && !c.is_school_library);
+
+    const tabs = canEdit ? `
+        <div class="tabs">
+            <button class="tab ${currentTab==='library'?'active':''}" onclick="switchTab('library')">📚 Библиотека школы</button>
+            <button class="tab ${currentTab==='my'?'active':''}" onclick="switchTab('my')">📝 Мои учебники</button>
+        </div>
+    ` : '';
+
+    const list = currentTab === 'my' ? myCourses : libCourses;
+
+    let grid = '';
+    for (const c of list) grid += renderCourseCard(c);
+    if (canEdit && currentTab === 'my') {
+        grid += `
+            <button class="course-card-create" onclick="onCreateCourse()">
+                <span class="plus">+</span>
+                <span>Создать учебник</span>
+            </button>`;
+    }
+    if (!list.length && !(canEdit && currentTab === 'my')) {
+        grid = `<div class="empty" style="grid-column: 1/-1;">
+            <div class="emoji">📚</div>
+            <div class="title">Пока пусто</div>
+            <div>Здесь появятся учебники.</div>
+        </div>`;
+    }
+
+    main.innerHTML = `
+        <div class="page-header">
+            <h1 class="page-title">Учебники</h1>
+        </div>
+        ${tabs}
+        <div class="course-grid">${grid}</div>
+    `;
+}
+
+function switchTab(t) {
+    currentTab = t;
+    showLibrary();
+}
+
+function renderCourseCard(c) {
+    const coverBg = pickCourseCoverColor(c.id);
+    return `
+        <a class="course-card" onclick="navigateTo('#/course/${c.id}')">
+            <div class="course-cover" style="background:${coverBg};">${esc(c.cover_emoji || '📘')}</div>
+            <div class="course-body">
+                <h3 class="course-title">${esc(c.title)}</h3>
+                <div class="course-meta">
+                    ${c.level ? `<span class="level-badge">${esc(c.level)}</span>` : ''}
+                    ${c.description ? `<span>${esc(c.description.slice(0, 40))}${c.description.length > 40 ? '…' : ''}</span>` : ''}
+                </div>
+            </div>
+        </a>
+    `;
+}
+
+// Палитра soft-обложек, выбирается по hash от id курса
+function pickCourseCoverColor(id) {
+    const palette = [
+        'var(--purple-light)', 'var(--blue-light)',  'var(--green-light)',
+        'var(--orange-light)', 'var(--coral-light)', 'var(--pink-light)',
+        'var(--teal-light)',   'var(--red-light)'
+    ];
+    return palette[id % palette.length];
+}
+
+async function onCreateCourse() {
+    const title = prompt('Название учебника:');
+    if (!title) return;
+    const { data, error } = await sb.from('study_courses')
+        .insert({ title: title.trim(), author_id: currentUser.id, is_school_library: false })
+        .select().single();
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    cache.courses = null; // сбрасываем кэш
+    toast('Учебник создан', 'success');
+    navigateTo('#/course/' + data.id);
+}
+
+/* ================================================================
+   SCREEN · COURSE DETAIL
+   ================================================================ */
+
+async function showCourse(courseId) {
+    const main = $('appMain');
+    main.innerHTML = `<div class="loader">Загружаю учебник…</div>`;
+
+    // курс
+    let course = cache.coursesById[courseId];
+    if (!course) {
+        const { data, error } = await sb.from('study_courses').select('*').eq('id', courseId).maybeSingle();
+        if (error || !data) { main.innerHTML = `<div class="empty"><div class="emoji">😕</div><div class="title">Учебник не найден</div></div>`; return; }
+        course = data;
+        cache.coursesById[courseId] = data;
+    }
+
+    // юниты
+    const { data: units, error: uErr } = await sb.from('study_units')
+        .select('id, title, description, cover_emoji, unit_number, "order"')
+        .eq('course_id', courseId)
+        .is('deleted_at', null)
+        .order('"order"', { ascending: true })
+        .order('id', { ascending: true });
+    if (uErr) { main.innerHTML = `<div class="empty"><div class="emoji">😕</div><div class="title">Ошибка</div><div>${esc(uErr.message)}</div></div>`; return; }
+    cache.unitsByCourseId[courseId] = units || [];
+
+    // уроки всех юнитов одним запросом
+    const unitIds = (units || []).map(u => u.id);
+    let lessons = [];
+    if (unitIds.length) {
+        const { data: lData, error: lErr } = await sb.from('study_lessons')
+            .select('id, unit_id, title, lesson_number, cover_emoji, duration_min, slide_count, is_published, "order"')
+            .in('unit_id', unitIds)
+            .is('deleted_at', null)
+            .order('"order"', { ascending: true })
+            .order('id', { ascending: true });
+        if (lErr) { main.innerHTML = `<div class="empty"><div class="emoji">😕</div><div class="title">Ошибка</div><div>${esc(lErr.message)}</div></div>`; return; }
+        lessons = lData || [];
+    }
+    const lessonsByUnit = {};
+    for (const l of lessons) {
+        if (!lessonsByUnit[l.unit_id]) lessonsByUnit[l.unit_id] = [];
+        lessonsByUnit[l.unit_id].push(l);
+    }
+
+    const canEdit = hasEditAccess(currentUser);
+    const totalLessons = lessons.length;
+
+    let unitsHtml = '';
+    for (const u of (units || [])) {
+        unitsHtml += renderUnitSection(u, lessonsByUnit[u.id] || [], canEdit);
+    }
+    if (!units || !units.length) {
+        unitsHtml = `<div class="empty">
+            <div class="emoji">📂</div>
+            <div class="title">В учебнике пока нет юнитов</div>
+            ${canEdit ? '<div>Создай первый юнит ниже.</div>' : ''}
+        </div>`;
+    }
+
+    main.innerHTML = `
+        <div class="crumbs">
+            <a onclick="navigateTo('#/')"><span>←</span> К учебникам</a>
+        </div>
+
+        <div class="course-hero">
+            <div class="course-hero-cover" style="background:${pickCourseCoverColor(course.id)};">
+                ${esc(course.cover_emoji || '📘')}
+            </div>
+            <div class="course-hero-body">
+                <div class="course-hero-kicker">Учебник</div>
+                <h2 class="course-hero-title">${esc(course.title)}</h2>
+                ${course.description ? `<p class="course-hero-desc">${esc(course.description)}</p>` : ''}
+                <div class="course-hero-meta">
+                    ${course.level ? `<span class="level-badge">${esc(course.level)}</span><span>·</span>` : ''}
+                    <span>${fmtUnits((units||[]).length)}</span>
+                    <span>·</span>
+                    <span>${fmtLessons(totalLessons)}</span>
+                </div>
+            </div>
+            ${canEdit ? `<button class="icon-btn" title="Меню учебника" onclick="alert('TODO: меню учебника')">⋯</button>` : ''}
+        </div>
+
+        ${unitsHtml}
+
+        ${canEdit ? `
+            <button class="add-row wide" onclick="onCreateUnit(${course.id})">
+                <span>+</span> Создать юнит
+            </button>
+        ` : ''}
+    `;
+}
+
+function renderUnitSection(unit, lessons, canEdit) {
+    let rows = '';
+    for (const l of lessons) rows += renderLessonRow(l, canEdit);
+    if (canEdit) {
+        rows += `<button class="add-row" onclick="onCreateLesson(${unit.id})"><span>+</span> Урок</button>`;
+    }
+    if (!lessons.length && !canEdit) {
+        rows = `<div class="muted" style="padding:8px 14px; font-size:13px;">В юните пока нет уроков.</div>`;
+    }
+    return `
+        <section class="unit-section">
+            <div class="unit-header">
+                <span class="unit-emoji">${esc(unit.cover_emoji || '📂')}</span>
+                <span class="unit-kicker">UNIT ${unit.unit_number ?? unit.order}</span>
+                <span class="unit-title">${esc(unit.title)}</span>
+                <span class="unit-count">· ${fmtLessons(lessons.length)}</span>
+                <span class="unit-actions">
+                    ${canEdit ? `<button class="icon-btn" title="Меню юнита" onclick="alert('TODO: меню юнита')">⋯</button>` : ''}
+                </span>
+            </div>
+            <div class="lesson-list">
+                ${rows}
+            </div>
+        </section>
+    `;
+}
+
+function renderLessonRow(l, canEdit) {
+    return `
+        <div class="lesson-row">
+            <div class="lesson-num">${l.lesson_number ?? l.order ?? ''}</div>
+            <div>
+                <p class="lesson-title">${esc(l.title)}</p>
+                <p class="lesson-meta">
+                    ${l.duration_min ? `<span>🕐 ${fmtMin(l.duration_min)}</span>` : ''}
+                    <span>📑 ${fmtSlides(l.slide_count || 0)}</span>
+                    ${!l.is_published ? `<span style="color:var(--orange-dark);">черновик</span>` : ''}
+                </p>
+            </div>
+            <div class="lesson-actions">
+                <button class="btn btn-primary btn-sm" onclick="navigateTo('#/lesson/${l.id}/run')">▶ Запустить</button>
+                ${canEdit ? `<button class="icon-btn" title="Редактировать" onclick="navigateTo('#/lesson/${l.id}/edit')">✏</button>` : ''}
+                ${canEdit ? `<button class="icon-btn" title="Меню урока" onclick="alert('TODO: меню урока')">⋯</button>` : ''}
+            </div>
+        </div>
+    `;
+}
+
+async function onCreateUnit(courseId) {
+    const title = prompt('Название юнита:');
+    if (!title) return;
+    // подсчёт текущих юнитов для unit_number и order
+    const units = cache.unitsByCourseId[courseId] || [];
+    const nextNum = units.length + 1;
+    const { error } = await sb.from('study_units').insert({
+        course_id: courseId,
+        title: title.trim(),
+        unit_number: nextNum,
+        order: nextNum
+    });
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    toast('Юнит создан', 'success');
+    showCourse(courseId);
+}
+
+async function onCreateLesson(unitId) {
+    const title = prompt('Название урока:');
+    if (!title) return;
+    // получаем текущее количество уроков в юните для lesson_number
+    const { count } = await sb.from('study_lessons')
+        .select('*', { count: 'exact', head: true })
+        .eq('unit_id', unitId).is('deleted_at', null);
+    const next = (count || 0) + 1;
+    const { data, error } = await sb.from('study_lessons').insert({
+        unit_id: unitId,
+        title: title.trim(),
+        lesson_number: next,
+        order: next,
+        author_id: currentUser.id
+    }).select().single();
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    toast('Урок создан', 'success');
+    navigateTo('#/lesson/' + data.id + '/edit');
+}
+
+/* ================================================================
+   SCREEN · EDITOR
+   ================================================================ */
+
+async function showEditor(lessonId) {
+    const main = $('appMain');
+    main.innerHTML = `<div class="loader">Загружаю редактор…</div>`;
+
+    // урок + юнит + курс одним запросом
+    const { data: lesson, error: lErr } = await sb.from('study_lessons')
+        .select('id, title, unit_id, lesson_number, duration_min, is_published, study_units(id, title, unit_number, course_id, study_courses(id, title))')
+        .eq('id', lessonId)
+        .is('deleted_at', null)
+        .maybeSingle();
+    if (lErr || !lesson) {
+        main.innerHTML = `<div class="empty"><div class="emoji">😕</div><div class="title">Урок не найден</div></div>`;
+        return;
+    }
+
+    const { data: slides, error: sErr } = await sb.from('study_slides')
+        .select('*')
+        .eq('lesson_id', lessonId)
+        .order('"order"', { ascending: true })
+        .order('id', { ascending: true });
+    if (sErr) {
+        main.innerHTML = `<div class="empty"><div class="emoji">😕</div><div class="title">Ошибка</div><div>${esc(sErr.message)}</div></div>`;
+        return;
+    }
+
+    if (!hasEditAccess(currentUser)) {
+        // Учитель — редактор недоступен, отправляем в run
+        navigateTo('#/lesson/' + lessonId + '/run');
+        return;
+    }
+
+    // Заодно подгружаем библиотеку колод для deck-слайдов
+    await loadDeckLibrary();
+
+    editorState.lessonId = lessonId;
+    editorState.lesson = lesson;
+    editorState.slides = slides || [];
+    editorState.selectedId = editorState.slides[0]?.id || null;
+    editorState.saveStatus = 'idle';
+    editorState.pickerOpen = false;
+
+    renderEditor();
+}
+
+function currentSlide() {
+    return editorState.slides.find(s => s.id === editorState.selectedId) || null;
+}
+
+function getSlideIndex(id) {
+    return editorState.slides.findIndex(s => s.id === id);
+}
+
+function renderEditor() {
+    const main = $('appMain');
+    const { lesson, slides, selectedId } = editorState;
+    const selected = currentSlide();
+    const unit = lesson.study_units;
+    const course = unit.study_courses;
+
+    main.innerHTML = `
+        <div class="editor-shell">
+            <div class="editor-topbar">
+                <div class="editor-crumbs">
+                    <a onclick="navigateTo('#/')">←</a>
+                    <a onclick="navigateTo('#/course/${course.id}')">${esc(course.title)}</a>
+                    <span>·</span>
+                    <span>Unit ${unit.unit_number ?? ''} · ${esc(unit.title)}</span>
+                    <span>·</span>
+                    <span class="here">${esc(lesson.title)}</span>
+                </div>
+                <div class="editor-tools">
+                    <span class="save-ind" id="saveInd">${renderSaveIndicator()}</span>
+                    <button class="btn btn-primary btn-sm" onclick="flushAndNavigate('#/lesson/${lesson.id}/run')">▶ Запустить</button>
+                </div>
+            </div>
+            <div class="editor-3pane">
+                <div class="ribbon" id="editorRibbon">${renderRibbon()}</div>
+                <div class="preview-pane">
+                    <div class="kicker">Превью</div>
+                    <div id="editorPreview" class="preview-stage" title="Клик — открыть в режиме ведения" onclick="onPreviewClick()">
+                        ${renderSlidePreview(selected)}
+                    </div>
+                </div>
+                <div class="form-pane">
+                    <div class="kicker">${selected ? 'Редактирование · слайд ' + (getSlideIndex(selected.id) + 1) : 'Нет выбранного слайда'}</div>
+                    <div id="editorForm">${renderEditorForm(selected)}</div>
+                </div>
+            </div>
+        </div>
+    `;
+    attachFormHandlers();
+    attachRibbonDragHandlers();
+}
+
+function renderSaveIndicator() {
+    const s = editorState.saveStatus;
+    if (s === 'saving') return `<span>⟳ Сохраняю…</span>`;
+    if (s === 'saved')  return `<span>✓ Сохранено</span>`;
+    if (s === 'dirty')  return `<span>● Изменено</span>`;
+    if (s === 'error')  return `<span>⚠ Ошибка сохранения</span>`;
+    return '';
+}
+function updateSaveIndicator() {
+    const el = $('saveInd');
+    if (!el) return;
+    el.className = 'save-ind ' + editorState.saveStatus;
+    el.innerHTML = renderSaveIndicator();
+}
+
+/* ============ RIBBON ============ */
+
+function renderRibbon() {
+    const { slides, selectedId, pickerOpen } = editorState;
+    let html = '';
+    slides.forEach((s, i) => {
+        const sel = s.id === selectedId ? 'sel' : '';
+        const meta = SLIDE_TYPE_META[s.slide_type] || SLIDE_TYPE_META.text;
+        const emoji = s.cover_emoji || meta.defaultEmoji;
+        html += `
+            <div class="ribbon-slide ${sel}" data-id="${s.id}" draggable="true" onclick="selectSlide(${s.id})">
+                <span class="rs-num">${i + 1}</span>
+                <span>${esc(emoji)}</span>
+                <span class="rs-typeicon" style="color:${meta.fg};">${meta.icon}</span>
+            </div>
+        `;
+    });
+    html += `<button class="ribbon-add" onclick="toggleAddPicker(event)" title="Добавить слайд">+</button>`;
+    return html;
+}
+
+function renderAddPicker() {
+    let rows = '';
+    for (const t of SLIDE_TYPES_ORDERED) {
+        const m = SLIDE_TYPE_META[t];
+        rows += `
+            <button class="add-pick-row" onclick="onPickAddSlideType('${t}')">
+                <span class="add-pick-circle" style="background:${m.bg}; color:${m.fg};">${m.icon}</span>
+                <span>
+                    <span class="add-pick-name">${esc(m.label)}</span>
+                    <span class="add-pick-desc">${esc(m.desc)}</span>
+                </span>
+            </button>
+        `;
+    }
+    return `
+        <div class="add-picker" id="addPicker">
+            <div class="add-pick-title">Выбери тип</div>
+            ${rows}
+        </div>
+    `;
+}
+
+function toggleAddPicker(e) {
+    if (e) e.stopPropagation();
+    // Если уже открыт — закрыть
+    const existing = document.getElementById('addPicker');
+    if (existing) {
+        existing.remove();
+        editorState.pickerOpen = false;
+        return;
+    }
+    const btn = (e && e.currentTarget) || document.querySelector('.ribbon-add');
+    if (!btn) return;
+
+    editorState.pickerOpen = true;
+
+    // Создаём popover отдельно и крепим к body
+    const wrap = document.createElement('div');
+    wrap.innerHTML = renderAddPicker();
+    const picker = wrap.firstElementChild;
+
+    const rect = btn.getBoundingClientRect();
+    picker.style.position = 'fixed';
+    picker.style.left = (rect.right + 8) + 'px';
+    // Picker «растёт» вверх от кнопки: нижний край совпадает с нижним краем кнопки
+    picker.style.bottom = (window.innerHeight - rect.bottom) + 'px';
+    picker.style.top = 'auto';
+    picker.style.right = 'auto';
+
+    document.body.appendChild(picker);
+
+    // Защита от выхода за правый край экрана
+    const pickerRect = picker.getBoundingClientRect();
+    if (pickerRect.right > window.innerWidth - 12) {
+        // если не вмещается справа — рендерим слева от кнопки
+        picker.style.left = Math.max(12, rect.left - pickerRect.width - 8) + 'px';
+    }
+    // и за верхний край
+    if (pickerRect.top < 12) {
+        picker.style.bottom = 'auto';
+        picker.style.top = '12px';
+    }
+
+    setTimeout(() => {
+        document.addEventListener('click', closeAddPickerOnOutsideClick, { once: true });
+    }, 50);
+}
+
+function closeAddPickerOnOutsideClick(e) {
+    if (e.target.closest && e.target.closest('#addPicker')) {
+        // клик внутри popover — оставляем открытым, ждём следующего клика
+        document.addEventListener('click', closeAddPickerOnOutsideClick, { once: true });
+        return;
+    }
+    const existing = document.getElementById('addPicker');
+    if (existing) existing.remove();
+    editorState.pickerOpen = false;
+}
+
+/* ============ DRAG-TO-REORDER ленты ============ */
+
+let _dragSlideId = null;
+
+function attachRibbonDragHandlers() {
+    const ribbon = $('editorRibbon');
+    if (!ribbon) return;
+    ribbon.querySelectorAll('.ribbon-slide').forEach(el => {
+        el.addEventListener('dragstart', (e) => {
+            _dragSlideId = parseInt(el.getAttribute('data-id'));
+            el.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            try { e.dataTransfer.setData('text/plain', String(_dragSlideId)); } catch(_) {}
+        });
+        el.addEventListener('dragend', () => {
+            el.classList.remove('dragging');
+            ribbon.querySelectorAll('.ribbon-slide').forEach(s => s.classList.remove('drag-over'));
+            _dragSlideId = null;
+        });
+        el.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            el.classList.add('drag-over');
+        });
+        el.addEventListener('dragleave', () => {
+            el.classList.remove('drag-over');
+        });
+        el.addEventListener('drop', (e) => {
+            e.preventDefault();
+            el.classList.remove('drag-over');
+            const dropId = parseInt(el.getAttribute('data-id'));
+            if (_dragSlideId && dropId && _dragSlideId !== dropId) {
+                reorderSlides(_dragSlideId, dropId);
+            }
+        });
+    });
+}
+
+async function reorderSlides(dragId, dropId) {
+    await flushSave();
+    const slides = editorState.slides;
+    const fromIdx = slides.findIndex(s => s.id === dragId);
+    const toIdx   = slides.findIndex(s => s.id === dropId);
+    if (fromIdx < 0 || toIdx < 0) return;
+
+    const [moved] = slides.splice(fromIdx, 1);
+    slides.splice(toIdx, 0, moved);
+    // Пересчитываем order
+    slides.forEach((s, i) => s.order = i + 1);
+
+    renderEditor();
+    editorState.saveStatus = 'saving';
+    updateSaveIndicator();
+
+    // Сохраняем все order в БД
+    let anyError = null;
+    for (const s of slides) {
+        const { error } = await sb.from('study_slides').update({ order: s.order }).eq('id', s.id);
+        if (error) { anyError = error; break; }
+    }
+    if (anyError) {
+        editorState.saveStatus = 'error';
+        toast('Не сохранилось: ' + anyError.message, 'error');
+    } else {
+        editorState.saveStatus = 'saved';
+        toast('Порядок сохранён', 'success');
+    }
+    updateSaveIndicator();
+    setTimeout(() => {
+        if (editorState.saveStatus === 'saved') {
+            editorState.saveStatus = 'idle';
+            updateSaveIndicator();
+        }
+    }, 1500);
+}
+
+async function selectSlide(id) {
+    await flushSave();
+    editorState.selectedId = id;
+    renderEditor();
+}
+
+async function onPickAddSlideType(type) {
+    await flushSave();
+    const m = SLIDE_TYPE_META[type];
+    const maxOrder = editorState.slides.reduce((mx, s) => Math.max(mx, s.order || 0), 0);
+    const initialMeta = (type === 'task') ? initTaskMeta('open') : {};
+    const { data, error } = await sb.from('study_slides').insert({
+        lesson_id: editorState.lessonId,
+        slide_type: type,
+        order: maxOrder + 1,
+        cover_emoji: m.defaultEmoji,
+        title: '',
+        body: '',
+        meta: initialMeta
+    }).select().single();
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    editorState.slides.push(data);
+    editorState.selectedId = data.id;
+    editorState.pickerOpen = false;
+    const picker = document.getElementById('addPicker');
+    if (picker) picker.remove();
+    renderEditor();
+}
+
+/* ============ PREVIEW ============ */
+
+function renderSlidePreview(slide) {
+    if (!slide) {
+        return `<div class="muted" style="text-align:center;">
+            <div style="font-size:48px; margin-bottom:8px;">📭</div>
+            <div>В уроке пока нет слайдов.<br>Нажми <strong>+</strong> в ленте слева.</div>
+        </div>`;
+    }
+    const t = slide.slide_type;
+    const m = SLIDE_TYPE_META[t] || SLIDE_TYPE_META.text;
+    const chip = `<span class="slide-type-chip" style="background:${m.bg}; color:${m.fg};">${m.icon} ${esc(m.label)}</span>`;
+
+    if (t === 'intro' || t === 'outro') {
+        return `
+            <div class="slide-card">
+                ${chip}
+                <div class="slide-emoji-block">${esc(slide.cover_emoji || m.defaultEmoji)}</div>
+                <h2>${esc(slide.title || (t === 'intro' ? 'Без названия' : 'Great job!'))}</h2>
+                ${slide.body ? `<p class="subtitle">${esc(slide.body)}</p>` : ''}
+            </div>
+        `;
+    }
+    if (t === 'vocab') {
+        return `
+            <div class="slide-card">
+                ${chip}
+                <h2>${esc(slide.title || '—')}</h2>
+                <div class="slide-emoji-block">${esc(slide.cover_emoji || m.defaultEmoji)}</div>
+                ${slide.body ? `<p class="subtitle">${esc(slide.body)}</p>` : ''}
+            </div>
+        `;
+    }
+    if (t === 'text') {
+        return `
+            <div class="slide-card">
+                ${chip}
+                ${slide.title ? `<h2 style="font-size:22px; text-align:left;">${esc(slide.title)}</h2>` : ''}
+                <div class="markdown">${md(slide.body || '_(пусто)_')}</div>
+            </div>
+        `;
+    }
+    if (t === 'explanation') {
+        return `
+            <div class="slide-card">
+                ${chip}
+                <h2 style="font-size:22px; text-align:left;">${esc(slide.title || '—')}</h2>
+                <div class="markdown">${md(slide.body || '_(пусто)_')}</div>
+            </div>
+        `;
+    }
+    if (t === 'task') {
+        return renderTaskPreview(slide, chip);
+    }
+    if (t === 'deck') {
+        return renderDeckPreview(slide, chip);
+    }
+    if (t === 'video') {
+        return renderVideoPreview(slide, chip);
+    }
+    // прочие типы (пока сюда нечего попасть)
+    return `
+        <div class="slide-card">
+            ${chip}
+            <h2 style="font-size:20px; text-align:left;">${esc(slide.title || m.label)}</h2>
+            <p class="muted" style="text-align:center; font-size:13px;">Превью для типа <code>${esc(t)}</code> — в следующих шагах.</p>
+        </div>
+    `;
+}
+
+/* ============ DECK ============ */
+
+function renderDeckForm(slide) {
+    const m = slide.meta || {};
+    const selectedId = m.deck_id;
+    const lib = deckLibraryCache || { folders: [], decks: [], folderPaths: {} };
+
+    // Группируем колоды по пути папки
+    const groups = {};
+    for (const d of lib.decks) {
+        const path = lib.folderPaths[d.folder_id] || 'Без папки';
+        (groups[path] ||= []).push(d);
+    }
+    const sortedPaths = Object.keys(groups).sort();
+
+    let optgroups = '';
+    for (const path of sortedPaths) {
+        optgroups += `<optgroup label="${esc(path)}">`;
+        for (const d of groups[path]) {
+            const extras = [d.level, d.word_count ? d.word_count + ' слов' : ''].filter(Boolean).join(' · ');
+            const label = `${d.cover_emoji || '📚'} ${d.title}${extras ? ' · ' + extras : ''}`;
+            optgroups += `<option value="${d.id}" ${d.id === selectedId ? 'selected' : ''}>${esc(label)}</option>`;
+        }
+        optgroups += `</optgroup>`;
+    }
+
+    let html = '';
+    html += renderFormField('Заголовок (опц.)',
+        `<input class="form-input" data-field="title" value="${esc(slide.title || '')}" placeholder="Тренировка слов">`);
+    html += renderFormField('Описание (опц.)',
+        `<input class="form-input" data-field="body" value="${esc(slide.body || '')}" placeholder="Закрепляем новые слова">`);
+
+    if (!lib.decks.length) {
+        html += `<div class="editor-warning">⚠️ Колоды не загружены или их нет в библиотеке школы.</div>`;
+    } else {
+        html += `
+            <div class="form-field">
+                <label>Колода <span class="hint">· из библиотеки тренажёра</span></label>
+                <select class="form-input select" data-meta-field="deck_id" data-meta-int="1">
+                    <option value="">— Выбери колоду —</option>
+                    ${optgroups}
+                </select>
+            </div>
+        `;
+    }
+
+    if (selectedId) {
+        const selected = lib.decks.find(d => d.id === selectedId);
+        if (selected) {
+            const path = lib.folderPaths[selected.folder_id] || 'Без папки';
+            html += `
+                <div style="background:var(--cream-deep); padding:10px 12px; border-radius:8px; font-size:12px; margin-bottom:10px;">
+                    <div style="font-size:14px;">${esc(selected.cover_emoji || '📚')} <strong>${esc(selected.title)}</strong></div>
+                    <div style="color:var(--text-mute); margin-top:3px;">
+                        ${esc(path)}${selected.level ? ' · ' + esc(selected.level) : ''}${selected.word_count ? ' · ' + selected.word_count + ' слов' : ''}
+                    </div>
+                </div>
+            `;
+        }
+    }
+    return html;
+}
+
+function renderDeckPreview(slide, chip) {
+    const m = slide.meta || {};
+    const deckId = m.deck_id;
+    const lib = deckLibraryCache || { folders: [], decks: [], folderPaths: {} };
+    const deck = deckId ? lib.decks.find(d => d.id === deckId) : null;
+
+    return `
+        <div class="slide-card">
+            ${chip}
+            ${slide.title ? `<h2 style="font-size:22px; text-align:left;">${esc(slide.title)}</h2>` : ''}
+            ${slide.body ? `<p class="task-instruction">${esc(slide.body)}</p>` : ''}
+            <div style="background:var(--cream-deep); border-radius:14px; padding:20px; display:flex; flex-direction:column; gap:6px; align-items:center; justify-content:center; min-height:160px;">
+                ${deck ? `
+                    <span style="font-size:42px;">${esc(deck.cover_emoji || '📚')}</span>
+                    <p style="font-size:16px; margin:0; font-weight:600;">${esc(deck.title)}</p>
+                    <p style="font-size:12px; margin:0; color:var(--text-mute);">${deck.level ? esc(deck.level) + ' · ' : ''}${deck.word_count || 0} слов</p>
+                    <button class="btn btn-primary btn-sm" style="margin-top:6px;">▶ Запустить тренажёр</button>
+                ` : `
+                    <span style="font-size:48px; opacity:0.4;">📚</span>
+                    <p class="muted" style="margin:0; font-size:13px;">Колода не выбрана</p>
+                `}
+            </div>
+        </div>
+    `;
+}
+
+/* ============ VIDEO ============ */
+
+function renderVideoForm(slide) {
+    const m = slide.meta || {};
+    const url = m.video_url || '';
+    const parsed = parseVideoUrl(url);
+
+    let html = '';
+    html += renderFormField('Заголовок',
+        `<input class="form-input" data-field="title" value="${esc(slide.title || '')}" placeholder="Daily routine song">`);
+    html += renderFormField('Описание (опц.)',
+        `<input class="form-input" data-field="body" value="${esc(slide.body || '')}" placeholder="Послушай и подпевай">`);
+    html += renderFormField('Ссылка на видео',
+        `<input class="form-input" data-meta-field="video_url" value="${esc(url)}"
+            placeholder="https://youtube.com/... · drive.google.com/... · rutube.ru/...">`,
+        'YouTube, Google Drive или Rutube');
+
+    if (url) {
+        if (parsed) {
+            const providerName = { youtube: 'YouTube', gdrive: 'Google Drive', rutube: 'Rutube' }[parsed.provider];
+            html += `<div style="background:var(--green-light); color:var(--green-dark); padding:8px 12px; border-radius:8px; font-size:12px; margin-bottom:10px;">
+                ✓ Распознано: <strong>${providerName}</strong> · ID <code style="font-size:11px;">${esc(parsed.id)}</code>
+            </div>`;
+        } else {
+            html += `<div class="editor-warning">⚠️ Не распознан провайдер. Поддерживаются: YouTube, Google Drive, Rutube.</div>`;
+        }
+    }
+    return html;
+}
+
+function renderVideoPreview(slide, chip) {
+    const m = slide.meta || {};
+    const url = m.video_url || '';
+    const parsed = parseVideoUrl(url);
+
+    let videoBlock;
+    if (parsed && parsed.provider === 'youtube') {
+        const thumb = `https://i.ytimg.com/vi/${parsed.id}/hqdefault.jpg`;
+        videoBlock = `
+            <div style="background:#2C2C2A; border-radius:14px; position:relative; aspect-ratio:16/9; overflow:hidden;">
+                <img src="${esc(thumb)}" style="width:100%; height:100%; object-fit:cover;" alt="YouTube preview">
+                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+                    <span style="width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,0.95); display:inline-flex; align-items:center; justify-content:center; color:#2C2C2A; font-size:26px;">▶</span>
+                </div>
+            </div>
+        `;
+    } else if (parsed) {
+        videoBlock = `
+            <div style="background:#2C2C2A; border-radius:14px; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px; color:white;">
+                <span style="width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,0.95); display:inline-flex; align-items:center; justify-content:center; color:#2C2C2A; font-size:26px;">▶</span>
+                <span style="font-size:12px; opacity:0.8;">${esc(parsed.provider)}</span>
+            </div>
+        `;
+    } else {
+        videoBlock = `
+            <div style="background:var(--cream-deep); border-radius:14px; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; color:var(--text-mute); flex-direction:column; gap:6px;">
+                <span style="font-size:48px; opacity:0.4;">🎥</span>
+                <span style="font-size:12px;">Ссылка не задана</span>
+            </div>
+        `;
+    }
+
+    return `
+        <div class="slide-card">
+            ${chip}
+            ${slide.title ? `<h2 style="font-size:20px; text-align:left;">${esc(slide.title)}</h2>` : ''}
+            ${videoBlock}
+            ${slide.body ? `<p class="task-instruction">${esc(slide.body)}</p>` : ''}
+        </div>
+    `;
+}
+
+/* ============ TASK PREVIEW ============ */
+
+function renderTaskPreview(slide, chip) {
+    const subtype = getTaskSubtype(slide) || 'choice';
+    const subMeta = TASK_SUBTYPE_META[subtype] || TASK_SUBTYPE_META.choice;
+    const subChip = `<span class="slide-type-chip" style="background:var(--green-light); color:var(--green-dark);">✓ ${esc(subMeta.label)}</span>`;
+
+    if (subtype === 'open')       return renderOpenPreview(slide, subChip);
+    if (subtype === 'choice')     return renderChoicePreview(slide, subChip);
+    if (subtype === 'matching')   return renderMatchingPreview(slide, subChip);
+    if (subtype === 'fill_blank') return renderFillBlankPreview(slide, subChip);
+    if (subtype === 'ordering')   return renderOrderingPreview(slide, subChip);
+    return `<div class="slide-card">${chip}<p class="muted">Неизвестный подтип</p></div>`;
+}
+
+function renderOpenPreview(slide, chip) {
+    const helpers = (slide.meta || {}).helper_words || [];
+    let helperChips = '';
+    helpers.forEach(w => {
+        if (w.text) helperChips += `<span class="task-word-chip">${esc(w.text)}</span>`;
+    });
+    return `
+        <div class="slide-card">
+            ${chip}
+            <h2 style="font-size:20px; text-align:left;">${esc(slide.title || 'Вопрос')}</h2>
+            ${slide.body ? `<p class="task-instruction">${esc(slide.body)}</p>` : ''}
+            ${helpers.length && helperChips ? `<div class="task-word-chips" style="margin-top:4px;">${helperChips}</div>` : ''}
+            <textarea class="form-input" placeholder="Ответ ученика..." rows="3" disabled
+                style="background:var(--cream); resize:none; border-style:dashed; cursor:default;"></textarea>
+        </div>
+    `;
+}
+
+function renderChoicePreview(slide, chip) {
+    const m = slide.meta || {};
+    const options = m.options || [];
+    const correctId = m.correct_id;
+    let optsHtml = '';
+    options.forEach((o, i) => {
+        const letter = String.fromCharCode(65 + i); // A,B,C...
+        const correct = o.id === correctId;
+        optsHtml += `
+            <div class="task-option-box ${correct?'correct':''}">
+                <span class="task-option-letter">${letter}.</span>
+                <span>${esc(o.text || '(пусто)')}</span>
+                ${correct ? '<span style="margin-left:auto; color:var(--green-dark);">✓</span>' : ''}
+            </div>
+        `;
+    });
+    return `
+        <div class="slide-card">
+            ${chip}
+            <h2 style="font-size:20px; text-align:left;">${esc(slide.title || 'Вопрос')}</h2>
+            ${slide.body ? `<p class="task-instruction">${esc(slide.body)}</p>` : ''}
+            <div class="task-options">${optsHtml || '<div class="muted" style="text-align:center;">Нет вариантов</div>'}</div>
+            <button class="task-check-btn">Проверить</button>
+        </div>
+    `;
+}
+
+function renderMatchingPreview(slide, chip) {
+    const pairs = (slide.meta || {}).pairs || [];
+    let html = '';
+    pairs.forEach(p => {
+        html += `
+            <div class="task-pair-side">${esc(p.left || '—')}</div>
+            <div class="arrow">⟷</div>
+            <div class="task-pair-side">${esc(p.right || '—')}</div>
+        `;
+    });
+    return `
+        <div class="slide-card">
+            ${chip}
+            <h2 style="font-size:20px; text-align:left;">${esc(slide.title || 'Соедини пары')}</h2>
+            ${slide.body ? `<p class="task-instruction">${esc(slide.body)}</p>` : ''}
+            <div class="task-pairs">${html || '<div class="muted">Нет пар</div>'}</div>
+        </div>
+    `;
+}
+
+function renderFillBlankPreview(slide, chip) {
+    const m = slide.meta || {};
+    const options = m.options || [];
+    const correctId = m.correct_id;
+    // В title — предложение с маркером ___ (тройное подчёркивание)
+    const sentence = slide.title || 'Sentence with ___ blank.';
+    const sentenceHtml = esc(sentence).replace(/___/g, '<span class="task-blank">_____</span>');
+    let optsHtml = '';
+    options.forEach(o => {
+        const correct = o.id === correctId;
+        optsHtml += `
+            <div class="task-option-box ${correct?'correct':''}" style="display:inline-flex;">
+                <span>${esc(o.text || '(пусто)')}</span>
+                ${correct ? '<span style="margin-left:6px; color:var(--green-dark);">✓</span>' : ''}
+            </div>
+        `;
+    });
+    return `
+        <div class="slide-card">
+            ${chip}
+            ${slide.body ? `<p class="task-instruction">${esc(slide.body)}</p>` : ''}
+            <p class="task-sentence">${sentenceHtml}</p>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">${optsHtml || '<div class="muted">Нет вариантов</div>'}</div>
+        </div>
+    `;
+}
+
+function renderOrderingPreview(slide, chip) {
+    const words = (slide.meta || {}).words || [];
+    // В превью покажем слова в обратном порядке как "перемешанные" — детерминированно
+    const shuffled = [...words].reverse();
+    let chipsHtml = '';
+    shuffled.forEach(w => {
+        chipsHtml += `<span class="task-word-chip">${esc(w.text || '—')}</span>`;
+    });
+    return `
+        <div class="slide-card">
+            ${chip}
+            <h2 style="font-size:20px; text-align:left;">${esc(slide.title || 'Составь предложение')}</h2>
+            ${slide.body ? `<p class="task-instruction">${esc(slide.body)}</p>` : ''}
+            <div class="task-target-line">сюда перетащи слова</div>
+            <div class="task-word-chips">${chipsHtml || '<div class="muted">Нет слов</div>'}</div>
+            <div class="muted" style="font-size:11px;">Правильный порядок: ${words.map(w => esc(w.text || '—')).join(' ')}</div>
+        </div>
+    `;
+}
+
+function rerenderPreview() {
+    const stage = $('editorPreview');
+    if (!stage) return;
+    stage.innerHTML = renderSlidePreview(currentSlide());
+}
+
+function onPreviewClick() {
+    // открывает run mode (когда будет готов)
+    if (editorState.lessonId) {
+        flushAndNavigate('#/lesson/' + editorState.lessonId + '/run');
+    }
+}
+
+/* ============ FORM ============ */
+
+function renderEditorForm(slide) {
+    if (!slide) {
+        return `<div class="muted" style="padding:14px;">Выбери слайд в ленте слева или создай новый кнопкой <strong>+</strong>.</div>`;
+    }
+    const t = slide.slide_type;
+    let body = '';
+
+    // Type & emoji row
+    body += `
+        <div class="row-type-emoji">
+            <div class="form-field">
+                <label>Тип слайда</label>
+                <select class="form-input select" data-field="slide_type" data-typechange="1">
+                    ${SLIDE_TYPES_ORDERED.map(tp => `<option value="${tp}" ${tp===t?'selected':''}>${SLIDE_TYPE_META[tp].label}</option>`).join('')}
+                </select>
+            </div>
+            <div class="form-field">
+                <label>Эмоджи</label>
+                <div class="form-field-emoji" onclick="onPickEmoji()">${esc(slide.cover_emoji || SLIDE_TYPE_META[t].defaultEmoji)}</div>
+            </div>
+        </div>
+    `;
+
+    // Type-specific fields
+    if (t === 'intro') {
+        body += renderFormField('Заголовок', `<input class="form-input" data-field="title" value="${esc(slide.title || '')}" placeholder="Daily routine">`);
+        body += renderFormField('Подзаголовок', `<textarea class="form-input" data-field="body" rows="3" placeholder="Today we'll talk about your day">${esc(slide.body || '')}</textarea>`);
+    } else if (t === 'outro') {
+        body += renderFormField('Заголовок', `<input class="form-input" data-field="title" value="${esc(slide.title || '')}" placeholder="Great job!">`);
+        body += renderFormField('Текст-итог', `<textarea class="form-input" data-field="body" rows="3" placeholder="You learned ...">${esc(slide.body || '')}</textarea>`);
+    } else if (t === 'vocab') {
+        body += renderFormField('Слово (En)', `<input class="form-input" data-field="title" value="${esc(slide.title || '')}" placeholder="Brush your teeth">`);
+        body += renderFormField('Перевод (Ru)', `<input class="form-input" data-field="body" value="${esc(slide.body || '')}" placeholder="Чистить зубы">`);
+    } else if (t === 'text') {
+        body += renderFormField('Заголовок (опц.)', `<input class="form-input" data-field="title" value="${esc(slide.title || '')}" placeholder="Reading: Tom's morning">`);
+        body += renderFormField('Текст (markdown)', `<textarea class="form-input" data-field="body" rows="8" placeholder="**Tom** wakes up at 7am. He brushes his teeth and ...">${esc(slide.body || '')}</textarea>`,
+            '**жирный** · *курсив* · `код` · переносы строк');
+    } else if (t === 'explanation') {
+        body += renderFormField('Заголовок', `<input class="form-input" data-field="title" value="${esc(slide.title || '')}" placeholder="Present simple">`);
+        body += renderFormField('Объяснение (markdown)', `<textarea class="form-input" data-field="body" rows="8" placeholder="Используем для повторяющихся действий ...">${esc(slide.body || '')}</textarea>`,
+            'markdown поддерживается');
+    } else if (t === 'task') {
+        body += renderTaskForm(slide);
+    } else if (t === 'deck') {
+        body += renderDeckForm(slide);
+    } else if (t === 'video') {
+        body += renderVideoForm(slide);
+    } else {
+        body += `<div class="muted" style="padding:14px; background:var(--cream-deep); border-radius:8px; font-size:13px;">
+            Форма для типа <strong>${esc(SLIDE_TYPE_META[t]?.label || t)}</strong> — в следующих шагах. Сейчас доступно только переключение типа.
+        </div>`;
+    }
+
+    // Teacher notes
+    body += renderFormField(
+        '<span style="display:inline-flex; align-items:center; gap:4px;">🙈 Заметки учителя</span>',
+        `<textarea class="form-input" data-field="teacher_notes" rows="3" placeholder="Скрыто от ребёнка">${esc(slide.teacher_notes || '')}</textarea>`,
+        'видны только учителю'
+    );
+
+    body += `
+        <div class="form-pane-foot">
+            <button class="btn btn-danger btn-sm" onclick="onDeleteSlide()">🗑 Удалить слайд</button>
+        </div>
+    `;
+
+    return body;
+}
+
+function renderFormField(label, control, hint) {
+    return `
+        <div class="form-field">
+            <label>${label}${hint ? ' <span class="hint">· ' + esc(hint) + '</span>' : ''}</label>
+            ${control}
+        </div>
+    `;
+}
+
+/* ============ TASK FORM ============ */
+
+function renderTaskForm(slide) {
+    const subtype = getTaskSubtype(slide) || 'choice';
+    // Pills для подтипа
+    let pills = `<div class="form-field"><label>Подтип задания</label><div class="subtype-pills">`;
+    for (const st of TASK_SUBTYPES_ORDERED) {
+        const m = TASK_SUBTYPE_META[st];
+        pills += `<button class="subtype-pill ${st===subtype?'active':''}" onclick="onPickTaskSubtype('${st}')" title="${esc(m.desc)}">${esc(m.short)}</button>`;
+    }
+    pills += `</div></div>`;
+
+    let body = pills;
+    if (subtype === 'open')            body += renderOpenForm(slide);
+    else if (subtype === 'choice')     body += renderChoiceForm(slide);
+    else if (subtype === 'matching')   body += renderMatchingForm(slide);
+    else if (subtype === 'fill_blank') body += renderFillBlankForm(slide);
+    else if (subtype === 'ordering')   body += renderOrderingForm(slide);
+    return body;
+}
+
+function renderOpenForm(slide) {
+    const m = slide.meta || {};
+    const helpers = m.helper_words || [];
+    let html = '';
+    html += renderFormField('Вопрос / задание',
+        `<textarea class="form-input" data-field="title" rows="2"
+            placeholder="What's in YOUR house?">${esc(slide.title || '')}</textarea>`);
+    html += renderFormField('Инструкция (опц.)',
+        `<input class="form-input" data-field="body" value="${esc(slide.body || '')}"
+            placeholder="Расскажи 3-4 предложения">`);
+
+    let rows = '';
+    helpers.forEach(w => {
+        rows += `
+            <div class="word-edit-row" data-row-id="${w.id}">
+                <span class="word-order-num">·</span>
+                <input class="form-input" type="text" value="${esc(w.text || '')}"
+                       placeholder="Слово-подсказка"
+                       data-helper-id="${w.id}">
+                <button class="x-btn" onclick="onTaskHelperDelete('${w.id}')" title="Удалить">×</button>
+            </div>
+        `;
+    });
+    const canAdd = helpers.length < 12;
+    html += `
+        <div class="form-field">
+            <label>Слова-подсказки <span class="hint">· опц., помогают ученику строить ответ</span></label>
+            <div>${rows}</div>
+            <button class="list-add-btn" onclick="onTaskHelperAdd()" ${canAdd?'':'disabled'}>+ Добавить подсказку</button>
+        </div>
+        <div style="background:var(--cream-deep); padding:10px 12px; border-radius:8px; font-size:12px; color:var(--text-soft); margin-bottom:10px;">
+            💬 В режиме ведения появится поле для ответа ученика — учитель/ребёнок печатает живьём.
+        </div>
+    `;
+    return html;
+}
+
+function renderChoiceForm(slide) {
+    const m = slide.meta || {};
+    const options = m.options || [];
+    const correctId = m.correct_id;
+    let html = '';
+    html += renderFormField('Вопрос', `<textarea class="form-input" data-field="title" rows="2" placeholder="What time does Tom wake up?">${esc(slide.title || '')}</textarea>`);
+    html += renderFormField('Инструкция (опц.)', `<input class="form-input" data-field="body" value="${esc(slide.body || '')}" placeholder="Выбери правильный ответ">`);
+
+    let rows = '';
+    options.forEach((o, i) => {
+        const letter = String.fromCharCode(65 + i);
+        rows += `
+            <div class="opt-edit-row" data-row-id="${o.id}">
+                <input type="radio" name="choiceCorrect" ${o.id===correctId?'checked':''}
+                       data-opt-id="${o.id}" data-opt-radio="1" title="Правильный ответ">
+                <input class="form-input" type="text" value="${esc(o.text || '')}"
+                       placeholder="${letter}. Вариант ответа"
+                       data-opt-id="${o.id}" data-opt-field="text">
+                <button class="x-btn" onclick="onTaskOptDelete('${o.id}')" title="Удалить" ${options.length<=2?'disabled':''}>×</button>
+            </div>
+        `;
+    });
+    const canAdd = options.length < 6;
+    html += `
+        <div class="form-field">
+            <label>Варианты ответа <span class="hint">· отметь правильный (мин 2, макс 6)</span></label>
+            <div>${rows}</div>
+            <button class="list-add-btn" onclick="onTaskOptAdd()" ${canAdd?'':'disabled'}>+ Добавить вариант</button>
+        </div>
+    `;
+    return html;
+}
+
+function renderMatchingForm(slide) {
+    const pairs = (slide.meta || {}).pairs || [];
+    let html = '';
+    html += renderFormField('Заголовок', `<input class="form-input" data-field="title" value="${esc(slide.title || '')}" placeholder="Сопоставь пары">`);
+    html += renderFormField('Инструкция (опц.)', `<input class="form-input" data-field="body" value="${esc(slide.body || '')}" placeholder="Соедини слова и переводы">`);
+
+    let rows = '';
+    pairs.forEach(p => {
+        rows += `
+            <div class="pair-edit-row" data-row-id="${p.id}">
+                <input class="form-input" type="text" value="${esc(p.left || '')}"
+                       placeholder="Левая часть"
+                       data-pair-id="${p.id}" data-pair-field="left">
+                <div class="arrow">↔</div>
+                <input class="form-input" type="text" value="${esc(p.right || '')}"
+                       placeholder="Правая часть"
+                       data-pair-id="${p.id}" data-pair-field="right">
+                <button class="x-btn" onclick="onTaskPairDelete('${p.id}')" title="Удалить" ${pairs.length<=2?'disabled':''}>×</button>
+            </div>
+        `;
+    });
+    const canAdd = pairs.length < 8;
+    html += `
+        <div class="form-field">
+            <label>Пары <span class="hint">· мин 2, макс 8</span></label>
+            <div>${rows}</div>
+            <button class="list-add-btn" onclick="onTaskPairAdd()" ${canAdd?'':'disabled'}>+ Добавить пару</button>
+        </div>
+    `;
+    return html;
+}
+
+function renderFillBlankForm(slide) {
+    const m = slide.meta || {};
+    const options = m.options || [];
+    const correctId = m.correct_id;
+    let html = '';
+    html += renderFormField('Предложение с пропуском',
+        `<textarea class="form-input" data-field="title" rows="3"
+            placeholder="She ___ her teeth every morning.">${esc(slide.title || '')}</textarea>`,
+        'используй ___ (3 нижних подчёркивания) для пропуска');
+    html += renderFormField('Инструкция (опц.)', `<input class="form-input" data-field="body" value="${esc(slide.body || '')}" placeholder="Выбери правильную форму">`);
+
+    let rows = '';
+    options.forEach(o => {
+        rows += `
+            <div class="opt-edit-row" data-row-id="${o.id}">
+                <input type="radio" name="fbCorrect" ${o.id===correctId?'checked':''}
+                       data-opt-id="${o.id}" data-opt-radio="1" title="Правильный ответ">
+                <input class="form-input" type="text" value="${esc(o.text || '')}"
+                       placeholder="Вариант"
+                       data-opt-id="${o.id}" data-opt-field="text">
+                <button class="x-btn" onclick="onTaskOptDelete('${o.id}')" title="Удалить" ${options.length<=2?'disabled':''}>×</button>
+            </div>
+        `;
+    });
+    const canAdd = options.length < 6;
+    html += `
+        <div class="form-field">
+            <label>Варианты <span class="hint">· отметь правильный (мин 2, макс 6)</span></label>
+            <div>${rows}</div>
+            <button class="list-add-btn" onclick="onTaskOptAdd()" ${canAdd?'':'disabled'}>+ Добавить вариант</button>
+        </div>
+    `;
+    return html;
+}
+
+function renderOrderingForm(slide) {
+    const words = (slide.meta || {}).words || [];
+    let html = '';
+    html += renderFormField('Заголовок', `<input class="form-input" data-field="title" value="${esc(slide.title || '')}" placeholder="Составь предложение">`);
+    html += renderFormField('Инструкция (опц.)', `<input class="form-input" data-field="body" value="${esc(slide.body || '')}" placeholder="Расставь слова в правильном порядке">`);
+
+    let rows = '';
+    words.forEach((w, i) => {
+        rows += `
+            <div class="word-edit-row" data-row-id="${w.id}">
+                <span class="word-order-num">${i+1}</span>
+                <input class="form-input" type="text" value="${esc(w.text || '')}"
+                       placeholder="Слово"
+                       data-word-id="${w.id}">
+                <button class="x-btn" onclick="onTaskWordDelete('${w.id}')" title="Удалить" ${words.length<=2?'disabled':''}>×</button>
+            </div>
+        `;
+    });
+    const canAdd = words.length < 12;
+    html += `
+        <div class="form-field">
+            <label>Слова в правильном порядке <span class="hint">· в режиме ведения перемешиваются</span></label>
+            <div>${rows}</div>
+            <button class="list-add-btn" onclick="onTaskWordAdd()" ${canAdd?'':'disabled'}>+ Добавить слово</button>
+        </div>
+    `;
+    return html;
+}
+
+/* ============ TASK actions ============ */
+
+function onPickTaskSubtype(st) {
+    const slide = currentSlide();
+    if (!slide) return;
+    if (getTaskSubtype(slide) === st) return;
+    if (!confirm('Сменить подтип задания? Содержимое текущего подтипа очистится.')) return;
+    slide.meta = initTaskMeta(st);
+    markDirty();
+    $('editorForm').innerHTML = renderEditorForm(slide);
+    attachFormHandlers();
+    rerenderPreview();
+}
+
+function onTaskOptAdd() {
+    const slide = currentSlide();
+    if (!slide || !slide.meta || !slide.meta.options) return;
+    if (slide.meta.options.length >= 6) return;
+    slide.meta.options.push({ id: newId(), text: '' });
+    markDirty();
+    $('editorForm').innerHTML = renderEditorForm(slide);
+    attachFormHandlers();
+    rerenderPreview();
+}
+function onTaskOptDelete(optId) {
+    const slide = currentSlide();
+    if (!slide || !slide.meta || !slide.meta.options) return;
+    if (slide.meta.options.length <= 2) return;
+    slide.meta.options = slide.meta.options.filter(o => o.id !== optId);
+    if (slide.meta.correct_id === optId) {
+        slide.meta.correct_id = slide.meta.options[0]?.id || null;
+    }
+    markDirty();
+    $('editorForm').innerHTML = renderEditorForm(slide);
+    attachFormHandlers();
+    rerenderPreview();
+}
+
+function onTaskPairAdd() {
+    const slide = currentSlide();
+    if (!slide || !slide.meta || !slide.meta.pairs) return;
+    if (slide.meta.pairs.length >= 8) return;
+    slide.meta.pairs.push({ id: newId(), left: '', right: '' });
+    markDirty();
+    $('editorForm').innerHTML = renderEditorForm(slide);
+    attachFormHandlers();
+    rerenderPreview();
+}
+function onTaskPairDelete(pairId) {
+    const slide = currentSlide();
+    if (!slide || !slide.meta || !slide.meta.pairs) return;
+    if (slide.meta.pairs.length <= 2) return;
+    slide.meta.pairs = slide.meta.pairs.filter(p => p.id !== pairId);
+    markDirty();
+    $('editorForm').innerHTML = renderEditorForm(slide);
+    attachFormHandlers();
+    rerenderPreview();
+}
+
+function onTaskWordAdd() {
+    const slide = currentSlide();
+    if (!slide || !slide.meta || !slide.meta.words) return;
+    if (slide.meta.words.length >= 12) return;
+    slide.meta.words.push({ id: newId(), text: '' });
+    markDirty();
+    $('editorForm').innerHTML = renderEditorForm(slide);
+    attachFormHandlers();
+    rerenderPreview();
+}
+function onTaskWordDelete(wordId) {
+    const slide = currentSlide();
+    if (!slide || !slide.meta || !slide.meta.words) return;
+    if (slide.meta.words.length <= 2) return;
+    slide.meta.words = slide.meta.words.filter(w => w.id !== wordId);
+    markDirty();
+    $('editorForm').innerHTML = renderEditorForm(slide);
+    attachFormHandlers();
+    rerenderPreview();
+}
+
+function onTaskHelperAdd() {
+    const slide = currentSlide();
+    if (!slide || !slide.meta) return;
+    if (!slide.meta.helper_words) slide.meta.helper_words = [];
+    if (slide.meta.helper_words.length >= 12) return;
+    slide.meta.helper_words.push({ id: newId(), text: '' });
+    markDirty();
+    $('editorForm').innerHTML = renderEditorForm(slide);
+    attachFormHandlers();
+    rerenderPreview();
+}
+function onTaskHelperDelete(wId) {
+    const slide = currentSlide();
+    if (!slide || !slide.meta || !slide.meta.helper_words) return;
+    slide.meta.helper_words = slide.meta.helper_words.filter(w => w.id !== wId);
+    markDirty();
+    $('editorForm').innerHTML = renderEditorForm(slide);
+    attachFormHandlers();
+    rerenderPreview();
+}
+function onTaskHelperInput(e) {
+    const el = e.currentTarget;
+    const id = el.getAttribute('data-helper-id');
+    const slide = currentSlide();
+    if (!slide || !slide.meta || !slide.meta.helper_words) return;
+    const w = slide.meta.helper_words.find(x => x.id === id);
+    if (w) {
+        w.text = el.value;
+        markDirty();
+        rerenderPreview();
+    }
+}
+
+function attachFormHandlers() {
+    const form = $('editorForm');
+    if (!form) return;
+    form.querySelectorAll('[data-field]').forEach(el => {
+        el.addEventListener('input', onFieldInput);
+        el.addEventListener('change', onFieldInput);
+    });
+    // task: choice/fill_blank options
+    form.querySelectorAll('[data-opt-id]').forEach(el => {
+        el.addEventListener('input', onTaskOptInput);
+        el.addEventListener('change', onTaskOptInput);
+    });
+    // task: matching pairs
+    form.querySelectorAll('[data-pair-id]').forEach(el => {
+        el.addEventListener('input', onTaskPairInput);
+    });
+    // task: ordering words
+    form.querySelectorAll('[data-word-id]').forEach(el => {
+        el.addEventListener('input', onTaskWordInput);
+    });
+    // task/open: helper words
+    form.querySelectorAll('[data-helper-id]').forEach(el => {
+        el.addEventListener('input', onTaskHelperInput);
+    });
+    // Поля, которые сохраняются в slide.meta (deck_id, video_url, ...)
+    form.querySelectorAll('[data-meta-field]').forEach(el => {
+        el.addEventListener('input', onMetaFieldInput);
+        el.addEventListener('change', onMetaFieldInput);
+    });
+}
+
+function onTaskOptInput(e) {
+    const el = e.currentTarget;
+    const optId = el.getAttribute('data-opt-id');
+    const slide = currentSlide();
+    if (!slide || !slide.meta) return;
+
+    if (el.hasAttribute('data-opt-radio')) {
+        if (el.checked) {
+            slide.meta.correct_id = optId;
+            markDirty();
+            rerenderPreview();
+        }
+        return;
+    }
+    const field = el.getAttribute('data-opt-field');
+    const opt = (slide.meta.options || []).find(o => o.id === optId);
+    if (opt) {
+        opt[field] = el.value;
+        markDirty();
+        rerenderPreview();
+    }
+}
+
+function onTaskPairInput(e) {
+    const el = e.currentTarget;
+    const pairId = el.getAttribute('data-pair-id');
+    const field = el.getAttribute('data-pair-field');
+    const slide = currentSlide();
+    if (!slide || !slide.meta) return;
+    const p = (slide.meta.pairs || []).find(x => x.id === pairId);
+    if (p) {
+        p[field] = el.value;
+        markDirty();
+        rerenderPreview();
+    }
+}
+
+function onTaskWordInput(e) {
+    const el = e.currentTarget;
+    const wordId = el.getAttribute('data-word-id');
+    const slide = currentSlide();
+    if (!slide || !slide.meta) return;
+    const w = (slide.meta.words || []).find(x => x.id === wordId);
+    if (w) {
+        w.text = el.value;
+        markDirty();
+        rerenderPreview();
+    }
+}
+
+function onFieldInput(e) {
+    const el = e.currentTarget;
+    const field = el.getAttribute('data-field');
+    const slide = currentSlide();
+    if (!slide) return;
+    const isTypeChange = el.hasAttribute('data-typechange');
+
+    if (isTypeChange) {
+        const newType = el.value;
+        const oldType = slide.slide_type;
+        slide.slide_type = newType;
+        // Если эмоджи был дефолтным для предыдущего типа — обновим под новый
+        const wasDefault = Object.values(SLIDE_TYPE_META).some(m => m.defaultEmoji === slide.cover_emoji);
+        if (!slide.cover_emoji || wasDefault) {
+            slide.cover_emoji = SLIDE_TYPE_META[newType].defaultEmoji;
+        }
+        // Инициализация meta при переключении в task
+        if (newType === 'task' && !getTaskSubtype(slide)) {
+            slide.meta = initTaskMeta('choice');
+        }
+        // При уходе из task сохраняем meta (не очищаем — вдруг вернётся)
+        markDirty();
+        // Перерендериваем форму (поля меняются) + превью + ленту
+        $('editorForm').innerHTML = renderEditorForm(slide);
+        attachFormHandlers();
+        rerenderPreview();
+        $('editorRibbon').innerHTML = renderRibbon();
+        return;
+    }
+
+    slide[field] = el.value;
+    markDirty();
+    rerenderPreview();
+    // Если поменялся заголовок — обновим ленту? Эмоджи в ленте от title не зависит. Не нужно.
+}
+
+// Обработчик полей, которые сохраняются в slide.meta (deck_id, video_url, и т.п.)
+function onMetaFieldInput(e) {
+    const el = e.currentTarget;
+    const field = el.getAttribute('data-meta-field');
+    const slide = currentSlide();
+    if (!slide) return;
+    if (!slide.meta) slide.meta = {};
+    let val = el.value;
+    if (el.hasAttribute('data-meta-int')) {
+        val = parseInt(val) || null;
+    }
+    slide.meta[field] = val;
+    markDirty();
+    rerenderPreview();
+}
+
+async function onPickEmoji() {
+    const slide = currentSlide();
+    if (!slide) return;
+    const cur = slide.cover_emoji || SLIDE_TYPE_META[slide.slide_type].defaultEmoji;
+    const next = prompt('Введи эмоджи для слайда (например 🪥):', cur);
+    if (next === null) return;
+    slide.cover_emoji = next.trim() || SLIDE_TYPE_META[slide.slide_type].defaultEmoji;
+    markDirty();
+    // обновить форму (отобразить новое эмоджи в кнопке) + превью + ленту
+    $('editorForm').innerHTML = renderEditorForm(slide);
+    attachFormHandlers();
+    rerenderPreview();
+    $('editorRibbon').innerHTML = renderRibbon();
+}
+
+async function onDeleteSlide() {
+    const slide = currentSlide();
+    if (!slide) return;
+    if (!confirm('Удалить слайд? Действие нельзя отменить.')) return;
+    const { error } = await sb.from('study_slides').delete().eq('id', slide.id);
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    editorState.slides = editorState.slides.filter(s => s.id !== slide.id);
+    // выбрать соседний
+    if (editorState.slides.length) {
+        const idx = Math.max(0, getSlideIndex(slide.id) - 1);
+        // getSlideIndex уже не найдёт удалённый — берём idx из старого порядка приближённо
+        editorState.selectedId = (editorState.slides[idx] || editorState.slides[0]).id;
+    } else {
+        editorState.selectedId = null;
+    }
+    renderEditor();
+    toast('Слайд удалён', 'success');
+}
+
+/* ============ AUTOSAVE ============ */
+
+function markDirty() {
+    editorState.saveStatus = 'dirty';
+    updateSaveIndicator();
+    if (editorState.saveTimer) clearTimeout(editorState.saveTimer);
+    editorState.saveTimer = setTimeout(doSave, 1000);
+}
+
+async function doSave() {
+    const slide = currentSlide();
+    if (!slide) return;
+    editorState.saveTimer = null;
+    editorState.saveStatus = 'saving';
+    updateSaveIndicator();
+    const payload = {
+        slide_type:    slide.slide_type,
+        title:         slide.title,
+        body:          slide.body,
+        cover_emoji:   slide.cover_emoji,
+        image_url:     slide.image_url,
+        meta:          slide.meta || {},
+        teacher_notes: slide.teacher_notes,
+        updated_at:    new Date().toISOString()
+    };
+    const { error } = await sb.from('study_slides').update(payload).eq('id', slide.id);
+    if (error) {
+        editorState.saveStatus = 'error';
+        toast('Не сохранилось: ' + error.message, 'error');
+    } else {
+        editorState.saveStatus = 'saved';
+    }
+    updateSaveIndicator();
+    if (editorState.saveStatus === 'saved') {
+        setTimeout(() => {
+            if (editorState.saveStatus === 'saved') {
+                editorState.saveStatus = 'idle';
+                updateSaveIndicator();
+            }
+        }, 2000);
+    }
+}
+
+async function flushSave() {
+    if (editorState.saveTimer) {
+        clearTimeout(editorState.saveTimer);
+        editorState.saveTimer = null;
+        await doSave();
+    }
+}
+
+async function flushAndNavigate(hash) {
+    await flushSave();
+    navigateTo(hash);
+}
+
+window.addEventListener('beforeunload', (e) => {
+    if (editorState.saveStatus === 'dirty' || editorState.saveTimer) {
+        // Принудительный sync save через fetch с keepalive не реализован — просто предупредим
+        e.preventDefault();
+        e.returnValue = '';
+    }
+});
+
+/* ============ MARKDOWN (мини) ============ */
+
+function md(text) {
+    if (!text) return '';
+    let out = esc(text);
+    out = out.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
+    out = out.replace(/\*([^*\n]+)\*/g, '<em>$1</em>');
+    out = out.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+    out = out.replace(/\n/g, '<br>');
+    return out;
+}
+
+/* ================================================================
+   SCREEN · RUN MODE
+   ================================================================ */
+
+const runState = {
+    lessonId: null,
+    lesson: null,
+    slides: [],
+    currentIdx: 0,
+    notesOpen: false,
+    studentName: null,
+    timer: { value: 0, running: false, intervalId: null },
+    interactions: {}   // per slide.id → state
+};
+
+async function showRunMode(lessonId) {
+    const main = $('appMain');
+    main.innerHTML = `<div class="loader">Загружаю урок…</div>`;
+
+    const { data: lesson, error: lErr } = await sb.from('study_lessons')
+        .select('id, title')
+        .eq('id', lessonId)
+        .is('deleted_at', null)
+        .maybeSingle();
+    if (lErr || !lesson) {
+        main.innerHTML = `<div class="empty"><div class="emoji">😕</div><div class="title">Урок не найден</div></div>`;
+        return;
+    }
+
+    const { data: slides, error: sErr } = await sb.from('study_slides')
+        .select('*')
+        .eq('lesson_id', lessonId)
+        .order('"order"', { ascending: true })
+        .order('id', { ascending: true });
+    if (sErr || !slides || !slides.length) {
+        main.innerHTML = `
+            <div class="empty">
+                <div class="emoji">📭</div>
+                <div class="title">В уроке нет слайдов</div>
+                ${hasEditAccess(currentUser) ? `<button class="btn btn-primary" onclick="navigateTo('#/lesson/${lessonId}/edit')" style="margin-top:14px;">Открыть редактор</button>` : ''}
+            </div>`;
+        return;
+    }
+
+    // Подгружаем библиотеку колод если есть deck-слайды
+    if (slides.some(s => s.slide_type === 'deck')) {
+        await loadDeckLibrary();
+    }
+
+    runState.lessonId = lessonId;
+    runState.lesson = lesson;
+    runState.slides = slides;
+    runState.currentIdx = 0;
+    runState.notesOpen = false;
+    runState.interactions = {};
+    runState.timer = { value: 0, running: false, intervalId: null };
+    // имя ученика опционально через ?student=
+    try {
+        const params = new URLSearchParams(window.location.search);
+        runState.studentName = params.get('student') || null;
+    } catch(_) { runState.studentName = null; }
+
+    renderRunMode();
+    attachRunKeyboard();
+}
+
+function renderRunMode() {
+    const main = $('appMain');
+    const slide = runState.slides[runState.currentIdx];
+    const total = runState.slides.length;
+    const progress = ((runState.currentIdx + 1) / total) * 100;
+
+    main.innerHTML = `
+        <div class="run-shell" id="runShell">
+            <div class="run-ribbon" id="runRibbon">${renderRunRibbon()}</div>
+
+            <div class="run-main">
+                <div class="run-progress"><div class="run-progress-bar" style="width:${progress}%"></div></div>
+
+                <div class="run-topbar">
+                    <span class="run-counter">Слайд ${runState.currentIdx + 1} из ${total}</span>
+                    ${runState.studentName ? `
+                        <div class="run-student-chip">
+                            <span class="avatar">${esc(runState.studentName.charAt(0).toUpperCase())}</span>
+                            <span>${esc(runState.studentName)}</span>
+                        </div>
+                    ` : '<div></div>'}
+                    <button class="run-close" onclick="exitRunMode()" title="Завершить (Esc)">✕</button>
+                </div>
+
+                <div class="run-stage" id="runStage">
+                    ${renderRunSlide(slide)}
+                </div>
+
+                <div class="run-bottombar">
+                    <button class="run-nav prev" onclick="runPrev()" ${runState.currentIdx === 0 ? 'disabled' : ''} title="Назад (←)">‹</button>
+                    <div class="run-controls">
+                        <div class="run-timer" id="runTimer">${renderRunTimer()}</div>
+                        <button class="run-points p1"  onclick="flashPoints(1, event)">⭐ +1</button>
+                        <button class="run-points p5"  onclick="flashPoints(5, event)">⭐ +5</button>
+                        <button class="run-points p10" onclick="flashPoints(10, event)">🏆 +10</button>
+                    </div>
+                    <button class="run-nav next" onclick="runNext()" ${runState.currentIdx === total - 1 ? 'disabled' : ''} title="Дальше (→ или пробел)">›</button>
+                </div>
+
+                ${runState.notesOpen ? `
+                    <div class="run-notes-drawer">${
+                        slide.teacher_notes ? esc(slide.teacher_notes) : '<span class="empty">Для этого слайда заметок нет.</span>'
+                    }</div>
+                ` : ''}
+
+                <button class="run-notes-tab" onclick="toggleRunNotes()">
+                    ${runState.notesOpen ? '▼' : '▲'} Заметки учителя
+                </button>
+            </div>
+        </div>
+    `;
+    // Прокручиваем ленту так чтобы текущий слайд был виден
+    setTimeout(() => {
+        const cur = document.querySelector('.run-ribbon-slide.current');
+        if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }, 50);
+}
+
+function renderRunRibbon() {
+    let html = '';
+    runState.slides.forEach((s, i) => {
+        const meta = SLIDE_TYPE_META[s.slide_type] || SLIDE_TYPE_META.text;
+        const emoji = s.cover_emoji || meta.defaultEmoji;
+        const cls = i === runState.currentIdx ? 'run-ribbon-slide current' : 'run-ribbon-slide';
+        const title = s.title || meta.label;
+        html += `
+            <div class="${cls}" onclick="runJumpTo(${i})" title="${i+1}. ${esc(title)}">
+                <span class="rs-num">${i+1}</span>
+                <span>${esc(emoji)}</span>
+            </div>
+        `;
+    });
+    return html;
+}
+
+function runJumpTo(idx) {
+    if (idx === runState.currentIdx) return;
+    if (idx < 0 || idx >= runState.slides.length) return;
+    runState.currentIdx = idx;
+    renderRunMode();
+}
+
+function renderRunSlide(slide) {
+    const t = slide.slide_type;
+    if (t === 'task')  return renderRunTask(slide);
+    if (t === 'deck')  return renderRunDeck(slide);
+    if (t === 'video') return renderRunVideo(slide);
+    // intro / outro / text / explanation / vocab — переиспользуем preview
+    return renderSlidePreview(slide);
+}
+
+/* ============ RUN · TASK ============ */
+
+function renderRunTask(slide) {
+    const subtype = getTaskSubtype(slide) || 'open';
+    const subMeta = TASK_SUBTYPE_META[subtype] || TASK_SUBTYPE_META.open;
+    const chip = `<span class="slide-type-chip" style="background:var(--green-light); color:var(--green-dark);">✓ ${esc(subMeta.label)}</span>`;
+    if (subtype === 'open')       return renderRunOpen(slide, chip);
+    if (subtype === 'choice')     return renderRunChoice(slide, chip);
+    if (subtype === 'matching')   return renderRunMatching(slide, chip);
+    if (subtype === 'fill_blank') return renderFillBlankPreview(slide, chip);   // v1 — статика
+    if (subtype === 'ordering')   return renderOrderingPreview(slide, chip);    // v1 — статика
+    return `<div class="slide-card">${chip}<p class="muted">Неизвестный подтип</p></div>`;
+}
+
+function renderRunOpen(slide, chip) {
+    const helpers = (slide.meta || {}).helper_words || [];
+    const interaction = getInteraction(slide.id);
+    let helperChips = '';
+    helpers.forEach(w => { if (w.text) helperChips += `<span class="task-word-chip">${esc(w.text)}</span>`; });
+    return `
+        <div class="slide-card">
+            ${chip}
+            <h2 style="font-size:24px; text-align:left;">${esc(slide.title || 'Вопрос')}</h2>
+            ${slide.body ? `<p class="task-instruction">${esc(slide.body)}</p>` : ''}
+            ${helpers.length && helperChips ? `<div class="task-word-chips" style="margin-top:4px;">${helperChips}</div>` : ''}
+            <textarea class="open-answer" placeholder="Ответ ученика..." 
+                oninput="onRunOpenInput(${slide.id}, this.value)">${esc(interaction.openAnswer || '')}</textarea>
+        </div>
+    `;
+}
+
+function renderRunChoice(slide, chip) {
+    const m = slide.meta || {};
+    const options = m.options || [];
+    const correctId = m.correct_id;
+    const interaction = getInteraction(slide.id);
+    const selectedId = interaction.choiceSelected;
+    const revealed = interaction.choiceRevealed;
+
+    let optsHtml = '';
+    options.forEach((o, i) => {
+        const letter = String.fromCharCode(65 + i);
+        let cls = 'task-option-box';
+        if (revealed) {
+            if (o.id === correctId) cls += ' revealed-correct';
+            else if (o.id === selectedId) cls += ' revealed-wrong';
+        } else if (o.id === selectedId) {
+            cls += ' selected';
+        }
+        optsHtml += `
+            <div class="${cls}" onclick="onRunChoicePick(${slide.id}, '${o.id}')">
+                <span class="task-option-letter">${letter}.</span>
+                <span style="flex:1;">${esc(o.text || '(пусто)')}</span>
+                ${revealed && o.id === correctId ? '<span style="color:var(--green-dark); font-weight:700;">✓</span>' : ''}
+                ${revealed && o.id === selectedId && o.id !== correctId ? '<span style="color:var(--red); font-weight:700;">✗</span>' : ''}
+            </div>
+        `;
+    });
+    return `
+        <div class="slide-card">
+            ${chip}
+            <h2 style="font-size:24px; text-align:left;">${esc(slide.title || 'Вопрос')}</h2>
+            ${slide.body ? `<p class="task-instruction">${esc(slide.body)}</p>` : ''}
+            <div class="task-options">${optsHtml}</div>
+            ${!revealed
+                ? `<button class="task-check-btn" onclick="onRunChoiceCheck(${slide.id})" ${!selectedId ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>Проверить</button>`
+                : `<button class="task-check-btn" onclick="onRunChoiceReset(${slide.id})">Попробовать снова</button>`}
+        </div>
+    `;
+}
+
+function renderRunMatching(slide, chip) {
+    const pairs = (slide.meta || {}).pairs || [];
+    const interaction = getInteraction(slide.id);
+    const matched = interaction.matchedPairs || [];
+    const leftSelected = interaction.leftSelected;
+
+    // Правую колонку детерминированно перемешиваем (reverse)
+    const rightItems = [...pairs].reverse();
+
+    let leftHtml = '';
+    pairs.forEach(p => {
+        const me = matched.find(mp => mp.leftId === p.id);
+        let cls = 'task-pair-side';
+        if (me) cls += ' matched';
+        else if (leftSelected === p.id) cls += ' selected';
+        leftHtml += `
+            <div class="${cls}" onclick="onRunMatchLeftClick(${slide.id}, '${p.id}')">
+                ${me ? `<span class="task-pair-num">${me.num}</span>` : ''}
+                <span>${esc(p.left || '—')}</span>
+            </div>
+        `;
+    });
+    let rightHtml = '';
+    rightItems.forEach(p => {
+        const me = matched.find(mp => mp.rightId === p.id);
+        let cls = 'task-pair-side';
+        if (me) cls += ' matched';
+        rightHtml += `
+            <div class="${cls}" onclick="onRunMatchRightClick(${slide.id}, '${p.id}')">
+                ${me ? `<span class="task-pair-num">${me.num}</span>` : ''}
+                <span>${esc(p.right || '—')}</span>
+            </div>
+        `;
+    });
+
+    return `
+        <div class="slide-card">
+            ${chip}
+            <h2 style="font-size:24px; text-align:left;">${esc(slide.title || 'Соедини пары')}</h2>
+            ${slide.body ? `<p class="task-instruction">${esc(slide.body)}</p>` : ''}
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px 24px;">
+                <div style="display:flex; flex-direction:column; gap:10px;">${leftHtml}</div>
+                <div style="display:flex; flex-direction:column; gap:10px;">${rightHtml}</div>
+            </div>
+            ${matched.length ? `<button class="task-check-btn" onclick="onRunMatchReset(${slide.id})">Сбросить</button>` : ''}
+        </div>
+    `;
+}
+
+/* ============ RUN · DECK / VIDEO ============ */
+
+function renderRunDeck(slide) {
+    const m = SLIDE_TYPE_META.deck;
+    const chip = `<span class="slide-type-chip" style="background:${m.bg}; color:${m.fg};">${m.icon} ${esc(m.label)}</span>`;
+    const meta = slide.meta || {};
+    const deckId = meta.deck_id;
+    const lib = deckLibraryCache || { decks: [] };
+    const deck = deckId ? lib.decks.find(d => d.id === deckId) : null;
+    return `
+        <div class="slide-card">
+            ${chip}
+            ${slide.title ? `<h2 style="font-size:26px; text-align:left;">${esc(slide.title)}</h2>` : ''}
+            ${slide.body ? `<p class="task-instruction" style="font-size:16px;">${esc(slide.body)}</p>` : ''}
+            <div style="background:var(--cream-deep); border-radius:18px; padding:32px; display:flex; flex-direction:column; gap:8px; align-items:center; justify-content:center;">
+                ${deck ? `
+                    <span style="font-size:64px;">${esc(deck.cover_emoji || '📚')}</span>
+                    <p style="font-size:22px; margin:8px 0 0; font-weight:600;">${esc(deck.title)}</p>
+                    <p style="font-size:14px; margin:0; color:var(--text-mute);">${deck.level ? esc(deck.level) + ' · ' : ''}${deck.word_count || 0} слов</p>
+                    <button class="btn btn-primary btn-large" style="margin-top:14px;" onclick="openDeckIframe(${deck.id})">▶ Запустить тренажёр</button>
+                ` : `
+                    <span style="font-size:64px; opacity:0.4;">📚</span>
+                    <p class="muted" style="margin:0;">Колода не выбрана</p>
+                `}
+            </div>
+        </div>
+    `;
+}
+
+function renderRunVideo(slide) {
+    const m = SLIDE_TYPE_META.video;
+    const chip = `<span class="slide-type-chip" style="background:${m.bg}; color:${m.fg};">${m.icon} ${esc(m.label)}</span>`;
+    const meta = slide.meta || {};
+    const url = meta.video_url || '';
+    const parsed = parseVideoUrl(url);
+    let videoBlock;
+    if (parsed && parsed.provider === 'youtube') {
+        videoBlock = `<iframe src="https://www.youtube.com/embed/${parsed.id}" allowfullscreen
+            style="width:100%; aspect-ratio:16/9; border:none; border-radius:14px;"></iframe>`;
+    } else if (parsed && parsed.provider === 'gdrive') {
+        videoBlock = `<iframe src="https://drive.google.com/file/d/${parsed.id}/preview" allowfullscreen
+            style="width:100%; aspect-ratio:16/9; border:none; border-radius:14px;"></iframe>`;
+    } else if (parsed && parsed.provider === 'rutube') {
+        videoBlock = `<iframe src="https://rutube.ru/play/embed/${parsed.id}" allowfullscreen
+            style="width:100%; aspect-ratio:16/9; border:none; border-radius:14px;"></iframe>`;
+    } else {
+        videoBlock = `<div style="background:var(--cream-deep); border-radius:14px; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; color:var(--text-mute); flex-direction:column; gap:8px;">
+            <span style="font-size:56px; opacity:0.4;">🎥</span>
+            <span style="font-size:14px;">Видео не настроено</span>
+        </div>`;
+    }
+    return `
+        <div class="slide-card">
+            ${chip}
+            ${slide.title ? `<h2 style="font-size:24px; text-align:left;">${esc(slide.title)}</h2>` : ''}
+            ${videoBlock}
+            ${slide.body ? `<p class="task-instruction" style="font-size:16px;">${esc(slide.body)}</p>` : ''}
+        </div>
+    `;
+}
+
+/* ============ RUN · interactions ============ */
+
+function getInteraction(slideId) {
+    if (!runState.interactions[slideId]) runState.interactions[slideId] = {};
+    return runState.interactions[slideId];
+}
+
+function rerenderRunStage() {
+    const stage = $('runStage');
+    if (!stage) return;
+    const slide = runState.slides[runState.currentIdx];
+    stage.innerHTML = renderRunSlide(slide);
+}
+
+function onRunOpenInput(slideId, value) {
+    getInteraction(slideId).openAnswer = value;
+}
+
+function onRunChoicePick(slideId, optId) {
+    const i = getInteraction(slideId);
+    if (i.choiceRevealed) return;
+    i.choiceSelected = optId;
+    rerenderRunStage();
+}
+function onRunChoiceCheck(slideId) {
+    const i = getInteraction(slideId);
+    if (!i.choiceSelected) return;
+    i.choiceRevealed = true;
+    rerenderRunStage();
+}
+function onRunChoiceReset(slideId) {
+    const i = getInteraction(slideId);
+    i.choiceSelected = null;
+    i.choiceRevealed = false;
+    rerenderRunStage();
+}
+
+function onRunMatchLeftClick(slideId, leftId) {
+    const i = getInteraction(slideId);
+    i.matchedPairs = i.matchedPairs || [];
+    const existing = i.matchedPairs.find(m => m.leftId === leftId);
+    if (existing) {
+        i.matchedPairs = i.matchedPairs.filter(m => m.leftId !== leftId);
+        i.leftSelected = null;
+    } else {
+        i.leftSelected = leftId;
+    }
+    rerenderRunStage();
+}
+function onRunMatchRightClick(slideId, rightId) {
+    const i = getInteraction(slideId);
+    i.matchedPairs = i.matchedPairs || [];
+    const existing = i.matchedPairs.find(m => m.rightId === rightId);
+    if (existing) {
+        i.matchedPairs = i.matchedPairs.filter(m => m.rightId !== rightId);
+        rerenderRunStage();
+        return;
+    }
+    if (i.leftSelected) {
+        const nextNum = i.matchedPairs.length + 1;
+        i.matchedPairs.push({ leftId: i.leftSelected, rightId, num: nextNum });
+        i.leftSelected = null;
+        rerenderRunStage();
+    }
+}
+function onRunMatchReset(slideId) {
+    const i = getInteraction(slideId);
+    i.matchedPairs = [];
+    i.leftSelected = null;
+    rerenderRunStage();
+}
+
+/* ============ RUN · navigation / notes / timer / points ============ */
+
+function runPrev() {
+    if (runState.currentIdx > 0) { runState.currentIdx--; renderRunMode(); }
+}
+function runNext() {
+    if (runState.currentIdx < runState.slides.length - 1) { runState.currentIdx++; renderRunMode(); }
+}
+
+function toggleRunNotes() {
+    runState.notesOpen = !runState.notesOpen;
+    renderRunMode();
+}
+
+function flashPoints(amount, event) {
+    const el = document.createElement('div');
+    el.className = 'points-flash';
+    el.textContent = '+' + amount + (amount >= 10 ? ' 🏆' : ' ⭐');
+    el.style.left = ((event.clientX || window.innerWidth/2) - 60) + 'px';
+    el.style.top = ((event.clientY || window.innerHeight/2) - 80) + 'px';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1000);
+}
+
+function renderRunTimer() {
+    const t = runState.timer;
+    const mm = String(Math.floor(t.value / 60)).padStart(2, '0');
+    const ss = String(t.value % 60).padStart(2, '0');
+    const warn = t.value > 0 && t.value % 60 === 0 && t.running;
+    return `
+        <span class="clock-icon">⏱</span>
+        <span class="time ${warn ? 'warn' : ''}">${mm}:${ss}</span>
+        <button class="timer-btn" onclick="onRunTimerClick()" title="${t.running ? 'Пауза' : 'Старт'}">${t.running ? '⏸' : '▶'}</button>
+        ${(t.value > 0 || t.running) ? `<button class="timer-btn" style="background:transparent; color:var(--text-mute);" onclick="onRunTimerReset()" title="Сбросить">⟳</button>` : ''}
+    `;
+}
+function updateRunTimer() {
+    const el = $('runTimer');
+    if (el) el.innerHTML = renderRunTimer();
+}
+function onRunTimerClick() {
+    if (runState.timer.running) {
+        pauseRunTimer();
+    } else {
+        startRunTimer();
+    }
+}
+function startRunTimer() {
+    runState.timer.running = true;
+    if (runState.timer.intervalId) clearInterval(runState.timer.intervalId);
+    runState.timer.intervalId = setInterval(() => {
+        runState.timer.value++;
+        updateRunTimer();
+    }, 1000);
+    updateRunTimer();
+}
+function pauseRunTimer() {
+    runState.timer.running = false;
+    if (runState.timer.intervalId) {
+        clearInterval(runState.timer.intervalId);
+        runState.timer.intervalId = null;
+    }
+    updateRunTimer();
+}
+function onRunTimerReset() {
+    pauseRunTimer();
+    runState.timer.value = 0;
+    updateRunTimer();
+}
+
+function openDeckIframe(deckId) {
+    const modal = document.createElement('div');
+    modal.className = 'run-iframe-modal';
+    modal.innerHTML = `
+        <iframe src="https://train.wowteach.ru/?deck=${deckId}"></iframe>
+        <button class="close" onclick="this.parentNode.remove()" title="Закрыть">✕</button>
+    `;
+    document.body.appendChild(modal);
+    modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
+}
+
+function exitRunMode() {
+    pauseRunTimer();
+    detachRunKeyboard();
+    // Возвращаемся назад через history
+    if (history.length > 1) {
+        history.back();
+    } else {
+        navigateTo('#/');
+    }
+}
+
+let _runKeyHandler = null;
+function attachRunKeyboard() {
+    detachRunKeyboard();
+    _runKeyHandler = (e) => {
+        const tag = (e.target && e.target.tagName) || '';
+        if (tag === 'TEXTAREA' || tag === 'INPUT') return;
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); runPrev(); }
+        else if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); runNext(); }
+        else if (e.key === 'Escape') { e.preventDefault(); exitRunMode(); }
+    };
+    document.addEventListener('keydown', _runKeyHandler);
+}
+function detachRunKeyboard() {
+    if (_runKeyHandler) {
+        document.removeEventListener('keydown', _runKeyHandler);
+        _runKeyHandler = null;
+    }
+}
+
+</script>
+</body>
+</html>
