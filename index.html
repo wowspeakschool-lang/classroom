@@ -2046,6 +2046,51 @@ textarea.form-input { resize: vertical; min-height: 38px; padding: 8px 14px; lin
     to   { transform: translateX(0); opacity: 1; }
 }
 
+
+/* ============ CANVAS SLIDE (модель B — холст с блоками в meta.blocks) ============ */
+.cv-edit-wrap { width: 100%; cursor: default; }
+.cv-chip-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+.cv-hint { font-size: 12px; color: var(--text-mute); }
+.cv-frame { position: relative; width: 100%; background: var(--white); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+.cv-stage { position: absolute; top: 0; left: 0; width: 1280px; height: 720px; transform-origin: top left; background: #FFFFFF; }
+.cv-stage.drop { outline: 4px dashed var(--purple); outline-offset: -4px; }
+.cv-empty-hint { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: var(--text-mute); font-size: 46px; text-align: center; pointer-events: none; font-family: var(--font-heading); }
+.cv-empty-hint span { font-size: 24px; }
+.cv-block { position: absolute; box-sizing: border-box; cursor: move; user-select: none; }
+.cv-block.sel { outline: 2px solid var(--purple); outline-offset: 1px; }
+.cv-block .cv-text, .cv-rblock .cv-text { width: 100%; height: 100%; overflow: hidden; line-height: 1.15; font-family: var(--font-heading); white-space: pre-wrap; word-break: break-word; padding: 2px 6px; box-sizing: border-box; }
+.cv-block .cv-img, .cv-rblock .cv-img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.cv-img-empty { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: var(--cream-deep); border: 2px dashed var(--border-soft); border-radius: 10px; color: var(--text-mute); font-size: 44px; text-align: center; font-family: var(--font-body); }
+.cv-img-empty span { font-size: 18px; }
+.cv-block .cv-shape, .cv-rblock .cv-shape { width: 100%; height: 100%; box-sizing: border-box; }
+.cv-hotspot { width: 100%; height: 100%; box-sizing: border-box; border: 3px dashed var(--orange); background: rgba(186,117,23,0.10); border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.cv-hot-tag { font-family: var(--font-heading); color: var(--orange-dark); font-size: 22px; }
+.cv-hot-peek { font-family: var(--font-body); color: var(--orange); font-size: 18px; opacity: .8; }
+.cv-handle { position: absolute; width: 16px; height: 16px; background: var(--white); border: 2px solid var(--purple); border-radius: 50%; }
+.cv-handle.nw { left: -8px; top: -8px; }
+.cv-handle.ne { right: -8px; top: -8px; }
+.cv-handle.sw { left: -8px; bottom: -8px; }
+.cv-handle.se { right: -8px; bottom: -8px; cursor: nwse-resize; }
+/* form side */
+.cv-add-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.cv-add-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 6px; background: var(--cream-deep); border: 1px solid var(--border); border-radius: var(--r-md); cursor: pointer; font-size: 26px; font-family: var(--font-body); transition: .12s; }
+.cv-add-btn:hover { border-color: var(--purple); background: var(--purple-light); }
+.cv-add-btn span { font-size: 13px; color: var(--text-soft); }
+.cv-btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.cv-prop-head { display: flex; align-items: center; justify-content: space-between; margin: 8px 0 10px; padding-top: 12px; border-top: 1px solid var(--border); font-family: var(--font-heading); color: var(--purple-dark); font-size: 15px; }
+.cv-z-btns { display: flex; gap: 4px; }
+.cv-prop-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cv-color { padding: 2px; height: 38px; cursor: pointer; }
+.btn-xs { padding: 3px 9px; font-size: 14px; min-width: 32px; }
+/* run mode */
+.cv-run-wrap { width: 100%; display: flex; justify-content: center; }
+.cv-run-frame { max-width: 1040px; }
+.cv-rblock { position: absolute; box-sizing: border-box; }
+.cv-hotspot-run { cursor: pointer; border-radius: 14px; transition: .15s; display: flex; align-items: center; justify-content: center; }
+.cv-hotspot-run:hover { background: rgba(186,117,23,0.08); }
+.cv-hotspot-run.on { background: rgba(99,153,34,0.18); box-shadow: 0 0 0 4px var(--green); }
+.cv-hot-reveal { font-family: var(--font-heading); color: var(--green-dark); font-size: 30px; background: rgba(255,255,255,0.88); padding: 6px 16px; border-radius: var(--r-pill); }
+
 </style>
 </head>
 <body>
@@ -2168,10 +2213,11 @@ const SLIDE_TYPE_META = {
     checkin:     { label: 'Чек-ин',      icon: '👋', defaultEmoji: '👋', bg: 'var(--purple-light)', fg: 'var(--purple-dark)', desc: 'настроение · дата · погода' },
     deck:        { label: 'Тренажёр',    icon: '⚡', defaultEmoji: '📚', bg: 'var(--coral-light)',  fg: 'var(--coral-dark)',  desc: 'встроенная колода'        },
     video:       { label: 'Видео',       icon: '▶',  defaultEmoji: '🎥', bg: 'var(--pink-light)',   fg: 'var(--pink-dark)',   desc: 'YouTube, GDrive, Rutube'  },
+    canvas:      { label: 'Холст',       icon: '🎨', defaultEmoji: '🎨', bg: 'var(--purple-light)', fg: 'var(--purple-dark)', desc: 'свободный холст · картинки · подсветка' },
     rate:        { label: 'Оценка',      icon: '★',  defaultEmoji: '⭐', bg: 'var(--orange-light)', fg: 'var(--orange-dark)', desc: 'урок · учитель · настроение' },
     outro:       { label: 'Заключение',  icon: '🎊', defaultEmoji: '🎉', bg: 'var(--teal-light)',   fg: 'var(--teal)',        desc: 'итог урока'               }
 };
-const SLIDE_TYPES_ORDERED = ['intro', 'checkin', 'explanation', 'text', 'vocab', 'task', 'poll', 'deck', 'video', 'rate', 'outro'];
+const SLIDE_TYPES_ORDERED = ['intro', 'checkin', 'explanation', 'text', 'vocab', 'task', 'poll', 'deck', 'video', 'canvas', 'rate', 'outro'];
 
 // Подтипы task
 const TASK_SUBTYPE_META = {
@@ -2231,7 +2277,8 @@ const editorState = {
     selectedId: null,
     saveStatus: 'idle', // 'idle' | 'dirty' | 'saving' | 'saved' | 'error'
     saveTimer: null,
-    pickerOpen: false
+    pickerOpen: false,
+    selectedBlockId: null
 };
 
 // Кэш библиотеки колод из тренажёра (word_decks + deck_folders, без study_ префикса)
@@ -2864,6 +2911,7 @@ function renderEditor() {
     `;
     attachFormHandlers();
     attachRibbonDragHandlers();
+    attachCanvasHandlers();
 }
 
 function renderSaveIndicator() {
@@ -3060,6 +3108,7 @@ async function reorderSlides(dragId, dropId) {
 async function selectSlide(id) {
     await flushSave();
     editorState.selectedId = id;
+    editorState.selectedBlockId = null;
     renderEditor();
 }
 
@@ -3081,6 +3130,7 @@ async function onPickAddSlideType(type) {
         weather_prompt: "What's the weather like?"
     };
     else if (type === 'outro') initialMeta = { finish_lesson: false };
+    else if (type === 'canvas') initialMeta = { blocks: [], bg: null };
     const { data, error } = await sb.from('study_slides').insert({
         lesson_id: editorState.lessonId,
         slide_type: type,
@@ -3169,6 +3219,9 @@ function renderSlidePreview(slide) {
     }
     if (t === 'rate') {
         return renderRatePreview(slide, chip);
+    }
+    if (t === 'canvas') {
+        return renderCanvasPreview(slide, chip);
     }
     // прочие типы (пока сюда нечего попасть)
     return `
@@ -3860,6 +3913,8 @@ function renderEditorForm(slide) {
         body += renderVideoForm(slide);
     } else if (t === 'rate') {
         body += renderRateForm(slide);
+    } else if (t === 'canvas') {
+        body += renderCanvasForm(slide);
     } else {
         body += `<div class="muted" style="padding:14px; background:var(--cream-deep); border-radius:8px; font-size:13px;">
             Форма для типа <strong>${esc(SLIDE_TYPE_META[t]?.label || t)}</strong> — в следующих шагах. Сейчас доступно только переключение типа.
@@ -4496,6 +4551,438 @@ function md(text) {
 }
 
 /* ================================================================
+   SCREEN · CANVAS SLIDE  (модель B — свободный холст с блоками)
+   Блоки живут в slide.meta.blocks; фон — slide.meta.bg (URL).
+   Координаты блоков — в пикселях системы 1280x720; холст
+   масштабируется через transform: scale(), drag-математика делит
+   экранную дельту на canvasScale.
+   ================================================================ */
+const CANVAS_W = 1280, CANVAS_H = 720;
+let canvasScale = 1;
+let canvasDrag = null;
+
+function canvasMeta(slide) {
+    if (!slide.meta) slide.meta = {};
+    if (!Array.isArray(slide.meta.blocks)) slide.meta.blocks = [];
+    return slide.meta;
+}
+function canvasBlocks(slide) { return canvasMeta(slide).blocks; }
+function findBlock(slide, id) { return canvasBlocks(slide).find(b => b.id === id) || null; }
+function selectedBlock() {
+    const s = currentSlide();
+    if (!s || s.slide_type !== 'canvas') return null;
+    return findBlock(s, editorState.selectedBlockId);
+}
+function newBlockId() { return 'b_' + Math.random().toString(36).slice(2, 9); }
+function maxZ(slide) { const bs = canvasBlocks(slide); return bs.length ? Math.max(...bs.map(b => b.z || 0)) : 0; }
+function cvClamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+function makeBlock(type, x, y) {
+    const s = currentSlide();
+    const base = { id: newBlockId(), type, x: Math.round(x), y: Math.round(y), z: maxZ(s) + 1 };
+    if (type === 'text')    return { ...base, w: 480, h: 90,  text: 'Текст', color: '#2C2C2A', size: 44, weight: 700, align: 'left' };
+    if (type === 'image')   return { ...base, w: 380, h: 250, url: '' };
+    if (type === 'shape')   return { ...base, w: 320, h: 200, shape: 'rect', fill: 'rgba(127,119,221,0.25)', stroke: '#7F77DD', radius: 16 };
+    if (type === 'hotspot') return { ...base, w: 240, h: 160, reveal: '✓' };
+    return base;
+}
+
+/* ---------- EDITOR: рендер холста ---------- */
+function renderCanvasPreview(slide, chip) {
+    const m = canvasMeta(slide);
+    const bg = m.bg ? `background-image:url('${esc(m.bg)}'); background-size:cover; background-position:center;` : '';
+    const blocks = canvasBlocks(slide).slice().sort((a, b) => (a.z || 0) - (b.z || 0))
+        .map(b => renderCanvasBlock(b, b.id === editorState.selectedBlockId)).join('');
+    const empty = canvasBlocks(slide).length ? '' :
+        `<div class="cv-empty-hint">Пустой холст<span>добавь блоки справа →</span></div>`;
+    return `<div class="cv-edit-wrap" onmousedown="event.stopPropagation()" onclick="event.stopPropagation()">
+        <div class="cv-chip-row">${chip}<span class="cv-hint">кликни блок · тащи мышкой · угол = размер</span></div>
+        <div class="cv-frame" id="cvFrame">
+            <div class="cv-stage" id="cvStage" style="${bg}">${blocks}${empty}</div>
+        </div>
+    </div>`;
+}
+
+function renderCanvasBlock(b, isSel) {
+    const pos = `left:${b.x}px; top:${b.y}px; width:${b.w}px; height:${b.h}px; z-index:${b.z || 1};`;
+    let inner = '';
+    if (b.type === 'text') {
+        inner = `<div class="cv-text" style="color:${esc(b.color)}; font-size:${b.size}px; font-weight:${b.weight}; text-align:${b.align};">${esc(b.text || '')}</div>`;
+    } else if (b.type === 'image') {
+        inner = b.url
+            ? `<img src="${esc(b.url)}" class="cv-img" draggable="false">`
+            : `<div class="cv-img-empty">🖼<span>загрузи картинку</span></div>`;
+    } else if (b.type === 'shape') {
+        const rad = b.shape === 'ellipse' ? '50%' : (b.radius || 0) + 'px';
+        inner = `<div class="cv-shape" style="background:${b.fill}; border:3px solid ${b.stroke}; border-radius:${rad};"></div>`;
+    } else if (b.type === 'hotspot') {
+        inner = `<div class="cv-hotspot"><span class="cv-hot-tag">тап-зона</span>${b.reveal ? `<span class="cv-hot-peek">→ ${esc(b.reveal)}</span>` : ''}</div>`;
+    }
+    const handles = isSel
+        ? `<span class="cv-handle nw"></span><span class="cv-handle ne"></span><span class="cv-handle sw"></span><span class="cv-handle se" data-resize="1"></span>`
+        : '';
+    return `<div class="cv-block ${b.type} ${isSel ? 'sel' : ''}" data-block-id="${b.id}" style="${pos}">${inner}${handles}</div>`;
+}
+
+/* ---------- EDITOR: фит / масштаб ---------- */
+function fitAllCanvases() {
+    document.querySelectorAll('.cv-frame').forEach(frame => {
+        const stage = frame.querySelector('.cv-stage');
+        if (!stage) return;
+        const w = frame.clientWidth;
+        if (!w) return;
+        const sc = w / CANVAS_W;
+        stage.style.transform = `scale(${sc})`;
+        frame.style.height = (CANVAS_H * sc) + 'px';
+        if (frame.id === 'cvFrame') canvasScale = sc;
+    });
+}
+window.addEventListener('resize', fitAllCanvases);
+
+/* ---------- EDITOR: drag / resize / select ---------- */
+function attachCanvasHandlers() {
+    const slide = currentSlide();
+    const stage = document.getElementById('cvStage');
+    if (!stage || !slide || slide.slide_type !== 'canvas') return;
+    fitAllCanvases();
+    requestAnimationFrame(fitAllCanvases);
+    stage.addEventListener('mousedown', onCanvasStageMouseDown);
+    stage.addEventListener('dragover', e => { e.preventDefault(); stage.classList.add('drop'); });
+    stage.addEventListener('dragleave', () => stage.classList.remove('drop'));
+    stage.addEventListener('drop', onCanvasDrop);
+}
+
+function onCanvasStageMouseDown(e) {
+    const blockEl = e.target.closest('.cv-block');
+    const isHandle = !!e.target.closest('[data-resize]');
+    if (blockEl && isHandle) { startCanvasOp(e, blockEl.dataset.blockId, 'resize'); return; }
+    if (blockEl) { canvasSelectBlock(blockEl.dataset.blockId); startCanvasOp(e, blockEl.dataset.blockId, 'move'); return; }
+    canvasSelectBlock(null);
+}
+
+function startCanvasOp(e, id, mode) {
+    e.preventDefault();
+    const b = findBlock(currentSlide(), id);
+    if (!b) return;
+    canvasDrag = { id, mode, sx: e.clientX, sy: e.clientY, ox: b.x, oy: b.y, ow: b.w, oh: b.h };
+    document.addEventListener('mousemove', onCanvasMouseMove);
+    document.addEventListener('mouseup', onCanvasMouseUp);
+}
+
+function onCanvasMouseMove(e) {
+    if (!canvasDrag) return;
+    const dx = (e.clientX - canvasDrag.sx) / (canvasScale || 1);
+    const dy = (e.clientY - canvasDrag.sy) / (canvasScale || 1);
+    const el = document.querySelector(`.cv-block[data-block-id="${canvasDrag.id}"]`);
+    if (!el) return;
+    if (canvasDrag.mode === 'move') {
+        const nx = cvClamp(canvasDrag.ox + dx, -canvasDrag.ow + 40, CANVAS_W - 40);
+        const ny = cvClamp(canvasDrag.oy + dy, -canvasDrag.oh + 40, CANVAS_H - 40);
+        el.style.left = nx + 'px';
+        el.style.top = ny + 'px';
+    } else {
+        const nw = cvClamp(canvasDrag.ow + dx, 40, CANVAS_W);
+        const nh = cvClamp(canvasDrag.oh + dy, 30, CANVAS_H);
+        el.style.width = nw + 'px';
+        el.style.height = nh + 'px';
+    }
+}
+
+function onCanvasMouseUp() {
+    document.removeEventListener('mousemove', onCanvasMouseMove);
+    document.removeEventListener('mouseup', onCanvasMouseUp);
+    if (!canvasDrag) return;
+    const b = findBlock(currentSlide(), canvasDrag.id);
+    const el = document.querySelector(`.cv-block[data-block-id="${canvasDrag.id}"]`);
+    if (b && el) {
+        b.x = Math.round(parseFloat(el.style.left));
+        b.y = Math.round(parseFloat(el.style.top));
+        b.w = Math.round(parseFloat(el.style.width));
+        b.h = Math.round(parseFloat(el.style.height));
+        markDirty();
+    }
+    canvasDrag = null;
+}
+
+function canvasSelectBlock(id) {
+    editorState.selectedBlockId = id;
+    rerenderCanvasAll();
+}
+
+/* перерисовать холст + панель свойств, сохранив выбор */
+function rerenderCanvasAll() {
+    const slide = currentSlide();
+    const prev = document.getElementById('editorPreview');
+    if (prev) prev.innerHTML = renderSlidePreview(slide);
+    const form = document.getElementById('editorForm');
+    if (form) { form.innerHTML = renderEditorForm(slide); attachFormHandlers(); }
+    attachCanvasHandlers();
+}
+
+/* ---------- EDITOR: операции с блоками ---------- */
+function canvasAddBlock(type) {
+    const slide = currentSlide();
+    if (!slide) return;
+    const n = canvasBlocks(slide).length;
+    const b = makeBlock(type, 220 + (n % 5) * 40, 170 + (n % 5) * 40);
+    canvasBlocks(slide).push(b);
+    editorState.selectedBlockId = b.id;
+    markDirty();
+    rerenderCanvasAll();
+    if (type === 'image') canvasPickImage('block');
+}
+
+function canvasDeleteBlock() {
+    const slide = currentSlide();
+    const id = editorState.selectedBlockId;
+    if (!id) return;
+    slide.meta.blocks = canvasBlocks(slide).filter(b => b.id !== id);
+    editorState.selectedBlockId = null;
+    markDirty();
+    rerenderCanvasAll();
+}
+
+function canvasBlockZ(dir) {
+    const slide = currentSlide();
+    const b = selectedBlock();
+    if (!b) return;
+    if (dir === 'front') b.z = maxZ(slide) + 1;
+    else b.z = Math.min(...canvasBlocks(slide).map(x => x.z || 0)) - 1;
+    markDirty();
+    rerenderCanvasAll();
+}
+
+/* живое обновление поля выбранного блока (без перерисовки формы — фокус остаётся в инпуте) */
+function canvasUpdateField(field, val, isInt) {
+    const b = selectedBlock();
+    if (!b) return;
+    b[field] = isInt ? (parseInt(val) || 0) : val;
+    markDirty();
+    const slide = currentSlide();
+    const prev = document.getElementById('editorPreview');
+    if (prev) prev.innerHTML = renderSlidePreview(slide);
+    attachCanvasHandlers();
+}
+
+/* ---------- EDITOR: загрузка изображений в Supabase Storage ---------- */
+function canvasPickImage(kind) {
+    const inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = 'image/*';
+    inp.onchange = async () => {
+        const file = inp.files && inp.files[0];
+        if (file) await canvasHandleImageFile(file, kind);
+    };
+    inp.click();
+}
+
+async function canvasHandleImageFile(file, kind, dropX, dropY) {
+    const slide = currentSlide();
+    if (!slide) return;
+    if (!file.type.startsWith('image/')) { toast('Это не изображение', 'error'); return; }
+    toast('Загружаю картинку…', 'info');
+    try {
+        const isBg = kind === 'bg';
+        const blob = await processImageToWebp(file, isBg ? CANVAS_W : 900, isBg ? CANVAS_H : 900, isBg ? 'cover' : 'contain');
+        const path = `lessons/${editorState.lessonId}/${slide.id}/${newBlockId()}.webp`;
+        const { error: upErr } = await sb.storage.from('classroom-media').upload(path, blob, { contentType: 'image/webp', upsert: true });
+        if (upErr) throw upErr;
+        const { data: pub } = sb.storage.from('classroom-media').getPublicUrl(path);
+        const url = pub.publicUrl;
+        if (isBg) {
+            canvasMeta(slide).bg = url;
+        } else {
+            const dims = await blobDims(blob);
+            const ar = dims.w / dims.h || 1.4;
+            const w = 440, h = Math.round(w / ar);
+            let b = selectedBlock();
+            if (b && b.type === 'image' && !b.url) {
+                b.url = url; b.h = h;
+            } else {
+                b = makeBlock('image', dropX != null ? dropX : 260, dropY != null ? dropY : 180);
+                b.url = url; b.w = w; b.h = h;
+                canvasBlocks(slide).push(b);
+                editorState.selectedBlockId = b.id;
+            }
+        }
+        markDirty();
+        rerenderCanvasAll();
+        toast('Готово', 'success');
+    } catch (err) {
+        console.error('canvas upload', err);
+        toast('Не загрузилось: ' + (err.message || err), 'error');
+    }
+}
+
+function processImageToWebp(file, maxW, maxH, mode) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        const url = URL.createObjectURL(file);
+        img.onload = () => {
+            URL.revokeObjectURL(url);
+            let tw, th, sx = 0, sy = 0, sw = img.width, sh = img.height;
+            if (mode === 'cover') {
+                tw = maxW; th = maxH;
+                const ar = maxW / maxH, iar = img.width / img.height;
+                if (iar > ar) { sw = img.height * ar; sx = (img.width - sw) / 2; }
+                else { sh = img.width / ar; sy = (img.height - sh) / 2; }
+            } else {
+                const sc = Math.min(maxW / img.width, maxH / img.height, 1);
+                tw = Math.max(1, Math.round(img.width * sc));
+                th = Math.max(1, Math.round(img.height * sc));
+            }
+            const c = document.createElement('canvas');
+            c.width = tw; c.height = th;
+            c.getContext('2d').drawImage(img, sx, sy, sw, sh, 0, 0, tw, th);
+            c.toBlob(b => b ? resolve(b) : reject(new Error('toBlob failed')), 'image/webp', 0.85);
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('битый файл изображения')); };
+        img.src = url;
+    });
+}
+
+function blobDims(blob) {
+    return new Promise(resolve => {
+        const img = new Image();
+        const url = URL.createObjectURL(blob);
+        img.onload = () => { URL.revokeObjectURL(url); resolve({ w: img.width, h: img.height }); };
+        img.onerror = () => resolve({ w: 4, h: 3 });
+        img.src = url;
+    });
+}
+
+async function onCanvasDrop(e) {
+    e.preventDefault();
+    const stage = document.getElementById('cvStage');
+    if (stage) stage.classList.remove('drop');
+    const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (!file) return;
+    const rect = stage.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / (canvasScale || 1);
+    const y = (e.clientY - rect.top) / (canvasScale || 1);
+    await canvasHandleImageFile(file, 'block', Math.round(x), Math.round(y));
+}
+
+function canvasClearBg() {
+    const slide = currentSlide();
+    if (!slide) return;
+    canvasMeta(slide).bg = null;
+    markDirty();
+    rerenderCanvasAll();
+}
+
+/* ---------- EDITOR: правая панель формы ---------- */
+function renderCanvasForm(slide) {
+    const m = canvasMeta(slide);
+    const b = selectedBlock();
+    let html = '';
+    html += `<div class="form-field"><label>Фон слайда</label>
+        <div class="cv-btn-row">
+            <button class="btn btn-sm" onclick="canvasPickImage('bg')">🖼 Загрузить фон</button>
+            ${m.bg ? `<button class="btn btn-sm btn-ghost" onclick="canvasClearBg()">Убрать</button>` : ''}
+        </div>
+        <div class="hint">сюда позже ляжет импорт PDF / PPTX</div>
+    </div>`;
+    html += `<div class="form-field"><label>Добавить блок</label>
+        <div class="cv-add-grid">
+            <button class="cv-add-btn" onclick="canvasAddBlock('text')">🔤<span>Текст</span></button>
+            <button class="cv-add-btn" onclick="canvasAddBlock('image')">🖼<span>Картинка</span></button>
+            <button class="cv-add-btn" onclick="canvasAddBlock('shape')">🟪<span>Подсветка</span></button>
+            <button class="cv-add-btn" onclick="canvasAddBlock('hotspot')">🎯<span>Тап-зона</span></button>
+        </div>
+    </div>`;
+    html += b
+        ? renderCanvasBlockProps(b)
+        : `<div class="muted" style="padding:12px; background:var(--cream-deep); border-radius:8px; font-size:13px;">Выбери блок на холсте, чтобы настроить его.</div>`;
+    return html;
+}
+
+function renderCanvasBlockProps(b) {
+    const NAMES = { text: 'Текст', image: 'Картинка', shape: 'Подсветка', hotspot: 'Тап-зона' };
+    let h = `<div class="cv-prop-head"><span>⚙ ${NAMES[b.type] || b.type}</span>
+        <div class="cv-z-btns">
+            <button class="btn btn-xs" onclick="canvasBlockZ('front')" title="На передний план">↑</button>
+            <button class="btn btn-xs" onclick="canvasBlockZ('back')" title="На задний план">↓</button>
+        </div>
+    </div>`;
+    if (b.type === 'text') {
+        h += renderFormField('Текст', `<textarea class="form-input" rows="3" oninput="canvasUpdateField('text', this.value)">${esc(b.text || '')}</textarea>`);
+        h += `<div class="cv-prop-row">
+            ${renderFormField('Размер', `<input type="number" class="form-input" value="${b.size}" oninput="canvasUpdateField('size', this.value, true)">`)}
+            ${renderFormField('Цвет', `<input type="color" class="form-input cv-color" value="${esc(b.color || '#2C2C2A')}" oninput="canvasUpdateField('color', this.value)">`)}
+        </div>`;
+        h += renderFormField('Выравнивание', `<select class="form-input" onchange="canvasUpdateField('align', this.value)">
+            ${['left', 'center', 'right'].map(a => `<option value="${a}" ${b.align === a ? 'selected' : ''}>${a === 'left' ? 'влево' : a === 'center' ? 'по центру' : 'вправо'}</option>`).join('')}
+        </select>`);
+    } else if (b.type === 'image') {
+        h += `<div class="cv-btn-row"><button class="btn btn-sm" onclick="canvasPickImage('block')">${b.url ? 'Заменить картинку' : 'Загрузить картинку'}</button></div>`;
+        h += `<div class="hint">или просто перетащи файл на холст</div>`;
+    } else if (b.type === 'shape') {
+        h += renderFormField('Форма', `<select class="form-input" onchange="canvasUpdateField('shape', this.value)">
+            <option value="rect" ${b.shape === 'rect' ? 'selected' : ''}>Прямоугольник</option>
+            <option value="ellipse" ${b.shape === 'ellipse' ? 'selected' : ''}>Овал</option>
+        </select>`);
+        h += `<div class="cv-prop-row">
+            ${renderFormField('Заливка', `<input type="color" class="form-input cv-color" value="${esc(cvRgbaToHex(b.fill))}" oninput="canvasUpdateField('fill', cvHexToRgba(this.value, 0.25))">`)}
+            ${renderFormField('Контур', `<input type="color" class="form-input cv-color" value="${esc(b.stroke || '#7F77DD')}" oninput="canvasUpdateField('stroke', this.value)">`)}
+        </div>`;
+    } else if (b.type === 'hotspot') {
+        h += renderFormField('Подпись при тапе', `<input class="form-input" value="${esc(b.reveal || '')}" oninput="canvasUpdateField('reveal', this.value)" placeholder="✓ · правильно · слово">`);
+        h += `<div class="hint">В режиме урока ученик тапает зону → появляется подпись и зелёная подсветка.</div>`;
+    }
+    h += `<div class="form-pane-foot"><button class="btn btn-danger btn-sm" onclick="canvasDeleteBlock()">🗑 Удалить блок</button></div>`;
+    return h;
+}
+
+function cvHexToRgba(hex, a) {
+    let h = (hex || '#7F77DD').replace('#', '');
+    if (h.length === 3) h = h.split('').map(c => c + c).join('');
+    const n = parseInt(h, 16);
+    return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
+}
+function cvRgbaToHex(rgba) {
+    if (!rgba) return '#7F77DD';
+    if (rgba[0] === '#') return rgba;
+    const m = rgba.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if (!m) return '#7F77DD';
+    return '#' + [1, 2, 3].map(i => (+m[i]).toString(16).padStart(2, '0')).join('');
+}
+
+/* ---------- RUN MODE: проигрывание холста ---------- */
+function renderCanvasRun(slide) {
+    const m = canvasMeta(slide);
+    const bg = m.bg ? `background-image:url('${esc(m.bg)}'); background-size:cover; background-position:center;` : '';
+    if (!runState.hotspots) runState.hotspots = {};
+    const blocks = canvasBlocks(slide).slice().sort((a, b) => (a.z || 0) - (b.z || 0)).map(b => {
+        const pos = `left:${b.x}px; top:${b.y}px; width:${b.w}px; height:${b.h}px; z-index:${b.z || 1};`;
+        if (b.type === 'text') {
+            return `<div class="cv-rblock" style="${pos}"><div class="cv-text" style="color:${esc(b.color)}; font-size:${b.size}px; font-weight:${b.weight}; text-align:${b.align};">${esc(b.text || '')}</div></div>`;
+        }
+        if (b.type === 'image') {
+            return `<div class="cv-rblock" style="${pos}">${b.url ? `<img src="${esc(b.url)}" class="cv-img" draggable="false">` : ''}</div>`;
+        }
+        if (b.type === 'shape') {
+            const rad = b.shape === 'ellipse' ? '50%' : (b.radius || 0) + 'px';
+            return `<div class="cv-rblock" style="${pos}"><div class="cv-shape" style="background:${b.fill}; border:3px solid ${b.stroke}; border-radius:${rad};"></div></div>`;
+        }
+        if (b.type === 'hotspot') {
+            const on = !!runState.hotspots[b.id];
+            return `<div class="cv-rblock cv-hotspot-run ${on ? 'on' : ''}" style="${pos}" onclick="onRunHotspot('${b.id}')">${on && b.reveal ? `<span class="cv-hot-reveal">${esc(b.reveal)}</span>` : ''}</div>`;
+        }
+        return '';
+    }).join('');
+    return `<div class="cv-run-wrap"><div class="cv-frame cv-run-frame"><div class="cv-stage" style="${bg}">${blocks}</div></div></div>`;
+}
+
+function onRunHotspot(id) {
+    if (!runState.hotspots) runState.hotspots = {};
+    runState.hotspots[id] = !runState.hotspots[id];
+    rerenderRunStage();
+    requestAnimationFrame(fitAllCanvases);
+}
+
+
+/* ================================================================
    SCREEN · RUN MODE
    ================================================================ */
 
@@ -4551,6 +5038,7 @@ async function showRunMode(lessonId) {
     runState.slides = slides;
     runState.currentIdx = 0;
     runState.notesOpen = false;
+    runState.hotspots = {};
     runState.interactions = {};
     runState.timer = { value: 0, running: false, intervalId: null };
     runState.runId = null;
@@ -4644,6 +5132,7 @@ function renderRunMode() {
         const cur = document.querySelector('.run-ribbon-slide.current');
         if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }, 50);
+    requestAnimationFrame(fitAllCanvases);
 }
 
 function renderRunRibbon() {
@@ -4682,6 +5171,7 @@ function renderRunSlide(slide) {
     if (t === 'video') return renderRunVideo(slide);
     if (t === 'rate')  return renderRunRate(slide);
     if (t === 'outro') return renderRunOutro(slide);
+    if (t === 'canvas') return renderCanvasRun(slide);
     // intro / outro / text / explanation / vocab — переиспользуем preview
     return renderSlidePreview(slide);
 }
@@ -5265,6 +5755,7 @@ function rerenderRunStage() {
     if (!stage) return;
     const slide = runState.slides[runState.currentIdx];
     stage.innerHTML = renderRunSlide(slide);
+    requestAnimationFrame(fitAllCanvases);
 }
 
 function onRunOpenInput(slideId, value) {
