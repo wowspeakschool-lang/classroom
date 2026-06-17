@@ -2090,6 +2090,46 @@ textarea.form-input { resize: vertical; min-height: 38px; padding: 8px 14px; lin
 .cv-hotspot-run:hover { background: rgba(186,117,23,0.08); }
 .cv-hotspot-run.on { background: rgba(99,153,34,0.18); box-shadow: 0 0 0 4px var(--green); }
 .cv-hot-reveal { font-family: var(--font-heading); color: var(--green-dark); font-size: 30px; background: rgba(255,255,255,0.88); padding: 6px 16px; border-radius: var(--r-pill); }
+/* image placement modal */
+.cv-img-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 600; display: flex; align-items: center; justify-content: center; padding: 24px; }
+.cv-img-card { position: relative; background: var(--white); border-radius: var(--r-lg); padding: 22px; width: 100%; max-width: 440px; box-shadow: 0 18px 50px rgba(0,0,0,.25); }
+.cv-img-x { position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; border-radius: 50%; background: var(--cream-deep); border: none; cursor: pointer; font-size: 16px; color: var(--text-soft); }
+.cv-img-prev { width: 100%; height: 150px; background: var(--cream-deep); border-radius: var(--r-md); display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 14px; }
+.cv-img-prev img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.cv-img-q { font-family: var(--font-heading); font-size: 18px; color: var(--text); margin-bottom: 14px; }
+.cv-img-opts { display: flex; flex-direction: column; gap: 8px; }
+.cv-img-opt { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--cream); border: 1px solid var(--border); border-radius: var(--r-md); cursor: pointer; text-align: left; transition: .12s; }
+.cv-img-opt:hover { border-color: var(--purple); background: var(--purple-light); }
+.cv-img-opt .ico { font-size: 26px; flex: none; }
+.cv-img-opt .tx { display: flex; flex-direction: column; gap: 2px; }
+.cv-img-opt .tx b { font-family: var(--font-body); font-weight: 700; font-size: 15px; color: var(--text); }
+.cv-img-opt .tx i { font-style: normal; font-size: 12px; color: var(--text-mute); }
+/* check-in: компактнее, чтобы всегда влезал в окно */
+.run-stage .checkin-run-card { gap: 10px; padding: 20px 32px; }
+.run-stage .checkin-run-card h2 { font-size: 24px; }
+.run-stage .checkin-run-card .checkin-block.run { padding: 4px 0; gap: 6px; }
+.run-stage .checkin-run-card .checkin-label { font-size: 16px; }
+.run-stage .checkin-run-card .checkin-month { font-size: 15px; padding: 2px 0; }
+.run-stage .checkin-run-card .checkin-mood.run { gap: 8px; }
+.run-stage .checkin-run-card .checkin-emoji-btn { font-size: 30px; padding: 6px 12px; border-radius: 12px; }
+.run-stage .checkin-run-card .checkin-week.run { gap: 6px; }
+.run-stage .checkin-run-card .checkin-day { padding: 7px 4px; }
+.run-stage .checkin-run-card .checkin-day-num { font-size: 19px; }
+.run-stage .checkin-run-card .checkin-day-label { font-size: 11px; }
+/* rate slide — новый дизайн */
+.rate2-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; margin: 10px 0; }
+.rate2-card { background: var(--cream); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 18px 14px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.rate2-label { font-family: var(--font-heading); font-size: 20px; color: var(--text); text-align: center; }
+.rate2-faces { display: flex; gap: 10px; }
+.rate2-face { width: 62px; height: 62px; border-radius: 50%; border: 2px solid var(--border); background: var(--white); font-size: 32px; line-height: 1; cursor: pointer; transition: transform .12s, border-color .12s, background .12s, filter .12s, opacity .12s; display: flex; align-items: center; justify-content: center; filter: grayscale(0.55); opacity: 0.65; }
+.rate2-face:hover { transform: scale(1.1); filter: none; opacity: 1; }
+.rate2-face.selected { filter: none; opacity: 1; transform: scale(1.08); }
+.rate2-face.bad.selected  { background: var(--red-light);    border-color: var(--red); }
+.rate2-face.mid.selected  { background: var(--orange-light); border-color: var(--orange); }
+.rate2-face.good.selected { background: var(--green-light);  border-color: var(--green); }
+.rate2-foot { display: flex; gap: 12px; align-items: center; justify-content: center; margin-top: 10px; }
+.rate2-thanks { color: var(--green-dark); font-size: 14px; font-weight: 700; }
+
 
 </style>
 </head>
@@ -2218,6 +2258,29 @@ const SLIDE_TYPE_META = {
     outro:       { label: 'Заключение',  icon: '🎊', defaultEmoji: '🎉', bg: 'var(--teal-light)',   fg: 'var(--teal)',        desc: 'итог урока'               }
 };
 const SLIDE_TYPES_ORDERED = ['intro', 'checkin', 'explanation', 'text', 'vocab', 'task', 'poll', 'deck', 'video', 'canvas', 'rate', 'outro'];
+
+const CHECKIN_MOODS = [
+    { key: 'great',   emoji: '😄' },
+    { key: 'happy',   emoji: '😊' },
+    { key: 'neutral', emoji: '😐' },
+    { key: 'tired',   emoji: '😴' },
+    { key: 'sad',     emoji: '😢' },
+    { key: 'angry',   emoji: '😡' },
+    { key: 'sick',    emoji: '🤒' },
+    { key: 'excited', emoji: '🤩' }
+];
+const CHECKIN_WEATHER = [
+    { key: 'sunny',   emoji: '☀️' },
+    { key: 'partly',  emoji: '⛅' },
+    { key: 'cloudy',  emoji: '☁️' },
+    { key: 'rainy',   emoji: '🌧' },
+    { key: 'stormy',  emoji: '⛈' },
+    { key: 'snowy',   emoji: '❄️' },
+    { key: 'windy',   emoji: '🌬' },
+    { key: 'foggy',   emoji: '🌫' },
+    { key: 'rainbow', emoji: '🌈' },
+    { key: 'hot',     emoji: '🥵' }
+];
 
 // Подтипы task
 const TASK_SUBTYPE_META = {
@@ -3235,6 +3298,21 @@ function renderSlidePreview(slide) {
 
 /* ============ DECK ============ */
 
+function onDeckSearch(q) {
+    const sel = document.getElementById('deckSelect');
+    if (!sel) return;
+    const term = (q || '').trim().toLowerCase();
+    sel.querySelectorAll('optgroup').forEach(g => {
+        let any = false;
+        g.querySelectorAll('option').forEach(o => {
+            const match = !term || o.textContent.toLowerCase().includes(term) || (g.label || '').toLowerCase().includes(term);
+            o.hidden = !match;
+            if (match) any = true;
+        });
+        g.hidden = !any;
+    });
+}
+
 function renderDeckForm(slide) {
     const m = slide.meta || {};
     const selectedId = m.deck_id;
@@ -3271,7 +3349,8 @@ function renderDeckForm(slide) {
         html += `
             <div class="form-field">
                 <label>Колода <span class="hint">· из библиотеки тренажёра</span></label>
-                <select class="form-input select" data-meta-field="deck_id" data-meta-int="1">
+                <input class="form-input" id="deckSearch" placeholder="🔍 Поиск по названию…" oninput="onDeckSearch(this.value)" style="margin-bottom:8px;">
+                <select class="form-input select" id="deckSelect" data-meta-field="deck_id" data-meta-int="1">
                     <option value="">— Выбери колоду —</option>
                     ${optgroups}
                 </select>
@@ -3834,9 +3913,7 @@ function renderCheckinPreview(slide, chip) {
             <div class="checkin-block">
                 <div class="checkin-label">${esc(m.mood_prompt || 'How are you today?')}</div>
                 <div class="checkin-mood">
-                    <span class="checkin-emoji-btn">😊</span>
-                    <span class="checkin-emoji-btn">😐</span>
-                    <span class="checkin-emoji-btn">😢</span>
+                    ${CHECKIN_MOODS.map(o => `<span class="checkin-emoji-btn">${o.emoji}</span>`).join('')}
                 </div>
             </div>
 
@@ -3849,10 +3926,7 @@ function renderCheckinPreview(slide, chip) {
             <div class="checkin-block">
                 <div class="checkin-label">${esc(m.weather_prompt || "What's the weather like?")}</div>
                 <div class="checkin-mood">
-                    <span class="checkin-emoji-btn">☀️</span>
-                    <span class="checkin-emoji-btn">⛅</span>
-                    <span class="checkin-emoji-btn">🌧</span>
-                    <span class="checkin-emoji-btn">❄️</span>
+                    ${CHECKIN_WEATHER.map(o => `<span class="checkin-emoji-btn">${o.emoji}</span>`).join('')}
                 </div>
             </div>
         </div>
@@ -4729,7 +4803,6 @@ function canvasAddBlock(type) {
     editorState.selectedBlockId = b.id;
     markDirty();
     rerenderCanvasAll();
-    if (type === 'image') canvasPickImage('block');
 }
 
 function canvasDeleteBlock() {
@@ -4765,45 +4838,95 @@ function canvasUpdateField(field, val, isInt) {
 }
 
 /* ---------- EDITOR: загрузка изображений в Supabase Storage ---------- */
-function canvasPickImage(kind) {
+/* выбор файла → модалка «как вставить» */
+function canvasInsertImage() {
+    const inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = 'image/*';
+    inp.onchange = () => {
+        const file = inp.files && inp.files[0];
+        if (file) showImagePlacementModal(file);
+    };
+    inp.click();
+}
+
+function showImagePlacementModal(file) {
+    if (!file.type.startsWith('image/')) { toast('Это не изображение', 'error'); return; }
+    const url = URL.createObjectURL(file);
+    const modal = document.createElement('div');
+    modal.className = 'cv-img-modal';
+    modal.innerHTML = `
+        <div class="cv-img-card">
+            <button class="cv-img-x" title="Закрыть">✕</button>
+            <div class="cv-img-prev"><img src="${url}" alt=""></div>
+            <div class="cv-img-q">Как вставить изображение?</div>
+            <div class="cv-img-opts">
+                <button class="cv-img-opt" data-mode="bg"><span class="ico">🖼</span><span class="tx"><b>Фон слайда</b><i>на весь слайд, с обрезкой под 16:9</i></span></button>
+                <button class="cv-img-opt" data-mode="fit"><span class="ico">🔲</span><span class="tx"><b>Во весь слайд</b><i>целиком, по размеру, без обрезки</i></span></button>
+                <button class="cv-img-opt" data-mode="block"><span class="ico">✋</span><span class="tx"><b>Перетаскиваемый блок</b><i>обычная картинка, двигаешь мышкой</i></span></button>
+            </div>
+        </div>`;
+    document.body.appendChild(modal);
+    const close = () => { URL.revokeObjectURL(url); modal.remove(); };
+    modal.addEventListener('click', e => { if (e.target === modal) close(); });
+    modal.querySelector('.cv-img-x').addEventListener('click', close);
+    modal.querySelectorAll('.cv-img-opt').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const mode = btn.dataset.mode;
+            close();
+            await canvasApplyImage(file, mode);
+        });
+    });
+}
+
+/* заменить картинку в уже выбранном image-блоке (размер блока сохраняется) */
+function canvasReplaceSelectedImage() {
+    const b = selectedBlock();
+    if (!b || b.type !== 'image') return;
     const inp = document.createElement('input');
     inp.type = 'file';
     inp.accept = 'image/*';
     inp.onchange = async () => {
         const file = inp.files && inp.files[0];
-        if (file) await canvasHandleImageFile(file, kind);
+        if (file) await canvasApplyImage(file, 'replace');
     };
     inp.click();
 }
 
-async function canvasHandleImageFile(file, kind, dropX, dropY) {
+async function canvasApplyImage(file, mode, dropX, dropY) {
     const slide = currentSlide();
     if (!slide) return;
     if (!file.type.startsWith('image/')) { toast('Это не изображение', 'error'); return; }
     toast('Загружаю картинку…', 'info');
     try {
-        const isBg = kind === 'bg';
-        const blob = await processImageToWebp(file, isBg ? CANVAS_W : 900, isBg ? CANVAS_H : 900, isBg ? 'cover' : 'contain');
+        const isBg = mode === 'bg';
+        const blob = await processImageToWebp(file, isBg ? CANVAS_W : 1280, isBg ? CANVAS_H : 1280, isBg ? 'cover' : 'contain');
         const path = `lessons/${editorState.lessonId}/${slide.id}/${newBlockId()}.webp`;
         const { error: upErr } = await sb.storage.from('classroom-media').upload(path, blob, { contentType: 'image/webp', upsert: false });
         if (upErr) throw upErr;
-        const { data: pub } = sb.storage.from('classroom-media').getPublicUrl(path);
-        const url = pub.publicUrl;
+        const url = sb.storage.from('classroom-media').getPublicUrl(path).data.publicUrl;
         if (isBg) {
             canvasMeta(slide).bg = url;
+        } else if (mode === 'replace') {
+            const b = selectedBlock();
+            if (b && b.type === 'image') b.url = url;
         } else {
             const dims = await blobDims(blob);
             const ar = dims.w / dims.h || 1.4;
-            const w = 440, h = Math.round(w / ar);
-            let b = selectedBlock();
-            if (b && b.type === 'image' && !b.url) {
-                b.url = url; b.h = h;
+            let w, h, x, y;
+            if (mode === 'fit') {
+                const sc = Math.min(1200 / dims.w, 660 / dims.h);
+                w = Math.round(dims.w * sc); h = Math.round(dims.h * sc);
+                x = Math.round((CANVAS_W - w) / 2); y = Math.round((CANVAS_H - h) / 2);
             } else {
-                b = makeBlock('image', dropX != null ? dropX : 260, dropY != null ? dropY : 180);
-                b.url = url; b.w = w; b.h = h;
-                canvasBlocks(slide).push(b);
-                editorState.selectedBlockId = b.id;
+                w = 460; h = Math.round(w / ar);
+                if (dropX != null) { x = dropX; y = dropY; }
+                else { x = Math.round((CANVAS_W - w) / 2); y = Math.round((CANVAS_H - h) / 2); }
             }
+            const b = makeBlock('image', x, y);
+            b.url = url; b.w = w; b.h = h;
+            canvasBlocks(slide).push(b);
+            editorState.selectedBlockId = b.id;
         }
         markDirty();
         rerenderCanvasAll();
@@ -4860,7 +4983,7 @@ async function onCanvasDrop(e) {
     const rect = stage.getBoundingClientRect();
     const x = (e.clientX - rect.left) / (canvasScale || 1);
     const y = (e.clientY - rect.top) / (canvasScale || 1);
-    await canvasHandleImageFile(file, 'block', Math.round(x), Math.round(y));
+    await canvasApplyImage(file, 'block', Math.round(x), Math.round(y));
 }
 
 function canvasClearBg() {
@@ -4876,17 +4999,17 @@ function renderCanvasForm(slide) {
     const m = canvasMeta(slide);
     const b = selectedBlock();
     let html = '';
-    html += `<div class="form-field"><label>Фон слайда</label>
+    html += `<div class="form-field"><label>Изображение</label>
         <div class="cv-btn-row">
-            <button class="btn btn-sm" onclick="canvasPickImage('bg')">🖼 Загрузить фон</button>
-            ${m.bg ? `<button class="btn btn-sm btn-ghost" onclick="canvasClearBg()">Убрать</button>` : ''}
+            <button class="btn btn-sm" onclick="canvasInsertImage()">🖼 Вставить изображение</button>
+            ${m.bg ? `<button class="btn btn-sm btn-ghost" onclick="canvasClearBg()">Убрать фон</button>` : ''}
         </div>
-        <div class="hint">сюда позже ляжет импорт PDF / PPTX</div>
+        <div class="hint">спросит: фон · во весь слайд · перетаскиваемый блок${m.bg ? ' · <b>фон установлен</b>' : ''}</div>
     </div>`;
     html += `<div class="form-field"><label>Добавить блок</label>
         <div class="cv-add-grid">
             <button class="cv-add-btn" onclick="canvasAddBlock('text')">🔤<span>Текст</span></button>
-            <button class="cv-add-btn" onclick="canvasAddBlock('image')">🖼<span>Картинка</span></button>
+            <button class="cv-add-btn" onclick="canvasInsertImage()">🖼<span>Картинка</span></button>
             <button class="cv-add-btn" onclick="canvasAddBlock('shape')">🟪<span>Подсветка</span></button>
             <button class="cv-add-btn" onclick="canvasAddBlock('hotspot')">🎯<span>Тап-зона</span></button>
         </div>
@@ -4915,7 +5038,7 @@ function renderCanvasBlockProps(b) {
             ${['left', 'center', 'right'].map(a => `<option value="${a}" ${b.align === a ? 'selected' : ''}>${a === 'left' ? 'влево' : a === 'center' ? 'по центру' : 'вправо'}</option>`).join('')}
         </select>`);
     } else if (b.type === 'image') {
-        h += `<div class="cv-btn-row"><button class="btn btn-sm" onclick="canvasPickImage('block')">${b.url ? 'Заменить картинку' : 'Загрузить картинку'}</button></div>`;
+        h += `<div class="cv-btn-row"><button class="btn btn-sm" onclick="canvasReplaceSelectedImage()">${b.url ? 'Заменить картинку' : 'Загрузить картинку'}</button></div>`;
         h += `<div class="hint">или просто перетащи файл на холст</div>`;
     } else if (b.type === 'shape') {
         h += renderFormField('Форма', `<select class="form-input" onchange="canvasUpdateField('shape', this.value)">
@@ -5482,39 +5605,37 @@ function renderRunRate(slide) {
     const saved = !!interaction.rateSaved;
 
     const rows = [];
-    if (meta.ask_lesson  !== false) rows.push({ key: 'lesson',  label: 'Урок' });
-    if (meta.ask_teacher !== false) rows.push({ key: 'teacher', label: 'Учитель' });
-    if (meta.ask_mood    !== false) rows.push({ key: 'mood',    label: 'Настроение' });
+    if (meta.ask_lesson  !== false) rows.push({ key: 'lesson',  label: 'Урок',       emoji: '📚' });
+    if (meta.ask_teacher !== false) rows.push({ key: 'teacher', label: 'Учитель',    emoji: '🧑‍🏫' });
+    if (meta.ask_mood    !== false) rows.push({ key: 'mood',    label: 'Настроение', emoji: '✨' });
+
+    const faces = [{ e: '😞', v: 1, cls: 'bad' }, { e: '😐', v: 2, cls: 'mid' }, { e: '😄', v: 3, cls: 'good' }];
 
     let rowsHtml = '';
     rows.forEach(r => {
         const cur = vals[r.key];
-        const faces = ['🙁', '😐', '😄'];
-        let faceHtml = '';
-        faces.forEach((f, i) => {
-            const val = i + 1;
-            const isSel = cur === val;
-            faceHtml += `<button class="rate-face-btn ${isSel ? 'selected' : ''}" onclick="onRunRateSet(${slide.id}, '${r.key}', ${val})">${f}</button>`;
-        });
+        const faceHtml = faces.map(f =>
+            `<button class="rate2-face ${f.cls} ${cur === f.v ? 'selected' : ''}" onclick="onRunRateSet(${slide.id}, '${r.key}', ${f.v})">${f.e}</button>`
+        ).join('');
         rowsHtml += `
-            <div class="rate-row">
-                <span class="rate-label">${esc(r.label)}</span>
-                <div class="rate-faces">${faceHtml}</div>
+            <div class="rate2-card">
+                <div class="rate2-label">${r.emoji} ${esc(r.label)}</div>
+                <div class="rate2-faces">${faceHtml}</div>
             </div>
         `;
     });
 
     return `
-        <div class="slide-card">
+        <div class="slide-card rate2-wrap">
             ${chip}
-            <h2 style="text-align:left;">${esc(stripLeadingEmoji(slide.title) || 'Оцени урок')}</h2>
-            ${slide.body ? `<p class="task-instruction">${esc(slide.body)}</p>` : ''}
-            <div class="rate-list run">${rowsHtml}</div>
-            <div style="display:flex; gap:10px; align-items:center; flex-shrink:0; margin-top:6px;">
-                <button class="task-check-btn" onclick="onRunRateSave(${slide.id})" ${saving ? 'disabled' : ''}>
+            <h2 style="text-align:center;">${esc(stripLeadingEmoji(slide.title) || 'Оцени урок')}</h2>
+            ${slide.body ? `<p class="task-instruction" style="text-align:center;">${esc(slide.body)}</p>` : ''}
+            <div class="rate2-grid">${rowsHtml}</div>
+            <div class="rate2-foot">
+                <button class="task-check-btn rate2-save" onclick="onRunRateSave(${slide.id})" ${saving ? 'disabled' : ''}>
                     ${saving ? 'Сохраняю...' : (saved ? '✓ Сохранено' : 'Сохранить оценку')}
                 </button>
-                ${saved ? '<span style="color:var(--green-dark); font-size:13px;">Спасибо!</span>' : ''}
+                ${saved ? '<span class="rate2-thanks">Спасибо! 🎉</span>' : ''}
             </div>
         </div>
     `;
@@ -5571,11 +5692,7 @@ function renderRunCheckin(slide) {
     const { days: week, month_name } = getCurrentWeekDates();
 
     // Mood buttons
-    const moodOptions = [
-        { key: 'happy', emoji: '😊', label: 'happy' },
-        { key: 'neutral', emoji: '😐', label: 'OK' },
-        { key: 'sad', emoji: '😢', label: 'sad' }
-    ];
+    const moodOptions = CHECKIN_MOODS;
     let moodHtml = '';
     moodOptions.forEach(o => {
         const isSel = sel.mood === o.key;
@@ -5596,12 +5713,7 @@ function renderRunCheckin(slide) {
     });
 
     // Weather buttons
-    const weatherOptions = [
-        { key: 'sunny',  emoji: '☀️' },
-        { key: 'cloudy', emoji: '⛅' },
-        { key: 'rainy',  emoji: '🌧' },
-        { key: 'snowy',  emoji: '❄️' }
-    ];
+    const weatherOptions = CHECKIN_WEATHER;
     let weatherHtml = '';
     weatherOptions.forEach(o => {
         const isSel = sel.weather === o.key;
@@ -5611,7 +5723,7 @@ function renderRunCheckin(slide) {
     const canSave = sel.mood && sel.day_of_week && sel.weather;
 
     return `
-        <div class="slide-card">
+        <div class="slide-card checkin-run-card">
             ${chip}
             <h2 style="text-align:left;">${esc(stripLeadingEmoji(slide.title) || "Let's start!")}</h2>
             ${slide.body ? `<p class="task-instruction">${esc(slide.body)}</p>` : ''}
