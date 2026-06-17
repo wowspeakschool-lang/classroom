@@ -1965,7 +1965,7 @@ textarea.form-input { resize: vertical; min-height: 38px; padding: 8px 14px; lin
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    padding: 20px;
 }
 .run-iframe-modal iframe {
     width: 100%;
@@ -1973,8 +1973,8 @@ textarea.form-input { resize: vertical; min-height: 38px; padding: 8px 14px; lin
     border: none;
     border-radius: var(--r-lg);
     background: white;
-    max-width: 1100px;
-    max-height: 800px;
+    max-width: 1500px;
+    max-height: none;
 }
 .run-iframe-modal .close {
     position: absolute;
@@ -2282,19 +2282,20 @@ const CHECKIN_WEATHER = [
     { key: 'partly',  emoji: '⛅', say: 'partly cloudy' },
     { key: 'cloudy',  emoji: '☁️', say: 'cloudy' },
     { key: 'rainy',   emoji: '🌧', say: 'rainy' },
-    { key: 'stormy',  emoji: '⛈', say: 'stormy' },
+    { key: 'stormy',  emoji: '⚡', say: 'stormy' },
     { key: 'snowy',   emoji: '❄️', say: 'snowy' },
     { key: 'windy',   emoji: '💨', say: 'windy' },
     { key: 'rainbow', emoji: '🌈', say: 'rainbow' }
 ];
+const DOW_FULL = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
 const TRAINER_MODES = [
-    { key: 'flip',       emoji: '🃏', name: 'Дриллинг' },
+    { key: 'flip',       emoji: '🃏', name: 'Flip cards' },
     { key: 'flashcard',  emoji: '📸', name: 'Flashcards' },
-    { key: 'choice4',    emoji: '🎯', name: '4 варианта' },
+    { key: 'choice4',    emoji: '🎯', name: '4 choices' },
     { key: 'match',      emoji: '🔗', name: 'Match pairs' },
     { key: 'memory',     emoji: '🧠', name: 'Memory' },
     { key: 'unscramble', emoji: '🔤', name: 'Unscramble' },
-    { key: 'hangman',    emoji: '🎩', name: 'Угадай слово' }
+    { key: 'hangman',    emoji: '🎩', name: 'Hangman' }
 ];
 
 function speak(text) {
@@ -5525,11 +5526,11 @@ function renderRunDeck(slide) {
                     <p style="font-size:22px; margin:8px 0 0; font-weight:600;">${esc(deck.title)}</p>
                     <p style="font-size:14px; margin:0; color:var(--text-mute);">${deck.level ? esc(deck.level) + ' · ' : ''}${deck.word_count || 0} слов</p>
                     <button class="deck-play-btn" onclick="openDeckIframe(${deck.id}, '${mode || ''}')">
-                        ${game ? `<span class="dp-emoji">${game.emoji}</span> Играть: ${esc(game.name)}` : '▶ Запустить тренажёр'}
+                        ${game ? `<span class="dp-emoji">${game.emoji}</span> Play: ${esc(game.name)}` : '▶ Start trainer'}
                     </button>
                 ` : `
                     <span style="font-size:64px; opacity:0.4;">📚</span>
-                    <p class="muted" style="margin:0;">Колода не выбрана</p>
+                    <p class="muted" style="margin:0;">No deck selected</p>
                 `}
             </div>
         </div>
@@ -5657,9 +5658,9 @@ function renderRunRate(slide) {
     const saved = !!interaction.rateSaved;
 
     const rows = [];
-    if (meta.ask_lesson  !== false) rows.push({ key: 'lesson',  label: 'Урок',       emoji: '📚' });
-    if (meta.ask_teacher !== false) rows.push({ key: 'teacher', label: 'Учитель',    emoji: '🧑‍🏫' });
-    if (meta.ask_mood    !== false) rows.push({ key: 'mood',    label: 'Настроение', emoji: '✨' });
+    if (meta.ask_lesson  !== false) rows.push({ key: 'lesson',  label: 'Lesson',  emoji: '📚' });
+    if (meta.ask_teacher !== false) rows.push({ key: 'teacher', label: 'Teacher', emoji: '🧑‍🏫' });
+    if (meta.ask_mood    !== false) rows.push({ key: 'mood',    label: 'Mood',    emoji: '✨' });
 
     const faces = [{ e: '😞', v: 1, cls: 'bad' }, { e: '😐', v: 2, cls: 'mid' }, { e: '😄', v: 3, cls: 'good' }];
 
@@ -5680,14 +5681,14 @@ function renderRunRate(slide) {
     return `
         <div class="slide-card rate2-wrap">
             ${chip}
-            <h2 style="text-align:center;">${esc(stripLeadingEmoji(slide.title) || 'Оцени урок')}</h2>
+            <h2 style="text-align:center;">${esc(stripLeadingEmoji(slide.title) || 'Rate the lesson')}</h2>
             ${slide.body ? `<p class="task-instruction" style="text-align:center;">${esc(slide.body)}</p>` : ''}
             <div class="rate2-grid">${rowsHtml}</div>
             <div class="rate2-foot">
                 <button class="task-check-btn rate2-save" onclick="onRunRateSave(${slide.id})" ${saving ? 'disabled' : ''}>
-                    ${saving ? 'Сохраняю...' : (saved ? '✓ Сохранено' : 'Сохранить оценку')}
+                    ${saving ? 'Saving…' : (saved ? '✓ Saved' : 'Save')}
                 </button>
-                ${saved ? '<span class="rate2-thanks">Спасибо! 🎉</span>' : ''}
+                ${saved ? '<span class="rate2-thanks">Thanks! 🎉</span>' : ''}
             </div>
         </div>
     `;
@@ -5824,7 +5825,7 @@ function onRunCheckinPickDay(slideId, dayKey, dateNum, dateIso, monthName) {
     i.checkin.date_iso = dateIso;
     i.checkin.month_name = monthName;
     i.checkinSaved = false;
-    try { speak(new Date(dateIso).toLocaleDateString('en-US', { weekday: 'long' })); } catch (_) {}
+    speak(DOW_FULL[dayKey] || '');
     rerenderRunStage();
 }
 
