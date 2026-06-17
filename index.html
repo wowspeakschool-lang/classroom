@@ -4785,7 +4785,7 @@ async function canvasHandleImageFile(file, kind, dropX, dropY) {
         const isBg = kind === 'bg';
         const blob = await processImageToWebp(file, isBg ? CANVAS_W : 900, isBg ? CANVAS_H : 900, isBg ? 'cover' : 'contain');
         const path = `lessons/${editorState.lessonId}/${slide.id}/${newBlockId()}.webp`;
-        const { error: upErr } = await sb.storage.from('classroom-media').upload(path, blob, { contentType: 'image/webp', upsert: true });
+        const { error: upErr } = await sb.storage.from('classroom-media').upload(path, blob, { contentType: 'image/webp', upsert: false });
         if (upErr) throw upErr;
         const { data: pub } = sb.storage.from('classroom-media').getPublicUrl(path);
         const url = pub.publicUrl;
