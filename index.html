@@ -2195,6 +2195,20 @@ textarea.form-input { resize: vertical; min-height: 38px; padding: 8px 14px; lin
 .reading-q-edit { background: var(--cream-deep); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; display: flex; flex-direction: column; gap: 8px; }
 .rqe-head { display: flex; align-items: center; gap: 8px; }
 .rqe-num { font-weight: 700; font-size: 13px; flex: 1; }
+/* listening */
+.listening-audio { width: 100%; }
+.run-stage .listening-audio { height: 52px; }
+.listening-audio-empty { background: var(--cream-deep); border-radius: 12px; padding: 20px; text-align: center; color: var(--text-mute); }
+/* speaking */
+.speak-prompt { font-size: 18px; color: var(--text-soft); margin: 0; }
+.run-stage .speak-prompt { font-size: 22px; }
+.speak-frames { display: flex; flex-direction: column; gap: 10px; }
+.speak-frame { background: var(--coral-light); color: var(--coral-dark); border-radius: 12px; padding: 14px 18px; font-size: 18px; font-weight: 600; }
+.run-stage .speak-frame { font-size: 26px; padding: 18px 24px; }
+.speak-words { display: flex; flex-wrap: wrap; gap: 8px; }
+.speak-word { background: var(--cream-deep); border: 1px solid var(--border); border-radius: var(--r-pill); padding: 6px 14px; font-size: 15px; }
+.run-stage .speak-word { font-size: 19px; padding: 8px 18px; }
+.speak-turn { align-self: flex-start; background: var(--purple-light); color: var(--purple-dark); border-radius: var(--r-pill); padding: 8px 18px; font-weight: 700; margin-top: 4px; }
 
 
 
@@ -2315,6 +2329,8 @@ const SLIDE_TYPE_META = {
     explanation: { label: 'Объяснение',  icon: 'ⓘ',  defaultEmoji: '📝', bg: 'var(--blue-light)',   fg: 'var(--blue-dark)',   desc: 'правила, грамматика'      },
     text:        { label: 'Текст',       icon: '☰',  defaultEmoji: '📄', bg: 'var(--cream-deep)',   fg: 'var(--text-soft)',   desc: 'reading / writing'        },
     reading:     { label: 'Чтение',      icon: '📖', defaultEmoji: '📖', bg: 'var(--green-light)',  fg: 'var(--green-dark)',  desc: 'текст + вопросы (прокрутка)' },
+    listening:   { label: 'Аудирование', icon: '🎧', defaultEmoji: '🎧', bg: 'var(--pink-light)',   fg: 'var(--pink-dark)',   desc: 'аудио/видео + вопросы' },
+    speaking:    { label: 'Говорение',   icon: '🗣️', defaultEmoji: '🗣️', bg: 'var(--coral-light)',  fg: 'var(--coral-dark)',  desc: 'промпт + речевые рамки' },
     vocab:       { label: 'Словарь',     icon: '📖', defaultEmoji: '📖', bg: 'var(--orange-light)', fg: 'var(--orange-dark)', desc: 'слово с переводом'        },
     task:        { label: 'Задание',     icon: '✓',  defaultEmoji: '✏️', bg: 'var(--green-light)',  fg: 'var(--green-dark)',  desc: 'choice · matching · fill · order' },
     poll:        { label: 'Опрос',       icon: '☑',  defaultEmoji: '🎯', bg: 'var(--blue-light)',   fg: 'var(--blue-dark)',   desc: 'I CAN · опросы · чек-листы' },
@@ -2325,16 +2341,16 @@ const SLIDE_TYPE_META = {
     rate:        { label: 'Оценка',      icon: '★',  defaultEmoji: '⭐', bg: 'var(--orange-light)', fg: 'var(--orange-dark)', desc: 'урок · учитель · настроение' },
     outro:       { label: 'Заключение',  icon: '🎊', defaultEmoji: '🎉', bg: 'var(--teal-light)',   fg: 'var(--teal)',        desc: 'итог урока'               }
 };
-const SLIDE_TYPES_ORDERED = ['intro', 'checkin', 'explanation', 'text', 'reading', 'vocab', 'task', 'poll', 'deck', 'video', 'canvas', 'rate', 'outro'];
+const SLIDE_TYPES_ORDERED = ['intro', 'checkin', 'explanation', 'text', 'reading', 'listening', 'speaking', 'vocab', 'task', 'poll', 'deck', 'video', 'canvas', 'rate', 'outro'];
 
 // Сферы: организующий слой над форматами. canvas доступен в каждой «учебной» сфере.
 const SKILLS = [
     { key: 'lexis',     label: 'Лексика',     emoji: '🟧', types: ['deck', 'vocab', 'task', 'canvas'] },
     { key: 'grammar',   label: 'Грамматика',  emoji: '🟦', types: ['explanation', 'task', 'video', 'canvas'] },
     { key: 'reading',   label: 'Чтение',      emoji: '📖', types: ['reading', 'text', 'task', 'canvas'] },
-    { key: 'listening', label: 'Аудирование', emoji: '🎧', types: ['video', 'task', 'canvas'] },
+    { key: 'listening', label: 'Аудирование', emoji: '🎧', types: ['listening', 'video', 'task', 'canvas'] },
     { key: 'writing',   label: 'Письмо',      emoji: '✍️', types: ['task', 'canvas'] },
-    { key: 'speaking',  label: 'Говорение',   emoji: '🗣️', types: ['explanation', 'text', 'canvas'] },
+    { key: 'speaking',  label: 'Говорение',   emoji: '🗣️', types: ['speaking', 'explanation', 'text', 'canvas'] },
     { key: 'ritual',    label: 'Ритуалы',     emoji: '🎀', types: ['intro', 'checkin', 'poll', 'rate', 'outro'] }
 ];
 function skillMeta(key) { return SKILLS.find(s => s.key === key) || null; }
@@ -3757,6 +3773,8 @@ async function onPickAddSlideType(type, skill) {
     else if (type === 'outro') initialMeta = { finish_lesson: false };
     else if (type === 'canvas') initialMeta = { blocks: [], bg: null };
     else if (type === 'reading') initialMeta = { intro: '', text: '', questions: [] };
+    else if (type === 'listening') initialMeta = { media_type: 'audio', media_url: '', intro: '', questions: [] };
+    else if (type === 'speaking') initialMeta = { prompt: '', frames: [], words: [] };
     if (skill) initialMeta.skill = skill;
     const { data, error } = await sb.from('study_slides').insert({
         lesson_id: editorState.lessonId,
@@ -3851,6 +3869,36 @@ function renderSlidePreview(slide) {
     }
     if (t === 'canvas') {
         return renderCanvasPreview(slide, chip);
+    }
+    if (t === 'speaking') {
+        const sm = slide.meta || {};
+        const frames = (sm.frames || []).filter(f => f.text).map(f => `<div class="speak-frame">${esc(f.text)}</div>`).join('');
+        return `
+            <div class="slide-card">
+                ${chip}
+                <h2 style="font-size:22px; text-align:left;">${esc(stripLeadingEmoji(slide.title) || 'Говорение')}</h2>
+                ${slide.image_url ? `<img class="slide-run-img" src="${esc(slide.image_url)}">` : ''}
+                ${sm.prompt ? `<p class="speak-prompt">${esc(sm.prompt)}</p>` : ''}
+                ${frames ? `<div class="speak-frames">${frames}</div>` : ''}
+                ${(sm.words || []).length ? `<div class="speak-words">${(sm.words || []).map(w => `<span class="speak-word">${esc(w)}</span>`).join('')}</div>` : ''}
+            </div>
+        `;
+    }
+    if (t === 'listening') {
+        const lm = slide.meta || {};
+        const qn = (lm.questions || []).length;
+        const mediaPrev = (lm.media_type === 'video')
+            ? `<div class="video-wrap"><div class="video-placeholder"><span style="font-size:40px; opacity:0.4;">🎬</span></div></div>`
+            : (lm.media_url ? `<audio controls src="${esc(lm.media_url)}" style="width:100%;"></audio>` : `<div class="listening-audio-empty">🔊 аудио не настроено</div>`);
+        return `
+            <div class="slide-card">
+                ${chip}
+                <h2 style="font-size:22px; text-align:left;">${esc(stripLeadingEmoji(slide.title) || 'Аудирование')}</h2>
+                ${mediaPrev}
+                ${lm.intro ? `<div class="reading-intro"><div class="reading-tag">Before</div><div class="markdown">${md(lm.intro)}</div></div>` : ''}
+                ${qn ? `<p class="muted" style="font-size:13px;">Вопросов: ${qn}</p>` : ''}
+            </div>
+        `;
     }
     if (t === 'reading') {
         const rm = slide.meta || {};
@@ -4600,6 +4648,10 @@ function renderEditorForm(slide) {
         body += renderRateForm(slide);
     } else if (t === 'reading') {
         body += renderReadingForm(slide);
+    } else if (t === 'listening') {
+        body += renderListeningForm(slide);
+    } else if (t === 'speaking') {
+        body += renderSpeakingForm(slide);
     } else if (t === 'canvas') {
         body += renderCanvasForm(slide);
     } else {
@@ -4966,6 +5018,11 @@ function renderReadingForm(slide) {
     html += renderSlideImageField(slide);
     html += renderFormField('Перед чтением (опц.)', `<textarea class="form-input" rows="2" oninput="onReadingMetaField('intro', this.value)" placeholder="Look at the pictures. What rooms can you see?">${esc(m.intro || '')}</textarea>`, 'markdown · показывается над текстом');
     html += renderFormField('Текст для чтения (markdown)', `<textarea class="form-input" rows="9" oninput="onReadingMetaField('text', this.value)" placeholder="There is an old house on the hill. In the bedroom there is ...">${esc(m.text || '')}</textarea>`, '**жирный** · *курсив* · переносы строк');
+    html += renderQuestionsEditor(slide, 'Вопросы после текста');
+    return html;
+}
+function renderQuestionsEditor(slide, label) {
+    const m = readingMeta(slide);
     let qs = '';
     m.questions.forEach((q, idx) => {
         let inner = `<div class="reading-q-edit">
@@ -4992,10 +5049,9 @@ function renderReadingForm(slide) {
         inner += `</div>`;
         qs += inner;
     });
-    html += `<div class="form-field"><label>Вопросы после текста</label>
+    return `<div class="form-field"><label>${esc(label || 'Вопросы')}</label>
         ${qs || '<div class="muted" style="font-size:13px;">Пока нет вопросов.</div>'}
         <button class="list-add-btn" onclick="onReadingQAdd()">+ Добавить вопрос</button></div>`;
-    return html;
 }
 function onReadingMetaField(key, val) { const s = currentSlide(); const m = readingMeta(s); m[key] = val; markDirty(); rerenderPreview(); }
 function onReadingQText(qid, val) { const s = currentSlide(); const q = readingMeta(s).questions.find(x => x.id === qid); if (q) { q.q = val; markDirty(); rerenderPreview(); } }
@@ -5029,6 +5085,123 @@ function onRunReadingPick(slideId, qid, oid) { const a = rdAns(slideId, qid); if
 function onRunReadingCheck(slideId, qid) { const a = rdAns(slideId, qid); if (!a.selected) return; a.revealed = true; rerenderRunStage(); }
 function onRunReadingReset(slideId, qid) { const a = rdAns(slideId, qid); a.revealed = false; a.selected = null; rerenderRunStage(); }
 function onRunReadingOpen(slideId, qid, val) { rdAns(slideId, qid).open = val; }
+function speakingMeta(s) { if (!s.meta) s.meta = {}; if (!Array.isArray(s.meta.frames)) s.meta.frames = []; if (!Array.isArray(s.meta.words)) s.meta.words = []; return s.meta; }
+function renderSpeakingForm(slide) {
+    const m = speakingMeta(slide);
+    let html = '';
+    html += renderFormField('Заголовок', `<input class="form-input" data-field="title" value="${esc(slide.title || '')}" placeholder="Dream room — speaking">`);
+    html += renderSlideImageField(slide);
+    html += renderFormField('Задание / промпт', `<textarea class="form-input" rows="2" oninput="onSpeakingMetaField('prompt', this.value)" placeholder="Describe your dream room → I guess!">${esc(m.prompt || '')}</textarea>`);
+    let frames = '';
+    m.frames.forEach((f, idx) => {
+        frames += `<div class="opt-edit-row">
+            <span class="rqe-num" style="flex:0 0 auto;">${idx + 1}.</span>
+            <input class="form-input" value="${esc(f.text || '')}" placeholder="In my room, there's a ____." oninput="onSpeakingFrameText('${f.id}', this.value)">
+            <button class="x-btn" onclick="onSpeakingFrameDelete('${f.id}')" title="Удалить">×</button>
+        </div>`;
+    });
+    html += `<div class="form-field"><label>Речевые рамки <span class="hint">· предложения-шаблоны для проговаривания, ____ = пропуск</span></label>
+        <div style="display:flex; flex-direction:column; gap:6px;">${frames || '<div class="muted" style="font-size:13px;">Пока пусто.</div>'}</div>
+        <button class="list-add-btn" onclick="onSpeakingFrameAdd()">+ Добавить рамку</button></div>`;
+    html += renderFormField('Слова-опоры (через запятую)', `<input class="form-input" value="${esc((m.words || []).join(', '))}" oninput="onSpeakingWords(this.value)" placeholder="bed, sofa, table, lamp, window">`, 'показываются как подсказки-чипсы');
+    return html;
+}
+function onSpeakingMetaField(key, val) { const s = currentSlide(); const m = speakingMeta(s); m[key] = val; markDirty(); rerenderPreview(); }
+function onSpeakingFrameText(fid, val) { const s = currentSlide(); const f = speakingMeta(s).frames.find(x => x.id === fid); if (f) { f.text = val; markDirty(); rerenderPreview(); } }
+function onSpeakingFrameAdd() { const s = currentSlide(); speakingMeta(s).frames.push({ id: newId(), text: '' }); slideFormRerender(); }
+function onSpeakingFrameDelete(fid) { const s = currentSlide(); const m = speakingMeta(s); m.frames = m.frames.filter(f => f.id !== fid); slideFormRerender(); }
+function onSpeakingWords(val) { const s = currentSlide(); const m = speakingMeta(s); m.words = val.split(',').map(w => w.trim()).filter(Boolean); markDirty(); rerenderPreview(); }
+function renderRunSpeaking(slide) {
+    const meta = SLIDE_TYPE_META.speaking;
+    const chip = `<span class="slide-type-chip" style="background:${meta.bg}; color:${meta.fg};">${meta.icon} ${esc(meta.label)}</span>`;
+    const m = slide.meta || {};
+    const img = slide.image_url ? `<img class="slide-run-img" src="${esc(slide.image_url)}">` : '';
+    const prompt = m.prompt ? `<p class="speak-prompt">${esc(m.prompt)}</p>` : '';
+    const frames = (m.frames || []).filter(f => f.text).map(f => `<div class="speak-frame">${esc(f.text)}</div>`).join('');
+    const words = (m.words || []).length ? `<div class="speak-words">${(m.words || []).map(w => `<span class="speak-word">${esc(w)}</span>`).join('')}</div>` : '';
+    return `
+        <div class="slide-card">
+            ${chip}
+            ${slide.title ? `<h2 style="font-size:30px; text-align:left;">${esc(stripLeadingEmoji(slide.title))}</h2>` : ''}
+            ${img}
+            ${prompt}
+            ${frames ? `<div class="speak-frames">${frames}</div>` : ''}
+            ${words}
+            <div class="speak-turn">🎤 Your turn!</div>
+        </div>`;
+}
+
+function renderListeningForm(slide) {
+    const m = slide.meta || {};
+    const mt = m.media_type || 'audio';
+    let html = '';
+    html += renderFormField('Заголовок', `<input class="form-input" data-field="title" value="${esc(slide.title || '')}" placeholder="Listening: audio 88">`);
+    html += `<div class="form-field"><label>Тип медиа</label><div class="cv-btn-row">
+        <button class="btn btn-sm ${mt === 'audio' ? 'btn-primary' : ''}" onclick="onListeningMediaType('audio')">🔊 Аудио</button>
+        <button class="btn btn-sm ${mt === 'video' ? 'btn-primary' : ''}" onclick="onListeningMediaType('video')">🎬 Видео</button>
+    </div></div>`;
+    if (mt === 'video') {
+        html += renderFormField('Ссылка на видео', `<input class="form-input" value="${esc(m.media_url || '')}" oninput="onListeningMetaField('media_url', this.value)" placeholder="YouTube · Google Drive · Rutube">`, 'YouTube, Google Drive или Rutube');
+    } else {
+        html += `<div class="form-field"><label>Аудио</label>
+            <div class="task-img-line">
+                <input class="form-input" value="${esc(m.media_url || '')}" oninput="onListeningMetaField('media_url', this.value)" placeholder="URL .mp3 или загрузи →" style="flex:1;">
+                <button class="btn btn-xs" onclick="onListeningAudioUpload()">⬆ загрузить</button>
+            </div>
+            ${m.media_url ? `<audio controls src="${esc(m.media_url)}" style="width:100%; margin-top:8px;"></audio>` : ''}
+        </div>`;
+    }
+    html += renderFormField('Перед прослушиванием (опц.)', `<textarea class="form-input" rows="2" oninput="onListeningMetaField('intro', this.value)" placeholder="Listen and write the numbers.">${esc(m.intro || '')}</textarea>`);
+    html += renderQuestionsEditor(slide, 'Вопросы после прослушивания');
+    return html;
+}
+function onListeningMetaField(key, val) { const s = currentSlide(); if (!s.meta) s.meta = {}; s.meta[key] = val; markDirty(); rerenderPreview(); }
+function onListeningMediaType(t) { const s = currentSlide(); if (!s.meta) s.meta = {}; s.meta.media_type = t; slideFormRerender(); }
+function onListeningAudioUpload() { slidePickAudioUpload(url => { const s = currentSlide(); if (!s.meta) s.meta = {}; s.meta.media_url = url; slideFormRerender(); }); }
+function slidePickAudioUpload(onUrl) {
+    const inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = 'audio/*';
+    inp.onchange = async () => {
+        const f = inp.files && inp.files[0];
+        if (!f) return;
+        toast('Загружаю аудио…', 'info');
+        try {
+            const ext = (f.name.split('.').pop() || 'mp3').toLowerCase();
+            const path = `lessons/${editorState.lessonId}/audio/a_${Math.random().toString(36).slice(2, 9)}.${ext}`;
+            const { error } = await sb.storage.from('classroom-media').upload(path, f, { contentType: f.type || 'audio/mpeg', upsert: false });
+            if (error) throw error;
+            onUrl(sb.storage.from('classroom-media').getPublicUrl(path).data.publicUrl);
+            toast('Готово', 'success');
+        } catch (e) { console.error('audio upload', e); toast('Не загрузилось: ' + (e.message || e), 'error'); }
+    };
+    inp.click();
+}
+function renderRunListening(slide) {
+    const meta = SLIDE_TYPE_META.listening;
+    const chip = `<span class="slide-type-chip" style="background:${meta.bg}; color:${meta.fg};">${meta.icon} ${esc(meta.label)}</span>`;
+    const m = slide.meta || {};
+    const mt = m.media_type || 'audio';
+    let media = '';
+    if (mt === 'video') {
+        const parsed = parseVideoUrl(m.media_url || '');
+        if (parsed && parsed.provider === 'youtube') media = `<div class="video-wrap"><iframe src="https://www.youtube.com/embed/${parsed.id}" allowfullscreen></iframe></div>`;
+        else if (parsed && parsed.provider === 'gdrive') media = `<div class="video-wrap"><iframe src="https://drive.google.com/file/d/${parsed.id}/preview" allowfullscreen></iframe></div>`;
+        else if (parsed && parsed.provider === 'rutube') media = `<div class="video-wrap"><iframe src="https://rutube.ru/play/embed/${parsed.id}" allowfullscreen></iframe></div>`;
+        else media = `<div class="video-wrap"><div class="video-placeholder"><span style="font-size:56px; opacity:0.4;">🎬</span><span style="font-size:14px;">Видео не настроено</span></div></div>`;
+    } else {
+        media = m.media_url ? `<audio class="listening-audio" controls src="${esc(m.media_url)}"></audio>` : `<div class="listening-audio-empty">🔊 Аудио не настроено</div>`;
+    }
+    const intro = m.intro ? `<div class="reading-intro"><div class="reading-tag">Before listening</div><div class="markdown" style="font-size:18px;">${md(m.intro)}</div></div>` : '';
+    return `
+        <div class="slide-card reading-card">
+            ${chip}
+            ${slide.title ? `<h2 style="font-size:30px; text-align:left;">${esc(stripLeadingEmoji(slide.title))}</h2>` : ''}
+            ${media}
+            ${intro}
+            ${renderRunQuestions(slide)}
+        </div>`;
+}
+
 function renderRunReading(slide) {
     const meta = SLIDE_TYPE_META.reading;
     const chip = `<span class="slide-type-chip" style="background:${meta.bg}; color:${meta.fg};">${meta.icon} ${esc(meta.label)}</span>`;
@@ -5037,6 +5210,20 @@ function renderRunReading(slide) {
     if (!i.reading) i.reading = {};
     const img = slide.image_url ? `<img class="slide-run-img" src="${esc(slide.image_url)}">` : '';
     const intro = m.intro ? `<div class="reading-intro"><div class="reading-tag">Before reading</div><div class="markdown" style="font-size:18px;">${md(m.intro)}</div></div>` : '';
+    return `
+        <div class="slide-card reading-card">
+            ${chip}
+            ${slide.title ? `<h2 style="font-size:30px; text-align:left;">${esc(stripLeadingEmoji(slide.title))}</h2>` : ''}
+            ${img}
+            ${intro}
+            <div class="reading-text markdown">${md(m.text || '')}</div>
+            ${renderRunQuestions(slide)}
+        </div>`;
+}
+function renderRunQuestions(slide) {
+    const m = slide.meta || {};
+    const i = getInteraction(slide.id);
+    if (!i.reading) i.reading = {};
     let qHtml = '';
     (m.questions || []).forEach((q, idx) => {
         const a = i.reading[q.id] || {};
@@ -5058,15 +5245,7 @@ function renderRunReading(slide) {
                     : `<button class="task-check-btn" onclick="onRunReadingCheck(${slide.id}, '${q.id}')" ${!a.selected ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>Проверить</button>`}</div>`;
         }
     });
-    return `
-        <div class="slide-card reading-card">
-            ${chip}
-            ${slide.title ? `<h2 style="font-size:30px; text-align:left;">${esc(stripLeadingEmoji(slide.title))}</h2>` : ''}
-            ${img}
-            ${intro}
-            <div class="reading-text markdown">${md(m.text || '')}</div>
-            ${qHtml ? `<div class="reading-qs">${qHtml}</div>` : ''}
-        </div>`;
+    return qHtml ? `<div class="reading-qs">${qHtml}</div>` : '';
 }
 
 function renderRunSimple(slide) {
@@ -6187,6 +6366,8 @@ function renderRunSlide(slide) {
     if (t === 'outro') return renderRunOutro(slide);
     if (t === 'canvas') return renderCanvasRun(slide);
     if (t === 'reading') return renderRunReading(slide);
+    if (t === 'listening') return renderRunListening(slide);
+    if (t === 'speaking') return renderRunSpeaking(slide);
     if (t === 'text' || t === 'explanation' || t === 'vocab') return renderRunSimple(slide);
     // intro / outro — hero-превью
     return renderSlidePreview(slide);
