@@ -2518,6 +2518,257 @@ async function ckDelete(key) {
 }
 
 
+/* ================================================================
+   Импорт PPTX → canvas-слайды с редактируемыми блоками
+   (клиентский разбор zip+XML; текст и картинки с координатами).
+   Не поддерживается пока: таблицы, чарты, SmartArt, группы,
+   векторные emf/wmf-картинки — такие элементы пропускаются.
+   ================================================================ */
+const PPTX_EMU_PER_PX = 9525;
+const PPTX_IMG_EXTS = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg'];
+let _jszipPromise = null;
+
+function ensureJSZip() {
+    if (window.JSZip) return Promise.resolve(window.JSZip);
+    if (_jszipPromise) return _jszipPromise;
+    _jszipPromise = new Promise((res, rej) => {
+        const s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+        s.onload = () => res(window.JSZip);
+        s.onerror = () => rej(new Error('Не удалось загрузить JSZip'));
+        document.head.appendChild(s);
+    });
+    return _jszipPromise;
+}
+
+function _px(parseXmlStr) { return new DOMParser().parseFromString(parseXmlStr, 'application/xml'); }
+function _findAll(node, ln, out) {
+    out = out || [];
+    if (!node || !node.childNodes) return out;
+    for (let i = 0; i < node.childNodes.length; i++) {
+        const c = node.childNodes[i];
+        if (c.nodeType === 1) { if (c.localName === ln) out.push(c); _findAll(c, ln, out); }
+    }
+    return out;
+}
+function _findFirst(node, ln) { const a = _findAll(node, ln); return a.length ? a[0] : null; }
+function _children(node, ln) {
+    const out = [];
+    if (!node || !node.childNodes) return out;
+    for (let i = 0; i < node.childNodes.length; i++) {
+        const c = node.childNodes[i];
+        if (c.nodeType === 1 && c.localName === ln) out.push(c);
+    }
+    return out;
+}
+function _attr(node, name) {
+    if (!node || !node.attributes) return null;
+    for (let i = 0; i < node.attributes.length; i++) {
+        const a = node.attributes[i];
+        if (a.localName === name || a.name === name) return a.value;
+    }
+    return null;
+}
+function _xfrm(sp) {
+    const xf = _findFirst(sp, 'xfrm'); if (!xf) return null;
+    const off = _children(xf, 'off')[0] || _findFirst(xf, 'off');
+    const ext = _children(xf, 'ext')[0] || _findFirst(xf, 'ext');
+    if (!off || !ext) return null;
+    const x = parseInt(_attr(off, 'x')), y = parseInt(_attr(off, 'y'));
+    const cx = parseInt(_attr(ext, 'cx')), cy = parseInt(_attr(ext, 'cy'));
+    if (![x, y, cx, cy].every(n => Number.isFinite(n))) return null;
+    return { x, y, w: cx, h: cy };
+}
+function _pptxFit(cx, cy) {
+    const wpx = cx / PPTX_EMU_PER_PX, hpx = cy / PPTX_EMU_PER_PX;
+    const s = Math.min(CANVAS_W / wpx, CANVAS_H / hpx);
+    return { scale: s, offX: (CANVAS_W - wpx * s) / 2, offY: (CANVAS_H - hpx * s) / 2 };
+}
+function _mapRect(r, fit) {
+    return {
+        x: Math.round(fit.offX + (r.x / PPTX_EMU_PER_PX) * fit.scale),
+        y: Math.round(fit.offY + (r.y / PPTX_EMU_PER_PX) * fit.scale),
+        w: Math.round((r.w / PPTX_EMU_PER_PX) * fit.scale),
+        h: Math.round((r.h / PPTX_EMU_PER_PX) * fit.scale)
+    };
+}
+function _pptxText(sp) {
+    const paras = _findAll(sp, 'p');
+    const lines = [];
+    let color = null, sizePt = null, bold = false, align = null;
+    for (const p of paras) {
+        const pPr = _children(p, 'pPr')[0];
+        if (pPr && !align) align = _attr(pPr, 'algn');
+        let line = '';
+        for (const r of _children(p, 'r')) {
+            const t = _children(r, 't')[0];
+            if (t && t.textContent != null) line += t.textContent;
+            const rPr = _children(r, 'rPr')[0];
+            if (rPr) {
+                if (sizePt == null && _attr(rPr, 'sz')) sizePt = parseInt(_attr(rPr, 'sz')) / 100;
+                if (_attr(rPr, 'b') === '1') bold = true;
+                if (!color) { const sf = _findFirst(rPr, 'srgbClr'); if (sf) color = '#' + _attr(sf, 'val'); }
+            }
+        }
+        lines.push(line);
+    }
+    const text = lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+    const am = { l: 'left', ctr: 'center', r: 'right', just: 'left' };
+    return { text, color, sizePt, bold, align: am[align] || 'left' };
+}
+function _parseRels(str) {
+    const map = {};
+    if (!str) return map;
+    _findAll(_px(str), 'Relationship').forEach(rel => {
+        const id = _attr(rel, 'Id'), tgt = _attr(rel, 'Target');
+        if (id && tgt) map[id] = tgt;
+    });
+    return map;
+}
+function _blipEmbed(node) {
+    const blip = _findFirst(node, 'blip'); if (!blip) return null;
+    for (let k = 0; k < blip.attributes.length; k++) if (blip.attributes[k].localName === 'embed') return blip.attributes[k].value;
+    return null;
+}
+
+async function parsePptxBrowser(zip) {
+    const presStr = await zip.file('ppt/presentation.xml').async('string');
+    const presRelsF = zip.file('ppt/_rels/presentation.xml.rels');
+    const rels = _parseRels(presRelsF ? await presRelsF.async('string') : '');
+    const pres = _px(presStr);
+    const sldSz = _findFirst(pres, 'sldSz');
+    const cx = sldSz ? parseInt(_attr(sldSz, 'cx')) : 12192000;
+    const cy = sldSz ? parseInt(_attr(sldSz, 'cy')) : 6858000;
+    const fit = _pptxFit(cx, cy);
+
+    const sldIds = _findAll(_findFirst(pres, 'sldIdLst') || pres, 'sldId');
+    const paths = [];
+    sldIds.forEach(s => {
+        let rId = null;
+        for (let i = 0; i < s.attributes.length; i++) {
+            const a = s.attributes[i];
+            if (a.localName === 'id' && (a.value || '').indexOf('rId') === 0) rId = a.value;
+        }
+        const tgt = rId && rels[rId];
+        if (tgt) paths.push('ppt/' + tgt.replace(/^\.\.\//, '').replace(/^ppt\//, ''));
+    });
+
+    const slides = [];
+    let skipped = 0;
+    for (const path of paths) {
+        const xmlStr = await zip.file(path).async('string');
+        const doc = _px(xmlStr);
+        const name = path.split('/').pop();
+        const relsF = zip.file('ppt/slides/_rels/' + name + '.rels');
+        const srels = _parseRels(relsF ? await relsF.async('string') : '');
+        const spTree = _findFirst(doc, 'spTree');
+        const blocks = [];
+        let z = 1;
+        if (spTree) {
+            for (let i = 0; i < spTree.childNodes.length; i++) {
+                const node = spTree.childNodes[i];
+                if (node.nodeType !== 1) continue;
+                if (node.localName === 'sp') {
+                    const tx = _pptxText(node);
+                    if (!tx.text) continue;
+                    const g = _xfrm(node);
+                    const rect = g ? _mapRect(g, fit) : { x: 120, y: 70 + z * 26, w: 760, h: 100 };
+                    const fontPx = tx.sizePt ? Math.max(10, Math.round(tx.sizePt * (96 / 72) * fit.scale)) : 28;
+                    blocks.push({ id: 'b_' + Math.random().toString(36).slice(2, 8), type: 'text', x: rect.x, y: rect.y, w: rect.w, h: rect.h, z: z++, text: tx.text, color: tx.color || '#2C2C2A', size: fontPx, weight: tx.bold ? 700 : 400, align: tx.align });
+                } else if (node.localName === 'pic') {
+                    const g = _xfrm(node); if (!g) { skipped++; continue; }
+                    const rId = _blipEmbed(node);
+                    const tgt = rId && srels[rId]; if (!tgt) { skipped++; continue; }
+                    let media = tgt.replace(/^\.\.\//, ''); if (!media.startsWith('ppt/')) media = 'ppt/' + media;
+                    const ext = (media.split('.').pop() || '').toLowerCase();
+                    if (!zip.file(media) || PPTX_IMG_EXTS.indexOf(ext) < 0) { skipped++; continue; }
+                    const rect = _mapRect(g, fit);
+                    blocks.push({ id: 'b_' + Math.random().toString(36).slice(2, 8), type: 'image', x: rect.x, y: rect.y, w: rect.w, h: rect.h, z: z++, url: '', _media: media, _ext: ext });
+                } else if (node.localName === 'graphicFrame' || node.localName === 'grpSp') {
+                    skipped++;
+                }
+            }
+        }
+        slides.push({ blocks });
+    }
+    return { slides, skipped };
+}
+
+async function importPptx() {
+    const inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = '.pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation';
+    inp.onchange = async () => {
+        const file = inp.files && inp.files[0];
+        if (!file) return;
+        await runPptxImport(file);
+    };
+    inp.click();
+}
+
+async function runPptxImport(file) {
+    try {
+        toast('Загружаю движок чтения…', 'info');
+        const JSZipLib = await ensureJSZip();
+        toast('Читаю презентацию…', 'info');
+        const zip = await JSZipLib.loadAsync(file);
+        const parsed = await parsePptxBrowser(zip);
+        if (!parsed.slides.length) { toast('В файле не найдено слайдов', 'error'); return; }
+
+        let maxOrder = editorState.slides.reduce((mx, s) => Math.max(mx, s.order || 0), 0);
+        let firstNewId = null;
+        const lessonId = editorState.lessonId;
+
+        for (let si = 0; si < parsed.slides.length; si++) {
+            toast(`Импорт: слайд ${si + 1} из ${parsed.slides.length}…`, 'info');
+            const sb_slide = parsed.slides[si];
+            const { data: row, error } = await sb.from('study_slides').insert({
+                lesson_id: lessonId,
+                slide_type: 'canvas',
+                order: ++maxOrder,
+                cover_emoji: '🖼',
+                title: '',
+                body: '',
+                meta: { blocks: [], bg: null }
+            }).select().single();
+            if (error) { toast('Ошибка создания слайда: ' + error.message, 'error'); return; }
+            if (!firstNewId) firstNewId = row.id;
+
+            // выгрузка картинок этого слайда
+            for (const b of sb_slide.blocks) {
+                if (b.type === 'image' && b._media) {
+                    try {
+                        const blob = await zip.file(b._media).async('blob');
+                        const path = `lessons/${lessonId}/${row.id}/b_${Math.random().toString(36).slice(2, 9)}.${b._ext}`;
+                        const ct = b._ext === 'svg' ? 'image/svg+xml' : (b._ext === 'jpg' ? 'image/jpeg' : 'image/' + b._ext);
+                        const { error: upErr } = await sb.storage.from('classroom-media').upload(path, blob, { contentType: ct, upsert: false });
+                        if (upErr) throw upErr;
+                        b.url = sb.storage.from('classroom-media').getPublicUrl(path).data.publicUrl;
+                    } catch (e) {
+                        console.error('pptx image upload', e);
+                        b.url = ''; // картинка не загрузилась — блок останется пустым
+                    }
+                }
+                delete b._media; delete b._ext;
+            }
+
+            await sb.from('study_slides').update({ meta: { blocks: sb_slide.blocks, bg: null } }).eq('id', row.id);
+            row.meta = { blocks: sb_slide.blocks, bg: null };
+            editorState.slides.push(row);
+        }
+
+        if (firstNewId) { editorState.selectedId = firstNewId; editorState.selectedBlockId = null; }
+        renderEditor();
+        const warn = parsed.skipped ? ` (${parsed.skipped} сложных элементов пропущено)` : '';
+        toast(`Импортировано слайдов: ${parsed.slides.length}${warn}`, 'success');
+    } catch (e) {
+        console.error('pptx import', e);
+        toast('Ошибка импорта: ' + (e.message || e), 'error');
+    }
+}
+
+
+
 // Подтипы task
 const TASK_SUBTYPE_META = {
     open:       { label: 'Открытый ответ',   short: 'Открытый', desc: 'Свободный ответ — нет правильного, ученик говорит/пишет сам' },
@@ -3190,6 +3441,7 @@ function renderEditor() {
                 </div>
                 <div class="editor-tools">
                     <span class="save-ind" id="saveInd">${renderSaveIndicator()}</span>
+                    <button class="btn btn-sm" onclick="importPptx()" title="Импорт PowerPoint → редактируемые холст-слайды">📥 Импорт PPTX</button>
                     <button class="btn btn-primary btn-sm" onclick="flushAndNavigate('#/lesson/${lesson.id}/run')">▶ Запустить</button>
                 </div>
             </div>
