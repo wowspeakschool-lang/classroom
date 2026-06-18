@@ -2361,15 +2361,18 @@ async function loadCheckinAudioMap() {
 }
 
 function playCheckinAudio(audioKey, fallbackWord) {
-    const url = checkinAudioMap[audioKey];
-    if (url) {
+    const tryUrl = (url, onFail) => {
         try {
             const a = new Audio(url);
-            a.play().catch(() => speak(fallbackWord));
-            return;
-        } catch (_) {}
-    }
-    speak(fallbackWord);
+            const p = a.play();
+            if (p && p.catch) p.catch(onFail);
+        } catch (_) { onFail(); }
+    };
+    const mapped = checkinAudioMap[audioKey];
+    if (mapped) { tryUrl(mapped, () => speak(fallbackWord)); return; }
+    // Фолбэк по соглашению: checkin-audio/{key}.mp3 — работает и без list()/select-политики
+    const conv = sb.storage.from('classroom-media').getPublicUrl('checkin-audio/' + audioKey + '.mp3').data.publicUrl;
+    tryUrl(conv, () => speak(fallbackWord));
 }
 
 /* ---------- Рекордер (редактор) ---------- */
