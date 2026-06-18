@@ -1793,6 +1793,10 @@ textarea.form-input { resize: vertical; min-height: 38px; padding: 8px 14px; lin
     background: var(--green-light);
     border-color: var(--green);
 }
+.run-stage .task-pair-side.matched.wrong {
+    background: var(--red-light);
+    border-color: var(--red);
+}
 .task-pair-num {
     display: inline-block;
     width: 22px;
@@ -2209,6 +2213,12 @@ textarea.form-input { resize: vertical; min-height: 38px; padding: 8px 14px; lin
 .speak-word { background: var(--cream-deep); border: 1px solid var(--border); border-radius: var(--r-pill); padding: 6px 14px; font-size: 15px; }
 .run-stage .speak-word { font-size: 19px; padding: 8px 18px; }
 .speak-turn { align-self: flex-start; background: var(--purple-light); color: var(--purple-dark); border-radius: var(--r-pill); padding: 8px 18px; font-weight: 700; margin-top: 4px; }
+/* row menu (урок/юнит/учебник) */
+.row-menu { position: absolute; z-index: 2000; background: var(--white); border: 1px solid var(--border); border-radius: var(--r-md); box-shadow: 0 8px 28px rgba(0,0,0,0.14); padding: 6px; min-width: 220px; display: flex; flex-direction: column; gap: 2px; }
+.row-menu-item { text-align: left; background: none; border: none; padding: 10px 12px; border-radius: 8px; cursor: pointer; font-size: 14px; font-family: var(--font-body); color: var(--text); }
+.row-menu-item:hover { background: var(--cream-deep); }
+.row-menu-item.danger { color: var(--red); }
+.row-menu-item.danger:hover { background: var(--red-light); }
 
 
 
@@ -3269,6 +3279,139 @@ async function onCreateCourse() {
    SCREEN · COURSE DETAIL
    ================================================================ */
 
+/* ============ ROW MENUS (урок / юнит / учебник) ============ */
+function closeRowMenu() {
+    const m = document.getElementById('rowMenu');
+    if (m) m.remove();
+    document.removeEventListener('click', closeRowMenu);
+}
+function openRowMenu(ev, items) {
+    ev.stopPropagation();
+    closeRowMenu();
+    const btn = ev.currentTarget;
+    const menu = document.createElement('div');
+    menu.id = 'rowMenu';
+    menu.className = 'row-menu';
+    menu.innerHTML = items.map(it => `<button class="row-menu-item ${it.danger ? 'danger' : ''}" data-act="${it.key}">${it.label}</button>`).join('');
+    document.body.appendChild(menu);
+    const r = btn.getBoundingClientRect();
+    menu.style.top = (r.bottom + 6 + window.scrollY) + 'px';
+    menu.style.left = Math.max(12, Math.min(r.left + window.scrollX, window.innerWidth - menu.offsetWidth - 12)) + 'px';
+    menu.addEventListener('click', (e) => {
+        const b = e.target.closest('[data-act]');
+        if (!b) return;
+        const it = items.find(x => x.key === b.dataset.act);
+        closeRowMenu();
+        if (it && it.fn) it.fn();
+    });
+    setTimeout(() => document.addEventListener('click', closeRowMenu), 0);
+}
+
+// --- Урок ---
+function openLessonMenu(ev, id) {
+    const l = (cache.lessonsById || {})[id] || {};
+    openRowMenu(ev, [
+        { key: 'rename', label: '✏ Переименовать', fn: () => onLessonRename(id) },
+        { key: 'pub', label: l.is_published ? '🙈 Снять с публикации' : '🌐 Опубликовать', fn: () => onLessonTogglePublish(id) },
+        { key: 'dup', label: '📋 Дублировать', fn: () => onLessonDuplicate(id) },
+        { key: 'del', label: '🗑 Удалить', danger: true, fn: () => onLessonDelete(id) }
+    ]);
+}
+async function onLessonRename(id) {
+    const l = (cache.lessonsById || {})[id] || {};
+    const t = prompt('Название урока:', l.title || '');
+    if (t === null) return;
+    const nt = t.trim(); if (!nt) return;
+    const { error } = await sb.from('study_lessons').update({ title: nt }).eq('id', id);
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    toast('Переименовано', 'success'); showCourse(cache.currentCourseId);
+}
+async function onLessonTogglePublish(id) {
+    const l = (cache.lessonsById || {})[id] || {};
+    const np = !l.is_published;
+    const { error } = await sb.from('study_lessons').update({ is_published: np }).eq('id', id);
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    toast(np ? 'Опубликован' : 'Снят с публикации', 'success'); showCourse(cache.currentCourseId);
+}
+async function onLessonDelete(id) {
+    const l = (cache.lessonsById || {})[id] || {};
+    if (!confirm('Удалить урок «' + (l.title || '') + '»? Восстановить можно только через БД.')) return;
+    const { error } = await sb.from('study_lessons').update({ deleted_at: new Date().toISOString() }).eq('id', id);
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    toast('Урок удалён', 'success'); showCourse(cache.currentCourseId);
+}
+async function onLessonDuplicate(id) {
+    toast('Дублирую…', 'info');
+    const { data: l } = await sb.from('study_lessons').select('*').eq('id', id).maybeSingle();
+    if (!l) { toast('Урок не найден', 'error'); return; }
+    const { data: slides } = await sb.from('study_slides').select('*').eq('lesson_id', id).is('deleted_at', null).order('"order"', { ascending: true }).order('id', { ascending: true });
+    const { data: sib } = await sb.from('study_lessons').select('lesson_number, "order"').eq('unit_id', l.unit_id).is('deleted_at', null);
+    const maxN = (sib || []).reduce((m, x) => Math.max(m, x.lesson_number || 0, x.order || 0), 0);
+    const { data: nl, error } = await sb.from('study_lessons').insert({
+        unit_id: l.unit_id, title: (l.title || 'Урок') + ' (копия)', lesson_number: maxN + 1, order: maxN + 1,
+        author_id: l.author_id, lesson_type: l.lesson_type || 'lesson', is_published: false, slide_count: (slides || []).length,
+        description: l.description, cover_emoji: l.cover_emoji, duration_min: l.duration_min, objective: l.objective
+    }).select().single();
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    if (slides && slides.length) {
+        const rows = slides.map(s => ({ lesson_id: nl.id, slide_type: s.slide_type, order: s.order, cover_emoji: s.cover_emoji, title: s.title, body: s.body, image_url: s.image_url, meta: s.meta, teacher_notes: s.teacher_notes }));
+        const { error: se } = await sb.from('study_slides').insert(rows);
+        if (se) { toast('Урок создан, но слайды не скопировались: ' + se.message, 'error'); showCourse(cache.currentCourseId); return; }
+    }
+    toast('Урок дублирован', 'success'); showCourse(cache.currentCourseId);
+}
+
+// --- Юнит ---
+function openUnitMenu(ev, id) {
+    openRowMenu(ev, [
+        { key: 'rename', label: '✏ Переименовать', fn: () => onUnitRename(id) },
+        { key: 'del', label: '🗑 Удалить', danger: true, fn: () => onUnitDelete(id) }
+    ]);
+}
+async function onUnitRename(id) {
+    const u = (cache.unitsById || {})[id] || {};
+    const t = prompt('Название юнита:', u.title || '');
+    if (t === null) return;
+    const nt = t.trim(); if (!nt) return;
+    const { error } = await sb.from('study_units').update({ title: nt }).eq('id', id);
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    toast('Переименовано', 'success'); showCourse(cache.currentCourseId);
+}
+async function onUnitDelete(id) {
+    const u = (cache.unitsById || {})[id] || {};
+    if (!confirm('Удалить юнит «' + (u.title || '') + '» со всеми уроками внутри? Восстановить можно только через БД.')) return;
+    const { error } = await sb.from('study_units').update({ deleted_at: new Date().toISOString() }).eq('id', id);
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    toast('Юнит удалён', 'success'); showCourse(cache.currentCourseId);
+}
+
+// --- Учебник ---
+function openCourseMenu(ev, id) {
+    const c = (cache.coursesById || {})[id] || {};
+    openRowMenu(ev, [
+        { key: 'rename', label: '✏ Переименовать', fn: () => onCourseRename(id) },
+        { key: 'lib', label: c.is_school_library ? '📤 Убрать из библиотеки школы' : '📚 В библиотеку школы', fn: () => onCourseToggleLibrary(id) }
+    ]);
+}
+async function onCourseRename(id) {
+    const c = (cache.coursesById || {})[id] || {};
+    const t = prompt('Название учебника:', c.title || '');
+    if (t === null) return;
+    const nt = t.trim(); if (!nt) return;
+    const { error } = await sb.from('study_courses').update({ title: nt }).eq('id', id);
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    cache.coursesById[id] = null; cache.courses = null;
+    toast('Переименовано', 'success'); showCourse(id);
+}
+async function onCourseToggleLibrary(id) {
+    const c = (cache.coursesById || {})[id] || {};
+    const nv = !c.is_school_library;
+    const { error } = await sb.from('study_courses').update({ is_school_library: nv }).eq('id', id);
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    cache.coursesById[id] = null; cache.courses = null;
+    toast(nv ? 'В библиотеке школы' : 'Убран из библиотеки', 'success'); showCourse(id);
+}
+
 async function showCourse(courseId) {
     const main = $('appMain');
     main.innerHTML = `<div class="loader">Загружаю учебник…</div>`;
@@ -3310,6 +3453,11 @@ async function showCourse(courseId) {
         if (!lessonsByUnit[l.unit_id]) lessonsByUnit[l.unit_id] = [];
         lessonsByUnit[l.unit_id].push(l);
     }
+    cache.currentCourseId = courseId;
+    cache.lessonsById = {};
+    for (const l of lessons) cache.lessonsById[l.id] = l;
+    cache.unitsById = {};
+    for (const u of (units || [])) cache.unitsById[u.id] = u;
 
     const canEdit = hasEditAccess(currentUser);
     const totalLessons = lessons.length;
@@ -3346,7 +3494,7 @@ async function showCourse(courseId) {
                     <span>${fmtLessons(totalLessons)}</span>
                 </div>
             </div>
-            ${canEdit ? `<button class="icon-btn" title="Меню учебника" onclick="alert('TODO: меню учебника')">⋯</button>` : ''}
+            ${canEdit ? `<button class="icon-btn" title="Меню учебника" onclick="openCourseMenu(event, ${course.id})">⋯</button>` : ''}
         </div>
 
         ${unitsHtml}
@@ -3376,7 +3524,7 @@ function renderUnitSection(unit, lessons, canEdit) {
                 <span class="unit-title">${esc(unit.title)}</span>
                 <span class="unit-count">· ${fmtLessons(lessons.length)}</span>
                 <span class="unit-actions">
-                    ${canEdit ? `<button class="icon-btn" title="Меню юнита" onclick="alert('TODO: меню юнита')">⋯</button>` : ''}
+                    ${canEdit ? `<button class="icon-btn" title="Меню юнита" onclick="openUnitMenu(event, ${u.id})">⋯</button>` : ''}
                 </span>
             </div>
             <div class="lesson-list">
@@ -3402,7 +3550,7 @@ function renderLessonRow(l, canEdit) {
             <div class="lesson-actions">
                 <button class="btn btn-primary btn-sm" onclick="navigateTo('#/lesson/${l.id}/run')">▶ Запустить</button>
                 ${canEdit ? `<button class="icon-btn" title="Редактировать" onclick="navigateTo('#/lesson/${l.id}/edit')">✏</button>` : ''}
-                ${canEdit ? `<button class="icon-btn" title="Меню урока" onclick="alert('TODO: меню урока')">⋯</button>` : ''}
+                ${canEdit ? `<button class="icon-btn" title="Меню урока" onclick="openLessonMenu(event, ${l.id})">⋯</button>` : ''}
             </div>
         </div>
     `;
@@ -4225,9 +4373,9 @@ function renderMatchingPreview(slide, chip) {
     let html = '';
     pairs.forEach(p => {
         html += `
-            <div class="task-pair-side">${p.left_img ? `<img class="task-pair-img" src="${esc(p.left_img)}">` : ''}${esc(p.left || (p.left_img ? '' : '—'))}</div>
+            <div class="task-pair-side">${p.left_img ? `<img class="task-pair-img" src="${esc(p.left_img)}">` : esc(p.left || '—')}</div>
             <div class="arrow">⟷</div>
-            <div class="task-pair-side">${p.right_img ? `<img class="task-pair-img" src="${esc(p.right_img)}">` : ''}${esc(p.right || (p.right_img ? '' : '—'))}</div>
+            <div class="task-pair-side">${p.right_img ? `<img class="task-pair-img" src="${esc(p.right_img)}">` : esc(p.right || '—')}</div>
         `;
     });
     return `
@@ -6494,13 +6642,12 @@ function renderRunMatching(slide, chip) {
     pairs.forEach(p => {
         const me = matched.find(mp => mp.leftId === p.id);
         let cls = 'task-pair-side';
-        if (me) cls += ' matched';
+        if (me) { cls += ' matched'; if (me.leftId !== me.rightId) cls += ' wrong'; }
         else if (leftSelected === p.id) cls += ' selected';
         leftHtml += `
             <div class="${cls}" onclick="onRunMatchLeftClick(${slide.id}, '${p.id}')">
                 ${me ? `<span class="task-pair-num">${me.num}</span>` : ''}
-                ${p.left_img ? `<img class="task-pair-img" src="${esc(p.left_img)}">` : ''}
-                ${p.left ? `<span>${esc(p.left)}</span>` : (p.left_img ? '' : '<span>—</span>')}
+                ${p.left_img ? `<img class="task-pair-img" src="${esc(p.left_img)}">` : (p.left ? `<span>${esc(p.left)}</span>` : '<span>—</span>')}
             </div>
         `;
     });
@@ -6508,12 +6655,11 @@ function renderRunMatching(slide, chip) {
     rightItems.forEach(p => {
         const me = matched.find(mp => mp.rightId === p.id);
         let cls = 'task-pair-side';
-        if (me) cls += ' matched';
+        if (me) { cls += ' matched'; if (me.leftId !== me.rightId) cls += ' wrong'; }
         rightHtml += `
             <div class="${cls}" onclick="onRunMatchRightClick(${slide.id}, '${p.id}')">
                 ${me ? `<span class="task-pair-num">${me.num}</span>` : ''}
-                ${p.right_img ? `<img class="task-pair-img" src="${esc(p.right_img)}">` : ''}
-                ${p.right ? `<span>${esc(p.right)}</span>` : (p.right_img ? '' : '<span>—</span>')}
+                ${p.right_img ? `<img class="task-pair-img" src="${esc(p.right_img)}">` : (p.right ? `<span>${esc(p.right)}</span>` : '<span>—</span>')}
             </div>
         `;
     });
