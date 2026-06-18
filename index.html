@@ -2138,6 +2138,29 @@ textarea.form-input { resize: vertical; min-height: 38px; padding: 8px 14px; lin
 .deck-play-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 10px 26px rgba(127,119,221,.5); }
 .deck-play-btn .dp-emoji { font-size: 28px; }
 
+/* check-in audio recorder modal */
+.ck-audio-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 600; display: flex; align-items: center; justify-content: center; padding: 24px; }
+.cka-card { position: relative; background: var(--white); border-radius: var(--r-lg); padding: 24px; width: 100%; max-width: 560px; max-height: 86vh; display: flex; flex-direction: column; box-shadow: 0 18px 50px rgba(0,0,0,.25); }
+.cka-x { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; background: var(--cream-deep); border: none; cursor: pointer; font-size: 16px; color: var(--text-soft); }
+.cka-head { font-family: var(--font-heading); font-size: 20px; color: var(--text); }
+.cka-sub { font-size: 13px; color: var(--text-mute); margin: 6px 0 14px; }
+.cka-scroll { overflow-y: auto; padding-right: 4px; }
+.cka-group-title { font-family: var(--font-heading); font-size: 14px; color: var(--purple-dark); margin: 14px 0 8px; }
+.cka-grid { display: flex; flex-direction: column; gap: 6px; }
+.cka-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--cream); border: 1px solid var(--border); border-radius: var(--r-md); }
+.cka-item.has { border-color: var(--green); background: var(--green-light); }
+.cka-emoji { font-size: 22px; flex: none; width: 26px; text-align: center; }
+.cka-word { flex: 1; font-size: 15px; color: var(--text); }
+.cka-status { font-size: 12px; color: var(--text-mute); min-width: 64px; text-align: right; }
+.cka-item.has .cka-status { color: var(--green-dark); }
+.cka-btns { display: flex; gap: 4px; flex: none; }
+.cka-b { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border); background: var(--white); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; padding: 0; }
+.cka-b:hover:not(:disabled) { border-color: var(--purple); }
+.cka-b:disabled { opacity: 0.35; cursor: default; }
+.cka-b.active { background: var(--red); border-color: var(--red); color: var(--white); animation: ckaPulse 1s infinite; }
+@keyframes ckaPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+
+
 
 </style>
 </head>
@@ -2308,6 +2331,189 @@ function speak(text) {
         window.speechSynthesis.speak(u);
     } catch (_) {}
 }
+
+
+/* ================================================================
+   Своя озвучка чек-ина: файлы в classroom-media/checkin-audio/{key}.{ext}
+   В уроке играет файл, если есть; иначе — системный синтез речи.
+   ================================================================ */
+const CHECKIN_AUDIO_ITEMS = [
+    ...CHECKIN_MOODS.map(m => ({ group: 'Настроение', key: m.key, word: m.say, emoji: m.emoji })),
+    ...['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+        .map(d => ({ group: 'Дни недели', key: d, word: d[0].toUpperCase() + d.slice(1), emoji: '📅' })),
+    ...CHECKIN_WEATHER.map(w => ({ group: 'Погода', key: w.key, word: w.say, emoji: w.emoji }))
+];
+
+let checkinAudioMap = {};
+
+async function loadCheckinAudioMap() {
+    try {
+        const { data, error } = await sb.storage.from('classroom-media').list('checkin-audio', { limit: 300 });
+        if (error) throw error;
+        const map = {};
+        (data || []).forEach(f => {
+            if (!f.name || f.name.startsWith('.')) return;
+            const key = f.name.replace(/\.[^.]+$/, '');
+            map[key] = sb.storage.from('classroom-media').getPublicUrl('checkin-audio/' + f.name).data.publicUrl;
+        });
+        checkinAudioMap = map;
+    } catch (_) { /* нет select-политики или пусто — тихо фолбэк на синтез */ }
+}
+
+function playCheckinAudio(audioKey, fallbackWord) {
+    const url = checkinAudioMap[audioKey];
+    if (url) {
+        try {
+            const a = new Audio(url);
+            a.play().catch(() => speak(fallbackWord));
+            return;
+        } catch (_) {}
+    }
+    speak(fallbackWord);
+}
+
+/* ---------- Рекордер (редактор) ---------- */
+let _ckRec = null; // { recorder, stream, key, word }
+
+async function openCheckinAudioModal() {
+    await loadCheckinAudioMap();
+    const modal = document.createElement('div');
+    modal.className = 'ck-audio-modal';
+    modal.id = 'ckAudioModal';
+    modal.innerHTML = renderCheckinAudioModal();
+    document.body.appendChild(modal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeCheckinAudioModal(); });
+}
+
+function closeCheckinAudioModal() {
+    if (_ckRec && _ckRec.stream) _ckRec.stream.getTracks().forEach(t => t.stop());
+    _ckRec = null;
+    const m = document.getElementById('ckAudioModal');
+    if (m) m.remove();
+}
+
+function ckRefresh() {
+    const m = document.getElementById('ckAudioModal');
+    if (m) m.innerHTML = renderCheckinAudioModal();
+}
+
+function renderCheckinAudioModal() {
+    const groups = {};
+    CHECKIN_AUDIO_ITEMS.forEach(it => { (groups[it.group] = groups[it.group] || []).push(it); });
+    let body = '';
+    Object.keys(groups).forEach(g => {
+        body += `<div class="cka-group-title">${g}</div><div class="cka-grid">`;
+        groups[g].forEach(it => {
+            const has = !!checkinAudioMap[it.key];
+            const rec = _ckRec && _ckRec.key === it.key;
+            body += `
+                <div class="cka-item ${has ? 'has' : ''}">
+                    <span class="cka-emoji">${it.emoji}</span>
+                    <span class="cka-word">${esc(it.word)}</span>
+                    <span class="cka-status">${rec ? '● запись…' : (has ? '✓ есть' : '')}</span>
+                    <div class="cka-btns">
+                        <button class="cka-b" title="Прослушать" ${has ? '' : 'disabled'} onclick="ckPlay('${it.key}')">▶</button>
+                        <button class="cka-b ${rec ? 'active' : ''}" title="Записать с микрофона" onclick="ckToggleRecord('${it.key}', '${esc(it.word)}')">${rec ? '■' : '🎙'}</button>
+                        <button class="cka-b" title="Загрузить файл" onclick="ckUpload('${it.key}')">📁</button>
+                        <button class="cka-b" title="Удалить" ${has ? '' : 'disabled'} onclick="ckDelete('${it.key}')">🗑</button>
+                    </div>
+                </div>`;
+        });
+        body += `</div>`;
+    });
+    return `
+        <div class="cka-card">
+            <button class="cka-x" onclick="closeCheckinAudioModal()">✕</button>
+            <div class="cka-head">🎙 Своя озвучка чек-ина</div>
+            <div class="cka-sub">Запиши голос с микрофона (🎙) или загрузи готовый файл (📁) для каждого слова. В уроке будет играть твой файл, иначе — системный голос.</div>
+            <div class="cka-scroll">${body}</div>
+        </div>`;
+}
+
+function ckPlay(key) {
+    const url = checkinAudioMap[key];
+    if (url) { try { new Audio(url).play(); } catch (_) {} }
+}
+
+async function ckToggleRecord(key, word) {
+    if (_ckRec && _ckRec.key === key) { ckStopRecord(); return; }
+    if (_ckRec) ckStopRecord();
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        let mime = '';
+        if (window.MediaRecorder && MediaRecorder.isTypeSupported('audio/webm')) mime = 'audio/webm';
+        else if (window.MediaRecorder && MediaRecorder.isTypeSupported('audio/mp4')) mime = 'audio/mp4';
+        const rec = mime ? new MediaRecorder(stream, { mimeType: mime }) : new MediaRecorder(stream);
+        const chunks = [];
+        rec.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+        rec.onstop = async () => {
+            const type = rec.mimeType || mime || 'audio/webm';
+            const blob = new Blob(chunks, { type });
+            try { stream.getTracks().forEach(t => t.stop()); } catch (_) {}
+            const ext = type.includes('mp4') ? 'm4a' : (type.includes('ogg') ? 'ogg' : 'webm');
+            await ckUploadBlob(key, blob, ext);
+        };
+        _ckRec = { recorder: rec, stream, key, word };
+        rec.start();
+        ckRefresh();
+    } catch (e) {
+        toast('Нет доступа к микрофону: ' + (e.message || e), 'error');
+    }
+}
+
+function ckStopRecord() {
+    if (_ckRec && _ckRec.recorder && _ckRec.recorder.state !== 'inactive') {
+        _ckRec.recorder.stop();
+    }
+}
+
+function ckUpload(key) {
+    const inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = 'audio/*';
+    inp.onchange = async () => {
+        const f = inp.files && inp.files[0];
+        if (!f) return;
+        const ext = (f.name.split('.').pop() || 'mp3').toLowerCase().replace(/[^a-z0-9]/g, '') || 'mp3';
+        await ckUploadBlob(key, f, ext);
+    };
+    inp.click();
+}
+
+async function ckDeleteFiles(key) {
+    try {
+        const { data } = await sb.storage.from('classroom-media').list('checkin-audio', { limit: 300 });
+        const toRemove = (data || []).filter(f => f.name.replace(/\.[^.]+$/, '') === key).map(f => 'checkin-audio/' + f.name);
+        if (toRemove.length) await sb.storage.from('classroom-media').remove(toRemove);
+    } catch (_) {}
+}
+
+async function ckUploadBlob(key, blob, ext) {
+    toast('Сохраняю озвучку…', 'info');
+    try {
+        await ckDeleteFiles(key);
+        const path = 'checkin-audio/' + key + '.' + ext;
+        const { error } = await sb.storage.from('classroom-media').upload(path, blob, { contentType: blob.type || 'audio/' + ext, upsert: true });
+        if (error) throw error;
+        _ckRec = null;
+        await loadCheckinAudioMap();
+        ckRefresh();
+        toast('Готово', 'success');
+    } catch (e) {
+        _ckRec = null;
+        console.error('checkin audio upload', e);
+        toast('Не загрузилось: ' + (e.message || e), 'error');
+        ckRefresh();
+    }
+}
+
+async function ckDelete(key) {
+    await ckDeleteFiles(key);
+    await loadCheckinAudioMap();
+    ckRefresh();
+    toast('Удалено', 'success');
+}
+
 
 // Подтипы task
 const TASK_SUBTYPE_META = {
@@ -3906,6 +4112,12 @@ function renderCheckinForm(slide) {
         `<input class="form-input" data-meta-field="weather_prompt" value="${esc(m.weather_prompt || "What's the weather like?")}" placeholder="What's the weather like?">`);
 
     html += `
+        <div class="form-field">
+            <button class="btn btn-sm" onclick="openCheckinAudioModal()">🎙 Своя озвучка</button>
+            <div class="hint">записать/загрузить голос для слов чек-ина · иначе системный голос</div>
+        </div>
+    `;
+    html += `
         <div style="background:var(--cream-deep); padding:10px 12px; border-radius:8px; font-size:12px; color:var(--text-soft); margin-bottom:10px;">
             💡 Ритуал начала урока. Ребёнок кликает по эмоджи настроения, дню недели и погоде. Ответы сохраняются — потом увидим в аналитике как ребёнок входил в урок.
         </div>
@@ -5211,6 +5423,7 @@ async function showRunMode(lessonId) {
     runState.currentIdx = 0;
     runState.notesOpen = false;
     runState.hotspots = {};
+    loadCheckinAudioMap();
     runState.interactions = {};
     runState.timer = { value: 0, running: false, intervalId: null };
     runState.runId = null;
@@ -5812,8 +6025,8 @@ function onRunCheckinPick(slideId, field, value) {
     if (!i.checkin) i.checkin = {};
     i.checkin[field] = value;
     i.checkinSaved = false;
-    if (field === 'mood')    { const o = CHECKIN_MOODS.find(x => x.key === value);   if (o) speak(o.say); }
-    if (field === 'weather') { const o = CHECKIN_WEATHER.find(x => x.key === value); if (o) speak(o.say); }
+    if (field === 'mood')    { const o = CHECKIN_MOODS.find(x => x.key === value);   if (o) playCheckinAudio(value, o.say); }
+    if (field === 'weather') { const o = CHECKIN_WEATHER.find(x => x.key === value); if (o) playCheckinAudio(value, o.say); }
     rerenderRunStage();
 }
 
@@ -5825,7 +6038,7 @@ function onRunCheckinPickDay(slideId, dayKey, dateNum, dateIso, monthName) {
     i.checkin.date_iso = dateIso;
     i.checkin.month_name = monthName;
     i.checkinSaved = false;
-    speak(DOW_FULL[dayKey] || '');
+    { const full = DOW_FULL[dayKey] || ''; playCheckinAudio(full.toLowerCase(), full); }
     rerenderRunStage();
 }
 
