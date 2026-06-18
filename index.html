@@ -3524,7 +3524,7 @@ function renderUnitSection(unit, lessons, canEdit) {
                 <span class="unit-title">${esc(unit.title)}</span>
                 <span class="unit-count">· ${fmtLessons(lessons.length)}</span>
                 <span class="unit-actions">
-                    ${canEdit ? `<button class="icon-btn" title="Меню юнита" onclick="openUnitMenu(event, ${u.id})">⋯</button>` : ''}
+                    ${canEdit ? `<button class="icon-btn" title="Меню юнита" onclick="openUnitMenu(event, ${unit.id})">⋯</button>` : ''}
                 </span>
             </div>
             <div class="lesson-list">
