@@ -2162,6 +2162,19 @@ textarea.form-input { resize: vertical; min-height: 38px; padding: 8px 14px; lin
 /* lesson types */
 .lesson-type-sel { font-family: var(--font-body); font-size: 13px; padding: 6px 10px; border: 1px solid var(--border); border-radius: var(--r-md); background: var(--white); color: var(--text); cursor: pointer; }
 .lesson-type-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: var(--r-pill); background: var(--purple-light); color: var(--purple-dark); font-weight: 600; font-size: 12px; }
+/* canvas bg color swatches */
+.cv-swatch-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.cv-swatch { width: 30px; height: 30px; border-radius: 8px; border: 2px solid var(--border); cursor: pointer; padding: 0; }
+.cv-swatch.sel { border-color: var(--purple); box-shadow: 0 0 0 2px var(--purple-light); }
+.cv-swatch-custom { display: flex; align-items: center; justify-content: center; font-size: 15px; background: var(--cream-deep); position: relative; overflow: hidden; }
+.cv-swatch-custom input[type="color"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+/* task images (choice options + matching pairs) */
+.task-img-line { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 2px 0 10px; }
+.task-img-line .tig { display: inline-flex; gap: 4px; align-items: center; }
+.task-img-thumb-sm { height: 34px; border-radius: 6px; border: 1px solid var(--border); object-fit: cover; }
+.task-opt-img { max-width: 100%; max-height: 170px; border-radius: 8px; display: block; margin-bottom: 6px; object-fit: contain; }
+.task-option-box.has-img { flex-direction: column; align-items: flex-start; }
+.task-pair-img { max-width: 100%; max-height: 120px; border-radius: 8px; display: block; object-fit: contain; }
 
 
 
@@ -4082,9 +4095,10 @@ function renderChoicePreview(slide, chip) {
         const letter = String.fromCharCode(65 + i); // A,B,C...
         const correct = o.id === correctId;
         optsHtml += `
-            <div class="task-option-box ${correct?'correct':''}">
+            <div class="task-option-box ${correct?'correct':''} ${o.img ? 'has-img' : ''}">
+                ${o.img ? `<img class="task-opt-img" src="${esc(o.img)}">` : ''}
                 <span class="task-option-letter">${letter}.</span>
-                <span>${esc(o.text || '(пусто)')}</span>
+                <span>${esc(o.text || (o.img ? '' : '(пусто)'))}</span>
                 ${correct ? '<span style="margin-left:auto; color:var(--green-dark);">✓</span>' : ''}
             </div>
         `;
@@ -4105,9 +4119,9 @@ function renderMatchingPreview(slide, chip) {
     let html = '';
     pairs.forEach(p => {
         html += `
-            <div class="task-pair-side">${esc(p.left || '—')}</div>
+            <div class="task-pair-side">${p.left_img ? `<img class="task-pair-img" src="${esc(p.left_img)}">` : ''}${esc(p.left || (p.left_img ? '' : '—'))}</div>
             <div class="arrow">⟷</div>
-            <div class="task-pair-side">${esc(p.right || '—')}</div>
+            <div class="task-pair-side">${p.right_img ? `<img class="task-pair-img" src="${esc(p.right_img)}">` : ''}${esc(p.right || (p.right_img ? '' : '—'))}</div>
         `;
     });
     return `
@@ -4677,6 +4691,11 @@ function renderChoiceForm(slide) {
                        data-opt-id="${o.id}" data-opt-field="text">
                 <button class="x-btn" onclick="onTaskOptDelete('${o.id}')" title="Удалить" ${options.length<=2?'disabled':''}>×</button>
             </div>
+            <div class="task-img-line">
+                ${o.img ? `<img class="task-img-thumb-sm" src="${esc(o.img)}">` : ''}
+                <button class="btn btn-xs" onclick="onTaskOptImage('${o.id}')">${o.img ? '🖼 заменить' : '🖼 картинка'}</button>
+                ${o.img ? `<button class="btn btn-xs" onclick="onTaskOptImageClear('${o.id}')">убрать</button>` : ''}
+            </div>
         `;
     });
     const canAdd = options.length < 6;
@@ -4708,6 +4727,10 @@ function renderMatchingForm(slide) {
                        placeholder="Правая часть"
                        data-pair-id="${p.id}" data-pair-field="right">
                 <button class="x-btn" onclick="onTaskPairDelete('${p.id}')" title="Удалить" ${pairs.length<=2?'disabled':''}>×</button>
+            </div>
+            <div class="task-img-line">
+                <span class="tig">${p.left_img ? `<img class="task-img-thumb-sm" src="${esc(p.left_img)}">` : ''}<button class="btn btn-xs" onclick="onTaskPairImage('${p.id}','left')">${p.left_img ? '🖼 слева ✓' : '🖼 слева'}</button>${p.left_img ? `<button class="btn btn-xs" onclick="onTaskPairImageClear('${p.id}','left')">×</button>` : ''}</span>
+                <span class="tig">${p.right_img ? `<img class="task-img-thumb-sm" src="${esc(p.right_img)}">` : ''}<button class="btn btn-xs" onclick="onTaskPairImage('${p.id}','right')">${p.right_img ? '🖼 справа ✓' : '🖼 справа'}</button>${p.right_img ? `<button class="btn btn-xs" onclick="onTaskPairImageClear('${p.id}','right')">×</button>` : ''}</span>
             </div>
         `;
     });
@@ -4798,6 +4821,51 @@ function onPickTaskSubtype(st) {
     $('editorForm').innerHTML = renderEditorForm(slide);
     attachFormHandlers();
     rerenderPreview();
+}
+
+function taskPickImageUpload(onUrl) {
+    const inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = 'image/*';
+    inp.onchange = async () => {
+        const f = inp.files && inp.files[0];
+        if (!f) return;
+        toast('Загружаю картинку…', 'info');
+        try {
+            const blob = await processImageToWebp(f, 800, 800, 'contain');
+            const path = `lessons/${editorState.lessonId}/tasks/t_${Math.random().toString(36).slice(2, 9)}.webp`;
+            const { error } = await sb.storage.from('classroom-media').upload(path, blob, { contentType: 'image/webp', upsert: false });
+            if (error) throw error;
+            onUrl(sb.storage.from('classroom-media').getPublicUrl(path).data.publicUrl);
+            toast('Готово', 'success');
+        } catch (e) { console.error('task image', e); toast('Не загрузилось: ' + (e.message || e), 'error'); }
+    };
+    inp.click();
+}
+function taskRerenderAfterImage() {
+    const slide = currentSlide();
+    markDirty();
+    $('editorForm').innerHTML = renderEditorForm(slide);
+    attachFormHandlers();
+    rerenderPreview();
+}
+function onTaskOptImage(optId) {
+    const s = currentSlide(); const o = ((s.meta || {}).options || []).find(x => x.id === optId);
+    if (!o) return;
+    taskPickImageUpload(url => { o.img = url; taskRerenderAfterImage(); });
+}
+function onTaskOptImageClear(optId) {
+    const s = currentSlide(); const o = ((s.meta || {}).options || []).find(x => x.id === optId);
+    if (o) { delete o.img; taskRerenderAfterImage(); }
+}
+function onTaskPairImage(pairId, side) {
+    const s = currentSlide(); const p = ((s.meta || {}).pairs || []).find(x => x.id === pairId);
+    if (!p) return;
+    taskPickImageUpload(url => { p[side + '_img'] = url; taskRerenderAfterImage(); });
+}
+function onTaskPairImageClear(pairId, side) {
+    const s = currentSlide(); const p = ((s.meta || {}).pairs || []).find(x => x.id === pairId);
+    if (p) { delete p[side + '_img']; taskRerenderAfterImage(); }
 }
 
 function onTaskOptAdd() {
@@ -5201,7 +5269,7 @@ function makeBlock(type, x, y) {
 /* ---------- EDITOR: рендер холста ---------- */
 function renderCanvasPreview(slide, chip) {
     const m = canvasMeta(slide);
-    const bg = m.bg ? `background-image:url('${esc(m.bg)}'); background-size:cover; background-position:center;` : '';
+    const bg = `${m.bgColor ? `background-color:${m.bgColor};` : ''}${m.bg ? `background-image:url('${esc(m.bg)}'); background-size:cover; background-position:center;` : ''}`;
     const blocks = canvasBlocks(slide).slice().sort((a, b) => (a.z || 0) - (b.z || 0))
         .map(b => renderCanvasBlock(b, b.id === editorState.selectedBlockId)).join('');
     const empty = canvasBlocks(slide).length ? '' :
@@ -5531,6 +5599,22 @@ function canvasClearBg() {
     rerenderCanvasAll();
 }
 
+function canvasSetBgColor(color) {
+    const slide = currentSlide();
+    if (!slide) return;
+    canvasMeta(slide).bgColor = color;
+    markDirty();
+    rerenderCanvasAll();
+}
+
+function canvasClearBgColor() {
+    const slide = currentSlide();
+    if (!slide) return;
+    canvasMeta(slide).bgColor = null;
+    markDirty();
+    rerenderCanvasAll();
+}
+
 /* ---------- EDITOR: правая панель формы ---------- */
 function renderCanvasForm(slide) {
     const m = canvasMeta(slide);
@@ -5542,6 +5626,14 @@ function renderCanvasForm(slide) {
             ${m.bg ? `<button class="btn btn-sm btn-ghost" onclick="canvasClearBg()">Убрать фон</button>` : ''}
         </div>
         <div class="hint">спросит: фон · во весь слайд · перетаскиваемый блок${m.bg ? ' · <b>фон установлен</b>' : ''}</div>
+    </div>`;
+    const BG_SWATCHES = ['#FFFFFF', '#FFFBF2', '#EEEDFE', '#FFE9D6', '#FCE1EF', '#E1F5EE', '#DCE9F5', '#2C2C2A'];
+    html += `<div class="form-field"><label>Цвет фона</label>
+        <div class="cv-swatch-row">
+            ${BG_SWATCHES.map(c => `<button class="cv-swatch ${(m.bgColor || '') === c ? 'sel' : ''}" style="background:${c}" onclick="canvasSetBgColor('${c}')" title="${c}"></button>`).join('')}
+            <label class="cv-swatch cv-swatch-custom" title="Свой цвет"><input type="color" value="${esc(m.bgColor || '#FFFFFF')}" oninput="canvasSetBgColor(this.value)">🎨</label>
+            ${m.bgColor ? `<button class="btn btn-xs" onclick="canvasClearBgColor()">Сброс</button>` : ''}
+        </div>
     </div>`;
     html += `<div class="form-field"><label>Добавить блок</label>
         <div class="cv-add-grid">
@@ -5611,7 +5703,7 @@ function cvRgbaToHex(rgba) {
 /* ---------- RUN MODE: проигрывание холста ---------- */
 function renderCanvasRun(slide) {
     const m = canvasMeta(slide);
-    const bg = m.bg ? `background-image:url('${esc(m.bg)}'); background-size:cover; background-position:center;` : '';
+    const bg = `${m.bgColor ? `background-color:${m.bgColor};` : ''}${m.bg ? `background-image:url('${esc(m.bg)}'); background-size:cover; background-position:center;` : ''}`;
     if (!runState.hotspots) runState.hotspots = {};
     const blocks = canvasBlocks(slide).slice().sort((a, b) => (a.z || 0) - (b.z || 0)).map(b => {
         const pos = `left:${b.x}px; top:${b.y}px; width:${b.w}px; height:${b.h}px; z-index:${b.z || 1};`;
@@ -5925,9 +6017,10 @@ function renderRunChoice(slide, chip) {
             cls += ' selected';
         }
         optsHtml += `
-            <div class="${cls}" onclick="onRunChoicePick(${slide.id}, '${o.id}')">
+            <div class="${cls} ${o.img ? 'has-img' : ''}" onclick="onRunChoicePick(${slide.id}, '${o.id}')">
+                ${o.img ? `<img class="task-opt-img" src="${esc(o.img)}">` : ''}
                 <span class="task-option-letter">${letter}.</span>
-                <span style="flex:1;">${esc(o.text || '(пусто)')}</span>
+                <span style="flex:1;">${esc(o.text || (o.img ? '' : '(пусто)'))}</span>
                 ${revealed && o.id === correctId ? '<span style="color:var(--green-dark); font-weight:700;">✓</span>' : ''}
                 ${revealed && o.id === selectedId && o.id !== correctId ? '<span style="color:var(--red); font-weight:700;">✗</span>' : ''}
             </div>
@@ -5964,7 +6057,8 @@ function renderRunMatching(slide, chip) {
         leftHtml += `
             <div class="${cls}" onclick="onRunMatchLeftClick(${slide.id}, '${p.id}')">
                 ${me ? `<span class="task-pair-num">${me.num}</span>` : ''}
-                <span>${esc(p.left || '—')}</span>
+                ${p.left_img ? `<img class="task-pair-img" src="${esc(p.left_img)}">` : ''}
+                ${p.left ? `<span>${esc(p.left)}</span>` : (p.left_img ? '' : '<span>—</span>')}
             </div>
         `;
     });
@@ -5976,7 +6070,8 @@ function renderRunMatching(slide, chip) {
         rightHtml += `
             <div class="${cls}" onclick="onRunMatchRightClick(${slide.id}, '${p.id}')">
                 ${me ? `<span class="task-pair-num">${me.num}</span>` : ''}
-                <span>${esc(p.right || '—')}</span>
+                ${p.right_img ? `<img class="task-pair-img" src="${esc(p.right_img)}">` : ''}
+                ${p.right ? `<span>${esc(p.right)}</span>` : (p.right_img ? '' : '<span>—</span>')}
             </div>
         `;
     });
