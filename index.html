@@ -2159,6 +2159,9 @@ textarea.form-input { resize: vertical; min-height: 38px; padding: 8px 14px; lin
 .cka-b:disabled { opacity: 0.35; cursor: default; }
 .cka-b.active { background: var(--red); border-color: var(--red); color: var(--white); animation: ckaPulse 1s infinite; }
 @keyframes ckaPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+/* lesson types */
+.lesson-type-sel { font-family: var(--font-body); font-size: 13px; padding: 6px 10px; border: 1px solid var(--border); border-radius: var(--r-md); background: var(--white); color: var(--text); cursor: pointer; }
+.lesson-type-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: var(--r-pill); background: var(--purple-light); color: var(--purple-dark); font-weight: 600; font-size: 12px; }
 
 
 
@@ -2311,6 +2314,20 @@ const CHECKIN_WEATHER = [
     { key: 'rainbow', emoji: '🌈', say: 'rainbow' }
 ];
 const DOW_FULL = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
+
+const LESSON_TYPES = [
+    { key: 'lesson',    label: 'Урок',                 emoji: '📘', selfPaced: false },
+    { key: 'homework',  label: 'Домашнее задание',     emoji: '📝', selfPaced: true },
+    { key: 'selfstudy', label: 'Урок-самопрохождение', emoji: '🧭', selfPaced: true }
+];
+function lessonTypeMeta(key) { return LESSON_TYPES.find(t => t.key === key) || LESSON_TYPES[0]; }
+async function onChangeLessonType(val) {
+    if (!editorState.lesson) return;
+    editorState.lesson.lesson_type = val;
+    const { error } = await sb.from('study_lessons').update({ lesson_type: val }).eq('id', editorState.lessonId);
+    if (error) { toast('Ошибка: ' + error.message, 'error'); return; }
+    toast('Тип урока: ' + lessonTypeMeta(val).label, 'success');
+}
 const TRAINER_MODES = [
     { key: 'flip',       emoji: '🃏', name: 'Flip cards' },
     { key: 'flashcard',  emoji: '📸', name: 'Flashcards' },
@@ -3218,7 +3235,7 @@ async function showCourse(courseId) {
     let lessons = [];
     if (unitIds.length) {
         const { data: lData, error: lErr } = await sb.from('study_lessons')
-            .select('id, unit_id, title, lesson_number, cover_emoji, duration_min, slide_count, is_published, "order"')
+            .select('id, unit_id, title, lesson_number, cover_emoji, duration_min, slide_count, is_published, lesson_type, "order"')
             .in('unit_id', unitIds)
             .is('deleted_at', null)
             .order('"order"', { ascending: true })
@@ -3314,6 +3331,7 @@ function renderLessonRow(l, canEdit) {
             <div>
                 <p class="lesson-title">${esc(l.title)}</p>
                 <p class="lesson-meta">
+                    ${(l.lesson_type && l.lesson_type !== 'lesson') ? `<span class="lesson-type-badge">${lessonTypeMeta(l.lesson_type).emoji} ${lessonTypeMeta(l.lesson_type).label}</span>` : ''}
                     ${l.duration_min ? `<span>🕐 ${fmtMin(l.duration_min)}</span>` : ''}
                     <span>📑 ${fmtSlides(l.slide_count || 0)}</span>
                     ${!l.is_published ? `<span style="color:var(--orange-dark);">черновик</span>` : ''}
@@ -3375,7 +3393,7 @@ async function showEditor(lessonId) {
 
     // урок + юнит + курс одним запросом
     const { data: lesson, error: lErr } = await sb.from('study_lessons')
-        .select('id, title, unit_id, lesson_number, duration_min, is_published, study_units(id, title, unit_number, course_id, study_courses(id, title))')
+        .select('id, title, unit_id, lesson_number, duration_min, is_published, lesson_type, study_units(id, title, unit_number, course_id, study_courses(id, title))')
         .eq('id', lessonId)
         .is('deleted_at', null)
         .maybeSingle();
@@ -3441,6 +3459,9 @@ function renderEditor() {
                 </div>
                 <div class="editor-tools">
                     <span class="save-ind" id="saveInd">${renderSaveIndicator()}</span>
+                    <select class="lesson-type-sel" onchange="onChangeLessonType(this.value)" title="Тип урока">
+                        ${LESSON_TYPES.map(t => `<option value="${t.key}" ${(lesson.lesson_type || 'lesson') === t.key ? 'selected' : ''}>${t.emoji} ${t.label}</option>`).join('')}
+                    </select>
                     <button class="btn btn-sm" onclick="importPptx()" title="Импорт PowerPoint → редактируемые холст-слайды">📥 Импорт PPTX</button>
                     <button class="btn btn-primary btn-sm" onclick="flushAndNavigate('#/lesson/${lesson.id}/run')">▶ Запустить</button>
                 </div>
@@ -5644,7 +5665,7 @@ async function showRunMode(lessonId) {
     main.innerHTML = `<div class="loader">Загружаю урок…</div>`;
 
     const { data: lesson, error: lErr } = await sb.from('study_lessons')
-        .select('id, title')
+        .select('id, title, lesson_type')
         .eq('id', lessonId)
         .is('deleted_at', null)
         .maybeSingle();
@@ -5755,6 +5776,7 @@ function renderRunMode() {
                     <button class="run-nav next" onclick="runNext()" ${runState.currentIdx === total - 1 ? 'disabled' : ''} title="Дальше (→ или пробел)">›</button>
                 </div>
 
+                ${lessonTypeMeta(runState.lesson && runState.lesson.lesson_type).selfPaced ? '' : `
                 ${runState.notesOpen ? `
                     <div class="run-notes-drawer">${
                         slide.teacher_notes ? esc(slide.teacher_notes) : '<span class="empty">Для этого слайда заметок нет.</span>'
@@ -5764,6 +5786,7 @@ function renderRunMode() {
                 <button class="run-notes-tab" onclick="toggleRunNotes()">
                     ${runState.notesOpen ? '▼' : '▲'} Заметки учителя
                 </button>
+                `}
             </div>
         </div>
     `;
