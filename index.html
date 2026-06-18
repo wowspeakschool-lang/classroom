@@ -2219,6 +2219,21 @@ textarea.form-input { resize: vertical; min-height: 38px; padding: 8px 14px; lin
 .row-menu-item:hover { background: var(--cream-deep); }
 .row-menu-item.danger { color: var(--red); }
 .row-menu-item.danger:hover { background: var(--red-light); }
+/* ordering (интерактив: собрать предложение / порядок) */
+.ord-answer { min-height: 56px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 12px 14px; border: 2px dashed var(--border); border-radius: 12px; }
+.ord-answer.ok { border-color: var(--green); background: var(--green-light); }
+.ord-answer.bad { border-color: var(--red); background: var(--red-light); }
+.ord-placeholder { color: var(--text-mute); font-size: 14px; }
+.task-word-chip { display: inline-flex; align-items: center; gap: 6px; }
+.task-word-chip.placed { background: var(--white); border: 1px solid var(--border); cursor: pointer; }
+.task-word-chip.ok { background: var(--green-light); border-color: var(--green); }
+.task-word-chip.bad { background: var(--red-light); border-color: var(--red); }
+.ord-chip-img { height: 54px; border-radius: 6px; display: block; object-fit: contain; }
+.run-stage .ord-chip-img { height: 84px; }
+.run-stage .task-word-chip { font-size: 18px; padding: 10px 18px; }
+.ord-bank { margin-top: 4px; }
+.ord-answer.vertical, .task-word-chips.vertical { flex-direction: column; align-items: stretch; }
+.ord-answer.vertical .task-word-chip, .task-word-chips.vertical .task-word-chip { justify-content: center; width: 100%; }
 
 
 
@@ -2864,7 +2879,7 @@ const TASK_SUBTYPE_META = {
     choice:     { label: 'Выбор ответа',     short: 'Выбор',    desc: 'Один правильный из вариантов'        },
     matching:   { label: 'Соединить пары',   short: 'Пары',     desc: 'Свободные пары: слово↔перевод и т.д.' },
     fill_blank: { label: 'Заполни пропуск',  short: 'Пропуск',  desc: 'Предложение с ___ и варианты'        },
-    ordering:   { label: 'Составь порядок',  short: 'Порядок',  desc: 'Перетащи слова в правильном порядке' }
+    ordering:   { label: 'Составь порядок',  short: 'Порядок',  desc: 'Собери предложение из слов / расставь картинки/фразы по порядку' }
 };
 const TASK_SUBTYPES_ORDERED = ['open', 'choice', 'matching', 'fill_blank', 'ordering'];
 
@@ -4421,16 +4436,16 @@ function renderOrderingPreview(slide, chip) {
     const shuffled = [...words].reverse();
     let chipsHtml = '';
     shuffled.forEach(w => {
-        chipsHtml += `<span class="task-word-chip">${esc(w.text || '—')}</span>`;
+        chipsHtml += `<span class="task-word-chip">${ordChipInner(w)}</span>`;
     });
     return `
         <div class="slide-card">
             ${chip}
-            <h2 style="font-size:20px; text-align:left;">${esc(stripLeadingEmoji(slide.title) || 'Составь предложение')}</h2>
+            <h2 style="font-size:20px; text-align:left;">${esc(stripLeadingEmoji(slide.title) || 'Составь по порядку')}</h2>
             ${slide.body ? `<p class="task-instruction">${esc(slide.body)}</p>` : ''}
-            <div class="task-target-line">сюда перетащи слова</div>
-            <div class="task-word-chips">${chipsHtml || '<div class="muted">Нет слов</div>'}</div>
-            <div class="muted" style="font-size:11px;">Правильный порядок: ${words.map(w => esc(w.text || '—')).join(' ')}</div>
+            <div class="task-target-line">сюда — элементы по порядку</div>
+            <div class="task-word-chips${((slide.meta || {}).layout === 'v') ? ' vertical' : ''}">${chipsHtml || '<div class="muted">Нет элементов</div>'}</div>
+            <div class="muted" style="font-size:11px;">Правильный порядок: ${words.map(w => esc(w.text || '🖼')).join(' · ')}</div>
         </div>
     `;
 }
@@ -5056,7 +5071,12 @@ function renderOrderingForm(slide) {
     const words = (slide.meta || {}).words || [];
     let html = '';
     html += renderFormField('Заголовок', `<input class="form-input" data-field="title" value="${esc(slide.title || '')}" placeholder="Составь предложение">`);
-    html += renderFormField('Инструкция (опц.)', `<input class="form-input" data-field="body" value="${esc(slide.body || '')}" placeholder="Расставь слова в правильном порядке">`);
+    html += renderFormField('Инструкция (опц.)', `<input class="form-input" data-field="body" value="${esc(slide.body || '')}" placeholder="Расставь в правильном порядке">`);
+    const lay = (slide.meta || {}).layout || 'h';
+    html += `<div class="form-field"><label>Расположение</label><div class="cv-btn-row">
+        <button class="btn btn-sm ${lay === 'h' ? 'btn-primary' : ''}" onclick="onOrderLayout('h')">↔ Горизонтально</button>
+        <button class="btn btn-sm ${lay === 'v' ? 'btn-primary' : ''}" onclick="onOrderLayout('v')">↕ Вертикально</button>
+    </div></div>`;
 
     let rows = '';
     words.forEach((w, i) => {
@@ -5064,18 +5084,23 @@ function renderOrderingForm(slide) {
             <div class="word-edit-row" data-row-id="${w.id}">
                 <span class="word-order-num">${i+1}</span>
                 <input class="form-input" type="text" value="${esc(w.text || '')}"
-                       placeholder="Слово"
+                       placeholder="Слово или фраза"
                        data-word-id="${w.id}">
                 <button class="x-btn" onclick="onTaskWordDelete('${w.id}')" title="Удалить" ${words.length<=2?'disabled':''}>×</button>
+            </div>
+            <div class="task-img-line">
+                ${w.img ? `<img class="task-img-thumb-sm" src="${esc(w.img)}">` : ''}
+                <button class="btn btn-xs" onclick="onTaskWordImage('${w.id}')">${w.img ? '🖼 заменить' : '🖼 картинка'}</button>
+                ${w.img ? `<button class="btn btn-xs" onclick="onTaskWordImageClear('${w.id}')">убрать</button>` : ''}
             </div>
         `;
     });
     const canAdd = words.length < 12;
     html += `
         <div class="form-field">
-            <label>Слова в правильном порядке <span class="hint">· в режиме ведения перемешиваются</span></label>
+            <label>Элементы в правильном порядке <span class="hint">· слова (предложение), фразы или картинки · в уроке перемешиваются</span></label>
             <div>${rows}</div>
-            <button class="list-add-btn" onclick="onTaskWordAdd()" ${canAdd?'':'disabled'}>+ Добавить слово</button>
+            <button class="list-add-btn" onclick="onTaskWordAdd()" ${canAdd?'':'disabled'}>+ Добавить элемент</button>
         </div>
     `;
     return html;
@@ -5452,6 +5477,15 @@ function onTaskPairImage(pairId, side) {
 function onTaskPairImageClear(pairId, side) {
     const s = currentSlide(); const p = ((s.meta || {}).pairs || []).find(x => x.id === pairId);
     if (p) { delete p[side + '_img']; taskRerenderAfterImage(); }
+}
+function onTaskWordImage(wid) {
+    const s = currentSlide(); const w = ((s.meta || {}).words || []).find(x => x.id === wid);
+    if (!w) return;
+    taskPickImageUpload(url => { w.img = url; taskRerenderAfterImage(); });
+}
+function onTaskWordImageClear(wid) {
+    const s = currentSlide(); const w = ((s.meta || {}).words || []).find(x => x.id === wid);
+    if (w) { delete w.img; taskRerenderAfterImage(); }
 }
 
 function onTaskOptAdd() {
@@ -6531,9 +6565,56 @@ function renderRunTask(slide) {
     if (subtype === 'choice')     return renderRunChoice(slide, chip);
     if (subtype === 'matching')   return renderRunMatching(slide, chip);
     if (subtype === 'fill_blank') return renderFillBlankPreview(slide, chip);   // v1 — статика
-    if (subtype === 'ordering')   return renderOrderingPreview(slide, chip);    // v1 — статика
+    if (subtype === 'ordering')   return renderRunOrdering(slide, chip);
     return `<div class="slide-card">${chip}<p class="muted">Неизвестный подтип</p></div>`;
 }
+
+function ordChipInner(w) {
+    if (w.img) return `<img class="ord-chip-img" src="${esc(w.img)}">${w.text ? `<span>${esc(w.text)}</span>` : ''}`;
+    return esc(w.text || '—');
+}
+function renderRunOrdering(slide, chip) {
+    const words = (slide.meta || {}).words || [];
+    const i = getInteraction(slide.id);
+    if (!i.order) i.order = { placed: [], revealed: false };
+    if (!i.orderBank) {
+        const ids = words.map(w => w.id);
+        for (let k = ids.length - 1; k > 0; k--) { const j = Math.floor(Math.random() * (k + 1)); [ids[k], ids[j]] = [ids[j], ids[k]]; }
+        i.orderBank = ids;
+    }
+    const byId = {}; words.forEach(w => byId[w.id] = w);
+    const placed = i.order.placed.filter(id => byId[id]);
+    const remaining = i.orderBank.filter(id => byId[id] && !placed.includes(id));
+    const revealed = i.order.revealed;
+    let ans = '';
+    placed.forEach((id, idx) => {
+        const w = byId[id];
+        let cls = 'task-word-chip placed';
+        if (revealed) cls += (words[idx] && words[idx].id === id) ? ' ok' : ' bad';
+        ans += `<span class="${cls}" onclick="${revealed ? '' : `onOrderRemove(${slide.id}, '${id}')`}">${ordChipInner(w)}</span>`;
+    });
+    let bank = '';
+    remaining.forEach(id => { bank += `<span class="task-word-chip" onclick="onOrderPlace(${slide.id}, '${id}')">${ordChipInner(byId[id])}</span>`; });
+    const allPlaced = words.length > 0 && placed.length === words.length;
+    const allCorrect = revealed && words.every((w, idx) => placed[idx] === w.id);
+    const vcls = ((slide.meta || {}).layout === 'v') ? ' vertical' : '';
+    return `
+        <div class="slide-card">
+            ${chip}
+            <h2 style="font-size:24px; text-align:left;">${esc(stripLeadingEmoji(slide.title) || 'Составь по порядку')}</h2>
+            ${slide.body ? `<p class="task-instruction">${esc(slide.body)}</p>` : ''}
+            <div class="ord-answer${vcls} ${revealed ? (allCorrect ? 'ok' : 'bad') : ''}">${ans || '<span class="ord-placeholder">Нажимай элементы ниже по порядку…</span>'}</div>
+            ${remaining.length ? `<div class="task-word-chips ord-bank${vcls}">${bank}</div>` : ''}
+            ${revealed
+                ? `<button class="task-check-btn" onclick="onOrderReset(${slide.id})">${allCorrect ? '🎉 Верно! Ещё раз' : 'Попробовать снова'}</button>`
+                : `<button class="task-check-btn" onclick="onOrderCheck(${slide.id})" ${allPlaced ? '' : 'disabled style="opacity:0.5; cursor:not-allowed;"'}>Проверить</button>`}
+        </div>`;
+}
+function onOrderLayout(val) { const s = currentSlide(); if (!s) return; if (!s.meta) s.meta = {}; s.meta.layout = val; markDirty(); $('editorForm').innerHTML = renderEditorForm(s); attachFormHandlers(); rerenderPreview(); }
+function onOrderPlace(slideId, id) { const i = getInteraction(slideId); if (!i.order) i.order = { placed: [], revealed: false }; if (i.order.revealed) return; if (!i.order.placed.includes(id)) i.order.placed.push(id); rerenderRunStage(); }
+function onOrderRemove(slideId, id) { const i = getInteraction(slideId); if (!i.order || i.order.revealed) return; i.order.placed = i.order.placed.filter(x => x !== id); rerenderRunStage(); }
+function onOrderCheck(slideId) { const i = getInteraction(slideId); if (!i.order) return; i.order.revealed = true; rerenderRunStage(); }
+function onOrderReset(slideId) { const i = getInteraction(slideId); i.order = { placed: [], revealed: false }; delete i.orderBank; rerenderRunStage(); }
 
 function renderRunOpen(slide, chip) {
     const m = slide.meta || {};
