@@ -798,7 +798,7 @@ a:hover { text-decoration: underline; }
 .preview-stage:hover { border-color: var(--border-soft); }
 
 .slide-card {
-    background: var(--white);
+    background: var(--slide-bg, var(--white));
     border: 1px solid var(--border);
     border-radius: var(--r-xl);
     padding: 24px 26px;
@@ -2175,6 +2175,9 @@ textarea.form-input { resize: vertical; min-height: 38px; padding: 8px 14px; lin
 .task-opt-img { max-width: 100%; max-height: 170px; border-radius: 8px; display: block; margin-bottom: 6px; object-fit: contain; }
 .task-option-box.has-img { flex-direction: column; align-items: flex-start; }
 .task-pair-img { max-width: 100%; max-height: 120px; border-radius: 8px; display: block; object-fit: contain; }
+/* run: крупный текст/объяснение + картинка слайда */
+.slide-run-img { max-width: 100%; max-height: 340px; border-radius: 12px; object-fit: contain; align-self: flex-start; margin: 4px 0; }
+.run-stage .slide-run-simple { gap: 18px; }
 
 
 
@@ -3483,7 +3486,7 @@ function renderEditor() {
                 <div class="ribbon" id="editorRibbon">${renderRibbon()}</div>
                 <div class="preview-pane">
                     <div class="kicker">Превью</div>
-                    <div id="editorPreview" class="preview-stage" title="Клик — открыть в режиме ведения" onclick="onPreviewClick()">
+                    <div id="editorPreview" class="preview-stage" title="Клик — открыть в режиме ведения" onclick="onPreviewClick()" style="${selected && selected.slide_type !== 'canvas' && selected.meta && selected.meta.bgColor ? `--slide-bg:${selected.meta.bgColor};` : ''}">
                         ${renderSlidePreview(selected)}
                     </div>
                 </div>
@@ -3774,6 +3777,7 @@ function renderSlidePreview(slide) {
             <div class="slide-card">
                 ${chip}
                 ${slide.title ? `<h2 style="font-size:22px; text-align:left;">${esc(stripLeadingEmoji(slide.title))}</h2>` : ''}
+                ${slide.image_url ? `<img class="slide-run-img" src="${esc(slide.image_url)}">` : ''}
                 <div class="markdown">${md(slide.body || '_(пусто)_')}</div>
             </div>
         `;
@@ -3783,6 +3787,7 @@ function renderSlidePreview(slide) {
             <div class="slide-card">
                 ${chip}
                 <h2 style="font-size:22px; text-align:left;">${esc(slide.title || '—')}</h2>
+                ${slide.image_url ? `<img class="slide-run-img" src="${esc(slide.image_url)}">` : ''}
                 <div class="markdown">${md(slide.body || '_(пусто)_')}</div>
             </div>
         `;
@@ -4184,7 +4189,9 @@ function renderOrderingPreview(slide, chip) {
 function rerenderPreview() {
     const stage = $('editorPreview');
     if (!stage) return;
-    stage.innerHTML = renderSlidePreview(currentSlide());
+    const s = currentSlide();
+    stage.style.setProperty('--slide-bg', (s && s.slide_type !== 'canvas' && s.meta && s.meta.bgColor) ? s.meta.bgColor : '');
+    stage.innerHTML = renderSlidePreview(s);
 }
 
 function onPreviewClick() {
@@ -4546,6 +4553,12 @@ function renderEditorForm(slide) {
         </div>`;
     }
 
+    // Картинка (объяснение / текст) + цвет фона (все типы, кроме холста)
+    if (t !== 'canvas') {
+        if (t === 'explanation' || t === 'text') body += renderSlideImageField(slide);
+        body += renderBgColorField(slide);
+    }
+
     // Teacher notes
     body += renderFormField(
         '<span style="display:inline-flex; align-items:center; gap:4px;">🙈 Заметки учителя</span>',
@@ -4821,6 +4834,49 @@ function onPickTaskSubtype(st) {
     $('editorForm').innerHTML = renderEditorForm(slide);
     attachFormHandlers();
     rerenderPreview();
+}
+
+const SLIDE_BG_SWATCHES = ['#FFFFFF', '#FFFBF2', '#EEEDFE', '#FFE9D6', '#FCE1EF', '#E1F5EE', '#DCE9F5', '#2C2C2A'];
+function renderBgColorField(slide) {
+    const cur = (slide.meta || {}).bgColor || '';
+    return `<div class="form-field"><label>Цвет фона слайда</label>
+        <div class="cv-swatch-row">
+            ${SLIDE_BG_SWATCHES.map(c => `<button class="cv-swatch ${cur === c ? 'sel' : ''}" style="background:${c}" onclick="slideSetBgColor('${c}')" title="${c}"></button>`).join('')}
+            <label class="cv-swatch cv-swatch-custom" title="Свой цвет"><input type="color" value="${esc(cur || '#FFFFFF')}" oninput="slideSetBgColor(this.value)">🎨</label>
+            ${cur ? `<button class="btn btn-xs" onclick="slideClearBgColor()">Сброс</button>` : ''}
+        </div></div>`;
+}
+function renderSlideImageField(slide) {
+    return `<div class="form-field"><label>Картинка (опц.)</label>
+        <div class="task-img-line">
+            ${slide.image_url ? `<img class="task-img-thumb-sm" src="${esc(slide.image_url)}">` : ''}
+            <button class="btn btn-xs" onclick="slideSetImage()">${slide.image_url ? '🖼 заменить' : '🖼 добавить'}</button>
+            ${slide.image_url ? `<button class="btn btn-xs" onclick="slideClearImage()">убрать</button>` : ''}
+        </div></div>`;
+}
+function slideFormRerender() {
+    const s = currentSlide();
+    markDirty();
+    $('editorForm').innerHTML = renderEditorForm(s);
+    attachFormHandlers();
+    rerenderPreview();
+}
+function slideSetBgColor(color) { const s = currentSlide(); if (!s) return; if (!s.meta) s.meta = {}; s.meta.bgColor = color; slideFormRerender(); }
+function slideClearBgColor() { const s = currentSlide(); if (!s || !s.meta) return; delete s.meta.bgColor; slideFormRerender(); }
+function slideSetImage() { taskPickImageUpload(url => { const s = currentSlide(); if (!s) return; s.image_url = url; slideFormRerender(); }); }
+function slideClearImage() { const s = currentSlide(); if (!s) return; s.image_url = null; slideFormRerender(); }
+
+function renderRunSimple(slide) {
+    const m = SLIDE_TYPE_META[slide.slide_type] || SLIDE_TYPE_META.text;
+    const chip = `<span class="slide-type-chip" style="background:${m.bg}; color:${m.fg};">${m.icon} ${esc(m.label)}</span>`;
+    const img = slide.image_url ? `<img class="slide-run-img" src="${esc(slide.image_url)}">` : '';
+    return `
+        <div class="slide-card slide-run-simple">
+            ${chip}
+            ${slide.title ? `<h2 style="font-size:32px; line-height:1.2; text-align:left;">${esc(stripLeadingEmoji(slide.title))}</h2>` : ''}
+            ${img}
+            <div class="markdown" style="font-size:21px; line-height:1.7;">${md(slide.body || '')}</div>
+        </div>`;
 }
 
 function taskPickImageUpload(onUrl) {
@@ -5853,7 +5909,7 @@ function renderRunMode() {
                     <button class="run-close" onclick="exitRunMode()" title="Завершить (Esc)">✕</button>
                 </div>
 
-                <div class="run-stage" id="runStage">
+                <div class="run-stage" id="runStage" style="${slide.slide_type !== 'canvas' && slide.meta && slide.meta.bgColor ? `--slide-bg:${slide.meta.bgColor};` : ''}">
                     ${renderRunSlide(slide)}
                 </div>
 
@@ -5927,7 +5983,8 @@ function renderRunSlide(slide) {
     if (t === 'rate')  return renderRunRate(slide);
     if (t === 'outro') return renderRunOutro(slide);
     if (t === 'canvas') return renderCanvasRun(slide);
-    // intro / outro / text / explanation / vocab — переиспользуем preview
+    if (t === 'text' || t === 'explanation' || t === 'vocab') return renderRunSimple(slide);
+    // intro / outro — hero-превью
     return renderSlidePreview(slide);
 }
 
