@@ -2178,6 +2178,23 @@ textarea.form-input { resize: vertical; min-height: 38px; padding: 8px 14px; lin
 /* run: крупный текст/объяснение + картинка слайда */
 .slide-run-img { max-width: 100%; max-height: 340px; border-radius: 12px; object-fit: contain; align-self: flex-start; margin: 4px 0; }
 .run-stage .slide-run-simple { gap: 18px; }
+/* add-picker: группировка по сферам */
+.add-picker { max-height: 72vh; overflow-y: auto; }
+.add-pick-sphere { margin-bottom: 4px; }
+.add-pick-sphere-h { font-size: 12px; font-weight: 800; color: var(--text-soft); padding: 9px 8px 3px; position: sticky; top: 0; background: var(--white); z-index: 1; }
+.rs-skill { position: absolute; top: 2px; right: 2px; font-size: 11px; line-height: 1; }
+/* reading format */
+.reading-card { gap: 16px; }
+.reading-intro { background: var(--blue-light); border-radius: 12px; padding: 12px 16px; }
+.reading-tag { font-size: 11px; font-weight: 800; color: var(--blue-dark); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+.reading-text { background: var(--cream-deep); border-radius: 14px; padding: 18px 22px; line-height: 1.7; }
+.run-stage .reading-text { font-size: 21px; }
+.reading-qs { display: flex; flex-direction: column; gap: 16px; margin-top: 4px; }
+.reading-q { border-top: 1px solid var(--border); padding-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+.reading-q-num { font-weight: 700; font-size: 18px; }
+.reading-q-edit { background: var(--cream-deep); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; display: flex; flex-direction: column; gap: 8px; }
+.rqe-head { display: flex; align-items: center; gap: 8px; }
+.rqe-num { font-weight: 700; font-size: 13px; flex: 1; }
 
 
 
@@ -2297,6 +2314,7 @@ const SLIDE_TYPE_META = {
     intro:       { label: 'Вступление',  icon: '🚩', defaultEmoji: '🌅', bg: 'var(--purple-light)', fg: 'var(--purple-dark)', desc: 'открывает урок'           },
     explanation: { label: 'Объяснение',  icon: 'ⓘ',  defaultEmoji: '📝', bg: 'var(--blue-light)',   fg: 'var(--blue-dark)',   desc: 'правила, грамматика'      },
     text:        { label: 'Текст',       icon: '☰',  defaultEmoji: '📄', bg: 'var(--cream-deep)',   fg: 'var(--text-soft)',   desc: 'reading / writing'        },
+    reading:     { label: 'Чтение',      icon: '📖', defaultEmoji: '📖', bg: 'var(--green-light)',  fg: 'var(--green-dark)',  desc: 'текст + вопросы (прокрутка)' },
     vocab:       { label: 'Словарь',     icon: '📖', defaultEmoji: '📖', bg: 'var(--orange-light)', fg: 'var(--orange-dark)', desc: 'слово с переводом'        },
     task:        { label: 'Задание',     icon: '✓',  defaultEmoji: '✏️', bg: 'var(--green-light)',  fg: 'var(--green-dark)',  desc: 'choice · matching · fill · order' },
     poll:        { label: 'Опрос',       icon: '☑',  defaultEmoji: '🎯', bg: 'var(--blue-light)',   fg: 'var(--blue-dark)',   desc: 'I CAN · опросы · чек-листы' },
@@ -2307,7 +2325,19 @@ const SLIDE_TYPE_META = {
     rate:        { label: 'Оценка',      icon: '★',  defaultEmoji: '⭐', bg: 'var(--orange-light)', fg: 'var(--orange-dark)', desc: 'урок · учитель · настроение' },
     outro:       { label: 'Заключение',  icon: '🎊', defaultEmoji: '🎉', bg: 'var(--teal-light)',   fg: 'var(--teal)',        desc: 'итог урока'               }
 };
-const SLIDE_TYPES_ORDERED = ['intro', 'checkin', 'explanation', 'text', 'vocab', 'task', 'poll', 'deck', 'video', 'canvas', 'rate', 'outro'];
+const SLIDE_TYPES_ORDERED = ['intro', 'checkin', 'explanation', 'text', 'reading', 'vocab', 'task', 'poll', 'deck', 'video', 'canvas', 'rate', 'outro'];
+
+// Сферы: организующий слой над форматами. canvas доступен в каждой «учебной» сфере.
+const SKILLS = [
+    { key: 'lexis',     label: 'Лексика',     emoji: '🟧', types: ['deck', 'vocab', 'task', 'canvas'] },
+    { key: 'grammar',   label: 'Грамматика',  emoji: '🟦', types: ['explanation', 'task', 'video', 'canvas'] },
+    { key: 'reading',   label: 'Чтение',      emoji: '📖', types: ['reading', 'text', 'task', 'canvas'] },
+    { key: 'listening', label: 'Аудирование', emoji: '🎧', types: ['video', 'task', 'canvas'] },
+    { key: 'writing',   label: 'Письмо',      emoji: '✍️', types: ['task', 'canvas'] },
+    { key: 'speaking',  label: 'Говорение',   emoji: '🗣️', types: ['explanation', 'text', 'canvas'] },
+    { key: 'ritual',    label: 'Ритуалы',     emoji: '🎀', types: ['intro', 'checkin', 'poll', 'rate', 'outro'] }
+];
+function skillMeta(key) { return SKILLS.find(s => s.key === key) || null; }
 
 const CHECKIN_MOODS = [
     { key: 'great',   emoji: '😄', say: 'great' },
@@ -3526,11 +3556,13 @@ function renderRibbon() {
         const sel = s.id === selectedId ? 'sel' : '';
         const meta = SLIDE_TYPE_META[s.slide_type] || SLIDE_TYPE_META.text;
         const emoji = s.cover_emoji || meta.defaultEmoji;
+        const sk = skillMeta((s.meta || {}).skill);
         html += `
             <div class="ribbon-slide ${sel}" data-id="${s.id}" draggable="true" onclick="selectSlide(${s.id})">
                 <span class="rs-num">${i + 1}</span>
                 <span>${esc(emoji)}</span>
                 <span class="rs-typeicon" style="color:${meta.fg};">${meta.icon}</span>
+                ${sk ? `<span class="rs-skill" title="${esc(sk.label)}">${sk.emoji}</span>` : ''}
             </div>
         `;
     });
@@ -3539,23 +3571,28 @@ function renderRibbon() {
 }
 
 function renderAddPicker() {
-    let rows = '';
-    for (const t of SLIDE_TYPES_ORDERED) {
-        const m = SLIDE_TYPE_META[t];
-        rows += `
-            <button class="add-pick-row" onclick="onPickAddSlideType('${t}')">
-                <span class="add-pick-circle" style="background:${m.bg}; color:${m.fg};">${m.icon}</span>
-                <span>
-                    <span class="add-pick-name">${esc(m.label)}</span>
-                    <span class="add-pick-desc">${esc(m.desc)}</span>
-                </span>
-            </button>
-        `;
+    let sections = '';
+    for (const sk of SKILLS) {
+        let rows = '';
+        for (const t of sk.types) {
+            const m = SLIDE_TYPE_META[t];
+            if (!m) continue;
+            rows += `
+                <button class="add-pick-row" onclick="onPickAddSlideType('${t}', '${sk.key}')">
+                    <span class="add-pick-circle" style="background:${m.bg}; color:${m.fg};">${m.icon}</span>
+                    <span>
+                        <span class="add-pick-name">${esc(m.label)}</span>
+                        <span class="add-pick-desc">${esc(m.desc)}</span>
+                    </span>
+                </button>
+            `;
+        }
+        sections += `<div class="add-pick-sphere"><div class="add-pick-sphere-h">${sk.emoji} ${esc(sk.label)}</div>${rows}</div>`;
     }
     return `
         <div class="add-picker" id="addPicker">
-            <div class="add-pick-title">Выбери тип</div>
-            ${rows}
+            <div class="add-pick-title">Выбери формат по сфере</div>
+            ${sections}
         </div>
     `;
 }
@@ -3700,7 +3737,7 @@ async function selectSlide(id) {
     renderEditor();
 }
 
-async function onPickAddSlideType(type) {
+async function onPickAddSlideType(type, skill) {
     await flushSave();
     const m = SLIDE_TYPE_META[type];
     const maxOrder = editorState.slides.reduce((mx, s) => Math.max(mx, s.order || 0), 0);
@@ -3719,6 +3756,8 @@ async function onPickAddSlideType(type) {
     };
     else if (type === 'outro') initialMeta = { finish_lesson: false };
     else if (type === 'canvas') initialMeta = { blocks: [], bg: null };
+    else if (type === 'reading') initialMeta = { intro: '', text: '', questions: [] };
+    if (skill) initialMeta.skill = skill;
     const { data, error } = await sb.from('study_slides').insert({
         lesson_id: editorState.lessonId,
         slide_type: type,
@@ -3812,6 +3851,20 @@ function renderSlidePreview(slide) {
     }
     if (t === 'canvas') {
         return renderCanvasPreview(slide, chip);
+    }
+    if (t === 'reading') {
+        const rm = slide.meta || {};
+        const qn = (rm.questions || []).length;
+        return `
+            <div class="slide-card">
+                ${chip}
+                <h2 style="font-size:22px; text-align:left;">${esc(stripLeadingEmoji(slide.title) || 'Чтение')}</h2>
+                ${slide.image_url ? `<img class="slide-run-img" src="${esc(slide.image_url)}">` : ''}
+                ${rm.intro ? `<div class="reading-intro"><div class="reading-tag">Before</div><div class="markdown">${md(rm.intro)}</div></div>` : ''}
+                <div class="reading-text markdown">${md(rm.text || '_(текст для чтения)_')}</div>
+                ${qn ? `<p class="muted" style="font-size:13px;">Вопросов после текста: ${qn}</p>` : ''}
+            </div>
+        `;
     }
     // прочие типы (пока сюда нечего попасть)
     return `
@@ -4545,6 +4598,8 @@ function renderEditorForm(slide) {
         body += renderVideoForm(slide);
     } else if (t === 'rate') {
         body += renderRateForm(slide);
+    } else if (t === 'reading') {
+        body += renderReadingForm(slide);
     } else if (t === 'canvas') {
         body += renderCanvasForm(slide);
     } else {
@@ -4555,9 +4610,13 @@ function renderEditorForm(slide) {
 
     // Картинка (объяснение / текст) + цвет фона (все типы, кроме холста)
     if (t !== 'canvas') {
-        if (t === 'explanation' || t === 'text') body += renderSlideImageField(slide);
+        if (t === 'explanation' || t === 'text') {
+            body += renderSlideImageField(slide);
+            body += `<div class="form-field"><button class="btn btn-sm" onclick="convertSlideToCanvas()">📐 Свободно разместить (на холсте)</button><div class="hint">заголовок, текст и картинка станут блоками — двигай и меняй размер</div></div>`;
+        }
         body += renderBgColorField(slide);
     }
+    body += renderSkillField(slide);
 
     // Teacher notes
     body += renderFormField(
@@ -4854,6 +4913,20 @@ function renderSlideImageField(slide) {
             ${slide.image_url ? `<button class="btn btn-xs" onclick="slideClearImage()">убрать</button>` : ''}
         </div></div>`;
 }
+function renderSkillField(slide) {
+    const cur = (slide.meta || {}).skill || '';
+    return `<div class="form-field"><label>Сфера</label>
+        <select class="lesson-type-sel" onchange="onChangeSkill(this.value)">
+            <option value="">— не указана —</option>
+            ${SKILLS.map(s => `<option value="${s.key}" ${cur === s.key ? 'selected' : ''}>${s.emoji} ${s.label}</option>`).join('')}
+        </select></div>`;
+}
+function onChangeSkill(key) {
+    const s = currentSlide(); if (!s) return;
+    if (!s.meta) s.meta = {};
+    if (key) s.meta.skill = key; else delete s.meta.skill;
+    slideFormRerender();
+}
 function slideFormRerender() {
     const s = currentSlide();
     markDirty();
@@ -4865,6 +4938,136 @@ function slideSetBgColor(color) { const s = currentSlide(); if (!s) return; if (
 function slideClearBgColor() { const s = currentSlide(); if (!s || !s.meta) return; delete s.meta.bgColor; slideFormRerender(); }
 function slideSetImage() { taskPickImageUpload(url => { const s = currentSlide(); if (!s) return; s.image_url = url; slideFormRerender(); }); }
 function slideClearImage() { const s = currentSlide(); if (!s) return; s.image_url = null; slideFormRerender(); }
+function convertSlideToCanvas() {
+    const s = currentSlide();
+    if (!s) return;
+    if (!confirm('Перенести слайд на холст? Заголовок, текст и картинка станут блоками — их можно двигать и менять размер.')) return;
+    const blocks = [];
+    let z = 1;
+    const hasImg = !!s.image_url;
+    if (s.title) blocks.push({ id: newBlockId(), type: 'text', x: 60, y: 48, w: 1160, h: 110, z: z++, text: stripLeadingEmoji(s.title) || s.title, color: '#2C2C2A', size: 48, weight: 700, align: 'left' });
+    if (s.body)  blocks.push({ id: newBlockId(), type: 'text', x: 60, y: 184, w: hasImg ? 720 : 1160, h: 460, z: z++, text: s.body, color: '#2C2C2A', size: 30, weight: 400, align: 'left' });
+    if (hasImg)  blocks.push({ id: newBlockId(), type: 'image', x: 820, y: 184, w: 400, h: 400, z: z++, url: s.image_url });
+    const bgColor = (s.meta || {}).bgColor || null;
+    s.slide_type = 'canvas';
+    s.meta = { blocks: blocks, bgColor: bgColor };
+    s.image_url = null;
+    editorState.selectedBlockId = blocks.length ? blocks[blocks.length - 1].id : null;
+    markDirty();
+    renderEditor();
+    toast('Слайд перенесён на холст — двигай блоки', 'success');
+}
+
+function readingMeta(s) { if (!s.meta) s.meta = {}; if (!Array.isArray(s.meta.questions)) s.meta.questions = []; return s.meta; }
+function renderReadingForm(slide) {
+    const m = readingMeta(slide);
+    let html = '';
+    html += renderFormField('Заголовок', `<input class="form-input" data-field="title" value="${esc(slide.title || '')}" placeholder="Reading: The Old House">`);
+    html += renderSlideImageField(slide);
+    html += renderFormField('Перед чтением (опц.)', `<textarea class="form-input" rows="2" oninput="onReadingMetaField('intro', this.value)" placeholder="Look at the pictures. What rooms can you see?">${esc(m.intro || '')}</textarea>`, 'markdown · показывается над текстом');
+    html += renderFormField('Текст для чтения (markdown)', `<textarea class="form-input" rows="9" oninput="onReadingMetaField('text', this.value)" placeholder="There is an old house on the hill. In the bedroom there is ...">${esc(m.text || '')}</textarea>`, '**жирный** · *курсив* · переносы строк');
+    let qs = '';
+    m.questions.forEach((q, idx) => {
+        let inner = `<div class="reading-q-edit">
+            <div class="rqe-head">
+                <span class="rqe-num">Вопрос ${idx + 1}</span>
+                <select class="lesson-type-sel" onchange="onReadingQType('${q.id}', this.value)">
+                    <option value="choice" ${q.type !== 'open' ? 'selected' : ''}>Выбор ответа</option>
+                    <option value="open" ${q.type === 'open' ? 'selected' : ''}>Открытый ответ</option>
+                </select>
+                <button class="x-btn" onclick="onReadingQDelete('${q.id}')" title="Удалить">×</button>
+            </div>
+            <input class="form-input" value="${esc(q.q || '')}" placeholder="Текст вопроса" oninput="onReadingQText('${q.id}', this.value)">`;
+        if (q.type !== 'open') {
+            let opts = '';
+            (q.options || []).forEach(o => {
+                opts += `<div class="opt-edit-row">
+                    <input type="radio" name="rq_${q.id}" ${o.id === q.correct_id ? 'checked' : ''} onclick="onReadingCorrect('${q.id}', '${o.id}')" title="Правильный ответ">
+                    <input class="form-input" value="${esc(o.text || '')}" placeholder="Вариант" oninput="onReadingOptText('${q.id}', '${o.id}', this.value)">
+                    <button class="x-btn" onclick="onReadingOptDelete('${q.id}', '${o.id}')" ${(q.options || []).length <= 2 ? 'disabled' : ''}>×</button>
+                </div>`;
+            });
+            inner += `<div style="margin-top:6px; display:flex; flex-direction:column; gap:6px;">${opts}<button class="list-add-btn" onclick="onReadingOptAdd('${q.id}')" ${(q.options || []).length >= 6 ? 'disabled' : ''}>+ вариант</button></div>`;
+        }
+        inner += `</div>`;
+        qs += inner;
+    });
+    html += `<div class="form-field"><label>Вопросы после текста</label>
+        ${qs || '<div class="muted" style="font-size:13px;">Пока нет вопросов.</div>'}
+        <button class="list-add-btn" onclick="onReadingQAdd()">+ Добавить вопрос</button></div>`;
+    return html;
+}
+function onReadingMetaField(key, val) { const s = currentSlide(); const m = readingMeta(s); m[key] = val; markDirty(); rerenderPreview(); }
+function onReadingQText(qid, val) { const s = currentSlide(); const q = readingMeta(s).questions.find(x => x.id === qid); if (q) { q.q = val; markDirty(); rerenderPreview(); } }
+function onReadingOptText(qid, oid, val) { const s = currentSlide(); const q = readingMeta(s).questions.find(x => x.id === qid); if (!q) return; const o = (q.options || []).find(x => x.id === oid); if (o) { o.text = val; markDirty(); rerenderPreview(); } }
+function onReadingCorrect(qid, oid) { const s = currentSlide(); const q = readingMeta(s).questions.find(x => x.id === qid); if (q) { q.correct_id = oid; markDirty(); rerenderPreview(); } }
+function readingFormRerender() { const s = currentSlide(); markDirty(); $('editorForm').innerHTML = renderEditorForm(s); attachFormHandlers(); rerenderPreview(); }
+function onReadingQAdd() {
+    const s = currentSlide(); const m = readingMeta(s);
+    const o1 = { id: newId(), text: '' }, o2 = { id: newId(), text: '' };
+    m.questions.push({ id: newId(), type: 'choice', q: '', options: [o1, o2], correct_id: o1.id });
+    readingFormRerender();
+}
+function onReadingQDelete(qid) { const s = currentSlide(); const m = readingMeta(s); m.questions = m.questions.filter(q => q.id !== qid); readingFormRerender(); }
+function onReadingQType(qid, type) {
+    const s = currentSlide(); const q = readingMeta(s).questions.find(x => x.id === qid); if (!q) return;
+    q.type = type;
+    if (type === 'choice' && !q.options) { const o1 = { id: newId(), text: '' }, o2 = { id: newId(), text: '' }; q.options = [o1, o2]; q.correct_id = o1.id; }
+    readingFormRerender();
+}
+function onReadingOptAdd(qid) { const s = currentSlide(); const q = readingMeta(s).questions.find(x => x.id === qid); if (!q) return; if ((q.options || []).length >= 6) return; q.options.push({ id: newId(), text: '' }); readingFormRerender(); }
+function onReadingOptDelete(qid, oid) {
+    const s = currentSlide(); const q = readingMeta(s).questions.find(x => x.id === qid); if (!q) return;
+    q.options = (q.options || []).filter(o => o.id !== oid);
+    if (q.correct_id === oid) q.correct_id = q.options[0] ? q.options[0].id : null;
+    readingFormRerender();
+}
+
+// RUN · reading
+function rdAns(slideId, qid) { const i = getInteraction(slideId); if (!i.reading) i.reading = {}; if (!i.reading[qid]) i.reading[qid] = {}; return i.reading[qid]; }
+function onRunReadingPick(slideId, qid, oid) { const a = rdAns(slideId, qid); if (a.revealed) return; a.selected = oid; rerenderRunStage(); }
+function onRunReadingCheck(slideId, qid) { const a = rdAns(slideId, qid); if (!a.selected) return; a.revealed = true; rerenderRunStage(); }
+function onRunReadingReset(slideId, qid) { const a = rdAns(slideId, qid); a.revealed = false; a.selected = null; rerenderRunStage(); }
+function onRunReadingOpen(slideId, qid, val) { rdAns(slideId, qid).open = val; }
+function renderRunReading(slide) {
+    const meta = SLIDE_TYPE_META.reading;
+    const chip = `<span class="slide-type-chip" style="background:${meta.bg}; color:${meta.fg};">${meta.icon} ${esc(meta.label)}</span>`;
+    const m = slide.meta || {};
+    const i = getInteraction(slide.id);
+    if (!i.reading) i.reading = {};
+    const img = slide.image_url ? `<img class="slide-run-img" src="${esc(slide.image_url)}">` : '';
+    const intro = m.intro ? `<div class="reading-intro"><div class="reading-tag">Before reading</div><div class="markdown" style="font-size:18px;">${md(m.intro)}</div></div>` : '';
+    let qHtml = '';
+    (m.questions || []).forEach((q, idx) => {
+        const a = i.reading[q.id] || {};
+        if (q.type === 'open') {
+            qHtml += `<div class="reading-q"><div class="reading-q-num">${idx + 1}. ${esc(q.q || '')}</div>
+                <textarea class="open-answer" placeholder="Type your answer..." oninput="onRunReadingOpen(${slide.id}, '${q.id}', this.value)">${esc(a.open || '')}</textarea></div>`;
+        } else {
+            let opts = '';
+            (q.options || []).forEach((o, oi) => {
+                const letter = String.fromCharCode(65 + oi);
+                let cls = 'task-option-box';
+                if (a.revealed) { if (o.id === q.correct_id) cls += ' revealed-correct'; else if (o.id === a.selected) cls += ' revealed-wrong'; }
+                else if (o.id === a.selected) cls += ' selected';
+                opts += `<div class="${cls}" onclick="onRunReadingPick(${slide.id}, '${q.id}', '${o.id}')"><span class="task-option-letter">${letter}.</span><span style="flex:1;">${esc(o.text || '')}</span>${a.revealed && o.id === q.correct_id ? '<span style="color:var(--green-dark); font-weight:700;">✓</span>' : ''}${a.revealed && o.id === a.selected && o.id !== q.correct_id ? '<span style="color:var(--red); font-weight:700;">✗</span>' : ''}</div>`;
+            });
+            qHtml += `<div class="reading-q"><div class="reading-q-num">${idx + 1}. ${esc(q.q || '')}</div><div class="task-options">${opts}</div>
+                ${a.revealed
+                    ? `<button class="task-check-btn" onclick="onRunReadingReset(${slide.id}, '${q.id}')">Снова</button>`
+                    : `<button class="task-check-btn" onclick="onRunReadingCheck(${slide.id}, '${q.id}')" ${!a.selected ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>Проверить</button>`}</div>`;
+        }
+    });
+    return `
+        <div class="slide-card reading-card">
+            ${chip}
+            ${slide.title ? `<h2 style="font-size:30px; text-align:left;">${esc(stripLeadingEmoji(slide.title))}</h2>` : ''}
+            ${img}
+            ${intro}
+            <div class="reading-text markdown">${md(m.text || '')}</div>
+            ${qHtml ? `<div class="reading-qs">${qHtml}</div>` : ''}
+        </div>`;
+}
 
 function renderRunSimple(slide) {
     const m = SLIDE_TYPE_META[slide.slide_type] || SLIDE_TYPE_META.text;
@@ -5983,6 +6186,7 @@ function renderRunSlide(slide) {
     if (t === 'rate')  return renderRunRate(slide);
     if (t === 'outro') return renderRunOutro(slide);
     if (t === 'canvas') return renderCanvasRun(slide);
+    if (t === 'reading') return renderRunReading(slide);
     if (t === 'text' || t === 'explanation' || t === 'vocab') return renderRunSimple(slide);
     // intro / outro — hero-превью
     return renderSlidePreview(slide);
