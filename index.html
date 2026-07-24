@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Classroom · Кабинет учителя</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/supabase-js/2.39.7/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root{ --brand:#7c3aed; --brand-d:#5b21b6; --ink:#1e293b; --mut:#64748b; --line:#e5e7eb; --bg:#f6f7fb; --ok:#16a34a; --warn:#f59e0b; --bad:#dc2626; }
   *{ box-sizing:border-box; }
@@ -150,8 +150,9 @@
 // ============================================================
 //  КОНФИГ. TODO: подставить из того же проекта Supabase, что app/learn.wowteach.ru
 // ============================================================
-const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';   // TODO
-const SUPABASE_KEY = 'YOUR-ANON-KEY';                       // TODO (anon public key)
+// Те же, что в app/train/learn.wowteach.ru (общий проект; ключ публичный).
+const SUPABASE_URL = 'https://api.wowteach.ru';
+const SUPABASE_KEY = 'sb_publishable_nZIl9kzPNhkd9Gbsm7aAgA_cAeY1s4x';
 
 const EDITOR_ROLES = ['super_admin','admin','methodist','curator','assistant'];
 
@@ -162,9 +163,18 @@ const cookieStore = {
   setItem: (k,v)=>{ document.cookie=`${k}=${encodeURIComponent(v)}; domain=.wowteach.ru; path=/; max-age=31536000; secure; samesite=lax`; },
   removeItem:(k)=>{ document.cookie=`${k}=; domain=.wowteach.ru; path=/; max-age=0; secure; samesite=lax`; }
 };
-const sb = isWowteach
-  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth:{ storage:cookieStore } })
-  : window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let sb = null;
+function ensureSb(){
+  if(sb) return sb;
+  if(!window.supabase || !window.supabase.createClient)
+    throw new Error('Библиотека Supabase не загрузилась. Проверь интернет и обнови страницу (Ctrl+F5).');
+  if(SUPABASE_URL.includes('YOUR-') || SUPABASE_KEY.includes('YOUR-'))
+    throw new Error('Не задан доступ к базе: впиши SUPABASE_URL и SUPABASE_KEY вверху файла (те же, что в app/learn).');
+  sb = isWowteach
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth:{ storage:cookieStore } })
+    : window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  return sb;
+}
 
 // ---- состояние ----
 let ME = null;            // { userId, name, email, roles[], teacherId, isEditor }
@@ -191,6 +201,7 @@ async function doLogin(){
   const email=$('loginEmail').value.trim(), pass=$('loginPass').value;
   $('loginErr').textContent=''; $('loginBtn').disabled=true;
   try{
+    ensureSb();
     const {error}=await sb.auth.signInWithPassword({ email, password:pass });
     if(error) throw error;
     await boot();
@@ -437,6 +448,8 @@ function switchTab(name){
 //  BOOT
 // ============================================================
 async function boot(){
+  try{ ensureSb(); }
+  catch(e){ $('app').classList.add('hidden'); $('loginScreen').classList.remove('hidden'); $('loginErr').textContent=e.message||String(e); return; }
   const { data:{ session } } = await sb.auth.getSession();
   if(!session){ $('loginScreen').classList.remove('hidden'); $('app').classList.add('hidden'); return; }
   try{
