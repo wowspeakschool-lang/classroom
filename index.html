@@ -103,6 +103,7 @@
   </header>
 
   <main>
+    <div id="mainViews">
     <div id="roleBanner" class="banner hidden"></div>
 
     <!-- УЧЕНИКИ -->
@@ -146,6 +147,19 @@
       <h2 class="section-title">Проверка</h2>
       <p class="section-sub">Работы твоих учеников, ожидающие проверки.</p>
       <div id="reviewWrap"><div class="loading">Загружаю…</div></div>
+    </section>
+    </div><!-- /mainViews -->
+
+    <!-- СТРАНИЦА УЧЕНИКА (hash: #student=ID) -->
+    <section id="tab-student" class="hidden">
+      <button class="btn sec sm" onclick="location.hash=''">← Назад к ученикам</button>
+      <h2 class="section-title" id="stuName" style="margin-top:12px">Ученик</h2>
+      <p class="section-sub" id="stuMeta"></p>
+      <div class="card" style="padding:18px">
+        <div class="field" style="max-width:380px"><label>Курс</label>
+          <select id="stuCourse" onchange="loadStudentLessons()"><option value="">— выбери курс —</option></select></div>
+        <div id="stuBody" class="muted">Выбери курс — увидишь уроки и сможешь включать их ученику.</div>
+      </div>
     </section>
   </main>
 </div>
@@ -290,18 +304,31 @@ function renderStudents(){
 
 let CUR_STU = null;   // { id, name, courseId, lessons:[] }
 
-async function openStudent(id){
+// Клик по ученику — переход на страницу через hash (#student=ID)
+function openStudent(id){ location.hash = '#student=' + encodeURIComponent(id); }
+
+function hideStudentPage(){ $('tab-student').classList.add('hidden'); $('mainViews').classList.remove('hidden'); }
+
+function showStudentPage(id){
   const s = STUDENTS.find(x=>x.id===id);
   CUR_STU = { id, name:s?.name };
-  const courseOpts = LIBRARY.map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');
-  openModal(`<button class="close" onclick="closeModal()">×</button>
-    <h2>${esc(s?.name||'Ученик')}</h2>
-    <p class="muted" style="margin:0 0 14px">Уровень ${esc(s?.level||'—')} · Юнит ${esc(s?.unit||'—')}</p>
-    <div class="field"><label>Курс</label>
-      <select id="stuCourse" onchange="loadStudentLessons()"><option value="">— выбери курс —</option>${courseOpts}</select></div>
-    <div id="stuBody" class="muted">Выбери курс — увидишь уроки и сможешь включать их ученику бегунком.</div>`);
-  if(LIBRARY.length){ $('stuCourse').value = LIBRARY[0].id; loadStudentLessons(); }
+  $('mainViews').classList.add('hidden');
+  $('tab-student').classList.remove('hidden');
+  $('stuName').textContent = s?.name || 'Ученик';
+  $('stuMeta').textContent = `Уровень ${s?.level||'—'} · Юнит ${s?.unit||'—'}`;
+  const sel = $('stuCourse');
+  sel.innerHTML = '<option value="">— выбери курс —</option>' + LIBRARY.map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');
+  $('stuBody').innerHTML = '<div class="muted">Выбери курс — увидишь уроки и сможешь включать их ученику.</div>';
+  if(LIBRARY.length){ sel.value = LIBRARY[0].id; loadStudentLessons(); }
+  window.scrollTo(0,0);
 }
+
+function route(){
+  const m = (location.hash||'').match(/^#student=(.+)$/);
+  if(m){ showStudentPage(decodeURIComponent(m[1])); }
+  else { hideStudentPage(); }
+}
+window.addEventListener('hashchange', route);
 
 async function loadStudentLessons(){
   const courseId = $('stuCourse').value;
@@ -324,14 +351,19 @@ function stLessonStatus(l){
   return '<span class="muted">—</span>';
 }
 
+function fmtDateInput(iso){ if(!iso) return ''; try{ return new Date(iso).toISOString().slice(0,10); }catch(e){ return ''; } }
+
 function renderStudentLessons(){
   const ls = CUR_STU.lessons||[];
   const doneN = ls.filter(x=>x.completed).length;
   const activeN = ls.filter(x=>x.active).length;
   const hasNext = ls.some(x=>x.is_published && !x.active);
-  const rows = ls.map(l=>`<tr>
+  const rows = ls.map((l,i)=>`<tr>
+      <td style="width:34px; color:#94a3b8">${i+1}</td>
       <td><b>${esc(l.title)}</b><div class="muted" style="font-size:12px">${esc(l.unit_title||'')}${l.is_published?'':' · черновик'}</div></td>
       <td>${stLessonStatus(l)}</td>
+      <td><input type="date" value="${fmtDateInput(l.deadline_at)}" ${l.active?'':'disabled'}
+            onchange="setLessonDeadline('${l.lesson_id}', this.value)" style="width:150px; padding:7px 9px"></td>
       <td style="text-align:right">
         <label class="switch"><input type="checkbox" ${l.active?'checked':''} ${l.is_published?'':'disabled'}
           onchange="toggleLesson('${l.lesson_id}', this.checked)"><span class="slider"></span></label>
@@ -343,8 +375,17 @@ function renderStudentLessons(){
       <div class="card" style="padding:10px 14px"><div class="muted" style="font-size:12px">Завершено</div><b style="font-size:18px">${doneN}</b></div>
       <button class="btn sm" style="margin-left:auto" ${hasNext?'':'disabled'} onclick="addNextLesson()">➕ Добавить следующий урок</button>
     </div>
-    ${ls.length? `<table><thead><tr><th>Урок</th><th>Статус</th><th style="text-align:right">Активен</th></tr></thead><tbody>${rows}</tbody></table>`
+    ${ls.length? `<table><thead><tr><th>#</th><th>Урок</th><th>Статус</th><th>Срок сдачи</th><th style="text-align:right">Доступ</th></tr></thead><tbody>${rows}</tbody></table>`
       : '<div class="empty">В курсе пока нет уроков.</div>'}`;
+}
+
+async function setLessonDeadline(lessonId, val){
+  const dl = val ? new Date(val + 'T23:59:00').toISOString() : null;
+  try{
+    await rpc('classroom_set_lesson_active', { p_student_id:CUR_STU.id, p_lesson_id:lessonId, p_active:true, p_deadline:dl, p_pass_threshold:null });
+    toast('Срок сохранён');
+    await loadStudentLessons();
+  }catch(e){ toast(e.message||String(e)); }
 }
 
 async function toggleLesson(lessonId, active){
@@ -491,6 +532,9 @@ async function refreshReview(){ await loadPending(); renderReview(); }
 //  НАВИГАЦИЯ
 // ============================================================
 function switchTab(name){
+  $('tab-student').classList.add('hidden');
+  $('mainViews').classList.remove('hidden');
+  if(location.hash) history.replaceState(null,'',location.pathname+location.search);
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
   ['students','assign','review'].forEach(n=> $('tab-'+n).classList.toggle('hidden', n!==name));
   if(name==='assign') fillCourses();
@@ -513,6 +557,7 @@ async function boot(){
   if(ME.isEditor){ const b=$('roleBanner'); b.textContent='Режим методиста: видны все ученики и все работы на проверке.'; b.classList.remove('hidden'); }
   await Promise.all([ loadStudents(), loadLibrary(), loadPending() ]);
   renderStudents();
+  route();
 }
 document.addEventListener('DOMContentLoaded', boot);
 </script>
