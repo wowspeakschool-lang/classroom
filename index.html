@@ -62,6 +62,13 @@
   .toast{ position:fixed; bottom:22px; left:50%; transform:translateX(-50%); background:#111827; color:#fff; padding:11px 18px; border-radius:10px; font-size:14px; z-index:80; opacity:0; transition:opacity .2s; }
   .toast.show{ opacity:1; }
   .banner{ background:#fffbeb; border:1px solid #fde68a; color:#92400e; padding:10px 14px; border-radius:10px; font-size:13px; margin-bottom:16px; }
+  .switch{ position:relative; display:inline-block; width:42px; height:24px; }
+  .switch input{ opacity:0; width:0; height:0; }
+  .slider{ position:absolute; cursor:pointer; inset:0; background:#cbd5e1; border-radius:999px; transition:.2s; }
+  .slider:before{ content:""; position:absolute; height:18px; width:18px; left:3px; top:3px; background:#fff; border-radius:50%; transition:.2s; }
+  .switch input:checked + .slider{ background:var(--brand); }
+  .switch input:checked + .slider:before{ transform:translateX(18px); }
+  .switch input:disabled + .slider{ opacity:.4; cursor:default; }
 </style>
 </head>
 <body>
@@ -281,32 +288,78 @@ function renderStudents(){
   </tbody></table>`;
 }
 
+let CUR_STU = null;   // { id, name, courseId, lessons:[] }
+
 async function openStudent(id){
   const s = STUDENTS.find(x=>x.id===id);
-  openModal(`<button class="close" onclick="closeModal()">×</button><h2>${esc(s?.name||'Ученик')}</h2>
+  CUR_STU = { id, name:s?.name };
+  const courseOpts = LIBRARY.map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');
+  openModal(`<button class="close" onclick="closeModal()">×</button>
+    <h2>${esc(s?.name||'Ученик')}</h2>
     <p class="muted" style="margin:0 0 14px">Уровень ${esc(s?.level||'—')} · Юнит ${esc(s?.unit||'—')}</p>
-    <div id="stuBody"><div class="loading">Загружаю прогресс…</div></div>`);
+    <div class="field"><label>Курс</label>
+      <select id="stuCourse" onchange="loadStudentLessons()"><option value="">— выбери курс —</option>${courseOpts}</select></div>
+    <div id="stuBody" class="muted">Выбери курс — увидишь уроки и сможешь включать их ученику бегунком.</div>`);
+  if(LIBRARY.length){ $('stuCourse').value = LIBRARY[0].id; loadStudentLessons(); }
+}
+
+async function loadStudentLessons(){
+  const courseId = $('stuCourse').value;
+  const body = $('stuBody');
+  if(!courseId){ body.textContent='Выбери курс.'; return; }
+  body.innerHTML = '<div class="loading">Загружаю уроки…</div>';
   try{
-    const { data:enr } = await sb.from('classroom_enrollments').select('id, course_id, deadline_at, started_at').eq('student_id', id);
-    const ids = (enr||[]).map(e=>e.id);
-    let prog=[], subs=[];
-    if(ids.length){
-      const p = await sb.from('classroom_progress').select('enrollment_id, lesson_id, completed_at, score').in('enrollment_id', ids);
-      const su = await sb.from('classroom_submissions').select('enrollment_id, block_id, auto_score, review_status, submitted_at').in('enrollment_id', ids);
-      prog=p.data||[]; subs=su.data||[];
-    }
-    const done = prog.filter(x=>x.completed_at).length;
-    const pending = subs.filter(x=>x.review_status==='pending').length;
-    $('stuBody').innerHTML = `
-      <div class="row" style="margin-bottom:14px">
-        <div class="card" style="padding:12px 16px"><div class="muted" style="font-size:12px">Курсов назначено</div><b style="font-size:20px">${(enr||[]).length}</b></div>
-        <div class="card" style="padding:12px 16px"><div class="muted" style="font-size:12px">Уроков завершено</div><b style="font-size:20px">${done}</b></div>
-        <div class="card" style="padding:12px 16px"><div class="muted" style="font-size:12px">На проверке</div><b style="font-size:20px">${pending}</b></div>
-      </div>
-      ${prog.length? `<table><thead><tr><th>Урок</th><th>Завершён</th><th>Балл</th></tr></thead><tbody>
-        ${prog.map(p=>`<tr><td>${esc(lessonTitle(p.lesson_id))}</td><td>${p.completed_at?fmtDate(p.completed_at):'<span class="pill n">в процессе</span>'}</td><td>${p.score!=null?p.score+'%':'—'}</td></tr>`).join('')}
-      </tbody></table>` : '<div class="empty">Пока нет активности.</div>'}`;
-  }catch(e){ $('stuBody').innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
+    const res = await rpc('classroom_student_lessons', { p_student_id:CUR_STU.id, p_course_id:courseId });
+    CUR_STU.courseId = courseId;
+    CUR_STU.lessons = (res && res.lessons) || [];
+    renderStudentLessons();
+  }catch(e){ body.innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
+}
+
+function stLessonStatus(l){
+  if(l.review_pending) return '<span class="pill y">на проверке</span>';
+  if(l.completed) return `<span class="pill g">сдано${l.score!=null?' · '+l.score+'%':''}</span>`;
+  if(l.active) return '<span class="pill n">активен</span>';
+  if(l.status==='paused') return '<span class="pill n">на паузе</span>';
+  return '<span class="muted">—</span>';
+}
+
+function renderStudentLessons(){
+  const ls = CUR_STU.lessons||[];
+  const doneN = ls.filter(x=>x.completed).length;
+  const activeN = ls.filter(x=>x.active).length;
+  const hasNext = ls.some(x=>x.is_published && !x.active);
+  const rows = ls.map(l=>`<tr>
+      <td><b>${esc(l.title)}</b><div class="muted" style="font-size:12px">${esc(l.unit_title||'')}${l.is_published?'':' · черновик'}</div></td>
+      <td>${stLessonStatus(l)}</td>
+      <td style="text-align:right">
+        <label class="switch"><input type="checkbox" ${l.active?'checked':''} ${l.is_published?'':'disabled'}
+          onchange="toggleLesson('${l.lesson_id}', this.checked)"><span class="slider"></span></label>
+      </td>
+    </tr>`).join('');
+  $('stuBody').innerHTML = `
+    <div class="row" style="margin-bottom:12px; align-items:center">
+      <div class="card" style="padding:10px 14px"><div class="muted" style="font-size:12px">Активных</div><b style="font-size:18px">${activeN}</b></div>
+      <div class="card" style="padding:10px 14px"><div class="muted" style="font-size:12px">Завершено</div><b style="font-size:18px">${doneN}</b></div>
+      <button class="btn sm" style="margin-left:auto" ${hasNext?'':'disabled'} onclick="addNextLesson()">➕ Добавить следующий урок</button>
+    </div>
+    ${ls.length? `<table><thead><tr><th>Урок</th><th>Статус</th><th style="text-align:right">Активен</th></tr></thead><tbody>${rows}</tbody></table>`
+      : '<div class="empty">В курсе пока нет уроков.</div>'}`;
+}
+
+async function toggleLesson(lessonId, active){
+  try{
+    await rpc('classroom_set_lesson_active', { p_student_id:CUR_STU.id, p_lesson_id:lessonId, p_active:active, p_deadline:null, p_pass_threshold:null });
+    toast(active?'Урок включён ученику':'Урок на паузе');
+    await loadStudentLessons();
+    await loadPending();
+  }catch(e){ toast(e.message||String(e)); await loadStudentLessons(); }
+}
+
+async function addNextLesson(){
+  const next = (CUR_STU.lessons||[]).find(x=>x.is_published && !x.active);
+  if(!next){ toast('Все уроки уже активны'); return; }
+  await toggleLesson(next.lesson_id, true);
 }
 
 // ============================================================
