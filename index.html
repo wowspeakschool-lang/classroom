@@ -125,6 +125,7 @@
           <div class="grow field"><label>Курс</label><select id="asgCourse" onchange="onCourseChange()"><option value="">— выбери курс —</option></select></div>
           <div class="grow field"><label>ДЗ (урок)</label><select id="asgLesson"><option value="">—</option></select></div>
         </div>
+        <div style="margin:-4px 0 10px"><button class="btn sec sm" type="button" onclick="openPreview($('asgLesson').value)">👁 Предпросмотр выбранного ДЗ</button></div>
         <div class="row">
           <div class="grow field"><label>Дедлайн (необязательно)</label><input id="asgDeadline" type="datetime-local" /></div>
           <div class="grow field"><label>Порог зачёта, % (необязательно)</label><input id="asgThreshold" type="number" min="0" max="100" placeholder="напр. 60" /></div>
@@ -358,11 +359,13 @@ function renderStudentLessons(){
   const doneN = ls.filter(x=>x.completed).length;
   const activeN = ls.filter(x=>x.active).length;
   const hasNext = ls.some(x=>x.is_published && !x.active);
-  const rows = ls.map((l,i)=>`<tr>
+  const rows = ls.map((l,i)=>`<tr id="row-${l.lesson_id}">
       <td style="width:34px; color:#94a3b8">${i+1}</td>
-      <td><b>${esc(l.title)}</b><div class="muted" style="font-size:12px">${esc(l.unit_title||'')}${l.is_published?'':' · черновик'}</div></td>
-      <td>${stLessonStatus(l)}</td>
-      <td><input type="date" value="${fmtDateInput(l.deadline_at)}" ${l.active?'':'disabled'}
+      <td><b style="cursor:pointer;color:var(--brand-d)" onclick="openPreview('${l.lesson_id}')">${esc(l.title)}</b>
+          <span title="Предпросмотр" style="cursor:pointer;margin-left:4px" onclick="openPreview('${l.lesson_id}')">👁</span>
+          <div class="muted" style="font-size:12px">${esc(l.unit_title||'')}${l.is_published?'':' · черновик'}</div></td>
+      <td class="statusCell">${stLessonStatus(l)}</td>
+      <td><input type="date" id="date-${l.lesson_id}" value="${fmtDateInput(l.deadline_at)}" ${l.active?'':'disabled'}
             onchange="setLessonDeadline('${l.lesson_id}', this.value)" style="width:150px; padding:7px 9px"></td>
       <td style="text-align:right">
         <label class="switch"><input type="checkbox" ${l.active?'checked':''} ${l.is_published?'':'disabled'}
@@ -371,36 +374,100 @@ function renderStudentLessons(){
     </tr>`).join('');
   $('stuBody').innerHTML = `
     <div class="row" style="margin-bottom:12px; align-items:center">
-      <div class="card" style="padding:10px 14px"><div class="muted" style="font-size:12px">Активных</div><b style="font-size:18px">${activeN}</b></div>
-      <div class="card" style="padding:10px 14px"><div class="muted" style="font-size:12px">Завершено</div><b style="font-size:18px">${doneN}</b></div>
-      <button class="btn sm" style="margin-left:auto" ${hasNext?'':'disabled'} onclick="addNextLesson()">➕ Добавить следующий урок</button>
+      <div class="card" style="padding:10px 14px"><div class="muted" style="font-size:12px">Активных</div><b style="font-size:18px" id="stActiveN">${activeN}</b></div>
+      <div class="card" style="padding:10px 14px"><div class="muted" style="font-size:12px">Завершено</div><b style="font-size:18px" id="stDoneN">${doneN}</b></div>
+      <button class="btn sm" id="addNextBtn" style="margin-left:auto" ${hasNext?'':'disabled'} onclick="addNextLesson()">➕ Добавить следующий урок</button>
     </div>
     ${ls.length? `<table><thead><tr><th>#</th><th>Урок</th><th>Статус</th><th>Срок сдачи</th><th style="text-align:right">Доступ</th></tr></thead><tbody>${rows}</tbody></table>`
       : '<div class="empty">В курсе пока нет уроков.</div>'}`;
 }
 
+// Точечное обновление одной строки — без перерисовки всей таблицы (без мигания)
+function patchLesson(l){
+  const row = document.getElementById('row-'+l.lesson_id);
+  if(row){
+    const sc = row.querySelector('.statusCell'); if(sc) sc.innerHTML = stLessonStatus(l);
+  }
+  const date = document.getElementById('date-'+l.lesson_id);
+  if(date) date.disabled = !l.active;
+  const ls = CUR_STU.lessons||[];
+  const a = document.getElementById('stActiveN'); if(a) a.textContent = ls.filter(x=>x.active).length;
+  const nb = document.getElementById('addNextBtn'); if(nb) nb.disabled = !ls.some(x=>x.is_published && !x.active);
+}
+
 async function setLessonDeadline(lessonId, val){
   const dl = val ? new Date(val + 'T23:59:00').toISOString() : null;
+  const l = (CUR_STU.lessons||[]).find(x=>x.lesson_id===lessonId);
   try{
     await rpc('classroom_set_lesson_active', { p_student_id:CUR_STU.id, p_lesson_id:lessonId, p_active:true, p_deadline:dl, p_pass_threshold:null });
+    if(l) l.deadline_at = dl;
     toast('Срок сохранён');
-    await loadStudentLessons();
   }catch(e){ toast(e.message||String(e)); }
 }
 
 async function toggleLesson(lessonId, active){
+  const l = (CUR_STU.lessons||[]).find(x=>x.lesson_id===lessonId);
   try{
-    await rpc('classroom_set_lesson_active', { p_student_id:CUR_STU.id, p_lesson_id:lessonId, p_active:active, p_deadline:null, p_pass_threshold:null });
+    await rpc('classroom_set_lesson_active', { p_student_id:CUR_STU.id, p_lesson_id:lessonId, p_active:active, p_deadline:(l&&l.deadline_at)||null, p_pass_threshold:null });
+    if(l){ l.active=active; l.status=active?'active':'paused'; patchLesson(l); }
     toast(active?'Урок включён ученику':'Урок на паузе');
-    await loadStudentLessons();
-    await loadPending();
-  }catch(e){ toast(e.message||String(e)); await loadStudentLessons(); }
+  }catch(e){
+    toast(e.message||String(e));
+    const row=document.getElementById('row-'+lessonId), cb=row&&row.querySelector('input[type=checkbox]'); if(cb) cb.checked=!active;
+  }
 }
 
 async function addNextLesson(){
   const next = (CUR_STU.lessons||[]).find(x=>x.is_published && !x.active);
   if(!next){ toast('Все уроки уже активны'); return; }
   await toggleLesson(next.lesson_id, true);
+  const row=document.getElementById('row-'+next.lesson_id), cb=row&&row.querySelector('input[type=checkbox]'); if(cb) cb.checked=true;
+}
+
+// ============================================================
+//  ПРЕДПРОСМОТР УРОКА (для учителя/методиста; тот же рендер станет прохождением)
+// ============================================================
+function blockTypeLabel(t){ return ({text:'Материал',video:'Видео',quiz:'Тест',match:'Соедини пары',exact_input:'Короткий ответ',task:'Задание',embed:'Тренажёр'})[t]||t; }
+
+function previewQuestion(q,qi){
+  const correct = new Set(q.correct||[]);
+  const opts=(q.options||[]).map((o,oi)=>{
+    const isC=correct.has(oi);
+    const label = (o && o.image)
+      ? `<img src="${esc(o.image)}" style="height:44px;vertical-align:middle" onerror="this.replaceWith(document.createTextNode('[картинка]'))">`
+      : esc(o && o.text!=null ? o.text : o);
+    return `<div class="chk" style="${isC?'border-color:#16a34a;background:#f0fdf4':''}">${label}${isC?' <span class="pill g" style="margin-left:auto">верный</span>':''}</div>`;
+  }).join('');
+  const audio = q.audio_url ? ` <audio controls src="${esc(q.audio_url)}" style="height:28px;vertical-align:middle"></audio>` : '';
+  return `<div style="margin-bottom:12px"><div style="font-weight:600;margin-bottom:6px">${qi+1}. ${esc(q.q||'')}${audio}</div>${opts}</div>`;
+}
+
+function previewBlock(b){
+  const p=b.payload||{}; const head=`<div class="bt">${blockTypeLabel(b.type)}</div>`;
+  if(b.type==='text')  return `<div class="block">${head}<div>${p.html||''}</div></div>`;
+  if(b.type==='video') return `<div class="block">${head}${p.title?`<b>${esc(p.title)}</b>`:''}<div class="muted">${esc(p.url||'')}</div></div>`;
+  if(b.type==='embed') return `<div class="block">${head}<div class="muted" style="margin-bottom:6px">Тренажёр: ${esc(p.url||'—')}</div>${p.url?`<iframe src="${esc(p.url)}" style="width:100%;height:360px;border:1px solid var(--line);border-radius:8px"></iframe>`:''}</div>`;
+  if(b.type==='exact_input') return `<div class="block">${head}${(p.items||[]).map(it=>`<div style="margin-bottom:6px">${esc(it.prompt||'')} → <span class="pill g">${(it.accept||[]).map(esc).join(' / ')}</span></div>`).join('')}</div>`;
+  if(b.type==='match') return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px">${esc(p.title)}</div>`:''}${(p.pairs||[]).map(pr=>`<div style="margin-bottom:6px"><span class="pill n">${esc(pr.left)}</span> → <span class="pill g">${esc(pr.right)}</span></div>`).join('')}</div>`;
+  if(b.type==='quiz') return `<div class="block">${head}${(p.questions||[]).map((q,qi)=>previewQuestion(q,qi)).join('')}</div>`;
+  if(b.type==='task') return `<div class="block">${head}${p.title?`<b>${esc(p.title)}</b>`:''}<div style="margin-top:6px">${p.html||''}</div>${Array.isArray(p.parts)?p.parts.map((pt,i)=>`<div style="margin-top:8px"><b>Часть ${i+1}${pt.title?' · '+esc(pt.title):''}</b><div>${pt.prompt_html||''}</div></div>`).join(''):''}<div class="muted" style="margin-top:8px">${p.answer_kind==='audio'?'🎤 Ответ ученика: запись голоса':'✍ Ответ ученика: текст/файл'} · ручная проверка</div></div>`;
+  return `<div class="block">${head}<pre class="muted" style="white-space:pre-wrap">${esc(JSON.stringify(p,null,2))}</pre></div>`;
+}
+
+async function openPreview(lessonId){
+  if(!lessonId){ toast('Выбери урок'); return; }
+  let title = '';
+  for(const c of LIBRARY){ const l=(c.lessons||[]).find(x=>x.id===lessonId); if(l){ title=l.title; break; } }
+  openModal(`<button class="close" onclick="closeModal()">×</button>
+    <h2>Предпросмотр${title?': '+esc(title):''}</h2>
+    <p class="muted" style="margin:0 0 12px">Так урок увидит ученик. Правильные ответы подсвечены — их видите только вы.</p>
+    <div id="pvBody"><div class="loading">Загружаю…</div></div>`);
+  try{
+    const { data:blocks, error } = await sb.from('classroom_blocks')
+      .select('id, type, payload, sort_order').eq('lesson_id', lessonId).order('sort_order');
+    if(error) throw error;
+    $('pvBody').innerHTML = (blocks && blocks.length) ? blocks.map(previewBlock).join('') : '<div class="empty">В уроке пока нет блоков.</div>';
+  }catch(e){ $('pvBody').innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
 }
 
 // ============================================================
