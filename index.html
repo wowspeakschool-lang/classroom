@@ -110,8 +110,14 @@
     <section id="tab-students">
       <h2 class="section-title">Мои ученики</h2>
       <p class="section-sub">Список закреплённых учеников. Нажми на ученика — история ДЗ и оценки.</p>
-      <div class="row" style="margin-bottom:14px">
+      <div class="row" style="margin-bottom:14px; align-items:center">
         <input class="grow" id="studentSearch" placeholder="🔎 Поиск по имени…" oninput="renderStudents()" />
+        <select id="studentStatus" onchange="renderStudents()" style="max-width:220px">
+          <option value="20674">Клиенты (учатся)</option>
+          <option value="63578">В отпуске</option>
+          <option value="">Все статусы</option>
+        </select>
+        <span id="studentsCount" class="muted" style="font-size:13px"></span>
       </div>
       <div id="studentsWrap"><div class="loading">Загружаю…</div></div>
     </section>
@@ -253,11 +259,21 @@ async function loadMe(authUid){
 // ============================================================
 async function loadStudents(){
   // Ученики: методист видит всех, учитель — своих (assigned_teacher_ids содержит его id).
-  let q = sb.from('students_active_with_teachers').select('id, name, parent_text, level, unit, assigned_teacher_ids').order('name');
-  if(!ME.isEditor && ME.teacherId) q = q.contains('assigned_teacher_ids', [ME.teacherId]);
-  const { data, error } = await q;
-  if(error){ console.warn('students', error); STUDENTS=[]; return; }
-  STUDENTS = data || [];
+  // Постранично: PostgREST режет на 1000 строк. Тай-брейкер .order('id') обязателен.
+  let all=[]; let from=0; const size=1000;
+  while(true){
+    let q = sb.from('students_active_with_teachers')
+      .select('id, name, parent_text, level, unit, client_state_id, assigned_teacher_ids')
+      .order('name', { ascending:true }).order('id', { ascending:true })
+      .range(from, from+size-1);
+    if(!ME.isEditor && ME.teacherId) q = q.contains('assigned_teacher_ids', [ME.teacherId]);
+    const { data, error } = await q;
+    if(error){ console.warn('students', error); break; }
+    all = all.concat(data||[]);
+    if(!data || data.length < size) break;
+    from += size; if(from > 50000) break;
+  }
+  STUDENTS = all;
 }
 
 async function loadLibrary(){
@@ -292,7 +308,11 @@ function lessonTitle(id){ for(const c of LIBRARY){ const l=(c.lessons||[]).find(
 function renderStudents(){
   const wrap=$('studentsWrap');
   const term=($('studentSearch').value||'').toLowerCase().trim();
-  const list = STUDENTS.filter(s=> !term || (s.name||'').toLowerCase().includes(term));
+  const st=$('studentStatus') ? $('studentStatus').value : '';
+  let list = STUDENTS.slice();
+  if(st) list = list.filter(s=> String(s.client_state_id)===st);
+  if(term) list = list.filter(s=> (s.name||'').toLowerCase().includes(term) || (s.parent_text||'').toLowerCase().includes(term));
+  const cnt=$('studentsCount'); if(cnt) cnt.textContent = `Показано: ${list.length} из ${STUDENTS.length}`;
   if(!list.length){ wrap.innerHTML = '<div class="empty">Учеников не найдено.</div>'; return; }
   wrap.innerHTML = `<table><thead><tr><th>Ученик</th><th>Уровень</th><th>Юнит</th><th></th></tr></thead><tbody>
     ${list.map(s=>`<tr>
