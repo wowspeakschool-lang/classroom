@@ -69,6 +69,27 @@
   .switch input:checked + .slider{ background:var(--brand); }
   .switch input:checked + .slider:before{ transform:translateX(18px); }
   .switch input:disabled + .slider{ opacity:.4; cursor:default; }
+  .mcol{ flex:1; display:flex; flex-direction:column; gap:8px; }
+  .mtile{ padding:12px 14px; border:1.5px solid var(--line); border-radius:10px; cursor:pointer; font-weight:600; text-align:center; background:#fff; user-select:none; transition:.12s; }
+  .mtile:hover{ border-color:var(--brand); }
+  .mtile.sel{ outline:2px solid var(--brand); outline-offset:1px; }
+  /* ── Детская тема (только режим прохождения) ── */
+  .kid .kidhead{ background:linear-gradient(135deg,#8b5cf6,#ec4899); color:#fff; border-radius:20px; padding:16px 20px; margin-bottom:16px; font-size:22px; }
+  .kid .block{ border:none; border-radius:22px; padding:20px 22px; margin-bottom:16px; background:#fff; box-shadow:0 8px 24px rgba(124,58,237,.10); }
+  .kid .bt{ color:#ec4899; font-size:13px; }
+  .kid .block > div:first-child + div, .kid .block p{ font-size:18px; }
+  .kid .chk{ border:2px solid #eee; border-radius:16px; padding:14px 18px; font-size:19px; margin-bottom:10px; transition:.12s; }
+  .kid .chk:hover{ border-color:#a78bfa; transform:translateY(-2px); box-shadow:0 6px 16px rgba(139,92,246,.15); }
+  .kid .chk input{ transform:scale(1.3); margin-right:6px; }
+  .kid .mtile{ border-radius:18px; padding:16px; font-size:22px; border-width:2px; }
+  .kid .btn{ border-radius:16px; padding:12px 24px; font-size:17px; background:linear-gradient(135deg,#8b5cf6,#ec4899); }
+  .kid .btn:hover{ filter:brightness(1.05); }
+  .kid input, .kid textarea, .kid select{ border-radius:14px; font-size:17px; padding:12px 14px; }
+  .kid .kidres{ margin-left:10px; font-weight:800; color:#16a34a; font-size:17px; }
+  .kid audio{ height:34px; }
+  .confetti{ position:fixed; top:-30px; z-index:200; pointer-events:none; animation:fall 1.6s ease-in forwards; }
+  @keyframes fall{ to{ transform:translateY(105vh) rotate(360deg); opacity:.2; } }
+  .runpage{ position:fixed; inset:0; overflow:auto; background:linear-gradient(180deg,#faf5ff,#fdf2f8); z-index:100; }
 </style>
 </head>
 <body>
@@ -496,6 +517,41 @@ async function openPreview(lessonId){
 //  ПРОХОЖДЕНИЕ УРОКА УЧЕНИКОМ (режим ученика; сдача → очередь проверки)
 // ============================================================
 let RUN = null;   // { lessonId, enr }
+let RUN_MATCH = {};   // { blockId: { map:{leftIdx:rightVal}, sel, rights:[...] } }
+const MATCH_COLORS = ['#7c3aed','#16a34a','#f59e0b','#0891b2','#db2777','#4f46e5','#ea580c','#0d9488'];
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+
+function matchPickLeft(id, li){
+  const st=RUN_MATCH[id]; if(!st) return;
+  if(st.map[li]!=null){ delete st.map[li]; st.sel=null; matchRefresh(id); return; }
+  st.sel = (st.sel===li ? null : li);
+  matchRefresh(id);
+}
+function matchPickRight(id, vi){
+  const st=RUN_MATCH[id]; if(!st) return;
+  if(st.sel==null){ toast('Сначала выбери букву слева'); return; }
+  const val=st.rights[vi];
+  Object.keys(st.map).forEach(k=>{ if(st.map[k]===val) delete st.map[k]; });
+  st.map[st.sel]=val; st.sel=null; matchRefresh(id);
+}
+function matchRefresh(id){
+  const st=RUN_MATCH[id]; if(!st) return;
+  const leftEls=document.querySelectorAll(`[id^="ml-${id}-"]`);
+  leftEls.forEach(el=>{
+    const li=Number(el.id.split('-').pop());
+    const mapped = st.map[li]!=null, c=MATCH_COLORS[li%MATCH_COLORS.length];
+    el.classList.toggle('sel', st.sel===li);
+    el.style.background = mapped? c : '#fff';
+    el.style.color = mapped? '#fff' : '';
+    el.style.borderColor = mapped? c : '';
+  });
+  st.rights.forEach((r,vi)=>{
+    const el=document.getElementById('mr-'+id+'-'+vi); if(!el) return;
+    let owner=null; Object.keys(st.map).forEach(k=>{ if(st.map[k]===r) owner=Number(k); });
+    if(owner!=null){ const c=MATCH_COLORS[owner%MATCH_COLORS.length]; el.style.background=c; el.style.color='#fff'; el.style.borderColor=c; }
+    else { el.style.background='#fff'; el.style.color=''; el.style.borderColor=''; }
+  });
+}
 
 async function openRunner(lessonId){
   if(!CUR_STU){ toast('Открой ученика'); return; }
@@ -503,21 +559,42 @@ async function openRunner(lessonId){
     try{ const r=await rpc('classroom_student_lessons', { p_student_id:CUR_STU.id, p_course_id:CUR_STU.courseId }); CUR_STU.enrollmentId = r && r.enrollment_id; }catch(e){}
   }
   if(!CUR_STU.enrollmentId){ toast('Урок ещё не активирован ученику'); return; }
-  let title=''; for(const c of LIBRARY){ const l=(c.lessons||[]).find(x=>x.id===lessonId); if(l){ title=l.title; break; } }
-  openModal(`<button class="close" onclick="closeRunner()">×</button>
-    <h2>${esc(title||'Урок')}</h2>
-    <p class="muted" style="margin:0 0 12px">Режим ученика. Отвечай на задания и нажимай «Сдать».</p>
-    <div id="runBody"><div class="loading">Загружаю…</div></div>`);
+  const url = location.pathname + '?run=' + encodeURIComponent(lessonId) + '&enroll=' + encodeURIComponent(CUR_STU.enrollmentId) + '&sid=' + encodeURIComponent(CUR_STU.id);
+  window.open(url, '_blank');
+}
+
+// Отдельная страница прохождения — открывается в новом окне (?run=lesson&enroll=enr)
+async function bootRunPage(params){
+  const lessonId=params.get('run'); const enr=params.get('enroll');
+  $('loginScreen').classList.add('hidden'); $('app').classList.add('hidden');
+  document.body.insertAdjacentHTML('beforeend', `<div id="runPage" class="runpage"><div class="kid" style="max-width:760px;margin:0 auto;padding:20px 16px 60px">
+      <div class="kidhead" id="runPageHead">🚀 Урок</div>
+      <div id="runBody"><div class="loading">Загружаю…</div></div>
+    </div></div>`);
+  RUN = { lessonId, enr }; RUN_MATCH = {};
   try{
-    const { data:blocks, error } = await sb.from('classroom_blocks').select('id, type, payload, sort_order').eq('lesson_id', lessonId).order('sort_order');
-    if(error) throw error;
-    RUN = { lessonId, enr:CUR_STU.enrollmentId };
-    $('runBody').innerHTML = (blocks && blocks.length) ? blocks.map(runBlock).join('') : '<div class="empty">В уроке нет блоков.</div>';
+    const [ls, bl] = await Promise.all([
+      sb.from('classroom_lessons').select('title').eq('id', lessonId).maybeSingle(),
+      sb.from('classroom_blocks').select('id, type, payload, sort_order').eq('lesson_id', lessonId).order('sort_order')
+    ]);
+    if(bl.error) throw bl.error;
+    const blocks = bl.data||[];
+    $('runPageHead').innerHTML = `🚀 <b>${esc((ls.data&&ls.data.title)||'Урок')}</b><div style="font-size:14px;opacity:.95;margin-top:2px">Поехали! Отвечай на задания и собирай звёздочки ⭐</div>`;
+    blocks.forEach(b=>{ if(b.type==='match'){ RUN_MATCH[b.id]={ map:{}, sel:null, rights:shuffle(((b.payload&&b.payload.pairs)||[]).map(x=>x.right)) }; } });
+    $('runBody').innerHTML = blocks.length ? blocks.map(runBlock).join('') : '<div class="empty">В уроке нет блоков.</div>';
   }catch(e){ $('runBody').innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
 }
-function closeRunner(){ closeModal(); loadStudentLessons(); }
 
-function runResult(id, txt, ok){ const el=$('res-'+id); if(el){ el.textContent=txt; el.className = ok?'pill g':'muted'; el.style.marginLeft='8px'; } }
+function runResult(id, txt, ok){ const el=$('res-'+id); if(el){ el.textContent=txt; el.className = ok?'kidres':'muted'; el.style.marginLeft='10px'; } }
+function scoreMsg(r){ if(r.needs_review) return 'Отправлено на проверку ✅'; const s=r.score; if(s===100) return `Отлично! ${s}% 🎉`; if(s!=null) return `${s}% 👍`; return 'Готово ✅'; }
+function celebrate(){
+  const emo=['🎉','⭐','🌟','✨','🥳','💜','🌈'];
+  for(let i=0;i<20;i++){
+    const s=document.createElement('div'); s.className='confetti'; s.textContent=emo[Math.floor(Math.random()*emo.length)];
+    s.style.left=(Math.random()*100)+'vw'; s.style.animationDelay=(Math.random()*0.35)+'s'; s.style.fontSize=(16+Math.random()*20)+'px';
+    document.body.appendChild(s); setTimeout(()=>s.remove(), 1900);
+  }
+}
 
 function runBlock(b){
   const p=b.payload||{}; const id=b.id; const head=`<div class="bt">${blockTypeLabel(b.type)}</div>`;
@@ -541,9 +618,13 @@ function runBlock(b){
     return `<div class="block">${head}${items}<button class="btn sm" onclick="runExact('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
   }
   if(b.type==='match'){
-    const rights=(p.pairs||[]).map(pr=>pr.right).slice().sort(()=>Math.random()-0.5);
-    const rows=(p.pairs||[]).map((pr,pi)=>`<div style="margin-bottom:6px"><span class="pill n">${esc(pr.left)}</span> → <select id="mt-${id}-${pi}"><option value="">—</option>${rights.map(r=>`<option value="${esc(r)}">${esc(r)}</option>`).join('')}</select></div>`).join('');
-    return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px">${esc(p.title)}</div>`:''}${rows}<button class="btn sm" onclick="runMatch('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
+    const st=RUN_MATCH[id] || { rights:(p.pairs||[]).map(x=>x.right) };
+    const left=(p.pairs||[]).map((pr,li)=>`<div class="mtile" id="ml-${id}-${li}" onclick="matchPickLeft('${id}',${li})">${esc(pr.left)}</div>`).join('');
+    const right=st.rights.map((r,vi)=>`<div class="mtile" id="mr-${id}-${vi}" onclick="matchPickRight('${id}',${vi})">${esc(r)}</div>`).join('');
+    return `<div class="block">${head}${p.title?`<div style="margin-bottom:10px">${esc(p.title)}</div>`:''}
+      <div class="muted" style="font-size:12px;margin-bottom:8px">Нажми букву слева, потом её пару справа.</div>
+      <div style="display:flex; gap:20px; max-width:520px"><div class="mcol">${left}</div><div class="mcol">${right}</div></div>
+      <button class="btn sm" style="margin-top:10px" onclick="runMatch('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
   }
   if(b.type==='task'){
     return `<div class="block">${head}${p.title?`<b>${esc(p.title)}</b>`:''}<div style="margin-top:6px">${p.html||''}</div>
@@ -559,26 +640,27 @@ async function submitBlock(blockId, answers){ return rpc('classroom_submit_block
 async function runQuiz(id){
   const ans={};
   document.querySelectorAll(`input[name^="q-${id}-"]`).forEach(inp=>{ if(inp.checked){ const qi=inp.name.split('-').pop(); (ans[qi]=ans[qi]||[]).push(Number(inp.value)); } });
-  try{ const r=await submitBlock(id, ans); runResult(id, r.needs_review?'на проверке':('Результат: '+(r.score!=null?r.score+'%':'—')), !r.needs_review); }
+  try{ const r=await submitBlock(id, ans); runResult(id, scoreMsg(r), true); if(!r.needs_review && r.score===100) celebrate(); }
   catch(e){ runResult(id, e.message||String(e), false); }
 }
 async function runExact(id){
   const ans={}; document.querySelectorAll(`input[id^="ei-${id}-"]`).forEach(inp=>{ ans[inp.id.split('-').pop()]=inp.value; });
-  try{ const r=await submitBlock(id, ans); runResult(id, r.needs_review?'на проверке':('Результат: '+(r.score!=null?r.score+'%':'—')), !r.needs_review); }
+  try{ const r=await submitBlock(id, ans); runResult(id, scoreMsg(r), true); if(!r.needs_review && r.score===100) celebrate(); }
   catch(e){ runResult(id, e.message||String(e), false); }
 }
 async function runMatch(id){
-  const ans={}; document.querySelectorAll(`select[id^="mt-${id}-"]`).forEach(sel=>{ ans[sel.id.split('-').pop()]=sel.value; });
-  try{ const r=await submitBlock(id, ans); runResult(id, r.needs_review?'на проверке':('Результат: '+(r.score!=null?r.score+'%':'—')), !r.needs_review); }
+  const st=RUN_MATCH[id]||{map:{}};
+  const ans={}; Object.keys(st.map).forEach(k=>{ ans[k]=st.map[k]; });
+  try{ const r=await submitBlock(id, ans); runResult(id, scoreMsg(r), true); if(!r.needs_review && r.score===100) celebrate(); }
   catch(e){ runResult(id, e.message||String(e), false); }
 }
 async function runTask(id){
   const t=$('tk-'+id); const ans = (t && t.value) ? { text:t.value } : {};
-  try{ await submitBlock(id, ans); runResult(id, 'отправлено на проверку', true); }
+  try{ await submitBlock(id, ans); runResult(id, 'Отправлено на проверку ✅', true); }
   catch(e){ runResult(id, e.message||String(e), false); }
 }
 async function runEmbed(id){
-  try{ await rpc('classroom_submit_embed', { p_block_id:id, p_enrollment_id:RUN.enr, p_score:null, p_payload:{} }); runResult(id, 'отмечено пройденным', true); }
+  try{ await rpc('classroom_submit_embed', { p_block_id:id, p_enrollment_id:RUN.enr, p_score:null, p_payload:{} }); runResult(id, 'Молодец! ✅', true); celebrate(); }
   catch(e){ runResult(id, e.message||String(e), false); }
 }
 
@@ -728,6 +810,8 @@ async function boot(){
   catch(e){ $('app').classList.add('hidden'); $('loginScreen').classList.remove('hidden'); $('loginErr').textContent=e.message||String(e); return; }
   const { data:{ session } } = await sb.auth.getSession();
   if(!session){ $('loginScreen').classList.remove('hidden'); $('app').classList.add('hidden'); return; }
+  const _p = new URLSearchParams(location.search);
+  if(_p.get('run')){ return bootRunPage(_p); }
   try{
     await loadMe(session.user.id);
   }catch(e){ $('loginErr').textContent=e.message||String(e); await sb.auth.signOut(); $('loginScreen').classList.remove('hidden'); return; }
