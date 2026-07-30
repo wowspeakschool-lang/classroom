@@ -339,6 +339,7 @@ async function loadStudentLessons(){
   try{
     const res = await rpc('classroom_student_lessons', { p_student_id:CUR_STU.id, p_course_id:courseId });
     CUR_STU.courseId = courseId;
+    CUR_STU.enrollmentId = (res && res.enrollment_id) || null;
     CUR_STU.lessons = (res && res.lessons) || [];
     renderStudentLessons();
   }catch(e){ body.innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
@@ -363,6 +364,7 @@ function renderStudentLessons(){
       <td style="width:34px; color:#94a3b8">${i+1}</td>
       <td><b style="cursor:pointer;color:var(--brand-d)" onclick="openPreview('${l.lesson_id}')">${esc(l.title)}</b>
           <span title="Предпросмотр" style="cursor:pointer;margin-left:4px" onclick="openPreview('${l.lesson_id}')">👁</span>
+          ${l.active?`<button class="btn sm" style="padding:2px 8px;font-size:12px;margin-left:6px" onclick="openRunner('${l.lesson_id}')">▶ Пройти</button>`:''}
           <div class="muted" style="font-size:12px">${esc(l.unit_title||'')}${l.is_published?'':' · черновик'}</div></td>
       <td class="statusCell">${stLessonStatus(l)}</td>
       <td><input type="date" id="date-${l.lesson_id}" value="${fmtDateInput(l.deadline_at)}" ${l.active?'':'disabled'}
@@ -468,6 +470,96 @@ async function openPreview(lessonId){
     if(error) throw error;
     $('pvBody').innerHTML = (blocks && blocks.length) ? blocks.map(previewBlock).join('') : '<div class="empty">В уроке пока нет блоков.</div>';
   }catch(e){ $('pvBody').innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
+}
+
+// ============================================================
+//  ПРОХОЖДЕНИЕ УРОКА УЧЕНИКОМ (режим ученика; сдача → очередь проверки)
+// ============================================================
+let RUN = null;   // { lessonId, enr }
+
+async function openRunner(lessonId){
+  if(!CUR_STU){ toast('Открой ученика'); return; }
+  if(!CUR_STU.enrollmentId){
+    try{ const r=await rpc('classroom_student_lessons', { p_student_id:CUR_STU.id, p_course_id:CUR_STU.courseId }); CUR_STU.enrollmentId = r && r.enrollment_id; }catch(e){}
+  }
+  if(!CUR_STU.enrollmentId){ toast('Урок ещё не активирован ученику'); return; }
+  let title=''; for(const c of LIBRARY){ const l=(c.lessons||[]).find(x=>x.id===lessonId); if(l){ title=l.title; break; } }
+  openModal(`<button class="close" onclick="closeRunner()">×</button>
+    <h2>${esc(title||'Урок')}</h2>
+    <p class="muted" style="margin:0 0 12px">Режим ученика. Отвечай на задания и нажимай «Сдать».</p>
+    <div id="runBody"><div class="loading">Загружаю…</div></div>`);
+  try{
+    const { data:blocks, error } = await sb.from('classroom_blocks').select('id, type, payload, sort_order').eq('lesson_id', lessonId).order('sort_order');
+    if(error) throw error;
+    RUN = { lessonId, enr:CUR_STU.enrollmentId };
+    $('runBody').innerHTML = (blocks && blocks.length) ? blocks.map(runBlock).join('') : '<div class="empty">В уроке нет блоков.</div>';
+  }catch(e){ $('runBody').innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
+}
+function closeRunner(){ closeModal(); loadStudentLessons(); }
+
+function runResult(id, txt, ok){ const el=$('res-'+id); if(el){ el.textContent=txt; el.className = ok?'pill g':'muted'; el.style.marginLeft='8px'; } }
+
+function runBlock(b){
+  const p=b.payload||{}; const id=b.id; const head=`<div class="bt">${blockTypeLabel(b.type)}</div>`;
+  if(b.type==='text')  return `<div class="block">${head}<div>${p.html||''}</div></div>`;
+  if(b.type==='video') return `<div class="block">${head}${p.title?`<b>${esc(p.title)}</b>`:''}${p.url?`<div class="muted">${esc(p.url)}</div>`:''}</div>`;
+  if(b.type==='embed') return `<div class="block">${head}${p.url?`<iframe src="${esc(p.url)}" style="width:100%;height:360px;border:1px solid var(--line);border-radius:8px"></iframe>`:'<div class="muted">Нет ссылки</div>'}<div style="margin-top:8px"><button class="btn sm" onclick="runEmbed('${id}')">Отметить пройденным</button><span id="res-${id}" class="muted"></span></div></div>`;
+  if(b.type==='quiz'){
+    const qs=(p.questions||[]).map((q,qi)=>{
+      const inp=(q.type==='multiple')?'checkbox':'radio';
+      const opts=(q.options||[]).map((o,oi)=>{
+        const label=(o&&o.image)?`<img src="${esc(o.image)}" style="height:40px" onerror="this.replaceWith(document.createTextNode('[картинка]'))">`:esc(o&&o.text!=null?o.text:o);
+        return `<label class="chk"><input type="${inp}" name="q-${id}-${qi}" value="${oi}"> ${label}</label>`;
+      }).join('');
+      const audio=q.audio_url?` <audio controls src="${esc(q.audio_url)}" style="height:28px;vertical-align:middle"></audio>`:'';
+      return `<div style="margin-bottom:10px"><div style="font-weight:600;margin-bottom:6px">${qi+1}. ${esc(q.q||'')}${audio}</div>${opts}</div>`;
+    }).join('');
+    return `<div class="block">${head}${qs}<button class="btn sm" onclick="runQuiz('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
+  }
+  if(b.type==='exact_input'){
+    const items=(p.items||[]).map((it,ii)=>`<div style="margin-bottom:8px"><div>${esc(it.prompt||'')}</div><input id="ei-${id}-${ii}" placeholder="ответ" style="max-width:280px"></div>`).join('');
+    return `<div class="block">${head}${items}<button class="btn sm" onclick="runExact('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
+  }
+  if(b.type==='match'){
+    const rights=(p.pairs||[]).map(pr=>pr.right).slice().sort(()=>Math.random()-0.5);
+    const rows=(p.pairs||[]).map((pr,pi)=>`<div style="margin-bottom:6px"><span class="pill n">${esc(pr.left)}</span> → <select id="mt-${id}-${pi}"><option value="">—</option>${rights.map(r=>`<option value="${esc(r)}">${esc(r)}</option>`).join('')}</select></div>`).join('');
+    return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px">${esc(p.title)}</div>`:''}${rows}<button class="btn sm" onclick="runMatch('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
+  }
+  if(b.type==='task'){
+    return `<div class="block">${head}${p.title?`<b>${esc(p.title)}</b>`:''}<div style="margin-top:6px">${p.html||''}</div>
+      ${p.answer_kind==='audio'?'<div class="muted" style="margin:8px 0">🎤 Запись голоса добавим позже; пока отправь на проверку — учитель проверит.</div>':''}
+      <textarea id="tk-${id}" placeholder="Ответ или комментарий (необязательно)" style="margin-top:6px"></textarea>
+      <div style="margin-top:6px"><button class="btn sm" onclick="runTask('${id}')">Отправить на проверку</button><span id="res-${id}" class="muted"></span></div></div>`;
+  }
+  return `<div class="block">${head}<span class="muted">Блок не поддержан в прохождении.</span></div>`;
+}
+
+async function submitBlock(blockId, answers){ return rpc('classroom_submit_block', { p_block_id:blockId, p_enrollment_id:RUN.enr, p_answers:answers }); }
+
+async function runQuiz(id){
+  const ans={};
+  document.querySelectorAll(`input[name^="q-${id}-"]`).forEach(inp=>{ if(inp.checked){ const qi=inp.name.split('-').pop(); (ans[qi]=ans[qi]||[]).push(Number(inp.value)); } });
+  try{ const r=await submitBlock(id, ans); runResult(id, r.needs_review?'на проверке':('Результат: '+(r.score!=null?r.score+'%':'—')), !r.needs_review); }
+  catch(e){ runResult(id, e.message||String(e), false); }
+}
+async function runExact(id){
+  const ans={}; document.querySelectorAll(`input[id^="ei-${id}-"]`).forEach(inp=>{ ans[inp.id.split('-').pop()]=inp.value; });
+  try{ const r=await submitBlock(id, ans); runResult(id, r.needs_review?'на проверке':('Результат: '+(r.score!=null?r.score+'%':'—')), !r.needs_review); }
+  catch(e){ runResult(id, e.message||String(e), false); }
+}
+async function runMatch(id){
+  const ans={}; document.querySelectorAll(`select[id^="mt-${id}-"]`).forEach(sel=>{ ans[sel.id.split('-').pop()]=sel.value; });
+  try{ const r=await submitBlock(id, ans); runResult(id, r.needs_review?'на проверке':('Результат: '+(r.score!=null?r.score+'%':'—')), !r.needs_review); }
+  catch(e){ runResult(id, e.message||String(e), false); }
+}
+async function runTask(id){
+  const t=$('tk-'+id); const ans = (t && t.value) ? { text:t.value } : {};
+  try{ await submitBlock(id, ans); runResult(id, 'отправлено на проверку', true); }
+  catch(e){ runResult(id, e.message||String(e), false); }
+}
+async function runEmbed(id){
+  try{ await rpc('classroom_submit_embed', { p_block_id:id, p_enrollment_id:RUN.enr, p_score:null, p_payload:{} }); runResult(id, 'отмечено пройденным', true); }
+  catch(e){ runResult(id, e.message||String(e), false); }
 }
 
 // ============================================================
