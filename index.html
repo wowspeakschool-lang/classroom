@@ -73,6 +73,11 @@
   .mtile{ padding:12px 14px; border:1.5px solid var(--line); border-radius:10px; cursor:pointer; font-weight:600; text-align:center; background:#fff; user-select:none; transition:.12s; }
   .mtile:hover{ border-color:var(--brand); }
   .mtile.sel{ outline:2px solid var(--brand); outline-offset:1px; }
+  .wchip{ display:inline-block; padding:8px 14px; margin:4px; border:2px solid var(--line); border-radius:12px; background:#fff; cursor:pointer; font-weight:600; }
+  .wchip:hover{ border-color:var(--brand); }
+  .worder-ans{ min-height:46px; border:2px dashed #cbd5e1; border-radius:12px; padding:6px; margin-bottom:10px; }
+  .kid .wchip{ font-size:22px; padding:12px 18px; border-radius:16px; }
+  .kid .worder-ans{ min-height:60px; border-radius:16px; }
   /* ── Детская тема (только режим прохождения) ── */
   .kid{ font-size:19px; }
   .kid .kidhead{ background:linear-gradient(135deg,#8b5cf6,#ec4899); color:#fff; border-radius:24px; padding:22px 30px; margin-bottom:22px; font-size:28px; }
@@ -215,6 +220,7 @@
           <option value="exact_input">Короткий ответ</option>
           <option value="task">Задание (ручная проверка)</option>
           <option value="embed">Тренажёр (ссылка)</option>
+          <option value="order">Составь предложение</option>
         </select>
         <button class="btn sec sm" onclick="edAddBlock()">+ Блок</button>
         <button class="btn" onclick="edSave()">💾 Сохранить урок</button>
@@ -515,7 +521,7 @@ async function addNextLesson(){
 // ============================================================
 //  ПРЕДПРОСМОТР УРОКА (для учителя/методиста; тот же рендер станет прохождением)
 // ============================================================
-function blockTypeLabel(t){ return ({text:'Материал',video:'Видео',quiz:'Тест',match:'Соедини пары',exact_input:'Короткий ответ',task:'Задание',embed:'Тренажёр'})[t]||t; }
+function blockTypeLabel(t){ return ({text:'Материал',video:'Видео',quiz:'Тест',match:'Соедини пары',exact_input:'Короткий ответ',task:'Задание',embed:'Тренажёр',order:'Составь предложение'})[t]||t; }
 
 function previewQuestion(q,qi){
   const correct = new Set(q.correct||[]);
@@ -539,6 +545,7 @@ function previewBlock(b){
   if(b.type==='exact_input') return `<div class="block">${head}${(p.items||[]).map(it=>`<div style="margin-bottom:6px">${esc(it.prompt||'')} → <span class="pill g">${(it.accept||[]).map(esc).join(' / ')}</span></div>`).join('')}</div>`;
   if(b.type==='match') return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px">${esc(p.title)}</div>`:''}${(p.pairs||[]).map(pr=>`<div style="margin-bottom:6px"><span class="pill n">${esc(pr.left)}</span> → <span class="pill g">${esc(pr.right)}</span></div>`).join('')}</div>`;
   if(b.type==='quiz') return `<div class="block">${head}${(p.questions||[]).map((q,qi)=>previewQuestion(q,qi)).join('')}</div>`;
+  if(b.type==='order') return `<div class="block">${head}<div class="muted" style="margin-bottom:6px">Правильный порядок:</div>${(p.words||[]).map(w=>`<span class="pill g" style="margin:3px;display:inline-block">${esc(w)}</span>`).join(' ')}</div>`;
   if(b.type==='task') return `<div class="block">${head}${p.title?`<b>${esc(p.title)}</b>`:''}<div style="margin-top:6px">${p.html||''}</div>${Array.isArray(p.parts)?p.parts.map((pt,i)=>`<div style="margin-top:8px"><b>Часть ${i+1}${pt.title?' · '+esc(pt.title):''}</b><div>${pt.prompt_html||''}</div></div>`).join(''):''}<div class="muted" style="margin-top:8px">${p.answer_kind==='audio'?'🎤 Ответ ученика: запись голоса':'✍ Ответ ученика: текст/файл'} · ручная проверка</div></div>`;
   return `<div class="block">${head}<pre class="muted" style="white-space:pre-wrap">${esc(JSON.stringify(p,null,2))}</pre></div>`;
 }
@@ -564,6 +571,7 @@ async function openPreview(lessonId){
 // ============================================================
 let RUN = null;   // { lessonId, enr }
 let RUN_MATCH = {};   // { blockId: { map:{leftIdx:rightVal}, sel, rights:[...] } }
+let RUN_ORDER = {};   // { blockId: { bank:[...], answer:[...] } }
 const MATCH_COLORS = ['#7c3aed','#16a34a','#f59e0b','#0891b2','#db2777','#4f46e5','#ea580c','#0d9488'];
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
 
@@ -617,7 +625,7 @@ async function bootRunPage(params){
       <div class="kidhead" id="runPageHead">🚀 Урок</div>
       <div id="runBody"><div class="loading">Загружаю…</div></div>
     </div></div>`);
-  RUN = { lessonId, enr }; RUN_MATCH = {};
+  RUN = { lessonId, enr }; RUN_MATCH = {}; RUN_ORDER = {};
   try{
     const [ls, bl] = await Promise.all([
       sb.from('classroom_lessons').select('title').eq('id', lessonId).maybeSingle(),
@@ -626,8 +634,12 @@ async function bootRunPage(params){
     if(bl.error) throw bl.error;
     const blocks = bl.data||[];
     $('runPageHead').innerHTML = `🚀 <b>${esc((ls.data&&ls.data.title)||'Урок')}</b><div style="font-size:14px;opacity:.95;margin-top:2px">Поехали! Отвечай на задания и собирай звёздочки ⭐</div>`;
-    blocks.forEach(b=>{ if(b.type==='match'){ RUN_MATCH[b.id]={ map:{}, sel:null, rights:shuffle(((b.payload&&b.payload.pairs)||[]).map(x=>x.right)) }; } });
+    blocks.forEach(b=>{
+      if(b.type==='match'){ RUN_MATCH[b.id]={ map:{}, sel:null, rights:shuffle(((b.payload&&b.payload.pairs)||[]).map(x=>x.right)) }; }
+      if(b.type==='order'){ RUN_ORDER[b.id]={ bank:shuffle(((b.payload&&b.payload.words)||[])), answer:[] }; }
+    });
     $('runBody').innerHTML = blocks.length ? blocks.map(runBlock).join('') : '<div class="empty">В уроке нет блоков.</div>';
+    blocks.forEach(b=>{ if(b.type==='order') orderRender(b.id); });
   }catch(e){ $('runBody').innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
 }
 
@@ -679,7 +691,27 @@ function runBlock(b){
       <textarea id="tk-${id}" placeholder="Ответ или комментарий (необязательно)" style="margin-top:6px"></textarea>
       <div style="margin-top:6px"><button class="btn sm" onclick="runTask('${id}')">Отправить на проверку</button><span id="res-${id}" class="muted"></span></div></div>`;
   }
+  if(b.type==='order'){
+    return `<div class="block">${head}<div style="margin-bottom:8px">Нажимай слова по порядку, чтобы собрать предложение:</div>
+      <div class="worder-ans" id="oa-${id}"></div>
+      <div id="ob-${id}"></div>
+      <button class="btn sm" style="margin-top:8px" onclick="runOrder('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
+  }
   return `<div class="block">${head}<span class="muted">Блок не поддержан в прохождении.</span></div>`;
+}
+
+function orderRender(id){
+  const st=RUN_ORDER[id]; if(!st) return;
+  const oa=document.getElementById('oa-'+id), ob=document.getElementById('ob-'+id);
+  if(oa) oa.innerHTML = st.answer.length ? st.answer.map((w,ai)=>`<span class="wchip" onclick="orderPickAns('${id}',${ai})">${esc(w)}</span>`).join('') : '<span class="muted" style="padding:8px">нажимай слова снизу…</span>';
+  if(ob) ob.innerHTML = st.bank.map((w,bi)=>`<span class="wchip" onclick="orderPickBank('${id}',${bi})">${esc(w)}</span>`).join('');
+}
+function orderPickBank(id,bi){ const st=RUN_ORDER[id]; if(!st) return; const w=st.bank.splice(bi,1)[0]; st.answer.push(w); orderRender(id); }
+function orderPickAns(id,ai){ const st=RUN_ORDER[id]; if(!st) return; const w=st.answer.splice(ai,1)[0]; st.bank.push(w); orderRender(id); }
+async function runOrder(id){
+  const st=RUN_ORDER[id]||{answer:[]};
+  try{ const r=await submitBlock(id, {order: st.answer}); runResult(id, scoreMsg(r), true); if(!r.needs_review && r.score===100) celebrate(); }
+  catch(e){ runResult(id, e.message||String(e), false); }
 }
 
 async function submitBlock(blockId, answers){ return rpc('classroom_submit_block', { p_block_id:blockId, p_enrollment_id:RUN.enr, p_answers:answers }); }
@@ -970,6 +1002,9 @@ function edBlockEditor(b,i){
         <input class="grow" value="${esc((it.accept||[]).join(', '))}" oninput="edAccept(${i},${ii},this.value)" placeholder="ответы через запятую">
         <button class="btn sec sm" onclick="edArrDel(${i},'items',${ii})">✕</button></div>`).join('')
       + `<button class="btn sec sm" onclick="edArrAdd(${i},'items',{prompt:'',accept:[]})">+ пункт</button>`;
+  } else if(b.type==='order'){
+    body=`<input value="${esc(p.sentence||'')}" oninput="edOrder(${i}, this.value)" placeholder="Предложение целиком (слова разделяй пробелом)">
+      <div class="muted" style="font-size:12px;margin-top:4px">Слова: ${(p.words||[]).map(esc).join(' · ')||'—'}</div>`;
   } else if(b.type==='match'){
     const pairs=(p.pairs||[]);
     body=`<input value="${esc(p.title||'')}" oninput="EDIT.blocks[${i}].payload.title=this.value" placeholder="Заголовок (напр. «Соедини…»)" style="margin-bottom:8px">`
@@ -1003,13 +1038,14 @@ function edQuizQuestion(i,qi,q){
   </div>`;
 }
 function edAccept(i,ii,val){ EDIT.blocks[i].payload.items[ii].accept = val.split(',').map(s=>s.trim()).filter(Boolean); }
+function edOrder(i,val){ EDIT.blocks[i].payload.sentence=val; EDIT.blocks[i].payload.words=val.trim().split(/\s+/).filter(Boolean); }
 function edArrAdd(i,key,obj){ (EDIT.blocks[i].payload[key]=EDIT.blocks[i].payload[key]||[]).push(obj); edRenderBlocks(); }
 function edArrDel(i,key,idx){ EDIT.blocks[i].payload[key].splice(idx,1); edRenderBlocks(); }
 function edMove(i,d){ const j=i+d; if(j<0||j>=EDIT.blocks.length) return; const t=EDIT.blocks[i]; EDIT.blocks[i]=EDIT.blocks[j]; EDIT.blocks[j]=t; edRenderBlocks(); }
 function edDel(i){ if(!confirm('Удалить блок?')) return; EDIT.blocks.splice(i,1); edRenderBlocks(); }
 function edAddBlock(){
   const t=$('edNewType').value;
-  const def={ text:{html:''}, quiz:{needs_review:false,questions:[]}, match:{needs_review:false,title:'',pairs:[]}, exact_input:{items:[]}, task:{needs_review:true,title:'',html:''}, embed:{url:'',needs_review:false} }[t]||{};
+  const def={ text:{html:''}, quiz:{needs_review:false,questions:[]}, match:{needs_review:false,title:'',pairs:[]}, exact_input:{items:[]}, task:{needs_review:true,title:'',html:''}, embed:{url:'',needs_review:false}, order:{sentence:'',words:[]} }[t]||{};
   EDIT.blocks.push({ type:t, payload:JSON.parse(JSON.stringify(def)) }); edRenderBlocks();
 }
 function edAddQuestion(i){ (EDIT.blocks[i].payload.questions=EDIT.blocks[i].payload.questions||[]).push({q:'',type:'single',options:[],correct:[]}); edRenderBlocks(); }
