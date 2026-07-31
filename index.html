@@ -527,7 +527,8 @@ function previewQuestion(q,qi){
     return `<div class="chk" style="${isC?'border-color:#16a34a;background:#f0fdf4':''}">${label}${isC?' <span class="pill g" style="margin-left:auto">верный</span>':''}</div>`;
   }).join('');
   const audio = q.audio_url ? ` <audio controls src="${esc(q.audio_url)}" style="height:28px;vertical-align:middle"></audio>` : '';
-  return `<div style="margin-bottom:12px"><div style="font-weight:600;margin-bottom:6px">${qi+1}. ${esc(q.q||'')}${audio}</div>${opts}</div>`;
+  const qimg = q.image ? `<div style="text-align:center;margin:6px 0"><img src="${esc(q.image)}" style="max-height:140px;border-radius:10px"></div>` : '';
+  return `<div style="margin-bottom:12px"><div style="font-weight:600;margin-bottom:6px">${qi+1}. ${esc(q.q||'')}${audio}</div>${qimg}${opts}</div>`;
 }
 
 function previewBlock(b){
@@ -654,7 +655,8 @@ function runBlock(b){
         return `<label class="chk" style="justify-content:center">${label}<input type="${inp}" name="q-${id}-${qi}" value="${oi}" style="margin-left:12px"></label>`;
       }).join('');
       const audio=q.audio_url?` <audio controls src="${esc(q.audio_url)}" style="height:28px;vertical-align:middle"></audio>`:'';
-      return `<div style="margin-bottom:10px"><div style="font-weight:600;margin-bottom:6px">${qi+1}. ${esc(q.q||'')}${audio}</div>${opts}</div>`;
+      const qimg=q.image?`<div style="text-align:center;margin:6px 0"><img src="${esc(q.image)}" style="max-height:220px;max-width:80%;border-radius:12px"></div>`:'';
+      return `<div style="margin-bottom:10px"><div style="font-weight:600;margin-bottom:6px">${qi+1}. ${esc(q.q||'')}${audio}</div>${qimg}${opts}</div>`;
     }).join('');
     return `<div class="block">${head}${qs}<button class="btn sm" onclick="runQuiz('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
   }
