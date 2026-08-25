@@ -193,6 +193,7 @@
         <div class="row" style="align-items:center">
           <input type="file" id="mediaFile" accept="image/*,audio/*" class="grow">
           <button class="btn" id="mediaBtn" onclick="uploadMedia()">Загрузить</button>
+          <button class="btn sec" onclick="openRecorder(mediaAddUrl)">🎤 Записать голос</button>
         </div>
         <div class="err" id="mediaErr"></div>
       </div>
@@ -204,7 +205,13 @@
       <h2 class="section-title">Библиотека — редактор уроков</h2>
       <p class="section-sub">Курс → юнит → урок → блоки. Картинки и аудио грузятся прямо в блок.</p>
       <div class="card" style="padding:16px; margin-bottom:14px">
-        <div class="row">
+        <div class="row" style="align-items:center; margin-bottom:10px">
+          <button class="btn sec sm" id="edViewTreeBtn" onclick="edSetView('tree')">📁 Папки</button>
+          <button class="btn sec sm" id="edViewListBtn" onclick="edSetView('list')">▾ Списки</button>
+          <span class="muted" style="font-size:12px">Папки — чтобы осмотреться, списки — когда знаешь, куда идёшь</span>
+        </div>
+        <div id="edTree" style="margin-bottom:12px"></div>
+        <div class="row" id="edSelects">
           <div class="grow field"><label>Курс</label><div class="row"><select id="edCourse" class="grow" onchange="edSelCourse()"></select><button class="btn sec sm" onclick="edNewCourse()">+</button></div></div>
           <div class="grow field"><label>Юнит</label><div class="row"><select id="edUnit" class="grow" onchange="edSelUnit()"></select><button class="btn sec sm" onclick="edNewUnit()">+</button></div></div>
           <div class="grow field"><label>Урок</label><div class="row"><select id="edLesson" class="grow" onchange="edSelLesson()"></select><button class="btn sec sm" onclick="edNewLesson()">+</button></div></div>
@@ -223,6 +230,7 @@
           <option value="order">Составь предложение</option>
         </select>
         <button class="btn sec sm" onclick="edAddBlock()">+ Блок</button>
+        <button class="btn sec sm" onclick="edPreview()">👁 Предпросмотр</button>
         <button class="btn" onclick="edSave()">💾 Сохранить урок</button>
         <span id="edSaveRes" class="muted"></span>
       </div>
@@ -950,6 +958,19 @@ function pickAndUpload(accept, cb){
   inp.onchange=async()=>{ const f=inp.files[0]; if(!f) return; toast('Загрузка…'); try{ const url=await uploadToBucket(f); cb(url); toast('Загружено ✅'); }catch(e){ toast(e.message||String(e)); } };
   inp.click();
 }
+// Добавляет готовую ссылку в список медиа — используется после записи голоса
+function mediaAddUrl(url){
+  const isAudio = /\.(webm|ogg|mp3|wav|m4a)(\?|$)/i.test(url);
+  const preview = isAudio ? `<audio controls src="${esc(url)}" style="height:38px"></audio>`
+                          : `<img src="${esc(url)}" style="height:64px;border-radius:8px">`;
+  $('mediaList').insertAdjacentHTML('afterbegin',
+    `<div class="card" style="padding:12px;display:flex;gap:12px;align-items:center;margin-bottom:10px">
+       ${preview}
+       <input value="${esc(url)}" readonly style="flex:1" onclick="this.select()">
+       <button class="btn sec sm" onclick="navigator.clipboard.writeText('${esc(url)}').then(()=>toast('Ссылка скопирована'))">Копировать</button>
+     </div>`);
+}
+
 async function uploadMedia(){
   const f = $('mediaFile').files[0];
   $('mediaErr').textContent='';
@@ -971,14 +992,213 @@ async function uploadMedia(){
 }
 
 // ============================================================
+//  ЗАПИСЬ ГОЛОСА (вместо загрузки готового аудио)
+// ============================================================
+let REC = { rec:null, chunks:[], stream:null, url:null, blob:null, timer:null, sec:0 };
+
+function recCleanup(){
+  try{ REC.rec && REC.rec.state !== 'inactive' && REC.rec.stop(); }catch(e){}
+  try{ (REC.stream ? REC.stream.getTracks() : []).forEach(t=>t.stop()); }catch(e){}
+  if(REC.timer) clearInterval(REC.timer);
+  if(REC.url) URL.revokeObjectURL(REC.url);
+  REC = { rec:null, chunks:[], stream:null, url:null, blob:null, timer:null, sec:0 };
+}
+
+// cb получает ссылку на загруженный файл
+function openRecorder(cb){
+  REC._cb = cb;
+  openModal(`<button class="close" onclick="closeRecorder()">×</button>
+    <h2>🎤 Запись голоса</h2>
+    <p class="muted" style="margin:0 0 14px">Браузер спросит доступ к микрофону. Запись сохранится в ту же папку, что и загруженные файлы.</p>
+    <div id="recBody" style="text-align:center; padding:10px 0">
+      <div id="recTime" style="font-size:34px; font-weight:700; margin-bottom:14px">00:00</div>
+      <button class="btn" id="recBtn" onclick="recStart()">● Начать запись</button>
+      <div id="recPlayer" style="margin-top:14px"></div>
+    </div>`);
+}
+function closeRecorder(){ recCleanup(); closeModal(); }
+
+async function recStart(){
+  if(!navigator.mediaDevices || !window.MediaRecorder){
+    toast('Браузер не умеет записывать звук'); return;
+  }
+  try{
+    REC.stream = await navigator.mediaDevices.getUserMedia({ audio:true });
+  }catch(e){
+    toast('Нет доступа к микрофону. Разреши его в настройках браузера'); return;
+  }
+  REC.chunks = [];
+  REC.rec = new MediaRecorder(REC.stream);
+  REC.rec.ondataavailable = e => { if(e.data && e.data.size) REC.chunks.push(e.data); };
+  REC.rec.onstop = () => {
+    REC.blob = new Blob(REC.chunks, { type: REC.rec.mimeType || 'audio/webm' });
+    REC.url = URL.createObjectURL(REC.blob);
+    const p = $('recPlayer');
+    if(p) p.innerHTML = `<audio controls src="${REC.url}" style="width:100%"></audio>
+      <div class="row" style="margin-top:10px; justify-content:center">
+        <button class="btn sec sm" onclick="recStart()">↻ Перезаписать</button>
+        <button class="btn sm" onclick="recUse()">✔ Использовать</button>
+      </div>`;
+  };
+  REC.rec.start();
+  REC.sec = 0;
+  const t = $('recTime'); if(t) t.textContent = '00:00';
+  if(REC.timer) clearInterval(REC.timer);
+  REC.timer = setInterval(()=>{
+    REC.sec++;
+    const m = String(Math.floor(REC.sec/60)).padStart(2,'0');
+    const s = String(REC.sec%60).padStart(2,'0');
+    const el = $('recTime'); if(el) el.textContent = m+':'+s;
+  }, 1000);
+  const b = $('recBtn'); if(b){ b.textContent='■ Остановить'; b.onclick = recStop; }
+  const p = $('recPlayer'); if(p) p.innerHTML='';
+}
+
+function recStop(){
+  try{ REC.rec && REC.rec.stop(); }catch(e){}
+  try{ (REC.stream?REC.stream.getTracks():[]).forEach(t=>t.stop()); }catch(e){}
+  if(REC.timer) clearInterval(REC.timer);
+  const b = $('recBtn'); if(b){ b.textContent='● Записать заново'; b.onclick = recStart; }
+}
+
+async function recUse(){
+  if(!REC.blob){ toast('Сначала запиши'); return; }
+  toast('Загружаю…');
+  try{
+    const ext = (REC.blob.type||'').includes('ogg') ? 'ogg' : 'webm';
+    const file = new File([REC.blob], 'voice_' + Date.now() + '.' + ext, { type: REC.blob.type });
+    const url = await uploadToBucket(file);
+    const cb = REC._cb;
+    closeRecorder();
+    if(cb) cb(url);
+    toast('Готово ✅');
+  }catch(e){ toast(e.message || String(e)); }
+}
+
+// ============================================================
+//  ВСТАВКА КАРТИНКИ ИЗ БУФЕРА (Ctrl+V)
+// ============================================================
+async function edPasteImage(ev){
+  // Работает только во вкладке «Библиотека» и только если открыт урок
+  const lib = $('tab-library');
+  if(!lib || lib.classList.contains('hidden')) return;
+  const items = (ev.clipboardData && ev.clipboardData.items) || [];
+  let file = null;
+  for(const it of items){ if(it.type && it.type.startsWith('image/')){ file = it.getAsFile(); break; } }
+  if(!file) return;                      // обычный текст вставляем как обычно
+  ev.preventDefault();
+
+  const idx = EDIT.lastTextIdx;
+  if(idx === null || idx === undefined || !EDIT.blocks[idx]){
+    toast('Поставь курсор в текстовый блок — туда вставится картинка');
+    return;
+  }
+  toast('Загружаю картинку…');
+  try{
+    const named = new File([file], 'paste_' + Date.now() + '.png', { type:file.type });
+    const url = await uploadToBucket(named);
+    const p = EDIT.blocks[idx].payload || (EDIT.blocks[idx].payload = {});
+    p.html = (p.html || '') + `\n<img src="${url}" style="max-width:100%">`;
+    edRenderBlocks();
+    toast('Картинка вставлена ✅');
+  }catch(e){ toast(e.message || String(e)); }
+}
+document.addEventListener('paste', edPasteImage);
+
+// ============================================================
 //  РЕДАКТОР УРОКОВ (методист) — прямой CRUD по RLS + загрузка в bucket
 // ============================================================
-let EDIT = { courseId:null, unitId:null, lessonId:null, blocks:[] };
+let EDIT = { courseId:null, unitId:null, lessonId:null, blocks:[], tree:null, open:{}, view:'tree', lastTextIdx:null };
 
 async function edInit(){
   const { data } = await sb.from('classroom_courses').select('id,title').order('sort_order');
   $('edCourse').innerHTML = '<option value="">— курс —</option>' + (data||[]).map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');
   $('edUnit').innerHTML=''; $('edLesson').innerHTML=''; $('edBlocks').innerHTML=''; $('edLessonMeta').innerHTML=''; $('edToolbar').classList.add('hidden');
+  await edLoadTree();
+  edSetView(EDIT.view || 'tree');
+}
+
+// ---------- Дерево папок: курс → юнит → урок ----------
+async function edLoadTree(){
+  const box = $('edTree');
+  if(!box) return;
+  box.innerHTML = '<div class="loading">Загружаю…</div>';
+  try{
+    const [{ data:courses }, { data:units }, { data:lessons }] = await Promise.all([
+      sb.from('classroom_courses').select('id,title').order('sort_order'),
+      sb.from('classroom_units').select('id,course_id,title,sort_order').order('sort_order'),
+      sb.from('classroom_lessons').select('id,unit_id,title,is_published,sort_order').order('sort_order'),
+    ]);
+    EDIT.tree = { courses:courses||[], units:units||[], lessons:lessons||[] };
+    edRenderTree();
+  }catch(e){ box.innerHTML = '<div class="empty">Не удалось загрузить: '+esc(e.message||String(e))+'</div>'; }
+}
+
+function edRenderTree(){
+  const box = $('edTree');
+  const t = EDIT.tree;
+  if(!box || !t) return;
+  if(!t.courses.length){ box.innerHTML='<div class="empty">Пока нет ни одного курса. Создай через «+» ниже.</div>'; return; }
+  EDIT.open = EDIT.open || {};
+
+  box.innerHTML = t.courses.map(c=>{
+    const units = t.units.filter(u=>u.course_id===c.id);
+    const lessonsN = units.reduce((s,u)=> s + t.lessons.filter(l=>l.unit_id===u.id).length, 0);
+    const openC = EDIT.open['c'+c.id];
+    return `<div class="card" style="padding:0; margin-bottom:8px; overflow:hidden">
+      <div onclick="edToggle('c${c.id}')" style="padding:12px 14px; cursor:pointer; display:flex; align-items:center; gap:8px; background:#faf9ff">
+        <span style="font-size:15px">${openC?'📂':'📁'}</span>
+        <b>${esc(c.title)}</b>
+        <span class="muted" style="font-size:12px; margin-left:auto">${units.length} юнит. · ${lessonsN} урок.</span>
+      </div>
+      ${openC ? `<div style="padding:0 14px 12px 30px">${
+        units.length ? units.map(u=>{
+          const ls = t.lessons.filter(l=>l.unit_id===u.id);
+          const openU = EDIT.open['u'+u.id];
+          return `<div style="margin-top:6px">
+            <div onclick="edToggle('u${u.id}')" style="padding:7px 10px; cursor:pointer; display:flex; align-items:center; gap:8px; border-radius:8px; background:#fff; border:1px solid var(--line)">
+              <span>${openU?'📂':'📁'}</span><span>${esc(u.title)}</span>
+              <span class="muted" style="font-size:12px; margin-left:auto">${ls.length}</span>
+            </div>
+            ${openU ? `<div style="padding:4px 0 0 26px">${
+              ls.length ? ls.map(l=>`
+                <div onclick="edOpenFromTree('${c.id}','${u.id}','${l.id}')"
+                     style="padding:6px 9px; cursor:pointer; border-radius:7px; display:flex; align-items:center; gap:7px;
+                            background:${EDIT.lessonId===l.id?'#eef2ff':'transparent'}">
+                  <span>📄</span><span>${esc(l.title)}</span>
+                  ${l.is_published?'':'<span class="muted" style="font-size:11px">черновик</span>'}
+                </div>`).join('')
+              : '<div class="muted" style="font-size:12px; padding:4px 0">Пока нет уроков</div>'
+            }</div>` : ''}
+          </div>`;
+        }).join('')
+        : '<div class="muted" style="font-size:12px">Пока нет юнитов</div>'
+      }</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function edToggle(key){ EDIT.open[key] = !EDIT.open[key]; edRenderTree(); }
+
+function edSetView(v){
+  EDIT.view = v;
+  const tree=$('edTree'), sel=$('edSelects');
+  if(tree) tree.style.display = v==='tree' ? '' : 'none';
+  if(sel)  sel.style.display  = v==='list' ? '' : 'none';
+  const bt=$('edViewTreeBtn'), bl=$('edViewListBtn');
+  if(bt) bt.style.opacity = v==='tree' ? '1' : '.55';
+  if(bl) bl.style.opacity = v==='list' ? '1' : '.55';
+}
+
+// Клик по уроку в дереве — синхронизируем выпадающие списки и открываем урок
+async function edOpenFromTree(courseId, unitId, lessonId){
+  $('edCourse').value = courseId;
+  await edSelCourse();
+  $('edUnit').value = unitId;
+  await edSelUnit();
+  $('edLesson').value = lessonId;
+  await edSelLesson();
+  edRenderTree();
 }
 async function edNewCourse(){
   const title=prompt('Название курса:'); if(!title) return;
@@ -1000,7 +1220,7 @@ async function edNewUnit(){
   const { data:cnt } = await sb.from('classroom_units').select('id').eq('course_id',EDIT.courseId);
   const { data, error } = await sb.from('classroom_units').insert({ course_id:EDIT.courseId, title, sort_order:(cnt||[]).length }).select().single();
   if(error){ toast(error.message); return; }
-  await edSelCourse(); $('edUnit').value=data.id; edSelUnit();
+  await edSelCourse(); $('edUnit').value=data.id; edSelUnit(); EDIT.open['c'+EDIT.courseId]=true; edLoadTree();
 }
 async function edSelUnit(){
   EDIT.unitId=$('edUnit').value||null; EDIT.lessonId=null;
@@ -1015,8 +1235,16 @@ async function edNewLesson(){
   const { data:cnt } = await sb.from('classroom_lessons').select('id').eq('unit_id',EDIT.unitId);
   const { data, error } = await sb.from('classroom_lessons').insert({ unit_id:EDIT.unitId, title, sort_order:(cnt||[]).length, is_published:true }).select().single();
   if(error){ toast(error.message); return; }
-  await edSelUnit(); $('edLesson').value=data.id; edSelLesson();
+  await edSelUnit(); $('edLesson').value=data.id; edSelLesson(); EDIT.open['c'+EDIT.courseId]=true; EDIT.open['u'+EDIT.unitId]=true; edLoadTree();
 }
+function edPreview(){
+  if(!EDIT.lessonId){ toast('Сначала выбери урок'); return; }
+  // Предпросмотр читает блоки из базы, поэтому несохранённые правки в нём не видны
+  const unsaved = JSON.stringify(EDIT.blocks) !== JSON.stringify(EDIT.savedBlocks||[]);
+  if(unsaved && !confirm('Есть несохранённые изменения — в предпросмотре их не будет.\n\nОткрыть предпросмотр сохранённой версии?')) return;
+  openPreview(EDIT.lessonId);
+}
+
 async function edSelLesson(){
   EDIT.lessonId=$('edLesson').value||null;
   if(!EDIT.lessonId){ $('edBlocks').innerHTML=''; $('edLessonMeta').innerHTML=''; $('edToolbar').classList.add('hidden'); return; }
@@ -1027,6 +1255,7 @@ async function edSelLesson(){
   </div>`;
   const { data:blocks } = await sb.from('classroom_blocks').select('id,type,payload,sort_order').eq('lesson_id',EDIT.lessonId).order('sort_order');
   EDIT.blocks = (blocks||[]).map(b=>({ type:b.type, payload:b.payload||{} }));
+  EDIT.savedBlocks = JSON.parse(JSON.stringify(EDIT.blocks));
   $('edToolbar').classList.remove('hidden');
   edRenderBlocks();
 }
@@ -1040,8 +1269,11 @@ function edBlockEditor(b,i){
   const p=b.payload||{};
   let body='';
   if(b.type==='text'){
-    body=`<textarea rows="4" oninput="EDIT.blocks[${i}].payload.html=this.value" placeholder="Текст (можно HTML)">${esc(p.html||'')}</textarea>
-      <div style="margin-top:6px"><button class="btn sec sm" onclick="edInsertImage(${i})">🖼 Вставить картинку</button></div>`;
+    body=`<textarea rows="4" onfocus="EDIT.lastTextIdx=${i}" oninput="EDIT.blocks[${i}].payload.html=this.value" placeholder="Текст (можно HTML). Картинку можно вставить прямо сюда: Ctrl+V">${esc(p.html||'')}</textarea>
+      <div style="margin-top:6px; display:flex; gap:8px; align-items:center; flex-wrap:wrap">
+        <button class="btn sec sm" onclick="edInsertImage(${i})">🖼 Вставить картинку</button>
+        <span class="muted" style="font-size:12px">или скопируй картинку и нажми Ctrl+V прямо в поле</span>
+      </div>`;
   } else if(b.type==='embed'){
     body=`<input value="${esc(p.url||'')}" oninput="EDIT.blocks[${i}].payload.url=this.value" placeholder="https://train.wowteach.ru/...">`;
   } else if(b.type==='task'){
@@ -1088,7 +1320,7 @@ function edQuizQuestion(i,qi,q){
   }).join('');
   return `<div class="block" style="background:#faf9ff; box-shadow:none; border:1px solid var(--line)">
     <input class="grow" value="${esc(q.q||'')}" oninput="EDIT.blocks[${i}].payload.questions[${qi}].q=this.value" placeholder="Текст вопроса">
-    <div class="row" style="margin:6px 0; align-items:center"><input class="grow" value="${esc(q.audio_url||'')}" oninput="EDIT.blocks[${i}].payload.questions[${qi}].audio_url=this.value" placeholder="ссылка на аудио (необязательно)"><button class="btn sec sm" onclick="edQAudio(${i},${qi})">🎵 Загрузить</button></div>
+    <div class="row" style="margin:6px 0; align-items:center"><input class="grow" value="${esc(q.audio_url||'')}" oninput="EDIT.blocks[${i}].payload.questions[${qi}].audio_url=this.value" placeholder="ссылка на аудио (необязательно)"><button class="btn sec sm" onclick="edQAudio(${i},${qi})">🎵 Файл</button><button class="btn sec sm" onclick="edQAudioRec(${i},${qi})">🎤 Записать</button></div>
     ${opts}
     <div style="margin-top:4px"><button class="btn sec sm" onclick="edAddOption(${i},${qi})">+ вариант</button> <button class="btn sec sm" onclick="edDelQuestion(${i},${qi})">удалить вопрос</button></div>
   </div>`;
@@ -1113,6 +1345,7 @@ function edCorrect(i,qi,oi,checked){ const q=EDIT.blocks[i].payload.questions[qi
 function edInsertImage(i){ pickAndUpload('image/*', url=>{ EDIT.blocks[i].payload.html=(EDIT.blocks[i].payload.html||'')+`\n<div style="text-align:center"><img src="${url}" style="max-width:60%"/></div>`; edRenderBlocks(); }); }
 function edOptImage(i,qi,oi){ pickAndUpload('image/*', url=>{ const o=EDIT.blocks[i].payload.questions[qi].options[oi]; o.image=url; delete o.text; edRenderBlocks(); }); }
 function edQAudio(i,qi){ pickAndUpload('audio/*', url=>{ EDIT.blocks[i].payload.questions[qi].audio_url=url; edRenderBlocks(); }); }
+function edQAudioRec(i,qi){ openRecorder(url=>{ EDIT.blocks[i].payload.questions[qi].audio_url=url; edRenderBlocks(); }); }
 
 async function edSave(){
   if(!EDIT.lessonId){ toast('Выбери урок'); return; }
