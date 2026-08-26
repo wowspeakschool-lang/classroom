@@ -57,6 +57,9 @@
   .modal .close{ float:right; background:none; border:none; font-size:22px; color:#94a3b8; }
   .chk{ display:flex; align-items:center; gap:9px; padding:8px 10px; border:1px solid var(--line); border-radius:9px; margin-bottom:6px; }
   .chk input{ width:auto; }
+  .treerow{ padding:7px 8px; border-radius:8px; cursor:pointer; font-size:14px; user-select:none; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .treerow:hover{ background:#f3f0ff; }
+  .treerow.lesson.active{ background:#ede9fe; color:var(--brand-d); font-weight:600; }
   .block{ border:1px solid var(--line); border-radius:11px; padding:14px; margin-bottom:12px; }
   .block .bt{ font-size:12px; font-weight:700; color:var(--brand-d); text-transform:uppercase; letter-spacing:.4px; margin-bottom:8px; }
   .toast{ position:fixed; bottom:22px; left:50%; transform:translateX(-50%); background:#111827; color:#fff; padding:11px 18px; border-radius:10px; font-size:14px; z-index:80; opacity:0; transition:opacity .2s; }
@@ -222,31 +225,14 @@
     <section id="tab-library" class="hidden">
       <h2 class="section-title">Библиотека — редактор уроков</h2>
       <p class="section-sub">Курс → юнит → урок → блоки. Картинки и аудио грузятся прямо в блок.</p>
-      <div class="card" style="padding:16px; margin-bottom:14px">
-        <div class="row">
-          <div class="grow field"><label>Курс</label><div class="row"><select id="edCourse" class="grow" onchange="edSelCourse()"></select><button class="btn sec sm" onclick="edNewCourse()">+</button></div></div>
-          <div class="grow field"><label>Юнит</label><div class="row"><select id="edUnit" class="grow" onchange="edSelUnit()"></select><button class="btn sec sm" onclick="edNewUnit()">+</button></div></div>
-          <div class="grow field"><label>Урок</label><div class="row"><select id="edLesson" class="grow" onchange="edSelLesson()"></select><button class="btn sec sm" onclick="edNewLesson()">+</button></div></div>
+      <div style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap">
+        <div class="card" style="padding:12px; width:320px; flex:0 0 320px; max-width:100%; max-height:72vh; overflow:auto">
+          <div class="row" style="align-items:center; margin-bottom:8px"><b style="flex:1">Курсы и уроки</b><button class="btn sec sm" onclick="edNewCourse()">+ курс</button></div>
+          <div id="edTree"><div class="loading">Загружаю…</div></div>
         </div>
-        <div id="edLessonMeta"></div>
-      </div>
-      <div id="edBlocks"></div>
-      <div id="edToolbar" class="hidden" style="margin-top:12px; display:flex; gap:8px; align-items:center; flex-wrap:wrap">
-        <select id="edNewType" style="max-width:260px">
-          <option value="text">Материал (текст/картинка)</option>
-          <option value="quiz">Тест</option>
-          <option value="match">Соедини пары</option>
-          <option value="exact_input">Короткий ответ</option>
-          <option value="task">Задание (ручная проверка)</option>
-          <option value="embed">Тренажёр (ссылка)</option>
-          <option value="order">Составь предложение</option>
-          <option value="sort">Распредели по группам</option>
-          <option value="flashcards">Карточки (заучивание)</option>
-          <option value="video">Видео</option>
-        </select>
-        <button class="btn sec sm" onclick="edAddBlock()">+ Блок</button>
-        <button class="btn" onclick="edSave()">💾 Сохранить урок</button>
-        <span id="edSaveRes" class="muted"></span>
+        <div class="grow" id="edRight" style="min-width:300px">
+          <div class="empty">Выбери урок в дереве слева — откроется редактор. 📄</div>
+        </div>
       </div>
     </section>
     </div><!-- /mainViews -->
@@ -1094,61 +1080,129 @@ async function uploadMedia(){
 //  РЕДАКТОР УРОКОВ (методист) — прямой CRUD по RLS + загрузка в bucket
 // ============================================================
 let EDIT = { courseId:null, unitId:null, lessonId:null, blocks:[] };
+let EDTREE = [];          // [{id,title,units:[{id,title,lessons:[{id,title,is_published}]}]}]
+let EDOPEN = new Set();   // раскрытые папки: 'c:'+courseId / 'u:'+unitId
+
+function edTypeSelectHtml(){
+  return `<select id="edNewType" style="max-width:260px">
+      <option value="text">Материал (текст/картинка)</option>
+      <option value="quiz">Тест</option>
+      <option value="match">Соедини пары</option>
+      <option value="exact_input">Короткий ответ</option>
+      <option value="task">Задание (ручная проверка)</option>
+      <option value="embed">Тренажёр (ссылка)</option>
+      <option value="order">Составь предложение</option>
+      <option value="sort">Распредели по группам</option>
+      <option value="flashcards">Карточки (заучивание)</option>
+      <option value="video">Видео</option>
+    </select>`;
+}
 
 async function edInit(){
-  const { data } = await sb.from('classroom_courses').select('id,title').order('sort_order');
-  $('edCourse').innerHTML = '<option value="">— курс —</option>' + (data||[]).map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');
-  $('edUnit').innerHTML=''; $('edLesson').innerHTML=''; $('edBlocks').innerHTML=''; $('edLessonMeta').innerHTML=''; $('edToolbar').classList.add('hidden');
+  const host=$('edTree'); if(host) host.innerHTML='<div class="loading">Загружаю…</div>';
+  const { data:courses } = await sb.from('classroom_courses').select('id,title').order('sort_order');
+  EDTREE = [];
+  for(const c of (courses||[])){
+    const { data:units } = await sb.from('classroom_units').select('id,title').eq('course_id',c.id).order('sort_order');
+    const us=[];
+    for(const u of (units||[])){
+      const { data:ls } = await sb.from('classroom_lessons').select('id,title,is_published').eq('unit_id',u.id).order('sort_order');
+      us.push({ id:u.id, title:u.title, lessons:(ls||[]) });
+    }
+    EDTREE.push({ id:c.id, title:c.title, units:us });
+  }
+  edRenderTree();
 }
+
+function edToggle(key){ if(EDOPEN.has(key)) EDOPEN.delete(key); else EDOPEN.add(key); edRenderTree(); }
+
+function edRenderTree(){
+  const host=$('edTree'); if(!host) return;
+  if(!EDTREE.length){ host.innerHTML='<div class="muted">Пока нет курсов. Нажми «+ курс».</div>'; return; }
+  host.innerHTML = EDTREE.map(c=>{
+    const co = EDOPEN.has('c:'+c.id);
+    let inner='';
+    if(co){
+      inner = c.units.map(u=>{
+        const uo = EDOPEN.has('u:'+u.id);
+        let lin='';
+        if(uo){
+          lin = (u.lessons.length ? u.lessons.map(l=>`<div class="treerow lesson ${EDIT.lessonId===l.id?'active':''}" style="padding-left:40px" onclick="edOpenLesson('${l.id}','${u.id}','${c.id}')">📄 ${esc(l.title)}${l.is_published?'':' <span class="muted">(черновик)</span>'}</div>`).join('')
+            : '<div class="muted" style="padding-left:40px;font-size:13px">нет уроков</div>')
+            + `<div style="padding:4px 0 6px 40px"><button class="btn sec sm" onclick="event.stopPropagation();edNewLesson('${u.id}','${c.id}')">+ урок</button></div>`;
+        }
+        return `<div class="treerow" style="padding-left:22px" onclick="edToggle('u:${u.id}')">${uo?'▾':'▸'} 📁 ${esc(u.title)}</div>${lin}`;
+      }).join('')
+      + `<div style="padding:4px 0 8px 22px"><button class="btn sec sm" onclick="event.stopPropagation();edNewUnit('${c.id}')">+ юнит</button></div>`;
+    }
+    return `<div class="treerow course" onclick="edToggle('c:${c.id}')">${co?'▾':'▸'} 📚 <b>${esc(c.title)}</b></div>${inner}`;
+  }).join('');
+}
+
 async function edNewCourse(){
   const title=prompt('Название курса:'); if(!title) return;
   const slug=(prompt('slug (латиницей, уникальный) — или пусто:','')||'').trim()||null;
   const { data, error } = await sb.from('classroom_courses').insert({ title, slug, is_published:true }).select().single();
   if(error){ toast(error.message); return; }
-  await edInit(); $('edCourse').value=data.id; edSelCourse();
+  await edInit(); EDOPEN.add('c:'+data.id); edRenderTree();
 }
-async function edSelCourse(){
-  EDIT.courseId=$('edCourse').value||null; EDIT.unitId=null; EDIT.lessonId=null;
-  $('edLesson').innerHTML=''; $('edBlocks').innerHTML=''; $('edLessonMeta').innerHTML=''; $('edToolbar').classList.add('hidden');
-  if(!EDIT.courseId){ $('edUnit').innerHTML=''; return; }
-  const { data } = await sb.from('classroom_units').select('id,title').eq('course_id',EDIT.courseId).order('sort_order');
-  $('edUnit').innerHTML='<option value="">— юнит —</option>'+(data||[]).map(u=>`<option value="${u.id}">${esc(u.title)}</option>`).join('');
-}
-async function edNewUnit(){
-  if(!EDIT.courseId){ toast('Сначала выбери курс'); return; }
+async function edNewUnit(courseId){
+  if(!courseId){ toast('Сначала выбери курс'); return; }
   const title=prompt('Название юнита:'); if(!title) return;
-  const { data:cnt } = await sb.from('classroom_units').select('id').eq('course_id',EDIT.courseId);
-  const { data, error } = await sb.from('classroom_units').insert({ course_id:EDIT.courseId, title, sort_order:(cnt||[]).length }).select().single();
+  const { data:cnt } = await sb.from('classroom_units').select('id').eq('course_id',courseId);
+  const { data, error } = await sb.from('classroom_units').insert({ course_id:courseId, title, sort_order:(cnt||[]).length }).select().single();
   if(error){ toast(error.message); return; }
-  await edSelCourse(); $('edUnit').value=data.id; edSelUnit();
+  await edInit(); EDOPEN.add('c:'+courseId); EDOPEN.add('u:'+data.id); edRenderTree();
 }
-async function edSelUnit(){
-  EDIT.unitId=$('edUnit').value||null; EDIT.lessonId=null;
-  $('edBlocks').innerHTML=''; $('edLessonMeta').innerHTML=''; $('edToolbar').classList.add('hidden');
-  if(!EDIT.unitId){ $('edLesson').innerHTML=''; return; }
-  const { data } = await sb.from('classroom_lessons').select('id,title').eq('unit_id',EDIT.unitId).order('sort_order');
-  $('edLesson').innerHTML='<option value="">— урок —</option>'+(data||[]).map(l=>`<option value="${l.id}">${esc(l.title)}</option>`).join('');
-}
-async function edNewLesson(){
-  if(!EDIT.unitId){ toast('Сначала выбери юнит'); return; }
+async function edNewLesson(unitId,courseId){
+  if(!unitId){ toast('Сначала выбери юнит'); return; }
   const title=prompt('Название урока/ДЗ:'); if(!title) return;
-  const { data:cnt } = await sb.from('classroom_lessons').select('id').eq('unit_id',EDIT.unitId);
-  const { data, error } = await sb.from('classroom_lessons').insert({ unit_id:EDIT.unitId, title, sort_order:(cnt||[]).length, is_published:true }).select().single();
+  const { data:cnt } = await sb.from('classroom_lessons').select('id').eq('unit_id',unitId);
+  const { data, error } = await sb.from('classroom_lessons').insert({ unit_id:unitId, title, sort_order:(cnt||[]).length, is_published:true }).select().single();
   if(error){ toast(error.message); return; }
-  await edSelUnit(); $('edLesson').value=data.id; edSelLesson();
+  await edInit(); EDOPEN.add('c:'+courseId); EDOPEN.add('u:'+unitId); edOpenLesson(data.id, unitId, courseId);
 }
-async function edSelLesson(){
-  EDIT.lessonId=$('edLesson').value||null;
-  if(!EDIT.lessonId){ $('edBlocks').innerHTML=''; $('edLessonMeta').innerHTML=''; $('edToolbar').classList.add('hidden'); return; }
-  const { data:lesson } = await sb.from('classroom_lessons').select('*').eq('id',EDIT.lessonId).single();
-  $('edLessonMeta').innerHTML = `<div class="row" style="margin-top:10px; align-items:center">
-    <label class="chk" style="max-width:210px"><input type="checkbox" id="edPub" ${lesson.is_published?'checked':''}> Опубликован</label>
-    <div class="field" style="max-width:220px"><label>Порог зачёта, %</label><input type="number" id="edThreshold" min="0" max="100" value="${lesson.pass_threshold!=null?lesson.pass_threshold:''}"></div>
-  </div>`;
-  const { data:blocks } = await sb.from('classroom_blocks').select('id,type,payload,sort_order').eq('lesson_id',EDIT.lessonId).order('sort_order');
-  EDIT.blocks = (blocks||[]).map(b=>({ type:b.type, payload:b.payload||{} }));
-  $('edToolbar').classList.remove('hidden');
-  edRenderBlocks();
+
+async function edOpenLesson(lessonId, unitId, courseId){
+  EDIT.courseId=courseId; EDIT.unitId=unitId; EDIT.lessonId=lessonId;
+  edRenderTree();
+  const right=$('edRight'); if(right) right.innerHTML='<div class="loading">Загружаю урок…</div>';
+  try{
+    const { data:lesson } = await sb.from('classroom_lessons').select('*').eq('id',lessonId).single();
+    const { data:blocks } = await sb.from('classroom_blocks').select('id,type,payload,sort_order').eq('lesson_id',lessonId).order('sort_order');
+    EDIT.blocks = (blocks||[]).map(b=>({ type:b.type, payload:b.payload||{} }));
+    right.innerHTML = `
+      <div class="card" style="padding:14px; margin-bottom:12px">
+        <div class="row" style="align-items:center">
+          <b style="flex:1; font-size:16px">${esc(lesson.title)}</b>
+          <button class="btn sec sm" onclick="edRenameLesson('${lessonId}')">✏ имя</button>
+          <button class="btn sec sm" onclick="openPreview('${lessonId}')">👁 Предпросмотр</button>
+        </div>
+        <div class="row" style="margin-top:10px; align-items:center">
+          <label class="chk" style="max-width:210px"><input type="checkbox" id="edPub" ${lesson.is_published?'checked':''}> Опубликован</label>
+          <div class="field" style="max-width:200px"><label>Порог зачёта, %</label><input type="number" id="edThreshold" min="0" max="100" value="${lesson.pass_threshold!=null?lesson.pass_threshold:''}"></div>
+        </div>
+      </div>
+      <div id="edBlocks"></div>
+      <div id="edToolbar" style="margin-top:12px; display:flex; gap:8px; align-items:center; flex-wrap:wrap">
+        ${edTypeSelectHtml()}
+        <button class="btn sec sm" onclick="edAddBlock()">+ Блок</button>
+        <button class="btn" onclick="edSave()">💾 Сохранить урок</button>
+        <span id="edSaveRes" class="muted"></span>
+      </div>`;
+    edRenderBlocks();
+  }catch(e){ if($('edRight')) $('edRight').innerHTML=`<div class="err">${esc(e.message||e)}</div>`; }
+}
+
+async function edRenameLesson(lessonId){
+  let cur=null; for(const c of EDTREE){ for(const u of c.units){ const l=u.lessons.find(x=>x.id===lessonId); if(l){ cur=l; break; } } if(cur) break; }
+  const title=prompt('Новое название урока:', cur?cur.title:''); if(!title) return;
+  const { error } = await sb.from('classroom_lessons').update({ title }).eq('id',lessonId);
+  if(error){ toast(error.message); return; }
+  if(cur) cur.title=title;
+  edRenderTree();
+  await edOpenLesson(lessonId, EDIT.unitId, EDIT.courseId);
+  toast('Переименовано');
 }
 
 function edRenderBlocks(){
@@ -1319,6 +1373,10 @@ async function edSave(){
     }
     await sb.from('classroom_blocks').delete().eq('lesson_id',EDIT.lessonId).gte('sort_order',EDIT.blocks.length);
     $('edSaveRes').textContent='Сохранено ✅'; toast('Урок сохранён');
+    // отразить статус публикации в дереве, не сворачивая редактор
+    const pubNow=$('edPub')?$('edPub').checked:true;
+    for(const c of EDTREE){ for(const u of c.units){ const l=u.lessons.find(x=>x.id===EDIT.lessonId); if(l) l.is_published=pubNow; } }
+    edRenderTree();
     await loadLibrary();
   }catch(e){ $('edSaveRes').textContent=''; toast(e.message||String(e)); }
 }
