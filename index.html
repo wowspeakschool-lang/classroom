@@ -1106,7 +1106,7 @@ async function edInit(){
     const { data:units } = await sb.from('classroom_units').select('id,title').eq('course_id',c.id).order('sort_order');
     const us=[];
     for(const u of (units||[])){
-      const { data:ls } = await sb.from('classroom_lessons').select('id,title,is_published').eq('unit_id',u.id).order('sort_order');
+      const { data:ls } = await sb.from('classroom_lessons').select('id,title,is_published,kind').eq('unit_id',u.id).order('sort_order');
       us.push({ id:u.id, title:u.title, lessons:(ls||[]) });
     }
     EDTREE.push({ id:c.id, title:c.title, units:us });
@@ -1115,6 +1115,12 @@ async function edInit(){
 }
 
 function edToggle(key){ if(EDOPEN.has(key)) EDOPEN.delete(key); else EDOPEN.add(key); edRenderTree(); }
+
+const ED_KINDS = [
+  { key:'lesson',   icon:'📘', title:'Уроки',             add:'урок'    },
+  { key:'homework', icon:'📝', title:'Домашние задания',  add:'ДЗ'      },
+  { key:'test',     icon:'🎯', title:'Тесты',             add:'тест'    },
+];
 
 function edRenderTree(){
   const host=$('edTree'); if(!host) return;
@@ -1127,9 +1133,19 @@ function edRenderTree(){
         const uo = EDOPEN.has('u:'+u.id);
         let lin='';
         if(uo){
-          lin = (u.lessons.length ? u.lessons.map(l=>`<div class="treerow lesson ${EDIT.lessonId===l.id?'active':''}" style="padding-left:40px" onclick="edOpenLesson('${l.id}','${u.id}','${c.id}')">📄 ${esc(l.title)}${l.is_published?'':' <span class="muted">(черновик)</span>'}</div>`).join('')
-            : '<div class="muted" style="padding-left:40px;font-size:13px">нет уроков</div>')
-            + `<div style="padding:4px 0 6px 40px"><button class="btn sec sm" onclick="event.stopPropagation();edNewLesson('${u.id}','${c.id}')">+ урок</button></div>`;
+          // Внутри юнита материалы разложены по типам: планы уроков,
+          // домашние задания и тесты — иначе список получается кашей
+          lin = ED_KINDS.map(k=>{
+            const items = u.lessons.filter(l => (l.kind||'homework') === k.key);
+            const kopen = EDOPEN.has('k:'+u.id+':'+k.key);
+            const rows = kopen
+              ? (items.length
+                  ? items.map(l=>`<div class="treerow lesson ${EDIT.lessonId===l.id?'active':''}" style="padding-left:58px" onclick="edOpenLesson('${l.id}','${u.id}','${c.id}')">📄 ${esc(l.title)}${l.is_published?'':' <span class="muted">(черновик)</span>'}</div>`).join('')
+                  : `<div class="muted" style="padding-left:58px;font-size:13px">пусто</div>`)
+                + `<div style="padding:4px 0 6px 58px"><button class="btn sec sm" onclick="event.stopPropagation();edNewLesson('${u.id}','${c.id}','${k.key}')">+ ${esc(k.add)}</button></div>`
+              : '';
+            return `<div class="treerow" style="padding-left:40px" onclick="edToggle('k:${u.id}:${k.key}')">${kopen?'▾':'▸'} ${k.icon} ${esc(k.title)} <span class="muted">${items.length}</span></div>${rows}`;
+          }).join('');
         }
         return `<div class="treerow" style="padding-left:22px" onclick="edToggle('u:${u.id}')">${uo?'▾':'▸'} 📁 ${esc(u.title)}</div>${lin}`;
       }).join('')
@@ -1154,17 +1170,26 @@ async function edNewUnit(courseId){
   if(error){ toast(error.message); return; }
   await edInit(); EDOPEN.add('c:'+courseId); EDOPEN.add('u:'+data.id); edRenderTree();
 }
-async function edNewLesson(unitId,courseId){
+async function edNewLesson(unitId,courseId,kind){
   if(!unitId){ toast('Сначала выбери юнит'); return; }
-  const title=prompt('Название урока/ДЗ:'); if(!title) return;
+  kind = kind || 'homework';
+  const k = ED_KINDS.find(x=>x.key===kind) || ED_KINDS[1];
+  const title=prompt('Название — ' + k.title.toLowerCase() + ':'); if(!title) return;
   const { data:cnt } = await sb.from('classroom_lessons').select('id').eq('unit_id',unitId);
-  const { data, error } = await sb.from('classroom_lessons').insert({ unit_id:unitId, title, sort_order:(cnt||[]).length, is_published:true }).select().single();
+  const { data, error } = await sb.from('classroom_lessons').insert({ unit_id:unitId, title, kind, sort_order:(cnt||[]).length, is_published:true }).select().single();
   if(error){ toast(error.message); return; }
-  await edInit(); EDOPEN.add('c:'+courseId); EDOPEN.add('u:'+unitId); edOpenLesson(data.id, unitId, courseId);
+  await edInit();
+  EDOPEN.add('c:'+courseId); EDOPEN.add('u:'+unitId); EDOPEN.add('k:'+unitId+':'+kind);
+  edOpenLesson(data.id, unitId, courseId);
 }
 
 async function edOpenLesson(lessonId, unitId, courseId){
   EDIT.courseId=courseId; EDIT.unitId=unitId; EDIT.lessonId=lessonId;
+  // Раскрываем ветку до открытого урока, иначе он теряется в свёрнутом дереве
+  EDOPEN.add('c:'+courseId); EDOPEN.add('u:'+unitId);
+  const _u = (EDTREE.find(c=>c.id===courseId)?.units || []).find(u=>u.id===unitId);
+  const _l = (_u?.lessons || []).find(l=>l.id===lessonId);
+  if(_l) EDOPEN.add('k:'+unitId+':'+(_l.kind||'homework'));
   edRenderTree();
   const right=$('edRight'); if(right) right.innerHTML='<div class="loading">Загружаю урок…</div>';
   try{
