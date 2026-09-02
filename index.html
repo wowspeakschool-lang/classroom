@@ -803,6 +803,7 @@ async function showOpen(lessonId, titleArg, mode){
   $('showVariant').value = CR_VIEW.variant;
   $('showFormat').value  = CR_VIEW.format;
   $('showMode').value    = SHOW.mode;
+  showLockMode();
   document.addEventListener('keydown', showKey);
   try{ if(document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen(); }catch(e){}
   try{
@@ -817,12 +818,28 @@ async function showOpen(lessonId, titleArg, mode){
 
 // Переключатели в панели: меняют взгляд, не перезагружая урок
 function showSet(){
+  const wasRole = CR_VIEW.role;
   CR_VIEW.role    = $('showRole').value;
   CR_VIEW.variant = $('showVariant').value;
   CR_VIEW.format  = $('showFormat').value;
   SHOW.mode       = $('showMode').value;
   SHOW.answer     = false;
+  // При переходе на взгляд ученика начинаем с первого блока,
+  // иначе останется позиция из списка преподавателя.
+  if(CR_VIEW.role !== wasRole) SHOW.i = 0;
+  showLockMode();
   showApply();
+}
+
+// Ученик видит ровно один блок за раз: списком ему было бы видно
+// следующее задание до того, как он сделал текущее.
+function showLockMode(){
+  const sel=$('showMode'); if(!sel) return;
+  const kid = CR_VIEW.role === 'student';
+  if(kid){ SHOW.mode='one'; sel.value='one'; }
+  sel.disabled = kid;
+  sel.title = kid ? 'Ученик всегда видит по одному блоку' : '';
+  sel.style.opacity = kid ? '.55' : '';
 }
 
 function showApply(){
