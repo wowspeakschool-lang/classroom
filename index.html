@@ -53,6 +53,18 @@
   /* Modal */
   .overlay{ position:fixed; inset:0; background:rgba(15,23,42,.45); display:flex; align-items:flex-start; justify-content:center; padding:40px 16px; z-index:50; overflow:auto; }
   .modal{ background:#fff; border-radius:16px; width:100%; max-width:640px; padding:22px; }
+  /* Полноэкранный показ: собственный слой, ничего не наследует от модалок */
+  #showLayer{ position:fixed; inset:0; width:100vw; height:100vh; z-index:9000;
+    background:#fff; display:flex; flex-direction:column; margin:0; padding:0; max-width:none; max-height:none; }
+  #showLayer.hidden{ display:none; }
+  #showBar{ flex:0 0 auto; display:flex; align-items:center; gap:10px; padding:10px 16px;
+    border-bottom:1px solid var(--line); background:#fff; }
+  #showBody{ flex:1 1 auto; overflow:auto; padding:32px 24px; display:flex; justify-content:center; }
+  #showInner{ width:100%; max-width:1100px; }
+  #showBody .block{ box-shadow:none; border:none; padding:0; font-size:20px; }
+  #showBody .bt{ display:none; }
+  #showBody img{ max-width:80vw !important; max-height:60vh !important; width:auto !important; height:auto !important; }
+  #showEmpty{ margin:auto; color:var(--muted); font-size:18px; }
   .modal h2{ margin:0 0 2px; font-size:18px; }
   .modal .close{ float:right; background:none; border:none; font-size:22px; color:#94a3b8; }
   .chk{ display:flex; align-items:center; gap:9px; padding:8px 10px; border:1px solid var(--line); border-radius:9px; margin-bottom:6px; }
@@ -252,6 +264,17 @@
 </div>
 
 <div class="overlay hidden" id="overlay" onclick="if(event.target===this)closeModal()"><div id="modalHost"></div></div>
+<div id="showLayer" class="hidden">
+  <div id="showBar">
+    <b id="showTitle" style="flex:1; font-size:15px"></b>
+    <span id="showPos" class="muted" style="font-size:13px"></span>
+    <button class="btn sec sm" onclick="showAnswer()" id="showAnsBtn">Показать ответ</button>
+    <button class="btn sec sm" onclick="showNav(-1)">←</button>
+    <button class="btn sec sm" onclick="showNav(1)">→</button>
+    <button class="btn sec sm" onclick="showClose()">✕ Esc</button>
+  </div>
+  <div id="showBody"><div id="showInner"></div></div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -545,6 +568,34 @@ function blockTypeLabel(t){ return ({text:'Материал',video:'Видео',
 // Текст с пропусками: «I ___ a cat» → части текста и места для ответов.
 // Пропуск в исходном тексте помечается двойным подчёркиванием
 // с ответом внутри: __have__
+// Что сейчас показываем: роль, режим занятия, длительность.
+// Читается из переключателей в шапке урока, влияет на показ и
+// на предпросмотр «глазами ученика».
+var CR_VIEW = { role:'teacher', variant:'any', format:'any' };
+
+// Роль «ученик» не видит учительские блоки. Преподаватель видит всё.
+function crAudienceOk(aud){
+  const a = aud || 'shared';
+  return CR_VIEW.role === 'student' ? (a === 'shared' || a === 'student') : true;
+}
+function crBlockVisible(b){
+  if(!crAudienceOk(b.audience)) return false;
+  const v = b.variant || 'any';
+  if(v !== 'any' && CR_VIEW.variant !== 'any' && v !== CR_VIEW.variant) return false;
+  const f = b.format || 'any';
+  if(f !== 'any' && CR_VIEW.format !== 'any' && f !== CR_VIEW.format) return false;
+  return true;
+}
+// Текст этапа: в групповом режиме под основным html идёт врезка html_group
+function crTextHtml(p){
+  const main = p.html || '';
+  if(CR_VIEW.variant === 'group' && p.html_group){
+    return main + `<div style="margin-top:12px; padding:12px 14px; border-left:4px solid var(--brand,#7c3aed); background:#faf9ff; border-radius:0 10px 10px 0">`
+      + `<div style="font-weight:700; margin-bottom:6px">В группе</div>${p.html_group}</div>`;
+  }
+  return main;
+}
+
 function gapsParse(text){
   const parts = [];
   const re = /__([^_]+)__/g;
@@ -575,7 +626,7 @@ function previewQuestion(q,qi){
 
 function previewBlock(b){
   const p=b.payload||{}; const head=`<div class="bt">${blockTypeLabel(b.type)}</div>`;
-  if(b.type==='text')  return `<div class="block">${head}${p.audio?`<div style="margin-bottom:8px">${audBtn(p.audio,true)}</div>`:''}<div>${p.html||''}</div></div>`;
+  if(b.type==='text')  return `<div class="block">${head}${p.audio?`<div style="margin-bottom:8px">${audBtn(p.audio,true)}</div>`:''}<div>${crTextHtml(p)}</div></div>`;
   if(b.type==='video') return `<div class="block">${head}${p.title?`<b>${esc(p.title)}</b>`:''}<div class="muted">${esc(p.url||'')}</div></div>`;
   if(b.type==='embed') return `<div class="block">${head}<div class="muted" style="margin-bottom:6px">Тренажёр: ${esc(p.url||'—')}</div>${p.url?`<iframe src="${esc(p.url)}" style="width:100%;height:360px;border:1px solid var(--line);border-radius:8px"></iframe>`:''}</div>`;
   if(b.type==='exact_input') return `<div class="block">${head}${(p.items||[]).map(it=>`<div style="margin-bottom:6px">${it.audio?audBtn(it.audio)+' ':''}${it.image?`<img src="${esc(it.image)}" style="max-height:70px;border-radius:8px;vertical-align:middle"> `:''}${esc(it.prompt||'')} → <span class="pill g">${(it.accept||[]).map(esc).join(' / ')}</span></div>`).join('')}</div>`;
@@ -611,6 +662,77 @@ async function openPreview(lessonId){
   }catch(e){ $('pvBody').innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
 }
 
+// ---------- Полноэкранный показ ----------
+// Отдельный слой, а не модалка: у .modal есть max-width, из-за него
+// предпросмотр не занимал экран целиком.
+var SHOW = { blocks:[], i:0, answer:false, title:'' };
+
+// Готовит состояние интерактивных блоков (перемешивание и т.п.)
+function prepRunState(blocks){
+  RUN_MATCH={}; RUN_ORDER={}; RUN_SORT={}; RUN_FC={}; RUN_FC_DATA={};
+  (blocks||[]).forEach(b=>{
+    if(b.type==='match'){ RUN_MATCH[b.id]={ map:{}, sel:null, rights:shuffle(((b.payload&&b.payload.pairs)||[]).map((x,ix)=>({val:(x.right!=null?x.right:('#'+ix)), image:x.right_image, audio:x.right_audio}))) }; }
+    if(b.type==='order'){ RUN_ORDER[b.id]={ bank:shuffle(((b.payload&&b.payload.words)||[])), answer:[] }; }
+    if(b.type==='sort'){ prepSort(b); }
+    if(b.type==='flashcards'){ RUN_FC[b.id]={ i:0, flip:false }; RUN_FC_DATA[b.id]={ cards:(b.payload&&b.payload.cards)||[] }; }
+  });
+}
+
+async function showOpen(lessonId){
+  if(!lessonId){ toast('Выбери урок'); return; }
+  let title=''; for(const c of LIBRARY){ const l=(c.lessons||[]).find(x=>x.id===lessonId); if(l){ title=l.title; break; } }
+  SHOW = { blocks:[], i:0, answer:false, title };
+  RUN = { lessonId, enr:null, preview:true };
+  $('showLayer').classList.remove('hidden');
+  $('showTitle').textContent = title || 'Показ';
+  $('showInner').innerHTML = '<div class="loading">Загружаю…</div>';
+  document.addEventListener('keydown', showKey);
+  try{ if(document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen(); }catch(e){}
+  try{
+    const { data:blocks, error } = await sb.from('classroom_blocks')
+      .select('id, type, payload, sort_order, audience, variant, format')
+      .eq('lesson_id', lessonId).order('sort_order');
+    if(error) throw error;
+    SHOW.blocks = (blocks||[]).filter(crBlockVisible);
+    prepRunState(SHOW.blocks);
+    showRender();
+  }catch(e){ $('showInner').innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
+}
+
+function showRender(){
+  const n=SHOW.blocks.length;
+  if(!n){ $('showInner').innerHTML = '<div id="showEmpty">Нет блоков для выбранных настроек.</div>'; $('showPos').textContent=''; return; }
+  if(SHOW.i<0) SHOW.i=0; if(SHOW.i>=n) SHOW.i=n-1;
+  const b=SHOW.blocks[SHOW.i];
+  $('showPos').textContent = `${SHOW.i+1} / ${n}`;
+  $('showInner').innerHTML = SHOW.answer ? previewBlock(b) : runBlock(b);
+  if(!SHOW.answer){
+    if(b.type==='order') orderRender(b.id);
+    if(b.type==='sort') sortRender(b.id);
+    if(b.type==='flashcards') fcRender(b.id);
+  }
+  const ab=$('showAnsBtn'); if(ab) ab.textContent = SHOW.answer ? 'Скрыть ответ' : 'Показать ответ';
+}
+
+function showNav(d){ SHOW.answer=false; SHOW.i += d; showRender(); }
+function showAnswer(){ SHOW.answer = !SHOW.answer; showRender(); }
+
+function showClose(){
+  $('showLayer').classList.add('hidden');
+  document.removeEventListener('keydown', showKey);
+  RUN=null;
+  try{ if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen(); }catch(e){}
+}
+
+function showKey(e){
+  if($('showLayer').classList.contains('hidden')) return;
+  const t=e.target && e.target.tagName;
+  if(t==='INPUT' || t==='TEXTAREA' || t==='SELECT') return;
+  if(e.key==='Escape'){ e.preventDefault(); showClose(); }
+  else if(e.key==='ArrowRight' || e.key==='ArrowDown' || e.key===' '){ e.preventDefault(); showNav(1); }
+  else if(e.key==='ArrowLeft' || e.key==='ArrowUp'){ e.preventDefault(); showNav(-1); }
+}
+
 // Предпросмотр «глазами ученика» — рендер прохождения, но без реальной сдачи
 async function openPreviewKid(lessonId){
   RUN = { lessonId, enr:null, preview:true }; RUN_MATCH={}; RUN_ORDER={}; RUN_SORT={}; RUN_FC={}; RUN_FC_DATA={};
@@ -619,8 +741,9 @@ async function openPreviewKid(lessonId){
     <p class="muted" style="margin:0 0 12px">Так видит ребёнок. Кнопки «Сдать» здесь только показывают, что произойдёт — ничего не сохраняется.</p>
     <div class="kid" id="pvKidBody"><div class="loading">Загружаю…</div></div>`);
   try{
-    const { data:blocks, error } = await sb.from('classroom_blocks').select('id, type, payload, sort_order').eq('lesson_id', lessonId).order('sort_order');
+    const { data:raw, error } = await sb.from('classroom_blocks').select('id, type, payload, sort_order, audience, variant, format').eq('lesson_id', lessonId).order('sort_order');
     if(error) throw error;
+    const blocks = (raw||[]).filter(crBlockVisible);
     (blocks||[]).forEach(b=>{
       if(b.type==='match'){ RUN_MATCH[b.id]={ map:{}, sel:null, rights:shuffle(((b.payload&&b.payload.pairs)||[]).map((x,ix)=>({val:(x.right!=null?x.right:('#'+ix)), image:x.right_image, audio:x.right_audio}))) }; }
       if(b.type==='order'){ RUN_ORDER[b.id]={ bank:shuffle(((b.payload&&b.payload.words)||[])), answer:[] }; }
@@ -698,10 +821,12 @@ async function bootRunPage(params){
   try{
     const [ls, bl] = await Promise.all([
       sb.from('classroom_lessons').select('title').eq('id', lessonId).maybeSingle(),
-      sb.from('classroom_blocks').select('id, type, payload, sort_order').eq('lesson_id', lessonId).order('sort_order')
+      sb.from('classroom_blocks').select('id, type, payload, sort_order, audience, variant, format').eq('lesson_id', lessonId).order('sort_order')
     ]);
     if(bl.error) throw bl.error;
-    const blocks = bl.data||[];
+    // Ученику не должны попасть сценарий урока, тайминги и ответы
+    CR_VIEW = { role:'student', variant:'any', format:'any' };
+    const blocks = (bl.data||[]).filter(crBlockVisible);
     $('runPageHead').innerHTML = `🚀 <b>${esc((ls.data&&ls.data.title)||'Урок')}</b><div style="font-size:14px;opacity:.95;margin-top:2px">Поехали! Отвечай на задания и собирай звёздочки ⭐</div>`;
     blocks.forEach(b=>{
       if(b.type==='match'){ RUN_MATCH[b.id]={ map:{}, sel:null, rights:shuffle(((b.payload&&b.payload.pairs)||[]).map((x,ix)=>({val:(x.right!=null?x.right:('#'+ix)), image:x.right_image, audio:x.right_audio}))) }; }
@@ -727,7 +852,7 @@ function celebrate(){
 
 function runBlock(b){
   const p=b.payload||{}; const id=b.id; const head=`<div class="bt">${blockTypeLabel(b.type)}</div>`;
-  if(b.type==='text')  return `<div class="block">${head}${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}<div>${p.html||''}</div></div>`;
+  if(b.type==='text')  return `<div class="block">${head}${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}<div>${crTextHtml(p)}</div></div>`;
   if(b.type==='video'){
     const yt = p.provider==='youtube' || /youtu/.test(p.url||'');
     const emb = yt ? (p.url||'').replace('watch?v=','embed/').replace('youtu.be/','www.youtube.com/embed/') : '';
@@ -1330,14 +1455,39 @@ async function edOpenLesson(lessonId, unitId, courseId){
   const right=$('edRight'); if(right) right.innerHTML='<div class="loading">Загружаю урок…</div>';
   try{
     const { data:lesson } = await sb.from('classroom_lessons').select('*').eq('id',lessonId).single();
-    const { data:blocks } = await sb.from('classroom_blocks').select('id,type,payload,sort_order').eq('lesson_id',lessonId).order('sort_order');
-    EDIT.blocks = (blocks||[]).map(b=>({ type:b.type, payload:b.payload||{} }));
+    const { data:blocks } = await sb.from('classroom_blocks').select('id,type,payload,sort_order,audience,variant,format').eq('lesson_id',lessonId).order('sort_order');
+    // audience/variant/format держим в блоке, а не в строке таблицы:
+    // ключ upsert — (lesson_id, sort_order), и без этого при перестановке
+    // блоков разметка осталась бы на старых позициях.
+    EDIT.blocks = (blocks||[]).map(b=>({ type:b.type, payload:b.payload||{},
+      audience:b.audience||'shared', variant:b.variant||'any', format:b.format||'any' }));
     right.innerHTML = `
       <div class="card" style="padding:14px; margin-bottom:12px">
         <div class="row" style="align-items:center">
           <b style="flex:1; font-size:16px">${esc(lesson.title)}</b>
           <button class="btn sec sm" onclick="edRenameLesson('${lessonId}')">✏ имя</button>
           <button class="btn sec sm" onclick="openPreview('${lessonId}')">👁 Предпросмотр</button>
+          <button class="btn sm" onclick="showOpen('${lessonId}')">▶ Показ</button>
+        </div>
+        <div class="row" style="margin-top:10px; align-items:center; gap:10px; flex-wrap:wrap">
+          <div class="field" style="max-width:150px; margin:0"><label>Роль</label>
+            <select id="cvRole" onchange="crViewChange()">
+              <option value="teacher" ${CR_VIEW.role==='teacher'?'selected':''}>Преподаватель</option>
+              <option value="student" ${CR_VIEW.role==='student'?'selected':''}>Ученик</option>
+            </select></div>
+          <div class="field" style="max-width:150px; margin:0"><label>Режим</label>
+            <select id="cvVariant" onchange="crViewChange()">
+              <option value="any" ${CR_VIEW.variant==='any'?'selected':''}>Любой</option>
+              <option value="individual" ${CR_VIEW.variant==='individual'?'selected':''}>Индивидуальный</option>
+              <option value="group" ${CR_VIEW.variant==='group'?'selected':''}>Групповой</option>
+            </select></div>
+          <div class="field" style="max-width:150px; margin:0"><label>Длительность</label>
+            <select id="cvFormat" onchange="crViewChange()">
+              <option value="any" ${CR_VIEW.format==='any'?'selected':''}>Любая</option>
+              <option value="30" ${CR_VIEW.format==='30'?'selected':''}>30 минут</option>
+              <option value="40" ${CR_VIEW.format==='40'?'selected':''}>40 минут</option>
+            </select></div>
+          <span id="cvCount" class="muted" style="font-size:13px"></span>
         </div>
         <div class="row" style="margin-top:10px; align-items:center">
           <label class="chk" style="max-width:210px"><input type="checkbox" id="edPub" ${lesson.is_published?'checked':''}> Опубликован</label>
@@ -1368,6 +1518,7 @@ async function edRenameLesson(lessonId){
 
 function edRenderBlocks(){
   $('edBlocks').innerHTML = EDIT.blocks.length ? EDIT.blocks.map((b,i)=>edBlockEditor(b,i)).join('') : '<div class="empty">Нет блоков. Добавь ниже.</div>';
+  crCount();
 }
 // Поле аудио с кнопками загрузки/записи (универсальное)
 // Аудио: если записано — сразу проигрыватель и крестик для удаления.
@@ -1477,11 +1628,34 @@ function edImageDel(i, path){
 }
 function edBlockEditor(b,i){
   const ctrl=`<div style="float:right"><button class="btn sec sm" onclick="edMove(${i},-1)">↑</button> <button class="btn sec sm" onclick="edMove(${i},1)">↓</button> <button class="btn sec sm" title="Дублировать" onclick="edDupBlock(${i})">⧉</button> <button class="btn sec sm" onclick="edDel(${i})">🗑</button></div>`;
-  const head=`<div class="bt">${blockTypeLabel(b.type)}</div>`;
+  const aud=b.audience||'shared', vr=b.variant||'any', fm=b.format||'any';
+  const dim = crBlockVisible(b) ? '' : ' style="opacity:.45"';
+  const badge = aud==='teacher' ? '<span class="pill n" style="margin-left:6px">преподаватель</span>'
+              : aud==='student' ? '<span class="pill" style="margin-left:6px">ученик</span>' : '';
+  const head=`<div class="bt">${blockTypeLabel(b.type)}${badge}</div>`;
+  const meta=`<div class="row" style="gap:8px; margin-bottom:8px; flex-wrap:wrap">
+      <select style="max-width:150px" onchange="edMeta(${i},'audience',this.value)">
+        <option value="shared" ${aud==='shared'?'selected':''}>Видно обоим</option>
+        <option value="teacher" ${aud==='teacher'?'selected':''}>Только преподавателю</option>
+        <option value="student" ${aud==='student'?'selected':''}>Только ученику</option>
+      </select>
+      <select style="max-width:140px" onchange="edMeta(${i},'variant',this.value)">
+        <option value="any" ${vr==='any'?'selected':''}>Любой режим</option>
+        <option value="individual" ${vr==='individual'?'selected':''}>Индивидуальный</option>
+        <option value="group" ${vr==='group'?'selected':''}>Групповой</option>
+      </select>
+      <select style="max-width:140px" onchange="edMeta(${i},'format',this.value)">
+        <option value="any" ${fm==='any'?'selected':''}>Любая длительность</option>
+        <option value="30" ${fm==='30'?'selected':''}>30 минут</option>
+        <option value="40" ${fm==='40'?'selected':''}>40 минут</option>
+      </select>
+    </div>`;
   const p=b.payload||{};
   let body='';
   if(b.type==='text'){
     body=`<textarea rows="4" oninput="EDIT.blocks[${i}].payload.html=this.value" placeholder="Текст (можно HTML)">${esc(p.html||'')}</textarea>
+      <div style="margin-top:8px"><label class="muted" style="font-size:12px">Адаптация для группы (необязательно)</label>
+        <textarea rows="3" oninput="edGroupHtml(${i},this.value)" placeholder="Показывается врезкой «В группе» в групповом режиме">${esc(p.html_group||'')}</textarea></div>
       <div style="margin-top:6px"><button class="btn sec sm" onclick="edInsertImage(${i})">🖼 Вставить картинку</button></div>
       ${edAudioField(p.audio, `EDIT.blocks[${i}].payload.audio`)}`;
   } else if(b.type==='video'){
@@ -1608,7 +1782,7 @@ function edBlockEditor(b,i){
     body=qs.map((q,qi)=>edQuizQuestion(i,qi,q)).join('')
       + `<button class="btn sec sm" onclick="edAddQuestion(${i})">+ вопрос</button>`;
   }
-  return `<div class="block">${ctrl}${head}${body}</div>`;
+  return `<div class="block"${dim}>${ctrl}${head}${meta}${body}</div>`;
 }
 function edQuizQuestion(i,qi,q){
   const opts=(q.options||[]).map((o,oi)=>{
@@ -1635,13 +1809,29 @@ function edAccept(i,ii,val){ EDIT.blocks[i].payload.items[ii].accept = val.split
 function edOrder(i,val){ EDIT.blocks[i].payload.sentence=val; EDIT.blocks[i].payload.words=val.trim().split(/\s+/).filter(Boolean); }
 function edArrAdd(i,key,obj){ (EDIT.blocks[i].payload[key]=EDIT.blocks[i].payload[key]||[]).push(obj); edRenderBlocks(); }
 function edArrDel(i,key,idx){ EDIT.blocks[i].payload[key].splice(idx,1); edRenderBlocks(); }
+function edMeta(i,key,val){ EDIT.blocks[i][key]=val; edRenderBlocks(); crCount(); }
+function edGroupHtml(i,val){
+  const p=EDIT.blocks[i].payload;
+  if(val && val.trim()) p.html_group=val; else delete p.html_group;
+}
+function crViewChange(){
+  CR_VIEW.role    = $('cvRole')    ? $('cvRole').value    : 'teacher';
+  CR_VIEW.variant = $('cvVariant') ? $('cvVariant').value : 'any';
+  CR_VIEW.format  = $('cvFormat')  ? $('cvFormat').value  : 'any';
+  edRenderBlocks(); crCount();
+}
+function crCount(){
+  const el=$('cvCount'); if(!el) return;
+  const vis=EDIT.blocks.filter(crBlockVisible).length;
+  el.textContent = `Показывается ${vis} из ${EDIT.blocks.length}`;
+}
 function edMove(i,d){ const j=i+d; if(j<0||j>=EDIT.blocks.length) return; const t=EDIT.blocks[i]; EDIT.blocks[i]=EDIT.blocks[j]; EDIT.blocks[j]=t; edRenderBlocks(); }
 function edDel(i){ if(!confirm('Удалить блок?')) return; EDIT.blocks.splice(i,1); edRenderBlocks(); }
 function edAddBlock(){
   const t=$('edNewType').value;
   const def={ text:{html:''}, quiz:{needs_review:false,questions:[]}, match:{needs_review:false,title:'',pairs:[]}, exact_input:{items:[]}, task:{needs_review:true,title:'',html:''}, embed:{url:'',needs_review:false}, order:{sentence:'',words:[]}, video:{url:'',provider:'youtube',title:''}, sort:{title:'',groups:[]}, flashcards:{title:'',cards:[]},
     gaps:{title:'',text:'',mode:'type'}, truefalse:{title:'',statements:[]}, speaking:{title:'',html:'',needs_review:true} }[t]||{};
-  EDIT.blocks.push({ type:t, payload:JSON.parse(JSON.stringify(def)) }); edRenderBlocks();
+  EDIT.blocks.push({ type:t, payload:JSON.parse(JSON.stringify(def)), audience:'shared', variant:'any', format:'any' }); edRenderBlocks();
 }
 function edAddQuestion(i){ (EDIT.blocks[i].payload.questions=EDIT.blocks[i].payload.questions||[]).push({q:'',type:'single',options:[],correct:[]}); edRenderBlocks(); }
 function edDelQuestion(i,qi){ EDIT.blocks[i].payload.questions.splice(qi,1); edRenderBlocks(); }
@@ -1669,7 +1859,8 @@ async function edSave(){
     const thrRaw=$('edThreshold')?$('edThreshold').value:'';
     await sb.from('classroom_lessons').update({ is_published:pub, pass_threshold: thrRaw===''?null:Math.max(0,Math.min(100,parseInt(thrRaw,10))) }).eq('id',EDIT.lessonId);
     if(EDIT.blocks.length){
-      const rows=EDIT.blocks.map((b,idx)=>({ lesson_id:EDIT.lessonId, type:b.type, payload:b.payload, sort_order:idx }));
+      const rows=EDIT.blocks.map((b,idx)=>({ lesson_id:EDIT.lessonId, type:b.type, payload:b.payload, sort_order:idx,
+        audience:b.audience||'shared', variant:b.variant||'any', format:b.format||'any' }));
       const { error } = await sb.from('classroom_blocks').upsert(rows, { onConflict:'lesson_id,sort_order' });
       if(error) throw error;
     }
