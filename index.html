@@ -62,6 +62,9 @@
   #showBody{ flex:1 1 auto; overflow:auto; padding:32px 24px; display:flex; justify-content:center; }
   #showInner{ width:100%; max-width:1100px; }
   #showBody .block{ box-shadow:none; border:none; padding:0; font-size:20px; }
+  #showBody.list .block{ font-size:17px; padding:16px 0; border-bottom:1px solid var(--line); }
+  #showBody.list .bt{ display:block; }
+  #showBar select{ font-size:13px; padding:5px 8px; }
   #showBody .bt{ display:none; }
   #showBody img{ max-width:80vw !important; max-height:60vh !important; width:auto !important; height:auto !important; }
   #showEmpty{ margin:auto; color:var(--muted); font-size:18px; }
@@ -155,6 +158,7 @@
         <button class="tab active" data-tab="students" onclick="switchTab('students')">Мои ученики</button>
         <button class="tab" data-tab="assign" onclick="switchTab('assign')">Задать ДЗ</button>
         <button class="tab" data-tab="review" onclick="switchTab('review')">Проверка <span id="reviewBadge" class="pill y hidden"></span></button>
+        <button class="tab" data-tab="lessons" onclick="switchTab('lessons')">Уроки</button>
         <button class="tab" data-tab="library" onclick="switchTab('library')">Библиотека</button>
         <button class="tab" data-tab="media" onclick="switchTab('media')">Медиа</button>
       </nav>
@@ -233,6 +237,37 @@
       <div id="mediaList" style="margin-top:14px"></div>
     </section>
 
+    <!-- УРОКИ: план урока для преподавателя, без редактирования -->
+    <section id="tab-lessons" class="hidden">
+      <h2 class="section-title">Уроки</h2>
+      <p class="section-sub">План урока для проведения занятия. Выберите урок и нажмите «Показ» — откроется на весь экран.</p>
+      <div class="card" style="padding:14px; margin-bottom:12px">
+        <div class="row" style="align-items:center; gap:10px; flex-wrap:wrap">
+          <div class="field" style="max-width:150px; margin:0"><label>Роль</label>
+            <select id="lvRole" onchange="lsViewChange()">
+              <option value="teacher">Преподаватель</option>
+              <option value="student">Ученик</option>
+            </select></div>
+          <div class="field" style="max-width:150px; margin:0"><label>Режим</label>
+            <select id="lvVariant" onchange="lsViewChange()">
+              <option value="any">Любой</option>
+              <option value="individual">Индивидуальный</option>
+              <option value="group">Групповой</option>
+            </select></div>
+          <div class="field" style="max-width:150px; margin:0"><label>Длительность</label>
+            <select id="lvFormat" onchange="lsViewChange()">
+              <option value="any">Любая</option>
+              <option value="30">30 минут</option>
+              <option value="40">40 минут</option>
+            </select></div>
+        </div>
+        <div class="muted" style="font-size:13px; margin-top:8px">
+          Настройки действуют на показ. Роль «ученик» убирает сценарий, тайминги и ответы — ставьте её, когда включаете демонстрацию экрана.
+        </div>
+      </div>
+      <div id="lsTree"><div class="loading">Загружаю…</div></div>
+    </section>
+
     <!-- БИБЛИОТЕКА / РЕДАКТОР УРОКОВ -->
     <section id="tab-library" class="hidden">
       <h2 class="section-title">Библиотека — редактор уроков</h2>
@@ -266,11 +301,31 @@
 <div class="overlay hidden" id="overlay" onclick="if(event.target===this)closeModal()"><div id="modalHost"></div></div>
 <div id="showLayer" class="hidden">
   <div id="showBar">
-    <b id="showTitle" style="flex:1; font-size:15px"></b>
+    <b id="showTitle" style="font-size:15px; margin-right:4px"></b>
+    <span class="muted" style="font-size:12px">глазами</span>
+    <select id="showRole" onchange="showSet()" style="max-width:150px">
+      <option value="teacher">преподавателя</option>
+      <option value="student">ученика</option>
+    </select>
+    <select id="showMode" onchange="showSet()" style="max-width:150px">
+      <option value="list">все материалы</option>
+      <option value="one">по одному блоку</option>
+    </select>
+    <select id="showVariant" onchange="showSet()" style="max-width:140px">
+      <option value="any">любой режим</option>
+      <option value="individual">индивидуальный</option>
+      <option value="group">групповой</option>
+    </select>
+    <select id="showFormat" onchange="showSet()" style="max-width:140px">
+      <option value="any">любая длительность</option>
+      <option value="30">30 минут</option>
+      <option value="40">40 минут</option>
+    </select>
+    <span style="flex:1"></span>
     <span id="showPos" class="muted" style="font-size:13px"></span>
-    <button class="btn sec sm" onclick="showAnswer()" id="showAnsBtn">Показать ответ</button>
-    <button class="btn sec sm" onclick="showNav(-1)">←</button>
-    <button class="btn sec sm" onclick="showNav(1)">→</button>
+    <button class="btn sec sm" onclick="showAnswer()" id="showAnsBtn">Показать ответы</button>
+    <button class="btn sec sm" id="showPrev" onclick="showNav(-1)">←</button>
+    <button class="btn sec sm" id="showNext" onclick="showNav(1)">→</button>
     <button class="btn sec sm" onclick="showClose()">✕ Esc</button>
   </div>
   <div id="showBody"><div id="showInner"></div></div>
@@ -646,26 +701,82 @@ function previewBlock(b){
   return `<div class="block">${head}<pre class="muted" style="white-space:pre-wrap">${esc(JSON.stringify(p,null,2))}</pre></div>`;
 }
 
-async function openPreview(lessonId){
-  if(!lessonId){ toast('Выбери урок'); return; }
-  let title = '';
-  for(const c of LIBRARY){ const l=(c.lessons||[]).find(x=>x.id===lessonId); if(l){ title=l.title; break; } }
-  openModal(`<button class="close" onclick="closeModal()">×</button>
-    <h2>Предпросмотр${title?': '+esc(title):''}</h2>
-    <p class="muted" style="margin:0 0 12px">Так урок увидит ученик. Правильные ответы подсвечены — их видите только вы. <button class="btn sec sm" onclick="openPreviewKid('${lessonId}')">👁 Глазами ученика</button></p>
-    <div id="pvBody"><div class="loading">Загружаю…</div></div>`);
+// Предпросмотр и показ — один и тот же полноэкранный слой,
+// отличается только начальный режим. Раньше предпросмотр жил
+// в модалке с max-width:640px и на весь экран не разворачивался.
+function openPreview(lessonId){ showOpen(lessonId, null, 'list'); }
+
+// ---------- Вкладка «Уроки»: планы для проведения занятия ----------
+// Отдельно от редактора: у преподавателя нет методистской роли,
+// вкладка «Библиотека» ему не показывается.
+var LSTREE = [];
+var LSOPEN = new Set();
+var LS_TITLES = {};
+
+async function lsInit(){
+  const host=$('lsTree'); if(!host) return;
+  host.innerHTML='<div class="loading">Загружаю…</div>';
   try{
-    const { data:blocks, error } = await sb.from('classroom_blocks')
-      .select('id, type, payload, sort_order').eq('lesson_id', lessonId).order('sort_order');
-    if(error) throw error;
-    $('pvBody').innerHTML = (blocks && blocks.length) ? blocks.map(previewBlock).join('') : '<div class="empty">В уроке пока нет блоков.</div>';
-  }catch(e){ $('pvBody').innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
+    const { data:courses } = await sb.from('classroom_courses').select('id,title').order('sort_order');
+    LSTREE=[];
+    for(const c of (courses||[])){
+      const { data:units } = await sb.from('classroom_units').select('id,title').eq('course_id',c.id).order('sort_order');
+      const us=[];
+      for(const u of (units||[])){
+        const { data:ls } = await sb.from('classroom_lessons')
+          .select('id,title,summary,is_published').eq('unit_id',u.id).eq('kind','lesson').order('sort_order');
+        if((ls||[]).length){
+          (ls||[]).forEach(l=>{ LS_TITLES[l.id] = u.title + ' · ' + l.title; });
+          us.push({ id:u.id, title:u.title, lessons:ls });
+        }
+      }
+      if(us.length) LSTREE.push({ id:c.id, title:c.title, units:us });
+    }
+    lsRenderTree();
+  }catch(e){ host.innerHTML=`<div class="err">${esc(e.message||e)}</div>`; }
+}
+
+function lsToggle(key){ if(LSOPEN.has(key)) LSOPEN.delete(key); else LSOPEN.add(key); lsRenderTree(); }
+
+function lsRenderTree(){
+  const host=$('lsTree'); if(!host) return;
+  if(!LSTREE.length){ host.innerHTML='<div class="empty">Планов уроков пока нет.</div>'; return; }
+  host.innerHTML = LSTREE.map(c=>{
+    const ck='lc:'+c.id, copen=LSOPEN.has(ck);
+    const units = !copen ? '' : c.units.map(u=>{
+      const uk='lu:'+u.id, uopen=LSOPEN.has(uk);
+      const lessons = !uopen ? '' : u.lessons.map(l=>`
+        <div class="row" style="align-items:center; padding:6px 0 6px 26px; border-top:1px solid var(--line)">
+          <div style="flex:1">
+            <div>📘 ${esc(l.title)}${l.is_published?'':' <span class="pill n">черновик</span>'}</div>
+            ${l.summary?`<div class="muted" style="font-size:12px">${esc(l.summary)}</div>`:''}
+          </div>
+          <button class="btn sec sm" onclick="showOpen('${l.id}', null, 'list')">👁 Просмотр</button>
+          <button class="btn sm" onclick="showOpen('${l.id}', null, 'one')">▶ Показ</button>
+        </div>`).join('');
+      return `<div style="padding-left:14px">
+          <div class="row" style="align-items:center; cursor:pointer; padding:6px 0" onclick="lsToggle('${uk}')">
+            <b style="flex:1">${uopen?'▾':'▸'} ${esc(u.title)}</b>
+            <span class="muted" style="font-size:12px">${u.lessons.length}</span>
+          </div>${lessons}</div>`;
+    }).join('');
+    return `<div class="card" style="padding:12px; margin-bottom:10px">
+        <div class="row" style="align-items:center; cursor:pointer" onclick="lsToggle('${ck}')">
+          <b style="flex:1; font-size:16px">${copen?'▾':'▸'} ${esc(c.title)}</b>
+        </div>${units}</div>`;
+  }).join('');
+}
+
+function lsViewChange(){
+  CR_VIEW.role    = $('lvRole')    ? $('lvRole').value    : 'teacher';
+  CR_VIEW.variant = $('lvVariant') ? $('lvVariant').value : 'any';
+  CR_VIEW.format  = $('lvFormat')  ? $('lvFormat').value  : 'any';
 }
 
 // ---------- Полноэкранный показ ----------
 // Отдельный слой, а не модалка: у .modal есть max-width, из-за него
 // предпросмотр не занимал экран целиком.
-var SHOW = { blocks:[], i:0, answer:false, title:'' };
+var SHOW = { all:[], blocks:[], i:0, answer:false, title:'', mode:'list' };
 
 // Готовит состояние интерактивных блоков (перемешивание и т.п.)
 function prepRunState(blocks){
@@ -678,14 +789,20 @@ function prepRunState(blocks){
   });
 }
 
-async function showOpen(lessonId){
+// mode: 'list' — все материалы подряд, 'one' — по одному блоку (как на уроке)
+async function showOpen(lessonId, titleArg, mode){
   if(!lessonId){ toast('Выбери урок'); return; }
-  let title=''; for(const c of LIBRARY){ const l=(c.lessons||[]).find(x=>x.id===lessonId); if(l){ title=l.title; break; } }
-  SHOW = { blocks:[], i:0, answer:false, title };
+  let title = titleArg || LS_TITLES[lessonId] || '';
+  if(!title){ for(const c of LIBRARY){ const l=(c.lessons||[]).find(x=>x.id===lessonId); if(l){ title=l.title; break; } } }
+  SHOW = { all:[], blocks:[], i:0, answer:false, title, mode: mode || 'list' };
   RUN = { lessonId, enr:null, preview:true };
   $('showLayer').classList.remove('hidden');
-  $('showTitle').textContent = title || 'Показ';
+  $('showTitle').textContent = title || 'Просмотр';
   $('showInner').innerHTML = '<div class="loading">Загружаю…</div>';
+  $('showRole').value    = CR_VIEW.role;
+  $('showVariant').value = CR_VIEW.variant;
+  $('showFormat').value  = CR_VIEW.format;
+  $('showMode').value    = SHOW.mode;
   document.addEventListener('keydown', showKey);
   try{ if(document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen(); }catch(e){}
   try{
@@ -693,28 +810,64 @@ async function showOpen(lessonId){
       .select('id, type, payload, sort_order, audience, variant, format')
       .eq('lesson_id', lessonId).order('sort_order');
     if(error) throw error;
-    SHOW.blocks = (blocks||[]).filter(crBlockVisible);
-    prepRunState(SHOW.blocks);
-    showRender();
+    SHOW.all = blocks || [];
+    showApply();
   }catch(e){ $('showInner').innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
 }
 
-function showRender(){
-  const n=SHOW.blocks.length;
-  if(!n){ $('showInner').innerHTML = '<div id="showEmpty">Нет блоков для выбранных настроек.</div>'; $('showPos').textContent=''; return; }
-  if(SHOW.i<0) SHOW.i=0; if(SHOW.i>=n) SHOW.i=n-1;
-  const b=SHOW.blocks[SHOW.i];
-  $('showPos').textContent = `${SHOW.i+1} / ${n}`;
-  $('showInner').innerHTML = SHOW.answer ? previewBlock(b) : runBlock(b);
-  if(!SHOW.answer){
-    if(b.type==='order') orderRender(b.id);
-    if(b.type==='sort') sortRender(b.id);
-    if(b.type==='flashcards') fcRender(b.id);
-  }
-  const ab=$('showAnsBtn'); if(ab) ab.textContent = SHOW.answer ? 'Скрыть ответ' : 'Показать ответ';
+// Переключатели в панели: меняют взгляд, не перезагружая урок
+function showSet(){
+  CR_VIEW.role    = $('showRole').value;
+  CR_VIEW.variant = $('showVariant').value;
+  CR_VIEW.format  = $('showFormat').value;
+  SHOW.mode       = $('showMode').value;
+  SHOW.answer     = false;
+  showApply();
 }
 
-function showNav(d){ SHOW.answer=false; SHOW.i += d; showRender(); }
+function showApply(){
+  SHOW.blocks = SHOW.all.filter(crBlockVisible);
+  if(SHOW.i >= SHOW.blocks.length) SHOW.i = 0;
+  prepRunState(SHOW.blocks);
+  showRender();
+}
+
+function showRender(){
+  const one = SHOW.mode === 'one';
+  const n = SHOW.blocks.length;
+  $('showBody').className = one ? '' : 'list';
+  $('showPrev').style.display = one ? '' : 'none';
+  $('showNext').style.display = one ? '' : 'none';
+  const ab=$('showAnsBtn'); if(ab) ab.textContent = SHOW.answer ? 'Скрыть ответы' : 'Показать ответы';
+
+  if(!n){
+    $('showInner').innerHTML = '<div id="showEmpty">Нет блоков для выбранных настроек.</div>';
+    $('showPos').textContent = '';
+    return;
+  }
+
+  const render = SHOW.answer ? previewBlock : runBlock;
+  let shown;
+  if(one){
+    if(SHOW.i<0) SHOW.i=0; if(SHOW.i>=n) SHOW.i=n-1;
+    shown = [SHOW.blocks[SHOW.i]];
+    $('showPos').textContent = `${SHOW.i+1} / ${n}`;
+  } else {
+    shown = SHOW.blocks;
+    $('showPos').textContent = `${n} блок(ов)`;
+  }
+  $('showInner').innerHTML = shown.map(render).join('');
+  if(!SHOW.answer){
+    shown.forEach(b=>{
+      if(b.type==='order') orderRender(b.id);
+      if(b.type==='sort') sortRender(b.id);
+      if(b.type==='flashcards') fcRender(b.id);
+    });
+  }
+  if(!one) $('showBody').scrollTop = 0;
+}
+
+function showNav(d){ if(SHOW.mode!=='one') return; SHOW.answer=false; SHOW.i += d; showRender(); }
 function showAnswer(){ SHOW.answer = !SHOW.answer; showRender(); }
 
 function showClose(){
@@ -728,31 +881,10 @@ function showKey(e){
   if($('showLayer').classList.contains('hidden')) return;
   const t=e.target && e.target.tagName;
   if(t==='INPUT' || t==='TEXTAREA' || t==='SELECT') return;
-  if(e.key==='Escape'){ e.preventDefault(); showClose(); }
-  else if(e.key==='ArrowRight' || e.key==='ArrowDown' || e.key===' '){ e.preventDefault(); showNav(1); }
+  if(e.key==='Escape'){ e.preventDefault(); showClose(); return; }
+  if(SHOW.mode!=='one') return;
+  if(e.key==='ArrowRight' || e.key==='ArrowDown' || e.key===' '){ e.preventDefault(); showNav(1); }
   else if(e.key==='ArrowLeft' || e.key==='ArrowUp'){ e.preventDefault(); showNav(-1); }
-}
-
-// Предпросмотр «глазами ученика» — рендер прохождения, но без реальной сдачи
-async function openPreviewKid(lessonId){
-  RUN = { lessonId, enr:null, preview:true }; RUN_MATCH={}; RUN_ORDER={}; RUN_SORT={}; RUN_FC={}; RUN_FC_DATA={};
-  openModal(`<button class="close" onclick="closeModal()">×</button>
-    <h2>Глазами ученика</h2>
-    <p class="muted" style="margin:0 0 12px">Так видит ребёнок. Кнопки «Сдать» здесь только показывают, что произойдёт — ничего не сохраняется.</p>
-    <div class="kid" id="pvKidBody"><div class="loading">Загружаю…</div></div>`);
-  try{
-    const { data:raw, error } = await sb.from('classroom_blocks').select('id, type, payload, sort_order, audience, variant, format').eq('lesson_id', lessonId).order('sort_order');
-    if(error) throw error;
-    const blocks = (raw||[]).filter(crBlockVisible);
-    (blocks||[]).forEach(b=>{
-      if(b.type==='match'){ RUN_MATCH[b.id]={ map:{}, sel:null, rights:shuffle(((b.payload&&b.payload.pairs)||[]).map((x,ix)=>({val:(x.right!=null?x.right:('#'+ix)), image:x.right_image, audio:x.right_audio}))) }; }
-      if(b.type==='order'){ RUN_ORDER[b.id]={ bank:shuffle(((b.payload&&b.payload.words)||[])), answer:[] }; }
-      if(b.type==='sort'){ prepSort(b); }
-      if(b.type==='flashcards'){ RUN_FC[b.id]={ i:0, flip:false }; RUN_FC_DATA[b.id]={ cards:(b.payload&&b.payload.cards)||[] }; }
-    });
-    $('pvKidBody').innerHTML = (blocks&&blocks.length)? blocks.map(runBlock).join('') : '<div class="empty">В уроке пока нет блоков.</div>';
-    (blocks||[]).forEach(b=>{ if(b.type==='order') orderRender(b.id); if(b.type==='sort') sortRender(b.id); if(b.type==='flashcards') fcRender(b.id); });
-  }catch(e){ $('pvKidBody').innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
 }
 
 // ============================================================
@@ -1266,10 +1398,11 @@ function switchTab(name){
   $('mainViews').classList.remove('hidden');
   if(location.hash) history.replaceState(null,'',location.pathname+location.search);
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
-  ['students','assign','review','media','library'].forEach(n=> $('tab-'+n).classList.toggle('hidden', n!==name));
+  ['students','assign','review','media','library','lessons'].forEach(n=> $('tab-'+n).classList.toggle('hidden', n!==name));
   if(name==='assign') fillCourses();
   if(name==='review') renderReview();
   if(name==='library') edInit();
+  if(name==='lessons') lsInit();
 }
 
 async function uploadToBucket(file){
@@ -1466,8 +1599,8 @@ async function edOpenLesson(lessonId, unitId, courseId){
         <div class="row" style="align-items:center">
           <b style="flex:1; font-size:16px">${esc(lesson.title)}</b>
           <button class="btn sec sm" onclick="edRenameLesson('${lessonId}')">✏ имя</button>
-          <button class="btn sec sm" onclick="openPreview('${lessonId}')">👁 Предпросмотр</button>
-          <button class="btn sm" onclick="showOpen('${lessonId}')">▶ Показ</button>
+          <button class="btn sec sm" onclick="showOpen('${lessonId}', null, 'list')">👁 Просмотр</button>
+          <button class="btn sm" onclick="showOpen('${lessonId}', null, 'one')">▶ Как на уроке</button>
         </div>
         <div class="row" style="margin-top:10px; align-items:center; gap:10px; flex-wrap:wrap">
           <div class="field" style="max-width:150px; margin:0"><label>Роль</label>
@@ -1891,6 +2024,7 @@ async function boot(){
   $('whoami').textContent = ME.name + (ME.isEditor?' · методист':'');
   if(ME.isEditor){ const b=$('roleBanner'); b.textContent='Режим методиста: видны все ученики и все работы на проверке.'; b.classList.remove('hidden'); }
   else { ['media','library'].forEach(t=>{ const el=document.querySelector('[data-tab='+t+']'); if(el) el.style.display='none'; }); }
+  // «Уроки» доступны и преподавателю: редактора он не видит, а вести урок должен
   await Promise.all([ loadStudents(), loadLibrary(), loadPending() ]);
   renderStudents();
   route();
