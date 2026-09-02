@@ -540,7 +540,23 @@ async function addNextLesson(){
 // ============================================================
 //  ПРЕДПРОСМОТР УРОКА (для учителя/методиста; тот же рендер станет прохождением)
 // ============================================================
-function blockTypeLabel(t){ return ({text:'Материал',video:'Видео',quiz:'Тест',match:'Соедини пары',exact_input:'Короткий ответ',task:'Задание',embed:'Тренажёр',order:'Составь предложение',sort:'Распредели по группам',flashcards:'Карточки'})[t]||t; }
+function blockTypeLabel(t){ return ({text:'Материал',video:'Видео',quiz:'Тест',match:'Соедини пары',exact_input:'Короткий ответ',task:'Задание',embed:'Тренажёр',order:'Составь предложение',sort:'Распредели по группам',flashcards:'Карточки',gaps:'Заполни пропуски',truefalse:'Верно / неверно',speaking:'Запись голоса'})[t]||t; }
+
+// Текст с пропусками: «I ___ a cat» → части текста и места для ответов.
+// Пропуск в исходном тексте помечается двойным подчёркиванием
+// с ответом внутри: __have__
+function gapsParse(text){
+  const parts = [];
+  const re = /__([^_]+)__/g;
+  let last = 0, m, n = 0;
+  while ((m = re.exec(text || '')) !== null) {
+    if (m.index > last) parts.push({ kind:'text', value: text.slice(last, m.index) });
+    parts.push({ kind:'gap', index: n++, accept: m[1].split('|').map(s=>s.trim()).filter(Boolean) });
+    last = re.lastIndex;
+  }
+  if (last < (text || '').length) parts.push({ kind:'text', value: text.slice(last) });
+  return parts;
+}
 
 function previewQuestion(q,qi){
   const correct = new Set(q.correct||[]);
@@ -567,6 +583,13 @@ function previewBlock(b){
   if(b.type==='quiz') return `<div class="block">${head}${(p.questions||[]).map((q,qi)=>previewQuestion(q,qi)).join('')}</div>`;
   if(b.type==='order') return `<div class="block">${head}${p.audio?`<div style="margin-bottom:6px">${audBtn(p.audio)}</div>`:''}<div class="muted" style="margin-bottom:6px">Правильный порядок:</div>${(p.words||[]).map(w=>`<span class="pill g" style="margin:3px;display:inline-block">${esc(w)}</span>`).join(' ')}</div>`;
   if(b.type==='sort') return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px">${esc(p.title)}</div>`:''}<div class="row">${(p.groups||[]).map(g=>`<div class="sortbin"><h4>${esc(g.name||'')}</h4>${(g.items||[]).map(it=>`<span class="sortitem">${it.image?'🖼':esc(it.text||'')}</span>`).join('')}</div>`).join('')}</div></div>`;
+  if(b.type==='gaps'){
+    const parts = gapsParse(p.text||'');
+    const line = parts.map(x => x.kind==='text' ? esc(x.value) : `<span class="pill g">${esc((x.accept||[])[0]||'')}</span>`).join('');
+    return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px"><b>${esc(p.title)}</b></div>`:''}${p.audio?`<div style="margin-bottom:6px">${audBtn(p.audio)}</div>`:''}<div style="line-height:2">${line}</div></div>`;
+  }
+  if(b.type==='truefalse') return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px"><b>${esc(p.title)}</b></div>`:''}${(p.statements||[]).map(s=>`<div style="margin-bottom:6px">${esc(s.text||'')} <span class="pill ${s.correct?'g':'n'}">${s.correct?'верно':'неверно'}</span></div>`).join('')}</div>`;
+  if(b.type==='speaking') return `<div class="block">${head}${p.title?`<div style="margin-bottom:6px"><b>${esc(p.title)}</b></div>`:''}<div>${p.html||''}</div>${p.sample?`<div style="margin-top:6px">${audBtn(p.sample)}</div>`:''}<div class="muted" style="margin-top:6px">🎤 Ученик записывает голос</div></div>`;
   if(b.type==='flashcards') return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px">${esc(p.title)}</div>`:''}<div class="muted">Карточек: ${(p.cards||[]).length} — ${(p.cards||[]).map(c=>esc(c.text||'')).join(', ')}</div></div>`;
   if(b.type==='task') return `<div class="block">${head}${p.audio?`<div style="margin-bottom:8px">${audBtn(p.audio,true)}</div>`:''}${p.title?`<b>${esc(p.title)}</b>`:''}<div style="margin-top:6px">${p.html||''}</div>${Array.isArray(p.parts)?p.parts.map((pt,i)=>`<div style="margin-top:8px"><b>Часть ${i+1}${pt.title?' · '+esc(pt.title):''}</b><div>${pt.prompt_html||''}</div></div>`).join(''):''}<div class="muted" style="margin-top:8px">${p.answer_kind==='audio'?'🎤 Ответ ученика: запись голоса':'✍ Ответ ученика: текст/файл'} · ручная проверка</div></div>`;
   return `<div class="block">${head}<pre class="muted" style="white-space:pre-wrap">${esc(JSON.stringify(p,null,2))}</pre></div>`;
@@ -713,6 +736,37 @@ function runBlock(b){
     return `<div class="block">${head}${p.title?`<b>${esc(p.title)}</b>`:''}<div style="margin-top:8px">${media}</div></div>`;
   }
   if(b.type==='embed') return `<div class="block">${head}${p.url?`<iframe src="${esc(p.url)}" style="width:100%;height:360px;border:1px solid var(--line);border-radius:8px"></iframe>`:'<div class="muted">Нет ссылки</div>'}<div style="margin-top:8px"><button class="btn sm" onclick="runEmbed('${id}')">Отметить пройденным</button><span id="res-${id}" class="muted"></span></div></div>`;
+  if(b.type==='gaps'){
+    const parts = gapsParse(p.text||'');
+    const bank = shuffle(parts.filter(x=>x.kind==='gap').map(x=>(x.accept||[])[0]||''));
+    const line = parts.map(x => x.kind==='text'
+      ? esc(x.value).replace(/\n/g,'<br>')
+      : `<input id="gp-${id}-${x.index}" class="gapin" autocomplete="off" style="width:120px;display:inline-block;margin:0 4px">`).join('');
+    return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px"><b>${esc(p.title)}</b></div>`:''}
+      ${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:240px;border-radius:12px"></div>`:''}
+      ${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}
+      ${p.mode==='drag'?`<div class="muted" style="margin-bottom:8px">Слова: ${bank.map(w=>`<span class="pill n">${esc(w)}</span>`).join(' ')}</div>`:''}
+      <div style="line-height:2.4;font-size:16px">${line}</div>
+      <div style="margin-top:10px"><button class="btn sm" onclick="runGaps('${id}')">Проверить</button><span id="res-${id}" class="muted"></span></div></div>`;
+  }
+  if(b.type==='truefalse'){
+    return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px"><b>${esc(p.title)}</b></div>`:''}
+      ${(p.statements||[]).map((s,si)=>`<div style="margin-bottom:10px">
+        <div style="margin-bottom:4px">${esc(s.text||'')}</div>
+        <label class="chk" style="display:inline-flex;max-width:120px;margin-right:6px"><input type="radio" name="tf-${id}-${si}" value="1"> Верно</label>
+        <label class="chk" style="display:inline-flex;max-width:120px"><input type="radio" name="tf-${id}-${si}" value="0"> Неверно</label>
+      </div>`).join('')}
+      <div style="margin-top:6px"><button class="btn sm" onclick="runTrueFalse('${id}')">Проверить</button><span id="res-${id}" class="muted"></span></div></div>`;
+  }
+  if(b.type==='speaking'){
+    return `<div class="block">${head}${p.title?`<div style="margin-bottom:6px"><b>${esc(p.title)}</b></div>`:''}
+      <div>${p.html||''}</div>
+      ${p.image?`<div style="margin:10px 0;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:240px;border-radius:12px"></div>`:''}
+      ${p.sample?`<div style="margin:10px 0"><span class="muted" style="font-size:13px">Послушай образец:</span> ${audBtn(p.sample,true)}</div>`:''}
+      <div id="sp-${id}" style="margin-top:10px"><button class="btn" onclick="spStart('${id}')">🎤 Записать ответ</button></div>
+      <span id="res-${id}" class="muted"></span></div>`;
+  }
+
   if(b.type==='flashcards') return `<div class="block">${head}${p.title?`<div style="margin-bottom:10px">${esc(p.title)}</div>`:''}<div id="fc-${id}"></div></div>`;
   if(b.type==='quiz'){
     const qs=(p.questions||[]).map((q,qi)=>{
@@ -863,6 +917,83 @@ async function runMatch(id){
   try{ const r=await submitBlock(id, ans); runResult(id, scoreMsg(r), true); if(!r.needs_review && r.score===100) celebrate(); }
   catch(e){ runResult(id, e.message||String(e), false); }
 }
+async function runGaps(id){
+  if(isPreview()){ runResult(id,'Предпросмотр — не сохраняю',true); return; }
+  const ans={};
+  document.querySelectorAll(`input[id^="gp-${id}-"]`).forEach(inp=>{
+    ans[inp.id.split('-').pop()] = inp.value;
+  });
+  try{ const r=await submitBlock(id, ans); runResult(id, scoreMsg(r), true); if(!r.needs_review && r.score===100) celebrate(); }
+  catch(e){ runResult(id, e.message||String(e), false); }
+}
+
+async function runTrueFalse(id){
+  if(isPreview()){ runResult(id,'Предпросмотр — не сохраняю',true); return; }
+  const ans={};
+  document.querySelectorAll(`input[name^="tf-${id}-"]`).forEach(inp=>{
+    if(inp.checked) ans[inp.name.split('-').pop()] = inp.value === '1';
+  });
+  try{ const r=await submitBlock(id, ans); runResult(id, scoreMsg(r), true); if(!r.needs_review && r.score===100) celebrate(); }
+  catch(e){ runResult(id, e.message||String(e), false); }
+}
+
+// ---------- Запись голоса учеником ----------
+// Тот же MediaRecorder, что у преподавателя, но результат
+// уходит в ответ на задание и слушает его учитель при проверке.
+let SP = {};   // { blockId: { rec, chunks, stream, url, blob, timer, sec } }
+
+function spBox(id, html){ const el=$('sp-'+id); if(el) el.innerHTML = html; }
+
+async function spStart(id){
+  if(!navigator.mediaDevices || !window.MediaRecorder){ toast('Браузер не умеет записывать звук'); return; }
+  let stream;
+  try{ stream = await navigator.mediaDevices.getUserMedia({ audio:true }); }
+  catch(e){ toast('Разреши доступ к микрофону'); return; }
+
+  const st = SP[id] = { stream, chunks:[], sec:0 };
+  st.rec = new MediaRecorder(stream);
+  st.rec.ondataavailable = e => { if(e.data && e.data.size) st.chunks.push(e.data); };
+  st.rec.onstop = () => {
+    st.blob = new Blob(st.chunks, { type: st.rec.mimeType || 'audio/webm' });
+    st.url = URL.createObjectURL(st.blob);
+    spBox(id, `<audio controls src="${st.url}" style="height:36px;max-width:240px"></audio>
+      <button class="btn sec sm" onclick="spStart('${id}')">↻ Перезаписать</button>
+      <button class="btn sm" onclick="spSend('${id}')">Отправить на проверку</button>`);
+  };
+  st.rec.start();
+  st.timer = setInterval(()=>{
+    st.sec++;
+    const t=$('sp-timer-'+id); if(t) t.textContent = String(Math.floor(st.sec/60)).padStart(2,'0')+':'+String(st.sec%60).padStart(2,'0');
+  }, 1000);
+  spBox(id, `<span id="sp-timer-${id}" style="font-weight:700;font-size:18px;margin-right:10px">00:00</span>
+    <button class="btn" onclick="spStop('${id}')">■ Остановить</button>`);
+}
+
+function spStop(id){
+  const st = SP[id]; if(!st) return;
+  try{ st.rec && st.rec.state !== 'inactive' && st.rec.stop(); }catch(e){}
+  try{ (st.stream?st.stream.getTracks():[]).forEach(t=>t.stop()); }catch(e){}
+  if(st.timer) clearInterval(st.timer);
+}
+
+async function spSend(id){
+  const st = SP[id];
+  if(!st || !st.blob){ toast('Сначала запиши ответ'); return; }
+  if(isPreview()){ runResult(id,'Предпросмотр — на проверку не уходит',true); return; }
+  spBox(id, '<span class="muted">Отправляю…</span>');
+  try{
+    const ext = (st.blob.type||'').includes('ogg') ? 'ogg' : 'webm';
+    const file = new File([st.blob], 'speaking_'+Date.now()+'.'+ext, { type: st.blob.type });
+    const url = await uploadToBucket(file);
+    await submitBlock(id, { audio: url });
+    spBox(id, `<audio controls src="${url}" style="height:36px;max-width:240px"></audio>
+      <span class="muted" style="margin-left:8px">Отправлено ✅</span>`);
+  }catch(e){
+    spBox(id, `<span class="err">${esc(e.message||String(e))}</span>
+      <button class="btn sec sm" onclick="spSend('${id}')">Повторить</button>`);
+  }
+}
+
 async function runTask(id){
   if(isPreview()){ runResult(id,'Предпросмотр — на проверку не уходит',true); return; }
   const t=$('tk-'+id); const ans = (t && t.value) ? { text:t.value } : {};
@@ -950,7 +1081,9 @@ async function openReview(p){
     let body = `<div class="block"><div class="bt">Задание</div>${esc(block?.payload?.title||block?.type||'')}
       ${block?.payload?.html?`<div style="margin-top:6px">${block.payload.html}</div>`:''}
       ${sub?.storage_path?`<div class="muted" style="margin-top:8px">📎 Файл ученика: ${esc(sub.storage_path)}</div>`:''}
-      ${sub?.answers && Object.keys(sub.answers).length?`<div class="muted" style="margin-top:8px">Ответ: <code>${esc(JSON.stringify(sub.answers))}</code></div>`:''}
+      ${sub?.answers?.audio?`<div style="margin-top:10px"><div class="muted" style="font-size:13px;margin-bottom:4px">🎤 Запись ученика:</div><audio controls src="${esc(sub.answers.audio)}" style="width:100%;max-width:340px"></audio></div>`:''}
+      ${sub?.answers?.text?`<div style="margin-top:10px"><div class="muted" style="font-size:13px;margin-bottom:4px">Ответ ученика:</div><div style="white-space:pre-wrap;background:#faf9ff;padding:10px;border-radius:8px">${esc(sub.answers.text)}</div></div>`:''}
+      ${sub?.answers && Object.keys(sub.answers).filter(k=>!['audio','text','__results'].includes(k)).length?`<div class="muted" style="margin-top:8px">Ответ: <code>${esc(JSON.stringify(sub.answers))}</code></div>`:''}
     </div>`;
     if(parts){
       body += parts.map((pt,idx)=>`<div class="block"><div class="bt">Часть ${idx+1}${pt.title?' · '+esc(pt.title):''}</div>
@@ -1094,6 +1227,9 @@ function edTypeSelectHtml(){
       <option value="order">Составь предложение</option>
       <option value="sort">Распредели по группам</option>
       <option value="flashcards">Карточки (заучивание)</option>
+      <option value="gaps">Заполни пропуски</option>
+      <option value="truefalse">Верно / неверно</option>
+      <option value="speaking">Запись голоса (ученик)</option>
       <option value="video">Видео</option>
     </select>`;
 }
@@ -1354,6 +1490,42 @@ function edBlockEditor(b,i){
       <select onchange="EDIT.blocks[${i}].payload.provider=this.value" style="margin-top:6px;max-width:220px"><option value="youtube" ${p.provider!=='file'?'selected':''}>YouTube</option><option value="file" ${p.provider==='file'?'selected':''}>Видеофайл</option></select>`;
   } else if(b.type==='embed'){
     body=`<input value="${esc(p.url||'')}" oninput="EDIT.blocks[${i}].payload.url=this.value" placeholder="https://train.wowteach.ru/...">`;
+  } else if(b.type==='gaps'){
+    const parts = gapsParse(p.text||'');
+    const gaps = parts.filter(x=>x.kind==='gap');
+    body=`<input value="${esc(p.title||'')}" oninput="EDIT.blocks[${i}].payload.title=this.value" placeholder="Заголовок (напр. «Вставь глагол»)" style="margin-bottom:6px">
+      <textarea rows="4" oninput="EDIT.blocks[${i}].payload.text=this.value; edRenderBlocks()" placeholder="Текст с пропусками: I __have__ a cat. She __has|has got__ a dog.">${esc(p.text||'')}</textarea>
+      <div class="muted" style="font-size:12px;margin-top:4px">
+        Пропуск — слово между двойными подчёркиваниями: <code>__have__</code>.
+        Несколько верных вариантов — через вертикальную черту: <code>__has|has got__</code>.
+      </div>
+      <div class="row" style="margin-top:6px;align-items:center">
+        <label class="chk" style="max-width:230px"><input type="radio" name="gm${i}" ${p.mode!=='drag'?'checked':''} onchange="EDIT.blocks[${i}].payload.mode='type'; edRenderBlocks()"> Вписывать с клавиатуры</label>
+        <label class="chk" style="max-width:230px"><input type="radio" name="gm${i}" ${p.mode==='drag'?'checked':''} onchange="EDIT.blocks[${i}].payload.mode='drag'; edRenderBlocks()"> Выбирать из слов</label>
+      </div>
+      ${edAudioField(p.audio, `EDIT.blocks[${i}].payload.audio`)}
+      ${edImageBox(i, 'image', 'Картинка:')}
+      <div class="muted" style="font-size:12px;margin-top:6px">Пропусков: <b>${gaps.length}</b>${gaps.length?' · ответы: '+gaps.map(g=>esc(g.accept.join(' / '))).join(', '):''}</div>`;
+
+  } else if(b.type==='truefalse'){
+    const st=(p.statements||[]);
+    body=`<input value="${esc(p.title||'')}" oninput="EDIT.blocks[${i}].payload.title=this.value" placeholder="Заголовок (напр. «Верно или неверно?»)" style="margin-bottom:6px">`
+      + st.map((s,si)=>`<div class="row" style="align-items:center;margin-bottom:6px">
+          <input class="grow" value="${esc(s.text||'')}" oninput="EDIT.blocks[${i}].payload.statements[${si}].text=this.value" placeholder="Утверждение">
+          <label class="chk" style="max-width:110px"><input type="checkbox" ${s.correct?'checked':''} onchange="EDIT.blocks[${i}].payload.statements[${si}].correct=this.checked"> верно</label>
+          <button class="btn sec sm" onclick="edArrDel(${i},'statements',${si})">✕</button>
+        </div>`).join('')
+      + `<button class="btn sec sm" onclick="edAddStatement(${i})">+ утверждение</button>
+         <div class="muted" style="font-size:12px;margin-top:4px">Галочка — утверждение верное. Порядок «Верно / Неверно» у ученика всегда одинаковый.</div>`;
+
+  } else if(b.type==='speaking'){
+    body=`<input value="${esc(p.title||'')}" oninput="EDIT.blocks[${i}].payload.title=this.value" placeholder="Заголовок (напр. «Прочитай вслух»)">
+      <textarea rows="3" style="margin-top:6px" oninput="EDIT.blocks[${i}].payload.html=this.value" placeholder="Что нужно сказать или прочитать">${esc(p.html||'')}</textarea>
+      <div class="muted" style="font-size:12px;margin-top:4px">Ученик запишет свой голос, преподаватель прослушает при проверке.</div>
+      ${edAudioField(p.sample, `EDIT.blocks[${i}].payload.sample`)}
+      <div class="muted" style="font-size:12px">↑ образец произношения (необязательно)</div>
+      ${edImageBox(i, 'image', 'Картинка:')}`;
+
   } else if(b.type==='task'){
     body=`<input value="${esc(p.title||'')}" oninput="EDIT.blocks[${i}].payload.title=this.value" placeholder="Заголовок">
       <textarea rows="3" style="margin-top:6px" oninput="EDIT.blocks[${i}].payload.html=this.value" placeholder="Условие (HTML)">${esc(p.html||'')}</textarea>
@@ -1467,7 +1639,8 @@ function edMove(i,d){ const j=i+d; if(j<0||j>=EDIT.blocks.length) return; const 
 function edDel(i){ if(!confirm('Удалить блок?')) return; EDIT.blocks.splice(i,1); edRenderBlocks(); }
 function edAddBlock(){
   const t=$('edNewType').value;
-  const def={ text:{html:''}, quiz:{needs_review:false,questions:[]}, match:{needs_review:false,title:'',pairs:[]}, exact_input:{items:[]}, task:{needs_review:true,title:'',html:''}, embed:{url:'',needs_review:false}, order:{sentence:'',words:[]}, video:{url:'',provider:'youtube',title:''}, sort:{title:'',groups:[]}, flashcards:{title:'',cards:[]} }[t]||{};
+  const def={ text:{html:''}, quiz:{needs_review:false,questions:[]}, match:{needs_review:false,title:'',pairs:[]}, exact_input:{items:[]}, task:{needs_review:true,title:'',html:''}, embed:{url:'',needs_review:false}, order:{sentence:'',words:[]}, video:{url:'',provider:'youtube',title:''}, sort:{title:'',groups:[]}, flashcards:{title:'',cards:[]},
+    gaps:{title:'',text:'',mode:'type'}, truefalse:{title:'',statements:[]}, speaking:{title:'',html:'',needs_review:true} }[t]||{};
   EDIT.blocks.push({ type:t, payload:JSON.parse(JSON.stringify(def)) }); edRenderBlocks();
 }
 function edAddQuestion(i){ (EDIT.blocks[i].payload.questions=EDIT.blocks[i].payload.questions||[]).push({q:'',type:'single',options:[],correct:[]}); edRenderBlocks(); }
