@@ -750,13 +750,13 @@ function runBlock(b){
       <button class="btn sm" style="margin-top:12px" onclick="runSort('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
   }
   if(b.type==='task'){
-    return `<div class="block">${head}${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}${p.title?`<b>${esc(p.title)}</b>`:''}<div style="margin-top:6px">${p.html||''}</div>
+    return `<div class="block">${head}${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:260px;border-radius:12px"></div>`:''}${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}${p.title?`<b>${esc(p.title)}</b>`:''}<div style="margin-top:6px">${p.html||''}</div>
       ${p.answer_kind==='audio'?'<div class="muted" style="margin:8px 0">🎤 Запись голоса добавим позже; пока отправь на проверку — учитель проверит.</div>':''}
       <textarea id="tk-${id}" placeholder="Ответ или комментарий (необязательно)" style="margin-top:6px"></textarea>
       <div style="margin-top:6px"><button class="btn sm" onclick="runTask('${id}')">Отправить на проверку</button><span id="res-${id}" class="muted"></span></div></div>`;
   }
   if(b.type==='order'){
-    return `<div class="block">${head}${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}<div style="margin-bottom:8px">Нажимай слова по порядку, чтобы собрать предложение:</div>
+    return `<div class="block">${head}${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:260px;border-radius:12px"></div>`:''}${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}<div style="margin-bottom:8px">Нажимай слова по порядку, чтобы собрать предложение:</div>
       <div class="worder-ans" id="oa-${id}"></div>
       <div id="ob-${id}"></div>
       <button class="btn sm" style="margin-top:8px" onclick="runOrder('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
@@ -1234,16 +1234,113 @@ function edRenderBlocks(){
   $('edBlocks').innerHTML = EDIT.blocks.length ? EDIT.blocks.map((b,i)=>edBlockEditor(b,i)).join('') : '<div class="empty">Нет блоков. Добавь ниже.</div>';
 }
 // Поле аудио с кнопками загрузки/записи (универсальное)
+// Аудио: если записано — сразу проигрыватель и крестик для удаления.
+// Раньше прослушать записанное было негде, а удалить нечем —
+// приходилось стирать ссылку из поля вручную.
 function edAudioField(val, setExpr){
-  return `<div class="row" style="margin:6px 0; align-items:center">
-    <input class="grow" value="${esc(val||'')}" oninput="${setExpr.replace(/"/g,'&quot;')}=this.value" placeholder="аудио: ссылка или пусто">
-    <button class="btn sec sm" onclick="edPickAudio(function(u){ ${setExpr}=u; edRenderBlocks(); })">🎵</button>
-    <button class="btn sec sm" onclick="edRecAudio(function(u){ ${setExpr}=u; edRenderBlocks(); })">🎤</button></div>`;
+  const setQ = setExpr.replace(/"/g,'&quot;');
+  if(val){
+    return `<div class="row" style="margin:6px 0; align-items:center; flex-wrap:wrap">
+      <audio controls preload="none" src="${esc(val)}" style="height:32px; max-width:220px"></audio>
+      <button class="btn sec sm" title="Заменить файлом" onclick="edPickAudio(function(u){ ${setExpr}=u; edRenderBlocks(); })">🎵</button>
+      <button class="btn sec sm" title="Перезаписать голосом" onclick="edRecAudio(function(u){ ${setExpr}=u; edRenderBlocks(); })">🎤</button>
+      <button class="btn sec sm" title="Удалить аудио" onclick="if(confirm('Удалить аудио?')){ ${setExpr}=undefined; edRenderBlocks(); }">✕</button>
+    </div>`;
+  }
+  return `<div class="row" style="margin:6px 0; align-items:center; flex-wrap:wrap">
+    <input class="grow" value="" oninput="${setQ}=this.value" placeholder="аудио: ссылка или пусто">
+    <button class="btn sec sm" onclick="edPickAudio(function(u){ ${setExpr}=u; edRenderBlocks(); })">🎵 Файл</button>
+    <button class="btn sec sm" onclick="edRecAudio(function(u){ ${setExpr}=u; edRenderBlocks(); })">🎤 Записать</button></div>`;
 }
+// Копия блока со всем содержимым — в домашках много однотипных
+// упражнений, собирать каждое заново долго
+function edDupBlock(i){
+  const src = EDIT.blocks[i];
+  const copy = JSON.parse(JSON.stringify(src));
+  EDIT.blocks.splice(i+1, 0, copy);
+  edRenderBlocks();
+  toast('Блок скопирован');
+}
+
 function edPickAudio(cb){ pickAndUpload('audio/*', cb); }
 function edRecAudio(cb){ recordAudio(cb); }
+
+// ---------- Единое управление аудио ----------
+// Раньше кнопки записи и загрузки были разбросаны по типам блоков,
+// прослушать записанное было негде, а удалить — нечем.
+// edAudioBox рисует одинаковый блок везде: есть звук — проигрыватель
+// и крестик, нет — две кнопки.
+//
+// path — путь до значения в payload, например "questions.0.audio"
+// или "pairs.2.leftAudio". Так один компонент работает с любой структурой.
+function edGetPath(obj, path){
+  return path.split('.').reduce((o,k)=> (o==null ? undefined : o[k]), obj);
+}
+function edSetPath(obj, path, val){
+  const keys = path.split('.');
+  const last = keys.pop();
+  const target = keys.reduce((o,k)=>{
+    if(o[k]==null) o[k] = /^\d+$/.test(k) ? [] : {};
+    return o[k];
+  }, obj);
+  if(val === null || val === undefined || val === '') delete target[last];
+  else target[last] = val;
+}
+
+function edAudioSet(i, path, url){
+  edSetPath(EDIT.blocks[i].payload, path, url);
+  edRenderBlocks();
+}
+function edAudioPick(i, path){ edPickAudio(url => edAudioSet(i, path, url)); }
+function edAudioRec(i, path){  edRecAudio(url => edAudioSet(i, path, url)); }
+function edAudioDel(i, path){
+  if(!confirm('Удалить аудио?')) return;
+  edAudioSet(i, path, null);
+}
+
+function edAudioBox(i, path, label){
+  const url = edGetPath(EDIT.blocks[i].payload, path);
+  const cap = label ? `<span class="muted" style="font-size:12px">${esc(label)}</span> ` : '';
+  if(url){
+    return `<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px">
+      ${cap}
+      <audio controls preload="none" src="${esc(url)}" style="height:32px;max-width:200px"></audio>
+      <button class="btn sec sm" title="Заменить файлом" onclick="edAudioPick(${i},'${path}')">🎵</button>
+      <button class="btn sec sm" title="Перезаписать голосом" onclick="edAudioRec(${i},'${path}')">🎤</button>
+      <button class="btn sec sm" title="Удалить аудио" onclick="edAudioDel(${i},'${path}')">✕</button>
+    </div>`;
+  }
+  return `<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px">
+    ${cap}
+    <button class="btn sec sm" onclick="edAudioPick(${i},'${path}')">🎵 Файл</button>
+    <button class="btn sec sm" onclick="edAudioRec(${i},'${path}')">🎤 Записать</button>
+  </div>`;
+}
+
+// ---------- Единое управление картинкой ----------
+function edImageBox(i, path, label){
+  const url = edGetPath(EDIT.blocks[i].payload, path);
+  const cap = label ? `<span class="muted" style="font-size:12px">${esc(label)}</span> ` : '';
+  if(url){
+    return `<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px">
+      ${cap}
+      <img src="${esc(url)}" style="height:44px;border-radius:8px">
+      <button class="btn sec sm" title="Заменить" onclick="edImagePick(${i},'${path}')">🖼</button>
+      <button class="btn sec sm" title="Удалить" onclick="edImageDel(${i},'${path}')">✕</button>
+    </div>`;
+  }
+  return `<div style="margin-top:4px">${cap}<button class="btn sec sm" onclick="edImagePick(${i},'${path}')">🖼 Картинка</button></div>`;
+}
+function edImagePick(i, path){
+  pickAndUpload('image/*', url => { edSetPath(EDIT.blocks[i].payload, path, url); edRenderBlocks(); });
+}
+function edImageDel(i, path){
+  if(!confirm('Удалить картинку?')) return;
+  edSetPath(EDIT.blocks[i].payload, path, null);
+  edRenderBlocks();
+}
 function edBlockEditor(b,i){
-  const ctrl=`<div style="float:right"><button class="btn sec sm" onclick="edMove(${i},-1)">↑</button> <button class="btn sec sm" onclick="edMove(${i},1)">↓</button> <button class="btn sec sm" onclick="edDel(${i})">🗑</button></div>`;
+  const ctrl=`<div style="float:right"><button class="btn sec sm" onclick="edMove(${i},-1)">↑</button> <button class="btn sec sm" onclick="edMove(${i},1)">↓</button> <button class="btn sec sm" title="Дублировать" onclick="edDupBlock(${i})">⧉</button> <button class="btn sec sm" onclick="edDel(${i})">🗑</button></div>`;
   const head=`<div class="bt">${blockTypeLabel(b.type)}</div>`;
   const p=b.payload||{};
   let body='';
@@ -1261,6 +1358,7 @@ function edBlockEditor(b,i){
     body=`<input value="${esc(p.title||'')}" oninput="EDIT.blocks[${i}].payload.title=this.value" placeholder="Заголовок">
       <textarea rows="3" style="margin-top:6px" oninput="EDIT.blocks[${i}].payload.html=this.value" placeholder="Условие (HTML)">${esc(p.html||'')}</textarea>
       ${edAudioField(p.audio, `EDIT.blocks[${i}].payload.audio`)}
+      ${edImageBox(i, 'image', 'Картинка к заданию:')}
       <div class="row" style="margin-top:6px; align-items:center">
         <label class="chk" style="max-width:190px"><input type="checkbox" ${p.needs_review!==false?'checked':''} onchange="EDIT.blocks[${i}].payload.needs_review=this.checked"> Ручная проверка</label>
         <select onchange="EDIT.blocks[${i}].payload.answer_kind=this.value||undefined" style="max-width:220px"><option value="">ответ: текст/файл</option><option value="audio" ${p.answer_kind==='audio'?'selected':''}>ответ: запись голоса</option></select>
@@ -1275,28 +1373,34 @@ function edBlockEditor(b,i){
         <div class="row" style="align-items:center">
           ${it.image?`<img src="${esc(it.image)}" style="height:40px;border-radius:6px">`:''}
           <button class="btn sec sm" onclick="edItemImage(${i},${ii})">🖼 картинка</button>
-          <button class="btn sec sm" onclick="edPickAudio(function(u){ EDIT.blocks[${i}].payload.items[${ii}].audio=u; edRenderBlocks(); })">🎵</button>
-          <button class="btn sec sm" onclick="edRecAudio(function(u){ EDIT.blocks[${i}].payload.items[${ii}].audio=u; edRenderBlocks(); })">🎤</button>
-          ${it.audio?'<span class="muted">аудио ✓</span>':''}</div>
+
+          ${edAudioField(it.audio, `EDIT.blocks[${i}].payload.items[${ii}].audio`)}</div>
       </div>`).join('')
       + `<button class="btn sec sm" onclick="edArrAdd(${i},'items',{prompt:'',accept:[]})">+ пункт</button>`;
   } else if(b.type==='order'){
     body=`<input value="${esc(p.sentence||'')}" oninput="edOrder(${i}, this.value)" placeholder="Предложение целиком (слова разделяй пробелом)">
       <div class="muted" style="font-size:12px;margin-top:4px">Слова: ${(p.words||[]).map(esc).join(' · ')||'—'}</div>
-      ${edAudioField(p.audio, `EDIT.blocks[${i}].payload.audio`)}`;
+      ${edAudioField(p.audio, `EDIT.blocks[${i}].payload.audio`)}
+      ${edImageBox(i, 'image', 'Картинка к заданию:')}`;
   } else if(b.type==='match'){
     const pairs=(p.pairs||[]);
     body=`<input value="${esc(p.title||'')}" oninput="EDIT.blocks[${i}].payload.title=this.value" placeholder="Заголовок (напр. «Соедини…»)" style="margin-bottom:8px">`
       + pairs.map((pr,pi)=>`<div class="block" style="box-shadow:none;background:#faf9ff">
         <div class="row" style="align-items:center">
           <input value="${esc(pr.left||'')}" oninput="EDIT.blocks[${i}].payload.pairs[${pi}].left=this.value" placeholder="лево (текст/ключ)" style="max-width:150px">
-          <button class="btn sec sm" onclick="edPairImage(${i},${pi},'left_image')">🖼${pr.left_image?'✓':''}</button>
-          <button class="btn sec sm" onclick="edPickAudio(function(u){ EDIT.blocks[${i}].payload.pairs[${pi}].left_audio=u; edRenderBlocks(); })">🎵${pr.left_audio?'✓':''}</button>
           <span>↔</span>
           <input value="${esc(pr.right||'')}" oninput="EDIT.blocks[${i}].payload.pairs[${pi}].right=this.value" placeholder="право (текст/ключ)" style="max-width:150px">
-          <button class="btn sec sm" onclick="edPairImage(${i},${pi},'right_image')">🖼${pr.right_image?'✓':''}</button>
-          <button class="btn sec sm" onclick="edPickAudio(function(u){ EDIT.blocks[${i}].payload.pairs[${pi}].right_audio=u; edRenderBlocks(); })">🎵${pr.right_audio?'✓':''}</button>
           <button class="btn sec sm" onclick="edArrDel(${i},'pairs',${pi})">✕</button></div>
+        <div class="row" style="gap:18px;align-items:flex-start;margin-top:6px">
+          <div style="flex:1;min-width:200px">
+            ${edImageBox(i, 'pairs.'+pi+'.left_image', 'Лево:')}
+            ${edAudioBox(i, 'pairs.'+pi+'.left_audio', '')}
+          </div>
+          <div style="flex:1;min-width:200px">
+            ${edImageBox(i, 'pairs.'+pi+'.right_image', 'Право:')}
+            ${edAudioBox(i, 'pairs.'+pi+'.right_audio', '')}
+          </div>
+        </div>
         <div class="muted" style="font-size:11px;margin-top:4px">Проверка идёт по текстовому ключу «право». Картинку/звук можно добавить для показа, но ключ «право» оставь заполненным.</div>
       </div>`).join('')
       + `<button class="btn sec sm" onclick="edArrAdd(${i},'pairs',{left:'',right:''})">+ пара</button>`;
@@ -1322,8 +1426,8 @@ function edBlockEditor(b,i){
             <input value="${esc(c.translation||'')}" oninput="EDIT.blocks[${i}].payload.cards[${ci}].translation=this.value" placeholder="перевод" style="max-width:170px">
             ${c.image?`<img src="${esc(c.image)}" style="height:40px;border-radius:6px">`:''}
             <button class="btn sec sm" onclick="edCardImage(${i},${ci})">🖼</button>
-            <button class="btn sec sm" onclick="edPickAudio(function(u){ EDIT.blocks[${i}].payload.cards[${ci}].audio=u; edRenderBlocks(); })">🎵</button>
-            <button class="btn sec sm" onclick="edRecAudio(function(u){ EDIT.blocks[${i}].payload.cards[${ci}].audio=u; edRenderBlocks(); })">🎤</button>
+
+            ${edAudioField(c.audio, `EDIT.blocks[${i}].payload.cards[${ci}].audio`)}
             <button class="btn sec sm" onclick="edArrDel(${i},'cards',${ci})">✕</button></div>
         </div>`).join('')
       + `<button class="btn sec sm" onclick="edArrAdd(${i},'cards',{text:'',translation:''})">+ карточка</button>`;
@@ -1340,7 +1444,7 @@ function edQuizQuestion(i,qi,q){
     const media = isImg
       ? `<img src="${esc(o.image||'')}" style="height:44px;border-radius:6px"> <button class="btn sec sm" onclick="edOptImage(${i},${qi},${oi})">🖼</button>`
       : `<input value="${esc((o&&o.text)||'')}" oninput="edOptText(${i},${qi},${oi},this.value)" placeholder="вариант" style="max-width:200px"> <button class="btn sec sm" onclick="edOptImage(${i},${qi},${oi})">🖼</button>`;
-    const oaud = `<button class="btn sec sm" onclick="edPickAudio(function(u){ EDIT.blocks[${i}].payload.questions[${qi}].options[${oi}].audio=u; edRenderBlocks(); })">🎵${o&&o.audio?'✓':''}</button>`;
+    const oaud = edAudioField(o && o.audio, `EDIT.blocks[${i}].payload.questions[${qi}].options[${oi}].audio`);
     const chk = `<label class="chk" style="display:inline-flex;margin:0"><input type="checkbox" ${(q.correct||[]).includes(oi)?'checked':''} onchange="edCorrect(${i},${qi},${oi},this.checked)"> верный</label>`;
     return `<div class="row" style="margin-bottom:5px; align-items:center">${media} ${oaud} ${chk} <button class="btn sec sm" onclick="edDelOpt(${i},${qi},${oi})">✕</button></div>`;
   }).join('');
@@ -1350,7 +1454,7 @@ function edQuizQuestion(i,qi,q){
     <div class="row" style="margin:6px 0; align-items:center">
       <select onchange="EDIT.blocks[${i}].payload.questions[${qi}].type=this.value" style="max-width:200px"><option value="single" ${q.type!=='multiple'?'selected':''}>один ответ</option><option value="multiple" ${q.type==='multiple'?'selected':''}>несколько ответов</option></select>
     </div>
-    <div class="row" style="margin:6px 0; align-items:center"><input class="grow" value="${esc(audUrl)}" oninput="edQAudioUrl(${i},${qi},this.value)" placeholder="аудио к вопросу: ссылка или пусто"><button class="btn sec sm" onclick="edPickAudio(function(u){ edQAudioUrl(${i},${qi},u); edRenderBlocks(); })">🎵</button><button class="btn sec sm" onclick="edRecAudio(function(u){ edQAudioUrl(${i},${qi},u); edRenderBlocks(); })">🎤</button></div>
+    ${edAudioField(audUrl, `EDIT.blocks[${i}].payload.questions[${qi}].audio`)}
     ${opts}
     <div style="margin-top:4px"><button class="btn sec sm" onclick="edAddOption(${i},${qi})">+ вариант</button> <button class="btn sec sm" onclick="edDelQuestion(${i},${qi})">удалить вопрос</button></div>
   </div>`;
