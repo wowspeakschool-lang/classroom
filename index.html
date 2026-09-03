@@ -704,7 +704,7 @@ function previewBlock(b){
 // Предпросмотр и показ — один и тот же полноэкранный слой,
 // отличается только начальный режим. Раньше предпросмотр жил
 // в модалке с max-width:640px и на весь экран не разворачивался.
-function openPreview(lessonId){ showOpen(lessonId, null, 'list'); }
+function openPreview(lessonId){ showOpen(lessonId, null, 'one', 'student'); }
 
 // ---------- Вкладка «Уроки»: планы для проведения занятия ----------
 // Отдельно от редактора: у преподавателя нет методистской роли,
@@ -751,7 +751,7 @@ function lsRenderTree(){
             <div>📘 ${esc(l.title)}${l.is_published?'':' <span class="pill n">черновик</span>'}</div>
             ${l.summary?`<div class="muted" style="font-size:12px">${esc(l.summary)}</div>`:''}
           </div>
-          <button class="btn sec sm" onclick="showOpen('${l.id}', null, 'list')">👁 Просмотр</button>
+          <button class="btn sec sm" onclick="showOpen('${l.id}', null, 'one', 'student')">👁 Глазами ученика</button>
           <button class="btn sm" onclick="showOpen('${l.id}', null, 'one')">▶ Показ</button>
         </div>`).join('');
       return `<div style="padding-left:14px">
@@ -790,11 +790,15 @@ function prepRunState(blocks){
 }
 
 // mode: 'list' — все материалы подряд, 'one' — по одному блоку (как на уроке)
-async function showOpen(lessonId, titleArg, mode){
+// forceRole: 'student' — открыть заведомо глазами ученика.
+// Сбрасывается при каждом открытии: иначе преподаватель, разок
+// переключившийся на себя, покажет ребёнку экран с ответами.
+async function showOpen(lessonId, titleArg, mode, forceRole){
   if(!lessonId){ toast('Выбери урок'); return; }
   let title = titleArg || LS_TITLES[lessonId] || '';
   if(!title){ for(const c of LIBRARY){ const l=(c.lessons||[]).find(x=>x.id===lessonId); if(l){ title=l.title; break; } } }
-  SHOW = { all:[], blocks:[], i:0, answer:false, title, mode: mode || 'list' };
+  SHOW = { all:[], blocks:[], i:0, answer:false, title, mode: mode || 'list', prevRole: CR_VIEW.role };
+  if(forceRole) CR_VIEW.role = forceRole;
   RUN = { lessonId, enr:null, preview:true };
   $('showLayer').classList.remove('hidden');
   $('showTitle').textContent = title || 'Просмотр';
@@ -890,6 +894,9 @@ function showAnswer(){ SHOW.answer = !SHOW.answer; showRender(); }
 function showClose(){
   $('showLayer').classList.add('hidden');
   document.removeEventListener('keydown', showKey);
+  if(SHOW.prevRole) CR_VIEW.role = SHOW.prevRole;
+  const cv=$('cvRole'); if(cv) cv.value = CR_VIEW.role;
+  if(typeof EDIT!=='undefined' && EDIT && EDIT.blocks && $('edBlocks')) edRenderBlocks();
   RUN=null;
   try{ if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen(); }catch(e){}
 }
@@ -1616,7 +1623,7 @@ async function edOpenLesson(lessonId, unitId, courseId){
         <div class="row" style="align-items:center">
           <b style="flex:1; font-size:16px">${esc(lesson.title)}</b>
           <button class="btn sec sm" onclick="edRenameLesson('${lessonId}')">✏ имя</button>
-          <button class="btn sec sm" onclick="showOpen('${lessonId}', null, 'list')">👁 Просмотр</button>
+          <button class="btn sec sm" onclick="showOpen('${lessonId}', null, 'one', 'student')">👁 Глазами ученика</button>
           <button class="btn sm" onclick="showOpen('${lessonId}', null, 'one')">▶ Как на уроке</button>
         </div>
         <div class="row" style="margin-top:10px; align-items:center; gap:10px; flex-wrap:wrap">
