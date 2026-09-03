@@ -66,8 +66,38 @@
   #showBody.list .bt{ display:block; }
   #showBar select{ font-size:13px; padding:5px 8px; }
   #showBody .bt{ display:none; }
-  #showBody img{ max-width:80vw !important; max-height:60vh !important; width:auto !important; height:auto !important; }
+  #showBody img{ max-width:100%; max-height:70vh; height:auto; }
   #showEmpty{ margin:auto; color:var(--muted); font-size:18px; }
+
+  /* Слайды по макету: подложка, темы, раскладки */
+  .slide{ box-sizing:border-box; width:100%; min-height:100%; padding:28px 32px; border-radius:18px;
+    background:var(--sl-bg); color:var(--sl-fg); position:relative; display:flex; flex-direction:column; }
+  .slide--open { --sl-bg:#EEEDFE; --sl-ac:#534AB7; --sl-fg:#26215C; }
+  .slide--speak{ --sl-bg:#E6F1FB; --sl-ac:#185FA5; --sl-fg:#0C447C; }
+  .slide--read { --sl-bg:#EAF3DE; --sl-ac:#3B6D11; --sl-fg:#173404; }
+  .slide--vocab{ --sl-bg:#FBEAF0; --sl-ac:#993556; --sl-fg:#4B1528; }
+  .slide--game { --sl-bg:#FAEEDA; --sl-ac:#854F0B; --sl-fg:#412402; }
+  .slide__tag{ position:absolute; top:14px; right:18px; font-size:12px; font-weight:700;
+    letter-spacing:.06em; color:var(--sl-ac); opacity:.85; }
+  .slide__instr{ font-size:13px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--sl-ac); margin-bottom:14px; }
+  .slide__body{ flex:1 1 auto; display:flex; flex-direction:column; justify-content:center; min-width:0; }
+  .slide__grid{ display:grid; gap:18px; align-items:stretch; justify-items:center; min-width:0; }
+  .slide__row{ display:flex; flex-wrap:wrap; gap:18px; align-items:stretch; justify-content:center; min-width:0; }
+  .slide__cell{ display:flex; flex-direction:column; align-items:center; gap:8px; min-width:0; }
+  .slide__pic{ flex:0 0 auto; background-size:contain; background-repeat:no-repeat; background-position:center; }
+  .slide__cap{ font-size:20px; font-weight:700; text-align:center; word-break:break-word; }
+  .slide__num{ font-size:12px; color:var(--sl-ac); opacity:.7; font-weight:700; }
+  .slide__word{ font-size:26px; font-weight:800; text-align:center; }
+  .slide__big{ font-size:40px; font-weight:800; text-align:center; letter-spacing:.02em; }
+  .slide__title{ font-size:38px; font-weight:800; text-align:center; }
+  .slide__sub{ font-size:20px; text-align:center; opacity:.75; margin-top:10px; }
+  .slide__arrow{ font-size:22px; color:var(--sl-ac); text-align:center; line-height:1; }
+  .slide__split{ display:flex; gap:24px; align-items:center; flex-wrap:wrap; min-width:0; }
+  .slide__split > *{ flex:1 1 260px; min-width:0; }
+  .slide__emoji{ font-size:46px; line-height:1.1; text-align:center; }
+  .slide__plain{ font-size:20px; line-height:1.5; }
+  .slide img{ max-width:100%; height:auto; }
   .modal h2{ margin:0 0 2px; font-size:18px; }
   .modal .close{ float:right; background:none; border:none; font-size:22px; color:#94a3b8; }
   .chk{ display:flex; align-items:center; gap:9px; padding:8px 10px; border:1px solid var(--line); border-radius:9px; margin-bottom:6px; }
@@ -453,8 +483,8 @@ async function loadLibrary(){
     const { data:units } = await sb.from('classroom_units').select('id, title, sort_order').eq('course_id', c.id).order('sort_order');
     let lessons=[];
     for(const un of (units||[])){
-      const { data:ls } = await sb.from('classroom_lessons').select('id, title, sort_order, is_published').eq('unit_id', un.id).order('sort_order');
-      (ls||[]).forEach(l=> lessons.push({ id:l.id, title:`${un.title} · ${l.title}`, is_published:l.is_published }));
+      const { data:ls } = await sb.from('classroom_lessons').select('id, title, sort_order, is_published, kind').eq('unit_id', un.id).order('sort_order');
+      (ls||[]).forEach(l=> lessons.push({ id:l.id, title:`${un.title} · ${l.title}`, is_published:l.is_published, kind:l.kind }));
     }
     c.lessons = lessons;
   }
@@ -623,6 +653,98 @@ function blockTypeLabel(t){ return ({text:'Материал',video:'Видео',
 // Текст с пропусками: «I ___ a cat» → части текста и места для ответов.
 // Пропуск в исходном тексте помечается двойным подчёркиванием
 // с ответом внутри: __have__
+// ---------- Слайды по макету ----------
+// payload.layout есть — слайд собирается из структуры.
+// Нет — блок работает как раньше, показывается payload.html.
+const SLIDE_THEMES = {
+  open:'открытие', speak:'говорение', read:'чтение', vocab:'лексика', game:'игры'
+};
+const SLIDE_LAYOUTS = {
+  title:   'Заголовок',
+  image:   'Одна картинка',
+  cards:   'Карточки в ряд',
+  words:   'Сетка слов',
+  ladder:  'Слова столбиком',
+  letters: 'Крупные буквы',
+  split:   'Картинка и текст',
+  emoji:   'Эмодзи с подписями',
+  plain:   'Свободный текст'
+};
+
+// Пропорции берём из сохранённых w/h, чтобы не считать при показе
+function slidePic(it, boxW, boxH){
+  const w = Number(it && it.w) || 0, h = Number(it && it.h) || 0;
+  let cw = boxW, ch = boxH;
+  if(w && h){
+    const r = w / h;
+    if(r >= 1) ch = Math.round(boxW / r); else cw = Math.round(boxH * r);
+    if(ch > boxH){ ch = boxH; cw = Math.round(boxH * r); }
+    if(cw > boxW){ cw = boxW; ch = Math.round(boxW / r); }
+  }
+  return `<div class="slide__pic" style="width:${cw}px;height:${ch}px;background-image:url('${esc((it&&it.img)||'')}')"></div>`;
+}
+
+function slideHtml(p){
+  const theme = SLIDE_THEMES[p.theme] ? p.theme : 'open';
+  const items = Array.isArray(p.items) ? p.items : [];
+  const L = p.layout;
+  let body = '';
+
+  if(L === 'title'){
+    body = `<div><div class="slide__title">${esc(p.text||'')}</div>` +
+           (p.subtext ? `<div class="slide__sub">${esc(p.subtext)}</div>` : '') + `</div>`;
+
+  } else if(L === 'image'){
+    body = `<div style="display:flex;justify-content:center">${slidePic(items[0]||{}, 520, 380)}</div>`;
+
+  } else if(L === 'cards'){
+    const n = Math.min(Math.max(items.length || 1, 1), 6);
+    const cols = n <= 3 ? n : Math.ceil(n / 2);
+    const box = n <= 3 ? 210 : 170;
+    body = `<div class="slide__grid" style="grid-template-columns:repeat(${cols},minmax(0,1fr))">` +
+      items.map(it => `<div class="slide__cell">` +
+        (it.num ? `<div class="slide__num">${esc(it.num)}</div>` : '') +
+        slidePic(it, box, box) +
+        (it.caption ? `<div class="slide__cap">${esc(it.caption)}</div>` : '') +
+      `</div>`).join('') + `</div>`;
+
+  } else if(L === 'words'){
+    const n = Math.min(items.length || 1, 12);
+    const cols = n <= 4 ? n : (n <= 8 ? Math.ceil(n / 2) : Math.ceil(n / 3));
+    body = `<div class="slide__grid" style="grid-template-columns:repeat(${cols},minmax(0,1fr))">` +
+      items.map(it => `<div class="slide__cell">` +
+        (it.num ? `<div class="slide__num">${esc(it.num)}</div>` : '') +
+        `<div class="slide__word">${esc(it.word||'')}</div></div>`).join('') + `</div>`;
+
+  } else if(L === 'ladder'){
+    body = `<div style="display:flex;flex-direction:column;align-items:center;gap:6px">` +
+      items.map((it, ix) => (ix ? `<div class="slide__arrow">↓</div>` : '') +
+        `<div class="slide__word">${esc(it.word||'')}</div>`).join('') + `</div>`;
+
+  } else if(L === 'letters'){
+    body = `<div class="slide__row">` +
+      items.map(it => `<div class="slide__big">${esc(it.text||'')}</div>`).join('') + `</div>`;
+
+  } else if(L === 'split'){
+    body = `<div class="slide__split"><div style="display:flex;justify-content:center">` +
+      slidePic(items[0]||{}, 340, 300) + `</div>` +
+      `<div class="slide__plain">${p.text||''}</div></div>`;
+
+  } else if(L === 'emoji'){
+    body = `<div class="slide__row">` +
+      items.map(it => `<div class="slide__cell"><div class="slide__emoji">${esc(it.emoji||'')}</div>` +
+        (it.caption ? `<div class="slide__cap">${esc(it.caption)}</div>` : '') + `</div>`).join('') + `</div>`;
+
+  } else {
+    body = `<div class="slide__plain">${p.text || p.html || ''}</div>`;
+  }
+
+  return `<div class="slide slide--${theme}">` +
+    (p.tag === 'if_time' ? `<div class="slide__tag">⏱ IF TIME</div>` : '') +
+    (p.instr ? `<div class="slide__instr">${esc(p.instr)}</div>` : '') +
+    `<div class="slide__body">${body}</div></div>`;
+}
+
 // Что сейчас показываем: роль, режим занятия, длительность.
 // Читается из переключателей в шапке урока, влияет на показ и
 // на предпросмотр «глазами ученика».
@@ -643,6 +765,7 @@ function crBlockVisible(b){
 }
 // Текст этапа: в групповом режиме под основным html идёт врезка html_group
 function crTextHtml(p){
+  if(p.layout) return slideHtml(p);
   const main = p.html || '';
   if(CR_VIEW.variant === 'group' && p.html_group){
     return main + `<div style="margin-top:12px; padding:12px 14px; border-left:4px solid var(--brand,#7c3aed); background:#faf9ff; border-radius:0 10px 10px 0">`
@@ -1265,7 +1388,7 @@ async function spSend(id){
   try{
     const ext = (st.blob.type||'').includes('ogg') ? 'ogg' : 'webm';
     const file = new File([st.blob], 'speaking_'+Date.now()+'.'+ext, { type: st.blob.type });
-    const url = await uploadToBucket(file);
+    const url = await uploadToBucket(file, await myUploadFolder());
     const ans = { audio: url };
     const t = $('tk-'+id);              // у task рядом с записью есть поле комментария
     if(t && t.value && t.value.trim()) ans.text = t.value;
@@ -1305,8 +1428,12 @@ function fillCourses(){
 function onCourseChange(){
   const cid=$('asgCourse').value;
   const c=LIBRARY.find(x=>x.id===cid);
+  // Ограничения по типу нет: назначить можно и план урока, и ДЗ, и тест
+  const kindLabel = { lesson:'план урока', homework:'ДЗ', test:'тест' };
   const lessons = c? (c.lessons||[]).filter(l=>l.is_published) : [];
-  $('asgLesson').innerHTML = lessons.length ? lessons.map(l=>`<option value="${l.id}">${esc(l.title)}</option>`).join('') : '<option value="">— нет опубликованных ДЗ —</option>';
+  $('asgLesson').innerHTML = lessons.length
+    ? lessons.map(l=>`<option value="${l.id}">${esc(l.title)}${l.kind?' · '+kindLabel[l.kind]||'':''}</option>`).join('')
+    : '<option value="">— нет опубликованных материалов —</option>';
 }
 function asgSelectAll(on){ document.querySelectorAll('.asgStu').forEach(c=>c.checked=on); }
 
@@ -1432,13 +1559,22 @@ function switchTab(name){
   if(name==='lessons') lsInit();
 }
 
-async function uploadToBucket(file){
+async function uploadToBucket(file, folder){
   const safe = file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
-  const path = 'uploads/' + Date.now() + '_' + safe;
+  const path = (folder || 'uploads') + '/' + Date.now() + '_' + safe;
   const { error } = await sb.storage.from('classroom-media').upload(path, file, { upsert:true, contentType:file.type||undefined });
   if(error) throw error;
   return sb.storage.from('classroom-media').getPublicUrl(path).data.publicUrl;
 }
+// Папка ученика в бакете: submissions/<uid>. Для редактора — общая uploads.
+async function myUploadFolder(){
+  try{
+    const { data } = await sb.auth.getUser();
+    const uid = data && data.user && data.user.id;
+    return uid ? ('submissions/' + uid) : 'uploads';
+  }catch(e){ return 'uploads'; }
+}
+
 function pickAndUpload(accept, cb){
   const inp=document.createElement('input'); inp.type='file'; inp.accept=accept;
   inp.onchange=async()=>{ const f=inp.files[0]; if(!f) return; toast('Загрузка…'); try{ const url=await uploadToBucket(f); cb(url); toast('Загружено ✅'); }catch(e){ toast(e.message||String(e)); } };
@@ -1619,6 +1755,7 @@ async function edOpenLesson(lessonId, unitId, courseId){
     // audience/variant/format держим в блоке, а не в строке таблицы:
     // ключ upsert — (lesson_id, sort_order), и без этого при перестановке
     // блоков разметка осталась бы на старых позициях.
+    ED_OPEN = new Set();
     EDIT.blocks = (blocks||[]).map(b=>({ type:b.type, payload:b.payload||{},
       audience:b.audience||'shared', variant:b.variant||'any', format:b.format||'any' }));
     right.innerHTML = `
@@ -1654,6 +1791,13 @@ async function edOpenLesson(lessonId, unitId, courseId){
           <div class="field" style="max-width:200px"><label>Порог зачёта, %</label><input type="number" id="edThreshold" min="0" max="100" value="${lesson.pass_threshold!=null?lesson.pass_threshold:''}"></div>
         </div>
       </div>
+      <div class="row" style="margin:10px 0 6px; align-items:center; gap:8px; flex-wrap:wrap">
+        <button class="btn sec sm" onclick="edCollapseAll(true)">▸ Свернуть все</button>
+        <button class="btn sec sm" onclick="edCollapseAll(false)">▾ Развернуть все</button>
+        <button class="btn sec sm" onclick="edToggleOutline()">☰ Оглавление</button>
+        <span id="edBlocksCount" class="muted" style="font-size:13px"></span>
+      </div>
+      <div id="edOutline" class="hidden" style="border:1px solid var(--line); border-radius:12px; padding:8px; margin-bottom:10px; max-height:280px; overflow:auto"></div>
       <div id="edBlocks"></div>
       <div id="edToolbar" style="margin-top:12px; display:flex; gap:8px; align-items:center; flex-wrap:wrap">
         ${edTypeSelectHtml()}
@@ -1676,9 +1820,87 @@ async function edRenameLesson(lessonId){
   toast('Переименовано');
 }
 
+// Свёрнутые блоки: в уроке их бывает полсотни, разворачивать все
+// сразу — бесконечная прокрутка мимо чужих форм.
+var ED_OPEN = new Set();
+
 function edRenderBlocks(){
-  $('edBlocks').innerHTML = EDIT.blocks.length ? EDIT.blocks.map((b,i)=>edBlockEditor(b,i)).join('') : '<div class="empty">Нет блоков. Добавь ниже.</div>';
+  $('edBlocks').innerHTML = EDIT.blocks.length
+    ? EDIT.blocks.map((b,i)=> ED_OPEN.has(i) ? edBlockEditor(b,i) : edBlockRow(b,i)).join('')
+    : '<div class="empty">Нет блоков. Добавь ниже.</div>';
+  const cnt=$('edBlocksCount');
+  if(cnt) cnt.textContent = EDIT.blocks.length ? `${EDIT.blocks.length} блок(ов), развёрнуто ${ED_OPEN.size}` : '';
+  edRenderOutline();
   crCount();
+}
+
+// Короткое описание блока для свёрнутой строки и оглавления
+function edBlockDigest(b){
+  const p=b.payload||{};
+  let t = p.title || p.instr || p.text || p.sentence || '';
+  if(!t && p.html) t = String(p.html).replace(/<[^>]*>/g,' ');
+  if(!t && Array.isArray(p.items) && p.items.length){
+    t = p.items.map(x=>x.word||x.caption||x.text||x.prompt||'').filter(Boolean).join(', ');
+  }
+  if(!t && Array.isArray(p.questions) && p.questions.length) t = p.questions[0].text || '';
+  if(!t && Array.isArray(p.statements) && p.statements.length) t = p.statements[0].text || '';
+  if(!t && Array.isArray(p.cards) && p.cards.length) t = p.cards.map(c=>c.text).filter(Boolean).join(', ');
+  t = String(t).replace(/\s+/g,' ').trim();
+  return t.length > 80 ? t.slice(0,80) + '…' : (t || '—');
+}
+
+function edAudBadge(aud){
+  return aud==='teacher' ? '<span class="pill n">преп.</span>'
+       : aud==='student' ? '<span class="pill">ученик</span>' : '';
+}
+
+function edBlockRow(b,i){
+  const dim = crBlockVisible(b) ? '' : ' style="opacity:.45"';
+  const layout = b.payload && b.payload.layout ? ` <span class="muted" style="font-size:11px">${esc(SLIDE_LAYOUTS[b.payload.layout]||b.payload.layout)}</span>` : '';
+  return `<div class="block" id="edb-${i}"${dim} style="padding:8px 12px; margin-bottom:6px">
+    <div class="row" style="align-items:center; gap:8px">
+      <span class="muted" style="font-size:12px; min-width:26px">${i+1}</span>
+      <button class="btn sec sm" onclick="edToggleBlock(${i})" title="Развернуть">▸</button>
+      <span class="muted" style="font-size:12px; min-width:110px">${blockTypeLabel(b.type)}${layout}</span>
+      ${edAudBadge(b.audience)}
+      <span class="grow" onclick="edToggleBlock(${i})"
+        style="min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor:pointer">${esc(edBlockDigest(b))}</span>
+      <button class="btn sec sm" onclick="edMove(${i},-1)" title="Выше">↑</button>
+      <button class="btn sec sm" onclick="edMove(${i},1)" title="Ниже">↓</button>
+      <button class="btn sec sm" onclick="edDupBlock(${i})" title="Копировать">⧉</button>
+      <button class="btn sec sm" onclick="edDel(${i})" title="Удалить">🗑</button>
+    </div></div>`;
+}
+
+function edToggleBlock(i){
+  if(ED_OPEN.has(i)) ED_OPEN.delete(i); else ED_OPEN.add(i);
+  edRenderBlocks();
+}
+function edCollapseAll(on){
+  ED_OPEN = on ? new Set() : new Set(EDIT.blocks.map((_,i)=>i));
+  edRenderBlocks();
+}
+function edToggleOutline(){
+  const o=$('edOutline'); if(!o) return;
+  o.classList.toggle('hidden');
+  if(!o.classList.contains('hidden')) edRenderOutline();
+}
+function edRenderOutline(){
+  const o=$('edOutline'); if(!o || o.classList.contains('hidden')) return;
+  o.innerHTML = EDIT.blocks.length ? EDIT.blocks.map((b,i)=>`
+    <div class="row" style="align-items:center; gap:8px; padding:3px 4px; cursor:pointer; ${crBlockVisible(b)?'':'opacity:.45'}"
+         onclick="edJump(${i})">
+      <span class="muted" style="font-size:11px; min-width:24px">${i+1}</span>
+      <span class="muted" style="font-size:11px; min-width:100px">${blockTypeLabel(b.type)}</span>
+      ${edAudBadge(b.audience)}
+      <span class="grow" style="min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${esc(edBlockDigest(b))}</span>
+    </div>`).join('') : '<div class="muted">Пусто</div>';
+}
+function edJump(i){
+  ED_OPEN.add(i);
+  edRenderBlocks();
+  const el=$('edb-'+i) || document.querySelectorAll('#edBlocks .block')[i];
+  if(el) el.scrollIntoView({ behavior:'smooth', block:'center' });
 }
 // Поле аудио с кнопками загрузки/записи (универсальное)
 // Аудио: если записано — сразу проигрыватель и крестик для удаления.
@@ -1705,6 +1927,7 @@ function edDupBlock(i){
   const src = EDIT.blocks[i];
   const copy = JSON.parse(JSON.stringify(src));
   EDIT.blocks.splice(i+1, 0, copy);
+  edShiftOpen(x => x>i ? x+1 : x);
   edRenderBlocks();
   toast('Блок скопирован');
 }
@@ -1787,7 +2010,7 @@ function edImageDel(i, path){
   edRenderBlocks();
 }
 function edBlockEditor(b,i){
-  const ctrl=`<div style="float:right"><button class="btn sec sm" onclick="edMove(${i},-1)">↑</button> <button class="btn sec sm" onclick="edMove(${i},1)">↓</button> <button class="btn sec sm" title="Дублировать" onclick="edDupBlock(${i})">⧉</button> <button class="btn sec sm" onclick="edDel(${i})">🗑</button></div>`;
+  const ctrl=`<div style="float:right"><button class="btn sec sm" title="Свернуть" onclick="edToggleBlock(${i})">▾</button> <button class="btn sec sm" onclick="edMove(${i},-1)">↑</button> <button class="btn sec sm" onclick="edMove(${i},1)">↓</button> <button class="btn sec sm" title="Дублировать" onclick="edDupBlock(${i})">⧉</button> <button class="btn sec sm" onclick="edDel(${i})">🗑</button></div>`;
   const aud=b.audience||'shared', vr=b.variant||'any', fm=b.format||'any';
   const dim = crBlockVisible(b) ? '' : ' style="opacity:.45"';
   const badge = aud==='teacher' ? '<span class="pill n" style="margin-left:6px">преподаватель</span>'
@@ -1813,7 +2036,9 @@ function edBlockEditor(b,i){
   const p=b.payload||{};
   let body='';
   if(b.type==='text'){
-    body=`<textarea rows="4" oninput="EDIT.blocks[${i}].payload.html=this.value" placeholder="Текст (можно HTML)">${esc(p.html||'')}</textarea>
+    body = p.layout ? edSlideEditor(i, p) : `<div class="row" style="justify-content:flex-end;margin-bottom:6px">
+        <button class="btn sec sm" onclick="edSlideOn(${i})">Собрать слайдом</button></div>
+      <textarea rows="4" oninput="EDIT.blocks[${i}].payload.html=this.value" placeholder="Текст (можно HTML)">${esc(p.html||'')}</textarea>
       <div style="margin-top:8px"><label class="muted" style="font-size:12px">Адаптация для группы (необязательно)</label>
         <textarea rows="3" oninput="edGroupHtml(${i},this.value)" placeholder="Показывается врезкой «В группе» в групповом режиме">${esc(p.html_group||'')}</textarea></div>
       <div style="margin-top:6px"><button class="btn sec sm" onclick="edInsertImage(${i})">🖼 Вставить картинку</button></div>
@@ -1969,6 +2194,135 @@ function edAccept(i,ii,val){ EDIT.blocks[i].payload.items[ii].accept = val.split
 function edOrder(i,val){ EDIT.blocks[i].payload.sentence=val; EDIT.blocks[i].payload.words=val.trim().split(/\s+/).filter(Boolean); }
 function edArrAdd(i,key,obj){ (EDIT.blocks[i].payload[key]=EDIT.blocks[i].payload[key]||[]).push(obj); edRenderBlocks(); }
 function edArrDel(i,key,idx){ EDIT.blocks[i].payload[key].splice(idx,1); edRenderBlocks(); }
+// Какие поля есть у элемента в каждом макете
+const SLIDE_ITEM_FIELDS = {
+  cards:  ['img','caption','num'],
+  words:  ['word','num'],
+  ladder: ['word'],
+  letters:['text'],
+  emoji:  ['emoji','caption'],
+  image:  ['img'],
+  split:  ['img'],
+  title:  [],
+  plain:  []
+};
+function slideUsesItems(L){ return (SLIDE_ITEM_FIELDS[L]||[]).length > 0; }
+function slideUsesText(L){ return L==='title' || L==='plain' || L==='split'; }
+
+// Форма редактирования слайда. Лишние поля из payload не удаляются:
+// при смене макета данные остаются, пока блок не сохранён.
+function edSlideEditor(i, p){
+  const L = p.layout, items = Array.isArray(p.items) ? p.items : [];
+  const fields = SLIDE_ITEM_FIELDS[L] || [];
+  const themes = Object.keys(SLIDE_THEMES).map(k=>{
+    const on = (p.theme||'open')===k;
+    return `<button title="${SLIDE_THEMES[k]}" onclick="edSlideSet(${i},'theme','${k}')"
+      style="width:26px;height:26px;border-radius:7px;cursor:pointer;padding:0;
+      border:${on?'3px solid #111':'1px solid var(--line)'};
+      background:${({open:'#EEEDFE',speak:'#E6F1FB',read:'#EAF3DE',vocab:'#FBEAF0',game:'#FAEEDA'})[k]}"></button>`;
+  }).join('');
+
+  const rows = !slideUsesItems(L) ? '' : items.map((it,ii)=>`
+    <div class="row" style="align-items:center; gap:6px; padding:6px 0; border-top:1px solid var(--line)">
+      <span class="muted" style="cursor:grab" title="Перетащить">⠿</span>
+      ${fields.includes('num')?`<input value="${esc(it.num||'')}" placeholder="№" style="max-width:52px" oninput="edSlideItem(${i},${ii},'num',this.value)">`:''}
+      ${fields.includes('img')?`<button class="btn sec sm" onclick="edSlideImage(${i},${ii})">${it.img?'Заменить':'Картинка'}</button>`:''}
+      ${it.img?`<img src="${esc(it.img)}" style="width:34px;height:34px;object-fit:contain;border-radius:6px">`:''}
+      ${fields.includes('word')?`<input value="${esc(it.word||'')}" placeholder="Слово" class="grow" oninput="edSlideItem(${i},${ii},'word',this.value)">`:''}
+      ${fields.includes('text')?`<input value="${esc(it.text||'')}" placeholder="Буква" class="grow" oninput="edSlideItem(${i},${ii},'text',this.value)">`:''}
+      ${fields.includes('emoji')?`<input value="${esc(it.emoji||'')}" placeholder="Эмодзи" style="max-width:70px" oninput="edSlideItem(${i},${ii},'emoji',this.value)">`:''}
+      ${fields.includes('caption')?`<input value="${esc(it.caption||'')}" placeholder="Подпись" class="grow" oninput="edSlideItem(${i},${ii},'caption',this.value)">`:''}
+      <button class="btn sec sm" onclick="edSlideUp(${i},${ii})" title="Выше">↑</button>
+      <button class="btn sec sm" onclick="edSlideDel(${i},${ii})" title="Удалить">🗑</button>
+    </div>`).join('');
+
+  return `<div class="row" style="gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:8px">
+      <select style="max-width:190px" onchange="edSlideLayout(${i},this.value)">
+        ${Object.keys(SLIDE_LAYOUTS).map(k=>`<option value="${k}" ${L===k?'selected':''}>${SLIDE_LAYOUTS[k]}</option>`).join('')}
+      </select>
+      <span class="row" style="gap:5px">${themes}</span>
+      <label class="chk" style="margin:0"><input type="checkbox" ${p.tag==='if_time'?'checked':''}
+        onchange="edSlideSet(${i},'tag',this.checked?'if_time':null)"><span>if time</span></label>
+      <span style="flex:1"></span>
+      <button class="btn sec sm" onclick="edSlideOff(${i})" title="Вернуться к полю HTML">Обычный текст</button>
+    </div>
+    <input value="${esc(p.instr||'')}" placeholder="Инструкция сверху (напр. Listen and say)" oninput="edSlideSet(${i},'instr',this.value)">
+    ${slideUsesText(L)?`<textarea rows="${L==='plain'?4:2}" style="margin-top:6px" placeholder="${L==='title'?'Заголовок':'Текст'}" oninput="edSlideSet(${i},'text',this.value)">${esc(p.text||'')}</textarea>`:''}
+    ${L==='title'?`<input style="margin-top:6px" value="${esc(p.subtext||'')}" placeholder="Подзаголовок" oninput="edSlideSet(${i},'subtext',this.value)">`:''}
+    ${slideUsesItems(L)?`<div style="margin-top:8px">${rows}
+      <button class="btn sec sm" style="margin-top:8px" onclick="edSlideAdd(${i})">+ Элемент</button></div>`:''}
+    <div class="muted" style="font-size:12px; margin:10px 0 4px">Предпросмотр слайда</div>
+    <div style="border:1px solid var(--line); border-radius:12px; overflow:hidden; min-height:150px">${slideHtml(p)}</div>`;
+}
+
+// Переезд на макет вручную: прежний html не стирается,
+// вернуться можно кнопкой «Обычный текст».
+function edSlideOn(i){
+  const p=EDIT.blocks[i].payload;
+  p.layout = p.layout || 'plain';
+  if(!p.text && p.html) p.text = p.html;
+  edRenderBlocks();
+}
+function edSlideOff(i){ delete EDIT.blocks[i].payload.layout; edRenderBlocks(); }
+
+function edSlideSet(i,key,val){
+  const p=EDIT.blocks[i].payload;
+  if(val===null || val==='') delete p[key]; else p[key]=val;
+  edRenderBlocks();
+}
+function edSlideItem(i,ii,key,val){
+  const it=EDIT.blocks[i].payload.items[ii];
+  if(val==='') delete it[key]; else it[key]=val;
+  edSlidePreview(i);
+}
+function edSlideLayout(i,L){ EDIT.blocks[i].payload.layout=L; edRenderBlocks(); }
+function edSlideAdd(i){
+  const p=EDIT.blocks[i].payload;
+  (p.items = p.items || []).push({});
+  edRenderBlocks();
+}
+function edSlideDel(i,ii){ EDIT.blocks[i].payload.items.splice(ii,1); edRenderBlocks(); }
+function edSlideUp(i,ii){
+  if(ii<1) return;
+  const a=EDIT.blocks[i].payload.items;
+  [a[ii-1],a[ii]]=[a[ii],a[ii-1]];
+  edRenderBlocks();
+}
+// Обновляем только предпросмотр, чтобы не терять фокус в поле при вводе
+function edSlidePreview(i){
+  const host=$('edBlocks'); if(!host) return;
+  const box=host.querySelectorAll('.block')[i]; if(!box) return;
+  const pv=box.lastElementChild; if(pv) pv.innerHTML = slideHtml(EDIT.blocks[i].payload);
+}
+
+// Картинка элемента: запоминаем размеры, чтобы сборщик знал пропорции
+function edSlideImage(i,ii){
+  const inp=document.createElement('input'); inp.type='file';
+  inp.accept='image/png,image/jpeg,image/webp,image/svg+xml';
+  inp.onchange=async()=>{
+    const f=inp.files[0]; if(!f) return;
+    if(f.size > 2*1024*1024){ toast('Файл больше 2 МБ'); return; }
+    toast('Загрузка…');
+    try{
+      const dim = await imageSize(f);
+      const url = await uploadToBucket(f);
+      const it = EDIT.blocks[i].payload.items[ii];
+      it.img = url;
+      if(dim){ it.w = dim.w; it.h = dim.h; }
+      edRenderBlocks(); toast('Загружено ✅');
+    }catch(e){ toast(e.message||String(e)); }
+  };
+  inp.click();
+}
+function imageSize(file){
+  return new Promise(res=>{
+    const url=URL.createObjectURL(file), im=new Image();
+    im.onload=()=>{ res({ w:im.naturalWidth, h:im.naturalHeight }); URL.revokeObjectURL(url); };
+    im.onerror=()=>{ res(null); URL.revokeObjectURL(url); };
+    im.src=url;
+  });
+}
+
 function edMeta(i,key,val){ EDIT.blocks[i][key]=val; edRenderBlocks(); crCount(); }
 function edGroupHtml(i,val){
   const p=EDIT.blocks[i].payload;
@@ -1985,13 +2339,28 @@ function crCount(){
   const vis=EDIT.blocks.filter(crBlockVisible).length;
   el.textContent = `Показывается ${vis} из ${EDIT.blocks.length}`;
 }
-function edMove(i,d){ const j=i+d; if(j<0||j>=EDIT.blocks.length) return; const t=EDIT.blocks[i]; EDIT.blocks[i]=EDIT.blocks[j]; EDIT.blocks[j]=t; edRenderBlocks(); }
-function edDel(i){ if(!confirm('Удалить блок?')) return; EDIT.blocks.splice(i,1); edRenderBlocks(); }
+// Раскрытость привязана к номеру блока, поэтому при сдвиге её надо пересчитать
+function edShiftOpen(fn){ ED_OPEN = new Set([...ED_OPEN].map(fn).filter(x=>x!=null && x>=0)); }
+
+function edMove(i,d){
+  const j=i+d; if(j<0||j>=EDIT.blocks.length) return;
+  const t=EDIT.blocks[i]; EDIT.blocks[i]=EDIT.blocks[j]; EDIT.blocks[j]=t;
+  edShiftOpen(x => x===i ? j : (x===j ? i : x));
+  edRenderBlocks();
+}
+function edDel(i){
+  if(!confirm('Удалить блок?')) return;
+  EDIT.blocks.splice(i,1);
+  edShiftOpen(x => x===i ? null : (x>i ? x-1 : x));
+  edRenderBlocks();
+}
 function edAddBlock(){
   const t=$('edNewType').value;
   const def={ text:{html:''}, quiz:{needs_review:false,questions:[]}, match:{needs_review:false,title:'',pairs:[]}, exact_input:{items:[]}, task:{needs_review:true,title:'',html:''}, embed:{url:'',needs_review:false}, order:{sentence:'',words:[]}, video:{url:'',provider:'youtube',title:''}, sort:{title:'',groups:[]}, flashcards:{title:'',cards:[]},
     gaps:{title:'',text:'',mode:'type'}, truefalse:{title:'',statements:[]}, speaking:{title:'',html:'',needs_review:true} }[t]||{};
-  EDIT.blocks.push({ type:t, payload:JSON.parse(JSON.stringify(def)), audience:'shared', variant:'any', format:'any' }); edRenderBlocks();
+  EDIT.blocks.push({ type:t, payload:JSON.parse(JSON.stringify(def)), audience:'shared', variant:'any', format:'any' });
+  ED_OPEN.add(EDIT.blocks.length-1);
+  edRenderBlocks();
 }
 function edAddQuestion(i){ (EDIT.blocks[i].payload.questions=EDIT.blocks[i].payload.questions||[]).push({q:'',type:'single',options:[],correct:[]}); edRenderBlocks(); }
 function edDelQuestion(i,qi){ EDIT.blocks[i].payload.questions.splice(qi,1); edRenderBlocks(); }
