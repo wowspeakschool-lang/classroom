@@ -1086,9 +1086,9 @@ function runBlock(b){
   }
   if(b.type==='task'){
     return `<div class="block">${head}${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:260px;border-radius:12px"></div>`:''}${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}${p.title?`<b>${esc(p.title)}</b>`:''}<div style="margin-top:6px">${p.html||''}</div>
-      ${p.answer_kind==='audio'?'<div class="muted" style="margin:8px 0">🎤 Запись голоса добавим позже; пока отправь на проверку — учитель проверит.</div>':''}
-      <textarea id="tk-${id}" placeholder="Ответ или комментарий (необязательно)" style="margin-top:6px"></textarea>
-      <div style="margin-top:6px"><button class="btn sm" onclick="runTask('${id}')">Отправить на проверку</button><span id="res-${id}" class="muted"></span></div></div>`;
+      ${p.answer_kind==='audio'?`<div id="sp-${id}" style="margin:10px 0"><button class="btn" onclick="spStart('${id}')">🎤 Записать ответ</button></div>`:''}
+      <textarea id="tk-${id}" placeholder="${p.answer_kind==='audio'?'Комментарий (необязательно)':'Ответ или комментарий (необязательно)'}" style="margin-top:6px"></textarea>
+      <div style="margin-top:6px"><button class="btn${p.answer_kind==='audio'?' sec':''} sm" onclick="runTask('${id}')">${p.answer_kind==='audio'?'Отправить без записи':'Отправить на проверку'}</button><span id="res-${id}" class="muted"></span></div></div>`;
   }
   if(b.type==='order'){
     return `<div class="block">${head}${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:260px;border-radius:12px"></div>`:''}${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}<div style="margin-bottom:8px">Нажимай слова по порядку, чтобы собрать предложение:</div>
@@ -1266,7 +1266,10 @@ async function spSend(id){
     const ext = (st.blob.type||'').includes('ogg') ? 'ogg' : 'webm';
     const file = new File([st.blob], 'speaking_'+Date.now()+'.'+ext, { type: st.blob.type });
     const url = await uploadToBucket(file);
-    await submitBlock(id, { audio: url });
+    const ans = { audio: url };
+    const t = $('tk-'+id);              // у task рядом с записью есть поле комментария
+    if(t && t.value && t.value.trim()) ans.text = t.value;
+    await submitBlock(id, ans);
     spBox(id, `<audio controls src="${url}" style="height:36px;max-width:240px"></audio>
       <span class="muted" style="margin-left:8px">Отправлено ✅</span>`);
   }catch(e){
