@@ -98,6 +98,18 @@
   .slide__emoji{ font-size:46px; line-height:1.1; text-align:center; }
   .slide__plain{ font-size:20px; line-height:1.5; }
   .slide img{ max-width:100%; height:auto; }
+
+  /* Пропуски с перетаскиванием */
+  .gapbank{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; padding:10px;
+    border:1px dashed var(--line); border-radius:12px; }
+  .gapchip{ display:inline-block; padding:6px 14px; border-radius:10px; cursor:grab;
+    background:#EEEDFE; color:#26215C; font-weight:700; font-size:17px; user-select:none; }
+  .gapchip:active{ cursor:grabbing; }
+  .gapchip.used{ opacity:.35; pointer-events:none; }
+  .gapslot{ display:inline-block; min-width:96px; min-height:32px; margin:0 5px; padding:3px 10px;
+    border-bottom:3px solid var(--brand,#7c3aed); border-radius:6px 6px 0 0; text-align:center;
+    font-weight:700; font-size:17px; vertical-align:middle; background:#faf9ff; cursor:pointer; }
+  .gapslot.full{ background:#EEEDFE; color:#26215C; }
   .modal h2{ margin:0 0 2px; font-size:18px; }
   .modal .close{ float:right; background:none; border:none; font-size:22px; color:#94a3b8; }
   .chk{ display:flex; align-items:center; gap:9px; padding:8px 10px; border:1px solid var(--line); border-radius:9px; margin-bottom:6px; }
@@ -221,23 +233,25 @@
 
     <!-- ЗАДАТЬ ДЗ -->
     <section id="tab-assign" class="hidden">
-      <h2 class="section-title">Задать ДЗ</h2>
-      <p class="section-sub">Выбери ДЗ из библиотеки, отметь учеников, поставь дедлайн.</p>
+      <h2 class="section-title">Задать материал</h2>
+      <p class="section-sub">Домашнее задание, тест или план урока: выбери из библиотеки, отметь учеников, поставь дедлайн.</p>
       <div class="card" style="padding:18px">
         <div class="row">
           <div class="grow field"><label>Курс</label><select id="asgCourse" onchange="onCourseChange()"><option value="">— выбери курс —</option></select></div>
-          <div class="grow field"><label>ДЗ (урок)</label><select id="asgLesson"><option value="">—</option></select></div>
+          <div class="grow field"><label>Материал</label><select id="asgLesson"><option value="">—</option></select></div>
         </div>
-        <div style="margin:-4px 0 10px"><button class="btn sec sm" type="button" onclick="openPreview($('asgLesson').value)">👁 Предпросмотр выбранного ДЗ</button></div>
+        <div style="margin:-4px 0 10px"><button class="btn sec sm" type="button" onclick="openPreview($('asgLesson').value)">👁 Предпросмотр выбранного</button></div>
         <div class="row">
           <div class="grow field"><label>Дедлайн (необязательно)</label><input id="asgDeadline" type="datetime-local" /></div>
           <div class="grow field"><label>Порог зачёта, % (необязательно)</label><input id="asgThreshold" type="number" min="0" max="100" placeholder="напр. 60" /></div>
         </div>
         <div class="field">
           <label>Кому назначить</label>
-          <div class="row" style="margin-bottom:8px">
+          <div class="row" style="margin-bottom:8px; align-items:center; gap:8px; flex-wrap:wrap">
+            <input id="asgSearch" class="grow" placeholder="Поиск по имени или родителю" oninput="asgRenderStudents()" style="min-width:200px">
             <button class="btn sec sm" onclick="asgSelectAll(true)">Выбрать всех</button>
             <button class="btn sec sm" onclick="asgSelectAll(false)">Снять</button>
+            <span id="asgCount" class="muted" style="font-size:13px"></span>
           </div>
           <div id="asgStudents" style="max-height:260px; overflow:auto"></div>
         </div>
@@ -484,7 +498,10 @@ async function loadLibrary(){
     let lessons=[];
     for(const un of (units||[])){
       const { data:ls } = await sb.from('classroom_lessons').select('id, title, sort_order, is_published, kind').eq('unit_id', un.id).order('sort_order');
-      (ls||[]).forEach(l=> lessons.push({ id:l.id, title:`${un.title} · ${l.title}`, is_published:l.is_published, kind:l.kind }));
+      (ls||[]).forEach(l=>{
+        KIND_BY_LESSON[l.id] = l.kind || 'homework';
+        lessons.push({ id:l.id, title:`${un.title} · ${l.title}`, is_published:l.is_published, kind:l.kind });
+      });
     }
     c.lessons = lessons;
   }
@@ -574,8 +591,19 @@ function stLessonStatus(l){
 
 function fmtDateInput(iso){ if(!iso) return ''; try{ return new Date(iso).toISOString().slice(0,10); }catch(e){ return ''; } }
 
+var STU_KIND = 'homework';   // какой тип материалов показан на карточке
+function stuSetKind(k){ STU_KIND = k; renderStudentLessons(); }
+
 function renderStudentLessons(){
-  const ls = CUR_STU.lessons||[];
+  const all = CUR_STU.lessons||[];
+  const kindOf = l => KIND_BY_LESSON[l.lesson_id] || 'homework';
+  const counts = { homework:0, lesson:0, test:0 };
+  all.forEach(l=>{ const k=kindOf(l); if(counts[k]!=null) counts[k]++; });
+  const tabs = ['homework','lesson','test'].map(k=>
+    `<button class="btn ${STU_KIND===k?'':'sec'} sm" onclick="stuSetKind('${k}')">
+       ${({homework:'Домашние задания',lesson:'Планы уроков',test:'Тесты'})[k]} <span class="muted">${counts[k]}</span>
+     </button>`).join(' ');
+  const ls = all.filter(l=> kindOf(l) === STU_KIND);
   const doneN = ls.filter(x=>x.completed).length;
   const activeN = ls.filter(x=>x.active).length;
   const hasNext = ls.some(x=>x.is_published && !x.active);
@@ -594,13 +622,14 @@ function renderStudentLessons(){
       </td>
     </tr>`).join('');
   $('stuBody').innerHTML = `
+    <div class="row" style="margin-bottom:10px; gap:8px; flex-wrap:wrap">${tabs}</div>
     <div class="row" style="margin-bottom:12px; align-items:center">
       <div class="card" style="padding:10px 14px"><div class="muted" style="font-size:12px">Активных</div><b style="font-size:18px" id="stActiveN">${activeN}</b></div>
       <div class="card" style="padding:10px 14px"><div class="muted" style="font-size:12px">Завершено</div><b style="font-size:18px" id="stDoneN">${doneN}</b></div>
       <button class="btn sm" id="addNextBtn" style="margin-left:auto" ${hasNext?'':'disabled'} onclick="addNextLesson()">➕ Добавить следующий урок</button>
     </div>
-    ${ls.length? `<table><thead><tr><th>#</th><th>Урок</th><th>Статус</th><th>Срок сдачи</th><th style="text-align:right">Доступ</th></tr></thead><tbody>${rows}</tbody></table>`
-      : '<div class="empty">В курсе пока нет уроков.</div>'}`;
+    ${ls.length? `<table><thead><tr><th>#</th><th>${({homework:'Домашнее задание',lesson:'План урока',test:'Тест'})[STU_KIND]}</th><th>Статус</th><th>Срок сдачи</th><th style="text-align:right">Доступ</th></tr></thead><tbody>${rows}</tbody></table>`
+      : `<div class="empty">В курсе нет материалов этого типа.</div>`}`;
 }
 
 // Точечное обновление одной строки — без перерисовки всей таблицы (без мигания)
@@ -774,6 +803,62 @@ function crTextHtml(p){
   return main;
 }
 
+// Пропуски в тексте по-прежнему хранятся как __слово__ — формат не меняем,
+// чтобы уже залитые задания продолжали работать. Меняется только способ
+// их поставить: выделением, а не набором подчёркиваний руками.
+function edGapAdd(i){
+  const ta = document.getElementById('gtx-'+i);
+  if(!ta) return;
+  const a = ta.selectionStart, b = ta.selectionEnd;
+  if(a === b){ toast('Сначала выдели то, что нужно спрятать'); return; }
+  const val = ta.value;
+  const sel = val.slice(a, b);
+  if(sel.includes('__')){ toast('Внутри выделения уже есть пропуск'); return; }
+  if(!sel.trim()){ toast('Выделены только пробелы'); return; }
+  // Пробелы по краям оставляем снаружи пропуска
+  const lead = sel.length - sel.trimStart().length;
+  const tail = sel.length - sel.trimEnd().length;
+  const core = sel.trim();
+  ta.value = val.slice(0, a + lead) + '__' + core + '__' + val.slice(b - tail);
+  EDIT.blocks[i].payload.text = ta.value;
+  edGapsPreview(i);
+}
+
+function edGapUndo(i){
+  const p = EDIT.blocks[i].payload;
+  const t = p.text || '';
+  const m = [...t.matchAll(/__([^_]+)__/g)];
+  if(!m.length){ toast('Пропусков нет'); return; }
+  const last = m[m.length-1];
+  p.text = t.slice(0, last.index) + last[1] + t.slice(last.index + last[0].length);
+  const ta = document.getElementById('gtx-'+i); if(ta) ta.value = p.text;
+  edGapsPreview(i);
+}
+
+function edGapClear(i){
+  const p = EDIT.blocks[i].payload;
+  p.text = (p.text || '').replace(/__([^_]+)__/g, '$1');
+  const ta = document.getElementById('gtx-'+i); if(ta) ta.value = p.text;
+  edGapsPreview(i);
+}
+
+// Обновляем только предпросмотр, чтобы не терять курсор в поле при вводе
+function edGapsPreview(i){
+  const box = document.getElementById('gpv-'+i);
+  if(box) box.innerHTML = edGapsPreviewHtml(EDIT.blocks[i].payload);
+}
+
+function edGapsPreviewHtml(p){
+  const parts = gapsParse(p.text || '');
+  const gaps = parts.filter(x=>x.kind==='gap');
+  if(!gaps.length) return '<span class="muted">Пропусков пока нет — выдели что-нибудь в тексте выше.</span>';
+  const line = parts.map(x => x.kind==='text'
+    ? esc(x.value).replace(/\n/g,'<br>')
+    : '<span class="gapslot"></span>').join('');
+  const bank = gaps.map(g => `<span class="gapchip">${esc((g.accept||[])[0]||'')}</span>`).join('');
+  return `<div class="gapbank">${bank}</div><div>${line}</div>`;
+}
+
 function gapsParse(text){
   const parts = [];
   const re = /__([^_]+)__/g;
@@ -799,7 +884,7 @@ function previewQuestion(q,qi){
   }).join('');
   const audio = (q.audio||q.audio_url) ? ` ${audBtn(q.audio||q.audio_url)}` : '';
   const qimg = q.image ? `<div style="text-align:center;margin:6px 0"><img src="${esc(q.image)}" style="max-height:140px;border-radius:10px"></div>` : '';
-  return `<div style="margin-bottom:12px"><div style="font-weight:600;margin-bottom:6px">${qi+1}. ${esc(q.q||'')}${audio}</div>${qimg}${opts}</div>`;
+  return `<div style="margin-bottom:12px"><div style="font-weight:600;margin-bottom:6px">${qi+1}. ${q.q||''}${audio}</div>${qimg}${opts}</div>`;
 }
 
 function previewBlock(b){
@@ -827,7 +912,8 @@ function previewBlock(b){
 // Предпросмотр и показ — один и тот же полноэкранный слой,
 // отличается только начальный режим. Раньше предпросмотр жил
 // в модалке с max-width:640px и на весь экран не разворачивался.
-function openPreview(lessonId){ showOpen(lessonId, null, 'one', 'student'); }
+// Режим не навязываем — его выберет showOpen по типу материала
+function openPreview(lessonId){ showOpen(lessonId, null, null, 'student'); }
 
 // ---------- Вкладка «Уроки»: планы для проведения занятия ----------
 // Отдельно от редактора: у преподавателя нет методистской роли,
@@ -835,6 +921,9 @@ function openPreview(lessonId){ showOpen(lessonId, null, 'one', 'student'); }
 var LSTREE = [];
 var LSOPEN = new Set();
 var LS_TITLES = {};
+// Тип материала по id: план урока листается по блокам, ДЗ — одной страницей
+var KIND_BY_LESSON = {};
+const KIND_LABEL = { lesson:'план урока', homework:'ДЗ', test:'тест' };
 
 async function lsInit(){
   const host=$('lsTree'); if(!host) return;
@@ -849,7 +938,7 @@ async function lsInit(){
         const { data:ls } = await sb.from('classroom_lessons')
           .select('id,title,summary,is_published').eq('unit_id',u.id).eq('kind','lesson').order('sort_order');
         if((ls||[]).length){
-          (ls||[]).forEach(l=>{ LS_TITLES[l.id] = u.title + ' · ' + l.title; });
+          (ls||[]).forEach(l=>{ LS_TITLES[l.id] = u.title + ' · ' + l.title; KIND_BY_LESSON[l.id]='lesson'; });
           us.push({ id:u.id, title:u.title, lessons:ls });
         }
       }
@@ -920,7 +1009,19 @@ async function showOpen(lessonId, titleArg, mode, forceRole){
   if(!lessonId){ toast('Выбери урок'); return; }
   let title = titleArg || LS_TITLES[lessonId] || '';
   if(!title){ for(const c of LIBRARY){ const l=(c.lessons||[]).find(x=>x.id===lessonId); if(l){ title=l.title; break; } } }
-  SHOW = { all:[], blocks:[], i:0, answer:false, title, mode: mode || 'list', prevRole: CR_VIEW.role };
+  // Тип материала задаёт способ показа: план урока идёт по одному блоку,
+  // домашка и тест — одной прокручиваемой страницей.
+  let kind = KIND_BY_LESSON[lessonId];
+  if(!kind){
+    try{
+      const { data:le } = await sb.from('classroom_lessons').select('kind').eq('id', lessonId).maybeSingle();
+      kind = (le && le.kind) || 'homework';
+      KIND_BY_LESSON[lessonId] = kind;
+    }catch(e){ kind = 'homework'; }
+  }
+  SHOW = { all:[], blocks:[], i:0, answer:false, title, kind,
+           mode: mode || (kind === 'lesson' ? 'one' : 'list'),
+           prevRole: CR_VIEW.role };
   if(forceRole) CR_VIEW.role = forceRole;
   RUN = { lessonId, enr:null, preview:true };
   $('showLayer').classList.remove('hidden');
@@ -962,11 +1063,14 @@ function showSet(){
 // следующее задание до того, как он сделал текущее.
 function showLockMode(){
   const sel=$('showMode'); if(!sel) return;
-  const kid = CR_VIEW.role === 'student';
-  if(kid){ SHOW.mode='one'; sel.value='one'; }
-  sel.disabled = kid;
-  sel.title = kid ? 'Ученик всегда видит по одному блоку' : '';
-  sel.style.opacity = kid ? '.55' : '';
+  // По одному блоку ученик видит только план урока: там следующий шаг
+  // не должен появляться раньше времени. Домашку он и так проходит
+  // одной страницей — пусть и в просмотре выглядит так же.
+  const lock = CR_VIEW.role === 'student' && SHOW.kind === 'lesson';
+  if(lock){ SHOW.mode='one'; sel.value='one'; }
+  sel.disabled = lock;
+  sel.title = lock ? 'План урока ученик видит по одному блоку' : '';
+  sel.style.opacity = lock ? '.55' : '';
 }
 
 function showApply(){
@@ -1142,14 +1246,20 @@ function runBlock(b){
   if(b.type==='embed') return `<div class="block">${head}${p.url?`<iframe src="${esc(p.url)}" style="width:100%;height:360px;border:1px solid var(--line);border-radius:8px"></iframe>`:'<div class="muted">Нет ссылки</div>'}<div style="margin-top:8px"><button class="btn sm" onclick="runEmbed('${id}')">Отметить пройденным</button><span id="res-${id}" class="muted"></span></div></div>`;
   if(b.type==='gaps'){
     const parts = gapsParse(p.text||'');
+    const drag = p.mode === 'drag';
     const bank = shuffle(parts.filter(x=>x.kind==='gap').map(x=>(x.accept||[])[0]||''));
     const line = parts.map(x => x.kind==='text'
       ? esc(x.value).replace(/\n/g,'<br>')
-      : `<input id="gp-${id}-${x.index}" class="gapin" autocomplete="off" style="width:120px;display:inline-block;margin:0 4px">`).join('');
+      : (drag
+          ? `<span class="gapslot" id="gp-${id}-${x.index}" data-val=""
+               ondragover="event.preventDefault()" ondrop="gapDrop(event,'${id}',${x.index})"
+               onclick="gapClear('${id}',${x.index})" title="Перетащи сюда; клик — очистить"></span>`
+          : `<input id="gp-${id}-${x.index}" class="gapin" autocomplete="off" style="width:120px;display:inline-block;margin:0 4px">`)).join('');
     return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px"><b>${esc(p.title)}</b></div>`:''}
       ${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:240px;border-radius:12px"></div>`:''}
       ${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}
-      ${p.mode==='drag'?`<div class="muted" style="margin-bottom:8px">Слова: ${bank.map(w=>`<span class="pill n">${esc(w)}</span>`).join(' ')}</div>`:''}
+      ${drag?`<div id="gbank-${id}" class="gapbank">${bank.map((w,wi)=>`<span class="gapchip" draggable="true" data-w="${esc(w)}"
+          ondragstart="gapDragStart(event,'${esc(w)}')" onclick="gapPlace('${id}',this)">${esc(w)}</span>`).join('')}</div>`:''}
       <div style="line-height:2.4;font-size:16px">${line}</div>
       <div style="margin-top:10px"><button class="btn sm" onclick="runGaps('${id}')">Проверить</button><span id="res-${id}" class="muted"></span></div></div>`;
   }
@@ -1182,7 +1292,7 @@ function runBlock(b){
       }).join('');
       const audio=(q.audio||q.audio_url)?` ${audBtn(q.audio||q.audio_url,true)}`:'';
       const qimg=q.image?`<div style="text-align:center;margin:6px 0"><img src="${esc(q.image)}" style="max-height:220px;max-width:80%;border-radius:12px"></div>`:'';
-      return `<div style="margin-bottom:10px"><div style="font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span>${qi+1}. ${esc(q.q||'')}</span>${audio}</div>${qimg}${opts}</div>`;
+      return `<div style="margin-bottom:10px"><div style="font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span>${qi+1}. ${q.q||''}</span>${audio}</div>${qimg}${opts}</div>`;
     }).join('');
     return `<div class="block">${head}${qs}<button class="btn sm" onclick="runQuiz('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
   }
@@ -1321,11 +1431,69 @@ async function runMatch(id){
   try{ const r=await submitBlock(id, ans); runResult(id, scoreMsg(r), true); if(!r.needs_review && r.score===100) celebrate(); }
   catch(e){ runResult(id, e.message||String(e), false); }
 }
+// Пропуски перетаскиванием: клавиатура детям не нужна, слово берётся из набора.
+// Работает и мышью, и в одно касание на телефоне — там перетаскивание неудобно,
+// поэтому клик по слову кладёт его в первый свободный пропуск.
+var GAP_DRAG = null;
+
+function gapDragStart(e, w){
+  GAP_DRAG = w;
+  try{ e.dataTransfer.setData('text/plain', w); }catch(_){}
+}
+
+function gapSet(id, idx, val){
+  const slot = document.getElementById(`gp-${id}-${idx}`);
+  if(!slot) return;
+  const prev = slot.dataset.val || '';
+  slot.dataset.val = val || '';
+  slot.textContent = val || '';
+  slot.classList.toggle('full', !!val);
+  gapSyncBank(id, prev);
+}
+
+function gapDrop(e, id, idx){
+  e.preventDefault();
+  let w = GAP_DRAG;
+  try{ w = e.dataTransfer.getData('text/plain') || w; }catch(_){}
+  if(!w) return;
+  gapSet(id, idx, w);
+  GAP_DRAG = null;
+}
+
+function gapClear(id, idx){ gapSet(id, idx, ''); }
+
+// В одно касание: слово уходит в первый пустой пропуск
+function gapPlace(id, chip){
+  const w = chip.dataset.w;
+  const slots = document.querySelectorAll(`[id^="gp-${id}-"]`);
+  for(const s of slots){
+    if(!s.dataset.val){ gapSet(id, s.id.split('-').pop(), w); return; }
+  }
+}
+
+// Использованные слова притушены; каждое доступно столько раз,
+// сколько встречается в наборе.
+function gapSyncBank(id){
+  const bank = document.getElementById('gbank-'+id);
+  if(!bank) return;
+  const used = {};
+  document.querySelectorAll(`[id^="gp-${id}-"]`).forEach(s=>{
+    const v = s.dataset.val; if(v) used[v] = (used[v]||0) + 1;
+  });
+  const left = Object.assign({}, used);
+  bank.querySelectorAll('.gapchip').forEach(ch=>{
+    const w = ch.dataset.w;
+    if(left[w] > 0){ left[w]--; ch.classList.add('used'); }
+    else ch.classList.remove('used');
+  });
+}
+
 async function runGaps(id){
   if(isPreview()){ runResult(id,'Предпросмотр — не сохраняю',true); return; }
   const ans={};
-  document.querySelectorAll(`input[id^="gp-${id}-"]`).forEach(inp=>{
-    ans[inp.id.split('-').pop()] = inp.value;
+  document.querySelectorAll(`[id^="gp-${id}-"]`).forEach(el=>{
+    const key = el.id.split('-').pop();
+    ans[key] = el.tagName === 'INPUT' ? el.value : (el.dataset.val || '');
   });
   try{ const r=await submitBlock(id, ans); runResult(id, scoreMsg(r), true); if(!r.needs_review && r.score===100) celebrate(); }
   catch(e){ runResult(id, e.message||String(e), false); }
@@ -1420,11 +1588,27 @@ function fillCourses(){
   const sel=$('asgCourse');
   sel.innerHTML = '<option value="">— выбери курс —</option>' + LIBRARY.map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');
   onCourseChange();
-  // список учеников (чекбоксы)
-  $('asgStudents').innerHTML = STUDENTS.length
-    ? STUDENTS.map(s=>`<label class="chk"><input type="checkbox" class="asgStu" value="${s.id}"><span>${esc(s.name)} <span class="muted">· ${esc(s.level||'')}</span></span></label>`).join('')
-    : '<div class="muted">Нет учеников.</div>';
+  asgRenderStudents();
 }
+
+// Отмеченных держим отдельно: при поиске список перерисовывается,
+// и галочки иначе слетали бы вместе с отфильтрованными строками.
+var ASG_PICKED = new Set();
+
+function asgRenderStudents(){
+  const host=$('asgStudents'); if(!host) return;
+  const term=(($('asgSearch')&&$('asgSearch').value)||'').toLowerCase().trim();
+  const list = !term ? STUDENTS : STUDENTS.filter(s=>
+    (s.name||'').toLowerCase().includes(term) || (s.parent_text||'').toLowerCase().includes(term));
+  host.innerHTML = list.length
+    ? list.map(s=>`<label class="chk"><input type="checkbox" class="asgStu" value="${s.id}"
+        ${ASG_PICKED.has(s.id)?'checked':''} onchange="asgPick('${s.id}',this.checked)">
+        <span>${esc(s.name)} <span class="muted">· ${esc(s.level||'')}</span></span></label>`).join('')
+    : '<div class="muted">Никого не найдено.</div>';
+  const c=$('asgCount');
+  if(c) c.textContent = `Найдено ${list.length} из ${STUDENTS.length} · отмечено ${ASG_PICKED.size}`;
+}
+function asgPick(id,on){ if(on) ASG_PICKED.add(id); else ASG_PICKED.delete(id); asgRenderStudents(); }
 function onCourseChange(){
   const cid=$('asgCourse').value;
   const c=LIBRARY.find(x=>x.id===cid);
@@ -1435,16 +1619,23 @@ function onCourseChange(){
     ? lessons.map(l=>`<option value="${l.id}">${esc(l.title)}${l.kind?' · '+kindLabel[l.kind]||'':''}</option>`).join('')
     : '<option value="">— нет опубликованных материалов —</option>';
 }
-function asgSelectAll(on){ document.querySelectorAll('.asgStu').forEach(c=>c.checked=on); }
+// «Выбрать всех» относится к тому, что сейчас видно в списке,
+// иначе при поиске кнопка отмечала бы и скрытых.
+function asgSelectAll(on){
+  document.querySelectorAll('.asgStu').forEach(c=>{
+    if(on) ASG_PICKED.add(c.value); else ASG_PICKED.delete(c.value);
+  });
+  asgRenderStudents();
+}
 
 async function doAssign(){
   $('asgErr').textContent='';
   const lessonId=$('asgLesson').value;
-  const chosen=[...document.querySelectorAll('.asgStu:checked')].map(c=>c.value);
+  const chosen=[...ASG_PICKED];
   const deadline = $('asgDeadline').value ? new Date($('asgDeadline').value).toISOString() : null;
   const thrRaw = $('asgThreshold').value;
   const threshold = thrRaw==='' ? null : Math.max(0,Math.min(100,parseInt(thrRaw,10)));
-  if(!lessonId){ $('asgErr').textContent='Выбери ДЗ.'; return; }
+  if(!lessonId){ $('asgErr').textContent='Выбери материал.'; return; }
   if(!chosen.length){ $('asgErr').textContent='Отметь хотя бы одного ученика.'; return; }
   $('asgBtn').disabled=true;
   try{
@@ -1457,7 +1648,7 @@ async function doAssign(){
       ok++;
     }
     toast(`ДЗ назначено: ${ok} ${ok===1?'ученику':'ученикам'}`);
-    asgSelectAll(false);
+    ASG_PICKED.clear(); asgRenderStudents();
     await loadPending();
   }catch(e){ $('asgErr').textContent = e.message||String(e); }
   finally{ $('asgBtn').disabled=false; }
@@ -1637,8 +1828,8 @@ let EDIT = { courseId:null, unitId:null, lessonId:null, blocks:[] };
 let EDTREE = [];          // [{id,title,units:[{id,title,lessons:[{id,title,is_published}]}]}]
 let EDOPEN = new Set();   // раскрытые папки: 'c:'+courseId / 'u:'+unitId
 
-function edTypeSelectHtml(){
-  return `<select id="edNewType" style="max-width:260px">
+function edTypeSelectHtml(id){
+  return `<select id="${id||'edNewType'}" style="max-width:260px">
       <option value="text">Материал (текст/картинка)</option>
       <option value="quiz">Тест</option>
       <option value="match">Соедини пары</option>
@@ -1755,7 +1946,7 @@ async function edOpenLesson(lessonId, unitId, courseId){
     // audience/variant/format держим в блоке, а не в строке таблицы:
     // ключ upsert — (lesson_id, sort_order), и без этого при перестановке
     // блоков разметка осталась бы на старых позициях.
-    ED_OPEN = new Set();
+    ED_OPEN = new Set(); ED_INSERT_AT = null;
     EDIT.blocks = (blocks||[]).map(b=>({ type:b.type, payload:b.payload||{},
       audience:b.audience||'shared', variant:b.variant||'any', format:b.format||'any' }));
     right.innerHTML = `
@@ -1763,7 +1954,7 @@ async function edOpenLesson(lessonId, unitId, courseId){
         <div class="row" style="align-items:center">
           <b style="flex:1; font-size:16px">${esc(lesson.title)}</b>
           <button class="btn sec sm" onclick="edRenameLesson('${lessonId}')">✏ имя</button>
-          <button class="btn sec sm" onclick="showOpen('${lessonId}', null, 'one', 'student')">👁 Глазами ученика</button>
+          <button class="btn sec sm" onclick="showOpen('${lessonId}', null, null, 'student')">👁 Глазами ученика</button>
           <button class="btn sm" onclick="showOpen('${lessonId}', null, 'one')">▶ Как на уроке</button>
         </div>
         <div class="row" style="margin-top:10px; align-items:center; gap:10px; flex-wrap:wrap">
@@ -1795,6 +1986,7 @@ async function edOpenLesson(lessonId, unitId, courseId){
         <button class="btn sec sm" onclick="edCollapseAll(true)">▸ Свернуть все</button>
         <button class="btn sec sm" onclick="edCollapseAll(false)">▾ Развернуть все</button>
         <button class="btn sec sm" onclick="edToggleOutline()">☰ Оглавление</button>
+        <button class="btn sec sm" onclick="edExtractAll()" title="Перенести картинки из кода в бакет">🖼 Вынести картинки</button>
         <span id="edBlocksCount" class="muted" style="font-size:13px"></span>
       </div>
       <div id="edOutline" class="hidden" style="border:1px solid var(--line); border-radius:12px; padding:8px; margin-bottom:10px; max-height:280px; overflow:auto"></div>
@@ -1859,7 +2051,9 @@ function edBlockRow(b,i){
   const layout = b.payload && b.payload.layout ? ` <span class="muted" style="font-size:11px">${esc(SLIDE_LAYOUTS[b.payload.layout]||b.payload.layout)}</span>` : '';
   return `<div class="block" id="edb-${i}"${dim} style="padding:8px 12px; margin-bottom:6px">
     <div class="row" style="align-items:center; gap:8px">
-      <span class="muted" style="font-size:12px; min-width:26px">${i+1}</span>
+      <input type="number" min="1" max="${EDIT.blocks.length}" value="${i+1}" title="Номер блока: впиши другой — блок встанет на это место"
+        onchange="edMoveTo(${i}, this.value)" onclick="event.stopPropagation()"
+        style="width:52px; padding:4px 6px; text-align:center">
       <button class="btn sec sm" onclick="edToggleBlock(${i})" title="Развернуть">▸</button>
       <span class="muted" style="font-size:12px; min-width:110px">${blockTypeLabel(b.type)}${layout}</span>
       ${edAudBadge(b.audience)}
@@ -1869,7 +2063,8 @@ function edBlockRow(b,i){
       <button class="btn sec sm" onclick="edMove(${i},1)" title="Ниже">↓</button>
       <button class="btn sec sm" onclick="edDupBlock(${i})" title="Копировать">⧉</button>
       <button class="btn sec sm" onclick="edDel(${i})" title="Удалить">🗑</button>
-    </div></div>`;
+      <button class="btn sec sm" onclick="edInsertToggle(${i})" title="Вставить блок после этого">＋</button>
+    </div></div>${edInsertBar(i)}`;
 }
 
 function edToggleBlock(i){
@@ -2010,7 +2205,7 @@ function edImageDel(i, path){
   edRenderBlocks();
 }
 function edBlockEditor(b,i){
-  const ctrl=`<div style="float:right"><button class="btn sec sm" title="Свернуть" onclick="edToggleBlock(${i})">▾</button> <button class="btn sec sm" onclick="edMove(${i},-1)">↑</button> <button class="btn sec sm" onclick="edMove(${i},1)">↓</button> <button class="btn sec sm" title="Дублировать" onclick="edDupBlock(${i})">⧉</button> <button class="btn sec sm" onclick="edDel(${i})">🗑</button></div>`;
+  const ctrl=`<div style="float:right"><input type="number" min="1" max="${EDIT.blocks.length}" value="${i+1}" title="Номер блока" onchange="edMoveTo(${i}, this.value)" style="width:52px; padding:4px 6px; text-align:center; margin-right:6px"> <button class="btn sec sm" title="Свернуть" onclick="edToggleBlock(${i})">▾</button> <button class="btn sec sm" onclick="edMove(${i},-1)">↑</button> <button class="btn sec sm" onclick="edMove(${i},1)">↓</button> <button class="btn sec sm" title="Дублировать" onclick="edDupBlock(${i})">⧉</button> <button class="btn sec sm" onclick="edDel(${i})">🗑</button> <button class="btn sec sm" title="Вставить блок после этого" onclick="edInsertToggle(${i})">＋</button></div>`;
   const aud=b.audience||'shared', vr=b.variant||'any', fm=b.format||'any';
   const dim = crBlockVisible(b) ? '' : ' style="opacity:.45"';
   const badge = aud==='teacher' ? '<span class="pill n" style="margin-left:6px">преподаватель</span>'
@@ -2038,7 +2233,12 @@ function edBlockEditor(b,i){
   if(b.type==='text'){
     body = p.layout ? edSlideEditor(i, p) : `<div class="row" style="justify-content:flex-end;margin-bottom:6px">
         <button class="btn sec sm" onclick="edSlideOn(${i})">Собрать слайдом</button></div>
-      <textarea rows="4" oninput="EDIT.blocks[${i}].payload.html=this.value" placeholder="Текст (можно HTML)">${esc(p.html||'')}</textarea>
+      ${edCountDataUris(p.html) ? `<div class="row" style="align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap">
+          <span class="pill y">картинок в коде: ${edCountDataUris(p.html)}</span>
+          <button class="btn sec sm" onclick="edExtractImages(${i})">Вынести в файлы</button>
+          <span class="muted" style="font-size:12px">в поле они скрыты пометкой ⟦картинка N⟧ — не удаляй её, если картинка нужна</span>
+        </div>` : ''}
+      <textarea rows="4" oninput="EDIT.blocks[${i}].payload.html=edUnmaskHtml(${i},this.value)" placeholder="Текст (можно HTML)">${esc(edMaskHtml(i, p.html||''))}</textarea>
       <div style="margin-top:8px"><label class="muted" style="font-size:12px">Адаптация для группы (необязательно)</label>
         <textarea rows="3" oninput="edGroupHtml(${i},this.value)" placeholder="Показывается врезкой «В группе» в групповом режиме">${esc(p.html_group||'')}</textarea></div>
       <div style="margin-top:6px"><button class="btn sec sm" onclick="edInsertImage(${i})">🖼 Вставить картинку</button></div>
@@ -2053,14 +2253,21 @@ function edBlockEditor(b,i){
     const parts = gapsParse(p.text||'');
     const gaps = parts.filter(x=>x.kind==='gap');
     body=`<input value="${esc(p.title||'')}" oninput="EDIT.blocks[${i}].payload.title=this.value" placeholder="Заголовок (напр. «Вставь глагол»)" style="margin-bottom:6px">
-      <textarea rows="4" oninput="EDIT.blocks[${i}].payload.text=this.value; edRenderBlocks()" placeholder="Текст с пропусками: I __have__ a cat. She __has|has got__ a dog.">${esc(p.text||'')}</textarea>
-      <div class="muted" style="font-size:12px;margin-top:4px">
-        Пропуск — слово между двойными подчёркиваниями: <code>__have__</code>.
-        Несколько верных вариантов — через вертикальную черту: <code>__has|has got__</code>.
+      <textarea id="gtx-${i}" rows="4" oninput="EDIT.blocks[${i}].payload.text=this.value; edGapsPreview(${i})" placeholder="Напиши текст целиком: I have a cat.">${esc(p.text||'')}</textarea>
+      <div class="row" style="margin-top:6px; align-items:center; gap:8px; flex-wrap:wrap">
+        <button class="btn sm" onclick="edGapAdd(${i})">➕ Сделать пропуск из выделенного</button>
+        <button class="btn sec sm" onclick="edGapUndo(${i})">Снять последний</button>
+        <button class="btn sec sm" onclick="edGapClear(${i})">Снять все</button>
       </div>
+      <div class="muted" style="font-size:12px;margin-top:4px">
+        Выдели букву, слово или несколько слов прямо в тексте и нажми кнопку — они станут пропуском.
+        Ученик перетащит их обратно.
+      </div>
+      <div class="muted" style="font-size:12px;margin-top:8px">Как увидит ученик:</div>
+      <div id="gpv-${i}" style="border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:4px;line-height:2.2">${edGapsPreviewHtml(p)}</div>
       <div class="row" style="margin-top:6px;align-items:center">
         <label class="chk" style="max-width:230px"><input type="radio" name="gm${i}" ${p.mode!=='drag'?'checked':''} onchange="EDIT.blocks[${i}].payload.mode='type'; edRenderBlocks()"> Вписывать с клавиатуры</label>
-        <label class="chk" style="max-width:230px"><input type="radio" name="gm${i}" ${p.mode==='drag'?'checked':''} onchange="EDIT.blocks[${i}].payload.mode='drag'; edRenderBlocks()"> Выбирать из слов</label>
+        <label class="chk" style="max-width:230px"><input type="radio" name="gm${i}" ${p.mode==='drag'?'checked':''} onchange="EDIT.blocks[${i}].payload.mode='drag'; edRenderBlocks()"> Перетаскивать слова</label>
       </div>
       ${edAudioField(p.audio, `EDIT.blocks[${i}].payload.audio`)}
       ${edImageBox(i, 'image', 'Картинка:')}
@@ -2167,7 +2374,7 @@ function edBlockEditor(b,i){
     body=qs.map((q,qi)=>edQuizQuestion(i,qi,q)).join('')
       + `<button class="btn sec sm" onclick="edAddQuestion(${i})">+ вопрос</button>`;
   }
-  return `<div class="block"${dim}>${ctrl}${head}${meta}${body}</div>`;
+  return `<div class="block" id="edb-${i}"${dim}>${ctrl}${head}${meta}${body}</div>${edInsertBar(i)}`;
 }
 function edQuizQuestion(i,qi,q){
   const opts=(q.options||[]).map((o,oi)=>{
@@ -2339,6 +2546,63 @@ function crCount(){
   const vis=EDIT.blocks.filter(crBlockVisible).length;
   el.textContent = `Показывается ${vis} из ${EDIT.blocks.length}`;
 }
+// Куда сейчас вставляем блок: индекс строки, под которой раскрыта панель
+var ED_INSERT_AT = null;
+function edInsertToggle(i){ ED_INSERT_AT = (ED_INSERT_AT===i ? null : i); edRenderBlocks(); }
+
+function edInsertHere(i){
+  const sel = $('edInsType'); if(!sel) return;
+  const t = sel.value;
+  const b = edNewBlock(t);
+  EDIT.blocks.splice(i+1, 0, b);
+  edShiftOpen(x => x > i ? x + 1 : x);
+  ED_OPEN.add(i+1);
+  ED_INSERT_AT = null;
+  edRenderBlocks();
+  const el = $('edb-'+(i+1)) || document.querySelectorAll('#edBlocks .block')[i+1];
+  if(el) el.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+// Заготовка блока по типу — одна на кнопку внизу и на вставку в середину
+function edNewBlock(t){
+  const def={ text:{html:''}, quiz:{needs_review:false,questions:[]}, match:{needs_review:false,title:'',pairs:[]},
+    exact_input:{items:[]}, task:{needs_review:true,title:'',html:''}, embed:{url:'',needs_review:false},
+    order:{sentence:'',words:[]}, video:{url:'',provider:'youtube',title:''}, sort:{title:'',groups:[]},
+    flashcards:{title:'',cards:[]}, gaps:{title:'',text:'',mode:'drag'}, truefalse:{title:'',statements:[]},
+    speaking:{title:'',html:'',needs_review:true} }[t]||{};
+  return { type:t, payload:JSON.parse(JSON.stringify(def)), audience:'shared', variant:'any', format:'any' };
+}
+
+// Перестановка по номеру: вписала 5 — блок встал пятым.
+// Раскрытость переносим по самим блокам, а не по номерам:
+// при переносе через несколько позиций арифметика по индексам врёт.
+function edMoveTo(from, val){
+  const n = EDIT.blocks.length;
+  let to = parseInt(val, 10);
+  if(isNaN(to)){ edRenderBlocks(); return; }
+  to = Math.max(1, Math.min(n, to)) - 1;
+  if(to === from){ edRenderBlocks(); return; }
+  const openObjs = new Set([...ED_OPEN].map(i => EDIT.blocks[i]));
+  const [b] = EDIT.blocks.splice(from, 1);
+  EDIT.blocks.splice(to, 0, b);
+  ED_OPEN = new Set(EDIT.blocks.map((x,i)=> openObjs.has(x) ? i : null).filter(x=> x!==null));
+  edRenderBlocks();
+  const el = $('edb-'+to) || document.querySelectorAll('#edBlocks .block')[to];
+  if(el) el.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+// Панель вставки под строкой
+function edInsertBar(i){
+  if(ED_INSERT_AT !== i) return '';
+  return `<div class="block" style="padding:8px 12px; margin:-2px 0 6px; background:#f8fafc">
+    <div class="row" style="align-items:center; gap:8px; flex-wrap:wrap">
+      <span class="muted" style="font-size:12px">Вставить после ${i+1}:</span>
+      ${edTypeSelectHtml('edInsType')}
+      <button class="btn sm" onclick="edInsertHere(${i})">Вставить</button>
+      <button class="btn sec sm" onclick="edInsertToggle(${i})">Отмена</button>
+    </div></div>`;
+}
+
 // Раскрытость привязана к номеру блока, поэтому при сдвиге её надо пересчитать
 function edShiftOpen(fn){ ED_OPEN = new Set([...ED_OPEN].map(fn).filter(x=>x!=null && x>=0)); }
 
@@ -2355,10 +2619,7 @@ function edDel(i){
   edRenderBlocks();
 }
 function edAddBlock(){
-  const t=$('edNewType').value;
-  const def={ text:{html:''}, quiz:{needs_review:false,questions:[]}, match:{needs_review:false,title:'',pairs:[]}, exact_input:{items:[]}, task:{needs_review:true,title:'',html:''}, embed:{url:'',needs_review:false}, order:{sentence:'',words:[]}, video:{url:'',provider:'youtube',title:''}, sort:{title:'',groups:[]}, flashcards:{title:'',cards:[]},
-    gaps:{title:'',text:'',mode:'type'}, truefalse:{title:'',statements:[]}, speaking:{title:'',html:'',needs_review:true} }[t]||{};
-  EDIT.blocks.push({ type:t, payload:JSON.parse(JSON.stringify(def)), audience:'shared', variant:'any', format:'any' });
+  EDIT.blocks.push(edNewBlock($('edNewType').value));
   ED_OPEN.add(EDIT.blocks.length-1);
   edRenderBlocks();
 }
@@ -2369,6 +2630,60 @@ function edDelOpt(i,qi,oi){ const q=EDIT.blocks[i].payload.questions[qi]; q.opti
 function edOptText(i,qi,oi,val){ const o=EDIT.blocks[i].payload.questions[qi].options[oi]; o.text=val; delete o.image; }
 function edCorrect(i,qi,oi,checked){ const q=EDIT.blocks[i].payload.questions[qi]; q.correct=q.correct||[]; if(checked){ if(!q.correct.includes(oi)) q.correct.push(oi); } else { q.correct=q.correct.filter(x=>x!==oi); } }
 function edQAudioUrl(i,qi,val){ const q=EDIT.blocks[i].payload.questions[qi]; q.audio=val||undefined; delete q.audio_url; }
+// В payload некоторых блоков картинка лежит целиком, как data:image;base64.
+// В поле редактирования это десятки тысяч символов, поверх которых
+// невозможно править текст. Прячем их за короткой пометкой.
+const ED_DATA_URI = /data:image\/[a-zA-Z0-9+.-]+;base64,[A-Za-z0-9+/=]+/g;
+var ED_MASK = {};
+
+function edMaskHtml(i, html){
+  const list = [];
+  const out = String(html||'').replace(ED_DATA_URI, m => { list.push(m); return `⟦картинка ${list.length}⟧`; });
+  ED_MASK[i] = list;
+  return out;
+}
+function edUnmaskHtml(i, val){
+  const list = ED_MASK[i] || [];
+  return String(val||'').replace(/⟦картинка (\d+)⟧/g, (m, n) => {
+    const v = list[Number(n) - 1];
+    return v === undefined ? m : v;
+  });
+}
+function edCountDataUris(html){
+  const m = String(html||'').match(ED_DATA_URI);
+  return m ? m.length : 0;
+}
+
+// Переносит картинки из payload в бакет и оставляет в html ссылку.
+// Это разовая операция: после неё блок правится как обычный текст.
+async function edExtractImages(i){
+  const p = EDIT.blocks[i].payload;
+  let html = p.html || '';
+  const found = html.match(ED_DATA_URI) || [];
+  if(!found.length){ toast('Картинок в коде нет'); return; }
+  toast(`Переношу ${found.length}…`);
+  try{
+    for(const uri of found){
+      const blob = await (await fetch(uri)).blob();
+      const ext = (blob.type.split('/')[1] || 'png').replace('+xml','');
+      const file = new File([blob], 'img_' + Date.now() + '.' + ext, { type: blob.type });
+      const url = await uploadToBucket(file);
+      html = html.split(uri).join(url);
+    }
+    p.html = html;
+    edRenderBlocks();
+    toast(`Перенесено: ${found.length} ✅`);
+  }catch(e){ toast(e.message||String(e)); }
+}
+
+// То же по всему уроку сразу
+async function edExtractAll(){
+  const idx = EDIT.blocks.map((b,i)=>i).filter(i => edCountDataUris(EDIT.blocks[i].payload && EDIT.blocks[i].payload.html));
+  if(!idx.length){ toast('Картинок в коде нет'); return; }
+  if(!confirm(`Перенести картинки в файлы? Блоков: ${idx.length}. Не забудь сохранить урок после.`)) return;
+  for(const i of idx) await edExtractImages(i);
+}
+
 function edInsertImage(i){ pickAndUpload('image/*', url=>{ EDIT.blocks[i].payload.html=(EDIT.blocks[i].payload.html||'')+`\n<div style="text-align:center"><img src="${url}" style="max-width:60%"/></div>`; edRenderBlocks(); }); }
 function edOptImage(i,qi,oi){ pickAndUpload('image/*', url=>{ const o=EDIT.blocks[i].payload.questions[qi].options[oi]; o.image=url; delete o.text; edRenderBlocks(); }); }
 function edItemImage(i,ii){ pickAndUpload('image/*', url=>{ EDIT.blocks[i].payload.items[ii].image=url; edRenderBlocks(); }); }
