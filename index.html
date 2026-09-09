@@ -2511,7 +2511,7 @@ function edAudioBox(i, path, label){
       <audio controls preload="none" src="${esc(url)}" style="height:32px;max-width:200px"></audio>
       <button class="btn sec sm" title="Заменить файлом" onclick="edAudioPick(${i},'${path}')">🎵</button>
       <button class="btn sec sm" title="Перезаписать голосом" onclick="edAudioRec(${i},'${path}')">🎤</button>
-      <button class="btn sec sm" title="Удалить аудио" onclick="edAudioDel(${i},'${path}')">✕</button>
+      <button class="btn sec sm" title="Убрать звук" onclick="edAudioDel(${i},'${path}')">🔇</button>
     </div>`;
   }
   return `<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px">
@@ -2530,7 +2530,7 @@ function edImageBox(i, path, label){
       ${cap}
       <img src="${esc(url)}" style="height:44px;border-radius:8px">
       <button class="btn sec sm" title="Заменить" onclick="edImagePick(${i},'${path}')">🖼</button>
-      <button class="btn sec sm" title="Удалить" onclick="edImageDel(${i},'${path}')">✕</button>
+      <button class="btn sec sm" title="Убрать картинку" onclick="edImageDel(${i},'${path}')">🚫🖼</button>
     </div>`;
   }
   return `<div style="margin-top:4px">${cap}<button class="btn sec sm" onclick="edImagePick(${i},'${path}')">🖼 Картинка</button></div>`;
@@ -2572,6 +2572,7 @@ function edBlockEditor(b,i){
   if(b.type==='text'){
     body = p.layout ? edSlideEditor(i, p) : `<div class="row" style="justify-content:flex-end;margin-bottom:6px">
         <button class="btn sec sm" onclick="edSlideOn(${i})">Собрать слайдом</button></div>
+      ${edTextImagesPanel(i, p)}
       ${edCountDataUris(p.html) ? `<div class="row" style="align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap">
           <span class="pill y">картинок в коде: ${edCountDataUris(p.html)}</span>
           <button class="btn sec sm" onclick="edExtractImages(${i})">Вынести в файлы</button>
@@ -2673,7 +2674,7 @@ function edBlockEditor(b,i){
           <label class="chk" style="max-width:110px"><input type="checkbox" ${s.correct?'checked':''} onchange="EDIT.blocks[${i}].payload.statements[${si}].correct=this.checked"> верно</label>
           <button class="btn sec sm" onclick="edArrDel(${i},'statements',${si})">✕</button>
         </div>`).join('')
-      + `<button class="btn sec sm" onclick="edAddStatement(${i})">+ утверждение</button>
+      + `<button class="btn sec sm" onclick="edArrAdd(${i},'statements',{text:'',correct:false})">+ утверждение</button>
          <div class="muted" style="font-size:12px;margin-top:4px">Галочка — утверждение верное. Порядок «Верно / Неверно» у ученика всегда одинаковый.</div>`;
 
   } else if(b.type==='speaking'){
@@ -3088,6 +3089,56 @@ async function edExtractAll(){
   if(!idx.length){ toast('Картинок в коде нет'); return; }
   if(!confirm(`Перенести картинки в файлы? Блоков: ${idx.length}. Не забудь сохранить урок после.`)) return;
   for(const i of idx) await edExtractImages(i);
+}
+
+function edImgTags(html){ return String(html||'').match(/<img[^>]*>/gi) || []; }
+
+function edTextImagesPanel(i, p){
+  const tags = edImgTags(p.html);
+  if(!tags.length) return '';
+  const thumbs = tags.map((t,n)=>{
+    const m = t.match(/src\s*=\s*["']([^"']+)["']/i);
+    const src = m ? m[1] : '';
+    return `<div style="display:inline-flex;flex-direction:column;align-items:center;gap:3px;margin:0 6px 6px 0">
+      <img src="${esc(src)}" style="height:52px;border-radius:8px;border:1px solid var(--line)">
+      <div class="row" style="gap:2px">
+        <span class="muted" style="font-size:11px;min-width:14px;text-align:center">${n+1}</span>
+        <button class="btn sec sm" style="padding:2px 6px" onclick="edTextImgMove(${i},${n},-1)" title="Левее">←</button>
+        <button class="btn sec sm" style="padding:2px 6px" onclick="edTextImgMove(${i},${n},1)" title="Правее">→</button>
+        <button class="btn sec sm" style="padding:2px 6px" onclick="edTextImgDel(${i},${n})" title="Удалить картинку">🚫🖼</button>
+      </div></div>`;
+  }).join('');
+  return `<div style="border:1px solid var(--line);border-radius:10px;padding:8px;margin-bottom:8px">
+      <div class="muted" style="font-size:12px;margin-bottom:6px">Картинки в блоке: ${tags.length}</div>${thumbs}</div>`;
+}
+
+function edTextImgDel(i, n){
+  const p = EDIT.blocks[i].payload;
+  const tags = edImgTags(p.html);
+  if(!tags[n]) return;
+  const at = p.html.indexOf(tags[n]);
+  if(at < 0) return;
+  p.html = p.html.slice(0, at) + p.html.slice(at + tags[n].length);
+  // за картинкой часто остаётся пустая обёртка от кнопки «Вставить картинку»
+  p.html = p.html.replace(/<div style="text-align:center">\s*<\/div>/g, '');
+  edRenderBlocks();
+}
+
+function edTextImgMove(i, n, d){
+  const p = EDIT.blocks[i].payload;
+  const tags = edImgTags(p.html);
+  const j = n + d;
+  if(!tags[n] || !tags[j]) return;
+  const a = tags[n], b = tags[j];
+  let ia = p.html.indexOf(a);
+  let ib = p.html.indexOf(b, a === b ? ia + a.length : 0);
+  if(ia < 0 || ib < 0 || ia === ib) return;
+  if(ia > ib){ const t=ia; ia=ib; ib=t; }
+  const first = p.html.slice(ia, ia + (ia === p.html.indexOf(a) ? a.length : b.length));
+  const A = p.html.slice(ia).startsWith(a) ? a : b;
+  const B = A === a ? b : a;
+  p.html = p.html.slice(0, ia) + B + p.html.slice(ia + A.length, ib) + A + p.html.slice(ib + B.length);
+  edRenderBlocks();
 }
 
 function edInsertImage(i){ pickAndUpload('image/*', url=>{ EDIT.blocks[i].payload.html=(EDIT.blocks[i].payload.html||'')+`\n<div style="text-align:center"><img src="${url}" style="max-width:60%"/></div>`; edRenderBlocks(); }); }
