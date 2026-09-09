@@ -117,6 +117,14 @@
   .seqnum{ flex:0 0 auto; width:26px; height:26px; border-radius:8px; background:#EEEDFE; color:#26215C;
     font-weight:700; font-size:13px; display:inline-flex; align-items:center; justify-content:center; }
   .seqimg{ height:48px; border-radius:8px; flex:0 0 auto; }
+  .hswrap{ position:relative; display:inline-block; max-width:100%; line-height:0; }
+  .hsimg{ max-width:100%; height:auto; border-radius:12px; display:block; }
+  .hsmark{ position:absolute; transform:translate(-50%,-50%); width:30px; height:30px; padding:0;
+    border-radius:50%; border:2px solid #fff; background:#534AB7; color:#fff; font-weight:800;
+    font-size:14px; line-height:1; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,.35);
+    display:inline-flex; align-items:center; justify-content:center; }
+  .hsmark.full{ background:#3B6D11; }
+  .hsmark.sel{ outline:3px solid #FBBF24; }
   .modal h2{ margin:0 0 2px; font-size:18px; }
   .modal .close{ float:right; background:none; border:none; font-size:22px; color:#94a3b8; }
   .chk{ display:flex; align-items:center; gap:9px; padding:8px 10px; border:1px solid var(--line); border-radius:9px; margin-bottom:6px; }
@@ -685,7 +693,8 @@ async function addNextLesson(){
 //  ПРЕДПРОСМОТР УРОКА (для учителя/методиста; тот же рендер станет прохождением)
 // ============================================================
 function blockTypeLabel(t){
-  if(t==='sequence') return 'Расставь по порядку'; return ({text:'Материал',video:'Видео',quiz:'Тест',match:'Соедини пары',exact_input:'Короткий ответ',task:'Задание',embed:'Тренажёр',order:'Составь предложение',sort:'Распредели по группам',flashcards:'Карточки',gaps:'Заполни пропуски',truefalse:'Верно / неверно',speaking:'Запись голоса'})[t]||t; }
+  if(t==='sequence') return 'Расставь по порядку';
+  if(t==='hotspot')  return 'Точки на картинке'; return ({text:'Материал',video:'Видео',quiz:'Тест',match:'Соедини пары',exact_input:'Короткий ответ',task:'Задание',embed:'Тренажёр',order:'Составь предложение',sort:'Распредели по группам',flashcards:'Карточки',gaps:'Заполни пропуски',truefalse:'Верно / неверно',speaking:'Запись голоса'})[t]||t; }
 
 // Текст с пропусками: «I ___ a cat» → части текста и места для ответов.
 // Пропуск в исходном тексте помечается двойным подчёркиванием
@@ -910,6 +919,13 @@ function previewBlock(b){
     const line = parts.map(x => x.kind==='text' ? esc(x.value) : `<span class="pill g">${esc((x.accept||[])[0]||'')}</span>`).join('');
     return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px"><b>${esc(p.title)}</b></div>`:''}${p.audio?`<div style="margin-bottom:6px">${audBtn(p.audio)}</div>`:''}<div style="line-height:2">${line}</div></div>`;
   }
+  if(b.type==='hotspot'){
+    const marks=(p.points||[]).map((pt,ix)=>`<span class="hsmark full" style="left:${Number(pt.x)||0}%;top:${Number(pt.y)||0}%">${ix+1}</span>`).join('');
+    return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px"><b>${esc(p.title)}</b></div>`:''}
+      <div class="hswrap">${p.image?`<img src="${esc(p.image)}" class="hsimg">`:''}${marks}</div>
+      <div style="margin-top:8px">${(p.points||[]).map((pt,ix)=>`<div><b>${ix+1}.</b> ${esc(pt.text||'')}${pt.audio?' 🔊':''}</div>`).join('')}</div>
+      ${(p.extras||[]).length?`<div class="muted" style="font-size:12px;margin-top:6px">Лишние варианты: ${(p.extras||[]).map(x=>esc(typeof x==='string'?x:(x&&x.text)||'')+((x&&x.audio)?' 🔊':'')).join(', ')}</div>`:''}</div>`;
+  }
   if(b.type==='sequence') return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px"><b>${esc(p.title)}</b></div>`:''}${(p.items||[]).map((it,ix)=>`<div class="seqrow"><span class="seqnum">${ix+1}</span>${it.image?`<img src="${esc(it.image)}" class="seqimg">`:''}<span class="grow">${esc(it.text||'')}</span></div>`).join('')}<div class="muted" style="font-size:12px;margin-top:6px">Это верный порядок; ученику список показывается перемешанным.</div></div>`;
   if(b.type==='truefalse') return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px"><b>${esc(p.title)}</b></div>`:''}${(p.statements||[]).map(s=>`<div style="margin-bottom:6px">${esc(s.text||'')} <span class="pill ${s.correct?'g':'n'}">${s.correct?'верно':'неверно'}</span></div>`).join('')}</div>`;
   if(b.type==='speaking') return `<div class="block">${head}${p.title?`<div style="margin-bottom:6px"><b>${esc(p.title)}</b></div>`:''}<div>${p.html||''}</div>${p.sample?`<div style="margin-top:6px">${audBtn(p.sample)}</div>`:''}<div class="muted" style="margin-top:6px">🎤 Ученик записывает голос</div></div>`;
@@ -1008,6 +1024,7 @@ function prepRunState(blocks){
     if(b.type==='sort'){ prepSort(b); }
     if(b.type==='flashcards'){ RUN_FC[b.id]={ i:0, flip:false, queue:null, done:0, again:0 }; RUN_FC_DATA[b.id]={ cards:(b.payload&&b.payload.cards)||[] }; }
     if(b.type==='sequence'){ prepSeq(b); }
+    if(b.type==='hotspot'){ prepHotspot(b); }
   });
 }
 
@@ -1120,6 +1137,7 @@ function showRender(){
       if(b.type==='order') orderRender(b.id);
       if(b.type==='sort') sortRender(b.id);
       if(b.type==='sequence') seqRender(b.id);
+      if(b.type==='hotspot') hsRender(b.id);
       if(b.type==='flashcards') fcRender(b.id);
     });
   }
@@ -1228,10 +1246,13 @@ async function bootRunPage(params){
       if(b.type==='sort'){ prepSort(b); }
       if(b.type==='flashcards'){ RUN_FC[b.id]={ i:0, flip:false, queue:null, done:0, again:0 }; RUN_FC_DATA[b.id]={ cards:(b.payload&&b.payload.cards)||[] }; }
       if(b.type==='sequence'){ prepSeq(b); }
+      if(b.type==='hotspot'){ prepHotspot(b); }
+    if(b.type==='hotspot'){ prepHotspot(b); }
     if(b.type==='sequence'){ prepSeq(b); }
+    if(b.type==='hotspot'){ prepHotspot(b); }
     });
     $('runBody').innerHTML = blocks.length ? blocks.map(runBlock).join('') : '<div class="empty">В уроке нет блоков.</div>';
-    blocks.forEach(b=>{ if(b.type==='order') orderRender(b.id); if(b.type==='sort') sortRender(b.id); if(b.type==='sequence') seqRender(b.id); if(b.type==='flashcards') fcRender(b.id); });
+    blocks.forEach(b=>{ if(b.type==='order') orderRender(b.id); if(b.type==='sort') sortRender(b.id); if(b.type==='sequence') seqRender(b.id); if(b.type==='hotspot') hsRender(b.id); if(b.type==='flashcards') fcRender(b.id); });
   }catch(e){ $('runBody').innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
 }
 
@@ -1275,6 +1296,13 @@ function runBlock(b){
           ondragstart="gapDragStart(event,'${esc(w)}')" onclick="gapPlace('${id}',this)">${esc(w)}</span>`).join('')}</div>`:''}
       <div style="line-height:2.4;font-size:16px">${line}</div>
       <div style="margin-top:10px"><button class="btn sm" onclick="runGaps('${id}')">Проверить</button><span id="res-${id}" class="muted"></span></div></div>`;
+  }
+  if(b.type==='hotspot'){
+    const p2=b.payload||{};
+    return `<div class="block">${head}
+      ${p2.title?`<div style="font-weight:700;margin-bottom:8px">${esc(p2.title)}</div>`:''}
+      <div id="hs-${id}"></div>
+      <div style="margin-top:10px"><button class="btn sm" onclick="runHotspot('${id}')">Проверить</button><span id="res-${id}" class="muted"></span></div></div>`;
   }
   if(b.type==='sequence'){
     const p2=b.payload||{};
@@ -1384,7 +1412,9 @@ function prepSort(b){
 }
 function sortItemHtml(id, it, inBin){
   const st=RUN_SORT[id];
-  const inner = it.image ? `<img src="${esc(it.image)}" style="max-height:60px;border-radius:8px;vertical-align:middle">` : esc(it.text||'');
+  let inner = it.image ? `<img src="${esc(it.image)}" style="max-height:60px;border-radius:8px;vertical-align:middle">` : esc(it.text||'');
+  // Нажатие на проигрыватель не должно класть карточку в корзину
+  if(it.audio) inner += `<span onclick="event.stopPropagation()" style="margin-left:6px">${audBtn(it.audio)}</span>`;
   const sel = (st.sel===it.gi)?' sel':'';
   const on = inBin ? `onclick="sortUnplace('${id}',${it.gi})"` : `onclick="sortPick('${id}',${it.gi})"`;
   return `<span class="sortitem${sel}" ${on}>${inner}</span>`;
@@ -1490,6 +1520,106 @@ async function runMatch(id){
   try{ const r=await submitBlock(id, ans); runResult(id, scoreMsg(r), true); if(!r.needs_review && r.score===100) celebrate(); }
   catch(e){ runResult(id, e.message||String(e), false); }
 }
+// Точки на картинке. Координаты в процентах от размера изображения,
+// поэтому картинка масштабируется, а точки остаются на месте.
+//   mode 'label' — точки пронумерованы, ученик подбирает к каждой подпись
+//   mode 'find'  — подпись показывается по одной, ученик тыкает в картинку
+let RUN_HS = {};        // { blockId: { mode, pick, ans:{}, step, bank:[] } }
+let RUN_HS_DATA = {};   // { blockId: { points:[], extras:[] } }
+
+function prepHotspot(b){
+  const p=b.payload||{};
+  const points=(p.points||[]), extras=(p.extras||[]);
+  RUN_HS_DATA[b.id]={ points, extras, img: p.image||'' };
+  RUN_HS[b.id]={
+    mode: p.mode==='find' ? 'find' : 'label',
+    pick: null, ans: {}, step: 0,
+    bank: shuffle(
+      points.map(pt=>({ text:pt.text||'', audio:pt.audio||'' }))
+        .concat(extras.map(x=> typeof x==='string'
+          ? { text:x, audio:'' }
+          : { text:(x&&x.text)||'', audio:(x&&x.audio)||'' })))
+  };
+}
+
+function hsRender(id){
+  const host=document.getElementById('hs-'+id); if(!host) return;
+  const d=RUN_HS_DATA[id]||{points:[],extras:[]}, st=RUN_HS[id]; if(!st) return;
+  const pts=d.points;
+
+  const marks = pts.map((pt,ix)=>{
+    if(st.mode==='find') return '';
+    const filled = st.ans[ix] != null && st.ans[ix] !== '';
+    return `<button class="hsmark${filled?' full':''}${st.pick===ix?' sel':''}"
+        style="left:${Number(pt.x)||0}%;top:${Number(pt.y)||0}%"
+        onclick="hsPickPoint('${id}',${ix})">${ix+1}</button>`;
+  }).join('');
+
+  const img = `<div class="hswrap" ${st.mode==='find'?`onclick="hsClickImage(event,'${id}')"`:''}>
+      <img src="${esc((RUN_HS_DATA[id]&&RUN_HS_DATA[id].img)||'')}" class="hsimg" alt="">
+      ${marks}</div>`;
+
+  let below='';
+  if(st.mode==='label'){
+    const used={}; Object.values(st.ans).forEach(v=>{ if(v) used[v]=(used[v]||0)+1; });
+    const left=Object.assign({},used);
+    below = `<div class="gapbank">${st.bank.map((w,wi)=>{
+      let cls='gapchip';
+      if(left[w.text]>0){ left[w.text]--; cls+=' used'; }
+      const snd = w.audio ? `<span onclick="event.stopPropagation()" style="margin-left:6px">${audBtn(w.audio)}</span>` : '';
+      return `<span class="${cls}" onclick="hsPickWord('${id}',${wi})">${esc(w.text)}${snd}</span>`;
+    }).join('')}</div>
+    <div class="muted" style="font-size:13px;margin-bottom:8px">Нажми точку на картинке, потом подпись. Нажатие на заполненную точку очищает её.</div>`;
+  } else {
+    const cur=pts[st.step];
+    below = cur
+      ? `<div style="font-size:20px;font-weight:700;margin:10px 0">${esc(cur.text||'')}${cur.audio?` ${audBtn(cur.audio,true)}`:''}</div>
+         <div class="muted" style="font-size:13px">Найди это на картинке и нажми. Осталось: ${pts.length - st.step}</div>`
+      : `<div style="font-weight:700;margin:10px 0">Все найдены ✅</div>`;
+  }
+
+  host.innerHTML = img + below;
+}
+
+function hsPickPoint(id, ix){
+  const st=RUN_HS[id]; if(!st) return;
+  if(st.ans[ix]){ delete st.ans[ix]; st.pick=null; hsRender(id); return; }
+  st.pick = (st.pick===ix ? null : ix);
+  hsRender(id);
+}
+
+function hsPickWord(id, wi){
+  const st=RUN_HS[id]; if(!st) return;
+  if(st.pick==null){ toast('Сначала нажми точку на картинке'); return; }
+  st.ans[st.pick] = st.bank[wi].text;
+  st.pick = null;
+  hsRender(id);
+}
+
+// Режим «найди»: попаданием считается ближайшая точка в пределах 12% картинки
+function hsClickImage(e, id){
+  const st=RUN_HS[id], d=RUN_HS_DATA[id]; if(!st || st.mode!=='find') return;
+  const pts=d.points; if(st.step>=pts.length) return;
+  const box=e.currentTarget.getBoundingClientRect();
+  const x=((e.clientX-box.left)/box.width)*100, y=((e.clientY-box.top)/box.height)*100;
+  let best=null, bestD=1e9;
+  pts.forEach((pt,ix)=>{
+    const dx=x-(Number(pt.x)||0), dy=y-(Number(pt.y)||0), dd=Math.sqrt(dx*dx+dy*dy);
+    if(dd<bestD){ bestD=dd; best=ix; }
+  });
+  st.ans[st.step] = (bestD<=12 && best!=null) ? (pts[best].text||'') : '';
+  st.step++;
+  hsRender(id);
+}
+
+async function runHotspot(id){
+  if(isPreview()){ runResult(id,'Предпросмотр — не сохраняю',true); return; }
+  const st=RUN_HS[id]; const ans={};
+  Object.keys(st.ans).forEach(k=>{ ans[k]=st.ans[k]; });
+  try{ const r=await submitBlock(id, ans); runResult(id, scoreMsg(r), true); if(!r.needs_review && r.score===100) celebrate(); }
+  catch(e){ runResult(id, e.message||String(e), false); }
+}
+
 // Расставь по порядку: правильный порядок — это порядок items в payload,
 // ученику список показывается перемешанным.
 let RUN_SEQ = {};        // { blockId: [исходные индексы в текущем порядке] }
@@ -1963,6 +2093,7 @@ function edTypeSelectHtml(id){
       <option value="embed">Тренажёр (ссылка)</option>
       <option value="order">Составь предложение</option>
       <option value="sequence">Расставь по порядку</option>
+      <option value="hotspot">Точки на картинке</option>
       <option value="sort">Распредели по группам</option>
       <option value="flashcards">Карточки (заучивание)</option>
       <option value="gaps">Заполни пропуски</option>
@@ -2478,6 +2609,39 @@ function edBlockEditor(b,i){
       ${edImageBox(i, 'image', 'Картинка:')}
       <div class="muted" style="font-size:12px;margin-top:6px">Пропусков: <b>${gaps.length}</b>${gaps.length?' · ответы: '+gaps.map(g=>esc(g.accept.join(' / '))).join(', '):''}</div>`;
 
+  } else if(b.type==='hotspot'){
+    const pts=(p.points||[]);
+    // Старые лишние варианты лежали строками — приводим к объекту,
+    // чтобы к ним можно было прикрепить звук
+    const ex=(p.extras||[]).map(x=> typeof x==='string' ? { text:x } : (x||{}));
+    p.extras = ex;
+    const marks=pts.map((pt,ix)=>`<span class="hsmark full" style="left:${Number(pt.x)||0}%;top:${Number(pt.y)||0}%">${ix+1}</span>`).join('');
+    body=`<input value="${esc(p.title||'')}" oninput="EDIT.blocks[${i}].payload.title=this.value" placeholder="Заголовок задания" style="margin-bottom:8px">
+      <div class="row" style="gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap">
+        <button class="btn sec sm" onclick="edHsImage(${i})">${p.image?'Заменить картинку':'🖼 Загрузить картинку'}</button>
+        <label class="chk" style="margin:0"><input type="radio" name="hsm-${i}" ${p.mode!=='find'?'checked':''}
+          onchange="edHsSet(${i},'mode','label')"><span>Подписать точки</span></label>
+        <label class="chk" style="margin:0"><input type="radio" name="hsm-${i}" ${p.mode==='find'?'checked':''}
+          onchange="edHsSet(${i},'mode','find')"><span>Найти на картинке</span></label>
+      </div>
+      ${p.image?`<div class="muted" style="font-size:12px;margin-bottom:4px">Нажми на картинку, чтобы поставить точку.</div>
+        <div class="hswrap" onclick="edHsAddPoint(event,${i})" style="cursor:crosshair">
+          <img src="${esc(p.image)}" class="hsimg">${marks}</div>`
+        : '<div class="muted">Сначала загрузи картинку.</div>'}
+      <div style="margin-top:10px">${pts.map((pt,ix)=>`<div class="row" style="align-items:center;gap:6px;margin-bottom:5px">
+          <span class="seqnum">${ix+1}</span>
+          <input class="grow" value="${esc(pt.text||'')}" oninput="EDIT.blocks[${i}].payload.points[${ix}].text=this.value; edTouch()" placeholder="Подпись к точке">
+          ${edAudioBox(i, 'points.'+ix+'.audio', '')}
+          <button class="btn sec sm" onclick="edArrDel(${i},'points',${ix})">✕</button>
+        </div>`).join('')}</div>
+      <div class="muted" style="font-size:12px;margin-top:10px">Лишние варианты — их нет на картинке, нужны для сложности:</div>
+      ${ex.map((x,xi)=>`<div class="row" style="align-items:center;gap:6px;margin-bottom:5px">
+          <input class="grow" value="${esc(x.text||'')}" oninput="EDIT.blocks[${i}].payload.extras[${xi}].text=this.value; edTouch()" placeholder="Лишний вариант">
+          ${edAudioBox(i, 'extras.'+xi+'.audio', '')}
+          <button class="btn sec sm" onclick="edArrDel(${i},'extras',${xi})">✕</button>
+        </div>`).join('')}
+      <button class="btn sec sm" onclick="edArrAdd(${i},'extras',{text:''})">+ лишний вариант</button>`;
+
   } else if(b.type==='sequence'){
     const items=(p.items||[]);
     body=`<input value="${esc(p.title||'')}" oninput="EDIT.blocks[${i}].payload.title=this.value" placeholder="Заголовок (напр. «Расставь по порядку»)" style="margin-bottom:8px">
@@ -2568,10 +2732,11 @@ function edBlockEditor(b,i){
     body=`<input value="${esc(p.title||'')}" oninput="EDIT.blocks[${i}].payload.title=this.value" placeholder="Заголовок (напр. «Распредели…»)" style="margin-bottom:8px">`
       + groups.map((g,gi)=>`<div class="block" style="box-shadow:none;background:#faf9ff">
         <div class="row" style="align-items:center;margin-bottom:6px"><b>Группа:</b><input class="grow" value="${esc(g.name||'')}" oninput="EDIT.blocks[${i}].payload.groups[${gi}].name=this.value" placeholder="название группы (напр. «a» / «звук /z/»)" style="max-width:260px"><button class="btn sec sm" onclick="edSortDelGroup(${i},${gi})">✕ группа</button></div>
-        ${(g.items||[]).map((it,ii)=>`<div class="row" style="align-items:center;margin-bottom:4px">
-            <input value="${esc(it.text||'')}" oninput="EDIT.blocks[${i}].payload.groups[${gi}].items[${ii}].text=this.value" placeholder="карточка (слово)" style="max-width:220px">
+        ${(g.items||[]).map((it,ii)=>`<div class="row" style="align-items:center;margin-bottom:4px;flex-wrap:wrap">
+            <input value="${esc(it.text||'')}" oninput="EDIT.blocks[${i}].payload.groups[${gi}].items[${ii}].text=this.value; edTouch()" placeholder="карточка (слово)" style="max-width:200px">
             ${it.image?`<img src="${esc(it.image)}" style="height:34px;border-radius:6px">`:''}
             <button class="btn sec sm" onclick="edSortItemImage(${i},${gi},${ii})">🖼</button>
+            ${edAudioBox(i, 'groups.'+gi+'.items.'+ii+'.audio', '')}
             <button class="btn sec sm" onclick="edSortDelItem(${i},${gi},${ii})">✕</button></div>`).join('')}
         <button class="btn sec sm" onclick="edSortAddItem(${i},${gi})">+ карточка</button>
       </div>`).join('')
@@ -2790,6 +2955,7 @@ function edNewBlock(t){
     exact_input:{items:[]}, task:{needs_review:true,title:'',html:''}, embed:{url:'',needs_review:false},
     order:{sentence:'',words:[]}, video:{url:'',provider:'youtube',title:''}, sort:{title:'',groups:[]},
     sequence:{title:'',items:[]},
+    hotspot:{title:'',image:'',mode:'label',points:[],extras:[]},
     flashcards:{title:'',cards:[]}, gaps:{title:'',text:'',mode:'drag'}, truefalse:{title:'',statements:[]},
     speaking:{title:'',html:'',needs_review:true} }[t]||{};
   return { type:t, payload:JSON.parse(JSON.stringify(def)), audience:'shared', variant:'any', format:'any' };
@@ -2912,6 +3078,20 @@ function edItemImage(i,ii){ pickAndUpload('image/*', url=>{ EDIT.blocks[i].paylo
 function edPairImage(i,pi,key){ pickAndUpload('image/*', url=>{ EDIT.blocks[i].payload.pairs[pi][key]=url; edRenderBlocks(); }); }
 function edCardImage(i,ci){ pickAndUpload('image/*', url=>{ EDIT.blocks[i].payload.cards[ci].image=url; edRenderBlocks(); }); }
 function edSortItemImage(i,gi,ii){ pickAndUpload('image/*', url=>{ EDIT.blocks[i].payload.groups[gi].items[ii].image=url; edRenderBlocks(); }); }
+function edHsImage(i){ pickAndUpload('image/*', url=>{ EDIT.blocks[i].payload.image=url; edRenderBlocks(); }); }
+function edHsSet(i,k,v){ EDIT.blocks[i].payload[k]=v; edRenderBlocks(); }
+
+// Координаты в процентах: картинка потом покажется любого размера
+function edHsAddPoint(e, i){
+  if(e.target && e.target.classList && e.target.classList.contains('hsmark')) return;
+  const box=e.currentTarget.getBoundingClientRect();
+  const x=Math.round(((e.clientX-box.left)/box.width)*1000)/10;
+  const y=Math.round(((e.clientY-box.top)/box.height)*1000)/10;
+  const p=EDIT.blocks[i].payload;
+  (p.points = p.points || []).push({ x, y, text:'' });
+  edRenderBlocks();
+}
+
 function edSeqImage(i,ii){ pickAndUpload('image/*', url=>{ EDIT.blocks[i].payload.items[ii].image=url; edRenderBlocks(); }); }
 function edSeqMove(i,ii,d){
   const a=EDIT.blocks[i].payload.items, j=ii+d;
