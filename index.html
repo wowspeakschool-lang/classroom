@@ -926,7 +926,7 @@ function previewBlock(b){
       <div style="margin-top:8px">${(p.points||[]).map((pt,ix)=>`<div><b>${ix+1}.</b> ${esc(pt.text||'')}${pt.audio?' 🔊':''}</div>`).join('')}</div>
       ${(p.extras||[]).length?`<div class="muted" style="font-size:12px;margin-top:6px">Лишние варианты: ${(p.extras||[]).map(x=>esc(typeof x==='string'?x:(x&&x.text)||'')+((x&&x.audio)?' 🔊':'')).join(', ')}</div>`:''}</div>`;
   }
-  if(b.type==='sequence') return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px"><b>${esc(p.title)}</b></div>`:''}${(p.items||[]).map((it,ix)=>`<div class="seqrow"><span class="seqnum">${ix+1}</span>${it.image?`<img src="${esc(it.image)}" class="seqimg">`:''}<span class="grow">${esc(it.text||'')}</span>${it.audio?audBtn(it.audio):''}</div>`).join('')}<div class="muted" style="font-size:12px;margin-top:6px">Это верный порядок; ученику список показывается перемешанным.</div></div>`;
+  if(b.type==='sequence') return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px"><b>${esc(p.title)}</b></div>`:''}${p.audio?`<div style="margin-bottom:8px">${audBtn(p.audio,true)}</div>`:''}${p.image?`<div style="margin-bottom:8px"><img src="${esc(p.image)}" style="max-height:160px;border-radius:10px"></div>`:''}${(p.items||[]).map((it,ix)=>`<div class="seqrow"><span class="seqnum">${ix+1}</span>${it.image?`<img src="${esc(it.image)}" class="seqimg">`:''}<span class="grow">${esc(it.text||'')}</span>${it.audio?audBtn(it.audio):''}</div>`).join('')}<div class="muted" style="font-size:12px;margin-top:6px">Это верный порядок; ученику список показывается перемешанным.</div></div>`;
   if(b.type==='truefalse') return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px"><b>${esc(p.title)}</b></div>`:''}${(p.statements||[]).map(s=>`<div style="margin-bottom:6px">${esc(s.text||'')} <span class="pill ${s.correct?'g':'n'}">${s.correct?'верно':'неверно'}</span></div>`).join('')}</div>`;
   if(b.type==='speaking') return `<div class="block">${head}${p.title?`<div style="margin-bottom:6px"><b>${esc(p.title)}</b></div>`:''}<div>${p.html||''}</div>${p.sample?`<div style="margin-top:6px">${audBtn(p.sample)}</div>`:''}<div class="muted" style="margin-top:6px">🎤 Ученик записывает голос</div></div>`;
   if(b.type==='flashcards') return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px">${esc(p.title)}</div>`:''}<div class="muted">Карточек: ${(p.cards||[]).length} — ${(p.cards||[]).map(c=>esc(c.text||'')).join(', ')}</div></div>`;
@@ -1308,6 +1308,8 @@ function runBlock(b){
     const p2=b.payload||{};
     return `<div class="block">${head}
       ${p2.title?`<div style="font-weight:700;margin-bottom:8px">${esc(p2.title)}</div>`:''}
+      ${p2.audio?`<div style="margin-bottom:10px">${audBtn(p2.audio,true)}</div>`:''}
+      ${p2.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p2.image)}" style="max-width:100%;max-height:240px;border-radius:12px"></div>`:''}
       <div class="muted" style="font-size:13px;margin-bottom:8px">Перетащи строки или подвинь стрелками, чтобы получился правильный порядок.</div>
       <div id="sq-${id}"></div>
       <div style="margin-top:10px"><button class="btn sm" onclick="runSequence('${id}')">Проверить</button><span id="res-${id}" class="muted"></span></div></div>`;
@@ -2646,7 +2648,10 @@ function edBlockEditor(b,i){
   } else if(b.type==='sequence'){
     const items=(p.items||[]);
     body=`<input value="${esc(p.title||'')}" oninput="EDIT.blocks[${i}].payload.title=this.value" placeholder="Заголовок (напр. «Расставь по порядку»)" style="margin-bottom:8px">
-      <div class="muted" style="font-size:12px;margin-bottom:6px">Записывай в правильном порядке — ученику список перемешается сам.</div>`
+      ${edAudioField(p.audio, `EDIT.blocks[${i}].payload.audio`)}
+      <div class="muted" style="font-size:12px">↑ звук ко всему заданию (напр. история целиком)</div>
+      ${edImageBox(i, 'image', 'Картинка к заданию:')}
+      <div class="muted" style="font-size:12px;margin:8px 0 6px">Записывай в правильном порядке — ученику список перемешается сам.</div>`
       + items.map((it,ii)=>`<div class="row" style="align-items:center;gap:6px;margin-bottom:6px;flex-wrap:wrap">
           <span class="seqnum">${ii+1}</span>
           <input class="grow" value="${esc(it.text||'')}" oninput="EDIT.blocks[${i}].payload.items[${ii}].text=this.value; edTouch()" placeholder="Предложение или подпись">
