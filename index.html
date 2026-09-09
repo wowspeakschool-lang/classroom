@@ -2578,8 +2578,8 @@ function edBlockEditor(b,i){
           <span class="muted" style="font-size:12px">в поле они скрыты пометкой ⟦картинка N⟧ — не удаляй её, если картинка нужна</span>
         </div>` : ''}
       <textarea rows="4" oninput="EDIT.blocks[${i}].payload.html=edUnmaskHtml(${i},this.value); edTouch()" placeholder="Текст (можно HTML)">${esc(edMaskHtml(i, p.html||''))}</textarea>
-      <div style="margin-top:8px"><label class="muted" style="font-size:12px">Адаптация для группы (необязательно)</label>
-        <textarea rows="3" oninput="edGroupHtml(${i},this.value)" placeholder="Показывается врезкой «В группе» в групповом режиме">${esc(p.html_group||'')}</textarea></div>
+      ${(edIsLesson() || p.html_group) ? `<div style="margin-top:8px"><label class="muted" style="font-size:12px">Адаптация для группы (необязательно)</label>
+        <textarea rows="3" oninput="edGroupHtml(${i},this.value)" placeholder="Показывается врезкой «В группе» в групповом режиме">${esc(p.html_group||'')}</textarea></div>` : ''}
       <div style="margin-top:6px"><button class="btn sec sm" onclick="edInsertImage(${i})">🖼 Вставить картинку</button></div>
       ${edAudioField(p.audio, `EDIT.blocks[${i}].payload.audio`)}`;
   } else if(b.type==='video'){
@@ -2782,8 +2782,11 @@ function edQuizQuestion(i,qi,q){
   const audUrl = q.audio || q.audio_url || '';
   return `<div class="block" style="background:#faf9ff; box-shadow:none; border:1px solid var(--line)">
     <input class="grow" value="${esc(q.q||'')}" oninput="EDIT.blocks[${i}].payload.questions[${qi}].q=this.value" placeholder="Текст вопроса">
-    <div class="row" style="margin:6px 0; align-items:center">
+    <div class="row" style="margin:6px 0; align-items:center; gap:8px; flex-wrap:wrap">
       <select onchange="EDIT.blocks[${i}].payload.questions[${qi}].type=this.value" style="max-width:200px"><option value="single" ${q.type!=='multiple'?'selected':''}>один ответ</option><option value="multiple" ${q.type==='multiple'?'selected':''}>несколько ответов</option></select>
+      ${q.image?`<img src="${esc(q.image)}" style="height:44px;border-radius:6px">`:''}
+      <button class="btn sec sm" onclick="edQImage(${i},${qi})">🖼 ${q.image?'Заменить':'Картинка к вопросу'}</button>
+      ${q.image?`<button class="btn sec sm" onclick="edQImageDel(${i},${qi})" title="Убрать картинку">✕</button>`:''}
     </div>
     ${edAudioField(audUrl, `EDIT.blocks[${i}].payload.questions[${qi}].audio`)}
     ${opts}
@@ -2923,6 +2926,12 @@ function imageSize(file){
   });
 }
 
+// Групповая адаптация нужна только плану урока: домашку и тест
+// ученик выполняет один.
+function edIsLesson(){
+  return (KIND_BY_LESSON[EDIT && EDIT.lessonId] || '') === 'lesson';
+}
+
 function edMeta(i,key,val){ EDIT.blocks[i][key]=val; edRenderBlocks(); crCount(); }
 function edGroupHtml(i,val){
   const p=EDIT.blocks[i].payload;
@@ -3024,6 +3033,8 @@ function edAddOption(i,qi){ (EDIT.blocks[i].payload.questions[qi].options=EDIT.b
 function edDelOpt(i,qi,oi){ const q=EDIT.blocks[i].payload.questions[qi]; q.options.splice(oi,1); q.correct=(q.correct||[]).filter(x=>x!==oi).map(x=>x>oi?x-1:x); edRenderBlocks(); }
 function edOptText(i,qi,oi,val){ const o=EDIT.blocks[i].payload.questions[qi].options[oi]; o.text=val; delete o.image; }
 function edCorrect(i,qi,oi,checked){ const q=EDIT.blocks[i].payload.questions[qi]; q.correct=q.correct||[]; if(checked){ if(!q.correct.includes(oi)) q.correct.push(oi); } else { q.correct=q.correct.filter(x=>x!==oi); } }
+function edQImage(i,qi){ pickAndUpload('image/*', url=>{ EDIT.blocks[i].payload.questions[qi].image=url; edRenderBlocks(); }); }
+function edQImageDel(i,qi){ delete EDIT.blocks[i].payload.questions[qi].image; edRenderBlocks(); }
 function edQAudioUrl(i,qi,val){ const q=EDIT.blocks[i].payload.questions[qi]; q.audio=val||undefined; delete q.audio_url; }
 // В payload некоторых блоков картинка лежит целиком, как data:image;base64.
 // В поле редактирования это десятки тысяч символов, поверх которых
