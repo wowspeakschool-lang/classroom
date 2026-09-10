@@ -2250,7 +2250,8 @@ async function edOpenLesson(lessonId, unitId, courseId){
         <button class="btn sec sm" id="edRedoBtn" onclick="edRedo()" title="Вернуть (Ctrl+Shift+Z)">↷ Вернуть</button>
         <button class="btn sec sm" onclick="edToggleOutline()">☰ Оглавление</button>
         <button class="btn sec sm" onclick="edExtractAll()" title="Перенести картинки из кода в бакет">🖼 Вынести картинки</button>
-        <button class="btn sec sm" onclick="ttsBatchOpen()" title="Озвучить карточки в выбранных юнитах">🔊 Озвучить пачкой</button>
+        <button class="btn sec sm" onclick="ttsLessonOpen()" title="Озвучить пометки в открытом материале">🔊 Озвучить этот материал</button>
+        <button class="btn sec sm" onclick="ttsBatchOpen()" title="Озвучить пометки в выбранных юнитах">🔊 Озвучить пачкой</button>
         <span id="edBlocksCount" class="muted" style="font-size:13px"></span>
       </div>
       <div id="edOutline" class="hidden" style="border:1px solid var(--line); border-radius:12px; padding:8px; margin-bottom:10px; max-height:280px; overflow:auto"></div>
@@ -2497,9 +2498,42 @@ var TTS_CB = null;
 // ---------- Озвучить пачкой ----------
 // Идёт по выбранным юнитам, находит карточки без звука и озвучивает их.
 // Уже озвученное не трогает: если у карточки есть audio, она пропускается.
-var TTSB = { units:[], items:[], busy:false, stop:false };
+var TTSB = { units:[], items:[], busy:false, stop:false, lids:null, lesson:false };
+
+// Пакетная озвучка пишет прямо в базу, минуя редактор. Поэтому
+// перед прогоном по открытому уроку правки должны быть сохранены,
+// а после — блоки перечитаны, иначе следующее «Сохранить»
+// затрёт только что созданный звук старым payload из браузера.
+// Заголовок открытого материала — из дерева редактора
+function edLessonTitle(id){
+  for(const c of (EDTREE||[])) for(const u of (c.units||[])){
+    const l = (u.lessons||[]).find(x=>x.id===id);
+    if(l) return u.title + ' · ' + l.title;
+  }
+  return '';
+}
+
+function ttsLessonOpen(){
+  if(!EDIT || !EDIT.lessonId){ toast('Сначала открой материал'); return; }
+  if(!confirm('Озвучка пишет сразу в базу.\n\nЕсли в редакторе есть несохранённые правки — сначала сохрани, иначе они потеряются.\n\nПродолжить?')) return;
+  TTSB = { units:[], items:[], busy:false, stop:false, lids:[EDIT.lessonId], lesson:true };
+  openModal(`<h3 style="margin-top:0">Озвучить этот материал</h3>
+    <div class="muted" style="font-size:13px;margin-bottom:8px">${esc(edLessonTitle(EDIT.lessonId))}</div>
+    <div class="field"><label>Голос по умолчанию</label>
+      <select id="ttsbVoice">${TTS_VOICES.map(v=>`<option value="${v[0]}" ${TTS_LAST_VOICE===v[0]?'selected':''}>${v[1]}</option>`).join('')}</select></div>
+    <div class="muted" style="font-size:12px;margin-top:6px">Озвучивается то, что помечено полем с суффиксом <code>_tts</code>. Уже заполненный звук не трогается.</div>
+    <div id="ttsbInfo" class="muted" style="margin-top:8px"></div>
+    <div id="ttsbErr" class="err"></div>
+    <div class="row" style="justify-content:flex-end;gap:8px;margin-top:12px">
+      <button class="btn sec" onclick="ttsBatchClose()">Закрыть</button>
+      <button class="btn sec" id="ttsbScan" onclick="ttsBatchScan()">Посчитать</button>
+      <button class="btn" id="ttsbGo" onclick="ttsBatchRun()" disabled>🔊 Озвучить</button>
+    </div>`);
+  ttsBatchScan();
+}
 
 async function ttsBatchOpen(){
+  TTSB.lids = null; TTSB.lesson = false;
   openModal(`<h3 style="margin-top:0">Озвучить пачкой</h3>
     <div class="loading">Загружаю список юнитов…</div>`);
   try{
@@ -2526,7 +2560,7 @@ async function ttsBatchOpen(){
   }catch(e){ $('modalHost').innerHTML = `<div class="modal"><div class="err">${esc(e.message||e)}</div></div>`; }
 }
 
-function ttsBatchClose(){ TTSB.stop = true; closeModal(); }
+function ttsBatchClose(){ TTSB.stop = true; TTSB.lids = null; TTSB.lesson = false; closeModal(); }
 
 // Что озвучивать, задаётся в самом payload: рядом с полем звука
 // кладётся поле с суффиксом _tts. Например у карточки:
@@ -2560,15 +2594,18 @@ function ttsCollect(obj, prefix, out){
 
 // Сначала показываем, что именно будет сделано — до того, как делать
 async function ttsBatchScan(){
-  const ids = [...document.querySelectorAll('.ttsU:checked')].map(c=>c.value);
   $('ttsbErr').textContent = '';
-  if(!ids.length){ $('ttsbErr').textContent = 'Отметь хотя бы один юнит'; return; }
+  let lids = TTSB.lids;
+  if(!lids){
+    const ids = [...document.querySelectorAll('.ttsU:checked')].map(c=>c.value);
+    if(!ids.length){ $('ttsbErr').textContent = 'Отметь хотя бы один юнит'; return; }
+    const { data:lessons } = await sb.from('classroom_lessons').select('id').in('unit_id', ids);
+    lids = (lessons||[]).map(l=>l.id);
+  }
   $('ttsbInfo').textContent = 'Считаю…';
   TTSB.items = [];
   try{
-    const { data:lessons } = await sb.from('classroom_lessons').select('id').in('unit_id', ids);
-    const lids = (lessons||[]).map(l=>l.id);
-    if(!lids.length){ $('ttsbInfo').textContent = 'В этих юнитах нет материалов'; return; }
+    if(!lids.length){ $('ttsbInfo').textContent = 'Материалов не найдено'; return; }
     const { data:blocks } = await sb.from('classroom_blocks')
       .select('id,type,payload').in('lesson_id', lids);
     let done = 0;
@@ -2648,6 +2685,11 @@ async function ttsBatchRun(){
     }
     $('ttsbInfo').textContent = `Готово. Озвучено: ${done}${failed?`, не вышло: ${failed}`:''}.`;
     toast('Озвучено: '+done);
+    if(TTSB.lesson && done && EDIT && EDIT.lessonId){
+      closeModal();
+      await edOpenLesson(EDIT.lessonId);   // подтянуть новый звук в редактор
+      toast('Материал перечитан');
+    }
   }catch(e){
     $('ttsbErr').textContent = e.message || String(e);
   }finally{
