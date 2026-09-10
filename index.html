@@ -2447,13 +2447,15 @@ function edAudioField(val, setExpr){
       <audio controls preload="none" src="${esc(val)}" style="height:32px; max-width:220px"></audio>
       <button class="btn sec sm" title="Заменить файлом" onclick="edPickAudio(function(u){ ${setExpr}=u; edRenderBlocks(); })">🎵</button>
       <button class="btn sec sm" title="Перезаписать голосом" onclick="edRecAudio(function(u){ ${setExpr}=u; edRenderBlocks(); })">🎤</button>
-      <button class="btn sec sm" title="Удалить аудио" onclick="if(confirm('Удалить аудио?')){ ${setExpr}=undefined; edRenderBlocks(); }">✕</button>
+      <button class="btn sec sm" title="Озвучить текст синтезом" onclick="edTtsOpenCb(function(u,sp){ ${setExpr}=u; ${setExpr}_tts=sp; edRenderBlocks(); })">🔊</button>
+      <button class="btn sec sm" title="Убрать звук" onclick="if(confirm('Удалить аудио?')){ ${setExpr}=undefined; edRenderBlocks(); }">🔇</button>
     </div>`;
   }
   return `<div class="row" style="margin:6px 0; align-items:center; flex-wrap:wrap">
     <input class="grow" value="" oninput="${setQ}=this.value" placeholder="аудио: ссылка или пусто">
     <button class="btn sec sm" onclick="edPickAudio(function(u){ ${setExpr}=u; edRenderBlocks(); })">🎵 Файл</button>
-    <button class="btn sec sm" onclick="edRecAudio(function(u){ ${setExpr}=u; edRenderBlocks(); })">🎤 Записать</button></div>`;
+    <button class="btn sec sm" onclick="edRecAudio(function(u){ ${setExpr}=u; edRenderBlocks(); })">🎤 Записать</button>
+    <button class="btn sec sm" onclick="edTtsOpenCb(function(u,sp){ ${setExpr}=u; ${setExpr}_tts=sp; edRenderBlocks(); })">🔊 Озвучить</button></div>`;
 }
 // Копия блока со всем содержимым — в домашках много однотипных
 // упражнений, собирать каждое заново долго
@@ -2477,6 +2479,85 @@ function edRecAudio(cb){ recordAudio(cb); }
 //
 // path — путь до значения в payload, например "questions.0.audio"
 // или "pairs.2.leftAudio". Так один компонент работает с любой структурой.
+// Синтез речи на своём сервере. Файл ложится в бакет, дальше это
+// обычное аудио. Рядом сохраняем {text, voice} — чтобы потом можно
+// было перегенерировать всё разом, не открывая блоки руками.
+const TTS_URL = 'https://api.wowteach.ru/tts';
+const TTS_VOICES = [
+  ['en_US-amy',  'Эми — женский, американский'],
+  ['en_US-ryan', 'Райан — мужской, американский'],
+  ['en_GB-alba', 'Альба — женская, британская'],
+  ['en_GB-alan', 'Алан — мужской, британский'],
+];
+var TTS_LAST_VOICE = 'en_US-amy';
+
+var TTS_CB = null;
+
+// Путь внутри payload (компонент edAudioBox)
+function edTtsOpen(i, path){
+  const spec = edGetPath(EDIT.blocks[i].payload, path + '_tts') || {};
+  edTtsOpenCb((url, sp)=>{
+    const pl = EDIT.blocks[i].payload;
+    edSetPath(pl, path, url);
+    edSetPath(pl, path + '_tts', sp);
+  }, spec);
+}
+
+// Обработчик-функция (компонент edAudioField)
+function edTtsOpenCb(cb, spec){
+  TTS_CB = cb;
+  spec = spec || {};
+  const text = spec.text || '';
+  const voice = spec.voice || TTS_LAST_VOICE;
+  openModal(`<h3 style="margin-top:0">Озвучить текст</h3>
+    <textarea id="ttsText" rows="3" placeholder="Что произнести по-английски">${esc(text)}</textarea>
+    <div class="field" style="margin-top:8px"><label>Голос</label>
+      <select id="ttsVoice">${TTS_VOICES.map(v=>`<option value="${v[0]}" ${voice===v[0]?'selected':''}>${v[1]}</option>`).join('')}</select></div>
+    <div class="muted" style="font-size:12px;margin-top:6px">Транскрипцию вроде /m/ синтез читает неправильно — такое лучше записать голосом.</div>
+    <div id="ttsErr" class="err" style="margin-top:6px"></div>
+    <div class="row" style="justify-content:flex-end;gap:8px;margin-top:12px">
+      <button class="btn sec" onclick="closeModal()">Отмена</button>
+      <button class="btn" id="ttsGo" onclick="edTtsRun()">🔊 Озвучить</button>
+    </div>`);
+}
+
+async function edTtsRun(){
+  const text = ($('ttsText').value || '').trim();
+  const voice = $('ttsVoice').value;
+  if(!text){ $('ttsErr').textContent = 'Напиши, что произнести'; return; }
+  const btn = $('ttsGo');
+  btn.disabled = true; btn.textContent = 'Синтезирую…';
+  try{
+    const { data:sess } = await sb.auth.getSession();
+    const token = sess && sess.session && sess.session.access_token;
+    if(!token) throw new Error('Нет входа в платформу — обнови страницу');
+
+    const r = await fetch(TTS_URL, {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token },
+      body: JSON.stringify({ text, voice })
+    });
+    if(!r.ok){
+      let m = 'Ошибка синтеза ('+r.status+')';
+      try{ const j = await r.json(); if(j && j.error) m = j.error; }catch(_){}
+      throw new Error(m);
+    }
+    const blob = await r.blob();
+    const ext = blob.type.includes('mpeg') ? 'mp3' : 'wav';
+    const file = new File([blob], 'tts_'+Date.now()+'.'+ext, { type: blob.type });
+    const url = await uploadToBucket(file);
+
+    if(TTS_CB) TTS_CB(url, { text, voice });
+    TTS_LAST_VOICE = voice;
+    closeModal();
+    edRenderBlocks();
+    toast('Озвучено ✅');
+  }catch(e){
+    $('ttsErr').textContent = e.message || String(e);
+    btn.disabled = false; btn.textContent = '🔊 Озвучить';
+  }
+}
+
 function edGetPath(obj, path){
   return path.split('.').reduce((o,k)=> (o==null ? undefined : o[k]), obj);
 }
@@ -2511,6 +2592,7 @@ function edAudioBox(i, path, label){
       <audio controls preload="none" src="${esc(url)}" style="height:32px;max-width:200px"></audio>
       <button class="btn sec sm" title="Заменить файлом" onclick="edAudioPick(${i},'${path}')">🎵</button>
       <button class="btn sec sm" title="Перезаписать голосом" onclick="edAudioRec(${i},'${path}')">🎤</button>
+      <button class="btn sec sm" title="Озвучить текст синтезом" onclick="edTtsOpen(${i},'${path}')">🔊</button>
       <button class="btn sec sm" title="Убрать звук" onclick="edAudioDel(${i},'${path}')">🔇</button>
     </div>`;
   }
@@ -2518,6 +2600,7 @@ function edAudioBox(i, path, label){
     ${cap}
     <button class="btn sec sm" onclick="edAudioPick(${i},'${path}')">🎵 Файл</button>
     <button class="btn sec sm" onclick="edAudioRec(${i},'${path}')">🎤 Записать</button>
+    <button class="btn sec sm" onclick="edTtsOpen(${i},'${path}')">🔊 Озвучить</button>
   </div>`;
 }
 
