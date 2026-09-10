@@ -2250,6 +2250,7 @@ async function edOpenLesson(lessonId, unitId, courseId){
         <button class="btn sec sm" id="edRedoBtn" onclick="edRedo()" title="Вернуть (Ctrl+Shift+Z)">↷ Вернуть</button>
         <button class="btn sec sm" onclick="edToggleOutline()">☰ Оглавление</button>
         <button class="btn sec sm" onclick="edExtractAll()" title="Перенести картинки из кода в бакет">🖼 Вынести картинки</button>
+        <button class="btn sec sm" onclick="ttsBatchOpen()" title="Озвучить карточки в выбранных юнитах">🔊 Озвучить пачкой</button>
         <span id="edBlocksCount" class="muted" style="font-size:13px"></span>
       </div>
       <div id="edOutline" class="hidden" style="border:1px solid var(--line); border-radius:12px; padding:8px; margin-bottom:10px; max-height:280px; overflow:auto"></div>
@@ -2493,68 +2494,166 @@ var TTS_LAST_VOICE = 'en_US-amy';
 
 var TTS_CB = null;
 
-// Путь внутри payload (компонент edAudioBox)
-function edTtsOpen(i, path){
-  const spec = edGetPath(EDIT.blocks[i].payload, path + '_tts') || {};
-  edTtsOpenCb((url, sp)=>{
-    const pl = EDIT.blocks[i].payload;
-    edSetPath(pl, path, url);
-    edSetPath(pl, path + '_tts', sp);
-  }, spec);
-}
+// ---------- Озвучить пачкой ----------
+// Идёт по выбранным юнитам, находит карточки без звука и озвучивает их.
+// Уже озвученное не трогает: если у карточки есть audio, она пропускается.
+var TTSB = { units:[], items:[], busy:false, stop:false };
 
-// Обработчик-функция (компонент edAudioField)
-function edTtsOpenCb(cb, spec){
-  TTS_CB = cb;
-  spec = spec || {};
-  const text = spec.text || '';
-  const voice = spec.voice || TTS_LAST_VOICE;
-  openModal(`<h3 style="margin-top:0">Озвучить текст</h3>
-    <textarea id="ttsText" rows="3" placeholder="Что произнести по-английски">${esc(text)}</textarea>
-    <div class="field" style="margin-top:8px"><label>Голос</label>
-      <select id="ttsVoice">${TTS_VOICES.map(v=>`<option value="${v[0]}" ${voice===v[0]?'selected':''}>${v[1]}</option>`).join('')}</select></div>
-    <div class="muted" style="font-size:12px;margin-top:6px">Транскрипцию вроде /m/ синтез читает неправильно — такое лучше записать голосом.</div>
-    <div id="ttsErr" class="err" style="margin-top:6px"></div>
-    <div class="row" style="justify-content:flex-end;gap:8px;margin-top:12px">
-      <button class="btn sec" onclick="closeModal()">Отмена</button>
-      <button class="btn" id="ttsGo" onclick="edTtsRun()">🔊 Озвучить</button>
-    </div>`);
-}
-
-async function edTtsRun(){
-  const text = ($('ttsText').value || '').trim();
-  const voice = $('ttsVoice').value;
-  if(!text){ $('ttsErr').textContent = 'Напиши, что произнести'; return; }
-  const btn = $('ttsGo');
-  btn.disabled = true; btn.textContent = 'Синтезирую…';
+async function ttsBatchOpen(){
+  openModal(`<h3 style="margin-top:0">Озвучить пачкой</h3>
+    <div class="loading">Загружаю список юнитов…</div>`);
   try{
-    const { data:sess } = await sb.auth.getSession();
-    const token = sess && sess.session && sess.session.access_token;
-    if(!token) throw new Error('Нет входа в платформу — обнови страницу');
-
-    const r = await fetch(TTS_URL, {
-      method:'POST',
-      headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token },
-      body: JSON.stringify({ text, voice })
-    });
-    if(!r.ok){
-      let m = 'Ошибка синтеза ('+r.status+')';
-      try{ const j = await r.json(); if(j && j.error) m = j.error; }catch(_){}
-      throw new Error(m);
+    const { data:courses } = await sb.from('classroom_courses').select('id,title').order('sort_order');
+    let html = '';
+    for(const c of (courses||[])){
+      const { data:units } = await sb.from('classroom_units').select('id,title').eq('course_id',c.id).order('sort_order');
+      if(!(units||[]).length) continue;
+      html += `<div style="margin-bottom:8px"><b>${esc(c.title)}</b>${(units||[]).map(u=>
+        `<label class="chk" style="display:block;margin-left:10px"><input type="checkbox" class="ttsU" value="${u.id}"><span>${esc(u.title)}</span></label>`).join('')}</div>`;
     }
-    const blob = await r.blob();
-    const ext = blob.type.includes('mpeg') ? 'mp3' : 'wav';
-    const file = new File([blob], 'tts_'+Date.now()+'.'+ext, { type: blob.type });
-    const url = await uploadToBucket(file);
+    openModal(`<h3 style="margin-top:0">Озвучить пачкой</h3>
+      <div style="max-height:240px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:8px">${html||'<div class="muted">Юнитов нет</div>'}</div>
+      <div class="field" style="margin-top:8px"><label>Голос</label>
+        <select id="ttsbVoice">${TTS_VOICES.map(v=>`<option value="${v[0]}" ${TTS_LAST_VOICE===v[0]?'selected':''}>${v[1]}</option>`).join('')}</select></div>
+      <div class="muted" style="font-size:12px;margin-top:6px">Озвучивается то, что помечено в самом задании полем с суффиксом <code>_tts</code>. Уже заполненный звук не трогается.</div>
+      <div id="ttsbInfo" class="muted" style="margin-top:8px"></div>
+      <div id="ttsbErr" class="err"></div>
+      <div class="row" style="justify-content:flex-end;gap:8px;margin-top:12px">
+        <button class="btn sec" onclick="ttsBatchClose()">Закрыть</button>
+        <button class="btn sec" id="ttsbScan" onclick="ttsBatchScan()">Посчитать</button>
+        <button class="btn" id="ttsbGo" onclick="ttsBatchRun()" disabled>🔊 Озвучить</button>
+      </div>`);
+  }catch(e){ $('modalHost').innerHTML = `<div class="modal"><div class="err">${esc(e.message||e)}</div></div>`; }
+}
 
-    if(TTS_CB) TTS_CB(url, { text, voice });
-    TTS_LAST_VOICE = voice;
-    closeModal();
-    edRenderBlocks();
-    toast('Озвучено ✅');
+function ttsBatchClose(){ TTSB.stop = true; closeModal(); }
+
+// Что озвучивать, задаётся в самом payload: рядом с полем звука
+// кладётся поле с суффиксом _tts. Например у карточки:
+//   { "text": "teacher", "audio_tts": { "text": "teacher" } }
+// Кнопка находит такие пары, синтезирует и заполняет audio.
+// Голос можно указать в самой пометке, иначе берётся выбранный в окне.
+function ttsCollect(obj, prefix, out){
+  if(Array.isArray(obj)){
+    obj.forEach((v,i)=> ttsCollect(v, prefix ? prefix+'.'+i : String(i), out));
+    return;
+  }
+  if(obj && typeof obj === 'object'){
+    Object.keys(obj).forEach(k=>{
+      if(k.length > 4 && k.slice(-4) === '_tts'){
+        const base = k.slice(0, -4);
+        const spec = obj[k];
+        const text = spec && typeof spec === 'object' ? spec.text : spec;
+        if(text && String(text).trim() && !obj[base]){
+          out.push({
+            path: (prefix ? prefix+'.' : '') + base,
+            text: String(text).trim(),
+            voice: (spec && spec.voice) || null
+          });
+        }
+      } else {
+        ttsCollect(obj[k], prefix ? prefix+'.'+k : k, out);
+      }
+    });
+  }
+}
+
+// Сначала показываем, что именно будет сделано — до того, как делать
+async function ttsBatchScan(){
+  const ids = [...document.querySelectorAll('.ttsU:checked')].map(c=>c.value);
+  $('ttsbErr').textContent = '';
+  if(!ids.length){ $('ttsbErr').textContent = 'Отметь хотя бы один юнит'; return; }
+  $('ttsbInfo').textContent = 'Считаю…';
+  TTSB.items = [];
+  try{
+    const { data:lessons } = await sb.from('classroom_lessons').select('id').in('unit_id', ids);
+    const lids = (lessons||[]).map(l=>l.id);
+    if(!lids.length){ $('ttsbInfo').textContent = 'В этих юнитах нет материалов'; return; }
+    const { data:blocks } = await sb.from('classroom_blocks')
+      .select('id,type,payload').in('lesson_id', lids);
+    let done = 0;
+    (blocks||[]).forEach(b=>{
+      const out = [];
+      ttsCollect(b.payload || {}, '', out);
+      out.forEach(it=> TTSB.items.push(Object.assign({ blockId:b.id }, it)));
+      // уже озвученные пометки — просто для счётчика
+      const all = [];
+      ttsCollectAll(b.payload || {}, all);
+      done += all.length - out.length;
+    });
+    $('ttsbInfo').textContent = TTSB.items.length
+      ? `Помечено к озвучке: ${TTSB.items.length + done}. Уже озвучено: ${done}. Будет сделано: ${TTSB.items.length}.`
+      : (done ? `Все ${done} помеченных уже озвучены.` : 'Пометок к озвучке не найдено.');
+    $('ttsbGo').disabled = TTSB.items.length === 0;
+  }catch(e){ $('ttsbErr').textContent = e.message || String(e); }
+}
+
+// То же, но без проверки «уже заполнено» — чтобы посчитать общее число пометок
+function ttsCollectAll(obj, out){
+  if(Array.isArray(obj)){ obj.forEach(v=> ttsCollectAll(v, out)); return; }
+  if(obj && typeof obj === 'object'){
+    Object.keys(obj).forEach(k=>{
+      if(k.length > 4 && k.slice(-4) === '_tts'){
+        const spec = obj[k];
+        const text = spec && typeof spec === 'object' ? spec.text : spec;
+        if(text && String(text).trim()) out.push(1);
+      } else ttsCollectAll(obj[k], out);
+    });
+  }
+}
+
+async function ttsBatchRun(){
+  if(TTSB.busy || !TTSB.items.length) return;
+  TTSB.busy = true; TTSB.stop = false;
+  const defVoice = $('ttsbVoice').value;
+  $('ttsbGo').disabled = true; $('ttsbScan').disabled = true;
+  const { data:sess } = await sb.auth.getSession();
+  const token = sess && sess.session && sess.session.access_token;
+  if(!token){ $('ttsbErr').textContent = 'Нет входа в платформу — обнови страницу'; TTSB.busy=false; return; }
+
+  const byBlock = {};
+  TTSB.items.forEach(it=>{ (byBlock[it.blockId] = byBlock[it.blockId] || []).push(it); });
+  let done = 0, failed = 0;
+
+  try{
+    for(const bid of Object.keys(byBlock)){
+      if(TTSB.stop) break;
+      const { data:rows } = await sb.from('classroom_blocks').select('payload').eq('id', bid).limit(1);
+      const payload = (rows && rows[0] && rows[0].payload) || null;
+      if(!payload) continue;
+
+      for(const it of byBlock[bid]){
+        if(TTSB.stop) break;
+        if(edGetPath(payload, it.path)) continue;   // кто-то заполнил, пока мы шли
+        const voice = it.voice || defVoice;
+        try{
+          const r = await fetch(TTS_URL, {
+            method:'POST',
+            headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token },
+            body: JSON.stringify({ text: it.text, voice })
+          });
+          if(!r.ok) throw new Error('код '+r.status);
+          const blob = await r.blob();
+          const ext = blob.type.includes('mpeg') ? 'mp3' : 'wav';
+          const file = new File([blob], 'tts_'+Date.now()+'.'+ext, { type: blob.type });
+          edSetPath(payload, it.path, await uploadToBucket(file));
+          edSetPath(payload, it.path + '_tts', { text: it.text, voice });
+          done++;
+        }catch(e){ failed++; }
+        $('ttsbInfo').textContent = `Озвучено ${done} из ${TTSB.items.length}${failed?`, не вышло: ${failed}`:''}…`;
+      }
+
+      const { error } = await sb.from('classroom_blocks').update({ payload }).eq('id', bid);
+      if(error){ $('ttsbErr').textContent = 'Не удалось сохранить блок: ' + error.message; break; }
+    }
+    $('ttsbInfo').textContent = `Готово. Озвучено: ${done}${failed?`, не вышло: ${failed}`:''}.`;
+    toast('Озвучено: '+done);
   }catch(e){
-    $('ttsErr').textContent = e.message || String(e);
-    btn.disabled = false; btn.textContent = '🔊 Озвучить';
+    $('ttsbErr').textContent = e.message || String(e);
+  }finally{
+    TTSB.busy = false;
+    $('ttsbScan').disabled = false;
+    $('ttsbGo').disabled = false;
   }
 }
 
