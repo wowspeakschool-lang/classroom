@@ -2535,21 +2535,40 @@ function ttsLessonOpen(){
 async function ttsBatchOpen(){
   TTSB.lids = null; TTSB.lesson = false;
   openModal(`<h3 style="margin-top:0">Озвучить пачкой</h3>
-    <div class="loading">Загружаю список юнитов…</div>`);
+    <div class="loading">Загружаю список…</div>`);
   try{
     const { data:courses } = await sb.from('classroom_courses').select('id,title').order('sort_order');
+    const KIND = { lesson:'план урока', homework:'ДЗ', test:'тест' };
     let html = '';
     for(const c of (courses||[])){
       const { data:units } = await sb.from('classroom_units').select('id,title').eq('course_id',c.id).order('sort_order');
       if(!(units||[]).length) continue;
-      html += `<div style="margin-bottom:8px"><b>${esc(c.title)}</b>${(units||[]).map(u=>
-        `<label class="chk" style="display:block;margin-left:10px"><input type="checkbox" class="ttsU" value="${u.id}"><span>${esc(u.title)}</span></label>`).join('')}</div>`;
+      let uHtml = '';
+      for(const u of units){
+        const { data:ls } = await sb.from('classroom_lessons')
+          .select('id,title,kind').eq('unit_id',u.id).order('sort_order');
+        // Галочка юнита отмечает все его материалы разом
+        uHtml += `<div style="margin:4px 0 4px 10px">
+          <label class="chk" style="display:block">
+            <input type="checkbox" class="ttsU" data-unit="${u.id}" onchange="ttsToggleUnit(this)">
+            <span><b>${esc(u.title)}</b> <span class="muted">${(ls||[]).length}</span></span></label>
+          ${(ls||[]).map(l=>`<label class="chk" style="display:block;margin-left:22px">
+              <input type="checkbox" class="ttsL" value="${l.id}" data-unit="${u.id}" onchange="ttsSyncUnit('${u.id}')">
+              <span>${esc(l.title)} <span class="muted">· ${KIND[l.kind]||l.kind||''}</span></span></label>`).join('')}
+        </div>`;
+      }
+      html += `<div style="margin-bottom:10px"><b style="font-size:15px">${esc(c.title)}</b>${uHtml}</div>`;
     }
     openModal(`<h3 style="margin-top:0">Озвучить пачкой</h3>
-      <div style="max-height:240px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:8px">${html||'<div class="muted">Юнитов нет</div>'}</div>
-      <div class="field" style="margin-top:8px"><label>Голос</label>
+      <div class="row" style="gap:8px;margin-bottom:6px">
+        <button class="btn sec sm" onclick="ttsSelectAll(true)">Отметить всё</button>
+        <button class="btn sec sm" onclick="ttsSelectAll(false)">Снять</button>
+        <span id="ttsbPicked" class="muted" style="font-size:12px"></span>
+      </div>
+      <div style="max-height:280px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:8px">${html||'<div class="muted">Материалов нет</div>'}</div>
+      <div class="field" style="margin-top:8px"><label>Голос по умолчанию</label>
         <select id="ttsbVoice">${TTS_VOICES.map(v=>`<option value="${v[0]}" ${TTS_LAST_VOICE===v[0]?'selected':''}>${v[1]}</option>`).join('')}</select></div>
-      <div class="muted" style="font-size:12px;margin-top:6px">Озвучивается то, что помечено в самом задании полем с суффиксом <code>_tts</code>. Уже заполненный звук не трогается.</div>
+      <div class="muted" style="font-size:12px;margin-top:6px">Озвучивается то, что помечено полем с суффиксом <code>_tts</code>. Уже заполненный звук не трогается.</div>
       <div id="ttsbInfo" class="muted" style="margin-top:8px"></div>
       <div id="ttsbErr" class="err"></div>
       <div class="row" style="justify-content:flex-end;gap:8px;margin-top:12px">
@@ -2557,7 +2576,34 @@ async function ttsBatchOpen(){
         <button class="btn sec" id="ttsbScan" onclick="ttsBatchScan()">Посчитать</button>
         <button class="btn" id="ttsbGo" onclick="ttsBatchRun()" disabled>🔊 Озвучить</button>
       </div>`);
+    ttsPickedCount();
   }catch(e){ $('modalHost').innerHTML = `<div class="modal"><div class="err">${esc(e.message||e)}</div></div>`; }
+}
+
+// Галочка юнита включает и выключает все его материалы
+function ttsToggleUnit(el){
+  document.querySelectorAll(`.ttsL[data-unit="${el.dataset.unit}"]`).forEach(c=> c.checked = el.checked);
+  ttsPickedCount();
+}
+
+// Обратная связь: если отмечены все материалы юнита — отмечается и он
+function ttsSyncUnit(uid){
+  const ls = [...document.querySelectorAll(`.ttsL[data-unit="${uid}"]`)];
+  const u = document.querySelector(`.ttsU[data-unit="${uid}"]`);
+  if(u) u.checked = ls.length > 0 && ls.every(c=>c.checked);
+  ttsPickedCount();
+}
+
+function ttsSelectAll(on){
+  document.querySelectorAll('.ttsL, .ttsU').forEach(c=> c.checked = on);
+  ttsPickedCount();
+}
+
+function ttsPickedCount(){
+  const n = document.querySelectorAll('.ttsL:checked').length;
+  const el = $('ttsbPicked');
+  if(el) el.textContent = n ? `Отмечено материалов: ${n}` : 'Ничего не отмечено';
+  const go = $('ttsbGo'); if(go) go.disabled = true;
 }
 
 function ttsBatchClose(){ TTSB.stop = true; TTSB.lids = null; TTSB.lesson = false; closeModal(); }
@@ -2597,10 +2643,8 @@ async function ttsBatchScan(){
   $('ttsbErr').textContent = '';
   let lids = TTSB.lids;
   if(!lids){
-    const ids = [...document.querySelectorAll('.ttsU:checked')].map(c=>c.value);
-    if(!ids.length){ $('ttsbErr').textContent = 'Отметь хотя бы один юнит'; return; }
-    const { data:lessons } = await sb.from('classroom_lessons').select('id').in('unit_id', ids);
-    lids = (lessons||[]).map(l=>l.id);
+    lids = [...document.querySelectorAll('.ttsL:checked')].map(c=>c.value);
+    if(!lids.length){ $('ttsbErr').textContent = 'Отметь хотя бы один материал'; return; }
   }
   $('ttsbInfo').textContent = 'Считаю…';
   TTSB.items = [];
