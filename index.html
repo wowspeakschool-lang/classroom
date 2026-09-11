@@ -3,50 +3,89 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
 <title>Classroom · Кабинет учителя</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-  :root{ --brand:#7c3aed; --brand-d:#5b21b6; --ink:#1e293b; --mut:#64748b; --line:#e5e7eb; --bg:#f6f7fb; --ok:#16a34a; --warn:#f59e0b; --bad:#dc2626; }
+  :root{
+    /* Оформление. Старые имена оставлены — на них завязано много правил. */
+    --brand:#5B4BE0; --brand-d:#3A2FA8; --brand-soft:#F0EEFD;
+    --ink:#1A1B2E; --mut:#7A7F92; --faint:#A6AAB9;
+    --line:#E8E7EE; --bg:#F7F6F9;
+    --ok:#0D6155; --ok-soft:#E2F1EE;
+    --warn:#A9660B; --warn-soft:#FBF0DE;
+    --bad:#B3261E;
+    /* Цвет курса. Подменяется при открытии материала, по умолчанию — брендовый. */
+    --course:#5B4BE0; --course-d:#3A2FA8; --course-soft:#F0EEFD;
+  }
   *{ box-sizing:border-box; }
-  body{ margin:0; font-family:-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; color:var(--ink); background:var(--bg); }
+  body{ margin:0; font-family:'Golos Text',-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased; }
   button{ font-family:inherit; cursor:pointer; }
   .hidden{ display:none !important; }
   /* Login */
   #loginScreen{ min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
-  .card{ background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:0 8px 30px rgba(15,23,42,.06); }
+  .card{ background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:none; }
   .login-card{ width:100%; max-width:380px; padding:28px; }
   .login-card h1{ font-size:20px; margin:0 0 4px; }
   .login-card p{ color:var(--mut); margin:0 0 18px; font-size:14px; }
   .field{ margin-bottom:12px; }
   .field label{ display:block; font-size:12px; font-weight:600; color:#475569; margin-bottom:6px; }
-  input,select,textarea{ width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:9px; font-size:14px; font-family:inherit; background:#fff; }
+  input,select,textarea{ width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px;
+    font-size:14px; font-family:inherit; background:#fff; color:var(--ink); }
+  input:focus,select:focus,textarea:focus{ outline:2px solid var(--course-soft); outline-offset:0; border-color:var(--course); }
   textarea{ resize:vertical; min-height:70px; }
-  .btn{ display:inline-flex; align-items:center; gap:6px; padding:10px 16px; border:none; border-radius:9px; background:var(--brand); color:#fff; font-weight:600; font-size:14px; }
-  .btn:hover{ background:var(--brand-d); }
-  .btn:disabled{ opacity:.55; cursor:default; }
-  .btn.sec{ background:#f1f5f9; color:#334155; }
-  .btn.sec:hover{ background:#e2e8f0; }
-  .btn.sm{ padding:6px 11px; font-size:13px; }
+  .btn{ border:1px solid var(--course); background:var(--course); color:#fff; padding:8px 14px;
+    border-radius:10px; font-weight:600; font-size:14px; cursor:pointer; }
+  .btn:hover{ background:var(--course-d); border-color:var(--course-d); }
+  .btn:disabled{ opacity:.5; cursor:default; }
+  .btn.sec{ background:#fff; border-color:var(--line); color:var(--ink); font-weight:500; }
+  .btn.sec:hover{ background:#fff; border-color:#CFCDDA; }
+  .btn.sm{ padding:6px 11px; font-size:13px; border-radius:9px; }
   .err{ color:var(--bad); font-size:13px; margin-top:8px; min-height:18px; }
   /* App shell */
-  header{ background:#fff; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:20; }
-  .head-in{ max-width:1080px; margin:0 auto; padding:12px 20px; display:flex; align-items:center; gap:16px; }
-  .logo{ font-weight:800; color:var(--brand); font-size:18px; }
-  .tabs{ display:flex; gap:4px; margin-left:8px; flex-wrap:wrap; }
-  .tab{ padding:8px 14px; border-radius:9px; border:none; background:transparent; color:var(--mut); font-weight:600; font-size:14px; }
-  .tab.active{ background:#f3f0ff; color:var(--brand-d); }
-  .head-right{ margin-left:auto; display:flex; align-items:center; gap:12px; font-size:13px; color:var(--mut); }
-  main{ max-width:1080px; margin:0 auto; padding:22px 20px 60px; }
-  .section-title{ font-size:18px; margin:0 0 4px; }
+  /* Полоса слева: вкладок стало шесть, вверху они уже не помещались,
+     а вертикально место есть и запас на рост. */
+  #app{ display:grid; grid-template-columns:236px 1fr; min-height:100vh; }
+  header{ background:#fff; border-right:1px solid var(--line); position:sticky; top:0; height:100vh; z-index:20; }
+  .head-in{ height:100%; display:flex; flex-direction:column; padding:0; }
+  .logo{ font-weight:700; font-size:16px; letter-spacing:-.015em; color:var(--ink);
+    height:58px; display:flex; align-items:center; gap:10px; padding:0 18px; }
+  .logo:before{ content:"C"; width:25px; height:25px; border-radius:8px; background:var(--course);
+    color:#fff; font-size:12px; display:grid; place-items:center; flex:0 0 auto; }
+  .tabs{ display:flex; flex-direction:column; gap:2px; padding:6px 12px; }
+  .tab{ display:flex; align-items:center; gap:10px; padding:9px 11px; border-radius:11px; border:none;
+    background:transparent; color:var(--ink); font-weight:500; font-size:14px; text-align:left; }
+  .tab:hover{ background:var(--bg); }
+  .tab.active{ background:var(--course-soft); color:var(--course-d); font-weight:600; }
+  .head-right{ margin-top:auto; display:flex; align-items:center; gap:10px; font-size:13px;
+    color:var(--mut); padding:14px 16px; border-top:1px solid var(--line); }
+  #whoami{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; }
+  main{ max-width:none; margin:0; padding:22px 26px 60px; min-width:0; }
+  @media (max-width:900px){
+    #app{ grid-template-columns:1fr; }
+    header{ position:static; height:auto; border-right:0; border-bottom:1px solid var(--line); }
+    .head-in{ flex-direction:row; align-items:center; flex-wrap:wrap; padding:8px 14px; gap:8px; }
+    .logo{ height:auto; padding:0; }
+    .tabs{ flex-direction:row; flex-wrap:wrap; padding:0; }
+    .head-right{ margin:0 0 0 auto; padding:0; border:0; }
+    main{ padding:16px 14px 50px; }
+  }
+  .section-title{ font-size:24px; font-weight:700; letter-spacing:-.02em; margin:0 0 3px; }
   .section-sub{ color:var(--mut); font-size:13px; margin:0 0 18px; }
   .row{ display:flex; gap:12px; flex-wrap:wrap; }
   .grow{ flex:1; min-width:200px; }
   table{ width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
   th,td{ text-align:left; padding:11px 14px; border-bottom:1px solid var(--line); font-size:14px; }
-  th{ background:#fafafe; color:#475569; font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.3px; }
+  th{ background:#FBFAFD; color:var(--mut); font-weight:600; font-size:12px; text-transform:none; letter-spacing:0; }
   tr:last-child td{ border-bottom:none; }
-  .pill{ display:inline-block; padding:2px 9px; border-radius:999px; font-size:12px; font-weight:600; }
-  .pill.g{ background:#dcfce7; color:#166534; } .pill.y{ background:#fef9c3; color:#854d0e; } .pill.r{ background:#fee2e2; color:#991b1b; } .pill.n{ background:#f1f5f9; color:#475569; }
+  .pill{ display:inline-block; padding:2px 9px; border-radius:8px; font-size:12px; font-weight:500; }
+  .pill.g{ background:var(--ok-soft); color:var(--ok); }
+  .pill.y{ background:var(--warn-soft); color:var(--warn); }
+  .pill.r{ background:#FBE9E7; color:var(--bad); }
+  .pill.n{ background:var(--bg); color:var(--mut); }
   .muted{ color:var(--mut); }
   .loading{ padding:26px; text-align:center; color:var(--mut); }
   .empty{ padding:30px; text-align:center; color:#94a3b8; background:#fff; border:1px dashed var(--line); border-radius:12px; }
@@ -132,8 +171,8 @@
   .treerow{ padding:7px 8px; border-radius:8px; cursor:pointer; font-size:14px; user-select:none; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .treerow:hover{ background:#f3f0ff; }
   .treerow.lesson.active{ background:#ede9fe; color:var(--brand-d); font-weight:600; }
-  .block{ border:1px solid var(--line); border-radius:11px; padding:14px; margin-bottom:12px; }
-  .block .bt{ font-size:12px; font-weight:700; color:var(--brand-d); text-transform:uppercase; letter-spacing:.4px; margin-bottom:8px; }
+  .block{ border:1px solid var(--line); border-radius:13px; padding:15px; margin-bottom:10px; background:#fff; }
+  .block .bt{ font-size:12px; font-weight:500; color:var(--mut); text-transform:none; letter-spacing:0; margin-bottom:8px; }
   .toast{ position:fixed; bottom:22px; left:50%; transform:translateX(-50%); background:#111827; color:#fff; padding:11px 18px; border-radius:10px; font-size:14px; z-index:80; opacity:0; transition:opacity .2s; }
   .toast.show{ opacity:1; }
   .banner{ background:#fffbeb; border:1px solid #fde68a; color:#92400e; padding:10px 14px; border-radius:10px; font-size:13px; margin-bottom:16px; }
@@ -212,12 +251,12 @@
     <div class="head-in">
       <span class="logo">🎓 Classroom</span>
       <nav class="tabs">
-        <button class="tab active" data-tab="students" onclick="switchTab('students')">Мои ученики</button>
-        <button class="tab" data-tab="assign" onclick="switchTab('assign')">Задать ДЗ</button>
-        <button class="tab" data-tab="review" onclick="switchTab('review')">Проверка <span id="reviewBadge" class="pill y hidden"></span></button>
-        <button class="tab" data-tab="lessons" onclick="switchTab('lessons')">Уроки</button>
-        <button class="tab" data-tab="library" onclick="switchTab('library')">Библиотека</button>
-        <button class="tab" data-tab="media" onclick="switchTab('media')">Медиа</button>
+        <button class="tab active" data-tab="students" onclick="switchTab('students')"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><circle cx="9.5" cy="8" r="3.2"/><path d="M4 19c.6-3.1 3-4.8 5.5-4.8S14.4 15.9 15 19"/><path d="M17 8.6a3 3 0 010 5"/></svg>Мои ученики</button>
+        <button class="tab" data-tab="assign" onclick="switchTab('assign')"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><path d="M12 4.5v10M8.2 10.8L12 14.5l3.8-3.7M5 19h14"/></svg>Задать материал</button>
+        <button class="tab" data-tab="review" onclick="switchTab('review')"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><path d="M4 12.5l5 5L20 6.5"/></svg>Проверка <span id="reviewBadge" class="pill y hidden" style="margin-left:auto"></span></button>
+        <button class="tab" data-tab="lessons" onclick="switchTab('lessons')"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><path d="M6.5 4.5l12 7.5-12 7.5z"/></svg>Уроки</button>
+        <button class="tab" data-tab="library" onclick="switchTab('library')"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><path d="M4 5.5h6.5v13H4zM13.5 5.5H20v13h-6.5z"/></svg>Библиотека</button>
+        <button class="tab" data-tab="media" onclick="switchTab('media')"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><path d="M9.5 17.5V6.2l9.5-1.9v11.4"/><circle cx="7.3" cy="17.6" r="2.3"/><circle cx="16.8" cy="15.7" r="2.3"/></svg>Медиа</button>
       </nav>
       <div class="head-right">
         <span id="whoami"></span>
@@ -2148,7 +2187,9 @@ function edRenderTree(){
             const kopen = EDOPEN.has('k:'+u.id+':'+k.key);
             const rows = kopen
               ? (items.length
-                  ? items.map(l=>`<div class="treerow lesson ${EDIT.lessonId===l.id?'active':''}" style="padding-left:58px" onclick="edOpenLesson('${l.id}','${u.id}','${c.id}')">📄 ${esc(l.title)}${l.is_published?'':' <span class="muted">(черновик)</span>'}</div>`).join('')
+                  ? items.map(l=>`<a class="treerow lesson ${EDIT.lessonId===l.id?'active':''}" style="padding-left:58px; display:block; text-decoration:none; color:inherit"
+                      href="?lesson=${l.id}" onclick="return edLinkOpen(event,'${l.id}','${u.id}','${c.id}')"
+                      title="Колесом мыши или с Ctrl — откроется в новой вкладке">📄 ${esc(l.title)}${l.is_published?'':' <span class="muted">(черновик)</span>'}</a>`).join('')
                   : `<div class="muted" style="padding-left:58px;font-size:13px">пусто</div>`)
                 + `<div style="padding:4px 0 6px 58px"><button class="btn sec sm" onclick="event.stopPropagation();edNewLesson('${u.id}','${c.id}','${k.key}')">+ ${esc(k.add)}</button></div>`
               : '';
@@ -2189,6 +2230,17 @@ async function edNewLesson(unitId,courseId,kind){
   await edInit();
   EDOPEN.add('c:'+courseId); EDOPEN.add('u:'+unitId); EDOPEN.add('k:'+unitId+':'+kind);
   edOpenLesson(data.id, unitId, courseId);
+}
+
+// Обычный клик — открываем на месте. Ctrl, Cmd, Shift, средняя кнопка —
+// не мешаем браузеру открыть ссылку своим способом.
+function edLinkOpen(e, lessonId, unitId, courseId){
+  if(e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button === 1) return true;
+  e.preventDefault();
+  edOpenLesson(lessonId, unitId, courseId);
+  // адрес в строке меняем без перезагрузки — можно скопировать и переслать
+  try{ history.replaceState(null, '', location.pathname + '?lesson=' + lessonId); }catch(_){}
+  return false;
 }
 
 async function edOpenLesson(lessonId, unitId, courseId){
@@ -3485,6 +3537,20 @@ async function boot(){
   await Promise.all([ loadStudents(), loadLibrary(), loadPending() ]);
   renderStudents();
   route();
+
+  // Пришли по ссылке на материал — открываем библиотеку прямо на нём
+  const _lesson = _p.get('lesson');
+  if(_lesson && ME.isEditor){
+    switchTab('library');
+    try{
+      const { data:le } = await sb.from('classroom_lessons').select('id,unit_id').eq('id',_lesson).maybeSingle();
+      if(le){
+        const { data:un } = await sb.from('classroom_units').select('id,course_id').eq('id',le.unit_id).maybeSingle();
+        EDOPEN.add('c:'+(un&&un.course_id)); EDOPEN.add('u:'+le.unit_id);
+        await edOpenLesson(le.id, le.unit_id, un && un.course_id);
+      } else toast('Материал не найден');
+    }catch(e){ toast(e.message||String(e)); }
+  }
 }
 document.addEventListener('DOMContentLoaded', boot);
 </script>
