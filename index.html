@@ -168,33 +168,40 @@
   .modal .close{ float:right; background:none; border:none; font-size:22px; color:#94a3b8; }
   .chk{ display:flex; align-items:center; gap:9px; padding:8px 10px; border:1px solid var(--line); border-radius:9px; margin-bottom:6px; }
   .chk input{ width:auto; }
-  .treerow{ padding:7px 8px; border-radius:8px; cursor:pointer; font-size:14px; user-select:none; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .treerow:hover{ background:#f3f0ff; }
-  .treerow.lesson.active{ background:#ede9fe; color:var(--brand-d); font-weight:600; }
+  .treerow{ padding:7px 9px; border-radius:9px; cursor:pointer; font-size:14px; user-select:none;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#3D4055; }
+  .treerow:hover{ background:var(--bg); }
+  .treerow.course{ color:var(--ink); font-size:14px; }
+  .treerow.lesson.active{ background:#fff; color:var(--ink); font-weight:600;
+    box-shadow:0 1px 3px rgba(26,27,46,.10); }
+  /* Тип материала — формой значка: квадрат план, круг домашка, ромб тест */
+  .tmark{ display:inline-block; width:8px; height:8px; margin-right:8px; vertical-align:1px; }
+  .tmark.lesson{ border-radius:2px; background:var(--course); }
+  .tmark.homework{ border-radius:50%; background:var(--ok); }
+  .tmark.test{ background:var(--warn); transform:rotate(45deg); border-radius:1px; }
+  .tdraft{ float:right; font-size:11px; color:var(--faint); font-weight:400; }
   .block{ border:1px solid var(--line); border-radius:13px; padding:15px; margin-bottom:10px; background:#fff; }
 
   /* Шапка материала — единственное цветное пятно в редакторе */
-  .hero{ border-radius:20px; padding:22px 24px 18px; margin-bottom:14px; color:#fff; position:relative;
-    overflow:hidden; background:linear-gradient(135deg, var(--course), var(--course-d)); }
-  .hero:after{ content:""; position:absolute; right:-70px; top:-90px; width:280px; height:280px;
-    border-radius:50%; background:rgba(255,255,255,.08); }
+  /* Шапка материала: светлая подложка в цвет курса, текст обычный.
+     Цветом обозначаем курс, а не привлекаем внимание. */
+  .hero{ border-radius:18px; padding:20px 22px 16px; margin-bottom:14px; position:relative; overflow:hidden;
+    background:var(--course-soft); border:1px solid rgba(0,0,0,.04); }
+  .hero:before{ content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--course); }
   .hero > *{ position:relative; z-index:2; }
-  .hero-path{ font-size:13px; opacity:.75; display:flex; gap:7px; align-items:center; flex-wrap:wrap; }
-  .hero-path span{ opacity:.5; }
-  .hero-t{ margin:5px 0 0; font-size:27px; line-height:1.15; letter-spacing:-.025em; font-weight:700; }
-  .hero-sub{ font-size:13px; opacity:.75; margin-top:5px; }
-  .hero-acts{ position:absolute; right:22px; top:20px; display:flex; gap:8px; z-index:3; flex-wrap:wrap; justify-content:flex-end; }
-  .hb{ background:rgba(255,255,255,.16); border:0; border-radius:10px; padding:8px 13px; color:#fff;
-    font-size:13px; font-weight:500; cursor:pointer; }
-  .hb:hover{ background:rgba(255,255,255,.26); }
-  .hero .field label{ color:rgba(255,255,255,.8); }
-  .hero select, .hero input{ background:rgba(255,255,255,.16); border-color:rgba(255,255,255,.25); color:#fff; }
-  .hero select option{ color:var(--ink); }
-  .hero-foot{ margin-top:16px; align-items:center; gap:16px; flex-wrap:wrap; }
-  .hero-foot .chk{ color:#fff; max-width:none; }
-  .hero-th{ font-size:13px; opacity:.85; display:flex; align-items:center; gap:7px; }
+  .hero-path{ font-size:13px; color:var(--mut); display:flex; gap:7px; align-items:center; flex-wrap:wrap; }
+  .hero-path span{ color:var(--faint); }
+  .hero-t{ margin:4px 0 0; font-size:26px; line-height:1.15; letter-spacing:-.025em; font-weight:700; color:var(--ink); }
+  .hero-sub{ font-size:13px; color:var(--mut); margin-top:4px; }
+  .hero-acts{ position:absolute; right:20px; top:18px; display:flex; gap:8px; z-index:3; flex-wrap:wrap; justify-content:flex-end; }
+  .hb{ background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:10px; padding:7px 13px;
+    color:var(--ink); font-size:13px; font-weight:500; cursor:pointer; }
+  .hb:hover{ border-color:var(--course); color:var(--course-d); }
+  .hero-foot{ margin-top:14px; align-items:center; gap:16px; flex-wrap:wrap; }
+  .hero-foot .chk{ max-width:none; }
+  .hero-th{ font-size:13px; color:var(--mut); display:flex; align-items:center; gap:7px; }
   .hero-th input{ width:64px; padding:5px 8px; text-align:center; }
-  #cvCount{ color:rgba(255,255,255,.8) !important; }
+  .hero select, .hero input{ background:#fff; }
   @media (max-width:760px){ .hero-acts{ position:static; margin-bottom:10px; justify-content:flex-start; } }
 
   /* Строка блока: сначала содержимое, потом служебное */
@@ -207,6 +214,28 @@
   .brow:hover .btn.sec.sm{ color:var(--mut); }
   .brow .btn.sec.sm:hover{ background:var(--bg); color:var(--ink); }
   .brow input[type=number]{ border-color:var(--line); color:var(--mut); font-size:12px; }
+  .moreWrap{ position:relative; display:inline-block; }
+  .moreMenu{ position:absolute; right:0; top:calc(100% + 6px); background:#fff; border:1px solid var(--line);
+    border-radius:12px; padding:5px; min-width:236px; box-shadow:0 12px 34px rgba(26,27,46,.14); z-index:15;
+    display:flex; flex-direction:column; gap:1px; }
+  .moreMenu button{ border:0; background:transparent; text-align:left; padding:8px 11px; border-radius:9px;
+    font-size:14px; cursor:pointer; color:var(--ink); }
+  .moreMenu button:hover{ background:var(--bg); }
+
+  #edDock{ position:fixed; right:22px; bottom:22px; z-index:18; display:flex; align-items:center; gap:6px;
+    background:#fff; border:1px solid var(--line); border-radius:14px; padding:7px;
+    box-shadow:0 10px 30px rgba(26,27,46,.16); }
+  #edDock.hidden{ display:none; }
+  .dk{ border:0; background:transparent; color:var(--mut); font-size:15px; padding:8px 11px;
+    border-radius:10px; cursor:pointer; }
+  .dk:hover:not(:disabled){ background:var(--bg); color:var(--ink); }
+  .dk:disabled{ opacity:.35; cursor:default; }
+  .dk.save{ background:var(--course); color:#fff; font-size:14px; font-weight:600; padding:8px 16px; }
+  .dk.save:hover{ background:var(--course-d); }
+  .dkSep{ width:1px; height:20px; background:var(--line); }
+  .dkState{ font-size:12px; color:var(--faint); padding:0 4px; min-width:64px; }
+  .dkState.dirty{ color:var(--warn); }
+  @media (max-width:760px){ #edDock{ right:12px; bottom:12px; } .dkState{ display:none; } }
   .block .bt{ font-size:12px; font-weight:500; color:var(--mut); text-transform:none; letter-spacing:0; margin-bottom:8px; }
   .toast{ position:fixed; bottom:22px; left:50%; transform:translateX(-50%); background:#111827; color:#fff; padding:11px 18px; border-radius:10px; font-size:14px; z-index:80; opacity:0; transition:opacity .2s; }
   .toast.show{ opacity:1; }
@@ -432,6 +461,16 @@
 </div>
 
 <div class="overlay hidden" id="overlay" onclick="if(event.target===this)closeModal()"><div id="modalHost"></div></div>
+<!-- Всегда под рукой при правке: отмена, возврат, сохранение.
+     Прокрутка на сорока блоках уводила кнопки далеко вниз. -->
+<div id="edDock" class="hidden">
+  <button class="dk" id="dkUndo" onclick="edUndo()" title="Отменить (Ctrl+Z)">↶</button>
+  <button class="dk" id="dkRedo" onclick="edRedo()" title="Вернуть (Ctrl+Shift+Z)">↷</button>
+  <span class="dkSep"></span>
+  <span class="dkState" id="dkState"></span>
+  <button class="dk save" onclick="edSave()">Сохранить</button>
+</div>
+
 <div id="showLayer" class="hidden">
   <div id="showBar">
     <b id="showTitle" style="font-size:15px; margin-right:4px"></b>
@@ -2080,6 +2119,7 @@ function switchTab(name){
   if(name==='review') renderReview();
   if(name==='library') edInit();
   if(name==='lessons') lsInit();
+  edDockSync();
 }
 
 async function uploadToBucket(file, folder){
@@ -2224,7 +2264,7 @@ function edRenderTree(){
               ? (items.length
                   ? items.map(l=>`<a class="treerow lesson ${EDIT.lessonId===l.id?'active':''}" style="padding-left:58px; display:block; text-decoration:none; color:inherit"
                       href="?lesson=${l.id}" onclick="return edLinkOpen(event,'${l.id}','${u.id}','${c.id}')"
-                      title="Колесом мыши или с Ctrl — откроется в новой вкладке">📄 ${esc(l.title)}${l.is_published?'':' <span class="muted">(черновик)</span>'}</a>`).join('')
+                      title="Колесом мыши или с Ctrl — откроется в новой вкладке"><span class="tmark ${k.key}"></span>${esc(l.title)}${l.is_published?'<span class="tdraft"></span>':'<span class="tdraft">черновик</span>'}</a>`).join('')
                   : `<div class="muted" style="padding-left:58px;font-size:13px">пусто</div>`)
                 + `<div style="padding:4px 0 6px 58px"><button class="btn sec sm" onclick="event.stopPropagation();edNewLesson('${u.id}','${c.id}','${k.key}')">+ ${esc(k.add)}</button></div>`
               : '';
@@ -2294,7 +2334,7 @@ async function edOpenLesson(lessonId, unitId, courseId){
     // ключ upsert — (lesson_id, sort_order), и без этого при перестановке
     // блоков разметка осталась бы на старых позициях.
     ED_OPEN = new Set(); ED_INSERT_AT = null;
-    ED_HIST = []; ED_REDO = []; ED_LAST = null;
+    ED_HIST = []; ED_REDO = []; ED_LAST = null; EDIT.savedJson = null;
     EDIT.blocks = (blocks||[]).map(b=>({ type:b.type, payload:b.payload||{},
       audience:b.audience||'shared', variant:b.variant||'any', format:b.format||'any' }));
     // Название курса и юнита для шапки; тип материала решает, что показывать
@@ -2347,13 +2387,19 @@ async function edOpenLesson(lessonId, unitId, courseId){
       </div>
       <div class="row" style="margin:10px 0 6px; align-items:center; gap:8px; flex-wrap:wrap">
         <button class="btn sec sm" onclick="edCollapseAll(true)">▸ Свернуть все</button>
-        <button class="btn sec sm" onclick="edCollapseAll(false)">▾ Развернуть все</button>
+
         <button class="btn sec sm" id="edUndoBtn" onclick="edUndo()" title="Отменить (Ctrl+Z)">↶ Отменить</button>
         <button class="btn sec sm" id="edRedoBtn" onclick="edRedo()" title="Вернуть (Ctrl+Shift+Z)">↷ Вернуть</button>
         <button class="btn sec sm" onclick="edToggleOutline()">☰ Оглавление</button>
-        <button class="btn sec sm" onclick="edExtractAll()" title="Перенести картинки из кода в бакет">🖼 Вынести картинки</button>
-        <button class="btn sec sm" onclick="ttsLessonOpen()" title="Озвучить пометки в открытом материале">🔊 Озвучить этот материал</button>
-        <button class="btn sec sm" onclick="ttsBatchOpen()" title="Озвучить пометки в выбранных юнитах">🔊 Озвучить пачкой</button>
+        <button class="btn sec sm" onclick="ttsLessonOpen()" title="Озвучить пометки в открытом материале">🔊 Озвучить</button>
+        <span class="moreWrap">
+          <button class="btn sec sm" onclick="edMoreToggle(event)">Ещё ▾</button>
+          <span class="moreMenu hidden" id="edMore">
+            <button onclick="edMoreDo(edExtractAll)">🖼 Вынести картинки в файлы</button>
+            <button onclick="edMoreDo(ttsBatchOpen)">🔊 Озвучить пачкой</button>
+            <button onclick="edMoreDo(()=>edCollapseAll(false))">▾ Развернуть все</button>
+          </span>
+        </span>
         <span id="edBlocksCount" class="muted" style="font-size:13px"></span>
       </div>
       <div id="edOutline" class="hidden" style="border:1px solid var(--line); border-radius:12px; padding:8px; margin-bottom:10px; max-height:280px; overflow:auto"></div>
@@ -2434,10 +2480,28 @@ function edRedo(){
   toast('Возвращено');
 }
 
+// Панель показывается только при открытом материале в библиотеке
+function edDockSync(){
+  const d=$('edDock'); if(!d) return;
+  const lib=$('tab-library');
+  const on = EDIT && EDIT.lessonId && lib && !lib.classList.contains('hidden');
+  d.classList.toggle('hidden', !on);
+  if(!on) return;
+  const u=$('dkUndo'), r=$('dkRedo'), st=$('dkState');
+  if(u) u.disabled = !ED_HIST.length;
+  if(r) r.disabled = !ED_REDO.length;
+  if(st){
+    const dirty = EDIT.savedJson != null && edSnapshot() !== EDIT.savedJson;
+    st.textContent = dirty ? 'не сохранено' : 'сохранено';
+    st.classList.toggle('dirty', dirty);
+  }
+}
+
 function edUndoBtns(){
   const u=$('edUndoBtn'), r=$('edRedoBtn');
   if(u){ u.disabled = !ED_HIST.length; u.style.opacity = ED_HIST.length ? '' : '.45'; }
   if(r){ r.disabled = !ED_REDO.length; r.style.opacity = ED_REDO.length ? '' : '.45'; }
+  edDockSync();
 }
 
 // Ctrl+Z внутри поля ввода не перехватываем: там работает
@@ -2469,6 +2533,8 @@ function edRenderBlocks(){
   edRenderOutline();
   crCount();
   edCheckpoint();
+  if(EDIT && EDIT.savedJson == null) EDIT.savedJson = edSnapshot();
+  edDockSync();
 }
 
 // Короткое описание блока для свёрнутой строки и оглавления
@@ -2610,18 +2676,31 @@ var TTSB = { units:[], items:[], busy:false, stop:false, lids:null, lesson:false
 // затрёт только что созданный звук старым payload из браузера.
 // Заголовок открытого материала — из дерева редактора
 // Цвет закреплён за курсом: работая в двух вкладках, их видно боковым зрением.
+// Оттенок закреплён за курсом по названию: Wow Dragon — фиолетовый,
+// первая и вторая часть разными тонами. Остальным — по порядку из палитры.
 const COURSE_TINTS = [
-  ['#5B4BE0','#3A2FA8','#F0EEFD'],   // насыщенный фиолетовый
-  ['#9B7BEA','#6D4FC7','#F3EFFE'],   // светлый фиолетовый
-  ['#12796B','#0B564B','#E2F1EE'],   // зелёный
-  ['#C2701A','#8E4F0E','#FBF0DE'],   // янтарный
-  ['#2C6BB5','#1D4B80','#E6EFF9'],   // синий
+  ['#6B5AD6','#4A3BAF','#F1EFFC'],   // фиолетовый
+  ['#9D85E3','#6F57C4','#F4F0FD'],   // фиолетовый светлее
+  ['#3E7F73','#2B5C52','#EAF3F1'],   // приглушённый зелёный
+  ['#B07A33','#855824','#F8F1E6'],   // тёплый песочный
+  ['#40739E','#2C5175','#EBF1F7'],   // пыльно-синий
+  ['#A55E7A','#7C4258','#F8EEF2'],   // приглушённый розовый
+];
+const COURSE_RULES = [
+  [/dragon.*\b2\b|dragon\s*ii/i, 1],
+  [/dragon/i,                      0],
+  [/sm0|starter/i,                 2],
 ];
 function crSetCourseColor(title){
   const t = String(title||'');
-  let i = 0;
-  for(let k=0;k<t.length;k++) i = (i*31 + t.charCodeAt(k)) % 997;
-  const c = COURSE_TINTS[i % COURSE_TINTS.length];
+  let idx = null;
+  for(const [re, n] of COURSE_RULES) if(re.test(t)){ idx = n; break; }
+  if(idx === null){
+    let h = 0;
+    for(let k=0;k<t.length;k++) h = (h*31 + t.charCodeAt(k)) % 997;
+    idx = 3 + (h % (COURSE_TINTS.length - 3));
+  }
+  const c = COURSE_TINTS[idx];
   const st = document.documentElement.style;
   st.setProperty('--course', c[0]);
   st.setProperty('--course-d', c[1]);
@@ -3324,6 +3403,18 @@ function edIsLesson(){
   return (KIND_BY_LESSON[EDIT && EDIT.lessonId] || '') === 'lesson';
 }
 
+// Редкие действия под «Ещё» — в ряду их было девять, и частые терялись
+function edMoreToggle(e){
+  e.stopPropagation();
+  const m=$('edMore'); if(!m) return;
+  m.classList.toggle('hidden');
+  if(!m.classList.contains('hidden')){
+    setTimeout(()=>document.addEventListener('click', edMoreClose, { once:true }), 0);
+  }
+}
+function edMoreClose(){ const m=$('edMore'); if(m) m.classList.add('hidden'); }
+function edMoreDo(fn){ edMoreClose(); fn(); }
+
 function edMeta(i,key,val){ EDIT.blocks[i][key]=val; edRenderBlocks(); crCount(); }
 function edGroupHtml(i,val){
   const p=EDIT.blocks[i].payload;
@@ -3579,6 +3670,7 @@ async function edSave(){
     }
     await sb.from('classroom_blocks').delete().eq('lesson_id',EDIT.lessonId).gte('sort_order',EDIT.blocks.length);
     $('edSaveRes').textContent='Сохранено ✅'; toast('Урок сохранён');
+    EDIT.savedJson = edSnapshot(); edDockSync();   // с этой точки правок нет
     // отразить статус публикации в дереве, не сворачивая редактор
     const pubNow=$('edPub')?$('edPub').checked:true;
     for(const c of EDTREE){ for(const u of c.units){ const l=u.lessons.find(x=>x.id===EDIT.lessonId); if(l) l.is_published=pubNow; } }
