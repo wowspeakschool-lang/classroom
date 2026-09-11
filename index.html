@@ -314,6 +314,35 @@
   .tl-ic.test{ background:var(--warn-soft); color:var(--warn); }
   .tl-bar{ height:5px; border-radius:99px; background:var(--bg); display:flex; overflow:hidden; }
   .tl-bar i{ display:block; height:100%; }
+
+  .tile{ position:relative; }
+  .tile.dragging{ opacity:.35; transform:scale(.97); }
+  .tile.insertL:before, .tile.insertR:after{ content:""; position:absolute; top:8px; bottom:8px; width:3px;
+    border-radius:3px; background:var(--course); z-index:3; }
+  .tile.insertL:before{ left:-9px; }
+  .tile.insertR:after{ right:-9px; }
+  .tdots{ position:absolute; right:8px; top:8px; border:0; background:rgba(255,255,255,.9); color:var(--faint);
+    padding:3px 8px; border-radius:8px; opacity:0; font-size:16px; line-height:1.2; cursor:pointer; z-index:4; }
+  .tile:hover .tdots{ opacity:1; }
+  .tdots:hover{ color:var(--ink); }
+  .tmenu{ position:absolute; right:8px; top:36px; background:#fff; border:1px solid var(--line);
+    border-radius:12px; padding:5px; min-width:200px; box-shadow:0 12px 34px rgba(26,27,46,.16);
+    z-index:12; display:flex; flex-direction:column; gap:1px; }
+  .tmenu button{ border:0; background:transparent; text-align:left; padding:8px 11px; border-radius:9px;
+    font-size:14px; cursor:pointer; color:var(--ink); }
+  .tmenu button:hover{ background:var(--bg); }
+  .tmenu button.dn{ color:var(--bad); }
+  .tmenu hr{ border:0; border-top:1px solid var(--line); margin:4px 2px; }
+  .trename{ width:100%; font:inherit; font-size:15px; font-weight:600; border:1px solid var(--course);
+    border-radius:8px; padding:5px 8px; }
+
+  .snack{ position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(90px);
+    background:var(--ink); color:#fff; border-radius:13px; padding:11px 14px 11px 18px; display:flex;
+    align-items:center; gap:14px; box-shadow:0 12px 34px rgba(26,27,46,.3); transition:transform .18s; z-index:35; }
+  .snack.on{ transform:translateX(-50%) translateY(0); }
+  .snack button{ background:rgba(255,255,255,.16); border:0; color:#fff; border-radius:9px;
+    padding:6px 12px; font-size:13px; font-weight:600; cursor:pointer; }
+  .snack button:hover{ background:rgba(255,255,255,.26); }
   .block .bt{ font-size:12px; font-weight:500; color:var(--mut); text-transform:none; letter-spacing:0; margin-bottom:8px; }
   .toast{ position:fixed; bottom:22px; left:50%; transform:translateX(-50%); background:#111827; color:#fff; padding:11px 18px; border-radius:10px; font-size:14px; z-index:80; opacity:0; transition:opacity .2s; }
   .toast.show{ opacity:1; }
@@ -545,6 +574,8 @@
      Прокрутка на сорока блоках уводила кнопки далеко вниз. -->
 <!-- Поиск по всем материалам. Дерево хорошо, когда знаешь, где лежит;
      поиск — когда помнишь только слово из названия. -->
+<div class="snack" id="libSnack"><span id="libSnackText"></span><button onclick="libUndoOrder()">Отменить</button></div>
+
 <div id="findVeil" class="hidden" onclick="if(event.target===this)findClose()">
   <div class="finder">
     <input id="findQ" placeholder="Название материала, юнита или курса" autocomplete="off"
@@ -2655,13 +2686,16 @@ function libRender(){
     t.textContent='Библиотека';
     ld.textContent='Курсы школы. Откройте курс, чтобы увидеть юниты.';
     f.innerHTML = `<span class="fsp"></span><button class="ghost" onclick="edNewCourse()">＋ Курс</button>`;
-    g.innerHTML = (EDTREE||[]).map(c=>{
+    g.innerHTML = (EDTREE||[]).map((c,i)=>{
       const n = (c.units||[]).reduce((a,u)=>a+(u.lessons||[]).length,0);
-      return `<a class="tile" href="?course=${c.id}" onclick="return libLink(event,'units','${c.id}')">
+      return `<a class="tile" draggable="true" data-i="${i}" href="?course=${c.id}" onclick="return libLink(event,'units','${c.id}')">
+        <button class="tdots" onclick="libMenu('course','${c.id}',event)">⋯</button>
+        ${libMenuHtml('course', c)}
         ${libCover(c.title, libTintFor(c.title))}
-        <span class="tl-body"><span class="tl-t">${esc(c.title)}</span>
+        <span class="tl-body">${libName('course', c)}
         <span class="tl-s">${(c.units||[]).length} юнитов · ${n} материалов</span></span></a>`;
     }).join('') || '<div class="empty">Курсов пока нет.</div>';
+    libDragInit('course', (EDTREE||[]).map(c=>c.id));
   }
 
   else if(LIB.level==='units' && course){
@@ -2669,16 +2703,19 @@ function libRender(){
     t.textContent=course.title;
     ld.textContent='Юниты курса. Откройте юнит, чтобы увидеть материалы.';
     f.innerHTML = `<span class="fsp"></span><button class="ghost" onclick="edNewUnit('${course.id}')">＋ Юнит</button>`;
-    g.innerHTML = (course.units||[]).map(u=>{
+    g.innerHTML = (course.units||[]).map((u,i)=>{
       const ls=(u.lessons||[]);
       const by=k=>ls.filter(x=>(x.kind||'homework')===k).length;
       const bits=[]; if(by('homework')) bits.push(by('homework')+' ДЗ');
       if(by('lesson')) bits.push(by('lesson')+' уроков'); if(by('test')) bits.push(by('test')+' тестов');
-      return `<a class="tile" href="?unit=${u.id}" onclick="return libLink(event,'items','${course.id}','${u.id}')">
+      return `<a class="tile" draggable="true" data-i="${i}" href="?unit=${u.id}" onclick="return libLink(event,'items','${course.id}','${u.id}')">
+        <button class="tdots" onclick="libMenu('unit','${u.id}',event)">⋯</button>
+        ${libMenuHtml('unit', u)}
         <span class="tl-body"><span class="tl-ic lesson">${svgFolderIc()}</span>
-        <span class="tl-t">${esc(u.title)}</span>
+        ${libName('unit', u)}
         <span class="tl-s">${bits.join(' · ')||'пусто'}</span></span></a>`;
     }).join('') || '<div class="empty">В курсе пока нет юнитов.</div>';
+    libDragInit('unit', (course.units||[]).map(u=>u.id));
   }
 
   else if(unit){
@@ -2696,23 +2733,178 @@ function libRender(){
        <button class="ghost" onclick="edNewLesson('${unit.id}','${course.id}','${LIB.kind==='all'?'homework':LIB.kind}')">＋ Материал</button>`;
     let list = LIB.kind==='all' ? all : all.filter(x=>(x.kind||'homework')===LIB.kind);
     if(LIB.unpub) list = list.filter(x=>!x.is_published);
-    g.innerHTML = list.length ? list.map(l=>{
+    g.innerHTML = list.length ? list.map((l,i)=>{
       const k=KW[l.kind||'homework']||KW.homework;
-      return `<a class="tile ${l.is_published?'':'unpub'}" href="?lesson=${l.id}"
+      return `<a class="tile ${l.is_published?'':'unpub'}" draggable="true" data-i="${i}" href="?lesson=${l.id}"
           onclick="return libLink(event,'lesson',null,null,'${l.id}')">
+        <button class="tdots" onclick="libMenu('lesson','${l.id}',event)">⋯</button>
+        ${libMenuHtml('lesson', l)}
         <span class="tl-body"><span class="tl-ic ${l.kind||'homework'}">${k[1]}</span>
-        <span class="tl-t">${esc(l.short||l.title)}</span>
+        ${libName('lesson', l)}
         <span class="tl-s">${k[0]}${l.is_published?'':' · <span class="np">не опубликовано</span>'}</span></span></a>`;
     }).join('')
       : `<div class="empty">${LIB.unpub?'Всё опубликовано.':'Материалов этого типа пока нет.'}</div>`;
+    // порядок меняем только когда виден весь список, иначе фильтр перемешает
+    if(LIB.kind==='all' && !LIB.unpub) libDragInit('lesson', list.map(l=>l.id));
   }
+  libFocusRename();   // поле переименования появляется после отрисовки
 }
 
+// ---------- Действия над плиткой ----------
+var LIBM = { menu:null, editing:null, undo:null };
+
+function libMenu(kind, id, e){
+  if(e){ e.preventDefault(); e.stopPropagation(); }
+  LIBM.menu = (LIBM.menu && LIBM.menu.id===id) ? null : { kind, id };
+  libRender();
+  if(LIBM.menu) setTimeout(()=>document.addEventListener('click', libMenuClose, { once:true }), 0);
+}
+function libMenuClose(){ if(LIBM.menu){ LIBM.menu=null; libRender(); } }
+
+function libMenuHtml(kind, item){
+  if(!LIBM.menu || LIBM.menu.id!==item.id) return '';
+  const pub = kind==='lesson'
+    ? `<button onclick="event.stopPropagation();libPub('${item.id}',${item.is_published?'false':'true'})">${item.is_published?'Снять с публикации':'Опубликовать'}</button>`
+    : '';
+  return `<span class="tmenu" onclick="event.stopPropagation()">
+    <button onclick="libRenameStart('${kind}','${item.id}')">Переименовать</button>
+    ${pub}
+    <hr>
+    <button class="dn" onclick="libDelete('${kind}','${item.id}')">Удалить</button>
+  </span>`;
+}
+
+function libRenameStart(kind, id){ LIBM.menu=null; LIBM.editing={ kind, id }; libRender(); }
+function libRenameCancel(){ LIBM.editing=null; libRender(); }
+
+async function libRenameSave(kind, id, val){
+  const t=(val||'').trim();
+  LIBM.editing=null;
+  if(!t){ libRender(); return; }
+  const tbl = kind==='course' ? 'classroom_courses' : kind==='unit' ? 'classroom_units' : 'classroom_lessons';
+  try{
+    const { error } = await sb.from(tbl).update({ title:t }).eq('id',id);
+    if(error) throw error;
+    await edInit(); await loadLibrary();
+    toast('Переименовано');
+  }catch(e){ toast(e.message||String(e)); libRender(); }
+}
+
+async function libPub(id, val){
+  LIBM.menu=null;
+  try{
+    const { error } = await sb.from('classroom_lessons').update({ is_published: val==='true'||val===true }).eq('id',id);
+    if(error) throw error;
+    await edInit(); await loadLibrary();
+  }catch(e){ toast(e.message||String(e)); }
+}
+
+async function libDelete(kind, id){
+  LIBM.menu=null;
+  const word = kind==='course' ? 'курс со всеми юнитами и материалами'
+             : kind==='unit'   ? 'юнит со всеми материалами' : 'материал';
+  if(!confirm('Удалить '+word+'? Отменить будет нельзя.')) return;
+  const tbl = kind==='course' ? 'classroom_courses' : kind==='unit' ? 'classroom_units' : 'classroom_lessons';
+  try{
+    const { error } = await sb.from(tbl).delete().eq('id',id);
+    if(error) throw error;
+    await edInit(); await loadLibrary();
+    toast('Удалено');
+  }catch(e){ toast(e.message||String(e)); }
+}
+
+// Порядок пишется сразу, но с возможностью отката — чтобы случайный
+// сдвиг мышью не перемешал два десятка материалов без возврата.
+async function libSaveOrder(kind, ids){
+  const tbl = kind==='course' ? 'classroom_courses' : kind==='unit' ? 'classroom_units' : 'classroom_lessons';
+  for(let i=0;i<ids.length;i++){
+    const { error } = await sb.from(tbl).update({ sort_order:i }).eq('id',ids[i]);
+    if(error){ toast('Не удалось сохранить порядок: '+error.message); return false; }
+  }
+  return true;
+}
+
+function libSnack(text, prevIds, kind){
+  LIBM.undo = { ids:prevIds, kind };
+  const s=$('libSnack');
+  $('libSnackText').textContent = text;
+  s.classList.add('on');
+  clearTimeout(LIBM.timer);
+  LIBM.timer = setTimeout(()=>{ s.classList.remove('on'); LIBM.undo=null; }, 7000);
+}
+async function libUndoOrder(){
+  const u=LIBM.undo; if(!u) return;
+  $('libSnack').classList.remove('on'); LIBM.undo=null;
+  if(await libSaveOrder(u.kind, u.ids)){ await edInit(); toast('Порядок возвращён'); }
+}
+
+function libName(kind, item){
+  if(LIBM.editing && LIBM.editing.id===item.id){
+    return `<input class="trename" value="${esc(item.title)}"
+      onclick="event.stopPropagation();event.preventDefault()"
+      onkeydown="if(event.key==='Enter'){libRenameSave('${kind}','${item.id}',this.value)}if(event.key==='Escape'){libRenameCancel()}"
+      onblur="libRenameSave('${kind}','${item.id}',this.value)">`;
+  }
+  return `<span class="tl-t">${esc(item.title)}</span>`;
+}
+
+function libAfterRender(){ libFocusRename(); }
 function libChip(k,label,n){
   return `<button class="f ${LIB.kind===k?'on':''}" onclick="libSetKind('${k}')">${label}<b>${n}</b></button>`;
 }
+function libFocusRename(){
+  const inp=document.querySelector('#libTiles .trename');
+  if(inp){ inp.focus(); inp.select(); }
+}
 function svgFolderIc(){
   return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 014.5 6h4l2 2.4h7A1.5 1.5 0 0119 10v7.5a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 013 17.5z"/></svg>';
+}
+
+// Вставка, а не обмен местами: видно, куда встанет, и это предсказуемо
+var LIBDRAG = { from:null, kind:null };
+
+function libDragInit(kind, ids){
+  LIBDRAG.kind = kind; LIBDRAG.ids = ids;
+  document.querySelectorAll('#libTiles .tile').forEach(el=>{
+    el.ondragstart = e=>{
+      if(LIBM.editing) { e.preventDefault(); return; }
+      LIBDRAG.from = +el.dataset.i;
+      el.classList.add('dragging');
+      e.dataTransfer.effectAllowed='move';
+      try{ e.dataTransfer.setData('text/plain', String(LIBDRAG.from)); }catch(_){}
+    };
+    el.ondragend = ()=>{ LIBDRAG.from=null; libClearMarks(); el.classList.remove('dragging'); };
+    el.ondragover = e=>{
+      e.preventDefault();
+      if(LIBDRAG.from===null) return;
+      const i=+el.dataset.i;
+      libClearMarks();
+      if(i===LIBDRAG.from) return;
+      const r=el.getBoundingClientRect();
+      el.classList.add(e.clientX < r.left + r.width/2 ? 'insertL' : 'insertR');
+    };
+    el.ondrop = async e=>{
+      e.preventDefault();
+      const from = LIBDRAG.from; libClearMarks();
+      if(from===null) return;
+      const i=+el.dataset.i;
+      const r=el.getBoundingClientRect();
+      let to = (e.clientX < r.left + r.width/2) ? i : i+1;
+      if(from < to) to--;
+      LIBDRAG.from=null;
+      if(to===from) return;
+      const prev = LIBDRAG.ids.slice();
+      const next = prev.slice();
+      const [m]=next.splice(from,1); next.splice(to,0,m);
+      if(await libSaveOrder(LIBDRAG.kind, next)){
+        await edInit();
+        libSnack('Порядок изменён', prev, LIBDRAG.kind);
+      }
+    };
+  });
+}
+function libClearMarks(){
+  document.querySelectorAll('#libTiles .tile').forEach(x=>x.classList.remove('insertL','insertR'));
 }
 
 // Обычный клик — внутри страницы, Ctrl и колесо отдаём браузеру
@@ -3103,7 +3295,7 @@ var TTSB = { units:[], items:[], busy:false, stop:false, lids:null, lesson:false
 const COURSE_TINTS = [
   ['#6B5AD6','#4A3BAF','#F1EFFC'],   // фиолетовый
   ['#9D85E3','#6F57C4','#F4F0FD'],   // фиолетовый светлее
-  ['#3E7F73','#2B5C52','#EAF3F1'],   // приглушённый зелёный
+  ['#5C9B7A','#3F7458','#EAF4EE'],   // светло-зелёный — Super Minds
   ['#B07A33','#855824','#F8F1E6'],   // тёплый песочный
   ['#40739E','#2C5175','#EBF1F7'],   // пыльно-синий
   ['#A55E7A','#7C4258','#F8EEF2'],   // приглушённый розовый
@@ -3111,7 +3303,7 @@ const COURSE_TINTS = [
 const COURSE_RULES = [
   [/dragon.*\b2\b|dragon\s*ii/i, 1],
   [/dragon/i,                      0],
-  [/sm0|starter/i,                 2],
+  [/super\s*minds|\bsm\d|starter/i, 2],
 ];
 function crSetCourseColor(title){
   const t = String(title||'');
