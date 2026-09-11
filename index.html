@@ -172,6 +172,41 @@
   .treerow:hover{ background:#f3f0ff; }
   .treerow.lesson.active{ background:#ede9fe; color:var(--brand-d); font-weight:600; }
   .block{ border:1px solid var(--line); border-radius:13px; padding:15px; margin-bottom:10px; background:#fff; }
+
+  /* Шапка материала — единственное цветное пятно в редакторе */
+  .hero{ border-radius:20px; padding:22px 24px 18px; margin-bottom:14px; color:#fff; position:relative;
+    overflow:hidden; background:linear-gradient(135deg, var(--course), var(--course-d)); }
+  .hero:after{ content:""; position:absolute; right:-70px; top:-90px; width:280px; height:280px;
+    border-radius:50%; background:rgba(255,255,255,.08); }
+  .hero > *{ position:relative; z-index:2; }
+  .hero-path{ font-size:13px; opacity:.75; display:flex; gap:7px; align-items:center; flex-wrap:wrap; }
+  .hero-path span{ opacity:.5; }
+  .hero-t{ margin:5px 0 0; font-size:27px; line-height:1.15; letter-spacing:-.025em; font-weight:700; }
+  .hero-sub{ font-size:13px; opacity:.75; margin-top:5px; }
+  .hero-acts{ position:absolute; right:22px; top:20px; display:flex; gap:8px; z-index:3; flex-wrap:wrap; justify-content:flex-end; }
+  .hb{ background:rgba(255,255,255,.16); border:0; border-radius:10px; padding:8px 13px; color:#fff;
+    font-size:13px; font-weight:500; cursor:pointer; }
+  .hb:hover{ background:rgba(255,255,255,.26); }
+  .hero .field label{ color:rgba(255,255,255,.8); }
+  .hero select, .hero input{ background:rgba(255,255,255,.16); border-color:rgba(255,255,255,.25); color:#fff; }
+  .hero select option{ color:var(--ink); }
+  .hero-foot{ margin-top:16px; align-items:center; gap:16px; flex-wrap:wrap; }
+  .hero-foot .chk{ color:#fff; max-width:none; }
+  .hero-th{ font-size:13px; opacity:.85; display:flex; align-items:center; gap:7px; }
+  .hero-th input{ width:64px; padding:5px 8px; text-align:center; }
+  #cvCount{ color:rgba(255,255,255,.8) !important; }
+  @media (max-width:760px){ .hero-acts{ position:static; margin-bottom:10px; justify-content:flex-start; } }
+
+  /* Строка блока: сначала содержимое, потом служебное */
+  .brow{ padding:11px 14px; margin-bottom:6px; }
+  .brow:hover{ background:#FBFAFD; }
+  .bcontent{ min-width:0; cursor:pointer; display:block; }
+  .btext{ display:block; font-size:15px; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .bmeta{ display:flex; align-items:center; gap:7px; margin-top:2px; font-size:12px; color:var(--faint); }
+  .brow .btn.sec.sm{ border-color:transparent; background:transparent; color:var(--faint); padding:5px 7px; }
+  .brow:hover .btn.sec.sm{ color:var(--mut); }
+  .brow .btn.sec.sm:hover{ background:var(--bg); color:var(--ink); }
+  .brow input[type=number]{ border-color:var(--line); color:var(--mut); font-size:12px; }
   .block .bt{ font-size:12px; font-weight:500; color:var(--mut); text-transform:none; letter-spacing:0; margin-bottom:8px; }
   .toast{ position:fixed; bottom:22px; left:50%; transform:translateX(-50%); background:#111827; color:#fff; padding:11px 18px; border-radius:10px; font-size:14px; z-index:80; opacity:0; transition:opacity .2s; }
   .toast.show{ opacity:1; }
@@ -249,7 +284,7 @@
 <div id="app" class="hidden">
   <header>
     <div class="head-in">
-      <span class="logo">🎓 Classroom</span>
+      <span class="logo">Classroom</span>
       <nav class="tabs">
         <button class="tab active" data-tab="students" onclick="switchTab('students')"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><circle cx="9.5" cy="8" r="3.2"/><path d="M4 19c.6-3.1 3-4.8 5.5-4.8S14.4 15.9 15 19"/><path d="M17 8.6a3 3 0 010 5"/></svg>Мои ученики</button>
         <button class="tab" data-tab="assign" onclick="switchTab('assign')"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><path d="M12 4.5v10M8.2 10.8L12 14.5l3.8-3.7M5 19h14"/></svg>Задать материал</button>
@@ -2262,15 +2297,29 @@ async function edOpenLesson(lessonId, unitId, courseId){
     ED_HIST = []; ED_REDO = []; ED_LAST = null;
     EDIT.blocks = (blocks||[]).map(b=>({ type:b.type, payload:b.payload||{},
       audience:b.audience||'shared', variant:b.variant||'any', format:b.format||'any' }));
+    // Название курса и юнита для шапки; тип материала решает, что показывать
+    let courseTitle='', unitTitle='';
+    for(const c of (EDTREE||[])){
+      for(const u of (c.units||[])){
+        if((u.lessons||[]).some(x=>x.id===lessonId)){ courseTitle=c.title; unitTitle=u.title; }
+      }
+    }
+    const kindNow = KIND_BY_LESSON[lessonId] || lesson.kind || 'homework';
+    const isLesson = kindNow === 'lesson';
+    const kindWord = { lesson:'план урока', homework:'домашнее задание', test:'тест' }[kindNow] || kindNow;
+    crSetCourseColor(courseTitle);
+
     right.innerHTML = `
-      <div class="card" style="padding:14px; margin-bottom:12px">
-        <div class="row" style="align-items:center">
-          <b style="flex:1; font-size:16px">${esc(lesson.title)}</b>
-          <button class="btn sec sm" onclick="edRenameLesson('${lessonId}')">✏ имя</button>
-          <button class="btn sec sm" onclick="showOpen('${lessonId}', null, null, 'student')">👁 Глазами ученика</button>
-          <button class="btn sm" onclick="showOpen('${lessonId}', null, 'one')">▶ Как на уроке</button>
+      <div class="hero">
+        <div class="hero-acts">
+          <button class="hb" onclick="edRenameLesson('${lessonId}')">Переименовать</button>
+          <button class="hb" onclick="showOpen('${lessonId}', null, null, 'student')">Глазами ученика</button>
+          ${isLesson?`<button class="hb" onclick="showOpen('${lessonId}', null, 'one')">Как на уроке</button>`:''}
         </div>
-        <div class="row" style="margin-top:10px; align-items:center; gap:10px; flex-wrap:wrap">
+        <div class="hero-path">${esc(courseTitle)}<span>›</span>${esc(unitTitle)}</div>
+        <h2 class="hero-t">${esc(lesson.title)}</h2>
+        <div class="hero-sub">${kindWord} · ${lesson.is_published?'опубликован':'черновик'} · <span id="heroBlocks">…</span></div>
+        <div class="row" style="margin-top:16px; align-items:center; gap:10px; flex-wrap:wrap${isLesson?'':'; display:none'}">
           <div class="field" style="max-width:150px; margin:0"><label>Роль</label>
             <select id="cvRole" onchange="crViewChange()">
               <option value="teacher" ${CR_VIEW.role==='teacher'?'selected':''}>Преподаватель</option>
@@ -2290,9 +2339,10 @@ async function edOpenLesson(lessonId, unitId, courseId){
             </select></div>
           <span id="cvCount" class="muted" style="font-size:13px"></span>
         </div>
-        <div class="row" style="margin-top:10px; align-items:center">
-          <label class="chk" style="max-width:210px"><input type="checkbox" id="edPub" ${lesson.is_published?'checked':''}> Опубликован</label>
-          <div class="field" style="max-width:200px"><label>Порог зачёта, %</label><input type="number" id="edThreshold" min="0" max="100" value="${lesson.pass_threshold!=null?lesson.pass_threshold:''}"></div>
+        <div class="row hero-foot">
+          <label class="chk"><input type="checkbox" id="edPub" ${lesson.is_published?'checked':''}> Опубликован</label>
+          <label class="hero-th">Порог зачёта
+            <input type="number" id="edThreshold" min="0" max="100" value="${lesson.pass_threshold!=null?lesson.pass_threshold:''}">%</label>
         </div>
       </div>
       <div class="row" style="margin:10px 0 6px; align-items:center; gap:8px; flex-wrap:wrap">
@@ -2413,7 +2463,9 @@ function edRenderBlocks(){
     ? EDIT.blocks.map((b,i)=> ED_OPEN.has(i) ? edBlockEditor(b,i) : edBlockRow(b,i)).join('')
     : '<div class="empty">Нет блоков. Добавь ниже.</div>';
   const cnt=$('edBlocksCount');
-  if(cnt) cnt.textContent = EDIT.blocks.length ? `${EDIT.blocks.length} блок(ов), развёрнуто ${ED_OPEN.size}` : '';
+  if(cnt) cnt.textContent = EDIT.blocks.length ? `развёрнуто ${ED_OPEN.size} из ${EDIT.blocks.length}` : '';
+  const hb=$('heroBlocks');
+  if(hb) hb.textContent = EDIT.blocks.length ? EDIT.blocks.length + ' бл.' : 'пусто';
   edRenderOutline();
   crCount();
   edCheckpoint();
@@ -2442,16 +2494,16 @@ function edAudBadge(aud){
 function edBlockRow(b,i){
   const dim = crBlockVisible(b) ? '' : ' style="opacity:.45"';
   const layout = b.payload && b.payload.layout ? ` <span class="muted" style="font-size:11px">${esc(SLIDE_LAYOUTS[b.payload.layout]||b.payload.layout)}</span>` : '';
-  return `<div class="block" id="edb-${i}"${dim} style="padding:8px 12px; margin-bottom:6px">
-    <div class="row" style="align-items:center; gap:8px">
+  return `<div class="block brow" id="edb-${i}"${dim}>
+    <div class="row" style="align-items:center; gap:10px">
       <input type="number" min="1" max="${EDIT.blocks.length}" value="${i+1}" title="Номер блока: впиши другой — блок встанет на это место"
         onchange="edMoveTo(${i}, this.value)" onclick="event.stopPropagation()"
         style="width:52px; padding:4px 6px; text-align:center">
       <button class="btn sec sm" onclick="edToggleBlock(${i})" title="Развернуть">▸</button>
-      <span class="muted" style="font-size:12px; min-width:110px">${blockTypeLabel(b.type)}${layout}</span>
-      ${edAudBadge(b.audience)}
-      <span class="grow" onclick="edToggleBlock(${i})"
-        style="min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor:pointer">${esc(edBlockDigest(b))}</span>
+      <span class="grow bcontent" onclick="edToggleBlock(${i})">
+        <span class="btext">${esc(edBlockDigest(b))}</span>
+        <span class="bmeta">${blockTypeLabel(b.type)}${layout}${edAudBadge(b.audience)}</span>
+      </span>
       <button class="btn sec sm" onclick="edMove(${i},-1)" title="Выше">↑</button>
       <button class="btn sec sm" onclick="edMove(${i},1)" title="Ниже">↓</button>
       <button class="btn sec sm" onclick="edDupBlock(${i})" title="Копировать">⧉</button>
@@ -2557,6 +2609,25 @@ var TTSB = { units:[], items:[], busy:false, stop:false, lids:null, lesson:false
 // а после — блоки перечитаны, иначе следующее «Сохранить»
 // затрёт только что созданный звук старым payload из браузера.
 // Заголовок открытого материала — из дерева редактора
+// Цвет закреплён за курсом: работая в двух вкладках, их видно боковым зрением.
+const COURSE_TINTS = [
+  ['#5B4BE0','#3A2FA8','#F0EEFD'],   // насыщенный фиолетовый
+  ['#9B7BEA','#6D4FC7','#F3EFFE'],   // светлый фиолетовый
+  ['#12796B','#0B564B','#E2F1EE'],   // зелёный
+  ['#C2701A','#8E4F0E','#FBF0DE'],   // янтарный
+  ['#2C6BB5','#1D4B80','#E6EFF9'],   // синий
+];
+function crSetCourseColor(title){
+  const t = String(title||'');
+  let i = 0;
+  for(let k=0;k<t.length;k++) i = (i*31 + t.charCodeAt(k)) % 997;
+  const c = COURSE_TINTS[i % COURSE_TINTS.length];
+  const st = document.documentElement.style;
+  st.setProperty('--course', c[0]);
+  st.setProperty('--course-d', c[1]);
+  st.setProperty('--course-soft', c[2]);
+}
+
 function edLessonTitle(id){
   for(const c of (EDTREE||[])) for(const u of (c.units||[])){
     const l = (u.lessons||[]).find(x=>x.id===id);
