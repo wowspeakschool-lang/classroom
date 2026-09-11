@@ -213,6 +213,12 @@
     background:rgba(0,0,0,.07); display:flex; overflow:hidden; }
   .rbar i{ display:block; height:100%; }
   .rtext{ font-size:13px; color:var(--mut); }
+  .siblings{ display:flex; gap:6px; margin-top:14px; overflow-x:auto; padding-bottom:2px; }
+  .siblings:empty{ display:none; }
+  .sib{ flex:0 0 auto; background:rgba(255,255,255,.7); border:1px solid rgba(0,0,0,.05); border-radius:9px;
+    padding:5px 11px; font-size:13px; color:var(--mut); white-space:nowrap; text-decoration:none; }
+  .sib:hover{ background:#fff; color:var(--ink); }
+  .sib.on{ background:#fff; color:var(--ink); font-weight:600; box-shadow:0 1px 3px rgba(26,27,46,.1); }
   @media (max-width:760px){ .hero-acts{ position:static; margin-bottom:10px; justify-content:flex-start; } }
 
   /* Строка блока: сначала содержимое, потом служебное */
@@ -269,6 +275,45 @@
   .findHint{ padding:9px 18px; border-top:1px solid var(--line); font-size:12px; color:var(--faint);
     display:flex; gap:15px; flex-wrap:wrap; }
   .findEmpty{ padding:22px 18px; color:var(--mut); font-size:14px; }
+
+  /* Библиотека плитками */
+  .crumbs{ display:flex; align-items:center; gap:9px; font-size:14px; color:var(--mut); margin-bottom:6px; flex-wrap:wrap; }
+  .crumbs a{ color:var(--mut); cursor:pointer; }
+  .crumbs a:hover{ color:var(--ink); }
+  .crumbs i{ font-style:normal; color:var(--faint); }
+  .crumbs b{ color:var(--ink); font-weight:600; }
+  .filters{ display:flex; gap:7px; margin:14px 0 16px; flex-wrap:wrap; align-items:center; }
+  .f{ border:1px solid var(--line); background:#fff; border-radius:10px; padding:7px 13px; font-size:14px;
+    color:var(--ink); display:flex; align-items:center; gap:8px; cursor:pointer; }
+  .f:hover{ border-color:#CFCDDA; }
+  .f.on{ background:var(--course-soft); border-color:transparent; color:var(--course-d); font-weight:600; }
+  .f b{ font-size:12px; color:var(--faint); font-weight:500; }
+  .f.on b{ color:var(--course-d); opacity:.7; }
+  .fsp{ flex:1; }
+  .ghost{ border:1px dashed #D2D0DD; background:transparent; border-radius:10px; padding:7px 13px;
+    font-size:14px; color:var(--mut); cursor:pointer; }
+  .ghost:hover{ border-color:var(--course); color:var(--course); }
+  .tgl{ border:1px solid var(--line); background:#fff; border-radius:10px; padding:7px 13px; font-size:14px;
+    color:var(--mut); display:flex; align-items:center; gap:8px; cursor:pointer; }
+  .tgl.on{ background:var(--warn-soft); border-color:transparent; color:var(--warn); font-weight:600; }
+
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(186px,1fr)); gap:14px; }
+  .tile{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:0; overflow:hidden;
+    display:flex; flex-direction:column; min-height:132px; cursor:pointer; color:inherit; text-decoration:none; }
+  .tile:hover{ border-color:#D6D3E4; box-shadow:0 4px 14px rgba(26,27,46,.07); }
+  .tile.unpub{ background:#FCFCFD; }
+  .tile.unpub .tl-t{ color:#5A5F73; }
+  .tile .tl-body{ padding:13px 15px 14px; display:flex; flex-direction:column; gap:6px; flex:1; }
+  .tl-t{ font-size:15px; font-weight:600; line-height:1.3; }
+  .tl-s{ font-size:12px; color:var(--faint); margin-top:auto; }
+  .tl-s .np{ color:var(--warn); }
+  .cover{ height:74px; flex:0 0 auto; position:relative; }
+  .tl-ic{ width:36px; height:36px; border-radius:11px; display:grid; place-items:center; font-size:15px; margin-bottom:2px; }
+  .tl-ic.lesson{ background:var(--course-soft); color:var(--course-d); }
+  .tl-ic.homework{ background:var(--ok-soft); color:var(--ok); }
+  .tl-ic.test{ background:var(--warn-soft); color:var(--warn); }
+  .tl-bar{ height:5px; border-radius:99px; background:var(--bg); display:flex; overflow:hidden; }
+  .tl-bar i{ display:block; height:100%; }
   .block .bt{ font-size:12px; font-weight:500; color:var(--mut); text-transform:none; letter-spacing:0; margin-bottom:8px; }
   .toast{ position:fixed; bottom:22px; left:50%; transform:translateX(-50%); background:#111827; color:#fff; padding:11px 18px; border-radius:10px; font-size:14px; z-index:80; opacity:0; transition:opacity .2s; }
   .toast.show{ opacity:1; }
@@ -469,17 +514,15 @@
 
     <!-- БИБЛИОТЕКА / РЕДАКТОР УРОКОВ -->
     <section id="tab-library" class="hidden">
-      <h2 class="section-title">Библиотека — редактор уроков</h2>
-      <p class="section-sub">Курс → юнит → урок → блоки. Картинки и аудио грузятся прямо в блок.</p>
-      <div style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap">
-        <div class="card" style="padding:12px; width:320px; flex:0 0 320px; max-width:100%; max-height:72vh; overflow:auto">
-          <div class="row" style="align-items:center; margin-bottom:8px"><b style="flex:1">Курсы и уроки</b><button class="btn sec sm" onclick="edNewCourse()">+ курс</button></div>
-          <div id="edTree"><div class="loading">Загружаю…</div></div>
-        </div>
-        <div class="grow" id="edRight" style="min-width:300px">
-          <div class="empty">Выбери урок в дереве слева — откроется редактор. 📄</div>
-        </div>
+      <!-- Плитки вместо дерева: курс → юнит → материалы -->
+      <div id="libGrid">
+        <div class="crumbs" id="libCrumbs"></div>
+        <h2 class="section-title" id="libTitle">Библиотека</h2>
+        <p class="section-sub" id="libLead">Курсы школы. Откройте курс, чтобы увидеть юниты.</p>
+        <div class="filters" id="libFilters"></div>
+        <div class="grid" id="libTiles"><div class="loading">Загружаю…</div></div>
       </div>
+      <div id="edRight" class="hidden"></div>
     </section>
     </div><!-- /mainViews -->
 
@@ -2269,7 +2312,7 @@ function edTypeSelectHtml(id){
 }
 
 async function edInit(){
-  const host=$('edTree'); if(host) host.innerHTML='<div class="loading">Загружаю…</div>';
+  const host=$('libTiles'); if(host) host.innerHTML='<div class="loading">Загружаю…</div>';
   const { data:courses } = await sb.from('classroom_courses').select('id,title').order('sort_order');
   EDTREE = [];
   for(const c of (courses||[])){
@@ -2281,7 +2324,18 @@ async function edInit(){
     }
     EDTREE.push({ id:c.id, title:c.title, units:us });
   }
-  edRenderTree();
+  // Адрес мог прийти с курсом или юнитом — открываем сразу нужный уровень
+  const pr = new URLSearchParams(location.search);
+  if(!EDIT.lessonId){
+    const cq = pr.get('course'), uq = pr.get('unit');
+    if(uq){
+      const c = EDTREE.find(x=>(x.units||[]).some(u=>u.id===uq));
+      if(c){ LIB.level='items'; LIB.courseId=c.id; LIB.unitId=uq; }
+    } else if(cq && EDTREE.some(x=>x.id===cq)){
+      LIB.level='units'; LIB.courseId=cq;
+    }
+  }
+  libRender();
 }
 
 function edToggle(key){ if(EDOPEN.has(key)) EDOPEN.delete(key); else EDOPEN.add(key); edRenderTree(); }
@@ -2292,7 +2346,11 @@ const ED_KINDS = [
   { key:'test',     icon:'🎯', title:'Тесты',             add:'тест'    },
 ];
 
-function edRenderTree(){
+// Дерево заменено плитками. Функция оставлена: её зовут из edSave
+// и из создания курса, а рисовать теперь надо сетку.
+function edRenderTree(){ libRender(); }
+
+function edRenderTreeOld(){
   const host=$('edTree'); if(!host) return;
   if(!EDTREE.length){ host.innerHTML='<div class="muted">Пока нет курсов. Нажми «+ курс».</div>'; return; }
   host.innerHTML = EDTREE.map(c=>{
@@ -2397,6 +2455,9 @@ async function edOpenLesson(lessonId, unitId, courseId){
     const kindWord = { lesson:'план урока', homework:'домашнее задание', test:'тест' }[kindNow] || kindNow;
     crSetCourseColor(courseTitle);
 
+    $('libGrid').classList.add('hidden');
+    right.classList.remove('hidden');
+
     right.innerHTML = `
       <div class="hero">
         <div class="hero-acts">
@@ -2404,7 +2465,7 @@ async function edOpenLesson(lessonId, unitId, courseId){
           <button class="hb" onclick="showOpen('${lessonId}', null, null, 'student')">Глазами ученика</button>
           ${isLesson?`<button class="hb" onclick="showOpen('${lessonId}', null, 'one')">Как на уроке</button>`:''}
         </div>
-        <div class="hero-path">${esc(courseTitle)}<span>›</span>${esc(unitTitle)}</div>
+        <div class="hero-path"><a onclick="libGo('courses')" style="cursor:pointer">Библиотека</a><span>›</span><a onclick="libGo('units','${EDIT.courseId||''}')" style="cursor:pointer">${esc(courseTitle)}</a><span>›</span><a onclick="libGo('items','${EDIT.courseId||''}','${EDIT.unitId||''}')" style="cursor:pointer">${esc(unitTitle)}</a></div>
         <h2 class="hero-t">${esc(lesson.title)}</h2>
         <div class="hero-sub">${kindWord} · ${lesson.is_published?'опубликован':'черновик'} · <span id="heroBlocks">…</span></div>
         <div class="row" style="margin-top:16px; align-items:center; gap:10px; flex-wrap:wrap${isLesson?'':'; display:none'}">
@@ -2428,6 +2489,7 @@ async function edOpenLesson(lessonId, unitId, courseId){
           <span id="cvCount" class="muted" style="font-size:13px"></span>
         </div>
         <div class="hero-ready" id="heroReady"></div>
+        <div class="siblings" id="siblings"></div>
         <div class="row hero-foot">
           <label class="chk"><input type="checkbox" id="edPub" ${lesson.is_published?'checked':''}> Опубликован</label>
           <label class="hero-th">Порог зачёта
@@ -2530,6 +2592,145 @@ function edRedo(){
 }
 
 // Панель показывается только при открытом материале в библиотеке
+// ---------- Библиотека плитками ----------
+// Три уровня: курсы → юниты → материалы. Тип делим переключателем,
+// а не подпапками: лишний уровень ради одного числа.
+var LIB = { level:'courses', courseId:null, unitId:null, kind:'all', unpub:false };
+
+// Обложка рисуется из названия курса: ни файлов, ни прав, ни загрузок.
+function libCover(title, tint){
+  let h=0; for(let i=0;i<title.length;i++) h=(h*31+title.charCodeAt(i))%9973;
+  const a=h%360, b=(h>>3)%360;
+  const shapes=[
+    `<circle cx="30" cy="${20+(h%30)}" r="${26+(h%14)}" fill="rgba(255,255,255,.34)"/>
+     <circle cx="${130+(h%40)}" cy="${58-(h%24)}" r="${34+(h%18)}" fill="rgba(255,255,255,.22)"/>`,
+    `<rect x="${10+(h%30)}" y="-14" width="52" height="52" rx="14" transform="rotate(24 40 20)" fill="rgba(255,255,255,.3)"/>
+     <rect x="${118+(h%26)}" y="24" width="60" height="60" rx="18" transform="rotate(-14 150 50)" fill="rgba(255,255,255,.2)"/>`,
+    `<path d="M0 60 Q50 ${18+(h%24)} 100 52 T200 34" stroke="rgba(255,255,255,.34)" stroke-width="9" fill="none"/>
+     <path d="M0 82 Q60 ${44+(h%20)} 120 70 T210 58" stroke="rgba(255,255,255,.2)" stroke-width="7" fill="none"/>`,
+  ];
+  return `<div class="cover" style="background:linear-gradient(135deg, ${tint[0]}, ${tint[1]})">
+    <svg viewBox="0 0 200 74" preserveAspectRatio="none" style="width:100%;height:100%">${shapes[h%3]}</svg></div>`;
+}
+
+function libTintFor(title){
+  const t=String(title||''); 
+  for(const [re,n] of COURSE_RULES) if(re.test(t)) return COURSE_TINTS[n];
+  let h=0; for(let k=0;k<t.length;k++) h=(h*31+t.charCodeAt(k))%997;
+  return COURSE_TINTS[3 + (h % (COURSE_TINTS.length-3))];
+}
+
+function libGo(level, courseId, unitId){
+  LIB.level = level;
+  LIB.courseId = courseId || null;
+  LIB.unitId = unitId || null;
+  LIB.kind = 'all'; LIB.unpub = false;
+  $('edRight').classList.add('hidden');
+  $('libGrid').classList.remove('hidden');
+  EDIT = { courseId:null, unitId:null, lessonId:null, blocks:[] };
+  edDockSync();
+  const u = level==='courses' ? location.pathname
+          : level==='units'   ? location.pathname+'?course='+courseId
+          :                     location.pathname+'?unit='+unitId;
+  try{ history.replaceState(null,'',u); }catch(_){}
+  libRender();
+}
+
+function libSetKind(k){ LIB.kind=k; libRender(); }
+function libToggleUnpub(){ LIB.unpub=!LIB.unpub; libRender(); }
+
+function libRender(){
+  const cr=$('libCrumbs'), t=$('libTitle'), ld=$('libLead'), f=$('libFilters'), g=$('libTiles');
+  if(!g) return;
+  const course = (EDTREE||[]).find(c=>c.id===LIB.courseId);
+  const unit   = course && (course.units||[]).find(u=>u.id===LIB.unitId);
+
+  let path='';
+  if(course) path = `<a onclick="libGo('courses')">Библиотека</a>`;
+  if(unit)   path += `<i>›</i><a onclick="libGo('units','${course.id}')">${esc(course.title)}</a>`;
+  cr.innerHTML = path;
+
+  if(LIB.level==='courses'){
+    crSetCourseColor('');
+    t.textContent='Библиотека';
+    ld.textContent='Курсы школы. Откройте курс, чтобы увидеть юниты.';
+    f.innerHTML = `<span class="fsp"></span><button class="ghost" onclick="edNewCourse()">＋ Курс</button>`;
+    g.innerHTML = (EDTREE||[]).map(c=>{
+      const n = (c.units||[]).reduce((a,u)=>a+(u.lessons||[]).length,0);
+      return `<a class="tile" href="?course=${c.id}" onclick="return libLink(event,'units','${c.id}')">
+        ${libCover(c.title, libTintFor(c.title))}
+        <span class="tl-body"><span class="tl-t">${esc(c.title)}</span>
+        <span class="tl-s">${(c.units||[]).length} юнитов · ${n} материалов</span></span></a>`;
+    }).join('') || '<div class="empty">Курсов пока нет.</div>';
+  }
+
+  else if(LIB.level==='units' && course){
+    crSetCourseColor(course.title);
+    t.textContent=course.title;
+    ld.textContent='Юниты курса. Откройте юнит, чтобы увидеть материалы.';
+    f.innerHTML = `<span class="fsp"></span><button class="ghost" onclick="edNewUnit('${course.id}')">＋ Юнит</button>`;
+    g.innerHTML = (course.units||[]).map(u=>{
+      const ls=(u.lessons||[]);
+      const by=k=>ls.filter(x=>(x.kind||'homework')===k).length;
+      const bits=[]; if(by('homework')) bits.push(by('homework')+' ДЗ');
+      if(by('lesson')) bits.push(by('lesson')+' уроков'); if(by('test')) bits.push(by('test')+' тестов');
+      return `<a class="tile" href="?unit=${u.id}" onclick="return libLink(event,'items','${course.id}','${u.id}')">
+        <span class="tl-body"><span class="tl-ic lesson">${svgFolderIc()}</span>
+        <span class="tl-t">${esc(u.title)}</span>
+        <span class="tl-s">${bits.join(' · ')||'пусто'}</span></span></a>`;
+    }).join('') || '<div class="empty">В курсе пока нет юнитов.</div>';
+  }
+
+  else if(unit){
+    crSetCourseColor(course.title);
+    t.textContent=unit.title;
+    ld.textContent='Материалы юнита.';
+    const all=(unit.lessons||[]);
+    const cnt=k=>all.filter(x=>(x.kind||'homework')===k).length;
+    const KW={ lesson:['план урока','▢'], homework:['ДЗ','●'], test:['тест','◆'] };
+    f.innerHTML =
+      libChip('all','Все',all.length)+libChip('homework','Домашки',cnt('homework'))+
+      libChip('lesson','Уроки',cnt('lesson'))+libChip('test','Тесты',cnt('test'))+
+      `<span class="fsp"></span>
+       <button class="tgl ${LIB.unpub?'on':''}" onclick="libToggleUnpub()">Не опубликовано <b>${all.filter(x=>!x.is_published).length}</b></button>
+       <button class="ghost" onclick="edNewLesson('${unit.id}','${course.id}','${LIB.kind==='all'?'homework':LIB.kind}')">＋ Материал</button>`;
+    let list = LIB.kind==='all' ? all : all.filter(x=>(x.kind||'homework')===LIB.kind);
+    if(LIB.unpub) list = list.filter(x=>!x.is_published);
+    g.innerHTML = list.length ? list.map(l=>{
+      const k=KW[l.kind||'homework']||KW.homework;
+      return `<a class="tile ${l.is_published?'':'unpub'}" href="?lesson=${l.id}"
+          onclick="return libLink(event,'lesson',null,null,'${l.id}')">
+        <span class="tl-body"><span class="tl-ic ${l.kind||'homework'}">${k[1]}</span>
+        <span class="tl-t">${esc(l.short||l.title)}</span>
+        <span class="tl-s">${k[0]}${l.is_published?'':' · <span class="np">не опубликовано</span>'}</span></span></a>`;
+    }).join('')
+      : `<div class="empty">${LIB.unpub?'Всё опубликовано.':'Материалов этого типа пока нет.'}</div>`;
+  }
+}
+
+function libChip(k,label,n){
+  return `<button class="f ${LIB.kind===k?'on':''}" onclick="libSetKind('${k}')">${label}<b>${n}</b></button>`;
+}
+function svgFolderIc(){
+  return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 014.5 6h4l2 2.4h7A1.5 1.5 0 0119 10v7.5a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 013 17.5z"/></svg>';
+}
+
+// Обычный клик — внутри страницы, Ctrl и колесо отдаём браузеру
+function libLink(e, level, cid, uid, lid){
+  if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button===1) return true;
+  e.preventDefault();
+  if(level==='lesson'){
+    // открыть напрямую, если знаем курс и юнит — без лишних запросов
+    const c=(EDTREE||[]).find(x=>(x.units||[]).some(u=>(u.lessons||[]).some(l=>l.id===lid)));
+    const u=c && (c.units||[]).find(x=>(x.lessons||[]).some(l=>l.id===lid));
+    if(c && u){
+      edOpenLesson(lid, u.id, c.id);
+      try{ history.replaceState(null,'',location.pathname+'?lesson='+lid); }catch(_){}
+    } else edOpenLessonById(lid);
+  } else libGo(level, cid, uid);
+  return false;
+}
+
 // ---------- Поиск материалов (Ctrl+K) ----------
 var FIND = { list:[], sel:0 };
 
@@ -2652,6 +2853,7 @@ function edRenderBlocks(){
   edCheckpoint();
   if(EDIT && EDIT.savedJson == null) EDIT.savedJson = edSnapshot();
   edRenderReady();
+  edRenderSiblings();
   edDockSync();
 }
 
@@ -2723,6 +2925,19 @@ function edHasPicture(b){
   if(p.image) return true;
   const arr = p.cards || p.items || p.points || [];
   return Array.isArray(arr) && arr.some(x => x && x.image);
+}
+
+// Соседние материалы юнита: дерево убрали, а прыгать между
+// Homework 3 и Homework 4 надо постоянно.
+function edRenderSiblings(){
+  const host=$('siblings'); if(!host) return;
+  const c=(EDTREE||[]).find(x=>x.id===EDIT.courseId);
+  const u=c && (c.units||[]).find(x=>x.id===EDIT.unitId);
+  const ls=(u && u.lessons)||[];
+  if(ls.length<2){ host.innerHTML=''; return; }
+  host.innerHTML = ls.map(l=>`<a class="sib ${l.id===EDIT.lessonId?'on':''}" href="?lesson=${l.id}"
+      onclick="return libLink(event,'lesson',null,null,'${l.id}')"
+      title="${esc(l.title)}"><span class="tmark ${l.kind||'homework'}"></span>${esc(l.short||l.title)}</a>`).join('');
 }
 
 function edRenderReady(){
