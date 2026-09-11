@@ -277,11 +277,16 @@
   .findEmpty{ padding:22px 18px; color:var(--mut); font-size:14px; }
 
   /* Библиотека плитками */
-  .crumbs{ display:flex; align-items:center; gap:9px; font-size:14px; color:var(--mut); margin-bottom:6px; flex-wrap:wrap; }
-  .crumbs a{ color:var(--mut); cursor:pointer; }
-  .crumbs a:hover{ color:var(--ink); }
+  .crumbs{ display:flex; align-items:center; gap:8px; font-size:14px; color:var(--mut);
+    margin-bottom:8px; flex-wrap:wrap; min-height:32px; }
+  .crumbs a.cb{ color:var(--mut); cursor:pointer; display:inline-flex; align-items:center;
+    padding:5px 10px; border-radius:9px; background:#fff; border:1px solid var(--line); }
+  .crumbs a.cb:hover{ color:var(--course-d); border-color:var(--course); }
   .crumbs i{ font-style:normal; color:var(--faint); }
   .crumbs b{ color:var(--ink); font-weight:600; }
+  .cbback{ border:1px solid var(--line); background:#fff; border-radius:9px; padding:4px 11px;
+    color:var(--mut); cursor:pointer; font-size:15px; line-height:1.2; margin-right:2px; }
+  .cbback:hover{ border-color:var(--course); color:var(--course-d); }
   .filters{ display:flex; gap:7px; margin:14px 0 16px; flex-wrap:wrap; align-items:center; }
   .f{ border:1px solid var(--line); background:#fff; border-radius:10px; padding:7px 13px; font-size:14px;
     color:var(--ink); display:flex; align-items:center; gap:8px; cursor:pointer; }
@@ -2676,9 +2681,17 @@ function libRender(){
   const course = (EDTREE||[]).find(c=>c.id===LIB.courseId);
   const unit   = course && (course.units||[]).find(u=>u.id===LIB.unitId);
 
-  let path='';
-  if(course) path = `<a onclick="libGo('courses')">Библиотека</a>`;
-  if(unit)   path += `<i>›</i><a onclick="libGo('units','${course.id}')">${esc(course.title)}</a>`;
+  // Путь кликабельный целиком, плюс явная стрелка на уровень выше
+  const home = `<a class="cb" onclick="libGo('courses')" title="Все курсы">${svgHome()}</a>`;
+  let path = '';
+  if(unit){
+    path = `<button class="cbback" onclick="libGo('units','${course.id}')" title="Назад к юнитам">←</button>`
+         + home + `<i>/</i><a class="cb" onclick="libGo('units','${course.id}')">${esc(course.title)}</a>`
+         + `<i>/</i><b>${esc(unit.title)}</b>`;
+  } else if(course){
+    path = `<button class="cbback" onclick="libGo('courses')" title="Назад к курсам">←</button>`
+         + home + `<i>/</i><b>${esc(course.title)}</b>`;
+  }
   cr.innerHTML = path;
 
   if(LIB.level==='courses'){
@@ -2855,6 +2868,9 @@ function libChip(k,label,n){
 function libFocusRename(){
   const inp=document.querySelector('#libTiles .trename');
   if(inp){ inp.focus(); inp.select(); }
+}
+function svgHome(){
+  return '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M4 10.5L12 4l8 6.5V19a1 1 0 01-1 1H5a1 1 0 01-1-1z"/></svg>';
 }
 function svgFolderIc(){
   return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 014.5 6h4l2 2.4h7A1.5 1.5 0 0119 10v7.5a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 013 17.5z"/></svg>';
@@ -4308,9 +4324,11 @@ async function boot(){
   }catch(e){ $('loginErr').textContent=e.message||String(e); await sb.auth.signOut(); $('loginScreen').classList.remove('hidden'); return; }
   $('loginScreen').classList.add('hidden'); $('app').classList.remove('hidden');
   $('whoami').textContent = ME.name + (ME.isEditor?' · методист':'');
-  if(ME.isEditor){ const b=$('roleBanner'); b.textContent='Режим методиста: видны все ученики и все работы на проверке.'; b.classList.remove('hidden'); }
-  else { ['media','library'].forEach(t=>{ const el=document.querySelector('[data-tab='+t+']'); if(el) el.style.display='none'; });
-    const fb=document.querySelector('.findBtn'); if(fb) fb.style.display='none'; }
+  // Плашку «Режим методиста» не показываем: роль подписана внизу боковой полосы.
+  if(!ME.isEditor){
+    ['media','library'].forEach(t=>{ const el=document.querySelector('[data-tab='+t+']'); if(el) el.style.display='none'; });
+    const fb=document.querySelector('.findBtn'); if(fb) fb.style.display='none';
+  }
   // «Уроки» доступны и преподавателю: редактора он не видит, а вести урок должен
   await Promise.all([ loadStudents(), loadLibrary(), loadPending() ]);
   renderStudents();
