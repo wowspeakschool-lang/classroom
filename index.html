@@ -591,6 +591,9 @@
 </div>
 
 <div id="edDock" class="hidden">
+  <button class="dk" onclick="edScrollTo(0)" title="В начало страницы">⤒</button>
+  <button class="dk" onclick="edScrollTo(1)" title="В конец страницы">⤓</button>
+  <span class="dkSep"></span>
   <button class="dk" id="dkUndo" onclick="edUndo()" title="Отменить (Ctrl+Z)">↶</button>
   <button class="dk" id="dkRedo" onclick="edRedo()" title="Вернуть (Ctrl+Shift+Z)">↷</button>
   <span class="dkSep"></span>
@@ -934,7 +937,7 @@ async function addNextLesson(){
 // ============================================================
 function blockTypeLabel(t){
   if(t==='sequence') return 'Расставь по порядку';
-  if(t==='hotspot')  return 'Точки на картинке'; return ({text:'Материал',video:'Видео',quiz:'Тест',match:'Соедини пары',exact_input:'Короткий ответ',task:'Задание',embed:'Тренажёр',order:'Составь предложение',sort:'Распредели по группам',flashcards:'Карточки',gaps:'Заполни пропуски',truefalse:'Верно / неверно',speaking:'Запись голоса'})[t]||t; }
+  if(t==='hotspot')  return 'Точки на картинке'; return ({text:'Материал',video:'Видео',quiz:'Тест',match:'Соедини пары',exact_input:'Короткий ответ',task:'Задание',embed:'Тренажёр',order:'Составь слово или предложение',sort:'Распредели по группам',flashcards:'Карточки',gaps:'Заполни пропуски',truefalse:'Верно / неверно',speaking:'Запись голоса'})[t]||t; }
 
 // Текст с пропусками: «I ___ a cat» → части текста и места для ответов.
 // Пропуск в исходном тексте помечается двойным подчёркиванием
@@ -2335,7 +2338,7 @@ function edTypeSelectHtml(id){
       <option value="exact_input">Короткий ответ</option>
       <option value="task">Задание (ручная проверка)</option>
       <option value="embed">Тренажёр (ссылка)</option>
-      <option value="order">Составь предложение</option>
+      <option value="order">Составь слово или предложение</option>
       <option value="sequence">Расставь по порядку</option>
       <option value="hotspot">Точки на картинке</option>
       <option value="sort">Распредели по группам</option>
@@ -3006,6 +3009,11 @@ async function edOpenLessonById(lessonId){
 document.addEventListener('keydown', e=>{
   if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); findOpen(); }
 });
+
+// В домашке бывает сорок блоков — до конца крутить долго
+function edScrollTo(end){
+  window.scrollTo({ top: end ? document.body.scrollHeight : 0, behavior:'smooth' });
+}
 
 function edDockSync(){
   const d=$('edDock'); if(!d) return;
@@ -3716,7 +3724,8 @@ function edBlockEditor(b,i){
   const badge = aud==='teacher' ? '<span class="pill n" style="margin-left:6px">преподаватель</span>'
               : aud==='student' ? '<span class="pill" style="margin-left:6px">ученик</span>' : '';
   const head=`<div class="bt">${blockTypeLabel(b.type)}${badge}</div>`;
-  const meta=`<div class="row" style="gap:8px; margin-bottom:8px; flex-wrap:wrap">
+  const metaNeeded = edIsLesson() || aud!=='shared' || vr!=='any' || fm!=='any';
+  const meta = !metaNeeded ? '' : `<div class="row" style="gap:8px; margin-bottom:8px; flex-wrap:wrap">
       <select style="max-width:150px" onchange="edMeta(${i},'audience',this.value)">
         <option value="shared" ${aud==='shared'?'selected':''}>Видно обоим</option>
         <option value="teacher" ${aud==='teacher'?'selected':''}>Только преподавателю</option>
