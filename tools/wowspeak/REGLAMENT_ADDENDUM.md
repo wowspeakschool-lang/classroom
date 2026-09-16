@@ -51,8 +51,11 @@ curl -s -o /dev/null -w "%{http_code}\n" https://api.openai.com/v1/models \
 Просить надо пустое белое место («at least the width of a whole drawing between neighbours»)
 и прямо запрещать рамки: «no frames, no boxes, no borders, no dividing lines».
 
-Стиль — **ЯРЧЕ И КРАСОЧНЕЕ**. Приглушённая бежево-охристая гамма не подходит. В промпт
-обязательно (константа `wowspeak_cropping.STYLE`):
+Стиль — **один на все 4 презентации** и **под возраст 10-13+**. Не дошкольный: без глазастых
+мультяшных мордочек, без игрушечных «пухлых» форм, без толстого чёрного контура — десятилетним
+такое ещё ок, тринадцатилетним уже стыдно. И при этом **ЯРЧЕ И КРАСОЧНЕЕ**: приглушённая
+бежево-охристая гамма не подходит, как и корпоративная сине-серая. В промпт обязательно
+(константа `wowspeak_cropping.STYLE`):
 
 > Style: bright, vivid, saturated children's cartoon illustration — playful and joyful.
 > Use a RICH and VARIED colour palette: bright blues, greens, yellows, reds, purples and

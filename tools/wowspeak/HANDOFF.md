@@ -54,6 +54,10 @@ e.g. `Speaking Clubs 10-12 Beginners What autumn smells like.pptx`
 - **STEP 4** — build all 4 decks (icons + video link + games), run `wowspeak_qa.py`, deliver
   the files in the chat. **No WordWall columns any more** — the games are in the deck.
 
+Icon style: **one style across all four decks**, pitched at the whole 10-13+ band - bright and
+colourful, but not preschool (no cartoon faces, no toy-like puffy shapes, no thick black
+outlines). Do not split the style by age group.
+
 Use GPT economically: **`quality='medium'` by default** (a quarter of the price; on a ~4 cm
 lesson tile the difference against `high` is barely visible), **one sheet for the whole theme**
 covering every version's words, reuse the crops across all four decks, and fix a crooked icon
