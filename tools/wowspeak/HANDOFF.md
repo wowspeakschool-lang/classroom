@@ -136,8 +136,10 @@ notes          [{label,text,[url],[tail],[red]} ...]   {GAMES}/{VIDEO}/{SPEAKING
   Never download a video; a local file she sends gets embedded.
 - No baked-in captions in generated icon sheets; captions only on New Words.
 - Advanced abstract words → definition cards, not icons.
-- When a theme risks overlapping vocabulary with an earlier theme, shift the angle and pick
-  different words (Anna's topic catalog `РК_каталог_тем.xlsx` has topic names only).
+- **Repeated words are fine.** What must not happen is two lessons on the same subject with
+  nearly the same word list (two "clothes" lessons). One clothing item surfacing inside another
+  theme is not a problem. Use `WORD_BANK.md` to spot a repeated *topic*, not a repeated word.
+  (Anna's topic catalog `РК_каталог_тем.xlsx` has topic names only.)
 - Show previews as **files** — Anna cannot see the assistant's own view-tool images.
 - Files that came pre-named with "wow" keep that base; otherwise `Speaking Clubs …`.
 
@@ -149,6 +151,6 @@ for Anna's approval of the words and a video link). Proposed sets:
 - 13+ Beginners (icons): rain · pumpkin spice · coffee · leaves · candle · cinnamon
 - 13+ Advanced (defs): scent · aroma · damp · earthy · nostalgic · remind
 
-`WORD_BANK.md` flags that `nostalgic`, `remind`, `rain`, `leaves`, `candles` repeat earlier
-themes (~4 repeats vs Anna's "1-2" guideline) — `run_example.py` already swaps two of them
-(`linger`, `evoke`, `comforting`). Let Anna decide.
+Approved by Anna, with `pumpkin spice` shortened to **`pumpkin`** on both Beginners decks.
+Video (all four decks): <https://youtu.be/cj6RmvPGqlI>.
+Icons: one sheet for the whole theme, cropped into `icons/smell/` — awaiting the preview "ок".

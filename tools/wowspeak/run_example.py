@@ -8,8 +8,8 @@ import os, sys
 sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 from wowspeak_builder import build
 
-ICO_1012='ic_smell_1012'; ICO_13='ic_smell_13'
-VID='https://youtu.be/XXXXXXXXXXX'
+ICO=os.path.join(os.path.dirname(os.path.abspath(__file__)),'icons','smell')
+VID='https://youtu.be/cj6RmvPGqlI'          # one video for all four decks, keep it under ~4 min
 EMO=['🍂','👃','☕',['🍂','☕','🕯️','🌧️','🎃','🌰']]
 
 LEAD=[('Do you like autumn?','🍂'),('What is your favourite smell?','👃'),
@@ -91,14 +91,14 @@ DISC13={'headline':'Role-play 🎭','statement':'👃 Describe a smell - we gues
            'Swap roles. Then: which memory was the easiest to guess, and why?']}
 
 VERSIONS=[
-  ('10-12 Beginners',beg('Speaking Club · 10-12 Beginners',ICO_1012,W1012),
+  ('10-12 Beginners',beg('Speaking Club · 10-12 Beginners',ICO,W1012),
       'Разбери новые слова по картинкам (это единственный слайд с подписями).',
       'Beginners говорят по рамке "This or That".','Beginners рассказывают про запахи осени по рамкам.'),
   ('10-12 Advanced',adv('Speaking Club · 10-12 Advanced',ADV1012,DISC1012),
       'Разбери слова и определения, проси пример в предложении.',
       'Разбери "Useful language for discussion" - фразы нужны весь урок.',
       'MAIN SPEAKING (Ranking): ранжируем запахи, требуем аргументы и уточняющие вопросы.'),
-  ('13+ Beginners',beg('Speaking Club · 13+ Beginners',ICO_13,W13),
+  ('13+ Beginners',beg('Speaking Club · 13+ Beginners',ICO,W13),
       'Разбери новые слова по картинкам (это единственный слайд с подписями).',
       'Beginners говорят по рамке "This or That".','Beginners рассказывают про запахи осени по рамкам.'),
   ('13+ Advanced',adv('Speaking Club · 13+ Advanced',ADV13,DISC13),

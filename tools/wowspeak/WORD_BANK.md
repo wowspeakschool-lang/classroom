@@ -1,8 +1,10 @@
 # WORD BANK — vocabulary already used across WOW Speak speaking-club themes
 
-Purpose: when choosing words for a NEW theme, scan this so you don't repeat vocabulary
-across topics. Anna's rule: **1-2 repeats is fine, more should be avoided.** Words are
-merged across all 4 versions of each theme (Beginners icons + Advanced definitions).
+Purpose: when choosing words for a NEW theme, scan this to make sure the *theme* is not a
+repeat. Anna's rule (updated): **repeated words are fine.** What must not happen is two
+lessons on the same subject whose word lists nearly coincide — two "clothes" lessons, say.
+One clothing item turning up inside a different theme is not a problem at all.
+Words are merged across all 4 versions of each theme (Beginners icons + Advanced definitions).
 
 ## Themes already built (theme → words used)
 - **A place where I feel happy** — peaceful, relaxing, comfortable, safe, cozy, quiet, welcoming, spacious, refreshing, lively, familiar, private, inspiring
@@ -32,4 +34,8 @@ merged across all 4 versions of each theme (Beginners icons + Advanced definitio
 `cozy/cosy`, `atmosphere`, `nostalgic`, `remind`, `chill`, `vibe`, `friends`, `score`, `team`, `magical`, `spacious`, `relaxing`, `mood`.
 
 ## Note for the CURRENT theme "What autumn smells like"
-The proposed set repeats a few autumn/feeling words already used: **nostalgic** (Autumn vibes, Halloween, playlist), **remind** (playlist), **rain / leaves** (Autumn vibes), **candles** (Autumn vibes). That's ~4 repeats — a bit over Anna's "1-2" guideline. New/unique words are good: smell, scent, aroma, damp, earthy, fresh, pumpkin spice, wood, coffee, cinnamon. Consider swapping 1-2 of the repeats (e.g. `nostalgic`→`comforting`/`familiar`? — but `familiar` was used too; or keep `nostalgic` only in one version). Flag this to Anna and let her decide.
+The theme is about **smells**, which keeps it clear of "Autumn vibes" (weather/cosy) and
+"Autumn playlist" (music), so the few shared words (`rain`, `leaves`, `candle`) are fine.
+Approved set — Beginners: rain · pumpkin · wood · leaves · coffee · candle (13+: cinnamon
+instead of wood). Advanced: smell · scent · damp · earthy · fresh · comforting
+(13+: scent · aroma · damp · earthy · linger · evoke).

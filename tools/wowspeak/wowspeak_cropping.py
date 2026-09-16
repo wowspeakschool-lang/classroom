@@ -99,10 +99,15 @@ def _merge(boxes,gap):
     for k in keys: out.setdefault(root(k),[]).append(k)
     return list(out.values())
 
-def crop_grid_auto(path,names,outdir,f=3,thr=26,min_area=90,gap=14,pad=10,row_tol=0.35,verbose=True):
+def crop_grid_auto(path,names,outdir,f=3,thr=26,min_area=90,gap=None,pad=10,row_tol=0.35,verbose=True):
     """Cut the sheet into len(names) icons, reading the objects themselves.
     names may be flat ['a','b',...] or row-major [['a','b','c'],['d','e','f']].
-    Anything foreign that falls inside a crop is painted white."""
+    Anything foreign that falls inside a crop is painted white.
+
+    gap is how close two blobs must be to count as one drawing (a boy and his
+    ball). Left as None it is tuned automatically: the widest gap that still
+    yields exactly len(names) drawings, so a tight sheet does not glue
+    neighbours together and an airy one does not fall apart."""
     flat=[n for row in names for n in row] if names and isinstance(names[0],(list,tuple)) else list(names)
     os.makedirs(outdir,exist_ok=True)
     im=Image.open(path).convert('RGB'); W,H=im.size
@@ -112,6 +117,10 @@ def crop_grid_auto(path,names,outdir,f=3,thr=26,min_area=90,gap=14,pad=10,row_to
     small=full[:sh*f,:sw*f].reshape(sh,f,sw,f).max(axis=(1,3))
     lab,n=_label(small); boxes=_boxes(lab,n,min_area)
     if not boxes: raise RuntimeError(f'{path}: nothing found - is the sheet blank?')
+    if gap is None:
+        tries=[g for g in (16,14,12,10,8,6,5,4,3,2) if len(_merge(boxes,g))==len(flat)]
+        gap=tries[0] if tries else 8
+        if verbose: print(f'{os.path.basename(path)}: gap={gap}'+('' if tries else ' (no gap gives the expected count)'))
     clusters=_merge(boxes,gap)
     cl=[]
     for g in clusters:
