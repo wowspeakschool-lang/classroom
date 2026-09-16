@@ -24,7 +24,9 @@ THE RULES (each one was paid for - do not break them)
     quiz and on the board. It also puts a small '→' in the corner, so the teacher
     is never stuck on a slide where clicks do nothing.
  6. Service screens go to the END of the file via finish(prs, helpers).
- 7. Feedback screens come back on a click ANYWHERE (link_whole_slide).
+ 7. Feedback screens carry a real button ('Next word' / 'Back to the question').
+    The whole slide is linked too, but a button is what the teacher can see and
+    aim at - 'click anywhere' looks broken when a click does nothing.
  8. A card must never be the colour of the slide background -> pal(bg, i),
     never PASTELS[i % 6].
  9. Rewrite the teacher notes for the games (F5 only, click past a button does
@@ -252,13 +254,16 @@ def g_quiz_series(prs,bg,items,helpers=None,title=None,mode='picture',nopt=4,
             if mode=='picture': media_on(s,c,items[idx][1],target=tgt)
             else: card_text(c,items[idx][0],size=24,col=B.INK)
         no_click_advance(s)                              # rule 5
-        # feedback screens - back on a click anywhere (rule 7)
+        # feedback screens: a real button to press (rule 7). The whole slide is
+        # linked as well, but the button is the one the teacher aims at - an
+        # invisible click-anywhere layer is not something you can see or trust.
         link_whole_slide(ok,nxt,GREEN)
-        B.text(ok,1.0,2.5,11.3,1.4,[[('YES! Correct! 🎉',54,B.GOLD,True,B.TF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
-        B.text(ok,1.0,4.1,11.3,0.8,[[('Click anywhere to go on ➡️',20,B.WHITE,True,B.BF)]],align=PP_ALIGN.CENTER)
+        B.text(ok,1.0,1.95,11.3,1.4,[[('YES! Correct! 🎉',54,B.GOLD,True,B.TF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+        btn(ok,4.2,3.95,4.93,1.05,'Next word  →' if k+1<n else 'See the result  →',
+            fill=B.GOLD,size=24,col='1B6B3F',rad=0.4,target=nxt)
         link_whole_slide(bad,s,AMBER)
-        B.text(bad,1.0,2.5,11.3,1.4,[[('Try again! 🤔',54,B.WHITE,True,B.TF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
-        B.text(bad,1.0,4.1,11.3,0.8,[[('Click anywhere to come back ↩️',20,'FFF6E0',True,B.BF)]],align=PP_ALIGN.CENTER)
+        B.text(bad,1.0,1.95,11.3,1.4,[[('Try again! 🤔',54,B.WHITE,True,B.TF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+        btn(bad,4.2,3.95,4.93,1.05,'↩  Back to the question',fill=B.WHITE,size=22,col='A35C0E',rad=0.4,target=s)
     B.blob(fin,0.4,0.6,3.2,B.BLOB[2]); B.blob(fin,12.8,7.0,3.6,B.BLOB[1])
     c=B.card(fin,2.6,2.3,8.13,2.4,fill=B.WHITE,rad=0.25)
     card_text(c,final,size=30,col=B.HOTPINK)

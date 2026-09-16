@@ -65,7 +65,7 @@ only when a medium sheet genuinely comes out wrong.
 | **New Words** | 6 icon cards **(the only slide with captions)** | 6 word + definition cards |
 | Talk with the words | rotating mini-activity + support frame | reusable "Useful language for discussion" |
 | **Games (N slides)** | picture quiz, one round per word + "what's missing" | word quiz (definition → word) + board |
-| | *on quiz and board slides a stray click is swallowed by an invisible catcher; the small "→" bottom-left is the way on* | |
+| | *stray clicks on quiz and board slides are swallowed by an invisible catcher; the small "→" bottom-left moves on. Feedback screens carry a real button: "Next word →" / "↩ Back to the question"* | |
 | Video | embedded file or a gold link button + 2-3 discussion Qs | same |
 | Main speaking | sentence frames | rotating format (Debate / Ranking / Discuss & Pitch / Role-play / Would-you-rather / Diamond-9) |
 | Thank you | | |
