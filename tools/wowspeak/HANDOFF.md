@@ -54,9 +54,12 @@ e.g. `Speaking Clubs 10-12 Beginners What autumn smells like.pptx`
 - **STEP 4** — build all 4 decks (icons + video link + games), run `wowspeak_qa.py`, deliver
   the files in the chat. **No WordWall columns any more** — the games are in the deck.
 
-Icon style: **one style across all four decks**, pitched at the whole 10-13+ band - bright and
-colourful, but not preschool (no cartoon faces, no toy-like puffy shapes, no thick black
-outlines). Do not split the style by age group.
+Icon style is **split by age**, as in the original §5: 10-12 gets lively glossy 3D app-icon
+style (friendly, not preschool); 13+ gets a different, more grown-up look. The reference for
+the 13+ style is Anna's existing decks for the older groups - **ask her for one and match it**;
+this session has never had one, and the repo's media is the SM2 course (glossy 3D for young
+kids). Both stay bright and colourful. Already rejected: thick black outlines with puffy shapes
+(too childish) and flat vector icons in a navy/coral palette (wrong look entirely).
 
 Use GPT economically: **`quality='medium'` by default** (a quarter of the price; on a ~4 cm
 lesson tile the difference against `high` is barely visible), **one sheet for the whole theme**
