@@ -5,8 +5,14 @@
 дословно одинаковый: стиль утверждён Анной на пробе острова 1, менять нельзя.
 Правки допустимы только в описании содержания сцены.
 
-Запуск:  OPENAI_API_KEY=... python3 tools/gen_map_images.py [ключ ...]
+Запуск:  OPENAI_API_KEY=... python3 tools/gen_map_images.py [--draft|--final] [ключ ...]
 Без аргументов — генерирует всё.
+
+Про деньги. Картинка 1536x1024 стоит примерно: low $0.016, medium $0.063, high $0.25.
+Порядок работы: гоняем промпт в --draft (low), пока содержание не сойдётся — пропавшая
+юбка или буквы на компасе видны и в черновике, — и только потом один прогон в medium.
+На карте остров показывается шириной около 430 px, там medium от high неотличим;
+high осмыслен только если картинка понадобится крупно.
 """
 import base64, json, os, sys, urllib.error, urllib.request
 from concurrent.futures import ThreadPoolExecutor
@@ -86,13 +92,14 @@ JOBS = {
         "Square, aspect ratio 1:1.")),
 }
 
+QUALITY = "medium"   # переключается флагами --draft / --final
 OUT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "map")
 
 
 def generate(key):
     job = JOBS[key]
     body = {"model": "gpt-image-1", "prompt": job["prompt"], "size": job["size"],
-            "quality": "high", "output_format": "png", "n": 1}
+            "quality": QUALITY, "output_format": "png", "n": 1}
     if job["transparent"]:
         body["background"] = "transparent"
     req = urllib.request.Request("https://api.openai.com/v1/images/generations",
@@ -147,7 +154,15 @@ def edit_festive():
 
 
 if __name__ == "__main__":
-    keys = sys.argv[1:] or list(JOBS)
+    args = sys.argv[1:]
+    if "--draft" in args:
+        QUALITY = "low"
+        args.remove("--draft")
+    elif "--final" in args:
+        QUALITY = "high"
+        args.remove("--final")
+    print("качество: %s" % QUALITY)
+    keys = args or list(JOBS)
     if "festive" in keys:
         print(*edit_festive()); sys.exit()
     bad = [k for k in keys if k not in JOBS]
