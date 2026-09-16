@@ -67,6 +67,17 @@ JOBS = {
         "Bright 3D rendered cartoon style, Pixar-like, glossy soft shapes, vivid saturated colors. "
         + NO_TEXT + "No characters, no dragon. Transparent background.")),
 
+    # Отдельное небо для широких экранов. Вертикальное при растягивании на ноутбук
+    # мылится: у него всего 1024 px по ширине.
+    "map-background-wide": dict(size="1536x1024", transparent=False, prompt=(
+        "Children's storybook background, empty scene with no objects: a calm turquoise magical "
+        "sea along the lower part of the frame with soft foam swirls, a wide sky above with "
+        "scattered fluffy white and lilac clouds, tiny sparkles and stars, warm golden light "
+        "from the top. Bright 3D rendered cartoon style, Pixar-like, soft glossy shapes, vivid "
+        "saturated colors - turquoise, violet, pink, gold. Lots of open empty space across the "
+        "middle of the composition. " + NO_TEXT
+        + "No characters, no buildings, no islands. Horizontal, aspect ratio 3:2.")),
+
     "map-background": dict(size="1024x1536", transparent=False, prompt=(
         "Children's storybook background, empty scene with no objects: a calm turquoise magical sea "
         "with soft foam swirls, scattered fluffy white clouds, tiny sparkles and stars, warm golden "

@@ -16,7 +16,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WEB = os.path.join(ROOT, "assets", "map", "web")
 OUT = os.path.join(ROOT, "wowspeak.html")
 
-ASSET_NAMES = ["map-background", "island-1-fair", "island-2-mirrors", "island-3-friends",
+ASSET_NAMES = ["map-background", "map-background-wide", "island-1-fair", "island-2-mirrors", "island-3-friends",
                "island-4-castle-closed", "island-4-castle-festive", "dragon", "crown"]
 
 # ---- что подменяем в карте ----

@@ -195,7 +195,7 @@
 
   var LAYOUTS = {
     portrait: {
-      ar: [900, 1500],
+      ar: [900, 1500], bg: "map-background",
       pos: [{left:37, top:82, width:56}, {left:70, top:67, width:50},
             {left:33, top:51, width:52}, {left:57, top:29, width:56}],
       trails: ["M330 1230 C 420 1170, 560 1130, 630 1010",
@@ -203,7 +203,8 @@
                "M300 760 C 360 640, 470 560, 510 430"]
     },
     landscape: {
-      ar: [1600, 900],
+      /* своё небо: вертикальное, растянутое на широкий экран, заметно мылилось */
+      ar: [1600, 900], bg: "map-background-wide",
       pos: [{left:16, top:72, width:26}, {left:38, top:45, width:24},
             {left:62, top:71, width:25}, {left:86, top:36, width:27}],
       trails: ["M300 610 C 400 545, 490 500, 585 468",
@@ -221,7 +222,6 @@
   var hintEl = document.getElementById("hint");
   var donePanel = document.getElementById("donePanel");
 
-  stage.style.backgroundImage = "url('" + asset("map-background") + "')";
 
   /* ---------- прогресс ---------- */
   function readJourney(){
@@ -345,6 +345,7 @@
     root.style.setProperty("--ar-w", L.ar[0]);
     root.style.setProperty("--ar-h", L.ar[1]);
     document.getElementById("trails").setAttribute("viewBox", "0 0 " + L.ar[0] + " " + L.ar[1]);
+    stage.style.backgroundImage = "url('" + asset(L.bg) + "')";
     ISLANDS.forEach(function(item, i){
       var p = L.pos[i], btn = nodes[item.n].btn;
       btn.style.left = p.left + "%";

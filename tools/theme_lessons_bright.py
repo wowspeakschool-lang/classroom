@@ -12,12 +12,15 @@ import base64, os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LESSONS = os.path.join(ROOT, "lessons", "wowspeak-mini")
-SKY = os.path.join(ROOT, "assets", "map", "web", "map-background.webp")
+WEB = os.path.join(ROOT, "assets", "map", "web")
+SKY_TALL = os.path.join(WEB, "map-background.webp")    # телефон, планшет в портрете
+SKY_WIDE = os.path.join(WEB, "map-background-wide.webp")  # ноутбук, альбомная ориентация
 MARKER = "/* --- яркая тема «Волшебная страна» --- */"
 
 
 def css():
-    sky = base64.b64encode(open(SKY, "rb").read()).decode()
+    tall = base64.b64encode(open(SKY_TALL, "rb").read()).decode()
+    wide = base64.b64encode(open(SKY_WIDE, "rb").read()).decode()
     return MARKER + """
 :root{
   --accent:#e08a2b;
@@ -28,10 +31,15 @@ def css():
 }
 
 /* небо карты за содержимым; отдельный слой, а не background-attachment:fixed —
-   тот на телефонах дёргается при прокрутке */
+   тот на телефонах дёргается при прокрутке.
+   Два файла: вертикальное небо растянутое на ноутбук заметно мылилось, поэтому
+   для широких экранов лежит отдельная горизонтальная картинка в родном размере. */
 body::before{
   content:""; position:fixed; inset:0; z-index:-1;
   background:url("data:image/webp;base64,%s") center top/cover no-repeat;
+}
+@media (min-aspect-ratio: 11/10){
+  body::before{ background-image:url("data:image/webp;base64,%s"); background-position:center; }
 }
 body{ background:#9fe3e0; }
 
@@ -64,15 +72,17 @@ body{ background:#9fe3e0; }
 
 .progress-bar{ background:rgba(255,255,255,.65); height:9px; border-radius:6px; }
 .progress-fill{ background:linear-gradient(90deg,#ffd469,#e08a2b); border-radius:6px; }
-""" % sky
+""" % (tall, wide)
 
 
 def patch(n):
     path = os.path.join(LESSONS, "lesson-%d.html" % n)
     s = open(path, encoding="utf-8").read()
-    if MARKER in s:
-        return "уже применено"
     assert s.count("</style>") == 1
+    if MARKER in s:
+        # блок темы всегда последний перед </style> — вырезаем и кладём заново,
+        # иначе повторный запуск молча оставлял бы старую версию оформления
+        s = s[:s.index(MARKER)] + s[s.index("</style>"):]
     s = s.replace("</style>", css() + "\n</style>", 1)
     open(path, "w", encoding="utf-8").write(s)
     return "готово (+%.0f КБ)" % (len(css()) / 1024)
