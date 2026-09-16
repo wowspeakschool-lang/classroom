@@ -1313,6 +1313,30 @@ img { max-width: 100%; }
 @keyframes fillShake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-5px);} 75%{transform:translateX(5px);} }
 .kb-toggle { display: block; margin: 14px auto 0; padding: 9px 18px; border: 1.5px dashed #b8abe0; background: transparent; color: #6a5fa0; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; }
 .kbd-hidden { display: none !important; }
+
+/* --- адаптация под большие экраны --- */
+@media (min-width: 900px) and (min-height: 640px) {
+  #app {
+    display: flex;
+    flex-direction: column;
+  }
+  #app > header { flex: 0 0 auto; }
+
+  /* Резерв высоты под контент на больших экранах не нужен: он оставлял пустоту
+     снизу и съедал место, из-за которого центрирование не срабатывало вовсе. */
+  #app main { min-height: 0; }
+
+  /* Большой нижний отступ нужен только когда учитель закреплён в углу.
+     В фазе рассказа он стоит в потоке и ничего не перекрывает. */
+  #app:has(#teacher-widget.intro-mode) { padding-bottom: 56px; }
+
+  /* В фазе рассказа учитель стоит в потоке: поднимаем пару «учитель + контент»
+     к центру. В фазе задания учитель закреплён в углу и из потока выпадает,
+     поэтому центрируем один контент. */
+  #teacher-widget.intro-mode { margin-top: auto; }
+  #teacher-widget:not(.intro-mode) ~ #content { margin-top: auto; }
+  #content { margin-bottom: auto; }
+}
 </style>
 </head>
 <body>

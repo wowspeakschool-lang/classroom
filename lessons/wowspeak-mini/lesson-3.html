@@ -1394,6 +1394,30 @@ img { max-width: 100%; }
 .fix-rule-do { font-size: 17px; color: #3d2e68; margin-bottom: 14px; }
 .fix-rule-close { min-width: 150px; }
 @media (max-width: 380px){ .shadows-grid { gap: 7px; } }
+
+/* --- адаптация под большие экраны --- */
+@media (min-width: 900px) and (min-height: 640px) {
+  #app {
+    display: flex;
+    flex-direction: column;
+  }
+  #app > header { flex: 0 0 auto; }
+
+  /* Резерв высоты под контент на больших экранах не нужен: он оставлял пустоту
+     снизу и съедал место, из-за которого центрирование не срабатывало вовсе. */
+  #app main { min-height: 0; }
+
+  /* Большой нижний отступ нужен только когда учитель закреплён в углу.
+     В фазе рассказа он стоит в потоке и ничего не перекрывает. */
+  #app:has(#teacher-widget.intro-mode) { padding-bottom: 56px; }
+
+  /* В фазе рассказа учитель стоит в потоке: поднимаем пару «учитель + контент»
+     к центру. В фазе задания учитель закреплён в углу и из потока выпадает,
+     поэтому центрируем один контент. */
+  #teacher-widget.intro-mode { margin-top: auto; }
+  #teacher-widget:not(.intro-mode) ~ #content { margin-top: auto; }
+  #content { margin-bottom: auto; }
+}
 </style>
 </head>
 <body>
