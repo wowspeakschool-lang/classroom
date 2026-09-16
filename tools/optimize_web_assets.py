@@ -29,8 +29,29 @@ PLAN = {
 }
 
 
+def lesson_skies():
+    """Фон уроков — только небо, без моря.
+
+    В полном небе у горизонта есть светлая полоса. За содержимым урока она
+    попадала ровно под кнопку и читалась как белая линия во всю ширину экрана.
+    Море уместно на карте, а под текстом нужен ровный фон.
+    """
+    for src_name, dst_name, keep in (("map-background-wide", "sky-lesson-wide", 0.62),
+                                     ("map-background", "sky-lesson-tall", 0.58)):
+        im = Image.open(os.path.join(SRC, src_name + ".png")).convert("RGB")
+        im = im.crop((0, 0, im.width, int(im.height * keep)))
+        width = 2304 if "wide" in dst_name else 1024
+        if im.width != width:
+            im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
+            im = im.filter(ImageFilter.UnsharpMask(radius=1.6, percent=55, threshold=2))
+        dst = os.path.join(OUT, dst_name + ".webp")
+        im.save(dst, "WEBP", quality=84, method=6)
+        print("%-26s %s -> %4.0f КБ" % (dst_name, im.size, os.path.getsize(dst) / 1024))
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
+    lesson_skies()
     before = after = 0
     for name, (width, q) in PLAN.items():
         src = os.path.join(SRC, name + ".png")

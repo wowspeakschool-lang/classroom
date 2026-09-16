@@ -134,8 +134,9 @@ def build():
         for old, new in ((DONE_OLD, DONE_NEW), (BACK_OLD, BACK_NEW)):
             assert src.count(old) == 1, "не найдено в уроке %d: %s" % (n, old[:40])
             src = src.replace(old, new, 1)
-        # единственный </script> урока экранируем, иначе он закроет наш контейнер
-        assert src.count("</script>") == 1
+        # все закрывающие теги скриптов урока экранируем, иначе первый же
+        # закроет наш контейнер (в уроке их может быть несколько)
+        assert src.count("</script>") >= 1
         src = src.replace("</script>", "<\\/script>")
         blobs.append('<script type="text/plain" id="lesson-%d">%s</script>' % (n, src))
 

@@ -13,8 +13,8 @@ import base64, os
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LESSONS = os.path.join(ROOT, "lessons", "wowspeak-mini")
 WEB = os.path.join(ROOT, "assets", "map", "web")
-SKY_TALL = os.path.join(WEB, "map-background.webp")    # телефон, планшет в портрете
-SKY_WIDE = os.path.join(WEB, "map-background-wide.webp")  # ноутбук, альбомная ориентация
+SKY_TALL = os.path.join(WEB, "sky-lesson-tall.webp")   # телефон, планшет в портрете
+SKY_WIDE = os.path.join(WEB, "sky-lesson-wide.webp")   # ноутбук, альбомная ориентация
 MARKER = "/* --- яркая тема «Волшебная страна» --- */"
 
 
@@ -30,18 +30,23 @@ def css():
   --shadow-lg:0 16px 44px rgba(61,46,104,.24);
 }
 
-/* небо карты за содержимым; отдельный слой, а не background-attachment:fixed —
-   тот на телефонах дёргается при прокрутке.
-   Два файла: вертикальное небо растянутое на ноутбук заметно мылилось, поэтому
-   для широких экранов лежит отдельная горизонтальная картинка в родном размере. */
-body::before{
-  content:""; position:fixed; inset:0; z-index:-1;
-  background:url("data:image/webp;base64,%s") center top/cover no-repeat;
+/* Небо уроков — та же картинка, что на карте, но без моря: полоса горизонта
+   под текстом смотрелась чужеродно. Вешаем на страницу, а не отдельным слоем. */
+html{
+  background:#5fd0e8 url("data:image/webp;base64,%s") center top/cover no-repeat fixed;
+  min-height:100%%;
 }
 @media (min-aspect-ratio: 11/10){
-  body::before{ background-image:url("data:image/webp;base64,%s"); background-position:center; }
+  html{ background-image:url("data:image/webp;base64,%s"); background-position:center; }
 }
-body{ background:#9fe3e0; }
+body{ background:transparent; }
+
+/* Под кнопкой «Дальше» в исходной вёрстке лежит белая подложка шириной 100vw
+   (.continue-area::before). На бледном фоне её не было видно, на ярком небе
+   она резала экран белой полосой во всю ширину. Кнопки контрастные сами. */
+.continue-area::before, .intro-button-area::before, .l2-check::before, .l2-sticky::before{
+  display:none !important;
+}
 
 /* шапка и карточки — белые, объёмные, с крупными скруглениями */
 #app > header{
