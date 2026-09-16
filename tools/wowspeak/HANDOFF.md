@@ -47,8 +47,11 @@ e.g. `Speaking Clubs 10-12 Beginners What autumn smells like.pptx`
 - **STEP 4** — build all 4 decks (icons + video link + games), run `wowspeak_qa.py`, deliver
   the files in the chat. **No WordWall columns any more** — the games are in the deck.
 
-Use GPT economically: one combined sheet per age group, reuse crops across a theme's decks,
-regenerate only a genuinely unusable icon.
+Use GPT economically: **`quality='medium'` by default** (a quarter of the price; on a ~4 cm
+lesson tile the difference against `high` is barely visible), **one sheet for the whole theme**
+covering every version's words, reuse the crops across all four decks, and fix a crooked icon
+by cropping again - re-generating one icon costs nearly as much as a whole sheet. Go to `high`
+only when a medium sheet genuinely comes out wrong.
 
 ## 3. THE DECK FORMAT
 `build(cfg, out)` renders, in lesson order:

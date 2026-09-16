@@ -35,8 +35,16 @@ def sheet_prompt(words,extra=''):
     lst='; '.join(f'{i+1}) {w}' for i,w in enumerate(words))
     return f"{SHEET_RULES} Draw: {lst}. {STYLE} {extra}".strip()
 
-def gen_sheet(words,out,extra='',size='1536x1024',quality='high',model='gpt-image-1',prompt=None):
+def gen_sheet(words,out,extra='',size='1536x1024',quality='medium',model='gpt-image-1',prompt=None):
     """Generate one icon sheet straight through the OpenAI API (OPENAI_API_KEY).
+
+    quality='medium' is the default: on a lesson card the icon lives in a tile of
+    about 4 cm and the difference against 'high' is barely there, while the sheet
+    costs a quarter as much. Go up to 'high' only when a medium sheet actually
+    comes out wrong - and remember that re-running a single icon costs nearly as
+    much as a whole sheet, which is why everything goes on ONE sheet and a
+    crooked crop is fixed by cropping again, not by generating again.
+
     background='opaque' on purpose: the cropper and the white cards expect a
     white background, transparency eats the white parts of the characters."""
     key=os.environ['OPENAI_API_KEY']
