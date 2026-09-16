@@ -171,6 +171,11 @@
   var STORAGE_KEY = "wowspeak_journey";
   var WEB = "assets/map/web/";
 
+  /* Две точки, которые подменяет сборщик единого файла (tools/build_single_file.py):
+     там картинки лежат data-URI прямо в странице, а урок открывается в iframe. */
+  function asset(name){ return WEB + name + ".webp"; }
+  function openLesson(item){ location.href = item.lesson; }
+
   /* Острова снизу вверх: остров 1 внизу, Замок наверху.
      left/top — центр острова в процентах сцены, width — доля ширины сцены. */
   var ISLANDS = [
@@ -190,7 +195,7 @@
   var hintEl = document.getElementById("hint");
   var donePanel = document.getElementById("donePanel");
 
-  stage.style.backgroundImage = "url('" + WEB + "map-background.webp')";
+  stage.style.backgroundImage = "url('" + asset("map-background") + "')";
 
   /* ---------- прогресс ---------- */
   function readJourney(){
@@ -247,7 +252,7 @@
     btn.type = "button";
 
     var img = document.createElement("img");
-    img.src = WEB + item.img + ".webp";
+    img.src = asset(item.img);
     img.alt = "";
     btn.appendChild(img);
 
@@ -313,8 +318,8 @@
   var finale = document.createElement("div");
   finale.className = "finale";
   finale.innerHTML =
-    '<img class="dragon" src="' + WEB + 'dragon.webp" alt="Дракон">' +
-    '<img class="crown" src="' + WEB + 'crown.webp" alt="Корона">';
+    '<img class="dragon" src="' + asset("dragon") + '" alt="Дракон">' +
+    '<img class="crown" src="' + asset("crown") + '" alt="Корона">';
   stage.appendChild(finale);
 
   /* ---------- отрисовка состояния ---------- */
@@ -336,7 +341,7 @@
     });
 
     /* Замок в праздничном виде, когда собраны все четыре части */
-    nodes[4].img.src = WEB + (done === 4 ? "island-4-castle-festive" : "island-4-castle-closed") + ".webp";
+    nodes[4].img.src = asset(done === 4 ? "island-4-castle-festive" : "island-4-castle-closed");
 
     for(var t=1;t<=3;t++){
       var trail = document.getElementById("trail-" + t);
@@ -401,7 +406,7 @@
       showHint("Ключик от этого острова ждёт на «" + ISLANDS[item.n-2].name + "» 🔑");
       return;
     }
-    location.href = item.lesson;
+    openLesson(item);
   }
 
   /* ---------- первый показ ---------- */
