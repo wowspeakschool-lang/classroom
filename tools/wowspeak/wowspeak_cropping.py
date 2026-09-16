@@ -26,8 +26,13 @@ STYLE=("Style: bright, vivid, saturated children's cartoon illustration - playfu
        "together, not a single muted earth-tone scheme. High colour contrast between neighbouring shapes, "
        "cheerful sunny mood, soft rounded friendly shapes. "
        "Avoid beige, brown, ochre and washed-out desaturated colours.")
-SHEET_RULES=("One sheet, up to 10 separate drawings, evenly spread out with LARGE WHITE GAPS between them. "
-             "Plain white background. ABSOLUTELY NO text, no letters, no captions, no labels anywhere.")
+# Never say "grid", "cells" or "panels" here: the model takes it literally and draws the
+# dividing lines, which glues every drawing into one blob and the cropper can find nothing.
+# Ask for empty white space instead, and forbid frames outright.
+SHEET_RULES=("One sheet, up to 10 separate drawings, spread out in rows with LARGE EMPTY WHITE GAPS between "
+             "them - at least the width of a whole drawing. The drawings must never touch, overlap or be "
+             "connected. Plain white background, no frames, no boxes, no borders, no dividing lines, no "
+             "panels. ABSOLUTELY NO text, no letters, no captions, no labels anywhere.")
 
 def sheet_prompt(words,extra=''):
     """Describe abstract words with a concrete scene, and keep neighbouring
