@@ -18,9 +18,9 @@ PLAN = {
     "island-3-friends": (820, 82), "island-4-castle-closed": (820, 82),
     "island-4-castle-festive": (820, 82),
     "map-background": (1000, 78),
-    "map-piece-1-tl": (420, 82), "map-piece-2-tr": (420, 82),
-    "map-piece-3-bl": (420, 82), "map-piece-4-br": (420, 82),
-    "parchment-reassembled": (760, 82),
+    # Обрывки пергамента и собранная карта на странице больше не нужны:
+    # по решению Анны наградой стал ключик от следующего острова, а не часть карты.
+    # Мастера PNG и tools/cut_parchment.py остаются на случай возврата к этой идее.
     "dragon": (270, 88), "crown": (250, 88),
 }
 
