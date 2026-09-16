@@ -34,6 +34,13 @@ Beginners = basic, very supported. Advanced = a real conversation club.
 For 13+ Beginners keep Beginner language but pick teen-relevant items (the two Beginners
 usually share ~4 words + 2 teen-swapped).
 
+**Beginners vocabulary: keep it to ONE part of speech, two at most.** Six nouns, or six
+adjectives - not a mix of noun + adjective + verb. A single word class drops straight into one
+sentence frame ("I don't like talking about ___", "It's ___"), and building sentences is the
+whole point of the Beginners deck. If a theme is abstract, pick the concrete side of it for
+Beginners (for "Small talk I hate": the *topics* people chat about, as nouns) and leave the
+abstract words to Advanced.
+
 **Filename format (exact):** `Speaking Clubs [age+level] [full theme name].pptx`
 e.g. `Speaking Clubs 10-12 Beginners What autumn smells like.pptx`
 
