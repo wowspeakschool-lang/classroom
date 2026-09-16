@@ -62,3 +62,44 @@ if __name__ == "__main__":
     with ThreadPoolExecutor(max_workers=2) as pool:
         for k, msg in pool.map(generate, keys):
             print(k, "->", msg)
+
+
+# ── Состояния лица ────────────────────────────────────────────────────────────
+# Делаются правкой базового портрета, а не генерацией с нуля: иначе вместо одного
+# персонажа в трёх настроениях получатся три разных человека.
+KEEP = ("Keep this exact character completely unchanged: same face and features, same wavy "
+        "chestnut hair, same violet and turquoise cloak with golden trim, same golden circlet "
+        "with a star, same art style, same pose, same framing and scale, same lighting, "
+        "same transparent background. ")
+
+EMOTIONS = {
+    "neutral": KEEP + ("Change only her expression: calm, kind and attentive, with a gentle "
+                       "closed-mouth smile, looking warmly at the viewer."),
+    "excited": KEEP + ("Change only her expression: delighted and excited, a big happy open "
+                       "smile, bright wide eyes, eyebrows raised with joy, a few extra golden "
+                       "sparkles around her."),
+}
+
+
+def edit_emotion(name, base="teacher-b-guardian"):
+    src = os.path.join(OUT, base + ".png")
+    fields = {"model": "gpt-image-1", "prompt": EMOTIONS[name], "size": "1024x1024",
+              "quality": QUALITY, "background": "transparent", "input_fidelity": "high", "n": "1"}
+    boundary = "----wowspeak" + base64.b16encode(os.urandom(8)).decode()
+    body = b""
+    for k, v in fields.items():
+        body += ("--%s\r\nContent-Disposition: form-data; name=\"%s\"\r\n\r\n%s\r\n"
+                 % (boundary, k, v)).encode()
+    body += ("--%s\r\nContent-Disposition: form-data; name=\"image\"; filename=\"base.png\"\r\n"
+             "Content-Type: image/png\r\n\r\n" % boundary).encode()
+    body += open(src, "rb").read() + ("\r\n--%s--\r\n" % boundary).encode()
+    req = urllib.request.Request("https://api.openai.com/v1/images/edits", data=body,
+        headers={"Authorization": "Bearer " + os.environ["OPENAI_API_KEY"],
+                 "Content-Type": "multipart/form-data; boundary=" + boundary})
+    try:
+        r = json.load(urllib.request.urlopen(req, timeout=900))
+    except urllib.error.HTTPError as e:
+        return name, "ОШИБКА %s: %s" % (e.code, e.read().decode()[:200])
+    path = os.path.join(OUT, "teacher-" + name + ".png")
+    open(path, "wb").write(base64.b64decode(r["data"][0]["b64_json"]))
+    return name, "готово (%.0f КБ)" % (os.path.getsize(path) / 1024)
