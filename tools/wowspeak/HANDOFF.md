@@ -62,6 +62,7 @@ regenerate only a genuinely unusable icon.
 | **New Words** | 6 icon cards **(the only slide with captions)** | 6 word + definition cards |
 | Talk with the words | rotating mini-activity + support frame | reusable "Useful language for discussion" |
 | **Games (N slides)** | picture quiz, one round per word + "what's missing" | word quiz (definition → word) + board |
+| | *on quiz and board slides a stray click is swallowed by an invisible catcher; the small "→" bottom-left is the way on* | |
 | Video | embedded file or a gold link button + 2-3 discussion Qs | same |
 | Main speaking | sentence frames | rotating format (Debate / Ranking / Discuss & Pitch / Role-play / Would-you-rather / Diamond-9) |
 | Thank you | | |
@@ -73,6 +74,10 @@ regenerate only a genuinely unusable icon.
          {'type':'missing','bg':'D4F5E6'},       # Beginners: cards really disappear
          {'type':'board','bg':'D4ECFF','questions':[...]}]   # Advanced: number → question
 ```
+`{'type':'missing'}` builds one slide per step by default; `'anim':True` builds the single
+animated slide instead (`<p:timing>`, disappear on click) — same thing on screen, but the
+animated one can only be verified in real PowerPoint.
+
 Quiz mode is picked from the level: Beginners get pictures ("Which one is "rain"?"),
 Advanced gets words ("Which word means: "…"?"). Override with `'mode':'picture'|'word'`.
 The games obey the 10 rules in `REGLAMENT_ADDENDUM.md §4` — read them before touching

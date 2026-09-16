@@ -9,7 +9,8 @@ Checks the things that actually broke before:
     the SAME link (otherwise the centre of the card is dead);
   * no card is painted in the slide's own background colour;
   * the feedback screens sit at the END of the file;
-  * click-advance is off on the quiz and board slides.
+  * the quiz and board slides carry the click catcher, so a stray click does not
+    skip the answer, and a '→' is there to move on.
 Animations themselves can only be checked in real PowerPoint - LibreOffice
 renders a PDF without playing them.
 """
@@ -25,6 +26,12 @@ def _bg(s):
 def _fill(sh):
     try: return str(sh.fill.fore_color.rgb)
     except Exception: return ''
+def _noclick(s):
+    """True when the slide carries the invisible 'no action' click catcher."""
+    for h in s._element.findall('.//'+qn('a:hlinkClick')):
+        if (h.get('action') or '').startswith('ppaction://noaction'): return True
+    return False
+
 def _target(sh):
     try: return sh.click_action.target_slide
     except Exception: return None
@@ -35,7 +42,7 @@ def scan(path):
     for i,s in enumerate(sl,1):
         x=s._element
         out['timing']+=len(x.findall(qn('p:timing')))
-        out['transition']+=len(x.findall(qn('p:transition')))
+        out['transition']+=1 if _noclick(s) else 0
         out['links']+=len(x.findall('.//'+qn('a:hlinkClick')))
         bg=_bg(s)
         if bg in (GREEN,AMBER): out['service'].append(i)
@@ -58,7 +65,7 @@ def scan(path):
         if greens or ambers:
             if not greens:
                 out['problems'].append(f'slide {i}: quiz round without a correct answer')
-            if not x.findall(qn('p:transition')):
+            if not _noclick(s):
                 out['problems'].append(f'slide {i}: quiz round without no_click_advance()')
     if out['service'] and out.get('bye') and min(out['service'])<out['bye']:
         out['problems'].append('feedback screens sit inside the lesson (finish() not called?)')

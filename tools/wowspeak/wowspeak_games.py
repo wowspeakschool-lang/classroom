@@ -21,7 +21,8 @@ THE RULES (each one was paid for - do not break them)
     same question again. Counter 1/6 ... 6/6 in the corner, final slide at the end.
  4. The correct answer never walks 1-2-3-4: its position is (k*3) % nopt.
  5. A click past a button must not flip the slide -> no_click_advance() on the
-    quiz and on the board. The teacher moves on with the arrow key.
+    quiz and on the board. It also puts a small '→' in the corner, so the teacher
+    is never stuck on a slide where clicks do nothing.
  6. Service screens go to the END of the file via finish(prs, helpers).
  7. Feedback screens come back on a click ANYWHERE (link_whole_slide).
  8. A card must never be the colour of the slide background -> pal(bg, i),
@@ -104,27 +105,48 @@ def _bg_of(slide,default=B.WHITE):
     try: return str(slide.background.fill.fore_color.rgb)
     except Exception: return default
 
-def link_whole_slide(slide,target,bg=None):
-    """Whole slide becomes one big button (rule 7). The rectangle is pushed to
-    the back and painted in the background colour, so it is invisible but
-    clickable everywhere - a no-fill shape only reacts on its rim."""
+def _backdrop(slide,bg=None):
+    """A full-slide rectangle in the background colour, pushed to the very back:
+    invisible, but it catches every click that misses a button."""
     sh=slide.shapes.add_shape(MSO_SHAPE.RECTANGLE,0,0,B.Emu(12192000),B.Emu(6858000))
     sh.fill.solid(); sh.fill.fore_color.rgb=B.C(bg or _bg_of(slide))
     sh.line.fill.background(); sh.shadow.inherit=False
-    sh.click_action.target_slide=target
-    el=sh._element; tree=el.getparent(); tree.remove(el); tree.insert(2,el)  # to the back
+    el=sh._element; tree=el.getparent(); tree.remove(el); tree.insert(2,el)
     return sh
 
-def no_click_advance(slide):
-    """Rule 5: a click past a button must not flip the slide. Animations still
-    run on click - only the slide advance is switched off. Teacher uses the arrow."""
-    sld=slide._element
-    for t in sld.findall(qn('p:transition')): sld.remove(t)
-    tr=parse_xml('<p:transition xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" advClick="0"/>')
-    tim=sld.find(qn('p:timing'))
-    if tim is not None: tim.addprevious(tr)
-    else: sld.append(tr)
-    return tr
+def _action(sh,action):
+    """Write a built-in PowerPoint click action (noaction / nextslide)."""
+    cNvPr=sh._element._nvXxPr.cNvPr
+    for h in cNvPr.findall(qn('a:hlinkClick')): cNvPr.remove(h)
+    hl=cNvPr.makeelement(qn('a:hlinkClick'),{qn('r:id'):'','action':action})
+    ext=cNvPr.find(qn('a:extLst'))
+    ext.addprevious(hl) if ext is not None else cNvPr.append(hl)
+    return sh
+
+def link_whole_slide(slide,target,bg=None):
+    """Rule 7: the whole slide becomes one big button. A no-fill shape only reacts
+    on its rim, so the catcher is painted in the background colour instead."""
+    sh=_backdrop(slide,bg); sh.click_action.target_slide=target
+    return sh
+
+def next_arrow(slide,x=0.42,y=6.78,w=0.8,h=0.5):
+    """A small '→' in the corner that fires PowerPoint's built-in Next Slide action.
+    It needs no target, so it keeps working after finish() reorders the file - and
+    it gives the teacher a way forward on a slide where clicks are switched off."""
+    sh=B.card(slide,x,y,w,h,fill=B.WHITE,rad=0.4,sh=False)
+    card_text(sh,'→',size=18,col='8A7AA8',font=B.BF)
+    return _action(sh,'ppaction://hlinkshowjump?jump=nextslide')
+
+def no_click_advance(slide,arrow=True,bg=None):
+    """Rule 5: a click past a button must not flip the slide.
+
+    Done with an invisible click-catcher carrying PowerPoint's 'no action', not
+    with <p:transition advClick="0">: the transition switch also kills the clicks
+    the teacher expects to work, and that reads as 'the game slide is stuck'.
+    The '→' in the corner is the way on."""
+    sh=_action(_backdrop(slide,bg),'ppaction://noaction')
+    if arrow: next_arrow(slide)
+    return sh
 
 # ------------------------------------------------------- click animations
 _P='http://schemas.openxmlformats.org/presentationml/2006/main'
@@ -248,28 +270,49 @@ def g_quiz(prs,bg,items,helpers=None,**kw):
     """Same quiz on emoji instead of icons (items = [(word, '🐶')])."""
     return g_quiz_series(prs,bg,items,helpers,**kw)
 
-def g_missing_pics(prs,bg,items,helpers=None,title='👀 What is missing?',order=None,rounds=None):
-    """The card really disappears (PowerPoint 'Disappear on click').
-    items = [(word, media)]. One click = one card gone; the class names it."""
-    helpers=[] if helpers is None else helpers
-    s=B.new_slide(prs,bg)
-    _head(s,title,bg)
-    B.text(s,0.9,1.6,11.5,0.6,[[('Look and remember. Then say what disappeared!',18,'5A4A7A',True,B.TF)]],align=PP_ALIGN.CENTER)
+def _missing_board(prs,bg,items,title,subtitle,hide=()):
+    """One 'what's missing' screen. hide = indexes of the cards already gone."""
+    s=B.new_slide(prs,bg); _head(s,title,bg)
+    B.text(s,0.9,1.6,11.5,0.6,[[(subtitle,18,'5A4A7A',True,B.TF)]],align=PP_ALIGN.CENTER)
     n=len(items); cols=3 if n>4 else n
     cw=min(3.3,(11.5-(cols-1)*0.4)/cols); gap=0.4; rows=(n+cols-1)//cols
     ch=min(2.2,(4.45-(rows-1)*0.3)/rows)          # keep clear of the logo line
     gx=(B.SLIDE_W-(cols*cw+(cols-1)*gap))/2; gy=2.35
     groups=[]
     for i,(word,media) in enumerate(items):
+        if i in hide: groups.append([]); continue
         r=i//cols; c=i%cols; x=gx+c*(cw+gap); y=gy+r*(ch+0.3)
-        sh=B.card(s,x,y,cw,ch,fill=pal(bg,i))        # rule 8
-        groups.append([sh]+media_on(s,sh,media,size=66))        # rule 1: one click
-    seq=order if order is not None else [(i*3+1)%n for i in range(n)]
-    seen=[]; [seen.append(i) for i in seq if i not in seen and 0<=i<n]
-    seen+=[i for i in range(n) if i not in seen]
-    if rounds: seen=seen[:rounds]
-    animate(s,[('exit',groups[i]) for i in seen])
+        sh=B.card(s,x,y,cw,ch,fill=pal(bg,i))     # rule 8
+        groups.append([sh]+media_on(s,sh,media,size=66))   # rule 1: one click
     B.logo(s)
+    return s,groups
+
+def g_missing_pics(prs,bg,items,helpers=None,title='👀 What is missing?',order=None,
+                   rounds=None,anim=False):
+    """The card really disappears. items = [(word, media)].
+
+    anim=False (default): every step is its own slide, so it can only work -
+    a click or the arrow key takes the class to the next screen.
+    anim=True: one slide with PowerPoint 'Disappear on click' in <p:timing>.
+    Same thing on screen; the animated version is the one to test in PowerPoint."""
+    helpers=[] if helpers is None else helpers
+    n=len(items)
+    seq=list(order) if order is not None else [(i*3+1)%n for i in range(n)]
+    seen=[]
+    for i in seq:
+        if 0<=i<n and i not in seen: seen.append(i)
+    seen+=[i for i in range(n) if i not in seen]
+    seen=seen[:rounds or min(n,4)]
+    look='Look and remember. Then say what disappeared!'
+    if anim:
+        s,groups=_missing_board(prs,bg,items,title,look)
+        animate(s,[('exit',groups[i]) for i in seen])
+        return helpers
+    _missing_board(prs,bg,items,title,look)
+    gone=[]
+    for i in seen:
+        gone.append(i)
+        _missing_board(prs,bg,items,title,'What is missing? Say the word!',hide=set(gone))
     return helpers
 
 def g_missing_anim(prs,bg,items,helpers=None,**kw):
@@ -316,7 +359,7 @@ def g_board(prs,bg,questions,helpers=None,title='🎲 Choose a number!',back='�
         card=B.card(qs,1.3,2.0,10.73,3.0,fill=B.WHITE,rad=0.1)
         card_text(card,q,size=26,col=B.INK,bold=True)
         btn(qs,4.9,5.4,3.53,0.85,txt=back,fill=pal(bg,i),size=17,target=board)
-        no_click_advance(qs)                              # rule 5
+        no_click_advance(qs,arrow=False)                  # rule 5 ('⬅️ Back' is the way out)
     no_click_advance(board)
     return helpers
 
@@ -333,7 +376,7 @@ def play(prs,spec,cfg):
     if t=='missing':
         if mode=='word':
             emo=spec.get('emoji',{}); items=[(w,emo.get(w,'💬')) for w,_ in items]
-        return g_missing_pics(prs,bg,items,**kw('title','order','rounds'))
+        return g_missing_pics(prs,bg,items,**kw('title','order','rounds','anim'))
     if t=='reveal':
         return g_reveal(prs,bg,spec.get('lines') or [w for w,_ in items],**kw('title','subtitle'))
     if t=='board':
