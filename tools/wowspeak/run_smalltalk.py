@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 """
 Тема «Small talk I hate» — 4 деки. Запуск: python3 run_smalltalk.py final
-Иконки ждём в icons/smalltalk/: weather school food family pets holidays music plans
+Иконки: icons/smalltalk/1012/ (стиль младших) и icons/smalltalk/13/ (стиль старших).
 """
 import os, sys
 sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 from wowspeak_builder import build
 
-ICO=os.path.join(os.path.dirname(os.path.abspath(__file__)),'icons','smalltalk')
+ICO=os.path.join(os.path.dirname(os.path.abspath(__file__)),'icons','smalltalk')  # + подпапка возраста
 VID='https://youtu.be/9X4mQFDFutc'           # одно видео на все четыре деки
 THEME='Small talk I hate'
 EMO=['🙃','💬','😬',['💬','🙃','😬','🗣️','🤐','😑']]
@@ -40,12 +40,12 @@ def notes(url,s5,s6,s9):
                                             'Открываются сами по клику, листать их не надо.'},
     ]
 
-def beg(sub,words,items):
+def beg(sub,words,items,ico):
     return {'level':'beg','theme':THEME,'emoji':EMO,'title_bg':'EDE4FA','subtitle':sub,
         'mood_q':'Do you like talking to people today? 💬',
         'moods':[('😄','Great'),('🙂','Good'),('😐','OK'),('😬','Awkward'),('😴','Tired')],
         'lead_in':LEAD,'video_url':VID,'video_qs':VQ,'vocab_title':'💬 New words! 🙃',
-        'vocab':[(w,f'{ICO}/{w}.png') for w in words],
+        'vocab':[(w,os.path.join(ICO,ico,f'{w}.png')) for w in words],
         'games':[{'type':'quiz','bg':'FFF7D4'},{'type':'missing','bg':'D4F5E6'}],
         'mini':{'title':'💬 This or That!','frame':'I prefer talking about ___','items':items},
         'speak_title':'🗣️ Topics I like and hate! 🙃','frame_hint':'Use the sentences to talk about your topics!',
@@ -98,7 +98,7 @@ BOARD13=['What question makes you cringe every time?','Talk about the weather fo
          'Is polite small talk a kind of lying?','When did small talk turn into a real conversation for you?']
 
 VERSIONS=[
-  ('10-12 Beginners',beg('Speaking Club · 10-12 Beginners',W1012,IT1012),
+  ('10-12 Beginners',beg('Speaking Club · 10-12 Beginners',W1012,IT1012,'1012'),
       'Разбери новые слова по картинкам (единственный слайд с подписями).',
       'Рамка "This or That": ученики выбирают тему и объясняют почему.',
       'Beginners рассказывают про любимые и нелюбимые темы по рамкам.'),
@@ -106,7 +106,7 @@ VERSIONS=[
       'Разбери слова и определения, проси пример в предложении.',
       'Разбери "Useful language for discussion" - фразы нужны весь урок.',
       'MAIN SPEAKING (Debate): спорим, нужен ли small talk. Требуй аргументы и встречные вопросы.'),
-  ('13+ Beginners',beg('Speaking Club · 13+ Beginners',W13,IT13),
+  ('13+ Beginners',beg('Speaking Club · 13+ Beginners',W13,IT13,'13'),
       'Разбери новые слова по картинкам (единственный слайд с подписями).',
       'Рамка "This or That": ученики выбирают тему и объясняют почему.',
       'Beginners рассказывают про любимые и нелюбимые темы по рамкам.'),

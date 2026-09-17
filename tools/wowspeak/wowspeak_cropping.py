@@ -130,11 +130,21 @@ def crop_grid_auto(path,names,outdir,f=3,thr=26,min_area=90,gap=None,pad=10,row_
     small=full[:sh*f,:sw*f].reshape(sh,f,sw,f).max(axis=(1,3))
     lab,n=_label(small); boxes=_boxes(lab,n,min_area)
     if not boxes: raise RuntimeError(f'{path}: nothing found - is the sheet blank?')
+    area={k:(x1-x0)*(y1-y0) for k,(x0,y0,x1,y1) in boxes.items()}
+    def ink(g): return sum(area[k] for k in g)
     if gap is None:
-        tries=[g for g in (16,14,12,10,8,6,5,4,3,2) if len(_merge(boxes,g))==len(flat)]
-        gap=tries[0] if tries else 8
-        if verbose: print(f'{os.path.basename(path)}: gap={gap}'+('' if tries else ' (no gap gives the expected count)'))
-    clusters=_merge(boxes,gap)
+        # Smallest gap that leaves the wanted drawings standing well clear of any
+        # leftovers. Going from small to large keeps a stray raindrop from the icon
+        # above out of the family below - at a wider gap the two glue together and
+        # the drop cannot be told from the family any more.
+        gap=8
+        for g in (2,3,4,5,6,8,10,12,14,16):
+            cs=sorted(_merge(boxes,g),key=ink,reverse=True)
+            if len(cs)<len(flat): continue
+            if len(cs)==len(flat) or ink(cs[len(flat)])<0.1*ink(cs[len(flat)-1]):
+                gap=g; break
+        if verbose: print(f'{os.path.basename(path)}: gap={gap}')
+    clusters=sorted(_merge(boxes,gap),key=ink,reverse=True)[:len(flat)]   # лишнее затрётся белым
     cl=[]
     for g in clusters:
         xs0=min(boxes[k][0] for k in g); ys0=min(boxes[k][1] for k in g)
@@ -169,6 +179,33 @@ def crop_grid_auto(path,names,outdir,f=3,thr=26,min_area=90,gap=None,pad=10,row_
         Image.fromarray(arr[Y0:Y1,X0:X1]).save(out); paths.append(out)
     if verbose: print(f'  -> {len(paths)} icons in {outdir}')
     return paths
+
+def drop_specks(path,max_frac=0.05,min_gap=12,f=2,thr=26):
+    """Paint out a stray speck that rode into the crop - a raindrop from the icon
+    above, a crumb from the neighbour. Only a component that is BOTH tiny and
+    standing clearly apart goes: the raindrops under their own cloud hang a couple
+    of pixels below it and stay, a drop floating 16px above a family does not."""
+    im=Image.open(path).convert('RGB'); W,H=im.size
+    a=np.asarray(im).astype(int)
+    full=(np.abs(a-255).sum(axis=2)>thr); sh,sw=H//f,W//f
+    small=full[:sh*f,:sw*f].reshape(sh,f,sw,f).max(axis=(1,3))
+    lab,n=_label(small); boxes=_boxes(lab,n,20)
+    if len(boxes)<2: return path
+    areas={k:int((lab==k).sum()) for k in boxes}
+    tot=sum(areas.values()); main=max(areas,key=areas.get); mb=boxes[main]
+    kill=[]
+    for k,b in boxes.items():
+        if k==main or areas[k]>max_frac*tot: continue
+        dx=max(0,max(b[0],mb[0])-min(b[2],mb[2])); dy=max(0,max(b[1],mb[1])-min(b[3],mb[3]))
+        if max(dx,dy)*f>min_gap: kill.append(k)
+    if not kill: return path
+    mask=np.isin(lab,kill)
+    for sh_,ax in ((1,0),(-1,0),(0,1),(0,-1)): mask|=np.roll(np.isin(lab,kill),sh_,axis=ax)
+    big=np.repeat(np.repeat(mask,f,axis=0),f,axis=1)
+    arr=np.asarray(im).copy(); arr[:sh*f,:sw*f][big]=255
+    Image.fromarray(arr).save(path)
+    print(f'  {os.path.basename(path)}: убрано {len(kill)} чужих пятен')
+    return path
 
 def crop_grid(path,names,outdir,thr=26,pad=8):
     """LEGACY - equal columns. Kept only for old sheets; use crop_grid_auto."""
