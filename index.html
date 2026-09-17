@@ -3238,9 +3238,10 @@ function edBlockRow(b,i){
       <button class="btn sec sm" onclick="edMove(${i},-1)" title="Выше">↑</button>
       <button class="btn sec sm" onclick="edMove(${i},1)" title="Ниже">↓</button>
       <button class="btn sec sm" onclick="edDupBlock(${i})" title="Копировать">⧉</button>
+      <button class="btn sec sm" onclick="edRebuildToggle(${i})" title="Пересобрать в другой тип на тех же словах">⇄</button>
       <button class="btn sec sm" onclick="edDel(${i})" title="Удалить">🗑</button>
       <button class="btn sec sm" onclick="edInsertToggle(${i})" title="Вставить блок после этого">＋</button>
-    </div></div>${edInsertBar(i)}`;
+    </div></div>${edRebuildBar(i)}${edInsertBar(i)}`;
 }
 
 function edToggleBlock(i){
@@ -3304,6 +3305,222 @@ function edDupBlock(i){
   edRenderBlocks();
   toast('Блок скопирован');
 }
+
+// ---------- Пересборка блока в другой тип ----------
+// Слова в домашке повторяются из задания в задание: сначала карточки,
+// потом квиз, потом «соедини пары» — набор один и тот же. Набирать его
+// заново каждый раз долго, и легко разойтись в опечатках. Отсюда ⇄:
+// берём материал уже собранного блока и раскладываем в другую механику.
+let ED_REBUILD_AT = null;
+
+// Общий вид материала: { text, translation, image, audio, audio_tts }.
+// Собирается из любого блока, где есть словарный набор.
+function edWordsFrom(b){
+  const p = (b && b.payload) || {};
+  const out = [];
+  const push = o => { if(o && (o.text || o.image || o.audio || o.audio_tts)) out.push(o); };
+  if(b.type === 'flashcards'){
+    (p.cards||[]).forEach(c => push({ text:c.text||'', translation:c.translation||'',
+      image:c.image||'', audio:c.audio||'', audio_tts:c.audio_tts }));
+  } else if(b.type === 'match'){
+    // пары бывают и текстовые, и картинка ↔ слово: во втором случае
+    // слово лежит справа, а слева картинка без текста
+    (p.pairs||[]).forEach(pr => {
+      const leftText = pr.left && String(pr.left).trim();
+      push(leftText
+        ? { text:pr.left, translation:pr.right||'', image:pr.left_image||'',
+            audio:pr.left_audio||'', audio_tts:pr.left_audio_tts }
+        : { text:pr.right||'', translation:'', image:pr.left_image||pr.right_image||'',
+            audio:pr.right_audio||pr.left_audio||'', audio_tts:pr.right_audio_tts||pr.left_audio_tts });
+    });
+  } else if(b.type === 'exact_input'){
+    (p.items||[]).forEach(it => push({ text:(it.accept||[])[0]||'', translation:edStripLead(it.prompt),
+      image:it.image||'', audio:it.audio||'', audio_tts:it.audio_tts }));
+  }
+  return out;
+}
+
+// «Напиши по-английски: часы» -> «часы». Инструкция в подсказке мешает,
+// если из этого блока потом собирать карточки.
+function edStripLead(s){
+  const t = String(s || '').trim();
+  const m = t.match(/^[^:]{0,40}:\s*(.+)$/);
+  return m ? m[1].trim() : t;
+}
+
+// Чего в наборе хватает. Режим предлагаем, только если материал есть
+// у всех слов: половина набора даст блок с дырами, который потом не найдёшь.
+function edWordsHave(ws){
+  const n = ws.length, all = f => n > 0 && ws.every(f);
+  return { n,
+    text: all(w => !!w.text),
+    translation: all(w => !!w.translation),
+    image: all(w => !!w.image),
+    sound: all(w => !!(w.audio || w.audio_tts)) };
+}
+
+const ED_REBUILD_MODES = [
+  { key:'quiz:tr2w',    type:'quiz',        need:['text','translation'], label:'Квиз · перевод → слово' },
+  { key:'quiz:w2tr',    type:'quiz',        need:['text','translation'], label:'Квиз · слово → перевод' },
+  { key:'quiz:img2w',   type:'quiz',        need:['text','image'],       label:'Квиз · картинка → слово' },
+  { key:'quiz:w2img',   type:'quiz',        need:['text','image'],       label:'Квиз · слово → картинка' },
+  { key:'quiz:snd2w',   type:'quiz',        need:['text','sound'],       label:'Квиз · на слух → слово' },
+  { key:'quiz:snd2img', type:'quiz',        need:['image','sound'],      label:'Квиз · на слух → картинка' },
+  { key:'match:w-tr',   type:'match',       need:['text','translation'], label:'Соедини пары · слово ↔ перевод' },
+  { key:'match:img-w',  type:'match',       need:['text','image'],       label:'Соедини пары · картинка ↔ слово' },
+  { key:'match:snd-w',  type:'match',       need:['text','sound'],       label:'Соедини пары · звук ↔ слово' },
+  { key:'cards:full',   type:'flashcards',  need:['text','translation','image'], label:'Карточки · картинка + слово + перевод' },
+  { key:'cards:img',    type:'flashcards',  need:['text','image'],       label:'Карточки · картинка + слово' },
+  { key:'cards:tr',     type:'flashcards',  need:['text','translation'], label:'Карточки · слово + перевод' },
+  { key:'cards:snd',    type:'flashcards',  need:['text','sound'],       label:'Карточки · звук + слово' },
+  { key:'input:tr',     type:'exact_input', need:['text','translation'], label:'Впиши слово · по переводу' },
+  { key:'input:img',    type:'exact_input', need:['text','image'],       label:'Впиши слово · по картинке' }
+];
+
+const ED_REBUILD_WHY = { text:'нет слов', translation:'нет переводов', image:'нет картинок', sound:'нет озвучки' };
+
+// Отвлекающие варианты берём из того же набора, по кругу от текущего слова.
+// Правильный ответ раскладываем по позициям, иначе он всегда первый
+// и дети отвечают не глядя.
+function edRebuildOptions(ws, idx, pick){
+  const n = ws.length, right = pick(ws[idx]), d = [];
+  for(let k = 1; d.length < 3 && k < n; k++){
+    const v = pick(ws[(idx + k) % n]);
+    if(v && v !== right && d.indexOf(v) < 0) d.push(v);
+  }
+  const pos = idx % (d.length + 1);
+  return { options: d.slice(0, pos).concat([right], d.slice(pos)), correct: pos };
+}
+
+function edRebuildMake(ws, key){
+  const wrap = (o, w) => { // звук вопроса: готовый файл или пометка на синтез
+    if(w.audio) o.audio = w.audio;
+    else if(w.audio_tts) o.audio_tts = w.audio_tts;
+    return o;
+  };
+  const quiz = (qText, pickOpt, asImage, withSound) => ({
+    needs_review: false,
+    questions: ws.map((w, i) => {
+      const r = edRebuildOptions(ws, i, pickOpt);
+      const q = { q: qText(w), type:'single',
+        options: r.options.map(v => asImage ? { image:v } : { text:v }),
+        correct: [r.correct] };
+      if(withSound) wrap(q, w);
+      return q;
+    })
+  });
+
+  if(key === 'quiz:tr2w')    return quiz(w => w.translation, w => w.text, false, false);
+  if(key === 'quiz:w2tr')    return quiz(w => w.text,        w => w.translation, false, false);
+  if(key === 'quiz:img2w')   return { needs_review:false, questions: ws.map((w,i) => {
+      const r = edRebuildOptions(ws, i, x => x.text);
+      return { q:'Что на картинке?', type:'single', image:w.image,
+        options:r.options.map(v => ({ text:v })), correct:[r.correct] };
+    }) };
+  if(key === 'quiz:w2img')   return quiz(w => w.text, w => w.image, true, false);
+  if(key === 'quiz:snd2w')   return quiz(() => 'Послушай и выбери слово.', w => w.text, false, true);
+  if(key === 'quiz:snd2img') return quiz(() => 'Послушай и выбери картинку.', w => w.image, true, true);
+
+  if(key === 'match:w-tr')  return { needs_review:false, title:'Соедини слово и перевод',
+    pairs: ws.map(w => wrapPair({ left:w.text, right:w.translation }, w, 'left')) };
+  if(key === 'match:img-w') return { needs_review:false, title:'Соедини картинку и слово',
+    pairs: ws.map(w => wrapPair({ left_image:w.image, right:w.text }, w, 'right')) };
+  if(key === 'match:snd-w') return { needs_review:false, title:'Послушай и найди слово',
+    pairs: ws.map(w => wrapPair({ left:'🔊', right:w.text }, w, 'left')) };
+
+  if(key === 'cards:full') return { title:'Посмотри карточки и запомни слова',
+    cards: ws.map(w => clean({ image:w.image, text:w.text, translation:w.translation, audio:w.audio, audio_tts:w.audio_tts })) };
+  if(key === 'cards:img')  return { title:'Посмотри карточки и запомни слова',
+    cards: ws.map(w => clean({ image:w.image, text:w.text, audio:w.audio, audio_tts:w.audio_tts })) };
+  if(key === 'cards:tr')   return { title:'Посмотри карточки и запомни слова',
+    cards: ws.map(w => clean({ text:w.text, translation:w.translation, audio:w.audio, audio_tts:w.audio_tts })) };
+  if(key === 'cards:snd')  return { title:'Послушай слова и повтори',
+    cards: ws.map(w => clean({ text:w.text, audio:w.audio, audio_tts:w.audio_tts })) };
+
+  if(key === 'input:tr') return { items: ws.map(w => clean({
+    prompt:'Напиши по-английски: ' + w.translation, accept: edAcceptOf(w.text), audio_tts:w.audio_tts })) };
+  if(key === 'input:img') return { items: ws.map(w => clean({
+    prompt:'Напиши, что на картинке', image:w.image, accept: edAcceptOf(w.text), audio_tts:w.audio_tts })) };
+  return null;
+
+  function wrapPair(pr, w, side){
+    if(w.audio) pr[side + '_audio'] = w.audio;
+    else if(w.audio_tts) pr[side + '_audio_tts'] = w.audio_tts;
+    return pr;
+  }
+  function clean(o){ Object.keys(o).forEach(k => { if(o[k] === '' || o[k] == null) delete o[k]; }); return o; }
+}
+
+// Засчитываем и со строчной, и с заглавной: нормализации на платформе нет
+function edAcceptOf(t){
+  const s = String(t || '').trim();
+  if(!s) return [];
+  const cap = s.charAt(0).toUpperCase() + s.slice(1);
+  return cap === s ? [s] : [s, cap];
+}
+
+function edRebuildToggle(i){
+  ED_REBUILD_AT = (ED_REBUILD_AT === i) ? null : i;
+  ED_INSERT_AT = null;
+  edRenderBlocks();
+}
+
+function edRebuildBar(i){
+  if(ED_REBUILD_AT !== i) return '';
+  const src = EDIT.blocks[i];
+  const ws = edWordsFrom(src);
+  const have = edWordsHave(ws);
+  if(!ws.length){
+    return `<div class="block" style="padding:8px 12px; margin:-2px 0 6px; background:#fff7ed">
+      <span class="muted" style="font-size:12px">В этом блоке нет словарного набора — пересобирать нечего.</span>
+      <button class="btn sec sm" onclick="edRebuildToggle(${i})">Закрыть</button></div>`;
+  }
+  const opts = ED_REBUILD_MODES.map(m => {
+    const miss = m.need.filter(k => !have[k]);
+    const same = (m.type === src.type && m.key === edSameModeKey(src));
+    const dis = miss.length || same;
+    const why = same ? 'это тот же блок — есть кнопка ⧉'
+                     : miss.map(k => ED_REBUILD_WHY[k]).join(', ');
+    return `<option value="${m.key}"${dis ? ' disabled' : ''}>${m.label}${dis ? ' — ' + why : ''}</option>`;
+  }).join('');
+  return `<div class="block" style="padding:8px 12px; margin:-2px 0 6px; background:#f8fafc">
+    <div class="row" style="align-items:center; gap:8px; flex-wrap:wrap">
+      <span class="muted" style="font-size:12px">Слов в наборе: ${have.n}. Пересобрать в:</span>
+      <select id="edRebuildMode" style="max-width:320px">${opts}</select>
+      <button class="btn sm" onclick="edRebuildDo(${i})">Создать блок</button>
+      <button class="btn sec sm" onclick="edRebuildToggle(${i})">Отмена</button>
+    </div></div>`;
+}
+
+// Чтобы не предлагать пересобрать блок сам в себя
+function edSameModeKey(b){
+  if(b.type !== 'flashcards') return null;
+  const c = (b.payload && b.payload.cards) || [];
+  const has = f => c.length && c.every(f);
+  if(has(x => x.image) && has(x => x.translation)) return 'cards:full';
+  if(has(x => x.image)) return 'cards:img';
+  if(has(x => x.translation)) return 'cards:tr';
+  return 'cards:snd';
+}
+
+function edRebuildDo(i){
+  const sel = $('edRebuildMode');
+  const key = sel && sel.value;
+  const mode = ED_REBUILD_MODES.filter(m => m.key === key)[0];
+  if(!mode){ toast('Выбери, во что пересобрать'); return; }
+  const ws = edWordsFrom(EDIT.blocks[i]);
+  const payload = edRebuildMake(ws, key);
+  if(!payload){ toast('Не получилось пересобрать'); return; }
+  const src = EDIT.blocks[i];
+  EDIT.blocks.splice(i + 1, 0, { type: mode.type, payload,
+    audience: src.audience || 'shared', variant: src.variant || 'any', format: src.format || 'any' });
+  edShiftOpen(x => x > i ? x + 1 : x);
+  ED_REBUILD_AT = null;
+  ED_OPEN.add(i + 1);
+  edRenderBlocks();
+  toast('Собран новый блок: ' + mode.label);
+}
+
 
 function edPickAudio(cb){ pickAndUpload('audio/*', cb); }
 function edRecAudio(cb){ recordAudio(cb); }
@@ -3751,7 +3968,7 @@ function edImageDel(i, path){
   edRenderBlocks();
 }
 function edBlockEditor(b,i){
-  const ctrl=`<div style="float:right"><input type="number" min="1" max="${EDIT.blocks.length}" value="${i+1}" title="Номер блока" onchange="edMoveTo(${i}, this.value)" style="width:52px; padding:4px 6px; text-align:center; margin-right:6px"> <button class="btn sec sm" title="Свернуть" onclick="edToggleBlock(${i})">▾</button> <button class="btn sec sm" onclick="edMove(${i},-1)">↑</button> <button class="btn sec sm" onclick="edMove(${i},1)">↓</button> <button class="btn sec sm" title="Дублировать" onclick="edDupBlock(${i})">⧉</button> <button class="btn sec sm" onclick="edDel(${i})">🗑</button> <button class="btn sec sm" title="Вставить блок после этого" onclick="edInsertToggle(${i})">＋</button></div>`;
+  const ctrl=`<div style="float:right"><input type="number" min="1" max="${EDIT.blocks.length}" value="${i+1}" title="Номер блока" onchange="edMoveTo(${i}, this.value)" style="width:52px; padding:4px 6px; text-align:center; margin-right:6px"> <button class="btn sec sm" title="Свернуть" onclick="edToggleBlock(${i})">▾</button> <button class="btn sec sm" onclick="edMove(${i},-1)">↑</button> <button class="btn sec sm" onclick="edMove(${i},1)">↓</button> <button class="btn sec sm" title="Дублировать" onclick="edDupBlock(${i})">⧉</button> <button class="btn sec sm" title="Пересобрать в другой тип на тех же словах" onclick="edRebuildToggle(${i})">⇄</button> <button class="btn sec sm" onclick="edDel(${i})">🗑</button> <button class="btn sec sm" title="Вставить блок после этого" onclick="edInsertToggle(${i})">＋</button></div>`;
   const aud=b.audience||'shared', vr=b.variant||'any', fm=b.format||'any';
   const dim = crBlockVisible(b) ? '' : ' style="opacity:.45"';
   const badge = aud==='teacher' ? '<span class="pill n" style="margin-left:6px">преподаватель</span>'
