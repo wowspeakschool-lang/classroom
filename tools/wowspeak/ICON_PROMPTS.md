@@ -4,8 +4,12 @@
 (в `high` — только если medium дал брак).
 Размер: лист — `1536x1024`, одна иконка — `1024x1024`.
 
-Дальше два эталонных стиля. Меняется только список предметов в конце — блок про стиль и блок
-про раскладку копируются как есть.
+Готовые промпты текущей темы — в конце файла, их можно копировать целиком. Выше — шаблоны на
+будущие темы: меняется только список предметов, блоки про раскладку и стиль копируются как есть.
+
+Предметы описывать **конкретной сценой**, а не словом урока: не «holidays», а «a closed suitcase
+with a sun hat and a beach ball on top». Абстрактные слова следить, чтобы не выглядели одинаково
+(chill / break / tired легко сливаются).
 
 ---
 
@@ -69,14 +73,43 @@
 
 ---
 
-## Текущая тема «Small talk I hate» — готовые списки
+## Текущая тема «Small talk I hate» — готовые промпты целиком
 
-**10-12** (стиль 1): 1) a sun partly behind a cloud with raindrops; 2) a school building with a
-clock on the front; 3) a round plate with a slice of pizza and a green salad; 4) a family of four
-standing together; 5) a dog and a cat sitting side by side; 6) a closed suitcase with a sun hat
-and a beach ball on top.
+Копировать как есть, ничего не подставляя.
 
-**13+** (стиль 2): 1) a sun partly behind a cloud with raindrops; 2) a school building with a
-clock on the front; 3) a round plate with a slice of pizza and a green salad; 4) a pair of
-over-ear headphones; 5) a wall calendar with one date circled and a pencil; 6) a closed suitcase
-with a sun hat and a beach ball on top.
+### 10-12 Beginners
+
+> Six separate 3D-rendered objects on one plain white sheet, laid out in two rows of three, far
+> apart from each other. Each is one compact object. The drawings must never touch, overlap or be
+> connected — leave empty white space at least the width of a whole drawing between neighbours.
+> No frames, no boxes, no borders, no dividing lines, no panels, no background scenery.
+> ABSOLUTELY NO text, letters, captions or labels anywhere.
+> The six objects are: 1) a sun partly behind a cloud with raindrops falling; 2) a school building
+> with a clock on the front; 3) a round plate with a slice of pizza and a green salad on it;
+> 4) a family of four standing close together and smiling; 5) a dog and a cat sitting side by side;
+> 6) a closed suitcase with a sun hat and a beach ball on top.
+> Style: cute glossy 3D character-art render, the look of a modern animated film for children —
+> soft rounded friendly shapes, smooth shiny surfaces, bright saturated candy colours, even soft
+> studio lighting, gentle contact shadows, cheerful and warm, cut out on pure white.
+> Polished and appealing, never flat vector, never a 2D outline cartoon.
+
+### 13+ Beginners
+
+> Six separate 3D-rendered objects on one plain white sheet, laid out in two rows of three, far
+> apart from each other. Each is one compact object. The drawings must never touch, overlap or be
+> connected — leave empty white space at least the width of a whole drawing between neighbours.
+> No frames, no boxes, no borders, no dividing lines, no panels, no background scenery.
+> ABSOLUTELY NO text, letters, captions or labels anywhere.
+> The six objects are: 1) a sun partly behind a cloud with raindrops falling; 2) a school building
+> with a clock on the front; 3) a round plate with a slice of pizza and a green salad on it;
+> 4) a pair of modern over-ear headphones; 5) a wall calendar with one date circled and a pencil
+> beside it; 6) a closed suitcase with a sun hat and a beach ball on top.
+> Style: polished stylised 3D render for teenagers — real object proportions and believable
+> materials, crisp modelling and fine detail, soft studio lighting with clean highlights and
+> gentle shadows, cut out on pure white. Colours stay BRIGHT and SATURATED (strong blues, greens,
+> yellows, reds, purples) — absolutely no muted, beige, brown, grey or washed-out palette.
+> NO cartoon faces or eyes on objects, NO toy-like puffy rounded shapes, nothing cute or babyish,
+> never flat vector, never a 2D outline cartoon. A high-quality modern product render, not a toy.
+
+Слова дек: 10-12 — weather · school · food · family · pets · holidays;
+13+ — weather · school · food · music · plans · holidays.
