@@ -162,7 +162,7 @@
 <div class="bar">
   <b>Ключики:</b>
   <span class="slots" id="slots"></span>
-  <b><span id="count">0</span> из 4</b>
+  <b><span id="count">0</span> из 3</b>
 </div>
 
 <div class="stage" id="stage">
@@ -172,8 +172,8 @@
     <path class="trail" id="trail-3"></path>
   </svg>
   <div class="done-panel" id="donePanel" hidden>
-    <h2>Все четыре ключика твои! 🔑</h2>
-    <p>Ворота Замка открылись, Дракон проснулся — Праздник начался!</p>
+    <h2>Вся Волшебная страна открыта! 👑</h2>
+    <p>Ворота Замка распахнулись, Дракон проснулся — Праздник начался!</p>
   </div>
 </div>
 
@@ -377,7 +377,8 @@ var WOWSPEAK_ASSETS = {
     return svg;
   }
 
-  for(var i=1;i<=4;i++){
+  /* три слота: ключик — это переход между островами, а переходов три */
+  for(var i=1;i<=3;i++){
     var slot = document.createElement("span");
     slot.className = "slot";
     slot.appendChild(makeBarKey());
@@ -444,10 +445,11 @@ var WOWSPEAK_ASSETS = {
     }
 
     var slots = slotsBox.children;
-    for(var s=0;s<4;s++){
+    for(var s=0;s<3;s++){
       slots[s].classList.toggle("filled", journey["island"+(s+1)] === true);
     }
-    countEl.textContent = String(done);
+    /* пройденный Замок ключика не даёт: он последний */
+    countEl.textContent = String(Math.min(done, 3));
 
     finale.classList.toggle("on", done === 4);
     donePanel.hidden = done !== 4;
@@ -477,7 +479,7 @@ var WOWSPEAK_ASSETS = {
 
   function popNewPieces(fromCount){
     var slots = slotsBox.children;
-    for(var s=fromCount; s<doneCount(); s++){
+    for(var s=fromCount; s<Math.min(doneCount(), slots.length); s++){
       (function(el, delay){
         setTimeout(function(){ el.classList.add("pop"); }, delay);
       })(slots[s], 250 + (s - fromCount) * 260);
@@ -11427,8 +11429,8 @@ screens.push(
     speech: "Вот он, Замок Дракона! Ворота уже открыты, а Дракон ещё спит — колокольчик пригодится. Сначала собери своего героя и расскажи, во что он одет.",
     icon: "🏰", iconLabel: "Замок Дракона", buttonLabel: "Вперёд!", introDelay: 2500 },
   { id: "map-out", type: "story", emotion: "excited", singlePhase: true, island: 4,
-    speech: "Ворота Замка распахнулись, Дракон проснулся — Праздник начался! Четвёртый ключик твой, и вся Волшебная страна теперь открыта.",
-    icon: "🔑", iconLabel: "Четвёртый ключик", buttonLabel: "Дальше", introDelay: 2500 }
+    speech: "Ворота Замка распахнулись, Дракон проснулся — праздник начался! Теперь вся Волшебная страна твоя.",
+    icon: "🏰", iconLabel: "Праздник в Замке Дракона", buttonLabel: "Дальше", introDelay: 2500 }
 );
 linearOrder.splice(1, 0, "map-in");                        // сразу после приветствия
 linearOrder.splice(linearOrder.length - 1, 0, "map-out");  // перед прощанием
@@ -13385,7 +13387,11 @@ function wsdevReset(){
     #wsdev-nav .wsdev-pos{min-width:52px}
   }
 </style>
-<style>body.in-lesson #wsdev-nav{display:none}</style>
+<style>
+  body.in-lesson #wsdev-nav{display:none}
+  /* на карте панель уходит вправо: по центру внизу стоит табличка финала */
+  #wsdev-nav{left:auto; right:14px; transform:none}
+</style>
 <div id="wsdev-nav">
   <span class="wsdev-pos">карта</span>
   <button class="wsdev-reset" id="wsdev-reset">↻ начать сначала</button>

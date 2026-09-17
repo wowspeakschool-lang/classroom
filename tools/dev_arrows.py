@@ -100,7 +100,11 @@ LESSON_BLOCK = START + STYLE + """
 # выше него и закрывала собой стрелку «вперёд». Пока урок открыт, панель карты
 # прячем: у урока своя, с тем же сбросом.
 MAP_STYLE = STYLE + """
-<style>body.in-lesson #wsdev-nav{display:none}</style>"""
+<style>
+  body.in-lesson #wsdev-nav{display:none}
+  /* на карте панель уходит вправо: по центру внизу стоит табличка финала */
+  #wsdev-nav{left:auto; right:14px; transform:none}
+</style>"""
 
 MAP_BLOCK = START + MAP_STYLE + """
 <div id="wsdev-nav">
