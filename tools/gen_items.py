@@ -28,6 +28,10 @@ ITEMS = {
              "violet leather with golden buckles and small golden wings at the ankles. " + STYLE,
     "bell": "A magic hand bell: a golden bell with a smooth wooden handle and a small star on "
             "top, a few sparkles around its rim. " + STYLE,
+    # ключик — награда за остров: на сюжетном экране вместо эмодзи 🔑
+    "key": "A magic golden key lying at a slight angle: a chunky cartoon key with a round bow "
+           "at one end, two simple teeth at the other, warm polished gold with a soft glow and "
+           "a few tiny sparkles around it. " + STYLE,
 }
 
 
