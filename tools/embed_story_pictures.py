@@ -38,8 +38,66 @@ def data_uri(im, quality=84):
     return "data:image/webp;base64," + base64.b64encode(buf.getvalue()).decode(), len(buf.getvalue())
 
 
+WHITE_CUT = 236
+
+
+def cut_white(im):
+    """Срезает белый фон заливкой от краёв, если он есть.
+
+    Картинку ключика Анна генерирует в GPT, а он отдаёт её на белом фоне.
+    Заливка идёт только от краёв, поэтому белые блики внутри предмета целы,
+    а искры вокруг ключа остаются: они не соединены с краем.
+    """
+    px = im.load()
+    w, h = im.size
+    corners = [px[0, 0], px[w - 1, 0], px[0, h - 1], px[w - 1, h - 1]]
+    if not all(c[3] > 0 and min(c[:3]) > WHITE_CUT for c in corners):
+        return im                      # фон уже прозрачный
+    stack = [(x, y) for x in range(w) for y in (0, h - 1)]
+    stack += [(x, y) for y in range(h) for x in (0, w - 1)]
+    seen = set()
+    while stack:
+        x, y = stack.pop()
+        if (x, y) in seen or not (0 <= x < w and 0 <= y < h):
+            continue
+        r, g, b, a = px[x, y]
+        if a == 0 or min(r, g, b) <= WHITE_CUT:
+            continue
+        seen.add((x, y))
+        px[x, y] = (r, g, b, 0)
+        stack += [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
+    # второй проход: дырки внутри предмета (например, кольцо ключика) заливкой
+    # от краёв не достаются — чистим замкнутые белые пятна крупнее порога.
+    # Блики на золоте желтоватые и под порог не подходят, поэтому целы.
+    min_area = w * h * 0.003
+    seen = set()
+    for y0 in range(h):
+        for x0 in range(w):
+            if (x0, y0) in seen:
+                continue
+            r, g, b, a = px[x0, y0]
+            if a == 0 or min(r, g, b) <= WHITE_CUT:
+                continue
+            comp, stack = [], [(x0, y0)]
+            while stack:
+                x, y = stack.pop()
+                if (x, y) in seen or not (0 <= x < w and 0 <= y < h):
+                    continue
+                rr, gg, bb, aa = px[x, y]
+                if aa == 0 or min(rr, gg, bb) <= WHITE_CUT:
+                    continue
+                seen.add((x, y)); comp.append((x, y))
+                stack += [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
+            if len(comp) >= min_area:
+                for x, y in comp:
+                    r, g, b, a = px[x, y]
+                    px[x, y] = (r, g, b, 0)
+    box = im.getbbox()
+    return im.crop(box) if box else im
+
+
 def scaled(path, width):
-    im = Image.open(path).convert("RGBA")
+    im = cut_white(Image.open(path).convert("RGBA"))
     if im.width != width:
         im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
     return im
