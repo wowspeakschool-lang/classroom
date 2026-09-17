@@ -143,9 +143,15 @@ def build():
     for n in (1, 2, 3, 4):
         src = open(os.path.join(ROOT, "lessons", "wowspeak-mini", "lesson-%d.html" % n),
                    encoding="utf-8").read()
-        for old, new in ((DONE_OLD, DONE_NEW), (BACK_OLD, BACK_NEW)):
-            assert src.count(old) == 1, "не найдено в уроке %d: %s" % (n, old[:40])
-            src = src.replace(old, new, 1)
+        assert src.count(DONE_OLD) == 1, "не найдено в уроке %d: %s" % (n, DONE_OLD[:40])
+        src = src.replace(DONE_OLD, DONE_NEW, 1)
+        # Кнопка «на карту» с прощания убрана: теперь возврат идёт через goToMap(),
+        # который сам умеет говорить с картой из iframe. Старый якорь оставлен для
+        # пересборки с нуля, до применения tools/fix_end_buttons.py.
+        if BACK_OLD in src:
+            src = src.replace(BACK_OLD, BACK_NEW, 1)
+        else:
+            assert "function goToMap()" in src, "урок %d не умеет возвращаться на карту" % n
         # все закрывающие теги скриптов урока экранируем, иначе первый же
         # закроет наш контейнер (в уроке их может быть несколько)
         assert src.count("</script>") >= 1

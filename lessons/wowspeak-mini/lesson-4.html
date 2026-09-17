@@ -1537,6 +1537,23 @@ body{ background:transparent; }
 .progress-bar{ background:rgba(255,255,255,.65); height:9px; border-radius:6px; }
 .progress-fill{ background:linear-gradient(90deg,#ffd469,#e08a2b); border-radius:6px; }
 
+/* правки внешнего вида 17.09 */
+/* кусочек показываем через круглое окошко: прямоугольный обрезок читался
+   как испорченная картинка */
+.frag-box { width:min(230px, 62vw); height:min(230px, 62vw); min-height:0 !important;
+  margin:0 auto; border-radius:50%; overflow:hidden; padding:0 !important; }
+.frag-img { width:100%; height:100%; max-height:none; object-fit:contain; padding:10%;
+  box-sizing:border-box; }
+/* на ответе показываем вещь целиком */
+.frag-img.frag-reveal { object-fit:contain; padding:12%; box-sizing:border-box; }
+/* слот с картинкой: в Уроке 1 таких стилей не было */
+.shadow-slot.has-icon { display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.shadow-slot .slot-icon { width:78%; height:78%; object-fit:contain; display:block; }
+/* силуэт будущего предмета в пустом слоте */
+.shadow-slot .slot-icon.slot-ghost { opacity:.45; filter:grayscale(.45); }
+/* подпись под картинкой острова */
+.placeholder-label { font-size:18px; font-style:normal; font-weight:700;
+  color:var(--primary, #3D2E68); opacity:.85; }
 </style>
 </head>
 <body>
@@ -1685,17 +1702,17 @@ const screens = [
   { id:"1-1", type:"greeting", emotion:"smile", singlePhase:true,
     title:"Урок 4 · Мой аватар",
     banner:"🎉 Сегодня финал курса! В конце урока тебе понадобятся мама или папа — позови их, когда дойдёшь до конца.",
-    speech:"Привет! Рада снова тебя видеть. Сегодня — финал курса! Ты уже выучил столько всего: слова про одежду, как рассказать о себе и о других. Сегодня соберёшь свой собственный аватар и расскажешь о нём по-английски. В конце тебе понадобятся мама или папа — позови их, когда дойдёшь до финала. Поехали!",
-    buttonLabel:"Поехали!", introDelay:3600 },
+    speech:"Привет! Сегодня финал курса. Ты уже знаешь слова про одежду и умеешь рассказывать о себе и о других. Сегодня соберёшь своего аватара и расскажешь о нём по-английски. Поехали!",
+    buttonLabel:"Поехали!", introDelay: 2500 },
 
   { id:"1-2", type:"backpack", emotion:"neutral", singlePhase:true, earned:["star","bottle","boots","bell"],
     speech:"Смотри, у тебя уже четыре волшебные вещи — звёздочка, бутылочка, сапоги и колокольчик. Сегодня получишь последнюю! А сначала — вспомним всё, что ты выучил.",
-    buttonLabel:"Вспомнить", introDelay:3200 },
+    buttonLabel:"Вспомнить", introDelay: 2500 },
 
   // ═══ Этап 2 — Повторение (4 задания) ═══
   { id:"2-1", type:"wordpic", emotion:"neutral",
     speech:"Начнём со слов про одежду. Посмотри на картинку и выбери слово.",
-    buttonLabel:"Начать", introDelay:2800,
+    buttonLabel:"Начать", introDelay: 2500,
     instruction:"Как это по-английски?",
     doneMsg:"✓ Отлично! Слова ты помнишь.",
     rounds:[
@@ -1710,7 +1727,7 @@ const screens = [
 
   { id:"2-2", type:"translate", emotion:"neutral",
     speech:"Теперь про себя. Прочитай по-русски и выбери, как это сказать по-английски.",
-    buttonLabel:"Дальше", introDelay:2600,
+    buttonLabel:"Дальше", introDelay: 2500,
     instruction:"Как сказать это по-английски?",
     doneMsg:"✓ Здорово! I have got — ты помнишь.",
     rounds:[
@@ -1726,7 +1743,7 @@ const screens = [
 
   { id:"2-3", type:"choosehs", emotion:"neutral", noBadge:true,
     speech:"А теперь про Бена и Мию. Посмотри на героя и выбери: has got или hasn't got.",
-    buttonLabel:"Дальше", introDelay:2600,
+    buttonLabel:"Дальше", introDelay: 2500,
     instruction:"Что скажем про героя?",
     doneMsg:"✓ Супер! has got и hasn't got — помнишь.",
     rounds:[
@@ -1738,7 +1755,7 @@ const screens = [
 
   { id:"2-4", type:"matchpics", emotion:"smile",
     speech:"И последнее повторение — соедини каждую фразу с нужным героем.",
-    buttonLabel:"Дальше", introDelay:2600,
+    buttonLabel:"Дальше", introDelay: 2500,
     instruction:"Соедини фразу с героем",
     doneMsg:"✓ Класс! Ты всё вспомнил. Пора за наградой!",
     pairs:[
@@ -1753,28 +1770,28 @@ const screens = [
   // ═══ Этап 3 — Награда: корона ═══
   { id:"3-1", type:"achievement", emotion:"excited", singlePhase:true,
     speech:"Позвони в колокольчик! Слышишь? Дракон просыпается — «a dragon». Он огромный, добрый и очень рад тебе.",
-    buttonLabel:"Дальше", introDelay:3000,
+    buttonLabel:"Дальше", introDelay: 2500,
     pic:"dragon", emoji:"🐉", en:"a dragon", ru:"дракон", autoPlayEN:"a dragon", autoPlayDelay:1500 },
 
   { id:"3-2", type:"backpack", emotion:"excited", singlePhase:true, earned:["star","bottle","boots","bell"],
     speech:"Дракон проснулся, и праздник вот-вот начнётся! Осталась одна вещь — её подарит тебе сам Дракон. А сейчас — твой проект.",
-    buttonLabel:"К проекту!", introDelay:3200 },
+    buttonLabel:"К проекту!", introDelay: 2500 },
 
   // ═══ Этап 4 — Проект: собери аватар ═══
   { id:"4-1", type:"gender", emotion:"neutral",
     speech:"А теперь — твой проект! Собери свой собственный аватар. Кем он будет — мальчиком или девочкой?",
-    buttonLabel:"Дальше", introDelay:2800,
+    buttonLabel:"Дальше", introDelay: 2500,
     instruction:"Кем будет твой аватар?" },
 
   { id:"4-2", type:"wardrobe", emotion:"neutral",
     speech:"Отлично! Теперь одень его как хочешь. Нажимай на одежду — выбери минимум три вещи.",
-    buttonLabel:"Дальше", introDelay:2800,
+    buttonLabel:"Дальше", introDelay: 2500,
     instruction:"Собери своего аватара — листай стрелками ◀ ▶!" },
 
   // ═══ Этап 5 — Проект: опиши аватар ═══
   { id:"5-1", type:"projectwrite", emotion:"neutral",
     speech:"Представь своего аватара! Расскажи о нём по-английски: что у него есть, чего нет. И обязательно выбери один или несколько артефактов — и тоже добавь их в описание!",
-    buttonLabel:"Начать", introDelay:3200,
+    buttonLabel:"Начать", introDelay: 2500,
     instruction:"Представь своего аватара и опиши его по-английски (можешь нарисовать своего на бумаге; минимум 5 предложений).",
     requireMinWords:20,
     contentButtonLabel:"Готово" },
@@ -1782,29 +1799,29 @@ const screens = [
   // ═══ Этап 6 — Покажи родителю ═══
   { id:"6-1", type:"parentshow", emotion:"smile",
     speech:"Готово! Ты написал целый рассказ по-английски. Теперь позови маму или папу и покажи им своего аватара — прочитай им, что ты написал!",
-    buttonLabel:"Позвал(а)!", introDelay:3200,
+    buttonLabel:"Позвал(а)!", introDelay: 2500,
     instruction:"Покажи свой рассказ маме или папе и прочитай его вслух." },
 
   // ═══ Этап 7 — Финал: дракон и весь курс ═══
   { id:"7-1", type:"achievement", emotion:"excited", singlePhase:true,
     speech:"Дракон дарит тебе корону — «a crown»! Ты прошёл всю Волшебную страну и заслужил её.",
-    buttonLabel:"Ух ты!", introDelay:3200,
+    buttonLabel:"Ух ты!", introDelay: 2500,
     pic:"crown", emoji:"👑", en:"a crown", ru:"корона", autoPlayEN:"a crown", autoPlayDelay:1600 },
 
   { id:"7-2", type:"backpack", emotion:"excited", singlePhase:true, earned:["star","bottle","boots","bell","crown"],
     speech:"Смотри — все пять волшебных вещей собраны, рюкзак полон! И ты прошёл 4 урока из 4. Ты молодец!",
-    buttonLabel:"Дальше", introDelay:3200 },
+    buttonLabel:"Дальше", introDelay: 2500 },
 
   { id:"7-3", type:"reflection", emotion:"smile",
     speech:"Расскажи напоследок — что тебе понравилось больше всего?",
-    buttonLabel:"Ответить", introDelay:2600,
+    buttonLabel:"Ответить", introDelay: 2500,
     question:"Что тебе понравилось на курсе больше всего?",
     options:["Слова про одежду","Рассказывать про себя","Рассказывать про других","Собрать своего аватара","Всё понравилось!"],
     saveKey:"l4_reflect", contentButtonLabel:"Дальше" },
 
   { id:"7-4", type:"farewell", emotion:"smile", singlePhase:true, showRestartButton:true,
     speech:"Ты прошёл весь курс WowSpeak — 4 из 4 уроков! Теперь ты умеешь так много по-английски. Позови маму или папу, расскажи им, чему научился, и предложи записаться на настоящий пробный урок!",
-    buttonLabel:"Завершить курс", introDelay:3600 },
+    buttonLabel:"Завершить курс", introDelay: 2500 },
 
 ];
 
@@ -1834,10 +1851,10 @@ function markIslandDone(n) {
 screens.push(
   { id: "map-in", type: "story", emotion: "smile", singlePhase: true,
     speech: "Вот он, Замок Дракона! Ворота уже открыты, а Дракон ещё спит — колокольчик пригодится. Сначала собери своего героя и расскажи, во что он одет.",
-    icon: "🏰", iconLabel: "Замок Дракона", buttonLabel: "Вперёд!", introDelay: 2600 },
+    icon: "🏰", iconLabel: "Замок Дракона", buttonLabel: "Вперёд!", introDelay: 2500 },
   { id: "map-out", type: "story", emotion: "excited", singlePhase: true, island: 4,
     speech: "Ворота Замка распахнулись, Дракон проснулся — Праздник начался! Четвёртый ключик твой, и вся Волшебная страна теперь открыта.",
-    icon: "🔑", iconLabel: "Четвёртый ключик", buttonLabel: "Дальше", introDelay: 2600 }
+    icon: "🔑", iconLabel: "Четвёртый ключик", buttonLabel: "Дальше", introDelay: 2500 }
 );
 linearOrder.splice(1, 0, "map-in");                        // сразу после приветствия
 linearOrder.splice(linearOrder.length - 1, 0, "map-out");  // перед прощанием
@@ -2033,10 +2050,22 @@ function advancePhase() {
   }
 }
 
+const BACKPACK_ORDER = ["star", "bottle", "boots", "bell", "crown"];
+
 function getProgress() {
+  /* Считаем задания, а не экраны: сюжетные (приветствие, рюкзак, награда,
+     остров, прощание) идут одной фазой и в знаменатель не попадают. */
+  const isTask = function(id) {
+    const sc = screens[screenById[id]];
+    return !!sc && !sc.singlePhase;
+  };
+  const tasks = linearOrder.filter(isTask);
   const idx = linearOrder.indexOf(state.currentId);
-  if (idx < 0) return { current: 1, total: linearOrder.length };
-  return { current: idx + 1, total: linearOrder.length };
+  if (idx < 0) return { current: 1, total: tasks.length };
+  let current = 0;
+  for (let i = 0; i <= idx; i++) if (isTask(linearOrder[i])) current++;
+  if (idx === linearOrder.length - 1) current = tasks.length;   // на прощании — всё
+  return { current: Math.max(1, current), total: tasks.length };
 }
 
 // ═══════════════════════════════════════════════════════
@@ -2103,7 +2132,15 @@ function renderIntroPhase(s, content) {
         slot.appendChild(el("img", { class: "slot-icon", src: IMG[earned[i]], alt: "награда", draggable: "false" }));
         grid.appendChild(slot);
       } else {
-        grid.appendChild(el("div", { class: "shadow-slot" }));
+        /* бледный силуэт того, что ещё предстоит получить */
+        const slot = el("div", { class: "shadow-slot" });
+        const nextKey = BACKPACK_ORDER[i];
+        if (nextKey && IMG[nextKey]) {
+          slot.classList.add("has-icon");
+          slot.appendChild(el("img", { class: "slot-icon slot-ghost", src: IMG[nextKey],
+                                       alt: "", draggable: "false" }));
+        }
+        grid.appendChild(slot);
       }
     }
     area.appendChild(grid);
@@ -2165,15 +2202,10 @@ function renderIntroPhase(s, content) {
       class: "btn btn-primary btn-big invisible",
       onclick: showFinishOverlay,
     }, s.buttonLabel || "Завершить урок");
-    const mapBtn = el("button", {
-      class: "btn btn-primary btn-big invisible",
-      onclick: function() { location.href = MAP_URL; },
-    }, "Вернуться на карту 🗺️");
-    btnArea.appendChild(mapBtn);
+    /* Карта — не здесь: она ждёт на табличке «Урок завершён», см. goToMap(). */
     btnArea.appendChild(restartBtn);
     btnArea.appendChild(finishBtn);
     buttonRevealTimer = setTimeout(() => {
-      mapBtn.classList.remove("invisible");
       restartBtn.classList.remove("invisible");
       finishBtn.classList.remove("invisible");
     }, s.introDelay || 2500);
@@ -3578,6 +3610,16 @@ function updateDevLabel(){
 // ═══════════════════════════════════════════════════════
 // FINISH OVERLAY (for farewell button "Завершить урок")
 // ═══════════════════════════════════════════════════════
+
+/* Возврат на карту: в едином файле урок лежит в iframe и просит карту закрыть
+   его сообщением, отдельной страницей — уходит по ссылке. */
+function goToMap() {
+  if (window.parent !== window) {
+    try { window.parent.postMessage({ type: "wowspeak:back" }, "*"); return; } catch (e) {}
+  }
+  location.href = MAP_URL;
+}
+
 function showFinishOverlay() {
   const overlay = el("div", {
     style: {
@@ -3590,7 +3632,7 @@ function showFinishOverlay() {
   overlay.appendChild(el("div", { style: { fontSize: "72px", marginBottom: "12px" } }, "🎉"));
   overlay.appendChild(el("h2", { style: { fontSize: "34px", margin: "0 0 14px" } }, "Курс WowSpeak завершён!"));
   overlay.appendChild(el("p", { style: { fontSize: "20px", margin: "0 0 26px", maxWidth: "500px", lineHeight: "1.4" } },
-    "Ты прошёл все 4 урока, собрал своего аватара и получил дракона — самого главного трофея! 🐉"));
+    "Ты прошёл все четыре острова, собрал своего аватара, разбудил Дракона — и он подарил тебе корону! 👑"));
 
   // ── Карточка для родителей ──
   const card = el("div", { style: {
@@ -3620,8 +3662,8 @@ function showFinishOverlay() {
   const closeBtn = el("button", {
     class: "btn",
     style: { background: "transparent", color: "white", borderColor: "rgba(255,255,255,0.6)", marginTop: "18px" },
-    onclick: () => { overlay.remove(); resetProgress(); },
-  }, "Закрыть");
+    onclick: () => { overlay.remove(); resetProgress(); goToMap(); },
+  }, "Вернуться на карту 🗺️");
   overlay.appendChild(closeBtn);
   document.body.appendChild(overlay);
 }
@@ -3710,6 +3752,10 @@ document.addEventListener("keydown", (e) => {
   }
   function step(d){
     var i = idx() + d;
+    /* В Уроке 1 развилка: правильный ответ ведёт на 2-2A, неправильный — на 2-2B.
+       В линейном списке они лежат подряд, поэтому стрелками была бы видна и вторая
+       реплика — как будто похвалили и тут же поправили. Ветку «неверно» пропускаем. */
+    if (linearOrder[i] === "2-2B") i += d;
     if (i < 0 || i >= linearOrder.length) return;
     goTo(linearOrder[i]);
     /* экраны с заданием показываем сразу в рабочей фазе, а не на реплике гида */
