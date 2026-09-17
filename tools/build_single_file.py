@@ -106,8 +106,20 @@ def data_uri(name):
         return "data:image/webp;base64," + base64.b64encode(f.read()).decode()
 
 
+DEV_START = "<!-- DEV-ARROWS-START -->"
+DEV_END = "<!-- DEV-ARROWS-END -->"
+
+
 def build():
     page = open(os.path.join(ROOT, "map.html"), encoding="utf-8").read()
+
+    # Временную панель просмотра вынимаем и приклеиваем в самом конце: её скрипт
+    # тоже кончается на "})();", а карту мы правим по этому якорю.
+    dev = ""
+    m = re.search(re.escape(DEV_START) + r".*?" + re.escape(DEV_END), page, re.S)
+    if m:
+        dev = m.group(0)
+        page = page.replace(dev, "", 1)
 
     assets = {n: data_uri(n) for n in ASSET_NAMES}
     assets_js = "<script>\nvar WOWSPEAK_ASSETS = {\n" + ",\n".join(
@@ -141,16 +153,19 @@ def build():
         blobs.append('<script type="text/plain" id="lesson-%d">%s</script>' % (n, src))
 
     tail = "\n".join(blobs) + '\n<script>document.body.classList.add("ready");</script>\n'
+    if dev:
+        tail += dev + "\n"
     page = page.replace("</body>", '<div class="loading">Загружаем уроки…</div>\n' + tail + "</body>", 1)
 
-    # Каждый живой </script> должен быть настоящим концом своего блока: их 7 —
-    # картинки, карта, четыре урока и флаг готовности. Лишний означает, что
-    # литерал "</script>" в коде разрывает скрипт пополам.
-    # Открывающих <script внутри текста уроков сколько угодно — парсер внутри
-    # скрипта ищет только закрывающий тег. А вот живых </script> должно быть ровно 7:
-    # картинки, карта, четыре урока и флаг готовности. Лишний означает, что литерал
+    # Каждый живой </script> должен быть настоящим концом своего блока. Открывающих
+    # <script внутри текста уроков сколько угодно — парсер внутри скрипта ищет только
+    # закрывающий тег. А вот живых </script> должно быть ровно семь — картинки,
+    # карта, четыре урока и флаг готовности, плюс один на временную панель
+    # просмотра, если она включена. Лишний означает, что литерал
     # "</script>" в коде разрывает скрипт пополам.
-    assert page.count("</script>") == 7, "закрывающих тегов: %d" % page.count("</script>")
+    expected = 7 + (1 if dev else 0)
+    assert page.count("</script>") == expected, \
+        "закрывающих тегов: %d, ждали %d" % (page.count("</script>"), expected)
 
     with open(OUT, "w", encoding="utf-8") as f:
         f.write(page)
