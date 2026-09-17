@@ -2532,6 +2532,13 @@ document.addEventListener("keydown", (e) => {
   #wsdev-nav button:hover{background:rgba(255,255,255,.34)}
   #wsdev-nav .wsdev-pos{opacity:.85; min-width:74px; text-align:center}
   #wsdev-nav .wsdev-reset{background:rgba(255,214,110,.28)}
+  /* на телефоне панель шире экрана — переносим кнопки на вторую строку */
+  @media (max-width: 560px){
+    #wsdev-nav{flex-wrap:wrap; justify-content:center; row-gap:6px; gap:6px;
+               max-width:calc(100vw - 16px); border-radius:18px; padding:7px 10px}
+    #wsdev-nav button{padding:5px 9px; font-size:13px}
+    #wsdev-nav .wsdev-pos{min-width:52px}
+  }
 </style>
 <div id="wsdev-nav">
   <button id="wsdev-prev">← назад</button>

@@ -32,6 +32,13 @@ STYLE = """
   #wsdev-nav button:hover{background:rgba(255,255,255,.34)}
   #wsdev-nav .wsdev-pos{opacity:.85; min-width:74px; text-align:center}
   #wsdev-nav .wsdev-reset{background:rgba(255,214,110,.28)}
+  /* на телефоне панель шире экрана — переносим кнопки на вторую строку */
+  @media (max-width: 560px){
+    #wsdev-nav{flex-wrap:wrap; justify-content:center; row-gap:6px; gap:6px;
+               max-width:calc(100vw - 16px); border-radius:18px; padding:7px 10px}
+    #wsdev-nav button{padding:5px 9px; font-size:13px}
+    #wsdev-nav .wsdev-pos{min-width:52px}
+  }
 </style>"""
 
 RESET_JS = """
@@ -85,7 +92,13 @@ LESSON_BLOCK = START + STYLE + """
 </script>
 """ + END + "\n"
 
-MAP_BLOCK = START + STYLE + """
+# В едином файле урок открывается в iframe поверх карты, а панель карты лежит
+# выше него и закрывала собой стрелку «вперёд». Пока урок открыт, панель карты
+# прячем: у урока своя, с тем же сбросом.
+MAP_STYLE = STYLE + """
+<style>body.in-lesson #wsdev-nav{display:none}</style>"""
+
+MAP_BLOCK = START + MAP_STYLE + """
 <div id="wsdev-nav">
   <span class="wsdev-pos">карта</span>
   <button class="wsdev-reset" id="wsdev-reset">↻ начать сначала</button>
