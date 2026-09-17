@@ -478,57 +478,5 @@
   }
 })();
 </script>
-<!-- DEV-ARROWS-START -->
-<style>
-  #wsdev-nav{position:fixed; left:50%; bottom:14px; transform:translateX(-50%); z-index:99000;
-           display:flex; gap:10px; align-items:center; width:auto; right:auto;
-           background:rgba(61,46,104,.88); color:#fff; padding:7px 12px; border-radius:999px;
-           font:700 14px/1 -apple-system,Segoe UI,Roboto,sans-serif; box-shadow:0 6px 20px rgba(0,0,0,.3)}
-  #wsdev-nav button{all:unset; cursor:pointer; padding:5px 11px; border-radius:999px;
-                  background:rgba(255,255,255,.18); white-space:nowrap}
-  #wsdev-nav button:hover{background:rgba(255,255,255,.34)}
-  #wsdev-nav .wsdev-pos{opacity:.85; min-width:74px; text-align:center}
-  #wsdev-nav .wsdev-reset{background:rgba(255,214,110,.28)}
-  /* на телефоне панель шире экрана — переносим кнопки на вторую строку */
-  @media (max-width: 560px){
-    #wsdev-nav{flex-wrap:wrap; justify-content:center; row-gap:6px; gap:6px;
-               max-width:calc(100vw - 16px); border-radius:18px; padding:7px 10px}
-    #wsdev-nav button{padding:5px 9px; font-size:13px}
-    #wsdev-nav .wsdev-pos{min-width:52px}
-  }
-</style>
-<style>
-  body.in-lesson #wsdev-nav{display:none}
-  /* на карте панель уходит вправо: по центру внизу стоит табличка финала */
-  #wsdev-nav{left:auto; right:14px; transform:none}
-</style>
-<div id="wsdev-nav">
-  <span class="wsdev-pos">карта</span>
-  <button class="wsdev-reset" id="wsdev-reset">↻ начать сначала</button>
-</div>
-<script>
-/* Временная кнопка сброса на карте. Удаляется вместе с этим блоком. */
-(function(){
-
-/* Сброс всего прогресса: карта снова с закрытыми островами, уроки — с начала. */
-function wsdevReset(){
-  var keys = ["wowspeak_journey", "wowspeak_lesson1_progress", "wowspeak_lesson2_progress",
-              "wowspeak_lesson3_progress", "wowspeak_lesson4_progress"];
-  keys.forEach(function(k){ try { localStorage.removeItem(k); } catch(e) {} });
-  /* Урок в едином файле живёт в iframe: перезагружать надо страницу-карту,
-     иначе карта останется с прежним прогрессом в памяти. */
-  if (window.parent !== window) {
-    try { window.parent.postMessage({ type: "wowspeak:reset" }, "*"); return; } catch(e) {}
-  }
-  location.reload();
-}
-  document.getElementById("wsdev-reset").onclick = wsdevReset;
-  /* Урок из iframe просит сбросить всё — чистим и перезагружаем карту. */
-  window.addEventListener("message", function(e){
-    if (e && e.data && e.data.type === "wowspeak:reset") wsdevReset();
-  });
-})();
-</script>
-<!-- DEV-ARROWS-END -->
 </body>
 </html>
