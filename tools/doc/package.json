@@ -1,0 +1,9 @@
+{
+  "name": "classroom-doc",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Сборка файлов «доработать руками» для методиста",
+  "dependencies": {
+    "docx": "^9.0.0"
+  }
+}
