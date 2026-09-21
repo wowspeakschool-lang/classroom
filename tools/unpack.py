@@ -9,8 +9,12 @@
   «Super Minds 3 Unit 1 Test.pdf»      → u1pdf/test.pdf
   «Super Minds 3. Final test (1).pdf»  → finalpdf/final_a.pdf
 
-    python3 tools/unpack.py                 # результаты текущей сессии
-    python3 tools/unpack.py <tool-results>  # явная папка
+    python3 tools/unpack.py                      # всё, что скачано в сессии
+    python3 tools/unpack.py 'SM3|Super Minds 3'  # только файлы этого курса
+    python3 tools/unpack.py 'SM3' <tool-results> # и явная папка результатов
+
+Фильтр нужен, когда в одной сессии качались файлы двух курсов: имена уроков
+у них одинаковые, и без фильтра выгрузка SM2 легла бы в папки SM3.
 """
 import json, base64, glob, os, re, sys
 
@@ -18,9 +22,9 @@ PROJECTS = '/root/.claude/projects'
 PART = {'1': 'a', '2': 'b'}
 
 
-def results_dir(argv):
-    if len(argv) > 1:
-        return argv[1]
+def results_dir(explicit=None):
+    if explicit:
+        return explicit
     dirs = glob.glob(f'{PROJECTS}/*/*/tool-results') + glob.glob(f'{PROJECTS}/*/tool-results')
     if not dirs:
         raise SystemExit('не нашёл папку tool-results — укажите её аргументом')
@@ -43,7 +47,8 @@ def target(title):
 
 
 if __name__ == '__main__':
-    res = results_dir(sys.argv)
+    keep = re.compile(sys.argv[1], re.I) if len(sys.argv) > 1 else None
+    res = results_dir(sys.argv[2] if len(sys.argv) > 2 else None)
     done = []
     for f in sorted(glob.glob(f'{res}/mcp-Google_Drive-download_file_content-*.txt')):
         try:
@@ -51,6 +56,8 @@ if __name__ == '__main__':
         except Exception:
             continue
         if d.get('mimeType') != 'application/pdf':
+            continue
+        if keep and not keep.search(d.get('title', '')):
             continue
         dst = target(d.get('title', ''))
         if not dst:
