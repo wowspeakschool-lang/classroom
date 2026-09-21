@@ -12,9 +12,10 @@
 
 - В каждом промпте уже прописана сетка, разделители и запрет текста — копируй целиком, ничего добавлять не надо.
 - Ячейки нумерую слева направо, сверху вниз — в том же порядке, в каком перечислены в промпте.
-- Разрешение: длинная сторона от 2048 px (лист режется, каждой ячейке нужен запас).
+- Разрешение: длинная сторона **2048 px и больше**. На 1536 px лист 3×3 даёт ячейку 410 px — это нижняя граница годного, на 4×3 уже мало.
 - Если генератор всё-таки впишет буквы — перегенерировать, не замазывать.
 - «Сцена» (solo) — там, где ребёнок описывает картинку или ищет детали: такие остаются одной большой картинкой, в сетку их не складываем.
+- **Никаких брендов.** Генератор сам дорисовывает галочки Nike на кроссовках и логотипы на технике. В каждый лист, где есть одежда, обувь или гаджеты, идёт `plain unbranded clothes and shoes, no logos, no swooshes, no brand marks`.
 - **Дети в ячейках — каждый раз разные и безымянные.** Никаких сквозных героев: иначе ребёнок начнёт путать их с Беном и Люси из учебника.
 
 ## Что берём из книги, а не генерируем
@@ -42,7 +43,7 @@
 
 ### Л1.1 · Обложка юнита (сцена)
 ```
-A cheerful cartoon classroom seen from the doorway: rows of desks, a big sunny window, backpacks on chairs, a globe, an open notebook and colour pencils on the front desk, a blank green board. Warm morning light.
+A cheerful cartoon classroom, wide view from inside the room with nothing in the foreground - no door, no door frame, no doorknob: rows of desks, a big sunny window, backpacks on chairs, a globe, an open notebook and colour pencils on the front desk, a blank green board. Warm morning light.
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, kid-safe, one single scene filling the frame. Absolutely no text, no letters, no numbers, no signs, no labels anywhere. Horizontal, aspect ratio 3:2.
 ```
 
@@ -56,7 +57,8 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 ### Л1.3 · have to — 6 картинок (3×2)
 ```
 A sheet of six separate illustrations in a clean 3x2 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone scene on a simple background, nothing crossing between cells. Each cell shows a nine-year-old child doing one daily duty:
-1) a boy hurrying through a school gate, a big round clock on the wall showing early morning, the clock face has plain ticks and no numbers; 2) a girl brushing her teeth at a bathroom mirror, an empty plate on a shelf behind her; 3) a boy washing his hands at a kitchen sink, a laid table behind him; 4) a girl pulling on her school jumper beside an open wardrobe; 5) a boy polishing his trainers on a doorstep with a football waiting beside him; 6) a girl finishing her homework at a desk while a bike and a ball wait by the door.
+1) a boy hurrying through a school gate, a big round clock on the wall showing early morning, the clock face has plain ticks and no numbers; 2) a girl brushing her teeth at a bathroom mirror, an empty plate on a shelf behind her; 3) a boy washing his hands at a kitchen sink, a laid table behind him; 4) a girl pulling on her school jumper beside an open wardrobe; 5) a boy polishing his plain unbranded trainers on a doorstep with a football waiting beside him; 6) a girl finishing her homework at a desk while a bike and a ball wait by the door.
+All clothes and shoes plain and unbranded - no logos, no swooshes, no brand marks anywhere.
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left, kid-safe. Absolutely no text, no letters, no numbers, no labels anywhere. Horizontal, aspect ratio 3:2.
 ```
 
