@@ -1,7 +1,12 @@
 # Super Minds 3 — ЛИСТЫ ПРОМПТОВ НА КАРТИНКИ (весь курс)
 
 Один промпт = одна картинка-лист с сеткой из нескольких изображений. Потом лист режется на отдельные PNG.
-Всего **107 листов** ≈ 433 изображения на 9 юнитов + Final Test.
+Всего **81 лист** на 9 юнитов + Final Test.
+
+**Героев курса (Ben, Lucy, Buster, Horax, Zelda, Mr Williams) НЕ генерируем.** Они есть
+в учебнике и в видео — кадры берём оттуда. Здесь остались только те картинки, которых
+в книге нет: словарные карточки под наши механики, отдельные объекты для match и пропусков,
+грамматические сцены, раскраски и картинки для speaking.
 
 ## Правила листа
 
@@ -10,28 +15,26 @@
 - Разрешение: длинная сторона от 2048 px (лист режется, каждой ячейке нужен запас).
 - Если генератор всё-таки впишет буквы — перегенерировать, не замазывать.
 - «Сцена» (solo) — там, где ребёнок описывает картинку или ищет детали: такие остаются одной большой картинкой, в сетку их не складываем.
+- **Дети в ячейках — каждый раз разные и безымянные.** Никаких сквозных героев: иначе ребёнок начнёт путать их с Беном и Люси из учебника.
 
----
+## Что берём из книги, а не генерируем
 
-# ЛИСТЫ ПЕРСОНАЖЕЙ (делать первыми)
+| Из учебника / видео | Где это было |
+|---|---|
+| Все кадры истории Ben & Lucy (9 сюжетов) | U1 библиотека, U3 деревня, U4 башня, U5 под водой, U6 пещеры, U7 больница, U8 глобус, U9 замок |
+| Рассказ про Оливера, интервью с Кейт | U1 |
+| Ящерицы-повара (видео) | U2 |
+| Песня про астронавтку, сказка «Эльфы и башмачник» | U3 |
+| Открытка от Али | U4 |
+| Монстр Crocorox, Кайли и дельфины | U5 |
+| Наскальные рисунки (фото CLIL) | U6 |
+| Песня «плохой день», Эмма и Джаспер, Джо Фриз | U7 |
+| Путешествия в машине времени, Макс в Чили | U8 |
+| Лиам во Флориде, Брайтон 100 лет назад (CLIL) | U9 |
+| Джим и клоун | Final Test |
 
-### ЛП.1 · Лист персонажей — 6 героев (6×1)
-```
-A character reference sheet: six original cartoon characters standing side by side in one horizontal row, full body, front view, neutral pose, equal size, equal spacing, on a plain light-grey background.
-1) BEN - a boy about nine, tousled dark-brown hair, freckles, green hoodie, blue jeans, red trainers.
-2) LUCY - a girl about nine, shoulder-length ginger hair in a half-ponytail, yellow t-shirt, denim dungarees, white trainers.
-3) BUSTER - a small scruffy beige terrier dog with a red collar.
-4) HORAX - a tall thin grown-up villain, long black coat, round dark glasses, pointed grey beard, comically grumpy, not frightening.
-5) ZELDA - a short round grown-up villainess, purple dress, big green scarf, messy orange bun, comically sly.
-6) MR WILLIAMS - a kind elderly librarian, bald with white side hair, round glasses, brown cardigan, bow tie.
-Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left, kid-safe. Absolutely no text, no letters, no numbers, no labels, no captions anywhere. Horizontal, aspect ratio 3:1.
-```
-
-### ЛП.2 · Эмоции героев (6×6)
-```
-An expression sheet: a grid of six columns and six rows on a plain light-grey background, thin light-grey gutters between cells. Each column is one of the same six characters from the reference sheet (Ben the boy in a green hoodie, Lucy the girl in denim dungarees, Buster the small beige terrier, Horax the tall villain in a black coat and dark glasses, Zelda the round villainess in a purple dress, Mr Williams the elderly librarian in a brown cardigan), head and shoulders, same face design in every cell. Each row is one emotion, in this order from top to bottom: happy, sad, angry, scared, tired, excited.
-Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light, kid-safe. Absolutely no text, no letters, no numbers, no labels anywhere. Square, aspect ratio 1:1.
-```
+Кадры режем из PDF учебника и из видео, жмём в webp (карточка 180–420 px, сцена 760–900 px)
+и кладём в `media/sm3/uN/` — ссылками, как в остальном проекте.
 
 ---
 
@@ -69,26 +72,6 @@ Clean children's-textbook vector look, crisp edges, soft drop shadow. Absolutely
 A sheet of four separate pictures in a clean 2x2 grid, equal cells separated by thin light-grey gutters, each cell on pure white. Each cell shows one simple cartoon figure built entirely out of flat geometric shapes - triangles, circles, squares and rectangles - like a children's shape collage, the individual shapes clearly visible:
 1) a cat; 2) a person; 3) a sailing boat; 4) a snake.
 Flat bright colours, thick friendly outlines, clean children's-textbook look. Absolutely no text, no letters, no numbers, no labels anywhere. Square, aspect ratio 1:1.
-```
-
-### Л1.6 · История: библиотека — 4 кадра (2×2)
-```
-A four-panel comic sheet in a clean 2x2 grid, equal panels separated by thin light-grey gutters, each panel a complete standalone illustration, nothing crossing between panels. The same characters in every panel: BEN a nine-year-old boy with tousled dark-brown hair and a green hoodie, LUCY a nine-year-old girl with ginger hair and denim dungarees, BUSTER a small scruffy beige terrier, HORAX a tall thin villain in a long black coat with round dark glasses and a pointed grey beard, MR WILLIAMS a kind elderly librarian in a brown cardigan with round glasses.
-1) Ben and Lucy in a huge old library full of tall bookshelves, Mr Williams handing them a heavy old book.
-2) Close-up of the open old book on a desk - the pages are covered in strange abstract symbols and shapes, not real letters; Ben and Lucy puzzled, Buster under the desk.
-3) Lucy excited, holding up a small folded note she has found inside the book, Ben leaning in.
-4) Horax hiding behind a bookshelf, peeping at the children through a spyglass, comically sneaky.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, expressive faces, soft cinematic light, vivid saturated colours, kid-safe. Absolutely no text, no letters, no numbers, no speech bubbles, no captions anywhere. Square, aspect ratio 1:1.
-```
-
-### Л1.7 · Оливер и интервью с Кейт — 4 картинки (2×2)
-```
-A sheet of four separate illustrations in a clean 2x2 grid, equal cells separated by thin light-grey gutters, nothing crossing between cells.
-1) A quiet boy with glasses sitting alone under a big tree in a school yard, thinking, while other children play football and video games in the background.
-2) The same boy standing in front of his class beside a teacher, everyone amazed; a big wall calendar behind them shown only as a grid of empty squares.
-3) The same boy and his classmates around a table full of jigsaw puzzles, logic games and shape blocks, everyone smiling - a puzzle club.
-4) A different girl, about ten, sitting on a lab stool in a bright science classroom holding a test tube and smiling, beakers and a microscope beside her.
-Bright 3D-rendered cartoon style, Pixar-like, expressive faces, vivid saturated colours, soft even light, kid-safe. Absolutely no text, no letters, no numbers, no labels anywhere. Square, aspect ratio 1:1.
 ```
 
 ### Л1.8 · Расписание на неделю (сцена)
@@ -149,15 +132,6 @@ A sheet of six separate pictures in a clean 3x2 grid, equal cells separated by t
 5) an open school lunch box on a desk with one bread roll filled with cheese and a small bottle of water, nothing else;
 6) an open fridge seen from the front with cheese, a bottle of water, vegetables and rolls on the shelves and no cake and no sausages.
 Bright 3D-rendered cartoon style, Pixar-like, appetising, vivid saturated colours, soft even light, everything clearly countable. Absolutely no text, no letters, no numbers, no labels, no packaging writing anywhere. Horizontal, aspect ratio 3:2.
-```
-
-### Л2.5 · Ящерицы-повара — 3 кадра (3×1)
-```
-A three-panel strip in one horizontal row, equal panels separated by thin light-grey gutters. The same two friendly cartoon lizards in chef aprons in a small kitchen appear in every panel:
-1) one lizard offering a bowl of green peas to the other;
-2) the two lizards slicing bread and cheese together on a board;
-3) one lizard dreamily pointing at a plate of cartoon flies while the other pulls a disgusted face - comic and silly, not gross.
-Bright 3D-rendered cartoon style, Pixar-like, expressive faces, vivid saturated colours, kid-safe. Absolutely no text, no letters, no numbers, no speech bubbles anywhere. Horizontal, aspect ratio 3:1.
 ```
 
 ### Л2.6 · Части растений — 6 карточек (3×2)
@@ -224,33 +198,6 @@ A sheet of twelve separate clock cards in a clean 4x3 grid, equal cells separate
 Clean 3D cartoon style, soft rounded shapes, soft even light, crisp readable hands. Absolutely no text, no letters, no numbers, no brand marks anywhere. Horizontal, aspect ratio 4:3.
 ```
 
-### Л3.4 · Песня про девушку-астронавта — 6 кадров (3×2)
-```
-A six-panel story sheet in a clean 3x2 grid, equal panels separated by thin light-grey gutters. The same young female astronaut appears in every panel - short dark hair, orange spacesuit:
-1) waking up in bed, a small clock on the bedside table, night outside the window; 2) standing at her front door with her helmet under her arm, early morning; 3) sitting in the cockpit of a small rocket with switches around her; 4) standing on the grey surface of the moon with Earth in the black sky; 5) arriving back home and hanging her helmet on a hook in the hall; 6) working at a desk with star charts by lamplight at night.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, vivid saturated colours, expressive, kid-safe. Absolutely no text, no letters, no numbers anywhere, including on any clock face. Horizontal, aspect ratio 3:2.
-```
-
-### Л3.5 · История: деревня — 4 кадра (2×2)
-```
-A four-panel comic sheet in a clean 2x2 grid, equal panels separated by thin light-grey gutters. The same characters throughout: BEN a boy with dark-brown hair and a green hoodie, LUCY a girl with ginger hair and denim dungarees, BUSTER a small beige terrier, HORAX a tall thin villain in a black coat with round dark glasses, ZELDA a short round villainess in a purple dress with a green scarf.
-1) Ben and Lucy arriving in a small old village at dusk, a cobbled street, warm lit windows.
-2) A room turned upside down - drawers pulled out, papers everywhere, chairs tipped over; Ben and Lucy staring at the mess, Buster sniffing.
-3) Horax and Zelda walking away down the lane at nightfall, glancing back over their shoulders.
-4) Lucy finding a small folded letter tucked inside an old oil lamp, Ben beside her, both delighted.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, expressive faces, soft cinematic light, kid-safe. Absolutely no text, no letters, no numbers, no speech bubbles anywhere. Square, aspect ratio 1:1.
-```
-
-### Л3.6 · Сказка «Эльфы и башмачник» — 4 кадра (2×2)
-```
-A four-panel fairy-tale sheet in a clean 2x2 grid, equal panels separated by thin light-grey gutters:
-1) a poor old shoemaker in a tiny workshop at night, cutting a piece of leather on his table by candlelight;
-2) morning in the same workshop - the table now covered with ten pairs of beautiful finished shoes, the shoemaker amazed;
-3) night again - five tiny elves in ragged clothes sewing shoes on the table while the shoemaker peeps from behind a curtain;
-4) the elves wearing smart new little clothes and hats, dancing happily and waving goodbye as they leave.
-Warm storybook illustration style, bright 3D-rendered cartoon, Pixar-like, candlelight and moonlight, vivid but cosy colours, kid-safe. Absolutely no text, no letters, no numbers anywhere. Square, aspect ratio 1:1.
-```
-
 ### Л3.7 · Профессии — 9 карточек (3×3)
 ```
 A sheet of nine separate profession cards in a clean 3x3 grid, equal cells separated by thin light-grey gutters, each cell one friendly smiling adult standing with the tools of the job on pure white:
@@ -314,16 +261,6 @@ A sheet of six separate pictures in a clean 3x2 grid, equal cells separated by t
 Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, soft even light, the destination always visible in the same cell. Absolutely no text, no letters, no numbers, no shop signs anywhere. Horizontal, aspect ratio 3:2.
 ```
 
-### Л4.6 · История: башня и ярмарка — 4 кадра (2×2)
-```
-A four-panel comic sheet in a clean 2x2 grid, equal panels separated by thin light-grey gutters. Same characters throughout: BEN a boy with dark-brown hair and a green hoodie, LUCY a girl with ginger hair and denim dungarees, BUSTER a small beige terrier, HORAX a tall thin villain in a black coat and round dark glasses, ZELDA a short round villainess in a purple dress.
-1) Ben and Lucy studying a folded map in a market square, an old tower visible behind them.
-2) Ben pointing excitedly at a funfair with a ferris wheel while Lucy points firmly at the tower - a friendly argument.
-3) Ben and Lucy high up in a swinging pirate-ship fairground ride, above the rooftops, the tower below them.
-4) Horax and Zelda inside an empty dusty tower room, looking around confused.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, expressive faces, soft cinematic light, kid-safe. Absolutely no text, no letters, no numbers, no speech bubbles anywhere. Square, aspect ratio 1:1.
-```
-
 ### Л4.7 · CLIL: башни — 4 карточки (2×2)
 ```
 A sheet of four separate structure cards in a clean 2x2 grid, equal cells separated by thin light-grey gutters, each cell one tall structure standing alone on pure white in three-quarter view:
@@ -341,12 +278,6 @@ Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, clean and
 ```
 One town street scene arranged so that these relations are unmistakable: the cinema stands opposite the library, a tall tower rises behind the cinema, a park lies opposite the school, a small boat floats below a bridge, the sports centre stands between the cinema and a cafe, and a castle rises behind the sports centre.
 Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, clear uncluttered composition, everything clearly visible. Absolutely no text, no letters, no numbers, no signs, no labels anywhere. Horizontal, aspect ratio 3:2.
-```
-
-### Л4.10 · Открытка от Али (сцена)
-```
-The picture side of a holiday postcard: an old clock tower with a lively square below it, a museum standing next to a hotel, palm trees, a bright blue sky, a few tourists.
-Bright 3D-rendered cartoon style, Pixar-like, sunny holiday colours, one single scene filling the frame, a subtle white postcard border. Absolutely no text, no letters, no numbers, no stamp writing, no place names anywhere - the clock face has plain ticks and no numbers. Horizontal, aspect ratio 3:2.
 ```
 
 ### Л4.11 · Speaking 1: предлоги (сцена)
@@ -383,34 +314,6 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 A sheet of ten separate place cards in a clean 5x2 grid, equal cells separated by thin light-grey gutters, each cell one simple recognisable place with no people in it:
 1) a restaurant interior with laid tables; 2) a museum hall with exhibits; 3) a park with a bench and trees; 4) a supermarket aisle with a trolley; 5) a hospital room with a bed; 6) a cinema hall with red seats and a blank screen; 7) a sandy beach with an umbrella; 8) a swimming pool with lanes; 9) a garden with flowers and a watering can; 10) a small rowing boat on calm water.
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light. Absolutely no text, no letters, no numbers, no signs, no labels anywhere. Horizontal, aspect ratio 5:2.
-```
-
-### Л5.4 · История: под водой — 4 кадра (2×2)
-```
-A four-panel comic sheet in a clean 2x2 grid, equal panels separated by thin light-grey gutters. Same characters throughout, wearing diving masks: BEN a boy with dark-brown hair, LUCY a girl with ginger hair, HORAX a tall thin villain, ZELDA a short round villainess.
-1) Ben and Lucy diving down towards a giant shell on the sea floor.
-2) Ben with his arm stuck inside the giant shell, Lucy pulling at him, both worried.
-3) Horax and Zelda trapped inside a metal cage on the sea bed with a big shark circling outside - comic, not frightening.
-4) A shoal of silver fish forming one clear curved abstract symbol in the water while Ben and Lucy point at it, a helpful octopus beside them.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, underwater light, vivid colours, kid-safe. Absolutely no text, no letters, no numbers, no real alphabet shapes, no speech bubbles anywhere. Square, aspect ratio 1:1.
-```
-
-### Л5.5 · Монстр Crocorox и песня — 4 картинки (2×2)
-```
-A sheet of four separate underwater pictures in a clean 2x2 grid, equal cells separated by thin light-grey gutters:
-1) a funny sea monster, silly and not frightening - an ugly square face, long teeth, small eyes, green scales on its head, short fins;
-2) a sad purple octopus with drooping tentacles;
-3) a turtle hiding completely inside its shell, only one eye peeping;
-4) a group of orange starfish huddled together looking scared.
-Bright 3D-rendered cartoon style, Pixar-like, expressive comic faces, vivid saturated colours, kid-safe. Absolutely no text, no letters, no numbers anywhere. Square, aspect ratio 1:1.
-```
-
-### Л5.6 · Кайли и дельфины — 2 кадра (2×1)
-```
-A two-panel strip in one horizontal row, equal panels separated by a thin light-grey gutter:
-1) a girl swimmer in open water with a ring of dolphins around her and a white shark fin in the distance;
-2) the dolphins slapping the water surface with their tails, spray flying, the shark turning away.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, vivid sea colours, tense but kid-safe, not scary. Absolutely no text, no letters, no numbers anywhere. Horizontal, aspect ratio 2:1.
 ```
 
 ### Л5.7 · Экология: изменения климата и загрязнение — 6 иконок (3×2)
@@ -470,28 +373,11 @@ A sheet of ten separate comparison cards in a clean 5x2 grid, equal cells separa
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light, screens blank. Absolutely no text, no letters, no numbers, no price tags, no logos anywhere. Horizontal, aspect ratio 5:2.
 ```
 
-### Л6.4 · История: пещеры — 4 кадра (2×2)
-```
-A four-panel comic sheet in a clean 2x2 grid, equal panels separated by thin light-grey gutters. Same characters throughout: BEN a boy with dark-brown hair and a green hoodie, LUCY a girl with ginger hair and denim dungarees, BUSTER a small beige terrier, HORAX a tall thin villain in a black coat and round dark glasses, ZELDA a short round villainess in a purple dress.
-1) Ben and Lucy at the dark mouth of a cave in a hillside, Ben pointing down into it.
-2) Inside the dark cave, Ben holding a torch whose beam lights damp rock walls, Lucy beside him holding a walkie-talkie.
-3) Buster growling in the dark, ears back, eyes glinting.
-4) Horax and Zelda running out of the cave in comic panic.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, dramatic torchlight, kid-safe and not frightening. Absolutely no text, no letters, no numbers, no speech bubbles anywhere. Square, aspect ratio 1:1.
-```
-
 ### Л6.5 · Наскальная живопись: материалы — 6 карточек (3×2)
 ```
 A sheet of six separate cards in a clean 3x2 grid, equal cells separated by thin light-grey gutters, each cell one item on pure white:
 1) small heaps of red, ochre and white mineral rock powder on a flat stone; 2) an old stone oil lamp with a small flame; 3) a rough rocky cave ceiling seen from below with a few bats; 4) a thin bare twig; 5) pieces of black charcoal; 6) a prehistoric artist's hand pressed on a rock wall leaving an ochre handprint.
 Bright 3D-rendered cartoon style with a slightly earthy palette, soft rounded shapes, soft even light. Absolutely no text, no letters, no numbers, no labels anywhere. Horizontal, aspect ratio 3:2.
-```
-
-### Л6.6 · Наскальные рисунки — 3 картинки (3×1)
-```
-A three-panel strip in one horizontal row, equal panels separated by thin light-grey gutters. Each panel shows an ancient cave painting on a rough rock wall, painted in ochre, red and black pigments in a primitive stick-figure style:
-1) a man standing beside a tall giraffe; 2) a line of people riding camels; 3) a hunting scene with figures holding spears while two other figures stand talking.
-Photorealistic rock texture with flat primitive painted figures, warm cave lighting. Absolutely no text, no letters, no numbers, no modern symbols anywhere. Horizontal, aspect ratio 3:1.
 ```
 
 ### Л6.7 · Две собаки Lucky и Mister (сцена)
@@ -562,44 +448,6 @@ A sheet of nine separate cards in a clean 3x3 grid, equal cells separated by thi
 Bright 3D-rendered cartoon style, Pixar-like, expressive faces, vivid saturated colours, soft even light. Absolutely no text, no letters, no numbers, no words in the speech puff anywhere. Square, aspect ratio 1:1.
 ```
 
-### Л7.4 · Песня «плохой день» — 4 кадра (2×2)
-```
-A four-panel comic sheet in a clean 2x2 grid, equal panels separated by thin light-grey gutters. The same girl in every panel - dark plaits, yellow raincoat:
-1) in a kitchen with a huge apple cake on the table, she has just swallowed a big piece and now holds her tummy;
-2) on a farm, looking up startled at a snake curled on a fence post;
-3) walking straight into a tree trunk, birds flying off, comic stars around her head;
-4) at a market, a box of apples landing on her knee, apples rolling everywhere.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, comic and kind, nothing painful-looking. Absolutely no text, no letters, no numbers, no speech bubbles anywhere. Square, aspect ratio 1:1.
-```
-
-### Л7.5 · История: больница — 4 кадра (2×2)
-```
-A four-panel comic sheet in a clean 2x2 grid, equal panels separated by thin light-grey gutters. Same characters throughout: BEN a boy with dark-brown hair and a green hoodie, LUCY a girl with ginger hair and denim dungarees, HORAX a tall thin villain with a pointed grey beard.
-1) Ben looking at his phone surprised, Lucy leaning in; the phone screen is completely blank.
-2) Ben and Lucy walking down a hospital corridor past identical doors with blank number plates.
-3) Horax sitting up in a hospital bed pretending to be a grandfather, comically over-acting, Ben and Lucy suspicious.
-4) A doctor opening the door, Horax caught out, Ben and Lucy slipping away holding an old book.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, expressive, kid-safe. Absolutely no text, no letters, no numbers, no door numbers, no speech bubbles anywhere. Square, aspect ratio 1:1.
-```
-
-### Л7.6 · Эмма и пёс Джаспер — 4 кадра (2×2)
-```
-A four-panel story sheet in a clean 2x2 grid, equal panels separated by thin light-grey gutters. The same girl of about ten in every panel - short brown hair, blue jumper:
-1) the girl in a wheelchair beside her worried parents, looking tired;
-2) a helper-dog centre with several big dogs, one large golden dog gently placing his paw on the girl's leg;
-3) the girl walking again with the golden dog at her side, crutches leaning unused against a wall;
-4) the dog wearing a big winner's medal while the girl hugs him, a small trophy beside them.
-Warm storybook illustration style, bright 3D-rendered cartoon, Pixar-like, emotional and kind, kid-safe. Absolutely no text, no letters, no numbers, no writing on the medal or trophy anywhere. Square, aspect ratio 1:1.
-```
-
-### Л7.7 · Джо Фриз, мороженое-монстрик — 2 кадра (2×1)
-```
-A two-panel strip in one horizontal row, equal panels separated by a thin light-grey gutter. The same small friendly ice-cream monster in both - a scoop-shaped body on a cone base with big eyes:
-1) lying in bed with a headache, an ice pack on his head, curtains drawn;
-2) happily eating a bowl of ice cream while his big monster father offers him a spoon of medicine in the background.
-Bright 3D-rendered cartoon style, Pixar-like, funny and cute, vivid saturated colours, kid-safe. Absolutely no text, no letters, no numbers anywhere. Horizontal, aspect ratio 2:1.
-```
-
 ### Л7.8 · Здоровый и нездоровый образ жизни — 6 карточек (3×2)
 ```
 A sheet of six separate cards in a clean 3x2 grid, equal cells separated by thin light-grey gutters. The top row shows healthy habits, the bottom row unhealthy ones:
@@ -665,35 +513,6 @@ A sheet of eight separate wonder cards in a clean 4x2 grid, equal cells separate
 Bright 3D-rendered cartoon style with a touch of realism, Pixar-like lighting, vivid saturated colours. Absolutely no text, no letters, no numbers, no place names, no map writing anywhere. Horizontal, aspect ratio 2:1.
 ```
 
-### Л8.6 · Путешествия во времени — 4 кадра (2×2)
-```
-A sheet of four separate illustrations in a clean 2x2 grid, equal cells separated by thin light-grey gutters. The same round glass time machine with copper pipes appears in every cell:
-1) a boy in a big sun hat stepping out of the time machine in ancient Egypt, pyramids under construction behind him with many workers;
-2) the same boy taking a photo with a small camera in the hot sun while workers pull a huge stone block;
-3) a boy in a thick coat beside the time machine on an icy Greenland shore with icebergs and a husky;
-4) a girl beside the time machine on a clean South African beach, local people sharing grilled fish with her while she rubs her tummy to show she is hungry.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, vivid saturated colours, respectful and kid-safe. Absolutely no text, no letters, no numbers, no hieroglyph-like writing anywhere. Square, aspect ratio 1:1.
-```
-
-### Л8.7 · История: волшебный глобус — 4 кадра (2×2)
-```
-A four-panel comic sheet in a clean 2x2 grid, equal panels separated by thin light-grey gutters. Same characters throughout: BEN a boy with dark-brown hair and a green hoodie, LUCY a girl with ginger hair and denim dungarees, MR WILLIAMS a kind elderly librarian in a brown cardigan.
-1) Ben and Lucy leaning over a glowing magic globe that shows a Brazilian football stadium inside it.
-2) The same globe now showing the Great Wall of China on one side and the Sydney Opera House on the other.
-3) Ben patting his empty bag - the old book is gone; both children alarmed.
-4) Mr Williams appearing behind them holding the book and smiling kindly, while Lucy spots loose symbol tiles falling out of it - abstract shapes, not real letters.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, warm magical glow, kid-safe. Absolutely no text, no letters, no numbers, no real alphabet shapes, no speech bubbles anywhere. Square, aspect ratio 1:1.
-```
-
-### Л8.8 · Макс в Чили — 3 кадра (3×1)
-```
-A three-panel strip in one horizontal row, equal panels separated by thin light-grey gutters. The same boy of about ten in every panel - black hair, orange T-shirt:
-1) the boy and his family looking up at huge stone statues shaped like people's heads;
-2) the boy running onto a beach straight past a warning sign board that is completely blank, rubbish floating in the water;
-3) the same boy in bed feeling ill, a glass of water and a thermometer on the bedside table, his worried mother beside him.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, vivid saturated colours, kid-safe. Absolutely no text, no letters, no numbers, no warning-sign writing anywhere - the sign must be blank. Horizontal, aspect ratio 3:1.
-```
-
 ### Л8.9 · Интервью с космонавтом (сцена)
 ```
 A child reporter holding a toy microphone interviewing a smiling astronaut in a spacesuit. Behind them a rocket on a launch pad and a red planet in the sky with two friendly purple aliens waving.
@@ -731,26 +550,6 @@ A sheet of six separate cards in a clean 3x2 grid, equal cells separated by thin
 Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, clear intention in every cell. Absolutely no text, no letters, no numbers, no screen content, no logos anywhere. Horizontal, aspect ratio 3:2.
 ```
 
-### Л9.5 · Лиам во Флориде — 4 кадра (2×2)
-```
-A four-panel story sheet in a clean 2x2 grid, equal panels separated by thin light-grey gutters. The same boy in every panel - blond hair, blue T-shirt:
-1) the boy and his parents arriving at a bright beach hotel with palm trees and suitcases, excited;
-2) night - the boy sitting up in bed, a big lightning bolt and heavy rain outside the window;
-3) dad switching on a hotel television whose screen shows only a rain symbol and nothing else, the boy disappointed;
-4) the family playing board games, reading and listening to music in the room while rain runs down the window, all of them laughing.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, warm and cosy, kid-safe. Absolutely no text, no letters, no numbers, no channel logos, no speech bubbles anywhere. Square, aspect ratio 1:1.
-```
-
-### Л9.6 · Финал истории: замок — 4 кадра (2×2)
-```
-A four-panel comic sheet in a clean 2x2 grid, equal panels separated by thin light-grey gutters. Same characters throughout: BEN a boy with dark-brown hair and a green hoodie, LUCY a girl with ginger hair and denim dungarees, BUSTER a small beige terrier, HORAX a tall thin villain in a black coat with round dark glasses and a pointed grey beard, ZELDA a short round villainess in a purple dress, MR WILLIAMS a kind elderly librarian in a brown cardigan.
-1) An old castle gate with a heavy stone door; above it a carved stone panel with empty slots for missing symbols; Ben and Lucy arriving.
-2) Horax and Zelda whispering in front of the door, holding loose carved symbol tiles - abstract shapes, not real letters.
-3) Buster jumping up and pulling the round dark glasses off Horax's face - underneath he is Mr Williams the librarian; everyone shocked.
-4) The door wide open with golden light pouring out, Ben and Lucy standing in front of an open treasure chest full of gold coins and old books.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, dramatic golden light, kid-safe. Absolutely no text, no letters, no numbers, no real alphabet shapes on the tiles or the panel, no speech bubbles anywhere. Square, aspect ratio 1:1.
-```
-
 ### Л9.7 · Отдых 100 лет назад и сегодня — 9 карточек (3×3)
 ```
 A sheet of nine separate cards in a clean 3x3 grid, equal cells separated by thin light-grey gutters, each cell one item on pure white. Cells 1-7 are in a vintage early-1900s seaside style with slightly muted sepia-tinted colours, cells 8-9 are modern and brightly coloured:
@@ -762,12 +561,6 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded shapes, soft even lig
 ```
 A television weather board showing seven equal vertical columns, each column containing one big weather icon only and nothing else, in this order from left to right: rainy, sunny, cloudy, windy, cloudy, rainy, sunny. A friendly presenter stands beside the board pointing at it.
 Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, clean studio look. Absolutely no text, no letters, no numbers, no day names, no temperatures anywhere - the days must be readable only from the position of the icons. Horizontal, aspect ratio 3:2.
-```
-
-### Л9.9 · Брайтон 100 лет назад (сцена)
-```
-A crowded old-fashioned seaside beach of about a hundred years ago: a steam train arriving at the edge of the scene, a striped puppet-show booth, donkeys giving rides on the sand, a hand ice-cream cart, families with picnic baskets and striped bathing tents, a park with trees beyond the promenade.
-Bright 3D-rendered cartoon style, Pixar-like, slightly muted vintage palette, lots of small clearly visible details, one single scene. Absolutely no text, no letters, no numbers, no signs, no shop names anywhere. Horizontal, aspect ratio 3:2.
 ```
 
 ### Л9.10 · Кемпинг в грозу (сцена)
@@ -830,33 +623,6 @@ A detailed house-and-garden scene containing exactly these details, each one unm
 Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, clear uncluttered composition, every detail fully visible and unambiguous, nothing hidden behind anything else. Absolutely no text, no letters, no numbers, no house number, no signs anywhere. Horizontal, aspect ratio 3:2.
 ```
 
-### ЛФ.7 · Джим и клоун — 2 кадра (2×1)
-```
-A two-panel strip in one horizontal row, equal panels separated by a thin light-grey gutter. The same boy of about eight in both panels - short brown hair, green jumper:
-1) the boy and his mother eating a cake at a kitchen table, his father visible through a doorway sitting in the living room;
-2) a friendly smiling clown at a birthday party leaning down to the boy; on a chair beside them the clown's hat and the father's jacket hang together - a quiet clue that the clown is dad.
-Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, warm and funny, the clown friendly and not scary at all. Absolutely no text, no letters, no numbers anywhere. Horizontal, aspect ratio 2:1.
-```
-
----
-
-# Сводка
-
-| Юнит | Листов | Изображений в них |
-|---|---|---|
-| Персонажи | 2 | 42 |
-| Unit 1 School | 11 | 38 |
-| Unit 2 Food | 11 | 43 |
-| Unit 3 Home / Time / Jobs | 10 | 47 |
-| Unit 4 Town | 12 | 45 |
-| Unit 5 Sea | 10 | 49 |
-| Unit 6 Gadgets | 13 | 40 |
-| Unit 7 Health | 11 | 41 |
-| Unit 8 Countries | 9 | 48 |
-| Unit 9 Weather | 11 | 43 |
-| Final Test | 7 | 37 |
-| **Итого** | **107** | **473** |
-
 ## Порядок работы
 
 1. Сначала **ЛП.1** — лист персонажей. Утвердить — и только потом все листы с историями (Л1.6, Л3.5, Л4.6, Л5.4, Л6.4, Л7.5, Л8.7, Л9.6): в них герои должны совпадать.
@@ -864,3 +630,28 @@ Storybook illustration style, bright 3D-rendered cartoon, Pixar-like, warm and f
 3. Дальше можно лить пачками по юнитам.
 4. Флаги (**Л8.3**) — если с 2-3 попыток не получается точно, берём готовые SVG.
 5. Циферблаты (**Л3.3**) — при желании надёжнее сгенерировать кодом (SVG), стрелки будут точные.
+
+---
+
+# Сводка
+
+| Юнит | Листов |
+|---|---|
+| Unit 1 School | 9 |
+| Unit 2 Food | 10 |
+| Unit 3 Home / Time / Jobs | 7 |
+| Unit 4 Town | 10 |
+| Unit 5 Sea | 7 |
+| Unit 6 Gadgets | 11 |
+| Unit 7 Health | 7 |
+| Unit 8 Countries | 6 |
+| Unit 9 Weather | 8 |
+| Final Test | 6 |
+| **Итого** | **81** |
+
+## Порядок запуска
+
+1. **Л1.2** (предметы, 3×3) — пробный: проверяем, что генератор держит сетку и не вписывает буквы.
+2. Дальше пачками по юнитам, в любом порядке — сквозных героев больше нет, совпадать между листами ничему не нужно.
+3. Флаги (**Л8.3**) — если с 2–3 попыток не выходит точно, берём готовые SVG.
+4. Циферблаты (**Л3.3**) — надёжнее сгенерировать кодом (SVG), стрелки будут точные.
