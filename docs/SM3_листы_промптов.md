@@ -1,7 +1,7 @@
 # Super Minds 3 — ЛИСТЫ ПРОМПТОВ НА КАРТИНКИ
 
 Один промпт = одна картинка-лист с сеткой внутри. Потом лист режется на отдельные PNG.
-**88 листов** на 9 юнитов + Final Test.
+**89 листов** на 9 юнитов + Final Test.
 
 ## Два жёстких правила
 
@@ -26,6 +26,19 @@
 - «Сцена» (solo) — там, где ребёнок описывает картинку или ищет детали:
   одна большая картинка, в сетку не складывается.
 - Животные разрешены: кошка, собака, дельфин — это предметы задания, а не герои.
+
+## Стилевые регистры
+
+Сложились сами по ходу генерации, дальше держим осознанно. В одном листе — **один** регистр,
+иначе после нарезки карточки не встанут в ряд.
+
+| Что | Регистр |
+|---|---|
+| Обложки юнитов и сюжетные сцены (пикник, магазин, кабинет) | полу-мультяшный 3D, как Л1.1 и Л2.8 |
+| Предметные карточки (еда, гаджеты, достопримечательности) | реалистичный 3D — узнаваемость важнее |
+| Символы и схемы (предметы школы, погода, экология, части растений) | мультяшный глянец |
+| Фигуры и коллажи из фигур | плоский вектор |
+| Животные в мультяшной манере | только на отдельном листе, не в одной сетке с фото-едой |
 
 ## Что берём из книги, а не генерируем
 
@@ -191,14 +204,22 @@ Clean cartoon-botanical style, soft rounded shapes, vivid saturated colours, sof
 Output size: 2048 x 1365 px, each cell at least 650 px.
 ```
 
-### Л2.7 · Блюда из растений и кто что ест — 6 картинок (3×2)
+### Л2.7 · Блюда из растений — 5 картинок (3+2)
 ```
-A sheet of six separate pictures in a clean 3x2 grid, equal cells separated by thin light-grey gutters:
-1) a green salad of spinach and lettuce in a bowl; 2) a bowl of asparagus soup; 3) roast pumpkin with chicken on a plate; 4) a salad of carrots and beetroot; 5) a glass of strawberry and mango smoothie;
-6) a small meadow with six animals each eating a different plant part - a rabbit with a carrot, a giraffe eating leaves, a parrot eating seeds, a panda with a bamboo stem, a monkey with a fruit, a goat nibbling grass.
-No people, no humans, no hands anywhere - animals only in cell 6.
-Bright 3D-rendered cartoon style, Pixar-like, appetising, vivid saturated colours, soft even light. Absolutely no text, no letters, no numbers, no labels anywhere.
+A sheet of five separate pictures in a clean grid of three cells in the top row and two cells in the bottom row, equal cells separated by thin light-grey gutters, the empty sixth position left as plain white:
+1) a green salad of spinach and lettuce in a bowl; 2) a bowl of asparagus soup; 3) roast pumpkin with chicken on a plate; 4) a salad of carrots and beetroot; 5) a tall glass of strawberry and mango smoothie.
+No people, no humans, no hands anywhere.
+Realistic appetising food photography look, soft natural light, shallow depth of field, warm wooden surfaces. Absolutely no text, no letters, no numbers, no labels anywhere.
 Output size: 2048 x 1365 px, each cell at least 650 px.
+```
+
+### Л2.12 · Кто какую часть растения ест (сцена)
+```
+A sunny meadow with six animals, each one clearly eating a different part of a plant, well separated across the frame so every pair is unmistakable:
+a rabbit biting an orange carrot pulled from the ground (root); a giraffe pulling green leaves from a branch (leaves); a parrot cracking sunflower seeds from a large sunflower head (seeds, not leaves); a panda chewing a thick bamboo stem (stem); a monkey holding a mango (fruit); a goat nibbling grass.
+No people at all - no humans, no hands anywhere.
+Bright 3D-rendered cartoon style, Pixar-like, friendly animal faces, vivid saturated colours, one single scene. Absolutely no text, no letters, no numbers, no labels anywhere.
+Output size: 2048 x 1365 px.
 ```
 
 ### Л2.8 · Пикник (сцена)
@@ -877,7 +898,7 @@ Output size: 2048 x 1024 px.
 | Юнит | Листов |
 |---|---|
 | Unit 1 School | 9 |
-| Unit 2 Food | 11 |
+| Unit 2 Food | 12 |
 | Unit 3 Home / Time / Jobs | 9 |
 | Unit 4 Town | 10 |
 | Unit 5 Sea | 8 |
@@ -886,7 +907,7 @@ Output size: 2048 x 1024 px.
 | Unit 8 Countries | 10 |
 | Unit 9 Weather | 10 |
 | Final Test | 6 |
-| **Итого** | **88** |
+| **Итого** | **89** |
 
 ## Порядок запуска
 
