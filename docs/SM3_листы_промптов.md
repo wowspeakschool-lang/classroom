@@ -1,7 +1,7 @@
 # Super Minds 3 — ЛИСТЫ ПРОМПТОВ НА КАРТИНКИ
 
 Один промпт = одна картинка-лист с сеткой внутри. Потом лист режется на отдельные PNG.
-**89 листов** на 9 юнитов + Final Test.
+**87 листов** на 9 юнитов + Final Test.
 
 ## Два жёстких правила
 
@@ -256,7 +256,7 @@ Output size: 2048 x 1365 px.
 
 ---
 
-# UNIT 3 · AT HOME / TIME / JOBS — 9 листов
+# UNIT 3 · AT HOME / TIME / JOBS — 7 листов
 
 ### Л3.1 · Обложка юнита (сцена)
 ```
@@ -290,21 +290,13 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 Output size: 2048 x 1024 px.
 ```
 
-### Л3.4 · Циферблаты, часть 1 — 6 карточек (3×2)
-```
-A sheet of six separate clock cards in a clean 3x2 grid, equal cells separated by thin light-grey gutters, each cell one simple round wall clock on a plain pastel wall. Every clock has a white face, bold black hour and minute hands and twelve plain tick marks with absolutely no numbers on the dial. The hands show, in order:
-1) quarter past eight; 2) half past eight; 3) quarter past five; 4) quarter to seven; 5) half past six; 6) twelve o'clock.
-No people anywhere. Clean 3D cartoon style, soft rounded shapes, soft even light, crisp readable hands, hour hand clearly shorter than the minute hand. Absolutely no text, no letters, no numbers, no brand marks anywhere.
-Output size: 2048 x 1365 px, each cell at least 650 px.
-```
-
-### Л3.5 · Циферблаты, часть 2 — 6 карточек (3×2)
-```
-A sheet of six separate clock cards in a clean 3x2 grid, equal cells separated by thin light-grey gutters, each cell one simple round wall clock on a plain pastel wall. Every clock has a white face, bold black hour and minute hands and twelve plain tick marks with absolutely no numbers on the dial. The hands show, in order:
-1) twenty to four; 2) quarter past three; 3) quarter to five; 4) six o'clock; 5) half past ten; 6) quarter to eight.
-No people anywhere. Clean 3D cartoon style, soft rounded shapes, soft even light, crisp readable hands, hour hand clearly shorter than the minute hand. Absolutely no text, no letters, no numbers, no brand marks anywhere.
-Output size: 2048 x 1365 px, each cell at least 650 px.
-```
+### Л3.4–Л3.5 · Циферблаты — генератором не делаем
+Двенадцать циферблатов рисует `tools/gen_clocks.py` → `media/sm3/u3/clock_*.svg`.
+Генератор картинок стрелки не держит: из двенадцати сгенерированных циферблатов
+верными вышли пять, один дублировал другой. Углы считаются арифметикой
+(`часовая = (h%12)*30 + m*0.5`, `минутная = m*6`), двенадцать делений без цифр,
+часовая заметно короче и толще минутной, фон карточки — один из шести пастельных.
+Время добавляется строкой в список `TIMES`, скрипт переприменяемый.
 
 ### Л3.6 · Профессии — 9 карточек (3×3)
 ```
@@ -899,7 +891,7 @@ Output size: 2048 x 1024 px.
 |---|---|
 | Unit 1 School | 9 |
 | Unit 2 Food | 12 |
-| Unit 3 Home / Time / Jobs | 9 |
+| Unit 3 Home / Time / Jobs | 7 |
 | Unit 4 Town | 10 |
 | Unit 5 Sea | 8 |
 | Unit 6 Gadgets | 11 |
@@ -907,7 +899,7 @@ Output size: 2048 x 1024 px.
 | Unit 8 Countries | 10 |
 | Unit 9 Weather | 10 |
 | Final Test | 6 |
-| **Итого** | **89** |
+| **Итого** | **87** |
 
 ## Порядок запуска
 
@@ -917,4 +909,4 @@ Output size: 2048 x 1024 px.
 2. Дальше юниты в любом порядке: сквозных героев нет, согласовывать листы
    между собой не нужно.
 3. Флаги (Л8.4, Л8.5) — если с 2–3 попыток не точно, берём SVG.
-4. Циферблаты (Л3.4, Л3.5) — надёжнее сгенерировать кодом (SVG).
+4. Циферблаты — уже сделаны кодом: `python3 tools/gen_clocks.py`.
