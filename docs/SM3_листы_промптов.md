@@ -14,6 +14,11 @@
 карточка выходит мелкой и мылит при нарезке. Поэтому наборы из 10–12 карточек
 разбиты на два листа.
 
+**3. Ни одного узнаваемого реального товара.** Логотипов генератор не рисует, а вот
+корпус копирует: приставка выходит PlayStation 5, телефон — iPhone Pro, кроссовок —
+Nike. Для школы это лишнее. Поэтому в промптах на технику, обувь и машины стоит
+`generic design, not resembling any real product`.
+
 ## Правила листа
 
 - Промпт копируется целиком, дописывать ничего не надо: сетка, разделители,
@@ -516,7 +521,8 @@ Output size: 2048 x 1365 px.
 ### Л6.2 · Гаджеты — 9 карточек (3×3)
 ```
 A sheet of nine separate gadget cards in a clean 3x3 grid, equal cells separated by thin light-grey gutters, each cell one modern gadget centred on pure white in three-quarter view, all screens completely blank:
-1) a mobile phone; 2) a tablet; 3) a laptop; 4) a torch switched on with a light beam; 5) a pair of walkie-talkies; 6) open lift doors in a hallway; 7) a games console with a controller; 8) an electric toothbrush; 9) an electric fan.
+1) a mobile phone; 2) a tablet; 3) a laptop; 4) a torch switched on with a light beam; 5) a pair of walkie-talkies; 6) open lift doors, the lift cut out on pure white like the other cells with no hallway around it; 7) a games console with a controller; 8) an electric toothbrush; 9) an electric fan.
+Every gadget is a generic invented design, not resembling any real product - the console must not look like any existing console and the phone must not look like any existing phone.
 No people at all - no humans, no hands anywhere.
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light. Absolutely no text, no letters, no numbers, no brand marks, no logos, no screen content anywhere.
 Output size: 2048 x 2048 px, each cell at least 650 px.
@@ -535,6 +541,7 @@ Output size: 2048 x 1365 px, each cell at least 650 px.
 ```
 A sheet of four separate comparison cards in a clean 2x2 grid, equal cells separated by thin light-grey gutters. Each cell shows exactly two objects side by side on pure white, same viewpoint, the difference obvious at a glance:
 1) a butterfly and a caterpillar; 2) a desktop computer and a small torch; 3) a fancy white smartphone and a plain black smartphone; 4) a boxy 1970s game console with a wired controller and a slim modern console with a wireless controller.
+Every device is a generic invented design, not resembling any real product - neither phone may look like any existing phone and neither console like any existing console.
 No people at all - no humans, no hands anywhere.
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, screens blank. Absolutely no text, no letters, no numbers, no logos, no brand marks anywhere.
 Output size: 2048 x 2048 px.
