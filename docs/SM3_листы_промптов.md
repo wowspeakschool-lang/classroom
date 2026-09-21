@@ -38,7 +38,7 @@
 
 ---
 
-# UNIT 1 · SCHOOL — 11 листов
+# UNIT 1 · SCHOOL — 9 листов
 
 ### Л1.1 · Обложка юнита (сцена)
 ```
@@ -100,7 +100,7 @@ Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, soft even
 
 ---
 
-# UNIT 2 · FOOD — 11 листов
+# UNIT 2 · FOOD — 10 листов
 
 ### Л2.1 · Обложка юнита (сцена)
 ```
@@ -176,7 +176,7 @@ Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, everythin
 
 ---
 
-# UNIT 3 · AT HOME / TIME / JOBS — 10 листов
+# UNIT 3 · AT HOME / TIME / JOBS — 7 листов
 
 ### Л3.1 · Обложка юнита (сцена)
 ```
@@ -225,7 +225,7 @@ Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, clean and
 
 ---
 
-# UNIT 4 · IN THE TOWN — 12 листов
+# UNIT 4 · IN THE TOWN — 10 листов
 
 ### Л4.1 · Обложка юнита (сцена)
 ```
@@ -294,7 +294,7 @@ Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, each dest
 
 ---
 
-# UNIT 5 · UNDER THE SEA — 10 листов
+# UNIT 5 · UNDER THE SEA — 7 листов
 
 ### Л5.1 · Обложка юнита (сцена)
 ```
@@ -351,7 +351,7 @@ Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, emotional
 
 ---
 
-# UNIT 6 · GADGETS — 13 листов
+# UNIT 6 · GADGETS — 11 листов
 
 ### Л6.1 · Обложка юнита (сцена)
 ```
@@ -426,7 +426,7 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 
 ---
 
-# UNIT 7 · HEALTH / PAST SIMPLE — 11 листов
+# UNIT 7 · HEALTH / PAST SIMPLE — 7 листов
 
 ### Л7.1 · Обложка юнита (сцена)
 ```
@@ -476,7 +476,7 @@ Bright 3D-rendered cartoon style, Pixar-like, lively, vivid saturated colours. A
 
 ---
 
-# UNIT 8 · COUNTRIES — 9 листов
+# UNIT 8 · COUNTRIES — 6 листов
 
 ### Л8.1 · Обложка юнита (сцена)
 ```
@@ -521,7 +521,7 @@ Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, funny and
 
 ---
 
-# UNIT 9 · WEATHER / BE GOING TO — 11 листов
+# UNIT 9 · WEATHER / BE GOING TO — 8 листов
 
 ### Л9.1 · Обложка юнита (сцена)
 ```
@@ -577,7 +577,7 @@ Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, each vign
 
 ---
 
-# FINAL TEST — 7 листов
+# FINAL TEST — 6 листов
 
 ### ЛФ.1 · Обложка (сцена)
 ```
