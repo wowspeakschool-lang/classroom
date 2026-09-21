@@ -567,6 +567,7 @@ Output size: 2048 x 1365 px.
 ### Л6.7 · Магазин гаджетов с ценниками (сцена)
 ```
 An electronics shop counter with nobody behind it: a laptop, a games console, a tablet, a pair of walkie-talkies, a torch, an electric toothbrush and a small digital radio on display, each item standing beside its own small price tag that is completely blank and empty.
+Every gadget is a generic invented design, not resembling any real product - the console must not look like any existing console, and the boxes on the shelves behind must not show any recognisable product either.
 No people at all - no shop assistant, no customers, no hands anywhere.
 Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, all screens blank, every price tag empty. Absolutely no text, no letters, no numbers, no prices, no logos anywhere.
 Output size: 2048 x 1365 px.
