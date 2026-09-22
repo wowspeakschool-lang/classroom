@@ -681,20 +681,31 @@ Output size: 2048 x 2048 px.
 
 ### Л8.4 · Флаги, часть 1 — 6 карточек (3×2)
 ```
-A sheet of six separate flag cards in a clean 3x2 grid, equal cells separated by thin light-grey gutters, each cell one national flag on pure white, gently waving, accurate colours and accurate proportions, clean crisp vector-like rendering, nothing else in the cell. In this order:
-1) Egypt; 2) Argentina; 3) Chile; 4) Mexico; 5) Spain; 6) China.
-No people anywhere. Absolutely no text, no letters, no numbers, no country names, no captions anywhere - flag emblems only where the real flag has them.
+A sheet of six separate flag cards in a clean 3x2 grid, equal cells separated by thin light-grey gutters, each cell one national flag on pure white. Draw every flag flat and rectangular, seen straight on, not waving, not folded, not on a pole, with correct proportions, correct colour order and clean crisp vector-like edges, nothing else in the cell:
+1) Egypt - three equal horizontal bands, red on top, white in the middle, black at the bottom, with a small gold eagle emblem centred on the white band;
+2) Argentina - three equal horizontal bands, light blue on top, white in the middle, light blue at the bottom, with a small golden sun with a face and rays centred on the white band;
+3) Chile - a white band on top and a red band below of equal height, and at the top left a blue square exactly as tall as the white band with one white five-pointed star centred in it;
+4) Mexico - three equal vertical bands, green at the left, white in the middle, red at the right, with a small eagle-on-a-cactus emblem centred on the white band;
+5) Spain - three horizontal bands, red on top, yellow in the middle, red at the bottom, the yellow band twice as tall as each red band, with a small coat of arms on the yellow band towards the left;
+6) China - a plain red field with one large gold five-pointed star in the upper left and four small gold stars in an arc to the right of it.
+No people anywhere. Absolutely no text, no letters, no numbers, no country names, no captions anywhere - emblems only where the real flag has them, and every emblem carries no writing.
 Output size: 2048 x 1365 px, each cell at least 650 px.
 ```
 
 ### Л8.5 · Флаги, часть 2 — 4 карточки (2×2)
 ```
-A sheet of four separate flag cards in a clean 2x2 grid, equal cells separated by thin light-grey gutters, each cell one national flag on pure white, gently waving, accurate colours and accurate proportions, clean crisp vector-like rendering, nothing else in the cell. In this order:
-1) India; 2) Turkey; 3) Brazil; 4) Australia.
-No people anywhere. Absolutely no text, no letters, no numbers, no country names, no captions anywhere - flag emblems only where the real flag has them, and the Brazilian banner must carry no words.
+A sheet of four separate flag cards in a clean 2x2 grid, equal cells separated by thin light-grey gutters, each cell one national flag on pure white. Draw every flag flat and rectangular, seen straight on, not waving, not folded, not on a pole, with correct proportions, correct colour order and clean crisp vector-like edges, nothing else in the cell:
+1) India - three equal horizontal bands, saffron orange on top, white in the middle, green at the bottom, with a navy blue spoked wheel centred on the white band;
+2) Turkey - a plain red field with a white crescent left of centre and one small white five-pointed star to the right of the crescent's opening;
+3) Brazil - a green field with a large yellow diamond in the centre, a blue globe inside the diamond scattered with small white stars, and a plain white curved band across the globe that is completely empty and carries absolutely no writing;
+4) Australia - a dark blue field with the British Union Jack filling the upper left quarter, one large white seven-pointed star below it, and five white stars of the Southern Cross on the right half.
+No people anywhere. Absolutely no text, no letters, no numbers, no country names, no captions, no motto on the Brazilian band anywhere.
 Output size: 2048 x 2048 px.
 ```
-> Флаги генераторы искажают чаще всего. Если с 2–3 попыток не выходит точно — брать готовые SVG.
+> Флаги генератор искажает чаще всего: путает число полос и звёзд, сбивает пропорции,
+> на бразильской ленте норовит написать девиз. Поэтому флаги рисуются плоскими, без
+> складок, и каждый описан по деталям. Проверять по списку: порядок цветов, соотношение
+> полос, число и положение звёзд, пустая лента у Бразилии.
 
 ### Л8.6 · Достопримечательности, часть 1 — 6 карточек (3×2)
 ```
