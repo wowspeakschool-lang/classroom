@@ -68,6 +68,36 @@ v_media text := 'https://classroom.wowteach.ru/media/';
 заполняет `audio`. Уже заполненный звук не трогается. Значение — строка или
 `{text, voice}`. Мы только размечаем, нажимает методист.
 
+## Аудио и видео от методиста
+
+В выгрузке «Взнания» медиафайлов нет никогда, поэтому блок `video` заливается
+с пустым `url`, а строка «нужна ссылка» уходит в файл «доработать руками».
+Методист присылает их потом, и имя файла должно само говорить, куда его вставить:
+
+```
+sm2_u6_hw2_b9      курс _ юнит _ урок _ блок
+sm2_u6_test_b13    тест юнита
+sm2_final_b3       урок отдельного юнита Final Test
+```
+
+Номер блока — **как в редакторе** (`sort_order + 1`), тот же, что в файле
+«доработать руками». Аудио (`.mp3`) кладём в `media/<курс>/uN/` и ставим
+`provider: 'file'` — иначе плеер считает ссылку ютубовской. Видео обычно
+приходит ссылкой на YouTube: файла нет, методист присылает строки
+`sm2_u6_hw2_b9 = https://youtu.be/…`, `provider` остаётся `youtube`.
+
+Список пустых блоков на любой момент:
+
+```sql
+select u.sort_order, l.title, b.sort_order + 1 as block_no, b.payload->>'title'
+from classroom_courses c
+join classroom_units u on u.course_id = c.id
+join classroom_lessons l on l.unit_id = u.id
+join classroom_blocks b on b.lesson_id = l.id
+where c.slug = 'sm2' and b.type = 'video' and coalesce(b.payload->>'url', '') = ''
+order by u.sort_order, l.sort_order, b.sort_order;
+```
+
 ## Регламент работы над юнитом
 
 Порядок жёсткий, шаги не склеивать и не забегать вперёд.
