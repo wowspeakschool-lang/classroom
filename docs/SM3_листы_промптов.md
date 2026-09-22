@@ -876,7 +876,11 @@ Output size: 2048 x 2048 px, each cell at least 650 px.
 ### ЛФ.4 · Аудирование: варианты ответов, часть 2 — 9 карточек (3×3)
 ```
 A sheet of nine separate answer cards in a clean 3x3 grid, equal cells separated by thin light-grey gutters, each cell one simple unambiguous object on pure white. Row by row, left to right:
-Row 1 - three birthday cakes that differ only in the number of candles; on every cake the candles stand upright, well separated and in one straight row across the top so they can be counted at a glance: the first cake has exactly eight candles, the second exactly nine candles, the third exactly ten candles. Count them carefully - the numbers must be exact.
+Row 1 - three birthday cakes that differ only in the number of candles. On every cake the candles stand upright, clearly separated from one another, in one straight row across the top of the cake, so they can be counted at a glance. Give each cake exactly the candles listed here, no more and no fewer, from left to right:
+ - first cake, eight candles: blue, red, yellow, green, pink, purple, orange, turquoise;
+ - second cake, nine candles: blue, red, yellow, green, pink, purple, orange, turquoise, white;
+ - third cake, ten candles: blue, red, yellow, green, pink, purple, orange, turquoise, white, and a second red one.
+Follow these lists exactly - the number of candles on each cake is the point of the picture.
 Row 2 - a bicycle with a ribbon bow / a games console with a controller and a ribbon bow / a puppy with a ribbon bow.
 Row 3 - a bowl of soup / a bowl of salad / a bowl of fruit.
 The console is a generic invented design, not resembling any real product.
