@@ -412,7 +412,10 @@ Output size: 2048 x 2048 px.
 
 ### Л4.9 · Городская сцена под предлоги (сцена)
 ```
-One town street scene, empty of people, arranged so that these relations are unmistakable: the cinema stands opposite the library, a tall tower rises behind the cinema, a park lies opposite the school, a small boat floats below a bridge, the sports centre stands between the cinema and a cafe, and a castle rises behind the sports centre.
+One town street scene with nobody in it, seen from the middle of a street that runs away from the viewer into the distance, so the buildings stand in two facing rows - one row along the left side of the street, one along the right side - and every facing pair is plainly on opposite sides of the road:
+on the left side, the cinema with a tall stone tower rising directly behind it, then the sports centre next to the cinema, then a cafe next to the sports centre, so the sports centre stands between the cinema and the cafe, with a castle on a hill rising behind the sports centre;
+on the right side, the library standing directly across the road from the cinema, and further along the school standing directly across the road from a small park;
+in the foreground a canal crosses the street with a stone bridge over it and a small boat floating below the bridge.
 No people at all anywhere.
 Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, clear uncluttered composition, everything clearly visible. Absolutely no text, no letters, no numbers, no signs, no labels anywhere.
 Output size: 2048 x 1365 px.
