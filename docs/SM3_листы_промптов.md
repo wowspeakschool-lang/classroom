@@ -856,7 +856,7 @@ Output size: 2048 x 1365 px.
 ### ЛФ.2 · Дни недели: занятия — 6 карточек (3×2)
 ```
 A sheet of six separate cards in a clean 3x2 grid, equal cells separated by thin light-grey gutters, each cell showing the objects of one activity on pure white, with nobody doing it:
-1) swimming goggles and a swimming cap by a pool; 2) a guitar leaning on a stool; 3) a bicycle with a helmet hanging on the handlebar; 4) a shopping basket full of groceries; 5) a football and boots on grass; 6) a cake, a mixing bowl and a whisk on a kitchen worktop.
+1) swimming goggles and a swimming cap by a pool; 2) a guitar leaning on a stool; 3) a bicycle with a helmet hanging on the handlebar; 4) a shopping basket full of groceries; 5) a football and plain unbranded boots with no stripes and no logos on grass; 6) a cake, a mixing bowl and a whisk on a kitchen worktop.
 No people at all - no humans, no hands anywhere.
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light. Absolutely no text, no letters, no numbers, no brand marks anywhere.
 Output size: 2048 x 1365 px, each cell at least 650 px.
@@ -865,7 +865,7 @@ Output size: 2048 x 1365 px, each cell at least 650 px.
 ### ЛФ.3 · Аудирование: варианты ответов, часть 1 — 9 карточек (3×3)
 ```
 A sheet of nine separate answer cards in a clean 3x3 grid, equal cells separated by thin light-grey gutters, each cell one simple unambiguous object or place on pure white. Row by row, left to right:
-Row 1 - a tennis racket with a ball / a football with boots / swimming goggles with a swimming cap.
+Row 1 - a tennis racket with a ball / a football with plain unbranded boots that have no stripes and no logos / swimming goggles with a swimming cap.
 Row 2 - a yellow school bus / a bicycle with a backpack hanging on it / a pair of walking shoes on a pavement.
 Row 3 - an empty kitchen / an empty garden with a swing / an empty bedroom with a made bed.
 No people at all - no humans, no children, no hands anywhere.
@@ -876,10 +876,11 @@ Output size: 2048 x 2048 px, each cell at least 650 px.
 ### ЛФ.4 · Аудирование: варианты ответов, часть 2 — 9 карточек (3×3)
 ```
 A sheet of nine separate answer cards in a clean 3x3 grid, equal cells separated by thin light-grey gutters, each cell one simple unambiguous object on pure white. Row by row, left to right:
-Row 1 - a birthday cake with eight candles / a birthday cake with nine candles / a birthday cake with ten candles.
-Row 2 - a bicycle with a ribbon bow / a games console with a ribbon bow / a puppy with a ribbon bow.
+Row 1 - three birthday cakes that differ only in the number of candles; on every cake the candles stand upright, well separated and in one straight row across the top so they can be counted at a glance: the first cake has exactly eight candles, the second exactly nine candles, the third exactly ten candles. Count them carefully - the numbers must be exact.
+Row 2 - a bicycle with a ribbon bow / a games console with a controller and a ribbon bow / a puppy with a ribbon bow.
 Row 3 - a bowl of soup / a bowl of salad / a bowl of fruit.
-No people at all - no humans, no hands anywhere; the puppy is fine. The candles must be clearly countable.
+The console is a generic invented design, not resembling any real product.
+No people at all - no humans, no hands anywhere; the puppy is fine.
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light. Absolutely no text, no letters, no numbers, no brand marks anywhere.
 Output size: 2048 x 2048 px, each cell at least 650 px.
 ```
