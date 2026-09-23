@@ -205,10 +205,12 @@ A cute cartoon fox cub standing straight and facing the viewer, arms relaxed dow
 
 **Прикрепить две картинки: зайчика и cave-closed.** Валун должен быть тот же
 самый, что лежит во входе в пещеру — светлый кремово-белый, а не серый.
+Пещеру в кадр не берём: она у нас уже есть отдельной картинкой, а когда
+генератор рисует её здесь, сцена не помещается в кадр и скалу срезает краем.
 
 ```
-Three cute cartoon animal cubs — a cream-white bunny, a brown hedgehog and an orange fox — pushing together against a big round boulder that is starting to roll aside, revealing a dark gap behind it. The boulder is exactly the one from the attached cave picture: smooth pale cream-white stone with soft rounded facets, not grey and not rough. The three cubs are exactly the characters from the attached picture, same fur colors and same faces. All three lean into the boulder with their paws, cheerful and determined, a few effort sparkles around them. Horizontal composition, all three animals and the boulder fully visible with clear empty margin around. Bright 3D rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colors, soft warm lighting from the top-left. No text. Plain flat pure white background, no shadow on the background.
+Three cute cartoon animal cubs — a cream-white bunny, a brown hedgehog and an orange fox, exactly the characters from the attached picture with the same fur colors and the same faces — pushing together against a big round smooth pale cream-white boulder with soft rounded facets, the same stone as in the second attached picture. The boulder has already started to roll aside and a narrow dark gap is visible behind it. Nothing else in the scene: no cave, no rock arch, no grass, only the three cubs, the boulder and the dark gap. All three lean into the boulder with their paws, cheerful and determined, a few effort sparkles around them. Horizontal composition, zoomed out so that every figure is complete, with a wide empty white margin on all four sides and nothing touching the edges of the frame. Bright 3D rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colors, soft warm lighting from the top-left. No text. Plain flat pure white background, no shadow on the background.
 ```
 
-**Проверить:** валун такой же светлый, как у входа в пещеру; это те же три
-зверька; камень уже сдвинулся, за ним видна щель.
+**Проверить:** ничего не упирается в край кадра; валун светлый, как у входа
+в пещеру; это те же три зверька; камень уже сдвинулся, за ним видна щель.
