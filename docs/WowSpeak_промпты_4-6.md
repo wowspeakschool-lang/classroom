@@ -194,8 +194,12 @@ A cute cartoon fox cub standing straight and facing the viewer, arms relaxed dow
 
 ## 17. friends-push — зверята двигают камень (горизонталь)
 
+**Прикрепить две картинки: зайчика и cave-closed.** Валун должен быть тот же
+самый, что лежит во входе в пещеру — светлый кремово-белый, а не серый.
+
 ```
-Three cute cartoon animal cubs — a cream-white bunny, a brown hedgehog and an orange fox — pushing together against a big round grey boulder that is starting to roll aside, revealing a dark gap behind it. All three lean into the boulder with their paws, cheerful and determined, a few effort sparkles around them. Horizontal composition, all three animals and the boulder fully visible with clear empty margin around. Bright 3D rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colors, soft warm lighting from the top-left. No text. Plain flat pure white background, no shadow on the background. Match the art style of the attached image exactly.
+Three cute cartoon animal cubs — a cream-white bunny, a brown hedgehog and an orange fox — pushing together against a big round boulder that is starting to roll aside, revealing a dark gap behind it. The boulder is exactly the one from the attached cave picture: smooth pale cream-white stone with soft rounded facets, not grey and not rough. The three cubs are exactly the characters from the attached picture, same fur colors and same faces. All three lean into the boulder with their paws, cheerful and determined, a few effort sparkles around them. Horizontal composition, all three animals and the boulder fully visible with clear empty margin around. Bright 3D rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colors, soft warm lighting from the top-left. No text. Plain flat pure white background, no shadow on the background.
 ```
 
-**Проверить:** это те же три зверька, камень уже сдвинулся, за ним видна щель.
+**Проверить:** валун такой же светлый, как у входа в пещеру; это те же три
+зверька; камень уже сдвинулся, за ним видна щель.
