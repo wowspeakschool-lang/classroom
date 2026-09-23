@@ -3,22 +3,26 @@
 
     python3 tools/build_kids46.py
 
-На выходе — `wowspeak-4-6.html`: карта и три урока в одном файле, картинки
-внутри, ничего не подгружается из сети.
+На выходе два файла:
+  wowspeak-4-6.html              карта и три урока, картинки внутри
+  docs/WowSpeak_озвучка_4-6.md   что озвучивать — собирается из тех же реплик
 
-Уроки здесь не правятся руками: вся структура лежит в LESSONS ниже, а HTML
-собирается из неё. Поправили спецификацию — пересобрали.
+Уроки здесь не правятся руками: вся структура лежит в LESSONS ниже. Реплики
+пишутся текстом прямо в спецификации, номера дорожек (RU-01, RU-02, …)
+скрипт раздаёт сам по порядку — поэтому файл озвучки не может разойтись
+с тем, что реально звучит в уроке.
 
-Звук: если в `assets/audio-4-6/` лежат файлы `RU-01.mp3`, `EN-01.mp3` и так
-далее, они вшиваются в файл. Пока их нет, реплики проговаривает синтез
-браузера — чтобы урок можно было листать и проверять уже сейчас.
+Звук: если в `assets/audio-4-6/` лежат `RU-01.mp3`, `EN-01.mp3` и прочие,
+они вшиваются в файл. Русский синтез браузера не используем — звучит плохо;
+без записи реплика молчит, текст для взрослого остаётся в пузыре.
 """
 
 import base64
 import io
 import json
-import os
+import math
 import re
+import struct
 import sys
 from pathlib import Path
 
@@ -26,17 +30,19 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "wowspeak-4-6.html"
+VOICE_DOC = ROOT / "docs" / "WowSpeak_озвучка_4-6.md"
 AUDIO_DIR = ROOT / "assets" / "audio-4-6"
 
 
 # ──────────────────────────────────────────────────────────── картинки ──
 
-def cut_white(im, tol=18):
-    """Убирает белый фон в два прохода: от краёв и замкнутые белые пятна.
+def cut_white(im, tol=18, holes=False):
+    """Убирает белый фон заливкой от краёв кадра.
 
-    Второй проход нужен из-за дырок внутри предмета — у ключика в версии
-    7–9 внутри кольца оставалось белое пятно. Порог 0.3% площади: блики
-    на золоте желтоватые и под него не попадают.
+    `holes` чистит ещё и замкнутые белые области — нужно это редко, а вреда
+    много: у облачка такой проход съел 19% самой картинки, у острова 9.5%,
+    у камушка выел блик. Включать только для предмета с настоящей дыркой
+    внутри (кольцо ключика), и потом обязательно смотреть глазами.
     """
     im = im.convert("RGBA")
     w, h = im.size
@@ -60,27 +66,26 @@ def cut_white(im, tol=18):
         px[x, y] = (r, g, b, 0)
         stack.extend(((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)))
 
-    # второй проход: замкнутые белые области крупнее 0.3% картинки
-    floor = int(w * h * 0.003)
-    for sy in range(0, h, 4):
-        for sx in range(0, w, 4):
-            if seen[sy * w + sx] or not white(sx, sy):
-                continue
-            blob = []
-            stack = [(sx, sy)]
-            while stack:
-                x, y = stack.pop()
-                if x < 0 or y < 0 or x >= w or y >= h or seen[y * w + x]:
+    if holes:
+        floor = int(w * h * 0.003)
+        for sy in range(0, h, 4):
+            for sx in range(0, w, 4):
+                if seen[sy * w + sx] or not white(sx, sy):
                     continue
-                if not white(x, y):
-                    continue
-                seen[y * w + x] = 1
-                blob.append((x, y))
-                stack.extend(((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)))
-            if len(blob) >= floor:
-                for x, y in blob:
-                    r, g, b, a = px[x, y]
-                    px[x, y] = (r, g, b, 0)
+                blob, stack = [], [(sx, sy)]
+                while stack:
+                    x, y = stack.pop()
+                    if x < 0 or y < 0 or x >= w or y >= h or seen[y * w + x]:
+                        continue
+                    if not white(x, y):
+                        continue
+                    seen[y * w + x] = 1
+                    blob.append((x, y))
+                    stack.extend(((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)))
+                if len(blob) >= floor:
+                    for x, y in blob:
+                        r, g, b, a = px[x, y]
+                        px[x, y] = (r, g, b, 0)
     return im
 
 
@@ -104,9 +109,9 @@ def prepare(path, width, transparent=True, quality=80):
 # имя → (файл, ширина, вырезать ли белый фон)
 #
 # Ширина — не «сколько хватит на глаз», а вдвое больше самого крупного места,
-# где картинка показывается: на телефоне пиксель экрана вдвое мельче
-# пикселя картинки, и вшитая впритык картинка выглядит мыльной. Проверка
-# сравнивает натуральный размер с показанным и ругается, если растягиваем.
+# где картинка показывается: на телефоне пиксель экрана вдвое мельче пикселя
+# картинки, и вшитая впритык выглядит мыльной. Проверка сравнивает
+# натуральный размер с показанным и ругается на растяжение.
 PICTURES = {
     "map_bg":        ("assets/kids-4-6/map-background-wide.webp", 1536, False),
     "meadow":        ("assets/kids-4-6/island-meadow.webp",        900, True),
@@ -135,6 +140,7 @@ PICTURES = {
     "backpack":      ("assets/lesson-1/backpack.webp",             800, True),
 }
 
+# слово → (как звучит, номер английской дорожки)
 WORDS = {
     "cap":   ("a cap", "EN-01"),
     "top":   ("a top", "EN-02"),
@@ -143,18 +149,40 @@ WORDS = {
     "skirt": ("a skirt", "EN-05"),
 }
 
+# фраза третьего острова
+PHRASES = {
+    "cap":   ("I have a cap", "EN-06"),
+    "top":   ("I have a top", "EN-07"),
+    "jeans": ("I have jeans", "EN-08"),
+    "shoes": ("I have shoes", "EN-09"),
+    "skirt": ("I have a skirt", "EN-10"),
+}
+
+VOICES = {
+    "firefly":  "Искорка",
+    "bunny":    "Зайчик",
+    "hedgehog": "Ёжик",
+    "fox":      "Лисёнок",
+}
+
+FRIENDS = ["bunny", "hedgehog", "fox"]
+
 
 # ─────────────────────────────────────────────────────────────── уроки ──
 #
 # Типы экранов:
-#   story  — картинка и реплика, кнопка «дальше» появляется сама
-#   word   — слово крупно: слушаем, повторяем вслух, жмём «я сказал»
-#   pick   — две картинки, показать названную; rounds = список раундов
-#   pairs  — найди пару: восемь карточек, четыре пары
-#   parent — экран для взрослого: назвать вслух всё выученное
+#   story   картинка и реплика, кнопка «дальше» появляется сама
+#   word    слово крупно: слушаем, повторяем вслух, жмём «я сказал»
+#   phrase  то же, но фразой «I have …»
+#   name    назови сам: показываем вещь, ребёнок говорит, потом слышит эталон
+#   pick    два варианта, показать названное
+#   pick4   четыре варианта — то же, но труднее
+#   pairs   найди пару
+#   parent  экран для взрослого: назвать вслух всё выученное
 #
-# В pick у раунда может быть `who` (кто просит) и `join` (кто прибегает
-# на помощь после верного ответа).
+# `token: True` — после задания ребёнок получает камушек (облачко, друга),
+# и сразу показывается карта, где камушек ложится в воду. Экран награды
+# скрипт вставляет сам, тексты берёт из token_lines.
 
 LESSONS = [
     {
@@ -162,174 +190,427 @@ LESSONS = [
         "title": "Солнечная Полянка",
         "island": "meadow",
         "token": "stone",
-        "token_word": "камушки",
-        "words": ["cap", "top"],
+        "token_lines": [
+            ("Молодец! За помощь зверята дали тебе волшебный камушек. Смотри — "
+             "он лёг в воду.", "радостно, с благодарностью"),
+            ("И ещё камушек! Дорожка растёт.", "весело"),
+            ("Третий! Уже половина пути.", "подбадривающе"),
+            ("Четвёртый камушек. Смотри, как блестит.", "любуемся"),
+            ("Пятый! Ещё чуть-чуть.", "нетерпеливо, весело"),
+            ("Последний камушек! Дорожка до Облачного Острова готова. Идём!",
+             "торжественно, зовём за собой"),
+        ],
         "screens": [
-            {"t": "story", "solo": True, "ru": "RU-01",
+            {"t": "story", "solo": True, "btn": "Полетели!",
              "text": "Привет! Я светлячок Искорка. Смотри, что мне принесли — "
                      "приглашение! Нас зовут на праздник на Драконий Остров. Полетели!",
-             "btn": "Полетели!"},
-            {"t": "story", "map": True, "ru": "RU-02",
-             "text": "Вот наша дорога. Три острова. Ой… а дорожек между ними нет. "
-                     "Ничего, мы что-нибудь придумаем!"},
-            {"t": "story", "pic": "meadow", "ru": "RU-03",
-             "text": "Это Солнечная Полянка. Тут живут зверята. Ой, ветер разбросал "
-                     "все их вещи! Давай поможем собрать."},
-            {"t": "word", "key": "cap", "ru": "RU-04",
-             "text": "Смотри, это кепка. По-английски — a cap. Скажи вслух: a cap."},
-            {"t": "pick", "ru": "RU-05", "text": "Найди кепку. Где тут a cap?",
+             "tone": "знакомство, радостно, с приглашением"},
+            {"t": "story", "pic": "meadow",
+             "text": "Мы на Солнечной Полянке! Тут живут зверята. Ой, ветер "
+                     "разбросал все их вещи. Давай поможем собрать.",
+             "tone": "сначала восхищённо, на «ой» — сочувственно"},
+
+            {"t": "word", "key": "cap",
+             "text": "Смотри, это кепка. По-английски — a cap. Скажи вслух: a cap.",
+             "tone": "показываем, «a cap» отчётливо и чуть медленнее"},
+            {"t": "pick", "token": True,
+             "text": "Найди кепку. Где тут a cap?", "tone": "вопрос, с интересом",
              "rounds": [
                  {"target": "cap", "other": "jacket"},
                  {"target": "cap", "other": "socks"},
                  {"target": "cap", "other": "backpack"},
              ]},
-            {"t": "word", "key": "top", "ru": "RU-06",
-             "text": "А это кофточка. По-английски — a top. Скажи вслух: a top."},
-            {"t": "pick", "ru": "RU-07", "text": "Слушай внимательно и показывай.",
+
+            {"t": "word", "key": "top",
+             "text": "А это кофточка. По-английски — a top. Скажи вслух: a top.",
+             "tone": "показываем"},
+            {"t": "pick", "token": True,
+             "text": "Слушай внимательно и показывай.", "tone": "мягко, без нажима",
              "rounds": [
                  {"target": "top", "other": "cap"},
                  {"target": "cap", "other": "top"},
                  {"target": "top", "other": "socks"},
                  {"target": "cap", "other": "jacket"},
              ]},
-            {"t": "pick", "ru": "RU-08",
-             "text": "Зверята ждут свои вещи. Дай каждому то, что он просит.",
+
+            {"t": "name", "token": True, "keys": ["cap", "top"],
+             "text": "А теперь ты назови сам. Что это по-английски?",
+             "tone": "с интересом, ждём ответа"},
+
+            {"t": "pick4", "token": True,
+             "text": "Теперь вещей много. Найди ту, которую я назову.",
+             "tone": "подзадориваем",
              "rounds": [
-                 {"who": "bunny", "target": "cap", "other": "top", "line": "RU-41"},
-                 {"who": "hedgehog", "target": "top", "other": "cap", "line": "RU-42"},
-                 {"who": "fox", "target": "cap", "other": "socks", "line": "RU-43"},
+                 {"target": "cap", "others": ["jacket", "socks", "jeans"]},
+                 {"target": "top", "others": ["shoes", "backpack", "skirt"]},
+                 {"target": "cap", "others": ["top", "shoes", "socks"]},
              ]},
-            {"t": "story", "reward": "stone", "count": 3, "ru": "RU-09",
-             "text": "Спасибо! За помощь зверята дают тебе три волшебных камушка."},
-            {"t": "story", "path": "stone", "ru": "RU-10",
-             "text": "Смотри, что получилось! Камушки легли в воду дорожкой. "
-                     "Теперь можно идти дальше!"},
-            {"t": "parent", "keys": ["cap", "top"], "ru": "RU-11",
-             "text": "А теперь позови маму или папу и назови всё, что ты сегодня выучил."},
+
+            {"t": "pairs", "token": True, "keys": ["cap", "top", "socks", "backpack"],
+             "text": "Помоги разложить вещи по парам. Нажимай на две одинаковые.",
+             "tone": "деловито, спокойно"},
+
+            {"t": "pick", "token": True,
+             "text": "Зверята ждут свои вещи. Дай каждому то, что он просит.",
+             "tone": "тепло",
+             "rounds": [
+                 {"who": "bunny", "target": "cap", "other": "top",
+                  "line": ("bunny", "Ой, где же моя a cap?", "растерянно, жалобно")},
+                 {"who": "hedgehog", "target": "top", "other": "cap",
+                  "line": ("hedgehog", "А я ищу свой a top!", "деловито")},
+                 {"who": "fox", "target": "cap", "other": "socks",
+                  "line": ("fox", "И мне нужна a cap!", "быстро, нетерпеливо")},
+             ]},
+
+            {"t": "parent", "keys": ["cap", "top"],
+             "text": "А теперь позови маму или папу и назови всё, что ты сегодня выучил.",
+             "tone": "доверительно, чуть тише"},
         ],
     },
+
     {
         "id": 2,
         "title": "Облачный Остров",
         "island": "clouds",
         "token": "cloudlet",
-        "token_word": "облачка",
-        "words": ["jeans", "shoes"],
+        "token_lines": [
+            ("Молодец! Вот тебе облачко. Оно село прямо над пропастью.",
+             "радостно"),
+            ("Ещё облачко! Мостик начинается.", "весело"),
+            ("Третье. Уже можно шагнуть.", "подбадривающе"),
+            ("Четвёртое, мягкое, как подушка.", "нежно"),
+            ("Пятое! Почти готово.", "нетерпеливо"),
+            ("Последнее! Мостик до Драконьего Острова готов. Прыгаем!",
+             "торжественно, зовём за собой"),
+        ],
         "screens": [
-            {"t": "story", "pic": "clouds", "ru": "RU-12",
-             "text": "Мы на Облачном Острове! Тут всё мягкое, как подушки."},
-            {"t": "story", "pic": "clouds", "ru": "RU-13",
-             "text": "Ой… впереди пропасть, а мостика нет. Надо что-то придумать."},
-            {"t": "word", "key": "jeans", "ru": "RU-14",
-             "text": "Смотри, это джинсы. По-английски — jeans. Скажи вслух: jeans."},
-            {"t": "pick", "ru": "RU-15", "text": "Где тут jeans? Покажи.",
+            {"t": "story", "pic": "clouds",
+             "text": "Мы на Облачном Острове! Тут всё мягкое, как подушки.",
+             "tone": "восхищённо"},
+            {"t": "story", "pic": "clouds",
+             "text": "Ой… впереди пропасть, а мостика нет. Надо что-то придумать.",
+             "tone": "озадаченно, но не испуганно"},
+
+            {"t": "word", "key": "jeans",
+             "text": "Смотри, это джинсы. По-английски — jeans. Скажи вслух: jeans.",
+             "tone": "показываем"},
+            {"t": "pick", "token": True,
+             "text": "Где тут jeans? Покажи.", "tone": "вопрос",
              "rounds": [
                  {"target": "jeans", "other": "cap"},
                  {"target": "jeans", "other": "top"},
                  {"target": "jeans", "other": "backpack"},
              ]},
-            {"t": "word", "key": "shoes", "ru": "RU-16",
-             "text": "А это ботинки. По-английски — shoes. Скажи вслух: shoes."},
-            {"t": "pick", "ru": "RU-17", "text": "Слушай и показывай.",
+
+            {"t": "word", "key": "shoes",
+             "text": "А это ботинки. По-английски — shoes. Скажи вслух: shoes.",
+             "tone": "показываем"},
+            {"t": "pick", "token": True,
+             "text": "Слушай и показывай.", "tone": "мягко",
              "rounds": [
                  {"target": "shoes", "other": "jeans"},
                  {"target": "jeans", "other": "shoes"},
                  {"target": "shoes", "other": "cap"},
-                 {"target": "shoes", "other": "socks"},
              ]},
-            {"t": "pick", "ru": "RU-18",
-             "text": "Зверята тоже собираются на праздник. Помоги им одеться!",
+
+            {"t": "word", "key": "skirt",
+             "text": "А это юбка. По-английски — a skirt. Скажи вслух: a skirt.",
+             "tone": "показываем"},
+            {"t": "pick", "token": True,
+             "text": "А теперь найди юбку.", "tone": "вопрос",
              "rounds": [
-                 {"who": "fox", "target": "jeans", "other": "top", "line": "RU-44"},
-                 {"who": "bunny", "target": "shoes", "other": "cap", "line": "RU-45"},
-                 {"who": "hedgehog", "target": "jeans", "other": "shoes", "line": "RU-46"},
+                 {"target": "skirt", "other": "jeans"},
+                 {"target": "skirt", "other": "shoes"},
+                 {"target": "jeans", "other": "skirt"},
              ]},
-            {"t": "story", "reward": "cloudlet", "count": 3, "ru": "RU-19",
-             "text": "Спасибо! Вот тебе три облачка."},
-            {"t": "story", "path": "cloudlet", "ru": "RU-20",
-             "text": "Смотри! Облачка встали мостиком. Прыгаем на Драконий Остров!"},
-            {"t": "parent", "keys": ["cap", "top", "jeans", "shoes"], "ru": "RU-21",
-             "text": "Позови маму или папу и назови всё, что ты выучил сегодня."},
+
+            {"t": "name", "token": True, "keys": ["jeans", "shoes", "skirt"],
+             "text": "Теперь ты назови сам. Что это по-английски?",
+             "tone": "с интересом, ждём ответа"},
+
+            {"t": "pick4", "token": True,
+             "text": "Вещей стало много! Найди ту, которую я назову.",
+             "tone": "подзадориваем",
+             "rounds": [
+                 {"target": "shoes", "others": ["jeans", "cap", "top"]},
+                 {"target": "skirt", "others": ["shoes", "top", "jacket"]},
+                 {"target": "jeans", "others": ["skirt", "socks", "cap"]},
+             ]},
+
+            {"t": "pick", "token": True,
+             "text": "Зверята тоже собираются на праздник. Помоги им одеться!",
+             "tone": "весело",
+             "rounds": [
+                 {"who": "fox", "target": "jeans", "other": "top",
+                  "line": ("fox", "Где мои jeans? Без них на праздник не пойду!",
+                           "возмущённо-весело")},
+                 {"who": "bunny", "target": "shoes", "other": "cap",
+                  "line": ("bunny", "А мне нужны shoes!", "мягко просит")},
+                 {"who": "hedgehog", "target": "skirt", "other": "jeans",
+                  "line": ("hedgehog", "И я хочу a skirt!", "ворчливо")},
+             ]},
+
+            {"t": "parent", "keys": ["cap", "top", "jeans", "shoes", "skirt"],
+             "text": "Позови маму или папу и назови всё, что ты выучил сегодня.",
+             "tone": "доверительно"},
         ],
     },
+
     {
         "id": 3,
         "title": "Драконий Остров",
         "island": "dragon",
         "token": "friend",
-        "token_word": "друзья",
-        "words": ["skirt"],
+        "token_lines": [
+            ("Слышишь? Это зайчик! Он услышал тебя и прибежал помогать.",
+             "обрадованно, с удивлением"),
+            ("А вот и ёжик! Он тоже с нами.", "весело"),
+            ("И лисёнок прибежал! Теперь мы все вместе.", "торжествующе"),
+        ],
         "screens": [
-            {"t": "story", "pic": "dragon", "ru": "RU-22",
+            {"t": "story", "pic": "dragon",
              "text": "Мы на Драконьем Острове! Вот и праздник: флажки, фонарики… "
-                     "А где же все? Никого нет. Как странно."},
-            {"t": "word", "key": "skirt", "ru": "RU-23",
-             "text": "Смотри, это юбка. По-английски — a skirt. Скажи вслух: a skirt."},
-            {"t": "pick", "ru": "RU-24", "text": "На празднике надо нарядиться! Выбирай, что наденешь.",
+                     "А где же все? Никого нет. Как странно.",
+             "tone": "радость, потом недоумение"},
+            {"t": "story", "solo": True,
+             "text": "А давай научимся рассказывать о себе! Это пригодится на "
+                     "празднике — там надо со всеми знакомиться.",
+             "tone": "заговорщицки, с идеей"},
+
+            {"t": "phrase", "key": "cap",
+             "text": "Смотри: у меня есть кепка. По-английски — I have a cap. "
+                     "Скажи вслух: I have a cap.",
+             "tone": "показываем, фразу отчётливо и чуть медленнее"},
+            {"t": "pick", "say": "phrase", "token": True,
+             "text": "Слушай и показывай, о чём я говорю.", "tone": "спокойно",
              "rounds": [
-                 {"target": "skirt", "other": "jeans"},
-                 {"target": "cap", "other": "shoes"},
-                 {"target": "top", "other": "skirt"},
+                 {"target": "cap", "other": "jeans"},
+                 {"target": "top", "other": "shoes"},
                  {"target": "shoes", "other": "cap"},
-                 {"target": "jeans", "other": "top"},
              ]},
-            {"t": "story", "pic": "dragon", "ru": "RU-25",
-             "text": "Ой, смотри! Кто-то тут был. Следы ведут вон туда, к камням."},
-            {"t": "pairs", "ru": "RU-26",
-             "text": "Помоги разобрать вещи — и мы пойдём по следам дальше.",
-             "keys": ["cap", "top", "jeans", "shoes"]},
-            {"t": "story", "pic": "cave_closed", "ru": "RU-27",
-             "text": "Следы привели нас к пещере. Интересно, кто там?"},
-            {"t": "story", "pic": "cave_closed", "ru": "RU-28",
-             "text": "Вход завален большим камнем. Одному не сдвинуть… Нужны друзья!"},
-            {"t": "pick", "ru": "RU-29", "text": "Вспомни, кому мы сегодня помогали. Позови их!",
+
+            {"t": "phrase", "key": "skirt",
+             "text": "А так: I have a skirt. Скажи вслух: I have a skirt.",
+             "tone": "показываем"},
+            {"t": "pick4", "say": "phrase", "token": True,
+             "text": "Теперь труднее. Слушай внимательно!", "tone": "подзадориваем",
              "rounds": [
-                 {"target": "cap", "other": "skirt", "join": "bunny"},
-                 {"target": "shoes", "other": "top", "join": "hedgehog"},
-                 {"target": "jeans", "other": "cap", "join": "fox"},
+                 {"target": "skirt", "others": ["jeans", "cap", "top"]},
+                 {"target": "jeans", "others": ["shoes", "skirt", "cap"]},
+                 {"target": "top", "others": ["cap", "jeans", "shoes"]},
              ]},
-            {"t": "story", "pic": "push", "ru": "RU-30",
-             "text": "Раз, два, взяли! Толкаем все вместе!", "btn": "Помочь!"},
-            {"t": "story", "pic": "cave_open", "ru": "RU-31",
-             "text": "Получилось! Как темно… Подожди, я посвечу. Смотри — гнёздышко. А в нём яйцо!"},
-            {"t": "story", "pic": "egg", "ru": "RU-32",
-             "text": "Интересно, кто же в нём? Неужели дракончик? Узнаем на первом уроке!"},
-            {"t": "parent", "keys": ["cap", "top", "jeans", "shoes", "skirt"], "ru": "RU-33",
-             "text": "Позови маму или папу и назови всё, что ты выучил."},
+
+            {"t": "name", "say": "phrase", "token": True,
+             "keys": ["cap", "jeans", "shoes"],
+             "text": "А теперь ты расскажи! Что у тебя есть?",
+             "tone": "с интересом, ждём ответа"},
+
+            {"t": "story", "pic": "dragon",
+             "text": "Ой, смотри! Кто-то тут был. Следы ведут вон туда, к камням.",
+             "tone": "шёпотом, загадочно"},
+            {"t": "pairs", "keys": ["cap", "top", "jeans", "shoes"],
+             "text": "По дороге разберём вещи. Нажимай на две одинаковые.",
+             "tone": "деловито"},
+            {"t": "story", "pic": "cave_closed",
+             "text": "Следы привели нас к пещере. А вход завален большим камнем. "
+                     "Одному не сдвинуть… Хорошо, что с нами друзья!",
+             "tone": "интрига, потом с усилием и решительно"},
+            {"t": "story", "pic": "push", "btn": "Помочь!",
+             "text": "Раз, два, взяли! Толкаем все вместе!",
+             "tone": "с натугой, весело"},
+            {"t": "story", "pic": "cave_open",
+             "text": "Получилось! Как темно… Подожди, я посвечу. Смотри — гнёздышко!",
+             "tone": "радость, потом тише, в темноте"},
+            {"t": "story", "pic": "egg",
+             "text": "А в нём яйцо! Интересно, кто же там внутри? Неужели дракончик? "
+                     "Узнаем на первом уроке!",
+             "tone": "изумление, тайна, предвкушение"},
+
+            {"t": "parent", "say": "phrase",
+             "keys": ["cap", "top", "jeans", "shoes", "skirt"],
+             "text": "Позови маму или папу и расскажи, что у тебя есть. По-английски!",
+             "tone": "доверительно"},
         ],
     },
 ]
 
-# Реплики, которые нужны движку вне экранов: похвала и «попробуй ещё».
 PRAISE = [
-    ("RU-34", "Молодец!"),
-    ("RU-35", "Правильно!"),
-    ("RU-36", "Верно! Умница!"),
-    ("RU-37", "Получилось!"),
-    ("RU-40", "Ух ты, как здорово!"),
+    ("Молодец!", "живо"),
+    ("Правильно!", "радостно"),
+    ("Верно! Умница!", "тепло"),
+    ("Получилось!", "с восторгом"),
+    ("Ух ты, как здорово!", "восхищённо"),
 ]
-# Короткие реплики зверят: их озвучивают три разных детских голоса,
-# иначе весь лид-магнит говорит одним голосом Искорки.
-ANIMAL_LINES = {
-    "RU-41": ("bunny", "Ой, где же моя a cap?"),
-    "RU-42": ("hedgehog", "А я ищу свой a top!"),
-    "RU-43": ("fox", "И мне нужна a cap!"),
-    "RU-44": ("fox", "Где мои jeans? Без них на праздник не пойду!"),
-    "RU-45": ("bunny", "А мне нужны shoes!"),
-    "RU-46": ("hedgehog", "И я хочу jeans!"),
-}
-
 RETRY = [
-    ("RU-38", "Ой, не то. Попробуй ещё разок."),
-    ("RU-39", "Почти! Давай ещё раз."),
+    ("Ой, не то. Попробуй ещё разок.", "спокойно, без тени упрёка"),
+    ("Почти! Давай ещё раз.", "подбадривающе"),
 ]
 
 
-def tone(notes, volume=0.22, rate=22050):
+# ────────────────────────────────── номера дорожек и экраны наград ──
+
+def build_script():
+    """Раздаёт номера RU-NN по порядку и вставляет экраны наград.
+
+    Файл озвучки собирается из этого же списка, поэтому разойтись с уроком
+    он не может: номер живёт в одном месте.
+    """
+    script = []          # (ключ, кто говорит, текст, интонация, где звучит)
+    counter = [0]
+
+    def key(voice, text, tone, where):
+        counter[0] += 1
+        k = "RU-%02d" % counter[0]
+        script.append((k, voice, text, tone, where))
+        return k
+
+    for les in LESSONS:
+        where = "Урок %d. %s" % (les["id"], les["title"])
+        out, earned = [], 0
+        for s in les["screens"]:
+            s["ru"] = key("firefly", s["text"], s.get("tone", ""), where)
+            for r in s.get("rounds", []):
+                if "line" in r:
+                    voice, text, tone = r["line"]
+                    r["line"] = key(voice, text, tone, where)
+            out.append(s)
+            if s.pop("token", False):
+                text, tone = les["token_lines"][earned]
+                earned += 1
+                out.append({
+                    "t": "token", "n": earned,
+                    "kind": "friends" if les["token"] == "friend" else "map",
+                    "text": text, "ru": key("firefly", text, tone, where),
+                })
+        les["screens"] = out
+        les["tokens"] = earned
+        if earned != len(les["token_lines"]):
+            sys.exit("в уроке %d %d наград, а реплик к ним %d"
+                     % (les["id"], earned, len(les["token_lines"])))
+
+    where = "Похвалы — звучат во всех трёх уроках"
+    praise_keys = [key("firefly", t, tone, where) for t, tone in PRAISE]
+    retry_keys = [key("firefly", t, tone, where) for t, tone in RETRY]
+    return script, praise_keys, retry_keys
+
+
+def write_voice_doc(script):
+    rows = {}
+    for k, voice, text, tone, where in script:
+        rows.setdefault(where, []).append((k, voice, text, tone))
+
+    counts = {}
+    for _, voice, _, _, _ in script:
+        counts[voice] = counts.get(voice, 0) + 1
+
+    doc = ["""# Озвучка лид-магнита 4–6 «Дорога на праздник»
+
+> Файл собирается скриптом `tools/build_kids46.py` вместе с самим уроком.
+> Руками не правим: номера дорожек здесь и в уроке всегда одни и те же.
+
+Ребёнок ещё не читает, поэтому **всё держится на голосе**. Текст на экране —
+только для взрослого рядом.
+"""]
+
+    doc.append("## Кого озвучиваем\n")
+    doc.append("| Кто | Каким голосом | Реплик | Характер |")
+    doc.append("|---|---|---|---|")
+    doc.append("| **Искорка**, светлячок-проводник | детский, звонкий, тёплый | "
+               "%d | Ведёт всё приключение. Радуется, удивляется, зовёт за собой. |"
+               % counts.get("firefly", 0))
+    for v, desc in (("bunny", "детский, мягкий, чуть робкий|Потерял свои вещи, просит помочь."),
+                    ("hedgehog", "детский, пониже, забавный|Деловитый, немного ворчливый."),
+                    ("fox", "детский, быстрый, озорной|Торопится на праздник.")):
+        voice_desc, character = desc.split("|")
+        doc.append("| **%s** | %s | %d | %s |"
+                   % (VOICES[v], voice_desc, counts.get(v, 0), character))
+    doc.append("""
+Если четыре разных голоса получить не выйдет — **обязательно** отдельный
+голос у Искорки и хотя бы один общий «звериный», отличный от неё. Один голос
+на всё приключение четырёхлетку усыпит.
+""")
+
+    doc.append("""## Как записывать
+
+**Тон:** тёплый, небыстрый, как будто рассказываете сказку четырёхлетке.
+Короткие фразы, паузы между предложениями. Не «диктор новостей».
+
+**Интонации важнее дикции.** Там, где в тексте «Ой…» — настоящее удивление,
+где «Смотри!» — радость. Ровно прочитанная строчка убивает сцену.
+
+**Английские слова внутри русских реплик** (`a cap`, `jeans`) произносятся
+по-английски, но той же интонацией — это часть фразы, а не вставка из
+словаря. Если сервис читает их по-русски («а сар»), разбейте реплику на две
+дорожки или возьмите многоязычный голос.
+
+**Файлы.** Каждая реплика — отдельный файл, имя ровно как в таблице:
+`RU-01.mp3`, `RU-02.mp3`, …, `EN-01.mp3`. Положить в `assets/audio-4-6/`.
+Сборка подхватит их сама. Если сервис отдаёт одним файлом — пришлите как
+есть, с паузами в 2 секунды между репликами, нарежу.
+""")
+
+    for where, items in rows.items():
+        doc.append("## %s\n" % where)
+        doc.append("| Файл | Кто | Текст | Интонация |")
+        doc.append("|---|---|---|---|")
+        for k, voice, text, tone in items:
+            doc.append("| %s | %s | %s | %s |" % (k, VOICES[voice], text, tone))
+        doc.append("")
+
+    doc.append("""## Английские слова и фразы
+
+Отдельным голосом: **носитель языка, взрослый, спокойный и чёткий**. Не
+детский — здесь нужен эталон произношения, а не характер.
+""")
+    doc.append("| Файл | Текст |")
+    doc.append("|---|---|")
+    for key, (text, code) in list(WORDS.items()) + list(PHRASES.items()):
+        doc.append("| %s | %s |" % (code, text))
+    doc.append("""
+Слова (EN-01…EN-05) нужны **дважды**: обычно и чуть медленнее. Второй
+вариант — с суффиксом в имени: `EN-01.mp3` и `EN-01-slow.mp3`. Фразам
+(EN-06…EN-10) медленный вариант не нужен.
+""")
+
+    doc.append("""## Где это сделать бесплатно
+
+Проверьте голос **на одной реплике** — возьмите самую длинную, где больше
+всего смен интонации. Если сервис прочтёт её ровно, он прочтёт ровно и всё
+остальное.
+
+**[ElevenLabs](https://elevenlabs.io)** — лучшее качество русского и
+единственный, где интонации звучат живыми. В библиотеке есть детские голоса;
+многоязычная модель правильно читает английские слова внутри русской фразы.
+Бесплатно около 10 000 символов в месяц — на весь наш текст хватает с
+запасом. **Рекомендую начать с него.**
+
+**[TTSMaker](https://ttsmaker.com/ru)** — бесплатно и без регистрации,
+русские голоса есть, скачивает mp3 сразу. Интонации беднее, детских голосов
+почти нет. Запасной вариант или для похвал.
+
+**Яндекс SpeechKit** — родной русский с правильными ударениями, бесплатный
+лимит через облако. Минус: нужен аккаунт в Яндекс.Облаке.
+
+Обзор сервисов с актуальными лимитами:
+[подборка на DTF](https://dtf.ru/howto/5127825-besplatnaya-ii-ozvuchka-teksta-na-russkom).
+
+**Свой голос — тоже вариант, и часто лучший.** Живая интонация мамы бьёт
+любой синтез, а записать эти фразы на телефон — минут двадцать.
+
+## Пока озвучки нет
+
+Русские реплики **молчат** — текст виден в пузыре, и взрослый читает его
+вслух. Английские слова проговаривает синтез браузера. На верный и неверный
+ответ звучат короткие сигналы, чтобы ребёнок получал отклик на нажатие.
+""")
+    VOICE_DOC.write_text("\n".join(doc), encoding="utf-8")
+
+
+# ──────────────────────────────────────────────────────────────── звук ──
+
+def tone_wav(notes, volume=0.22, rate=22050):
     """Короткий звук отклика: без русской озвучки ребёнку нужен хоть какой-то
     ответ на нажатие. Собираем WAV сами, чтобы ничего не скачивать."""
-    import math
-    import struct
     frames = bytearray()
     for freq, dur in notes:
         n = int(rate * dur)
@@ -345,18 +626,18 @@ def tone(notes, volume=0.22, rate=22050):
 
 
 def collect_audio():
-    """Вшивает записанные дорожки, если они уже лежат в assets/audio-4-6/."""
     out = {}
-    if not AUDIO_DIR.is_dir():
-        return out
-    for f in sorted(AUDIO_DIR.iterdir()):
-        if f.suffix.lower() not in (".mp3", ".m4a", ".ogg", ".wav"):
-            continue
-        mime = {"mp3": "audio/mpeg", "m4a": "audio/mp4",
-                "ogg": "audio/ogg", "wav": "audio/wav"}[f.suffix.lower().lstrip(".")]
-        out[f.stem.upper()] = (
-            f"data:{mime};base64," + base64.b64encode(f.read_bytes()).decode()
-        )
+    if AUDIO_DIR.is_dir():
+        for f in sorted(AUDIO_DIR.iterdir()):
+            ext = f.suffix.lower().lstrip(".")
+            if ext not in ("mp3", "m4a", "ogg", "wav"):
+                continue
+            mime = {"mp3": "audio/mpeg", "m4a": "audio/mp4",
+                    "ogg": "audio/ogg", "wav": "audio/wav"}[ext]
+            out[f.stem.upper()] = ("data:%s;base64," % mime +
+                                   base64.b64encode(f.read_bytes()).decode())
+    out.setdefault("SFX-OK", tone_wav([(880, 0.10), (1318, 0.16)]))
+    out.setdefault("SFX-NO", tone_wav([(330, 0.18)], volume=0.16))
     return out
 
 
@@ -365,22 +646,21 @@ HTML = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Волшебная страна — путешествие на праздник</title>
+<title>Волшебная страна — дорога на праздник</title>
 <style>
 :root{
-  --sky:#bfe9ff; --sea:#7fd4e8; --card:#fffdf7; --ink:#3a2f4a;
-  --accent:#ff9d3c; --accent-dark:#f07c15; --good:#5ec26a; --bad:#ff8a8a;
+  --sky:#bfe9ff; --card:#fffdf7; --ink:#3a2f4a;
+  --accent:#ff9d3c; --good:#5ec26a; --bad:#ff8a8a;
   --shadow:0 10px 24px rgba(60,40,90,.18);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;overflow:hidden}
 body{
   font-family:"Nunito","Comic Sans MS",system-ui,-apple-system,"Segoe UI",sans-serif;
-  color:var(--ink); background:var(--sky);
-  user-select:none; -webkit-user-select:none;
+  color:var(--ink); background:var(--sky); user-select:none; -webkit-user-select:none;
 }
 img{-webkit-user-drag:none}
-#app{position:fixed;inset:0;display:flex;flex-direction:column}
+#app{position:fixed;inset:0}
 
 /* ───────── карта ───────── */
 #map{position:absolute;inset:0;display:none;background:#bfe9ff center/cover no-repeat}
@@ -392,16 +672,18 @@ img{-webkit-user-drag:none}
 .island .name{display:block;margin-top:-6px;font-size:clamp(13px,2.4vw,22px);font-weight:800;
   color:#fff;text-shadow:0 2px 6px rgba(40,60,90,.6)}
 .island.locked img{filter:grayscale(.55) brightness(.9) drop-shadow(0 12px 18px rgba(40,60,90,.25))}
-.island.locked .name{opacity:.8}
 .island .tick{position:absolute;top:2%;right:8%;font-size:clamp(22px,4vw,40px)}
 .island .lock{position:absolute;top:8%;left:50%;transform:translateX(-50%);
   font-size:clamp(20px,3.6vw,36px);filter:drop-shadow(0 2px 4px rgba(0,0,0,.35))}
-.bridge{position:absolute;transform:translate(-50%,-50%);width:6%;max-width:80px;
-  opacity:0;transition:opacity .5s}
-.bridge.on{opacity:1}
-.bridge img{width:100%;display:block}
-/* Светлячок стоит в пустом море по центру: у левого края он наезжал
-   на подпись первого острова на узком экране. */
+/* камушки в воде — мелкие: это шаги по воде, а не валуны */
+.dot{position:absolute;transform:translate(-50%,-50%);width:4%;max-width:54px;
+  opacity:0;transition:opacity .4s}
+.dot.on{opacity:1}
+.dot.pop{animation:drop .6s both}
+.dot img{width:100%;display:block;filter:drop-shadow(0 4px 6px rgba(40,60,90,.3))}
+@keyframes drop{0%{transform:translate(-50%,-160%) scale(1.5);opacity:0}
+                60%{transform:translate(-50%,-50%) scale(1.1);opacity:1}
+                100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
 #map .guide{position:absolute;left:50%;bottom:1%;transform:translateX(-50%);
   width:13%;max-width:150px}
 #map .guide img{width:100%;display:block}
@@ -417,8 +699,8 @@ img{-webkit-user-drag:none}
 .topbar .home{border:0;background:rgba(255,255,255,.75);border-radius:999px;
   width:44px;height:44px;font-size:22px;cursor:pointer;box-shadow:var(--shadow)}
 .topbar .tokens{display:flex;gap:6px;margin-left:auto}
-.topbar .tokens img{width:38px;height:38px;object-fit:contain}
-.topbar .tokens .ghost{width:38px;height:38px;border-radius:50%;
+.topbar .tokens img{width:34px;height:34px;object-fit:contain}
+.topbar .tokens .ghost{width:34px;height:34px;border-radius:50%;
   background:rgba(255,255,255,.45);border:2px dashed rgba(120,110,140,.35)}
 
 .stage{flex:1 1 auto;display:flex;align-items:center;gap:2vw;padding:0 3vw 6px;
@@ -428,9 +710,8 @@ img{-webkit-user-drag:none}
 .bubble{background:var(--card);border-radius:20px;padding:10px 14px;box-shadow:var(--shadow);
   font-size:clamp(13px,1.7vw,19px);line-height:1.35;text-align:center;margin-top:-6px}
 
-/* Высота картинок считается от свободного места, а не подбирается в vh:
-   иначе на низком экране содержимое наползает на кнопку и перехватывает
-   нажатие — проверка ловила это на родительском экране. */
+/* Высота картинок считается от свободного места, а не в vh: иначе на низком
+   экране содержимое наползает на кнопку и перехватывает нажатие. */
 .content{flex:1 1 auto;display:flex;flex-direction:column;align-items:center;
   justify-content:center;gap:1vh;min-width:0;min-height:0;height:100%;overflow:hidden}
 .picarea{flex:1 1 0;min-height:0;width:100%;display:flex;align-items:center;
@@ -441,26 +722,24 @@ img{-webkit-user-drag:none}
 .picarea.items{gap:4vw}
 .picarea.items img{height:auto;max-height:100%;width:auto;max-width:24%}
 .below{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:1vh}
+.wordline{font-size:clamp(22px,4vw,46px);font-weight:900;letter-spacing:.5px;text-align:center}
 
-/* Экран, где говорит только светлячок: он занимает середину, а справа
-   ничего нет — второй копии героя на экране быть не должно. */
+/* Экран, где говорит только светлячок: он занимает середину. Второй копии
+   героя на экране быть не должно. */
 .stage.solo{justify-content:center}
 .stage.solo .guide{flex:0 0 auto;width:min(46%,420px);max-width:none}
 .stage.solo .guide img{max-width:none;width:100%}
 .stage.solo .bubble{font-size:clamp(15px,2.1vw,24px)}
 .stage.solo .content{display:none}
 
-/* Карта целиком внутри урока: тот же фон и те же места островов,
-   что и на настоящей карте, только смотреть, а не нажимать. */
+/* Карта внутри урока: тот же фон и те же места островов. */
 .mapview{flex:1 1 0;min-height:0;width:100%;position:relative;border-radius:24px;
   background-position:center;background-size:cover;box-shadow:var(--shadow);overflow:hidden}
-.mapview img{position:absolute;transform:translate(-50%,-50%);width:30%;
+.mapview>img{position:absolute;transform:translate(-50%,-50%);width:26%;
   filter:drop-shadow(0 8px 14px rgba(40,60,90,.25))}
-.wordline{font-size:clamp(24px,4.4vw,52px);font-weight:900;letter-spacing:.5px}
 
 /* Карточки — квадратные: сторона считается от реального размера ряда,
-   который js кладёт в --bw/--bh. Иначе на широком экране карточка
-   растягивается в колонну, а картинка тонет в белом поле. */
+   который js кладёт в --bw/--bh. */
 .cards{--n:2;--gap:3vw;gap:var(--gap)}
 .card{background:var(--card);border:4px solid transparent;border-radius:28px;
   box-shadow:var(--shadow);padding:1.4%;cursor:pointer;flex:0 0 auto;
@@ -484,9 +763,6 @@ img{-webkit-user-drag:none}
 .grid .card{padding:6%;border-radius:18px;width:auto;height:auto;min-height:0}
 .grid .card.gone{visibility:hidden}
 .grid .card.picked{border-color:var(--accent)}
-
-.joined{flex:0 0 auto;height:14%;display:flex;gap:1.5vw;align-items:flex-end;justify-content:center}
-.joined img{height:100%;object-fit:contain;animation:pop .5s}
 
 .bottombar{flex:0 0 auto;display:flex;gap:12px;align-items:center;justify-content:center;
   padding:6px 14px calc(10px + env(safe-area-inset-bottom))}
@@ -524,9 +800,7 @@ img{-webkit-user-drag:none}
 </head>
 <body>
 <div id="app">
-  <div id="map">
-    <div class="maptitle"></div>
-  </div>
+  <div id="map"></div>
   <div id="lesson">
     <div class="topbar">
       <button class="home" title="На карту">🗺️</button>
@@ -555,7 +829,10 @@ const LESSONS = __LESSONS__;
 const PRAISE = __PRAISE__;
 const RETRY = __RETRY__;
 const WORDS = __WORDS__;
+const PHRASES = __PHRASES__;
+const FRIENDS = __FRIENDS__;
 const STORE = "ws46_progress";
+const ISLAND_POS = [[20, 60], [50, 38], [80, 62]];
 
 /* ─────────────────────────── звук ─────────────────────────── */
 let current = null;
@@ -566,8 +843,8 @@ function stopSound(){
 function play(key, text, lang){
   stopSound();
   return new Promise(resolve => {
-    // Страховка: без неё экран навсегда ждёт события, которое может не прийти —
-    // синтез в вебвью и на телефоне молча не отвечает, и урок встаёт намертво.
+    // Страховка по времени: без неё экран навсегда ждёт события, которое
+    // может не прийти — синтез в вебвью и на телефоне молча не отвечает.
     let done = false;
     const finish = () => { if (!done){ done = true; clearTimeout(timer); resolve(); } };
     const limit = Math.min(12000, 1800 + (text ? text.length * 90 : 0));
@@ -580,25 +857,23 @@ function play(key, text, lang){
       a.play().catch(finish);
       return;
     }
-    // Русский синтез не используем: он звучит плохо. Без записи реплика
-    // просто молчит, текст для взрослого остаётся в пузыре. Английские
-    // слова синтез читает — их ребёнку надо слышать с первого дня.
-    if (!text || lang !== "en-US" || !("speechSynthesis" in window)) { finish(); return; }
+    // Русский синтез не используем: звучит плохо. Без записи реплика молчит,
+    // текст для взрослого остаётся в пузыре. Английское ребёнку надо слышать.
+    if (!text || lang !== "en-US" || !("speechSynthesis" in window)){ finish(); return; }
     try{
       const u = new SpeechSynthesisUtterance(text);
-      u.lang = lang || "ru-RU";
-      u.rate = lang === "en-US" ? 0.8 : 0.95;
+      u.lang = "en-US";
+      u.rate = 0.8;
       u.onend = u.onerror = finish;
       speechSynthesis.speak(u);
     } catch(e){ finish(); }
   });
 }
-const pick = arr => arr[Math.floor(Math.random() * arr.length)];
-function praise(){ return play(pick(PRAISE)[0]) .then(() => {}); }
-function retry(){ return play(pick(RETRY)[0]).then(() => {}); }
-/* Короткий звук поверх всего: пока похвалы не записаны, ребёнку нужен
-   хоть какой-то ответ на нажатие. Отдельный объект, чтобы не гасить его
-   вместе с репликой. */
+const choice = arr => arr[Math.floor(Math.random() * arr.length)];
+function praise(){ return play(choice(PRAISE)); }
+function retry(){ return play(choice(RETRY)); }
+/* Короткий сигнал поверх всего: пока похвалы не записаны, ребёнку нужен
+   отклик на нажатие. Отдельный объект, чтобы не гасить его вместе с репликой. */
 function blip(key){
   try { const a = new Audio(AUDIO[key]); a.volume = 0.7; a.play().catch(() => {}); }
   catch(e){}
@@ -610,6 +885,9 @@ function shuffle(a){
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
+}
+function saying(s, key){
+  return s.say === "phrase" ? PHRASES[key] : WORDS[key];
 }
 
 /* ───────────────────────── прогресс ───────────────────────── */
@@ -627,7 +905,28 @@ function unlocked(id){ return id === 1 || isDone(id - 1); }
 const mapEl = document.getElementById("map");
 const lessonEl = document.getElementById("lesson");
 const overlay = document.getElementById("overlay");
-const ISLAND_POS = [[20, 60], [50, 38], [80, 62]];
+
+/* Камушки ложатся по прямой между островами. Позиция считается от их
+   числа, поэтому добавить задание — значит просто добавить камушек. */
+function dotPos(i, k, total){
+  const t = (k + 1) / (total + 1);
+  return [ISLAND_POS[i][0] + (ISLAND_POS[i+1][0] - ISLAND_POS[i][0]) * t,
+          ISLAND_POS[i][1] + (ISLAND_POS[i+1][1] - ISLAND_POS[i][1]) * t + 13];
+}
+function addDots(host, i, shown, popLast){
+  const les = LESSONS[i];
+  const total = les.tokens;
+  for (let k = 0; k < total; k++){
+    const d = document.createElement("div");
+    const p = dotPos(i, k, total);
+    d.className = "dot" + (k < shown ? " on" : "") +
+                  (popLast && k === shown - 1 ? " pop" : "");
+    d.style.left = p[0] + "%";
+    d.style.top = p[1] + "%";
+    d.innerHTML = '<img src="' + IMG[les.token] + '" alt="">';
+    host.appendChild(d);
+  }
+}
 
 function buildMap(){
   mapEl.style.backgroundImage = "url(" + IMG.map_bg + ")";
@@ -641,27 +940,9 @@ function buildMap(){
       '<span class="name">' + les.title + "</span>" +
       (isDone(les.id) ? '<span class="tick">⭐</span>' : "") +
       (unlocked(les.id) ? "" : '<span class="lock">🔒</span>');
-    b.onclick = () => {
-      if (!unlocked(les.id)){
-        play(null, "Сначала пройдём остров пораньше.", "ru-RU");
-        return;
-      }
-      startLesson(i);
-    };
+    b.onclick = () => { if (unlocked(les.id)) startLesson(i); };
     mapEl.appendChild(b);
-    // мостик к следующему острову
-    if (i < LESSONS.length - 1){
-      const token = les.token === "friend" ? "stone" : les.token;
-      for (let k = 0; k < 3; k++){
-        const d = document.createElement("div");
-        const t = (k + 1) / 4;
-        d.className = "bridge" + (isDone(les.id) ? " on" : "");
-        d.style.left = (ISLAND_POS[i][0] + (ISLAND_POS[i+1][0] - ISLAND_POS[i][0]) * t) + "%";
-        d.style.top = (ISLAND_POS[i][1] + (ISLAND_POS[i+1][1] - ISLAND_POS[i][1]) * t + 14) + "%";
-        d.innerHTML = '<img src="' + IMG[token] + '" alt="">';
-        mapEl.appendChild(d);
-      }
-    }
+    if (i < LESSONS.length - 1) addDots(mapEl, i, isDone(les.id) ? les.tokens : 0, false);
   });
   const g = document.createElement("div");
   g.className = "guide";
@@ -684,10 +965,10 @@ const tokensEl = lessonEl.querySelector(".tokens");
 const btnNext = lessonEl.querySelector(".next");
 const btnListen = lessonEl.querySelector(".listen");
 
-let L = 0, S = 0, round = 0, joined = [], earned = 0;
+let L = 0, S = 0, round = 0, earned = 0, token = 0;
 
 function startLesson(i){
-  L = i; S = 0; round = 0; joined = []; earned = 0;
+  L = i; S = 0; round = 0; earned = 0;
   mapEl.classList.remove("on");
   lessonEl.classList.add("on");
   render();
@@ -696,60 +977,58 @@ function lesson(){ return LESSONS[L]; }
 function screen(){ return lesson().screens[S]; }
 
 function drawTokens(){
-  const total = 3;
-  if (lesson().token === "friend") earned = joined.length;
   let html = "";
-  for (let i = 0; i < total; i++){
-    const key = lesson().token === "friend" ? ["bunny","hedgehog","fox"][i] : lesson().token;
-    html += i < earned
-      ? '<img src="' + IMG[key] + '" alt="">'
-      : '<div class="ghost"></div>';
+  for (let i = 0; i < lesson().tokens; i++){
+    const key = lesson().token === "friend" ? FRIENDS[i] : lesson().token;
+    html += i < earned ? '<img src="' + IMG[key] + '" alt="">' : '<div class="ghost"></div>';
   }
   tokensEl.innerHTML = html;
 }
-
-function say(){
-  const s = screen();
-  const steps = [[s.ru]];
-  if (s.t === "word") steps.push([WORDS[s.key][1], WORDS[s.key][0], "en-US"],
-                                 [WORDS[s.key][1] + "-slow", WORDS[s.key][0], "en-US"]);
-  if (s.t === "pick"){
-    const r = s.rounds[round];
-    if (r.line) steps.push([r.line]);
-    steps.push([WORDS[r.target][1], WORDS[r.target][0], "en-US"]);
-  }
-  return queue(steps);
-}
-
-let token = 0;
 
 function render(){
   stopSound();
   token++;
   const s = screen();
-  guideImg.src = IMG[s.solo ? "firefly_wow" : (s.reward ? "firefly_smile" : "firefly")];
+  guideImg.src = IMG[s.solo ? "firefly_wow" : (s.t === "token" ? "firefly_wow" : "firefly")];
   bubble.textContent = s.text || "";
   content.innerHTML = "";
   btnNext.hidden = true;
   btnNext.textContent = s.btn || "Дальше ▶";
-  btnListen.hidden = false;
   lessonEl.querySelector(".stage").classList.toggle("solo", !!s.solo);
+  if (s.t === "token") earned = s.n;
   drawTokens();
-  const draw = RENDER[s.t];
-  draw(s);
+  RENDER[s.t](s);
   fit();
   say();
 }
 
-/* Реплики идут очередью, а не по таймеру: без записи русского звука
-   пауза в две секунды перед английским словом — пустая тишина. Маркер
-   отрисовки обрывает очередь, если экран уже сменился. */
+/* Реплики идут очередью, а не по таймеру: без записи русского звука пауза
+   перед английским словом — пустая тишина. Маркер обрывает очередь, если
+   экран уже сменился. */
 async function queue(steps){
   const mine = token;
   for (const step of steps){
     if (mine !== token) return;
     await play(step[0], step[1], step[2]);
   }
+}
+function say(){
+  const s = screen();
+  const steps = [[s.ru]];
+  if (s.t === "word"){
+    steps.push([WORDS[s.key][1], WORDS[s.key][0], "en-US"],
+               [WORDS[s.key][1] + "-slow", WORDS[s.key][0], "en-US"]);
+  }
+  if (s.t === "phrase"){
+    steps.push([PHRASES[s.key][1], PHRASES[s.key][0], "en-US"]);
+  }
+  if (s.t === "pick" || s.t === "pick4"){
+    const r = s.rounds[round];
+    if (r.line) steps.push([r.line]);
+    const w = saying(s, r.target);
+    steps.push([w[1], w[0], "en-US"]);
+  }
+  return queue(steps);
 }
 
 /* Ряду карточек нужен его собственный размер в пикселях: от него считается
@@ -776,9 +1055,33 @@ function picArea(keys, extraClass){
   });
   return area;
 }
+function cardsArea(keys, onPick, n){
+  const cards = document.createElement("div");
+  cards.className = "picarea cards";
+  cards.style.setProperty("--n", n || keys.length);
+  keys.forEach(key => {
+    const c = document.createElement("button");
+    c.className = "card";
+    c.innerHTML = '<img src="' + IMG[key] + '" alt="">';
+    c.onclick = () => onPick(c, key);
+    cards.appendChild(c);
+  });
+  return cards;
+}
 
 RENDER.story = function(s){
-  if (s.map){
+  if (s.solo){
+    // светлячок уже стоит в середине и говорит
+  } else {
+    content.appendChild(picArea([s.pic]));
+  }
+  setTimeout(() => { btnNext.hidden = false; }, 2000);
+};
+
+RENDER.token = function(s){
+  if (s.kind === "friends"){
+    content.appendChild(picArea(FRIENDS.slice(0, s.n), "items"));
+  } else {
     const view = document.createElement("div");
     view.className = "mapview";
     view.style.backgroundImage = "url(" + IMG.map_bg + ")";
@@ -789,41 +1092,58 @@ RENDER.story = function(s){
       im.style.top = ISLAND_POS[i][1] + "%";
       view.appendChild(im);
     });
+    addDots(view, L, s.n, true);
     content.appendChild(view);
-  } else if (s.solo){
-    // светлячок уже стоит слева и говорит — второй такой же не нужен
-  } else if (s.pics){
-    content.appendChild(picArea(s.pics));
-  } else if (s.reward || s.path){
-    const key = s.reward || s.path;
-    const n = s.count || 3;
-    const keys = [];
-    for (let i = 0; i < n; i++) keys.push(key === "friend" ? "bunny" : key);
-    const area = picArea(keys, "items");
-    [...area.children].forEach((im, i) => {
-      im.style.animation = "pop .5s " + (i * 0.25) + "s both";
-    });
-    content.appendChild(area);
-    if (s.reward) earned = n;
-    drawTokens();
-  } else {
-    content.appendChild(picArea([s.pic]));
   }
-  setTimeout(() => { btnNext.hidden = false; }, 2000);
+  setTimeout(() => { btnNext.hidden = false; }, 2200);
 };
 
-RENDER.word = function(s){
-  content.appendChild(picArea([s.key]));
+function speakScreen(s, key, line){
+  content.appendChild(picArea([key]));
   const below = document.createElement("div");
   below.className = "below";
-  const line = document.createElement("div");
-  line.className = "wordline";
-  line.textContent = WORDS[s.key][0];
-  below.appendChild(line);
+  const text = document.createElement("div");
+  text.className = "wordline";
+  text.textContent = line;
+  below.appendChild(text);
   const said = document.createElement("button");
   said.className = "btn big";
   said.textContent = "🗣 Я сказал!";
-  said.onclick = () => { stopSound(); next(); };
+  below.appendChild(said);
+  content.appendChild(below);
+  return said;
+}
+
+RENDER.word = function(s){
+  speakScreen(s, s.key, WORDS[s.key][0]).onclick = () => { stopSound(); next(); };
+};
+RENDER.phrase = function(s){
+  speakScreen(s, s.key, PHRASES[s.key][0]).onclick = () => { stopSound(); next(); };
+};
+
+/* Назови сам: слово на экране не пишем — ребёнок не читает. Сначала он
+   говорит, потом слышит эталон и сравнивает. */
+RENDER.name = function(s){
+  const key = s.keys[round];
+  content.appendChild(picArea([key]));
+  const below = document.createElement("div");
+  below.className = "below";
+  const said = document.createElement("button");
+  said.className = "btn big";
+  said.textContent = "🗣 Я сказал!";
+  said.onclick = async () => {
+    said.disabled = true;
+    const w = saying(s, key);
+    const line = document.createElement("div");
+    line.className = "wordline";
+    line.textContent = w[0];
+    below.insertBefore(line, said);
+    blip("SFX-OK");
+    await play(w[1], w[0], "en-US");
+    await praise();
+    round++;
+    if (round >= s.keys.length){ round = 0; next(); } else { render(); }
+  };
   below.appendChild(said);
   content.appendChild(below);
 };
@@ -831,28 +1151,11 @@ RENDER.word = function(s){
 RENDER.pick = function(s){
   const r = s.rounds[round];
   if (r.who) content.appendChild(picArea([r.who], "who"));
-  const cards = document.createElement("div");
-  cards.className = "picarea cards";
-  cards.style.setProperty("--n", 2);
-  shuffle([r.target, r.other]).forEach(key => {
-    const c = document.createElement("button");
-    c.className = "card";
-    c.innerHTML = '<img src="' + IMG[key] + '" alt="">';
-    c.onclick = () => answer(c, key === r.target, s, r);
-    cards.appendChild(c);
-  });
-  content.appendChild(cards);
-  if (joined.length){
-    const row = document.createElement("div");
-    row.className = "joined";
-    joined.forEach(k => {
-      const im = document.createElement("img");
-      im.src = IMG[k];
-      row.appendChild(im);
-    });
-    content.appendChild(row);
-  }
+  const opts = r.others ? [r.target].concat(r.others) : [r.target, r.other];
+  content.appendChild(cardsArea(shuffle(opts),
+    (c, key) => answer(c, key === r.target, s, r)));
 };
+RENDER.pick4 = RENDER.pick;
 
 async function answer(card, ok, s, r){
   if (card.dataset.locked) return;
@@ -866,19 +1169,16 @@ async function answer(card, ok, s, r){
   content.querySelectorAll(".card").forEach(c => c.dataset.locked = "1");
   card.classList.add("right");
   blip("SFX-OK");
-  if (r.join && joined.indexOf(r.join) < 0){ joined.push(r.join); drawTokens(); }
   await praise();
   round++;
-  if (round >= s.rounds.length){ round = 0; next(); }
-  else { render(); }
+  if (round >= s.rounds.length){ round = 0; next(); } else { render(); }
 }
 
 RENDER.pairs = function(s){
-  const keys = s.keys.concat(s.keys);
   const grid = document.createElement("div");
   grid.className = "grid";
   let picked = null, left = s.keys.length;
-  shuffle(keys).forEach(key => {
+  shuffle(s.keys.concat(s.keys)).forEach(key => {
     const c = document.createElement("button");
     c.className = "card";
     c.dataset.key = key;
@@ -895,9 +1195,9 @@ RENDER.pairs = function(s){
       if (picked.dataset.key === key){
         picked.classList.add("gone");
         c.classList.add("gone");
-        blip("SFX-OK");
         picked = null;
         left--;
+        blip("SFX-OK");
         await praise();
         if (left === 0) next();
       } else {
@@ -915,17 +1215,10 @@ RENDER.pairs = function(s){
 };
 
 RENDER.parent = function(s){
-  const row = document.createElement("div");
-  row.className = "picarea cards";
-  row.style.setProperty("--n", s.keys.length);
-  s.keys.forEach(k => {
-    const wrap = document.createElement("button");
-    wrap.className = "card";
-    wrap.innerHTML = '<img src="' + IMG[k] + '" alt="">';
-    wrap.onclick = () => { const w = WORDS[k]; if (w) play(w[1], w[0], "en-US"); };
-    row.appendChild(wrap);
-  });
-  content.appendChild(row);
+  content.appendChild(cardsArea(s.keys, (c, key) => {
+    const w = saying(s, key);
+    if (w) play(w[1], w[0], "en-US");
+  }));
   setTimeout(() => { btnNext.hidden = false; }, 2000);
   btnNext.textContent = "Готово ✔";
 };
@@ -952,7 +1245,7 @@ function finish(){
   panel.innerHTML =
     "<h2>Урок пройден!</h2>" +
     "<p>" + (last
-      ? "Ты прошёл всю дорогу до праздника. А кто же в яйце — узнаешь на первом уроке с преподавателем."
+      ? "Ты прошёл всю дорогу до праздника. А кто в яйце — узнаешь на первом уроке с преподавателем."
       : "Дорожка на следующий остров готова.") + "</p>" +
     '<div class="row">' +
       '<button class="btn ghost" data-act="again">Пройти ещё раз</button>' +
@@ -964,7 +1257,6 @@ function finish(){
   };
   panel.querySelector('[data-act="map"]').onclick = showMap;
   overlay.classList.add("on");
-  play(null, last ? "Ты прошёл всю дорогу! Молодец!" : "Урок пройден! Молодец!", "ru-RU");
 }
 
 btnNext.onclick = next;
@@ -994,45 +1286,54 @@ showMap();
 
 
 def main():
+    script, praise_keys, retry_keys = build_script()
+    write_voice_doc(script)
+    print(f"  реплик в файле озвучки: {len(script)}")
+
     images = {}
     for name, (rel, width, transparent) in PICTURES.items():
         path = ROOT / rel
         if not path.exists():
             sys.exit(f"нет картинки: {rel}")
         images[name] = prepare(path, width, transparent)
-        print(f"  {name:14s} {len(images[name]) // 1024:5d} КБ")
 
     audio = collect_audio()
-    print(f"  дорожек озвучки: {len(audio)}")
-    audio.setdefault("SFX-OK", tone([(880, 0.10), (1318, 0.16)]))
-    audio.setdefault("SFX-NO", tone([(330, 0.18)], volume=0.16))
+    print(f"  дорожек озвучки: {len([k for k in audio if not k.startswith('SFX')])}")
 
-    # каждая картинка, на которую ссылается спецификация, должна существовать
-    spec = json.dumps(LESSONS, ensure_ascii=False)
-    for key in re.findall(r'"(?:pic|who|target|other|join|reward|path|island)":\s*"([a-z_]+)"', spec):
-        if key not in images and key != "friend":
-            sys.exit(f"в уроках есть ссылка на картинку «{key}», а её нет")
+    # каждая ссылка из спецификации должна указывать на существующую картинку
     for les in LESSONS:
+        for key in ("island", "token"):
+            if les[key] not in images and les[key] != "friend":
+                sys.exit(f"в уроке {les['id']} нет картинки «{les[key]}»")
         for s in les["screens"]:
-            for k in s.get("keys", []) + s.get("pics", []):
+            keys = list(s.get("keys", []))
+            if "pic" in s:
+                keys.append(s["pic"])
+            for r in s.get("rounds", []):
+                keys += [r["target"]] + ([r["other"]] if "other" in r else r.get("others", []))
+                if "who" in r:
+                    keys.append(r["who"])
+            for k in keys:
                 if k not in images:
-                    sys.exit(f"в уроках есть ссылка на картинку «{k}», а её нет")
-            if s["t"] == "word" and s["key"] not in WORDS:
+                    sys.exit(f"экран {s['t']} ссылается на картинку «{k}», а её нет")
+            if s["t"] in ("word", "phrase") and s["key"] not in WORDS:
                 sys.exit(f"слово «{s['key']}» не описано в WORDS")
 
     page = HTML
-    page = page.replace("__IMG__", json.dumps(images))
-    page = page.replace("__AUDIO__", json.dumps(audio))
-    page = page.replace("__LESSONS__", json.dumps(LESSONS, ensure_ascii=False))
-    page = page.replace("__PRAISE__", json.dumps(PRAISE, ensure_ascii=False))
-    page = page.replace("__RETRY__", json.dumps(RETRY, ensure_ascii=False))
-    page = page.replace("__WORDS__", json.dumps(WORDS, ensure_ascii=False))
+    for mark, value in (("__IMG__", images), ("__AUDIO__", audio),
+                        ("__LESSONS__", LESSONS), ("__PRAISE__", praise_keys),
+                        ("__RETRY__", retry_keys), ("__WORDS__", WORDS),
+                        ("__PHRASES__", PHRASES), ("__FRIENDS__", FRIENDS)):
+        page = page.replace(mark, json.dumps(value, ensure_ascii=False))
 
     # литерал закрывающего тега внутри скрипта оборвал бы страницу
     if page.count("</script>") != 1:
         sys.exit("в собранной странице лишний закрывающий тег скрипта")
 
     OUT.write_text(page, encoding="utf-8")
+    total = sum(len(l["screens"]) for l in LESSONS)
+    print(f"  экранов: {total}, из них наград: "
+          f"{sum(l['tokens'] for l in LESSONS)}")
     print(f"\n{OUT.name}: {len(page.encode()) / 1024 / 1024:.2f} МБ")
 
 
