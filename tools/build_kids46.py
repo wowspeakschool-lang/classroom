@@ -84,7 +84,7 @@ def cut_white(im, tol=18):
     return im
 
 
-def prepare(path, width, transparent=True, quality=82):
+def prepare(path, width, transparent=True, quality=80):
     im = Image.open(path)
     if transparent:
         im = cut_white(im)
@@ -102,32 +102,37 @@ def prepare(path, width, transparent=True, quality=82):
 
 
 # имя → (файл, ширина, вырезать ли белый фон)
+#
+# Ширина — не «сколько хватит на глаз», а вдвое больше самого крупного места,
+# где картинка показывается: на телефоне пиксель экрана вдвое мельче
+# пикселя картинки, и вшитая впритык картинка выглядит мыльной. Проверка
+# сравнивает натуральный размер с показанным и ругается, если растягиваем.
 PICTURES = {
-    "map_bg":        ("assets/kids-4-6/map-background-wide.webp", 1600, False),
-    "meadow":        ("assets/kids-4-6/island-meadow.webp",        560, True),
-    "clouds":        ("assets/kids-4-6/island-clouds.webp",        560, True),
-    "dragon":        ("assets/kids-4-6/island-dragon.webp",        560, True),
-    "firefly":       ("assets/kids-4-6/firefly-neutral.webp",      300, True),
-    "firefly_smile": ("assets/kids-4-6/firefly-smile.webp",        300, True),
-    "firefly_wow":   ("assets/kids-4-6/firefly-excited.webp",      300, True),
-    "firefly_lamp":  ("assets/kids-4-6/firefly-lantern.webp",      420, False),
-    "stone":         ("assets/kids-4-6/stone.webp",                220, True),
-    "cloudlet":      ("assets/kids-4-6/cloudlet.webp",             220, True),
-    "egg":           ("assets/kids-4-6/egg.webp",                  560, True),
-    "cave_closed":   ("assets/kids-4-6/cave-closed.webp",          620, True),
-    "cave_open":     ("assets/kids-4-6/cave-open.webp",            620, True),
-    "bunny":         ("assets/kids-4-6/animal-bunny.webp",         360, True),
-    "hedgehog":      ("assets/kids-4-6/animal-hedgehog.webp",      360, True),
-    "fox":           ("assets/kids-4-6/animal-fox.webp",           360, True),
-    "push":          ("assets/kids-4-6/friends-push.webp",         900, True),
-    "cap":           ("assets/lesson-1/cap.webp",                  320, True),
-    "top":           ("assets/lesson-1/tshirt.webp",               320, True),
-    "jeans":         ("assets/lesson-1/jeans.webp",                320, True),
-    "shoes":         ("assets/lesson-1/shoes.webp",                320, True),
-    "skirt":         ("assets/lesson-1/skirt.webp",                320, True),
-    "jacket":        ("assets/lesson-1/jacket.webp",               320, True),
-    "socks":         ("assets/lesson-1/socks.webp",                320, True),
-    "backpack":      ("assets/lesson-1/backpack.webp",             320, True),
+    "map_bg":        ("assets/kids-4-6/map-background-wide.webp", 1536, False),
+    "meadow":        ("assets/kids-4-6/island-meadow.webp",        900, True),
+    "clouds":        ("assets/kids-4-6/island-clouds.webp",        900, True),
+    "dragon":        ("assets/kids-4-6/island-dragon.webp",        900, True),
+    "firefly":       ("assets/kids-4-6/firefly-neutral.webp",      900, True),
+    "firefly_smile": ("assets/kids-4-6/firefly-smile.webp",        900, True),
+    "firefly_wow":   ("assets/kids-4-6/firefly-excited.webp",      900, True),
+    "firefly_lamp":  ("assets/kids-4-6/firefly-lantern.webp",      900, False),
+    "stone":         ("assets/kids-4-6/stone.webp",                900, True),
+    "cloudlet":      ("assets/kids-4-6/cloudlet.webp",             900, True),
+    "egg":           ("assets/kids-4-6/egg.webp",                 1100, True),
+    "cave_closed":   ("assets/kids-4-6/cave-closed.webp",         1100, True),
+    "cave_open":     ("assets/kids-4-6/cave-open.webp",           1100, True),
+    "bunny":         ("assets/kids-4-6/animal-bunny.webp",         760, True),
+    "hedgehog":      ("assets/kids-4-6/animal-hedgehog.webp",      760, True),
+    "fox":           ("assets/kids-4-6/animal-fox.webp",           760, True),
+    "push":          ("assets/kids-4-6/friends-push.webp",        1400, True),
+    "cap":           ("assets/lesson-1/cap.webp",                  800, True),
+    "top":           ("assets/lesson-1/tshirt.webp",               800, True),
+    "jeans":         ("assets/lesson-1/jeans.webp",                800, True),
+    "shoes":         ("assets/lesson-1/shoes.webp",                800, True),
+    "skirt":         ("assets/lesson-1/skirt.webp",                800, True),
+    "jacket":        ("assets/lesson-1/jacket.webp",               800, True),
+    "socks":         ("assets/lesson-1/socks.webp",                800, True),
+    "backpack":      ("assets/lesson-1/backpack.webp",             800, True),
 }
 
 WORDS = {
@@ -160,11 +165,11 @@ LESSONS = [
         "token_word": "камушки",
         "words": ["cap", "top"],
         "screens": [
-            {"t": "story", "pic": "firefly_wow", "ru": "RU-01",
+            {"t": "story", "solo": True, "ru": "RU-01",
              "text": "Привет! Я светлячок Искорка. Смотри, что мне принесли — "
                      "приглашение! Нас зовут на праздник на Драконий Остров. Полетели!",
              "btn": "Полетели!"},
-            {"t": "story", "pics": ["meadow", "clouds", "dragon"], "ru": "RU-02",
+            {"t": "story", "map": True, "ru": "RU-02",
              "text": "Вот наша дорога. Три острова. Ой… а дорожек между ними нет. "
                      "Ничего, мы что-нибудь придумаем!"},
             {"t": "story", "pic": "meadow", "ru": "RU-03",
@@ -190,9 +195,9 @@ LESSONS = [
             {"t": "pick", "ru": "RU-08",
              "text": "Зверята ждут свои вещи. Дай каждому то, что он просит.",
              "rounds": [
-                 {"who": "bunny", "target": "cap", "other": "top"},
-                 {"who": "hedgehog", "target": "top", "other": "cap"},
-                 {"who": "fox", "target": "cap", "other": "socks"},
+                 {"who": "bunny", "target": "cap", "other": "top", "line": "RU-41"},
+                 {"who": "hedgehog", "target": "top", "other": "cap", "line": "RU-42"},
+                 {"who": "fox", "target": "cap", "other": "socks", "line": "RU-43"},
              ]},
             {"t": "story", "reward": "stone", "count": 3, "ru": "RU-09",
              "text": "Спасибо! За помощь зверята дают тебе три волшебных камушка."},
@@ -235,9 +240,9 @@ LESSONS = [
             {"t": "pick", "ru": "RU-18",
              "text": "Зверята тоже собираются на праздник. Помоги им одеться!",
              "rounds": [
-                 {"who": "fox", "target": "jeans", "other": "top"},
-                 {"who": "bunny", "target": "shoes", "other": "cap"},
-                 {"who": "hedgehog", "target": "jeans", "other": "shoes"},
+                 {"who": "fox", "target": "jeans", "other": "top", "line": "RU-44"},
+                 {"who": "bunny", "target": "shoes", "other": "cap", "line": "RU-45"},
+                 {"who": "hedgehog", "target": "jeans", "other": "shoes", "line": "RU-46"},
              ]},
             {"t": "story", "reward": "cloudlet", "count": 3, "ru": "RU-19",
              "text": "Спасибо! Вот тебе три облачка."},
@@ -303,10 +308,40 @@ PRAISE = [
     ("RU-37", "Получилось!"),
     ("RU-40", "Ух ты, как здорово!"),
 ]
+# Короткие реплики зверят: их озвучивают три разных детских голоса,
+# иначе весь лид-магнит говорит одним голосом Искорки.
+ANIMAL_LINES = {
+    "RU-41": ("bunny", "Ой, где же моя a cap?"),
+    "RU-42": ("hedgehog", "А я ищу свой a top!"),
+    "RU-43": ("fox", "И мне нужна a cap!"),
+    "RU-44": ("fox", "Где мои jeans? Без них на праздник не пойду!"),
+    "RU-45": ("bunny", "А мне нужны shoes!"),
+    "RU-46": ("hedgehog", "И я хочу jeans!"),
+}
+
 RETRY = [
     ("RU-38", "Ой, не то. Попробуй ещё разок."),
     ("RU-39", "Почти! Давай ещё раз."),
 ]
+
+
+def tone(notes, volume=0.22, rate=22050):
+    """Короткий звук отклика: без русской озвучки ребёнку нужен хоть какой-то
+    ответ на нажатие. Собираем WAV сами, чтобы ничего не скачивать."""
+    import math
+    import struct
+    frames = bytearray()
+    for freq, dur in notes:
+        n = int(rate * dur)
+        for i in range(n):
+            # мягкое нарастание и затухание, иначе на краях слышен щелчок
+            env = min(1.0, i / (rate * 0.01), (n - i) / (rate * 0.05))
+            v = int(32767 * volume * env * math.sin(2 * math.pi * freq * i / rate))
+            frames += struct.pack("<h", v)
+    header = b"RIFF" + struct.pack("<I", 36 + len(frames)) + b"WAVEfmt " + \
+        struct.pack("<IHHIIHH", 16, 1, 1, rate, rate * 2, 2, 16) + \
+        b"data" + struct.pack("<I", len(frames))
+    return "data:audio/wav;base64," + base64.b64encode(header + bytes(frames)).decode()
 
 
 def collect_audio():
@@ -403,7 +438,24 @@ img{-webkit-user-drag:none}
 .picarea img{height:100%;max-width:100%;object-fit:contain;
   filter:drop-shadow(0 8px 16px rgba(40,60,90,.2))}
 .picarea.who{flex:0 1 38%;min-height:20%}
+.picarea.items{gap:4vw}
+.picarea.items img{height:auto;max-height:100%;width:auto;max-width:24%}
 .below{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:1vh}
+
+/* Экран, где говорит только светлячок: он занимает середину, а справа
+   ничего нет — второй копии героя на экране быть не должно. */
+.stage.solo{justify-content:center}
+.stage.solo .guide{flex:0 0 auto;width:min(46%,420px);max-width:none}
+.stage.solo .guide img{max-width:none;width:100%}
+.stage.solo .bubble{font-size:clamp(15px,2.1vw,24px)}
+.stage.solo .content{display:none}
+
+/* Карта целиком внутри урока: тот же фон и те же места островов,
+   что и на настоящей карте, только смотреть, а не нажимать. */
+.mapview{flex:1 1 0;min-height:0;width:100%;position:relative;border-radius:24px;
+  background-position:center;background-size:cover;box-shadow:var(--shadow);overflow:hidden}
+.mapview img{position:absolute;transform:translate(-50%,-50%);width:30%;
+  filter:drop-shadow(0 8px 14px rgba(40,60,90,.25))}
 .wordline{font-size:clamp(24px,4.4vw,52px);font-weight:900;letter-spacing:.5px}
 
 /* Карточки — квадратные: сторона считается от реального размера ряда,
@@ -528,8 +580,10 @@ function play(key, text, lang){
       a.play().catch(finish);
       return;
     }
-    // Записи ещё нет — проговаривает браузер, чтобы урок можно было проверять.
-    if (!text || !("speechSynthesis" in window)) { finish(); return; }
+    // Русский синтез не используем: он звучит плохо. Без записи реплика
+    // просто молчит, текст для взрослого остаётся в пузыре. Английские
+    // слова синтез читает — их ребёнку надо слышать с первого дня.
+    if (!text || lang !== "en-US" || !("speechSynthesis" in window)) { finish(); return; }
     try{
       const u = new SpeechSynthesisUtterance(text);
       u.lang = lang || "ru-RU";
@@ -540,8 +594,15 @@ function play(key, text, lang){
   });
 }
 const pick = arr => arr[Math.floor(Math.random() * arr.length)];
-function praise(){ const p = pick(PRAISE); return play(p[0], p[1]); }
-function retry(){ const p = pick(RETRY); return play(p[0], p[1]); }
+function praise(){ return play(pick(PRAISE)[0]) .then(() => {}); }
+function retry(){ return play(pick(RETRY)[0]).then(() => {}); }
+/* Короткий звук поверх всего: пока похвалы не записаны, ребёнку нужен
+   хоть какой-то ответ на нажатие. Отдельный объект, чтобы не гасить его
+   вместе с репликой. */
+function blip(key){
+  try { const a = new Audio(AUDIO[key]); a.volume = 0.7; a.play().catch(() => {}); }
+  catch(e){}
+}
 function shuffle(a){
   a = a.slice();
   for (let i = a.length - 1; i > 0; i--){
@@ -649,23 +710,46 @@ function drawTokens(){
 
 function say(){
   const s = screen();
-  return play(s.ru, s.text, "ru-RU");
+  const steps = [[s.ru]];
+  if (s.t === "word") steps.push([WORDS[s.key][1], WORDS[s.key][0], "en-US"],
+                                 [WORDS[s.key][1] + "-slow", WORDS[s.key][0], "en-US"]);
+  if (s.t === "pick"){
+    const r = s.rounds[round];
+    if (r.line) steps.push([r.line]);
+    steps.push([WORDS[r.target][1], WORDS[r.target][0], "en-US"]);
+  }
+  return queue(steps);
 }
+
+let token = 0;
 
 function render(){
   stopSound();
+  token++;
   const s = screen();
-  guideImg.src = IMG[s.t === "story" && s.reward ? "firefly_wow" : "firefly"];
+  guideImg.src = IMG[s.solo ? "firefly_wow" : (s.reward ? "firefly_smile" : "firefly")];
   bubble.textContent = s.text || "";
   content.innerHTML = "";
   btnNext.hidden = true;
   btnNext.textContent = s.btn || "Дальше ▶";
   btnListen.hidden = false;
+  lessonEl.querySelector(".stage").classList.toggle("solo", !!s.solo);
   drawTokens();
   const draw = RENDER[s.t];
   draw(s);
   fit();
   say();
+}
+
+/* Реплики идут очередью, а не по таймеру: без записи русского звука
+   пауза в две секунды перед английским словом — пустая тишина. Маркер
+   отрисовки обрывает очередь, если экран уже сменился. */
+async function queue(steps){
+  const mine = token;
+  for (const step of steps){
+    if (mine !== token) return;
+    await play(step[0], step[1], step[2]);
+  }
 }
 
 /* Ряду карточек нужен его собственный размер в пикселях: от него считается
@@ -694,14 +778,28 @@ function picArea(keys, extraClass){
 }
 
 RENDER.story = function(s){
-  if (s.pics){
+  if (s.map){
+    const view = document.createElement("div");
+    view.className = "mapview";
+    view.style.backgroundImage = "url(" + IMG.map_bg + ")";
+    LESSONS.forEach((les, i) => {
+      const im = document.createElement("img");
+      im.src = IMG[les.island];
+      im.style.left = ISLAND_POS[i][0] + "%";
+      im.style.top = ISLAND_POS[i][1] + "%";
+      view.appendChild(im);
+    });
+    content.appendChild(view);
+  } else if (s.solo){
+    // светлячок уже стоит слева и говорит — второй такой же не нужен
+  } else if (s.pics){
     content.appendChild(picArea(s.pics));
   } else if (s.reward || s.path){
     const key = s.reward || s.path;
     const n = s.count || 3;
     const keys = [];
     for (let i = 0; i < n; i++) keys.push(key === "friend" ? "bunny" : key);
-    const area = picArea(keys);
+    const area = picArea(keys, "items");
     [...area.children].forEach((im, i) => {
       im.style.animation = "pop .5s " + (i * 0.25) + "s both";
     });
@@ -728,11 +826,6 @@ RENDER.word = function(s){
   said.onclick = () => { stopSound(); next(); };
   below.appendChild(said);
   content.appendChild(below);
-  // сначала реплика Искорки, потом само слово дважды: обычно и медленнее
-  setTimeout(async () => {
-    await play(WORDS[s.key][1], WORDS[s.key][0], "en-US");
-    await play(WORDS[s.key][1] + "-slow", WORDS[s.key][0], "en-US");
-  }, 3200);
 };
 
 RENDER.pick = function(s){
@@ -759,23 +852,20 @@ RENDER.pick = function(s){
     });
     content.appendChild(row);
   }
-  // слово называется после реплики, а на повторных раундах — сразу
-  const word = WORDS[r.target];
-  setTimeout(() => {
-    play(word[1], word[0], "en-US");
-  }, round === 0 ? 2600 : 400);
 };
 
 async function answer(card, ok, s, r){
   if (card.dataset.locked) return;
   if (!ok){
     card.classList.add("wrong");
+    blip("SFX-NO");
     setTimeout(() => card.classList.remove("wrong"), 500);
     await retry();
     return;
   }
   content.querySelectorAll(".card").forEach(c => c.dataset.locked = "1");
   card.classList.add("right");
+  blip("SFX-OK");
   if (r.join && joined.indexOf(r.join) < 0){ joined.push(r.join); drawTokens(); }
   await praise();
   round++;
@@ -805,12 +895,14 @@ RENDER.pairs = function(s){
       if (picked.dataset.key === key){
         picked.classList.add("gone");
         c.classList.add("gone");
+        blip("SFX-OK");
         picked = null;
         left--;
         await praise();
         if (left === 0) next();
       } else {
         c.classList.add("wrong");
+        blip("SFX-NO");
         setTimeout(() => c.classList.remove("wrong"), 500);
         picked.classList.remove("picked");
         picked = null;
@@ -912,6 +1004,8 @@ def main():
 
     audio = collect_audio()
     print(f"  дорожек озвучки: {len(audio)}")
+    audio.setdefault("SFX-OK", tone([(880, 0.10), (1318, 0.16)]))
+    audio.setdefault("SFX-NO", tone([(330, 0.18)], volume=0.16))
 
     # каждая картинка, на которую ссылается спецификация, должна существовать
     spec = json.dumps(LESSONS, ensure_ascii=False)
