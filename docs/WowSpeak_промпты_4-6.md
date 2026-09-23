@@ -60,21 +60,29 @@ A small floating island with a sunny green meadow, seen from a slight angle: sof
 
 ## 3. island-clouds — Остров 2 (облачный)
 
+**Прикрепить: island-meadow** (принятую полянку). Острова должны быть одного
+размера и с одного ракурса — иначе на карте они не встанут в ряд.
+
 ```
-A small floating island made of soft fluffy clouds, seen from a slight angle: a platform of white and pale pink cloud puffs with a springy look, three or four smaller cloudlets floating around it, a pale rainbow ribbon curving over the top, tiny golden sparkles. The whole island is visible with clear empty margin around it. Bright 3D rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colors, soft warm lighting from the top-left. No characters, no text. Plain flat pure white background, no shadow on the background. Match the art style of the attached image exactly.
+A small floating island made of soft fluffy clouds, seen from the same slightly raised angle as the island in the attached picture and drawn at the same size: a springy platform of white and pale pink cloud puffs with plump rounded edges, three or four smaller cloudlets floating around it, a pale rainbow ribbon curving over the top, tiny golden sparkles in the air. The platform reads as solid enough to stand on, with a clearly visible flat top surface. The whole island is visible with clear empty margin around it. Bright 3D rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colors, soft warm lighting from the top-left. No characters, no text. Plain flat pure white background, no shadow on the background. Match the art style of the attached image exactly.
 ```
 
-**Проверить:** облачный остров читается как площадка, на которую можно встать.
+**Проверить:** облачный остров читается как площадка, на которую можно встать;
+он того же размера, что полянка.
 
 ---
 
 ## 4. island-dragon — Остров 3 (остров Дракона, праздничный)
 
+**Прикрепить две картинки: island-meadow и cave-closed.** Пещера с камнем на
+острове должна быть той же, которую ребёнок потом увидит крупным планом.
+
 ```
-A small floating island with warm sandy rocks and green grass, decorated for a party: strings of little flags and glowing paper lanterns stretched between the rocks, a low table with cupcakes and juice, soft cushions on the grass, and on the right side a dark cave entrance in the rock, blocked by a big round boulder. The whole island is visible with clear empty margin around it. Bright 3D rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colors, soft warm lighting from the top-left. No characters, no text. Plain flat pure white background, no shadow on the background. Match the art style of the attached image exactly.
+A small floating island with warm sandy rock and green grass on top, seen from the same slightly raised angle as the green island in the attached picture and drawn at the same size, with the same rocky underside and a couple of hanging roots. The island is decorated for a party: strings of little colourful flags and glowing paper lanterns stretched above the grass, a low table with cupcakes and juice, soft cushions on the grass. On the right side of the island there is a cave entrance in warm sandy rock, blocked by a big round smooth pale cream-white boulder — exactly the cave and the boulder from the second attached picture, just smaller. The whole island is visible with clear empty margin around it. Bright 3D rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colors, soft warm lighting from the top-left. No characters, no text. Plain flat pure white background, no shadow on the background. Match the art style of the attached image exactly.
 ```
 
-**Проверить:** видны и праздник (флажки, фонарики), и вход в пещеру с камнем.
+**Проверить:** видны и праздник (флажки, фонарики), и вход в пещеру с камнем;
+камень светлый, как на крупном плане; остров того же размера, что полянка.
 
 ---
 
