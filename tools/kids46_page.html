@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Волшебная страна — дорога на праздник</title>
+<style>
+:root{
+  --sky:#bfe9ff; --card:#fffdf7; --ink:#3a2f4a;
+  --accent:#ff9d3c; --good:#5ec26a; --bad:#ff8a8a;
+  --shadow:0 10px 24px rgba(60,40,90,.18);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden}
+body{font-family:"Nunito","Comic Sans MS",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--ink);background:var(--sky);user-select:none;-webkit-user-select:none}
+img{-webkit-user-drag:none}
+#app{position:fixed;inset:0}
+
+/* ───────── карта ───────── */
+#map{position:absolute;inset:0;display:none;background:#bfe9ff center/cover no-repeat}
+#map.on{display:block}
+.island{position:absolute;transform:translate(-50%,-50%);width:30%;max-width:420px;
+  border:0;background:none;padding:0;cursor:pointer;transition:transform .2s}
+.island img{width:100%;display:block;filter:drop-shadow(0 12px 18px rgba(40,60,90,.25))}
+.island:active{transform:translate(-50%,-50%) scale(.96)}
+.island .name{display:block;margin-top:-6px;font-size:clamp(13px,2.4vw,22px);font-weight:800;
+  color:#fff;text-shadow:0 2px 6px rgba(40,60,90,.6)}
+.island.locked img{filter:grayscale(.9) brightness(.82) contrast(.9)
+  drop-shadow(0 12px 18px rgba(40,60,90,.25));opacity:.75}
+.island.locked .name{opacity:.7}
+.island .tick{position:absolute;top:2%;right:8%;font-size:clamp(22px,4vw,40px)}
+.island .lock{position:absolute;top:8%;left:50%;transform:translateX(-50%);
+  font-size:clamp(20px,3.6vw,36px);filter:drop-shadow(0 2px 4px rgba(0,0,0,.35))}
+.island.shake{animation:islandshake .4s}
+@keyframes islandshake{25%{transform:translate(calc(-50% - 10px),-50%)}
+                       75%{transform:translate(calc(-50% + 10px),-50%)}}
+.dot{position:absolute;transform:translate(-50%,-50%);width:3.6%;max-width:48px;
+  opacity:0;transition:opacity .4s}
+.dot.on{opacity:1}
+.dot.pop{animation:drop .6s both}
+.dot img{width:100%;display:block;filter:drop-shadow(0 4px 6px rgba(40,60,90,.3))}
+@keyframes drop{0%{transform:translate(-50%,-160%) scale(1.5);opacity:0}
+                60%{transform:translate(-50%,-50%) scale(1.1);opacity:1}
+                100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
+#map .guide{position:absolute;left:50%;bottom:1%;transform:translateX(-50%);
+  width:13%;max-width:150px}
+#map .guide img{width:100%;display:block}
+#map .maptitle{position:absolute;left:50%;top:3%;transform:translateX(-50%);
+  font-size:clamp(16px,3vw,30px);font-weight:900;color:#fff;
+  text-shadow:0 3px 10px rgba(40,60,90,.55);white-space:nowrap}
+
+/* ───────── урок ───────── */
+#lesson{position:absolute;inset:0;display:none;flex-direction:column;
+  background:linear-gradient(180deg,#d9f3ff 0%,#fff4de 100%)}
+#lesson.on{display:flex}
+.topbar{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:8px 14px}
+.topbar .home{border:0;background:rgba(255,255,255,.75);border-radius:999px;
+  width:44px;height:44px;font-size:22px;cursor:pointer;box-shadow:var(--shadow)}
+.topbar .tokens{display:flex;gap:5px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+.topbar .tokens img{width:30px;height:30px;object-fit:contain}
+.topbar .tokens .ghost{width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,.45);border:2px dashed rgba(120,110,140,.35)}
+
+.stage{flex:1 1 auto;display:flex;align-items:center;gap:2vw;padding:0 3vw 6px;
+  min-height:0;overflow:hidden}
+.guide{flex:0 0 22%;max-width:230px;display:flex;flex-direction:column;align-items:center}
+.guide img{width:100%;max-width:180px;display:block}
+.bubble{background:var(--card);border-radius:20px;padding:10px 14px;box-shadow:var(--shadow);
+  font-size:clamp(13px,1.6vw,18px);line-height:1.35;text-align:center;margin-top:-6px}
+
+/* Высота считается от свободного места, а не в vh: иначе на низком экране
+   содержимое наползает на кнопку и перехватывает нажатие. */
+.content{flex:1 1 auto;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:1vh;min-width:0;min-height:0;height:100%;overflow:hidden}
+.picarea{flex:1 1 0;min-height:0;width:100%;display:flex;align-items:center;
+  justify-content:center;gap:2vw}
+.picarea img{height:100%;max-width:100%;object-fit:contain;
+  filter:drop-shadow(0 8px 16px rgba(40,60,90,.2))}
+.picarea.who{flex:0 1 30%;min-height:18%}
+.picarea.small img{height:auto;max-height:100%;width:auto;max-width:34%}
+.picarea.items{gap:4vw}
+.picarea.items img{height:auto;max-height:100%;width:auto;max-width:24%}
+.below{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:1vh}
+.wordline{font-size:clamp(22px,4vw,44px);font-weight:900;letter-spacing:.5px;text-align:center}
+
+.stage.solo{justify-content:center}
+.stage.solo .guide{flex:0 0 auto;width:min(46%,400px);max-width:none}
+.stage.solo .guide img{max-width:none;width:100%}
+.stage.solo .bubble{font-size:clamp(15px,2.1vw,23px)}
+.stage.solo .content{display:none}
+
+.mapview{flex:1 1 0;min-height:0;width:100%;position:relative;border-radius:24px;
+  background-position:center;background-size:cover;box-shadow:var(--shadow);overflow:hidden}
+.mapview>img{position:absolute;transform:translate(-50%,-50%);width:26%;
+  filter:drop-shadow(0 8px 14px rgba(40,60,90,.25))}
+
+/* ───────── карточки ───────── */
+.cards{--n:2;--gap:3vw;gap:var(--gap)}
+.card{background:var(--card);border:4px solid transparent;border-radius:26px;
+  box-shadow:var(--shadow);padding:1.4%;cursor:pointer;flex:0 0 auto;
+  --side:min(calc((var(--bw,100%) - (var(--n) - 1) * var(--gap)) / var(--n)),
+             var(--bh,100%), 400px);
+  width:var(--side);height:var(--side);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .15s,border-color .2s,opacity .3s}
+.card img{height:100%;width:100%;object-fit:contain;display:block;pointer-events:none}
+.card:active{transform:scale(.96)}
+.card.right{border-color:var(--good);animation:pop .4s}
+.card.wrong{border-color:var(--bad);animation:shake .4s}
+.card.gone{opacity:0;transform:scale(.3);pointer-events:none}
+@keyframes pop{50%{transform:scale(1.08)}}
+@keyframes shake{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+
+/* ───────── поле предметов (нажми на все / шарики) ───────── */
+.field{flex:1 1 0;min-height:0;width:100%;display:grid;gap:1.5vw;
+  grid-template-columns:repeat(3,1fr);align-content:center;justify-items:center}
+.field .cell{width:100%;height:100%;min-height:0;background:none;border:0;padding:0;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:opacity .35s,transform .35s}
+.field .cell img{max-height:100%;max-width:100%;object-fit:contain;
+  filter:drop-shadow(0 6px 12px rgba(40,60,90,.22))}
+.field .cell.gone{opacity:0;transform:scale(.2) rotate(15deg);pointer-events:none}
+.field .cell.wrong{animation:shake .4s}
+.field.float .cell img{animation:floaty 2.6s ease-in-out infinite alternate}
+@keyframes floaty{from{transform:translateY(-6%)}to{transform:translateY(6%)}}
+
+/* ───────── корзины ───────── */
+.baskets{flex:0 0 32%;display:flex;gap:3vw;align-items:flex-end;justify-content:center;
+  width:100%;min-height:0}
+.baskets button{border:0;background:none;padding:0;cursor:pointer;height:100%;
+  flex:1 1 0;min-width:0;transition:transform .15s}
+.baskets button:active{transform:scale(.94)}
+.baskets img{height:100%;width:100%;object-fit:contain;
+  filter:drop-shadow(0 6px 12px rgba(40,60,90,.25))}
+.baskets button.wrong{animation:shake .4s}
+
+/* ───────── кляксы ───────── */
+.blobs{flex:1 1 0;min-height:0;display:flex;gap:4vw;align-items:center;justify-content:center;
+  width:100%}
+.blobs button{border:0;background:none;padding:0;cursor:pointer;height:70%;
+  flex:1 1 0;min-width:0;transition:transform .15s}
+.blobs img{height:100%;width:100%;object-fit:contain}
+.blobs button.lit{animation:pop .5s}
+.blobs button.wrong{animation:shake .4s}
+
+/* ───────── цель: чемодан, машинка, полка ───────── */
+.target{flex:0 0 30%;min-height:0;display:flex;align-items:center;justify-content:center}
+.target img{height:100%;max-width:70%;object-fit:contain;
+  filter:drop-shadow(0 8px 16px rgba(40,60,90,.25))}
+.target.hit img{animation:pop .5s}
+
+/* ───────── лента (поймай вещь) ───────── */
+.belt{flex:1 1 0;min-height:0;width:100%;position:relative;overflow:hidden}
+.belt .cell{position:absolute;top:50%;height:70%;border:0;background:none;padding:0;
+  cursor:pointer;transform:translate(0,-50%)}
+.belt .cell img{height:100%;object-fit:contain;
+  filter:drop-shadow(0 6px 12px rgba(40,60,90,.22))}
+.belt .cell.gone{opacity:0;transition:opacity .3s;pointer-events:none}
+.belt .cell.wrong{animation:shake .4s}
+
+/* ───────── рука с пальцами ───────── */
+.handrow{flex:1 1 0;min-height:0;width:100%;display:flex;align-items:center;
+  justify-content:center;gap:3vw}
+.handbox{position:relative;height:100%;display:flex;align-items:center}
+.handbox{max-width:60%}
+.handbox img.hand{height:100%;max-width:100%;object-fit:contain;display:block}
+.handbox .arrow{position:absolute;width:0;height:0;
+  border-left:14px solid transparent;border-right:14px solid transparent;
+  border-top:20px solid var(--accent);transform:translate(-50%,-100%);
+  transition:left .28s ease,top .28s ease;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3));
+  opacity:0}
+.handbox .arrow.on{opacity:1}
+.handrow .thing{height:56%;max-width:34%;object-fit:contain;transition:opacity .3s;
+  filter:drop-shadow(0 8px 16px rgba(40,60,90,.2))}
+.handrow .thing.swap{animation:pop .5s}
+
+.bottombar{flex:0 0 auto;display:flex;gap:12px;align-items:center;justify-content:center;
+  padding:6px 14px calc(10px + env(safe-area-inset-bottom))}
+.btn{border:0;border-radius:999px;padding:13px 28px;font:inherit;font-weight:900;
+  font-size:clamp(14px,2.1vw,21px);color:#fff;background:var(--accent);
+  box-shadow:var(--shadow);cursor:pointer}
+.btn:active{transform:translateY(2px)}
+.btn.ghost{background:#fff;color:var(--ink)}
+.btn.big{padding:15px 36px}
+.btn[hidden]{display:none}
+
+#overlay{position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+  background:rgba(40,30,60,.5);backdrop-filter:blur(3px);z-index:20}
+#overlay.on{display:flex}
+.panel{background:var(--card);border-radius:28px;padding:26px 30px;text-align:center;
+  box-shadow:var(--shadow);max-width:min(90%,560px)}
+.panel h2{margin:0 0 6px;font-size:clamp(20px,3.4vw,30px)}
+.panel p{margin:0 0 18px;font-size:clamp(14px,2vw,19px);line-height:1.4}
+.panel .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+#wsdev{position:absolute;right:10px;top:10px;z-index:30;display:none;gap:6px}
+#wsdev.on{display:flex}
+#wsdev button{border:0;border-radius:10px;background:rgba(0,0,0,.55);color:#fff;
+  font:inherit;font-size:13px;padding:6px 10px;cursor:pointer}
+
+@media (max-aspect-ratio:1/1){
+  .stage{flex-direction:column;gap:1vh;padding-top:4px}
+  .guide{flex:0 0 auto;max-width:none;width:100%;flex-direction:row;align-items:center;gap:10px}
+  .guide img{width:22%;max-width:104px}
+  .bubble{margin-top:0;text-align:left;flex:1 1 auto;font-size:clamp(13px,3.4vw,18px)}
+  .content{flex:1 1 auto;height:auto}
+  .cards{gap:4vw}
+  .handrow{flex-direction:column;gap:1vh}
+  .handrow .thing{height:auto;max-height:30%;max-width:40%}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="map"></div>
+  <div id="lesson">
+    <div class="topbar">
+      <button class="home" title="На карту">🗺️</button>
+      <div class="tokens"></div>
+    </div>
+    <div class="stage">
+      <div class="guide"><img alt=""><div class="bubble"></div></div>
+      <div class="content"></div>
+    </div>
+    <div class="bottombar">
+      <button class="btn ghost listen">🔊 Ещё раз</button>
+      <button class="btn next" hidden>Дальше ▶</button>
+    </div>
+  </div>
+  <div id="overlay"><div class="panel"></div></div>
+  <div id="wsdev">
+    <button data-act="prev">◀</button>
+    <button data-act="next">▶</button>
+    <button data-act="reset">↻ сначала</button>
+  </div>
+</div>
+<script>
+const DEV_PANEL = __DEV__;
+const IMG = __IMG__;
+const AUDIO = __AUDIO__;
+const LESSONS = __LESSONS__;
+const PRAISE = __PRAISE__;
+const RETRY = __RETRY__;
+const ASK = __ASK__;
+const COLORS = __COLORS__;
+const FRIENDS = __FRIENDS__;
+const TIPS = __TIPS__;
+const HOP = /[?&]fast=1/.test(location.search) ? 60 : 700;
+const STORE = "ws46_progress";
+const ISLAND_POS = [[20, 60], [50, 38], [80, 62]];
+
+/* ─────────────────────────── звук ─────────────────────────── */
+let current = null;
+function stopSound(){
+  if (current){ try{ current.pause(); }catch(e){} current = null; }
+  try{ speechSynthesis.cancel(); }catch(e){}
+}
+/* Страховка по времени обязательна: событие «речь закончилась» в вебвью и
+   на телефоне может не прийти вовсе, и экран встанет намертво. */
+function play(key, text, lang){
+  stopSound();
+  return new Promise(resolve => {
+    let done = false;
+    const finish = () => { if (!done){ done = true; clearTimeout(t); resolve(); } };
+    const t = setTimeout(finish, Math.min(12000, 1500 + (text ? text.length * 90 : 0)));
+    const src = AUDIO[key];
+    if (src){
+      const a = new Audio(src);
+      current = a;
+      a.onended = a.onerror = finish;
+      a.play().catch(finish);
+      return;
+    }
+    /* Русский синтез не используем: звучит плохо. Без записи реплика молчит,
+       текст для взрослого остаётся в пузыре. Английское ребёнку надо слышать. */
+    if (!text || lang !== "en" || !("speechSynthesis" in window)){ finish(); return; }
+    try{
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = "en-US"; u.rate = 0.8;
+      u.onend = u.onerror = finish;
+      speechSynthesis.speak(u);
+    } catch(e){ finish(); }
+  });
+}
+const en = v => play(v[0], v[1], "en");
+const ru = k => play(k);
+const choice = a => a[Math.floor(Math.random() * a.length)];
+const praise = () => ru(choice(PRAISE));
+const retry = () => ru(choice(RETRY));
+function blip(key){
+  try { const a = new Audio(AUDIO[key]); a.volume = .7; a.play().catch(()=>{}); } catch(e){}
+}
+function shuffle(a){
+  a = a.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+const pic = t => IMG[t[0] + "_" + t[1]];
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+/* ───────────────────────── прогресс ───────────────────────── */
+function progress(){
+  try { return JSON.parse(localStorage.getItem(STORE)) || {done:[]}; }
+  catch(e){ return {done:[]}; }
+}
+function saveProgress(p){ try{ localStorage.setItem(STORE, JSON.stringify(p)); }catch(e){} }
+const isDone = id => progress().done.indexOf(id) >= 0;
+const unlocked = id => id === 1 || isDone(id - 1);
+
+/* ─────────────────────────── карта ────────────────────────── */
+const mapEl = document.getElementById("map");
+const lessonEl = document.getElementById("lesson");
+const overlay = document.getElementById("overlay");
+
+function dotPos(i, k, total){
+  const t = (k + 1) / (total + 1);
+  return [ISLAND_POS[i][0] + (ISLAND_POS[i+1][0] - ISLAND_POS[i][0]) * t,
+          ISLAND_POS[i][1] + (ISLAND_POS[i+1][1] - ISLAND_POS[i][1]) * t + 13];
+}
+function addDots(host, i, shown, popLast){
+  const les = LESSONS[i], total = les.tokens;
+  for (let k = 0; k < total; k++){
+    const d = document.createElement("div");
+    const p = dotPos(i, k, total);
+    d.className = "dot" + (k < shown ? " on" : "") + (popLast && k === shown-1 ? " pop" : "");
+    d.style.left = p[0] + "%"; d.style.top = p[1] + "%";
+    d.innerHTML = '<img src="' + IMG[les.token] + '" alt="">';
+    host.appendChild(d);
+  }
+}
+function buildMap(){
+  mapEl.style.backgroundImage = "url(" + IMG.map_bg + ")";
+  mapEl.innerHTML = '<div class="maptitle">Дорога на праздник</div>';
+  LESSONS.forEach((les, i) => {
+    const b = document.createElement("button");
+    b.className = "island" + (unlocked(les.id) ? "" : " locked");
+    b.style.left = ISLAND_POS[i][0] + "%"; b.style.top = ISLAND_POS[i][1] + "%";
+    b.innerHTML = '<img src="' + IMG[les.island] + '" alt="">' +
+      '<span class="name">' + les.title + "</span>" +
+      (isDone(les.id) ? '<span class="tick">⭐</span>' : "") +
+      (unlocked(les.id) ? "" : '<span class="lock">🔒</span>');
+    b.onclick = () => {
+      if (unlocked(les.id)){ startLesson(i); return; }
+      b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake");
+      blip("SFX-NO");
+    };
+    mapEl.appendChild(b);
+    if (i < LESSONS.length - 1) addDots(mapEl, i, isDone(les.id) ? les.tokens : 0, false);
+  });
+  const g = document.createElement("div");
+  g.className = "guide";
+  g.innerHTML = '<img src="' + IMG.firefly_smile + '" alt="">';
+  mapEl.appendChild(g);
+}
+function showMap(){
+  stopSound(); buildMap();
+  mapEl.classList.add("on");
+  lessonEl.classList.remove("on");
+  overlay.classList.remove("on");
+}
+
+/* ─────────────────────────── урок ─────────────────────────── */
+const guideImg = lessonEl.querySelector(".guide img");
+const bubble = lessonEl.querySelector(".bubble");
+const content = lessonEl.querySelector(".content");
+const tokensEl = lessonEl.querySelector(".tokens");
+const btnNext = lessonEl.querySelector(".next");
+const btnListen = lessonEl.querySelector(".listen");
+let L = 0, S = 0, round = 0, earned = 0, token = 0;
+
+function startLesson(i){
+  L = i; S = 0; round = 0; earned = 0;
+  mapEl.classList.remove("on"); lessonEl.classList.add("on");
+  render();
+}
+const lesson = () => LESSONS[L];
+const screen = () => lesson().screens[S];
+
+function drawTokens(){
+  let html = "";
+  for (let i = 0; i < lesson().tokens; i++){
+    const key = lesson().token === "friend" ? FRIENDS[i] : lesson().token;
+    html += i < earned ? '<img src="' + IMG[key] + '" alt="">' : '<div class="ghost"></div>';
+  }
+  tokensEl.innerHTML = html;
+}
+
+function render(){
+  stopSound(); token++;
+  const s = screen();
+  guideImg.src = IMG[s.solo || s.t === "token" ? "firefly_wow" : "firefly"];
+  bubble.textContent = s.text || "";
+  content.innerHTML = "";
+  btnNext.hidden = true;
+  btnNext.textContent = s.btn || "Дальше ▶";
+  lessonEl.querySelector(".stage").classList.toggle("solo", !!s.solo);
+  if (s.t === "token") earned = s.n;
+  drawTokens();
+  RENDER[s.t](s);
+  fit();
+  if (s._run) s._run(); else say();
+}
+
+/* Реплики идут очередью, а не по таймеру: без русской записи пауза перед
+   английским словом — пустая тишина. Маркер обрывает очередь, если экран
+   уже сменился. */
+async function queue(steps){
+  const mine = token;
+  for (const step of steps){
+    if (mine !== token) return;
+    await step();
+  }
+}
+function say(){
+  const s = screen();
+  const steps = [() => ru(s.ru)];
+  const r = s.rounds ? s.rounds[round] : null;
+  if (s.t === "word") steps.push(() => en(s.voice), () => en([s.voice[0]+"-slow", s.voice[1]]));
+  if (s.t === "findall") steps.push(() => en(s.voice));
+  if (s.t === "sort" && r) steps.push(() => en(r.voice));
+  if ((s.t === "collect" || s.t === "catch" || s.t === "pick") && r){
+    steps.push(() => en(r.voice));
+  }
+  if (s.t === "order" && r){
+    r.voices.forEach(v => { steps.push(() => en(v)); steps.push(() => wait(350)); });
+  }
+  return queue(steps);
+}
+
+/* Ряду карточек нужен его размер в пикселях: от него считается сторона
+   квадрата. Зацикливания нет — высота задана флексом с basis 0. */
+function fit(){
+  content.querySelectorAll(".cards").forEach(el => {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--bw", r.width + "px");
+    el.style.setProperty("--bh", r.height + "px");
+  });
+}
+window.addEventListener("resize", () => { fit(); setTimeout(fit, 120); });
+
+const RENDER = {};
+
+function picArea(keys, cls){
+  const area = document.createElement("div");
+  area.className = "picarea" + (cls ? " " + cls : "");
+  keys.forEach(k => { const im = document.createElement("img"); im.src = k; area.appendChild(im); });
+  return area;
+}
+function cardsRow(keys, onPick){
+  const row = document.createElement("div");
+  row.className = "picarea cards";
+  row.style.setProperty("--n", keys.length);
+  keys.forEach(k => {
+    const c = document.createElement("button");
+    c.className = "card";
+    c.dataset.key = k.t ? k.t.join("_") : "";
+    c.innerHTML = '<img src="' + k.src + '" alt="">';
+    c.onclick = () => onPick(c, k);
+    row.appendChild(c);
+  });
+  return row;
+}
+function sayButton(label, onClick){
+  const below = document.createElement("div");
+  below.className = "below";
+  const b = document.createElement("button");
+  b.className = "btn big";
+  b.textContent = label;
+  b.onclick = onClick;
+  below.appendChild(b);
+  content.appendChild(below);
+  return b;
+}
+async function wrong(el){
+  el.classList.add("wrong"); blip("SFX-NO");
+  setTimeout(() => el.classList.remove("wrong"), 500);
+  await retry();
+}
+async function rightStep(next){
+  blip("SFX-OK");
+  await praise();
+  next();
+}
+function nextRound(s){
+  round++;
+  if (round >= s.rounds.length){ round = 0; next(); } else { render(); }
+}
+
+/* ───────── сюжет и награда ───────── */
+function showNextLater(ms){
+  const mine = token;
+  setTimeout(() => { if (mine === token) btnNext.hidden = false; }, ms);
+}
+RENDER.story = function(s){
+  if (!s.solo) content.appendChild(picArea([IMG[s.pic]]));
+  showNextLater(2000);
+};
+RENDER.token = function(s){
+  if (s.kind === "friends"){
+    content.appendChild(picArea(FRIENDS.slice(0, s.n).map(k => IMG[k]), "items"));
+  } else {
+    const view = document.createElement("div");
+    view.className = "mapview";
+    view.style.backgroundImage = "url(" + IMG.map_bg + ")";
+    LESSONS.forEach((les, i) => {
+      const im = document.createElement("img");
+      im.src = IMG[les.island];
+      im.style.left = ISLAND_POS[i][0] + "%"; im.style.top = ISLAND_POS[i][1] + "%";
+      view.appendChild(im);
+    });
+    addDots(view, L, s.n, true);
+    content.appendChild(view);
+  }
+  showNextLater(2200);
+};
+
+/* ───────── слушай и повторяй ───────── */
+RENDER.word = function(s){
+  content.appendChild(picArea([pic(s.thing)]));
+  const below = document.createElement("div");
+  below.className = "below";
+  const line = document.createElement("div");
+  line.className = "wordline";
+  line.textContent = s.voice[1];
+  below.appendChild(line);
+  const b = document.createElement("button");
+  b.className = "btn big"; b.textContent = "🗣 Я сказал!";
+  b.onclick = () => { stopSound(); next(); };
+  below.appendChild(b);
+  content.appendChild(below);
+};
+
+/* ───────── назови сам ───────── */
+RENDER.name = function(s){
+  const r = s.rounds[round];
+  content.appendChild(picArea([pic(r.thing)]));
+  const b = sayButton("🗣 Я сказал!", async () => {
+    b.disabled = true;
+    const line = document.createElement("div");
+    line.className = "wordline";
+    line.textContent = r.voice[1];
+    b.parentNode.insertBefore(line, b);
+    blip("SFX-OK");
+    await en(r.voice);
+    await praise();
+    nextRound(s);
+  });
+};
+
+/* ───────── нажми на все предметы цвета ───────── */
+RENDER.findall = function(s){
+  const field = document.createElement("div");
+  field.className = "field" + (s.float ? " float" : "");
+  let left = s.pool.filter(t => t[1] === s.color).length;
+  shuffle(s.pool).forEach((t, i) => {
+    const c = document.createElement("button");
+    c.className = "cell";
+    c.dataset.c = t[1];
+    c.innerHTML = '<img src="' + pic(t) + '" alt="">';
+    if (s.float) c.querySelector("img").style.animationDelay = (i * 0.35) + "s";
+    c.onclick = async () => {
+      if (c.classList.contains("gone")) return;
+      if (t[1] !== s.color){ await wrong(c); return; }
+      c.classList.add("gone"); blip("SFX-OK");
+      left--;
+      if (left === 0){ await praise(); next(); }
+    };
+    field.appendChild(c);
+  });
+  content.appendChild(field);
+};
+
+/* ───────── разложи по корзинам ───────── */
+RENDER.sort = function(s){
+  const r = s.rounds[round];
+  const top = document.createElement("div");
+  top.className = "picarea small";
+  const im = document.createElement("img");
+  im.src = pic(r.thing);
+  im.style.cursor = "pointer";
+  im.onclick = () => en(r.voice);
+  top.appendChild(im);
+  content.appendChild(top);
+
+  const row = document.createElement("div");
+  row.className = "baskets";
+  s.colors.forEach(c => {
+    const b = document.createElement("button");
+    b.dataset.c = c;
+    b.innerHTML = '<img src="' + IMG["basket_" + c] + '" alt="">';
+    b.onclick = async () => {
+      if (c !== r.thing[1]){ await wrong(b); return; }
+      im.style.transition = "transform .45s, opacity .45s";
+      im.style.transform = "scale(.2) translateY(60%)";
+      im.style.opacity = "0";
+      await rightStep(() => nextRound(s));
+    };
+    row.appendChild(b);
+  });
+  content.appendChild(row);
+};
+
+/* ───────── нажми цвета по порядку ───────── */
+RENDER.order = function(s){
+  const r = s.rounds[round];
+  let at = 0;
+  const row = document.createElement("div");
+  row.className = "blobs";
+  shuffle(COLORS).forEach(c => {
+    const b = document.createElement("button");
+    b.dataset.c = c;
+    b.innerHTML = '<img src="' + IMG["blob_" + c] + '" alt="">';
+    b.onclick = async () => {
+      if (c !== r.seq[at]){ at = 0; await wrong(b); say(); return; }
+      b.classList.remove("lit"); void b.offsetWidth; b.classList.add("lit");
+      blip("SFX-OK");
+      at++;
+      if (at >= r.seq.length){ await praise(); nextRound(s); }
+    };
+    row.appendChild(b);
+  });
+  content.appendChild(row);
+};
+
+/* ───────── чемодан, магазин, стирка ───────── */
+RENDER.collect = function(s){
+  const r = s.rounds[round];
+  if (s.who) content.appendChild(picArea([IMG[s.who]], "who"));
+  const tgt = document.createElement("div");
+  tgt.className = "target";
+  tgt.innerHTML = '<img src="' + IMG[s.target] + '" alt="">';
+
+  const opts = shuffle([r.target].concat(r.others)).map(t => ({src: pic(t), t}));
+  const row = cardsRow(opts, async (c, k) => {
+    if (k.t !== r.target){ await wrong(c); return; }
+    c.classList.add("gone");
+    tgt.classList.remove("hit"); void tgt.offsetWidth; tgt.classList.add("hit");
+    await rightStep(() => nextRound(s));
+  });
+  content.appendChild(row);
+  content.appendChild(tgt);
+};
+
+/* ───────── поймай вещь ───────── */
+RENDER.catch = function(s){
+  const r = s.rounds[round];
+  const belt = document.createElement("div");
+  belt.className = "belt";
+  const opts = shuffle([r.target].concat(r.others));
+  opts.forEach((t, i) => {
+    const c = document.createElement("button");
+    c.className = "cell";
+    c.dataset.key = t.join("_");
+    c.innerHTML = '<img src="' + pic(t) + '" alt="">';
+    c.style.left = "100%";
+    c.style.transition = "left 9s linear";
+    c.onclick = async () => {
+      if (t !== r.target){ await wrong(c); return; }
+      opts.forEach((_, j) => {
+        const el = belt.children[j];
+        el.style.transition = "none";
+        el.style.left = getComputedStyle(el).left;
+      });
+      c.classList.add("gone");
+      await rightStep(() => nextRound(s));
+    };
+    belt.appendChild(c);
+    setTimeout(() => { c.style.left = (-30 - i * 28) + "%"; }, 60 + i * 900);
+  });
+  content.appendChild(belt);
+  // вещь может уехать за край — тогда просто пускаем раунд заново
+  const mine = token;
+  setTimeout(() => { if (mine === token) render(); }, 11500);
+};
+
+/* ───────── выбери из двух-четырёх ───────── */
+RENDER.pick = function(s){
+  const r = s.rounds[round];
+  if (s.who) content.appendChild(picArea([IMG[s.who]], "who"));
+  const opts = shuffle([r.target].concat(r.others)).map(t => ({src: pic(t), t}));
+  content.appendChild(cardsRow(opts, async (c, k) => {
+    if (k.t !== r.target){ await wrong(c); return; }
+    c.classList.add("right");
+    await rightStep(() => nextRound(s));
+  }));
+};
+
+/* ───────── рука с пальцами: знакомство и три дрилла ───────── */
+function handBox(words, picKey){
+  const rowEl = document.createElement("div");
+  rowEl.className = "handrow";
+  const box = document.createElement("div");
+  box.className = "handbox";
+  const hand = document.createElement("img");
+  hand.className = "hand";
+  hand.src = IMG["hand" + Math.min(Math.max(words, 1), 5)];
+  const arrow = document.createElement("div");
+  arrow.className = "arrow";
+  box.appendChild(hand); box.appendChild(arrow);
+  rowEl.appendChild(box);
+  if (picKey){
+    const th = document.createElement("img");
+    th.className = "thing"; th.src = IMG[picKey];
+    rowEl.appendChild(th);
+  }
+  content.appendChild(rowEl);
+  return {box, arrow, thing: rowEl.querySelector(".thing")};
+}
+async function hop(arrow, words){
+  const tips = TIPS[Math.min(Math.max(words, 1), 5)];
+  arrow.classList.add("on");
+  for (let i = 0; i < tips.length; i++){
+    const mine = token;
+    arrow.style.left = (tips[i][0] * 100) + "%";
+    arrow.style.top = (tips[i][1] * 100) + "%";
+    await wait(HOP);
+    if (mine !== token) return;
+  }
+  arrow.classList.remove("on");
+}
+
+RENDER.fingers = function(s){
+  const isSwap = s.mode === "swap";
+  const step = isSwap ? s.rounds[round] : s.steps[round];
+  const line = isSwap ? step.line : step;
+  const picKey = isSwap ? step.pic : s.pic;
+  const ui = handBox(line[2], picKey);
+
+  const text = document.createElement("div");
+  text.className = "wordline";
+  text.textContent = line[1];
+  const below = document.createElement("div");
+  below.className = "below";
+  below.appendChild(text);
+  content.appendChild(below);
+
+  const said = document.createElement("button");
+  said.className = "btn big";
+  said.textContent = "🗣 Я сказал!";
+  said.hidden = true;
+  said.onclick = async () => {
+    stopSound();
+    if (isSwap){ blip("SFX-OK"); await en(line); }
+    await praise();
+    round++;
+    const total = isSwap ? s.rounds.length : s.steps.length;
+    if (round >= total){ round = 0; next(); } else { render(); }
+  };
+  below.appendChild(said);
+
+  s._run = async () => {
+    const mine = token;
+    await ru(s.ru);
+    if (mine !== token) return;
+    if (isSwap && step.cue){
+      await en(step.cue);
+      if (mine !== token) return;
+      if (ui.thing){ ui.thing.classList.remove("swap"); void ui.thing.offsetWidth;
+                     ui.thing.classList.add("swap"); }
+    } else {
+      en(line);
+      await hop(ui.arrow, line[2]);
+    }
+    if (mine !== token) return;
+    await ru(ASK);
+    if (mine !== token) return;
+    await hop(ui.arrow, line[2]);
+    said.hidden = false;
+  };
+};
+
+function next(){
+  stopSound(); round = 0;
+  if (S >= lesson().screens.length - 1){ finish(); return; }
+  S++; render();
+}
+function prev(){
+  stopSound(); round = 0;
+  if (S > 0){ S--; render(); }
+}
+
+function finish(){
+  const p = progress();
+  if (p.done.indexOf(lesson().id) < 0) p.done.push(lesson().id);
+  saveProgress(p);
+  const last = L === LESSONS.length - 1;
+  const panel = overlay.querySelector(".panel");
+  panel.innerHTML = "<h2>Урок пройден!</h2><p>" + (last
+      ? "Ты прошёл всю дорогу до праздника. А кто в яйце — узнаешь на первом уроке с преподавателем."
+      : "Дорожка на следующий остров готова.") + "</p>" +
+    '<div class="row"><button class="btn ghost" data-act="again">Пройти ещё раз</button>' +
+    '<button class="btn" data-act="map">Вернуться на карту 🗺️</button></div>';
+  panel.querySelector('[data-act="again"]').onclick = () => {
+    overlay.classList.remove("on"); startLesson(L);
+  };
+  panel.querySelector('[data-act="map"]').onclick = showMap;
+  overlay.classList.add("on");
+}
+
+btnNext.onclick = next;
+btnListen.onclick = () => { const s = screen(); if (s._run) s._run(); else say(); };
+lessonEl.querySelector(".home").onclick = showMap;
+
+if (DEV_PANEL && !/[?&]dev=0/.test(location.search)){
+  const dev = document.getElementById("wsdev");
+  dev.classList.add("on");
+  dev.onclick = e => {
+    const act = e.target.dataset.act;
+    if (act === "next") next();
+    if (act === "prev") prev();
+    if (act === "reset"){ try{ localStorage.removeItem(STORE); }catch(e){} showMap(); }
+  };
+}
+
+showMap();
+</script>
+</body>
+</html>
