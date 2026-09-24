@@ -19,7 +19,7 @@ import struct
 import sys
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageChops, ImageFilter
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import kids46_lessons as LS
@@ -66,11 +66,15 @@ FINGER_TIPS = {
 
 # ──────────────────────────────────────────────────────────── картинки ──
 
-def cut_white(im, bright=250, neutral=3, holes=None):
+def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=4, holes=None):
     """Убирает фон генератора: светлый И бесцветный.
 
     Одной яркости мало. Фон строго серый (max−min = 0), а белые места самих
     картинок тонированные — у облака розоватые, у камушка желтоватые.
+    Допуск 6, а не 0: у самого фона рядом со светящейся звёздочкой
+    облачного острова разброс доходит до 5, и при допуске 3 сбоку от
+    звёздочки оставался белый квадрат. При 6 ни одна картинка не теряет
+    и 0.1% непрозрачных пикселей — в рисунки заливка не уходит.
     Заливка «по яркости» уходила внутрь облака и выедала его: исчезало 19%
     картинки. Условие «бесцветный» эту дорогу закрывает — цепочка серых
     пикселей внутри облака рвётся на первом же розовом. С ним же безопасен
@@ -83,7 +87,16 @@ def cut_white(im, bright=250, neutral=3, holes=None):
 
     def is_bg(x, y):
         r, g, b, a = px[x, y]
-        return a > 0 and min(r, g, b) >= bright and max(r, g, b) - min(r, g, b) <= neutral
+        if a == 0:
+            return False
+        lo, hi = min(r, g, b), max(r, g, b)
+        if lo >= bright and hi - lo <= neutral:
+            return True
+        # Вторая полоса — запечённая тень под предметом. Она серая насквозь
+        # (254 → 248 → 199 → 181) и на цветном фоне читается белым пятном.
+        # Порог по яркости мягче, зато серость строгая: у одежды подошва
+        # и строчка белые, но чуть тёплые, и под это правило не попадают.
+        return lo >= shadow and hi - lo <= shadow_n
 
     seen = bytearray(w * h)
 
@@ -114,6 +127,26 @@ def cut_white(im, bright=250, neutral=3, holes=None):
                     for x, y in blob:
                         r, g, b, a = px[x, y]
                         px[x, y] = (r, g, b, 0)
+    return feather(im)
+
+
+def feather(im, passes=3, light=214, full=250):
+    """Растушёвывает край: чем пиксель на границе белее, тем он прозрачнее.
+
+    Вырезается только чистый фон, а сглаженные пиксели по краю фигуры под
+    порог не попадают — и вокруг острова, белья и верёвки остаётся белая
+    кайма. На голубом фоне карты она видна сразу.
+    """
+    im = im.convert("RGBA")
+    r, g, b, a = im.split()
+    mn = ImageChops.darker(ImageChops.darker(r, g), b)
+    fade = mn.point(lambda p: 255 if p < light
+                    else max(0, min(255, int((full - p) * 255 / (full - light)))))
+    for _ in range(passes):
+        border = ImageChops.subtract(a, a.filter(ImageFilter.MinFilter(3)))
+        mask = border.point(lambda p: 255 if p > 0 else 0)
+        a = Image.composite(ImageChops.darker(a, fade), a, mask)
+    im.putalpha(a)
     return im
 
 
@@ -133,9 +166,9 @@ def encode(im, width, quality=80):
 # Проверка сравнивает натуральный размер с показанным и ругается.
 BASE = {            # имя: (файл, ширина, резать ли фон)
     "map_bg":        ("map-background-wide.webp", 1536, False),
-    "meadow":        ("island-meadow.webp",        900, True),
-    "clouds":        ("island-clouds.webp",        900, True),
-    "dragon":        ("island-dragon.webp",        900, True),
+    "meadow":        ("island-meadow.webp",       1100, True),
+    "clouds":        ("island-clouds.webp",       1100, True),
+    "dragon":        ("island-dragon.webp",       1100, True),
     "firefly":       ("firefly-neutral.webp",      760, True),
     "firefly_smile": ("firefly-smile.webp",        760, True),
     "firefly_wow":   ("firefly-excited.webp",      760, True),
@@ -160,7 +193,9 @@ BASE = {            # имя: (файл, ширина, резать ли фон)
 
 # что красим в три цвета: (имя, файл, ширина)
 PAINTED = (
-    [(o, f"obj-{o}.webp", 900) for o in LS.OBJS] +
+    # 1200, а не 900: на широком экране одиночный предмет показывается
+    # на 948 px, и на 900 он уже мылил.
+    [(o, f"obj-{o}.webp", 1200) for o in LS.OBJS] +
     [("top", "../lesson-1/tshirt.webp", 1000),
      ("jeans", "../lesson-1/jeans.webp", 1000),
      ("shoes", "../lesson-1/shoes.webp", 1000),
@@ -189,6 +224,15 @@ def build_images():
         im = Image.open(ART / f)
         images[name] = encode(cut_white(im, holes=HOLES.get(name)) if cut
                               else im.convert("RGB"), width)
+    # В пещере по сюжету яйцо, а на картинке пустое гнездо: вклеиваем.
+    cave = cut_white(Image.open(ART / "cave-open.webp"), holes=HOLES.get("cave_open"))
+    egg = cut_white(Image.open(ART / "egg.webp"))
+    egg = egg.crop(egg.getbbox())
+    w = int(cave.width * 0.21)
+    egg = egg.resize((w, round(egg.height * w / egg.width)), Image.LANCZOS)
+    cave.alpha_composite(egg, (int(cave.width * 0.395), int(cave.height * 0.435)))
+    images["cave_egg"] = encode(cave, 1000)
+
     for name, f, width in PAINTED:
         src = cut_white(Image.open(ART / f), holes=HOLES.get(name))
         src = src.crop(src.getbbox())
@@ -250,6 +294,14 @@ def build_script():
             if s["t"] == "sort":
                 s["rounds"] = [{"thing": list(t), "voice": say_of("color", t)}
                                for t in s["rounds"]]
+            if s["t"] == "vocab":
+                s["things"] = [{"thing": list(t), "voice": say_of(s["say"], t)}
+                               for t in s["things"]]
+            if s["t"] == "truefalse":
+                s["rounds"] = [{"thing": list(r["thing"]), "claim": list(r["claim"]),
+                                "voice": say_of(s["say"], r["claim"]),
+                                "ok": list(r["thing"]) == list(r["claim"])}
+                               for r in s["rounds"]]
             if s["t"] == "findall":
                 s["voice"] = en(s["color"])
             if s["t"] == "order":
@@ -273,36 +325,47 @@ def build_script():
     praise = [ru("firefly", t, tone, where) for t, tone in LS.PRAISE]
     retry = [ru("firefly", t, tone, where) for t, tone in LS.RETRY]
     ask = ru("firefly", LS.ASK_REPEAT[0], LS.ASK_REPEAT[1], where)
-    return script, praise, retry, ask, en_tracks
+    finale = ru("firefly", LS.FINALE[0], LS.FINALE[1], where)
+    return script, praise, retry, ask, finale, en_tracks
 
 
 def prep_fingers(s, en, say_of):
-    """Готовит шаги дрилла: что звучит, сколько слов, какая рука."""
-    mode = s["mode"]
-    if mode == "full":
-        s["steps"] = [en(LS.sentence(*s["thing"]))]
-        s["pic"] = "%s_%s" % (s["thing"][0], s["thing"][1])
-    elif mode == "chain":
-        item, color = s["thing"]
-        s["steps"] = [en("I"), en("I have"), en(LS.sentence(item, color))]
-        s["pic"] = f"{item}_{color}"
-    elif mode == "back":
-        item, color = s["thing"]
-        s["steps"] = [en(LS.ITEM_EN[item]), en(LS.combo(item, color)),
-                      en(LS.sentence(item, color))]
-        s["pic"] = f"{item}_{color}"
-        s["fromEnd"] = True
-    elif mode == "swap":
+    """Готовит дрилл: список слов фразы и диапазон слов на каждом шаге.
+
+    Раньше на шаге звучала вся фраза целиком, а стрелка прыгала по пальцам —
+    к третьему пальцу фраза уже кончилась. Теперь звучит слово за словом,
+    палец в палец.
+    """
+    if s["mode"] == "swap":
         rounds, prev = [], None
         for item, color in s["things"]:
             cue = None
             if prev is not None:
-                cue = en(color) if prev[1] != color else en(LS.ITEM_EN[item])
+                cue = en(color) if prev[1] != color else en(LS.ITEM_BARE[item])
+            text = LS.sentence(item, color)
             rounds.append({"pic": f"{item}_{color}", "cue": cue,
-                           "line": en(LS.sentence(item, color))})
+                           "words": [en(w) for w in text.split()],
+                           "line": en(text)})
             prev = (item, color)
         s["rounds"] = rounds
         s.pop("things")
+        return
+
+    item, color = s["thing"]
+    text = LS.sentence(item, color)
+    words = [en(w) for w in text.split()]
+    n = len(words)
+    s["words"] = words
+    s["line"] = en(text)
+    s["pic"] = f"{item}_{color}"
+    if s["mode"] == "full":
+        s["steps"] = [[0, n - 1]]
+    elif s["mode"] == "chain":
+        # по слову за шаг: I · I have · I have a · … Прыжок сразу к целой
+        # фразе сводил дрилл на нет — ребёнок повторял её с двух слов.
+        s["steps"] = [[0, i] for i in range(n)]
+    else:                                   # back — собираем с конца
+        s["steps"] = [[i, n - 1] for i in range(n - 1, -1, -1)]
 
 
 def write_voice_doc(script, en_tracks):
@@ -431,7 +494,7 @@ HTML = (Path(__file__).resolve().parent / "kids46_page.html").read_text(encoding
 
 
 def main():
-    script, praise, retry, ask, en_tracks = build_script()
+    script, praise, retry, ask, finale, en_tracks = build_script()
     write_voice_doc(script, en_tracks)
     print(f"  русских реплик: {len(script)}, английских: {len(en_tracks)}")
 
@@ -464,6 +527,11 @@ def main():
                     need("%s_%s" % tuple(t))
                 for t in ([r["target"]] if "target" in r else []) + r.get("others", []):
                     need("%s_%s" % tuple(t))
+            for t in s.get("things", []):
+                need("%s_%s" % tuple(t["thing"] if isinstance(t, dict) else t))
+            for r in s.get("rounds", []):
+                if isinstance(r, dict) and "claim" in r:
+                    need("%s_%s" % tuple(r["thing"]))
             for t in s.get("pool", []):
                 need("%s_%s" % tuple(t))
 
@@ -472,7 +540,8 @@ def main():
     for mark, value in (("__DEV__", DEV_PANEL), ("__IMG__", images),
                         ("__AUDIO__", audio), ("__LESSONS__", LS.LESSONS),
                         ("__PRAISE__", praise), ("__RETRY__", retry),
-                        ("__ASK__", ask), ("__COLORS__", LS.COLORS),
+                        ("__ASK__", ask), ("__FINALE__", finale),
+                        ("__COLORS__", LS.COLORS),
                         ("__FRIENDS__", LS.FRIENDS), ("__TIPS__", FINGER_TIPS)):
         page = page.replace(mark, json.dumps(value, ensure_ascii=False))
 

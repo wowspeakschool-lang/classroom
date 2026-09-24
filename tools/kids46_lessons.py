@@ -11,21 +11,18 @@
     combo     a green top
     sentence  I have a green top
 
-Одна пара — четыре разных задания, поэтому и уроки, и файл озвучки
-собираются из одного списка.
-
-Номера дорожек (RU-01, EN-01 …) раздаёт скрипт по порядку: держать их
-руками в двух местах — верный способ получить рассинхрон.
+Одна пара — разные задания, поэтому и уроки, и файл озвучки собираются из
+одного списка. Номера дорожек скрипт раздаёт сам по порядку.
 """
 
 COLORS = ["green", "blue", "yellow"]
 COLOR_RU = {"green": "зелёный", "blue": "синий", "yellow": "жёлтый"}
 
-# предметы для урока цветов и одежда
 OBJS = ["ball", "car", "flower", "cup", "fish"]
 ITEMS = ["top", "jeans", "shoes"]
 
 ITEM_EN = {"top": "a top", "jeans": "jeans", "shoes": "shoes"}
+ITEM_BARE = {"top": "top", "jeans": "jeans", "shoes": "shoes"}
 # «a green top», но «green jeans» — артикля у множественного числа нет
 COMBO_EN = {"top": "a {c} top", "jeans": "{c} jeans", "shoes": "{c} shoes"}
 
@@ -33,32 +30,32 @@ VOICES = {"firefly": "Искорка", "bunny": "Зайчик",
           "hedgehog": "Ёжик", "fox": "Лисёнок"}
 FRIENDS = ["bunny", "hedgehog", "fox"]
 
-# четыре фразы, которые дриллим
-DRILL = [("top", "green"), ("top", "blue"), ("jeans", "blue"), ("shoes", "yellow")]
-
-
-def sentence(item, color):
-    return "I have " + COMBO_EN[item].format(c=color)
-
 
 def combo(item, color):
     return COMBO_EN[item].format(c=color)
 
 
+def sentence(item, color):
+    return "I have " + combo(item, color)
+
+
 # ────────────────────────────────────────────────────────────── уроки ──
 #
 # Типы заданий:
-#   word      слушай и повторяй одно слово
-#   findall   нажми на все предметы названного цвета (float — шарики летят)
-#   sort      разложи по корзинам
-#   order     нажми цвета в названном порядке
-#   name      назови сам: сначала говорит ребёнок, потом звучит эталон
-#   collect   послушай и положи в чемодан / купи в магазине / отправь в стирку
-#   catch     поймай вещь, пока она не уехала
-#   pick      выбери из двух-четырёх
-#   fingers   рука с пальцами: знакомство и три дрилла
+#   word       слушай и повторяй одно слово
+#   findall    нажми на все предметы названного цвета (float — шарики летят)
+#   sort       разложи по корзинам
+#   order      нажми цвета в названном порядке
+#   name       назови сам: сначала говорит ребёнок, потом звучит эталон
+#   collect    положи в чемодан / купи в магазине / отправь в стирку
+#   catch      поймай вещь, пока она не уехала
+#   pick       выбери из двух-четырёх
+#   truefalse  верно или нет: слышим одно, видим другое
+#   fingers    рука с пальцами: знакомство и три дрилла
+#   vocab      словарик в конце урока: картинка и озвучка, без слов
 #
-# token: True — после задания даётся камушек, облачко или прибегает друг.
+# token: True — после задания даётся камушек. Наград меньше, чем заданий:
+# иначе дорожка достраивается до острова задолго до конца урока.
 
 L1 = {
     "id": 1, "title": "Солнечная Полянка", "island": "meadow",
@@ -67,9 +64,7 @@ L1 = {
         ("Молодец! Вот тебе волшебный камушек. Смотри — он лёг в воду.", "радостно"),
         ("И ещё камушек! Дорожка растёт.", "весело"),
         ("Третий! Уже половина пути.", "подбадривающе"),
-        ("Четвёртый. Смотри, как блестит.", "любуемся"),
-        ("Пятый! Ещё чуть-чуть.", "нетерпеливо"),
-        ("Шестой! Совсем немного осталось.", "весело"),
+        ("Четвёртый. Ещё чуть-чуть.", "нетерпеливо"),
         ("Последний камушек! Дорожка до Облачного Острова готова. Идём!",
          "торжественно, зовём за собой"),
     ],
@@ -87,7 +82,7 @@ L1 = {
          "text": "Смотри, мячик зелёный. А теперь послушай, как этот цвет "
                  "звучит по-английски. И повтори за мной!",
          "tone": "показываем, приглашаем слушать"},
-        {"t": "findall", "token": True, "color": "green",
+        {"t": "findall", "color": "green",
          "pool": [("ball", "green"), ("car", "blue"), ("flower", "green"),
                   ("cup", "yellow"), ("fish", "green"), ("car", "yellow")],
          "text": "Послушай цвет и нажми на все предметы этого цвета.",
@@ -101,7 +96,7 @@ L1 = {
                   ("balloon", "green"), ("balloon", "blue")],
          "text": "Послушай цвет и лопни все шарики этого цвета!",
          "tone": "весело, азартно"},
-        {"t": "sort", "token": True, "colors": ["green", "blue"],
+        {"t": "sort", "colors": ["green", "blue"],
          "rounds": [("cup", "green"), ("fish", "blue"), ("flower", "blue"),
                     ("ball", "green")],
          "text": "Разложи по корзинам. Нажми на предмет — услышишь его цвет.",
@@ -129,6 +124,11 @@ L1 = {
          "rounds": [("fish", "green"), ("car", "yellow"), ("cup", "blue")],
          "text": "А теперь ты назови сам. Какого цвета?",
          "tone": "с интересом, ждём ответа"},
+
+        {"t": "vocab", "say": "color",
+         "things": [("ball", "green"), ("car", "blue"), ("cup", "yellow")],
+         "text": "Вот всё, что ты сегодня выучил. Нажимай на картинки и слушай.",
+         "tone": "спокойно, с гордостью"},
     ],
 }
 
@@ -140,10 +140,7 @@ L2 = {
         ("Ещё облачко! Мостик начинается.", "весело"),
         ("Третье. Уже можно шагнуть.", "подбадривающе"),
         ("Четвёртое, мягкое, как подушка.", "нежно"),
-        ("Пятое!", "весело"),
-        ("Шестое. Мостик уже длинный.", "любуемся"),
-        ("Седьмое!", "весело"),
-        ("Восьмое. Ещё одно — и пойдём.", "нетерпеливо"),
+        ("Пятое! Совсем немного осталось.", "нетерпеливо"),
         ("Последнее! Мостик до Драконьего Острова готов. Прыгаем!",
          "торжественно, зовём за собой"),
     ],
@@ -153,24 +150,41 @@ L2 = {
                  "Ой… впереди пропасть, а мостика нет.",
          "tone": "восхищённо, потом озадаченно"},
         {"t": "story", "solo": True,
-         "text": "Давай сначала вспомним цвета. А потом научимся новому!",
+         "text": "Сначала вспомним цвета — все три. А потом научимся новому!",
          "tone": "бодро, по-деловому"},
 
-        # ── разминка: только цвета ──
-        {"t": "findall", "token": True, "float": True, "color": "yellow",
-         "pool": [("balloon", "yellow"), ("balloon", "blue"), ("balloon", "yellow"),
-                  ("balloon", "green"), ("balloon", "yellow")],
-         "text": "Послушай цвет и лопни все шарики этого цвета!",
-         "tone": "весело"},
-        {"t": "findall", "token": True, "color": "green",
-         "pool": [("flower", "green"), ("cup", "blue"), ("ball", "green"),
-                  ("fish", "yellow"), ("car", "green"), ("cup", "yellow")],
-         "text": "А теперь послушай другой цвет и найди все такие предметы.",
-         "tone": "спокойно"},
-        {"t": "name", "token": True, "say": "color",
-         "rounds": [("ball", "blue"), ("flower", "yellow")],
-         "text": "Назови сам: какого цвета?",
-         "tone": "ждём ответа"},
+        # ── разминка: все три цвета, играми, которых не было в первом уроке ──
+        {"t": "pick", "say": "color",
+         "rounds": [
+             {"target": ("flower", "green"),
+              "others": [("flower", "blue"), ("flower", "yellow")]},
+             {"target": ("car", "yellow"),
+              "others": [("car", "green"), ("car", "blue")]},
+             {"target": ("fish", "blue"),
+              "others": [("fish", "yellow"), ("fish", "green")]},
+         ],
+         "text": "Слушай цвет и показывай.", "tone": "спокойно"},
+        {"t": "catch", "token": True, "say": "color",
+         "rounds": [
+             {"target": ("ball", "yellow"),
+              "others": [("ball", "green"), ("ball", "blue")]},
+             {"target": ("cup", "green"),
+              "others": [("cup", "blue"), ("cup", "yellow")]},
+             {"target": ("car", "blue"),
+              "others": [("car", "yellow"), ("car", "green")]},
+         ],
+         "text": "Предметы поехали! Поймай тот, цвет которого я назову.",
+         "tone": "азартно"},
+        {"t": "truefalse", "say": "color",
+         "rounds": [
+             {"thing": ("flower", "green"), "claim": ("flower", "green")},
+             {"thing": ("fish", "blue"), "claim": ("fish", "yellow")},
+             {"thing": ("cup", "yellow"), "claim": ("cup", "yellow")},
+             {"thing": ("ball", "green"), "claim": ("ball", "blue")},
+         ],
+         "text": "Я буду называть цвет. Угадала — палец вверх, "
+                 "не угадала — палец вниз.",
+         "tone": "по-игровому, с хитринкой"},
 
         # ── новое, по накопительной ──
         {"t": "word", "say": "item", "thing": ("top", "green"),
@@ -189,8 +203,7 @@ L2 = {
         {"t": "word", "say": "item", "thing": ("jeans", "blue"),
          "text": "А это джинсы. Послушай и повтори за мной.",
          "tone": "показываем"},
-        {"t": "collect", "token": True, "target": "shelf", "say": "item",
-         "who": "fox",
+        {"t": "collect", "token": True, "target": "shelf", "say": "item", "who": "fox",
          "rounds": [
              {"target": ("jeans", "blue"), "others": [("top", "green")]},
              {"target": ("top", "yellow"), "others": [("jeans", "green")]},
@@ -210,28 +223,45 @@ L2 = {
          ],
          "text": "Ой, вещи запачкались! Послушай и отправь нужную в стирку.",
          "tone": "озабоченно, потом весело"},
-        {"t": "catch", "token": True, "say": "item",
-         "rounds": [
-             {"target": ("shoes", "blue"), "others": [("top", "green"), ("jeans", "yellow")]},
-             {"target": ("top", "green"), "others": [("jeans", "blue"), ("shoes", "yellow")]},
-             {"target": ("jeans", "yellow"), "others": [("shoes", "green"), ("top", "blue")]},
-         ],
-         "text": "Вещи поехали! Поймай ту, которую я назову.",
-         "tone": "азартно, быстро"},
 
         # ── слияние: цвет вместе с одеждой ──
-        {"t": "collect", "token": True, "target": "suitcase", "say": "combo",
+        {"t": "collect", "target": "suitcase", "say": "combo",
          "rounds": [
              {"target": ("top", "green"), "others": [("top", "blue"), ("top", "yellow")]},
              {"target": ("jeans", "yellow"), "others": [("jeans", "green"), ("jeans", "blue")]},
-             {"target": ("shoes", "blue"), "others": [("shoes", "yellow"), ("top", "blue")]},
+             {"target": ("shoes", "blue"), "others": [("shoes", "yellow"), ("shoes", "green")]},
          ],
-         "text": "Теперь труднее: я назову и цвет, и вещь. Слушай внимательно!",
+         "text": "Теперь я назову и цвет, и вещь. Слушай внимательно!",
          "tone": "подзадориваем"},
+        {"t": "truefalse", "token": True, "say": "combo",
+         "rounds": [
+             {"thing": ("top", "green"), "claim": ("top", "green")},
+             {"thing": ("jeans", "blue"), "claim": ("jeans", "yellow")},
+             {"thing": ("shoes", "yellow"), "claim": ("shoes", "yellow")},
+             {"thing": ("top", "blue"), "claim": ("jeans", "blue")},
+         ],
+         "text": "И снова: угадала я или нет?",
+         "tone": "с хитринкой"},
+        {"t": "pick", "say": "combo",
+         "rounds": [
+             {"target": ("jeans", "green"),
+              "others": [("jeans", "blue"), ("top", "green"), ("shoes", "green")]},
+             {"target": ("top", "yellow"),
+              "others": [("top", "green"), ("jeans", "yellow"), ("shoes", "yellow")]},
+             {"target": ("shoes", "blue"),
+              "others": [("shoes", "green"), ("jeans", "blue"), ("top", "blue")]},
+         ],
+         "text": "Теперь вещей много. Слушай и показывай.",
+         "tone": "спокойно"},
         {"t": "name", "token": True, "say": "combo",
          "rounds": [("top", "blue"), ("jeans", "green"), ("shoes", "yellow")],
          "text": "А теперь ты. Назови и цвет, и вещь!",
          "tone": "ждём ответа"},
+
+        {"t": "vocab", "say": "combo",
+         "things": [("top", "green"), ("jeans", "blue"), ("shoes", "yellow")],
+         "text": "Вот что ты выучил сегодня. Нажимай и слушай.",
+         "tone": "спокойно, с гордостью"},
     ],
 }
 
@@ -255,27 +285,24 @@ L3 = {
          "tone": "заговорщицки"},
 
         # ── разминка ──
-        {"t": "findall", "float": True, "color": "blue",
-         "pool": [("balloon", "blue"), ("balloon", "yellow"), ("balloon", "blue"),
-                  ("balloon", "green"), ("balloon", "blue")],
-         "text": "Послушай цвет и лопни все шарики этого цвета!",
-         "tone": "весело"},
-        {"t": "collect", "target": "shelf", "say": "item", "who": "bunny",
+        {"t": "order",
+         "rounds": [["blue", "green"], ["yellow", "blue", "green"]],
+         "text": "Слушай и нажимай кляксы по порядку.",
+         "tone": "загадочно"},
+        {"t": "catch", "say": "item",
          "rounds": [
-             {"target": ("shoes", "green"), "others": [("top", "blue")]},
-             {"target": ("jeans", "yellow"), "others": [("shoes", "blue")]},
+             {"target": ("shoes", "green"), "others": [("top", "blue"), ("jeans", "yellow")]},
+             {"target": ("jeans", "blue"), "others": [("shoes", "yellow"), ("top", "green")]},
          ],
-         "text": "Зайчик зашёл в магазин. Что он хочет?",
-         "tone": "с интересом"},
-        {"t": "pick", "say": "combo",
+         "text": "Вещи поехали! Поймай ту, которую я назову.",
+         "tone": "азартно"},
+        {"t": "truefalse", "say": "combo",
          "rounds": [
-             {"target": ("jeans", "green"),
-              "others": [("jeans", "blue"), ("top", "green"), ("shoes", "green")]},
-             {"target": ("top", "yellow"),
-              "others": [("top", "green"), ("jeans", "yellow"), ("shoes", "yellow")]},
+             {"thing": ("jeans", "green"), "claim": ("jeans", "green")},
+             {"thing": ("top", "yellow"), "claim": ("top", "blue")},
+             {"thing": ("shoes", "blue"), "claim": ("shoes", "blue")},
          ],
-         "text": "А теперь и цвет, и вещь. Покажи, что я назову.",
-         "tone": "спокойно"},
+         "text": "Угадала я или нет?", "tone": "с хитринкой"},
 
         # ── новое: фраза ──
         {"t": "fingers", "mode": "full", "thing": ("top", "green"),
@@ -289,7 +316,8 @@ L3 = {
          "text": "А теперь наоборот — с конца. Так даже легче!",
          "tone": "заговорщицки"},
         {"t": "fingers", "mode": "swap", "token": True,
-         "things": DRILL,
+         "things": [("top", "green"), ("top", "blue"), ("top", "yellow"),
+                    ("jeans", "yellow"), ("shoes", "yellow")],
          "text": "Теперь я меняю одно слово, а ты говоришь новую фразу.",
          "tone": "с вызовом, весело"},
 
@@ -304,10 +332,16 @@ L3 = {
          ],
          "text": "Слушай, кто что говорит, и показывай.",
          "tone": "спокойно"},
-        {"t": "name", "say": "sentence",
+        {"t": "name", "say": "sentence", "example": True,
          "rounds": [("top", "yellow"), ("jeans", "green"), ("shoes", "blue")],
-         "text": "А теперь ты расскажи! Что у тебя есть?",
-         "tone": "ждём ответа"},
+         "text": "А теперь ты расскажи! Что у тебя есть? Если забыл — нажми "
+                 "«послушать пример».",
+         "tone": "ждём ответа, подбадривающе"},
+
+        {"t": "vocab", "say": "sentence",
+         "things": [("top", "green"), ("jeans", "blue"), ("shoes", "yellow")],
+         "text": "Вот твои фразы. Нажимай и слушай.",
+         "tone": "спокойно, с гордостью"},
 
         # ── сюжет ──
         {"t": "story", "pic": "cave_closed",
@@ -317,13 +351,14 @@ L3 = {
         {"t": "story", "pic": "push", "btn": "Помочь!",
          "text": "Раз, два, взяли! Толкаем все вместе!",
          "tone": "с натугой, весело"},
-        {"t": "story", "pic": "cave_open",
-         "text": "Получилось! Как темно… Подожди, я посвечу. Смотри — гнёздышко!",
-         "tone": "радость, потом тише"},
+        {"t": "story", "pic": "cave_egg",
+         "text": "Получилось! Как темно… Подожди, я посвечу. Смотри — гнёздышко, "
+                 "а в нём яйцо!",
+         "tone": "радость, потом тише, потом изумление"},
         {"t": "story", "pic": "egg",
-         "text": "А в нём яйцо! Интересно, кто же там внутри? Неужели дракончик? "
+         "text": "Интересно, кто же там внутри? Неужели дракончик? "
                  "Узнаем на первом уроке!",
-         "tone": "изумление, тайна, предвкушение"},
+         "tone": "тайна, предвкушение"},
     ],
 }
 
@@ -340,21 +375,23 @@ RETRY = [
     ("Ой, не то. Попробуй ещё разок.", "спокойно, без тени упрёка"),
     ("Почти! Давай ещё раз.", "подбадривающе"),
 ]
-ASK_REPEAT = ("А теперь скажи сам, целиком.", "мягко приглашаем")
+ASK_REPEAT = ("Теперь твоя очередь! Покажи ладошку, говори и следи за пальчиками.",
+              "мягко приглашаем, с улыбкой")
+FINALE = ("Ты прошёл всю дорогу до праздника и теперь умеешь рассказывать о себе "
+          "по-английски! А кто в яйце — узнаешь на первом уроке.",
+          "торжественно, тепло")
 
 
 # ──────────────────────────────── английские дорожки ──
 
 def english_tracks():
-    """Все английские записи: слова, сочетания, фразы и куски для дриллов."""
-    tracks = []                      # (ключ, текст)
-    index = {}                       # текст → ключ
+    """Слова, сочетания, фразы и отдельные слова для дриллов по пальцам."""
+    tracks, index = [], {}
 
     def add(text):
         if text not in index:
-            key = "EN-%02d" % (len(tracks) + 1)
-            index[text] = key
-            tracks.append((key, text))
+            index[text] = "EN-%02d" % (len(tracks) + 1)
+            tracks.append((index[text], text))
         return index[text]
 
     for c in COLORS:
@@ -367,6 +404,7 @@ def english_tracks():
     for it in ITEMS:
         for c in COLORS:
             add(sentence(it, c))
-    add("I")
-    add("I have")
+    # отдельные слова: на них по очереди показывает стрелка на пальцах
+    for w in ["I", "have", "a"] + [ITEM_BARE[i] for i in ITEMS]:
+        add(w)
     return tracks, index

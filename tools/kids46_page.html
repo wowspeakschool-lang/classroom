@@ -78,6 +78,10 @@ img{-webkit-user-drag:none}
 .picarea img{height:100%;max-width:100%;object-fit:contain;
   filter:drop-shadow(0 8px 16px rgba(40,60,90,.2))}
 .picarea.who{flex:0 1 30%;min-height:18%}
+/* Когда на экране есть и герой, и цель, троим тесно: карточки ужимались
+   до 56 px на узком телефоне. Тогда герой и цель отдают место ряду. */
+.content.withwho .picarea.who{flex:0 1 22%}
+.content.withwho .target{flex:0 0 32%}
 .picarea.small img{height:auto;max-height:100%;width:auto;max-width:34%}
 .picarea.items{gap:4vw}
 .picarea.items img{height:auto;max-height:100%;width:auto;max-width:24%}
@@ -145,8 +149,12 @@ img{-webkit-user-drag:none}
 .blobs button.wrong{animation:shake .4s}
 
 /* ───────── цель: чемодан, машинка, полка ───────── */
-.target{flex:0 0 30%;min-height:0;display:flex;align-items:center;justify-content:center}
-.target img{height:100%;max-width:70%;object-fit:contain;
+/* width:100% обязателен: без него .target сжимается по ширине картинки,
+   и max-width считается уже от неё — чемодан ужимался до 62% самого себя
+   и выглядел вчетверо меньше карточек. */
+.target{flex:0 0 46%;min-height:0;width:100%;
+  display:flex;align-items:center;justify-content:center}
+.target img{height:100%;max-width:55%;object-fit:contain;
   filter:drop-shadow(0 8px 16px rgba(40,60,90,.25))}
 .target.hit img{animation:pop .5s}
 
@@ -175,6 +183,25 @@ img{-webkit-user-drag:none}
   filter:drop-shadow(0 8px 16px rgba(40,60,90,.2))}
 .handrow .thing.swap{animation:pop .5s}
 
+/* верно или нет */
+.yesno{flex:0 0 26%;display:flex;gap:6vw;align-items:center;justify-content:center;width:100%}
+.yesno button{border:0;border-radius:50%;width:auto;height:100%;aspect-ratio:1;
+  font-size:clamp(28px,6vw,54px);cursor:pointer;box-shadow:var(--shadow);
+  background:#fff;transition:transform .15s}
+.yesno button:active{transform:scale(.94)}
+.yesno .yes{background:#d8f5da}
+.yesno .no{background:#ffe0e0}
+.yesno button.wrong{animation:shake .4s}
+/* летящая в цель вещь */
+.flyer{position:fixed;object-fit:contain;z-index:50;pointer-events:none;
+  transition:left .55s cubic-bezier(.4,0,.2,1), top .55s cubic-bezier(.4,0,.2,1),
+             width .55s cubic-bezier(.4,0,.2,1), height .55s cubic-bezier(.4,0,.2,1),
+             opacity .55s}
+/* подсказка «теперь твоя очередь» */
+.turn{flex:0 0 auto;background:var(--accent);color:#fff;font-weight:900;
+  border-radius:999px;padding:8px 20px;font-size:clamp(13px,2vw,19px);
+  animation:pop .5s}
+
 .bottombar{flex:0 0 auto;display:flex;gap:12px;align-items:center;justify-content:center;
   padding:6px 14px calc(10px + env(safe-area-inset-bottom))}
 .btn{border:0;border-radius:999px;padding:13px 28px;font:inherit;font-weight:900;
@@ -192,6 +219,7 @@ img{-webkit-user-drag:none}
   box-shadow:var(--shadow);max-width:min(90%,560px)}
 .panel h2{margin:0 0 6px;font-size:clamp(20px,3.4vw,30px)}
 .panel p{margin:0 0 18px;font-size:clamp(14px,2vw,19px);line-height:1.4}
+.panel p.hint{margin:14px 0 0;font-size:14px;opacity:.7}
 .panel .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
 #wsdev{position:absolute;right:10px;top:10px;z-index:30;display:none;gap:6px}
@@ -247,6 +275,10 @@ const LESSONS = __LESSONS__;
 const PRAISE = __PRAISE__;
 const RETRY = __RETRY__;
 const ASK = __ASK__;
+const FINALE = __FINALE__;
+// Ссылка на запись: подставить, когда Анна её пришлёт. Пока пусто —
+// кнопка показывает подпись-заглушку вместо того, чтобы молча не работать.
+const SIGNUP_URL = "";
 const COLORS = __COLORS__;
 const FRIENDS = __FRIENDS__;
 const TIPS = __TIPS__;
@@ -402,6 +434,7 @@ function render(){
   btnNext.hidden = true;
   btnNext.textContent = s.btn || "Дальше ▶";
   lessonEl.querySelector(".stage").classList.toggle("solo", !!s.solo);
+  content.classList.toggle("withwho", !!s.who);
   if (s.t === "token") earned = s.n;
   drawTokens();
   const num = document.querySelector("#wsdev .num");
@@ -409,7 +442,7 @@ function render(){
       (s.rounds && s.rounds.length > 1 ? " (" + (round + 1) + "/" + s.rounds.length + ")" : "");
   RENDER[s.t](s);
   fit();
-  if (s._run) s._run(); else say();
+  if (s._run) s._run();
 }
 
 /* Реплики идут очередью, а не по таймеру: без русской записи пауза перед
@@ -422,20 +455,47 @@ async function queue(steps){
     await step();
   }
 }
-function say(){
-  const s = screen();
-  const steps = [() => ru(s.ru)];
+/* Английское слово и само задание идут ТОЛЬКО после того, как Искорка
+   договорит: иначе ребёнок начинает тыкать, не дослушав. Пока записи нет,
+   на чтение реплики взрослому даётся пауза по длине текста. */
+function readPause(text){
+  if (HOP < 200) return 120;              // ?fast=1 — режим проверки
+  return Math.min(4200, 900 + (text || "").length * 45);
+}
+function taskSteps(s){
+  const steps = [];
   const r = s.rounds ? s.rounds[round] : null;
-  if (s.t === "word") steps.push(() => en(s.voice), () => en([s.voice[0]+"-slow", s.voice[1]]));
+  if (s.t === "word"){
+    steps.push(() => en(s.voice), () => en([s.voice[0] + "-slow", s.voice[1]]));
+  }
   if (s.t === "findall") steps.push(() => en(s.voice));
   if (s.t === "sort" && r) steps.push(() => en(r.voice));
   if ((s.t === "collect" || s.t === "catch" || s.t === "pick") && r){
     steps.push(() => en(r.voice));
   }
+  if (s.t === "truefalse" && r) steps.push(() => en(r.voice));
   if (s.t === "order" && r){
     r.voices.forEach(v => { steps.push(() => en(v)); steps.push(() => wait(350)); });
   }
-  return queue(steps);
+  return steps;
+}
+/* Ставит содержимое задания и включает его звук, когда реплика отзвучала. */
+function afterIntro(s, build){
+  const mine = token;
+  (async () => {
+    await ru(s.ru);
+    if (mine !== token) return;
+    await wait(AUDIO[s.ru] ? 250 : readPause(s.text));
+    if (mine !== token) return;
+    if (build) build();
+    fit();
+    queue(taskSteps(s));
+  })();
+}
+function replay(){
+  const s = screen();
+  if (s._run){ s._run(); return; }
+  queue([() => ru(s.ru)].concat(taskSteps(s)));
 }
 
 /* Ряду карточек нужен его размер в пикселях: от него считается сторона
@@ -505,6 +565,7 @@ function showNextLater(ms){
 RENDER.story = function(s){
   if (!s.solo) content.appendChild(picArea([IMG[s.pic]]));
   showNextLater(2000);
+  ru(s.ru);
 };
 RENDER.token = function(s){
   if (s.kind === "friends"){
@@ -523,177 +584,256 @@ RENDER.token = function(s){
     content.appendChild(view);
   }
   showNextLater(2200);
+  ru(s.ru);
 };
 
 /* ───────── слушай и повторяй ───────── */
 RENDER.word = function(s){
   content.appendChild(picArea([pic(s.thing)]));
-  const below = document.createElement("div");
-  below.className = "below";
-  const line = document.createElement("div");
-  line.className = "wordline";
-  line.textContent = s.voice[1];
-  below.appendChild(line);
-  const b = document.createElement("button");
-  b.className = "btn big"; b.textContent = "🗣 Я сказал!";
-  b.onclick = () => { stopSound(); next(); };
-  below.appendChild(b);
-  content.appendChild(below);
+  afterIntro(s, () => {
+    const below = document.createElement("div");
+    below.className = "below";
+    const line = document.createElement("div");
+    line.className = "wordline";
+    line.textContent = s.voice[1];
+    below.appendChild(line);
+    const b = document.createElement("button");
+    b.className = "btn big"; b.textContent = "🗣 Я сказал!";
+    b.onclick = () => { stopSound(); next(); };
+    below.appendChild(b);
+    content.appendChild(below);
+  });
 };
 
 /* ───────── назови сам ───────── */
 RENDER.name = function(s){
   const r = s.rounds[round];
   content.appendChild(picArea([pic(r.thing)]));
-  const b = sayButton("🗣 Я сказал!", async () => {
-    b.disabled = true;
-    const line = document.createElement("div");
-    line.className = "wordline";
-    line.textContent = r.voice[1];
-    b.parentNode.insertBefore(line, b);
-    blip("SFX-OK");
-    await en(r.voice);
-    await praise();
-    nextRound(s);
+  afterIntro(s, () => {
+    const below = document.createElement("div");
+    below.className = "below";
+    if (s.example){
+      const ex = document.createElement("button");
+      ex.className = "btn ghost";
+      ex.textContent = "🔊 Послушать пример";
+      ex.onclick = () => en(r.voice);
+      below.appendChild(ex);
+    }
+    const b = document.createElement("button");
+    b.className = "btn big";
+    b.textContent = "🗣 Я сказал!";
+    b.onclick = async () => {
+      b.disabled = true;
+      blip("SFX-OK");
+      await en(r.voice);          // эталон: ребёнок сравнивает себя с ним
+      await praise();
+      nextRound(s);
+    };
+    below.appendChild(b);
+    content.appendChild(below);
   });
+};
+
+/* ───────── верно или нет ───────── */
+RENDER.truefalse = function(s){
+  const r = s.rounds[round];
+  content.appendChild(picArea([pic(r.thing)], "small"));
+  afterIntro(s, () => {
+    const row = document.createElement("div");
+    row.className = "yesno";
+    [["yes", "👍", true], ["no", "👎", false]].forEach(([cls, icon, val]) => {
+      const b = document.createElement("button");
+      b.className = cls;
+      b.dataset.v = val ? "1" : "0";
+      b.textContent = icon;
+      b.onclick = async () => {
+        if (val !== r.ok){ await wrong(b); return; }
+        await rightStep(() => nextRound(s));
+      };
+      row.appendChild(b);
+    });
+    content.appendChild(row);
+  });
+};
+
+/* ───────── словарик: картинка и озвучка, без слов ───────── */
+RENDER.vocab = function(s){
+  // t — это ключ вещи (массив), голос кладём отдельным полем:
+  // cardsRow пишет из t атрибут data-key и ждёт массив, объект его ломает.
+  const opts = s.things.map(t => ({src: pic(t.thing), t: t.thing, voice: t.voice}));
+  content.appendChild(cardsRow(opts, (c, k) => { blip("SFX-OK"); en(k.voice); }));
+  ru(s.ru);
+  showNextLater(2400);
+  btnNext.textContent = "Готово ✔";
 };
 
 /* ───────── нажми на все предметы цвета ───────── */
 RENDER.findall = function(s){
-  const field = document.createElement("div");
-  field.className = "field" + (s.float ? " float" : "");
-  let left = s.pool.filter(t => t[1] === s.color).length;
-  shuffle(s.pool).forEach((t, i) => {
-    const c = document.createElement("button");
-    c.className = "cell";
-    c.dataset.c = t[1];
-    c.innerHTML = '<img src="' + pic(t) + '" alt="">';
-    if (s.float) c.querySelector("img").style.animationDelay = (i * 0.35) + "s";
-    c.onclick = async () => {
-      if (c.classList.contains("gone")) return;
-      if (t[1] !== s.color){ await wrong(c); return; }
-      c.classList.add("gone"); blip("SFX-OK");
-      left--;
-      if (left === 0){ await praise(); next(); }
-    };
-    field.appendChild(c);
+  afterIntro(s, () => {
+    const field = document.createElement("div");
+    field.className = "field" + (s.float ? " float" : "");
+    let left = s.pool.filter(t => t[1] === s.color).length;
+    shuffle(s.pool).forEach((t, i) => {
+      const c = document.createElement("button");
+      c.className = "cell";
+      c.dataset.c = t[1];
+      c.innerHTML = '<img src="' + pic(t) + '" alt="">';
+      if (s.float) c.querySelector("img").style.animationDelay = (i * 0.35) + "s";
+      c.onclick = async () => {
+        if (c.classList.contains("gone")) return;
+        if (t[1] !== s.color){ await wrong(c); return; }
+        c.classList.add("gone"); blip("SFX-OK");
+        left--;
+        if (left === 0){ await praise(); next(); }
+      };
+      field.appendChild(c);
+    });
+    content.appendChild(field);
   });
-  content.appendChild(field);
 };
 
 /* ───────── разложи по корзинам ───────── */
 RENDER.sort = function(s){
-  const r = s.rounds[round];
-  const top = document.createElement("div");
-  top.className = "picarea small";
-  const im = document.createElement("img");
-  im.src = pic(r.thing);
-  im.style.cursor = "pointer";
-  im.onclick = () => en(r.voice);
-  top.appendChild(im);
-  content.appendChild(top);
+  afterIntro(s, () => {
+    const r = s.rounds[round];
+    const top = document.createElement("div");
+    top.className = "picarea small";
+    const im = document.createElement("img");
+    im.src = pic(r.thing);
+    im.style.cursor = "pointer";
+    im.onclick = () => en(r.voice);
+    top.appendChild(im);
+    content.appendChild(top);
 
-  const row = document.createElement("div");
-  row.className = "baskets";
-  s.colors.forEach(c => {
-    const b = document.createElement("button");
-    b.dataset.c = c;
-    b.innerHTML = '<img src="' + IMG["basket_" + c] + '" alt="">';
-    b.onclick = async () => {
-      if (c !== r.thing[1]){ await wrong(b); return; }
-      im.style.transition = "transform .45s, opacity .45s";
-      im.style.transform = "scale(.2) translateY(60%)";
-      im.style.opacity = "0";
-      await rightStep(() => nextRound(s));
-    };
-    row.appendChild(b);
+    const row = document.createElement("div");
+    row.className = "baskets";
+    s.colors.forEach(c => {
+      const b = document.createElement("button");
+      b.dataset.c = c;
+      b.innerHTML = '<img src="' + IMG["basket_" + c] + '" alt="">';
+      b.onclick = async () => {
+        if (c !== r.thing[1]){ await wrong(b); return; }
+        im.style.transition = "transform .45s, opacity .45s";
+        im.style.transform = "scale(.2) translateY(60%)";
+        im.style.opacity = "0";
+        await rightStep(() => nextRound(s));
+      };
+      row.appendChild(b);
+    });
+    content.appendChild(row);
   });
-  content.appendChild(row);
 };
 
 /* ───────── нажми цвета по порядку ───────── */
 RENDER.order = function(s){
-  const r = s.rounds[round];
-  let at = 0;
-  const row = document.createElement("div");
-  row.className = "blobs";
-  shuffle(COLORS).forEach(c => {
-    const b = document.createElement("button");
-    b.dataset.c = c;
-    b.innerHTML = '<img src="' + IMG["blob_" + c] + '" alt="">';
-    b.onclick = async () => {
-      if (c !== r.seq[at]){ at = 0; await wrong(b); say(); return; }
-      b.classList.remove("lit"); void b.offsetWidth; b.classList.add("lit");
-      blip("SFX-OK");
-      at++;
-      if (at >= r.seq.length){ await praise(); nextRound(s); }
-    };
-    row.appendChild(b);
+  afterIntro(s, () => {
+    const r = s.rounds[round];
+    let at = 0;
+    const row = document.createElement("div");
+    row.className = "blobs";
+    shuffle(COLORS).forEach(c => {
+      const b = document.createElement("button");
+      b.dataset.c = c;
+      b.innerHTML = '<img src="' + IMG["blob_" + c] + '" alt="">';
+      b.onclick = async () => {
+        if (c !== r.seq[at]){ at = 0; await wrong(b); say(); return; }
+        b.classList.remove("lit"); void b.offsetWidth; b.classList.add("lit");
+        blip("SFX-OK");
+        at++;
+        if (at >= r.seq.length){ await praise(); nextRound(s); }
+      };
+      row.appendChild(b);
+    });
+    content.appendChild(row);
   });
-  content.appendChild(row);
 };
 
 /* ───────── чемодан, магазин, стирка ───────── */
-RENDER.collect = function(s){
-  const r = s.rounds[round];
-  if (s.who) content.appendChild(picArea([IMG[s.who]], "who"));
-  const tgt = document.createElement("div");
-  tgt.className = "target";
-  tgt.innerHTML = '<img src="' + IMG[s.target] + '" alt="">';
-
-  const opts = shuffle([r.target].concat(r.others)).map(t => ({src: pic(t), t}));
-  const row = cardsRow(opts, async (c, k) => {
-    if (k.t !== r.target){ await wrong(c); return; }
-    c.classList.add("gone");
-    tgt.classList.remove("hit"); void tgt.offsetWidth; tgt.classList.add("hit");
-    await rightStep(() => nextRound(s));
+function flyTo(card, target){
+  const a = card.getBoundingClientRect(), b = target.getBoundingClientRect();
+  const im = card.querySelector("img").cloneNode();
+  im.className = "flyer";
+  im.style.left = a.left + "px"; im.style.top = a.top + "px";
+  im.style.width = a.width + "px"; im.style.height = a.height + "px";
+  document.body.appendChild(im);
+  card.classList.add("gone");
+  requestAnimationFrame(() => {
+    im.style.left = (b.left + b.width * 0.3) + "px";
+    im.style.top = (b.top + b.height * 0.3) + "px";
+    im.style.width = (b.width * 0.4) + "px";
+    im.style.height = (b.height * 0.4) + "px";
+    im.style.opacity = "0.15";
   });
-  content.appendChild(row);
-  content.appendChild(tgt);
+  setTimeout(() => im.remove(), 650);
+}
+
+RENDER.collect = function(s){
+  afterIntro(s, () => {
+    const r = s.rounds[round];
+    if (s.who) content.appendChild(picArea([IMG[s.who]], "who"));
+    const tgt = document.createElement("div");
+    tgt.className = "target";
+    tgt.innerHTML = '<img src="' + IMG[s.target] + '" alt="">';
+
+    const opts = shuffle([r.target].concat(r.others)).map(t => ({src: pic(t), t}));
+    const row = cardsRow(opts, async (c, k) => {
+      if (k.t !== r.target){ await wrong(c); return; }
+      flyTo(c, tgt);
+      tgt.classList.remove("hit"); void tgt.offsetWidth; tgt.classList.add("hit");
+      await wait(500);
+      await rightStep(() => nextRound(s));
+    });
+    content.appendChild(row);
+    content.appendChild(tgt);
+  });
 };
 
 /* ───────── поймай вещь ───────── */
 RENDER.catch = function(s){
-  const r = s.rounds[round];
-  const belt = document.createElement("div");
-  belt.className = "belt";
-  const opts = shuffle([r.target].concat(r.others));
-  opts.forEach((t, i) => {
-    const c = document.createElement("button");
-    c.className = "cell";
-    c.dataset.key = t.join("_");
-    c.innerHTML = '<img src="' + pic(t) + '" alt="">';
-    c.style.left = "100%";
-    c.style.transition = "left 9s linear";
-    c.onclick = async () => {
-      if (t !== r.target){ await wrong(c); return; }
-      opts.forEach((_, j) => {
-        const el = belt.children[j];
-        el.style.transition = "none";
-        el.style.left = getComputedStyle(el).left;
-      });
-      c.classList.add("gone");
-      await rightStep(() => nextRound(s));
-    };
-    belt.appendChild(c);
-    setTimeout(() => { c.style.left = (-30 - i * 28) + "%"; }, 60 + i * 900);
+  afterIntro(s, () => {
+    const r = s.rounds[round];
+    const belt = document.createElement("div");
+    belt.className = "belt";
+    const opts = shuffle([r.target].concat(r.others));
+    opts.forEach((t, i) => {
+      const c = document.createElement("button");
+      c.className = "cell";
+      c.dataset.key = t.join("_");
+      c.innerHTML = '<img src="' + pic(t) + '" alt="">';
+      c.style.left = "100%";
+      c.style.transition = "left 9s linear";
+      c.onclick = async () => {
+        if (t !== r.target){ await wrong(c); return; }
+        opts.forEach((_, j) => {
+          const el = belt.children[j];
+          el.style.transition = "none";
+          el.style.left = getComputedStyle(el).left;
+        });
+        c.classList.add("gone");
+        await rightStep(() => nextRound(s));
+      };
+      belt.appendChild(c);
+      setTimeout(() => { c.style.left = (-30 - i * 28) + "%"; }, 60 + i * 900);
+    });
+    content.appendChild(belt);
+    // вещь может уехать за край — тогда просто пускаем раунд заново
+    const mine = token;
+    setTimeout(() => { if (mine === token) render(); }, 11500);
   });
-  content.appendChild(belt);
-  // вещь может уехать за край — тогда просто пускаем раунд заново
-  const mine = token;
-  setTimeout(() => { if (mine === token) render(); }, 11500);
 };
 
 /* ───────── выбери из двух-четырёх ───────── */
 RENDER.pick = function(s){
-  const r = s.rounds[round];
-  if (s.who) content.appendChild(picArea([IMG[s.who]], "who"));
-  const opts = shuffle([r.target].concat(r.others)).map(t => ({src: pic(t), t}));
-  content.appendChild(cardsRow(opts, async (c, k) => {
-    if (k.t !== r.target){ await wrong(c); return; }
-    c.classList.add("right");
-    await rightStep(() => nextRound(s));
-  }));
+  afterIntro(s, () => {
+    const r = s.rounds[round];
+    if (s.who) content.appendChild(picArea([IMG[s.who]], "who"));
+    const opts = shuffle([r.target].concat(r.others)).map(t => ({src: pic(t), t}));
+    content.appendChild(cardsRow(opts, async (c, k) => {
+      if (k.t !== r.target){ await wrong(c); return; }
+      c.classList.add("right");
+      await rightStep(() => nextRound(s));
+    }));
+  });
 };
 
 /* ───────── рука с пальцами: знакомство и три дрилла ───────── */
@@ -717,34 +857,36 @@ function handBox(words, picKey){
   content.appendChild(rowEl);
   return {box, arrow, thing: rowEl.querySelector(".thing")};
 }
-async function hop(arrow, words){
-  const tips = TIPS[Math.min(Math.max(words, 1), 5)];
+function moveArrow(arrow, count, i){
+  const tips = TIPS[Math.min(Math.max(count, 1), 5)];
+  const t = tips[Math.min(i, tips.length - 1)];
   arrow.classList.add("on");
-  for (let i = 0; i < tips.length; i++){
-    const mine = token;
-    arrow.style.left = (tips[i][0] * 100) + "%";
-    arrow.style.top = (tips[i][1] * 100) + "%";
-    await wait(HOP);
-    if (mine !== token) return;
-  }
-  arrow.classList.remove("on");
+  arrow.style.left = (t[0] * 100) + "%";
+  arrow.style.top = (t[1] * 100) + "%";
 }
 
 RENDER.fingers = function(s){
   const isSwap = s.mode === "swap";
   const step = isSwap ? s.rounds[round] : s.steps[round];
-  const line = isSwap ? step.line : step;
-  const picKey = isSwap ? step.pic : s.pic;
-  const ui = handBox(line[2], picKey);
+  const words = isSwap ? s.rounds[round].words : s.words;
+  const from = isSwap ? 0 : step[0];
+  const to = isSwap ? words.length - 1 : step[1];
+  const count = to - from + 1;
+  const picKey = isSwap ? s.rounds[round].pic : s.pic;
+  const line = isSwap ? s.rounds[round].line : s.line;
+  const ui = handBox(count, picKey);
 
-  const text = document.createElement("div");
-  text.className = "wordline";
-  text.textContent = line[1];
   const below = document.createElement("div");
   below.className = "below";
+  const text = document.createElement("div");
+  text.className = "wordline";
+  text.textContent = words.slice(from, to + 1).map(w => w[1]).join(" ");
   below.appendChild(text);
-  content.appendChild(below);
-
+  const turn = document.createElement("div");
+  turn.className = "turn";
+  turn.textContent = "Теперь ты! Говори и следи за пальчиками";
+  turn.hidden = true;
+  below.appendChild(turn);
   const said = document.createElement("button");
   said.className = "btn big";
   said.textContent = "🗣 Я сказал!";
@@ -758,24 +900,41 @@ RENDER.fingers = function(s){
     if (round >= total){ round = 0; next(); } else { render(); }
   };
   below.appendChild(said);
+  content.appendChild(below);
 
+  /* Сначала слово за словом — палец в палец. Раньше звучала вся фраза
+     сразу, и к третьему пальцу говорить было уже нечего. */
   s._run = async () => {
     const mine = token;
+    turn.hidden = true; said.hidden = true;
     await ru(s.ru);
+    if (mine !== token) return;
+    await wait(AUDIO[s.ru] ? 250 : readPause(s.text));
     if (mine !== token) return;
     if (isSwap && step.cue){
       await en(step.cue);
       if (mine !== token) return;
       if (ui.thing){ ui.thing.classList.remove("swap"); void ui.thing.offsetWidth;
                      ui.thing.classList.add("swap"); }
-    } else {
-      en(line);
-      await hop(ui.arrow, line[2]);
+      await wait(400);
     }
+    for (let i = 0; i < count; i++){
+      if (mine !== token) return;
+      moveArrow(ui.arrow, count, i);
+      await en(words[from + i]);
+      await wait(HOP);
+    }
+    ui.arrow.classList.remove("on");
     if (mine !== token) return;
+    turn.hidden = false;
     await ru(ASK);
     if (mine !== token) return;
-    await hop(ui.arrow, line[2]);
+    for (let i = 0; i < count; i++){
+      if (mine !== token) return;
+      moveArrow(ui.arrow, count, i);
+      await wait(HOP + 350);
+    }
+    ui.arrow.classList.remove("on");
     said.hidden = false;
   };
 };
@@ -796,20 +955,44 @@ function finish(){
   saveProgress(p);
   const last = L === LESSONS.length - 1;
   const panel = overlay.querySelector(".panel");
-  panel.innerHTML = "<h2>Урок пройден!</h2><p>" + (last
-      ? "Ты прошёл всю дорогу до праздника. А кто в яйце — узнаешь на первом уроке с преподавателем."
-      : "Дорожка на следующий остров готова.") + "</p>" +
-    '<div class="row"><button class="btn ghost" data-act="again">Пройти ещё раз</button>' +
-    '<button class="btn" data-act="map">Вернуться на карту 🗺️</button></div>';
+  if (last){
+    // Дорога пройдена — возвращать на карту некуда, зовём на урок.
+    panel.innerHTML = "<h2>🎉 Ты дошёл до праздника!</h2>" +
+      "<p>Ты выучил три цвета, три вещи и умеешь рассказывать о себе " +
+      "по-английски. А кто в яйце — узнаешь на первом уроке с преподавателем.</p>" +
+      '<div class="row">' +
+        '<button class="btn" data-act="signup">Записаться на первый урок 🐉</button>' +
+        '<button class="btn ghost" data-act="again">Пройти ещё раз</button>' +
+      "</div>";
+    const sg = panel.querySelector('[data-act="signup"]');
+    if (SIGNUP_URL){
+      sg.onclick = () => { location.href = SIGNUP_URL; };
+    } else {
+      sg.onclick = () => {
+        let hint = panel.querySelector(".hint");
+        if (!hint){
+          hint = document.createElement("p");
+          hint.className = "hint";
+          hint.textContent = "Сюда встанет ссылка на запись — пришлите её, и кнопка заработает.";
+          panel.appendChild(hint);
+        }
+      };
+    }
+  } else {
+    panel.innerHTML = "<h2>Урок пройден!</h2><p>Дорожка на следующий остров готова.</p>" +
+      '<div class="row"><button class="btn ghost" data-act="again">Пройти ещё раз</button>' +
+      '<button class="btn" data-act="map">Вернуться на карту 🗺️</button></div>';
+    panel.querySelector('[data-act="map"]').onclick = showMap;
+  }
   panel.querySelector('[data-act="again"]').onclick = () => {
     overlay.classList.remove("on"); startLesson(L);
   };
-  panel.querySelector('[data-act="map"]').onclick = showMap;
   overlay.classList.add("on");
+  ru(last ? FINALE : null);
 }
 
 btnNext.onclick = next;
-btnListen.onclick = () => { const s = screen(); if (s._run) s._run(); else say(); };
+btnListen.onclick = replay;
 lessonEl.querySelector(".home").onclick = showMap;
 
 if (DEV_PANEL && !/[?&]dev=0/.test(location.search)){
