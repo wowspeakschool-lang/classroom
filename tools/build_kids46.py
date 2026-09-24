@@ -37,6 +37,21 @@ ART = ROOT / "assets" / "kids-4-6"
 
 COLOR_HUE = {"green": 120, "blue": 215, "yellow": 48}
 
+# Замкнутые белые области, которые надо вырезать: доля кадра, начиная с
+# которой это дырка, а не блик. Выбрано для каждой картинки глазами —
+# по размеру блик от дырки не отличается. Чего тут нет, у того замкнутых
+# дырок не бывает: у камушка и облачка такой проход выедал блик.
+HOLES = {
+    "clouds": 0.5,      # просвет под радугой
+    "meadow": 0.15,     # просветы под бельевой верёвкой
+    "dragon": 0.20,     # просветы под гирляндой
+    "push": 0.10,       # просветы между зверятами и камнем
+    "jeans": 1.00,      # просвет между штанинами
+    "cup": 0.50,        # дырка в ручке (блик там же — 0.11%)
+    "basket": 0.10,     # дырки в двух ручках
+    "suitcase": 0.20,   # щель между крышкой и дном
+}
+
 # кончики пальцев в долях от рамки фигуры, слева направо.
 # Автоматически они не ловятся: большой палец торчит вбок и по верхнему
 # контуру не находится. Снято по сетке руками — картинки не меняются.
@@ -51,7 +66,7 @@ FINGER_TIPS = {
 
 # ──────────────────────────────────────────────────────────── картинки ──
 
-def cut_white(im, bright=250, neutral=3, holes=True):
+def cut_white(im, bright=250, neutral=3, holes=None):
     """Убирает фон генератора: светлый И бесцветный.
 
     Одной яркости мало. Фон строго серый (max−min = 0), а белые места самих
@@ -88,7 +103,7 @@ def cut_white(im, bright=250, neutral=3, holes=True):
 
     flood([(0, 0), (w - 1, 0), (0, h - 1), (w - 1, h - 1)])
     if holes:
-        floor = int(w * h * 0.0008)
+        floor = int(w * h * holes / 100)
         for sy in range(0, h, 4):
             for sx in range(0, w, 4):
                 if seen[sy * w + sx] or not is_bg(sx, sy):
@@ -172,9 +187,10 @@ def build_images():
     images = {}
     for name, (f, width, cut) in BASE.items():
         im = Image.open(ART / f)
-        images[name] = encode(cut_white(im) if cut else im.convert("RGB"), width)
+        images[name] = encode(cut_white(im, holes=HOLES.get(name)) if cut
+                              else im.convert("RGB"), width)
     for name, f, width in PAINTED:
-        src = cut_white(Image.open(ART / f))
+        src = cut_white(Image.open(ART / f), holes=HOLES.get(name))
         src = src.crop(src.getbbox())
         if src.width > width * 1.6:          # красим уже уменьшенную — быстрее
             src = src.resize((int(width * 1.6),

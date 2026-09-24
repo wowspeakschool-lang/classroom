@@ -198,6 +198,9 @@ img{-webkit-user-drag:none}
 #wsdev.on{display:flex}
 #wsdev button{border:0;border-radius:10px;background:rgba(0,0,0,.55);color:#fff;
   font:inherit;font-size:13px;padding:6px 10px;cursor:pointer}
+/* Временная нумерация экранов: чтобы Анне хватало прислать номер. */
+#wsdev .num{border-radius:10px;background:rgba(255,157,60,.92);color:#fff;
+  font:inherit;font-weight:900;font-size:14px;padding:6px 12px;align-self:center}
 
 @media (max-aspect-ratio:1/1){
   .stage{flex-direction:column;gap:1vh;padding-top:4px}
@@ -230,6 +233,7 @@ img{-webkit-user-drag:none}
   </div>
   <div id="overlay"><div class="panel"></div></div>
   <div id="wsdev">
+    <span class="num"></span>
     <button data-act="prev">◀</button>
     <button data-act="next">▶</button>
     <button data-act="reset">↻ сначала</button>
@@ -400,6 +404,9 @@ function render(){
   lessonEl.querySelector(".stage").classList.toggle("solo", !!s.solo);
   if (s.t === "token") earned = s.n;
   drawTokens();
+  const num = document.querySelector("#wsdev .num");
+  if (num) num.textContent = "У" + lesson().id + " · " + (S + 1) +
+      (s.rounds && s.rounds.length > 1 ? " (" + (round + 1) + "/" + s.rounds.length + ")" : "");
   RENDER[s.t](s);
   fit();
   if (s._run) s._run(); else say();

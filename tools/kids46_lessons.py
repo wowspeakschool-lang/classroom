@@ -84,21 +84,22 @@ L1 = {
          "tone": "восхищённо"},
 
         {"t": "word", "say": "color", "thing": ("ball", "green"),
-         "text": "Смотри, мячик зелёный. По-английски — green. Скажи вслух: green.",
-         "tone": "показываем, «green» отчётливо и чуть медленнее"},
+         "text": "Смотри, мячик зелёный. А теперь послушай, как этот цвет "
+                 "звучит по-английски. И повтори за мной!",
+         "tone": "показываем, приглашаем слушать"},
         {"t": "findall", "token": True, "color": "green",
          "pool": [("ball", "green"), ("car", "blue"), ("flower", "green"),
                   ("cup", "yellow"), ("fish", "green"), ("car", "yellow")],
-         "text": "Нажми на всё зелёное. Где тут green?",
+         "text": "Послушай цвет и нажми на все предметы этого цвета.",
          "tone": "с интересом"},
 
         {"t": "word", "say": "color", "thing": ("car", "blue"),
-         "text": "А машинка синяя. По-английски — blue. Скажи вслух: blue.",
+         "text": "А машинка синяя. Послушай, как называется этот цвет. Повтори!",
          "tone": "показываем"},
         {"t": "findall", "token": True, "float": True, "color": "blue",
          "pool": [("balloon", "blue"), ("balloon", "green"), ("balloon", "blue"),
                   ("balloon", "green"), ("balloon", "blue")],
-         "text": "Лопни синие шарики! Слушай: blue.",
+         "text": "Послушай цвет и лопни все шарики этого цвета!",
          "tone": "весело, азартно"},
         {"t": "sort", "token": True, "colors": ["green", "blue"],
          "rounds": [("cup", "green"), ("fish", "blue"), ("flower", "blue"),
@@ -107,12 +108,12 @@ L1 = {
          "tone": "деловито, спокойно"},
 
         {"t": "word", "say": "color", "thing": ("cup", "yellow"),
-         "text": "А чашка жёлтая. По-английски — yellow. Скажи вслух: yellow.",
+         "text": "А чашка жёлтая. Послушай и повтори за мной.",
          "tone": "показываем"},
         {"t": "findall", "token": True, "color": "yellow",
          "pool": [("cup", "yellow"), ("ball", "green"), ("fish", "yellow"),
                   ("car", "blue"), ("flower", "yellow"), ("ball", "blue")],
-         "text": "Теперь нажми на всё жёлтое. Слушай: yellow.",
+         "text": "Снова послушай цвет и нажми на все такие предметы.",
          "tone": "с интересом"},
         {"t": "sort", "token": True, "colors": COLORS,
          "rounds": [("car", "yellow"), ("ball", "blue"), ("flower", "green"),
@@ -159,12 +160,12 @@ L2 = {
         {"t": "findall", "token": True, "float": True, "color": "yellow",
          "pool": [("balloon", "yellow"), ("balloon", "blue"), ("balloon", "yellow"),
                   ("balloon", "green"), ("balloon", "yellow")],
-         "text": "Лопни жёлтые шарики. Слушай: yellow!",
+         "text": "Послушай цвет и лопни все шарики этого цвета!",
          "tone": "весело"},
         {"t": "findall", "token": True, "color": "green",
          "pool": [("flower", "green"), ("cup", "blue"), ("ball", "green"),
                   ("fish", "yellow"), ("car", "green"), ("cup", "yellow")],
-         "text": "А теперь нажми на всё зелёное.",
+         "text": "А теперь послушай другой цвет и найди все такие предметы.",
          "tone": "спокойно"},
         {"t": "name", "token": True, "say": "color",
          "rounds": [("ball", "blue"), ("flower", "yellow")],
@@ -173,8 +174,9 @@ L2 = {
 
         # ── новое, по накопительной ──
         {"t": "word", "say": "item", "thing": ("top", "green"),
-         "text": "А это кофточка. По-английски — a top. Скажи вслух: a top.",
-         "tone": "показываем, «a top» отчётливо"},
+         "text": "А это кофточка. Послушай, как она называется по-английски, "
+                 "и повтори за мной.",
+         "tone": "показываем, приглашаем слушать"},
         {"t": "collect", "token": True, "target": "suitcase", "say": "item",
          "rounds": [
              {"target": ("top", "green"), "others": [("ball", "blue"), ("cup", "yellow")]},
@@ -185,7 +187,7 @@ L2 = {
          "tone": "по-деловому, весело"},
 
         {"t": "word", "say": "item", "thing": ("jeans", "blue"),
-         "text": "А это джинсы. По-английски — jeans. Скажи вслух: jeans.",
+         "text": "А это джинсы. Послушай и повтори за мной.",
          "tone": "показываем"},
         {"t": "collect", "token": True, "target": "shelf", "say": "item",
          "who": "fox",
@@ -198,7 +200,7 @@ L2 = {
          "tone": "с интересом"},
 
         {"t": "word", "say": "item", "thing": ("shoes", "yellow"),
-         "text": "А это ботинки. По-английски — shoes. Скажи вслух: shoes.",
+         "text": "А это ботинки. Послушай и повтори за мной.",
          "tone": "показываем"},
         {"t": "collect", "token": True, "target": "machine", "say": "item",
          "rounds": [
@@ -256,7 +258,7 @@ L3 = {
         {"t": "findall", "float": True, "color": "blue",
          "pool": [("balloon", "blue"), ("balloon", "yellow"), ("balloon", "blue"),
                   ("balloon", "green"), ("balloon", "blue")],
-         "text": "Лопни синие шарики. Слушай: blue!",
+         "text": "Послушай цвет и лопни все шарики этого цвета!",
          "tone": "весело"},
         {"t": "collect", "target": "shelf", "say": "item", "who": "bunny",
          "rounds": [
@@ -277,9 +279,9 @@ L3 = {
 
         # ── новое: фраза ──
         {"t": "fingers", "mode": "full", "thing": ("top", "green"),
-         "text": "Смотри: у меня есть зелёная кофточка. По-английски — "
-                 "I have a green top. Пять слов — пять пальчиков!",
-         "tone": "показываем, фразу отчётливо и медленно"},
+         "text": "Смотри: у меня есть зелёная кофточка. Сейчас я скажу это "
+                 "по-английски. Пять слов — пять пальчиков!",
+         "tone": "показываем, приглашаем слушать"},
         {"t": "fingers", "mode": "chain", "token": True, "thing": ("top", "green"),
          "text": "Давай соберём фразу по кусочкам. Повторяй за мной!",
          "tone": "по-игровому, бодро"},
