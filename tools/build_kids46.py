@@ -28,6 +28,10 @@ from pathlib import Path
 
 from PIL import Image
 
+# 🟥 Перед публикацией поставить False и пересобрать: пока панель включена,
+# ребёнок пролистает урок мимо заданий.
+DEV_PANEL = True
+
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "wowspeak-4-6.html"
 VOICE_DOC = ROOT / "docs" / "WowSpeak_озвучка_4-6.md"
@@ -36,52 +40,54 @@ AUDIO_DIR = ROOT / "assets" / "audio-4-6"
 
 # ──────────────────────────────────────────────────────────── картинки ──
 
-def cut_white(im, tol=18, holes=False):
-    """Убирает белый фон заливкой от краёв кадра.
+def cut_white(im, bright=250, neutral=3, holes=True):
+    """Убирает фон генератора: светлый И бесцветный.
 
-    `holes` чистит ещё и замкнутые белые области — нужно это редко, а вреда
-    много: у облачка такой проход съел 19% самой картинки, у острова 9.5%,
-    у камушка выел блик. Включать только для предмета с настоящей дыркой
-    внутри (кольцо ключика), и потом обязательно смотреть глазами.
+    Одной яркости мало. Фон у генератора строго серый (max−min = 0), а белые
+    места самой картинки тонированные — у облака розоватые и желтоватые.
+    Заливка «по яркости» уходила прямо внутрь облака и выедала его: у
+    облачка исчезало 19% картинки, у облачного острова 9.5%, у камушка блик.
+    Второе условие — «бесцветный» — эту дорогу закрывает: цепочка серых
+    пикселей внутри облака рвётся на первом же розовом.
+
+    `holes` добивает замкнутые бесцветные области: под радугой оставался
+    белый кусок, до которого заливка от краёв не дотягивалась. С проверкой
+    на бесцветность этот проход безопасен — тонированное он не трогает.
     """
     im = im.convert("RGBA")
     w, h = im.size
     px = im.load()
-    lim = 255 - tol
 
-    def white(x, y):
+    def is_bg(x, y):
         r, g, b, a = px[x, y]
-        return a > 0 and r >= lim and g >= lim and b >= lim
+        return a > 0 and min(r, g, b) >= bright and max(r, g, b) - min(r, g, b) <= neutral
 
     seen = bytearray(w * h)
-    stack = [(0, 0), (w - 1, 0), (0, h - 1), (w - 1, h - 1)]
-    while stack:
-        x, y = stack.pop()
-        if x < 0 or y < 0 or x >= w or y >= h or seen[y * w + x]:
-            continue
-        if not white(x, y):
-            continue
-        seen[y * w + x] = 1
-        r, g, b, a = px[x, y]
-        px[x, y] = (r, g, b, 0)
-        stack.extend(((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)))
+
+    def flood(seeds, collect=None):
+        stack = list(seeds)
+        while stack:
+            x, y = stack.pop()
+            if x < 0 or y < 0 or x >= w or y >= h or seen[y * w + x] or not is_bg(x, y):
+                continue
+            seen[y * w + x] = 1
+            if collect is None:
+                r, g, b, a = px[x, y]
+                px[x, y] = (r, g, b, 0)
+            else:
+                collect.append((x, y))
+            stack.extend(((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)))
+
+    flood([(0, 0), (w - 1, 0), (0, h - 1), (w - 1, h - 1)])
 
     if holes:
-        floor = int(w * h * 0.003)
+        floor = int(w * h * 0.0008)
         for sy in range(0, h, 4):
             for sx in range(0, w, 4):
-                if seen[sy * w + sx] or not white(sx, sy):
+                if seen[sy * w + sx] or not is_bg(sx, sy):
                     continue
-                blob, stack = [], [(sx, sy)]
-                while stack:
-                    x, y = stack.pop()
-                    if x < 0 or y < 0 or x >= w or y >= h or seen[y * w + x]:
-                        continue
-                    if not white(x, y):
-                        continue
-                    seen[y * w + x] = 1
-                    blob.append((x, y))
-                    stack.extend(((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)))
+                blob = []
+                flood([(sx, sy)], blob)
                 if len(blob) >= floor:
                     for x, y in blob:
                         r, g, b, a = px[x, y]
@@ -130,14 +136,14 @@ PICTURES = {
     "hedgehog":      ("assets/kids-4-6/animal-hedgehog.webp",      760, True),
     "fox":           ("assets/kids-4-6/animal-fox.webp",           760, True),
     "push":          ("assets/kids-4-6/friends-push.webp",        1400, True),
-    "cap":           ("assets/lesson-1/cap.webp",                  800, True),
-    "top":           ("assets/lesson-1/tshirt.webp",               800, True),
-    "jeans":         ("assets/lesson-1/jeans.webp",                800, True),
-    "shoes":         ("assets/lesson-1/shoes.webp",                800, True),
-    "skirt":         ("assets/lesson-1/skirt.webp",                800, True),
-    "jacket":        ("assets/lesson-1/jacket.webp",               800, True),
-    "socks":         ("assets/lesson-1/socks.webp",                800, True),
-    "backpack":      ("assets/lesson-1/backpack.webp",             800, True),
+    "cap":           ("assets/lesson-1/cap.webp",                  1100, True),
+    "top":           ("assets/lesson-1/tshirt.webp",               1100, True),
+    "jeans":         ("assets/lesson-1/jeans.webp",                1100, True),
+    "shoes":         ("assets/lesson-1/shoes.webp",                1100, True),
+    "skirt":         ("assets/lesson-1/skirt.webp",                1100, True),
+    "jacket":        ("assets/lesson-1/jacket.webp",               1100, True),
+    "socks":         ("assets/lesson-1/socks.webp",                1100, True),
+    "backpack":      ("assets/lesson-1/backpack.webp",             1100, True),
 }
 
 # слово → (как звучит, номер английской дорожки)
@@ -671,7 +677,12 @@ img{-webkit-user-drag:none}
 .island:active{transform:translate(-50%,-50%) scale(.96)}
 .island .name{display:block;margin-top:-6px;font-size:clamp(13px,2.4vw,22px);font-weight:800;
   color:#fff;text-shadow:0 2px 6px rgba(40,60,90,.6)}
-.island.locked img{filter:grayscale(.55) brightness(.9) drop-shadow(0 12px 18px rgba(40,60,90,.25))}
+.island.locked img{filter:grayscale(.9) brightness(.82) contrast(.9)
+  drop-shadow(0 12px 18px rgba(40,60,90,.25));opacity:.75}
+.island.locked .name{opacity:.7}
+.island.shake{animation:islandshake .4s}
+@keyframes islandshake{25%{transform:translate(calc(-50% - 10px),-50%)}
+                       75%{transform:translate(calc(-50% + 10px),-50%)}}
 .island .tick{position:absolute;top:2%;right:8%;font-size:clamp(22px,4vw,40px)}
 .island .lock{position:absolute;top:8%;left:50%;transform:translateX(-50%);
   font-size:clamp(20px,3.6vw,36px);filter:drop-shadow(0 2px 4px rgba(0,0,0,.35))}
@@ -831,6 +842,7 @@ const RETRY = __RETRY__;
 const WORDS = __WORDS__;
 const PHRASES = __PHRASES__;
 const FRIENDS = __FRIENDS__;
+const DEV_PANEL = __DEV__;
 const STORE = "ws46_progress";
 const ISLAND_POS = [[20, 60], [50, 38], [80, 62]];
 
@@ -940,7 +952,14 @@ function buildMap(){
       '<span class="name">' + les.title + "</span>" +
       (isDone(les.id) ? '<span class="tick">⭐</span>' : "") +
       (unlocked(les.id) ? "" : '<span class="lock">🔒</span>');
-    b.onclick = () => { if (unlocked(les.id)) startLesson(i); };
+    b.onclick = () => {
+      if (unlocked(les.id)){ startLesson(i); return; }
+      // закрыто — качнём остров, чтобы было видно, что нажатие услышано
+      b.classList.remove("shake");
+      void b.offsetWidth;
+      b.classList.add("shake");
+      blip("SFX-NO");
+    };
     mapEl.appendChild(b);
     if (i < LESSONS.length - 1) addDots(mapEl, i, isDone(les.id) ? les.tokens : 0, false);
   });
@@ -1263,8 +1282,8 @@ btnNext.onclick = next;
 btnListen.onclick = () => { say(); };
 lessonEl.querySelector(".home").onclick = showMap;
 
-/* ─────────── панель просмотра, только по ?dev=1 ─────────── */
-if (/[?&]dev=1/.test(location.search)){
+/* ─────────── панель просмотра ─────────── */
+if (DEV_PANEL && !/[?&]dev=0/.test(location.search)){
   const dev = document.getElementById("wsdev");
   dev.classList.add("on");
   dev.onclick = e => {
@@ -1320,7 +1339,7 @@ def main():
                 sys.exit(f"слово «{s['key']}» не описано в WORDS")
 
     page = HTML
-    for mark, value in (("__IMG__", images), ("__AUDIO__", audio),
+    for mark, value in (("__DEV__", DEV_PANEL), ("__IMG__", images), ("__AUDIO__", audio),
                         ("__LESSONS__", LESSONS), ("__PRAISE__", praise_keys),
                         ("__RETRY__", retry_keys), ("__WORDS__", WORDS),
                         ("__PHRASES__", PHRASES), ("__FRIENDS__", FRIENDS)):
