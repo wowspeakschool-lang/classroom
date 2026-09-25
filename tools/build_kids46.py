@@ -267,7 +267,7 @@ BASE = {            # имя: (файл, ширина, резать ли фон)
 PAINTED = (
     # 1200, а не 900: на широком экране одиночный предмет показывается
     # на 948 px, и на 900 он уже мылил.
-    [(o, f"obj-{o}.webp", 1200) for o in LS.OBJS] +
+    [(o, f"obj-{o}.webp", 1200) for o in LS.OBJS + LS.SKY] +
     [("top", "../lesson-1/tshirt.webp", 1000),
      ("jeans", "../lesson-1/jeans.webp", 1000),
      ("shoes", "../lesson-1/shoes.webp", 1000),

@@ -19,6 +19,9 @@ COLORS = ["green", "blue", "yellow"]
 COLOR_RU = {"green": "зелёный", "blue": "синий", "yellow": "жёлтый"}
 
 OBJS = ["ball", "car", "flower", "cup", "fish"]
+# «Небесные» предметы Облачного Острова: цвета во втором уроке
+# отрабатываются не на тех же предметах, что в первом.
+SKY = ["kite", "bird", "umbrella", "star", "plane"]
 ITEMS = ["top", "jeans", "shoes"]
 
 ITEM_EN = {"top": "a top", "jeans": "jeans", "shoes": "shoes"}
@@ -167,31 +170,31 @@ L2 = {
         # ── разминка: все три цвета, играми, которых не было в первом уроке ──
         {"t": "pick", "say": "color",
          "rounds": [
-             {"target": ("flower", "green"),
-              "others": [("flower", "blue"), ("flower", "yellow")]},
-             {"target": ("car", "yellow"),
-              "others": [("car", "green"), ("car", "blue")]},
-             {"target": ("fish", "blue"),
-              "others": [("fish", "yellow"), ("fish", "green")]},
+             {"target": ("kite", "green"),
+              "others": [("kite", "blue"), ("kite", "yellow")]},
+             {"target": ("umbrella", "yellow"),
+              "others": [("umbrella", "green"), ("umbrella", "blue")]},
+             {"target": ("bird", "blue"),
+              "others": [("bird", "yellow"), ("bird", "green")]},
          ],
          "text": "Слушай цвет и показывай.", "tone": "спокойно"},
         {"t": "catch", "token": True, "say": "color",
          "rounds": [
-             {"target": ("ball", "yellow"),
-              "others": [("ball", "green"), ("ball", "blue")]},
-             {"target": ("cup", "green"),
-              "others": [("cup", "blue"), ("cup", "yellow")]},
-             {"target": ("car", "blue"),
-              "others": [("car", "yellow"), ("car", "green")]},
+             {"target": ("star", "yellow"),
+              "others": [("star", "green"), ("star", "blue")]},
+             {"target": ("plane", "green"),
+              "others": [("plane", "blue"), ("plane", "yellow")]},
+             {"target": ("kite", "blue"),
+              "others": [("kite", "yellow"), ("kite", "green")]},
          ],
          "text": "Предметы поехали! Поймай тот, цвет которого я назову.",
          "tone": "азартно"},
         {"t": "truefalse", "say": "color",
          "rounds": [
-             {"thing": ("flower", "green"), "claim": ("flower", "green")},
-             {"thing": ("fish", "blue"), "claim": ("fish", "yellow")},
-             {"thing": ("cup", "yellow"), "claim": ("cup", "yellow")},
-             {"thing": ("ball", "green"), "claim": ("ball", "blue")},
+             {"thing": ("umbrella", "green"), "claim": ("umbrella", "green")},
+             {"thing": ("bird", "blue"), "claim": ("bird", "yellow")},
+             {"thing": ("star", "yellow"), "claim": ("star", "yellow")},
+             {"thing": ("plane", "green"), "claim": ("plane", "blue")},
          ],
          "text": "Я буду называть цвет. Угадала — палец вверх, "
                  "не угадала — палец вниз.",
