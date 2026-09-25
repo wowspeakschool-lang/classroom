@@ -9,6 +9,13 @@ from PIL import Image, ImageChops
 
 S_MIN, V_MIN, SPREAD = 38, 30, 30   # spread — полуширина тона в шкале 0..255
 
+# Господствующий тон ищем по уверенно цветным пикселям (S_MIN), а красим и
+# бледные тоже (S_PALE). Блик на лепестке — тот же розовый, но выцветший:
+# при пороге 38 он оставался розовым, и на зелёном цветке по лепесткам шли
+# розовые полосы. Совсем бесцветное (S < S_PALE) не трогаем: у ботинок от
+# этого позеленела бы белая подошва.
+S_PALE = 12
+
 
 def dominant_hue(im):
     h, s, v = im.convert("HSV").split()
@@ -28,7 +35,17 @@ def dominant_hue(im):
     return best
 
 
-def recolor(im, target_hue_deg, src_hue=None):
+def recolor(im, target_hue_deg, src_hue=None, whole=False, sat=1.0):
+    """whole=True — красить весь предмет, не только господствующий тон.
+
+    Нужно там, где предмет одноцветный по замыслу, а генератор развёл в нём
+    два-три тона: у цветка стебель попадал в полосу лишь частично, и на синем
+    цветке он выходил в полоску — где синий, где зелёный.
+
+    sat — множитель насыщенности для перекрашенного. Цветок в исходнике
+    пастельный (медиана 122 против 200 у шарика и кружки), и рядом с ними
+    его зелёный читался другим цветом. На уроке цветов это путает.
+    """
     im = im.convert("RGBA")
     alpha = im.getchannel("A")
     hsv = im.convert("RGB").convert("HSV")
@@ -38,11 +55,17 @@ def recolor(im, target_hue_deg, src_hue=None):
     # маска: тон рядом с господствующим, достаточно цветной и не чёрный
     shifted = h.point(lambda p: (p - src + 128) % 256)          # пик в центр
     near = shifted.point(lambda p: 255 if abs(p - 128) <= SPREAD else 0)
-    mask = ImageChops.multiply(near, s.point(lambda p: 255 if p >= S_MIN else 0))
+    if whole:
+        near = Image.new("L", im.size, 255)
+    mask = ImageChops.multiply(near, s.point(lambda p: 255 if p >= S_PALE else 0))
     mask = ImageChops.multiply(mask, v.point(lambda p: 255 if p >= V_MIN else 0))
 
     tgt = int(round(target_hue_deg / 360 * 256)) % 256
     new_h = Image.composite(Image.new("L", im.size, tgt), h, mask)
-    out = Image.merge("HSV", (new_h, s, v)).convert("RGB").convert("RGBA")
+    new_s = s
+    if sat != 1.0:
+        up = s.point(lambda p: min(255, int(p * sat)))
+        new_s = Image.composite(up, s, mask)
+    out = Image.merge("HSV", (new_h, new_s, v)).convert("RGB").convert("RGBA")
     out.putalpha(alpha)
     return out

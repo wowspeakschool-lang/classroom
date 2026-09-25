@@ -99,7 +99,8 @@ L1 = {
         {"t": "sort", "colors": ["green", "blue"],
          "rounds": [("cup", "green"), ("fish", "blue"), ("flower", "blue"),
                     ("ball", "green")],
-         "text": "Разложи по корзинам. Нажми на предмет — услышишь его цвет.",
+         "text": "Разложим всё по корзинам. Нажми на корзинку нужного цвета, "
+                 "а нажмёшь на предмет — услышишь его цвет.",
          "tone": "деловито, спокойно"},
 
         {"t": "word", "say": "color", "thing": ("cup", "yellow"),
@@ -113,7 +114,7 @@ L1 = {
         {"t": "sort", "token": True, "colors": COLORS,
          "rounds": [("car", "yellow"), ("ball", "blue"), ("flower", "green"),
                     ("fish", "yellow"), ("cup", "blue")],
-         "text": "А теперь корзины три. Разложи всё по цветам.",
+         "text": "А теперь корзины три. Снова нажимай на корзинку нужного цвета.",
          "tone": "деловито"},
         {"t": "order", "token": True,
          "rounds": [["green", "blue"], ["yellow", "green"],

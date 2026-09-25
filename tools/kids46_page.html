@@ -83,6 +83,12 @@ img{-webkit-user-drag:none}
 .content.withwho .picarea.who{flex:0 1 22%}
 .content.withwho .target{flex:0 0 32%}
 .picarea.small img{height:auto;max-height:100%;width:auto;max-width:34%}
+/* Предмет для корзин должен быть заметно меньше самих корзин, иначе
+   непонятно, что во что кладут. */
+.picarea.sortitem{flex:1 1 0}
+.picarea.sortitem img{height:auto;max-height:58%;width:auto;max-width:20%;
+  object-fit:contain}
+.picarea.sortitem img.gone{opacity:0;transform:scale(.3)}
 .picarea.items{gap:4vw}
 .picarea.items img{height:auto;max-height:100%;width:auto;max-width:24%}
 .below{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:1vh}
@@ -130,7 +136,7 @@ img{-webkit-user-drag:none}
 @keyframes floaty{from{transform:translateY(-6%)}to{transform:translateY(6%)}}
 
 /* ───────── корзины ───────── */
-.baskets{flex:0 0 32%;display:flex;gap:3vw;align-items:flex-end;justify-content:center;
+.baskets{flex:0 0 46%;display:flex;gap:3vw;align-items:flex-end;justify-content:center;
   width:100%;min-height:0}
 .baskets button{border:0;background:none;padding:0;cursor:pointer;height:100%;
   flex:1 1 0;min-width:0;transition:transform .15s}
@@ -138,6 +144,7 @@ img{-webkit-user-drag:none}
 .baskets img{height:100%;width:100%;object-fit:contain;
   filter:drop-shadow(0 6px 12px rgba(40,60,90,.25))}
 .baskets button.wrong{animation:shake .4s}
+.baskets button.hit img{animation:pop .5s}
 
 /* ───────── кляксы ───────── */
 .blobs{flex:1 1 0;min-height:0;display:flex;gap:4vw;align-items:center;justify-content:center;
@@ -697,10 +704,11 @@ RENDER.sort = function(s){
   afterIntro(s, () => {
     const r = s.rounds[round];
     const top = document.createElement("div");
-    top.className = "picarea small";
+    top.className = "picarea sortitem";
     const im = document.createElement("img");
     im.src = pic(r.thing);
     im.style.cursor = "pointer";
+    im.style.transition = "opacity .3s, transform .3s";
     im.onclick = () => en(r.voice);
     top.appendChild(im);
     content.appendChild(top);
@@ -713,9 +721,9 @@ RENDER.sort = function(s){
       b.innerHTML = '<img src="' + IMG["basket_" + c] + '" alt="">';
       b.onclick = async () => {
         if (c !== r.thing[1]){ await wrong(b); return; }
-        im.style.transition = "transform .45s, opacity .45s";
-        im.style.transform = "scale(.2) translateY(60%)";
-        im.style.opacity = "0";
+        flyTo(im, b);
+        b.classList.remove("hit"); void b.offsetWidth; b.classList.add("hit");
+        await wait(500);
         await rightStep(() => nextRound(s));
       };
       row.appendChild(b);
@@ -749,9 +757,13 @@ RENDER.order = function(s){
 };
 
 /* ───────── чемодан, магазин, стирка ───────── */
+/* Летит именно картинка: у карточки вокруг неё есть поля, и полёт,
+   посчитанный по кнопке, стартовал мимо предмета. Прятать можно и саму
+   картинку (корзины), и карточку целиком (чемодан). */
 function flyTo(card, target){
-  const a = card.getBoundingClientRect(), b = target.getBoundingClientRect();
-  const im = card.querySelector("img").cloneNode();
+  const src = card.tagName === "IMG" ? card : card.querySelector("img");
+  const a = src.getBoundingClientRect(), b = target.getBoundingClientRect();
+  const im = src.cloneNode();
   im.className = "flyer";
   im.style.left = a.left + "px"; im.style.top = a.top + "px";
   im.style.width = a.width + "px"; im.style.height = a.height + "px";

@@ -204,6 +204,13 @@ PAINTED = (
      ("blob", "paint-blob.webp", 480)]
 )
 
+# Что перекрашивать не по господствующему тону. У цветка три собственных
+# цвета — розовые лепестки, жёлтая середина, зелёный стебель; полоса тона
+# захватывала середину и половину стебля, и синий цветок выходил в полоску.
+# Красим его целиком, а насыщенность поднимаем: в исходнике он пастельный,
+# и рядом с шариком его зелёный читался другим цветом.
+PAINT_OPTS = {"flower": {"whole": True, "sat": 1.65}}
+
 
 CACHE = ROOT / "tools" / ".kids46_images.json"
 
@@ -211,7 +218,8 @@ CACHE = ROOT / "tools" / ".kids46_images.json"
 def build_images():
     sig = {"base": {k: [v[0], v[1], v[2], (ART / v[0]).stat().st_mtime]
                     for k, v in BASE.items()},
-           "painted": [[n, f, w, (ART / f).stat().st_mtime] for n, f, w in PAINTED],
+           "painted": [[n, f, w, (ART / f).stat().st_mtime, PAINT_OPTS.get(n)]
+                       for n, f, w in PAINTED],
            "hue": COLOR_HUE}
     if CACHE.exists():
         old = json.loads(CACHE.read_text())
@@ -240,7 +248,8 @@ def build_images():
             src = src.resize((int(width * 1.6),
                               round(src.height * width * 1.6 / src.width)), Image.LANCZOS)
         for color, hue in COLOR_HUE.items():
-            images[f"{name}_{color}"] = encode(recolor(src, hue), width)
+            opts = PAINT_OPTS.get(name, {})
+            images[f"{name}_{color}"] = encode(recolor(src, hue, **opts), width)
     CACHE.write_text(json.dumps({"sig": sig, "images": images}))
     return images
 
