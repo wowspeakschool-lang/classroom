@@ -57,7 +57,14 @@ img{-webkit-user-drag:none}
 .topbar{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:8px 14px}
 .topbar .home{border:0;background:rgba(255,255,255,.75);border-radius:999px;
   width:44px;height:44px;font-size:22px;cursor:pointer;box-shadow:var(--shadow)}
-.topbar .tokens{display:flex;gap:5px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+/* Сколько шагов внутри одного задания уже сделано. Без этого ребёнок не
+   понимал, что начался следующий раунд: картинка сменилась, а игра та же. */
+.topbar .roundbar{display:flex;gap:7px;margin:0 auto;align-items:center}
+.topbar .roundbar i{width:16px;height:16px;border-radius:50%;
+  background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 2px rgba(120,110,140,.3);
+  transition:background .3s, transform .3s}
+.topbar .roundbar i.on{background:var(--good);box-shadow:none;transform:scale(1.15)}
+.topbar .tokens{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
 .topbar .tokens img{width:30px;height:30px;object-fit:contain}
 .topbar .tokens .ghost{width:30px;height:30px;border-radius:50%;
   background:rgba(255,255,255,.45);border:2px dashed rgba(120,110,140,.35)}
@@ -132,6 +139,22 @@ img{-webkit-user-drag:none}
 .card.right{border-color:var(--good);animation:pop .4s}
 .card.wrong{border-color:var(--bad);animation:shake .4s}
 .card.gone{opacity:0;transform:scale(.3);pointer-events:none}
+
+/* ───────── «получилось!» между раундами ───────── */
+.cheer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  pointer-events:none;z-index:40}
+.cheer span{font-size:min(22vh,150px);line-height:1;
+  filter:drop-shadow(0 8px 20px rgba(40,60,90,.35));animation:cheerin .9s ease-out forwards}
+@keyframes cheerin{
+  0%{transform:scale(.3) rotate(-12deg);opacity:0}
+  35%{transform:scale(1.15) rotate(4deg);opacity:1}
+  55%{transform:scale(1) rotate(0)}
+  80%{opacity:1}
+  100%{transform:scale(1.05);opacity:0}}
+/* Новый раунд проявляется, а не подменяется мгновенно. Только прозрачность:
+   от масштаба поехали бы замеры карточек в fit(). */
+.content.fresh, .sortitem img.fresh{animation:freshin .32s ease-out}
+@keyframes freshin{from{opacity:0}to{opacity:1}}
 @keyframes pop{50%{transform:scale(1.08)}}
 @keyframes shake{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
 
@@ -270,6 +293,7 @@ img{-webkit-user-drag:none}
   <div id="lesson">
     <div class="topbar">
       <button class="home" title="На карту">🗺️</button>
+      <div class="roundbar"></div>
       <div class="tokens"></div>
     </div>
     <div class="stage">
@@ -475,6 +499,9 @@ function render(){
   if (s.t === "token") earned = s.n;
   drawTokens();
   updateNum();
+  drawRounds();
+  content.classList.remove("fresh"); void content.offsetWidth;
+  content.classList.add("fresh");
   RENDER[s.t](s);
   fit();
   if (s._run) s._run();
@@ -586,9 +613,38 @@ async function wrong(el){
   setTimeout(() => el.classList.remove("wrong"), 500);
   await retry();
 }
+/* Знак «получилось». Раньше правильный ответ отмечался только звуком, и
+   между раундами одной игры ребёнок не понимал, засчитали ему или нет. */
+const CHEER = ["\u2705", "\u2b50", "\ud83d\udc4d", "\ud83c\udf89", "\ud83c\udf1f"];
+function cheer(){
+  const box = document.createElement("div");
+  box.className = "cheer";
+  box.innerHTML = "<span>" + choice(CHEER) + "</span>";
+  lessonEl.appendChild(box);
+  setTimeout(() => box.remove(), 950);
+}
+function drawRounds(){
+  const bar = lessonEl.querySelector(".roundbar");
+  const s = screen();
+  const n = s && s.rounds && s.rounds.length > 1 ? s.rounds.length
+          : (s && s.steps && s.steps.length > 1 ? s.steps.length : 0);
+  bar.innerHTML = "";
+  for (let i = 0; i < n; i++){
+    const d = document.createElement("i");
+    if (i < round) d.className = "on";
+    bar.appendChild(d);
+  }
+}
+/* Знак и похвала занимают одинаковое время независимо от того, записан
+   голос или нет: без записи реплика молчит и возвращается мгновенно, и
+   следующий раунд выскакивал ребёнку в лицо. */
+async function cheerStep(){
+  cheer();
+  await Promise.all([praise(), wait(700)]);
+}
 async function rightStep(next){
   blip("SFX-OK");
-  await praise();
+  await cheerStep();
   next();
 }
 function nextRound(s){
@@ -694,7 +750,7 @@ RENDER.name = function(s){
       b.disabled = true;
       blip("SFX-OK");
       await en(r.voice);          // эталон: ребёнок сравнивает себя с ним
-      await praise();
+      await cheerStep();
       nextRound(s);
     };
     below.appendChild(b);
@@ -752,7 +808,7 @@ RENDER.findall = function(s){
         if (t[1] !== s.color){ await wrong(c); return; }
         c.classList.add("gone"); blip("SFX-OK");
         left--;
-        if (left === 0){ await praise(); next(); }
+        if (left === 0){ await cheerStep(); next(); }
       };
       field.appendChild(c);
     });
@@ -785,11 +841,12 @@ RENDER.sort = function(s){
       blip("SFX-OK");
       flyTo(im, b);
       b.classList.remove("hit"); void b.offsetWidth; b.classList.add("hit");
-      await wait(460);
+      await wait(420);          // предмет долетает до корзины
+      await cheerStep();
       round++;
       if (round >= s.rounds.length){ round = 0; next(); return; }
       showItem();
-      queue([() => praise(), () => en(s.rounds[round].voice)]);
+      queue([() => en(s.rounds[round].voice)]);
     };
     row.appendChild(b);
   });
@@ -800,7 +857,9 @@ RENDER.sort = function(s){
     im.src = pic(r.thing);
     im.classList.remove("gone");
     im.onclick = () => en(r.voice);
+    im.classList.remove("fresh"); void im.offsetWidth; im.classList.add("fresh");
     updateNum();
+    drawRounds();
   }
   showItem();
   afterIntro(s, null);
@@ -822,7 +881,7 @@ RENDER.order = function(s){
         b.classList.remove("lit"); void b.offsetWidth; b.classList.add("lit");
         blip("SFX-OK");
         at++;
-        if (at >= r.seq.length){ await praise(); nextRound(s); }
+        if (at >= r.seq.length){ await cheerStep(); nextRound(s); }
       };
       row.appendChild(b);
     });
@@ -982,7 +1041,7 @@ RENDER.fingers = function(s){
   said.onclick = async () => {
     stopSound();
     if (isSwap){ blip("SFX-OK"); await en(line); }
-    await praise();
+    await cheerStep();
     round++;
     const total = isSwap ? s.rounds.length : s.steps.length;
     if (round >= total){ round = 0; next(); } else { render(); }
