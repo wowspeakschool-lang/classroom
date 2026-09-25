@@ -95,15 +95,28 @@ img{-webkit-user-drag:none}
 .wordline{font-size:clamp(22px,4vw,44px);font-weight:900;letter-spacing:.5px;text-align:center}
 
 .stage.solo{justify-content:center}
-.stage.solo .guide{flex:0 0 auto;width:min(46%,400px);max-width:none}
-.stage.solo .guide img{max-width:none;width:100%}
-.stage.solo .bubble{font-size:clamp(15px,2.1vw,23px)}
+/* Высота обязательна: иначе крупный светлячок выдавливает пузырь за низ
+   сцены, и у первой реплики обрезалось последнее слово. */
+.stage.solo .guide{flex:0 0 auto;width:min(46%,400px);max-width:none;
+  height:100%;justify-content:center;min-height:0}
+.stage.solo .guide img{flex:0 1 auto;min-height:0;width:auto;height:auto;
+  max-width:100%;max-height:72%;object-fit:contain}
+.stage.solo .bubble{flex:0 0 auto;max-width:100%;font-size:clamp(15px,2.1vw,23px)}
 .stage.solo .content{display:none}
 
 .mapview{flex:1 1 0;min-height:0;width:100%;position:relative;border-radius:24px;
   background-position:center;background-size:cover;box-shadow:var(--shadow);overflow:hidden}
 .mapview>img{position:absolute;transform:translate(-50%,-50%);width:26%;
   filter:drop-shadow(0 8px 14px rgba(40,60,90,.25))}
+/* Вступление: сначала все острова тусклые — дороги ещё нет; потом первый
+   оживает и зовёт нажать на себя. */
+.mapview>img.dim{filter:grayscale(.9) brightness(.82) contrast(.9)
+  drop-shadow(0 8px 14px rgba(40,60,90,.25));opacity:.7}
+.mapview>img.pick{cursor:pointer;animation:beat 1.6s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:translate(-50%,-50%) scale(1)}
+  50%{transform:translate(-50%,-50%) scale(1.08)}}
+.mapview>img.nudge{animation:nudge .4s}
+@keyframes nudge{25%{transform:translate(-58%,-50%)}75%{transform:translate(-42%,-50%)}}
 
 /* ───────── карточки ───────── */
 .cards{--n:2;--gap:3vw;gap:var(--gap)}
@@ -417,8 +430,16 @@ let L = 0, S = 0, round = 0, earned = 0, token = 0;
 
 function startLesson(i){
   L = i; S = 0; round = 0; earned = 0;
+  // Пока ни один урок не пройден, карты ещё нет — и уводить на неё некуда.
+  lessonEl.querySelector(".home").hidden = progress().done.length === 0;
   mapEl.classList.remove("on"); lessonEl.classList.add("on");
   render();
+}
+
+/* Первый запуск начинается не с карты, а сразу со светлячка: острова
+   ребёнок увидит, когда пройдёт первый урок и ему будет что выбирать. */
+function boot(){
+  if (progress().done.length === 0) startLesson(0); else showMap();
 }
 const lesson = () => LESSONS[L];
 const screen = () => lesson().screens[S];
@@ -591,6 +612,35 @@ RENDER.token = function(s){
     content.appendChild(view);
   }
   showNextLater(2200);
+  ru(s.ru);
+};
+
+/* ───────── дорога: карта до первого урока ───────── */
+RENDER.road = function(s){
+  const view = document.createElement("div");
+  view.className = "mapview";
+  view.style.backgroundImage = "url(" + IMG.map_bg + ")";
+  const isles = LESSONS.map((les, i) => {
+    const im = document.createElement("img");
+    im.src = IMG[les.island];
+    im.style.left = ISLAND_POS[i][0] + "%"; im.style.top = ISLAND_POS[i][1] + "%";
+    if (!(s.open && i === 0)) im.classList.add("dim");
+    view.appendChild(im);
+    return im;
+  });
+  content.appendChild(view);
+  if (s.open){
+    isles[0].classList.add("pick");
+    isles[0].onclick = e => { e.stopPropagation(); stopSound(); next(); };
+    // мимо острова — не «ничего не произошло», а подсказка, куда нажать
+    view.onclick = () => {
+      blip("SFX-NO");
+      isles[0].classList.remove("nudge"); void isles[0].offsetWidth;
+      isles[0].classList.add("nudge");
+    };
+  } else {
+    showNextLater(2400);
+  }
   ru(s.ru);
 };
 
@@ -1014,11 +1064,11 @@ if (DEV_PANEL && !/[?&]dev=0/.test(location.search)){
     const act = e.target.dataset.act;
     if (act === "next") next();
     if (act === "prev") prev();
-    if (act === "reset"){ try{ localStorage.removeItem(STORE); }catch(e){} showMap(); }
+    if (act === "reset"){ try{ localStorage.removeItem(STORE); }catch(e){} boot(); }
   };
 }
 
-showMap();
+boot();
 </script>
 </body>
 </html>

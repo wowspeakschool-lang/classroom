@@ -559,7 +559,7 @@ def main():
 
     OUT.write_text(page, encoding="utf-8")
     tasks = sum(1 for l in LS.LESSONS for s in l["screens"]
-                if s["t"] not in ("story", "token", "word"))
+                if s["t"] not in ("story", "road", "token", "word"))
     print(f"  экранов {sum(len(l['screens']) for l in LS.LESSONS)}, "
           f"заданий {tasks}, наград {sum(l['tokens'] for l in LS.LESSONS)}")
     print(f"\n{OUT.name}: {len(page.encode()) / 1024 / 1024:.2f} МБ")
