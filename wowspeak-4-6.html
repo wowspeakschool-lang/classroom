@@ -174,9 +174,11 @@ img{-webkit-user-drag:none}
    и выглядел вчетверо меньше карточек. */
 .target{flex:0 0 46%;min-height:0;width:100%;
   display:flex;align-items:center;justify-content:center}
+.target{gap:2vw}
+.target img.who{height:76%;max-width:20%;align-self:flex-end}
 .target img{height:100%;max-width:55%;object-fit:contain;
   filter:drop-shadow(0 8px 16px rgba(40,60,90,.25))}
-.target.hit img{animation:pop .5s}
+.target.hit img:not(.who){animation:pop .5s}
 
 /* ───────── лента (поймай вещь) ───────── */
 .belt{flex:1 1 0;min-height:0;width:100%;position:relative;overflow:hidden}
@@ -462,7 +464,7 @@ function render(){
   btnNext.hidden = true;
   btnNext.textContent = s.btn || "Дальше ▶";
   lessonEl.querySelector(".stage").classList.toggle("solo", !!s.solo);
-  content.classList.toggle("withwho", !!s.who);
+  content.classList.toggle("withwho", !!(s.who && s.t !== "collect"));
   if (s.t === "token") earned = s.n;
   drawTokens();
   const num = document.querySelector("#wsdev .num");
@@ -832,15 +834,17 @@ function flyTo(card, target){
 RENDER.collect = function(s){
   afterIntro(s, () => {
     const r = s.rounds[round];
-    if (s.who) content.appendChild(picArea([IMG[s.who]], "who"));
     const tgt = document.createElement("div");
     tgt.className = "target";
-    tgt.innerHTML = '<img src="' + IMG[s.target] + '" alt="">';
+    // Герой стоит рядом с целью, а не отдельной строчкой сверху: там ему
+    // доставалось 22% высоты, и лисёнок выходил вдвое меньше карточек.
+    if (s.who) tgt.innerHTML = '<img class="who" src="' + IMG[s.who] + '" alt="">';
+    tgt.innerHTML += '<img src="' + IMG[s.target] + '" alt="">';
 
     const opts = shuffle([r.target].concat(r.others)).map(t => ({src: pic(t), t}));
     const row = cardsRow(opts, async (c, k) => {
       if (k.t !== r.target){ await wrong(c); return; }
-      flyTo(c, tgt);
+      flyTo(c, tgt.querySelector("img:not(.who)"));
       tgt.classList.remove("hit"); void tgt.offsetWidth; tgt.classList.add("hit");
       await wait(500);
       await rightStep(() => nextRound(s));
