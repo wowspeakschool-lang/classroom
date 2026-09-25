@@ -1046,9 +1046,62 @@ function moveArrow(arrow, count, i){
   arrow.style.top = (t[1] * 100) + "%";
 }
 
+/* Раунд, где ребёнок говорит фразу сам: рука стоит молча и показывает,
+   сколько в ней слов, стрелка никуда не идёт — она бы сбивала. Правильная
+   фраза звучит только по кнопке «проверить себя». */
+function fingersSolo(s){
+  const r = s.rounds[round];
+  const n = r.words.length;
+  const ui = handBox(n, r.pic);
+  ui.arrow.remove();
+
+  const below = document.createElement("div");
+  below.className = "below";
+  const text = document.createElement("div");
+  text.className = "wordline";
+  text.textContent = r.combo[1];
+  below.appendChild(text);
+  const turn = document.createElement("div");
+  turn.className = "turn";
+  turn.textContent = "Теперь скажи всё предложение целиком";
+  turn.hidden = true;
+  below.appendChild(turn);
+  const check = document.createElement("button");
+  check.className = "btn big";
+  check.textContent = "🔊 Проверить себя";
+  check.hidden = true;
+  check.onclick = async () => {
+    check.disabled = true;
+    stopSound();
+    text.textContent = r.line[1];
+    await en(r.line);
+    await cheerStep();
+    nextRound(s);
+  };
+  below.appendChild(check);
+  content.appendChild(below);
+
+  s._run = async () => {
+    const mine = token;
+    turn.hidden = true; check.hidden = true; check.disabled = false;
+    text.textContent = r.combo[1];
+    await ru(s.ru);
+    if (mine !== token) return;
+    await wait(AUDIO[s.ru] ? 250 : readPause(s.text));
+    if (mine !== token) return;
+    await en(r.combo);
+    if (mine !== token) return;
+    await wait(300);
+    if (mine !== token) return;
+    turn.hidden = false;
+    check.hidden = false;
+  };
+}
+
 RENDER.fingers = function(s){
   const isSwap = s.mode === "swap";
-  const step = isSwap ? s.rounds[round] : s.steps[round];
+  if (isSwap && round > 0){ fingersSolo(s); return; }
+  const step = isSwap ? null : s.steps[round];
   const words = isSwap ? s.rounds[round].words : s.words;
   const from = isSwap ? 0 : step[0];
   const to = isSwap ? words.length - 1 : step[1];
@@ -1065,9 +1118,16 @@ RENDER.fingers = function(s){
   below.appendChild(text);
   const turn = document.createElement("div");
   turn.className = "turn";
-  turn.textContent = "Теперь ты! Говори и следи за пальчиками";
+  turn.textContent = "Теперь ты! Покажи ладошку, говори и следи за пальчиками";
   turn.hidden = true;
   below.appendChild(turn);
+  /* Стрелка на очереди ребёнка трогается не сама, а по кнопке: иначе она
+     уезжала, пока он ещё разворачивал ладошку. */
+  const ready = document.createElement("button");
+  ready.className = "btn big";
+  ready.textContent = "✋ Я готов";
+  ready.hidden = true;
+  below.appendChild(ready);
   const said = document.createElement("button");
   said.className = "btn big";
   said.textContent = "🗣 Я сказал!";
@@ -1087,16 +1147,14 @@ RENDER.fingers = function(s){
      сразу, и к третьему пальцу говорить было уже нечего. */
   s._run = async () => {
     const mine = token;
-    turn.hidden = true; said.hidden = true;
+    turn.hidden = true; said.hidden = true; ready.hidden = true;
     await ru(s.ru);
     if (mine !== token) return;
     await wait(AUDIO[s.ru] ? 250 : readPause(s.text));
     if (mine !== token) return;
-    if (isSwap && step.cue){
-      await en(step.cue);
+    if (isSwap){
+      await en(s.rounds[round].combo);
       if (mine !== token) return;
-      if (ui.thing){ ui.thing.classList.remove("swap"); void ui.thing.offsetWidth;
-                     ui.thing.classList.add("swap"); }
       await wait(400);
     }
     for (let i = 0; i < count; i++){
@@ -1108,15 +1166,19 @@ RENDER.fingers = function(s){
     ui.arrow.classList.remove("on");
     if (mine !== token) return;
     turn.hidden = false;
+    ready.hidden = false;
     await ru(ASK);
-    if (mine !== token) return;
-    for (let i = 0; i < count; i++){
-      if (mine !== token) return;
-      moveArrow(ui.arrow, count, i);
-      await wait(HOP + 350);
-    }
-    ui.arrow.classList.remove("on");
-    said.hidden = false;
+    ready.onclick = async () => {
+      ready.hidden = true;
+      const mine2 = token;
+      for (let i = 0; i < count; i++){
+        if (mine2 !== token) return;
+        moveArrow(ui.arrow, count, i);
+        await wait(HOP + 350);
+      }
+      ui.arrow.classList.remove("on");
+      said.hidden = false;
+    };
   };
 };
 
@@ -1140,9 +1202,10 @@ function finish(){
     // Дорога пройдена — возвращать на карту некуда, зовём на урок.
     panel.innerHTML = "<h2>🎉 Ты дошёл до праздника!</h2>" +
       "<p>Ты выучил три цвета, три вещи и умеешь рассказывать о себе " +
-      "по-английски. А кто в яйце — узнаешь на первом уроке с преподавателем.</p>" +
+      "по-английски. А кто вылупится из яйца — узнаем в следующем приключении. " +
+      "Приходи, я буду ждать!</p>" +
       '<div class="row">' +
-        '<button class="btn" data-act="signup">Записаться на первый урок 🐉</button>' +
+        '<button class="btn" data-act="signup">Хочу в следующее приключение 🐉</button>' +
         '<button class="btn ghost" data-act="again">Пройти ещё раз</button>' +
       "</div>";
     const sg = panel.querySelector('[data-act="signup"]');

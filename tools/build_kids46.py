@@ -52,21 +52,44 @@ HOLES = {
     "suitcase": 0.20,   # щель между крышкой и дном
 }
 
-# кончики пальцев в долях от рамки фигуры, слева направо.
-# Автоматически они не ловятся: большой палец торчит вбок и по верхнему
-# контуру не находится. Снято по сетке руками — картинки не меняются.
-FINGER_TIPS = {
-    5: [(0.07, 0.46), (0.30, 0.11), (0.47, 0.05), (0.645, 0.10), (0.86, 0.21)],
-    4: [(0.17, 0.10), (0.39, 0.05), (0.62, 0.10), (0.86, 0.24)],
-    3: [(0.23, 0.10), (0.51, 0.05), (0.79, 0.10)],
-    2: [(0.29, 0.07), (0.70, 0.07)],
-    1: [(0.23, 0.05)],
-}
+def finger_tips(im, want):
+    """Кончики пальцев в долях от рамки фигуры, слева направо.
+
+    Считаются по картинке, а не выписываются руками: иначе перерисованная
+    рука молча расходится с координатами и стрелка метит мимо. Берём верхний
+    контур и ищем его локальные минимумы — каждый торчащий палец даёт один.
+    Большой палец на раскрытой ладони тоже находится: он ниже остальных, но
+    минимум у него свой.
+    """
+    w, h = im.size
+    a = im.getchannel("A").load()
+    top = []
+    for x in range(w):
+        y = 0
+        while y < h and a[x, y] < 120:
+            y += 1
+        top.append(y if y < h else h)
+    sm = [min(top[max(0, i - 3):i + 4]) for i in range(w)]   # сгладить зазубрины
+    sep = max(2, w // 10)
+    mins = []
+    for x in range(1, w - 1):
+        if sm[x] == min(sm[max(0, x - sep):x + sep + 1]) and sm[x] < h * 0.8:
+            if not mins or x - mins[-1][0] > sep:
+                mins.append((x, sm[x]))
+            elif sm[x] < mins[-1][1]:
+                mins[-1] = (x, sm[x])
+    mins.sort(key=lambda p: p[1])
+    if len(mins) < want:
+        sys.exit(f"на руке нашлось {len(mins)} пальцев вместо {want}")
+    tips = sorted(mins[:want])
+    # чуть ниже самой макушки: стрелка должна указывать на подушечку
+    return [[round(x / w, 4), round((y + h * 0.02) / h, 4)] for x, y in tips]
 
 
 # ──────────────────────────────────────────────────────────── картинки ──
 
-def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=4, holes=None):
+def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=9, shadow_w=10,
+              holes=None):
     """Убирает фон генератора: светлый И бесцветный.
 
     Одной яркости мало. Фон строго серый (max−min = 0), а белые места самих
@@ -94,9 +117,13 @@ def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=4, holes=None):
             return True
         # Вторая полоса — запечённая тень под предметом. Она серая насквозь
         # (254 → 248 → 199 → 181) и на цветном фоне читается белым пятном.
-        # Порог по яркости мягче, зато серость строгая: у одежды подошва
-        # и строчка белые, но чуть тёплые, и под это правило не попадают.
-        return lo >= shadow and hi - lo <= shadow_n
+        # Порог по яркости мягче, зато серость строгая.
+        #
+        # Одной «серости» мало: у ботинок тень (193,188,192) и белая подошва
+        # (230,225,209) по разбросу почти одинаковы. Различает их тон —
+        # тень холодная, синего в ней не меньше красного, а подошва тёплая,
+        # кремовая. Отсюда второе условие: красный и синий почти равны.
+        return lo >= shadow and hi - lo <= shadow_n and abs(r - b) <= shadow_w
 
     seen = bytearray(w * h)
 
@@ -127,7 +154,52 @@ def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=4, holes=None):
                     for x, y in blob:
                         r, g, b, a = px[x, y]
                         px[x, y] = (r, g, b, 0)
+    soften(im)
     return feather(im)
+
+
+def soften(im, lo=150, spread=14, warm=12, clear=245, dark=185):
+    """Гасит остаток тени вместо того, чтобы его вырезать.
+
+    У ботинок и джинсов из набора 7–9 тень запечена так, что по цвету
+    совпадает с самой вещью: тень (218,220,224) и белая подошва (230,225,209)
+    различаются только тёплым оттенком, и порог, который убирает одну,
+    начинает есть другую. Поэтому не режем, а делаем прозрачнее: чем светлее
+    пиксель, тем меньше от него остаётся. Заливка идёт только по «теневым»
+    пикселям и об вещь останавливается сама — внутрь не уходит.
+    """
+    w, h = im.size
+    px = im.load()
+
+    def shady(x, y):
+        r, g, b, a = px[x, y]
+        if a == 0:
+            return False
+        mn, mx = min(r, g, b), max(r, g, b)
+        return mn >= lo and mx - mn <= spread and abs(r - b) <= warm
+
+    seen = bytearray(w * h)
+    stack = []
+    for x in range(w):
+        for y in (0, h - 1):
+            stack.append((x, y))
+    for y in range(h):
+        for x in (0, w - 1):
+            stack.append((x, y))
+    # стартуем от уже прозрачных краёв: тень к ним примыкает
+    while stack:
+        x, y = stack.pop()
+        if x < 0 or y < 0 or x >= w or y >= h or seen[y * w + x]:
+            continue
+        r, g, b, a = px[x, y]
+        if a != 0 and not shady(x, y):
+            continue
+        seen[y * w + x] = 1
+        if a != 0:
+            lum = (r + g + b) / 3
+            k = 0.0 if lum >= clear else min(1.0, (clear - lum) / (clear - dark))
+            px[x, y] = (r, g, b, int(a * k))
+        stack.extend(((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)))
 
 
 def feather(im, passes=3, light=214, full=250):
@@ -223,11 +295,11 @@ def build_images():
            "hue": COLOR_HUE}
     if CACHE.exists():
         old = json.loads(CACHE.read_text())
-        if old.get("sig") == sig:
+        if old.get("sig") == sig and "tips" in old:
             print("  картинки из кэша")
-            return old["images"]
+            return old["images"], old["tips"]
 
-    images = {}
+    images, tips = {}, {}
     for name, (f, width, cut) in BASE.items():
         im = Image.open(ART / f)
         images[name] = encode(cut_white(im, holes=HOLES.get(name)) if cut
@@ -241,6 +313,11 @@ def build_images():
     cave.alpha_composite(egg, (int(cave.width * 0.395), int(cave.height * 0.435)))
     images["cave_egg"] = encode(cave, 1000)
 
+    for n in range(1, 6):
+        hand = cut_white(Image.open(ART / BASE["hand%d" % n][0]))
+        hand = hand.crop(hand.getbbox())
+        tips[n] = finger_tips(hand, n)
+
     for name, f, width in PAINTED:
         src = cut_white(Image.open(ART / f), holes=HOLES.get(name))
         src = src.crop(src.getbbox())
@@ -250,8 +327,8 @@ def build_images():
         for color, hue in COLOR_HUE.items():
             opts = PAINT_OPTS.get(name, {})
             images[f"{name}_{color}"] = encode(recolor(src, hue, **opts), width)
-    CACHE.write_text(json.dumps({"sig": sig, "images": images}))
-    return images
+    CACHE.write_text(json.dumps({"sig": sig, "images": images, "tips": tips}))
+    return images, tips
 
 
 # ───────────────────────────────────── номера дорожек и файл озвучки ──
@@ -349,16 +426,17 @@ def prep_fingers(s, en, say_of):
     палец в палец.
     """
     if s["mode"] == "swap":
-        rounds, prev = [], None
+        # В каждом раунде сначала звучит сочетание («yellow jeans»), а фразу
+        # целиком ребёнок строит сам. Первый раунд — показательный: там фразу
+        # проговаривают по пальцам, дальше рука стоит молча как подсказка,
+        # сколько слов, и фраза звучит только по кнопке «проверить себя».
+        rounds = []
         for item, color in s["things"]:
-            cue = None
-            if prev is not None:
-                cue = en(color) if prev[1] != color else en(LS.ITEM_BARE[item])
             text = LS.sentence(item, color)
-            rounds.append({"pic": f"{item}_{color}", "cue": cue,
+            rounds.append({"pic": f"{item}_{color}",
+                           "combo": en(LS.combo(item, color)),
                            "words": [en(w) for w in text.split()],
                            "line": en(text)})
-            prev = (item, color)
         s["rounds"] = rounds
         s.pop("things")
         return
@@ -510,7 +588,7 @@ def main():
     write_voice_doc(script, en_tracks)
     print(f"  русских реплик: {len(script)}, английских: {len(en_tracks)}")
 
-    images = build_images()
+    images, tips = build_images()
     print(f"  картинок: {len(images)}")
 
     # каждая ссылка из уроков должна указывать на существующую картинку
@@ -555,7 +633,7 @@ def main():
                         ("__ASK__", ask), ("__FINALE__", finale),
                         ("__MAPSAY__", map_say),
                         ("__COLORS__", LS.COLORS),
-                        ("__FRIENDS__", LS.FRIENDS), ("__TIPS__", FINGER_TIPS)):
+                        ("__FRIENDS__", LS.FRIENDS), ("__TIPS__", tips)):
         page = page.replace(mark, json.dumps(value, ensure_ascii=False))
 
     if page.count("</script>") != 1:
