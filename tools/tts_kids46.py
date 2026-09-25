@@ -50,7 +50,9 @@ SLOW_EN = BASE_EN + "Speak noticeably slower than usual, stretching the word."
 
 def tracks():
     """Что нужно озвучить: (имя файла, текст, голос, указание интонации)."""
-    script, praise, retry, ask, en_list = build_script()
+    # Распаковываем последним элементом: в build_script со временем
+    # добавлялись новые группы реплик, и жёсткий разбор отставал.
+    *_, en_list = build_script()
     out = []
     for key, voice, text, tone, _where in script:
         out.append((key, text, VOICE[voice], BASE_RU + (tone or "")))

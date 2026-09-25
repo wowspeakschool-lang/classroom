@@ -43,9 +43,24 @@ img{-webkit-user-drag:none}
 @keyframes drop{0%{transform:translate(-50%,-160%) scale(1.5);opacity:0}
                 60%{transform:translate(-50%,-50%) scale(1.1);opacity:1}
                 100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
-#map .guide{position:absolute;left:50%;bottom:1%;transform:translateX(-50%);
-  width:13%;max-width:150px}
-#map .guide img{width:100%;display:block}
+/* Светлячок и его подсказка — одной строкой внизу: пузырь, поставленный
+   отдельно по центру, ложился прямо на светлячка. Без подсказки ребёнок
+   попадал на карту и просто смотрел на острова. */
+#map .mapguide{position:absolute;left:50%;bottom:2%;transform:translateX(-50%);
+  display:flex;align-items:flex-end;gap:12px;width:min(78%,760px);justify-content:center}
+#map .mapguide img{width:min(15vw,130px);flex:0 0 auto;display:block}
+#map .mapsay{flex:0 1 auto;margin-bottom:6px;
+  background:var(--card);border-radius:20px;padding:10px 16px;box-shadow:var(--shadow);
+  font-size:clamp(13px,1.8vw,20px);line-height:1.35;text-align:left}
+/* На низком экране подсказка ложилась на названия островов. */
+@media (max-height:470px){
+  #map .mapguide{bottom:1%;gap:8px;width:min(92%,760px)}
+  #map .mapguide img{width:min(11vw,84px)}
+  #map .mapsay{font-size:13px;padding:6px 12px;border-radius:16px;margin-bottom:2px}
+  .island .name{font-size:clamp(11px,2vw,16px)}
+}
+.island.beckon{animation:beat 1.6s ease-in-out infinite}
+.island.beckon .name{text-shadow:0 2px 10px rgba(255,180,60,.95),0 2px 6px rgba(40,60,90,.6)}
 #map .maptitle{position:absolute;left:50%;top:3%;transform:translateX(-50%);
   font-size:clamp(16px,3vw,30px);font-weight:900;color:#fff;
   text-shadow:0 3px 10px rgba(40,60,90,.55);white-space:nowrap}
@@ -322,6 +337,7 @@ const PRAISE = ["RU-62", "RU-63", "RU-64", "RU-65", "RU-66"];
 const RETRY = ["RU-67", "RU-68"];
 const ASK = "RU-69";
 const FINALE = "RU-70";
+const MAPSAY = [{"ru": "RU-71", "text": "Дорожка готова! Нажми на Облачный Остров — полетели дальше."}, {"ru": "RU-72", "text": "Мостик готов! Нажми на Драконий Остров — там нас ждёт праздник."}, {"ru": "RU-73", "text": "Ты прошёл всю дорогу до праздника! Можно заглянуть на любой остров ещё раз."}, {"ru": "RU-74", "text": "Нажми на остров, чтобы продолжить путешествие."}];
 // Ссылка на запись: подставить, когда Анна её пришлёт. Пока пусто —
 // кнопка показывает подпись-заглушку вместо того, чтобы молча не работать.
 const SIGNUP_URL = "";
@@ -414,12 +430,28 @@ function addDots(host, i, shown, popLast){
     host.appendChild(d);
   }
 }
+/* Какой остров зовёт: первый открытый, но не пройденный. */
+function nextIsland(){
+  for (let i = 0; i < LESSONS.length; i++){
+    const id = LESSONS[i].id;
+    if (unlocked(id) && !isDone(id)) return i;
+  }
+  return -1;
+}
+function mapLine(){
+  const done = progress().done.length;
+  if (done >= LESSONS.length) return MAPSAY[2];
+  if (done === 1 || done === 2) return MAPSAY[done - 1];
+  return MAPSAY[3];
+}
 function buildMap(){
   mapEl.style.backgroundImage = "url(" + IMG.map_bg + ")";
   mapEl.innerHTML = '<div class="maptitle">Дорога на праздник</div>';
+  const call = nextIsland();
   LESSONS.forEach((les, i) => {
     const b = document.createElement("button");
-    b.className = "island" + (unlocked(les.id) ? "" : " locked");
+    b.className = "island" + (unlocked(les.id) ? "" : " locked") +
+      (i === call ? " beckon" : "");
     b.style.left = ISLAND_POS[i][0] + "%"; b.style.top = ISLAND_POS[i][1] + "%";
     b.innerHTML = '<img src="' + IMG[les.island] + '" alt="">' +
       '<span class="name">' + les.title + "</span>" +
@@ -434,15 +466,17 @@ function buildMap(){
     if (i < LESSONS.length - 1) addDots(mapEl, i, isDone(les.id) ? les.tokens : 0, false);
   });
   const g = document.createElement("div");
-  g.className = "guide";
-  g.innerHTML = '<img src="' + IMG.firefly_smile + '" alt="">';
+  g.className = "mapguide";
+  g.innerHTML = '<img src="' + IMG.firefly_smile + '" alt="">' +
+    '<div class="mapsay">' + mapLine().text + "</div>";
   mapEl.appendChild(g);
 }
 function showMap(){
-  stopSound(); buildMap();
+  stopSound(); token++; buildMap();
   mapEl.classList.add("on");
   lessonEl.classList.remove("on");
   overlay.classList.remove("on");
+  ru(mapLine().ru);
 }
 
 /* ─────────────────────────── урок ─────────────────────────── */

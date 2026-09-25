@@ -335,7 +335,10 @@ def build_script():
     retry = [ru("firefly", t, tone, where) for t, tone in LS.RETRY]
     ask = ru("firefly", LS.ASK_REPEAT[0], LS.ASK_REPEAT[1], where)
     finale = ru("firefly", LS.FINALE[0], LS.FINALE[1], where)
-    return script, praise, retry, ask, finale, en_tracks
+    where = "Карта — что говорит Искорка между уроками"
+    map_say = [{"ru": ru("firefly", t, tone, where), "text": t}
+               for t, tone in LS.MAP_SAY]
+    return script, praise, retry, ask, finale, map_say, en_tracks
 
 
 def prep_fingers(s, en, say_of):
@@ -503,7 +506,7 @@ HTML = (Path(__file__).resolve().parent / "kids46_page.html").read_text(encoding
 
 
 def main():
-    script, praise, retry, ask, finale, en_tracks = build_script()
+    script, praise, retry, ask, finale, map_say, en_tracks = build_script()
     write_voice_doc(script, en_tracks)
     print(f"  русских реплик: {len(script)}, английских: {len(en_tracks)}")
 
@@ -550,6 +553,7 @@ def main():
                         ("__AUDIO__", audio), ("__LESSONS__", LS.LESSONS),
                         ("__PRAISE__", praise), ("__RETRY__", retry),
                         ("__ASK__", ask), ("__FINALE__", finale),
+                        ("__MAPSAY__", map_say),
                         ("__COLORS__", LS.COLORS),
                         ("__FRIENDS__", LS.FRIENDS), ("__TIPS__", FINGER_TIPS)):
         page = page.replace(mark, json.dumps(value, ensure_ascii=False))
