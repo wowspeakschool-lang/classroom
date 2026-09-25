@@ -140,6 +140,23 @@ img{-webkit-user-drag:none}
 .mapview>img.nudge{animation:nudge .4s}
 @keyframes nudge{25%{transform:translate(-58%,-50%)}75%{transform:translate(-42%,-50%)}}
 
+/* ───────── чего не стало и раскрась ───────── */
+.shelfrow{gap:3vw;position:relative}
+.shelfrow img{transition:opacity .35s, transform .35s}
+.shelfrow img.hidden{opacity:0;transform:scale(.4)}
+.shelfrow img.back{animation:pop .5s}
+.veil{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:auto;height:118%;max-width:none;opacity:0;animation:veilin .4s forwards}
+.veil.away{animation:veilout .45s forwards}
+@keyframes veilin{from{opacity:0;transform:translate(-50%,-70%)}
+  to{opacity:1;transform:translate(-50%,-50%)}}
+@keyframes veilout{from{opacity:1;transform:translate(-50%,-50%)}
+  to{opacity:0;transform:translate(-50%,-30%)}}
+.cards.locked{pointer-events:none;opacity:.55}
+.paintarea{position:relative}
+.paintarea img{height:100%;max-width:100%;object-fit:contain}
+.paintarea img.splash{animation:pop .5s}
+
 /* ───────── карточки ───────── */
 .cards{--n:2;--gap:3vw;gap:var(--gap)}
 .card{background:var(--card);border:4px solid transparent;border-radius:26px;
@@ -589,7 +606,9 @@ function afterIntro(s, build){
       await wait(300);
     }
     if (mine !== token) return;
-    queue(taskSteps(s));
+    await queue(taskSteps(s));
+    if (mine !== token) return;
+    if (s._quiz) await s._quiz();
   })();
 }
 function replay(){
@@ -714,6 +733,86 @@ RENDER.token = function(s){
   }
   showNextLater(2200);
   ru(s.ru);
+};
+
+/* ───────── чего не стало ───────── */
+RENDER.gone = function(s){
+  afterIntro(s, () => {
+    const r = s.rounds[round];
+    const top = document.createElement("div");
+    top.className = "picarea items shelfrow";
+    const slots = r.things.map(t => {
+      const im = document.createElement("img");
+      im.src = pic(t);
+      top.appendChild(im);
+      return im;
+    });
+    content.appendChild(top);
+
+    const row = cardsRow(shuffle(r.things.slice()).map(t => ({src: pic(t), t})),
+      async (c, k) => {
+        if (k.t !== r.things[r.missing]){ await wrong(c); return; }
+        c.classList.add("right");
+        slots[r.missing].classList.remove("hidden");
+        slots[r.missing].classList.add("back");
+        await en(r.voice);
+        await rightStep(() => nextRound(s));
+      });
+    row.classList.add("locked");
+    content.appendChild(row);
+
+    /* Сначала облачко наплывает на все вещи, потом уходит — и одной нет.
+       Карточки до этого не нажимаются: иначе ребёнок тыкает вслепую. */
+    s._quiz = async () => {
+      const mine = token;
+      const cloud = document.createElement("img");
+      cloud.className = "veil";
+      cloud.src = IMG.cloudlet;
+      top.appendChild(cloud);
+      await wait(900);
+      if (mine !== token) return;
+      slots[r.missing].classList.add("hidden");
+      await wait(700);
+      if (mine !== token) return;
+      cloud.classList.add("away");
+      await wait(500);
+      if (mine !== token) return;
+      cloud.remove();
+      row.classList.remove("locked");
+    };
+  });
+};
+
+/* ───────── раскрась ───────── */
+RENDER.paint = function(s){
+  afterIntro(s, () => {
+    const r = s.rounds[round];
+    const area = document.createElement("div");
+    area.className = "picarea paintarea";
+    const im = document.createElement("img");
+    im.src = IMG[r.thing[0] + "_grey"];
+    area.appendChild(im);
+    content.appendChild(area);
+
+    const row = document.createElement("div");
+    row.className = "blobs";
+    shuffle(COLORS.slice()).forEach(c => {
+      const b = document.createElement("button");
+      b.dataset.c = c;
+      b.innerHTML = '<img src="' + IMG["blob_" + c] + '" alt="">';
+      b.onclick = async () => {
+        if (c !== r.thing[1]){ await wrong(b); return; }
+        blip("SFX-OK");
+        b.classList.add("lit");
+        im.src = pic(r.thing);
+        im.classList.remove("splash"); void im.offsetWidth; im.classList.add("splash");
+        await wait(450);
+        await rightStep(() => nextRound(s));
+      };
+      row.appendChild(b);
+    });
+    content.appendChild(row);
+  });
 };
 
 /* ───────── дорога: карта до первого урока ───────── */

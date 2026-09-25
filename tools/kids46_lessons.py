@@ -295,25 +295,24 @@ L3 = {
                  "о себе — на празднике это пригодится!",
          "tone": "заговорщицки"},
 
-        # ── разминка ──
-        {"t": "order",
-         "rounds": [["blue", "green"], ["yellow", "blue", "green"]],
-         "text": "Слушай и нажимай кляксы по порядку.",
-         "tone": "загадочно"},
-        {"t": "catch", "say": "item",
+        # ── разминка: обе игры новые, в прошлых уроках их не было ──
+        {"t": "gone", "say": "combo",
          "rounds": [
-             {"target": ("shoes", "green"), "others": [("top", "blue"), ("jeans", "yellow")]},
-             {"target": ("jeans", "blue"), "others": [("shoes", "yellow"), ("top", "green")]},
+             {"things": [("top", "green"), ("jeans", "blue"), ("shoes", "yellow")],
+              "missing": 1},
+             {"things": [("shoes", "green"), ("top", "yellow"), ("jeans", "green")],
+              "missing": 0},
+             {"things": [("jeans", "yellow"), ("shoes", "blue"), ("top", "blue")],
+              "missing": 2},
          ],
-         "text": "Вещи поехали! Поймай ту, которую я назову.",
-         "tone": "азартно"},
-        {"t": "truefalse", "say": "combo",
-         "rounds": [
-             {"thing": ("jeans", "green"), "claim": ("jeans", "green")},
-             {"thing": ("top", "yellow"), "claim": ("top", "blue")},
-             {"thing": ("shoes", "blue"), "claim": ("shoes", "blue")},
-         ],
-         "text": "Угадала я или нет?", "tone": "с хитринкой"},
+         "text": "Вещи выложены. Смотри внимательно — сейчас облачко "
+                 "наплывёт, и одной вещи не станет. Найди, какой!",
+         "tone": "загадочно, с интересом"},
+        {"t": "paint", "say": "combo",
+         "rounds": [("top", "blue"), ("jeans", "green"), ("shoes", "yellow")],
+         "text": "Вещи выцвели! Послушай и нажми кляксу нужного цвета — "
+                 "вещь снова станет цветной.",
+         "tone": "озабоченно, потом весело"},
 
         # ── новое: фраза ──
         {"t": "fingers", "mode": "full", "thing": ("top", "green"),

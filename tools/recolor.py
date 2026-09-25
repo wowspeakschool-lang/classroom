@@ -35,12 +35,16 @@ def dominant_hue(im):
     return best
 
 
-def recolor(im, target_hue_deg, src_hue=None, whole=False, sat=1.0):
+def recolor(im, target_hue_deg, src_hue=None, whole=False, sat=1.0, val=1.0):
     """whole=True — красить весь предмет, не только господствующий тон.
 
     Нужно там, где предмет одноцветный по замыслу, а генератор развёл в нём
     два-три тона: у цветка стебель попадал в полосу лишь частично, и на синем
     цветке он выходил в полоску — где синий, где зелёный.
+
+    val — множитель яркости; вместе с sat=0 даёт «бесцветную» вещь для
+    задания «раскрась». Одной обесцветки мало: вещь выходит почти белой и
+    на светлом фоне теряется.
 
     sat — множитель насыщенности для перекрашенного. Цветок в исходнике
     пастельный (медиана 122 против 200 у шарика и кружки), и рядом с ними
@@ -66,6 +70,10 @@ def recolor(im, target_hue_deg, src_hue=None, whole=False, sat=1.0):
     if sat != 1.0:
         up = s.point(lambda p: min(255, int(p * sat)))
         new_s = Image.composite(up, s, mask)
-    out = Image.merge("HSV", (new_h, new_s, v)).convert("RGB").convert("RGBA")
+    new_v = v
+    if val != 1.0:
+        down = v.point(lambda p: max(0, min(255, int(p * val))))
+        new_v = Image.composite(down, v, mask)
+    out = Image.merge("HSV", (new_h, new_s, new_v)).convert("RGB").convert("RGBA")
     out.putalpha(alpha)
     return out

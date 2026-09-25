@@ -324,9 +324,13 @@ def build_images():
         if src.width > width * 1.6:          # красим уже уменьшенную — быстрее
             src = src.resize((int(width * 1.6),
                               round(src.height * width * 1.6 / src.width)), Image.LANCZOS)
+        opts = PAINT_OPTS.get(name, {})
         for color, hue in COLOR_HUE.items():
-            opts = PAINT_OPTS.get(name, {})
             images[f"{name}_{color}"] = encode(recolor(src, hue, **opts), width)
+        # бесцветный вариант для задания «раскрась»
+        grey = dict(opts); grey.pop("sat", None)
+        images[f"{name}_grey"] = encode(
+            recolor(src, 0, sat=0.0, val=0.80, **grey), width)
     CACHE.write_text(json.dumps({"sig": sig, "images": images, "tips": tips}))
     return images, tips
 
@@ -388,6 +392,16 @@ def build_script():
                                 "voice": say_of(s["say"], r["claim"]),
                                 "ok": list(r["thing"]) == list(r["claim"])}
                                for r in s["rounds"]]
+            if s["t"] == "gone":
+                # «чего не стало»: показываем набор, один предмет исчезает,
+                # ребёнок выбирает его из карточек внизу
+                s["rounds"] = [{"things": [list(t) for t in r["things"]],
+                                "missing": r["missing"],
+                                "voice": say_of(s["say"], r["things"][r["missing"]])}
+                               for r in s["rounds"]]
+            if s["t"] == "paint":
+                s["rounds"] = [{"thing": list(t), "voice": say_of(s["say"], t)}
+                               for t in s["rounds"]]
             if s["t"] == "findall":
                 s["voice"] = en(s["color"])
             if s["t"] == "order":
@@ -614,6 +628,10 @@ def main():
                 if r.get("pic"):
                     need(r["pic"])
                 for t in ([r["thing"]] if "thing" in r else []):
+                    need("%s_%s" % tuple(t))
+                    if s["t"] == "paint":
+                        need("%s_grey" % t[0])
+                for t in r.get("things", []):
                     need("%s_%s" % tuple(t))
                 for t in ([r["target"]] if "target" in r else []) + r.get("others", []):
                     need("%s_%s" % tuple(t))
