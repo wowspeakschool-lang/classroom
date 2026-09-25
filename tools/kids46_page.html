@@ -455,6 +455,13 @@ function drawTokens(){
   tokensEl.innerHTML = html;
 }
 
+function updateNum(){
+  const num = document.querySelector("#wsdev .num");
+  if (!num) return;
+  const s = screen();
+  num.textContent = "У" + lesson().id + " · " + (S + 1) +
+    (s.rounds && s.rounds.length > 1 ? " (" + (round + 1) + "/" + s.rounds.length + ")" : "");
+}
 function render(){
   stopSound(); token++;
   const s = screen();
@@ -467,9 +474,7 @@ function render(){
   content.classList.toggle("withwho", !!(s.who && s.t !== "collect"));
   if (s.t === "token") earned = s.n;
   drawTokens();
-  const num = document.querySelector("#wsdev .num");
-  if (num) num.textContent = "У" + lesson().id + " · " + (S + 1) +
-      (s.rounds && s.rounds.length > 1 ? " (" + (round + 1) + "/" + s.rounds.length + ")" : "");
+  updateNum();
   RENDER[s.t](s);
   fit();
   if (s._run) s._run();
@@ -511,14 +516,18 @@ function taskSteps(s){
 }
 /* Ставит содержимое задания и включает его звук, когда реплика отзвучала. */
 function afterIntro(s, build){
+  if (build) build();          // игра на экране сразу — ждать нечего
+  fit();
   const mine = token;
   (async () => {
-    await ru(s.ru);
+    if (round === 0){          // реплика Искорки — только в первом раунде
+      await ru(s.ru);
+      if (mine !== token) return;
+      await wait(AUDIO[s.ru] ? 250 : readPause(s.text));
+    } else {
+      await wait(300);
+    }
     if (mine !== token) return;
-    await wait(AUDIO[s.ru] ? 250 : readPause(s.text));
-    if (mine !== token) return;
-    if (build) build();
-    fit();
     queue(taskSteps(s));
   })();
 }
@@ -753,35 +762,48 @@ RENDER.findall = function(s){
 
 /* ───────── разложи по корзинам ───────── */
 RENDER.sort = function(s){
-  afterIntro(s, () => {
-    const r = s.rounds[round];
-    const top = document.createElement("div");
-    top.className = "picarea sortitem";
-    const im = document.createElement("img");
-    im.src = pic(r.thing);
-    im.style.cursor = "pointer";
-    im.style.transition = "opacity .3s, transform .3s";
-    im.onclick = () => en(r.voice);
-    top.appendChild(im);
-    content.appendChild(top);
+  /* Корзины ставятся один раз и остаются на месте. Между раундами меняется
+     только предмет наверху: раньше экран перерисовывался целиком и заново
+     выжидал реплику, и ребёнок каждый раз смотрел на пустое место. */
+  const top = document.createElement("div");
+  top.className = "picarea sortitem";
+  const im = document.createElement("img");
+  im.style.cursor = "pointer";
+  im.style.transition = "opacity .3s, transform .3s";
+  top.appendChild(im);
+  content.appendChild(top);
 
-    const row = document.createElement("div");
-    row.className = "baskets";
-    s.colors.forEach(c => {
-      const b = document.createElement("button");
-      b.dataset.c = c;
-      b.innerHTML = '<img src="' + IMG["basket_" + c] + '" alt="">';
-      b.onclick = async () => {
-        if (c !== r.thing[1]){ await wrong(b); return; }
-        flyTo(im, b);
-        b.classList.remove("hit"); void b.offsetWidth; b.classList.add("hit");
-        await wait(500);
-        await rightStep(() => nextRound(s));
-      };
-      row.appendChild(b);
-    });
-    content.appendChild(row);
+  const row = document.createElement("div");
+  row.className = "baskets";
+  s.colors.forEach(c => {
+    const b = document.createElement("button");
+    b.dataset.c = c;
+    b.innerHTML = '<img src="' + IMG["basket_" + c] + '" alt="">';
+    b.onclick = async () => {
+      const r = s.rounds[round];
+      if (c !== r.thing[1]){ await wrong(b); return; }
+      blip("SFX-OK");
+      flyTo(im, b);
+      b.classList.remove("hit"); void b.offsetWidth; b.classList.add("hit");
+      await wait(460);
+      round++;
+      if (round >= s.rounds.length){ round = 0; next(); return; }
+      showItem();
+      queue([() => praise(), () => en(s.rounds[round].voice)]);
+    };
+    row.appendChild(b);
   });
+  content.appendChild(row);
+
+  function showItem(){
+    const r = s.rounds[round];
+    im.src = pic(r.thing);
+    im.classList.remove("gone");
+    im.onclick = () => en(r.voice);
+    updateNum();
+  }
+  showItem();
+  afterIntro(s, null);
 };
 
 /* ───────── нажми цвета по порядку ───────── */
