@@ -31,24 +31,34 @@ around the whole shape. No characters, no text, no letters, no numbers.
 
 ---
 
-## 2. tracks — следы, ведущие к пещере (новая)
+## 2. tracks — следы к пещере (переделать)
 
-По сюжету Искорка говорит «следы ведут к пещере», а следов на картинке нет.
+По сюжету это следы **дракончика**, того самого, что вылупится из яйца.
+Первый вариант вышел кошачьей лапкой: круглая подушечка и четыре пальчика.
+Нужны три пальца с коготками — и **сами следы поменьше**: дракончик ещё
+маленький, след с детскую ладошку, а не с тазик.
 
 ```
-A row of small animal footprints on a grassy island path, horizontal
-composition: five or six rounded paw prints pressed into soft earth, going from
-the lower left corner towards the upper right, getting smaller with distance.
-The path is bright green grass with a few little white daisies and small
-pebbles. Nothing else in the picture — no cave, no animals, no characters. Cute
-chunky 3D cartoon render for small children, smooth glossy surfaces, soft
-rounded shapes, bright and friendly, warm daylight. Plain flat pure white
-background, no shadow on the background, generous margin around the whole
-shape. No text, no letters, no numbers.
+A trail of small three-toed dragon footprints on a grassy island path,
+horizontal composition: six little prints going from the lower left corner
+towards the upper right, getting smaller with distance. Each print is a small
+reptile track — three slender forward toes ending in tiny pointed claw marks,
+and a narrow heel; the prints are small, about the size of a child's hand, not
+massive. No round cat pad, no toe beans, no soft paw shape. The prints are
+pressed into soft brown earth on bright green grass with a few little white
+daisies and small pebbles. Nothing else in the picture — no cave, no dragon,
+no characters. Cute chunky 3D cartoon render for small children, smooth glossy
+surfaces, soft rounded shapes, bright and friendly, warm daylight. Plain flat
+pure white background, no shadow on the background, generous margin around the
+whole shape. No text, no letters, no numbers.
 ```
 
-**Проверить:** следы идут по диагонали и их видно издали; в кадре нет ни
-пещеры, ни зверей — пещера у нас отдельной картинкой.
+**Проверить:** у каждого следа **три** пальца с коготками, круглой
+подушечки нет; следы мелкие рядом с ромашками, а не во весь кадр; в кадре
+нет ни пещеры, ни дракона — пещера у нас отдельной картинкой.
+
+Искорка на этом экране теперь говорит «Следы — и с коготками! Чьи же они?» —
+так вопрос остаётся открытым до яйца.
 
 ---
 
