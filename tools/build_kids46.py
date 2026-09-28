@@ -209,6 +209,7 @@ BASE = {            # имя: (файл, ширина, резать ли фон)
     "stone":         ("stone.webp",                560, True),
     "cloudlet":      ("cloudlet.webp",             560, True),
     "egg":           ("egg.webp",                 1000, True),
+    "tracks":        ("tracks.webp",             1000, True),
     "cave_closed":   ("cave-closed.webp",         1000, True),
     "cave_egg":      ("cave-egg.webp",            1000, True),
     "bunny":         ("animal-bunny.webp",         700, True),
@@ -620,6 +621,8 @@ def main():
             for k in ("pic", "who"):
                 if s.get(k):
                     need(s[k])
+            for k in s.get("pics", []):
+                need(k)
             if s["t"] == "collect":
                 need(s["target"])
             for thing in ([s["thing"]] if "thing" in s else []):

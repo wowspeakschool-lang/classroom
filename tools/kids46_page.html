@@ -711,7 +711,10 @@ function showNextLater(ms){
   setTimeout(() => { if (mine === token) btnNext.hidden = false; }, ms);
 }
 RENDER.story = function(s){
-  if (!s.solo) content.appendChild(picArea([IMG[s.pic]]));
+  /* pics — когда реплика про две вещи сразу: «следы ведут к пещере, а вход
+     завален камнем». Отдельным экраном это было бы лишней дорожкой. */
+  if (s.pics) content.appendChild(picArea(s.pics.map(k => IMG[k]), "items"));
+  else if (!s.solo) content.appendChild(picArea([IMG[s.pic]]));
   showNextLater(2000);
   ru(s.ru);
 };
