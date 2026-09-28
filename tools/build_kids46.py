@@ -125,11 +125,19 @@ def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=4, shadow_w=4,
         # тень холодная, синего в ней не меньше красного, а подошва тёплая,
         # кремовая. Отсюда второе условие: красный и синий почти равны.
         #
+        # У вещи может быть свой светло-серый — пропеллер самолётика, — и
+        # от тени он не отличается ничем: тот же 180–249 и та же серость.
+        # Тогда полоса выключается для этой картинки целиком (`shadow=None`
+        # в CUT_OPTS): запечённой тени у неё всё равно нет, а пропеллер
+        # заливка объедала с края.
+        #
         # Пороги держать строгими. Однажды их расширили до 9/10 и добавили
         # мягкое гашение остатка — halo у джинсов почти ушёл, но заодно
         # обгрызло серый пропеллер самолётика и белую подошву ботинок: они
         # такие же светло-серые, как тень. Тень, совпадающую по цвету с самой
         # вещью, надо не дочищать, а перерисовывать картинку без неё.
+        if shadow is None:          # у вещи свой серый — вторая полоса ей вредна
+            return False
         return lo >= shadow and hi - lo <= shadow_n and abs(r - b) <= shadow_w
 
     seen = bytearray(w * h)
@@ -247,14 +255,19 @@ PAINTED = (
 PAINT_OPTS = {"flower": {"whole": True, "sat": 1.65}}
 
 
+# Чем вырезать фон, если не поровну для всех. `shadow=None` — выключить
+# полосу запечённой тени: у самолётика серый пропеллер, и она ела его.
+CUT_OPTS = {"plane": {"shadow": None}}
+
+
 CACHE = ROOT / "tools" / ".kids46_images.json"
 
 
 def build_images():
     sig = {"base": {k: [v[0], v[1], v[2], (ART / v[0]).stat().st_mtime]
                     for k, v in BASE.items()},
-           "painted": [[n, f, w, (ART / f).stat().st_mtime, PAINT_OPTS.get(n)]
-                       for n, f, w in PAINTED],
+           "painted": [[n, f, w, (ART / f).stat().st_mtime, PAINT_OPTS.get(n),
+                        CUT_OPTS.get(n)] for n, f, w in PAINTED],
            "hue": COLOR_HUE}
     if CACHE.exists():
         old = json.loads(CACHE.read_text())
@@ -265,7 +278,8 @@ def build_images():
     images, tips = {}, {}
     for name, (f, width, cut) in BASE.items():
         im = Image.open(ART / f)
-        images[name] = encode(cut_white(im, holes=HOLES.get(name)) if cut
+        images[name] = encode(cut_white(im, holes=HOLES.get(name),
+                                        **CUT_OPTS.get(name, {})) if cut
                               else im.convert("RGB"), width)
     # Пещера с гнездом и яйцом — одна картинка. Раньше яйцо вклеивалось в
     # картинку пустой пещеры, но у той было своё гнездо, и получалось два.
@@ -275,7 +289,8 @@ def build_images():
         tips[n] = finger_tips(hand, n)
 
     for name, f, width in PAINTED:
-        src = cut_white(Image.open(ART / f), holes=HOLES.get(name))
+        src = cut_white(Image.open(ART / f), holes=HOLES.get(name),
+                        **CUT_OPTS.get(name, {}))
         src = src.crop(src.getbbox())
         if src.width > width * 1.6:          # красим уже уменьшенную — быстрее
             src = src.resize((int(width * 1.6),
