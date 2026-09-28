@@ -113,6 +113,9 @@ img{-webkit-user-drag:none}
 .picarea.sortitem img.gone{opacity:0;transform:scale(.3)}
 .picarea.items{gap:4vw}
 .picarea.items img{height:auto;max-height:100%;width:auto;max-width:24%}
+/* Две картинки в сюжете — не три зверька: им можно занять полэкрана. */
+.picarea.duo{gap:4vw}
+.picarea.duo img{height:auto;max-height:100%;width:auto;max-width:42%}
 .below{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:1vh}
 .wordline{font-size:clamp(22px,4vw,44px);font-weight:900;letter-spacing:.5px;text-align:center}
 
@@ -713,7 +716,7 @@ function showNextLater(ms){
 RENDER.story = function(s){
   /* pics — когда реплика про две вещи сразу: «следы ведут к пещере, а вход
      завален камнем». Отдельным экраном это было бы лишней дорожкой. */
-  if (s.pics) content.appendChild(picArea(s.pics.map(k => IMG[k]), "items"));
+  if (s.pics) content.appendChild(picArea(s.pics.map(k => IMG[k]), "duo"));
   else if (!s.solo) content.appendChild(picArea([IMG[s.pic]]));
   showNextLater(2000);
   ru(s.ru);
