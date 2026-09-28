@@ -32,6 +32,7 @@ DEV_PANEL = True
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "wowspeak-4-6.html"
 VOICE_DOC = ROOT / "docs" / "WowSpeak_озвучка_4-6.md"
+SSML_DOC = ROOT / "docs" / "WowSpeak_озвучка_4-6_для_сервиса.md"
 AUDIO_DIR = ROOT / "assets" / "audio-4-6"
 ART = ROOT / "assets" / "kids-4-6"
 
@@ -433,6 +434,44 @@ def prep_fingers(s, en, say_of):
         s["steps"] = [[i, n - 1] for i in range(n - 1, -1, -1)]
 
 
+def write_ssml_doc(script):
+    """Текст для сервиса озвучки: паузы расставлены тегами, блок на урок.
+
+    Тире и многоточие движок сам паузой не считает — «что мне принесли —
+    приглашение» читалось слитно. Между дорожками стоит пауза в две секунды:
+    по ней потом режется один длинный файл на отдельные реплики, иначе их
+    пришлось бы скачивать по одной.
+    """
+    import re
+    by = {}
+    for k, voice, text, tone, where in script:
+        t = re.sub(r"\s*—", ' <break time="400ms"/>—', text)
+        t = t.replace("…", '… <break time="600ms"/>')
+        by.setdefault(where, []).append((k, t))
+
+    d = ["""# Озвучка 4–6: текст для сервиса, паузы тегами
+
+> Собирается вместе с уроком, руками не правим.
+
+Каждый блок ниже вставляется в поле целиком — **одним куском**, и на выходе
+получается один файл. Резать его на отдельные дорожки не нужно: пришлите как
+есть, скрипт разрежет по двухсекундным паузам и разложит по именам.
+
+**Включите режим SSML** (кнопка `</> SSML` на панели) — без него теги
+прочитаются вслух как текст.
+
+Если SSML в вашем тарифе нет, вставляйте блок без тегов, каждую реплику
+с новой строки, а в настройках поднимите «паузу параграфов» до 2000 мс —
+тогда резка тоже сработает."""]
+    for where, items in by.items():
+        d.append("\n## " + where + "\n")
+        d.append("```xml\n<speak>")
+        d.append('\n<break time="2s"/>\n'.join(t for _, t in items))
+        d.append("</speak>\n```\n")
+        d.append("Дорожки по порядку: " + ", ".join(k for k, _ in items) + "\n")
+    SSML_DOC.write_text("\n".join(d), encoding="utf-8")
+
+
 def write_voice_doc(script, en_tracks):
     rows, counts = {}, {}
     for k, voice, text, tone, where in script:
@@ -569,6 +608,7 @@ HTML = (Path(__file__).resolve().parent / "kids46_page.html").read_text(encoding
 def main():
     script, praise, retry, ask, finale, map_say, en_tracks = build_script()
     write_voice_doc(script, en_tracks)
+    write_ssml_doc(script)
     print(f"  русских реплик: {len(script)}, английских: {len(en_tracks)}")
 
     images, tips = build_images()
