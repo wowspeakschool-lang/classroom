@@ -583,7 +583,8 @@ function taskSteps(s){
   }
   if (s.t === "findall") steps.push(() => en(s.voice));
   if (s.t === "sort" && r) steps.push(() => en(r.voice));
-  if ((s.t === "collect" || s.t === "catch" || s.t === "pick") && r){
+  if ((s.t === "collect" || s.t === "catch" || s.t === "pick" ||
+       s.t === "paint") && r){
     steps.push(() => en(r.voice));
   }
   if (s.t === "truefalse" && r) steps.push(() => en(r.voice));

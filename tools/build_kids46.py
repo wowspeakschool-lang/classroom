@@ -88,7 +88,7 @@ def finger_tips(im, want):
 
 # ──────────────────────────────────────────────────────────── картинки ──
 
-def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=9, shadow_w=10,
+def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=4, shadow_w=4,
               holes=None):
     """Убирает фон генератора: светлый И бесцветный.
 
@@ -123,6 +123,12 @@ def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=9, shadow_w=10,
         # (230,225,209) по разбросу почти одинаковы. Различает их тон —
         # тень холодная, синего в ней не меньше красного, а подошва тёплая,
         # кремовая. Отсюда второе условие: красный и синий почти равны.
+        #
+        # Пороги держать строгими. Однажды их расширили до 9/10 и добавили
+        # мягкое гашение остатка — halo у джинсов почти ушёл, но заодно
+        # обгрызло серый пропеллер самолётика и белую подошву ботинок: они
+        # такие же светло-серые, как тень. Тень, совпадающую по цвету с самой
+        # вещью, надо не дочищать, а перерисовывать картинку без неё.
         return lo >= shadow and hi - lo <= shadow_n and abs(r - b) <= shadow_w
 
     seen = bytearray(w * h)
@@ -154,52 +160,7 @@ def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=9, shadow_w=10,
                     for x, y in blob:
                         r, g, b, a = px[x, y]
                         px[x, y] = (r, g, b, 0)
-    soften(im)
     return feather(im)
-
-
-def soften(im, lo=150, spread=14, warm=12, clear=245, dark=185):
-    """Гасит остаток тени вместо того, чтобы его вырезать.
-
-    У ботинок и джинсов из набора 7–9 тень запечена так, что по цвету
-    совпадает с самой вещью: тень (218,220,224) и белая подошва (230,225,209)
-    различаются только тёплым оттенком, и порог, который убирает одну,
-    начинает есть другую. Поэтому не режем, а делаем прозрачнее: чем светлее
-    пиксель, тем меньше от него остаётся. Заливка идёт только по «теневым»
-    пикселям и об вещь останавливается сама — внутрь не уходит.
-    """
-    w, h = im.size
-    px = im.load()
-
-    def shady(x, y):
-        r, g, b, a = px[x, y]
-        if a == 0:
-            return False
-        mn, mx = min(r, g, b), max(r, g, b)
-        return mn >= lo and mx - mn <= spread and abs(r - b) <= warm
-
-    seen = bytearray(w * h)
-    stack = []
-    for x in range(w):
-        for y in (0, h - 1):
-            stack.append((x, y))
-    for y in range(h):
-        for x in (0, w - 1):
-            stack.append((x, y))
-    # стартуем от уже прозрачных краёв: тень к ним примыкает
-    while stack:
-        x, y = stack.pop()
-        if x < 0 or y < 0 or x >= w or y >= h or seen[y * w + x]:
-            continue
-        r, g, b, a = px[x, y]
-        if a != 0 and not shady(x, y):
-            continue
-        seen[y * w + x] = 1
-        if a != 0:
-            lum = (r + g + b) / 3
-            k = 0.0 if lum >= clear else min(1.0, (clear - lum) / (clear - dark))
-            px[x, y] = (r, g, b, int(a * k))
-        stack.extend(((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)))
 
 
 def feather(im, passes=3, light=214, full=250):
