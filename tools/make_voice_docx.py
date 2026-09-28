@@ -38,7 +38,14 @@ def esc(s):
 
 
 def run(text, *, bold=False, italic=False, color=None, size=None, mono=False):
+    """Порядок свойств внутри rPr задан схемой: rFonts, b, i, color, sz.
+
+    Переставишь — и файл не откроется вовсе: LibreOffice отвечает «source
+    file could not be loaded», не уточняя, что именно не так.
+    """
     rpr = []
+    if mono:
+        rpr.append('<w:rFonts w:ascii="Consolas" w:hAnsi="Consolas"/>')
     if bold:
         rpr.append("<w:b/>")
     if italic:
@@ -47,22 +54,21 @@ def run(text, *, bold=False, italic=False, color=None, size=None, mono=False):
         rpr.append(f'<w:color w:val="{color}"/>')
     if size:
         rpr.append(f'<w:sz w:val="{size}"/><w:szCs w:val="{size}"/>')
-    if mono:
-        rpr.append('<w:rFonts w:ascii="Consolas" w:hAnsi="Consolas"/>')
     pr = f"<w:rPr>{''.join(rpr)}</w:rPr>" if rpr else ""
-    return f'{pr and f"<w:r>{pr}" or "<w:r>"}<w:t xml:space="preserve">{esc(text)}</w:t></w:r>'
+    return f"<w:r>{pr}<w:t xml:space=\"preserve\">{esc(text)}</w:t></w:r>"
 
 
 def para(runs, *, style=None, space_after=120, border=False, ind=0):
+    """И здесь порядок схемный: pStyle, pBdr, spacing, ind — именно такой."""
     pr = ["<w:pPr>"]
     if style:
         pr.append(f'<w:pStyle w:val="{style}"/>')
     if border:
         pr.append('<w:pBdr><w:bottom w:val="single" w:sz="4" w:space="6" '
                   'w:color="D8D8E0"/></w:pBdr>')
+    pr.append(f'<w:spacing w:after="{space_after}"/>')
     if ind:
         pr.append(f'<w:ind w:left="{ind}"/>')
-    pr.append(f'<w:spacing w:after="{space_after}"/>')
     pr.append("</w:pPr>")
     return "<w:p>" + "".join(pr) + "".join(runs) + "</w:p>"
 
@@ -120,10 +126,17 @@ def build():
             'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" '
             'Target="word/document.xml"/></Relationships>')
 
+    # Связи документа: пустые, но часть обязана быть — без неё
+    # LibreOffice файл не открывает.
+    doc_rels = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                '<Relationships xmlns="http://schemas.openxmlformats.org/'
+                'package/2006/relationships"/>')
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED) as z:
         z.writestr("[Content_Types].xml", types)
         z.writestr("_rels/.rels", rels)
+        z.writestr("word/_rels/document.xml.rels", doc_rels)
         z.writestr("word/document.xml", doc)
 
     n = sum(len(v) for v in by.values())
