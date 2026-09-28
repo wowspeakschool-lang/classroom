@@ -210,7 +210,7 @@ BASE = {            # имя: (файл, ширина, резать ли фон)
     "cloudlet":      ("cloudlet.webp",             560, True),
     "egg":           ("egg.webp",                 1000, True),
     "cave_closed":   ("cave-closed.webp",         1000, True),
-    "cave_open":     ("cave-open.webp",           1000, True),
+    "cave_egg":      ("cave-egg.webp",            1000, True),
     "bunny":         ("animal-bunny.webp",         700, True),
     "hedgehog":      ("animal-hedgehog.webp",      700, True),
     "fox":           ("animal-fox.webp",           700, True),
@@ -266,15 +266,8 @@ def build_images():
         im = Image.open(ART / f)
         images[name] = encode(cut_white(im, holes=HOLES.get(name)) if cut
                               else im.convert("RGB"), width)
-    # В пещере по сюжету яйцо, а на картинке пустое гнездо: вклеиваем.
-    cave = cut_white(Image.open(ART / "cave-open.webp"), holes=HOLES.get("cave_open"))
-    egg = cut_white(Image.open(ART / "egg.webp"))
-    egg = egg.crop(egg.getbbox())
-    w = int(cave.width * 0.21)
-    egg = egg.resize((w, round(egg.height * w / egg.width)), Image.LANCZOS)
-    cave.alpha_composite(egg, (int(cave.width * 0.395), int(cave.height * 0.435)))
-    images["cave_egg"] = encode(cave, 1000)
-
+    # Пещера с гнездом и яйцом — одна картинка. Раньше яйцо вклеивалось в
+    # картинку пустой пещеры, но у той было своё гнездо, и получалось два.
     for n in range(1, 6):
         hand = cut_white(Image.open(ART / BASE["hand%d" % n][0]))
         hand = hand.crop(hand.getbbox())
