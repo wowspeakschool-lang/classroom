@@ -374,18 +374,28 @@ function stopSound(){
   try{ speechSynthesis.cancel(); }catch(e){}
 }
 /* Страховка по времени обязательна: событие «речь закончилась» в вебвью и
-   на телефоне может не прийти вовсе, и экран встанет намертво. */
+   на телефоне может не прийти вовсе, и экран встанет намертво.
+
+   Но считать её по длине текста нельзя: у русских реплик текст сюда не
+   передаётся (он только в пузыре), и запись на восемь секунд «заканчивалась»
+   через полторы. Пока озвучки не было, это ничего не ломало; с ней английское
+   слово полезло бы поверх Искорки. Для записи берём её настоящую длину. */
 function play(key, text, lang){
   stopSound();
   return new Promise(resolve => {
-    let done = false;
-    const finish = () => { if (!done){ done = true; clearTimeout(t); resolve(); } };
-    const t = setTimeout(finish, Math.min(12000, 1500 + (text ? text.length * 90 : 0)));
+    let done = false, timer = null;
+    const finish = () => { if (!done){ done = true; clearTimeout(timer); resolve(); } };
+    const guard = ms => { clearTimeout(timer); timer = setTimeout(finish, ms); };
+    guard(Math.min(12000, 1500 + (text ? text.length * 90 : 0)));
     const src = AUDIO[key];
     if (src){
       const a = new Audio(src);
       current = a;
       a.onended = a.onerror = finish;
+      guard(20000);                       // пока длина неизвестна
+      a.onloadedmetadata = () => {
+        if (isFinite(a.duration) && a.duration) guard(a.duration * 1000 + 900);
+      };
       a.play().catch(finish);
       return;
     }
@@ -713,13 +723,21 @@ function showNextLater(ms){
   const mine = token;
   setTimeout(() => { if (mine === token) btnNext.hidden = false; }, ms);
 }
+/* Говорит реплику и открывает «Дальше». Пока записи нет, ждём на глаз —
+   взрослому надо успеть прочесть текст. Когда запись есть, ждать по таймеру
+   нельзя: реплика длится восемь секунд, а кнопка открывалась через две, и
+   ребёнок пролистывал Искорку на полуслове. */
+function sayThenNext(s, ms){
+  if (!AUDIO[s.ru]){ showNextLater(ms); ru(s.ru); return; }
+  const mine = token;
+  ru(s.ru).then(() => { if (mine === token) showNextLater(300); });
+}
 RENDER.story = function(s){
   /* pics — когда реплика про две вещи сразу: «следы ведут к пещере, а вход
      завален камнем». Отдельным экраном это было бы лишней дорожкой. */
   if (s.pics) content.appendChild(picArea(s.pics.map(k => IMG[k]), "duo"));
   else if (!s.solo) content.appendChild(picArea([IMG[s.pic]]));
-  showNextLater(2000);
-  ru(s.ru);
+  sayThenNext(s, 2000);
 };
 RENDER.token = function(s){
   if (s.kind === "friends"){
@@ -737,8 +755,7 @@ RENDER.token = function(s){
     addDots(view, L, s.n, true);
     content.appendChild(view);
   }
-  showNextLater(2200);
-  ru(s.ru);
+  sayThenNext(s, 2200);
 };
 
 /* ───────── чего не стало ───────── */
@@ -844,10 +861,10 @@ RENDER.road = function(s){
       isles[0].classList.remove("nudge"); void isles[0].offsetWidth;
       isles[0].classList.add("nudge");
     };
+    ru(s.ru);           // здесь «Дальше» нет: идём по нажатию на остров
   } else {
-    showNextLater(2400);
+    sayThenNext(s, 2400);
   }
-  ru(s.ru);
 };
 
 /* ───────── слушай и повторяй ───────── */
@@ -925,8 +942,7 @@ RENDER.vocab = function(s){
   // cardsRow пишет из t атрибут data-key и ждёт массив, объект его ломает.
   const opts = s.things.map(t => ({src: pic(t.thing), t: t.thing, voice: t.voice}));
   content.appendChild(cardsRow(opts, (c, k) => { blip("SFX-OK"); en(k.voice); }));
-  ru(s.ru);
-  showNextLater(2400);
+  sayThenNext(s, 2400);
   btnNext.textContent = "Готово ✔";
 };
 
