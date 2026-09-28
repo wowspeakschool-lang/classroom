@@ -296,7 +296,6 @@ img{-webkit-user-drag:none}
   box-shadow:var(--shadow);max-width:min(90%,560px)}
 .panel h2{margin:0 0 6px;font-size:clamp(20px,3.4vw,30px)}
 .panel p{margin:0 0 18px;font-size:clamp(14px,2vw,19px);line-height:1.4}
-.panel p.hint{margin:14px 0 0;font-size:14px;opacity:.7}
 .panel .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
 #wsdev{position:absolute;right:10px;top:10px;z-index:30;display:none;gap:6px}
@@ -1300,27 +1299,22 @@ function finish(){
   const panel = overlay.querySelector(".panel");
   if (last){
     // Дорога пройдена — возвращать на карту некуда, зовём на урок.
+    /* Кнопка записи появится, когда будет ссылка: SIGNUP_URL в начале
+       файла. Пока её нет, не показываем — мёртвая кнопка хуже, чем её
+       отсутствие. */
+    const signup = SIGNUP_URL
+      ? '<button class="btn" data-act="signup">Хочу в следующее приключение 🐉</button>'
+      : "";
     panel.innerHTML = "<h2>🎉 Ты дошёл до праздника!</h2>" +
       "<p>Ты выучил три цвета, три вещи и умеешь рассказывать о себе " +
       "по-английски. А кто вылупится из яйца — узнаем в следующем приключении. " +
       "Приходи, я буду ждать!</p>" +
-      '<div class="row">' +
-        '<button class="btn" data-act="signup">Хочу в следующее приключение 🐉</button>' +
+      '<div class="row">' + signup +
         '<button class="btn ghost" data-act="again">Пройти ещё раз</button>' +
       "</div>";
-    const sg = panel.querySelector('[data-act="signup"]');
     if (SIGNUP_URL){
-      sg.onclick = () => { location.href = SIGNUP_URL; };
-    } else {
-      sg.onclick = () => {
-        let hint = panel.querySelector(".hint");
-        if (!hint){
-          hint = document.createElement("p");
-          hint.className = "hint";
-          hint.textContent = "Сюда встанет ссылка на запись — пришлите её, и кнопка заработает.";
-          panel.appendChild(hint);
-        }
-      };
+      panel.querySelector('[data-act="signup"]').onclick =
+        () => { location.href = SIGNUP_URL; };
     }
   } else {
     panel.innerHTML = "<h2>Урок пройден!</h2><p>Дорожка на следующий остров готова.</p>" +
