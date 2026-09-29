@@ -5,6 +5,7 @@
     python3 tools/tts_kids46.py --voices    по образцу на каждый голос-кандидат
     python3 tools/tts_kids46.py            записать недостающее
     python3 tools/tts_kids46.py --force RU-05 RU-06   переделать конкретные дорожки
+    python3 tools/tts_kids46.py --only RU-01 RU-02    записать только эти, и ничего сверх
 
 Пишем **только русские реплики**, через Yandex SpeechKit: у него родной
 русский — ударения и вопросительная интонация. Английские слова читает
@@ -27,12 +28,12 @@
 сервиса запрос повторяется без неё.
 """
 
+import base64
 import json
 import os
 import sys
 import time
 import urllib.error
-import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -68,17 +69,20 @@ SLOW_EN = BASE_EN + "Speak noticeably slower than usual, stretching the word."
 
 # ────────────────────────────────────────────────── Yandex SpeechKit ──
 
-YA_URL = "https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize"
+YA_URL = "https://tts.api.cloud.yandex.net/tts/v3/utteranceSynthesis"
 
-# Голоса героев у Yandex и роль к каждому. Роль — не любая: у большинства
-# голосов есть `neutral` и `good`, у некоторых нет ни одной. Не подошла —
-# впишите None, запрос уйдёт без неё.
+# Голоса героев у Yandex: (голос, роль, сдвиг тона в Гц). Роль — не любая:
+# у большинства голосов есть `neutral` и `good`, у некоторых `friendly`,
+# у некоторых ни одной — тогда None, запрос уйдёт без неё. Детских голосов
+# в SpeechKit нет, поэтому Искорку делаем взрослым голосом с тоном выше:
+# +150 Гц поднимает alena с ~250 до ~410 Гц, длина фраз не меняется.
+# Выбрала Анна из alena / dasha / lera на трёх настоящих репликах.
 YA_VOICE = {
-    "firefly":  ("alena", "good"),      # Искорка: тёплая, живая
-    "bunny":    ("jane",  "good"),      # зайчик
-    "hedgehog": ("ermil", "good"),      # ёжик
-    "fox":      ("zahar", "good"),      # лисёнок
-    "en":       ("john",  None),        # английский
+    "firefly":  ("alena", "good", 150),     # Искорка
+    "bunny":    ("jane",  "good", 0),       # зайчик
+    "hedgehog": ("ermil", "good", 0),       # ёжик
+    "fox":      ("zahar", "good", 0),       # лисёнок
+    "en":       ("john",  None, 0),         # английский
 }
 # Кого прогоняет --voices. Список нарочно шире рабочего: какие голоса
 # сервис знает сегодня, видно только по ответу — неизвестное имя он
@@ -88,7 +92,7 @@ YA_VOICE = {
 YA_SAMPLES = ("alena", "jane", "omazh", "dasha", "julia", "lera", "masha",
               "marina", "filipp", "ermil", "zahar", "alexander", "kirill",
               "anton", "madi_ru", "zorro", "ermolaev")
-YA_SPEED = "0.95"        # чуть медленнее обычного: слушает четырёхлетка
+YA_SPEED = 0.95          # чуть медленнее обычного: слушает четырёхлетка
 
 
 def speak_openai(text, who, tone, voice=None):
@@ -106,36 +110,50 @@ def speak_openai(text, who, tone, voice=None):
         return r.read()
 
 
-def speak_yandex(text, who, tone, voice=None, emotion=None):
+def speak_yandex(text, who, tone, voice=None, emotion=None, pitch=0):
+    """Синтез через API v3: только в нём есть сдвиг тона.
+
+    Ответ — строки JSON, в каждой кусок mp3 в base64; склеиваем по порядку.
+    """
     lang_en = who.startswith("en")
     if voice is None:
-        voice, emotion = YA_VOICE["en" if lang_en else who]
-    form = {"text": text, "voice": voice, "format": "mp3",
-            "lang": "en-US" if lang_en else "ru-RU",
-            # медленное английское слово — то же самое, но ещё тише темпом
-            "speed": "0.7" if who == "en_slow" else YA_SPEED}
+        voice, emotion, pitch = YA_VOICE["en" if lang_en else who]
+    # медленное английское слово — то же самое, но ещё тише темпом
+    hints = [{"voice": voice},
+             {"speed": 0.7 if who == "en_slow" else YA_SPEED}]
+    if pitch:
+        hints.append({"pitchShift": pitch})
     if emotion:
-        form["emotion"] = emotion
+        hints.append({"role": emotion})
+    body = json.dumps({"text": text, "hints": hints, "outputAudioSpec":
+                       {"containerAudio": {"containerAudioType": "MP3"}}}).encode()
+    head = {"Content-Type": "application/json"}
     if os.environ.get("YANDEX_FOLDER_ID"):
-        form["folderId"] = os.environ["YANDEX_FOLDER_ID"]
+        head["x-folder-id"] = os.environ["YANDEX_FOLDER_ID"]
     # Ключа в окружении может не быть намеренно: если он лежит в API
     # credentials окружения, заголовок подставит прокси уже за пределами
     # контейнера, и сам ключ сюда не попадает. Свой заголовок в этом
     # случае не шлём, иначе спорим с прокси за одно и то же поле.
-    head = {}
     if os.environ.get("YANDEX_API_KEY"):
         head["Authorization"] = "Api-Key " + os.environ["YANDEX_API_KEY"]
-    req = urllib.request.Request(YA_URL, data=urllib.parse.urlencode(form).encode(),
-                                 headers=head)
+    req = urllib.request.Request(YA_URL, data=body, headers=head)
     try:
         with urllib.request.urlopen(req, timeout=120) as r:
-            return r.read()
+            raw = r.read().decode()
     except urllib.error.HTTPError as e:
         # Роль поддержана не у каждого голоса, и отказ из-за неё выглядит
         # как отказ вообще. Пробуем ещё раз без роли, прежде чем сдаться.
-        if e.code == 400 and emotion and b"emotion" in e.read()[:400].lower():
-            return speak_yandex(text, who, tone, voice=voice, emotion=None)
+        if e.code == 400 and emotion and b"role" in e.read()[:400].lower():
+            return speak_yandex(text, who, tone, voice=voice, pitch=pitch)
         raise
+    audio = b""
+    for line in raw.splitlines():
+        if line.strip():
+            res = json.loads(line).get("result") or {}
+            audio += base64.b64decode((res.get("audioChunk") or {}).get("data", ""))
+    if not audio:
+        sys.exit("Yandex вернул ответ без звука: " + raw[:200])
+    return audio
 
 
 ENGINES = {"openai": speak_openai, "yandex": speak_yandex}
@@ -212,6 +230,9 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
 
     force = set(a for a in args if a.startswith(("RU-", "EN-")))
+    if "--only" in args:
+        # записать ровно названные дорожки, переписав их, и ничего сверх
+        todo = [t for t in todo if t[0] in force]
     done = skipped = 0
     for key, text, who, tone in todo:
         f = OUT / (key + ".mp3")
