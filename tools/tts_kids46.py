@@ -118,7 +118,13 @@ def speak_yandex(text, who, tone, voice=None, emotion=None):
         form["emotion"] = emotion
     if os.environ.get("YANDEX_FOLDER_ID"):
         form["folderId"] = os.environ["YANDEX_FOLDER_ID"]
-    head = {"Authorization": "Api-Key " + os.environ["YANDEX_API_KEY"]}
+    # Ключа в окружении может не быть намеренно: если он лежит в API
+    # credentials окружения, заголовок подставит прокси уже за пределами
+    # контейнера, и сам ключ сюда не попадает. Свой заголовок в этом
+    # случае не шлём, иначе спорим с прокси за одно и то же поле.
+    head = {}
+    if os.environ.get("YANDEX_API_KEY"):
+        head["Authorization"] = "Api-Key " + os.environ["YANDEX_API_KEY"]
     req = urllib.request.Request(YA_URL, data=urllib.parse.urlencode(form).encode(),
                                  headers=head)
     try:
@@ -231,6 +237,16 @@ def main():
 
 
 def need_key(engine):
+    """Чего не хватает, чтобы движок заработал.
+
+    У Yandex ключ может лежать не в окружении, а в API credentials — тогда
+    его подставляет прокси, и проверять здесь нечего. Обязателен только
+    идентификатор каталога: он уходит в теле запроса, и прокси его не знает.
+    """
+    if engine == "yandex":
+        if not os.environ.get("YANDEX_FOLDER_ID"):
+            sys.exit("нет YANDEX_FOLDER_ID в окружении")
+        return
     if not os.environ.get(KEY_ENV[engine]):
         sys.exit(f"нет {KEY_ENV[engine]} в окружении (движок {engine})")
 
