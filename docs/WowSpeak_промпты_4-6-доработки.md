@@ -234,3 +234,26 @@ Keep the plain flat pure white background and the same margins.
 * в одежде явно видны наши три цвета — зелёный, синий, жёлтый;
 * на палочке звёздочка, по краям белое поле, фигура не обрезана;
 * не похожа на Хранительницу Слов из 7–9 и не выглядит взрослой тётей.
+
+### mia-invite — с приглашением (первый экран Урока 1)
+
+Реплика: «Привет! Я волшебница Мия. Смотри, что мне принесли — приглашение!
+Нас зовут на праздник на Драконий Остров. Полетели!» Приложить готовый
+`mia-neutral` — правка одной картинки, не цепочкой.
+
+```
+Edit the attached picture. Keep the same girl exactly: same face, hair,
+clothes, colours, wand and style. Change only her pose and expression:
+excited and happy, mouth open in a joyful smile. In her free hand she
+proudly shows the viewer an open festive invitation card, held up next to
+her face: a cream card with a golden edge and a golden star seal,
+decorated with tiny colourful party flags and a small picture of a green
+floating island with bunting and paper lanterns. The card has no words,
+no letters and no numbers on it. The wand stays in her other hand with a
+few golden sparkles. Keep the plain flat pure white background, no shadow
+on the background, and generous margins; nothing touches the edges.
+```
+
+**Проверить:** та же девушка, что в `mia-neutral`; открытка повёрнута к
+зрителю и хорошо видна; на ней нет букв (генератор любит вписывать
+«Invitation» — такую не брать); палочка на месте; вокруг белое поле.
