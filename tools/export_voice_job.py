@@ -24,13 +24,15 @@ OUT = Path(__file__).resolve().parent / "ozvuchka.py"
 
 # Голос и роль каждому герою. Роль поддержана не у всех голосов, поэтому
 # в скрипте на отказ из-за неё запрос уходит повторно без роли.
+#
+# Английских дорожек здесь нет, и это решение Анны: английские слова
+# читает синтез браузера, и он их читает хорошо — записываем только
+# русские реплики, где браузерный голос звучит плохо.
 VOICE = {
     "firefly":  ("alena", "good"),
     "bunny":    ("jane",  "good"),
     "hedgehog": ("ermil", "good"),
     "fox":      ("zahar", "good"),
-    "en":       ("john",  None),
-    "en_slow":  ("john",  None),
 }
 
 TEMPLATE = '''# -*- coding: utf-8 -*-
@@ -64,7 +66,6 @@ VOICES = {json_voices}
 SAMPLES = {json_samples}
 
 SPEED = "0.95"        # чуть медленнее обычного: слушает четырёхлетка
-SLOW = "0.7"          # английское слово «по слогам»
 
 # ───────────────────────────────────────────── сами реплики ──
 
@@ -92,10 +93,9 @@ except Exception:
 def synth(text, who, voice=None, emotion=None):
     if voice is None:
         voice, emotion = VOICES[who]
-    english = who.startswith("en")
     form = {{"text": text, "voice": voice, "format": "mp3",
-            "lang": "en-US" if english else "ru-RU",
-            "speed": SLOW if who == "en_slow" else SPEED,
+            "lang": "ru-RU",
+            "speed": SPEED,
             "folderId": FOLDER}}
     if emotion:
         form["emotion"] = emotion
@@ -149,7 +149,7 @@ def main():
         print("Послушайте и, если нужно, поменяйте имена в таблице VOICES.")
         return
 
-    only = set(a for a in args if a.startswith(("RU-", "EN-")))
+    only = set(a for a in args if a.startswith("RU-"))
     os.makedirs(OUT, exist_ok=True)
     done = skipped = 0
     for key, text, who in TRACKS:
@@ -210,12 +210,8 @@ def table(d):
 
 
 def main():
-    script, *_, en_list = build_script()
+    script, *_, _en_list = build_script()
     tracks = [[key, text, who] for key, who, text, _tone, _where in script]
-    for key, text in en_list:
-        tracks.append([key, text, "en"])
-        if len(text.split()) <= 3:
-            tracks.append([key + "-slow", text, "en_slow"])
 
     voices = table({k: list(v) for k, v in VOICE.items()})
     body = TEMPLATE.replace("{json_voices}", voices.replace("null", "None")) \

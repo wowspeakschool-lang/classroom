@@ -27,8 +27,6 @@ VOICES = {
     "bunny": ["jane", "good"],
     "hedgehog": ["ermil", "good"],
     "fox": ["zahar", "good"],
-    "en": ["john", None],
-    "en_slow": ["john", None],
 }
 
 # Кого прогонять в режиме obrazcy. Неизвестное сервису имя просто
@@ -36,7 +34,6 @@ VOICES = {
 SAMPLES = ["alena", "jane", "omazh", "dasha", "julia", "lera", "masha", "marina", "filipp", "ermil", "zahar", "alexander", "kirill", "anton", "madi_ru", "zorro", "ermolaev"]
 
 SPEED = "0.95"        # чуть медленнее обычного: слушает четырёхлетка
-SLOW = "0.7"          # английское слово «по слогам»
 
 # ───────────────────────────────────────────── сами реплики ──
 
@@ -114,53 +111,6 @@ TRACKS = [
     ["RU-71", "Мостик готов! Нажми на Драконий Остров — там нас ждёт праздник.", "firefly"],
     ["RU-72", "Ты прошёл всю дорогу до праздника! Можно заглянуть на любой остров ещё раз.", "firefly"],
     ["RU-73", "Нажми на остров, чтобы продолжить путешествие.", "firefly"],
-    ["EN-01", "green", "en"],
-    ["EN-01-slow", "green", "en_slow"],
-    ["EN-02", "blue", "en"],
-    ["EN-02-slow", "blue", "en_slow"],
-    ["EN-03", "yellow", "en"],
-    ["EN-03-slow", "yellow", "en_slow"],
-    ["EN-04", "a top", "en"],
-    ["EN-04-slow", "a top", "en_slow"],
-    ["EN-05", "jeans", "en"],
-    ["EN-05-slow", "jeans", "en_slow"],
-    ["EN-06", "shoes", "en"],
-    ["EN-06-slow", "shoes", "en_slow"],
-    ["EN-07", "a green top", "en"],
-    ["EN-07-slow", "a green top", "en_slow"],
-    ["EN-08", "a blue top", "en"],
-    ["EN-08-slow", "a blue top", "en_slow"],
-    ["EN-09", "a yellow top", "en"],
-    ["EN-09-slow", "a yellow top", "en_slow"],
-    ["EN-10", "green jeans", "en"],
-    ["EN-10-slow", "green jeans", "en_slow"],
-    ["EN-11", "blue jeans", "en"],
-    ["EN-11-slow", "blue jeans", "en_slow"],
-    ["EN-12", "yellow jeans", "en"],
-    ["EN-12-slow", "yellow jeans", "en_slow"],
-    ["EN-13", "green shoes", "en"],
-    ["EN-13-slow", "green shoes", "en_slow"],
-    ["EN-14", "blue shoes", "en"],
-    ["EN-14-slow", "blue shoes", "en_slow"],
-    ["EN-15", "yellow shoes", "en"],
-    ["EN-15-slow", "yellow shoes", "en_slow"],
-    ["EN-16", "I have a green top", "en"],
-    ["EN-17", "I have a blue top", "en"],
-    ["EN-18", "I have a yellow top", "en"],
-    ["EN-19", "I have green jeans", "en"],
-    ["EN-20", "I have blue jeans", "en"],
-    ["EN-21", "I have yellow jeans", "en"],
-    ["EN-22", "I have green shoes", "en"],
-    ["EN-23", "I have blue shoes", "en"],
-    ["EN-24", "I have yellow shoes", "en"],
-    ["EN-25", "I", "en"],
-    ["EN-25-slow", "I", "en_slow"],
-    ["EN-26", "have", "en"],
-    ["EN-26-slow", "have", "en_slow"],
-    ["EN-27", "a", "en"],
-    ["EN-27-slow", "a", "en_slow"],
-    ["EN-28", "top", "en"],
-    ["EN-28-slow", "top", "en_slow"],
 ]
 
 # ─────────────────────────────────────────────────── работа ──
@@ -185,10 +135,9 @@ except Exception:
 def synth(text, who, voice=None, emotion=None):
     if voice is None:
         voice, emotion = VOICES[who]
-    english = who.startswith("en")
     form = {"text": text, "voice": voice, "format": "mp3",
-            "lang": "en-US" if english else "ru-RU",
-            "speed": SLOW if who == "en_slow" else SPEED,
+            "lang": "ru-RU",
+            "speed": SPEED,
             "folderId": FOLDER}
     if emotion:
         form["emotion"] = emotion
@@ -242,7 +191,7 @@ def main():
         print("Послушайте и, если нужно, поменяйте имена в таблице VOICES.")
         return
 
-    only = set(a for a in args if a.startswith(("RU-", "EN-")))
+    only = set(a for a in args if a.startswith("RU-"))
     os.makedirs(OUT, exist_ok=True)
     done = skipped = 0
     for key, text, who in TRACKS:

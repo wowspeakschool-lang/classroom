@@ -6,12 +6,12 @@
     python3 tools/tts_kids46.py            записать недостающее
     python3 tools/tts_kids46.py --force RU-05 RU-06   переделать конкретные дорожки
 
-Два движка, и по умолчанию они делят работу пополам:
+Пишем **только русские реплики**, через Yandex SpeechKit: у него родной
+русский — ударения и вопросительная интонация. Английские слова читает
+синтез браузера прямо у ребёнка, и читает хорошо, поэтому файлов под них
+не нужно — `--en` по умолчанию `off`.
 
-    русские реплики   Yandex SpeechKit  (родной русский, ударения и вопросы)
-    английские слова  OpenAI            (чистое произношение, эталон для ребёнка)
-
-Переключается флагами: `--ru openai`, `--en yandex`. Ключи берутся из
+Переключается флагами: `--ru openai`, `--en openai`. Ключи берутся из
 окружения — `YANDEX_API_KEY` (и `YANDEX_FOLDER_ID`, если ключ его требует)
 и `OPENAI_API_KEY`; нужен только ключ того движка, который вызываете.
 
@@ -166,10 +166,11 @@ def main():
     args = sys.argv[1:]
     todo = tracks()
     ru_engine = opt(args, "--ru", "yandex")
-    en_engine = opt(args, "--en", "openai")
+    en_engine = opt(args, "--en", "off")      # английский — синтез браузера
+    todo = [t for t in todo if not (en_engine == "off" and t[2].startswith("en"))]
     for e in (ru_engine, en_engine):
-        if e not in ENGINES:
-            sys.exit(f"движок «{e}» неизвестен, есть: " + ", ".join(ENGINES))
+        if e not in ENGINES and e != "off":
+            sys.exit(f"движок «{e}» неизвестен, есть: off, " + ", ".join(ENGINES))
 
     def engine_of(who):
         return en_engine if who.startswith("en") else ru_engine
