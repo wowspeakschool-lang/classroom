@@ -168,7 +168,12 @@ def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=4, shadow_w=4,
                 collect.append((x, y))
             stack.extend(((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)))
 
-    flood([(0, 0), (w - 1, 0), (0, h - 1), (w - 1, h - 1)])
+    # Заливка стартует со всего периметра, а не из четырёх углов: у полянки
+    # со следами скала и трава касаются правого края и отрезают полоску фона
+    # от углов — она оставалась белой. Проверено: остальные картинки от
+    # этого не меняются ни на пиксель.
+    flood([(x, 0) for x in range(w)] + [(x, h - 1) for x in range(w)] +
+          [(0, y) for y in range(h)] + [(w - 1, y) for y in range(h)])
     if holes:
         floor = int(w * h * holes / 100)
         for sy in range(0, h, 4):
@@ -229,8 +234,7 @@ BASE = {            # имя: (файл, ширина, резать ли фон)
     "stone":         ("stone.webp",                560, True),
     "cloudlet":      ("cloudlet.webp",             560, True),
     "egg":           ("egg.webp",                 1000, True),
-    "tracks":        ("tracks.webp",             1000, True),
-    "cave_closed":   ("cave-closed.webp",         1000, True),
+    "tracks_glade":  ("tracks-glade.webp",       1448, True),   # весь исходник
     "cave_egg":      ("cave-egg.webp",            1000, True),
     "bunny":         ("animal-bunny.webp",         700, True),
     "hedgehog":      ("animal-hedgehog.webp",      700, True),
