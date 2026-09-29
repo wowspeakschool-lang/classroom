@@ -181,15 +181,16 @@ picture. No other characters, no dragon, no text, no letters, no numbers.
 `mia-neutral` (приложить его), не цепочкой: на второй-третьей правке
 плывут лицо и цвета.
 
-**Образец стиля** — приложить `assets/kids-4-6/animal-fox.webp`.
+**Образец стиля** — приложить светлячка `assets/kids-4-6/firefly-neutral.webp`.
 **Размер** 1024×1024. **Сохранить** в `assets/kids-4-6/` под именами из
 заголовков.
 
 ### mia-neutral — обычная (стоит рядом с репликами)
 
 ```
-Use the attached picture only as a style reference: the same cute chunky 3D
-cartoon render, smooth glossy surfaces, soft rounded shapes, big shiny eyes.
+Use the attached picture of a firefly only as a style reference: the same
+cute chunky 3D cartoon render, smooth glossy surfaces, soft rounded shapes,
+big shiny eyes. Do not draw the firefly itself.
 
 A young cheerful girl sorceress named Mia, about 16 years old, cute and
 friendly, for small children. Upper body from the waist up, facing the
