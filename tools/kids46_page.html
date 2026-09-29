@@ -153,6 +153,10 @@ img{-webkit-user-drag:none}
   max-width:100%;max-height:72%;object-fit:contain}
 .stage.solo .bubble{flex:0 0 auto;max-width:100%;font-size:clamp(15px,2.1vw,23px)}
 .stage.solo .content{display:none}
+/* Картинка без гида: Мия и пузырь прячутся, реплика звучит как обычно.
+   На «Раз, два, взяли!» сцена со зверятами — сама по себе рассказ, и
+   фигурка с текстом сбоку её только сжимала (Анна). */
+.stage.piconly .guide{display:none}
 
 .mapview{flex:1 1 0;min-height:0;width:100%;position:relative;border-radius:24px;
   background-position:center;background-size:cover;box-shadow:var(--shadow);overflow:hidden}
@@ -619,6 +623,7 @@ function render(){
   btnNext.hidden = true;
   btnNext.textContent = s.btn || "Дальше ▶";
   lessonEl.querySelector(".stage").classList.toggle("solo", !!s.solo);
+  lessonEl.querySelector(".stage").classList.toggle("piconly", !!s.picOnly);
   content.classList.toggle("withwho", !!(s.who && s.t !== "collect"));
   if (s.t === "token") earned = s.n;
   drawTokens();

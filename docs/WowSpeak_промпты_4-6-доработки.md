@@ -257,3 +257,48 @@ on the background, and generous margins; nothing touches the edges.
 **Проверить:** та же девушка, что в `mia-neutral`; открытка повёрнута к
 зрителю и хорошо видна; на ней нет букв (генератор любит вписывать
 «Invitation» — такую не брать); палочка на месте; вокруг белое поле.
+
+---
+
+## friends-push — зверята толкают камень (Урок 3, экран 16, перерисовать)
+
+Сейчас зверята и камень висят в воздухе: ни пещеры, ни земли. Нужна та же
+сцена, но в мире соседних экранов: сзади пещера из песчаных камней, камень
+закрывает её вход, под лапами трава. Следующий экран — та же пещера уже
+открытая, изнутри.
+
+**Приложить** (все из `assets/kids-4-6/`): `friends-push.webp` — эту сцену
+переделываем, `cave-closed.webp` — пещера, `tracks-glade.webp` — трава и
+земля в том же стиле.
+
+```
+Edit the first attached picture. Keep the bunny, the hedgehog and the fox
+exactly as they are: same faces, colours, poses and the same pushing
+action, all three leaning into the big round pale stone with effort and
+happy faces, with the small yellow effort marks around them.
+
+Add the world around them, taken from the other attached pictures: behind
+the stone, the sandy-rock cave from the second picture, so that the big
+round stone is right in front of the cave entrance and still covers it
+completely. Under the characters and the stone, a soft rounded patch of
+bright green meadow with a sandy path, like in the third picture. Tufts of
+grass, a few tiny white daisies and small pebbles on both sides of the
+scene, at the left and at the right. Wide horizontal composition, the
+whole scene fully visible.
+
+Same cute chunky 3D cartoon render, smooth glossy surfaces, soft rounded
+shapes, bright and friendly. Plain flat pure white background, no shadow
+on the background, generous margin around the whole scene, nothing
+touches the edges of the picture. No other characters, no text, no
+letters, no numbers.
+```
+
+**Размер** 1536×1024 (горизонтальный). **Сохранить** как
+`assets/kids-4-6/friends-push.webp` — или просто прислать в чат.
+
+**Проверить:**
+* зверята те же и толкают тот же камень, позы не поменялись;
+* камень стоит прямо перед входом в пещеру и закрывает его целиком;
+* пещера та же, что на экране 3-15 (песчаные камни), трава с обеих сторон;
+* вокруг белое поле, сцена нигде не обрезана — у прошлой полянки трава
+  справа упёрлась в край.
