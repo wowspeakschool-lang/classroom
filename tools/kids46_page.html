@@ -380,7 +380,13 @@ function stopSound(){
    передаётся (он только в пузыре), и запись на восемь секунд «заканчивалась»
    через полторы. Пока озвучки не было, это ничего не ломало; с ней английское
    слово полезло бы поверх Искорки. Для записи берём её настоящую длину. */
+/* Похвала звучит поверх смены раунда, а всё, что должно прозвучать после
+   неё, ждёт её конца. Экран сменился, пока ждали, — звук уже не нужен. */
 function play(key, text, lang){
+  const mine = token;
+  return praiseEnd.then(() => mine === token ? playNow(key, text, lang) : undefined);
+}
+function playNow(key, text, lang){
   stopSound();
   return new Promise(resolve => {
     let done = false, timer = null;
@@ -413,7 +419,37 @@ function play(key, text, lang){
 const en = v => play(v[0], v[1], "en");
 const ru = k => play(k);
 const choice = a => a[Math.floor(Math.random() * a.length)];
-const praise = () => ru(choice(PRAISE));
+/* Похвала идёт из перемешанной колоды, а не наугад: наугад из пяти то и
+   дело выпадало одно и то же, и четыре «Ух ты, как здорово!» подряд
+   раздражают. Колода кончилась — перемешиваем заново так, чтобы первая
+   не совпала с последней сказанной.
+
+   Своим звуком, мимо current: смена раунда вызывает stopSound(), и через
+   play() похвала обрывалась бы на полуслове. */
+let praiseBag = [], lastPraise = null, praiseEnd = Promise.resolve();
+function nextPraise(){
+  if (!praiseBag.length){
+    praiseBag = shuffle(PRAISE);
+    if (praiseBag.length > 1 && praiseBag[0] === lastPraise) praiseBag.push(praiseBag.shift());
+  }
+  return lastPraise = praiseBag.shift();
+}
+function praise(){
+  const src = AUDIO[nextPraise()];
+  if (!src) return;
+  praiseEnd = new Promise(done => {
+    const a = new Audio(src);
+    let guard = setTimeout(done, 4000);
+    // та же пауза, что после реплики Искорки перед английским словом
+    a.onended = a.onerror = () => { clearTimeout(guard); setTimeout(done, 250); };
+    a.onloadedmetadata = () => {
+      if (isFinite(a.duration) && a.duration){
+        clearTimeout(guard); guard = setTimeout(done, a.duration * 1000 + 300);
+      }
+    };
+    a.play().catch(done);
+  });
+}
 const retry = () => ru(choice(RETRY));
 function blip(key){
   try { const a = new Audio(AUDIO[key]); a.volume = .7; a.play().catch(()=>{}); } catch(e){}
@@ -702,12 +738,14 @@ function drawRounds(){
     bar.appendChild(d);
   }
 }
-/* Знак и похвала занимают одинаковое время независимо от того, записан
-   голос или нет: без записи реплика молчит и возвращается мгновенно, и
-   следующий раунд выскакивал ребёнку в лицо. */
+/* Знак держится 700 мс, и следующий раунд приходит через них независимо
+   от длины похвалы. Раньше раунд ждал, пока она договорит: с записью это
+   1–2.6 с, и переход стал рваным. Теперь похвала договаривает поверх
+   нового раунда, а его английское слово ждёт её конца (praiseEnd). */
 async function cheerStep(){
   cheer();
-  await Promise.all([praise(), wait(700)]);
+  praise();
+  await wait(700);
 }
 async function rightStep(next){
   blip("SFX-OK");

@@ -400,6 +400,9 @@ def build_script():
     where = "Карта — что говорит Искорка между уроками"
     map_say = [{"ru": ru("firefly", t, tone, where), "text": t}
                for t, tone in LS.MAP_SAY]
+    # дописанное после записи — только в конец, иначе номера сдвинутся
+    where = "Похвалы — звучат во всех трёх уроках"
+    praise += [ru("firefly", t, tone, where) for t, tone in LS.PRAISE_MORE]
     return script, praise, retry, ask, finale, map_say, en_tracks
 
 
