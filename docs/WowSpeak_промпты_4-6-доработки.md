@@ -113,3 +113,55 @@ around the whole shape. No text, no letters, no numbers.
 цветным фоном, и тень превращается в грязный след. Скрипт вырезает фон по
 двум правилам — «светлое и бесцветное» и «серое холодное», — но тень,
 совпадающую по цвету с самой вещью, не отличит никакое правило.
+
+---
+
+## tracks-glade — полянка со следами и друзьями (Урок 3, экран 15, замена)
+
+Сейчас на экране две отдельные картинки — следы и пещера под камнем. Нужна
+одна сцена: реплика «Ой, смотри! Следы — и с коготками! Чьи же они? Ведут
+прямо к пещере. А вход завален камнем. Одному не сдвинуть… Хорошо, что с
+нами друзья!» — значит, на картинке и следы, и пещера, и зверята.
+
+**Приложить к запросу пять картинок** (все из `assets/kids-4-6/`):
+`animal-bunny.webp`, `animal-hedgehog.webp`, `animal-fox.webp` — зверята,
+`tracks.webp` — следы, `cave-closed.webp` — пещера под камнем.
+
+```
+Use the attached pictures as exact references: the cream bunny, the brown
+hedgehog and the orange fox must look exactly like the attached characters
+(same faces, same colours, same proportions); the footprints must look
+exactly like the attached three-toed clawed footprints; the cave must look
+exactly like the attached sandy-rock cave with a big round grey stone
+blocking the entrance.
+
+A small sunny grassy meadow, seen from the front, wide horizontal
+composition. On the right, the sandy-rock cave with the round grey stone
+completely blocking its entrance. A trail of the same small three-toed
+clawed footprints goes across the meadow from the lower left and leads
+straight to the stone. On the left, the bunny, the hedgehog and the fox
+stand together next to the trail, looking down at the footprints with
+curious, surprised, happy faces; the fox points at the footprints with one
+paw. The footprints are small — each about the size of the bunny's foot —
+and clearly visible. A few tufts of grass, tiny white daisies and small
+pebbles. The meadow is a soft rounded patch of grass under the whole scene,
+not a floating island.
+
+Cute chunky 3D cartoon render for small children, smooth glossy surfaces,
+soft rounded shapes, bright and friendly, same style as the attached
+pictures. Plain flat pure white background, no shadow on the background,
+generous margin around the whole scene, nothing touches the edges of the
+picture. No other characters, no dragon, no text, no letters, no numbers.
+```
+
+**Размер** 1536×1024 (горизонтальный). **Сохранить** как
+`assets/kids-4-6/tracks-glade.webp` — или просто прислать в чат.
+
+**Проверить:**
+* зверята те же, что на экране 3-16, где толкают камень: зайчик кремовый с
+  длинными ушами, ёжик коричневый, лисёнок оранжевый с белой грудкой;
+* следы трёхпалые, с коготками, маленькие — это следы дракончика, а не
+  кошачьи и не огромные;
+* цепочка следов ведёт именно к камню, а камень закрывает вход целиком;
+* дракончика на картинке нет — он ещё в яйце;
+* по краям белое поле, сцена нигде не обрезана.
