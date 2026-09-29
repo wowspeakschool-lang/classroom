@@ -116,6 +116,27 @@ img{-webkit-user-drag:none}
 /* Две картинки в сюжете — не три зверька: им можно занять полэкрана. */
 .picarea.duo{gap:4vw}
 .picarea.duo img{height:auto;max-height:100%;width:auto;max-width:42%}
+/* Тёмная пещера. Время — под запись RU-59: «Как темно…» до 1.9 с,
+   «Подожди, я посвечу» 2.4–3.9 с, «Смотри» с 4.4 с. Светлячок подлетает,
+   пока Искорка говорит «посвечу», свет загорается перед «Смотри». */
+.picarea.dark{position:relative}
+.picarea.dark.go img.scene{animation:cavelit 5s ease forwards}
+@keyframes cavelit{0%,74%{filter:brightness(.14) saturate(.5)}
+  100%{filter:brightness(1) saturate(1) drop-shadow(0 8px 16px rgba(40,60,90,.2))}}
+.picarea.dark img.fly{position:absolute;left:50%;top:50%;height:auto;width:11%;
+  max-width:none;opacity:0;filter:drop-shadow(0 0 14px #fff3a0) drop-shadow(0 0 30px #ffe066)}
+.picarea.dark.go img.fly{animation:flyin 5s ease-in-out forwards}
+@keyframes flyin{0%,44%{opacity:0;transform:translate(-460%,-150%) scale(.8)}
+  50%{opacity:1}74%{transform:translate(-50%,-150%) scale(1)}
+  100%{opacity:1;transform:translate(-50%,-150%) scale(1)}}
+/* Светлячок у пузыря гаснет, пока он же летит в пещеру, — иначе на экране
+   два светлячка сразу. */
+#lesson.cavefly .guide img{animation:guideaway 5s ease forwards}
+@keyframes guideaway{0%,40%{opacity:1}50%,100%{opacity:0}}
+.picarea.dark::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:radial-gradient(circle at 50% 45%,rgba(255,236,150,.6),rgba(255,236,150,0) 42%)}
+.picarea.dark.go::after{animation:caveglow 5s ease forwards}
+@keyframes caveglow{0%,72%{opacity:0}84%{opacity:1}100%{opacity:.35}}
 .below{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:1vh}
 .wordline{font-size:clamp(22px,4vw,44px);font-weight:900;letter-spacing:.5px;text-align:center}
 
@@ -359,7 +380,7 @@ const FINALE = __FINALE__;
 const MAPSAY = __MAPSAY__;
 // Ссылка на запись: подставить, когда Анна её пришлёт. Пока пусто —
 // кнопка показывает подпись-заглушку вместо того, чтобы молча не работать.
-const SIGNUP_URL = "";
+const GIFT_URL = "";          // ссылка кнопки «Получить подарок» в финале
 const COLORS = __COLORS__;
 const FRIENDS = __FRIENDS__;
 const TIPS = __TIPS__;
@@ -587,6 +608,7 @@ function updateNum(){
 }
 function render(){
   stopSound(); token++;
+  lessonEl.classList.remove("cavefly");
   const s = screen();
   guideImg.src = IMG[s.solo || s.t === "token" ? "firefly_wow" : "firefly"];
   bubble.textContent = s.text || "";
@@ -775,6 +797,23 @@ RENDER.story = function(s){
   /* pics — когда реплика про две вещи сразу: «следы ведут к пещере, а вход
      завален камнем». Отдельным экраном это было бы лишней дорожкой. */
   if (s.pics) content.appendChild(picArea(s.pics.map(k => IMG[k]), "duo"));
+  else if (!s.solo && s.dark){
+    /* «Как темно… подожди, я посвечу»: картинка начинается тёмной, и
+       свет приходит вместе со светлячком. «Ещё раз» повторяет и свет. */
+    const area = picArea([IMG[s.pic]], "dark");
+    area.firstChild.classList.add("scene");
+    const fly = document.createElement("img");
+    fly.className = "fly"; fly.src = IMG.firefly; fly.alt = "";
+    area.appendChild(fly);
+    content.appendChild(area);
+    s._run = () => {
+      area.classList.remove("go"); lessonEl.classList.remove("cavefly");
+      void area.offsetWidth;
+      area.classList.add("go"); lessonEl.classList.add("cavefly");
+      sayThenNext(s, 5200);
+    };
+    return;                    // звук и свет запустит render() через s._run
+  }
   else if (!s.solo) content.appendChild(picArea([IMG[s.pic]]));
   sayThenNext(s, 2000);
 };
@@ -1374,30 +1413,24 @@ function finish(){
   const panel = overlay.querySelector(".panel");
   if (last){
     // Дорога пройдена — возвращать на карту некуда, зовём на урок.
-    /* Кнопка записи появится, когда будет ссылка: SIGNUP_URL в начале
-       файла. Пока её нет, не показываем — мёртвая кнопка хуже, чем её
-       отсутствие. */
-    const signup = SIGNUP_URL
-      ? '<button class="btn" data-act="signup">Хочу в следующее приключение 🐉</button>'
-      : "";
+    /* Вместо «Пройти ещё раз» — «Получить подарок» (Анна). Ссылки пока
+       нет: GIFT_URL в начале файла; пустая — кнопка стоит, но никуда не
+       ведёт, чтобы было видно, где она будет. */
     panel.innerHTML = "<h2>🎉 Ты дошёл до праздника!</h2>" +
       "<p>Ты выучил три цвета, три вещи и умеешь рассказывать о себе " +
       "по-английски. А кто вылупится из яйца — узнаем в следующем приключении. " +
       "Приходи, я буду ждать!</p>" +
-      '<div class="row">' + signup +
-        '<button class="btn ghost" data-act="again">Пройти ещё раз</button>' +
-      "</div>";
-    if (SIGNUP_URL){
-      panel.querySelector('[data-act="signup"]').onclick =
-        () => { location.href = SIGNUP_URL; };
-    }
+      '<div class="row"><button class="btn" data-act="gift">Получить подарок 🎁</button></div>';
+    panel.querySelector('[data-act="gift"]').onclick =
+      () => { if (GIFT_URL) location.href = GIFT_URL; };
   } else {
     panel.innerHTML = "<h2>Урок пройден!</h2><p>Дорожка на следующий остров готова.</p>" +
       '<div class="row"><button class="btn ghost" data-act="again">Пройти ещё раз</button>' +
       '<button class="btn" data-act="map">Вернуться на карту 🗺️</button></div>';
     panel.querySelector('[data-act="map"]').onclick = showMap;
   }
-  panel.querySelector('[data-act="again"]').onclick = () => {
+  const again = panel.querySelector('[data-act="again"]');
+  if (again) again.onclick = () => {
     overlay.classList.remove("on"); startLesson(L);
   };
   overlay.classList.add("on");

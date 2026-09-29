@@ -90,7 +90,7 @@ def finger_tips(im, want):
 # ──────────────────────────────────────────────────────────── картинки ──
 
 def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=4, shadow_w=4,
-              holes=None):
+              holes=None, ground=None):
     """Убирает фон генератора: светлый И бесцветный.
 
     Одной яркости мало. Фон строго серый (max−min = 0), а белые места самих
@@ -136,6 +136,13 @@ def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=4, shadow_w=4,
         # обгрызло серый пропеллер самолётика и белую подошву ботинок: они
         # такие же светло-серые, как тень. Тень, совпадающую по цвету с самой
         # вещью, надо не дочищать, а перерисовывать картинку без неё.
+        # Третья полоса — «пол» под сценой: тёплое светлое пятно, на котором
+        # стоят герои (у «push» 244,237,233). Оно не серое, и первые две
+        # полосы его не берут — на цветном фоне под лапами оставалась белая
+        # полоса с рваным краем. Включается только для своей картинки и
+        # только ниже линии пола: выше тот же тон у светлой шерсти зайчика.
+        if ground and y >= ground[2] * h and lo >= ground[0] and hi - lo <= ground[1]:
+            return True
         if shadow is None:          # у вещи свой серый — вторая полоса ей вредна
             return False
         return lo >= shadow and hi - lo <= shadow_n and abs(r - b) <= shadow_w
@@ -257,14 +264,19 @@ PAINT_OPTS = {"flower": {"whole": True, "sat": 1.65}}
 
 # Чем вырезать фон, если не поровну для всех. `shadow=None` — выключить
 # полосу запечённой тени: у самолётика серый пропеллер, и она ела его.
-CUT_OPTS = {"plane": {"shadow": None}}
+CUT_OPTS = {"plane": {"shadow": None},
+            # пол под зверятами и камнем: светлее 215, разброс до 18, ниже 72%
+            "push": {"ground": (215, 18, 0.72)}}
 
 
 CACHE = ROOT / "tools" / ".kids46_images.json"
 
 
 def build_images():
-    sig = {"base": {k: [v[0], v[1], v[2], (ART / v[0]).stat().st_mtime]
+    # Настройки вырезки входят в подпись: без них правка CUT_OPTS или HOLES
+    # у готовой картинки молча брала старую из кэша.
+    sig = {"base": {k: [v[0], v[1], v[2], (ART / v[0]).stat().st_mtime,
+                        CUT_OPTS.get(k), HOLES.get(k)]
                     for k, v in BASE.items()},
            "painted": [[n, f, w, (ART / f).stat().st_mtime, PAINT_OPTS.get(n),
                         CUT_OPTS.get(n)] for n, f, w in PAINTED],
