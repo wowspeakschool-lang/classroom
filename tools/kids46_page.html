@@ -611,7 +611,8 @@ function afterIntro(s, build){
   fit();
   const mine = token;
   (async () => {
-    if (round === 0){          // реплика Искорки — только в первом раунде
+    // реплика Искорки — только в первом раунде и не при перезапуске ленты
+    if (round === 0 && !s._again){
       await ru(s.ru);
       if (mine !== token) return;
       await wait(AUDIO[s.ru] ? 250 : readPause(s.text));
@@ -1091,6 +1092,11 @@ RENDER.collect = function(s){
 };
 
 /* ───────── поймай вещь ───────── */
+/* Лента трогается, когда цвет уже назван, а не сразу. С записью реплика
+   идёт четыре с половиной секунды, слово — ещё секунду, и вещи успевали
+   проехать полпути, пока ребёнок узнавал, что ловить. Уехала вещь за
+   край — раунд начинается заново, но уже без реплики: раньше Искорка
+   повторяла «Предметы поехали!» каждые одиннадцать секунд. */
 RENDER.catch = function(s){
   afterIntro(s, () => {
     const r = s.rounds[round];
@@ -1115,13 +1121,22 @@ RENDER.catch = function(s){
         await rightStep(() => nextRound(s));
       };
       belt.appendChild(c);
-      setTimeout(() => { c.style.left = (-30 - i * 28) + "%"; }, 60 + i * 900);
     });
     content.appendChild(belt);
-    // вещь может уехать за край — тогда просто пускаем раунд заново
-    const mine = token;
-    setTimeout(() => { if (mine === token) render(); }, 11500);
+    s._quiz = async () => {
+      const cells = [...belt.children];
+      cells.forEach((c, i) => {
+        setTimeout(() => { c.style.left = (-30 - i * 28) + "%"; }, 60 + i * 900);
+      });
+      // вещь может уехать за край — тогда пускаем раунд заново
+      const mine = token;
+      setTimeout(() => {
+        if (mine !== token) return;
+        s._again = true; render();
+      }, 11500);
+    };
   });
+  s._again = false;
 };
 
 /* ───────── выбери из двух-четырёх ───────── */
