@@ -228,9 +228,11 @@ BASE = {            # имя: (файл, ширина, резать ли фон)
     "meadow":        ("island-meadow.webp",       1100, True),
     "clouds":        ("island-clouds.webp",       1100, True),
     "dragon":        ("island-dragon.webp",       1100, True),
-    "firefly":       ("firefly-neutral.webp",      760, True),
-    "firefly_smile": ("firefly-smile.webp",        760, True),
-    "firefly_wow":   ("firefly-excited.webp",      760, True),
+    # гид — Волшебница Мия; светлячок остался для стайки в пещере
+    "guide":         ("mia-neutral.webp",          760, True),
+    "guide_smile":   ("mia-smile.webp",            760, True),
+    "guide_wow":     ("mia-excited.webp",          760, True),
+    "firefly":       ("firefly-neutral.webp",      400, True),
     "stone":         ("stone.webp",                560, True),
     "cloudlet":      ("cloudlet.webp",             560, True),
     "egg":           ("egg.webp",                 1000, True),
@@ -421,7 +423,7 @@ def build_script():
     retry = [ru("firefly", t, tone, where) for t, tone in LS.RETRY]
     ask = ru("firefly", LS.ASK_REPEAT[0], LS.ASK_REPEAT[1], where)
     finale = ru("firefly", LS.FINALE[0], LS.FINALE[1], where)
-    where = "Карта — что говорит Искорка между уроками"
+    where = "Карта — что говорит Мия между уроками"
     map_say = [{"ru": ru("firefly", t, tone, where), "text": t}
                for t, tone in LS.MAP_SAY]
     # дописанное после записи — только в конец, иначе номера сдвинутся
@@ -526,7 +528,7 @@ def write_voice_doc(script, en_tracks):
 
 | Кто | Каким голосом | Реплик | Характер |
 |---|---|---|---|"""]
-    d.append("| **Искорка**, светлячок-проводник | детский, звонкий, тёплый | %d | "
+    d.append("| **Волшебница Мия**, проводница | взрослый женский, тёплый, живой (Yandex lera) | %d | "
              "Ведёт всё приключение. Радуется, удивляется, зовёт за собой. |"
              % counts.get("firefly", 0))
     for v, desc, ch in (("bunny", "детский, мягкий, чуть робкий", "Стеснительный."),

@@ -48,7 +48,9 @@ img{-webkit-user-drag:none}
    попадал на карту и просто смотрел на острова. */
 #map .mapguide{position:absolute;left:50%;bottom:2%;transform:translateX(-50%);
   display:flex;align-items:flex-end;gap:12px;width:min(78%,760px);justify-content:center}
-#map .mapguide img{width:min(15vw,130px);flex:0 0 auto;display:block}
+/* Мия заполняет квадрат плотнее светлячка и при 130 px заходила головой
+   на название Солнечной Полянки. */
+#map .mapguide img{width:min(12vw,104px);flex:0 0 auto;display:block}
 #map .mapsay{flex:0 1 auto;margin-bottom:6px;
   background:var(--card);border-radius:20px;padding:10px 16px;box-shadow:var(--shadow);
   font-size:clamp(13px,1.8vw,20px);line-height:1.35;text-align:left}
@@ -116,23 +118,25 @@ img{-webkit-user-drag:none}
 /* Две картинки в сюжете — не три зверька: им можно занять полэкрана. */
 .picarea.duo{gap:4vw}
 .picarea.duo img{height:auto;max-height:100%;width:auto;max-width:42%}
-/* Тёмная пещера. Время — под запись RU-59: «Как темно…» до 1.9 с,
-   «Подожди, я посвечу» 2.4–3.9 с, «Смотри» с 4.4 с. Светлячок подлетает,
-   пока Искорка говорит «посвечу», свет загорается перед «Смотри». */
+/* Тёмная пещера. Время — под запись RU-59 (Мия, 10.4 с): «Как темно…»
+   до 2.0 с, «Сейчас позову своих светлячков» 2.4–4.3, «Светлячки, летите
+   сюда!» 4.8–6.8, «Смотри — гнёздышко» с 7.2. Светлячки слетаются по
+   одному с 5 с, свет загорается к «Смотри». Цикл — 7.6 с. */
 .picarea.dark{position:relative}
-.picarea.dark.go img.scene{animation:cavelit 5s ease forwards}
-@keyframes cavelit{0%,74%{filter:brightness(.14) saturate(.5)}
-  100%{filter:brightness(1) saturate(1) drop-shadow(0 8px 16px rgba(40,60,90,.2))}}
-.picarea.dark img.fly{position:absolute;left:50%;top:50%;height:auto;width:11%;
-  max-width:none;opacity:0;filter:drop-shadow(0 0 14px #fff3a0) drop-shadow(0 0 30px #ffe066)}
-.picarea.dark.go img.fly{animation:flyin 5s ease-in-out forwards}
-@keyframes flyin{0%,44%{opacity:0;transform:translate(-460%,-150%) scale(.8)}
-  50%{opacity:1}74%{transform:translate(-50%,-150%) scale(1)}
-  100%{opacity:1;transform:translate(-50%,-150%) scale(1)}}
-/* Светлячок у пузыря гаснет, пока он же летит в пещеру, — иначе на экране
-   два светлячка сразу. */
-#lesson.cavefly .guide img{animation:guideaway 5s ease forwards}
-@keyframes guideaway{0%,40%{opacity:1}50%,100%{opacity:0}}
+.picarea.dark.go img.scene{animation:cavelit 7.6s ease forwards}
+@keyframes cavelit{0%,86%{filter:brightness(.14) saturate(.5)}
+  97%,100%{filter:brightness(1) saturate(1) drop-shadow(0 8px 16px rgba(40,60,90,.2))}}
+.picarea.dark img.fly{position:absolute;height:auto;max-width:none;opacity:0;
+  filter:drop-shadow(0 0 10px #fff3a0) drop-shadow(0 0 22px #ffe066)}
+.picarea.dark.go img.fly{animation:swarmin 1.7s ease-out var(--d) both,
+  hover 1.8s ease-in-out calc(var(--d) + 1.7s) infinite alternate}
+@keyframes swarmin{from{opacity:0;transform:translate(var(--sx),var(--sy)) scale(.5)}
+  30%{opacity:1}to{opacity:1;transform:translate(0,0) scale(1)}}
+@keyframes hover{from{translate:0 0}to{translate:0 -14%}}
+.picarea.dark::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:radial-gradient(circle at 50% 45%,rgba(255,236,150,.6),rgba(255,236,150,0) 42%)}
+.picarea.dark.go::after{animation:caveglow 7.6s ease forwards}
+@keyframes caveglow{0%,84%{opacity:0}93%{opacity:1}100%{opacity:.35}}
 .picarea.dark::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
   background:radial-gradient(circle at 50% 45%,rgba(255,236,150,.6),rgba(255,236,150,0) 42%)}
 .picarea.dark.go::after{animation:caveglow 5s ease forwards}
@@ -553,7 +557,7 @@ function buildMap(){
   });
   const g = document.createElement("div");
   g.className = "mapguide";
-  g.innerHTML = '<img src="' + IMG.firefly_smile + '" alt="">' +
+  g.innerHTML = '<img src="' + IMG.guide_smile + '" alt="">' +
     '<div class="mapsay">' + mapLine().text + "</div>";
   mapEl.appendChild(g);
 }
@@ -608,9 +612,8 @@ function updateNum(){
 }
 function render(){
   stopSound(); token++;
-  lessonEl.classList.remove("cavefly");
   const s = screen();
-  guideImg.src = IMG[s.solo || s.t === "token" ? "firefly_wow" : "firefly"];
+  guideImg.src = IMG[s.solo || s.t === "token" ? "guide_wow" : "guide"];
   bubble.textContent = s.text || "";
   content.innerHTML = "";
   btnNext.hidden = true;
@@ -793,24 +796,54 @@ function sayThenNext(s, ms){
   const mine = token;
   ru(s.ru).then(() => { if (mine === token) showNextLater(300); });
 }
+/* Стайка светлячков в пещере: куда садится (в % области) и откуда летит
+   (сдвиг в % от своего размера) — все прилетают слева сверху, со стороны
+   Мии, но с разных точек. */
+const SWARM = [[40, 40, -900, -500], [52, 33, -1100, -700], [62, 44, -1300, -400],
+               [46, 56, -800, -300], [58, 60, -1000, -200]];
 RENDER.story = function(s){
   /* pics — когда реплика про две вещи сразу: «следы ведут к пещере, а вход
      завален камнем». Отдельным экраном это было бы лишней дорожкой. */
   if (s.pics) content.appendChild(picArea(s.pics.map(k => IMG[k]), "duo"));
   else if (!s.solo && s.dark){
-    /* «Как темно… подожди, я посвечу»: картинка начинается тёмной, и
-       свет приходит вместе со светлячком. «Ещё раз» повторяет и свет. */
+    /* «Как темно… Сейчас позову своих светлячков. Светлячки, летите сюда!»:
+       картинка начинается тёмной, на зов Мия поднимает палочку, слетается
+       стайка, и становится светло. «Ещё раз» повторяет всё сначала. */
     const area = picArea([IMG[s.pic]], "dark");
     area.firstChild.classList.add("scene");
-    const fly = document.createElement("img");
-    fly.className = "fly"; fly.src = IMG.firefly; fly.alt = "";
-    area.appendChild(fly);
+    const flies = SWARM.map(([x, y, sx, sy], i) => {
+      const fly = document.createElement("img");
+      fly.className = "fly"; fly.src = IMG.firefly; fly.alt = "";
+      fly.style.setProperty("--sx", sx + "%"); fly.style.setProperty("--sy", sy + "%");
+      fly.style.setProperty("--d", (5.0 + i * 0.3).toFixed(1) + "s");
+      area.appendChild(fly);
+      return fly;
+    });
     content.appendChild(area);
+    /* Места считаются от самой картинки, а не от области: на узком экране
+       пещера занимает только середину высокой области, и в процентах от неё
+       светлячки садились над пещерой и мимо яйца. */
+    const place = () => {
+      const img = area.firstChild, A = area.getBoundingClientRect();
+      const ar = (img.naturalWidth || 1) / (img.naturalHeight || 1);
+      const w = Math.min(A.width, A.height * ar), h = w / ar;
+      const ox = (A.width - w) / 2, oy = (A.height - h) / 2, fw = w * 0.07;
+      flies.forEach((fly, i) => {
+        const [x, y] = SWARM[i];
+        fly.style.width = fw + "px";
+        fly.style.left = (ox + x / 100 * w - fw / 2) + "px";
+        fly.style.top = (oy + y / 100 * h - fw / 2) + "px";
+      });
+    };
+    area.firstChild.decode().then(place, place);
+    addEventListener("resize", place);
     s._run = () => {
-      area.classList.remove("go"); lessonEl.classList.remove("cavefly");
-      void area.offsetWidth;
-      area.classList.add("go"); lessonEl.classList.add("cavefly");
-      sayThenNext(s, 5200);
+      place();
+      const mine = token;
+      guideImg.src = IMG.guide;
+      area.classList.remove("go"); void area.offsetWidth; area.classList.add("go");
+      setTimeout(() => { if (mine === token) guideImg.src = IMG.guide_wow; }, 4800);
+      sayThenNext(s, 8000);
     };
     return;                    // звук и свет запустит render() через s._run
   }
