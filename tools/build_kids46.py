@@ -90,7 +90,7 @@ def finger_tips(im, want):
 # ──────────────────────────────────────────────────────────── картинки ──
 
 def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=4, shadow_w=4,
-              holes=None, ground=None):
+              holes=None, ground=None, keep=None):
     """Убирает фон генератора: светлый И бесцветный.
 
     Одной яркости мало. Фон строго серый (max−min = 0), а белые места самих
@@ -112,6 +112,11 @@ def cut_white(im, bright=250, neutral=6, shadow=170, shadow_n=4, shadow_w=4,
     def is_bg(x, y):
         r, g, b, a = px[x, y]
         if a == 0:
+            return False
+        # Овал, внутри которого фона не бывает (cx, cy, rx, ry в долях).
+        # У яйца белый блик на скорлупе без всякой границы переходит в фон,
+        # и заливка выгрызала верхушку — по цвету их не различить.
+        if keep and ((x / w - keep[0]) / keep[2]) ** 2 + ((y / h - keep[1]) / keep[3]) ** 2 < 1:
             return False
         lo, hi = min(r, g, b), max(r, g, b)
         if lo >= bright and hi - lo <= neutral:
@@ -266,7 +271,10 @@ PAINT_OPTS = {"flower": {"whole": True, "sat": 1.65}}
 # полосу запечённой тени: у самолётика серый пропеллер, и она ела его.
 CUT_OPTS = {"plane": {"shadow": None},
             # пол под зверятами и камнем: светлее 215, разброс до 18, ниже 72%
-            "push": {"ground": (215, 18, 0.72)}}
+            "push": {"ground": (215, 18, 0.72)},
+            # овал скорлупы: белый блик на верхушке сливался с фоном,
+            # и заливка выгрызала в яйце ямку
+            "egg": {"keep": (0.5064, 0.3987, 0.2233, 0.2456)}}
 
 
 CACHE = ROOT / "tools" / ".kids46_images.json"
