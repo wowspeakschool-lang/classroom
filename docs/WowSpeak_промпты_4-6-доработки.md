@@ -165,3 +165,70 @@ picture. No other characters, no dragon, no text, no letters, no numbers.
 * цепочка следов ведёт именно к камню, а камень закрывает вход целиком;
 * дракончика на картинке нет — он ещё в яйце;
 * по краям белое поле, сцена нигде не обрезана.
+
+---
+
+## luchik — Волшебница Лучик, новый гид вместо Искорки (три портрета)
+
+Гид — девушка-волшебница, и голос у неё обычный взрослый женский. Она не
+должна быть похожа на Хранительницу Слов из версии 7–9: та взрослая и
+серьёзная, Лучик — юная, лёгкая, солнечная. Имя от «лучика»: в образе
+солнечные лучи и звёздочки.
+
+**Порядок.** Сначала `luchik-neutral`, **только** с образцом стиля. Потом
+`luchik-smile` и `luchik-excited` — каждый **одной правкой** готового
+`luchik-neutral` (приложить его), не цепочкой: на второй-третьей правке
+плывут лицо и цвета.
+
+**Образец стиля** — приложить `assets/kids-4-6/animal-fox.webp`.
+**Размер** 1024×1024. **Сохранить** в `assets/kids-4-6/` под именами из
+заголовков.
+
+### luchik-neutral — обычная (стоит рядом с репликами)
+
+```
+Use the attached picture only as a style reference: the same cute chunky 3D
+cartoon render, smooth glossy surfaces, soft rounded shapes, big shiny eyes.
+
+A young cheerful girl sorceress named Luchik, about 16 years old, cute and
+friendly, for small children. Upper body from the waist up, facing the
+viewer, slightly turned. Warm golden hair in two soft buns with a small
+glowing golden sun clip. Big warm brown eyes, rosy cheeks, gentle friendly
+smile. A short cape and dress in bright clear colours: green, blue and
+yellow — clean colours, not pastel. She holds a small magic wand with a
+glowing little golden star on top. A few tiny golden sparkles around the
+wand. Calm, kind, welcoming pose.
+
+Plain flat pure white background, no shadow on the background, generous
+margin around the whole figure, nothing touches the edges of the picture.
+No other characters, no text, no letters, no numbers.
+```
+
+### luchik-smile — радуется (на карте)
+
+Приложить готовый `luchik-neutral`.
+
+```
+Edit the attached picture. Keep the same girl exactly: same face, hair,
+clothes, colours, wand and style. Change only the expression and pose: a
+big happy open smile, eyes smiling, one hand waving hello, the wand in the
+other hand. Keep the plain flat pure white background and the same margins.
+```
+
+### luchik-excited — восторг (награды, сюжетные экраны)
+
+Приложить готовый `luchik-neutral`.
+
+```
+Edit the attached picture. Keep the same girl exactly: same face, hair,
+clothes, colours, wand and style. Change only the expression and pose:
+delighted and amazed, eyebrows up, mouth open in a happy "wow", the wand
+raised up high with a burst of golden sparkles and tiny stars around it.
+Keep the plain flat pure white background and the same margins.
+```
+
+**Проверить:**
+* во всех трёх — одна и та же девушка: лицо, причёска, цвета одежды;
+* в одежде явно видны наши три цвета — зелёный, синий, жёлтый;
+* на палочке звёздочка, по краям белое поле, фигура не обрезана;
+* не похожа на Хранительницу Слов из 7–9 и не выглядит взрослой тётей.
