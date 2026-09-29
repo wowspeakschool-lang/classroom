@@ -168,29 +168,30 @@ picture. No other characters, no dragon, no text, no letters, no numbers.
 
 ---
 
-## luchik — Волшебница Лучик, новый гид вместо Искорки (три портрета)
+## mia — Волшебница Мия, новый гид вместо Искорки (три портрета)
 
 Гид — девушка-волшебница, и голос у неё обычный взрослый женский. Она не
 должна быть похожа на Хранительницу Слов из версии 7–9: та взрослая и
-серьёзная, Лучик — юная, лёгкая, солнечная. Имя от «лучика»: в образе
-солнечные лучи и звёздочки.
+серьёзная, Мия — юная, лёгкая, солнечная. Сначала звалась Лучик, но
+«лучик» — мужского рода, а гид — девушка; в образе от него остались
+солнышко на заколке и звёздочки.
 
-**Порядок.** Сначала `luchik-neutral`, **только** с образцом стиля. Потом
-`luchik-smile` и `luchik-excited` — каждый **одной правкой** готового
-`luchik-neutral` (приложить его), не цепочкой: на второй-третьей правке
+**Порядок.** Сначала `mia-neutral`, **только** с образцом стиля. Потом
+`mia-smile` и `mia-excited` — каждый **одной правкой** готового
+`mia-neutral` (приложить его), не цепочкой: на второй-третьей правке
 плывут лицо и цвета.
 
 **Образец стиля** — приложить `assets/kids-4-6/animal-fox.webp`.
 **Размер** 1024×1024. **Сохранить** в `assets/kids-4-6/` под именами из
 заголовков.
 
-### luchik-neutral — обычная (стоит рядом с репликами)
+### mia-neutral — обычная (стоит рядом с репликами)
 
 ```
 Use the attached picture only as a style reference: the same cute chunky 3D
 cartoon render, smooth glossy surfaces, soft rounded shapes, big shiny eyes.
 
-A young cheerful girl sorceress named Luchik, about 16 years old, cute and
+A young cheerful girl sorceress named Mia, about 16 years old, cute and
 friendly, for small children. Upper body from the waist up, facing the
 viewer, slightly turned. Warm golden hair in two soft buns with a small
 glowing golden sun clip. Big warm brown eyes, rosy cheeks, gentle friendly
@@ -204,9 +205,9 @@ margin around the whole figure, nothing touches the edges of the picture.
 No other characters, no text, no letters, no numbers.
 ```
 
-### luchik-smile — радуется (на карте)
+### mia-smile — радуется (на карте)
 
-Приложить готовый `luchik-neutral`.
+Приложить готовый `mia-neutral`.
 
 ```
 Edit the attached picture. Keep the same girl exactly: same face, hair,
@@ -215,9 +216,9 @@ big happy open smile, eyes smiling, one hand waving hello, the wand in the
 other hand. Keep the plain flat pure white background and the same margins.
 ```
 
-### luchik-excited — восторг (награды, сюжетные экраны)
+### mia-excited — восторг (награды, сюжетные экраны)
 
-Приложить готовый `luchik-neutral`.
+Приложить готовый `mia-neutral`.
 
 ```
 Edit the attached picture. Keep the same girl exactly: same face, hair,
