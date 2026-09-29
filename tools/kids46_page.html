@@ -617,7 +617,8 @@ function updateNum(){
 function render(){
   stopSound(); token++;
   const s = screen();
-  guideImg.src = IMG[s.solo || s.t === "token" ? "guide_wow" : "guide"];
+  // guide — свой портрет экрана (на первом Мия с приглашением в руках)
+  guideImg.src = IMG[s.guide || (s.solo || s.t === "token" ? "guide_wow" : "guide")];
   bubble.textContent = s.text || "";
   content.innerHTML = "";
   btnNext.hidden = true;

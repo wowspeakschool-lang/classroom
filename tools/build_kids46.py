@@ -232,6 +232,8 @@ BASE = {            # имя: (файл, ширина, резать ли фон)
     "guide":         ("mia-neutral.webp",          760, True),
     "guide_smile":   ("mia-smile.webp",            760, True),
     "guide_wow":     ("mia-excited.webp",          760, True),
+    # первый экран, крупно (solo — до 400 px): Мия показывает приглашение
+    "guide_invite":  ("mia-invite.webp",           820, True),
     "firefly":       ("firefly-neutral.webp",      400, True),
     "stone":         ("stone.webp",                560, True),
     "cloudlet":      ("cloudlet.webp",             560, True),
