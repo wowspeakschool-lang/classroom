@@ -1,15 +1,23 @@
 #!/usr/bin/env python3
 """Нарезка листов Super Minds 3 на отдельные картинки.
 
-Лист — одна сгенерированная картинка с сеткой ячеек внутри. Скрипт делит её
-по сетке, обрезает поля каждой ячейки, вписывает в квадрат и кладёт webp
-в media/sm3/uN/. Сцены (grid 1x1) просто масштабируются.
+Лист — одна сгенерированная картинка с сеткой ячеек внутри. Скрипт находит
+предмет каждой ячейки как связную фигуру и вырезает её целиком, потом кладёт
+webp в media/sm3/uN/. Сцены (grid 1x1) просто масштабируются.
+
+Почему не режем ровно по сетке. Генератор часто выводит предмет за свою
+ячейку: купол медузы заходил в ячейку осьминога, луч звезды и хвост конька —
+в ряд выше, так же вылезали вентилятор, щётка и зонт. Резать по линии значит
+отрезать им верхушку, а резать с запасом — тащить в карточку кусок соседа.
+Поэтому строим маску непустых пикселей, гасим линии сетки, размечаем связные
+области и отдаём ячейке те из них, которые лежат в ней большей частью.
 
 Переприменяем: файлы всегда переписываются заново.
 
   python3 tools/sm3_cut.py --src <папка с листами> [--only Л8.4 Л8.5]
 """
 import argparse, os, sys
+from collections import deque
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -18,6 +26,8 @@ CARD = 400          # длинная сторона карточки, px (диа
 SCENE = 880         # длинная сторона сцены, px (диапазон 760-900)
 Q_CARD, Q_SCENE = 82, 80
 PAD = 0.02          # поле вокруг предмета, доля стороны ячейки
+WHITE = 244         # ниже этого предмет, выше — фон листа
+MIN_PART = 0.004    # область меньше 0.4% ячейки — мусор, не предмет
 
 # лист: (файл, юнит, строк, колонок, имена ячеек слева направо сверху вниз)
 # None вместо имени — ячейку пропустить (пустая клетка листа)
@@ -150,43 +160,38 @@ SHEETS = [
 ]
 
 
-def _uniform_light(vals, share=0.85):
+def _line_is_divider(vals, share=0.85):
     """Похожа ли линия на разделитель сетки.
 
-    Строгого «вся линия одного тона» мало: сосед может переползти через линию
-    (медуза заходила в ячейку осьминога), и в этом месте она прерывается.
-    Поэтому считаем линию разделителем, если ровными и светлыми оказались
-    хотя бы 85% её точек.
+    Строгого «вся линия одного тона» мало: сосед может переползти через линию,
+    и в этом месте она прерывается. Считаем разделителем линию, у которой
+    ровными и светлыми оказались хотя бы 85% точек.
     """
     if not vals:
         return False
-    grey = [sum(px) / 3 for px in vals]
-    good = [g for g in grey if 185 <= g <= 252]
-    if len(good) < share * len(grey):
+    good = [g for g in vals if 185 <= g <= 252]
+    if len(good) < share * len(vals):
         return False
     return max(good) - min(good) <= 14
 
 
-def find_divider(im, pos, vertical, search):
-    """Найти настоящую линию сетки рядом с расчётной границей ячейки.
-
-    Возвращает (начало, конец) полосы разделителя или None, если линии нет —
-    так бывает, когда предмет вылез за свою ячейку и перекрыл её собой.
-    """
-    px = im.load()
-    w, h = im.size
+def divider_band(grey, pos, vertical, search):
+    """Полоса разделителя рядом с расчётной границей ячейки, или None."""
+    px = grey.load()
+    w, h = grey.size
     limit = w if vertical else h
     span = h if vertical else w
+    step = max(1, span // 200)
 
     def line(i):
         if vertical:
-            return [px[i, y] for y in range(0, span, max(1, span // 200))]
-        return [px[x, i] for x in range(0, span, max(1, span // 200))]
+            return [px[i, y] for y in range(0, span, step)]
+        return [px[x, i] for x in range(0, span, step)]
 
     hit = None
-    for d in range(0, search + 1):
+    for d in range(search + 1):
         for i in (pos - d, pos + d):
-            if 0 < i < limit - 1 and _uniform_light(line(i)):
+            if 0 < i < limit - 1 and _line_is_divider(line(i)):
                 hit = i
                 break
         if hit is not None:
@@ -194,77 +199,90 @@ def find_divider(im, pos, vertical, search):
     if hit is None:
         return None
     a = b = hit
-    while a > 0 and _uniform_light(line(a - 1)):
+    while a > 0 and _line_is_divider(line(a - 1)):
         a -= 1
-    while b < limit - 1 and _uniform_light(line(b + 1)):
+    while b < limit - 1 and _line_is_divider(line(b + 1)):
         b += 1
     return a, b
 
 
-def strip_divider(im, limit=8):
-    """Снять с краёв ровные серые линии разделителя, если они остались.
+def label_parts(mask, w, h):
+    """Разметить связные области маски. Возвращает (метки, список областей)."""
+    labels = [0] * (w * h)
+    parts = []
+    for start in range(w * h):
+        if not mask[start] or labels[start]:
+            continue
+        n = len(parts) + 1
+        labels[start] = n
+        q = deque([start])
+        x0 = x1 = start % w
+        y0 = y1 = start // w
+        size = 0
+        while q:
+            i = q.popleft()
+            size += 1
+            x, y = i % w, i // w
+            x0, x1 = min(x0, x), max(x1, x)
+            y0, y1 = min(y0, y), max(y1, y)
+            for j in (i - 1 if x else -1, i + 1 if x + 1 < w else -1,
+                      i - w if y else -1, i + w if y + 1 < h else -1):
+                if j >= 0 and mask[j] and not labels[j]:
+                    labels[j] = n
+                    q.append(j)
+        parts.append({"size": size, "box": (x0, y0, x1 + 1, y1 + 1)})
+    return labels, parts
 
-    Обрезка по содержимому их не берёт: линия серая (около 230), а порог белого
-    выше. Линия отличается тем, что она однородная по всей длине, — по этому и ловим.
-    """
+
+def strip_lines(im, limit=6):
+    """Снять с краёв ровные светлые линии — остатки сетки."""
     px = im.load()
     w, h = im.size
-
-    def line_is_divider(vals):
-        flat = [v for p in vals for v in p]
-        if not flat:
-            return False
-        lo, hi = min(flat), max(flat)
-        return hi - lo <= 12 and 190 <= sum(flat) / len(flat) <= 252
-
     left, right, top, bottom = 0, w, 0, h
+
+    def line(vals):
+        return _line_is_divider([sum(v) / 3 for v in vals], share=0.9)
+
     for _ in range(limit):
         if right - left < 8 or bottom - top < 8:
             break
         moved = False
-        if line_is_divider([px[left, y] for y in range(top, bottom)]):
+        if line([px[left, y] for y in range(top, bottom)]):
             left += 1; moved = True
-        if line_is_divider([px[right - 1, y] for y in range(top, bottom)]):
+        if line([px[right - 1, y] for y in range(top, bottom)]):
             right -= 1; moved = True
-        if line_is_divider([px[x, top] for x in range(left, right)]):
+        if line([px[x, top] for x in range(left, right)]):
             top += 1; moved = True
-        if line_is_divider([px[x, bottom - 1] for x in range(left, right)]):
+        if line([px[x, bottom - 1] for x in range(left, right)]):
             bottom -= 1; moved = True
         if not moved:
             break
     return im.crop((left, top, right, bottom))
 
 
-def content_box(im, thr=244):
-    """Границы содержимого: всё, что темнее порога хотя бы по одному каналу."""
-    g = im.convert("L").point(lambda v: 0 if v >= thr else 255)
-    return g.getbbox()
+def drop_strays(im, thr=WHITE):
+    """Убрать с краёв обрывок соседней картинки.
 
-
-def drop_strays(im, thr=244):
-    """Убрать с краёв обрывки соседней ячейки.
-
-    Когда предмет соседа подходит к линии сетки вплотную, линия в этом месте
-    прерывается, ячейка режется по расчётной границе — и в карточку попадает
-    полоска чужой картинки. Отличается она тем, что тонкая и отделена от
-    предмета чистым белым просветом.
+    Бывает, что предметы соседних ячеек касаются друг друга в месте, где
+    линия сетки прервана: осьминог с медузой, черепаха с коньком, сапоги
+    с зонтом. Тогда это одна связная фигура, и в карточку попадает край
+    чужого предмета — тонкий и отделённый чистым просветом.
     """
     w, h = im.size
     g = im.convert("L").point(lambda v: 0 if v >= thr else 255)
     px = g.load()
-    # одиночного тёмного пикселя мало: по краю ячейки идут остатки линии сетки,
-    # и строка из одной такой точки считалась бы содержимым — тогда просвета
-    # между обрывком и предметом не находится вовсе.
-    xs = list(range(0, w, max(1, w // 300)))
-    ys = list(range(0, h, max(1, h // 300)))
-    need_x = max(3, len(xs) // 50)
-    need_y = max(3, len(ys) // 50)
+    # по краям кадра может остаться вертикальная линия сетки: она даёт тёмную
+    # точку в каждой строке, и «пустых» строк не находится вовсе. Поэтому
+    # профиль считаем по середине кадра, отступив по 6% с каждой стороны.
+    mx, my = round(w * 0.06), round(h * 0.06)
+    xs = list(range(mx, w - mx, max(1, w // 300)))
+    ys = list(range(my, h - my, max(1, h // 300)))
+    need_x, need_y = max(3, len(xs) // 50), max(3, len(ys) // 50)
     rows = [sum(1 for x in xs if px[x, y]) >= need_x for y in range(h)]
     cols = [sum(1 for y in ys if px[x, y]) >= need_y for x in range(w)]
 
     def cut(flags, size):
-        """сколько снять с начала: тонкий кусок содержимого + просвет за ним"""
-        thin, gap = size * 0.14, size * 0.008
+        thin, gap = size * 0.25, size * 0.008
         i = 0
         while i < size and not flags[i]:
             i += 1
@@ -278,58 +296,99 @@ def drop_strays(im, thr=244):
             k += 1
         return j if k - j >= gap and k < size else 0
 
-    top = cut(rows, h)
-    bottom = h - cut(rows[::-1], h)
-    left = cut(cols, w)
-    right = w - cut(cols[::-1], w)
-    if right - left < w * 0.5 or bottom - top < h * 0.5:
+    top, left = cut(rows, h), cut(cols, w)
+    bottom, right = h - cut(rows[::-1], h), w - cut(cols[::-1], w)
+    if right - left < w * 0.4 or bottom - top < h * 0.4:
         return im
     return im.crop((left, top, right, bottom))
 
 
-def cut_cell(sheet, r, c, rows, cols):
-    """Вырезать ячейку, отступив ровно по линии сетки.
+def trim_white(im, pad, thr=WHITE):
+    box = im.convert("L").point(lambda v: 0 if v >= thr else 255).getbbox()
+    if box is None:
+        return im
+    w, h = im.size
+    return im.crop((max(0, box[0] - pad), max(0, box[1] - pad),
+                    min(w, box[2] + pad), min(h, box[3] + pad)))
 
-    Фиксированный отступ в процентах не годится: у морского конька, звезды,
-    медузы, вентилятора, щётки, зонта и дельфина край предмета подходит к линии
-    вплотную, и отступ срезал им хвосты. Поэтому линию ищем, а не угадываем;
-    не нашли (предмет вылез за свою ячейку) — режем по расчётной границе,
-    ничего не отрезая.
-    """
-    w, h = sheet.size
-    cw, ch = w / cols, h / rows
+
+def cut_sheet(sheet, rows, cols):
+    """Вернуть список вырезанных ячеек листа (None там, где ячейка пуста)."""
+    W, H = sheet.size
+    grey = sheet.convert("L")
+    cw, ch = W / cols, H / rows
     search = max(4, round(min(cw, ch) * 0.04))
 
-    def edge(idx, total, size, vertical):
-        pos = round(idx * size)
-        if idx == 0:
-            return 0
-        if idx == total:
-            return w if vertical else h
-        band = find_divider(sheet, pos, vertical, search)
-        return band  # (a, b) или None
+    bands_x = [divider_band(grey, round(c * cw), True, search) for c in range(1, cols)]
+    bands_y = [divider_band(grey, round(r * ch), False, search) for r in range(1, rows)]
 
-    left = edge(c, cols, cw, True)
-    right = edge(c + 1, cols, cw, True)
-    top = edge(r, rows, ch, False)
-    bottom = edge(r + 1, rows, ch, False)
+    k = max(1, round(min(W, H) / 400))           # разметку ведём на уменьшенной копии
+    sw, sh = W // k, H // k
+    small = grey.resize((sw, sh), Image.LANCZOS)
+    px = small.load()
+    mask = [px[x, y] < WHITE for y in range(sh) for x in range(sw)]
 
-    x0 = 0 if c == 0 else (left[1] + 1 if left else round(c * cw))
-    x1 = w if c + 1 == cols else (right[0] if right else round((c + 1) * cw))
-    y0 = 0 if r == 0 else (top[1] + 1 if top else round(r * ch))
-    y1 = h if r + 1 == rows else (bottom[0] if bottom else round((r + 1) * ch))
+    for band in bands_x:                          # линии сетки гасим, иначе они
+        if band:                                  # соединяют все ячейки в одну область
+            for x in range(max(0, band[0] // k - 1), min(sw, band[1] // k + 2)):
+                for y in range(sh):
+                    mask[y * sw + x] = False
+    for band in bands_y:
+        if band:
+            for y in range(max(0, band[0] // k - 1), min(sh, band[1] // k + 2)):
+                for x in range(sw):
+                    mask[y * sw + x] = False
 
-    cell = sheet.crop((x0, y0, x1, y1))
-    cell = strip_divider(cell)
-    for _ in range(2):          # обрывков у края бывает два подряд
-        cell = drop_strays(cell)
-    box = content_box(cell)
-    if box is None:                      # ячейка пустая — белая клетка листа
-        return None
-    pad = round(min(cell.size) * PAD)
-    box = (max(box[0] - pad, 0), max(box[1] - pad, 0),
-           min(box[2] + pad, cell.size[0]), min(box[3] + pad, cell.size[1]))
-    return cell.crop(box)
+    labels, parts = label_parts(mask, sw, sh)
+    for p in parts:
+        p["cells"] = {}
+
+    for y in range(sh):
+        r = min(rows - 1, int(y * k / ch))
+        for x in range(sw):
+            n = labels[y * sw + x]
+            if n:
+                c = min(cols - 1, int(x * k / cw))
+                p = parts[n - 1]
+                p["cells"][(r, c)] = p["cells"].get((r, c), 0) + 1
+
+    cell_px = (sw * sh) / (rows * cols)
+    out = []
+    for r in range(rows):
+        for c in range(cols):
+            boxes = [p["box"] for p in parts
+                     if p["size"] >= MIN_PART * cell_px
+                     and max(p["cells"].items(), key=lambda kv: kv[1])[0] == (r, c)]
+            if not boxes:
+                # ячейка залита картинкой во весь кадр (фото блюда, интерьер):
+                # своей отдельной фигуры у неё нет, она слилась с соседней.
+                # Для таких режем просто по сетке.
+                x0 = 0 if c == 0 else (bands_x[c - 1][1] + 1 if bands_x[c - 1] else round(c * cw))
+                x1 = W if c + 1 == cols else (bands_x[c][0] if bands_x[c] else round((c + 1) * cw))
+                y0 = 0 if r == 0 else (bands_y[r - 1][1] + 1 if bands_y[r - 1] else round(r * ch))
+                y1 = H if r + 1 == rows else (bands_y[r][0] if bands_y[r] else round((r + 1) * ch))
+                piece = sheet.crop((x0, y0, x1, y1))
+                out.append(piece if piece.size[0] > 8 and piece.size[1] > 8 else None)
+                continue
+            x0 = min(b[0] for b in boxes) * k
+            y0 = min(b[1] for b in boxes) * k
+            x1 = max(b[2] for b in boxes) * k
+            y1 = max(b[3] for b in boxes) * k
+            # за свою ячейку предмет может выступать, но не больше 12%: иначе в
+            # карточку уезжает целиком сосед, слипшийся с ним в одну фигуру
+            over_x, over_y = cw * 0.12, ch * 0.12
+            x0 = max(x0, round(c * cw - over_x)); x1 = min(x1, round((c + 1) * cw + over_x))
+            y0 = max(y0, round(r * ch - over_y)); y1 = min(y1, round((r + 1) * ch + over_y))
+            pad = round(min(cw, ch) * PAD)
+            piece = sheet.crop((max(0, x0 - pad), max(0, y0 - pad),
+                                min(W, x1 + pad), min(H, y1 + pad)))
+            # сначала обрезать поля, иначе обрывок соседа прячется у края и
+            # не опознаётся; потом снять его; потом вернуть ровное поле
+            piece = trim_white(piece, 0)
+            piece = strip_lines(piece)
+            piece = drop_strays(piece)
+            out.append(trim_white(strip_lines(piece), pad))
+    return out
 
 
 def fit(im, side):
@@ -345,7 +404,7 @@ def main():
     ap.add_argument("--preview", help="куда положить контрольный лист-превью")
     args = ap.parse_args()
 
-    made, previews = [], []
+    made, previews, empty = [], [], []
     for fname, sid, unit, rows, cols, names in SHEETS:
         if args.only and sid not in args.only:
             continue
@@ -357,33 +416,34 @@ def main():
         outdir = os.path.join(ROOT, "media", "sm3", unit)
         os.makedirs(outdir, exist_ok=True)
         scene = rows == 1 and cols == 1
+        pieces = [sheet] if scene else cut_sheet(sheet, rows, cols)
         for i, name in enumerate(names):
             if name is None:
                 continue
-            piece = cut_cell(sheet, i // cols, i % cols, rows, cols) if not scene else sheet
+            piece = pieces[i] if i < len(pieces) else None
             if piece is None:
-                print(f"  {sid} ячейка {i+1}: пусто, пропущено")
+                empty.append(f"{sid} ячейка {i + 1} ({name})")
                 continue
             out = fit(piece, SCENE if scene else CARD)
             dst = os.path.join(outdir, f"{name}.webp")
             out.save(dst, "WEBP", quality=Q_SCENE if scene else Q_CARD, method=6)
             made.append((sid, os.path.relpath(dst, ROOT), out.size, os.path.getsize(dst)))
-            previews.append((f"{name}", out))
+            previews.append((name, out))
 
     for sid, rel, size, nbytes in made:
-        print(f"{sid:6} {rel:44} {size[0]}x{size[1]:<5} {nbytes/1024:6.0f} КБ")
+        print(f"{sid:6} {rel:44} {size[0]}x{size[1]:<5} {nbytes / 1024:6.0f} КБ")
     print(f"\nвсего файлов: {len(made)}")
+    for line in empty:
+        print("  пусто:", line)
 
     if args.preview and previews:
-        cols = 6
-        cell = 240
-        rows = (len(previews) + cols - 1) // cols
-        sheet = Image.new("RGB", (cols * cell, rows * cell), "white")
+        cols_p, cell = 6, 240
+        rows_p = (len(previews) + cols_p - 1) // cols_p
+        sheet = Image.new("RGB", (cols_p * cell, rows_p * cell), "white")
         for n, (_, im) in enumerate(previews):
             t = fit(im, cell - 16)
-            x = (n % cols) * cell + (cell - t.size[0]) // 2
-            y = (n // cols) * cell + (cell - t.size[1]) // 2
-            sheet.paste(t, (x, y))
+            sheet.paste(t, ((n % cols_p) * cell + (cell - t.size[0]) // 2,
+                            (n // cols_p) * cell + (cell - t.size[1]) // 2))
         sheet.save(args.preview, quality=88)
         print("превью:", args.preview)
 
