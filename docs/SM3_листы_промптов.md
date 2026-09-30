@@ -1,9 +1,9 @@
 # Super Minds 3 — ЛИСТЫ ПРОМПТОВ НА КАРТИНКИ
 
 Один промпт = одна картинка-лист с сеткой внутри. Потом лист режется на отдельные PNG.
-**87 листов** на 9 юнитов + Final Test.
+**85 листов** на 9 юнитов + Final Test.
 
-**Состояние на 30.09.2026: все 87 листов сгенерированы и проверены.** Осталось по
+**Состояние: все листы, кроме Л1.6 и Л1.9, сгенерированы и проверены.** Осталось по
 желанию перезапустить ЛФ.2 и ЛФ.3 — на бутсах три полосы. Пометки «что реально
 вышло» стоят у Л4.9 и ЛФ.4: там картинка принята, но ключ задания надо ставить
 по факту, а не по промпту. Следующий этап — нарезка листов на карточки, webp
@@ -63,6 +63,13 @@ Nike. Для школы это лишнее. Поэтому в промптах 
 | Фигуры и коллажи из фигур | плоский вектор |
 | Животные в мультяшной манере | только на отдельном листе, не в одной сетке с фото-едой |
 
+## Раскрасок в курсе нет
+
+Были листы Л1.7 и Л1.8 — чёрно-белые страницы-раскраски. **Анна решила убрать
+раскраски из заданий**, поэтому они выброшены, а номера Л1.7 и Л1.8 остались
+пустыми: перенумеровывать нельзя, ссылки на листы уже разошлись по переписке
+и по именам файлов. Новых раскрасок не заводим.
+
 ## Что берём из книги, а не генерируем
 
 | Из учебника / видео | Где это было |
@@ -85,7 +92,7 @@ Nike. Для школы это лишнее. Поэтому в промптах 
 
 ---
 
-# UNIT 1 · SCHOOL — 9 листов
+# UNIT 1 · SCHOOL — 7 листов
 
 ### Л1.1 · Обложка юнита (сцена)
 ```
@@ -140,20 +147,6 @@ A school timetable board on a classroom wall shown as a picture grid only: five 
 No people at all anywhere.
 Bright 3D-rendered cartoon style, Pixar-like, glossy rounded icons, vivid saturated colours, clean and orderly. Absolutely no text, no letters, no numbers, no day names, no labels anywhere - the days must be readable only from the icons.
 Output size: 2048 x 1365 px.
-```
-
-### Л1.7 · Раскраска: фигуры (сцена)
-```
-A children's colouring page: a friendly robot and a house built out of large geometric shapes - several squares, circles, pentagons, triangles and rectangles - every shape big, closed and clearly separated so it can be coloured one by one.
-No people anywhere. Black and white line art, clean even outlines, no shading, no grey, no fills, pure white background. Absolutely no text, no letters, no numbers anywhere.
-Output size: 1536 x 2048 px.
-```
-
-### Л1.8 · Раскраска: школьный двор (сцена)
-```
-A children's colouring page of an empty school yard: a backpack on a bench, a football, a tree, a bicycle in a rack, a cat sitting on a wall, a window with a flowerpot, a skipping rope on the ground - all drawn with big simple closed outlines, well separated, easy to colour.
-No people anywhere. Black and white line art, clean even outlines, no shading, no grey, no fills, pure white background. Absolutely no text, no letters, no numbers anywhere.
-Output size: 1536 x 2048 px.
 ```
 
 ### Л1.9 · Speaking: шесть уголков класса (сцена)
@@ -942,7 +935,7 @@ Output size: 2048 x 1024 px.
 
 | Юнит | Листов |
 |---|---|
-| Unit 1 School | 9 |
+| Unit 1 School | 7 |
 | Unit 2 Food | 12 |
 | Unit 3 Home / Time / Jobs | 7 |
 | Unit 4 Town | 10 |
@@ -952,7 +945,7 @@ Output size: 2048 x 1024 px.
 | Unit 8 Countries | 10 |
 | Unit 9 Weather | 10 |
 | Final Test | 6 |
-| **Итого** | **87** |
+| **Итого** | **85** |
 
 ## Порядок запуска
 
