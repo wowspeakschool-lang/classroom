@@ -150,6 +150,57 @@ SHEETS = [
 ]
 
 
+def _uniform_light(vals, share=0.85):
+    """Похожа ли линия на разделитель сетки.
+
+    Строгого «вся линия одного тона» мало: сосед может переползти через линию
+    (медуза заходила в ячейку осьминога), и в этом месте она прерывается.
+    Поэтому считаем линию разделителем, если ровными и светлыми оказались
+    хотя бы 85% её точек.
+    """
+    if not vals:
+        return False
+    grey = [sum(px) / 3 for px in vals]
+    good = [g for g in grey if 185 <= g <= 252]
+    if len(good) < share * len(grey):
+        return False
+    return max(good) - min(good) <= 14
+
+
+def find_divider(im, pos, vertical, search):
+    """Найти настоящую линию сетки рядом с расчётной границей ячейки.
+
+    Возвращает (начало, конец) полосы разделителя или None, если линии нет —
+    так бывает, когда предмет вылез за свою ячейку и перекрыл её собой.
+    """
+    px = im.load()
+    w, h = im.size
+    limit = w if vertical else h
+    span = h if vertical else w
+
+    def line(i):
+        if vertical:
+            return [px[i, y] for y in range(0, span, max(1, span // 200))]
+        return [px[x, i] for x in range(0, span, max(1, span // 200))]
+
+    hit = None
+    for d in range(0, search + 1):
+        for i in (pos - d, pos + d):
+            if 0 < i < limit - 1 and _uniform_light(line(i)):
+                hit = i
+                break
+        if hit is not None:
+            break
+    if hit is None:
+        return None
+    a = b = hit
+    while a > 0 and _uniform_light(line(a - 1)):
+        a -= 1
+    while b < limit - 1 and _uniform_light(line(b + 1)):
+        b += 1
+    return a, b
+
+
 def strip_divider(im, limit=8):
     """Снять с краёв ровные серые линии разделителя, если они остались.
 
@@ -190,16 +241,88 @@ def content_box(im, thr=244):
     return g.getbbox()
 
 
+def drop_strays(im, thr=244):
+    """Убрать с краёв обрывки соседней ячейки.
+
+    Когда предмет соседа подходит к линии сетки вплотную, линия в этом месте
+    прерывается, ячейка режется по расчётной границе — и в карточку попадает
+    полоска чужой картинки. Отличается она тем, что тонкая и отделена от
+    предмета чистым белым просветом.
+    """
+    w, h = im.size
+    g = im.convert("L").point(lambda v: 0 if v >= thr else 255)
+    px = g.load()
+    # одиночного тёмного пикселя мало: по краю ячейки идут остатки линии сетки,
+    # и строка из одной такой точки считалась бы содержимым — тогда просвета
+    # между обрывком и предметом не находится вовсе.
+    xs = list(range(0, w, max(1, w // 300)))
+    ys = list(range(0, h, max(1, h // 300)))
+    need_x = max(3, len(xs) // 50)
+    need_y = max(3, len(ys) // 50)
+    rows = [sum(1 for x in xs if px[x, y]) >= need_x for y in range(h)]
+    cols = [sum(1 for y in ys if px[x, y]) >= need_y for x in range(w)]
+
+    def cut(flags, size):
+        """сколько снять с начала: тонкий кусок содержимого + просвет за ним"""
+        thin, gap = size * 0.14, size * 0.008
+        i = 0
+        while i < size and not flags[i]:
+            i += 1
+        j = i
+        while j < size and flags[j]:
+            j += 1
+        if j - i > thin or j >= size:
+            return 0
+        k = j
+        while k < size and not flags[k]:
+            k += 1
+        return j if k - j >= gap and k < size else 0
+
+    top = cut(rows, h)
+    bottom = h - cut(rows[::-1], h)
+    left = cut(cols, w)
+    right = w - cut(cols[::-1], w)
+    if right - left < w * 0.5 or bottom - top < h * 0.5:
+        return im
+    return im.crop((left, top, right, bottom))
+
+
 def cut_cell(sheet, r, c, rows, cols):
+    """Вырезать ячейку, отступив ровно по линии сетки.
+
+    Фиксированный отступ в процентах не годится: у морского конька, звезды,
+    медузы, вентилятора, щётки, зонта и дельфина край предмета подходит к линии
+    вплотную, и отступ срезал им хвосты. Поэтому линию ищем, а не угадываем;
+    не нашли (предмет вылез за свою ячейку) — режем по расчётной границе,
+    ничего не отрезая.
+    """
     w, h = sheet.size
-    x0, x1 = round(c * w / cols), round((c + 1) * w / cols)
-    y0, y1 = round(r * h / rows), round((r + 1) * h / rows)
+    cw, ch = w / cols, h / rows
+    search = max(4, round(min(cw, ch) * 0.04))
+
+    def edge(idx, total, size, vertical):
+        pos = round(idx * size)
+        if idx == 0:
+            return 0
+        if idx == total:
+            return w if vertical else h
+        band = find_divider(sheet, pos, vertical, search)
+        return band  # (a, b) или None
+
+    left = edge(c, cols, cw, True)
+    right = edge(c + 1, cols, cw, True)
+    top = edge(r, rows, ch, False)
+    bottom = edge(r + 1, rows, ch, False)
+
+    x0 = 0 if c == 0 else (left[1] + 1 if left else round(c * cw))
+    x1 = w if c + 1 == cols else (right[0] if right else round((c + 1) * cw))
+    y0 = 0 if r == 0 else (top[1] + 1 if top else round(r * ch))
+    y1 = h if r + 1 == rows else (bottom[0] if bottom else round((r + 1) * ch))
+
     cell = sheet.crop((x0, y0, x1, y1))
-    # разделители сетки — линии по краю ячейки; 1.5% мало: у части листов сетка
-    # сдвинута, и в карточку попадала полоска соседа. Срезаем 3%.
-    m = round(min(cell.size) * 0.03)
-    cell = cell.crop((m, m, cell.size[0] - m, cell.size[1] - m))
     cell = strip_divider(cell)
+    for _ in range(2):          # обрывков у края бывает два подряд
+        cell = drop_strays(cell)
     box = content_box(cell)
     if box is None:                      # ячейка пустая — белая клетка листа
         return None
