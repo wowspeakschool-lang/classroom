@@ -160,7 +160,7 @@ SHEETS = [
 ]
 
 
-def _line_is_divider(vals, share=0.85):
+def _line_is_divider(vals, share=0.85, spread=14):
     """Похожа ли линия на разделитель сетки.
 
     Строгого «вся линия одного тона» мало: сосед может переползти через линию,
@@ -169,10 +169,12 @@ def _line_is_divider(vals, share=0.85):
     """
     if not vals:
         return False
-    good = [g for g in vals if 185 <= g <= 252]
+    # верхнюю границу держим на 255: между двумя фотографиями во весь кадр
+    # разделитель выходит не серым, а белым, и при пороге 252 не находился
+    good = [g for g in vals if 185 <= g <= 255]
     if len(good) < share * len(vals):
         return False
-    return max(good) - min(good) <= 14
+    return max(good) - min(good) <= spread
 
 
 def divider_band(grey, pos, vertical, search):
@@ -234,14 +236,40 @@ def label_parts(mask, w, h):
     return labels, parts
 
 
-def strip_lines(im, limit=6):
+def cut_off_line(im, depth=10):
+    """Срезать край до серой линии сетки, если она прячется в нескольких
+    пикселях от края (снаружи от неё бывает белая кромка, и построчная
+    чистка до линии не доходит)."""
+    px = im.load()
+    w, h = im.size
+
+    def grey(vals):
+        return _line_is_divider([sum(v) / 3 for v in vals], share=0.9, spread=16)
+
+    left = right = top = bottom = 0
+    for d in range(min(depth, w // 4)):
+        if grey([px[d, y] for y in range(h)]):
+            left = d + 1
+        if grey([px[w - 1 - d, y] for y in range(h)]):
+            right = d + 1
+    for d in range(min(depth, h // 4)):
+        if grey([px[x, d] for x in range(w)]):
+            top = d + 1
+        if grey([px[x, h - 1 - d] for x in range(w)]):
+            bottom = d + 1
+    if not (left or right or top or bottom):
+        return im
+    return im.crop((left, top, w - right, h - bottom))
+
+
+def strip_lines(im, limit=10):
     """Снять с краёв ровные светлые линии — остатки сетки."""
     px = im.load()
     w, h = im.size
     left, right, top, bottom = 0, w, 0, h
 
     def line(vals):
-        return _line_is_divider([sum(v) / 3 for v in vals], share=0.9)
+        return _line_is_divider([sum(v) / 3 for v in vals], share=0.9, spread=16)
 
     for _ in range(limit):
         if right - left < 8 or bottom - top < 8:
@@ -317,7 +345,9 @@ def cut_sheet(sheet, rows, cols):
     W, H = sheet.size
     grey = sheet.convert("L")
     cw, ch = W / cols, H / rows
-    search = max(4, round(min(cw, ch) * 0.04))
+    # окно поиска линии: у части листов сетка заметно смещена относительно
+    # расчётной границы (в Л7.3 — на 30 px), при 4% линия не находилась вовсе
+    search = max(6, round(min(cw, ch) * 0.08))
 
     bands_x = [divider_band(grey, round(c * cw), True, search) for c in range(1, cols)]
     bands_y = [divider_band(grey, round(r * ch), False, search) for r in range(1, rows)]
@@ -367,6 +397,14 @@ def cut_sheet(sheet, rows, cols):
                 x1 = W if c + 1 == cols else (bands_x[c][0] if bands_x[c] else round((c + 1) * cw))
                 y0 = 0 if r == 0 else (bands_y[r - 1][1] + 1 if bands_y[r - 1] else round(r * ch))
                 y1 = H if r + 1 == rows else (bands_y[r][0] if bands_y[r] else round((r + 1) * ch))
+                # у залитых ячеек нет белого поля, по которому видно чужой
+                # кусок, поэтому от внутренних границ отступаем на 1.2%:
+                # полоска соседа снизу была заметна, а потеря края фото — нет
+                inset = round(min(cw, ch) * 0.012)
+                if c: x0 += inset
+                if c + 1 < cols: x1 -= inset
+                if r: y0 += inset
+                if r + 1 < rows: y1 -= inset
                 piece = sheet.crop((x0, y0, x1, y1))
                 out.append(piece if piece.size[0] > 8 and piece.size[1] > 8 else None)
                 continue
@@ -424,6 +462,9 @@ def main():
             if piece is None:
                 empty.append(f"{sid} ячейка {i + 1} ({name})")
                 continue
+            # серая линия сетки остаётся и на ячейках, нарезанных по сетке
+            # (фото во весь кадр), поэтому край чистим у всех кусков
+            piece = strip_lines(cut_off_line(piece))
             out = fit(piece, SCENE if scene else CARD)
             dst = os.path.join(outdir, f"{name}.webp")
             out.save(dst, "WEBP", quality=Q_SCENE if scene else Q_CARD, method=6)
