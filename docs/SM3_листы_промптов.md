@@ -421,6 +421,10 @@ Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, clear unc
 Output size: 2048 x 1365 px.
 ```
 
+> Что вышло: улица двумя рядами, кинотеатр напротив библиотеки — получилось.
+> Парк и школа встали рядом на одной стороне, а не друг напротив друга, поэтому
+> в задании про них спрашивать `next to`, а не `opposite`.
+
 ### Л4.10 · Speaking: предлоги (сцена)
 ```
 A tidy empty town corner: a library standing near a shopping centre, a bench between two small trees, a bicycle in front of a cafe, a bird above a lamp post, a dog sitting opposite a cat, a postbox next to a door, a parked car behind a hedge.
@@ -891,6 +895,10 @@ No people at all - no humans, no hands anywhere; the puppy is fine.
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light. Absolutely no text, no letters, no numbers, no brand marks anywhere.
 Output size: 2048 x 2048 px, each cell at least 650 px.
 ```
+
+> Что вышло на второй попытке: свечей **7 / 9 / 10** (на первом торте генератор
+> потерял розовую). Варианты различимы и считаются, поэтому лист принят как есть —
+> в ключе к аудированию возраст ставить 7, 9 и 10, а не 8, 9 и 10.
 
 ### ЛФ.5 · Карточки-загадки, часть 1 — 6 картинок (3×2)
 ```
