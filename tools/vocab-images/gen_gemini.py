@@ -14,7 +14,7 @@
 В листах со сквозным персонажем первая готовая картинка листа уходит образцом
 во все следующие — иначе персонаж меняется от картинки к картинке.
 """
-import argparse, base64, glob, io, json, os, re, sys, time, urllib.request, urllib.error
+import argparse, base64, glob, io, json, os, re, sys, time, urllib.parse, urllib.request, urllib.error
 import numpy as np
 from PIL import Image
 from lib import fname, make_soft_transparent, to_square
@@ -67,6 +67,48 @@ def prompt_for(it, has_ref):
     return (f"{STYLE}\n\n{RULES}\n\nWord: \"{it['term']}\".\n"
             f"Что нарисовать: {it['desc']}.\n"
             f"Общее для этой серии картинок: {it['note']}{ref}")
+
+
+# Pollinations (Flux) плохо понимает русский — для него описания по-английски.
+# Пока переведён только пробный лист 1.1; для остальных листов добавить сюда.
+EN_NOTE = {'1.1': 'The same girl in every picture: 12 years old, red hair in a ponytail, yellow windbreaker, '
+                  'dark blue trousers, green hiking boots. Only a small piece of nature around her, not a full landscape.'}
+EN = {
+ 'camp under the stars': 'she lies in a sleeping bag on the grass next to a small tent, looking up; above her a small oval patch of night sky with stars and a moon, only around the scene',
+ 'climb a tree': 'she climbs along a thick branch of a big leafy tree, holding on with hands and legs',
+ 'explore a cave': 'wearing a head torch she looks into the dark entrance of a cave in a rock, a beam of light goes inside',
+ 'kayak down a river': 'she sits in a red kayak with a double-bladed paddle, riding a river with white foamy rapids',
+ 'look for fossils': 'she crouches by a flat stone holding a magnifying glass and a brush; an ammonite shell fossil imprint in the stone',
+ 'pick wild fruit': 'she picks blackberries from a thorny bush into a wicker basket',
+ 'play in the snow': 'in a hat and scarf she builds a snowman, snowdrifts around, snow under her feet',
+ 'record birdsong': 'she holds a small voice recorder with a microphone towards a little bird singing on a branch; musical notes come from its beak',
+ 'track wild animals': 'she kneels with a magnifying glass over a line of paw prints in mud; the prints lead to a fox peeking out from behind a bush',
+ 'try rock climbing': 'in a helmet and climbing harness she climbs a steep rock wall with colourful holds, a rope hangs from above',
+}
+
+
+def call_pollinations(it, seed, tries=4):
+    key = f"{it['batch']}.{it['sheet']}"
+    if it['term'] not in EN:
+        raise RuntimeError('нет английского описания в EN — добавить')
+    prompt = (f"Children's picture dictionary illustration of \"{it['term']}\": {EN[it['term']]}. "
+              f"{EN_NOTE.get(key, '')} Hand-drawn storybook style, bold dark brown outlines of even thickness, "
+              "rich saturated colours with soft shading and volume, hand-drawn textures, friendly rounded cartoon shapes. "
+              "Single centred illustration on a pure white background, wide white margin on every side, "
+              "nothing cut by the edge. No text, no letters, no caption, no frame, no border.")
+    q = urllib.parse.urlencode({'width': 1024, 'height': 1024, 'model': 'flux', 'nologo': 'true',
+                                'seed': seed, 'enhance': 'false'})
+    url = 'https://image.pollinations.ai/prompt/' + urllib.parse.quote(prompt) + '?' + q
+    for a in range(tries):
+        try:
+            with urllib.request.urlopen(url, timeout=240) as r:
+                data = r.read()
+            im = Image.open(io.BytesIO(data)); b = io.BytesIO(); im.convert('RGB').save(b, 'PNG')
+            return b.getvalue()
+        except Exception as e:
+            if a == tries - 1:
+                raise
+            print(f'    {e}, повтор'); time.sleep(15 * (a + 1))
 
 
 def call(prompt, ref_png=None, tries=4):
@@ -124,6 +166,8 @@ def main():
     ap.add_argument('--sheet', nargs='*', help='партия.лист, например 1.1')
     ap.add_argument('--force', action='store_true')
     ap.add_argument('--out', default=os.path.join(HERE, 'out'))
+    ap.add_argument('--engine', choices=['gemini', 'pollinations'], default='gemini')
+    ap.add_argument('--seed', type=int, default=42, help='pollinations: один seed на лист держит стиль ровнее')
     args = ap.parse_args()
 
     items = items_all = parse_prompts()
@@ -158,7 +202,8 @@ def main():
                 ref = open(raws[0], 'rb').read()
         print(f"{it['batch']}.{it['sheet']}.{it['n']} {it['term']}" + (' (по образцу)' if ref else ''))
         try:
-            raw = call(prompt_for(it, bool(ref)), ref)
+            raw = (call_pollinations(it, args.seed) if args.engine == 'pollinations'
+                   else call(prompt_for(it, bool(ref)), ref))
         except Exception as e:
             print('   ОШИБКА', e); continue
         open(os.path.join(rd, fname(it['term'])), 'wb').write(raw)
