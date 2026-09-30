@@ -1,7 +1,7 @@
 import os, re
 import numpy as np
 from PIL import Image
-from scipy.ndimage import label, binary_dilation
+from scipy.ndimage import label, binary_dilation, binary_erosion, binary_fill_holes
 
 def fname(w):
     return re.sub(r"[^A-Za-z0-9]+", "_", w).strip("_") + '.png'
@@ -77,4 +77,46 @@ def row(sheet, y0, y1, words, outdir, min_area=600, pad=6, grow=3, thr=235, gap=
         m=keep[ay0:ay1,ax0:ax1]
         rgba[...,3]=(rgba[...,3]*m).astype(np.uint8)
         to_square(Image.fromarray(rgba,'RGBA')).save(os.path.join(outdir,fname(w)))
+    return True
+
+def row_x(sheet, y0, y1, words, outdir, cuts, min_area=150, pad=6, grow=3, thr=235, fill=()):
+    """Как row(), но клетки заданы границами по x (cuts — len(words)-1 значений).
+    Для рядов, где соседние рисунки касаются и кластеры по зазору слипаются.
+    Граница — число или ступенька (y_листа, x_выше, x_ниже), если рисунки заходят
+    друг за друга по горизонтали на разной высоте.
+    fill — слова, у которых светлая середина (доска, лист) обведена контуром:
+    ей не даём стать прозрачной, заливаем дырки маски."""
+    im = Image.open(sheet).convert('RGB'); mr = min_rgb_of(im)
+    reg = mr[y0:y1, :] < thr
+    H, W = reg.shape
+    def bound(c):
+        a = np.full(H, c if isinstance(c, (int, np.integer)) else 0)
+        if not isinstance(c, (int, np.integer)):
+            ys, xt, xb_ = c; k = max(0, min(H, ys - y0)); a[:k] = xt; a[k:] = xb_
+        return a
+    bs = [np.zeros(H, int)] + [bound(c) for c in cuts] + [np.full(H, W)]
+    cols = np.arange(W)[None, :]
+    os.makedirs(outdir, exist_ok=True)
+    for w, la, lb in zip(words, bs, bs[1:]):
+        inside = (cols >= la[:, None]) & (cols < lb[:, None])
+        xa, xb = int(la.min()), int(lb.max())
+        part = reg & inside
+        lab, n = label(part)
+        keep = np.zeros_like(reg)
+        for i in range(1, n + 1):
+            if (lab == i).sum() >= min_area: keep |= (lab == i)
+        ys, xx = np.where(keep)
+        ax0 = max(xa, xx.min() - pad); ax1 = min(xb, xx.max() + 1 + pad)
+        ay0 = max(0, ys.min() - pad); ay1 = min(reg.shape[0], ys.max() + 1 + pad)
+        keep = binary_dilation(keep, iterations=grow) & inside
+        crop = im.crop((ax0, y0 + ay0, ax1, y0 + ay1))
+        rgba = np.array(make_soft_transparent(crop))
+        if w in fill:
+            light = (mr[y0 + ay0:y0 + ay1, ax0:ax1] < 250) & inside[ay0:ay1, ax0:ax1]
+            solid = binary_erosion(binary_fill_holes(binary_dilation(light, iterations=5)), iterations=5)
+        else:
+            solid = np.zeros((ay1 - ay0, ax1 - ax0), bool)
+        rgba[..., 3] = (rgba[..., 3] * keep[ay0:ay1, ax0:ax1]).astype(np.uint8)
+        rgba[..., 3] = np.maximum(rgba[..., 3], solid.astype(np.uint8) * 255)
+        to_square(Image.fromarray(rgba, 'RGBA')).save(os.path.join(outdir, fname(w)))
     return True
