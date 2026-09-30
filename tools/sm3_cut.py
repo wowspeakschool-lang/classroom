@@ -43,6 +43,8 @@ SHEETS = [
                                       "shape_rectangle", "shape_pentagon", "shape_hexagon"]),
     ("12.webp", "Л1.5",  "u1", 2, 2, ["shapepic_cat", "shapepic_person",
                                       "shapepic_boat", "shapepic_snake"]),
+    ("90.webp", "Л1.6",  "u1", 1, 1, ["scene_timetable"]),
+    ("91.webp", "Л1.9",  "u1", 1, 1, ["scene_class_corners"]),
     # --- UNIT 2 · FOOD ---
     ("72.webp", "Л2.1",  "u2", 1, 1, ["scene_food_cover"]),
     ("14.webp", "Л2.2",  "u2", 3, 3, ["food_apple_juice", "food_bread_rolls", "food_cheese",
