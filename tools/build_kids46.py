@@ -27,7 +27,7 @@ from recolor import recolor
 
 # 🟥 Перед публикацией поставить False и пересобрать: пока панель включена,
 # ребёнок пролистает урок мимо заданий.
-DEV_PANEL = True
+DEV_PANEL = False
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "wowspeak-4-6.html"
