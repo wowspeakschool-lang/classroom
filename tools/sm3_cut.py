@@ -185,35 +185,44 @@ SHEETS = [
 ]
 
 
-def _line_is_divider(vals, share=0.85, spread=14):
+def _line_is_divider(vals, share=0.85, spread=20):
     """Похожа ли линия на разделитель сетки.
 
-    Строгого «вся линия одного тона» мало: сосед может переползти через линию,
-    и в этом месте она прерывается. Считаем разделителем линию, у которой
-    ровными и светлыми оказались хотя бы 85% точек.
+    Судим по разбросу без крайних значений: min/max ловил единичный тёмный
+    пиксель (тень предмета, пересёкшего линию) и браковал линию целиком.
+    Между двумя пастельными ячейками шов вообще не белый, а серый 200-240,
+    поэтому важен не цвет, а ровность линии по всей длине.
     """
     if not vals:
         return False
-    # верхнюю границу держим на 255: между двумя фотографиями во весь кадр
-    # разделитель выходит не серым, а белым, и при пороге 252 не находился
-    good = [g for g in vals if 185 <= g <= 255]
+    good = sorted(g for g in vals if 185 <= g <= 255)
     if len(good) < share * len(vals):
         return False
-    return max(good) - min(good) <= spread
+    lo = good[max(0, int(len(good) * 0.05))]
+    hi = good[min(len(good) - 1, int(len(good) * 0.95))]
+    return hi - lo <= spread
 
 
-def divider_band(grey, pos, vertical, search):
-    """Полоса разделителя рядом с расчётной границей ячейки, или None."""
+def divider_band(grey, pos, vertical, search, lo=None, hi=None):
+    """Полоса разделителя рядом с расчётной границей ячейки, или None.
+
+    lo/hi ограничивают отрезок линии. Это важно: вертикальная линия проходит
+    через все ряды листа, и достаточно одному предмету наехать на неё в своём
+    ряду, чтобы вся линия перестала считаться разделителем. Поэтому границу
+    ищем отдельно для каждой ячейки, на её собственном отрезке.
+    """
     px = grey.load()
     w, h = grey.size
     limit = w if vertical else h
     span = h if vertical else w
-    step = max(1, span // 200)
+    lo = 0 if lo is None else max(0, lo)
+    hi = span if hi is None else min(span, hi)
+    step = max(1, (hi - lo) // 200)
 
     def line(i):
         if vertical:
-            return [px[i, y] for y in range(0, span, step)]
-        return [px[x, i] for x in range(0, span, step)]
+            return [px[i, y] for y in range(lo, hi, step)]
+        return [px[x, i] for x in range(lo, hi, step)]
 
     hit = None
     for d in range(search + 1):
@@ -225,10 +234,13 @@ def divider_band(grey, pos, vertical, search):
             break
     if hit is None:
         return None
+    # полосу не расширяем без края: у пастельных ячеек фон сам по себе ровный,
+    # и разделитель «разрастался» на сотню пикселей, съедая картинку
+    grow = max(4, round(span * 0.02))
     a = b = hit
-    while a > 0 and _line_is_divider(line(a - 1)):
+    while a > hit - grow and a > 0 and _line_is_divider(line(a - 1)):
         a -= 1
-    while b < limit - 1 and _line_is_divider(line(b + 1)):
+    while b < hit + grow and b < limit - 1 and _line_is_divider(line(b + 1)):
         b += 1
     return a, b
 
@@ -259,6 +271,48 @@ def label_parts(mask, w, h):
                     q.append(j)
         parts.append({"size": size, "box": (x0, y0, x1 + 1, y1 + 1)})
     return labels, parts
+
+
+def shave_edge(im, depth=4):
+    """НЕ ИСПОЛЬЗУЕТСЯ. Снять с краёв ровную кромку, отличающуюся от соседних
+    пикселей. Идея не сработала: у фотографии крайняя строка законно отличается
+    от того, что в восьми пикселях внутрь (небо, вода, градиент), и правило
+    начинало срезать саму картинку. Оставлено как след неудачной попытки.
+
+    После всех обрезок у части карточек оставалась полоска шириной 1-3 px:
+    остаток поля листа. Цвет у неё бывает любой — от серого до почти белого,
+    поэтому судим не по цвету, а по двум признакам сразу: полоса ровная по
+    всей длине и заметно отличается от линии в восьми пикселях внутрь.
+    """
+    px = im.load()
+    w, h = im.size
+
+    def line(side, d):
+        if side == "l":
+            return [px[d, y] for y in range(h)]
+        if side == "r":
+            return [px[w - 1 - d, y] for y in range(h)]
+        if side == "t":
+            return [px[x, d] for x in range(w)]
+        return [px[x, h - 1 - d] for x in range(w)]
+
+    def flat(vals):
+        g = sorted(sum(v) / 3 for v in vals)
+        return g[int(len(g) * 0.05)], g[min(len(g) - 1, int(len(g) * 0.95))], sum(g) / len(g)
+
+    cut = {"l": 0, "r": 0, "t": 0, "b": 0}
+    for side in "lrtb":
+        span = w if side in "lr" else h
+        for d in range(min(depth, span // 6)):
+            lo, hi, avg = flat(line(side, d))
+            if hi - lo > 18:
+                break
+            if abs(avg - flat(line(side, d + 8))[2]) <= 8:
+                break
+            cut[side] = d + 1
+    if not any(cut.values()):
+        return im
+    return im.crop((cut["l"], cut["t"], w - cut["r"], h - cut["b"]))
 
 
 def cut_off_line(im, depth=10):
@@ -374,8 +428,17 @@ def cut_sheet(sheet, rows, cols):
     # расчётной границы (в Л7.3 — на 30 px), при 4% линия не находилась вовсе
     search = max(6, round(min(cw, ch) * 0.08))
 
-    bands_x = [divider_band(grey, round(c * cw), True, search) for c in range(1, cols)]
-    bands_y = [divider_band(grey, round(r * ch), False, search) for r in range(1, rows)]
+    # границы ищем для каждой ячейки на её отрезке линии
+    vband = {}      # (колонка-граница, ряд) -> полоса
+    hband = {}      # (ряд-граница, колонка) -> полоса
+    for c in range(1, cols):
+        for r in range(rows):
+            vband[(c, r)] = divider_band(grey, round(c * cw), True, search,
+                                         round(r * ch), round((r + 1) * ch))
+    for r in range(1, rows):
+        for c in range(cols):
+            hband[(r, c)] = divider_band(grey, round(r * ch), False, search,
+                                         round(c * cw), round((c + 1) * cw))
 
     k = max(1, round(min(W, H) / 400))           # разметку ведём на уменьшенной копии
     sw, sh = W // k, H // k
@@ -383,15 +446,18 @@ def cut_sheet(sheet, rows, cols):
     px = small.load()
     mask = [px[x, y] < WHITE for y in range(sh) for x in range(sw)]
 
-    for band in bands_x:                          # линии сетки гасим, иначе они
-        if band:                                  # соединяют все ячейки в одну область
-            for x in range(max(0, band[0] // k - 1), min(sw, band[1] // k + 2)):
-                for y in range(sh):
-                    mask[y * sw + x] = False
-    for band in bands_y:
+    # линии сетки гасим, иначе они соединяют все ячейки в одну область
+    for (c, r), band in vband.items():
         if band:
+            y0, y1 = round(r * ch) // k, min(sh, round((r + 1) * ch) // k + 1)
+            for x in range(max(0, band[0] // k - 1), min(sw, band[1] // k + 2)):
+                for y in range(y0, y1):
+                    mask[y * sw + x] = False
+    for (r, c), band in hband.items():
+        if band:
+            x0, x1 = round(c * cw) // k, min(sw, round((c + 1) * cw) // k + 1)
             for y in range(max(0, band[0] // k - 1), min(sh, band[1] // k + 2)):
-                for x in range(sw):
+                for x in range(x0, x1):
                     mask[y * sw + x] = False
 
     labels, parts = label_parts(mask, sw, sh)
@@ -418,10 +484,12 @@ def cut_sheet(sheet, rows, cols):
                 # ячейка залита картинкой во весь кадр (фото блюда, интерьер):
                 # своей отдельной фигуры у неё нет, она слилась с соседней.
                 # Для таких режем просто по сетке.
-                x0 = 0 if c == 0 else (bands_x[c - 1][1] + 1 if bands_x[c - 1] else round(c * cw))
-                x1 = W if c + 1 == cols else (bands_x[c][0] if bands_x[c] else round((c + 1) * cw))
-                y0 = 0 if r == 0 else (bands_y[r - 1][1] + 1 if bands_y[r - 1] else round(r * ch))
-                y1 = H if r + 1 == rows else (bands_y[r][0] if bands_y[r] else round((r + 1) * ch))
+                bl, br = vband.get((c, r)), vband.get((c + 1, r))
+                bt, bb = hband.get((r, c)), hband.get((r + 1, c))
+                x0 = 0 if c == 0 else (bl[1] + 1 if bl else round(c * cw))
+                x1 = W if c + 1 == cols else (br[0] if br else round((c + 1) * cw))
+                y0 = 0 if r == 0 else (bt[1] + 1 if bt else round(r * ch))
+                y1 = H if r + 1 == rows else (bb[0] if bb else round((r + 1) * ch))
                 # у залитых ячеек нет белого поля, по которому видно чужой
                 # кусок, поэтому от внутренних границ отступаем на 1.2%:
                 # полоска соседа снизу была заметна, а потеря края фото — нет
