@@ -245,6 +245,35 @@ def divider_band(grey, pos, vertical, search, lo=None, hi=None):
     return a, b
 
 
+def best_seam(grey, pos, vertical, search, lo, hi):
+    # Если ровной линии нет (предмет пересекает её во многих местах, как брызги
+    # дельфинов у самого шва), всё равно нужна опорная граница: берём в окне
+    # поиска самый ровный столбец или строку — шов ровнее картинки по обе
+    # стороны от него.
+    px = grey.load()
+    w, h = grey.size
+    limit = w if vertical else h
+    step = max(1, (hi - lo) // 150)
+
+    def spread(i):
+        if vertical:
+            vals = sorted(px[i, y] for y in range(lo, hi, step))
+        else:
+            vals = sorted(px[x, i] for x in range(lo, hi, step))
+        a = vals[int(len(vals) * 0.1)]
+        b = vals[min(len(vals) - 1, int(len(vals) * 0.9))]
+        return b - a
+
+    best, score = pos, None
+    for d in range(-search, search + 1):
+        i = pos + d
+        if 0 < i < limit - 1:
+            sc = spread(i)
+            if score is None or sc < score:
+                best, score = i, sc
+    return best, best
+
+
 def label_parts(mask, w, h):
     """Разметить связные области маски. Возвращает (метки, список областей)."""
     labels = [0] * (w * h)
@@ -446,19 +475,26 @@ def cut_sheet(sheet, rows, cols):
     px = small.load()
     mask = [px[x, y] < WHITE for y in range(sh) for x in range(sw)]
 
-    # линии сетки гасим, иначе они соединяют все ячейки в одну область
+    # Линии сетки гасим, иначе они соединяют все ячейки в одну область.
+    # Но гасим только светлые пиксели полосы: там, где предмет переходит через
+    # линию (плавник акулы, луч звезды, антенна рации, хвост кошки), он темнее
+    # разделителя, и его надо оставить. Иначе перешедшая часть отрывается от
+    # предмета, становится отдельной областью, достаётся соседней ячейке — и
+    # предмет выходит обрезанным по линии.
     for (c, r), band in vband.items():
         if band:
             y0, y1 = round(r * ch) // k, min(sh, round((r + 1) * ch) // k + 1)
             for x in range(max(0, band[0] // k - 1), min(sw, band[1] // k + 2)):
                 for y in range(y0, y1):
-                    mask[y * sw + x] = False
+                    if px[x, y] >= 185:
+                        mask[y * sw + x] = False
     for (r, c), band in hband.items():
         if band:
             x0, x1 = round(c * cw) // k, min(sw, round((c + 1) * cw) // k + 1)
             for y in range(max(0, band[0] // k - 1), min(sh, band[1] // k + 2)):
                 for x in range(x0, x1):
-                    mask[y * sw + x] = False
+                    if px[x, y] >= 185:
+                        mask[y * sw + x] = False
 
     labels, parts = label_parts(mask, sw, sh)
     for p in parts:
@@ -505,11 +541,62 @@ def cut_sheet(sheet, rows, cols):
             y0 = min(b[1] for b in boxes) * k
             x1 = max(b[2] for b in boxes) * k
             y1 = max(b[3] for b in boxes) * k
-            # за свою ячейку предмет может выступать, но не больше 12%: иначе в
-            # карточку уезжает целиком сосед, слипшийся с ним в одну фигуру
-            over_x, over_y = cw * 0.12, ch * 0.12
+            # За свою ячейку предмет может выступать — плавник акулы, луч звезды,
+            # антенна рации уходят за линию в пустое поле соседа. Но если сосед
+            # сам залит картинкой во весь кадр (у дельфинов справа пляж), за
+            # линию заезжать нельзя: в карточку попадёт чужая картинка.
+            over_x, over_y = cw * 0.18, ch * 0.18
             x0 = max(x0, round(c * cw - over_x)); x1 = min(x1, round((c + 1) * cw + over_x))
             y0 = max(y0, round(r * ch - over_y)); y1 = min(y1, round((r + 1) * ch + over_y))
+
+            gp = grey.load()
+
+            def neighbour_is_empty(band, side):
+                # пусто ли у соседа сразу за линией, на отрезке этой ячейки
+                if not band:
+                    return False
+                d = round(min(cw, ch) * 0.05)
+                if side in "lr":
+                    xs = (range(max(0, band[0] - d), band[0]) if side == "l"
+                          else range(band[1] + 1, min(W, band[1] + 1 + d)))
+                    ys = range(round(r * ch), round((r + 1) * ch), 4)
+                else:
+                    ys = (range(max(0, band[0] - d), band[0]) if side == "t"
+                          else range(band[1] + 1, min(H, band[1] + 1 + d)))
+                    xs = range(round(c * cw), round((c + 1) * cw), 4)
+                pts = [(x, y) for x in xs for y in ys]
+                if not pts:
+                    return False
+                # «пусто» — это не просто светло: пляж у дельфинов тоже светлый.
+                # Пустое поле ещё и ровное, поэтому смотрим и на разброс.
+                vals = sorted(gp[x, y] for x, y in pts)
+                light = sum(1 for v in vals if v >= 235)
+                lo = vals[int(len(vals) * 0.05)]
+                hi = vals[min(len(vals) - 1, int(len(vals) * 0.95))]
+                return light >= 0.7 * len(vals) and hi - lo <= 14
+
+            # там, где ровной линии не нашлось, берём самый ровный столбец окна:
+            # без опорной границы выступ в 18% пускает в карточку кусок соседа
+            bl, br = vband.get((c, r)), vband.get((c + 1, r))
+            bt, bb = hband.get((r, c)), hband.get((r + 1, c))
+            ys = (round(r * ch), round((r + 1) * ch))
+            xs = (round(c * cw), round((c + 1) * cw))
+            if c and not bl:
+                bl = best_seam(grey, round(c * cw), True, search, *ys)
+            if c + 1 < cols and not br:
+                br = best_seam(grey, round((c + 1) * cw), True, search, *ys)
+            if r and not bt:
+                bt = best_seam(grey, round(r * ch), False, search, *xs)
+            if r + 1 < rows and not bb:
+                bb = best_seam(grey, round((r + 1) * ch), False, search, *xs)
+            if bl and not neighbour_is_empty(bl, "l"):
+                x0 = max(x0, bl[1] + 1)
+            if br and not neighbour_is_empty(br, "r"):
+                x1 = min(x1, br[0])
+            if bt and not neighbour_is_empty(bt, "t"):
+                y0 = max(y0, bt[1] + 1)
+            if bb and not neighbour_is_empty(bb, "b"):
+                y1 = min(y1, bb[0])
             pad = round(min(cw, ch) * PAD)
             piece = sheet.crop((max(0, x0 - pad), max(0, y0 - pad),
                                 min(W, x1 + pad), min(H, y1 + pad)))
