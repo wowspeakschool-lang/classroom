@@ -368,6 +368,58 @@ LESSONS = {
                 "<p>Ты молодец! Увидимся на занятии.</p>"}),
         ],
     },
+    "u1_hw6": {
+        "unit": "u1",
+        "unit_title": "Unit 1 · School",
+        "unit_sort": 1,
+        "lesson_title": "Homework 6",
+        "lesson_sort": 5,
+        "kind": "homework",
+        # Раскраску («послушай запись и раскрась картинку») Анна просила убрать
+        # из заданий — блок выброшен, приветствие переписано без обещания раскраски.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_laptop")}" alt="" style="height:200px"></p>'
+                "<h2>Привет!</h2>"
+                "<p>Сегодня ты будешь много работать с текстом. Скорее приступай к заданиям :)</p>"}),
+
+            ("text", {"html":
+                "<h3>Puzzles are great fun</h3>"
+                "<p>Прочитай историю Оливера — она понадобится в обоих заданиях.</p>"
+                f'<p><img src="{img("u1", "story_oliver")}" alt="История Оливера" style="max-width:100%"></p>'}),
+
+            ("gaps", {
+                "title": "Вставь пропущенные слова так, чтобы предложения совпали с рассказом",
+                "mode": "drag",
+                "text":
+                    "1. The children think Oliver is silly because he doesn't like "
+                    "__football and computer games__.\n"
+                    "2. Oliver thinks stories are boring because they don't have "
+                    "__numbers and dates__.\n"
+                    "3. Oliver can say what __day__ it is when he looks at a date.\n"
+                    "4. The children think Oliver is a __computer__.\n"
+                    "5. Oliver wants to start a __puzzle club__ at school.\n"
+                    "6. Everyone __likes__ Oliver's idea.",
+                "gaps_expected": 6,
+            }),
+
+            ("truefalse", {
+                "title": "Отметь верные и неверные утверждения",
+                "statements": [
+                    {"text": "The boys and girls think Oliver is different.", "answer": True},
+                    {"text": "Oliver likes sitting under a tree and thinking.", "answer": True},
+                    {"text": "Oliver likes listening to Ms Sanders’ stories.", "answer": False},
+                    {"text": "Ms Sanders writes the date of her birthday on the board.", "answer": True},
+                    {"text": "The computer and Oliver say different days.", "answer": False},
+                    {"text": "Mike wants to learn to do the same thing as Oliver.", "answer": True},
+                ],
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_jump")}" alt="" style="height:180px"></p>'
+                "<h3>Урааа, ты справился, поздравляю!</h3><p>До скорой встречи!</p>"}),
+        ],
+    },
 }
 
 
