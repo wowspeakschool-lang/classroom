@@ -72,6 +72,8 @@ img{-webkit-user-drag:none}
 }
 .island.beckon{animation:beat 1.6s ease-in-out infinite}
 .island.beckon .name{text-shadow:0 2px 10px rgba(255,180,60,.95),0 2px 6px rgba(40,60,90,.6)}
+#map.tall .island{width:44%;max-width:none}
+#map.tall .dot.small{width:5%}
 #map .maptitle{position:absolute;left:50%;top:3%;transform:translateX(-50%);
   font-size:clamp(16px,3vw,30px);font-weight:900;color:#fff;
   text-shadow:0 3px 10px rgba(40,60,90,.55);white-space:nowrap}
@@ -451,6 +453,11 @@ const HOP = /[?&]fast=1/.test(location.search) ? 60 : 700;
 const ECHO_PAUSE = /[?&]fast=1/.test(location.search) ? 60 : 2200;
 const STORE = "ws46_progress";
 const ISLAND_POS = [[20, 60], [50, 38], [80, 62]];
+/* Большая карта на телефоне — змейкой снизу вверх и крупнее: в ряд острова
+   выходили крошечными, а дорожка не доставала до Облачного (Анна). */
+const ISLAND_POS_TALL = [[27, 70], [73, 46], [28, 21]];
+const tallMap = () => innerHeight > innerWidth * 1.1;
+const mapPos = i => (tallMap() ? ISLAND_POS_TALL : ISLAND_POS)[i];
 
 /* ─────────────────────────── звук ─────────────────────────── */
 let current = null;
@@ -568,12 +575,16 @@ function dotPos(i, k, total, onMap){
   /* На большой карте острова широкие и стоят почти вплотную: дорожка от
      центра к центру ложилась на сами острова и их названия. Там она
      занимает только середину пролёта. */
-  const t = onMap ? .2 + .55 * (k + .5) / total : (k + 1) / (total + 1);
+  const t = !onMap ? (k + 1) / (total + 1)
+          : tallMap() ? .2 + .5 * (k + .5) / total        // змейка: середина, мимо надписей
+          : .2 + .55 * (k + .5) / total;
   /* Дорожка идёт чуть ниже линии центров. На высокой карте телефона 13%
      высоты — это много: последнее облачко садилось на «Драконий Остров». */
   const drop = onMap && innerHeight > innerWidth ? 7 : 13;
-  return [ISLAND_POS[i][0] + (ISLAND_POS[i+1][0] - ISLAND_POS[i][0]) * t,
-          ISLAND_POS[i][1] + (ISLAND_POS[i+1][1] - ISLAND_POS[i][1]) * t + drop];
+  const P = onMap ? mapPos : (j => ISLAND_POS[j]);
+  const dy = onMap && tallMap() ? 0 : drop;
+  return [P(i)[0] + (P(i+1)[0] - P(i)[0]) * t,
+          P(i)[1] + (P(i+1)[1] - P(i)[1]) * t + dy];
 }
 function addDots(host, i, shown, popLast){
   const les = LESSONS[i], total = les.tokens;
@@ -602,6 +613,7 @@ function mapLine(){
   return MAPSAY[3];
 }
 function buildMap(){
+  mapEl.classList.toggle("tall", tallMap());
   mapEl.style.backgroundImage = "url(" + IMG.map_bg + ")";
   mapEl.innerHTML = '<div class="maptitle">Дорога на праздник</div>';
   const call = nextIsland();
@@ -609,7 +621,7 @@ function buildMap(){
     const b = document.createElement("button");
     b.className = "island" + (unlocked(les.id) ? "" : " locked") +
       (i === call ? " beckon" : "");
-    b.style.left = ISLAND_POS[i][0] + "%"; b.style.top = ISLAND_POS[i][1] + "%";
+    b.style.left = mapPos(i)[0] + "%"; b.style.top = mapPos(i)[1] + "%";
     b.innerHTML = '<img src="' + IMG[les.island] + '" alt="">' +
       '<span class="name">' + les.title + "</span>" +
       (isDone(les.id) ? '<span class="tick">⭐</span>' : "") +
@@ -628,6 +640,10 @@ function buildMap(){
     '<div class="mapsay">' + mapLine().text + "</div>";
   mapEl.appendChild(g);
 }
+// повернули телефон — карта перестраивается под новую раскладку
+addEventListener("resize", () => {
+  if (mapEl.classList.contains("on") && mapEl.classList.contains("tall") !== tallMap()) buildMap();
+});
 function showMap(){
   stopSound(); token++; buildMap();
   mapEl.classList.add("on");
