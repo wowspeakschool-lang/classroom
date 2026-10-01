@@ -420,6 +420,138 @@ LESSONS = {
                 "<h3>Урааа, ты справился, поздравляю!</h3><p>До скорой встречи!</p>"}),
         ],
     },
+    "u1_hw7": {
+        "unit": "u1",
+        "unit_title": "Unit 1 · School",
+        "unit_sort": 1,
+        "lesson_title": "Homework 7",
+        "lesson_sort": 6,
+        "kind": "homework",
+        # Обе части выгрузки, «Homework 7 (1)» и «(2)», в одном уроке:
+        # две части одной домашки — это один урок.
+        # Раскраска «раскрась фигуры по цветам» заменена на match теми же
+        # парами — раскраски Анна просила убрать. Обе игры Wordwall (робот
+        # идёт к названной фигуре; робот идёт к ячейке с верным ответом)
+        # пересобраны quiz'ами — СОСТАВ МОЙ.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_highfive")}" alt="" style="height:200px"></p>'
+                "<h2>Привет!</h2>"
+                "<p>Сегодня ты будешь много работать с геометрическими фигурами, "
+                "а потом составишь интервью и ответишь на вопросы.</p>"
+                "<p>Задания самые разные и очень интересные — удачи :)</p>"}),
+
+            ("exact_input", {"items": [
+                {"image": img("u1", "shape_pentagon"),
+                 "prompt": "1. Напиши название фигуры",
+                 "accept": ["pentagon", "Pentagon", "a pentagon"], "audio_tts": "pentagon"},
+                {"image": img("u1", "shape_hexagon"),
+                 "prompt": "2. Напиши название фигуры",
+                 "accept": ["hexagon", "Hexagon", "a hexagon"], "audio_tts": "hexagon"},
+                {"image": img("u1", "shape_triangle"),
+                 "prompt": "3. Напиши название фигуры",
+                 "accept": ["triangle", "Triangle", "a triangle"], "audio_tts": "triangle"},
+            ]}),
+
+            ("match", {
+                "title": "Соедини каждую иллюстрацию с названием объекта, который на ней изображён",
+                "pairs": [
+                    {"left_image": img("u1", "shapepic_cat"), "right": "cat", "right_audio_tts": "cat"},
+                    {"left_image": img("u1", "shapepic_person"), "right": "person", "right_audio_tts": "person"},
+                    {"left_image": img("u1", "shapepic_boat"), "right": "boat", "right_audio_tts": "boat"},
+                    {"left_image": img("u1", "shapepic_snake"), "right": "snake", "right_audio_tts": "snake"},
+                ],
+            }),
+
+            ("match", {
+                "title": "У каждой фигуры свой цвет. Соедини фигуру с её названием",
+                "pairs": [
+                    {"left_image": img("u1", "shape_square"), "right": "blue square",
+                     "right_audio_tts": "a blue square"},
+                    {"left_image": img("u1", "shape_circle"), "right": "green circle",
+                     "right_audio_tts": "a green circle"},
+                    {"left_image": img("u1", "shape_pentagon"), "right": "yellow pentagon",
+                     "right_audio_tts": "a yellow pentagon"},
+                    {"left_image": img("u1", "shape_triangle"), "right": "red triangle",
+                     "right_audio_tts": "a red triangle"},
+                    {"left_image": img("u1", "shape_rectangle"), "right": "orange rectangle",
+                     "right_audio_tts": "an orange rectangle"},
+                ],
+            }),
+
+            ("quiz", {"questions": [
+                {"q": "Find the hexagon.", "type": "single",
+                 "options": [{"image": img("u1", "shape_pentagon")}, {"image": img("u1", "shape_hexagon")},
+                             {"image": img("u1", "shape_square")}, {"image": img("u1", "shape_circle")}],
+                 "correct": [1]},
+                {"q": "Find the rectangle.", "type": "single",
+                 "options": [{"image": img("u1", "shape_triangle")}, {"image": img("u1", "shape_circle")},
+                             {"image": img("u1", "shape_rectangle")}, {"image": img("u1", "shape_hexagon")}],
+                 "correct": [2]},
+                {"q": "Find the circle.", "type": "single",
+                 "options": [{"image": img("u1", "shape_circle")}, {"image": img("u1", "shape_square")},
+                             {"image": img("u1", "shape_pentagon")}, {"image": img("u1", "shape_triangle")}],
+                 "correct": [0]},
+                {"q": "Find the square.", "type": "single",
+                 "options": [{"image": img("u1", "shape_rectangle")}, {"image": img("u1", "shape_hexagon")},
+                             {"image": img("u1", "shape_triangle")}, {"image": img("u1", "shape_square")}],
+                 "correct": [3]},
+            ]}),
+
+            ("match", {
+                "title": "Составь интервью: соедини вопросы с ответами",
+                "pairs": [
+                    {"left": "What’s your favourite subject, Kate?",
+                     "right": "Science. I love it."},
+                    {"left": "What do you like about it?",
+                     "right": "We do fun activities in the Science, and I love doing them."},
+                    {"left": "How many Science lessons do you have a week?",
+                     "right": "Three, but I’d like to have it every day."},
+                    {"left": "Have you got Science today?",
+                     "right": "Let me think. It’s Wednesday. Yes, I’ve got Science after Maths."},
+                    {"left": "Do lots of students like Science?",
+                     "right": "No, not many children like it. They think it’s difficult."},
+                    {"left": "What’s the favourite subject in your class?",
+                     "right": "For most of my classmates it’s English. They love it."},
+                ],
+            }),
+
+            ("truefalse", {
+                "title": "Верно или неверно?",
+                "statements": [
+                    {"text": "Kate’s favourite subject is Chemistry.", "answer": False},
+                    {"text": "On Wednesdays she has Science.", "answer": True},
+                    {"text": "She has three Science lessons every week.", "answer": True},
+                    {"text": "Kate’s classmates love Science.", "answer": False},
+                    {"text": "Kate tells that Science lessons are boring.", "answer": False},
+                ],
+            }),
+
+            ("quiz", {"questions": [
+                {"q": "What is Kate’s favourite subject?", "type": "single",
+                 "options": [{"text": "English"}, {"text": "Maths"},
+                             {"text": "Science"}, {"text": "History"}],
+                 "correct": [2]},
+                {"q": "How many Science lessons has Kate got a week?", "type": "single",
+                 "options": [{"text": "one"}, {"text": "three"},
+                             {"text": "five"}, {"text": "every day"}],
+                 "correct": [1]},
+                {"q": "Which lesson comes before Science on Wednesday?", "type": "single",
+                 "options": [{"text": "Art"}, {"text": "Music"},
+                             {"text": "Maths"}, {"text": "P.E."}],
+                 "correct": [2]},
+                {"q": "What is the favourite subject in Kate’s class?", "type": "single",
+                 "options": [{"text": "Science"}, {"text": "English"},
+                             {"text": "Geography"}, {"text": "I.T."}],
+                 "correct": [1]},
+            ]}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_smiley")}" alt="" style="height:180px"></p>'
+                "<h3>Ты справился со всеми заданиями, поздравляю!</h3>"
+                "<p>Теперь можешь смело отдыхать :)</p>"}),
+        ],
+    }
 }
 
 
@@ -431,7 +563,9 @@ def check(lesson, errors):
 
         if btype == "quiz":
             for n, q in enumerate(payload["questions"], start=1):
-                texts = [o["text"] for o in q["options"]]
+                # вариант бывает картинкой, а не текстом — сравниваем по тому,
+                # что в нём есть, иначе проверка на дубли падает на картинках
+                texts = [o.get("text", o.get("image", "")) for o in q["options"]]
                 if len(set(texts)) != len(texts):
                     errors.append(f"{where}, вопрос {n}: повторяются варианты")
                 for c in q["correct"]:
