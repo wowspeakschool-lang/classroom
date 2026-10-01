@@ -311,6 +311,63 @@ LESSONS = {
                 "<h3>Super duper! Nice job!</h3>"}),
         ],
     },
+    "u1_hw5": {
+        "unit": "u1",
+        "unit_title": "Unit 1 · School",
+        "unit_sort": 1,
+        "lesson_title": "Homework 5",
+        "lesson_sort": 4,
+        "kind": "homework",
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_book")}" alt="" style="height:200px"></p>'
+                "<h2>Добро пожаловать в домашнее задание!</h2>"
+                "<p>Сегодня мы вспомним историю, с которой познакомились на уроке, "
+                "и выполним по ней задания.</p>"
+                "<p>Для начала прочитай текст ещё раз — вспомни, в какое приключение "
+                "попали Lucy и Ben.</p>"}),
+
+            ("text", {"html":
+                "<h3>Ben and Lucy in the library</h3>"
+                f'<p><img src="{img("u1", "story_library_1")}" alt="Кадры 1–6" style="max-width:100%"></p>'
+                f'<p><img src="{img("u1", "story_library_2")}" alt="Кадры 7–8" style="max-width:100%"></p>'}),
+
+            ("quiz", {"questions": [{
+                "q": "Who is Mr Williams?",
+                "type": "single",
+                "options": [{"text": "teacher"}, {"text": "librarian"}, {"text": "shop assistant"}],
+                "correct": [1],
+            }]}),
+
+            ("truefalse", {
+                "title": "Выбери «верно» или «неверно» для каждого предложения. Не торопись!",
+                "statements": [
+                    {"text": "Ben and Lucy are in the library.", "answer": True},
+                    {"text": "The book is easy to read.", "answer": False},
+                    {"text": "The book is in code.", "answer": True},
+                    {"text": "The librarian, Mr Williams, helps the explorers to read the code.",
+                     "answer": False},
+                    {"text": "Lucy finds the secret to the book.", "answer": True},
+                    {"text": "Horax understands the code.", "answer": False},
+                ],
+            }),
+
+            ("task", {
+                "title": "А теперь задание посложнее!",
+                "needs_review": True,
+                "html":
+                    "<p>Мы узнали, что Lucy и Ben могут прочесть книгу с помощью секретной записки. "
+                    "А сможешь ли ты расшифровать их послание, используя код?</p>"
+                    f'<p><img src="{img("u1", "story_code")}" alt="Код" style="max-width:100%"></p>'
+                    "<p>Запиши в поле ниже, что получилось.</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("congrats_popper")}" alt="" style="height:180px"></p>'
+                "<h3>Ура! Ты справился с домашней работой 🎉</h3>"
+                "<p>Ты молодец! Увидимся на занятии.</p>"}),
+        ],
+    },
 }
 
 
