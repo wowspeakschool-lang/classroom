@@ -84,7 +84,7 @@ def erase_glued_captions(path):
     Image.fromarray(arr).save(out); return out
 
 # Предметы с нарисованной мягкой тенью рядом: оставляем только то, что внутри контура
-OUTLINE_ONLY = {'receipt'}
+OUTLINE_ONLY = set()  # receipt перерисован без тени, обычная вырезка чище
 
 def outline_only(png):
     from scipy.ndimage import binary_dilation, binary_erosion, binary_fill_holes
