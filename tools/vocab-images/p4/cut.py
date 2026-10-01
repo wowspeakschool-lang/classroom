@@ -10,7 +10,7 @@ from lib import row, row_x, clusters_of, min_rgb_of
 from sheets import S
 
 # Сцены с белым содержимым (лёд, снег): фон вырезается вместе с ним — заливаем сцену целиком
-FILL = {'ice hockey', 'ice skating'}
+FILL = {'ice hockey', 'ice skating', 'boarding pass', 'speed limit'}
 
 LAYOUT = {7: [4, 3], 8: [4, 4], 9: [5, 4], 10: [5, 5], 11: [4, 4, 3], 12: [4, 4, 4], 13: [5, 4, 4]}
 
