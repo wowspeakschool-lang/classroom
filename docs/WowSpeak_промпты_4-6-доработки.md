@@ -302,3 +302,54 @@ letters, no numbers.
 * пещера та же, что на экране 3-15 (песчаные камни), трава с обеих сторон;
 * вокруг белое поле, сцена нигде не обрезана — у прошлой полянки трава
   справа упёрлась в край.
+
+---
+
+## Ладошки: счёт с большого пальца (hand-1 … hand-4)
+
+Анна: на каждой фразе пальцы загибаются **с большого и по порядку**.
+Сейчас `hand-1…4` считают с указательного, а большой палец прижат — на
+фразе из четырёх слов («I have blue jeans») стрелка начинала с
+указательного, на фразе из пяти — с большого. Нужны четыре новые
+ладошки; `hand-5` (раскрытая) остаётся как есть и служит образцом.
+
+**Прикреплять `hand-5.webp`** к каждому запросу: это та же рука, мы
+меняем только загнутые пальцы. Делать каждую **одной правкой от hand-5**,
+а не цепочкой (hand-4 → hand-3 → …): на второй-третьей правке плывут
+форма и цвет кожи.
+
+Что важно для стрелки (кончики пальцев ищутся по картинке
+автоматически):
+
+* большой палец — слева от зрителя (как на hand-5), смотрит **вверх и
+  чуть в сторону**, не горизонтально: стрелка указывает на кончик сверху;
+* между поднятыми пальцами видны просветы;
+* загнутые пальцы прижаты к ладони плотно, ни один не торчит выше
+  костяшек — иначе его примут за поднятый.
+
+### hand-4 — большой, указательный, средний, безымянный
+
+```
+The same cartoon child's hand as in the attached image, in the same position, same size, same skin tone, same lighting and same plain white background. Change only this: four fingers are up and spread wide with visible gaps between them — the thumb, the index finger, the middle finger and the ring finger. The thumb is on the left side of the image and points up and slightly outward, not sideways. The little finger is folded tightly down against the palm and does not stick up. The whole hand is visible with clear empty margin around it. No text. Plain flat pure white background, no shadow on the background.
+```
+
+### hand-3 — большой, указательный, средний
+
+```
+The same cartoon child's hand as in the attached image, in the same position, same size, same skin tone, same lighting and same plain white background. Change only this: three fingers are up and spread wide with visible gaps between them — the thumb, the index finger and the middle finger. The thumb is on the left side of the image and points up and slightly outward, not sideways. The ring finger and the little finger are folded tightly down against the palm and do not stick up. The whole hand is visible with clear empty margin around it. No text. Plain flat pure white background, no shadow on the background.
+```
+
+### hand-2 — большой и указательный
+
+```
+The same cartoon child's hand as in the attached image, in the same position, same size, same skin tone, same lighting and same plain white background. Change only this: two fingers are up with a wide gap between them — the thumb and the index finger. The thumb is on the left side of the image and points up and slightly outward, not sideways. The middle, ring and little fingers are folded tightly down against the palm and do not stick up. The whole hand is visible with clear empty margin around it. No text. Plain flat pure white background, no shadow on the background.
+```
+
+### hand-1 — только большой
+
+```
+The same cartoon child's hand as in the attached image, in the same position, same size, same skin tone, same lighting and same plain white background. Change only this: only the thumb is up, pointing straight up like a thumbs-up, on the left side of the hand. All four other fingers are folded tightly down against the palm and do not stick up. The palm still faces the viewer. The whole hand is visible with clear empty margin around it. No text. Plain flat pure white background, no shadow on the background.
+```
+
+Готовые картинки — в `assets/kids-4-6/` под теми же именами
+(`hand-1.webp` … `hand-4.webp`), квадрат, как сейчас (1254×1254).

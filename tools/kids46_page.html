@@ -409,6 +409,7 @@ const PRAISE = __PRAISE__;
 const RETRY = __RETRY__;
 const ASK = __ASK__;
 const FINALE = __FINALE__;
+const ECHO = __ECHO__;
 const MAPSAY = __MAPSAY__;
 // Ссылка на запись: подставить, когда Анна её пришлёт. Пока пусто —
 // кнопка показывает подпись-заглушку вместо того, чтобы молча не работать.
@@ -417,6 +418,8 @@ const COLORS = __COLORS__;
 const FRIENDS = __FRIENDS__;
 const TIPS = __TIPS__;
 const HOP = /[?&]fast=1/.test(location.search) ? 60 : 700;
+// пауза на повтор ребёнком в эхо-раунде
+const ECHO_PAUSE = /[?&]fast=1/.test(location.search) ? 60 : 2200;
 const STORE = "ws46_progress";
 const ISLAND_POS = [[20, 60], [50, 38], [80, 62]];
 
@@ -1339,8 +1342,14 @@ function moveArrow(arrow, count, i){
   const tips = TIPS[Math.min(Math.max(count, 1), 5)];
   const t = tips[Math.min(i, tips.length - 1)];
   arrow.classList.add("on");
-  arrow.style.left = (t[0] * 100) + "%";
-  arrow.style.top = (t[1] * 100) + "%";
+  /* Кончики — в долях самой картинки, а не рамки: на телефоне рамка выше
+     нарисованной руки (object-fit: contain), и стрелка висела над ладошкой. */
+  const img = arrow.parentNode.querySelector("img.hand");
+  const bw = img.clientWidth, bh = img.clientHeight;
+  const k = Math.min(bw / (img.naturalWidth || bw), bh / (img.naturalHeight || bh));
+  const dw = (img.naturalWidth || bw) * k, dh = (img.naturalHeight || bh) * k;
+  arrow.style.left = (img.offsetLeft + (bw - dw) / 2 + t[0] * dw) + "px";
+  arrow.style.top = (img.offsetTop + (bh - dh) / 2 + t[1] * dh) + "px";
 }
 
 /* Раунд, где ребёнок говорит фразу сам: рука стоит молча и показывает,
@@ -1398,6 +1407,7 @@ function fingersSolo(s){
 RENDER.fingers = function(s){
   const isSwap = s.mode === "swap";
   if (isSwap && round > 0){ fingersSolo(s); return; }
+  const isEcho = !isSwap && !!(s.echo && s.echo[round]);
   const step = isSwap ? null : s.steps[round];
   const words = isSwap ? s.rounds[round].words : s.words;
   const from = isSwap ? 0 : step[0];
@@ -1445,7 +1455,8 @@ RENDER.fingers = function(s){
   s._run = async () => {
     const mine = token;
     turn.hidden = true; said.hidden = true; ready.hidden = true;
-    await ru(s.ru);
+    bubble.textContent = isEcho ? ECHO.text : (s.text || "");
+    await ru(isEcho ? ECHO.ru : s.ru);
     if (mine !== token) return;
     await wait(AUDIO[s.ru] ? 250 : readPause(s.text));
     if (mine !== token) return;
@@ -1454,14 +1465,22 @@ RENDER.fingers = function(s){
       if (mine !== token) return;
       await wait(400);
     }
+    /* Эхо: слово — пауза, ребёнок повторяет — следующий палец. */
+    if (isEcho) turn.textContent = "Повтори!";
     for (let i = 0; i < count; i++){
       if (mine !== token) return;
       moveArrow(ui.arrow, count, i);
       await en(words[from + i]);
-      await wait(HOP);
+      if (!isEcho){ await wait(HOP); continue; }
+      if (mine !== token) return;
+      turn.hidden = false;
+      await wait(ECHO_PAUSE);
+      turn.hidden = true;
     }
     ui.arrow.classList.remove("on");
     if (mine !== token) return;
+    if (isEcho){ said.hidden = false; return; }
+    turn.textContent = "Теперь ты! Покажи ладошку, говори и следи за пальчиками";
     turn.hidden = false;
     ready.hidden = false;
     await ru(ASK);

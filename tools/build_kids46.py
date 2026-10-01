@@ -429,7 +429,10 @@ def build_script():
     # дописанное после записи — только в конец, иначе номера сдвинутся
     where = "Похвалы — звучат во всех трёх уроках"
     praise += [ru("firefly", t, tone, where) for t, tone in LS.PRAISE_MORE]
-    return script, praise, retry, ask, finale, map_say, en_tracks
+    echo = {"ru": ru("firefly", LS.ECHO_LINE[0], LS.ECHO_LINE[1],
+                     "Урок 3 — второй раунд знакомства с фразой"),
+            "text": LS.ECHO_LINE[0]}
+    return script, praise, retry, ask, finale, map_say, echo, en_tracks
 
 
 def prep_fingers(s, en, say_of):
@@ -463,7 +466,9 @@ def prep_fingers(s, en, say_of):
     s["line"] = en(text)
     s["pic"] = f"{item}_{color}"
     if s["mode"] == "full":
-        s["steps"] = [[0, n - 1]]
+        # второй раунд — эхо: слово, пауза, ребёнок повторяет
+        s["steps"] = [[0, n - 1], [0, n - 1]]
+        s["echo"] = [False, True]
     elif s["mode"] == "chain":
         # по слову за шаг: I · I have · I have a · … Прыжок сразу к целой
         # фразе сводил дрилл на нет — ребёнок повторял её с двух слов.
@@ -652,7 +657,7 @@ HTML = (Path(__file__).resolve().parent / "kids46_page.html").read_text(encoding
 
 
 def main():
-    script, praise, retry, ask, finale, map_say, en_tracks = build_script()
+    script, praise, retry, ask, finale, map_say, echo, en_tracks = build_script()
     write_voice_doc(script, en_tracks)
     write_ssml_doc(script)
     print(f"  русских реплик: {len(script)}, английских: {len(en_tracks)}")
@@ -705,7 +710,7 @@ def main():
     for mark, value in (("__DEV__", DEV_PANEL), ("__IMG__", images),
                         ("__AUDIO__", audio), ("__LESSONS__", LS.LESSONS),
                         ("__PRAISE__", praise), ("__RETRY__", retry),
-                        ("__ASK__", ask), ("__FINALE__", finale),
+                        ("__ASK__", ask), ("__FINALE__", finale), ("__ECHO__", echo),
                         ("__MAPSAY__", map_say),
                         ("__COLORS__", LS.COLORS),
                         ("__FRIENDS__", LS.FRIENDS), ("__TIPS__", tips)):
