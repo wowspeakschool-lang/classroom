@@ -110,9 +110,9 @@ LESSONS = {
             }),
 
             ("order", {
-                "words": ["When", "have", "you", "got", "English?", "On", "Mondays."],
-                "sentence": "When have you got English? On Mondays.",
-                "audio_tts": "When have you got English? On Mondays.",
+                "words": ["When", "have", "you", "got", "English?", "On", "Mondays.", "After", "Maths."],
+                "sentence": "When have you got English? On Mondays. After Maths.",
+                "audio_tts": "When have you got English? On Mondays. After Maths.",
             }),
 
             ("speaking", {
@@ -183,6 +183,68 @@ LESSONS = {
                 f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
                 "<h3>\u041e\u0442\u043b\u0438\u0447\u043d\u043e! \u0414\u043e\u043c\u0430\u0448\u043d\u0435\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435 \u0433\u043e\u0442\u043e\u0432\u043e 🌟</h3>"
                 "<p>\u0422\u044b \u043c\u043e\u043b\u043e\u0434\u0435\u0446, \u0432\u0441\u0442\u0440\u0435\u0442\u0438\u043c\u0441\u044f \u043d\u0430 \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u043c \u0443\u0440\u043e\u043a\u0435 :)</p>"}),
+        ],
+    },
+    "u1_hw3": {
+        "unit": "u1",
+        "unit_title": "Unit 1 \u00b7 School",
+        "unit_sort": 1,
+        "lesson_title": "Homework 3",
+        "lesson_sort": 2,
+        "kind": "homework",
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_highfive")}" alt="" style="height:200px"></p>'
+                "<h2>\u041f\u0440\u0438\u0432\u0435\u0442! \u0414\u0430\u0432\u0430\u0439 \u043f\u0440\u0438\u0441\u0442\u0443\u043f\u0438\u043c \u043a \u0434\u043e\u043c\u0430\u0448\u043d\u0435\u043c\u0443 \u0437\u0430\u0434\u0430\u043d\u0438\u044e :)</h2>"
+                "<p>\u0421\u0435\u0433\u043e\u0434\u043d\u044f \u0442\u044b \u0441\u0430\u043c \u0431\u0443\u0434\u0435\u0448\u044c \u043f\u0438\u0441\u0430\u0442\u044c \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0435\u043d\u0438\u044f \u2014 \u043f\u043e \u0442\u043e\u043c\u0443, \u0447\u0442\u043e \u0433\u043e\u0432\u043e\u0440\u044f\u0442 \u0440\u0435\u0431\u044f\u0442\u0430.</p>"}),
+
+            ("task", {
+                "title": "Look, read and write sentences \u00b7 Tim",
+                "needs_review": True,
+                "html":
+                    "<p>\u0422\u0438\u043c \u0440\u0430\u0441\u0441\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u043e \u0448\u043a\u043e\u043b\u0435. \u0421\u043c\u0430\u0439\u043b\u0438\u043a \u043f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442, \u043a\u0430\u043a \u043e\u043d \u043a \u044d\u0442\u043e\u043c\u0443 \u043e\u0442\u043d\u043e\u0441\u0438\u0442\u0441\u044f: "
+                    "😁 \u2014 <i>like</i>, 😖 \u2014 <i>don\u2019t like</i>, 😁😁 \u2014 <i>love</i>. "
+                    "\u0417\u0430\u043f\u0438\u0448\u0438 \u043f\u043e\u043b\u043d\u044b\u0435 \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0435\u043d\u0438\u044f.</p>"
+                    "<ol>"
+                    "<li>😁 Speaking English. Good at it. \u2014 "
+                    "<i>\u043e\u0431\u0440\u0430\u0437\u0435\u0446: I like speaking English. I\u2019m good at it.</i></li>"
+                    "<li>😖 History. Not my favourite subject.</li>"
+                    "<li>😁😁 Listening to music.</li>"
+                    "</ol>",
+            }),
+
+            ("task", {
+                "title": "Look, read and write sentences \u00b7 Anna",
+                "needs_review": True,
+                "html":
+                    "<p>\u0422\u0435\u043f\u0435\u0440\u044c \u0410\u043d\u043d\u0430. \u041f\u0440\u043e\u0434\u043e\u043b\u0436\u0430\u0439 \u043d\u0443\u043c\u0435\u0440\u0430\u0446\u0438\u044e \u2014 4, 5, 6.</p>"
+                    "<ol start=\"4\">"
+                    "<li>😖 Learning Maths.</li>"
+                    "<li>😁 Geography. Very good at it.</li>"
+                    "<li>😁😁 Studying History. Love my teacher too.</li>"
+                    "</ol>",
+            }),
+
+            ("task", {
+                "title": "Look and write sentences",
+                "needs_review": True,
+                "html":
+                    "<p>\u0413\u0430\u043b\u043e\u0447\u043a\u0430 \u2714 \u2014 \u043d\u0440\u0430\u0432\u0438\u0442\u0441\u044f, \u043a\u0440\u0435\u0441\u0442\u0438\u043a \u2716 \u2014 \u043d\u0435 \u043d\u0440\u0430\u0432\u0438\u0442\u0441\u044f. "
+                    "\u041d\u0430\u043f\u0438\u0448\u0438 \u043f\u0440\u043e \u043a\u0430\u0436\u0434\u043e\u0433\u043e \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0435\u043d\u0438\u0435.</p>"
+                    "<ol>"
+                    "<li>Jim \u00b7 playing football \u00b7 \u2716 \u2014 "
+                    "<i>\u043e\u0431\u0440\u0430\u0437\u0435\u0446: Jim doesn\u2019t like playing football.</i></li>"
+                    "<li>Claire \u00b7 singing \u00b7 \u2716</li>"
+                    "<li>Mary \u00b7 playing the piano \u00b7 \u2714</li>"
+                    "<li>Sam \u00b7 reading \u00b7 \u2714</li>"
+                    "<li>Lisa \u00b7 watching TV \u00b7 \u2716</li>"
+                    "</ol>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_clap")}" alt="" style="height:180px"></p>'
+                "<h3>Good job! Thank you!</h3>"
+                "<p>\u0423\u0447\u0438\u0442\u0435\u043b\u044c \u043f\u0440\u043e\u0432\u0435\u0440\u0438\u0442 \u0442\u0432\u043e\u0438 \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0435\u043d\u0438\u044f \u0438 \u043d\u0430\u043f\u0438\u0448\u0435\u0442, \u0447\u0442\u043e \u043f\u043e\u043b\u0443\u0447\u0438\u043b\u043e\u0441\u044c \u043b\u0443\u0447\u0448\u0435 \u0432\u0441\u0435\u0433\u043e.</p>"}),
         ],
     },
 }
