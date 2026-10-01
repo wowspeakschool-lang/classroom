@@ -10,7 +10,10 @@ from lib import row, row_x, clusters_of, min_rgb_of
 from sheets import S
 
 # Сцены с белым содержимым (лёд, снег): фон вырезается вместе с ним — заливаем сцену целиком
-FILL = {'ice hockey', 'ice skating', 'boarding pass', 'speed limit'}
+FILL = {'ice hockey', 'ice skating', 'boarding pass', 'speed limit', 'receipt'}
+
+# Листы, где генератор разложил картинки иначе, чем в промпте
+LAYOUT_SHEET = {25: [5, 4, 2]}
 
 LAYOUT = {7: [4, 3], 8: [4, 4], 9: [5, 4], 10: [5, 5], 11: [4, 4, 3], 12: [4, 4, 4], 13: [5, 4, 4]}
 
@@ -34,7 +37,7 @@ def split_rows(path, bs, n_rows):
     for i, (y0, y1) in enumerate(bs):
         pic = y1 - y0 > 60
         if pic:
-            if prev_pic and y0 - prev < 8:
+            if prev_pic and y0 - prev < 15:
                 y0 = y0 + 20 + int(np.argmin(c[y0 + 20:y0 + 90]))
             else:
                 # светлые пряди и тени не дотягивают до порога 200 — берём весь белый
@@ -57,9 +60,31 @@ def column_cuts(path, y0, y1, n):
         cuts.append(lo + int(np.argmin(c[lo:hi])))
     return cuts, [int(c[x]) for x in cuts]
 
+def erase_glued_captions(path):
+    """Подпись вплотную к рисунку попадает в его полосу. Стираем её: связные куски
+    тёмного цвета, целиком лежащие в нижних 50 px такой полосы и не выше 42 px, —
+    это буквы. Части рисунка, заходящие в полосу, связаны с рисунком и остаются."""
+    from scipy.ndimage import label
+    im = Image.open(path).convert('RGB'); a = min_rgb_of(im)
+    bs = bands(path); H = a.shape[0]; changed = False; arr = np.array(im)
+    for i, (y0, y1) in enumerate(bs):
+        if y1 - y0 <= 60: continue
+        nxt = bs[i + 1] if i + 1 < len(bs) else None
+        if nxt and nxt[1] - nxt[0] <= 60 and nxt[0] - y1 < 25: continue  # подпись отдельно
+        s0 = max(y0, y1 - 50)
+        lab, n = label(a[y0:y1 + 3] < 235)
+        for k in range(1, n + 1):
+            ys, xs = np.where(lab == k)
+            if ys.min() + y0 >= s0 and ys.max() - ys.min() <= 42 and a[y0:y1 + 3][lab == k].min() < 80:
+                arr[y0:y1 + 3][lab == k] = 255; changed = True
+    if not changed: return path
+    out = '/tmp/claude-0/-home-user-classroom/d4a2a0a4-519c-5b81-af84-18451bfcf9dd/scratchpad/clean_' + os.path.basename(path) + '.png'
+    Image.fromarray(arr).save(out); return out
+
 def cut(sheet, path, out='out'):
+    path = erase_glued_captions(path)
     title, note, items = S[sheet - 1]
-    lay = LAYOUT[len(items)]
+    lay = LAYOUT_SHEET.get(sheet) or LAYOUT[len(items)]
     rows = split_rows(path, bands(path), len(lay))
     k = 0; report = []
     for (y0, y1), n in zip(rows, lay):
