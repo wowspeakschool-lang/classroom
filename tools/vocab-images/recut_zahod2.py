@@ -58,3 +58,6 @@ import shutil, tempfile
 _t = tempfile.mkdtemp()
 row_x(I+'18.webp', 486, 921, ['make a cake','make a cup of tea','make a mess','make a mistake','make the bed'], _t, [298, 592, 917, 1225])
 shutil.copy(_t + '/make_a_mistake.png', O + '4.3/make_a_mistake.png')
+
+# translate перерисован отдельной картинкой (в листе 3 мальчик был в жёлтой рубашке)
+row(I+'19.webp', 19, 866, ['translate'], O+'3.1', gap=200, min_area=150)
