@@ -303,10 +303,11 @@ L3 = {
         # ── разминка: обе игры новые, в прошлых уроках их не было ──
         {"t": "gone", "say": "combo",
          "rounds": [
-             {"things": [("top", "green"), ("jeans", "blue"), ("shoes", "yellow")],
-              "missing": 1},
-             {"things": [("shoes", "green"), ("top", "yellow"), ("jeans", "green")],
+             # пропадает по порядку: слева, в середине, справа (Анна)
+             {"things": [("jeans", "blue"), ("top", "green"), ("shoes", "yellow")],
               "missing": 0},
+             {"things": [("top", "yellow"), ("shoes", "green"), ("jeans", "green")],
+              "missing": 1},
              {"things": [("jeans", "yellow"), ("shoes", "blue"), ("top", "blue")],
               "missing": 2},
          ],

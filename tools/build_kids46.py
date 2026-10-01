@@ -637,6 +637,10 @@ def collect_audio():
             # медленной версии урок ищет строчными («EN-01-slow»), и с
             # «-SLOW» медленное слово тихо уходило в синтез браузера
             key = f.stem.upper().replace("-SLOW", "-slow")
+            # медленные слова урок больше не играет (Анна: слово — один
+            # раз); файлы лежат, в сборку не едут
+            if key.endswith("-slow"):
+                continue
             out[key] = ("data:%s;base64," % mime +
                                    base64.b64encode(f.read_bytes()).decode())
     out.setdefault("SFX-OK", tone_wav([(880, 0.10), (1318, 0.16)]))
