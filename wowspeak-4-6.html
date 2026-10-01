@@ -172,6 +172,9 @@ img{-webkit-user-drag:none}
   background:radial-gradient(circle at 50% 45%,rgba(255,236,150,.6),rgba(255,236,150,0) 42%)}
 .picarea.dark.go::after{animation:caveglow 5s ease forwards}
 @keyframes caveglow{0%,72%{opacity:0}84%{opacity:1}100%{opacity:.35}}
+.below.fing .turn{min-height:2.6em;display:flex;align-items:center;justify-content:center}
+.below.fing .turn[hidden]{display:flex;visibility:hidden}
+.below.fing .slot{min-height:66px;width:100%;display:flex;justify-content:center}
 .below{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
 .wordline{font-size:clamp(22px,4vw,44px);font-weight:900;letter-spacing:.5px;text-align:center}
 
@@ -789,6 +792,12 @@ function placeSayEn(){
   } else {
     content.appendChild(sayEn);
     placeEnOverTask();
+    /* картинка «раскрась» ещё не загружена — без этого кнопка садилась
+       на кляксы, поверх вещи */
+    content.querySelectorAll("img").forEach(im => {
+      if (!im.complete) im.addEventListener("load", placeEnOverTask, {once: true});
+    });
+    requestAnimationFrame(placeEnOverTask);
   }
 }
 function placeEnOverTask(){
@@ -1451,7 +1460,7 @@ function fingersSolo(s){
   ui.arrow.remove();
 
   const below = document.createElement("div");
-  below.className = "below";
+  below.className = "below fing";
   const text = document.createElement("div");
   text.className = "wordline";
   text.textContent = r.combo[1];
@@ -1473,7 +1482,10 @@ function fingersSolo(s){
     await cheerStep();
     nextRound(s);
   };
-  below.appendChild(check);
+  const slot = document.createElement("div");
+  slot.className = "slot";
+  below.appendChild(slot);
+  slot.appendChild(check);
   content.appendChild(below);
 
   s._run = async () => {
@@ -1508,7 +1520,7 @@ RENDER.fingers = function(s){
   const ui = handBox(count, picKey, s.mode === "back" && words.length === 5);
 
   const below = document.createElement("div");
-  below.className = "below";
+  below.className = "below fing";
   const text = document.createElement("div");
   text.className = "wordline";
   text.textContent = words.slice(from, to + 1).map(w => w[1]).join(" ");
@@ -1524,7 +1536,12 @@ RENDER.fingers = function(s){
   ready.className = "btn big";
   ready.textContent = "✋ Я готов";
   ready.hidden = true;
-  below.appendChild(ready);
+  /* Подсказка и кнопки появляются и прячутся по ходу раунда; место под
+     них держится всегда — иначе ладошка то росла, то сжималась (Анна). */
+  const slot = document.createElement("div");
+  slot.className = "slot";
+  below.appendChild(slot);
+  slot.appendChild(ready);
   const said = document.createElement("button");
   said.className = "btn big";
   said.textContent = "🗣 Я сказал!";
@@ -1537,7 +1554,7 @@ RENDER.fingers = function(s){
     const total = isSwap ? s.rounds.length : s.steps.length;
     if (round >= total){ round = 0; next(); } else { render(); }
   };
-  below.appendChild(said);
+  slot.appendChild(said);
   content.appendChild(below);
 
   /* Сначала слово за словом — палец в палец. Раньше звучала вся фраза
@@ -1584,7 +1601,8 @@ RENDER.fingers = function(s){
       if (mine === token){ round++; render(); }
       return;
     }
-    childTurn(round === 0 ? ASK : ECHO.now);
+    // со второго раунда — только текст «Теперь ты!», без голоса (Анна)
+    childTurn(round === 0 ? ASK : null);
   };
   /* Очередь ребёнка: подсказка, «Я готов», стрелка идёт молча. Полная
      инструкция — в первый раз, дальше коротко «Теперь ты!». */
@@ -1603,7 +1621,7 @@ RENDER.fingers = function(s){
       ui.arrow.classList.remove("on");
       said.hidden = false;
     };
-    await ru(say);
+    if (say) await ru(say);
   }
 };
 
