@@ -689,6 +689,12 @@ def main():
     ap.add_argument("--src", required=True, help="папка с листами")
     ap.add_argument("--only", nargs="*", help="резать только эти листы")
     ap.add_argument("--preview", help="куда положить контрольный лист-превью")
+    ap.add_argument("--cells", nargs="*", help="переписать только эти карточки")
+    ap.add_argument("--plain", action="store_true",
+                    help="без чисток края: ячейка режется по сетке и обрезается "
+                         "только по содержимому. Чистки хороши там, где сосед "
+                         "заезжает в кадр, но у предмета с тонким верхом "
+                         "(антенна, щетина, кораллы) они срезают верхушку.")
     args = ap.parse_args()
 
     made, previews, empty = [], [], []
@@ -702,10 +708,14 @@ def main():
         sheet = Image.open(path).convert("RGB")
         outdir = os.path.join(ROOT, "media", "sm3", unit)
         os.makedirs(outdir, exist_ok=True)
+        if args.cells and not any(n in args.cells for n in names if n):
+            continue
         scene = rows == 1 and cols == 1
         pieces = [sheet] if scene else cut_sheet(sheet, rows, cols)
         for i, name in enumerate(names):
             if name is None:
+                continue
+            if args.cells and name not in args.cells:
                 continue
             piece = pieces[i] if i < len(pieces) else None
             if piece is None:
@@ -713,7 +723,8 @@ def main():
                 continue
             # серая линия сетки остаётся и на ячейках, нарезанных по сетке
             # (фото во весь кадр), поэтому край чистим у всех кусков
-            piece = strip_lines(cut_off_line(cut_foreign_strip(piece)))
+            if not args.plain:
+                piece = strip_lines(cut_off_line(cut_foreign_strip(piece)))
             out = fit(piece, SCENE if scene else CARD)
             dst = os.path.join(outdir, f"{name}.webp")
             out.save(dst, "WEBP", quality=Q_SCENE if scene else Q_CARD, method=6)
