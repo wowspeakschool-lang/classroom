@@ -78,9 +78,24 @@ img{-webkit-user-drag:none}
   background:linear-gradient(180deg,#d9f3ff 0%,#fff4de 100%)}
 #lesson.on{display:flex}
 .topbar{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:8px 14px}
-.topbar .home,.topbar .listen{border:0;background:rgba(255,255,255,.85);border-radius:999px;
+.topbar .home{border:0;background:rgba(255,255,255,.85);border-radius:999px;
   width:52px;height:52px;padding:0;font-size:26px;cursor:pointer;box-shadow:var(--shadow);flex:0 0 auto}
-.topbar .home:active,.topbar .listen:active{transform:scale(.94)}
+.topbar .home:active{transform:scale(.94)}
+/* Два «повтори» (Анна): белый у портрета Мии — только её реплика,
+   голубой с EN у английского — только английское. */
+.say{border:0;border-radius:50%;width:42px;height:42px;padding:0;flex:0 0 auto;
+  font-size:21px;line-height:1;cursor:pointer;background:rgba(255,255,255,.95);
+  box-shadow:0 4px 10px rgba(60,40,90,.18);position:relative}
+.say:active{transform:scale(.92)}
+.say[hidden]{display:none}
+.say.en{background:#e3f1ff;box-shadow:0 0 0 2px #6aa8e8,0 4px 10px rgba(60,40,90,.18)}
+.say.en::after{content:"EN";position:absolute;right:-6px;bottom:-5px;font-size:10px;
+  font-weight:900;color:#fff;background:#4a8fd9;border-radius:8px;padding:1px 4px}
+.guide{position:relative}
+.guide .say.ru{position:absolute;left:-4px;top:-4px;z-index:2}
+.wordrow{display:flex;align-items:center;justify-content:center;gap:12px}
+.content{position:relative}
+.content > .say.en{position:absolute;right:6px;top:6px;z-index:3}
 /* Сколько шагов внутри одного задания уже сделано. Без этого ребёнок не
    понимал, что начался следующий раунд: картинка сменилась, а игра та же. */
 .topbar .roundbar{display:flex;gap:7px;margin:0 auto;align-items:center}
@@ -380,12 +395,11 @@ img{-webkit-user-drag:none}
   <div id="lesson">
     <div class="topbar">
       <button class="home" title="На карту">🗺️</button>
-      <button class="listen" title="Ещё раз">🔊</button>
       <div class="roundbar"></div>
       <div class="tokens"></div>
     </div>
     <div class="stage">
-      <div class="guide"><img alt=""><div class="bubble"></div></div>
+      <div class="guide"><button class="say ru" title="Повторить, что сказала Мия">🔊</button><img alt=""><div class="bubble"></div></div>
       <div class="content"></div>
     </div>
     <div class="bottombar">
@@ -606,7 +620,11 @@ const bubble = lessonEl.querySelector(".bubble");
 const content = lessonEl.querySelector(".content");
 const tokensEl = lessonEl.querySelector(".tokens");
 const btnNext = lessonEl.querySelector(".next");
-const btnListen = lessonEl.querySelector(".listen");
+const sayRu = lessonEl.querySelector(".say.ru");
+const sayEn = document.createElement("button");
+sayEn.className = "say en"; sayEn.textContent = "🔊";
+sayEn.title = "Повторить по-английски";
+let curRu = null;           // какую реплику Мии повторяет белая кнопка
 let L = 0, S = 0, round = 0, earned = 0, token = 0;
 
 function startLesson(i){
@@ -660,7 +678,10 @@ function render(){
   drawRounds();
   content.classList.remove("fresh"); void content.offsetWidth;
   content.classList.add("fresh");
+  curRu = s.ru || null;
   RENDER[s.t](s);
+  placeSayEn();
+  placeSayRu();
   fit();
   if (s._run) s._run();
 }
@@ -720,10 +741,40 @@ function afterIntro(s, build){
     if (s._quiz) await s._quiz();
   })();
 }
-function replay(){
+/* Что повторяет голубая кнопка: только английское этого раунда. Где
+   английское — ответ на задание («чего не стало», «назови сам» без
+   примера), кнопки нет: она бы подсказала ответ. */
+function enSteps(s){
+  const r = s.rounds ? s.rounds[round] : null;
+  if (s.t === "word") return [() => en(s.voice)];
+  if (s.t === "fingers"){
+    if (s.mode === "swap") return round > 0 ? [() => en(r.combo)] : [() => en(r.line)];
+    return [() => en(s.line)];
+  }
+  // «назови сам»: пример и так на своей кнопке, а без примера — это ответ
+  if (s.t === "name") return [];
+  if (s.t === "gone" || s.t === "vocab") return [];
+  return taskSteps(s);
+}
+/* Голубая кнопка встаёт рядом с английской строкой, если она на экране;
+   иначе — в угол задания. Строку оборачиваем, а не кладём кнопку внутрь:
+   её текст меняется по ходу раунда, и кнопка стёрлась бы. */
+function placeSayEn(){
   const s = screen();
-  if (s._run){ s._run(); return; }
-  queue([() => ru(s.ru)].concat(taskSteps(s)));
+  sayEn.hidden = !enSteps(s).length;
+  const line = content.querySelector(".wordline");
+  if (line){
+    let row = line.parentNode;
+    if (!row.classList.contains("wordrow")){
+      row = document.createElement("div");
+      row.className = "wordrow";
+      line.replaceWith(row);
+      row.appendChild(line);
+    }
+    row.appendChild(sayEn);
+  } else {
+    content.appendChild(sayEn);
+  }
 }
 
 /* Ряду карточек нужен его размер в пикселях: от него считается сторона
@@ -1463,6 +1514,7 @@ RENDER.fingers = function(s){
     const mine = token;
     turn.hidden = true; said.hidden = true; ready.hidden = true;
     bubble.textContent = isEcho ? ECHO.text : (s.text || "");
+    curRu = isEcho ? ECHO.ru : (phase === "turn" ? ASK : s.ru);
     /* Инструкция звучит только в первом раунде (Анна): дальше текст
        остаётся в пузыре, а голос молчит. У эхо — своя реплика. */
     const intro = isEcho ? ECHO.ru : (round === 0 ? s.ru : null);
@@ -1565,7 +1617,19 @@ function finish(){
 }
 
 btnNext.onclick = next;
-btnListen.onclick = replay;
+/* Белая кнопка — в углу самого портрета, а не всей колонки гида: на
+   сюжетном экране телефона колонка высокая, и кнопка висела далеко над Мией. */
+function placeSayRu(){
+  sayRu.style.left = (guideImg.offsetLeft - 6) + "px";
+  sayRu.style.top = (guideImg.offsetTop - 6) + "px";
+}
+guideImg.addEventListener("load", placeSayRu);
+addEventListener("resize", placeSayRu);
+sayRu.onclick = () => { if (curRu){ stopSound(); playNow(curRu); } };
+sayEn.onclick = () => {
+  const steps = enSteps(screen());
+  if (steps.length){ stopSound(); queue(steps.map(f => () => praiseEnd.then(f))); }
+};
 lessonEl.querySelector(".home").onclick = showMap;
 
 if (DEV_PANEL && !/[?&]dev=0/.test(location.search)){

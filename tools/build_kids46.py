@@ -306,6 +306,9 @@ def build_images():
            "painted": [[n, f, w, (ART / f).stat().st_mtime, PAINT_OPTS.get(n),
                         CUT_OPTS.get(n)] for n, f, w in PAINTED],
            "hue": COLOR_HUE}
+    # через JSON: кортежи в настройках (keep у яйца) возвращаются из файла
+    # списками, и без этого подпись не совпадала никогда — сборка шла 8 минут
+    sig = json.loads(json.dumps(sig))
     if CACHE.exists():
         old = json.loads(CACHE.read_text())
         if old.get("sig") == sig and "tips" in old:
