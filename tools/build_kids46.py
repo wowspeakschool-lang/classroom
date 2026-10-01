@@ -15,6 +15,7 @@ import base64
 import io
 import json
 import math
+import re
 import struct
 import sys
 from pathlib import Path
@@ -213,8 +214,8 @@ def feather(im, passes=3, light=214, full=250):
     return im
 
 
-def encode(im, width, quality=80):
-    box = im.getbbox()
+def encode(im, width, quality=80, crop=True):
+    box = im.getbbox() if crop else None
     if box:
         im = im.crop(box)
     if im.width > width:
@@ -319,15 +320,23 @@ def build_images():
                               else im.convert("RGB"), width)
     # Пещера с гнездом и яйцом — одна картинка. Раньше яйцо вклеивалось в
     # картинку пустой пещеры, но у той было своё гнездо, и получалось два.
-    for n in range(1, 6):
-        hand = cut_white(Image.open(ART / BASE["hand%d" % n][0]))
-        hand = hand.crop(hand.getbbox())
-        tips[n] = finger_tips(hand, n)
-    for n in range(1, 5):
-        if "handb%d" % n in BASE:
-            hand = cut_white(Image.open(ART / BASE["handb%d" % n][0]))
-            hand = hand.crop(hand.getbbox())
-            tips["b%d" % n] = finger_tips(hand, n, "right")
+    # Ладошки режутся одной общей рамкой, а не каждая по своим краям:
+    # иначе кулачок с одним пальцем растягивался на всё место и выходил
+    # крупнее раскрытой ладони. Все нарисованы на одном холсте, запястье
+    # на одном месте — общая рамка держит их одного размера.
+    hands = {k: cut_white(Image.open(ART / BASE[k][0]))
+             for k in BASE if re.fullmatch(r"handb?\d", k)}
+    boxes = [h.getbbox() for h in hands.values()]
+    union = (min(b[0] for b in boxes), min(b[1] for b in boxes),
+             max(b[2] for b in boxes), max(b[3] for b in boxes))
+    for k, h in hands.items():
+        h = h.crop(union)
+        images[k] = encode(h, BASE[k][1], crop=False)
+        n = int(k[-1])
+        if k.startswith("handb"):
+            tips["b%d" % n] = finger_tips(h, n, "right")
+        else:
+            tips[n] = finger_tips(h, n)
 
     for name, f, width in PAINTED:
         src = cut_white(Image.open(ART / f), holes=HOLES.get(name),
