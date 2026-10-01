@@ -633,7 +633,11 @@ def collect_audio():
                 continue
             mime = {"mp3": "audio/mpeg", "m4a": "audio/mp4",
                     "ogg": "audio/ogg", "wav": "audio/wav"}[ext]
-            out[f.stem.upper()] = ("data:%s;base64," % mime +
+            # имя в верхний регистр — чтобы и ru-05.mp3 нашёлся; но суффикс
+            # медленной версии урок ищет строчными («EN-01-slow»), и с
+            # «-SLOW» медленное слово тихо уходило в синтез браузера
+            key = f.stem.upper().replace("-SLOW", "-slow")
+            out[key] = ("data:%s;base64," % mime +
                                    base64.b64encode(f.read_bytes()).decode())
     out.setdefault("SFX-OK", tone_wav([(880, 0.10), (1318, 0.16)]))
     out.setdefault("SFX-NO", tone_wav([(330, 0.18)], volume=0.16))

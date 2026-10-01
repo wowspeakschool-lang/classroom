@@ -7,10 +7,11 @@
     python3 tools/tts_kids46.py --force RU-05 RU-06   переделать конкретные дорожки
     python3 tools/tts_kids46.py --only RU-01 RU-02    записать только эти, и ничего сверх
 
-Пишем **только русские реплики**, через Yandex SpeechKit: у него родной
-русский — ударения и вопросительная интонация. Английские слова читает
-синтез браузера прямо у ребёнка, и читает хорошо, поэтому файлов под них
-не нужно — `--en` по умолчанию `off`.
+Пишем всё через Yandex SpeechKit: русские реплики — голосом Мии (lera),
+английские слова — голосом john. Английский раньше читал синтез
+браузера, но он на каждом устройстве свой, а на Android одинокое «I»
+звучало как «Capital I» — теперь и английский файлами (`--en off` вернёт
+старое поведение).
 
 Переключается флагами: `--ru openai`, `--en openai`. Ключи берутся из
 окружения — `YANDEX_API_KEY` (и `YANDEX_FOLDER_ID`, если ключ его требует)
@@ -192,7 +193,9 @@ def main():
     args = sys.argv[1:]
     todo = tracks()
     ru_engine = opt(args, "--ru", "yandex")
-    en_engine = opt(args, "--en", "off")      # английский — синтез браузера
+    # английский тоже файлами (Yandex john): синтез браузера на каждом
+    # устройстве свой, а на Android одинокое «I» читал как «Capital I»
+    en_engine = opt(args, "--en", "yandex")
     todo = [t for t in todo if not (en_engine == "off" and t[2].startswith("en"))]
     for e in (ru_engine, en_engine):
         if e not in ENGINES and e != "off":
