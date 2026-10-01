@@ -88,6 +88,9 @@ img{-webkit-user-drag:none}
   box-shadow:0 4px 10px rgba(60,40,90,.18);position:relative}
 .say:active{transform:scale(.92)}
 .say[hidden]{display:none}
+/* Появляются не сразу, а через 1.8 с после экрана (Анна) — мягко. */
+.say{transition:opacity .35s, transform .35s}
+.say.later{opacity:0;transform:scale(.6);pointer-events:none}
 .say.en{background:#e3f1ff;box-shadow:0 0 0 2px #6aa8e8,0 4px 10px rgba(60,40,90,.18)}
 .say.en::after{content:"EN";position:absolute;right:-6px;bottom:-5px;font-size:10px;
   font-weight:900;color:#fff;background:#4a8fd9;border-radius:8px;padding:1px 4px}
@@ -628,7 +631,7 @@ let curRu = null;           // какую реплику Мии повторяе
 let L = 0, S = 0, round = 0, earned = 0, token = 0;
 
 function startLesson(i){
-  L = i; S = 0; round = 0; earned = 0;
+  L = i; S = 0; round = 0; earned = 0; sayShownFor = null;
   // Пока ни один урок не пройден, карты ещё нет — и уводить на неё некуда.
   lessonEl.querySelector(".home").hidden = progress().done.length === 0;
   mapEl.classList.remove("on"); lessonEl.classList.add("on");
@@ -682,6 +685,7 @@ function render(){
   RENDER[s.t](s);
   placeSayEn();
   placeSayRu();
+  showSayLater();
   fit();
   if (s._run) s._run();
 }
@@ -1514,6 +1518,7 @@ RENDER.fingers = function(s){
     const mine = token;
     turn.hidden = true; said.hidden = true; ready.hidden = true;
     bubble.textContent = isEcho ? ECHO.text : (s.text || "");
+    placeSayRu();
     curRu = isEcho ? ECHO.ru : (phase === "turn" ? ASK : s.ru);
     /* Инструкция звучит только в первом раунде (Анна): дальше текст
        остаётся в пузыре, а голос молчит. У эхо — своя реплика. */
@@ -1617,13 +1622,27 @@ function finish(){
 }
 
 btnNext.onclick = next;
-/* Белая кнопка — в углу самого портрета, а не всей колонки гида: на
-   сюжетном экране телефона колонка высокая, и кнопка висела далеко над Мией. */
+/* Белая кнопка — на нижнем правом углу облачка с репликой, наполовину
+   снаружи: на портрете она закрывала Мию (Анна). */
 function placeSayRu(){
-  sayRu.style.left = (guideImg.offsetLeft - 6) + "px";
-  sayRu.style.top = (guideImg.offsetTop - 6) + "px";
+  sayRu.style.left = (bubble.offsetLeft + bubble.offsetWidth - 30) + "px";
+  sayRu.style.top = (bubble.offsetTop + bubble.offsetHeight - 22) + "px";
 }
 guideImg.addEventListener("load", placeSayRu);
+/* Кнопки «повторить» показываются через 1.8 с после экрана. */
+let sayShownFor = null;     // экран, на котором кнопки уже появились
+function showSayLater(){
+  const mine = token, here = L + ":" + S;
+  // между раундами одного экрана кнопки не прячем — только на новом экране
+  if (sayShownFor === here){ placeSayRu(); return; }
+  sayShownFor = here;
+  sayRu.classList.add("later"); sayEn.classList.add("later");
+  setTimeout(() => {
+    if (L + ":" + S !== here) return;
+    placeSayRu();
+    sayRu.classList.remove("later"); sayEn.classList.remove("later");
+  }, 1800);
+}
 addEventListener("resize", placeSayRu);
 sayRu.onclick = () => { if (curRu){ stopSound(); playNow(curRu); } };
 sayEn.onclick = () => {
