@@ -456,6 +456,8 @@ def build_script():
     echo = {"ru": ru("firefly", LS.ECHO_LINE[0], LS.ECHO_LINE[1],
                      "Урок 3 — второй раунд знакомства с фразой"),
             "text": LS.ECHO_LINE[0]}
+    echo["now"] = ru("firefly", LS.NOW_LINE[0], LS.NOW_LINE[1],
+                     "Урок 3 — пальчиковые дриллы со второго раунда")
     return script, praise, retry, ask, finale, map_say, echo, en_tracks
 
 
@@ -490,9 +492,9 @@ def prep_fingers(s, en, say_of):
     s["line"] = en(text)
     s["pic"] = f"{item}_{color}"
     if s["mode"] == "full":
-        # второй раунд — эхо: слово, пауза, ребёнок повторяет
-        s["steps"] = [[0, n - 1], [0, n - 1]]
-        s["echo"] = [False, True]
+        # показ → эхо (слово, пауза, ребёнок повторяет) → сам по стрелке
+        s["steps"] = [[0, n - 1]] * 3
+        s["phase"] = ["show", "echo", "turn"]
     elif s["mode"] == "chain":
         # по слову за шаг: I · I have · I have a · … Прыжок сразу к целой
         # фразе сводил дрилл на нет — ребёнок повторял её с двух слов.

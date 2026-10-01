@@ -1397,9 +1397,8 @@ function fingersSolo(s){
     const mine = token;
     turn.hidden = true; check.hidden = true; check.disabled = false;
     text.textContent = r.combo[1];
-    await ru(s.ru);
-    if (mine !== token) return;
-    await wait(AUDIO[s.ru] ? 250 : readPause(s.text));
+    // инструкция прозвучала в первом раунде — дальше сразу вещь
+    await wait(300);
     if (mine !== token) return;
     await en(r.combo);
     if (mine !== token) return;
@@ -1413,7 +1412,8 @@ function fingersSolo(s){
 RENDER.fingers = function(s){
   const isSwap = s.mode === "swap";
   if (isSwap && round > 0){ fingersSolo(s); return; }
-  const isEcho = !isSwap && !!(s.echo && s.echo[round]);
+  const phase = !isSwap && s.phase ? s.phase[round] : null;
+  const isEcho = phase === "echo";
   const step = isSwap ? null : s.steps[round];
   const words = isSwap ? s.rounds[round].words : s.words;
   const from = isSwap ? 0 : step[0];
@@ -1463,10 +1463,16 @@ RENDER.fingers = function(s){
     const mine = token;
     turn.hidden = true; said.hidden = true; ready.hidden = true;
     bubble.textContent = isEcho ? ECHO.text : (s.text || "");
-    await ru(isEcho ? ECHO.ru : s.ru);
-    if (mine !== token) return;
-    await wait(AUDIO[s.ru] ? 250 : readPause(s.text));
-    if (mine !== token) return;
+    /* Инструкция звучит только в первом раунде (Анна): дальше текст
+       остаётся в пузыре, а голос молчит. У эхо — своя реплика. */
+    const intro = isEcho ? ECHO.ru : (round === 0 ? s.ru : null);
+    if (intro){
+      await ru(intro);
+      if (mine !== token) return;
+      await wait(AUDIO[intro] ? 250 : readPause(s.text));
+      if (mine !== token) return;
+    }
+    if (phase === "turn"){ childTurn(ASK); return; }
     if (isSwap){
       await en(s.rounds[round].combo);
       if (mine !== token) return;
@@ -1487,10 +1493,20 @@ RENDER.fingers = function(s){
     ui.arrow.classList.remove("on");
     if (mine !== token) return;
     if (isEcho){ said.hidden = false; return; }
+    // показ: только слушаем — дальше эхо, хвалить пока не за что
+    if (phase === "show"){
+      await wait(600);
+      if (mine === token){ round++; render(); }
+      return;
+    }
+    childTurn(round === 0 ? ASK : ECHO.now);
+  };
+  /* Очередь ребёнка: подсказка, «Я готов», стрелка идёт молча. Полная
+     инструкция — в первый раз, дальше коротко «Теперь ты!». */
+  async function childTurn(say){
     turn.textContent = "Теперь ты! Покажи ладошку, говори и следи за пальчиками";
     turn.hidden = false;
     ready.hidden = false;
-    await ru(ASK);
     ready.onclick = async () => {
       ready.hidden = true;
       const mine2 = token;
@@ -1502,7 +1518,8 @@ RENDER.fingers = function(s){
       ui.arrow.classList.remove("on");
       said.hidden = false;
     };
-  };
+    await ru(say);
+  }
 };
 
 function next(){
