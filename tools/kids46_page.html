@@ -1421,7 +1421,8 @@ RENDER.fingers = function(s){
   const count = to - from + 1;
   const picKey = isSwap ? s.rounds[round].pic : s.pic;
   const line = isSwap ? s.rounds[round].line : s.line;
-  const ui = handBox(count, picKey, s.mode === "back");
+  // с мизинца — только у фразы из пяти слов: у неё последнее слово на мизинце
+  const ui = handBox(count, picKey, s.mode === "back" && words.length === 5);
 
   const below = document.createElement("div");
   below.className = "below";

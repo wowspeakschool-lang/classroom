@@ -328,7 +328,9 @@ L3 = {
         {"t": "fingers", "mode": "chain", "token": True, "thing": ("top", "green"),
          "text": "Давай соберём фразу по кусочкам. Повторяй!",
          "tone": "по-игровому, бодро"},
-        {"t": "fingers", "mode": "back", "token": True, "thing": ("jeans", "blue"),
+        # с конца — фраза из пяти слов: последнее слово на мизинце, ладошки
+        # hand-b1…b4 (Анна); у фразы из четырёх оно легло бы на безымянный
+        {"t": "fingers", "mode": "back", "token": True, "thing": ("top", "blue"),
          "text": "А теперь наоборот — с конца. Так даже легче!",
          "tone": "заговорщицки"},
         {"t": "fingers", "mode": "swap", "token": True,
