@@ -10,9 +10,12 @@ from lib import row, row_x, clusters_of, min_rgb_of, fname
 from sheets import S
 
 # Сцены с белым содержимым (лёд, снег): фон вырезается вместе с ним — заливаем сцену целиком
-FILL = {'ice hockey', 'ice skating', 'boarding pass', 'speed limit', 'receipt'}
+FILL = {'ice hockey', 'ice skating', 'boarding pass', 'speed limit', 'receipt', 'boring'}
 
 # Листы, где генератор разложил картинки иначе, чем в промпте
+# Границы клеток вручную: {лист: {номер ряда: [границы]}}; граница-ступенька (y, x_выше, x_ниже)
+CUTS = {27: {1: [404, (650, 912, 945)]}}
+
 IMAGES = '/tmp/claude-0/-home-user-classroom/d4a2a0a4-519c-5b81-af84-18451bfcf9dd/images'
 
 LAYOUT_SHEET = {25: [5, 4, 2]}
@@ -73,11 +76,13 @@ def erase_glued_captions(path):
         if y1 - y0 <= 60: continue
         nxt = bs[i + 1] if i + 1 < len(bs) else None
         if nxt and nxt[1] - nxt[0] <= 60 and nxt[0] - y1 < 25: continue  # подпись отдельно
-        s0 = max(y0, y1 - 50)
+        s0 = max(y0, y1 - 62)
         lab, n = label(a[y0:y1 + 3] < 235)
         for k in range(1, n + 1):
             ys, xs = np.where(lab == k)
-            if ys.min() + y0 >= s0 and ys.max() - ys.min() <= 42 and a[y0:y1 + 3][lab == k].min() < 80:
+            px = arr[y0:y1 + 3][lab == k].astype(int)
+            grey = (px.max(1) - px.min(1)).mean() < 25  # буквы чёрные; капли, перья — цветные
+            if ys.min() + y0 >= s0 and ys.max() - ys.min() <= 52 and a[y0:y1 + 3][lab == k].min() < 80 and grey:
                 arr[y0:y1 + 3][lab == k] = 255; changed = True
     if not changed: return path
     out = '/tmp/claude-0/-home-user-classroom/d4a2a0a4-519c-5b81-af84-18451bfcf9dd/scratchpad/clean_' + os.path.basename(path) + '.png'
@@ -105,10 +110,13 @@ def cut(sheet, path, out='out'):
     lay = LAYOUT_SHEET.get(sheet) or LAYOUT[len(items)]
     rows = split_rows(path, bands(path), len(lay))
     k = 0; report = []
-    for (y0, y1), n in zip(rows, lay):
+    for ri, ((y0, y1), n) in enumerate(zip(rows, lay)):
         words = [t for _, t, _ in items[k:k + n]]; k += n
         d = f'{out}/{sheet}'
         ok = False
+        if ri in CUTS.get(sheet, {}):
+            row_x(path, y0, y1, words, d, CUTS[sheet][ri], fill=tuple(w for w in words if w in FILL), fill_thr=253, fill_close=8)
+            report.append(f'  ряд {y0}-{y1}: {n} шт, границы вручную {CUTS[sheet][ri]}'); continue
         need_fill = tuple(w for w in words if w in FILL)
         if need_fill:
             for g in (12, 6, 3):
@@ -123,7 +131,7 @@ def cut(sheet, path, out='out'):
                 report.append(f'  ряд {y0}-{y1}: {n} шт, зазор {g}'); break
         if not ok:
             cuts, ink = column_cuts(path, y0, y1, n)
-            row_x(path, y0, y1, words, d, cuts)
+            row_x(path, y0, y1, words, d, cuts, fill=need_fill, fill_thr=253, fill_close=8)
             report.append(f'  ряд {y0}-{y1}: {n} шт, ПО КОЛОНКАМ {cuts} чернил {ink}')
     # перерисованные отдельными картинками — images_map.txt: "<картинка> <лист>:<слово>"
     imgdir = os.path.dirname(path) if 'clean_' not in path else IMAGES
