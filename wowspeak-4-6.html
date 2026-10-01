@@ -94,8 +94,7 @@ img{-webkit-user-drag:none}
 /* голубая — крупнее белой (Анна, вариант 1) */
 .say.en{width:58px;height:58px;font-size:29px;background:#e3f1ff;
   box-shadow:0 0 0 2px #6aa8e8,0 4px 10px rgba(60,40,90,.18)}
-.say.en::after{content:"EN";position:absolute;right:-8px;bottom:-6px;font-size:12px;
-  font-weight:900;color:#fff;background:#4a8fd9;border-radius:8px;padding:1px 5px}
+
 .guide{position:relative}
 .guide .say.ru{position:absolute;left:-4px;top:-4px;z-index:2}
 .wordrow{display:flex;align-items:center;justify-content:center;gap:12px}
@@ -760,7 +759,9 @@ function enSteps(s){
   if (s.t === "word") return [() => en(s.voice)];
   if (s.t === "fingers"){
     if (s.mode === "swap") return round > 0 ? [() => en(r.combo)] : [() => en(r.line)];
-    return [() => en(s.line)];
+    // в «по кусочкам» и «с конца» — только кусок этого шага, слово за словом
+    const st = s.steps[round];
+    return s.words.slice(st[0], st[1] + 1).map(w => () => en(w));
   }
   // «назови сам»: пример и так на своей кнопке, а без примера — это ответ
   if (s.t === "name") return [];
@@ -1661,13 +1662,13 @@ function showSayLater(){
   // между раундами одного экрана кнопки не прячем — только на новом экране
   if (sayShownFor === here){ placeSayRu(); return; }
   sayShownFor = here;
-  sayRu.classList.add("later"); sayEn.classList.add("later");
+  // Анна: кнопки — сразу, без задержки
   setTimeout(() => {
     if (L + ":" + S !== here) return;
     placeSayRu();
     placeEnOverTask();
     sayRu.classList.remove("later"); sayEn.classList.remove("later");
-  }, 1800);
+  }, 0);
 }
 addEventListener("resize", placeSayRu);
 sayRu.onclick = () => { if (curRu){ stopSound(); playNow(curRu); } };
