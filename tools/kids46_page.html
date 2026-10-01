@@ -35,9 +35,12 @@ img{-webkit-user-drag:none}
 .island.shake{animation:islandshake .4s}
 @keyframes islandshake{25%{transform:translate(calc(-50% - 10px),-50%)}
                        75%{transform:translate(calc(-50% + 10px),-50%)}}
+/* Поверх островов: на карте острова широкие и стоят почти вплотную,
+   дорожка заходит на них — и облачка прятались за Драконьим (Анна). */
 .dot{position:absolute;transform:translate(-50%,-50%);width:5.4%;max-width:64px;
-  opacity:0;transition:opacity .4s}
+  opacity:0;transition:opacity .4s;z-index:2;pointer-events:none}
 .dot.on{opacity:1}
+.dot.small{width:4%;max-width:48px}
 /* Белая обводка: без неё камушек сливался с травой и водой. */
 .dot img{width:100%;display:block;
   filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 4px #fff) drop-shadow(0 4px 6px rgba(40,60,90,.3))}
@@ -561,8 +564,11 @@ const mapEl = document.getElementById("map");
 const lessonEl = document.getElementById("lesson");
 const overlay = document.getElementById("overlay");
 
-function dotPos(i, k, total){
-  const t = (k + 1) / (total + 1);
+function dotPos(i, k, total, onMap){
+  /* На большой карте острова широкие и стоят почти вплотную: дорожка от
+     центра к центру ложилась на сами острова и их названия. Там она
+     занимает только середину пролёта. */
+  const t = onMap ? .2 + .6 * (k + .5) / total : (k + 1) / (total + 1);
   return [ISLAND_POS[i][0] + (ISLAND_POS[i+1][0] - ISLAND_POS[i][0]) * t,
           ISLAND_POS[i][1] + (ISLAND_POS[i+1][1] - ISLAND_POS[i][1]) * t + 13];
 }
@@ -570,8 +576,9 @@ function addDots(host, i, shown, popLast){
   const les = LESSONS[i], total = les.tokens;
   for (let k = 0; k < total; k++){
     const d = document.createElement("div");
-    const p = dotPos(i, k, total);
-    d.className = "dot" + (k < shown ? " on" : "") + (popLast && k === shown-1 ? " pop" : "");
+    const p = dotPos(i, k, total, host === mapEl);
+    d.className = "dot" + (host === mapEl ? " small" : "") + (k < shown ? " on" : "") +
+      (popLast && k === shown-1 ? " pop" : "");
     d.style.left = p[0] + "%"; d.style.top = p[1] + "%";
     d.innerHTML = '<img src="' + IMG[les.token] + '" alt="">';
     host.appendChild(d);
