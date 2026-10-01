@@ -344,6 +344,75 @@ def shave_edge(im, depth=4):
     return im.crop((cut["l"], cut["t"], w - cut["r"], h - cut["b"]))
 
 
+def cut_foreign_strip(im, depth=0.25):
+    # Последняя проверка карточки: не осталось ли вдоль края куска чужой
+    # картинки. Признак — ровный шов, а за ним область, непохожая на то, что
+    # внутри. Ищем глубоко, до четверти стороны: у фотографий во весь кадр
+    # полоса соседа бывает широкой, и прежние чистки её не доставали.
+    w, h = im.size
+    px = im.load()
+
+    def scan(side):
+        size = w if side in "lr" else h
+        across = h if side in "lr" else w
+        limit = max(2, int(size * depth))
+        step = max(1, across // 160)
+        means, flats = [], []
+        for d in range(limit + int(size * 0.15) + 2):
+            if side == "l":
+                vals = [px[d, y] for y in range(0, h, step)]
+            elif side == "r":
+                vals = [px[w - 1 - d, y] for y in range(0, h, step)]
+            elif side == "t":
+                vals = [px[x, d] for x in range(0, w, step)]
+            else:
+                vals = [px[x, h - 1 - d] for x in range(0, w, step)]
+            n = len(vals)
+            means.append([sum(v[i] for v in vals) / n for i in range(3)])
+            g = sorted(sum(v) / 3 for v in vals)
+            flats.append(g[min(n - 1, int(n * 0.9))] - g[int(n * 0.1)])
+        # префиксные суммы по средним, чтобы не пересчитывать полосы
+        pref = [[0.0, 0.0, 0.0]]
+        for m in means:
+            pref.append([pref[-1][i] + m[i] for i in range(3)])
+
+        def avg(a, b):
+            b = min(b, len(means))
+            k = max(1, b - a)
+            return [(pref[b][i] - pref[a][i]) / k for i in range(3)]
+
+        best = 0
+        inner_w = max(4, int(size * 0.15))
+        min_strip = max(2, int(size * 0.015))
+        for d in range(min_strip, limit):
+            if flats[d] > 18:
+                continue
+            # шов между ячейками всегда светлый. Без этого условия правило
+            # резало по собственному контуру фигуры: у оранжевого
+            # прямоугольника и синего квадрата срезало половину карточки.
+            if sum(means[d]) / 3 < 200:
+                continue
+            outer, inner = avg(0, d), avg(d + 1, d + 1 + inner_w)
+            # кусок соседа — это картинка, а не поле: если за швом почти белое,
+            # резать нечего. Без этого у щётки срезало щетину — над ней белое
+            # поле, и оно отличалось от синей ручки достаточно, чтобы сойти
+            # за чужую картинку.
+            if sum(outer) / 3 > 232:
+                continue
+            if sum(abs(a - b) for a, b in zip(outer, inner)) > 36:
+                best = d + 1
+        return best
+
+    cut = {side: scan(side) for side in "lrtb"}
+    if not any(cut.values()):
+        return im
+    x0, y0 = cut["l"], cut["t"]
+    x1, y1 = w - cut["r"], h - cut["b"]
+    if x1 - x0 < w * 0.5 or y1 - y0 < h * 0.5:
+        return im
+    return im.crop((x0, y0, x1, y1))
+
+
 def cut_off_line(im, depth=10):
     """Срезать край до серой линии сетки, если она прячется в нескольких
     пикселях от края (снаружи от неё бывает белая кромка, и построчная
@@ -644,7 +713,7 @@ def main():
                 continue
             # серая линия сетки остаётся и на ячейках, нарезанных по сетке
             # (фото во весь кадр), поэтому край чистим у всех кусков
-            piece = strip_lines(cut_off_line(piece))
+            piece = strip_lines(cut_off_line(cut_foreign_strip(piece)))
             out = fit(piece, SCENE if scene else CARD)
             dst = os.path.join(outdir, f"{name}.webp")
             out.save(dst, "WEBP", quality=Q_SCENE if scene else Q_CARD, method=6)
