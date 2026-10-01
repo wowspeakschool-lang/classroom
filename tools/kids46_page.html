@@ -1314,7 +1314,9 @@ RENDER.collect = function(s){
     if (s.who) tgt.innerHTML = '<img class="who" src="' + IMG[s.who] + '" alt="">';
     tgt.innerHTML += '<img src="' + IMG[s.target] + '" alt="">';
 
-    const opts = shuffle([r.target].concat(r.others)).map(t => ({src: pic(t), t}));
+    // стирка: вещи с пятнами (Анна), в машинку улетает как есть
+    const look = t => (s.dirty && IMG[t[0] + "_" + t[1] + "_dirty"]) || pic(t);
+    const opts = shuffle([r.target].concat(r.others)).map(t => ({src: look(t), t}));
     const row = cardsRow(opts, async (c, k) => {
       if (k.t !== r.target){ await wrong(c); return; }
       flyTo(c, tgt.querySelector("img:not(.who)"));

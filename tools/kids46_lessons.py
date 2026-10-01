@@ -231,7 +231,7 @@ L2 = {
         {"t": "word", "say": "item", "thing": ("shoes", "yellow"),
          "text": "А это ботинки. Послушай и повтори.",
          "tone": "показываем"},
-        {"t": "collect", "token": True, "target": "machine", "say": "item",
+        {"t": "collect", "token": True, "target": "machine", "say": "item", "dirty": True,
          "rounds": [
              {"target": ("shoes", "green"), "others": [("top", "blue"), ("jeans", "yellow")]},
              {"target": ("jeans", "green"), "others": [("shoes", "blue"), ("top", "yellow")]},

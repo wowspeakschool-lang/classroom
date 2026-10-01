@@ -15,12 +15,14 @@ import base64
 import io
 import json
 import math
+import random
 import re
+import zlib
 import struct
 import sys
 from pathlib import Path
 
-from PIL import Image, ImageChops, ImageFilter
+from PIL import Image, ImageChops, ImageDraw, ImageFilter
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import kids46_lessons as LS
@@ -294,6 +296,42 @@ for _n in range(1, 5):
     if (ART / ("hand-b%d.webp" % _n)).exists():
         BASE["handb%d" % _n] = ("hand-b%d.webp" % _n, 700, True)
 
+# «Ой, вещи запачкались!» (стирка, У2): мягкие размытые пятна поверх вещи —
+# Анна выбрала из трёх видов. Рисуем сборкой, как перекраску: пятно ложится
+# только на саму вещь и не выходит за её контур. Место пятен задаёт имя
+# вещи — при каждой сборке одно и то же. Меняете рисунок — поднимите
+# DIRT_VERSION, иначе кэш отдаст старые картинки.
+DIRTY = ("top", "jeans", "shoes")
+DIRT_VERSION = 1
+
+
+def dirty(im, seed):
+    w, h = im.size
+    rnd = random.Random(seed)
+    a = im.getchannel("A")
+    inner = a.filter(ImageFilter.MinFilter(int(min(w, h) * .06) | 1))
+    px = inner.load()
+    cand = [(x, y) for y in range(0, h, 7) for x in range(0, w, 7) if px[x, y] > 200]
+    layer = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    s = min(w, h)
+    for _ in range(4):
+        cx, cy = rnd.choice(cand)
+        r = s * rnd.uniform(.06, .1)
+        n = rnd.randint(9, 14)
+        pts = []
+        for i in range(n):
+            ang = 2 * math.pi * i / n
+            rr = r * rnd.uniform(.6, 1.15)
+            pts.append((cx + rr * math.cos(ang), cy + rr * math.sin(ang) * rnd.uniform(.75, 1)))
+        d.polygon(pts, fill=(105, 72, 40, 150))
+    layer = layer.filter(ImageFilter.GaussianBlur(s * .018))
+    layer.putalpha(ImageChops.multiply(layer.getchannel("A"), a))
+    out = im.copy()
+    out.alpha_composite(layer)
+    return out
+
+
 CACHE = ROOT / "tools" / ".kids46_images.json"
 
 
@@ -305,7 +343,7 @@ def build_images():
                     for k, v in BASE.items()},
            "painted": [[n, f, w, (ART / f).stat().st_mtime, PAINT_OPTS.get(n),
                         CUT_OPTS.get(n)] for n, f, w in PAINTED],
-           "hue": COLOR_HUE}
+           "hue": COLOR_HUE, "dirt": DIRT_VERSION}
     # через JSON: кортежи в настройках (keep у яйца) возвращаются из файла
     # списками, и без этого подпись не совпадала никогда — сборка шла 8 минут
     sig = json.loads(json.dumps(sig))
@@ -350,7 +388,11 @@ def build_images():
                               round(src.height * width * 1.6 / src.width)), Image.LANCZOS)
         opts = PAINT_OPTS.get(name, {})
         for color, hue in COLOR_HUE.items():
-            images[f"{name}_{color}"] = encode(recolor(src, hue, **opts), width)
+            im = recolor(src, hue, **opts)
+            images[f"{name}_{color}"] = encode(im, width)
+            if name in DIRTY:
+                images[f"{name}_{color}_dirty"] = encode(
+                    dirty(im, zlib.crc32(f"{name}_{color}".encode())), width)
         # бесцветный вариант для задания «раскрась»
         grey = dict(opts); grey.pop("sat", None)
         images[f"{name}_grey"] = encode(
