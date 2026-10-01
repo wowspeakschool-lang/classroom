@@ -127,6 +127,64 @@ LESSONS = {
                 "<h3>Отличная работа! 🎉</h3><p>До встречи на уроке!</p>"}),
         ],
     },
+    "u1_hw2": {
+        "unit": "u1",
+        "unit_title": "Unit 1 \u00b7 School",
+        "unit_sort": 1,
+        "lesson_title": "Homework 2",
+        "lesson_sort": 1,
+        "kind": "homework",
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_book")}" alt="" style="height:200px"></p>'
+                "<h2>\u041f\u0440\u0438\u0432\u0435\u0442! 👋</h2>"
+                "<p>\u0421\u0435\u0433\u043e\u0434\u043d\u044f \u0442\u044b \u0431\u0443\u0434\u0435\u0448\u044c \u043c\u043d\u043e\u0433\u043e \u0440\u0430\u0431\u043e\u0442\u0430\u0442\u044c \u0441 \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0435\u043d\u0438\u044f\u043c\u0438: "
+                "\u0432\u043f\u0438\u0448\u0435\u0448\u044c \u043f\u0440\u043e\u043f\u0443\u0449\u0435\u043d\u043d\u044b\u0435 \u0441\u043b\u043e\u0432\u0430 \u0438 \u0440\u0430\u0441\u0441\u0442\u0430\u0432\u0438\u0448\u044c \u0441\u043b\u043e\u0432\u0430 \u043f\u043e \u043f\u043e\u0440\u044f\u0434\u043a\u0443, "
+                "\u0447\u0442\u043e\u0431\u044b \u043f\u043e\u043b\u0443\u0447\u0438\u043b\u0438\u0441\u044c \u0432\u0435\u0440\u043d\u044b\u0435 \u0444\u0440\u0430\u0437\u044b.</p>"
+                "<p>\u0423\u0434\u0430\u0447\u0438!</p>"}),
+
+            ("gaps", {
+                "title": "\u0421\u0430\u0440\u0430 \u0438 \u0410\u0434\u0430\u043c \u0440\u0430\u0441\u0441\u043a\u0430\u0437\u044b\u0432\u0430\u044e\u0442 \u043e \u0441\u0435\u0431\u0435. "
+                         "\u041f\u0435\u0440\u0435\u0442\u0430\u0449\u0438 \u0441\u043b\u043e\u0432\u0430 \u0432 \u043f\u0440\u043e\u043f\u0443\u0441\u043a\u0438",
+                "mode": "drag",
+                "text":
+                    "Adam:\n"
+                    "I love __reading__ books in English.\n"
+                    "I'm good at __writing__ stories, hey!\n"
+                    "I love __learning__ about lots of things.\n"
+                    "We learn at school all __day__.\n\n"
+                    "Sarah:\n"
+                    "I love __working__ on paper.\n"
+                    "I think Art's just __great__!\n"
+                    "I really like my __teachers__.\n"
+                    "That's why I'm never __late__!",
+                "gaps_expected": 8,
+            }),
+
+            ("order", {
+                "words": ["I", "like", "speaking", "English.", "I'm", "good", "at", "it."],
+                "sentence": "I like speaking English. I'm good at it.",
+                "audio_tts": "I like speaking English. I'm good at it.",
+            }),
+
+            ("order", {
+                "words": ["I", "don't", "like", "learning", "Maths."],
+                "sentence": "I don't like learning Maths.",
+                "audio_tts": "I don't like learning Maths.",
+            }),
+
+            ("order", {
+                "words": ["I", "love", "studying", "history.", "I", "love", "my", "teacher", "too."],
+                "sentence": "I love studying history. I love my teacher too.",
+                "audio_tts": "I love studying history. I love my teacher too.",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>\u041e\u0442\u043b\u0438\u0447\u043d\u043e! \u0414\u043e\u043c\u0430\u0448\u043d\u0435\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435 \u0433\u043e\u0442\u043e\u0432\u043e 🌟</h3>"
+                "<p>\u0422\u044b \u043c\u043e\u043b\u043e\u0434\u0435\u0446, \u0432\u0441\u0442\u0440\u0435\u0442\u0438\u043c\u0441\u044f \u043d\u0430 \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u043c \u0443\u0440\u043e\u043a\u0435 :)</p>"}),
+        ],
+    },
 }
 
 
