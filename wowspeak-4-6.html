@@ -98,7 +98,12 @@ img{-webkit-user-drag:none}
 .guide .say.ru{position:absolute;left:-4px;top:-4px;z-index:2}
 .wordrow{display:flex;align-items:center;justify-content:center;gap:12px}
 .content{position:relative}
-.content > .say.en{position:absolute;right:6px;top:6px;z-index:3}
+/* Без английской строки — по центру, чуть выше верхней картинки задания
+   (Анна); место считает placeEnOverTask. */
+.content > .say.en{position:absolute;z-index:3;left:50%;top:6px}
+/* место под кнопку, иначе на широком экране задание доходит до верха
+   и кнопка ложится на картинки */
+.content.hasen{padding-top:76px;box-sizing:border-box}
 /* Сколько шагов внутри одного задания уже сделано. Без этого ребёнок не
    понимал, что начался следующий раунд: картинка сменилась, а игра та же. */
 .topbar .roundbar{display:flex;gap:7px;margin:0 auto;align-items:center}
@@ -767,6 +772,7 @@ function placeSayEn(){
   const s = screen();
   sayEn.hidden = !enSteps(s).length;
   const line = content.querySelector(".wordline");
+  content.classList.toggle("hasen", !line && !sayEn.hidden);
   if (line){
     let row = line.parentNode;
     if (!row.classList.contains("wordrow")){
@@ -778,8 +784,24 @@ function placeSayEn(){
     row.appendChild(sayEn);
   } else {
     content.appendChild(sayEn);
+    placeEnOverTask();
   }
 }
+function placeEnOverTask(){
+  if (sayEn.parentNode !== content) return;
+  const c = content.getBoundingClientRect();
+  let top = Infinity;
+  content.querySelectorAll("img, .card").forEach(el => {
+    if (el === sayEn || !el.offsetWidth || sayEn.contains(el)) return;
+    const r = el.getBoundingClientRect();
+    if (r.height > 8) top = Math.min(top, r.top);
+  });
+  const h = sayEn.offsetHeight || 58, w = sayEn.offsetWidth || 58;
+  const y = top === Infinity ? 6 : Math.max(4, top - c.top - h - 14);
+  sayEn.style.top = y + "px";
+  sayEn.style.left = (c.width / 2 - w / 2) + "px";
+}
+addEventListener("resize", placeEnOverTask);
 
 /* Ряду карточек нужен его размер в пикселях: от него считается сторона
    квадрата. Зацикливания нет — высота задана флексом с basis 0. */
@@ -1640,6 +1662,7 @@ function showSayLater(){
   setTimeout(() => {
     if (L + ":" + S !== here) return;
     placeSayRu();
+    placeEnOverTask();
     sayRu.classList.remove("later"); sayEn.classList.remove("later");
   }, 1800);
 }
