@@ -1392,7 +1392,7 @@ RENDER.catch = function(s){
     s._quiz = async () => {
       const W = size();
       const dist = W + train.offsetWidth + 20;
-      const ms = dist / (W * .14) * 1000;   // скорость как раньше: 14% ширины в секунду
+      const ms = dist / (W * .18) * 1000;   // 18% ширины в секунду (было 14 — Анна: чуть быстрее)
       train.style.transition = "transform " + ms + "ms linear";
       void train.offsetWidth;
       train.style.transform = "translate(" + (-dist) + "px,-50%)";
