@@ -113,7 +113,15 @@ def speak_openai(text, who, tone, voice=None):
         return r.read()
 
 
+# Как отдавать синтезу отдельные английские слова (Анна выбрала на слух
+# 01.10.2026): john читал blue как «plue», jeans — «джанс», shoes — «шоуз».
+# Другая запись того же слова звучит чище. Только для слова целиком.
+EN_SAY_AS = {"blue": "Blue!", "jeans": "jeenz", "shoes": "shooz"}
+
+
 def speak_yandex(text, who, tone, voice=None, emotion=None, pitch=0):
+    if who.startswith("en"):
+        text = EN_SAY_AS.get(text, text)
     """Синтез через API v3: только в нём есть сдвиг тона.
 
     Ответ — строки JSON, в каждой кусок mp3 в base64; склеиваем по порядку.
