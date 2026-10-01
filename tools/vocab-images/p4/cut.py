@@ -6,7 +6,7 @@ import sys, os
 import numpy as np
 from PIL import Image
 sys.path.insert(0, '..')
-from lib import row, row_x, clusters_of, min_rgb_of
+from lib import row, row_x, clusters_of, min_rgb_of, fname
 from sheets import S
 
 # Сцены с белым содержимым (лёд, снег): фон вырезается вместе с ним — заливаем сцену целиком
@@ -81,6 +81,22 @@ def erase_glued_captions(path):
     out = '/tmp/claude-0/-home-user-classroom/d4a2a0a4-519c-5b81-af84-18451bfcf9dd/scratchpad/clean_' + os.path.basename(path) + '.png'
     Image.fromarray(arr).save(out); return out
 
+# Предметы с нарисованной мягкой тенью рядом: оставляем только то, что внутри контура
+OUTLINE_ONLY = {'receipt'}
+
+def outline_only(png):
+    from scipy.ndimage import binary_dilation, binary_erosion, binary_fill_holes
+    im = np.array(Image.open(png).convert('RGBA'))
+    dark = (im[..., :3].min(2) < 80) & (im[..., 3] > 0)
+    solid = binary_erosion(binary_fill_holes(binary_dilation(dark, iterations=3)), iterations=2)
+    from scipy.ndimage import label
+    lab, n = label(solid)
+    if n > 1:  # крапинки тени снаружи контура — отдельные мелкие куски
+        sizes = np.bincount(lab.ravel()); sizes[0] = 0
+        solid = lab == sizes.argmax()
+    im[..., 3] = np.where(solid, 255, 0).astype(np.uint8)
+    Image.fromarray(im).save(png)
+
 def cut(sheet, path, out='out'):
     path = erase_glued_captions(path)
     title, note, items = S[sheet - 1]
@@ -107,6 +123,9 @@ def cut(sheet, path, out='out'):
             cuts, ink = column_cuts(path, y0, y1, n)
             row_x(path, y0, y1, words, d, cuts)
             report.append(f'  ряд {y0}-{y1}: {n} шт, ПО КОЛОНКАМ {cuts} чернил {ink}')
+    for _, t, _ in items:
+        if t in OUTLINE_ONLY:
+            outline_only(f'{out}/{sheet}/{fname(t)}'); report.append(f'  {t}: по контуру')
     print(f'лист {sheet} {title}:'); print('\n'.join(report))
 
 if __name__ == '__main__':
