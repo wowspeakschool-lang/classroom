@@ -45,3 +45,16 @@ row_x(I+'14.webp', 54, 433, ['playing computer games','playing sport','reading b
 row(I+'14.webp', 546, 909, ['spending time online','watching TV','making things','spend time with someone'], O+'2.2', gap=12, min_area=150)
 row(I+'15.webp', 17, 425, ['be glad','be happy','enjoy an activity','enjoy yourself'], O+'2.3', gap=12, min_area=150)
 row(I+'15.webp', 500, 929, ['feel happy','have a great time','have a laugh','have fun'], O+'2.3', gap=12, min_area=150)
+
+# --- четвёртая порция: листы 16-17, замена make a mistake из листа 18 ---
+C = ['change (alternative clothes)','change (become something different)','change (give money back)','change (something in a shop)']
+row_x(I+'16.webp', 23, 409, C, O+'5.2', [390, 763, 1143])
+row(I+'16.webp', 505, 936, ['change (something new)','change (transport)','change schools'], O+'5.2', gap=12, min_area=150)
+row(I+'17.webp', 7, 280, ['be born','become a teenager','find part-time work','get married'], O+'5.3', gap=12, min_area=150)
+row(I+'17.webp', 342, 632, ['go to high school','learn to walk and talk','move house','start school'], O+'5.3', gap=12, min_area=150)
+row(I+'17.webp', 686, 966, ['start working or training','take exams','travel'], O+'5.3', gap=12, min_area=150)
+# 18 — повтор листа do/make; из него берём только make a mistake (в листе 10 рука неестественная)
+import shutil, tempfile
+_t = tempfile.mkdtemp()
+row_x(I+'18.webp', 486, 921, ['make a cake','make a cup of tea','make a mess','make a mistake','make the bed'], _t, [298, 592, 917, 1225])
+shutil.copy(_t + '/make_a_mistake.png', O + '4.3/make_a_mistake.png')
