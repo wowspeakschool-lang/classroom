@@ -72,8 +72,9 @@ img{-webkit-user-drag:none}
   background:linear-gradient(180deg,#d9f3ff 0%,#fff4de 100%)}
 #lesson.on{display:flex}
 .topbar{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:8px 14px}
-.topbar .home{border:0;background:rgba(255,255,255,.75);border-radius:999px;
-  width:44px;height:44px;font-size:22px;cursor:pointer;box-shadow:var(--shadow)}
+.topbar .home,.topbar .listen{border:0;background:rgba(255,255,255,.85);border-radius:999px;
+  width:52px;height:52px;padding:0;font-size:26px;cursor:pointer;box-shadow:var(--shadow);flex:0 0 auto}
+.topbar .home:active,.topbar .listen:active{transform:scale(.94)}
 /* Сколько шагов внутри одного задания уже сделано. Без этого ребёнок не
    понимал, что начался следующий раунд: картинка сменилась, а игра та же. */
 .topbar .roundbar{display:flex;gap:7px;margin:0 auto;align-items:center}
@@ -141,7 +142,7 @@ img{-webkit-user-drag:none}
   background:radial-gradient(circle at 50% 45%,rgba(255,236,150,.6),rgba(255,236,150,0) 42%)}
 .picarea.dark.go::after{animation:caveglow 5s ease forwards}
 @keyframes caveglow{0%,72%{opacity:0}84%{opacity:1}100%{opacity:.35}}
-.below{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:1vh}
+.below{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
 .wordline{font-size:clamp(22px,4vw,44px);font-weight:900;letter-spacing:.5px;text-align:center}
 
 .stage.solo{justify-content:center}
@@ -307,19 +308,28 @@ img{-webkit-user-drag:none}
              width .55s cubic-bezier(.4,0,.2,1), height .55s cubic-bezier(.4,0,.2,1),
              opacity .55s}
 /* подсказка «теперь твоя очередь» */
-.turn{flex:0 0 auto;background:var(--accent);color:#fff;font-weight:900;
-  border-radius:999px;padding:8px 20px;font-size:clamp(13px,2vw,19px);
-  animation:pop .5s}
+/* Просто текст, без плашки: оранжевая плашка выглядела как кнопка. */
+.turn{flex:0 0 auto;color:var(--accent);font-weight:900;text-align:center;
+  font-size:clamp(15px,2.4vw,22px);text-shadow:0 1px 0 #fff;animation:pop .5s}
 
+/* Кнопки — «одна большая» (Анна выбрала вариант 3): на экране одна
+   крупная кнопка почти во всю ширину, «Ещё раз» — круглый значок в шапке. */
 .bottombar{flex:0 0 auto;display:flex;gap:12px;align-items:center;justify-content:center;
-  padding:6px 14px calc(10px + env(safe-area-inset-bottom))}
-.btn{border:0;border-radius:999px;padding:13px 28px;font:inherit;font-weight:900;
-  font-size:clamp(14px,2.1vw,21px);color:#fff;background:var(--accent);
-  box-shadow:var(--shadow);cursor:pointer}
+  padding:8px 16px calc(16px + env(safe-area-inset-bottom))}
+.btn{border:0;border-radius:22px;width:min(88vw,440px);min-height:66px;padding:0 24px;
+  font:inherit;font-weight:900;font-size:clamp(19px,2.4vw,26px);color:#fff;
+  background:linear-gradient(180deg,#ffb35c,#ff8f2a);
+  box-shadow:0 8px 18px rgba(255,140,40,.35);cursor:pointer}
 .btn:active{transform:translateY(2px)}
-.btn.ghost{background:#fff;color:var(--ink)}
-.btn.big{padding:15px 36px}
+.btn:disabled{opacity:.6}
+.btn.ghost{background:#fff;color:var(--ink);border:3px solid #ffd8b0;
+  box-shadow:0 6px 16px rgba(60,40,90,.15)}
+.btn.next{background:linear-gradient(180deg,#71d27c,#4bb158);
+  box-shadow:0 8px 18px rgba(70,170,80,.35)}
 .btn[hidden]{display:none}
+/* Экран, где «Дальше» появится позже, держит под неё место —
+   иначе картинка прыгает вверх-вниз, когда кнопка выезжает. */
+.bottombar.waits .next[hidden]{display:block;visibility:hidden}
 
 #overlay{position:absolute;inset:0;display:none;align-items:center;justify-content:center;
   background:rgba(40,30,60,.5);backdrop-filter:blur(3px);z-index:20}
@@ -328,7 +338,8 @@ img{-webkit-user-drag:none}
   box-shadow:var(--shadow);max-width:min(90%,560px)}
 .panel h2{margin:0 0 6px;font-size:clamp(20px,3.4vw,30px)}
 .panel p{margin:0 0 18px;font-size:clamp(14px,2vw,19px);line-height:1.4}
-.panel .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.panel .row{display:flex;flex-direction:column;align-items:stretch;gap:14px}
+.panel .btn{width:100%;white-space:nowrap;font-size:clamp(16px,2vw,22px)}
 
 #wsdev{position:absolute;right:10px;top:10px;z-index:30;display:none;gap:6px}
 #wsdev.on{display:flex}
@@ -356,6 +367,7 @@ img{-webkit-user-drag:none}
   <div id="lesson">
     <div class="topbar">
       <button class="home" title="На карту">🗺️</button>
+      <button class="listen" title="Ещё раз">🔊</button>
       <div class="roundbar"></div>
       <div class="tokens"></div>
     </div>
@@ -364,7 +376,6 @@ img{-webkit-user-drag:none}
       <div class="content"></div>
     </div>
     <div class="bottombar">
-      <button class="btn ghost listen">🔊 Ещё раз</button>
       <button class="btn next" hidden>Дальше ▶</button>
     </div>
   </div>
@@ -622,6 +633,7 @@ function render(){
   bubble.textContent = s.text || "";
   content.innerHTML = "";
   btnNext.hidden = true;
+  btnNext.parentNode.classList.remove("waits");
   btnNext.textContent = s.btn || "Дальше ▶";
   lessonEl.querySelector(".stage").classList.toggle("solo", !!s.solo);
   lessonEl.querySelector(".stage").classList.toggle("piconly", !!s.picOnly);
@@ -798,6 +810,7 @@ function showNextLater(ms){
    нельзя: реплика длится восемь секунд, а кнопка открывалась через две, и
    ребёнок пролистывал Искорку на полуслове. */
 function sayThenNext(s, ms){
+  btnNext.parentNode.classList.add("waits");
   if (!AUDIO[s.ru]){ showNextLater(ms); ru(s.ru); return; }
   const mine = token;
   ru(s.ru).then(() => { if (mine === token) showNextLater(300); });
