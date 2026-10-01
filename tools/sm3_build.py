@@ -247,6 +247,70 @@ LESSONS = {
                 "<p>\u0423\u0447\u0438\u0442\u0435\u043b\u044c \u043f\u0440\u043e\u0432\u0435\u0440\u0438\u0442 \u0442\u0432\u043e\u0438 \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0435\u043d\u0438\u044f \u0438 \u043d\u0430\u043f\u0438\u0448\u0435\u0442, \u0447\u0442\u043e \u043f\u043e\u043b\u0443\u0447\u0438\u043b\u043e\u0441\u044c \u043b\u0443\u0447\u0448\u0435 \u0432\u0441\u0435\u0433\u043e.</p>"}),
         ],
     },
+    "u1_hw4": {
+        "unit": "u1",
+        "unit_title": "Unit 1 · School",
+        "unit_sort": 1,
+        "lesson_title": "Homework 4",
+        "lesson_sort": 3,
+        "kind": "homework",
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_rocket")}" alt="" style="height:200px"></p>'
+                "<h2>Привет! Готов к новому домашнему заданию?</h2>"}),
+
+            ("text", {"html":
+                "<h3>Давай повторим правило!</h3>"
+                "<p>Мы используем <b>have to</b>, когда говорим о правилах и о том, "
+                "что мы <b>должны</b> делать.</p>"
+                "<div style=\"border-left:4px solid #2E9E4F;padding:8px 14px;margin:10px 0\">"
+                "<p><i>Language focus</i></p>"
+                "<p>You <b>have to wear</b> a uniform.<br>"
+                "You <b>have to climb</b> like me.<br>"
+                "You <b>have to clean</b> your eyes like this.<br>"
+                "You can’t? I see. Hehe!</p></div>"}),
+
+            ("match", {
+                "title": "Соедини картинку с предложением",
+                "pairs": [
+                    {"left_image": img("u1", "haveto_be_on_time"),
+                     "right": "You have to arrive at school before nine o’clock.",
+                     "right_audio_tts": "You have to arrive at school before nine o'clock."},
+                    {"left_image": img("u1", "haveto_brush_teeth"),
+                     "right": "You have to brush your teeth after a meal.",
+                     "right_audio_tts": "You have to brush your teeth after a meal."},
+                    {"left_image": img("u1", "haveto_wash_hands"),
+                     "right": "You have to wash your hands before a meal.",
+                     "right_audio_tts": "You have to wash your hands before a meal."},
+                    {"left_image": img("u1", "haveto_wear_uniform"),
+                     "right": "You have to get dressed before you can go to school.",
+                     "right_audio_tts": "You have to get dressed before you can go to school."},
+                    {"left_image": img("u1", "haveto_clean_shoes"),
+                     "right": "You have to clean your shoes before you go and play.",
+                     "right_audio_tts": "You have to clean your shoes before you go and play."},
+                    {"left_image": img("u1", "haveto_do_homework"),
+                     "right": "You have to do your homework before you go and play.",
+                     "right_audio_tts": "You have to do your homework before you go and play."},
+                ],
+            }),
+
+            ("task", {
+                "title": "Write about you",
+                "needs_review": True,
+                "html":
+                    "<p>Напиши про себя. Используй <b>before</b>, <b>after</b>, "
+                    "<b>every day</b> или <b>every week</b>.</p>"
+                    "<p><b>At school</b></p>"
+                    "<ol><li>I have to …</li><li>I …</li><li>…</li></ol>"
+                    "<p><b>At home</b></p>"
+                    "<ol><li>I have to …</li><li>I …</li><li>…</li></ol>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_medal")}" alt="" style="height:180px"></p>'
+                "<h3>Super duper! Nice job!</h3>"}),
+        ],
+    },
 }
 
 
