@@ -18,7 +18,7 @@ webp в media/sm3/uN/. Сцены (grid 1x1) просто масштабирую
 """
 import argparse, os, sys
 from collections import deque
-from PIL import Image
+from PIL import Image, ImageFilter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -519,6 +519,24 @@ def trim_white(im, pad, thr=WHITE):
                     min(w, box[2] + pad), min(h, box[3] + pad)))
 
 
+def add_margin(im, pad):
+    # Чистки края снимают и ровное белое поле вокруг предмета — он упирается
+    # в край и выглядит срезанным, даже когда цел. Поэтому у предметов на
+    # белом поле возвращаем его обратно: рисуем кадр чуть больше и кладём
+    # предмет в середину. Фотографий во весь кадр это не касается.
+    w, h = im.size
+    px = im.load()
+    edges = []
+    for d in (0, 1):
+        edges += [px[d, y] for y in range(h)] + [px[w - 1 - d, y] for y in range(h)]
+        edges += [px[x, d] for x in range(w)] + [px[x, h - 1 - d] for x in range(w)]
+    if sum(sum(v) / 3 for v in edges) / len(edges) < 240:
+        return im
+    out = Image.new("RGB", (w + 2 * pad, h + 2 * pad), (255, 255, 255))
+    out.paste(im, (pad, pad))
+    return out
+
+
 def cut_sheet(sheet, rows, cols):
     """Вернуть список вырезанных ячеек листа (None там, где ячейка пуста)."""
     W, H = sheet.size
@@ -542,7 +560,13 @@ def cut_sheet(sheet, rows, cols):
 
     k = max(1, round(min(W, H) / 400))           # разметку ведём на уменьшенной копии
     sw, sh = W // k, H // k
-    small = grey.resize((sw, sh), Image.LANCZOS)
+    # Уменьшаем по самому тёмному пикселю окрестности, а не усреднением:
+    # антенна рации шириной в восемь пикселей при усреднении светлела, теряла
+    # связь с корпусом, оставалась отдельной фигурой — и предмет резало по
+    # линии. Для маски важно не «какого цвета в среднем», а «есть ли тут хоть
+    # что-то непустое».
+    small = grey.filter(ImageFilter.MinFilter(min(9, 2 * k + 1))).resize(
+        (sw, sh), Image.NEAREST) if k > 1 else grey
     px = small.load()
     mask = [px[x, y] < WHITE for y in range(sh) for x in range(sw)]
 
@@ -688,6 +712,10 @@ def cut_sheet(sheet, rows, cols):
                 x1 = max(x1, min(round((c + 1) * cw + over_x), max(b[2] for b in solo) * k))
                 y1 = max(y1, min(round((r + 1) * ch + over_y), max(b[3] for b in solo) * k))
             pad = round(min(cw, ch) * PAD)
+            if os.environ.get("SM3_DEBUG"):
+                print(f"    отладка ячейки r{r}c{c}: box=({x0},{y0},{x1},{y1}) "
+                      f"solo={len(solo)} из {len(own)} фигур, "
+                      f"bt={bt} bb={bb} bl={bl} br={br}", file=sys.stderr)
             piece = sheet.crop((max(0, x0 - pad), max(0, y0 - pad),
                                 min(W, x1 + pad), min(H, y1 + pad)))
             # сначала обрезать поля, иначе обрывок соседа прячется у края и
@@ -695,7 +723,7 @@ def cut_sheet(sheet, rows, cols):
             piece = trim_white(piece, 0)
             piece = strip_lines(piece)
             piece = drop_strays(piece)
-            out.append(trim_white(strip_lines(piece), pad))
+            out.append(add_margin(trim_white(strip_lines(piece), pad), pad))
     return out
 
 
