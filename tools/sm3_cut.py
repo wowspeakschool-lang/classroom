@@ -185,6 +185,23 @@ SHEETS = [
 ]
 
 
+def _line_is_clean(vals, spread=18):
+    """Строгая проверка для чистки краёв готовой карточки.
+
+    Нестрогая (85-90% светлых точек) годится, чтобы найти линию сетки внутри
+    листа: предмет местами её пересекает. Но для края карточки она губительна:
+    строка с кончиком антенны — это белое поле и несколько синих пикселей,
+    то есть «почти всё светлое», и чистка снимала шапочку по строчке за раз.
+    У настоящего поля тёмных точек нет вовсе.
+    """
+    if not vals:
+        return False
+    if min(vals) < 185:
+        return False
+    g = sorted(vals)
+    return g[min(len(g) - 1, int(len(g) * 0.95))] - g[int(len(g) * 0.05)] <= spread
+
+
 def _line_is_divider(vals, share=0.85, spread=20):
     """Похожа ли линия на разделитель сетки.
 
@@ -389,10 +406,15 @@ def cut_foreign_strip(im, depth=0.25):
         for d in range(min_strip, limit):
             if flats[d] > 18:
                 continue
-            # шов между ячейками всегда светлый. Без этого условия правило
-            # резало по собственному контуру фигуры: у оранжевого
-            # прямоугольника и синего квадрата срезало половину карточки.
-            if sum(means[d]) / 3 < 200:
+            # Шов между ячейками светлый и бесцветный — белый или серый.
+            # Без «светлый» правило резало по контуру самой фигуры (у
+            # прямоугольника отрезало половину карточки), без «бесцветный» —
+            # по ровному пастельному фону: у мыши между коробками от
+            # карточки оставалась полоска в середине.
+            mr, mg, mb = means[d]
+            if (mr + mg + mb) / 3 < 225:
+                continue
+            if max(mr, mg, mb) - min(mr, mg, mb) > 12:
                 continue
             outer, inner = avg(0, d), avg(d + 1, d + 1 + inner_w)
             # кусок соседа — это картинка, а не поле: если за швом почти белое,
@@ -423,7 +445,7 @@ def cut_off_line(im, depth=10):
     w, h = im.size
 
     def grey(vals):
-        return _line_is_divider([sum(v) / 3 for v in vals], share=0.9, spread=16)
+        return _line_is_clean([sum(v) / 3 for v in vals], spread=16)
 
     left = right = top = bottom = 0
     for d in range(min(depth, w // 4)):
@@ -448,7 +470,8 @@ def strip_lines(im, limit=10):
     left, right, top, bottom = 0, w, 0, h
 
     def line(vals):
-        return _line_is_divider([sum(v) / 3 for v in vals], share=0.9, spread=16)
+        # строго: ни одной тёмной точки, иначе снимаем кончик предмета
+        return _line_is_clean([sum(v) / 3 for v in vals], spread=16)
 
     for _ in range(limit):
         if right - left < 8 or bottom - top < 8:
@@ -526,11 +549,14 @@ def add_margin(im, pad):
     # предмет в середину. Фотографий во весь кадр это не касается.
     w, h = im.size
     px = im.load()
-    edges = []
-    for d in (0, 1):
-        edges += [px[d, y] for y in range(h)] + [px[w - 1 - d, y] for y in range(h)]
-        edges += [px[x, d] for x in range(w)] + [px[x, h - 1 - d] for x in range(w)]
-    if sum(sum(v) / 3 for v in edges) / len(edges) < 240:
+    # белый ли фон — судим по углам: по краям уже может лежать сам предмет,
+    # и среднее по всей рамке тогда занижено, а поле всё равно нужно
+    c = max(6, min(w, h) // 20)
+    corners = []
+    for cx in (0, w - c):
+        for cy in (0, h - c):
+            corners += [px[x, y] for x in range(cx, cx + c) for y in range(cy, cy + c)]
+    if min(sum(v) / 3 for v in corners) < 235:
         return im
     out = Image.new("RGB", (w + 2 * pad, h + 2 * pad), (255, 255, 255))
     out.paste(im, (pad, pad))
@@ -565,7 +591,11 @@ def cut_sheet(sheet, rows, cols):
     # связь с корпусом, оставалась отдельной фигурой — и предмет резало по
     # линии. Для маски важно не «какого цвета в среднем», а «есть ли тут хоть
     # что-то непустое».
-    small = grey.filter(ImageFilter.MinFilter(min(9, 2 * k + 1))).resize(
+    # Окно минимума держим маленьким (3 px): при большом тёмные пиксели
+    # предмета расползаются в полосу разделителя, она перестаёт гаситься,
+    # и весь лист слипается в одну фигуру — у маяка в карточке оставался
+    # только луч.
+    small = grey.filter(ImageFilter.MinFilter(3)).resize(
         (sw, sh), Image.NEAREST) if k > 1 else grey
     px = small.load()
     mask = [px[x, y] < WHITE for y in range(sh) for x in range(sw)]
