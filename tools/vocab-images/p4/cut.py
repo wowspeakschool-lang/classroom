@@ -27,13 +27,19 @@ def split_rows(path, bs, n_rows):
     """Полосы рисунков — выше 60 px. Если полоса началась вплотную к предыдущей,
     в её верх влипла подпись прошлого ряда: срезаем по самой пустой строке под ней."""
     c = (min_rgb_of(Image.open(path)) < 200).sum(1)
-    rows, prev = [], -100
-    for y0, y1 in bs:
-        if y1 - y0 > 60:
-            if y0 - prev < 8:
+    rows, prev, prev_pic = [], -100, False
+    for i, (y0, y1) in enumerate(bs):
+        pic = y1 - y0 > 60
+        if pic:
+            if prev_pic and y0 - prev < 8:
                 y0 = y0 + 20 + int(np.argmin(c[y0 + 20:y0 + 90]))
-            rows.append((y0, y1))
-        prev = y1
+            else:
+                # светлые пряди и тени не дотягивают до порога 200 — берём весь белый
+                # промежуток до предыдущей полосы (подписи), он гарантированно пустой
+                y0 = max(0, prev + 2)
+            nxt = bs[i + 1][0] if i + 1 < len(bs) else len(c)
+            rows.append((y0, max(y1, nxt - 2)))
+        prev, prev_pic = y1, pic
     if len(rows) != n_rows:
         raise SystemExit(f'рядов {len(rows)} вместо {n_rows}: {bs}')
     return rows
