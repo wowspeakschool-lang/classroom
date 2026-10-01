@@ -234,9 +234,11 @@ def divider_band(grey, pos, vertical, search, lo=None, hi=None):
             break
     if hit is None:
         return None
-    # полосу не расширяем без края: у пастельных ячеек фон сам по себе ровный,
-    # и разделитель «разрастался» на сотню пикселей, съедая картинку
-    grow = max(4, round(span * 0.02))
+    # Полосу не расширяем без края: у пастельных ячеек фон сам по себе ровный,
+    # и разделитель «разрастался», съедая картинку. 2% считались от всего
+    # листа, а не от ячейки — полоса выходила в 50 px, и клин вставал внутри
+    # ячейки: у дельфина отрезало нос. Разделитель — это несколько пикселей.
+    grow = max(3, round(span * 0.005))
     a = b = hit
     while a > hit - grow and a > 0 and _line_is_divider(line(a - 1)):
         a -= 1
@@ -582,9 +584,16 @@ def cut_sheet(sheet, rows, cols):
     out = []
     for r in range(rows):
         for c in range(cols):
-            boxes = [p["box"] for p in parts
-                     if p["size"] >= MIN_PART * cell_px
-                     and max(p["cells"].items(), key=lambda kv: kv[1])[0] == (r, c)]
+            own = [p for p in parts
+                   if p["size"] >= MIN_PART * cell_px
+                   and max(p["cells"].items(), key=lambda kv: kv[1])[0] == (r, c)]
+            boxes = [p["box"] for p in own]
+            # Фигура, которая почти вся лежит в своей ячейке, — это предмет
+            # с выступом (антенны раций заходят к соседу на 14%), и резать его
+            # по линии нельзя. Фигура, размазанная между двумя ячейками, —
+            # это слипшиеся соседи (две фотографии во весь кадр), и её режем.
+            solo = [p["box"] for p in own
+                    if p["cells"].get((r, c), 0) >= 0.75 * p["size"]]
             if not boxes:
                 # ячейка залита картинкой во весь кадр (фото блюда, интерьер):
                 # своей отдельной фигуры у неё нет, она слилась с соседней.
@@ -658,14 +667,26 @@ def cut_sheet(sheet, rows, cols):
                 bt = best_seam(grey, round(r * ch), False, search, *xs)
             if r + 1 < rows and not bb:
                 bb = best_seam(grey, round((r + 1) * ch), False, search, *xs)
+            # режем по середине полосы, а не по её ближнему краю: если полоса
+            # всё же шире самой линии, ближний край стоит внутри ячейки
+            def mid(b):
+                return (b[0] + b[1]) // 2
+
             if bl and not neighbour_is_empty(bl, "l"):
-                x0 = max(x0, bl[1] + 1)
+                x0 = max(x0, mid(bl) + 1)
             if br and not neighbour_is_empty(br, "r"):
-                x1 = min(x1, br[0])
+                x1 = min(x1, mid(br))
             if bt and not neighbour_is_empty(bt, "t"):
-                y0 = max(y0, bt[1] + 1)
+                y0 = max(y0, mid(bt) + 1)
             if bb and not neighbour_is_empty(bb, "b"):
-                y1 = min(y1, bb[0])
+                y1 = min(y1, mid(bb))
+
+            # свою фигуру ограничитель не режет — только возвращаем её в кадр
+            if solo:
+                x0 = min(x0, max(round(c * cw - over_x), min(b[0] for b in solo) * k))
+                y0 = min(y0, max(round(r * ch - over_y), min(b[1] for b in solo) * k))
+                x1 = max(x1, min(round((c + 1) * cw + over_x), max(b[2] for b in solo) * k))
+                y1 = max(y1, min(round((r + 1) * ch + over_y), max(b[3] for b in solo) * k))
             pad = round(min(cw, ch) * PAD)
             piece = sheet.crop((max(0, x0 - pad), max(0, y0 - pad),
                                 min(W, x1 + pad), min(H, y1 + pad)))
