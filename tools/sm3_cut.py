@@ -185,6 +185,23 @@ SHEETS = [
 ]
 
 
+def _line_is_clean(vals, spread=18):
+    """Строгая проверка для чистки краёв готовой карточки.
+
+    Нестрогая (85-90% светлых точек) годится, чтобы найти линию сетки внутри
+    листа: предмет местами её пересекает. Но для края карточки она губительна:
+    строка с кончиком антенны — это белое поле и несколько синих пикселей,
+    то есть «почти всё светлое», и чистка снимала шапочку по строчке за раз.
+    У настоящего поля тёмных точек нет вовсе.
+    """
+    if not vals:
+        return False
+    if min(vals) < 185:
+        return False
+    g = sorted(vals)
+    return g[min(len(g) - 1, int(len(g) * 0.95))] - g[int(len(g) * 0.05)] <= spread
+
+
 def _line_is_divider(vals, share=0.85, spread=20):
     """Похожа ли линия на разделитель сетки.
 
@@ -423,7 +440,7 @@ def cut_off_line(im, depth=10):
     w, h = im.size
 
     def grey(vals):
-        return _line_is_divider([sum(v) / 3 for v in vals], share=0.9, spread=16)
+        return _line_is_clean([sum(v) / 3 for v in vals], spread=16)
 
     left = right = top = bottom = 0
     for d in range(min(depth, w // 4)):
@@ -448,7 +465,8 @@ def strip_lines(im, limit=10):
     left, right, top, bottom = 0, w, 0, h
 
     def line(vals):
-        return _line_is_divider([sum(v) / 3 for v in vals], share=0.9, spread=16)
+        # строго: ни одной тёмной точки, иначе снимаем кончик предмета
+        return _line_is_clean([sum(v) / 3 for v in vals], spread=16)
 
     for _ in range(limit):
         if right - left < 8 or bottom - top < 8:
@@ -526,11 +544,14 @@ def add_margin(im, pad):
     # предмет в середину. Фотографий во весь кадр это не касается.
     w, h = im.size
     px = im.load()
-    edges = []
-    for d in (0, 1):
-        edges += [px[d, y] for y in range(h)] + [px[w - 1 - d, y] for y in range(h)]
-        edges += [px[x, d] for x in range(w)] + [px[x, h - 1 - d] for x in range(w)]
-    if sum(sum(v) / 3 for v in edges) / len(edges) < 240:
+    # белый ли фон — судим по углам: по краям уже может лежать сам предмет,
+    # и среднее по всей рамке тогда занижено, а поле всё равно нужно
+    c = max(6, min(w, h) // 20)
+    corners = []
+    for cx in (0, w - c):
+        for cy in (0, h - c):
+            corners += [px[x, y] for x in range(cx, cx + c) for y in range(cy, cy + c)]
+    if min(sum(v) / 3 for v in corners) < 235:
         return im
     out = Image.new("RGB", (w + 2 * pad, h + 2 * pad), (255, 255, 255))
     out.paste(im, (pad, pad))
