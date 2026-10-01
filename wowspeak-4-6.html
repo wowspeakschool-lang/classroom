@@ -1448,18 +1448,37 @@ function handBox(words, picKey, back){
   return {box, arrow, thing: rowEl.querySelector(".thing")};
 }
 function moveArrow(arrow, count, i){
-  const n = Math.min(Math.max(count, 1), 5);
-  const tips = TIPS[(arrow.dataset.kind || "") + n];
-  const t = tips[Math.min(i, tips.length - 1)];
-  arrow.classList.add("on");
+  arrow.dataset.n = Math.min(Math.max(count, 1), 5);
+  arrow.dataset.i = i;
+  arrow._tries = 0;
+  placeArrow(arrow);
+}
+/* Новая ладошка в первый миг ещё без размеров: стрелка, поставленная по
+   ней, садилась на левый край посередине (Анна, «с конца»). Ждём картинку
+   и ставим по ней; появляется стрелка сразу на пальце, без подлёта. */
+function placeArrow(arrow){
+  const img = arrow.parentNode && arrow.parentNode.querySelector("img.hand");
+  if (!img) return;
+  if (!img.naturalWidth || !img.clientWidth){
+    if (arrow._tries++ < 40){
+      img.addEventListener("load", () => placeArrow(arrow), {once: true});
+      requestAnimationFrame(() => placeArrow(arrow));
+    }
+    return;
+  }
+  const tips = TIPS[(arrow.dataset.kind || "") + arrow.dataset.n];
+  const t = tips[Math.min(+arrow.dataset.i, tips.length - 1)];
   /* Кончики — в долях самой картинки, а не рамки: на телефоне рамка выше
      нарисованной руки (object-fit: contain), и стрелка висела над ладошкой. */
-  const img = arrow.parentNode.querySelector("img.hand");
   const bw = img.clientWidth, bh = img.clientHeight;
-  const k = Math.min(bw / (img.naturalWidth || bw), bh / (img.naturalHeight || bh));
-  const dw = (img.naturalWidth || bw) * k, dh = (img.naturalHeight || bh) * k;
+  const k = Math.min(bw / img.naturalWidth, bh / img.naturalHeight);
+  const dw = img.naturalWidth * k, dh = img.naturalHeight * k;
+  const first = !arrow.classList.contains("on");
+  if (first) arrow.style.transition = "none";
   arrow.style.left = (img.offsetLeft + (bw - dw) / 2 + t[0] * dw) + "px";
   arrow.style.top = (img.offsetTop + (bh - dh) / 2 + t[1] * dh) + "px";
+  if (first){ void arrow.offsetWidth; arrow.style.transition = ""; }
+  arrow.classList.add("on");
 }
 
 /* Раунд, где ребёнок говорит фразу сам: рука стоит молча и показывает,
