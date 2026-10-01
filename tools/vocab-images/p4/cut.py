@@ -13,6 +13,8 @@ from sheets import S
 FILL = {'ice hockey', 'ice skating', 'boarding pass', 'speed limit', 'receipt'}
 
 # Листы, где генератор разложил картинки иначе, чем в промпте
+IMAGES = '/tmp/claude-0/-home-user-classroom/d4a2a0a4-519c-5b81-af84-18451bfcf9dd/images'
+
 LAYOUT_SHEET = {25: [5, 4, 2]}
 
 LAYOUT = {7: [4, 3], 8: [4, 4], 9: [5, 4], 10: [5, 5], 11: [4, 4, 3], 12: [4, 4, 4], 13: [5, 4, 4]}
@@ -123,6 +125,16 @@ def cut(sheet, path, out='out'):
             cuts, ink = column_cuts(path, y0, y1, n)
             row_x(path, y0, y1, words, d, cuts)
             report.append(f'  ряд {y0}-{y1}: {n} шт, ПО КОЛОНКАМ {cuts} чернил {ink}')
+    # перерисованные отдельными картинками — images_map.txt: "<картинка> <лист>:<слово>"
+    imgdir = os.path.dirname(path) if 'clean_' not in path else IMAGES
+    for line in open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'images_map.txt')):
+        f, _, rest = line.strip().partition(' ')
+        if ':' in rest and int(rest.split(':')[0]) == sheet:
+            word = rest.split(':', 1)[1]; src = os.path.join(IMAGES, f + '.webp')
+            from widen import row as wrow
+            y0, y1 = bands(src)[0]
+            wrow(src, y0, y1, [word], f'{out}/{sheet}', gap=400, min_area=150)
+            report.append(f'  {word}: заменён картинкой {f}')
     for _, t, _ in items:
         if t in OUTLINE_ONLY:
             outline_only(f'{out}/{sheet}/{fname(t)}'); report.append(f'  {t}: по контуру')

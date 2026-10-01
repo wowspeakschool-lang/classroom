@@ -25,3 +25,4 @@
 48 24
 49 25
 50 22:bank account
+51 22:receipt
