@@ -9,6 +9,9 @@ sys.path.insert(0, '..')
 from lib import row, row_x, clusters_of, min_rgb_of
 from sheets import S
 
+# Сцены с белым содержимым (лёд, снег): фон вырезается вместе с ним — заливаем сцену целиком
+FILL = {'ice hockey', 'ice skating'}
+
 LAYOUT = {7: [4, 3], 8: [4, 4], 9: [5, 4], 10: [5, 5], 11: [4, 4, 3], 12: [4, 4, 4], 13: [5, 4, 4]}
 
 def bands(path):
@@ -63,7 +66,15 @@ def cut(sheet, path, out='out'):
         words = [t for _, t, _ in items[k:k + n]]; k += n
         d = f'{out}/{sheet}'
         ok = False
-        for g in (12, 6, 3):
+        need_fill = tuple(w for w in words if w in FILL)
+        if need_fill:
+            for g in (12, 6, 3):
+                cl = clusters_of(path, y0, y1, 150, 235, g)[4]
+                if len(cl) == n:
+                    cuts = [(a['x1'] + b['x0']) // 2 for a, b in zip(cl, cl[1:])]
+                    row_x(path, y0, y1, words, d, cuts, fill=need_fill, fill_thr=253, fill_close=8)
+                    report.append(f'  ряд {y0}-{y1}: {n} шт, зазор {g}, заливка {need_fill}'); ok = True; break
+        for g in (() if ok else (12, 6, 3)):
             if len(clusters_of(path, y0, y1, 150, 235, g)[4]) == n:
                 row(path, y0, y1, words, d, gap=g, min_area=150); ok = True
                 report.append(f'  ряд {y0}-{y1}: {n} шт, зазор {g}'); break

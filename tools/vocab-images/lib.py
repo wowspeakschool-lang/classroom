@@ -79,7 +79,7 @@ def row(sheet, y0, y1, words, outdir, min_area=600, pad=6, grow=3, thr=235, gap=
         to_square(Image.fromarray(rgba,'RGBA')).save(os.path.join(outdir,fname(w)))
     return True
 
-def row_x(sheet, y0, y1, words, outdir, cuts, min_area=150, pad=6, grow=3, thr=235, fill=()):
+def row_x(sheet, y0, y1, words, outdir, cuts, min_area=150, pad=6, grow=3, thr=235, fill=(), fill_thr=250, fill_close=5):
     """Как row(), но клетки заданы границами по x (cuts — len(words)-1 значений).
     Для рядов, где соседние рисунки касаются и кластеры по зазору слипаются.
     Граница — число или ступенька (y_листа, x_выше, x_ниже), если рисунки заходят
@@ -112,8 +112,8 @@ def row_x(sheet, y0, y1, words, outdir, cuts, min_area=150, pad=6, grow=3, thr=2
         crop = im.crop((ax0, y0 + ay0, ax1, y0 + ay1))
         rgba = np.array(make_soft_transparent(crop))
         if w in fill:
-            light = (mr[y0 + ay0:y0 + ay1, ax0:ax1] < 250) & inside[ay0:ay1, ax0:ax1]
-            solid = binary_erosion(binary_fill_holes(binary_dilation(light, iterations=5)), iterations=5)
+            light = (mr[y0 + ay0:y0 + ay1, ax0:ax1] < fill_thr) & inside[ay0:ay1, ax0:ax1]
+            solid = binary_erosion(binary_fill_holes(binary_dilation(light, iterations=fill_close)), iterations=fill_close)
         else:
             solid = np.zeros((ay1 - ay0, ax1 - ax0), bool)
         rgba[..., 3] = (rgba[..., 3] * keep[ay0:ay1, ax0:ax1]).astype(np.uint8)
