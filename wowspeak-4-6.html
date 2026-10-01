@@ -640,7 +640,7 @@ let curRu = null;           // какую реплику Мии повторяе
 let L = 0, S = 0, round = 0, earned = 0, token = 0;
 
 function startLesson(i){
-  L = i; S = 0; round = 0; earned = 0; sayShownFor = null;
+  L = i; S = 0; round = 0; earned = 0; sayShownFor = null; lastRendered = null;
   // Пока ни один урок не пройден, карты ещё нет — и уводить на неё некуда.
   lessonEl.querySelector(".home").hidden = progress().done.length === 0;
   mapEl.classList.remove("on"); lessonEl.classList.add("on");
@@ -671,6 +671,14 @@ function updateNum(){
   num.textContent = "У" + lesson().id + " · " + (S + 1) +
     (s.rounds && s.rounds.length > 1 ? " (" + (round + 1) + "/" + s.rounds.length + ")" : "");
 }
+let lastRendered = null;
+/* Ладошки раскодированы заранее и держатся в памяти: иначе новая картинка
+   на кадр-другой пустая, и при смене шага рука моргала. */
+const HAND_CACHE = Object.keys(IMG).filter(k => /^handb?\d$/.test(k)).map(k => {
+  const im = new Image(); im.src = IMG[k];
+  if (im.decode) im.decode().catch(() => {});
+  return im;
+});
 function render(){
   stopSound(); token++;
   const s = screen();
@@ -688,8 +696,12 @@ function render(){
   drawTokens();
   updateNum();
   drawRounds();
-  content.classList.remove("fresh"); void content.offsetWidth;
-  content.classList.add("fresh");
+  /* В пальчиковом дрилле шаги меняются на том же экране — без проявления:
+     экран мигал на каждой смене ладошки (Анна). Новый экран — проявляется. */
+  const here = L + ":" + S, sameScreen = here === lastRendered;
+  lastRendered = here;
+  content.classList.remove("fresh");
+  if (!(sameScreen && s.t === "fingers")){ void content.offsetWidth; content.classList.add("fresh"); }
   curRu = s.ru || null;
   RENDER[s.t](s);
   placeSayEn();
