@@ -52,7 +52,7 @@ HOLES = {
     "suitcase": 0.20,   # щель между крышкой и дном
 }
 
-def finger_tips(im, want):
+def finger_tips(im, want, side="left"):
     """Кончики пальцев в долях от рамки фигуры, слева направо.
 
     Считаются по картинке, а не выписываются руками: иначе перерисованная
@@ -84,7 +84,9 @@ def finger_tips(im, want):
     # загнутые костяшки — правее. Брать «самые высокие» нельзя: на руке из
     # двух пальцев большой лежит почти горизонтально, и костяшка загнутого
     # среднего торчит выше его кончика.
-    tips = sorted(mins)[:want]
+    # Фраза с конца (Анна): счёт с мизинца — у таких ладошек поднятые
+    # пальцы справа, берём крайние справа.
+    tips = sorted(mins)[:want] if side == "left" else sorted(mins)[-want:]
     # чуть ниже самой макушки: стрелка должна указывать на подушечку
     return [[round(x / w, 4), round((y + h * 0.02) / h, 4)] for x, y in tips]
 
@@ -286,6 +288,11 @@ CUT_OPTS = {"plane": {"shadow": None},
             "egg": {"keep": (0.5064, 0.3987, 0.2233, 0.2456)}}
 
 
+# Ладошки для фразы с конца: мизинец, +безымянный, +средний, +указательный.
+for _n in range(1, 5):
+    if (ART / ("hand-b%d.webp" % _n)).exists():
+        BASE["handb%d" % _n] = ("hand-b%d.webp" % _n, 700, True)
+
 CACHE = ROOT / "tools" / ".kids46_images.json"
 
 
@@ -316,6 +323,11 @@ def build_images():
         hand = cut_white(Image.open(ART / BASE["hand%d" % n][0]))
         hand = hand.crop(hand.getbbox())
         tips[n] = finger_tips(hand, n)
+    for n in range(1, 5):
+        if "handb%d" % n in BASE:
+            hand = cut_white(Image.open(ART / BASE["handb%d" % n][0]))
+            hand = hand.crop(hand.getbbox())
+            tips["b%d" % n] = finger_tips(hand, n, "right")
 
     for name, f, width in PAINTED:
         src = cut_white(Image.open(ART / f), holes=HOLES.get(name),

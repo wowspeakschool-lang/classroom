@@ -1318,16 +1318,21 @@ RENDER.pick = function(s){
 };
 
 /* ───────── рука с пальцами: знакомство и три дрилла ───────── */
-function handBox(words, picKey){
+function handBox(words, picKey, back){
   const rowEl = document.createElement("div");
   rowEl.className = "handrow";
   const box = document.createElement("div");
   box.className = "handbox";
   const hand = document.createElement("img");
   hand.className = "hand";
-  hand.src = IMG["hand" + Math.min(Math.max(words, 1), 5)];
+  const n = Math.min(Math.max(words, 1), 5);
+  /* Фраза с конца показывается с мизинца (Анна): свои ладошки handb1-4.
+     Пока их нет — обычные, с большого. */
+  const kind = back && n < 5 && IMG["handb" + n] ? "b" : "";
+  hand.src = IMG["hand" + kind + n];
   const arrow = document.createElement("div");
   arrow.className = "arrow";
+  arrow.dataset.kind = kind;
   box.appendChild(hand); box.appendChild(arrow);
   rowEl.appendChild(box);
   if (picKey){
@@ -1339,7 +1344,8 @@ function handBox(words, picKey){
   return {box, arrow, thing: rowEl.querySelector(".thing")};
 }
 function moveArrow(arrow, count, i){
-  const tips = TIPS[Math.min(Math.max(count, 1), 5)];
+  const n = Math.min(Math.max(count, 1), 5);
+  const tips = TIPS[(arrow.dataset.kind || "") + n];
   const t = tips[Math.min(i, tips.length - 1)];
   arrow.classList.add("on");
   /* Кончики — в долях самой картинки, а не рамки: на телефоне рамка выше
@@ -1415,7 +1421,7 @@ RENDER.fingers = function(s){
   const count = to - from + 1;
   const picKey = isSwap ? s.rounds[round].pic : s.pic;
   const line = isSwap ? s.rounds[round].line : s.line;
-  const ui = handBox(count, picKey);
+  const ui = handBox(count, picKey, s.mode === "back");
 
   const below = document.createElement("div");
   below.className = "below";
