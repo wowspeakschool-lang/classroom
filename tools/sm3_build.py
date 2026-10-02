@@ -1041,6 +1041,60 @@ LESSONS = {
                 "<p>Все задания выполнены. Ты большущий молодец 😊</p>"}),
         ],
     },
+    "u2_hw5": {
+        "unit": "u2",
+        "unit_title": "Unit 2 · Food",
+        "unit_sort": 2,
+        "lesson_title": "Homework 5",
+        "lesson_sort": 4,
+        "kind": "homework",
+        # Два задания из выгрузки сюда не попали: «послушай аудио и соедини
+        # картинку с её номером» и «соедини людей и блюда» — у первого нет ни
+        # картинок, ни записи, у второго в выгрузке пусты обе колонки. Оба
+        # вынесены строками в файл «доработать руками».
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_headphones")}" alt="" style="height:200px"></p>'
+                "<h2>Привет-привет!</h2>"
+                "<p>Ну что, готов к новой домашней работе? Давай начинать 😊</p>"}),
+
+            ("video", {"title": "Послушай диалоги Ким и Дэниэля, а потом Тома и Мэри",
+                       "url": "", "provider": ""}),
+
+            ("gaps", {
+                "title": "Впиши пропущенные слова ⏬",
+                "mode": "drag",
+                "text":
+                    "Kim: __What’s the matter__, Daniel?\n"
+                    "Daniel: It’s my head. It hurts.\n"
+                    "Kim: Shall I get you some medicine?\n"
+                    "Daniel: No, it’s OK. It’s not too bad.\n\n"
+                    "Tom: What are you doing, Mary?\n"
+                    "Mary: I want this book. It’s really good.\n"
+                    "Tom: Shall I help you?\n"
+                    "Mary: No, thanks. __I think__ __I’ve got it__.",
+                "gaps_expected": 3,
+            }),
+
+            ("video", {"title": "Послушай образец к игре «I spy with my little eye»",
+                       "url": "", "provider": ""}),
+
+            ("speaking", {
+                "title": "Поиграем в «I spy with my little eye» 🎤",
+                "needs_review": True,
+                "image": img("u2", "scene_i_spy"),
+                "html":
+                    "<p>Назови первую букву и сам предмет, который не подписан — "
+                    "рядом с ним стоит пустая строчка. Начинай так:</p>"
+                    "<p><i>I spy with my little eye something beginning with…</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>Большое тебе спасибо за отличную работу!</h3>"
+                "<p>Ты прекрасно поработал сегодня. Так держать! Теперь можно отдохнуть :)</p>"}),
+        ],
+    },
 }
 
 
