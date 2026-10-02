@@ -1597,6 +1597,83 @@ LESSONS = {
                 "<p>Встретимся на уроке :)</p>"}),
         ],
     },
+    "u3_hw3": {
+        "unit": "u3",
+        "unit_title": "Unit 3 \u00b7 At home",
+        "unit_sort": 3,
+        "lesson_title": "Homework 3",
+        "lesson_sort": 2,
+        "kind": "homework",
+        # Блок 3 «Диаграмма» — у нас hotspot: точки стоят ровно на оранжевых
+        # кружках самой картинки (посчитаны по пикселям, а не на глаз).
+        # Две картинки выгрузки не взяты: фотография игрушечного Базза Лайтера
+        # и Микки-Маус с надписью BYE — чужие персонажи.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_headphones")}" alt="" style="height:200px"></p>'
+                "<h2>Привет!</h2>"
+                "<p>Сегодня мы послушаем с тобой песню и сделаем несколько "
+                "интересных заданий. Удачи тебе!</p>"}),
+
+            ("video", {"title": "Итак, поехали! Послушай песню. Кто главный герой?",
+                       "url": "", "provider": ""}),
+
+            ("hotspot", {
+                "title": "Послушай песню ещё раз и выбери подходящее время для каждой картинки",
+                "mode": "label",
+                "image": img("u3", "scene_astronaut_day"),
+                "points": [
+                    {"x": 4.2,  "y": 7.1,  "text": "quarter to three",
+                     "audio_tts": "quarter to three"},
+                    {"x": 72.6, "y": 5.1,  "text": "nine o\u2019clock",
+                     "audio_tts": "nine o'clock"},
+                    {"x": 6.5,  "y": 56.7, "text": "half past nine",
+                     "audio_tts": "half past nine"},
+                    {"x": 38.3, "y": 60.1, "text": "half past ten",
+                     "audio_tts": "half past ten"},
+                    {"x": 70.6, "y": 57.0, "text": "half past three",
+                     "audio_tts": "half past three"},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "МОЛОДЕЦ! Послушай песню ещё раз и вставь пропущенные слова \u2b07",
+                "mode": "drag",
+                "text":
+                    "1. She __gets up__ at quarter to three.\n"
+                    "2. She __is at her door__ at nine o\u2019clock.\n"
+                    "3. She __is in her spaceship__ at half past nine.\n"
+                    "4. She __is on the moon__ at half past ten.\n"
+                    "5. She __is back home__ at half past three.\n"
+                    "6. She __works__ at night.",
+                "gaps_expected": 6,
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_medal")}" alt="" style="height:180px"></p>'
+                "<h3>Здорово! Ты сделал все основные задания!</h3>"
+                "<p>У меня для тебя есть ещё одно задание. Оно дополнительное, "
+                "но если ты его сделаешь, будешь ПРОСТО ГУРУ английского!</p>"}),
+
+            ("task", {
+                "title": "Представь, что ты пилот космического корабля!",
+                "needs_review": True,
+                "html":
+                    "<p>Внимательно прочитай пример ниже и заполни его по-своему. "
+                    "Опиши свой день!</p>"
+                    "<p><i>I\u2019m in my spaceship. It\u2019s \u2026<br>"
+                    "I\u2019m the pilot and \u2026<br>"
+                    "It\u2019s \u2026, I\u2019m on the moon.<br>"
+                    "\u2026 . \u2026 .</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_smiley")}" alt="" style="height:180px"></p>'
+                "<h3>Ты справился, молодец!</h3>"
+                "<p>Не забудь показать свой ответ на уроке учителю — он даст тебе "
+                "дополнительный балл. BYE :)</p>"}),
+        ],
+    },
 }
 
 
