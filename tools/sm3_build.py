@@ -1095,6 +1095,92 @@ LESSONS = {
                 "<p>Ты прекрасно поработал сегодня. Так держать! Теперь можно отдохнуть :)</p>"}),
         ],
     },
+    "u2_hw6": {
+        "unit": "u2",
+        "unit_title": "Unit 2 \u00b7 Food",
+        "unit_sort": 2,
+        "lesson_title": "Homework 6",
+        "lesson_sort": 5,
+        "kind": "homework",
+        # Блок 4 в выгрузке стоял без картинок (правая колонка пустая) —
+        # подставлены наши карточки частей растения из Л2.6.
+        # Блок 7 в выгрузке «Текст» с прикреплённым аудио-образцом; у нас это
+        # пустой медиа-блок, чтобы номера блоков совпадали с выгрузкой.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>\u041f\u0440\u0438\u0432\u0435\u0442!</h2>"
+                "<p>\u041a\u0430\u043a \u0442\u0432\u043e\u0438 \u0434\u0435\u043b\u0430? \u0422\u044b \u0431\u043e\u043b\u044c\u0448\u043e\u0439 \u043c\u043e\u043b\u043e\u0434\u0435\u0446, \u0447\u0442\u043e \u0440\u0435\u0448\u0438\u043b \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0434\u043e\u043c\u0430\u0448\u043d\u044e\u044e \u0440\u0430\u0431\u043e\u0442\u0443. "
+                "\u0412\u0440\u0435\u043c\u044f \u043f\u0440\u043e\u043b\u0435\u0442\u0438\u0442 \u043d\u0435\u0437\u0430\u043c\u0435\u0442\u043d\u043e, \u0442\u044b \u043a\u0430\u043a \u0432\u0441\u0435\u0433\u0434\u0430 \u0441\u043e \u0432\u0441\u0435\u043c \u0441\u043f\u0440\u0430\u0432\u0438\u0448\u044c\u0441\u044f. \u0412\u043f\u0435\u0440\u0451\u0434!</p>"
+                "<p>\u0414\u0430\u0432\u0430\u0439 \u043f\u043e\u0441\u043c\u043e\u0442\u0440\u0438\u043c \u0432\u0438\u0434\u0435\u043e \u043f\u0440\u043e \u0441\u044a\u0435\u0434\u043e\u0431\u043d\u044b\u0435 \u0447\u0430\u0441\u0442\u0438 \u0440\u0430\u0441\u0442\u0435\u043d\u0438\u0439. \u041f\u043e\u043a\u0430 \u0431\u0443\u0434\u0435\u0448\u044c \u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c, "
+                "\u043d\u0430\u0439\u0434\u0438 \u0435\u0434\u0438\u043d\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u0439 \u043e\u0440\u0430\u043d\u0436\u0435\u0432\u044b\u0439 \u043f\u0440\u043e\u0434\u0443\u043a\u0442 \u0432 \u0432\u0438\u0434\u0435\u043e \u0438 \u0437\u0430\u043f\u043e\u043c\u043d\u0438 \u0435\u0433\u043e!</p>"}),
+
+            ("video", {"title": "\u0412\u0438\u0434\u0435\u043e: \u0441\u044a\u0435\u0434\u043e\u0431\u043d\u044b\u0435 \u0447\u0430\u0441\u0442\u0438 \u0440\u0430\u0441\u0442\u0435\u043d\u0438\u0439",
+                       "url": "", "provider": ""}),
+
+            ("task", {
+                "title": "What orange vegetable is in the video?",
+                "needs_review": True,
+                "html":
+                    "<p>\u0421\u0430\u043c\u043e\u0435 \u0432\u0440\u0435\u043c\u044f \u043d\u0430\u043f\u0438\u0441\u0430\u0442\u044c \u043e\u0442\u0432\u0435\u0442 \u043d\u0430 \u0432\u043e\u043f\u0440\u043e\u0441: "
+                    "<i>What orange vegetable is in the video?</i></p>",
+            }),
+
+            ("match", {
+                "title": "\u0412\u0441\u043f\u043e\u043c\u043d\u0438 \u0432\u0438\u0434\u0435\u043e \u0438 \u0441\u043e\u0435\u0434\u0438\u043d\u0438 \u043d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u0441\u044a\u0435\u0434\u043e\u0431\u043d\u043e\u0439 \u0447\u0430\u0441\u0442\u0438 \u0441 \u0435\u0451 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u043e\u0439",
+                "pairs": [
+                    {"left_image": img("u2", "part_roots"),  "right": "roots",  "right_audio_tts": "roots"},
+                    {"left_image": img("u2", "part_seeds"),  "right": "seeds",  "right_audio_tts": "seeds"},
+                    {"left_image": img("u2", "part_stems"),  "right": "stems",  "right_audio_tts": "stems"},
+                    {"left_image": img("u2", "part_leaves"), "right": "leaves", "right_audio_tts": "leaves"},
+                    {"left_image": img("u2", "part_fruit"),  "right": "fruit",  "right_audio_tts": "fruit"},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "\u041f\u0440\u043e\u0447\u0438\u0442\u0430\u0439 \u043f\u0438\u0441\u044c\u043c\u043e \u041c\u0430\u0440\u043a\u0430 \u0438 \u043f\u043e\u0441\u0442\u0430\u0432\u044c \u0441\u043b\u043e\u0432\u0430 \u043d\u0430 \u0441\u0432\u043e\u0438 \u043c\u0435\u0441\u0442\u0430 \u2b07",
+                "mode": "drag",
+                "text":
+                    "Dear Penny,\n\n"
+                    "Tonight, we\u2019re having a nice dinner. There\u2019s a delicious salad "
+                    "with spinach and lettuce \u2014 __leaves__. There\u2019s also a delicious "
+                    "soup with asparagus \u2014 __stems__. We have some chicken with pumpkin "
+                    "__seeds__. We also have a salad with __roots__: carrots and beetroot. "
+                    "There\u2019s also a glass of __fruit__ juice for me with strawberries "
+                    "and mango \u2014 my favourite.\n\n"
+                    "What\u2019s for dinner at your home?\n\nMark",
+                "gaps_expected": 5,
+            }),
+
+            ("gaps", {
+                "title": "\u0418\u0437 \u043a\u0430\u043a\u0438\u0445 \u0447\u0430\u0441\u0442\u0435\u0439 \u0440\u0430\u0441\u0442\u0435\u043d\u0438\u0439 \u0434\u0435\u043b\u0430\u044e\u0442 \u044d\u0442\u0438 \u0431\u043b\u044e\u0434\u0430 \u0438 \u043d\u0430\u043f\u0438\u0442\u043e\u043a? \u0412\u043f\u0438\u0448\u0438 \u0438\u0445",
+                "text":
+                    "soup: __stems|leaves|seeds|roots__, __leaves|stems|seeds|roots__\n"
+                    "juice: __fruit|fruits|stems|leaves|roots__, __stems|leaves|roots|fruit|fruits__\n"
+                    "salad: __fruit|fruits|leaves|seeds|roots|stems__, "
+                    "__seeds|leaves|fruit|fruits|roots|stems__",
+                "gaps_expected": 6,
+            }),
+
+            ("video", {"title": "\u041f\u043e\u0441\u043b\u0443\u0448\u0430\u0439 \u043e\u0431\u0440\u0430\u0437\u0435\u0446 \u2014 \u0432 \u043d\u0451\u043c \u0433\u043e\u0432\u043e\u0440\u0438\u0442\u0441\u044f \u043e \u0436\u0438\u0432\u043e\u0442\u043d\u043e\u043c, \u043a\u043e\u0442\u043e\u0440\u043e\u0433\u043e \u043d\u0430 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0435 \u043d\u0435\u0442 :)",
+                       "url": "", "provider": ""}),
+
+            ("speaking", {
+                "title": "\u0422\u0435\u043f\u0435\u0440\u044c \u2014 \u0442\u0432\u043e\u044f \u043e\u0447\u0435\u0440\u0435\u0434\u044c \U0001f3a4",
+                "needs_review": True,
+                "image": img("u2", "scene_who_eats_what"),
+                "html":
+                    "<p>\u0412\u044b\u0431\u0435\u0440\u0438 \u0434\u0432\u0443\u0445 \u0436\u0438\u0432\u043e\u0442\u043d\u044b\u0445 \u0441 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0438 \u0438 \u0440\u0430\u0441\u0441\u043a\u0430\u0436\u0438, "
+                    "\u043a\u0430\u043a\u0438\u043c\u0438 \u0447\u0430\u0441\u0442\u044f\u043c\u0438 \u0440\u0430\u0441\u0442\u0435\u043d\u0438\u0439 \u043b\u044e\u0431\u0438\u0442 \u043f\u0438\u0442\u0430\u0442\u044c\u0441\u044f \u043a\u0430\u0436\u0434\u043e\u0435 \u0438\u0437 \u043d\u0438\u0445.</p>"
+                    "<p><i>\u041e\u0431\u0440\u0430\u0437\u0435\u0446: The rabbit eats roots. It likes carrots.</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>\u0421\u0443\u043f\u0435\u0440! \u0421\u043f\u0440\u0430\u0432\u0438\u043b\u0441\u044f \u0441\u043e \u0432\u0441\u0435\u043c\u0438 \u0437\u0430\u0434\u0430\u043d\u0438\u044f\u043c\u0438.</h3>"
+                "<p>\u041e\u0433\u0440\u043e\u043c\u043d\u043e\u0435 \u0442\u0435\u0431\u0435 \u0441\u043f\u0430\u0441\u0438\u0431\u043e. \u0422\u044b \u043e\u0442\u043b\u0438\u0447\u043d\u043e \u043f\u043e\u0440\u0430\u0431\u043e\u0442\u0430\u043b \U0001f60a \u0423\u0432\u0438\u0434\u0438\u043c\u0441\u044f \u043d\u0430 \u0437\u0430\u043d\u044f\u0442\u0438\u0438!</p>"}),
+        ],
+    },
 }
 
 

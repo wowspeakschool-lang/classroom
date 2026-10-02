@@ -37,6 +37,24 @@ Homework 6 `1X0GDg6o-GzIU0dlFCPbkUK1QTv4ro6C2`.
 | Homework 3 | `1YTZiW9bSIr7BLeaYb_BraMWbPzBCmLEb` | |
 | Homework 4 | `1A-mrWo-DhtAN_Gr7We-GONCxz0GXCN9c` | `1N_0iHdaYMMberiLNcL2EIHGS-2Rm6LIL` |
 | Homework 5 | `1QWJzrjcjWwRCVNjbVAerfEnE3U0odc45` | `1SDu2Zqln8HYz6AtGwfsAhC3uSoavR6jf` |
+| Homework 6 | `1IKX2kB-WVSSLu7BnYXfBnIC1Pvm66eTz` | `1c42cj7AQT8jgk-HEnSKvAg7LxPBNEo0i` |
+| Homework 7 | `10bCb9xcwCdw9BXCEKucLzieuY4Dp7IaO` | `11nMEf720mrPUlK1iwl7DXKbt_vEdHWSa` |
+| Test | `1n2UkVe9HfNSe7Dz_Iu85yQoru1guIQ4t` | `1jSknYsBD1U-7jM43Geh30LOcHL_oCZLt` |
 
-Остальные файлы Unit 2 (Homework 6 и дальше, Test) ещё не найдены — дописать
-сюда, когда найдутся.
+Остальные PDF Unit 2: Homework 1 (1) `1qqEkKTb0Irz0LmZuQTClKn5rrLc-gxfG`,
+Homework 1 (2) `10KelPFPOV_o-ODoZBBASan3IU0XxEZH0`,
+Homework 2 (2) `1X77Twe5fQZL8X6C6kC1Q6YQqEpKx1Q3d`,
+Homework 3 `13taPLa_A8bQPLktY_WuFlL1ikqz1mNth`.
+
+## Как искать файлы остальных юнитов
+
+`parentId` в `search_files` **работает** (раньше я считал, что нет). Весь юнит
+одним запросом, с `excludeContentSnippets: true` и `pageSize: 60`, ответ в двух
+страницах — `nextPageToken` обязателен, иначе половина файлов не видна:
+
+```
+parentId = '<id папки юнита>'
+```
+
+Папка SM3 целиком — `parentId = '1AOaFvFEhGQ_wLjZEcTZ5DbYNEk3W5M-3'` (в ней
+лежат папки юнитов и учебник `SB.pdf`).
