@@ -967,6 +967,80 @@ LESSONS = {
                 "До встречи на уроке 😊</p>"}),
         ],
     },
+    "u2_hw4": {
+        "unit": "u2",
+        "unit_title": "Unit 2 · Food",
+        "unit_sort": 2,
+        "lesson_title": "Homework 4",
+        "lesson_sort": 3,
+        "kind": "homework",
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_highfive")}" alt="" style="height:200px"></p>'
+                "<h2>Привет-привет, самый лучший ученик!</h2>"
+                "<p>Сегодня будем вспоминать историю, которую читали на уроке. "
+                "Ну что, готов начинать?</p>"}),
+
+            ("video", {"title": "Послушай аудио и найди ответ на вопрос: What happened to Buster?",
+                       "url": "", "provider": ""}),
+
+            ("text", {"html":
+                "<h3>Ben and Lucy and the golden apple</h3>"
+                f'<p><img src="{img("u2", "story_buster")}" alt="Кадры истории" style="max-width:100%"></p>'}),
+
+            ("quiz", {"questions": [{
+                "q": "What happened to Buster?",
+                "type": "single",
+                "options": [{"text": "The dog bit him."}, {"text": "Horax and Zelda hurt him."},
+                            {"text": "The snake bit him."}],
+                "correct": [2],
+            }]}),
+
+            ("quiz", {"title": "Выбери правильный вариант", "questions": [
+                {"q": "Ben and Lucy want to go to the ___.", "type": "single",
+                 "options": [{"text": "school"}, {"text": "library"}, {"text": "village"}],
+                 "correct": [2]},
+                {"q": "An old man tells them to go to the ___ at the top of the mountain.",
+                 "type": "single",
+                 "options": [{"text": "cellar"}, {"text": "waterfall"}, {"text": "village"}],
+                 "correct": [1]},
+                {"q": "Only the golden ___ can help Buster.", "type": "single",
+                 "options": [{"text": "tomato"}, {"text": "orange"}, {"text": "apple"}],
+                 "correct": [2]},
+                {"q": "Horax and Zelda want to ___ the apple, too.", "type": "single",
+                 "options": [{"text": "take"}, {"text": "eat"}, {"text": "cook"}],
+                 "correct": [0]},
+                {"q": "The children write ___ in the book.", "type": "single",
+                 "options": [{"text": "an apple"}, {"text": "the letter"}, {"text": "an idea"}],
+                 "correct": [1]},
+            ]}),
+
+            ("gaps", {
+                "title": "Что ещё мог сказать Бен? Соедини начало и конец предложений",
+                "mode": "drag",
+                "text":
+                    "Shall we __call the police__?\n"
+                    "Let’s __take him to the vet__.\n"
+                    "We can __make some tea for Buster__.\n"
+                    "Do you want __any help__?",
+                "gaps_expected": 4,
+            }),
+
+            ("speaking", {
+                "title": "Расскажи историю от лица Бена 🎤",
+                "needs_review": True,
+                "html":
+                    "<p>Представь, что ты Бен, и расскажи историю от его лица — так, "
+                    "будто она происходит прямо сейчас. Обязательно скажи, что ты "
+                    "чувствуешь и о чём думаешь 😊</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("congrats_popper")}" alt="" style="height:180px"></p>'
+                "<h3>Отличная работа!</h3>"
+                "<p>Все задания выполнены. Ты большущий молодец 😊</p>"}),
+        ],
+    },
 }
 
 
