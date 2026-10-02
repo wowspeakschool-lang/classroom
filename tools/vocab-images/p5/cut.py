@@ -10,7 +10,7 @@ from lib import row, row_x, clusters_of, min_rgb_of, fname
 from sheets import S
 
 # Сцены с белым содержимым (лёд, снег): фон вырезается вместе с ним — заливаем сцену целиком
-FILL = set()
+FILL = {'spectacular', 'snowstorm', 'recover', 'modern', 'clear up', 'come out'}
 
 # Листы, где генератор разложил картинки иначе, чем в промпте
 # Границы клеток вручную: {лист: {номер ряда: [границы]}}; граница-ступенька (y, x_выше, x_ниже)
