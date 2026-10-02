@@ -863,6 +863,110 @@ LESSONS = {
                 "<p>Ты огромный молодец. Увидимся на уроке 😊</p>"}),
         ],
     },
+    "u2_hw3": {
+        "unit": "u2",
+        "unit_title": "Unit 2 · Food",
+        "unit_sort": 2,
+        "lesson_title": "Homework 3",
+        "lesson_sort": 2,
+        "kind": "homework",
+        # Блок 4 в выгрузке — «соедини предложения ящериц с картинками», но
+        # картинок там не было ни одной, а горошек у нас есть, хлеб с сыром и
+        # мухи — нет. Сделан пропусками на те же три реплики: отрабатываются
+        # ровно те обороты, ради которых задание и стояло.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_rocket")}" alt="" style="height:200px"></p>'
+                "<h2>Привет, самый лучший ученик!</h2>"
+                "<p>Готов к новой домашней работе? Давай начинать!</p>"}),
+
+            ("video", {"title": "Посмотри видео и найди ответ на вопрос: What time is it?",
+                       "url": "", "provider": "youtube"}),
+
+            ("text", {"html":
+                "<p>Посмотри видео <b>два раза</b>:</p>"
+                "<ol><li>Первый раз просто послушай.</li>"
+                "<li>Во второй раз повторяй все предложения за нашими ящерицами 🦎</li></ol>"}),
+
+            ("quiz", {"questions": [{
+                "q": "What time is it?",
+                "type": "single",
+                "options": [{"text": "it’s seven o’clock"}, {"text": "it’s twelve o’clock"},
+                            {"text": "it’s six o’clock"}, {"text": "it’s nine o’clock"}],
+                "correct": [2],
+            }]}),
+
+            ("gaps", {
+                "title": "Вспомни, что говорили ящерицы, и вставь нужные слова",
+                "mode": "drag",
+                "text":
+                    "__How about__ some peas?\n"
+                    "__Shall we__ have some bread with cheese?\n"
+                    "__I’d like__ some flies.",
+                "gaps_expected": 3,
+            }),
+
+            ("gaps", {
+                "title": "Прочитай диалог и вставь нужные слова",
+                "mode": "drag",
+                "text":
+                    "Jack: __Shall__ we make a sandwich for lunch?\n"
+                    "Sara: __Good__ idea.\n"
+                    "Jack: How __about__ a chicken sandwich?\n"
+                    "Sara: __OK__.\n"
+                    "Jack: Shall we __have__ some salad with it?\n"
+                    "Sara: Yes, please! I like chicken with salad.",
+                "gaps_expected": 5,
+            }),
+
+            ("sequence", {
+                "title": "Составь диалог — расставь реплики по порядку",
+                "items": [
+                    {"text": "Shall we make a pizza?"},
+                    {"text": "Good idea! How about an onion and carrot one?"},
+                    {"text": "Yuk! How about cheese and tomato?"},
+                    {"text": "OK."},
+                ],
+            }),
+
+            ("sequence", {
+                "title": "И ещё один диалог",
+                "items": [
+                    {"text": "Shall we have sandwiches for lunch?"},
+                    {"text": "OK. How about sausage sandwiches?"},
+                    {"text": "Great idea. Oh no! There aren’t any sausages in the fridge."},
+                    {"text": "How about egg sandwiches, then?"},
+                ],
+            }),
+
+            ("sequence", {
+                "title": "И последний",
+                "items": [
+                    {"text": "I’m thirsty. Can I have a drink, please?"},
+                    {"text": "Yes, of course. How about lemonade?"},
+                    {"text": "Sorry. I don’t like that."},
+                    {"text": "That’s OK. How about apple juice?"},
+                    {"text": "Yes, please. I like juice."},
+                ],
+            }),
+
+            ("speaking", {
+                "title": "Поддержи диалог 🎤",
+                "needs_review": True,
+                "html":
+                    "<p>Посмотри видео и поддержи разговор:</p>"
+                    "<ul><li>согласись на идею поесть суп;</li>"
+                    "<li>вырази сожаление, что нет томатов;</li>"
+                    "<li>согласись поесть другой суп.</li></ul>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_medal")}" alt="" style="height:180px"></p>'
+                "<h3>Отличная работа!</h3>"
+                "<p>Большое тебе спасибо за твой труд :) Ты отлично постарался. "
+                "До встречи на уроке 😊</p>"}),
+        ],
+    },
 }
 
 
