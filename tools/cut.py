@@ -58,6 +58,144 @@ def sheet(src, rows, names, dst='.', pad=14, row_gap=20, col_gap=40, thr=245):
         print(f'  {name:14} {b[2]-b[0]}×{b[3]-b[1]}')
 
 
+def blobs(src, n, names, dst='.', pad=14, thr=245, join=34, min_area=1500):
+    """Режет лист по связным пятнам, а не по щелям между рядами.
+
+    Генератор часто ставит предметы вплотную: между двумя рядами остаётся
+    пиксель, и проекция их уже не разделяет. Пятна разделяют, потому что
+    предметы всё равно не соприкасаются. Куски одного предмета (лимон, половинка
+    и листик) собираются обратно: прямоугольники ближе join пикселей — один
+    предмет. Порядок — построчно сверху вниз, внутри строки слева направо,
+    как в промпте.
+    """
+    from scipy import ndimage
+    im = Image.open(src).convert('RGB')
+    m = np.array(im.convert('L')) < thr
+    lab, k = ndimage.label(m)
+    boxes = []
+    for sy, sx in ndimage.find_objects(lab):
+        if (sy.stop - sy.start) * (sx.stop - sx.start) >= min_area:
+            boxes.append([sx.start, sy.start, sx.stop, sy.stop])
+
+    # склеиваем куски одного предмета: пока есть близкие прямоугольники
+    merged = True
+    while merged:
+        merged = False
+        for i in range(len(boxes)):
+            for j in range(i + 1, len(boxes)):
+                a, b = boxes[i], boxes[j]
+                dx = max(0, max(a[0], b[0]) - min(a[2], b[2]))
+                dy = max(0, max(a[1], b[1]) - min(a[3], b[3]))
+                if dx < join and dy < join:
+                    boxes[i] = [min(a[0], b[0]), min(a[1], b[1]),
+                                max(a[2], b[2]), max(a[3], b[3])]
+                    boxes.pop(j); merged = True; break
+            if merged:
+                break
+    assert len(boxes) == n, f'{src}: пятен {len(boxes)}, ждали {n}'
+
+    # раскладываем построчно: новая строка, когда предмет начинается ниже
+    # середины предыдущего
+    boxes.sort(key=lambda b: b[1])
+    rows, cur = [], [boxes[0]]
+    for b in boxes[1:]:
+        if b[1] > (cur[-1][1] + cur[-1][3]) / 2:
+            rows.append(cur); cur = [b]
+        else:
+            cur.append(b)
+    rows.append(cur)
+    order = [b for r in rows for b in sorted(r, key=lambda b: b[0])]
+    assert len(order) == len(names), f'{src}: кусков {len(order)}, имён {len(names)}'
+
+    os.makedirs(dst, exist_ok=True)
+    for name, b in zip(names, order):
+        box = (max(0, b[0] - pad), max(0, b[1] - pad),
+               min(im.width, b[2] + pad), min(im.height, b[3] + pad))
+        im.crop(box).save(f'{dst}/{name}.png')
+        print(f'  {name:22} {box[2]-box[0]}×{box[3]-box[1]}')
+
+
+def _seams(profile, k, span=0.35):
+    """k-1 позиций разреза: там, где краски меньше всего, рядом с ожидаемой границей."""
+    n = len(profile)
+    cuts = []
+    for i in range(1, k):
+        c = i * n / k
+        w = int(span * n / k)
+        lo, hi = max(1, int(c - w)), min(n - 1, int(c + w))
+        seg = profile[lo:hi]
+        cuts.append(lo + int(np.argmin(seg)))
+    return cuts
+
+
+def seams(src, rows, names, dst='.', pad=10, thr=245):
+    """Режет лист, даже если предметы соприкасаются.
+
+    Пятна и щели не помогают, когда генератор поставил предметы вплотную.
+    Тогда режем по шву: берём профиль краски и ищем в нём самое светлое место
+    рядом с ожидаемой границей ячейки. Каждую ячейку потом обжимаем по её
+    собственным краям, так что небольшой промах шва ничего не портит.
+    """
+    im = Image.open(src).convert('RGB')
+    m = np.array(im.convert('L')) < thr
+    ys, xs = np.where(m)
+    y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+    sub = m[y0:y1, x0:x1]
+
+    hcuts = [0] + _seams(sub.sum(axis=1), len(rows)) + [sub.shape[0]]
+    os.makedirs(dst, exist_ok=True)
+    out = []
+    for r, k in enumerate(rows):
+        band = sub[hcuts[r]:hcuts[r + 1]]
+        vcuts = [0] + _seams(band.sum(axis=0), k) + [band.shape[1]]
+        for c in range(k):
+            cell = band[:, vcuts[c]:vcuts[c + 1]]
+            cys, cxs = np.where(cell)
+            out.append((x0 + vcuts[c] + cxs.min(), y0 + hcuts[r] + cys.min(),
+                        x0 + vcuts[c] + cxs.max() + 1, y0 + hcuts[r] + cys.max() + 1))
+    assert len(out) == len(names), f'{src}: ячеек {len(out)}, имён {len(names)}'
+    for name, b in zip(names, out):
+        box = (max(0, b[0] - pad), max(0, b[1] - pad),
+               min(im.width, b[2] + pad), min(im.height, b[3] + pad))
+        im.crop(box).save(f'{dst}/{name}.png')
+        print(f'  {name:22} {box[2]-box[0]}×{box[3]-box[1]}')
+
+
+def clean(path, thr=245, pad=10, share=0.15):
+    """Убирает с куска обрезки соседей.
+
+    После резки тесного листа в углу остаётся край чужого предмета. Признак
+    именно обрезка: пятно упирается в край кадра и заметно меньше главного.
+    Половинка лимона или листик внутрь кадра помещаются целиком, их это
+    правило не трогает.
+    """
+    from scipy import ndimage
+    im = Image.open(path).convert('RGB')
+    a = np.array(im)
+    m = np.array(im.convert('L')) < thr
+    lab, k = ndimage.label(m)
+    if k < 2:
+        return 0
+    sizes = ndimage.sum(m, lab, range(1, k + 1))
+    big = sizes.max()
+    h, w = m.shape
+    drop_ids = []
+    for i, (sy, sx) in enumerate(ndimage.find_objects(lab), start=1):
+        touches = (sy.start == 0 or sx.start == 0 or sy.stop == h or sx.stop == w)
+        if touches and sizes[i - 1] < share * big:
+            drop_ids.append(i)
+    if not drop_ids:
+        return 0
+    a[np.isin(lab, drop_ids)] = 255
+    im2 = Image.fromarray(a)
+    m2 = np.array(im2.convert('L')) < thr
+    ys, xs = np.where(m2)
+    im2.crop((max(0, xs.min() - pad), max(0, ys.min() - pad),
+              min(im2.width, xs.max() + 1 + pad),
+              min(im2.height, ys.max() + 1 + pad))).save(path)
+    return len(drop_ids)
+
+
 def whole(src, name, dst='.'):
     os.makedirs(dst, exist_ok=True)
     im = Image.open(src).convert('RGB')
