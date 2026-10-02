@@ -725,6 +725,144 @@ LESSONS = {
                 "Увидимся на уроке!</p>"}),
         ],
     },
+    "u2_hw2": {
+        "unit": "u2",
+        "unit_title": "Unit 2 · Food",
+        "unit_sort": 2,
+        "lesson_title": "Homework 2",
+        "lesson_sort": 1,
+        "kind": "homework",
+        # Обе части выгрузки одним уроком. Видео в выгрузке нет — блок стоит
+        # пустым, методисту останется вставить ссылку (строка в файле
+        # «доработать руками»). Из двух почти одинаковых заданий на запись
+        # голоса про одну и ту же картинку оставлено одно.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>Привет-привет!</h2>"
+                "<p>Ну что, готов к новой домашней работе? Она тебя уже ждёт. "
+                "Давай начинать!</p>"}),
+
+            ("video", {"title": "Посмотри видео и найди ответ на вопрос: What are they cooking? 🍰",
+                       "url": "", "provider": "youtube"}),
+
+            ("quiz", {"questions": [{
+                "q": "What are they cooking?",
+                "type": "single",
+                "options": [{"text": "cupcakes"}, {"text": "candies"},
+                            {"text": "a cake"}, {"text": "a pizza"}],
+                "correct": [2],
+            }]}),
+
+            ("match", {
+                "title": "Соедини картинку с описанием 🧾",
+                "pairs": [
+                    {"left_image": img("u2", "tray_potatoes_peas_onions"),
+                     "right": "There are some potatoes. There are some peas. There are some onions."},
+                    {"left_image": img("u2", "tray_milk_lemonade_juice"),
+                     "right": "There is some milk. There is some lemonade. There is some orange juice."},
+                    {"left_image": img("u2", "tray_biscuits_cake_chocolate"),
+                     "right": "There are some biscuits. There is some cake. There is some chocolate."},
+                    {"left_image": img("u2", "tray_cake_biscuits_sandwiches"),
+                     "right": "There is some cake. There are some biscuits. There are some sandwiches."},
+                    {"left_image": img("u2", "tray_peas_potatoes_nuts"),
+                     "right": "There are some peas. There are some potatoes. There are some nuts."},
+                    {"left_image": img("u2", "tray_water_juice_milk"),
+                     "right": "There is some water. There is some apple juice. There is some milk."},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "Прочитай диалог и вставь some или any",
+                "mode": "drag",
+                "image": img("u2", "lunchbox_roll_water"),
+                "text":
+                    "Kate: Guess what’s in my lunch box!\n"
+                    "Alice: There’s __some__ bread. I think there’s a roll.\n"
+                    "Kate: That’s right. What’s in it?\n"
+                    "Alice: Is there __any__ chicken?\n"
+                    "Kate: No, there isn’t. I don’t like chicken.\n"
+                    "Alice: OK, there isn’t __any__ chicken. Is there __any__ cheese?\n"
+                    "Kate: Cheese? Yes, there is. I love cheese.\n"
+                    "Alice: Is there anything else in your lunch box?\n"
+                    "Kate: Yes, there’s __some__ water too.",
+                "gaps_expected": 5,
+            }),
+
+            ("task", {
+                "title": "Напиши к каждому предложению вопрос и отрицание",
+                "needs_review": True,
+                "html":
+                    "<p><i>Образец:</i><br>There is some cheese.<br>"
+                    "Is there any cheese?<br>There isn’t any cheese.</p>"
+                    "<ol><li>There are some rolls.</li><li>There is some salad.</li>"
+                    "<li>There are some vegetables.</li><li>There is some soup.</li></ol>",
+            }),
+
+            ("speaking", {
+                "title": "Посмотри на картинку и расскажи, что на ней есть, а чего нет 🎤",
+                "needs_review": True,
+                "image": img("u2", "scene_picnic"),
+                "html": "<p>Используй <b>there is</b> / <b>there are</b> и "
+                        "<b>there isn’t</b> / <b>there aren’t</b>.</p>",
+            }),
+
+            ("match", {
+                "title": "Соедини картинку с описанием корзинки хозяина 🍎 🥦 🥕",
+                "pairs": [
+                    {"left_image": img("u2", "basket_vegetables_only"),
+                     "right": "There are some vegetables in my basket, but there isn’t any fruit."},
+                    {"left_image": img("u2", "basket_fruit_only"),
+                     "right": "There’s some fruit in my basket, but there aren’t any vegetables."},
+                    {"left_image": img("u2", "basket_mixed"),
+                     "right": "There’s some fruit and there are some vegetables in my basket."},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "Корзинка Дэйзи: вставь some или any, is или are",
+                "mode": "drag",
+                "image": img("u2", "basket_bananas_juice"),
+                "text":
+                    "__Are__ there __any__ bananas in your basket? "
+                    "Yes, there __are__ __some__ bananas.\n"
+                    "__Is__ there __any__ apple juice in your basket? "
+                    "Yes, there __is__ __some__ apple juice.\n"
+                    "__Are__ there __any__ tomatoes? No, there __aren’t__ __any__ tomatoes.",
+                "gaps_expected": 12,
+            }),
+
+            ("gaps", {
+                "title": "Песня про пикник: впиши продукты из списка ребят",
+                "mode": "drag",
+                "text":
+                    "Let’s make a picnic!\n"
+                    "It’s going to be such fun.\n"
+                    "We’re going to go shopping,\n"
+                    "For a picnic in the sun.\n"
+                    "Are there any __tomatoes__?\n"
+                    "Is there any __jam__?\n"
+                    "Yes, there are lots of yummy things,\n"
+                    "For me and my friend Pam!",
+                "gaps_expected": 2,
+            }),
+
+            ("task", {
+                "title": "Второй куплет придумай сам",
+                "needs_review": True,
+                "html":
+                    "<p>Впиши те продукты, которые пригодятся на пикнике тебе:</p>"
+                    "<p><i>Are there any …?<br>Is there any …?<br>"
+                    "Yes, there are lots of yummy things,<br>"
+                    "These sandwiches look good!</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_clap")}" alt="" style="height:180px"></p>'
+                "<h3>Спасибо тебе большое за твои старания!</h3>"
+                "<p>Ты огромный молодец. Увидимся на уроке 😊</p>"}),
+        ],
+    },
 }
 
 
