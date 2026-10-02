@@ -14,6 +14,7 @@ import argparse, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA = "@@MEDIA@@"
+MEDIA_URL = "https://classroom.wowteach.ru/media/"
 
 SUBJECTS = [
     ("English", "английский", "subj_english"),
@@ -25,6 +26,18 @@ SUBJECTS = [
     ("Art", "изобразительное искусство", "subj_art"),
     ("P.E.", "физкультура", "subj_pe"),
     ("History", "история", "subj_history"),
+]
+
+
+U2_FOOD = [
+    ("apple juice", "яблочный сок", "food_apple_juice"),
+    ("rolls", "булочки", "food_bread_rolls"),
+    ("cheese", "сыр", "food_cheese"),
+    ("water", "вода", "food_water"),
+    ("soup", "суп", "food_soup"),
+    ("vegetables", "овощи", "food_vegetables"),
+    ("lemonade", "лимонад", "food_lemonade"),
+    ("salad", "салат", "food_salad"),
 ]
 
 
@@ -653,6 +666,65 @@ LESSONS = {
             }),
         ],
     },
+    "u2_hw1": {
+        "unit": "u2",
+        "unit_title": "Unit 2 · Food",
+        "unit_sort": 2,
+        "lesson_title": "Homework 1",
+        "lesson_sort": 0,
+        "kind": "homework",
+        # Обе части выгрузки в одном уроке: «(1)» — словарный тренажёр на восемь
+        # слов, «(2)» — задания. Кроссворд Wordwall («посмотри на картинки и
+        # напиши слово») пересобран exact_input'ом с теми же картинками —
+        # СОСТАВ МОЙ.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>Привет-привет!</h2>"
+                "<p>Готов к домашнему заданию? Тогда давай начинать :)</p>"}),
+
+            ("flashcards", {"cards": [
+                {"text": en, "translation": ru, "audio_tts": en, "image": img("u2", f)}
+                for en, ru, f in U2_FOOD
+            ]}),
+
+            ("exact_input", {"items": [
+                {"image": img("u2", f), "prompt": "Посмотри на картинку и напиши слово",
+                 "accept": [en, en.lower(), en.capitalize()], "audio_tts": en}
+                for en, ru, f in U2_FOOD
+            ]}),
+
+            ("gaps", {
+                "title": "Заполни пропуски словами из кроссворда",
+                "mode": "drag",
+                "text":
+                    "1. Can I have two chicken __rolls__, please?\n"
+                    "2. Carrots and potatoes are __vegetables__.\n"
+                    "3. It’s usually yellow or white. — __cheese__!\n"
+                    "4. You wash your face with it, and you can drink it. — __water__!\n"
+                    "5. You drink this, it’s sweet. — __apple juice__!\n"
+                    "6. It’s usually hot and you need a spoon to eat it. — __soup__!",
+                "gaps_expected": 6,
+            }),
+
+            ("sequence", {
+                "title": "Составь диалог — расставь реплики по порядку",
+                "items": [
+                    {"text": "I’m hungry."},
+                    {"text": "Would you like a chicken roll?"},
+                    {"text": "No, thanks. I don’t like chicken."},
+                    {"text": "Would you like a cheese sandwich?"},
+                    {"text": "Yes, please. I’d love one."},
+                ],
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Супер!</h3>"
+                "<p>Большое спасибо за домашнее задание. Ты отлично поработал сегодня. "
+                "Увидимся на уроке!</p>"}),
+        ],
+    },
 }
 
 
@@ -758,6 +830,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--lesson", required=True)
     ap.add_argument("--sql", help="записать SQL в файл")
+    ap.add_argument("--chunks", metavar="LESSON_ID",
+                    help="печатать вставки блоков кусками по три, готовыми для "
+                         "execute_sql (длинный do-блок отваливается по таймауту)")
+    ap.add_argument("--per-chunk", type=int, default=3)
     args = ap.parse_args()
 
     lesson = LESSONS[args.lesson]
@@ -771,6 +847,20 @@ def main():
 
     print(f"Проверка пройдена: {len(lesson['blocks'])} блоков, "
           f"типы: {', '.join(t for t, _ in lesson['blocks'])}", file=sys.stderr)
+    if args.chunks:
+        rows = []
+        for n, (btype, payload) in enumerate(lesson["blocks"]):
+            clean = {k: v for k, v in payload.items() if k != "gaps_expected"}
+            js = json.dumps(clean, ensure_ascii=False)
+            rows.append(f"('{args.chunks}', '{btype}', replace($blk${js}$blk$, "
+                        f"'@@MEDIA@@', '{MEDIA_URL}')::jsonb, {n})")
+        for i in range(0, len(rows), args.per_chunk):
+            print("-- кусок", i // args.per_chunk + 1)
+            print("insert into classroom_blocks (lesson_id, type, payload, sort_order) values")
+            print(",\n".join(rows[i:i + args.per_chunk]))
+            print("returning sort_order, type;\n")
+        return
+
     sql = sql_for(args.lesson, lesson)
     if args.sql:
         with open(args.sql, "w", encoding="utf-8") as f:
