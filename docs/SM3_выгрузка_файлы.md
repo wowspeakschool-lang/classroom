@@ -56,5 +56,37 @@ Homework 3 `13taPLa_A8bQPLktY_WuFlL1ikqz1mNth`.
 parentId = '<id папки юнита>'
 ```
 
-Папка SM3 целиком — `parentId = '1AOaFvFEhGQ_wLjZEcTZ5DbYNEk3W5M-3'` (в ней
-лежат папки юнитов и учебник `SB.pdf`).
+Папка SM3 целиком — `parentId = '1i0n65ZsCIE7O5kKzx8kF19IvdwNWrCye'` (в ней
+папки `Unit 1`…`Unit 9`, `Final Test` и учебник `SB.pdf`, 182 МБ — через
+коннектор не скачивается, предел 10 МБ).
+
+| Юнит | id папки |
+|---|---|
+| Unit 1 | `11n9OUJMZNylYTw74P4QJJk6cruf4JFKV` |
+| Unit 2 | `1_GoOaodMZcLU7Lax3PABDykuVBw8RK9K` |
+| Unit 3 | `19w2ygZLlyq4eZd6A8J6oUxW36ZoAUFc8` |
+| Unit 4 | `18ryKOtfb9FFAufOxtCoqF2ZfMRezqN69` |
+| Unit 5 | `1SQ5g-yNDrL6y6np6rSwup6SKsCju0lbQ` |
+| Unit 6 | `1mINuJdaEmlo-nHZ7Y2F3SvAqQf2ClFet` |
+| Unit 7 | `14de98KcGvlhB08-2Pzu7X0Y7uw-eDTUp` |
+| Unit 8 | `19PXVjf3Vkst9l9a9tcEBXxZYP1Lj6YnO` |
+| Unit 9 | `1w1Xs41E-PKy1_NL1xa_72TBoUMGntPXD` |
+| Final Test | `1REKAMJPUXek1tKnQ7jY_UraULwv9igPp` |
+
+## Unit 3 — папка `19w2ygZLlyq4eZd6A8J6oUxW36ZoAUFc8`
+
+| Файл | txt | pdf |
+|---|---|---|
+| Homework 1 (1) | `1eP0oiLP8bUd4qNoHDhADUnfqKzLgvSmM` | `1BfQBVS8mIgykYhRkTMbFqX9GGvbDuKFa` |
+| Homework 1 (2) | `1w3qZSg4g8dyRPnF0ugc5Xd9cT_-otBcs` | `1E3Y7fnpS91VWR_s13C1OV0KG-MafTkNC` |
+| Homework 2 | `1dAd4uSK78zEblht7PbtBpP7SVo0aVzQ3` | `1wRT1N2msWhDSKQe5BLoweDv6hStC_4mE` |
+| Homework 3 | `1B3xuSbpp0f_8KamK_83qWUwOIf0mpEn6` | `1Z0s2vMGfMolgUKKh6daQF4u-tNaGnO4W` |
+| Homework 4 (1) | `1k0hTaeRPFLfjJE3iFHHQI00F63ck_GLS` | `10gdVMy2Pq0f72dfae07FjQi36Hmcy6Lh` |
+| Homework 4 (2) | `1hZpb7MqoyoZZ8DMD6RqbmtFdpnGi-t-H` | `1Z2GFSwAuaKl501D2nb9KE0JITR1WUn7A` |
+| Homework 5 | `1eeRrFgCqU2CC5yuuX-nsc-7dtETTY_U2` | `1-I_BD2uaTcU42vLqS82y6i43FmOSJQiU` |
+| Homework 6 | `15dBF-86diN1brSSR85KZ4nGBIe-rAtTZ` | `1dcnhZgcGqDNnRXsIdHuuVYD6VPjxlN1d` |
+| Homework 7 (1) | `1GoBER6CfVsx039Yux4bJOCPid5Gk3S6G` | `1L4vLuGqbDnPePwN07vVxhVn-o1LY4afK` |
+| Homework 7 (2) | `1R3HH_SK_4D4w-nPnSc0sklDO2VAWA76Z` | `1FJwz4fOfld7evwLMEqlIWvlby8PS8hIX` |
+| Test | `1f3D2EyLGNhu8SDxEStrU6tf8f34j87mh` | `1sSJ2Lyo0UvyaCSqzNedalCQodhU_ponK` |
+
+Пары «(1)» и «(2)» — это **одна** домашка, залитая одним уроком.

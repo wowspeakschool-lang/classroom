@@ -41,6 +41,18 @@ U2_FOOD = [
 ]
 
 
+U3_CHORES = [
+    ("tidy up", "убираться", "chore_tidy_up"),
+    ("do the shopping", "ходить за покупками", "chore_do_shopping"),
+    ("take the dog for a walk", "выгуливать собаку", "chore_walk_dog"),
+    ("wash up", "мыть посуду", "chore_wash_up"),
+    ("sweep", "подметать", "chore_sweep"),
+    ("cook", "готовить", "chore_cook"),
+    ("dry the dishes", "вытирать посуду", "chore_dry_dishes"),
+    ("feed the dog", "кормить собаку", "chore_feed_dog"),
+]
+
+
 def img(unit, name):
     return f"{MEDIA}sm3/{unit}/{name}.webp"
 
@@ -1369,6 +1381,97 @@ LESSONS = {
                     "A: Would you like a cheese sandwich?<br>"
                     "B: Yes, please. I\u2019d love one.</i></p>",
             }),
+        ],
+    },
+    "u3_hw1": {
+        "unit": "u3",
+        "unit_title": "Unit 3 \u00b7 At home",
+        "unit_sort": 3,
+        "lesson_title": "Homework 1",
+        "lesson_sort": 0,
+        "kind": "homework",
+        # Обе части выгрузки одним уроком: «(1)» — словарный тренажёр на восемь
+        # дел по дому, «(2)» — задания. Блок 8 в выгрузке был «Картинка» со
+        # сканом образца («Write about you»); у нас это текст — так читается
+        # лучше, а содержание то же.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>Привет-привет!</h2>"
+                "<p>Сегодня мы будем изучать слова, которые ты проходил на уроке. "
+                "Чем ты любишь заниматься дома? Выполни задания, повтори слова "
+                "и ответь на вопрос :) Готов начать?</p>"}),
+
+            ("flashcards", {"cards": [
+                {"text": en, "translation": ru, "audio_tts": en, "image": img("u3", f)}
+                for en, ru, f in U3_CHORES
+            ]}),
+
+            ("quiz", quiz_ru_to_en(U3_CHORES)),
+
+            ("exact_input", {"items": [
+                # en уже строчными, поэтому en.lower() дал бы дубль в accept
+                {"image": img("u3", f), "prompt": "Посмотри на картинку и напиши, что здесь делают",
+                 "accept": [en, en.capitalize()], "audio_tts": en}
+                for en, ru, f in U3_CHORES
+            ]}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("good_luck_clover")}" alt="" style="height:180px"></p>'
+                "<h3>Это дополнительная часть домашней работы</h3>"
+                "<p>Здесь тебя ждут очень интересные задания. Её можно выполнить "
+                "по желанию — но если ты всё-таки её сделаешь, будет просто отлично \U0001f60a</p>"}),
+
+            ("match", {
+                "title": "Посмотри внимательно на слова и соедини первую часть фразы со второй",
+                "pairs": [
+                    {"left": "sweep", "right": "the floor", "right_audio_tts": "sweep the floor"},
+                    {"left": "wash", "right": "up", "right_audio_tts": "wash up"},
+                    {"left": "do", "right": "the shopping", "right_audio_tts": "do the shopping"},
+                    {"left": "tidy", "right": "up your room", "right_audio_tts": "tidy up your room"},
+                    {"left": "cook", "right": "the dinner", "right_audio_tts": "cook the dinner"},
+                    {"left": "dry", "right": "the dishes", "right_audio_tts": "dry the dishes"},
+                    {"left": "take", "right": "the dog for a walk",
+                     "right_audio_tts": "take the dog for a walk"},
+                    {"left": "feed", "right": "the dog", "right_audio_tts": "feed the dog"},
+                ],
+            }),
+
+            ("match", {
+                "title": "Молодец! Давай ещё потренируемся — соедини картинки с названиями",
+                "pairs": [
+                    {"left_image": img("u3", "chore_tidy_up"), "right": "tidy up",
+                     "right_audio_tts": "tidy up"},
+                    {"left_image": img("u3", "chore_sweep"), "right": "sweep",
+                     "right_audio_tts": "sweep"},
+                    {"left_image": img("u3", "chore_feed_dog"), "right": "feed the dog",
+                     "right_audio_tts": "feed the dog"},
+                    {"left_image": img("u3", "chore_dry_dishes"), "right": "dry the dishes",
+                     "right_audio_tts": "dry the dishes"},
+                    {"left_image": img("u3", "chore_do_shopping"), "right": "do the shopping",
+                     "right_audio_tts": "do the shopping"},
+                    {"left_image": img("u3", "chore_wash_up"), "right": "wash up",
+                     "right_audio_tts": "wash up"},
+                ],
+            }),
+
+            ("text", {"html":
+                "<h3>WOW! Ты справился с основными заданиями. Осталось ещё одно \u2014 прочитай образец</h3>"
+                "<p><b>Write about you.</b></p>"
+                "<p><i>I like taking the dog for a walk. I don\u2019t like tidying up.</i></p>"}),
+
+            ("task", {
+                "title": "Теперь расскажи про себя!",
+                "needs_review": True,
+                "html":
+                    "<p>Что ты любишь и не любишь делать по дому? Ориентируйся на образец выше.</p>"
+                    "<p>Не забудь рассказать свой текст на уроке :)</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_clap")}" alt="" style="height:180px"></p>'
+                "<h3>Вот и всё, домашняя работа выполнена!</h3>"
+                "<p>Огромное спасибо за твой труд. Увидимся на занятии!</p>"}),
         ],
     },
 }
