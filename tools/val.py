@@ -21,7 +21,12 @@ SHARED = names(f'{ROOT}/media/shared')
 RX = r"\(v_lesson, '(\w+)', replace\(\$blk\$(.*?)\$blk\$, '@@MEDIA@@', v_media\)::jsonb, (\d+)\)"
 bad = 0
 
-for fn in sorted(glob.glob(f'{SQ}/*.sql')):
+FILES = sorted(glob.glob(f'{SQ}/*.sql'))
+if not FILES:
+    raise SystemExit(f'в {SQ} нет ни одного .sql — проверять нечего, '
+                     'это не «ошибок 0», а несобранный юнит')
+
+for fn in FILES:
     s = open(fn).read()
     print('=' * 70); print(fn)
     blocks = re.findall(RX, s, re.S)

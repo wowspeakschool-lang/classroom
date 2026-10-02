@@ -155,7 +155,7 @@ h2.text('<p>Давай повторим всё, что выучили сегод
 h2.text('<p>Посмотри маленькое видео и обрати внимание на слова и на их окончание :)</p>')
 
 h2.add('video', {'title': 'Видео про окончание -ing',
-                 'url': '@@MEDIA@@sm2/u8/sm2_u8_hw2_b4.mp4', 'provider': 'file'},
+                 'url': 'https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm2/u8/sm2_u8_hw2_b4.mp4', 'provider': 'file'},
        'видео прислала методист')
 
 h2.add('match', {'title': 'Видео посмотрели! Теперь давай соединим картинку с названием '
@@ -356,7 +356,7 @@ h4.text('<p>Прослушай историю и найди ответ на во
         'комикс «The Football Club» из выгрузки')
 
 h4.add('video', {'title': 'Аудио к истории',
-                 'url': '@@MEDIA@@sm2/u8/sm2_u8_hw4_b4.mp3', 'provider': 'file'},
+                 'url': 'https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm2/u8/sm2_u8_hw4_b4.mp3', 'provider': 'file'},
        'медиафайл прислала методист')
 
 h4.add('quiz', {'title': 'Итак, давай ответим на вопрос', 'questions': [
@@ -456,7 +456,7 @@ h5.text('<p>Послушай рассказ Мэдди о её спортивн�
         + img('maddie'))
 
 h5.add('video', {'title': 'Аудио: рассказ Мэдди',
-                 'url': '@@MEDIA@@sm2/u8/sm2_u8_hw5_b6.mp3', 'provider': 'file'},
+                 'url': 'https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm2/u8/sm2_u8_hw5_b6.mp3', 'provider': 'file'},
        'аудио прислала методист')
 
 h5.add('task', {'title': 'Внимание, вопросы о Мэдди!',
@@ -709,7 +709,7 @@ t.text('<h3>LISTENING</h3><p>Послушай запись. Прочитай п�
        '«Верно» или «Неверно».</p>')
 
 t.add('video', {'title': 'Аудио к заданию LISTENING',
-                'url': '@@MEDIA@@sm2/u8/sm2_u8_test_b14.mp3', 'provider': 'file'},
+                'url': 'https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm2/u8/sm2_u8_test_b14.mp3', 'provider': 'file'},
       'аудио прислала методист')
 
 t.add('truefalse', {'title': 'Верно или неверно?', 'statements': [

@@ -406,7 +406,7 @@ h4.text('<p>Прочитай и прослушай текст. Правильн�
         'комикс из выгрузки, кадры 1–6 и 7–8')
 
 h4.add('video', {'title': 'Аудио к истории',
-                 'url': '@@MEDIA@@sm2/u6/sm2_u6_hw4_b5.mp3', 'provider': 'file'},
+                 'url': 'https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm2/u6/sm2_u6_hw4_b5.mp3', 'provider': 'file'},
        'медиафайл прислала методист')
 
 h4.add('gaps', {'title': 'Отлично! Мы прочитали историю и немного вспомнили, о чём читали '
@@ -735,7 +735,7 @@ t.text('<h3>LISTENING</h3><p>Послушай запись. Прочитай п�
        '«Верно» или «Неверно».</p>')
 
 t.add('video', {'title': 'Аудио к заданию LISTENING',
-                'url': '@@MEDIA@@sm2/u6/sm2_u6_test_b13.mp3', 'provider': 'file'},
+                'url': 'https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm2/u6/sm2_u6_test_b13.mp3', 'provider': 'file'},
       'аудио прислала методист')
 
 t.add('truefalse', {'title': 'Верно или неверно?', 'statements': [

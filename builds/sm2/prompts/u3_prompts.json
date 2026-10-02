@@ -1,0 +1,188 @@
+[
+ [
+  "p_hospital",
+  "ДЗ 1 блок 3, ДЗ 1 блок 4, ДЗ 1 блок 6, ДЗ 1 блок 15, ДЗ 2 блок 7, Тест блок 2, Тест блок 5",
+  "A town hospital building with a big red cross on the front, white and light blue walls, a small ambulance parked beside it",
+  "объект"
+ ],
+ [
+  "p_shop",
+  "ДЗ 1 блок 3, ДЗ 1 блок 4, ДЗ 1 блок 6, ДЗ 1 блок 17, Тест блок 2",
+  "A small town corner shop with a striped awning and a bright shop window full of goods, a door with steps",
+  "объект"
+ ],
+ [
+  "p_cafe",
+  "ДЗ 1 блок 3, ДЗ 1 блок 4, ДЗ 1 блок 6, ДЗ 1 блок 17, Тест блок 2, Тест блок 4",
+  "A small street cafe building with a red and white striped awning, two round tables with chairs outside, a big coffee cup on the roof sign board with no writing",
+  "объект"
+ ],
+ [
+  "p_train_station",
+  "ДЗ 1 блок 3, ДЗ 1 блок 4, ДЗ 1 блок 6, ДЗ 1 блок 17, ДЗ 2 блок 9, Тест блок 2",
+  "A town train station building with a clock on the front and a modern passenger train standing at the platform beside it",
+  "объект"
+ ],
+ [
+  "p_park",
+  "ДЗ 1 блок 3, ДЗ 1 блок 4, ДЗ 1 блок 6, ДЗ 1 блок 15, ДЗ 2 блок 8, Тест блок 2",
+  "A small town park: green lawn, three leafy trees, a wooden bench, a curved path and a small pond",
+  "сцена"
+ ],
+ [
+  "p_street",
+  "ДЗ 1 блок 3, ДЗ 1 блок 4, ДЗ 1 блок 6, ДЗ 1 блок 17, Тест блок 2",
+  "A quiet town street: a grey road with white markings, pavements on both sides, a few small colourful houses along it, street lamps and trees",
+  "сцена"
+ ],
+ [
+  "p_cinema",
+  "ДЗ 1 блок 3, ДЗ 1 блок 4, ДЗ 1 блок 6, ДЗ 1 блок 15, ДЗ 1 блок 17, ДЗ 2 блок 5, Тест блок 8",
+  "A town cinema building with a big marquee canopy of round yellow lights and a large film reel on the roof, red and gold front, no writing anywhere",
+  "объект"
+ ],
+ [
+  "p_swimming_pool",
+  "ДЗ 1 блок 3, ДЗ 1 блок 4, ДЗ 1 блок 6, ДЗ 1 блок 15, ДЗ 2 блок 5, Тест блок 3",
+  "An outdoor swimming pool building: a bright blue rectangular pool with lane ropes, a blue water slide and sun loungers around it",
+  "объект"
+ ],
+ [
+  "p_playground",
+  "ДЗ 1 блок 3, ДЗ 1 блок 4, ДЗ 1 блок 6, ДЗ 1 блок 15, ДЗ 1 блок 17, Тест блок 3",
+  "A childrens playground with a red and yellow climbing frame, a slide, two swings and a sandpit on green grass",
+  "объект"
+ ],
+ [
+  "p_bus_stop",
+  "ДЗ 1 блок 3, ДЗ 1 блок 4, ДЗ 1 блок 6, ДЗ 1 блок 15, Тест блок 3",
+  "A town bus stop: a glass shelter with a curved roof and a yellow bench, a round bus sign on a pole, grey road in front",
+  "объект"
+ ],
+ [
+  "p_sweet_shop",
+  "Тест блок 6",
+  "A small sweet shop building with a pink and white striped awning and a window full of colourful cakes, cupcakes and candy jars, no writing",
+  "объект"
+ ],
+ [
+  "p_school",
+  "Тест блок 7",
+  "A cheerful town school building, yellow walls with a red roof, a clock above the entrance, wide steps and two trees beside it, no writing",
+  "объект"
+ ],
+ [
+  "m_market",
+  "ДЗ 6 блок 3, ДЗ 7 блок 9",
+  "An open air street market: two market stalls with striped canopies, crates of colourful fruit and vegetables on the counters",
+  "объект"
+ ],
+ [
+  "m_car_park",
+  "ДЗ 6 блок 3, ДЗ 7 блок 9",
+  "A multi storey car park building, open concrete levels with several small colourful cars parked on them",
+  "объект"
+ ],
+ [
+  "m_monument",
+  "ДЗ 6 блок 3, ДЗ 7 блок 9",
+  "A stone monument in a small square: a tall pedestal with a carved stone lion on top, a few steps around it",
+  "объект"
+ ],
+ [
+  "m_sports_centre",
+  "ДЗ 6 блок 3, ДЗ 7 блок 9",
+  "A modern sports centre building with a curved roof, big glass front and a running track and basketball hoop beside it, no writing",
+  "объект"
+ ],
+ [
+  "m_museum",
+  "ДЗ 6 блок 3, ДЗ 7 блок 9",
+  "A classical museum building with white columns, a triangular pediment and wide stone steps, two stone statues at the sides, no writing",
+  "объект"
+ ],
+ [
+  "o_car",
+  "ДЗ 6 блок 4 — запасная, нарисована, но в урок не поставлена",
+  "A small red family car seen from the front three quarter view, shiny and friendly",
+  "объект"
+ ],
+ [
+  "o_dinosaur",
+  "🟥 ДЗ 6 блок 4 — нужна, если хотите там картинки вместо слов",
+  "A dinosaur skeleton on a museum stand, pale bones, long neck and tail",
+  "объект"
+ ],
+ [
+  "o_vegetables",
+  "ДЗ 6 блок 4 — запасная, нарисована, но в урок не поставлена",
+  "A wicker basket filled with fresh fruit and vegetables: apples, carrots, tomatoes, a cabbage and bananas",
+  "объект"
+ ],
+ [
+  "o_ball",
+  "🟥 ДЗ 6 блок 4 — нужна, если хотите там картинки вместо слов",
+  "A football and a basketball lying side by side next to a pair of blue dumbbells",
+  "объект"
+ ],
+ [
+  "b_in_front_of",
+  "ДЗ 3 блок 16, ДЗ 7 блок 13",
+  "A large brown cardboard box and a red ball; the red ball is clearly IN FRONT OF the box, nearer to the viewer, the box behind it",
+  "объект"
+ ],
+ [
+  "b_behind",
+  "🟥 запасная «behind» с мячиком — сейчас вместо неё собака у дома (ДЗ 3 блок 16, ДЗ 7 блок 13)",
+  "A large brown cardboard box standing on the ground and a small red ball on the ground BEHIND the box, further from the viewer, so the box hides the lower part of the ball and only the upper half of the ball is visible above and past the box; the ball is NOT resting on top of the box",
+  "объект"
+ ],
+ [
+  "b_next_to",
+  "ДЗ 3 блок 16, ДЗ 7 блок 13",
+  "A large brown cardboard box and a red ball; the red ball is NEXT TO the box, standing beside it on the same line, not in front and not behind",
+  "объект"
+ ],
+ [
+  "b_between",
+  "ДЗ 3 блок 16, ДЗ 7 блок 13",
+  "Two brown cardboard boxes standing apart with a wide gap between them, and one red ball on the ground in the gap BETWEEN the two boxes; all three objects small in the middle of the frame",
+  "объект"
+ ],
+ [
+  "t_toy_shop",
+  "Тест блок 3",
+  "A toy shop building with a striped awning and a big window full of toys: a teddy bear, a toy car and building blocks, no writing",
+  "объект"
+ ],
+ [
+  "t_dog_behind",
+  "ДЗ 3 блок 16, ДЗ 7 блок 13, Тест блок 3",
+  "A house with a red roof in the middle of the picture, and a small friendly orange dog standing on the ground BEHIND the house at the far side, so only the dogs head and ears appear above the roof line; the dog is much smaller than the house and is not on top of it",
+  "объект"
+ ],
+ [
+  "t_cat_between",
+  "Тест блок 3",
+  "A small house with a red roof on the left and a toy shop with a striped awning on the right, standing apart; a grey cat sits on the ground BETWEEN the two buildings",
+  "сцена"
+ ],
+ [
+  "grace_girl",
+  "ДЗ 5 блок 3",
+  "A friendly young girl with long brown hair wearing a yellow jumper, smiling at the viewer, waist up portrait",
+  "объект"
+ ],
+ [
+  "town_a",
+  "ДЗ 1 блок 11",
+  "A small colourful cartoon town seen from above at an angle: a hospital with a red cross, a school, a cafe, a park with trees and a playground, streets with a few cars, no writing anywhere",
+  "сцена"
+ ],
+ [
+  "town_b",
+  "ДЗ 1 блок 12",
+  "A small colourful cartoon town seen from above at an angle: a cinema, a train station with a train, a swimming pool, a shop and a bus stop, streets with a few cars, no writing anywhere",
+  "сцена"
+ ]
+]

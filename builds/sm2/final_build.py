@@ -22,7 +22,7 @@ t.text(img('banner_listen', 200) + '<h3>LISTENING</h3>'
        '<p>Послушай аудио и выполни задание ниже.</p>',
        'баннер «Listening» из выгрузки')
 
-t.add('video', {'title': 'Аудио к заданию «Соедини человека с картинкой»', 'url': '@@MEDIA@@sm2/u9/sm2_final_b3.mp3', 'provider': 'file'},
+t.add('video', {'title': 'Аудио к заданию «Соедини человека с картинкой»', 'url': 'https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm2/u9/sm2_final_b3.mp3', 'provider': 'file'},
       'медиафайл прислала методист')
 
 t.add('match', {'title': 'Послушай аудио и соедини человека с картинкой',

@@ -305,7 +305,7 @@ h4.text('<p>На этот раз наши друзья не смогут отп�
         '<p>Послушай аудио и узнай, как ей это удалось.</p>' + img('mess_room'))
 
 h4.add('video', {'title': 'Аудио: история Tidy Up!',
-                 'url': '@@MEDIA@@sm2/u5/sm2_u5_hw4_b4.mp3', 'provider': 'file'},
+                 'url': 'https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm2/u5/sm2_u5_hw4_b4.mp3', 'provider': 'file'},
        'медиафайл прислала методист')
 
 LISTEN = ['sweater', 'jeans', 'skirt', 'shoes', 'books', 'bike', 'balls']
@@ -384,7 +384,7 @@ h5.text('<p>Молодец, ты справился с первым задани
         'своим делом. Послушай аудио и выясни, кто чем занят.</p>')
 
 h5.add('video', {'title': 'Аудио: кто чем занят',
-                 'url': '@@MEDIA@@sm2/u5/sm2_u5_hw5_b6.mp3', 'provider': 'file'},
+                 'url': 'https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm2/u5/sm2_u5_hw5_b6.mp3', 'provider': 'file'},
        'медиафайл прислала методист')
 
 h5.add('hotspot', {'title': 'Послушай аудио выше и соедини имена с персонажами на фото',

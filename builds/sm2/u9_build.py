@@ -286,7 +286,7 @@ h4.text('<p>Читай и слушай:</p>' + img('story_hol1') + img('story_ho
         'комикс из выгрузки, кадры 1–4 и 5–6')
 
 h4.add('video', {'title': 'Аудио к истории',
-                 'url': '@@MEDIA@@sm2/u9/sm2_u9_hw4_b4.mp3', 'provider': 'file'},
+                 'url': 'https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm2/u9/sm2_u9_hw4_b4.mp3', 'provider': 'file'},
        'медиафайл прислала методист')
 
 h4.add('quiz', {'title': 'Отлично! Проверим, как внимательно ты читал?', 'questions': [

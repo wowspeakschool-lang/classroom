@@ -347,7 +347,7 @@ h4.text('<p>Давай послушаем аудио и найдём ответ 
         '<i>Where would children like to go?</i></p>')
 
 h4.add('video', {'title': 'Аудио к истории',
-                 'url': '@@MEDIA@@sm2/u7/sm2_u7_hw4_b4.mp3', 'provider': 'file'},
+                 'url': 'https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm2/u7/sm2_u7_hw4_b4.mp3', 'provider': 'file'},
        'медиафайл прислала методист')
 
 h4.text('<p>Прочитай историю:</p>' + img('story_bus'),
@@ -671,7 +671,7 @@ t.add('match', {'title': 'Прочитай текст. Найди каждый �
 t.text('<h3>LISTENING</h3><p>Послушай запись и выбери правильный ответ.</p>')
 
 t.add('video', {'title': 'Аудио к заданию LISTENING',
-                'url': '@@MEDIA@@sm2/u7/sm2_u7_test_b14.mp3', 'provider': 'file'},
+                'url': 'https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm2/u7/sm2_u7_test_b14.mp3', 'provider': 'file'},
       'аудио прислала методист')
 
 t.add('quiz', {'title': 'Послушай запись. Выбери правильный ответ', 'questions': [
