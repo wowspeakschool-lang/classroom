@@ -10,11 +10,25 @@ def min_rgb_of(im):
     arr = np.array(im.convert('RGB')).astype(np.int32)
     return np.minimum(np.minimum(arr[...,0], arr[...,1]), arr[...,2]).astype(np.uint8)
 
+# порог фона: 240 — как было; строже (250 + бесцветность) — для листов, где
+# белое внутри рисунка (облака, экраны, бумага) уходило вместе с фоном
+BG_MIN, BG_GREY = 240, 255
+# KEEP_SOFT: маска рисунка — всё непрозрачное, что связано с тёмными частями,
+# а не только пиксели темнее 235 (+grow). Иначе белая середина облака пропадает.
+KEEP_SOFT = False
+
+def widen_keep(alpha, m):
+    if not KEEP_SOFT:
+        return m
+    lab, n = label(alpha > 0)
+    ids = np.unique(lab[m & (alpha > 0)]); ids = ids[ids > 0]
+    return m | np.isin(lab, ids)
+
 def make_soft_transparent(im):
     arr = np.array(im.convert('RGBA'))
     r,g,b = arr[...,0].astype(np.int32), arr[...,1].astype(np.int32), arr[...,2].astype(np.int32)
     min_rgb = np.minimum(np.minimum(r,g),b).astype(np.uint8)
-    bg = min_rgb >= 240
+    bg = (min_rgb >= BG_MIN) & ((np.maximum(np.maximum(r,g),b) - min_rgb) <= BG_GREY)
     labeled,_ = label(bg)
     edge=set(); h,w = labeled.shape
     for y in [0,h-1]: edge.update(np.unique(labeled[y,:]).tolist())
@@ -74,7 +88,7 @@ def row(sheet, y0, y1, words, outdir, min_area=600, pad=6, grow=3, thr=235, gap=
         ax1=min(reg.shape[1],k['x1']+pad); ay1=min(reg.shape[0],k['y1']+pad)
         crop=im.crop((ax0,y0+ay0,ax1,y0+ay1))
         rgba=np.array(make_soft_transparent(crop))
-        m=keep[ay0:ay1,ax0:ax1]
+        m=widen_keep(rgba[...,3], keep[ay0:ay1,ax0:ax1])
         rgba[...,3]=(rgba[...,3]*m).astype(np.uint8)
         to_square(Image.fromarray(rgba,'RGBA')).save(os.path.join(outdir,fname(w)))
     return True
@@ -116,7 +130,8 @@ def row_x(sheet, y0, y1, words, outdir, cuts, min_area=150, pad=6, grow=3, thr=2
             solid = binary_erosion(binary_fill_holes(binary_dilation(light, iterations=fill_close)), iterations=fill_close)
         else:
             solid = np.zeros((ay1 - ay0, ax1 - ax0), bool)
-        rgba[..., 3] = (rgba[..., 3] * keep[ay0:ay1, ax0:ax1]).astype(np.uint8)
+        m = widen_keep(rgba[..., 3], keep[ay0:ay1, ax0:ax1] & inside[ay0:ay1, ax0:ax1]) & inside[ay0:ay1, ax0:ax1]
+        rgba[..., 3] = (rgba[..., 3] * m).astype(np.uint8)
         rgba[..., 3] = np.maximum(rgba[..., 3], solid.astype(np.uint8) * 255)
         to_square(Image.fromarray(rgba, 'RGBA')).save(os.path.join(outdir, fname(w)))
     return True

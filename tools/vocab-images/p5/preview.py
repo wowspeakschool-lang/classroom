@@ -12,10 +12,10 @@ for n in map(int, sys.argv[1:]):
     sh = Image.new('RGB', (1520, rows * 330 + 20), 'white'); dr = ImageDraw.Draw(sh)
     for k, f in enumerate(fs):
         x = 10 + k % 5 * 300; y = 10 + k // 5 * 330
-        bg = Image.new('RGB', (290, 290), (214, 230, 245)); bd = ImageDraw.Draw(bg)
+        bg = Image.new('RGB', (290, 290), (40, 40, 90)); bd = ImageDraw.Draw(bg)
         for i in range(0, 290, 20):
             for j in range(0, 290, 20):
-                if (i // 20 + j // 20) % 2: bd.rectangle((i, j, i + 19, j + 19), fill=(236, 242, 250))
+                if (i // 20 + j // 20) % 2: bd.rectangle((i, j, i + 19, j + 19), fill=(52, 52, 104))
         im = Image.open(f'out/{n}/{f}').resize((290, 290)); bg.paste(im, (0, 0), im); sh.paste(bg, (x, y))
         dr.text((x + 4, y + 294), f[:-4].replace('_', ' '), fill='black', font=font)
     sh.save(f'preview/{n}.png')

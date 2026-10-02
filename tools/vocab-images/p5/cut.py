@@ -8,9 +8,13 @@ from PIL import Image
 sys.path.insert(0, '..')
 from lib import row, row_x, clusters_of, min_rgb_of, fname
 from sheets import S
+import lib
+# фон — только чисто-белое и бесцветное; белое внутри рисунка остаётся
+lib.BG_MIN, lib.BG_GREY, lib.KEEP_SOFT = 250, 8, True
 
 # Сцены с белым содержимым (лёд, снег): фон вырезается вместе с ним — заливаем сцену целиком
-FILL = {'spectacular', 'snowstorm', 'recover', 'modern', 'clear up', 'come out', 'ancient', 'power', 'pump', 'crop', 'habitat', 'landscape', 'boarding school', 'break up', 'do well', 'do badly', 'environment', 'classroom', 'lunchtime', 'textbook', 'timetable', 'whiteboard', 'reach', 'sail', 'tour', 'on board', 'block', 'comment', 'follow', 'like', 'post', 'share', 'tag', 'take down', 'barbecue', 'bite', 'freeze', 'fry', 'grill', 'steam', 'air conditioning', 'facilities', 'health centre', 'historic buildings', 'modern architecture', 'open spaces', 'ruins', 'season', 'valley', 'wildlife', 'explain', 'insist', 'suggest', 'direct', 'professional', 'complain', 'nasty', 'unexpected', 'wonder', 'remind', 'warn'}
+FILL_OLD = None  # заливка дыр больше не нужна: её заменил строгий порог фона
+FILL = set()
 
 # Листы, где генератор разложил картинки иначе, чем в промпте
 # Границы клеток вручную: {лист: {номер ряда: [границы]}}; граница-ступенька (y, x_выше, x_ниже)
@@ -146,7 +150,50 @@ def cut(sheet, path, out='out'):
     for _, t, _ in items:
         if t in OUTLINE_ONLY:
             outline_only(f'{out}/{sheet}/{fname(t)}'); report.append(f'  {t}: по контуру')
+    for _, t, _ in items:
+        p = f'{out}/{sheet}/{fname(t)}'
+        if os.path.exists(p) and t not in OUTLINE_ONLY:
+            clean_png(p)
     print(f'лист {sheet} {title}:'); print('\n'.join(report))
+
+
+def clean_png(p, peel=4, pale=212, grey=32, speck=0.004, pure=250):
+    """Белая кайма и крошки после вырезки: снимаем по контуру светлые бесцветные
+    пиксели (не глубже peel), выкидываем мелкие островки отдельно от рисунка."""
+    from scipy.ndimage import label, binary_dilation
+    im = np.array(Image.open(p).convert('RGBA')).astype(np.int32)
+    rgb, a = im[..., :3], im[..., 3]
+    mn, mx = rgb.min(-1), rgb.max(-1)
+    whitish = (mn >= pale) & (mx - mn <= grey)
+    for _ in range(peel):
+        solid = a > 128
+        edge = solid & binary_dilation(~solid)
+        hit = edge & whitish
+        if not hit.any():
+            break
+        a[hit] = 0
+    # мягкий край: светлым пикселям у контура — частичная прозрачность
+    solid = a > 128
+    edge = solid & binary_dilation(~solid)
+    soft = edge & (mn >= 190)
+    a[soft] = np.minimum(a[soft], np.clip((255 - mn[soft]) * 4, 60, 255))
+    # дырки: зажатый между руками и предметами чистый фон, обведённый контуром
+    lab, n = label((a > 128) & (mn >= 238) & (mx - mn <= 14))
+    for i in range(1, n + 1):
+        c = lab == i
+        if c.sum() < 60 or mn[c].mean() < pure:
+            continue
+        ring = binary_dilation(c, iterations=3) & ~c
+        if False and (mn[ring] < 150).mean() >= 0.35:  # белое внутри пузырей уходило вместе с дырками
+            a[c] = 0
+    lab, n = label(a > 40)
+    if n > 1:
+        sizes = np.bincount(lab.ravel()); sizes[0] = 0
+        big = sizes.max()
+        small = np.isin(lab, np.where((sizes < speck * a.size) & (sizes < big))[0])
+        a[small] = 0
+    im[..., 3] = a
+    Image.fromarray(im.astype(np.uint8), 'RGBA').save(p)
 
 if __name__ == '__main__':
     a = sys.argv[1:]
