@@ -57,6 +57,11 @@ def img(unit, name):
     return f"{MEDIA}sm3/{unit}/{name}.webp"
 
 
+def svg(unit, name):
+    """Часы Unit 3 лежат в svg — их рисует tools/gen_clocks.py, а не генератор."""
+    return f"{MEDIA}sm3/{unit}/{name}.svg"
+
+
 def shared(name):
     return f"{MEDIA}shared/{name}.webp"
 
@@ -1472,6 +1477,124 @@ LESSONS = {
                 f'<p><img src="{shared("well_done_clap")}" alt="" style="height:180px"></p>'
                 "<h3>Вот и всё, домашняя работа выполнена!</h3>"
                 "<p>Огромное спасибо за твой труд. Увидимся на занятии!</p>"}),
+        ],
+    },
+    "u3_hw2": {
+        "unit": "u3",
+        "unit_title": "Unit 3 \u00b7 At home",
+        "unit_sort": 3,
+        "lesson_title": "Homework 2",
+        "lesson_sort": 1,
+        "kind": "homework",
+        # Шесть «сколько времени на картинке?» в выгрузке опирались на фотографии
+        # электронных часов из интернета (одна с водяным знаком стока, одна —
+        # футболка с принтом). Те же шесть времён нарисованы своим табло,
+        # tools/gen_clocks.py. Стрелочные циферблаты блока 3 — оттуда же.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_rocket")}" alt="" style="height:200px"></p>'
+                "<h2>Привет!</h2>"
+                "<p>Сегодня тебя ждёт много интересных заданий. Удачи тебе!</p>"
+                "<p>Готов начать? Внимательно посмотри видео.</p>"}),
+
+            ("video", {"title": "Видео: который час?", "url": "", "provider": ""}),
+
+            ("match", {
+                "title": "Посмотри видео ещё раз и соедини картинки с описанием",
+                "pairs": [
+                    {"left_image": svg("u3", "clock_quarter_past_eight"),
+                     "right": "It\u2019s quarter past eight",
+                     "right_audio_tts": "It's quarter past eight"},
+                    {"left_image": svg("u3", "clock_half_past_eight"),
+                     "right": "It\u2019s half past eight",
+                     "right_audio_tts": "It's half past eight"},
+                    {"left_image": svg("u3", "clock_quarter_past_five"),
+                     "right": "It\u2019s quarter past five",
+                     "right_audio_tts": "It's quarter past five"},
+                    {"left_image": svg("u3", "clock_quarter_to_seven"),
+                     "right": "It\u2019s quarter to seven",
+                     "right_audio_tts": "It's quarter to seven"},
+                    {"left_image": svg("u3", "clock_half_past_six"),
+                     "right": "It\u2019s half past six",
+                     "right_audio_tts": "It's half past six"},
+                    {"left_image": svg("u3", "clock_twelve_oclock"),
+                     "right": "It\u2019s twelve o\u2019clock",
+                     "right_audio_tts": "It's twelve o'clock"},
+                ],
+            }),
+
+            ("text", {"html":
+                "<h3>Супер! Ты прекрасно справляешься!</h3>"
+                "<p>Давай ещё немного потренируемся. Посмотри на картинки "
+                "и опиши время, которое на них указано.</p>"}),
+
+            ("task", {
+                "title": "Сколько времени на картинке?",
+                "needs_review": True,
+                "html":
+                    f'<p><img src="{svg("u3", "digital_two_fifteen")}" alt="" style="height:150px"></p>'
+                    "<p>Опиши время по-английски.</p>",
+            }),
+
+            ("task", {
+                "title": "Сколько времени на картинке?",
+                "needs_review": True,
+                "html":
+                    f'<p><img src="{svg("u3", "digital_eleven_oclock")}" alt="" style="height:150px"></p>'
+                    "<p>Опиши время по-английски.</p>",
+            }),
+
+            ("task", {
+                "title": "Сколько времени на картинке?",
+                "needs_review": True,
+                "html":
+                    f'<p><img src="{svg("u3", "digital_twelve_forty_five")}" alt="" style="height:150px"></p>'
+                    "<p>Опиши время по-английски.</p>",
+            }),
+
+            ("task", {
+                "title": "Сколько времени на картинке?",
+                "needs_review": True,
+                "html":
+                    f'<p><img src="{svg("u3", "digital_nine_thirty")}" alt="" style="height:150px"></p>'
+                    "<p>Опиши время по-английски.</p>",
+            }),
+
+            ("task", {
+                "title": "Сколько времени на картинке?",
+                "needs_review": True,
+                "html":
+                    f'<p><img src="{svg("u3", "digital_five_forty_five")}" alt="" style="height:150px"></p>'
+                    "<p>Опиши время по-английски.</p>",
+            }),
+
+            ("task", {
+                "title": "Сколько времени на картинке?",
+                "needs_review": True,
+                "html":
+                    f'<p><img src="{svg("u3", "digital_eight_oclock")}" alt="" style="height:150px"></p>'
+                    "<p>Опиши время по-английски.</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>SUPER! Ты сделал все основные задания!</h3>"
+                "<p>У меня есть для тебя ещё одно задание. Оно дополнительное, "
+                "но если ты его сделаешь, получишь дополнительную \u2b50</p>"}),
+
+            ("task", {
+                "title": "Опиши свой день по времени",
+                "needs_review": True,
+                "html":
+                    "<p>Напиши своё расписание и расскажи его учителю на уроке.</p>"
+                    "<p><i>Пример:<br>I go to school at 8:30.<br>"
+                    "I have lunch at 12 o\u2019clock.</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_jump")}" alt="" style="height:180px"></p>'
+                "<h3>Ты справился, молодец!</h3>"
+                "<p>Встретимся на уроке :)</p>"}),
         ],
     },
 }

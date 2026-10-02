@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
-"""Циферблаты для Unit 3 — SVG, без цифр, точные стрелки.
+"""Часы для Unit 3 — SVG: стрелочные циферблаты и электронное табло.
 
 Генератор картинок стрелки не держит: из 12 сгенерированных циферблатов
 правильными оказались 5. Здесь угол считается, а не рисуется на глаз.
+
+Электронное табло нужно домашке 2: там шесть вопросов «сколько времени на
+картинке?» по фотографиям электронных часов из интернета (одна с водяным
+знаком стока, одна вообще футболка с принтом). Цифры рисуются семью
+сегментами-многоугольниками, а не текстом: шрифта в SVG может не оказаться,
+и тогда время расползётся или пропадёт.
 
     python3 tools/gen_clocks.py            # в media/sm3/u3/
     python3 tools/gen_clocks.py --out DIR
@@ -77,6 +83,76 @@ def clock_svg(h: int, m: int, back: str) -> str:
 '''
 
 
+# ---------- электронное табло ----------
+
+# (часы, минуты, имя файла) — ровно те времена, что в выгрузке домашки 2
+DIGITAL = [
+    (2, 15, "digital_two_fifteen"),
+    (11, 0, "digital_eleven_oclock"),
+    (12, 45, "digital_twelve_forty_five"),
+    (9, 30, "digital_nine_thirty"),
+    (5, 45, "digital_five_forty_five"),
+    (8, 0, "digital_eight_oclock"),
+]
+
+# какие сегменты горят у каждой цифры; a — верх, g — середина
+SEGS = {
+    "0": "abcdef", "1": "bc",     "2": "abdeg",  "3": "abcdg", "4": "bcfg",
+    "5": "acdfg",  "6": "acdefg", "7": "abc",    "8": "abcdefg", "9": "abcdfg",
+}
+
+DW, DH, DT = 58, 104, 13          # ширина, высота и толщина цифры
+GAP = 18                          # просвет между цифрами
+COLON_W = 26
+
+
+def seg_poly(seg: str, x: float, y: float) -> str:
+    """Один сегмент как шестиугольник: скошенные концы, как у настоящего табло."""
+    t, w, h = DT, DW, DH
+    k = t / 2
+    if seg in "ad g"[:3] or seg == "g":                 # горизонтальные a, d, g
+        cy = {"a": y, "d": y + h, "g": y + h / 2}[seg]
+        return (f'{x+k},{cy-k} {x+w-k},{cy-k} {x+w-k+k/2},{cy} '
+                f'{x+w-k},{cy+k} {x+k},{cy+k} {x+k-k/2},{cy}')
+    cx = x + (w if seg in "bc" else 0)                  # вертикальные b, c, e, f
+    top = y + (h / 2 if seg in "ce" else 0)
+    bot = top + h / 2
+    return (f'{cx-k},{top+k} {cx},{top+k-k/2} {cx+k},{top+k} '
+            f'{cx+k},{bot-k} {cx},{bot-k+k/2} {cx-k},{bot-k}')
+
+
+def digital_svg(h: int, m: int) -> str:
+    text = f"{h}:{m:02d}"
+    # ширина табло: цифры + двоеточия + поля
+    body = 0.0
+    for ch in text:
+        body += COLON_W if ch == ":" else DW
+        body += GAP
+    body -= GAP
+    pad_x, pad_y = 70, 56
+    W = int(body + pad_x * 2)
+    H = int(DH + pad_y * 2)
+    on, off = "#ff8a1f", "#3a2a18"
+    out = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">',
+           f'  <rect width="{W}" height="{H}" rx="28" fill="#141414"/>',
+           f'  <rect x="14" y="14" width="{W-28}" height="{H-28}" rx="18" '
+           f'fill="none" stroke="#2c2c2c" stroke-width="4"/>']
+    x = float(pad_x)
+    for ch in text:
+        if ch == ":":
+            for cy in (pad_y + DH * 0.30, pad_y + DH * 0.70):
+                out.append(f'  <circle cx="{x + COLON_W/2:.1f}" cy="{cy:.1f}" r="{DT*0.55:.1f}" fill="{on}"/>')
+            x += COLON_W + GAP
+            continue
+        lit = SEGS[ch]
+        for seg in "abcdefg":
+            colour = on if seg in lit else off
+            out.append(f'  <polygon points="{seg_poly(seg, x, pad_y)}" fill="{colour}"/>')
+        x += DW + GAP
+    out.append("</svg>")
+    return "\n".join(out) + "\n"
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="media/sm3/u3")
@@ -87,6 +163,10 @@ def main() -> None:
         path = out / f"clock_{name}.svg"
         path.write_text(clock_svg(h, m, BACKS[i % len(BACKS)]), encoding="utf-8")
         print(f"{path}  {h:02d}:{m:02d}")
+    for h, m, name in DIGITAL:
+        path = out / f"{name}.svg"
+        path.write_text(digital_svg(h, m), encoding="utf-8")
+        print(f"{path}  {h}:{m:02d}")
 
 
 if __name__ == "__main__":
