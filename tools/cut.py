@@ -196,6 +196,24 @@ def clean(path, thr=245, pad=10, share=0.15):
     return len(drop_ids)
 
 
+def check_edges(dst, names, thr=245, limit=3):
+    """Ищет куски, у которых предмет упирается в край кадра.
+
+    Шов или сетка могут пройти по предмету, и тогда у него аккуратно срезан
+    верх — на превью это видно не всегда. Проверять надо все куски: за Unit 4
+    так нашлись подрезанные корзина и бананы-ананас.
+    """
+    bad = []
+    for n in names:
+        m = np.array(Image.open(f'{dst}/{n}.png').convert('L')) < thr
+        sides = (int(m[0].sum()), int(m[-1].sum()), int(m[:, 0].sum()), int(m[:, -1].sum()))
+        if max(sides) > limit:
+            bad.append((n, sides))
+            print(f'  ✖ {n:22} верх {sides[0]}, низ {sides[1]}, лево {sides[2]}, право {sides[3]}')
+    print(f'подрезанных: {len(bad)} из {len(names)}')
+    return bad
+
+
 def whole(src, name, dst='.'):
     os.makedirs(dst, exist_ok=True)
     im = Image.open(src).convert('RGB')
