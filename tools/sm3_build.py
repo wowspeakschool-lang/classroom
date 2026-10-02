@@ -1181,6 +1181,196 @@ LESSONS = {
                 "<p>\u041e\u0433\u0440\u043e\u043c\u043d\u043e\u0435 \u0442\u0435\u0431\u0435 \u0441\u043f\u0430\u0441\u0438\u0431\u043e. \u0422\u044b \u043e\u0442\u043b\u0438\u0447\u043d\u043e \u043f\u043e\u0440\u0430\u0431\u043e\u0442\u0430\u043b \U0001f60a \u0423\u0432\u0438\u0434\u0438\u043c\u0441\u044f \u043d\u0430 \u0437\u0430\u043d\u044f\u0442\u0438\u0438!</p>"}),
         ],
     },
+    "u2_hw7": {
+        "unit": "u2",
+        "unit_title": "Unit 2 \u00b7 Food",
+        "unit_sort": 2,
+        "lesson_title": "Homework 7",
+        "lesson_sort": 6,
+        "kind": "homework",
+        # Обе картинки заданий вырезаны из PDF выгрузки: сцена в столовой
+        # (блок 3) и семья Джона за ужином (блок 4).
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_highfive")}" alt="" style="height:200px"></p>'
+                "<h2>\u0414\u043e\u0431\u0440\u043e \u043f\u043e\u0436\u0430\u043b\u043e\u0432\u0430\u0442\u044c \u0432 \u0434\u043e\u043c\u0430\u0448\u043d\u0435\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435!</h2>"}),
+
+            ("sequence", {
+                "title": "\u0420\u0430\u0441\u0441\u0442\u0430\u0432\u044c \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0435\u043d\u0438\u044f \u0432 \u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u043e\u043c \u043f\u043e\u0440\u044f\u0434\u043a\u0435, \u0447\u0442\u043e\u0431\u044b \u043f\u043e\u043b\u0443\u0447\u0438\u043b\u0441\u044f \u0434\u0438\u0430\u043b\u043e\u0433. \u041f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0430: \u043d\u0430\u0447\u0438\u043d\u0430\u0435\u043c \u0441 \u0444\u0440\u0430\u0437\u044b \u00abHello. Can I help you?\u00bb",
+                "items": [
+                    {"text": "A: Hello. Can I help you?",
+                     "audio_tts": "Hello. Can I help you?"},
+                    {"text": "B: I\u2019d like a pizza with cheese, mushrooms and onions, please.",
+                     "audio_tts": "I'd like a pizza with cheese, mushrooms and onions, please."},
+                    {"text": "A: Sorry, we haven\u2019t got any mushrooms.",
+                     "audio_tts": "Sorry, we haven't got any mushrooms."},
+                    {"text": "B: No mushrooms? Have you got any peppers?",
+                     "audio_tts": "No mushrooms? Have you got any peppers?"},
+                    {"text": "A: Let me see. Yes, we\u2019ve got peppers.",
+                     "audio_tts": "Let me see. Yes, we've got peppers."},
+                    {"text": "B: That\u2019s great. Can I have some tomatoes, too?",
+                     "audio_tts": "That's great. Can I have some tomatoes, too?"},
+                    {"text": "A: OK, so that\u2019s pizza with cheese, onions, peppers and tomatoes.",
+                     "audio_tts": "OK, so that's pizza with cheese, onions, peppers and tomatoes."},
+                ],
+            }),
+
+            ("task", {
+                "title": "\u041f\u043e\u0441\u043c\u043e\u0442\u0440\u0438 \u043d\u0430 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0443 \u0438 \u0441\u043e\u0441\u0442\u0430\u0432\u044c \u0434\u0438\u0430\u043b\u043e\u0433",
+                "needs_review": True,
+                "html":
+                    f'<p><img src="{img("u2", "scene_canteen_order")}" alt="" style="max-width:100%"></p>'
+                    "<p>\u041c\u043e\u0436\u0435\u0448\u044c \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c \u043f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0435\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435 \u043a\u0430\u043a \u043f\u0440\u0438\u043c\u0435\u0440.</p>"
+                    "<p><b>Assistant:</b> <i>Hello! Can I help you?</i><br>"
+                    "<b>Boy:</b> \u2026</p>",
+            }),
+
+            ("gaps", {
+                "title": "\u042d\u0442\u043e \u0441\u0435\u043c\u044c\u044f \u0414\u0436\u043e\u043d\u0430. \u041f\u0440\u043e\u0447\u0438\u0442\u0430\u0439 \u0440\u0430\u0441\u0441\u043a\u0430\u0437 \u043e \u0435\u0433\u043e \u0443\u0436\u0438\u043d\u0435 \u0438 \u0437\u0430\u043f\u043e\u043b\u043d\u0438 \u043f\u0440\u043e\u043f\u0443\u0441\u043a\u0438 \u2b07",
+                "mode": "drag",
+                "image": img("u2", "scene_john_dinner"),
+                "text":
+                    "My __favourite__ dinner is chicken, peas and __chips__. "
+                    "I have __dinner__ at 7 __o\u2019clock__. I __don\u2019t__ like fish and rice.",
+                "gaps_expected": 5,
+            }),
+
+            ("speaking", {
+                "title": "\u0420\u0430\u0441\u0441\u043a\u0430\u0436\u0438 \u043e \u0441\u0432\u043e\u0451\u043c \u0443\u0436\u0438\u043d\u0435 \U0001f3a4",
+                "needs_review": True,
+                "html":
+                    "<p>\u041d\u0430\u0436\u043c\u0438 \u043d\u0430 \u043c\u0438\u043a\u0440\u043e\u0444\u043e\u043d \u0438 \u0440\u0430\u0441\u0441\u043a\u0430\u0436\u0438 \u043e \u0441\u0432\u043e\u0451\u043c \u0443\u0436\u0438\u043d\u0435. "
+                    "\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439 \u0440\u0430\u0441\u0441\u043a\u0430\u0437 \u0414\u0436\u043e\u043d\u0430 \u043a\u0430\u043a \u043f\u0440\u0438\u043c\u0435\u0440.</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_jump")}" alt="" style="height:180px"></p>'
+                "<h3>\u0422\u044b \u0441\u043f\u0440\u0430\u0432\u0438\u043b\u0441\u044f \u0441\u043e \u0432\u0441\u0435\u043c\u0438 \u0437\u0430\u0434\u0430\u043d\u0438\u044f\u043c\u0438, \u0442\u0430\u043a \u0434\u0435\u0440\u0436\u0430\u0442\u044c!</h3>"}),
+        ],
+    },
+    "u2_test": {
+        "unit": "u2",
+        "unit_title": "Unit 2 \u00b7 Food",
+        "unit_sort": 2,
+        "lesson_title": "Test",
+        "lesson_sort": 7,
+        "kind": "test",
+        # Нумерация блоков как в выгрузке: два match, пять «выбери правильный
+        # вариант» (у нас quiz, по вопросу на каждый пропуск), пять «составь
+        # предложение», две записи голоса. Картинки к match в выгрузке не было —
+        # правая колонка пустая, подставлены наши карточки листов Л2.2 и Л2.3.
+        "blocks": [
+            ("match", {
+                "title": "Соедини слова с картинками",
+                "pairs": [
+                    {"left_image": img("u2", "food_bread_rolls"), "right": "Rolls", "right_audio_tts": "rolls"},
+                    {"left_image": img("u2", "food_vegetables"), "right": "Vegetables", "right_audio_tts": "vegetables"},
+                    {"left_image": img("u2", "food_soup"), "right": "Soup", "right_audio_tts": "soup"},
+                    {"left_image": img("u2", "food_water"), "right": "Water", "right_audio_tts": "water"},
+                    {"left_image": img("u2", "food_peas"), "right": "Peas", "right_audio_tts": "peas"},
+                    {"left_image": img("u2", "food_salad"), "right": "Salad", "right_audio_tts": "salad"},
+                ],
+            }),
+
+            ("match", {
+                "title": "Соедини слова с картинками",
+                "pairs": [
+                    {"left_image": img("u2", "food_pineapple"), "right": "Pineapple", "right_audio_tts": "pineapple"},
+                    {"left_image": img("u2", "food_cheese"), "right": "Cheese", "right_audio_tts": "cheese"},
+                    {"left_image": img("u2", "food_sausages"), "right": "Sausages", "right_audio_tts": "sausages"},
+                    {"left_image": img("u2", "food_onions"), "right": "Onions", "right_audio_tts": "onions"},
+                ],
+            }),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: ___ any oranges?", "type": "single",
+                 "options": [{"text": "Are there"}, {"text": "Is there"}], "correct": [0]},
+                {"q": "B: No, ___.", "type": "single",
+                 "options": [{"text": "there aren’t"}, {"text": "there isn’t"}], "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: ___ there any water?", "type": "single",
+                 "options": [{"text": "Is"}, {"text": "Are"}], "correct": [0]},
+                {"q": "B: Yes, there ___.", "type": "single",
+                 "options": [{"text": "is"}, {"text": "are"}], "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "There are ___ onions on the table.", "type": "single",
+                 "options": [{"text": "some"}, {"text": "any"}], "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: Have we got ___ sandwiches?", "type": "single",
+                 "options": [{"text": "any"}, {"text": "some"}], "correct": [0]},
+                {"q": "B: Sorry, we haven’t got ___.", "type": "single",
+                 "options": [{"text": "any"}, {"text": "some"}], "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: ___ any pizza in the fridge?", "type": "single",
+                 "options": [{"text": "Is there"}, {"text": "Are there"}], "correct": [0]},
+                {"q": "B: Yes, ___.", "type": "single",
+                 "options": [{"text": "there is"}, {"text": "there are"}], "correct": [0]},
+            ]}),
+
+            ("order", {
+                "words": ["Shall", "we", "make", "some", "soup?"],
+                "sentence": "Shall we make some soup?",
+                "audio_tts": "Shall we make some soup?",
+            }),
+
+            ("order", {
+                "words": ["How", "about", "some", "orange", "juice?"],
+                "sentence": "How about some orange juice?",
+                "audio_tts": "How about some orange juice?",
+            }),
+
+            ("order", {
+                "words": ["Can", "I", "have", "some", "cheese", "sandwiches?"],
+                "sentence": "Can I have some cheese sandwiches?",
+                "audio_tts": "Can I have some cheese sandwiches?",
+            }),
+
+            ("order", {
+                "words": ["We", "haven\u2019t", "got", "any", "pineapple", "juice."],
+                "sentence": "We haven\u2019t got any pineapple juice.",
+                "audio_tts": "We haven't got any pineapple juice.",
+            }),
+
+            ("order", {
+                "words": ["I\u2019d", "like", "some", "lemonade,", "please."],
+                "sentence": "I\u2019d like some lemonade, please.",
+                "audio_tts": "I'd like some lemonade, please.",
+            }),
+
+            ("speaking", {
+                "title": "SPEAKING TASK \u00b7 Part 1 \U0001f3a4",
+                "needs_review": True,
+                "html":
+                    "<p>Расскажи о еде, которую ты любишь и не любишь. "
+                    "Запиши свой ответ, нажав на кнопку микрофона.</p>"
+                    "<p><i>For example:<br>My favourite food is\u2026<br>"
+                    "I don\u2019t like eating\u2026</i></p>",
+            }),
+
+            ("speaking", {
+                "title": "SPEAKING TASK \u00b7 Part 2 \U0001f3a4",
+                "needs_review": True,
+                "image": img("u2", "scene_cafe_menu"),
+                "html":
+                    "<p>Посмотри на картинку, ознакомься с меню. Затем составь диалог "
+                    "посетителя и официанта и разыграй его. Запиши свой ответ, нажав "
+                    "на кнопку микрофона.</p>"
+                    "<p><i>For example:<br>"
+                    "A: Would you like a chicken roll?<br>"
+                    "B: No, thanks. I don\u2019t like chicken.<br>"
+                    "A: Would you like a cheese sandwich?<br>"
+                    "B: Yes, please. I\u2019d love one.</i></p>",
+            }),
+        ],
+    },
 }
 
 
