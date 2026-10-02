@@ -551,7 +551,108 @@ LESSONS = {
                 "<h3>Ты справился со всеми заданиями, поздравляю!</h3>"
                 "<p>Теперь можешь смело отдыхать :)</p>"}),
         ],
-    }
+    },
+    "u1_test": {
+        "unit": "u1",
+        "unit_title": "Unit 1 · School",
+        "unit_sort": 1,
+        "lesson_title": "Test",
+        "lesson_sort": 7,
+        "kind": "test",
+        # Нумерация блоков как в выгрузке: один match, пять «выбери правильный
+        # вариант», пять «составь предложение», запись голоса.
+        # «Выбери правильный вариант» отдельного типа у нас нет — делаем quiz'ом,
+        # по вопросу на каждый пропуск, предложение целиком в тексте вопроса.
+        "blocks": [
+            ("match", {
+                "title": "Соедини слова с картинками",
+                "pairs": [
+                    {"left_image": img("u1", "subj_art"), "right": "Art", "right_audio_tts": "Art"},
+                    {"left_image": img("u1", "subj_english"), "right": "English", "right_audio_tts": "English"},
+                    {"left_image": img("u1", "subj_geography"), "right": "Geography", "right_audio_tts": "Geography"},
+                    {"left_image": img("u1", "subj_science"), "right": "Science", "right_audio_tts": "Science"},
+                    {"left_image": img("u1", "subj_history"), "right": "History", "right_audio_tts": "History"},
+                    {"left_image": img("u1", "subj_maths"), "right": "Maths", "right_audio_tts": "Maths"},
+                ],
+            }),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: ___ he like eating chocolate?", "type": "single",
+                 "options": [{"text": "Do"}, {"text": "Does"}, {"text": "Is"}], "correct": [1]},
+                {"q": "B: Yes, he ___.", "type": "single",
+                 "options": [{"text": "do"}, {"text": "does"}, {"text": "like"}], "correct": [1]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: Do you ___ wear uniform to school?", "type": "single",
+                 "options": [{"text": "have"}, {"text": "have to"}, {"text": "do"}], "correct": [1]},
+                {"q": "B: No, we ___.", "type": "single",
+                 "options": [{"text": "don’t"}, {"text": "have"}, {"text": "do"}], "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "Sarah ___ swimming.", "type": "single",
+                 "options": [{"text": "like"}, {"text": "doesn’t like"}, {"text": "doesn’t likes"}],
+                 "correct": [1]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: Do you ___ watching TV?", "type": "single",
+                 "options": [{"text": "like"}, {"text": "likes"}], "correct": [0]},
+                {"q": "B: Yes, I do. But today I ___ do my homework before I can watch TV.",
+                 "type": "single",
+                 "options": [{"text": "have"}, {"text": "has to"}, {"text": "have to"}], "correct": [2]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: What do you like ___?", "type": "single",
+                 "options": [{"text": "do"}, {"text": "doing"}], "correct": [1]},
+                {"q": "B: I like ___ computer games.", "type": "single",
+                 "options": [{"text": "play"}, {"text": "playing"}], "correct": [1]},
+            ]}),
+
+            ("order", {
+                "words": ["Alice", "has", "to", "walk", "to school."],
+                "sentence": "Alice has to walk to school.",
+                "audio_tts": "Alice has to walk to school.",
+            }),
+
+            ("order", {
+                "words": ["July", "doesn’t", "like", "studying", "Geography."],
+                "sentence": "July doesn’t like studying Geography.",
+                "audio_tts": "July doesn't like studying Geography.",
+            }),
+
+            ("order", {
+                "words": ["We", "love", "reading", "about", "knights and queens."],
+                "sentence": "We love reading about knights and queens.",
+                "audio_tts": "We love reading about knights and queens.",
+            }),
+
+            # в выгрузке имя написано с опечаткой — «Ccaspar»
+            ("order", {
+                "words": ["Caspar", "has", "to", "tidy up", "his room."],
+                "sentence": "Caspar has to tidy up his room.",
+                "audio_tts": "Caspar has to tidy up his room.",
+            }),
+
+            ("order", {
+                "words": ["Eliot", "and Noah", "hate", "playing", "tennis."],
+                "sentence": "Eliot and Noah hate playing tennis.",
+                "audio_tts": "Eliot and Noah hate playing tennis.",
+            }),
+
+            ("speaking", {
+                "title": "SPEAKING TASK 🎤",
+                "needs_review": True,
+                "html":
+                    "<p>Расскажи о любимых и нелюбимых школьных предметах (5–7 предложений). "
+                    "Запиши свой ответ, нажав на кнопку микрофона.</p>"
+                    "<p><i>For example:<br>I love learning English.<br>"
+                    "I hate Maths. It’s boring.<br>I like studying Music.</i></p>",
+            }),
+        ],
+    },
 }
 
 
