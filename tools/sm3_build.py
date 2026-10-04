@@ -4804,6 +4804,509 @@ LESSONS = {
                 "<p>Спасибо за твои труды :)</p>"}),
         ],
     },
+    "u7_hw4": {
+        "unit": "u7",
+        "unit_title": "Unit 7 · At the doctor’s",
+        "unit_sort": 7,
+        "lesson_title": "Homework 4",
+        "lesson_sort": 3,
+        "kind": "homework",
+        # Блоки один в один с выгрузкой. В выгрузке опечатка «some ice crea,?» —
+        # залито «some ice cream?».
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>Огромный привет! Как твоё настроение?</h2>"
+                "<p>Самое время сделать новое домашнее задание. Сегодня нас ждут "
+                "неправильные глаголы и несколько упражнений. Для начала посмотри "
+                "видео ниже!</p>"}),
+
+            ("video", {"title": "Видео: неправильные глаголы", "url": "", "provider": ""}),
+
+            ("match", {
+                "title": "Посмотри видео ещё раз и соедини пары глаголов: слева "
+                         "настоящее время, справа прошедшее",
+                "pairs": [
+                    {"left": "eat", "right": "ate", "right_audio_tts": "ate"},
+                    {"left": "drink", "right": "drank", "right_audio_tts": "drank"},
+                    {"left": "wake up", "right": "woke up", "right_audio_tts": "woke up"},
+                    {"left": "go", "right": "went", "right_audio_tts": "went"},
+                    {"left": "come", "right": "came", "right_audio_tts": "came"},
+                    {"left": "have", "right": "had", "right_audio_tts": "had"},
+                    {"left": "say", "right": "said", "right_audio_tts": "said"},
+                    {"left": "give", "right": "gave", "right_audio_tts": "gave"},
+                    {"left": "feel", "right": "felt", "right_audio_tts": "felt"},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "Отлично! Теперь впиши прошедшую форму глагола",
+                "text":
+                    "1. have → __had__\n"
+                    "2. go → __went__\n"
+                    "3. feel → __felt__\n"
+                    "4. eat → __ate__\n"
+                    "5. wake up → __woke up__\n"
+                    "6. give → __gave__\n"
+                    "7. drink → __drank__\n"
+                    "8. come → __came__\n"
+                    "9. say → __said__",
+                "gaps_expected": 9,
+            }),
+
+            ("gaps", {
+                "title": "Впиши слова в текст по смыслу: had · went · gave · "
+                         "have · said · felt",
+                "mode": "drag",
+                "text":
+                    "Last Saturday, Joe Freeze, the small ice-cream monster, woke up at "
+                    "half past eight. He __had__ a terrible headache. He __went__ into "
+                    "his father’s bedroom. His father __gave__ him some medicine. "
+                    "Then Joe said, ‘Can I __have__ some ice cream?’ ‘Of "
+                    "course’, he __said__. Joe had some ice-cream and he __felt__ "
+                    "better.",
+                "gaps_expected": 6,
+            }),
+
+            ("task", {
+                "title": "Дополнительное задание — для самых настоящих чемпионов",
+                "needs_review": True,
+                "html":
+                    "<p>Напиши 3 предложения о том, что ты делал на прошлых выходных.</p>"
+                    "<p><i>Например: I went to the park last weekend.</i></p>"
+                    "<p>Вперёд!</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_medal")}" alt="" style="height:180px"></p>'
+                "<h3>Спасибо тебе огромное за твой труд!</h3>"
+                "<p>Ты невероятно потрудился сегодня. До встречи на занятии :)</p>"}),
+        ],
+    },
+    "u7_hw5": {
+        "unit": "u7",
+        "unit_title": "Unit 7 · At the doctor’s",
+        "unit_sort": 7,
+        "lesson_title": "Homework 5",
+        "lesson_sort": 4,
+        "kind": "homework",
+        # В выгрузке 12 блоков, у нас 7: пять блоков «верно/неверно» с одним
+        # утверждением сведены в один (блок 5).
+        # Утверждение «Ben's grandfather played a trick on the children» в
+        # выгрузке помечено «Не указано» — такого ответа у нашего блока нет,
+        # и по истории это правда не сказано, поэтому утверждение не взято.
+        # «Lucy gave Horax the book» в выгрузке тоже «Не указано», но по
+        # истории дети уходят с книгой — залито как неверное.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_book")}" alt="" style="height:200px"></p>'
+                "<h2>Привет, добро пожаловать в домашнее задание!</h2>"
+                "<p>Сегодня мы прочитаем историю и выполним упражнения. А в конце "
+                "тебя ждёт дополнительное задание — по желанию, но ты будешь "
+                "МЕГА крут, когда справишься с ним!</p>"
+                "<p>Для начала вспомни: каким был номер палаты, в которой лежал "
+                "дедушка Бена?</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u7", "story_hospital_1")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u7", "story_hospital_2")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("match", {
+                "title": "Прочти ещё раз и сопоставь две части предложения по смыслу",
+                "pairs": [
+                    {"left": "Ben got", "right": "a text message.",
+                     "right_audio_tts": "a text message"},
+                    {"left": "It said, ‘Go to the hospital,’",
+                     "right": "but it was a trick.",
+                     "right_audio_tts": "but it was a trick"},
+                    {"left": "They found Horax", "right": "and not Ben’s grandfather there!",
+                     "right_audio_tts": "and not Ben's grandfather there"},
+                    {"left": "Horax wanted", "right": "the book and the letters.",
+                     "right_audio_tts": "the book and the letters"},
+                    {"left": "At that moment", "right": "the doctor came in.",
+                     "right_audio_tts": "the doctor came in"},
+                    {"left": "Lucy and Ben said, ‘Bye, bye,’",
+                     "right": "and went out of the room.",
+                     "right_audio_tts": "and went out of the room"},
+                ],
+            }),
+
+            ("truefalse", {
+                "title": "Выбери True (правда) или False (неправда)",
+                "statements": [
+                    {"text": "The doctor took Ben and Lucy to room 209.", "answer": True},
+                    {"text": "Horax wanted the book from the children.", "answer": True},
+                    {"text": "Lucy gave Horax the book.", "answer": False},
+                    {"text": "The doctor thought Horax was Ben’s grandfather.",
+                     "answer": True},
+                ],
+            }),
+
+            ("task", {
+                "title": "Дополнительное задание — перепиши предложения "
+                         "в прошедшем времени",
+                "needs_review": True,
+                "html":
+                    "<p>Как в примере (пункт 1). В предыдущих заданиях есть подсказки — "
+                    "пролистай наверх.</p>"
+                    "<p>1. Lucy and Ben / go / hospital — "
+                    "<i>Lucy and Ben went to the hospital.</i><br>"
+                    "2. They / go / room 209<br>"
+                    "3. They / find / Horax, not / Ben / grandfather<br>"
+                    "4. It / be / trick<br>"
+                    "5. Horax / want / book and letters<br>"
+                    "6. At that moment / doctor / arrive<br>"
+                    "7. Ben / Lucy / say goodbye / and / go / out / room</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>Отлично, ты справился со всеми заданиями!</h3>"
+                "<p>Держи за это кубок победителя. Жду тебя на занятии!</p>"}),
+        ],
+    },
+    "u7_hw6": {
+        "unit": "u7",
+        "unit_title": "Unit 7 · At the doctor’s",
+        "unit_sort": 7,
+        "lesson_title": "Homework 6",
+        "lesson_sort": 5,
+        "kind": "homework",
+        # В выгрузке 6 блоков, у нас 7: дописано прощание — в выгрузке урок
+        # обрывался последним заданием. Обе страницы рассказа вырезаны из PDF.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_laptop")}" alt="" style="height:200px"></p>'
+                "<h2>Добро пожаловать в домашнее задание!</h2>"
+                "<p>В этом уроке тебя ждут текст и несколько упражнений. В конце есть "
+                "дополнительное задание — по желанию, НО если сделаешь его, "
+                "будешь чемпионом английского!</p>"
+                "<p>Для начала прочитай текст ещё раз.</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u7", "reading_best_friend_1")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u7", "reading_best_friend_2")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("sequence", {
+                "title": "Прочитай текст ещё раз и расставь предложения "
+                         "в правильном порядке по смыслу",
+                "items": [
+                    {"text": "Emma Woodward had a bad headache."},
+                    {"text": "Her parents took her to hospital."},
+                    {"text": "The doctor said, ‘You have to sit in a wheelchair "
+                             "or use crutches.’"},
+                    {"text": "Emma’s mum and dad went to the Helper Dog Project "
+                             "with Emma."},
+                    {"text": "Emma liked the biggest dog, Jasper, a lot."},
+                    {"text": "With Jasper’s help, Emma learnt to walk again."},
+                    {"text": "Jasper got a big prize, The Best Animal of the Year!"},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "Заполни краткое содержание текста. Осторожно: среди слов "
+                         "есть лишние — help · visit · say · feel · learn",
+                "text":
+                    "Emma liked swimming and riding her bike. Emma’s headache got "
+                    "worse and worse and she __felt__ very ill. The doctor __said__ Emma "
+                    "needed an operation. After the operation, Emma couldn’t remember "
+                    "how to do anything. She had to use a wheelchair or crutches. Emma "
+                    "didn’t try to walk because she was very tired. One day Emma and "
+                    "her parents __visited__ the Helper Dog Project. One of the big dogs "
+                    "came to Emma and put his paw on Emma’s leg. His name was Jasper. "
+                    "He and Emma became best friends. Jasper __helped__ Emma and she "
+                    "slowly __learned__ to walk again with no crutches. Last week a "
+                    "magazine gave Jasper a big prize: The Best Animal of the Year! "
+                    "Emma said to Jasper, ‘You are now the most famous dog in the "
+                    "world!’ Jasper put his paw on Emma’s leg. She "
+                    "__remembered__ the first time she saw Jasper and smiled.",
+                "gaps_expected": 6,
+            }),
+
+            ("gaps", {
+                "title": "Дополнительное задание: послушай краткий пересказ — "
+                         "в нём четыре ошибки. С первой я тебе помогу, остальные найди сам",
+                "audio": "",
+                "text":
+                    "1. stomach-ache instead of a headache.\n"
+                    "2. __smallest__ instead of __biggest__.\n"
+                    "3. __George__ instead of __Jasper__.\n"
+                    "4. __Film__ instead of __Animal__.",
+                "gaps_expected": 6,
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Отличная работа!</h3>"
+                "<p>Увидимся на занятии :)</p>"}),
+        ],
+    },
+    "u7_hw7": {
+        "unit": "u7",
+        "unit_title": "Unit 7 · At the doctor’s",
+        "unit_sort": 7,
+        "lesson_title": "Homework 7",
+        "lesson_sort": 6,
+        "kind": "homework",
+        # Обе части выгрузки одним уроком: прощание первой части и приветствие
+        # второй сведены в блок-перемычку 7, поэтому блоков 12, а не 13.
+        # К блоку 5 подставлены наши карточки привычек — в выгрузке правая
+        # колонка пустая.
+        # Образец к заданию «как ты поддерживаешь здоровый образ жизни» был
+        # фотографией девочки с теннисной ракеткой — фотографии детей не берём,
+        # пример перенесён текстом.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_rocket")}" alt="" style="height:200px"></p>'
+                "<h2>Добро пожаловать в домашнее задание!</h2>"
+                "<p>Выполни все задания, если хочешь стать чемпионом английского! "
+                "А в конце тебя ждёт дополнительное задание — по желанию, НО если "
+                "выполнишь, будешь мега крут.</p>"}),
+
+            ("text", {"html":
+                "<h3>Have you got a healthy lifestyle?</h3>"
+                "<p>Давай вспомним, о чём мы говорили на уроке, и прочитаем текст.</p>"
+                f'<p><img src="{img("u7", "reading_keep_healthy")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("sort", {
+                "title": "Внимательно посмотри на фразы и распредели их по категориям",
+                "groups": [
+                    {"name": "HEALTHY", "items": [
+                        {"text": "swimming"},
+                        {"text": "walking to school"},
+                        {"text": "laughing with friends"},
+                    ]},
+                    {"name": "UNHEALTHY", "items": [
+                        {"text": "playing computer games for four hours"},
+                        {"text": "always going to bed very late"},
+                        {"text": "always eating ice cream for lunch"},
+                    ]},
+                ],
+            }),
+
+            ("match", {
+                "title": "Соедини фразы с картинками по смыслу",
+                "pairs": [
+                    {"left": "These are bad for the teeth.",
+                     "right_image": img("u7", "habit_ice_creams"), "right": "ice creams"},
+                    {"left": "It gets me outdoors.",
+                     "right_image": img("u7", "habit_walking"), "right": "walking"},
+                    {"left": "Sometimes it makes my eyes ache.",
+                     "right_image": img("u7", "habit_screen_late"), "right": "screen"},
+                    {"left": "I always make healthy food.",
+                     "right_image": img("u7", "habit_picnic"), "right": "healthy food"},
+                ],
+            }),
+
+            ("task", {
+                "title": "Напиши, как ты поддерживаешь здоровый образ жизни",
+                "needs_review": True,
+                "html":
+                    "<p>Несколько предложений — по образцу.</p>"
+                    "<p><i>Например: I play tennis to keep healthy. I usually play "
+                    "tennis with my friends on Saturdays.</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("good_luck_clover")}" alt="" style="height:180px"></p>'
+                "<h3>Ты выполнил основную часть — супер!</h3>"
+                "<p>Осталась вторая часть: упражнения про приём у врача и ещё одно "
+                "дополнительное задание.</p>"}),
+
+            ("quiz", {"title": "Read and choose: doctor or patient?", "questions": [
+                {"q": "1. What’s the matter?", "type": "single",
+                 "options": [{"text": "doctor"}, {"text": "patient"}], "correct": [0]},
+                {"q": "2. Have you got a headache?", "type": "single",
+                 "options": [{"text": "doctor"}, {"text": "patient"}], "correct": [0]},
+                {"q": "3. When can I go to school again?", "type": "single",
+                 "options": [{"text": "patient"}, {"text": "doctor"}], "correct": [0]},
+                {"q": "4. Have you got any other aches?", "type": "single",
+                 "options": [{"text": "doctor"}, {"text": "patient"}], "correct": [0]},
+                {"q": "5. I’m so hot. Can I drink some cold orange juice?",
+                 "type": "single",
+                 "options": [{"text": "patient"}, {"text": "doctor"}], "correct": [0]},
+                {"q": "6. What have I got?", "type": "single",
+                 "options": [{"text": "patient"}, {"text": "doctor"}], "correct": [0]},
+            ]}),
+
+            ("match", {
+                "title": "Соедини вопросы и ответы",
+                "pairs": [
+                    {"left": "What’s the matter?",
+                     "right": "I’ve got a stomach-ache.",
+                     "right_audio_tts": "I've got a stomach-ache."},
+                    {"left": "Have you got a headache?",
+                     "right": "Yes, but it’s not strong.",
+                     "right_audio_tts": "Yes, but it's not strong."},
+                    {"left": "Have you got any other aches?",
+                     "right": "No, just the stomach-ache.",
+                     "right_audio_tts": "No, just the stomach-ache."},
+                    {"left": "I’m so hot. Can I drink some cold orange juice?",
+                     "right": "You have to drink a lot, but you can’t drink "
+                              "anything cold.",
+                     "right_audio_tts": "You have to drink a lot, but you can't drink "
+                                        "anything cold."},
+                    {"left": "What have I got?",
+                     "right": "Don’t worry. It’s nothing serious. But you have "
+                              "to rest.",
+                     "right_audio_tts": "Don't worry. It's nothing serious. But you have "
+                                        "to rest."},
+                    {"left": "When can I go to school again?",
+                     "right": "I’m not sure. Maybe in a week.",
+                     "right_audio_tts": "I'm not sure. Maybe in a week."},
+                ],
+            }),
+
+            ("task", {
+                "title": "Дополнительное задание — для ЧЕМПИОНОВ",
+                "needs_review": True,
+                "html":
+                    "<p>Напиши рассказ (из жизни или выдуманный) о том, как кто-то "
+                    "получил травму или заболел. Можешь обратиться за помощью "
+                    "к словарям.</p>"
+                    "<p>Образец — ниже. Напиши свой рассказ здесь или на "
+                    "листочке.</p>",
+            }),
+
+            ("text", {"html":
+                "<h3>Образец: план и рассказ про Тома</h3>"
+                f'<p><img src="{img("u7", "writing_tom_story")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание — ты замечательный "
+                "ученик!</h3>"
+                "<p>За это лови звёздочку :) Увидимся на занятии!</p>"}),
+        ],
+    },
+    "u7_test": {
+        "unit": "u7",
+        "unit_title": "Unit 7 · At the doctor’s",
+        "unit_sort": 7,
+        "lesson_title": "Test",
+        "lesson_sort": 7,
+        "kind": "test",
+        # Нумерация блоков как в выгрузке: match, пять «выбери правильный
+        # вариант» (у нас quiz, чтобы сохранить неверные варианты), пять
+        # «составь предложение», запись голоса.
+        # Блок 1 в выгрузке — «соедини слова с картинками», но картинок болезней
+        # у нас нет (их не нарисовать без человека). Поэтому пары
+        # «описание → слово», формулировки другие, чем в Homework 1.
+        "blocks": [
+            ("match", {
+                "title": "Прочитай и подбери слово",
+                "pairs": [
+                    {"left": "At night I cough a lot.", "right": "cough",
+                     "right_audio_tts": "cough"},
+                    {"left": "My head hurts and I want to lie down.", "right": "headache",
+                     "right_audio_tts": "headache"},
+                    {"left": "This person gives you medicine when you are ill.",
+                     "right": "doctor", "right_audio_tts": "doctor"},
+                    {"left": "I ate too much cake and now my tummy hurts.",
+                     "right": "stomachache", "right_audio_tts": "stomachache"},
+                    {"left": "My ear hurts and I can’t hear well.", "right": "earache",
+                     "right_audio_tts": "earache"},
+                    {"left": "This tooth hurts when I eat something sweet.",
+                     "right": "toothache", "right_audio_tts": "toothache"},
+                ],
+            }),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "I ___ up and I felt very sick.", "type": "single",
+                 "options": [{"text": "woke"}, {"text": "wake"}, {"text": "waked"}],
+                 "correct": [0]},
+                {"q": "I woke up and I ___ very sick.", "type": "single",
+                 "options": [{"text": "felt"}, {"text": "feel"}, {"text": "feeled"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: What did you do after school? We ___ a volleyball game.",
+                 "type": "single",
+                 "options": [{"text": "watched"}, {"text": "watch"}, {"text": "watching"}],
+                 "correct": [0]},
+                {"q": "B: Oh! And we ___ football.", "type": "single",
+                 "options": [{"text": "played"}, {"text": "playing"}, {"text": "play"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "Sam and Dan ___ TV in the living room.", "type": "single",
+                 "options": [{"text": "watched"}, {"text": "listening"}, {"text": "play"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "You ___ a letter in the morning.", "type": "single",
+                 "options": [{"text": "wrote"}, {"text": "write"}, {"text": "writing"}],
+                 "correct": [0]},
+                {"q": "… and ___ to music.", "type": "single",
+                 "options": [{"text": "listened"}, {"text": "listening"},
+                             {"text": "listen"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "Last week ___ difficult.", "type": "single",
+                 "options": [{"text": "was"}, {"text": "were"}], "correct": [0]},
+                {"q": "My mum and my sister ___ sick.", "type": "single",
+                 "options": [{"text": "were"}, {"text": "was"}, {"text": "are"}],
+                 "correct": [0]},
+            ]}),
+
+            ("order", {
+                "words": ["Pete", "went", "to", "the", "bookstore."],
+                "sentence": "Pete went to the bookstore.",
+                "audio_tts": "Pete went to the bookstore.",
+            }),
+
+            ("order", {
+                "words": ["I", "cooked", "dinner", "on", "Thursday."],
+                "sentence": "I cooked dinner on Thursday.",
+                "audio_tts": "I cooked dinner on Thursday.",
+            }),
+
+            ("order", {
+                "words": ["I", "liked", "this", "llama."],
+                "sentence": "I liked this llama.",
+                "audio_tts": "I liked this llama.",
+            }),
+
+            ("order", {
+                "words": ["Miriam", "had", "a", "headache", "yesterday."],
+                "sentence": "Miriam had a headache yesterday.",
+                "audio_tts": "Miriam had a headache yesterday.",
+            }),
+
+            ("order", {
+                "words": ["The nurse", "went", "to", "the park."],
+                "sentence": "The nurse went to the park.",
+                "audio_tts": "The nurse went to the park.",
+            }),
+
+            ("speaking", {
+                "title": "SPEAKING TASK \U0001f3a4",
+                "needs_review": True,
+                "html":
+                    "<p>Расскажи, чем ты занимался на прошлой неделе (5–7 "
+                    "предложений).</p>"
+                    "<p><i>For example:<br>On Monday I played tennis.<br>"
+                    "On Wednesday I had English class.<br>"
+                    "On Friday I went to the swimming pool.</i></p>"
+                    "<p>Запиши свой ответ, нажав на кнопку микрофона.</p>",
+            }),
+        ],
+    },
 }
 
 
