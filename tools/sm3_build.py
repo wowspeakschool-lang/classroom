@@ -5549,6 +5549,577 @@ LESSONS = {
                 "<p>Спасибо тебе большое :)</p>"}),
         ],
     },
+    "u8_hw4": {
+        "unit": "u8",
+        "unit_title": "Unit 8 · Countries",
+        "unit_sort": 8,
+        "lesson_title": "Homework 4",
+        "lesson_sort": 3,
+        "kind": "homework",
+        # Блоки один в один с выгрузкой. В выгрузке опечатка «Did you stay is a
+        # hotel?» — залито «in a hotel».
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>Сегодня тебя ждёт новое домашнее задание!</h2>"
+                "<p>Будет много интересного, тебе понравится :) А ещё есть "
+                "дополнительное задание — необязательное, но если выполнишь, "
+                "получишь звание покорителя английского языка!</p>"
+                "<p>Для начала посмотри видео: как думаешь, останавливался ли Хэмми "
+                "в отеле во время отпуска?</p>"}),
+
+            ("video", {"title": "Видео: каникулы Хэмми", "url": "", "provider": ""}),
+
+            ("match", {
+                "title": "Посмотри видео ещё раз и отметь, как Хэмми ответил на вопросы",
+                "pairs": [
+                    {"left": "Did you stay in a hotel?", "right": "No, I didn’t.",
+                     "right_audio_tts": "No, I didn't."},
+                    {"left": "Did you have a good holiday?", "right": "Yes, I did!",
+                     "right_audio_tts": "Yes, I did!"},
+                ],
+            }),
+
+            ("order", {
+                "words": ["Did", "you", "have", "fun", "there?"],
+                "sentence": "Did you have fun there?",
+                "audio_tts": "Did you have fun there?",
+            }),
+
+            ("order", {
+                "words": ["How", "long", "did", "you", "stay", "in Mexico?"],
+                "sentence": "How long did you stay in Mexico?",
+                "audio_tts": "How long did you stay in Mexico?",
+            }),
+
+            ("order", {
+                "words": ["Where", "did", "you", "stay?"],
+                "sentence": "Where did you stay?",
+                "audio_tts": "Where did you stay?",
+            }),
+
+            ("order", {
+                "words": ["Did", "you", "go", "to", "a", "museum", "there?"],
+                "sentence": "Did you go to a museum there?",
+                "audio_tts": "Did you go to a museum there?",
+            }),
+
+            ("order", {
+                "words": ["Did", "you", "buy", "me", "a", "present?"],
+                "sentence": "Did you buy me a present?",
+                "audio_tts": "Did you buy me a present?",
+            }),
+
+            ("match", {
+                "title": "Подбери ответы на вопросы. Если сложно — пропусти "
+                         "и вернись, когда сделаешь остальные",
+                "pairs": [
+                    {"left": "Did you play in the park yesterday?",
+                     "right": "Yes, I did! The weather was great!",
+                     "right_audio_tts": "Yes, I did! The weather was great!"},
+                    {"left": "Where did you go last Sunday?",
+                     "right": "I went to the supermarket to buy some food.",
+                     "right_audio_tts": "I went to the supermarket to buy some food."},
+                    {"left": "How long did you play computer games last weekend?",
+                     "right": "For 3 hours. My mum was angry!",
+                     "right_audio_tts": "For three hours. My mum was angry!"},
+                    {"left": "Who did you go to the park with?",
+                     "right": "With my parents.", "right_audio_tts": "With my parents."},
+                    {"left": "When did you get up last Saturday?",
+                     "right": "At 10 o’clock.", "right_audio_tts": "At ten o'clock."},
+                    {"left": "Did you go to a museum last weekend?",
+                     "right": "No, I didn’t. It was closed.",
+                     "right_audio_tts": "No, I didn't. It was closed."},
+                ],
+            }),
+
+            ("speaking", {
+                "title": "Дополнительное задание \U0001f3a4",
+                "needs_review": True,
+                "audio": "",
+                "html":
+                    "<p>Ответь на вопросы и запиши себя на диктофон.</p>"
+                    "<p>1. Did you play in the park yesterday?<br>"
+                    "2. Did you do your homework yesterday?<br>"
+                    "3. What did you do last Sunday?</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>Вот это да! Ты завершил домашнее задание!</h3>"
+                "<p>Кто настоящий молодец? Это ты! До встречи на уроке!</p>"}),
+        ],
+    },
+    "u8_hw5": {
+        "unit": "u8",
+        "unit_title": "Unit 8 · Countries",
+        "unit_sort": 8,
+        "lesson_title": "Homework 5",
+        "lesson_sort": 4,
+        "kind": "homework",
+        # Блоков столько же, сколько в выгрузке. Обе страницы истории и текст
+        # про еду вырезаны из PDF: блоки «Картинка» в редакторе стояли пустыми.
+        # Верный ответ блока 7 снят с PDF по пустому чекбоксу.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_book")}" alt="" style="height:200px"></p>'
+                "<h2>Привет! Как здорово, что ты решил сделать домашнее задание!</h2>"
+                "<p>Сегодня тебя ждёт текст и интересные задания. В конце — "
+                "дополнительные: сделаешь их, получишь звание чемпиона английского.</p>"
+                "<p>Начни с того, что прочитай историю ещё раз. Кстати, ты помнишь, "
+                "что Бен и Люси ели на обед?</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u8", "story_library_1")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u8", "story_library_2")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("sequence", {
+                "title": "Прочитай историю ещё раз и расставь предложения "
+                         "в правильном порядке",
+                "items": [
+                    {"text": "First Lucy and Ben look at a football stadium in Brazil."},
+                    {"text": "Then they look at the Great Wall of China."},
+                    {"text": "After that they look at the opera house in Sydney."},
+                    {"text": "Then they see Mr Williams, the librarian."},
+                    {"text": "Ben says that he is hungry."},
+                    {"text": "They see that they haven’t got the book."},
+                    {"text": "They want to look for their book."},
+                    {"text": "Finally Lucy finds the missing letters."},
+                ],
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("good_luck_clover")}" alt="" style="height:180px"></p>'
+                "<h3>А здесь ещё одно задание — для самых крутых учеников!</h3>"
+                "<p>Прочитай текст и выполни упражнение после него. Читай "
+                "внимательно!</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u8", "reading_food_culture")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("quiz", {"title": "Чему нас учит этот рассказ?", "questions": [
+                {"q": "Выбери правильный ответ", "type": "single",
+                 "options": [{"text": "It’s interesting to try food from another "
+                                      "culture."},
+                             {"text": "Eat only what you really know."}],
+                 "correct": [0]},
+            ]}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>Ура! Ты справился с домашней работой.</h3>"
+                "<p>Вот твой приз — большой кубок победителя. Увидимся "
+                "на занятии!</p>"}),
+        ],
+    },
+    "u8_hw6": {
+        "unit": "u8",
+        "unit_title": "Unit 8 · Countries",
+        "unit_sort": 8,
+        "lesson_title": "Homework 6",
+        "lesson_sort": 5,
+        "kind": "homework",
+        # Блоки один в один с выгрузкой. Текст про Макса и картинка с машиной
+        # времени вырезаны из PDF.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_laptop")}" alt="" style="height:200px"></p>'
+                "<h2>Привет!</h2>"
+                "<p>В этом задании тебя ждут текст и аудирование, а ещё дополнительное "
+                "задание — для чемпионов английского!</p>"
+                "<p>Прочитай текст и ответь на вопрос: <b>Why did Max get sick?</b></p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u8", "reading_max_chile")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("gaps", {
+                "title": "Прочитай текст ещё раз и заполни пропуски — "
+                         "в каждом 1, 2 или 3 слова",
+                "text":
+                    "1. The family went on holiday to Chile.\n"
+                    "2. They __visited some|visited__ big rocks that looked like "
+                    "people.\n"
+                    "3. Max wanted to go swimming because it __was__ very hot.\n"
+                    "4. Max ran to the beach but he __didn’t read|did not read__ "
+                    "the sign.\n"
+                    "5. There __was__ some rubbish on the beach.\n"
+                    "6. Max __didn’t have|did not have__ anything to eat at the "
+                    "restaurant.\n"
+                    "7. Max was __sick__ for three days.\n"
+                    "8. Max said not reading the sign was __very silly|silly__.",
+                "gaps_expected": 7,
+            }),
+
+            ("text", {"html":
+                "<h3>А это Дэвид отправился в путешествие на машине времени</h3>"
+                f'<p><img src="{img("u8", "story_david_time_machine")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("gaps", {
+                "title": "Задание на аудирование: Лили побывала в Африке. Послушай "
+                         "её рассказ и заполни таблицу — в каждом пропуске "
+                         "одно слово",
+                "audio": "",
+                "text":
+                    "Lily went to: South Africa\n"
+                    "1. She showed the people she was: __hungry__\n"
+                    "2. Food she ate: __fish__\n"
+                    "3. The beach was very: __clean__\n"
+                    "4. She stayed for one or two: __hours__",
+                "gaps_expected": 4,
+            }),
+
+            ("task", {
+                "title": "Дополнительное задание — напиши рассказ о путешествии "
+                         "Дэвида",
+                "needs_review": True,
+                "html":
+                    "<p>Посмотри на картинку выше: Дэвид отправился в путешествие "
+                    "на машине времени. Напиши небольшой рассказ о его приключениях "
+                    "в прошедшем времени.</p>"
+                    "<p>Начни так: <i>David visited Greenland in the time "
+                    "machine…</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание и готов к уроку.</h3>"
+                "<p>Ты — СУПЕР КРУТ! Жду тебя на уроке!</p>"}),
+        ],
+    },
+    "u8_hw7": {
+        "unit": "u8",
+        "unit_title": "Unit 8 · Countries",
+        "unit_sort": 8,
+        "lesson_title": "Homework 7",
+        "lesson_sort": 6,
+        "kind": "homework",
+        # Обе части выгрузки одним уроком: прощание первой части и приветствие
+        # второй сведены в блок-перемычку 8, поэтому блоков 15, а не 17.
+        # Три страницы разворота про чудеса света вырезаны из PDF.
+        # Блок 4 в выгрузке — «выбери correct/incorrect»; у нас truefalse:
+        # это то же самое, только кнопками «верно/неверно».
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_rocket")}" alt="" style="height:200px"></p>'
+                "<h2>Hello! Welcome to your homework!</h2>"
+                "<p>Сегодня нас ждут задания о чудесах света. В конце есть "
+                "дополнительное задание — для чемпионов: кто сделает его "
+                "добросовестно, получит дополнительный балл.</p>"
+                "<p>Для начала ответь на вопрос: <b>How many new wonders are there "
+                "in the world?</b> Прочитай текст и проверь себя!</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u8", "reading_wonders_1")}" alt="" '
+                'style="max-width:100%"></p>'
+                f'<p><img src="{img("u8", "reading_wonders_2")}" alt="" '
+                'style="max-width:100%"></p>'
+                f'<p><img src="{img("u8", "reading_wonders_3")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("truefalse", {
+                "title": "Прочитай текст ещё раз и скажи, верные это предложения "
+                         "(correct) или нет (incorrect)",
+                "statements": [
+                    {"text": "There are pink snakes in the Grand Canyon.", "answer": True},
+                    {"text": "The beaches next to the Harbour of Rio de Janeiro "
+                             "are small.", "answer": False},
+                    {"text": "The Northern Lights can be more than one colour.",
+                     "answer": True},
+                    {"text": "Mount Everest isn’t very old.", "answer": False},
+                    {"text": "Many fish live in the Great Barrier Reef.", "answer": True},
+                    {"text": "The Zambezi river forms a big waterfall.", "answer": True},
+                ],
+            }),
+
+            ("match", {
+                "title": "Соедини описания чудес света с их названиями",
+                "pairs": [
+                    {"left": "Apart from different species of fish, you can also see "
+                             "whales and dolphins here. There are also 900 different "
+                             "islands around it and more than 2500 reefs. It is in "
+                             "danger because of sea pollution and climate change.",
+                     "right": "Great Barrier Reef",
+                     "right_image": img("u8", "wonder_reef"),
+                     "right_audio_tts": "Great Barrier Reef"},
+                    {"left": "It is named after a famous English queen. The area has "
+                             "a dry season and a rainy season. When it rains, more than "
+                             "300,000 gallons of water fall there every second. When it "
+                             "doesn’t rain, you can walk across the top.",
+                     "right": "Victoria Falls",
+                     "right_image": img("u8", "wonder_victoria_falls"),
+                     "right_audio_tts": "Victoria Falls"},
+                    {"left": "There are more than 100 islands here with 15 different "
+                             "cities. There are 30 different beaches here, too, and in "
+                             "summer a million people can be on the beaches at the "
+                             "same time.",
+                     "right": "The Harbour of Rio de Janeiro",
+                     "right_image": img("u8", "wonder_rio"),
+                     "right_audio_tts": "The Harbour of Rio de Janeiro"},
+                ],
+            }),
+
+            ("quiz", {
+                "title": "Задание на аудирование: ты услышишь радиопередачу о чудесах "
+                         "света. Прочитай факты, послушай запись и выбери правильный "
+                         "вариант",
+                "audio": "",
+                "questions": [
+                    {"q": "1. The Great Pyramid is in ___.", "type": "single",
+                     "options": [{"text": "Giza"}, {"text": "Cairo"}, {"text": "Khufu"}],
+                     "correct": [0]},
+                    {"q": "2. The pyramid was the tallest building until ___. After "
+                          "that, Lincoln Cathedral in England was the tallest in 1311.",
+                     "type": "single",
+                     "options": [{"text": "1310"}, {"text": "1312"}, {"text": "755"}],
+                     "correct": [0]},
+                    {"q": "3. The longest wall in the world is called the ___.",
+                     "type": "single",
+                     "options": [{"text": "Great Wall"}, {"text": "Grand Canyon"},
+                                 {"text": "Grand Wall"}],
+                     "correct": [0]},
+                    {"q": "4. The wall has more than ___ stones.", "type": "single",
+                     "options": [{"text": "2.3 million"}, {"text": "2.3 billion"},
+                                 {"text": "2,300"}],
+                     "correct": [0]},
+                    {"q": "5. The Taj Mahal was built to remember ___.", "type": "single",
+                     "options": [{"text": "a wife"}, {"text": "a daughter"},
+                                 {"text": "Shah Jahan"}],
+                     "correct": [0]},
+                    {"q": "6. The palace is in ___.", "type": "single",
+                     "options": [{"text": "India"}, {"text": "Australia"},
+                                 {"text": "Argentina"}],
+                     "correct": [0]},
+                ],
+            }),
+
+            ("task", {
+                "title": "Дополнительное задание — для чемпионов",
+                "needs_review": True,
+                "html":
+                    "<p>Напиши небольшой рассказ (5–6 предложений) об одном "
+                    "из чудес света. Будет круто, если ты придумаешь своё собственное "
+                    "чудо света — включи воображение!</p>"
+                    "<p>Не забудь рассказать: 1) что это; 2) где оно находится; "
+                    "3) как оно выглядит.</p>"
+                    "<p>А чтобы рассказ стал ещё красочнее — нарисуй своё чудо "
+                    "света!</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("good_luck_clover")}" alt="" style="height:180px"></p>'
+                "<h3>Отличная работа! Осталась вторая часть</h3>"
+                "<p>В ней мы повторим всё, что прошли за месяц. Посмотри видео "
+                "и ответь: <b>Was it hot or cold at the beach?</b></p>"}),
+
+            ("video", {"title": "Видео: каникулы Грега", "url": "", "provider": ""}),
+
+            ("match", {
+                "title": "Помоги Грегу соединить начало и конец фраз — "
+                         "они перепутались!",
+                "pairs": [
+                    {"left": "I went to the sea but", "right": "I didn’t have fun!",
+                     "right_audio_tts": "I didn't have fun!"},
+                    {"left": "I didn’t want to swim because",
+                     "right": "there wasn’t sun!",
+                     "right_audio_tts": "there wasn't sun!"},
+                ],
+            }),
+
+            ("quiz", {"title": "Внимательно читай предложения и выбирай правильный ответ",
+                      "questions": [
+                {"q": "1. I went to China but I ___ the wall.", "type": "single",
+                 "options": [{"text": "didn’t see"}, {"text": "didn’t saw"}],
+                 "correct": [0]},
+                {"q": "2. In India, I ___ the Taj Mahal.", "type": "single",
+                 "options": [{"text": "didn’t visit"}, {"text": "didn’t visited"}],
+                 "correct": [0]},
+                {"q": "3. I went to Egypt but I didn’t ___ a picture of the Sphinx.",
+                 "type": "single",
+                 "options": [{"text": "take"}, {"text": "took"}], "correct": [0]},
+                {"q": "4. I went to Australia but I didn’t ___ in the sun.",
+                 "type": "single",
+                 "options": [{"text": "relax"}, {"text": "relaxed"}], "correct": [0]},
+                {"q": "5. In Brazil, I ___ in the Amazon.", "type": "single",
+                 "options": [{"text": "didn’t swim"}, {"text": "didn’t swam"}],
+                 "correct": [0]},
+            ]}),
+
+            ("video", {"title": "Видео: на чём Грег поехал на каникулы",
+                       "url": "", "provider": ""}),
+
+            ("match", {
+                "title": "Лукас побывал в Древнем Египте. Вопросы и ответы интервью "
+                         "перепутались — помоги им найти друг друга!",
+                "pairs": [
+                    {"left": "Lucas, where did you go in your time machine?",
+                     "right": "I went to ancient Egypt.",
+                     "right_audio_tts": "I went to ancient Egypt."},
+                    {"left": "What did you see?",
+                     "right": "I saw the pyramids. There were thousands of people "
+                              "working there.",
+                     "right_audio_tts": "I saw the pyramids. There were thousands of "
+                                        "people working there."},
+                    {"left": "Did you have fun?", "right": "Yes, I did. It was great.",
+                     "right_audio_tts": "Yes, I did. It was great."},
+                    {"left": "Was it hot?",
+                     "right": "Yes, it was. But I was OK. I had a big hat.",
+                     "right_audio_tts": "Yes, it was. But I was OK. I had a big hat."},
+                    {"left": "How long did you stay there?", "right": "About five hours.",
+                     "right_audio_tts": "About five hours."},
+                    {"left": "Did you buy anything?",
+                     "right": "No, I didn’t, but I took some photos.",
+                     "right_audio_tts": "No, I didn't, but I took some photos."},
+                ],
+            }),
+
+            ("task", {
+                "title": "Дополнительное задание — напиши о своём путешествии "
+                         "в машине времени",
+                "needs_review": True,
+                "html":
+                    "<p>Ты можешь отправиться в любое время и любую страну — "
+                    "прояви воображение! Воспользуйся рассказом Лукаса как образцом.</p>"
+                    "<p><i>Lucas went to ancient Egypt in his time machine. He saw the "
+                    "pyramids and he saw thousands of people. He had fun in Egypt. "
+                    "He had a big hat with him. He stayed in Egypt for about five hours. "
+                    "He didn’t buy any food and took some photos.</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("congrats_popper")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание и готов к уроку.</h3>"
+                "<p>Ты — СУПЕР КРУТ! Жду тебя на уроке!</p>"}),
+        ],
+    },
+    "u8_test": {
+        "unit": "u8",
+        "unit_title": "Unit 8 · Countries",
+        "unit_sort": 8,
+        "lesson_title": "Test",
+        "lesson_sort": 7,
+        "kind": "test",
+        # Нумерация блоков как в выгрузке: match, пять «выбери правильный
+        # вариант» (у нас quiz, чтобы сохранить неверные варианты), пять
+        # «составь предложение», запись голоса.
+        # Картинок к match в выгрузке не было — взяты наши карточки стран.
+        # В выгрузке опечатка «didin't» — залито didn’t.
+        # К SPEAKING TASK картинки с вопросительными словами не было —
+        # слова названы в тексте задания.
+        "blocks": [
+            ("match", {
+                "title": "Соедини слова с картинками",
+                "pairs": [
+                    {"left_image": img("u8", "country_australia"), "right": "Australia",
+                     "right_audio_tts": "Australia"},
+                    {"left_image": img("u8", "country_china"), "right": "China",
+                     "right_audio_tts": "China"},
+                    {"left_image": img("u8", "country_turkey"), "right": "Turkey",
+                     "right_audio_tts": "Turkey"},
+                    {"left_image": img("u8", "country_egypt"), "right": "Egypt",
+                     "right_audio_tts": "Egypt"},
+                    {"left_image": img("u8", "country_argentina"), "right": "Argentina",
+                     "right_audio_tts": "Argentina"},
+                    {"left_image": img("u8", "country_brazil"), "right": "Brazil",
+                     "right_audio_tts": "Brazil"},
+                ],
+            }),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: ___ you buy me a present?", "type": "single",
+                 "options": [{"text": "Did"}, {"text": "Are"}, {"text": "Were"}],
+                 "correct": [0]},
+                {"q": "B: No, I ___.", "type": "single",
+                 "options": [{"text": "didn’t"}, {"text": "did"},
+                             {"text": "weren’t"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: Did you ___ shopping with Maya on Sunday?", "type": "single",
+                 "options": [{"text": "go"}, {"text": "went"}, {"text": "going"}],
+                 "correct": [0]},
+                {"q": "B: Yes, we ___.", "type": "single",
+                 "options": [{"text": "did"}, {"text": "go"}, {"text": "didn’t"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "He ___ see the pyramids in Egypt.", "type": "single",
+                 "options": [{"text": "didn’t"}, {"text": "don’t"},
+                             {"text": "isn’t"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: Where ___ you stay in Mexico?", "type": "single",
+                 "options": [{"text": "did"}, {"text": "were"}, {"text": "are"}],
+                 "correct": [0]},
+                {"q": "B: We ___ in a hotel on the beach.", "type": "single",
+                 "options": [{"text": "stayed"}, {"text": "stay"}, {"text": "staying"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: ___ he eat a lot of pizza yesterday?", "type": "single",
+                 "options": [{"text": "Did"}, {"text": "Does"}, {"text": "Do"}],
+                 "correct": [0]},
+                {"q": "B: Yes, he ___.", "type": "single",
+                 "options": [{"text": "did"}, {"text": "does"}, {"text": "didn’t"}],
+                 "correct": [0]},
+            ]}),
+
+            ("order", {
+                "words": ["Did", "you", "have", "fun", "in", "Spain?"],
+                "sentence": "Did you have fun in Spain?",
+                "audio_tts": "Did you have fun in Spain?",
+            }),
+
+            ("order", {
+                "words": ["How", "long", "did", "she", "stay", "there?"],
+                "sentence": "How long did she stay there?",
+                "audio_tts": "How long did she stay there?",
+            }),
+
+            ("order", {
+                "words": ["We", "went", "to", "Chile", "for", "a week."],
+                "sentence": "We went to Chile for a week.",
+                "audio_tts": "We went to Chile for a week.",
+            }),
+
+            ("order", {
+                "words": ["Did", "you", "go", "to", "a", "museum?"],
+                "sentence": "Did you go to a museum?",
+                "audio_tts": "Did you go to a museum?",
+            }),
+
+            ("order", {
+                "words": ["Did", "she", "send", "lots of", "postcards?"],
+                "sentence": "Did she send lots of postcards?",
+                "audio_tts": "Did she send lots of postcards?",
+            }),
+
+            ("speaking", {
+                "title": "SPEAKING TASK \U0001f3a4",
+                "needs_review": True,
+                "html":
+                    "<p>Представь, что ты берёшь интервью у космонавта. Составь "
+                    "5 вопросов со словами <b>Where · How · Who · What "
+                    "· How long</b> и ответь на них.</p>"
+                    "<p><i>For example:<br>Where did you go? — I went to Mars.<br>"
+                    "How did you get there? — I flew in a rocket.<br>"
+                    "Who did you meet there? — I met friendly purple aliens. / "
+                    "I didn’t meet anyone.</i></p>"
+                    "<p>Запиши свой ответ, нажав на кнопку микрофона.</p>",
+            }),
+        ],
+    },
 }
 
 
