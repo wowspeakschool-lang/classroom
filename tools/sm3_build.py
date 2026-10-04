@@ -2374,6 +2374,63 @@ LESSONS = {
                 "<p>Не забудь показать свой текст на занятии. Увидимся!</p>"}),
         ],
     },
+    "u4_hw3": {
+        "unit": "u4",
+        "unit_title": "Unit 4 \u00b7 In the town",
+        "unit_sort": 4,
+        "lesson_title": "Homework 3",
+        "lesson_sort": 2,
+        "kind": "homework",
+        # Блок 3 «Диаграмма» — у нас hotspot: точки стоят у номеров (1)-(4)
+        # на самой картинке, координаты посчитаны по оранжевым цифрам.
+        # Шаблон песни для блока 4 в выгрузке был картинкой-сканом; у нас он
+        # текстом — читается лучше, содержание то же.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_headphones")}" alt="" style="height:200px"></p>'
+                "<h2>Привет!</h2>"
+                "<p>Сегодня мы послушаем с тобой песню и сделаем несколько интересных "
+                "заданий. Удачи тебе!</p>"}),
+
+            ("video", {"title": "Итак, поехали! Послушай песню. Кто главный герой?",
+                       "url": "", "provider": ""}),
+
+            ("hotspot", {
+                "title": "Послушай песню ещё раз и расставь пропущенные слова. "
+                         "Осторожно: в задании ДВА ЛИШНИХ СЛОВА!",
+                "mode": "label",
+                "image": img("u4", "song_lost_in_town"),
+                "points": [
+                    {"x": 19.0, "y": 11.4, "text": "Opposite", "audio_tts": "opposite"},
+                    {"x": 23.0, "y": 41.0, "text": "below", "audio_tts": "below"},
+                    {"x": 18.0, "y": 46.0, "text": "near", "audio_tts": "near"},
+                    {"x": 18.0, "y": 66.8, "text": "in front of", "audio_tts": "in front of"},
+                ],
+                "extras": ["between", "above"],
+            }),
+
+            ("task", {
+                "title": "Придумай свою версию песни",
+                "needs_review": True,
+                "html":
+                    "<p>У меня для тебя есть ещё одно задание. Оно дополнительное, "
+                    "но если ты его сделаешь, будешь ПРОСТО ГУРУ английского!</p>"
+                    "<p>Послушай песню ещё раз и заполни пропуски своими местами в городе:</p>"
+                    "<p><i>Opposite the \u2026,<br>In the \u2026,<br>"
+                    "I\u2019m looking for the \u2026<br>But it\u2019s not there.</i></p>"
+                    "<p><i>Just below the \u2026,<br>Near the \u2026,<br>"
+                    "My map says there\u2019s a \u2026<br>But there is not.</i></p>"
+                    "<p><i>In front of the \u2026,<br>In the \u2026,<br>"
+                    "There\u2019s a place<br>Where people always meet.</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_smiley")}" alt="" style="height:180px"></p>'
+                "<h3>Ты справился, молодец!</h3>"
+                "<p>Не забудь показать свой ответ на уроке учителю — он даст тебе "
+                "дополнительный балл. BYE :)</p>"}),
+        ],
+    },
 }
 
 
