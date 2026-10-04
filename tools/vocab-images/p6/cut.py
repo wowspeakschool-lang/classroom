@@ -16,11 +16,11 @@ lib.BG_MIN, lib.BG_GREY, lib.KEEP_SOFT = 250, 8, True
 FILL_OLD = None  # заливка дыр больше не нужна: её заменил строгий порог фона
 FILL = set()
 # вырезать зажатый белый фон (не везде: белое внутри пузырей пропадало)
-HOLES = set()
+HOLES = {'argument', 'arrangement', 'weakness', 'construct', 'knock over', 'terribly', 'embarrassment', 'fitness', 'friendliness'}
 
 # Листы, где генератор разложил картинки иначе, чем в промпте
 # Границы клеток вручную: {лист: {номер ряда: [границы]}}; граница-ступенька (y, x_выше, x_ниже)
-CUTS = {}
+CUTS = {3: {0: [321, 607, 936, (150, 1239, 1225)]}}
 
 IMAGES = '/tmp/claude-0/-home-user-classroom/d4a2a0a4-519c-5b81-af84-18451bfcf9dd/images'
 
@@ -199,7 +199,7 @@ def clean_png(p, peel=4, pale=212, grey=32, speck=0.004, pure=250):
         if c.sum() < 60 or mn[c].mean() < pure:
             continue
         ring = binary_dilation(c, iterations=3) & ~c
-        if p.endswith(tuple(f'/{fname(w)}' for w in HOLES)) and (mn[ring] < 150).mean() >= 0.35:  # белое внутри пузырей уходило вместе с дырками
+        if p.endswith(tuple(f'/{fname(w)}' for w in HOLES)):  # только по списку: белое внутри пузырей и бумаги — тоже «дырка»
             a[c] = 0
     lab, n = label(a > 40)
     if n > 1:
