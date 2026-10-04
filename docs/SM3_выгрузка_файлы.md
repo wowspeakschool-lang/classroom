@@ -122,3 +122,20 @@ parentId = '<id папки юнита>'
 
 В Unit 5 домашек **восемь**, а «Homework 2» разложена на два файла — это
 один урок.
+
+## Unit 6 — папка `1mINuJdaEmlo-nHZ7Y2F3SvAqQf2ClFet`
+
+| Файл | txt | pdf |
+|---|---|---|
+| Homework 1 (1) | `18x2A-xc2BJugAuTVKKe6gqNkqOcc0rO0` | `1Vn0Vi12v6o4q-s0alkJWCQyGt3j-RUw_` |
+| Homework 1 (2) | `1qxfdjuj4tFCJqb2IoB73KoF-xyqOTO7w` | `12DcSxjOPWfKTZdHmWvmvjkA1RuSQ-XIb` |
+| Homework 2 | `1SstfWInRXP9EIwFNv7LDx8wu8uLC0bHS` | `1TCfRJMLrYbyNhKAjbfsmlq7rZTVnt86Y` |
+| Homework 3 | `1Wnj-7iqKOvILkt9ZeRYMMxMwoxrUWYMN` | `1DPI6An_yFQQv9nSxcUs3BUKA4X9sSnsM` |
+| Homework 4 | `1U_vGQYi_R5_Sgeo6OszveCOfXN9SQ7q8` | `1-tG40dWV7H3mlBAX3c3JoFjnT05VGxGs` |
+| Homework 5 | `1HvkJEbR17SBHj9KDr4sf2lhzGEHdg6rb` | `12FruUMk-LCPDeZwvTOEYzum11x-oxyM3` |
+| Homework 6 | `1PFuU8nvrHMdA9lXaO2mn3nvaBCcJNH4x` | `1N4B4eRezI5htHk5Df6g9GSj8zsneocZ7` |
+| Homework 7 | `1XD_PfZLTS-7nuW1w5lsMHUgk1zZl9Iqs` | `1TMt1UTxH8TdbvZ3JMsL77L_VditU0KQU` |
+| Homework 8 | `1RZAmJEFhzxFiBawB9NUVBXoLMfrCaS8X` | `1AcVC7ExsKvwLPurJtT-RMBkJFjO2_8up` |
+| Test | `1HmJ7ChZ5h-x5yZVLMCGbnZxmKpUtP8ok` | `12tiBHHh8mpsYTGTr4pkKC1Rvaj2aCJgm` |
+
+Домашек **восемь**, «Homework 1» разложена на два файла — это один урок.

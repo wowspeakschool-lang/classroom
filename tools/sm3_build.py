@@ -108,6 +108,19 @@ U5_SEA = [
 ]
 
 
+U6_GADGETS = [
+    ("mobile phone", "мобильный телефон", "gad_phone"),
+    ("tablet", "планшет", "gad_tablet"),
+    ("laptop", "ноутбук", "gad_laptop"),
+    ("torch", "фонарик", "gad_torch"),
+    ("walkie-talkie", "рация", "gad_walkie_talkies"),
+    ("lift", "лифт", "gad_lift"),
+    ("games console", "игровая приставка", "gad_console"),
+    ("electric toothbrush", "электрическая зубная щётка", "gad_toothbrush"),
+    ("electric fan", "вентилятор", "gad_fan"),
+]
+
+
 def img(unit, name):
     return f"{MEDIA}sm3/{unit}/{name}.webp"
 
@@ -3708,6 +3721,356 @@ LESSONS = {
                     "5. Where were you last summer?</p>"
                     "<p>Запиши свой ответ, нажав на кнопку микрофона.</p>",
             }),
+        ],
+    },
+    "u6_hw1": {
+        "unit": "u6",
+        "unit_title": "Unit 6 · Gadgets",
+        "unit_sort": 6,
+        "lesson_title": "Homework 1",
+        "lesson_sort": 0,
+        "kind": "homework",
+        # Обе части выгрузки одним уроком: «(1)» — словарный тренажёр на 9 слов,
+        # «(2)» — дополнительная часть. Блоки 1-4 — тренажёр, 5 — перемычка,
+        # 6-8 — вторая часть.
+        # Цены в выгрузке ребёнок смотрел на развороте учебника. У нас свой лист
+        # (tools/sm3_u6_prices.py): на картинке магазина ценники пустые, а
+        # дорисовать их на место нельзя — ценник у зубной щётки стоит под радио.
+        # Поэтому режим «впиши», неверные варианты (345, 25, 120, 110) не нужны:
+        # ребёнок складывает, а не выбирает.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_rocket")}" alt="" style="height:200px"></p>'
+                "<h2>Привет! А ты любишь гаджеты и всякие технологии?</h2>"
+                "<p>Выполни все задания, чтобы выучить слова на 100%!</p>"}),
+
+            ("flashcards", {"cards": [
+                {"text": en, "translation": ru, "audio_tts": en, "image": img("u6", f)}
+                for en, ru, f in U6_GADGETS
+            ]}),
+
+            ("quiz", quiz_ru_to_en(U6_GADGETS)),
+
+            ("exact_input", {"items": [
+                {"image": img("u6", f), "prompt": "Посмотри на картинку и напиши слово",
+                 "accept": [en, en.capitalize()], "audio_tts": en}
+                for en, ru, f in U6_GADGETS
+            ]}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("good_luck_clover")}" alt="" style="height:180px"></p>'
+                "<h3>А теперь — вторая, дополнительная часть</h3>"
+                "<p>Выполнив эти задания, ты станешь МЕГА крутым учеником!</p>"
+                "<p>Посмотри на ценники и впиши в пропуски, сколько стоит покупка.</p>"}),
+
+            ("gaps", {
+                "title": "Посмотри на цены и впиши суммы (только число)",
+                "image": img("u6", "shop_prices"),
+                "text":
+                    "1. A: Hello, can I help you? B: Yes, I’d like a laptop, please. "
+                    "A: That’s £__325__.\n"
+                    "2. A: Hello, can I help you? B: Yes, I’d like a games console, "
+                    "please. A: That’s £__200__.\n"
+                    "3. A: Hello, can I help you? B: Yes, I’d like a torch and an "
+                    "electric toothbrush, please. A: That’s £__20__.\n"
+                    "4. A: Hello, can I help you? B: Yes, I’d like a tablet and a "
+                    "walkie-talkie, please. A: That’s £__115__.",
+                "gaps_expected": 4,
+            }),
+
+            ("task", {
+                "title": "Напиши, какие гаджеты есть у тебя",
+                "needs_review": True,
+                "html":
+                    "<p>Молодец! Ты справился. А это — твоё последнее задание.</p>"
+                    "<p><i>Например: I’ve got a tablet and a torch.</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Ура, ты выполнил все задания — ты супер ученик!</h3>"
+                "<p>За это держи звёздочку. До встречи на занятии!</p>"}),
+        ],
+    },
+    "u6_hw2": {
+        "unit": "u6",
+        "unit_title": "Unit 6 · Gadgets",
+        "unit_sort": 6,
+        "lesson_title": "Homework 2",
+        "lesson_sort": 1,
+        "kind": "homework",
+        # Блоков столько же, сколько в выгрузке. К «составь предложение» и к
+        # «выбери правильный вариант» подставлены наши парные картинки —
+        # в выгрузке их не было. К «мультики и книги» и к «PE и математика»
+        # пары нет, эти блоки без картинки.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_laptop")}" alt="" style="height:200px"></p>'
+                "<h2>Привет, добро пожаловать в домашнее задание!</h2>"
+                "<p>Сегодня мы посмотрим видео и выполним упражнения. А в конце тебя "
+                "ждёт дополнительное задание — оно по желанию, но ты будешь МЕГА крут, "
+                "когда справишься с ним!</p>"}),
+
+            ("video", {"title": "Видео: сравнительная степень прилагательных",
+                       "url": "", "provider": ""}),
+
+            ("sort", {
+                "title": "Распредели прилагательные: к каким прибавляем -er, "
+                         "а к каким ставим more перед прилагательным?",
+                "groups": [
+                    {"name": "+ er", "items": [
+                        {"text": "big"}, {"text": "small"}, {"text": "easy"},
+                        {"text": "cheap"}, {"text": "happy"}, {"text": "fast"},
+                    ]},
+                    {"name": "more …", "items": [
+                        {"text": "interesting"}, {"text": "beautiful"},
+                        {"text": "expensive"}, {"text": "dangerous"},
+                    ]},
+                ],
+            }),
+
+            ("order", {
+                "image": img("u6", "pair_tv_watch"),
+                "words": ["A TV", "is", "more", "expensive", "than", "a watch."],
+                "sentence": "A TV is more expensive than a watch.",
+                "audio_tts": "A TV is more expensive than a watch.",
+            }),
+
+            ("order", {
+                "image": img("u6", "pair_cake_cookie"),
+                "words": ["A cake", "is", "bigger", "than", "a cookie."],
+                "sentence": "A cake is bigger than a cookie.",
+                "audio_tts": "A cake is bigger than a cookie.",
+            }),
+
+            ("order", {
+                "image": img("u6", "pair_plane_bicycle"),
+                "words": ["A plane", "is", "faster", "than", "a bike."],
+                "sentence": "A plane is faster than a bike.",
+                "audio_tts": "A plane is faster than a bike.",
+            }),
+
+            ("order", {
+                "image": img("u6", "pair_football_golfball"),
+                "words": ["Football", "is", "more", "interesting", "than", "golf."],
+                "sentence": "Football is more interesting than golf.",
+                "audio_tts": "Football is more interesting than golf.",
+            }),
+
+            ("order", {
+                "words": ["Cartoons", "are", "funnier", "than", "books."],
+                "sentence": "Cartoons are funnier than books.",
+                "audio_tts": "Cartoons are funnier than books.",
+            }),
+
+            ("quiz", {"title": "Выбери правильный вариант ответа", "questions": [
+                {"q": "A tiger is ___ than a cat.", "type": "single",
+                 "image": img("u6", "pair_tiger_cat"),
+                 "options": [{"text": "stronger"}, {"text": "more strong"},
+                             {"text": "more stronger"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Выбери правильный вариант ответа", "questions": [
+                {"q": "An elephant is ___ than a mouse.", "type": "single",
+                 "image": img("u6", "pair_elephant_mouse"),
+                 "options": [{"text": "bigger"}, {"text": "biger"}, {"text": "more big"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Выбери правильный вариант ответа", "questions": [
+                {"q": "A butterfly is ___ than a caterpillar.", "type": "single",
+                 "image": img("u6", "pair_butterfly_caterpillar"),
+                 "options": [{"text": "more beautiful"}, {"text": "more beautifuller"},
+                             {"text": "beautifuller"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Выбери правильный вариант ответа", "questions": [
+                {"q": "PE is ___ than Maths.", "type": "single",
+                 "options": [{"text": "funnier"}, {"text": "more funny"},
+                             {"text": "funnyer"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Выбери правильный вариант ответа", "questions": [
+                {"q": "A computer is ___ than a torch.", "type": "single",
+                 "image": img("u6", "pair_computer_torch"),
+                 "options": [{"text": "more expensive"}, {"text": "expensiver"},
+                             {"text": "more expensiver"}],
+                 "correct": [0]},
+            ]}),
+
+            ("speaking", {
+                "title": "Дополнительное задание \U0001f3a4",
+                "needs_review": True,
+                "html":
+                    "<p>Его можно сделать по желанию. Но если сделаешь, будешь "
+                    "нереально крут!</p>"
+                    "<p>Ниже картинка с двумя собачками — Lucky и Mister. Скажи "
+                    "3–4 предложения, сравнивая их. Не забудь про сравнительную "
+                    "степень прилагательных.</p>"
+                    "<p><i>Например: Lucky is more beautiful than Mister.</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{img("u6", "scene_two_dogs")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("congrats_popper")}" alt="" style="height:180px"></p>'
+                "<h3>Вау, поздравляю! Ты завершил всё домашнее задание — "
+                "ты просто МЕГА КРУТ!</h3>"
+                "<p>Увидимся на занятии ;)</p>"}),
+        ],
+    },
+    "u6_hw3": {
+        "unit": "u6",
+        "unit_title": "Unit 6 · Gadgets",
+        "unit_sort": 6,
+        "lesson_title": "Homework 3",
+        "lesson_sort": 2,
+        "kind": "homework",
+        # Блоков столько же, сколько в выгрузке. Блок 3 («Диаграмма») собран
+        # нашим hotspot: точки стоят на кружках-подсказках, а не на самих
+        # кнопках — кнопки мелкие и стоят вплотную, номера налезали бы друг
+        # на друга.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_headphones")}" alt="" style="height:200px"></p>'
+                "<h2>Привет-привет! Давай начинать домашнюю работу :)</h2>"
+                "<p>Послушай песню и исправь предложения.</p>"}),
+
+            ("task", {
+                "title": "Послушай песню и исправь предложения",
+                "needs_review": True,
+                "audio": "",
+                "html":
+                    "<p><i>My gadget is smaller than yours. → My gadget is bigger "
+                    "than yours.</i></p>"
+                    "<p>My gadget is uglier than yours. → …<br>"
+                    "My gadget is older than yours. → …<br>"
+                    "My gadget is cheaper than yours. → …</p>",
+            }),
+
+            ("hotspot", {
+                "title": "Послушай песенку ещё раз. Посмотри на гаджет и подпиши, "
+                         "что происходит, когда нажимаешь каждую кнопку",
+                "mode": "label",
+                "image": img("u6", "scene_four_button_gadget"),
+                "points": [
+                    {"x": 11.0, "y": 16.0, "text": "torch comes on",
+                     "audio_tts": "torch comes on"},
+                    {"x": 83.0, "y": 18.0, "text": "plays a song",
+                     "audio_tts": "plays a song"},
+                    {"x": 12.0, "y": 64.0, "text": "fan comes on",
+                     "audio_tts": "fan comes on"},
+                    {"x": 83.0, "y": 65.0, "text": "phone someone",
+                     "audio_tts": "phone someone"},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "Заверши диалоги о гаджете",
+                "text":
+                    "1. A: What happens when you press the red button?\n"
+                    "B: The torch comes on. I use it to __see everything__.\n"
+                    "2. A: What happens when you press the blue button?\n"
+                    "B: The __song__ comes on. I use it to __have fun__.\n"
+                    "3. A: What happens when you press the brown button?\n"
+                    "B: The __fan__ comes on. I use it to __feel colder__.\n"
+                    "4. A: What happens when you press the green button?\n"
+                    "B: The __phone__ comes on. I use it to __phone someone__.",
+                "gaps_expected": 7,
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_smiley")}" alt="" style="height:180px"></p>'
+                "<h3>Ты отлично потрудился!</h3>"
+                "<p>Самое время отдохнуть :)</p>"}),
+        ],
+    },
+    "u6_hw4": {
+        "unit": "u6",
+        "unit_title": "Unit 6 · Gadgets",
+        "unit_sort": 6,
+        "lesson_title": "Homework 4",
+        "lesson_sort": 3,
+        "kind": "homework",
+        # Блоки один в один с выгрузкой.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_highfive")}" alt="" style="height:200px"></p>'
+                "<h2>Привет, добро пожаловать в домашнее задание!</h2>"
+                "<p>Сегодня мы посмотрим видео и выполним упражнения. А в конце тебя "
+                "ждёт дополнительное задание — оно по желанию, но ты будешь МЕГА крут, "
+                "когда справишься с ним!</p>"
+                "<p>Для начала посмотри видео ниже и ответь на вопрос устно: "
+                "<b>Who is the fastest — the boy, the girl or Hammy?</b></p>"}),
+
+            ("video", {"title": "Видео: превосходная степень прилагательных",
+                       "url": "", "provider": ""}),
+
+            ("order", {
+                "words": ["I’m", "the", "strongest!"],
+                "sentence": "I’m the strongest!",
+                "audio_tts": "I'm the strongest!",
+            }),
+
+            ("order", {
+                "words": ["I’m", "the", "most", "intelligent!"],
+                "sentence": "I’m the most intelligent!",
+                "audio_tts": "I'm the most intelligent!",
+            }),
+
+            ("sort", {
+                "title": "Отлично! Теперь распредели прилагательные по категориям",
+                "groups": [
+                    {"name": "the … + est", "items": [
+                        {"text": "fast"}, {"text": "cheap"}, {"text": "big"},
+                        {"text": "small"}, {"text": "funny"}, {"text": "old"},
+                    ]},
+                    {"name": "the most …", "items": [
+                        {"text": "interesting"}, {"text": "dangerous"},
+                        {"text": "expensive"}, {"text": "beautiful"},
+                        {"text": "boring"}, {"text": "exciting"},
+                    ]},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "Поставь прилагательные из скобок в превосходную форму "
+                         "(«самый …»). Первый пропуск уже заполнен как образец",
+                "text":
+                    "Jack can run, he can run very fast, he’s the fastest (fast) boy "
+                    "in school. And Jane tells jokes like no one else, she’s "
+                    "__the funniest__ (funny) and she’s cool. Robert’s "
+                    "__the happiest__ (happy) — a friendly boy, he laughs and smiles "
+                    "all day, while Sally’s __the quietest__ (quiet), she doesn’t "
+                    "speak up, she says she’s got nothing to say. __The best__ (good) "
+                    "student in our year is Beth McBeth — she’s with me, "
+                    "I’m going to tell her everything and introduce Class 6C.",
+                "gaps_expected": 4,
+            }),
+
+            ("task", {
+                "title": "Дополнительное задание — ответь на вопросы письменно",
+                "needs_review": True,
+                "html":
+                    "<p>Его можно сделать по желанию. Но если сделаешь, будешь нереально "
+                    "крут и получишь дополнительную ⭐</p>"
+                    "<p>1. Who is the funniest person in your class? "
+                    "<i>Например: Alex is the funniest person in my class.</i><br>"
+                    "2. Who is the oldest person in your class?<br>"
+                    "3. Who is the youngest person in your class?<br>"
+                    "4. Who is best at drawing in your class?<br>"
+                    "5. Who is the most intelligent person in your class?</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю, ты завершил домашнее задание! Ты просто супер!</h3>"
+                "<p>Увидимся на занятии ;)</p>"}),
         ],
     },
 }
