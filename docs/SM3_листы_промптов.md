@@ -382,30 +382,70 @@ Bright 3D-rendered cartoon style, Pixar-like, vivid saturated colours, clean and
 Output size: 2048 x 683 px.
 ```
 
-### Л3.10 · Моменты дня для картинки к тесту — 5 карточек (3+2)
+### Л3.10 · Картинка к блоку 2 теста Unit 3 — восемь пар «занятие + часы»
 
-Карточки к блоку 2 теста Unit 3 («посмотри на картинку и заполни пропуски»).
-**Часов в промпте нет и быть не должно**: генератор не держит стрелки (из 12
-сгенерированных циферблатов правильными вышло 5), поэтому циферблаты рисует
-`tools/gen_clocks.py`, а картинку собирает `tools/sm3_day_times.py`. Ещё три
-карточки берутся готовыми из Л3.2 — прогулка с собакой, уборка, мытьё посуды.
+Заменяет коллаж из выгрузки (фотосток вперемешку с клипартом, фотографии
+детей — Анна забраковала). Рисуется **целиком генератором, вместе с часами**:
+Анна проверила, стрелки он держит.
+
+Время на пяти первых парах — это ответы задания, их сверять обязательно.
+Три последние отвлекающие и нарочно близки к верным: 6:30 рядом с 6:00,
+7:45 рядом с 7:15.
 
 ```
-A sheet of five separate cards in a clean grid of three cells in the top row and two cells in the bottom row, equal cells separated by thin light-grey gutters, the empty sixth position left as plain white. Each cell shows the objects of one moment of a child's day with nobody there:
-1) doing homework - a desk with an open exercise book, a pencil and a rubber on it, a school backpack leaning against the chair, a desk lamp switched on;
-2) going to bed - a child's bed at night with the duvet turned down and a teddy on the pillow, a small bedside lamp glowing, the window dark with a moon and stars outside;
-3) playing with friends outside - a sunny grassy yard with a football, a kick scooter lying on its side and a skipping rope on the grass, a bench behind them;
-4) having dinner with the family - a dining table laid for four, four plates of food, four glasses, a jug of juice and a bowl of salad in the middle;
-5) playing the flute - a wooden recorder resting on a chair beside a music stand that holds one plain blank sheet of paper.
-No people at all - no humans, no hands, no faces anywhere.
-Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light - exactly the style of the household-chore cards. Absolutely no text, no letters, no numbers, no labels, no brand marks anywhere, and no clocks or watches in any cell.
-Output size: 2048 x 1365 px, each cell at least 650 px.
+A sheet of eight separate wide cards in a clean 2x4 grid, equal cells separated by thin
+light-grey gutters, on a soft cream background. Each card shows, side by side, the objects
+of one moment of a child's day on the left and one round wall clock on the right.
+
+Every clock is the same design: a plain white circular face with a thin dark grey rim,
+twelve short dark tick marks around the edge, no numbers at all, a short thick hour hand
+and a long thin minute hand, both dark grey, and a small dark dot at the centre.
+Draw each clock reading exactly the time described for its card:
+
+1) taking the dog for a walk - a dog lead hanging by the front door with a small dog
+   sitting under it. Clock: quarter past seven - hour hand just past 7, minute hand
+   pointing straight right at 3.
+2) doing homework - a desk with an open exercise book, a pencil and a rubber on it, a
+   school backpack leaning against the chair, a desk lamp switched on. Clock: six o'clock
+   exactly - hour hand pointing straight down at 6, minute hand pointing straight up at 12.
+3) going to bed - a child's bed at night with the duvet turned down and a teddy on the
+   pillow, a small bedside lamp glowing, the window dark with a moon and stars outside.
+   Clock: half past ten - hour hand halfway between 10 and 11, minute hand pointing
+   straight down at 6.
+4) tidying up the room - a tidy bedroom shelf with a big box of toys beside it and a few
+   toys still on the floor. Clock: half past eight - hour hand halfway between 8 and 9,
+   minute hand pointing straight down at 6.
+5) playing with friends outside - a sunny grassy yard with a football, a kick scooter
+   lying on its side and a skipping rope on the grass, a bench behind them. Clock: eleven
+   o'clock exactly - hour hand pointing at 11, minute hand pointing straight up at 12.
+6) having dinner with the family - a dining table laid for four, four plates of food, four
+   glasses, a jug of juice and a bowl of salad in the middle. Clock: half past six - hour
+   hand halfway between 6 and 7, minute hand pointing straight down at 6.
+7) washing up - a kitchen sink full of foam with dirty plates stacked beside it. Clock:
+   quarter to eight - hour hand almost at 8, minute hand pointing straight left at 9.
+8) playing the flute - a wooden recorder resting on a chair beside a music stand holding
+   one plain blank sheet of paper. Clock: quarter past three - hour hand just past 3,
+   minute hand pointing straight right at 3.
+
+No people at all - no humans, no hands, no faces anywhere; the dog is fine.
+Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated
+colours, soft even light - exactly the style of the household-chore cards. Absolutely no
+text, no letters, no numbers, no labels, no brand marks anywhere, including on the clock
+faces and on the sheet of music paper.
+Output size: 2048 x 2048 px.
 ```
 
-Что проверить на готовом листе: во второй карточке — **ночь** (тёмное окно,
-горит ночник), иначе она сольётся с уборкой комнаты из Л3.2; в третьей — улица
-и трава, иначе мяч и самокат читаются как «убери игрушки»; ни в одной ячейке
-нет часов.
+Что проверяю на готовой картинке, по ячейкам:
+
+* **время на всех восьми циферблатах** — главное; каждую стрелку сверяю с таблицей;
+* ночь в третьей (тёмное окно, горит ночник), иначе сольётся с уборкой комнаты;
+* улица и трава в пятой, иначе мяч с самокатом читаются как «убери игрушки»;
+* нет людей, рук, букв и цифр — в том числе на циферблатах;
+* стиль совпадает с карточками дел из Л3.2.
+
+Если время где-то разъедется — запасной путь готов: `tools/gen_clocks.py` рисует
+циферблат по углу, `tools/sm3_day_times.py` собирает картинку из карточек занятий
+и таких циферблатов. Тогда генератору уйдут только занятия, без часов.
 
 ---
 

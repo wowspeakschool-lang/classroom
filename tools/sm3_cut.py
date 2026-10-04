@@ -76,6 +76,8 @@ SHEETS = [
     ("29.webp", "Л3.7",  "u3", 1, 1, ["scene_kitchen_after_chores"]),
     ("30.webp", "Л3.8",  "u3", 1, 1, ["scene_night_jobs"]),
     ("31.webp", "Л3.9",  "u3", 1, 1, ["scene_daily_routine"]),
+    # Л3.10 режем, только если пойдём запасным путём (занятия отдельно, часы
+    # скриптом). Основной путь — вся картинка одним куском от генератора.
     ("32.webp", "Л3.10", "u3", 2, 3, ["day_homework", "day_bedtime", "day_play_outside",
                                       "day_family_dinner", "day_flute", None]),
     # --- UNIT 5 · UNDER THE SEA ---
