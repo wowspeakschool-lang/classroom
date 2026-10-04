@@ -2431,6 +2431,114 @@ LESSONS = {
                 "дополнительный балл. BYE :)</p>"}),
         ],
     },
+    "u4_hw4": {
+        "unit": "u4",
+        "unit_title": "Unit 4 \u00b7 In the town",
+        "unit_sort": 4,
+        "lesson_title": "Homework 4",
+        "lesson_sort": 3,
+        "kind": "homework",
+        # В выгрузке 16 блоков, у нас 12: пять блоков «Верно/неверно» с одним
+        # утверждением каждый сведены в один блок с пятью. У нас truefalse на
+        # то и рассчитан, а пять кнопок «Проверить» подряд ребёнку ни к чему.
+        # Правило Language focus в выгрузке было картинкой-сканом — у нас текст.
+        # В выгрузке «sports center», в словаре юнита «sports centre» —
+        # оставлено centre.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_highfive")}" alt="" style="height:200px"></p>'
+                "<h2>Hi! Happy to see you!</h2>"
+                "<p>Сегодня тебя ждёт много интересных заданий. Готов начать?</p>"}),
+
+            ("text", {"html":
+                "<h3>Внимательно прочитай правило</h3>"
+                "<p><b>Language focus.</b> Use <b>be going to</b> + <b>infinitive of "
+                "purpose</b> to tell someone where you are going and why you are going "
+                "there.</p>"
+                "<p><i>Where are you going?</i> \u2014 I <b>am going to</b> the market "
+                "<b>to buy</b> some fruit and vegetables.<br>"
+                "<i>Where is he / she going?</i> \u2014 He / she <b>is going to</b> the "
+                "sports centre <b>to play</b> table tennis.<br>"
+                "<i>Where are we / they going?</i> \u2014 We / they <b>are going to</b> "
+                "the caf\u00e9 <b>to have</b> lunch.</p>"
+                "<p>А теперь перейдём к заданиям!</p>"}),
+
+            ("order", {
+                "words": ["Mandy", "is", "going", "to", "the", "square", "to meet",
+                          "her", "cousin."],
+                "sentence": "Mandy is going to the square to meet her cousin.",
+                "audio_tts": "Mandy is going to the square to meet her cousin.",
+            }),
+
+            ("order", {
+                "words": ["Richard and Pierre", "are", "going", "to the", "cinema",
+                          "to watch", "a new", "film."],
+                "sentence": "Richard and Pierre are going to the cinema to watch a new film.",
+                "audio_tts": "Richard and Pierre are going to the cinema to watch a new film.",
+            }),
+
+            ("order", {
+                "words": ["Serge", "is", "going", "to the", "library", "to get",
+                          "some books", "for his science project."],
+                "sentence": "Serge is going to the library to get some books for his science project.",
+                "audio_tts": "Serge is going to the library to get some books for his science project.",
+            }),
+
+            ("order", {
+                "words": ["Martina", "is", "going", "to the", "market", "to buy",
+                          "a birthday present", "for her sister."],
+                "sentence": "Martina is going to the market to buy a birthday present for her sister.",
+                "audio_tts": "Martina is going to the market to buy a birthday present for her sister.",
+            }),
+
+            ("order", {
+                "words": ["Emma", "is", "going", "to the", "sports centre", "to go", "swimming."],
+                "sentence": "Emma is going to the sports centre to go swimming.",
+                "audio_tts": "Emma is going to the sports centre to go swimming.",
+            }),
+
+            ("order", {
+                "words": ["We", "are", "going", "to the", "caf\u00e9", "to drink",
+                          "some", "milkshakes."],
+                "sentence": "We are going to the caf\u00e9 to drink some milkshakes.",
+                "audio_tts": "We are going to the cafe to drink some milkshakes.",
+            }),
+
+            ("text", {"html":
+                "<h3>Молодец! А теперь прочитай внимательно текст</h3>"
+                f'<p><img src="{img("u4", "postcard_ali")}" alt="Reading: a postcard" '
+                'style="max-width:100%"></p>'}),
+
+            ("truefalse", {
+                "title": "Прочитай открытку выше. Выбери «верно», если предложение "
+                         "верное, и «неверно», если нет",
+                "statements": [
+                    {"text": "It\u2019s the second (2nd) week of Ali\u2019s school trip.",
+                     "correct": False},
+                    {"text": "Ali\u2019s hotel is next to a museum.", "correct": False},
+                    {"text": "The tower isn\u2019t a new building.", "correct": True},
+                    {"text": "Below the tower there is a square.", "correct": True},
+                    {"text": "There aren\u2019t any paintings by famous artists in the museum.",
+                     "correct": False},
+                ],
+            }),
+
+            ("task", {
+                "title": "Напиши 3\u20136 предложений про свои планы",
+                "needs_review": True,
+                "html":
+                    "<p>Ура! Ты уже так много сделал. У меня для тебя ещё одно задание: "
+                    "представь, что ты отправился в путешествие.</p>"
+                    "<p><i>Например:<br>I\u2019m going to the market to\u2026<br>"
+                    "I\u2019m going to the park to\u2026</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>Ты просто СУПЕРКРУТ!</h3>"
+                "<p>Настоящий гуру английского. Так держать :) Увидимся на уроке!</p>"}),
+        ],
+    },
 }
 
 
