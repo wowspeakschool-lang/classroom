@@ -3381,6 +3381,335 @@ LESSONS = {
                 "<p>Увидимся на занятии :)</p>"}),
         ],
     },
+    "u5_hw6": {
+        "unit": "u5",
+        "unit_title": "Unit 5 · Under the sea",
+        "unit_sort": 5,
+        "lesson_title": "Homework 6",
+        "lesson_sort": 5,
+        "kind": "homework",
+        # Блоков столько же, сколько в выгрузке. Обе страницы рассказа «Saved by
+        # dolphins» вырезаны из PDF: в редакторе блок «Картинка» стоял пустым,
+        # он один и держал обе страницы. Шесть вопросов к рассказу в выгрузке
+        # были картинкой-сканом — перенесены текстом.
+        "blocks": [
+            ("text", {"html":
+                "<h3>Read the story:</h3>"
+                f'<p><img src="{img("u5", "story_dolphins_1")}" alt="" '
+                'style="max-width:100%"></p>'
+                f'<p><img src="{img("u5", "story_dolphins_2")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("task", {
+                "title": "Read the story again and answer the questions",
+                "needs_review": True,
+                "html":
+                    "<p>1. Who are they? <i>— Kylie Morgan and her dad</i><br>"
+                    "2. Where are they?<br>"
+                    "3. What does Kylie see?<br>"
+                    "4. What dangerous animal does Kylie’s dad see?<br>"
+                    "5. How many teeth does it have?<br>"
+                    "6. Why do the dolphins swim around Kylie?</p>",
+            }),
+
+            ("truefalse", {
+                "title": "Read the story and choose: True or False",
+                "statements": [
+                    {"text": "The dolphins hit their tails on the water to scare the sharks.",
+                     "answer": True},
+                    {"text": "The dolphins get close to Kylie to protect her.", "answer": True},
+                    {"text": "The white shark plays with the dolphins.", "answer": False},
+                    {"text": "Sharks aren’t dangerous animals.", "answer": False},
+                    {"text": "The dolphins save Kylie from the shark.", "answer": True},
+                ],
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Great job!</h3>"
+                "<p>Увидимся на уроке :)</p>"}),
+        ],
+    },
+    "u5_hw7": {
+        "unit": "u5",
+        "unit_title": "Unit 5 · Under the sea",
+        "unit_sort": 5,
+        "lesson_title": "Homework 7",
+        "lesson_sort": 6,
+        "kind": "homework",
+        # Блоков столько же, сколько в выгрузке. Шесть фотографий из учебника
+        # заменены нашим листом (tools/sm3_u5_eco_sheet.py), пляж «тогда и
+        # сейчас» — нашей парой картинок в одном файле: в блоке пропусков
+        # картинка одна.
+        # В блоке 5 выгрузки у шестого вопроса верным отмечен «bad», хотя в
+        # поле «пропущенные слова» стоит «good» — проверено по кружку в PDF.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>Привет! Как твои дела?</h2>"
+                "<p>Самое время начинать домашнюю работу!</p>"}),
+
+            ("task", {
+                "title": "Посмотри на картинки и закончи предложения",
+                "needs_review": True,
+                "image": img("u5", "eco_six_pictures"),
+                "html":
+                    "<p><i>Pictures …, … and … make me feel happy "
+                    "because …<br>"
+                    "Pictures …, … and … make me feel angry "
+                    "because …</i></p>",
+            }),
+
+            ("gaps", {
+                "title": "Посмотри на картинки и заполни пропуски: is / isn’t, "
+                         "aren’t, was / were",
+                "image": img("u5", "beach_then_now"),
+                "text":
+                    "In 1990 …\n"
+                    "1. The beach __was__ clean.\n"
+                    "2. People __were__ in the sea.\n"
+                    "3. There __were__ fish and dolphins in the sea too.\n"
+                    "4. Paul __was__ happy.\n"
+                    "Today …\n"
+                    "5. The beach __isn’t__ clean.\n"
+                    "6. There __is__ rubbish on the beach.\n"
+                    "7. There __aren’t__ any fish in the sea.\n"
+                    "8. Paul __isn’t__ happy.",
+                "gaps_expected": 8,
+            }),
+
+            ("sort", {
+                "title": "Вставь слова в подходящую колонку",
+                "groups": [
+                    {"name": "Climate change", "items": [
+                        {"text": "world getting hotter"},
+                        {"text": "floods"},
+                        {"text": "poles melting"},
+                    ]},
+                    {"name": "Pollution", "items": [
+                        {"text": "plastic bags"},
+                        {"text": "sea creatures eat plastic"},
+                        {"text": "big boats"},
+                    ]},
+                ],
+            }),
+
+            ("quiz", {"title": "Выбери правильный вариант", "questions": [
+                {"q": "1. Sea plants give us ___.", "type": "single",
+                 "options": [{"text": "oxygen"}, {"text": "pollution"}], "correct": [0]},
+                {"q": "2. Cities by the sea are in danger because there is ___ water "
+                      "in the sea.", "type": "single",
+                 "options": [{"text": "more"}, {"text": "less"}], "correct": [0]},
+                {"q": "3. ___ water is bad for corals.", "type": "single",
+                 "options": [{"text": "Hot"}, {"text": "Cold"}], "correct": [0]},
+                {"q": "4. Fish are losing their homes because coral ___.", "type": "single",
+                 "options": [{"text": "is turning white"}, {"text": "has beautiful colours"}],
+                 "correct": [0]},
+                {"q": "5. Sea creatures die because ___ eat plastic.", "type": "single",
+                 "options": [{"text": "they"}, {"text": "we"}], "correct": [0]},
+                {"q": "6. Big boats are ___ for our seas.", "type": "single",
+                 "options": [{"text": "bad"}, {"text": "good"}], "correct": [0]},
+            ]}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("congrats_popper")}" alt="" style="height:180px"></p>'
+                "<h3>Всё просто отлично! Ты большой молодец!</h3>"
+                "<p>Спасибо тебе :)</p>"}),
+        ],
+    },
+    "u5_hw8": {
+        "unit": "u5",
+        "unit_title": "Unit 5 · Under the sea",
+        "unit_sort": 5,
+        "lesson_title": "Homework 8",
+        "lesson_sort": 7,
+        "kind": "homework",
+        # В выгрузке 9 блоков, у нас 10: дописано прощание — в выгрузке урок
+        # обрывался картинкой. Приветствие дописано в блок 1.
+        # Все четыре картинки вырезаны из PDF: в редакторе блоки «Картинка»
+        # стояли пустыми. Таблица «составь предложения» (блок 8 выгрузки) была
+        # серым сканом, обрезанным снизу, — перенесена текстом; третья строка
+        # в скане видна не целиком, взято то, что читается.
+        "blocks": [
+            ("text", {"html":
+                "<h2>Привет! Сегодня читаем про морских животных</h2>"
+                "<p>Посмотри на картинку: кого ты узнаёшь?</p>"
+                f'<p><img src="{img("u5", "scene_sea_playground")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                "<h3>Read the text:</h3>"
+                f'<p><img src="{img("u5", "reading_megalodon")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("quiz", {"title": "Выбери подходящий вариант", "questions": [
+                {"q": "Extinct animals are ones that ___ now.", "type": "single",
+                 "options": [{"text": "do not live"}, {"text": "live"}], "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Выбери подходящий вариант", "questions": [
+                {"q": "Megalodons were ___.", "type": "single",
+                 "options": [{"text": "sharks"}, {"text": "dolphins"}], "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Выбери подходящий вариант", "questions": [
+                {"q": "Megalodons were very ___.", "type": "single",
+                 "options": [{"text": "big"}, {"text": "small"}], "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Выбери подходящий вариант", "questions": [
+                {"q": "Megalodons were ___.", "type": "single",
+                 "options": [{"text": "fast"}, {"text": "slow"}], "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Выбери подходящий вариант", "questions": [
+                {"q": "Megalodons were in ___.", "type": "single",
+                 "options": [{"text": "many different places"}, {"text": "only one place"}],
+                 "correct": [0]},
+            ]}),
+
+            ("task", {
+                "title": "Составь предложения по таблице",
+                "needs_review": True,
+                "html":
+                    "<p>Выбери по одному слову из каждого столбика и запиши "
+                    "получившиеся предложения.</p>"
+                    "<p><i>1. There — was / were / weren’t — many seahorses / "
+                    "many octopuses / many starfish — at / in / on — the sea. / "
+                    "the garden. / the bath.<br>"
+                    "2. The — owl / puffin / lion — was / were / wasn’t — "
+                    "in / next to / opposite — the school. / a net. / the beach.<br>"
+                    "3. Where — was — it — at — four o’clock?</i></p>",
+            }),
+
+            ("text", {"html":
+                "<h3>А вот как можно рассказать о морском животном</h3>"
+                f'<p><img src="{img("u5", "project_turtles")}" alt="" '
+                'style="max-width:100%"></p>'
+                "<p>Пригодится на уроке :)</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_jump")}" alt="" style="height:180px"></p>'
+                "<h3>Отличная работа!</h3>"
+                "<p>Увидимся на занятии.</p>"}),
+        ],
+    },
+    "u5_test": {
+        "unit": "u5",
+        "unit_title": "Unit 5 · Under the sea",
+        "unit_sort": 5,
+        "lesson_title": "Test",
+        "lesson_sort": 8,
+        "kind": "test",
+        # Нумерация блоков как в выгрузке: match, шесть «выбери правильный
+        # вариант» (у нас quiz, чтобы сохранить неверные варианты), пять
+        # «составь предложение», запись голоса. Картинок к match в выгрузке
+        # не было — взяты наши карточки.
+        "blocks": [
+            ("match", {
+                "title": "Соедини слова с картинками",
+                "pairs": [
+                    {"left_image": img("u5", "sea_dolphin"), "right": "dolphin",
+                     "right_audio_tts": "dolphin"},
+                    {"left_image": img("u5", "sea_seal"), "right": "seal",
+                     "right_audio_tts": "seal"},
+                    {"left_image": img("u5", "sea_turtle"), "right": "turtle",
+                     "right_audio_tts": "turtle"},
+                    {"left_image": img("u5", "sea_anchor"), "right": "anchor",
+                     "right_audio_tts": "anchor"},
+                    {"left_image": img("u5", "sea_starfish"), "right": "starfish",
+                     "right_audio_tts": "starfish"},
+                    {"left_image": img("u5", "sea_seahorse"), "right": "seahorse",
+                     "right_audio_tts": "seahorse"},
+                ],
+            }),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "Millions of years ago ___ dinosaurs.", "type": "single",
+                 "options": [{"text": "there were"}, {"text": "there was"}], "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: ___ you in the sea, Julia?", "type": "single",
+                 "options": [{"text": "Were"}, {"text": "Was"}], "correct": [0]},
+                {"q": "B: No, I ___.", "type": "single",
+                 "options": [{"text": "wasn’t"}, {"text": "was"}, {"text": "weren’t"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: Was Paul in the cinema? B: ___", "type": "single",
+                 "options": [{"text": "Yes, he was."}, {"text": "No, he was."},
+                             {"text": "Yes, he wasn’t."}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: Where ___ you on Saturday, Lucas?", "type": "single",
+                 "options": [{"text": "were"}, {"text": "was"}], "correct": [0]},
+                {"q": "B: I ___ in the supermarket.", "type": "single",
+                 "options": [{"text": "was"}, {"text": "were"}], "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "Lily and Ella ___ in the park,", "type": "single",
+                 "options": [{"text": "weren’t"}, {"text": "wasn’t"}], "correct": [0]},
+                {"q": "… they ___ in the sports centre.", "type": "single",
+                 "options": [{"text": "were"}, {"text": "was"}], "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: ___ Charlotte in the swimming pool on Monday?", "type": "single",
+                 "options": [{"text": "Was"}, {"text": "Were"}], "correct": [0]},
+                {"q": "B: No, she ___.", "type": "single",
+                 "options": [{"text": "wasn’t"}, {"text": "was"}, {"text": "weren’t"}],
+                 "correct": [0]},
+            ]}),
+
+            ("order", {
+                "words": ["Max", "was", "at", "the beach."],
+                "sentence": "Max was at the beach.",
+                "audio_tts": "Max was at the beach.",
+            }),
+
+            ("order", {
+                "words": ["There", "was", "a house", "behind", "the swimming pool."],
+                "sentence": "There was a house behind the swimming pool.",
+                "audio_tts": "There was a house behind the swimming pool.",
+            }),
+
+            ("order", {
+                "words": ["Was", "Mina", "in", "a boat?"],
+                "sentence": "Was Mina in a boat?",
+                "audio_tts": "Was Mina in a boat?",
+            }),
+
+            ("order", {
+                "words": ["Were", "there", "seahorses", "in", "the sea?"],
+                "sentence": "Were there seahorses in the sea?",
+                "audio_tts": "Were there seahorses in the sea?",
+            }),
+
+            ("order", {
+                "words": ["Where", "were", "you", "at", "6 o’clock", "yesterday?"],
+                "sentence": "Where were you at 6 o’clock yesterday?",
+                "audio_tts": "Where were you at 6 o'clock yesterday?",
+            }),
+
+            ("speaking", {
+                "title": "SPEAKING TASK \U0001f3a4",
+                "needs_review": True,
+                "html":
+                    "<p>Ответь на вопросы:</p>"
+                    "<p>1. Where were you yesterday?<br>"
+                    "2. Where was your mum 2 hours ago?<br>"
+                    "3. Where were you two days ago?<br>"
+                    "4. Where was your friend last Sunday?<br>"
+                    "5. Where were you last summer?</p>"
+                    "<p>Запиши свой ответ, нажав на кнопку микрофона.</p>",
+            }),
+        ],
+    },
 }
 
 
