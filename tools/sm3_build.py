@@ -64,6 +64,19 @@ U3_DAYS = [
 ]
 
 
+U3_JOBS = [
+    ("firefighter", "пожарный", "job_firefighter"),
+    ("cleaner", "уборщик", "job_cleaner"),
+    ("vet", "ветеринар", "job_vet"),
+    ("police officer", "полицейский", "job_police"),
+    ("teacher", "учитель", "job_teacher"),
+    ("security guard", "охранник", "job_security"),
+    ("ambulance driver", "водитель скорой помощи", "job_ambulance_driver"),
+    ("shopkeeper", "продавец", "job_shopkeeper"),
+    ("nurse", "медсестра", "job_nurse"),
+]
+
+
 def img(unit, name):
     return f"{MEDIA}sm3/{unit}/{name}.webp"
 
@@ -2001,6 +2014,213 @@ LESSONS = {
                 f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
                 "<h3>SUPER! Ты выполнил все задания!</h3>"
                 "<p>Ты БОЛЬШОЙ МОЛОДЕЦ! Увидимся на уроке!</p>"}),
+        ],
+    },
+    "u3_hw7": {
+        "unit": "u3",
+        "unit_title": "Unit 3 \u00b7 At home",
+        "unit_sort": 3,
+        "lesson_title": "Homework 7",
+        "lesson_sort": 6,
+        "kind": "homework",
+        # Обе части выгрузки одним уроком. «Найди пару» из части «(1)» не
+        # дублируется: то же задание (картинка - слово) стоит блоком 5 из
+        # части «(2)». В выгрузке профессия написана двояко — «fire fighter»
+        # в части (1) и «firefighter» в части (2); оставлено firefighter.
+        # Образец «A Police Officer's Diary» в выгрузке был картинкой-сканом;
+        # у нас он текстом — читается лучше, содержание то же.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_rocket")}" alt="" style="height:200px"></p>'
+                "<h2>Привет!</h2>"
+                "<p>Сегодня мы повторим с тобой профессии, которые ты изучил на занятии. "
+                "Тебя ждёт много интересных заданий. Готов начать?</p>"}),
+
+            ("flashcards", {"cards": [
+                {"text": en, "translation": ru, "audio_tts": en, "image": img("u3", f)}
+                for en, ru, f in U3_JOBS
+            ]}),
+
+            ("exact_input", {"items": [
+                {"image": img("u3", f), "prompt": "Посмотри на картинку и напиши профессию",
+                 "accept": [en, en.capitalize()], "audio_tts": en}
+                for en, ru, f in U3_JOBS
+            ]}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("good_luck_clover")}" alt="" style="height:180px"></p>'
+                "<h3>HELLO! Добро пожаловать в дополнительное домашнее задание!</h3>"
+                "<p>Сегодня мы повторим слова, которые ты изучал на уроке. "
+                "Готов начать тренироваться?</p>"}),
+
+            ("match", {
+                "title": "Внимательно посмотри на картинки и соедини слова с подходящими изображениями",
+                "pairs": [
+                    {"left_image": img("u3", f), "right": en, "right_audio_tts": en}
+                    for en, ru, f in U3_JOBS
+                ],
+            }),
+
+            ("match", {
+                "title": "МОЛОДЕЦ! Давай ещё потренируемся \u2014 прочитай описание "
+                         "и выбери соответствующую профессию",
+                "pairs": [
+                    {"left": "cleaner", "right": "This person cleans the town.",
+                     "right_audio_tts": "This person cleans the town."},
+                    {"left": "police officer", "right": "This person helps people.",
+                     "right_audio_tts": "This person helps people."},
+                    {"left": "teacher", "right": "This person teaches people.",
+                     "right_audio_tts": "This person teaches people."},
+                    {"left": "vet", "right": "This person looks after animals.",
+                     "right_audio_tts": "This person looks after animals."},
+                    {"left": "firefighter", "right": "This person stops fire.",
+                     "right_audio_tts": "This person stops fire."},
+                    {"left": "ambulance driver",
+                     "right": "This person takes ill people to hospital.",
+                     "right_audio_tts": "This person takes ill people to hospital."},
+                ],
+            }),
+
+            ("text", {"html":
+                "<h3>УРА! Осталось последнее задание \u2014 внимательно прочитай текст</h3>"
+                "<p><b>Project.</b> Choose a job that people do at night. "
+                "Write a diary for their day or night.</p>"
+                "<p><b>A Police Officer\u2019s Diary</b><br><i>Night</i><br>"
+                "6 o\u2019clock \u2014 I wake up and have breakfast.<br>"
+                "7 o\u2019clock \u2014 I feed the dog and then I cycle to work.<br>"
+                "9 o\u2019clock \u2014 I usually have a break and drink some tea.<br>"
+                "12 o\u2019clock \u2014 I have a sandwich for lunch.<br>"
+                "5 o\u2019clock \u2014 I finish work and I sometimes have dinner "
+                "with the other police officers.</p>"}),
+
+            ("task", {
+                "title": "Выбери работу, которую люди выполняют по ночам",
+                "needs_review": True,
+                "html":
+                    f'<p><img src="{img("u3", "scene_night_jobs")}" alt="" style="max-width:100%"></p>'
+                    "<p>Опиши график работы как в примере выше. "
+                    "Не забудь показать свой текст учителю :)</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_jump")}" alt="" style="height:180px"></p>'
+                "<h3>Ура! Ты выполнил все задания!</h3>"
+                "<p>ТЫ СУПЕР КРУТ! BYE :)</p>"}),
+        ],
+    },
+    "u3_test": {
+        "unit": "u3",
+        "unit_title": "Unit 3 \u00b7 At home",
+        "unit_sort": 3,
+        "lesson_title": "Test",
+        "lesson_sort": 7,
+        "kind": "test",
+        # Нумерация блоков как в выгрузке: match, «заполни пропуски» по картинке,
+        # пять «выбери правильный вариант» (у нас quiz, чтобы сохранить неверные
+        # варианты), пять «составь предложение», запись голоса.
+        # Картинки к блоку 1 в выгрузке не было — взяты наши карточки дел по дому.
+        # В выгрузке опечатка «I olay with my friends» — залито play.
+        "blocks": [
+            ("match", {
+                "title": "Соедини слова с картинками",
+                "pairs": [
+                    {"left_image": img("u3", "chore_tidy_up"), "right": "Tidy up",
+                     "right_audio_tts": "tidy up"},
+                    {"left_image": img("u3", "chore_walk_dog"), "right": "Take the dog for a walk",
+                     "right_audio_tts": "take the dog for a walk"},
+                    {"left_image": img("u3", "chore_do_shopping"), "right": "Do the shopping",
+                     "right_audio_tts": "do the shopping"},
+                    {"left_image": img("u3", "chore_wash_up"), "right": "Wash up",
+                     "right_audio_tts": "wash up"},
+                    {"left_image": img("u3", "chore_sweep"), "right": "Sweep",
+                     "right_audio_tts": "sweep"},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "Посмотри на картинку и заполни пропуски \u2b07",
+                "mode": "drag",
+                "image": img("u3", "scene_day_times"),
+                "text":
+                    "1. I __take the dog for a walk__ at quarter past seven.\n"
+                    "2. I __do homework__ at six o\u2019clock.\n"
+                    "3. I go to bed at __half past ten__.\n"
+                    "4. I clean my room at __half past eight__.\n"
+                    "5. I play with my friends at __eleven o\u2019clock__.",
+                "gaps_expected": 5,
+            }),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: I think you like ___ up your room.", "type": "single",
+                 "options": [{"text": "tidying"}, {"text": "tidy"}, {"text": "wash"}],
+                 "correct": [0]},
+                {"q": "B: No, I ___ like it.", "type": "single",
+                 "options": [{"text": "don\u2019t"}, {"text": "do"}, {"text": "does"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: I like ___ the dog for a walk. B: Me too.", "type": "single",
+                 "options": [{"text": "taking"}, {"text": "take"}, {"text": "walk"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: What time do you go to bed? B: At ___ past eleven.", "type": "single",
+                 "options": [{"text": "half"}, {"text": "quarter"}], "correct": [0]},
+                {"q": "B: At half past ___.", "type": "single",
+                 "options": [{"text": "11"}, {"text": "10"}, {"text": "12"}], "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "I have breakfast at quarter ___ eight.", "type": "single",
+                 "options": [{"text": "to"}, {"text": "half"}, {"text": "past"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "I ___ sweep the floor at the weekend. I like it a lot!", "type": "single",
+                 "options": [{"text": "always"}, {"text": "never"}], "correct": [0]},
+            ]}),
+
+            ("order", {
+                "words": ["Do", "you", "like", "doing", "shopping?"],
+                "sentence": "Do you like doing shopping?",
+                "audio_tts": "Do you like doing shopping?",
+            }),
+
+            ("order", {
+                "words": ["I", "don\u2019t", "like", "washing", "up."],
+                "sentence": "I don\u2019t like washing up.",
+                "audio_tts": "I don't like washing up.",
+            }),
+
+            ("order", {
+                "words": ["My mum", "and", "I", "cook", "dinner", "at", "half", "past", "six."],
+                "sentence": "My mum and I cook dinner at half past six.",
+                "audio_tts": "My mum and I cook dinner at half past six.",
+            }),
+
+            ("order", {
+                "words": ["I", "sometimes", "tidy", "up", "my", "room."],
+                "sentence": "I sometimes tidy up my room.",
+                "audio_tts": "I sometimes tidy up my room.",
+            }),
+
+            ("order", {
+                "words": ["Do", "you", "always", "wash", "your", "clothes?"],
+                "sentence": "Do you always wash your clothes?",
+                "audio_tts": "Do you always wash your clothes?",
+            }),
+
+            ("speaking", {
+                "title": "SPEAKING TASK \U0001f3a4",
+                "needs_review": True,
+                "html":
+                    "<p>Расскажи о распорядке своего дня (5\u20137 предложений). "
+                    "Запиши свой ответ, нажав на кнопку микрофона.</p>"
+                    "<p><i>For example: I take my dog for a walk at 8 o\u2019clock.</i></p>",
+            }),
         ],
     },
 }
