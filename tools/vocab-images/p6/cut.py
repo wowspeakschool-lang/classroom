@@ -16,7 +16,10 @@ lib.BG_MIN, lib.BG_GREY, lib.KEEP_SOFT = 250, 8, True
 FILL_OLD = None  # заливка дыр больше не нужна: её заменил строгий порог фона
 FILL = set()
 # вырезать зажатый белый фон (не везде: белое внутри пузырей пропадало)
-HOLES = {'clear up', 'fold', 'sort', 'sweep', 'wipe', 'water', 'put (sth) away', 'argument', 'arrangement', 'weakness', 'construct', 'knock over', 'terribly', 'embarrassment', 'fitness', 'friendliness'}
+# белое, которое чистка кусков фона не трогает: облачка, снег, разметка, облака у края сцены
+KEEP_WHITE = {'preparation', 'response', 'roll', 'release a track', 'reverse', 'drag', 'crack',
+              'ladder', 'wind power', 'solar power', 'impressive', 'surface'}
+HOLES = {'rub your eyes', 'useless', 'have the strength', 'make a promise', 'have an allergic reaction', 'swallow', 'bump', 'be bitten', 'clear up', 'fold', 'sort', 'sweep', 'wipe', 'water', 'put (sth) away', 'argument', 'arrangement', 'weakness', 'construct', 'knock over', 'terribly', 'embarrassment', 'fitness', 'friendliness'}
 
 # Листы, где генератор разложил картинки иначе, чем в промпте
 # Границы клеток вручную: {лист: {номер ряда: [границы]}}; граница-ступенька (y, x_выше, x_ниже)
@@ -201,6 +204,17 @@ def clean_png(p, peel=4, pale=212, grey=32, speck=0.004, pure=250):
         ring = binary_dilation(c, iterations=3) & ~c
         if p.endswith(tuple(f'/{fname(w)}' for w in HOLES)):  # только по списку: белое внутри пузырей и бумаги — тоже «дырка»
             a[c] = 0
+    # куски фона, отрезанные от края тенью или землёй: светлое и бесцветное,
+    # связанное с прозрачным краем через светло-серое
+    if not p.endswith(tuple(f'/{fname(w)}' for w in KEEP_WHITE)):
+        from scipy.ndimage import distance_transform_edt
+        out = a <= 40
+        M = (~out) & (mn >= 215) & (mx - mn <= 20)
+        labm, _ = label(M)
+        touch = np.unique(labm[binary_dilation(out) & M]); touch = touch[touch > 0]
+        T = np.isin(labm, touch)
+        dist = distance_transform_edt(~out)
+        a[T & (((mn >= 245) & (mx - mn <= 10)) | ((mn >= 225) & (dist <= 6)))] = 0
     lab, n = label(a > 40)
     if n > 1:
         sizes = np.bincount(lab.ravel()); sizes[0] = 0
