@@ -6365,6 +6365,616 @@ LESSONS = {
                 "<p>Самое время отдохнуть :)</p>"}),
         ],
     },
+    "u9_hw4": {
+        "unit": "u9",
+        "unit_title": "Unit 9 · Weather",
+        "unit_sort": 9,
+        "lesson_title": "Homework 4",
+        "lesson_sort": 3,
+        "kind": "homework",
+        # Текстовой выгрузки у этой домашки нет, структура снята с PDF
+        # (docs/SM3_выгрузка_файлы.md). Блоков столько же, сколько в выгрузке.
+        # Блок 3 в выгрузке опирается на видео, которого в выгрузке нет: пар
+        # там всего две, Yes/No. Оставляем как есть, видео допишет методист.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_laptop")}" alt="" style="height:200px"></p>'
+                "<h2>Добро пожаловать в домашнее задание!</h2>"
+                "<p>В этом уроке тебя ждут несколько упражнений. Выполни все "
+                "задания, если хочешь выучить тему на все 100!</p>"
+                "<p>В конце урока есть дополнительное задание — по желанию, "
+                "НО если ты сделаешь его, то будешь нереально крут!</p>"
+                "<p>Для начала посмотри видео и повтори материал, пройденный "
+                "на занятии.</p>"}),
+
+            ("video", {"title": "Видео: Are you going to…?",
+                       "url": "", "provider": ""}),
+
+            ("match", {
+                "title": "Посмотри видео ещё раз, найди вопросы в видео и "
+                         "соедини их с правильным ответом",
+                "pairs": [
+                    {"left": "Are you going to climb some trees?",
+                     "right": "No, I’m not.", "right_audio_tts": "No, I’m not."},
+                    {"left": "Are you going to eat some sweets?",
+                     "right": "Yes, I am.", "right_audio_tts": "Yes, I am."},
+                ],
+            }),
+
+            ("order", {
+                "words": ["Are", "you", "going", "to", "go", "snorkelling?"],
+                "sentence": "Are you going to go snorkelling?",
+                "audio_tts": "Are you going to go snorkelling?",
+            }),
+
+            ("order", {
+                "words": ["Are", "you", "going", "to", "take", "photos?"],
+                "sentence": "Are you going to take photos?",
+                "audio_tts": "Are you going to take photos?",
+            }),
+
+            ("order", {
+                "words": ["Are", "you", "going", "to", "listen", "to", "music?"],
+                "sentence": "Are you going to listen to music?",
+                "audio_tts": "Are you going to listen to music?",
+            }),
+
+            ("order", {
+                "words": ["Are", "you", "going", "to", "read", "a", "book?"],
+                "sentence": "Are you going to read a book?",
+                "audio_tts": "Are you going to read a book?",
+            }),
+
+            ("order", {
+                "words": ["Are", "you", "going", "to", "eat", "lots", "of", "food?"],
+                "sentence": "Are you going to eat lots of food?",
+                "audio_tts": "Are you going to eat lots of food?",
+            }),
+
+            ("task", {
+                "title": "Дополнительное задание — для самых больших умников!",
+                "needs_review": True,
+                "html":
+                    "<p>Напиши 3–4 вопроса для своих одноклассников об их планах "
+                    "на каникулы — что они собираются делать?</p>"
+                    "<p><i>Например: Are you going to read a book?</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание — ты МЕГА КРУТ!</h3>"
+                "<p>Жду тебя на уроке!</p>"}),
+        ],
+    },
+    "u9_hw5": {
+        "unit": "u9",
+        "unit_title": "Unit 9 · Weather",
+        "unit_sort": 9,
+        "lesson_title": "Homework 5",
+        "lesson_sort": 4,
+        "kind": "homework",
+        # Блоки один в один с выгрузкой. Картинки истории, сундука и шифра
+        # вырезаны из PDF выгрузки. Ответ блока 2 виден на последней панели
+        # истории: статуя золотая.
+        # Первый пропуск краткого пересказа («castle») в выгрузке заполнен
+        # как образец — у нас он стоит текстом, пропусков шесть.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_book")}" alt="" style="height:200px"></p>'
+                "<h2>Hello! Welcome to your homework!</h2>"
+                "<p>Прочитай текст, который мы разбирали на уроке, и выполни "
+                "два упражнения к нему.</p>"
+                "<p>В конце домашнего задания есть дополнительное задание — "
+                "для чемпионов! Его можно сделать по желанию, но те, кто "
+                "сделают его добросовестно, получат дополнительный балл!</p>"}),
+
+            ("quiz", {"questions": [
+                {"q": "Прежде чем читать, попробуй вспомнить: What colour is "
+                      "the statue? Прочитай текст и проверь себя!",
+                 "type": "single",
+                 "options": [{"text": "silver"}, {"text": "red"},
+                             {"text": "golden"}, {"text": "white"}],
+                 "correct": [2]},
+            ]}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u9", "story_castle_1")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u9", "story_castle_2")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("gaps", {
+                "title": "Замечательно, ты отлично справляешься! Это краткий "
+                         "пересказ истории, но в нём пропущены слова — "
+                         "постарайся вставить их по смыслу",
+                "mode": "drag",
+                "text":
+                    "Ben and Lucy go to the castle. They see Horax and Zelda "
+                    "near a door. The door has a __message__ with a missing "
+                    "word above it. Horax and Zelda need the letters. They "
+                    "__hear__ Ben and they get the children. Ben gives Zelda "
+                    "the letters. Buster pulls off Horax’s __glasses__. Horax "
+                    "is Mr Williams, the librarian! Horax makes the word "
+                    "‘__finders__’ and Zelda writes it above the door. Horax "
+                    "and Zelda try to go in, but they can’t. Ben and Lucy make "
+                    "the word ‘__friends__’. They go in and find the "
+                    "__treasure__.",
+                "gaps_expected": 6,
+            }),
+
+            # У блока task картинка рисуется только из html — отдельного поля
+            # image он не показывает (проверено по index.html).
+            ("task", {
+                "title": "Дополнительное задание для настоящих чемпионов!",
+                "needs_review": True,
+                "html":
+                    f'<p><img src="{img("u9", "task_treasure")}" alt="" '
+                    'style="max-width:100%"></p>'
+                    "<p>Разгадай текст с помощью шифра — на уроке мы будем "
+                    "обсуждать, что там спрятано!</p>"
+                    "<p>Можешь записать свой ответ здесь или в тетради — как "
+                    "тебе больше нравится!</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{img("u9", "cipher_alphabet")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u9", "cipher_text")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание, ты "
+                "замечательный ученик!</h3>"
+                "<p>За это лови звёздочку :)</p><p>Увидимся на занятии!</p>"}),
+        ],
+    },
+    "u9_hw6": {
+        "unit": "u9",
+        "unit_title": "Unit 9 · Weather",
+        "unit_sort": 9,
+        "lesson_title": "Homework 6",
+        "lesson_sort": 5,
+        "kind": "homework",
+        # Блоки один в один с выгрузкой. Текст для чтения вырезан из PDF двумя
+        # кусками, как и был загружен методистом. Картинка к блоку 4 в выгрузке
+        # — та же сцена с грозой за окном, что у нас уже лежит.
+        # Первый пропуск («was going») в выгрузке заполнен как образец.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>Добро пожаловать в домашнее задание!</h2>"
+                "<p>В этом уроке тебя ждёт текст и несколько упражнений.</p>"
+                "<p>В конце урока есть дополнительное задание — по желанию, "
+                "НО если ты сделаешь его, то будешь чемпионом английского!</p>"
+                "<p>Для начала внимательно прочитай текст ещё раз.</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u9", "reading_liam_1")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u9", "reading_liam_2")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("sequence", {
+                "title": "Отлично! А теперь прочитай текст ещё раз и расставь "
+                         "предложения в правильном порядке по смыслу",
+                "image": img("u9", "scene_storm_window"),
+                "items": [
+                    {"text": "Liam and his mum and dad went to Florida for a holiday."},
+                    {"text": "Liam woke up because of a noisy thunderstorm."},
+                    {"text": "Liam’s dad switched on the TV."},
+                    {"text": "The man on TV said, ‘There’s going to be rain for "
+                             "fourteen days!’"},
+                    {"text": "Liam didn’t like that. ‘It’s going to be boring!’ "
+                             "he thought."},
+                    {"text": "Liam had a good time inside with his mum and dad."},
+                    {"text": "Liam loved his holiday so much he didn’t want to "
+                             "go home."},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "Прочитай текст ещё раз и заполни краткое содержание. "
+                         "Вставь слова по смыслу. Не забудь, что текст в "
+                         "прошедшем времени!",
+                "mode": "drag",
+                "text":
+                    "Liam was very excited because he was going to Florida for "
+                    "two weeks. ‘It’s going to be __fantastic__!’ he said. ‘We "
+                    "can go for boat rides!’ said Dad. ‘We can relax and have a "
+                    "lot of fun!’ said Mum.\n"
+                    "They arrived in Florida and the hotel was beautiful. "
+                    "‘Tomorrow I’m __going__ to swim in the sea!’ he said.\n"
+                    "But in the middle of the night there was a lot of noise and "
+                    "Liam woke up. He looked outside and saw a big "
+                    "__thunderstorm__.\n"
+                    "Dad switched on the TV. ‘There’s going to be a lot of "
+                    "__rain__ in Florida for the next fourteen days,’ said the "
+                    "man on TV. ‘It’s our holiday. We can’t swim or see fish in "
+                    "the rain! It’s going to be __boring__,’ Liam said.\n"
+                    "‘We can have fun in our room. We can read, play games and "
+                    "listen to music,’ said Mum. Two weeks later, their holiday "
+                    "was finished. ‘I __don’t__ want to go home, Mum,’ Liam "
+                    "said. ‘It was a beautiful holiday!’ ‘Let’s play another "
+                    "__game__,’ said Mum. Dad went to get their games box. "
+                    "‘Hooray!’ shouted Liam.",
+                "gaps_expected": 7,
+            }),
+
+            ("gaps", {
+                "title": "ДОПОЛНИТЕЛЬНОЕ ЗАДАНИЕ для самых больших умников! "
+                         "Послушай краткий пересказ истории — в нём 4 ошибки. "
+                         "С первой я тебе помогу, остальные найди сам",
+                "audio": "",
+                "text":
+                    "1. Italy instead of (вместо) Florida.\n"
+                    "2. __a river|a river.__ instead of __the sea|the sea.__\n"
+                    "3. __a thunderstorm|a thunderstorm.__ instead of "
+                    "__a lot of rain|a lot of rain.__\n"
+                    "4. __fantastic|fantastic.__ instead of __boring|boring.__",
+                "gaps_expected": 6,
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание и теперь готов "
+                "к уроку. Ты — СУПЕР КРУТ!</h3>"
+                "<p>Жду тебя на уроке!</p>"}),
+        ],
+    },
+    "u9_hw7": {
+        "unit": "u9",
+        "unit_title": "Unit 9 · Weather",
+        "unit_sort": 9,
+        "lesson_title": "Homework 7",
+        "lesson_sort": 6,
+        "kind": "homework",
+        # Обе части выгрузки одним уроком: прощание первой части и приветствие
+        # второй сведены в блок-перемычку 8, поэтому блоков 17, а не 18.
+        # Картинки к «составь предложение» в выгрузке — стоковые фотографии
+        # детей, их не берём.
+        # Пятое предложение блока 11 в выгрузке обрезано рамкой редактора,
+        # читается только «Dad’s … going to build …» — хвост восстановлен.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_highfive")}" alt="" style="height:200px"></p>'
+                "<h2>Добро пожаловать в домашнее задание!</h2>"
+                "<p>В этом уроке тебя ждут классные упражнения! Выполни все "
+                "задания, если хочешь стать чемпионом английского!</p>"
+                "<p>В дополнение к этому домашнему заданию идёт "
+                "дополнительное! Его можно выполнить по желанию, НО если ты "
+                "его выполнишь, то будешь мега крут!</p>"}),
+
+            ("text", {"html":
+                "<h3>Давай вспомним, о чём мы говорили на уроке, и прочитаем "
+                "текст!</h3>"
+                "<p>Ответь на вопрос: Did people go on holiday by plane or by "
+                "train?</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u9", "reading_100_years")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("sort", {
+                "title": "Внимательно посмотри на фразы и распредели их по "
+                         "категориям: Did people have it 100 years ago?",
+                "groups": [
+                    {"name": "Yes", "items": [
+                        {"text": "puppet show"},
+                        {"text": "donkey ride"},
+                        {"text": "steam train"},
+                        {"text": "swimming boots"},
+                        {"text": "ice-cream cart"},
+                        {"text": "crowded beach"},
+                        {"text": "picnic basket"},
+                    ]},
+                    {"name": "No", "items": [
+                        {"text": "electric train"},
+                        {"text": "flip-flops"},
+                    ]},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "Отлично! Ты почти справился с домашним заданием. "
+                         "Следующее задание — прочитай письмо и заполни "
+                         "пропуски подходящими словами",
+                "mode": "drag",
+                "text":
+                    "Dear Elsa,\n"
+                    "Thank you for your letter. You asked what I did on my "
+                    "holiday last week. Well, we went to Brighton beach. The "
+                    "steam train was comfortable but very noisy. It is better "
+                    "than travelling by horse though. There were so many people "
+                    "at the beach – it was very __crowded__. I was upset because "
+                    "I bought new __swimming boots__, but I couldn’t wear them! "
+                    "We couldn’t have a picnic there either, so we went to "
+                    "Victoria Park. Mum brought a __picnic basket__ filled with "
+                    "sandwiches, lemonade and fruit. Then Uncle Joe bought us "
+                    "some ice-cream from the __cart__. It was delicious. In the "
+                    "afternoon we saw a __puppet show__ with Punch and Judy and "
+                    "I liked it. I didn’t go on the __donkey rides__ because I’m "
+                    "afraid of them.\n"
+                    "We are going to take the train to Manchester to see Aunt "
+                    "Emma next week. Are you going to be there?\n"
+                    "Yours truly,\nSandra",
+                "gaps_expected": 6,
+            }),
+
+            ("task", {
+                "title": "ДОПОЛНИТЕЛЬНОЕ ЗАДАНИЕ — отпуск в прошлом",
+                "needs_review": True,
+                "html":
+                    f'<p><img src="{img("u9", "example_holiday_diary")}" alt="" '
+                    'style="max-width:100%"></p>'
+                    "<p>Ты большой молодец и выполнил основную часть домашнего "
+                    "задания, супер!</p>"
+                    "<p>Представь, что ты отправился в отпуск в прошлое. Опиши "
+                    "своё путешествие! Эти вопросы помогут тебе:</p>"
+                    "<p>1. Where were you?<br>2. How did you travel there?<br>"
+                    "3. What did you do there?</p>"
+                    "<p>Посмотри на картинку и текст выше — воспользуйся ими "
+                    "как примером. Удачи!</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_clap")}" alt="" style="height:180px"></p>'
+                "<h3>Отличная работа — первая часть позади!</h3>"
+                "<p>Во второй части тебя ждут упражнения на повторение всего, "
+                "что мы успели пройти за прошедший месяц.</p>"
+                "<p>Для начала посмотри видео ниже. Как ты думаешь, какой "
+                "питомец отправится к ветеринару — a cat or a dog? Watch and "
+                "check!</p>"}),
+
+            ("video", {"title": "Видео: going to — планы",
+                       "url": "", "provider": ""}),
+
+            ("match", {
+                "title": "Отлично, ты посмотрел видео! Теперь соедини "
+                         "предложения с картинками по смыслу",
+                "pairs": [
+                    {"left": "I’m going to buy a car.",
+                     "right_image": img("u9", "going_buy_car"), "right": "car"},
+                    {"left": "She is going to take her dog to the vet.",
+                     "right_image": img("u9", "going_vet"), "right": "vet"},
+                    {"left": "He’s going to take piano lessons.",
+                     "right_image": img("u9", "going_play_piano"), "right": "piano"},
+                    {"left": "We’re going to order pizza for dinner.",
+                     "right_image": img("u9", "going_order_pizza"), "right": "pizza"},
+                    {"left": "The student’s going to watch TV tonight.",
+                     "right_image": img("u9", "going_watch_tv"), "right": "TV"},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "Итак, приступим к практике! Внимательно посмотри на "
+                         "слова: not rain · cook · build · phone · not have. Их "
+                         "нужно вставить в предложения и поставить в правильную "
+                         "форму. Посмотри на пример в предложении 1",
+                "text":
+                    "1. I’m going to phone Lisa this evening.\n"
+                    "2. It __isn’t going to rain|isn't going to rain|is not "
+                    "going to rain__ this afternoon.\n"
+                    "3. You’re __going to cook__ dinner.\n"
+                    "4. We __aren’t going to have|aren't going to have|are not "
+                    "going to have__ fish and chips for dinner.\n"
+                    "5. Dad’s __going to build__ a tree house.",
+                "gaps_expected": 4,
+            }),
+
+            ("order", {
+                "words": ["Are", "you", "going", "to", "do", "homework", "this",
+                          "evening?"],
+                "sentence": "Are you going to do homework this evening?",
+                "audio_tts": "Are you going to do homework this evening?",
+            }),
+
+            ("order", {
+                "words": ["Are", "you", "going", "to", "go", "swimming", "this",
+                          "weekend?"],
+                "sentence": "Are you going to go swimming this weekend?",
+                "audio_tts": "Are you going to go swimming this weekend?",
+            }),
+
+            ("order", {
+                "words": ["What", "are", "you", "going", "to", "do", "after",
+                          "school?"],
+                "sentence": "What are you going to do after school?",
+                "audio_tts": "What are you going to do after school?",
+            }),
+
+            ("order", {
+                "words": ["Are", "you", "going", "to", "go", "to bed", "early",
+                          "tonight?"],
+                "sentence": "Are you going to go to bed early tonight?",
+                "audio_tts": "Are you going to go to bed early tonight?",
+            }),
+
+            ("gaps", {
+                "title": "Ура, ты на финишной прямой! Поставь слова в скобках "
+                         "в правильную форму и впиши её в пропуски. Пиши "
+                         "внимательно и обязательно проверь себя!",
+                "text":
+                    "1. Are you going to visit your grandparents this weekend? "
+                    "(visit)\n"
+                    "2. Is he __going to sleep__ at your house tonight? (sleep)\n"
+                    "3. Are your mum and dad __going to help__ you with your "
+                    "school project? (help)\n"
+                    "4. Is your sister __going to give__ you a birthday present? "
+                    "(give)\n"
+                    "5. Are we __going to have__ pizza tonight? (have)",
+                "gaps_expected": 4,
+            }),
+
+            ("speaking", {
+                "title": "ДОПОЛНИТЕЛЬНОЕ ЗАДАНИЕ — ответь голосом",
+                "sample": "",
+                "html":
+                    "<p>Внимательно прочитай вопросы ниже. Твоя задача — "
+                    "ответить на них голосовым сообщением!</p>"
+                    "<p>1. Are you going to go swimming this weekend?<br>"
+                    "2. What are you going to do after school?<br>"
+                    "3. Are you going to visit your grandparents this weekend?"
+                    "<br>4. Are you going to go to bed early tonight?<br>"
+                    "5. What are you going to do this weekend?</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание и теперь готов "
+                "к уроку. Ты — СУПЕР КРУТ!</h3>"
+                "<p>Жду тебя на уроке!</p>"}),
+        ],
+    },
+    "u9_test": {
+        "unit": "u9",
+        "unit_title": "Unit 9 · Weather",
+        "unit_sort": 9,
+        "lesson_title": "Unit 9 Test",
+        "lesson_sort": 7,
+        "kind": "test",
+        # Нумерация блоков как в выгрузке: match, шесть «выбери правильный
+        # вариант», пять «составь предложение», две записи голоса.
+        # «Выбери правильный вариант» делаем quiz'ом, по вопросу на пропуск.
+        # Пример к блоку 14 переписан под нашу картинку прогноза: на ней
+        # среда облачная, тумана нет.
+        "blocks": [
+            ("match", {
+                "title": "Соедини слова с картинками",
+                "pairs": [
+                    {"left": "umbrella", "right_image": img("u9", "clothes_umbrella"),
+                     "right": "umbrella picture"},
+                    {"left": "boots", "right_image": img("u9", "clothes_boots"),
+                     "right": "boots picture"},
+                    {"left": "thunderstorm", "right_image": img("u9", "weather_thunderstorm"),
+                     "right": "thunderstorm picture"},
+                    {"left": "cloudy", "right_image": img("u9", "weather_cloudy"),
+                     "right": "cloudy picture"},
+                    {"left": "raincoat", "right_image": img("u9", "clothes_raincoat"),
+                     "right": "raincoat picture"},
+                    {"left": "foggy", "right_image": img("u9", "weather_foggy"),
+                     "right": "foggy picture"},
+                ],
+            }),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант",
+                      "questions": [
+                {"q": "On Wednesday it’s going to be ___ and foggy.", "type": "single",
+                 "options": [{"text": "sunny"}, {"text": "cloudy"}], "correct": [1]},
+                {"q": "On Wednesday it’s going to be cloudy and ___.", "type": "single",
+                 "options": [{"text": "foggy"}, {"text": "rainy"}], "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант",
+                      "questions": [
+                {"q": "I’m going to ___ and read my favourite book.", "type": "single",
+                 "options": [{"text": "go out"}, {"text": "stay at home"}],
+                 "correct": [1]},
+                {"q": "I’m going to stay at home and ___ my favourite book.",
+                 "type": "single",
+                 "options": [{"text": "draw"}, {"text": "read"}], "correct": [1]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант",
+                      "questions": [
+                {"q": "I’m ___ to travel to Italy.", "type": "single",
+                 "options": [{"text": "go"}, {"text": "going"}, {"text": "went"}],
+                 "correct": [1]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант",
+                      "questions": [
+                {"q": "A: ___ you going to play in the garden?", "type": "single",
+                 "options": [{"text": "Am"}, {"text": "Are"}, {"text": "Is"}],
+                 "correct": [1]},
+                {"q": "B: ___, I’m not.", "type": "single",
+                 "options": [{"text": "No"}, {"text": "Yes"}], "correct": [0]},
+                {"q": "B: I’m going to ___ with my aunt.", "type": "single",
+                 "options": [{"text": "swim"}, {"text": "read"}, {"text": "cook"}],
+                 "correct": [2]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант",
+                      "questions": [
+                {"q": "A: ___ are you going to do on holidays?", "type": "single",
+                 "options": [{"text": "Why"}, {"text": "What"}, {"text": "When"}],
+                 "correct": [1]},
+                {"q": "A: What are you ___ to do on holidays?", "type": "single",
+                 "options": [{"text": "go"}, {"text": "going"}], "correct": [1]},
+                {"q": "B: I’m going ___ to the library.", "type": "single",
+                 "options": [{"text": "go"}, {"text": "to go"}, {"text": "going"}],
+                 "correct": [1]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант",
+                      "questions": [
+                {"q": "A: What ___ you going to do this weekend?", "type": "single",
+                 "options": [{"text": "is"}, {"text": "am"}, {"text": "are"}],
+                 "correct": [2]},
+                {"q": "B: ___ going to swim in the sea.", "type": "single",
+                 "options": [{"text": "I"}, {"text": "I’m"}, {"text": "I is"}],
+                 "correct": [1]},
+            ]}),
+
+            ("order", {
+                "words": ["Are", "you", "going", "to", "swim?"],
+                "sentence": "Are you going to swim?",
+                "audio_tts": "Are you going to swim?",
+            }),
+
+            ("order", {
+                "words": ["I’m", "going", "to", "read", "a", "book."],
+                "sentence": "I’m going to read a book.",
+                "audio_tts": "I’m going to read a book.",
+            }),
+
+            ("order", {
+                "words": ["What", "are", "you", "going", "to", "do?"],
+                "sentence": "What are you going to do?",
+                "audio_tts": "What are you going to do?",
+            }),
+
+            ("order", {
+                "words": ["It’s", "going", "to", "be", "cloudy", "on", "Monday."],
+                "sentence": "It’s going to be cloudy on Monday.",
+                "audio_tts": "It’s going to be cloudy on Monday.",
+            }),
+
+            ("order", {
+                "words": ["I’m", "not", "going", "to", "watch", "YouTube."],
+                "sentence": "I’m not going to watch YouTube.",
+                "audio_tts": "I’m not going to watch YouTube.",
+            }),
+
+            ("speaking", {
+                "title": "SPEAKING TASK · Part 1",
+                "image": img("u9", "scene_holiday_plans"),
+                "html":
+                    "<p>Посмотри на картинку и составь предложения о своих "
+                    "планах на выходные или праздники (5–7 предложений)! "
+                    "Используй be going to.</p>"
+                    "<p><i>For example: I’m going to read my favourite book at "
+                    "the weekend.</i></p>"
+                    "<p>Запиши свой ответ, нажав на кнопку микрофона.</p>",
+            }),
+
+            ("speaking", {
+                "title": "SPEAKING TASK · Part 2",
+                "image": img("u9", "weather_week_board"),
+                "html":
+                    "<p>Посмотри на картинку и опиши, какая будет погода.</p>"
+                    "<p><i>For example: On Wednesday it’s going to be cloudy."
+                    "</i></p>"
+                    "<p>Запиши свой ответ, нажав на кнопку микрофона.</p>",
+            }),
+        ],
+    },
 }
 
 
