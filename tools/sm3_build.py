@@ -121,6 +121,20 @@ U6_GADGETS = [
 ]
 
 
+# Слова Unit 7 идут без картинок: болезнь рисуется только через человека,
+# а людей мы не генерируем. Тренажёр текстовый.
+U7_HEALTH = [
+    ("earache", "боль в ухе"),
+    ("toothache", "зубная боль"),
+    ("headache", "головная боль"),
+    ("doctor", "врач"),
+    ("nurse", "медсестра"),
+    ("stomachache", "боль в животе"),
+    ("cold", "простуда"),
+    ("cough", "кашель"),
+]
+
+
 def img(unit, name):
     return f"{MEDIA}sm3/{unit}/{name}.webp"
 
@@ -4584,6 +4598,210 @@ LESSONS = {
                     "phone.</i></p>"
                     "<p>Запиши свой ответ, нажав на кнопку микрофона.</p>",
             }),
+        ],
+    },
+    "u7_hw1": {
+        "unit": "u7",
+        "unit_title": "Unit 7 · At the doctor’s",
+        "unit_sort": 7,
+        "lesson_title": "Homework 1",
+        "lesson_sort": 0,
+        "kind": "homework",
+        # Обе части выгрузки одним уроком: «(1)» — словарный тренажёр на 8 слов,
+        # «(2)» — дополнительная часть. Блоки 1-4 тренажёр, 5 перемычка, 6-8
+        # вторая часть.
+        # Карточек болезней у нас нет и быть не может: все они рисуются через
+        # человека, а в генерации людей мы не делаем. Поэтому тренажёр
+        # текстовый, без картинок.
+        # Блок 6: в выгрузке это «Диаграмма» — подписать людей в очереди к врачу
+        # по симптомам. Картинки с людьми нет, поэтому пары
+        # «симптом → диагноз» тем же набором слов. СОСТАВ МОЙ.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>Добро пожаловать в домашнее задание!</h2>"
+                "<p>Сегодня мы выучим слова, связанные со здоровьем. Выполни все "
+                "задания, если хочешь выучить тему на все 100!</p>"
+                "<p>А в конце тебя ждёт дополнительная часть — её можно сделать "
+                "по желанию, НО если сделаешь, будешь нереально крут!</p>"}),
+
+            ("flashcards", {"cards": [
+                {"text": en, "translation": ru, "audio_tts": en}
+                for en, ru in U7_HEALTH
+            ]}),
+
+            ("quiz", {"questions": [
+                {"q": f"Как по-английски «{ru}»?", "type": "single",
+                 "options": [{"text": o} for o in opts],
+                 "correct": [opts.index(en)]}
+                for en, ru, opts in [
+                    (en, ru, sorted([en] + [U7_HEALTH[(i + k) % len(U7_HEALTH)][0]
+                                            for k in (1, 2, 3)], key=str.lower))
+                    for i, (en, ru) in enumerate(U7_HEALTH)
+                ]
+            ]}),
+
+            ("exact_input", {"items": [
+                {"prompt": f"Напиши по-английски: «{ru}»",
+                 "accept": [en, en.capitalize()], "audio_tts": en}
+                for en, ru in U7_HEALTH
+            ]}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("good_luck_clover")}" alt="" style="height:180px"></p>'
+                "<h3>А теперь — вторая, дополнительная часть</h3>"
+                "<p>Выполнив эти задания, ты станешь МЕГА крутым учеником!</p>"}),
+
+            ("match", {
+                "title": "Прочитай, на что жалуется человек, и подбери диагноз",
+                "pairs": [
+                    {"left": "My ear hurts.", "right": "earache",
+                     "right_audio_tts": "earache"},
+                    {"left": "My head hurts.", "right": "headache",
+                     "right_audio_tts": "headache"},
+                    {"left": "My tooth hurts.", "right": "toothache",
+                     "right_audio_tts": "toothache"},
+                    {"left": "My stomach hurts.", "right": "stomachache",
+                     "right_audio_tts": "stomachache"},
+                    {"left": "I sneeze and my nose runs.", "right": "cold",
+                     "right_audio_tts": "a cold"},
+                    {"left": "I can’t stop coughing.", "right": "cough",
+                     "right_audio_tts": "a cough"},
+                ],
+            }),
+
+            ("task", {
+                "title": "Нарисуй очередь к доктору",
+                "needs_review": True,
+                "html":
+                    "<p>Твоё творческое задание — нарисовать очередь к доктору "
+                    "в больнице. Постарайся нарисовать самых разных пациентов!</p>"
+                    "<p>На уроке обязательно расскажи учителю о проблемах людей, "
+                    "которые ждут приёма.</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание — ты МЕГА КРУТ!</h3>"
+                "<p>Жду тебя на уроке!</p>"}),
+        ],
+    },
+    "u7_hw2": {
+        "unit": "u7",
+        "unit_title": "Unit 7 · At the doctor’s",
+        "unit_sort": 7,
+        "lesson_title": "Homework 2",
+        "lesson_sort": 1,
+        "kind": "homework",
+        # Блоки один в один с выгрузкой. Картинка с болельщиками к блоку 5
+        # вырезана из PDF: в редакторе она была у задания справа.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_laptop")}" alt="" style="height:200px"></p>'
+                "<h2>Добро пожаловать в домашнее задание!</h2>"
+                "<p>Выполни все задания, если хочешь выучить тему на все 100! "
+                "В конце есть дополнительное задание — по желанию, но если "
+                "сделаешь его, будешь нереально крут.</p>"
+                "<p>Для начала посмотри видео. Как думаешь, кем были родители Хэмми? "
+                "Посмотри и проверь себя!</p>"}),
+
+            ("video", {"title": "Видео: прошедшее время, родители Хэмми",
+                       "url": "", "provider": ""}),
+
+            ("quiz", {"title": "Посмотри видео ещё раз и выбери правильный вариант",
+                      "questions": [
+                {"q": "My mum ___ the drums.", "type": "single",
+                 "options": [{"text": "played"}, {"text": "play"}, {"text": "plaid"}],
+                 "correct": [0]},
+                {"q": "My dad ___.", "type": "single",
+                 "options": [{"text": "danced"}, {"text": "dance"}, {"text": "dancd"}],
+                 "correct": [0]},
+            ]}),
+
+            ("gaps", {
+                "title": "Замечательно! А теперь расставь слова в пропуски по смыслу",
+                "mode": "drag",
+                "text":
+                    "Yesterday my friend and I __were__ in the park. Suddenly there was "
+                    "this big, black dog. Jonathan __looked__ at its eyes. ‘Go "
+                    "away!’ he __shouted__.\n"
+                    "On Sunday, Sue __visited__ her grandma. Grandma __was__ very happy "
+                    "with the flowers and the cake. She __smiled__ a lot. Sue and her "
+                    "grandma __listened__ to a piano concert together.",
+                "gaps_expected": 7,
+            }),
+
+            ("task", {
+                "title": "Дополнительное задание — для самых больших умников",
+                "needs_review": True,
+                "image": img("u7", "scene_football_fans"),
+                "html":
+                    "<p>Напиши предложения о картинке, используя эти слова: "
+                    "<b>watch · shout · jump · be</b>.</p>"
+                    "<p>Начни так: <i>On Sunday I watched a football game.</i></p>"
+                    "<p>Не забудь: эти действия уже прошли, писать нужно в прошедшем "
+                    "времени!</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание — ты МЕГА КРУТ!</h3>"
+                "<p>Жду тебя на уроке!</p>"}),
+        ],
+    },
+    "u7_hw3": {
+        "unit": "u7",
+        "unit_title": "Unit 7 · At the doctor’s",
+        "unit_sort": 7,
+        "lesson_title": "Homework 3",
+        "lesson_sort": 2,
+        "kind": "homework",
+        # Блоки один в один с выгрузкой. Первая строка песни в выгрузке стоит
+        # заполненной как образец, пропусков семь.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_headphones")}" alt="" style="height:200px"></p>'
+                "<h2>Привет-привет! Как твои дела?</h2>"
+                "<p>Начнём домашнее задание :) Послушай песню и впиши слова.</p>"}),
+
+            ("gaps", {
+                "title": "Послушай песню и впиши пропущенные слова",
+                "mode": "drag",
+                "audio": "",
+                "text":
+                    "The girl was in the kitchen.\n"
+                    "There __was__ a big apple cake in the kitchen, too.\n"
+                    "She __swallowed__ the big cake and then __got__ a stomach-ache.\n"
+                    "She __was__ at a farm and __looked up__ at a snake.\n"
+                    "Then she __walked__ into a tree.\n"
+                    "At the market a box of apples __landed__ on her knee.\n"
+                    "It was a bad day.",
+                "gaps_expected": 7,
+            }),
+
+            ("task", {
+                "title": "Представь, что у тебя был плохой день",
+                "needs_review": True,
+                "html":
+                    "<p>Напиши, где ты был и что случилось.</p>"
+                    "<p><i>I was at the …</i></p>",
+            }),
+
+            ("task", {
+                "title": "Заверши эту песню и нарисуй к ней картинку",
+                "needs_review": True,
+                "html":
+                    "<p>Используй свои идеи из прошлого задания.</p>"
+                    "<p><i>I was at the …,<br>"
+                    "I looked — there were …<br>"
+                    "I …<br>"
+                    "And now it really aches.</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_clap")}" alt="" style="height:180px"></p>'
+                "<h3>Отличная работа!</h3>"
+                "<p>Спасибо за твои труды :)</p>"}),
         ],
     },
 }

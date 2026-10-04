@@ -139,3 +139,21 @@ parentId = '<id папки юнита>'
 | Test | `1HmJ7ChZ5h-x5yZVLMCGbnZxmKpUtP8ok` | `12tiBHHh8mpsYTGTr4pkKC1Rvaj2aCJgm` |
 
 Домашек **восемь**, «Homework 1» разложена на два файла — это один урок.
+
+## Unit 7 — папка `14de98KcGvlhB08-2Pzu7X0Y7uw-eDTUp`
+
+| Файл | txt | pdf |
+|---|---|---|
+| Homework 1 (1) | `1yolIau910cbvh4GiovXRP2Dl3TeKRveT` | `1vTqqHNAhE4Rh8Ms2ls6RzgllcLv_iKPu` |
+| Homework 1 (2) | `1PrXEQqXmAWK1izvjMJxWghV4tCkRiPN5` | `1QRWBNHZWYjRSfKGADgvsrb_cTz6eeGE8` |
+| Homework 2 | `1q9Rjh-6ts3GebjxMK_nj1HXP90H7WsNU` | `1WJFiqro3ryj-KAOVIEL8DMaAQqKcFrhy` |
+| Homework 3 | `1U3mJJXXUdA4wftLA_O8eDppXDAKNdg3d` | `1TVCRDGLzQJBAhoSHAJu2tcODgYYNjpeT` |
+| Homework 4 | `1-k82-CT0w9KlZN87HxJLNqQPARc3_7Jf` | `1La1xZTze7nhmmP8gDtnpEeFTW0yzIDwt` |
+| Homework 5 | `1JVIDoZko8J7yNQN0Lm4CyiD5CeJmeowY` | `1lpd0yHk1O6Jl__I3GjCCifPNDXMDczit` |
+| Homework 6 | `1P0Oye3qy14GgvCEq6GmXqmtiqJrqlYnA` | `1yQQg_p2AYrzn6eyXNVizum6hlU7CL4z4` |
+| Homework 7 (1) | `1MNUYQvC-v2ZZqIEfNwWamj7UJgq3wr7w` | `1iXvMf0KQw40TP6YNXkOxqSINVxL_Nyhz` |
+| Homework 7 (2) | `1YUvOdt1ntFW2zG6D1P4JLfI34UdU7i3n` | `1he1lc2AtUi7GkB_5P-H-P0qIC8rb3qb-` |
+| Test | `1q8WHnJsxg1EvWVKbdVYeHOBCN7o_TLMP` | `1MMSL1ZFuWz0Q6qXPJ3E9glTCllhaI89p` |
+
+Домашек **семь**, «Homework 1» и «Homework 7» разложены на два файла — каждая
+один урок.
