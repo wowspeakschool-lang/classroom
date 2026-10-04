@@ -149,6 +149,19 @@ U8_COUNTRIES = [
 ]
 
 
+U9_WEATHER = [
+    ("thunderstorm", "шторм", "weather_thunderstorm"),
+    ("rainy", "дождливо", "weather_rainy"),
+    ("cloudy", "облачно", "weather_cloudy"),
+    ("windy", "ветрено", "weather_windy"),
+    ("boots", "сапоги", "clothes_boots"),
+    ("raincoat", "дождевик", "clothes_raincoat"),
+    ("umbrella", "зонт", "clothes_umbrella"),
+    ("lightning", "молния", "weather_lightning"),
+    ("foggy", "туманно", "weather_foggy"),
+]
+
+
 def img(unit, name):
     return f"{MEDIA}sm3/{unit}/{name}.webp"
 
@@ -6118,6 +6131,238 @@ LESSONS = {
                     "I didn’t meet anyone.</i></p>"
                     "<p>Запиши свой ответ, нажав на кнопку микрофона.</p>",
             }),
+        ],
+    },
+    "u9_hw1": {
+        "unit": "u9",
+        "unit_title": "Unit 9 · Weather",
+        "unit_sort": 9,
+        "lesson_title": "Homework 1",
+        "lesson_sort": 0,
+        "kind": "homework",
+        # Обе части выгрузки одним уроком: «(1)» — словарный тренажёр на 9 слов,
+        # «(2)» — дополнительная часть.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>Добро пожаловать в домашнее задание!</h2>"
+                "<p>Сегодня мы выучим разные виды погоды. Выполни все задания, "
+                "если хочешь выучить тему на все 100!</p>"
+                "<p>А в конце тебя ждёт дополнительная часть — по желанию, "
+                "НО если сделаешь, будешь нереально крут!</p>"}),
+
+            ("flashcards", {"cards": [
+                {"text": en, "translation": ru, "audio_tts": en, "image": img("u9", f)}
+                for en, ru, f in U9_WEATHER
+            ]}),
+
+            ("quiz", quiz_ru_to_en(U9_WEATHER)),
+
+            ("exact_input", {"items": [
+                {"image": img("u9", f), "prompt": "Посмотри на картинку и напиши слово",
+                 "accept": [en, en.capitalize()], "audio_tts": en}
+                for en, ru, f in U9_WEATHER
+            ]}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("good_luck_clover")}" alt="" style="height:180px"></p>'
+                "<h3>А теперь — вторая, дополнительная часть</h3>"
+                "<p>Выполнив эти задания, ты станешь МЕГА крутым учеником!</p>"}),
+
+            ("match", {
+                "title": "Сопоставь слова и их описания",
+                "pairs": [
+                    {"left": "When there’s lots of rain and lightning. You can hear "
+                             "big ‘bangs’.", "right": "Thunderstorm",
+                     "right_audio_tts": "thunderstorm"},
+                    {"left": "You use this in the rain.", "right": "Umbrella",
+                     "right_audio_tts": "umbrella"},
+                    {"left": "A good day to fly your kite.", "right": "Windy",
+                     "right_audio_tts": "windy"},
+                    {"left": "A flash from the sky.", "right": "Lightning",
+                     "right_audio_tts": "lightning"},
+                    {"left": "When you can’t see the sun.", "right": "Cloudy",
+                     "right_audio_tts": "cloudy"},
+                    {"left": "When you can’t see where you are going.", "right": "Foggy",
+                     "right_audio_tts": "foggy"},
+                    {"left": "You can get very wet in weather like this.", "right": "Rainy",
+                     "right_audio_tts": "rainy"},
+                    {"left": "You put these on your feet when it’s raining.",
+                     "right": "Boots", "right_audio_tts": "boots"},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "Слова растерялись! Помоги им найти свои места в тексте",
+                "mode": "drag",
+                "text":
+                    "The weather was terrible yesterday. It was cold and __foggy__ in "
+                    "the morning. Then there was no sun because it was __cloudy__. "
+                    "At lunchtime it was very __rainy__, so all my things got wet. "
+                    "And then at about 5 o’clock the __thunderstorm__ started. "
+                    "There was lots of __lightning__ in the sky. I was quite scared "
+                    "because I was in a tent, camping! And I didn’t have an "
+                    "__umbrella__ or a __raincoat__ to wear. And I didn’t have any "
+                    "__boots__ for my feet. It was awful!",
+                "gaps_expected": 8,
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание — ты МЕГА КРУТ!</h3>"
+                "<p>Жду тебя на уроке!</p>"}),
+        ],
+    },
+    "u9_hw2": {
+        "unit": "u9",
+        "unit_title": "Unit 9 · Weather",
+        "unit_sort": 9,
+        "lesson_title": "Homework 2",
+        "lesson_sort": 1,
+        "kind": "homework",
+        # Блоков столько же, сколько в выгрузке.
+        # Прогноз погоды в выгрузке был картинкой, которой нет; взят наш экран
+        # (tools/sm3_u9_weekboard.py подписывает дни недели). Пять утверждений
+        # сошлись с нашей картинкой как есть, шестое переписано: на нашем
+        # экране в субботу дождь, поэтому «On Saturday it's going to be sunny»
+        # — тоже неверно, как и в выгрузке.
+        # Блок 6 в выгрузке — «Диаграмма» (подписать картинки днями недели).
+        # Картинки с занятиями у нас отдельные, поэтому это match: день →
+        # картинка. Ключ взят из блока 8 той же домашки.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_laptop")}" alt="" style="height:200px"></p>'
+                "<h2>Добро пожаловать в домашнее задание!</h2>"
+                "<p>Выполни все задания, если хочешь выучить тему на все 100! "
+                "В конце есть дополнительное задание — по желанию, НО если "
+                "сделаешь его, будешь нереально крут.</p>"
+                "<p>Для начала посмотри видео и всё повтори.</p>"}),
+
+            ("video", {"title": "Видео: going to — планы и погода",
+                       "url": "", "provider": ""}),
+
+            ("order", {
+                "words": ["On", "Saturday,", "we", "are", "going", "to make",
+                          "sandwiches", "and", "go", "to the park."],
+                "sentence": "On Saturday, we are going to make sandwiches and go "
+                            "to the park.",
+                "audio_tts": "On Saturday, we are going to make sandwiches and go "
+                             "to the park.",
+            }),
+
+            ("order", {
+                "words": ["The weather", "is", "going", "to", "be", "sunny", "and",
+                          "warm."],
+                "sentence": "The weather is going to be sunny and warm.",
+                "audio_tts": "The weather is going to be sunny and warm.",
+            }),
+
+            ("truefalse", {
+                "title": "Посмотри на прогноз погоды и отметь, какие предложения "
+                         "верные (true), а какие неверные (false)",
+                "image": img("u9", "weather_week_board"),
+                "statements": [
+                    {"text": "On Monday it’s going to be sunny.", "answer": False},
+                    {"text": "On Tuesday it isn’t going to be rainy.", "answer": True},
+                    {"text": "On Wednesday it’s going to be sunny.", "answer": False},
+                    {"text": "On Thursday it’s going to be foggy.", "answer": False},
+                    {"text": "On Friday it’s going to be cloudy.", "answer": True},
+                    {"text": "On Saturday it’s going to be sunny.", "answer": False},
+                ],
+            }),
+
+            ("match", {
+                "title": "Послушай запись и соедини дни недели с занятиями",
+                "pairs": [
+                    {"left": "Monday", "right_image": img("u9", "plan_sleep"),
+                     "right": "sleep"},
+                    {"left": "Tuesday", "right_image": img("u9", "plan_watch_tv"),
+                     "right": "watch TV"},
+                    {"left": "Wednesday", "right_image": img("u9", "plan_cook"),
+                     "right": "cook food"},
+                    {"left": "Thursday", "right_image": img("u9", "plan_tennis"),
+                     "right": "play tennis"},
+                    {"left": "Friday", "right_image": img("u9", "plan_kite"),
+                     "right": "fly a kite"},
+                    {"left": "Sunday", "right_image": img("u9", "plan_ride_horse"),
+                     "right": "ride a horse"},
+                ],
+            }),
+
+            ("video", {"title": "Аудио к заданию «дни недели и занятия»",
+                       "url": "", "provider": ""}),
+
+            ("gaps", {
+                "title": "Посмотри на картинки и дни недели из прошлого задания "
+                         "и заполни пропуски. Первое предложение — образец",
+                # Пропуск — только занятие: вписывать «I’m going to…» целиком
+                # ученик не станет (поле 120 px), а апостроф в I’m он наберёт
+                # прямой, и ответ не сойдётся с текстом задания.
+                "text":
+                    "1. On Monday I’m going to sleep.\n"
+                    "2. On Tuesday I’m going to __watch TV|watch tv__.\n"
+                    "3. On Wednesday I’m going to __cook food__.\n"
+                    "4. On Thursday I’m going to __play tennis__.\n"
+                    "5. On Friday I’m going to __fly a kite__.\n"
+                    "6. On Sunday I’m going to __ride a horse__.",
+                "gaps_expected": 5,
+            }),
+
+            ("task", {
+                "title": "Дополнительное задание — напиши о своих планах на неделю",
+                "needs_review": True,
+                "html":
+                    "<p>3–4 предложения о том, что ты собираешься делать.</p>"
+                    "<p><i>Например: On Saturday I’m going to do my homework.</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание — ты МЕГА КРУТ!</h3>"
+                "<p>Жду тебя на уроке!</p>"}),
+        ],
+    },
+    "u9_hw3": {
+        "unit": "u9",
+        "unit_title": "Unit 9 · Weather",
+        "unit_sort": 9,
+        "lesson_title": "Homework 3",
+        "lesson_sort": 2,
+        "kind": "homework",
+        # Блоки один в один с выгрузкой. Шаблон припева из блока 3 выгрузки
+        # у нас внутри самого задания.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_headphones")}" alt="" style="height:200px"></p>'
+                "<h2>Привет! Давай начинать домашнюю работу :)</h2>"
+                "<p>Послушай песню и исправь предложения.</p>"}),
+
+            ("task", {
+                "title": "Послушай песню и исправь предложения",
+                "needs_review": True,
+                "audio": "",
+                "html":
+                    "<p>1. I’m going to read my Science book.<br>"
+                    "2. I’m not going to travel far away.<br>"
+                    "3. I’m going to walk in the rain.<br>"
+                    "4. We aren’t going to go back to school.<br>"
+                    "5. We’re going to see our friends before our holiday.</p>",
+            }),
+
+            ("task", {
+                "title": "Напиши свой припев",
+                "needs_review": True,
+                "html":
+                    "<p>Можешь использовать идеи из песни :)</p>"
+                    "<p><i>I’m going to …<br>And …<br>"
+                    "Then I’m going to …<br>"
+                    "I’m going to have lots of fun.</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_smiley")}" alt="" style="height:180px"></p>'
+                "<h3>Отличная работа!</h3>"
+                "<p>Самое время отдохнуть :)</p>"}),
         ],
     },
 }

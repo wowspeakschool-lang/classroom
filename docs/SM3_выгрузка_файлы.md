@@ -174,3 +174,21 @@ parentId = '<id папки юнита>'
 | Test | `1UJHthetdhjrgyB7pJ0DxnXkxUu9lVwct` | `1vOAJa2X6wB5HyMaerB379ItIrPhKGG_o` |
 
 Домашек **семь**, «Homework 1» и «Homework 7» разложены на два файла.
+
+## Unit 9 — папка `1w1Xs41E-PKy1_NL1xa_72TBoUMGntPXD`
+
+| Файл | txt | pdf |
+|---|---|---|
+| Homework 1 (1) | `183EMjq0JZ3Fegy71Hfp7WCxRFytpN9in` | `1zdRqJJ1pwXyRoDvY1zPwngG7VCIJJxjx` |
+| Homework 1 (2) | `1_iOYwhzCB7wzV1UF0Nyupg-ghXEfFGWn` | `1k_NKrE-a4UwPiTa8pN8VGmfHm--Q4x9d` |
+| Homework 2 | `1Roq-aX65o9gYW4KDzLbDJyKF74Q_a0jv` | `1MShO5oqAiNc19ZQnFdoCIfHBFmWjnBaS` |
+| Homework 3 | `1-dArZgtGxLOJW24H5ei6QmtFBejYttyx` | `1eN1A4z6MUFqpne6bNy-KVM9L3dHcFuLa` |
+| Homework 4 | **нет txt** | `1G1FCDGEdFaHc6Itjksf6w_uzIEctcoTo` |
+| Homework 5 | `1r0qpDk4yk9l_fBcNBP9dCJCxBI8pdLoj` | `1-1H5skvGNJmjFFHyB4nIq4ofEb-Ro8AT` |
+| Homework 6 | `1Bu6B60daJVS0ojikpN0lxBmd8QueB1RI` | `1C-MoRajHQVfj4JltHwc6TtTd8xXOOK8c` |
+| Homework 7 (1) | `1AbTylZ4IJEDsqJdQwIKi633gLdYeZpSQ` | `1sasFcp-j9El9ofXvX61erckbLzV23UH2` |
+| Homework 7 (2) | `1_me7hOBVYzVCYM72FIyMeYYT4RBfbWoA` | `1Dx_7j8z2aoadEkvshGcqm17NSLgg7TYE` |
+| Test | `1kVVQ3ef0WNs_lajUNfXITjOqprYy6Kzv` | `1tSzYmCf27pNn4wkFyrDO-HHRm1_R3Dxv` |
+
+⚠️ **У Homework 4 текстовой выгрузки нет** — только PDF (10 МБ, выложен
+позже остальных). Структура снята чтением PDF.
