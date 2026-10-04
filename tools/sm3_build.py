@@ -4073,6 +4073,519 @@ LESSONS = {
                 "<p>Увидимся на занятии ;)</p>"}),
         ],
     },
+    "u6_hw5": {
+        "unit": "u6",
+        "unit_title": "Unit 6 · Gadgets",
+        "unit_sort": 6,
+        "lesson_title": "Homework 5",
+        "lesson_sort": 4,
+        "kind": "homework",
+        # Блоков столько же, сколько в выгрузке. Обе страницы истории вырезаны
+        # из PDF: блоки «Картинка» в редакторе стояли пустыми. На второй
+        # странице кадры 7 и 8 без реплик — так они и лежали в выгрузке,
+        # подписи обрезаны при загрузке.
+        # Верные ответы шести вопросов сняты с PDF: верный тот вариант,
+        # у которого нет пустого чекбокса.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_book")}" alt="" style="height:200px"></p>'
+                "<h2>Добро пожаловать в домашнее задание!</h2>"
+                "<p>В этом уроке тебя ждут текст и упражнения к нему, а ещё крутое "
+                "интерактивное видео. Выполни все задания, если хочешь выучить тему "
+                "на все 100!</p>"}),
+
+            ("text", {"html":
+                "<h3>Пришло время вспомнить текст, который мы читали на уроке!</h3>"
+                "<p>Прежде чем читать, ответь на вопрос: <b>Why are Horax and Zelda "
+                "scared?</b></p>"
+                "<p>Прочитай историю и проверь себя — правильно ли ты угадал?</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u6", "story_caves_1")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u6", "story_caves_2")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("quiz", {"title": "Прочитай историю ещё раз и выбери правильный вариант",
+                      "questions": [
+                {"q": "In picture 1, what does Ben mean when he says "
+                      "‘Somewhere down there …’?",
+                 "type": "single",
+                 "options": [{"text": "A place below a tree"},
+                             {"text": "A place under a stone"},
+                             {"text": "A place in the caves"}],
+                 "correct": [2]},
+            ]}),
+
+            ("quiz", {"title": "Выбери правильный вариант ответа", "questions": [
+                {"q": "In picture 3, why does Ben say ‘The torch was a good "
+                      "idea.’?",
+                 "type": "single",
+                 "options": [{"text": "Because he’s scared of the dark."},
+                             {"text": "Because it’s dark in the cave."},
+                             {"text": "Because a torch is his favourite gadget."}],
+                 "correct": [1]},
+            ]}),
+
+            ("quiz", {"title": "Выбери правильный вариант ответа", "questions": [
+                {"q": "In picture 6, how does Lucy know Horax and Zelda are coming?",
+                 "type": "single",
+                 "options": [{"text": "Buster sees them."}, {"text": "She sees them."},
+                             {"text": "Ben tells her."}],
+                 "correct": [2]},
+            ]}),
+
+            ("quiz", {"title": "Выбери правильный вариант ответа", "questions": [
+                {"q": "Who makes the scary noise?", "type": "single",
+                 "options": [{"text": "Horax and Zelda."}, {"text": "Buster."},
+                             {"text": "Ben."}],
+                 "correct": [1]},
+            ]}),
+
+            ("quiz", {"title": "Выбери правильный вариант ответа", "questions": [
+                {"q": "Buster is ___ dog in the world!", "type": "single",
+                 "options": [{"text": "clever"}, {"text": "cleverer"},
+                             {"text": "the cleverest"}],
+                 "correct": [2]},
+            ]}),
+
+            ("quiz", {"title": "Выбери правильный вариант ответа", "questions": [
+                {"q": "What is the next letter?", "type": "single",
+                 "options": [{"text": "F"}, {"text": "E"}, {"text": "T"}],
+                 "correct": [1]},
+            ]}),
+
+            ("match", {
+                "title": "Ты отлично справляешься! Соедини героя и фразу, "
+                         "которую он произнёс",
+                "pairs": [
+                    {"left": "Ben", "right": "The torch was a good idea!",
+                     "right_audio_tts": "The torch was a good idea!"},
+                    {"left": "Lucy", "right": "Have you got a walkie-talkie and a torch?",
+                     "right_audio_tts": "Have you got a walkie-talkie and a torch?"},
+                    {"left": "Zelda", "right": "Let’s run!",
+                     "right_audio_tts": "Let's run!"},
+                    {"left": "Horax", "right": "Where are those kids?",
+                     "right_audio_tts": "Where are those kids?"},
+                    {"left": "Buster", "right": "Grrrrrrr!"},
+                ],
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_clap")}" alt="" style="height:180px"></p>'
+                "<h3>Не забудь про интерактивное видео</h3>"
+                "<p>Учитель прикрепил его в твоём личном кабинете. Это по желанию, "
+                "НО если посмотришь — будешь нереально крут!</p>"}),
+        ],
+    },
+    "u6_hw6": {
+        "unit": "u6",
+        "unit_title": "Unit 6 · Gadgets",
+        "unit_sort": 6,
+        "lesson_title": "Homework 6",
+        "lesson_sort": 5,
+        "kind": "homework",
+        # Блоков столько же, сколько в выгрузке.
+        # Блок 2 в выгрузке пустой целиком: ни записи, ни картинок, только
+        # названия колонок. Собран на наших карточках, ключ придуман мной —
+        # СОСТАВ МОЙ, запись должна ему соответствовать.
+        # Блок 3 — «выбери правильный вариант» внутри связного текста. Текст
+        # целиком в заголовке блока, а каждый пропуск — отдельный вопрос:
+        # так сохранены и чтение, и неверные варианты.
+        # Картинка сада наша, людей на ней нет, поэтому вопросы блока 6
+        # переписаны под неё: сравниваются футболки на верёвке, а не мальчики.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_headphones")}" alt="" style="height:200px"></p>'
+                "<h2>Добро пожаловать в домашнее задание!</h2>"
+                "<p>Тебя ждут интересные упражнения, а ещё ДОПОЛНИТЕЛЬНОЕ задание — "
+                "его можно сделать по желанию, НО если сделаешь, будешь нереально "
+                "крут!</p>"
+                "<p>Начнём с аудирования.</p>"}),
+
+            ("sort", {
+                "title": "Прослушай аудио и укажи, кому какой гаджет принадлежит "
+                         "СЕЙЧАС. Три картинки лишние — отправь их в колонку Extra",
+                "audio": "",
+                "groups": [
+                    {"name": "Jenny", "items": [{"image": img("u6", "gad_tablet")}]},
+                    {"name": "Tim", "items": [{"image": img("u6", "gad_console")}]},
+                    {"name": "Olivia", "items": [{"image": img("u6", "gad_phone")}]},
+                    {"name": "Extra", "items": [
+                        {"image": img("u6", "gad_torch")},
+                        {"image": img("u6", "gad_walkie_talkies")},
+                        {"image": img("u6", "gad_fan")},
+                    ]},
+                ],
+            }),
+
+            ("quiz", {
+                "title":
+                    "Супер! Прочитай текст про игровые приставки и выбери подходящее "
+                    "слово в каждый пропуск. "
+                    "There are many games consoles that we can play with. The (1) ___ "
+                    "games console is more than 40 years old! It’s bigger (2) ___ "
+                    "the ones we have today. It is slower too. Modern consoles are "
+                    "smaller and faster. You can play games on these consoles and "
+                    "(3) ___ DVDs too. Some games consoles also connect to the internet. "
+                    "Games consoles are not very cheap. Today, the (4) ___ expensive "
+                    "games consoles cost around £800 and the cheapest ones cost "
+                    "about £50. Many people like games consoles because the games "
+                    "(5) ___ fun and many people can play together with one console.",
+                "questions": [
+                    {"q": "(1)", "type": "single",
+                     "options": [{"text": "oldest"}, {"text": "young"}, {"text": "old"}],
+                     "correct": [0]},
+                    {"q": "(2)", "type": "single",
+                     "options": [{"text": "than"}, {"text": "more"}, {"text": "the"}],
+                     "correct": [0]},
+                    {"q": "(3)", "type": "single",
+                     "options": [{"text": "watch"}, {"text": "have"}, {"text": "open"}],
+                     "correct": [0]},
+                    {"q": "(4)", "type": "single",
+                     "options": [{"text": "most"}, {"text": "more"}, {"text": "than"}],
+                     "correct": [0]},
+                    {"q": "(5)", "type": "single",
+                     "options": [{"text": "are"}, {"text": "do"}, {"text": "is"}],
+                     "correct": [0]},
+                ],
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("good_luck_clover")}" alt="" style="height:180px"></p>'
+                "<h3>А это дополнительное задание — для ЧЕМПИОНОВ!</h3>"
+                "<p>Его можно выполнить по желанию. Ниже картинка, а после неё "
+                "задание: внимательно посмотри и впиши правильные ответы.</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u6", "scene_garden_count")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("gaps", {
+                "title": "Посмотри на картинку и закончи предложения",
+                "text":
+                    "1. There are __three|3__ balls in the garden.\n"
+                    "2. The red T-shirt is bigger than the blue "
+                    "__T-shirt|t-shirt|tshirt__.\n"
+                    "3. Where is the bicycle? — __Behind the tree|behind the tree__.\n"
+                    "4. What can you see on the table? — "
+                    "__Walkie-talkies|walkie-talkies|two walkie-talkies|"
+                    "2 walkie-talkies__.",
+                "gaps_expected": 4,
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание — ты замечательный "
+                "ученик!</h3>"
+                "<p>За это лови звёздочку :) Увидимся на занятии!</p>"}),
+        ],
+    },
+    "u6_hw7": {
+        "unit": "u6",
+        "unit_title": "Unit 6 · Gadgets",
+        "unit_sort": 6,
+        "lesson_title": "Homework 7",
+        "lesson_sort": 6,
+        "kind": "homework",
+        # Блоков столько же, сколько в выгрузке.
+        # Блок 4: в выгрузке правая колонка пустая — там должны были стоять
+        # три наскальных рисунка, которых у нас нет. Поэтому пары
+        # «описание → что на рисунке»: место из текста в ответ не берём,
+        # иначе задание решалось бы без чтения.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>Огромный привет! Как твоё настроение?</h2>"
+                "<p>Самое время сделать новое домашнее задание. Сегодня будет много "
+                "интересного, и ты кое-что нарисуешь. Давай начнём!</p>"}),
+
+            ("match", {
+                "title": "Давай вспомним, что мы проходили на занятии! "
+                         "Соедини слова с картинками",
+                "pairs": [
+                    {"left_image": img("u6", "cave_pigments"), "right": "rock powder",
+                     "right_audio_tts": "rock powder"},
+                    {"left_image": img("u6", "cave_lamp"), "right": "lamp",
+                     "right_audio_tts": "lamp"},
+                    {"left_image": img("u6", "cave_ceiling_bats"), "right": "cave ceiling",
+                     "right_audio_tts": "cave ceiling"},
+                    {"left_image": img("u6", "cave_twig"), "right": "twig",
+                     "right_audio_tts": "twig"},
+                    {"left_image": img("u6", "cave_charcoal"), "right": "charcoal",
+                     "right_audio_tts": "charcoal"},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "Супер! А теперь прочитай предложения и вставь пропущенные слова",
+                "mode": "drag",
+                "text":
+                    "1. Artists still use __charcoal__ to draw pictures.\n"
+                    "2. I drew a picture with a __twig__ from a tree in our Art lesson "
+                    "today.\n"
+                    "3. Cave artists used __rock powder__ to make coloured paint.\n"
+                    "4. We saw some bats sleeping on the __cave ceiling__.\n"
+                    "5. Dad had an old oil __lamp__ so we could see in the dark.",
+                "gaps_expected": 5,
+            }),
+
+            ("match", {
+                "title": "Прочитай описания наскальных рисунков и соедини описание "
+                         "с тем, что на нём изображено. Обращай внимание на детали!",
+                "pairs": [
+                    {"left": "This painting is in the Sahara Desert. It shows a man with "
+                             "a tall giraffe. It tells us that giraffes are thousands of "
+                             "years old and live in the desert.",
+                     "right": "a man and a tall giraffe",
+                     "right_audio_tts": "a man and a tall giraffe"},
+                    {"left": "This painting tells us how people travelled. Some people "
+                             "are on camels and some are walking. This picture is from "
+                             "a cave in Algeria.",
+                     "right": "people on camels and people walking",
+                     "right_audio_tts": "people on camels and people walking"},
+                    {"left": "In this picture we can see people hunting. Some people are "
+                             "talking, too. You can see this picture in a cave in "
+                             "Thailand.",
+                     "right": "people hunting and talking",
+                     "right_audio_tts": "people hunting and talking"},
+                ],
+            }),
+
+            ("task", {
+                "title": "Нарисуй свой наскальный рисунок и опиши его",
+                "needs_review": True,
+                "html":
+                    "<p>Задание дополнительное, но настоящие чемпионы обязательно "
+                    "с ним справятся! Рисовать можно самыми разными материалами.</p>"
+                    "<p>Потом напиши небольшое описание по плану:</p>"
+                    "<p><i>1. I draw my pictures on …<br>2. I use …<br>"
+                    "3. In this picture you can see …</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_medal")}" alt="" style="height:180px"></p>'
+                "<h3>Спасибо тебе огромное за твой труд!</h3>"
+                "<p>Ты невероятно потрудился сегодня. До встречи на занятии :)</p>"}),
+        ],
+    },
+    "u6_hw8": {
+        "unit": "u6",
+        "unit_title": "Unit 6 · Gadgets",
+        "unit_sort": 6,
+        "lesson_title": "Homework 8",
+        "lesson_sort": 7,
+        "kind": "homework",
+        # Блоков столько же, сколько в выгрузке. Картинка магазина с планшетами
+        # вырезана из PDF (в редакторе блок пустой), а образец рассказа про
+        # велосипед со скана перенесён текстом — так он читается.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_rocket")}" alt="" style="height:200px"></p>'
+                "<h2>Привет-привет!</h2>"
+                "<p>Самое время повторить всё-всё, что ты узнал в этом юните. "
+                "Ты наверняка помнишь то, что выучил. Давай начинать!</p>"}),
+
+            ("sequence", {
+                "title": "Послушай разговор продавца и покупателя, а затем расставь "
+                         "предложения диалога в правильном порядке",
+                "audio": "",
+                "items": [
+                    {"text": "A: Good morning. Can I help you?"},
+                    {"text": "B: Yes. Have you got any torches?"},
+                    {"text": "A: Yes, we have. We’ve got this blue torch and this "
+                             "green one."},
+                    {"text": "B: How much is the green one?"},
+                    {"text": "A: It’s 14 pounds. The blue one is cheaper. "
+                             "It’s only eight pounds."},
+                    {"text": "B: That’s great. Can I buy the blue one, please?"},
+                    {"text": "A: Of course!"},
+                    {"text": "B: Thank you."},
+                ],
+            }),
+
+            ("task", {
+                "title": "Напиши свой диалог",
+                "needs_review": True,
+                "image": img("u6", "scene_tablet_shop"),
+                "html":
+                    "<p>Ты лучше всех! Просмотри диалог из предыдущего задания ещё раз "
+                    "и напиши свой, но по картинке — посмотри, девочка покупает "
+                    "планшет.</p>"
+                    "<p>Я помогу тебе с началом:</p>"
+                    "<p><i>Assistant: Good morning. Can I help you?</i></p>",
+            }),
+
+            ("task", {
+                "title": "Дополнительное задание — для мастеров английского языка",
+                "needs_review": True,
+                "html":
+                    "<p>Напиши небольшой рассказ о своём любимом гаджете и сравни его "
+                    "со своим старым гаджетом. Если нарисуешь картинку — будет "
+                    "просто супер!</p>"
+                    "<p>Ниже образец такого рассказа. Успехов!</p>",
+            }),
+
+            ("text", {"html":
+                "<h3>Образец рассказа</h3>"
+                "<p><i>My favourite gadget is my bike.</i></p>"
+                "<p><i>It was my birthday present from my parents. My old bike was very "
+                "small. This bike is bigger.</i></p>"
+                "<p><i>It’s red and black. It’s the most beautiful bike in the "
+                "world.</i></p>"
+                "<p><i>I love my bike. I cycle to lots of places on it. I sometimes ride "
+                "my bike to visit my grandmother at the weekend.</i></p>"
+                "<p>Writing tip: прочитай написанное медленно и проверь, нет ли "
+                "ошибок.</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("congrats_popper")}" alt="" style="height:180px"></p>'
+                "<h3>Великолепная работа!</h3>"
+                "<p>Поздравляю тебя с окончанием большой-пребольшой темы. Ты узнал много "
+                "нового о технологиях и научился сравнивать предметы. Твой учитель "
+                "очень гордится тобой! Увидимся на занятии :)</p>"}),
+        ],
+    },
+    "u6_test": {
+        "unit": "u6",
+        "unit_title": "Unit 6 · Gadgets",
+        "unit_sort": 6,
+        "lesson_title": "Test",
+        "lesson_sort": 8,
+        "kind": "test",
+        # Нумерация блоков как в выгрузке: match, «заполни пропуски», пять
+        # «выбери правильный вариант» (у нас quiz, чтобы сохранить неверные
+        # варианты), пять «составь предложение», две записи голоса.
+        # Картинок к match в выгрузке не было — взяты наши карточки.
+        # К SPEAKING TASK картинок тоже не было: Part 1 идёт по нашему листу
+        # ценников (ответ «That's £325» сходится с ценой ноутбука), Part 2 —
+        # по нашему столу с гаджетами, поэтому образец про слона и мышь
+        # заменён на сравнение гаджетов.
+        "blocks": [
+            ("match", {
+                "title": "Соедини слова с картинками",
+                "pairs": [
+                    {"left_image": img("u6", "gad_torch"), "right": "Torch",
+                     "right_audio_tts": "torch"},
+                    {"left_image": img("u6", "gad_walkie_talkies"), "right": "Walkie-talkie",
+                     "right_audio_tts": "walkie-talkie"},
+                    {"left_image": img("u6", "gad_laptop"), "right": "Laptop",
+                     "right_audio_tts": "laptop"},
+                    {"left_image": img("u6", "gad_fan"), "right": "Electric fan",
+                     "right_audio_tts": "electric fan"},
+                    {"left_image": img("u6", "gad_console"), "right": "Games console",
+                     "right_audio_tts": "games console"},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "Прочитай и заполни пропуски",
+                "mode": "drag",
+                "text":
+                    "1. We use it to go from one floor to another — __lift__.\n"
+                    "2. We use it to listen to music — __digital radio__.\n"
+                    "3. We use this gadget to call friends — __mobile phone__.\n"
+                    "4. We use it to study or work in the internet — __laptop__.\n"
+                    "5. We use it when it is dark or at night — __torch__.",
+                "gaps_expected": 5,
+            }),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "The tablet is ___ than the phone.", "type": "single",
+                 "options": [{"text": "bigger"}, {"text": "big"}, {"text": "more big"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "Is a car ___ than a bike?", "type": "single",
+                 "options": [{"text": "faster"}, {"text": "fast"}, {"text": "more fast"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "The white phone is ___ than the black phone.", "type": "single",
+                 "options": [{"text": "more expensive"}, {"text": "expensive"},
+                             {"text": "expensiver"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: Are dogs ___ than cats?", "type": "single",
+                 "options": [{"text": "friendlier"}, {"text": "more friendly"},
+                             {"text": "friendly"}],
+                 "correct": [0]},
+                {"q": "B: I think yes, they ___.", "type": "single",
+                 "options": [{"text": "are"}, {"text": "is"}, {"text": "aren’t"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "A: Who is ___?", "type": "single",
+                 "options": [{"text": "stronger"}, {"text": "more strong"},
+                             {"text": "strong"}],
+                 "correct": [0]},
+                {"q": "B: Hulk is ___ than a sportsman.", "type": "single",
+                 "options": [{"text": "stronger"}, {"text": "more strong"},
+                             {"text": "strong"}],
+                 "correct": [0]},
+            ]}),
+
+            ("order", {
+                "words": ["The TV", "is", "bigger", "than", "the phone."],
+                "sentence": "The TV is bigger than the phone.",
+                "audio_tts": "The TV is bigger than the phone.",
+            }),
+
+            ("order", {
+                "words": ["My bike", "is", "faster", "than", "yours."],
+                "sentence": "My bike is faster than yours.",
+                "audio_tts": "My bike is faster than yours.",
+            }),
+
+            ("order", {
+                "words": ["How", "much", "is", "the torch?"],
+                "sentence": "How much is the torch?",
+                "audio_tts": "How much is the torch?",
+            }),
+
+            ("order", {
+                "words": ["I", "would", "like", "to", "buy", "it."],
+                "sentence": "I would like to buy it.",
+                "audio_tts": "I would like to buy it.",
+            }),
+
+            ("order", {
+                "words": ["My", "favourite", "gadget", "is", "my bike."],
+                "sentence": "My favourite gadget is my bike.",
+                "audio_tts": "My favourite gadget is my bike.",
+            }),
+
+            ("speaking", {
+                "title": "SPEAKING TASK \U0001f3a4 Part 1",
+                "needs_review": True,
+                "image": img("u6", "shop_prices"),
+                "html":
+                    "<p>Посмотри на картинку, составь диалог и разыграй его.</p>"
+                    "<p><i>For example:<br>A: Hello, can I help you?<br>"
+                    "B: Yes, I’d like a laptop, please.<br>"
+                    "A: That’s £325.</i></p>"
+                    "<p>Запиши свой ответ, нажав на кнопку микрофона.</p>",
+            }),
+
+            ("speaking", {
+                "title": "SPEAKING TASK \U0001f3a4 Part 2",
+                "needs_review": True,
+                "image": img("u6", "scene_gadgets_desk"),
+                "html":
+                    "<p>Сравни предметы на картинке (4–5 предложений).</p>"
+                    "<p><i>For example: The laptop is bigger than the mobile "
+                    "phone.</i></p>"
+                    "<p>Запиши свой ответ, нажав на кнопку микрофона.</p>",
+            }),
+        ],
+    },
 }
 
 
