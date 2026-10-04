@@ -2275,6 +2275,105 @@ LESSONS = {
                 "<p>Увидимся на уроке!</p>"}),
         ],
     },
+    "u4_hw2": {
+        "unit": "u4",
+        "unit_title": "Unit 4 \u00b7 In the town",
+        "unit_sort": 4,
+        "lesson_title": "Homework 2",
+        "lesson_sort": 1,
+        "kind": "homework",
+        # В выгрузке 11 блоков, у нас 12: картинка города вынесена отдельным
+        # блоком 9, иначе внутри задания она ужимается до 220 px и подписи
+        # CINEMA, LIBRARY не прочитать. Дальше номера сдвинуты на один.
+        # К шести «составь предложение» подставлены наши картинки предлогов —
+        # в выгрузке их не было.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_highfive")}" alt="" style="height:200px"></p>'
+                "<h2>HELLO! Добро пожаловать в домашнее задание!</h2>"
+                "<p>Сегодня мы будем повторять предлоги. Внимательно посмотри видео "
+                "и сделай задания ниже.</p>"}),
+
+            ("video", {"title": "Видео: предлоги места", "url": "", "provider": ""}),
+
+            ("order", {
+                "image": img("u4", "prep_cat_under_sofa"),
+                "words": ["The", "cat", "is", "under", "the", "sofa."],
+                "sentence": "The cat is under the sofa.",
+                "audio_tts": "The cat is under the sofa.",
+            }),
+
+            ("order", {
+                "image": img("u4", "prep_cat_dog_opposite"),
+                "words": ["The", "cat", "is", "opposite", "the", "dog."],
+                "sentence": "The cat is opposite the dog.",
+                "audio_tts": "The cat is opposite the dog.",
+            }),
+
+            ("order", {
+                "image": img("u4", "prep_cat_below_shelf"),
+                "words": ["The", "cat", "is", "below", "the", "shelf."],
+                "sentence": "The cat is below the shelf.",
+                "audio_tts": "The cat is below the shelf.",
+            }),
+
+            ("order", {
+                "image": img("u4", "prep_fox_in_front_of_box"),
+                "words": ["The", "fox", "is", "in front of", "the", "box."],
+                "sentence": "The fox is in front of the box.",
+                "audio_tts": "The fox is in front of the box.",
+            }),
+
+            ("order", {
+                "image": img("u4", "prep_mouse_between_boxes"),
+                "words": ["The", "mouse", "is", "between", "the", "boxes."],
+                "sentence": "The mouse is between the boxes.",
+                "audio_tts": "The mouse is between the boxes.",
+            }),
+
+            ("order", {
+                "image": img("u4", "prep_monkey_behind_tree"),
+                "words": ["The", "monkey", "is", "behind", "the", "tree."],
+                "sentence": "The monkey is behind the tree.",
+                "audio_tts": "The monkey is behind the tree.",
+            }),
+
+            ("text", {"html":
+                "<h3>Посмотри на картинку — какие места есть в городе?</h3>"
+                f'<p><img src="{img("u4", "scene_town_prepositions")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("quiz", {"title": "Выбери правильный вариант", "questions": [
+                {"q": "1. The cinema is ___ the library.", "type": "single",
+                 "options": [{"text": "opposite"}, {"text": "between"}], "correct": [0]},
+                {"q": "2. The tower is ___ the cinema.", "type": "single",
+                 "options": [{"text": "behind"}, {"text": "above"}], "correct": [0]},
+                {"q": "3. The park is ___ the school.", "type": "single",
+                 "options": [{"text": "opposite"}, {"text": "near"}], "correct": [0]},
+                {"q": "4. The boat is ___ the bridge.", "type": "single",
+                 "options": [{"text": "below"}, {"text": "above"}], "correct": [0]},
+                {"q": "5. The sports centre is ___ the cinema and the cafe.", "type": "single",
+                 "options": [{"text": "between"}, {"text": "in front of"}], "correct": [0]},
+                {"q": "6. The castle is ___ the sports centre.", "type": "single",
+                 "options": [{"text": "behind"}, {"text": "opposite"}], "correct": [0]},
+            ]}),
+
+            ("task", {
+                "title": "Напиши три предложения про свой город",
+                "needs_review": True,
+                "html":
+                    "<p>СУПЕР! Ты прекрасно со всем справляешься. У меня есть для тебя "
+                    "ещё одно задание — оно дополнительное, но если ты его сделаешь, "
+                    "получишь дополнительную \u2b50</p>"
+                    "<p><i>Например: The cinema is behind the shop.</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_jump")}" alt="" style="height:180px"></p>'
+                "<h3>УРА! У тебя получилось!</h3>"
+                "<p>Не забудь показать свой текст на занятии. Увидимся!</p>"}),
+        ],
+    },
 }
 
 
