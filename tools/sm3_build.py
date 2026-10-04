@@ -2675,6 +2675,352 @@ LESSONS = {
                 "<p>Ты БОЛЬШОЙ МОЛОДЕЦ! Увидимся на уроке!</p>"}),
         ],
     },
+    "u4_hw7": {
+        "unit": "u4",
+        "unit_title": "Unit 4 · In the town",
+        "unit_sort": 4,
+        "lesson_title": "Homework 7",
+        "lesson_sort": 6,
+        "kind": "homework",
+        # Обе части выгрузки, «Homework 7 (1)» и «(2)», одним уроком: прощание
+        # первой части и приветствие второй сведены в один блок-перемычку 6,
+        # поэтому блоков 18, а не 19. Картинка-пример из части (1) (скан
+        # учебника) переписана текстом — блок 4.
+        # В выгрузке описание «You can see how the aeroplanes can fly» стояло
+        # у skyscraper, а «People can check traffic in the sky there» — у
+        # airport tower наоборот. Небоскрёбу ни одно не подходит, поэтому
+        # у airport tower оставлено про небо, а небоскрёбу написано своё.
+        # Игра Wordwall «going to SM3» (Quiz, multiple choice) пересобрана
+        # блоком quiz на наших картинках — СОСТАВ МОЙ.
+        # Предлоги в выгрузке шли без картинок — подставлены наши; «the box»
+        # у кошки заменено на «the shelf» по картинке.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>HELLO! Добро пожаловать в домашнее задание!</h2>"
+                "<p>Сегодня мы повторим с тобой слова, которые ты изучал на уроке!</p>"
+                "<p>Готов начать тренироваться?</p>"}),
+
+            ("match", {
+                "title": "Внимательно посмотри на картинки и соедини слова "
+                         "с подходящими изображениями",
+                "pairs": [
+                    {"left_image": img("u4", "tower_lighthouse"), "right": "lighthouse",
+                     "right_audio_tts": "lighthouse"},
+                    {"left_image": img("u4", "tower_skyscraper"), "right": "skyscraper",
+                     "right_audio_tts": "skyscraper"},
+                    {"left_image": img("u4", "tower_control"), "right": "airport tower",
+                     "right_audio_tts": "airport tower"},
+                    {"left_image": img("u4", "tower_clock"), "right": "clock tower",
+                     "right_audio_tts": "clock tower"},
+                ],
+            }),
+
+            ("match", {
+                "title": "МОЛОДЕЦ! Давай ещё потренируемся. "
+                         "Прочитай описание и выбери подходящее здание",
+                "pairs": [
+                    {"left": "It’s very tall and old. It shows the time.",
+                     "right": "clock tower", "right_audio_tts": "clock tower"},
+                    {"left": "People can check the traffic in the sky there.",
+                     "right": "airport tower", "right_audio_tts": "airport tower"},
+                    {"left": "It keeps boats safe.",
+                     "right": "lighthouse", "right_audio_tts": "lighthouse"},
+                    {"left": "It’s very tall. People work in offices there.",
+                     "right": "skyscraper", "right_audio_tts": "skyscraper"},
+                ],
+            }),
+
+            ("text", {"html":
+                "<h3>УРА! ОСТАЛОСЬ ПОСЛЕДНЕЕ ЗАДАНИЕ! ВНИМАТЕЛЬНО ПРОЧИТАЙ ЕГО!</h3>"
+                "<p>Which tall buildings do you want to visit? Why? Write sentences.</p>"
+                "<p><i>Например: I want to visit a clock tower so that I can see "
+                "how big the clock in it is.</i></p>"}),
+
+            ("task", {
+                "title": "Напиши, какие места ты бы хотел посетить! Почему?",
+                "needs_review": True,
+                "html":
+                    "<p>Внимательно посмотри на пример выше и приступай к заданию!</p>"
+                    "<p>Не забудь показать свой текст учителю на уроке!</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("hello_rocket")}" alt="" style="height:180px"></p>'
+                "<h3>Ты на финишной прямой! Остался последний рывок!</h3>"
+                "<p>Сегодня мы повторим всё, что ты изучил :) ПОЕХАЛИ!</p>"}),
+
+            ("gaps", {
+                "title": "Впиши above, near, below, opposite, next to, in front of",
+                "image": img("u4", "prep_cat_below_shelf"),
+                "text": "The cat is __below__ the shelf.",
+                "gaps_expected": 1,
+            }),
+
+            ("gaps", {
+                "title": "Впиши above, near, below, opposite, next to, in front of",
+                "image": img("u4", "prep_ball_above_table"),
+                "text": "The ball is __above__ the table.",
+                "gaps_expected": 1,
+            }),
+
+            ("gaps", {
+                "title": "Впиши above, near, below, opposite, next to, in front of",
+                "image": img("u4", "prep_teddy_next_to_ball"),
+                "text": "The bear is __next to__ the ball.",
+                "gaps_expected": 1,
+            }),
+
+            ("gaps", {
+                "title": "Впиши above, near, below, opposite, next to, in front of",
+                "image": img("u4", "prep_elephant_in_front_of_chair"),
+                "text": "The elephant is __in front of__ the chair.",
+                "gaps_expected": 1,
+            }),
+
+            ("gaps", {
+                "title": "Впиши above, near, below, opposite, next to, in front of",
+                "image": img("u4", "prep_mouse_near_tv"),
+                "text": "The mouse is __near__ the TV.",
+                "gaps_expected": 1,
+            }),
+
+            ("gaps", {
+                "title": "Впиши above, near, below, opposite, next to, in front of",
+                "image": img("u4", "prep_cats_opposite"),
+                "text": "The white cat is __opposite__ the grey cat.",
+                "gaps_expected": 1,
+            }),
+
+            ("text", {"html":
+                "<h3>SUPER! С первым заданием ты справился!</h3>"
+                "<p>Теперь давай вспомним конструкцию <b>to be going to</b>. "
+                "Сделай задание ниже!</p>"}),
+
+            ("quiz", {
+                "title": "Посмотри на картинку и выбери, куда и зачем он идёт",
+                "questions": [
+                    {"q": "1. Where is he going and why?",
+                     "type": "single",
+                     "image": img("u4", "going_cinema"),
+                     "options": [{"text": "He’s going to the cinema to watch a film."},
+                                 {"text": "He’s going to the library to read a book."},
+                                 {"text": "He’s going to the market square to buy apples."}],
+                     "correct": [0]},
+                    {"q": "2. Where is she going and why?",
+                     "type": "single",
+                     "image": img("u4", "going_library"),
+                     "options": [{"text": "She’s going to the library to borrow a book."},
+                                 {"text": "She’s going to the café to have a milkshake."},
+                                 {"text": "She’s going to the sports centre to go swimming."}],
+                     "correct": [0]},
+                    {"q": "3. Where are they going and why?",
+                     "type": "single",
+                     "image": img("u4", "going_sports_centre"),
+                     "options": [{"text": "They’re going to the sports centre to go swimming."},
+                                 {"text": "They’re going to the supermarket to buy some bread."},
+                                 {"text": "They’re going to the cinema to watch a film."}],
+                     "correct": [0]},
+                    {"q": "4. Where is he going and why?",
+                     "type": "single",
+                     "image": img("u4", "going_cafe"),
+                     "options": [{"text": "He’s going to the café to have a milkshake."},
+                                 {"text": "He’s going to the bank to get some money."},
+                                 {"text": "He’s going to the library to borrow a book."}],
+                     "correct": [0]},
+                    {"q": "5. Where is she going and why?",
+                     "type": "single",
+                     "image": img("u4", "going_supermarket"),
+                     "options": [{"text": "She’s going to the supermarket to do the shopping."},
+                                 {"text": "She’s going to the funfair to have fun."},
+                                 {"text": "She’s going to the café to have a milkshake."}],
+                     "correct": [0]},
+                    {"q": "6. Where are they going and why?",
+                     "type": "single",
+                     "image": img("u4", "going_market"),
+                     "options": [{"text": "They’re going to the market square to buy a present."},
+                                 {"text": "They’re going to the bus station to take a bus."},
+                                 {"text": "They’re going to the sports centre to play football."}],
+                     "correct": [0]},
+                ],
+            }),
+
+            ("text", {"html":
+                "<h3>Ты хорошо справляешься!</h3>"
+                "<p>А теперь посмотри на картинку ниже! Какие места изображены на ней?</p>"
+                f'<p><img src="{img("u4", "scene_town_prepositions")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("task", {
+                "title": "Посмотри на картинку ещё раз и опиши её!",
+                "needs_review": True,
+                "html":
+                    "<p>Напиши 4–5 предложений о том, где что находится.</p>"
+                    "<p><i>Например: The cinema is next to the sports centre …</i></p>",
+            }),
+
+            ("task", {
+                "title": "Напиши свой диалог — дополнительное задание",
+                "needs_review": True,
+                "html":
+                    "<p>Мы почти на финишной прямой. Посмотри внимательно на карту города "
+                    "выше и на диалог ниже! Попробуй написать такой же диалог, используя "
+                    "свои имена и слова.</p>"
+                    "<p><i>Vic: Hi, Daisy! I’m in town, next to the school. "
+                    "I’m looking for the new café. Can you tell me where it is?<br>"
+                    "Daisy: No problem! Can you see the sports centre? The café is next "
+                    "to it, opposite the bus station.<br>"
+                    "Vic: Oh, I know! It’s near the cinema.<br>"
+                    "Daisy: That’s right!<br>"
+                    "Vic: Thank you!</i></p>"
+                    "<p>Это задание дополнительное, но добавит 3 балла к контрольной "
+                    "работе в конце юнита! ;)</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>Good Job! Ты большой молодец!</h3>"
+                "<p>Теперь ты точно готов к тесту! Желаю удачи — у тебя обязательно "
+                "всё получится!</p>"}),
+        ],
+    },
+    "u4_test": {
+        "unit": "u4",
+        "unit_title": "Unit 4 · In the town",
+        "unit_sort": 4,
+        "lesson_title": "Test",
+        "lesson_sort": 7,
+        "kind": "test",
+        # Нумерация блоков как в выгрузке: match, шесть «выбери правильный
+        # вариант» (у нас quiz, чтобы сохранить неверные варианты), пять
+        # «составь предложение», две записи голоса.
+        # Картинок к пропускам в выгрузке были клипарты из стока — взяты наши
+        # карточки предлогов, а существительные в предложениях подогнаны под
+        # картинку (было «the cat is near the house», стало «the mouse is near
+        # the TV»). Набор предлогов и неверные варианты сохранены.
+        # В блоке 5 у выгрузки верным помечено «borrow a book» при картинке с
+        # футбольным мячом — явная описка. Собрано по нашей картинке со
+        # спортивным центром: верно «go swimming», лишние варианты оставлены.
+        "blocks": [
+            ("match", {
+                "title": "Соедини слова с картинками",
+                "pairs": [
+                    {"left_image": img("u4", "town_library"), "right": "Library",
+                     "right_audio_tts": "library"},
+                    {"left_image": img("u4", "town_bus_station"), "right": "Bus station",
+                     "right_audio_tts": "bus station"},
+                    {"left_image": img("u4", "town_map"), "right": "Map",
+                     "right_audio_tts": "map"},
+                    {"left_image": img("u4", "town_bank"), "right": "Bank",
+                     "right_audio_tts": "bank"},
+                    {"left_image": img("u4", "town_market"), "right": "Market square",
+                     "right_audio_tts": "market square"},
+                    {"left_image": img("u4", "town_tower"), "right": "Tower",
+                     "right_audio_tts": "tower"},
+                ],
+            }),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "The mouse is ___ the TV.", "type": "single",
+                 "image": img("u4", "prep_mouse_near_tv"),
+                 "options": [{"text": "near"}, {"text": "opposite"}, {"text": "below"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "The ball is ___ the table.", "type": "single",
+                 "image": img("u4", "prep_ball_above_table"),
+                 "options": [{"text": "above"}, {"text": "below"}, {"text": "opposite"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "The mouse is ___ the boxes.", "type": "single",
+                 "image": img("u4", "prep_mouse_between_boxes"),
+                 "options": [{"text": "between"}, {"text": "above"}, {"text": "near"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "He ___ the sports centre.", "type": "single",
+                 "options": [{"text": "is going to"}, {"text": "going to"}, {"text": "go to"}],
+                 "correct": [0]},
+                {"q": "He is going to the sports centre to ___.", "type": "single",
+                 "image": img("u4", "going_sports_centre"),
+                 "options": [{"text": "go swimming"}, {"text": "borrow a book"},
+                             {"text": "buy some apples"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "The dog is ___ the cat.", "type": "single",
+                 "image": img("u4", "prep_cat_dog_opposite"),
+                 "options": [{"text": "opposite"}, {"text": "above"}, {"text": "near"}],
+                 "correct": [0]},
+            ]}),
+
+            ("quiz", {"title": "Заполни пропуски — выбери подходящий вариант", "questions": [
+                {"q": "The picture is ___ the window.", "type": "single",
+                 "image": img("u4", "prep_picture_below_window"),
+                 "options": [{"text": "below"}, {"text": "above"}, {"text": "between"}],
+                 "correct": [0]},
+            ]}),
+
+            ("order", {
+                "words": ["The tree", "is", "opposite", "the house."],
+                "sentence": "The tree is opposite the house.",
+                "audio_tts": "The tree is opposite the house.",
+            }),
+
+            ("order", {
+                "words": ["I’m", "going", "to", "the park", "to ride", "my bike."],
+                "sentence": "I’m going to the park to ride my bike.",
+                "audio_tts": "I'm going to the park to ride my bike.",
+            }),
+
+            ("order", {
+                "words": ["We", "are", "going", "to", "the library."],
+                "sentence": "We are going to the library.",
+                "audio_tts": "We are going to the library.",
+            }),
+
+            ("order", {
+                "words": ["The", "bank", "is", "between", "two", "trees."],
+                "sentence": "The bank is between two trees.",
+                "audio_tts": "The bank is between two trees.",
+            }),
+
+            ("order", {
+                "words": ["Julia", "is", "going", "to", "the", "supermarket."],
+                "sentence": "Julia is going to the supermarket.",
+                "audio_tts": "Julia is going to the supermarket.",
+            }),
+
+            ("speaking", {
+                "title": "SPEAKING TASK \U0001f3a4 Part 1",
+                "needs_review": True,
+                "image": img("u4", "scene_town_busy"),
+                "html":
+                    "<p>Посмотри на картинку и опиши её, используя предлоги места "
+                    "(4–5 предложений).</p>"
+                    "<p><i>For example: The library is near the shopping centre. "
+                    "The bench is between two small trees.</i></p>"
+                    "<p>Запиши свой ответ, нажав на кнопку микрофона.</p>",
+            }),
+
+            ("speaking", {
+                "title": "SPEAKING TASK \U0001f3a4 Part 2",
+                "needs_review": True,
+                "image": img("u4", "scene_town_busy"),
+                "html":
+                    "<p>Посмотри на картинку и опиши, кто куда направляется и зачем "
+                    "(4–5 предложений).</p>"
+                    "<p><i>For example: They are going to the market square to buy "
+                    "some apples.</i></p>"
+                    "<p>Запиши свой ответ, нажав на кнопку микрофона.</p>",
+            }),
+        ],
+    },
 }
 
 
