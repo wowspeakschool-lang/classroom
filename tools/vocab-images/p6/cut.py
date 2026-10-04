@@ -16,7 +16,7 @@ lib.BG_MIN, lib.BG_GREY, lib.KEEP_SOFT = 250, 8, True
 FILL_OLD = None  # заливка дыр больше не нужна: её заменил строгий порог фона
 FILL = set()
 # вырезать зажатый белый фон (не везде: белое внутри пузырей пропадало)
-HOLES = {'argument', 'arrangement', 'weakness', 'construct', 'knock over', 'terribly', 'embarrassment', 'fitness', 'friendliness'}
+HOLES = {'clear up', 'fold', 'sort', 'sweep', 'wipe', 'water', 'put (sth) away', 'argument', 'arrangement', 'weakness', 'construct', 'knock over', 'terribly', 'embarrassment', 'fitness', 'friendliness'}
 
 # Листы, где генератор разложил картинки иначе, чем в промпте
 # Границы клеток вручную: {лист: {номер ряда: [границы]}}; граница-ступенька (y, x_выше, x_ниже)
