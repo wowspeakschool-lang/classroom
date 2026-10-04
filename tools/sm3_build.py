@@ -94,6 +94,20 @@ U4_TOWN = [
 ]
 
 
+U5_SEA = [
+    ("seal", "тюлень", "sea_seal"),
+    ("dolphin", "дельфин", "sea_dolphin"),
+    ("anchor", "якорь", "sea_anchor"),
+    ("turtle", "черепаха", "sea_turtle"),
+    ("shell", "ракушка", "sea_shell"),
+    ("octopus", "осьминог", "sea_octopus"),
+    ("seahorse", "морской конёк", "sea_seahorse"),
+    ("starfish", "морская звезда", "sea_starfish"),
+    ("jellyfish", "медуза", "sea_jellyfish"),
+    ("to dive", "нырять", "sea_diving_gear"),
+]
+
+
 def img(unit, name):
     return f"{MEDIA}sm3/{unit}/{name}.webp"
 
@@ -3019,6 +3033,352 @@ LESSONS = {
                     "some apples.</i></p>"
                     "<p>Запиши свой ответ, нажав на кнопку микрофона.</p>",
             }),
+        ],
+    },
+    "u5_hw1": {
+        "unit": "u5",
+        "unit_title": "Unit 5 · Under the sea",
+        "unit_sort": 5,
+        "lesson_title": "Homework 1",
+        "lesson_sort": 0,
+        "kind": "homework",
+        # В выгрузке это только словарный тренажёр на 10 слов, без заданий.
+        # Приветствие и прощание дописаны: урок ребёнок открывает отдельно.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>Привет! Сегодня мы ныряем под воду \U0001f30a</h2>"
+                "<p>Выучим слова про море и его обитателей. Поехали!</p>"}),
+
+            ("flashcards", {"cards": [
+                {"text": en, "translation": ru, "audio_tts": en, "image": img("u5", f)}
+                for en, ru, f in U5_SEA
+            ]}),
+
+            ("quiz", quiz_ru_to_en(U5_SEA)),
+
+            ("exact_input", {"items": [
+                {"image": img("u5", f), "prompt": "Посмотри на картинку и напиши слово",
+                 "accept": ([en, en.capitalize()] if not en.startswith("to ")
+                            else [en, en.capitalize(), en[3:], en[3:].capitalize()]),
+                 "audio_tts": en}
+                for en, ru, f in U5_SEA
+            ]}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Отлично! Слова выучены.</h3>"
+                "<p>Увидимся на уроке!</p>"}),
+        ],
+    },
+    "u5_hw2": {
+        "unit": "u5",
+        "unit_title": "Unit 5 · Under the sea",
+        "unit_sort": 5,
+        "lesson_title": "Homework 2",
+        "lesson_sort": 1,
+        "kind": "homework",
+        # Обе части выгрузки, «Homework 2 (1)» и «(2)», одним уроком: прощание
+        # первой части и приветствие второй сведены в блок-перемычку 8,
+        # поэтому блоков 13, а не 14.
+        # К «составь предложение» подставлены наши картинки мест — в выгрузке
+        # там стояли фотографии из стока с людьми. У последнего предложения
+        # убрана подсказка «(назад)»: в блоке сборки она была бы отдельной
+        # плиткой со словом «ago (назад)».
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_highfive")}" alt="" style="height:200px"></p>'
+                "<h2>Привет! Как здорово, что ты решил сделать домашнюю работу!</h2>"
+                "<p>Она будет небольшая и интересная. Вперёд!</p>"}),
+
+            ("video", {"title": "Видео: was / were", "url": "", "provider": ""}),
+
+            ("order", {
+                "image": img("u5", "place_restaurant"),
+                "words": ["He", "was", "at", "the", "restaurant", "yesterday."],
+                "sentence": "He was at the restaurant yesterday.",
+                "audio_tts": "He was at the restaurant yesterday.",
+            }),
+
+            ("order", {
+                "image": img("u5", "place_museum"),
+                "words": ["They", "weren’t", "in", "the", "museum", "last", "week."],
+                "sentence": "They weren’t in the museum last week.",
+                "audio_tts": "They weren't in the museum last week.",
+            }),
+
+            ("order", {
+                "image": img("u5", "place_park"),
+                "words": ["She", "wasn’t", "in", "the", "park", "last", "weekend."],
+                "sentence": "She wasn’t in the park last weekend.",
+                "audio_tts": "She wasn't in the park last weekend.",
+            }),
+
+            ("order", {
+                "image": img("u5", "place_hospital"),
+                "words": ["The", "dog", "was", "in", "hospital", "yesterday."],
+                "sentence": "The dog was in hospital yesterday.",
+                "audio_tts": "The dog was in hospital yesterday.",
+            }),
+
+            ("order", {
+                "image": img("u5", "place_supermarket"),
+                "words": ["They", "were", "in", "the", "supermarket", "two", "days", "ago."],
+                "sentence": "They were in the supermarket two days ago.",
+                "audio_tts": "They were in the supermarket two days ago.",
+            }),
+
+            ("quiz", {"title": "Выбери правильный вариант ответа", "questions": [
+                {"q": "1. She ___ at school yesterday.", "type": "single",
+                 "options": [{"text": "was"}, {"text": "were"}], "correct": [0]},
+                {"q": "2. They ___ at the restaurant, they were at the café.",
+                 "type": "single",
+                 "options": [{"text": "weren’t"}, {"text": "were"}, {"text": "was"},
+                             {"text": "wasn’t"}],
+                 "correct": [0]},
+                {"q": "3. Mathew was sick yesterday, so he ___ in the hospital.",
+                 "type": "single",
+                 "options": [{"text": "was"}, {"text": "were"}, {"text": "wasn’t"},
+                             {"text": "weren’t"}],
+                 "correct": [0]},
+                {"q": "4. Maria and Peter ___ at the cinema yesterday, they liked the film!",
+                 "type": "single",
+                 "options": [{"text": "were"}, {"text": "weren’t"}, {"text": "was"},
+                             {"text": "wasn’t"}],
+                 "correct": [0]},
+                {"q": "5. There ___ cats in the box next to the supermarket, "
+                      "they were very cold!",
+                 "type": "single",
+                 "options": [{"text": "were"}, {"text": "was"}], "correct": [0]},
+                {"q": "6. I ___ at school yesterday, it was Sunday!", "type": "single",
+                 "options": [{"text": "wasn’t"}, {"text": "was"}, {"text": "were"},
+                             {"text": "weren’t"}],
+                 "correct": [0]},
+            ]}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("good_luck_clover")}" alt="" style="height:180px"></p>'
+                "<h3>Отличная работа! Самое время отдохнуть :)</h3>"
+                "<p>А потом — вторая половина задания. Готов? Давай начинать!</p>"}),
+
+            ("gaps", {
+                "title": "Впиши was, wasn’t, were или weren’t так, чтобы "
+                         "получился связный текст",
+                "text":
+                    "Yesterday __was__ a busy day! We __were__ in the park in the morning. "
+                    "There __was__ a football match, but there __weren’t__ many goals. "
+                    "Only one! In the afternoon we __were__ at my cousin’s house. "
+                    "There __were__ cheese sandwiches, but there __wasn’t__ any cake "
+                    "this time. In the evening we __were__ at the cinema for that new film "
+                    "about life under the sea. It __was__ interesting! We all __were__ very "
+                    "tired at the end of the day.",
+                "gaps_expected": 10,
+            }),
+
+            ("task", {
+                "title": "Перепиши предложения в прошедшем времени, используя was или were",
+                "needs_review": True,
+                "html":
+                    "<p>1. There is a small shark too.<br>"
+                    "2. I’m scared!<br>"
+                    "3. We’re at the beach.<br>"
+                    "4. There are dolphins, seals and turtles in the sea.<br>"
+                    "5. It’s hot.<br>"
+                    "6. I’m in the sea in my new swimsuit.</p>",
+            }),
+
+            ("task", {
+                "title": "Напиши, где ты был(а) в каждый из дней недели",
+                "needs_review": True,
+                "html":
+                    "<p><i>Например:<br>On Monday I was at the swimming pool.<br>"
+                    "On Tuesday I was in the supermarket.</i></p>"
+                    "<p>Прояви фантазию — предложения можно просто придумать.</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_clap")}" alt="" style="height:180px"></p>'
+                "<h3>Ты отлично потрудился!</h3>"
+                "<p>Спасибо тебе большое. Увидимся на уроке :)</p>"}),
+        ],
+    },
+    "u5_hw3": {
+        "unit": "u5",
+        "unit_title": "Unit 5 · Under the sea",
+        "unit_sort": 5,
+        "lesson_title": "Homework 3",
+        "lesson_sort": 2,
+        "kind": "homework",
+        # Блок 2 — песня Crocorox, в выгрузке плеер пустой: аудио вписывает
+        # методист, строка в «доработать руками».
+        # Шаблон стихотворения из блока 4 выгрузки у нас внутри самого задания:
+        # отдельным текстовым блоком он стоял бы после вопроса, а ребёнку
+        # нужен перед ответом.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_headphones")}" alt="" style="height:200px"></p>'
+                "<h2>Привет-привет! Давай скорее приступать к домашней работе!</h2>"
+                "<p>Сначала послушай песню, а потом дополни предложения.</p>"}),
+
+            ("gaps", {
+                "title": "Послушай песню и дополни предложения",
+                "mode": "drag",
+                "audio": "",
+                "text":
+                    "1. The octopus was sad.\n"
+                    "2. The __Crocorox__ was bad.\n"
+                    "3. The __turtle__ hid inside its shell.\n"
+                    "4. The __starfish__ were all very scared.",
+                "gaps_expected": 3,
+            }),
+
+            ("gaps", {
+                "title": "Прочитай и дополни предложения",
+                "text":
+                    "1. Its face was pretty. No, it wasn’t. It was ugly.\n"
+                    "2. Its eyes were small. Yes, __they were__.\n"
+                    "3. Its teeth were short. No, __they weren’t__. "
+                    "They __were long__.\n"
+                    "4. Its face was square. Yes, __it was__.\n"
+                    "5. There were scales on its head. Yes, __there were__.",
+                "gaps_expected": 5,
+            }),
+
+            ("task", {
+                "title": "Нарисуй своё страшное морское животное",
+                "needs_review": True,
+                "html":
+                    "<p>Закончи стихотворение о нём, а потом напиши о других морских "
+                    "животных. Не забудь показать рисунок учителю :)</p>"
+                    "<p><i>Its face …<br>Its eyes …<br>Its teeth …<br>"
+                    "The dolphins were …<br>The seals were …<br>…</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_smiley")}" alt="" style="height:180px"></p>'
+                "<h3>Great job! Thank you!</h3>"
+                "<p>Увидимся на уроке :)</p>"}),
+        ],
+    },
+    "u5_hw4": {
+        "unit": "u5",
+        "unit_title": "Unit 5 · Under the sea",
+        "unit_sort": 5,
+        "lesson_title": "Homework 4",
+        "lesson_sort": 3,
+        "kind": "homework",
+        # Блоки один в один с выгрузкой: приветствие, двенадцать пропусков,
+        # «найди пару» на шесть вопросов и ответов, прощание.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_laptop")}" alt="" style="height:200px"></p>'
+                "<h2>Привет! Какой ты молодец, что делаешь домашнюю работу :)</h2>"
+                "<p>Сегодня потренируем was, were, wasn’t и weren’t.</p>"}),
+
+            ("gaps", {
+                "title": "Заполни пропуски с помощью was, were, wasn’t или weren’t",
+                "text":
+                    "1. «Where __was__ Anne yesterday?» — «She __was__ "
+                    "at the park with her friends.»\n"
+                    "2. «__Was__ Ed at school last week?» — «No, he "
+                    "__wasn’t__. He __was__ at home because he was sick.»\n"
+                    "3. «__Were__ my keys on the table?» — «No, they "
+                    "__weren’t__.»\n"
+                    "4. «__Was__ Sylvia at the birthday party?» — «Yes, "
+                    "she __was__. She was very happy.»\n"
+                    "5. «__Were__ your friends on the beach?» — «No, they "
+                    "__weren’t__. It was too cold.»\n"
+                    "6. «Where __were__ Joe and Bill on Saturday afternoon?» — "
+                    "«I think they were at the cinema.»",
+                "gaps_expected": 12,
+            }),
+
+            ("match", {
+                "title": "Найди ответы на вопросы",
+                "pairs": [
+                    {"left": "Was Jack at the swimming pool?",
+                     "right": "No, he wasn’t. It wasn’t open.",
+                     "right_audio_tts": "No, he wasn't. It wasn't open."},
+                    {"left": "Were your brother and sister on the beach at the weekend?",
+                     "right": "Yes, they were. They were in the sea too.",
+                     "right_audio_tts": "Yes, they were. They were in the sea too."},
+                    {"left": "Where were you on Sunday, Louise?",
+                     "right": "I was at home all day. I was tired.",
+                     "right_audio_tts": "I was at home all day. I was tired."},
+                    {"left": "Were your grandparents in the garden, Liz?",
+                     "right": "No, they weren’t. It was too hot to do gardening.",
+                     "right_audio_tts": "No, they weren't. It was too hot to do gardening."},
+                    {"left": "Were there seahorses and starfish in the sea?",
+                     "right": "Yes, there were! Lots of them. They were beautiful!",
+                     "right_audio_tts": "Yes, there were! Lots of them. They were beautiful!"},
+                    {"left": "Was there a clock on the tower in the square?",
+                     "right": "Yes, there was. A very old one.",
+                     "right_audio_tts": "Yes, there was. A very old one."},
+                ],
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_medal")}" alt="" style="height:180px"></p>'
+                "<h3>Ты большой молодец!</h3>"
+                "<p>Спасибо за твои старания! Увидимся на уроке.</p>"}),
+        ],
+    },
+    "u5_hw5": {
+        "unit": "u5",
+        "unit_title": "Unit 5 · Under the sea",
+        "unit_sort": 5,
+        "lesson_title": "Homework 5",
+        "lesson_sort": 4,
+        "kind": "homework",
+        # В выгрузке 11 блоков, у нас 6: шесть блоков «верно/неверно» с одним
+        # утверждением каждый сведены в один (блок 4) — наш truefalse на то и
+        # рассчитан. Обе страницы истории вырезаны из PDF выгрузки: в редакторе
+        # блоки «Картинка» стояли пустыми.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_book")}" alt="" style="height:200px"></p>'
+                "<h2>Привет! Вперёд к новым знаниям!</h2>"
+                "<p>Прочитай историю и сделай задания к ней.</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u5", "story_giant_shell_1")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u5", "story_giant_shell_2")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("truefalse", {
+                "title": "Выбери true (верно) или false (неверно)",
+                "statements": [
+                    {"text": "The next letter is in the giant shell.", "answer": True},
+                    {"text": "Lucy can’t get her arm out of the giant shell.",
+                     "answer": False},
+                    {"text": "The shark was in Horax’s cage.", "answer": True},
+                    {"text": "The shark likes Horax and Zelda.", "answer": False},
+                    {"text": "The octopus can’t help the children.", "answer": False},
+                    {"text": "The fish make the letter S.", "answer": True},
+                ],
+            }),
+
+            ("sequence", {
+                "title": "Расставь предложения в правильном порядке по смыслу",
+                "items": [
+                    {"text": "First Lucy and Ben dive down to a giant shell."},
+                    {"text": "Ben can’t see a letter in the shell."},
+                    {"text": "Then Ben can’t get his arm out of the shell."},
+                    {"text": "They see Horax and Zelda and the shark."},
+                    {"text": "The shark doesn’t get the children. It follows Horax "
+                             "and Zelda."},
+                    {"text": "The octopus helps Ben to get his arm out."},
+                    {"text": "Finally the children look at the fish and see the letter S."},
+                ],
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>Спасибо! Ты огромный молодец!</h3>"
+                "<p>Увидимся на занятии :)</p>"}),
         ],
     },
 }
