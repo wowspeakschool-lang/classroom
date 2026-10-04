@@ -57,6 +57,14 @@ def split_rows(path, bs, n_rows):
             nxt = bs[i + 1][0] if i + 1 < len(bs) else len(c)
             rows.append((y0, max(y1, nxt - 2)))
         prev, prev_pic = y1, pic
+    # подписи ряда вплотную к рисункам следующего — две полосы слиплись в одну:
+    # режем самую высокую по самой пустой строке в её середине
+    while len(rows) < n_rows:
+        k = max(range(len(rows)), key=lambda i: rows[i][1] - rows[i][0])
+        a0, a1 = rows[k]; h = a1 - a0
+        lo, hi = a0 + int(h * .35), a0 + int(h * .65)
+        cut = lo + int(np.argmin(c[lo:hi]))
+        rows[k:k + 1] = [(a0, cut), (cut + 1, a1)]
     if len(rows) != n_rows:
         raise SystemExit(f'рядов {len(rows)} вместо {n_rows}: {bs}')
     return rows
@@ -71,16 +79,17 @@ def column_cuts(path, y0, y1, n):
         cuts.append(lo + int(np.argmin(c[lo:hi])))
     return cuts, [int(c[x]) for x in cuts]
 
-def erase_glued_captions(path):
+def erase_glued_captions(path, rows=None):
     """Подпись вплотную к рисунку попадает в его полосу. Стираем её: связные куски
     тёмного цвета, целиком лежащие в нижних 50 px такой полосы и не выше 42 px, —
     это буквы. Части рисунка, заходящие в полосу, связаны с рисунком и остаются."""
     from scipy.ndimage import label
     im = Image.open(path).convert('RGB'); a = min_rgb_of(im)
-    bs = bands(path); H = a.shape[0]; changed = False; arr = np.array(im)
+    bs = rows or bands(path); H = a.shape[0]; changed = False; arr = np.array(im)
     for i, (y0, y1) in enumerate(bs):
+        y1 = min(y1, H - 3)
         if y1 - y0 <= 60: continue
-        nxt = bs[i + 1] if i + 1 < len(bs) else None
+        nxt = bs[i + 1] if i + 1 < len(bs) and not rows else None
         if nxt and nxt[1] - nxt[0] <= 60 and nxt[0] - y1 < 25: continue  # подпись отдельно
         s0 = max(y0, y1 - 62)
         lab, n = label(a[y0:y1 + 3] < 235)
@@ -111,10 +120,11 @@ def outline_only(png):
     Image.fromarray(im).save(png)
 
 def cut(sheet, path, out='out'):
-    path = erase_glued_captions(path)
     title, note, items = S[sheet - 1]
     lay = LAYOUT_SHEET.get(sheet) or LAYOUT[len(items)]
     rows = split_rows(path, bands(path), len(lay))
+    # подписи, слипшиеся со следующим рядом, сидят внизу полос ряда — стираем по рядам
+    path = erase_glued_captions(path, rows)
     k = 0; report = []
     for ri, ((y0, y1), n) in enumerate(zip(rows, lay)):
         words = [t for _, t, _ in items[k:k + n]]; k += n
@@ -132,7 +142,10 @@ def cut(sheet, path, out='out'):
                     row_x(path, y0, y1, words, d, cuts, fill=need_fill, fill_thr=253, fill_close=8)
                     report.append(f'  ряд {y0}-{y1}: {n} шт, зазор {g}, заливка {need_fill}'); ok = True; break
         for g in (() if ok else (12, 6, 3)):
-            if len(clusters_of(path, y0, y1, 150, 235, g)[4]) == n:
+            cl = clusters_of(path, y0, y1, 150, 235, g)[4]
+            ws = [k['x1'] - k['x0'] for k in cl]
+            # кластеры разной ширины — это половинки одной картинки и две слипшиеся
+            if len(cl) == n and max(ws) < 1.7 * min(ws):
                 row(path, y0, y1, words, d, gap=g, min_area=150); ok = True
                 report.append(f'  ряд {y0}-{y1}: {n} шт, зазор {g}'); break
         if not ok:
