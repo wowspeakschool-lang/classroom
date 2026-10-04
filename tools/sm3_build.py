@@ -77,6 +77,23 @@ U3_JOBS = [
 ]
 
 
+U4_TOWN = [
+    ("bank", "банк", "town_bank"),
+    ("tower", "башня", "town_tower"),
+    ("map", "карта", "town_map"),
+    ("library", "библиотека", "town_library"),
+    ("market square", "торговая площадь", "town_market"),
+    ("supermarket", "супермаркет", "town_supermarket"),
+    ("bus station", "автобусная остановка", "town_bus_station"),
+    ("sports centre", "спортивный центр", "town_sports_centre"),
+    ("car park", "парковка", "town_car_park"),
+    ("funfair", "парк с аттракционами", "town_funfair"),
+    ("go straight", "идти прямо", "arrow_straight"),
+    ("turn left", "повернуть налево", "arrow_left"),
+    ("turn right", "повернуть направо", "arrow_right"),
+]
+
+
 def img(unit, name):
     return f"{MEDIA}sm3/{unit}/{name}.webp"
 
@@ -2221,6 +2238,41 @@ LESSONS = {
                     "Запиши свой ответ, нажав на кнопку микрофона.</p>"
                     "<p><i>For example: I take my dog for a walk at 8 o\u2019clock.</i></p>",
             }),
+        ],
+    },
+    "u4_hw1": {
+        "unit": "u4",
+        "unit_title": "Unit 4 \u00b7 In the town",
+        "unit_sort": 4,
+        "lesson_title": "Homework 1",
+        "lesson_sort": 0,
+        "kind": "homework",
+        # В выгрузке это только словарный тренажёр на 13 слов, без заданий.
+        # Прощание дописано: урок ребёнок открывает отдельно, а в выгрузке
+        # у тренажёра концовки не бывает вовсе.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>Привет! How are you?</h2>"
+                "<p>Сегодня мы выучим слова, которые ты изучил на занятии. Поехали!</p>"}),
+
+            ("flashcards", {"cards": [
+                {"text": en, "translation": ru, "audio_tts": en, "image": img("u4", f)}
+                for en, ru, f in U4_TOWN
+            ]}),
+
+            ("quiz", quiz_ru_to_en(U4_TOWN)),
+
+            ("exact_input", {"items": [
+                {"image": img("u4", f), "prompt": "Посмотри на картинку и напиши слово",
+                 "accept": [en, en.capitalize()], "audio_tts": en}
+                for en, ru, f in U4_TOWN
+            ]}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Отлично! Слова выучены.</h3>"
+                "<p>Увидимся на уроке!</p>"}),
         ],
     },
 }
