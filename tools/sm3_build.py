@@ -1920,6 +1920,89 @@ LESSONS = {
                 "<p>ЛОВИ ЗВЁЗДОЧКУ! Увидимся на уроке! Bye!</p>"}),
         ],
     },
+    "u3_hw6": {
+        "unit": "u3",
+        "unit_title": "Unit 3 \u00b7 At home",
+        "unit_sort": 3,
+        "lesson_title": "Homework 6",
+        "lesson_sort": 5,
+        "kind": "homework",
+        # Обе страницы сказки вырезаны из PDF: в редакторе блоки «Картинка»
+        # пустые. Блоки 7 и 8 в выгрузке были «Текст» — у нас открытые
+        # вопросы, ребёнку нужно место для ответа.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_book")}" alt="" style="height:200px"></p>'
+                "<h2>ПРИВЕТ-ПРИВЕТ!</h2>"
+                "<p>Сегодня мы с тобой будем читать сказку. Ты любишь сказки?</p>"
+                "<p>Как думаешь, кто главный герой истории? Прочитай текст ниже "
+                "и ответь на вопрос :)</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u3", "story_shoemaker_1")}" '
+                'alt="The shoemaker and the elves" style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u3", "story_shoemaker_2")}" alt="" style="max-width:100%"></p>'}),
+
+            ("truefalse", {
+                "title": "Прочитай предложения и скажи, это правда (True) или неправда (False)",
+                "statements": [
+                    {"text": "The shoemaker works a lot of hours.", "correct": True},
+                    {"text": "The shoemaker works hard but has little money.", "correct": True},
+                    {"text": "Every morning he finds new shoes on the table.", "correct": True},
+                    {"text": "The elves work after 5 o\u2019clock in the morning.", "correct": False},
+                    {"text": "The shoemaker makes nice clothes for the elves to thank them.",
+                     "correct": True},
+                    {"text": "The elves still make shoes for the shoemaker.", "correct": False},
+                ],
+            }),
+
+            ("gaps", {
+                "title": "Расставь слова на свои места \u2b07",
+                "mode": "drag",
+                "text":
+                    "There is a __shoemaker__ who works very hard. One night, he cuts some "
+                    "__leather__ and leaves it on the kitchen table. In the morning, there are "
+                    "ten pairs of beautiful shoes. The __next__ morning there are twenty pairs "
+                    "of beautiful shoes. Every night, he leaves leather on the table and "
+                    "__every__ morning there are beautiful new shoes. Soon, everyone in the town "
+                    "wants more shoes from the shoemaker. But the shoemaker __doesn\u2019t__ know "
+                    "who makes the shoes. One night he hides under a table and sees five elves "
+                    "making shoes. They are wearing __old__ clothes. The shoemaker makes nice "
+                    "clothes for the elves. The elves take the clothes but they don\u2019t come "
+                    "back to make new shoes. The shoemaker doesn\u2019t mind because he wants "
+                    "the elves to be __happy__.",
+                "gaps_expected": 7,
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_clap")}" alt="" style="height:180px"></p>'
+                "<h3>Молодец! Ты отлично справляешься!</h3>"
+                "<p>Осталось последнее задание. Оно дополнительное, но если ты его "
+                "сделаешь, получишь \u2b50</p>"}),
+
+            ("task", {
+                "title": "Кто твой любимый сказочный герой?",
+                "needs_review": True,
+                "html": "<p>Напиши его имя.</p>",
+            }),
+
+            ("task", {
+                "title": "Опиши день своего героя",
+                "needs_review": True,
+                "html":
+                    "<p>Используй выражения из текста сказки.</p>"
+                    "<p><i>Например: William wakes up at 8 o\u2019clock and brushes his teeth. "
+                    "He has breakfast at 9 o\u2019clock\u2026</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>SUPER! Ты выполнил все задания!</h3>"
+                "<p>Ты БОЛЬШОЙ МОЛОДЕЦ! Увидимся на уроке!</p>"}),
+        ],
+    },
 }
 
 
