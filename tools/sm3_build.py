@@ -1819,6 +1819,107 @@ LESSONS = {
                 "Увидимся на занятии!</p>"}),
         ],
     },
+    "u3_hw5": {
+        "unit": "u3",
+        "unit_title": "Unit 3 \u00b7 At home",
+        "unit_sort": 3,
+        "lesson_title": "Homework 5",
+        "lesson_sort": 4,
+        "kind": "homework",
+        # Кадры истории (1-6, 7-8) и картинка к тесту (кадры 1, 3, 6, 8)
+        # вырезаны из PDF выгрузки: в редакторе оба блока «Картинка» пустые.
+        # В выгрузке опечатка «tommorow» — на самом кадре истории написано
+        # tomorrow, так и залито.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_highfive")}" alt="" style="height:200px"></p>'
+                "<h2>HELLO! Рад тебя видеть!</h2>"
+                "<p>Сегодня мы вспомним с тобой историю, которую ты смотрел на уроке. "
+                "Поехали!</p>"}),
+
+            ("text", {"html":
+                "<h3>Прочитай историю!</h3>"
+                f'<p><img src="{img("u3", "story_letter_f_1")}" alt="" style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u3", "story_letter_f_2")}" alt="" style="max-width:100%"></p>'}),
+
+            ("order", {
+                "words": ["Let\u2019s", "look", "for", "it", "tomorrow", "morning."],
+                "sentence": "Let\u2019s look for it tomorrow morning.",
+                "audio_tts": "Let's look for it tomorrow morning.",
+            }),
+
+            ("order", {
+                "words": ["Let\u2019s", "wait", "for", "dark."],
+                "sentence": "Let\u2019s wait for dark.",
+                "audio_tts": "Let's wait for dark.",
+            }),
+
+            ("order", {
+                "words": ["I", "don\u2019t", "like", "this", "village."],
+                "sentence": "I don\u2019t like this village.",
+                "audio_tts": "I don't like this village.",
+            }),
+
+            ("order", {
+                "words": ["Let\u2019s", "go", "soon."],
+                "sentence": "Let\u2019s go soon.",
+                "audio_tts": "Let's go soon.",
+            }),
+
+            ("order", {
+                "words": ["What", "a", "mess!"],
+                "sentence": "What a mess!",
+                "audio_tts": "What a mess!",
+            }),
+
+            ("quiz", {"questions": [
+                {"q": "Look at pictures 1 and 3. What\u2019s the same about Ben and Zelda?",
+                 "type": "single",
+                 "image": img("u3", "story_letter_f_quiz"),
+                 "options": [{"text": "They are angry."}, {"text": "They are tired."},
+                             {"text": "They are hungry."}],
+                 "correct": [1]},
+            ]}),
+
+            ("quiz", {"questions": [
+                {"q": "Look at picture 8. What\u2019s the same about Lucy and Ben?",
+                 "type": "single",
+                 "image": img("u3", "story_letter_f_quiz"),
+                 "options": [{"text": "They are sad."}, {"text": "They are angry."},
+                             {"text": "They are excited."}],
+                 "correct": [2]},
+            ]}),
+
+            ("quiz", {"questions": [
+                {"q": "Look at pictures 6 and 8. What\u2019s different about Lucy?",
+                 "type": "single",
+                 "image": img("u3", "story_letter_f_quiz"),
+                 "options": [{"text": "First she is happy, then she is unhappy."},
+                             {"text": "First she is unhappy, then she is happy."},
+                             {"text": "First she is scared, then she is not tired."}],
+                 "correct": [1]},
+            ]}),
+
+            ("task", {
+                "title": "Answer the questions about the story",
+                "needs_review": True,
+                "html":
+                    "<ol>"
+                    "<li>What time do Horax and Zelda go home?</li>"
+                    "<li>Where does Ben look for the letter first?</li>"
+                    "<li>Where does Lucy find the letter?</li>"
+                    "<li>What is the second letter?</li>"
+                    "</ol>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Ты со всем справился!</h3>"
+                "<p>ЛОВИ ЗВЁЗДОЧКУ! Увидимся на уроке! Bye!</p>"}),
+        ],
+    },
 }
 
 
