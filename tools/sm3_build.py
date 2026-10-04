@@ -53,6 +53,17 @@ U3_CHORES = [
 ]
 
 
+U3_DAYS = [
+    ("Monday", "понедельник"),
+    ("Tuesday", "вторник"),
+    ("Wednesday", "среда"),
+    ("Thursday", "четверг"),
+    ("Friday", "пятница"),
+    ("Saturday", "суббота"),
+    ("Sunday", "воскресенье"),
+]
+
+
 def img(unit, name):
     return f"{MEDIA}sm3/{unit}/{name}.webp"
 
@@ -1672,6 +1683,140 @@ LESSONS = {
                 "<h3>Ты справился, молодец!</h3>"
                 "<p>Не забудь показать свой ответ на уроке учителю — он даст тебе "
                 "дополнительный балл. BYE :)</p>"}),
+        ],
+    },
+    "u3_hw4": {
+        "unit": "u3",
+        "unit_title": "Unit 3 \u00b7 At home",
+        "unit_sort": 3,
+        "lesson_title": "Homework 4",
+        "lesson_sort": 3,
+        "kind": "homework",
+        # Обе части выгрузки одним уроком. Нумерация блоков 1-11 совпадает
+        # с частью «(1)»; словарный тренажёр на дни недели из части «(2)»
+        # вставлен блоками 12-14, перед прощанием.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_laptop")}" alt="" style="height:200px"></p>'
+                "<h2>Привет!</h2>"
+                "<p>Сегодня мы повторим с тобой тему <b>Time</b>. Тебя ждёт много "
+                "крутых упражнений для тренировки. Поехали!</p>"}),
+
+            ("match", {
+                "title": "Первое задание: сопоставь время с картинками",
+                "pairs": [
+                    {"left_image": svg("u3", "clock_twenty_to_four"),
+                     "right": "It\u2019s twenty to four.",
+                     "right_audio_tts": "It's twenty to four."},
+                    {"left_image": svg("u3", "clock_quarter_past_three"),
+                     "right": "It\u2019s quarter past three.",
+                     "right_audio_tts": "It's quarter past three."},
+                    {"left_image": svg("u3", "clock_half_past_six"),
+                     "right": "It\u2019s half past six.",
+                     "right_audio_tts": "It's half past six."},
+                    {"left_image": svg("u3", "clock_quarter_to_five"),
+                     "right": "It\u2019s quarter to five.",
+                     "right_audio_tts": "It's quarter to five."},
+                    {"left_image": svg("u3", "clock_six_oclock"),
+                     "right": "It\u2019s six o\u2019clock.",
+                     "right_audio_tts": "It's six o'clock."},
+                    {"left_image": svg("u3", "clock_quarter_past_eight"),
+                     "right": "It\u2019s quarter past eight.",
+                     "right_audio_tts": "It's quarter past eight."},
+                ],
+            }),
+
+            ("text", {"html":
+                "<h3>Внимательно прочитай правило!</h3>"
+                f'<p><img src="{img("u3", "rule_adverbs_time")}" alt="Adverbs for time" '
+                'style="max-width:100%"></p>'}),
+
+            ("order", {
+                "words": ["I", "always", "brush", "my", "teeth", "after", "dinner."],
+                "sentence": "I always brush my teeth after dinner.",
+                "audio_tts": "I always brush my teeth after dinner.",
+            }),
+
+            ("order", {
+                "words": ["My", "father", "never", "goes", "to", "bed", "early."],
+                "sentence": "My father never goes to bed early.",
+                "audio_tts": "My father never goes to bed early.",
+            }),
+
+            ("order", {
+                "words": ["My", "sister", "usually", "does", "lots", "of", "homework",
+                          "at", "the weekend."],
+                "sentence": "My sister usually does lots of homework at the weekend.",
+                "audio_tts": "My sister usually does lots of homework at the weekend.",
+            }),
+
+            ("order", {
+                "words": ["My", "mother", "sometimes", "does", "the shopping", "on", "Fridays."],
+                "sentence": "My mother sometimes does the shopping on Fridays.",
+                "audio_tts": "My mother sometimes does the shopping on Fridays.",
+            }),
+
+            ("order", {
+                "words": ["My", "brother", "always", "goes", "to", "bed", "at", "ten",
+                          "o\u2019clock."],
+                "sentence": "My brother always goes to bed at ten o\u2019clock.",
+                "audio_tts": "My brother always goes to bed at ten o'clock.",
+            }),
+
+            ("text", {"html":
+                "<h3>Прочитай новое правило!</h3>"
+                f'<p><img src="{img("u3", "table_family_chores")}" alt="" '
+                'style="max-width:100%"></p>'
+                "<p><b>Always</b> \u2714\u2714\u2714 \u00b7 <b>Usually</b> \u2714\u2714 \u00b7 "
+                "<b>Sometimes</b> \u2714 \u00b7 <b>Never</b> \u2716</p>"}),
+
+            ("gaps", {
+                "title": "Прочитай правило ещё раз и выполни упражнение \u2b07",
+                "mode": "drag",
+                "text":
+                    "1. I __never__ feed the cat.\n"
+                    "2. Mum __usually__ dries the dishes.\n"
+                    "3. Dad __always__ washes up.\n"
+                    "4. My brother __sometimes__ dries the dishes.\n"
+                    "5. My sister __never__ washes up.\n"
+                    "6. My brother __never__ feeds the cat.\n"
+                    "7. I __never__ cook.",
+                "gaps_expected": 7,
+            }),
+
+            ("task", {
+                "title": "Напиши 6 предложений про свою семью",
+                "needs_review": True,
+                "html":
+                    "<p>Молодец! Ты выполнил все основные задания. Осталось последнее \u2014 "
+                    "оно необязательное, но если ты его сделаешь, будешь СУПЕР КРУТЫМ учеником!</p>"
+                    "<p><i>Например: Mum cooks every day. Dad always feeds the dog.</i></p>",
+            }),
+
+            ("flashcards", {"title": "Дни недели", "cards": [
+                {"text": en, "translation": ru, "audio_tts": en} for en, ru in U3_DAYS
+            ]}),
+
+            ("quiz", {"title": "Как это по-английски?", "questions": [
+                {"q": f"Как по-английски \u00ab{ru}\u00bb?", "type": "single",
+                 "options": [{"text": o} for o in sorted(
+                     [en] + [U3_DAYS[(i + k) % len(U3_DAYS)][0] for k in (1, 2, 3)])],
+                 "correct": [sorted(
+                     [en] + [U3_DAYS[(i + k) % len(U3_DAYS)][0] for k in (1, 2, 3)]).index(en)]}
+                for i, (en, ru) in enumerate(U3_DAYS)
+            ]}),
+
+            ("exact_input", {"items": [
+                {"prompt": f"Напиши по-английски: {ru}", "accept": [en, en.lower()],
+                 "audio_tts": en}
+                for en, ru in U3_DAYS
+            ]}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание!</h3>"
+                "<p>Ты замечательный ученик. За это лови звёздочку :) "
+                "Увидимся на занятии!</p>"}),
         ],
     },
 }
