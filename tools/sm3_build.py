@@ -135,6 +135,20 @@ U7_HEALTH = [
 ]
 
 
+U8_COUNTRIES = [
+    ("Egypt", "Египет", "country_egypt"),
+    ("Chile", "Чили", "country_chile"),
+    ("Mexico", "Мексика", "country_mexico"),
+    ("China", "Китай", "country_china"),
+    ("Spain", "Испания", "country_spain"),
+    ("India", "Индия", "country_india"),
+    ("Argentina", "Аргентина", "country_argentina"),
+    ("Australia", "Австралия", "country_australia"),
+    ("Brazil", "Бразилия", "country_brazil"),
+    ("Turkey", "Турция", "country_turkey"),
+]
+
+
 def img(unit, name):
     return f"{MEDIA}sm3/{unit}/{name}.webp"
 
@@ -5305,6 +5319,234 @@ LESSONS = {
                     "On Friday I went to the swimming pool.</i></p>"
                     "<p>Запиши свой ответ, нажав на кнопку микрофона.</p>",
             }),
+        ],
+    },
+    "u8_hw1": {
+        "unit": "u8",
+        "unit_title": "Unit 8 · Countries",
+        "unit_sort": 8,
+        "lesson_title": "Homework 1",
+        "lesson_sort": 0,
+        "kind": "homework",
+        # Обе части выгрузки одним уроком: «(1)» — словарный тренажёр на 10
+        # стран, «(2)» — дополнительная часть с флагами.
+        # В выгрузке у стран не было перевода («Определение» пустое) —
+        # подставлены русские названия. Опечатка «Brasil» залита как Brazil.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_rocket")}" alt="" style="height:200px"></p>'
+                "<h2>Добро пожаловать в домашнее задание!</h2>"
+                "<p>Ты начал новую тему — пора учить слова :) Сегодня мы запомним "
+                "страны, о которых говорили на уроке.</p>"
+                "<p>А после основной части тебя ждут дополнительные задания — "
+                "необязательные, но очень интересные!</p>"}),
+
+            ("flashcards", {"cards": [
+                {"text": en, "translation": ru, "audio_tts": en, "image": img("u8", f)}
+                for en, ru, f in U8_COUNTRIES
+            ]}),
+
+            ("quiz", quiz_ru_to_en(U8_COUNTRIES)),
+
+            ("exact_input", {"items": [
+                {"image": img("u8", f), "prompt": "Посмотри на картинку и напиши страну",
+                 "accept": [en, en.lower()], "audio_tts": en}
+                for en, ru, f in U8_COUNTRIES
+            ]}),
+
+            ("text", {"html":
+                f'<p><img src="{shared("good_luck_clover")}" alt="" style="height:180px"></p>'
+                "<h3>Добро пожаловать в дополнительную часть!</h3>"
+                "<p>Те, кто выполнит задания отсюда, будут самыми крутыми "
+                "и подготовленными на следующем уроке.</p>"}),
+
+            ("match", {
+                "title": "Соедини название страны и флаг",
+                "pairs": [
+                    {"left": "Egypt", "right_image": img("u8", "flag_egypt"),
+                     "right": "Egypt flag"},
+                    {"left": "Argentina", "right_image": img("u8", "flag_argentina"),
+                     "right": "Argentina flag"},
+                    {"left": "Chile", "right_image": img("u8", "flag_chile"),
+                     "right": "Chile flag"},
+                    {"left": "Mexico", "right_image": img("u8", "flag_mexico"),
+                     "right": "Mexico flag"},
+                    {"left": "Spain", "right_image": img("u8", "flag_spain"),
+                     "right": "Spain flag"},
+                    {"left": "China", "right_image": img("u8", "flag_china"),
+                     "right": "China flag"},
+                    {"left": "India", "right_image": img("u8", "flag_india"),
+                     "right": "India flag"},
+                    {"left": "Turkey", "right_image": img("u8", "flag_turkey"),
+                     "right": "Turkey flag"},
+                    {"left": "Brazil", "right_image": img("u8", "flag_brazil"),
+                     "right": "Brazil flag"},
+                ],
+            }),
+
+            ("task", {
+                "title": "Нарисуй два флага",
+                "needs_review": True,
+                "html":
+                    "<p>Дома на листочке или в тетради нарисуй флаг своей страны "
+                    "и флаг страны, в которой ты мечтаешь жить. Если это одна и та же "
+                    "страна — супер, нарисуй один флаг!</p>"
+                    "<p><i>For example: I live in Russia, but I’d like to live "
+                    "in Turkey!</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание — ты МЕГА КРУТ!</h3>"
+                "<p>Жду тебя на уроке!</p>"}),
+        ],
+    },
+    "u8_hw2": {
+        "unit": "u8",
+        "unit_title": "Unit 8 · Countries",
+        "unit_sort": 8,
+        "lesson_title": "Homework 2",
+        "lesson_sort": 1,
+        "kind": "homework",
+        # Блоки один в один с выгрузкой.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_laptop")}" alt="" style="height:200px"></p>'
+                "<h2>Привет! Добро пожаловать в домашнее задание!</h2>"
+                "<p>В конце есть дополнительное задание — для самых крутых "
+                "и смелых, обязательно попробуй его сделать!</p>"
+                "<p>Прежде чем начать, обязательно посмотри видео — так будет "
+                "легче и понятнее.</p>"}),
+
+            ("video", {"title": "Видео: прошедшее время, отрицания",
+                       "url": "", "provider": ""}),
+
+            ("match", {
+                "title": "Супер! Давай найдём пары — повторим неправильные глаголы",
+                "pairs": [
+                    {"left": "go", "right": "went", "right_audio_tts": "went"},
+                    {"left": "feel", "right": "felt", "right_audio_tts": "felt"},
+                    {"left": "ride", "right": "rode", "right_audio_tts": "rode"},
+                    {"left": "give", "right": "gave", "right_audio_tts": "gave"},
+                    {"left": "say", "right": "said", "right_audio_tts": "said"},
+                ],
+            }),
+
+            ("quiz", {
+                "title": "Выбери правильный вариант. Образец: We went to the beach "
+                         "but we didn’t go swimming.",
+                "questions": [
+                    {"q": "1. We rode an elephant in the zoo but we ___ ride a horse.",
+                     "type": "single",
+                     "options": [{"text": "didn’t"}, {"text": "don’t"},
+                                 {"text": "doesn’t"}],
+                     "correct": [0]},
+                    {"q": "2. I saw Bill at the birthday party but I ___ see Harry.",
+                     "type": "single",
+                     "options": [{"text": "didn’t"}, {"text": "not"},
+                                 {"text": "isn’t"}],
+                     "correct": [0]},
+                    {"q": "3. They gave the horse an apple but they ___ him any sweets.",
+                     "type": "single",
+                     "options": [{"text": "didn’t give"}, {"text": "not gave"},
+                                 {"text": "didn’t gave"}],
+                     "correct": [0]},
+                    {"q": "4. She said a lot but she ___ say her name.", "type": "single",
+                     "options": [{"text": "didn’t"}, {"text": "don’t"},
+                                 {"text": "isn’t"}],
+                     "correct": [0]},
+                    {"q": "5. He ate all the chocolates but he ___ the ice cream.",
+                     "type": "single",
+                     "options": [{"text": "didn’t eat"}, {"text": "not ate"},
+                                 {"text": "didn’t ate"}],
+                     "correct": [0]},
+                ],
+            }),
+
+            ("task", {
+                "title": "Дополнительное задание — перепиши предложения "
+                         "в отрицательной форме с didn’t",
+                "needs_review": True,
+                "html":
+                    "<p>Не забудь: после didn’t глагол встаёт в начальную форму.</p>"
+                    "<p><i>Например: I bought a new car yesterday. → "
+                    "I didn’t buy a car yesterday.</i></p>"
+                    "<p>1. I went to school yesterday.<br>"
+                    "2. We took photographs of the Great Wall of China.<br>"
+                    "3. We ate burritos in Spain.<br>"
+                    "4. We travelled to 3 countries: Spain, Italy and Portugal.<br>"
+                    "5. I walked in the park on Sunday.</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
+                "<h3>Поздравляю! Ты завершил домашнее задание — ты замечательный "
+                "ученик!</h3>"
+                "<p>За это лови звёздочку :) Увидимся на занятии!</p>"}),
+        ],
+    },
+    "u8_hw3": {
+        "unit": "u8",
+        "unit_title": "Unit 8 · Countries",
+        "unit_sort": 8,
+        "lesson_title": "Homework 3",
+        "lesson_sort": 2,
+        "kind": "homework",
+        # Блоки один в один с выгрузкой. Шаблон песни из блока 4 выгрузки
+        # у нас внутри самого задания — ребёнку он нужен перед ответом.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_headphones")}" alt="" style="height:200px"></p>'
+                "<h2>Привет-привет! Как здорово, что ты решил сделать домашнюю "
+                "работу!</h2>"
+                "<p>Послушай песню и выбери правильный вариант ответа.</p>"}),
+
+            ("quiz", {
+                "title": "Послушай песню и выбери правильный вариант",
+                "audio": "",
+                "questions": [
+                    {"q": "1. I went to ___ but I didn’t see the wall.",
+                     "type": "single",
+                     "options": [{"text": "China"}, {"text": "India"}], "correct": [0]},
+                    {"q": "2. In India I didn’t see the ___.", "type": "single",
+                     "options": [{"text": "Taj Mahal"}, {"text": "Sphinx"}],
+                     "correct": [0]},
+                    {"q": "3. I went to Egypt but I didn’t see the ___.",
+                     "type": "single",
+                     "options": [{"text": "Sphinx"}, {"text": "lynx"}], "correct": [0]},
+                    {"q": "4. I went to ___ but I didn’t see the sun.",
+                     "type": "single",
+                     "options": [{"text": "Australia"}, {"text": "Brazil"}],
+                     "correct": [0]},
+                    {"q": "5. In Brazil I didn’t see the ___.", "type": "single",
+                     "options": [{"text": "Amazon"}, {"text": "wall"}], "correct": [0]},
+                ],
+            }),
+
+            ("task", {
+                "title": "Заверши песню",
+                "needs_review": True,
+                "html":
+                    "<p>Подумай о четырёх местах и интересных фактах о них. Что ты "
+                    "видел? Чего не видел?</p>"
+                    "<p><i>I went to …<br>But I didn’t see …<br>"
+                    "In …<br>I didn’t see …<br>"
+                    "I went to …<br>And I saw …<br>"
+                    "I went to …<br>And I saw …</i></p>",
+            }),
+
+            ("task", {
+                "title": "А теперь время рисования!",
+                "needs_review": True,
+                "html":
+                    "<p>Нарисуй то место, в котором ты побывал, и не забудь показать "
+                    "рисунок учителю :)</p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_clap")}" alt="" style="height:180px"></p>'
+                "<h3>Классная работа!</h3>"
+                "<p>Спасибо тебе большое :)</p>"}),
         ],
     },
 }
