@@ -48,7 +48,7 @@ def split_rows(path, bs, n_rows):
     for i, (y0, y1) in enumerate(bs):
         pic = y1 - y0 > 60
         if pic:
-            if prev_pic and y0 - prev < 15:
+            if prev_pic and y0 - prev < 25:
                 y0 = y0 + 20 + int(np.argmin(c[y0 + 20:y0 + 90]))
             else:
                 # светлые пряди и тени не дотягивают до порога 200 — берём весь белый
