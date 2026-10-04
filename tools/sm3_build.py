@@ -2539,6 +2539,142 @@ LESSONS = {
                 "<p>Настоящий гуру английского. Так держать :) Увидимся на уроке!</p>"}),
         ],
     },
+    "u4_hw5": {
+        "unit": "u4",
+        "unit_title": "Unit 4 \u00b7 In the town",
+        "unit_sort": 4,
+        "lesson_title": "Homework 5",
+        "lesson_sort": 4,
+        "kind": "homework",
+        # Блок 4 в выгрузке — «Заполни пропуски» с двумя лишними словами.
+        # Наш gaps в режиме drag строит набор только из верных ответов, лишних
+        # слов в нём не бывает. Поэтому режим «впиши», а все семь слов (с двумя
+        # лишними) названы в заголовке — задумка сохранена.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_book")}" alt="" style="height:200px"></p>'
+                "<h2>Привет-привет!</h2>"
+                "<p>Сегодня мы вспомним историю, которую ты смотрел на уроке. "
+                "Кто в ней главный герой?</p>"
+                "<p>Прочитай историю ниже и сделай задания к ней.</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u4", "story_pirate_ship_1")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u4", "story_pirate_ship_2")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("gaps", {
+                "title": "Прочитай текст ещё раз и впиши слова в пропуски по смыслу. "
+                         "Слова: letter \u00b7 dog \u00b7 near \u00b7 going \u00b7 high \u00b7 "
+                         "cat \u00b7 museum. Два слова лишние!",
+                "text":
+                    "1. Lucy and Ben are going to the tower to get the next __letter__.\n"
+                    "2. Lucy and Ben have got their __dog__ with them.\n"
+                    "3. Look, the tower\u2019s over there, the school\u2019s __near__.\n"
+                    "4. \u2018Lucy! Where are you __going__?\u2019\n"
+                    "5. Lucy and Ben are really __high__ on the Pirate Ship.",
+                "gaps_expected": 5,
+            }),
+
+            ("sequence", {
+                "title": "Молодец! Расставь предложения в правильном порядке по смыслу",
+                "items": [
+                    {"text": "Ben and Lucy know that the tower is near the market square."},
+                    {"text": "Ben wants to go to the funfair. Lucy says, \u2018We\u2019re going "
+                             "to the tower.\u2019"},
+                    {"text": "Then Lucy doesn\u2019t go to the tower. She goes to the funfair."},
+                    {"text": "Ben and Lucy go on the Pirate Ship. They are above the tower."},
+                    {"text": "Horax and Zelda are in the tower. It\u2019s the wrong place."},
+                ],
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_clap")}" alt="" style="height:180px"></p>'
+                "<h3>Ура! Ты со всем справился!</h3>"
+                "<p>Увидимся на уроке :)</p>"}),
+        ],
+    },
+    "u4_hw6": {
+        "unit": "u4",
+        "unit_title": "Unit 4 \u00b7 In the town",
+        "unit_sort": 4,
+        "lesson_title": "Homework 6",
+        "lesson_sort": 5,
+        "kind": "homework",
+        # Обе страницы диалога вырезаны из PDF: в редакторе блоки «Картинка»
+        # пустые. Клипарт с двумя читающими детьми из выгрузки не взят —
+        # он декоративный, вместо него наша картинка в приветствии.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{shared("hello_book")}" alt="" style="height:200px"></p>'
+                "<h2>ПРИВЕТ-ПРИВЕТ!</h2>"
+                "<p>Сегодня мы с тобой будем читать. Какая твоя любимая книга?</p>"
+                "<p>Прочти диалог с начала до конца и выбери наиболее подходящий "
+                "вариант ответа.</p>"}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u4", "dialog_paul_daisy_1")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("text", {"html":
+                f'<p><img src="{img("u4", "dialog_paul_daisy_2")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("order", {
+                "words": ["Let\u2019s", "look", "at", "the", "map."],
+                "sentence": "Let\u2019s look at the map.",
+                "audio_tts": "Let's look at the map.",
+            }),
+
+            ("order", {
+                "words": ["Can", "you", "see", "the", "museum?"],
+                "sentence": "Can you see the museum?",
+                "audio_tts": "Can you see the museum?",
+            }),
+
+            ("order", {
+                "words": ["Where", "are", "we", "going", "now?"],
+                "sentence": "Where are we going now?",
+                "audio_tts": "Where are we going now?",
+            }),
+
+            ("order", {
+                "words": ["We\u2019re", "going", "on", "Sunday."],
+                "sentence": "We\u2019re going on Sunday.",
+                "audio_tts": "We're going on Sunday.",
+            }),
+
+            ("order", {
+                "words": ["Let\u2019s", "go", "to", "the", "funfair."],
+                "sentence": "Let\u2019s go to the funfair.",
+                "audio_tts": "Let's go to the funfair.",
+            }),
+
+            ("order", {
+                "words": ["There\u2019s", "a", "park", "opposite", "the", "market", "square."],
+                "sentence": "There\u2019s a park opposite the market square.",
+                "audio_tts": "There's a park opposite the market square.",
+            }),
+
+            ("task", {
+                "title": "Напиши свои два диалога",
+                "needs_review": True,
+                "html":
+                    "<p>SUPER! Давай ещё потренируемся. Прочитай диалоги ещё раз, выбери "
+                    "два из них и напиши свои варианты по этому образцу.</p>"
+                    "<p><i>Например:<br>Anya: Can you see the museum?<br>"
+                    "Masha: Yes, it\u2019s near the market square.</i></p>",
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>SUPER! Ты выполнил все задания!</h3>"
+                "<p>Ты БОЛЬШОЙ МОЛОДЕЦ! Увидимся на уроке!</p>"}),
+        ],
+    },
 }
 
 
