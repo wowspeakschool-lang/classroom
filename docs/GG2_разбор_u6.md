@@ -72,23 +72,25 @@ vet, artist, singer, farmer); если оставляем hotspot — скан �
 | № | тип в выгрузке | → блок LMS | содержание |
 |---|---|---|---|
 | 1 | Текст | text | «Огромный привет! В этой домашней работе мы повторим все то, что ты прошел на уроке с учителем. Это поможет тебе не только все запомнить, но и использовать :)) К этому домашнему заданию, есть дополнение! Оно необязательное, но если ты его выполнишь, учитель даст тебе дополнительную ⭐ Давай начинать 😉» + мальчик (shared) |
-| 2 | Медиафайл | video (пустой) | «Давай начнем с видео. Посмотри его, а потом сделай задание ниже.» Видео в выгрузке нет (по заданиям — история про семью, которая хотела стать поп-звёздами: mum played the drums, dad danced). → «доработать руками» |
-| 3 | Найди пару | match | «Супер! А теперь давай посмотрим видео еще раз и распределим глаголы по парам. Вперед!» play — played; dance — danced; try — tried |
-| 4 | Порядок предложений (слова через «/») | order (4 предложения) | «Молодец! А теперь давай посмотрим видео еще раз и расставим слова в предложениях по смыслу.» 1) My/mum/played/the/drums. 2) My/dad/danced. 3) They/wanted/to/be/pop stars. 4) The/tried/hard. — в оригинале опечатка, должно быть **They/tried/hard.** |
-| 5 | Заполни пропуски | gaps | «Перейдем к практике! Расставь пропущенные слова в предложения по смыслу!» 1) My aunt __phoned__ me last Saturday on my mobile. 2) She __invited__ me to Harry's birthday party. 3) I __stopped__ on the way at the toy shop for a present. (в оригинале опечатка «wav») 4) Harry and his friends __listened__ to music. 5) I __helped__ my aunt with the food. 6) Harry __liked__ his party! Пропущенные: phoned, invited, listened, helped, liked, stopped. Неверных вариантов нет |
-| 6 | Текст | task | «А это дополнительное задание - для чемпионов! За него ты получишь дополнительный балл! ;) Напиши 4 предложения о себе, используя Past simple! Посмотри на пример: I played computer games on Monday. I danced at school on Thursday.» (+ красная стрелка-декор) |
-| 7 | Текст | text | прощание + девочка (shared) |
+| 2 | Текст | text | «Давай начнем с видео. Посмотри его, а потом сделай задание ниже.» (+ зелёная стрелка-декор) |
+| 3 | Медиафайл | video (пустой) | Видео в выгрузке нет (по заданиям — история про семью, которая хотела стать поп-звёздами: mum played the drums, dad danced). → «доработать руками» |
+| 4 | Найди пару | match | «Супер! А теперь давай посмотрим видео еще раз и распределим глаголы по парам. Вперед!» play — played; dance — danced; try — tried |
+| 5 | Порядок предложений (слова через «/») | order (4 предложения) | «Молодец! А теперь давай посмотрим видео еще раз и расставим слова в предложениях по смыслу.» 1) My/mum/played/the/drums. 2) My/dad/danced. 3) They/wanted/to/be/pop stars. 4) The/tried/hard. — в оригинале опечатка, должно быть **They/tried/hard.** |
+| 6 | Заполни пропуски | gaps | «Перейдем к практике! Расставь пропущенные слова в предложения по смыслу!» 1) My aunt __phoned__ me last Saturday on my mobile. 2) She __invited__ me to Harry's birthday party. 3) I __stopped__ on the way at the toy shop for a present. (в оригинале опечатка «wav») 4) Harry and his friends __listened__ to music. 5) I __helped__ my aunt with the food. 6) Harry __liked__ his party! Пропущенные: phoned, invited, listened, helped, liked, stopped. Неверных вариантов нет |
+| 7 | Текст | task | «А это дополнительное задание - для чемпионов! За него ты получишь дополнительный балл! ;) Напиши 4 предложения о себе, используя Past simple! Посмотри на пример: I played computer games on Monday. I danced at school on Thursday.» (+ красная стрелка-декор) |
+| 8 | Текст | text | «Ты МЕГАКРУТ! Ты так сегодня здорово потрудился. Твой учитель тобой гордится, и ты тоже можешь собой гордиться. До встречи на занятии ⭐» + девочка (shared) |
 
 ### (2)
 
 | № | тип в выгрузке | → блок LMS | содержание |
 |---|---|---|---|
 | 1 | Текст | text | «Привет-привет! Добро пожаловать в дополнительную часть домашнего задания! Это задание необязательное, но если ты его сделаешь, получишь дополнительную ⭐ Давай начинать 😉» + мальчик (shared) |
-| 2 | Картинка | text + картинка | «Начнем с небольшой таблички! Что на ней изображено? Внимательно изучи содержимое таблички, а затем выполни упражнение.» Карточка «Past Simple: last week · 2 days ago · in 1999 · yesterday» (карточка методиста) |
-| 3 | Заполни пропуски | gaps (с картинкой) | «Итак, приступим к упражнению! Внимательно посмотри на картинку выше и заполни пропуски в предложениях соответствующими словами, удачи! ;)» Картинка: «Now it is: 04:00 · May · Tuesday». 1) 03:00 → __an hour ago__ (пример на картинке); 2) 03:50 → __10 minutes ago__; 3) March → __2 months ago__; 4) Saturday → __3 days ago__. Пропущенные: an hour ago, 10 minutes ago, 2 months ago, 3 days ago; неверных нет |
-| 4 | Текст | text | «Здорово! Ты так хорошо справляешься! У меня для тебя есть еще одно задание! Внимательно посмотри на маркеры Past Simple и переведи их.» (+ фиолетовая стрелка-декор) |
-| 5 | Embed (Wordwall) | match (СОСТАВ МОЙ) | Обложка: Wordwall «Match up — Past simple time markers», «Drag and drop each keyword next to its definition». Ссылки в тексте нет, содержимого нет. Пересобрать match «маркер ↔ перевод»: yesterday — вчера; last week — на прошлой неделе; last year — в прошлом году; last Saturday — в прошлую субботу; two days ago — два дня назад; an hour ago — час назад; in 1999 — в 1999 году; this morning — сегодня утром |
-| 6 | Текст | text | прощание + девочка (shared) |
+| 2 | Текст | text | «Начнем с небольшой таблички! Что на ней изображено? Внимательно изучи содержимое таблички, а затем выполни упражнение.» (+ стрелка-декор) |
+| 3 | Картинка | text + картинка | Карточка «Past Simple: last week · 2 days ago · in 1999 · yesterday» (карточка методиста) |
+| 4 | Заполни пропуски | gaps (с картинкой) | «Итак, приступим к упражнению! Внимательно посмотри на картинку выше и заполни пропуски в предложениях соответствующими словами, удачи! ;)» Картинка: «Now it is: 04:00 · May · Tuesday». 1) 03:00 → __an hour ago__ (пример на картинке); 2) 03:50 → __10 minutes ago__; 3) March → __2 months ago__; 4) Saturday → __3 days ago__. Пропущенные: an hour ago, 10 minutes ago, 2 months ago, 3 days ago; неверных нет |
+| 5 | Текст | text | «Здорово! Ты так хорошо справляешься! У меня для тебя есть еще одно задание! Внимательно посмотри на маркеры Past Simple и переведи их.» (+ фиолетовая стрелка-декор) |
+| 6 | Embed (Wordwall) | match (СОСТАВ МОЙ) | Обложка: Wordwall «Match up — Past simple time markers», «Drag and drop each keyword next to its definition». Ссылки в тексте нет, содержимого нет. Пересобрать match «маркер ↔ перевод»: yesterday — вчера; last week — на прошлой неделе; last year — в прошлом году; last Saturday — в прошлую субботу; two days ago — два дня назад; an hour ago — час назад; in 1999 — в 1999 году; this morning — сегодня утром |
+| 7 | Текст | text | «Hurrey! Домашняя работа выполнена на отлично, все благодаря твоим стараниям. Увидимся на занятии 🌟» (в оригинале «Hurrey» → Hurray) + девочка (shared) |
 
 Картинки урока: (1) p1 x100 — shared; p3 x212 — зелёная стрелка-декор (не нужна);
 p8 x397 — красная стрелка-декор; p9 x416 — shared. (2) p1 x105 — shared; p3 x218 — стрелка-декор;
@@ -100,7 +102,7 @@ p8 x365 — обложка Wordwall (не переносим); p9 x422 — share
 НУЖНЫ КАРТИНКИ: по желанию — карточки к play/dance/try (барабанная установка, танцпол с
 диско-шаром, …) не обязательны: глаголы сопоставляются текстом. Сцена к видео не нужна.
 
-Заметки: видео блока (1)·2 — в «доработать руками». Wordwall (2)·5 — «СОСТАВ МОЙ».
+Заметки: видео блока (1)·3 — в «доработать руками». Wordwall (2)·6 — «СОСТАВ МОЙ».
 Опечатки в оригинале исправить: «The/tried/hard» → «They/tried/hard», «wav» → «way».
 
 ---
@@ -116,9 +118,8 @@ p8 x365 — обложка Wordwall (не переносим); p9 x422 — share
 | 5 | Заполни пропуски | gaps | «Здорово! Давай еще немного потренируемся! Заполни пропуски в предложениях.» 1) We __had__ (have) lunch at 2 o'clock yesterday. 2) I __made__ (make) a pizza last Sunday. 3) We __went__ (go) to the cinema last month. 4) You __took__ (take) a photo of me two minutes ago. 5) They __drank__ (drink) tea after the meal yesterday evening. 6) I __ate__ (eat) a sandwich for lunch an hour ago. 7) We first __met__ (meet) three years ago. 8) Everyone __came__ (come) to my party last Sunday. Пропущенные: had, made, went, took, drank, ate, met, came; неверных нет |
 | 6 | Текст | text | «Молодец! У меня для тебя есть еще 1 задание! Соедини неправильные глаголы по парам!» (+ стрелка-декор) |
 | 7 | Найди пару | match | «Match the words»: Have — Had; Make — Made; Feel — Felt; Take — Took; Come — Came; Drink — Drank; Meet — Met; Go — Went; Eat — Ate |
-| 8 | Текст | text | «Здорово! Ты со всем справился!» |
-| 9 | Текст | task | «А это дополнительное задание - для чемпионов! За него ты получишь дополнительный балл! ;) Напиши 5 предложений о том, что ты делал на выходных! Посмотри на пример: I walked with my dog on Saturday.» |
-| 10 | Текст | text | прощание + девочка (shared) |
+| 8 | Текст | task | «Здорово! Ты со всем справился! А это дополнительное задание - для чемпионов! За него ты получишь дополнительный балл! ;) Напиши 5 предложений о том, что ты делал на выходных! Посмотри на пример: I walked with my dog on Saturday.» |
+| 9 | Текст | text | «Спасибо тебе огромное! Ты так сегодня здорово потрудился. Твой учитель тобой гордится, и ты тоже можешь собой гордиться. До встречи на занятии ⭐» + девочка (shared) |
 
 Картинки урока: p1 x100 — shared; p3 x202 — карточка методиста (неправильные глаголы с
 галочками) → как есть; p7 x237 — стрелка-декор; p11 x417 — shared.
@@ -135,17 +136,18 @@ p8 x365 — обложка Wordwall (не переносим); p9 x422 — share
 | № | тип в выгрузке | → блок LMS | содержание |
 |---|---|---|---|
 | 1 | Текст | text | «Привет, самый старательный и классный ученик! Сегодня мы будем вспоминать слова, которые ты учил на занятии😎 Давай начнем?» + мальчик (shared) |
-| 2 | Картинка | text + картинка | «Начнем с небольшой таблички, узнаешь? Внимательно изучи содержимое таблички, а затем выполни упражнение» Карточка учебника «Communication — Asking for and giving permission: Can I borrow a pen, please? — Yes, you can. / No, sorry, you can't. / Sure, no problem. Is it OK if I use your mobile? — No, sorry, it isn't OK. / Oh, all right. / Yes, that's fine.» |
-| 3 | Составь предложение | order | «Итак, приступим к упражнению! Внимательно посмотри на картинку и расставь слова по порядку.» Can/I/borrow/a/pen,/please? |
-| 4 | Составь предложение | order | «Расставь слова в правильном порядке.» Yes,/you/can. |
-| 5 | Составь предложение | order | Is/it/OK/if/I/use/your/mobile? |
-| 6 | Составь предложение | order | No,/sorry,/it/isn't/OK. |
-| 7 | Составь предложение | order | Sure,/no/problem. |
-| 8 | Заполни пропуски | gaps | «Следующее задание немного посложнее... НО! Ты можешь немного подглядывать в табличку ;) Прочитай диалог и заполни пропуски недостающими словами, не торопись и думай хорошенько!» **Dialogue 1.** Elena: We've got a Maths test today. Have you got your calculator this time? Tom: Oh no, I forgot it. __Is it OK if I use yours__? Elena: __No, it isn't.__ I need it for the test! Tom: OK, I understand. I hope the test is easy! **Dialogue 2.** Jess: Hi Tom. Do you want to go to the cinema? Matt: Sure, but I have to ask my mum first. __Can I borrow your mobile, please?__ I don't have my phone with me. Jess: __Yes, you can__. Here you are. Matt: Thanks. Oh, hi mum. __Please can I go to the cinema?__ Mum: __Sure, no problem.__ Пропущенные (6): Is it OK if use yours (так в оригинале, пропущено I — исправить на «Is it OK if I use yours»); No, it isn't.; Can I borrow your mobile, please?; Yes, you can; Please can I go to the cinema?; Sure, no problem. Неверных нет |
-| 9 | Открытый вопрос | task | «Ты отлично справляешься! Осталось одно задание из основной части! Напиши 2 вопроса с просьбой! Не забудь добавить please в конце! Будь вежливым! Посмотри внимательно на пример. 1 You want to go to the cinema. a Please can I go to the cinema? b Can I go to the cinema, please? А теперь напиши свои варианты: 1 You want to use your dad's laptop. a … b … 2 You want to borrow a friend's mobile. a … b …» |
-| 10 | Текст | text | «А это дополнительное задание для самых стойких и терпеливых! Внимательно посмотри на картинку ниже! Что на ней изображено? А теперь прочитай данные еще раз и напиши свое обращение! У тебя получится!» (+ синяя стрелка-персонаж, декор) |
-| 11 | Картинка | task (с картинкой или текстом) | Записка: «Who: Paul and Leo / Where: go to the swimming pool / Ask Leo's dad for permission / Permission: No / Why: homework». Задание — написать диалог-просьбу по данным. Объединить с блоком 10 в один task |
-| 12 | Текст | text | прощание + «BYE» с Микки Маусом → заменить на shared |
+| 2 | Текст | text | «Начнем с небольшой таблички, узнаешь? Внимательно изучи содержимое таблички, а затем выполни упражнение» (+ стрелка-декор) |
+| 3 | Картинка | text + картинка | Карточка учебника «Communication — Asking for and giving permission: Can I borrow a pen, please? — Yes, you can. / No, sorry, you can't. / Sure, no problem. Is it OK if I use your mobile? — No, sorry, it isn't OK. / Oh, all right. / Yes, that's fine.» |
+| 4 | Составь предложение | order | «Итак, приступим к упражнению! Внимательно посмотри на картинку и расставь слова по порядку.» Can/I/borrow/a/pen,/please? |
+| 5 | Составь предложение | order | «Расставь слова в правильном порядке.» Yes,/you/can. |
+| 6 | Составь предложение | order | Is/it/OK/if/I/use/your/mobile? |
+| 7 | Составь предложение | order | No,/sorry,/it/isn't/OK. |
+| 8 | Составь предложение | order | Sure,/no/problem. |
+| 9 | Заполни пропуски | gaps | «Следующее задание немного посложнее... НО! Ты можешь немного подглядывать в табличку ;) Прочитай диалог и заполни пропуски недостающими словами, не торопись и думай хорошенько!» **Dialogue 1.** Elena: We've got a Maths test today. Have you got your calculator this time? Tom: Oh no, I forgot it. __Is it OK if I use yours__? Elena: __No, it isn't.__ I need it for the test! Tom: OK, I understand. I hope the test is easy! **Dialogue 2.** Jess: Hi Tom. Do you want to go to the cinema? Matt: Sure, but I have to ask my mum first. __Can I borrow your mobile, please?__ I don't have my phone with me. Jess: __Yes, you can__. Here you are. Matt: Thanks. Oh, hi mum. __Please can I go to the cinema?__ Mum: __Sure, no problem.__ Пропущенные (6): Is it OK if use yours (так в оригинале, пропущено I — исправить на «Is it OK if I use yours»); No, it isn't.; Can I borrow your mobile, please?; Yes, you can; Please can I go to the cinema?; Sure, no problem. Неверных нет |
+| 10 | Открытый вопрос | task | «Ты отлично справляешься! Осталось одно задание из основной части! Напиши 2 вопроса с просьбой! Не забудь добавить please в конце! Будь вежливым! Посмотри внимательно на пример. 1 You want to go to the cinema. a Please can I go to the cinema? b Can I go to the cinema, please? А теперь напиши свои варианты: 1 You want to use your dad's laptop. a … b … 2 You want to borrow a friend's mobile. a … b …» |
+| 11 | Текст | text | «А это дополнительное задание для самых стойких и терпеливых! Внимательно посмотри на картинку ниже! Что на ней изображено? А теперь прочитай данные еще раз и напиши свое обращение! У тебя получится!» (+ синяя стрелка-персонаж, декор) |
+| 12 | Картинка | task (с картинкой или текстом) | Записка: «Who: Paul and Leo / Where: go to the swimming pool / Ask Leo's dad for permission / Permission: No / Why: homework». Задание — написать диалог-просьбу по данным. Объединить с блоком 11 в один task |
+| 13 | Текст | text | «Hurrey! Домашняя работа выполнена на отлично, все благодаря твоим стараниям. Увидимся на занятии 🌟» + «BYE» с Микки Маусом → заменить на shared |
 
 Картинки урока: p1 x100 — shared; p3 x218 — стрелка-декор; p4 x229 — карточка учебника
 «Communication: Asking for and giving permission» → как есть (или перенабрать текстом);
@@ -153,11 +155,9 @@ p12 x435 — синяя стрелка-персонаж, декор → выбр
 (жёлтая записка Who/Where/Permission/Why) → как есть или текстом; p14 x464 — «BYE» с Микки
 Маусом → promo/shared, заменить нашим (чужой персонаж).
 
-НУЖНЫ КАРТИНКИ: по желанию к task 10–11 — сцена «бассейн» (pool без людей) — не обязательно.
+НУЖНЫ КАРТИНКИ: по желанию к task 11–12 — сцена «бассейн» (pool без людей) — не обязательно.
 
-Заметки: в выгрузке блоки 3–7 идут без номеров у каждого (ShkolaApp печатает номер только
-у первого из подряд идущих одинаковых); нумерация выше восстановлена по порядку — сверить в
-редакторе, если номер важен. В пропуске диалога ошибка оригинала «Is it OK if use yours».
+Заметки: в пропуске диалога ошибка оригинала «Is it OK if use yours».
 
 ---
 
@@ -175,7 +175,7 @@ p12 x435 — синяя стрелка-персонаж, декор → выбр
 | 8 | Верно / неверно | truefalse | Grandpa worked every Sunday. — **False** (on Saturdays) |
 | 9 | Верно / неверно | truefalse | Grandpa bought a bike when he was 16. — **True** |
 | 10 | Открытый вопрос | task (с картинкой) | «Ты уже на финишной прямой!! Осталось последнее задание :) Посмотри внимательно на картинку. Опиши события в прошедшем времени! Напиши не менее 5 предложений! For example: An artist emptied the bin. Don't forget about Past Simple!» Картинка — иллюстрация учебника: художник выносит мусор, пилот моет машину, строитель несёт пакеты с покупками, повар (с кем-то) несёт красный диван, полицейский выгуливает собаку, медсестра моет посуду |
-| 11 | Текст | text | прощание + «BYE» ладошка (shared) |
+| 11 | Текст | text | «Ура! Ты справился с домашним заданием просто прекрасно. Самое время немножко отдохнуть. Увидимся на занятии :)» + «BYE» ладошка (shared) |
 
 Блоки 4–9 в LMS можно собрать в один truefalse из 6 утверждений.
 
@@ -202,7 +202,7 @@ p12 x435 — синяя стрелка-персонаж, декор → выбр
 | 4 | Впиши в пропуски | gaps (ввод) | «Ты отлично справляешься! А теперь послушай аудио еще раз и впиши пропущенные слова в предложения ниже.» 1) Nick had a fun day last __Saturday__ (альт. saturday). 2) First, Nick went to the __park__. 3) He scored __three__ (альт. 3) goals. 4) Nick ate __two__ (альт. 2) cheeseburgers. 5) Nick and Ted drank __lemonade__. 6) The __film__ (альт. movie) was really exciting. 7) Gary and Ted went home at __seven__ (альт. 7) o'clock. Регистр не учитывается |
 | 5 | Впиши в пропуски | gaps (ввод) | «А теперь приступим к следующему заданию! Внимательно прочитай рассказ Элены о своих выходных, впиши в пропуски глаголы в прошедшем времени (смотри, я показала тебе пример с глаголом go - он поменялся на went).» Last Sunday I went to the beach with my friends. First, we went (go) to the beach and we went swimming. But the sea __was__ (be) cold, so we __got__ (get) out quickly! Then we played (play) beach volleyball. Amy and I were (be) Team A and the boys were Team B. It was a lot of fun. Amy and I were the winners! After that, we __had__ (have) a picnic on the sand. We __ate__ (eat) sandwiches and __drank__ (drink) coke. Mum came and took us home in her car. We arrived home at 4 o'clock. It was a great day out! Пропущенные: was, got, had, ate, drank (в оригинале «Amy and were» — пропущено I) |
 | 6 | Открытый вопрос | task (с картинкой) | «Супер, ты отлично справляешься! А теперь давай попробуем самостоятельно написать небольшой рассказ о своих прошлых выходных или о каком-то памятном и интересном для тебя дне ;) Воспользуйся примером текста Элены и вводными словами на картинке выше и не забудь, что твой рассказ должен быть в прошедшем времени (проверяй, в какой форме ты пишешь глаголы).» Карточка: «First, Then, After that — First, we visited Madame Tussaud's. Then, we went to the London Aquarium. After that, we went to a Mexican restaurant.» |
-| 7 | Текст | text | «Классная работа! Я тебя поздравляю - домашняя работа выполнена очень здорово.» + «Good Bye!» стикер (shared) |
+| 7 | Текст | text | «Классная работа! Я тебя поздравляю - домашняя работа выполнена очень здорово. До встречи на занятии 🖐» + «Good Bye!» стикер (shared) |
 
 ### (2)
 
@@ -214,7 +214,7 @@ p12 x435 — синяя стрелка-персонаж, декор → выбр
 | 4 | Embed (Wordwall) | gaps (СОСТАВ МОЙ) | Обложка: Wordwall «Complete the sentence — Past simple grammar», «A cloze activity where you drag and drop words into blank spaces within a text». Ссылки и содержимого нет. Пересобрать gaps на Past Simple (инструкция обещает диалог с вопросами и ответами): напр. A: Where __did__ you go last weekend? B: I __went__ to the zoo. A: What __did__ you see? B: We __saw__ lions and monkeys. A: __Did__ you have lunch there? B: Yes, we __had__ pizza. Слова: did, went, did, saw, Did, had |
 | 5 | Заполни пропуски | gaps | «Ты отлично справляешься! Давай сделаем еще одно задание! Прочитай текст и заполни пропуски недостающими словами, не торопись и думай хорошенько!» 1) I __had__ lunch at 2 p.m. yesterday. 2) I __met__ Ted at the cinema an hour ago. 3) Yesterday Mum __drank__ tea after dinner. 4) We __bought__ some cakes at the supermarket. 5) Jim __took__ lots of photos on holidays last year. 6) Dad __gave__ me a watch for my last birthday. Пропущенные: had, met, drank, bought, took, gave; неверных нет (в оригинале нумерация «1, 1, 2, 3, 4, 5» — исправить) |
 | 6 | Заполни пропуски | gaps | «Cледующее задание немного посложнее... Но ты обязательно справишься! Прочитай диалог и заполни пропуски недостающими словами!» Pam: Please __can__ I borrow your laptop, dad? Dad: No, __sorry__, you can't. I'm using it. Why do you need it? Pam: I'm planning a project for school and I want to look at the Internet. Dad: Is it OK __if__ I look at your notes? Pam: Yes, that's __fine__. Here. Dad: They're good. Pam: Come on, dad. Can I use your laptop, __please__? Just for an hour. Dad: Oh, __all right__. Пропущенные: can, sorry, if, fine, please, all right; неверных нет |
-| 7 | Текст | text | прощание + девочка (shared) |
+| 7 | Текст | text | «Hurrey! Домашняя работа выполнена на отлично, все благодаря твоим стараниям. Теперь ты готов к тесту на 100% Увидимся на занятии 🌟» + девочка (shared) |
 
 Картинки урока: (1) p1 x105 — shared («HELLO»); p7 x250 — карточка учебника «First, Then,
 After that» → как есть или текстом; p8 x405 — shared («Good Bye!»). (2) p1 x103 — shared;
@@ -232,8 +232,8 @@ p5 x221 — стрелка-декор; p6 x230 — обложка Wordwall (не
 
 ## Test  (`Go Getter 2 Unit 6 Test`)
 
-`kind='test'`, `pass_threshold=90`. В редакторе 8 номеров; разделы 4 и 5 состоят из
-нескольких одинаковых блоков подряд (номер напечатан только у первого).
+`kind='test'`, `pass_threshold=90`. В редакторе 8 блоков; блок 4 содержит 5 предложений,
+блок 5 — 6 вопросов (в LMS — 5 order-блоков и quiz из 6 вопросов).
 
 | № | тип в выгрузке | → блок LMS | содержание |
 |---|---|---|---|
@@ -292,8 +292,8 @@ HW6(2) x221), обложки Wordwall (HW2(2) x365, HW6(2) x230), «BYE» с М�
 сток с фигурками-профессиями (HW6(2) x208). Приветствия/прощания — shared.
 
 ## Доработать руками (для `docs/…_доработать_руками.md`)
-- HW2 блок (1)·2 — видео (семья хотела стать поп-звёздами) — пусто.
-- HW2 блок (2)·5 — Wordwall «Past simple time markers» → match, СОСТАВ МОЙ.
+- HW2 блок (1)·3 — видео (семья хотела стать поп-звёздами) — пусто.
+- HW2 блок (2)·6 — Wordwall «Past simple time markers» → match, СОСТАВ МОЙ.
 - HW3 блок 3 — видео (Hammy в школе) — пусто.
 - HW6 блок (1)·2 — аудио про день Ника — пусто.
 - HW6 блок (2)·4 — Wordwall «Past simple grammar» → gaps, СОСТАВ МОЙ.
