@@ -32,6 +32,11 @@ git checkout -b claude/gg2 origin/claude/charming-volta-8wralr   # чат B
 Если ветка `claude/charming-volta-8wralr` к тому времени уже влита в `main` —
 резать от `main`, но сначала убедиться, что `tools/sm3_build.py` на месте.
 
+⚠️ **Чат A по факту работает прямо в `claude/charming-volta-8wralr`** — своей
+ветки не завёл. Пока так, обоим перед каждым пушем делать
+`git pull --rebase origin <ветка>`: иначе push отлетает с «fast-forward», а при
+невезении один затирает чужой коммит.
+
 ## Два чата одновременно — что чьё
 
 Курсы в базе разные, поэтому в Supabase чаты друг другу не мешают. Мешают они
