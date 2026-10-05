@@ -29,21 +29,15 @@ PAD = 0.02          # поле вокруг предмета, доля стор�
 WHITE = 244         # ниже этого предмет, выше — фон листа
 MIN_PART = 0.004    # область меньше 0.4% ячейки — мусор, не предмет
 
-# лист: (номер листа, юнит, строк, колонок, имена ячеек слева направо сверху вниз)
-# None вместо имени — ячейку пропустить (пустая клетка листа).
+# Таблица листов живёт в tools/gg1_sheets.py — там же промпты, порядок ячеек
+# общий. Здесь: (номер, юнит, строк, колонок, имена ячеек слева направо сверху
+# вниз); None вместо имени — ячейку пропустить.
 # Файл листа ищется в --src по номеру: «Л0.1.png», «L0.1.webp», «0.1.jpg» —
 # Анна подписывает присланные картинки номером листа.
-SHEETS = [
-    # --- UNIT 0 · GET STARTED! ---
-    ("Л0.1", "u0", 3, 3, ["obj_book", "obj_coloured_pencil", "obj_notebook",
-                          "obj_pen", "obj_pencil", "obj_pencil_case",
-                          "obj_sharpener", "obj_rubber", "obj_ruler"]),
-    ("Л0.2", "u0", 3, 3, ["obj_scissors", "obj_sandwich", "obj_bag",
-                          "obj_bin", "obj_board", "obj_chair",
-                          "obj_clock", "obj_desk", "obj_apple"]),
-    ("Л0.3", "u0", 2, 3, ["col_red_pen", "col_blue_bag", "col_yellow_ruler",
-                          "col_green_notebook", "col_pink_pencil_case", "col_orange_bag"]),
-]
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from gg1_sheets import SHEETS as _SHEETS
+SHEETS = [(sid, unit, rows, cols, [key for key, _ in cells])
+          for sid, unit, rows, cols, _reg, _title, _note, cells in _SHEETS]
 
 
 def sheet_file(src, sid):
