@@ -9,6 +9,7 @@
 
   python3 tools/gg1_sheets.py            пересобрать docs/GG1_листы_промптов.md
   python3 tools/gg1_sheets.py --check    только проверить (дубли ключей, размер сетки)
+  python3 tools/gg1_sheets.py --html F   ещё и страница с кнопками «скопировать» (артефакт)
 
 Ключ None — ячейка в нарезку не идёт. Картинка, которая уже есть в другом
 юните, второй раз не рисуется — блок ссылается на неё по старому ключу.
@@ -626,9 +627,137 @@ def render():
     return "\n".join(out)
 
 
+
+UNIT_TITLES = {"u0": "Unit 0", "u1": "Unit 1", "u2": "Unit 2", "u3": "Unit 3", "u4": "Unit 4",
+               "u5": "Unit 5", "u6": "Unit 6", "u7": "Unit 7", "u8": "Unit 8", "final": "Final Test"}
+
+PAGE_CSS = """
+:root{
+  /* тетрадь в клетку: бумага, чернила, красное поле */
+  --paper:#F7F8F4; --card:#FFFFFF; --ink:#1D2A44; --muted:#5E6878; --line:#DDE2EA;
+  --accent:#2F5BD3; --accent-ink:#FFFFFF; --done:#2E8B57; --margin:#E2574C; --code:#F1F3F8;
+  --f-display:"Unbounded",system-ui,sans-serif; --f-body:"Golos Text",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#12161F; --card:#1A202C; --ink:#E6EAF2; --muted:#9AA4B5; --line:#2B3342;
+  --accent:#7EA2FF; --accent-ink:#0E1320; --done:#5CC28A; --margin:#F07A70; --code:#141A25; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#12161F; --card:#1A202C; --ink:#E6EAF2; --muted:#9AA4B5; --line:#2B3342;
+  --accent:#7EA2FF; --accent-ink:#0E1320; --done:#5CC28A; --margin:#F07A70; --code:#141A25; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--f-body);
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:24px 24px;background-attachment:fixed}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:28px 64px}
+header h1{font:600 clamp(24px,5vw,34px)/1.15 var(--f-display);margin:0 0 8px;text-wrap:balance}
+header p{margin:0 0 6px;color:var(--muted);max-width:65ch}
+.progress{margin:14px 0 0;font:500 13px var(--f-mono);color:var(--muted)}
+.bar{height:6px;background:var(--line);border-radius:3px;margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--done);width:0;transition:width .3s}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);
+  border-bottom:1px solid var(--line);margin:22px -16px 0;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px}
+nav a{font:500 13px var(--f-mono);color:var(--ink);text-decoration:none;border:1px solid var(--line);
+  background:var(--card);border-radius:999px;padding:4px 10px}
+nav a:hover,nav a:focus-visible{border-color:var(--accent);outline:none}
+nav a .n{color:var(--muted)}
+section{margin-top:34px}
+section h2{font:600 20px var(--f-display);margin:0 0 12px;scroll-margin-top:64px}
+.sheet{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--margin);
+  border-radius:8px;padding:14px 16px;margin-bottom:14px}
+.sheet.done{border-left-color:var(--done);opacity:.72}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px}
+.sid{font:700 18px var(--f-mono);color:var(--margin)}
+.sheet.done .sid{color:var(--done)}
+.title{font-weight:600;min-width:0}
+.meta{font:12px var(--f-mono);color:var(--muted);letter-spacing:.02em}
+.note{margin:8px 0 0;color:var(--muted);max-width:70ch}
+.new{font:600 11px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent-ink);
+  background:var(--accent);border-radius:4px;padding:1px 6px}
+pre{margin:10px 0 0;background:var(--code);border:1px solid var(--line);border-radius:6px;padding:10px 12px;
+  font:12.5px/1.5 var(--f-mono);white-space:pre-wrap;word-break:break-word;max-height:220px;overflow:auto}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
+button{font:600 14px var(--f-body);border-radius:6px;padding:8px 14px;cursor:pointer;border:1px solid var(--accent)}
+.copy{background:var(--accent);color:var(--accent-ink)}
+.mark{background:transparent;color:var(--ink);border-color:var(--line)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.status{font:12px var(--f-mono);color:var(--done)}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+"""
+
+PAGE_JS = """
+const KEY='gg1_sheets_done';
+let done={}; try{done=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(done))}catch(e){}}
+function paint(){
+  const all=document.querySelectorAll('.sheet'); let n=0;
+  all.forEach(el=>{const on=!!done[el.dataset.id]; el.classList.toggle('done',on);
+    el.querySelector('.mark').textContent=on?'Сгенерирован ✓':'Отметить: сгенерирован'; if(on)n++;});
+  document.getElementById('cnt').textContent=n+' из '+all.length;
+  document.querySelector('.bar i').style.width=(100*n/all.length)+'%';
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b)return;
+  const card=b.closest('.sheet'); const id=card.dataset.id;
+  if(b.classList.contains('copy')){
+    const txt=card.querySelector('pre').textContent; const st=card.querySelector('.status');
+    const ok=()=>{st.textContent='Скопировано'; setTimeout(()=>st.textContent='',1800)};
+    const fallback=()=>{const r=document.createRange(); r.selectNodeContents(card.querySelector('pre'));
+      const s=getSelection(); s.removeAllRanges(); s.addRange(r); st.textContent='Выделено — нажмите Ctrl+C / ⌘C'};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok,fallback)}else fallback();
+  } else if(b.classList.contains('mark')){ done[id]=!done[id]; save(); paint(); }
+});
+paint();
+"""
+
+CHANGED = {"Л1.2", "Л2.3", "Л2.6", "Л4.1", "ЛФ.1"}
+
+
+def render_html():
+    import html as H
+    units = []
+    for sh in SHEETS:
+        if sh[1] not in units:
+            units.append(sh[1])
+    total = sum(len(sh[7]) for sh in SHEETS)
+    out = ['<title>Листы GG1</title>',
+           '<link rel="preconnect" href="https://fonts.googleapis.com">',
+           '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&family=JetBrains+Mono:wght@500;700&family=Unbounded:wght@600&display=swap">',
+           f'<style>{PAGE_CSS}</style>', '<div class="wrap"><header>',
+           '<h1>Go Getter 1 · листы картинок</h1>',
+           f'<p>{len(SHEETS)} листов, {total} картинок. Кнопка копирует промпт целиком — стиль, сетка и размер уже внутри.</p>',
+           '<p>Готовую картинку присылайте в чат с подписью номера листа: <b>Л0.1</b>, <b>Л2.3</b>, <b>ЛФ.1</b>…</p>',
+           '<div class="progress">Сгенерировано: <span id="cnt">0</span><div class="bar"><i></i></div></div>',
+           '</header><nav aria-label="Юниты">']
+    for u in units:
+        n = sum(1 for sh in SHEETS if sh[1] == u)
+        out.append(f'<a href="#{u}">{UNIT_TITLES[u]} <span class="n">{n}</span></a>')
+    out.append('</nav>')
+    for u in units:
+        out.append(f'<section><h2 id="{u}">{UNIT_TITLES[u]}</h2>')
+        for sh in SHEETS:
+            sid, unit, rows, cols, reg, title, note, cells = sh
+            if unit != u:
+                continue
+            kind = "сцена" if rows == cols == 1 else f"{len(cells)} карточек · сетка {cols}×{rows}"
+            new = '<span class="new">новый промпт</span>' if sid in CHANGED else ''
+            out.append(f'<article class="sheet" data-id="{H.escape(sid)}"><div class="head">'
+                       f'<span class="sid">{H.escape(sid)}</span><span class="title">{H.escape(title)}</span>'
+                       f'<span class="meta">{kind} · {REGISTER_RU[reg]}</span>{new}</div>')
+            if note:
+                out.append(f'<p class="note">{H.escape(note)}</p>')
+            out.append(f'<pre>{H.escape(prompt(sh))}</pre><div class="actions">'
+                       f'<button class="copy" type="button">Скопировать промпт</button>'
+                       f'<button class="mark" type="button">Отметить: сгенерирован</button>'
+                       f'<span class="status" aria-live="polite"></span></div></article>')
+        out.append('</section>')
+    out.append(f'</div><script>{PAGE_JS}</script>')
+    return "\n".join(out)
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--html", metavar="ФАЙЛ", help="ещё и страница с кнопками «скопировать»")
     args = ap.parse_args()
     errors = check()
     if errors:
@@ -641,6 +770,10 @@ def main():
     with open(DOC, "w", encoding="utf-8") as f:
         f.write(render())
     print("записан", os.path.relpath(DOC, ROOT))
+    if args.html:
+        with open(args.html, "w", encoding="utf-8") as f:
+            f.write(render_html())
+        print("страница:", args.html)
 
 
 if __name__ == "__main__":
