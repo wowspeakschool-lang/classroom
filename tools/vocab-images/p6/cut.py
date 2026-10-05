@@ -19,6 +19,9 @@ FILL = set()
 # белое, которое чистка кусков фона не трогает: облачка, снег, разметка, облака у края сцены
 KEEP_WHITE = {'preparation', 'response', 'roll', 'release a track', 'reverse', 'drag', 'crack',
               'ladder', 'wind power', 'solar power', 'impressive', 'surface', 'chimney'}
+# сцены, где фон застрял между фигурами и под ногами: чистим жёстче
+EXTRA = {'make an arrest', 'bravery', 'bench', 'powerful', 'controversial', 'carbon dioxide emissions',
+         'fossil fuel', 'talk (sb) into', 'rumour', 'frame'}
 HOLES = {'rub your eyes', 'useless', 'have the strength', 'make a promise', 'have an allergic reaction', 'swallow', 'bump', 'be bitten', 'clear up', 'fold', 'sort', 'sweep', 'wipe', 'water', 'put (sth) away', 'argument', 'arrangement', 'weakness', 'construct', 'knock over', 'terribly', 'embarrassment', 'fitness', 'friendliness'}
 
 # Листы, где генератор разложил картинки иначе, чем в промпте
@@ -215,6 +218,16 @@ def clean_png(p, peel=4, pale=212, grey=32, speck=0.004, pure=250):
         T = np.isin(labm, touch)
         dist = distance_transform_edt(~out)
         a[T & (((mn >= 245) & (mx - mn <= 10)) | ((mn >= 225) & (dist <= 6)))] = 0
+    if p.endswith(tuple(f'/{fname(w)}' for w in EXTRA)):
+        out = a <= 40
+        W = (~out) & (mn >= 244) & (mx - mn <= 10)
+        labw, nw = label(W); sz = np.bincount(labw.ravel())
+        a[np.isin(labw, [i for i in range(1, nw + 1) if sz[i] >= 60])] = 0
+        out = a <= 40
+        M = (~out) & (mn >= 232) & (mx - mn <= 14)
+        labm, _ = label(M)
+        touch = np.unique(labm[binary_dilation(out) & M]); touch = touch[touch > 0]
+        a[np.isin(labm, touch)] = 0
     lab, n = label(a > 40)
     if n > 1:
         sizes = np.bincount(lab.ravel()); sizes[0] = 0
