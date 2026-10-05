@@ -13,11 +13,15 @@
 
 ## Правила (те же, что у SM3 — см. `docs/SM3_листы_промптов.md`)
 
-1. **Людей нет нигде** — ни детей, ни рук, ни лиц, ни силуэтов.
+1. **Люди — только на листах с персонажами** (регистры «персонажи» и «сцены с
+   персонажами»): стилизованные 3D-мультяшные, не фото. Решение Анны 05.10.2026 —
+   для GG1 «генерируем что нужно, делаем красиво»; правило SM3 «без людей» здесь
+   снято. На остальных листах людей нет, и это прописано в промпте.
 2. **Не больше 3 колонок** — иначе ячейка мельче 512 px и мылит при нарезке.
 3. **Никаких узнаваемых товаров** — `generic design, not resembling any real product`.
 4. **Один стилевой регистр на лист**: предметы — реалистичный 3D, животные и
-   символы действий — мультяшный глянец, комнаты и места — полу-мультяшные сцены.
+   символы действий — мультяшный глянец, комнаты и места — полу-мультяшные сцены,
+   люди — 3D-мультяшные персонажи.
 
 ## Чего не генерируем
 
@@ -29,15 +33,17 @@
 | Обучающие карточки методиста, картинки учебника | вырезаются из PDF выгрузки (`tools/gg1_pdf_frames.py`) |
 | Фото без людей из выгрузки (Лондон, Париж, библиотека, парк) | из PDF выгрузки |
 | Приветствия, похвалы, прощания | `media/shared/`; Микки, Минни, Шрек, Чип и Дейл, Мистер Бин из выгрузки не берём |
+| Мультяшные иллюстрации учебника с людьми (Kit & Dug, Oliver и Sarah, девочка с метками частей тела…) | из PDF выгрузки — на них уже стоят ответы и координаты |
 | Вещь, которая уже нарисована в другом юните | берётся по старому ключу (ручка из Л0.1, кроссовки из Л2.2, животные Unit 7 в финальном тесте…) |
 
-## 🟥 Ждут решения Анны — листов пока нет
+## Что изменилось после первой версии (05.10.2026)
 
-* **Unit 1 · семья** (mum, dad, granny, cousin…) — это люди.
-* **Unit 4 · части тела, лицо, волосы** — то же.
+Людей теперь рисуем, поэтому переделаны листы, которые обходили людей предметами:
+**Л1.2, Л2.3, Л2.6, Л4.1, ЛФ.1** — промпты новые. Добавлены листы с людьми:
+**Л1.3–Л1.6, Л3.5, Л4.3–Л4.6, Л5.6, Л6.4, ЛФ.3**. Остальные листы не менялись.
 
 
-**Всего листов: 36, картинок: 247.**
+**Всего листов: 48, картинок: 305.**
 
 
 ---
@@ -75,7 +81,7 @@ Output size: 2048 x 1365 px, each cell at least 650 px.
 
 ---
 
-# UNIT 1 — листов: 2
+# UNIT 1 — листов: 6
 
 ### Л1.1 · Места — 6 карт. (3×2), сцены, полу-мультяшный 3D
 Где ты? — at a party, at school, in the garden, in the park, at home, in the library.
@@ -87,14 +93,50 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded shapes, vivid saturat
 Output size: 2048 x 1365 px, each cell at least 650 px.
 ```
 
-### Л1.2 · Сцены к заданиям Unit 1 — 6 карт. (3×2), сцены, полу-мультяшный 3D
-Вместо фото людей в Homework 6 и в тесте: что делают — показываем вещами.
+### Л1.2 · Кто где — Homework 6 и 7 — 6 карт. (3×2), сцены с персонажами
+Вместо фото людей. Ответы заданий держатся на деталях — их не менять.
 ```
 A sheet of 6 separate illustrations in a clean 3x2 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
-1) a sunny beach with two empty sun loungers, a striped umbrella and a suitcase beside them; 2) a sleepy dog curled up on a soft pillow in a dog bed, an alarm clock beside it; 3) a cosy armchair with an open laptop on it, a floor lamp and a window behind; 4) a sofa with two game controllers on it facing a TV with a colourful game picture; 5) a tablet lying on top of a packed suitcase covered with travel stickers; 6) a big coffee mug with a red heart on it and a small red superhero cape draped next to it.
-No people at all - no humans, no children, no hands, no faces, no silhouettes of people anywhere.
-Bright 3D-rendered cartoon style, Pixar-like, soft rounded shapes, vivid saturated colours, warm soft light, everything clearly visible and easy to recognise. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+1) two ten-year-old boys, best friends, laughing and playing a video game on a sofa; 2) a ten-year-old boy and his twelve-year-old cousin, a girl, on holiday on a sunny beach with palm trees, a suitcase beside them; 3) a smiling young woman holding a small white-and-red Polish flag; 4) a man sitting on the grass in a garden with a laptop, flower beds and an apple tree behind; 5) a smiling young woman waving a small American flag; 6) a group of happy schoolchildren sitting at desks in a bright classroom.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, warm soft light, everything clearly visible and easy to recognise. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
 Output size: 2048 x 1365 px, each cell at least 650 px.
+```
+
+### Л1.3 · Тест Unit 1 — 9 карт. (3×3), сцены с персонажами
+Картинки к «выбери слово» и «составь предложение» теста.
+```
+A sheet of 9 separate illustrations in a clean 3x3 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
+1) a man asleep in bed and a happy dog sleeping on the pillow next to him, an alarm clock on the bedside table; 2) a girl with a laptop sitting in a cosy armchair at home; 3) a birthday party: a girl called Anna receiving a wrapped present from a friend, balloons and a cake; 4) two friends in berets and striped tops waving a French flag; 5) a group of classmates having fun in a park, not at school; 6) two neighbours seen from behind relaxing on sun loungers on a beach; 7) a smiling dad wearing a red superhero cape, his child cheering beside him; 8) a girl of eleven and her younger brother in a park; 9) a boy called Robin reading a book in a library with tall bookshelves.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, warm soft light, everything clearly visible and easy to recognise. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+Output size: 2048 x 2048 px, each cell at least 650 px.
+```
+
+### Л1.4 · Семья — портреты — 9 карт. (3×3), персонажи, 3D-мультяшные, на белом
+Все девять — одна семья: похожи друг на друга, одинаковый стиль, каждый по пояс.
+```
+A sheet of 9 separate picture cards in a clean 3x3 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture on pure white, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
+1) the grandfather, an old man with grey hair and glasses; 2) the grandmother, an old woman with white hair in a red cardigan; 3) the father, a man of forty in a pink shirt; 4) the mother, a woman of forty in a yellow dress; 5) the uncle, a man with a beard in a green jumper; 6) the aunt, a woman with curly hair in a blue top; 7) the son, a boy of eight in a T-shirt; 8) the daughter, a girl of eleven with a ponytail; 9) the cousin, a boy of nine with glasses.
+All nine are members of ONE family and clearly look related; every character is shown waist-up, facing the viewer, in the same style and scale.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, soft even light from the top-left. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+Output size: 2048 x 2048 px, each cell at least 650 px.
+```
+
+### Л1.5 · Семья — вместе — 3 карт. (3×1), персонажи, 3D-мультяшные, на белом
+Те же люди, что на Л1.4: родители, бабушка с дедушкой, вся семья.
+```
+A sheet of 3 separate picture cards in a clean 3x1 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture on pure white, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
+1) the mother and the father standing together, smiling; 2) the grandmother and the grandfather standing together, smiling; 3) the whole family together: grandparents, parents, a son and a daughter.
+The same family as on the portrait sheet: the same faces, hair and clothes - grandfather with grey hair and glasses, grandmother with white hair in a red cardigan, father in a pink shirt, mother in a yellow dress, a girl of eleven with a ponytail, a boy of eight.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, soft even light from the top-left. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+Output size: 2048 x 1024 px, each cell at least 650 px.
+```
+
+### Л1.6 · Семья Салли на пикнике — сцена, сцены с персонажами
+Для задания «Где кто?»: люди стоят раздельно, чтобы на каждого можно было поставить метку.
+```
+One single scene filling the frame: a family picnic on the grass in a park, seven people clearly separated from each other: from left to right a grandfather, a grandmother in a red cardigan, a father in a pink shirt, a mother in a yellow dress, a girl of eleven called Sally in the middle, her little sister of five, and her brother of eight.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, warm soft light, everything clearly visible and easy to recognise. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+Output size: 2048 x 2048 px, each cell at least 650 px.
 ```
 
 
@@ -120,14 +162,13 @@ Realistic 3D render, soft studio lighting from the top-left, clean product-style
 Output size: 2048 x 2048 px, each cell at least 650 px.
 ```
 
-### Л2.3 · Топ и раскладки — 4 карт. (2×2), реалистичный 3D
-Раскладки — вместо мальчика и девочки в одежде («Her jacket is grey…»). Цвета в промпте важны: по ним задание.
+### Л2.3 · Люди Unit 2 — 6 карт. (3×2), персонажи, 3D-мультяшные, на белом
+Цвета одежды важны — по ним задания.
 ```
-A sheet of 4 separate picture cards in a clean 2x2 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture on pure white, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
-1) a sleeveless top; 2) a neat flat-lay outfit seen from above: a grey jacket, a pink jumper, blue jeans and brown boots; 3) a neat flat-lay outfit seen from above: a blue cap, a green hoodie, black trousers and white trainers; 4) a neat flat-lay seen from above: a cap, a mobile phone, a shirt, jeans, trainers and a skateboard.
-No people at all - no humans, no children, no hands, no faces, no silhouettes of people anywhere.
-Realistic 3D render, soft studio lighting from the top-left, clean product-style but friendly and colourful, generic design, not resembling any real product. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
-Output size: 2048 x 2048 px, each cell at least 650 px.
+A sheet of 6 separate picture cards in a clean 3x2 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture on pure white, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
+1) a girl in a grey jacket, a pink jumper, blue jeans and brown boots next to a boy in a blue cap, a green hoodie, black trousers and white shoes; 2) a boy standing with a skateboard, wearing a cap, a shirt, jeans and trainers, holding a mobile phone; 3) a friendly girl of ten holding a tennis racket and a book; 4) two young brothers giving each other a high five; 5) two girls, best friends, hugging and smiling; 6) a boy of thirteen with a red backpack, a cat peeking out of its pocket.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, soft even light from the top-left. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+Output size: 2048 x 1365 px, each cell at least 650 px.
 ```
 
 ### Л2.4 · Прилагательные и супер-рюкзак — 6 карт. (3×2), реалистичный 3D
@@ -150,10 +191,10 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded shapes, vivid saturat
 Output size: 2048 x 2048 px, each cell at least 650 px.
 ```
 
-### Л2.6 · Гаджеты — 6 карт. (3×2), реалистичный 3D
+### Л2.6 · Гаджеты и топ — 6 карт. (3×2), реалистичный 3D
 ```
 A sheet of 6 separate picture cards in a clean 3x2 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture on pure white, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
-1) a games console with a controller; 2) a smartphone; 3) a mountain bike; 4) an open laptop; 5) a skateboard; 6) a tablet.
+1) a games console with a controller; 2) a smartphone; 3) a mountain bike; 4) an open laptop; 5) a skateboard; 6) a sleeveless top.
 No people at all - no humans, no children, no hands, no faces, no silhouettes of people anywhere.
 Realistic 3D render, soft studio lighting from the top-left, clean product-style but friendly and colourful, generic design, not resembling any real product. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
 Output size: 2048 x 1365 px, each cell at least 650 px.
@@ -162,7 +203,7 @@ Output size: 2048 x 1365 px, each cell at least 650 px.
 
 ---
 
-# UNIT 3 — листов: 4
+# UNIT 3 — листов: 5
 
 ### Л3.1 · Комнаты — 6 карт. (3×2), сцены, полу-мультяшный 3D
 ```
@@ -201,17 +242,25 @@ Realistic 3D render, soft studio lighting from the top-left, clean product-style
 Output size: 2048 x 2048 px, each cell at least 650 px.
 ```
 
+### Л3.5 · Гости у двери — сцена, сцены с персонажами
+Вместо фото людей в Homework 7.
+```
+One single scene filling the frame: a boy opening the front door of a house to welcome two smiling guests, a hallway with stairs going up behind him.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, warm soft light, everything clearly visible and easy to recognise. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+Output size: 2048 x 2048 px, each cell at least 650 px.
+```
+
 
 ---
 
-# UNIT 4 — листов: 2
+# UNIT 4 — листов: 6
 
-### Л4.1 · Характер — зверята — 6 карт. (3×2), мультяшный глянец
+### Л4.1 · Характер — 6 карт. (3×2), персонажи, 3D-мультяшные, на белом
+clever, friendly, funny, helpful, nice, sporty — дети, по которым это видно.
 ```
 A sheet of 6 separate picture cards in a clean 3x2 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture on pure white, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
-1) an owl wearing glasses reading a book; 2) a happy puppy waving its paw; 3) a laughing monkey; 4) a hedgehog carrying an apple to share; 5) a kitten giving a flower; 6) a bunny in trainers holding a ball.
-No people at all - no humans, no children, no hands, no faces, no silhouettes of people anywhere.
-Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+1) a girl with glasses reading a big book, a lightbulb idea above her; 2) a smiling boy waving hello; 3) a boy making a funny face and laughing; 4) a girl carrying shopping bags for an old woman; 5) a girl hugging a puppy; 6) a boy in sports clothes holding a football.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, soft even light from the top-left. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
 Output size: 2048 x 1365 px, each cell at least 650 px.
 ```
 
@@ -225,10 +274,48 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded shapes, vivid saturat
 Output size: 2048 x 1024 px, each cell at least 650 px.
 ```
 
+### Л4.3 · Лицо — 6 карт. (3×2), персонажи, 3D-мультяшные, на белом
+Крупно одна часть лица мультяшного ребёнка, остальное мягко размыто.
+```
+A sheet of 6 separate picture cards in a clean 3x2 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture on pure white, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
+1) a close-up of a cartoon child's eyes; 2) a close-up of a cartoon child's nose; 3) a close-up of a cartoon child's smiling mouth; 4) a close-up of a cartoon child's ear; 5) a close-up of a cartoon child's big white smile showing teeth; 6) a cartoon child seen from behind with thick shiny hair.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, soft even light from the top-left. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+Output size: 2048 x 1365 px, each cell at least 650 px.
+```
+
+### Л4.4 · Тело — 9 карт. (3×3), персонажи, 3D-мультяшные, на белом
+Нужная часть тела у мультяшного ребёнка подсвечена мягким золотым свечением.
+```
+A sheet of 9 separate picture cards in a clean 3x3 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture on pure white, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
+1) a cartoon child with the head glowing softly; 2) a cartoon child with the neck glowing softly; 3) a cartoon child with one arm glowing softly; 4) a cartoon child's open hand; 5) a cartoon child's hand with the fingers spread; 6) a cartoon child with one leg glowing softly; 7) one bare cartoon child's foot; 8) two bare cartoon child's feet; 9) a cartoon child's bare foot with wiggling toes.
+It is the same cartoon child in every cell, in the same clothes: a T-shirt and shorts, barefoot.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, soft even light from the top-left. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+Output size: 2048 x 2048 px, each cell at least 650 px.
+```
+
+### Л4.5 · Волосы и тело целиком — 9 карт. (3×3), персонажи, 3D-мультяшные, на белом
+Портреты детей по плечи: у каждого свои волосы. Последняя — ребёнок в полный рост.
+```
+A sheet of 9 separate picture cards in a clean 3x3 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture on pure white, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
+1) a girl with red hair; 2) a boy with spiky hair; 3) a girl with wavy hair; 4) a boy with dark hair; 5) a girl with curly hair; 6) a girl with long straight hair; 7) a boy with blond hair; 8) a girl with fair light-brown hair; 9) a cartoon child standing in full height with arms slightly out.
+Every child is shown head and shoulders, facing the viewer, so the hair is clearly visible; the last cell shows a whole child.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, soft even light from the top-left. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+Output size: 2048 x 2048 px, each cell at least 650 px.
+```
+
+### Л4.6 · Сцены Unit 4 — 4 карт. (2×2), сцены с персонажами
+Клоун Бонзо — по тексту задания: детали лица важны.
+```
+A sheet of 4 separate illustrations in a clean 2x2 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
+1) a friendly clown with big ears, big brown eyes, a big red mouth, very white teeth, a red nose and grey curly hair; 2) a boy who has fallen on the playground and a girl helping him up and asking if he is OK; 3) a smiling grandmother with curly grey hair; 4) children at their desks in an English class, a teacher at the board.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, warm soft light, everything clearly visible and easy to recognise. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+Output size: 2048 x 2048 px, each cell at least 650 px.
+```
+
 
 ---
 
-# UNIT 5 — листов: 5
+# UNIT 5 — листов: 6
 
 ### Л5.1 · Глаголы 1 — 9 карт. (3×3), мультяшный глянец
 Действие без людей — предметом или животным.
@@ -277,10 +364,19 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 Output size: 2048 x 1365 px, each cell at least 650 px.
 ```
 
+### Л5.6 · Люди Unit 5 — 2 карт. (2×1), сцены с персонажами
+Вместо фото в Homework 5.
+```
+A sheet of 2 separate illustrations in a clean 2x1 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
+1) two women talking to each other in sign language with their hands; 2) a girl of twelve with her labrador dog wearing a 'hearing dog' vest without any text.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, warm soft light, everything clearly visible and easy to recognise. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+Output size: 2048 x 1024 px, each cell at least 650 px.
+```
+
 
 ---
 
-# UNIT 6 — листов: 3
+# UNIT 6 — листов: 4
 
 ### Л6.1 · Распорядок дня 1 — 9 карт. (3×3), мультяшный глянец
 Действие — предметом, без людей.
@@ -308,6 +404,15 @@ A sheet of 9 separate picture cards in a clean 3x3 grid, equal cells separated b
 No people at all - no humans, no children, no hands, no faces, no silhouettes of people anywhere.
 Realistic 3D render, soft studio lighting from the top-left, clean product-style but friendly and colourful, generic design, not resembling any real product. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
 Output size: 2048 x 2048 px, each cell at least 650 px.
+```
+
+### Л6.4 · Майк, Даша, Джен — 3 карт. (3×1), персонажи, 3D-мультяшные, на белом
+Портреты к текстам — вместо фото детей.
+```
+A sheet of 3 separate picture cards in a clean 3x1 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture on pure white, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
+1) Mike, an American boy of ten holding a basketball; 2) Dasha, a girl of nine in a ballet outfit; 3) Jen, a girl of eleven with a skateboard.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, soft even light from the top-left. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+Output size: 2048 x 1024 px, each cell at least 650 px.
 ```
 
 
@@ -406,16 +511,23 @@ Output size: 2048 x 1365 px, each cell at least 650 px.
 
 ---
 
-# FINAL TEST — листов: 2
+# FINAL TEST — листов: 3
 
-### ЛФ.1 · Гостиные к финальному тесту — 2 карт. (2×1), сцены, полу-мультяшный 3D
-Левая — для «диаграммы» (подписать вещи), правая — для чтения: кот под креслом, лампа на шкафу, напитки на столе, большое закрытое окно.
+### ЛФ.1 · Гостиная к финальному тесту — сцена, сцены, полу-мультяшный 3D
+Для «диаграммы»: подписать вещи в комнате.
 ```
-A sheet of 2 separate illustrations in a clean 2x1 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture, nothing crossing between cells, each subject centred with a generous empty margin on all sides, never touching the cell edges:
-1) a living room with two armchairs, a bookcase by the window, a rug, a small coffee table, a cabinet and pictures on the wall; 2) a living room with a cat under an armchair, a lamp on top of a cupboard, drinks on a table and a big closed window.
+One single scene filling the frame: a living room with two armchairs, a bookcase by the window, a rug, a small coffee table, a cabinet and pictures on the wall.
 No people at all - no humans, no children, no hands, no faces, no silhouettes of people anywhere.
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded shapes, vivid saturated colours, warm soft light, everything clearly visible and easy to recognise. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
-Output size: 2048 x 1024 px, each cell at least 650 px.
+Output size: 2048 x 2048 px, each cell at least 650 px.
+```
+
+### ЛФ.3 · Семья в гостиной — Reading Part 2 — сцена, сцены с персонажами
+Ответы задания держатся на деталях: мужчина с чёрными волосами и в очках, дети НЕ поют, женщина держит напитки, кот спит под креслом, лампа на книжном шкафу, два кресла, большое окно закрыто.
+```
+One single scene filling the frame: a family in a living room: a man with black hair and glasses sitting in one of two armchairs, two children playing a board game on the rug, a woman holding a tray of drinks, a cat sleeping under the other armchair, a lamp on top of a bookcase, a big closed window.
+Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, warm soft light, everything clearly visible and easy to recognise. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
+Output size: 2048 x 2048 px, each cell at least 650 px.
 ```
 
 ### ЛФ.2 · Вещи к финальному тесту — 6 карт. (3×2), реалистичный 3D

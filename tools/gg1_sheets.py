@@ -34,7 +34,18 @@ STYLE = {
              "colours, warm soft light, everything clearly visible and easy to recognise.",
 }
 
-REGISTER_RU = {"object": "реалистичный 3D", "cartoon": "мультяшный глянец", "scene": "сцены, полу-мультяшный 3D"}
+# Люди (решение Анны 05.10.2026: «генерируем что нужно, делаем красиво»):
+# стилизованные 3D-персонажи, не фото. Портреты — на белом, как карточки.
+STYLE["people"] = ("Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive "
+                   "faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated "
+                   "colours, soft even light from the top-left. " + WHITE_BG)
+STYLE["people_scene"] = ("Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive "
+                         "faces, stylised and clearly not photorealistic, soft rounded shapes, vivid "
+                         "saturated colours, warm soft light, everything clearly visible and easy to recognise.")
+PEOPLE = {"people", "people_scene"}
+
+REGISTER_RU = {"people": "персонажи, 3D-мультяшные, на белом", "people_scene": "сцены с персонажами",
+               "object": "реалистичный 3D", "cartoon": "мультяшный глянец", "scene": "сцены, полу-мультяшный 3D"}
 
 GRID_CARDS = ("A sheet of {n} separate {what} in a clean {cols}x{rows} grid, equal cells separated by "
               "thin light-grey gutters, each cell a complete standalone picture, nothing crossing "
@@ -97,14 +108,48 @@ SHEETS = [
         ("place_home", "a cosy family house from outside with a red roof, a front door and a little front garden"),
         ("place_library", "a library room with tall bookshelves full of books and an open book on a reading table"),
     ]),
-    ("Л1.2", "u1", 2, 3, "scene", "Сцены к заданиям Unit 1",
-     "Вместо фото людей в Homework 6 и в тесте: что делают — показываем вещами.", [
-        ("beach_loungers", "a sunny beach with two empty sun loungers, a striped umbrella and a suitcase beside them"),
-        ("dog_in_bed", "a sleepy dog curled up on a soft pillow in a dog bed, an alarm clock beside it"),
-        ("home_armchair_laptop", "a cosy armchair with an open laptop on it, a floor lamp and a window behind"),
-        ("game_console_sofa", "a sofa with two game controllers on it facing a TV with a colourful game picture"),
-        ("tablet_suitcase", "a tablet lying on top of a packed suitcase covered with travel stickers"),
-        ("superhero_mug", "a big coffee mug with a red heart on it and a small red superhero cape draped next to it"),
+    ("Л1.2", "u1", 2, 3, "people_scene", "Кто где — Homework 6 и 7",
+     "Вместо фото людей. Ответы заданий держатся на деталях — их не менять.", [
+        ("rob_victor_console", "two ten-year-old boys, best friends, laughing and playing a video game on a sofa"),
+        ("rob_mel_holiday", "a ten-year-old boy and his twelve-year-old cousin, a girl, on holiday on a sunny beach with palm trees, a suitcase beside them"),
+        ("she_poland", "a smiling young woman holding a small white-and-red Polish flag"),
+        ("he_garden", "a man sitting on the grass in a garden with a laptop, flower beds and an apple tree behind"),
+        ("she_american", "a smiling young woman waving a small American flag"),
+        ("they_school", "a group of happy schoolchildren sitting at desks in a bright classroom"),
+    ]),
+    ("Л1.3", "u1", 3, 3, "people_scene", "Тест Unit 1",
+     "Картинки к «выбери слово» и «составь предложение» теста.", [
+        ("t1_dog_best_friend", "a man asleep in bed and a happy dog sleeping on the pillow next to him, an alarm clock on the bedside table"),
+        ("t1_friend_home", "a girl with a laptop sitting in a cosy armchair at home"),
+        ("t1_birthday", "a birthday party: a girl called Anna receiving a wrapped present from a friend, balloons and a cake"),
+        ("t1_french_friends", "two friends in berets and striped tops waving a French flag"),
+        ("t1_classmates_park", "a group of classmates having fun in a park, not at school"),
+        ("t1_neighbours_beach", "two neighbours seen from behind relaxing on sun loungers on a beach"),
+        ("t1_super_dad", "a smiling dad wearing a red superhero cape, his child cheering beside him"),
+        ("t1_emma_park", "a girl of eleven and her younger brother in a park"),
+        ("t1_robin_library", "a boy called Robin reading a book in a library with tall bookshelves"),
+    ]),
+    ("Л1.4", "u1", 3, 3, "people", "Семья — портреты",
+     "Все девять — одна семья: похожи друг на друга, одинаковый стиль, каждый по пояс.", [
+        ("fam_grandfather", "the grandfather, an old man with grey hair and glasses"),
+        ("fam_grandmother", "the grandmother, an old woman with white hair in a red cardigan"),
+        ("fam_father", "the father, a man of forty in a pink shirt"),
+        ("fam_mother", "the mother, a woman of forty in a yellow dress"),
+        ("fam_uncle", "the uncle, a man with a beard in a green jumper"),
+        ("fam_aunt", "the aunt, a woman with curly hair in a blue top"),
+        ("fam_son", "the son, a boy of eight in a T-shirt"),
+        ("fam_daughter", "the daughter, a girl of eleven with a ponytail"),
+        ("fam_cousin", "the cousin, a boy of nine with glasses"),
+    ]),
+    ("Л1.5", "u1", 1, 3, "people", "Семья — вместе",
+     "Те же люди, что на Л1.4: родители, бабушка с дедушкой, вся семья.", [
+        ("fam_parents", "the mother and the father standing together, smiling"),
+        ("fam_grandparents", "the grandmother and the grandfather standing together, smiling"),
+        ("fam_family", "the whole family together: grandparents, parents, a son and a daughter"),
+    ]),
+    ("Л1.6", "u1", 1, 1, "people_scene", "Семья Салли на пикнике",
+     "Для задания «Где кто?»: люди стоят раздельно, чтобы на каждого можно было поставить метку.", [
+        ("scene_sally_family", "a family picnic on the grass in a park, seven people clearly separated from each other: from left to right a grandfather, a grandmother in a red cardigan, a father in a pink shirt, a mother in a yellow dress, a girl of eleven called Sally in the middle, her little sister of five, and her brother of eight"),
     ]),
 
     # ---------------- UNIT 2 ----------------
@@ -130,12 +175,14 @@ SHEETS = [
         ("clothes_shorts", "a pair of shorts"),
         ("clothes_trainers", "a pair of trainers"),
     ]),
-    ("Л2.3", "u2", 2, 2, "object", "Топ и раскладки",
-     "Раскладки — вместо мальчика и девочки в одежде («Her jacket is grey…»). Цвета в промпте важны: по ним задание.", [
-        ("clothes_top", "a sleeveless top"),
-        ("outfit_her", "a neat flat-lay outfit seen from above: a grey jacket, a pink jumper, blue jeans and brown boots"),
-        ("outfit_his", "a neat flat-lay outfit seen from above: a blue cap, a green hoodie, black trousers and white trainers"),
-        ("items_flatlay", "a neat flat-lay seen from above: a cap, a mobile phone, a shirt, jeans, trainers and a skateboard"),
+    ("Л2.3", "u2", 2, 3, "people", "Люди Unit 2",
+     "Цвета одежды важны — по ним задания.", [
+        ("kids_outfits", "a girl in a grey jacket, a pink jumper, blue jeans and brown boots next to a boy in a blue cap, a green hoodie, black trousers and white shoes"),
+        ("boy_skater", "a boy standing with a skateboard, wearing a cap, a shirt, jeans and trainers, holding a mobile phone"),
+        ("emma_new_girl", "a friendly girl of ten holding a tennis racket and a book"),
+        ("brothers_highfive", "two young brothers giving each other a high five"),
+        ("best_friends_girls", "two girls, best friends, hugging and smiling"),
+        ("jamie_super_backpack", "a boy of thirteen with a red backpack, a cat peeking out of its pocket"),
     ]),
     ("Л2.4", "u2", 2, 3, "object", "Прилагательные и супер-рюкзак",
      "Пары: big/small, long/short, new/old, cool/boring, too big.", [
@@ -153,13 +200,13 @@ SHEETS = [
         ("dem_that", "one small T-shirt far away at the end of a long empty room"),
         ("dem_those", "three small T-shirts far away at the end of a long empty room"),
     ]),
-    ("Л2.6", "u2", 2, 3, "object", "Гаджеты", None, [
+    ("Л2.6", "u2", 2, 3, "object", "Гаджеты и топ", None, [
         ("gadget_games_console", "a games console with a controller"),
         ("gadget_mobile_phone", "a smartphone"),
         ("gadget_mountain_bike", "a mountain bike"),
         ("gadget_laptop", "an open laptop"),
         ("gadget_skateboard", "a skateboard"),
-        ("gadget_tablet", "a tablet"),
+        ("clothes_top", "a sleeveless top"),
     ]),
 
     # ---------------- UNIT 3 ----------------
@@ -203,20 +250,64 @@ SHEETS = [
         ("phrase_shoes", "a pair of trainers on a doormat by a door"),
     ]),
 
+    ("Л3.5", "u3", 1, 1, "people_scene", "Гости у двери", "Вместо фото людей в Homework 7.", [
+        ("scene_guests_door", "a boy opening the front door of a house to welcome two smiling guests, a hallway with stairs going up behind him"),
+    ]),
+
     # ---------------- UNIT 4 ----------------
     # Части тела и волосы — ждём решения Анны.
-    ("Л4.1", "u4", 2, 3, "cartoon", "Характер — зверята", None, [
-        ("pers_clever", "an owl wearing glasses reading a book"),
-        ("pers_friendly", "a happy puppy waving its paw"),
-        ("pers_funny", "a laughing monkey"),
-        ("pers_helpful", "a hedgehog carrying an apple to share"),
-        ("pers_nice", "a kitten giving a flower"),
-        ("pers_sporty", "a bunny in trainers holding a ball"),
+    ("Л4.1", "u4", 2, 3, "people", "Характер",
+     "clever, friendly, funny, helpful, nice, sporty — дети, по которым это видно.", [
+        ("pers_clever", "a girl with glasses reading a big book, a lightbulb idea above her"),
+        ("pers_friendly", "a smiling boy waving hello"),
+        ("pers_funny", "a boy making a funny face and laughing"),
+        ("pers_helpful", "a girl carrying shopping bags for an old woman"),
+        ("pers_nice", "a girl hugging a puppy"),
+        ("pers_sporty", "a boy in sports clothes holding a football"),
     ]),
     ("Л4.2", "u4", 1, 2, "scene", "Сцены к Homework 3 и 4",
      "Два монстра — вместо кадра со Шреком.", [
         ("scene_two_monsters", "two friendly green cartoon monsters standing side by side, one tall and thin, one short and round"),
         ("scene_alarm_clock", "an alarm clock with plain tick marks, its hands at half past nine, on a bedside table next to a school backpack, morning light"),
+    ]),
+    ("Л4.3", "u4", 2, 3, "people", "Лицо",
+     "Крупно одна часть лица мультяшного ребёнка, остальное мягко размыто.", [
+        ("body_eyes", "a close-up of a cartoon child's eyes"),
+        ("body_nose", "a close-up of a cartoon child's nose"),
+        ("body_mouth", "a close-up of a cartoon child's smiling mouth"),
+        ("body_ears", "a close-up of a cartoon child's ear"),
+        ("body_teeth", "a close-up of a cartoon child's big white smile showing teeth"),
+        ("body_hair", "a cartoon child seen from behind with thick shiny hair"),
+    ]),
+    ("Л4.4", "u4", 3, 3, "people", "Тело",
+     "Нужная часть тела у мультяшного ребёнка подсвечена мягким золотым свечением.", [
+        ("body_head", "a cartoon child with the head glowing softly"),
+        ("body_neck", "a cartoon child with the neck glowing softly"),
+        ("body_arm", "a cartoon child with one arm glowing softly"),
+        ("body_hand", "a cartoon child's open hand"),
+        ("body_fingers", "a cartoon child's hand with the fingers spread"),
+        ("body_leg", "a cartoon child with one leg glowing softly"),
+        ("body_foot", "one bare cartoon child's foot"),
+        ("body_feet", "two bare cartoon child's feet"),
+        ("body_toes", "a cartoon child's bare foot with wiggling toes"),
+    ]),
+    ("Л4.5", "u4", 3, 3, "people", "Волосы и тело целиком",
+     "Портреты детей по плечи: у каждого свои волосы. Последняя — ребёнок в полный рост.", [
+        ("hair_red", "a girl with red hair"),
+        ("hair_spiky", "a boy with spiky hair"),
+        ("hair_wavy", "a girl with wavy hair"),
+        ("hair_dark", "a boy with dark hair"),
+        ("hair_curly", "a girl with curly hair"),
+        ("hair_straight", "a girl with long straight hair"),
+        ("hair_blond", "a boy with blond hair"),
+        ("hair_fair", "a girl with fair light-brown hair"),
+        ("body_body", "a cartoon child standing in full height with arms slightly out"),
+    ]),
+    ("Л4.6", "u4", 2, 2, "people_scene", "Сцены Unit 4", "Клоун Бонзо — по тексту задания: детали лица важны.", [
+        ("clown_bonzo", "a friendly clown with big ears, big brown eyes, a big red mouth, very white teeth, a red nose and grey curly hair"),
+        ("kids_hurt", "a boy who has fallen on the playground and a girl helping him up and asking if he is OK"),
+        ("granny_curly", "a smiling grandmother with curly grey hair"),
+        ("english_class", "children at their desks in an English class, a teacher at the board"),
     ]),
 
     # ---------------- UNIT 5 ----------------
@@ -268,6 +359,11 @@ SHEETS = [
         ("teddy_blue_eyes", "a teddy bear with new bright blue eyes"),
     ]),
 
+    ("Л5.6", "u5", 1, 2, "people_scene", "Люди Unit 5", "Вместо фото в Homework 5.", [
+        ("sign_language_friends", "two women talking to each other in sign language with their hands"),
+        ("jasmine_sweep", "a girl of twelve with her labrador dog wearing a 'hearing dog' vest without any text"),
+    ]),
+
     # ---------------- UNIT 6 ----------------
     ("Л6.1", "u6", 3, 3, "cartoon", "Распорядок дня 1", "Действие — предметом, без людей.", [
         ("da_get_up", "a ringing alarm clock on a bedside table next to an unmade bed, morning sun"),
@@ -301,6 +397,12 @@ SHEETS = [
         ("obj_computer_games", "a game controller in front of a monitor with a game"),
         ("obj_family_dinner", "a dinner table laid with four plates"),
         ("obj_ice_cream_chocolate", "a chocolate ice cream cone"),
+    ]),
+
+    ("Л6.4", "u6", 1, 3, "people", "Майк, Даша, Джен", "Портреты к текстам — вместо фото детей.", [
+        ("mike", "Mike, an American boy of ten holding a basketball"),
+        ("dasha", "Dasha, a girl of nine in a ballet outfit"),
+        ("jen", "Jen, a girl of eleven with a skateboard"),
     ]),
 
     # ---------------- UNIT 7 ----------------
@@ -390,10 +492,13 @@ SHEETS = [
     ]),
 
     # ---------------- FINAL TEST ----------------
-    ("ЛФ.1", "final", 1, 2, "scene", "Гостиные к финальному тесту",
-     "Левая — для «диаграммы» (подписать вещи), правая — для чтения: кот под креслом, лампа на шкафу, напитки на столе, большое закрытое окно.", [
+    ("ЛФ.1", "final", 1, 1, "scene", "Гостиная к финальному тесту",
+     "Для «диаграммы»: подписать вещи в комнате.", [
         ("final_living_room", "a living room with two armchairs, a bookcase by the window, a rug, a small coffee table, a cabinet and pictures on the wall"),
-        ("final_living_room_cat", "a living room with a cat under an armchair, a lamp on top of a cupboard, drinks on a table and a big closed window"),
+    ]),
+    ("ЛФ.3", "final", 1, 1, "people_scene", "Семья в гостиной — Reading Part 2",
+     "Ответы задания держатся на деталях: мужчина с чёрными волосами и в очках, дети НЕ поют, женщина держит напитки, кот спит под креслом, лампа на книжном шкафу, два кресла, большое окно закрыто.", [
+        ("final_family_room", "a family in a living room: a man with black hair and glasses sitting in one of two armchairs, two children playing a board game on the rug, a woman holding a tray of drinks, a cat sleeping under the other armchair, a lamp on top of a bookcase, a big closed window"),
     ]),
     ("ЛФ.2", "final", 2, 3, "object", "Вещи к финальному тесту", None, [
         ("final_grapes", "a bunch of grapes"),
@@ -406,6 +511,18 @@ SHEETS = [
 ]
 
 
+# Строка промпта сверх ячеек — там, где карточки одного листа должны сойтись
+# друг с другом (одна и та же семья на портретах и на общих снимках).
+EXTRA = {
+    "Л1.4": "All nine are members of ONE family and clearly look related; every character is shown waist-up, facing the viewer, in the same style and scale.",
+    "Л1.5": "The same family as on the portrait sheet: the same faces, hair and clothes - grandfather with grey hair and glasses, grandmother with white hair in a red cardigan, father in a pink shirt, mother in a yellow dress, a girl of eleven with a ponytail, a boy of eight.",
+    "Л4.4": "It is the same cartoon child in every cell, in the same clothes: a T-shirt and shorts, barefoot.",
+    "Л4.5": "Every child is shown head and shoulders, facing the viewer, so the hair is clearly visible; the last cell shows a whole child.",
+}
+
+SCENES = {"scene", "people_scene"}
+
+
 def prompt(sheet):
     sid, unit, rows, cols, reg, title, note, cells = sheet
     style = STYLE[reg]
@@ -413,13 +530,17 @@ def prompt(sheet):
         _, desc = cells[0]
         body = [f"One single scene filling the frame: {desc}."]
     else:
-        what = "illustrations" if reg == "scene" else "picture cards"
+        what = "illustrations" if reg in SCENES else "picture cards"
         head = GRID_CARDS.format(n=len(cells), what=what, rows=rows, cols=cols)
-        if reg != "scene":
+        if reg not in SCENES:
             head = head.replace("standalone picture,", "standalone picture on pure white,")
         items = "; ".join(f"{i}) {d}" for i, (_, d) in enumerate(cells, 1))
         body = [head, items + "."]
-    return "\n".join(body + [NO_PEOPLE, style + " " + NO_TEXT, size_line(rows, cols)])
+    if sid in EXTRA:
+        body.append(EXTRA[sid])
+    if reg not in PEOPLE:
+        body.append(NO_PEOPLE)
+    return "\n".join(body + [style + " " + NO_TEXT, size_line(rows, cols)])
 
 
 def check():
@@ -451,11 +572,15 @@ HEAD = """# Go Getter 1 — ЛИСТЫ ПРОМПТОВ НА КАРТИНКИ
 
 ## Правила (те же, что у SM3 — см. `docs/SM3_листы_промптов.md`)
 
-1. **Людей нет нигде** — ни детей, ни рук, ни лиц, ни силуэтов.
+1. **Люди — только на листах с персонажами** (регистры «персонажи» и «сцены с
+   персонажами»): стилизованные 3D-мультяшные, не фото. Решение Анны 05.10.2026 —
+   для GG1 «генерируем что нужно, делаем красиво»; правило SM3 «без людей» здесь
+   снято. На остальных листах людей нет, и это прописано в промпте.
 2. **Не больше 3 колонок** — иначе ячейка мельче 512 px и мылит при нарезке.
 3. **Никаких узнаваемых товаров** — `generic design, not resembling any real product`.
 4. **Один стилевой регистр на лист**: предметы — реалистичный 3D, животные и
-   символы действий — мультяшный глянец, комнаты и места — полу-мультяшные сцены.
+   символы действий — мультяшный глянец, комнаты и места — полу-мультяшные сцены,
+   люди — 3D-мультяшные персонажи.
 
 ## Чего не генерируем
 
@@ -467,12 +592,14 @@ HEAD = """# Go Getter 1 — ЛИСТЫ ПРОМПТОВ НА КАРТИНКИ
 | Обучающие карточки методиста, картинки учебника | вырезаются из PDF выгрузки (`tools/gg1_pdf_frames.py`) |
 | Фото без людей из выгрузки (Лондон, Париж, библиотека, парк) | из PDF выгрузки |
 | Приветствия, похвалы, прощания | `media/shared/`; Микки, Минни, Шрек, Чип и Дейл, Мистер Бин из выгрузки не берём |
+| Мультяшные иллюстрации учебника с людьми (Kit & Dug, Oliver и Sarah, девочка с метками частей тела…) | из PDF выгрузки — на них уже стоят ответы и координаты |
 | Вещь, которая уже нарисована в другом юните | берётся по старому ключу (ручка из Л0.1, кроссовки из Л2.2, животные Unit 7 в финальном тесте…) |
 
-## 🟥 Ждут решения Анны — листов пока нет
+## Что изменилось после первой версии (05.10.2026)
 
-* **Unit 1 · семья** (mum, dad, granny, cousin…) — это люди.
-* **Unit 4 · части тела, лицо, волосы** — то же.
+Людей теперь рисуем, поэтому переделаны листы, которые обходили людей предметами:
+**Л1.2, Л2.3, Л2.6, Л4.1, ЛФ.1** — промпты новые. Добавлены листы с людьми:
+**Л1.3–Л1.6, Л3.5, Л4.3–Л4.6, Л5.6, Л6.4, ЛФ.3**. Остальные листы не менялись.
 """
 
 
