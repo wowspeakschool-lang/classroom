@@ -136,7 +136,7 @@ Output size: 2048 x 1024 px, each cell at least 650 px.
 ```
 One single scene filling the frame: a family picnic on the grass in a park, seven people clearly separated from each other: from left to right a grandfather, a grandmother in a red cardigan, a father in a pink shirt, a mother in a yellow dress, a girl of eleven called Sally in the middle, her little sister of five, and her brother of eight.
 Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, warm soft light, everything clearly visible and easy to recognise. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
-Output size: 2048 x 2048 px, each cell at least 650 px.
+Output size: 2048 x 1365 px.
 ```
 
 
@@ -247,7 +247,7 @@ Output size: 2048 x 2048 px, each cell at least 650 px.
 ```
 One single scene filling the frame: a boy opening the front door of a house to welcome two smiling guests, a hallway with stairs going up behind him.
 Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, warm soft light, everything clearly visible and easy to recognise. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
-Output size: 2048 x 2048 px, each cell at least 650 px.
+Output size: 2048 x 1365 px.
 ```
 
 
@@ -519,7 +519,7 @@ Output size: 2048 x 1365 px, each cell at least 650 px.
 One single scene filling the frame: a living room with two armchairs, a bookcase by the window, a rug, a small coffee table, a cabinet and pictures on the wall.
 No people at all - no humans, no children, no hands, no faces, no silhouettes of people anywhere.
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded shapes, vivid saturated colours, warm soft light, everything clearly visible and easy to recognise. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
-Output size: 2048 x 2048 px, each cell at least 650 px.
+Output size: 2048 x 1365 px.
 ```
 
 ### ЛФ.3 · Семья в гостиной — Reading Part 2 — сцена, сцены с персонажами
@@ -527,7 +527,7 @@ Output size: 2048 x 2048 px, each cell at least 650 px.
 ```
 One single scene filling the frame: a family in a living room: a man with black hair and glasses sitting in one of two armchairs, two children playing a board game on the rug, a woman holding a tray of drinks, a cat sleeping under the other armchair, a lamp on top of a bookcase, a big closed window.
 Bright 3D-rendered cartoon style, Pixar-like friendly characters with expressive faces, stylised and clearly not photorealistic, soft rounded shapes, vivid saturated colours, warm soft light, everything clearly visible and easy to recognise. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
-Output size: 2048 x 2048 px, each cell at least 650 px.
+Output size: 2048 x 1365 px.
 ```
 
 ### ЛФ.2 · Вещи к финальному тесту — 6 карт. (3×2), реалистичный 3D

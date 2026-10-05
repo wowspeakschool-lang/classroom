@@ -55,6 +55,8 @@ GRID_CARDS = ("A sheet of {n} separate {what} in a clean {cols}x{rows} grid, equ
 
 
 def size_line(rows, cols):
+    if rows == cols == 1:
+        return "Output size: 2048 x 1365 px."
     if rows == cols:
         return "Output size: 2048 x 2048 px, each cell at least 650 px."
     if cols > rows:
