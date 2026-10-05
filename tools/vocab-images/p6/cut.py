@@ -18,7 +18,7 @@ FILL = set()
 # вырезать зажатый белый фон (не везде: белое внутри пузырей пропадало)
 # белое, которое чистка кусков фона не трогает: облачка, снег, разметка, облака у края сцены
 KEEP_WHITE = {'preparation', 'response', 'roll', 'release a track', 'reverse', 'drag', 'crack',
-              'ladder', 'wind power', 'solar power', 'impressive', 'surface'}
+              'ladder', 'wind power', 'solar power', 'impressive', 'surface', 'chimney'}
 HOLES = {'rub your eyes', 'useless', 'have the strength', 'make a promise', 'have an allergic reaction', 'swallow', 'bump', 'be bitten', 'clear up', 'fold', 'sort', 'sweep', 'wipe', 'water', 'put (sth) away', 'argument', 'arrangement', 'weakness', 'construct', 'knock over', 'terribly', 'embarrassment', 'fitness', 'friendliness'}
 
 # Листы, где генератор разложил картинки иначе, чем в промпте
