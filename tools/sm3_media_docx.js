@@ -131,6 +131,14 @@ const DATA = [
    'это предпоследний блок — «ДОПОЛНИТЕЛЬНОЕ ЗАДАНИЕ — ответь голосом»',
    'sm3_u9_hw7_b16'],
 ]],
+['Final Test', [
+  ['Фин. тест', 'аудио', 'Запись на 4:02 — к заданиям «имена людей» и «дни недели»',
+   'дальше «Послушай аудио и подпиши людей на картинке» (библиотека)',
+   'sm3_ft_b3'],
+  ['Фин. тест', 'аудио', 'Запись к заданию «выбери подходящую картинку» — 🟥 ответы мои, запись должна им соответствовать',
+   'дальше шесть вопросов: Which sport does John like? и так далее',
+   'sm3_ft_b6'],
+]],
 ];
 
 const ICON = { 'видео': '🎬 видео', 'аудио': '🔊 аудио' };
@@ -175,6 +183,14 @@ function table(rows, startNo) {
   });
 }
 
+// «41 файл», а не «41 файлов»
+function plural(n, one, few, many) {
+  const a = Math.abs(n) % 100, b = a % 10;
+  if (a > 10 && a < 20) return many;
+  if (b > 1 && b < 5) return few;
+  return b === 1 ? one : many;
+}
+
 const ALL = DATA.flatMap(([, rows]) => rows);
 const nVideo = ALL.filter(r => r[1] === 'видео').length;
 const nAudio = ALL.filter(r => r[1] === 'аудио').length;
@@ -183,12 +199,12 @@ const kids = [
   new Paragraph({ heading: HeadingLevel.HEADING_1,
     children: [new TextRun({ text: 'Super Minds 3 · что скачать со «Взнания» — аудио и видео', bold: true, size: 32 })] }),
   new Paragraph({ spacing: { after: 120 }, children: [new TextRun({
-    text: `Всего ${ALL.length} файлов: ${nVideo} видео и ${nAudio} аудио. Это всё, чего не было в выгрузке — `
+    text: `Всего ${ALL.length} ${plural(ALL.length, 'файл', 'файла', 'файлов')}: ${nVideo} видео и ${nAudio} аудио. Это всё, чего не было в выгрузке — `
         + 'в уроках под них уже стоят пустые блоки, номера не сдвинутся. Два файла '
         + '(№ 1 и № 4) пустого блока не имеют — их я прикреплю к соседнему заданию, '
         + 'в таблице это помечено.', size: 20 })] }),
   new Paragraph({ spacing: { after: 120 }, children: [new TextRun({
-    text: 'Куда класть: бакет classroom-media, папка sm3/u<номер юнита>/ — так же, как было у SM2. '
+    text: 'Куда класть: бакет classroom-media, папка sm3/u<номер юнита>/, у финального теста — sm3/ft/. '
         + 'Имя файла брать из последней колонки, не переименовывать: по нему я найду, в какой блок его вставить. '
         + 'Видео — .mp4, аудио — .mp3. Когда зальёте, напишите — я пропишу ссылки в блоки.', size: 20 })] }),
   new Paragraph({ spacing: { after: 240 }, children: [new TextRun({
@@ -204,8 +220,6 @@ for (const [unit, rows] of DATA) {
   no += rows.length;
 }
 
-kids.push(new Paragraph({ spacing: { before: 240 },
-  children: [new TextRun({ text: 'Final Test — в работе, строки допишу, когда он будет залит.', size: 20, italics: true })] }));
 
 const doc = new Document({
   sections: [{

@@ -199,3 +199,12 @@ too large»), а не просто возвращает ошибку. Помог
 отдаёт текстовый слой PDF, которого для структуры урока хватило. Остальные
 PDF юнита (1.5–4 МБ) скачиваются как обычно — ответ ложится файлом в
 `tool-results/`.
+
+## Final Test — папка `1REKAMJPUXek1tKnQ7jY_UraULwv9igPp`
+
+| Файл | txt | pdf |
+|---|---|---|
+| Super Minds 3. Final test. | `1BdAsrJkQ7mWPotpGsh9Us-WWKhNk4_fc` | `1majqGYer_yGXWdAAf5ppAebLIt-uR_p3` |
+
+Один урок, в базе он лежит отдельным юнитом `Final Test` (sort_order 10) —
+так же, как сделан финальный тест SM2.

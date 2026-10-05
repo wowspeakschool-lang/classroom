@@ -6975,6 +6975,178 @@ LESSONS = {
             }),
         ],
     },
+    "ft_test": {
+        "unit": "ft",
+        "unit_title": "Final Test",
+        "unit_sort": 10,
+        "lesson_title": "Final Test",
+        "lesson_sort": 0,
+        "kind": "test",
+        # Итоговый тест. Приветствие, разделители LISTENING / READING & WRITING
+        # и прощание — как в финальном тесте SM2, в выгрузке их нет.
+        # Выгрузка держится на аудио (04:02 в первом «Медиафайле» и второе —
+        # к заданию с картинками), самих записей в ней нет. Поэтому ключ
+        # блоков 5 и 7 придуман мной: запись должна ему соответствовать.
+        # Картинки библиотеки, дома и текста про Джима вырезаны из PDF.
+        "blocks": [
+            ("text", {"html":
+                f'<p><img src="{img("ft", "scene_final_hall")}" alt="" '
+                'style="max-width:100%"></p>'
+                "<h2>Super Minds 3 · Final Test</h2>"
+                "<p>Это итоговый тест за весь курс. Не торопись, читай задания "
+                "внимательно — ты всё это уже знаешь!</p>"}),
+
+            ("text", {"html":
+                "<h3>LISTENING</h3>"
+                "<p>Послушай аудио и выполни два задания ниже.</p>"}),
+
+            ("video", {"title": "Аудио к заданиям «имена людей» и «дни недели»",
+                       "url": "", "provider": ""}),
+
+            # Точки расставлены по тем же людям, что и в выгрузке: порядок
+            # точек = порядок имён в её списке (1 Peter … 6 Sally), лишнее
+            # имя — Mary.
+            ("hotspot", {
+                "title": "Послушай аудио и подпиши людей на картинке",
+                "mode": "label",
+                "image": img("ft", "scene_library"),
+                "points": [
+                    {"x": 18, "y": 20, "text": "Peter", "audio_tts": "Peter"},
+                    {"x": 90, "y": 28, "text": "Paul",  "audio_tts": "Paul"},
+                    {"x": 42, "y": 39, "text": "Jane",  "audio_tts": "Jane"},
+                    {"x": 21, "y": 57, "text": "Fred",  "audio_tts": "Fred"},
+                    {"x": 60, "y": 57, "text": "Daisy", "audio_tts": "Daisy"},
+                    {"x": 74, "y": 86, "text": "Sally", "audio_tts": "Sally"},
+                ],
+                "extras": [{"text": "Mary", "audio_tts": "Mary"}],
+            }),
+
+            # Правая колонка в выгрузке пустая — занятия подставлены наши,
+            # по одной карточке на день. СОСТАВ МОЙ.
+            ("match", {
+                "title": "Послушай аудио и соедини дни недели и занятия",
+                "pairs": [
+                    {"left": "Monday",    "right_image": img("ft", "act_swimming"),
+                     "right": "go swimming"},
+                    {"left": "Tuesday",   "right_image": img("ft", "act_football"),
+                     "right": "play football"},
+                    {"left": "Wednesday", "right_image": img("ft", "act_guitar"),
+                     "right": "play the guitar"},
+                    {"left": "Thursday",  "right_image": img("ft", "act_shopping"),
+                     "right": "go shopping"},
+                    {"left": "Friday",    "right_image": img("ft", "act_cycling"),
+                     "right": "ride a bike"},
+                    {"left": "Saturday",  "right_image": img("ft", "act_baking"),
+                     "right": "bake a cake"},
+                ],
+            }),
+
+            ("video", {"title": "Аудио к заданию «выбери подходящую картинку»",
+                       "url": "", "provider": ""}),
+
+            # Варианты в выгрузке пустые — подставлены наши карточки.
+            # Верный вариант выбран мной: СОСТАВ МОЙ, запись должна совпасть.
+            ("quiz", {
+                "title": "Послушай аудио и выбери подходящую картинку",
+                "questions": [
+                    {"q": "Which sport does John like?", "type": "single",
+                     "options": [{"image": img("ft", "opt_football")},
+                                 {"image": img("ft", "opt_tennis")},
+                                 {"image": img("ft", "opt_swimming")}],
+                     "correct": [1]},
+                    {"q": "How did Jack go to school yesterday?", "type": "single",
+                     "options": [{"image": img("ft", "opt_walking")},
+                                 {"image": img("ft", "opt_school_bus")},
+                                 {"image": img("ft", "opt_bicycle")}],
+                     "correct": [1]},
+                    {"q": "Where’s Vicky?", "type": "single",
+                     "options": [{"image": img("ft", "opt_kitchen")},
+                                 {"image": img("ft", "opt_bedroom")},
+                                 {"image": img("ft", "opt_garden")}],
+                     "correct": [2]},
+                    {"q": "How old is Jim?", "type": "single",
+                     "options": [{"image": img("ft", "cake_7")},
+                                 {"image": img("ft", "cake_9")},
+                                 {"image": img("ft", "cake_10")}],
+                     "correct": [1]},
+                    {"q": "What did Nick get for his birthday?", "type": "single",
+                     "options": [{"image": img("ft", "gift_bicycle")},
+                                 {"image": img("ft", "gift_puppy")},
+                                 {"image": img("ft", "gift_console")}],
+                     "correct": [1]},
+                    {"q": "What’s in the bowl?", "type": "single",
+                     "options": [{"image": img("ft", "bowl_fruit")},
+                                 {"image": img("ft", "bowl_soup")},
+                                 {"image": img("ft", "bowl_salad")}],
+                     "correct": [1]},
+                ],
+            }),
+
+            ("text", {"html": "<h3>READING &amp; WRITING</h3>"}),
+
+            # В выгрузке к семи словам был ещё неверный вариант «a supermarket».
+            # У нашего «перетащи слова» лишних слов в банке не бывает, поэтому
+            # он выброшен — карточка riddle_supermarket осталась без дела.
+            ("gaps", {
+                "title": "Прочитай предложения и заполни пропуски",
+                "mode": "drag",
+                "text":
+                    "1. You can eat this food in a sandwich. __cheese__\n"
+                    "2. This is a part of your body. All food and drinks go "
+                    "there first. __a stomach__\n"
+                    "3. You can have this brown drink hot or cold. Some people "
+                    "put milk in it. __coffee__\n"
+                    "4. People sit inside here and watch films. __a cinema__\n"
+                    "5. This animal is clever. It swims and jumps in the water. "
+                    "__a dolphin__\n"
+                    "6. We eat it for lunch, it is hot with vegetables and meat. "
+                    "__soup__\n"
+                    "7. You can use it to travel between floors in the building. "
+                    "__a lift__",
+                "gaps_expected": 7,
+            }),
+
+            ("truefalse", {
+                "title": "Посмотри на картинку и выбери «верно» или «неверно». "
+                         "hold — держать · scarf — шарф · curly — кудрявый · "
+                         "skip — прыгать на скакалке",
+                "image": img("ft", "scene_house"),
+                "statements": [
+                    {"text": "The woman in the garden is holding a kite.", "answer": True},
+                    {"text": "The window which is above the door is round.", "answer": True},
+                    {"text": "The boy with the scarf has curly hair.", "answer": True},
+                    {"text": "The man on the balcony is taller than the woman "
+                             "who is next to him.", "answer": False},
+                    {"text": "The girl who is wearing a red sweater is skipping.",
+                     "answer": True},
+                    {"text": "There are some birds on top of the house.", "answer": False},
+                ],
+            }),
+
+            ("text", {"html":
+                "<p>Прочитай текст и заполни пропуски в задании ниже. "
+                "<i>take off — снимать</i></p>"
+                f'<p><img src="{img("ft", "reading_jim_story")}" alt="" '
+                'style="max-width:100%"></p>'}),
+
+            ("gaps", {
+                "title": "Прочитай и впиши пропущенные слова",
+                "text":
+                    "1. Jim and his mother ate __a cake|some cake|cake__ in the "
+                    "kitchen.\n"
+                    "2. Jim’s father was in the __living room|the living room__.\n"
+                    "3. The clown __smiled__ at Jim.\n"
+                    "4. The clown was Jim’s __dad|father|Dad|daddy__.",
+                "gaps_expected": 4,
+            }),
+
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>Это конец итогового теста!</h3>"
+                "<p>Ты прошёл весь курс Super Minds 3 — это целый год работы. "
+                "Поздравляю!</p>"}),
+        ],
+    },
 }
 
 
