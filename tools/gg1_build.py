@@ -23,6 +23,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA = "@@MEDIA@@"
 MEDIA_URL = "https://classroom.wowteach.ru/media/"
 COURSE = "Go Getter 1"
+# Курса в базе ещё нет. Место в списке курсов — 4 (договорились с чатом GG2/GG3:
+# Wow Dragon сдвинуты на 7–8, GG2 — 5, GG3 — 6). Заводится один раз перед
+# первой заливкой, без сдвигов:
+#   insert into classroom_courses (slug, title, sort_order, is_published)
+#   values ('gg1', 'Go Getter 1', 4, false);
 
 
 def img(unit, name):
