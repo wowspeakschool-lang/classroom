@@ -1,0 +1,31 @@
+-- Go Getter 2 · Unit 7 · Travel · Homework 5
+-- собрано tools/gg2_build.py --lesson u7_hw5
+-- заливалось через execute_sql кусками (--setup, --clear, --chunks); этот файл — исходник
+insert into classroom_units (course_id, title, sort_order)
+select c.id, 'Unit 7 · Travel', 7 from classroom_courses c
+where c.slug = 'gg2'
+  and not exists (select 1 from classroom_units u where u.course_id = c.id and u.title = 'Unit 7 · Travel');
+insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)
+select u.id, 'Homework 5', 'homework', 60, false, 4
+from classroom_units u join classroom_courses c on c.id = u.course_id
+where c.slug = 'gg2' and u.title = 'Unit 7 · Travel'
+  and not exists (select 1 from classroom_lessons l where l.unit_id = u.id and l.title = 'Homework 5');
+update classroom_lessons l set kind = 'homework', pass_threshold = 60, sort_order = 4
+from classroom_units u join classroom_courses c on c.id = u.course_id
+where l.unit_id = u.id and c.slug = 'gg2' and u.title = 'Unit 7 · Travel' and l.title = 'Homework 5';
+select l.id, l.kind, l.pass_threshold, l.is_published from classroom_lessons l
+join classroom_units u on u.id = l.unit_id join classroom_courses c on c.id = u.course_id
+where c.slug = 'gg2' and u.title = 'Unit 7 · Travel' and l.title = 'Homework 5';
+
+-- затем: delete блоков урока (CTE) и вставка:
+-- кусок 1
+insert into classroom_blocks (lesson_id, type, payload, sort_order) values
+('<lesson_id>', 'text', replace($blk${"html": "<p><img src=\"@@MEDIA@@shared/hello_wave.webp\" alt=\"\" style=\"height:200px\"></p><h2>Привет-привет! 👋</h2><p>Очень здорово, что ты снова решил сделать домашнюю работу. Сегодня мы будем много читать, но тебе понравится 😎 Ну что, начинаем!</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 0),
+('<lesson_id>', 'text', replace($blk${"html": "<p>Любишь ли ты путешествовать? Какие города и страны ты уже посетил? Сегодня мы прочитаем историю про Эдмунда Хиллари. Он часто путешествовал из-за своей работы. Как думаешь, куда он отправился на этот раз?</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 1),
+('<lesson_id>', 'text', replace($blk${"html": "<h3>Edmund Hillary 🏔️</h3><p><img src=\"@@MEDIA@@gg2/u7/everest.webp\" alt=\"\" style=\"max-width:100%\"></p><p>In 1953, the <b>explorer</b> Edmund Hillary travelled to the Himalayan Mountains with two climbing teams. He was on an <b>expedition</b> to climb the tallest mountain in the world – Mount Everest. The mountain was very <b>dangerous</b>. There was snow and ice, and it was very <b>cold</b>.</p><p>There were two teams for the climb to the top. The first team <b>tried</b>, but they didn't get there. Edmund Hillary and his guide Tenzing Norgay were the second <b>team</b>. They started to climb the mountain. Their backpacks were <b>heavy</b> – 14 kg! They had a <b>tent</b>, food and a camera with them.</p><p>On 29th May, Edmund Hillary and Tenzing Norgay <b>arrived</b> at the top of Mount Everest. Edmund <b>got</b> there first. Edmund took photos of Tenzing and the <b>tall</b> mountain, but he didn't want Tenzing to <b>take</b> a photo of him. So there isn't a photo of Edmund Hillary on the top of the world!</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 2),
+('<lesson_id>', 'quiz', replace($blk${"questions": [{"q": "How many people got to the top of Mount Everest on 29th May?", "type": "single", "options": [{"text": "four people"}, {"text": "two people"}, {"text": "eight people"}, {"text": "ten people"}], "correct": [1]}], "title": "Прочитай текст и ответь на вопрос"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 3),
+('<lesson_id>', 'text', replace($blk${"html": "<p>Молодец! Прочитай текст об экспедиции ещё раз.</p><p>Для каждого предложения выбери: правда (<b>True</b>), неправда (<b>False</b>) или <b>Not stated</b> — если по тексту этого определить нельзя.</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 4),
+('<lesson_id>', 'quiz', replace($blk${"questions": [{"q": "The expedition was in the Himalayan Mountains.", "type": "single", "options": [{"text": "True"}, {"text": "False"}, {"text": "Not stated"}], "correct": [0]}, {"q": "The weather wasn't cold.", "type": "single", "options": [{"text": "True"}, {"text": "False"}, {"text": "Not stated"}], "correct": [1]}, {"q": "There were three men on the first team.", "type": "single", "options": [{"text": "True"}, {"text": "False"}, {"text": "Not stated"}], "correct": [2]}, {"q": "The first team didn't get to the top.", "type": "single", "options": [{"text": "True"}, {"text": "False"}, {"text": "Not stated"}], "correct": [0]}, {"q": "Edmund Hillary got to the top before Tenzing Norgay.", "type": "single", "options": [{"text": "True"}, {"text": "False"}, {"text": "Not stated"}], "correct": [0]}, {"q": "They were very tired.", "type": "single", "options": [{"text": "True"}, {"text": "False"}, {"text": "Not stated"}], "correct": [2]}, {"q": "Tenzing didn't want Edmund to take his photo.", "type": "single", "options": [{"text": "True"}, {"text": "False"}, {"text": "Not stated"}], "correct": [1]}, {"q": "There isn't a photo of Edmund on the top of Mount Everest.", "type": "single", "options": [{"text": "True"}, {"text": "False"}, {"text": "Not stated"}], "correct": [0]}], "title": "True, False или Not stated?"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 5),
+('<lesson_id>', 'task', replace($blk${"title": "Ответь на вопросы ✍️", "html": "<p>Молодец! Осталось последнее задание. Прочитай текст ещё раз и письменно ответь на вопросы:</p><ol><li>When did this expedition happen?</li><li>What was the name of the mountain?</li><li>How many teams were there?</li><li>How heavy were the backpacks?</li><li>Who arrived at the top first?</li><li>Why isn't there a photo of Edmund at the top?</li></ol>", "needs_review": true}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 6),
+('<lesson_id>', 'text', replace($blk${"html": "<p><img src=\"@@MEDIA@@shared/well_done_trophy.webp\" alt=\"\" style=\"height:200px\"></p><h2>Ура! 🏆</h2><p>Ты справился с домашним заданием! Ты — мегакрутой ученик. Увидимся на занятии. Goodbye!</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 7)
+returning sort_order, type;

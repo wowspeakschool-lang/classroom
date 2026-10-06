@@ -1,0 +1,36 @@
+-- Go Getter 2 · Unit 3 · Technology · Homework 7
+-- собрано tools/gg2_build.py --lesson u3_hw7
+-- заливалось через execute_sql кусками (--setup, --clear, --chunks); этот файл — исходник
+insert into classroom_units (course_id, title, sort_order)
+select c.id, 'Unit 3 · Technology', 3 from classroom_courses c
+where c.slug = 'gg2'
+  and not exists (select 1 from classroom_units u where u.course_id = c.id and u.title = 'Unit 3 · Technology');
+insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)
+select u.id, 'Homework 7', 'homework', 60, false, 6
+from classroom_units u join classroom_courses c on c.id = u.course_id
+where c.slug = 'gg2' and u.title = 'Unit 3 · Technology'
+  and not exists (select 1 from classroom_lessons l where l.unit_id = u.id and l.title = 'Homework 7');
+update classroom_lessons l set kind = 'homework', pass_threshold = 60, sort_order = 6
+from classroom_units u join classroom_courses c on c.id = u.course_id
+where l.unit_id = u.id and c.slug = 'gg2' and u.title = 'Unit 3 · Technology' and l.title = 'Homework 7';
+select l.id, l.kind, l.pass_threshold, l.is_published from classroom_lessons l
+join classroom_units u on u.id = l.unit_id join classroom_courses c on c.id = u.course_id
+where c.slug = 'gg2' and u.title = 'Unit 3 · Technology' and l.title = 'Homework 7';
+
+-- затем: delete блоков урока (CTE) и вставка:
+-- кусок 1
+insert into classroom_blocks (lesson_id, type, payload, sort_order) values
+('<lesson_id>', 'text', replace($blk${"html": "<p><img src=\"@@MEDIA@@shared/hello_wave.webp\" alt=\"\" style=\"height:200px\"></p><h2>Привет! 👋</h2><p>Вот и подходит к концу наш юнит. Самое время повторить всё, что ты прошёл за это время. Давай начнём. Всё-всё получится 😎</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 0),
+('<lesson_id>', 'quiz', replace($blk${"questions": [{"q": "Выбери правильный ответ. Is there any paper in the ___?", "type": "single", "options": [{"text": "speakers"}, {"text": "printer"}], "correct": [1]}, {"q": "Turn on the ___ so I can see you.", "type": "single", "options": [{"text": "camera"}, {"text": "headphones"}], "correct": [0]}, {"q": "Let's watch a film on the ___.", "type": "single", "options": [{"text": "keyboard"}, {"text": "TV"}], "correct": [1]}, {"q": "I ___ Computer Studies. I always get 20/20 in the test.", "type": "single", "options": [{"text": "am good at"}, {"text": "worry about"}], "correct": [0]}, {"q": "Are you ___ this film? Don't watch it then!", "type": "single", "options": [{"text": "bad at"}, {"text": "scared of"}], "correct": [1]}, {"q": "I like your ___. The screen is very clear.", "type": "single", "options": [{"text": "tablet"}, {"text": "mouse"}], "correct": [0]}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 1),
+('<lesson_id>', 'exact_input', replace($blk${"items": [{"image": "@@MEDIA@@gg2/u3/book_dad_phone.webp", "prompt": "1. Dad's talking on the ___ with his brother.", "accept": ["phone"], "audio_tts": "Dad's talking on the phone with his brother."}, {"image": "@@MEDIA@@gg2/u3/book_text_hi.webp", "prompt": "2. How often do you ___ your friend?", "accept": ["text"], "audio_tts": "How often do you text your friend?"}, {"image": "@@MEDIA@@gg2/u3/book_boy_selfie.webp", "prompt": "3. Let's ___ a selfie.", "accept": ["take"], "audio_tts": "Let's take a selfie."}, {"image": "@@MEDIA@@gg2/u3/book_pets_site.webp", "prompt": "4. I sometimes ___ the Internet in the evening.", "accept": ["surf"], "audio_tts": "I sometimes surf the Internet in the evening."}, {"image": "@@MEDIA@@gg2/u3/book_video_chat.webp", "prompt": "5. We often chat ___ because we've got cameras on our computers.", "accept": ["online"], "audio_tts": "We often chat online because we've got cameras on our computers."}, {"image": "@@MEDIA@@gg2/u3/book_download_song.webp", "prompt": "6. I ___ songs to my phone.", "accept": ["download"], "audio_tts": "I download songs to my phone."}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 2),
+('<lesson_id>', 'order', replace($blk${"words": ["I", "am", "listening", "to", "my", "favourite", "song."], "sentence": "I am listening to my favourite song.", "audio_tts": "I am listening to my favourite song."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 3),
+('<lesson_id>', 'order', replace($blk${"words": ["He", "is", "sending", "an", "email."], "sentence": "He is sending an email.", "audio_tts": "He is sending an email."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 4),
+('<lesson_id>', 'order', replace($blk${"words": ["She", "is", "not", "doing", "her", "homework."], "sentence": "She is not doing her homework.", "audio_tts": "She is not doing her homework."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 5),
+('<lesson_id>', 'order', replace($blk${"words": ["We", "are", "wearing", "black", "trousers."], "sentence": "We are wearing black trousers.", "audio_tts": "We are wearing black trousers."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 6),
+('<lesson_id>', 'order', replace($blk${"words": ["They", "are", "not", "having", "lunch."], "sentence": "They are not having lunch.", "audio_tts": "They are not having lunch."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 7),
+('<lesson_id>', 'order', replace($blk${"words": ["I", "am", "running", "really", "fast."], "sentence": "I am running really fast.", "audio_tts": "I am running really fast."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 8),
+('<lesson_id>', 'text', replace($blk${"html": "<p>Самое время посмотреть видео. Ответь на вопросы: <i>Where is Sally? Where is Hana? What are they doing?</i></p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 9),
+('<lesson_id>', 'video', replace($blk${"title": "Посмотри видео: Where is Sally? Where is Hana? What are they doing?", "url": "", "provider": "file"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 10),
+('<lesson_id>', 'gaps', replace($blk${"title": "Посмотри видео ещё раз и заполни диалог", "mode": "type", "text": "Hana: Hello? Hello. __Can I speak__ to Sally, please?\nSally: Speaking.\nHana: Hi. This is Hana.\nSally: Hi, __Hana|Hannah__. What's up?\nHana: Kate is __sick|ill__.\nSally: That's __too bad__.\nHana: Um, __how about__ going to see her?\nSally: That's a __good idea__. What time shall we meet?\nHana: How about __at two__?\nSally: Sounds good. Let's meet at the __bus stop__.\nHana: Okay. __See you__ then.\nSally: __How are you__?\nKate: I'm okay now. I __can go__ to school on Monday.\nHana: Good!\nSally: Kate, here's an __apple pie__. I made it for you.\nKate: __Thanks|Thank you__. I like apple pie."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 11),
+('<lesson_id>', 'text', replace($blk${"html": "<p><img src=\"@@MEDIA@@shared/congrats_popper.webp\" alt=\"\" style=\"height:200px\"></p><h2>Молодец! Очень-очень отличная работа 👍</h2><p>Представляешь, ты прошёл целый юнит. Теперь ты знаешь всё про технологии, можешь говорить про действия, которые происходят сейчас, и разговаривать по телефону. Увидимся на занятии 😄</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 12)
+returning sort_order, type;

@@ -1,0 +1,39 @@
+-- Go Getter 2 · Unit 7 · Travel · Homework 2
+-- собрано tools/gg2_build.py --lesson u7_hw2
+-- заливалось через execute_sql кусками (--setup, --clear, --chunks); этот файл — исходник
+insert into classroom_units (course_id, title, sort_order)
+select c.id, 'Unit 7 · Travel', 7 from classroom_courses c
+where c.slug = 'gg2'
+  and not exists (select 1 from classroom_units u where u.course_id = c.id and u.title = 'Unit 7 · Travel');
+insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)
+select u.id, 'Homework 2', 'homework', 60, false, 1
+from classroom_units u join classroom_courses c on c.id = u.course_id
+where c.slug = 'gg2' and u.title = 'Unit 7 · Travel'
+  and not exists (select 1 from classroom_lessons l where l.unit_id = u.id and l.title = 'Homework 2');
+update classroom_lessons l set kind = 'homework', pass_threshold = 60, sort_order = 1
+from classroom_units u join classroom_courses c on c.id = u.course_id
+where l.unit_id = u.id and c.slug = 'gg2' and u.title = 'Unit 7 · Travel' and l.title = 'Homework 2';
+select l.id, l.kind, l.pass_threshold, l.is_published from classroom_lessons l
+join classroom_units u on u.id = l.unit_id join classroom_courses c on c.id = u.course_id
+where c.slug = 'gg2' and u.title = 'Unit 7 · Travel' and l.title = 'Homework 2';
+
+-- затем: delete блоков урока (CTE) и вставка:
+-- кусок 1
+insert into classroom_blocks (lesson_id, type, payload, sort_order) values
+('<lesson_id>', 'text', replace($blk${"html": "<p><img src=\"@@MEDIA@@shared/hello_wave.webp\" alt=\"\" style=\"height:200px\"></p><h2>Добро пожаловать! 👋</h2><p>Сегодня тебя ждёт много интересных упражнений! В конце — дополнительное задание. Если ты его сделаешь, получишь дополнительную звёздочку! ⭐</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 0),
+('<lesson_id>', 'text', replace($blk${"html": "<p>Для начала посмотри видео! Как думаешь, что на этот раз случилось с хомячком?</p><p><img src=\"@@MEDIA@@gg2/u7/book_hammy_rain.webp\" alt=\"\" style=\"max-width:100%\"></p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 1),
+('<lesson_id>', 'video', replace($blk${"title": "Посмотри видео: что случилось с Хэмми и друзьями? 🌧️", "url": "", "provider": "file"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 2),
+('<lesson_id>', 'quiz', replace($blk${"questions": [{"q": "The bus ___.", "type": "single", "options": [{"text": "come"}, {"text": "came"}], "correct": [1]}, {"q": "We ___ umbrellas.", "type": "single", "options": [{"text": "had"}, {"text": "has"}], "correct": [0]}, {"q": "We ___ to the cinema.", "type": "single", "options": [{"text": "goes"}, {"text": "went"}], "correct": [1]}], "title": "Посмотри видео и выбери правильный вариант"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 3),
+('<lesson_id>', 'sequence', replace($blk${"title": "Посмотри видео ещё раз и расставь предложения в том порядке, как они идут в рассказе", "items": [{"text": "How was the cinema last night?"}, {"text": "It is a long story."}, {"text": "The bus didn't come."}, {"text": "It started to rain."}, {"text": "We wanted to take a taxi."}, {"text": "We didn't go to the cinema."}, {"text": "We came home."}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 4),
+('<lesson_id>', 'text', replace($blk${"html": "<p>Отлично, ты посмотрел видео и выполнил задание! А теперь практика: расставь слова в правильном порядке.</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 5),
+('<lesson_id>', 'order', replace($blk${"words": ["Tim", "ate", "pizza", "at", "the", "pizzeria."], "sentence": "Tim ate pizza at the pizzeria.", "audio_tts": "Tim ate pizza at the pizzeria.", "image": "@@MEDIA@@gg2/u7/tim_pizza.webp"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 6),
+('<lesson_id>', 'order', replace($blk${"words": ["Dad", "drank", "coffee", "in", "the", "kitchen."], "sentence": "Dad drank coffee in the kitchen.", "audio_tts": "Dad drank coffee in the kitchen.", "image": "@@MEDIA@@gg2/u7/dad_coffee.webp"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 7),
+('<lesson_id>', 'order', replace($blk${"words": ["Tina", "wore", "a", "hat."], "sentence": "Tina wore a hat.", "audio_tts": "Tina wore a hat.", "image": "@@MEDIA@@gg2/u7/tina_hat.webp"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 8),
+('<lesson_id>', 'order', replace($blk${"words": ["Mum", "and", "Stan", "went", "to", "the", "supermarket."], "sentence": "Mum and Stan went to the supermarket.", "audio_tts": "Mum and Stan went to the supermarket.", "image": "@@MEDIA@@gg2/u7/mum_stan_shop.webp"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 9),
+('<lesson_id>', 'text', replace($blk${"html": "<p>Молодец! Ты справился с большей частью заданий. Давай ещё немного потренируемся! Сделай из утвердительных предложений отрицательные.</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 10),
+('<lesson_id>', 'quiz', replace($blk${"questions": [{"q": "Elena and Amy stayed at home. → Elena and Amy ___ at home.", "type": "single", "options": [{"text": "didn't stay"}, {"text": "stayed"}], "correct": [0]}, {"q": "The first night Elena slept well. → The first night Elena ___ well.", "type": "single", "options": [{"text": "sleepy"}, {"text": "didn't sleep"}], "correct": [1]}, {"q": "The spider went inside Elena's sleeping bag. → The spider ___ inside Elena's sleeping bag.", "type": "single", "options": [{"text": "didn't go"}, {"text": "gone"}], "correct": [0]}, {"q": "That evening they ate at a restaurant. → That evening they ___ at a restaurant.", "type": "single", "options": [{"text": "eat"}, {"text": "didn't eat"}], "correct": [1]}], "title": "Выбери отрицательную форму"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 11),
+('<lesson_id>', 'text', replace($blk${"html": "<p>А здесь — дополнительное задание для самых смелых! Посмотри, что Эми и Елена взяли с собой в путешествие.</p><p><img src=\"@@MEDIA@@gg2/u7/scene_suitcase.webp\" alt=\"\" style=\"max-width:100%\"></p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 12),
+('<lesson_id>', 'match', replace($blk${"title": "Соедини названия предметов с картинками", "pairs": [{"left_image": "@@MEDIA@@gg2/u7/guidebook.webp", "right": "guidebook", "right_audio_tts": "guidebook"}, {"left_image": "@@MEDIA@@gg2/u7/sun_hat.webp", "right": "hat", "right_audio_tts": "hat"}, {"left_image": "@@MEDIA@@gg2/u7/suitcase.webp", "right": "suitcase", "right_audio_tts": "suitcase"}, {"left_image": "@@MEDIA@@gg2/u7/socks.webp", "right": "socks", "right_audio_tts": "socks"}, {"left_image": "@@MEDIA@@gg2/u3/camera.webp", "right": "camera", "right_audio_tts": "camera"}, {"left_image": "@@MEDIA@@gg2/u7/passport.webp", "right": "passport", "right_audio_tts": "passport"}, {"left_image": "@@MEDIA@@gg2/u7/sunglasses.webp", "right": "sunglasses", "right_audio_tts": "sunglasses"}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 13),
+('<lesson_id>', 'task', replace($blk${"title": "Что вы берёте в путешествие? ✍️", "html": "<p>Мне очень интересно, что ты и твоя семья берёте с собой в путешествия! Напиши небольшой текст о том, какие вещи вы брали с собой, когда ездили отдыхать.</p><p><i>Например: I took a tent, a camera …</i></p><p>Не забудь прочитать свой текст учителю на уроке!</p>", "needs_review": true}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 14),
+('<lesson_id>', 'text', replace($blk${"html": "<p><img src=\"@@MEDIA@@shared/congrats_popper.webp\" alt=\"\" style=\"height:200px\"></p><h2>Поздравляю! 🎉</h2><p>Ты завершил домашнее задание, ты замечательный ученик! Увидимся на занятии!</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 15)
+returning sort_order, type;

@@ -8,7 +8,7 @@
   python3 tools/gg3_build.py --list
   python3 tools/gg3_build.py --lesson u1_test --setup | --clear ID | --chunks ID | --verify ID | --sql
 """
-import os, sys
+import json, os, re, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gg2_build as base  # noqa: E402
@@ -21,7 +21,18 @@ _check = base.check
 
 
 def check(lesson, errors):
-    _check(lesson, errors)
+    # В gg2_build.check регулярка ссылок записана r"[^\"'\\s)<]+": в сыром
+    # строковом литерале \\s — это обратная косая и буква «s», и ссылка
+    # обрывается на первой «s» (hang_washing → hang_wa). Его ошибки «нет файла»
+    # выкидываем и проверяем ссылки заново правильной регуляркой.
+    own = []
+    _check(lesson, own)
+    errors.extend(e for e in own if "нет файла media/" not in e)
+    for i, (btype, payload, _) in enumerate(base.blocks_of(lesson), start=1):
+        dump = json.dumps(payload, ensure_ascii=False)
+        for link in re.findall(r"@@MEDIA@@([^\"'\s)<\\]+)", dump):
+            if not os.path.exists(os.path.join(base.ROOT, "media", link)):
+                errors.append(f"блок {i} ({btype}): нет файла media/{link}")
     if lesson.get("kind") != "test":
         errors.append("в GG3 только тесты: kind должен быть 'test'")
 
