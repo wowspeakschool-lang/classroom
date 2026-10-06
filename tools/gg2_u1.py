@@ -465,7 +465,7 @@ LESSONS = {
             "<h2>Тест Unit 1 📝</h2><p>Пора проверить, как ты запомнил школьные предметы, принадлежности и "
             "Present Simple. Чтобы пройти тест, нужно набрать 90 баллов. Читай задания внимательно. Удачи!</p>"}),
         ("exact_input", {"title": "Напиши слова по-английски", "items": [
-            {"prompt": f"{i}. Напиши по-английски: {ru}", "image": img(U, f), "accept": [en, en.lower()],
+            {"prompt": f"{i}. Напиши по-английски: {ru}", "image": img(U, f), "accept": [en, en.lower() if en[0].isupper() else en.capitalize()],
              "audio_tts": en}
             for i, (en, ru, f) in enumerate([
                 ("calculator", "калькулятор", "calculator"), ("dictionary", "словарь", "dictionary"),

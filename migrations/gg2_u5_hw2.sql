@@ -1,0 +1,37 @@
+-- Go Getter 2 · Unit 5 · My town · Homework 2
+-- собрано tools/gg2_build.py --lesson u5_hw2
+-- заливалось через execute_sql кусками (--setup, --clear, --chunks); этот файл — исходник
+insert into classroom_units (course_id, title, sort_order)
+select c.id, 'Unit 5 · My town', 5 from classroom_courses c
+where c.slug = 'gg2'
+  and not exists (select 1 from classroom_units u where u.course_id = c.id and u.title = 'Unit 5 · My town');
+insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)
+select u.id, 'Homework 2', 'homework', 60, false, 1
+from classroom_units u join classroom_courses c on c.id = u.course_id
+where c.slug = 'gg2' and u.title = 'Unit 5 · My town'
+  and not exists (select 1 from classroom_lessons l where l.unit_id = u.id and l.title = 'Homework 2');
+update classroom_lessons l set kind = 'homework', pass_threshold = 60, sort_order = 1
+from classroom_units u join classroom_courses c on c.id = u.course_id
+where l.unit_id = u.id and c.slug = 'gg2' and u.title = 'Unit 5 · My town' and l.title = 'Homework 2';
+select l.id, l.kind, l.pass_threshold, l.is_published from classroom_lessons l
+join classroom_units u on u.id = l.unit_id join classroom_courses c on c.id = u.course_id
+where c.slug = 'gg2' and u.title = 'Unit 5 · My town' and l.title = 'Homework 2';
+
+-- затем: delete блоков урока (CTE) и вставка:
+-- кусок 1
+insert into classroom_blocks (lesson_id, type, payload, sort_order) values
+('<lesson_id>', 'text', replace($blk${"html": "<p><img src=\"@@MEDIA@@shared/hello_wave.webp\" alt=\"\" style=\"height:200px\"></p><h2>Добро пожаловать в домашнее задание!</h2><p>Сегодня мы закрепим знания, полученные на уроке. В конце тебя будет ждать дополнительное упражнение — для самых смелых и самых сильных учеников 💪</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 0),
+('<lesson_id>', 'video', replace($blk${"title": "Посмотри видео с урока и выполни задания ниже", "url": "", "provider": "file"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 1),
+('<lesson_id>', 'gaps', replace($blk${"title": "Заполни пропуски в диалоге", "mode": "drag", "text": "Elena: Where's Lucas? The film starts in five __minutes__.\nTom: He was OK this __morning__.\nLucas: Sorry I'm __late__. There weren't any buses.\nAmy: Never __mind__, Lucas. Let's go for a pizza now."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 2),
+('<lesson_id>', 'truefalse', replace($blk${"title": "Отметь, верны ли эти утверждения", "statements": [{"text": "Lucas was at school yesterday.", "correct": true}, {"text": "Lucas came on time to the cinema.", "correct": false}, {"text": "Lucas had a new bike.", "correct": false}, {"text": "Lucas's phone was out of battery.", "correct": true}, {"text": "They didn't go to the pizzeria.", "correct": true}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 3),
+('<lesson_id>', 'task', replace($blk${"title": "Ответь на вопросы", "needs_review": true, "html": "<ol><li>Why were Lucas's friends worried?</li><li>Why was Lucas late?</li><li>Where did they want to go after the cinema?</li></ol>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 4),
+('<lesson_id>', 'text', replace($blk${"html": "<h3>Вторая часть: видео про школьную поездку</h3><p>Макс и Хэмми рассказывают Анне о школьной поездке... Посмотри на картинку и попробуй угадать, чем они занимались.</p><p><img src=\"@@MEDIA@@gg2/u5/book_hammy_boat.webp\" alt=\"Хэмми в лодке\" style=\"max-width:100%\"></p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 5),
+('<lesson_id>', 'video', replace($blk${"title": "Посмотри видео и проверь, угадал ли ты. Повторяй реплики за ребятами, чтобы хорошенько запомнить правила", "url": "", "provider": "file"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 6),
+('<lesson_id>', 'sort', replace($blk${"title": "Посмотри видео ещё раз и распредели реплики: кто какие фразы сказал?", "groups": [{"name": "Max", "items": [{"text": "It was really hot!"}, {"text": "The sailing boats were fun!"}]}, {"name": "Hammy", "items": [{"text": "The sailing boats weren't fun."}, {"text": "And it wasn't hot."}, {"text": "It was cold!"}, {"text": "I was completely wet!"}]}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 7),
+('<lesson_id>', 'quiz', replace($blk${"title": "Потренируем грамматику: выбери правильный вариант", "questions": [{"q": "I ___ at the shops.", "type": "single", "options": [{"text": "was"}, {"text": "were"}], "correct": [0]}, {"q": "Mum and Dad ___ at work.", "type": "single", "options": [{"text": "was"}, {"text": "were"}], "correct": [1]}, {"q": "We ___ at school.", "type": "single", "options": [{"text": "were"}, {"text": "was"}], "correct": [0]}, {"q": "Sam ___ at home.", "type": "single", "options": [{"text": "weren't"}, {"text": "wasn't"}], "correct": [1]}, {"q": "My grandparents ___ at the theatre.", "type": "single", "options": [{"text": "weren't"}, {"text": "wasn't"}], "correct": [0]}, {"q": "Anna ___ at school yesterday.", "type": "single", "options": [{"text": "were"}, {"text": "was"}], "correct": [1]}, {"q": "There ___ some people at the bank.", "type": "single", "options": [{"text": "was"}, {"text": "were"}], "correct": [1]}, {"q": "These shoes ___ expensive.", "type": "single", "options": [{"text": "wasn't"}, {"text": "weren't"}], "correct": [1]}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 8),
+('<lesson_id>', 'gaps', replace($blk${"title": "Задание посложнее: впиши was, wasn't, were или weren't", "mode": "type", "text": "Lucas: Tell me about the film. I was late. I __wasn't|wasn’t__ there, remember?\nTom: I remember! Amy and Elena __were__ worried about you.\nLucas: I know. Sorry!\nTom: Well, it __was__ a really good film. I'm sad you __weren't|weren’t__ there. The popcorn __was__ great, too.\nLucas: Oh no! I love popcorn."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 9),
+('<lesson_id>', 'text', replace($blk${"html": "<h3>Как говорить о времени в прошлом</h3><p>Посмотри на табличку — она поможет тебе в следующем задании.</p><p><b>LOOK!</b><br>yesterday<br><b>last</b> night / week / month / year<br><b>last</b> Monday / May<br><b>in</b> 2014</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 10),
+('<lesson_id>', 'gaps', replace($blk${"title": "Today is the 8th of February and it's Tuesday. Расставь слова к их эквивалентам", "mode": "drag", "text": "1. 7 February = __yesterday__\n2. 7 February at 8 p.m. = __last night__\n3. 8 January = __last month__\n4. 8 December = __last year__\n5. 5 February = __last Saturday__"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 11),
+('<lesson_id>', 'task', replace($blk${"title": "Дополнительное задание — для самых смелых! ⭐", "needs_review": true, "html": "<p>Ура, ты выполнил все основные задания! Составь и запиши несколько предложений о том, где ты был или не был на прошлой неделе.</p><p><i>Например: I was at the cinema last Monday. I wasn't at school last Sunday.</i></p><p>Удачи, ты обязательно справишься!</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 12),
+('<lesson_id>', 'text', replace($blk${"html": "<p><img src=\"@@MEDIA@@shared/well_done_clap.webp\" alt=\"\" style=\"height:180px\"></p><h3>Bye! 👋</h3><p>Ты отлично справился. До встречи на уроке!</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 13)
+returning sort_order, type;

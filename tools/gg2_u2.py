@@ -168,7 +168,7 @@ LESSONS = {
                           f'<p><img src="{img(U, "book_bake_perfect")}" alt="Hammy" '
                           'style="max-width:100%;max-height:320px"></p>'}),
         video("Посмотри видео: что готовят Анна, Макс и Хэмми? 🥞",
-              "видео: Анна, Макс и Хэмми пекут блины (Is there any…? / Are there any…?)"),
+              "Анна, Макс и Хэмми пекут блины (Is there any…? / Are there any…?)"),
         ("match", {"title": "Посмотри видео ещё раз и соедини вопросы и ответы", "pairs": [
             {"left": "Are there any eggs?", "right": "Yes, there are.", "right_audio_tts": "Yes, there are."},
             {"left": "Is there any cream?", "right": "There's some milk.",
@@ -278,7 +278,7 @@ LESSONS = {
             "audio": "",
             "audio_tts": "What would you like? ... Anything else? ... Would you like anything to drink? "
                          "... Great, thanks."}),
-             ("audio", "аудио: реплики официанта с паузами для ролевой игры — пусто; стоит audio_tts "
+             ("audio", "реплики официанта с паузами для ролевой игры — пусто; стоит audio_tts "
                        "реплик официанта без длинных пауз, при желании заменить записью")),
         ("speaking", {"title": "Твоя очередь 🎤", "needs_review": True,
                       "html": "<p>Молодец! Ещё раз посмотри на диалог выше. Теперь твоя очередь записывать! "
@@ -367,7 +367,7 @@ LESSONS = {
                                "<p>Это Пенни. Прослушай её диалог с папой и выполни задания под аудио.</p>"
                                + pic("penny_breakfast", "Penny and her dad"),
                        "audio": ""}),
-             ("audio", "аудио: диалог Пенни с папой о завтраке — пусто (без него задания про Пенни решаются "
+             ("audio", "диалог Пенни с папой о завтраке — пусто (без него задания про Пенни решаются "
                        "только по памяти)")),
         ("quiz", {"questions": [{
             "q": "Прослушай аудио и выбери, что Пенни будет на завтрак. Верных ответов несколько.",
@@ -549,7 +549,7 @@ LESSONS = {
                                "<p>Послушай рассказ Мии о покупках в супермаркете. Затем отметь, какие "
                                "предложения верные (True), а какие — неверные (False).</p>",
                        "audio": ""}),
-             ("audio", "аудио LISTENING: рассказ Мии о покупках в супермаркете — пусто; без него "
+             ("audio", "LISTENING: рассказ Мии о покупках в супермаркете — пусто; без него "
                        "следующий блок (верно/неверно) нерешаем")),
         ("truefalse", {"title": "True or False?", "statements": [
             {"text": "Mia is shopping with her dad.", "correct": False},

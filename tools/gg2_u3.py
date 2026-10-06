@@ -580,7 +580,7 @@ LESSONS = {
     # ------------------------------------------------------------------ TEST
     "u3_test": {**UNIT, "lesson_title": "Unit 3 Test", "lesson_sort": 7, "kind": "test", "blocks": [
         ("exact_input", {"items": [
-            {"prompt": f"Напиши по-английски: {ru}", "accept": acc, "audio_tts": acc[0]}
+            {"prompt": f"Напиши по-английски: {ru}", "accept": acc}  # без audio_tts: в тесте звук выдал бы ответ
             for ru, acc in [
                 ("общаться онлайн", ["chat online"]),
                 ("скачать песню", ["download a song"]),
