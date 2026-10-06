@@ -673,7 +673,7 @@ Homework 3: вместо игры Wordwall «types of music» (состав мо
 ```
 A sheet of 6 separate picture cards arranged in a clean grid of three columns and two rows, equal cells separated by wide empty pure-white gaps, no lines and no frames between the cells. Every item is complete and centred in its cell with a generous empty margin, not touching any other item or the edge of the sheet, nothing crossing between cells.
 Row 1, left to right: an electric guitar and an amplifier; a sparkly microphone with little stars; a violin with sheet music.
-Row 2, left to right: a boombox, a cap and headphones; a saxophone; a banjo and a cowboy hat.
+Row 2, left to right: one boombox with a baseball cap lying on top of it, both together as one single object; a shiny golden saxophone; a banjo and a cowboy hat.
 No people at all - no humans, no children, no hands, no faces, no silhouettes of people anywhere.
 Realistic 3D render, soft studio lighting from the top-left, clean product-style but friendly and colourful, generic design, not resembling any real product. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
 Output size: 2048 x 1365 px, each cell at least 600 px.
