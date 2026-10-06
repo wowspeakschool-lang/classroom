@@ -1,8 +1,138 @@
 # Go Getter 2 и тесты Go Getter 3 — доработать руками
 
-Единственный чеклист методиста по GG2 и GG3. Пока курс не залит, здесь
-собираются решения и открытые вопросы. Таблица «Что нужно от вас — весь
-список» появится вместе с заливкой.
+Единственный чеклист методиста по GG2 и GG3. Номер блока — **как в
+редакторе** (с 1). Имя файла в последнем столбце — как назвать запись, чтобы
+не перепутать.
+
+## Что нужно от вас — весь список
+
+Залито 06.10.2026: GG2 — 62 урока (8 юнитов по 6–7 домашек + тест, Unit 0,
+Final Test), 812 блоков; GG3 — 9 тестов (kind = test, порог 90), 94 блока.
+Всё `is_published = false`.
+
+1. **Видео и аудио** — 27 видео и 24 аудио, блоки созданы пустыми, список ниже
+   (🎬 / 🔊). У GG3 Final Test блок 2 помечен «видео», но там нужен
+   звук Listening.
+2. **«Озвучить пачкой»** в каждом уроке — карточки, сопоставления и
+   «составь предложение» размечены `*_tts`, звук не синтезирован.
+3. **Пересобранные игры Wordwall / Educaplay — 9 шт.** (🎲, «СОСТАВ МОЙ»):
+   содержимого в выгрузке нет, состав придуман по материалу урока — просмотреть.
+4. **Проверить — 34 места** (👀): спорные ключи, исправленные опечатки,
+   задания, собранные заново.
+5. **Названия юнитов** придуманы нами — поменяйте, если в программе другие:
+   GG2 — Get started! · School · Food · Technology · Our world · My town ·
+   Jobs · Travel · Celebrations; GG3 — Chores · Shopping · Holidays ·
+   Gadgets · Health · Cooking · Homes · The future.
+6. **Картинки появятся у учеников только после слияния ветки** `claude/gg2`
+   в ветку, с которой публикуется сайт (`media/gg2/`, `media/gg3/` — 9 МБ и
+   3 МБ). До этого в уроках будут пустые рамки. Туда же едет правка
+   `index.html`: инструкция над квизом, «впиши слово» и «составь
+   предложение» теперь видна ученику во всех курсах.
+7. **Публикация** — включить урокам `is_published`, когда всё выше сделано.
+
+### Go Getter 2
+
+| юнит | урок | блок | что | имя файла |
+|---|---|---|---|---|
+| Unit 0 · Get started! | Unit 0 Test | 13 | 🔊 аудио: аудио «видеозвонок трёх подростков: Tom, Léa, Aylin» к следующему заданию | `gg2_u0_test_b13` |
+| Unit 1 · School | Homework 2 | 3 | 🎬 видео: видео «After school» (Anna, Max, Hammy) | `gg2_u1_hw2_b3` |
+| Unit 1 · School | Homework 3 | 3 | 🎬 видео: видео «free time / football» (Anna, Max, Hammy) | `gg2_u1_hw3_b3` |
+| Unit 1 · School | Homework 3 | 9 | 🎲 игра: СОСТАВ МОЙ: пересобрана игра Wordwall «Do or does? Do or play?» (cloze), https://wordwall.net/resource/58864826/do-or-does-do-or-play — содержимого в выгрузке нет | `gg2_u1_hw3_b9` |
+| Unit 1 · School | Homework 4 | 3 | 🎬 видео: видеоинтервью с Molly Greenberg (учитель из Нью-Йорка) | `gg2_u1_hw4_b3` |
+| Unit 1 · School | Homework 6 | 3 | 🔊 аудио: аудио: Mark рассказывает о своих предметах и расписании (без него следующие задания не решаются) | `gg2_u1_hw6_b3` |
+| Unit 1 · School | Unit 1 Test | 12 | 👀 проверить: утв. 6 — ключ «False» вместо «Не указано» (правка принята); утв. 4 оставлено «Not stated», утв. 7 «True» — как в выгрузке | `gg2_u1_test_b12` |
+| Unit 1 · School | Unit 1 Test | 13 | 🔊 аудио: аудио «Sophia's Tuesday» — вставить в поле аудио этого блока | `gg2_u1_test_b13` |
+| Unit 2 · Food | Homework 1 | 2 | 👀 проверить: chips переведено «картошка фри» (в выгрузке «чипсы»): в британском chips — картофель фри, и картинка, и fish and chips в HW5 про него | `gg2_u2_hw1_b2` |
+| Unit 2 · Food | Homework 2 | 7 | 🎬 видео: Анна, Макс и Хэмми пекут блины (Is there any…? / Are there any…?) | `gg2_u2_hw2_b7` |
+| Unit 2 · Food | Homework 4 | 3 | 🔊 аудио: реплики официанта с паузами для ролевой игры — пусто; стоит audio_tts реплик официанта без длинных пауз, при желании заменить записью | `gg2_u2_hw4_b3` |
+| Unit 2 · Food | Homework 6 | 2 | 🔊 аудио: диалог Пенни с папой о завтраке — пусто (без него задания про Пенни решаются только по памяти) | `gg2_u2_hw6_b2` |
+| Unit 2 · Food | Homework 7 | 4 | 🎲 игра: СОСТАВ МОЙ: пересобрана игра Wordwall «Complete the sentence: A/an-some-any» (https://wordwall.net/resource/762927/a-an-some-any) — 8 предложений на a/an/some/any | `gg2_u2_hw7_b4` |
+| Unit 2 · Food | Unit 2 Test | 12 | 🔊 аудио: LISTENING: рассказ Мии о покупках в супермаркете — пусто; без него следующий блок (верно/неверно) нерешаем | `gg2_u2_test_b12` |
+| Unit 3 · Technology | Homework 2 | 3 | 🎬 видео: видео на Present Continuous, в нём есть супергерой | `gg2_u3_hw2_b3` |
+| Unit 3 · Technology | Homework 2 | 4 | 👀 проверить: в выгрузке левые картинки (персонажи видео) пустые — поставлены наши зверята: кот сидит, лисичка бежит, зверята едят, зверята читают | `gg2_u3_hw2_b4` |
+| Unit 3 · Technology | Homework 2 | 16 | 🔊 аудио: пример описания картинки (Present Continuous) к следующему заданию | `gg2_u3_hw2_b16` |
+| Unit 3 · Technology | Homework 3 | 3 | 🎬 видео: видео с вопросами в Present Continuous (ответы Yes/No) | `gg2_u3_hw3_b3` |
+| Unit 3 · Technology | Homework 3 | 20 | 🎲 игра: СОСТАВ МОЙ: пересобрана игра Educaplay «Froggy Jumps» (вопросы и краткие ответы Present Continuous) — в выгрузке содержимого нет | `gg2_u3_hw3_b20` |
+| Unit 3 · Technology | Homework 4 | 3 | 🎬 видео: видео: телефонный разговор Тони и Саманты | `gg2_u3_hw4_b3` |
+| Unit 3 · Technology | Homework 4 | 6 | 🔊 аудио: реплики Amy и Amy's Dad с паузами для ролевой игры | `gg2_u3_hw4_b6` |
+| Unit 3 · Technology | Homework 5 | 5 | 👀 проверить: утверждение 5 «He wants new computers for his school» — по выгрузке «неверно» (просят старые компьютеры родителей), но в тексте «We need computers for my school»; ключ спорный | `gg2_u3_hw5_b5` |
+| Unit 3 · Technology | Homework 6 | 2 | 🔊 аудио: разговор Гарри и Лили о гаджетах (им же пользуются блоки 3–6) | `gg2_u3_hw6_b2` |
+| Unit 3 · Technology | Homework 6 | 5 | 🔊 аудио: тот же разговор Гарри и Лили, что в блоке 2 | `gg2_u3_hw6_b5` |
+| Unit 3 · Technology | Homework 6 | 10 | 🔊 аудио: пример рассказа о любимых гаджетах | `gg2_u3_hw6_b10` |
+| Unit 3 · Technology | Homework 7 | 11 | 🎬 видео: видео: Хана звонит Салли, они навещают заболевшую Кейт | `gg2_u3_hw7_b11` |
+| Unit 3 · Technology | Homework 7 | 12 | 👀 проверить: имя в выгрузке то Hana, то Hannah — в тексте везде Hana, в пропуске принимаются оба написания; к «sick» добавлен вариант «ill», к «Thanks» — «Thank you». Сверить с видео | `gg2_u3_hw7_b12` |
+| Unit 3 · Technology | Unit 3 Test | 2 | 👀 проверить: вопрос 5: неверные варианты в выгрузке «What you do / What you are» — лишнее What убрано (стоит перед пропуском) | `gg2_u3_test_b2` |
+| Unit 3 · Technology | Unit 3 Test | 11 | 🔊 аудио: LISTENING: Эмма звонит маме (от подруги Лили) | `gg2_u3_test_b11` |
+| Unit 4 · Our world | Homework 2 | 6 | 🎬 видео: видео с урока: герои сравнивают себя (жонглирование, трюки), в конце правило comparative | `gg2_u4_hw2_b6` |
+| Unit 4 · Our world | Homework 2 | 7 | 👀 проверить: левая часть пар в выгрузке пустая (были картинки героев видео): заменить «Герой 1–3» картинками героев и проверить пары по видео | `gg2_u4_hw2_b7` |
+| Unit 4 · Our world | Homework 2 | 20 | 🎲 игра: СОСТАВ МОЙ: игры «лягушка» в выгрузке нет (ни ссылки, ни обложки) — пересобрана quiz «картинка → прилагательное» по словам HW2 | `gg2_u4_hw2_b20` |
+| Unit 4 · Our world | Homework 3 | 6 | 🎬 видео: видео с урока: superlatives (cat — small, elephant — big, tree — beautiful) | `gg2_u4_hw3_b6` |
+| Unit 4 · Our world | Homework 3 | 12 | 👀 проверить: картинки трёх картин в выгрузке не было — поставлена сгенерированная three_paintings (лист 35): проверить, что подходит к предложениям | `gg2_u4_hw3_b12` |
+| Unit 4 · Our world | Homework 3 | 16 | 🔊 аудио: аудио-образец ответа (в выгрузке пустой) | `gg2_u4_hw3_b16` |
+| Unit 4 · Our world | Homework 4 | 3 | 🎬 видео: видео: ребята рассказывают о любимых фильмах | `gg2_u4_hw4_b3` |
+| Unit 4 · Our world | Homework 4 | 4 | 👀 проверить: СОСТАВ МОЙ: в выгрузке match «вопрос ↔ фильм» с неоднозначными парами (на любой вопрос подходит любой ответ) — сделан sequence в порядке пар выгрузки; сверить порядок фильмов с видео. «family film» исправлено на «favourite film» | `gg2_u4_hw4_b4` |
+| Unit 4 · Our world | Homework 4 | 5 | 🔊 аудио: аудио-образец рассказа о любимом фильме (в выгрузке пустой) | `gg2_u4_hw4_b5` |
+| Unit 4 · Our world | Homework 4 | 16 | 👀 проверить: столбец «Why?» в выгрузке пустой — добавлены пропуски funnier / more exciting из текстов | `gg2_u4_hw4_b16` |
+| Unit 4 · Our world | Homework 5 | 3 | 👀 проверить: СОСТАВ МОЙ: в выгрузке все 4 варианта — пустые плейсхолдеры; варианты придуманы, верный — a school competition | `gg2_u4_hw5_b3` |
+| Unit 4 · Our world | Homework 5 | 9 | 🔊 аудио: аудио-образец рассказа о размерах и возрасте (в выгрузке пустой) | `gg2_u4_hw5_b9` |
+| Unit 4 · Our world | Homework 6 | 2 | 🔊 аудио: аудио: ребята описывают своих друзей (Lenny и Zach, Bella и Fiona, Fred и Dave, Diana и Mary) | `gg2_u4_hw6_b2` |
+| Unit 4 · Our world | Homework 6 | 6 | 🎬 видео: видео «что такое абзац (paragraph)» | `gg2_u4_hw6_b6` |
+| Unit 4 · Our world | Homework 7 | 29 | 🔊 аудио: аудио: разговор Софи и папы о домашке по географии (Ben Nevis, Windermere, вулканы) | `gg2_u4_hw7_b29` |
+| Unit 4 · Our world | Unit 4 Test | 13 | 🔊 аудио: аудио LISTENING: интервью с туристом Марко (вставить в вопрос 1) | `gg2_u4_test_b13` |
+| Unit 5 · My town | Homework 2 | 2 | 🎬 видео: видео с урока: Лукас опоздал в кино, его ждут Elena, Tom и Amy | `gg2_u5_hw2_b2` |
+| Unit 5 · My town | Homework 2 | 4 | 👀 проверить: ключ утверждения 5 «They didn't go to the pizzeria» = Верно (как в выгрузке), но в диалоге Amy: «Let's go for a pizza now» — сверить с видео | `gg2_u5_hw2_b4` |
+| Unit 5 · My town | Homework 2 | 7 | 🎬 видео: видео Max & Hammy: школьная поездка, парусные лодки (It was really hot! / I was completely wet!) | `gg2_u5_hw2_b7` |
+| Unit 5 · My town | Homework 3 | 2 | 🎬 видео: видео с вопросами Were you in the garden / park / kitchen? | `gg2_u5_hw3_b2` |
+| Unit 5 · My town | Homework 3 | 3 | 👀 проверить: по грамматике пары park и kitchen взаимозаменяемы (оба ответа на «we») — ключ держится только на видео, сверить | `gg2_u5_hw3_b3` |
+| Unit 5 · My town | Homework 6 | 2 | 🔊 аудио: аудио: Джимми с мамой смотрят старые фото (library, bank, supermarket, train station) | `gg2_u5_hw6_b2` |
+| Unit 5 · My town | Unit 5 Test | 11 | 🔊 аудио: аудио: Лиам объясняет туристу дорогу до Royal Hotel | `gg2_u5_test_b11` |
+| Unit 6 · Jobs | Homework 2 | 2 | 🎬 видео: семья хотела стать поп-звёздами (mum played the drums, dad danced, they tried hard) | `gg2_u6_hw2_b2` |
+| Unit 6 · Jobs | Homework 2 | 14 | 🎲 игра: СОСТАВ МОЙ: пересобрана игра Wordwall «Match up — Past simple time markers» (маркер ↔ перевод, 8 пар) | `gg2_u6_hw2_b14` |
+| Unit 6 · Jobs | Homework 3 | 3 | 🎬 видео: Hammy в школе (went to school, drank, ate my Maths book, cookery class, chocolate cakes) | `gg2_u6_hw3_b3` |
+| Unit 6 · Jobs | Homework 6 | 2 | 🔊 аудио: рассказ Ника о весёлом дне (Ted, Gary; парк, футбол, ресторан, кино) | `gg2_u6_hw6_b2` |
+| Unit 6 · Jobs | Homework 6 | 8 | 👀 проверить: в выгрузке было 12 картинок, 4 лишние (почтальон, пожарный и др.); match лишних не держит — оставлены 8 пар без лишних | `gg2_u6_hw6_b8` |
+| Unit 6 · Jobs | Homework 6 | 9 | 🎲 игра: СОСТАВ МОЙ: пересобрана игра Wordwall «Complete the sentence — Past simple grammar» (диалог: did, went, see, saw, Did, had) | `gg2_u6_hw6_b9` |
+| Unit 6 · Jobs | Unit 6 Test | 11 | 🔊 аудио: LISTENING теста: четыре человека рассказывают, что делали вчера (Speaker 1–4) | `gg2_u6_test_b11` |
+| Unit 7 · Travel | Homework 2 | 3 | 🎬 видео: видео учебника: Хэмми и друзья не попали в кино — автобус не пришёл, пошёл дождь | `gg2_u7_hw2_b3` |
+| Unit 7 · Travel | Homework 3 | 3 | 🎬 видео: видео учебника: Anna, Max и Hammy на каникулах, обезьяна с фотоаппаратом | `gg2_u7_hw3_b3` |
+| Unit 7 · Travel | Homework 4 | 3 | 🎬 видео: видео: покупка билета на поезд в Калифорнию (How much is it? Which platform?) | `gg2_u7_hw4_b3` |
+| Unit 7 · Travel | Homework 4 | 5 | 👀 проверить: время прибытия исправлено: в оригинале «At 10 a.m.» (раньше отправления 10:30 a.m.), поставлено «At 11:45 a.m.»; вписывание фраз заменено перетаскиванием | `gg2_u7_hw4_b5` |
+| Unit 7 · Travel | Homework 6 | 3 | 🔊 аудио: аудио учебника: Penny рассказывает David про свой отпуск | `gg2_u7_hw6_b3` |
+| Unit 7 · Travel | Homework 6 | 5 | 👀 проверить: в оригинале «Jenny» — заменено на Penny; ответ про погоду «Yes! It was sunny!» → «It was sunny!» | `gg2_u7_hw6_b5` |
+| Unit 7 · Travel | Homework 6 | 6 | 👀 проверить: в оригинале 5 слов, «photo» убрано — отдельной карточки «фотография» нет, а с camera она путается | `gg2_u7_hw6_b6` |
+| Unit 7 · Travel | Homework 6 | 12 | 👀 проверить: СОСТАВ МОЙ: в оригинале только 2 пары (arrive — at, get — off), добавлены get on и by bus | `gg2_u7_hw6_b12` |
+| Unit 7 · Travel | Homework 6 | 17 | 🎲 игра: СОСТАВ МОЙ: пересобрана игра Wordwall «Unjumble — Past Simple negative & interrogative forms» — 5 блоков order подряд | `gg2_u7_hw6_b17` |
+| Unit 7 · Travel | Unit 7 Test | 2 | 👀 проверить: пятое предложение разбито на два вопроса (Did / buy); подсказки «(Were / buyed) (Did / bought)» из текста убраны, повтор «did» среди вариантов заменён на «Do» | `gg2_u7_test_b2` |
+| Unit 7 · Travel | Unit 7 Test | 11 | 🔊 аудио: аудио теста: разговор в кассе вокзала (билет до Эдинбурга, return, обратно в воскресенье вечером, поезд 11:30, £85, платформа 6) | `gg2_u7_test_b11` |
+| Unit 7 · Travel | Unit 7 Test | 12 | 👀 проверить: ключи LISTENING взяты из выгрузки, по аудио не сверены (аудио нет) | `gg2_u7_test_b12` |
+| Unit 8 · Celebrations | Homework 2 | 3 | 🎬 видео: мультфильм Hammy о планах на каникулы (be going to), из выгрузки не выгрузился | `gg2_u8_hw2_b3` |
+| Unit 8 · Celebrations | Homework 3 | 3 | 🎬 видео: эпизод Hammy с вопросами Is he asleep? / Can Hammy swim? / Does he like biscuits? и т.п., из выгрузки не выгрузился | `gg2_u8_hw3_b3` |
+| Unit 8 · Celebrations | Homework 3 | 13 | 🎲 игра: СОСТАВ МОЙ: пересобрана игра Wordwall «Go getter 2 Unit 8.3 types of music» (quiz, картинка → тип музыки: rock, pop, classical, rap, jazz, country) | `gg2_u8_hw3_b13` |
+| Unit 8 · Celebrations | Homework 4 | 3 | 🎬 видео: диалог-приглашение (Are you busy next Thursday? … Let's meet outside the Arena), из выгрузки не выгрузился | `gg2_u8_hw4_b3` |
+| Unit 8 · Celebrations | Homework 6 | 2 | 🎬 видео: аудио: ребята (Tina, Harry, Robert, Kelly, David) рассказывают, как проведут дни рождения; из выгрузки не выгрузилось | `gg2_u8_hw6_b2` |
+| Unit 8 · Celebrations | Homework 6 | 5 | 👀 проверить: картинка приглашения из выгрузки не попала (блок был пустой); вопрос «What is the name of the party?» убран — без картинки на него нет ответа. Если исходник найдётся — вставить сюда | `gg2_u8_hw6_b5` |
+| Unit 8 · Celebrations | Homework 6 | 6 | 👀 проверить: в исходнике «Please reply to ___ or 678954321» — перед «or» было пусто (имя/почта потеряны), оставлено «Please reply to 678954321» | `gg2_u8_hw6_b6` |
+| Unit 8 · Celebrations | Homework 6 | 21 | 🎲 игра: СОСТАВ МОЙ: пересобрана игра Wordwall «Go Getter (2) 8.3 Yes/No questions» (unjumble) — пять блоков order подряд из вопросов Homework 3: Is he asleep? Can Hammy swim? Does he like biscuits? Did he exercise this morning? Do you love your pet? | `gg2_u8_hw6_b21` |
+| Unit 8 · Celebrations | Unit 8 Test | 2 | 👀 проверить: вопрос 2: в исходнике «My sister ___ to come to the concert» с ключом «isn't going to» — получалось «isn't going to to come». Переписано «My sister ___ to the concert with us», ключ «isn't going to come» (неверные из исходника: not going to come, doesn't going to come) | `gg2_u8_test_b2` |
+| Unit 8 · Celebrations | Unit 8 Test | 12 | 🎬 видео: аудио теста: разговор Софи и Бена о субботе (конкурс талантов, встреча в кафе); из выгрузки не выгрузилось | `gg2_u8_test_b12` |
+| Final Test | Final Test | 9 | 🎬 видео: аудио итогового теста: разговор Софи с мамой (библиотека, Том, папа любит путешествовать, Лили, день рождения папы в понедельник, торговый центр); из выгрузки не выгрузилось | `gg2_final_b9` |
+
+### Go Getter 3
+
+| юнит | урок | блок | что | имя файла |
+|---|---|---|---|---|
+| Unit 1 · Chores | Unit 1 Test | 2 | 👀 проверить: СОСТАВ МОЙ: какие буквы пропущены в выгрузке, не видно — скрыты гласные (кроме первой буквы слова), ребёнок пишет фразу целиком | `gg3_u1_test_b2` |
+| Unit 2 · Shopping | Unit 2 Test | 2 | 👀 проверить: СОСТАВ МОЙ: какие буквы пропущены в выгрузке, не видно — скрыты гласные (кроме первой буквы слова), ребёнок пишет фразу целиком | `gg3_u2_test_b2` |
+| Unit 3 · Holidays | Unit 3 Test | 2 | 👀 проверить: СОСТАВ МОЙ: какие буквы пропущены в выгрузке, не видно — скрыты гласные (кроме первой буквы слова), ребёнок пишет фразу целиком | `gg3_u3_test_b2` |
+| Unit 4 · Gadgets | Unit 4 Test | 2 | 👀 проверить: СОСТАВ МОЙ: какие буквы пропущены в выгрузке, не видно — скрыты гласные (кроме первой буквы слова), ребёнок пишет фразу целиком | `gg3_u4_test_b2` |
+| Unit 5 · Health | Unit 5 Test | 2 | 👀 проверить: СОСТАВ МОЙ: какие буквы пропущены в выгрузке, не видно — скрыты гласные (кроме первой буквы слова), ребёнок пишет фразу целиком | `gg3_u5_test_b2` |
+| Unit 5 · Health | Unit 5 Test | 5 | 👀 проверить: Предложение из выгрузки: «They don't have to go to school with a temperature» — по смыслу «не обязаны» ходить с температурой; если хотите «не должны», поменять на shouldn't | `gg3_u5_test_b5` |
+| Unit 6 · Cooking | Unit 6 Test | 2 | 👀 проверить: СОСТАВ МОЙ: какие буквы пропущены в выгрузке, не видно — скрыты гласные (кроме первой буквы слова), ребёнок пишет фразу целиком | `gg3_u6_test_b2` |
+| Unit 7 · Homes | Unit 7 Test | 2 | 👀 проверить: СОСТАВ МОЙ: какие буквы пропущены в выгрузке, не видно — скрыты гласные (кроме первой буквы слова), ребёнок пишет фразу целиком | `gg3_u7_test_b2` |
+| Unit 8 · The future | Unit 8 Test | 2 | 👀 проверить: СОСТАВ МОЙ: какие буквы пропущены в выгрузке, не видно — скрыты гласные (кроме первой буквы слова), ребёнок пишет фразу целиком | `gg3_u8_test_b2` |
+| Unit 8 · The future | Unit 8 Test | 3 | 👀 проверить: Вопрос 1 «I think she ___ abroad one day»: неверный вариант «is going to live» тоже грамматически возможен (ключ will live — по правилу I think + will). Оставлено как в выгрузке; при пороге 90% лучше заменить его на «will to live» | `gg3_u8_test_b3` |
+| Final Test | Final Test | 2 | 🎬 видео: аудио к заданию Listening: пять человек рассказывают о проблемах со здоровьем (Ben, Molly, Duncan, Olivia, Stuart) — в выгрузке плеер пустой | `gg3_final_b2` |
+| Final Test | Final Test | 6 | 👀 проверить: СОСТАВ МОЙ: в выгрузке буквы перемешаны, но сам порядок букв не виден — перемешал заново; картинки-подсказки добавлены из листов юнитов | `gg3_final_b6` |
 
 ## Решено (Анна, 05.10.2026)
 
@@ -39,7 +169,7 @@
    исправлена на `[^\"'\s)<\\]+`; в шаблоне — поправить тем, кто его ведёт.
 6. **Уроки по 5–15 КБ вставляются одним `insert`** без таймаута — «кусками
    по три» нужно только для крупных уроков с длинным html.
-7. **У `quiz`, `exact_input` и `order` ученик не видит `title`.** Рендер
+7. **(исправлено в `index.html`, 06.10.2026) У `quiz`, `exact_input` и `order` ученик не видел `title`.** Рендер
    прохождения в `index.html` выводит заголовок только у text, match, sort,
    gaps, sequence, truefalse, flashcards, task, speaking. Инструкция квиза
    («Выбери правильную форму глагола») видна лишь в редакторе. Так и в SM3
