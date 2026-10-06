@@ -19,7 +19,7 @@ FILL = {'advise'}
 # белое, которое чистка кусков фона не трогает: облачка, снег, разметка, облака у края сцены
 KEEP_WHITE = set()
 # сцены, где фон застрял между фигурами и под ногами: чистим жёстче
-EXTRA = set()
+EXTRA = {'active', 'kneel down', 'lean', 'rush', 'petrified (of)', 'practical', 'at risk', 'help', 'success', 'competition', 'relationship', 'out of nowhere', 'be at your best'}
 HOLES = {'have a go at (sth)', 'weigh up', 'make a (big) difference'}
 # белая одежда без контура у края (халат): закрываем маску на N пикселей
 CLOSE = {'advise': 10}
