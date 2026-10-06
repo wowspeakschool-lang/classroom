@@ -175,7 +175,12 @@ def main():
     args = ap.parse_args()
 
     if args.unit:
-        ids = json.load(open(os.path.join(ROOT, "tools", "gg1_ids.json")))
+        # общий файл + по файлу на юнит (tools/gg1_ids_u3.json …): юниты
+        # собираются параллельно, и общий файл они бы правили наперебой
+        import glob
+        ids = {}
+        for f in sorted(glob.glob(os.path.join(ROOT, "tools", "gg1_ids*.json"))):
+            ids.update(json.load(open(f)))
         keys = [k for k in LESSONS if k.startswith(args.unit + "_")]
         for k in keys:
             errors = []
