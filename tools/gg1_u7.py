@@ -214,12 +214,12 @@ LESSONS = {
             }),
 
             # Wordwall «Match up · GG1 unit 7.2» — СОСТАВ МОЙ
-            ("match", {"title": CHAMPION + "Соедини начало и конец предложения ⭐", "pairs": [
-                {"left": "I", "right": "don't like snakes."},
-                {"left": "My brother", "right": "doesn't eat fish."},
-                {"left": "Elephants", "right": "don't fly."},
-                {"left": "A kangaroo", "right": "doesn't swim."},
-                {"left": "We", "right": "don't go to school on Sundays."},
+            ("match", {"title": CHAMPION + "Соедини утвердительное предложение с отрицательным ⭐", "pairs": [
+                {"left": "I like snakes.", "right": "I don't like snakes."},
+                {"left": "My brother eats fish.", "right": "My brother doesn't eat fish."},
+                {"left": "Elephants fly.", "right": "Elephants don't fly."},
+                {"left": "A kangaroo jumps.", "right": "A kangaroo doesn't jump."},
+                {"left": "We go to the zoo on Sundays.", "right": "We don't go to the zoo on Sundays."},
             ]}),
 
             # Wordwall «Quiz · gg1 7.2» — СОСТАВ МОЙ

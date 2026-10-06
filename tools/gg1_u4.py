@@ -373,7 +373,7 @@ LESSONS = {
                 ("You've got a new bike. ___ bike is cool.", ["Your", "Our", "Their"], "Your"),
                 ("He's got a sister. ___ sister is ten.", ["His", "Her", "Its"], "His"),
                 ("She's got a dog. ___ dog is funny.", ["Her", "His", "Our"], "Her"),
-                ("The dog has got big ears. ___ ears are brown.", ["Its", "Their", "His"], "Its"),
+                ("The dog has got big ears. ___ ears are brown.", ["Its", "Their", "Our"], "Its"),
                 ("We've got a house. ___ house is big.", ["Our", "Their", "Your"], "Our"),
                 ("They've got a car. ___ car is red.", ["Their", "Our", "Its"], "Their"),
             ]),

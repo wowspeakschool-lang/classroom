@@ -86,7 +86,7 @@ def pic_match(title, words):
 def spell(title, words, how):
     """Впиши слово по картинке: подсказка — анаграмма или слово с пропусками."""
     return ("exact_input", {"title": title, "items": [
-        {"prompt": how(en), "accept": list(dict.fromkeys([en, en.capitalize()])),
+        {"prompt": how(en), "accept": list(dict.fromkeys([en, en.capitalize() if en.islower() else en])),
          "image": p, "audio_tts": en} for en, ru, p in words]})
 
 
@@ -484,7 +484,9 @@ LESSONS = {
             cards(U3_THINGS),
             pic_match("Соедини картинку и слово", U3_THINGS),
             ("quiz", quiz_ru_to_en(U3_THINGS)),
-            spell("Вставь пропущенные буквы и впиши слово целиком", U3_THINGS, gapped),
+            # у TV gapped() не прячет ни одной буквы — подсказка своя
+            spell("Вставь пропущенные буквы и впиши слово целиком", U3_THINGS,
+                  lambda en: "T _" if en == "TV" else gapped(en)),
 
             ("text", {"html": REVIEW + pic(u("card_vocab_carpet"), "Vocabulary")}),
 
