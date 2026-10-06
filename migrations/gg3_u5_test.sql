@@ -1,0 +1,32 @@
+-- Go Getter 3 · Unit 5 · Health · Unit 5 Test
+-- собрано tools/gg3_build.py --lesson u5_test
+-- заливалось через execute_sql кусками (--setup, --clear, --chunks); этот файл — исходник
+insert into classroom_units (course_id, title, sort_order)
+select c.id, 'Unit 5 · Health', 5 from classroom_courses c
+where c.slug = 'gg3'
+  and not exists (select 1 from classroom_units u where u.course_id = c.id and u.title = 'Unit 5 · Health');
+insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)
+select u.id, 'Unit 5 Test', 'test', 90, false, 0
+from classroom_units u join classroom_courses c on c.id = u.course_id
+where c.slug = 'gg3' and u.title = 'Unit 5 · Health'
+  and not exists (select 1 from classroom_lessons l where l.unit_id = u.id and l.title = 'Unit 5 Test');
+update classroom_lessons l set kind = 'test', pass_threshold = 90, sort_order = 0
+from classroom_units u join classroom_courses c on c.id = u.course_id
+where l.unit_id = u.id and c.slug = 'gg3' and u.title = 'Unit 5 · Health' and l.title = 'Unit 5 Test';
+select l.id, l.kind, l.pass_threshold, l.is_published from classroom_lessons l
+join classroom_units u on u.id = l.unit_id join classroom_courses c on c.id = u.course_id
+where c.slug = 'gg3' and u.title = 'Unit 5 · Health' and l.title = 'Unit 5 Test';
+
+-- затем: delete блоков урока (CTE) и вставка:
+-- кусок 1
+insert into classroom_blocks (lesson_id, type, payload, sort_order) values
+('<lesson_id>', 'match', replace($blk${"title": "Соедини фразу с картинкой", "pairs": [{"left_image": "@@MEDIA@@gg3/u5/sore_throat.webp", "right": "sore throat", "right_audio_tts": "sore throat"}, {"left_image": "@@MEDIA@@gg3/u5/blocked_nose.webp", "right": "blocked nose", "right_audio_tts": "blocked nose"}, {"left_image": "@@MEDIA@@gg3/u5/headache.webp", "right": "headache", "right_audio_tts": "headache"}, {"left_image": "@@MEDIA@@gg3/u5/stomachache.webp", "right": "a stomachache", "right_audio_tts": "a stomachache"}, {"left_image": "@@MEDIA@@gg3/u5/cough.webp", "right": "cough", "right_audio_tts": "cough"}, {"left_image": "@@MEDIA@@gg3/u5/temperature.webp", "right": "temperature", "right_audio_tts": "temperature"}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 0),
+('<lesson_id>', 'exact_input', replace($blk${"title": "Посмотри на картинку и впиши пропущенные буквы", "items": [{"image": "@@MEDIA@@gg3/u5/sneeze.webp", "prompt": "1. Напиши слово целиком: sn__z_", "accept": ["sneeze", "Sneeze"]}, {"image": "@@MEDIA@@gg3/u5/cough.webp", "prompt": "2. Напиши слово целиком: c__gh", "accept": ["cough", "Cough"]}, {"image": "@@MEDIA@@gg3/u5/earache.webp", "prompt": "3. Напиши слово целиком: e_r_ch_", "accept": ["earache", "Earache"]}, {"image": "@@MEDIA@@gg3/u5/toothache.webp", "prompt": "4. Напиши слово целиком: t__th_ch_", "accept": ["toothache", "Toothache"]}, {"image": "@@MEDIA@@gg3/u5/runny_nose.webp", "prompt": "5. Напиши фразу целиком: r_nny n_s_", "accept": ["runny nose", "Runny nose"]}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 1),
+('<lesson_id>', 'quiz', replace($blk${"title": "Прочитай предложение и выбери пропущенное слово", "questions": [{"q": "You ___ take this medicine twice a day.", "type": "single", "options": [{"text": "has to"}, {"text": "have to"}], "correct": [1]}, {"q": "He ___ stay at home because he has a temperature.", "type": "single", "options": [{"text": "should"}, {"text": "have to"}], "correct": [0]}, {"q": "They ___ go to school today – it's a holiday.", "type": "single", "options": [{"text": "shouldn't"}, {"text": "haven't to"}, {"text": "don't have to"}], "correct": [2]}, {"q": "___ visit the doctor if you have a sore throat?", "type": "single", "options": [{"text": "Do you have to"}, {"text": "Have you"}], "correct": [0]}, {"q": "You ___ drink warm tea when you have a cold.", "type": "single", "options": [{"text": "should to"}, {"text": "should"}], "correct": [1]}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 2),
+('<lesson_id>', 'order', replace($blk${"words": ["He", "has", "to", "see", "a doctor."], "sentence": "He has to see a doctor.", "audio_tts": "He has to see a doctor."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 3),
+('<lesson_id>', 'order', replace($blk${"words": ["They", "don't", "have to", "go to school", "with a temperature."], "sentence": "They don't have to go to school with a temperature.", "audio_tts": "They don't have to go to school with a temperature."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 4),
+('<lesson_id>', 'order', replace($blk${"words": ["She", "should", "drink", "warm tea", "because she", "has", "a sore throat."], "sentence": "She should drink warm tea because she has a sore throat.", "audio_tts": "She should drink warm tea because she has a sore throat."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 5),
+('<lesson_id>', 'order', replace($blk${"words": ["Do", "you", "have", "to", "take", "this medicine", "every day?"], "sentence": "Do you have to take this medicine every day?", "audio_tts": "Do you have to take this medicine every day?"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 6),
+('<lesson_id>', 'speaking', replace($blk${"title": "SPEAKING TASK 1 🎤", "needs_review": true, "html": "<p>Опиши картинку, ответь на вопросы.</p><ul><li>What's the problem?</li><li>Does he have a sore throat / a temperature / a cough?</li><li>What should he do?</li><li>What shouldn't he do?</li><li>Does he have to go to school? Why / why not?</li><li>What do you do when you are sick?</li></ul><p>Нажми на микрофон и запиши ответ.</p>", "image": "@@MEDIA@@gg3/u5/scene_ill.webp"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 7),
+('<lesson_id>', 'speaking', replace($blk${"title": "SPEAKING TASK 2 🎤", "needs_review": true, "html": "<p>Ответь на вопросы (не забудь отвечать полными предложениями).</p><ol><li>What health problems do you often have?</li><li>Do you often have a cold or a cough?</li><li>What should you do if you have a temperature?</li><li>What shouldn't you do if you have a stomachache?</li><li>Do you have to go to school when you are sick?</li><li>What should you drink when you have a sore throat?</li><li>What do you have to do every day to stay healthy?</li><li>What should people do to feel better when they have a headache?</li></ol><p>Нажми на микрофон и запиши ответ.</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 8)
+returning sort_order, type;
