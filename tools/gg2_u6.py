@@ -131,7 +131,7 @@ LESSONS = {
               "К этому домашнему заданию есть дополнение! Оно необязательное, но если ты его "
               "выполнишь, учитель даст тебе дополнительную ⭐ Давай начинать!"),
         video("Давай начнём с видео. Посмотри его, а потом сделай задания ниже.",
-              "видео: семья хотела стать поп-звёздами (mum played the drums, dad danced, they tried hard)"),
+              "семья хотела стать поп-звёздами (mum played the drums, dad danced, they tried hard)"),
         ("match", {"title": "Супер! Посмотри видео ещё раз и соедини глаголы по парам",
                    "pairs": [{"left": a, "right": b, "right_audio_tts": b}
                              for a, b in [("play", "played"), ("dance", "danced"), ("try", "tried")]]}),
@@ -204,7 +204,7 @@ LESSONS = {
                           "<li>make – <b>made</b></li><li>meet – <b>met</b></li>"
                           "<li>take – <b>took</b></li></ul>"}),
         video("Посмотри видео, а потом сделай задание ниже.",
-              "видео: Hammy в школе (went to school, drank, ate my Maths book, cookery class, chocolate cakes)"),
+              "Hammy в школе (went to school, drank, ate my Maths book, cookery class, chocolate cakes)"),
         ("sequence", {"title": "Посмотри видео ещё раз и расставь предложения по порядку",
                       "items": [{"text": t} for t in [
                           "Yesterday I went to school.", "Hammy came too.", "Hammy drank something!",
@@ -337,7 +337,7 @@ LESSONS = {
               "Сегодня мы будем тренироваться в аудировании и даже напишем небольшой рассказ. "
               "У тебя всё получится, как и всегда. Давай приступим :)"),
         audio("Послушай рассказ Ника о его дне, а потом сделай задания ниже 🎧",
-              "аудио: рассказ Ника о весёлом дне (дядя Ted, Gary; парк, футбол, ресторан, кино)"),
+              "рассказ Ника о весёлом дне (Ted, Gary; парк, футбол, ресторан, кино)"),
         ("quiz", {"title": "Послушай аудио и выбери правильный вариант ответа",
                   "questions": [
                       q1("Nick's ___ visited.", ["uncle", "grandfather"], 0),
@@ -380,10 +380,12 @@ LESSONS = {
                           "<h3>Классная работа! 🖐</h3>"
                           "<p>Первая часть готова. Теперь повторим изученный материал, чтобы ты смог "
                           "хорошо подготовиться к тесту. Для тебя нет ничего невозможного 😎</p>"}),
-        ("match", {"title": "Давай сначала вспомним названия профессий. Соедини название с картинкой",
+        todo(("match", {"title": "Давай сначала вспомним названия профессий. Соедини название с картинкой",
                    "pairs": [{"left": en, "right_image": img(U, JOB_FILE[en])}
                              for en in ["nurse", "builder", "police officer", "doctor", "farmer", "vet",
                                         "teacher", "chef"]]}),
+             ("check", "в выгрузке было 12 картинок, 4 лишние (почтальон, пожарный и др.); match лишних "
+                       "не держит — оставлены 8 пар без лишних")),
         todo(("gaps", {"title": "Молодец! А сейчас вспомним прошедшее время. Прочитай диалог и вставь "
                                 "подходящие слова",
                        "mode": "drag",
@@ -481,7 +483,7 @@ LESSONS = {
                           "didn't want to do anything", "was angry"], 1),
                   ]}),
         audio("LISTENING. Послушай, как четыре человека рассказывают о том, что они делали вчера 🎧",
-              "аудио LISTENING теста: четыре человека рассказывают, что делали вчера (Speaker 1–4)"),
+              "LISTENING теста: четыре человека рассказывают, что делали вчера (Speaker 1–4)"),
         ("sort", {"title": "LISTENING. Соедини каждого человека с двумя фактами о том, что он делал",
                   "groups": [
                       {"name": "Speaker 1", "items": [{"text": "is a builder"}, {"text": "watched TV after work"}]},
