@@ -95,7 +95,9 @@ SHEETS = [
         ("col_red_pen", "a bright red ballpoint pen"),
         ("col_blue_bag", "a bright blue school backpack"),
         ("col_yellow_ruler", "a bright yellow plastic ruler with plain tick marks"),
-        ("col_green_notebook", "a bright green spiral notebook"),
+        # в листе Анны мазок поверх обложки: ячейку не режем, col_green_notebook.webp —
+        # копия obj_notebook (Л0.1, тоже зелёная)
+        (None, "a bright green spiral notebook"),
         ("col_pink_pencil_case", "a bright pink zipped pencil case"),
         ("col_orange_bag", "a bright orange school backpack"),
     ]),
