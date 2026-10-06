@@ -124,7 +124,7 @@ Output size: 2048 x 1365 px, landscape.
 A sheet of 9 separate picture cards arranged in a clean grid of three columns and three rows, equal cells separated by wide empty pure-white gaps, no lines and no frames between the cells. Every item is complete and centred in its cell with a generous empty margin, not touching any other item or the edge of the sheet, nothing crossing between cells.
 Row 1, left to right: a kitchen blender; a microwave oven; a smart TV with app tiles on the screen.
 Row 2, left to right: a USB stick; a TV remote control; a hairdryer.
-Row 3, left to right: a games console with a controller; a toaster with two slices of toast; an electric plug and a wall socket.
+Row 3, left to right: a games console: a small flat black box with a simple round grey game controller beside it, not resembling any real console; a toaster with two slices of toast; an electric plug and a wall socket.
 No people at all - no humans, no children, no hands, no faces, no silhouettes of people anywhere.
 Realistic 3D render, soft studio lighting from the top-left, clean product-style but friendly and colourful, generic design, not resembling any real product. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
 Output size: 2048 x 2048 px, each cell at least 600 px.

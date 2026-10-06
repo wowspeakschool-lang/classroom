@@ -107,7 +107,7 @@ SHEETS = [
         ("u4_usb_stick", "a USB stick"),
         ("u4_remote", "a TV remote control"),
         ("u4_hairdryer", "a hairdryer"),
-        ("u4_games_console", "a games console with a controller"),
+        ("u4_games_console", "a games console: a small flat black box with a simple round grey game controller beside it, not resembling any real console"),
         ("u4_toaster", "a toaster with two slices of toast"),
         ("u4_plug_socket", "an electric plug and a wall socket"),
     ], None),

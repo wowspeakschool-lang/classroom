@@ -328,7 +328,7 @@ SHEETS = [
     ("u3", 1, 2, "cartoon", "Зверята: эмоции",
      "Homework 3, открытые вопросы 15–16.", [
         ("u3_cat_tired", "a tired cat stretched out on a sofa"),
-        ("u3_angry_bird", "an angry round red bird"),
+        ("u3_angry_bird", "an angry little blue songbird with ruffled feathers, frowning and stamping its foot, an ordinary bird, not resembling any famous cartoon or game character"),
     ], None),
     ("u3", 2, 3, "people_scene", "Герои Unit 3",
      "Вместо фото: селфи (Homework 1, 2), Гарри и Лили (Homework 6), звонок (Homework 4), "

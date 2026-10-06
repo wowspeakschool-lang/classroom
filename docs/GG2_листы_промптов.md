@@ -305,7 +305,7 @@ Output size: 2048 x 2048 px, each cell at least 600 px.
 Homework 3, открытые вопросы 15–16.
 ```
 A sheet of 2 separate picture cards arranged in a clean grid of two columns and one row, equal cells separated by wide empty pure-white gaps, no lines and no frames between the cells. Every item is complete and centred in its cell with a generous empty margin, not touching any other item or the edge of the sheet, nothing crossing between cells.
-Row 1, left to right: a tired cat stretched out on a sofa; an angry round red bird.
+Row 1, left to right: a tired cat stretched out on a sofa; an angry little blue songbird with ruffled feathers, frowning and stamping its foot, an ordinary bird, not resembling any famous cartoon or game character.
 No people at all - no humans, no children, no hands, no faces, no silhouettes of people anywhere.
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. Plain flat pure white background, no shadow on the background. Absolutely no text, no letters, no numbers, no labels, no signs, no brand marks anywhere.
 Output size: 2048 x 1024 px, each cell at least 600 px.
