@@ -20,7 +20,7 @@ FILL = {'advise'}
 KEEP_WHITE = set()
 # сцены, где фон застрял между фигурами и под ногами: чистим жёстче
 EXTRA = set()
-HOLES = set()
+HOLES = {'have a go at (sth)', 'weigh up', 'make a (big) difference'}
 # белая одежда без контура у края (халат): закрываем маску на N пикселей
 CLOSE = {'advise': 10}
 
@@ -65,6 +65,11 @@ def split_rows(path, bs, n_rows):
         prev, prev_pic = y1, pic
     # подписи ряда вплотную к рисункам следующего — две полосы слиплись в одну:
     # режем самую высокую по самой пустой строке в её середине
+    # высокая подпись (две строки) сошла за полосу рисунка — выкидываем самые низкие полосы
+    while len(rows) > n_rows:
+        k = min(range(len(rows)), key=lambda i: rows[i][1] - rows[i][0])
+        if rows[k][1] - rows[k][0] > 120: break
+        del rows[k]
     while len(rows) < n_rows:
         k = max(range(len(rows)), key=lambda i: rows[i][1] - rows[i][0])
         a0, a1 = rows[k]; h = a1 - a0
