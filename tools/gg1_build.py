@@ -12,6 +12,9 @@
   python3 tools/gg1_build.py --lesson u0_hw1          проверить и показать SQL
   python3 tools/gg1_build.py --lesson u0_hw1 --sql migrations/gg1_u0_hw1.sql
   python3 tools/gg1_build.py --lesson u0_hw1 --chunks <lesson_id> --per-chunk 7
+  python3 tools/gg1_build.py --unit u2 --insert       вставки всех уроков юнита
+  python3 tools/gg1_build.py --unit u2 --check        сверка всего юнита одной строкой
+                                                      (id уроков — tools/gg1_ids.json)
 
 Выгрузка — ShkolaApp (docs/GG1_выгрузка_файлы.md). Игры Wordwall пересобраны
 штатными блоками: в заголовке у таких блоков нет пометки, она стоит в
@@ -166,7 +169,44 @@ def main():
     ap.add_argument("--verify", metavar="LESSON_ID",
                     help="запрос для сверки залитого урока: md5 каждого блока в базе "
                          "против собранного здесь; одна строка: ok или BAD <sort_order> на каждый блок")
+    ap.add_argument("--unit", help="все уроки юнита (u2): с --insert — вставки, с --check — сверка")
+    ap.add_argument("--insert", action="store_true")
+    ap.add_argument("--check", action="store_true")
     args = ap.parse_args()
+
+    if args.unit:
+        ids = json.load(open(os.path.join(ROOT, "tools", "gg1_ids.json")))
+        keys = [k for k in LESSONS if k.startswith(args.unit + "_")]
+        for k in keys:
+            errors = []
+            check(LESSONS[k], errors)
+            if errors:
+                sys.exit(f"{k}: проверка не прошла: {errors}")
+            if k not in ids:
+                sys.exit(f"{k}: нет id в tools/gg1_ids.json")
+        if args.insert:
+            # по уроку на запрос: так запрос короче лимита и падение видно по уроку
+            for k in keys:
+                print(f"-- {k}")
+                print("insert into classroom_blocks (lesson_id, type, payload, sort_order) values")
+                print(",\n".join(
+                    f"('{ids[k]}', '{t}', replace($blk$"
+                    + json.dumps({a: b for a, b in p.items() if a != "gaps_expected"}, ensure_ascii=False)
+                    + f"$blk$, '@@MEDIA@@', '{MEDIA_URL}')::jsonb, {n})"
+                    for n, (t, p) in enumerate(LESSONS[k]["blocks"])))
+                print("returning sort_order;\n")
+        if args.check:
+            rows = ",".join(f"('{ids[k]}',{n},'{t}','{h}')" for k in keys for n, t, h in digests(LESSONS[k]))
+            lids = ",".join(f"'{ids[k]}'" for k in keys)
+            print(f"with want(lid,so,t,m) as (values {rows}),\n"
+                  "have as (select lesson_id::text lid, sort_order so, type t, md5(payload::text) m "
+                  f"from classroom_blocks where lesson_id::text in ({lids}))\n"
+                  "select count(*) total, count(*) filter (where w.m = h.m and w.t = h.t) ok, "
+                  "string_agg(coalesce(w.lid, h.lid) || ':' || coalesce(w.so, h.so), ' ') "
+                  "filter (where w.m is distinct from h.m or w.t is distinct from h.t) bad, "
+                  "(select count(*) from classroom_blocks where payload::text like '%@@MEDIA@@%') leftover "
+                  "from want w full join have h using (lid, so);")
+        return
 
     if args.list:
         for key, lesson in LESSONS.items():

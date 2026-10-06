@@ -24,6 +24,8 @@
 | Unit 0 | Test | 10 | LISTENING: учитель называет страницу, номер картинки, цвета и число стульев |
 | Unit 1 | Homework 6 | 2 | Роб рассказывает о друге Викторе и кузине Мел (учебник 1.6); по нему блоки 3–4 |
 | Unit 1 | Test | 14 | LISTENING: Эмма о себе, брате Максе и подруге; по нему блок 15 |
+| Unit 2 | Homework 6 | 3 | Люк и Роза о любимых вещах (учебник 2.6); по нему блоки 4–6 |
+| Unit 2 | Test | 14 | LISTENING: Эмма показывает школьные вещи; по нему блок 15 |
 
 ### Игры Wordwall пересобраны — СОСТАВ МОЙ
 
@@ -46,6 +48,17 @@
 | Unit 1 | Homework 3 | 14 | обложка пустая, «1.3 be quiz» | `quiz`: 6 вопросов isn't / aren't / am not |
 | Unit 1 | Homework 7 | 8 | Labelled diagram «GG1 1.1 Family tree» | `hotspot`: кто кому на древе Марка |
 | Unit 1 | Homework 7 | 9–10 | Quiz «GG1 1.2 to be affirmative», «GG1 1.3 to be negative» | два `quiz` по 5 вопросов |
+| Unit 2 | Homework 1 | 11 | Gameshow quiz «Copy of GG1 2.1 clothes» | `quiz`: что на картинке, 6 вещей |
+| Unit 2 | Homework 1 | 12 | Quiz «GG1 2.1 It is They are» | `quiz`: It's / They're, is / are |
+| Unit 2 | Homework 2 | 7 | «Соедини слово и картинку» — правые половины пустые | `match`: This / These / That / Those ↔ наши картинки |
+| Unit 2 | Homework 2 | 11 | Quiz «This That These Those» | `quiz`: 4 вопроса по картинкам |
+| Unit 2 | Homework 2 | 12 | Find the match «gg1 2.2» | `match`: прилагательное ↔ перевод |
+| Unit 2 | Homework 2 | 13–15 | Unjumble «GG1 2.2» | три `order` из примеров карточки |
+| Unit 2 | Homework 3 | 10 | Match up «gg1 2.3 photocopiable ex 1» | `match`: 7 вопросов ↔ краткие ответы |
+| Unit 2 | Homework 3 | 11–12 | Unjumble «GG1 2.3» | два `order`-вопроса |
+| Unit 2 | Homework 7 | 7 | Crossword «Go Getter 1 Unit 2.1 Clothes» | `exact_input`: 6 вещей по картинке |
+| Unit 2 | Homework 7 | 8 | Match up «Unit 2.2 Adjectives» | `match`: картинка ↔ пара прилагательных |
+| Unit 2 | Homework 7 | 9 | Match up «gg1 2.3 photocopiable ex 1» (повтор из Homework 3) | `match`: личные вопросы ↔ ответы |
 
 ### Исправлено в выгрузке
 
@@ -56,6 +69,7 @@
 |---|---|---|---|
 | Unit 1 | Test | «Our neighbours are on holidays.» | «Our neighbours are on holiday.» |
 | Unit 2 | Homework 7 | лишнее в «cool / fantastic / boring» — *fantastic* | *boring* (единственное отрицательное) |
+| Unit 2 | Homework 3 | «ответь на вопросы из предыдущего задания» | вопросы про картинку с Кит и Дагом — инструкция поправлена |
 | Unit 4 | Homework 4 | реплика «I'm fine.» → «That's all right» (не по смыслу) | пара исправлена по смыслу |
 | Unit 6 | Homework 5 | «She has lessons after lunch» — верно | неверно: у Даши после обеда танцы |
 | Unit 7 | Homework 6 | «There are three» котят | шесть, как в письме |
@@ -106,4 +120,25 @@ Homework 3 блок 11. Если точка легла мимо предмета
 
 **Test, блок 1** — в выгрузке не видно, какие буквы скрыты; у нас видна каждая
 вторая буква и последняя.
+
+## Unit 2 · My things
+
+**Homework 6, блок 5 — варианты ответа восстановить по аудио.** В выгрузке у
+четырёх вопросов («Luke's ___ is new» и т. д.) варианты ответа пустые, а аудио
+нет. Сейчас это открытое задание с ручной проверкой; когда будет аудио, его
+лучше сделать тестом с вариантами.
+
+**Homework 6, блок 6** — в выгрузке говорение с образцом-аудио; образца нет,
+ученик опирается на аудио блока 3.
+
+**Фото детей заменены нарисованными**: одежда «Her … / His …» (Homework 1
+блок 9), статья про Эмму (Homework 4 блок 6), суперрюкзак Джейми (Homework 5),
+мальчик со скейтом (Homework 7 блок 3). Статьи учебника перенесены текстом.
+
+**Приветствие Homework 6** — в выгрузке бурундук Disney, заменён общим.
+
+**Тест, блоки 2–6** — фото вещей со стрелкой «далеко / близко» взяты из
+выгрузки, на них держится выбор this / that / these / those.
+
+**Метки на картинках поставлены на глаз**: Homework 6 блок 2, Homework 7 блок 3.
 
