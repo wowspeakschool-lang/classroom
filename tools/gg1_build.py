@@ -165,7 +165,7 @@ def main():
     ap.add_argument("--per-chunk", type=int, default=3)
     ap.add_argument("--verify", metavar="LESSON_ID",
                     help="запрос для сверки залитого урока: md5 каждого блока в базе "
-                         "против собранного здесь; разница видна в колонке ok")
+                         "против собранного здесь; одна строка: ok или BAD <sort_order> на каждый блок")
     args = ap.parse_args()
 
     if args.list:
@@ -197,9 +197,10 @@ def main():
         print(f"with want(sort_order, type, md5) as (values {rows}),\n"
               f"have as (select sort_order, type, md5(payload::text) md5 from classroom_blocks "
               f"where lesson_id = '{args.verify}')\n"
-              "select coalesce(w.sort_order, h.sort_order) sort_order, w.type, "
-              "(w.md5 = h.md5 and w.type = h.type) ok from want w full join have h using (sort_order) "
-              "order by 1;")
+              "select count(*) blocks, string_agg(case when w.md5 = h.md5 and w.type = h.type "
+              "then 'ok' else 'BAD ' || coalesce(w.sort_order, h.sort_order) end, ' ' "
+              "order by coalesce(w.sort_order, h.sort_order)) result "
+              "from want w full join have h using (sort_order);")
         return
     if args.chunks:
         rows = []

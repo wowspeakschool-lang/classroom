@@ -85,9 +85,14 @@ def choose(title, items):
         for q, opts, ok in items]})
 
 
-def order(sentence, words=None):
+def order(sentence, words=None, title=None, image=None):
     words = words or sentence.split(" ")
-    return ("order", {"words": words, "sentence": sentence, "audio_tts": sentence})
+    out = {"words": words, "sentence": sentence, "audio_tts": sentence}
+    if title:
+        out = {"title": title, **out}
+    if image:
+        out["image"] = image
+    return ("order", out)
 
 
 def hello(html, picture="hello_wave"):
@@ -98,4 +103,74 @@ def bye(html="<h3>Поздравляю! Ты завершил домашнее �
              "<p>Увидимся на занятии!</p>", picture="well_done_trophy"):
     return ("text", {"html": pic(shared(picture), height=180) + html})
 
+
+def mcq(title, items):
+    """Тест «выбери вариант». items: (вопрос, [варианты], верный[, картинка]).
+
+    В выгрузке верный вариант всегда стоит первым — перемешиваем, но не
+    случайно, а от текста вопроса: сборка повторяется байт в байт.
+
+    Позицию верного ответа не отдаём случаю: на шести вопросах случай
+    поставил его первым пять раз. Неверные перемешиваются, а верный идёт
+    по кругу — от вопроса к вопросу на следующее место.
+    """
+    qs = []
+    shift = len(title or "")
+    for i, it in enumerate(items):
+        q, opts, ok = it[:3]
+        wrong = [o for o in opts if o != ok]
+        random.Random(q + "|" + ok).shuffle(wrong)
+        opts = wrong[:]
+        opts.insert((i + shift) % len(opts + [ok]), ok)
+        one = {"q": q, "type": "single", "options": [{"text": o} for o in opts],
+               "correct": [opts.index(ok)]}
+        if len(it) > 3 and it[3]:
+            one["image"] = it[3]
+        qs.append(one)
+    out = {"questions": qs}
+    if title:
+        out = {"title": title, **out}
+    return ("quiz", out)
+
+
+def true_false(title, items):
+    """«Верно / неверно» с картинкой. У блока truefalse картинки нет, поэтому
+    это quiz с двумя вариантами в постоянном порядке.
+    items: (утверждение, верно ли[, картинка])."""
+    qs = []
+    for it in items:
+        st, ok = it[:2]
+        one = {"q": st, "type": "single",
+               "options": [{"text": "Верно"}, {"text": "Неверно"}],
+               "correct": [0 if ok else 1]}
+        if len(it) > 2 and it[2]:
+            one["image"] = it[2]
+        qs.append(one)
+    return ("quiz", {"title": title, "questions": qs})
+
+
+def anagram(word):
+    """Буквы слова вперемешку, от самого слова; совпасть со словом не может."""
+    letters = list(word)
+    rnd = random.Random(word)
+    while True:
+        rnd.shuffle(letters)
+        if "".join(letters) != word:
+            return " ".join(l.upper() for l in letters)
+
+
+def gapped(word):
+    """«m _ t _ e r»: видна каждая вторая буква и последняя."""
+    return " ".join(c if i % 2 == 0 or i == len(word) - 1 else "_"
+                    for i, c in enumerate(word))
+
+
+def listening(title, picture=None):
+    """Аудио из выгрузки не приходит никогда. Блок с пустым audio ставим, чтобы
+    методист вставила файл и номера блоков не сдвинулись; у quiz и truefalse
+    своего поля audio в редакторе нет, поэтому аудио — в текстовом блоке перед ними."""
+    html = f"<p><b>{title}</b></p>"
+    if picture:
+        html += pic(picture)
+    return ("text", {"audio": "", "html": html})
 
