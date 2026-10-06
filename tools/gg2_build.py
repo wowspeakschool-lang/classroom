@@ -143,7 +143,7 @@ def check(lesson, errors):
 
     for i, (btype, payload, _) in enumerate(blocks_of(lesson), start=1):
         dump = json.dumps(payload, ensure_ascii=False)
-        for link in re.findall(r"@@MEDIA@@([^\"'\\s)<]+)", dump):
+        for link in re.findall(r"@@MEDIA@@([^\"'\s)<\\]+)", dump):
             if not os.path.exists(os.path.join(ROOT, "media", link)):
                 errors.append(f"блок {i} ({btype}): нет файла media/{link}")
         if "base64," in dump:
