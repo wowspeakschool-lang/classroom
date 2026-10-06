@@ -1,0 +1,33 @@
+-- Go Getter 2 · Unit 4 · Our world · Homework 5
+-- собрано tools/gg2_build.py --lesson u4_hw5
+-- заливалось через execute_sql кусками (--setup, --clear, --chunks); этот файл — исходник
+insert into classroom_units (course_id, title, sort_order)
+select c.id, 'Unit 4 · Our world', 4 from classroom_courses c
+where c.slug = 'gg2'
+  and not exists (select 1 from classroom_units u where u.course_id = c.id and u.title = 'Unit 4 · Our world');
+insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)
+select u.id, 'Homework 5', 'homework', 60, false, 4
+from classroom_units u join classroom_courses c on c.id = u.course_id
+where c.slug = 'gg2' and u.title = 'Unit 4 · Our world'
+  and not exists (select 1 from classroom_lessons l where l.unit_id = u.id and l.title = 'Homework 5');
+update classroom_lessons l set kind = 'homework', pass_threshold = 60, sort_order = 4
+from classroom_units u join classroom_courses c on c.id = u.course_id
+where l.unit_id = u.id and c.slug = 'gg2' and u.title = 'Unit 4 · Our world' and l.title = 'Homework 5';
+select l.id, l.kind, l.pass_threshold, l.is_published from classroom_lessons l
+join classroom_units u on u.id = l.unit_id join classroom_courses c on c.id = u.course_id
+where c.slug = 'gg2' and u.title = 'Unit 4 · Our world' and l.title = 'Homework 5';
+
+-- затем: delete блоков урока (CTE) и вставка:
+-- кусок 1
+insert into classroom_blocks (lesson_id, type, payload, sort_order) values
+('<lesson_id>', 'text', replace($blk${"html": "<p><img src=\"@@MEDIA@@shared/hello_wave.webp\" alt=\"\" style=\"height:200px\"></p><h2>Привет, самый старательный и классный ученик!</h2><p>Сегодня тебе предстоит много читать :) Но ты точно справишься, ведь для тебя нет ничего невозможного 😎 Давай начнём?</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 0),
+('<lesson_id>', 'text', replace($blk${"html": "<p>Сначала прочитаем текст о рекордах, которые установили ученики одной школы, а потом сделаем по нему несколько заданий.</p><p><img src=\"@@MEDIA@@gg2/u4/book_school_records.webp\" alt=\"\" style=\"max-width:100%;max-height:340px;border-radius:12px\"></p><h3>Friday 24th May: School Records Competition</h3><p>What do you think of world records? In my opinion, they are fun and interesting. Well, we have a School Records Competition every year. It is the funniest day of the year! Everyone can join the fun!</p><p><b>These are some records to beat:</b></p><ul><li><b>Thomas Baker:</b> He’s the fastest runner. 100m in 14.4 seconds!</li><li><b>Katie Lancer:</b> She’s the most intelligent student. 19/20 questions correct in 5 minutes.</li><li><b>Mrs Price</b> (our Maths teacher!): Her pizza is the longest of all: 80 centimetres long!</li><li><b>Daniella</b> (Mr Nunn’s pet cat!): She’s the most beautiful pet of all. Bring your photos, not your pets!</li></ul><p>Are you faster, taller, more intelligent or maybe funnier than your classmates? Then come to the School Records Competition and be the best!</p><p>Check out the after school clubs website for all the records you can try. There are a lot of them!</p><p>Contact me: Gordon Butler for forms.</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 1),
+('<lesson_id>', 'quiz', replace($blk${"questions": [{"q": "О чём текст, который ты прочитал? What is the text about?", "type": "single", "options": [{"text": "a sports club"}, {"text": "a school competition"}, {"text": "a pet show"}, {"text": "a pizza restaurant"}], "correct": [1]}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 2),
+('<lesson_id>', 'gaps', replace($blk${"title": "Прочитай текст ещё раз. Найди правильный ответ на каждый вопрос.", "mode": "drag", "text": "1. Who is the fastest runner? __Thomas Baker__\n2. Who has the competition forms? __Gordon Butler__\n3. Who is the cleverest person? __Katie Lancer__\n4. Who has the most beautiful pet? __Mr Nunn__\n5. Who can make the longest pizza? __Mrs Price__"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 3),
+('<lesson_id>', 'task', replace($blk${"title": "Ответь на вопросы по тексту", "needs_review": true, "html": "<p>Прочитай текст ещё раз (если нужно) и ответь на вопросы.</p><p><i>Образец: What’s the name of the competition? — School Records Competition.</i></p><ol><li>When is the competition?</li><li>What does Gordon think of world records?</li><li>Who can join the fun?</li><li>Where can you find all the records?</li><li>How many records are there to try?</li></ol>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 4),
+('<lesson_id>', 'text', replace($blk${"html": "<p>Ещё одно очень интересное задание. Посмотри на подсказку, а потом соедини начало предложения с его концом.</p><p><img src=\"@@MEDIA@@gg2/u4/book_look_sizes.webp\" alt=\"\" style=\"max-width:100%;max-height:200px;border-radius:12px\"></p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 5),
+('<lesson_id>', 'match', replace($blk${"title": "Соедини начало предложения с его концом.", "pairs": [{"left": "My parents", "right": "are 42 years old.", "right_audio_tts": "are 42 years old."}, {"left": "The Eiffel Tower", "right": "is 324 metres high.", "right_audio_tts": "is 324 metres high."}, {"left": "My baby sister", "right": "is 12 months old.", "right_audio_tts": "is 12 months old."}, {"left": "My dad", "right": "is 1 metre 80 centimetres tall.", "right_audio_tts": "is 1 metre 80 centimetres tall."}, {"left": "This ruler", "right": "is 30 centimetres long.", "right_audio_tts": "is 30 centimetres long."}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 6),
+('<lesson_id>', 'text', replace($blk${"html": "<p>А вот и последнее задание. <b>Оно необязательное</b>, но будет очень здорово, если ты его сделаешь :) Мы будем измерять всё, что нас окружает. Сначала нарисуй двух знакомых тебе людей, одно здание (можно достопримечательность) и один предмет.</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 7),
+('<lesson_id>', 'speaking', replace($blk${"title": "Расскажи о своих рисунках 🎤", "needs_review": true, "html": "<p>А теперь расскажи о каждом рисунке: какого он размера или сколько лет человеку.</p><p><i>For example: My mum is 38 years old. The Eiffel Tower is 324 metres high.</i></p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 8),
+('<lesson_id>', 'text', replace($blk${"html": "<p><img src=\"@@MEDIA@@shared/congrats_popper.webp\" alt=\"\" style=\"height:180px\"></p><h3>Bye-bye! 👋</h3><p>Ты отлично поработал. Увидимся на занятии!</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 9)
+returning sort_order, type;

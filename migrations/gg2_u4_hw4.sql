@@ -1,0 +1,40 @@
+-- Go Getter 2 · Unit 4 · Our world · Homework 4
+-- собрано tools/gg2_build.py --lesson u4_hw4
+-- заливалось через execute_sql кусками (--setup, --clear, --chunks); этот файл — исходник
+insert into classroom_units (course_id, title, sort_order)
+select c.id, 'Unit 4 · Our world', 4 from classroom_courses c
+where c.slug = 'gg2'
+  and not exists (select 1 from classroom_units u where u.course_id = c.id and u.title = 'Unit 4 · Our world');
+insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)
+select u.id, 'Homework 4', 'homework', 60, false, 3
+from classroom_units u join classroom_courses c on c.id = u.course_id
+where c.slug = 'gg2' and u.title = 'Unit 4 · Our world'
+  and not exists (select 1 from classroom_lessons l where l.unit_id = u.id and l.title = 'Homework 4');
+update classroom_lessons l set kind = 'homework', pass_threshold = 60, sort_order = 3
+from classroom_units u join classroom_courses c on c.id = u.course_id
+where l.unit_id = u.id and c.slug = 'gg2' and u.title = 'Unit 4 · Our world' and l.title = 'Homework 4';
+select l.id, l.kind, l.pass_threshold, l.is_published from classroom_lessons l
+join classroom_units u on u.id = l.unit_id join classroom_courses c on c.id = u.course_id
+where c.slug = 'gg2' and u.title = 'Unit 4 · Our world' and l.title = 'Homework 4';
+
+-- затем: delete блоков урока (CTE) и вставка:
+-- кусок 1
+insert into classroom_blocks (lesson_id, type, payload, sort_order) values
+('<lesson_id>', 'text', replace($blk${"html": "<p><img src=\"@@MEDIA@@shared/hello_headphones.webp\" alt=\"\" style=\"height:200px\"></p><h2>Привет-привет! Как твои дела?</h2><p>В этом домашнем задании мы будем говорить про фильмы 🎥 Ну что, поехали :)</p><p><img src=\"@@MEDIA@@gg2/u4/cinema.webp\" alt=\"\" style=\"max-width:100%;max-height:220px;border-radius:12px\"></p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 0),
+('<lesson_id>', 'text', replace($blk${"html": "<p>Давай сначала посмотрим видео, где ребята рассказывают про свои любимые фильмы. Если кажется, что они говорят слишком быстро, нажми на шестерёнку в видео и уменьши скорость 😉</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 1),
+('<lesson_id>', 'video', replace($blk${"title": "Посмотри видео: ребята рассказывают о любимых фильмах", "url": "", "provider": "file"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 2),
+('<lesson_id>', 'sequence', replace($blk${"title": "Вспомни разговор ребят из видео и расставь реплики по порядку.", "items": [{"text": "What’s your favourite film?"}, {"text": "My favourite film is ‘Puss in Boots’."}, {"text": "What about you?"}, {"text": "My favourite film is ‘The Angry Birds Movie 2’."}, {"text": "And what about you?"}, {"text": "My favourite film is ‘Shrek’."}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 3),
+('<lesson_id>', 'speaking', replace($blk${"title": "Мой любимый фильм 🎤", "needs_review": true, "html": "<p>Расскажи про свой любимый мультик или фильм. Нажми на микрофон и запиши ответ.</p><p><i>For example: My favourite film is … I think it is funnier than …</i></p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 4),
+('<lesson_id>', 'text', replace($blk${"html": "<p>Супер! Какой интересный рассказ! А сейчас давай расставим слова по порядку. Можешь подсматривать в подсказку :)</p><p><img src=\"@@MEDIA@@gg2/u4/book_opinions.webp\" alt=\"\" style=\"max-width:100%;max-height:300px;border-radius:12px\"></p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 5),
+('<lesson_id>', 'order', replace($blk${"words": ["What’s", "your", "favourite", "subject?"], "sentence": "What’s your favourite subject?", "audio_tts": "What's your favourite subject?"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 6),
+('<lesson_id>', 'order', replace($blk${"words": ["In", "my", "opinion,", "it’s", "a", "bit", "silly."], "sentence": "In my opinion, it’s a bit silly.", "audio_tts": "In my opinion, it's a bit silly."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 7),
+('<lesson_id>', 'order', replace($blk${"words": ["What", "about", "you,", "Kim?"], "sentence": "What about you, Kim?", "audio_tts": "What about you, Kim?"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 8),
+('<lesson_id>', 'order', replace($blk${"words": ["I", "think", "that", "cartoons", "are", "more", "exciting."], "sentence": "I think that cartoons are more exciting.", "audio_tts": "I think that cartoons are more exciting."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 9),
+('<lesson_id>', 'order', replace($blk${"words": ["What", "do", "you", "think", "of", "adventure stories?"], "sentence": "What do you think of adventure stories?", "audio_tts": "What do you think of adventure stories?"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 10),
+('<lesson_id>', 'gaps', replace($blk${"title": "Билли и Патти разговаривают о любимых книгах. Прочитай разговор и впиши потерявшиеся слова.", "mode": "type", "image": "@@MEDIA@@gg2/u4/book_billy_patty.webp", "text": "Patty: What’s your __favourite|favorite__ book, Billy?\nBilly: __My__ favourite book is Harry Potter and the Philosopher’s Stone.\nPatty: What do you think __of__ adventure stories?\nBilly: I __think__ adventure stories are great. __What__ about you, Patty?\nPatty: In my __opinion__, funny stories are better than adventure stories.\nBilly: Well, Harry Potter books are adventure stories and they are funny too.\nPatty: You’re __right__."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 11),
+('<lesson_id>', 'text', replace($blk${"html": "<p>Молодец! А теперь представь, что кто-то разговаривает о фильмах с тобой. Выбери самый подходящий ответ на каждую реплику.</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 12),
+('<lesson_id>', 'quiz', replace($blk${"questions": [{"q": "What do you think of cartoons?", "type": "single", "options": [{"text": "I think they’re funny."}, {"text": "That’s true."}], "correct": [0]}, {"q": "What about you?", "type": "single", "options": [{"text": "I often watch a film."}, {"text": "I prefer Transformers."}], "correct": [1]}, {"q": "In my opinion, Frozen is a great film.", "type": "single", "options": [{"text": "I think so."}, {"text": "You’re right."}], "correct": [1]}, {"q": "I think action films are better than cartoons.", "type": "single", "options": [{"text": "My favourite cartoon is Frozen."}, {"text": "In my opinion, cartoons are better."}], "correct": [1]}, {"q": "Do you like cartoons or action films?", "type": "single", "options": [{"text": "Cartoons. I think they are funnier than action films."}, {"text": "I don’t like watching cartoons."}], "correct": [0]}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 13),
+('<lesson_id>', 'text', replace($blk${"html": "<p>Великолепно 👍 Давай прочитаем рассказы Тины и Гари об их любимых фильмах.</p><p><b>Tina:</b> I like cartoons. I don’t like action films. My favourite film is <i>Minions</i>. I think it is funnier than an action film.</p><p><b>Gary:</b> I don’t like cartoons. I like action films. My favourite film is <i>Transformers</i>. I think it is more exciting than a cartoon.</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 14),
+('<lesson_id>', 'gaps', replace($blk${"title": "Заполни табличку информацией из текстов.", "mode": "type", "text": "Tina. Cartoons or action films? __cartoons__ · Favourite film: __Minions__ · Why? It is __funnier__ than an action film.\nGary. Cartoons or action films? __action films__ · Favourite film: __Transformers__ · Why? It is __more exciting__ than a cartoon."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 15),
+('<lesson_id>', 'text', replace($blk${"html": "<p><img src=\"@@MEDIA@@shared/well_done_smiley.webp\" alt=\"\" style=\"height:180px\"></p><h3>Bye-bye! 👋</h3><p>Отличная работа! До встречи на занятии.</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 16)
+returning sort_order, type;
