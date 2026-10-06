@@ -1,21 +1,21 @@
--- Go Getter 3 · Unit 2 · Shopping · Unit 2 Test
+-- Go Getter 3 · Unit 2 · Unit 2 Test
 -- собрано tools/gg3_build.py --lesson u2_test
 -- заливалось через execute_sql кусками (--setup, --clear, --chunks); этот файл — исходник
 insert into classroom_units (course_id, title, sort_order)
-select c.id, 'Unit 2 · Shopping', 2 from classroom_courses c
+select c.id, 'Unit 2', 2 from classroom_courses c
 where c.slug = 'gg3'
-  and not exists (select 1 from classroom_units u where u.course_id = c.id and u.title = 'Unit 2 · Shopping');
+  and not exists (select 1 from classroom_units u where u.course_id = c.id and u.title = 'Unit 2');
 insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)
 select u.id, 'Unit 2 Test', 'test', 90, false, 0
 from classroom_units u join classroom_courses c on c.id = u.course_id
-where c.slug = 'gg3' and u.title = 'Unit 2 · Shopping'
+where c.slug = 'gg3' and u.title = 'Unit 2'
   and not exists (select 1 from classroom_lessons l where l.unit_id = u.id and l.title = 'Unit 2 Test');
 update classroom_lessons l set kind = 'test', pass_threshold = 90, sort_order = 0
 from classroom_units u join classroom_courses c on c.id = u.course_id
-where l.unit_id = u.id and c.slug = 'gg3' and u.title = 'Unit 2 · Shopping' and l.title = 'Unit 2 Test';
+where l.unit_id = u.id and c.slug = 'gg3' and u.title = 'Unit 2' and l.title = 'Unit 2 Test';
 select l.id, l.kind, l.pass_threshold, l.is_published from classroom_lessons l
 join classroom_units u on u.id = l.unit_id join classroom_courses c on c.id = u.course_id
-where c.slug = 'gg3' and u.title = 'Unit 2 · Shopping' and l.title = 'Unit 2 Test';
+where c.slug = 'gg3' and u.title = 'Unit 2' and l.title = 'Unit 2 Test';
 
 -- затем: delete блоков урока (CTE) и вставка:
 -- кусок 1

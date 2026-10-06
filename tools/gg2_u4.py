@@ -15,7 +15,7 @@
 from gg2_build import img, shared, todo, video
 
 U = "u4"
-UNIT = {"unit": U, "unit_title": "Unit 4 · Our world", "unit_sort": 4}
+UNIT = {"unit": U, "unit_title": "Unit 4", "unit_sort": 4}
 
 
 def book(name):

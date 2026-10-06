@@ -8,7 +8,7 @@ Homework 5 и теста (утв. 6) заменены на «Неверно» �
 from gg2_build import img, shared, todo, video
 
 U = "u1"
-UNIT = {"unit": U, "unit_title": "Unit 1 · School", "unit_sort": 1}
+UNIT = {"unit": U, "unit_title": "Unit 1", "unit_sort": 1}
 
 SUBJECTS = [  # (англ., перевод, картинка)
     ("Art", "изобразительное искусство", "subj_art"),

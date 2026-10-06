@@ -8,7 +8,7 @@ import random
 from gg2_build import img, shared, todo, video
 
 U = "u6"
-UNIT = {"unit": U, "unit_title": "Unit 6 · Jobs", "unit_sort": 6}
+UNIT = {"unit": U, "unit_title": "Unit 6", "unit_sort": 6}
 
 JOBS = [
     ("artist", "художник", "artist"),

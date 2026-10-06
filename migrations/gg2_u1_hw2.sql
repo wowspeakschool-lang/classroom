@@ -1,21 +1,21 @@
--- Go Getter 2 · Unit 1 · School · Homework 2
+-- Go Getter 2 · Unit 1 · Homework 2
 -- собрано tools/gg2_build.py --lesson u1_hw2
 -- заливалось через execute_sql кусками (--setup, --clear, --chunks); этот файл — исходник
 insert into classroom_units (course_id, title, sort_order)
-select c.id, 'Unit 1 · School', 1 from classroom_courses c
+select c.id, 'Unit 1', 1 from classroom_courses c
 where c.slug = 'gg2'
-  and not exists (select 1 from classroom_units u where u.course_id = c.id and u.title = 'Unit 1 · School');
+  and not exists (select 1 from classroom_units u where u.course_id = c.id and u.title = 'Unit 1');
 insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)
 select u.id, 'Homework 2', 'homework', 60, false, 1
 from classroom_units u join classroom_courses c on c.id = u.course_id
-where c.slug = 'gg2' and u.title = 'Unit 1 · School'
+where c.slug = 'gg2' and u.title = 'Unit 1'
   and not exists (select 1 from classroom_lessons l where l.unit_id = u.id and l.title = 'Homework 2');
 update classroom_lessons l set kind = 'homework', pass_threshold = 60, sort_order = 1
 from classroom_units u join classroom_courses c on c.id = u.course_id
-where l.unit_id = u.id and c.slug = 'gg2' and u.title = 'Unit 1 · School' and l.title = 'Homework 2';
+where l.unit_id = u.id and c.slug = 'gg2' and u.title = 'Unit 1' and l.title = 'Homework 2';
 select l.id, l.kind, l.pass_threshold, l.is_published from classroom_lessons l
 join classroom_units u on u.id = l.unit_id join classroom_courses c on c.id = u.course_id
-where c.slug = 'gg2' and u.title = 'Unit 1 · School' and l.title = 'Homework 2';
+where c.slug = 'gg2' and u.title = 'Unit 1' and l.title = 'Homework 2';
 
 -- затем: delete блоков урока (CTE) и вставка:
 -- кусок 1

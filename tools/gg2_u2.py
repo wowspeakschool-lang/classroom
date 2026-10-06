@@ -11,7 +11,7 @@ import random
 from gg2_build import img, shared, todo, video
 
 U = "u2"
-UNIT = {"unit": U, "unit_title": "Unit 2 · Food", "unit_sort": 2}
+UNIT = {"unit": U, "unit_title": "Unit 2", "unit_sort": 2}
 
 
 def hello(name, title, body):

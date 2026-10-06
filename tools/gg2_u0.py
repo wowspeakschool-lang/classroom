@@ -6,7 +6,7 @@
 from gg2_build import img, shared, todo, video
 
 U = "u0"
-UNIT = {"unit": U, "unit_title": "Unit 0 · Get started!", "unit_sort": 0}
+UNIT = {"unit": U, "unit_title": "Unit 0", "unit_sort": 0}
 
 
 def order(parts, image=None):

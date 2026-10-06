@@ -6,7 +6,7 @@ HW2 (1)·12 ключ «going» (не «going to»), HW2 (1)·8 «her homework».
 from gg2_build import img, shared, todo, video
 
 U = "u8"
-UNIT = {"unit": U, "unit_title": "Unit 8 · Celebrations", "unit_sort": 8}
+UNIT = {"unit": U, "unit_title": "Unit 8", "unit_sort": 8}
 
 
 def hello(name, title, *paras):

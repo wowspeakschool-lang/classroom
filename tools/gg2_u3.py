@@ -9,7 +9,7 @@ Homework 6, блоки 4–5: варианты восстановлены — Г
 from gg2_build import img, shared, todo, video
 
 U = "u3"
-UNIT = {"unit": U, "unit_title": "Unit 3 · Technology", "unit_sort": 3}
+UNIT = {"unit": U, "unit_title": "Unit 3", "unit_sort": 3}
 
 GADGETS = [  # (англ., перевод, картинка)
     ("mobile phone", "мобильный телефон", "mobile_phone"),

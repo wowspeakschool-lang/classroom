@@ -8,7 +8,7 @@
 from gg2_build import img, shared, todo, video
 
 U = "u5"
-UNIT = {"unit": U, "unit_title": "Unit 5 · My town", "unit_sort": 5}
+UNIT = {"unit": U, "unit_title": "Unit 5", "unit_sort": 5}
 
 
 def hello(pic, title, *paras):

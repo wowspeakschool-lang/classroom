@@ -3,7 +3,7 @@ from gg2_build import todo
 from gg3_kit import unit, gimg, match_block, letters_block, q, quiz_block, order_block, speaking
 
 U = "u1"
-UNIT = unit(1, "Unit 1 · Chores")
+UNIT = unit(1, "Unit 1")
 
 LESSONS = {
     "u1_test": {**UNIT, "lesson_title": "Unit 1 Test", "lesson_sort": 0, "kind": "test", "blocks": [

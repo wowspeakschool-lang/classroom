@@ -2,7 +2,7 @@
 from gg2_build import img, shared, todo, video
 
 U = "u7"
-UNIT = {"unit": U, "unit_title": "Unit 7 · Travel", "unit_sort": 7}
+UNIT = {"unit": U, "unit_title": "Unit 7", "unit_sort": 7}
 
 
 def hello(pic, title, *paras):

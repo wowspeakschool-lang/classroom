@@ -2,7 +2,7 @@
 from gg3_kit import unit, gimg, match_block, letters_block, q, quiz_block, order_block, speaking
 
 U = "u2"
-UNIT = unit(2, "Unit 2 · Shopping")
+UNIT = unit(2, "Unit 2")
 
 LESSONS = {
     "u2_test": {**UNIT, "lesson_title": "Unit 2 Test", "lesson_sort": 0, "kind": "test", "blocks": [
