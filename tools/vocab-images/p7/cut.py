@@ -14,17 +14,19 @@ lib.BG_MIN, lib.BG_GREY, lib.KEEP_SOFT = 250, 8, True
 
 # Сцены с белым содержимым (лёд, снег): фон вырезается вместе с ним — заливаем сцену целиком
 FILL_OLD = None  # заливка дыр больше не нужна: её заменил строгий порог фона
-FILL = set()
+FILL = {'advise'}
 # вырезать зажатый белый фон (не везде: белое внутри пузырей пропадало)
 # белое, которое чистка кусков фона не трогает: облачка, снег, разметка, облака у края сцены
 KEEP_WHITE = set()
 # сцены, где фон застрял между фигурами и под ногами: чистим жёстче
 EXTRA = set()
 HOLES = set()
+# белая одежда без контура у края (халат): закрываем маску на N пикселей
+CLOSE = {'advise': 10}
 
 # Листы, где генератор разложил картинки иначе, чем в промпте
 # Границы клеток вручную: {лист: {номер ряда: [границы]}}; граница-ступенька (y, x_выше, x_ниже)
-CUTS = {}
+CUTS = {2: {0: [296, 633, (190, 985, 945), 1213]}}
 
 IMAGES = '/tmp/claude-0/-home-user-classroom/d4a2a0a4-519c-5b81-af84-18451bfcf9dd/images'
 
@@ -173,6 +175,12 @@ def cut(sheet, path, out='out'):
         p = f'{out}/{sheet}/{fname(t)}'
         if os.path.exists(p) and t not in OUTLINE_ONLY:
             clean_png(p)
+        if os.path.exists(p) and t in CLOSE:
+            from scipy.ndimage import binary_closing, binary_fill_holes
+            im = np.array(Image.open(p).convert('RGBA'))
+            m = binary_fill_holes(binary_closing(im[..., 3] > 40, iterations=CLOSE[t]))
+            im[m & (im[..., 3] <= 40), :3] = 255; im[m, 3] = 255
+            Image.fromarray(im).save(p)
     print(f'лист {sheet} {title}:'); print('\n'.join(report))
 
 
