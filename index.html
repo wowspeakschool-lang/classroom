@@ -1598,11 +1598,11 @@ function runBlock(b){
       const qimg=q.image?`<div style="text-align:center;margin:6px 0"><img src="${esc(q.image)}" style="max-height:220px;max-width:80%;border-radius:12px"></div>`:'';
       return `<div style="margin-bottom:10px"><div style="font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span>${qi+1}. ${q.q||''}</span>${audio}</div>${qimg}${opts}</div>`;
     }).join('');
-    return `<div class="block">${head}${qs}<button class="btn sm" onclick="runQuiz('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
+    return `<div class="block">${head}${p.title?`<div style="margin-bottom:10px"><b>${esc(p.title)}</b></div>`:''}${qs}<button class="btn sm" onclick="runQuiz('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
   }
   if(b.type==='exact_input'){
     const items=(p.items||[]).map((it,ii)=>`<div style="margin-bottom:8px"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">${it.audio?audBtn(it.audio,true):''}${it.image?`<img src="${esc(it.image)}" style="max-height:120px;border-radius:12px">`:''}<span>${esc(it.prompt||'')}</span></div><input id="ei-${id}-${ii}" placeholder="ответ" style="max-width:280px;margin-top:6px"></div>`).join('');
-    return `<div class="block">${head}${items}<button class="btn sm" onclick="runExact('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
+    return `<div class="block">${head}${p.title?`<div style="margin-bottom:10px"><b>${esc(p.title)}</b></div>`:''}${items}<button class="btn sm" onclick="runExact('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
   }
   if(b.type==='match'){
     const st=RUN_MATCH[id] || { rights:(p.pairs||[]).map((x,ix)=>({val:(x.right!=null?x.right:('#'+ix)), image:x.right_image, audio:x.right_audio})) };
@@ -1628,7 +1628,7 @@ function runBlock(b){
       <div style="margin-top:6px"><button class="btn${p.answer_kind==='audio'?' sec':''} sm" onclick="runTask('${id}')">${p.answer_kind==='audio'?'Отправить без записи':'Отправить на проверку'}</button><span id="res-${id}" class="muted"></span></div></div>`;
   }
   if(b.type==='order'){
-    return `<div class="block">${head}${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:260px;border-radius:12px"></div>`:''}${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}<div style="margin-bottom:8px">Нажимай слова по порядку, чтобы собрать предложение:</div>
+    return `<div class="block">${head}${p.title?`<div style="margin-bottom:10px"><b>${esc(p.title)}</b></div>`:''}${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:260px;border-radius:12px"></div>`:''}${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}<div style="margin-bottom:8px">Нажимай слова по порядку, чтобы собрать предложение:</div>
       <div class="worder-ans" id="oa-${id}"></div>
       <div id="ob-${id}"></div>
       <button class="btn sm" style="margin-top:8px" onclick="runOrder('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
