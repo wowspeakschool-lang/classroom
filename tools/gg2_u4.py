@@ -179,6 +179,7 @@ LESSONS = {
              "right_audio_tts": "I'm better than you at tricks."},
         ]}), ("check", "левая часть пар в выгрузке пустая (были картинки героев видео): заменить «Герой 1–3» "
                        "картинками героев и проверить пары по видео")),
+        tx("<p>Тебя не проведёшь! А теперь посмотри на правило из конца видео:</p>" + im(book("comparative_rule"), 360)),
         ("match", {"title": "Посмотри на правило. Соедини обычное слово с его сравнительной формой.", "pairs": [
             {"left": "big", "right": "bigger", "right_audio_tts": "bigger"},
             {"left": "high", "right": "higher", "right_audio_tts": "higher"},
@@ -190,7 +191,6 @@ LESSONS = {
             {"left": "boring", "right": "more boring", "right_audio_tts": "more boring"},
             {"left": "expensive", "right": "more expensive", "right_audio_tts": "more expensive"},
         ]}),
-        tx("<p>Правило-подсказка:</p>" + im(book("comparative_rule"), 360)),
         tx("<p>Великолепно! Следующее задание кажется простым, но будь внимателен. "
            "Расставь слова по порядку, чтобы получились предложения.</p>"),
         order(["I’m", "taller", "than", "my", "friend."]),

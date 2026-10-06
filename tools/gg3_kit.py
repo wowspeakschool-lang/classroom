@@ -50,7 +50,7 @@ def letters_block(u, items, title="Посмотри на картинку и в�
 
     Какие буквы были пропущены в выгрузке, не видно — скрываем гласные."""
     block = ("exact_input", {"title": title, "items": [
-        {"image": gimg(u, name), "prompt": f"{n}. Напиши фразу целиком: {mask(text)}", "accept": accept(text)}
+        {"image": gimg(u, name), "prompt": f"{n}. Напиши {'фразу' if ' ' in text else 'слово'} целиком: {mask(text)}", "accept": accept(text)}
         for n, (name, text) in enumerate(items, start=1)]})
     return todo(block, ("check", "СОСТАВ МОЙ: какие буквы пропущены в выгрузке, не видно — "
                                  "скрыты гласные (кроме первой буквы слова), ребёнок пишет фразу целиком"))
