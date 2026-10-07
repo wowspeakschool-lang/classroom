@@ -29,7 +29,7 @@ grade	module	section	term	pos	translation	note
 5	Starter Unit		egg	n	яйцо	
 5	Starter Unit		equals	v	равняется	
 5	Starter Unit		eraser	n	ластик	
-5	Starter Unit		finish	n;v	финиш, окончание; заканчивать	
+5	Starter Unit		finish	n; v	финиш, окончание; заканчивать	
 5	Starter Unit		flag	n	флаг	
 5	Starter Unit		fox	n	лиса	
 5	Starter Unit		flower	n	цветок	
@@ -163,7 +163,7 @@ grade	module	section	term	pos	translation	note
 5	Module 1	1b	sixteen	num	шестнадцать	
 5	Module 1	1b	strange	adj	странный	
 5	Module 1	1b	twelve	num	двенадцать	
-5	Module 1	1b	then	conj	затем	
+5	Module 1	1b	then	adv	затем	
 5	Module 1	1b	thirteen	num	тринадцать	
 5	Module 1	1b	together	adv	вместе	
 5	Module 1	1b	twenty	num	двадцать	
@@ -397,7 +397,7 @@ grade	module	section	term	pos	translation	note
 5	Module 3	3c	wall	n	стена	
 5	Module 3	3c	I like ... very much.		Мне очень нравится ... .	
 5	Module 3	3c	Where exactly is it?		Где именно это находится?	
-5	Module 3	3d - Culture Corner	all	prn	все, весь	
+5	Module 3	3d - Culture Corner	all	pron	все, весь	
 5	Module 3	3d - Culture Corner	another	pron	другой	
 5	Module 3	3d - Culture Corner	back garden	n	сад за домом	
 5	Module 3	3d - Culture Corner	central heating		центральное отопление	
@@ -598,7 +598,7 @@ grade	module	section	term	pos	translation	note
 5	Module 5	5b	anyway	adv	в любом случае	
 5	Module 5	5b	beak	n	клюв	
 5	Module 5	5b	bear	n	медведь	
-5	Module 5	5b	cute	adj	умный, сообразительный	
+5	Module 5	5b	cute	adj	милый, симпатичный	
 5	Module 5	5b	feather	n	перо	
 5	Module 5	5b	find	irr v	находить	
 5	Module 5	5b	fish	n	рыба	
@@ -627,7 +627,7 @@ grade	module	section	term	pos	translation	note
 5	Module 5	5b	wing	n	крыло	
 5	Module 5	5b	parts of the body		части тела	
 5	Module 5	5c	activity	n	деятельность, занятие	
-5	Module 5	5c	bright	n	яркий	
+5	Module 5	5c	bright	adj	яркий	
 5	Module 5	5c	budgie	n	волнистый попугайчик	
 5	Module 5	5c	cow	n	корова	
 5	Module 5	5c	dog	n	собака	
@@ -653,7 +653,7 @@ grade	module	section	term	pos	translation	note
 5	Module 5	5c	talk online		разговаривать через интернет	
 5	Module 5	5d - Culture Corner	characteristic	n	характеристика	
 5	Module 5	5d - Culture Corner	complete	v	заполнять, завершать	
-5	Module 5	5d - Culture Corner	cute	adj	умный, сообразительный	
+5	Module 5	5d - Culture Corner	cute	adj	милый, симпатичный	
 5	Module 5	5d - Culture Corner	eucalyptus	n	эвкалипт	
 5	Module 5	5d - Culture Corner	fact file		анкета	
 5	Module 5	5d - Culture Corner	furry	adj	пушистый, меховой	
@@ -701,7 +701,7 @@ grade	module	section	term	pos	translation	note
 5	Module 5	Across the Curriculum 5: Science	field	n	поле	
 5	Module 5	Across the Curriculum 5: Science	fly	n	муха	
 5	Module 5	Across the Curriculum 5: Science	forest	n	лес	
-5	Module 5	Across the Curriculum 5: Science	grasshoper	n	кузнечик	
+5	Module 5	Across the Curriculum 5: Science	grasshopper	n	кузнечик	
 5	Module 5	Across the Curriculum 5: Science	ground	n	земля	
 5	Module 5	Across the Curriculum 5: Science	honey	n	мёд	
 5	Module 5	Across the Curriculum 5: Science	important	adj	важный	
@@ -717,7 +717,7 @@ grade	module	section	term	pos	translation	note
 5	Module 5	Across the Curriculum 5: Science	wasp	n	оса	
 5	Module 5	Across the Curriculum 5: Science	waste	n	отходы	
 5	Module 6	6a	acrobatics	n	акробатика	
-5	Module 6	6a	action hero		главный герой	
+5	Module 6	6a	action hero		герой боевика	
 5	Module 6	6a	after	prep	после	
 5	Module 6	6a	always	adv	всегда	
 5	Module 6	6a	archaeologist	n	археолог	
@@ -819,7 +819,7 @@ grade	module	section	term	pos	translation	note
 5	Module 6	English in Use 6	suggestion	n	предложение	
 5	Module 6	English in Use 6	go to the cinema		ходить в кино	
 5	Module 6	English in Use 6	be tired		уставать	
-5	Module 6	English in Use 6	See you at ... o' clock.		Увидимся в ... часов.	
+5	Module 6	English in Use 6	See you at ... o'clock.		Увидимся в ... часов.	
 5	Module 6	English in Use 6	Sure, that's a good idea.		Конечно, это хорошая идея.	
 5	Module 6	English in Use 6	What/How about having a coffee?		Как насчёт кофе?	
 5	Module 6	English in Use 6	Why don't we go ... ?		Почему бы нам не пойти ... ?	
@@ -860,7 +860,7 @@ grade	module	section	term	pos	translation	note
 5	Module 7	7a	balcony	n	балкон	
 5	Module 7	7a	chat log		чат	
 5	Module 7	7a	computer screen		экран компьютера	
-5	Module 7	7a	go swimming		идти купаться/плавать	
+5	Module 7	7a	go swimming		идти купаться/плавать; ходить купаться	
 5	Module 7	7a	image	n	изображение, образ	
 5	Module 7	7a	magazine	n	журнал	
 5	Module 7	7a	mind	n	ум, разум	
@@ -903,7 +903,6 @@ grade	module	section	term	pos	translation	note
 5	Module 7	7a	The sun is shining.		Светит солнце.	
 5	Module 7	7a	That's not my kind of place.		Это место не для меня.	
 5	Module 7	7a	What's the weather like in ...?		Какая погода в ...?	
-5	Module 7	7a	go swimming		ходить купаться	
 5	Module 7	7a	pick flowers		собирать цветы	
 5	Module 7	7a	rake leaves		сгребать листья	
 5	Module 7	7a	You're lucky.		Тебе повезло.	
@@ -960,7 +959,7 @@ grade	module	section	term	pos	translation	note
 5	Module 7	7d - Culture Corner	decide	v	решать	
 5	Module 7	7d - Culture Corner	jacket	n	куртка	
 5	Module 7	7d - Culture Corner	long-sleeved	adj	с длинными рукавами	
-5	Module 7	7d - Culture Corner	northwest	adj	северо-запад	
+5	Module 7	7d - Culture Corner	northwest	adj	северо-западный	
 5	Module 7	7d - Culture Corner	pack	v	упаковывать	
 5	Module 7	7d - Culture Corner	sad	adj	грустный	
 5	Module 7	7d - Culture Corner	short-sleeved	adj	с короткими рукавами	
@@ -1170,7 +1169,7 @@ grade	module	section	term	pos	translation	note
 5	Module 9	9b	royal	adj	королевский	
 5	Module 9	9b	theatre	n	театр	
 5	Module 9	9b	theme park		тематический парк	
-5	Module 9	9b	yesterday	adj	вчера	
+5	Module 9	9b	yesterday	adv	вчера	
 5	Module 9	9b	zoo	n	зоопарк	
 5	Module 9	9c	action film		фильм жанра экшн, боевик	
 5	Module 9	9c	adventure film		фильм-приключение	
@@ -1207,7 +1206,7 @@ grade	module	section	term	pos	translation	note
 5	Module 9	English in Use 9	Can you tell me where the ... is?		Не подскажете, где находится ...?	
 5	Module 9	English in Use 9	Could you tell me how to get to ...?		Скажите, как добраться до...	
 5	Module 9	English in Use 9	Excuse me. Is there a ... around here?		Простите, где-нибудь поблизости есть ...?	
-5	Module 9	English in Use 9	on one's left/right		справа/слева от кого-либо	
+5	Module 9	English in Use 9	on one's left/right		слева/справа от кого-либо	
 5	Module 9	English in Use 9	turn right/left		поворачивать направо/налево	
 5	Module 9	English in Use 9	walk down		идти вниз по	
 5	Module 9	Across the Curriculum 9: Maths	bar	n	плитка	
@@ -1273,7 +1272,7 @@ grade	module	section	term	pos	translation	note
 5	Module 10	10b	hard	adj	тяжёлый, трудный	
 5	Module 10	10b	hiking	n	поход	
 5	Module 10	10b	hungry	adj	голодный	
-5	Module 10	10b	jet skiing		катание на водных лыжах	
+5	Module 10	10b	jet skiing		катание на гидроцикле	
 5	Module 10	10b	mind	n	ум	
 5	Module 10	10b	relaxed	adj	расслабленный	
 5	Module 10	10b	relaxing	adj	расслабляющий	
@@ -1299,13 +1298,13 @@ grade	module	section	term	pos	translation	note
 5	Module 10	10c	toothache	n	зубная боль	
 5	Module 10	10c	put lotion		наносить мазь, лосьон	
 5	Module 10	10c	see a doctor		посещать доктора	
-5	Module 10	10c	stay out of sun		не выходить на солнце	
+5	Module 10	10c	stay out of the sun		не выходить на солнце	
 5	Module 10	10d - Culture Corner	aboard	adv	на борту	
 5	Module 10	10d - Culture Corner	castle	n	замок	
 5	Module 10	10d - Culture Corner	cathedral	n	собор	
 5	Module 10	10d - Culture Corner	flat tyre		спущенная шина	
 5	Module 10	10d - Culture Corner	scenic	adj	живописный, красивый	
-5	Module 10	10d - Culture Corner	sit back	phr v	откидываться (на спинку сидения)	
+5	Module 10	10d - Culture Corner	sit back	phr v	откидываться (на спинку сиденья)	
 5	Module 10	10d - Culture Corner	square	n	квадрат (зд.)	
 5	Module 10	10d - Culture Corner	team	n	команда	
 5	Module 10	10d - Culture Corner	win	irr v	выигрывать	
@@ -1333,18 +1332,18 @@ grade	module	section	term	pos	translation	note
 5	Geographical Names		Alaska		Аляска	
 5	Geographical Names		Aleutian Islands		Алеутские острова	
 5	Geographical Names		America		Америка	
-5	Geographical Names		Antarctica		Антарктика	
+5	Geographical Names		Antarctica		Антарктида	
 5	Geographical Names		Asia		Азия	
 5	Geographical Names		Australia		Австралия	
 5	Geographical Names		Ballater		г. Баллатер (Великобритания)	
-5	Geographical Names		Barranquilla		г. Баранкилла (Колумбия)	
+5	Geographical Names		Barranquilla		г. Барранкилья (Колумбия)	
 5	Geographical Names		Belfast		Белфаст (Северная Ирландия)	
 5	Geographical Names		Bering Sea		Берингово море	
 5	Geographical Names		Brazil		Бразилия	
 5	Geographical Names		Canada		Канада	
 5	Geographical Names		Canberra		Канберра	
 5	Geographical Names		China		Китай	
-5	Geographical Names		Columbia		Колумбия	
+5	Geographical Names		Colombia		Колумбия	
 5	Geographical Names		Cork		г. Корк (Ирландия)	
 5	Geographical Names		Dona Lola		Дона Лола (курорт в Испании)	
 5	Geographical Names		Dublin		г. Дублин (Ирландия)	
@@ -1371,7 +1370,7 @@ grade	module	section	term	pos	translation	note
 5	Geographical Names		Mexico		Мексика	
 5	Geographical Names		Mount Kilimanjaro		гора Килиманджаро	
 5	Geographical Names		Nepal		Непал	
-5	Geographical Names		New York City		Нью Йорк	
+5	Geographical Names		New York City		Нью-Йорк	
 5	Geographical Names		New Zealand		Новая Зеландия	
 5	Geographical Names		North America		Северная Америка	
 5	Geographical Names		Northern India		север Индии	
@@ -1449,7 +1448,7 @@ grade	module	section	term	pos	translation	note
 5	Personal Names		Elizabeth	f		
 5	Personal Names		Emma	f		
 5	Personal Names		Esmeralda	f		
-5	Personal Names		Eve	m		
+5	Personal Names		Eve	f		
 5	Personal Names		Fiona	f		
 5	Personal Names		Fred	m		
 5	Personal Names		George	m		
@@ -1472,7 +1471,7 @@ grade	module	section	term	pos	translation	note
 5	Personal Names		Jill	f		
 5	Personal Names		Jim	m		
 5	Personal Names		Joan	f		
-5	Personal Names		Joe	f		
+5	Personal Names		Joe	m		
 5	Personal Names		John	m		
 5	Personal Names		Johnny	m		
 5	Personal Names		Jude	f		
@@ -1482,9 +1481,9 @@ grade	module	section	term	pos	translation	note
 5	Personal Names		June	f		
 5	Personal Names		Juni	f		
 5	Personal Names		Justin	m		
-5	Personal Names		Karen	m		
+5	Personal Names		Karen	f		
 5	Personal Names		Kate	f		
-5	Personal Names		Katherine			
+5	Personal Names		Katherine	f		
 5	Personal Names		Kelly	f		
 5	Personal Names		Ken	m		
 5	Personal Names		Kitty	f		
@@ -1526,7 +1525,7 @@ grade	module	section	term	pos	translation	note
 5	Personal Names		Patsy	f		
 5	Personal Names		Paul	m		
 5	Personal Names		Pedro	m		
-5	Personal Names		Penny			
+5	Personal Names		Penny	f		
 5	Personal Names		Pete	m		
 5	Personal Names		Peter	m		
 5	Personal Names		Phil	m		
@@ -1575,6 +1574,6 @@ grade	module	section	term	pos	translation	note
 5	Other Proper Names		Sir Benjamin Hall		Бенджамин Холл	
 5	Other Proper Names		Shakespeare		Шекспир	
 5	Other Proper Names		Elizabeth		Елизавета	
-5	Other Proper Names		Mel Gibson		Мэл Гибсон	
-5	Other Proper Names		Katherine Mansfield		Кэтрин Менсфилд	
+5	Other Proper Names		Mel Gibson		Мел Гибсон	
+5	Other Proper Names		Katherine Mansfield		Кэтрин Мэнсфилд	
 5	Other Proper Names		Russell Crowe		Рассел Кроу	

@@ -16,7 +16,7 @@ grade	module	section	term	pos	translation	note
 6	Module 1	1a Family Members	height	n	рост	
 6	Module 1	1a Family Members	husband	n	муж	
 6	Module 1	1a Family Members	long	adj	длинный	
-6	Module 1	1a Family Members	middle aged	adj	среднего возраста	
+6	Module 1	1a Family Members	middle-aged	adj	среднего возраста	
 6	Module 1	1a Family Members	mum	n	мама	
 6	Module 1	1a Family Members	old	adj	старый	
 6	Module 1	1a Family Members	parents	n pl	родители	
@@ -113,8 +113,8 @@ grade	module	section	term	pos	translation	note
 6	Module 1	English in Use/Extensive Reading 1	solar system		солнечная система	
 6	Module 1	English in Use/Extensive Reading 1	surface area		площадь поверхности	
 6	Module 2	2a Happy Times	April	n	апрель	
-6	Module 2	2a Happy Times	at midnight	n	в полночь	
-6	Module 2	2a Happy Times	at midday	n	в полдень	
+6	Module 2	2a Happy Times	at midnight	phr	в полночь	
+6	Module 2	2a Happy Times	at midday	phr	в полдень	
 6	Module 2	2a Happy Times	August	n	август	
 6	Module 2	2a Happy Times	birthday	n	день рождения	
 6	Module 2	2a Happy Times	celebrate	v	праздновать	
@@ -203,7 +203,7 @@ grade	module	section	term	pos	translation	note
 6	Module 2	2b My place	dining room		столовая	
 6	Module 2	2b My place	do one's best		делать все от себя зависящее	
 6	Module 2	2b My place	living room		гостиная	
-6	Module 2	2b My place	move a house		переезжать	
+6	Module 2	2b My place	move house		переезжать	
 6	Module 2	2b My place	give smb. a hand		помогать кому-либо	
 6	Module 2	2b My place	Watch out!		Осторожно!	
 6	Module 2	2b My place	Calm down!		Успокойся!	
@@ -219,7 +219,7 @@ grade	module	section	term	pos	translation	note
 6	Module 2	2c My neighbourhood	stamp	n	марка	
 6	Module 2	2c My neighbourhood	supermarket	n	супермаркет	
 6	Module 2	2c My neighbourhood	vegetables	n pl	овощи	
-6	Module 2	2c My neighbourhood	bus station		автобусная остановка	
+6	Module 2	2c My neighbourhood	bus station		автовокзал	
 6	Module 2	2c My neighbourhood	coffee shop		кафетерий	
 6	Module 2	2c My neighbourhood	pet shop		зоомагазин	
 6	Module 2	2c My neighbourhood	post office		почта	
@@ -399,7 +399,7 @@ grade	module	section	term	pos	translation	note
 6	Module 4	4b How about...?	pop concert		концерт поп-музыки	
 6	Module 4	4b How about...?	pop music		популярная музыка	
 6	Module 4	4b How about...?	reality shows		реалити-шоу	
-6	Module 4	4c My favourite day	camp	v	лагерь отдыха	
+6	Module 4	4c My favourite day	camp	n	лагерь отдыха	
 6	Module 4	4c My favourite day	climb/go climbing	v	взбираться	
 6	Module 4	4c My favourite day	meet (met)	v irr.	встречать(ся)	
 6	Module 4	4c My favourite day	movie	n	фильм	
@@ -422,7 +422,7 @@ grade	module	section	term	pos	translation	note
 6	Module 4	4d Culture Corner	pocket money		карманные деньги	
 6	Module 4	4d Culture Corner	semi-detached house		дом, имеющий общую стену с другим	
 6	Module 4	4d Culture Corner	surf the net		бродить по Интернету	
-6	Module 4	4d Culture Corner	soup opera		мыльная опера	sic: опечатка в учебнике, правильно soap opera
+6	Module 4	4d Culture Corner	soap opera		мыльная опера	
 6	Module 4	English in Use/Extensive Reading 4	appointment	n	встреча, свидание	
 6	Module 4	English in Use/Extensive Reading 4	cancel	v	отменять	
 6	Module 4	English in Use/Extensive Reading 4	chart	n	диаграмма	
@@ -542,13 +542,13 @@ grade	module	section	term	pos	translation	note
 6	Module 5	English in Use/Extensive Reading 5	a fictional character		вымышленный персонаж	
 6	Module 5	English in Use/Extensive Reading 5	be offended		быть обиженным	
 6	Module 5	English in Use/Extensive Reading 5	have in mind		иметь в виду	
-6	Module 5	English in Use/Extensive Reading 5	I beg you pardon!		Прошу прощения!	sic: опечатка в учебнике, правильно I beg your pardon!
+6	Module 5	English in Use/Extensive Reading 5	I beg your pardon!		Прошу прощения!	
 6	Module 5	English in Use/Extensive Reading 5	include a card		приложить открытку	
 6	Module 5	English in Use/Extensive Reading 5	including delivery		включая доставку	
 6	Module 5	English in Use/Extensive Reading 5	send flowers		отправлять цветы	
 6	Module 5	English in Use/Extensive Reading 5	through a looking glass		сквозь зеркало	
 6	Module 6	6a Free time	acting	n	выступление	
-6	Module 6	6a Free time	at the weekend	n	в выходные дни	
+6	Module 6	6a Free time	at the weekend	phr	в выходные дни	
 6	Module 6	6a Free time	brilliant	adj	выдающийся	
 6	Module 6	6a Free time	brochure	n	брошюра, проспект	
 6	Module 6	6a Free time	leaflet	n	листовка, буклет	
@@ -557,8 +557,7 @@ grade	module	section	term	pos	translation	note
 6	Module 6	6a Free time	PC (personal computer)	n	персональный компьютер	
 6	Module 6	6a Free time	paint	v	рисовать	
 6	Module 6	6a Free time	photography	n	фотография	
-6	Module 6	6a Free time	present	v	дарить	
-6	Module 6	6a Free time	present	n	подарок	
+6	Module 6	6a Free time	present	v/n	дарить; подарок	
 6	Module 6	6a Free time	print	v	печатать	
 6	Module 6	6a Free time	tiring	adj	утомительный	
 6	Module 6	6a Free time	art museum		художественный музей	
@@ -606,7 +605,7 @@ grade	module	section	term	pos	translation	note
 6	Module 6	6c Pastimes	coconut	n	кокос	
 6	Module 6	6c Pastimes	corn	n	кукуруза	
 6	Module 6	6c Pastimes	dice	n	кубик	
-6	Module 6	6c Pastimes	explore	n	исследовать	
+6	Module 6	6c Pastimes	explore	v	исследовать	
 6	Module 6	6c Pastimes	go down	phr v	опускаться	
 6	Module 6	6c Pastimes	go up	phr v	подниматься	
 6	Module 6	6c Pastimes	grow (grew)	v irr.	расти	
@@ -640,7 +639,7 @@ grade	module	section	term	pos	translation	note
 6	Module 6	6d Culture Corner	come up with	phr v	предлагать	
 6	Module 6	6d Culture Corner	letter tiles		плитки (фишки) с буквами	
 6	Module 6	6d Culture Corner	solve a crime		раскрыть преступление	
-6	Module 6	6d Culture Corner	the scene of crime		картина преступления	
+6	Module 6	6d Culture Corner	the scene of crime		место преступления	
 6	Module 6	Use of English/Extensive Reading 6	attach	v	прикреплять	
 6	Module 6	Use of English/Extensive Reading 6	drawing	n	рисование	
 6	Module 6	Use of English/Extensive Reading 6	educate	v	обучать	
@@ -662,7 +661,7 @@ grade	module	section	term	pos	translation	note
 6	Module 6	Use of English/Extensive Reading 6	make us laugh		заставляет нас смеяться	
 6	Module 6	Use of English/Extensive Reading 6	roller skates		роликовые коньки	
 6	Module 6	Use of English/Extensive Reading 6	table tennis set		набор для игры в настольный теннис	
-6	Module 6	Use of English/Extensive Reading 6	What about..?		Как насчет..?	
+6	Module 6	Use of English/Extensive Reading 6	What about...?		Как насчет...?	
 6	Module 7	7a In the past	ago	adv	тому назад	
 6	Module 7	7a In the past	busy	adj	суетливый, занятой	
 6	Module 7	7a In the past	crowded	adj	переполненный	
@@ -928,7 +927,7 @@ grade	module	section	term	pos	translation	note
 6	Module 9	9c Let's cook!	jar	n	банка	
 6	Module 9	9c Let's cook!	kilo	n	килограмм	
 6	Module 9	9c Let's cook!	loaf	n	батон	
-6	Module 9	9c Let's cook!	melt	n	растапливать, растворять	
+6	Module 9	9c Let's cook!	melt	v	растапливать, растворять	
 6	Module 9	9c Let's cook!	mixture	n	смесь	
 6	Module 9	9c Let's cook!	muffin	n	кекс	
 6	Module 9	9c Let's cook!	packet	n	пакет, пачка	
@@ -945,7 +944,7 @@ grade	module	section	term	pos	translation	note
 6	Module 9	9d Culture Corner	pastries	n	выпечка	
 6	Module 9	9d Culture Corner	vinegar	n	уксус	
 6	Module 9	9d Culture Corner	herb sauce		соус из трав	
-6	Module 9	English in Use/Extensive Reading 9	fibre	n	мышечная ткань	
+6	Module 9	English in Use/Extensive Reading 9	fibre	n	клетчатка	
 6	Module 9	English in Use/Extensive Reading 9	grains	n	злаки, зерно	
 6	Module 9	English in Use/Extensive Reading 9	healthy	adj	здоровый	
 6	Module 9	English in Use/Extensive Reading 9	iron	n	железо	
@@ -973,7 +972,7 @@ grade	module	section	term	pos	translation	note
 6	Module 10	10a Holiday plans	next month		в следующем месяце	
 6	Module 10	10a Holiday plans	post some letters		отправлять письма по почте	
 6	Module 10	10a Holiday plans	rent a boat		брать лодку напрокат	
-6	Module 10	10a Holiday plans	stay in a luxurious hotel		останавливаться в роскошом отеле	sic: так в учебнике (роскошом)
+6	Module 10	10a Holiday plans	stay in a luxurious hotel		останавливаться в роскошном отеле	
 6	Module 10	10a Holiday plans	taste local food		пробовать местную еду	
 6	Module 10	10a Holiday plans	travel abroad		путешествовать за границей	
 6	Module 10	10b What's the weather like?	borrow	v	взять на время	
@@ -1030,7 +1029,7 @@ grade	module	section	term	pos	translation	note
 6	Module 10	10d Culture Corner	object	n	предмет, вещь	
 6	Module 10	10d Culture Corner	piper	n	волынщик	
 6	Module 10	10d Culture Corner	provide	v	обеспечивать	
-6	Module 10	10d Culture Corner	tour	v	тур	
+6	Module 10	10d Culture Corner	tour	v	совершать тур, осматривать	
 6	Module 10	10d Culture Corner	transparent	adj	прозрачный	
 6	Module 10	10d Culture Corner	treasure	n	сокровище	
 6	Module 10	10d Culture Corner	tricycle	n	трехколесный велосипед	
@@ -1039,7 +1038,7 @@ grade	module	section	term	pos	translation	note
 6	Module 10	10d Culture Corner	folk music		народная музыка	
 6	Module 10	10d Culture Corner	hot air balloon		воздушный шар	
 6	Module 10	10d Culture Corner	multiplication table		таблица умножения	
-6	Module 10	10d Culture Corner	range from		выстраивать(ся)	
+6	Module 10	10d Culture Corner	range from		варьироваться (от ... до ...)	
 6	Module 10	10d Culture Corner	remind smb. of smth.		напоминать кому-либо о чем-либо	
 6	Module 10	10d Culture Corner	sea life		морская жизнь	
 6	Module 10	10d Culture Corner	underwater safari		подводное сафари	
@@ -1051,8 +1050,8 @@ grade	module	section	term	pos	translation	note
 6	Module 10	English in Use/Extensive Reading 10	stretch	n	участок, полоса	
 6	Module 10	English in Use/Extensive Reading 10	reservation	n	резервирование, бронирование	
 6	Module 10	English in Use/Extensive Reading 10	ultimate	adj	максимальный, наивысший	
-6	Module 10	English in Use/Extensive Reading 10	volcano	n	вулканы	
+6	Module 10	English in Use/Extensive Reading 10	volcano	n	вулкан	
 6	Module 10	English in Use/Extensive Reading 10	double room		номер на двоих	
-6	Module 10	English in Use/Extensive Reading 10	en suite bathroom		совмещенная ванная	
+6	Module 10	English in Use/Extensive Reading 10	en suite bathroom		отдельная ванная комната в номере	
 6	Module 10	English in Use/Extensive Reading 10	per night		за ночь	
 6	Module 10	English in Use/Extensive Reading 10	single room		номер на одного	

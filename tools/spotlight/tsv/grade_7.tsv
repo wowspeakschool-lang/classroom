@@ -2,7 +2,7 @@ grade	module	section	term	pos	translation	note
 7	Module 1	1a A city mouse or a country mouse?	barn	n	сарай, коровник	
 7	Module 1	1a A city mouse or a country mouse?	facilities	n pl	оборудование, приспособления	
 7	Module 1	1a A city mouse or a country mouse?	farmyard	n	двор фермы	
-7	Module 1	1a A city mouse or a country mouse?	feed*	v	кормить	
+7	Module 1	1a A city mouse or a country mouse?	feed	v	кормить	
 7	Module 1	1a A city mouse or a country mouse?	free	adj	свободный	
 7	Module 1	1a A city mouse or a country mouse?	guest	n	гость	
 7	Module 1	1a A city mouse or a country mouse?	happy	adj	счастливый	
@@ -29,7 +29,7 @@ grade	module	section	term	pos	translation	note
 7	Module 1	1a A city mouse or a country mouse?	crowded streets	phr	переполненные улицы	
 7	Module 1	1a A city mouse or a country mouse?	heavy traffic	phr	оживленное движение	
 7	Module 1	1a A city mouse or a country mouse?	high cost of living	phr	высокая стоимость жизни	
-7	Module 1	1a A city mouse or a country mouse?	high quality lifestyle	phr	правильный образ жизни	
+7	Module 1	1a A city mouse or a country mouse?	high quality lifestyle	phr	высокое качество жизни	
 7	Module 1	1a A city mouse or a country mouse?	high/low rate of unemployment	phr	высокий/низкий уровень безработицы	
 7	Module 1	1a A city mouse or a country mouse?	hustle and bustle	phr	толчея и суета	
 7	Module 1	1a A city mouse or a country mouse?	lead (un)healthy lifestyle	phr	вести (не)здоровый образ жизни	
@@ -56,7 +56,7 @@ grade	module	section	term	pos	translation	note
 7	Module 1	1b Better safe than sorry	switch on/off	phr v	включать/выключать	
 7	Module 1	1b Better safe than sorry	turn on/off	phr v	включать/выключать	
 7	Module 1	1b Better safe than sorry	better safe than sorry	phr	семь раз отмерь, один раз отрежь	
-7	Module 1	1b Better safe than sorry	dusk to dawn	phr	от зари до зари, от восхода до заката	
+7	Module 1	1b Better safe than sorry	dusk to dawn	phr	от заката до рассвета	
 7	Module 1	1b Better safe than sorry	How about ... + ing	phr	Как насчет ...	
 7	Module 1	1b Better safe than sorry	I think/don't think you should ...	phr	Я думаю/не думаю, что тебе стоит ...	
 7	Module 1	1b Better safe than sorry	Why don't you ...?	phr	Почему бы тебе не ...?	
@@ -68,7 +68,7 @@ grade	module	section	term	pos	translation	note
 7	Module 1	1c Hanging out	choose	v	выбирать	
 7	Module 1	1c Hanging out	crazy	adj	сумасшедший	
 7	Module 1	1c Hanging out	exhibition	n	выставка	
-7	Module 1	1c Hanging out	hang out		постоянно бывать, гулять	
+7	Module 1	1c Hanging out	hang out	phr v	постоянно бывать, гулять	
 7	Module 1	1c Hanging out	include	v	включать в себя	
 7	Module 1	1c Hanging out	museum	n	музей	
 7	Module 1	1c Hanging out	outdoors	adv	вне дома	
@@ -143,7 +143,7 @@ grade	module	section	term	pos	translation	note
 7	Module 1	Across the Curriculum 1 – Geography	metro network	n	сеть метрополитена	
 7	Module 1	Across the Curriculum 1 – Geography	nightlife	n	ночная жизнь	
 7	Module 1	Across the Curriculum 1 – Geography	population	n	население	
-7	Module 1	Across the Curriculum 1 – Geography	street party	n	уличный парад	
+7	Module 1	Across the Curriculum 1 – Geography	street party	n	уличный праздник	
 7	Module 1	Across the Curriculum 1 – Geography	trolley bus	n	троллейбус	
 7	Module 2	2a Bookworms	adventure story	n	приключенческий рассказ	
 7	Module 2	2a Bookworms	amazing	adj	удивительный, поразительный	
@@ -204,7 +204,7 @@ grade	module	section	term	pos	translation	note
 7	Module 2	2a Bookworms	a suspense story	phr	захватывающий приключенческий рассказ	
 7	Module 2	2a Bookworms	at first glance	phr	на первый взгляд	
 7	Module 2	2a Bookworms	humorous story	phr	юмористический рассказ	
-7	Module 2	2a Bookworms	solve the mystery case	phr	расследовать загадочное дело	
+7	Module 2	2a Bookworms	solve the mystery case	phr	раскрыть загадочное дело	
 7	Module 2	2b A classic read	adventure	n	приключение	
 7	Module 2	2b A classic read	bush	n	куст	
 7	Module 2	2b A classic read	cave	n	пещера	
@@ -561,7 +561,7 @@ grade	module	section	term	pos	translation	note
 7	Module 5	5a Predictions	online school	n	школа дистанционного обучения	
 7	Module 5	5a Predictions	petrol	n	бензин	
 7	Module 5	5a Predictions	planet	n	планета	
-7	Module 5	5a Predictions	robotic housemaid	n	робот - домашняя хозяйка	
+7	Module 5	5a Predictions	robotic housemaid	n	робот — домашняя хозяйка	
 7	Module 5	5a Predictions	traffic jam	n	дорожная пробка, затор	
 7	Module 5	5a Predictions	underwater city	n	подводный город	
 7	Module 5	5a Predictions	look after	phr v	заботиться о ком-либо, присматривать за кем-либо	
@@ -604,7 +604,7 @@ grade	module	section	term	pos	translation	note
 7	Module 5	5c What's your opinion?	go online	phr	выходить в сеть Интернет	
 7	Module 5	5c What's your opinion?	keep notes	phr	делать записи	
 7	Module 5	5d – Culture Corner	afford	v	позволять себе	
-7	Module 5	5d – Culture Corner	digital music player (Mp3)	n	цифровой музыкальный плейер (MP3)	
+7	Module 5	5d – Culture Corner	digital music player (MP3)	n	цифровой музыкальный плейер (MP3)	
 7	Module 5	5d – Culture Corner	doll	n	кукла	
 7	Module 5	5d – Culture Corner	games console	n	игровая приставка	
 7	Module 5	5d – Culture Corner	gold mine	n	золотой рудник, прииск	
@@ -619,7 +619,7 @@ grade	module	section	term	pos	translation	note
 7	Module 5	5d – Culture Corner	receive	v	получать	
 7	Module 5	5d – Culture Corner	survey	n	исследование, опрос	
 7	Module 5	5d – Culture Corner	tape recorder	n	магнитофон	
-7	Module 5	English in Use 5	connect to the Internet.	phr	подключаться к сети Интернет	
+7	Module 5	English in Use 5	connect to the Internet	phr	подключаться к сети Интернет	
 7	Module 5	English in Use 5	click on 'send'	phr	нажать «отправить»	
 7	Module 5	English in Use 5	select an email address	phr	выбрать адрес электронной почты	
 7	Module 5	Across the Curriculum 5 – ICT	cockpit	n	кабина (в самолете)	
@@ -761,7 +761,7 @@ grade	module	section	term	pos	translation	note
 7	Module 7	7b DVD frenzy!	turn into	phr v	превращать во что-либо	
 7	Module 7	7b DVD frenzy!	turn off	phr v	выключать	
 7	Module 7	7b DVD frenzy!	turn on	phr v	включать	
-7	Module 7	7b DVD frenzy!	according to	phr v	соответственно кому-либо	
+7	Module 7	7b DVD frenzy!	according to	phr	согласно кому-либо, по словам кого-либо	
 7	Module 7	7b DVD frenzy!	How about ...?	phr	Как насчет ...?	
 7	Module 7	7b DVD frenzy!	I don't mind.	phr	Я не возражаю.	
 7	Module 7	7b DVD frenzy!	I don't really like ...	phr	Мне на самом деле не нравится ...	
@@ -775,12 +775,12 @@ grade	module	section	term	pos	translation	note
 7	Module 7	7c In the charts!	artist	n	исполнитель, музыкант	
 7	Module 7	7c In the charts!	bright	adj	яркий	
 7	Module 7	7c In the charts!	cast	n	актерский состав	
-7	Module 7	7c In the charts!	catchy	adj	притягательный	
+7	Module 7	7c In the charts!	catchy	adj	легко запоминающийся, привязчивый	
 7	Module 7	7c In the charts!	classical music	n	классическая музыка	
 7	Module 7	7c In the charts!	funk	n	фанк	
 7	Module 7	7c In the charts!	genuine	adj	истинный, настоящий	
 7	Module 7	7c In the charts!	genre	n	жанр	
-7	Module 7	7c In the charts!	heavy metal	n	тяжелый метал, хеви-метал	
+7	Module 7	7c In the charts!	heavy metal	n	тяжелый металл, хеви-метал	
 7	Module 7	7c In the charts!	jazz	n	джаз	
 7	Module 7	7c In the charts!	lyrics	n	слова песни, стихи	
 7	Module 7	7c In the charts!	music chart	n	музыкальный хит-парад	
@@ -894,7 +894,7 @@ grade	module	section	term	pos	translation	note
 7	Module 8	8b Eco-helpers	No, I can manage, thanks.	phr	Спасибо, я справлюсь сам(а).	
 7	Module 8	8b Eco-helpers	No, it's OK, but thanks anyway!	phr	Нет, но в любом случае спасибо!	
 7	Module 8	8c Born free	alligator	n	крокодил, аллигатор	
-7	Module 8	8c Born free	black bear	n	бурый медведь	
+7	Module 8	8c Born free	black bear	n	черный медведь (барибал)	
 7	Module 8	8c Born free	camel	n	верблюд	
 7	Module 8	8c Born free	desert	n	пустыня	
 7	Module 8	8c Born free	grassland	n	луг	
@@ -914,11 +914,11 @@ grade	module	section	term	pos	translation	note
 7	Module 8	8d – Culture Corner	flock	n	стая	
 7	Module 8	8d – Culture Corner	garlic	n	чеснок	
 7	Module 8	8d – Culture Corner	geese	n pl	гуси	
-7	Module 8	8d – Culture Corner	golden eagle	n	золотой орел	
+7	Module 8	8d – Culture Corner	golden eagle	n	беркут	
 7	Module 8	8d – Culture Corner	marsh	n	болото	
 7	Module 8	8d – Culture Corner	nature trail	n	природная тропа	
 7	Module 8	8d – Culture Corner	nest	v	гнездиться	
-7	Module 8	8d – Culture Corner	puffin	n	буревестник	
+7	Module 8	8d – Culture Corner	puffin	n	тупик (птица)	
 7	Module 8	8d – Culture Corner	rare	adj	редкий	
 7	Module 8	8d – Culture Corner	remote	adj	удаленный	
 7	Module 8	8d – Culture Corner	reserve	n	заповедник	
@@ -971,7 +971,7 @@ grade	module	section	term	pos	translation	note
 7	Module 9	9a You are what you eat!	chocolate	n	шоколад	
 7	Module 9	9a You are what you eat!	coffee	n	кофе	
 7	Module 9	9a You are what you eat!	cola	n	кола	
-7	Module 9	9a You are what you eat!	cream	n	крем	
+7	Module 9	9a You are what you eat!	cream	n	сливки	
 7	Module 9	9a You are what you eat!	crisp	n	хрустящий картофель, чипсы	
 7	Module 9	9a You are what you eat!	cup	n	чашка	
 7	Module 9	9a You are what you eat!	curry	n	карри	
@@ -1036,13 +1036,13 @@ grade	module	section	term	pos	translation	note
 7	Module 9	9b Can I help you?	crayon	n	цветной мелок	
 7	Module 9	9b Can I help you?	diary	n	дневник	
 7	Module 9	9b Can I help you?	electronics	n	магазин электроники и бытовой техники	
-7	Module 9	9b Can I help you?	first aid kit	phr	аптечка первой помощи	
+7	Module 9	9b Can I help you?	first aid kit	n	аптечка первой помощи	
 7	Module 9	9b Can I help you?	hooded sweater	n	свитер с капюшоном	
 7	Module 9	9b Can I help you?	jeweller's	n	ювелирный магазин	
 7	Module 9	9b Can I help you?	manager	n	управляющий	
 7	Module 9	9b Can I help you?	optician's	n	оптика	
 7	Module 9	9b Can I help you?	phonecard	n	телефонная карта	
-7	Module 9	9b Can I help you?	ring	n	звонок	
+7	Module 9	9b Can I help you?	ring	n	кольцо	
 7	Module 9	9b Can I help you?	security guard	n	охранник	
 7	Module 9	9b Can I help you?	shop assistant	n	продавец	
 7	Module 9	9b Can I help you?	socks	n	носки	
@@ -1095,7 +1095,7 @@ grade	module	section	term	pos	translation	note
 7	Module 9	Across the Curriculum 9 – Citizenship	stuff	n	вещи	
 7	Module 9	Across the Curriculum 9 – Citizenship	swap	v	обмениваться	
 7	Module 9	Across the Curriculum 9 – Citizenship	fit in	phr v	подходить	
-7	Module 9	Across the Curriculum 9 – Citizenship	for a good cause	phr	по веской причине	
+7	Module 9	Across the Curriculum 9 – Citizenship	for a good cause	phr	ради благого дела	
 7	Module 9	Across the Curriculum 9 – Citizenship	on offer	phr	на распродаже	
 7	Module 10	10a Stress free	ache	n	боль	
 7	Module 10	10a Stress free	allow	v	позволять	
@@ -1106,7 +1106,7 @@ grade	module	section	term	pos	translation	note
 7	Module 10	10a Stress free	gossip	n	сплетня	
 7	Module 10	10a Stress free	harmless	adj	безвредный	
 7	Module 10	10a Stress free	headache	n	головная боль	
-7	Module 10	10a Stress free	hurtful	adj	болезненный	
+7	Module 10	10a Stress free	hurtful	adj	обидный	
 7	Module 10	10a Stress free	lose	v	терять	
 7	Module 10	10a Stress free	mate	n	товарищ	
 7	Module 10	10a Stress free	mean	adj	жадный	
@@ -1123,13 +1123,13 @@ grade	module	section	term	pos	translation	note
 7	Module 10	10a Stress free	fall apart	phr v	разваливаться, ломаться	
 7	Module 10	10a Stress free	fall behind with sth	phr v	отставать	
 7	Module 10	10a Stress free	fall out with somebody	phr v	ссориться с кем-либо	
-7	Module 10	10a Stress free	sit around	phr	сидеть без дела	
+7	Module 10	10a Stress free	sit around	phr v	сидеть без дела	
 7	Module 10	10a Stress free	break the chain	phr	разорвать цепочку	
 7	Module 10	10a Stress free	get the blame	phr	оставаться виноватым	
 7	Module 10	10a Stress free	have an appointment	phr	назначить встречу	
 7	Module 10	10a Stress free	have it one's way	phr	поступать по-своему	
 7	Module 10	10a Stress free	He gets away with everything.	phr	Ему все сходит с рук.	
-7	Module 10	10a Stress free	scratch my back and I'll scratch yours	phr	око за око, зуб за зуб	
+7	Module 10	10a Stress free	scratch my back and I'll scratch yours	phr	ты мне, я тебе	
 7	Module 10	10a Stress free	sit exams	phr	сдавать экзамены	
 7	Module 10	10a Stress free	spread rumours	phr	распускать слухи	
 7	Module 10	10a Stress free	throw a party	phr	устраивать вечеринку	
@@ -1179,7 +1179,7 @@ grade	module	section	term	pos	translation	note
 7	Module 10	10d – Culture Corner	isolation	n	изоляция, уединение	
 7	Module 10	10d – Culture Corner	landing	n	посадка, приземление	
 7	Module 10	10d – Culture Corner	mile	n	миля	
-7	Module 10	10d – Culture Corner	non-profit charity	n	безвозмездная помощь	
+7	Module 10	10d – Culture Corner	non-profit charity	n	некоммерческая благотворительная организация	
 7	Module 10	10d – Culture Corner	operate	v	оперировать	
 7	Module 10	10d – Culture Corner	patient	n	пациент	
 7	Module 10	10d – Culture Corner	risk	n	риск	
@@ -1222,7 +1222,7 @@ grade	module	section	term	pos	translation	note
 7	People	People	Anna			
 7	People	People	Annabel			
 7	People	People	Axel			
-7	People	People	Barbara Mc Alpine			
+7	People	People	Barbara McAlpine			
 7	People	People	Becky			
 7	People	People	Betty			
 7	People	People	Bill			
@@ -1314,7 +1314,7 @@ grade	module	section	term	pos	translation	note
 7	People	People	Tony			
 7	People	People	Warren			
 7	People	People	Wendy			
-7	Famous People/Characters	Famous People/Characters	A.Selkirk			
+7	Famous People/Characters	Famous People/Characters	A. Selkirk			
 7	Famous People/Characters	Famous People/Characters	Agatha Christie			
 7	Famous People/Characters	Famous People/Characters	Akiane Kramarik			
 7	Famous People/Characters	Famous People/Characters	Andy Wachowski			
@@ -1349,7 +1349,7 @@ grade	module	section	term	pos	translation	note
 7	Famous People/Characters	Famous People/Characters	Gimli			
 7	Famous People/Characters	Famous People/Characters	Gollum			
 7	Famous People/Characters	Famous People/Characters	Grima Wormtongue			
-7	Famous People/Characters	Famous People/Characters	HG Wells			
+7	Famous People/Characters	Famous People/Characters	H. G. Wells			
 7	Famous People/Characters	Famous People/Characters	Hercule Poirot			
 7	Famous People/Characters	Famous People/Characters	Herman Melville			
 7	Famous People/Characters	Famous People/Characters	High Kings			
@@ -1365,7 +1365,7 @@ grade	module	section	term	pos	translation	note
 7	Famous People/Characters	Famous People/Characters	Lady Galadriel			
 7	Famous People/Characters	Famous People/Characters	Larry Wachowski			
 7	Famous People/Characters	Famous People/Characters	Lassie			
-7	Famous People/Characters	Famous People/Characters	Leonardo Di Caprio			
+7	Famous People/Characters	Famous People/Characters	Leonardo DiCaprio			
 7	Famous People/Characters	Famous People/Characters	Leprechaun			
 7	Famous People/Characters	Famous People/Characters	Lord Byron			
 7	Famous People/Characters	Famous People/Characters	Lord Shaftesbury			
@@ -1386,7 +1386,7 @@ grade	module	section	term	pos	translation	note
 7	Famous People/Characters	Famous People/Characters	Robinson Crusoe			
 7	Famous People/Characters	Famous People/Characters	Saruman			
 7	Famous People/Characters	Famous People/Characters	Seanachais			
-7	Famous People/Characters	Famous People/Characters	Sherlock Homes			
+7	Famous People/Characters	Famous People/Characters	Sherlock Holmes			
 7	Famous People/Characters	Famous People/Characters	Sir Arthur Conan Doyle			
 7	Famous People/Characters	Famous People/Characters	Stanley Robertson			
 7	Famous People/Characters	Famous People/Characters	Stephen William Hawking			
@@ -1436,7 +1436,7 @@ grade	module	section	term	pos	translation	note
 7	Places	Places	Golden Eagle			
 7	Places	Places	Great Britain			
 7	Places	Places	Great Wall of China			
-7	Places	Places	Gwynedd Wales			
+7	Places	Places	Gwynedd, Wales			
 7	Places	Places	Hollywood			
 7	Places	Places	Hong Kong			
 7	Places	Places	Idaho			
@@ -1494,15 +1494,15 @@ grade	module	section	term	pos	translation	note
 7	Others	Others	A Brief History of Time			
 7	Others	Others	Alice in Wonderland			
 7	Others	Others	Arsenal			
-7	Others	Others	Barclay's Bank			
+7	Others	Others	Barclays Bank			
 7	Others	Others	Bliss			
 7	Others	Others	Camp Pacific			
 7	Others	Others	Campbell's Adventure Park			
-7	Others	Others	Champion's League			
+7	Others	Others	Champions League			
 7	Others	Others	Coastersaurus			
 7	Others	Others	Crown Jewels			
 7	Others	Others	Dragon Coaster			
-7	Others	Others	Eastenders			
+7	Others	Others	EastEnders			
 7	Others	Others	Finding Nemo			
 7	Others	Others	Geo-Kids			
 7	Others	Others	Goldilocks			

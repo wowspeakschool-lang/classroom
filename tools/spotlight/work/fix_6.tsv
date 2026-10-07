@@ -1,0 +1,24 @@
+grade	module	section	term	field	old	new	reason
+6	Module 1	1a Family Members	middle aged	term	middle aged	middle-aged	English spelling
+6	Module 2	2a Happy Times	at midnight	pos	n	phr	wrong pos: phrase, not noun
+6	Module 2	2a Happy Times	at midday	pos	n	phr	wrong pos: phrase, not noun
+6	Module 2	2b My place	move a house	term	move a house	move house	"English error: ""move a house"""
+6	Module 2	2c My neighbourhood	bus station	translation	автобусная остановка	автовокзал	wrong translation: bus station ≠ остановка
+6	Module 4	4c My favourite day	camp	pos	v	n	wrong pos: translation is a noun (лагерь отдыха)
+6	Module 4	4d Culture Corner	soup opera	term	soup opera	soap opera	"English typo ""soup opera"""
+6	Module 4	4d Culture Corner	soup opera	note	sic: опечатка в учебнике, правильно soap opera		sic note obsolete after fix
+6	Module 5	English in Use/Extensive Reading 5	I beg you pardon!	term	I beg you pardon!	I beg your pardon!	"English typo ""I beg you pardon"""
+6	Module 5	English in Use/Extensive Reading 5	I beg you pardon!	note	sic: опечатка в учебнике, правильно I beg your pardon!		sic note obsolete after fix
+6	Module 6	6a Free time	at the weekend	pos	n	phr	wrong pos: phrase, not noun
+6	Module 6	6c Pastimes	explore	pos	n	v	wrong pos: explore is a verb
+6	Module 6	6d Culture Corner	the scene of crime	translation	картина преступления	место преступления	wrong translation: scene of crime = место
+6	Module 6	Use of English/Extensive Reading 6	What about..?	term	What about..?	What about...?	"junk punctuation ""..?"""
+6	Module 6	Use of English/Extensive Reading 6	What about..?	translation	Как насчет..?	Как насчет...?	"junk punctuation ""..?"""
+6	Module 9	9c Let's cook!	melt	pos	n	v	wrong pos: melt is a verb here
+6	Module 9	English in Use/Extensive Reading 9	fibre	translation	мышечная ткань	клетчатка	wrong translation in food context (fibre = клетчатка)
+6	Module 10	10a Holiday plans	stay in a luxurious hotel	translation	останавливаться в роскошом отеле	останавливаться в роскошном отеле	"Russian typo ""роскошом"""
+6	Module 10	10a Holiday plans	stay in a luxurious hotel	note	sic: так в учебнике (роскошом)		sic note obsolete after fix
+6	Module 10	10d Culture Corner	tour	translation	тур	совершать тур, осматривать	translation is a noun while pos is v
+6	Module 10	10d Culture Corner	range from	translation	выстраивать(ся)	варьироваться (от ... до ...)	wrong translation: range from ≠ выстраивать(ся)
+6	Module 10	English in Use/Extensive Reading 10	volcano	translation	вулканы	вулкан	singular term translated as plural
+6	Module 10	English in Use/Extensive Reading 10	en suite bathroom	translation	совмещенная ванная	отдельная ванная комната в номере	wrong translation: en suite ≠ совмещенная

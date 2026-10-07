@@ -1,0 +1,271 @@
+grade	module	section	term	field	old	new	reason	status
+2	Spotlight on the UK	1. Gardens in the UK	green house	term	green house	greenhouse	english spelling	ok
+3	Spotlight on Russia	4. Everybody likes presents!	grandparent	translation	дедушка и бабушка	дедушка или бабушка	wrong translation: grandparent is one person	ok
+4	Module 2	Unit 4: Work and play!	volleyball	translation	воллейбол	волейбол	russian spelling	ok
+4	Starter Unit		same	translation	так же, такой же	тот же, такой же	"wrong translation: ""так же"" is an adverb"	ok
+4	Arthur & Rascal		fast food	translation	еда, которая быстро готовится (сосиски, пицца и т. п.); еда, которая быстро готовится (бургеры, бутерброды, пицца и т. п.)	еда, которая быстро готовится (бургеры, бутерброды, пицца и т. п.)	junk: translation duplicated twice	ok
+4	Cultural Sections on English-speaking Countries	3. What's for pudding?	lemon meringue	translation	лимонная меринга	лимонная меренга	russian spelling	ok
+5	Starter Unit		finish	pos	n;v	n; v	"junk: missing space, file style is ""n; v"""	ok
+5	Module 1	1b	then	pos	conj	adv	"wrong pos: ""then"" (затем) is an adverb"	ok
+5	Module 3	3d - Culture Corner	all	pos	prn	pron	pos typo: prn → pron	ok
+5	Module 5	5b	cute	translation	умный, сообразительный	милый, симпатичный	wrong translation: cute ≠ умный	ok
+5	Module 5	5c	bright	pos	n	adj	wrong pos: bright = яркий is adj	ok
+5	Module 5	5d - Culture Corner	cute	translation	умный, сообразительный	милый, симпатичный	wrong translation: cute ≠ умный	ok
+5	Module 5	Across the Curriculum 5: Science	grasshoper	term	grasshoper	grasshopper	english spelling	ok
+5	Module 6	6a	action hero	translation	главный герой	герой боевика	"wrong translation: action hero is not ""главный герой"""	ok
+5	Module 6	English in Use 6	See you at ... o' clock.	term	See you at ... o' clock.	See you at ... o'clock.	junk: stray space in o'clock	ok
+5	Module 7	7d - Culture Corner	northwest	translation	северо-запад	северо-западный	wrong translation: pos adj, noun given	ok
+5	Module 9	9b	yesterday	pos	adj	adv	wrong pos: yesterday = вчера is adv	ok
+5	Module 9	English in Use 9	on one's left/right	translation	справа/слева от кого-либо	слева/справа от кого-либо	wrong translation: left/right order swapped	ok
+5	Module 10	10b	jet skiing	translation	катание на водных лыжах	катание на гидроцикле	wrong translation: jet skiing ≠ водные лыжи (water skiing)	ok
+5	Module 10	10d - Culture Corner	sit back	translation	откидываться (на спинку сидения)	откидываться (на спинку сиденья)	russian spelling: сиденье	ok
+5	Module 10	10c	stay out of sun	term	stay out of sun	stay out of the sun	english: missing article	ok
+5	Geographical Names		Columbia	term	Columbia	Colombia	english spelling: the country is Colombia (Columbia is a US name)	ok
+5	Geographical Names		Barranquilla	translation	г. Баранкилла (Колумбия)	г. Барранкилья (Колумбия)	russian spelling of the city name	ok
+5	Geographical Names		New York City	translation	Нью Йорк	Нью-Йорк	russian spelling: hyphen	ok
+5	Geographical Names		Antarctica	translation	Антарктика	Антарктида	wrong translation: Antarctica (continent) = Антарктида	ok
+5	Personal Names		Eve	pos	m	f	wrong gender mark: Eve is female	ok
+5	Personal Names		Joe	pos	f	m	wrong gender mark: Joe is male	ok
+5	Personal Names		Karen	pos	m	f	wrong gender mark: Karen is female	ok
+5	Personal Names		Katherine	pos		f	missing gender mark: Katherine is female	ok
+5	Personal Names		Penny	pos		f	missing gender mark: Penny is female	ok
+5	Other Proper Names		Mel Gibson	translation	Мэл Гибсон	Мел Гибсон	russian spelling of the name	ok
+5	Other Proper Names		Katherine Mansfield	translation	Кэтрин Менсфилд	Кэтрин Мэнсфилд	russian spelling of the name	ok
+6	Module 1	1a Family Members	middle aged	term	middle aged	middle-aged	English spelling	ok
+6	Module 2	2a Happy Times	at midnight	pos	n	phr	wrong pos: phrase, not noun	ok
+6	Module 2	2a Happy Times	at midday	pos	n	phr	wrong pos: phrase, not noun	ok
+6	Module 2	2b My place	move a house	term	move a house	move house	"English error: ""move a house"""	ok
+6	Module 2	2c My neighbourhood	bus station	translation	автобусная остановка	автовокзал	wrong translation: bus station ≠ остановка	ok
+6	Module 4	4c My favourite day	camp	pos	v	n	wrong pos: translation is a noun (лагерь отдыха)	ok
+6	Module 4	4d Culture Corner	soup opera	term	soup opera	soap opera	"English typo ""soup opera"""	ok
+6	Module 4	4d Culture Corner	soup opera	note	sic: опечатка в учебнике, правильно soap opera		sic note obsolete after fix	ok (по исправленному слову)
+6	Module 5	English in Use/Extensive Reading 5	I beg you pardon!	term	I beg you pardon!	I beg your pardon!	"English typo ""I beg you pardon"""	ok
+6	Module 5	English in Use/Extensive Reading 5	I beg you pardon!	note	sic: опечатка в учебнике, правильно I beg your pardon!		sic note obsolete after fix	ok (по исправленному слову)
+6	Module 6	6a Free time	at the weekend	pos	n	phr	wrong pos: phrase, not noun	ok
+6	Module 6	6c Pastimes	explore	pos	n	v	wrong pos: explore is a verb	ok
+6	Module 6	6d Culture Corner	the scene of crime	translation	картина преступления	место преступления	wrong translation: scene of crime = место	ok
+6	Module 6	Use of English/Extensive Reading 6	What about..?	term	What about..?	What about...?	"junk punctuation ""..?"""	ok
+6	Module 6	Use of English/Extensive Reading 6	What about..?	translation	Как насчет..?	Как насчет...?	"junk punctuation ""..?"""	ok (по исправленному слову)
+6	Module 9	9c Let's cook!	melt	pos	n	v	wrong pos: melt is a verb here	ok
+6	Module 9	English in Use/Extensive Reading 9	fibre	translation	мышечная ткань	клетчатка	wrong translation in food context (fibre = клетчатка)	ok
+6	Module 10	10a Holiday plans	stay in a luxurious hotel	translation	останавливаться в роскошом отеле	останавливаться в роскошном отеле	"Russian typo ""роскошом"""	ok
+6	Module 10	10a Holiday plans	stay in a luxurious hotel	note	sic: так в учебнике (роскошом)		sic note obsolete after fix	ok
+6	Module 10	10d Culture Corner	tour	translation	тур	совершать тур, осматривать	translation is a noun while pos is v	ok
+6	Module 10	10d Culture Corner	range from	translation	выстраивать(ся)	варьироваться (от ... до ...)	wrong translation: range from ≠ выстраивать(ся)	ok
+6	Module 10	English in Use/Extensive Reading 10	volcano	translation	вулканы	вулкан	singular term translated as plural	ok
+6	Module 10	English in Use/Extensive Reading 10	en suite bathroom	translation	совмещенная ванная	отдельная ванная комната в номере	wrong translation: en suite ≠ совмещенная	ok
+7	Module 1	1a A city mouse or a country mouse?	feed*	term	feed*	feed	stray asterisk	ok
+7	Module 1	1a A city mouse or a country mouse?	high quality lifestyle	translation	правильный образ жизни	высокое качество жизни	wrong translation: high quality lifestyle ≠ правильный образ жизни	ok
+7	Module 1	1b Better safe than sorry	dusk to dawn	translation	от зари до зари, от восхода до заката	от заката до рассвета	"wrong translation: dusk to dawn (was ""от зари до зари, от восхода до заката"")"	ok
+7	Module 1	1c Hanging out	hang out	pos		phr v	missing pos for phrasal verb	ok
+7	Module 1	Across the Curriculum 1 – Geography	street party	translation	уличный парад	уличный праздник	wrong translation: street party ≠ парад	ok
+7	Module 2	2a Bookworms	solve the mystery case	translation	расследовать загадочное дело	раскрыть загадочное дело	wrong translation: solve = раскрыть	ok
+7	Module 5	5a Predictions	robotic housemaid	translation	робот - домашняя хозяйка	робот — домашняя хозяйка	"junk: hyphen instead of dash (cf. ""робот — домашнее животное"")"	ok
+7	Module 5	5d – Culture Corner	digital music player (Mp3)	term	digital music player (Mp3)	digital music player (MP3)	English spelling (Mp3)	ok
+7	Module 5	English in Use 5	connect to the Internet.	term	connect to the Internet.	connect to the Internet	stray period	ok
+7	Module 7	7b DVD frenzy!	according to	pos	phr v	phr	wrong pos: according to is not a phrasal verb	ok
+7	Module 7	7b DVD frenzy!	according to	translation	соответственно кому-либо	согласно кому-либо, по словам кого-либо	wrong translation: соответственно ≠ согласно	ok
+7	Module 7	7c In the charts!	catchy	translation	притягательный	легко запоминающийся, привязчивый	wrong translation: catchy ≠ притягательный	ok
+7	Module 7	7c In the charts!	heavy metal	translation	тяжелый метал, хеви-метал	тяжелый металл, хеви-метал	"Russian spelling ""метал"""	ok
+7	Module 8	8c Born free	black bear	translation	бурый медведь	черный медведь (барибал)	wrong translation: black bear ≠ бурый медведь	ok
+7	Module 8	8d – Culture Corner	golden eagle	translation	золотой орел	беркут	wrong translation: golden eagle = беркут	ok
+7	Module 8	8d – Culture Corner	puffin	translation	буревестник	тупик (птица)	wrong translation: puffin ≠ буревестник	ok
+7	Module 9	9a You are what you eat!	cream	translation	крем	сливки	wrong translation in food context: cream = сливки	ok
+7	Module 9	9b Can I help you?	first aid kit	pos	phr	n	pos: noun, like other compounds in list	ok
+7	Module 9	9b Can I help you?	ring	translation	звонок	кольцо	wrong translation in jeweller's context: ring = кольцо	ok
+7	Module 9	Across the Curriculum 9 – Citizenship	for a good cause	translation	по веской причине	ради благого дела	wrong translation: for a good cause ≠ по веской причине	ok
+7	Module 10	10a Stress free	hurtful	translation	болезненный	обидный	wrong translation: hurtful = обидный	ok
+7	Module 10	10a Stress free	sit around	pos	phr	phr v	wrong pos: sit around is a phrasal verb	ok
+7	Module 10	10a Stress free	scratch my back and I'll scratch yours	translation	око за око, зуб за зуб	ты мне, я тебе	"wrong equivalent: not ""око за око"""	ok
+7	Module 10	10d – Culture Corner	non-profit charity	translation	безвозмездная помощь	некоммерческая благотворительная организация	wrong translation: non-profit charity ≠ безвозмездная помощь	ok
+7	People	People	Barbara Mc Alpine	term	Barbara Mc Alpine	Barbara McAlpine	name spelling	ok
+7	Famous People/Characters	Famous People/Characters	A.Selkirk	term	A.Selkirk	A. Selkirk	name spelling (missing space)	ok
+7	Famous People/Characters	Famous People/Characters	HG Wells	term	HG Wells	H. G. Wells	name spelling (initials)	ok
+7	Famous People/Characters	Famous People/Characters	Leonardo Di Caprio	term	Leonardo Di Caprio	Leonardo DiCaprio	name spelling	ok
+7	Famous People/Characters	Famous People/Characters	Sherlock Homes	term	Sherlock Homes	Sherlock Holmes	name spelling	ok
+7	Places	Places	Gwynedd Wales	term	Gwynedd Wales	Gwynedd, Wales	missing comma	ok
+7	Others	Others	Barclay's Bank	term	Barclay's Bank	Barclays Bank	name spelling	ok
+7	Others	Others	Champion's League	term	Champion's League	Champions League	name spelling	ok
+7	Others	Others	Eastenders	term	Eastenders	EastEnders	name spelling	ok
+8	Module 1	Across the Curriculum: PSHE	taut	pos	adv	adj	pos: taut is an adjective	ok
+8	Module 2	2f	demand	pos	n	v	pos: translation is verbal (требовать), noun label wrong	ok
+8	Module 2	Culture Corner 2 Phrasals & Phrases	put words into practice	translation	сказано—сделано; делать то, что говоришь	сказано — сделано; делать то, что говоришь	junk: dash without spaces	ok
+8	Module 2	Going Green 2	neither nor	term	neither nor	neither ... nor	"English: correlative needs ""..."" between parts"	ok
+8	Module 2	Going Green 2	neither nor	pos	adj	conj	pos: neither...nor is a conjunction	ok (по исправленному слову)
+8	Module 2	Going Green 2	playwright	translation	сценарист	драматург	wrong translation: playwright = драматург, not сценарист	ok
+8	Module 3	3a	research	pos	n	v	pos: translation is verbal (изучать, исследовать)	ok
+8	Module 3	3c	culture	translation	культура (бактерия)	культура (бактерий)	Russian: wrong case	ok
+8	Module 3	3e	relieved	translation	облегчённый	испытывающий облегчение	wrong translation: relieved is about feeling relief, not облегчённый (lightened)	ok
+8	Module 3	Culture Corner 3	improve	translation	доказывать	улучшать	wrong translation: improve = улучшать (доказывать is prove)	ok
+8	Module 4	4d	perm	translation	делать перманентую завивку	делать перманентную завивку	Russian typo: перманентую	ok
+8	Module 4	4e Phrasals & Phrases	put an end to sth	translation	останаливать, прекращать	останавливать, прекращать	Russian typo: останаливать	ok
+8	Module 4	4f	relevant	translation	уместный, относяйщийся к делу	уместный, относящийся к делу	Russian typo: относяйщийся	ok
+8	Module 5	5a	shake	translation	искать	трясти(сь)	wrong translation: shake = трясти(сь), not искать	ok
+8	Module 5	5a	smash	pos	n	v	pos: translation is verbal (разбивать)	ok
+8	Module 5	5d Phrasals & Phrases	be in for	translation	остаться дома из-за чего-либо	ожидать чего-либо (неприятного), предстоять	wrong translation: be in for = something (unpleasant) is coming	ok
+8	Module 5	5e	linkers	pos	v	n	pos: linkers is a noun	ok
+8	Module 5	5e Phrasals & Phrases	as a concequence	term	as a concequence	as a consequence	English typo: concequence	ok
+8	Module 5	5f	tip over	translation	споткнуться	опрокидывать(ся)	wrong translation: tip over = опрокидываться, not споткнуться	ok
+8	Module 5	Culture Corner 5	breed	translation	вид	порода	wrong translation: breed (of animals) = порода	ok
+8	Module 6	6a Phrasals & Phrases	raindeer sledge	term	raindeer sledge	reindeer sledge	English typo: raindeer	ok
+8	Module 6	6b	thrilling	translation	пугающий, наводящий страх	захватывающий, волнующий	wrong translation: thrilling = захватывающий (cf. 6c)	ok
+8	Module 6	6d	jet	translation	сверхзвуковой самолёт	реактивный самолёт	wrong translation: jet = реактивный самолёт, not сверхзвуковой	ok
+8	Module 6	6d	touristy	pos	n	adj	pos: touristy is an adjective	ok
+8	Module 7	7b	contradict	translation	потиворечить, опровергать	противоречить, опровергать	Russian typo: потиворечить	ok
+8	Module 7	7b Phrasals & Phrases	that's the spirit!	translation	ну и выдержка!	так держать!	wrong translation: that's the spirit = так держать, вот это настрой	ok
+8	Module 7	7f Phrasals & Phrases	a curse or a bless	term	a curse or a bless	a curse or a blessing	English: noun blessing, not bless	ok
+8	Module 8	8a	bump	pos	n	v	pos: translation is verbal (ударяться)	ok
+8	Module 8	8b	racquet	translation	ракет;ка (для игры в теннис, бадминтон)	ракетка (для игры в теннис, бадминтон)	junk: stray semicolon inside word	ok
+8	Module 8	8b	scuba diving	translation	плавание под водой с авкалангом или спецоборудованием	плавание под водой с аквалангом или спецоборудованием	Russian typo: авкалангом	ok
+8	Module 8	8e	postcode	pos	v	n	pos: postcode is a noun	ok
+8	Module 8	8f Phrasals & Phrases	be in favour of	translation	пользоваться спросом, нравиться	быть за, поддерживать	wrong translation: be in favour of = support	ok
+8	Module 8	Culture Corner 8 Phrasals & Phrases	make appearance	term	make appearance	make an appearance	English: missing article	ok
+9	Module 1	Vocabulary: Festivals & Celebrations	monthly	translation	ежемесячно	ежемесячный	wrong translation for term	ok
+9	Module 1	1b	what the matter?	term	what the matter?	what's the matter?	English spelling	ok
+9	Module 1	1d Special Occasions	rely on	translation	надеяться на кого-либо/чего-либо	надеяться на кого-либо/что-либо	Russian spelling	ok
+9	Module 1	1e	chime	pos		C n	wrong part of speech	ok
+9	Module 1	1f	head for	pos	phr	phr v	wrong part of speech	ok
+9	Module 1	1f	magic	pos	U n	adj	wrong part of speech	ok
+9	Module 2	2a	escape	pos	U v	v	wrong part of speech	ok
+9	Module 2	2a	orbit	translation	орбита	вращаться по орбите	wrong translation for term	ok
+9	Module 2	2a	porch	translation	подъезд	крыльцо	wrong translation for term	ok
+9	Module 2	2c	deny	translation	запрещать	отрицать	wrong translation for term	ok
+9	Module 2	2f	furnished	translation	меблированнный	меблированный	Russian spelling	ok
+9	Module 3	3c	ankle	translation	колено	лодыжка	wrong translation for term	ok
+9	Module 3	Vocabulary: The mind	mind	translation	соображать	ум, разум	wrong translation for term	ok
+9	Module 3	3e	fiercely	pos	adj	adv	wrong part of speech	ok
+9	Module 3	Culture Corner 3	date back to	note	(веку, году, т. п.)	(веку, году и т. п.)	Russian spelling	ok
+9	Module 3	Culture Corner 3	go bump in the night	translation	наткнуться на что-либо	издавать странные звуки по ночам	wrong translation for term	ok
+9	Module 4	4a	cater for	pos	phr	phr v	wrong part of speech	ok
+9	Module 4	4b Computer problems	scan	pos	C n	v	wrong part of speech	ok
+9	Module 4	4b Computer problems	transfer	translation	= зд. передавать	зд. передавать	junk/punctuation	ok
+9	Module 4	4e	hooked on	translation	“подсесть” на что-либо	«подсесть» на что-либо	junk/punctuation	ok
+9	Module 4	4e	research	translation	исследование	исследовать	wrong translation for term	ok
+9	Module 4	Going Green 4	gradually	translation	медленно	постепенно	wrong translation for term	ok
+9	Module 5	Vocabulary: Types of art	sketch	translation	набросок	делать набросок	wrong translation for term	ok
+9	Module 5	Vocabulary: Types of art	spray painting	translation	рисовать с помощью аэрозоли	рисование с помощью аэрозоля	wrong translation for term	ok
+9	Module 5	5c	accurately	pos	adj	adv	wrong part of speech	ok
+9	Module 5	5c	accurately	translation	внимательный	точно, аккуратно	wrong translation for term	ok
+9	Module 5	5c	go out	pos	phr	phr v	wrong part of speech	ok
+9	Module 5	5c	hardworking	translation	работающий, не покладая рук	работающий не покладая рук	junk/punctuation	ok
+9	Module 5	5d	acting	translation	играть роль	актерская игра	wrong translation for term	ok
+9	Module 5	5d	star	translation	звезда	играть главную роль	wrong translation for term	ok
+9	Module 5	5e	satisfying	translation	удовлетворительный	приносящий удовлетворение	wrong translation for term	ok
+9	Module 5	Culture Corner 5	rule	pos	U n	v	wrong part of speech	ok
+9	Module 5	Literature: Across the Curriculum	exchange	translation	обменяться парой фраз	обмен репликами	wrong translation for term	ok
+9	Module 5	Literature: Across the Curriculum	get engaged	translation	сообщить о помолвке	обручиться	wrong translation for term	ok
+9	Module 6	6a	volunteer	pos	v	C n	wrong part of speech	ok
+9	Module 6	6b	sightseeing	translation	осматривать достопримечательности	осмотр достопримечательностей	wrong translation for term	ok
+9	Module 6	6b	zebra crossing	translation	наземный переход (“зебра”)	наземный переход («зебра»)	junk/punctuation	ok
+9	Module 6	6c	tomb	translation	надгробие	гробница	wrong translation for term	ok
+9	Module 6	6d	fill in	translation	наполнять	заполнять	wrong translation for term	ok
+9	Module 6	6d	hardworking	translation	работающий, не покладая рук	работающий не покладая рук	junk/punctuation	ok
+9	Module 6	6e	altogether	translation	вместе	в общем, в целом	wrong translation for term	ok
+9	Module 6	6e	pitch	note	(для игры в футбол, гольф, т. п.)	(для игры в футбол, гольф и т. п.)	Russian spelling	ok
+9	Module 6	Going Green 6	mean	translation	иметь ввиду	иметь в виду	Russian spelling	ok
+9	Module 7	7a	relieved	translation	облегченный	испытывающий облегчение	wrong translation for term	ok
+9	Module 7	7d	extremely	pos	adj	adv	wrong part of speech	ok
+9	Module 7	7d	keep sth up	pos	phr	phr v	wrong part of speech	ok
+9	Module 7	Culture Corner 7	motionless	translation	недвижимый	неподвижный	Russian spelling	ok
+9	Module 7	Across the Curriculum	in the same way	translation	точно также	точно так же	Russian spelling	ok
+9	Module 8	8a	concentrate on	pos	v	phr v	wrong part of speech	ok
+9	Module 8	8a	frighten away	pos	v	phr v	wrong part of speech	ok
+9	Module 8	8a	give up	pos	phr	phr v	wrong part of speech	ok
+9	Module 8	8b	trek	pos	v	C n	wrong part of speech	ok
+9	Module 8	8d	turn your nose up	translation	задирать нос	воротить нос, пренебрегать	wrong translation for term	ok
+9	Module 8	8f	head toward	pos	phr	phr v	wrong part of speech	ok
+9	Module 8	8f	instead of	pos	adv	prep	wrong part of speech	ok
+9	Module 8	Going Green 8	scallop	note	(вид рыбы)	(вид моллюска)	wrong translation for term	ok
+9	Module 8	Going Green 8	worrying	translation	волнующий	тревожный, вызывающий беспокойство	wrong translation for term	ok
+10	Module 1	1a	pastime	translation	развлечение, времяпровождение	развлечение, времяпрепровождение	орфография: времяпрепровождение	ok
+10	Module 1	1d	pleasant	translation	довольный	приятный	pleasant = приятный, не «довольный»	ok
+10	Module 1	1e	advice	term	advice	advice/advise	advice — только сущ.; глагол advise (pos n/v)	ok
+10	Module 2	Culture Corner 2 Phrases	raise money	translation	зарабатывать деньги	собирать деньги	raise money = собирать (средства), не зарабатывать	ok
+10	Module 3	3a Phrases	sit an exam	translation	готовиться к экзамену	сдавать экзамен	sit an exam = сдавать экзамен	ok
+10	Module 4	Going Green 4	canopy	translation	поросль молодых деревьев	полог леса, верхний ярус крон	canopy (ярус леса) = полог, не поросль	ok
+10	Module 4	Spotlight on Exams	collar	translation	воротник	ошейник	collar у тигра = ошейник (с радиомаяком)	ok
+10	Module 5	5e	amused	translation	удивленный, изумленный	позабавленный, развеселившийся	amused = позабавленный, не изумленный	ok
+10	Module 5	5e	uneasy	translation	непростой	беспокойный, встревоженный	uneasy (чувство) = беспокойный	ok
+10	Module 6	6a	additive	translation	приправа	пищевая добавка	additive = добавка, не приправа	ok
+10	Module 6	6a	oily	translation	сливочный	жирный, маслянистый	oily = жирный, маслянистый	ok
+10	Module 6	6c Words often confused	ache/pain	translation	тупая, ноющая боль/ страдание, боль	тупая, ноющая боль/страдание, боль	лишний пробел после /	ok
+10	Module 6	6d	totally	pos	adj	adv	totally — наречие	ok
+10	Module 6	Across the Curriculum	main	pos	n	adj	main — прилагательное	ok
+10	Module 7	Culture Corner 7	housekeeper	translation	домохозяйка	экономка	housekeeper = экономка, не домохозяйка	ok
+10	Module 8	8d	ivory	pos	n	adj	перевод — прилагательное	ok
+10	Module 8	8d	scaffolding	translation	зависание	строительные леса	scaffolding = леса, не зависание	ok
+10	Module 8	Culture Corner 8	wireless	pos	n	adj	перевод «беспроводной» — прилагательное	ok
+10	Module 8	Going Green 8	flow	translation	течь	поток, течение	flow (n) = поток, «течь» — глагол	ok
+11	Module 1	1a	separated	pos	n	adj	pos: adjective	ok
+11	Module 1	1b Phrases	on one's way	translation	встречный	по пути, по дороге	wrong translation	ok
+11	Module 1	Going Green 1	limited	pos	n	adj	pos: adjective	ok
+11	Module 2	2a	alert	translation	тревога, сигнал тревоги	бдительный, настороженный	translation is noun but pos adj	ok
+11	Module 2	2a	sigh	translation	вздох	вздыхать	translation is noun but pos v	ok
+11	Module 2	2a	mount	translation	укреплять	нарастать, усиливаться	wrong translation (stress mounts)	ok
+11	Module 2	2a Phrases	get sb down	translation	унижать	угнетать, расстраивать	wrong translation	ok
+11	Module 2	2d	accustomed to	translation	привыкать	привыкший	translation is verb but pos adj	ok
+11	Module 2	2d	trickle	translation	струиться, течь тонокой струйкой	струиться, течь тонкой струйкой	spelling	ok
+11	Module 2	Culture Corner 2	volunteer	pos	v	n	pos: translation is noun	ok
+11	Module 2	Across the Curriculum: Science	hormone	pos		n	missing pos	ok
+11	Module 2	Going Green 2	preserve	pos	n	v	pos: verb	ok
+11	Module 3	3a	announce	translation	объявлять, аннонсировать	объявлять, анонсировать	spelling	ok
+11	Module 3	3c	transaction	translation	распределение	сделка, операция	wrong translation	ok
+11	Module 3	3d	lie	pos	n	v	pos: verb	ok
+11	Module 3	3d	timidly	pos	adj	adv	pos: adverb	ok
+11	Module 3	3d Phrases	hold your noise	term	hold your noise	hold your nose	English spelling	ok
+11	Module 3	3e	achieve	translation	заслуживать	достигать	wrong translation	ok
+11	Module 3	3e	restate	translation	утверждать	переформулировать, повторно излагать	wrong translation	ok
+11	Module 3	Across the curriculum: Citizenship	morally	pos	v	adv	pos: adverb	ok
+11	Module 3	Going Green 3 Phrases	be in one's best interest	translation	быть заинтересованным в чем-либо	быть в чьих-либо интересах	wrong translation	ok
+11	Module 4	4a	heel	translation	каблук, шпилька	пятка	wrong sense (body part, injuries list)	ok
+11	Module 4	4a	pitch black	pos	n	adj	pos: adjective	ok
+11	Module 4	4a	sprain	translation	рястянуть связки, сухожилия	растянуть связки, сухожилия	spelling	ok
+11	Module 4	4b	thumping	translation	обширный, гигантский	сильный, стучащий	wrong sense (illness list)	ok
+11	Module 4	4c	frequent	pos	adv	adj	pos: adjective	ok
+11	Module 4	4c	rise	translation	повышать, увеличивать	повышаться, увеличиваться	rise is intransitive	ok
+11	Module 4	4c	tow truck	translation	буксир	эвакуатор, машина техпомощи	wrong translation (буксир = tugboat)	ok
+11	Module 4	4d	glimpse	pos	v	n	pos: translation is noun	ok
+11	Module 4	4d	sheet	translation	простынь	простыня	spelling	ok
+11	Module 4	4d	witness	pos	v	n	pos: translation is noun	ok
+11	Module 4	4d Phrasal verbs	track out	term	track out	track down	English: phrasal verb is track down	ok
+11	Module 4	4e	accuracy	translation	аккуратность	точность	wrong translation	ok
+11	Module 4	4e	crackle	translation	хрустеть	трещать, потрескивать	wrong translation	ok
+11	Module 4	4e Phrases	as plain as a day	term	as plain as a day	as plain as day	English idiom	ok
+11	Module 4	4e Phrases	die to meet sb	translation	очень хотеть с кем-то увидиться	очень хотеть с кем-то увидеться	spelling	ok
+11	Module 4	Culture Corner 4	basin	translation	водоем	таз	wrong sense (cleaning items)	ok
+11	Module 4	Culture Corner 4	unsanitary	pos	n	adj	pos: adjective	ok
+11	Module 4	Culture Corner 4	unsanitary	translation	антисанитария	антисанитарный	translation to adjective	ok
+11	Module 4	Going Green 4	entangle	translation	вмешивать, вовлекать	запутывать	wrong sense (animals entangled in litter)	ok
+11	Module 4	Going Green 4	sprinkler	translation	распрыскиватель	разбрызгиватель	spelling	ok
+11	Module 5	5a	fixed address	pos		n	missing pos	ok
+11	Module 5	5a	fully-furnished	pos	n	adj	pos: adjective	ok
+11	Module 5	5a	government	pos	adj	n	pos: noun	ok
+11	Module 5	5a	rough	pos	adv	adj	pos: adjective	ok
+11	Module 5	5d Phrases	in full view	translation	в полной мере, в полном объеме	на виду у всех, в поле зрения	wrong translation	ok
+11	Module 5	5e	exterior	pos	n	adj	pos: translation is adjective	ok
+11	Module 5	Across the Curriculum: Geography	worthless	translation	бесценный	ничего не стоящий, никчемный	wrong translation (opposite meaning)	ok
+11	Module 6	6b	blazing row	translation	весомый аргумент	бурная ссора, жаркий спор	wrong translation	ok
+11	Module 6	6b	depressing	translation	угнетенный, унылый	угнетающий, гнетущий	wrong translation (depressed vs depressing)	ok
+11	Module 6	6b	feature	translation	передовица	очерк, тематическая статья	wrong translation (передовица = editorial)	ok
+11	Module 6	6d	announce	translation	оглашать, аннонсировать	оглашать, анонсировать	spelling	ok
+11	Module 6	6d	wag	translation	качаться	вилять (хвостом)	wrong translation	ok
+11	Module 6	6e Phrasal verbs	expose sb to sth	translation	знакомить кого-либо с кем-либо	знакомить кого-либо с чем-либо	translation mismatch (sth)	ok
+11	Module 6	Going Green 6	stranded	translation	осевший	выброшенный на берег, оказавшийся на мели	wrong translation	ok
+11	Module 7	7a Phrases	get one's hopes up	translation	успокаивать, подбадривать	питать надежды, обнадеживаться	wrong translation	ok
+11	Module 7	7b Phrases	you can't teach an old dog new tricks	translation	старого лечить, что мертвого лечить	старого учить, что мертвого лечить	proverb misquoted	ok
+11	Module 7	7d	unforgiving	translation	непростительный	неумолимый, беспощадный	wrong translation	ok
+11	Module 7	7e	actual	translation	актуальный, значимый	фактический, действительный	false friend	ok
+11	Module 7	7e	enclose	translation	ограждать, окружать	прилагать (к письму), вкладывать	wrong sense (letters section)	ok
+11	Module 7	7e Phrases	on request	translation	в ответ на	по запросу, по требованию	wrong translation	ok
+11	Module 7	Culture Corner 7	hang-out	translation	место для провождения свободного времени	место для проведения свободного времени	spelling	ok
+11	Module 7	Across the Curriculum: Citizenship	socialising	translation	социализация, вращение обществе	социализация, вращение в обществе	missing preposition	ok
+11	Module 7	Going Green 7	aware	translation	предупрежденный	осведомленный, знающий	wrong translation	ok
+11	Module 7	Going Green 7	soul	pos		n	missing pos	ok
+11	Module 8	8a	city state	translation	городское правительство	город-государство	wrong translation	ok
+11	Module 8	8b	aisle	translation	проход между рядам	проход между рядами	spelling	ok
+11	Module 8	8b	boarding pass	translation	пасадочный талон	посадочный талон	spelling	ok
+11	Module 8	8b	take-off slot	translation	время посадки	время вылета	wrong translation	ok
+11	Module 8	8e	struck	translation	впечатляюще	пораженный, впечатленный	translation is adverb but pos adj	ok
+11	Module 8	Going Green 8	Renaissance	pos	adj	n	pos: translation is noun	ok
+11	Module 8	Going Green 8	Renaissance	note	(период в европейском искусстве, относяйщийся особенно к Италии в XIV-XVI вв., когда у людей возрос интерес к искусству)	(период в европейском искусстве, относящийся особенно к Италии в XIV-XVI вв., когда у людей возрос интерес к искусству)	spelling	ok
+11	Module 3	Across the curriculum: Citizenship	practice	term	practice	practise	English: British verb spelling (pos v)	ok

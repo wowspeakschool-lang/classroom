@@ -22,4 +22,10 @@ for g in range(2, 12):
 for c in ov[1]: c.font = bold; c.fill = fill
 for c, w in zip('ABCDE', (7, 40, 44, 8, 12)): ov.column_dimensions[c].width = w
 ov.freeze_panes = 'A2'; ov.auto_filter.ref = ov.dimensions
+fx = wb.create_sheet('Исправления')
+fx.append(['Класс', 'Модуль', 'Раздел', 'Слово', 'Поле', 'Было', 'Стало', 'Причина'])
+for r in list(csv.reader(open('work/fixes_applied.tsv'), delimiter='\t'))[1:]: fx.append([int(r[0])] + r[1:8])
+for c in fx[1]: c.font = bold; c.fill = fill
+for c, w in zip('ABCDEFGH', (7, 14, 28, 28, 12, 40, 40, 40)): fx.column_dimensions[c].width = w
+fx.freeze_panes = 'A2'; fx.auto_filter.ref = fx.dimensions
 wb.save('/home/user/classroom/docs/Spotlight_словари_2-11.xlsx'); print('total', tot)

@@ -1,0 +1,34 @@
+grade	module	section	term	field	old	new	reason
+7	Module 1	1a A city mouse or a country mouse?	feed*	term	feed*	feed	stray asterisk
+7	Module 1	1a A city mouse or a country mouse?	high quality lifestyle	translation	правильный образ жизни	высокое качество жизни	wrong translation: high quality lifestyle ≠ правильный образ жизни
+7	Module 1	1b Better safe than sorry	dusk to dawn	translation	от зари до зари, от восхода до заката	от заката до рассвета	"wrong translation: dusk to dawn (was ""от зари до зари, от восхода до заката"")"
+7	Module 1	1c Hanging out	hang out	pos		phr v	missing pos for phrasal verb
+7	Module 1	Across the Curriculum 1 – Geography	street party	translation	уличный парад	уличный праздник	wrong translation: street party ≠ парад
+7	Module 2	2a Bookworms	solve the mystery case	translation	расследовать загадочное дело	раскрыть загадочное дело	wrong translation: solve = раскрыть
+7	Module 5	5a Predictions	robotic housemaid	translation	робот - домашняя хозяйка	робот — домашняя хозяйка	"junk: hyphen instead of dash (cf. ""робот — домашнее животное"")"
+7	Module 5	5d – Culture Corner	digital music player (Mp3)	term	digital music player (Mp3)	digital music player (MP3)	English spelling (Mp3)
+7	Module 5	English in Use 5	connect to the Internet.	term	connect to the Internet.	connect to the Internet	stray period
+7	Module 7	7b DVD frenzy!	according to	pos	phr v	phr	wrong pos: according to is not a phrasal verb
+7	Module 7	7b DVD frenzy!	according to	translation	соответственно кому-либо	согласно кому-либо, по словам кого-либо	wrong translation: соответственно ≠ согласно
+7	Module 7	7c In the charts!	catchy	translation	притягательный	легко запоминающийся, привязчивый	wrong translation: catchy ≠ притягательный
+7	Module 7	7c In the charts!	heavy metal	translation	тяжелый метал, хеви-метал	тяжелый металл, хеви-метал	"Russian spelling ""метал"""
+7	Module 8	8c Born free	black bear	translation	бурый медведь	черный медведь (барибал)	wrong translation: black bear ≠ бурый медведь
+7	Module 8	8d – Culture Corner	golden eagle	translation	золотой орел	беркут	wrong translation: golden eagle = беркут
+7	Module 8	8d – Culture Corner	puffin	translation	буревестник	тупик (птица)	wrong translation: puffin ≠ буревестник
+7	Module 9	9a You are what you eat!	cream	translation	крем	сливки	wrong translation in food context: cream = сливки
+7	Module 9	9b Can I help you?	first aid kit	pos	phr	n	pos: noun, like other compounds in list
+7	Module 9	9b Can I help you?	ring	translation	звонок	кольцо	wrong translation in jeweller's context: ring = кольцо
+7	Module 9	Across the Curriculum 9 – Citizenship	for a good cause	translation	по веской причине	ради благого дела	wrong translation: for a good cause ≠ по веской причине
+7	Module 10	10a Stress free	hurtful	translation	болезненный	обидный	wrong translation: hurtful = обидный
+7	Module 10	10a Stress free	sit around	pos	phr	phr v	wrong pos: sit around is a phrasal verb
+7	Module 10	10a Stress free	scratch my back and I'll scratch yours	translation	око за око, зуб за зуб	ты мне, я тебе	"wrong equivalent: not ""око за око"""
+7	Module 10	10d – Culture Corner	non-profit charity	translation	безвозмездная помощь	некоммерческая благотворительная организация	wrong translation: non-profit charity ≠ безвозмездная помощь
+7	People	People	Barbara Mc Alpine	term	Barbara Mc Alpine	Barbara McAlpine	name spelling
+7	Famous People/Characters	Famous People/Characters	A.Selkirk	term	A.Selkirk	A. Selkirk	name spelling (missing space)
+7	Famous People/Characters	Famous People/Characters	HG Wells	term	HG Wells	H. G. Wells	name spelling (initials)
+7	Famous People/Characters	Famous People/Characters	Leonardo Di Caprio	term	Leonardo Di Caprio	Leonardo DiCaprio	name spelling
+7	Famous People/Characters	Famous People/Characters	Sherlock Homes	term	Sherlock Homes	Sherlock Holmes	name spelling
+7	Places	Places	Gwynedd Wales	term	Gwynedd Wales	Gwynedd, Wales	missing comma
+7	Others	Others	Barclay's Bank	term	Barclay's Bank	Barclays Bank	name spelling
+7	Others	Others	Champion's League	term	Champion's League	Champions League	name spelling
+7	Others	Others	Eastenders	term	Eastenders	EastEnders	name spelling

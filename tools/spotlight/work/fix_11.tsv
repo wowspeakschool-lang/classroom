@@ -1,0 +1,74 @@
+grade	module	section	term	field	old	new	reason
+11	Module 1	1a	separated	pos	n	adj	pos: adjective
+11	Module 1	1b Phrases	on one's way	translation	встречный	по пути, по дороге	wrong translation
+11	Module 1	Going Green 1	limited	pos	n	adj	pos: adjective
+11	Module 2	2a	alert	translation	тревога, сигнал тревоги	бдительный, настороженный	translation is noun but pos adj
+11	Module 2	2a	sigh	translation	вздох	вздыхать	translation is noun but pos v
+11	Module 2	2a	mount	translation	укреплять	нарастать, усиливаться	wrong translation (stress mounts)
+11	Module 2	2a Phrases	get sb down	translation	унижать	угнетать, расстраивать	wrong translation
+11	Module 2	2d	accustomed to	translation	привыкать	привыкший	translation is verb but pos adj
+11	Module 2	2d	trickle	translation	струиться, течь тонокой струйкой	струиться, течь тонкой струйкой	spelling
+11	Module 2	Culture Corner 2	volunteer	pos	v	n	pos: translation is noun
+11	Module 2	Across the Curriculum: Science	hormone	pos		n	missing pos
+11	Module 2	Going Green 2	preserve	pos	n	v	pos: verb
+11	Module 3	3a	announce	translation	объявлять, аннонсировать	объявлять, анонсировать	spelling
+11	Module 3	3c	transaction	translation	распределение	сделка, операция	wrong translation
+11	Module 3	3d	lie	pos	n	v	pos: verb
+11	Module 3	3d	timidly	pos	adj	adv	pos: adverb
+11	Module 3	3d Phrases	hold your noise	term	hold your noise	hold your nose	English spelling
+11	Module 3	3e	achieve	translation	заслуживать	достигать	wrong translation
+11	Module 3	3e	restate	translation	утверждать	переформулировать, повторно излагать	wrong translation
+11	Module 3	Across the curriculum: Citizenship	morally	pos	v	adv	pos: adverb
+11	Module 3	Going Green 3 Phrases	be in one's best interest	translation	быть заинтересованным в чем-либо	быть в чьих-либо интересах	wrong translation
+11	Module 4	4a	heel	translation	каблук, шпилька	пятка	wrong sense (body part, injuries list)
+11	Module 4	4a	pitch black	pos	n	adj	pos: adjective
+11	Module 4	4a	sprain	translation	рястянуть связки, сухожилия	растянуть связки, сухожилия	spelling
+11	Module 4	4b	thumping	translation	обширный, гигантский	сильный, стучащий	wrong sense (illness list)
+11	Module 4	4c	frequent	pos	adv	adj	pos: adjective
+11	Module 4	4c	rise	translation	повышать, увеличивать	повышаться, увеличиваться	rise is intransitive
+11	Module 4	4c	tow truck	translation	буксир	эвакуатор, машина техпомощи	wrong translation (буксир = tugboat)
+11	Module 4	4d	glimpse	pos	v	n	pos: translation is noun
+11	Module 4	4d	sheet	translation	простынь	простыня	spelling
+11	Module 4	4d	witness	pos	v	n	pos: translation is noun
+11	Module 4	4d Phrasal verbs	track out	term	track out	track down	English: phrasal verb is track down
+11	Module 4	4e	accuracy	translation	аккуратность	точность	wrong translation
+11	Module 4	4e	crackle	translation	хрустеть	трещать, потрескивать	wrong translation
+11	Module 4	4e Phrases	as plain as a day	term	as plain as a day	as plain as day	English idiom
+11	Module 4	4e Phrases	die to meet sb	translation	очень хотеть с кем-то увидиться	очень хотеть с кем-то увидеться	spelling
+11	Module 4	Culture Corner 4	basin	translation	водоем	таз	wrong sense (cleaning items)
+11	Module 4	Culture Corner 4	unsanitary	pos	n	adj	pos: adjective
+11	Module 4	Culture Corner 4	unsanitary	translation	антисанитария	антисанитарный	translation to adjective
+11	Module 4	Going Green 4	entangle	translation	вмешивать, вовлекать	запутывать	wrong sense (animals entangled in litter)
+11	Module 4	Going Green 4	sprinkler	translation	распрыскиватель	разбрызгиватель	spelling
+11	Module 5	5a	fixed address	pos		n	missing pos
+11	Module 5	5a	fully-furnished	pos	n	adj	pos: adjective
+11	Module 5	5a	government	pos	adj	n	pos: noun
+11	Module 5	5a	rough	pos	adv	adj	pos: adjective
+11	Module 5	5d Phrases	in full view	translation	в полной мере, в полном объеме	на виду у всех, в поле зрения	wrong translation
+11	Module 5	5e	exterior	pos	n	adj	pos: translation is adjective
+11	Module 5	Across the Curriculum: Geography	worthless	translation	бесценный	ничего не стоящий, никчемный	wrong translation (opposite meaning)
+11	Module 6	6b	blazing row	translation	весомый аргумент	бурная ссора, жаркий спор	wrong translation
+11	Module 6	6b	depressing	translation	угнетенный, унылый	угнетающий, гнетущий	wrong translation (depressed vs depressing)
+11	Module 6	6b	feature	translation	передовица	очерк, тематическая статья	wrong translation (передовица = editorial)
+11	Module 6	6d	announce	translation	оглашать, аннонсировать	оглашать, анонсировать	spelling
+11	Module 6	6d	wag	translation	качаться	вилять (хвостом)	wrong translation
+11	Module 6	6e Phrasal verbs	expose sb to sth	translation	знакомить кого-либо с кем-либо	знакомить кого-либо с чем-либо	translation mismatch (sth)
+11	Module 6	Going Green 6	stranded	translation	осевший	выброшенный на берег, оказавшийся на мели	wrong translation
+11	Module 7	7a Phrases	get one's hopes up	translation	успокаивать, подбадривать	питать надежды, обнадеживаться	wrong translation
+11	Module 7	7b Phrases	you can't teach an old dog new tricks	translation	старого лечить, что мертвого лечить	старого учить, что мертвого лечить	proverb misquoted
+11	Module 7	7d	unforgiving	translation	непростительный	неумолимый, беспощадный	wrong translation
+11	Module 7	7e	actual	translation	актуальный, значимый	фактический, действительный	false friend
+11	Module 7	7e	enclose	translation	ограждать, окружать	прилагать (к письму), вкладывать	wrong sense (letters section)
+11	Module 7	7e Phrases	on request	translation	в ответ на	по запросу, по требованию	wrong translation
+11	Module 7	Culture Corner 7	hang-out	translation	место для провождения свободного времени	место для проведения свободного времени	spelling
+11	Module 7	Across the Curriculum: Citizenship	socialising	translation	социализация, вращение обществе	социализация, вращение в обществе	missing preposition
+11	Module 7	Going Green 7	aware	translation	предупрежденный	осведомленный, знающий	wrong translation
+11	Module 7	Going Green 7	soul	pos		n	missing pos
+11	Module 8	8a	city state	translation	городское правительство	город-государство	wrong translation
+11	Module 8	8b	aisle	translation	проход между рядам	проход между рядами	spelling
+11	Module 8	8b	boarding pass	translation	пасадочный талон	посадочный талон	spelling
+11	Module 8	8b	take-off slot	translation	время посадки	время вылета	wrong translation
+11	Module 8	8e	struck	translation	впечатляюще	пораженный, впечатленный	translation is adverb but pos adj
+11	Module 8	Going Green 8	Renaissance	pos	adj	n	pos: translation is noun
+11	Module 8	Going Green 8	Renaissance	note	(период в европейском искусстве, относяйщийся особенно к Италии в XIV-XVI вв., когда у людей возрос интерес к искусству)	(период в европейском искусстве, относящийся особенно к Италии в XIV-XVI вв., когда у людей возрос интерес к искусству)	spelling
+11	Module 3	Across the curriculum: Citizenship	practice	term	practice	practise	English: British verb spelling (pos v)

@@ -5,7 +5,7 @@ grade	module	section	term	pos	translation	note
 4	Starter Unit		hope		надеяться	
 4	Starter Unit		join		присоединяться	
 4	Starter Unit		remember		помнить	
-4	Starter Unit		same		так же, такой же	
+4	Starter Unit		same		тот же, такой же	
 4	Module 1	Unit 1: One big happy family!	camera		фотоаппарат	
 4	Module 1	Unit 1: One big happy family!	CD		компакт-диск	
 4	Module 1	Unit 1: One big happy family!	friendly		дружелюбный	
@@ -78,7 +78,7 @@ grade	module	section	term	pos	translation	note
 4	Module 2	Unit 4: Work and play!	surprise		сюрприз	
 4	Module 2	Unit 4: Work and play!	take care of		заботиться о	
 4	Module 2	Unit 4: Work and play!	taxi driver		водитель такси	
-4	Module 2	Unit 4: Work and play!	volleyball		воллейбол	
+4	Module 2	Unit 4: Work and play!	volleyball		волейбол	
 4	Module 2	Unit 4: Work and play!	wait		ждать	
 4	Module 2	Unit 4: Work and play!	week		неделя	
 4	Module 2	Unit 4: Work and play!	whistle		свистеть	
@@ -181,7 +181,7 @@ grade	module	section	term	pos	translation	note
 4	Cultural Sections on English-speaking Countries	3. What's for pudding?	dinner		ужин	
 4	Cultural Sections on English-speaking Countries	3. What's for pudding?	ingredients		ингредиенты, состав	
 4	Cultural Sections on English-speaking Countries	3. What's for pudding?	jam tart		пирог с джемом	
-4	Cultural Sections on English-speaking Countries	3. What's for pudding?	lemon meringue		лимонная меринга	
+4	Cultural Sections on English-speaking Countries	3. What's for pudding?	lemon meringue		лимонная меренга	
 4	Cultural Sections on English-speaking Countries	3. What's for pudding?	simple		простой	
 4	Cultural Sections on English-speaking Countries	4. A walk in the wild	fun-loving		веселый	
 4	Cultural Sections on English-speaking Countries	4. A walk in the wild	hug		обнимать	
@@ -189,7 +189,7 @@ grade	module	section	term	pos	translation	note
 4	Arthur & Rascal		bark		лаять	
 4	Arthur & Rascal		busy		занятой	
 4	Arthur & Rascal		celebrate		праздновать	
-4	Arthur & Rascal		fast food		еда, которая быстро готовится (сосиски, пицца и т. п.)	
+4	Arthur & Rascal		fast food		еда, которая быстро готовится (бургеры, бутерброды, пицца и т. п.)	
 4	Arthur & Rascal		hate		ненавидеть	
 4	Arthur & Rascal		hungry		голодный	
 4	Arthur & Rascal		kitten		котенок	
@@ -308,32 +308,6 @@ grade	module	section	term	pos	translation	note
 4	Module 8	Unit 16: Hello, sunshine!	swimming trunks		плавки	
 4	Module 8	Unit 16: Hello, sunshine!	swimsuit		купальник	
 4	Module 8	Unit 16: Hello, sunshine!	tent		палатка	
-4	Goldilocks and the Three Bears		break a rule		нарушать правило	
-4	Goldilocks and the Three Bears		check		проверять	
-4	Goldilocks and the Three Bears		curl		завиток	
-4	Goldilocks and the Three Bears		fair		честный, справедливый	
-4	Goldilocks and the Three Bears		golden		золотистый	
-4	Goldilocks and the Three Bears		horrid		страшный, ужасный	
-4	Goldilocks and the Three Bears		in a hurry		в спешке	
-4	Goldilocks and the Three Bears		inside		внутри	
-4	Goldilocks and the Three Bears		knock		стучать	
-4	Goldilocks and the Three Bears		luck		удача	
-4	Goldilocks and the Three Bears		mine		мой	
-4	Goldilocks and the Three Bears		mistake		ошибка	
-4	Goldilocks and the Three Bears		naughty		непослушный	
-4	Goldilocks and the Three Bears		never mind		неважно, не беда	
-4	Goldilocks and the Three Bears		oats		овес	
-4	Goldilocks and the Three Bears		on my way		по пути	
-4	Goldilocks and the Three Bears		outside		снаружи	
-4	Goldilocks and the Three Bears		porridge		каша	
-4	Goldilocks and the Three Bears		pot		горшок	
-4	Goldilocks and the Three Bears		remind		напоминать	
-4	Goldilocks and the Three Bears		return		возвращаться	
-4	Goldilocks and the Three Bears		share		делиться	
-4	Goldilocks and the Three Bears		soft		мягкий	
-4	Goldilocks and the Three Bears		tune		мелодия	
-4	Goldilocks and the Three Bears		wood		лес	
-4	Goldilocks and the Three Bears		worry		беспокоиться	
 4	Cultural Sections on English-speaking Countries	5. Birthday wishes!	balloon		воздушный шар	
 4	Cultural Sections on English-speaking Countries	5. Birthday wishes!	birthday boy		именинник	
 4	Cultural Sections on English-speaking Countries	5. Birthday wishes!	birthday girl		именинница	
@@ -348,15 +322,6 @@ grade	module	section	term	pos	translation	note
 4	Cultural Sections on English-speaking Countries	7. Alton Towers	young		молодой	
 4	Cultural Sections on English-speaking Countries	8. Florida fun!	rest		отдых	
 4	Cultural Sections on English-speaking Countries	8. Florida fun!	sandy		песчаный	
-4	Arthur & Rascal		bark		лаять	
-4	Arthur & Rascal		busy		занятой	
-4	Arthur & Rascal		celebrate		праздновать	
-4	Arthur & Rascal		fast food		еда, которая быстро готовится (бургеры, бутерброды, пицца и т. п.)	
-4	Arthur & Rascal		hate		ненавидеть	
-4	Arthur & Rascal		hungry		голодный	
-4	Arthur & Rascal		kitten		котенок	
-4	Arthur & Rascal		programme		программа	
-4	Arthur & Rascal		scary film		фильм ужасов	
 4	Special Days!		April Fool's Day		День первого апреля (праздник шуток и розыгрышей)	
 4	Special Days!		throw		бросать	
 4	Spotlight on Russia	5. The Day of the City	carnival		карнавал	
@@ -374,38 +339,3 @@ grade	module	section	term	pos	translation	note
 4	Spotlight on Russia	7. The days we remember	performance		представление	
 4	Spotlight on Russia	8. Travelling is fun	travel		путешествовать	
 4	Spotlight on Russia	8. Travelling is fun	diary		дневник	
-4	Geographical Names and Nationalities		Athens		Афины	
-4	Geographical Names and Nationalities		Australia		Австралия	
-4	Geographical Names and Nationalities		Canada		Канада	
-4	Geographical Names and Nationalities		China		Китай	
-4	Geographical Names and Nationalities		England		Англия	
-4	Geographical Names and Nationalities		Florida		Флорида	
-4	Geographical Names and Nationalities		France		Франция	
-4	Geographical Names and Nationalities		Germany		Германия	
-4	Geographical Names and Nationalities		Greece		Греция	
-4	Geographical Names and Nationalities		Ireland		Ирландия	
-4	Geographical Names and Nationalities		Italian		итальянец	
-4	Geographical Names and Nationalities		Italy		Италия	
-4	Geographical Names and Nationalities		Japan		Япония	
-4	Geographical Names and Nationalities		Japanese		японец	
-4	Geographical Names and Nationalities		London		Лондон	
-4	Geographical Names and Nationalities		Madrid		Мадрид	
-4	Geographical Names and Nationalities		Mexico		Мексика	
-4	Geographical Names and Nationalities		Moscow		Москва	
-4	Geographical Names and Nationalities		New Zealand		Новая Зеландия	
-4	Geographical Names and Nationalities		Paris		Париж	
-4	Geographical Names and Nationalities		Poland		Польша	
-4	Geographical Names and Nationalities		Portugal		Португалия	
-4	Geographical Names and Nationalities		Rome		Рим	
-4	Geographical Names and Nationalities		Russia		Россия	
-4	Geographical Names and Nationalities		Russian		русский	
-4	Geographical Names and Nationalities		Scotland		Шотландия	
-4	Geographical Names and Nationalities		Spain		Испания	
-4	Geographical Names and Nationalities		Turkey		Турция	
-4	Useful English		Bon voyage!		Счастливого пути!	
-4	Useful English		Congratulations!		Поздравляю!	
-4	Useful English		Excuse me, where's ...?		Извините, где находится ...?	
-4	Useful English		Happy New Year!		С Новым годом!	
-4	Useful English		Nice to meet you.		Рад с Вами познакомиться.	
-4	Useful English		See you later.		Увидимся. / Пока.	
-4	Useful English		Thank you. — You're welcome.		Спасибо. — Пожалуйста.	

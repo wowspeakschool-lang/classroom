@@ -47,7 +47,7 @@ grade	module	section	term	pos	translation	note
 11	Module 1	1a	reputation	n	репутация	
 11	Module 1	1a	role	n	роль, обязанность, назначение	
 11	Module 1	1a	senior	n	старшекурсник, старшеклассник, старший по званию или возрасту	
-11	Module 1	1a	separated	n	проживающий отдельно от супруга(и)	
+11	Module 1	1a	separated	adj	проживающий отдельно от супруга(и)	
 11	Module 1	1a	sibling	n	родной брат, сестра	
 11	Module 1	1a	single	adj	неженатый, незамужем	
 11	Module 1	1a	single parent family	n	семья, в которой только один из родителей	(мать или отец)
@@ -126,7 +126,7 @@ grade	module	section	term	pos	translation	note
 11	Module 1	1b Phrases	keep yourself to yourself	phr	быть не очень общительным человеком	
 11	Module 1	1b Phrases	make a promise	phr	давать обещание, обещать	
 11	Module 1	1b Phrases	make friends with sb	phr	становиться друзьями	
-11	Module 1	1b Phrases	on one's way	phr	встречный	
+11	Module 1	1b Phrases	on one's way	phr	по пути, по дороге	
 11	Module 1	1b Phrases	pick a fight	phr	ввязываться	(во что-либо)
 11	Module 1	1b Phrases	put the blame on sb	phr	возлагать вину, сваливать вину	
 11	Module 1	1b Phrases	say hello to sb	phr	здороваться	(с кем-либо)
@@ -279,7 +279,7 @@ grade	module	section	term	pos	translation	note
 11	Module 1	Going Green 1	greenhouse gas	n	парниковый газ	
 11	Module 1	Going Green 1	jungle	n	джунгли	
 11	Module 1	Going Green 1	landfill	n	мусорная свалка	
-11	Module 1	Going Green 1	limited	n	ограниченный	
+11	Module 1	Going Green 1	limited	adj	ограниченный	
 11	Module 1	Going Green 1	pollutant	n	загрязнитель окружающей среды	
 11	Module 1	Going Green 1	preserve	v	охранять, оберегать, хранить	
 11	Module 1	Going Green 1	raw material	n	сырье	
@@ -294,7 +294,7 @@ grade	module	section	term	pos	translation	note
 11	Module 1	Going Green 1 Phrases	take action	phr	начинать действовать, принимать меры	
 11	Module 1	Going Green 1 Phrases	take turns	phr	делать поочередно	
 11	Module 2	2a	adapt	v	приспосабливать	
-11	Module 2	2a	alert	adj	тревога, сигнал тревоги	
+11	Module 2	2a	alert	adj	бдительный, настороженный	
 11	Module 2	2a	attitude	n	отношение, позиция	
 11	Module 2	2a	bear	v	выносить, терпеть	
 11	Module 2	2a	beast	n	зверь, животное	
@@ -326,7 +326,7 @@ grade	module	section	term	pos	translation	note
 11	Module 2	2a	lowdown	n	информация, факты	
 11	Module 2	2a	manage	v	управляться, справляться	
 11	Module 2	2a	mess	n	неприятность	
-11	Module 2	2a	mount	v	укреплять	
+11	Module 2	2a	mount	v	нарастать, усиливаться	
 11	Module 2	2a	muscle	n	мускул	
 11	Module 2	2a	nutritious	adj	питательный	
 11	Module 2	2a	overwhelmed	adj	сокрушенный, пораженный	
@@ -339,7 +339,7 @@ grade	module	section	term	pos	translation	note
 11	Module 2	2a	shake	v	трясти	
 11	Module 2	2a	shallow	adj	неглубокий	(о дыхании)
 11	Module 2	2a	shrug	v	пожимать плечами	
-11	Module 2	2a	sigh	v	вздох	
+11	Module 2	2a	sigh	v	вздыхать	
 11	Module 2	2a	snarl	v	ворчать, огрызаться	
 11	Module 2	2a	stammer	v	заикаться	
 11	Module 2	2a	stamp	v	топать ногой	
@@ -369,7 +369,7 @@ grade	module	section	term	pos	translation	note
 11	Module 2	2a Phrases	be up	phr	достигать, случаться, выходить	
 11	Module 2	2a Phrases	be up to one's eyes in sth	phr	быть занятым	
 11	Module 2	2a Phrases	feel the strain of sth	phr	быть в напряженной ситуации	
-11	Module 2	2a Phrases	get sb down	phr	унижать	
+11	Module 2	2a Phrases	get sb down	phr	угнетать, расстраивать	
 11	Module 2	2a Phrases	get sth off one's chest	phr	облегчить душу, признаться в чем-либо	
 11	Module 2	2a Phrases	get things out of proportion	phr	преувеличивать, делать из мухи слона	
 11	Module 2	2a Phrases	get out of hand	phr	отбиться от рук	
@@ -428,7 +428,7 @@ grade	module	section	term	pos	translation	note
 11	Module 2	2c	postpone	v	откладывать	
 11	Module 2	2c	royal	adj	королевский	
 11	Module 2	2c	scenery	n	пейзаж	
-11	Module 2	2d	accustomed to	adj	привыкать	
+11	Module 2	2d	accustomed to	adj	привыкший	
 11	Module 2	2d	abuse	v	оскорблять, ругать	
 11	Module 2	2d	affection	n	привязанность, любовь, влюбленность	
 11	Module 2	2d	arrogant	adj	высокомерный, надменный	
@@ -470,7 +470,7 @@ grade	module	section	term	pos	translation	note
 11	Module 2	2d	threat	n	угроза	
 11	Module 2	2d	thrust	v	толкать	
 11	Module 2	2d	totter	v	ковылять, идти неровной походкой	
-11	Module 2	2d	trickle	v	струиться, течь тонокой струйкой	
+11	Module 2	2d	trickle	v	струиться, течь тонкой струйкой	
 11	Module 2	2d	tyrant	n	тиран, деспот	
 11	Module 2	2d	wicked	adj	злой	
 11	Module 2	2d Phrasal verbs	take over	phr v	перенимать	
@@ -501,7 +501,7 @@ grade	module	section	term	pos	translation	note
 11	Module 2	Culture Corner 2	terrorise	v	терроризировать, устрашать	
 11	Module 2	Culture Corner 2	tip	n	совет, подсказка	
 11	Module 2	Culture Corner 2	train	v	тренировать	
-11	Module 2	Culture Corner 2	volunteer	v	доброволец, волонтер	
+11	Module 2	Culture Corner 2	volunteer	n	доброволец, волонтер	
 11	Module 2	Across the Curriculum: Science	appetite	n	аппетит	
 11	Module 2	Across the Curriculum: Science	backbone	n	позвоночник	
 11	Module 2	Across the Curriculum: Science	complex	adj	комплексный, составной	
@@ -512,7 +512,7 @@ grade	module	section	term	pos	translation	note
 11	Module 2	Across the Curriculum: Science	generate	v	создавать, генерировать	
 11	Module 2	Across the Curriculum: Science	gigantic	adj	гигантский, огромный	
 11	Module 2	Across the Curriculum: Science	heart rate	n	частота сердцебиения	
-11	Module 2	Across the Curriculum: Science	hormone		гормон	
+11	Module 2	Across the Curriculum: Science	hormone	n	гормон	
 11	Module 2	Across the Curriculum: Science	intelligence	n	ум	
 11	Module 2	Across the Curriculum: Science	nervous system	n	нервная система	
 11	Module 2	Across the Curriculum: Science	organ	n	орган	(часть тела)
@@ -541,7 +541,7 @@ grade	module	section	term	pos	translation	note
 11	Module 2	Going Green 2	minimal	adj	минимальный	
 11	Module 2	Going Green 2	package	n	упаковка, сверток	
 11	Module 2	Going Green 2	packaging	n	упаковочный материал	
-11	Module 2	Going Green 2	preserve	n	сохранять	
+11	Module 2	Going Green 2	preserve	v	сохранять	
 11	Module 2	Going Green 2	solid waste	n	твердые отходы	
 11	Module 2	Going Green 2	transport	v	транспортировать, перевозить	
 11	Module 2	Going Green 2	tray	n	контейнер, неглубокий ящик	
@@ -551,7 +551,7 @@ grade	module	section	term	pos	translation	note
 11	Module 2	Going Green 2 Phrasal verbs	make up	phr v	формировать	
 11	Module 2	Going Green 2 Phrases	be down to	phr	быть основанием для чего-либо	
 11	Module 2	Going Green 2 Phrases	in bulk	phr	большими партиями	
-11	Module 3	3a	announce	v	объявлять, аннонсировать	
+11	Module 3	3a	announce	v	объявлять, анонсировать	
 11	Module 3	3a	arrest	v	арестовывать	
 11	Module 3	3a	bruised	adj	побитый, в кровоподтеках	(синяках)
 11	Module 3	3a	burglary	n	кража со взломом	
@@ -670,7 +670,7 @@ grade	module	section	term	pos	translation	note
 11	Module 3	3c	record	n	записи, заметки	
 11	Module 3	3c	requirement	n	требование	
 11	Module 3	3c	shout	v	кричать	
-11	Module 3	3c	transaction	n	распределение	
+11	Module 3	3c	transaction	n	сделка, операция	
 11	Module 3	3c	vacuum	n	пылесос	
 11	Module 3	3c Phrasal verbs	apply for	phr v	подавать заявление	
 11	Module 3	3c Phrasal verbs	draw up	phr v	составлять список	
@@ -695,7 +695,7 @@ grade	module	section	term	pos	translation	note
 11	Module 3	3d	impact	n	влияние, воздействие, эффект	
 11	Module 3	3d	influence	n	влияние	
 11	Module 3	3d	lame	v	хромать	
-11	Module 3	3d	lie	n	лежать, располагаться	
+11	Module 3	3d	lie	v	лежать, располагаться	
 11	Module 3	3d	lick	v	облизывать, лизать	
 11	Module 3	3d	limp	v	ковылять, хромать, двигаться с трудом	
 11	Module 3	3d	liver	n	печень	
@@ -715,15 +715,15 @@ grade	module	section	term	pos	translation	note
 11	Module 3	3d	tear	v	рвать, разрывать	
 11	Module 3	3d	tight	adj	тугой, плотный	
 11	Module 3	3d	tilt	v	наклонять, опрокидывать	
-11	Module 3	3d	timidly	adj	робко, запуганно	
+11	Module 3	3d	timidly	adv	робко, запуганно	
 11	Module 3	3d	tombstone	n	надгробие	
 11	Module 3	3d	tremble	v	трястись, дрожать	
 11	Module 3	3d Phrasal verbs	point to	phr v	указывать, показывать	(пальцем)
 11	Module 3	3d Phrasal verbs	smother in	phr v	покрывать	
 11	Module 3	3d Phrasal verbs	speak up	phr v	повышать голос	
-11	Module 3	3d Phrases	hold your noise	phr	зажимать нос	
+11	Module 3	3d Phrases	hold your nose	phr	зажимать нос	
 11	Module 3	3d Phrases	have half a mind to	phr	быть склонным сделать что-либо	
-11	Module 3	3e	achieve	v	заслуживать	
+11	Module 3	3e	achieve	v	достигать	
 11	Module 3	3e	address	v	обращаться	
 11	Module 3	3e	alternative	adj	альтернативный	
 11	Module 3	3e	appropriate	adj	соответствующий, подходящий	
@@ -746,7 +746,7 @@ grade	module	section	term	pos	translation	note
 11	Module 3	3e	pocket money	n	карманные деньги	
 11	Module 3	3e	politically-minded	adj	политически направленный	
 11	Module 3	3e	quotation	n	цитата	
-11	Module 3	3e	restate	v	утверждать	
+11	Module 3	3e	restate	v	переформулировать, повторно излагать	
 11	Module 3	3e	rhetorical question	n	риторический вопрос	
 11	Module 3	3e	skill	n	умение	
 11	Module 3	3e	struggle	v	бороться	
@@ -795,8 +795,8 @@ grade	module	section	term	pos	translation	note
 11	Module 3	Across the curriculum: Citizenship	dignity	n	достоинство	
 11	Module 3	Across the curriculum: Citizenship	injustice	n	несправедливость	
 11	Module 3	Across the curriculum: Citizenship	invent	v	изобретать	
-11	Module 3	Across the curriculum: Citizenship	morally	v	нравственно, морально	
-11	Module 3	Across the curriculum: Citizenship	practice	v	практиковаться, тренироваться	
+11	Module 3	Across the curriculum: Citizenship	morally	adv	нравственно, морально	
+11	Module 3	Across the curriculum: Citizenship	practise	v	практиковаться, тренироваться	
 11	Module 3	Across the curriculum: Citizenship	race	n	раса	
 11	Module 3	Across the curriculum: Citizenship	simplified	adj	упрощенный	
 11	Module 3	Across the curriculum: Citizenship	slave	n	раб	
@@ -820,7 +820,7 @@ grade	module	section	term	pos	translation	note
 11	Module 3	Going Green 3	target	n	цель	
 11	Module 3	Going Green 3	unprocessed	adj	необработанный	
 11	Module 3	Going Green 3	wildlife reserve	n	заповедник	
-11	Module 3	Going Green 3 Phrases	be in one's best interest	phr	быть заинтересованным в чем-либо	
+11	Module 3	Going Green 3 Phrases	be in one's best interest	phr	быть в чьих-либо интересах	
 11	Module 3	Going Green 3 Phrases	reduce one's impact on sth	phr	сокращать эффект на что-либо	
 11	Module 4	4a	agonising	adj	мучительный	
 11	Module 4	4a	ankle	n	лодыжка	
@@ -843,7 +843,7 @@ grade	module	section	term	pos	translation	note
 11	Module 4	4a	fracture	n	трещина, разлом, пролом	
 11	Module 4	4a	frostbitten	adj	обмороженный	
 11	Module 4	4a	harsh	adj	резкий	
-11	Module 4	4a	heel	n	каблук, шпилька	
+11	Module 4	4a	heel	n	пятка	
 11	Module 4	4a	hip	n	бедро	
 11	Module 4	4a	hurt	v	удариться, пораниться	
 11	Module 4	4a	hurtful	adj	болезненный	
@@ -861,7 +861,7 @@ grade	module	section	term	pos	translation	note
 11	Module 4	4a	painful	adj	болезненный	
 11	Module 4	4a	path	n	тропинка, дорожка	
 11	Module 4	4a	peak	n	вершина горы	
-11	Module 4	4a	pitch black	n	черный, как смоль	
+11	Module 4	4a	pitch black	adj	черный, как смоль	
 11	Module 4	4a	rope	n	канат, веревка	
 11	Module 4	4a	scratch	v	царапать	
 11	Module 4	4a	severe	adj	сильный	
@@ -870,7 +870,7 @@ grade	module	section	term	pos	translation	note
 11	Module 4	4a	skull	n	череп	
 11	Module 4	4a	slim	adj	стройный, тонкий	
 11	Module 4	4a	slip	v	скользить, сползать	
-11	Module 4	4a	sprain	v	рястянуть связки, сухожилия	
+11	Module 4	4a	sprain	v	растянуть связки, сухожилия	
 11	Module 4	4a	stiff	adj	одеревенелый, окостеневший	
 11	Module 4	4a	strike	v	ударять	
 11	Module 4	4a	subconscious	adj	подсознательный	
@@ -923,7 +923,7 @@ grade	module	section	term	pos	translation	note
 11	Module 4	4b	streaming	adj	сильный	(о насморке)
 11	Module 4	4b	temperature	n	температура	
 11	Module 4	4b	throbbing	adj	пульсирующий	
-11	Module 4	4b	thumping	adj	обширный, гигантский	
+11	Module 4	4b	thumping	adj	сильный, стучащий	
 11	Module 4	4b	tickly	adj	щекочущий	
 11	Module 4	4b	virus	n	вирус	
 11	Module 4	4b	vomit	v	тошнить, рвать	
@@ -938,7 +938,7 @@ grade	module	section	term	pos	translation	note
 11	Module 4	4c	cinema complex	n	кинокомплекс	
 11	Module 4	4c	convince	v	убеждать, уверять	
 11	Module 4	4c	debris	n	развалины	
-11	Module 4	4c	frequent	adv	частый	
+11	Module 4	4c	frequent	adj	частый	
 11	Module 4	4c	genius	adj	гениальный	
 11	Module 4	4c	identity	n	личность	
 11	Module 4	4c	insist	v	настаивать	
@@ -950,13 +950,13 @@ grade	module	section	term	pos	translation	note
 11	Module 4	4c	observe	v	наблюдать, замечать	
 11	Module 4	4c	operation	n	операция	
 11	Module 4	4c	predict	v	предугадывать, предвидеть	
-11	Module 4	4c	rise	v	повышать, увеличивать	
+11	Module 4	4c	rise	v	повышаться, увеличиваться	
 11	Module 4	4c	sense	v	чувствовать	
 11	Module 4	4c	shoot	v	стрелять	
 11	Module 4	4c	smash	v	разбивать вдребезги	
 11	Module 4	4c	suspicious	adj	подозрительный	
 11	Module 4	4c	swallow	v	глотать	
-11	Module 4	4c	tow truck	n	буксир	
+11	Module 4	4c	tow truck	n	эвакуатор, машина техпомощи	
 11	Module 4	4c	tsunami	n	цунами	
 11	Module 4	4c Phrasal verbs	break out	phr v	внезапно начаться	
 11	Module 4	4c Phrasal verbs	pull down	phr v	сносить	(здание)
@@ -974,7 +974,7 @@ grade	module	section	term	pos	translation	note
 11	Module 4	4d	extent	n	объем, протяжение, размер, пространство	
 11	Module 4	4d	fetch	v	достать, принести что-либо	
 11	Module 4	4d	flea market	n	«блошиный рынок», барахолка	
-11	Module 4	4d	glimpse	v	мимолетный взгляд	
+11	Module 4	4d	glimpse	n	мимолетный взгляд	
 11	Module 4	4d	grope	v	идти наощупь	
 11	Module 4	4d	guide	v	показывать путь, проводить, вести	
 11	Module 4	4d	hail	v	окликать	
@@ -984,7 +984,7 @@ grade	module	section	term	pos	translation	note
 11	Module 4	4d	passage	n	проход	
 11	Module 4	4d	rescue	n	спасение	
 11	Module 4	4d	row	v	грести	
-11	Module 4	4d	sheet	n	простынь	
+11	Module 4	4d	sheet	n	простыня	
 11	Module 4	4d	speck	n	пятнышко, крупинка	
 11	Module 4	4d	stretch	n	протяжение, отрезок	
 11	Module 4	4d	striking	adj	поразительный, удивительный	
@@ -994,18 +994,18 @@ grade	module	section	term	pos	translation	note
 11	Module 4	4d	valley	n	долина	
 11	Module 4	4d	wasting illness	n	изнурительная болезнь	
 11	Module 4	4d	wild	adj	дикий	
-11	Module 4	4d	witness	v	свидетель	
+11	Module 4	4d	witness	n	свидетель	
 11	Module 4	4d	youngster	n	подросток, молодой человек	
 11	Module 4	4d Phrasal verbs	get about	phr v	начинать (вы)ходить после болезни	
 11	Module 4	4d Phrasal verbs	put in	phr v	добавлять	
 11	Module 4	4d Phrasal verbs	shake off	phr v	избавляться	
-11	Module 4	4d Phrasal verbs	track out	phr v	выслеживать	
+11	Module 4	4d Phrasal verbs	track down	phr v	выслеживать	
 11	Module 4	4d Phrases	at once	phr	немедленно, сразу же	
 11	Module 4	4d Phrases	break the good news	phr	сообщать хорошие новости	
 11	Module 4	4d Phrases	not have the least doubt	phr	быть совершенно уверенным в чем-либо	
-11	Module 4	4e	accuracy	n	аккуратность	
+11	Module 4	4e	accuracy	n	точность	
 11	Module 4	4e	airlift	v	перевозить пассажиров по воздуху	
-11	Module 4	4e	lively	adj	оживленный, веселый	
+11	Module 4	4e	lively	adj	оживленный, веселый; живой, полный жизни	
 11	Module 4	4e	award	v	награждать	
 11	Module 4	4e	beam	v	радостно улыбаться	
 11	Module 4	4e	brave	adj	смелый	
@@ -1014,7 +1014,7 @@ grade	module	section	term	pos	translation	note
 11	Module 4	4e	coastguard	n	береговая охрана	
 11	Module 4	4e	consequence	n	последствие	
 11	Module 4	4e	content	adj	довольный	
-11	Module 4	4e	crackle	v	хрустеть	
+11	Module 4	4e	crackle	v	трещать, потрескивать	
 11	Module 4	4e	dash	v	стремительно двигаться куда-либо	
 11	Module 4	4e	delight	n	восторг	
 11	Module 4	4e	distress call	n	сигнал о помощи	
@@ -1032,7 +1032,6 @@ grade	module	section	term	pos	translation	note
 11	Module 4	4e	hover	v	парить	
 11	Module 4	4e	illustrate	v	иллюстрировать, описывать	
 11	Module 4	4e	lark	n	жаворонок	
-11	Module 4	4e	lively	adj	живой, полный жизни	
 11	Module 4	4e	medal	n	медаль	
 11	Module 4	4e	merry	adj	веселый	
 11	Module 4	4e	miraculous	adj	чудесный, удивительный	
@@ -1069,12 +1068,12 @@ grade	module	section	term	pos	translation	note
 11	Module 4	4e	wail	v	стонать, причитать	
 11	Module 4	4e	yell	v	вопить, визжать	
 11	Module 4	4e Phrases	as happy as a lark	phr	веселый, жизнерадостный	
-11	Module 4	4e Phrases	as plain as a day	phr	простой, очевидный	
+11	Module 4	4e Phrases	as plain as day	phr	простой, очевидный	
 11	Module 4	4e Phrases	as quick as a flash	phr	очень быстрый, как молния	
 11	Module 4	4e Phrases	as sick as a dog	phr	плохо себя чувствовать	
 11	Module 4	4e Phrases	as white as a sheet	phr	белый как лист; бледный	
 11	Module 4	4e Phrases	catch sb's eye	phr	привлекать чье-либо внимание	
-11	Module 4	4e Phrases	die to meet sb	phr	очень хотеть с кем-то увидиться	
+11	Module 4	4e Phrases	die to meet sb	phr	очень хотеть с кем-то увидеться	
 11	Module 4	4e Phrases	frozen with fear	phr	замереть от страха	
 11	Module 4	4e Phrases	gasp for breath	phr	хватать ртом воздух	
 11	Module 4	4e Phrases	go like clockwork	phr	работать, как часы	
@@ -1087,7 +1086,7 @@ grade	module	section	term	pos	translation	note
 11	Module 4	4e Phrases	run aground	phr	сесть на мель	
 11	Module 4	4e Phrases	safe and sound	phr	в целости и сохранности	
 11	Module 4	Culture Corner 4	barrack	n	казарма	
-11	Module 4	Culture Corner 4	basin	n	водоем	
+11	Module 4	Culture Corner 4	basin	n	таз	
 11	Module 4	Culture Corner 4	broom	n	метла	
 11	Module 4	Culture Corner 4	celebrity	n	знаменитость	
 11	Module 4	Culture Corner 4	consult	v	консультироваться	
@@ -1107,7 +1106,7 @@ grade	module	section	term	pos	translation	note
 11	Module 4	Culture Corner 4	sponge	n	губка	
 11	Module 4	Culture Corner 4	state	n	состояние	
 11	Module 4	Culture Corner 4	supplies	n	оборудование	
-11	Module 4	Culture Corner 4	unsanitary	n	антисанитария	
+11	Module 4	Culture Corner 4	unsanitary	adj	антисанитарный	
 11	Module 4	Culture Corner 4	unventilated	adj	непроветриваемый	
 11	Module 4	Culture Corner 4	volunteer	v	пойти добровольцем; добровольно поступить на службу	
 11	Module 4	Culture Corner 4 Phrases	around the clock	phr	круглые сутки	
@@ -1137,7 +1136,7 @@ grade	module	section	term	pos	translation	note
 11	Module 4	Going Green 4	clippings	n	обрезки	
 11	Module 4	Going Green 4	compost	n	компост, органическое удобрение	
 11	Module 4	Going Green 4	drain	n	осушительная труба	
-11	Module 4	Going Green 4	entangle	v	вмешивать, вовлекать	
+11	Module 4	Going Green 4	entangle	v	запутывать	
 11	Module 4	Going Green 4	eventually	adv	в итоге, в конце концов	
 11	Module 4	Going Green 4	excess	n	избыток, излишек	
 11	Module 4	Going Green 4	fertiliser	n	удобрение	
@@ -1150,7 +1149,7 @@ grade	module	section	term	pos	translation	note
 11	Module 4	Going Green 4	restore	v	восстанавливать	
 11	Module 4	Going Green 4	runoff	n	сточные воды	
 11	Module 4	Going Green 4	soil	n	почва	
-11	Module 4	Going Green 4	sprinkler	n	распрыскиватель	
+11	Module 4	Going Green 4	sprinkler	n	разбрызгиватель	
 11	Module 4	Going Green 4	storm drain	n	ливневый дренаж	
 11	Module 4	Going Green 4	stream	n	поток	
 11	Module 4	Going Green 4	sweep	v	подметать, мести	
@@ -1174,10 +1173,10 @@ grade	module	section	term	pos	translation	note
 11	Module 5	5a	disused	adj	вышедший из употребления	
 11	Module 5	5a	doorway	n	дверной проем	
 11	Module 5	5a	drug addict	n	наркоман	
-11	Module 5	5a	fixed address		постоянный адрес	
+11	Module 5	5a	fixed address	n	постоянный адрес	
 11	Module 5	5a	foster home	n	семья, принявшая на воспитание ребенка	
-11	Module 5	5a	fully-furnished	n	полностью обставленный мебелью	
-11	Module 5	5a	government	adj	правительство	
+11	Module 5	5a	fully-furnished	adj	полностью обставленный мебелью	
+11	Module 5	5a	government	n	правительство	
 11	Module 5	5a	hostel	n	дешевый отель, хостел	
 11	Module 5	5a	industrial	adj	промышленный	
 11	Module 5	5a	inner	adj	внутренний	
@@ -1190,7 +1189,7 @@ grade	module	section	term	pos	translation	note
 11	Module 5	5a	privacy	n	уединение	
 11	Module 5	5a	reluctant	adj	вынужденный, неохотный	
 11	Module 5	5a	residential	adj	жилой	
-11	Module 5	5a	rough	adv	неспокойный, опасный	(о районе)
+11	Module 5	5a	rough	adj	неспокойный, опасный	(о районе)
 11	Module 5	5a	run-down	adj	пришедший в негодность, обветшалый	
 11	Module 5	5a	scarce	adj	скудный, недостаточный, дефицитный	
 11	Module 5	5a	self-esteem	n	самоуважение, чувство собственного достоинства	
@@ -1307,7 +1306,7 @@ grade	module	section	term	pos	translation	note
 11	Module 5	5d Phrases	claim kin	phr	претендовать на родство	
 11	Module 5	5d Phrases	come in sight	phr	появляться	
 11	Module 5	5d Phrases	devote yourself to sb/sth	phr	посвящать себя чему-либо	
-11	Module 5	5d Phrases	in full view	phr	в полной мере, в полном объеме	
+11	Module 5	5d Phrases	in full view	phr	на виду у всех, в поле зрения	
 11	Module 5	5d Phrases	take sb/sth for granted	phr	принимать как должное	
 11	Module 5	5d Phrases	there and then	phr	немедленно	
 11	Module 5	5d Phrases	throw upon sb's shoulders	phr	сбрасывать на чьи-либо плечи	
@@ -1320,7 +1319,7 @@ grade	module	section	term	pos	translation	note
 11	Module 5	5e	crime rate	n	уровень преступности	
 11	Module 5	5e	decor	n	декор, внутренний дизайн	
 11	Module 5	5e	document	n	документ	
-11	Module 5	5e	exterior	n	наружный, внешний	
+11	Module 5	5e	exterior	adj	наружный, внешний	
 11	Module 5	5e	factual	adj	фактический, основанный на фактах	
 11	Module 5	5e	funding	n	финансирование, субсидирование	
 11	Module 5	5e	greenery	n	зелень, растительность	
@@ -1376,7 +1375,7 @@ grade	module	section	term	pos	translation	note
 11	Module 5	Across the Curriculum: Geography	spirit	n	дух	
 11	Module 5	Across the Curriculum: Geography	urbanisation	n	урбанизация, рост городов	
 11	Module 5	Across the Curriculum: Geography	vast	adj	огромный, громадный	
-11	Module 5	Across the Curriculum: Geography	worthless	adj	бесценный	
+11	Module 5	Across the Curriculum: Geography	worthless	adj	ничего не стоящий, никчемный	
 11	Module 5	Across the Curriculum: Geography Phrasal verbs	end up	phr v	оказываться	
 11	Module 5	Across the Curriculum: Geography Phrasal verbs	set up	phr v	основать, начать новое дело	
 11	Module 5	Across the Curriculum: Geography Phrases	gain ownership	phr	стать владельцем	
@@ -1407,8 +1406,7 @@ grade	module	section	term	pos	translation	note
 11	Module 6	6a	alien	n	пришелец	
 11	Module 6	6a	analyse	v	анализировать	
 11	Module 6	6a	antenna	n	антенна	
-11	Module 6	6a	beam	v	испускать сигналы, светить	
-11	Module 6	6a	beam	n	луч	
+11	Module 6	6a	beam	v/n	испускать сигналы, светить; луч	
 11	Module 6	6a	broadcast	n	вещание, трансляция	
 11	Module 6	6a	comb	v	прочесывать, тщательно проверять	
 11	Module 6	6a	comet	n	комета	
@@ -1449,14 +1447,14 @@ grade	module	section	term	pos	translation	note
 11	Module 6	6a Phrases	sweep the skies	phr	изучать небо через телескоп	
 11	Module 6	6b	article	n	статья	
 11	Module 6	6b	association	n	ассоциация	
-11	Module 6	6b	blazing row	n	весомый аргумент	
+11	Module 6	6b	blazing row	n	бурная ссора, жаркий спор	
 11	Module 6	6b	broadsheet	n	широкополосная газета	
 11	Module 6	6b	coverage	n	репортаж, освещение события, трансляция	
 11	Module 6	6b	covering	n	оболочка, покрытие	
-11	Module 6	6b	depressing	adj	угнетенный, унылый	
+11	Module 6	6b	depressing	adj	угнетающий, гнетущий	
 11	Module 6	6b	development	n	развитие, рост	
 11	Module 6	6b	exclusive	adj	эксклюзивный, единственный в своем роде	
-11	Module 6	6b	feature	n	передовица	
+11	Module 6	6b	feature	n	очерк, тематическая статья	
 11	Module 6	6b	fiction	n	вымысел	
 11	Module 6	6b	first	adj	первый	
 11	Module 6	6b	front	n	лицевая сторона	
@@ -1500,7 +1498,7 @@ grade	module	section	term	pos	translation	note
 11	Module 6	6c	motorway	n	шоссе, автомагистраль	
 11	Module 6	6c	patronise	v	покровительствовать, опекать	
 11	Module 6	6d	absence	n	отсутствие	
-11	Module 6	6d	announce	v	оглашать, аннонсировать	
+11	Module 6	6d	announce	v	оглашать, анонсировать	
 11	Module 6	6d	apprehensively	adv	с опаской, предчувствуя недоброе	
 11	Module 6	6d	baa	v	блеять	
 11	Module 6	6d	bark	v	лаять	
@@ -1540,7 +1538,7 @@ grade	module	section	term	pos	translation	note
 11	Module 6	6d	trot	v	идти рысью	
 11	Module 6	6d	twitch	v	резко дернуть, дергаться	
 11	Module 6	6d	unwillingness	n	нежелание	
-11	Module 6	6d	wag	v	качаться	
+11	Module 6	6d	wag	v	вилять (хвостом)	
 11	Module 6	6d	whine	v	скулить, подвывать	
 11	Module 6	6d Phrasal verbs	attribute to	phr v	приписывать кому-либо что-либо	
 11	Module 6	6d Phrasal verbs	drag on sth	phr v	тянуть что-либо с усилием	
@@ -1564,7 +1562,7 @@ grade	module	section	term	pos	translation	note
 11	Module 6	6e	rewarding	adj	стоящий, полезный	
 11	Module 6	6e	source	n	источник	
 11	Module 6	6e	vision	n	видение, восприятие	
-11	Module 6	6e Phrasal verbs	expose sb to sth	phr v	знакомить кого-либо с кем-либо	
+11	Module 6	6e Phrasal verbs	expose sb to sth	phr v	знакомить кого-либо с чем-либо	
 11	Module 6	6e Phrases	in view of	phr	принимая во внимание, имея в виду	
 11	Module 6	Culture Corner 6	colony	n	колония	
 11	Module 6	Culture Corner 6	decline	v	уменьшаться, снижаться	
@@ -1611,7 +1609,7 @@ grade	module	section	term	pos	translation	note
 11	Module 6	Going Green 6	mate	v	спаривать	(животных)
 11	Module 6	Going Green 6	offshore	adj	офшорный (на некотором расстоянии от берега)	
 11	Module 6	Going Green 6	operation	n	операция	
-11	Module 6	Going Green 6	stranded	adj	осевший	
+11	Module 6	Going Green 6	stranded	adj	выброшенный на берег, оказавшийся на мели	
 11	Module 6	Going Green 6	sympathy	n	сочувствие	
 11	Module 6	Going Green 6 Phrases	keep track of sth	phr	следить за чем-либо	
 11	Module 7	7a	achieve	v	добиваться	
@@ -1645,7 +1643,7 @@ grade	module	section	term	pos	translation	note
 11	Module 7	7a Phrasal verbs	run for	phr v	выставлять свою кандидатуру на выборах, баллотироваться	
 11	Module 7	7a Phrases	a dream come true	phr	осуществление мечты	
 11	Module 7	7a Phrases	dash one's hopes	phr	разбить чьи-либо надежды	
-11	Module 7	7a Phrases	get one's hopes up	phr	успокаивать, подбадривать	
+11	Module 7	7a Phrases	get one's hopes up	phr	питать надежды, обнадеживаться	
 11	Module 7	7a Phrases	give up hope	phr	потерять надежду	
 11	Module 7	7a Phrases	have high hopes of	phr	возлагать большие надежды на	
 11	Module 7	7a Phrases	in the hope that	phr	в надежде, что	
@@ -1687,7 +1685,7 @@ grade	module	section	term	pos	translation	note
 11	Module 7	7b Phrases	dream up an excuse	phr	придумывать оправдание	
 11	Module 7	7b Phrases	have the time of one's life	phr	отлично проводить время, наслаждаться жизнью, веселиться на славу	
 11	Module 7	7b Phrases	not be one's cup of tea	phr	не то, что нужно	
-11	Module 7	7b Phrases	you can't teach an old dog new tricks	phr	старого лечить, что мертвого лечить	
+11	Module 7	7b Phrases	you can't teach an old dog new tricks	phr	старого учить, что мертвого лечить	
 11	Module 7	7b Phrases	you live and learn	phr	век живи — век учись	
 11	Module 7	7c	cheat	v	списывать	
 11	Module 7	7c	conceive	v	постигать, понимать, осмысливать	
@@ -1720,7 +1718,7 @@ grade	module	section	term	pos	translation	note
 11	Module 7	7d	trap	n	ловушка	
 11	Module 7	7d	triumph	n	триумф	
 11	Module 7	7d	turn	n	очередь	
-11	Module 7	7d	unforgiving	adj	непростительный	
+11	Module 7	7d	unforgiving	adj	неумолимый, беспощадный	
 11	Module 7	7d	verse	n	стих, строфа	
 11	Module 7	7d	virtue	n	достоинство	
 11	Module 7	7d	will	n	воля, сила воли	
@@ -1736,13 +1734,13 @@ grade	module	section	term	pos	translation	note
 11	Module 7	7d Phrases	make allowance for	phr	учитывать, принимать во внимание	
 11	Module 7	7d Phrases	the common touch	phr	талант общения с людьми из разных слоев общества	
 11	Module 7	7d Phrases	twist the truth	phr	искажать истину	
-11	Module 7	7e	actual	adj	актуальный, значимый	
+11	Module 7	7e	actual	adj	фактический, действительный	
 11	Module 7	7e	appalling	adj	ужасный, отталкивающий	
 11	Module 7	7e	careers fair	n	ярмарка вакансий	
 11	Module 7	7e	contact	v	общаться, контактировать	
 11	Module 7	7e	draughty	adj	продуваемый насквозь, расположенный на сквозняке	(о зданиях)
 11	Module 7	7e	driving licence	n	водительские права	
-11	Module 7	7e	enclose	v	ограждать, окружать	
+11	Module 7	7e	enclose	v	прилагать (к письму), вкладывать	
 11	Module 7	7e	enquire	v	спрашивать, наводить справки	
 11	Module 7	7e	entitled	adj	уполномоченный, получивший право	
 11	Module 7	7e	envelope	n	конверт	
@@ -1767,11 +1765,11 @@ grade	module	section	term	pos	translation	note
 11	Module 7	7e	web design	n	дизайн веб-страниц	
 11	Module 7	7e Phrases	in advance	phr	раньше времени, заранее	
 11	Module 7	7e Phrases	on average	phr	в среднем	
-11	Module 7	7e Phrases	on request	phr	в ответ на	
+11	Module 7	7e Phrases	on request	phr	по запросу, по требованию	
 11	Module 7	Culture Corner 7	campus	n	учебный городок, территория колледжа или университета	
 11	Module 7	Culture Corner 7	endless	adj	бесконечный	
 11	Module 7	Culture Corner 7	gown	n	балахон, мантия	
-11	Module 7	Culture Corner 7	hang-out	n	место для провождения свободного времени	
+11	Module 7	Culture Corner 7	hang-out	n	место для проведения свободного времени	
 11	Module 7	Culture Corner 7	interactive	adj	взаимодействующий	
 11	Module 7	Culture Corner 7	lowdown	n	подноготная, истинная правда	
 11	Module 7	Culture Corner 7	meagre	adj	скудный	
@@ -1785,10 +1783,10 @@ grade	module	section	term	pos	translation	note
 11	Module 7	Across the Curriculum: Citizenship	equation	n	формула, математическое уравнение	
 11	Module 7	Across the Curriculum: Citizenship	first aid	n	первая помощь	
 11	Module 7	Across the Curriculum: Citizenship	retirement home	n	дом престарелых	
-11	Module 7	Across the Curriculum: Citizenship	socialising	n	социализация, вращение обществе	
+11	Module 7	Across the Curriculum: Citizenship	socialising	n	социализация, вращение в обществе	
 11	Module 7	Across the Curriculum: Citizenship	spare change	n	лишняя мелочь	(о деньгах)
 11	Module 7	Across the Curriculum: Citizenship	wise	adj	умный	
-11	Module 7	Going Green 7	aware	adj	предупрежденный	
+11	Module 7	Going Green 7	aware	adj	осведомленный, знающий	
 11	Module 7	Going Green 7	behaviour	n	поведение	
 11	Module 7	Going Green 7	cemetery	n	кладбище	
 11	Module 7	Going Green 7	disabled	adj	с ограниченными возможностями, нетрудоспособный	
@@ -1801,7 +1799,7 @@ grade	module	section	term	pos	translation	note
 11	Module 7	Going Green 7	outspoken	adj	прямой, откровенный	
 11	Module 7	Going Green 7	poacher	n	браконьер	
 11	Module 7	Going Green 7	privilege	n	привилегия, преимущество	
-11	Module 7	Going Green 7	soul		душа	
+11	Module 7	Going Green 7	soul	n	душа	
 11	Module 7	Going Green 7	target	n	мишень, цель	
 11	Module 7	Going Green 7	zoologist	n	зоолог	
 11	Module 7	Going Green 7 Phrasal verbs	save up	phr v	копить деньги	
@@ -1816,7 +1814,7 @@ grade	module	section	term	pos	translation	note
 11	Module 8	8a	border	n	граница	
 11	Module 8	8a	canal	n	водный канал	
 11	Module 8	8a	carve	v	вырезать, гравировать	
-11	Module 8	8a	city state	n	городское правительство	
+11	Module 8	8a	city state	n	город-государство	
 11	Module 8	8a	cliff	n	утес, скала	
 11	Module 8	8a	craftsmanship	n	мастерство, тонкая (искусная) работа	
 11	Module 8	8a	dam	n	дамба, плотина	
@@ -1876,10 +1874,10 @@ grade	module	section	term	pos	translation	note
 11	Module 8	8a Phrasal verbs	die out	phr v	вымирать	
 11	Module 8	8a Phrases	bring sth to life	phr	оживлять	
 11	Module 8	8b	air traffic control	n	диспетчерская служба воздушного транспорта	
-11	Module 8	8b	aisle	n	проход между рядам	
+11	Module 8	8b	aisle	n	проход между рядами	
 11	Module 8	8b	baggage re-claim	n	отдел выдачи багажа	
 11	Module 8	8b	board	v	подниматься на борт	
-11	Module 8	8b	boarding pass	n	пасадочный талон	
+11	Module 8	8b	boarding pass	n	посадочный талон	
 11	Module 8	8b	cabin crew	n	экипаж самолета, бортпроводники	
 11	Module 8	8b	check-in	n	регистрация	
 11	Module 8	8b	conveyor belt	n	ленточный транспортер багажа	
@@ -1895,7 +1893,7 @@ grade	module	section	term	pos	translation	note
 11	Module 8	8b	route	n	маршрут	
 11	Module 8	8b	stopover	n	промежуточная остановка в пути	
 11	Module 8	8b	strike	v	бастовать	
-11	Module 8	8b	take-off slot	n	время посадки	
+11	Module 8	8b	take-off slot	n	время вылета	
 11	Module 8	8b	visibility	n	видимость	
 11	Module 8	8b Phrases	squeeze past sb	phr	протискиваться	
 11	Module 8	8c	bowing	n	поклон	
@@ -2002,7 +2000,7 @@ grade	module	section	term	pos	translation	note
 11	Module 8	8e	scent	n	аромат	
 11	Module 8	8e	shady	adj	тенистый	
 11	Module 8	8e	spectacular	adj	впечатляющий, захватывающий	
-11	Module 8	8e	struck	adj	впечатляюще	
+11	Module 8	8e	struck	adj	пораженный, впечатленный	
 11	Module 8	8e	stunningly	adv	потрясающе	
 11	Module 8	8e	supplement	n	добавка, дополнение	
 11	Module 8	8e	trickling	adj	текущий, стекающий	
@@ -2066,7 +2064,7 @@ grade	module	section	term	pos	translation	note
 11	Module 8	Going Green 8	monastery	n	монастырь	
 11	Module 8	Going Green 8	officially	adv	официально	
 11	Module 8	Going Green 8	outstanding	adj	выдающийся, знаменитый	
-11	Module 8	Going Green 8	Renaissance	adj	ренессанс	(период в европейском искусстве, относяйщийся особенно к Италии в XIV-XVI вв., когда у людей возрос интерес к искусству)
+11	Module 8	Going Green 8	Renaissance	n	ренессанс	(период в европейском искусстве, относящийся особенно к Италии в XIV-XVI вв., когда у людей возрос интерес к искусству)
 11	Module 8	Going Green 8	sculpt	v	ваять, лепить	
 11	Module 8	Going Green 8	species	n	вид	(животных или растений)
 11	Module 8	Going Green 8	stronghold	n	крепость	

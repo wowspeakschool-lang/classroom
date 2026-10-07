@@ -271,7 +271,7 @@ grade	module	section	term	pos	translation	note
 8	Module 1	Across the Curriculum: PSHE	shame	n	стыд	
 8	Module 1	Across the Curriculum: PSHE	slack	adj	незатянутый, ненатянутый, слабый	
 8	Module 1	Across the Curriculum: PSHE	swear	v	ругаться, браниться	
-8	Module 1	Across the Curriculum: PSHE	taut	adv	тугой, натянутый	
+8	Module 1	Across the Curriculum: PSHE	taut	adj	тугой, натянутый	
 8	Module 1	Across the Curriculum: PSHE	thunder	n	гром	
 8	Module 1	Across the Curriculum: PSHE	thruway	n	автострада, автомагистраль	
 8	Module 1	Across the Curriculum: PSHE	willing	adj	готовый сделать что-либо	
@@ -477,8 +477,7 @@ grade	module	section	term	pos	translation	note
 8	Module 2	2d	replace	v	заменять что-либо	
 8	Module 2	2d	resist	v	устоять против, сопротивляться	
 8	Module 2	2d	scales	n	весы	
-8	Module 2	2d	slice	n	ломтик, тонкий кусочек	
-8	Module 2	2d	slice	v	тонко резать	
+8	Module 2	2d	slice	n/v	ломтик, тонкий кусочек; тонко резать	
 8	Module 2	2d	secret	n	секрет	
 8	Module 2	2d	serve	v	подавать, сервировать	еду или напитки
 8	Module 2	2d	shabby	adj	поношенный, потрёпанный, потертый	
@@ -562,7 +561,7 @@ grade	module	section	term	pos	translation	note
 8	Module 2	2f	cheque	n	чек	
 8	Module 2	2f	combine	v	комбинировать	
 8	Module 2	2f	behave	v	вести себя, поступать	
-8	Module 2	2f	demand	n	требовать, предъявлять требование	
+8	Module 2	2f	demand	v	требовать, предъявлять требование	
 8	Module 2	2f	derive	v	происходить	
 8	Module 2	2f	disinterested	adj	незаинтересованный	
 8	Module 2	2f	disorder	n	беспорядок	
@@ -616,7 +615,7 @@ grade	module	section	term	pos	translation	note
 8	Module 2	Culture Corner 2	waste	v	тратить	зря
 8	Module 2	Culture Corner 2 Phrasals & Phrases	fair trade		взаимовыгодная торговля	
 8	Module 2	Culture Corner 2 Phrasals & Phrases	household items		домашняя утварь	
-8	Module 2	Culture Corner 2 Phrasals & Phrases	put words into practice		сказано—сделано; делать то, что говоришь	
+8	Module 2	Culture Corner 2 Phrasals & Phrases	put words into practice		сказано — сделано; делать то, что говоришь	
 8	Module 2	Going Green 2	activate	v	активировать, завести, включить	
 8	Module 2	Going Green 2	anyway	adv	в любом случае	
 8	Module 2	Going Green 2	appear	v	появляться	
@@ -643,10 +642,10 @@ grade	module	section	term	pos	translation	note
 8	Module 2	Going Green 2	marine	adj	морской	
 8	Module 2	Going Green 2	minimal	adj	минимальный	
 8	Module 2	Going Green 2	mistake	v	ошибаться	
-8	Module 2	Going Green 2	neither nor	adj	ни тот, ни другой	
+8	Module 2	Going Green 2	neither ... nor	conj	ни тот, ни другой	
 8	Module 2	Going Green 2	oil	n	нефть	
 8	Module 2	Going Green 2	persuade	v	убеждать	
-8	Module 2	Going Green 2	playwright	n	сценарист	
+8	Module 2	Going Green 2	playwright	n	драматург	
 8	Module 2	Going Green 2	pollution	n	загрязнение	
 8	Module 2	Going Green 2	print	v	печатать	
 8	Module 2	Going Green 2	prior	adj	прежний, предыдущий	
@@ -728,7 +727,7 @@ grade	module	section	term	pos	translation	note
 8	Module 3	3a	reach	v	достигать, добираться	
 8	Module 3	3a	realise	v	осознавать, понимать	
 8	Module 3	3a	refer	v	упоминать, ссылаться	
-8	Module 3	3a	research	n	изучать, исследовать	
+8	Module 3	3a	research	v	изучать, исследовать	
 8	Module 3	3a	rooftop	n	крыша	
 8	Module 3	3a	science	n	наука	
 8	Module 3	3a	scientific	adj	научный	
@@ -799,7 +798,7 @@ grade	module	section	term	pos	translation	note
 8	Module 3	3c	but	conj	но	
 8	Module 3	3c	chew	v	жевать, разжёвывать	
 8	Module 3	3c	coin	n	монета	
-8	Module 3	3c	culture	n	культура (бактерия)	
+8	Module 3	3c	culture	n	культура (бактерий)	
 8	Module 3	3c	destroy	v	разрушать	
 8	Module 3	3c	dig	v	копать	
 8	Module 3	3c	discovery	n	открытие	
@@ -919,7 +918,7 @@ grade	module	section	term	pos	translation	note
 8	Module 3	3e	plot	n	сюжет	
 8	Module 3	3e	point	v	указывать, направлять в нужную сторону	
 8	Module 3	3e	punctuation	n	пунктуация	
-8	Module 3	3e	relieved	adj	облегчённый	
+8	Module 3	3e	relieved	adj	испытывающий облегчение	
 8	Module 3	3e	return	v	возвращать(ся)	
 8	Module 3	3e	scene	n	сцена, эпизод	
 8	Module 3	3e	sequence	n	последовательность	событий
@@ -984,7 +983,7 @@ grade	module	section	term	pos	translation	note
 8	Module 3	Culture Corner 3	image	n	изображение, образ	
 8	Module 3	Culture Corner 3	illustrate	v	иллюстрировать	
 8	Module 3	Culture Corner 3	illustration	n	иллюстрация	
-8	Module 3	Culture Corner 3	improve	v	доказывать	
+8	Module 3	Culture Corner 3	improve	v	улучшать	
 8	Module 3	Culture Corner 3	issue	v	издавать, печатать	
 8	Module 3	Culture Corner 3	note	n	банкнота	
 8	Module 3	Culture Corner 3	naturalist	n	естествовед, натуралист	
@@ -1176,7 +1175,7 @@ grade	module	section	term	pos	translation	note
 8	Module 4	4d	mend	v	штопать, чинить	
 8	Module 4	4d	needle	n	игла	
 8	Module 4	4d	panic	v	паниковать, беспокоиться	
-8	Module 4	4d	perm	v	делать перманентую завивку	
+8	Module 4	4d	perm	v	делать перманентную завивку	
 8	Module 4	4d	pierce	v	прокалывать	
 8	Module 4	4d	poke	v	толкать, тыкать	
 8	Module 4	4d	polish	v	красить	ногти
@@ -1200,8 +1199,7 @@ grade	module	section	term	pos	translation	note
 8	Module 4	4d Phrasals & Phrases	wear off		проходить, терять (популярность, известность)	
 8	Module 4	4e	brainstorming	n	мозговой штурм; попытка быстро думать	
 8	Module 4	4e	bright	adj	яркий, живой, оживлённый	
-8	Module 4	4e	bully	v	запугивать, издеваться, грубо обращаться	
-8	Module 4	4e	bully	n	хулиган, задира, обидчик	
+8	Module 4	4e	bully	v/n	запугивать, издеваться, грубо обращаться; хулиган, задира, обидчик	
 8	Module 4	4e	common	adj	общий	
 8	Module 4	4e	counsellor	n	консультант, советник	
 8	Module 4	4e	expand	v	расширять, распространять	
@@ -1223,7 +1221,7 @@ grade	module	section	term	pos	translation	note
 8	Module 4	4e	vivid	adj	яркий, живой, наглядный, жизненный	
 8	Module 4	4e Phrasals & Phrases	on one's own		самостоятельно, в одиночку	
 8	Module 4	4e Phrasals & Phrases	pick on		дразнить, докучать, придираться	
-8	Module 4	4e Phrasals & Phrases	put an end to sth		останаливать, прекращать	
+8	Module 4	4e Phrasals & Phrases	put an end to sth		останавливать, прекращать	
 8	Module 4	4e Phrasals & Phrases	sign off		подписываться, ставить подпись	
 8	Module 4	4f	accept	v	принимать, соглашаться	
 8	Module 4	4f	afford	v	иметь возможность, быть в состоянии	
@@ -1249,7 +1247,7 @@ grade	module	section	term	pos	translation	note
 8	Module 4	4f	original	adj	оригинальный, подлинный	
 8	Module 4	4f	prefix	n	приставка	
 8	Module 4	4f	probable	adj	возможный	
-8	Module 4	4f	relevant	adj	уместный, относяйщийся к делу	
+8	Module 4	4f	relevant	adj	уместный, относящийся к делу	
 8	Module 4	4f	rely on	v	полагаться на ...	
 8	Module 4	4f	rent	v	брать в аренду, сдавать в аренду	
 8	Module 4	4f	rudeness	n	грубость	
@@ -1339,8 +1337,8 @@ grade	module	section	term	pos	translation	note
 8	Module 5	5a	rush	v	мчаться, кидаться, бросаться	
 8	Module 5	5a	scream	v	визжать, кричать	
 8	Module 5	5a	search	v	искать, исследовать	
-8	Module 5	5a	shake	v	искать	
-8	Module 5	5a	smash	n	разбивать вдребезги, ломать	
+8	Module 5	5a	shake	v	трясти(сь)	
+8	Module 5	5a	smash	v	разбивать вдребезги, ломать	
 8	Module 5	5a	spin	v	крутить, вертеть, вращать	
 8	Module 5	5a	storey	n	этаж, ярус	
 8	Module 5	5a	suffer	v	страдать	
@@ -1448,7 +1446,7 @@ grade	module	section	term	pos	translation	note
 8	Module 5	5d Phrasals & Phrases	agreeable weather		приятная погода	
 8	Module 5	5d Phrasals & Phrases	at hand		под рукой	
 8	Module 5	5d Phrasals & Phrases	boiling hot		очень жаркий	
-8	Module 5	5d Phrasals & Phrases	be in for		остаться дома из-за чего-либо	
+8	Module 5	5d Phrasals & Phrases	be in for		ожидать чего-либо (неприятного), предстоять	
 8	Module 5	5d Phrasals & Phrases	by the looks of it		видимо, по-видимому	
 8	Module 5	5d Phrasals & Phrases	clear up		очиститься	
 8	Module 5	5d Phrasals & Phrases	feel under the weather		неважно себя чувствовать, нездоровиться	
@@ -1475,7 +1473,7 @@ grade	module	section	term	pos	translation	note
 8	Module 5	5e	improve	v	улучшать(ся)	
 8	Module 5	5e	introduce	v	представлять кого-либо (в первый раз), знакомить	
 8	Module 5	5e	justify	v	объяснять, оправдывать	
-8	Module 5	5e	linkers	v	логические и языковые связи	
+8	Module 5	5e	linkers	n	логические и языковые связи	
 8	Module 5	5e	litter	n	мусор	
 8	Module 5	5e	pack	v	упаковать	
 8	Module 5	5e	point	n	дело, суть, смысл	
@@ -1491,7 +1489,7 @@ grade	module	section	term	pos	translation	note
 8	Module 5	5e	viewpoint	n	точка зрения	
 8	Module 5	5e Phrasals & Phrases	all in all		в итоге	
 8	Module 5	5e Phrasals & Phrases	all things considered		учитывая всё, приняв всё во внимание	
-8	Module 5	5e Phrasals & Phrases	as a concequence		в результате, вследствие	
+8	Module 5	5e Phrasals & Phrases	as a consequence		в результате, вследствие	
 8	Module 5	5e Phrasals & Phrases	set up		запускать	
 8	Module 5	5e Phrasals & Phrases	sum up		подытожить, подвести итог, резюмировать	
 8	Module 5	5e Phrasals & Phrases	To begin with/to start with		Начнём с того, что	
@@ -1508,11 +1506,11 @@ grade	module	section	term	pos	translation	note
 8	Module 5	5f	staff	n	коллектив (на работе)	
 8	Module 5	5f	team	n	команда (спортивная)	
 8	Module 5	5f	thunderstorm	n	гроза	
-8	Module 5	5f	tip over	v	споткнуться	
+8	Module 5	5f	tip over	v	опрокидывать(ся)	
 8	Module 5	5f Phrasals & Phrases	come as a shock		оказаться шоком	
 8	Module 5	5f Phrasals & Phrases	just about		почти что, примерно	
 8	Module 5	5f Phrasals & Phrases	over and over again		снова и снова	
-8	Module 5	Culture Corner 5	breed	n	вид	животных
+8	Module 5	Culture Corner 5	breed	n	порода	животных
 8	Module 5	Culture Corner 5	cancel	v	отменять, останавливать	
 8	Module 5	Culture Corner 5	chance	n	шанс	
 8	Module 5	Culture Corner 5	creature	n	создание, существо	
@@ -1558,7 +1556,7 @@ grade	module	section	term	pos	translation	note
 8	Module 6	6a	view	n	вид	
 8	Module 6	6a	wonder	v	удивляться, интересоваться	
 8	Module 6	6a Phrasals & Phrases	guided tour		экскурсионный тур	
-8	Module 6	6a Phrasals & Phrases	raindeer sledge		оленья упряжка	
+8	Module 6	6a Phrasals & Phrases	reindeer sledge		оленья упряжка	
 8	Module 6	6b	absolute	adj	совершенный, абсолютный	
 8	Module 6	6b	aim (at)	v	иметь целью, стремиться к	
 8	Module 6	6b	amazing	adj	поразительный, удивительный	
@@ -1593,7 +1591,7 @@ grade	module	section	term	pos	translation	note
 8	Module 6	6b	steal	v	воровать, красть	
 8	Module 6	6b	take-off	n	взлёт	
 8	Module 6	6b	theme park	n	парк отдыха с аттракционами	
-8	Module 6	6b	thrilling	adj	пугающий, наводящий страх	
+8	Module 6	6b	thrilling	adj	захватывающий, волнующий	
 8	Module 6	6b	trouble	n	беда, проблема, трудность	
 8	Module 6	6b	website	n	вебсайт, страничка в Интернете	
 8	Module 6	6b Phrasals & Phrases	drive sb mad		сводить с ума, доводить	
@@ -1631,7 +1629,7 @@ grade	module	section	term	pos	translation	note
 8	Module 6	6d	hovercraft	n	судно на воздушной подушке	
 8	Module 6	6d	indicate	v	показывать, указывать	
 8	Module 6	6d	invent	v	изобретать	
-8	Module 6	6d	jet	n	сверхзвуковой самолёт	
+8	Module 6	6d	jet	n	реактивный самолёт	
 8	Module 6	6d	lane	n	улочка, переулок	
 8	Module 6	6d	merchandise	v	торговать	
 8	Module 6	6d	motorway	n	шоссе	
@@ -1644,7 +1642,7 @@ grade	module	section	term	pos	translation	note
 8	Module 6	6d	steam train	n	паровоз	
 8	Module 6	6d	terminal	n	терминал	
 8	Module 6	6d	toll bridge	n	мост с платным проездом	
-8	Module 6	6d	touristy	n	переполненный туристами	о месте
+8	Module 6	6d	touristy	adj	переполненный туристами	о месте
 8	Module 6	6d	track	n	тропа	
 8	Module 6	6d	traffic lights	n	светофор	
 8	Module 6	6d	transport	v	перевозить, транспортировать	
@@ -1805,7 +1803,7 @@ grade	module	section	term	pos	translation	note
 8	Module 7	7a Phrasals & Phrases	on a daily basis		изо дня в день, повседневно	
 8	Module 7	7a Phrasals & Phrases	tell sb off		отчитывать кого-либо	
 8	Module 7	7b	certificate	n	аттестат	
-8	Module 7	7b	contradict	v	потиворечить, опровергать	
+8	Module 7	7b	contradict	v	противоречить, опровергать	
 8	Module 7	7b	degree	n	учёная степень	
 8	Module 7	7b	graffiti	n	граффити, рисунки на стенах	
 8	Module 7	7b	mark	v	ставить отметку (оценку), отмечать	
@@ -1818,7 +1816,7 @@ grade	module	section	term	pos	translation	note
 8	Module 7	7b Phrasals & Phrases	let sb down		подводить	
 8	Module 7	7b Phrasals & Phrases	mess up		провалить, испортить	
 8	Module 7	7b Phrasals & Phrases	report card	n	табель успеваемости	
-8	Module 7	7b Phrasals & Phrases	that's the spirit!		ну и выдержка!	
+8	Module 7	7b Phrasals & Phrases	that's the spirit!		так держать!	
 8	Module 7	7b Phrasals & Phrases	to retake an examination		пересдавать экзамен	
 8	Module 7	7c	cheat	v	обманывать, списывать	на экзамене
 8	Module 7	7c	deduction	n	умозаключение, вывод	
@@ -1836,8 +1834,7 @@ grade	module	section	term	pos	translation	note
 8	Module 7	7c Phrasals & Phrases	performing arts		исполнительские виды искусства	
 8	Module 7	7c Phrasals & Phrases	show business		индустрия развлечений	
 8	Module 7	7d	bark	n	кора	
-8	Module 7	7d	broadcast	n	радио- или телепередача, программа	
-8	Module 7	7d	broadcast	v	вести передачу, передавать в новостях, по радио	
+8	Module 7	7d	broadcast	n/v	радио- или телепередача, программа; вести передачу, передавать в новостях, по радио	
 8	Module 7	7d	chipped	adj	наструганный, нарезанный мелкими кусочками	
 8	Module 7	7d	coax	v	уговаривать	
 8	Module 7	7d	cover	v	давать репортаж	
@@ -1899,7 +1896,7 @@ grade	module	section	term	pos	translation	note
 8	Module 7	7f	temper	n	нрав, характер	
 8	Module 7	7f	tolerate	v	терпеть, выносить	
 8	Module 7	7f	unacceptable	adj	неприемлемый	
-8	Module 7	7f Phrasals & Phrases	a curse or a bless		проклятие или благо	
+8	Module 7	7f Phrasals & Phrases	a curse or a blessing		проклятие или благо	
 8	Module 7	7f Phrasals & Phrases	care for		любить	
 8	Module 7	7f Phrasals & Phrases	call sb names		обзывать, дразниться, давать прозвище	
 8	Module 7	7f Phrasals & Phrases	catch up with		нагнать (упущенное), догнать	
@@ -1937,7 +1934,7 @@ grade	module	section	term	pos	translation	note
 8	Module 8	8a	bizarre	adj	причудливый, чудной, необычный	
 8	Module 8	8a	board	n	доска	
 8	Module 8	8a	bounce	v	отскакивать, отпрыгивать	
-8	Module 8	8a	bump	n	ударяться, налетать	
+8	Module 8	8a	bump	v	ударяться, налетать	
 8	Module 8	8a	circle	n	кружок, группа (людей)	
 8	Module 8	8a	competitor	n	участник состязания, соперник	
 8	Module 8	8a	discover	v	обнаруживать, открывать	
@@ -2012,10 +2009,10 @@ grade	module	section	term	pos	translation	note
 8	Module 8	8b	monotonous	adj	монотонный, унылый	
 8	Module 8	8b	mumble	v	бормотать	
 8	Module 8	8b	noticeboard	n	доска объявлений	
-8	Module 8	8b	racquet	n	ракет;ка (для игры в теннис, бадминтон)	
+8	Module 8	8b	racquet	n	ракетка (для игры в теннис, бадминтон)	
 8	Module 8	8b	rhythm	n	ритм	
 8	Module 8	8b	rugby	n	рэгби	
-8	Module 8	8b	scuba diving	n	плавание под водой с авкалангом или спецоборудованием	
+8	Module 8	8b	scuba diving	n	плавание под водой с аквалангом или спецоборудованием	
 8	Module 8	8b	spare	adj	запасной	
 8	Module 8	8b	squash	n	сквош	
 8	Module 8	8b	trainers	n	кроссовки	
@@ -2093,7 +2090,7 @@ grade	module	section	term	pos	translation	note
 8	Module 8	8e	level	n	уровень	
 8	Module 8	8e	membership	n	членство	в клубе
 8	Module 8	8e	outing	n	загородная прогулка, экскурсия	
-8	Module 8	8e	postcode	v	почтовый индекс	
+8	Module 8	8e	postcode	n	почтовый индекс	
 8	Module 8	8e	request	v	вежливо просить	
 8	Module 8	8e	session	n	период, сессия, совещание	
 8	Module 8	8e	subscription	n	подписка, членский взнос	
@@ -2114,7 +2111,7 @@ grade	module	section	term	pos	translation	note
 8	Module 8	8f	tracksuit	n	спортивный тренировочный костюм	
 8	Module 8	8f	upset	adj	расстроенный	
 8	Module 8	8f	weekday	n	будний день	
-8	Module 8	8f Phrasals & Phrases	be in favour of		пользоваться спросом, нравиться	
+8	Module 8	8f Phrasals & Phrases	be in favour of		быть за, поддерживать	
 8	Module 8	8f Phrasals & Phrases	fall into place		вставать на место	
 8	Module 8	8f Phrasals & Phrases	for hire		напрокат	
 8	Module 8	8f Phrasals & Phrases	in charge of		ответственный за	
@@ -2142,7 +2139,7 @@ grade	module	section	term	pos	translation	note
 8	Module 8	Culture Corner 8	title	n	титул	
 8	Module 8	Culture Corner 8	wander	v	бродить, слоняться без дела	
 8	Module 8	Culture Corner 8	wave (to)	v	махать	кому-либо
-8	Module 8	Culture Corner 8 Phrasals & Phrases	make appearance		появляться	
+8	Module 8	Culture Corner 8 Phrasals & Phrases	make an appearance		появляться	
 8	Module 8	Going Green 8	aim	n	цель	
 8	Module 8	Going Green 8	aquatic	adj	водный, приспособленный к жизни в воде	
 8	Module 8	Going Green 8	awareness	n	осведомлённость, информированность	

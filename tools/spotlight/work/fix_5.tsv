@@ -1,0 +1,27 @@
+grade	module	section	term	field	old	new	reason
+5	Starter Unit		finish	pos	n;v	n; v	"junk: missing space, file style is ""n; v"""
+5	Module 1	1b	then	pos	conj	adv	"wrong pos: ""then"" (затем) is an adverb"
+5	Module 3	3d - Culture Corner	all	pos	prn	pron	pos typo: prn → pron
+5	Module 5	5b	cute	translation	умный, сообразительный	милый, симпатичный	wrong translation: cute ≠ умный
+5	Module 5	5c	bright	pos	n	adj	wrong pos: bright = яркий is adj
+5	Module 5	5d - Culture Corner	cute	translation	умный, сообразительный	милый, симпатичный	wrong translation: cute ≠ умный
+5	Module 5	Across the Curriculum 5: Science	grasshoper	term	grasshoper	grasshopper	english spelling
+5	Module 6	6a	action hero	translation	главный герой	герой боевика	"wrong translation: action hero is not ""главный герой"""
+5	Module 6	English in Use 6	See you at ... o' clock.	term	See you at ... o' clock.	See you at ... o'clock.	junk: stray space in o'clock
+5	Module 7	7d - Culture Corner	northwest	translation	северо-запад	северо-западный	wrong translation: pos adj, noun given
+5	Module 9	9b	yesterday	pos	adj	adv	wrong pos: yesterday = вчера is adv
+5	Module 9	English in Use 9	on one's left/right	translation	справа/слева от кого-либо	слева/справа от кого-либо	wrong translation: left/right order swapped
+5	Module 10	10b	jet skiing	translation	катание на водных лыжах	катание на гидроцикле	wrong translation: jet skiing ≠ водные лыжи (water skiing)
+5	Module 10	10d - Culture Corner	sit back	translation	откидываться (на спинку сидения)	откидываться (на спинку сиденья)	russian spelling: сиденье
+5	Module 10	10c	stay out of sun	term	stay out of sun	stay out of the sun	english: missing article
+5	Geographical Names		Columbia	term	Columbia	Colombia	english spelling: the country is Colombia (Columbia is a US name)
+5	Geographical Names		Barranquilla	translation	г. Баранкилла (Колумбия)	г. Барранкилья (Колумбия)	russian spelling of the city name
+5	Geographical Names		New York City	translation	Нью Йорк	Нью-Йорк	russian spelling: hyphen
+5	Geographical Names		Antarctica	translation	Антарктика	Антарктида	wrong translation: Antarctica (continent) = Антарктида
+5	Personal Names		Eve	pos	m	f	wrong gender mark: Eve is female
+5	Personal Names		Joe	pos	f	m	wrong gender mark: Joe is male
+5	Personal Names		Karen	pos	m	f	wrong gender mark: Karen is female
+5	Personal Names		Katherine	pos		f	missing gender mark: Katherine is female
+5	Personal Names		Penny	pos		f	missing gender mark: Penny is female
+5	Other Proper Names		Mel Gibson	translation	Мэл Гибсон	Мел Гибсон	russian spelling of the name
+5	Other Proper Names		Katherine Mansfield	translation	Кэтрин Менсфилд	Кэтрин Мэнсфилд	russian spelling of the name

@@ -138,7 +138,7 @@ grade	module	section	term	pos	translation	note
 3	The Toy Soldier		end		конец	
 3	The Toy Soldier		follow		следовать за	
 3	The Toy Soldier		How do you do?		приветствие при знакомстве	
-3	The Toy Soldier		Look out		Осторожнее!	
+3	The Toy Soldier		Look out		Осторожнее!; выглядывать	
 3	The Toy Soldier		march		маршировать	
 3	The Toy Soldier		poor		бедный	
 3	The Toy Soldier		put		класть, ставить	
@@ -206,7 +206,7 @@ grade	module	section	term	pos	translation	note
 3	Spotlight on Russia	3. I scream for ice cream!	outside		на улице, вне дома	
 3	Spotlight on Russia	3. I scream for ice cream!	scream		кричать, визжать	
 3	Spotlight on Russia	3. I scream for ice cream!	vanilla		ванильный	
-3	Spotlight on Russia	4. Everybody likes presents!	grandparent		дедушка и бабушка	
+3	Spotlight on Russia	4. Everybody likes presents!	grandparent		дедушка или бабушка	
 3	Spotlight on Russia	4. Everybody likes presents!	granddaughter		внучка	
 3	Classroom English		Are you ready?		Вы готовы?	
 3	Classroom English		Change seats.		Пересядьте.	
@@ -332,62 +332,6 @@ grade	module	section	term	pos	translation	note
 3	Module 8	Unit 16: On Sundays	night		ночь	
 3	Module 8	Unit 16: On Sundays	relative		родственник	
 3	Module 8	Unit 16: On Sundays	visit		посещать, навещать	
-3	Fun at school		add		добавлять	
-3	Fun at school		because		потому что	
-3	Fun at school		belong		принадлежать	
-3	Fun at school		child		ребёнок	
-3	Fun at school		circle		круг	
-3	Fun at school		crocodile		крокодил	
-3	Fun at school		design		придумывать, конструировать	
-3	Fun at school		domesticated		домашний	
-3	Fun at school		fairy tale		сказка	
-3	Fun at school		family crest		фамильный герб	
-3	Fun at school		figure out		вычислять	
-3	Fun at school		hear		слышать	
-3	Fun at school		in the street		на улице	
-3	Fun at school		knew		знал	
-3	Fun at school		know		знать	
-3	Fun at school		map		карта	
-3	Fun at school		midnight		полночь	
-3	Fun at school		noon		полдень	
-3	Fun at school		painting		картина	
-3	Fun at school		scene		эпизод	
-3	Fun at school		set a clock		устанавливать часы	
-3	Fun at school		snake		змея	
-3	Fun at school		square		квадрат	
-3	Fun at school		surname		фамилия	
-3	Fun at school		take away		вычитать	
-3	Fun at school		title		название	
-3	Fun at school		triangle		треугольник	
-3	Fun at school		turkey		индюк, индюшка	
-3	Fun at school		whale		кит	
-3	Fun at school		wild		дикий	
-3	The Toy Soldier		arm		рука	
-3	The Toy Soldier		by himself		один	
-3	The Toy Soldier		cheer		приветствовать	
-3	The Toy Soldier		dance on the toes		танцевать на носочках	
-3	The Toy Soldier		end		конец	
-3	The Toy Soldier		follow		следовать за	
-3	The Toy Soldier		How do you do?		приветствие при знакомстве	
-3	The Toy Soldier		look out		выглядывать	
-3	The Toy Soldier		march		маршировать	
-3	The Toy Soldier		poor		бедный	
-3	The Toy Soldier		put		класть, ставить	
-3	The Toy Soldier		shout		кричать	
-3	The Toy Soldier		sky		небо	
-3	Arthur & Rascal		alright		хорошо, в порядке	
-3	Arthur & Rascal		be careful		быть осторожным	
-3	Arthur & Rascal		catch		ловить	
-3	Arthur & Rascal		drop		бросать	
-3	Arthur & Rascal		go home		идти домой	
-3	Arthur & Rascal		help		помогать	
-3	Arthur & Rascal		naughty		непослушный	
-3	Arthur & Rascal		next door		по соседству	
-3	Arthur & Rascal		picnic		пикник	
-3	Arthur & Rascal		prize		приз	
-3	Arthur & Rascal		quick		быстрый	
-3	Arthur & Rascal		silly		глупый	
-3	Arthur & Rascal		winner		победитель	
 3	Mother's Day		come to mind		приходить на ум	
 3	Mother's Day		smile		улыбаться	
 3	Cultural sections on English-speaking countries	5. Animals Down Under!	farm		ферма	
