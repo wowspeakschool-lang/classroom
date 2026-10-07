@@ -24,7 +24,7 @@
 * Тесты названы иначе: `Super Minds 1 Unit N Test`. Итоговый тест — два файла,
   Listening и Reading - Writing; оба идут в один урок `Final Test`.
 
-## Чего нет в выгрузке — 🟥 спросить Анну
+## Чего не было в первой выгрузке — догружено, см. конец файла
 
 Только то, что нам переносить (Unit 5 HW4–7, юниты 6–9, тесты, Final).
 Юниты 0–4 и Unit 5 HW1–3 уже в базе, их пропуски в выгрузке не важны.
@@ -226,3 +226,31 @@
 |---|---|---|
 | Final test. Listening. | `18IS6RmMd-1WLznnFKSCDTsoxx1tZpgAt` 9 КБ | `11F-ZEsNDV-BK37Jmdegq5UneB6kKjMMb` 2.1 МБ |
 | Final test. Reading - Writing | `1gFcNdbXYvvMZ2vIyhPVQRBtFc4NGfd2Y` 14 КБ | `11XOphZIn61HK0bWMIO6_08yeXjAmCYNM` 3.1 МБ |
+
+## Догружено 07.10.2026 в корень папки SM1 (не в папки юнитов)
+
+Анна залила недостающие файлы одной пачкой прямо в `SM1`. Вместе с ними
+выгрузка юнитов 5–9 полная: у всех домашек есть обе части. Пропуски юнитов
+1–4 (см. выше) не догружали — эти уроки уже в базе.
+
+| Файл | txt | pdf |
+|---|---|---|
+| Unit 5 Homework 1 (1) | `1Athp2_bu9wqYi4ieZAwN7WD7dNT32uSC` 1 КБ | `1M9j9m7JRh6cvFionPlvzReoyKi_YI9ql` 318 КБ |
+| Unit 5 Homework 1 (2) | `1TGpwcRue7EwSEOl3zMxQokE4f-uGVtUd` 2 КБ | `1McijStMrl4VamlRM7dmQ5hRKO8oJ2XD6` 395 КБ |
+| Unit 5 Homework 5 | `1P1WSDDqEiRv1wiqQZ5615oUWRta5KPkI` 3 КБ | `1mOj3q4jwhaI1rz4zOWXWk7zi8B6WbosA` 2.0 МБ |
+| Unit 6 Homework 1 (2) | `1VkOMpq-RZc0ebBEJzdgE-sZulZCjn4PK` 2 КБ | `1sqL-uYgnLxmKFHIMkQgUtmRlF-sDgQJr` 321 КБ |
+| Unit 6 Homework 3 | `1Yv0rthMfhPzfQCCGAw8ywpq1uW4cNRZC` 4 КБ | `190d7I2tj_-6G-BvRkZndAXpPJP8Y55X4` 2.9 МБ |
+| Unit 6 Homework 5 | `1otqoSxzlHm-adLP4mzM7ZJZh7Adpg9VP` 7 КБ | `1dvazVKUliOnn4vFeuT1nuGhGn6LINFFa` 1.1 МБ |
+| Unit 6 Homework 6 | `1oE2ctbjwuagXH-bI_t6CJJBkw7qiwTwr` 3 КБ | `1MmvcgNnA7nqPbN4arrjV3NkhB7hHMt4p` 1.2 МБ |
+| Unit 7 Homework 1 (1) | `1imMXZhl6XopUhHFzy0Q7c4fmi0YDjTgD` 1 КБ | `1XWGkYnkqaqwbMue01_LHTsf348D8edzF` 463 КБ |
+| Unit 7 Homework 1 (2) | `1ffVL1HbdLD6EEebYJrY_Y4uA0F7ozZ1x` 2 КБ | `1fCI4DYQVDbBXW1Ulfy79iDM3Fw7w2L3y` 341 КБ |
+| Unit 7 Homework 3 | `1jsPRLFT8HZVI-jnsDbkddfS1z9T1jEA2` 5 КБ | `1vs9jMmWuwhsrdk-ZIGOUVcBVsprCndWR` 3.1 МБ |
+| Unit 7 Homework 4 (1) | `1vm5Wr8OTfqmLa_eI6cvjiqCkTz3O7z32` 3 КБ | `1tLJ7VEX81pRnJwIsAOAkIkcDnEdf1CoC` 1.1 МБ |
+| Unit 7 Homework 5 | `1tlITBnqnM-1TC-ocUpfs3cwYGK-jpj5M` 7 КБ | `1J9KDJpyTAL6BG4r0NTkCGJMMAyocfnaB` 3.9 МБ |
+| Unit 8 Homework 1 (2) | `1Rrc4vD75PViSQbexWh8WekcCxU6KRNEV` 1 КБ | `1FIPys4Rou44TnzvVoAX7yfMgveVdGQzG` 359 КБ |
+| Unit 8 Homework 6 (2) | `1PzGbysdh5J-BmZFhvCOj1sw_AJI67NuD` 1 КБ | `1gGShc6LBQUCHnw69eFwq1C9mRanlMXj6` 303 КБ |
+| Unit 9 Homework 1 (1) | `1wdVJewpS7tt2UGp0NC0RHF3RdbdSwcNB` 1 КБ | `1XDp1Ov6Adchwt_psfEuHoamMnxp7z4be` 132 КБ |
+| Unit 9 Homework 1 (2) | `1whltbYN91hEynKQy6NiNsKBvN0ljXes-` 2 КБ | `1m9acJ9toWxZB-K1f-kOXtXjLmh4iioEz` 1.1 МБ |
+| Unit 9 Homework 5 | `1o8mQvK90g7Cu5krrNK7bOYPp7d92DRIO` 5 КБ | `1BpMmehzfP25X7oM7zkphAmZzmaFmg_gU` 2.3 МБ |
+| Unit 9 Homework 6 (1) | `1PXSKyOAXQ_V3wf2W4bMEvmFijTzw2n5T` 0 КБ | `1f6hKZ6krhlYuzM7A0nTBuQkh-5w4TJx0` 98 КБ |
+| Unit 9 Homework 7 | `1fWvhhX6ZAfqI3w6BmnFvnBwG1gYCy9gE` 3 КБ | `1FSzhZSiexVqXSdROzkRKe5XvBmH1Xkw5` 1.0 МБ |
