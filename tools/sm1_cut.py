@@ -52,6 +52,13 @@ SHEETS = {
     "Л7.1": (3, 3, ["u7/clothes_tshirt", "u7/clothes_sweater", "u7/clothes_jacket",
                     "u7/clothes_skirt", "u7/clothes_shorts", "u7/clothes_jeans",
                     "u7/clothes_trousers", "u7/clothes_socks", "u7/clothes_shoes"], CARD, 82),
+    "Л7.2": (2, 2, ["u7/clothes_cap", "u7/clothes_hat_elephant",
+                    "u7/clothes_socks_faces", "u7/clothes_sweater_red"], CARD, 82),
+    "Л7.3": (2, (3, 2), ["u7/pattern_stripes", "u7/pattern_spots", "u7/pattern_flowers",
+                         "u7/pattern_plain", "u7/pattern_zigzags"], CARD, 82),
+    "Л7.4": (1, 3, ["u7/outfit_anna", "u7/outfit_lily", "u7/outfit_kate"], CARD, 82),
+    "Л7.5": (1, 1, ["u7/fav_clothes"], 760, 82),
+    "Л7.6": (2, 2, ["u7/pic_flower", "u7/pic_rabbit", "u7/pic_flowers", "u7/pic_rabbits"], CARD, 82),
 }
 
 # Стоковые картинки тестов, которые по разбору заменяются ячейками уже нарезанных
@@ -169,9 +176,10 @@ def cut(name, src):
     m[:4, :] = m[-4:, :] = False; m[:, :4] = m[:, -4:] = False
     out = []
     cells = []
-    for (y0, y1) in split(m.sum(axis=1), rows):
+    per_row = cols if isinstance(cols, tuple) else (cols,) * rows
+    for (y0, y1), n in zip(split(m.sum(axis=1), rows), per_row):
         band = m[y0:y1]
-        for (x0, x1) in split(band.sum(axis=0), cols):
+        for (x0, x1) in split(band.sum(axis=0), n):
             cells.append((x0, y0, x1, y1))
     if len(cells) != len(names):
         raise SystemExit(f"{name}: ячеек {len(cells)}, а имён {len(names)}")
@@ -194,7 +202,7 @@ def cut(name, src):
 def main():
     if sys.argv[1:] == ["--list"]:
         for k, (r, c, n, s, q) in SHEETS.items():
-            print(f"{k:6} {r}×{c}  {', '.join('/'.join(x) if isinstance(x, tuple) else (x or '—') for x in n)}")
+            print(f"{k:6} {r}×{c if isinstance(c, int) else '+'.join(map(str, c))}  {', '.join('/'.join(x) if isinstance(x, tuple) else (x or '—') for x in n)}")
         return
     name, src = sys.argv[1], sys.argv[2]
     for rel, wh, sz in cut(name, src):
