@@ -1,0 +1,4582 @@
+[
+ {
+  "topic": "Conditionals (Type 0)",
+  "subtopic": "Conditionals Type 0: форма If/When + Present Simple — Present Simple",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 5 · What the future holds",
+  "lesson": "",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 0)",
+  "subtopic": "Conditionals Type 0: значение — общие истины, научные факты",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 5 · What the future holds",
+  "lesson": "",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 0)",
+  "subtopic": "Conditionals Type 0: when вместо if",
+  "order": 3,
+  "grade": 7,
+  "module": "Module 5 · What the future holds",
+  "lesson": "",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: форма If + Present Simple — will + V",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 5 · What the future holds",
+  "lesson": "",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: главная часть с Imperative / can, must, may",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 5 · What the future holds",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Imperative; can, must, may + bare inf"
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: значение — реальная/вероятная ситуация в настоящем/будущем",
+  "order": 3,
+  "grade": 7,
+  "module": "Module 5 · What the future holds",
+  "lesson": "",
+  "status": "новое",
+  "detail": "в будущем"
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: запятая, если if-часть впереди",
+  "order": 4,
+  "grade": 7,
+  "module": "Module 5 · What the future holds",
+  "lesson": "",
+  "status": "новое",
+  "detail": "без запятой, если главное первым"
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: unless = if not",
+  "order": 5,
+  "grade": 7,
+  "module": "Module 5 · What the future holds",
+  "lesson": "",
+  "status": "новое",
+  "detail": "unless + утвердительная форма"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: форма be + V3 — Present Simple и Past Simple",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "is cooked / was cooked"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Continuous (is/was being + V3)",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "is being / was being cooked"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Present/Past Perfect (has/had been + V3)",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "has been / had been cooked"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Future Simple (will be + V3)",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "will be cooked"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: инфинитив и модальные (has to be / can be + V3)",
+  "order": 6,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "has to be cooked; can be cooked"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: преобразование active → passive",
+  "order": 7,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "дополнение → подлежащее; by + агент или опускается"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — исполнитель неизвестен/неважен/очевиден",
+  "order": 8,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "очевиден или неважен"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — действие важнее исполнителя (новости, инструкции, реклама)",
+  "order": 9,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "новости, объявления, инструкции, реклама"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — уход от ответственности",
+  "order": 10,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — акцент на исполнителе",
+  "order": 11,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "by the president himself"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — формальность, вежливость",
+  "order": 12,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: by + исполнитель vs with + инструмент/материал",
+  "order": 13,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: когда агент опускается (they, people, someone…)",
+  "order": 14,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "they, he, someone, people, one; не опускается, если важен"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: глаголы без пассива (непереходные; have, fit, suit, resemble…)",
+  "order": 15,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "только переходные; have, fit, suit, resemble"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: get вместо be",
+  "order": 16,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "неожиданные события: The cheque got lost"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: глаголы с двумя дополнениями (give, offer, send…)",
+  "order": 17,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "bring, tell, send, show, teach, promise, sell, read, offer, give, lend — две модели; explain, announce, dictate, write — одна"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: by в вопросах с who/whom/which",
+  "order": 18,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "Who will the tickets be booked by?"
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: форма have + object + V3",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: значение — действие выполняет кто-то другой для подлежащего",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4d",
+  "status": "новое",
+  "detail": "исполнитель обычно не упоминается"
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: have sth done в разных временах (Continuous, Perfect, Future)",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4d",
+  "status": "новое",
+  "detail": "has/is having/had/was having/has had/had had/has been having/had been having/will have"
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: инфинитив, -ing и модальные (to have / having sth done)",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4d",
+  "status": "новое",
+  "detail": "to have, having; should have her room painted"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: в роли подлежащего",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после глаголов admit, avoid, consider, deny, fancy, go, imagine, mind, miss, practise, suggest…",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "admit, appreciate, avoid, consider, continue, deny, fancy, go, imagine, mind, miss, practise, prevent, quit, save, suggest"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после like, love, enjoy, prefer, dislike, hate — общее предпочтение",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после выражений it's no use, it's (not) worth, can't help, there's no point…",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "be busy, it's no use/good, it's (not) worth, what's the use of, can't help, there's no point, can't stand, have difficulty/trouble"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после spend/waste/lose + время/деньги",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после предлогов (look forward to, be used to, object to…)",
+  "order": 6,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "look forward to, be/get used to, in addition to, object to; другие предлоги"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing vs bare infinitive после see, hear, watch, feel — незавершённое vs завершённое",
+  "order": 7,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "hear, listen to, notice, see, watch, feel"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: цель",
+  "order": 9,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после agree, decide, expect, hope, plan, promise, refuse, want",
+  "order": 10,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после would like/prefer/love — конкретное предпочтение",
+  "order": 11,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после прилагательных (happy, eager, kind, lucky…); It was kind of you to…",
+  "order": 12,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "чувства, желание, характер, lucky/fortunate; It was kind of them to…"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после too/enough",
+  "order": 13,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после be the first/next/last",
+  "order": 14,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: устойчивые выражения (to tell you the truth, to be honest, to sum up…)",
+  "order": 15,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "to tell you the truth, to be honest, to sum up, to begin with"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: второй инфинитив после and/or без to",
+  "order": 18,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "дано при цели"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "Bare infinitive: после модальных, had better, would rather",
+  "order": 20,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "Bare infinitive: let/make/see/hear/feel + object + V; в пассиве + to (was made to)",
+  "order": 21,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "let, make, see, hear, feel; be made/heard/seen + to"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "Bare infinitive: help + (to) V",
+  "order": 22,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: forget/remember",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "обзорно в теме Infinitive / -ing form"
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: stop",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "обзорно"
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: try",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "обзорно"
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: regret",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "обзорно"
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: mean",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "обзорно"
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: go on",
+  "order": 6,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "обзорно"
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: hate",
+  "order": 7,
+  "grade": 8,
+  "module": "Module 5 · Global Issues",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "обзорно"
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: прямая vs косвенная речь, that можно опустить",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "that после say/tell можно опустить"
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: say vs tell (say to sb, tell sb)",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: устойчивые сочетания с say/tell/ask",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "SAY/TELL/ASK"
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: смена местоимений",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: без сдвига времён — вводящий глагол в настоящем (up-to-date reporting)",
+  "order": 6,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "только: вводящий глагол в Present Simple"
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: сдвиг времён (Present → Past, Past → Past Perfect, will → would)",
+  "order": 8,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "Past Continuous → Past Perfect Continuous или Past Continuous"
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: слова времени и места (now → then, yesterday → the day before…)",
+  "order": 9,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "now → then; today → that day; ago → before; here → there"
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: вводящие глаголы ask, inquire, wonder, want to know",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "ask, inquire, wonder, want/would like to know"
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: специальные вопросы — то же вопросительное слово",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: общие вопросы — if/whether",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: прямой порядок слов, без «?», без please/well/oh",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: сдвиг времён, местоимений и слов времени",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Indirect questions",
+  "subtopic": "Indirect questions: Could you tell me…? / Do you know…? — прямой порядок слов",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "Could you tell me…? Do you know…?"
+ },
+ {
+  "topic": "Indirect questions",
+  "subtopic": "Indirect questions: I wonder / I want to know / I doubt — без вопросительного знака",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "I wonder, I want to know, I doubt"
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported commands: приказы — order/tell + sb + (not) to-inf",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "order/tell"
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported requests: ask/beg + sb + (not) to-inf",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "ask, beg (She begged me not to tease her)"
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported suggestions: suggest + -ing / that sb (should) …",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "suggested watching / suggested that I (should) see"
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported advice: advise + sb + (not) to-inf",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "She advised me to watch my step"
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: will/shall → would",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: can → could / would be able to",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: may → might/could",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: shall → should / would / offered",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: must → had to (обязанность) / must (вывод)",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: needn't → didn't need to / didn't have to / wouldn't have to",
+  "order": 6,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: не меняются (would, could, used to, mustn't, should, might, ought to, had better)",
+  "order": 7,
+  "grade": 8,
+  "module": "Module 6 · Culture Exchanges",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 0)",
+  "subtopic": "Conditionals Type 0: форма If/When + Present Simple — Present Simple",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 0)",
+  "subtopic": "Conditionals Type 0: значение — общие истины, научные факты",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 0)",
+  "subtopic": "Conditionals Type 0: when вместо if",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: форма If + Present Simple — will + V",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: главная часть с Imperative / can, must, may",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: значение — реальная/вероятная ситуация в настоящем/будущем",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: запятая, если if-часть впереди",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: unless = if not",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: форма If + Past Simple — would/could/might + V",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: If + Past Continuous",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: значение — воображаемая/маловероятная ситуация в настоящем/будущем",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: were/was для I, he, she, it",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "were или was"
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: If I were you — совет",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: форма If + Past Perfect — would/could/might have + V3",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "bare perfect infinitive"
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: If + Past Perfect Continuous",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: значение — нереальная ситуация в прошлом",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: значение — сожаление, критика",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 8 · Pastimes",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: цель",
+  "order": 9,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": "went to buy"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после agree, decide, expect, hope, plan, promise, refuse, want",
+  "order": 10,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "расширение",
+  "detail": "+ want sb to do (I want you to come)"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после would like/prefer/love — конкретное предпочтение",
+  "order": 11,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после прилагательных (happy, eager, kind, lucky…); It was kind of you to…",
+  "order": 12,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после too/enough",
+  "order": 13,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после be the first/next/last",
+  "order": 14,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: устойчивые выражения (to tell you the truth, to be honest, to sum up…)",
+  "order": 15,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: вопросительное слово + to-inf (when to go)",
+  "order": 16,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "asked me when to get"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после существительных; so + adj + as to; only + to-inf; for + sb + to-inf",
+  "order": 17,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "honour, goal, way; so + adj + as to; only + to-inf (неудача); for + sb + to-inf"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: второй инфинитив после and/or без to",
+  "order": 18,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: dare — с to и без",
+  "order": 19,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "осмелиться — с to или без; угроза — без to; вызов — с to"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "Bare infinitive: после модальных, had better, would rather",
+  "order": 20,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "Bare infinitive: let/make/see/hear/feel + object + V; в пассиве + to (was made to)",
+  "order": 21,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "расширение",
+  "detail": "+ watch, notice (Complex Object)"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "Bare infinitive: help + (to) V",
+  "order": 22,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: в роли подлежащего",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после глаголов admit, avoid, consider, deny, fancy, go, imagine, mind, miss, practise, suggest…",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после like, love, enjoy, prefer, dislike, hate — общее предпочтение",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после выражений it's no use, it's (not) worth, can't help, there's no point…",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после spend/waste/lose + время/деньги",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после предлогов (look forward to, be used to, object to…)",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "расширение",
+  "detail": "+ think of, apologise for; prefer … to"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing vs bare infinitive после see, hear, watch, feel — незавершённое vs завершённое",
+  "order": 7,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: be/get used to + -ing vs used to + V",
+  "order": 8,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: forget/remember",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "расширение",
+  "detail": "значения расписаны: не забыть сделать vs помнить о прошлом"
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: stop",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "расширение",
+  "detail": "остановиться, чтобы vs прекратить"
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: try",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "расширение",
+  "detail": "стараться vs попробовать"
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: regret",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "расширение",
+  "detail": "сожалеть сообщить (say, tell, inform, announce) vs о сделанном"
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: mean",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "расширение",
+  "detail": "намереваться vs означать"
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: go on",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "расширение",
+  "detail": "перейти к другому vs продолжать"
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: hate",
+  "order": 7,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: want (My car wants cleaning)",
+  "order": 8,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: be sorry to / for -ing; be afraid to / of -ing",
+  "order": 9,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive / -ing без смены значения: begin, start, continue, intend",
+  "order": 10,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "две -ing подряд нельзя"
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive / -ing: advise, allow, encourage, permit, require + object + to-inf / + -ing; в пассиве только to-inf",
+  "order": 11,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "be advised/allowed… + только to-inf"
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive / -ing: need/require/want + -ing / to be done (пассивное значение)",
+  "order": 12,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "The lawn needs mowing / to be mowed"
+ },
+ {
+  "topic": "Indirect questions",
+  "subtopic": "Indirect questions: Could you tell me…? / Do you know…? — прямой порядок слов",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indirect questions",
+  "subtopic": "Indirect questions: I wonder / I want to know / I doubt — без вопросительного знака",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indirect questions",
+  "subtopic": "Indirect questions: общий вопрос → if/whether",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Expressing preference (prefer / would rather)",
+  "subtopic": "Expressing preference: prefer + noun/-ing to noun/-ing — общее предпочтение",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5d",
+  "status": "новое",
+  "detail": "I prefer vegetables to meat; painting to drawing"
+ },
+ {
+  "topic": "Expressing preference (prefer / would rather)",
+  "subtopic": "Expressing preference: prefer + to-inf rather than + bare inf",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Expressing preference (prefer / would rather)",
+  "subtopic": "Expressing preference: I'd prefer + to-inf / noun (rather than) — конкретное предпочтение",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Expressing preference (prefer / would rather)",
+  "subtopic": "Expressing preference: I'd rather + bare inf (than + bare inf)",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5d",
+  "status": "новое",
+  "detail": "would sooner и I'd rather sb did — не даны"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: форма be + V3 — Present Simple и Past Simple",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Continuous (is/was being + V3)",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Present/Past Perfect (has/had been + V3)",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Future Simple (will be + V3)",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Future Perfect (will have been + V3)",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: инфинитив и модальные (has to be / can be + V3)",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": "has to be made; may be made"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: преобразование active → passive",
+  "order": 7,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — исполнитель неизвестен/неважен/очевиден",
+  "order": 8,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "расширение",
+  "detail": "+ неизвестен"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — действие важнее исполнителя (новости, инструкции, реклама)",
+  "order": 9,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — уход от ответственности",
+  "order": 10,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — акцент на исполнителе",
+  "order": 11,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — формальность, вежливость",
+  "order": 12,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: by + исполнитель vs with + инструмент/материал",
+  "order": 13,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: когда агент опускается (they, people, someone…)",
+  "order": 14,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: глаголы без пассива (непереходные; have, fit, suit, resemble…)",
+  "order": 15,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "расширение",
+  "detail": "+ exist, seem, lack"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: get вместо be",
+  "order": 16,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": "He got hit"
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: глаголы с двумя дополнениями (give, offer, send…)",
+  "order": 17,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: by в вопросах с who/whom/which",
+  "order": 18,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: make/hear/see/help + to-inf в пассиве; see/hear/watch + -ing",
+  "order": 19,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "I was made to lie; hear/see/watch + -ing"
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: форма have + object + V3",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: значение — действие выполняет кто-то другой для подлежащего",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: have sth done в разных временах (Continuous, Perfect, Future)",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "расширение",
+  "detail": "+ will be having"
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: инфинитив, -ing и модальные (to have / having sth done)",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: отрицания и вопросы с do/does/did",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "Did you have your eyes checked?"
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: get sth done вместо have",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: значение — неприятное происшествие (had his car stolen)",
+  "order": 7,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6c",
+  "status": "новое",
+  "detail": "George had his car stolen"
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: форма If + Present Simple — will + V",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: значение — реальная/вероятная ситуация в настоящем/будущем",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: запятая, если if-часть впереди",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: unless = if not",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: форма If + Past Simple — would/could/might + V",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: If + Past Continuous",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": "If Paul was not working today…"
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: значение — воображаемая/маловероятная ситуация в настоящем/будущем",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: were/was для I, he, she, it",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "расширение",
+  "detail": "в официальной речи were во всех лицах"
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: If I were you — совет",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: форма If + Past Perfect — would/could/might have + V3",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: If + Past Perfect Continuous",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": "If he hadn't been studying that hard…"
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: значение — нереальная ситуация в прошлом",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: значение — сожаление, критика",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: unless, provided/providing (that), as long as, on condition (that)",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: but for, otherwise, or else",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "but for + -ing/noun"
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: what if, supposing, even if",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: only if (+ инверсия в главном предложении)",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "Only if…, will you…"
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: will/would/should в if-части (просьба, раздражение, сомнение)",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "If she should need help…"
+ },
+ {
+  "topic": "Inversion",
+  "subtopic": "Inversion: условные без if — Should/Were/Had + подлежащее",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "Should he pass… / Were there… / Had I known…; дано в разделе условных"
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: I wish / If only + Past Simple/Continuous — желание изменить настоящее",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: I wish / If only + Past Perfect — сожаление о прошлом",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: I wish / If only + would + V — раздражение, просьба изменить поведение",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: were вместо was",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: If only vs I wish — эмоциональность",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: say vs tell (say to sb, tell sb)",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: say + to-inf; speak/talk about (не say about)",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: устойчивые сочетания с say/tell/ask",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: смена местоимений",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: без сдвига времён — вводящий глагол в настоящем (up-to-date reporting)",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "расширение",
+  "detail": "+ вводящий глагол в Future/Present Perfect"
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: без сдвига времён — общие истины, условные 2/3 типа, wish, сразу после сказанного",
+  "order": 7,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: сдвиг времён (Present → Past, Past → Past Perfect, will → would)",
+  "order": 8,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "расширение",
+  "detail": "Past Simple → Past Simple/Past Perfect"
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: слова времени и места (now → then, yesterday → the day before…)",
+  "order": 9,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": "today → в OCR таблица сбита"
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: will/shall → would",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: can → could / would be able to",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: may → might/could",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": "may → might"
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: shall → should / would / offered",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: must → had to (обязанность) / must (вывод)",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: needn't → didn't need to / didn't have to / wouldn't have to",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: не меняются (would, could, used to, mustn't, should, might, ought to, had better)",
+  "order": 7,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: специальные вопросы — то же вопросительное слово",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: общие вопросы — if/whether",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: прямой порядок слов, без «?», без please/well/oh",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported commands: приказы — order/tell + sb + (not) to-inf",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported requests: ask/beg + sb + (not) to-inf",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported suggestions: suggest + -ing / that sb (should) …",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported advice: advise + sb + (not) to-inf",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": "advise в группе приказов"
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: + to-inf (agree, claim, offer, promise, refuse, threaten…)",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "agree, claim, demand, offer, promise, refuse, threaten"
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: + sb + to-inf (advise, allow, encourage, order, remind, warn…)",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "advise, allow, ask, beg, command, encourage, forbid, instruct, invite, order, permit, remind, urge, warn, want"
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: + (предлог +) -ing (accuse sb of, apologise for, deny, insist on, suggest…)",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "accuse of, apologise for, admit (to), boast about/of, complain of/about, deny, insist on, suggest"
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: + that-clause (agree, claim, explain, inform sb, promise…)",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: explain/wonder + вопросительное слово (+ to-inf / clause)",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: в роли подлежащего",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после глаголов admit, avoid, consider, deny, fancy, go, imagine, mind, miss, practise, suggest…",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после like, love, enjoy, prefer, dislike, hate — общее предпочтение",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после выражений it's no use, it's (not) worth, can't help, there's no point…",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после spend/waste/lose + время/деньги",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после предлогов (look forward to, be used to, object to…)",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing vs bare infinitive после see, hear, watch, feel — незавершённое vs завершённое",
+  "order": 7,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: цель",
+  "order": 9,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после agree, decide, expect, hope, plan, promise, refuse, want",
+  "order": 10,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после would like/prefer/love — конкретное предпочтение",
+  "order": 11,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после прилагательных (happy, eager, kind, lucky…); It was kind of you to…",
+  "order": 12,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": "+ it + be + adj/noun"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после too/enough",
+  "order": 13,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после be the first/next/last",
+  "order": 14,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: устойчивые выражения (to tell you the truth, to be honest, to sum up…)",
+  "order": 15,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: вопросительное слово + to-inf (when to go)",
+  "order": 16,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": "после ask, decide, explain, find out, learn, want to know"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после существительных; so + adj + as to; only + to-inf; for + sb + to-inf",
+  "order": 17,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: второй инфинитив после and/or без to",
+  "order": 18,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: dare — с to и без",
+  "order": 19,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "Bare infinitive: после модальных, had better, would rather",
+  "order": 20,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "Bare infinitive: let/make/see/hear/feel + object + V; в пассиве + to (was made to)",
+  "order": 21,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "расширение",
+  "detail": "+ see/hear/watch + -ing в пассиве не меняются (She was heard crying)"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "Bare infinitive: help + (to) V",
+  "order": 22,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: forget/remember",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: stop",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: try",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: regret",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: mean",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: go on",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: hate",
+  "order": 7,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: want (My car wants cleaning)",
+  "order": 8,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: be sorry to / for -ing; be afraid to / of -ing",
+  "order": 9,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive / -ing без смены значения: begin, start, continue, intend",
+  "order": 10,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive / -ing: advise, allow, encourage, permit, require + object + to-inf / + -ing; в пассиве только to-inf",
+  "order": 11,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive / -ing: need/require/want + -ing / to be done (пассивное значение)",
+  "order": 12,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Expressing preference (prefer / would rather)",
+  "subtopic": "Expressing preference: prefer + noun/-ing to noun/-ing — общее предпочтение",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Expressing preference (prefer / would rather)",
+  "subtopic": "Expressing preference: prefer + to-inf rather than + bare inf",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Expressing preference (prefer / would rather)",
+  "subtopic": "Expressing preference: I'd prefer + to-inf / noun (rather than) — конкретное предпочтение",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Expressing preference (prefer / would rather)",
+  "subtopic": "Expressing preference: I'd rather + bare inf (than + bare inf)",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 2 · Living & Spending",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": "без I'd rather you did"
+ },
+ {
+  "topic": "Conditionals (Type 0)",
+  "subtopic": "Conditionals Type 0: форма If/When + Present Simple — Present Simple",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 0)",
+  "subtopic": "Conditionals Type 0: значение — общие истины, научные факты",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 0)",
+  "subtopic": "Conditionals Type 0: when вместо if",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: форма If + Present Simple — will + V",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: главная часть с Imperative / can, must, may",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: значение — реальная/вероятная ситуация в настоящем/будущем",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: запятая, если if-часть впереди",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: unless = if not",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: will/would/should в if-части (просьба, раздражение, сомнение)",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": "If she should need help…"
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: форма If + Past Simple — would/could/might + V",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: If + Past Continuous",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: значение — воображаемая/маловероятная ситуация в настоящем/будущем",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: were/was для I, he, she, it",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: If I were you — совет",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: форма If + Past Perfect — would/could/might have + V3",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: If + Past Perfect Continuous",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: значение — нереальная ситуация в прошлом",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: значение — сожаление, критика",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: unless, provided/providing (that), as long as, on condition (that)",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: but for, otherwise, or else",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: what if, supposing, even if",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: only if (+ инверсия в главном предложении)",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": "Only if you are dressed formally, will you…"
+ },
+ {
+  "topic": "Inversion",
+  "subtopic": "Inversion: условные без if — Should/Were/Had + подлежащее",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": "Should he pass / Were I / Had I known"
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: I wish / If only + Past Simple/Continuous — желание изменить настоящее",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: I wish / If only + Past Perfect — сожаление о прошлом",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: I wish / If only + would + V — раздражение, просьба изменить поведение",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: were вместо was",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: If only vs I wish — эмоциональность",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 6 · Food & Health",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: форма be + V3 — Present Simple и Past Simple",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Continuous (is/was being + V3)",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Present/Past Perfect (has/had been + V3)",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Future Simple (will be + V3)",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Future Perfect (will have been + V3)",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: инфинитив и модальные (has to be / can be + V3)",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: преобразование active → passive",
+  "order": 7,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — исполнитель неизвестен/неважен/очевиден",
+  "order": 8,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — действие важнее исполнителя (новости, инструкции, реклама)",
+  "order": 9,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — уход от ответственности",
+  "order": 10,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — акцент на исполнителе",
+  "order": 11,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — формальность, вежливость",
+  "order": 12,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: by + исполнитель vs with + инструмент/материал",
+  "order": 13,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: когда агент опускается (they, people, someone…)",
+  "order": 14,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: глаголы без пассива (непереходные; have, fit, suit, resemble…)",
+  "order": 15,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: get вместо be",
+  "order": 16,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: глаголы с двумя дополнениями (give, offer, send…)",
+  "order": 17,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: by в вопросах с who/whom/which",
+  "order": 18,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: make/hear/see/help + to-inf в пассиве; see/hear/watch + -ing",
+  "order": 19,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: прямая vs косвенная речь, that можно опустить",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: say vs tell (say to sb, tell sb)",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: say + to-inf; speak/talk about (не say about)",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: устойчивые сочетания с say/tell/ask",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: без сдвига времён — вводящий глагол в настоящем (up-to-date reporting)",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: без сдвига времён — общие истины, условные 2/3 типа, wish, сразу после сказанного",
+  "order": 7,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": "+ unreal past"
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: сдвиг времён (Present → Past, Past → Past Perfect, will → would)",
+  "order": 8,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: слова времени и места (now → then, yesterday → the day before…)",
+  "order": 9,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: вводящие глаголы ask, inquire, wonder, want to know",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: специальные вопросы — то же вопросительное слово",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: общие вопросы — if/whether",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: прямой порядок слов, без «?», без please/well/oh",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: сдвиг времён, местоимений и слов времени",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indirect questions",
+  "subtopic": "Indirect questions: Could you tell me…? / Do you know…? — прямой порядок слов",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indirect questions",
+  "subtopic": "Indirect questions: I wonder / I want to know / I doubt — без вопросительного знака",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported commands: приказы — order/tell + sb + (not) to-inf",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported requests: ask/beg + sb + (not) to-inf",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported suggestions: suggest + -ing / that sb (should) …",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported advice: advise + sb + (not) to-inf",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: will/shall → would",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: can → could / would be able to",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: may → might/could",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: shall → should / would / offered",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: must → had to (обязанность) / must (вывод)",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: needn't → didn't need to / didn't have to / wouldn't have to",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: не меняются (would, could, used to, mustn't, should, might, ought to, had better)",
+  "order": 7,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: + to-inf (agree, claim, offer, promise, refuse, threaten…)",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: + sb + to-inf (advise, allow, encourage, order, remind, warn…)",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: + (предлог +) -ing (accuse sb of, apologise for, deny, insist on, suggest…)",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: + that-clause (agree, claim, explain, inform sb, promise…)",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: explain/wonder + вопросительное слово (+ to-inf / clause)",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: пересказ диалогов — связки, восклицания, краткие ответы, question tags",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "and, as, adding that, explaining that…; exclaim, thank; question tags опускаются"
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: в роли подлежащего",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после глаголов admit, avoid, consider, deny, fancy, go, imagine, mind, miss, practise, suggest…",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после like, love, enjoy, prefer, dislike, hate — общее предпочтение",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после выражений it's no use, it's (not) worth, can't help, there's no point…",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после spend/waste/lose + время/деньги",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: после предлогов (look forward to, be used to, object to…)",
+  "order": 6,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing vs bare infinitive после see, hear, watch, feel — незавершённое vs завершённое",
+  "order": 7,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "-ing form: be/get used to + -ing vs used to + V",
+  "order": 8,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: цель",
+  "order": 9,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после agree, decide, expect, hope, plan, promise, refuse, want",
+  "order": 10,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после would like/prefer/love — конкретное предпочтение",
+  "order": 11,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после прилагательных (happy, eager, kind, lucky…); It was kind of you to…",
+  "order": 12,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после too/enough",
+  "order": 13,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после be the first/next/last",
+  "order": 14,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: устойчивые выражения (to tell you the truth, to be honest, to sum up…)",
+  "order": 15,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: вопросительное слово + to-inf (when to go)",
+  "order": 16,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: после существительных; so + adj + as to; only + to-inf; for + sb + to-inf",
+  "order": 17,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: второй инфинитив после and/or без to",
+  "order": 18,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "to-infinitive: dare — с to и без",
+  "order": 19,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "Bare infinitive: после модальных, had better, would rather",
+  "order": 20,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "Bare infinitive: let/make/see/hear/feel + object + V; в пассиве + to (was made to)",
+  "order": 21,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form",
+  "subtopic": "Bare infinitive: help + (to) V",
+  "order": 22,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: forget/remember",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: stop",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: try",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: regret",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: mean",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: go on",
+  "order": 6,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: hate",
+  "order": 7,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: want (My car wants cleaning)",
+  "order": 8,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive vs -ing: be sorry to / for -ing; be afraid to / of -ing",
+  "order": 9,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive / -ing без смены значения: begin, start, continue, intend",
+  "order": 10,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive / -ing: advise, allow, encourage, permit, require + object + to-inf / + -ing; в пассиве только to-inf",
+  "order": 11,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Infinitive / -ing form (difference in meaning)",
+  "subtopic": "Infinitive / -ing: need/require/want + -ing / to be done (пассивное значение)",
+  "order": 12,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Expressing preference (prefer / would rather)",
+  "subtopic": "Expressing preference: prefer + noun/-ing to noun/-ing — общее предпочтение",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Expressing preference (prefer / would rather)",
+  "subtopic": "Expressing preference: prefer + to-inf rather than + bare inf",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Expressing preference (prefer / would rather)",
+  "subtopic": "Expressing preference: I'd prefer + to-inf / noun (rather than) — конкретное предпочтение",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Expressing preference (prefer / would rather)",
+  "subtopic": "Expressing preference: I'd rather + bare inf (than + bare inf)",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 3 · Responsibility",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: форма be + V3 — Present Simple и Past Simple",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Continuous (is/was being + V3)",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Present/Past Perfect (has/had been + V3)",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Future Simple (will be + V3)",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: Future Perfect (will have been + V3)",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: инфинитив и модальные (has to be / can be + V3)",
+  "order": 6,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: преобразование active → passive",
+  "order": 7,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — исполнитель неизвестен/неважен/очевиден",
+  "order": 8,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — действие важнее исполнителя (новости, инструкции, реклама)",
+  "order": 9,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — уход от ответственности",
+  "order": 10,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — акцент на исполнителе",
+  "order": 11,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: значение — формальность, вежливость",
+  "order": 12,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: by + исполнитель vs with + инструмент/материал",
+  "order": 13,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: когда агент опускается (they, people, someone…)",
+  "order": 14,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: глаголы без пассива (непереходные; have, fit, suit, resemble…)",
+  "order": 15,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: get вместо be",
+  "order": 16,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: глаголы с двумя дополнениями (give, offer, send…)",
+  "order": 17,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: by в вопросах с who/whom/which",
+  "order": 18,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Passive Voice",
+  "subtopic": "Passive Voice: make/hear/see/help + to-inf в пассиве; see/hear/watch + -ing",
+  "order": 19,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: форма have + object + V3",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: значение — действие выполняет кто-то другой для подлежащего",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: have sth done в разных временах (Continuous, Perfect, Future)",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: инфинитив, -ing и модальные (to have / having sth done)",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: отрицания и вопросы с do/does/did",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: get sth done вместо have",
+  "order": 6,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Causative (have something done)",
+  "subtopic": "Causative: значение — неприятное происшествие (had his car stolen)",
+  "order": 7,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: прямая vs косвенная речь, that можно опустить",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: say vs tell (say to sb, tell sb)",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: say + to-inf; speak/talk about (не say about)",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: устойчивые сочетания с say/tell/ask",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: смена местоимений",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: без сдвига времён — вводящий глагол в настоящем (up-to-date reporting)",
+  "order": 6,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: без сдвига времён — общие истины, условные 2/3 типа, wish, сразу после сказанного",
+  "order": 7,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: сдвиг времён (Present → Past, Past → Past Perfect, will → would)",
+  "order": 8,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": "Future Simple → Future in the Past (would)"
+ },
+ {
+  "topic": "Reported Speech",
+  "subtopic": "Reported Speech: слова времени и места (now → then, yesterday → the day before…)",
+  "order": 9,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: вводящие глаголы ask, inquire, wonder, want to know",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: специальные вопросы — то же вопросительное слово",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: общие вопросы — if/whether",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: прямой порядок слов, без «?», без please/well/oh",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported questions",
+  "subtopic": "Reported questions: сдвиг времён, местоимений и слов времени",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indirect questions",
+  "subtopic": "Indirect questions: Could you tell me…? / Do you know…? — прямой порядок слов",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indirect questions",
+  "subtopic": "Indirect questions: I wonder / I want to know / I doubt — без вопросительного знака",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported commands: приказы — order/tell + sb + (not) to-inf",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": "+ instructions: advise, order, tell"
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported requests: ask/beg + sb + (not) to-inf",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported suggestions: suggest + -ing / that sb (should) …",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported commands/requests",
+  "subtopic": "Reported advice: advise + sb + (not) to-inf",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: + to-inf (agree, claim, offer, promise, refuse, threaten…)",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: + sb + to-inf (advise, allow, encourage, order, remind, warn…)",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: + (предлог +) -ing (accuse sb of, apologise for, deny, insist on, suggest…)",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: + that-clause (agree, claim, explain, inform sb, promise…)",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reporting verbs",
+  "subtopic": "Reporting verbs: explain/wonder + вопросительное слово (+ to-inf / clause)",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: will/shall → would",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": "will → would"
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: can → could / would be able to",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: may → might/could",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": "may → might"
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: shall → should / would / offered",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: must → had to (обязанность) / must (вывод)",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: needn't → didn't need to / didn't have to / wouldn't have to",
+  "order": 6,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reported Speech: modal verbs",
+  "subtopic": "Reported Speech: modal verbs: не меняются (would, could, used to, mustn't, should, might, ought to, had better)",
+  "order": 7,
+  "grade": 11,
+  "module": "Module 6 · Communication",
+  "lesson": "6c",
+  "status": "повторение",
+  "detail": "назван только should"
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: форма If + Present Simple — will + V",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": "главная часть — только Future Simple"
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: значение — реальная/вероятная ситуация в настоящем/будущем",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: запятая, если if-часть впереди",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 1)",
+  "subtopic": "Conditionals Type 1: unless = if not",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: форма If + Past Simple — would/could/might + V",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: If + Past Continuous",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: значение — воображаемая/маловероятная ситуация в настоящем/будущем",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: were/was для I, he, she, it",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 2)",
+  "subtopic": "Conditionals Type 2: If I were you — совет",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: форма If + Past Perfect — would/could/might have + V3",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: If + Past Perfect Continuous",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: значение — нереальная ситуация в прошлом",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditionals (Type 3)",
+  "subtopic": "Conditionals Type 3: значение — сожаление, критика",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: unless, provided/providing (that), as long as, on condition (that)",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: but for, otherwise, or else",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: what if, supposing, even if",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: only if (+ инверсия в главном предложении)",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Conditional linkers (unless, provided…)",
+  "subtopic": "Conditional linkers: will/would/should в if-части (просьба, раздражение, сомнение)",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "расширение",
+  "detail": "+ настойчивость (If you will stop arguing…); NOT if you will stay"
+ },
+ {
+  "topic": "Inversion",
+  "subtopic": "Inversion: условные без if — Should/Were/Had + подлежащее",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: I wish / If only + Past Simple/Continuous — желание изменить настоящее",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: I wish / If only + Past Perfect — сожаление о прошлом",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: I wish / If only + would + V — раздражение, просьба изменить поведение",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: were вместо was",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Wishes (I wish / If only)",
+  "subtopic": "Wishes: If only vs I wish — эмоциональность",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 7 · In days to come",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Inversion",
+  "subtopic": "Inversion: условные без if — Should/Were/Had + подлежащее",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Inversion",
+  "subtopic": "Inversion: эмфатическая — форма (вспомогательный / do, does, did + подлежащее)",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Inversion",
+  "subtopic": "Inversion: после отрицательных наречий в начале (Never, Rarely, Seldom, Little, Hardly… when, No sooner… than, Not only… but also)",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "Barely, Hardly… when, In no way, Under no circumstances, Little, Never, Nor/Neither, No sooner… than, Not only… but also, Nowhere, On no account, Rarely, Scarcely, Seldom"
+ },
+ {
+  "topic": "Inversion",
+  "subtopic": "Inversion: после Only after/by/when/then, Not till/until, Not since — в главном предложении",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "only after/by/if/when, not since, not till/until"
+ },
+ {
+  "topic": "Inversion",
+  "subtopic": "Inversion: после So/Such в начале (результат)",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "So angry was he, that…"
+ },
+ {
+  "topic": "Inversion",
+  "subtopic": "Inversion: согласие после as, so, neither/nor",
+  "order": 6,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "as did his grandparents"
+ },
+ {
+  "topic": "Inversion",
+  "subtopic": "Inversion: смысловой глагол после Here/There (There goes the bus — НО There it goes)",
+  "order": 7,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "НО There it goes / Here they are"
+ },
+ {
+  "topic": "Inversion",
+  "subtopic": "Inversion: в прямой речи после цитаты (said Bill — НО he said)",
+  "order": 8,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "НО \"…,\" he said"
+ }
+]

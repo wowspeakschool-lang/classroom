@@ -1,0 +1,3052 @@
+[
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: a/an — первое упоминание, значение «один»",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 9 · Modern living",
+  "lesson": "9a",
+  "status": "новое",
+  "detail": "I can see a white cat"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: a/an — первое упоминание, значение «один»",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": "неизвестное/неупомянутое ранее"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: a/an — первое упоминание, значение «один»",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: the — известный, упомянутый ранее предмет",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 9 · Modern living",
+  "lesson": "9a",
+  "status": "новое",
+  "detail": "The cat on the sofa is black"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: the — известный, упомянутый ранее предмет",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2b",
+  "status": "расширение",
+  "detail": "добавлено: ясно из контекста; ед./мн., исч./неисч."
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: the — известный, упомянутый ранее предмет",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: нулевой артикль — мн. ч. и неисчисляемые в общем значении",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 9 · Modern living",
+  "lesson": "9a",
+  "status": "новое",
+  "detail": "They sell toys… Do you like milk?"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: нулевой артикль — мн. ч. и неисчисляемые в общем значении",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": "the не с мн. ч. в значении группы вообще"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: нулевой артикль — мн. ч. и неисчисляемые в общем значении",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "не the + мн. ч."
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: нулевой артикль — при другом определителе (my, this, some, числительное, 's)",
+  "order": 4,
+  "grade": 5,
+  "module": "Module 9 · Modern living",
+  "lesson": "9a",
+  "status": "новое",
+  "detail": "my, this, some/any/no, every/each, whose/which, three, my granny's"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: a/an = per; деньги, дроби, меры, частота, скорость",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2b",
+  "status": "новое",
+  "detail": "three times a day, a pound, a third, 60 km an hour"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: a/an = per; деньги, дроби, меры, частота, скорость",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "+ a million, £4 a litre"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: a/an с болезнями (a cold, но flu)",
+  "order": 6,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2b",
+  "status": "новое",
+  "detail": "a cold, a fever, a headache; но не flu, pneumonia, tonsillitis"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: a/an с болезнями (a cold, но flu)",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: a/the + ед. ч. — обобщение группы",
+  "order": 7,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: the — уникальные объекты, музыкальные инструменты, исторические события",
+  "order": 8,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2b",
+  "status": "новое",
+  "detail": "the moon, the sky, play the guitar"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: the — уникальные объекты, музыкальные инструменты, исторические события",
+  "order": 8,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "the moon, play the flute"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: the и нулевой — географические названия",
+  "order": 9,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2b",
+  "status": "новое",
+  "detail": "the: реки, моря, океаны, горные цепи, группы островов, пустыни; без: страны, города, улицы, горы, острова, континенты, озёра (Lake Baikal / the Baikal)"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: the и нулевой — географические названия",
+  "order": 9,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: the и нулевой — театры, отели, музеи, газеты; названия с именем (Victoria Station, Harrods)",
+  "order": 10,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2b",
+  "status": "новое",
+  "detail": "Barclays Bank, but the Black Swan Hotel"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: the и нулевой — театры, отели, музеи, газеты; названия с именем (Victoria Station, Harrods)",
+  "order": 10,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "Glasgow Airport, Harrods, но the White House"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: the — люди: фамилии, титулы, the + прилагательное (the rich)",
+  "order": 11,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2b",
+  "status": "новое",
+  "detail": "the Jacksons, the President (но King Henry VIII), the young, the poor"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: the — люди: фамилии, титулы, the + прилагательное (the rich)",
+  "order": 11,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "the Smiths, the elderly"
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: нулевой артикль — имена, спорт, дни, месяцы, праздники, цвета, напитки, еда, языки",
+  "order": 12,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2b",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: нулевой артикль — имена, спорт, дни, месяцы, праздники, цвета, напитки, еда, языки",
+  "order": 12,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: нулевой артикль — school, hospital, church, bed по назначению",
+  "order": 13,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2b",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Articles (a/an/the/zero)",
+  "subtopic": "Articles: нулевой артикль — school, hospital, church, bed по назначению",
+  "order": 13,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: различие исчисляемых и неисчисляемых",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 3 · All the things I like!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "только в рамках some/any, отдельного раздела нет"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: различие исчисляемых и неисчисляемых",
+  "order": 1,
+  "grade": 4,
+  "module": "Module 3 · Tasty treats",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "только в рамках much/many и how much/how many"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: различие исчисляемых и неисчисляемых",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8a",
+  "status": "расширение",
+  "detail": "определение: у исчисляемых ед. и мн. ч., у неисчисляемых мн. ч. нет"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: различие исчисляемых и неисчисляемых",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 9 · Food & refreshments",
+  "lesson": "9a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: различие исчисляемых и неисчисляемых",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: различие исчисляемых и неисчисляемых",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2d",
+  "status": "повторение",
+  "detail": "1 child, 2 children / sugar, heat"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: различие исчисляемых и неисчисляемых",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": "1 pen, 2 pens / sugar, meat"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: неисчисляемые — еда и жидкости",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8a",
+  "status": "новое",
+  "detail": "cheese, sugar, butter, salt, rice, flour; water, tea, milk…"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: неисчисляемые — еда и жидкости",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 9 · Food & refreshments",
+  "lesson": "9a",
+  "status": "расширение",
+  "detail": "добавлены rain, snow"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: неисчисляемые — еда и жидкости",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2d",
+  "status": "расширение",
+  "detail": "вещества: lemonade, blood, butter, oxygen"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: неисчисляемые — еда и жидкости",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": "beer, blood, bread, air, oxygen, corn, flour"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: количество с неисчисляемыми (a jar of, a bottle of)",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8a",
+  "status": "новое",
+  "detail": "15 слов: jar, bottle, piece, loaf, cup, bar, glass, kilo…"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: количество с неисчисляемыми (a jar of, a bottle of)",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 9 · Food & refreshments",
+  "lesson": "9a",
+  "status": "повторение",
+  "detail": "тот же список"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: количество с неисчисляемыми (a jar of, a bottle of)",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "расширение",
+  "detail": "добавлено много партитивов: a piece of advice, a rasher of bacon, a lump of sugar, a pair of trousers…"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: существительные без ед. числа (clothes, jeans)",
+  "order": 4,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8a",
+  "status": "новое",
+  "detail": "clothes, shorts, jeans, trousers, stairs, scissors"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: There is/are + исчисляемые/неисчисляемые — утверждение",
+  "order": 5,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "новое",
+  "detail": "There is a book / There are some, a lot of, (a) few apples / There's some, (a) little butter"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: There is/are + исчисляемые/неисчисляемые — отрицание",
+  "order": 6,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "новое",
+  "detail": "There isn't a book / aren't any/many apples / isn't any/much butter"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: There is/are + исчисляемые/неисчисляемые — вопрос",
+  "order": 7,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Is there a book? Are there any apples? Is there any butter?"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: неисчисляемые без a/an, глагол в ед. ч.",
+  "order": 8,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: неисчисляемые без a/an, глагол в ед. ч.",
+  "order": 8,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "расширение",
+  "detail": "+ some, any, much, no"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: исключения с a/an (a help, a pity, a shame)",
+  "order": 9,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "a help, a knowledge (of sth), a pity, a relief, a shame, a wonder"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: группы неисчисляемых — предметы, языки, игры, болезни, явления природы",
+  "order": 10,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2d",
+  "status": "новое",
+  "detail": "maths, chemistry; языки; baseball, darts; flu, measles; fog, snow"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: группы неисчисляемых — предметы, языки, игры, болезни, явления природы",
+  "order": 10,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "расширение",
+  "detail": "+ спорт (cycling, football), абстрактные (anger, beauty, love)"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: «ловушки» — advice, information, news, furniture, luggage, money",
+  "order": 11,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2d",
+  "status": "новое",
+  "detail": "advice, knowledge, progress, information, news, work; baggage, furniture, luggage, money…"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: «ловушки» — advice, information, news, furniture, luggage, money",
+  "order": 11,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "расширение",
+  "detail": "+ accommodation, behaviour, stationery, traffic, travel, weather"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: собирательные (family, team) и составные (homework, countryside)",
+  "order": 12,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "family, flock, public, team, government; countryside, homework, housework, seaside"
+ },
+ {
+  "topic": "Countable / Uncountable nouns",
+  "subtopic": "Countable / Uncountable: длительность, расстояние, деньги как целое — глагол в ед. ч.",
+  "order": 13,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Demonstratives (this/that/these/those)",
+  "subtopic": "Demonstratives: this — these (ед. и мн. ч.)",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 4 · Come in and play!",
+  "lesson": "",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Demonstratives (this/that/these/those)",
+  "subtopic": "Demonstratives: this — these (ед. и мн. ч.)",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 2 · That's me!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": "This is a ball. / These are balls."
+ },
+ {
+  "topic": "Demonstratives (this/that/these/those)",
+  "subtopic": "Demonstratives: that — those (ед. и мн. ч.)",
+  "order": 2,
+  "grade": 3,
+  "module": "Module 4 · Come in and play!",
+  "lesson": "",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Demonstratives (this/that/these/those)",
+  "subtopic": "Demonstratives: that — those (ед. и мн. ч.)",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 2 · That's me!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": "That is a ball. / Those are balls."
+ },
+ {
+  "topic": "Demonstratives (this/that/these/those)",
+  "subtopic": "Demonstratives: this/these vs that/those — близко vs далеко",
+  "order": 3,
+  "grade": 3,
+  "module": "Module 4 · Come in and play!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "о людях, животных, предметах рядом / далеко"
+ },
+ {
+  "topic": "Determiners (both/either/neither/all/none)",
+  "subtopic": "Determiners: both — о двух, глагол во мн. ч.",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "Both Nick and Alex are… / They are both… / Both of them…"
+ },
+ {
+  "topic": "Determiners (both/either/neither/all/none)",
+  "subtopic": "Determiners: either / neither (+ of)",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "+ ед. ч. исчисляемого; either of/neither of + глагол в ед. или мн. ч."
+ },
+ {
+  "topic": "Determiners (both/either/neither/all/none)",
+  "subtopic": "Determiners: all — о более чем двух; all + that-clause",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "All of us… / We all… / All four of us…"
+ },
+ {
+  "topic": "Determiners (both/either/neither/all/none)",
+  "subtopic": "Determiners: none / none of",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "No, none. / none of + сущ./местоимение"
+ },
+ {
+  "topic": "Determiners (both/either/neither/all/none)",
+  "subtopic": "Determiners: whole vs all (the whole morning = all morning)",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "a/the/this/my + whole + noun"
+ },
+ {
+  "topic": "Determiners (both/either/neither/all/none)",
+  "subtopic": "Determiners: both/neither vs all/none — о двух vs о многих",
+  "order": 6,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Determiners (every/each)",
+  "subtopic": "Determiners (every/each): every + ед. ч. — вся группа (= all)",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": "Every student has a library card"
+ },
+ {
+  "topic": "Determiners (every/each)",
+  "subtopic": "Determiners (every/each): every + ед. ч. — вся группа (= all)",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Determiners (every/each)",
+  "subtopic": "Determiners (every/each): each + ед. ч. — каждый в отдельности",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Determiners (every/each)",
+  "subtopic": "Determiners (every/each): each + ед. ч. — каждый в отдельности",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Determiners (every/each)",
+  "subtopic": "Determiners (every/each): every vs each — о двух vs о трёх и более",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Determiners (every/each)",
+  "subtopic": "Determiners (every/each): every vs each — о двух vs о трёх и более",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Determiners (every/each)",
+  "subtopic": "Determiners (every/each): each (one) of / every one of",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Determiners (every/each)",
+  "subtopic": "Determiners (every/each): each (one) of / every one of",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: some/any/no + неисчисляемые и мн. ч.",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: some/any/no + неисчисляемые и мн. ч.",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: some/any/no + неисчисляемые и мн. ч.",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: производные — люди, вещи, места (somebody, anything, nowhere)",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": "-body/-one, -thing, -where"
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: производные — люди, вещи, места (somebody, anything, nowhere)",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "производные упомянуты без таблицы"
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: производные — люди, вещи, места (somebody, anything, nowhere)",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: some- — в утверждениях",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: some- — в утверждениях",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: some- — в утверждениях",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: some- в вопросах — предложения и просьбы",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": "Would you like some cake?"
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: some- в вопросах — предложения и просьбы",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: some- в вопросах — предложения и просьбы",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "расширение",
+  "detail": "добавлено: когда ожидается «да» (Have you lost something?)"
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: any- — в вопросах",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: any- — в вопросах",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: any- — в вопросах",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: not any- в отрицаниях; any после without, never, rarely",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: not any- в отрицаниях; any после without, never, rarely",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: not any- в отрицаниях; any после without, never, rarely",
+  "order": 6,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: any в утверждении = «любой, неважно кто/что»",
+  "order": 7,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: any в утверждении = «любой, неважно кто/что»",
+  "order": 7,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "Anyone can take part"
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: any в утверждении = «любой, неважно кто/что»",
+  "order": 7,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": "Anyone can take part; You can come any time"
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: no- вместо not any (глагол утвердительный)",
+  "order": 8,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: no- вместо not any (глагол утвердительный)",
+  "order": 8,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "расширение",
+  "detail": "примеры замен: haven't got any → 've got no; wasn't anybody → was nobody"
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: no- вместо not any (глагол утвердительный)",
+  "order": 8,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: hardly any",
+  "order": 9,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: hardly any",
+  "order": 9,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": "в утвердительных с неисч. и мн. ч."
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: every + ед. ч.; everybody, everything, everywhere",
+  "order": 10,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: every + ед. ч.; everybody, everything, everywhere",
+  "order": 10,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: глагол после производных — в ед. ч.",
+  "order": 11,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: глагол после производных — в ед. ч.",
+  "order": 11,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Indefinite pronouns (some-/any-/no-/every-)",
+  "subtopic": "Indefinite pronouns: глагол после производных — в ед. ч.",
+  "order": 11,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Like / As",
+  "subtopic": "Like / As: like — сходство; после feel, look, smell, taste, sound",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "новое",
+  "detail": "works like a dog; like + noun/pronoun/-ing"
+ },
+ {
+  "topic": "Like / As",
+  "subtopic": "Like / As: as — роль, профессия; после regard, describe, be known; as usual, such as, the same as",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "новое",
+  "detail": "works as a clerk; придаточные образа действия"
+ },
+ {
+  "topic": "Like / As",
+  "subtopic": "Like / As: like vs as — сходство vs реальная роль",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "новое",
+  "detail": "works like a dog vs works as a clerk"
+ },
+ {
+  "topic": "Object pronouns",
+  "subtopic": "Object pronouns: формы me, you, him, her, it, us, them",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4a",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Object pronouns",
+  "subtopic": "Object pronouns: употребление — дополнение, после предлогов",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4a",
+  "status": "новое",
+  "detail": "Look at him! to me, about me"
+ },
+ {
+  "topic": "Object pronouns",
+  "subtopic": "Object pronouns: личные vs объектные vs притяжательные — сопоставление",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4a",
+  "status": "новое",
+  "detail": "общая таблица I — me — my; функции: подлежащее / дополнение / определение"
+ },
+ {
+  "topic": "Ordinal numbers",
+  "subtopic": "Ordinal numbers: first, second, third и составные (21st, 22nd)",
+  "order": 1,
+  "grade": 4,
+  "module": "Module 5 · Where were you yesterday?",
+  "lesson": "",
+  "status": "новое",
+  "detail": "1–31 с сокращениями 1st, 2nd, 3rd"
+ },
+ {
+  "topic": "Ordinal numbers",
+  "subtopic": "Ordinal numbers: first, second, third и составные (21st, 22nd)",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2a",
+  "status": "расширение",
+  "detail": "добавлены большие числа: 51st, 101st, 382nd, 6503rd"
+ },
+ {
+  "topic": "Ordinal numbers",
+  "subtopic": "Ordinal numbers: образование с -th и орфография (fifth, ninth, twelfth, twentieth)",
+  "order": 2,
+  "grade": 4,
+  "module": "Module 5 · Where were you yesterday?",
+  "lesson": "",
+  "status": "новое",
+  "detail": "список до thirty-first"
+ },
+ {
+  "topic": "Ordinal numbers",
+  "subtopic": "Ordinal numbers: образование с -th и орфография (fifth, ninth, twelfth, twentieth)",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2a",
+  "status": "расширение",
+  "detail": "правило сформулировано: seven – seventh, 56 – fifty-sixth"
+ },
+ {
+  "topic": "Ordinal numbers",
+  "subtopic": "Ordinal numbers: с артиклем the и даты",
+  "order": 3,
+  "grade": 4,
+  "module": "Module 5 · Where were you yesterday?",
+  "lesson": "",
+  "status": "новое",
+  "detail": "fifteen — the fifteenth; даты"
+ },
+ {
+  "topic": "Ordinal numbers",
+  "subtopic": "Ordinal numbers: с артиклем the и даты",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2a",
+  "status": "расширение",
+  "detail": "добавлено: пишется September 1 — читается the first of September; всегда с the"
+ },
+ {
+  "topic": "Partitives (a bottle of…)",
+  "subtopic": "Partitives: a bottle/glass/carton/cup/bowl/packet/slice/loaf/kilo/bar of",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "новое",
+  "detail": "a bottle of Coke, a glass of water, a loaf of bread…"
+ },
+ {
+  "topic": "Partitives (a bottle of…)",
+  "subtopic": "Partitives: мн. ч. — two bottles of, two loaves of",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Personal pronouns (subject)",
+  "subtopic": "Personal pronouns: формы I, you, he, she, it, we, you, they",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 1 · School days",
+  "lesson": "1b",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Personal pronouns (subject)",
+  "subtopic": "Personal pronouns: формы I, you, he, she, it, we, you, they",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Personal pronouns (subject)",
+  "subtopic": "Personal pronouns: употребление — подлежащее вместо существительного",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 1 · School days",
+  "lesson": "1b",
+  "status": "новое",
+  "detail": "I — с прописной; you — ед. и мн. ч."
+ },
+ {
+  "topic": "Personal pronouns (subject)",
+  "subtopic": "Personal pronouns: употребление — подлежащее вместо существительного",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Personal pronouns (subject)",
+  "subtopic": "Personal pronouns: he/she vs it vs they — выбор местоимения",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 1 · School days",
+  "lesson": "1b",
+  "status": "новое",
+  "detail": "it — неодушевлённые, абстрактные, животные"
+ },
+ {
+  "topic": "Personal pronouns (subject)",
+  "subtopic": "Personal pronouns: he/she vs it vs they — выбор местоимения",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "it — предметы или животные"
+ },
+ {
+  "topic": "Plurals (irregular)",
+  "subtopic": "Plurals (irregular): man — men, child — children, tooth — teeth, foot — feet, mouse — mice",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 5 · Furry friends!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "+ woman — women"
+ },
+ {
+  "topic": "Plurals (irregular)",
+  "subtopic": "Plurals (irregular): man — men, child — children, tooth — teeth, foot — feet, mouse — mice",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 2 · That's me!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": "6 слов"
+ },
+ {
+  "topic": "Plurals (irregular)",
+  "subtopic": "Plurals (irregular): man — men, child — children, tooth — teeth, foot — feet, mouse — mice",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "6 слов"
+ },
+ {
+  "topic": "Plurals (irregular)",
+  "subtopic": "Plurals (irregular): одинаковая форма ед. и мн. ч. (fish, sheep)",
+  "order": 2,
+  "grade": 3,
+  "module": "Module 5 · Furry friends!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "fish — fish, sheep — sheep"
+ },
+ {
+  "topic": "Plurals (irregular)",
+  "subtopic": "Plurals (irregular): существительные только во мн. ч. (jeans, scissors)",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 2 · That's me!",
+  "lesson": "2b",
+  "status": "новое",
+  "detail": "shorts, jeans, pyjamas, scissors, clothes, glasses"
+ },
+ {
+  "topic": "Plurals (only plural / collective nouns)",
+  "subtopic": "Plurals (only plural / collective nouns): только мн. ч. — одежда, приборы, инструменты, people, stairs",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2d",
+  "status": "новое",
+  "detail": "clothes, jeans, binoculars, pliers, scissors, arms, congratulations, people, stairs, surroundings"
+ },
+ {
+  "topic": "Plurals (only plural / collective nouns)",
+  "subtopic": "Plurals (only plural / collective nouns): собирательные (team, family, police) — глагол в ед. или мн. ч.",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2d",
+  "status": "новое",
+  "detail": "The team were… / The team was…"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): основное правило — + -s",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 2 · Family moments",
+  "lesson": "",
+  "status": "новое",
+  "detail": "только это правило: pen — pens, book — books"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): основное правило — + -s",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 6 · Home, sweet home!",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "chair — chairs"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): основное правило — + -s",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 2 · That's me!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": "a doll – two dolls"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): основное правило — + -s",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "a car – two cars"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): орфография — + -es после -s, -ss, -sh, -ch, -x, -o",
+  "order": 2,
+  "grade": 3,
+  "module": "Module 6 · Home, sweet home!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "-s, -ss, -o, -x: buses, glasses, potatoes, boxes"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): орфография — + -es после -s, -ss, -sh, -ch, -x, -o",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 2 · That's me!",
+  "lesson": "2b",
+  "status": "расширение",
+  "detail": "добавлены -sh, -ch: toothbrushes, matches"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): орфография — + -es после -s, -ss, -sh, -ch, -x, -o",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "buses, dresses, brushes, benches, boxes, tomatoes"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): орфография — -y → -ies (но гласная + y → -s)",
+  "order": 3,
+  "grade": 3,
+  "module": "Module 6 · Home, sweet home!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "baby — babies, boy — boys"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): орфография — -y → -ies (но гласная + y → -s)",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 2 · That's me!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": "lady – ladies, toy – toys"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): орфография — -y → -ies (но гласная + y → -s)",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "berry – berries, boy – boys"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): орфография — -f/-fe → -ves",
+  "order": 4,
+  "grade": 3,
+  "module": "Module 6 · Home, sweet home!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "shelf — shelves"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): орфография — -f/-fe → -ves",
+  "order": 4,
+  "grade": 5,
+  "module": "Module 2 · That's me!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": "life – lives, scarf – scarves"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): орфография — -f/-fe → -ves",
+  "order": 4,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "leaf – leaves, knife – knives"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): исключения на -o — только -s (photos, videos)",
+  "order": 5,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "новое",
+  "detail": "videos, photos"
+ },
+ {
+  "topic": "Plurals (regular)",
+  "subtopic": "Plurals (regular): произношение окончания -(e)s",
+  "order": 6,
+  "grade": 5,
+  "module": "Module 2 · That's me!",
+  "lesson": "2b",
+  "status": "новое",
+  "detail": "только в оглавлении (Listening & Pronunciation 2b), в справочнике правила нет"
+ },
+ {
+  "topic": "Possessive adjectives",
+  "subtopic": "Possessive adjectives: формы my, your, his, her, its, our, their",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 2 · Family moments",
+  "lesson": "",
+  "status": "новое",
+  "detail": "полная таблица I — my … they — their"
+ },
+ {
+  "topic": "Possessive adjectives",
+  "subtopic": "Possessive adjectives: формы my, your, his, her, its, our, their",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3b",
+  "status": "повторение",
+  "detail": "its — о неодушевлённом"
+ },
+ {
+  "topic": "Possessive adjectives",
+  "subtopic": "Possessive adjectives: формы my, your, his, her, its, our, their",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "1a",
+  "status": "повторение",
+  "detail": "«основная форма»"
+ },
+ {
+  "topic": "Possessive adjectives",
+  "subtopic": "Possessive adjectives: значение — принадлежность и отношения между людьми",
+  "order": 2,
+  "grade": 3,
+  "module": "Module 2 · Family moments",
+  "lesson": "",
+  "status": "новое",
+  "detail": "перед существительным: This is my mother"
+ },
+ {
+  "topic": "Possessive adjectives",
+  "subtopic": "Possessive adjectives: значение — принадлежность и отношения между людьми",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3b",
+  "status": "повторение",
+  "detail": "This is my book / Peter is her father"
+ },
+ {
+  "topic": "Possessive adjectives",
+  "subtopic": "Possessive adjectives: значение — принадлежность и отношения между людьми",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "1a",
+  "status": "повторение",
+  "detail": "This is my bike / Derek is her brother"
+ },
+ {
+  "topic": "Possessive adjectives",
+  "subtopic": "Possessive adjectives: обязательны с частями тела, одеждой, родственниками (vs русский)",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3b",
+  "status": "новое",
+  "detail": "в английском употребляются чаще, чем в русском"
+ },
+ {
+  "topic": "Possessive case ('s)",
+  "subtopic": "Possessive case ('s): 's в ед. ч. — принадлежность",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 4 · Come in and play!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Lulu's rocking horse, the dog's house; только ед. ч."
+ },
+ {
+  "topic": "Possessive case ('s)",
+  "subtopic": "Possessive case ('s): 's в ед. ч. — принадлежность",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4b",
+  "status": "повторение",
+  "detail": "Jim's room, the girl's guitar; 's — для одушевлённых"
+ },
+ {
+  "topic": "Possessive case ('s)",
+  "subtopic": "Possessive case ('s): 's в ед. ч. — принадлежность",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "1a",
+  "status": "повторение",
+  "detail": "Mary's bag; для людей и животных"
+ },
+ {
+  "topic": "Possessive case ('s)",
+  "subtopic": "Possessive case ('s): вопрос Whose?",
+  "order": 2,
+  "grade": 3,
+  "module": "Module 4 · Come in and play!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "кому принадлежит"
+ },
+ {
+  "topic": "Possessive case ('s)",
+  "subtopic": "Possessive case ('s): вопрос Whose?",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4b",
+  "status": "повторение",
+  "detail": "Whose is the guitar? It's Peter's."
+ },
+ {
+  "topic": "Possessive case ('s)",
+  "subtopic": "Possessive case ('s): значение — отношения между людьми",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4b",
+  "status": "новое",
+  "detail": "Linda's sister"
+ },
+ {
+  "topic": "Possessive case ('s)",
+  "subtopic": "Possessive case ('s): значение — отношения между людьми",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "1a",
+  "status": "повторение",
+  "detail": "Tom's uncle"
+ },
+ {
+  "topic": "Possessive case ('s)",
+  "subtopic": "Possessive case ('s): магазины, учреждения, чей-то дом (at the baker's)",
+  "order": 4,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4b",
+  "status": "новое",
+  "detail": "at the chemist's"
+ },
+ {
+  "topic": "Possessive case ('s)",
+  "subtopic": "Possessive case ('s): магазины, учреждения, чей-то дом (at the baker's)",
+  "order": 4,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "1a",
+  "status": "расширение",
+  "detail": "добавлено at Bob's — у Боба дома"
+ },
+ {
+  "topic": "Possessive case ('s)",
+  "subtopic": "Possessive case ('s): имена на -s — 's или только апостроф",
+  "order": 5,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4b",
+  "status": "новое",
+  "detail": "Doris's / Doris' dress"
+ },
+ {
+  "topic": "Possessive case ('s)",
+  "subtopic": "Possessive case ('s): имена на -s — 's или только апостроф",
+  "order": 5,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "1a",
+  "status": "повторение",
+  "detail": "Doris's / Doris' hat"
+ },
+ {
+  "topic": "Possessive case ('s)",
+  "subtopic": "Possessive case ('s): мн. ч. — s' (the boys') и исключения 's (the children's)",
+  "order": 6,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4b",
+  "status": "новое",
+  "detail": "the boys' toys, the women's dresses"
+ },
+ {
+  "topic": "Possessive case ('s)",
+  "subtopic": "Possessive case ('s): мн. ч. — s' (the boys') и исключения 's (the children's)",
+  "order": 6,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "1a",
+  "status": "повторение",
+  "detail": "the girls' room, the children's books"
+ },
+ {
+  "topic": "Possessive case ('s)",
+  "subtopic": "Possessive case ('s): of для неодушевлённых (the windows of the house)",
+  "order": 7,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4b",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Possessive pronouns",
+  "subtopic": "Possessive pronouns: формы mine, yours, his, hers, its, ours, theirs — без существительного",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "1b",
+  "status": "новое",
+  "detail": "This bike is mine"
+ },
+ {
+  "topic": "Possessive pronouns",
+  "subtopic": "Possessive pronouns: my vs mine — сопоставление основной и абсолютной формы",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "1b",
+  "status": "новое",
+  "detail": "my – mine … their – theirs"
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: in, on, under",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 6 · Home, sweet home!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "схемами"
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: in, on, under",
+  "order": 1,
+  "grade": 4,
+  "module": "Module 1 · Family and friends",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: in, on, under",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: in, on, under",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: next to, in front of, behind",
+  "order": 2,
+  "grade": 3,
+  "module": "Module 6 · Home, sweet home!",
+  "lesson": "",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: next to, in front of, behind",
+  "order": 2,
+  "grade": 4,
+  "module": "Module 1 · Family and friends",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: next to, in front of, behind",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: next to, in front of, behind",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": "beside/next to"
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: opposite, between",
+  "order": 3,
+  "grade": 4,
+  "module": "Module 1 · Family and friends",
+  "lesson": "",
+  "status": "новое",
+  "detail": "новые в 4 кл."
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: opposite, between",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: near, beside",
+  "order": 4,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2b",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: at — at school/work/home, в адресах",
+  "order": 5,
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3c",
+  "status": "новое",
+  "detail": "at 20, Oxford Street"
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: at — at school/work/home, в адресах",
+  "order": 5,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: in — устойчивые выражения (in bed, in hospital, in the sky, in a picture)",
+  "order": 6,
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3c",
+  "status": "новое",
+  "detail": "in the middle, in the air, in prison, in a newspaper"
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: in — устойчивые выражения (in bed, in hospital, in the sky, in a picture)",
+  "order": 6,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: in — города, страны, континенты",
+  "order": 7,
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3c",
+  "status": "новое",
+  "detail": "in Athens, in England, in Europe"
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: in — города, страны, континенты",
+  "order": 7,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: on — on the left/right, on the first floor",
+  "order": 8,
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of place",
+  "subtopic": "Prepositions of place: on — on the left/right, on the first floor",
+  "order": 8,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: at — время, праздники, at night/at noon/at the weekend",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 8 · Day by day",
+  "lesson": "",
+  "status": "новое",
+  "detail": "at 4 o'clock, at Christmas, at noon, at night, at the weekend"
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: at — время, праздники, at night/at noon/at the weekend",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 6 · Round the clock",
+  "lesson": "6a",
+  "status": "расширение",
+  "detail": "добавлены at Easter, at the moment, at present, at dawn, at midnight"
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: at — время, праздники, at night/at noon/at the weekend",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: on — дни недели и праздничные дни",
+  "order": 2,
+  "grade": 3,
+  "module": "Module 8 · Day by day",
+  "lesson": "",
+  "status": "новое",
+  "detail": "on Monday"
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: on — дни недели и праздничные дни",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 6 · Round the clock",
+  "lesson": "6a",
+  "status": "повторение",
+  "detail": "on Monday, on New Year's Day"
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: on — дни недели и праздничные дни",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: on — даты, день недели + часть дня, on a hot day",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 6 · Round the clock",
+  "lesson": "6a",
+  "status": "новое",
+  "detail": "on 6th May, on Tuesday evening, on a hot day"
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: on — даты, день недели + часть дня, on a hot day",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: in — части суток (in the morning/afternoon/evening)",
+  "order": 4,
+  "grade": 3,
+  "module": "Module 8 · Day by day",
+  "lesson": "",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: in — части суток (in the morning/afternoon/evening)",
+  "order": 4,
+  "grade": 5,
+  "module": "Module 6 · Round the clock",
+  "lesson": "6a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: in — части суток (in the morning/afternoon/evening)",
+  "order": 4,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: in — месяцы, времена года, годы, века",
+  "order": 5,
+  "grade": 5,
+  "module": "Module 6 · Round the clock",
+  "lesson": "6a",
+  "status": "новое",
+  "detail": "in September, in the winter, in 1996, in the 20th century"
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: in — месяцы, времена года, годы, века",
+  "order": 5,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: in = «через» (in an hour, in a week)",
+  "order": 6,
+  "grade": 5,
+  "module": "Module 6 · Round the clock",
+  "lesson": "6a",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Prepositions of time",
+  "subtopic": "Prepositions of time: in = «через» (in an hour, in a week)",
+  "order": 6,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Quantifiers",
+  "subtopic": "Quantifiers: a few/few vs a little/little",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2b",
+  "status": "новое",
+  "detail": "исч. мн. ч. / неисч.; very few, very little"
+ },
+ {
+  "topic": "Quantifiers",
+  "subtopic": "Quantifiers: a lot of / lots of",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2b",
+  "status": "новое",
+  "detail": "исч. мн. ч. и неисч., обычно в утверждениях"
+ },
+ {
+  "topic": "Quantifiers",
+  "subtopic": "Quantifiers: much/many — отрицания и вопросы",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2b",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Quantifiers",
+  "subtopic": "Quantifiers: every vs each",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "every — вся группа, each — по отдельности; each — о двух, every — о трёх+"
+ },
+ {
+  "topic": "Quantifiers",
+  "subtopic": "Quantifiers: a couple of, several + исчисляемые мн. ч.",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Quantifiers",
+  "subtopic": "Quantifiers: a great deal of, plenty of",
+  "order": 6,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "a great deal of + неисч.; plenty of + исч./неисч."
+ },
+ {
+  "topic": "Quantifiers",
+  "subtopic": "Quantifiers: hardly any",
+  "order": 7,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "отсылка к Indefinite pronouns"
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: формы myself … themselves",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 10 · Healthy body, healthy mind",
+  "lesson": "",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: формы myself … themselves",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: формы myself … themselves",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: подлежащее = дополнение (cut himself)",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 10 · Healthy body, healthy mind",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Tim cut himself"
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: подлежащее = дополнение (cut himself)",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6d",
+  "status": "расширение",
+  "detail": "добавлен список: behave, burn, cut, enjoy, hurt, kill, look at, laugh at, introduce, dry, teach"
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: подлежащее = дополнение (cut himself)",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: эмфатическое — «сам» (She will cut the cake herself)",
+  "order": 3,
+  "grade": 7,
+  "module": "Module 10 · Healthy body, healthy mind",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Karen will cut the cake herself"
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: эмфатическое — «сам» (She will cut the cake herself)",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6d",
+  "status": "повторение",
+  "detail": "только Do it yourself; в ToC «emphatic pronouns», в справочнике не описано"
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: by myself — «сам, в одиночку»",
+  "order": 4,
+  "grade": 7,
+  "module": "Module 10 · Healthy body, healthy mind",
+  "lesson": "",
+  "status": "новое",
+  "detail": "He did the shopping by himself"
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: by myself — «сам, в одиночку»",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: by myself — «сам, в одиночку»",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "= alone, on my own"
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: глаголы без возвратного местоимения (wash, dress, meet)",
+  "order": 5,
+  "grade": 7,
+  "module": "Module 10 · Healthy body, healthy mind",
+  "lesson": "",
+  "status": "новое",
+  "detail": "dress, wash, hide"
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: глаголы без возвратного местоимения (wash, dress, meet)",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6d",
+  "status": "расширение",
+  "detail": "добавлены shave, undress, afford, complain, meet, wake up; исключение — маленькие дети/животные"
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: глаголы без возвратного местоимения (wash, dress, meet)",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "",
+  "status": "расширение",
+  "detail": "добавлены rest, relax, stand up, get up, sit down"
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: после be, feel, look, seem",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: после be, feel, look, seem",
+  "order": 6,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "Helen doesn't seem herself lately"
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: после предлогов (но не предлогов места)",
+  "order": 7,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6d",
+  "status": "новое",
+  "detail": "behind you"
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: после предлогов (но не предлогов места)",
+  "order": 7,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "take care of yourself; behind you, NOT behind yourself"
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: устойчивые выражения (Enjoy yourself!, Help yourself, Make yourself at home)",
+  "order": 8,
+  "grade": 9,
+  "module": "Module 6 · Town & Community",
+  "lesson": "6d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Reflexive pronouns",
+  "subtopic": "Reflexive pronouns: устойчивые выражения (Enjoy yourself!, Help yourself, Make yourself at home)",
+  "order": 8,
+  "grade": 11,
+  "module": "Module 4 · Danger!",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a few — с исчисляемыми мн. ч. («несколько»)",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8b",
+  "status": "новое",
+  "detail": "There are a few eggs"
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a few — с исчисляемыми мн. ч. («несколько»)",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 9 · Food & refreshments",
+  "lesson": "9a",
+  "status": "повторение",
+  "detail": "в утверждениях, вопросах и отрицаниях"
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a few — с исчисляемыми мн. ч. («несколько»)",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a few — с исчисляемыми мн. ч. («несколько»)",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a few — с исчисляемыми мн. ч. («несколько»)",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a few — с исчисляемыми мн. ч. («несколько»)",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a little — с неисчисляемыми («немного»)",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8b",
+  "status": "новое",
+  "detail": "Put a little sugar"
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a little — с неисчисляемыми («немного»)",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 9 · Food & refreshments",
+  "lesson": "9a",
+  "status": "повторение",
+  "detail": "There is a little water"
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a little — с неисчисляемыми («немного»)",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a little — с неисчисляемыми («немного»)",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a little — с неисчисляемыми («немного»)",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a little — с неисчисляемыми («немного»)",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: few / little — «мало»",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8b",
+  "status": "новое",
+  "detail": "We have got few tomatoes. There is little milk."
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: few / little — «мало»",
+  "order": 3,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: few / little — «мало»",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: few / little — «мало»",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: few / little — «мало»",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a few vs few, a little vs little — «немного, но достаточно» vs «почти нет»",
+  "order": 4,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8b",
+  "status": "новое",
+  "detail": "противопоставление по значению"
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a few vs few, a little vs little — «немного, но достаточно» vs «почти нет»",
+  "order": 4,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a few vs few, a little vs little — «немного, но достаточно» vs «почти нет»",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "расширение",
+  "detail": "формулировка «немного, но достаточно / почти нет»"
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a few vs few, a little vs little — «немного, но достаточно» vs «почти нет»",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a few vs few, a little vs little — «немного, но достаточно» vs «почти нет»",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: very few / very little",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: very few / very little",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: very few / very little",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a few/a little",
+  "subtopic": "a few/a little: a little + прилагательное (a little cold)",
+  "order": 6,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "It's a little cold"
+ },
+ {
+  "topic": "a/an",
+  "subtopic": "a/an: неопределённый артикль — только с исчисляемыми в ед. ч.",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 4 · Come in and play!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "the не дан"
+ },
+ {
+  "topic": "a/an",
+  "subtopic": "a/an: неопределённый артикль — только с исчисляемыми в ед. ч.",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 1 · School days",
+  "lesson": "1a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a/an",
+  "subtopic": "a/an: a перед согласной, an перед гласной",
+  "order": 2,
+  "grade": 3,
+  "module": "Module 4 · Come in and play!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "a ball, an elephant"
+ },
+ {
+  "topic": "a/an",
+  "subtopic": "a/an: a перед согласной, an перед гласной",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 1 · School days",
+  "lesson": "1a",
+  "status": "повторение",
+  "detail": "правило по букве (a, e, i, o, u)"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: some — в утверждениях (неисчисляемые и мн. ч.)",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 3 · All the things I like!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "There is some cheese / There are some apples"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: some — в утверждениях (неисчисляемые и мн. ч.)",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8b",
+  "status": "повторение",
+  "detail": "There are some pencils / There is some jam"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: some — в утверждениях (неисчисляемые и мн. ч.)",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": "I've got some money / some books"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: some — в утверждениях (неисчисляемые и мн. ч.)",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "We need some bananas and some milk"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: any — в отрицаниях",
+  "order": 2,
+  "grade": 3,
+  "module": "Module 3 · All the things I like!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "There aren't any eggs / isn't any water"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: any — в отрицаниях",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8b",
+  "status": "повторение",
+  "detail": "There aren't any pencils / isn't any jam"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: any — в отрицаниях",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": "No, I haven't got any money"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: any — в отрицаниях",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: any — в вопросах",
+  "order": 3,
+  "grade": 3,
+  "module": "Module 3 · All the things I like!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Are there any biscuits? Is there any chocolate?"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: any — в вопросах",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8b",
+  "status": "повторение",
+  "detail": "Are there any pencils? Is there any jam?"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: any — в вопросах",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": "Have you got any money?"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: any — в вопросах",
+  "order": 3,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: some в вопросах — просьба и предложение",
+  "order": 4,
+  "grade": 3,
+  "module": "Module 3 · All the things I like!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "только просьба: Can I have some milk, please?"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: some в вопросах — просьба и предложение",
+  "order": 4,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8b",
+  "status": "повторение",
+  "detail": "только в примере: Can I have some water, please?"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: some в вопросах — просьба и предложение",
+  "order": 4,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2b",
+  "status": "расширение",
+  "detail": "добавлено предложение: Would you like some coffee?"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: some в вопросах — просьба и предложение",
+  "order": 4,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "Would you like some tea? / Can I have some apple juice?"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: a/an vs some/any — исчисляемые ед. ч. во всех типах предложений",
+  "order": 5,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8b",
+  "status": "новое",
+  "detail": "There is an apple / There isn't an apple / Is there an apple?"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: a/an vs some/any — исчисляемые ед. ч. во всех типах предложений",
+  "order": 5,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "a/an во всех типах предложений с исч. ед. ч."
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: перевод some — «несколько» / «немного» / не переводится",
+  "order": 6,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8b",
+  "status": "новое",
+  "detail": "перед неисч. не переводится, перед исч. — «несколько»"
+ },
+ {
+  "topic": "a/an/some/any",
+  "subtopic": "a/an/some/any: перевод some — «несколько» / «немного» / не переводится",
+  "order": 6,
+  "grade": 6,
+  "module": "Module 2 · Here we are!",
+  "lesson": "2b",
+  "status": "повторение",
+  "detail": "some bread — немного хлеба, some apples — несколько яблок"
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: a lot of / lots of — в утверждениях (исчисляемые и неисчисляемые)",
+  "order": 1,
+  "grade": 4,
+  "module": "Module 3 · Tasty treats",
+  "lesson": "",
+  "status": "новое",
+  "detail": "She's got a lot of friends. There is a lot of cheese"
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: a lot of / lots of — в утверждениях (исчисляемые и неисчисляемые)",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: a lot of / lots of — в утверждениях (исчисляемые и неисчисляемые)",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 9 · Food & refreshments",
+  "lesson": "9a",
+  "status": "расширение",
+  "detail": "добавлено lots of"
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: a lot of / lots of — в утверждениях (исчисляемые и неисчисляемые)",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: a lot of / lots of — в утверждениях (исчисляемые и неисчисляемые)",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: a lot of / lots of — в утверждениях (исчисляемые и неисчисляемые)",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: much/many — отрицание",
+  "order": 2,
+  "grade": 4,
+  "module": "Module 3 · Tasty treats",
+  "lesson": "",
+  "status": "новое",
+  "detail": "There isn't much butter / aren't many apples"
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: much/many — отрицание",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: much/many — отрицание",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 9 · Food & refreshments",
+  "lesson": "9a",
+  "status": "повторение",
+  "detail": "There isn't much sugar / aren't many books"
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: much/many — отрицание",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: much/many — отрицание",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: much/many — отрицание",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: much/many — вопросы",
+  "order": 3,
+  "grade": 4,
+  "module": "Module 3 · Tasty treats",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Is there much sugar? Are there many girls?"
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: much/many — вопросы",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: much/many — вопросы",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 9 · Food & refreshments",
+  "lesson": "9a",
+  "status": "повторение",
+  "detail": "Are there many books on the shelf?"
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: much/many — вопросы",
+  "order": 3,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: much/many — вопросы",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: much/many — вопросы",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: How much? / How many?",
+  "order": 4,
+  "grade": 4,
+  "module": "Module 3 · Tasty treats",
+  "lesson": "",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: How much? / How many?",
+  "order": 4,
+  "grade": 5,
+  "module": "Module 8 · Special days",
+  "lesson": "8b",
+  "status": "повторение",
+  "detail": "How much sugar have you got?"
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: How much? / How many?",
+  "order": 4,
+  "grade": 6,
+  "module": "Module 9 · Food & refreshments",
+  "lesson": "9a",
+  "status": "повторение",
+  "detail": "How much money…? How many boys…?"
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: краткие ответы и a lot / lots без существительного",
+  "order": 5,
+  "grade": 4,
+  "module": "Module 3 · Tasty treats",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Not much. / Not many. / A lot."
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: краткие ответы и a lot / lots без существительного",
+  "order": 5,
+  "grade": 7,
+  "module": "Module 9 · Shopping time",
+  "lesson": "",
+  "status": "расширение",
+  "detail": "добавлено: of опускается — Yes, there's a lot / lots"
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: краткие ответы и a lot / lots без существительного",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "There's lots going on"
+ },
+ {
+  "topic": "much/many/a lot of",
+  "subtopic": "much/many/a lot of: краткие ответы и a lot / lots без существительного",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": "There's lots/a lot going on"
+ }
+]

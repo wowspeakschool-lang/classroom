@@ -1,0 +1,2332 @@
+[
+ {
+  "topic": "Question words",
+  "subtopic": "Question words: Whose? — чья вещь",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 4 · Come in and play!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "только whose (Whose is this doll?), в разделе Possessive case"
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: значение — never, sometimes, usually, often, always",
+  "order": 1,
+  "grade": 4,
+  "module": "Module 2 · A working day",
+  "lesson": "",
+  "status": "новое",
+  "detail": "never, sometimes, usually, often, always; с Present Simple"
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: место — перед смысловым глаголом, после be",
+  "order": 2,
+  "grade": 4,
+  "module": "Module 2 · A working day",
+  "lesson": "",
+  "status": "новое",
+  "detail": "только примерами: перед смысловым глаголом и после is; правило не сформулировано"
+ },
+ {
+  "topic": "Question words",
+  "subtopic": "Question words: How much? / How many?",
+  "order": 2,
+  "grade": 4,
+  "module": "Module 3 · Tasty treats",
+  "lesson": "",
+  "status": "новое",
+  "detail": "How much — неисчисляемые, How many — исчисляемые; в разделе Much/Many/A lot of"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: сравнительная степень — -er + than",
+  "order": 1,
+  "grade": 4,
+  "module": "Module 4 · At the zoo!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "small — smaller; + than при сравнении"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: сравнительная степень — more (многосложные)",
+  "order": 2,
+  "grade": 4,
+  "module": "Module 4 · At the zoo!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "beautiful — more beautiful"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: орфография -er/-est (удвоение, -e, y → i)",
+  "order": 3,
+  "grade": 4,
+  "module": "Module 4 · At the zoo!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "nice — nicer, thin — thinner, funny — funnier; только для -er"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: двусложные на -y/-er/-ow — -er/-est",
+  "order": 7,
+  "grade": 4,
+  "module": "Module 4 · At the zoo!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "только на -y: busy — busier"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: превосходная степень — the -est + of/in",
+  "order": 4,
+  "grade": 4,
+  "module": "Module 7 · Days to remember",
+  "lesson": "",
+  "status": "новое",
+  "detail": "tall — tallest; the + … + of/in, сравнение 3+"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: превосходная степень — the most",
+  "order": 5,
+  "grade": 4,
+  "module": "Module 7 · Days to remember",
+  "lesson": "",
+  "status": "новое",
+  "detail": "interesting — most interesting"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: орфография -er/-est (удвоение, -e, y → i)",
+  "order": 3,
+  "grade": 4,
+  "module": "Module 7 · Days to remember",
+  "lesson": "",
+  "status": "расширение",
+  "detail": "добавлено -est: nicest, happiest, biggest"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: неправильные прилагательные (good, bad, many/much, little)",
+  "order": 6,
+  "grade": 4,
+  "module": "Module 7 · Days to remember",
+  "lesson": "",
+  "status": "новое",
+  "detail": "только good — better — best, bad — worse — worst"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: двусложные на -y/-er/-ow — -er/-est",
+  "order": 7,
+  "grade": 4,
+  "module": "Module 7 · Days to remember",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "tasty — tastiest"
+ },
+ {
+  "topic": "Question words",
+  "subtopic": "Question words: who / what / where / when / why / how",
+  "order": 3,
+  "grade": 4,
+  "module": "Module 8 · Places to go",
+  "lesson": "",
+  "status": "новое",
+  "detail": "who, what, where, when, why, how — впервые как раздел"
+ },
+ {
+  "topic": "Alternative questions",
+  "subtopic": "Alternative questions: образование (общий вопрос + or) — be, have got",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 1 · School days",
+  "lesson": "1b",
+  "status": "новое",
+  "detail": "to be, have got (Are you a teacher or a doctor?)"
+ },
+ {
+  "topic": "Alternative questions",
+  "subtopic": "Alternative questions: в Present Simple (do/does … or …)",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 1 · School days",
+  "lesson": "1b",
+  "status": "новое",
+  "detail": "Does he work or does he go to school?"
+ },
+ {
+  "topic": "Alternative questions",
+  "subtopic": "Alternative questions: в Present Simple (do/does … or …)",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 5 · World animals",
+  "lesson": "5b",
+  "status": "повторение",
+  "detail": "Does Ann walk her dog in the morning or in the afternoon?"
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: образование — вспомогательный глагол + местоимение (do/does)",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 5 · World animals",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "Present Simple: don't you?"
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: с be и модальными глаголами (isn't she, can't she)",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 5 · World animals",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "is / can: isn't she, can't she"
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: утверждение → отрицательный хвост, отрицание → утвердительный",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 5 · World animals",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "This is…, isn't it? / He doesn't…, does he?"
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: there is → is there?",
+  "order": 4,
+  "grade": 5,
+  "module": "Module 5 · World animals",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "There is no TV…, is there?"
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: значение — never, sometimes, usually, often, always",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 6 · Round the clock",
+  "lesson": "6a",
+  "status": "повторение",
+  "detail": "never, sometimes, often, usually, always"
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: место — перед смысловым глаголом, после be",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 6 · Round the clock",
+  "lesson": "6a",
+  "status": "расширение",
+  "detail": "правило сформулировано: перед смысловым, после to be"
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: место — после вспомогательных и модальных глаголов",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 6 · Round the clock",
+  "lesson": "6a",
+  "status": "новое",
+  "detail": "He doesn't often read; He can never sleep"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: наречия — -er/-est (hard, fast, early)",
+  "order": 10,
+  "grade": 5,
+  "module": "Module 6 · Round the clock",
+  "lesson": "",
+  "status": "новое",
+  "detail": "fast, early, late, high, near: hard – harder – hardest"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: наречия — more/most (slowly)",
+  "order": 11,
+  "grade": 5,
+  "module": "Module 6 · Round the clock",
+  "lesson": "",
+  "status": "новое",
+  "detail": "slowly – more slowly – most slowly"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: неправильные наречия (well, badly)",
+  "order": 12,
+  "grade": 5,
+  "module": "Module 6 · Round the clock",
+  "lesson": "",
+  "status": "новое",
+  "detail": "well – better – best, badly – worse – worst"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: неправильные прилагательные (good, bad, many/much, little)",
+  "order": 6,
+  "grade": 5,
+  "module": "Module 6 · Round the clock",
+  "lesson": "",
+  "status": "расширение",
+  "detail": "добавлены much/many/lots – more – most, little – less – least"
+ },
+ {
+  "topic": "Impersonal it",
+  "subtopic": "Impersonal it: время и расстояние",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 7 · In all weathers",
+  "lesson": "7a",
+  "status": "новое",
+  "detail": "It is 6 o'clock. It's late. It is five miles from here."
+ },
+ {
+  "topic": "Impersonal it",
+  "subtopic": "Impersonal it: погода и явления природы",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 7 · In all weathers",
+  "lesson": "7a",
+  "status": "новое",
+  "detail": "It's freezing."
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: образование — вспомогательный глагол + местоимение (do/does)",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 7 · In all weathers",
+  "lesson": "7a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: с be и модальными глаголами (isn't she, can't she)",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 7 · In all weathers",
+  "lesson": "7a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: утверждение → отрицательный хвост, отрицание → утвердительный",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 7 · In all weathers",
+  "lesson": "7a",
+  "status": "повторение",
+  "detail": "повторение правил 5c, нового нет"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: сравнительная степень — -er + than",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 7 · In all weathers",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "Ben is taller than Emma"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: сравнительная степень — more (многосложные)",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 7 · In all weathers",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "more beautiful"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: орфография -er/-est (удвоение, -e, y → i)",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 7 · In all weathers",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "big – bigger, wise – wiser, sunny – sunnier"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: превосходная степень — the -est + of/in",
+  "order": 4,
+  "grade": 5,
+  "module": "Module 7 · In all weathers",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "the + -est + of/in; артикль относится к существительному"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: превосходная степень — the most",
+  "order": 5,
+  "grade": 5,
+  "module": "Module 7 · In all weathers",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "the most beautiful"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: неправильные прилагательные (good, bad, many/much, little)",
+  "order": 6,
+  "grade": 5,
+  "module": "Module 7 · In all weathers",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "good, bad, many/much, little"
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: значение — never, sometimes, usually, often, always",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 4 · Day after day",
+  "lesson": "4a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: seldom / rarely",
+  "order": 4,
+  "grade": 6,
+  "module": "Module 4 · Day after day",
+  "lesson": "4a",
+  "status": "новое",
+  "detail": "seldom, rarely"
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: место — перед смысловым глаголом, после be",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 4 · Day after day",
+  "lesson": "4a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: место — после вспомогательных и модальных глаголов",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 4 · Day after day",
+  "lesson": "4a",
+  "status": "повторение",
+  "detail": "He can never wake up…"
+ },
+ {
+  "topic": "Linkers",
+  "subtopic": "Linkers: слова-связки времени (and, then, after that, when, before, later)",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 4 · Day after day",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "and, then, after that, when, before, later; because/so в справочнике нет"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: сравнительная степень — -er + than",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 8 · Rules & regulations",
+  "lesson": "8b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: сравнительная степень — more (многосложные)",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 8 · Rules & regulations",
+  "lesson": "8b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: орфография -er/-est (удвоение, -e, y → i)",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 8 · Rules & regulations",
+  "lesson": "8b",
+  "status": "повторение",
+  "detail": "safe – safer, early – earlier, big – bigger"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: превосходная степень — the -est + of/in",
+  "order": 4,
+  "grade": 6,
+  "module": "Module 8 · Rules & regulations",
+  "lesson": "8b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: превосходная степень — the most",
+  "order": 5,
+  "grade": 6,
+  "module": "Module 8 · Rules & regulations",
+  "lesson": "8b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: неправильные прилагательные (good, bad, many/much, little)",
+  "order": 6,
+  "grade": 6,
+  "module": "Module 8 · Rules & regulations",
+  "lesson": "8b",
+  "status": "повторение",
+  "detail": "good, bad, many/much, little"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: двусложные на -y/-er/-ow — -er/-est",
+  "order": 7,
+  "grade": 6,
+  "module": "Module 8 · Rules & regulations",
+  "lesson": "8b",
+  "status": "расширение",
+  "detail": "добавлены двусложные на -er (pretty, …-er)"
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: who(m) / which / that — люди и предметы",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 3 · Profiles",
+  "lesson": "",
+  "status": "новое",
+  "detail": "who(m)/that — люди, which/that — предметы"
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: whose — принадлежность",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 3 · Profiles",
+  "lesson": "",
+  "status": "новое",
+  "detail": "whose — люди, животные, предметы; не опускается"
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: опущение who/which/that (дополнение vs подлежащее)",
+  "order": 3,
+  "grade": 7,
+  "module": "Module 3 · Profiles",
+  "lesson": "",
+  "status": "новое",
+  "detail": "можно опустить, если дополнение; нельзя — если подлежащее"
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: относительные наречия when / where / why",
+  "order": 4,
+  "grade": 7,
+  "module": "Module 3 · Profiles",
+  "lesson": "",
+  "status": "новое",
+  "detail": "when/that, where, why (после reason)"
+ },
+ {
+  "topic": "Adjectives -ed/-ing",
+  "subtopic": "Adjectives -ed/-ing: -ing — каков предмет/явление (amazing)",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 3 · Profiles",
+  "lesson": "",
+  "status": "новое",
+  "detail": "amazing"
+ },
+ {
+  "topic": "Adjectives -ed/-ing",
+  "subtopic": "Adjectives -ed/-ing: -ed — что чувствует человек (amazed)",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 3 · Profiles",
+  "lesson": "",
+  "status": "новое",
+  "detail": "shocked, amazed"
+ },
+ {
+  "topic": "Adjectives (general)",
+  "subtopic": "Adjectives: не изменяются по числам",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 3 · Profiles",
+  "lesson": "",
+  "status": "новое",
+  "detail": "a small car – small cars"
+ },
+ {
+  "topic": "Adjectives (general)",
+  "subtopic": "Adjectives: место — перед существительным, после be / look, smell, sound, feel, taste",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 3 · Profiles",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Mary is young. You look tired."
+ },
+ {
+  "topic": "Adjectives (general)",
+  "subtopic": "Adjectives: мнение vs объективные характеристики",
+  "order": 3,
+  "grade": 7,
+  "module": "Module 3 · Profiles",
+  "lesson": "",
+  "status": "новое",
+  "detail": "beautiful, good vs long, strong, young"
+ },
+ {
+  "topic": "Adjectives (order)",
+  "subtopic": "Adjectives (order): мнение перед объективными характеристиками",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 3 · Profiles",
+  "lesson": "",
+  "status": "новое",
+  "detail": "a colourful summer dress; обычно не более трёх"
+ },
+ {
+  "topic": "Adjectives (order)",
+  "subtopic": "Adjectives (order): размер – возраст – форма – цвет – происхождение – материал",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 3 · Profiles",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Size, Age, Shape, Colour, Origin, Material; узор не выделен"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: сравнительная степень — -er + than",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: сравнительная степень — more (многосложные)",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: орфография -er/-est (удвоение, -e, y → i)",
+  "order": 3,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "wide – wider, big – bigger, ugly – uglier"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: превосходная степень — the -est + of/in",
+  "order": 4,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: превосходная степень — the most",
+  "order": 5,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: неправильные прилагательные (good, bad, many/much, little)",
+  "order": 6,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: двусложные на -y/-er/-ow — -er/-est",
+  "order": 7,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "расширение",
+  "detail": "добавлены на -ow (narrow – narrower)"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: прилагательные с двумя способами (clever, quiet, friendly…)",
+  "order": 8,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "новое",
+  "detail": "clever, common, cruel, friendly, gentle, pleasant, polite, simple, stupid, quiet"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: far — farther/further, old — elder/eldest",
+  "order": 9,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "новое",
+  "detail": "far – farther/further; old – older/elder"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: наречия — -er/-est (hard, fast, early)",
+  "order": 10,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "расширение",
+  "detail": "расширенный список: free, low, deep, long, right, wrong, straight"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: наречия — more/most (slowly)",
+  "order": 11,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "slowly"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: неправильные наречия (well, badly)",
+  "order": 12,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "good/well, bad/badly"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: as … as / not as (so) … as",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "новое",
+  "detail": "as … as, not as/so … as"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: less … than / the least … of/in",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "новое",
+  "detail": "less … than / more … than; the least / the most … of/in"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: much/a lot/far/a bit/slightly + comparative",
+  "order": 3,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "новое",
+  "detail": "much/a lot/far/a little/a bit/slightly"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: the + comparative …, the + comparative",
+  "order": 4,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "новое",
+  "detail": "The harder she studies, the more easily…"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: comparative and comparative (shorter and shorter)",
+  "order": 5,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "новое",
+  "detail": "shorter and shorter"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: by far + the superlative",
+  "order": 6,
+  "grade": 7,
+  "module": "Module 7 · In the spotlight",
+  "lesson": "",
+  "status": "новое",
+  "detail": "by far + the + superlative"
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: образование — вспомогательный глагол + местоимение (do/does)",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 8 · Green issues",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "isn't he, haven't you"
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: с be и модальными глаголами (isn't she, can't she)",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 8 · Green issues",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "can't she"
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: утверждение → отрицательный хвост, отрицание → утвердительный",
+  "order": 3,
+  "grade": 7,
+  "module": "Module 8 · Green issues",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: never/hardly/seldom/rarely → утвердительный хвост",
+  "order": 5,
+  "grade": 7,
+  "module": "Module 8 · Green issues",
+  "lesson": "",
+  "status": "новое",
+  "detail": "You never listen…, do you?"
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: шкала частотности в % (always 100% … never 0%)",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1c",
+  "status": "новое",
+  "detail": "always 100%, usually 75%, often 50%, sometimes 25%, never 0%"
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: место — перед смысловым глаголом, после be",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: место — после вспомогательных и модальных глаголов",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1c",
+  "status": "повторение",
+  "detail": "после вспомогательных"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: сравнительная степень — -er + than",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: сравнительная степень — more (многосложные)",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1d",
+  "status": "повторение",
+  "detail": "sociable"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: орфография -er/-est (удвоение, -e, y → i)",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1d",
+  "status": "повторение",
+  "detail": "hot – hotter, easy – easier"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: превосходная степень — the -est + of/in",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1d",
+  "status": "повторение",
+  "detail": "the youngest of…, the funniest … in"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: превосходная степень — the most",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: неправильные прилагательные (good, bad, many/much, little)",
+  "order": 6,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: прилагательные с двумя способами (clever, quiet, friendly…)",
+  "order": 8,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1d",
+  "status": "повторение",
+  "detail": "clever, cruel, friendly, gentle, narrow, quiet, shallow, simple"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: far — farther/further, old — elder/eldest",
+  "order": 9,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1d",
+  "status": "расширение",
+  "detail": "farther — расстояние / further — время (further information); elder/eldest — члены семьи"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: наречия — -er/-est (hard, fast, early)",
+  "order": 10,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1d",
+  "status": "повторение",
+  "detail": "hard, fast, early, late…"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: наречия — more/most (slowly)",
+  "order": 11,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1d",
+  "status": "повторение",
+  "detail": "quickly, slowly, easily"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: неправильные наречия (well, badly)",
+  "order": 12,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Adverbs of degree",
+  "subtopic": "Adverbs of degree: сильная степень — really, very, extremely",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1d",
+  "status": "новое",
+  "detail": "место — перед прил./нареч.; really, very, extremely"
+ },
+ {
+  "topic": "Adverbs of degree",
+  "subtopic": "Adverbs of degree: средняя степень — pretty, quite, rather",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1d",
+  "status": "новое",
+  "detail": "pretty, quite, rather"
+ },
+ {
+  "topic": "Adverbs of degree",
+  "subtopic": "Adverbs of degree: слабая степень — a little, a bit",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 1 · Socialising",
+  "lesson": "1d",
+  "status": "новое",
+  "detail": "a little, a bit"
+ },
+ {
+  "topic": "Adjectives (order)",
+  "subtopic": "Adjectives (order): мнение перед объективными характеристиками",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2e",
+  "status": "повторение",
+  "detail": "nice, strange; good, practical, bad"
+ },
+ {
+  "topic": "Adjectives (order)",
+  "subtopic": "Adjectives (order): размер – возраст – форма – цвет – происхождение – материал",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2e",
+  "status": "повторение",
+  "detail": "huge, old, round, dark pink, Italian, leather"
+ },
+ {
+  "topic": "Adjectives (order)",
+  "subtopic": "Adjectives (order): узор (pattern) в порядке прилагательных",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 2 · Food & Shopping",
+  "lesson": "2e",
+  "status": "новое",
+  "detail": "striped, checked, floral — между цветом и происхождением"
+ },
+ {
+  "topic": "too / enough",
+  "subtopic": "too / enough: too + прил./нареч. — чрезмерность",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4b",
+  "status": "новое",
+  "detail": "too busy"
+ },
+ {
+  "topic": "too / enough",
+  "subtopic": "too / enough: прил./нареч. + enough — достаточность",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4b",
+  "status": "новое",
+  "detail": "well enough, not old enough"
+ },
+ {
+  "topic": "too / enough",
+  "subtopic": "too / enough: enough / not enough + существительное",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4b",
+  "status": "новое",
+  "detail": "enough time, not enough chairs"
+ },
+ {
+  "topic": "too / enough",
+  "subtopic": "too / enough: too … / … enough + to-infinitive",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 4 · Be Yourself",
+  "lesson": "4b",
+  "status": "новое",
+  "detail": "только в примерах: too busy to see you, not old enough to drive"
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: шкала частотности в % (always 100% … never 0%)",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: место — перед смысловым глаголом, после be",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: место — после вспомогательных и модальных глаголов",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1c",
+  "status": "повторение",
+  "detail": "He has never travelled abroad"
+ },
+ {
+  "topic": "Exclamations",
+  "subtopic": "Exclamations: How + прил./нареч.!",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1c",
+  "status": "новое",
+  "detail": "How tall she is! How carefully he drives!"
+ },
+ {
+  "topic": "Exclamations",
+  "subtopic": "Exclamations: What a/an (+ прил.) + исчисл. сущ. ед. ч.!",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1c",
+  "status": "новое",
+  "detail": "What a pretty baby! What an amazing story!"
+ },
+ {
+  "topic": "Exclamations",
+  "subtopic": "Exclamations: What (+ прил.) + неисчисл. / мн. ч.!",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1c",
+  "status": "новое",
+  "detail": "What horrible weather! (NOT What a horrible weather)"
+ },
+ {
+  "topic": "Exclamations",
+  "subtopic": "Exclamations: отрицательный вопрос (Isn't it great…!)",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1c",
+  "status": "новое",
+  "detail": "Isn't it great to be here!"
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: who(m) / which / that — люди и предметы",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: whose — принадлежность",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: опущение who/which/that (дополнение vs подлежащее)",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1d",
+  "status": "повторение",
+  "detail": "The woman (who) you met…"
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: относительные наречия when / where / why",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1d",
+  "status": "повторение",
+  "detail": "when/that, where, why"
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: defining vs non-defining (запятые, без that)",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1d",
+  "status": "новое",
+  "detail": "с запятыми / без, that только в defining"
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: which, относящееся ко всему предложению",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1d",
+  "status": "новое",
+  "detail": "…, which she doesn't like"
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: of which / whose для предметов",
+  "order": 7,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1d",
+  "status": "новое",
+  "detail": "That's the book of which/whose (the) first page is missing"
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: some of / most of + whom/which/whose",
+  "order": 8,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1d",
+  "status": "новое",
+  "detail": "some of / many of / most of / half of"
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: that не после запятой и не после предлога",
+  "order": 9,
+  "grade": 9,
+  "module": "Module 1 · Celebrations",
+  "lesson": "1d",
+  "status": "новое",
+  "detail": "The person to whom you were speaking…"
+ },
+ {
+  "topic": "too / enough",
+  "subtopic": "too / enough: too + прил./нареч. — чрезмерность",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "too / enough",
+  "subtopic": "too / enough: прил./нареч. + enough — достаточность",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "too / enough",
+  "subtopic": "too / enough: enough / not enough + существительное",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "too / enough",
+  "subtopic": "too / enough: too … / … enough + to-infinitive",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 2 · Life & Living",
+  "lesson": "2c",
+  "status": "расширение",
+  "detail": "выделено как модель + to-inf; not … enough — недостаточность"
+ },
+ {
+  "topic": "Clauses of purpose",
+  "subtopic": "Clauses of purpose: to / in order to / so as to + infinitive",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 4 · Technology",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "to / in order to / so as to"
+ },
+ {
+  "topic": "Clauses of purpose",
+  "subtopic": "Clauses of purpose: so that + can/will, could/would",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 4 · Technology",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "so that + can/will — наст./буд.; could/would — прош."
+ },
+ {
+  "topic": "Clauses of purpose",
+  "subtopic": "Clauses of purpose: with the view to / with the aim of + -ing",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 4 · Technology",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "with the view to (так в справочнике) / with the aim of"
+ },
+ {
+  "topic": "Clauses of result",
+  "subtopic": "Clauses of result: such … that",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 4 · Technology",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "such a(n) + исчисл. ед. ч.; such + мн. ч.; such a lot of"
+ },
+ {
+  "topic": "Clauses of result",
+  "subtopic": "Clauses of result: so … that",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 4 · Technology",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "so + прил./нареч.; so + few/little/many/much; so popular a museum that"
+ },
+ {
+  "topic": "Clauses of result",
+  "subtopic": "Clauses of result: as a result / as a consequence / consequently / therefore / so",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 4 · Technology",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "(and) as a result, as a consequence, consequently (офиц.), so, therefore"
+ },
+ {
+  "topic": "so / such",
+  "subtopic": "so / such: so + прил./нареч.; so + many/much/few/little + сущ.",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 4 · Technology",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "so loudly that…; so + many/much/few/little"
+ },
+ {
+  "topic": "so / such",
+  "subtopic": "so / such: such (a/an) + (прил.) + сущ.; such a lot of",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 4 · Technology",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "such (a/an) + сущ.; such a lot of"
+ },
+ {
+  "topic": "so / such",
+  "subtopic": "so / such: so + прил. + a(n) + сущ.",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 4 · Technology",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "so + adj + a(n) + noun"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: сравнительная степень — -er + than",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: сравнительная степень — more (многосложные)",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: орфография -er/-est (удвоение, -e, y → i)",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "hot-hotter, easy-easier"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: превосходная степень — the -est + of/in",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: превосходная степень — the most",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: неправильные прилагательные (good, bad, many/much, little)",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: двусложные на -y/-er/-ow — -er/-est",
+  "order": 7,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "easy-easier"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: прилагательные с двумя способами (clever, quiet, friendly…)",
+  "order": 8,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "clever, cruel, friendly…, stupid"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: far — farther/further, old — elder/eldest",
+  "order": 9,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "far, elder/eldest"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: наречия — -er/-est (hard, fast, early)",
+  "order": 10,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: наречия — more/most (slowly)",
+  "order": 11,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: неправильные наречия (well, badly)",
+  "order": 12,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "good/well, bad/badly"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: as … as / not as (so) … as",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "as … as / not as(so) … as"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: less … than / the least … of/in",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "less/more … than, the least/most"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: much/a lot/far/a bit/slightly + comparative",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "much/a lot/far/a little bit/slightly"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: the + comparative …, the + comparative",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "The longer the day went on, the more tired…"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: comparative and comparative (shorter and shorter)",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "worse and worse"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: by far + the superlative",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 5 · Art & Literature",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: образование — вспомогательный глагол + местоимение (do/does)",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "расширение",
+  "detail": "добавлено did; do/does/did при отсутствии вспомогательного"
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: с be и модальными глаголами (isn't she, can't she)",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: утверждение → отрицательный хвост, отрицание → утвердительный",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: I am → aren't I?",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": "I am late, aren't I?"
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: Let's → shall we? / Let me → will you?",
+  "order": 7,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": "Let's → shall we?; Let me/him → will you/won't you?"
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: повелительное наклонение → will you?",
+  "order": 8,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": "отрицательный императив → will you?"
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: have (владеть) → haven't I? vs have в идиоме → don't I?",
+  "order": 9,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": "I have (владеть) → haven't I?; идиома → don't/didn't I?"
+ },
+ {
+  "topic": "Question tags",
+  "subtopic": "Question tags: This/That is → isn't it?",
+  "order": 10,
+  "grade": 9,
+  "module": "Module 8 · Challenges",
+  "lesson": "8d",
+  "status": "новое",
+  "detail": "This/That is → isn't it?"
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: шкала частотности в % (always 100% … never 0%)",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 1 · Strong ties",
+  "lesson": "1c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: место — перед смысловым глаголом, после be",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 1 · Strong ties",
+  "lesson": "1c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: место — после вспомогательных и модальных глаголов",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 1 · Strong ties",
+  "lesson": "1c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: сравнительная степень — -er + than",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: сравнительная степень — more (многосложные)",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: орфография -er/-est (удвоение, -e, y → i)",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": "big – bigger, -ier"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: превосходная степень — the -est + of/in",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": "the + in (места) / of"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: превосходная степень — the most",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: неправильные прилагательные (good, bad, many/much, little)",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": "good/well, bad/badly, much, many/lots, little"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: двусложные на -y/-er/-ow — -er/-est",
+  "order": 7,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": "согласная + y → -ier/-iest"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: прилагательные с двумя способами (clever, quiet, friendly…)",
+  "order": 8,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": "clever, common, …, stupid"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: far — farther/further, old — elder/eldest",
+  "order": 9,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": "far – farther/further; elder/eldest"
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: наречия — -er/-est (hard, fast, early)",
+  "order": 10,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: наречия — more/most (slowly)",
+  "order": 11,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparatives & Superlatives",
+  "subtopic": "Comparatives & Superlatives: неправильные наречия (well, badly)",
+  "order": 12,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: as … as / not as (so) … as",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: less … than / the least … of/in",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: much/a lot/far/a bit/slightly + comparative",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: the + comparative …, the + comparative",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": "The harder you study, the better…"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: comparative and comparative (shorter and shorter)",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": "warmer and warmer"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: by far + the superlative",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: twice / three times / half as … as",
+  "order": 7,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "новое",
+  "detail": "twice/three times/half as … as"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: the same … as",
+  "order": 8,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "новое",
+  "detail": "the same … as"
+ },
+ {
+  "topic": "Comparative structures",
+  "subtopic": "Comparative structures: look/sound/smell/taste + like",
+  "order": 9,
+  "grade": 10,
+  "module": "Module 3 · Schooldays & Work",
+  "lesson": "3c",
+  "status": "новое",
+  "detail": "look/sound/smell/taste + like"
+ },
+ {
+  "topic": "Adjectives -ed/-ing",
+  "subtopic": "Adjectives -ed/-ing: -ing — каков предмет/явление (amazing)",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5e",
+  "status": "повторение",
+  "detail": "It was an exciting story"
+ },
+ {
+  "topic": "Adjectives -ed/-ing",
+  "subtopic": "Adjectives -ed/-ing: -ed — что чувствует человек (amazed)",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 5 · Holidays",
+  "lesson": "5e",
+  "status": "повторение",
+  "detail": "We were excited by the news"
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: who(m) / which / that — люди и предметы",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: whose — принадлежность",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: опущение who/which/that (дополнение vs подлежащее)",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: относительные наречия when / where / why",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: defining vs non-defining (запятые, без that)",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: which, относящееся ко всему предложению",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: of which / whose для предметов",
+  "order": 7,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: some of / most of + whom/which/whose",
+  "order": 8,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: that не после запятой и не после предлога",
+  "order": 9,
+  "grade": 10,
+  "module": "Module 8 · Technology",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: шкала частотности в % (always 100% … never 0%)",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 1 · Relationships",
+  "lesson": "1c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: место — перед смысловым глаголом, после be",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 1 · Relationships",
+  "lesson": "1c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Adverbs of frequency",
+  "subtopic": "Adverbs of frequency: место — после вспомогательных и модальных глаголов",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 1 · Relationships",
+  "lesson": "1c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: who(m) / which / that — люди и предметы",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: whose — принадлежность",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: опущение who/which/that (дополнение vs подлежащее)",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: defining vs non-defining (запятые, без that)",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: which, относящееся ко всему предложению",
+  "order": 6,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: of which / whose для предметов",
+  "order": 7,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: some of / most of + whom/which/whose",
+  "order": 8,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": "most of which"
+ },
+ {
+  "topic": "Relative pronouns / Relative clauses",
+  "subtopic": "Relative clauses: that не после запятой и не после предлога",
+  "order": 9,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Relative adverbs",
+  "subtopic": "Relative adverbs: when/that — время",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": "That was the year (when/that)…; можно опустить; ранее в Relative clauses 7, 9, 10 кл."
+ },
+ {
+  "topic": "Relative adverbs",
+  "subtopic": "Relative adverbs: where — место",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": "The restaurant where…"
+ },
+ {
+  "topic": "Relative adverbs",
+  "subtopic": "Relative adverbs: why — причина (the reason why)",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": "The reason (why) she was late…; можно опустить"
+ },
+ {
+  "topic": "Prepositions in relative clauses",
+  "subtopic": "Prepositions in relative clauses: предлог + whom/which (that невозможен)",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": "to whom, of which; ранее в Relative clauses 9–10 кл."
+ },
+ {
+  "topic": "Clauses of purpose",
+  "subtopic": "Clauses of purpose: to / in order to / so as to + infinitive",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Clauses of purpose",
+  "subtopic": "Clauses of purpose: so that + can/will, could/would",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Clauses of purpose",
+  "subtopic": "Clauses of purpose: with the view to / with the aim of + -ing",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Clauses of purpose",
+  "subtopic": "Clauses of purpose: for + noun/-ing (назначение предмета)",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "a liquid for removing paint"
+ },
+ {
+  "topic": "Clauses of purpose",
+  "subtopic": "Clauses of purpose: in case + Present / Past",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "in case + Present — наст./буд.; + Past — прош."
+ },
+ {
+  "topic": "Clauses of purpose",
+  "subtopic": "Clauses of purpose: отрицательная цель — so as not / in order not to",
+  "order": 6,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "одно и то же действующее лицо"
+ },
+ {
+  "topic": "Clauses of purpose",
+  "subtopic": "Clauses of purpose: отрицательная цель — so that + can't/won't, couldn't/wouldn't",
+  "order": 7,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "разные действующие лица"
+ },
+ {
+  "topic": "Clauses of purpose",
+  "subtopic": "Clauses of purpose: for fear / lest; for fear of",
+  "order": 8,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "for fear/lest + might/should; for fear of sth/doing"
+ },
+ {
+  "topic": "Clauses of purpose",
+  "subtopic": "Clauses of purpose: prevent … (from) + -ing / avoid + -ing",
+  "order": 9,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "prevent + noun/pronoun (+ from) + -ing; avoid + -ing"
+ },
+ {
+  "topic": "Clauses of reason",
+  "subtopic": "Clauses of reason: as / because / for / on the grounds that",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "because отвечает на why; for — после запятой, очень формально"
+ },
+ {
+  "topic": "Clauses of reason",
+  "subtopic": "Clauses of reason: the reason for / the reason (why)",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "the reason for, the reason (why)"
+ },
+ {
+  "topic": "Clauses of reason",
+  "subtopic": "Clauses of reason: because of / due to (+ the fact that)",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "новое",
+  "detail": "because of / due to + noun/-ing; … the fact that + clause"
+ },
+ {
+  "topic": "Clauses of result",
+  "subtopic": "Clauses of result: such … that",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Clauses of result",
+  "subtopic": "Clauses of result: so … that",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Clauses of result",
+  "subtopic": "Clauses of result: as a result / as a consequence / consequently / therefore / so",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "so / such",
+  "subtopic": "so / such: so + прил./нареч.; so + many/much/few/little + сущ.",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "so / such",
+  "subtopic": "so / such: such (a/an) + (прил.) + сущ.; such a lot of",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "so / such",
+  "subtopic": "so / such: so + прил. + a(n) + сущ.",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 2 · Where there's a will there's a way",
+  "lesson": "2c",
+  "status": "повторение",
+  "detail": "so popular a restaurant"
+ },
+ {
+  "topic": "So / Neither / Nor (agreement)",
+  "subtopic": "So / Neither / Nor: So + aux + подлежащее — к утверждению",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "So does Jack"
+ },
+ {
+  "topic": "So / Neither / Nor (agreement)",
+  "subtopic": "So / Neither / Nor: Neither/Nor + aux + подлежащее — к отрицанию",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "Neither/Nor did James; NOT So didn't James"
+ }
+]

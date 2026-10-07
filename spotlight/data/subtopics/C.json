@@ -1,0 +1,2472 @@
+[
+ {
+  "topic": "Imperative",
+  "subtopic": "Imperative: утверждение — инфинитив без to",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 1 · School days",
+  "lesson": "1a",
+  "status": "новое",
+  "detail": "Stand up! Open your books."
+ },
+ {
+  "topic": "Imperative",
+  "subtopic": "Imperative: утверждение — инфинитив без to",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4b",
+  "status": "расширение",
+  "detail": "всегда обращено ко 2 лицу ед./мн. ч."
+ },
+ {
+  "topic": "Imperative",
+  "subtopic": "Imperative: утверждение — инфинитив без to",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 3 · Getting around",
+  "lesson": "3a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Imperative",
+  "subtopic": "Imperative: отрицание — Don't + инфинитив",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 1 · School days",
+  "lesson": "1a",
+  "status": "новое",
+  "detail": "Don't come in!"
+ },
+ {
+  "topic": "Imperative",
+  "subtopic": "Imperative: отрицание — Don't + инфинитив",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Imperative",
+  "subtopic": "Imperative: отрицание — Don't + инфинитив",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 3 · Getting around",
+  "lesson": "3a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Imperative",
+  "subtopic": "Imperative: значение — приказание",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4b",
+  "status": "новое",
+  "detail": "Be quiet!"
+ },
+ {
+  "topic": "Imperative",
+  "subtopic": "Imperative: значение — приказание",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 3 · Getting around",
+  "lesson": "3a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Imperative",
+  "subtopic": "Imperative: значение — инструкция, указание",
+  "order": 4,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4b",
+  "status": "новое",
+  "detail": "Press the button on the left"
+ },
+ {
+  "topic": "Imperative",
+  "subtopic": "Imperative: значение — инструкция, указание",
+  "order": 4,
+  "grade": 6,
+  "module": "Module 3 · Getting around",
+  "lesson": "3a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Imperative",
+  "subtopic": "Imperative: значение — предложение (Have some cake)",
+  "order": 5,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4b",
+  "status": "новое",
+  "detail": "Have some orange juice"
+ },
+ {
+  "topic": "Imperative",
+  "subtopic": "Imperative: значение — предложение (Have some cake)",
+  "order": 5,
+  "grade": 6,
+  "module": "Module 3 · Getting around",
+  "lesson": "3a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Imperative",
+  "subtopic": "Imperative: значение — просьба, вежливость с please",
+  "order": 6,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4b",
+  "status": "новое",
+  "detail": "please в начале или в конце"
+ },
+ {
+  "topic": "Imperative",
+  "subtopic": "Imperative: значение — просьба, вежливость с please",
+  "order": 6,
+  "grade": 6,
+  "module": "Module 3 · Getting around",
+  "lesson": "3a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): must — уверенность (о настоящем)",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "must be"
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): must — уверенность (о настоящем)",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 3 · See it to believe it",
+  "lesson": "3d",
+  "status": "повторение",
+  "detail": "~100%"
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): must — уверенность (о настоящем)",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): must — уверенность (о настоящем)",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "He must be on his way home"
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): may/might/could — вероятность (о настоящем)",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "might be late"
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): may/might/could — вероятность (о настоящем)",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 3 · See it to believe it",
+  "lesson": "3d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): may/might/could — вероятность (о настоящем)",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): may/might/could — вероятность (о настоящем)",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): can't/couldn't — невозможность (о настоящем)",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "can't be broken"
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): can't/couldn't — невозможность (о настоящем)",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 3 · See it to believe it",
+  "lesson": "3d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): can't/couldn't — невозможность (о настоящем)",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): can't/couldn't — невозможность (о настоящем)",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): выводы о прошлом — must/may/might/could/can't + have V3",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "must have done, may have returned, couldn't have said"
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): выводы о прошлом — must/may/might/could/can't + have V3",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 3 · See it to believe it",
+  "lesson": "3d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): выводы о прошлом — must/may/might/could/can't + have V3",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": "must have been delayed, couldn't have cooked"
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): выводы о прошлом — must/may/might/could/can't + have V3",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "They could have been killed"
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): вероятность — will (100%) vs should/ought to (90%)",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "will 100%, should/ought to 90%"
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): вероятность — will (100%) vs should/ought to (90%)",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "should/ought to — только о будущем"
+ },
+ {
+  "topic": "Modal verbs (deduction)",
+  "subtopic": "Modal verbs (deduction): критика — could/should/ought to (+ have V3)",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "could (at least), should, ought to"
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: общие правила формы — без -s/-ing/-ed, + инфинитив без to",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "кроме have to, ought to"
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: общие правила формы — без -s/-ing/-ed, + инфинитив без to",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: общие правила формы — без -s/-ing/-ed, + инфинитив без to",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: общие правила формы — без -s/-ing/-ed, + инфинитив без to",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: вопрос и отрицание (инверсия, not)",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: вопрос и отрицание (инверсия, not)",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: вопрос и отрицание (инверсия, not)",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: вопрос и отрицание (инверсия, not)",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: + простой инфинитив (наст./буд.) vs + перфектный инфинитив (прошлое)",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "He should have washed his car"
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: + простой инфинитив (наст./буд.) vs + перфектный инфинитив (прошлое)",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: + простой инфинитив (наст./буд.) vs + перфектный инфинитив (прошлое)",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: + простой инфинитив (наст./буд.) vs + перфектный инфинитив (прошлое)",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "незавершённое vs завершённое действие"
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: формы инфинитива — simple / continuous / perfect / perfect continuous",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: формы инфинитива — simple / continuous / perfect / perfect continuous",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: формы инфинитива — simple / continuous / perfect / perfect continuous",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: формы инфинитива — simple / continuous / perfect / perfect continuous",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: значение — критика (could / should / ought to)",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "You could at least be polite / could have waited"
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: значение — критика (could / should / ought to)",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: значение — критика (could / should / ought to)",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "could at least have called; should have + PP"
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: значение — вероятность (will 100% vs should/ought to 90%)",
+  "order": 6,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: значение — вероятность (will 100% vs should/ought to 90%)",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: значение — совет (should / ought to / shall)",
+  "order": 7,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "shall — просьба о совете"
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: значение — совет (should / ought to / shall)",
+  "order": 7,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: эквиваленты модальных (need, had better, have (got) to, be able to, used to)",
+  "order": 8,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "need, had better, have (got) to, be able to, used to"
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: значение — предложения (offers/suggestions)",
+  "order": 9,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "Would you like…? Shall I…? Can I…? We can/could…"
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: обзор значений модальных (систематизация)",
+  "order": 10,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "обязательство, отсутствие необходимости, разрешение, возможность, способность, выводы, критика, предложения, вероятность, совет"
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: обзор значений модальных (систематизация)",
+  "order": 10,
+  "grade": 10,
+  "module": "Module 7 · Let's have fun",
+  "lesson": "7e",
+  "status": "повторение",
+  "detail": "7e: повторение модальных по разделу Module 4 (рецензия) — проверить"
+ },
+ {
+  "topic": "Modal verbs (functions)",
+  "subtopic": "Modal verbs: обзор значений модальных (систематизация)",
+  "order": 10,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "систематизация по функциям"
+ },
+ {
+  "topic": "Semi-modals",
+  "subtopic": "Semi-modals: need (= must), have (got) to (= must)",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Semi-modals",
+  "subtopic": "Semi-modals: had better (= should)",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Semi-modals",
+  "subtopic": "Semi-modals: be able to (= can)",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "Semi-modals",
+  "subtopic": "Semi-modals: used to (= would)",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "There is / There are",
+  "subtopic": "There is / There are: there is — утверждение (ед. ч.)",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 6 · Home, sweet home!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "there's — краткая форма"
+ },
+ {
+  "topic": "There is / There are",
+  "subtopic": "There is / There are: there is — утверждение (ед. ч.)",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3b",
+  "status": "повторение",
+  "detail": "перевод начинается с обстоятельства места"
+ },
+ {
+  "topic": "There is / There are",
+  "subtopic": "There is / There are: there are — утверждение (мн. ч.)",
+  "order": 2,
+  "grade": 3,
+  "module": "Module 6 · Home, sweet home!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "There are two beds…"
+ },
+ {
+  "topic": "There is / There are",
+  "subtopic": "There is / There are: there are — утверждение (мн. ч.)",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "There is / There are",
+  "subtopic": "There is / There are: отрицание — there isn't / there aren't",
+  "order": 3,
+  "grade": 3,
+  "module": "Module 6 · Home, sweet home!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "There isn't / There aren't"
+ },
+ {
+  "topic": "There is / There are",
+  "subtopic": "There is / There are: отрицание — there isn't / there aren't",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "There is / There are",
+  "subtopic": "There is / There are: вопросы — Is there…? / Are there…?",
+  "order": 4,
+  "grade": 3,
+  "module": "Module 6 · Home, sweet home!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Is there…? / Are there…? (кратких ответов нет)"
+ },
+ {
+  "topic": "There is / There are",
+  "subtopic": "There is / There are: вопросы — Is there…? / Are there…?",
+  "order": 4,
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3b",
+  "status": "повторение",
+  "detail": "кратких ответов нет"
+ },
+ {
+  "topic": "There is / There are",
+  "subtopic": "There is / There are: some / any в конструкции",
+  "order": 5,
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3b",
+  "status": "новое",
+  "detail": "There are some chairs / There aren't any / Are there any…?"
+ },
+ {
+  "topic": "can (ability)",
+  "subtopic": "can (ability): значение — умение; утверждение can + глагол без to",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 5 · Furry friends!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "все лица; способность, умение"
+ },
+ {
+  "topic": "can (ability)",
+  "subtopic": "can (ability): значение — умение; утверждение can + глагол без to",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4a",
+  "status": "расширение",
+  "detail": "can не меняется по лицам; после него глагол без to"
+ },
+ {
+  "topic": "can (ability)",
+  "subtopic": "can (ability): значение — умение; утверждение can + глагол без to",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 3 · Getting around",
+  "lesson": "3b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can (ability)",
+  "subtopic": "can (ability): отрицание — cannot / can't",
+  "order": 2,
+  "grade": 3,
+  "module": "Module 5 · Furry friends!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "cannot (полное), can't (краткое)"
+ },
+ {
+  "topic": "can (ability)",
+  "subtopic": "can (ability): отрицание — cannot / can't",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can (ability)",
+  "subtopic": "can (ability): отрицание — cannot / can't",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 3 · Getting around",
+  "lesson": "3b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can (ability)",
+  "subtopic": "can (ability): вопросы и краткие ответы",
+  "order": 3,
+  "grade": 3,
+  "module": "Module 5 · Furry friends!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Yes, I can / No, he can't"
+ },
+ {
+  "topic": "can (ability)",
+  "subtopic": "can (ability): вопросы и краткие ответы",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 4 · Family ties",
+  "lesson": "4a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can (ability)",
+  "subtopic": "can (ability): вопросы и краткие ответы",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 3 · Getting around",
+  "lesson": "3b",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): спросить разрешения — Can I…?",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 10 · Holidays",
+  "lesson": "10a",
+  "status": "новое",
+  "detail": "Can I borrow your book?"
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): спросить разрешения — Can I…?",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 3 · Getting around",
+  "lesson": "3b",
+  "status": "повторение",
+  "detail": "Can we play on the computer, please?"
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): просьба — Can you…? / Can I have…?",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 10 · Holidays",
+  "lesson": "10a",
+  "status": "новое",
+  "detail": "Can you pass me the salt, please?"
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): просьба — Can you…? / Can I have…?",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 3 · Getting around",
+  "lesson": "3b",
+  "status": "повторение",
+  "detail": "Can you open the door? Can I have a piece of cake?"
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): предложение помощи — Can I…?",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 10 · Holidays",
+  "lesson": "10a",
+  "status": "новое",
+  "detail": "Can I give you a lift?"
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): can't — запрет",
+  "order": 4,
+  "grade": 5,
+  "module": "Module 10 · Holidays",
+  "lesson": "10a",
+  "status": "новое",
+  "detail": "You can't park here"
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): can't — запрет",
+  "order": 4,
+  "grade": 6,
+  "module": "Module 3 · Getting around",
+  "lesson": "3b",
+  "status": "повторение",
+  "detail": "You can't turn left here!"
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): can't — запрет",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "расширение",
+  "detail": "mustn't/can't — правила, закон"
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): can't — запрет",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": "mustn't/can't"
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): can't — запрет",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "mustn't/can't — против правил/закона"
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): can vs may — разрешение (may формальнее)",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "Can/May I…? — Yes, you can/may"
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): can vs may — разрешение (may формальнее)",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): can vs may — разрешение (may формальнее)",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): can vs may — разрешение (may формальнее)",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): предложения (offers/suggestions) — can, could, would, shall",
+  "order": 6,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "Can I bring…? What else would you like? Shall I…? We could…"
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): предложения (offers/suggestions) — can, could, would, shall",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can (permission/request)",
+  "subtopic": "can (permission/request): предложения (offers/suggestions) — can, could, would, shall",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": "Can we…? Would you like…? Shall I…? We can/could…"
+ },
+ {
+  "topic": "can/could (ability past)",
+  "subtopic": "can/could (ability past): could — общая способность в прошлом",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "Daniel could swim when he was three"
+ },
+ {
+  "topic": "can/could (ability past)",
+  "subtopic": "can/could (ability past): could — общая способность в прошлом",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can/could (ability past)",
+  "subtopic": "can/could (ability past): could — общая способность в прошлом",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "расширение",
+  "detail": "общая повторяющаяся способность"
+ },
+ {
+  "topic": "can/could (ability past)",
+  "subtopic": "can/could (ability past): could — общая способность в прошлом",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can/could (ability past)",
+  "subtopic": "can/could (ability past): was/were able to — способность в конкретной ситуации",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "He was(n't) able to attend yesterday's meeting"
+ },
+ {
+  "topic": "can/could (ability past)",
+  "subtopic": "can/could (ability past): was/were able to — способность в конкретной ситуации",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can/could (ability past)",
+  "subtopic": "can/could (ability past): was/were able to — способность в конкретной ситуации",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can/could (ability past)",
+  "subtopic": "can/could (ability past): was/were able to — способность в конкретной ситуации",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can/could (ability past)",
+  "subtopic": "can/could (ability past): couldn't — неспособность в прошлом",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "couldn't = wasn't able to"
+ },
+ {
+  "topic": "can/could (ability past)",
+  "subtopic": "can/could (ability past): couldn't — неспособность в прошлом",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "can/could (ability past)",
+  "subtopic": "can/could (ability past): couldn't — неспособность в прошлом",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "расширение",
+  "detail": "любая неспособность в прошлом"
+ },
+ {
+  "topic": "can/could (ability past)",
+  "subtopic": "can/could (ability past): couldn't — неспособность в прошлом",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "любая неспособность — повторяющаяся или конкретная"
+ },
+ {
+  "topic": "can/could (ability past)",
+  "subtopic": "can/could (ability past): be able to в других временах (will be able to)",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "Will you be able to help me?"
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: утверждение — have got / has got (полные и краткие формы)",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 5 · Furry friends!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "все лица, полные и краткие (I've got, he's got)"
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: утверждение — have got / has got (полные и краткие формы)",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 2 · That's me!",
+  "lesson": "2a",
+  "status": "повторение",
+  "detail": "все лица; 've got / 's got"
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: утверждение — have got / has got (полные и краткие формы)",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "в разговорной речи — в основном краткие формы"
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: отрицание — haven't got / hasn't got",
+  "order": 2,
+  "grade": 3,
+  "module": "Module 5 · Furry friends!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "полные и краткие"
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: отрицание — haven't got / hasn't got",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 2 · That's me!",
+  "lesson": "2a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: отрицание — haven't got / hasn't got",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: вопросы и краткие ответы",
+  "order": 3,
+  "grade": 3,
+  "module": "Module 5 · Furry friends!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Have you got…? Has he got…?; got в ответе опускается"
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: вопросы и краткие ответы",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 2 · That's me!",
+  "lesson": "2a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: вопросы и краткие ответы",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: значение — принадлежность (иметь)",
+  "order": 4,
+  "grade": 3,
+  "module": "Module 5 · Furry friends!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "She has got a rabbit"
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: значение — принадлежность (иметь)",
+  "order": 4,
+  "grade": 5,
+  "module": "Module 2 · That's me!",
+  "lesson": "2a",
+  "status": "повторение",
+  "detail": "иметь, владеть, обладать"
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: значение — принадлежность (иметь)",
+  "order": 4,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "He has got a ball"
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: значение — описание внешности людей, животных, предметов",
+  "order": 5,
+  "grade": 3,
+  "module": "Module 5 · Furry friends!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "It's got a big mouth"
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: значение — описание внешности людей, животных, предметов",
+  "order": 5,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "She has got blue eyes"
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: значение — родственные отношения",
+  "order": 6,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "новое",
+  "detail": "I have got two sisters"
+ },
+ {
+  "topic": "have got",
+  "subtopic": "have got: It's got (= It has got) vs It's (= It is)",
+  "order": 7,
+  "grade": 3,
+  "module": "Module 5 · Furry friends!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "It's got = It has got; It's = It is"
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: значение — необходимость из-за обстоятельств (утверждение)",
+  "order": 1,
+  "grade": 4,
+  "module": "Module 2 · A working day",
+  "lesson": "",
+  "status": "новое",
+  "detail": "I have to be at school at 9"
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: значение — необходимость из-за обстоятельств (утверждение)",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 8 · Rules & regulations",
+  "lesson": "8c",
+  "status": "расширение",
+  "detail": "вынужденность согласно обстоятельствам"
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: значение — необходимость из-за обстоятельств (утверждение)",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 8 · Green issues",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "«приходится, нужно»"
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: значение — необходимость из-за обстоятельств (утверждение)",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: значение — необходимость из-за обстоятельств (утверждение)",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: значение — необходимость из-за обстоятельств (утверждение)",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "расширение",
+  "detail": "объективная необходимость, решённая не говорящим"
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: don't / doesn't have to — отсутствие необходимости",
+  "order": 2,
+  "grade": 4,
+  "module": "Module 2 · A working day",
+  "lesson": "",
+  "status": "новое",
+  "detail": "don't / doesn't have to"
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: don't / doesn't have to — отсутствие необходимости",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 8 · Rules & regulations",
+  "lesson": "8c",
+  "status": "повторение",
+  "detail": "You don't have to wash the dishes"
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: don't / doesn't have to — отсутствие необходимости",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 8 · Green issues",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "don't/doesn't have to"
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: don't / doesn't have to — отсутствие необходимости",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": "нет необходимости в настоящем/будущем"
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: don't / doesn't have to — отсутствие необходимости",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: don't / doesn't have to — отсутствие необходимости",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: вопросы и краткие ответы — Do you have to…?",
+  "order": 3,
+  "grade": 4,
+  "module": "Module 2 · A working day",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Do you have to…? — Yes, I do"
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: had to — прошедшее время",
+  "order": 4,
+  "grade": 7,
+  "module": "Module 8 · Green issues",
+  "lesson": "",
+  "status": "новое",
+  "detail": "употребляется в разных временах (had to)"
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: had to — прошедшее время",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: had to — прошедшее время",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": "прошедшее для must и have to"
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: didn't have to — не было необходимости в прошлом",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "неизвестно, сделано ли"
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: didn't have to — не было необходимости в прошлом",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: didn't have to — не было необходимости в прошлом",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "have to",
+  "subtopic": "have to: have got to (= have to)",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "have got to"
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: may — спросить разрешения (May I…?) и ответы",
+  "order": 1,
+  "grade": 4,
+  "module": "Module 3 · Tasty treats",
+  "lesson": "",
+  "status": "новое",
+  "detail": "официально; Certainly./Of course you may. / No, you may not."
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: can — общая (теоретическая) возможность",
+  "order": 2,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "It can get pretty cold up here"
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: can — общая (теоретическая) возможность",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: can — общая (теоретическая) возможность",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: can — общая (теоретическая) возможность",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "Going to the gym can be boring"
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: could/may/might — возможность в конкретной ситуации",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "It might be cold today"
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: could/may/might — возможность в конкретной ситуации",
+  "order": 3,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: could/may/might — возможность в конкретной ситуации",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: could/may/might — возможность в конкретной ситуации",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: возможность в вопросах — can/could/might, но не may",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "Where could I buy a good coat?"
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: возможность в вопросах — can/could/might, но не may",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: возможность в вопросах — can/could/might, но не may",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: возможность в вопросах — can/could/might, но не may",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "How difficult can it be?"
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: could/might/would + have V3 — было возможно, но не случилось",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "I could have lent you some money"
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: could/might/would + have V3 — было возможно, но не случилось",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: could/might/would + have V3 — было возможно, но не случилось",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": "He could have come with us, if…"
+ },
+ {
+  "topic": "may/might",
+  "subtopic": "may/might: could/might/would + have V3 — было возможно, но не случилось",
+  "order": 5,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "must/have to (obligation)",
+  "subtopic": "must/have to (obligation): must vs have to — субъективная vs объективная необходимость",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "must — говорящий решил сам; have to — объективные обстоятельства"
+ },
+ {
+  "topic": "must/have to (obligation)",
+  "subtopic": "must/have to (obligation): had to — прошедшее для must и have to",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "must/have to (obligation)",
+  "subtopic": "must/have to (obligation): should/ought to — долг, слабая обязанность",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": ""
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: must — обязанность, необходимость",
+  "order": 1,
+  "grade": 4,
+  "module": "Module 4 · At the zoo!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "I must put my rubbish in the bin"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: must — обязанность, необходимость",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 9 · Modern living",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "обязанность и необходимость"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: must — обязанность, необходимость",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 8 · Rules & regulations",
+  "lesson": "8a",
+  "status": "повторение",
+  "detail": "You must listen to your teacher"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: must — обязанность, необходимость",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 8 · Green issues",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "правила, обязанности, долг"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: must — обязанность, необходимость",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": "долг, строгое обязательство, крайняя необходимость"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: must — обязанность, необходимость",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: must — обязанность, необходимость",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "расширение",
+  "detail": "субъективное решение говорящего"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: mustn't — запрет",
+  "order": 2,
+  "grade": 4,
+  "module": "Module 4 · At the zoo!",
+  "lesson": "",
+  "status": "новое",
+  "detail": "must not (mustn't — только в заголовке); вопросов нет"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: mustn't — запрет",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 9 · Modern living",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "You mustn't speak loudly in here"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: mustn't — запрет",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 8 · Rules & regulations",
+  "lesson": "8a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: mustn't — запрет",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 8 · Green issues",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: mustn't — запрет",
+  "order": 2,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": "правила, закон"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: mustn't — запрет",
+  "order": 2,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: can't как запрет (= mustn't)",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 8 · Rules & regulations",
+  "lesson": "8a",
+  "status": "новое",
+  "detail": "You can't enter the building after 8 pm"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: can't как запрет (= mustn't)",
+  "order": 3,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": "mustn't/can't — запрет правилами, законом"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: can't как запрет (= mustn't)",
+  "order": 3,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": "mustn't = can't"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: must — настойчивый совет",
+  "order": 4,
+  "grade": 7,
+  "module": "Module 8 · Green issues",
+  "lesson": "",
+  "status": "новое",
+  "detail": "You must tell the truth"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: must только в настоящем; в других временах — have to / had to",
+  "order": 5,
+  "grade": 7,
+  "module": "Module 8 · Green issues",
+  "lesson": "",
+  "status": "новое",
+  "detail": "I had to go to the doctor yesterday"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: must только в настоящем; в других временах — have to / had to",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": "had to — прошедшее для must и have to"
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: must только в настоящем; в других временах — have to / had to",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "must/mustn't",
+  "subtopic": "must/mustn't: must — логический вывод",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "с простым и перфектным инфинитивом"
+ },
+ {
+  "topic": "need/needn't",
+  "subtopic": "need/needn't: needn't / don't need to — нет необходимости (наст./буд.)",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 8 · Rules & regulations",
+  "lesson": "8c",
+  "status": "новое",
+  "detail": "только needn't (как и don't have to)"
+ },
+ {
+  "topic": "need/needn't",
+  "subtopic": "need/needn't: needn't / don't need to — нет необходимости (наст./буд.)",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "расширение",
+  "detail": "don't need to / needn't"
+ },
+ {
+  "topic": "need/needn't",
+  "subtopic": "need/needn't: needn't / don't need to — нет необходимости (наст./буд.)",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "need/needn't",
+  "subtopic": "need/needn't: needn't / don't need to — нет необходимости (наст./буд.)",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "need/needn't",
+  "subtopic": "need/needn't: needn't / don't need to — нет необходимости (наст./буд.)",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "don't have to / don't need to / needn't"
+ },
+ {
+  "topic": "need/needn't",
+  "subtopic": "need/needn't: needn't have V3 — не было необходимости, но сделали",
+  "order": 2,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "You needn't have cooked so much food"
+ },
+ {
+  "topic": "need/needn't",
+  "subtopic": "need/needn't: needn't have vs didn't have to",
+  "order": 3,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "didn't have to — неизвестно, сделали ли"
+ },
+ {
+  "topic": "need/needn't",
+  "subtopic": "need/needn't: need (= must) как эквивалент модального",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "need как эквивалент must"
+ },
+ {
+  "topic": "need/needn't",
+  "subtopic": "need/needn't: need (= must) как эквивалент модального",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": "в списке semi-modals"
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: значение — совет, рекомендация; утверждение should + глагол без to",
+  "order": 1,
+  "grade": 7,
+  "module": "Module 1 · Lifestyles",
+  "lesson": "",
+  "status": "новое",
+  "detail": "не меняется по временам; + bare infinitive"
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: значение — совет, рекомендация; утверждение should + глагол без to",
+  "order": 1,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "повторение",
+  "detail": "обычный совет, рекомендация"
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: значение — совет, рекомендация; утверждение should + глагол без to",
+  "order": 1,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: значение — совет, рекомендация; утверждение should + глагол без to",
+  "order": 1,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: значение — совет, рекомендация; утверждение should + глагол без to",
+  "order": 1,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: отрицание — shouldn't",
+  "order": 2,
+  "grade": 7,
+  "module": "Module 1 · Lifestyles",
+  "lesson": "",
+  "status": "новое",
+  "detail": "should not / shouldn't"
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: вопросы — Should I…?",
+  "order": 3,
+  "grade": 7,
+  "module": "Module 1 · Lifestyles",
+  "lesson": "",
+  "status": "новое",
+  "detail": "should перед подлежащим"
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: ought to (= should)",
+  "order": 4,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "ought to — тоже обычный совет"
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: ought to (= should)",
+  "order": 4,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: ought to (= should)",
+  "order": 4,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": "You ought to abide by the rules"
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: ought to (= should)",
+  "order": 4,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: значение — обязательство, долг (слабая обязанность)",
+  "order": 5,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "обязательство"
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: значение — обязательство, долг (слабая обязанность)",
+  "order": 5,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: значение — обязательство, долг (слабая обязанность)",
+  "order": 5,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": "долг, слабая обязанность"
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: значение — критика (should / should have V3)",
+  "order": 6,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "He should be more patient; She should have apologised"
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: значение — критика (should / should have V3)",
+  "order": 6,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: значение — критика (should / should have V3)",
+  "order": 6,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: значение — вероятность ~90% (о будущем)",
+  "order": 7,
+  "grade": 8,
+  "module": "Module 7 · Education",
+  "lesson": "7c",
+  "status": "новое",
+  "detail": "They should/ought to be here soon"
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: значение — вероятность ~90% (о будущем)",
+  "order": 7,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: значение — вероятность ~90% (о будущем)",
+  "order": 7,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: Shall I…? — просьба о совете",
+  "order": 8,
+  "grade": 9,
+  "module": "Module 7 · Staying safe",
+  "lesson": "7d",
+  "status": "новое",
+  "detail": "Shall I…?"
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: Shall I…? — просьба о совете",
+  "order": 8,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: Shall I…? — просьба о совете",
+  "order": 8,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: Shall I…? — предложение помощи",
+  "order": 9,
+  "grade": 10,
+  "module": "Module 4 · Earth Alert!",
+  "lesson": "4c",
+  "status": "новое",
+  "detail": "Shall I give you a lift?"
+ },
+ {
+  "topic": "should/shouldn't",
+  "subtopic": "should/shouldn't: had better (= should)",
+  "order": 10,
+  "grade": 11,
+  "module": "Module 5 · Who are you?",
+  "lesson": "5c",
+  "status": "новое",
+  "detail": "в списке semi-modals"
+ },
+ {
+  "topic": "to be (Past: was/were)",
+  "subtopic": "to be (Past): утверждение — was / were",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 2 · Family moments",
+  "lesson": "",
+  "status": "новое",
+  "detail": "I/he/she/it was; you/we/they were"
+ },
+ {
+  "topic": "to be (Past: was/were)",
+  "subtopic": "to be (Past): утверждение — was / were",
+  "order": 1,
+  "grade": 4,
+  "module": "Module 5 · Where were you yesterday?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "to be (Past: was/were)",
+  "subtopic": "to be (Past): утверждение — was / were",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 9 · Modern living",
+  "lesson": "9a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "to be (Past: was/were)",
+  "subtopic": "to be (Past): утверждение — was / were",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 7 · Now and then",
+  "lesson": "7a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "to be (Past: was/were)",
+  "subtopic": "to be (Past): отрицание — wasn't / weren't",
+  "order": 2,
+  "grade": 3,
+  "module": "Module 2 · Family moments",
+  "lesson": "",
+  "status": "новое",
+  "detail": "полные и краткие: was not/wasn't, were not/weren't"
+ },
+ {
+  "topic": "to be (Past: was/were)",
+  "subtopic": "to be (Past): отрицание — wasn't / weren't",
+  "order": 2,
+  "grade": 4,
+  "module": "Module 5 · Where were you yesterday?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "to be (Past: was/were)",
+  "subtopic": "to be (Past): отрицание — wasn't / weren't",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 9 · Modern living",
+  "lesson": "9a",
+  "status": "повторение",
+  "detail": "wasn't / weren't"
+ },
+ {
+  "topic": "to be (Past: was/were)",
+  "subtopic": "to be (Past): отрицание — wasn't / weren't",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 7 · Now and then",
+  "lesson": "7a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "to be (Past: was/were)",
+  "subtopic": "to be (Past): вопросы и краткие ответы",
+  "order": 3,
+  "grade": 3,
+  "module": "Module 2 · Family moments",
+  "lesson": "",
+  "status": "новое",
+  "detail": "was/were перед подлежащим; Yes, I was / No, they weren't"
+ },
+ {
+  "topic": "to be (Past: was/were)",
+  "subtopic": "to be (Past): вопросы и краткие ответы",
+  "order": 3,
+  "grade": 4,
+  "module": "Module 5 · Where were you yesterday?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "to be (Past: was/were)",
+  "subtopic": "to be (Past): вопросы и краткие ответы",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 9 · Modern living",
+  "lesson": "9a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "to be (Past: was/were)",
+  "subtopic": "to be (Past): вопросы и краткие ответы",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 7 · Now and then",
+  "lesson": "7a",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "to be (Past: was/were)",
+  "subtopic": "to be (Past): слова-указатели прошедшего времени",
+  "order": 4,
+  "grade": 3,
+  "module": "Module 2 · Family moments",
+  "lesson": "",
+  "status": "новое",
+  "detail": "yesterday, last week/month/year, two days ago, in 1975"
+ },
+ {
+  "topic": "to be (Past: was/were)",
+  "subtopic": "to be (Past): слова-указатели прошедшего времени",
+  "order": 4,
+  "grade": 4,
+  "module": "Module 5 · Where were you yesterday?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "yesterday, last…, …ago, in 1975"
+ },
+ {
+  "topic": "to be (Present)",
+  "subtopic": "to be (Present): утверждение — am/is/are, полные и краткие формы",
+  "order": 1,
+  "grade": 3,
+  "module": "Module 1 · School days",
+  "lesson": "",
+  "status": "новое",
+  "detail": "все лица; I am/I'm, he is/he's, we are/we're…"
+ },
+ {
+  "topic": "to be (Present)",
+  "subtopic": "to be (Present): утверждение — am/is/are, полные и краткие формы",
+  "order": 1,
+  "grade": 5,
+  "module": "Module 1 · School days",
+  "lesson": "1b",
+  "status": "повторение",
+  "detail": "все лица, полные и краткие; значения быть/находиться/являться"
+ },
+ {
+  "topic": "to be (Present)",
+  "subtopic": "to be (Present): утверждение — am/is/are, полные и краткие формы",
+  "order": 1,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": "все лица; to be — единственный глагол, меняющийся по лицам; при переводе часто опускается"
+ },
+ {
+  "topic": "to be (Present)",
+  "subtopic": "to be (Present): отрицание — am not / isn't / aren't",
+  "order": 2,
+  "grade": 3,
+  "module": "Module 1 · School days",
+  "lesson": "",
+  "status": "новое",
+  "detail": "полные и краткие: I'm not, isn't, aren't"
+ },
+ {
+  "topic": "to be (Present)",
+  "subtopic": "to be (Present): отрицание — am not / isn't / aren't",
+  "order": 2,
+  "grade": 5,
+  "module": "Module 1 · School days",
+  "lesson": "1b",
+  "status": "повторение",
+  "detail": "I'm not, aren't, isn't"
+ },
+ {
+  "topic": "to be (Present)",
+  "subtopic": "to be (Present): отрицание — am not / isn't / aren't",
+  "order": 2,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ },
+ {
+  "topic": "to be (Present)",
+  "subtopic": "to be (Present): вопросы и краткие ответы",
+  "order": 3,
+  "grade": 3,
+  "module": "Module 1 · School days",
+  "lesson": "",
+  "status": "новое",
+  "detail": "Am I? Is he? Are you?; Yes, I am / No, I'm not"
+ },
+ {
+  "topic": "to be (Present)",
+  "subtopic": "to be (Present): вопросы и краткие ответы",
+  "order": 3,
+  "grade": 5,
+  "module": "Module 1 · School days",
+  "lesson": "1b",
+  "status": "повторение",
+  "detail": "Yes, I am / No, I'm not; Yes, he is…"
+ },
+ {
+  "topic": "to be (Present)",
+  "subtopic": "to be (Present): вопросы и краткие ответы",
+  "order": 3,
+  "grade": 6,
+  "module": "Module 1 · Who's who?",
+  "lesson": "",
+  "status": "повторение",
+  "detail": ""
+ }
+]

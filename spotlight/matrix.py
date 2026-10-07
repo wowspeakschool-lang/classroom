@@ -246,7 +246,10 @@ def main():
     for i, (g, m, n, v) in enumerate(items, 2):
         grp = group(g)
         u = units[n]
-        ws2.append([g, m, ', '.join(v['lessons']), u['topic'], n, v['status'], '; '.join(v['detail'])[:400], grp,
+        detail = '; '.join(v['detail'])[:400]
+        if detail.startswith('='):
+            detail = ' ' + detail
+        ws2.append([g, m, ', '.join(v['lessons']), u['topic'], n, v['status'], detail, grp,
                     f'=IFERROR(INDEX({mt}!${vcol[grp]}:${vcol[grp]},MATCH(E{i},{mt}!$E:$E,0)),"")',
                     f'=IFERROR(INDEX({mt}!${wcol[grp]}:${wcol[grp]},MATCH(E{i},{mt}!$E:$E,0))&"","")',
                     'не начат', f"Spotlight / {g} класс / {m} / {u['topic']} / {n}"])
