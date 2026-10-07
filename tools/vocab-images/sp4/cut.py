@@ -17,7 +17,7 @@ FILL_OLD = None  # заливка дыр больше не нужна: её за
 FILL = set()
 # вырезать зажатый белый фон (не везде: белое внутри пузырей пропадало)
 # белое, которое чистка кусков фона не трогает: облачка, снег, разметка, облака у края сцены
-KEEP_WHITE = {'lemon meringue', 'ingredients', 'injection', 'tin', 'dairy', 'beanstalk', 'national park'}
+KEEP_WHITE = {'lemon meringue', 'ingredients', 'injection', 'tin', 'dairy', 'beanstalk', 'national park', 'sandy', 'cloudy', 'sight', 'Paris', 'Greece', 'Canada'}
 # ровно-белое внутри рисунка своё (облака в окне, мяч): снимаем только куски, выходящие наружу
 PURE_EDGE = {'curtain', 'play sports', 'wake up'}
 # сцены, где фон застрял между фигурами и под ногами: чистим жёстче
@@ -26,10 +26,16 @@ HOLES = {'key', 'cherry', 'basket', 'oats', 'carry', 'plump', 'postman'}
 # белая одежда без контура у края (халат): закрываем маску на N пикселей
 CLOSE = {}
 PURE_MN, PURE_MIN = 251, 120
+# нарисованная тень под предметом: светлое тёплое пятно снаружи тёмного контура.
+# Идём от прозрачного края по светлому, только в нижней половине и не глубже SHADOW_D
+SHADOW_D = 30
+NO_SHADOW = {'fleece', 'beanstalk', 'crew', 'cloudy', 'Greece', 'Florida', 'Germany', 'parade'}
 
 # Листы, где генератор разложил картинки иначе, чем в промпте
 # Границы клеток вручную: {лист: {номер ряда: [границы]}}; граница-ступенька (y, x_выше, x_ниже)
-CUTS = {6: {0: [283, 526, (215, 910, 896), 1238], 1: [391, (660, 756, 738), 1116]},
+CUTS = {12: {1: [415, 808, (670, 1236, 1162)]},
+        13: {0: [(200, 392, 366), 642, 993, 1322]},
+        6: {0: [283, 526, (215, 910, 896), 1238], 1: [391, (660, 756, 738), 1116]},
         7: {1: [400, (800, 757, 765), 1112]}}
 
 IMAGES = '/tmp/claude-0/-home-user-classroom/d4a2a0a4-519c-5b81-af84-18451bfcf9dd/images'
@@ -211,6 +217,17 @@ def clean_png(p, peel=4, pale=212, grey=32, speck=0.004, pure=250):
             if p.endswith(tuple(f'/{fname(w)}' for w in PURE_EDGE)):
                 big = np.intersect1d(big, np.unique(lab[binary_dilation(a <= 40, iterations=2)]))
             a[np.isin(lab, big)] = 0
+    if not p.endswith(tuple(f'/{fname(w)}' for w in NO_SHADOW)):
+        from scipy.ndimage import distance_transform_edt
+        out = a <= 40
+        ys = np.where((~out).any(1))[0]
+        if len(ys):
+            y_mid = ys[0] + (ys[-1] - ys[0]) * 0.5
+            light = (~out) & (mn >= 140) & (rgb.sum(-1) >= 3 * 180) & (mx - mn <= 90)
+            light[:int(y_mid)] = False
+            labl, _ = label(light)
+            touch = np.unique(labl[binary_dilation(out, iterations=2) & light]); touch = touch[touch > 0]
+            a[np.isin(labl, touch) & (distance_transform_edt(~out) <= SHADOW_D)] = 0
     whitish = (mn >= pale) & (mx - mn <= grey)
     for _ in range(peel):
         solid = a > 128
