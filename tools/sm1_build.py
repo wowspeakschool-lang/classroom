@@ -107,7 +107,7 @@ def check(lesson, errors):
 
     # ссылки на картинки
     for i, (btype, payload) in enumerate(lesson["blocks"], start=1):
-        for link in re.findall(r"@@MEDIA@@([^\"'\\s)<]+)", json.dumps(payload, ensure_ascii=False)):
+        for link in re.findall(r"@@MEDIA@@([^\"'\s)<\\]+)", json.dumps(payload, ensure_ascii=False)):
             path = os.path.join(ROOT, "media", link)
             if not os.path.exists(path):
                 errors.append(f"блок {i} ({btype}): нет файла media/{link}")
