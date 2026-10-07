@@ -4,43 +4,31 @@ import csv, collections, os
 os.chdir(os.path.dirname(os.path.abspath(__file__)) + '/..')
 rows = list(csv.DictReader(open('tsv/grade_4.tsv'), delimiter='\t'))
 
-# колоды-темы: (папка, колода) → слова; что не названо — по разделу ниже
-D = {
- ('Module 1', 'Unit 1 · Мои вещи'): 'camera CD glove guitar hairbrush key|mobile phone|roller blades|watch',
- ('Module 1', 'Unit 1 · Какой он?'): "friendly kind slim sporty vet|What does he look like?|What's he like?",
- ('Module 1', 'Unit 2 · Друзья и хобби'): 'best friend|both crew dive glue|play the violin|plump quite skate ski sound|stick together|surf',
- ('Module 2', 'Unit 3–4 · Профессии'): "baker greengrocer mechanic nurse postman waiter doctor firefighter|police officer|taxi driver|zoo keeper",
- ('Module 2', 'Unit 3 · Места в городе'): "baker's|greengrocer's|garage hospital|post office|station",
- ('Module 2', 'Unit 3 · Дела и как часто'): 'always never sometimes usually bake carry clean curtain fix|go shopping|play sports|serve sick injection|wake (up)|wash the dishes',
- ('Module 2', 'Unit 4 · Спорт и свободное время'): 'badminton baseball hockey volleyball|free time|sports centre|whistle',
- ('Module 2', 'Unit 4 · Другие слова'): 'meal parcel polite postcard surprise|take care of|wait week',
- ('Module 3', 'Unit 5–6 · Фрукты и овощи'): 'coconut lemon mango pineapple tomato beans pepper cherry onion',
- ('Module 3', 'Unit 5–6 · Продукты'): 'butter flour|olive oil|salt sugar beef lamb yogurt cookie dairy',
- ('Module 3', 'Unit 6 · Упаковка и количество'): 'bar bottle carton jar kilo loaf packet tin basket',
- ('Module 3', 'Unit 5–6 · Блюда и на кухне'): 'barbecue|French fries|paella sushi snack treat tasty taste easy|make sure|pass put world',
- ('Module 4', 'Unit 7–8 · Животные'): 'giraffe seal cuckoo|elephant seal|panda carnivore herbivore omnivore zoo plant',
- ('Module 4', 'Unit 7–8 · Путешествие и другие слова'): 'journey passport suitcase ticket|a whale of a time|amazing rubbish|cookery book|lazy lunchtime',
- ('Module 8', 'Unit 15–16 · Отдых и погода'): 'go camping|go to the lake|go to the mountains|go to the seaside|cloudy rainy Coliseum',
- ('Module 8', 'Unit 16 · Вещи в поездку'): 'boots flippers|sleeping bag|sunglasses|swimming trunks|swimsuit tent',
- ('Справочник', 'Страны'): 'Australia Canada China England France Germany Greece Ireland Italy Japan Mexico|New Zealand|Poland Portugal Russia Scotland Spain Turkey Florida',
- ('Справочник', 'Города и национальности'): 'Athens London Madrid Moscow Paris Rome Italian Japanese Russian',
+# Папка — модуль учебника, колода — юнит под его названием из учебника;
+# большой юнит делится на темы: «Unit 3: The Animal Hospital · профессии».
+# Cultural Section N и Spotlight on Russia N идут в папку Module N одной колодой.
+T = {  # юнит → тема → слова (фразы через |)
+ 'Unit 1': {'вещи': 'camera CD glove guitar hairbrush key|mobile phone|roller blades|watch',
+            'внешность и характер': "friendly kind slim sporty vet|What does he look like?|What's he like?"},
+ 'Unit 3': {'профессии': 'baker greengrocer mechanic nurse postman waiter',
+            'места': "baker's|greengrocer's|garage hospital|post office|station",
+            'дела и как часто': 'always never sometimes usually bake carry clean curtain fix|go shopping|play sports|serve sick injection|wake (up)|wash the dishes'},
+ 'Unit 4': {'профессии': 'doctor firefighter|police officer|taxi driver|zoo keeper',
+            'спорт': 'badminton baseball hockey volleyball|free time|sports centre|whistle',
+            'другие слова': 'meal parcel polite postcard surprise|take care of|wait week'},
+ 'Unit 5': {'фрукты и овощи': 'coconut lemon mango pineapple tomato beans pepper',
+            'продукты и на кухне': 'butter flour|olive oil|salt sugar basket easy|make sure|pass put tasty treat'},
+ 'Unit 6': {'упаковка и количество': 'bar bottle carton jar kilo loaf packet tin',
+            'еда': 'barbecue beef cherry cookie dairy|French fries|lamb onion paella snack sushi taste world yogurt'},
+ 'Unit 8': {'животные': 'carnivore cuckoo|elephant seal|herbivore omnivore panda plant',
+            'путешествие': 'journey passport suitcase ticket|a whale of a time|amazing rubbish'},
 }
-SEC = {  # раздел целиком → (папка, колода)
- 'Starter Unit': ('', 'Starter Unit'),
- 'Module 5': ('Module 5–7', 'Module 5 · Чувства и вчера'),
- 'Module 6': ('Module 5–7', 'Module 6 · Сказки'),
- 'Module 7': ('Module 5–7', 'Module 7 · Лучшие времена'),
- 'Goldilocks and the Three Bears': ('Чтение', 'Goldilocks and the Three Bears'),
- 'Arthur & Rascal': ('Чтение', 'Arthur & Rascal'),
- 'Months': ('Справочник', 'Месяцы'), 'Numbers': ('Справочник', 'Числа'),
- 'Useful English': ('Справочник', 'Полезные фразы'),
-}
+GEO = {'страны': 'Australia Canada China England France Germany Greece Ireland Italy Japan Mexico|New Zealand|Poland Portugal Russia Scotland Spain Turkey Florida',
+       'города и национальности': 'Athens London Madrid Moscow Paris Rome Italian Japanese Russian'}
+OTHER = 'Другие разделы'
 def culture(m, s):
-    n = int(s.split('.')[0]) if s[:1].isdigit() else 9
-    if m.startswith('Cultural'): return ('Culture Corner', 'Cultural Sections 1–4' if n <= 4 else 'Cultural Sections 5–8 и Special Days')
-    if m.startswith('Spotlight on Russia'): return ('Spotlight on Russia', 'Spotlight on Russia 1–4' if n <= 4 else 'Spotlight on Russia 5–8')
-    if m.startswith('Special'): return ('Culture Corner', 'Cultural Sections 5–8 и Special Days')
-
+    if m.startswith(('Cultural', 'Spotlight on Russia')):
+        return (f'Module {s.split(".")[0]}', 'Culture Corner & Spotlight on Russia')
 # готовая картинка: id слова тренажёра; сверено по переводу
 REUSE = {
  'amazing':1768,'angry':703,'april':624,'august':628,'australia':372,'badminton':81,'bake':940,"baker's":871,
@@ -66,20 +54,21 @@ REUSE = {
 # совпало слово, но не смысл → рисуем заново
 MISMATCH = {'clean': 'в тренажёре «чистый», у нас «убирать»', 'fair': '«светлый» ≠ «честный»',
             'ride': '«кататься» ≠ «аттракцион»', 'wood': '«дерево (материал)» ≠ «лес»'}
+# число — рисуем цифрами сами, как готовое «60» в тренажёре
+DIGITS = {'seventy': '70', 'eighty': '80', 'ninety': '90', 'hundred': '100',
+          'first': '1st', 'second': '2nd', 'third': '3rd'}
 # без картинки: отвлечённое, фразы, числа — картинка не объясняет слово
 NOPIC = set('''activity|back together|feel|hope|join|same|both|quite|stick together|always|never|sometimes|usually
 |free time|surprise|take care of|wait|week|make sure|treat|easy|a whale of a time|amazing|check|in a hurry|luck|mine
 |never mind|on my way|return|worry|for a while|is called|project|almost|at least|simple|fun-loving|resolution
 |last a long time|millionaire|adopt|donate|raise|soon|discover|it is worth it|rest|young|brilliant|pull down|remember|remind
-|eighty|ninety|seventy|sixty|hundred|first|second|third|sound|horrid|naughty|share|serve|polite|kind|save
+|sound|horrid|naughty|share|serve|polite|kind|save
 |what does he look like?|what's he like?|bon voyage!|congratulations!|excuse me, where's ...?|happy new year!
 |it's your turn|nice to meet you.|see you later.|thank you. — you're welcome.|pass|put|dream|busy|hate|cheap|delicious'''
   .replace('\n', '').split('|'))
 
-lk = {}
 RAW = {r['term'] for r in rows}
-# фразы, где пробел внутри, распознаём жадно
-def split(s):
+def split(s):  # жадно: фразы с пробелом внутри
     out, cur = [], s.replace('|', ' | ').split()
     i = 0
     while i < len(cur):
@@ -89,19 +78,25 @@ def split(s):
             if ph in RAW: out.append(ph); i = j; break
         else: raise SystemExit('нет слова: ' + cur[i])
     return out
-for k, ws in D.items():
-    for w in split(ws): lk[w] = k
+topic = {(u, w): t for u, ts in T.items() for t, ws in ts.items() for w in split(ws)}
+geo = {w: t for t, ws in GEO.items() for w in split(ws)}
+def place(m, s, t):
+    if s.startswith('Unit '):
+        u = s.split(':')[0]
+        return (m, s + (' · ' + topic[(u, t)] if u in T else ''))
+    if m == 'Starter Unit': return ('Module 1', 'Starter Unit')
+    if m.startswith('Geographical'): return (OTHER, m + ' · ' + geo[t])
+    if m.startswith('Special'): return (OTHER, 'Special Days!')
+    return culture(m, s) or (OTHER, m)
 
 out, miss = [], []
 for r in rows:
     m, s, t = r['module'], r['section'], r['term']
-    k = lk.get(t)
-    if k and k[0] != m and k[0] != 'Справочник': k = None  # pass, lamb — в двух разделах
-    k = k or culture(m, s) or SEC.get(m)
+    k = place(m, s, t)
     if not k: miss.append((m, s, t)); continue
     lt = t.lower()
     img = ('mismatch' if lt in MISMATCH else f'reuse:{REUSE[lt]}' if lt in REUSE else
-           'none' if lt in NOPIC else 'new')
+           'none' if lt in NOPIC else f'digits:{DIGITS[lt]}' if lt in DIGITS else 'new')
     if lt in REUSE and lt in NOPIC: img = f'reuse:{REUSE[lt]}'
     out.append([k[0], k[1], m, s, t, r['translation'], img])
 if miss: print('НЕ РАЗЛОЖЕНО:', *miss, sep='\n'); raise SystemExit(1)
@@ -113,4 +108,4 @@ by = collections.OrderedDict()
 for x in out: by.setdefault((x[0], x[1]), []).append(x)
 for (f, d), g in by.items():
     cc = collections.Counter(x[6].split(':')[0] for x in g)
-    print(f'{f:20} {d:42} {len(g):3}  есть {cc["reuse"]:2} новых {cc["new"]+cc["mismatch"]:2} без {cc["none"]:2}')
+    print(f'{f:16} {d:58} {len(g):3}  есть {cc["reuse"]:2} новых {cc["new"]+cc["mismatch"]:2} без {cc["none"]:2}')
