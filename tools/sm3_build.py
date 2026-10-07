@@ -481,13 +481,13 @@ LESSONS = {
             ("truefalse", {
                 "title": "Выбери «верно» или «неверно» для каждого предложения. Не торопись!",
                 "statements": [
-                    {"text": "Ben and Lucy are in the library.", "answer": True},
-                    {"text": "The book is easy to read.", "answer": False},
-                    {"text": "The book is in code.", "answer": True},
+                    {"text": "Ben and Lucy are in the library.", "correct": True},
+                    {"text": "The book is easy to read.", "correct": False},
+                    {"text": "The book is in code.", "correct": True},
                     {"text": "The librarian, Mr Williams, helps the explorers to read the code.",
-                     "answer": False},
-                    {"text": "Lucy finds the secret to the book.", "answer": True},
-                    {"text": "Horax understands the code.", "answer": False},
+                     "correct": False},
+                    {"text": "Lucy finds the secret to the book.", "correct": True},
+                    {"text": "Horax understands the code.", "correct": False},
                 ],
             }),
 
@@ -545,12 +545,12 @@ LESSONS = {
             ("truefalse", {
                 "title": "Отметь верные и неверные утверждения",
                 "statements": [
-                    {"text": "The boys and girls think Oliver is different.", "answer": True},
-                    {"text": "Oliver likes sitting under a tree and thinking.", "answer": True},
-                    {"text": "Oliver likes listening to Ms Sanders’ stories.", "answer": False},
-                    {"text": "Ms Sanders writes the date of her birthday on the board.", "answer": True},
-                    {"text": "The computer and Oliver say different days.", "answer": False},
-                    {"text": "Mike wants to learn to do the same thing as Oliver.", "answer": True},
+                    {"text": "The boys and girls think Oliver is different.", "correct": True},
+                    {"text": "Oliver likes sitting under a tree and thinking.", "correct": True},
+                    {"text": "Oliver likes listening to Ms Sanders’ stories.", "correct": False},
+                    {"text": "Ms Sanders writes the date of her birthday on the board.", "correct": True},
+                    {"text": "The computer and Oliver say different days.", "correct": False},
+                    {"text": "Mike wants to learn to do the same thing as Oliver.", "correct": True},
                 ],
             }),
 
@@ -658,11 +658,11 @@ LESSONS = {
             ("truefalse", {
                 "title": "Верно или неверно?",
                 "statements": [
-                    {"text": "Kate’s favourite subject is Chemistry.", "answer": False},
-                    {"text": "On Wednesdays she has Science.", "answer": True},
-                    {"text": "She has three Science lessons every week.", "answer": True},
-                    {"text": "Kate’s classmates love Science.", "answer": False},
-                    {"text": "Kate tells that Science lessons are boring.", "answer": False},
+                    {"text": "Kate’s favourite subject is Chemistry.", "correct": False},
+                    {"text": "On Wednesdays she has Science.", "correct": True},
+                    {"text": "She has three Science lessons every week.", "correct": True},
+                    {"text": "Kate’s classmates love Science.", "correct": False},
+                    {"text": "Kate tells that Science lessons are boring.", "correct": False},
                 ],
             }),
 
@@ -3405,13 +3405,13 @@ LESSONS = {
             ("truefalse", {
                 "title": "Выбери true (верно) или false (неверно)",
                 "statements": [
-                    {"text": "The next letter is in the giant shell.", "answer": True},
+                    {"text": "The next letter is in the giant shell.", "correct": True},
                     {"text": "Lucy can’t get her arm out of the giant shell.",
-                     "answer": False},
-                    {"text": "The shark was in Horax’s cage.", "answer": True},
-                    {"text": "The shark likes Horax and Zelda.", "answer": False},
-                    {"text": "The octopus can’t help the children.", "answer": False},
-                    {"text": "The fish make the letter S.", "answer": True},
+                     "correct": False},
+                    {"text": "The shark was in Horax’s cage.", "correct": True},
+                    {"text": "The shark likes Horax and Zelda.", "correct": False},
+                    {"text": "The octopus can’t help the children.", "correct": False},
+                    {"text": "The fish make the letter S.", "correct": True},
                 ],
             }),
 
@@ -3470,11 +3470,11 @@ LESSONS = {
                 "title": "Read the story and choose: True or False",
                 "statements": [
                     {"text": "The dolphins hit their tails on the water to scare the sharks.",
-                     "answer": True},
-                    {"text": "The dolphins get close to Kylie to protect her.", "answer": True},
-                    {"text": "The white shark plays with the dolphins.", "answer": False},
-                    {"text": "Sharks aren’t dangerous animals.", "answer": False},
-                    {"text": "The dolphins save Kylie from the shark.", "answer": True},
+                     "correct": True},
+                    {"text": "The dolphins get close to Kylie to protect her.", "correct": True},
+                    {"text": "The white shark plays with the dolphins.", "correct": False},
+                    {"text": "Sharks aren’t dangerous animals.", "correct": False},
+                    {"text": "The dolphins save Kylie from the shark.", "correct": True},
                 ],
             }),
 
@@ -4965,11 +4965,11 @@ LESSONS = {
             ("truefalse", {
                 "title": "Выбери True (правда) или False (неправда)",
                 "statements": [
-                    {"text": "The doctor took Ben and Lucy to room 209.", "answer": True},
-                    {"text": "Horax wanted the book from the children.", "answer": True},
-                    {"text": "Lucy gave Horax the book.", "answer": False},
+                    {"text": "The doctor took Ben and Lucy to room 209.", "correct": True},
+                    {"text": "Horax wanted the book from the children.", "correct": True},
+                    {"text": "Lucy gave Horax the book.", "correct": False},
                     {"text": "The doctor thought Horax was Ben’s grandfather.",
-                     "answer": True},
+                     "correct": True},
                 ],
             }),
 
@@ -5840,14 +5840,14 @@ LESSONS = {
                 "title": "Прочитай текст ещё раз и скажи, верные это предложения "
                          "(correct) или нет (incorrect)",
                 "statements": [
-                    {"text": "There are pink snakes in the Grand Canyon.", "answer": True},
+                    {"text": "There are pink snakes in the Grand Canyon.", "correct": True},
                     {"text": "The beaches next to the Harbour of Rio de Janeiro "
-                             "are small.", "answer": False},
+                             "are small.", "correct": False},
                     {"text": "The Northern Lights can be more than one colour.",
-                     "answer": True},
-                    {"text": "Mount Everest isn’t very old.", "answer": False},
-                    {"text": "Many fish live in the Great Barrier Reef.", "answer": True},
-                    {"text": "The Zambezi river forms a big waterfall.", "answer": True},
+                     "correct": True},
+                    {"text": "Mount Everest isn’t very old.", "correct": False},
+                    {"text": "Many fish live in the Great Barrier Reef.", "correct": True},
+                    {"text": "The Zambezi river forms a big waterfall.", "correct": True},
                 ],
             }),
 
@@ -6262,12 +6262,12 @@ LESSONS = {
                          "верные (true), а какие неверные (false)",
                 "image": img("u9", "weather_week_board"),
                 "statements": [
-                    {"text": "On Monday it’s going to be sunny.", "answer": False},
-                    {"text": "On Tuesday it isn’t going to be rainy.", "answer": True},
-                    {"text": "On Wednesday it’s going to be sunny.", "answer": False},
-                    {"text": "On Thursday it’s going to be foggy.", "answer": False},
-                    {"text": "On Friday it’s going to be cloudy.", "answer": True},
-                    {"text": "On Saturday it’s going to be sunny.", "answer": False},
+                    {"text": "On Monday it’s going to be sunny.", "correct": False},
+                    {"text": "On Tuesday it isn’t going to be rainy.", "correct": True},
+                    {"text": "On Wednesday it’s going to be sunny.", "correct": False},
+                    {"text": "On Thursday it’s going to be foggy.", "correct": False},
+                    {"text": "On Friday it’s going to be cloudy.", "correct": True},
+                    {"text": "On Saturday it’s going to be sunny.", "correct": False},
                 ],
             }),
 
@@ -7112,14 +7112,14 @@ LESSONS = {
                          "skip — прыгать на скакалке",
                 "image": img("ft", "scene_house"),
                 "statements": [
-                    {"text": "The woman in the garden is holding a kite.", "answer": True},
-                    {"text": "The window which is above the door is round.", "answer": True},
-                    {"text": "The boy with the scarf has curly hair.", "answer": True},
+                    {"text": "The woman in the garden is holding a kite.", "correct": True},
+                    {"text": "The window which is above the door is round.", "correct": True},
+                    {"text": "The boy with the scarf has curly hair.", "correct": True},
                     {"text": "The man on the balcony is taller than the woman "
-                             "who is next to him.", "answer": False},
+                             "who is next to him.", "correct": False},
                     {"text": "The girl who is wearing a red sweater is skipping.",
-                     "answer": True},
-                    {"text": "There are some birds on top of the house.", "answer": False},
+                     "correct": True},
+                    {"text": "There are some birds on top of the house.", "correct": False},
                 ],
             }),
 

@@ -158,13 +158,10 @@ LESSONS["u8_hw1"] = {**base(1, "Homework 1", 0), "blocks": [
                   "image": I("monster_draw"), "sample": "",
                   "sample_tts": "2 legs, 4 arms, 10 teeth.", "needs_review": True}),  # 8
     # 9–10. Игры (2), в выгрузке пустые — СОСТАВ МОЙ.
-    ("match", {"title": "Задание для настоящих чемпионов! 🏆 Соедини слово с картинкой",
-               "pairs": [{"left_image": I(f), "right": en, "right_audio_tts": en}
-                         for en, ru, f in BODY]}),                                    # 9
     ("exact_input", {"items": [
-        {"prompt": ("Впиши слова! " if i == 0 else "") + f"Напиши по-английски: {ru}",
+        {"prompt": ("Задание для настоящих чемпионов! 🏆 Впиши слова! " if i == 0 else "") + f"Напиши по-английски: {ru}",
          "accept": [en, en.capitalize()], "audio_tts": en}
-        for i, (en, ru, f) in enumerate(BODY)]}),                                    # 10
+        for i, (en, ru, f) in enumerate(BODY)]}),                                    # 9
     bye("<h3>Поздравляю! Ты завершил домашнее задание, ты замечательный ученик! 🌟</h3>"
         "<p>За это лови звёздочку :)</p><p>Увидимся на занятии!</p>"),
 ]}

@@ -93,6 +93,12 @@ def check(lesson, errors):
             if len(set(rights)) != len(rights):
                 errors.append(f"{where}: правые значения повторяются — такой блок надо делать quiz")
 
+        if btype == "truefalse":
+            # сервер читает statements[].correct; ключ answer молча даёт «всё неверно»
+            for n, st in enumerate(payload.get("statements", []), start=1):
+                if "correct" not in st:
+                    errors.append(f"{where}, утверждение {n}: нет поля correct")
+
         if btype == "order":
             glued = " ".join(payload["words"])
             if glued != payload["sentence"]:
