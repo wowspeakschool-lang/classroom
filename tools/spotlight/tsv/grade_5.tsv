@@ -1,0 +1,1029 @@
+grade	module	section	term	pos	translation	note
+5	Starter Unit		alphabet	n	алфавит	
+5	Starter Unit		ant	n	муравей	
+5	Starter Unit		apple	n	яблоко	
+5	Starter Unit		ball	n	мяч	
+5	Starter Unit		bird	n	птица	
+5	Starter Unit		black	adj	чёрный	
+5	Starter Unit		blackboard	n	школьная доска	
+5	Starter Unit		blue	adj	синий, голубой	
+5	Starter Unit		book	n	книга	
+5	Starter Unit		box	n	коробка	
+5	Starter Unit		brown	adj	коричневый	
+5	Starter Unit		café	n	кафе	
+5	Starter Unit		cake	n	пирог, торт	
+5	Starter Unit		cap	n	кепка	
+5	Starter Unit		cat	n	кот, кошка	
+5	Starter Unit		chair	n	стул	
+5	Starter Unit		climb	v	карабкаться, взбираться	
+5	Starter Unit		colour	n	цвет	
+5	Starter Unit		count	v	считать, подсчитывать	
+5	Starter Unit		crayon	n	цветной карандаш	
+5	Starter Unit		cup	n	чашка	
+5	Starter Unit		date	n	дата	
+5	Starter Unit		desk	n	письменный стол, парта	
+5	Starter Unit		doctor	n	доктор, врач	
+5	Starter Unit		doll	n	кукла	
+5	Starter Unit		draw	irr v	рисовать	
+5	Starter Unit		eat	irr v	есть	
+5	Starter Unit		egg	n	яйцо	
+5	Starter Unit		equals	v	равняется	
+5	Starter Unit		eraser	n	ластик	
+5	Starter Unit		finish	n;v	финиш, окончание; заканчивать	
+5	Starter Unit		flag	n	флаг	
+5	Starter Unit		fox	n	лиса	
+5	Starter Unit		flower	n	цветок	
+5	Starter Unit		friend	n	друг	
+5	Starter Unit		garlic	n	чеснок	
+5	Starter Unit		game	n	игра	
+5	Starter Unit		girl	n	девочка	
+5	Starter Unit		glass	n	стекло	
+5	Starter Unit		glue	n	клей	
+5	Starter Unit		grass	n	трава	
+5	Starter Unit		green	adj	зелёный	
+5	Starter Unit		grey	adj	серый	
+5	Starter Unit		gym	n	спортивный зал	
+5	Starter Unit		have got		иметь	
+5	Starter Unit		hat	n	шляпа	
+5	Starter Unit		hand	n	рука	
+5	Starter Unit		house	n	дом	
+5	Starter Unit		I	pron	я	
+5	Starter Unit		ink	n	чернила	
+5	Starter Unit		jam	n	джем, варенье	
+5	Starter Unit		jeans	n	джинсы	
+5	Starter Unit		kite	n	воздушный змей	
+5	Starter Unit		know	irr v	знать	
+5	Starter Unit		lemon	n	лимон	
+5	Starter Unit		look	v	смотреть	
+5	Starter Unit		market	n	рынок	
+5	Starter Unit		melon	n	дыня	
+5	Starter Unit		minus	n	минус	
+5	Starter Unit		museum	n	музей	
+5	Starter Unit		music	n	музыка	
+5	Starter Unit		name	n	имя	
+5	Starter Unit		nest	n	гнездо	
+5	Starter Unit		nose	n	нос	
+5	Starter Unit		notebook	n	тетрадь	
+5	Starter Unit		now	adv	сейчас	
+5	Starter Unit		number	n	число	
+5	Starter Unit		orange	n	апельсин	
+5	Starter Unit		paper clips	n	скрепки	
+5	Starter Unit		park	n	парк	
+5	Starter Unit		pen	n	ручка	
+5	Starter Unit		pencil	n	карандаш	
+5	Starter Unit		pencil case	n	пенал	
+5	Starter Unit		pink	adj	розовый	
+5	Starter Unit		please	int	пожалуйста	
+5	Starter Unit		plus	n	плюс	
+5	Starter Unit		pupil	n	ученик	
+5	Starter Unit		purple	adj	пурпурный, фиолетовый	
+5	Starter Unit		queen	n	королева	
+5	Starter Unit		question	n	вопрос	
+5	Starter Unit		rainbow	n	радуга	
+5	Starter Unit		reading rules	n	правила чтения	
+5	Starter Unit		red	adj	красный	
+5	Starter Unit		right	adj	правильный	
+5	Starter Unit		robot	n	робот	
+5	Starter Unit		ruler	n	линейка	
+5	Starter Unit		run	irr v	бегать	
+5	Starter Unit		say	irr v	сказать	
+5	Starter Unit		school	n	школа	
+5	Starter Unit		schoolbag	n	портфель, ранец	
+5	Starter Unit		sharpener	n	точилка	
+5	Starter Unit		shop	n	магазин	
+5	Starter Unit		sing	irr v	петь	
+5	Starter Unit		sky	n	небо	
+5	Starter Unit		sleep	irr v	спать	
+5	Starter Unit		snake	n	змея	
+5	Starter Unit		speak	irr v	говорить	
+5	Starter Unit		spell	v	называть по буквам	
+5	Starter Unit		song	n	песня	
+5	Starter Unit		start	v	начинать	
+5	Starter Unit		sun	n	солнце	
+5	Starter Unit		train	n	поезд	
+5	Starter Unit		tree	n	дерево	
+5	Starter Unit		uniform	n	форма	
+5	Starter Unit		vet	n	ветеринар	
+5	Starter Unit		walk	v	ходить, гулять	
+5	Starter Unit		white	adj	белый	
+5	Starter Unit		window	n	окно	
+5	Starter Unit		write	irr v	писать	
+5	Starter Unit		wrong	adj	неправильный	
+5	Starter Unit		yacht	n	яхта	
+5	Starter Unit		yellow	adj	жёлтый	
+5	Starter Unit		zebra	n	зебра	
+5	Starter Unit		zoo	n	зоопарк	
+5	Starter Unit		Hello!		Здравствуйте!	
+5	Starter Unit		Hi!		Привет!	
+5	Starter Unit		What's your name?		Как тебя зовут?	
+5	Starter Unit		My name's ...		Меня зовут ...	
+5	Starter Unit		How are you?		Как дела?	
+5	Starter Unit		I'm fine, thanks.		Спасибо, хорошо.	
+5	Starter Unit		Nice to meet you.		Рад познакомиться.	
+5	Starter Unit		Goodbye! Bye!		До свидания! Пока!	
+5	Starter Unit		Where are you from?		Откуда ты (из какой страны, города)?	
+5	Module 1	1a	art	n	изобразительное искусство	
+5	Module 1	1a	atlas	n	атлас	
+5	Module 1	1a	break	n	перемена	
+5	Module 1	1a	class	n	класс, урок	
+5	Module 1	1a	dictionary	n	словарь	
+5	Module 1	1a	English	n	английский язык	
+5	Module 1	1a	favourite	adj	любимый	
+5	Module 1	1a	geography	n	география	
+5	Module 1	1a	history	n	история	
+5	Module 1	1a	information technology (IT)	n	информационные технологии	
+5	Module 1	1a	mathematics (maths)	n	математика	
+5	Module 1	1a	notepad	n	блокнот	
+5	Module 1	1a	physical education (PE)	n	физическое воспитание	
+5	Module 1	1a	science	n	естествознание	
+5	Module 1	1a	school objects		предметы школьного обихода	
+5	Module 1	1a	student	n	учащийся	
+5	Module 1	1a	subject	n	предмет	
+5	Module 1	1a	teacher	n	учитель	
+5	Module 1	1a	textbook	n	учебник	
+5	Module 1	1a	timetable	n	расписание	
+5	Module 1	1a	days of the week		дни недели	
+5	Module 1	1a	Monday	n	понедельник	
+5	Module 1	1a	Tuesday	n	вторник	
+5	Module 1	1a	Wednesday	n	среда	
+5	Module 1	1a	Thursday	n	четверг	
+5	Module 1	1a	Friday	n	пятница	
+5	Module 1	1a	Saturday	n	суббота	
+5	Module 1	1a	Sunday	n	воскресенье	
+5	Module 1	1b	best	adj	лучший	
+5	Module 1	1b	eighteen	num	восемнадцать	
+5	Module 1	1b	eleven	num	одиннадцать	
+5	Module 1	1b	same	pron	такой же	
+5	Module 1	1b	fifteen	num	пятнадцать	
+5	Module 1	1b	fourteen	num	четырнадцать	
+5	Module 1	1b	grade	n	класс	
+5	Module 1	1b	nineteen	num	девятнадцать	
+5	Module 1	1b	new	adj	новый	
+5	Module 1	1b	seventeen	num	семнадцать	
+5	Module 1	1b	sixteen	num	шестнадцать	
+5	Module 1	1b	strange	adj	странный	
+5	Module 1	1b	twelve	num	двенадцать	
+5	Module 1	1b	then	conj	затем	
+5	Module 1	1b	thirteen	num	тринадцать	
+5	Module 1	1b	together	adv	вместе	
+5	Module 1	1b	twenty	num	двадцать	
+5	Module 1	1b	Excuse me, ...		Простите, ... Извините, ...	
+5	Module 1	1b	How do you spell it?		Как это пишется? Как ты это произносишь по буквам?	
+5	Module 1	1b	How old are you?		Сколько тебе лет?	
+5	Module 1	1b	Let's go!		Пошли! Давай пойдём!	
+5	Module 1	1c	capital letter		прописная буква	
+5	Module 1	1c	choose	irr v	выбирать	
+5	Module 1	1c	country	n	страна	
+5	Module 1	1c	full stop	n	точка	
+5	Module 1	1c	language	n	язык	
+5	Module 1	1c	other	adj	другой	
+5	Module 1	1c	secondary school	n	средняя школа	
+5	Module 1	1c	subject choice form	n	анкета (форма) выбора предметов	
+5	Module 1	1c	What class is he in?		В каком он классе?	
+5	Module 1	1c	What subjects does he do?		Какие предметы он изучает?	
+5	Module 1	1d - Culture Corner	corner	n	угол, уголок	
+5	Module 1	1d - Culture Corner	culture	n	культура	
+5	Module 1	1d - Culture Corner	diagram	n	диаграмма	
+5	Module 1	1d - Culture Corner	education system		образовательная система	
+5	Module 1	1d - Culture Corner	primary school		начальная школа	
+5	Module 1	1d - Culture Corner	Sixth Form		старшие классы (Великобритания)	
+5	Module 1	1d - Culture Corner	type	n	тип, вид	
+5	Module 1	1d - Culture Corner	university	n	университет	
+5	Module 1	English in Use 1	Good afternoon!		Добрый день!	
+5	Module 1	English in Use 1	Good evening!		Добрый вечер!	
+5	Module 1	English in Use 1	Good morning!		Доброе утро!	
+5	Module 1	English in Use 1	Good night!		Спокойной ночи!	
+5	Module 1	English in Use 1	See you (later)!		Увидимся (позже)!	
+5	Module 1	English in Use 1	See you tomorrow!		До завтра!	
+5	Module 1	Across the Curriculum 1: Citizenship	ask	v	спрашивать	
+5	Module 1	Across the Curriculum 1: Citizenship	citizenship	n	гражданство; граждановедение	
+5	Module 1	Across the Curriculum 1: Citizenship	mime	v	изображать мимикой и жестами	
+5	Module 1	Across the Curriculum 1: Citizenship	share	v	делиться	
+5	Module 1	Across the Curriculum 1: Citizenship	smile	v	улыбаться	
+5	Module 1	Across the Curriculum 1: Citizenship	thank	v	благодарить	
+5	Module 1	Across the Curriculum 1: Citizenship	think	irr v	думать	
+5	Module 1	Across the Curriculum 1: Citizenship	work	v	работать	
+5	Module 1	Across the Curriculum 1: Citizenship	alone		один, в одиночку	
+5	Module 1	Across the Curriculum 1: Citizenship	in groups		в группах	
+5	Module 1	Across the Curriculum 1: Citizenship	in pairs		в парах	
+5	Module 2	2a	amazing	adj	изумительный	
+5	Module 2	2a	American	adj; n	американский; американец	
+5	Module 2	2a	aunt	n	тётя	
+5	Module 2	2a	Australian	adj; n	австралийский; австралиец	
+5	Module 2	2a	bite	irr v	кусать	
+5	Module 2	2a	brilliant	adj	замечательный; блестящий	
+5	Module 2	2a	British	adj; n	британский; британец	
+5	Module 2	2a	can	irr v	мочь; уметь	
+5	Module 2	2a	Canadian	adj; n	канадский; канадец	
+5	Module 2	2a	cartoon character		персонаж мультфильма	
+5	Module 2	2a	English	adj; n	английский; англичанин	
+5	Module 2	2a	evil	adj	злой	
+5	Module 2	2a	fast	adj	быстрый	
+5	Module 2	2a	find out	phr v	выяснять	
+5	Module 2	2a	French	adj; n	французский; француз	
+5	Module 2	2a	Italian	adj; n	итальянский; итальянец	
+5	Module 2	2a	Japanese	adj; n	японский; японец	
+5	Module 2	2a	live	v	жить	
+5	Module 2	2a	nationality	n	национальность	
+5	Module 2	2a	New Zealander	n	житель Новой Зеландии	
+5	Module 2	2a	quiet	adj	тихий	
+5	Module 2	2a	people	n	люди	
+5	Module 2	2a	powers	n	силы	
+5	Module 2	2a	Russian	adj; n	русский	
+5	Module 2	2a	special	adj	особенный	
+5	Module 2	2a	spider	n	паук	
+5	Module 2	2a	stop	v	останавливать(ся)	
+5	Module 2	2a	strong	adj	сильный	
+5	Module 2	2a	wall	n	стена	
+5	Module 2	2a	watch	v	смотреть, наблюдать	
+5	Module 2	2a	who	pron	кто	
+5	Module 2	2a	next door		по соседству	
+5	Module 2	2a	speak English		разговаривать по-английски	
+5	Module 2	2b	basketball	n	баскетбольный мяч	
+5	Module 2	2b	bicycle (bike)	n	велосипед	
+5	Module 2	2b	child (pl: children)	n	ребёнок	
+5	Module 2	2b	digital camera	n	цифровой фотоаппарат	
+5	Module 2	2b	fly	n	муха	
+5	Module 2	2b	foot (pl: feet)	n	ступня	
+5	Module 2	2b	gloves	n	перчатки	
+5	Module 2	2b	guitar	n	гитара	
+5	Module 2	2b	handbag	n	сумочка	
+5	Module 2	2b	helmet	n	шлем	
+5	Module 2	2b	knife	n	нож	
+5	Module 2	2b	lamp	n	лампа	
+5	Module 2	2b	man (pl: men)	n	человек, мужчина	
+5	Module 2	2b	mouse (pl: mice)	n	мышь	
+5	Module 2	2b	personal things	n	личные вещи	
+5	Module 2	2b	present	n	подарок	
+5	Module 2	2b	scarf	n	шарф	
+5	Module 2	2b	skateboard	n	скейтборд	
+5	Module 2	2b	teddy bear	n	плюшевый медведь	
+5	Module 2	2b	thing	n	вещь, предмет	
+5	Module 2	2b	tie	n	галстук	
+5	Module 2	2b	toy	n	игрушка	
+5	Module 2	2b	tooth (pl: teeth)	n	зуб	
+5	Module 2	2b	trainers	n	кроссовки	
+5	Module 2	2b	watch	n	часы	
+5	Module 2	2b	woman (pl: women)	n	женщина	
+5	Module 2	2b	Happy birthday!		С днём рождения!	
+5	Module 2	2c	age	n	возраст	
+5	Module 2	2c	album	n	альбом	
+5	Module 2	2c	but	conj	но	
+5	Module 2	2c	because	conj	потому что	
+5	Module 2	2c	hundred	num	сто; сотня	
+5	Module 2	2c	coin	n	монета	
+5	Module 2	2c	collection	n	коллекция	
+5	Module 2	2c	easy	adj	лёгкий	
+5	Module 2	2c	eighty	num	восемьдесят	
+5	Module 2	2c	feel	irr v	чувствовать	
+5	Module 2	2c	fifty	num	пятьдесят	
+5	Module 2	2c	forty	num	сорок	
+5	Module 2	2c	great	adj	большой, великий, отличный	
+5	Module 2	2c	happy	adj	счастливый	
+5	Module 2	2c	nice	adj	милый, приятный	
+5	Module 2	2c	ninety	num	девяносто	
+5	Module 2	2c	picture	n	картинка	
+5	Module 2	2c	seventy	num	семьдесят	
+5	Module 2	2c	sixty	num	шестьдесят	
+5	Module 2	2c	stamp	n	марка	
+5	Module 2	2c	thirty	num	тридцать	
+5	Module 2	2c	be proud of		гордиться чем-либо, кем-либо	
+5	Module 2	2d - Culture Corner	buy	irr v	покупать	
+5	Module 2	2d - Culture Corner	cow	n	корова	
+5	Module 2	2d - Culture Corner	double decker	n	двухэтажный автобус	
+5	Module 2	2d - Culture Corner	dragon	n	дракон	
+5	Module 2	2d - Culture Corner	holidays	n	каникулы	
+5	Module 2	2d - Culture Corner	map	n	карта	
+5	Module 2	2d - Culture Corner	mug	n	кружка	
+5	Module 2	2d - Culture Corner	Northern Irish	adj	ирландец (житель Северной Ирландии)	
+5	Module 2	2d - Culture Corner	pin	n	значок (зд.)	
+5	Module 2	2d - Culture Corner	popular	adj	популярный	
+5	Module 2	2d - Culture Corner	Scottish	adj	шотландский	
+5	Module 2	2d - Culture Corner	shamrock	n	трилистник (эмблема Ирландии)	
+5	Module 2	2d - Culture Corner	souvenir	n	сувенир	
+5	Module 2	2d - Culture Corner	stuffed toy	n	мягкая игрушка	
+5	Module 2	2d - Culture Corner	tartan	n	шерстяная клетчатая материя	
+5	Module 2	2d - Culture Corner	Union Jack	n	флаг Великобритании	
+5	Module 2	2d - Culture Corner	Welsh	adj/n	валлийский, валлиец (житель Уэльса)	
+5	Module 2	English in Use 2	bell	n	колокольчик	
+5	Module 2	English in Use 2	customer	n	покупатель, клиент	
+5	Module 2	English in Use 2	key ring	n	брелок для ключей	
+5	Module 2	English in Use 2	shop assistant	n	продавец	
+5	Module 2	English in Use 2	thermos flask	n	термос	
+5	Module 2	English in Use 2	T-shirt	n	футболка	
+5	Module 2	English in Use 2	umbrella	n	зонт	
+5	Module 2	English in Use 2	Here you are.		Вот, пожалуйста.	
+5	Module 2	English in Use 2	How about ...?		Как насчёт ... ?	
+5	Module 2	English in Use 2	How can I help you?		Чем я могу помочь?	
+5	Module 2	English in Use 2	How much is it?		Сколько это стоит?	
+5	Module 2	English in Use 2	I want to buy ... .		Я хочу купить ... .	
+5	Module 2	English in Use 2	That's a good idea.		Это хорошая идея.	
+5	Module 2	Across the Curriculum 2: Geography	awful	adj	ужасный, страшный	
+5	Module 2	Across the Curriculum 2: Geography	capital (city)	n	столица	
+5	Module 2	Across the Curriculum 2: Geography	continent	n	континент, материк	
+5	Module 2	Across the Curriculum 2: Geography	English-speaking countries		англоговорящие страны	
+5	Module 2	Across the Curriculum 2: Geography	hole	n	отверстие, дырка	
+5	Module 2	Across the Curriculum 2: Geography	quiz	n	викторина	
+5	Module 3	3a	advert	n	рекламное объявление	
+5	Module 3	3a	architect	n	архитектор	
+5	Module 3	3a	article	n	статья	
+5	Module 3	3a	bathroom	n	ванная комната	
+5	Module 3	3a	beautiful	adj	красивый	
+5	Module 3	3a	bedroom	n	спальня	
+5	Module 3	3a	dining room	n	столовая	
+5	Module 3	3a	false	adj	неверный	
+5	Module 3	3a	famous	adj	известный	
+5	Module 3	3a	first	num	первый	
+5	Module 3	3a	flat	n	квартира	
+5	Module 3	3a	floor	n	пол, этаж	
+5	Module 3	3a	garage	n	гараж	
+5	Module 3	3a	great	adj	великий, большой, отличный	
+5	Module 3	3a	ground floor	n	первый этаж	
+5	Module 3	3a	hall	n	коридор, холл	
+5	Module 3	3a	home	n	дом	
+5	Module 3	3a	kitchen	n	кухня	
+5	Module 3	3a	letter	n	письмо	
+5	Module 3	3a	lift	n	лифт	
+5	Module 3	3a	living room	n	гостиная	
+5	Module 3	3a	number (of)	n	количество	
+5	Module 3	3a	own	adj	собственный	
+5	Module 3	3a	pay	irr v	платить	
+5	Module 3	3a	price	n	цена	
+5	Module 3	3a	reception room	n	зал для приёма гостей	
+5	Module 3	3a	roof	n	крыша	
+5	Module 3	3a	true	adj	верный	
+5	Module 3	3a	second	num	второй	
+5	Module 3	3a	step	n	ступенька	
+5	Module 3	3a	swimming pool	n	бассейн	
+5	Module 3	3a	third	num	третий	
+5	Module 3	3a	tower	n	башня	
+5	Module 3	3a	unusual	adj	необычный	
+5	Module 3	3a	view	n	вид	
+5	Module 3	3a	villa	n	вилла	
+5	Module 3	3a	block of flats		многоквартирный дом	
+5	Module 3	3a	for sale		на продажу	
+5	Module 3	3a	keep fit		поддерживать форму	
+5	Module 3	3a	live high up		жить на верхних этажах	
+5	Module 3	3b	appliance	n	бытовой прибор, устройство	
+5	Module 3	3b	armchair	n	кресло	
+5	Module 3	3b	bath	n	ванна	
+5	Module 3	3b	bed	n	кровать	
+5	Module 3	3b	bookcase	n	книжный шкаф	
+5	Module 3	3b	book shelves	n	книжные полки	
+5	Module 3	3b	carpet	n	ковёр	
+5	Module 3	3b	coffee table	n	журнальный столик	
+5	Module 3	3b	cooker	n	кухонная плита	
+5	Module 3	3b	fridge	n	холодильник	
+5	Module 3	3b	furniture	n	мебель	
+5	Module 3	3b	mirror	n	зеркало	
+5	Module 3	3b	painting	n	картина	
+5	Module 3	3b	sink	n	раковина (на кухне)	
+5	Module 3	3b	sofa	n	диван, софа	
+5	Module 3	3b	table	n	стол	
+5	Module 3	3b	television (TV)	n	телевизор	
+5	Module 3	3b	toilet	n	туалет	
+5	Module 3	3b	wardrobe	n	гардероб	
+5	Module 3	3b	washbasin	n	раковина (в ванной)	
+5	Module 3	3b	window	n	окно	
+5	Module 3	3b	How many?		Сколько?	
+5	Module 3	3b	Really?		На самом деле?	
+5	Module 3	3b	Sounds great!		Хорошо! Здорово!	
+5	Module 3	3b	What's your new flat like?		Как выглядит твоя новая квартира?	
+5	Module 3	3b	heads or tails		(о монете) орёл или решка	
+5	Module 3	3c	call	v	называть	
+5	Module 3	3c	computer	n	компьютер	
+5	Module 3	3c	everything	pron	всё	
+5	Module 3	3c	poster	n	плакат, постер	
+5	Module 3	3c	wall	n	стена	
+5	Module 3	3c	I like ... very much.		Мне очень нравится ... .	
+5	Module 3	3c	Where exactly is it?		Где именно это находится?	
+5	Module 3	3d - Culture Corner	all	prn	все, весь	
+5	Module 3	3d - Culture Corner	another	pron	другой	
+5	Module 3	3d - Culture Corner	back garden	n	сад за домом	
+5	Module 3	3d - Culture Corner	central heating		центральное отопление	
+5	Module 3	3d - Culture Corner	downstairs	adv	внизу	
+5	Module 3	3d - Culture Corner	fireplace	n	камин	
+5	Module 3	3d - Culture Corner	front garden		сад перед домом	
+5	Module 3	3d - Culture Corner	inside	adv; prep	внутри	
+5	Module 3	3d - Culture Corner	outside	adv; prep	снаружи	
+5	Module 3	3d - Culture Corner	plan	n	схема, план	
+5	Module 3	3d - Culture Corner	semi-detached	adj	имеющий общую стену	
+5	Module 3	3d - Culture Corner	special features		особенности	
+5	Module 3	3d - Culture Corner	typical	adj	типичный	
+5	Module 3	3d - Culture Corner	upstairs	adv	вверху	
+5	Module 3	3d - Culture Corner	keep people warm		согревать людей	
+5	Module 3	English in Use 3	big	adj	большой	
+5	Module 3	English in Use 3	key	n	ключ	
+5	Module 3	English in Use 3	quite	adv	вполне	
+5	Module 3	English in Use 3	Here we are.		Вот мы и здесь.	
+5	Module 3	English in Use 3	It's great.		Здорово.	
+5	Module 3	English in Use 3	Take a look.		Взгляни.	
+5	Module 3	Across the Curriculum 3: Art & Design	admire	v	восхищаться	
+5	Module 3	Across the Curriculum 3: Art & Design	building	n	здание	
+5	Module 3	Across the Curriculum 3: Art & Design	design	n	конструирование, дизайн	
+5	Module 3	Across the Curriculum 3: Art & Design	different	adj	различный	
+5	Module 3	Across the Curriculum 3: Art & Design	dome	n	купол	
+5	Module 3	Across the Curriculum 3: Art & Design	fantastic	adj	фантастический	
+5	Module 3	Across the Curriculum 3: Art & Design	marble	n	мрамор	
+5	Module 3	Across the Curriculum 3: Art & Design	minaret	n	минарет	
+5	Module 3	Across the Curriculum 3: Art & Design	pearl	n	жемчужина	
+5	Module 3	Across the Curriculum 3: Art & Design	palace	n	дворец	
+5	Module 3	Across the Curriculum 3: Art & Design	precious	adj	драгоценный	
+5	Module 3	Across the Curriculum 3: Art & Design	shine	irr v	сверкать, сиять	
+5	Module 3	Across the Curriculum 3: Art & Design	stone	n	камень	
+5	Module 3	Across the Curriculum 3: Art & Design	sunshine	n	солнечная погода	
+5	Module 3	Across the Curriculum 3: Art & Design	wonder	n	чудо	
+5	Module 3	Across the Curriculum 3: Art & Design	world	n	мир, земля	
+5	Module 3	Across the Curriculum 3: Art & Design	in the centre		в центре	
+5	Module 3	Across the Curriculum 3: Art & Design	be made of		быть изготовленным, сделанным из	
+5	Module 4	4a	baby	n	ребёнок	
+5	Module 4	4a	boy	n	мальчик	
+5	Module 4	4a	brother	n	брат	
+5	Module 4	4a	burn	v	гореть, пригорать	
+5	Module 4	4a	caring	adj	заботливый, внимательный	
+5	Module 4	4a	clever	adj	умный	
+5	Module 4	4a	cookie	n	домашнее печенье	
+5	Module 4	4a	cool	adj	классный	
+5	Module 4	4a	dad	n	папа	
+5	Module 4	4a	dance	v	танцевать	
+5	Module 4	4a	diary	n	дневник	
+5	Module 4	4a	family	n	семья	
+5	Module 4	4a	family members		члены семьи	
+5	Module 4	4a	food	n	еда	
+5	Module 4	4a	friendly	adj	дружелюбный	
+5	Module 4	4a	father	n	отец	
+5	Module 4	4a	funny	adj	смешной	
+5	Module 4	4a	give	irr v	давать	
+5	Module 4	4a	grandfather	n	дед	
+5	Module 4	4a	grandma	n	бабушка	
+5	Module 4	4a	grandmother	n	бабушка	
+5	Module 4	4a	grandpa	n	дедушка	
+5	Module 4	4a	grandparents	n	дедушка и бабушка	
+5	Module 4	4a	hobby	n	хобби	
+5	Module 4	4a	kind	adj	добрый	
+5	Module 4	4a	laugh	v	смеяться	
+5	Module 4	4a	make	irr v	делать, готовить	
+5	Module 4	4a	mother	n	мать	
+5	Module 4	4a	mum	n	мама	
+5	Module 4	4a	naughty	adj	непослушный	
+5	Module 4	4a	noisy	adj	шумный	
+5	Module 4	4a	piano	n	фортепиано	
+5	Module 4	4a	pilot	n	пилот	
+5	Module 4	4a	play	v	играть	
+5	Module 4	4a	secret	n/adj	секрет; тайный, секретный	
+5	Module 4	4a	see	irr v	видеть	
+5	Module 4	4a	sister	n	сестра	
+5	Module 4	4a	sweet	adj	сладкий, милый	
+5	Module 4	4a	tell	irr v	говорить, рассказывать	
+5	Module 4	4a	violin	n	скрипка	
+5	Module 4	4a	visit	v	посещать, навещать	
+5	Module 4	4a	weekend	n	выходные, уик-энд	
+5	Module 4	4a	yet	adv	ещё, пока что	
+5	Module 4	4a	every summer		каждое лето	
+5	Module 4	4b	appearance	n	внешность	
+5	Module 4	4b	build	n	телосложение	
+5	Module 4	4b	classmate	n	одноклассник	
+5	Module 4	4b	come	irr v	приходить	
+5	Module 4	4b	description	n	описание	
+5	Module 4	4b	ear	n	ухо	
+5	Module 4	4b	eye	n	глаз	
+5	Module 4	4b	facial features		черты лица	
+5	Module 4	4b	fair	adj	светлый, белокурый	
+5	Module 4	4b	fat	adj	толстый, упитанный	
+5	Module 4	4b	hair	n	волосы	
+5	Module 4	4b	height	n	рост	
+5	Module 4	4b	long	adj	длинный	
+5	Module 4	4b	lovely	adj	красивый	
+5	Module 4	4b	match	v	устанавливать соответствие, подходить	
+5	Module 4	4b	moustache	n	усы	
+5	Module 4	4b	mouth	n	рот	
+5	Module 4	4b	nose	n	нос	
+5	Module 4	4b	party	n	вечеринка	
+5	Module 4	4b	plump	adj	полный, пухлый	
+5	Module 4	4b	short	adj	короткий, невысокий	
+5	Module 4	4b	talk	v	разговаривать	
+5	Module 4	4b	tall	adj	высокий	
+5	Module 4	4b	thin	adj	худой	
+5	Module 4	4b	whose	pron	чей	
+5	Module 4	4b	with	prep	с	
+5	Module 4	4b	over there		вон там	
+5	Module 4	4c	cooking	n	кулинария	
+5	Module 4	4c	dancing	n	танцы	
+5	Module 4	4c	full name		полное имя	
+5	Module 4	4c	grace	n	грация, изящество	
+5	Module 4	4c	guess	v	угадывать	
+5	Module 4	4c	jazz	n	джаз	
+5	Module 4	4c	painting	n	рисование	
+5	Module 4	4c	person	n	личность, человек	
+5	Module 4	4c	place	n	место	
+5	Module 4	4c	profile	n	анкета, краткие сведения	
+5	Module 4	4c	singer	n	певец, певица	
+5	Module 4	4c	singing	n	пение	
+5	Module 4	4c	voice	n	голос	
+5	Module 4	4c	young	adj	молодой	
+5	Module 4	4d - Culture Corner	comic book	n	книга (журнал) комиксов	
+5	Module 4	4d - Culture Corner	cook	v	готовить	
+5	Module 4	4d - Culture Corner	drink	irr v	пить	
+5	Module 4	4d - Culture Corner	patient	adj	терпеливый	
+5	Module 4	4d - Culture Corner	saxophone	n	саксофон	
+5	Module 4	4d - Culture Corner	slim	adj	стройный	
+5	Module 4	4d - Culture Corner	show	n	шоу, зрелище	
+5	Module 4	4d - Culture Corner	Swedish	adj	шведский	
+5	Module 4	4d - Culture Corner	all over the world		во всём мире	
+5	Module 4	4d - Culture Corner	be afraid (of)		бояться (чего-либо)	
+5	Module 4	4d - Culture Corner	What are they like?		Какие они? (по нраву, характеру)	
+5	Module 4	4d - Culture Corner	What do they look like?		Как они выглядят?	
+5	Module 4	English in Use 4	now	adv	сейчас	
+5	Module 4	English in Use 4	pretty	adj	симпатичный, хорошенький	
+5	Module 4	English in Use 4	as well		также	
+5	Module 4	English in Use 4	What does she look like?		Как она выглядит?	
+5	Module 4	English in Use 4	What is she like?		Какая она? (по нраву, характеру)	
+5	Module 4	Across the Curriculum 4: Literature	bee	n	пчела	
+5	Module 4	Across the Curriculum 4: Literature	busy	adj	занятой	
+5	Module 4	Across the Curriculum 4: Literature	gentle	adj	добрый, мягкий	
+5	Module 4	Across the Curriculum 4: Literature	granny	n	бабушка	
+5	Module 4	Across the Curriculum 4: Literature	lamb	n	ягнёнок, овечка	
+5	Module 4	Across the Curriculum 4: Literature	mule	n	мул, осёл	
+5	Module 4	Across the Curriculum 4: Literature	literature	n	литература	
+5	Module 4	Across the Curriculum 4: Literature	owl	n	сова	
+5	Module 4	Across the Curriculum 4: Literature	ox (pl: oxen)	n	бык	
+5	Module 4	Across the Curriculum 4: Literature	peacock	n	павлин	
+5	Module 4	Across the Curriculum 4: Literature	playful	adj	игривый, весёлый	
+5	Module 4	Across the Curriculum 4: Literature	poem	n	стихотворение	
+5	Module 4	Across the Curriculum 4: Literature	rhyming words		рифмующиеся слова	
+5	Module 4	Across the Curriculum 4: Literature	simile	n	сравнение	
+5	Module 4	Across the Curriculum 4: Literature	slow	adj	медленный	
+5	Module 4	Across the Curriculum 4: Literature	snail	n	улитка	
+5	Module 4	Across the Curriculum 4: Literature	stubborn	adj	упрямый	
+5	Module 4	Across the Curriculum 4: Literature	title	n	заглавие, название	
+5	Module 4	Across the Curriculum 4: Literature	wise	adj	мудрый	
+5	Module 4	Across the Curriculum 4: Literature	as ... as		такой ..., как	
+5	Module 4	Across the Curriculum 4: Literature	send an email		отправить сообщение по электронной почте	
+5	Module 5	5a	amazing	adj	чудесный, восхитительный	
+5	Module 5	5a	animal	n	животное	
+5	Module 5	5a	bite	irr v	кусать	
+5	Module 5	5a	camel	n	верблюд	
+5	Module 5	5a	carry	v	носить, переносить	
+5	Module 5	5a	cobra	n	кобра	
+5	Module 5	5a	creature	n	создание, творение	
+5	Module 5	5a	crocodile	n	крокодил	
+5	Module 5	5a	cry	v	плакать	
+5	Module 5	5a	dangerous	adj	опасный	
+5	Module 5	5a	deer (pl: deer)	n	олень	
+5	Module 5	5a	elephant	n	слон	
+5	Module 5	5a	female	adj	женский	
+5	Module 5	5a	grass	n	трава	
+5	Module 5	5a	habit	n	привычка	
+5	Module 5	5a	heavy	adj	тяжёлый	
+5	Module 5	5a	hide	irr v	прятать(ся)	
+5	Module 5	5a	horn	n	рог	
+5	Module 5	5a	hunt	v	охотиться	
+5	Module 5	5a	leopard	n	леопард	
+5	Module 5	5a	lion	n	лев	
+5	Module 5	5a	metre	n	метр	
+5	Module 5	5a	mud	n	грязь	
+5	Module 5	5a	permanent	adj	постоянный	
+5	Module 5	5a	plant	n	растение	
+5	Module 5	5a	relax	v	отдыхать, расслабляться	
+5	Module 5	5a	rhino	n	носорог	
+5	Module 5	5a	sleep	irr v	спать	
+5	Module 5	5a	stripe	n	полоса	
+5	Module 5	5a	swim	irr v	плавать	
+5	Module 5	5a	tiger	n	тигр	
+5	Module 5	5a	trunk	n	хобот	
+5	Module 5	5a	use	v	использовать	
+5	Module 5	5a	wash	v	мыть	
+5	Module 5	5b	address	n	адрес	
+5	Module 5	5b	adult	n	взрослый	
+5	Module 5	5b	anyway	adv	в любом случае	
+5	Module 5	5b	beak	n	клюв	
+5	Module 5	5b	bear	n	медведь	
+5	Module 5	5b	cute	adj	умный, сообразительный	
+5	Module 5	5b	feather	n	перо	
+5	Module 5	5b	find	irr v	находить	
+5	Module 5	5b	fish	n	рыба	
+5	Module 5	5b	fruit	n	фрукт	
+5	Module 5	5b	fur	n	мех	
+5	Module 5	5b	giraffe	n	жираф	
+5	Module 5	5b	hear	irr v	слышать	
+5	Module 5	5b	highlighted	adj	выделенный	
+5	Module 5	5b	leg	n	нога	
+5	Module 5	5b	mane	n	грива	
+5	Module 5	5b	monkey	n	обезьяна	
+5	Module 5	5b	neck	n	шея	
+5	Module 5	5b	opening times		часы работы	
+5	Module 5	5b	otter	n	выдра	
+5	Module 5	5b	paw	n	лапа	
+5	Module 5	5b	peacock	n	павлин	
+5	Module 5	5b	penguin	n	пингвин	
+5	Module 5	5b	reason	n	причина	
+5	Module 5	5b	sound	n	звук	
+5	Module 5	5b	tail	n	хвост	
+5	Module 5	5b	thick	adj	толстый	
+5	Module 5	5b	ticket	n	билет	
+5	Module 5	5b	trunk	n	хобот	
+5	Module 5	5b	tusk	n	бивень	
+5	Module 5	5b	wild	adj	дикий	
+5	Module 5	5b	wing	n	крыло	
+5	Module 5	5b	parts of the body		части тела	
+5	Module 5	5c	activity	n	деятельность, занятие	
+5	Module 5	5c	bright	n	яркий	
+5	Module 5	5c	budgie	n	волнистый попугайчик	
+5	Module 5	5c	cow	n	корова	
+5	Module 5	5c	dog	n	собака	
+5	Module 5	5c	duck	n	утка	
+5	Module 5	5c	else	adv	ещё	
+5	Module 5	5c	farm animals		домашний скот	
+5	Module 5	5c	goat	n	козел, коза	
+5	Module 5	5c	golden	adj	золотой	
+5	Module 5	5c	goldfish	n	золотая рыбка	
+5	Module 5	5c	goose (pl: geese)	n	гусь	
+5	Module 5	5c	guinea pig		морская свинка	
+5	Module 5	5c	guy	n	парень	
+5	Module 5	5c	hen	n	курица	
+5	Module 5	5c	list	v	составлять список, относить к чему-либо	
+5	Module 5	5c	notify	v	оповещать, уведомлять	
+5	Module 5	5c	pet	n	домашний питомец	
+5	Module 5	5c	rabbit	n	кролик	
+5	Module 5	5c	sheep (pl: sheep)	n	овца	
+5	Module 5	5c	take	irr v	брать	
+5	Module 5	5c	tortoise	n	черепаха	
+5	Module 5	5c	all day long		весь день	
+5	Module 5	5c	take sb for walks		брать кого-либо на прогулку	
+5	Module 5	5c	talk online		разговаривать через интернет	
+5	Module 5	5d - Culture Corner	characteristic	n	характеристика	
+5	Module 5	5d - Culture Corner	complete	v	заполнять, завершать	
+5	Module 5	5d - Culture Corner	cute	adj	умный, сообразительный	
+5	Module 5	5d - Culture Corner	eucalyptus	n	эвкалипт	
+5	Module 5	5d - Culture Corner	fact file		анкета	
+5	Module 5	5d - Culture Corner	furry	adj	пушистый, меховой	
+5	Module 5	5d - Culture Corner	get	irr v	получать	
+5	Module 5	5d - Culture Corner	koala	n	коала	
+5	Module 5	5d - Culture Corner	leaf (pl: leaves)	n	лист	
+5	Module 5	5d - Culture Corner	liquid	n	жидкость	
+5	Module 5	5d - Culture Corner	little	adj	маленький	
+5	Module 5	5d - Culture Corner	mammal	n	млекопитающее	
+5	Module 5	5d - Culture Corner	marsupial	adj	сумчатый	
+5	Module 5	5d - Culture Corner	mean	irr v	иметь в виду, обозначать	
+5	Module 5	5d - Culture Corner	need	v	нуждаться	
+5	Module 5	5d - Culture Corner	never	adv	никогда	
+5	Module 5	5d - Culture Corner	round	adj	круглый	
+5	Module 5	5d - Culture Corner	sharp	adj	острый	
+5	Module 5	5d - Culture Corner	soft	adj	мягкий	
+5	Module 5	5d - Culture Corner	zoologist	n	зоолог	
+5	Module 5	5d - Culture Corner	during the day		в течение дня	
+5	Module 5	5d - Culture Corner	they don't make good pets		они не поддаются приручению	
+5	Module 5	English in Use 5	breast	n	грудь	
+5	Module 5	English in Use 5	breath	n	дыхание	
+5	Module 5	English in Use 5	broken	adj	сломанный	
+5	Module 5	English in Use 5	earache	n	боль в ухе	
+5	Module 5	English in Use 5	fleas	n	блохи	
+5	Module 5	English in Use 5	health	n	здоровье	
+5	Module 5	English in Use 5	parrot	n	попугай	
+5	Module 5	English in Use 5	problem	n	проблема	
+5	Module 5	English in Use 5	toothache	n	зубная боль	
+5	Module 5	English in Use 5	vet	n	ветеринар	
+5	Module 5	English in Use 5	visit	n; v	визит, посещение; посещать	
+5	Module 5	English in Use 5	be ill		болеть	
+5	Module 5	English in Use 5	What's the matter?		Что случилось?	
+5	Module 5	English in Use 5	What's wrong (with him)?		Что (с ним) случилось?	
+5	Module 5	Across the Curriculum 5: Science	ant	n	муравей	
+5	Module 5	Across the Curriculum 5: Science	antenna (plural: antennae)	n	усик, щупальце	
+5	Module 5	Across the Curriculum 5: Science	bee	n	пчела	
+5	Module 5	Across the Curriculum 5: Science	beetle	n	жук	
+5	Module 5	Across the Curriculum 5: Science	butterfly	n	бабочка	
+5	Module 5	Across the Curriculum 5: Science	buzz around	phr v	жужжать	
+5	Module 5	Across the Curriculum 5: Science	call	v	называть	
+5	Module 5	Across the Curriculum 5: Science	dead	adj	мёртвый	
+5	Module 5	Across the Curriculum 5: Science	detective	n; adj	детектив; детективный	
+5	Module 5	Across the Curriculum 5: Science	dragonfly	n	стрекоза	
+5	Module 5	Across the Curriculum 5: Science	expect	v	ожидать	
+5	Module 5	Across the Curriculum 5: Science	field	n	поле	
+5	Module 5	Across the Curriculum 5: Science	fly	n	муха	
+5	Module 5	Across the Curriculum 5: Science	forest	n	лес	
+5	Module 5	Across the Curriculum 5: Science	grasshoper	n	кузнечик	
+5	Module 5	Across the Curriculum 5: Science	ground	n	земля	
+5	Module 5	Across the Curriculum 5: Science	honey	n	мёд	
+5	Module 5	Across the Curriculum 5: Science	important	adj	важный	
+5	Module 5	Across the Curriculum 5: Science	insect	n	насекомое	
+5	Module 5	Across the Curriculum 5: Science	ladybird	n	божья коровка	
+5	Module 5	Across the Curriculum 5: Science	life	n	жизнь	
+5	Module 5	Across the Curriculum 5: Science	keep	irr v	хранить	
+5	Module 5	Across the Curriculum 5: Science	million	n	миллион	
+5	Module 5	Across the Curriculum 5: Science	mosquito	n	комар	
+5	Module 5	Across the Curriculum 5: Science	present	v	представлять	
+5	Module 5	Across the Curriculum 5: Science	rubbish	n	мусор	
+5	Module 5	Across the Curriculum 5: Science	unwanted	adj	ненужный, лишний	
+5	Module 5	Across the Curriculum 5: Science	wasp	n	оса	
+5	Module 5	Across the Curriculum 5: Science	waste	n	отходы	
+5	Module 6	6a	acrobatics	n	акробатика	
+5	Module 6	6a	action hero		главный герой	
+5	Module 6	6a	after	prep	после	
+5	Module 6	6a	always	adv	всегда	
+5	Module 6	6a	archaeologist	n	археолог	
+5	Module 6	6a	before	adv; prep	перед (о времени)	
+5	Module 6	6a	clock	n	часы	
+5	Module 6	6a	daily	adj	ежедневный	
+5	Module 6	6a	daily routine		распорядок дня	
+5	Module 6	6a	get up	phr v	вставать (с постели)	
+5	Module 6	6a	fight	irr v	бороться	
+5	Module 6	6a	late	adv	поздно	
+5	Module 6	6a	often	adv	часто	
+5	Module 6	6a	sometimes	adv	иногда	
+5	Module 6	6a	usually	adv	обычно	
+5	Module 6	6a	wake up	phr v	просыпаться	
+5	Module 6	6a	at ... o'clock		в ... часов	
+5	Module 6	6a	at home		дома	
+5	Module 6	6a	at midnight/at night		в полночь/ночью	
+5	Module 6	6a	at noon		в полдень	
+5	Module 6	6a	do homework		делать домашнее задание	
+5	Module 6	6a	do the/go shopping		ходить за покупками	
+5	Module 6	6a	have/eat dinner		ужинать	
+5	Module 6	6a	have/eat lunch		обедать	
+5	Module 6	6a	for a while		некоторое время	
+5	Module 6	6a	get dressed		одеваться	
+5	Module 6	6a	go jogging		совершать пробежку	
+5	Module 6	6a	go to bed		ложиться спать	
+5	Module 6	6a	go to school		ходить в школу	
+5	Module 6	6a	half past seven		половина восьмого	
+5	Module 6	6a	Have you got the time, please?		Скажите, пожалуйста, который час?	
+5	Module 6	6a	practise kick boxing		упражняться в кикбоксинге	
+5	Module 6	6a	quarter past seven		четверть восьмого	
+5	Module 6	6a	quarter to seven		без четверти семь	
+5	Module 6	6a	What's the time, please?		Скажите, пожалуйста, который час?	
+5	Module 6	6a	work on computer		работать на компьютере	
+5	Module 6	6b	ambulance	n	машина скорой помощи	
+5	Module 6	6b	baker	n	булочник, пекарь	
+5	Module 6	6b	baker's	n	булочная, пекарня	
+5	Module 6	6b	bakery	n	булочная, пекарня	
+5	Module 6	6b	café	n	кафе	
+5	Module 6	6b	doctor	n	доктор, врач	
+5	Module 6	6b	drive	irr v	водить, управлять автомобилем	
+5	Module 6	6b	hospital	n	больница	
+5	Module 6	6b	job	n	работа	
+5	Module 6	6b	mechanic	n	механик	
+5	Module 6	6b	Mr	n	мистер, господин	
+5	Module 6	6b	Ms	n	мисс	
+5	Module 6	6b	Mrs	n	миссис	
+5	Module 6	6b	nurse	n	медицинская сестра, сиделка	
+5	Module 6	6b	paint	v	красить, рисовать (красками)	
+5	Module 6	6b	painter	n	маляр, художник	
+5	Module 6	6b	postman	n	почтальон	
+5	Module 6	6b	serve	v	подавать, обслуживать	
+5	Module 6	6b	taxi driver	n	таксист	
+5	Module 6	6b	wait	v	ждать	
+5	Module 6	6b	waiter	n	официант	
+5	Module 6	6b	waitress	n	официантка	
+5	Module 6	6b	a street scene		уличная сцена	
+5	Module 6	6b	across the road		через дорогу	
+5	Module 6	6b	act out a dialogue		разыгрывать диалог	
+5	Module 6	6b	catch the bus home		сесть на автобус до дома	
+5	Module 6	6b	deliver letters		доставлять письма	
+5	Module 6	6b	do a crossword		разгадывать кроссворд	
+5	Module 6	6b	repair		ремонтировать	
+5	Module 6	6b	say goodbye to ...		попрощаться с ...	
+5	Module 6	6b	by the fire		у огня	
+5	Module 6	6b	What does your dad do?		Чем занимается твой папа?	
+5	Module 6	6c	boring	adj	скучный, неинтересный	
+5	Module 6	6c	hard work		трудная работа	
+5	Module 6	6c	newspaper	n	газета	
+5	Module 6	6c	Drop me a line.		Напиши мне пару строк.	
+5	Module 6	6c	Have a good time!		Желаю вам хорошо провести время!	
+5	Module 6	6c	Great to hear from you.		Рад получить весточку от тебя.	
+5	Module 6	6c	make phone calls		звонить по телефону	
+5	Module 6	6c	plant flowers		сажать цветы	
+5	Module 6	6c	play (games) with		играть (в игры) с ...	
+5	Module 6	6c	That's all for now!		Пока это всё!	
+5	Module 6	6c	Write back soon.		Отвечай поскорее.	
+5	Module 6	6d - Culture Corner	above	adv; prep	над	
+5	Module 6	6d - Culture Corner	belfry	n	колокольня	
+5	Module 6	6d - Culture Corner	exactly	adv	точно	
+5	Module 6	6d - Culture Corner	hour hand		часовая стрелка	
+5	Module 6	6d - Culture Corner	huge	adj	огромный	
+5	Module 6	6d - Culture Corner	interesting	adj	интересный	
+5	Module 6	6d - Culture Corner	know	irr v	знать	
+5	Module 6	6d - Culture Corner	landmark	n	достопримечательность	
+5	Module 6	6d - Culture Corner	minute hand		минутная стрелка	
+5	Module 6	6d - Culture Corner	most (people)		большинство (людей)	
+5	Module 6	6d - Culture Corner	perhaps	adv	возможно	
+5	Module 6	6d - Culture Corner	ton	n	тонна	
+5	Module 6	6d - Culture Corner	top	n	верхушка, шпиль	
+5	Module 6	6d - Culture Corner	tour guide		экскурсовод	
+5	Module 6	6d - Culture Corner	tourist attraction		место, привлекающее туристов	
+5	Module 6	6d - Culture Corner	wide	adj	широкий	
+5	Module 6	6d - Culture Corner	commissioner of works		руководитель работ	
+5	Module 6	6d - Culture Corner	every year		каждый год	
+5	Module 6	English in Use 6	agree	v	соглашаться	
+5	Module 6	English in Use 6	free	adj	свободный	
+5	Module 6	English in Use 6	respond	v	отвечать	
+5	Module 6	English in Use 6	suggestion	n	предложение	
+5	Module 6	English in Use 6	go to the cinema		ходить в кино	
+5	Module 6	English in Use 6	be tired		уставать	
+5	Module 6	English in Use 6	See you at ... o' clock.		Увидимся в ... часов.	
+5	Module 6	English in Use 6	Sure, that's a good idea.		Конечно, это хорошая идея.	
+5	Module 6	English in Use 6	What/How about having a coffee?		Как насчёт кофе?	
+5	Module 6	English in Use 6	Why don't we go ... ?		Почему бы нам не пойти ... ?	
+5	Module 6	Across the Curriculum 6: Science	be ready	v	быть готовым	
+5	Module 6	Across the Curriculum 6: Science	centimetre	n	сантиметр	
+5	Module 6	Across the Curriculum 6: Science	compass	n	компас	
+5	Module 6	Across the Curriculum 6: Science	correct	adj	правильный, верный	
+5	Module 6	Across the Curriculum 6: Science	different	adj	различный	
+5	Module 6	Across the Curriculum 6: Science	early	adj; adv	ранний; рано	
+5	Module 6	Across the Curriculum 6: Science	east	n	восток	
+5	Module 6	Across the Curriculum 6: Science	hole	n	отверстие, дырка	
+5	Module 6	Across the Curriculum 6: Science	lid	n	крышка	
+5	Module 6	Across the Curriculum 6: Science	mark	n	отметка	
+5	Module 6	Across the Curriculum 6: Science	mobile phone		мобильный телефон	
+5	Module 6	Across the Curriculum 6: Science	move around	phr v	вращаться вокруг	
+5	Module 6	Across the Curriculum 6: Science	nearby	adj	близлежащий	
+5	Module 6	Across the Curriculum 6: Science	need	v	нуждаться	
+5	Module 6	Across the Curriculum 6: Science	north	n	север	
+5	Module 6	Across the Curriculum 6: Science	perfect	adj	идеальный, отличный	
+5	Module 6	Across the Curriculum 6: Science	place	n	место	
+5	Module 6	Across the Curriculum 6: Science	point	v	указывать	
+5	Module 6	Across the Curriculum 6: Science	put	irr v	класть	
+5	Module 6	Across the Curriculum 6: Science	shadow	n	тень	
+5	Module 6	Across the Curriculum 6: Science	sky	n	небо	
+5	Module 6	Across the Curriculum 6: Science	side	n	сторона	
+5	Module 6	Across the Curriculum 6: Science	south	n	юг	
+5	Module 6	Across the Curriculum 6: Science	stone	n	камень	
+5	Module 6	Across the Curriculum 6: Science	straw	n	соломинка	
+5	Module 6	Across the Curriculum 6: Science	sundial	n	солнечные часы	
+5	Module 6	Across the Curriculum 6: Science	sunny day		солнечный день	
+5	Module 6	Across the Curriculum 6: Science	tape	v	прикрепить скотчем (зд.)	
+5	Module 6	Across the Curriculum 6: Science	top	n	верх, верхушка	
+5	Module 6	Across the Curriculum 6: Science	until	prep	до	
+5	Module 6	Across the Curriculum 6: Science	use	v	использовать	
+5	Module 6	Across the Curriculum 6: Science	west	n	запад	
+5	Module 6	Across the Curriculum 6: Science	do the same		делать то же самое	
+5	Module 7	7a	autumn	n	осень	
+5	Module 7	7a	balcony	n	балкон	
+5	Module 7	7a	chat log		чат	
+5	Module 7	7a	computer screen		экран компьютера	
+5	Module 7	7a	go swimming		идти купаться/плавать	
+5	Module 7	7a	image	n	изображение, образ	
+5	Module 7	7a	magazine	n	журнал	
+5	Module 7	7a	mind	n	ум, разум	
+5	Module 7	7a	month	n	месяц	
+5	Module 7	7a	January	n	январь	
+5	Module 7	7a	February	n	февраль	
+5	Module 7	7a	March	n	март	
+5	Module 7	7a	April	n	апрель	
+5	Module 7	7a	May	n	май	
+5	Module 7	7a	June	n	июнь	
+5	Module 7	7a	July	n	июль	
+5	Module 7	7a	August	n	август	
+5	Module 7	7a	September	n	сентябрь	
+5	Module 7	7a	October	n	октябрь	
+5	Module 7	7a	November	n	ноябрь	
+5	Module 7	7a	December	n	декабрь	
+5	Module 7	7a	proverb	n	пословица, поговорка	
+5	Module 7	7a	season	n	время года	
+5	Module 7	7a	snow	n	снег	
+5	Module 7	7a	spring	n	весна	
+5	Module 7	7a	statement	n	утверждение	
+5	Module 7	7a	summer	n	лето	
+5	Module 7	7a	weather	n	погода	
+5	Module 7	7a	weather forecast		прогноз погоды	
+5	Module 7	7a	winter	n	зима	
+5	Module 7	7a	year	n	год	
+5	Module 7	7a	at the moment		сейчас, в настоящий момент	
+5	Module 7	7a	be fed up with sth		устать от чего-либо	
+5	Module 7	7a	How are you doing?		Как дела?	
+5	Module 7	7a	It doesn't suit me.		Это не по мне.	
+5	Module 7	7a	It's fabulous!		Это потрясающе!	
+5	Module 7	7a	It's (very) hot.		(Очень) жарко.	
+5	Module 7	7a	It's awful!		Это ужасно!	
+5	Module 7	7a	It's cold.		Холодно.	
+5	Module 7	7a	It's freezing.		Морозно.	
+5	Module 7	7a	It's raining (heavily).		Идёт (сильный) дождь.	
+5	Module 7	7a	It's snowing.		Идёт снег.	
+5	Module 7	7a	It's terrible!		Это ужасно!	
+5	Module 7	7a	It's warm.		Тепло.	
+5	Module 7	7a	The sun is shining.		Светит солнце.	
+5	Module 7	7a	That's not my kind of place.		Это место не для меня.	
+5	Module 7	7a	What's the weather like in ...?		Какая погода в ...?	
+5	Module 7	7a	go swimming		ходить купаться	
+5	Module 7	7a	pick flowers		собирать цветы	
+5	Module 7	7a	rake leaves		сгребать листья	
+5	Module 7	7a	You're lucky.		Тебе повезло.	
+5	Module 7	7b	airport	n	аэропорт	
+5	Module 7	7b	bag	n	сумка	
+5	Module 7	7b	blouse	n	блузка	
+5	Module 7	7b	boots	n	ботинки	
+5	Module 7	7b	clothes	n	одежда	
+5	Module 7	7b	coat	n	пальто	
+5	Module 7	7b	couple	n	пара	
+5	Module 7	7b	dress	n	платье	
+5	Module 7	7b	get on	phr v	садиться на ... (о транспорте)	
+5	Module 7	7b	habit	n	привычка	
+5	Module 7	7b	hang up	phr v	вешать телефонную трубку	
+5	Module 7	7b	high heels	n	высокие каблуки	
+5	Module 7	7b	joke	n	шутка	
+5	Module 7	7b	jumper	n	джемпер	
+5	Module 7	7b	light	adj	лёгкий, светлый	
+5	Module 7	7b	loose	adj	свободный (об одежде)	
+5	Module 7	7b	put on	phr v	надевать	
+5	Module 7	7b	raincoat	n	плащ	
+5	Module 7	7b	shirt	n	рубашка	
+5	Module 7	7b	shoes	n	туфли	
+5	Module 7	7b	shorts	n	шорты	
+5	Module 7	7b	skirt	n	юбка	
+5	Module 7	7b	socks	n	носки	
+5	Module 7	7b	suit	n	костюм	
+5	Module 7	7b	telephone conversation		телефонный разговор	
+5	Module 7	7b	tight	adj	тесный (об одежде), обтягивающий	
+5	Module 7	7b	trainers	n	кроссовки	
+5	Module 7	7b	trousers	n	брюки	
+5	Module 7	7b	wear	irr v	носить	
+5	Module 7	7b	go on foot		ходить пешком	
+5	Module 7	7b	How do I look in this?		Как я выгляжу в этом?	
+5	Module 7	7b	How does this look on me?		Как это на мне смотрится?	
+5	Module 7	7b	I'm not sure it suits you.		Я не уверен, что это подходит тебе.	
+5	Module 7	7c	beach	n	пляж	
+5	Module 7	7c	enjoy	v	наслаждаться, получать удовольствие	
+5	Module 7	7c	greeting	n	приветствие; поздравление	
+5	Module 7	7c	local club	n	местный клуб	
+5	Module 7	7c	postcard	n	открытка	
+5	Module 7	7c	stay	v	останавливаться, оставаться	
+5	Module 7	7c	sunbathe	v	загорать	
+5	Module 7	7c	go camping		ходить в поход	
+5	Module 7	7c	go skiing		кататься на лыжах	
+5	Module 7	7c	have a picnic		устраивать пикник	
+5	Module 7	7c	It's fun.		Весело.	
+5	Module 7	7c	make a snowman		лепить снеговика	
+5	Module 7	7c	play golf		играть в гольф	
+5	Module 7	7c	See you soon.		Скоро увидимся.	
+5	Module 7	7d - Culture Corner	calm	adj	спокойный, тихий	
+5	Module 7	7d - Culture Corner	climate	n	климат	
+5	Module 7	7d - Culture Corner	cool	adj	прохладный	
+5	Module 7	7d - Culture Corner	decide	v	решать	
+5	Module 7	7d - Culture Corner	jacket	n	куртка	
+5	Module 7	7d - Culture Corner	long-sleeved	adj	с длинными рукавами	
+5	Module 7	7d - Culture Corner	northwest	adj	северо-запад	
+5	Module 7	7d - Culture Corner	pack	v	упаковывать	
+5	Module 7	7d - Culture Corner	sad	adj	грустный	
+5	Module 7	7d - Culture Corner	short-sleeved	adj	с короткими рукавами	
+5	Module 7	7d - Culture Corner	stressed	adj	напряжённый	
+5	Module 7	7d - Culture Corner	temperature	n	температура	
+5	Module 7	7d - Culture Corner	vary	v	различаться	
+5	Module 7	7d - Culture Corner	walking shoes	n	спортивная обувь	
+5	Module 7	7d - Culture Corner	wool sweater	n	шерстяной свитер	
+5	Module 7	7d - Culture Corner	make sure		убеждаться, удостовериться	
+5	Module 7	English in Use 7	clothing sizes		размеры одежды	
+5	Module 7	English in Use 7	customer	n	покупатель, клиент	
+5	Module 7	English in Use 7	collar	n	воротник	
+5	Module 7	English in Use 7	Any particular colour?		Какой-то особенный цвет?	
+5	Module 7	English in Use 7	Have a nice day!		Приятного дня!	
+5	Module 7	English in Use 7	Here you are.		Вот, пожалуйста.	
+5	Module 7	English in Use 7	How can I help you?		Чем я могу вам помочь?	
+5	Module 7	English in Use 7	How much does it cost?		Сколько это стоит?	
+5	Module 7	English in Use 7	How much is it?		Сколько это стоит?	
+5	Module 7	English in Use 7	I'm looking for ... .		Я ищу ... .	
+5	Module 7	English in Use 7	Thank you — You're welcome.		Спасибо — Пожалуйста.	
+5	Module 7	English in Use 7	What size are you?		Какой у вас размер?	
+5	Module 7	Across the Curriculum 7: Literature	blow away	phr v	уносить (ветром)	
+5	Module 7	Across the Curriculum 7: Literature	branch	n	ветка	
+5	Module 7	Across the Curriculum 7: Literature	dancing ballerina		танцующая балерина	
+5	Module 7	Across the Curriculum 7: Literature	go away	phr v	уходить	
+5	Module 7	Across the Curriculum 7: Literature	go up	phr v	подниматься вверх	
+5	Module 7	Across the Curriculum 7: Literature	land	n	земля	
+5	Module 7	Across the Curriculum 7: Literature	sea	n	море	
+5	Module 7	Across the Curriculum 7: Literature	sky	n	небо	
+5	Module 7	Across the Curriculum 7: Literature	wind	n	ветер	
+5	Module 8	8a	banana	n	банан	
+5	Module 8	8a	biscuit	n	печенье	
+5	Module 8	8a	both	pron	оба	
+5	Module 8	8a	carrot	n	морковь	
+5	Module 8	8a	celebrate	v	праздновать	
+5	Module 8	8a	celebration	n	празднование, праздник	
+5	Module 8	8a	choose	irr v	выбирать	
+5	Module 8	8a	complete	v	заполнять, завершать	
+5	Module 8	8a	cookery competition		кулинарный конкурс	
+5	Module 8	8a	costume	n	костюм (карнавальный, театральный)	
+5	Module 8	8a	cranberry sauce		клюквенный соус	
+5	Module 8	8a	cut	irr v	резать, разрезать	
+5	Module 8	8a	crop	n	урожай	
+5	Module 8	8a	dessert	n	десерт	
+5	Module 8	8a	dictionary entry		словарная статья	
+5	Module 8	8a	different varieties		различные виды	
+5	Module 8	8a	dish	n	блюдо	
+5	Module 8	8a	dress up	phr v	наряжаться	
+5	Module 8	8a	farmer	n	фермер	
+5	Module 8	8a	festive	adj	весёлый, праздничный	
+5	Module 8	8a	festival	n	праздник	
+5	Module 8	8a	fresh	adj	свежий	
+5	Module 8	8a	harvest	n; v	урожай; собирать урожай	
+5	Module 8	8a	holiday	n	праздник	
+5	Module 8	8a	last	v	длиться, продолжаться	
+5	Module 8	8a	moon	n	луна	
+5	Module 8	8a	pumpkin pie		тыквенный пирог	
+5	Module 8	8a	radio show		радиопрограмма	
+5	Module 8	8a	rice	n	рис	
+5	Module 8	8a	street parade		уличный парад	
+5	Module 8	8a	sweet potato		сладкий картофель	
+5	Module 8	8a	turkey	n	индейка	
+5	Module 8	8a	wheat	n	пшеница	
+5	Module 8	8a	light bonfires		разжигать костры	
+5	Module 8	8a	set off fireworks		запускать фейерверки	
+5	Module 8	8a	exchange gifts		обмениваться подарками	

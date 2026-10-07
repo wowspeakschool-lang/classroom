@@ -10,11 +10,16 @@ BOOKS = {  # класс: [(файл, первая, последняя стран
  7: [('Spotlight_7_SB.pdf',11,26)],
  8: [('Spotlight_8_SB.pdf',23,46)],
  9: [('Spotlight_9_SB-страницы.pdf',28,50)],
+ 10: [('Spotlight_10.pdf',25,51)],
+ 11: [('Spotlight_11.pdf',26,48)],
 }
 def gap(prof, lo, hi):
     seg = prof[lo:hi]; return lo + int(np.argmin(np.convolve(seg, np.ones(9), 'same')))
 idx = {}
+import sys
+ONLY = [int(a) for a in sys.argv[1:]]
 for g, parts in BOOKS.items():
+    if ONLY and g not in ONLY: continue
     out = f'crops/{g}'; os.makedirs(out, exist_ok=True); n = 0; lst = []
     for f, a, b in parts:
         d = pymupdf.open('pdf/' + f)
