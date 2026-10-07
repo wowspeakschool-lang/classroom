@@ -83,8 +83,138 @@ ACTIVITIES = [
     ("play the guitar", "играть на гитаре"),
 ]
 
+# Картинки занятий: шесть — лист ЛТ9.1, три (ice cream, book, guitar) — Л9.4
+ACT_IMG = {
+    "catch a fish": "act_catch_fish", "paint a picture": "act_paint_picture",
+    "eat ice cream": "act_eat_ice_cream", "take a photo": "act_take_photo",
+    "listen to music": "act_listen_music", "look for shells": "act_look_shells",
+    "read a book": "act_read_book", "make a sandcastle": "act_make_sandcastle",
+    "play the guitar": "act_play_guitar",
+}
+ACT_WORDS = [(en, ru, ACT_IMG[en]) for en, ru in ACTIVITIES]
+
+
+def listen_quiz(words, title="Послушай и выбери, что прозвучало"):
+    """«Послушай» тренажёра: звучит слово, выбрать из четырёх.
+    Верный — на позиции i % 4: варианты при показе не перемешиваются."""
+    n = len(words)
+    qs = []
+    for i, (en, ru, _) in enumerate(words):
+        wrong = [words[(i + k) % n][0] for k in range(1, 4)]
+        pos = i % 4
+        opts = wrong[:pos] + [en] + wrong[pos:]
+        qs.append({"q": title, "type": "single", "audio_tts": en,
+                   "options": [{"text": o} for o in opts], "correct": [pos]})
+    return {"questions": qs}
+
+
+def en_to_ru_quiz(words):
+    """«Найди определение»: английское слово → перевод."""
+    n = len(words)
+    qs = []
+    for i, (en, ru, f) in enumerate(words):
+        wrong = [words[(i + k) % n][1] for k in range(1, 4)]
+        pos = (i + 2) % 4
+        opts = wrong[:pos] + [ru] + wrong[pos:]
+        qs.append({"q": f"Что значит <b>{en}</b>?", "type": "single", "audio_tts": en,
+                   "image": c(f), "options": [{"text": o} for o in opts], "correct": [pos]})
+    return {"questions": qs}
+
+
+def scramble(word):
+    """Буквы слова вразброс, детерминированно: чётные позиции с конца, потом нечётные."""
+    s = word[1::2][::-1] + word[0::2]
+    return s if s != word else word[::-1]
+
+
+def masked(phrase):
+    """Каждая вторая буква слова (кроме первой) — пропуск: c_t_h a f_s_."""
+    return " ".join("".join(ch if i % 2 == 0 else "_" for i, ch in enumerate(w))
+                    if len(w) > 1 else w for w in phrase.split())
+
+
+def tf(q, image, true):
+    """Верно / неверно по картинке; варианты всегда True, False — как в выгрузке."""
+    return {"q": q, "type": "single", "image": image,
+            "options": [{"text": "True ✅"}, {"text": "False ❌"}],
+            "correct": [0 if true else 1]}
+
 
 LESSONS = {
+    # ------------------------------------------------------------------ HW1
+    "u9_hw1": {
+        "unit": U, "unit_title": UNIT, "unit_sort": 9,
+        "lesson_title": "Homework 1", "lesson_sort": 0, "kind": "homework",
+        # Часть (1) — словарный тренажёр на 9 слов (Remember, Listen, Match,
+        # доп.: Unscramble, Fill in), список слов в выгрузке свёрнут — слова
+        # из словаря юнита, задания наши (СОСТАВ МОЙ). Часть (2): фото
+        # «Hello» на песке и реклама (бл. 1) не перенесены, приветствие
+        # (бл. 2) — перемычка, раскраска (бл. 3) выброшена, бл. 4 — task,
+        # бл. 5 — прощание.
+        "blocks": [
+            # 1 — Teacher's note части (1)
+            hello("hello_wave", "Добро пожаловать в домашнее задание!",
+                  "Я не знаю человека, который бы не любил море! 🌊",
+                  "Сегодня мы с тобой выучим различные занятия, которыми можно заниматься "
+                  "на море. В этом уроке тебя ждут задания на отработку новых слов! Выполни "
+                  "все, если хочешь выучить тему на все 100!",
+                  "После того как завершишь все задания, тебя ждёт дополнительное задание — "
+                  "его можно выполнить по желанию, НО если ты выполнишь его, то будешь "
+                  "нереально крут!"),
+
+            # 2
+            ("flashcards", {"title": "Запомни слова. Нажми на карточку, чтобы увидеть перевод",
+                            "cards": [{"text": en, "translation": ru, "audio_tts": en, "image": c(f)}
+                                      for en, ru, f in ACT_WORDS]}),
+
+            # 3 — «Remember»
+            ("quiz", quiz_ru_to_en(ACT_WORDS)),
+
+            # 4 — «Listen»
+            ("quiz", listen_quiz(ACT_WORDS)),
+
+            # 5 — «Match»
+            ("match", {"title": "Найди пару: соедини картинку и слова",
+                       "pairs": [{"left_image": c(f), "right": en, "right_audio_tts": en}
+                                 for en, ru, f in ACT_WORDS]}),
+
+            # 6 — доп. «Unscramble»
+            ("exact_input", {"items": [
+                {"prompt": f"Собери слова из букв: {' '.join(scramble(w) for w in en.split())} ({ru})",
+                 "accept": [en], "audio_tts": en}
+                for en, ru, f in ACT_WORDS]}),
+
+            # 7 — доп. «Fill in»
+            ("exact_input", {"items": [
+                {"prompt": f"Впиши пропущенные буквы: {masked(en)} ({ru})",
+                 "accept": [en], "image": c(f), "audio_tts": en}
+                for en, ru, f in ACT_WORDS]}),
+
+            # 8 — перемычка: приветствие части (2)
+            ("text", {"html":
+                "<h3>Привет! 👋</h3>"
+                "<p>Добро пожаловать во вторую, ДОПОЛНИТЕЛЬНУЮ часть домашнего задания.</p>"
+                "<p>Выполни задание, чтобы хорошенько запомнить новые слова! "
+                "Выполнив его, ты станешь МЕГА крутым учеником!</p>"}),
+
+            # 9 — бл. 4 части (2)
+            ("task", {
+                "title": "Дополнительное задание ⭐ Мой отдых на море",
+                "needs_review": True,
+                "image": c("hw1_drawing_example"),
+                "html":
+                    "<p>Это ДОПОЛНИТЕЛЬНОЕ ЗАДАНИЕ — для самых смелых!</p>"
+                    "<p><b>Нарисуй свой отдых на море</b> и пришли рисунок сюда. А на уроке "
+                    "устно расскажи учителю, чем ты больше всего любишь заниматься на каникулах.</p>"
+                    "<p>Уверена, что твой рисунок будет очень красивым. Удачи 💗</p>",
+            }),
+
+            # 10
+            bye("well_done_star", "Поздравляю! Ты завершил домашнее задание. Ты — МЕГА КРУТ! 🌟",
+                "Жду тебя на уроке!"),
+        ],
+    },
+
     # ------------------------------------------------------------------ HW2
     "u9_hw2": {
         "unit": U, "unit_title": UNIT, "unit_sort": 9,
@@ -389,31 +519,132 @@ LESSONS = {
         ],
     },
 
+    # ------------------------------------------------------------------ HW5
+    "u9_hw5": {
+        "unit": U, "unit_title": UNIT, "unit_sort": 9,
+        "lesson_title": "Homework 5", "lesson_sort": 4, "kind": "homework",
+        # Выгрузка: 21 блок. Не перенесены: бл. 1 (фото «hello» с ракушками),
+        # бл. 2 (реклама), картинки-«ракушки в коллекцию» (бл. 9, 14, 17, 18)
+        # и стоковое фото в прощании (бл. 21). Верно/неверно (бл. 4–8) — один
+        # quiz; фото детей заменены картинками тех же занятий без людей
+        # (ответы не меняются). «Расставь слова» (бл. 10–13) — четыре order.
+        "blocks": [
+            # 1 — бл. 3
+            hello("hello_book", "Добро пожаловать в домашнее задание!",
+                  "Тебя ждут интересные упражнения и 1 ДОПОЛНИТЕЛЬНОЕ задание, которое можно "
+                  "выполнить ПО ЖЕЛАНИЮ. Но ты будешь МЕГА КРУТ, когда выполнишь его."),
+
+            # 2 — бл. 4–8. Ответы по картинкам выгрузки: девочка ест мороженое;
+            # девочка в наушниках (не читает); семья строит замок; мальчик ловит
+            # рыбу (не фотографирует)
+            ("quiz", {"title": "Внимательно посмотри на картинку. Прочитай предложение и скажи, "
+                               "это правда (True) или неправда (False).", "questions": [
+                tf("She is eating ice-cream.", c("hw5_girl_icecream"), True),
+                tf("She is reading a book.", c("act_listen_music"), False),
+                tf("They are making a sandcastle.", c("act_make_sandcastle"), True),
+                tf("He is taking a photo.", c("act_catch_fish"), False),
+            ]}),
+
+            # 3–6 — бл. 10–13
+            order("She is painting a picture.", ["She", "is", "painting", "a", "picture."],
+                  c("act_paint_picture")),
+            order("He is taking a photo.", ["He", "is", "taking", "a", "photo."], c("act_take_photo")),
+            order("They are looking for shells.", ["They", "are", "looking", "for", "shells."],
+                  c("act_look_shells")),
+            order("She is reading a book.", ["She", "is", "reading", "a", "book."], c("act_read_book")),
+
+            # 7 — бл. 15, аудио к заданию 8
+            ("video", {"title": "Аудио: послушай и узнай, как зовут детей на пляже",
+                       "url": "", "provider": "file"}),
+
+            # 8 — бл. 16 «Диаграмма». Кто есть кто — по аудио, которого нет;
+            # распределение имён угадано (мальчики Tom, Jim, Bob; девочки Sue, Mia) — в доработку
+            ("hotspot", {
+                "title": "Послушай аудио и подпиши детей на картинке их именами.",
+                "mode": "label", "image": c("hw5_beach_kids"),
+                "points": [
+                    {"x": 19, "y": 44, "text": "Tom", "audio_tts": "Tom"},
+                    {"x": 36, "y": 77, "text": "Jim", "audio_tts": "Jim"},
+                    {"x": 50, "y": 64, "text": "Sue", "audio_tts": "Sue"},
+                    {"x": 67, "y": 78, "text": "Mia", "audio_tts": "Mia"},
+                    {"x": 87, "y": 55, "text": "Bob", "audio_tts": "Bob"},
+                ], "extras": []}),
+
+            # 9 — бл. 17–18
+            ("text", {"html":
+                "<p>Ты большой молодец! Ты выполнил основную часть домашнего задания, класс!</p>"
+                "<p>Осталось одно ДОПОЛНИТЕЛЬНОЕ ЗАДАНИЕ! Его можно выполнить по желанию.</p>"}),
+
+            # 10 — бл. 19–20; в выгрузке к заданию аудио-образец (пустой плеер),
+            # образец ниже наш
+            ("speaking", {
+                "title": "Дополнительное задание ⭐ Что делают на пляже? 🎤",
+                "needs_review": True,
+                "image": c("hw5_beach_scene"),
+                "html":
+                    "<p>Посмотри на картинку и запиши аудио, где ты описываешь, чем занимаются "
+                    "дети и взрослые.</p>"
+                    "<p>Послушай пример: <i>The girl is making a sandcastle.</i></p>"
+                    "<p>Запиши свой ответ, нажав на кнопку микрофона 🙌</p>",
+                "sample": "",
+                "sample_tts": "The girl is making a sandcastle. The boy is swimming. "
+                              "The woman is reading a book.",
+            }),
+
+            # 11 — бл. 21
+            bye("well_done_clap", "Поздравляю! Ты завершил домашнее задание! 👏",
+                "Горжусь тобой! Увидимся на занятии!"),
+        ],
+    },
+
     # ------------------------------------------------------------------ HW6
     "u9_hw6": {
         "unit": U, "unit_title": UNIT, "unit_sort": 9,
         "lesson_title": "Homework 6", "lesson_sort": 5, "kind": "homework",
-        # В выгрузке только часть (2), часть (1) (словарный тренажёр) не
-        # выгрузилась. Картинок к блокам 2, 3 и 4 в PDF нет совсем: пейзажи
-        # — под листы Л9.1/Л9.2, а «выбери имя по картинке» (дети в разных
-        # местах) без картинки не решается — перестроено: имя дано, ученик
-        # вписывает место (СОСТАВ МОЙ, в доработку).
+        # Часть (1) — словарный тренажёр на 7 слов (Cards, Remember, Find the
+        # definition, Listen), список слов свёрнут: взяты 7 мест из части (2),
+        # задания наши (СОСТАВ МОЙ). Приветствия у части (1) нет — наше;
+        # приветствие части (2) — перемычка. Картинок к блокам 7–9 (бл. 2–4
+        # части (2)) в PDF нет совсем: пейзажи — под листы Л9.1/Л9.2, а
+        # «выбери имя по картинке» (дети в разных местах) без картинки не
+        # решается — перестроено: имя дано, ученик вписывает место (СОСТАВ МОЙ).
         "blocks": [
-            # 1
+            # 1 — наше
             hello("hello_highfive", "Добро пожаловать в домашнее задание!",
-                  "Уверена, что ты хорошо выучил новые слова и готов к следующему этапу!",
-                  "Сегодня тебя ждут увлекательные упражнения. А ещё тебя ждёт ДОПОЛНИТЕЛЬНОЕ "
-                  "задание, которое ты можешь выполнить по желанию, НО если ты его сделаешь, "
-                  "то будешь нереально крут!"),
+                  "Сегодня мы выучим, как по-английски называются места, куда можно поехать "
+                  "на каникулы: горы, пляж, озеро, город…",
+                  "Выполни все задания, если хочешь выучить тему на все 100!"),
 
-            # 2
+            # 2 — «Cards»
+            ("flashcards", {"title": "Запомни слова. Нажми на карточку, чтобы увидеть перевод",
+                            "cards": [{"text": en, "translation": ru, "audio_tts": en, "image": c(f)}
+                                      for en, ru, f in PLACES]}),
+
+            # 3 — «Remember»
+            ("quiz", quiz_ru_to_en(PLACES)),
+
+            # 4 — «Find the definition»
+            ("quiz", en_to_ru_quiz(PLACES)),
+
+            # 5 — «Listen»
+            ("quiz", listen_quiz(PLACES)),
+
+            # 6 — перемычка: приветствие части (2)
+            ("text", {"html":
+                "<h3>Отлично! Переходим ко второй части 🙌</h3>"
+                "<p>Уверена, что ты хорошо выучил новые слова и готов к следующему этапу!</p>"
+                "<p>Тебя ждут увлекательные упражнения. А ещё тебя ждёт ДОПОЛНИТЕЛЬНОЕ задание, "
+                "которое ты можешь выполнить по желанию, НО если ты его сделаешь, то будешь "
+                "нереально крут!</p>"}),
+
+            # 7
             ("match", {
                 "title": "Посмотри на картинки и слова. Соедини пейзажи с их названиями:",
                 "pairs": [{"left_image": c(f), "right": en, "right_audio_tts": en}
                           for en, ru, f in PLACES],
             }),
 
-            # 3 — в выгрузке «Диаграмма», точки на картинке; картинки нет
+            # 8 — в выгрузке «Диаграмма», точки на картинке; картинки нет
             ("match", {
                 "title": "А теперь давай вспомним, чем мы можем заняться в каждом из этих мест. "
                          "Соедини предложения с картинками.",
@@ -435,7 +666,7 @@ LESSONS = {
                 ],
             }),
 
-            # 4 — СОСТАВ МОЙ: в выгрузке «выбери имя по картинке», картинки нет
+            # 9 — СОСТАВ МОЙ: в выгрузке «выбери имя по картинке», картинки нет
             ("gaps", {
                 "title": "Прочитай рассказы ребят и перетащи в пропуск, где каждый из них сейчас.",
                 "mode": "drag",
@@ -448,7 +679,7 @@ LESSONS = {
                 "gaps_expected": 5,
             }),
 
-            # 5
+            # 10
             ("gaps", {
                 "title": "Ты справился с большей частью задания, ты — большой МОЛОДЕЦ! "
                          "Прочитай о местах, которые я очень люблю, и заполни пропуски.",
@@ -460,7 +691,7 @@ LESSONS = {
                 "gaps_expected": 5,
             }),
 
-            # 6
+            # 11
             ("task", {
                 "title": "Дополнительное задание для ЧЕМПИОНОВ ⭐",
                 "needs_review": True,
@@ -470,9 +701,77 @@ LESSONS = {
                     "<p><i>I like the … . I can … here.</i></p>",
             }),
 
-            # 7
+            # 12
             bye("well_done_trophy", "Поздравляю! Ты завершил домашнее задание 🏆",
                 "Ты замечательный ученик! Лови сердечко ❤ Увидимся на занятии!"),
+        ],
+    },
+
+    # ------------------------------------------------------------------ HW7
+    "u9_hw7": {
+        "unit": U, "unit_title": UNIT, "unit_sort": 9,
+        "lesson_title": "Homework 7", "lesson_sort": 6, "kind": "homework",
+        # Выгрузка: 7 блоков, повторение перед тестом. Бл. 2 — «Найди пару»
+        # на слух (9 озвученных кнопок ↔ 9 фраз; девятая карточка пропала на
+        # стыке страниц PDF — это eat ice cream, единственное слово словаря,
+        # которого нет в списке) → quiz «послушай и выбери». Картинки
+        # приветствия и прощания (мальчик, Микки Маус) заменены общими.
+        "blocks": [
+            # 1
+            hello("hello_rocket", "Привет! Как здорово, что ты открыл домашнее задание!",
+                  "Сегодня мы повторяем всё перед тестом: лексику, грамматику и не только! "
+                  "Ты справишься, я уверен!"),
+
+            # 2 — бл. 2
+            ("quiz", listen_quiz(ACT_WORDS, "Соедини фразы с картинкой: послушай и выбери, "
+                                            "что прозвучало")),
+
+            # 3 — бл. 3; верные отмечены в выгрузке
+            ("quiz", {"title": "Посмотри на картинку. Правда или нет? Выбери True или False",
+                      "questions": [
+                tf("The boy is reading a book.", c("hw7_boy_guitar"), False),
+                tf("The girl is listening to music.", c("hw7_girl_music"), True),
+                tf("The boy is catching a fish.", c("hw7_boy_fishing"), True),
+            ]}),
+
+            # 4 — бл. 4
+            ("gaps", {
+                "title": "Заполни пропуски",
+                "mode": "drag",
+                "text":
+                    "1. Let’s __listen__ to music. – Good __idea__!\n"
+                    "2. Let’s paint a __picture__. – I’m not __sure__.\n"
+                    "3. Let’s __eat__ ice cream. – __Good__ idea!\n"
+                    "4. Let’s __catch__ a fish. – __Sorry__, I don’t want to.\n"
+                    "5. __Let’s__ look for __shells__. – Good idea!",
+                "gaps_expected": 10,
+            }),
+
+            # 5 — бл. 5
+            ("quiz", {"title": "Выбери правильный ответ.", "questions": [
+                q1("Where’s the shell?", ["They’re on the rocks.", "It’s on the rocks."], 1),
+                q1("Where are the kites?", ["They aren’t in the box. They’re on the bed.",
+                                            "It isn’t in the box. It’s on the bed."], 0),
+                q1("Where’s my hat?", ["They aren’t in my bag. They’re on my head!",
+                                       "It isn’t in my bag. It’s on my head!"], 1),
+            ]}),
+
+            # 6 — бл. 6
+            ("speaking", {
+                "title": "Где что? 🎤",
+                "needs_review": True,
+                "image": c("hw7_where_tiles"),
+                "html":
+                    "<p>Посмотри на картинки. Ответь на вопросы — нажми на микрофон и запиши "
+                    "ответ голосом.</p>"
+                    "<ol><li>Where is the apple?</li><li>Where are the frogs?</li>"
+                    "<li>Where are the pencils?</li><li>Where is the frog?</li>"
+                    "<li>Where are the apples?</li><li>Where is the pencil?</li></ol>",
+            }),
+
+            # 7 — бл. 7
+            bye("well_done_trophy", "Ура! Ты справился! 🏆",
+                "Ты отлично подготовился к тесту! Увидимся на уроке! 👋"),
         ],
     },
 
