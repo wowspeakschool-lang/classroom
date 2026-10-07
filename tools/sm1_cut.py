@@ -70,6 +70,13 @@ SHEETS = {
     "Л8.1": (3, 3, ["u8/body_head", "u8/body_arms", "u8/body_hand",
                     "u8/body_fingers", "u8/body_leg", "u8/body_knee",
                     "u8/body_foot", "u8/body_toes", "u8/body_teddy"], CARD, 82),
+    "Л8.2": (2, 3, ["u8/move_forwards", "u8/move_backwards", "u8/move_sideways",
+                    "u8/move_step", "u8/move_stretch", "u8/move_jump"], CARD, 82),
+    "Л8.3": (2, 3, ["u8/ab_can_ski", "u8/ab_cat_dance", "u8/ab_bear_cant_ride_bike",
+                    "u8/ab_dog_swim", "u8/kite_sky", "u8/robot_beep"], CARD, 82),
+    "Л8.4": (2, 2, ["u8/monster", "u8/t_dog_football", "u8/t_cat_guitar", "u8/inventors_robot"], CARD, 82),
+    "Л9.1": (2, 2, ["u9/place_mountains", "u9/place_countryside", "u9/place_beach", "u9/place_city"], CARD, 82),
+    "Л9.2": (1, 3, ["u9/place_theme_park", "u9/place_campsite", "u9/place_lake"], CARD, 82),
 }
 
 # Стоковые картинки тестов, которые по разбору заменяются ячейками уже нарезанных
