@@ -77,6 +77,17 @@ SHEETS = {
     "Л8.4": (2, 2, ["u8/monster", "u8/t_dog_football", "u8/t_cat_guitar", "u8/inventors_robot"], CARD, 82),
     "Л9.1": (2, 2, ["u9/place_mountains", "u9/place_countryside", "u9/place_beach", "u9/place_city"], CARD, 82),
     "Л9.2": (1, 3, ["u9/place_theme_park", "u9/place_campsite", "u9/place_lake"], CARD, 82),
+    "ЛТ9.1": (2, 3, ["u9/act_paint_picture", "u9/act_listen_music", "u9/act_catch_fish",
+                     "u9/act_take_photo", "u9/act_look_shells", "u9/act_make_sandcastle"], CARD, 82),
+    "Л9.3": (1, 1, ["u9/hw3_where_photos"], 760, 82),
+    "ЛФ.1": (1, 3, ["ft/ft_eraser", "ft/ft_bike", "ft/ft_chicken"], CARD, 82),
+    "Л9.4": (1, 3, ["u9/act_eat_ice_cream", "u9/act_read_book", "u9/act_play_guitar"], CARD, 82),
+    "Л6.3": (1, 3, ["u6/hw3_rats", "u6/hw3_cars", "u6/hw3_go_kart"], CARD, 82),
+    "Л7.7": (2, (3, 2), ["u7/outfit_kate", "u7/outfit_tom", "u7/outfit_any",
+                         "u7/outfit_sam", "u7/football_ball"], CARD, 82),
+    "Л8.5": (2, 3, ["u8/move_he_stretches_forwards", "u8/move_she_jumps_forwards",
+                    "u8/move_she_stretches_sideways", "u8/move_she_jumps_backwards",
+                    "u8/move_he_runs_sideways", "u8/move_she_steps_forwards"], CARD, 82),
 }
 
 # Стоковые картинки тестов, которые по разбору заменяются ячейками уже нарезанных
@@ -192,6 +203,23 @@ def save(img, rel, size, q):
     return path, img.size
 
 
+# Картинки, которые собираются из уже нарезанных карточек: ряд одинаковой высоты.
+ROWS = {
+    "Л7.7": ("u7/hw3_four_outfits", ["u7/outfit_kate", "u7/outfit_tom", "u7/outfit_any", "u7/outfit_sam"]),
+}
+
+
+def compose_row(dst, srcs, height=360, gap=40, q=82):
+    ims = [Image.open(os.path.join(ROOT, "media", "sm1", s + ".webp")).convert("RGB") for s in srcs]
+    ims = [im.resize((round(im.width * height / im.height), height), Image.LANCZOS) for im in ims]
+    w = sum(im.width for im in ims) + gap * (len(ims) + 1)
+    row = Image.new("RGB", (w, height + 2 * gap), "white")
+    x = gap
+    for im in ims:
+        row.paste(im, (x, gap)); x += im.width + gap
+    return save(row, dst, SCENE, q)
+
+
 def cut(name, src):
     rows, cols, names, size, q = SHEETS[name]
     img = Image.open(src).convert("RGB")
@@ -220,6 +248,10 @@ def cut(name, src):
         for r in (rel if isinstance(rel, tuple) else (rel,)):
             path, wh = save(piece, r, size, q)
             out.append((r, wh, os.path.getsize(path)))
+    if name in ROWS:
+        dst, srcs = ROWS[name]
+        path, wh = compose_row(dst, srcs)
+        out.append((dst + "  ← " + ", ".join(srcs), wh, os.path.getsize(path)))
     for dst, src in ALIASES.get(name, {}).items():
         a = os.path.join(ROOT, "media", "sm1", src + ".webp")
         b = os.path.join(ROOT, "media", "sm1", dst + ".webp")
