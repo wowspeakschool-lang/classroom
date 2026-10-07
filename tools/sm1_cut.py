@@ -14,7 +14,7 @@
 направо, сверху вниз], размер по длинной стороне, качество). None вместо имени —
 ячейку пропустить. Сцена (1×1) просто обрезается по полям и масштабируется.
 """
-import os, sys
+import os, shutil, sys
 from PIL import Image
 import numpy as np
 
@@ -32,6 +32,25 @@ SHEETS = {
                      "u2/toy_monster", "u2/toy_car", "u2/toy_train"], CARD, 82),
     # коллаж «где занимаются спортом» — лист целиком, точки блока по центрам сетки
     "Л5.2": (1, 1, ["u5/sport_places"], SCENE, 80),
+    "ЛТ5.2": (1, 2, [("u5/t_piano", "u5/t_order_piano"), "u5/t_homework"], CARD, 82),
+    "ЛТ1.2": (2, 3, ["u1/t_pencil_case", "u1/t_desk_chair", ("u1/t_notebook", "u1/t_blue_notebook"),
+                     "u1/t_yellow_desk", "u1/t_wooden_desk", "u1/t_pencil_case_open"], CARD, 82),
+    "ЛТ2.2": (2, 3, ["u2/t_plane", "u2/t_yellow_ball", "u2/t_bike",
+                     "u2/t_green_train", "u2/t_purple_monster", "u2/t_toys"], CARD, 82),
+    "Л6.1": (3, 3, ["u6/room_bathroom", "u6/room_bedroom", "u6/room_living_room",
+                    "u6/room_hall", "u6/room_dining_room", "u6/room_kitchen",
+                    "u6/room_stairs", "u6/room_cellar", "u6/house_outside"], CARD, 82),
+    "ЛТ6.1": (2, 2, ["u6/test_frog_piano", "u6/test_park_empty",
+                     "u6/test_kitten_kitchen", "u6/test_books_bedroom"], CARD, 80),
+}
+
+# Стоковые картинки тестов, которые по разбору заменяются ячейками уже нарезанных
+# листов: копия под старым именем, чтобы не трогать уроки.
+ALIASES = {
+    "ЛТ5.2": {"u5/t_computer_games": "u5/act_computer_games", "u5/t_football": "u5/act_play_football",
+              "u5/t_watch_tv": "u5/act_watch_tv", "u5/t_order_watch_tv": "u5/act_watch_tv"},
+    "ЛТ1.2": {"u1/t_book": "u1/school_book", "u1/t_rubber": "u1/school_rubber",
+              "u1/t_pencil": "u1/school_pencil"},
 }
 
 
@@ -101,15 +120,21 @@ def cut(name, src):
             continue
         piece = img.crop((x0, y0, x1, y1))
         piece = trim(piece, m[y0:y1, x0:x1])
-        path, wh = save(piece, rel, size, q)
-        out.append((rel, wh, os.path.getsize(path)))
+        for r in (rel if isinstance(rel, tuple) else (rel,)):
+            path, wh = save(piece, r, size, q)
+            out.append((r, wh, os.path.getsize(path)))
+    for dst, src in ALIASES.get(name, {}).items():
+        a = os.path.join(ROOT, "media", "sm1", src + ".webp")
+        b = os.path.join(ROOT, "media", "sm1", dst + ".webp")
+        shutil.copyfile(a, b)
+        out.append((dst + "  ← " + src, Image.open(b).size, os.path.getsize(b)))
     return out
 
 
 def main():
     if sys.argv[1:] == ["--list"]:
         for k, (r, c, n, s, q) in SHEETS.items():
-            print(f"{k:6} {r}×{c}  {', '.join(x or '—' for x in n)}")
+            print(f"{k:6} {r}×{c}  {', '.join('/'.join(x) if isinstance(x, tuple) else (x or '—') for x in n)}")
         return
     name, src = sys.argv[1], sys.argv[2]
     for rel, wh, sz in cut(name, src):
