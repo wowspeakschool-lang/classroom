@@ -228,7 +228,7 @@ HW2 это, скорее всего, та же реклама для родит�
 **Л7.1 · одежда, 3×3** → `media/sm1/u7/`: `clothes_tshirt`, `clothes_sweater`,
 `clothes_jacket` / `clothes_skirt`, `clothes_shorts`, `clothes_jeans` /
 `clothes_trousers`, `clothes_socks`, `clothes_shoes`.
-Где: U7 HW2 бл. 9, 11, 13–15, 18, 19 · HW7 бл. 2, 7 · Test бл. 2, 5, 7.
+Где: U7 HW1 бл. 2, 9, 10 · HW2 бл. 9, 11, 13–15, 18, 19 · HW7 бл. 2, 7 · Test бл. 2, 5, 7.
 
 ```
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. A 3×3 grid of nine separate children's clothing items, each laid flat and seen from the front, one item per cell. Row 1, left to right: a plain red short-sleeved T-shirt; a plain green knitted sweater; a brown zip-up jacket. Row 2, left to right: a plain pink pleated skirt; plain blue shorts; a pair of blue denim jeans. Row 3, left to right: a pair of plain grey trousers; a pair of white socks; a pair of brown lace-up children's shoes, generic design, not resembling any real product. Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge, no text, no letters, no labels, no numbers. No people at all - no humans, no hands, no faces. 1536×1536.
@@ -236,7 +236,7 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 
 **Л7.2 · головные уборы, носки, свитер для теста, 2×2** → `clothes_cap`,
 `clothes_hat_elephant` / `clothes_socks_faces`, `clothes_sweater_red`.
-Где: U7 HW2 бл. 16, 18, 19 · HW7 бл. 7 · Test бл. 2, 3.
+Где: U7 HW1 бл. 2, 9 (`clothes_cap`) · HW2 бл. 16, 18, 19 · HW7 бл. 7 · Test бл. 2, 3.
 
 ```
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. A 2×2 grid of four separate items, one per cell. Row 1, left to right: a yellow baseball cap, generic design, not resembling any real product; a funny grey plush hat shaped like an elephant head with big floppy ears and a trunk. Row 2, left to right: a pair of funny purple and white socks with cartoon faces with open mouths printed on them; a bright red chunky knitted sweater. Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge, no text, no letters, no labels, no numbers. No people at all - no humans, no hands, no faces. 1024×1024.
@@ -251,7 +251,7 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 ```
 
 **Л7.4 · три комплекта одежды, 1×3** → `outfit_anna`, `outfit_lily`, `outfit_kate`.
-Где: U7 HW6 бл. 4. В каждой ячейке верх лежит над юбкой — как будто одежда
+Где: U7 HW6 бл. 4 · HW5 бл. 7 (`outfit_anna` — «Anna is wearing a blue skirt»). В каждой ячейке верх лежит над юбкой — как будто одежда
 разложена на кровати.
 
 ```
@@ -274,9 +274,20 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. A 2×2 grid, one picture per cell. Row 1, left to right: one single red flower with a green stem; one single white fluffy rabbit sitting. Row 2, left to right: a group of four colourful flowers growing together; a group of three fluffy rabbits sitting together, white, brown and grey. Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge, no text, no letters, no labels, no numbers. No people at all - no humans, no hands, no faces. 1024×1024.
 ```
 
+**Л7.7 · четыре комплекта одежды и мяч, 3 + 2** (второй заход) →
+`outfit_kate`, `outfit_tom`, `outfit_any` / `outfit_sam`, `football_ball`.
+Где: U7 HW3 бл. 10, 12 · HW5 бл. 12, 15 (`football_ball`).
+Вместо фото четырёх взрослых в HW3: одежда та же, что на фото. После нарезки
+собрать скриптом `hw3_four_outfits` — четыре комплекта в ряд, в порядке Kate,
+Tom, Any, Sam (по образцу `chars_three`), — это картинка к вопросам HW3 бл. 12.
+
+```
+Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. Five separate items in two rows; the first four are clothing outfits, each outfit is its clothing items laid flat and stacked from top to bottom as if worn, with no body inside. Row 1, left to right: a red knitted sweater above a white midi skirt above a pair of red ankle boots; a long black coat with a white shirt above black jeans above a pair of brown boots, generic design, not resembling any real product; a bright pink sweater above a long red skirt above a pair of white trainers, generic design, not resembling any real product. Row 2, left to right, centred: a beige baseball cap above a grey T-shirt with one wide blue and white stripe across the chest above red shorts, generic design, not resembling any real product; one classic black and white football. Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge, no text, no letters, no labels, no numbers. No people at all - no humans, no hands, no faces. 1536×1024.
+```
+
 **ЛТ7.1 · предметы к тесту Unit 7, 3 + 2** → `obj_tv`, `obj_microphone`,
 `obj_bikes` / `obj_game_controllers`, `obj_sandwich`.
-Где: U7 Test бл. 3, 4, 6, 8. Заменяют стоковые фото людей (в бл. 6 — фото
+Где: U7 Test бл. 3, 4, 6, 8 · HW5 бл. 9, 11, 15 (`obj_bikes`, `obj_sandwich`). Заменяют стоковые фото людей (в бл. 6 — фото
 детей, его брать нельзя).
 
 ```
@@ -307,12 +318,17 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. A 2×2 grid of four separate food items, one per cell. Row 1, left to right: a red apple and a yellow banana lying together; a white bowl full of green peas and orange carrot slices. Row 2, left to right: a baking dish with roasted chicken pieces and carrots; a glass of orange juice with two orange halves beside it. Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge, no text, no letters, no labels, no numbers. No people at all - no humans, no hands, no faces. 1024×1024.
 ```
 
-Итого: **10 листов** (8 сеток, Л7.5 целиком, ЛТ7.2 — сцена), **45 картинок**
-(Unit 7 — 32, Unit 4 — 13).
+Итого: **11 листов** (9 сеток, Л7.5 целиком, ЛТ7.2 — сцена), **50 картинок**
+(Unit 7 — 37, Unit 4 — 13) + сборная `hw3_four_outfits` из ячеек Л7.7.
 
 ### 2. По желанию — в выгрузке стоковое фото
 
-Отдельных листов нет: стоковые фото одежды (HW2: юбка, брюки на человеке,
+Отдельных листов нет. Во втором заходе: стоковые фото тренажёра HW1 (10 вещей)
+заменены Л7.1, Л7.2; фото людей в HW3 (четверо взрослых) и HW5 (девочка в юбке,
+девушки на велосипедах, мальчик с мячом, мужчина с бутербродом) — Л7.4, Л7.7,
+ЛТ7.1; фото фокусника (HW5 бл. 2) просто не взято, в задании оно не нужно.
+
+Первый заход: стоковые фото одежды (HW2: юбка, брюки на человеке,
 пиджак, джинсы, туфли на шпильке, кепка; HW7: клипарт ботинок, куртки, шорт,
 свитера) и еды (тест Unit 4) **уже заменены** картинками обязательных листов
 Л7.1, Л7.2, ЛТ4.1, ЛТ4.2 — чтобы юнит вышел одним стилем и не было людей.
@@ -329,8 +345,23 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 | `media/sm1/u7/kids_thumbs_up.webp` | HW7, клипарт мальчик и девочка (прозрачный фон → белый) | HW7 бл. 6 |
 | `media/sm1/u7/chars_three.webp` | три кадра героев HW7, собраны в ряд | Test бл. 12 |
 | `media/sm1/u4/fridge.webp` | тест Unit 4, холодильник | U4 Test бл. 12 |
+| `media/sm1/u7/vocab_clothes.webp` 900×506 | HW1 (2), карточка Vocabulary — Clothes | HW1 бл. 7 |
+| `media/sm1/u7/kids_drawing_sample.webp` | HW1 (2), клипарт девочки и мальчика к рисунку | HW1 бл. 8 |
+| `media/sm1/u7/grammar_is_he_wearing.webp` 900×506 | HW3, карточка Grammar 2 | HW3 бл. 2 |
+| `media/sm1/u7/char_darius.webp` | HW3, герой Darius | HW3 бл. 5, 16 |
+| `media/sm1/u7/char_mabel_card.webp` | HW3, Mabel | HW3 бл. 5, 15 |
+| `media/sm1/u7/gf_family_party.webp` | HW3, кадр Gravity Falls | HW3 бл. 6 |
+| `media/sm1/u7/gf_mabel_dipper.webp` | HW3, Mabel и Dipper | HW3 бл. 13 |
+| `media/sm1/u7/story_cap_phrases.webp` 900×506 | HW4 (1), карточка Key Phrases | HW4 бл. 2 |
+| `media/sm1/u7/story_cap_cover.webp` | HW4 (1), обложка «Unit 7 The cap» | HW4 бл. 3 |
+| `media/sm1/u7/cap_yellow_clipart.webp` | HW4 (1), клипарт кепки | HW4 бл. 4, 6 |
+| `media/sm1/u7/story_cap_1_4.webp`, `story_cap_5_8.webp` | HW4 (1), кадры истории | HW4 бл. 5 |
+| `media/sm1/u7/party_scene_names.webp` 739×386 | HW5, сцена праздника с именами | HW5 бл. 4, 5, 16 |
+| `media/sm1/u7/boy_singing.webp` | HW5, клипарт мальчика с микрофоном | HW5 бл. 8, 15 |
+| `media/sm1/u7/watching_tv_clipart.webp` | HW5, клипарт «смотрят телевизор» | HW5 бл. 10, 15 |
+| `media/sm1/u7/emma_singing.webp` | HW5, клипарт Эммы | HW5 бл. 13, 15 |
 
-Вырезано 8 файлов (7 из PDF + 1 сборный).
+Вырезано 8 файлов в первом заходе (7 из PDF + 1 сборный) и 16 во втором (все из PDF).
 
 ---
 
@@ -344,17 +375,51 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 | U7 HW2 | 7 | видео 2 (Do you like this cap?) → файл `sm1_u7_hw2_b7` |
 | U7 HW2 | 17 | аудио-образец ответа → `sm1_u7_hw2_b17`; или нажать «Озвучить пачкой» (размечен наш образец «I like this T-shirt. I like these jeans. I don't like this skirt.») |
 | U7 HW2 | 9, 18, 19 | Wordwall, обложки пустые — **СОСТАВ МОЙ**, посмотреть |
-| U7 HW4 | — | **части (1) нет** в выгрузке — прислать, если есть |
-| U7 HW4 | 2 | мультфильм Unit 7 («SM2ed Animated story video», Rutube, 1:39) → файл или ссылка `sm1_u7_hw4_b2` |
-| U7 HW4 | после 2 | 9 заданий интерактивного видео (00:02, 00:04, 00:07, 00:08, 00:47 — верно/неверно; 00:29, 00:41, 01:05, 01:30 — составь предложение): в выгрузке только тип и время. Прислать тексты — добавим блоками после видео |
+| U7 HW1 | 9, 10 | Wordwall, обложки пустые — **СОСТАВ МОЙ**, посмотреть |
+| U7 HW3 | 4 | видео 1 (Mabel: pink jumper, purple skirt) → файл `sm1_u7_hw3_b4` |
+| U7 HW3 | 7 | видео 2 (Gravity Falls) → файл `sm1_u7_hw3_b7` |
+| U7 HW3 | 9 | аудио «кто во что одет» → файл `sm1_u7_hw3_b9`. В выгрузке пустое; наш текст под наши картинки размечен `audio_tts` (**СОСТАВ МОЙ**). Если вставляете исходное аудио — сверить, что оно описывает ту же одежду, что на картинках бл. 10 |
+| U7 HW3 | 13 | аудио-образец ответа → `sm1_u7_hw3_b13`; или «Озвучить пачкой» (размечен наш образец про Mabel) |
+| U7 HW3 | 14, 15, 16 | Wordwall, обложки пустые — **СОСТАВ МОЙ**, посмотреть |
+| U7 HW3 | 10, 12 | проверить ключ: кто Kate / Tom / Any / Sam, решено по картинке (см. «спорное») |
+| U7 HW4 | 3 | аудио истории «The cap» → файл `sm1_u7_hw4_b3` |
+| U7 HW4 | 8 | мультфильм Unit 7 («SM2ed Animated story video», Rutube, 1:39) → файл или ссылка `sm1_u7_hw4_b8` |
+| U7 HW4 | после 8 | 9 заданий интерактивного видео (00:02, 00:04, 00:07, 00:08, 00:47 — верно/неверно; 00:29, 00:41, 01:05, 01:30 — составь предложение): в выгрузке только тип и время. Прислать тексты — добавим блоками после видео (прощание 9 сдвинется) |
+| U7 HW5 | 3 | видео «шоу талантов» → файл `sm1_u7_hw5_b3` |
+| U7 HW5 | после 3 | «отметь, какая одежда была на героях видео» (trousers, skirt, shorts, cap, jeans, shoes, sweater, jacket): ответы не отмечены — **в урок не положено**. Прислать ключ — добавим блоком после 3-го (номера 4–17 сдвинутся на один) |
+| U7 HW5 | 13 | аудио-образец чтения → `sm1_u7_hw5_b13`; или «Озвучить пачкой» (размечен текст про Эмму) |
+| U7 HW5 | 15, 16 | Wordwall, обложки пустые — **СОСТАВ МОЙ**, посмотреть |
 | U7 HW6 | 4 | решить: задание переделано (см. «спорное») |
 | U7 HW7 | 7, 8 | Wordwall, обложки пустые — **СОСТАВ МОЙ**, посмотреть |
 | U7 Test | после 8 | аудирование «Speaker 1–5 + Extra»: нет аудио, картинок и ключа — **в урок не положено**. Прислать аудио, картинку и ответы — добавим блоком после 8-го (номера 9–12 сдвинутся на один, файл обновим) |
 | U4 Test | 11 | аудио LISTENING → файл `sm1_u4_test_b11` |
-| все шесть | — | нажать «Озвучить пачкой» (размечено `audio_tts` / `left_audio_tts` / `right_audio_tts`) — по желанию, озвучку по курсу решили не прогонять |
-| все шесть | — | включить публикацию (заливаем с `is_published = false`) |
+| все девять | — | нажать «Озвучить пачкой» (размечено `audio_tts` / `left_audio_tts` / `right_audio_tts`) — по желанию, озвучку по курсу решили не прогонять |
+| все девять | — | включить публикацию (заливаем с `is_published = false`) |
 
 ### По урокам — подробности
+
+**U7 HW1.** Части (1) и (2) — один урок, перемычка — бл. 6. Из тренажёра
+(1) не перенесены «дополнительные» Unscramble / Fill in / Final test (так же
+сделано в других юнитах). Бл. 2 части (2) — реклама. Холст для рисования
+(бл. 4 части (2)) стал speaking: рисунок ребёнок делает на бумаге и
+показывает учителю. Перевод jacket в тренажёре «пиджак», на карточке
+«куртка» — поставили «пиджак, куртка».
+
+**U7 HW3.** Бл. 2 — реклама. Фото четырёх взрослых (бл. 11–13 выгрузки)
+заменены комплектами их одежды (Л7.7); аудио к ним нет — текст наш. В бл. 9
+выгрузки у вопросов были полупрозрачные картинки Диппера и Мейбл — сделали без
+них (картинка в паре «соедини» закрывает текст вопроса). Wordwall бл. 14
+выгрузки — две игры («Заполни пропуски», «Расставь слова»), собраны gaps и
+двумя order.
+
+**U7 HW4.** Пересобран из (1) и (2): номера блоков поменялись (видео было
+бл. 2, стало 8). Бл. 2 части (1) — реклама; зелёная стрелка-украшение не
+взята. Обложка истории перенесена из прощания (1) в бл. 3, к угадайке
+«что случится с кепкой».
+
+**U7 HW5.** Бл. 2 и стр. 17 — реклама. В инструкции бл. 9 выгрузки «5
+предложений», а их 6 — написали 6. В вопросах True/False выгрузки нет кнопки
+Not stated, хотя инструкция её требует, — добавили третьим вариантом.
 
 **U7 HW2.** Не перенесены: бл. 2 выгрузки — реклама для родителей; смайлики
 и стрелки-украшения. Блоки «Тест» 13 и 14 выгрузки сведены в один quiz (11).
@@ -392,17 +457,30 @@ Wordwall: бл. 7 — впиши слово по картинке, бл. 8 — I
 4. **U7 HW2 бл. 2 и HW6 бл. 2 выгрузки** — реклама «3 бесплатных урока по
    реферальной программе» (в HW6 картинка не выгрузилась, догадка по HW2).
    В уроки не переносили.
+5. 🟥 **U7 HW3 бл. 10 и 12 — кто есть кто.** В выгрузке ключа нет (имена
+   соединяются по аудио, ответы не отмечены). Приняли порядок фото слева
+   направо: Kate — красный свитер и белая юбка, Tom — чёрное пальто, Any —
+   розовый свитер и красная юбка, Sam — серая футболка, шорты, кепка. Вопросы
+   выгрузки этому не противоречат (Kate white skirt — Yes, Tom grey T-shirt —
+   No, Sam cap — Yes, Any red sweater — No). Имя **Any** — как в выгрузке;
+   возможно, опечатка вместо Amy / Annie — сверить по аудио.
+6. **U7 HW3, HW5 — кадры героев мультфильмов** (Mabel, Dipper, Gravity
+   Falls, Darius) и клипарт людей (рисованные, не фото) взяты из PDF, как в
+   выгрузке и как кадры HW7 первого захода.
+7. **U7 HW5 бл. 5, ключ.** Lara сидит за столом, ног не видно — «Lara is
+   wearing pink jeans» = Not stated. Paul ест торт — «playing computer games»
+   = False (в компьютер играет Lara).
+8. **U7 HW4 бл. 4.** Слово cap: название (1), кадр 1 (1), кадр 2 (2 — my cap,
+   the same cap), кадр 3 (2), кадр 4 (1), кадр 7 (1) = 8. Посчитано по тексту
+   кадров; если в аудио есть лишние реплики, число может отличаться.
 
 ---
 
 ## Для сборщика
 
-`python3 tools/sm1_build.py --check-all`: все шесть уроков — ok.
+`python3 tools/sm1_build.py --check-all`: по урокам Unit 7 ошибок нет, кроме
+«нет файла» под картинки листов Л7.1–Л7.7, ЛТ7.1, ЛТ7.2 (и сборную
+`hw3_four_outfits`); HW4 — ok.
 
-⚠️ **Проверка ссылок на картинки в `tools/sm1_build.py` сейчас не срабатывает
-вовсе.** Регулярка `r"@@MEDIA@@([^\"'\\s)<]+)"` в raw-строке исключает из
-класса символов букву `s` (а не пробел), а все пути начинаются с `sm1/` или
-`shared/` — совпадений ноль, «нет файла» не выдаётся никогда. Правильно:
-`r"@@MEDIA@@([^\"'\s)<\\]+)"`. Файл не мой — не правил; своей проверкой
-нашёл, что не хватает ровно 45 будущих картинок из листов выше, остальные
-ссылки на месте.
+Проверка ссылок на картинки в `tools/sm1_build.py` с тех пор починена (регулярка
+с `\s`), «нет файла» выдаётся честно.

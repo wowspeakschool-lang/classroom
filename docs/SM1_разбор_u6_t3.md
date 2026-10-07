@@ -6,22 +6,29 @@
 
 | Урок | Ключ | Блоков | Откуда |
 |---|---|---|---|
-| Unit 6 · Homework 1 | `u6_hw1` | 15 | `Homework 1 (1)` — только словарный тренажёр |
+| Unit 6 · Homework 1 | `u6_hw1` | 20 | `Homework 1 (1)` (словарный тренажёр) + `Unit 6 Homework 1 (2)` (догрузка) |
 | Unit 6 · Homework 2 | `u6_hw2` | 12 | `Homework 2` |
+| Unit 6 · Homework 3 | `u6_hw3` | 9 | `Unit 6 Homework 3` (догрузка) |
 | Unit 6 · Homework 4 | `u6_hw4` | 11 | `Homework 4` |
+| Unit 6 · Homework 5 | `u6_hw5` | 15 | `Unit 6 Homework 5` (догрузка) |
+| Unit 6 · Homework 6 | `u6_hw6` | 8 | `Unit 6 Homework 6` (догрузка) |
 | Unit 6 · Homework 7 | `u6_hw7` | 11 | `Homework 7` |
 | Unit 6 · Unit 6 Test | `u6_test` | 12 | `Super Minds 1 Unit 6 Test` |
 | Unit 3 · Unit 3 Test | `u3_test` | 11 | `Super Minds 1 Unit 3 Test` |
 
-Homework 3, 5, 6 юнита 6 в выгрузке нет — уроки пропущены, номера не сдвигались
-(HW4 — `sort_order` 3, HW7 — 6, тест — 7).
+Второй заход (07.10.2026): методист догрузила в корень папки SM1 вторую часть HW1 и
+Homework 3, 5, 6. Теперь в Unit 6 все семь домашек и тест (`lesson_sort` = K − 1, тест — 7).
 
 `python3 tools/sm1_build.py --check-all`: по моим урокам ошибок, кроме «нет файла» под
-листы Л6.1, ЛТ6.1, ЛТ3.1 — **ноль**. HW2 и HW4 проходят полностью.
+листы Л6.1, Л6.3, ЛТ6.1, ЛТ3.1 — **ноль**. HW2, HW4, HW6 проходят полностью.
 
 ---
 
 ## Unit 6 · Homework 1 — `u6_hw1`
+
+Две части, один урок. Порядок по содержимому: приветствие (1) обещает «ДОПОЛНИТЕЛЬНОЕ задание»
+после теста, (2) начинается словами «Добро пожаловать во вторую часть домашнего задания».
+Прощание (1) и приветствие (2) сведены в перемычку 15. Реклама для родителей из (2) не взята.
 
 Слова: bathroom, bedroom, living room, hall, dining room, kitchen, stairs, cellar.
 Задания тренажёра (Запомни · Послушай · Найди пару · Скрэмбл · Тест) переложены
@@ -29,16 +36,19 @@ Homework 3, 5, 6 юнита 6 в выгрузке нет — уроки проп
 
 | № | Тип | Что внутри | Откуда |
 |---|---|---|---|
-| 1 | text | приветствие + картинка дома | выгрузка, текст; `house_outside` — Л6.1 |
-| 2 | flashcards | 8 комнат, перевод, `audio_tts` | «Запомни»; картинки Л6.1 |
-| 3 | quiz | «Послушай слово и выбери» ×8 | «Послушай» |
-| 4 | match | слово ↔ перевод | «Найди пару» |
-| 5–12 | order | собери слово из букв ×8, с картинкой | «Скрэмбл» |
-| 13 | quiz | картинка → слово ×8 | «Тест» |
-| 14 | exact_input | перевод → слово ×8 | «Тест» (Введи слова) |
-| 15 | text | прощание | моё |
-
-Из приветствия убрана фраза про «ДОПОЛНИТЕЛЬНОЕ задание»: оно было во второй части.
+| 1 | text | приветствие + картинка дома | (1), текст; `house_outside` — Л6.1 |
+| 2 | flashcards | 8 комнат, перевод, `audio_tts` | (1) «Запомни»; картинки Л6.1 |
+| 3 | quiz | «Послушай слово и выбери» ×8 | (1) «Послушай» |
+| 4 | match | слово ↔ перевод | (1) «Найди пару» |
+| 5–12 | order | собери слово из букв ×8, с картинкой | (1) «Скрэмбл» |
+| 13 | quiz | картинка → слово ×8 | (1) «Тест» |
+| 14 | exact_input | перевод → слово ×8 | (1) «Тест» (Введи слова) |
+| 15 | text | перемычка: «ты выучил все комнаты» + вход во вторую часть | (1) конец + (2) бл. 1 |
+| 16 | text | «Давай повторим…» + карточка `card_rooms_vocab` | (2) бл. 3, x112 |
+| 17 | speaking | назови комнаты своего дома, `sample_tts` | (2) бл. 4 (образец аудио без файла) |
+| 18 | match | ⭐ картинка комнаты ↔ слово — **СОСТАВ МОЙ** | (2) бл. 5 игра «Соедини картинки со словами» |
+| 19 | exact_input | ⭐ впиши комнату по картинке — **СОСТАВ МОЙ** | (2) бл. 5 игра «Впиши слова» |
+| 20 | text | прощание | (2) бл. 6 |
 
 ## Unit 6 · Homework 2 — `u6_hw2`
 
@@ -56,6 +66,25 @@ Homework 3, 5, 6 юнита 6 в выгрузке нет — уроки проп
 | 10 | match | ⭐ картинки ↔ There is/are — **СОСТАВ МОЙ** | бл. 11 Wordwall |
 | 11 | quiz | ⭐ There is / There are ×6 — **СОСТАВ МОЙ** | бл. 12 Wordwall |
 | 12 | text | прощание | бл. 13 |
+
+## Unit 6 · Homework 3 — `u6_hw3`
+
+Тема — Is there…? / Are there…? Догрузка, один файл.
+
+| № | Тип | Что внутри | Откуда |
+|---|---|---|---|
+| 1 | text | приветствие (звёздочки за задания) | бл. 1 (птица-приветствие заменена `shared/hello_laptop`) |
+| 2 | text | «Давай повторим…» + карточка `card_grammar_is_there` | бл. 2, x116 |
+| 3 | video | видео про животных (файла нет) | бл. 3–4 |
+| 4 | quiz | 4 вопроса с картинками: Are there five lions? → No, there aren't · Is there a small ball? → No, there isn't · Is there a dragon? → Yes, there is · Are there four dogs? → Yes, there are | бл. 5 (match); ответ определяется картинкой — на match это не переносится, поэтому quiz |
+| 5 | quiz | Is / Are ×6 (pears, rats, cars, plane, go-kart, cakes) | бл. 6–7 |
+| 6 | task | вопросы 1–8 по картинке дома `hw3_house_rooms`, три примера | бл. 8–9 «Открытый вопрос» |
+| 7 | quiz | ⭐ Is / Are there ×6 — **СОСТАВ МОЙ** | бл. 10, пустая игра |
+| 8 | quiz | ⭐ ответы Yes/No по картинке дома ×5 — **СОСТАВ МОЙ** | бл. 11, пустая игра |
+| 9 | text | прощание | бл. 12 (реклама розыгрыша не взята) |
+
+Ключ бл. 6 (для проверки учителем): 1 There are six rooms · 2 Yes, there are · 3 No, there isn't ·
+4 Yes, there is · 5 No, there aren't · 6 No, there aren't · 7 Yes, there is · 8 Yes, there is.
 
 ## Unit 6 · Homework 4 — `u6_hw4`
 
@@ -75,6 +104,41 @@ Homework 3, 5, 6 юнита 6 в выгрузке нет — уроки проп
 
 В бл. 7 номера кадров стояли прямо на картинке и выдавали ответ — закрасил их
 (`story_old_house_shuffled`), точки поставил в центры кадров.
+
+## Unit 6 · Homework 5 — `u6_hw5`
+
+| № | Тип | Что внутри | Откуда |
+|---|---|---|---|
+| 1 | text | приветствие (кристаллы, доп. задание) | бл. 1, 3 (реклама бл. 2 не взята) |
+| 2 | video | экскурсия героя по дому (файла нет) | бл. 4–5 |
+| 3 | text | картинка домика `hw5_house_attic` | бл. 7 |
+| 4 | truefalse | three rooms F · living room T · kitchen T · isn't a bathroom F · cellar F | бл. 7, ответы по картинке |
+| 5 | text | переход к «составь предложение» | бл. 8 |
+| 6–10 | order | There are two bedrooms in the house. · There isn't a living room. · There aren't five bedrooms. · There is a kitchen. · How many rooms are there in the house? — с фото | бл. 8–9 |
+| 11 | speaking | прочитай описание домика вслух, `sample_tts` | бл. 10–11 |
+| 12 | task | опиши свой дом, 5–7 предложений | бл. 12 |
+| 13 | exact_input | ⭐ 6 комнат по картинке и переводу — **СОСТАВ МОЙ** | бл. 13, пустая игра «Впиши слова» |
+| 14 | quiz | ⭐ There is / isn't / are / aren't по картинке домика ×6 — **СОСТАВ МОЙ** | бл. 14, две пустые игры |
+| 15 | text | прощание | бл. 15–16 |
+
+Бл. 6 выгрузки («Отметь, какие комнаты показывал герой видео») в урок не положен — см. доработку.
+
+## Unit 6 · Homework 6 — `u6_hw6`
+
+Тема — виды домов (CLIL Geography: cave house, house boat, tree house, yurt).
+
+| № | Тип | Что внутри | Откуда |
+|---|---|---|---|
+| 1 | text | приветствие | бл. 1 (реклама бл. 2 не взята) |
+| 2 | text | «Давай повторим…» + карточка `card_types_of_homes` | бл. 3, x108 |
+| 3 | video | Сэм путешествует по миру (файла нет) | бл. 4–5 |
+| 4 | match | фото ↔ It's a tree house / house boat / yurt / cave house | бл. 7 |
+| 5 | gaps (drag) | 4 предложения: house boat, tree house, yurt, cave house + `homes_many` | бл. 8 |
+| 6 | quiz | описание пещерного дома, 4 пропуска — **ВАРИАНТЫ МОИ** | бл. 9, выпадающие списки |
+| 7 | speaking | нарисуй и опиши домик мечты, `homes_four`, `sample_tts` | бл. 10 |
+| 8 | text | прощание | бл. 11 |
+
+Бл. 6 выгрузки («выбери виды домов, которые звучали в видео») в урок не положен — см. доработку.
 
 ## Unit 6 · Homework 7 — `u6_hw7`
 
@@ -131,7 +195,7 @@ Homework 3, 5, 6 юнита 6 в выгрузке нет — уроки проп
 #### Л6.1 · Комнаты дома — 9 карточек (3×3)
 Режется: `room_bathroom`, `room_bedroom`, `room_living_room` · `room_hall`, `room_dining_room`,
 `room_kitchen` · `room_stairs`, `room_cellar`, `house_outside` → `media/sm1/u6/`.
-Где: HW1 бл. 1, 2, 5–14; HW7 бл. 9; Unit 6 Test бл. 2.
+Где: HW1 бл. 1, 2, 5–14, 18, 19; HW5 бл. 13; HW7 бл. 9; Unit 6 Test бл. 2.
 ```
 A sheet of 9 separate picture cards in a 3 x 3 grid. Each card is a small cosy room seen as an open cutaway box from a three-quarter view (two walls and a floor), so the room type is obvious at a glance.
 Row 1, left to right: a bathroom with a bathtub, a toilet and a washbasin; a bedroom with a bed, a pillow and a bedside lamp; a living room with a sofa, an armchair and a television.
@@ -167,6 +231,18 @@ Row 2, left to right: a green frog; a black spider; a brown dog.
 Row 3, left to right: a ginger cat; a white duck with an orange beak; a grey donkey.
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. No text, no letters, no labels, no numbers. No people at all - no humans, no hands, no faces.
 Output size: 1536 x 1536 px.
+```
+
+#### Л6.3 · Картинки к «Is / Are there» в HW3 — 3 карточки (1×3)
+Режется: `hw3_rats`, `hw3_cars`, `hw3_go_kart` → `media/sm1/u6/`.
+Где: HW3 бл. 5 (вопросы 2, 3, 5). Почему обязательно: в выгрузке крысы сидят в руках
+человека, машинки — герои известного мультфильма, болид — фирменная модель с логотипами.
+Число крыс и машин важно — вопросы «any rats?», «How many cars?».
+```
+A sheet of 3 separate picture cards in one row.
+Row 1, left to right: three cute grey rats sitting side by side; two small toy cars side by side, one red and one blue (generic design, not resembling any real product, no faces on the cars); a small yellow go-kart with big black wheels and an empty seat (generic design, not resembling any real product).
+Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. No text, no letters, no labels, no numbers. No people at all - no humans, no hands, no faces. Generic design, not resembling any real product.
+Output size: 1536 x 1024 px.
 ```
 
 ### 2. По желанию — в выгрузке стоковое фото, ответы не пострадают
@@ -210,6 +286,14 @@ Output size: 1536 x 1024 px.
 `test_pears`, `test_lizard`, `test_plane`, `test_crocodile`, `test_bikes`, `test_dogs`,
 `test_fishing_scene` — 26 файлов.
 
+Второй заход (догрузка), `media/sm1/u6/`: `card_rooms_vocab` (HW1), `card_grammar_is_there`,
+`hw3_lions`, `hw3_ball`, `hw3_dragon`, `hw3_dogs`, `hw3_cake`, `hw3_house_rooms` (HW3),
+`hw5_house_attic`, `hw5_bedroom`, `hw5_living_room`, `hw5_floorplan`, `hw5_kitchen`, `hw5_house` (HW5),
+`card_types_of_homes`, `home_yurt`, `home_boat`, `home_cave`, `home_tree`, `homes_many`,
+`cave_house_room`, `homes_four` (HW6) — 22 файла. В HW3 груши и самолёт взяты из уже вырезанных
+`test_pears`, `test_plane` (те же картинки, что в тесте). Фото в HW5 и HW6 — стоковые, без людей;
+на `hw5_house_attic` нарисованы люди (клипарт учебника), по нему сверяются ответы — не перерисовывать.
+
 `media/sm1/u3/`: `test_elephant_plane`, `test_frog_table`, `test_rat_bag`, `test_spider`, `test_dogs`,
 `test_elephants_ruler`, `test_lizards`, `test_ducks_books`, `test_dog_desk`, `test_cat`,
 `test_animals_where`, `test_attic_animals` — 12 файлов.
@@ -226,8 +310,22 @@ Output size: 1536 x 1024 px.
 
 | Урок | Блок | Что сделать |
 |---|---|---|
-| U6 HW1 | — | В выгрузке только часть (1), словарный тренажёр. Части (2) нет — пришлите, если она была, добавлю в этот же урок |
-| U6 HW3, HW5, HW6 | — | В выгрузке их нет совсем — пришлите, если есть |
+| U6 HW1 | 17 | Образец ответа «назови комнаты» в выгрузке без файла — размечен `sample_tts`, можно озвучить пачкой или прислать `sm1_u6_hw1_b17.mp3` |
+| U6 HW1 | 18, 19 | Игры доп. задания «Соедини картинки со словами» и «Впиши слова» пустые — пересобрал, **СОСТАВ МОЙ** |
+| U6 HW3 | 3 | Видео про животных (Is there…? / Are there…?) → `sm1_u6_hw3_b3.mp4` |
+| U6 HW3 | 4 | Ответы Yes/No выбраны по картинкам (львов три, мяч большой, собак четыре) — сверить с видео |
+| U6 HW3 | 5 | Крысы в руках человека, машинки из мультфильма и фирменный болид заменяются листом **Л6.3** |
+| U6 HW3 | 7, 8 | Две пустые игры «Выбери правильный вариант» — пересобрал, **СОСТАВ МОЙ** |
+| U6 HW5 | 2 | Видео «экскурсия по дому» → `sm1_u6_hw5_b2.mp4` |
+| U6 HW5 | после 2 | 🟥 Блок «Отметь, какие комнаты показывал герой видео» (a hall, a bedroom, a bathroom, a garage, a toilet, a kitchen, a garden, a living room — несколько верных): ключа в выгрузке нет, все чекбоксы пустые. **В урок не положен.** Пришлите ответы — добавлю quiz после видео (станет бл. 3, дальше номера сдвинутся на 1) |
+| U6 HW5 | 4 | «There is a cellar.» — в выгрузке текст задания упоминает Not stated, но кнопок только две; подвала на картинке нет → False |
+| U6 HW5 | 11 | Образец чтения вслух размечен `sample_tts` (или `sm1_u6_hw5_b11.mp3`) |
+| U6 HW5 | 13, 14 | Три пустые игры («Впиши слова», два «Выбери правильный вариант») — пересобрал, **СОСТАВ МОЙ** |
+| U6 HW6 | 3 | Видео «Сэм путешествует по миру, виды домов» → `sm1_u6_hw6_b3.mp4` |
+| U6 HW6 | после 3 | 🟥 Блок «Выбери только те виды домов, которые звучали в видео» (castle, hut, cave house, tree house, igloo, caravan, yurt, boat house): ключа нет, все чекбоксы пустые. **В урок не положен.** Пришлите ответы — добавлю quiz после видео (станет бл. 4, дальше сдвиг на 1). На обложке видео — igloo |
+| U6 HW6 | 6 | Выпадающие списки описания пещерного дома: вариантов в выгрузке нет — **ВАРИАНТЫ МОИ**; ответы по фото: cave house · two rooms · bedroom · hasn't got a kitchen. Проверьте |
+| U6 HW6 | 1 | Приветствие обещало «ДОПОЛНИТЕЛЬНОЕ задание», но отдельного блока с ним в выгрузке нет — фразу убрал |
+| U6 HW6 | 7 | Образец ответа — мой, `sample_tts` |
 | U6 HW2 | 3 | Видео «девочка описывает любимую комнату» → `sm1_u6_hw2_b3.mp4` |
 | U6 HW2 | 9 | Образец ответа к записи голоса в выгрузке пустой — размечен `sample_tts`, можно озвучить пачкой или прислать `sm1_u6_hw2_b9.mp3` |
 | U6 HW2 | 10, 11 | Игры Wordwall, обложки пустые — пересобрал сам, **СОСТАВ МОЙ**, посмотрите |
@@ -246,7 +344,7 @@ Output size: 1536 x 1024 px.
 | U3 Test | 4 | В вопросе 2 текст «under the desk», а на картинке стол — оставил как в выгрузке |
 | все | — | Нажать «Озвучить пачкой» (размечено `audio_tts`/`sample_tts`) |
 | все | — | Включить публикацию — уроки зальются скрытыми |
-| все | — | Картинки по листам Л6.1, ЛТ6.1, ЛТ3.1 (обязательно), ЛТ6.2, ЛТ3.2, Л6.2 (по желанию) |
+| все | — | Картинки по листам Л6.1, Л6.3, ЛТ6.1, ЛТ3.1 (обязательно), ЛТ6.2, ЛТ3.2, Л6.2 (по желанию) |
 
 Подробности по урокам — в таблицах блоков выше.
 
