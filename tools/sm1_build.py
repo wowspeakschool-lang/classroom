@@ -84,7 +84,12 @@ def check(lesson, errors):
                         errors.append(f"{where}, вопрос {n}: correct вне списка вариантов")
 
         if btype == "match":
-            rights = [p["right"] for p in payload["pairs"]]
+            # без right сервер сравнивает ответ с null — пара всегда «неверно»;
+            # пустой right наоборот засчитывает что угодно
+            for n, p in enumerate(payload["pairs"], start=1):
+                if not str(p.get("right") or "").strip():
+                    errors.append(f"{where}, пара {n}: нет right — сервер не сможет проверить ответ")
+            rights = [p.get("right") for p in payload["pairs"]]
             if len(set(rights)) != len(rights):
                 errors.append(f"{where}: правые значения повторяются — такой блок надо делать quiz")
 

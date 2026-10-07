@@ -5,7 +5,8 @@
 итоговой сборкой.
 
 Выгрузка (папка Drive `Unit 8` и `Test SM1/Unit 8`): HW1 (1), HW2, HW3,
-HW4 (1)+(2), HW5, HW6 (1), HW7, Unit 8 Test. Скачаны и txt, и pdf; все PDF
+HW4 (1)+(2), HW5, HW6 (1), HW7, Unit 8 Test. Догружены 07.10.2026 в корень
+папки SM1: HW1 (2) и HW6 (2) — оба урока пересобраны из двух частей. Скачаны и txt, и pdf; все PDF
 меньше 4.2 МБ, легли целиком.
 
 **Название юнита — `Unit 8 · My body`.** Слова юнита — части тела и
@@ -21,12 +22,12 @@ Super Minds 1 по выгрузке не проверить — 🟥 свери�
 
 | Урок | Блоков | Что из выгрузки | Пометки |
 |---|---|---|---|
-| u8_hw1 · Homework 1 | 6 | HW1 (1) — словарный тренажёр, 8 слов | части (2) в выгрузке нет |
+| u8_hw1 · Homework 1 | 11 | HW1 (1) — словарный тренажёр, 8 слов + (2) — дополнительная часть | перемычка — блок 6; 2 пустые игры — СОСТАВ МОЙ |
 | u8_hw2 · Homework 2 | 10 | HW2 | пустое «Найди пару» не перенесено; 2 Wordwall — СОСТАВ МОЙ |
 | u8_hw3 · Homework 3 | 13 | HW3 | 2 Wordwall — СОСТАВ МОЙ |
 | u8_hw4 · Homework 4 | 10 | HW4 (1) + (2) | перемычка — блок 8; вопросы интерактивного видео не выгрузились |
 | u8_hw5 · Homework 5 | 14 | HW5 | 2 Wordwall — СОСТАВ МОЙ |
-| u8_hw6 · Homework 6 | 7 | HW6 (1) — словарный тренажёр, 6 слов | части (2) нет; переводов в выгрузке нет — наши |
+| u8_hw6 · Homework 6 | 11 | HW6 (1) — словарный тренажёр, 6 слов + (2) | перемычка — блок 7; переводы с карточки методиста из (2) |
 | u8_hw7 · Homework 7 | 10 | HW7 | 2 Wordwall — СОСТАВ МОЙ |
 | u8_test · Unit 8 Test | 13 | Super Minds 1 Unit 8 Test | kind `test`, без приветствия/прощания |
 
@@ -34,18 +35,37 @@ Super Minds 1 по выгрузке не проверить — 🟥 свери�
 
 ### u8_hw1 · Homework 1
 
-Тренажёр «vocabulary-drilling»: head, fingers, hand, knee, leg, toes, foot,
-arms + переводы; задания «Карточки», «Запомни», «Послушай», «Найди пару».
-Картинок у слов в выгрузке нет — лист Л8.1.
+Две части одним уроком. (1) — тренажёр «vocabulary-drilling»: head,
+fingers, hand, knee, leg, toes, foot, arms + переводы; задания «Карточки»,
+«Запомни», «Послушай», «Найди пару». Картинок у слов в выгрузке нет — лист
+Л8.1. (2) — «дополнительная часть домашнего задания, по желанию»:
+карточка методиста, «Нарисуй монстра», две игры. Прощания у (1) в выгрузке
+нет (тренажёр), приветствие (2) — перемычка, блок 6.
 
 | № | Тип | Что внутри | Откуда |
 |---|---|---|---|
-| 1 | text | приветствие + мишка body_teddy | текст комментария к уроку |
-| 2 | flashcards | 8 слов с переводом и картинкой | список слов |
-| 3 | quiz | «Как по-английски …?» ×8 | «Запомни» |
-| 4 | quiz | «Послушай слово и выбери» ×8, `audio_tts` | «Послушай» |
-| 5 | match | картинка ↔ слово ×8 | «Найди пару» |
-| 6 | text | прощание | наше |
+| 1 | text | приветствие + мишка body_teddy | (1) текст комментария к уроку |
+| 2 | flashcards | 8 слов с переводом и картинкой | (1) список слов |
+| 3 | quiz | «Как по-английски …?» ×8 | (1) «Запомни» |
+| 4 | quiz | «Послушай слово и выбери» ×8, `audio_tts` | (1) «Послушай» |
+| 5 | match | картинка ↔ слово ×8 | (1) «Найди пару» |
+| 6 | text | перемычка: основная часть позади, дальше — дополнительная | (2) блок 1 |
+| 7 | text | «Давай повторим…» + карточка Vocabulary — The Body (vocab_body) | (2) блок 2 |
+| 8 | speaking | «Нарисуй своего монстра и расскажи, какие у него части тела», картинка monster_draw, пример 2 legs, 4 arms, 10 teeth | (2) блок 3 (картинка + запись голоса) |
+| 9 | match | «Задание для настоящих чемпионов! Соедини слово с картинкой» ×8 — СОСТАВ МОЙ | (2) блок 4, игра без содержимого |
+| 10 | exact_input | «Впиши слова»: напиши по-английски по переводу ×8 — СОСТАВ МОЙ | (2) блок 4′, игра без содержимого |
+| 11 | text | прощание со звёздочкой | (2) блок 5 |
+
+Блок 4 (2) в выгрузке начинается словами «Ты выполнил все задания из
+основной части! А это дополнительные задания — для настоящих чемпионов!»,
+хотя вся часть (2) уже объявлена дополнительной; фраза ушла в перемычку и
+заголовок блока 9. Обе игры блока 4 в PDF — пустое окно без обложки и
+без содержимого. Блок 9 по составу совпадает с блоком 5 (те же восемь
+пар картинка ↔ слово) — игра методиста называлась именно так; блок 10
+сделан «по переводу», чтобы не повторять HW7 · 6 (там «по картинке»).
+
+Переводы сверены с карточкой vocab_body: hand — «кисть руки», arm —
+«рука (от плеча)» (у нас arms — «руки (от плеча)»); остальные совпадали.
 
 ### u8_hw2 · Homework 2
 
@@ -140,20 +160,32 @@ ab_dog_swim.
 
 ### u8_hw6 · Homework 6
 
-Тренажёр: forwards, backwards, stretch, sideways, step, jump. Перевода в
-выгрузке нет (заглушка «Определение») — переводы наши: вперёд, назад,
-тянуться, вбок, шагать, прыгать. Задания «Послушай», «Найди пару»,
-«Скрэмбл» ×2, «Введи слова» ×2.
+Две части одним уроком. (1) — тренажёр: forwards, backwards, stretch,
+sideways, step, jump; задания «Послушай», «Найди пару», «Скрэмбл» ×2,
+«Введи слова» ×2. Перевода в (1) нет (заглушка «Определение») — в (2) есть
+карточка методиста «Vocabulary 2 — Movements» с переводами: вперёд, назад,
+вбок, шаг, прыжок, тянуться. Наши прежние переводы расходились в двух
+словах (step — «шагать», jump — «прыгать») — заменены на карточные.
+Прощания у (1) нет, приветствие (2) «Рада снова видеть тебя!» — перемычка,
+блок 7.
 
 | № | Тип | Что внутри | Откуда |
 |---|---|---|---|
 | 1 | text | приветствие | наше (комментария к уроку нет) |
-| 2 | flashcards | 6 слов, картинки Л8.2 | список слов |
-| 3 | quiz | «Послушай слово и выбери» ×6 | «Послушай» |
-| 4 | match | картинка ↔ слово ×6 | «Найди пару» |
-| 5 | exact_input | собери слово из перемешанных букв ×6 | «Скрэмбл» |
-| 6 | exact_input | напиши по-английски ×6 | «Введи слова» |
-| 7 | text | прощание | наше |
+| 2 | flashcards | 6 слов, картинки Л8.2 | (1) список слов |
+| 3 | quiz | «Послушай слово и выбери» ×6 | (1) «Послушай» |
+| 4 | match | картинка ↔ слово ×6 | (1) «Найди пару» |
+| 5 | exact_input | собери слово из перемешанных букв ×6 | (1) «Скрэмбл» |
+| 6 | exact_input | напиши по-английски ×6 | (1) «Введи слова» |
+| 7 | text | перемычка: слова выучены, впереди ещё задания | (2) блок 1 |
+| 8 | text | «Давай повторим…» + карточка Vocabulary 2 — Movements (vocab_moves) | (2) блок 2 |
+| 9 | match | картинка ↔ He stretches forwards / She jumps forwards / She stretches sideways / She jumps backwards / He runs sideways / She steps forwards | (2) блок 3 «Соедини описание с картинкой», картинки — Л8.5 |
+| 10 | speaking | «Расскажи, что ты умеешь делать», пример I can jump backwards. | (2) блок 4 |
+| 11 | text | прощание | (2) блок 5 |
+
+Блок 9: в выгрузке шесть фото детей одной картинкой, связи в PDF не
+видны (точки не соединены). Фото не берём — картинки с животными по
+каждой фразе (Л8.5), так что верная пара задаётся самой картинкой.
 
 ### u8_hw7 · Homework 7
 
@@ -218,7 +250,7 @@ too small; Come and see Beep — совпадают с текстом письм
 
 Режется на: body_head, body_arms, body_hand / body_fingers, body_leg,
 body_knee / body_foot, body_toes, body_teddy.
-Где: HW1 блоки 1, 2, 3, 5 (body_teddy — блок 1); HW7 блоки 2, 6; Test
+Где: HW1 блоки 1, 2, 3, 5, 9 (body_teddy — блок 1); HW7 блоки 2, 6; Test
 блоки 1, 2.
 
 ```
@@ -262,6 +294,24 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 Output size: 2048 x 1365 px, each cell at least 600 px.
 ```
 
+#### Л8.5 · Движения: кто что делает — 6 карточек (3×2)
+
+Режется на: move_he_stretches_forwards, move_she_jumps_forwards,
+move_she_stretches_sideways / move_she_jumps_backwards,
+move_he_runs_sideways, move_she_steps_forwards.
+Где: HW6 блок 9 (в выгрузке фото детей). «He» — щенок, «she» — котёнок с
+розовым бантом; с Л8.2 не совпадает: там одно слово, здесь движение +
+направление.
+
+```
+A sheet of six separate pictures arranged in a 3x2 grid on a plain flat pure white background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. Two characters appear: a cute brown puppy with a blue collar (the boy) and a cute white kitten with a big pink bow on its head (the girl). In every picture a big bright arrow on the ground shows the direction of the movement.
+Row 1, left to right: the puppy leaning far forwards with both front paws stretched out ahead of it, a green arrow pointing forwards; the kitten jumping high forwards in a long leap, a green arrow pointing forwards; the kitten standing and bending its body to one side with one front paw stretched up over its head, a blue arrow pointing sideways.
+Row 2, left to right: the kitten jumping backwards in the air, facing the viewer, an orange arrow behind it pointing backwards; the puppy running sideways with quick little steps, small motion lines, a blue arrow pointing sideways; the kitten taking one careful step forwards, one paw lifted, a green arrow pointing forwards.
+No people at all - no humans, no hands, no faces. No text, no letters, no labels, no numbers. No shadow on the background.
+Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left.
+Output size: 2048 x 1365 px, each cell at least 600 px.
+```
+
 ### 2. По желанию — в выгрузке стоковое фото или клипарт
 
 #### Л8.4 · Замена стоковых картинок — 4 карточки (2×2)
@@ -281,9 +331,10 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 Output size: 2048 x 2048 px, each cell at least 900 px.
 ```
 
-### 3. Не перерисовывать — уже вырезано из PDF в `media/sm1/u8/` (36 файлов)
+### 3. Не перерисовывать — уже вырезано из PDF в `media/sm1/u8/` (39 файлов)
 
-* карточки методиста: grammar_can_cant, grammar_can_you, story_key_phrases, t_letter_jake, pet_forum;
+* карточки методиста: grammar_can_cant, grammar_can_you, story_key_phrases, t_letter_jake, pet_forum, vocab_body (HW1 (2)), vocab_moves (HW6 (2));
+* монстр для рисования: monster_draw (HW1 (2), клипарт; в PDF с маской прозрачности — сведён на белый);
 * история «The Problem»: story_robot_1_6, story_robot_7_8, story_robot_shuffled;
 * картинки учебника и заданий: sb_can_cant_kids, abilities_sheet, animals_can_cant, boy_tennis_cook, girl_dance_fly, t_town_scene;
 * клипарт из листа HW3: ab_cant_swim, ab_stand_one_leg, ab_cant_ride_bike, ab_play_football, ab_skip, ab_cant_piano;
@@ -310,8 +361,8 @@ sb_can_cant_kids, she_cant_skip и she_cant_ride_horse в PDF лежат с ма
 | 7 | HW5 · 11 | прислать аудио «как я описала своего питомца» → `sm1_u8_hw5_b11` |
 | 8 | Test · 11 | прислать аудио разговора Лили и Тома → `sm1_u8_test_b11` |
 | 9 | HW2 | пустой блок «Найди пару» после видео (I can swim / I can't walk / I can climb trees / I can't fly / I can ski / I can't stop — без картинок) не перенесён: прислать картинки к нему или решить, что без него |
-| 10 | HW1 | в выгрузке только часть (1) — словарный тренажёр; будет ли часть (2)? |
-| 11 | HW6 | в выгрузке только часть (1) — тренажёр на 6 слов движения; будет ли часть (2)? Переводы слов наши (в выгрузке заглушка «Определение») — проверить |
+| 10 | HW1 · 9, 10 | игры части (2) «Соедини слово с картинкой» и «Впиши слова» в выгрузке пустые, обложек нет — собраны по словам урока, СОСТАВ МОЙ. Блок 9 совпадает по составу с блоком 5 — оставить или убрать? |
+| 11 | HW6 · 9 | в выгрузке фото детей, связи не видны — картинки с животными по Л8.5, пары по фразам; проверить, что «He runs sideways» и прочие фразы читаются по картинкам |
 | 12 | HW2 · 8, 9 | Wordwall пересобраны, обложки пустые — СОСТАВ МОЙ, посмотреть |
 | 13 | HW3 · 9–12 | Wordwall пересобраны, обложки пустые — СОСТАВ МОЙ, посмотреть |
 | 14 | HW5 · 12, 13 | Wordwall пересобраны по тексту форума, обложки пустые — СОСТАВ МОЙ, посмотреть |
@@ -333,6 +384,10 @@ ab_can_ski). Блок 8 — match «картинка ↔ I can / can't …» н�
 **HW3.** Блок 9 — quiz «Can a fish swim?» …; блоки 10–12 — три «Составь
 предложение».
 
+**HW1.** Перемычка — блок 6 (часть (2) — дополнительная, по желанию).
+Блоки 9–10 — пустые игры (2), СОСТАВ МОЙ. Переводы hand / arms
+выровнены по карточке методиста.
+
 **HW4.** Перемычка — блок 8. Блок 9 — интерактивное видео, вопросы внутри
 видео в нашем плеере не работают; если нужны — сделаем отдельными
 блоками после видео, когда придут тексты.
@@ -341,6 +396,9 @@ ab_can_ski). Блок 8 — match «картинка ↔ I can / can't …» н�
 «Can this dog swim?» в выгрузке не дошли — наши, с животными. Блок 12 —
 gaps can / can't по тексту форума, блок 13 — match описание ↔ имя
 питомца.
+
+**HW6.** Перемычка — блок 7. Переводы step / jump заменены на карточные
+(шаг, прыжок). Блок 9 — картинки Л8.5 вместо фото детей.
 
 **HW7.** Блок 6 — exact_input «впиши слово по картинке»; блоки 7–9 —
 «Составь предложение».
@@ -351,6 +409,7 @@ gaps can / can't по тексту форума, блок 13 — match опис�
 ## Проверка
 
 `python3 tools/sm1_build.py --check-all` по u8: все ошибки — только «нет
-файла» под 20 будущих картинок из листов Л8.1–Л8.3 (body_* ×9, move_* ×6,
-ab_can_ski, ab_cat_dance, ab_bear_cant_ride_bike, ab_dog_swim, kite_sky).
+файла» под 26 будущих картинок из листов Л8.1–Л8.3 и Л8.5 (body_* ×9,
+move_* ×6, ab_can_ski, ab_cat_dance, ab_bear_cant_ride_bike, ab_dog_swim,
+kite_sky, move_he_*/move_she_* ×6).
 Других ошибок нет. u8_hw3 и u8_hw4 проходят полностью.
