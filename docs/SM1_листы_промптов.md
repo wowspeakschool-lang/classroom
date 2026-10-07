@@ -2,7 +2,7 @@
 
 Один промпт = одна картинка-лист с сеткой внутри, потом лист режется на
 карточки в `media/sm1/uN/`. Промпт копируется целиком, стиль, запрет текста и
-людей уже внутри. **33 листа** на юниты 5–9, тесты 1–9 и Final Test.
+людей уже внутри. **37 листов** на юниты 5–9, тесты 1–9 и Final Test.
 
 Нумерация: `Л<юнит>.<n>` — домашки юнита, `ЛТ<юнит>.<n>` — тест юнита,
 `ЛФ.<n>` — Final Test. Ячейки идут слева направо, сверху вниз — в порядке промпта.
@@ -17,6 +17,7 @@
 * СЦЕНА — `Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, one single scene filling the frame, no people.`
 
 Готовые листы присылать с подписью листа (`Л6.1`), чтобы знать, как резать.
+
 
 
 ## Unit 5 · тесты Unit 1 и Unit 2
@@ -117,6 +118,8 @@ A sheet of 6 separate toys in a grid of 3 columns and 2 rows, landscape 1536x102
 Материал заданий: кадры мультфильма, карточки методиста, картинки, по которым
 сверяются ответы, клипарт с людьми (генерировать людей нельзя).
 
+* `media/sm1/u5/` (второй заход): `hw5_mila_letter` — письмо Милы, рукописный текст и
+  рисунки учебника, q88 — 1 файл.
 * `media/sm1/u5/`: `card_lost_phrases`, `card_phonics_u`, `card_go_activities`
   (карточки методиста, q88), `story_lost_forest`, `story_lost_comic`,
   `story_lost_flash`, `story_lost_whisper`, `story_lost_rabbit` (кадры истории),
@@ -152,7 +155,7 @@ BYE; галерея фонов.
 ##### Л6.1 · Комнаты дома — 9 карточек (3×3)
 Режется: `room_bathroom`, `room_bedroom`, `room_living_room` · `room_hall`, `room_dining_room`,
 `room_kitchen` · `room_stairs`, `room_cellar`, `house_outside` → `media/sm1/u6/`.
-Где: HW1 бл. 1, 2, 5–14; HW7 бл. 9; Unit 6 Test бл. 2.
+Где: HW1 бл. 1, 2, 5–14, 18, 19; HW5 бл. 13; HW7 бл. 9; Unit 6 Test бл. 2.
 ```
 A sheet of 9 separate picture cards in a 3 x 3 grid. Each card is a small cosy room seen as an open cutaway box from a three-quarter view (two walls and a floor), so the room type is obvious at a glance.
 Row 1, left to right: a bathroom with a bathtub, a toilet and a washbasin; a bedroom with a bed, a pillow and a bedside lamp; a living room with a sofa, an armchair and a television.
@@ -188,6 +191,18 @@ Row 2, left to right: a green frog; a black spider; a brown dog.
 Row 3, left to right: a ginger cat; a white duck with an orange beak; a grey donkey.
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. No text, no letters, no labels, no numbers. No people at all - no humans, no hands, no faces.
 Output size: 1536 x 1536 px.
+```
+
+##### Л6.3 · Картинки к «Is / Are there» в HW3 — 3 карточки (1×3)
+Режется: `hw3_rats`, `hw3_cars`, `hw3_go_kart` → `media/sm1/u6/`.
+Где: HW3 бл. 5 (вопросы 2, 3, 5). Почему обязательно: в выгрузке крысы сидят в руках
+человека, машинки — герои известного мультфильма, болид — фирменная модель с логотипами.
+Число крыс и машин важно — вопросы «any rats?», «How many cars?».
+```
+A sheet of 3 separate picture cards in one row.
+Row 1, left to right: three cute grey rats sitting side by side; two small toy cars side by side, one red and one blue (generic design, not resembling any real product, no faces on the cars); a small yellow go-kart with big black wheels and an empty seat (generic design, not resembling any real product).
+Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. No text, no letters, no labels, no numbers. No people at all - no humans, no hands, no faces. Generic design, not resembling any real product.
+Output size: 1536 x 1024 px.
 ```
 
 #### 2. По желанию — в выгрузке стоковое фото, ответы не пострадают
@@ -231,6 +246,14 @@ Output size: 1536 x 1024 px.
 `test_pears`, `test_lizard`, `test_plane`, `test_crocodile`, `test_bikes`, `test_dogs`,
 `test_fishing_scene` — 26 файлов.
 
+Второй заход (догрузка), `media/sm1/u6/`: `card_rooms_vocab` (HW1), `card_grammar_is_there`,
+`hw3_lions`, `hw3_ball`, `hw3_dragon`, `hw3_dogs`, `hw3_cake`, `hw3_house_rooms` (HW3),
+`hw5_house_attic`, `hw5_bedroom`, `hw5_living_room`, `hw5_floorplan`, `hw5_kitchen`, `hw5_house` (HW5),
+`card_types_of_homes`, `home_yurt`, `home_boat`, `home_cave`, `home_tree`, `homes_many`,
+`cave_house_room`, `homes_four` (HW6) — 22 файла. В HW3 груши и самолёт взяты из уже вырезанных
+`test_pears`, `test_plane` (те же картинки, что в тесте). Фото в HW5 и HW6 — стоковые, без людей;
+на `hw5_house_attic` нарисованы люди (клипарт учебника), по нему сверяются ответы — не перерисовывать.
+
 `media/sm1/u3/`: `test_elephant_plane`, `test_frog_table`, `test_rat_bag`, `test_spider`, `test_dogs`,
 `test_elephants_ruler`, `test_lizards`, `test_ducks_books`, `test_dog_desk`, `test_cat`,
 `test_animals_where`, `test_attic_animals` — 12 файлов.
@@ -256,7 +279,7 @@ Output size: 1536 x 1024 px.
 **Л7.1 · одежда, 3×3** → `media/sm1/u7/`: `clothes_tshirt`, `clothes_sweater`,
 `clothes_jacket` / `clothes_skirt`, `clothes_shorts`, `clothes_jeans` /
 `clothes_trousers`, `clothes_socks`, `clothes_shoes`.
-Где: U7 HW2 бл. 9, 11, 13–15, 18, 19 · HW7 бл. 2, 7 · Test бл. 2, 5, 7.
+Где: U7 HW1 бл. 2, 9, 10 · HW2 бл. 9, 11, 13–15, 18, 19 · HW7 бл. 2, 7 · Test бл. 2, 5, 7.
 
 ```
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. A 3×3 grid of nine separate children's clothing items, each laid flat and seen from the front, one item per cell. Row 1, left to right: a plain red short-sleeved T-shirt; a plain green knitted sweater; a brown zip-up jacket. Row 2, left to right: a plain pink pleated skirt; plain blue shorts; a pair of blue denim jeans. Row 3, left to right: a pair of plain grey trousers; a pair of white socks; a pair of brown lace-up children's shoes, generic design, not resembling any real product. Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge, no text, no letters, no labels, no numbers. No people at all - no humans, no hands, no faces. 1536×1536.
@@ -264,7 +287,7 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 
 **Л7.2 · головные уборы, носки, свитер для теста, 2×2** → `clothes_cap`,
 `clothes_hat_elephant` / `clothes_socks_faces`, `clothes_sweater_red`.
-Где: U7 HW2 бл. 16, 18, 19 · HW7 бл. 7 · Test бл. 2, 3.
+Где: U7 HW1 бл. 2, 9 (`clothes_cap`) · HW2 бл. 16, 18, 19 · HW7 бл. 7 · Test бл. 2, 3.
 
 ```
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. A 2×2 grid of four separate items, one per cell. Row 1, left to right: a yellow baseball cap, generic design, not resembling any real product; a funny grey plush hat shaped like an elephant head with big floppy ears and a trunk. Row 2, left to right: a pair of funny purple and white socks with cartoon faces with open mouths printed on them; a bright red chunky knitted sweater. Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge, no text, no letters, no labels, no numbers. No people at all - no humans, no hands, no faces. 1024×1024.
@@ -279,7 +302,7 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 ```
 
 **Л7.4 · три комплекта одежды, 1×3** → `outfit_anna`, `outfit_lily`, `outfit_kate`.
-Где: U7 HW6 бл. 4. В каждой ячейке верх лежит над юбкой — как будто одежда
+Где: U7 HW6 бл. 4 · HW5 бл. 7 (`outfit_anna` — «Anna is wearing a blue skirt»). В каждой ячейке верх лежит над юбкой — как будто одежда
 разложена на кровати.
 
 ```
@@ -302,9 +325,20 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. A 2×2 grid, one picture per cell. Row 1, left to right: one single red flower with a green stem; one single white fluffy rabbit sitting. Row 2, left to right: a group of four colourful flowers growing together; a group of three fluffy rabbits sitting together, white, brown and grey. Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge, no text, no letters, no labels, no numbers. No people at all - no humans, no hands, no faces. 1024×1024.
 ```
 
+**Л7.7 · четыре комплекта одежды и мяч, 3 + 2** (второй заход) →
+`outfit_kate`, `outfit_tom`, `outfit_any` / `outfit_sam`, `football_ball`.
+Где: U7 HW3 бл. 10, 12 · HW5 бл. 12, 15 (`football_ball`).
+Вместо фото четырёх взрослых в HW3: одежда та же, что на фото. После нарезки
+собрать скриптом `hw3_four_outfits` — четыре комплекта в ряд, в порядке Kate,
+Tom, Any, Sam (по образцу `chars_three`), — это картинка к вопросам HW3 бл. 12.
+
+```
+Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. Five separate items in two rows; the first four are clothing outfits, each outfit is its clothing items laid flat and stacked from top to bottom as if worn, with no body inside. Row 1, left to right: a red knitted sweater above a white midi skirt above a pair of red ankle boots; a long black coat with a white shirt above black jeans above a pair of brown boots, generic design, not resembling any real product; a bright pink sweater above a long red skirt above a pair of white trainers, generic design, not resembling any real product. Row 2, left to right, centred: a beige baseball cap above a grey T-shirt with one wide blue and white stripe across the chest above red shorts, generic design, not resembling any real product; one classic black and white football. Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge, no text, no letters, no labels, no numbers. No people at all - no humans, no hands, no faces. 1536×1024.
+```
+
 **ЛТ7.1 · предметы к тесту Unit 7, 3 + 2** → `obj_tv`, `obj_microphone`,
 `obj_bikes` / `obj_game_controllers`, `obj_sandwich`.
-Где: U7 Test бл. 3, 4, 6, 8. Заменяют стоковые фото людей (в бл. 6 — фото
+Где: U7 Test бл. 3, 4, 6, 8 · HW5 бл. 9, 11, 15 (`obj_bikes`, `obj_sandwich`). Заменяют стоковые фото людей (в бл. 6 — фото
 детей, его брать нельзя).
 
 ```
@@ -335,12 +369,17 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. A 2×2 grid of four separate food items, one per cell. Row 1, left to right: a red apple and a yellow banana lying together; a white bowl full of green peas and orange carrot slices. Row 2, left to right: a baking dish with roasted chicken pieces and carrots; a glass of orange juice with two orange halves beside it. Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge, no text, no letters, no labels, no numbers. No people at all - no humans, no hands, no faces. 1024×1024.
 ```
 
-Итого: **10 листов** (8 сеток, Л7.5 целиком, ЛТ7.2 — сцена), **45 картинок**
-(Unit 7 — 32, Unit 4 — 13).
+Итого: **11 листов** (9 сеток, Л7.5 целиком, ЛТ7.2 — сцена), **50 картинок**
+(Unit 7 — 37, Unit 4 — 13) + сборная `hw3_four_outfits` из ячеек Л7.7.
 
 #### 2. По желанию — в выгрузке стоковое фото
 
-Отдельных листов нет: стоковые фото одежды (HW2: юбка, брюки на человеке,
+Отдельных листов нет. Во втором заходе: стоковые фото тренажёра HW1 (10 вещей)
+заменены Л7.1, Л7.2; фото людей в HW3 (четверо взрослых) и HW5 (девочка в юбке,
+девушки на велосипедах, мальчик с мячом, мужчина с бутербродом) — Л7.4, Л7.7,
+ЛТ7.1; фото фокусника (HW5 бл. 2) просто не взято, в задании оно не нужно.
+
+Первый заход: стоковые фото одежды (HW2: юбка, брюки на человеке,
 пиджак, джинсы, туфли на шпильке, кепка; HW7: клипарт ботинок, куртки, шорт,
 свитера) и еды (тест Unit 4) **уже заменены** картинками обязательных листов
 Л7.1, Л7.2, ЛТ4.1, ЛТ4.2 — чтобы юнит вышел одним стилем и не было людей.
@@ -357,8 +396,23 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 | `media/sm1/u7/kids_thumbs_up.webp` | HW7, клипарт мальчик и девочка (прозрачный фон → белый) | HW7 бл. 6 |
 | `media/sm1/u7/chars_three.webp` | три кадра героев HW7, собраны в ряд | Test бл. 12 |
 | `media/sm1/u4/fridge.webp` | тест Unit 4, холодильник | U4 Test бл. 12 |
+| `media/sm1/u7/vocab_clothes.webp` 900×506 | HW1 (2), карточка Vocabulary — Clothes | HW1 бл. 7 |
+| `media/sm1/u7/kids_drawing_sample.webp` | HW1 (2), клипарт девочки и мальчика к рисунку | HW1 бл. 8 |
+| `media/sm1/u7/grammar_is_he_wearing.webp` 900×506 | HW3, карточка Grammar 2 | HW3 бл. 2 |
+| `media/sm1/u7/char_darius.webp` | HW3, герой Darius | HW3 бл. 5, 16 |
+| `media/sm1/u7/char_mabel_card.webp` | HW3, Mabel | HW3 бл. 5, 15 |
+| `media/sm1/u7/gf_family_party.webp` | HW3, кадр Gravity Falls | HW3 бл. 6 |
+| `media/sm1/u7/gf_mabel_dipper.webp` | HW3, Mabel и Dipper | HW3 бл. 13 |
+| `media/sm1/u7/story_cap_phrases.webp` 900×506 | HW4 (1), карточка Key Phrases | HW4 бл. 2 |
+| `media/sm1/u7/story_cap_cover.webp` | HW4 (1), обложка «Unit 7 The cap» | HW4 бл. 3 |
+| `media/sm1/u7/cap_yellow_clipart.webp` | HW4 (1), клипарт кепки | HW4 бл. 4, 6 |
+| `media/sm1/u7/story_cap_1_4.webp`, `story_cap_5_8.webp` | HW4 (1), кадры истории | HW4 бл. 5 |
+| `media/sm1/u7/party_scene_names.webp` 739×386 | HW5, сцена праздника с именами | HW5 бл. 4, 5, 16 |
+| `media/sm1/u7/boy_singing.webp` | HW5, клипарт мальчика с микрофоном | HW5 бл. 8, 15 |
+| `media/sm1/u7/watching_tv_clipart.webp` | HW5, клипарт «смотрят телевизор» | HW5 бл. 10, 15 |
+| `media/sm1/u7/emma_singing.webp` | HW5, клипарт Эммы | HW5 бл. 13, 15 |
 
-Вырезано 8 файлов (7 из PDF + 1 сборный).
+Вырезано 8 файлов в первом заходе (7 из PDF + 1 сборный) и 16 во втором (все из PDF).
 
 ---
 
@@ -379,7 +433,7 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 
 Режется на: body_head, body_arms, body_hand / body_fingers, body_leg,
 body_knee / body_foot, body_toes, body_teddy.
-Где: HW1 блоки 1, 2, 3, 5 (body_teddy — блок 1); HW7 блоки 2, 6; Test
+Где: HW1 блоки 1, 2, 3, 5, 9 (body_teddy — блок 1); HW7 блоки 2, 6; Test
 блоки 1, 2.
 
 ```
@@ -423,6 +477,24 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 Output size: 2048 x 1365 px, each cell at least 600 px.
 ```
 
+##### Л8.5 · Движения: кто что делает — 6 карточек (3×2)
+
+Режется на: move_he_stretches_forwards, move_she_jumps_forwards,
+move_she_stretches_sideways / move_she_jumps_backwards,
+move_he_runs_sideways, move_she_steps_forwards.
+Где: HW6 блок 9 (в выгрузке фото детей). «He» — щенок, «she» — котёнок с
+розовым бантом; с Л8.2 не совпадает: там одно слово, здесь движение +
+направление.
+
+```
+A sheet of six separate pictures arranged in a 3x2 grid on a plain flat pure white background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. Two characters appear: a cute brown puppy with a blue collar (the boy) and a cute white kitten with a big pink bow on its head (the girl). In every picture a big bright arrow on the ground shows the direction of the movement.
+Row 1, left to right: the puppy leaning far forwards with both front paws stretched out ahead of it, a green arrow pointing forwards; the kitten jumping high forwards in a long leap, a green arrow pointing forwards; the kitten standing and bending its body to one side with one front paw stretched up over its head, a blue arrow pointing sideways.
+Row 2, left to right: the kitten jumping backwards in the air, facing the viewer, an orange arrow behind it pointing backwards; the puppy running sideways with quick little steps, small motion lines, a blue arrow pointing sideways; the kitten taking one careful step forwards, one paw lifted, a green arrow pointing forwards.
+No people at all - no humans, no hands, no faces. No text, no letters, no labels, no numbers. No shadow on the background.
+Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left.
+Output size: 2048 x 1365 px, each cell at least 600 px.
+```
+
 #### 2. По желанию — в выгрузке стоковое фото или клипарт
 
 ##### Л8.4 · Замена стоковых картинок — 4 карточки (2×2)
@@ -442,9 +514,10 @@ Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid 
 Output size: 2048 x 2048 px, each cell at least 900 px.
 ```
 
-#### 3. Не перерисовывать — уже вырезано из PDF в `media/sm1/u8/` (36 файлов)
+#### 3. Не перерисовывать — уже вырезано из PDF в `media/sm1/u8/` (39 файлов)
 
-* карточки методиста: grammar_can_cant, grammar_can_you, story_key_phrases, t_letter_jake, pet_forum;
+* карточки методиста: grammar_can_cant, grammar_can_you, story_key_phrases, t_letter_jake, pet_forum, vocab_body (HW1 (2)), vocab_moves (HW6 (2));
+* монстр для рисования: monster_draw (HW1 (2), клипарт; в PDF с маской прозрачности — сведён на белый);
 * история «The Problem»: story_robot_1_6, story_robot_7_8, story_robot_shuffled;
 * картинки учебника и заданий: sb_can_cant_kids, abilities_sheet, animals_can_cant, boy_tennis_cook, girl_dance_fly, t_town_scene;
 * клипарт из листа HW3: ab_cant_swim, ab_stand_one_leg, ab_cant_ride_bike, ab_play_football, ab_skip, ab_cant_piano;
@@ -469,7 +542,7 @@ sb_can_cant_kids, she_cant_skip и she_cant_ride_horse в PDF лежат с ма
 ##### Л9.1 · Места отдыха — 4 карточки (2×2)
 
 Режутся: `place_mountains`, `place_countryside`, `place_beach`, `place_city`
-(слева направо, сверху вниз). Где: u9_hw6 бл. 2 и 3.
+(слева направо, сверху вниз). Где: u9_hw6 бл. 2, 4, 7, 8.
 
 ```
 A sheet of 4 separate small landscape vignettes arranged in a grid of 2 columns and 2 rows, each vignette a rounded self-contained little scene like a game icon.
@@ -484,7 +557,7 @@ Output size: 1536 x 1536 px.
 
 ##### Л9.2 · Места отдыха — 3 карточки (1 ряд × 3)
 
-Режутся: `place_theme_park`, `place_campsite`, `place_lake`. Где: u9_hw6 бл. 2 и 3.
+Режутся: `place_theme_park`, `place_campsite`, `place_lake`. Где: u9_hw6 бл. 2, 4, 7, 8.
 
 ```
 A sheet of 3 separate small landscape vignettes in one row, each vignette a rounded self-contained little scene like a game icon, all three the same size.
@@ -499,12 +572,31 @@ Output size: 1536 x 1024 px.
 ##### ЛТ9.1 · Занятия на пляже — 6 карточек (3×2)
 
 Режутся: `act_paint_picture`, `act_listen_music`, `act_catch_fish`,
-`act_take_photo`, `act_look_shells`, `act_make_sandcastle`. Где: u9_test бл. 2.
+`act_take_photo`, `act_look_shells`, `act_make_sandcastle`. Где: u9_test бл. 2;
+u9_hw1 бл. 2, 5, 7; u9_hw5 бл. 2 (listen_music, make_sandcastle, catch_fish),
+бл. 3–5 (paint_picture, take_photo, look_shells).
 
 ```
 A sheet of 6 separate objects arranged in a grid of 3 columns and 2 rows, each object shows one holiday activity without any person.
 Row 1, left to right: a wooden painter's palette with bright paint blobs, a paintbrush and a small easel with a picture of the sea; big over-ear headphones connected to a small music player with a few floating musical notes; a fishing rod with a fish hanging on the line.
 Row 2, left to right: a compact photo camera, generic design, not resembling any real product; a few colourful seashells on a small patch of sand with a magnifying glass; a sandcastle with towers, a small red bucket and a spade.
+Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left.
+No people at all - no humans, no hands, no faces.
+Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge.
+No text, no letters, no labels, no numbers.
+Output size: 1536 x 1024 px.
+```
+
+##### Л9.4 · Занятия на пляже, дополнение — 3 карточки (1 ряд × 3)
+
+Режутся: `act_eat_ice_cream`, `act_read_book`, `act_play_guitar`.
+Где: u9_hw1 бл. 2, 5, 7 (словарь из 9 занятий: шесть с листа ЛТ9.1 + эти
+три); u9_hw5 бл. 6 (`act_read_book`). Стиль и размер карточек — как у ЛТ9.1,
+чтобы девять карточек одного урока не различались.
+
+```
+A sheet of 3 separate objects in one row, all three the same size, each object shows one holiday activity without any person.
+Row 1, left to right: a big ice cream cone with two scoops, pink and white, with a few sprinkles; an open book lying on a small beach towel with a pair of sunglasses next to it; an acoustic guitar leaning on a small sand dune with a seashell beside it.
 Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left.
 No people at all - no humans, no hands, no faces.
 Plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge.
@@ -549,10 +641,10 @@ Output size: 1536 x 1024 px.
 
 #### 3. Не перерисовывать — вырезано из PDF
 
-51 файл, webp. Карточки ≤ 400 px (78–85), кадры истории, открытка и слова
+59 файлов, webp. Карточки ≤ 400 px (78–85), кадры истории, открытка и слова
 с буквами — качество 88.
 
-* `media/sm1/u9/` (39): `hw2_friends_talk`, `hw2_lets_swim`, `hw2_lets_music`,
+* `media/sm1/u9/` (47): `hw2_friends_talk`, `hw2_lets_swim`, `hw2_lets_music`,
   `hw2_lets_photo`, `hw2_lets_paint`, `hw2_lets_park`, `hw2_lets_shells`,
   `smile_sorry`, `smile_not_sure`, `smile_good_idea`, `hw2_beach_umbrella`,
   `hw3_cat`, `hw3_where_photos`, `hw3_bags`, `hw3_house`,
@@ -560,7 +652,11 @@ Output size: 1536 x 1024 px.
   `hw4_video_cover`, `hw4_frame_1` … `hw4_frame_8`,
   `test_listen_music`, `test_palette`, `test_book`, `test_girl_bucket`,
   `test_birds`, `test_dog`, `test_pink_shoes`, `test_blue_crocodile`,
-  `test_selfie`, `test_postcard`, `test_beach_scene`.
+  `test_selfie`, `test_postcard`, `test_beach_scene`;
+  догружено 07.10: `hw1_drawing_example` (детский рисунок-пример),
+  `hw5_girl_icecream`, `hw5_beach_kids`, `hw5_beach_scene`, `hw7_boy_guitar`,
+  `hw7_girl_music`, `hw7_boy_fishing`, `hw7_where_tiles` (все — рисованные,
+  не фото).
 * `media/sm1/ft/` (12): `ft_picnic`, `ft_eraser`, `ft_spider`, `ft_bike`,
   `ft_arm`, `ft_chicken`, `ft_kitchen`, `ft_word_pencil`, `ft_word_monster`,
   `ft_word_duck`, `ft_word_bathroom`, `ft_word_sweater`.
