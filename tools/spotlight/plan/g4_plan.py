@@ -6,7 +6,7 @@ rows = list(csv.DictReader(open('tsv/grade_4.tsv'), delimiter='\t'))
 
 # Папка — модуль учебника, колода — юнит под его названием из учебника;
 # большой юнит делится на темы: «Unit 3: The Animal Hospital · профессии».
-# Cultural Section N и Spotlight on Russia N идут в папку Module N одной колодой.
+# Cultural Section N и Spotlight on Russia N — отдельные колоды в папке Module N.
 T = {  # юнит → тема → слова (фразы через |)
  'Unit 1': {'вещи': 'camera CD glove guitar hairbrush key|mobile phone|roller blades|watch',
             'внешность и характер': "friendly kind slim sporty vet|What does he look like?|What's he like?"},
@@ -28,7 +28,9 @@ GEO = {'страны': 'Australia Canada China England France Germany Greece Ire
 OTHER = 'Другие разделы'
 def culture(m, s):
     if m.startswith(('Cultural', 'Spotlight on Russia')):
-        return (f'Module {s.split(".")[0]}', 'Culture Corner & Spotlight on Russia')
+        n, title = s.split('. ', 1)
+        kind = 'Culture Corner' if m.startswith('Cultural') else 'Spotlight on Russia'
+        return (f'Module {n}', f'{kind} {n}: {title}')
 # готовая картинка: id слова тренажёра; сверено по переводу
 REUSE = {
  'amazing':1768,'angry':703,'april':624,'august':628,'australia':372,'badminton':81,'bake':940,"baker's":871,
