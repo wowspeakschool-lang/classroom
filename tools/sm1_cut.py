@@ -59,6 +59,17 @@ SHEETS = {
     "Л7.4": (1, 3, ["u7/outfit_anna", "u7/outfit_lily", "u7/outfit_kate"], CARD, 82),
     "Л7.5": (1, 1, ["u7/fav_clothes"], 760, 82),
     "Л7.6": (2, 2, ["u7/pic_flower", "u7/pic_rabbit", "u7/pic_flowers", "u7/pic_rabbits"], CARD, 82),
+    "ЛТ7.1": (2, (3, 2), ["u7/obj_tv", "u7/obj_microphone", "u7/obj_bikes",
+                          "u7/obj_game_controllers", "u7/obj_sandwich"], CARD, 82),
+    "ЛТ7.2": (1, 1, ["u7/scene_clothes_shop"], SCENE, 80),
+    "ЛТ4.1": (3, 3, ["u4/food_chicken", "u4/food_cheese_sandwich", "u4/food_cake",
+                     "u4/food_sausage", "u4/food_banana", "u4/food_steak",
+                     "u4/food_pizza", "u4/food_ice_cream", "u4/food_milk"], CARD, 82),
+    "ЛТ4.2": (2, 2, ["u4/food_apple_banana", "u4/food_peas_carrots",
+                     "u4/food_chicken_carrots", "u4/food_orange_juice"], CARD, 82),
+    "Л8.1": (3, 3, ["u8/body_head", "u8/body_arms", "u8/body_hand",
+                    "u8/body_fingers", "u8/body_leg", "u8/body_knee",
+                    "u8/body_foot", "u8/body_toes", "u8/body_teddy"], CARD, 82),
 }
 
 # Стоковые картинки тестов, которые по разбору заменяются ячейками уже нарезанных
@@ -79,6 +90,9 @@ def content_mask(a):
     return dark | sat
 
 
+FORCED = []   # split() резал без белого просвета — там нужна чистка обрывков
+
+
 def split(profile, parts):
     """Границы parts полос по (parts-1) самым широким пустым промежуткам."""
     filled = profile > 0
@@ -96,6 +110,7 @@ def split(profile, parts):
     if len(gaps) < parts - 1:
         # чистого просвета нет (предметы почти касаются) — режем по самому
         # «тонкому» месту около ожидаемой границы сетки, ±12% ширины
+        FORCED.append(True)
         span, gaps = hi - lo, []
         for k in range(1, parts):
             c = lo + span * k // parts
@@ -142,8 +157,11 @@ def drop_edge_scraps(mask, share=0.08, k=4):
     return mask & ~gone
 
 
-def trim(img, mask, pad=0.03):
-    kept = drop_edge_scraps(mask)
+def trim(img, mask, pad=0.03, scraps=False):
+    # Край ячейки по построению проходит вплотную к содержимому, поэтому мелкое
+    # пятно у края — обычно своя деталь (нотка у микрофона). Обрывки соседа
+    # ищем только там, где ячейку пришлось резать без белого просвета.
+    kept = drop_edge_scraps(mask) if scraps else mask
     if (kept != mask).any():
         # обрывок мог остаться внутри рамки (трава тянется до края) — белим его
         a = np.asarray(img).copy()
@@ -177,17 +195,21 @@ def cut(name, src):
     out = []
     cells = []
     per_row = cols if isinstance(cols, tuple) else (cols,) * rows
-    for (y0, y1), n in zip(split(m.sum(axis=1), rows), per_row):
+    FORCED.clear()
+    bands = split(m.sum(axis=1), rows)
+    rows_forced = bool(FORCED)
+    for (y0, y1), n in zip(bands, per_row):
         band = m[y0:y1]
+        FORCED.clear()
         for (x0, x1) in split(band.sum(axis=0), n):
-            cells.append((x0, y0, x1, y1))
+            cells.append((x0, y0, x1, y1, rows_forced or bool(FORCED)))
     if len(cells) != len(names):
         raise SystemExit(f"{name}: ячеек {len(cells)}, а имён {len(names)}")
-    for (x0, y0, x1, y1), rel in zip(cells, names):
+    for (x0, y0, x1, y1, forced), rel in zip(cells, names):
         if rel is None:
             continue
         piece = img.crop((x0, y0, x1, y1))
-        piece = trim(piece, m[y0:y1, x0:x1])
+        piece = trim(piece, m[y0:y1, x0:x1], scraps=forced)
         for r in (rel if isinstance(rel, tuple) else (rel,)):
             path, wh = save(piece, r, size, q)
             out.append((r, wh, os.path.getsize(path)))
