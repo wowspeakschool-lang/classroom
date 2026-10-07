@@ -13,7 +13,7 @@ quiz_ru_to_en) — здесь, юнит берёт их через `from sm1_bui
   python3 tools/sm1_build.py --lesson u6_hw1 --chunks <lesson_id> --per-chunk 7
   python3 tools/sm1_build.py --check-all                проверить всё
 """
-import argparse, glob, importlib.util, json, os, re, sys
+import argparse, glob, hashlib, importlib.util, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA = "@@MEDIA@@"
@@ -168,6 +168,57 @@ def sql_for(key, lesson):
     return "\n".join(out)
 
 
+# ---------- заливка ----------
+
+def jsonb_text(v):
+    """Текст jsonb так, как его отдаёт Postgres (payload::text): ключи по длине,
+    потом по байтам, разделители ', ' и ': '. Нужен, чтобы сверить залитый блок
+    с исходником одной md5, не перечитывая payload глазами."""
+    if isinstance(v, dict):
+        keys = sorted(v, key=lambda k: (len(k.encode()), k.encode()))
+        return "{" + ", ".join(json.dumps(k, ensure_ascii=False) + ": " + jsonb_text(v[k]) for k in keys) + "}"
+    if isinstance(v, list):
+        return "[" + ", ".join(jsonb_text(x) for x in v) + "]"
+    return json.dumps(v, ensure_ascii=False)
+
+
+def final_payload(payload):
+    clean = {k: v for k, v in payload.items() if k != "gaps_expected"}
+    return json.loads(json.dumps(clean, ensure_ascii=False).replace(MEDIA, MEDIA_URL))
+
+
+def lesson_sql(lesson):
+    """Юнит (если нет) и урок (если нет) одним запросом; возвращает id урока."""
+    ut, lt = lesson["unit_title"].replace("'", "''"), lesson["lesson_title"].replace("'", "''")
+    thr = 90 if lesson["kind"] == "test" else 60
+    return f"""with c as (select id from classroom_courses where slug = 'sm1'),
+nu as (insert into classroom_units (course_id, title, sort_order)
+       select c.id, '{ut}', {lesson['unit_sort']} from c
+       where not exists (select 1 from classroom_units u, c where u.course_id = c.id and u.title = '{ut}')
+       returning id),
+u as (select id from nu union all select u.id from classroom_units u, c where u.course_id = c.id and u.title = '{ut}'),
+nl as (insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)
+       select u.id, '{lt}', '{lesson['kind']}', {thr}, false, {lesson['lesson_sort']} from u
+       where not exists (select 1 from classroom_lessons l, u where l.unit_id = u.id and l.title = '{lt}')
+       returning id)
+select id from nl union all select l.id from classroom_lessons l, u where l.unit_id = u.id and l.title = '{lt}';"""
+
+
+def verify_sql(lesson, lesson_id):
+    """Пустой ответ — всё совпало; иначе номера блоков (как в редакторе), которые расходятся."""
+    rows = ", ".join(f"({n}, '{hashlib.md5(jsonb_text(final_payload(p)).encode()).hexdigest()}', '{t}')"
+                     for n, (t, p) in enumerate(lesson["blocks"]))
+    n = len(lesson["blocks"])
+    return f"""select coalesce(v.s, b.sort_order) + 1 as block_no, v.t as want_type, b.type as got_type
+from (values {rows}) v(s, h, t)
+full join (select * from classroom_blocks where lesson_id = '{lesson_id}') b on b.sort_order = v.s
+where b.id is null or v.s is null or md5(b.payload::text) <> v.h or b.type <> v.t
+union all
+select null, 'лишний @@MEDIA@@', null where exists (select 1 from classroom_blocks
+  where lesson_id = '{lesson_id}' and payload::text like '%@@MEDIA@@%')
+order by 1;"""
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--lesson")
@@ -178,6 +229,10 @@ def main():
                     help="печатать вставки блоков кусками, готовыми для "
                          "execute_sql (длинный do-блок отваливается по таймауту)")
     ap.add_argument("--per-chunk", type=int, default=3)
+    ap.add_argument("--lesson-sql", action="store_true",
+                    help="SQL: завести юнит и урок (скрытый), вернуть id урока")
+    ap.add_argument("--verify", metavar="LESSON_ID",
+                    help="SQL сверки залитых блоков с исходником по md5")
     args = ap.parse_args()
 
     LESSONS = load_lessons()
@@ -202,6 +257,12 @@ def main():
 
     print(f"Проверка пройдена: {len(lesson['blocks'])} блоков, "
           f"типы: {', '.join(t for t, _ in lesson['blocks'])}", file=sys.stderr)
+    if args.lesson_sql:
+        print(lesson_sql(lesson))
+        return
+    if args.verify:
+        print(verify_sql(lesson, args.verify))
+        return
     if args.chunks:
         rows = []
         for n, (btype, payload) in enumerate(lesson["blocks"]):
