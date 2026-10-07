@@ -17,16 +17,20 @@ FILL_OLD = None  # заливка дыр больше не нужна: её за
 FILL = set()
 # вырезать зажатый белый фон (не везде: белое внутри пузырей пропадало)
 # белое, которое чистка кусков фона не трогает: облачка, снег, разметка, облака у края сцены
-KEEP_WHITE = set()
+KEEP_WHITE = {'lemon meringue', 'ingredients', 'injection', 'tin', 'dairy', 'beanstalk', 'national park'}
+# ровно-белое внутри рисунка своё (облака в окне, мяч): снимаем только куски, выходящие наружу
+PURE_EDGE = {'curtain', 'play sports', 'wake up'}
 # сцены, где фон застрял между фигурами и под ногами: чистим жёстче
 EXTRA = {'ski', 'zoo keeper', 'clean', 'wake up', 'postman', 'plump', 'carry', 'oats'}
 HOLES = {'key', 'cherry', 'basket', 'oats', 'carry', 'plump', 'postman'}
 # белая одежда без контура у края (халат): закрываем маску на N пикселей
 CLOSE = {}
+PURE_MN, PURE_MIN = 251, 120
 
 # Листы, где генератор разложил картинки иначе, чем в промпте
 # Границы клеток вручную: {лист: {номер ряда: [границы]}}; граница-ступенька (y, x_выше, x_ниже)
-CUTS = {}
+CUTS = {6: {0: [283, 526, (215, 910, 896), 1238], 1: [391, (660, 756, 738), 1116]},
+        7: {1: [400, (800, 757, 765), 1112]}}
 
 IMAGES = '/tmp/claude-0/-home-user-classroom/d4a2a0a4-519c-5b81-af84-18451bfcf9dd/images'
 
@@ -196,6 +200,17 @@ def clean_png(p, peel=4, pale=212, grey=32, speck=0.004, pure=250):
     im = np.array(Image.open(p).convert('RGBA')).astype(np.int32)
     rgb, a = im[..., :3], im[..., 3]
     mn, mx = rgb.min(-1), rgb.max(-1)
+    # фон листа — ровный 252-255 без оттенка; нарисованное белое (паруса, снег, скафандр)
+    # с фактурой и тоном. Любой такой ровный кусок крупнее PURE_MIN — фон, где бы ни лежал:
+    # между ногами, в кольце ключа, между стеблями
+    if not p.endswith(tuple(f'/{fname(w)}' for w in KEEP_WHITE)):
+        lab, n = label((a > 40) & (mn >= PURE_MN) & (mx - mn <= 4))
+        if n:
+            sz = np.bincount(lab.ravel()); sz[0] = 0
+            big = np.where(sz >= PURE_MIN)[0]
+            if p.endswith(tuple(f'/{fname(w)}' for w in PURE_EDGE)):
+                big = np.intersect1d(big, np.unique(lab[binary_dilation(a <= 40, iterations=2)]))
+            a[np.isin(lab, big)] = 0
     whitish = (mn >= pale) & (mx - mn <= grey)
     for _ in range(peel):
         solid = a > 128
