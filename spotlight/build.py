@@ -14,6 +14,44 @@ CATS = ["Глаголы: времена", "Глаголы: to be / have got / м
         "Зависимые предлоги и устойчивые сочетания"]
 LEX = {"Словообразование", "Фразовые глаголы", "Зависимые предлоги и устойчивые сочетания"}
 
+ALIAS = {
+    'Modal verbs (criticism)': 'Modal verbs (functions)', 'Modal verbs (criticism, offers, probability)': 'Modal verbs (functions)',
+    'Modal verbs (general)': 'Modal verbs (functions)', 'Modal verbs (offers/suggestions)': 'Modal verbs (functions)',
+    'Modal verbs (revision)': 'Modal verbs (functions)', 'Modal verbs (overview)': 'Modal verbs (functions)',
+    'Modal verbs (probability)': 'Modal verbs (deduction)',
+    'Past Perfect / Past Perfect Continuous': 'Past Perfect',
+    'Present Perfect (have gone to / have been to / have been in)': 'have gone to / have been to / have been in',
+    'Irregular verbs': 'Irregular verbs (list)',
+    'Expressing preference': 'Expressing preference (prefer / would rather)',
+    'Infinitive (to / bare)': 'Infinitive / -ing form',
+    'Infinitive vs -ing (difference in meaning)': 'Infinitive / -ing form (difference in meaning)',
+    'Reported Speech (introductory verbs)': 'Reporting verbs', 'Reporting verbs (special introductory verbs)': 'Reporting verbs',
+    'Reported Speech (orders, requests, suggestions)': 'Reported commands/requests',
+    'Modal verbs in Reported Speech': 'Reported Speech: modal verbs',
+    'Reported questions / Indirect questions': 'Reported questions',
+    'used to / be used to / get used to': 'be/get used to',
+    'Determiners (every / each)': 'Determiners (every/each)',
+    'Conditional linkers': 'Conditional linkers (unless, provided…)',
+    'Conditionals: linking words & inversion': 'Conditional linkers (unless, provided…)',
+    'It-sentences (impersonal it)': 'Impersonal it',
+    'Adjectives & adverbs in descriptions': 'Adjectives & adverbs in writing', 'Adjectives (descriptive)': 'Adjectives & adverbs in writing',
+    'Adjectives and adverbs (narrative)': 'Adjectives & adverbs in writing',
+    'Types of comparison': 'Comparative structures',
+    'Reported Speech (commands, requests, suggestions)': 'Reported commands/requests',
+    'Reported Speech (modals)': 'Reported Speech: modal verbs',
+    'Reported Speech (questions)': 'Reported questions',
+    'Like (verb vs preposition)': 'Like / As',
+    'Partitives (a bottle of, a packet of)': 'Partitives (a bottle of…)',
+}
+CATFIX = {
+    'Stative verbs': 'Глаголы: времена', 'Irregular verbs (list)': 'Глаголы: другое',
+    'have gone to / have been to / have been in': 'Глаголы: времена',
+    'Demonstratives (this/that/these/those)': 'Местоимения',
+    'Determiners (both/either/neither/all/none)': 'Местоимения', 'Determiners (every/each)': 'Местоимения',
+    'Months': 'Числительные', 'Telling the time': 'Числительные',
+}
+
+
 def load_rows():
     rows = []
     for f in sorted(glob.glob(os.path.join(D, 'data', 'g*.json'))):
@@ -26,42 +64,6 @@ def load_rows():
             r['category'] = 'Глаголы: другое' if 'Глагол' in r['category'] else r['category']
 
 
-    ALIAS = {
-        'Modal verbs (criticism)': 'Modal verbs (functions)', 'Modal verbs (criticism, offers, probability)': 'Modal verbs (functions)',
-        'Modal verbs (general)': 'Modal verbs (functions)', 'Modal verbs (offers/suggestions)': 'Modal verbs (functions)',
-        'Modal verbs (revision)': 'Modal verbs (functions)', 'Modal verbs (overview)': 'Modal verbs (functions)',
-        'Modal verbs (probability)': 'Modal verbs (deduction)',
-        'Past Perfect / Past Perfect Continuous': 'Past Perfect',
-        'Present Perfect (have gone to / have been to / have been in)': 'have gone to / have been to / have been in',
-        'Irregular verbs': 'Irregular verbs (list)',
-        'Expressing preference': 'Expressing preference (prefer / would rather)',
-        'Infinitive (to / bare)': 'Infinitive / -ing form',
-        'Infinitive vs -ing (difference in meaning)': 'Infinitive / -ing form (difference in meaning)',
-        'Reported Speech (introductory verbs)': 'Reporting verbs', 'Reporting verbs (special introductory verbs)': 'Reporting verbs',
-        'Reported Speech (orders, requests, suggestions)': 'Reported commands/requests',
-        'Modal verbs in Reported Speech': 'Reported Speech: modal verbs',
-        'Reported questions / Indirect questions': 'Reported questions',
-        'used to / be used to / get used to': 'be/get used to',
-        'Determiners (every / each)': 'Determiners (every/each)',
-        'Conditional linkers': 'Conditional linkers (unless, provided…)',
-        'Conditionals: linking words & inversion': 'Conditional linkers (unless, provided…)',
-        'It-sentences (impersonal it)': 'Impersonal it',
-        'Adjectives & adverbs in descriptions': 'Adjectives & adverbs in writing', 'Adjectives (descriptive)': 'Adjectives & adverbs in writing',
-        'Adjectives and adverbs (narrative)': 'Adjectives & adverbs in writing',
-        'Types of comparison': 'Comparative structures',
-        'Reported Speech (commands, requests, suggestions)': 'Reported commands/requests',
-        'Reported Speech (modals)': 'Reported Speech: modal verbs',
-        'Reported Speech (questions)': 'Reported questions',
-        'Like (verb vs preposition)': 'Like / As',
-        'Partitives (a bottle of, a packet of)': 'Partitives (a bottle of…)',
-    }
-    CATFIX = {
-        'Stative verbs': 'Глаголы: времена', 'Irregular verbs (list)': 'Глаголы: другое',
-        'have gone to / have been to / have been in': 'Глаголы: времена',
-        'Demonstratives (this/that/these/those)': 'Местоимения',
-        'Determiners (both/either/neither/all/none)': 'Местоимения', 'Determiners (every/each)': 'Местоимения',
-        'Months': 'Числительные', 'Telling the time': 'Числительные',
-    }
     for r in rows:
         r['topic'] = ALIAS.get(r['topic'], r['topic'])
         r['category'] = CATFIX.get(r['topic'], r['category'])
