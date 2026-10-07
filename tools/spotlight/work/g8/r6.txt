@@ -1,0 +1,44 @@
+Module 7|7d|coax|v|уговаривать|
+Module 7|7d|cover|v|давать репортаж|
+Module 7|7d|coverage|n|репортаж|
+Module 7|7d|director|n|режиссёр|в театре, кино
+Module 7|7d|drain|v|осушать, откачивать воду|
+Module 7|7d|editor|n|редактор|
+Module 7|7d|host|v|вести радио- или телепрограмму|
+Module 7|7d|newsreader|n|диктор, телекомментатор, ведущий выпуска новостей|
+Module 7|7d|paper mill|n|целлюлозно-бумажная фабрика|
+Module 7|7d|presentation|n|презентация, показ, представление|
+Module 7|7d|presenter|n|ведущий|
+Module 7|7d|pressure cooker|n|автоклав, скороварка|
+Module 7|7d|producer|n|продюсер|
+Module 7|7d|pulp|n|бесформенная масса|
+Module 7|7d|reporter|n|репортёр|
+Module 7|7d|review|n|обзор|
+Module 7|7d|restless|adj|возбуждённый, беспокойный|
+Module 7|7d|roam|v|бродить|
+Module 7|7d|sitcom|n|комедийное шоу, комедийный сериал|
+Module 7|7d|spray|v|распылять|
+Module 7|7d Phrasals & Phrases|breaking news||горячие новости|
+Module 7|7d Phrasals & Phrases|give an injection||делать укол|
+Module 7|7d Phrasals & Phrases|on air||в прямом эфире|
+Module 7|7d Phrasals & Phrases|on one's own||самостоятельно|
+Module 7|7d Phrasals & Phrases|peak season||сезон максимальной нагрузки (товарооборота)|
+Module 7|7d Phrasals & Phrases|prime time||лучшее эфирное время|
+Module 7|7d Phrasals & Phrases|rush hour||час пик|
+Module 7|7d Phrasals & Phrases|sound engineer||звукорежиссёр|
+Module 7|7e|access|n|доступ, возможность|
+Module 7|7e|commute|v|ежедневно ездить в школу|на работу, на учёбу
+Module 7|7e|contrast|v|сравнивать, противопоставлять|
+Module 7|7e|development|n|развитие, усовершенствование|
+Module 7|7e|drawback|n|недостаток, помеха, препятствие|
+Module 7|7e|high-tech|adj|высокотехнологичный|
+Module 7|7e|inaccurate|adj|неверный, некорректный|
+Module 7|7e|online|adv|интерактивно, в Интернете|
+Module 7|7e|storyline|n|основная сюжетная линия|
+Module 7|7e|tool|n|средство, инструмент|
+Module 7|7e|violent|adj|жестокий|
+Module 7|7e Phrasals & Phrases|advantages and disadvantages||плюсы и минусы, преимущества и недостатки|
+Module 7|7e Phrasals & Phrases|at one's own pace||в своём темпе|
+Module 7|7e Phrasals & Phrases|bear in mind||иметь в виду|
+Module 7|7e Phrasals & Phrases|for instance||например, к примеру|
+Module 7|7e Phrasals & Phrases|get the most from||получить как можно больше от|

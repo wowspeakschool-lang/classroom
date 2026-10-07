@@ -1,0 +1,46 @@
+Module 6|Going Green 6|marble|n|мрамор|
+Module 6|Going Green 6|mixture|n|смесь|
+Module 6|Going Green 6|particle|n|частица|часть речи
+Module 6|Going Green 6|petrol|n|бензин|
+Module 6|Going Green 6|province|n|область|
+Module 6|Going Green 6|release|v|высвобождать, выпускать|
+Module 6|Going Green 6|repair|v|восстанавливать, ремонтировать|
+Module 6|Going Green 6|represent|v|представлять, рекламировать|
+Module 6|Going Green 6|restore|v|реставрировать|
+Module 6|Going Green 6|sculpture|n|скульптура|
+Module 6|Going Green 6|smog|n|смог|загрязнение от выхлопных газов
+Module 6|Going Green 6|solar|adj|солнечный|
+Module 6|Going Green 6|statue|n|статуя|
+Module 6|Going Green 6|sulphur|n|сера|
+Module 6|Going Green 6|vehicle|n|транспортное средство|
+Module 6|Going Green 6 Phrasals & Phrases|be located||быть расположенным|
+Module 6|Going Green 6 Phrasals & Phrases|build up||постепенно создавать|
+Module 6|Going Green 6 Phrasals & Phrases|run on||работать на|о машинах
+Module 6|Going Green 6 Phrasals & Phrases|visual prompt||визуальная опора|
+Module 7|7a|affect|v|влиять|
+Module 7|7a|beyond|prep|помимо, свыше того|
+Module 7|7a|complete|v|заканчивать, завершать|
+Module 7|7a|connect|v|соединять(ся)|
+Module 7|7a|cope (with)|v|справляться|
+Module 7|7a|deal (with)|v|иметь дело с|
+Module 7|7a|deny|v|отрицать, отвергать|
+Module 7|7a|divide|v|делить, разъединять|
+Module 7|7a|download|v|загружать|
+Module 7|7a|edit|v|редактировать|
+Module 7|7a|essential|adj|необходимый, существенный|
+Module 7|7a|extension|n|продолжение|
+Module 7|7a|fast-paced|adj|идущий быстрыми шагами, быстро развивающийся|
+Module 7|7a|file|n|файл, документ|
+Module 7|7a|gadget|n|электронное устройство, прибор|
+Module 7|7a|gain|v|получать, приобретать|
+Module 7|7a|games console|n|игровая приставка|
+Module 7|7a|impact|n|влияние|
+Module 7|7a|install|v|устанавливать|
+Module 7|7a|multi-tasking|n|выполнение нескольких задач одновременно|
+Module 7|7a|occasionally|adv|время от времени|
+Module 7|7a|reflect|v|размышлять, раздумывать|
+Module 7|7a|screen|n|экран|
+Module 7|7a|silence|n|тишина|
+Module 7|7a|simultaneously|adv|одновременно|
+Module 7|7a|stuck|adj|застрявший|
+Module 7|7a|text|v|посылать сообщение|на мобильный телефон

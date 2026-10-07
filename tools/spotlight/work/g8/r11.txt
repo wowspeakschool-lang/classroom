@@ -1,0 +1,44 @@
+Module 8|8d|tournament|n|соревнование, турнир|
+Module 8|8d|win|v|победить, выигрывать|
+Module 8|8d Phrasals & Phrases|be fed up||пресытиться, быть сытым по горло|
+Module 8|8d Phrasals & Phrases|be saved by the bell||быть спасённым в последний момент|
+Module 8|8d Phrasals & Phrases|call a meeting||созывать собрание|
+Module 8|8d Phrasals & Phrases|come up with||предложить|
+Module 8|8d Phrasals & Phrases|get the ball rolling||сдвинуться с мёртвой точки|
+Module 8|8d Phrasals & Phrases|host team||хозяева поля|
+Module 8|8d Phrasals & Phrases|send sb off||удалить с поля, оштрафовать за нарушение|
+Module 8|8d Phrasals & Phrases|the ball is in sb's court||чья-то очередь делать что-то|
+Module 8|8d Phrasals & Phrases|to lose a game||проиграть игру|
+Module 8|8d Phrasals & Phrases|top scorer||лучший бомбардир|
+Module 8|8d Phrasals & Phrases|throw in the towel||признать себя побеждённым, сдаться|
+Module 8|8e|accept|v|принимать|
+Module 8|8e|advanced|adj|продвинутый, усложнённый|
+Module 8|8e|annual|adj|ежегодный|
+Module 8|8e|apology|n|извинение|
+Module 8|8e|application form|n|анкета, регистрационная форма, бланк заявления|
+Module 8|8e|apply (for)|v|подавать заявление (на), просить (о)|
+Module 8|8e|asthma|n|астма|
+Module 8|8e|basic|adj|основной|
+Module 8|8e|beginner|n|новичок, начинающий|
+Module 8|8e|certificate|n|свидетельство, сертификат, удостоверение|
+Module 8|8e|certification|n|выдача свидетельства, удостоверения, сертификация|
+Module 8|8e|depend on|v|зависеть от|
+Module 8|8e|eyesight|n|зрение, кругозор|
+Module 8|8e|fee|n|плата|
+Module 8|8e|guidance|n|руководство|
+Module 8|8e|include|v|включать|
+Module 8|8e|level|n|уровень|
+Module 8|8e|membership|n|членство|в клубе
+Module 8|8e|outing|n|загородная прогулка, экскурсия|
+Module 8|8e|postcode|v|почтовый индекс|
+Module 8|8e|request|v|вежливо просить|
+Module 8|8e|session|n|период, сессия, совещание|
+Module 8|8e|subscription|n|подписка, членский взнос|
+Module 8|8e|superb|adj|превосходный|
+Module 8|8e|surname|n|фамилия|
+Module 8|8e|timetable|n|расписание|
+Module 8|8e|transactional letter|n|ответное письмо|
+Module 8|8e|trainer|n|тренер|
+Module 8|8e Phrasals & Phrases|be crazy about||быть помешанным на чем-либо|
+Module 8|8e Phrasals & Phrases|emergency contact number||телефон для экстренных случаев|
+Module 8|8e Phrasals & Phrases|tick as appropriate||поставить галочку, сделав выбор|

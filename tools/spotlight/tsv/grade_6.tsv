@@ -47,16 +47,16 @@ grade	module	section	term	pos	translation	note
 6	Module 1	1b Who are you?	alarm clock		будильник	
 6	Module 1	1b Who are you?	credit card		кредитная карта	
 6	Module 1	1b Who are you?	date of birth		дата рождения	
-6	Module 1	Culture Corner 1 Phrasals & Phrases	driving licence		водительское удостоверение	
-6	Module 1	Culture Corner 1 Phrasals & Phrases	expiry date		дата истечения срока действия	"* (printed as ""expiry date*"")"
-6	Module 1	Culture Corner 1 Phrasals & Phrases	full name		полное имя	
-6	Module 1	Culture Corner 1 Phrasals & Phrases	home address		домашний адрес	
-6	Module 1	Culture Corner 1 Phrasals & Phrases	identity card		удостоверение личности	
-6	Module 1	Culture Corner 1 Phrasals & Phrases	identification number		идентификационный номер	
-6	Module 1	Culture Corner 1 Phrasals & Phrases	join a club		вступать в клуб	
-6	Module 1	Culture Corner 1 Phrasals & Phrases	membership card		членский билет (карта)	
-6	Module 1	Culture Corner 1 Phrasals & Phrases	telephone number		телефонный номер	
-6	Module 1	Culture Corner 1 Phrasals & Phrases	register a library		записываться в библиотеку	
+6	Module 1	1b Who are you?	driving licence		водительское удостоверение	
+6	Module 1	1b Who are you?	expiry date		дата истечения срока действия	"* (printed as ""expiry date*"")"
+6	Module 1	1b Who are you?	full name		полное имя	
+6	Module 1	1b Who are you?	home address		домашний адрес	
+6	Module 1	1b Who are you?	identity card		удостоверение личности	
+6	Module 1	1b Who are you?	identification number		идентификационный номер	
+6	Module 1	1b Who are you?	join a club		вступать в клуб	
+6	Module 1	1b Who are you?	membership card		членский билет (карта)	
+6	Module 1	1b Who are you?	telephone number		телефонный номер	
+6	Module 1	1b Who are you?	register a library		записываться в библиотеку	
 6	Module 1	1c My Country	Brazil	n	Бразилия	
 6	Module 1	1c My Country	Brazilian	adj/n	бразильский/бразилец	
 6	Module 1	1c My Country	Britain	n	Великобритания	
@@ -135,44 +135,44 @@ grade	module	section	term	pos	translation	note
 6	Module 2	2a Happy Times	graduation	n	окончание учебного заведения	
 6	Module 2	2a Happy Times	invitation	n	приглашение	
 6	Module 2	2a Happy Times	January	n	январь	
-6	Module 2	2b	July	n	июль	
-6	Module 2	2b	June	n	июнь	
-6	Module 2	2b	March	n	март	
-6	Module 2	2b	May	n	май	
-6	Module 2	2b	Monday	n	понедельник	
-6	Module 2	2b	nineteenth	num	девятнадцатый	
-6	Module 2	2b	ninth	num	девятый	
-6	Module 2	2b	noon	n	полдень	
-6	Module 2	2b	November	n	ноябрь	
-6	Module 2	2b	occasion	n	случай	
-6	Module 2	2b	o'clock	adv	на часах, ровно	
-6	Module 2	2b	October	n	октябрь	
-6	Module 2	2b	Saturday	n	суббота	
-6	Module 2	2b	second	num	второй	
-6	Module 2	2b	sixteenth	num	шестнадцатый	
-6	Module 2	2b	sixth	num	шестой	
-6	Module 2	2b	September	n	сентябрь	
-6	Module 2	2b	seventeenth	num	семнадцатый	
-6	Module 2	2b	seventh	num	седьмой	
-6	Module 2	2b	Sunday	n	воскресенье	
-6	Module 2	2b	take place	v	проходить	
-6	Module 2	2b	tenth	num	десятый	
-6	Module 2	2b	third	num	третий	
-6	Module 2	2b	thirteenth	num	тринадцатый	
-6	Module 2	2b	thirtieth	num	тридцатый	
-6	Module 2	2b	thirty-second	num	тридцать второй	
-6	Module 2	2b	Thursday	n	четверг	
-6	Module 2	2b	Tuesday	n	вторник	
-6	Module 2	2b	twelfth	num	двенадцатый	
-6	Module 2	2b	twentieth	num	двадцатый	
-6	Module 2	2b	twenty-first	num	двадцать первый	
-6	Module 2	2b	Wednesday	n	среда	
-6	Module 2	2b	a quarter past		четверть часа	
-6	Module 2	2b	a quarter to		без четверти	
-6	Module 2	2b	half past		половина	
-6	Module 2	2b	Halloween holiday		праздник Хэллоуин	
-6	Module 2	2b	invite smb. to a party		приглашать кого-либо на вечеринку	
-6	Module 2	2b	trick or treat		угости, а не то пожалеешь	
+6	Module 2	2a Happy Times	July	n	июль	
+6	Module 2	2a Happy Times	June	n	июнь	
+6	Module 2	2a Happy Times	March	n	март	
+6	Module 2	2a Happy Times	May	n	май	
+6	Module 2	2a Happy Times	Monday	n	понедельник	
+6	Module 2	2a Happy Times	nineteenth	num	девятнадцатый	
+6	Module 2	2a Happy Times	ninth	num	девятый	
+6	Module 2	2a Happy Times	noon	n	полдень	
+6	Module 2	2a Happy Times	November	n	ноябрь	
+6	Module 2	2a Happy Times	occasion	n	случай	
+6	Module 2	2a Happy Times	o'clock	adv	на часах, ровно	
+6	Module 2	2a Happy Times	October	n	октябрь	
+6	Module 2	2a Happy Times	Saturday	n	суббота	
+6	Module 2	2a Happy Times	second	num	второй	
+6	Module 2	2a Happy Times	sixteenth	num	шестнадцатый	
+6	Module 2	2a Happy Times	sixth	num	шестой	
+6	Module 2	2a Happy Times	September	n	сентябрь	
+6	Module 2	2a Happy Times	seventeenth	num	семнадцатый	
+6	Module 2	2a Happy Times	seventh	num	седьмой	
+6	Module 2	2a Happy Times	Sunday	n	воскресенье	
+6	Module 2	2a Happy Times	take place	v	проходить	
+6	Module 2	2a Happy Times	tenth	num	десятый	
+6	Module 2	2a Happy Times	third	num	третий	
+6	Module 2	2a Happy Times	thirteenth	num	тринадцатый	
+6	Module 2	2a Happy Times	thirtieth	num	тридцатый	
+6	Module 2	2a Happy Times	thirty-second	num	тридцать второй	
+6	Module 2	2a Happy Times	Thursday	n	четверг	
+6	Module 2	2a Happy Times	Tuesday	n	вторник	
+6	Module 2	2a Happy Times	twelfth	num	двенадцатый	
+6	Module 2	2a Happy Times	twentieth	num	двадцатый	
+6	Module 2	2a Happy Times	twenty-first	num	двадцать первый	
+6	Module 2	2a Happy Times	Wednesday	n	среда	
+6	Module 2	2a Happy Times	a quarter past		четверть часа	
+6	Module 2	2a Happy Times	a quarter to		без четверти	
+6	Module 2	2a Happy Times	half past		половина	
+6	Module 2	2a Happy Times	Halloween holiday		праздник Хэллоуин	
+6	Module 2	2a Happy Times	invite smb. to a party		приглашать кого-либо на вечеринку	
+6	Module 2	2a Happy Times	trick or treat		угости, а не то пожалеешь	
 6	Module 2	2b My place	armchair	n	кресло	
 6	Module 2	2b My place	basin	n	таз	
 6	Module 2	2b My place	bathroom	n	ванная комната	
@@ -186,27 +186,27 @@ grade	module	section	term	pos	translation	note
 6	Module 2	2b My place	cushion	n	диванная подушка	
 6	Module 2	2b My place	curtain	n	штора	
 6	Module 2	2b My place	expensive	adj	дорогой	
-6	Module 2	2d	fireplace	n	камин	
-6	Module 2	2d	floor	n	пол	
-6	Module 2	2d	flower	n	цветок	
-6	Module 2	2d	fridge	n	холодильник	
-6	Module 2	2d	kitchen	n	кухня	
-6	Module 2	2d	mirror	n	зеркало	
-6	Module 2	2d	newspaper	n	газета	
-6	Module 2	2d	painting	n	картина	
-6	Module 2	2d	shelf	n	полка	
-6	Module 2	2d	sink	n	раковина	
-6	Module 2	2d	study	n	кабинет	
-6	Module 2	2d	vase	n	ваза	
-6	Module 2	2d	wardrobe	n	гардероб	
-6	Module 2	2d	coffee table		журнальный столик	
-6	Module 2	2d	dining room		столовая	
-6	Module 2	2d	do one's best		делать все от себя зависящее	
-6	Module 2	2d	living room		гостиная	
-6	Module 2	2d	move a house		переезжать	
-6	Module 2	2d	give smb. a hand		помогать кому-либо	
-6	Module 2	2d	Watch out!		Осторожно!	
-6	Module 2	2d	Calm down!		Успокойся!	
+6	Module 2	2b My place	fireplace	n	камин	
+6	Module 2	2b My place	floor	n	пол	
+6	Module 2	2b My place	flower	n	цветок	
+6	Module 2	2b My place	fridge	n	холодильник	
+6	Module 2	2b My place	kitchen	n	кухня	
+6	Module 2	2b My place	mirror	n	зеркало	
+6	Module 2	2b My place	newspaper	n	газета	
+6	Module 2	2b My place	painting	n	картина	
+6	Module 2	2b My place	shelf	n	полка	
+6	Module 2	2b My place	sink	n	раковина	
+6	Module 2	2b My place	study	n	кабинет	
+6	Module 2	2b My place	vase	n	ваза	
+6	Module 2	2b My place	wardrobe	n	гардероб	
+6	Module 2	2b My place	coffee table		журнальный столик	
+6	Module 2	2b My place	dining room		столовая	
+6	Module 2	2b My place	do one's best		делать все от себя зависящее	
+6	Module 2	2b My place	living room		гостиная	
+6	Module 2	2b My place	move a house		переезжать	
+6	Module 2	2b My place	give smb. a hand		помогать кому-либо	
+6	Module 2	2b My place	Watch out!		Осторожно!	
+6	Module 2	2b My place	Calm down!		Успокойся!	
 6	Module 2	2c My neighbourhood	aspirin	n	аспирин	
 6	Module 2	2c My neighbourhood	baker's	n	булочная	
 6	Module 2	2c My neighbourhood	bank	n	банк	
@@ -235,9 +235,9 @@ grade	module	section	term	pos	translation	note
 6	Module 2	2d Culture Corner	pavement	n	тротуар	
 6	Module 2	2d Culture Corner	narrow	adj	узкий	
 6	Module 2	2d Culture Corner	power	n	власть, сила	
-6	Module 2	2d Phrasals & Phrases	store	n	магазин	
-6	Module 2	2d Phrasals & Phrases	fashionable clothes		модная одежда	
-6	Module 2	2d Phrasals & Phrases	outdoor café		уличное кафе	
+6	Module 2	2d Culture Corner	store	n	магазин	
+6	Module 2	2d Culture Corner	fashionable clothes		модная одежда	
+6	Module 2	2d Culture Corner	outdoor café		уличное кафе	
 6	Module 2	English in Use/Extensive Reading 2	come over	phr v	приезжать	
 6	Module 2	English in Use/Extensive Reading 2	choose	v	выбирать	
 6	Module 2	English in Use/Extensive Reading 2	heating	n	отопление	

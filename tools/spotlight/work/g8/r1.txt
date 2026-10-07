@@ -1,0 +1,49 @@
+Module 6|6c|experience|n|опыт|
+Module 6|6c|itinerary|n|маршрут, путеводитель|
+Module 6|6c|message|n|послание|
+Module 6|6c|probably|adv|возможно|
+Module 6|6c|report|v|докладывать|
+Module 6|6c|rewarding|adj|стоящий, вознаграждающий|
+Module 6|6c|thrilling|adj|волнующий, захватывающий|
+Module 6|6c|valid|adj|действующий, имеющий силу|
+Module 6|6c|unattended|adj|несопровождаемый|
+Module 6|6d|board|v|садиться в самолет, на корабль|
+Module 6|6d|boarding school|n|закрытое учебное заведение, школа-интернат|
+Module 6|6d|boarding time|n|время посадки пассажиров|
+Module 6|6d|book|v|бронировать|
+Module 6|6d|buffet car|n|вагон-ресторан|
+Module 6|6d|coach|n|туристический или междугородный автобус|
+Module 6|6d|common|adj|обыкновенный|
+Module 6|6d|cruise|n|круиз|
+Module 6|6d|goods|n|товары, вещи|
+Module 6|6d|harbour|n|гавань, порт|
+Module 6|6d|helicopter|n|вертолёт|
+Module 6|6d|hovercraft|n|судно на воздушной подушке|
+Module 6|6d|indicate|v|показывать, указывать|
+Module 6|6d|invent|v|изобретать|
+Module 6|6d|jet|n|сверхзвуковой самолёт|
+Module 6|6d|lane|n|улочка, переулок|
+Module 6|6d|merchandise|v|торговать|
+Module 6|6d|motorway|n|шоссе|
+Module 6|6d|paddlewheel|n|колесо с лопастями|
+Module 6|6d|platform|n|платформа|
+Module 6|6d|return (ticket)|adj|билет туда и обратно|
+Module 6|6d|rotate|v|вращать(ся)|
+Module 6|6d|sign|n|знак|
+Module 6|6d|single (ticket)|adj|билет в одну сторону|
+Module 6|6d|steam train|n|паровоз|
+Module 6|6d|terminal|n|терминал|
+Module 6|6d|toll bridge|n|мост с платным проездом|
+Module 6|6d|touristy|n|переполненный туристами|о месте
+Module 6|6d|track|n|тропа|
+Module 6|6d|traffic lights|n|светофор|
+Module 6|6d|transport|v|перевозить, транспортировать|
+Module 6|6d|vessel|n|судно, корабль|
+Module 6|6d|voyage|n|путешествие|
+Module 6|6d Phrasals & Phrases|be on strike||бастовать|
+Module 6|6d Phrasals & Phrases|come into use||начать использоваться|
+Module 6|6d Phrasals & Phrases|domestic flight|n|внутренний рейс|
+Module 6|6d Phrasals & Phrases|get off||сходить|с самолёта, с корабля, с поезда
+Module 6|6d Phrasals & Phrases|means of transport|n|транспортные средства, виды транспорта|
+Module 6|6d Phrasals & Phrases|peak-time||часы пик, время большой нагрузки|
+Module 6|6d Phrasals & Phrases|off-peak||не час пик|

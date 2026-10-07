@@ -1,0 +1,48 @@
+Module 4|4e|rescue unit|n|спасательная группа, спасательный отряд|
+Module 4|4e|roar|v|орать, реветь|
+Module 4|4e|rock|v|качаться|
+Module 4|4e|screech|v|издавать визжащий звук|
+Module 4|4e|sequence|n|последовательность|
+Module 4|4e|shift|n|рабочая смена|
+Module 4|4e|sigh|v|вздыхать|
+Module 4|4e|sinking|adj|тонущий|
+Module 4|4e|skilful|adj|мастерский, опытный|
+Module 4|4e|snap|v|ломаться|
+Module 4|4e|snatch|v|схватить, ухватить|
+Module 4|4e|stare|v|уставиться|
+Module 4|4e|stride|v|идти широким шагом|
+Module 4|4e|stumble|v|спотыкаться|
+Module 4|4e|survivor|n|выживший, оставшийся в живых|
+Module 4|4e|throb|v|стучать, пульсировать|
+Module 4|4e|thump|v|глухо стучать|
+Module 4|4e|thunder|v|ворваться с грохотом|
+Module 4|4e|ton|n|тонна|
+Module 4|4e|trapped|adj|захваченный, в ловушке|
+Module 4|4e|vivid|adj|живой, яркий|
+Module 4|4e|wail|v|стонать, причитать|
+Module 4|4e|yell|v|вопить, визжать|
+Module 4|4e Phrases|as happy as a lark|phr|веселый, жизнерадостный|
+Module 4|4e Phrases|as plain as a day|phr|простой, очевидный|
+Module 4|4e Phrases|as quick as a flash|phr|очень быстрый, как молния|
+Module 4|4e Phrases|as sick as a dog|phr|плохо себя чувствовать|
+Module 4|4e Phrases|as white as a sheet|phr|белый как лист; бледный|
+Module 4|4e Phrases|catch sb's eye|phr|привлекать чье-либо внимание|
+Module 4|4e Phrases|die to meet sb|phr|очень хотеть с кем-то увидиться|
+Module 4|4e Phrases|frozen with fear|phr|замереть от страха|
+Module 4|4e Phrases|gasp for breath|phr|хватать ртом воздух|
+Module 4|4e Phrases|go like clockwork|phr|работать, как часы|
+Module 4|4e Phrases|have a memory like a sieve|phr|иметь девичью память|
+Module 4|4e Phrases|in recognition of|phr|в знак признания, признательности|
+Module 4|4e Phrases|leap into action|phr|быстро начать делать что-либо|
+Module 4|4e Phrases|long face|phr|унылое, мрачное лицо|
+Module 4|4e Phrases|lose consciousness|phr|потерять сознание|
+Module 4|4e Phrases|on board|phr|находиться на борту|(корабля, самолета)
+Module 4|4e Phrases|run aground|phr|сесть на мель|
+Module 4|4e Phrases|safe and sound|phr|в целости и сохранности|
+Module 4|Culture Corner 4|barrack|n|казарма|
+Module 4|Culture Corner 4|basin|n|водоем|
+Module 4|Culture Corner 4|broom|n|метла|
+Module 4|Culture Corner 4|celebrity|n|знаменитость|
+Module 4|Culture Corner 4|consult|v|консультироваться|
+Module 4|Culture Corner 4|crawl|v|ползти|
+Module 4|Culture Corner 4|dedicate|v|посвящать, отдавать много времени на что-то|

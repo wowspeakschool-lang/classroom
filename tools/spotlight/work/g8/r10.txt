@@ -1,0 +1,45 @@
+Module 8|8b|spare|adj|запасной|
+Module 8|8b|squash|n|сквош|
+Module 8|8b|trainers|n|кроссовки|
+Module 8|8b|water polo|n|водное поло|
+Module 8|8b|wonder|v|интересоваться, желать узнать|
+Module 8|8b Phrasals & Phrases|free refreshments||бесплатные закуски|
+Module 8|8c|boil|v|кипеть|о жидкостях
+Module 8|8c|cup|n|кубок|
+Module 8|8c|drop|v|ронять|
+Module 8|8c|exhibition|n|выставка|
+Module 8|8c|expand|v|расширять, увеличивать|
+Module 8|8c|fix|v|чинить|
+Module 8|8c|general truth|n|общеизвестная истина|
+Module 8|8c|imaginary|adj|воображаемый|
+Module 8|8c|iron|n|железо|
+Module 8|8c|reservation|n|предварительный заказ|
+Module 8|8c|rust|v|ржаветь (о металлах)|
+Module 8|8c|splash|n|всплеск|
+Module 8|8c|steam|n|пар|
+Module 8|8c|tidy|v|убираться, наводить чистоту, порядок|
+Module 8|8c|wire|n|провод, проволока|
+Module 8|8c Phrasals & Phrases|at least||во всяком случае, по крайней мере|
+Module 8|8c Phrasals & Phrases|be in the mood||быть в настроении|
+Module 8|8c Phrasals & Phrases|chain story||история, начатая одним человеком, продолженная следующим и т. д.|
+Module 8|8c Phrasals & Phrases|cut off||выключать, отрезать|
+Module 8|8c Phrasals & Phrases|It depends||Всё зависит от обстоятельств|
+Module 8|8d|amazed|adj|изумлённый|
+Module 8|8d|bat|n|бита|в спортивных играх
+Module 8|8d|beat|v|побить (в соревнованиях), победить|
+Module 8|8d|billion|n|миллиард|
+Module 8|8d|club|n|клюшка|для гольфа
+Module 8|8d|competitor|n|соперник, конкурент, участник состязания|
+Module 8|8d|course|n|скаковой круг, поле|для игры в гольф
+Module 8|8d|create|v|создавать|
+Module 8|8d|defeat|v|нанести поражение|
+Module 8|8d|fan|n|болельщик, фанат|
+Module 8|8d|gain|v|получать, приобретать, наращивать|
+Module 8|8d|helmet|n|шлем|
+Module 8|8d|nil|n|ноль|
+Module 8|8d|official|n|должностное лицо|
+Module 8|8d|pitch|n|игровая (спортивная) площадка|
+Module 8|8d|record|n|рекорд|
+Module 8|8d|result|n|результат|
+Module 8|8d|score|v|забивать|
+Module 8|8d|spectator|n|зритель, посетитель|стадиона

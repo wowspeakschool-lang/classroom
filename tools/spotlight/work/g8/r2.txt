@@ -1,0 +1,47 @@
+Module 6|6e|accommodation|n|жильё|
+Module 6|6e|aloud|adv|громко, вслух|
+Module 6|6e|appreciate|v|ценить|
+Module 6|6e|benefit|v|извлекать пользу|
+Module 6|6e|complaint|n|недовольство, жалоба|
+Module 6|6e|contribute|v|вносить вклад|
+Module 6|6e|culture|n|культура|
+Module 6|6e|exchange student|n|студент по обмену|
+Module 6|6e|furthermore|adv|кроме того, к тому же|
+Module 6|6e|generosity|n|щедрость, великодушие|
+Module 6|6e|global|adj|глобальный|
+Module 6|6e|gratitude|n|благодарность, признательность|
+Module 6|6e|hospitality|n|гостеприимство|
+Module 6|6e|host family|n|семья, принимающая студента по обмену|
+Module 6|6e|interchange|v|обмениваться|
+Module 6|6e|kindness|n|доброта|
+Module 6|6e|lifelong|adj|на всю жизнь|
+Module 6|6e|manners|n|манеры|
+Module 6|6e|model|n|модель, образец|
+Module 6|6e|moreover|adv|кроме того, более того, сверх того|
+Module 6|6e|open-minded|adj|(человек) широких взглядов|
+Module 6|6e|penfriend|n|друг по переписке|
+Module 6|6e|proofread|v|корректировать текст|
+Module 6|6e|quality|n|качество|
+Module 6|6e|recipe|n|рецепт, инструкция|
+Module 6|6e|request|n|просьба|
+Module 6|6e|respectful|adj|уважительный, уважающий|
+Module 6|6e|similarity|n|сходство, подобие|
+Module 6|6e|swap|v|обмениваться|
+Module 6|6e|welcoming|adj|гостеприимный|
+Module 6|6e Phrases|drop a line||черкнуть строчку|
+Module 6|6e Phrases|keep in touch||поддерживать отношения|
+Module 6|6e Phrases|once again||снова, ещё раз|
+Module 6|6e Phrases|a sense of humour||чувство юмора|
+Module 6|6e Phrases|word for word||дословно|
+Module 6|6f|achieve|v|достигать|
+Module 6|6f|amuse|v|развлекать, рассмешить|
+Module 6|6f|curious|adj|любопытный|
+Module 6|6f|deliver|v|доставлять|
+Module 6|6f|enthusiasm|n|энтузиазм, энергия|
+Module 6|6f|excited|adj|взволнованный|
+Module 6|6f|excursion|n|экскурсия|
+Module 6|6f|expedition|n|экспедиция|
+Module 6|6f|fetch|v|сходить и принести|
+Module 6|6f|gap|n|пропуск, пробел|
+Module 6|6f|hire|v|брать напрокат, нанимать|
+Module 6|6f|journey|n|поездка, путешествие|

@@ -1,0 +1,45 @@
+Module 7|Across the Curriculum: ICT|resource|n|источник питания|для компьютера
+Module 7|Across the Curriculum: ICT|share|v|использовать совместно, делиться|
+Module 7|Across the Curriculum: ICT|software|n|компьютерная программа, программное обеспечение|
+Module 7|Across the Curriculum: ICT|unethical|adj|неэтичный|
+Module 7|Across the Curriculum: ICT|virus|n|компьютерный вирус|
+Module 7|Across the Curriculum: ICT|wire|n|провод|
+Module 7|Across the Curriculum: ICT Phrasals & Phrases|cabling system||сеть|кабелей, проводов
+Module 7|Across the Curriculum: ICT Phrasals & Phrases|flow of data||поток информации|
+Module 8|8a|addicted|adj|увлечённый, пристрастившийся|
+Module 8|8a|axe|n|ледоруб|
+Module 8|8a|bizarre|adj|причудливый, чудной, необычный|
+Module 8|8a|board|n|доска|
+Module 8|8a|bounce|v|отскакивать, отпрыгивать|
+Module 8|8a|bump|n|ударяться, налетать|
+Module 8|8a|circle|n|кружок, группа (людей)|
+Module 8|8a|competitor|n|участник состязания, соперник|
+Module 8|8a|discover|v|обнаруживать, открывать|
+Module 8|8a|dive|v|погружаться с аквалангом, нырять|
+Module 8|8a|entrant|n|участник соревнований|
+Module 8|8a|equipment|n|оборудование, снаряжение|
+Module 8|8a|fasten|v|пристегиваться|
+Module 8|8a|flippers|n|ласты|
+Module 8|8a|goal|n|ворота, гол|
+Module 8|8a|hill|n|холм, возвышенность|
+Module 8|8a|inflatable|adj|надувной|
+Module 8|8a|invent|v|изобретать|
+Module 8|8a|involve|v|повлечь за собой|
+Module 8|8a|knock|n|удар, столкновение, толчок|
+Module 8|8a|mountaineering|n|альпинизм|
+Module 8|8a|opposing|adj|противостоящий|
+Module 8|8a|originate|v|брать начало, происходить|
+Module 8|8a|paragliding|n|парапланеризм, полеты на параплане|
+Module 8|8a|pastime|n|приятное времяпрепровождение, занятие, хобби|
+Module 8|8a|puck|n|шайба|
+Module 8|8a|roll|v|катиться|
+Module 8|8a|rope|n|канат, веревка|
+Module 8|8a|sandboarding|n|катание на доске по песку|
+Module 8|8a|skilled|adj|опытный, умелый, квалифицированный|
+Module 8|8a|skydiving|n|затяжные прыжки с парашютом|
+Module 8|8a|slide|v|скользить|
+Module 8|8a|slip|v|поскользнуться, скользить|
+Module 8|8a|snorkel|n|дыхательная трубка для подводного плавания|
+Module 8|8a|snowboarding|n|сноубординг|
+Module 8|8a|splash|v|брызгаться, плескаться|
+Module 8|8a|steep|adj|крутой|о дорогах, холмах, горных местностях

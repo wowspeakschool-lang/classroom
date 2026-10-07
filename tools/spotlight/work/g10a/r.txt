@@ -1,0 +1,47 @@
+Module 4|Spotlight on Exams|birth|n|рождение|
+Module 4|Spotlight on Exams|boar|n|кабан|
+Module 4|Spotlight on Exams|breed|v|разводить, выводить|
+Module 4|Spotlight on Exams|bright|adj|яркий|
+Module 4|Spotlight on Exams|camouflage|v|маскировать|
+Module 4|Spotlight on Exams|collar|n|воротник|
+Module 4|Spotlight on Exams|conservationist|n|борец за охрану природы|
+Module 4|Spotlight on Exams|cub|n|детеныш|
+Module 4|Spotlight on Exams|deforestation|n|вырубка леса, обезлесение|
+Module 4|Spotlight on Exams|double|v|удваивать|
+Module 4|Spotlight on Exams|elk|n|лось|
+Module 4|Spotlight on Exams|female|adj|женский|
+Module 4|Spotlight on Exams|follow|v|отслеживать, следить|
+Module 4|Spotlight on Exams|giant|adj|гигантский|
+Module 4|Spotlight on Exams|hunt|v|охотиться|
+Module 4|Spotlight on Exams|impressive|adj|впечатляющий, выразительный|
+Module 4|Spotlight on Exams|indigenous|adj|местный, локальный|
+Module 4|Spotlight on Exams|length|n|длина|
+Module 4|Spotlight on Exams|lifetime|n|жизнь, продолжительность жизни|
+Module 4|Spotlight on Exams|location|n|место|
+Module 4|Spotlight on Exams|loud|adj|громкий|
+Module 4|Spotlight on Exams|lucky|adj|удачливый|
+Module 4|Spotlight on Exams|male|adj|мужской|
+Module 4|Spotlight on Exams|movement|n|перемещение, передвижение|
+Module 4|Spotlight on Exams|panda|n|панда|
+Module 4|Spotlight on Exams|photographer|n|фотограф|
+Module 4|Spotlight on Exams|predator|n|хищник|
+Module 4|Spotlight on Exams|prey|n|добыча, жертва|
+Module 4|Spotlight on Exams|primarily|adv|главным образом|
+Module 4|Spotlight on Exams|roar|n|рев|
+Module 4|Spotlight on Exams|scientist|n|ученый|
+Module 4|Spotlight on Exams|shrink|v|сокращать|
+Module 4|Spotlight on Exams|Siberian tiger|n|амурский тигр|
+Module 4|Spotlight on Exams|stealthily|adv|украдкой, крадучись|
+Module 4|Spotlight on Exams|step|n|шаг|
+Module 4|Spotlight on Exams|stripe|n|полоса|
+Module 4|Spotlight on Exams|threat|n|угроза|
+Module 4|Spotlight on Exams|vision|n|зрение|
+Module 4|Spotlight on Exams|wild|adj|дикий|
+Module 4|Spotlight on Exams|truly|adv|действительно|
+Module 4|Spotlight on Exams|unfortunately|adv|к сожалению|
+Module 4|Spotlight on Exams Phrasal verbs|come together|phr v|объединиться|
+Module 4|Spotlight on Exams Phrasal verbs|set up|phr v|создавать|
+Module 4|Spotlight on Exams Phrasal verbs|sneak up|phr v|подкрасться незаметно|
+Module 4|Spotlight on Exams Phrases|set free|phr|отпускать на волю|
+Module 5|5a|ancient|adj|древний|
+Module 5|5a|annual|adj|ежегодный|

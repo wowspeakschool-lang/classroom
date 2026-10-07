@@ -1,0 +1,41 @@
+Module 8|8f|coach|n|тренер|
+Module 8|8f|insecure|adj|небезопасный, ненадёжный|
+Module 8|8f|instructor|n|инструктор|
+Module 8|8f|junk food|n|еда всухомятку, неполноценная пища|
+Module 8|8f|league|n|лига|
+Module 8|8f|section|n|часть|
+Module 8|8f|tracksuit|n|спортивный тренировочный костюм|
+Module 8|8f|upset|adj|расстроенный|
+Module 8|8f|weekday|n|будний день|
+Module 8|8f Phrasals & Phrases|be in favour of||пользоваться спросом, нравиться|
+Module 8|8f Phrasals & Phrases|fall into place||вставать на место|
+Module 8|8f Phrasals & Phrases|for hire||напрокат|
+Module 8|8f Phrasals & Phrases|in charge of||ответственный за|
+Module 8|8f Phrasals & Phrases|set an alarm clock||завести будильник|
+Module 8|8f Phrasals & Phrases|talk sb into sth||уговорить кого-либо на что-либо|
+Module 8|Culture Corner 8|abseil|v|спускаться на веревке|
+Module 8|Culture Corner 8|attract|v|привлекать|
+Module 8|Culture Corner 8|beak|n|клюв|
+Module 8|Culture Corner 8|charity|n|благотворительность|
+Module 8|Culture Corner 8|cereals|n|злаки, крупы|
+Module 8|Culture Corner 8|cuddly|adj|приятный, привлекательный|
+Module 8|Culture Corner 8|dinosaur|n|динозавр|
+Module 8|Culture Corner 8|goalkeeper|n|вратарь|
+Module 8|Culture Corner 8|half-time|n|перерыв (в игре)|
+Module 8|Culture Corner 8|hen|n|курица|
+Module 8|Culture Corner 8|home game|n|игра на своем поле|
+Module 8|Culture Corner 8|hopefully|adv|в надежде, с надеждой|
+Module 8|Culture Corner 8|kick-off|n|начало матча с центра поля|
+Module 8|Culture Corner 8|kit|n|комплект, наряд|
+Module 8|Culture Corner 8|mascot|n|талисман|
+Module 8|Culture Corner 8|penalty shoot-out|n|послематчевые пенальти|
+Module 8|Culture Corner 8|publicity|n|публичность, известность|
+Module 8|Culture Corner 8|public relations|n|связи с общественностью|
+Module 8|Culture Corner 8|striped|adj|полосатый|
+Module 8|Culture Corner 8|title|n|титул|
+Module 8|Culture Corner 8|wander|v|бродить, слоняться без дела|
+Module 8|Culture Corner 8|wave (to)|v|махать|кому-либо
+Module 8|Culture Corner 8 Phrasals & Phrases|make appearance||появляться|
+Module 8|Going Green 8|aim|n|цель|
+Module 8|Going Green 8|aquatic|adj|водный, приспособленный к жизни в воде|
+Module 8|Going Green 8|awareness|n|осведомлённость, информированность|

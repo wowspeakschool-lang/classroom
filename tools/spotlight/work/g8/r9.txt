@@ -1,0 +1,47 @@
+Module 8|8a|strap|v|скреплять ремнями, привязывать|
+Module 8|8a|swing|v|втыкать с размаху|
+Module 8|8a|technique|n|техника, способ|
+Module 8|8a|unlike|adj/adv|не такой, отличающийся|
+Module 8|8a|waterfall|n|водопад|
+Module 8|8a|weightless|adj|невесомый|
+Module 8|8a|whizz|v|быстро двигаться; кружиться, рассекая воздух|
+Module 8|8a|zorbing|n|зорбинг|спуск со склонов внутри прозрачного двухслойного шара
+Module 8|8a Phrasals & Phrases|base jumping||бейс-джампинг, прыжки с парашютом с высоких объектов со специальным оборудованием|
+Module 8|8a Phrasals & Phrases|ice climbing||ледолазание|
+Module 8|8a Phrasals & Phrases|pull oneself up on smth||подтянуться, опираясь на что-либо|
+Module 8|8a Phrasals & Phrases|rock climbing||скалолазание|
+Module 8|8a Phrasals & Phrases|sand dune||песчаная дюна, бархан|
+Module 8|8a Phrasals & Phrases|spectator sport||зрелищный вид спорта|
+Module 8|8a Phrasals & Phrases|speed freak||любитель быстрой езды|
+Module 8|8a Phrasals & Phrases|sport event||спортивное событие|
+Module 8|8a Phrasals & Phrases|take part in||принимать участие в|
+Module 8|8a Phrasals & Phrases|work out||отрабатывать, улучшать|
+Module 8|8b|aerobics|n|аэробика|
+Module 8|8b|assembly hall|n|актовый зал|
+Module 8|8b|athletics|n|атлетика|
+Module 8|8b|audible|adj|слышный, слышимый|
+Module 8|8b|court|n|корт|
+Module 8|8b|cricket|n|крикет|
+Module 8|8b|experience|n|опыт|
+Module 8|8b|flat|adj|невыразительный, однообразный|
+Module 8|8b|gate|n|ворота|
+Module 8|8b|gymnastics|n|гимнастика|
+Module 8|8b|hesitant|adj|колеблющийся, сомневающийся|
+Module 8|8b|high jump|n|прыжки в высоту|
+Module 8|8b|hurdles|n|бег с препятствиями|
+Module 8|8b|indistinct|adj|невнятный, неотчетливый|
+Module 8|8b|inter-school|adj|межшкольный|
+Module 8|8b|javelin throwing|n|метание копья|
+Module 8|8b|jerky|adj|тряский, двигающийся резкими толчками|
+Module 8|8b|jogging|n|бег трусцой|
+Module 8|8b|karate|n|каратэ|
+Module 8|8b|long jump|n|прыжки в длину|
+Module 8|8b|lovely|adj|красивый, прекрасный, очаровательный|
+Module 8|8b|match|n|матч, встреча|
+Module 8|8b|monotonous|adj|монотонный, унылый|
+Module 8|8b|mumble|v|бормотать|
+Module 8|8b|noticeboard|n|доска объявлений|
+Module 8|8b|racquet|n|ракет;ка (для игры в теннис, бадминтон)|
+Module 8|8b|rhythm|n|ритм|
+Module 8|8b|rugby|n|рэгби|
+Module 8|8b|scuba diving|n|плавание под водой с авкалангом или спецоборудованием|

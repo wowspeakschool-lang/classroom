@@ -1608,3 +1608,560 @@ grade	module	section	term	pos	translation	note
 8	Module 6	6c	bother	v	беспокоиться, волноваться	
 8	Module 6	6c	destination	n	место назначения	
 8	Module 6	6c	exact	adj	точный	
+8	Module 6	6c	experience	n	опыт	
+8	Module 6	6c	itinerary	n	маршрут, путеводитель	
+8	Module 6	6c	message	n	послание	
+8	Module 6	6c	probably	adv	возможно	
+8	Module 6	6c	report	v	докладывать	
+8	Module 6	6c	rewarding	adj	стоящий, вознаграждающий	
+8	Module 6	6c	thrilling	adj	волнующий, захватывающий	
+8	Module 6	6c	valid	adj	действующий, имеющий силу	
+8	Module 6	6c	unattended	adj	несопровождаемый	
+8	Module 6	6d	board	v	садиться в самолет, на корабль	
+8	Module 6	6d	boarding school	n	закрытое учебное заведение, школа-интернат	
+8	Module 6	6d	boarding time	n	время посадки пассажиров	
+8	Module 6	6d	book	v	бронировать	
+8	Module 6	6d	buffet car	n	вагон-ресторан	
+8	Module 6	6d	coach	n	туристический или междугородный автобус	
+8	Module 6	6d	common	adj	обыкновенный	
+8	Module 6	6d	cruise	n	круиз	
+8	Module 6	6d	goods	n	товары, вещи	
+8	Module 6	6d	harbour	n	гавань, порт	
+8	Module 6	6d	helicopter	n	вертолёт	
+8	Module 6	6d	hovercraft	n	судно на воздушной подушке	
+8	Module 6	6d	indicate	v	показывать, указывать	
+8	Module 6	6d	invent	v	изобретать	
+8	Module 6	6d	jet	n	сверхзвуковой самолёт	
+8	Module 6	6d	lane	n	улочка, переулок	
+8	Module 6	6d	merchandise	v	торговать	
+8	Module 6	6d	motorway	n	шоссе	
+8	Module 6	6d	paddlewheel	n	колесо с лопастями	
+8	Module 6	6d	platform	n	платформа	
+8	Module 6	6d	return (ticket)	adj	билет туда и обратно	
+8	Module 6	6d	rotate	v	вращать(ся)	
+8	Module 6	6d	sign	n	знак	
+8	Module 6	6d	single (ticket)	adj	билет в одну сторону	
+8	Module 6	6d	steam train	n	паровоз	
+8	Module 6	6d	terminal	n	терминал	
+8	Module 6	6d	toll bridge	n	мост с платным проездом	
+8	Module 6	6d	touristy	n	переполненный туристами	о месте
+8	Module 6	6d	track	n	тропа	
+8	Module 6	6d	traffic lights	n	светофор	
+8	Module 6	6d	transport	v	перевозить, транспортировать	
+8	Module 6	6d	vessel	n	судно, корабль	
+8	Module 6	6d	voyage	n	путешествие	
+8	Module 6	6d Phrasals & Phrases	be on strike		бастовать	
+8	Module 6	6d Phrasals & Phrases	come into use		начать использоваться	
+8	Module 6	6d Phrasals & Phrases	domestic flight	n	внутренний рейс	
+8	Module 6	6d Phrasals & Phrases	get off		сходить	с самолёта, с корабля, с поезда
+8	Module 6	6d Phrasals & Phrases	means of transport	n	транспортные средства, виды транспорта	
+8	Module 6	6d Phrasals & Phrases	peak-time		часы пик, время большой нагрузки	
+8	Module 6	6d Phrasals & Phrases	off-peak		не час пик	
+8	Module 6	6e	accommodation	n	жильё	
+8	Module 6	6e	aloud	adv	громко, вслух	
+8	Module 6	6e	appreciate	v	ценить	
+8	Module 6	6e	benefit	v	извлекать пользу	
+8	Module 6	6e	complaint	n	недовольство, жалоба	
+8	Module 6	6e	contribute	v	вносить вклад	
+8	Module 6	6e	culture	n	культура	
+8	Module 6	6e	exchange student	n	студент по обмену	
+8	Module 6	6e	furthermore	adv	кроме того, к тому же	
+8	Module 6	6e	generosity	n	щедрость, великодушие	
+8	Module 6	6e	global	adj	глобальный	
+8	Module 6	6e	gratitude	n	благодарность, признательность	
+8	Module 6	6e	hospitality	n	гостеприимство	
+8	Module 6	6e	host family	n	семья, принимающая студента по обмену	
+8	Module 6	6e	interchange	v	обмениваться	
+8	Module 6	6e	kindness	n	доброта	
+8	Module 6	6e	lifelong	adj	на всю жизнь	
+8	Module 6	6e	manners	n	манеры	
+8	Module 6	6e	model	n	модель, образец	
+8	Module 6	6e	moreover	adv	кроме того, более того, сверх того	
+8	Module 6	6e	open-minded	adj	(человек) широких взглядов	
+8	Module 6	6e	penfriend	n	друг по переписке	
+8	Module 6	6e	proofread	v	корректировать текст	
+8	Module 6	6e	quality	n	качество	
+8	Module 6	6e	recipe	n	рецепт, инструкция	
+8	Module 6	6e	request	n	просьба	
+8	Module 6	6e	respectful	adj	уважительный, уважающий	
+8	Module 6	6e	similarity	n	сходство, подобие	
+8	Module 6	6e	swap	v	обмениваться	
+8	Module 6	6e	welcoming	adj	гостеприимный	
+8	Module 6	6e Phrases	drop a line		черкнуть строчку	
+8	Module 6	6e Phrases	keep in touch		поддерживать отношения	
+8	Module 6	6e Phrases	once again		снова, ещё раз	
+8	Module 6	6e Phrases	a sense of humour		чувство юмора	
+8	Module 6	6e Phrases	word for word		дословно	
+8	Module 6	6f	achieve	v	достигать	
+8	Module 6	6f	amuse	v	развлекать, рассмешить	
+8	Module 6	6f	curious	adj	любопытный	
+8	Module 6	6f	deliver	v	доставлять	
+8	Module 6	6f	enthusiasm	n	энтузиазм, энергия	
+8	Module 6	6f	excited	adj	взволнованный	
+8	Module 6	6f	excursion	n	экскурсия	
+8	Module 6	6f	expedition	n	экспедиция	
+8	Module 6	6f	fetch	v	сходить и принести	
+8	Module 6	6f	gap	n	пропуск, пробел	
+8	Module 6	6f	hire	v	брать напрокат, нанимать	
+8	Module 6	6f	journey	n	поездка, путешествие	
+8	Module 6	6f	outback	n	малонаселённые районы Австралийского континента	
+8	Module 6	6f	room	n	пространство	
+8	Module 6	6f	sink	v	затонуть	
+8	Module 6	6f	trip	n	поездка, путешествие	
+8	Module 6	6f	voyage	n	морское путешествие	
+8	Module 6	6f Phrasals & Phrases	in advance		раньше времени, заранее	
+8	Module 6	6f Phrasals & Phrases	on time		вовремя, по расписанию	
+8	Module 6	6f Phrasals & Phrases	without delay		без задержки	
+8	Module 6	Culture Corner 6	architectural	adj	архитектурный	
+8	Module 6	Culture Corner 6	attack	n	атака, нападение	
+8	Module 6	Culture Corner 6	bank	n	берег	реки
+8	Module 6	Culture Corner 6	castle	n	замок	
+8	Module 6	Culture Corner 6	event	n	событие	
+8	Module 6	Culture Corner 6	export	v	экспортировать	
+8	Module 6	Culture Corner 6	extremely	adv	чрезвычайно, весьма	
+8	Module 6	Culture Corner 6	fame	n	слава, известность	
+8	Module 6	Culture Corner 6	flow	v	течь	
+8	Module 6	Culture Corner 6	fort	n	форт	
+8	Module 6	Culture Corner 6	illustrate	v	иллюстрировать	
+8	Module 6	Culture Corner 6	industrial revolution	n	промышленная революция	
+8	Module 6	Culture Corner 6	liquid	adj	жидкий	
+8	Module 6	Culture Corner 6	Londoner	n	лондонец, житель Лондона	
+8	Module 6	Culture Corner 6	major	adj	важный	
+8	Module 6	Culture Corner 6	mouth	n	устье реки	
+8	Module 6	Culture Corner 6	provide	v	обеспечивать, снабжать	
+8	Module 6	Culture Corner 6	protect	v	защищать	
+8	Module 6	Culture Corner 6	rowing	n	гребля	
+8	Module 6	Culture Corner 6	sight	n	вид	
+8	Module 6	Culture Corner 6	stroll	n	легкая прогулка	
+8	Module 6	Culture Corner 6	thirst	n	жажда	
+8	Module 6	Culture Corner 6	waterway	n	судоходный канал	
+8	Module 6	Going Green 6	acid	n	кислота	
+8	Module 6	Going Green 6	AD (Anno Domini)		нашей эры	
+8	Module 6	Going Green 6	alternative	adj	альтернативный	
+8	Module 6	Going Green 6	ancestor	n	предок	
+8	Module 6	Going Green 6	carve	v	вырезать, гравировать	
+8	Module 6	Going Green 6	coal	n	уголь	
+8	Module 6	Going Green 6	damage	v	повреждать, портить	
+8	Module 6	Going Green 6	democracy	n	демократия	
+8	Module 6	Going Green 6	destruction	n	разрушение, разруха	
+8	Module 6	Going Green 6	erosion	n	эрозия, разрушение	
+8	Module 6	Going Green 6	fascinating	adj	восхитительный	
+8	Module 6	Going Green 6	fossil fuel	n	органическое топливо	
+8	Module 6	Going Green 6	freedom	n	свобода	
+8	Module 6	Going Green 6	gradual	adj	постепенный, последовательный	
+8	Module 6	Going Green 6	inherit	v	наследовать	
+8	Module 6	Going Green 6	liberty	n	свобода	
+8	Module 6	Going Green 6	maintenance	n	сохранение, восстановление	
+8	Module 6	Going Green 6	marble	n	мрамор	
+8	Module 6	Going Green 6	mixture	n	смесь	
+8	Module 6	Going Green 6	particle	n	частица	часть речи
+8	Module 6	Going Green 6	petrol	n	бензин	
+8	Module 6	Going Green 6	province	n	область	
+8	Module 6	Going Green 6	release	v	высвобождать, выпускать	
+8	Module 6	Going Green 6	repair	v	восстанавливать, ремонтировать	
+8	Module 6	Going Green 6	represent	v	представлять, рекламировать	
+8	Module 6	Going Green 6	restore	v	реставрировать	
+8	Module 6	Going Green 6	sculpture	n	скульптура	
+8	Module 6	Going Green 6	smog	n	смог	загрязнение от выхлопных газов
+8	Module 6	Going Green 6	solar	adj	солнечный	
+8	Module 6	Going Green 6	statue	n	статуя	
+8	Module 6	Going Green 6	sulphur	n	сера	
+8	Module 6	Going Green 6	vehicle	n	транспортное средство	
+8	Module 6	Going Green 6 Phrasals & Phrases	be located		быть расположенным	
+8	Module 6	Going Green 6 Phrasals & Phrases	build up		постепенно создавать	
+8	Module 6	Going Green 6 Phrasals & Phrases	run on		работать на	о машинах
+8	Module 6	Going Green 6 Phrasals & Phrases	visual prompt		визуальная опора	
+8	Module 7	7a	affect	v	влиять	
+8	Module 7	7a	beyond	prep	помимо, свыше того	
+8	Module 7	7a	complete	v	заканчивать, завершать	
+8	Module 7	7a	connect	v	соединять(ся)	
+8	Module 7	7a	cope (with)	v	справляться	
+8	Module 7	7a	deal (with)	v	иметь дело с	
+8	Module 7	7a	deny	v	отрицать, отвергать	
+8	Module 7	7a	divide	v	делить, разъединять	
+8	Module 7	7a	download	v	загружать	
+8	Module 7	7a	edit	v	редактировать	
+8	Module 7	7a	essential	adj	необходимый, существенный	
+8	Module 7	7a	extension	n	продолжение	
+8	Module 7	7a	fast-paced	adj	идущий быстрыми шагами, быстро развивающийся	
+8	Module 7	7a	file	n	файл, документ	
+8	Module 7	7a	gadget	n	электронное устройство, прибор	
+8	Module 7	7a	gain	v	получать, приобретать	
+8	Module 7	7a	games console	n	игровая приставка	
+8	Module 7	7a	impact	n	влияние	
+8	Module 7	7a	install	v	устанавливать	
+8	Module 7	7a	multi-tasking	n	выполнение нескольких задач одновременно	
+8	Module 7	7a	occasionally	adv	время от времени	
+8	Module 7	7a	reflect	v	размышлять, раздумывать	
+8	Module 7	7a	screen	n	экран	
+8	Module 7	7a	silence	n	тишина	
+8	Module 7	7a	simultaneously	adv	одновременно	
+8	Module 7	7a	stuck	adj	застрявший	
+8	Module 7	7a	text	v	посылать сообщение	на мобильный телефон
+8	Module 7	7a Phrasals & Phrases	be fixed on		уставиться на что-либо (о глазах)	
+8	Module 7	7a Phrasals & Phrases	chat online		беседовать онлайн	
+8	Module 7	7a Phrasals & Phrases	come to a head		назреть, назревать	
+8	Module 7	7a Phrasals & Phrases	face-to-face		с глазу на глаз, лицом к лицу	
+8	Module 7	7a Phrasals & Phrases	on a daily basis		изо дня в день, повседневно	
+8	Module 7	7a Phrasals & Phrases	tell sb off		отчитывать кого-либо	
+8	Module 7	7b	certificate	n	аттестат	
+8	Module 7	7b	contradict	v	потиворечить, опровергать	
+8	Module 7	7b	degree	n	учёная степень	
+8	Module 7	7b	graffiti	n	граффити, рисунки на стенах	
+8	Module 7	7b	mark	v	ставить отметку (оценку), отмечать	
+8	Module 7	7b	oral	adj	устный	
+8	Module 7	7b	revise	v	повторять	
+8	Module 7	7b	test	n	анализ; контрольная, экзамен	
+8	Module 7	7b	timetable	n	расписание	
+8	Module 7	7b Phrasals & Phrases	come up		попадаться	
+8	Module 7	7b Phrasals & Phrases	entrance exam		вступительный экзамен	
+8	Module 7	7b Phrasals & Phrases	let sb down		подводить	
+8	Module 7	7b Phrasals & Phrases	mess up		провалить, испортить	
+8	Module 7	7b Phrasals & Phrases	report card	n	табель успеваемости	
+8	Module 7	7b Phrasals & Phrases	that's the spirit!		ну и выдержка!	
+8	Module 7	7b Phrasals & Phrases	to retake an examination		пересдавать экзамен	
+8	Module 7	7c	cheat	v	обманывать, списывать	на экзамене
+8	Module 7	7c	deduction	n	умозаключение, вывод	
+8	Module 7	7c	forbidden	adj	запретный, запрещенный	
+8	Module 7	7c	headmaster	n	директор школы	
+8	Module 7	7c	obliged	adj	обязанный, благодарный	
+8	Module 7	7c	ordinary	adj	обыкновенный	
+8	Module 7	7c	opportunity	n	возможность	
+8	Module 7	7c	oversleep	v	проспать	
+8	Module 7	7c	skill	n	мастерство, опыт, умение	
+8	Module 7	7c	wide range	n	широкий ассортимент, большой выбор	
+8	Module 7	7c Phrasals & Phrases	attend classes/school		посещать уроки/школу	
+8	Module 7	7c Phrasals & Phrases	be accepted		быть принятым	
+8	Module 7	7c Phrasals & Phrases	do the washing up		мыть посуду	
+8	Module 7	7c Phrasals & Phrases	performing arts		исполнительские виды искусства	
+8	Module 7	7c Phrasals & Phrases	show business		индустрия развлечений	
+8	Module 7	7d	bark	n	кора	
+8	Module 7	7d	broadcast	n	радио- или телепередача, программа	
+8	Module 7	7d	broadcast	v	вести передачу, передавать в новостях, по радио	
+8	Module 7	7d	chipped	adj	наструганный, нарезанный мелкими кусочками	
+8	Module 7	7d	coax	v	уговаривать	
+8	Module 7	7d	cover	v	давать репортаж	
+8	Module 7	7d	coverage	n	репортаж	
+8	Module 7	7d	director	n	режиссёр	в театре, кино
+8	Module 7	7d	drain	v	осушать, откачивать воду	
+8	Module 7	7d	editor	n	редактор	
+8	Module 7	7d	host	v	вести радио- или телепрограмму	
+8	Module 7	7d	newsreader	n	диктор, телекомментатор, ведущий выпуска новостей	
+8	Module 7	7d	paper mill	n	целлюлозно-бумажная фабрика	
+8	Module 7	7d	presentation	n	презентация, показ, представление	
+8	Module 7	7d	presenter	n	ведущий	
+8	Module 7	7d	pressure cooker	n	автоклав, скороварка	
+8	Module 7	7d	producer	n	продюсер	
+8	Module 7	7d	pulp	n	бесформенная масса	
+8	Module 7	7d	reporter	n	репортёр	
+8	Module 7	7d	review	n	обзор	
+8	Module 7	7d	restless	adj	возбуждённый, беспокойный	
+8	Module 7	7d	roam	v	бродить	
+8	Module 7	7d	sitcom	n	комедийное шоу, комедийный сериал	
+8	Module 7	7d	spray	v	распылять	
+8	Module 7	7d Phrasals & Phrases	breaking news		горячие новости	
+8	Module 7	7d Phrasals & Phrases	give an injection		делать укол	
+8	Module 7	7d Phrasals & Phrases	on air		в прямом эфире	
+8	Module 7	7d Phrasals & Phrases	on one's own		самостоятельно	
+8	Module 7	7d Phrasals & Phrases	peak season		сезон максимальной нагрузки (товарооборота)	
+8	Module 7	7d Phrasals & Phrases	prime time		лучшее эфирное время	
+8	Module 7	7d Phrasals & Phrases	rush hour		час пик	
+8	Module 7	7d Phrasals & Phrases	sound engineer		звукорежиссёр	
+8	Module 7	7e	access	n	доступ, возможность	
+8	Module 7	7e	commute	v	ежедневно ездить в школу	на работу, на учёбу
+8	Module 7	7e	contrast	v	сравнивать, противопоставлять	
+8	Module 7	7e	development	n	развитие, усовершенствование	
+8	Module 7	7e	drawback	n	недостаток, помеха, препятствие	
+8	Module 7	7e	high-tech	adj	высокотехнологичный	
+8	Module 7	7e	inaccurate	adj	неверный, некорректный	
+8	Module 7	7e	online	adv	интерактивно, в Интернете	
+8	Module 7	7e	storyline	n	основная сюжетная линия	
+8	Module 7	7e	tool	n	средство, инструмент	
+8	Module 7	7e	violent	adj	жестокий	
+8	Module 7	7e Phrasals & Phrases	advantages and disadvantages		плюсы и минусы, преимущества и недостатки	
+8	Module 7	7e Phrasals & Phrases	at one's own pace		в своём темпе	
+8	Module 7	7e Phrasals & Phrases	bear in mind		иметь в виду	
+8	Module 7	7e Phrasals & Phrases	for instance		например, к примеру	
+8	Module 7	7e Phrasals & Phrases	get the most from		получить как можно больше от	
+8	Module 7	7e Phrasals & Phrases	in addition		вдобавок, к тому же	
+8	Module 7	7e Phrasals & Phrases	no doubt		без сомнения	
+8	Module 7	7f	advertisement	n	реклама	
+8	Module 7	7f	announcement	n	объявление, сообщение	
+8	Module 7	7f	bully	v	задирать, издеваться	
+8	Module 7	7f	distribute	v	распределять, распространять	
+8	Module 7	7f	educate	v	обучать, давать образование	
+8	Module 7	7f	hurt	v	обижать, причинять боль	
+8	Module 7	7f	instruction	n	инструкция	
+8	Module 7	7f	mean	adj	скупой, злой	
+8	Module 7	7f	mood	n	настроение	
+8	Module 7	7f	resit	v	пересдавать письменный экзамен	
+8	Module 7	7f	reveal	v	разоблачать, раскрывать	
+8	Module 7	7f	temper	n	нрав, характер	
+8	Module 7	7f	tolerate	v	терпеть, выносить	
+8	Module 7	7f	unacceptable	adj	неприемлемый	
+8	Module 7	7f Phrasals & Phrases	a curse or a bless		проклятие или благо	
+8	Module 7	7f Phrasals & Phrases	care for		любить	
+8	Module 7	7f Phrasals & Phrases	call sb names		обзывать, дразниться, давать прозвище	
+8	Module 7	7f Phrasals & Phrases	catch up with		нагнать (упущенное), догнать	
+8	Module 7	Culture Corner 7	contain	v	содержать, вмещать	
+8	Module 7	Culture Corner 7	found	v	основывать	поселение, город
+8	Module 7	Culture Corner 7	humanities	n	гуманитарные науки	
+8	Module 7	Culture Corner 7	leading	adj	ведущий, главный	
+8	Module 7	Culture Corner 7	medieval	adj	средневековый	
+8	Module 7	Culture Corner 7	precious	adj	ценный, дорогой	
+8	Module 7	Culture Corner 7	prestigious	adj	престижный, авторитетный	
+8	Module 7	Culture Corner 7	survive	v	выживать	
+8	Module 7	Culture Corner 7	wealthy	adj	состоятельный, богатый	
+8	Module 7	Culture Corner 7 Phrasals & Phrases	be in existence		существовать	
+8	Module 7	Culture Corner 7 Phrasals & Phrases	graduate from		оканчивать	высшее учебное заведение
+8	Module 7	Culture Corner 7 Phrasals & Phrases	have in common		иметь общее	
+8	Module 7	Across the Curriculum: ICT	consequence	n	последствие	
+8	Module 7	Across the Curriculum: ICT	copyrighted	adj	охраняемый авторским правом	о книгах, песнях, фильмах
+8	Module 7	Across the Curriculum: ICT	device	n	устройство	
+8	Module 7	Across the Curriculum: ICT	handle	v	обрабатывать	данные
+8	Module 7	Across the Curriculum: ICT	hardware	n	комплектующие части для компьютера	
+8	Module 7	Across the Curriculum: ICT	network	n	сеть	информационная
+8	Module 7	Across the Curriculum: ICT	overuse	v	чрезмерно использовать, злоупотреблять	
+8	Module 7	Across the Curriculum: ICT	password	n	пароль	
+8	Module 7	Across the Curriculum: ICT	plagiarism	n	плагиат, заимствование чужого	
+8	Module 7	Across the Curriculum: ICT	resource	n	источник питания	для компьютера
+8	Module 7	Across the Curriculum: ICT	share	v	использовать совместно, делиться	
+8	Module 7	Across the Curriculum: ICT	software	n	компьютерная программа, программное обеспечение	
+8	Module 7	Across the Curriculum: ICT	unethical	adj	неэтичный	
+8	Module 7	Across the Curriculum: ICT	virus	n	компьютерный вирус	
+8	Module 7	Across the Curriculum: ICT	wire	n	провод	
+8	Module 7	Across the Curriculum: ICT Phrasals & Phrases	cabling system		сеть	кабелей, проводов
+8	Module 7	Across the Curriculum: ICT Phrasals & Phrases	flow of data		поток информации	
+8	Module 8	8a	addicted	adj	увлечённый, пристрастившийся	
+8	Module 8	8a	axe	n	ледоруб	
+8	Module 8	8a	bizarre	adj	причудливый, чудной, необычный	
+8	Module 8	8a	board	n	доска	
+8	Module 8	8a	bounce	v	отскакивать, отпрыгивать	
+8	Module 8	8a	bump	n	ударяться, налетать	
+8	Module 8	8a	circle	n	кружок, группа (людей)	
+8	Module 8	8a	competitor	n	участник состязания, соперник	
+8	Module 8	8a	discover	v	обнаруживать, открывать	
+8	Module 8	8a	dive	v	погружаться с аквалангом, нырять	
+8	Module 8	8a	entrant	n	участник соревнований	
+8	Module 8	8a	equipment	n	оборудование, снаряжение	
+8	Module 8	8a	fasten	v	пристегиваться	
+8	Module 8	8a	flippers	n	ласты	
+8	Module 8	8a	goal	n	ворота, гол	
+8	Module 8	8a	hill	n	холм, возвышенность	
+8	Module 8	8a	inflatable	adj	надувной	
+8	Module 8	8a	invent	v	изобретать	
+8	Module 8	8a	involve	v	повлечь за собой	
+8	Module 8	8a	knock	n	удар, столкновение, толчок	
+8	Module 8	8a	mountaineering	n	альпинизм	
+8	Module 8	8a	opposing	adj	противостоящий	
+8	Module 8	8a	originate	v	брать начало, происходить	
+8	Module 8	8a	paragliding	n	парапланеризм, полеты на параплане	
+8	Module 8	8a	pastime	n	приятное времяпрепровождение, занятие, хобби	
+8	Module 8	8a	puck	n	шайба	
+8	Module 8	8a	roll	v	катиться	
+8	Module 8	8a	rope	n	канат, веревка	
+8	Module 8	8a	sandboarding	n	катание на доске по песку	
+8	Module 8	8a	skilled	adj	опытный, умелый, квалифицированный	
+8	Module 8	8a	skydiving	n	затяжные прыжки с парашютом	
+8	Module 8	8a	slide	v	скользить	
+8	Module 8	8a	slip	v	поскользнуться, скользить	
+8	Module 8	8a	snorkel	n	дыхательная трубка для подводного плавания	
+8	Module 8	8a	snowboarding	n	сноубординг	
+8	Module 8	8a	splash	v	брызгаться, плескаться	
+8	Module 8	8a	steep	adj	крутой	о дорогах, холмах, горных местностях
+8	Module 8	8a	strap	v	скреплять ремнями, привязывать	
+8	Module 8	8a	swing	v	втыкать с размаху	
+8	Module 8	8a	technique	n	техника, способ	
+8	Module 8	8a	unlike	adj/adv	не такой, отличающийся	
+8	Module 8	8a	waterfall	n	водопад	
+8	Module 8	8a	weightless	adj	невесомый	
+8	Module 8	8a	whizz	v	быстро двигаться; кружиться, рассекая воздух	
+8	Module 8	8a	zorbing	n	зорбинг	спуск со склонов внутри прозрачного двухслойного шара
+8	Module 8	8a Phrasals & Phrases	base jumping		бейс-джампинг, прыжки с парашютом с высоких объектов со специальным оборудованием	
+8	Module 8	8a Phrasals & Phrases	ice climbing		ледолазание	
+8	Module 8	8a Phrasals & Phrases	pull oneself up on smth		подтянуться, опираясь на что-либо	
+8	Module 8	8a Phrasals & Phrases	rock climbing		скалолазание	
+8	Module 8	8a Phrasals & Phrases	sand dune		песчаная дюна, бархан	
+8	Module 8	8a Phrasals & Phrases	spectator sport		зрелищный вид спорта	
+8	Module 8	8a Phrasals & Phrases	speed freak		любитель быстрой езды	
+8	Module 8	8a Phrasals & Phrases	sport event		спортивное событие	
+8	Module 8	8a Phrasals & Phrases	take part in		принимать участие в	
+8	Module 8	8a Phrasals & Phrases	work out		отрабатывать, улучшать	
+8	Module 8	8b	aerobics	n	аэробика	
+8	Module 8	8b	assembly hall	n	актовый зал	
+8	Module 8	8b	athletics	n	атлетика	
+8	Module 8	8b	audible	adj	слышный, слышимый	
+8	Module 8	8b	court	n	корт	
+8	Module 8	8b	cricket	n	крикет	
+8	Module 8	8b	experience	n	опыт	
+8	Module 8	8b	flat	adj	невыразительный, однообразный	
+8	Module 8	8b	gate	n	ворота	
+8	Module 8	8b	gymnastics	n	гимнастика	
+8	Module 8	8b	hesitant	adj	колеблющийся, сомневающийся	
+8	Module 8	8b	high jump	n	прыжки в высоту	
+8	Module 8	8b	hurdles	n	бег с препятствиями	
+8	Module 8	8b	indistinct	adj	невнятный, неотчетливый	
+8	Module 8	8b	inter-school	adj	межшкольный	
+8	Module 8	8b	javelin throwing	n	метание копья	
+8	Module 8	8b	jerky	adj	тряский, двигающийся резкими толчками	
+8	Module 8	8b	jogging	n	бег трусцой	
+8	Module 8	8b	karate	n	каратэ	
+8	Module 8	8b	long jump	n	прыжки в длину	
+8	Module 8	8b	lovely	adj	красивый, прекрасный, очаровательный	
+8	Module 8	8b	match	n	матч, встреча	
+8	Module 8	8b	monotonous	adj	монотонный, унылый	
+8	Module 8	8b	mumble	v	бормотать	
+8	Module 8	8b	noticeboard	n	доска объявлений	
+8	Module 8	8b	racquet	n	ракет;ка (для игры в теннис, бадминтон)	
+8	Module 8	8b	rhythm	n	ритм	
+8	Module 8	8b	rugby	n	рэгби	
+8	Module 8	8b	scuba diving	n	плавание под водой с авкалангом или спецоборудованием	
+8	Module 8	8b	spare	adj	запасной	
+8	Module 8	8b	squash	n	сквош	
+8	Module 8	8b	trainers	n	кроссовки	
+8	Module 8	8b	water polo	n	водное поло	
+8	Module 8	8b	wonder	v	интересоваться, желать узнать	
+8	Module 8	8b Phrasals & Phrases	free refreshments		бесплатные закуски	
+8	Module 8	8c	boil	v	кипеть	о жидкостях
+8	Module 8	8c	cup	n	кубок	
+8	Module 8	8c	drop	v	ронять	
+8	Module 8	8c	exhibition	n	выставка	
+8	Module 8	8c	expand	v	расширять, увеличивать	
+8	Module 8	8c	fix	v	чинить	
+8	Module 8	8c	general truth	n	общеизвестная истина	
+8	Module 8	8c	imaginary	adj	воображаемый	
+8	Module 8	8c	iron	n	железо	
+8	Module 8	8c	reservation	n	предварительный заказ	
+8	Module 8	8c	rust	v	ржаветь (о металлах)	
+8	Module 8	8c	splash	n	всплеск	
+8	Module 8	8c	steam	n	пар	
+8	Module 8	8c	tidy	v	убираться, наводить чистоту, порядок	
+8	Module 8	8c	wire	n	провод, проволока	
+8	Module 8	8c Phrasals & Phrases	at least		во всяком случае, по крайней мере	
+8	Module 8	8c Phrasals & Phrases	be in the mood		быть в настроении	
+8	Module 8	8c Phrasals & Phrases	chain story		история, начатая одним человеком, продолженная следующим и т. д.	
+8	Module 8	8c Phrasals & Phrases	cut off		выключать, отрезать	
+8	Module 8	8c Phrasals & Phrases	It depends		Всё зависит от обстоятельств	
+8	Module 8	8d	amazed	adj	изумлённый	
+8	Module 8	8d	bat	n	бита	в спортивных играх
+8	Module 8	8d	beat	v	побить (в соревнованиях), победить	
+8	Module 8	8d	billion	n	миллиард	
+8	Module 8	8d	club	n	клюшка	для гольфа
+8	Module 8	8d	competitor	n	соперник, конкурент, участник состязания	
+8	Module 8	8d	course	n	скаковой круг, поле	для игры в гольф
+8	Module 8	8d	create	v	создавать	
+8	Module 8	8d	defeat	v	нанести поражение	
+8	Module 8	8d	fan	n	болельщик, фанат	
+8	Module 8	8d	gain	v	получать, приобретать, наращивать	
+8	Module 8	8d	helmet	n	шлем	
+8	Module 8	8d	nil	n	ноль	
+8	Module 8	8d	official	n	должностное лицо	
+8	Module 8	8d	pitch	n	игровая (спортивная) площадка	
+8	Module 8	8d	record	n	рекорд	
+8	Module 8	8d	result	n	результат	
+8	Module 8	8d	score	v	забивать	
+8	Module 8	8d	spectator	n	зритель, посетитель	стадиона
+8	Module 8	8d	tournament	n	соревнование, турнир	
+8	Module 8	8d	win	v	победить, выигрывать	
+8	Module 8	8d Phrasals & Phrases	be fed up		пресытиться, быть сытым по горло	
+8	Module 8	8d Phrasals & Phrases	be saved by the bell		быть спасённым в последний момент	
+8	Module 8	8d Phrasals & Phrases	call a meeting		созывать собрание	
+8	Module 8	8d Phrasals & Phrases	come up with		предложить	
+8	Module 8	8d Phrasals & Phrases	get the ball rolling		сдвинуться с мёртвой точки	
+8	Module 8	8d Phrasals & Phrases	host team		хозяева поля	
+8	Module 8	8d Phrasals & Phrases	send sb off		удалить с поля, оштрафовать за нарушение	
+8	Module 8	8d Phrasals & Phrases	the ball is in sb's court		чья-то очередь делать что-то	
+8	Module 8	8d Phrasals & Phrases	to lose a game		проиграть игру	
+8	Module 8	8d Phrasals & Phrases	top scorer		лучший бомбардир	
+8	Module 8	8d Phrasals & Phrases	throw in the towel		признать себя побеждённым, сдаться	
+8	Module 8	8e	accept	v	принимать	
+8	Module 8	8e	advanced	adj	продвинутый, усложнённый	
+8	Module 8	8e	annual	adj	ежегодный	
+8	Module 8	8e	apology	n	извинение	
+8	Module 8	8e	application form	n	анкета, регистрационная форма, бланк заявления	
+8	Module 8	8e	apply (for)	v	подавать заявление (на), просить (о)	
+8	Module 8	8e	asthma	n	астма	
+8	Module 8	8e	basic	adj	основной	
+8	Module 8	8e	beginner	n	новичок, начинающий	
+8	Module 8	8e	certificate	n	свидетельство, сертификат, удостоверение	
+8	Module 8	8e	certification	n	выдача свидетельства, удостоверения, сертификация	
+8	Module 8	8e	depend on	v	зависеть от	
+8	Module 8	8e	eyesight	n	зрение, кругозор	
+8	Module 8	8e	fee	n	плата	
+8	Module 8	8e	guidance	n	руководство	
+8	Module 8	8e	include	v	включать	
+8	Module 8	8e	level	n	уровень	
+8	Module 8	8e	membership	n	членство	в клубе
+8	Module 8	8e	outing	n	загородная прогулка, экскурсия	
+8	Module 8	8e	postcode	v	почтовый индекс	
+8	Module 8	8e	request	v	вежливо просить	
+8	Module 8	8e	session	n	период, сессия, совещание	
+8	Module 8	8e	subscription	n	подписка, членский взнос	
+8	Module 8	8e	superb	adj	превосходный	
+8	Module 8	8e	surname	n	фамилия	
+8	Module 8	8e	timetable	n	расписание	
+8	Module 8	8e	transactional letter	n	ответное письмо	
+8	Module 8	8e	trainer	n	тренер	
+8	Module 8	8e Phrasals & Phrases	be crazy about		быть помешанным на чем-либо	
+8	Module 8	8e Phrasals & Phrases	emergency contact number		телефон для экстренных случаев	
+8	Module 8	8e Phrasals & Phrases	tick as appropriate		поставить галочку, сделав выбор	
+8	Module 8	8f	coach	n	тренер	
+8	Module 8	8f	insecure	adj	небезопасный, ненадёжный	
+8	Module 8	8f	instructor	n	инструктор	
+8	Module 8	8f	junk food	n	еда всухомятку, неполноценная пища	
+8	Module 8	8f	league	n	лига	
+8	Module 8	8f	section	n	часть	
+8	Module 8	8f	tracksuit	n	спортивный тренировочный костюм	
+8	Module 8	8f	upset	adj	расстроенный	
+8	Module 8	8f	weekday	n	будний день	
+8	Module 8	8f Phrasals & Phrases	be in favour of		пользоваться спросом, нравиться	
+8	Module 8	8f Phrasals & Phrases	fall into place		вставать на место	
+8	Module 8	8f Phrasals & Phrases	for hire		напрокат	
+8	Module 8	8f Phrasals & Phrases	in charge of		ответственный за	
+8	Module 8	8f Phrasals & Phrases	set an alarm clock		завести будильник	
+8	Module 8	8f Phrasals & Phrases	talk sb into sth		уговорить кого-либо на что-либо	
+8	Module 8	Culture Corner 8	abseil	v	спускаться на веревке	
+8	Module 8	Culture Corner 8	attract	v	привлекать	
+8	Module 8	Culture Corner 8	beak	n	клюв	
+8	Module 8	Culture Corner 8	charity	n	благотворительность	
+8	Module 8	Culture Corner 8	cereals	n	злаки, крупы	
+8	Module 8	Culture Corner 8	cuddly	adj	приятный, привлекательный	
+8	Module 8	Culture Corner 8	dinosaur	n	динозавр	
+8	Module 8	Culture Corner 8	goalkeeper	n	вратарь	
+8	Module 8	Culture Corner 8	half-time	n	перерыв (в игре)	
+8	Module 8	Culture Corner 8	hen	n	курица	
+8	Module 8	Culture Corner 8	home game	n	игра на своем поле	
+8	Module 8	Culture Corner 8	hopefully	adv	в надежде, с надеждой	
+8	Module 8	Culture Corner 8	kick-off	n	начало матча с центра поля	
+8	Module 8	Culture Corner 8	kit	n	комплект, наряд	
+8	Module 8	Culture Corner 8	mascot	n	талисман	
+8	Module 8	Culture Corner 8	penalty shoot-out	n	послематчевые пенальти	
+8	Module 8	Culture Corner 8	publicity	n	публичность, известность	
+8	Module 8	Culture Corner 8	public relations	n	связи с общественностью	
+8	Module 8	Culture Corner 8	striped	adj	полосатый	
+8	Module 8	Culture Corner 8	title	n	титул	
+8	Module 8	Culture Corner 8	wander	v	бродить, слоняться без дела	
+8	Module 8	Culture Corner 8	wave (to)	v	махать	кому-либо
+8	Module 8	Culture Corner 8 Phrasals & Phrases	make appearance		появляться	
+8	Module 8	Going Green 8	aim	n	цель	
+8	Module 8	Going Green 8	aquatic	adj	водный, приспособленный к жизни в воде	
+8	Module 8	Going Green 8	awareness	n	осведомлённость, информированность	
+8	Module 8	Going Green 8	case	n	дело, особая ситуация	
+8	Module 8	Going Green 8	conserve	v	консервировать, сохранять, защищать	
+8	Module 8	Going Green 8	coral reef	n	коралловый риф	
+8	Module 8	Going Green 8	edge	n	край	
+8	Module 8	Going Green 8	festivities	n	празднества, торжества	
+8	Module 8	Going Green 8	generation	n	поколение	
+8	Module 8	Going Green 8	interact	v	взаимодействовать, воздействовать	
+8	Module 8	Going Green 8	measure	n	мера, мероприятие	
+8	Module 8	Going Green 8	non-profit organisation	n	некоммерческая организация	
+8	Module 8	Going Green 8	outcome	n	результат, последствие, исход	
+8	Module 8	Going Green 8	participate	v	участвовать, принимать участие	
+8	Module 8	Going Green 8	procedure	n	процедура, процесс	
+8	Module 8	Going Green 8	prospective	adj	будущий, ожидаемый	
+8	Module 8	Going Green 8	regard	v	считать, относиться	
+8	Module 8	Going Green 8	responsibility	n	ответственность	
+8	Module 8	Going Green 8	seabed	n	морское дно	
+8	Module 8	Going Green 8	shoreline	n	береговая линия	
+8	Module 8	Going Green 8 Phrasal verbs	stand for		выступать (за команду), представлять	
+8	Module 8	Going Green 8 Phrases	take action		принимать меры	

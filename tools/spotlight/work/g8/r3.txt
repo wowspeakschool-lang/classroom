@@ -1,0 +1,48 @@
+Module 6|6f|outback|n|малонаселённые районы Австралийского континента|
+Module 6|6f|room|n|пространство|
+Module 6|6f|sink|v|затонуть|
+Module 6|6f|trip|n|поездка, путешествие|
+Module 6|6f|voyage|n|морское путешествие|
+Module 6|6f Phrasals & Phrases|in advance||раньше времени, заранее|
+Module 6|6f Phrasals & Phrases|on time||вовремя, по расписанию|
+Module 6|6f Phrasals & Phrases|without delay||без задержки|
+Module 6|Culture Corner 6|architectural|adj|архитектурный|
+Module 6|Culture Corner 6|attack|n|атака, нападение|
+Module 6|Culture Corner 6|bank|n|берег|реки
+Module 6|Culture Corner 6|castle|n|замок|
+Module 6|Culture Corner 6|event|n|событие|
+Module 6|Culture Corner 6|export|v|экспортировать|
+Module 6|Culture Corner 6|extremely|adv|чрезвычайно, весьма|
+Module 6|Culture Corner 6|fame|n|слава, известность|
+Module 6|Culture Corner 6|flow|v|течь|
+Module 6|Culture Corner 6|fort|n|форт|
+Module 6|Culture Corner 6|illustrate|v|иллюстрировать|
+Module 6|Culture Corner 6|industrial revolution|n|промышленная революция|
+Module 6|Culture Corner 6|liquid|adj|жидкий|
+Module 6|Culture Corner 6|Londoner|n|лондонец, житель Лондона|
+Module 6|Culture Corner 6|major|adj|важный|
+Module 6|Culture Corner 6|mouth|n|устье реки|
+Module 6|Culture Corner 6|provide|v|обеспечивать, снабжать|
+Module 6|Culture Corner 6|protect|v|защищать|
+Module 6|Culture Corner 6|rowing|n|гребля|
+Module 6|Culture Corner 6|sight|n|вид|
+Module 6|Culture Corner 6|stroll|n|легкая прогулка|
+Module 6|Culture Corner 6|thirst|n|жажда|
+Module 6|Culture Corner 6|waterway|n|судоходный канал|
+Module 6|Going Green 6|acid|n|кислота|
+Module 6|Going Green 6|AD (Anno Domini)||нашей эры|
+Module 6|Going Green 6|alternative|adj|альтернативный|
+Module 6|Going Green 6|ancestor|n|предок|
+Module 6|Going Green 6|carve|v|вырезать, гравировать|
+Module 6|Going Green 6|coal|n|уголь|
+Module 6|Going Green 6|damage|v|повреждать, портить|
+Module 6|Going Green 6|democracy|n|демократия|
+Module 6|Going Green 6|destruction|n|разрушение, разруха|
+Module 6|Going Green 6|erosion|n|эрозия, разрушение|
+Module 6|Going Green 6|fascinating|adj|восхитительный|
+Module 6|Going Green 6|fossil fuel|n|органическое топливо|
+Module 6|Going Green 6|freedom|n|свобода|
+Module 6|Going Green 6|gradual|adj|постепенный, последовательный|
+Module 6|Going Green 6|inherit|v|наследовать|
+Module 6|Going Green 6|liberty|n|свобода|
+Module 6|Going Green 6|maintenance|n|сохранение, восстановление|

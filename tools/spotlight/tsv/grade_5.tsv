@@ -1027,3 +1027,554 @@ grade	module	section	term	pos	translation	note
 5	Module 8	8a	light bonfires		разжигать костры	
 5	Module 8	8a	set off fireworks		запускать фейерверки	
 5	Module 8	8a	exchange gifts		обмениваться подарками	
+5	Module 8	8b	bottle	n	бутылка	
+5	Module 8	8b	bowl	n	миска, тарелка	
+5	Module 8	8b	box	n	коробка	
+5	Module 8	8b	bread	n	хлеб	
+5	Module 8	8b	burger	n	гамбургер	
+5	Module 8	8b	butter	n	масло	
+5	Module 8	8b	cabbage	n	капуста	
+5	Module 8	8b	cake	n	торт	
+5	Module 8	8b	carton	n	пакет	
+5	Module 8	8b	cereal	n	крупы, злаки, хлопья	
+5	Module 8	8b	cheese	n	сыр	
+5	Module 8	8b	cherry	n	вишня; черешня	
+5	Module 8	8b	chicken	n	курица, цыплёнок	
+5	Module 8	8b	chocolate	n	шоколад	
+5	Module 8	8b	container	n	ёмкость, сосуд	
+5	Module 8	8b	cupboard	n	шкаф для посуды	
+5	Module 8	8b	everything	pron	всё	
+5	Module 8	8b	garlic	n	чеснок	
+5	Module 8	8b	glass	n	стакан	
+5	Module 8	8b	grapes	n	виноград	
+5	Module 8	8b	ice cream	n	мороженое	
+5	Module 8	8b	jar	n	банка	
+5	Module 8	8b	lemonade	n	лимонад	
+5	Module 8	8b	master chef	n	шеф-повар	
+5	Module 8	8b	meal	n	приём пищи	
+5	Module 8	8b	meat	n	мясо	
+5	Module 8	8b	milk	n	молоко	
+5	Module 8	8b	olive oil	n	оливковое масло	
+5	Module 8	8b	onion	n	лук	
+5	Module 8	8b	orange juice		апельсиновый сок	
+5	Module 8	8b	packet	n	пакет, пачка	
+5	Module 8	8b	pasta	n	паста, макаронные изделия	
+5	Module 8	8b	pineapple	n	ананас	
+5	Module 8	8b	pizza	n	пицца	
+5	Module 8	8b	sausage	n	сосиска	
+5	Module 8	8b	strawberry	n	клубника	
+5	Module 8	8b	shopping list		список покупок	
+5	Module 8	8b	sugar	n	сахар	
+5	Module 8	8b	tomato	n	помидор	
+5	Module 8	8b	tonight	adv	сегодня вечером	
+5	Module 8	8c	balloon	n	воздушный шар	
+5	Module 8	8c	bring	irr v	приносить	
+5	Module 8	8c	Chinese	adj	китайский	
+5	Module 8	8c	crisps	n	чипсы	
+5	Module 8	8c	envelope	n	конверт	
+5	Module 8	8c	full of		полный чего-либо	
+5	Module 8	8c	good luck		удача	
+5	Module 8	8c	magazine entry		журнальная статья	
+5	Module 8	8c	mean	irr v	значить, означать	
+5	Module 8	8c	money	n	деньги	
+5	Module 8	8c	noodles	n	лапша	
+5	Module 8	8c	paper	n	бумага	
+5	Module 8	8c	sandwich	n	бутерброд	
+5	Module 8	8c	soup	n	суп	
+5	Module 8	8c	stick	n	палка, палочка	
+5	Module 8	8c	treat	n	угощение	
+5	Module 8	8c	unlucky	adj	неудачливый	
+5	Module 8	8c	I'd love to ...		Мне бы хотелось ...	
+5	Module 8	8c	I don't think so.		Я так не думаю.	
+5	Module 8	8c	Would you like ...?		Не желаете ...?	
+5	Module 8	8d - Culture Corner	baseball	n	бейсбол	
+5	Module 8	8d - Culture Corner	basketball	n	баскетбол	
+5	Module 8	8d - Culture Corner	corn	n	кукуруза	
+5	Module 8	8d - Culture Corner	custom	n	обычай	
+5	Module 8	8d - Culture Corner	fries	n	картофель фри	
+5	Module 8	8d - Culture Corner	hamburger	n	гамбургер	
+5	Module 8	8d - Culture Corner	quiz	n	викторина	
+5	Module 8	8d - Culture Corner	score	n	очко, гол	
+5	Module 8	8d - Culture Corner	Thanksgiving (Day)	n	День благодарения	
+5	Module 8	English in Use 8	baked potato		печёный картофель	
+5	Module 8	English in Use 8	beef	n	говядина	
+5	Module 8	English in Use 8	cashier	n	кассир	
+5	Module 8	English in Use 8	chilli	n	острый стручковый перец (чили)	
+5	Module 8	English in Use 8	chips	n	чипсы	
+5	Module 8	English in Use 8	coke	n	кока-кола	
+5	Module 8	English in Use 8	fast food		еда быстрого приготовления	
+5	Module 8	English in Use 8	medium	adj	средний	
+5	Module 8	English in Use 8	menu	n	меню	
+5	Module 8	English in Use 8	mineral water		минеральная вода	
+5	Module 8	English in Use 8	order	n; v	заказ; заказывать	
+5	Module 8	English in Use 8	takeaway	n	еда на вынос	
+5	Module 8	English in Use 8	tuna	n	тунец	
+5	Module 8	English in Use 8	vanilla	n	ваниль	
+5	Module 8	English in Use 8	Enjoy your meal!		Приятного аппетита!	
+5	Module 8	English in Use 8	Is that eat in or take away?		Вы будете есть здесь или заберёте с собой?	
+5	Module 8	Across the Curriculum 8: PSHE	back	adv	назад	
+5	Module 8	Across the Curriculum 8: PSHE	bacteria	n	бактерии	
+5	Module 8	Across the Curriculum 8: PSHE	carefully	adv	аккуратно, тщательно	
+5	Module 8	Across the Curriculum 8: PSHE	chop	v	резать	
+5	Module 8	Across the Curriculum 8: PSHE	clean	v	чистить, очищать	
+5	Module 8	Across the Curriculum 8: PSHE	dairy products		молочные продукты	
+5	Module 8	Across the Curriculum 8: PSHE	danger	n	опасность	
+5	Module 8	Across the Curriculum 8: PSHE	first	adv	сначала	
+5	Module 8	Across the Curriculum 8: PSHE	forget	irr v	забывать	
+5	Module 8	Across the Curriculum 8: PSHE	fruit & vegetables		фрукты и овощи	
+5	Module 8	Across the Curriculum 8: PSHE	keep away	phr v	держаться вдали от	
+5	Module 8	Across the Curriculum 8: PSHE	keep out	phr v	не допускать, не позволять	
+5	Module 8	Across the Curriculum 8: PSHE	knife	n	нож	
+5	Module 8	Across the Curriculum 8: PSHE	prepare	v	готовить, подготавливать	
+5	Module 8	Across the Curriculum 8: PSHE	PSHE (Personal Social & Health Education)		основы безопасности жизнедеятельности (ОБЖ)	
+5	Module 8	Across the Curriculum 8: PSHE	sharp	adj	острый	
+5	Module 8	Across the Curriculum 8: PSHE	store	v	хранить	
+5	Module 8	Across the Curriculum 8: PSHE	surface	n	поверхность	
+5	Module 8	Across the Curriculum 8: PSHE	touch	v	касаться, дотрагиваться	
+5	Module 8	Across the Curriculum 8: PSHE	yoghurt	n	йогурт	
+5	Module 8	Across the Curriculum 8: PSHE	the list of dos and don'ts		список того, что можно и нельзя делать	
+5	Module 8	Across the Curriculum 8: PSHE	for example		например	
+5	Module 8	Across the Curriculum 8: PSHE	keep clean		содержать в чистоте	
+5	Module 9	9a	aspirin	n	аспирин	
+5	Module 9	9a	baker's	n	булочная	
+5	Module 9	9a	bakery	n	булочная	
+5	Module 9	9a	chemist's	n	аптека	
+5	Module 9	9a	florist's	n	цветочный магазин	
+5	Module 9	9a	greengrocer's	n	овощной магазин	
+5	Module 9	9a	jeweller's	n	ювелирный магазин	
+5	Module 9	9a	mean	irr v	иметь в виду, означать	
+5	Module 9	9a	mention	v	упоминать	
+5	Module 9	9a	newsagent's	n	газетный киоск	
+5	Module 9	9a	record shop		музыкальный магазин	
+5	Module 9	9a	sell	irr v	продавать	
+5	Module 9	9a	shoe shop		обувной магазин	
+5	Module 9	9a	shop	n; v	магазин; делать покупки	
+5	Module 9	9a	shopping centre/mall		торговый центр	
+5	Module 9	9a	tulip	n	тюльпан	
+5	Module 9	9a	fast food restaurant		ресторан быстрого питания, фаст-фуд	
+5	Module 9	9a	look for		искать	
+5	Module 9	9a	pair of shoes		пара туфель	
+5	Module 9	9b	adventure park		парк аттракционов	
+5	Module 9	9b	advertise	v	рекламировать	
+5	Module 9	9b	art gallery		картинная галерея	
+5	Module 9	9b	candyfloss	n	сахарная вата	
+5	Module 9	9b	classical	adj	классический	
+5	Module 9	9b	concert hall		концертный зал	
+5	Module 9	9b	exhibition	n	выставка	
+5	Module 9	9b	museum	n	музей	
+5	Module 9	9b	Net		интернет	
+5	Module 9	9b	play	n; v	пьеса; играть	
+5	Module 9	9b	queue	n	очередь	
+5	Module 9	9b	ride	n	аттракцион (в парке)	
+5	Module 9	9b	roller coaster		американские горки	
+5	Module 9	9b	royal	adj	королевский	
+5	Module 9	9b	theatre	n	театр	
+5	Module 9	9b	theme park		тематический парк	
+5	Module 9	9b	yesterday	adj	вчера	
+5	Module 9	9b	zoo	n	зоопарк	
+5	Module 9	9c	action film		фильм жанра экшн, боевик	
+5	Module 9	9c	adventure film		фильм-приключение	
+5	Module 9	9c	adult	n	взрослый	
+5	Module 9	9c	animated	adj	мультипликационный	
+5	Module 9	9c	become	irr v	становиться	
+5	Module 9	9c	comedy	n	комедия	
+5	Module 9	9c	hero	n	герой	
+5	Module 9	9c	horror film		фильм ужасов	
+5	Module 9	9c	romance	n	романтический фильм	
+5	Module 9	9c	face	v	сталкиваться (зд.)	
+5	Module 9	9c	heading	n	заголовок	
+5	Module 9	9c	leading star		актёр/актриса в главной роли	
+5	Module 9	9c	main character		главный персонаж	
+5	Module 9	9c	miss	v	пропускать	
+5	Module 9	9c	plot	n	сюжет	
+5	Module 9	9c	recommend	v	рекомендовать	
+5	Module 9	9c	recommendation	n	рекомендация	
+5	Module 9	9c	review	n	обзор	
+5	Module 9	9c	save	v	спасать	
+5	Module 9	9c	It is (well) worth seeing.		Это стоит того, чтобы посмотреть.	
+5	Module 9	9d - Culture Corner	busy spot		оживлённое место	
+5	Module 9	9d - Culture Corner	cinema	n	кинотеатр	
+5	Module 9	9d - Culture Corner	nearby	adv	поблизости	
+5	Module 9	9d - Culture Corner	nightclub	n	ночной клуб	
+5	Module 9	9d - Culture Corner	premiere	n	премьера	
+5	Module 9	9d - Culture Corner	pronounce	v	произносить	
+5	Module 9	9d - Culture Corner	seat	n	место (для сидения)	
+5	Module 9	9d - Culture Corner	square	n	площадь	
+5	Module 9	9d - Culture Corner	statue	n	статуя	
+5	Module 9	9d - Culture Corner	how much/many		сколько	
+5	Module 9	English in Use 9	opposite	prep	напротив	
+5	Module 9	English in Use 9	supermarket	n	супермаркет	
+5	Module 9	English in Use 9	Can you tell me where the ... is?		Не подскажете, где находится ...?	
+5	Module 9	English in Use 9	Could you tell me how to get to ...?		Скажите, как добраться до...	
+5	Module 9	English in Use 9	Excuse me. Is there a ... around here?		Простите, где-нибудь поблизости есть ...?	
+5	Module 9	English in Use 9	on one's left/right		справа/слева от кого-либо	
+5	Module 9	English in Use 9	turn right/left		поворачивать направо/налево	
+5	Module 9	English in Use 9	walk down		идти вниз по	
+5	Module 9	Across the Curriculum 9: Maths	bar	n	плитка	
+5	Module 9	Across the Curriculum 9: Maths	change	n	сдача	
+5	Module 9	Across the Curriculum 9: Maths	coin	n	монета	
+5	Module 9	Across the Curriculum 9: Maths	cost	irr v	стоить	
+5	Module 9	Across the Curriculum 9: Maths	item	n	пункт, предмет	
+5	Module 9	Across the Curriculum 9: Maths	pence	n	пенсы (мн.ч.)	
+5	Module 9	Across the Curriculum 9: Maths	penny	n	пенс	
+5	Module 9	Across the Curriculum 9: Maths	pound	n	фунт стерлингов	
+5	Module 10	10a	abroad	adv	за границей	
+5	Module 10	10a	activity holiday		активный отдых	
+5	Module 10	10a	advert	n	реклама	
+5	Module 10	10a	advise	v	советовать	
+5	Module 10	10a	ancient culture		древняя культура	
+5	Module 10	10a	apartment	n	квартира, апартаменты	
+5	Module 10	10a	beauty	n	красота	
+5	Module 10	10a	book	v	заказывать, бронировать	
+5	Module 10	10a	camp	n; v	лагерь; разбивать лагерь	
+5	Module 10	10a	coach	n	автобус (междугородний)	
+5	Module 10	10a	countryside	n	сельская местность	
+5	Module 10	10a	credit card		кредитная карточка	
+5	Module 10	10a	cruise	n	круиз	
+5	Module 10	10a	discover	v	обнаруживать, открывать	
+5	Module 10	10a	experience	v	испытывать, знать по опыту	
+5	Module 10	10a	extreme sports		экстремальный спорт	
+5	Module 10	10a	fill in	phr v	заполнять	
+5	Module 10	10a	free brochure		бесплатная брошюра	
+5	Module 10	10a	full board		полный пансион	
+5	Module 10	10a	historic	adj	исторический	
+5	Module 10	10a	holiday	n	каникулы, праздник, отпуск	
+5	Module 10	10a	hotel	n	гостиница	
+5	Module 10	10a	join (in)	phr v	присоединяться	
+5	Module 10	10a	learn (about)	v	узнавать (о)	
+5	Module 10	10a	leisure	n	свободное время, досуг	
+5	Module 10	10a	magic	n	волшебство, магия	
+5	Module 10	10a	magnificent	adj	великолепный	
+5	Module 10	10a	motorbike	n	мотоцикл	
+5	Module 10	10a	mountaineering	n	альпинизм	
+5	Module 10	10a	price	n	цена	
+5	Module 10	10a	rest	n	отдых	
+5	Module 10	10a	rock climbing		скалолазание	
+5	Module 10	10a	safari	n	сафари	
+5	Module 10	10a	sand	n	песок	
+5	Module 10	10a	ship	n	теплоход, корабль	
+5	Module 10	10a	sightseeing tour		тур по достопримечательностям	
+5	Module 10	10a	spend	irr v	проводить (время)	
+5	Module 10	10a	travel	n; v	путешествие; путешествовать	
+5	Module 10	10a	travel agent		туристический агент	
+5	Module 10	10a	trekking	n	горный туризм	
+5	Module 10	10b	airport	n	аэропорт	
+5	Module 10	10b	bored	adj	скучающий	
+5	Module 10	10b	boring	adj	скучный	
+5	Module 10	10b	business	n	бизнес	
+5	Module 10	10b	canoeing	n	гребля на каноэ	
+5	Module 10	10b	decide	v	решать	
+5	Module 10	10b	difficult	adj	трудный, сложный	
+5	Module 10	10b	enjoyable	adj	приятный, доставляющий удовольствие	
+5	Module 10	10b	excited	adj	взволнованный	
+5	Module 10	10b	exciting	adj	волнующий	
+5	Module 10	10b	feeling	n	ощущение, чувство	
+5	Module 10	10b	fishing	n	рыбалка	
+5	Module 10	10b	hard	adj	тяжёлый, трудный	
+5	Module 10	10b	hiking	n	поход	
+5	Module 10	10b	hungry	adj	голодный	
+5	Module 10	10b	jet skiing		катание на водных лыжах	
+5	Module 10	10b	mind	n	ум	
+5	Module 10	10b	relaxed	adj	расслабленный	
+5	Module 10	10b	relaxing	adj	расслабляющий	
+5	Module 10	10b	sailing	n	хождение на яхте	
+5	Module 10	10b	scuba diving		подводное плавание, погружение с аквалангом	
+5	Module 10	10b	sunbathing	n	приём солнечных ванн	
+5	Module 10	10b	tiring	adj	утомительный	
+5	Module 10	10b	tired	adj	уставший	
+5	Module 10	10b	white water rafting		сплав (на плотах) по горным рекам	
+5	Module 10	10b	windsurfing	n	виндсёрфинг	
+5	Module 10	10b	Don't worry!		Не волнуйтесь!	
+5	Module 10	10b	pass the exam		сдать экзамен	
+5	Module 10	10c	abbreviation	n	аббревиатура, сокращение	
+5	Module 10	10c	dentist	n	стоматолог	
+5	Module 10	10c	headache	n	головная боль	
+5	Module 10	10c	health matters		вопросы здоровья	
+5	Module 10	10c	note	n	записка	
+5	Module 10	10c	pharmacy	n	аптека	
+5	Module 10	10c	reception	n	стойка администратора	
+5	Module 10	10c	stomachache	n	боль в животе	
+5	Module 10	10c	sunburn	n	ожог от солнца	
+5	Module 10	10c	temperature	n	температура	
+5	Module 10	10c	toothache	n	зубная боль	
+5	Module 10	10c	put lotion		наносить мазь, лосьон	
+5	Module 10	10c	see a doctor		посещать доктора	
+5	Module 10	10c	stay out of sun		не выходить на солнце	
+5	Module 10	10d - Culture Corner	aboard	adv	на борту	
+5	Module 10	10d - Culture Corner	castle	n	замок	
+5	Module 10	10d - Culture Corner	cathedral	n	собор	
+5	Module 10	10d - Culture Corner	flat tyre		спущенная шина	
+5	Module 10	10d - Culture Corner	scenic	adj	живописный, красивый	
+5	Module 10	10d - Culture Corner	sit back	phr v	откидываться (на спинку сидения)	
+5	Module 10	10d - Culture Corner	square	n	квадрат (зд.)	
+5	Module 10	10d - Culture Corner	team	n	команда	
+5	Module 10	10d - Culture Corner	win	irr v	выигрывать	
+5	Module 10	10d - Culture Corner	miss a turn		пропускать ход	
+5	Module 10	English in Use 10	kind	n	вид, тип	
+5	Module 10	English in Use 10	ordinary	adj	обычный	
+5	Module 10	English in Use 10	reasonable	adj	справедливый, разумный	
+5	Module 10	English in Use 10	rent	v	брать напрокат	
+5	Module 10	English in Use 10	sign	v	подписывать(ся), ставить подпись	
+5	Module 10	English in Use 10	per day		в день	
+5	Module 10	Across the Curriculum 10: Geography	bottled water		бутилированная вода	
+5	Module 10	Across the Curriculum 10: Geography	cartoon strip		комикс	
+5	Module 10	Across the Curriculum 10: Geography	leaflet	n	листовка	
+5	Module 10	Across the Curriculum 10: Geography	point	n	пункт	
+5	Module 10	Across the Curriculum 10: Geography	reason	n	причина	
+5	Module 10	Across the Curriculum 10: Geography	shut up	phr v	замолчать	
+5	Module 10	Across the Curriculum 10: Geography	stream	n	ручей	
+5	Module 10	Across the Curriculum 10: Geography	tent	n	палатка	
+5	Module 10	Across the Curriculum 10: Geography	whistle	n	свисток	
+5	Module 10	Across the Curriculum 10: Geography	get lost		потеряться	
+5	Module 10	Across the Curriculum 10: Geography	Let's have some fun!		Давайте повеселимся!	
+5	Module 10	Across the Curriculum 10: Geography	start a fire		разводить костёр	
+5	Geographical Names		Africa		Африка	
+5	Geographical Names		Agra		г. Агра (Индия)	
+5	Geographical Names		Alaska		Аляска	
+5	Geographical Names		Aleutian Islands		Алеутские острова	
+5	Geographical Names		America		Америка	
+5	Geographical Names		Antarctica		Антарктика	
+5	Geographical Names		Asia		Азия	
+5	Geographical Names		Australia		Австралия	
+5	Geographical Names		Ballater		г. Баллатер (Великобритания)	
+5	Geographical Names		Barranquilla		г. Баранкилла (Колумбия)	
+5	Geographical Names		Belfast		Белфаст (Северная Ирландия)	
+5	Geographical Names		Bering Sea		Берингово море	
+5	Geographical Names		Brazil		Бразилия	
+5	Geographical Names		Canada		Канада	
+5	Geographical Names		Canberra		Канберра	
+5	Geographical Names		China		Китай	
+5	Geographical Names		Columbia		Колумбия	
+5	Geographical Names		Cork		г. Корк (Ирландия)	
+5	Geographical Names		Dona Lola		Дона Лола (курорт в Испании)	
+5	Geographical Names		Dublin		г. Дублин (Ирландия)	
+5	Geographical Names		Edinburgh		г. Эдинбург (Шотландия)	
+5	Geographical Names		Egypt		Египет	
+5	Geographical Names		England		Англия	
+5	Geographical Names		Europe		Европа	
+5	Geographical Names		Forth		Форт (река в Шотландии)	
+5	Geographical Names		France		Франция	
+5	Geographical Names		Germany		Германия	
+5	Geographical Names		Glasgow		г. Глазго (Шотландия)	
+5	Geographical Names		(Great) Britain		Великобритания	
+5	Geographical Names		Greece		Греция	
+5	Geographical Names		India		Индия	
+5	Geographical Names		Ireland		Ирландия	
+5	Geographical Names		Italy		Италия	
+5	Geographical Names		Japan		Япония	
+5	Geographical Names		Kiska Island		о. Киска (Аляска)	
+5	Geographical Names		Kodiak Island		о. Кадьяк (Аляска)	
+5	Geographical Names		Korea		Корея	
+5	Geographical Names		Loch Ness		оз. Лохнесс	
+5	Geographical Names		London		Лондон	
+5	Geographical Names		Mallorca		о. Майорка (Испания)	
+5	Geographical Names		Mexico		Мексика	
+5	Geographical Names		Mount Kilimanjaro		гора Килиманджаро	
+5	Geographical Names		Nepal		Непал	
+5	Geographical Names		New York City		Нью Йорк	
+5	Geographical Names		New Zealand		Новая Зеландия	
+5	Geographical Names		North America		Северная Америка	
+5	Geographical Names		Northern India		север Индии	
+5	Geographical Names		Northern Ireland		Северная Ирландия	
+5	Geographical Names		Nunivak Island		о. Нунивак (Аляска)	
+5	Geographical Names		Oban		г. Обан (Великобритания)	
+5	Geographical Names		Ottawa		г. Оттава (Канада)	
+5	Geographical Names		Pacific Ocean		Тихий океан	
+5	Geographical Names		Pakistan		Пакистан	
+5	Geographical Names		Pribilof Islands		острова Прибылова	
+5	Geographical Names		the River Nile		р. Нил	
+5	Geographical Names		the River Stirling		р. Стерлинг (Шотландия)	
+5	Geographical Names		Russia		Россия	
+5	Geographical Names		Scotland		Шотландия	
+5	Geographical Names		South America		Южная Америка	
+5	Geographical Names		South Asia		Южная Азия	
+5	Geographical Names		Southwest Alaska		юго-запад Аляски	
+5	Geographical Names		Spain		Испания	
+5	Geographical Names		Springfield		г. Спрингфилд (США)	
+5	Geographical Names		St Andrews		г. Сент-Эндрюс (Шотландия)	
+5	Geographical Names		St George Island		остров Святого Георгия	
+5	Geographical Names		St Lawrence Island		остров Святого Лаврентия	
+5	Geographical Names		St Matthew Island		остров Святого Матвея	
+5	Geographical Names		St Paul Island		остров Святого Павла	
+5	Geographical Names		Stirling		г. Стерлинг (Шотландия)	
+5	Geographical Names		Surrey		графство Суррей	
+5	Geographical Names		Switzerland		Швейцария	
+5	Geographical Names		Turkey		Турция	
+5	Geographical Names		the Thames		р. Темза (Великобритания)	
+5	Geographical Names		the Himalayas		Гималаи	
+5	Geographical Names		the Philippines		Филиппины	
+5	Geographical Names		the UK (the United Kingdom)		Соединённое Королевство (Великобритании и Северной Ирландии)	
+5	Geographical Names		the USA (the United States of America)		Соединенные Штаты Америки	
+5	Geographical Names		Valley of the Kings		Долина Королей	
+5	Geographical Names		Wales		Уэльс	
+5	Geographical Names		Washington DC		Вашингтон (округ Колумбия)	
+5	Geographical Names		Wellington		г. Веллингтон (Новая Зеландия)	
+5	Geographical Names		York		г. Йорк (Великобритания)	
+5	Personal Names		Alex	m		
+5	Personal Names		Alexa	f		
+5	Personal Names		Alice	f		
+5	Personal Names		Amelia	f		
+5	Personal Names		Amy	f		
+5	Personal Names		Andrew	m		
+5	Personal Names		Andy	m		
+5	Personal Names		Angela	f		
+5	Personal Names		Ann	f		
+5	Personal Names		Antonio	m		
+5	Personal Names		Anya	f		
+5	Personal Names		Asterix	m		
+5	Personal Names		Avril	f		
+5	Personal Names		Bart	m		
+5	Personal Names		Ben	m		
+5	Personal Names		Benjamin	m		
+5	Personal Names		Benny	m		
+5	Personal Names		Betty	f		
+5	Personal Names		Bill	m		
+5	Personal Names		Billy	m		
+5	Personal Names		Bob	m		
+5	Personal Names		Brian	m		
+5	Personal Names		Carla	f		
+5	Personal Names		Carmen	f		
+5	Personal Names		Cathy	f		
+5	Personal Names		Chris	m		
+5	Personal Names		Claire	f		
+5	Personal Names		Cliff	m		
+5	Personal Names		Damien	m		
+5	Personal Names		Daria	f		
+5	Personal Names		Darryl	m		
+5	Personal Names		Dave	m		
+5	Personal Names		David	m		
+5	Personal Names		Diana	f		
+5	Personal Names		Duncan	m		
+5	Personal Names		Eliza	f		
+5	Personal Names		Elizabeth	f		
+5	Personal Names		Emma	f		
+5	Personal Names		Esmeralda	f		
+5	Personal Names		Eve	m		
+5	Personal Names		Fiona	f		
+5	Personal Names		Fred	m		
+5	Personal Names		George	m		
+5	Personal Names		Gus	m		
+5	Personal Names		Harry	m		
+5	Personal Names		Helen	f		
+5	Personal Names		Henry	m		
+5	Personal Names		Homer	m		
+5	Personal Names		Isabel	f		
+5	Personal Names		Ivan	m		
+5	Personal Names		Jack	m		
+5	Personal Names		James	m		
+5	Personal Names		Jane	f		
+5	Personal Names		Janet	f		
+5	Personal Names		Jayne	f		
+5	Personal Names		Jeff	m		
+5	Personal Names		Jennifer	f		
+5	Personal Names		Jenny	f		
+5	Personal Names		Jessie	f		
+5	Personal Names		Jill	f		
+5	Personal Names		Jim	m		
+5	Personal Names		Joan	f		
+5	Personal Names		Joe	f		
+5	Personal Names		John	m		
+5	Personal Names		Johnny	m		
+5	Personal Names		Jude	f		
+5	Personal Names		Julia	f		
+5	Personal Names		Julio	m		
+5	Personal Names		July	f		
+5	Personal Names		June	f		
+5	Personal Names		Juni	f		
+5	Personal Names		Justin	m		
+5	Personal Names		Karen	m		
+5	Personal Names		Kate	f		
+5	Personal Names		Katherine			
+5	Personal Names		Kelly	f		
+5	Personal Names		Ken	m		
+5	Personal Names		Kitty	f		
+5	Personal Names		Lara	f		
+5	Personal Names		Laura	f		
+5	Personal Names		Lee	m		
+5	Personal Names		Lily	f		
+5	Personal Names		Linda	f		
+5	Personal Names		Lisa	f		
+5	Personal Names		Liz	f		
+5	Personal Names		Lloyd	m		
+5	Personal Names		Lola	f		
+5	Personal Names		Lucy	f		
+5	Personal Names		Lynn	f		
+5	Personal Names		Maggie	f		
+5	Personal Names		Marge	f		
+5	Personal Names		Mark	m		
+5	Personal Names		Markus	m		
+5	Personal Names		Marta	f		
+5	Personal Names		Mary	f		
+5	Personal Names		Mary Jane	f		
+5	Personal Names		Matt	m		
+5	Personal Names		Max	m		
+5	Personal Names		Mel	m		
+5	Personal Names		Miguel	m		
+5	Personal Names		Mike	m		
+5	Personal Names		Miles	m		
+5	Personal Names		Mitten	m		
+5	Personal Names		Monty	m		
+5	Personal Names		Natasha	f		
+5	Personal Names		Nelson	m		
+5	Personal Names		Nemo	m		
+5	Personal Names		Nora	f		
+5	Personal Names		Obelix	m		
+5	Personal Names		Olga	f		
+5	Personal Names		Oliver	m		
+5	Personal Names		Pam	f		
+5	Personal Names		Pat	f		
+5	Personal Names		Patsy	f		
+5	Personal Names		Paul	m		
+5	Personal Names		Pedro	m		
+5	Personal Names		Penny			
+5	Personal Names		Pete	m		
+5	Personal Names		Peter	m		
+5	Personal Names		Phil	m		
+5	Personal Names		Quasimodo	m		
+5	Personal Names		Rex	m		
+5	Personal Names		Rita	f		
+5	Personal Names		Rose	f		
+5	Personal Names		Rosie	f		
+5	Personal Names		Russ	m		
+5	Personal Names		Russell	m		
+5	Personal Names		Ryan	m		
+5	Personal Names		Sally	f		
+5	Personal Names		Sam	f/m		
+5	Personal Names		Samantha	f		
+5	Personal Names		Sandra	f		
+5	Personal Names		Sandy	f		
+5	Personal Names		Sarah	f		
+5	Personal Names		Sasha	m/f		
+5	Personal Names		Shakira	f		
+5	Personal Names		Sid	m		
+5	Personal Names		Simon	m		
+5	Personal Names		Slava	m		
+5	Personal Names		Stacy	f		
+5	Personal Names		Stan	m		
+5	Personal Names		Stella	f		
+5	Personal Names		Stephanie	f		
+5	Personal Names		Steve	m		
+5	Personal Names		Steven	m		
+5	Personal Names		Stripes	f		
+5	Personal Names		Sue	f		
+5	Personal Names		Susan	f		
+5	Personal Names		Tanya	f		
+5	Personal Names		Tara	f		
+5	Personal Names		Ted	m		
+5	Personal Names		Tim	m		
+5	Personal Names		Tom	m		
+5	Personal Names		Tommy	m		
+5	Personal Names		Tony	m		
+5	Personal Names		Tweety	f		
+5	Personal Names		Vicky	f		
+5	Personal Names		Wendy	f		
+5	Personal Names		William	m		
+5	Personal Names		Wilma	f		
+5	Personal Names		Zoe	f		
+5	Other Proper Names		Big Ben		Биг Бен	
+5	Other Proper Names		Sir Benjamin Hall		Бенджамин Холл	
+5	Other Proper Names		Shakespeare		Шекспир	
+5	Other Proper Names		Elizabeth		Елизавета	
+5	Other Proper Names		Mel Gibson		Мэл Гибсон	
+5	Other Proper Names		Katherine Mansfield		Кэтрин Менсфилд	
+5	Other Proper Names		Russell Crowe		Рассел Кроу	
