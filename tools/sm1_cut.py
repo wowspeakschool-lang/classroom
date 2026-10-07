@@ -42,6 +42,16 @@ SHEETS = {
                     "u6/room_stairs", "u6/room_cellar", "u6/house_outside"], CARD, 82),
     "ЛТ6.1": (2, 2, ["u6/test_frog_piano", "u6/test_park_empty",
                      "u6/test_kitten_kitchen", "u6/test_books_bedroom"], CARD, 80),
+    "ЛТ3.1": (3, 3, ["u3/animal_elephant", "u3/animal_rat", "u3/animal_lizard",
+                     "u3/animal_frog", "u3/animal_spider", "u3/animal_dog",
+                     "u3/animal_cat", "u3/animal_duck", "u3/animal_donkey"], CARD, 82),
+    "ЛТ6.2": (2, 3, ["u6/test_pears", "u6/test_lizard", "u6/test_plane",
+                     "u6/test_crocodile", "u6/test_bikes", "u6/test_dogs"], CARD, 82),
+    "ЛТ3.2": (1, 3, ["u3/test_dogs", "u3/test_dog_desk", "u3/test_cat"], CARD, 82),
+    "Л6.2": (1, 1, ["u6/haunted_house"], SCENE, 80),
+    "Л7.1": (3, 3, ["u7/clothes_tshirt", "u7/clothes_sweater", "u7/clothes_jacket",
+                    "u7/clothes_skirt", "u7/clothes_shorts", "u7/clothes_jeans",
+                    "u7/clothes_trousers", "u7/clothes_socks", "u7/clothes_shoes"], CARD, 82),
 }
 
 # Стоковые картинки тестов, которые по разбору заменяются ячейками уже нарезанных
@@ -77,12 +87,62 @@ def split(profile, parts):
             gaps.append((i - start, start, i)); start = None
     gaps = sorted(sorted(gaps, reverse=True)[:parts - 1], key=lambda g: g[1])
     if len(gaps) < parts - 1:
-        raise SystemExit(f"нашлось {len(gaps) + 1} полос вместо {parts}")
+        # чистого просвета нет (предметы почти касаются) — режем по самому
+        # «тонкому» месту около ожидаемой границы сетки, ±12% ширины
+        span, gaps = hi - lo, []
+        for k in range(1, parts):
+            c = lo + span * k // parts
+            w = span * 12 // 100
+            j = c - w + int(np.argmin(profile[c - w:c + w]))
+            gaps.append((0, j, j + 1))
     cuts = [lo] + [x for g in gaps for x in (g[1], g[2])] + [hi]
     return [(cuts[i], cuts[i + 1]) for i in range(0, len(cuts), 2)]
 
 
+def drop_edge_scraps(mask, share=0.08, k=4):
+    """Обрывок соседа у края ячейки: связное пятно, которое касается края и
+    весит меньше share всего содержимого (хвост крокодила у велосипедов на
+    ЛТ6.2 — он касается травы, поэтому просвета нет). Пятна ищутся на сетке,
+    уменьшенной в k раз, обходом в ширину — без scipy."""
+    h, w = mask.shape
+    hs, ws = (h + k - 1) // k, (w + k - 1) // k
+    pad = np.zeros((hs * k, ws * k), bool)
+    pad[:h, :w] = mask
+    small = pad.reshape(hs, k, ws, k).any(axis=(1, 3))
+    label = np.zeros(small.shape, int)
+    comps, n = [], 0
+    for y0, x0 in zip(*np.where(small)):
+        if label[y0, x0]:
+            continue
+        n += 1
+        label[y0, x0] = n
+        queue, size, edge = [(y0, x0)], 0, False
+        while queue:
+            y, x = queue.pop()
+            size += 1
+            if x in (0, ws - 1) or y in (0, hs - 1):
+                edge = True
+            for yy, xx in ((y - 1, x), (y + 1, x), (y, x - 1), (y, x + 1)):
+                if 0 <= yy < hs and 0 <= xx < ws and small[yy, xx] and not label[yy, xx]:
+                    label[yy, xx] = n
+                    queue.append((yy, xx))
+        comps.append((n, size, edge))
+    total = sum(c[1] for c in comps)
+    drop = [c[0] for c in comps if c[2] and c[1] < total * share]
+    if not drop:
+        return mask
+    gone = np.isin(label, drop).repeat(k, 0).repeat(k, 1)[:h, :w]
+    return mask & ~gone
+
+
 def trim(img, mask, pad=0.03):
+    kept = drop_edge_scraps(mask)
+    if (kept != mask).any():
+        # обрывок мог остаться внутри рамки (трава тянется до края) — белим его
+        a = np.asarray(img).copy()
+        a[mask & ~kept] = 255
+        img = Image.fromarray(a)
+    mask = kept
     ys, xs = np.where(mask)
     y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
     p = int(max(y1 - y0, x1 - x0) * pad)
