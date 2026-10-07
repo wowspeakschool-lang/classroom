@@ -1,47 +1,14 @@
 [
  {
   "grade": 5,
-  "module": "Starter",
-  "lesson": "",
-  "category": "Числительные",
-  "topic": "Cardinal numbers",
-  "scope": "Количественные числительные 1–10; счёт, простые примеры сложения/вычитания (plus, minus, equals).",
-  "example": "",
-  "comment": "Впервые в 5 кл (повторение из нач. школы). Дальше: 11–20 (1b), 21–100 (2c).",
-  "source": "ToC, Word List"
- },
- {
-  "grade": 5,
-  "module": "Starter",
-  "lesson": "",
-  "category": "Предложение и вопросы",
-  "topic": "Question words",
-  "scope": "Речевые вопросы Starter: What's your name? How are you? How old are you? Where are you from? How do you spell it?",
-  "example": "How old are you?",
-  "comment": "Только как речевые клише; полный список вопросительных слов — в The Language of Grammar (what, when, where, who, whose, why).",
-  "source": "Word List"
- },
- {
-  "grade": 5,
-  "module": "Starter",
-  "lesson": "",
-  "category": "Предложение и вопросы",
-  "topic": "Let's",
-  "scope": "Let's + глагол как клише: Let's go!",
-  "example": "Let's go!",
-  "comment": "Только клише в Starter; как функция «предложение» — 6c / English in Use 6.",
-  "source": "Word List"
- },
- {
-  "grade": 5,
   "module": "Module 1 · School days",
   "lesson": "1a",
   "category": "Предложение и вопросы",
   "topic": "Imperative",
-  "scope": "Повелительное наклонение: утвердительная форма (= инфинитив без to) и отрицательная Don't + глагол; школьные объявления и classroom language.",
+  "scope": "Повелительное наклонение (введение): форма = инфинитив без to (Stand up!), отрицание Do not/Don't + инфинитив (Don't come in!).",
   "example": "Open your books.",
-  "comment": "проверить: в ToC «Imperative» стоит между строками Starter и 1a (OCR склеил колонки) — может относиться к Starter (classroom language). Полностью в GR дано в Module 4 (4b).",
-  "source": "ToC"
+  "comment": "Впервые. Полный раздел справочника (обращение ко 2 лицу, значения: приказ, инструкция, предложение/просьба, please) — в разделе Module 4, см. 4b.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -49,21 +16,10 @@
   "lesson": "1a",
   "category": "Существительные и артикли",
   "topic": "a/an",
-  "scope": "Неопределённый артикль: a перед согласным звуком, an перед гласным; только с исчисляемыми в ед. числе.",
-  "example": "a notebook, an eraser",
-  "comment": "Впервые. Расширение до a/an/some/any — 8b; a/an – the – zero article — 9a.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 5,
-  "module": "Module 1 · School days",
-  "lesson": "1b",
-  "category": "Числительные",
-  "topic": "Cardinal numbers",
-  "scope": "Числительные 11–20 (eleven … twenty).",
-  "example": "",
-  "comment": "Продолжение Starter (1–10).",
-  "source": "ToC, Word List"
+  "scope": "Неопределённый артикль: a — перед исчисляемыми существительными в ед. числе, начинающимися с согласной (b, d, p и т.д.); an — перед исчисляемыми в ед. числе, начинающимися с гласной (a, e, i, o, u).",
+  "example": "a notebook, a pen; an area, an eraser",
+  "comment": "Впервые. Справочник формулирует правило по букве (согласная/гласная). Расширение: a/an/some/any — 8b; a/an – the – нулевой артикль — 9a.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -71,10 +27,10 @@
   "lesson": "1b",
   "category": "Местоимения",
   "topic": "Personal pronouns (subject)",
-  "scope": "Личные местоимения в им. падеже: I, you, he, she, it, we, you, they; I всегда с заглавной; you — ед. и мн. ч.; it — для неодушевлённых, животных, абстрактных; they — мн. ч.",
+  "scope": "Личные местоимения в именительном падеже: I, you, he, she, it; we, you, they — употребляются как подлежащее перед глаголом вместо существительного. Примечания справочника: I всегда пишется с прописной буквы; you — одинаково для 2 лица ед. и мн. числа; he/she — об одушевлённых; it — о неодушевлённых существительных, абстрактных понятиях, животных; they — о существительных во мн. числе.",
   "example": "",
-  "comment": "В GR описано в Module 2. Объектные местоимения — 4a.",
-  "source": "ToC, GR"
+  "comment": "Впервые. В справочнике — в разделе Module 2. Объектный падеж — 4a.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -82,10 +38,10 @@
   "lesson": "1b",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "to be (Present)",
-  "scope": "am/is/are, все лица ед. и мн. ч.; + (полные и краткие формы I'm, you're, he's…), − (I'm not, you aren't, he isn't…), ? (Am I…? Are you…? Is he…?), краткие ответы Yes, I am./No, I'm not. и т.д.",
-  "example": "Is she …? — Yes, she is.",
-  "comment": "Полностью: все формы и краткие ответы. В GR — раздел Module 2.",
-  "source": "ToC, GR"
+  "scope": "Глагол to be (быть, находиться, являться), все лица ед. и мн. числа: + полные и краткие формы (I am/I'm, you are/you're, he is/he's, she is/she's, it is/it's, we/you/they are/'re); − (I'm not, you aren't, he/she/it isn't, we/you/they aren't); ? (Am I...? Are you...? Is he/she/it...? Are we/you/they...?); краткие ответы Yes, I am. / No, I'm not.; Yes, he is. / No, he isn't.; Yes, we are. / No, we aren't.",
+  "example": "",
+  "comment": "Впервые, полный объём. В справочнике — в разделе Module 2.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -93,21 +49,10 @@
   "lesson": "1b",
   "category": "Предложение и вопросы",
   "topic": "Alternative questions",
-  "scope": "Альтернативные (or-) вопросы: строятся как общие вопросы + or; в GR — примеры с to be, have got, Present Simple.",
+  "scope": "Альтернативные вопросы (вопросы выбора, or-questions): строятся так же, как общие вопросы (Yes/No questions), во всех временных формах, с союзом or.",
   "example": "Are you a teacher or a doctor?",
-  "comment": "В ToC «or-questions» (1b); повторно — 5b с Present Simple.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 5,
-  "module": "Module 1 · School days",
-  "lesson": "1c",
-  "category": "Предложение и вопросы",
-  "topic": "Capital letters & punctuation",
-  "scope": "Заглавные буквы (имена, страны, языки, I, начало предложения) и точка (full stop) — в заполнении анкеты.",
-  "example": "",
-  "comment": "Раздел письма, не грамматики; проверить точный объём правил.",
-  "source": "ToC, Word List"
+  "comment": "Впервые. Примеры справочника охватывают to be, have got и Present Simple (Have you got a brother or a sister? Does he work or does he go to school?). Повторение с Present Simple — 5b.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -115,10 +60,10 @@
   "lesson": "2a",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "have got",
-  "scope": "have got / has got: все лица; + (полные и краткие формы I've got, he's got), − (haven't/hasn't got), ? (Have I/you/we/they got? Has he/she/it got?), краткие ответы Yes, I have./No, he hasn't. Значение: иметь, владеть; внешность; родственники.",
+  "scope": "have got — иметь, владеть, обладать. Все лица: + have got/'ve got (I, you, we, they), has got/'s got (he, she, it); − haven't got / hasn't got; ? Have I/you/we/they got? Has he/she/it got?; краткие ответы Yes, I/you/we/they have. / No, ... haven't.; Yes, he/she/it has. / No, ... hasn't.",
   "example": "I've got three brothers.",
-  "comment": "Полный объём сразу (все лица, все формы).",
-  "source": "ToC, GR"
+  "comment": "Впервые, полный объём (все лица, все формы). Примеры справочника: предмет (He has got a pencil), внешность (She has got black hair), родственники.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -126,21 +71,10 @@
   "lesson": "2a",
   "category": "Словообразование",
   "topic": "Word formation",
-  "scope": "Прилагательные/существительные национальности от названий стран: -an (American), -ish (British), -ian (Canadian, Australian), -ese (Japanese).",
-  "example": "Canada – Canadian",
-  "comment": "",
-  "source": "ToC, Word List"
- },
- {
-  "grade": 5,
-  "module": "Module 2 · That's me!",
-  "lesson": "2a",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "find out — выяснять.",
+  "scope": "Существительные/прилагательные национальности с суффиксами -an, -ish, -ian, -ese (по оглавлению: word formation (-an, -ish, -ian, -ese)).",
   "example": "",
-  "comment": "Единственный фразовый глагол модуля (по Word List).",
-  "source": "Word List"
+  "comment": "в доступных страницах только заголовок из оглавления",
+  "source": "ToC"
  },
  {
   "grade": 5,
@@ -148,10 +82,10 @@
   "lesson": "2b",
   "category": "Существительные и артикли",
   "topic": "Plurals (regular)",
-  "scope": "Мн. число: +s (doll – dolls); +es после -s, -ss, -sh, -ch, -x, -o (buses, classes, matches, foxes); гласная+y → +s (toys); согласная+y → -ies (ladies); -f/-fe → -ves (lives, scarves). Произношение окончания /s/, /z/, /ɪz/.",
-  "example": "a fox – foxes",
-  "comment": "Впервые с полным набором правил орфографии.",
-  "source": "ToC, GR"
+  "scope": "Множественное число существительных: большинство + -s (a doll – two dolls); после -s, -ss, -sh, -ch, -x, -o + -es (bus – buses, class – classes, toothbrush – toothbrushes, match – matches, fox – foxes); гласная + y → + -s (toy – toys); согласная + y → y на i + -es (lady – ladies); -f/-fe → v + -es (life – lives, scarf – scarves).",
+  "example": "a lady – two ladies",
+  "comment": "Впервые. Произношение -(e)s — в оглавлении (Listening & Pronunciation 2b), в справочнике нет.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -159,10 +93,10 @@
   "lesson": "2b",
   "category": "Существительные и артикли",
   "topic": "Plurals (irregular)",
-  "scope": "Исключения: child – children, woman – women, man – men, foot – feet, tooth – teeth, mouse – mice. Только мн. ч.: shorts, jeans, pyjamas, scissors, clothes, glasses.",
-  "example": "a tooth – teeth",
-  "comment": "",
-  "source": "GR"
+  "scope": "Исключения: child – children, woman – women, man – men, foot – feet, tooth – teeth, mouse – mice. Существительные, имеющие только форму мн. числа: shorts, jeans, pyjamas, scissors, clothes, glasses.",
+  "example": "Glasses are helpful if you can't see well.",
+  "comment": "Впервые.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -170,65 +104,10 @@
   "lesson": "2b",
   "category": "Местоимения",
   "topic": "Demonstratives (this/that/these/those)",
-  "scope": "this – these (близко), that – those (далеко); This is … / These are … / That is … / Those are …",
+  "scope": "this – these (этот – эти), that – those (тот – те): This is a ball. / These are balls. That is a ball. / Those are balls.",
   "example": "These are balls.",
-  "comment": "Только утвердительные предложения в GR.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 5,
-  "module": "Module 2 · That's me!",
-  "lesson": "2c",
-  "category": "Числительные",
-  "topic": "Cardinal numbers",
-  "scope": "Числительные 21–100 (twenty-one … a hundred).",
-  "example": "thirty",
-  "comment": "Продолжение 1b (11–20).",
-  "source": "ToC, Word List"
- },
- {
-  "grade": 5,
-  "module": "Module 2 · That's me!",
-  "lesson": "2c",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Dependent prepositions",
-  "scope": "be proud of — гордиться чем-либо/кем-либо.",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
- },
- {
-  "grade": 5,
-  "module": "Module 3 · My home, my castle",
-  "lesson": "3a",
-  "category": "Числительные",
-  "topic": "Ordinal numbers",
-  "scope": "Порядковые числительные 1st–20th (first, second, third …); этажи (on the first floor).",
-  "example": "on the second floor",
-  "comment": "Впервые; только до 20-го. В ToC стоит в колонке рядом с Grammar — проверить, грамматика или лексика.",
-  "source": "ToC, Word List"
- },
- {
-  "grade": 5,
-  "module": "Module 3 · My home, my castle",
-  "lesson": "3a",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Collocations / Fixed phrases",
-  "scope": "a block of flats; number (of); high up.",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
- },
- {
-  "grade": 5,
-  "module": "Module 3 · My home, my castle",
-  "lesson": "3b",
-  "category": "Словообразование",
-  "topic": "Word formation",
-  "scope": "Сложные существительные (compound nouns): существительное + существительное (bedroom, bookcase и т.п.).",
-  "example": "",
-  "comment": "Примеры не видны в OCR — проверить список.",
-  "source": "ToC"
+  "comment": "Впервые. Значение близко/далеко справочник не формулирует — только перевод.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -236,10 +115,10 @@
   "lesson": "3b",
   "category": "Предложение и вопросы",
   "topic": "There is / There are",
-  "scope": "There is (There's) + ед. ч., There are + мн. ч. (some); − There isn't a…/There aren't any…; ? Is there a…? Are there any…? Значение: наличие предмета в месте; перевод начинается с обстоятельства места.",
+  "scope": "Конструкция there is/there are — сообщение о наличии лица/предмета в определённом месте; перевод обычно начинается с обстоятельства места. Ед. число: + There is/There's a chair; − There isn't a chair; ? Is there a chair? Мн. число: + There are some chairs; − There aren't any chairs; ? Are there any chairs?",
   "example": "There are a lot of trees in the park.",
-  "comment": "Кратких ответов в GR нет. some/any здесь — только как часть конструкции; подробно — 8b.",
-  "source": "ToC, GR"
+  "comment": "Впервые. Кратких ответов в справочнике нет. some/any здесь только в составе конструкции; отдельно — 8b.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -247,10 +126,21 @@
   "lesson": "3b",
   "category": "Местоимения",
   "topic": "Possessive adjectives",
-  "scope": "my, your, his, her, its, our, your, their; принадлежность и отношения между людьми; обязательны с частями тела, одеждой, родственниками (Raise your hands).",
-  "example": "Peter is her father.",
-  "comment": "Впервые. Повторяются в 4a в паре с объектными местоимениями. Абсолютная форма (mine…) не дана — 6 кл.",
-  "source": "ToC, GR"
+  "scope": "Притяжательные местоимения (possessive adjectives): my, your, his, her, its (о неодушевлённом); our, your, their. Указывают на принадлежность (This is my book) и на отношения между людьми (Peter is her father). В английском употребляются чаще, чем в русском: обязательны при существительных, обозначающих части тела, предметы одежды и родственные отношения.",
+  "example": "Raise your hands. Please, take off your coats.",
+  "comment": "Впервые. Сопоставление с объектными местоимениями — 4a. Абсолютная форма (mine, yours...) в 5 кл. не дана.",
+  "source": "GR, ToC"
+ },
+ {
+  "grade": 5,
+  "module": "Module 3 · My home, my castle",
+  "lesson": "3b",
+  "category": "Словообразование",
+  "topic": "Word formation",
+  "scope": "Сложные существительные (compound nouns).",
+  "example": "",
+  "comment": "в доступных страницах только заголовок из оглавления",
+  "source": "ToC"
  },
  {
   "grade": 5,
@@ -258,21 +148,10 @@
   "lesson": "3c",
   "category": "Предлоги",
   "topic": "Prepositions of place",
-  "scope": "on, under, in, in front of, behind, next to. Устойчивые: at school/university/college, at work, at home, at 20 Oxford Street; in the middle/air/sky, in bed, in hospital, in prison, in a newspaper/magazine/picture, in + город/страна/континент; on the left/right, on the first floor.",
+  "scope": "Предлоги места: on (на), under (под), in (в), in front of (перед), behind (за), next to (рядом). Устойчивые выражения: at — at school/university/college, at work, at home; в адресах перед номером дома (at 20, Oxford Street); in — in the middle, in the air, in the sky, in bed, in hospital, in prison, in a newspaper/magazine, in a picture; с названиями городов, стран, континентов (in Athens, in England, in Europe, in Australia); on — on the left, on the right, on the first (second и т.д.) floor.",
   "example": "",
-  "comment": "проверить: в ToC «prepositions of place» стоит между 3b и 3c — отнесено к 3c (asking about location).",
-  "source": "ToC, GR"
- },
- {
-  "grade": 5,
-  "module": "Module 3 · My home, my castle",
-  "lesson": "",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Dependent prepositions",
-  "scope": "be made of — быть сделанным из (Across the Curriculum 3: Art & Design).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "comment": "Впервые.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -280,10 +159,10 @@
   "lesson": "4a",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "can (ability)",
-  "scope": "can/can't: все лица одной формой; + can read, − can't read, ? Can you read?, краткие ответы Yes, I can./No, I can't. Значение: умение/способность; после can — глагол без to.",
+  "scope": "Модальный глагол can — умение, способность. Все лица одинаково: + I/you/he/she/it/we/you/they can read; − can't read; ? Can I/you/he... read?; краткие ответы Yes, ... can. / No, ... can't. can не изменяется по лицам и числам, после него смысловой глагол без частицы to.",
   "example": "I can play the piano.",
-  "comment": "Только ability. Разрешение/запрет — 10a.",
-  "source": "ToC, GR"
+  "comment": "Впервые. Значения разрешения/просьбы/предложения/запрета — 10a.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -291,10 +170,10 @@
   "lesson": "4a",
   "category": "Местоимения",
   "topic": "Object pronouns",
-  "scope": "me, you, him, her, it, us, you, them; функция дополнения, употребление с предлогами (to me, about me); таблица: личные – объектные – притяжательные.",
+  "scope": "Личные местоимения в объектном падеже: me, you, him/her/it, us, you, them (таблица вместе с личными в именит. падеже и притяжательными my, your, his/her/its, our, your, their). Объектный падеж соответствует всем косвенным падежам русского, может употребляться с предлогами (me, to me, about me). Функции: именительный — подлежащее (He can dance well), объектный — дополнение (Look at him!), притяжательные — определение перед существительным (This is his umbrella).",
   "example": "Look at him!",
-  "comment": "Впервые. В паре с possessive adjectives (повторение 3b).",
-  "source": "ToC, GR"
+  "comment": "Впервые. Притяжательные местоимения (possessive adjectives) повторяются из 3b в общей таблице.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -302,21 +181,10 @@
   "lesson": "4b",
   "category": "Существительные и артикли",
   "topic": "Possessive case ('s)",
-  "scope": "'s для одушевлённых (Jim's room); s' / 's после -s в ед. ч. (Doris's/Doris' dress); ' после мн. ч. на -s (the boys' toys); 's после неправ. мн. ч. (the children's room); of для неодушевлённых (the windows of the house); магазины (at the chemist's). Вопрос Whose? — It's Peter's.",
-  "example": "Whose is the guitar? It's Peter's.",
-  "comment": "Впервые, полный объём.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 5,
-  "module": "Module 4 · Family ties",
-  "lesson": "4b",
-  "category": "Предложение и вопросы",
-  "topic": "Question words",
-  "scope": "Whose? — чей? (с притяжательным падежом).",
-  "example": "Whose are the cookies?",
-  "comment": "",
-  "source": "ToC, GR"
+  "scope": "Притяжательный падеж: значения — принадлежность (John's ball), отношения между людьми (Linda's sister); в названиях магазинов и учреждений (at the chemist's). Образование: 's для одушевлённых (Jim's room, the girl's guitar); для неодушевлённых — предлог of (the windows of the house); имена в ед. ч. на -s — 's или только апостроф (Doris's dress / Doris' dress); мн. ч. на -s — только апостроф (the boys' toys); мн. ч.-исключения — 's (the women's dresses, the children's room). Вопрос Whose?: Whose is the guitar? It's Peter's.",
+  "example": "Whose are the cookies? They're Sally's.",
+  "comment": "Впервые. Вопрос whose дан в этом же разделе.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -324,21 +192,10 @@
   "lesson": "4b",
   "category": "Предложение и вопросы",
   "topic": "Imperative",
-  "scope": "Утвердительная форма = инфинитив без to; отрицательная Do not/Don't + инфинитив; обращено ко 2-му лицу; значения: приказ (Be quiet!), инструкция (Press the button…), предложение/просьба (Have some orange juice; Sit down, please).",
-  "example": "Don't come in!",
-  "comment": "Полное описание в GR — Module 4. Первое появление — 1a (проверить).",
-  "source": "ToC, GR"
- },
- {
-  "grade": 5,
-  "module": "Module 4 · Family ties",
-  "lesson": "4d",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Dependent prepositions",
-  "scope": "be afraid (of) — бояться (чего-либо); all over the (world).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "scope": "Повелительное наклонение: форма = инфинитив без to (Stand up!); отрицание — Do not/Don't + инфинитив (Don't come in!); всегда обращено ко 2 лицу ед. или мн. числа (Open your books). Значения: приказание (Be quiet!), инструкция (Press the button on the left), предложение/просьба (Have some orange juice); вежливость — please в начале или в конце (Sit down, please! / Please sit down!).",
+  "example": "Be quiet!",
+  "comment": "Повторение и расширение после 1a: полный раздел справочника.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -346,9 +203,9 @@
   "lesson": "",
   "category": "Словообразование",
   "topic": "Word formation",
-  "scope": "Прилагательные с суффиксом -ful (Across the Curriculum: Literature, p. 63).",
+  "scope": "Прилагательные с суффиксом -ful.",
   "example": "",
-  "comment": "Примеры в OCR не видны.",
+  "comment": "в доступных страницах только заголовок из оглавления; в оглавлении — в доп. разделах модуля 4 (Across the Curriculum, с. 63), не в уроке a–c",
   "source": "ToC"
  },
  {
@@ -357,10 +214,10 @@
   "lesson": "5a",
   "category": "Глаголы: времена",
   "topic": "Present Simple",
-  "scope": "Утвердительная форма: I/you/we/they work, he/she/it works. Правила -s/-es: +s (eats), +es после -ss, -sh, -ch, -x, -o (washes, does), согласная+y → -ies (carries), гласная+y → +s (plays); произношение /s/, /z/, /ɪz/. Значения: регулярные/повседневные действия, состояния/постоянные действия, законы природы. Сигнальные слова: every day/week/month/year, at night, in the morning/afternoon/evening, on Mondays, наречия частотности.",
-  "example": "He lives in Russia.",
-  "comment": "Впервые как тема. Отрицание и вопросы — 5b.",
-  "source": "ToC, GR"
+  "scope": "Утвердительная форма: I/you/we/they work; he/she/it works (в 3 л. ед. ч. + -s). Правила правописания: большинство + -s (eat – eats); после -ss, -sh, -ch, -x, -o + -es (wash – washes, do – does); согласная + y → i + -es (carry – carries); гласная + y → + -s (play – plays). Употребление: регулярно повторяющиеся, повседневные действия; состояния или постоянные действия; непреложные истины и законы природы. Указатели времени: every day/week/month/year, at night, in the morning/afternoon/evening, on Monday(s), Tuesday(s), наречия частотности (never, sometimes, often, usually, always).",
+  "example": "The sun rises in the east.",
+  "comment": "Впервые. Отрицание и вопросы — 5b. Произношение -(e)s /s/, /z/, /ɪz/ — только в оглавлении (Listening & Pronunciation 5a), в справочнике нет.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -368,9 +225,9 @@
   "lesson": "5a",
   "category": "Словообразование",
   "topic": "Word formation",
-  "scope": "Прилагательные с суффиксом -al (nature – natural и т.п.).",
+  "scope": "Прилагательные с суффиксом -al.",
   "example": "",
-  "comment": "Примеры в OCR не видны — проверить.",
+  "comment": "в доступных страницах только заголовок из оглавления",
   "source": "ToC"
  },
  {
@@ -379,10 +236,10 @@
   "lesson": "5b",
   "category": "Глаголы: времена",
   "topic": "Present Simple",
-  "scope": "Отрицание: I/you/we/they don't work, he/she/it doesn't work; вопрос: Do I/you/we/they work? Does he/she/it work?; краткие ответы Yes, I do./No, he doesn't.; -s не добавляется при does/doesn't.",
-  "example": "Bill doesn't like bananas.",
-  "comment": "Продолжение 5a: полный объём форм.",
-  "source": "ToC, GR"
+  "scope": "Отрицательная форма: I/you/we/they don't work; he/she/it doesn't work. Вопросительная: Do I/you/we/they work? Does he/she/it work? Краткие ответы: Yes, I/you/we/they do. / No, ... don't.; Yes, he/she/it does. / No, ... doesn't. Образование от инфинитива; в вопросах и отрицаниях вспомогательный do/don't (I, you, we, they) и does/doesn't (he, she, it); -s не добавляется к смысловому глаголу при does/doesn't.",
+  "example": "Bill (he) doesn't like bananas.",
+  "comment": "Расширение 5a: полная парадигма.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -390,10 +247,10 @@
   "lesson": "5b",
   "category": "Предложение и вопросы",
   "topic": "Alternative questions",
-  "scope": "Альтернативные вопросы в Present Simple: Does … or …?",
+  "scope": "Альтернативные вопросы в Present Simple: строятся как общие вопросы, но с союзом or.",
   "example": "Does Ann walk her dog in the morning or in the afternoon?",
-  "comment": "Повторение 1b.",
-  "source": "ToC, GR"
+  "comment": "Повторение из 1b, применение к Present Simple.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -401,32 +258,10 @@
   "lesson": "5c",
   "category": "Предложение и вопросы",
   "topic": "Question tags",
-  "scope": "Разделительные вопросы: вспомогательный/модальный глагол или be из основной части + местоимение; утверждение → отрицательный хвост, отрицание → положительный. С Present Simple (don't you?/does he?), to be (isn't she?), can (can't she?), there is (is there?), this is (isn't it?).",
+  "scope": "Разделительные вопросы — вопрос в конце высказывания, в основном в разговорной речи. Образуются вспомогательным глаголом того времени, в котором стоит сказуемое, + личное местоимение, соответствующее подлежащему (You like summer, don't you? Crocodiles swim in rivers, don't they?). Если сказуемое — модальный глагол (can и др.) или be, в вопросе используются сами эти глаголы (Your grandma can cook very well, can't she? Jane is from England, isn't she?). Утвердительное предложение → отрицательный хвост (This is a bicycle, isn't it?); отрицательное → утвердительный хвост (He doesn't like rain, does he? There is no TV in the living room, is there?).",
   "example": "You like summer, don't you?",
-  "comment": "В ToC — «Present Simple: tag-questions» (5c), ещё раз «tag-questions» рядом с 7a (проверить).",
-  "source": "ToC, GR"
- },
- {
-  "grade": 5,
-  "module": "Module 5 · World animals",
-  "lesson": "",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "buzz around — жужжать (Across the Curriculum 5: Science).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
- },
- {
-  "grade": 5,
-  "module": "Module 5 · World animals",
-  "lesson": "5c",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Collocations / Fixed phrases",
-  "scope": "take (a dog) for walks; make good pets.",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "comment": "Впервые. В оглавлении — Present Simple: tag-questions (5c); справочник даёт общее правило (be, can, Present Simple, there is). Повторение — 7a.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -434,10 +269,10 @@
   "lesson": "6a",
   "category": "Прилагательные и наречия",
   "topic": "Adverbs of frequency",
-  "scope": "never, sometimes, often, usually, always; место: перед смысловым глаголом, но после to be, вспомогательных и модальных (can, do).",
+  "scope": "Наречия частотности: never (никогда), sometimes (иногда), often (часто), usually (обычно), always (всегда). Употребляются с Present Simple, показывают, как часто происходит действие. Место: перед смысловым глаголом, но после to be, а также после вспомогательных и модальных глаголов (can, do и т.д.).",
   "example": "She is always happy.",
-  "comment": "Без seldom/rarely (они — 6 кл).",
-  "source": "ToC, GR"
+  "comment": "Впервые как тема (в списке сигнальных слов Present Simple — 5a). Примеры справочника: I usually sleep long on Sundays. He doesn't often read newspapers. He can never sleep in the afternoon.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -445,21 +280,10 @@
   "lesson": "6a",
   "category": "Предлоги",
   "topic": "Prepositions of time",
-  "scope": "AT: время (at 7 o'clock), праздники (at Christmas/Easter, at the weekend), at the moment/present/dawn/noon/night/midnight. ON: дни (on Monday, on New Year's Day), даты (on 6th May), on Tuesday evening, on a hot day. IN: месяцы, времена года, годы, века, in the morning/afternoon/evening, in an hour/a minute/a week (через).",
+  "scope": "AT: время (at 7 o'clock); праздники (at Christmas, at Easter, at the weekend); выражения at the moment, at present, at dawn, at noon, at night, at midnight. ON: дни (on Monday, on New Year's Day); даты (on 6th May); время дня с указанием дня недели (on Tuesday evening); прилагательное + day (on a hot day). IN: месяцы (in September); времена года (in the winter/spring/autumn); годы (in 1996); века (in the 20th century); выражения in the morning/afternoon/evening; in an hour, in a minute, in a week/few days/month/year (через).",
   "example": "on Tuesday evening",
-  "comment": "Впервые, полная таблица at/on/in.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 5,
-  "module": "Module 6 · Round the clock",
-  "lesson": "6a",
-  "category": "Числительные",
-  "topic": "Telling the time",
-  "scope": "Время: at … o'clock, half past seven, quarter past seven, quarter to seven; What's the time? (asking/telling the time).",
-  "example": "quarter to seven",
-  "comment": "",
-  "source": "ToC, Word List"
+  "comment": "Впервые.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -467,32 +291,10 @@
   "lesson": "6a",
   "category": "Словообразование",
   "topic": "Word formation",
-  "scope": "Наречия с суффиксом -ly от прилагательных (quick – quickly).",
+  "scope": "Наречия с суффиксом -ly.",
   "example": "",
-  "comment": "",
+  "comment": "в доступных страницах только заголовок из оглавления",
   "source": "ToC"
- },
- {
-  "grade": 5,
-  "module": "Module 6 · Round the clock",
-  "lesson": "6a",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "get up — вставать; wake up — просыпаться.",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
- },
- {
-  "grade": 5,
-  "module": "Module 6 · Round the clock",
-  "lesson": "6a",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Collocations / Fixed phrases",
-  "scope": "Распорядок дня: get dressed, go to bed, go to school, do homework, go shopping, go jogging, at … o'clock; 6b do a crossword; 6c make phone calls.",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
  },
  {
   "grade": 5,
@@ -500,10 +302,10 @@
   "lesson": "6b",
   "category": "Глаголы: времена",
   "topic": "Present Continuous",
-  "scope": "am/is/are + V-ing; все лица; + (краткие формы), − (I'm not, isn't, aren't), ?, краткие ответы. Орфография -ing: -e опускается (dancing); удвоение согласной в односложных (shopping, running); удвоение -l (travelling); -ie → -ying (lying). Значения: действие в момент речи; действие в текущий период (He's writing a book).",
+  "scope": "Образование: am/is/are + глагол с -ing. Все лица: + I am/I'm, you are/you're, he/she/it is/'s, we/you/they are/'re sleeping; − I'm not, you aren't, he/she/it isn't, we/you/they aren't sleeping; ? Am I / Are you / Is he/she/it / Are we/you/they sleeping?; краткие ответы Yes, I am. / No, I'm not.; Yes, you are. / No, you're not.; Yes, he/she/it is. / No, ... isn't.; Yes, we/you/they are. / No, ... aren't. Орфография -ing: -e опускается (dance – dancing); односложные с гласной между двумя согласными — удвоение (shop – shopping, run – running); на -l — удвоение l (travel – travelling); -ie → y (lie – lying, die – dying). Употребление: действия в момент речи; действия в настоящий период времени, не обязательно в момент речи.",
   "example": "He's doing his homework now.",
-  "comment": "Впервые. Значение «будущее (планы)» не дано — 6 кл. Отработка продолжается в 6c (Weekends — what your family are doing).",
-  "source": "ToC, GR"
+  "comment": "Впервые. Сигнальные слова в справочнике 5 кл. не перечислены (только now в примере). Сопоставление с Present Simple — 7b.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -511,43 +313,21 @@
   "lesson": "6b",
   "category": "Словообразование",
   "topic": "Word formation",
-  "scope": "Существительные-профессии: -er/-or (teacher, actor), -man (postman), -ist (artist), -ic (mechanic).",
-  "example": "teach – teacher",
-  "comment": "",
-  "source": "ToC"
- },
- {
-  "grade": 5,
-  "module": "Module 6 · Round the clock",
-  "lesson": "6c",
-  "category": "Предложение и вопросы",
-  "topic": "Let's",
-  "scope": "Предложения (making suggestions): Let's …; dialogues making suggestions.",
+  "scope": "Существительные (названия профессий) с суффиксами -er/-or, -man, -ist, -ic.",
   "example": "",
-  "comment": "Функция; конкретные структуры в OCR не видны — проверить (Shall we/How about?).",
+  "comment": "в доступных страницах только заголовок из оглавления",
   "source": "ToC"
- },
- {
-  "grade": 5,
-  "module": "Module 6 · Round the clock",
-  "lesson": "6d",
-  "category": "Прилагательные и наречия",
-  "topic": "Comparatives & Superlatives",
-  "scope": "Степени сравнения наречий: -er/-est у наречий-прилагательных (fast, early, late, high, near; hard – harder – hardest); more/most у многосложных (slowly – more slowly – most slowly); исключения well – better – best, badly – worse – worst, much – more – most, little – less – least.",
-  "example": "hard – harder – hardest",
-  "comment": "Дано в Culture Corner (p. 81) как «Adverbs: comparatives». Прилагательные — модуль 7.",
-  "source": "ToC, GR"
  },
  {
   "grade": 5,
   "module": "Module 6 · Round the clock",
   "lesson": "",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "move around — вращаться вокруг (Across the Curriculum 6: Science).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "category": "Прилагательные и наречия",
+  "topic": "Comparatives & Superlatives",
+  "scope": "Степени сравнения наречий: наречия, совпадающие по форме с прилагательными (fast, early, late, high, near), + -er/-est (hard – harder – hardest); двусложные и многосложные — more/most (slowly – more slowly – most slowly). Исключения: good/well – better – best; bad/badly – worse – worst; much – more – most; many/lots – more – most; little – less – least.",
+  "example": "slowly – more slowly – most slowly",
+  "comment": "Впервые. В оглавлении — «Adverbs: comparatives» в доп. разделах модуля 6 (рядом с Culture Corner, с. 81), не в уроке a–c. Степени сравнения прилагательных — модуль 7.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -555,10 +335,10 @@
   "lesson": "7a",
   "category": "Предложение и вопросы",
   "topic": "It-sentences (impersonal it)",
-  "scope": "Безличные предложения с формальным it: время (It is 6 o'clock. It's late.), расстояние (It is five miles from here.), погода/явления природы (It's freezing. It's raining.). What's the weather like in …?",
-  "example": "It's freezing.",
+  "scope": "Безличные предложения с формальным подлежащим it (на русский не переводится) — для обозначения времени (It is 6 o'clock. It's late.), расстояния (It is five miles from here.), явлений природы (It's freezing.).",
+  "example": "It's late.",
   "comment": "Впервые.",
-  "source": "ToC, GR, Word List"
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -566,21 +346,10 @@
   "lesson": "7a",
   "category": "Предложение и вопросы",
   "topic": "Question tags",
-  "scope": "Повторение разделительных вопросов (в ToC «tag-questions» в строке 7a).",
+  "scope": "Повторение разделительных вопросов (правила — в разделе справочника Module 5, см. 5c).",
   "example": "",
-  "comment": "проверить: строка ToC может относиться к 6c или 7a; основное — 5c.",
-  "source": "ToC"
- },
- {
-  "grade": 5,
-  "module": "Module 7 · In all weathers",
-  "lesson": "7a",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Dependent prepositions",
-  "scope": "be fed up with sth — устать от чего-либо; at the moment; go swimming.",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "comment": "Повторение из 5c; нового в справочнике нет.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -588,43 +357,10 @@
   "lesson": "7b",
   "category": "Глаголы: времена",
   "topic": "Present Simple vs Present Continuous",
-  "scope": "Present Simple — регулярные действия, привычки, постоянные состояния; Present Continuous — действие в момент речи или временное действие.",
+  "scope": "Present Simple — регулярные и повседневные действия (Sarah wakes up at 7 o'clock), привычки (He walks to the supermarket), состояния/постоянные действия (He lives near the train station). Present Continuous — действия в момент речи (Peter is playing computer games at the moment) и действия временного характера (She's studying History at university).",
   "example": "Peter is playing computer games at the moment.",
-  "comment": "Противопоставление впервые. Stative verbs не даны (6 кл).",
-  "source": "ToC, GR"
- },
- {
-  "grade": 5,
-  "module": "Module 7 · In all weathers",
-  "lesson": "7b",
-  "category": "Прилагательные и наречия",
-  "topic": "Adjectives (opposites)",
-  "scope": "Прилагательные-антонимы (одежда): напр. long – short, heavy – light.",
-  "example": "",
-  "comment": "Лексика; конкретный список в OCR не виден — проверить.",
-  "source": "ToC"
- },
- {
-  "grade": 5,
-  "module": "Module 7 · In all weathers",
-  "lesson": "7b",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "get on — садиться (в транспорт); hang up — вешать трубку; put on — надевать. Across the Curriculum 7: blow away — уносить (ветром), go away — уходить, go up — подниматься.",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
- },
- {
-  "grade": 5,
-  "module": "Module 7 · In all weathers",
-  "lesson": "7c",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Collocations / Fixed phrases",
-  "scope": "go on foot (7b); go camping, go skiing, have a picnic, make a snowman, play golf (7c); make sure (7d).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "comment": "Впервые как противопоставление. Глаголы состояния (stative verbs) в 5 кл. не даны.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -632,10 +368,10 @@
   "lesson": "",
   "category": "Прилагательные и наречия",
   "topic": "Comparatives & Superlatives",
-  "scope": "Степени сравнения прилагательных: -er/the -est (long – longer – the longest), more/the most (beautiful); сравн. + than (2 объекта), превосх. + of/in (3+). Орфография: удвоение (big – bigger), -e → -r/-st (wise), -y → -ier/-iest (sunny – sunnier). Исключения good, bad, many/much, little.",
+  "scope": "Степени сравнения прилагательных: положительная – сравнительная – превосходная. Односложные: -er / the -est (long – longer – the longest); многосложные: more / the most (beautiful – more beautiful – the most beautiful). Сравнительная + than — сравнение двух (Ben is taller than Emma); превосходная + of/in — сравнение трёх и более (The lion is the strongest animal of all). Орфография: краткий гласный между двумя согласными — удвоение (big – bigger – the biggest); на -e — + -r/-st (wise – wiser – the wisest); на -y — y на i + -er/-est (sunny – sunnier – the sunniest); исключения: good – better – the best; bad – worse – the worst; many/much – more – the most; little – less – the least. Примечание: артикль относится к существительному, следующему за прилагательным.",
   "example": "Ben is taller than Emma.",
-  "comment": "В ToC — «adjectives: comparatives» на странице Across the Curriculum 7 (p. 93). Повторение и расширение — 6 кл (8b).",
-  "source": "ToC, GR"
+  "comment": "Впервые для прилагательных. В оглавлении — «adjectives: comparatives» в доп. разделах модуля 7 (рядом с Across the Curriculum, с. 93), не в уроке a–c. Наречия — модуль 6.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -643,10 +379,10 @@
   "lesson": "8a",
   "category": "Существительные и артикли",
   "topic": "Countable / Uncountable nouns",
-  "scope": "Исчисляемые (ед. и мн. ч.) и неисчисляемые (еда: cheese, sugar, butter, salt, rice, flour; жидкости: water, coffee, tea, milk, juice, lemonade, olive oil); слова-ёмкости: jar, bottle, piece, loaf, cup, bar, glass, kilo, carton, bowl, can, jug, slice, tin, packet (a jar of marmalade). Только мн. ч.: clothes, shorts, jeans, trousers, stairs, scissors.",
+  "scope": "Исчисляемые имеют ед. и мн. число (an orange – two oranges; a notebook – three notebooks). Неисчисляемые не имеют мн. числа: еда (cheese, sugar, butter, salt, rice, flour), жидкости (water, coffee, tea, milk, tomato juice, lemonade, olive oil). Количество с неисчисляемыми: jar, bottle, piece, loaf, cup, bar, glass, kilo, carton, bowl, can, jug, slice, tin, packet (a jar of marmalade, a bottle of olive oil). Существительные без ед. числа: clothes, shorts, jeans, trousers, stairs, scissors.",
   "example": "a bottle of olive oil",
-  "comment": "Впервые. Ёмкости — лексика 8b (containers).",
-  "source": "ToC, GR"
+  "comment": "Впервые.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -654,21 +390,10 @@
   "lesson": "8a",
   "category": "Словообразование",
   "topic": "Word formation",
-  "scope": "Конверсия существительное → глагол (a dress – to dress).",
+  "scope": "Конверсия: глагол от существительного без изменения формы (a dress – to dress).",
   "example": "a dress – to dress",
-  "comment": "",
+  "comment": "в доступных страницах только заголовок из оглавления",
   "source": "ToC"
- },
- {
-  "grade": 5,
-  "module": "Module 8 · Special days",
-  "lesson": "8a",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "dress up — наряжаться. Across the Curriculum 8: keep away — держаться вдали, keep out — не допускать.",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
  },
  {
   "grade": 5,
@@ -676,10 +401,10 @@
   "lesson": "8b",
   "category": "Существительные и артикли",
   "topic": "a/an/some/any",
-  "scope": "a/an — исчисл. ед. ч.; some — утверждение (мн. ч. и неисчисл.); any — отрицание и вопрос. Таблица с There is/are. some/any перед неисчисл. не переводятся, перед исчисл. = «несколько». Can I have some water?",
-  "example": "There is some jam.",
-  "comment": "Some в просьбах дано примером (Can I have some water?), отдельного правила нет.",
-  "source": "ToC, GR"
+  "scope": "Исчисляемые: ед. ч. — There is an apple / There isn't an apple / Is there an apple?; мн. ч. — There are some pencils / There aren't any pencils / Are there any pencils? Неисчисляемые: There is some jam / There isn't any jam / Is there any jam? Some/any перед неисчисляемыми на русский не переводятся (Can I have some water, please?); перед исчисляемыми — «несколько» (There are some apples in the basket).",
+  "example": "There isn't any jam.",
+  "comment": "Расширение a/an (1a) и there is/are (3b). Some в просьбе (Can I have some water?) — только в примере.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -687,10 +412,10 @@
   "lesson": "8b",
   "category": "Существительные и артикли",
   "topic": "much/many/a lot of",
-  "scope": "a lot of — утверждения (исчисл. и неисчисл.); many — исчисл., much — неисчисл. в вопросах и отрицаниях; How many …? How much …?",
-  "example": "How much sugar have you got?",
-  "comment": "",
-  "source": "ToC, GR"
+  "scope": "a lot of — в утверждениях с исчисляемыми и неисчисляемыми (She has got a lot of friends. There's still a lot of juice in the bottle.); many (исчисляемые) и much (неисчисляемые) — в вопросах и отрицаниях; вопросы how many / how much (How much sugar have you got?).",
+  "example": "There are not very many pencils in the bag.",
+  "comment": "Впервые.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -698,21 +423,10 @@
   "lesson": "8b",
   "category": "Существительные и артикли",
   "topic": "a few/a little",
-  "scope": "few (мало)/a few (несколько) — исчисл. мн. ч.; little (мало)/a little (немного) — неисчисл. Противопоставление few/a few, little/a little.",
-  "example": "There are a few eggs in the fridge.",
-  "comment": "Даны обе пары (с артиклем и без).",
-  "source": "ToC, GR"
- },
- {
-  "grade": 5,
-  "module": "Module 8 · Special days",
-  "lesson": "8c",
-  "category": "Прилагательные и наречия",
-  "topic": "Adjectives -ed/-ing",
-  "scope": "Прилагательные на -ing/-ed + существительное (по ToC).",
-  "example": "",
-  "comment": "проверить: в OCR ToC «Adjectives -ing/-ed+noun» у 8c; в GR раздела нет, объём неясен.",
-  "source": "ToC"
+  "scope": "few (мало) / a few (несколько) — с исчисляемыми во мн. числе (There are a few eggs in the fridge. We have got few tomatoes.); little (мало) / a little (немного) — с неисчисляемыми (Put a little sugar into your coffee. There is little milk.). Противопоставление few/a few и little/a little по значению.",
+  "example": "There is little milk. We need more.",
+  "comment": "Впервые.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -720,21 +434,10 @@
   "lesson": "8c",
   "category": "Словообразование",
   "topic": "Word formation",
-  "scope": "Прилагательные с приставкой un- (unhappy, unusual).",
+  "scope": "Прилагательные с приставкой un-.",
   "example": "",
-  "comment": "",
+  "comment": "в доступных страницах только заголовок из оглавления",
   "source": "ToC"
- },
- {
-  "grade": 5,
-  "module": "Module 8 · Special days",
-  "lesson": "8c",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Dependent prepositions",
-  "scope": "full of — полный чего-либо; English in Use 8: Is that eat in or take away?",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
  },
  {
   "grade": 5,
@@ -742,10 +445,10 @@
   "lesson": "9a",
   "category": "Существительные и артикли",
   "topic": "Articles (a/an/the/zero)",
-  "scope": "a/an — исчисл. ед. ч. при первом упоминании и в значении «один»; zero article — мн. ч. и неисчисл. при первом упоминании, а также при других определителях (притяжательные/указательные, some/any/no/every/each, whose/which/what, числительные, притяжательный падеж); the — известный/определённый предмет.",
+  "scope": "a/an — перед исчисляемыми в ед. числе при первом упоминании и в значении «один» (I can see a white cat). Нулевой артикль: а) перед существительными во мн. числе и неисчисляемыми при первом упоминании (They sell toys at Toyland. Do you like milk?); б) если перед существительным есть другой определитель — притяжательное/указательное местоимение (This boy is my new friend), some, any, no, every/each, вопросительные whose, which, what, количественное числительное (He has three brothers), существительное в притяжательном падеже (I like my granny's garden). the — об определённом, уже известном предмете или лице (The cat on the sofa is black).",
   "example": "The cat on the sofa is black.",
-  "comment": "Впервые «the» и нулевой артикль.",
-  "source": "ToC, GR"
+  "comment": "Впервые определённый и нулевой артикль. Географические названия с артиклем не даны.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -753,10 +456,10 @@
   "lesson": "9a",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "to be (Past: was/were)",
-  "scope": "was/were: + I/he/she/it was, we/you/they were; − wasn't/weren't; ? Was I…? Were you…?; краткие ответы Yes, I was./No, we weren't.",
+  "scope": "Past Simple глагола to be: + I/he/she/it was, you/we/they were; − wasn't / weren't; ? Was I/he/she/it...? Were you/we/they...?; краткие ответы Yes, I/he/she/it was. / No, ... wasn't.; Yes, we/you/they were. / No, ... weren't.",
   "example": "",
   "comment": "Впервые, полный объём.",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -764,10 +467,10 @@
   "lesson": "9b",
   "category": "Глаголы: времена",
   "topic": "Past Simple",
-  "scope": "Правильные глаголы: +ed для всех лиц; − didn't + инфинитив; ? Did … + инфинитив?; краткие ответы Yes, I did./No, I didn't. Орфография: -e → +d (liked), согл.+y → -ied (studied), удвоение (stopped). Значение: действие в прошлом. Сигнальные слова: yesterday, last Monday/week/month, two days ago.",
+  "scope": "Правильные глаголы: инфинитив + -ed, все лица одинаково (I/you/he... worked); − didn't + инфинитив (didn't work); ? Did ... work?; краткие ответы Yes, ... did. / No, ... didn't. Орфография: на -e — только -d (like – liked); согласная + y → i + -ed (study – studied); односложные с гласной между двумя согласными — удвоение (stop – stopped). Употребление: действия, которые происходили в прошлом. Указатели времени: yesterday, last Monday/month/week, two days/weeks ago.",
   "example": "He left yesterday.",
-  "comment": "Впервые.",
-  "source": "ToC, GR"
+  "comment": "Впервые. Неправильные глаголы — 9c. Произношение -ed в справочнике нет.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -775,32 +478,21 @@
   "lesson": "9c",
   "category": "Глаголы: времена",
   "topic": "Past Simple",
-  "scope": "Неправильные глаголы: особая форма (go – went, see – saw, drink – drank), список Irregular Verbs (~75 глаголов); вопросы и отрицания тоже через did/didn't + инфинитив.",
-  "example": "He saw her. — Did he see her?",
-  "comment": "Продолжение 9b.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 5,
-  "module": "Module 9 · Modern living",
-  "lesson": "9d",
-  "category": "Глаголы: to be / have got / модальные",
-  "topic": "must/mustn't",
-  "scope": "must — обязанность, необходимость; mustn't — запрет.",
-  "example": "You mustn't speak loudly in here.",
-  "comment": "Дано на странице Culture Corner (p. 111) «Grammar: must/mustn't»; только утверждение/отрицание, вопросов нет. have to — 6 кл.",
-  "source": "ToC, GR"
+  "scope": "Неправильные глаголы имеют особую форму Past Simple, её надо запомнить (go – went, see – saw, drink – drank). Вопросы и отрицания — тоже через did/did not (didn't) + инфинитив: I/you/... went; didn't go; Did ... go?; Yes, ... did. / No, ... didn't. Таблица Irregular Verbs (Infinitive – Past – Past Participle – перевод): be, become, begin, break, bring, build, buy, can, catch, choose, come, cost, cut, do, draw, dream, drink, drive, eat, fall, feed, feel, find, fly, forget, forgive, get, give, go, have, hear, hide, keep, know, learn, leave, let, lose, make, mean, meet, pay, put, read, ride, run, say, see, sell, send, set, show, sing, sit, sleep, speak, spend, stand, stick, swim, take, teach, tell, think, understand, wake, wear, win, write (≈70 глаголов; варианты dreamt/dreamed, learnt/learned, got/gotten).",
+  "example": "He saw her. – Did he see her? – He didn't see her.",
+  "comment": "Расширение 9b. Таблица — в конце учебника (с. IV1); список восстановлен по OCR таблицы.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
   "module": "Module 9 · Modern living",
   "lesson": "",
-  "category": "Предложение и вопросы",
-  "topic": "Directions",
-  "scope": "Asking for/giving directions (English in Use 9): How to get to …? walk down …",
-  "example": "",
-  "comment": "Функция; предлоги движения отдельно не даны — проверить.",
-  "source": "ToC, Word List"
+  "category": "Глаголы: to be / have got / модальные",
+  "topic": "must/mustn't",
+  "scope": "must — обязанность и необходимость (You must be careful in the streets); mustn't — запрет (You mustn't speak loudly in here).",
+  "example": "You mustn't speak loudly in here.",
+  "comment": "Впервые. В оглавлении — «Grammar: must/mustn't» в доп. разделах модуля 9 (рядом с Culture Corner, с. 111), не в уроке a–c. Вопросов и кратких ответов нет.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -808,10 +500,10 @@
   "lesson": "10a",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "can (permission/request)",
-  "scope": "can — спросить разрешения (Can I borrow your book?), попросить (Can you pass me the salt?), предложить (Can I give you a lift?); can't — запрет (You can't park here).",
-  "example": "You can't park here.",
-  "comment": "проверить: распределение грамматики 10a/10b/10c по ToC неоднозначно (OCR: «can/can't Present Perfect» в строке 10a).",
-  "source": "ToC, GR"
+  "scope": "can: а) спросить разрешения (Can I borrow your book?); б) попросить что-либо (Can you pass me the salt, please?); в) предложить что-либо (Can I give you a lift?); can't — запрет (You can't park here).",
+  "example": "Can I borrow your book?",
+  "comment": "Расширение can (ability) из 4a. проверить: распределение грамматики 10a/10b/10c по оглавлению неоднозначно (OCR: «can/can't Present Perfect»).",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -819,10 +511,10 @@
   "lesson": "10a",
   "category": "Глаголы: времена",
   "topic": "Present Perfect",
-  "scope": "have/has + Past Participle (правильные -ed, неправильные — 3-я форма). Значения: жизненный опыт; завершённое действие с результатом в настоящем. Слова: ever, never, just, yet, already. Примеры +, −, ? и краткий ответ (No, I haven't).",
-  "example": "I have been to London.",
-  "comment": "Впервые, ознакомительно; полной таблицы форм нет. проверить урок (10a?).",
-  "source": "ToC, GR"
+  "scope": "Present Perfect = have + Past Participle. Употребление: а) действие в прошлом, результат которого важен для настоящего — жизненный опыт (I have been to London. Have you ever travelled to Siberia? – No, I haven't.); б) действие, завершившееся к моменту речи, результат связан с настоящим (They have already planned their trip). Past Participle — 3-я форма: правильные + -ed (finish – finished, plan – planned; орфография как в Past Simple), неправильные — особая форма по таблице (be – been, go – gone, see – seen). Слова-спутники: ever (Have you ever seen Big Ben?), never (My granny has never travelled to other countries), just (I have just finished my homework), yet (He hasn't come yet), already (I have already had lunch).",
+  "example": "I have just finished my homework.",
+  "comment": "Впервые. Полной таблицы форм (+/−/? по лицам) в справочнике нет — только примеры (have/has, haven't). проверить: урок (10a или 10c) — OCR оглавления неоднозначен.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -830,10 +522,10 @@
   "lesson": "10b",
   "category": "Глаголы: времена",
   "topic": "Future Simple (will)",
-  "scope": "will + инфинитив; + полная/краткая форма (I'll), − will not/won't, ? Will you…?, краткие ответы Yes, I will./No, I won't. Значения: решение в момент речи; предположения (с think, believe, expect, be sure, be afraid); просьбы (Will you open the door?).",
-  "example": "I think Tom will be a vet.",
-  "comment": "Впервые. проверить урок (10b/10c).",
-  "source": "ToC, GR"
+  "scope": "will + инфинитив, все лица: + I will run / I'll run, you/he/she/it/we/they will run / 'll run; − will not / won't run; ? Will I/you/he... run?; краткие ответы Yes, I will. / No, I won't. (для всех лиц). Употребление: решения, принимаемые в момент речи (I'll go to sleep); предположения — с глаголами think, believe, expect и выражениями be sure, be afraid (I think Tom will be a vet); просьбы (Will you open the door for me, please?).",
+  "example": "I think Tom will be a vet. He likes animals.",
+  "comment": "Впервые.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -841,10 +533,10 @@
   "lesson": "10b",
   "category": "Глаголы: времена",
   "topic": "be going to",
-  "scope": "be going to + инфинитив — планы и намерения на будущее.",
+  "scope": "be going to — описание планов и намерений на будущее.",
   "example": "He is going to try jet skiing next summer.",
-  "comment": "Только значение «планы»; таблицы форм нет; «предсказание по признакам» — 6 кл.",
-  "source": "ToC, GR"
+  "comment": "Впервые. Таблицы форм нет, только одно значение и пример. Значение «предсказание по очевидным признакам» в 5 кл. не дано.",
+  "source": "GR, ToC"
  },
  {
   "grade": 5,
@@ -852,10 +544,10 @@
   "lesson": "10b",
   "category": "Словообразование",
   "topic": "Word formation",
-  "scope": "Прилагательные с суффиксами -able (enjoyable), -ous (dangerous), -ing (exciting).",
-  "example": "enjoy – enjoyable",
-  "comment": "",
-  "source": "ToC, Word List"
+  "scope": "Прилагательные с суффиксами -able, -ous, -ing.",
+  "example": "",
+  "comment": "в доступных страницах только заголовок из оглавления. проверить: урок 10b (OCR оглавления неоднозначен)",
+  "source": "ToC"
  },
  {
   "grade": 5,
@@ -863,32 +555,10 @@
   "lesson": "10c",
   "category": "Словообразование",
   "topic": "Word formation",
-  "scope": "Существительные с суффиксами -tion/-sion (protect – protection).",
+  "scope": "Существительные с суффиксами -tion/-sion.",
   "example": "",
-  "comment": "",
+  "comment": "в доступных страницах только заголовок из оглавления",
   "source": "ToC"
- },
- {
-  "grade": 5,
-  "module": "Module 10 · Holidays",
-  "lesson": "10a",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "fill in — заполнять; join (in) — присоединяться (10a); sit back — откидываться (10d); shut up — замолчать (Across the Curriculum 10).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
- },
- {
-  "grade": 5,
-  "module": "Module 10 · Holidays",
-  "lesson": "10a",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Dependent prepositions",
-  "scope": "learn (about) — узнавать о (10a); stay out of (the) sun, see a doctor, put lotion (10c); get lost, have some fun (Across the Curriculum 10).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
  },
  {
   "grade": 6,
@@ -896,10 +566,10 @@
   "lesson": "1a",
   "category": "Местоимения",
   "topic": "Possessive adjectives",
-  "scope": "my, your, his, her, its, our, your, their — перед существительным; принадлежность и отношения между людьми.",
+  "scope": "Притяжательные местоимения (основная форма): my, your, his, her, its, our, your, their — употребляются перед существительным, чтобы а) показать принадлежность (This is my bike); б) показать отношения между людьми (Derek is her brother).",
   "example": "Derek is her brother.",
-  "comment": "Повторение из 5 кл (3b, 4a).",
-  "source": "ToC, GR"
+  "comment": "Повторение из 5 кл. Абсолютная форма — 1b.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -907,21 +577,10 @@
   "lesson": "1a",
   "category": "Существительные и артикли",
   "topic": "Possessive case ('s)",
-  "scope": "'s (Mary's bag, Tom's uncle); 's или ' после имени на -s (Doris's/Doris' hat); ' после мн. ч. на -s (the girls' room); 's после неправ. мн. ч. (the children's books); магазины/учреждения и дом: at the baker's, at the florist's, at Bob's.",
-  "example": "Mary's bag",
-  "comment": "Повторение из 5 кл (4b); of для неодушевлённых здесь не упомянут.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 1 · Who's who?",
-  "lesson": "1a",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Collocations / Fixed phrases",
-  "scope": "be married to smb; be in one's early sixties / mid twenties / late thirties (возраст); facial features. 1b: join a club, register at a library. English in Use 1: introduce smb to smb.",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "scope": "Притяжательный падеж: а) принадлежность (Mary's bag); б) отношения между людьми (Tom's uncle); в) названия магазинов, учреждений, чужой дом (at the baker's, at the florist's, at Bob's). Образование: 's (для людей и животных: Jim's flat, my cat's toy); к существительным в ед. ч. — 's (the girl's doll, Rosa's car); имя собственное на -s — 's или только апостроф (Doris's hat / Doris' hat); мн. ч. на -s — только апостроф (the girls' room); мн. ч.-исключения — 's (the children's books).",
+  "example": "the children's books",
+  "comment": "Повторение из 5 кл.; новое — at Bob's (у Боба дома). Предлог of для неодушевлённых в справочнике 6 кл. не упомянут.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -929,10 +588,10 @@
   "lesson": "1b",
   "category": "Местоимения",
   "topic": "Possessive pronouns",
-  "scope": "Абсолютная форма: mine, yours, his, hers, its, ours, yours, theirs — без существительного; сопоставление с possessive adjectives.",
+  "scope": "Абсолютная форма притяжательных местоимений: mine, yours, his, hers, its, ours, yours, theirs — употребляется без существительного (This bike is mine). Сопоставление с основной формой: my – mine, your – yours, his – his, her – hers, its – its, our – ours, their – theirs.",
   "example": "This bike is mine.",
   "comment": "Впервые.",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -940,9 +599,9 @@
   "lesson": "",
   "category": "Местоимения",
   "topic": "Personal pronouns (subject)",
-  "scope": "I, you, he, she, it, we, you, they — функция подлежащего; I с заглавной; you — ед. и мн. ч.; it — предметы и животные.",
+  "scope": "Личные местоимения в именительном падеже: I, you, he, she, it; we, you, they — употребляются перед глаголом вместо существительного/имени собственного. I всегда с прописной буквы; you — одинаково для ед. и мн. числа; he/she — о людях; it — о предметах или животных; they — об одушевлённых и неодушевлённых во мн. числе.",
   "example": "",
-  "comment": "Повторение из 5 кл (GR Module 1, в ToC не указано).",
+  "comment": "Повторение из 5 кл. В оглавлении отдельно не названо.",
   "source": "GR"
  },
  {
@@ -951,9 +610,9 @@
   "lesson": "",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "to be (Present)",
-  "scope": "am/is/are, все лица; + (полные/краткие формы), −, ?, краткие ответы. При переводе to be часто опускается.",
+  "scope": "to be — единственный английский глагол, изменяющийся по числам и лицам; формы надо запомнить. + I am/I'm, you are/you're, he/she/it is/'s, we/you/they are/'re; − I'm not, you aren't, he/she/it isn't, we/you/they aren't; ? Am I...? Are you...? Is he/she/it...? Are we/you/they...?; краткие ответы Yes, I am. / No, I'm not. и т.д. При переводе на русский глагол to be часто опускается.",
   "example": "I'm thirteen years old.",
-  "comment": "Повторение из 5 кл (GR Module 1, в ToC не указано).",
+  "comment": "Повторение из 5 кл. В оглавлении отдельно не названо.",
   "source": "GR"
  },
  {
@@ -962,9 +621,9 @@
   "lesson": "",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "have got",
-  "scope": "have got/has got, все лица; + (в речи краткие формы), −, ?, краткие ответы. Значения: принадлежность; описание людей/животных; родственные отношения.",
+  "scope": "have (got) — в разговорной речи преимущественно в сокращённой форме. + I've/You've/We've/They've got, He's/She's/It's got; − haven't got / hasn't got; ? Have I/you/we/they got? Has he/she/it got?; краткие ответы Yes, ... have/has. / No, ... haven't/hasn't. Употребление: а) принадлежность (He has got a ball); б) описание людей, животных (She has got blue eyes); в) отношения между людьми (I have got two sisters). Часто переводится без дословного перевода самого глагола.",
   "example": "She has got blue eyes.",
-  "comment": "Повторение из 5 кл (GR Module 1, в ToC не указано).",
+  "comment": "Повторение из 5 кл. В оглавлении отдельно не названо.",
   "source": "GR"
  },
  {
@@ -973,9 +632,9 @@
   "lesson": "",
   "category": "Существительные и артикли",
   "topic": "Plurals (regular)",
-  "scope": "+s; +es после -s, -ss, -sh, -ch, -x, -o (buses, tomatoes), но -o → только -s в videos, photos; гласная+y → +s (boys); согл.+y → -ies (berries); -f/-fe → -ves (leaves, knives).",
-  "example": "a berry – two berries",
-  "comment": "Повторение из 5 кл; новое — исключения на -o (videos, photos).",
+  "scope": "Большинство + -s (a car – two cars); после -s, -ss, -sh, -ch, -x, -o + -es (buses, dresses, brushes, benches, boxes, tomatoes); некоторые на -o — только -s (videos, photos); гласная + y → + -s (a boy – two boys); согласная + y → i + -es (a berry – two berries); -f/-fe → v + -es (leaf – leaves, knife – knives).",
+  "example": "leaf – leaves",
+  "comment": "Повторение из 5 кл.; новое — исключения на -o (videos, photos). В оглавлении отдельно не названо.",
   "source": "GR"
  },
  {
@@ -984,21 +643,10 @@
   "lesson": "",
   "category": "Существительные и артикли",
   "topic": "Plurals (irregular)",
-  "scope": "man – men, woman – women, child – children, foot – feet, tooth – teeth, mouse – mice.",
-  "example": "",
-  "comment": "Повторение из 5 кл.",
+  "scope": "Исключения: man – men, woman – women, child – children, foot – feet, tooth – teeth, mouse – mice.",
+  "example": "a child – children",
+  "comment": "Повторение из 5 кл. В оглавлении отдельно не названо.",
   "source": "GR"
- },
- {
-  "grade": 6,
-  "module": "Module 2 · Here we are!",
-  "lesson": "2a",
-  "category": "Предлоги",
-  "topic": "Prepositions of time",
-  "scope": "AT: время, праздники (at Christmas/Easter, at the weekend), at the moment/present/dawn/noon/night/midnight/midday. ON: дни, даты (on May 6th), on Tuesday evening, on a hot day. IN: месяцы, времена года, годы, века, in the morning/afternoon/evening, in an hour/a minute/a week/a few days (через).",
-  "example": "at midnight",
-  "comment": "Повторение из 5 кл (6a); добавлено at midday.",
-  "source": "ToC, GR"
  },
  {
   "grade": 6,
@@ -1006,21 +654,21 @@
   "lesson": "2a",
   "category": "Числительные",
   "topic": "Ordinal numbers",
-  "scope": "Образование -th (seventh, tenth, fifty-sixth); first, second, third и составные 51st, 22nd, 63rd, 101st; орфография fifth, ninth, twelfth, twentieth/thirtieth/fortieth; всегда с the; даты: пишется September 1, читается the first of September.",
+  "scope": "Порядковые числительные отвечают на вопрос «который» и образуются от количественных с помощью -th (seven – seventh, ten – tenth, 56 – fifty-sixth). Запомнить: 1 – first, 2 – second, 3 – third; они же в составных (51st, 101st, 22nd, 382nd, 63rd, 6503rd). Орфография: five – fifth, nine – ninth, twelve – twelfth, twenty/thirty/forty – twentieth/thirtieth/fortieth. В предложении всегда с артиклем the (He took the first prize at the Olympic Games). Даты: пишется September 1, July 4, читается the first of September, the fourth of July.",
   "example": "It's my thirteenth birthday today.",
-  "comment": "Расширение 5 кл (там 1st–20th): любые числа, даты.",
-  "source": "ToC, GR"
+  "comment": "Впервые в справочнике (в 5 кл. — только в оглавлении).",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
   "module": "Module 2 · Here we are!",
   "lesson": "2a",
-  "category": "Числительные",
-  "topic": "Telling the time",
-  "scope": "Время и даты: o'clock, quarter to/past …; asking about birthdays (When is your birthday?).",
-  "example": "",
-  "comment": "Функция в ToC (telling the time).",
-  "source": "ToC, Word List"
+  "category": "Предлоги",
+  "topic": "Prepositions of time",
+  "scope": "at: время (at 7 o'clock), праздники (at Christmas, at Easter, at the weekend), выражения at the moment, at present, at dawn, at noon, at night, at midnight. on: дни (on Monday, on New Year's Day), даты (on May 6th), on Tuesday evening, прилагательное + day (on a hot day). in: месяцы (in September), времена года (in (the) winter/spring/autumn), годы (in 1996), века (in the 20th century), выражения in the morning/afternoon/evening, in an hour, in a minute/in a week/in a few days/month/year (через).",
+  "example": "on a hot day",
+  "comment": "Повторение из 5 кл. в том же объёме.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1028,10 +676,10 @@
   "lesson": "2b",
   "category": "Существительные и артикли",
   "topic": "a/an/some/any",
-  "scope": "some — утверждения (некоторое количество/несколько) с неисчисл. и мн. ч.; any — вопросы и отрицания; some в вопросах-предложениях и просьбах (Would you like some coffee? Can I have some coffee?). a/an — исчисл. ед. ч. (ToC).",
+  "scope": "some и any — с неисчисляемыми (sugar, bread) и с исчисляемыми во мн. числе (pens, cars): some bread — немного хлеба; some apples — несколько яблок. some — «немного, несколько», в утвердительных предложениях (I've got some money / some books). any — в вопросах и отрицаниях (Have you got any money/books? No, I haven't got any money/books). some — в вопросах, когда мы что-то предлагаем или просим (Would you like some coffee? Can I have some coffee, please?).",
   "example": "Would you like some coffee?",
-  "comment": "Новое по сравнению с 5 кл: some в предложениях и просьбах.",
-  "source": "ToC, GR"
+  "comment": "Повторение из 5 кл.; новое — some в предложениях и просьбах. Раздел справочника называется Some/Any (a/an отдельно не разбирается).",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1039,32 +687,10 @@
   "lesson": "2b",
   "category": "Предлоги",
   "topic": "Prepositions of place",
-  "scope": "on, under, in front of, behind, beside/next to, near, at, in, between, opposite. Устойчивые: at school/work/home, at 20 Oxford Street; in the middle/air/sky, in bed/hospital/prison, in a newspaper/picture, in + города/страны/континенты; on the left/right, on the first floor.",
+  "scope": "Предлоги места помогают определить местонахождение: on, under, in front of, behind, beside/next to, near, at, in, between, opposite. at: at school/university/college, at work, at home; в адресах с номером дома (at 20, Oxford Street). in: in the middle, in the air, in the sky, in bed, in hospital, in prison, in a newspaper/magazine, in a picture; с названиями городов, стран, континентов (in Athens, in England, in Europe, in Australia). on: on the left, on the right, on the first floor.",
   "example": "",
-  "comment": "Расширение 5 кл (3c): добавлены beside, near, between, opposite.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 2 · Here we are!",
-  "lesson": "2b",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Collocations / Fixed phrases",
-  "scope": "do one's best, give smb a hand, move house; восклицания Watch out! Calm down!",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
- },
- {
-  "grade": 6,
-  "module": "Module 2 · Here we are!",
-  "lesson": "",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "come over — заходить, приходить в гости (English in Use 2).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "comment": "Повторение из 5 кл.; новые предлоги: beside, near, between, opposite.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1072,21 +698,10 @@
   "lesson": "3a",
   "category": "Предложение и вопросы",
   "topic": "Imperative",
-  "scope": "Утвердительная форма = инфинитив без to; отрицательная Do not/Don't + инфинитив; обращено ко 2-му лицу; значения: приказ (Stop that noise!), инструкции/указания (Cut the paper…), предложение (Have some cake), просьба с please (Please be quiet!).",
-  "example": "Don't talk to him!",
-  "comment": "Повторение из 5 кл; контекст — правила дорожного движения (Look both ways).",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 3 · Getting around",
-  "lesson": "3a",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Collocations / Fixed phrases",
-  "scope": "lean out of the window, look both ways, on foot, seat belt (3a); go straight on, go towards, turn right/left, turn green (3b); be famous for (3c).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "scope": "Форма = инфинитив без to (Sit down!); отрицание — Do not/Don't + инфинитив (Don't talk to him!); всегда обращено ко 2 лицу ед. или мн. числа (Take your books). Употребление: а) приказание (Stop that noise!); б) указания/инструкции (Cut the paper in two pieces); в) предложение (Have some cake); г) просьба — обычно с please в начале или в конце (Be quiet, please! / Please be quiet!).",
+  "example": "Stop that noise!",
+  "comment": "Повторение из 5 кл. в том же объёме.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1094,10 +709,10 @@
   "lesson": "3b",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "can (ability)",
-  "scope": "can/can't: все лица, + / − / ? / краткие ответы; не изменяется, глагол без to. Значение: умение/способность (I can sing).",
+  "scope": "can — все лица одинаково: + can walk; − can't walk; ? Can I/you/he... walk?; краткие ответы Yes, ... can. / No, ... can't. Модальный глагол: не изменяется по лицам и числам, после него инфинитив без to. Значение а) способность/умение (I can sing).",
   "example": "I can sing.",
-  "comment": "Повторение из 5 кл; в 6 кл can объединён в одну тему ability/prohibition/permission.",
-  "source": "ToC, GR"
+  "comment": "Повторение из 5 кл. Остальные значения can — в этом же разделе, см. следующую строку.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1105,32 +720,10 @@
   "lesson": "3b",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "can (permission/request)",
-  "scope": "can: просьба сделать (Can you open the door, please?), попросить что-то (Can I have a piece of cake?), разрешение (Can we play on the computer?), can't — запрет (You can't turn left here!).",
+  "scope": "can: б) попросить кого-то сделать что-то для нас (Can you open the door, please?); в) попросить что-то (Can I have a piece of cake, please?); г) спросить разрешения (Can we play on the computer, please?); д) выразить запрет — can't (You can't turn left here!).",
   "example": "You can't turn left here!",
-  "comment": "Расширение 5 кл (10a).",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 3 · Getting around",
-  "lesson": "3d",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "get around — передвигаться (по городу) (Culture Corner: Getting around London).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
- },
- {
-  "grade": 6,
-  "module": "Module 3 · Getting around",
-  "lesson": "",
-  "category": "Предложение и вопросы",
-  "topic": "Directions",
-  "scope": "Asking for/giving directions (English in Use 3), giving driving directions (3b): go straight on, turn left/right, go towards.",
-  "example": "",
-  "comment": "Функция; отдельного правила о предлогах движения нет.",
-  "source": "ToC, Word List"
+  "comment": "Повторение из 5 кл. (там же: предложение помощи Can I give you a lift? — в 6 кл. не дано). В оглавлении: can — ability/prohibition/permission.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1138,10 +731,10 @@
   "lesson": "4a",
   "category": "Глаголы: времена",
   "topic": "Present Simple",
-  "scope": "Все формы: + (he/she/it works), − don't/doesn't, ? Do/Does …?, краткие ответы. Орфография 3-го лица: +s, +es после -ss, -sh, -ch, -x, -o (misses, goes), согл.+y → -ies (studies), гласная+y → +s (plays). Значения: регулярные действия, постоянные состояния, законы природы. Сигнальные слова: every day/week…, at night, in the morning…, on Mondays, наречия частотности.",
-  "example": "She usually plays tennis at the weekend.",
-  "comment": "Повторение из 5 кл (5a–5b).",
-  "source": "ToC, GR"
+  "scope": "+ I/you/we/they work, he/she/it works; − don't/doesn't work; ? Do I/you/we/they work? Does he/she/it work? Образование от инфинитива, в 3 л. ед. ч. + -s; в вопросах и отрицаниях do/don't (I, you, we, they), does/doesn't (he, she, it), -s не добавляется к смысловому глаголу при does/doesn't. Орфография: + -s (work – works); после -ss, -sh, -ch, -x, -o + -es (miss – misses, go – goes); согласная + y → i + -es (study – studies); гласная + y → + -s (play – plays). Употребление: регулярно повторяющиеся, повседневные действия (She usually plays tennis at the weekend); постоянные состояния (She likes sweets); непреложные истины и законы природы (The sun sets in the west). Указатели времени: every day/week/month/year, at night, in the morning/afternoon/evening, on Monday(s), Tuesday(s), наречия частотности (never, seldom, rarely, sometimes, often, usually, always).",
+  "example": "The sun sets in the west.",
+  "comment": "Повторение из 5 кл.; новые сигнальные слова seldom, rarely.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1149,21 +742,10 @@
   "lesson": "4a",
   "category": "Прилагательные и наречия",
   "topic": "Adverbs of frequency",
-  "scope": "never, seldom/rarely, sometimes, often, usually, always; место: перед смысловым глаголом, после to be, вспомогательных и модальных.",
+  "scope": "never (никогда), seldom/rarely (редко), sometimes (иногда), often (часто), usually (обычно), always (всегда). Употребляются с Present Simple, показывают, как часто что-то происходит. Место: перед смысловым глаголом, но после to be, а также после вспомогательных и модальных глаголов (can, do и т.д.).",
   "example": "He is always late for school.",
-  "comment": "Расширение 5 кл: добавлены seldom, rarely.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 4 · Day after day",
-  "lesson": "4a",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Collocations / Fixed phrases",
-  "scope": "Распорядок дня: get dressed, have a shower, brush my teeth, do my homework, go out with friends, listen to music, play tricks on, play sports, once a month (4a); eat out (4b); arrive in Moscow / at the airport (4c).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "comment": "Повторение из 5 кл.; новые seldom/rarely. Примеры: I usually work on Sundays. He can never wake up before 10 o'clock.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1171,32 +753,10 @@
   "lesson": "4b",
   "category": "Глаголы: времена",
   "topic": "Present Simple",
-  "scope": "Короткие ответы: Yes, I do./No, I don't.; Yes, he does./No, he doesn't.",
+  "scope": "Краткие ответы: Yes, I/you/we/they do. / No, ... don't.; Yes, he/she/it does. / No, ... doesn't.",
   "example": "",
-  "comment": "В ToC 4b — «present simple (short answers)».",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 4 · Day after day",
-  "lesson": "4b",
-  "category": "Предложение и вопросы",
-  "topic": "Let's",
-  "scope": "Предложения: How about …? What about …? (making suggestions), expressing likes/dislikes.",
-  "example": "",
-  "comment": "Функция (название урока «How about…?»); форма после How about (-ing) в OCR не видна — проверить.",
-  "source": "ToC, Word List"
- },
- {
-  "grade": 6,
-  "module": "Module 4 · Day after day",
-  "lesson": "4b",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "be on — идти (о фильме, передаче) (4b); put on (a dress) — надевать, put up (a tent) — ставить палатку, set off — отправляться в путь (4c); get along with — ладить (4d).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "comment": "Урок 4b в оглавлении — present simple (short answers); правило — в общем разделе справочника (см. 4a).",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1204,10 +764,10 @@
   "lesson": "4c",
   "category": "Предложение и вопросы",
   "topic": "Linkers",
-  "scope": "Слова-связки времени (time words): and, then, after that, when, before, later — логическая/временная связь между предложениями.",
+  "scope": "Слова-связки (time words): союзы и наречия времени обеспечивают логическую/временную связь между предложениями и частями предложения: and, then, after that, when, before, later и т.д.",
   "example": "Think before you start working.",
-  "comment": "Впервые как тема.",
-  "source": "ToC, GR"
+  "comment": "Впервые в справочнике. because/so — только в оглавлении (10c), в справочнике нет.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1215,54 +775,21 @@
   "lesson": "5a",
   "category": "Глаголы: времена",
   "topic": "Present Continuous",
-  "scope": "Утвердительная форма: am/is/are + V-ing (в речи краткие формы). Орфография -ing: -e опускается (writing), удвоение (sitting, swimming), -l удваивается (travelling), -ie → -ying (lying).",
+  "scope": "Образование: to be (am/is/are) + глагол с -ing; в разговорной речи — в сокращённой форме. + I'm, You're, He's/She's/It's, We're/You're/They're playing.",
+  "example": "",
+  "comment": "Повторение из 5 кл. В оглавлении 5a — утвердительная форма; отрицание, вопросы и значения — 5b.",
+  "source": "GR, ToC"
+ },
+ {
+  "grade": 6,
+  "module": "Module 5 · Feasts",
+  "lesson": "5b",
+  "category": "Глаголы: времена",
+  "topic": "Present Continuous",
+  "scope": "− I'm not, you aren't, he/she/it isn't, we/you/they aren't playing; ? Am I / Are you / Is he/she/it / Are we/you/they playing?; краткие ответы Yes, I am. / No, I'm not.; Yes, you are. / No, you're not.; Yes, he/she/it is. / No, ... isn't.; Yes, we/you/they are. / No, ... aren't. Орфография -ing: -e опускается (write – writing); односложные с кратким гласным между двумя согласными — удвоение (sit – sitting, swim – swimming); на -l — удвоение (travel – travelling); -ie → y (lie – lying, die – dying). Употребление: действия в момент речи (He's reading a book now); действия в настоящий период, не обязательно в момент речи (I'm working for my exam); действия в будущем по плану (I'm playing tennis on Saturday). Указатели времени: now, at the moment, these days, at present, always, tonight, still.",
   "example": "He's reading a book now.",
-  "comment": "Повторение из 5 кл. Вопросы и отрицания — 5b.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 5 · Feasts",
-  "lesson": "5a",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Collocations / Fixed phrases",
-  "scope": "do the dusting / gardening / shopping / washing up; make preparations / a cake / a phone call / tea; Good luck! (5a); have a great time, have a meal, exchange gifts, make a speech, put up decorations, watch the fireworks, put in order (5b–5c); take part in, take place (5d); have in mind, be offended (English in Use 5).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
- },
- {
-  "grade": 6,
-  "module": "Module 5 · Feasts",
-  "lesson": "5a",
-  "category": "Предложение и вопросы",
-  "topic": "Exclamations",
-  "scope": "Восклицания (в ToC 5a рядом с writing down key information).",
-  "example": "",
-  "comment": "проверить: форма (What a …! / How …!) в OCR не видна; может быть study skill, не грамматика.",
-  "source": "ToC"
- },
- {
-  "grade": 6,
-  "module": "Module 5 · Feasts",
-  "lesson": "5b",
-  "category": "Глаголы: времена",
-  "topic": "Present Continuous",
-  "scope": "Отрицание (I'm not, isn't, aren't playing), вопросы (Am I/Are you/Is he playing?), краткие ответы. Значения: действие в момент речи; в текущий период (I'm working for my exam); будущее по плану (I'm playing tennis on Saturday). Сигнальные слова: now, at the moment, these days, at present, always, tonight, still.",
-  "example": "I'm playing tennis on Saturday.",
-  "comment": "Расширение 5 кл: новое значение «будущее (договорённость/план)» и сигнальные слова.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 5 · Feasts",
-  "lesson": "5b",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "be over — закончиться; clean up — убирать; dress up — наряжаться; join in — присоединяться; run out of — закончиться (о запасах) (5b); hold onto — держаться за, pull over — перетягивать (5d).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "comment": "Расширение 5 кл.: новое — значение запланированного будущего и список сигнальных слов. Будущее значение повторяется в 10b.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1272,30 +799,8 @@
   "topic": "Word formation",
   "scope": "Сложные существительные (compound nouns).",
   "example": "",
-  "comment": "В ToC 6a и в The Language of Grammar; примеры в OCR не видны.",
-  "source": "ToC, Word List"
- },
- {
-  "grade": 6,
-  "module": "Module 6 · Leisure activities",
-  "lesson": "6a",
-  "category": "Предложение и вопросы",
-  "topic": "Linkers",
-  "scope": "Связь предложений (linking sentences) — в ToC 6a.",
-  "example": "",
-  "comment": "проверить: какие связки (and, but, or?) — в OCR не видно.",
+  "comment": "в доступных страницах только заголовок из оглавления",
   "source": "ToC"
- },
- {
-  "grade": 6,
-  "module": "Module 6 · Leisure activities",
-  "lesson": "6a",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Dependent prepositions",
-  "scope": "be good at, be fond of, be keen on, be mad about, be interested in (6a); I don't care (about), wait for smb (6b); go cycling, go windsurfing, go on trips.",
-  "example": "",
-  "comment": "Впервые набор прилагательное + предлог.",
-  "source": "Word List"
  },
  {
   "grade": 6,
@@ -1303,32 +808,21 @@
   "lesson": "6b",
   "category": "Глаголы: времена",
   "topic": "Present Simple vs Present Continuous",
-  "scope": "Present Simple — регулярные действия, привычки, постоянные состояния (Sarah starts school at 8; He likes coffee in the morning; He lives near the hospital); Present Continuous — момент речи, временные действия (He's studying Law at University).",
+  "scope": "Present Simple — регулярные и повседневные действия (Sarah starts school at 8 o'clock), привычки (He likes coffee in the morning), постоянные состояния (He lives near the hospital). Present Continuous — действия в момент речи (Peter is watching TV at the moment) и действия временного характера (He's studying Law at University).",
   "example": "Peter is watching TV at the moment.",
-  "comment": "Повторение из 5 кл (7b) + stative verbs.",
-  "source": "ToC, GR"
+  "comment": "Повторение из 5 кл.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
   "module": "Module 6 · Leisure activities",
-  "lesson": "6b",
+  "lesson": "",
   "category": "Глаголы: другое",
   "topic": "Stative verbs",
-  "scope": "Глаголы состояния не употребляются в Continuous: like, want, know, love.",
+  "scope": "Глаголы состояния (state verbs) не образуют форму Present Continuous, так как описывают состояние, а не действие: like, want, know, love.",
   "example": "I want a car. (NOT: I'm wanting a car.)",
-  "comment": "Впервые.",
+  "comment": "Впервые. В оглавлении не названо; в справочнике — в разделе Module 6 рядом с PS vs PC (6b).",
   "source": "GR"
- },
- {
-  "grade": 6,
-  "module": "Module 6 · Leisure activities",
-  "lesson": "6c",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "go down — спускаться, go up — подниматься (6c, board game); come up with — придумать, look for — искать (6d / English in Use 6).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
  },
  {
   "grade": 6,
@@ -1336,10 +830,10 @@
   "lesson": "7a",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "to be (Past: was/were)",
-  "scope": "was/were: + I/he/she/it was, we/you/they were; − wasn't/weren't; ? Was/Were …?; краткие ответы. Произношение where – were.",
+  "scope": "+ I/he/she/it was, you/we/they were; − wasn't/weren't; ? Was I/he/she/it...? Were you/we/they...?; краткие ответы Yes, I/he/she/it was. / No, ... wasn't.; Yes, we/you/they were. / No, ... weren't.",
   "example": "",
-  "comment": "Повторение из 5 кл (9a). проверить урок: в ToC 7a — past simple (regular verbs); was/were только в GR Module 7.",
-  "source": "ToC, GR"
+  "comment": "Повторение из 5 кл. В оглавлении отдельно не названо; урок по месту в справочнике (раздел Module 7) — проверить.",
+  "source": "GR"
  },
  {
   "grade": 6,
@@ -1347,10 +841,10 @@
   "lesson": "7a",
   "category": "Глаголы: времена",
   "topic": "Past Simple",
-  "scope": "Правильные глаголы: +ed; − didn't + инфинитив; ? Did …?; краткие ответы. Орфография: -e → +d (liked), согл.+y → -ied (studied), удвоение (stopped), -l → -lled (travelled). Произношение -ed /t/, /d/, /ɪd/. Сигнальные слова: yesterday, last Monday/month/week, two days/weeks ago.",
-  "example": "He went out. — Did he go out?",
-  "comment": "Повторение из 5 кл (9b); новое — удвоение -l.",
-  "source": "ToC, GR"
+  "scope": "Правильные глаголы: инфинитив + -ed, все лица (worked); − didn't work; ? Did ... work?; краткие ответы Yes, I/you/he etc did. / No, ... didn't. Орфография: на -e — только -d (like – liked); согласная + y → i + -ed (study – studied); односложные с кратким гласным между двумя согласными — удвоение (stop – stopped); на -l — удвоение l (travel – travelled). Употребление: действия, которые происходили в прошлом, т.е. мы знаем, когда действие было совершено (He left yesterday). Указатели времени: yesterday, last Monday/month/week, two days/weeks ago.",
+  "example": "He left yesterday.",
+  "comment": "Повторение из 5 кл.; новое — удвоение -l (travelled).",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1358,21 +852,10 @@
   "lesson": "7b",
   "category": "Глаголы: времена",
   "topic": "Past Simple",
-  "scope": "Неправильные глаголы (go – went, see – saw, drink – drank), список Irregular Verbs GR7 (~90 глаголов, вкл. burn, smell, spell с вариантами -ed); вопросы/отрицания через did.",
-  "example": "Did he go out? — He didn't go out.",
-  "comment": "Повторение из 5 кл (9c); рассказ (telling a story).",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 7 · Now and then",
-  "lesson": "7c",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "live on — продолжать жить, жить дальше (7c); make up — составлять, придумывать (7d).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "scope": "Неправильные глаголы образуют Past Simple не через -ed, а особой формой (список — GR7): go – went, see – saw, drink – drank; их надо запомнить. Вопросы и отрицания — тоже did/did not (didn't) + инфинитив: went; didn't go; Did ... go?; Yes, ... did. / No, ... didn't. Таблица Irregular Verbs (Infinitive – Past – перевод): be, beat, become, begin, bite, blow, break, bring, build, burn, buy, can, catch, choose, come, cost, cut, do, draw, dream, drink, drive, eat, fall, feed, feel, fight, find, fly, forbid, forget, forgive, freeze, get, give, go, grow, hang, have, hear, hide, hit, hold, keep, know, learn, leave, let, lose, make, mean, meet, pay, put, read, ride, run, say, see, sell, send, set, show, sing, sit, sleep, smell, speak, spell, spend, stand, swim, take, teach, tell, think, throw, understand, wake, wear, win, write. Возможны формы на -ed: burnt (burned), dreamt (dreamed), learnt (learned), smelt (smelled), spelt (spelled).",
+  "example": "He went out. – Did he go out? – He didn't go out.",
+  "comment": "Расширение 5 кл.: таблица шире (beat, bite, blow, burn, fight, forbid, freeze, grow, hang, hit, hold, smell, spell, throw). В таблице 6 кл. только Infinitive и Past, без Past Participle. Список восстановлен по OCR таблицы.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1380,21 +863,10 @@
   "lesson": "8a",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "must/mustn't",
-  "scope": "must — необходимость/обязанность; mustn't — запрет.",
-  "example": "You must listen to your teacher.",
-  "comment": "Повторение из 5 кл (Module 9); добавлен can't как запрет.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 8 · Rules & regulations",
-  "lesson": "8a",
-  "category": "Глаголы: to be / have got / модальные",
-  "topic": "can (permission/request)",
-  "scope": "can't — запрет (наряду с mustn't).",
-  "example": "You can't enter the building after 8.00 pm.",
-  "comment": "В ToC 8a — «must/mustn't/can't».",
-  "source": "ToC, GR"
+  "scope": "must — необходимость (You must listen to your teacher); mustn't и can't — запрет (You mustn't drive over 35 mph. You can't enter the building after 8.00 pm).",
+  "example": "You mustn't drive over 35 mph.",
+  "comment": "Повторение из 5 кл.; новое — can't как запрет в одном ряду с mustn't (раздел Must/Mustn't/Can't).",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1402,21 +874,10 @@
   "lesson": "8b",
   "category": "Прилагательные и наречия",
   "topic": "Comparatives & Superlatives",
-  "scope": "Прилагательные: -er/the -est (одно- и двусложные на -y: tall, pretty), more/the most (многосложные); сравн. + than, превосх. + of/in. Орфография: -e → -r/-st (safe), -y → -ier/-iest (early), удвоение (big – bigger). Исключения good, bad, many/much, little.",
+  "scope": "Степени сравнения прилагательных: сравнительная и превосходная (young – younger – the youngest; interesting – more interesting – the most interesting). Сравнительная + than — сравнение двух (She is older than her brother. It's colder today than it was yesterday); превосходная + of/in — трёх и более (Tom is the tallest boy in his basketball team). Односложные и двусложные на -y, -er — -er / the -est (tall – taller – the tallest; pretty – prettier – the prettiest); многосложные — more / the most (beautiful – more beautiful – the most beautiful). Орфография: на -e — + -r/-st (safe – safer – the safest); на -y — y на i (early – earlier – the earliest); краткий гласный между двумя согласными — удвоение (big – bigger – the biggest). Исключения: good – better – the best; bad – worse – the worst; many/much – more – the most; little – less – the least.",
   "example": "She is older than her brother.",
-  "comment": "Повторение и расширение 5 кл (Module 7).",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 8 · Rules & regulations",
-  "lesson": "8b",
-  "category": "Предложение и вопросы",
-  "topic": "Let's",
-  "scope": "Предложения и ответы на них: Shall we …? (making suggestions / accepting / rejecting / warning); come on.",
-  "example": "",
-  "comment": "Функция (урок «Shall we?»); формы в OCR не видны.",
-  "source": "ToC, Word List"
+  "comment": "Повторение из 5 кл.; новое — двусложные на -y/-er с -er/-est. Наречия в 6 кл. не даны.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1424,10 +885,10 @@
   "lesson": "8c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "have to",
-  "scope": "have to — необходимость, вынужденность по обстоятельствам; don't have to — отсутствие необходимости.",
-  "example": "We have to be at the airport at 9.00.",
-  "comment": "Впервые. Вопросы (Do you have to…?) в GR не даны.",
-  "source": "ToC, GR"
+  "scope": "have to — необходимость, вынужденность действия согласно обстоятельствам (We have to be at the airport at 9.00 o'clock). don't have to — отсутствие необходимости (You don't have to wash the dishes. I'll do it).",
+  "example": "We have to be at the airport at 9.00 o'clock.",
+  "comment": "Впервые. Раздел «Have to/Don't have to (модальное значение)». Вопросов и форм has to в справочнике нет.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1435,32 +896,10 @@
   "lesson": "8c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "need/needn't",
-  "scope": "needn't — отсутствие необходимости (= don't have to).",
+  "scope": "needn't (как и don't have to) — отсутствие необходимости.",
   "example": "You needn't worry.",
-  "comment": "Впервые; только needn't.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 8 · Rules & regulations",
-  "lesson": "8d",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "look after — ухаживать, присматривать (Extensive reading 8).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
- },
- {
-  "grade": 6,
-  "module": "Module 8 · Rules & regulations",
-  "lesson": "8d",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Collocations / Fixed phrases",
-  "scope": "make noise (8a); depending on the occasion (8d); You're on the right track.",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "comment": "Впервые. need как смысловой глагол в справочнике не разбирается.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1468,10 +907,10 @@
   "lesson": "9a",
   "category": "Существительные и артикли",
   "topic": "Countable / Uncountable nouns",
-  "scope": "Неисчисляемые не имеют мн. ч. (cheese, sugar, butter, salt, rain, snow, water, coffee, tea, milk, orange juice, lemonade); обозначение количества: jar, bottle, piece, loaf, cup, bar, glass, kilo, carton, bowl, can, jug, slice, tin, packet (a jar of marmalade).",
+  "scope": "Неисчисляемые существительные не имеют формы мн. числа: cheese, sugar, butter, salt, rain, snow, water, coffee, tea, milk, orange juice, lemonade. Для обозначения количества: jar, bottle, piece, loaf, cup, bar, glass, kilo, carton, bowl, can, jug, slice, tin, packet (a jar of marmalade, a bottle of water).",
   "example": "a bottle of water",
-  "comment": "Повторение из 5 кл (8a).",
-  "source": "ToC, GR"
+  "comment": "Повторение из 5 кл.; новое в списке — rain, snow.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1479,10 +918,10 @@
   "lesson": "9a",
   "category": "Существительные и артикли",
   "topic": "much/many/a lot of",
-  "scope": "a lot of / lots of — утверждения (все типы); much — вопросы/отрицания с неисчисл.; many — вопросы/отрицания с исчисл. мн. ч.; How much …? / How many …?",
+  "scope": "A lot (of) — в утверждениях с исчисляемыми и неисчисляемыми (She's got a lot of/lots of books. There's a lot of milk in the fridge). Much — в вопросах и отрицаниях с неисчисляемыми (How much money have you got? There isn't much sugar in the bowl). Many — с исчисляемыми во мн. числе в вопросах и отрицаниях (Are there many books on the shelf? There aren't many books on the shelf). how much — с неисчисляемыми, how many — с исчисляемыми (How much sugar do we need? How many boys are there in your class?).",
   "example": "How many boys are there in your class?",
-  "comment": "Повторение из 5 кл (8b); добавлено lots of.",
-  "source": "ToC, GR"
+  "comment": "Повторение из 5 кл.; новое — lots of. В оглавлении — Quantifiers.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1490,21 +929,10 @@
   "lesson": "9a",
   "category": "Существительные и артикли",
   "topic": "a few/a little",
-  "scope": "a few — исчисл., a little — неисчисл. в значении «несколько/немного» в утверждениях, вопросах и отрицаниях.",
-  "example": "There is a little water in the glass.",
-  "comment": "В 6 кл только a few/a little; few/little без артикля не даны (были в 5 кл).",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 9 · Food & refreshments",
-  "lesson": "9a",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Collocations / Fixed phrases",
-  "scope": "rush to work (9a); be on a diet, have a snack (9b); be based on, reserve a table (English in Use 9).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "scope": "A few — с исчисляемыми, a little — с неисчисляемыми в значении «несколько/немного» в утверждениях, вопросах и отрицаниях (There is a little water in the glass. There are a few flowers in the vase).",
+  "example": "There are a few flowers in the vase.",
+  "comment": "Повторение из 5 кл. в сокращённом виде: few/little без a в 6 кл. не даны. проверить: окончание правила неразборчиво в OCR.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1512,10 +940,10 @@
   "lesson": "9b",
   "category": "Глаголы: времена",
   "topic": "Present Simple vs Present Continuous",
-  "scope": "Повторение противопоставления (в ToC 9b).",
+  "scope": "Повторение противопоставления (правило — раздел справочника Module 6, см. 6b).",
   "example": "",
-  "comment": "проверить: в OCR ToC «present simple vs … continuous» стоит в строке 9b; в GR раздел только в Module 6.",
-  "source": "ToC"
+  "comment": "Повторение 6b; нового в справочнике нет.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
@@ -1523,75 +951,20 @@
   "lesson": "10a",
   "category": "Глаголы: времена",
   "topic": "be going to",
-  "scope": "am/is/are going to + инфинитив; все лица; + (краткие формы), − (I'm not/isn't/aren't going to), ?, краткие ответы. Значения: планы и намерения на ближайшее будущее; предсказание по очевидным признакам (It is going to rain).",
-  "example": "I'm going to play football this afternoon.",
-  "comment": "Расширение 5 кл: полная таблица форм и значение «предсказание по признакам».",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 10 · Holiday time",
-  "lesson": "10a",
-  "category": "Зависимые предлоги и устойчивые сочетания",
-  "topic": "Collocations / Fixed phrases",
-  "scope": "go on a boat cruise, stay in a (luxurious) hotel, buy souvenirs, rent a boat (10a); look forward to smth / doing smth (10c); range from, remind smb of smth (10d).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
+  "scope": "Все лица: + I'm / you're / he/she/it's / we/you/they're going to leave; − I'm not / you aren't / he/she/it isn't / we/you/they aren't going to leave; ? Am I / Are you / Is he/she/it / Are we/you/they going to leave?; краткие ответы Yes, I am. / No, I am not.; Yes, you are. / No, you aren't.; Yes, he/she/it is. / No, ... isn't.; Yes, we/you/they are. / No, ... aren't. Употребление: а) планы и намерения на ближайшее будущее (I'm going to play football this afternoon); б) когда есть доказательство, что что-то произойдёт (There are dark clouds in the sky. It is going to rain.).",
+  "example": "It is going to rain.",
+  "comment": "Расширение 5 кл.: полная парадигма и новое значение — предсказание по очевидным признакам.",
+  "source": "GR, ToC"
  },
  {
   "grade": 6,
   "module": "Module 10 · Holiday time",
   "lesson": "10b",
   "category": "Глаголы: времена",
-  "topic": "Future forms (comparison)",
-  "scope": "Present Continuous в значении будущего (договорённости) в сопоставлении с be going to (намерения).",
-  "example": "",
-  "comment": "По ToC 10b: «present continuous (future meaning) – going to». проверить точный объём.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 6,
-  "module": "Module 10 · Holiday time",
-  "lesson": "10b",
-  "category": "Глаголы: времена",
-  "topic": "Future Simple (will)",
-  "scope": "Решения в момент речи (on the spot decisions) — в функциях ToC 10b/10c.",
-  "example": "",
-  "comment": "проверить: в GR 6 кл раздела will нет; возможно, только как функция.",
-  "source": "ToC"
- },
- {
-  "grade": 6,
-  "module": "Module 10 · Holiday time",
-  "lesson": "10b",
-  "category": "Глаголы: to be / have got / модальные",
-  "topic": "can (permission/request)",
-  "scope": "Asking for / giving / refusing permission (функция в 10b).",
-  "example": "",
-  "comment": "Функция; в GR — Module 3.",
-  "source": "ToC"
- },
- {
-  "grade": 6,
-  "module": "Module 10 · Holiday time",
-  "lesson": "10b",
-  "category": "Фразовые глаголы",
-  "topic": "Phrasal verbs",
-  "scope": "hang on — подождать (10b); check in / check out — зарегистрироваться / выписаться (в отеле) (English in Use 10).",
-  "example": "",
-  "comment": "",
-  "source": "Word List"
- },
- {
-  "grade": 6,
-  "module": "Module 10 · Holiday time",
-  "lesson": "10c",
-  "category": "Предложение и вопросы",
-  "topic": "Linkers",
-  "scope": "Связки причины и следствия: because, so.",
-  "example": "",
-  "comment": "Впервые because/so как тема. См. также Clauses of reason / result.",
-  "source": "ToC"
+  "topic": "Present Continuous",
+  "scope": "Значение будущего: действие, запланированное заранее (I'm playing tennis on Saturday — согласно плану); сигнальное слово tonight.",
+  "example": "I'm playing tennis on Saturday.",
+  "comment": "Повторение: в справочнике дано в разделе Module 5 среди употреблений Present Continuous (5b). В оглавлении 10b — present continuous (future meaning) – going to; сопоставление форм будущего в справочнике нет.",
+  "source": "GR, ToC"
  }
 ]

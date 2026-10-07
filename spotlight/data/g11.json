@@ -5,10 +5,10 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "Present Simple",
-  "scope": "Форма V/Vs; орфография 3 л. ед.ч.: -s, -es после -ss/-sh/-ch/-x/-o, согласная+y → -ies, гласная+y → -s. Значения: распорядок дня, повторяющиеся действия, привычки, рецензии/спортивные комментарии/драматическое повествование, расписания и программы (значение будущего), восклицательные предложения (Here comes…), постоянные состояния. Сигнальные слова: every hour/day/week/month/summer/year, every morning/evening.",
+  "scope": "Форма: смысловой глагол V/Vs. Орфография 3 л. ед.ч. (утверждение): большинство глаголов + -s (talk – talks); на -ss, -sh, -ch, -x, -o + -es (miss – misses, fish – fishes, match – matches, mix – mixes, go – goes); согласная + y → -ies (fry – fries); НО гласная + y → -s (pay – pays). Значения: распорядок дня (daily routines); повторяющиеся действия; привычки; рецензии/спортивные комментарии/драматическое повествование; расписания и программы (значение будущего); восклицательные предложения (Here comes Elaine!); постоянные состояния. Сигнальные слова: every hour/day/week/month/summer/year, every morning/evening и т.п.",
   "example": "The play starts at 8:00.",
-  "comment": "Повторение и систематизация (ToC: present, future and past tenses); новые для повторения значения — reviews/sports commentaries, exclamatory sentences.",
-  "source": "ToC, GR"
+  "comment": "Повторение и систематизация (ToC 1c: present, future and past tenses). Отрицание и вопрос в справочнике не расписаны.",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -16,10 +16,10 @@
   "lesson": "1c",
   "category": "Прилагательные и наречия",
   "topic": "Adverbs of frequency",
-  "scope": "always (100%), usually (75%), often (50%), sometimes (25%), never (0%); место: перед смысловым глаголом, но после to be и вспомогательных глаголов.",
-  "example": "She's always late for everything.",
-  "comment": "Повторение; дано в справочнике при Present Simple.",
-  "source": "GR"
+  "scope": "Наречия частотности показывают, как часто что-то происходит: always (100%), usually (75%), often (50%), sometimes (25%), never (0%). Место: перед смысловым глаголом, но после глагола to be и после вспомогательных глаголов.",
+  "example": "They never go out on Mondays.",
+  "comment": "Повторение; в справочнике дано при Present Simple.",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -27,10 +27,10 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "Present Continuous",
-  "scope": "Форма am/is/are + V-ing; орфография -ing: -e выпадает (bake – baking), удвоение согласной в ударном последнем слоге (occur – occurring, begin – beginning, но discover – discovering), односложные гласная+согласная (sit – sitting). Значения: действие в момент речи; действие в период речи (around now); запланированные договорённости на ближайшее будущее (fixed arrangements); временные ситуации; изменяющиеся/развивающиеся ситуации; частые повторяющиеся действия с always/constantly/continually — раздражение/критика. Сигнальные слова: now, at the moment, at present, nowadays, these days, today, tomorrow, next month.",
+  "scope": "Форма: am/is/are + V-ing. Орфография -ing: большинство глаголов + -ing (build – building, smell – smelling); -e выпадает (bake – baking, sunbathe – sunbathing); глаголы на гласная + согласная с ударением на последнем слоге удваивают согласную (occur – occurring, begin – beginning), НО discover – discovering; односложные на гласная + согласная удваивают согласную (sit – sitting, stop – stopping). Значения: действие в момент речи; действие в период речи (around the time of speaking); твёрдые договорённости на ближайшее будущее (особенно когда известны время и место); временные ситуации; изменяющиеся/развивающиеся ситуации (getting thinner and thinner); частые повторяющиеся действия с always, constantly, continually — раздражение/критика. Примечание: обычно не употребляются в Continuous have (= possess), like, love, hate, want, know, remember, forget, understand, think, believe, cost (см. Stative verbs). Сигнальные слова: now, at the moment, at present, nowadays, these days, today, tomorrow, next month.",
   "example": "She's always complaining.",
   "comment": "Повторение; полный набор значений.",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -38,10 +38,10 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "Present Simple vs Present Continuous",
-  "scope": "Постоянные состояния (PS) vs временные ситуации (PC); повторяющиеся действия (PS) vs действия в период речи (PC).",
-  "example": "Richard speaks Polish. / He's working really hard these days.",
+  "scope": "Present Simple — постоянные состояния (Richard speaks Polish) vs Present Continuous — временные ситуации (She's washing her hair now); Present Simple — повторяющиеся действия (She wakes up at 6:00 every morning) vs Present Continuous — действия в период речи (He's working really hard these days).",
+  "example": "He's working really hard these days.",
   "comment": "Отдельное противопоставление в справочнике.",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -49,10 +49,10 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "Stative verbs",
-  "scope": "Группы: глаголы чувств (appear, feel, hear, look, see, smell, sound, taste), восприятия/мышления (believe, forget, know, realise, remember, understand), чувств и эмоций (desire, detest, enjoy, hate, like, love, prefer, want), прочие (be, belong, contain, cost, fit, have, include, keep, matter, need, owe, own, weigh, wish). Разница в значении в Simple/Continuous: think (считать/обдумывать), have (иметь/есть, принимать, переживать), see (видеть/встречаться), taste, smell, appear (казаться/выступать), fit (подходить по размеру/устанавливать); enjoy в Continuous — конкретное предпочтение; look (о внешности), feel, hurt, ache — без разницы в значении.",
+  "scope": "Глаголы состояния описывают состояние, а не действие, и обычно не имеют Continuous. Группы: глаголы чувств (appear, feel, hear, look, see, smell, sound, taste); восприятия/мышления (believe, forget, know, realise, remember, understand); чувств и эмоций (desire, detest, enjoy, hate, like, love, prefer, want); прочие (be, belong, contain, cost, fit, have, include, keep, matter, need, owe, own, weigh, wish). Некоторые употребляются в Continuous с другим значением: think (= believe / = am considering); have (= owns, possesses / = experiencing, eating, taking a bath); see (= it is visible / = am meeting); taste (= has the flavour of / = is testing); smell (= has the aroma of / = is sniffing); appear (= seems to / = is performing); fit (= is the right size / = is attaching, installing). Примечание: enjoy в Continuous — конкретное предпочтение (He's enjoying the party), в Simple — общее (Jack really enjoys reading crime novels). look (о внешности), feel (испытывать эмоцию), hurt, ache — в Simple и Continuous без разницы в значении (She looks / is looking very beautiful).",
   "example": "I am thinking about moving to Canada. (= am considering)",
   "comment": "Расширенный список и пары значений.",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -60,10 +60,10 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "Present Perfect",
-  "scope": "Форма have/has + Past Participle (-ed / неправильные глаголы). Значения: действие началось в прошлом и продолжается (know, be, have, possess, own); прошлое действие с видимым результатом в настоящем; действие в неуказанное время в прошлом; с today/this morning/this week/so far — период не закончен, акцент на количестве; недавно завершённые действия; личный опыт/изменения. Сигнальные слова: just, already, yet, for, since, ever, never.",
+  "scope": "Форма: have/has + Past Participle (правильные — + -ed: complain – complained; неправильные — по таблице Irregular Verbs). Значения: действие началось в прошлом и продолжается до настоящего, обычно с know, be, have, possess, own; прошлое действие с видимым результатом в настоящем; действие в неуказанное время в прошлом (важно действие, а не время); с today, this morning/afternoon/week, so far — период не закончен, или для акцента на количестве (seven times this week); недавно завершённые действия; личный опыт/изменения. Сигнальные слова: just, already, yet, for, since, ever, never.",
   "example": "He has drunk two cups of coffee today.",
   "comment": "Повторение.",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -71,10 +71,10 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "Present Perfect (have gone to / have been to / have been in)",
-  "scope": "have gone to — ушёл и ещё не вернулся; have been to — побывал и вернулся; have been in — находится там (в течение периода).",
+  "scope": "have gone to — ушёл/уехал и ещё не вернулся (в пути или там); have been to — побывал и вернулся; have been in — находится там сейчас (в течение периода).",
   "example": "He has been to Berlin.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -82,10 +82,10 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "Present Perfect Continuous",
-  "scope": "Форма have/has + been + V-ing. Значения: акцент на длительности действия, начавшегося в прошлом и продолжающегося; действие длилось какое-то время, оставило видимый результат; раздражение/критика; повторяющиеся действия от прошлого до настоящего. Сигнальные слова: since, for, how long.",
+  "scope": "Форма: have/has + been + V-ing. Значения: акцент на длительности действия, начавшегося в прошлом и продолжающегося до настоящего; действие началось в прошлом и длилось какое-то время, может продолжаться или закончиться, но оставило видимый результат в настоящем; раздражение/гнев/критика; повторяющиеся действия в прошлом, продолжающиеся до настоящего. Сигнальные слова: since, for, how long (акцент на длительности).",
   "example": "She has been using my computer without asking me.",
-  "comment": "Повторение; значение раздражения/критики.",
-  "source": "ToC, GR"
+  "comment": "Повторение.",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -93,10 +93,10 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "Present Perfect vs Past Simple",
-  "scope": "Past Simple — указанное время в прошлом; действие началось и закончилось в прошлом. Present Perfect — неуказанное время; действие началось в прошлом и продолжается.",
-  "example": "Paul has lived here for two years.",
+  "scope": "Past Simple: действие в указанное время в прошлом (Liz watched a film yesterday); действие началось и закончилось в прошлом (Paul had an earache for a week). Present Perfect: действие в неуказанное время в прошлом (Liz has watched a film); действие началось в прошлом и продолжается (Paul has lived here for two years).",
+  "example": "Paul has lived here for two years. (He still lives here.)",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -104,10 +104,21 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "Past Simple",
-  "scope": "Правильные глаголы на -ed, неправильные — по таблице; одна форма для всех лиц, кроме be. Орфография: -d после -e; согласная+y → -ied; гласная+y → -ed; удвоение конечной согласной (skip – skipped); -l удваивается (travel – travelled). Значения: завершённые действия в прошлом; действия в определённое время; привычки в прошлом; последовательные действия; завершённые действия, не связанные с настоящим (указанное или подразумеваемое время). Сигнальные слова: yesterday, last night/week, ago, in 1988.",
+  "scope": "Форма: правильные глаголы на -ed, неправильные — по таблице Irregular Verbs; одна форма для всех лиц, исключение — be (was/were). Орфография: -e + -d (wave – waved); согласная + y → -ied (cry – cried); гласная + y → -ed (pray – prayed); один ударный гласный между двумя согласными — удвоение (skip – skipped); на -l — удвоение l (travel – travelled). Значения: завершённые действия в прошлом; действия в определённое время в прошлом; привычки в прошлом; последовательные действия; завершённые действия, не связанные с настоящим, с указанным или подразумеваемым временем (Henry James wrote many novels). Сигнальные слова: yesterday, yesterday morning/evening, last night/week, two weeks/a month ago, in 1988.",
   "example": "She woke up, put some clothes on and ran out of the house.",
-  "comment": "Повторение; таблица неправильных глаголов в конце учебника.",
-  "source": "ToC, GR"
+  "comment": "Повторение.",
+  "source": "GR, ToC"
+ },
+ {
+  "grade": 11,
+  "module": "Module 1 · Relationships",
+  "lesson": "",
+  "category": "Глаголы: другое",
+  "topic": "Irregular verbs",
+  "scope": "Таблица Irregular Verbs (GR21): Infinitive – Past – Past Participle, около 100 глаголов (be – was – been … write – wrote – written). Варианты: burnt (burned), dreamt (dreamed), learnt (learned), smelt (smelled), spelt (spelled); hang – hung (hanged); get – got – got (gotten); bear – bore – born(e); can – could – (been able to).",
+  "example": "",
+  "comment": "Приложение к справочнику; используется для Past Simple, Present Perfect, пассива.",
+  "source": "GR"
  },
  {
   "grade": 11,
@@ -115,10 +126,10 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "Past Continuous",
-  "scope": "Форма was/were + V-ing. Значения: действие в процессе в указанный момент прошлого; длительное действие, прерванное другим (Past Simple); одновременные действия (while); фон в рассказе. Сигнальные слова: while, when, as, all day/night/morning, yesterday.",
+  "scope": "Форма: was/were + V-ing. Значения: действие в процессе в указанный момент прошлого (начало и конец неизвестны); длительное действие, прерванное другим (прерывающее — Past Simple); два и более одновременных действия; фон (background) в рассказе. Сигнальные слова: while, when, as, all day/night/morning, yesterday.",
   "example": "He was listening to music when the doorbell rang.",
   "comment": "Повторение.",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -126,21 +137,10 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "Past Simple vs Past Continuous",
-  "scope": "Указанное время: завершённое действие (PS) vs действие в процессе (PC); последовательные действия (PS) vs одновременные (PC); прерванное действие (PC) + прерывающее (PS).",
+  "scope": "Указанное время: завершённое действие (PS: Fay rang Susan at 2 o'clock) vs действие в процессе (PC: At 3 o'clock he was taking a nap); последовательные действия (PS: First she packed her bags and then she ordered a taxi) vs одновременные (PC: was watering … while he was painting); прерванное действие (PC) + прерывающее (PS).",
   "example": "Molly was walking back home when it began to rain.",
   "comment": "",
-  "source": "GR"
- },
- {
-  "grade": 11,
-  "module": "Module 1 · Relationships",
-  "lesson": "1c",
-  "category": "Глаголы: времена",
-  "topic": "Past Perfect / Past Perfect Continuous",
-  "scope": "В ToC — «past tenses»; в справочнике отдельного раздела нет (Past Perfect встречается только в таблицах пассива, каузатива, косвенной речи и условных 3 типа).",
-  "example": "",
-  "comment": "проверить: раздел о Past Perfect/Past Perfect Continuous, возможно, на странице GR4, не попавшей в OCR.",
-  "source": "ToC"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -148,10 +148,10 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "Future Simple (will)",
-  "scope": "Форма will + V. Значения: предсказания (с hope, think, believe, expect, imagine, I'm sure, I'm afraid, probably, perhaps); обещания; спонтанные решения; угрозы; надежды, страхи, предложения, предупреждения, просьбы, комментарии; то, в чём ещё не уверены/не решили. Shall I/we? — предложения, советы. Сигнальные слова: tomorrow, the day after tomorrow, next week/month/year, tonight, soon, in a week.",
+  "scope": "Форма: will + V. Значения: предсказания (обычно с hope, think, believe, expect, imagine, I'm sure, I'm afraid, probably, perhaps); обещания; спонтанные решения (on-the-spot decisions); угрозы; надежды, страхи, предложения, обещания, предупреждения, предсказания, просьбы, комментарии (особенно с expect, hope, believe, I'm sure, I'm afraid, probably); то, в чём ещё не уверены или что ещё не решили (Maybe I'll go…). Примечание: Shall I/we? — в вопросах для предложений, предложений помощи и просьбы о совете. Сигнальные слова: tomorrow, the day after tomorrow, next week/month/year, tonight, soon, in a week/month/year.",
   "example": "I'm so tired. I'll take a break.",
   "comment": "Повторение.",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -159,10 +159,10 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "Future Continuous",
-  "scope": "Форма will be + V-ing. Значения: действие в процессе в указанный момент будущего; действие, которое обязательно произойдёт как часть распорядка/договорённости; вежливый вопрос о планах.",
+  "scope": "Форма: will be + Present Participle (V-ing). Значения: действие в процессе в указанный момент будущего; действие, которое обязательно произойдёт как результат распорядка или договорённости; вежливый вопрос о чьих-то планах на ближайшее будущее (Will you be watching the show tonight?).",
   "example": "This time next week I'll be sunbathing in Barbados.",
   "comment": "",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -170,10 +170,10 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "be going to",
-  "scope": "Форма am/is/are going to + V. Значения: планы и намерения; предсказания на основе того, что видим/знаем. Противопоставление: will — спонтанные решения.",
+  "scope": "Форма: am/is/are + going to + bare infinitive. Значения: планы и намерения на будущее; предсказания на основе того, что видим или знаем. Противопоставление: will — спонтанные решения (I'm thirsty. I think I'll have a glass of water).",
   "example": "There are black clouds in the sky. It looks like it is going to rain.",
   "comment": "",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -181,10 +181,10 @@
   "lesson": "1c",
   "category": "Глаголы: времена",
   "topic": "Future forms (comparison)",
-  "scope": "Сопоставление will / be going to / Present Continuous (договорённости) / Present Simple (расписания) / Future Continuous.",
+  "scope": "По справочнику М1 будущее выражается: will (предсказания, обещания, спонтанные решения, угрозы и др.); be going to (планы/намерения, предсказания по признакам) — прямо противопоставлено will (спонтанные решения); Present Continuous (твёрдые договорённости); Present Simple (расписания/программы); Future Continuous (действие в процессе в момент будущего, распорядок/договорённость, вежливый вопрос о планах).",
   "example": "I'm thirsty. I think I'll have a glass of water.",
-  "comment": "Future Perfect / Future Perfect Continuous в справочнике отдельно не даны (Future Perfect — только в таблице пассива).",
-  "source": "GR"
+  "comment": "Сводной таблицы в справочнике нет — строка собрана из разделов справочника М1. Future Perfect / Future Perfect Continuous отдельно не даны (Future Perfect Simple — только в таблице пассива М4).",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -192,10 +192,10 @@
   "lesson": "1c",
   "category": "Глаголы: другое",
   "topic": "used to",
-  "scope": "used to + V — прошлые привычки/состояния, которых больше нет; противопоставление с be used to + -ing.",
+  "scope": "used to + V — прошлая привычка, которой больше нет (I used to work very hard. — I don't any more), противопоставлено be/get used to + -ing; в списке semi-modals: used to (= would).",
   "example": "I used to work very hard. (I don't any more.)",
-  "comment": "ToC 1c; в справочнике — только примечание в M3 (be/get used to) и M5 (used to = would). проверить: полный раздел мог быть на GR4.",
-  "source": "ToC, GR"
+  "comment": "Отдельного раздела в справочнике нет: только примечание в М3 (при -ing form) и строка в М5 (semi-modals: used to = would). would для прошлых привычек отдельно не описан.",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -203,43 +203,10 @@
   "lesson": "1c",
   "category": "Глаголы: другое",
   "topic": "be/get used to",
-  "scope": "be used to + -ing — привычно (состояние); get used to + -ing — привыкать (процесс).",
+  "scope": "be/get used to + -ing form — привычка (It's my habit); противопоставлено used to + V (прошлая привычка, которой больше нет). be used to также в списке выражений с предлогом to + -ing.",
   "example": "I'm used to working very hard. (It's my habit.)",
-  "comment": "Противопоставление с used to.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 11,
-  "module": "Module 1 · Relationships",
-  "lesson": "1c",
-  "category": "Глаголы: другое",
-  "topic": "would (past habits)",
-  "scope": "would + V — повторяющиеся действия в прошлом (не состояния).",
-  "example": "Whenever Emma was upset, she used to walk out of the room.",
-  "comment": "В справочнике только «used to (= would)» в M5. проверить: ограничение (не со stative verbs) явно не дано.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 11,
-  "module": "Module 1 · Relationships",
-  "lesson": "1d",
-  "category": "Существительные и артикли",
-  "topic": "Collective nouns",
-  "scope": "Собирательные существительные (family, flock, public, team, committee, clergy, company, enemy, group, government) — лексика модуля; в справочнике M8 — в списке неисчисляемых.",
-  "example": "",
-  "comment": "ToC даёт collective nouns в блоке Vocabulary M1; урок по порядку колонок — 1d, проверить.",
-  "source": "ToC, GR"
- },
- {
-  "grade": 11,
-  "module": "Module 1 · Relationships",
-  "lesson": "1e",
-  "category": "Предложение и вопросы",
-  "topic": "Linkers",
-  "scope": "Linking words and phrases для статьи о друге (an article about a friend).",
-  "example": "",
-  "comment": "Конкретный список слов в источнике не дан — проверить по странице 1e.",
-  "source": "ToC"
+  "comment": "В справочнике — примечание в М3 (раздел -ing form); разница be used to / get used to не объясняется.",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -247,10 +214,10 @@
   "lesson": "1c",
   "category": "Фразовые глаголы",
   "topic": "Phrasal verbs",
-  "scope": "Фокус English in Use: come + частицы (список в источнике не виден). Фразовые глаголы из текстов модуля (Word List): care for, comply with, dress up, get on (well/badly), pass away, reflect on, agree to, approve of, depend on, dig up, get away from, go ahead, go on (случаться), keep sth down, object to, rely on, show off, take care of, tell off, trip over, care about, light up, bring sb up, pick on, carry out, filter out, set up.",
+  "scope": "come + частицы (English in Use 1c); конкретные частицы в доступных страницах не даны.",
   "example": "",
-  "comment": "проверить: частицы к come (стр. 1c) в OCR отсутствуют.",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления; приложения с фразовыми глаголами в учебнике нет.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -258,10 +225,10 @@
   "lesson": "1c",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Dependent prepositions",
-  "scope": "Из Word List модуля: alien to, pleased with, attached to, agree to sth, approve of, depend on, object to, rely on, care for/about, comply with, reflect on, put the blame on sb, be close to sb, make friends with sb, on the point of; be unheard of. ",
+  "scope": "Dependent prepositions (English in Use 1c); конкретные сочетания в доступных страницах не даны.",
   "example": "",
-  "comment": "Упражнение 1c на зависимые предлоги в источнике не видно — список собран по Word List; проверить.",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -269,9 +236,9 @@
   "lesson": "1b",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Collocations / Fixed phrases",
-  "scope": "Idioms related to people (1b); лексика relationships, families, character adjectives.",
+  "scope": "Idioms related to people (1b).",
   "example": "",
-  "comment": "Конкретные идиомы в OCR не выделены.",
+  "comment": "в доступных страницах только заголовок из оглавления.",
   "source": "ToC"
  },
  {
@@ -280,10 +247,10 @@
   "lesson": "2c",
   "category": "Предложение и вопросы",
   "topic": "Relative pronouns / Relative clauses",
-  "scope": "Relative pronouns: who/whom/that — люди; which/that — предметы/животные; whose — принадлежность (люди, животные, предметы); of which/whose для предметов. Опускаются, когда являются дополнением; не опускаются, когда подлежащее. that не используется после запятой и предлогов. whom/which/whose в выражениях количества с of (some of, many of, half of, most of which). Defining (без запятых) vs non-defining (с запятыми, без that); which, относящееся ко всему главному предложению.",
+  "scope": "Relative clauses вводятся относительным местоимением или наречием. who(m)/that — люди; which/that — предметы (и животные); whose — принадлежность (люди, животные, предметы); для предметов также of which/whose (That's the book of which/whose (the) first page is missing). Опускаются who/which/that, когда это дополнение (The woman (who) you met…); не опускаются, когда подлежащее. Defining clause — необходимая информация, без запятых, who/whom/whose/which/that; non-defining — дополнительная информация, в запятых, who/whom/whose/which (не that); в non-defining which может относиться ко всему главному предложению (…, which she doesn't like). whom/which/whose в выражениях количества с of (some of, many of, half of, most of which). that заменяет who/whom/which, но никогда не ставится после запятой и после предлога.",
   "example": "She got a lot of job offers, most of which were from investment banks.",
-  "comment": "Расширено по сравнению с 10 кл.: non-defining, which ко всему предложению, expressions of quantity.",
-  "source": "ToC, GR"
+  "comment": "",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -291,10 +258,10 @@
   "lesson": "2c",
   "category": "Предложение и вопросы",
   "topic": "Relative adverbs",
-  "scope": "when/that — время; where — место; why — причина (the reason why).",
+  "scope": "Relative adverbs: when/that — время (That was the year (when/that) we got married); where — место; why — причина (The reason (why) she was late…); when/that и why могут опускаться.",
   "example": "The restaurant where we had dinner yesterday is very expensive.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -302,10 +269,10 @@
   "lesson": "2c",
   "category": "Предложение и вопросы",
   "topic": "Prepositions in relative clauses",
-  "scope": "Предлог перед whom/which (to whom, of which) — после предлога that невозможен.",
-  "example": "The person to whom you were speaking is my brother.",
+  "scope": "Предлог перед whom/which (to whom, of which); that после предлога невозможен.",
+  "example": "The person to whom you were speaking is my brother. ('that' is not possible)",
   "comment": "",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -313,10 +280,10 @@
   "lesson": "2c",
   "category": "Предложение и вопросы",
   "topic": "Clauses of purpose",
-  "scope": "to / in order to / so as to + inf; so that + can/will (наст./буд.), so that + could/would (прош.); with a view to / with the aim of + -ing; for + noun/-ing (назначение предмета); in case + Present / in case + Past. Отрицательная цель: so as not / in order not + inf (одно подлежащее); so that + can't/won't, couldn't/wouldn't (разные подлежащие); for fear/lest + might/should; for fear of sth/of doing sth; prevent + noun (+ from) + -ing; avoid + -ing.",
+  "scope": "Цель: to / in order to / so as to + inf; so that + can/will (наст./буд.); so that + could/would (прош.); with the view to / with the aim of + -ing; for + noun/-ing (назначение предмета: a liquid for removing paint); in case + Present (наст./буд.); in case + Past (прош.). Отрицательная цель: so as not / in order not + inf (одно и то же действующее лицо); so that + can't/won't (наст./буд.) и so that + couldn't/wouldn't (прош.) — разные действующие лица; for fear/lest + might/should; for fear of sth/of doing sth; prevent + noun/pronoun (+ from) + -ing; avoid + -ing.",
   "example": "Joe joined a gym so that he could become fitter.",
-  "comment": "Урок по ToC — 2c (проверить, не 2e).",
-  "source": "ToC, GR"
+  "comment": "",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -324,10 +291,10 @@
   "lesson": "2c",
   "category": "Предложение и вопросы",
   "topic": "Clauses of reason",
-  "scope": "as, because, for (формально, после запятой), on the grounds that, the reason for, the reason (why); because of / due to + noun/-ing; because of / due to the fact that.",
+  "scope": "Вводятся: as, because, for, on the grounds that, the reason for, the reason (why). because обычно отвечает на вопрос why; for (= because) — всегда после запятой/паузы, очень формально; because of / due to + noun/-ing; because of / due to the fact that + clause.",
   "example": "They fired him on the grounds that he wasn't doing his job properly.",
   "comment": "",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -335,10 +302,10 @@
   "lesson": "2c",
   "category": "Предложение и вопросы",
   "topic": "Clauses of result",
-  "scope": "that (после such/so), (and) as a result, (and) as a consequence, consequently, so, therefore. such a(n) + adj + единственное исчисляемое + that; such + adj + неисчисляемое/мн.ч. + that; such a lot of + noun + that; so + adj/adv + that; so + few/little/many/much + noun + that; so + adj + a(n) + noun + that.",
+  "scope": "Вводятся: that (после such/so), (and) as a result, (and) as a consequence (формально), consequently (формально), so, therefore. Модели: such a(n) + (adj) + singular countable + that; such + (adj) + uncountable/plural noun + that; such a lot of + noun + that; so + adj/adv + that; so + few/little/many/much + noun + that; so + adj + a(n) + noun + that (so popular a restaurant that…); as a result / therefore / consequently / so + clause.",
   "example": "Mrs Abbot is such a good teacher that all her students love her.",
   "comment": "Пересекается с so/such.",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -346,10 +313,10 @@
   "lesson": "2c",
   "category": "Прилагательные и наречия",
   "topic": "so / such",
-  "scope": "so + adj/adv; so + many/much/few/little + noun; so + adj + a(n) + noun; such (a/an) + (adj) + noun; such a lot of — в придаточных результата.",
+  "scope": "В придаточных результата: so + adj/adv + that; so + few/little/many/much + noun + that; so + adj + a(n) + noun + that; such a(n) + (adj) + singular countable + that; such + (adj) + uncountable/plural noun + that; such a lot of + noun + that. Инверсия после so/such в начале предложения — М8.",
   "example": "They're such nice people that everybody likes them.",
   "comment": "Дано в рамках Clauses of result.",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -357,10 +324,10 @@
   "lesson": "2c",
   "category": "Фразовые глаголы",
   "topic": "Phrasal verbs",
-  "scope": "Фокус English in Use: put + частицы (список в источнике не виден). Из текстов модуля (Word List): break sth down, break up with sb, build up, deal with, get at, give away, give back, give over, give up, speed up, take on, take up, bump into, come over sb, fit in with, give in, go over, hang out with, pick at, pick on, stand up for, take over, bunk off, turn up, consist of, send out, take in, break down, cut back, make up.",
+  "scope": "put + частицы (English in Use 2c); конкретные частицы в доступных страницах не даны.",
   "example": "",
-  "comment": "проверить: частицы к put (2c) в OCR отсутствуют.",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления; приложения с фразовыми глаголами в учебнике нет.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -368,10 +335,10 @@
   "lesson": "2c",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Dependent prepositions",
-  "scope": "Из Word List: accustomed to, be fed up with, be up to one's eyes in sth, feel the strain of, on behalf of, be down to, consist of, deal with, fit in with, stand up for.",
+  "scope": "Dependent prepositions (English in Use 2c); конкретные сочетания в доступных страницах не даны.",
   "example": "",
-  "comment": "Упражнение на зависимые предлоги в источнике не видно — проверить.",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -379,9 +346,9 @@
   "lesson": "2b",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Collocations / Fixed phrases",
-  "scope": "Idioms with numbers (2b); лексика stress, body language, peer pressure.",
+  "scope": "Idioms with numbers (2b).",
   "example": "",
-  "comment": "Конкретные идиомы не выделены в OCR.",
+  "comment": "в доступных страницах только заголовок из оглавления.",
   "source": "ToC"
  },
  {
@@ -390,10 +357,10 @@
   "lesson": "3c",
   "category": "Глаголы: другое",
   "topic": "Infinitive / -ing form",
-  "scope": "-ing form: как подлежащее; после admit, appreciate, avoid, consider, continue, deny, fancy, go (занятия), imagine, mind, miss, practise, prevent, quit, save, suggest; после love, like, enjoy, prefer, dislike, hate (общее предпочтение); после be busy, it's no use/good, it's (not) worth, what's the use of, can't help, there's no point (in), can't stand, have difficulty/trouble (in); после spend/waste/lose (time, money); после предлога to (look forward to, object to, be used to, in addition to) и think of, apologise for; prefer doing to doing; после hear, listen to, notice, see, watch, feel — незавершённое действие.\nto-infinitive: цель; после agree, appear, decide, expect, hope, plan, promise, refuse, want; после would like/prefer/love (конкретное предпочтение); после прилагательных чувств, готовности (eager, reluctant, willing), характера (it was kind of you to…), lucky/fortunate; после too/enough; после the first/second/next/last; после вопросительного слова (ask, decide, explain, find out, learn, want to know); в выражениях to tell you the truth, to be honest, to sum up, to begin with; после honour, goal, way; so + adj + as to; only to (неудовлетворительный результат); for + noun/pronoun + to-inf; dare (с to/без to).\nbare infinitive: после модальных; после let, make, see, hear, feel (но в пассиве — to-inf: be made to, be seen to); после had better, would rather; help + (to) inf.",
+  "scope": "-ing form: как существительное в функции подлежащего; после admit, appreciate, avoid, consider, continue, deny, fancy, go (занятия), imagine, mind, miss, practise, prevent, quit, save, suggest; после love, like, enjoy, prefer, dislike, hate — общее предпочтение; после be busy, it's no use, it's no good, it's (not) worth, what's the use of, can't help, there's no point (in), can't stand, have difficulty (in), have trouble; после spend, waste, lose (time, money); после предлога to и др. предлогов: think of, apologise for, object to, look forward to, be used to, in addition to; prefer doing sth to sth else; после hear, listen to, notice, see, watch, feel — незавершённое действие (I saw Paul waiting for the bus), НО bare inf — завершённое (I didn't see Paul get on the bus). Примечание: be/get used to + -ing vs used to + V.\nto-infinitive: цель; после глаголов, относящихся к будущему (agree, appear, decide, expect, hope, plan, promise, refuse, want); после would like / would prefer / would love — конкретное предпочтение; после прилагательных чувств (happy, glad, sad), готовности/нежелания (eager, reluctant, willing), характера (clever, kind) и lucky, fortunate; безличная конструкция it + be + adj/noun (It was kind of you to…, It was moving to see him…); после too/enough; после be + first/second/next/last; после ask, decide, explain, find out, learn, want, want to know + вопросительное слово (when to get the tickets); в выражениях to tell you the truth, to be honest, to sum up, to begin with; после существительных honour, goal, way; so + adj + as to (Would you be so kind as to…); only + to-inf — неудовлетворительный результат; for + noun/pronoun + to-inf. Два инфинитива через and/or — второй to опускается. dare: «иметь смелость» — с to или без; угроза/предупреждение/гнев — без to (Don't you dare talk…); вызов — с to (I dare you to dive…).\nbare infinitive: после модальных; после let, make, see, hear, feel (НО в пассиве be made/heard/seen + to-inf; see/hear/watch + -ing в пассиве не меняются: She was heard crying); после had better, would rather; help + (to) inf.",
   "example": "She drove all the way to the mall only to find it was closed.",
-  "comment": "Полный обзор; второй to опускается при and/or.",
-  "source": "ToC, GR"
+  "comment": "Полный обзор.",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -401,20 +368,20 @@
   "lesson": "3c",
   "category": "Глаголы: другое",
   "topic": "Infinitive / -ing form (difference in meaning)",
-  "scope": "forget, remember, mean, regret, try, stop, go on, want, be sorry, hate, be afraid: to-inf vs -ing с разным значением. Без разницы: begin, continue, intend, start (не две -ing формы подряд); advise/allow/encourage/permit/require + object + to-inf vs + -ing; need/require/want + to-inf / -ing / passive inf (The lawn needs mowing); be advised/allowed/encouraged/permitted/required + to-inf.",
+  "scope": "С изменением значения: forget + to-inf (не вспомнить сделать) / + -ing (не вспомнить, что было); remember + to-inf (не забыть) / + -ing (вспоминать); mean + to-inf (намереваться) / + -ing (означать, включать); regret + to-inf (сожалеть сообщить — с say, tell, inform) / + -ing (сожалеть о сделанном); try + to-inf (пытаться) / + -ing (попробовать в качестве эксперимента); stop + to-inf (остановиться, чтобы сделать) / + -ing (прекратить); go on + to-inf (перейти к другому) / + -ing (продолжать); want + to-inf (хотеть) / + -ing (нуждаться: My car wants cleaning); be sorry + to-inf (сожалеть) / be sorry for + -ing (извиняться); hate + to-inf (не хочется делать то, что предстоит) / + -ing (неловко за то, что делаешь); be afraid + to-inf (бояться сделать, не решаться) / be afraid of + -ing (бояться, что случится). Без изменения значения: begin, continue, intend, start + to-inf / -ing (две -ing формы подряд не ставятся: NOT is beginning talking); advise, allow, encourage, permit, require + object + to-inf / + -ing; need, require, want + to-inf / -ing / passive inf (The lawn needs mowing / needs to be mowed); be advised/allowed/encouraged/permitted/required + только to-inf.",
   "example": "I stopped drinking coffee months ago.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
   "module": "Module 3 · Responsibility",
-  "lesson": "3c",
+  "lesson": "",
   "category": "Глаголы: другое",
   "topic": "Expressing preference",
-  "scope": "Общее: prefer + noun/-ing + to + noun/-ing; prefer + to-inf + rather than + bare inf. Конкретное: I'd prefer + to-inf (+ rather than + bare inf); I'd prefer + noun (+ rather than + noun); I'd rather + bare inf (+ than + bare inf).",
+  "scope": "Общее предпочтение: I prefer + noun/-ing + to + noun/-ing (I prefer vegetables to meat; painting to drawing); I prefer + to-inf + rather than + bare inf. Конкретное предпочтение: I'd prefer + to-inf (+ rather than + bare inf); I'd prefer + noun (+ rather than + noun); I'd rather + bare inf (+ than + bare inf).",
   "example": "I'd rather go to the concert than stay at home.",
-  "comment": "Пересекается с Unreal Past (would rather) — M7.",
+  "comment": "В ToC отдельно не назван; относится к разделу -ing/infinitive (3c) — урок проверить.",
   "source": "GR"
  },
  {
@@ -423,9 +390,9 @@
   "lesson": "3a",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Easily confused words",
-  "scope": "Words often confused (лексика «crime and the law»).",
+  "scope": "Words often confused (3a, тема crime and the law); конкретные пары в доступных страницах не даны.",
   "example": "",
-  "comment": "Конкретные пары в источнике не видны — проверить по 3a.",
+  "comment": "в доступных страницах только заголовок из оглавления.",
   "source": "ToC"
  },
  {
@@ -434,10 +401,10 @@
   "lesson": "3c",
   "category": "Фразовые глаголы",
   "topic": "Phrasal verbs",
-  "scope": "Фокус English in Use: keep + частицы (список в источнике не виден). Из текстов модуля (Word List): break into, reach for, wipe sth off, apply for, draw up, pick sb up, point to, smother in, speak up, take up, pass through.",
+  "scope": "keep + частицы (English in Use 3c); конкретные частицы в доступных страницах не даны.",
   "example": "",
-  "comment": "проверить: частицы к keep (3c) в OCR отсутствуют.",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления; приложения с фразовыми глаголами в учебнике нет.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -445,10 +412,10 @@
   "lesson": "3c",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Dependent prepositions",
-  "scope": "Из Word List: take responsibility for, give sb the responsibility of sth, fall for sth, apply for, point to, reach for, reduce one's impact on sth; в справочнике: object to, look forward to, think of, apologise for, in addition to (+ -ing).",
-  "example": "",
-  "comment": "Упражнение на зависимые предлоги в источнике не видно — проверить.",
-  "source": "ToC, Word List, GR"
+  "scope": "Dependent prepositions (English in Use 3c); конкретные сочетания в доступных страницах не даны. В справочнике М3 (-ing после предлогов): think of, apologise for, object to, look forward to, be used to, in addition to; have difficulty (in), there's no point (in).",
+  "example": "He apologised for being late.",
+  "comment": "Заголовок — из оглавления; сочетания — только из справочника (раздел -ing form).",
+  "source": "ToC, GR"
  },
  {
   "grade": 11,
@@ -456,10 +423,10 @@
   "lesson": "4c",
   "category": "Глаголы: другое",
   "topic": "Passive Voice",
-  "scope": "Форма be (в нужном времени) + Past Participle. Времена в таблице: Present Simple/Continuous, Past Simple/Continuous, Present Perfect, Past Perfect, Future Simple, Future Perfect, инфинитив (has to be made), модальные (may be made). Перевод из актива: дополнение → подлежащее, by + агент или опускается. Употребление: деятель неизвестен/неважен/очевиден; действие важнее (новости, объявления, инструкции, процессы); избежать ответственности; выделить агента; формальность/вежливость. Только переходные глаголы; не пассивируются have, exist, seem, fit, suit, resemble, lack. get вместо be (неожиданно/случайно). by (агент) vs with (инструмент/материал). Агент опускается при they, people, someone и т.п. Два дополнения (send, give, tell, show, offer…) — два варианта пассива. by не опускается в вопросах с who/whom/which. hear, help, make, see + to-inf в пассиве; hear/see/watch + -ing без изменений.",
+  "scope": "Форма: to be в нужном времени + Past Participle. Таблица: Present Simple (is made), Present Continuous (is being made), Past Simple (were made), Past Continuous (was being made), Present Perfect Simple (have been made), Past Perfect Simple (had been made), Future Simple (will be made), Future Perfect Simple (will have been made), инфинитив (has to be made), модальные (may be made). Из актива в пассив: дополнение → подлежащее; время сохраняется; подлежащее → агент с by или опускается. Употребление: деятель неизвестен/неважен/очевиден; действие важнее деятеля (заголовки, статьи, официальные объявления, реклама, инструкции, процессы); чтобы не брать ответственность / не называть виновника неприятного события; чтобы выделить агента; для формальности/вежливости. Только переходные глаголы; не пассивируются переходные have, exist, seem, fit, suit, resemble, lack. get вместо be в разговорной речи — случайное/неожиданное (He got hit by a truck). by — кто совершает действие; with — инструмент/материал/ингредиент. Агент опускается при they, he, someone/somebody, people, one; не опускается, если он конкретный/важный или необходим для смысла. Два дополнения (bring, tell, send, show, teach, promise, buy, sell, read, offer, give, lend) — два варианта пассива (Sarah will be sent a gift — обычнее; A gift will be sent to Sarah — реже). В вопросах с who/whom/which by не опускается (Who were you given this book by?). hear, help, make, see + to-inf в пассиве (I was made to lie); hear, see, watch + -ing в активе и пассиве (She was seen stealing).",
   "example": "Sara will be sent a gift.",
-  "comment": "Расширено: two-object passive, get-passive, by/with.",
-  "source": "ToC, GR"
+  "comment": "",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -467,43 +434,21 @@
   "lesson": "4c",
   "category": "Глаголы: другое",
   "topic": "Causative (have something done)",
-  "scope": "have (в нужном времени) + object + Past Participle; таблица во всех временах (Present/Past/Future Simple и Continuous, Present/Past Perfect и Perfect Continuous, инфинитив, -ing форма). Отрицания и вопросы с do/does/did. get вместо have. Каузатив для несчастных случаев (had his car stolen).",
+  "scope": "Форма: have в нужном времени + object + Past Participle; подлежащее не исполнитель, а тот, кто организовал/попросил. Таблица: Present Simple (has clothes designed), Present Continuous (is having … designed), Past Simple (had … designed), Past Continuous (was having … designed), Future Simple (will have … designed), Future Continuous (will be having … designed), Present Perfect (has had … designed), Present Perfect Continuous (has been having … designed), Past Perfect (had had … designed), Past Perfect Continuous (had been having … designed), инфинитив (wants to have … designed), -ing форма (likes having … designed). Употребление: кто-то делает что-то для нас. Отрицания и вопросы — с do/does/don't/doesn't (Present Simple), did/didn't (Past Simple). get часто вместо have (Did Mary have/get her hair dyed?). Каузатив вместо пассива — о несчастных случаях/неприятностях (had his car stolen).",
   "example": "George had his car stolen from the parking lot.",
-  "comment": "ToC: «make, get, have» — каузативные конструкции make sb do, get sb to do / get sth done; в справочнике только have/get sth done и make в пассиве (I was made to lie) — проверить.",
-  "source": "ToC, GR"
+  "comment": "ToC 4c: «the causative; make, get, have». В справочнике — только have/get + object + Past Participle; make sb do / get sb to do как каузатив не описаны (make + bare inf — в М3, be made to — в пассиве).",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
   "module": "Module 4 · Danger!",
-  "lesson": "4c",
+  "lesson": "",
   "category": "Местоимения",
   "topic": "Reflexive pronouns",
-  "scope": "myself … themselves. После behave, burn, cut, enjoy, hurt, kill, look at, laugh at, introduce, dry, teach (подлежащее = дополнение); после be, feel, look, seem; после предлогов (кроме предлогов места). Не используются с wash, shave, (un)dress, afford, complain, meet, rest, relax, stand up, get up, sit down, wake up (кроме детей/животных с wash/dress). Идиомы: Enjoy yourself!, Behave yourself!, by myself, Help yourself to…, Do it yourself, Make yourself at home/heard/understood.",
+  "scope": "Формы: myself, yourself, himself, herself, itself, ourselves, yourselves, themselves. Употребление: после behave, burn, cut, enjoy, hurt, kill, look at, laugh at, introduce, dry, teach, когда подлежащее и дополнение совпадают; после be, feel, look, seem (Helen doesn't seem herself lately); после предлогов (take care of yourself), НО не после предлогов места (behind you, NOT behind yourself). Обычно без возвратного: wash, shave, (un)dress, afford, complain, meet, rest, relax, stand up, get up, sit down, wake up; НО с wash/dress — о маленьких детях и животных. Идиомы: Enjoy yourself! Behave yourself! by myself/herself (= alone, on my own), Help yourself to…, Do it yourself, Make yourself at home! Make yourself heard. Make yourself understood.",
   "example": "He cut himself while he was chopping vegetables.",
-  "comment": "В ToC не указано — только в справочнике M4; урок проверить.",
+  "comment": "В ToC не назван — урок неизвестен.",
   "source": "GR"
- },
- {
-  "grade": 11,
-  "module": "Module 4 · Danger!",
-  "lesson": "4e",
-  "category": "Прилагательные и наречия",
-  "topic": "Adjectives and adverbs (narrative)",
-  "scope": "Прилагательные и наречия для повествования (narrative techniques) — описание чувств, действий.",
-  "example": "",
-  "comment": "ToC 4e: «adjectives/adverbs»; правил в справочнике нет — проверить.",
-  "source": "ToC"
- },
- {
-  "grade": 11,
-  "module": "Module 4 · Danger!",
-  "lesson": "4e",
-  "category": "Предложение и вопросы",
-  "topic": "Linkers",
-  "scope": "Linkers для рассказа (narrative): последовательность событий.",
-  "example": "",
-  "comment": "Список слов в источнике не дан.",
-  "source": "ToC"
  },
  {
   "grade": 11,
@@ -511,10 +456,10 @@
   "lesson": "4c",
   "category": "Фразовые глаголы",
   "topic": "Phrasal verbs",
-  "scope": "Фокус English in Use: go + частицы (список в источнике не виден). Из текстов модуля (Word List): break out, pull down, get about, put in, shake off, track out, die down, dispose of.",
+  "scope": "go + частицы (English in Use 4c); конкретные частицы в доступных страницах не даны.",
   "example": "",
-  "comment": "проверить: частицы к go (4c) в OCR отсутствуют.",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления; приложения с фразовыми глаголами в учебнике нет.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -522,10 +467,10 @@
   "lesson": "4c",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Dependent prepositions",
-  "scope": "Из Word List: hold on to, in recognition of, dispose of.",
+  "scope": "Dependent prepositions (English in Use 4c); конкретные сочетания в доступных страницах не даны.",
   "example": "",
-  "comment": "Упражнение на зависимые предлоги в источнике не видно — проверить.",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -533,9 +478,9 @@
   "lesson": "4b",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Collocations / Fixed phrases",
-  "scope": "Idioms related to health (4b); лексика injuries, illnesses.",
+  "scope": "Idioms related to health (4b).",
   "example": "",
-  "comment": "",
+  "comment": "в доступных страницах только заголовок из оглавления.",
   "source": "ToC"
  },
  {
@@ -544,10 +489,10 @@
   "lesson": "5c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "Modal verbs (general)",
-  "scope": "can/could, may/might, must/had to, ought to, shall/should, will/would: без -s/-ing/-ed; + bare infinitive; инверсия в вопросах, not в отрицании; + perfect infinitive — о завершённом действии. Формы инфинитива: (to) play, (to) be playing, (to) have played, (to) have been playing.",
+  "scope": "can/could, may/might, must/had to, ought to, shall/should, will/would: не принимают -s, -ing, -ed; + bare infinitive; стоят перед подлежащим в вопросе, not — в отрицании; не имеют времён в обычном смысле: + простой инфинитив — незавершённое действие/состояние (наст./буд.), + perfect infinitive — завершённое. Формы инфинитива: present simple (to) play, present continuous (to) be playing, present perfect simple (to) have played, present perfect continuous (to) have been playing.",
   "example": "",
   "comment": "Систематизация модальных по функциям.",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -555,10 +500,10 @@
   "lesson": "5c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "must/have to (obligation)",
-  "scope": "Obligation/duty/necessity: must (субъективно), have to (объективные обстоятельства), had to — прошедшая форма must и have to; should/ought to — слабая обязанность.",
+  "scope": "Obligation/Duty/Necessity: must — долг/сильная обязанность, говорящий сам решил (субъективно); have to — сильная необходимость из-за объективных обстоятельств; had to — прошедшая форма и must, и have to; should/ought to — долг или слабая обязанность.",
   "example": "He has to get up early as his classes start at 7:30 am.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -566,10 +511,10 @@
   "lesson": "5c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "need/needn't",
-  "scope": "Отсутствие необходимости: don't have to / don't need to / needn't (наст./буд.); needn't have done — не было нужно, но сделали; didn't have to — не было нужно (неизвестно, сделали ли); need (= must).",
-  "example": "You needn't have cooked so much food.",
+  "scope": "Absence of necessity: don't have to / don't need to / needn't — не нужно (наст./буд.); needn't have done — не было необходимости, но сделали; didn't have to — не было необходимости (неизвестно, сделали ли). need (= must) — в списке semi-modals.",
+  "example": "You needn't have cooked so much food. We weren't hungry.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -577,10 +522,10 @@
   "lesson": "5c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "can (permission/request)",
-  "scope": "Permission: can/may (may — формальнее); prohibition: mustn't/can't.",
+  "scope": "Permission/Prohibition: can/may — спросить/дать разрешение (may — формальнее): Can/May I use your phone? — Yes, you can/may. mustn't/can't — запрещено, против правил/закона.",
   "example": "You mustn't/can't park here.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -588,10 +533,10 @@
   "lesson": "5c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "may/might",
-  "scope": "Possibility: can + present inf — общая/теоретическая возможность; could/may/might — в конкретной ситуации; в вопросах can/could/might, но не may; could/might/would + perfect inf — возможно было, но не случилось.",
+  "scope": "Possibility: can + present inf — общая/теоретическая возможность (не для конкретной ситуации: Going to the gym can be boring); could/may/might + present inf — возможность в конкретной ситуации; в вопросах can/could/might, но НЕ may (How difficult can it be?); could/might/would + perfect inf — было возможно в прошлом, но не случилось.",
   "example": "He could have come with us, if he hadn't missed the train.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -599,10 +544,10 @@
   "lesson": "5c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "can/could (ability past)",
-  "scope": "can — способность в наст./буд.; could — общая/повторяющаяся способность в прошлом; was(n't) able to — конкретный случай в прошлом; couldn't — любая неспособность в прошлом; be able to (= can).",
-  "example": "I was able to find all the answers to the questions.",
+  "scope": "Ability/Inability: can — способность в наст./буд.; could — общая или повторяющаяся способность в прошлом; was(n't) able to — (не)способность в конкретном случае в прошлом; couldn't — любая неспособность в прошлом (повторяющаяся или конкретная). be able to (= can) — в списке semi-modals (Will you be able to help me?).",
+  "example": "I could sing quite well when I was younger.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -610,10 +555,10 @@
   "lesson": "5c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "Modal verbs (deduction)",
-  "scope": "Logical assumptions/deductions: must (почти наверняка правда), may/might/could (возможно), can't/couldn't (почти наверняка невозможно); с present inf (настоящее) и perfect inf (прошлое).",
+  "scope": "Logical assumptions/deductions: must — почти наверняка правда; may/might/could — возможно правда; can't/couldn't — почти наверняка невозможно. С present inf — о настоящем (He must be on his way home), с perfect inf — о прошлом (Something must have delayed him; They could have been killed).",
   "example": "Jim couldn't have cooked dinner. He's been at work since morning.",
-  "comment": "ToC: «logical deductions».",
-  "source": "ToC, GR"
+  "comment": "ToC 5c: «logical deductions».",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -621,10 +566,10 @@
   "lesson": "5c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "Modal verbs (criticism)",
-  "scope": "could (at least) + inf / + perfect inf; should + inf / should have done (но не сделал).",
+  "scope": "Criticism: could (at least) + inf (настоящее) / + perfect inf (прошлое); should + inf / should have + PP (но не сделал).",
   "example": "You could at least have called to cancel it yesterday.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -632,10 +577,10 @@
   "lesson": "5c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "Modal verbs (offers/suggestions)",
-  "scope": "Would you like…?, Shall I…?, Can I…?, We can/could…",
+  "scope": "Offers/Suggestions: Would you like…?; Shall I…?; Can I…?; We can/could…",
   "example": "Shall I give you a lift?",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -643,10 +588,10 @@
   "lesson": "5c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "Modal verbs (probability)",
-  "scope": "will — 100%; should/ought to — ~90%, только о будущем.",
-  "example": "The weather should get better tomorrow.",
+  "scope": "Probability: will — 100% уверенность; should/ought to — ~90%, только о будущем.",
+  "example": "The weather should/ought to get better tomorrow.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -654,10 +599,10 @@
   "lesson": "5c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "should/shouldn't",
-  "scope": "Advice: should/ought to — общий совет; Shall I…? — просьба о совете; had better (= should).",
-  "example": "You'd better stay at home until you get over the flu.",
+  "scope": "Advice: should/ought to — общий совет; Shall I…? — просьба о совете; had better (= should) — в списке semi-modals.",
+  "example": "You should stop smoking.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -665,21 +610,10 @@
   "lesson": "5c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "Semi-modals",
-  "scope": "need (= must), had better (= should), have (got) to (= must), be able to (= can), used to (= would).",
+  "scope": "Глаголы/выражения со значением модальных: need (= must), had better (= should), have (got) to (= must), be able to (= can), used to (= would).",
   "example": "I've got to see the doctor.",
   "comment": "",
-  "source": "GR"
- },
- {
-  "grade": 11,
-  "module": "Module 5 · Who are you?",
-  "lesson": "5e",
-  "category": "Предложение и вопросы",
-  "topic": "Linkers",
-  "scope": "Linking words and phrases для отчёта (a report on improving an area).",
-  "example": "",
-  "comment": "Список слов в источнике не дан.",
-  "source": "ToC"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -687,10 +621,10 @@
   "lesson": "5c",
   "category": "Фразовые глаголы",
   "topic": "Phrasal verbs",
-  "scope": "Фокус English in Use: do + частицы (из Word List — do up = ремонтировать; остальные частицы в источнике не видны). Из текстов модуля (Word List): date from, get back, open up, stick to, take sb on, get rid of, fall in with, carry out, cater for, do up, tow away, end up, set up, force sb out, spread out.",
+  "scope": "do + частицы (English in Use 5c); конкретные частицы в доступных страницах не даны.",
   "example": "",
-  "comment": "проверить: полный список с do (5c) в OCR отсутствует.",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления; приложения с фразовыми глаголами в учебнике нет.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -698,10 +632,10 @@
   "lesson": "5c",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Dependent prepositions",
-  "scope": "Из Word List: date from, stick to, take pity on, get rid of, fall in with, devote yourself to sb/sth, cater for, sort of.",
+  "scope": "Dependent prepositions (English in Use 5c); конкретные сочетания в доступных страницах не даны.",
   "example": "",
-  "comment": "Упражнение на зависимые предлоги в источнике не видно — проверить.",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -709,9 +643,9 @@
   "lesson": "5b",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Collocations / Fixed phrases",
-  "scope": "Idioms related to parts of houses (5b); лексика homes and neighbourhoods, types of houses.",
+  "scope": "Idioms related to parts of houses (5b).",
   "example": "",
-  "comment": "",
+  "comment": "в доступных страницах только заголовок из оглавления.",
   "source": "ToC"
  },
  {
@@ -720,10 +654,10 @@
   "lesson": "6c",
   "category": "Глаголы: другое",
   "topic": "Reported Speech",
-  "scope": "Say/tell: say + (that) + clause; say to + sb + (that); tell + sb + (that); say + to-inf; не say about — speak/talk about. Коллокации SAY (hello, something/nothing, so, a prayer, a few words, for certain/sure), TELL (the truth, a lie, a story, a secret, a joke, the time, the difference, sb one's name, sb the way, sb's fortune), ASK (a question, a favour, the price, after sb, the time, around, for sth/sb). Reported statements: смена местоимений; up-to-date reporting (времена могут не меняться); reporting the past — сдвиг времён: PS→Past S, PC→Past C, Present Perfect→Past Perfect, Past S→Past S/Past Perfect, Past C→Past C/Past Perfect C, will→would; смена обстоятельств (now→then, today→that day, yesterday→the day before, tomorrow→the next day, this→that, last week→the week before, next week→the week after, ago→before, here→there). Времена не меняются: глагол в present/future/present perfect; общие истины; условные 2/3 типа, wishes, unreal past; сообщение сразу же.",
+  "scope": "Прямая речь — точные слова, в кавычках; косвенная — точный смысл, без кавычек; that после вводящего глагола можно опустить. Say/tell: say + (that) + clause; say + to + sb + (that) + clause; tell + sb + (that) + clause; say + to-inf (Ann said to wake her up); не say about — вместо него speak/talk about. Сочетания: SAY hello/good morning, something/nothing, so, a prayer, a few words, no more, for certain/sure; TELL the truth, a lie, a story, a secret, a joke, the time, the difference, one from another, sb one's name, sb the way, sb so, someone's fortune; ASK a question, a favour, the price, after sb, the time, around, for sth/sb. Reported statements: личные/притяжательные местоимения меняются по смыслу; up-to-date reporting — времена могут меняться или сохраняться; reporting the past (вводящий глагол в Past Simple): Present Simple → Past Simple; Present Continuous → Past Continuous; Present Perfect → Past Perfect; Past Simple → Past Simple/Past Perfect; Past Continuous → Past Continuous/Past Perfect Continuous; Future Simple → Future in the Past (would). Слова-указатели: now → then/immediately; today → that day; yesterday → the day before/the previous day; tomorrow → the next/following day; this week → that week; last week → the week before/the previous week; next week → the week after/the following week; ago → before; here → there. Времена не меняются: вводящий глагол в present/future/present perfect; общие истины, постоянные состояния; условные 2/3 типа, wishes, unreal past; сообщение сразу после сказанного.",
   "example": "Stella said (that) she had ordered pizza.",
   "comment": "Полный обзор.",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -731,10 +665,10 @@
   "lesson": "6c",
   "category": "Предложение и вопросы",
   "topic": "Reported questions / Indirect questions",
-  "scope": "Reported questions: ask, inquire, wonder, want to know; с вопросительным словом — то же слово; общие вопросы — if/whether; прямой порядок слов, без ?, please/well/oh опускаются. Indirect questions: Could you tell me…?, Do you know…?, I wonder…, I want to know…, I doubt… + прямой порядок слов (после I wonder/I want to know/I doubt — без ?).",
+  "scope": "Reported questions: вводятся ask, inquire, wonder, want to know; со специальным вопросительным словом (who, where, how, when, what) — то же слово; если вопрос начинается со вспомогательного (be, do, have) или модального глагола — if/whether; глагол в утвердительной форме (прямой порядок), вопросительный знак и please, well, oh опускаются; времена, местоимения, обстоятельства меняются как в утверждениях. Indirect questions (просьба о совете/информации): Could you tell me…?, Do you know…?, I wonder…, I want to know…, I doubt… + утвердительный порядок слов; после I want to know, I wonder, I doubt вопросительный знак не ставится.",
   "example": "Do you know where the library is?",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -742,10 +676,10 @@
   "lesson": "6c",
   "category": "Глаголы: другое",
   "topic": "Reported Speech (orders, requests, suggestions)",
-  "scope": "Reported requests/suggestions: ask, beg, suggest + to-inf / -ing / that-clause (suggest + -ing; suggest that sb (should) do). Reported orders/commands: advise, order, tell + sb + (not) to-inf.",
+  "scope": "Reported requests/suggestions: особый вводящий глагол (ask, beg, suggest и др.) + to-inf, -ing или that-clause в зависимости от глагола (He begged me not to go; He suggested watching a film; He suggested that I (should) take an aspirin). Reported orders/commands/instructions: advise, order, tell + sb + (not) to-inf.",
   "example": "He suggested watching a film.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -753,10 +687,10 @@
   "lesson": "6c",
   "category": "Глаголы: другое",
   "topic": "Reported Speech (introductory verbs)",
-  "scope": "+ to-inf: agree, demand, offer, promise, refuse, threaten, claim. + sb + to-inf: advise, allow, ask, beg, command, encourage, forbid, instruct, invite, order, permit, remind, urge, warn, want. + -ing: accuse sb of, apologise for, admit (to), boast about/of, complain about/of, deny, insist on, suggest. + that-clause: agree, boast, claim, complain, deny, exclaim, explain, inform sb, promise, suggest. + how/where/why/what/whether: explain to sb how + to-inf, wonder + whether/where/how + clause/to-inf.",
+  "scope": "+ to-inf: agree, demand, offer, promise, refuse, threaten, claim (claimed to have seen). + sb + to-inf: advise, allow, ask, beg, command, encourage, forbid, instruct, invite, order, permit, remind, urge, warn, want. + -ing: accuse sb of, apologise for, admit (to), boast about/of, complain about/of, deny, insist on, suggest. + that-clause: agree, boast, claim, complain, deny, exclaim, explain, inform sb, promise, suggest. + how/where/why/what/whether: explain to sb how + to-inf (подлежащее инфинитива совпадает с подлежащим глагола); wonder + where/why/what/whether + clause или wonder how + to-inf.",
   "example": "He accused me of eating his sandwich.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -764,10 +698,10 @@
   "lesson": "6c",
   "category": "Глаголы: to be / have got / модальные",
   "topic": "Modal verbs in Reported Speech",
-  "scope": "will→would; can→could (наст.) / would be able to (буд.); may→might; shall→would (информация) / should (совет) / offer (предложение); must→had to (обязанность) / must (вывод); needn't→didn't have to/didn't need to (наст.) / wouldn't have to (буд.); should → без изменений.",
+  "scope": "Изменение модальных при out-of-date reporting: will → would; can → could (наст.) / would be able to (буд.); may → might; shall → would (информация) / should (совет) / offer + to-inf (предложение помощи); must → had to (обязанность) / must (вывод); needn't → didn't have to / didn't need to (наст.) / wouldn't have to (буд.); should → should (без изменений).",
   "example": "He said (that) it might rain.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -775,10 +709,10 @@
   "lesson": "6c",
   "category": "Фразовые глаголы",
   "topic": "Phrasal verbs",
-  "scope": "Фокус English in Use: talk + частицы (из Word List — talk back; остальные частицы в источнике не видны). Из текстов модуля (Word List): point out, sit around, tune in, come out, talk back, drag on, spring out, attribute to, expose sb to sth, get sth across.",
+  "scope": "talk + частицы (English in Use 6c); конкретные частицы в доступных страницах не даны.",
   "example": "",
-  "comment": "проверить: полный список с talk (6c) в OCR отсутствует.",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления; приложения с фразовыми глаголами в учебнике нет.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -786,10 +720,10 @@
   "lesson": "6c",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Dependent prepositions",
-  "scope": "Из Word List: attribute to, expose sb to sth, be dear to, in view of, keep track of sth; в справочнике — глаголы речи с предлогами: accuse sb of, apologise for, boast about/of, complain about/of, insist on, admit (to).",
-  "example": "",
-  "comment": "Упражнение на зависимые предлоги в источнике не видно — проверить.",
-  "source": "ToC, Word List, GR"
+  "scope": "Dependent prepositions (English in Use 6c); конкретные сочетания в доступных страницах не даны. В справочнике М6 (вводящие глаголы + -ing): accuse sb of, apologise for, admit (to), boast about/of, complain about/of, insist on.",
+  "example": "He boasted about being taller than me.",
+  "comment": "Заголовок — из оглавления; сочетания — только из справочника (Special Introductory Verbs).",
+  "source": "ToC, GR"
  },
  {
   "grade": 11,
@@ -797,10 +731,10 @@
   "lesson": "6b",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Collocations / Fixed phrases",
-  "scope": "Idioms with talk and speak (6b); say/tell/ask collocations (GR); лексика newspapers & the media, space technology; animal sounds (6d).",
+  "scope": "Idioms with talk and speak (6b).",
   "example": "",
-  "comment": "",
-  "source": "ToC, GR"
+  "comment": "в доступных страницах только заголовок из оглавления. Сочетания с say/tell/ask — в строке Reported Speech.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -808,10 +742,10 @@
   "lesson": "7c",
   "category": "Глаголы: другое",
   "topic": "Conditionals (Type 1)",
-  "scope": "If + Present Simple → Future Simple; реальная/вероятная ситуация в наст./буд. Запятая при if-clause в начале. unless + утвердительный глагол (= if not).",
+  "scope": "If + Present Simple → Future Simple; реальная или очень вероятная ситуация в наст./буд. Если if-clause стоит первым — запятая; если главное первым — без запятой. unless + утвердительный глагол (= if + отрицание).",
   "example": "If she does well at the interview, she will get the job.",
   "comment": "Повторение. Type 0 в справочнике не дан.",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -819,10 +753,10 @@
   "lesson": "7c",
   "category": "Глаголы: другое",
   "topic": "Conditionals (Type 2)",
-  "scope": "If + Past Simple / Past Continuous → would/could/might + bare inf; нереальное настоящее; were/was для 1 и 3 л. ед.ч. (в формальном — were); If I were you… — совет.",
+  "scope": "If + Past Simple / Past Continuous → would/could/might + bare inf; нереальное настоящее (противоречит фактам, маловероятно в наст./буд.). were или was для 1 и 3 л. ед.ч.; в формальном английском — were для всех лиц. If I were you… — совет.",
   "example": "If I were you, I would stay in tonight.",
   "comment": "",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -830,10 +764,10 @@
   "lesson": "7c",
   "category": "Глаголы: другое",
   "topic": "Conditionals (Type 3)",
-  "scope": "If + Past Perfect / Past Perfect Continuous → would/could/might + perfect inf; нереальное прошлое, сожаление, критика.",
+  "scope": "If + Past Perfect / Past Perfect Continuous → would/could/might + bare perfect infinitive; нереальное прошлое (противоречит фактам), также сожаление или критика.",
   "example": "If I had studied harder, I would have passed the exams.",
-  "comment": "Смешанные условные (Mixed) в справочнике отдельно не даны.",
-  "source": "ToC, GR"
+  "comment": "Смешанные условные (Mixed) в справочнике не даны.",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -841,10 +775,10 @@
   "lesson": "7c",
   "category": "Предложение и вопросы",
   "topic": "Conditional linkers",
-  "scope": "unless, providing, provided (that), as long as, on condition (that), but for + -ing/noun, otherwise, or else, what if, supposing, even if, only if (only if в начале → инверсия в главном). will/would/should в if-clause — просьба, раздражение, сомнение, настойчивость (If she should need help…).",
+  "scope": "Кроме if: unless (= if not), providing, provided (that), as long as, on condition (that), but for + -ing/noun, otherwise, or else, what if, supposing, even if, only if. only if в начале предложения → инверсия в главном (Only if you are dressed formally, will you be allowed in). will/would/should обычно не употребляются в if-clause (NOT if you will stay), но возможны для просьбы, раздражения, сомнения/неуверенности, настойчивости (If she should need help…; If you will stop arguing…).",
   "example": "Get up now or else you'll miss your appointment.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -852,10 +786,10 @@
   "lesson": "7c",
   "category": "Предложение и вопросы",
   "topic": "Inversion",
-  "scope": "Inversion in conditionals (omission of if): Should he pass… (1 тип), Were there an election… (2 тип), Had I known… (3 тип).",
+  "scope": "Omission of 'if': should (тип 1), were (тип 2), had (тип 3) выносятся перед подлежащим.",
   "example": "Had I known, I would have told you.",
   "comment": "ToC 7c: «inversions»; расширяется в 8c.",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -863,21 +797,10 @@
   "lesson": "7c",
   "category": "Глаголы: другое",
   "topic": "Wishes (I wish / If only)",
-  "scope": "I wish / If only + Past Simple/Past Continuous — желание изменить настоящее; + Past Perfect — сожаление о прошлом; + subject + would + bare inf — вежливый императив, желание изменить ситуацию/поведение другого. If only — эмоциональнее; were вместо was.",
-  "example": "I wish I had studied harder.",
-  "comment": "",
-  "source": "ToC, GR"
- },
- {
-  "grade": 11,
-  "module": "Module 7 · In days to come",
-  "lesson": "7c",
-  "category": "Глаголы: другое",
-  "topic": "Unreal Past (it's time, I'd rather...)",
-  "scope": "ToC: «unreal past». В справочнике отдельного раздела нет: даны только wishes и would rather/I'd prefer (M3); it's (high) time, as if, suppose не описаны.",
-  "example": "",
-  "comment": "проверить: раздел Unreal Past, возможно, на странице учебника 7c, а не в GR.",
-  "source": "ToC"
+  "scope": "I wish / If only + Past Simple/Past Continuous — хотелось бы, чтобы настоящее было иным; + Past Perfect — сожаление о том, что случилось/не случилось в прошлом; + subject + would + bare inf — вежливый императив; желание, чтобы ситуация или чьё-то поведение изменились. If only — то же, что I wish, но эмоциональнее/драматичнее. После wish/if only можно were вместо was.",
+  "example": "I wish I had studied harder. (but I didn't)",
+  "comment": "ToC 7c: «unreal past» — в справочнике соответствует разделу Wishes; it's (high) time, as if и т.п. не описаны.",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -885,10 +808,10 @@
   "lesson": "7c",
   "category": "Фразовые глаголы",
   "topic": "Phrasal verbs",
-  "scope": "Фокус English in Use: carry + частицы (список в источнике не виден). Из текстов модуля (Word List): come up against, end in, run for, go into, drop out, build on, go through, hold on, scrape by, sign up, save up.",
+  "scope": "carry + частицы (English in Use 7c); конкретные частицы в доступных страницах не даны.",
   "example": "",
-  "comment": "проверить: частицы к carry (7c) в OCR отсутствуют.",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления; приложения с фразовыми глаголами в учебнике нет.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -896,10 +819,10 @@
   "lesson": "7c",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Dependent prepositions",
-  "scope": "Из Word List: have high hopes of, pin one's hopes on, give way to, make allowance for, declare war on, come up against, end in, run for, build on.",
+  "scope": "Dependent prepositions (English in Use 7c); конкретные сочетания в доступных страницах не даны.",
   "example": "",
-  "comment": "Упражнение на зависимые предлоги в источнике не видно — проверить.",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -907,10 +830,10 @@
   "lesson": "7a",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Collocations / Fixed phrases",
-  "scope": "Phrases with hope (7a); idioms related to school (7b); лексика education (university) & training.",
+  "scope": "Phrases with hope (7a).",
   "example": "",
-  "comment": "",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -918,10 +841,10 @@
   "lesson": "8c",
   "category": "Предложение и вопросы",
   "topic": "Inversion",
-  "scope": "Инверсия вспомогательного глагола и подлежащего (do/does/did при отсутствии вспом.): после отрицательных/ограничительных выражений в начале предложения — Barely, Hardly (ever)…when, In no way, In/Under no circumstances, Little, Never (before), Nor/Neither, No sooner…than, Not even once, Not only…but also, Not since, Not till/until, Nowhere, Only in this way, On no account, On no occasion, Only then, Rarely, Scarcely (ever)…when, Seldom; only after/by/if/when, not since/till/until — инверсия в главном предложении; в условных (Should/Were/Had); после so/such/to such a degree (результат); после as, neither/nor, so (согласие). Инверсия подлежащего и смыслового глагола: после наречий места (There goes the last bus! — но There it goes!); в прямой речи («…,» said Bill — но he said).",
+  "scope": "Инверсия подлежащего и вспомогательного глагола для эмфазы (если вспомогательного нет — do/does/did, как в вопросе): после выражений в начале предложения — Barely, Hardly (ever)… when, In no way, In/Under no circumstances, Little, Never (before), Nor/Neither, No sooner… than, Not even once, Not only… but also, Not since, Not till/until, Nowhere, Only in this way, On no account, On no occasion, Only then, Rarely, Scarcely (ever)… when, Seldom; only after, only by, only if, only when, not since, not till/until в начале — инверсия в главном предложении; в условных при should/were/had в начале (if опускается; типы 1, 2, 3); после so, such, to such a degree в начале (результат: So angry was he, that…); после as, neither/nor, so — согласие (as did his grandparents). Инверсия подлежащего и смыслового глагола: после наречий места (There goes the last bus! — НО There it goes!; Here are your glasses! — НО Here they are!); в прямой речи, когда вводящий глагол после цитаты и подлежащее — существительное (\"…,\" said Bill — НО \"…,\" he said).",
   "example": "Rarely do we go out during the week.",
-  "comment": "Расширение темы 7c; впервые полный список.",
-  "source": "ToC, GR"
+  "comment": "Расширение темы 7c.",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -929,10 +852,10 @@
   "lesson": "8c",
   "category": "Предложение и вопросы",
   "topic": "So / Neither / Nor (agreement)",
-  "scope": "So + вспом. глагол + подлежащее (согласие с утвердительным); Neither/Nor + вспом. глагол + подлежащее (с отрицательным).",
-  "example": "Peter didn't come to the party. Neither did James.",
+  "scope": "So + вспомогательный глагол + местоимение/существительное — положительное добавление к утвердительному предложению (So does Jack); Neither/Nor + вспомогательный глагол + местоимение/существительное — к отрицательному (Neither/Nor did James; NOT So didn't James).",
+  "example": "Peter didn't come to the party. Neither/Nor did James.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -940,10 +863,10 @@
   "lesson": "8c",
   "category": "Местоимения",
   "topic": "Indefinite pronouns (some-/any-/no-/every-)",
-  "scope": "some/any/no + uncountable и plural countable; производные -body/-one/-thing/-where. some — в утверждениях и в вопросах-предложениях/просьбах; any — в вопросах, с not, с without/never/rarely; any в утверждении = «неважно кто/что»; hardly any; no = not any (глагол в утвердительной форме); every + singular countable. Глагол в ед.ч. с производными.",
+  "scope": "some, any, no + неисчисляемые и мн.ч. исчисляемых. Производные: люди — somebody/someone, anybody/anyone, nobody/no one, everybody/everyone; вещи — something, anything, nothing, everything; места — somewhere, anywhere, nowhere, everywhere. some и производные — в утверждениях, а также в вопросах-предложениях/просьбах и когда ожидается «да» (Would you like something to eat?; Have you lost something?); any и производные — в вопросах; not any — в отрицаниях; any — с without, never, rarely; any в утверждении = «неважно кто/что/где» (Anyone can take part; You can come any time); hardly any — в утвердительных предложениях с неисчисляемыми и мн.ч.; no и производные вместо not any, глагол тогда утвердительный (They've got no money / bought nothing / There was nobody); every + единственное исчисляемое. С производными some-/any-/no-/every- глагол в ед.ч.",
   "example": "They didn't buy anything. / They bought nothing.",
   "comment": "",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -951,10 +874,32 @@
   "lesson": "8c",
   "category": "Существительные и артикли",
   "topic": "Quantifiers",
-  "scope": "every vs each (each — по отдельности, для двух; every one of / each (one) of); a few/few (countable), a little/little (uncountable), very few/little; a lot of/lots of (утверждение), much/many (вопрос, отрицание); a couple of, several (+ plural); a great deal of (+ uncountable); plenty of (+ оба).",
-  "example": "We have (very) little time left.",
+  "scope": "Every vs each: every + единственное исчисляемое — вся группа (= all); each + единственное исчисляемое — члены группы по отдельности; every one of / each (one) of; each — обычно о двух, every — о трёх и более. Other quantifiers: a couple of (= a few, one or two), several (= a number of) + исчисляемое мн.ч.; a great deal of (= a lot) + неисчисляемое; plenty of (= much/many) + исчисляемое или неисчисляемое. Также hardly any (см. Indefinite pronouns).",
+  "example": "Each visitor was given a day pass.",
+  "comment": "a few/a little и much/many/a lot of — отдельными строками.",
+  "source": "GR, ToC"
+ },
+ {
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "category": "Существительные и артикли",
+  "topic": "a few/a little",
+  "scope": "a few, few + исчисляемые мн.ч.; a little, little + неисчисляемые. a few — «немного, но достаточно»; few — «почти нет», с very для усиления; a little — «немного, но достаточно» (также при прилагательном: It's a little cold); little — «почти нет», с very для усиления.",
+  "example": "We have (very) little time left. We must hurry up.",
   "comment": "",
-  "source": "ToC, GR"
+  "source": "GR, ToC"
+ },
+ {
+  "grade": 11,
+  "module": "Module 8 · Travel",
+  "lesson": "8c",
+  "category": "Существительные и артикли",
+  "topic": "much/many/a lot of",
+  "scope": "a lot of/lots of + исчисляемые мн.ч. и неисчисляемые, обычно в утверждениях; of опускается, если после a lot/lots нет существительного (There's lots/a lot going on). much + неисчисляемые, many + исчисляемые мн.ч. — обычно в отрицаниях и вопросах.",
+  "example": "There aren't many books on the shelf.",
+  "comment": "",
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -962,10 +907,10 @@
   "lesson": "8c",
   "category": "Существительные и артикли",
   "topic": "Determiners (both/either/neither/all/none)",
-  "scope": "either/neither + singular countable; either of/neither of + глагол в ед. или мн.ч.; both (+ мн.ч.), both … and, both of them; whole (a/the/my + whole + countable); all (+ мн.ч., all of us, we all, all four of us), all that-clause (= the only thing) + ед.ч.; none (без существительного), none of + noun/object pronoun.",
-  "example": "Neither of the two brothers is/are at school today.",
+  "scope": "either (= любой из двух) / neither (= ни тот ни другой) — о двух, + единственное исчисляемое (Neither actor won an award); either of / neither of + глагол в ед. или мн.ч. both — о двух, положительное значение, глагол во мн.ч., противоположность neither/not either (Both Nick and Alex are…; They are both…; Both of them…; Both men…). whole (= complete) + исчисляемое, всегда a/the/this/my + whole + noun (the whole morning = all morning). all — о более чем двух, положительное значение, глагол во мн.ч., противоположность none (All of us…; We all…; All four of us…); all + that-clause (= the only thing) + глагол в ед.ч. none — о более чем двух, отрицательное значение, без существительного («No, none.»); none of + существительное/объектное местоимение + глагол в ед. или мн.ч.",
+  "example": "Neither of two brothers is/are at school today.",
   "comment": "",
-  "source": "GR"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -973,21 +918,10 @@
   "lesson": "8c",
   "category": "Существительные и артикли",
   "topic": "Countable / Uncountable nouns",
-  "scope": "ToC: «plural/singular nouns». Неисчисляемые: ед.ч. глагола, без a/an, с some/any/much/no; исключения a help, a knowledge (of), a pity, a relief, a shame, a wonder. Группы: вещества, учебные предметы, языки, виды спорта, болезни, природные явления, собирательные, составные (homework, countryside), абстрактные; самые частые (accommodation, advice, baggage, furniture, information, luggage, money, news, progress, traffic, travel, weather…). Суммы (длительность, расстояние, деньги) — глагол в ед.ч. Партитивы: a piece of advice, a glass of, a jar of, a rasher of, a pint of, a sheet of, a packet of, a slice/loaf of, a kilo of, a tube of, a bar of, a lump of, a bag of, a pair of, an item of news, a carton of, a flash of lightning, a clap of thunder.",
+  "scope": "ToC: «plural/singular nouns». Исчисляемые (1 pen, 2 pens) и неисчисляемые (sugar, meat). Неисчисляемые: глагол в ед.ч., без a/an, с some, any, much, no; исключения с a/an: a help, a knowledge (of sth), a pity, a relief, a shame, a wonder. Группы неисчисляемых: вещества (beer, blood, bread, butter, air, oxygen, corn, flour); учебные предметы (accountancy, chemistry, economics, history, literature, maths, physics); языки (Chinese, French…); виды спорта (baseball, billiards, cricket, cycling, darts, football, golf, rugby); болезни (chickenpox, flu, measles, mumps, pneumonia, tuberculosis); природные явления (darkness, fog, gravity, hail, snow, sunlight, shade); собирательные (family, flock, public, team, committee, clergy, company, enemy, group, government); составные (countryside, homework, housework, seaside); абстрактные (anger, beauty, fear, knowledge, love, trouble, truth, wealth, work). Самые частые: accommodation, advice, baggage, behaviour, crockery, cutlery, furniture, information, jewellery, luggage, machinery, money, news, progress, rubbish, stationery, traffic, travel, weather. Длительность, расстояние, деньги как единое целое — глагол в ед.ч. Партитивы (measurement + of): a piece of advice/cake/furniture/information/paper; a glass of; a jar of jam; a rasher of bacon; a pint of beer; a box/sheet of paper; a packet of tea; a slice/loaf of bread; a kilo/pound of meat; a tube of toothpaste; a bar of chocolate/soap; a bit/piece of chalk; an ice cube; a lump of sugar; a bag of flour; a pair of trousers; a game of soccer; an item/piece of news; a drop/can of oil; a can of Coke; a carton of milk; a block of wood; a flash/bolt of lightning; a clap/peal of thunder.",
   "example": "Three hundred pounds a night is too much to pay for this room.",
   "comment": "",
-  "source": "ToC, GR"
- },
- {
-  "grade": 11,
-  "module": "Module 8 · Travel",
-  "lesson": "",
-  "category": "Прилагательные и наречия",
-  "topic": "Participles as adjectives (past participles)",
-  "scope": "Past participles — по ToC в блоке лексики конца модуля.",
-  "example": "",
-  "comment": "проверить: что именно (причастия как прилагательные / participle clauses) и урок (8d или 8e) — в источнике только строка ToC.",
-  "source": "ToC"
+  "source": "GR, ToC"
  },
  {
   "grade": 11,
@@ -995,10 +929,10 @@
   "lesson": "8c",
   "category": "Фразовые глаголы",
   "topic": "Phrasal verbs",
-  "scope": "Фокус English in Use: check + частицы (список в источнике не виден). Из текстов модуля (Word List): die out, become of, get clear of, wrench out, pull up, cut ahead.",
+  "scope": "check + частицы (English in Use 8c); конкретные частицы в доступных страницах не даны.",
   "example": "",
-  "comment": "проверить: частицы к check (8c) в OCR отсутствуют.",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления; приложения с фразовыми глаголами в учебнике нет.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -1006,10 +940,10 @@
   "lesson": "8c",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Dependent prepositions",
-  "scope": "Из Word List: become of, get clear of, trust yourself to the mercy of.",
+  "scope": "Dependent prepositions (English in Use 8c); конкретные сочетания в доступных страницах не даны.",
   "example": "",
-  "comment": "Упражнение на зависимые предлоги в источнике не видно — проверить.",
-  "source": "ToC, Word List"
+  "comment": "в доступных страницах только заголовок из оглавления.",
+  "source": "ToC"
  },
  {
   "grade": 11,
@@ -1017,9 +951,9 @@
   "lesson": "8b",
   "category": "Зависимые предлоги и устойчивые сочетания",
   "topic": "Collocations / Fixed phrases",
-  "scope": "Collocations related to travel (8b, airport & air travel); idioms related to weather.",
+  "scope": "Collocations related to travel (8b, airport & air travel).",
   "example": "",
-  "comment": "",
+  "comment": "в доступных страницах только заголовок из оглавления.",
   "source": "ToC"
  }
 ]
