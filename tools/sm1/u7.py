@@ -1,7 +1,8 @@
-"""Super Minds 1 · Unit 7 · Get dressed — HW2, HW4, HW6, HW7 и тест юнита.
+"""Super Minds 1 · Unit 7 · Get dressed — HW1–HW7 и тест юнита.
 
-Выгрузка ShkolaApp, разбор — docs/SM1_разбор_u7_t4.md. Homework 1, 3, 5 в
-выгрузке нет, номера уроков не сдвигаем (lesson_sort = K - 1).
+Выгрузка ShkolaApp, разбор — docs/SM1_разбор_u7_t4.md. HW1, HW3, HW5 и
+часть (1) HW4 догружены 07.10.2026 в корень папки SM1 (второй заход);
+lesson_sort = K - 1.
 
 Картинки одежды — одним набором на весь юнит (листы Л7.1, Л7.2): в тесте у
 «соедини слова с картинками» картинок нет совсем, а стоковые фото домашек
@@ -197,30 +198,6 @@ LESSONS = {
             ("text", {"html":
                 f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
                 "<h3>Поздравляю! Ты завершил домашнее задание, ты молодец!</h3>"
-                "<p>Увидимся на занятии!</p>"}),
-        ],
-    },
-
-    # ------------------------------------------------------------------ HW4
-    "u7_hw4": {
-        "unit": U, "unit_title": UNIT, "unit_sort": 7,
-        "lesson_title": "Homework 4", "lesson_sort": 3, "kind": "homework",
-        # В выгрузке только часть (2) — интерактивное видео (мультфильм
-        # «SM2ed Animated story video», Rutube, 1:39) с 9 заданиями по
-        # таймкодам. Самих заданий в выгрузке нет (только тип и время), части
-        # (1) нет совсем. Переносим видео; задания — в «доработать руками».
-        "blocks": [
-            ("text", {"html":
-                f'<p><img src="{shared("hello_headphones")}" alt="" style="height:200px"></p>'
-                "<h2>Привет!</h2>"
-                "<p>Сегодня тебя ждёт мультфильм. Посмотри его внимательно — "
-                "а потом посмотри ещё раз и повторяй за героями.</p>"}),
-
-            ("video", {"title": "Мультфильм Unit 7", "url": "", "provider": "file"}),
-
-            ("text", {"html":
-                f'<p><img src="{shared("well_done_clap")}" alt="" style="height:180px"></p>'
-                "<h3>Отличная работа!</h3>"
                 "<p>Увидимся на занятии!</p>"}),
         ],
     },
@@ -553,3 +530,468 @@ LESSONS = {
         ],
     },
 }
+
+
+# =================================================================== второй заход
+# Догружено 07.10.2026: HW1 (1)+(2), HW3, HW4 (1), HW5.
+
+def hello(html, image="hello_wave"):
+    return ("text", {"html":
+        f'<p><img src="{shared(image)}" alt="" style="height:200px"></p>' + html})
+
+
+def bye(html, image="well_done_star"):
+    return ("text", {"html":
+        f'<p><img src="{shared(image)}" alt="" style="height:180px"></p>' + html})
+
+
+def pic(name, alt="", width="100%"):
+    return f'<p><img src="{c(name)}" alt="{alt}" style="max-width:{width}"></p>'
+
+
+def order(sentence, words, image=None):
+    b = {"words": words, "sentence": sentence, "audio_tts": sentence}
+    if image:
+        b["image"] = image
+    return ("order", b)
+
+
+def listen_quiz(words, title="Послушай слово и выбери его"):
+    """«Послушай» тренажёра: верный вариант на позиции i % 4 (варианты не
+    перемешиваются при показе)."""
+    n = len(words)
+    qs = []
+    for i, (en, ru, _) in enumerate(words):
+        wrong = [words[(i + k) % n][0] for k in range(1, 4)]
+        pos = i % 4
+        opts = wrong[:pos] + [en] + wrong[pos:]
+        qs.append({"q": title, "type": "single", "audio_tts": en,
+                   "options": [{"text": o} for o in opts], "correct": [pos]})
+    return {"questions": qs}
+
+
+# Слова словарного тренажёра HW1 (1) — в его порядке. Картинки — листы Л7.1,
+# Л7.2 (стоковые фото тренажёра не берём).
+CLOTHES = [
+    ("jeans", "джинсы", "clothes_jeans"),
+    ("sweater", "свитер", "clothes_sweater"),
+    ("jacket", "пиджак, куртка", "clothes_jacket"),
+    ("skirt", "юбка", "clothes_skirt"),
+    ("shorts", "шорты", "clothes_shorts"),
+    ("baseball cap", "бейсболка, кепка", "clothes_cap"),
+    ("shoes", "обувь", "clothes_shoes"),
+    ("socks", "носки", "clothes_socks"),
+    ("T-shirt", "футболка", "clothes_tshirt"),
+    ("trousers", "брюки", "clothes_trousers"),
+]
+
+# ------------------------------------------------------------------ HW1
+# (1) — словарный тренажёр (10 слов: Карточки, Запомни, Послушай, Найди пару;
+# «дополнительные» Unscramble / Fill in / Final test тренажёра не переносим —
+# как в других юнитах). (2) — дополнительная часть: повторение, рисунок +
+# запись голоса, две игры Wordwall (обложки пустые, СОСТАВ МОЙ).
+# Бл. 2 части (2) — реклама для родителей, не переносим.
+LESSONS["u7_hw1"] = {
+    "unit": U, "unit_title": UNIT, "unit_sort": 7,
+    "lesson_title": "Homework 1", "lesson_sort": 0, "kind": "homework",
+    "blocks": [
+        hello("<h2>Добро пожаловать в домашнее задание! 👋</h2>"
+              "<p>В этом уроке тебя ждут задания на отработку новых слов — мы "
+              "выучим, как по-английски называется одежда. Выполни все задания, если "
+              "хочешь выучить тему на все 100!</p>"
+              "<p>После того как завершишь все задания, тебя ждёт дополнительная "
+              "часть — её можно выполнить по желанию, НО если ты выполнишь её, то "
+              "будешь нереально крут!</p>"),
+        ("flashcards", {"title": "Запомни слова. Нажми на карточку, чтобы увидеть перевод",
+                        "cards": [{"text": en, "translation": ru, "audio_tts": en,
+                                   "image": c(f)} for en, ru, f in CLOTHES]}),
+        ("quiz", quiz_ru_to_en(CLOTHES)),
+        ("quiz", listen_quiz(CLOTHES)),
+        ("match", {"title": "Найди пару: соедини слово и перевод", "pairs": [
+            {"left": en, "left_audio_tts": en, "right": ru} for en, ru, f in CLOTHES]}),
+
+        # 6 — перемычка: прощание (1) + приветствие (2)
+        ("text", {"html":
+            f'<p><img src="{shared("well_done_clap")}" alt="" style="height:160px"></p>'
+            "<h3>Отлично! Слова выучены 💪</h3>"
+            "<p>Добро пожаловать в дополнительную часть домашнего задания! Здесь тебя "
+            "ждут интересные упражнения. Их можно выполнить по желанию.</p>"
+            "<p>НО если ты выполнишь их, то будешь большим молодцом!</p>"}),
+
+        ("text", {"html": "<p>Давай повторим всё, что выучили с тобой на уроке:</p>"
+                  + pic("vocab_clothes", "Vocabulary — Clothes")}),
+
+        # 8 — в выгрузке холст для рисования + запись голоса
+        ("speaking", {
+            "title": "Нарисуй себя в любимой одежде 🎨🎤",
+            "needs_review": True,
+            "image": c("kids_drawing_sample"),
+            "html":
+                "<p>Нарисуй себя в любимой одежде (не забудь раскрасить!) и покажи "
+                "рисунок своему учителю на уроке.</p>"
+                "<p>Нажми на микрофон и перечисли, какую одежду ты нарисовал.</p>"
+                "<p><i>Пример: a blue T-shirt, blue shorts, green shoes.</i></p>"}),
+
+        # 9 — Wordwall «Соедини слова с картинками», обложка пустая. СОСТАВ МОЙ.
+        ("match", {"title": "Ты выполнил все задания из основной части! А это "
+                            "дополнительное задание — для настоящих чемпионов! "
+                            "Соедини слова с картинками:",
+                   "pairs": [{"left_image": c(f), "right": en, "right_audio_tts": en}
+                             for en, ru, f in CLOTHES[:6]]}),
+
+        # 10 — Wordwall «Впиши слова», обложка пустая. СОСТАВ МОЙ.
+        ("exact_input", {"items": [
+            {"image": c(f), "prompt": "Впиши слова: что на картинке?" if i == 0 else
+                                      "Что на картинке?",
+             "accept": acc, "audio_tts": acc[0]}
+            for i, (f, acc) in enumerate([
+                ("clothes_shoes", ["shoes", "Shoes"]),
+                ("clothes_socks", ["socks", "Socks"]),
+                ("clothes_tshirt", ["T-shirt", "t-shirt", "T shirt", "tshirt", "a T-shirt"]),
+                ("clothes_trousers", ["trousers", "Trousers"]),
+                ("clothes_sweater", ["sweater", "Sweater", "a sweater"]),
+                ("clothes_jeans", ["jeans", "Jeans"]),
+            ])
+        ]}),
+
+        bye("<h3>Поздравляю! Ты завершил домашнее задание, ты молодец!</h3>"
+            "<p>За это лови сердечко 💗</p>"
+            "<p>Увидимся на занятии!</p>"),
+    ],
+}
+
+# ------------------------------------------------------------------ HW3
+# Бл. 2 — реклама для родителей, не переносим. Кадры героев мультфильмов
+# (Mabel, Darius, Gravity Falls) — из PDF, как в выгрузке. Фото четырёх
+# взрослых в бл. 11–13 брать нельзя — заменены комплектами одежды (Л7.7),
+# аудио к бл. 10–11 в выгрузке нет: текст наш, размечен audio_tts, СОСТАВ МОЙ.
+# Бл. 14 — две игры Wordwall, обложки пустые: СОСТАВ МОЙ.
+HW3_NAMES = [("Kate", "outfit_kate"), ("Tom", "outfit_tom"),
+             ("Any", "outfit_any"), ("Sam", "outfit_sam")]
+HW3_SCRIPT = ("Kate is wearing a red sweater, a white skirt and red boots. "
+              "Tom is wearing a black coat, a white shirt and black jeans. "
+              "Any is wearing a pink sweater and a red skirt. "
+              "Sam is wearing a grey T-shirt, red shorts and a cap.")
+
+LESSONS["u7_hw3"] = {
+    "unit": U, "unit_title": UNIT, "unit_sort": 7,
+    "lesson_title": "Homework 3", "lesson_sort": 2, "kind": "homework",
+    "blocks": [
+        hello("<h2>Добро пожаловать в домашнее задание! 👋</h2>"
+              "<p>Впереди тебя ждут несколько интересных видео и увлекательных "
+              "упражнений, а также 1 дополнительное задание, которое можно выполнить "
+              "по желанию.</p>"
+              "<p>За каждое задание ты будешь получать ⭐️. Собери максимальное "
+              "количество звёздочек и стань ЧЕМПИОНОМ!</p>"),
+
+        ("text", {"html": "<p>Давай повторим всё, что выучили с тобой на уроке:</p>"
+                  + pic("grammar_is_he_wearing", "Grammar 2 — Is he/she wearing …?")}),
+
+        ("text", {"html":
+            "<p>Мы начнём с видео, но прежде чем смотреть, как думаешь, во что одеты "
+            "главные персонажи видео? A T-shirt? A skirt? A cap?</p>"
+            "<p>Теперь посмотри видео один раз, внимательно слушай, что говорит "
+            "персонаж, и проверь себя — угадал ли ты?</p>"
+            "<p>Затем посмотри видео снова и повторяй за персонажами.</p>"}),
+
+        # 4
+        ("video", {"title": "Видео 1: She's wearing a pink jumper and a purple skirt",
+                   "url": "", "provider": "file"}),
+
+        ("match", {"title": "Сейчас посмотри видео ещё раз и соедини предложения и "
+                            "подходящие картинки! За это задание ты получишь 1 ⭐️.",
+                   "pairs": [
+            {"left": "He's wearing a white T-shirt.",
+             "left_audio_tts": "He's wearing a white T-shirt.",
+             "right": "Darius", "right_image": c("char_darius")},
+            {"left": "She's wearing a pink jumper.",
+             "left_audio_tts": "She's wearing a pink jumper.",
+             "right": "Mabel", "right_image": c("char_mabel_card")},
+        ]}),
+
+        ("text", {"html":
+            "<p>Посмотри ещё одно видео. Но сначала посмотри на картинку и угадай, о "
+            "каких персонажах будем смотреть видео.</p>"
+            + pic("gf_family_party", "", "480px") +
+            "<p>Теперь посмотри видео один раз и проверь себя — угадал ли ты?</p>"
+            "<p>Затем посмотри видео снова и повторяй за персонажами.</p>"}),
+
+        # 7
+        ("video", {"title": "Видео 2: Gravity Falls", "url": "", "provider": "file"}),
+
+        ("match", {"title": "Сейчас посмотри видео ещё раз и соедини вопрос с правильным "
+                            "ответом. Так ты сможешь получить ещё 1 ⭐️.",
+                   "pairs": [
+            {"left": "Is Dipper wearing a cap?", "right": "Yes, he is.",
+             "right_audio_tts": "Yes, he is."},
+            {"left": "Is Mabel wearing a yellow sweater?", "right": "No, she isn’t.",
+             "right_audio_tts": "No, she isn't."},
+        ]}),
+
+        # 9 — аудио в выгрузке пустое; наш текст для озвучки, СОСТАВ МОЙ
+        ("text", {"html":
+            f'<p><img src="{shared("well_done_smiley")}" alt="" style="height:140px"></p>'
+            "<p>Молодец!</p>"
+            "<p>Теперь время практики. Внизу ты найдёшь картинку с одеждой четырёх "
+            "ребят. Прослушай аудио и соедини имена с одеждой. Это задание "
+            "оценивается в целых 2 ⭐️⭐️.</p>",
+            "audio": "", "audio_tts": HW3_SCRIPT}),
+
+        ("match", {"title": "Прослушай аудио и отметь, где чья одежда (соедини имя и "
+                            "картинку).",
+                   "pairs": [{"left": n, "right": "одежда " + n, "right_image": c(f)}
+                             for n, f in HW3_NAMES]}),
+
+        ("text", {"html":
+            "<p>Отлично! Ты справился с большей частью заданий. Ты — молодец.</p>"
+            "<p>Посмотри ещё раз на картинку из предыдущего задания и ответь на "
+            "вопросы ниже. За это задание ты получишь 2 ⭐️⭐️.</p>"}),
+
+        # 12 — в выгрузке ответы не отмечены; ключ — по нашей картинке
+        ("quiz", {"title": "Ответь на вопросы", "questions": [
+            yes_no("Is Tom wearing a grey T-shirt?", c("hw3_four_outfits"),
+                   ["Yes, he is.", "No, he isn't."], 1),
+            yes_no("Is Kate wearing a white skirt?", c("hw3_four_outfits"),
+                   ["No, she isn't.", "Yes, she is."], 1),
+            yes_no("Is Sam wearing a cap?", c("hw3_four_outfits"),
+                   ["Yes, he is.", "No, he isn't."], 0),
+            yes_no("Is Any wearing a red sweater?", c("hw3_four_outfits"),
+                   ["Yes, she is.", "No, she isn't."], 1),
+        ]}),
+
+        # 13 — образец ответа (аудио) в выгрузке пустой
+        ("speaking", {
+            "title": "Опиши одного из героев 🎤",
+            "needs_review": True,
+            "image": c("gf_mabel_dipper"),
+            "sample": "",
+            "sample_tts": "This is Mabel. She is wearing a pink sweater and a purple skirt.",
+            "html":
+                "<p>Посмотри на картинку. На ней герои мультфильма Gravity Falls — "
+                "Mabel и Dipper. Опиши одного из героев.</p>"
+                "<p>Сначала послушай пример ответа.</p>"}),
+
+        # 14 — Wordwall «Заполни пропуски», обложка пустая. СОСТАВ МОЙ.
+        ("gaps", {
+            "title": "Ты выполнил все задания из основной части! А это дополнительное "
+                     "задание — для настоящих чемпионов! Заполни пропуски: is или isn't.",
+            "text":
+                "1. __Is__ Dipper wearing a cap? — Yes, he is.\n"
+                "2. Is Mabel wearing a yellow sweater? — No, she __isn't|isn’t|is not__.\n"
+                "3. Darius __is__ wearing a white T-shirt.\n"
+                "4. Is Mabel wearing a purple skirt? — Yes, she __is__.\n"
+                "5. Is Dipper wearing a dress? — No, he __isn't|isn’t|is not__.",
+            "gaps_expected": 5,
+        }),
+
+        # 15–16 — Wordwall «Расставь слова в правильном порядке», обложка пустая.
+        # СОСТАВ МОЙ.
+        order("Is Mabel wearing a pink sweater?",
+              ["Is", "Mabel", "wearing", "a", "pink", "sweater?"], c("char_mabel_card")),
+        order("He is wearing a white T-shirt.",
+              ["He", "is", "wearing", "a", "white", "T-shirt."], c("char_darius")),
+
+        bye("<h3>Поздравляю! Ты завершил домашнее задание, ты молодец!</h3>"
+            "<p>Жду тебя на занятии!</p>", "hello_wave"),
+    ],
+}
+
+# ------------------------------------------------------------------ HW4
+# (1) — история «The cap» (аудио, кадры, задания), (2) — интерактивное видео
+# «SM2ed Animated story video» (Rutube, 1:39) с 9 заданиями по таймкодам;
+# содержимого заданий видео в выгрузке нет. Прощание (1) и приветствие (2)
+# сведены в перемычку. Бл. 2 части (1) — реклама для родителей.
+CAP_ORDER = ["My cap isn't here.", "Look! Gary's wearing my cap.",
+             "That's my cap, Gary.", "No, it's my cap.",
+             "Oh no! That's my cap!", "I'm very sorry, Gary."]
+
+LESSONS["u7_hw4"] = {
+    "unit": U, "unit_title": UNIT, "unit_sort": 7,
+    "lesson_title": "Homework 4", "lesson_sort": 3, "kind": "homework",
+    "blocks": [
+        hello("<h2>Привет! 👋</h2>"
+              "<p>Сегодня мы с тобой послушаем и прочитаем рассказ о наших "
+              "супердрузьях!</p>"
+              "<p>В конце урока тебя ждёт интерактивное видео — оно дополнительное, "
+              "его можно сделать по желанию, но ты будешь МЕГА крут, когда "
+              "справишься с ним!</p>", "hello_headphones"),
+
+        ("text", {"html": "<p>Давай повторим всё, что выучили с тобой на уроке:</p>"
+                  + pic("story_cap_phrases", "Story — The Cap (Key Phrases)")}),
+
+        # 3 — аудио истории в выгрузке пустое
+        ("text", {"html":
+            "<p>Твоё первое задание — послушать аудио и выполнить тест под ним.</p>"
+            + pic("story_cap_cover", "The cap", "480px") +
+            "<p>Но сначала попробуй угадать, какое приключение ждёт наших Супердрузей "
+            "в этот раз. Название истории — <b>The cap</b>. Может, что-то случится с "
+            "кепкой?</p>"
+            "<p>Прослушай аудио и узнай, угадал ли ты.</p>",
+            "audio": ""}),
+
+        # 4 — в выгрузке ответ не отмечен; посчитано по тексту истории: название 1,
+        # кадры 1 (1), 2 (2), 3 (2), 4 (1), 7 (1) = 8
+        ("quiz", {"title": "Сколько раз звучит слово cap?", "questions": [
+            {"q": "Прослушай историю ещё раз. Посчитай, сколько раз звучит слово "
+                  "<b>cap</b>, и выбери правильный ответ. (Название истории тоже "
+                  "считается.)", "type": "single", "image": c("cap_yellow_clipart"),
+             "options": [{"text": "8"}, {"text": "10"}, {"text": "4"}, {"text": "6"}],
+             "correct": [0]},
+        ]}),
+
+        ("text", {"html":
+            "<p>Внимательно прочитай историю и выполни упражнение, которое ты увидишь "
+            "сразу после рассказа.</p>"
+            + pic("story_cap_1_4", "The cap, 1–4") + pic("story_cap_5_8", "The cap, 5–8")}),
+
+        ("sequence", {"title": "Сейчас прочитай текст ещё раз и выполни задание — расставь "
+                               "предложения в правильном порядке, как они идут в рассказе! "
+                               "У тебя получится!",
+                      "image": c("cap_yellow_clipart"),
+                      "items": [{"text": t, "audio_tts": t} for t in CAP_ORDER]}),
+
+        # 7 — перемычка: прощание (1) + приветствие (2)
+        ("text", {"html":
+            f'<p><img src="{shared("well_done_clap")}" alt="" style="height:160px"></p>'
+            "<h3>Поздравляю! Основная часть готова, ты замечательный ученик! ✨</h3>"
+            "<p>А теперь — дополнительное задание: мультфильм. Посмотри его "
+            "внимательно, а потом посмотри ещё раз и повторяй за героями.</p>"}),
+
+        # 8
+        ("video", {"title": "Мультфильм Unit 7", "url": "", "provider": "file"}),
+
+        bye("<h3>Отличная работа!</h3>"
+            "<p>Жду тебя на занятии!</p>", "well_done_trophy"),
+    ],
+}
+
+# ------------------------------------------------------------------ HW5
+# Бл. 2 — реклама для родителей (и ещё раз на стр. 17), не переносим. Фото
+# фокусника (бл. 4) — стоковое, не берём. Бл. 6 (отметь одежду героев
+# видео: trousers, skirt, shorts, cap, jeans, shoes, sweater, jacket) — ответы
+# не отмечены, видео нет: в урок не положен, в доработку. Фото людей к
+# «расставь слова» заменены нашими картинками и клипартом из PDF.
+# Бл. 14 — две игры Wordwall, обложки пустые: СОСТАВ МОЙ.
+TFN = ["True", "False", "Not stated"]
+
+LESSONS["u7_hw5"] = {
+    "unit": U, "unit_title": UNIT, "unit_sort": 7,
+    "lesson_title": "Homework 5", "lesson_sort": 4, "kind": "homework",
+    "blocks": [
+        hello("<h2>Добро пожаловать в домашнее задание! 👋</h2>"
+              "<p>Тебя ждут интересные упражнения и увлекательное видео, а также "
+              "ДОПОЛНИТЕЛЬНОЕ задание, которое можно выполнить ПО ЖЕЛАНИЮ и получить "
+              "дополнительные кристаллы 💎.</p>"
+              "<p>Чтобы стать ЧЕМПИОНОМ — собери все кристаллы, которые ты будешь "
+              "получать за выполнение каждого упражнения.</p>"),
+
+        ("text", {"html":
+            "<p>Сейчас тебе нужно посмотреть видео и выполнить задание.</p>"
+            "<p>Главные герои видео выступают на шоу талантов и показывают фокусы с "
+            "помощью одежды. Как думаешь, какие фокусы они показывают?</p>"
+            "<p>Посмотри видео и узнай, угадал ли ты 🎩</p>"}),
+
+        # 3
+        ("video", {"title": "Видео: шоу талантов", "url": "", "provider": "file"}),
+
+        ("text", {"html":
+            "<p>Внимательно посмотри на картинку.</p>"
+            + pic("party_scene_names", "Emma, Ken, Lara, Paul") +
+            "<p>Под картинкой есть предложения. Прочитай их и скажи, это правда "
+            "(True) или неправда (False). Если по картинке нельзя определить, правда "
+            "это или неправда, выбери <b>Not stated</b>.</p>"
+            "<p>За это задание ты можешь заработать 2 💎💎</p>"}),
+
+        # 5 — в выгрузке ответы не отмечены (и нет кнопки Not stated); ключ — по
+        # картинке: Lara сидит за столом, ног не видно → Not stated
+        ("quiz", {"title": "True, False или Not stated?", "questions": [
+            yes_no("Emma is watching TV.", c("party_scene_names"), TFN, 0),
+            yes_no("Ken is playing a game.", c("party_scene_names"), TFN, 0),
+            yes_no("Lara is wearing pink jeans.", c("party_scene_names"), TFN, 2),
+            yes_no("Paul is playing computer games.", c("party_scene_names"), TFN, 1),
+            yes_no("Ken is wearing a yellow sweater.", c("party_scene_names"), TFN, 0),
+            yes_no("Emma is wearing a green T-shirt.", c("party_scene_names"), TFN, 1),
+        ]}),
+
+        ("text", {"html":
+            "<p>А в следующем упражнении мы с тобой потренируемся составлять "
+            "предложения.</p>"
+            "<p>Расставь слова в правильном порядке, чтобы получилось предложение. "
+            "Тебя ждут 6 таких предложений. Составь их и получи 2 💎💎</p>"}),
+
+        # 7–12
+        order("Anna is wearing a blue skirt.",
+              ["Anna", "is", "wearing", "a", "blue", "skirt."], c("outfit_anna")),
+        order("What is Bob doing?", ["What", "is", "Bob", "doing?"], c("boy_singing")),
+        order("Are Amy and Hannah riding bikes?",
+              ["Are", "Amy and Hannah", "riding", "bikes?"], c("obj_bikes")),
+        order("Emma and Tom are watching TV.",
+              ["Emma and Tom", "are", "watching", "TV."], c("watching_tv_clipart")),
+        order("Is Sam eating a sandwich?",
+              ["Is", "Sam", "eating", "a sandwich?"], c("obj_sandwich")),
+        order("Is Oscar playing football?",
+              ["Is", "Oscar", "playing", "football?"], c("football_ball")),
+
+        # 13 — текст и запись голоса (бл. 11–12 выгрузки)
+        ("speaking", {
+            "title": "Прочитай вслух 🎤",
+            "needs_review": True,
+            "image": c("emma_singing"),
+            "sample": "",
+            "sample_tts": "Emma is my best friend. Emma is wearing a pink T-shirt, green "
+                          "trousers and black shoes. She is singing.",
+            "html":
+                "<p>Посмотри! На картинке моя подруга. Её зовут Эмма!</p>"
+                "<p>Посмотри на картинку и прочитай описание девочки. Нажми на микрофон "
+                "и запиши, как ты читаешь текст вслух. За это задание ты получишь "
+                "3 💎💎💎</p>"
+                "<p><b>Emma is my best friend.<br>Emma is wearing a pink T-shirt, green "
+                "trousers and black shoes.<br>She is singing.</b></p>"}),
+
+        ("task", {
+            "title": "Нарисуй своего друга",
+            "needs_review": True,
+            "html":
+                "<p>Нарисуй своего друга, опиши его и покажи рисунок на уроке. Используй "
+                "предыдущее упражнение как пример.</p>"
+                "<p>Напиши 3–5 предложений. За это задание ты получишь 4 💎💎💎💎</p>"
+                "<p><i>My best friend is … He/She is wearing … He/She is …</i></p>"}),
+
+        # 15 — Wordwall «Впиши слова», обложка пустая. СОСТАВ МОЙ.
+        ("exact_input", {"items": [
+            {"image": c(f), "prompt": (
+                "Ты выполнил все задания из основной части! А это дополнительное "
+                "задание — для настоящих чемпионов! Впиши слово с -ing.<br>" if i == 0
+                else "") + p, "accept": acc}
+            for i, (f, p, acc) in enumerate([
+                ("watching_tv_clipart", "Emma and Tom are ___ TV. (watch)", ["watching"]),
+                ("boy_singing", "Bob is ___. (sing)", ["singing"]),
+                ("obj_sandwich", "Sam is ___ a sandwich. (eat)", ["eating"]),
+                ("obj_bikes", "Amy and Hannah are ___ bikes. (ride)", ["riding"]),
+                ("football_ball", "Oscar is ___ football. (play)", ["playing"]),
+                ("emma_singing", "Emma is ___ a pink T-shirt. (wear)", ["wearing"]),
+            ])
+        ]}),
+
+        # 16 — Wordwall «Выбери правильный вариант», обложка пустая. СОСТАВ МОЙ.
+        ("quiz", {"title": "Выбери правильный вариант", "questions": [
+            yes_no("Выбери правильный вариант:<br>Emma ___ watching TV.",
+                   c("party_scene_names"), ["is", "are", "am"], 0),
+            yes_no("___ Ken playing a game? — Yes, he is.", c("party_scene_names"),
+                   ["Are", "Is", "Do"], 1),
+            yes_no("Is Paul eating cake? — Yes, he ___.", c("party_scene_names"),
+                   ["isn't", "does", "is"], 2),
+            yes_no("Lara ___ playing football. She's playing a computer game.",
+                   c("party_scene_names"), ["is", "isn't", "aren't"], 1),
+            yes_no("Ken is ___ a yellow sweater.", c("party_scene_names"),
+                   ["wear", "wearing", "wears"], 1),
+        ]}),
+
+        bye("<h3>Поздравляю! Ты завершил домашнее задание! Молодец!</h3>"
+            "<p>За прохождение домашнего задания держи ещё 1 дополнительный 💎</p>"
+            "<p>Жду тебя на занятии!</p>", "well_done_medal"),
+    ],
+}
+
+LESSONS = {k: LESSONS[k] for k in
+           ["u7_hw1", "u7_hw2", "u7_hw3", "u7_hw4", "u7_hw5", "u7_hw6", "u7_hw7", "u7_test"]}

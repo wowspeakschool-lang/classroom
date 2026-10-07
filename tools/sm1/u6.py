@@ -1,12 +1,15 @@
 """Super Minds 1 · Unit 6 · My house — уроки из выгрузки ShkolaApp.
 
-В выгрузке есть HW1 (только часть (1), словарный тренажёр), HW2, HW4, HW7 и тест.
-Homework 3, 5, 6 в выгрузке нет — номера уроков не сдвигаем.
+HW1 собран из двух частей: «Homework 1 (1)» (словарный тренажёр, в папке юнита)
+и «Homework 1 (2)» (догружена 07.10.2026 в корень SM1). HW3, HW5, HW6 — тоже
+из догрузки. Есть HW1–HW7 и тест.
 Разбор по блокам — docs/SM1_разбор_u6_t3.md.
 
 Картинки комнат (room_*.webp, house_outside) — лист Л6.1, ещё не сгенерирован.
 test_books_bedroom и test_park_empty — лист ЛТ6.1 (замена фото с ребёнком
-и фото фирменного карта). Остальное вырезано из PDF.
+и фото фирменного карта). hw3_rats, hw3_cars, hw3_go_kart — лист Л6.3
+(в выгрузке крысы в руках человека, машинки из мультфильма и фирменная модель).
+Остальное вырезано из PDF.
 """
 from sm1_build import *  # noqa: F401,F403  img, shared
 
@@ -74,15 +77,22 @@ def base(key, title, sort, kind="homework"):
 LESSONS = {}
 
 # ---------------------------------------------------------------- Homework 1
-# Выгрузка: только «Homework 1 (1)» — словарный тренажёр (vocabulary-drilling):
-# 8 слов + задания «Запомни», «Послушай», «Найди пару», «Скрэмбл» и тест.
-# Вторая часть (2) не выгрузилась — строка в доработке.
+# Две части. «(1)» — словарный тренажёр (vocabulary-drilling): 8 слов + задания
+# «Запомни», «Послушай», «Найди пару», «Скрэмбл» и тест. «(2)» (догружена) —
+# карточка Rooms in the House, запись голосом «назови комнаты своего дома» и
+# доп. задание из двух игр («Соедини картинки со словами», «Впиши слова»),
+# содержимое игр в выгрузку не попало — СОСТАВ МОЙ. Порядок по содержимому:
+# приветствие (1) обещает доп. задание, (2) — «вторая часть домашнего задания».
+# Прощание (1) и приветствие (2) сведены в перемычку 15.
+# Блок 2 «(2)» — реклама для родителей, не перенесена.
 LESSONS["u6_hw1"] = dict(base("u6_hw1", "Homework 1", 0), blocks=[
     hello("hello_wave",
           "<h2>Привет! 👋</h2>"
           "<p>Сейчас мы с тобой выучим все слова, которые разобрали на уроке: комнаты в доме. "
           "Выполни все задания, чтобы выучить слова на 100%!</p>"
-          "<p>В конце урока тебя ждёт тест. У тебя всё получится. Удачи! ❤</p>"
+          "<p>В конце первой части тебя ждёт тест. А потом — вторая часть и ДОПОЛНИТЕЛЬНОЕ задание. "
+          "Его можно выполнить по желанию, но если ты его сделаешь — ты будешь МЕГА КРУТЫМ! "
+          "У тебя всё получится. Удачи! ❤</p>"
           f'<p><img src="{img(U, "house_outside")}" alt="" style="max-width:100%;max-height:260px"></p>'),
 
     ("flashcards", {"title": "Запомни слова. Нажми на карточку, чтобы увидеть перевод", "cards": [
@@ -101,8 +111,39 @@ LESSONS["u6_hw1"] = dict(base("u6_hw1", "Homework 1", 0), blocks=[
         {"image": img(U, f), "prompt": f"Напиши по-английски: {ru}",
          "accept": [en, en.capitalize()], "audio_tts": en} for en, ru, f in ROOMS]}),
 
+    # 15 — перемычка: прощание (1) + приветствие (2)
+    ("text", {"html":
+        f'<p><img src="{shared("hello_rocket")}" alt="" style="height:180px"></p>'
+        "<h3>Ты выучил все комнаты! 🎉</h3>"
+        "<p>Добро пожаловать во вторую часть домашнего задания. "
+        "Выполни все задания, чтобы хорошенько запомнить новые слова!</p>"
+        "<p>Выполнив это задание, ты станешь МЕГА крутым учеником!</p>"}),
+
+    ("text", {"html":
+        "<h3>Давай повторим всё, что выучили с тобой на уроке:</h3>"
+        f'<p><img src="{img(U, "card_rooms_vocab")}" alt="Vocabulary — Rooms in the House" style="max-width:100%"></p>'}),
+
+    ("speaking", {"title": "Какие комнаты есть в твоём доме? 🎤",
+                  "html": "<p>Запиши аудио, где ты называешь все комнаты, которые есть в твоём доме.</p>"
+                          "<p>Послушай пример ответа, а потом нажми на микрофон.</p>"
+                          "<p><i>Например: a kitchen, a bathroom, a living room, two bedrooms, a hall.</i></p>",
+                  "sample": "",
+                  "sample_tts": "In my house there is a kitchen, a bathroom, a living room, two bedrooms and a hall.",
+                  "needs_review": True}),
+
+    # Игра «Соедини картинки со словами» — содержимого в выгрузке нет. СОСТАВ МОЙ: комнаты Л6.1.
+    ("match", {"title": "⭐ Ты выполнил все задания из основной части! А это дополнительное задание — "
+                        "для настоящих чемпионов! Соедини картинки со словами:",
+               "pairs": [{"left_image": img(U, f), "right": en, "right_audio_tts": en}
+                         for en, ru, f in ROOMS]}),
+
+    # Игра «Впиши слова» — содержимого нет. СОСТАВ МОЙ: комната по картинке, без перевода.
+    ("exact_input", {"items": [{"image": img(U, f), "prompt": "⭐ Впиши слово: что это за комната?",
+                                "accept": [en, en.capitalize(), f"a {en}", f"the {en}"]}
+                               for en, ru, f in ROOMS]}),
+
     bye("well_done_trophy",
-        "<h3>Поздравляю! Ты выучил все комнаты! 🎉</h3><p>Увидимся на занятии!</p>"),
+        "<h3>Поздравляю! Ты завершил домашнее задание. Ты — МЕГА КРУТ! 🎉</h3><p>Жду тебя на уроке!</p>"),
 ])
 
 # ---------------------------------------------------------------- Homework 2
@@ -209,6 +250,105 @@ LESSONS["u6_hw2"] = dict(base("u6_hw2", "Homework 2", 1), blocks=[
         "<h3>Поздравляю! Ты завершил домашнее задание, ты молодец! 🌟</h3><p>Увидимся на занятии!</p>"),
 ])
 
+# ---------------------------------------------------------------- Homework 3
+# «SM1 Unit 6 Homework 3» (догружена). Видео про животных — файла нет.
+# Ответы бл. 5 по картинкам: львов три (не пять), мяч большой (не small),
+# дракон один, собак четыре. В бл. 6–8 картинки крыс (в руках человека),
+# машинок из мультфильма и фирменной модели болида заменены листом Л6.3.
+# Бл. 10–11 — две пустые игры «Выбери правильный вариант» — СОСТАВ МОЙ.
+# Бл. 12 — реклама розыгрыша, не перенесена.
+YN = ["Yes, there is.", "No, there isn't.", "Yes, there are.", "No, there aren't."]
+
+
+def yn_q(q, correct, image=None, order=(0, 1, 2, 3), intro=""):
+    opts = [YN[i] for i in order]
+    d = {"q": intro + q, "type": "single", "audio_tts": q,
+         "options": [{"text": o} for o in opts], "correct": [opts.index(correct)]}
+    if image:
+        d["image"] = img(U, image)
+    return d
+
+
+def pick(q, options, correct, image=None):
+    d = {"q": q, "type": "single", "options": [{"text": o} for o in options],
+         "correct": [options.index(correct)]}
+    if image:
+        d["image"] = img(U, image)
+    return d
+
+
+LESSONS["u6_hw3"] = dict(base("u6_hw3", "Homework 3", 2), blocks=[
+    hello("hello_laptop",
+          "<h2>Добро пожаловать в домашнее задание!</h2>"
+          "<p>Впереди тебя ждут несколько интересных видео и увлекательных упражнений.</p>"
+          "<p>За каждое задание ты будешь получать ⭐ Собери максимальное количество звёздочек "
+          "и стань ЧЕМПИОНОМ!</p>"),
+
+    ("text", {"html":
+        "<h3>Давай повторим всё, что выучили с тобой на уроке:</h3>"
+        f'<p><img src="{img(U, "card_grammar_is_there")}" alt="Is there…? / Are there…?" style="max-width:100%"></p>'}),
+
+    ("video", {"title": "Ура! Мы с тобой посмотрим интересное видео. В этом видео ты увидишь много животных. "
+                        "Попробуй угадать, какие животные встретятся тебе в видео? "
+                        "Для начала посмотри видео один раз, внимательно слушай, что говорят персонажи. "
+                        "Потом посмотри видео ещё раз и повторяй за персонажами.",
+               "url": "", "provider": "file"}),
+
+    ("quiz", {"questions": [
+        yn_q("Are there five lions?", "No, there aren't.", "hw3_lions", (0, 3, 1, 2),
+             intro="Посмотри видео ещё раз и на картинку. Выбери ответ на вопрос. "),
+        yn_q("Is there a small ball?", "No, there isn't.", "hw3_ball", (1, 0, 2, 3)),
+        yn_q("Is there a dragon?", "Yes, there is.", "hw3_dragon", (1, 3, 0, 2)),
+        yn_q("Are there four dogs?", "Yes, there are.", "hw3_dogs", (3, 1, 0, 2)),
+    ]}),
+
+    ("quiz", {"questions": [
+        pick("Ты посмотрел видео, и сейчас нужно выполнить ещё одно задание. Выбери правильный вариант: "
+             "___ there any pears?", ["Are", "Is"], "Are", "test_pears"),
+        pick("___ there any rats?", ["Is", "Are"], "Are", "hw3_rats"),
+        pick("How many cars ___ there?", ["is", "are"], "are", "hw3_cars"),
+        pick("___ there a plane?", ["Is", "Are"], "Is", "test_plane"),
+        pick("___ there a go-kart?", ["Are", "Is"], "Is", "hw3_go_kart"),
+        pick("How many cakes ___ there?", ["is", "are"], "are", "hw3_cake"),
+    ]}),
+
+    ("task", {"title": "Посмотри на картинку и впиши ответы на вопросы ✏️",
+              "image": img(U, "hw3_house_rooms"),
+              "needs_review": True,
+              "html": "<p>Внимательно посмотри на картинку. Впиши ответы на вопросы 1–8. "
+                      "Первые три вопроса — примеры, на них уже есть ответы.</p>"
+                      "<p><i>How many bedrooms are there? — There are two bedrooms.<br>"
+                      "Are there two living rooms? — No, there aren't.<br>"
+                      "Is there a bathroom? — Yes, there is.</i></p>"
+                      "<ol><li>How many rooms are there?</li><li>Are there two bedrooms?</li>"
+                      "<li>Is there a hall?</li><li>Is there a living room?</li><li>Are there 3 rooms?</li>"
+                      "<li>Are there 4 bedrooms?</li><li>Is there a dining room?</li><li>Is there a kitchen?</li></ol>"}),
+
+    # Бл. 10 — игра «Выбери правильный вариант», содержимого нет. СОСТАВ МОЙ.
+    ("quiz", {"questions": [
+        pick("⭐ Ты выполнил все задания из основной части! А это дополнительное задание — для настоящих "
+             "чемпионов! Выбери правильный вариант: ___ there a kitchen in the house?", ["Is", "Are"], "Is"),
+        pick("___ there any chairs in the dining room?", ["Is", "Are"], "Are"),
+        pick("___ there a sofa in the living room?", ["Are", "Is"], "Is"),
+        pick("How many bedrooms ___ there?", ["are", "is"], "are"),
+        pick("___ there any lizards in the bathroom?", ["Is", "Are"], "Are"),
+        pick("___ there a cellar in the house?", ["Are", "Is"], "Is"),
+    ]}),
+
+    # Бл. 11 — вторая пустая игра «Выбери правильный вариант». СОСТАВ МОЙ: по картинке дома.
+    ("quiz", {"questions": [
+        yn_q("Is there a sofa in the living room?", "Yes, there is.", "hw3_house_rooms",
+             intro="⭐ Посмотри на картинку дома и выбери правильный ответ. "),
+        yn_q("Is there a fridge in the kitchen?", "Yes, there is.", "hw3_house_rooms", (1, 0, 3, 2)),
+        yn_q("Are there any cats in the house?", "No, there aren't.", "hw3_house_rooms", (2, 3, 0, 1)),
+        yn_q("Is there a car in the kitchen?", "No, there isn't.", "hw3_house_rooms", (3, 2, 1, 0)),
+        yn_q("Are there any lamps in the living room?", "Yes, there are.", "hw3_house_rooms", (1, 0, 3, 2)),
+    ]}),
+
+    bye("well_done_jump",
+        "<h3>Ура, ты справился со всеми заданиями, ты — супер ученик! 💜</h3><p>Увидимся на занятии!</p>"),
+])
+
 # ---------------------------------------------------------------- Homework 4
 STORY_ORDER = [
     "There's the old house.",
@@ -288,6 +428,182 @@ LESSONS["u6_hw4"] = dict(base("u6_hw4", "Homework 4", 3), blocks=[
     bye("well_done_clap",
         "<h3>Поздравляю!</h3><p>Ты завершил домашнее задание, ты замечательный ученик! ✨</p>"
         "<p>Жду тебя на занятии!</p>"),
+])
+
+# ---------------------------------------------------------------- Homework 5
+# «SM1 Unit 6 Homework 5» (догружена). Бл. 2 — реклама, не перенесена.
+# Бл. 6 «Отметь, какие комнаты показывал герой видео» (a hall, a bedroom,
+# a bathroom, a garage, a toilet, a kitchen, a garden, a living room):
+# ключа в выгрузке нет (все чекбоксы пустые), видео нет — в урок НЕ положен,
+# строка в доработке. Бл. 13–14 — три пустые игры — СОСТАВ МОЙ.
+HOUSE_TEXT = ("I live in a nice house. There are 4 rooms. There is a bedroom, a bathroom, "
+              "a living room and a kitchen. There isn't a cellar. There isn't a hall. I like my house!")
+
+
+def order_s(sentence, words, image):
+    return ("order", {"title": "Расставь слова в правильном порядке.", "image": img(U, image),
+                      "words": words, "sentence": sentence, "audio_tts": sentence})
+
+
+LESSONS["u6_hw5"] = dict(base("u6_hw5", "Homework 5", 4), blocks=[
+    hello("hello_highfive",
+          "<h2>Добро пожаловать в домашнее задание!</h2>"
+          "<p>Тебя ждут интересные упражнения и увлекательное видео, а также ДОПОЛНИТЕЛЬНОЕ задание, "
+          "которое можно выполнить ПО ЖЕЛАНИЮ и получить дополнительные кристаллы 💎</p>"
+          "<p>Чтобы стать ЧЕМПИОНОМ — собери все кристаллы, которые ты будешь получать "
+          "за выполнение каждого задания.</p>"),
+
+    ("video", {"title": "Сейчас тебе нужно будет посмотреть видео. Герой видео проведёт небольшую экскурсию "
+                        "по своему дому. Попробуй угадать, какие комнаты есть у него в доме 🏡",
+               "url": "", "provider": "file"}),
+
+    ("text", {"html":
+        "<p>Внимательно посмотри на картинку. Под картинкой есть предложения: прочитай их и скажи, "
+        "правда это (True) или неправда (False). За задания под картинкой ты можешь заработать 2 💎💎</p>"
+        f'<p><img src="{img(U, "hw5_house_attic")}" alt="" style="max-width:100%"></p>'}),
+
+    ("truefalse", {"title": "Посмотри на картинку и выбери True, если предложение верно, False — если не верно.",
+                   "statements": [
+                       {"text": "There are three rooms in the house.", "correct": False},
+                       {"text": "There is a living room.", "correct": True},
+                       {"text": "There is a kitchen.", "correct": True},
+                       {"text": "There isn't a bathroom.", "correct": False},
+                       {"text": "There is a cellar.", "correct": False},
+                   ]}),
+
+    ("text", {"html":
+        f'<p><img src="{shared("good_luck_clover")}" alt="" style="height:160px"></p>'
+        "<p>А в следующем упражнении мы с тобой потренируемся составлять предложения.</p>"
+        "<p>Расставь слова в правильном порядке, чтобы получилось предложение. "
+        "Тебя ждут 5 таких предложений. Составь их и получи 2 💎💎</p>"}),
+
+    order_s("There are two bedrooms in the house.", ["There", "are", "two", "bedrooms", "in", "the house."],
+            "hw5_bedroom"),
+    order_s("There isn't a living room.", ["There", "isn't", "a", "living", "room."], "hw5_living_room"),
+    order_s("There aren't five bedrooms.", ["There", "aren't", "five", "bedrooms."], "hw5_floorplan"),
+    order_s("There is a kitchen.", ["There", "is", "a", "kitchen."], "hw5_kitchen"),
+    order_s("How many rooms are there in the house?",
+            ["How", "many", "rooms", "are", "there", "in", "the house?"], "hw5_house"),
+
+    ("speaking", {"title": "Прочитай вслух 🎤",
+                  "html": "<p>Следующее упражнение оценивается в целых 3 💎💎💎</p>"
+                          "<p>Посмотри ещё раз на картинку домика и прочитай его описание. "
+                          "Прочитай текст вслух. Запиши себя на диктофон.</p>"
+                          "<p><i>I live in a nice house.<br>There are 4 rooms. There is a bedroom, a bathroom, "
+                          "a living room and a kitchen. There isn't a cellar. There isn't a hall.<br>"
+                          "I like my house!</i></p>",
+                  "image": img(U, "hw5_house_attic"),
+                  "sample": "", "sample_tts": HOUSE_TEXT,
+                  "needs_review": True}),
+
+    ("task", {"title": "Опиши свой дом ✏️",
+              "needs_review": True,
+              "html": "<p>Здесь тебя ждёт ещё одно задание. За него ты получишь 4 💎💎💎💎</p>"
+                      "<p>Опиши свой дом, используя <b>there is / there are / there isn't / there aren't</b>. "
+                      "Используй предыдущее упражнение как пример.</p>"
+                      "<p>Напиши 5–7 предложений.</p>"
+                      "<p>(По желанию можешь нарисовать рисунок своего дома и показать учителю на уроке. "
+                      "За рисунок я подарю тебе дополнительный 💎)</p>"}),
+
+    # Бл. 13 — игра «Впиши слова», содержимого нет. СОСТАВ МОЙ: комнаты по картинке и переводу.
+    ("exact_input", {"items": [
+        {"image": img(U, f), "prompt": f"⭐ Дополнительное задание. Впиши слово: {ru}",
+         "accept": [en, en.capitalize(), f"a {en}"]}
+        for en, ru, f in ROOMS if en in ("bedroom", "bathroom", "living room", "kitchen", "hall", "cellar")]}),
+
+    # Бл. 14 — две игры «Выбери правильный вариант», содержимого нет. СОСТАВ МОЙ: по картинке домика.
+    ("quiz", {"questions": [
+        {"q": "⭐ Посмотри на картинку домика и выбери правильный вариант: ___ a bedroom.", "type": "single",
+         "image": img(U, "hw5_house_attic"),
+         "options": [{"text": "There is"}, {"text": "There are"}, {"text": "There isn't"}], "correct": [0]},
+        {"q": "___ a hall.", "type": "single",
+         "options": [{"text": "There is"}, {"text": "There isn't"}, {"text": "There aren't"}], "correct": [1]},
+        {"q": "___ four rooms.", "type": "single",
+         "options": [{"text": "There is"}, {"text": "There isn't"}, {"text": "There are"}], "correct": [2]},
+        {"q": "___ any spiders in the kitchen.", "type": "single",
+         "options": [{"text": "There aren't"}, {"text": "There isn't"}, {"text": "There is"}], "correct": [0]},
+        {"q": "___ a cellar.", "type": "single",
+         "options": [{"text": "There are"}, {"text": "There aren't"}, {"text": "There isn't"}], "correct": [2]},
+        {"q": "How many rooms are there?", "type": "single",
+         "options": [{"text": "There is four rooms."}, {"text": "There are four rooms."},
+                     {"text": "There aren't four rooms."}], "correct": [1]},
+    ]}),
+
+    bye("well_done_star",
+        "<h3>Поздравляю! Ты завершил домашнее задание! Молодец! 💎</h3>"
+        "<p>За прохождение домашнего задания держи ещё 1 дополнительный 💎</p><p>Жду тебя на занятии!</p>"),
+])
+
+# ---------------------------------------------------------------- Homework 6
+# «SM1 Unit 6 Homework 6» (догружена). Тема — виды домов (CLIL Geography).
+# Бл. 2 — реклама, не перенесена. Бл. 6 «выбери виды домов, которые звучали в
+# видео» (castle, hut, cave house, tree house, igloo, caravan, yurt, boat house):
+# ключа нет, видео нет — в урок НЕ положен, строка в доработке.
+# Бл. 9 — выпадающие списки: варианты в выгрузку не попали — СОСТАВ ВАРИАНТОВ МОЙ.
+HOMES = [  # (en, файл)
+    ("tree house", "home_tree"),
+    ("house boat", "home_boat"),
+    ("yurt", "home_yurt"),
+    ("cave house", "home_cave"),
+]
+
+LESSONS["u6_hw6"] = dict(base("u6_hw6", "Homework 6", 5), blocks=[
+    hello("hello_wave",
+          "<h2>Привет!</h2>"
+          "<p>Сегодня мы узнаем о разных домах. Тебя ждут интересные увлекательные упражнения и видео.</p>"),
+
+    ("text", {"html":
+        "<h3>Давай повторим всё, что выучили с тобой на уроке:</h3>"
+        f'<p><img src="{img(U, "card_types_of_homes")}" alt="Types of Homes" style="max-width:100%"></p>'}),
+
+    ("video", {"title": "Посмотри видео и выполни задание под ним. В этом видео Сэм путешествует по всему миру "
+                        "и узнаёт о различных видах домов. А где живёшь ты?",
+               "url": "", "provider": "file"}),
+
+    ("match", {"title": "А теперь давай вспомним названия домиков, которые мы выучили на уроке. "
+                        "Соедини название с картинкой.",
+               "pairs": [{"left_image": img(U, f), "right": f"It's a {en}.", "right_audio_tts": f"It's a {en}."}
+                         for en, f in HOMES]}),
+
+    ("gaps", {"title": "Молодец, ты справился с большей частью заданий! А теперь прочитай текст и заполни пропуски.",
+              "mode": "drag", "image": img(U, "homes_many"),
+              "text": "1) My house is in water. I live in a __house boat__.\n"
+                      "2) My house is in a tree. I live in a __tree house__.\n"
+                      "3) My house is round. I live in a __yurt__.\n"
+                      "4) My house is in a cave. I live in a __cave house__.",
+              "gaps_expected": 4}),
+
+    # Бл. 9 — выпадающие списки, вариантов в выгрузке нет. Варианты мои, ответ — по фото:
+    # пещерный дом, в кадре спальня и ванна, кухни нет.
+    ("quiz", {"questions": [
+        {"q": "Посмотри! Я очень хочу побывать в этом доме. Прочитай его описание и выбери правильный вариант "
+              "для каждого пропуска.<br>Look! It's a ___.", "type": "single", "image": img(U, "cave_house_room"),
+         "options": [{"text": "tree house"}, {"text": "cave house"}, {"text": "house boat"}, {"text": "yurt"}],
+         "correct": [1]},
+        {"q": "There are ___ rooms.", "type": "single", "image": img(U, "cave_house_room"),
+         "options": [{"text": "two"}, {"text": "five"}, {"text": "ten"}], "correct": [0]},
+        {"q": "It has got a ___ and a bathroom.", "type": "single", "image": img(U, "cave_house_room"),
+         "options": [{"text": "kitchen"}, {"text": "garden"}, {"text": "bedroom"}], "correct": [2]},
+        {"q": "It hasn't got a ___.", "type": "single", "image": img(U, "cave_house_room"),
+         "options": [{"text": "bedroom"}, {"text": "kitchen"}, {"text": "bathroom"}], "correct": [1]},
+    ]}),
+
+    ("speaking", {"title": "Мой домик мечты 🎤",
+                  "html": "<p>Ура! Осталось всего 1 задание.</p>"
+                          "<p>Выбери один из домиков, которые мы сегодня выучили. Может быть тот, который тебе "
+                          "больше всего понравился, в котором ты бы хотел жить или просто побывать. "
+                          "Нарисуй его, нажми на микрофон и опиши. Используй предыдущее задание как пример.</p>"
+                          "<p><i>Look! It's a tree house. There are two rooms. It has got a bedroom and a bathroom. "
+                          "It hasn't got a kitchen. I like it!</i></p>",
+                  "image": img(U, "homes_four"),
+                  "sample": "",
+                  "sample_tts": "Look! It's a tree house. There are two rooms. It has got a bedroom and a bathroom. "
+                                "It hasn't got a kitchen. I like it!",
+                  "needs_review": True}),
+
+    bye("well_done_smiley",
+        "<h3>Поздравляю! Ты завершил домашнее задание, ты замечательный ученик!</h3>"
+        "<p>За это лови звёздочку ⭐</p><p>Увидимся на занятии!</p>"),
 ])
 
 # ---------------------------------------------------------------- Homework 7

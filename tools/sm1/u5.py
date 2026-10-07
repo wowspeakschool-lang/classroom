@@ -1,8 +1,8 @@
-"""Super Minds 1 · Unit 5 · My week — HW4, HW6, HW7 и тест юнита.
+"""Super Minds 1 · Unit 5 · My week — HW4, HW5, HW6, HW7 и тест юнита.
 
 Выгрузка ShkolaApp, разбор — docs/SM1_разбор_u5_t1_t2.md. Homework 1–3 уже в
-базе (на base64, не трогаем), Homework 5 в выгрузке нет — номера уроков не
-сдвигаем (lesson_sort = K - 1).
+базе (на base64, не трогаем; догруженный в корень SM1 «Unit 5 Homework 1» не
+собираем). Homework 5 — из догрузки 07.10.2026 (lesson_sort = K - 1).
 
 Картинки занятий (act_*) — листы Л5.1 и ЛТ5.1: в HW6 и в тесте у «соедини
 картинку с фразой» картинок в выгрузке нет совсем, а в «Составь предложение»
@@ -163,6 +163,108 @@ LESSONS = {
                 f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
                 "<h3>Домашнее задание сделано!</h3>"
                 "<p>Ты отлично потрудился. Увидимся на уроке!</p>"}),
+        ],
+    },
+
+    # ------------------------------------------------------------------ HW5
+    "u5_hw5": {
+        "unit": U, "unit_title": UNIT, "unit_sort": 5,
+        "lesson_title": "Homework 5", "lesson_sort": 4, "kind": "homework",
+        # «SM1 Unit 5 Homework 5» — догружена 07.10.2026 в корень SM1.
+        # Блок 3 выгрузки: клипарт с детьми-спортсменами — украшение, не взят.
+        # Блок 5 LISTENING (James, Emma, Charles, Hannah — по три картинки на
+        # выбор): аудио нет, ключа нет (все кружки пустые), две картинки из
+        # двенадцати не выгрузились — в урок НЕ положен, строка в доработке.
+        # Блок 8 — две пустые игры («Впиши слова», «Составь предложения») — СОСТАВ МОЙ.
+        # Блок 10 — реклама розыгрыша, не перенесена.
+        "blocks": [
+            # 1
+            ("text", {"html":
+                f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
+                "<h2>Привет!</h2>"
+                "<p>Это новая домашняя работа. Сегодня тебя ждут много не совсем простых, но "
+                "очень-очень интересных заданий! Ты познакомишься с новыми персонажами, а с одним "
+                "даже пообщаешься 😉</p><p>Ну что, предлагаю начинать!</p>"}),
+
+            # 2
+            ("sort", {
+                "title": "Начнём с интересного задания! Распредели слова по группам, чтобы получились "
+                         "выражения. Например: play the piano или go swimming.",
+                "groups": [
+                    {"name": "PLAY", "items": [{"text": t, "audio_tts": "play " + t} for t in
+                                               ["hide-and-seek", "with friends", "with toys", "computer games"]]},
+                    {"name": "WATCH", "items": [{"text": "TV", "audio_tts": "watch TV"}]},
+                    {"name": "GO", "items": [{"text": "swimming", "audio_tts": "go swimming"}]},
+                    {"name": "RIDE", "items": [{"text": t, "audio_tts": "ride " + t} for t in
+                                               ["my horse", "my bike", "my pony"]]},
+                ]}),
+
+            # 3
+            ("match", {
+                "title": "Ты прекрасно справился с предыдущим заданием! А вот и следующее — соедини одну "
+                         "часть предложения со второй. Думаю, у тебя получится 😉",
+                "pairs": [
+                    {"left": "On Saturdays I play the", "right": "piano",
+                     "right_audio_tts": "On Saturdays I play the piano."},
+                    {"left": "On Sundays I watch", "right": "TV",
+                     "right_audio_tts": "On Sundays I watch TV."},
+                    {"left": "On Mondays I play with", "right": "friends",
+                     "right_audio_tts": "On Mondays I play with friends."},
+                    {"left": "On Thursdays I go", "right": "swimming",
+                     "right_audio_tts": "On Thursdays I go swimming."},
+                    {"left": "On Tuesdays I ride", "right": "my bike",
+                     "right_audio_tts": "On Tuesdays I ride my bike."},
+                    {"left": "On Wednesdays I play", "right": "computer games",
+                     "right_audio_tts": "On Wednesdays I play computer games."},
+                ]}),
+
+            # 4 — письмо Милы (блок 6 выгрузки)
+            ("text", {"html":
+                "<p>Мы с тобой сейчас познакомимся с Милой и узнаем, как проходит её неделя.</p>"
+                "<p>Она тебе написала письмо, давай прочитаем его!</p>"
+                + pic("hw5_mila_letter", 660)}),
+
+            # 5
+            ("task", {
+                "title": "Ответное письмо Миле ✉️",
+                "needs_review": True,
+                "html": "<p>А теперь давай напишем ответное письмо Миле.</p>"
+                        "<p>Ты можешь написать его в окошке здесь. А если тебе неудобно печатать текст, "
+                        "можешь написать его от руки и прислать фото.</p>"
+                        "<p>Начни, пожалуйста, письмо с таких слов: <i>Hello, Mila! My name is … "
+                        "This is my week!</i></p>"}),
+
+            # 6 — игра «Впиши слова», содержимого нет. СОСТАВ МОЙ.
+            ("exact_input", {"items": [
+                {"prompt": "⭐ Ты выполнил все задания из основной части! А это дополнительное задание — "
+                           "для настоящих чемпионов! Впиши по-английски: смотреть телевизор",
+                 "accept": ["watch TV", "watch tv", "Watch TV"]},
+                {"prompt": "кататься на велосипеде", "accept": ["ride a bike", "ride my bike", "Ride a bike"]},
+                {"prompt": "играть на пианино", "accept": ["play the piano", "Play the piano"]},
+                {"prompt": "играть в прятки", "accept": ["play hide-and-seek", "play hide and seek",
+                                                         "Play hide-and-seek"]},
+                {"prompt": "заниматься плаванием", "accept": ["go swimming", "Go swimming"]},
+                {"prompt": "играть в компьютерные игры", "accept": ["play computer games",
+                                                                    "Play computer games"]},
+            ]}),
+
+            # 7–9 — игра «Составь предложения», содержимого нет. СОСТАВ МОЙ: фразы из письма Милы.
+            order("On Mondays I watch TV for two hours.",
+                  ["On", "Mondays", "I", "watch", "TV", "for", "two", "hours."],
+                  title="⭐ Составь предложение из письма Милы"),
+            order("I play tennis for one hour.",
+                  ["I", "play", "tennis", "for", "one", "hour."],
+                  title="⭐ Составь предложение из письма Милы"),
+            order("On Saturdays and Sundays I do nothing!",
+                  ["On", "Saturdays", "and", "Sundays", "I", "do", "nothing!"],
+                  title="⭐ Составь предложение из письма Милы"),
+
+            # 10
+            ("text", {"html":
+                f'<p><img src="{shared("well_done_trophy")}" alt="" style="height:180px"></p>'
+                "<h3>Ого! Вот это здорово!</h3>"
+                "<p>Как много заданий ты сделал сегодня. Ты потрудился на славу.</p>"
+                "<p>Ты самый-самый лучший ученик на свете. Молодец ⭐</p>"}),
         ],
     },
 
