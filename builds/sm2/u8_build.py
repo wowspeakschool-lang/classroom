@@ -96,11 +96,11 @@ h1.add('video', {'title': 'Видео: ребята о любимом спорт
 h1.add('truefalse', {'title': 'Определи — верно утверждение или нет. Если понадобится, '
                               'можешь заглянуть обратно в видео и вспомнить ответ 😊',
                      'statements': [
-                         {'text': "The first girl's name is Olivia.", 'answer': True},
-                         {'text': "Noah's favourite sport is baseball.", 'answer': False},
-                         {'text': "Scarlett doesn't like water.", 'answer': False},
-                         {'text': 'Thomas likes catching the ball.', 'answer': True},
-                         {'text': 'Lucas likes basketball and volleyball.', 'answer': False}]},
+                         {'text': "The first girl's name is Olivia.", 'correct': True},
+                         {'text': "Noah's favourite sport is baseball.", 'correct': False},
+                         {'text': "Scarlett doesn't like water.", 'correct': False},
+                         {'text': 'Thomas likes catching the ball.', 'correct': True},
+                         {'text': 'Lucas likes basketball and volleyball.', 'correct': False}]},
        'ответы отмечены в выгрузке; там опечатка «Thomas like catching» — исправил')
 
 h1.add('sequence', {'title': 'Послушай ещё разок Оливию. Расставь то, что она сказала, '
@@ -367,15 +367,15 @@ h4.add('quiz', {'title': 'Итак, давай ответим на вопрос'
 h4.add('truefalse', {'title': 'Проверим, насколько хорошо мы поняли историю? '
                               'Начнём с простого — выбери, верно или неверно утверждение :)',
                      'statements': [
-                         {'text': 'Flash wants to play football.', 'answer': True},
+                         {'text': 'Flash wants to play football.', 'correct': True},
                          {'text': 'At first, the boy wants Flash in his team.',
-                          'answer': False},
+                          'correct': False},
                          {'text': 'Flash wants to join the table tennis club.',
-                          'answer': False},
-                         {'text': 'Misty scores a goal.', 'answer': True},
-                         {'text': 'The green team wins the football game.', 'answer': False},
+                          'correct': False},
+                         {'text': 'Misty scores a goal.', 'correct': True},
+                         {'text': 'The green team wins the football game.', 'correct': False},
                          {'text': 'At the end, the boy wants Flash in his team.',
-                          'answer': True}]},
+                          'correct': True}]},
        'ответы отмечены в выгрузке')
 
 h4.add('hotspot', {'title': 'Отличная работа! Теперь посмотри на картинку и соедини '
@@ -439,15 +439,15 @@ h5.add('truefalse', {'title': 'Снова вернёмся к картинке �
                               'ниже или нет. Будь внимателен, чтобы не попасть в ловушку 😉',
                      'image': url('park_scene'),
                      'statements': [
-                         {'text': "There's a boy with a camera.", 'answer': True},
-                         {'text': 'Two girls are playing tennis.', 'answer': False},
+                         {'text': "There's a boy with a camera.", 'correct': True},
+                         {'text': 'Two girls are playing tennis.', 'correct': False},
                          {'text': 'The man next to the cinema is painting a picture.',
-                          'answer': False},
-                         {'text': 'Some people are swimming.', 'answer': True},
+                          'correct': False},
+                         {'text': 'Some people are swimming.', 'correct': True},
                          {'text': 'Two people are playing tennis on the grass.',
-                          'answer': True},
+                          'correct': True},
                          {'text': 'The boy with an ice cream has got trousers.',
-                          'answer': False}]},
+                          'correct': False}]},
        'ответы отмечены в выгрузке; там опечатка «The boys with an ice cream has got» — '
        'исправил на «The boy … has got»')
 
@@ -541,15 +541,15 @@ h6.add('truefalse', {'title': 'Отличная работа! А теперь д
                               'в следователей :) Определи, правдиво ли предложение ниже',
                      'statements': [
                          {'text': "When I play table tennis I've got my goggles and "
-                                  "I'm going to the court.", 'answer': False},
+                                  "I'm going to the court.", 'correct': False},
                          {'text': "When I go skiing, I've got my goggles and my helmet, "
-                                  "and I'm going to the mountains.", 'answer': True},
+                                  "and I'm going to the mountains.", 'correct': True},
                          {'text': "When I go surfing, I've got my board and I'm going "
-                                  "to the beach.", 'answer': True},
+                                  "to the beach.", 'correct': True},
                          {'text': 'When I do athletics, I wear my shorts and a T-shirt, '
-                                  "and I'm going to the court.", 'answer': False},
+                                  "and I'm going to the court.", 'correct': False},
                          {'text': 'When I play volleyball, I take my helmet and go '
-                                  'to the pitch.', 'answer': False}]},
+                                  'to the pitch.', 'correct': False}]},
        'ответы отмечены в выгрузке')
 
 h6.add('task', {'title': 'Вот это ты здорово справился с заданием! Молодец :)',
@@ -713,12 +713,12 @@ t.add('video', {'title': 'Аудио к заданию LISTENING',
       'аудио прислала методист')
 
 t.add('truefalse', {'title': 'Верно или неверно?', 'statements': [
-    {'text': 'Sam likes playing volleyball.', 'answer': True},
-    {'text': 'Playing tennis is boring for Sam.', 'answer': False},
-    {'text': "Lisa doesn't like swimming.", 'answer': False},
-    {'text': 'Lisa likes athletics.', 'answer': True},
-    {'text': 'Sam and Lisa both like football.', 'answer': True},
-    {'text': "Lisa thinks hockey's dangerous.", 'answer': True}]},
+    {'text': 'Sam likes playing volleyball.', 'correct': True},
+    {'text': 'Playing tennis is boring for Sam.', 'correct': False},
+    {'text': "Lisa doesn't like swimming.", 'correct': False},
+    {'text': 'Lisa likes athletics.', 'correct': True},
+    {'text': 'Sam and Lisa both like football.', 'correct': True},
+    {'text': "Lisa thinks hockey's dangerous.", 'correct': True}]},
     'ответы отмечены в выгрузке')
 
 t.add('speaking', {'title': 'SPEAKING TASK 🎤',

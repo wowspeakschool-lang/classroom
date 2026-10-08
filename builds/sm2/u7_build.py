@@ -371,11 +371,11 @@ h4.add('match', {'title': 'Супер! Давай теперь попробуе�
 h4.add('truefalse', {'title': 'Проверим, насколько внимательно мы прочитали историю? '
                               'Определи, верно или неверно утверждение',
                      'statements': [
-                         {'text': 'The children are excited.', 'answer': True},
-                         {'text': 'There are lots of lizards on the road.', 'answer': False},
-                         {'text': "They've got a problem with a plane.", 'answer': False},
-                         {'text': 'The driver can help.', 'answer': True},
-                         {'text': "They're going to the restaurant.", 'answer': False}]},
+                         {'text': 'The children are excited.', 'correct': True},
+                         {'text': 'There are lots of lizards on the road.', 'correct': False},
+                         {'text': "They've got a problem with a plane.", 'correct': False},
+                         {'text': 'The driver can help.', 'correct': True},
+                         {'text': "They're going to the restaurant.", 'correct': False}]},
        'ответы отмечены в выгрузке; там опечатка «They’ve got problem» — исправил')
 
 h4.add('speaking', {'title': 'А теперь мы с тобой отправляемся в театральный кружок! 🎭',

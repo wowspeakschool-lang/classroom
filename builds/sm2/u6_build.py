@@ -739,12 +739,12 @@ t.add('video', {'title': 'Аудио к заданию LISTENING',
       'аудио прислала методист')
 
 t.add('truefalse', {'title': 'Верно или неверно?', 'statements': [
-    {'text': 'Clown 1 has got big ears and a small nose.', 'answer': False},
-    {'text': 'Clown 1 is happy.', 'answer': True},
-    {'text': 'Clown 2 has got long hair and glasses.', 'answer': True},
-    {'text': "Clown 2's birthday is in March.", 'answer': False},
-    {'text': 'Clown 3 is angry.', 'answer': False},
-    {'text': 'Clown 3 has got a medal.', 'answer': True}]},
+    {'text': 'Clown 1 has got big ears and a small nose.', 'correct': False},
+    {'text': 'Clown 1 is happy.', 'correct': True},
+    {'text': 'Clown 2 has got long hair and glasses.', 'correct': True},
+    {'text': "Clown 2's birthday is in March.", 'correct': False},
+    {'text': 'Clown 3 is angry.', 'correct': False},
+    {'text': 'Clown 3 has got a medal.', 'correct': True}]},
     'ответы — как отмечено в выгрузке')
 
 t.add('speaking', {'title': 'SPEAKING TASK 🎤',
