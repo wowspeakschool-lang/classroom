@@ -14,7 +14,7 @@ for n, (_, _, items) in enumerate(S, 1):
         src = f'out/{n}/{fname(cap)}'
         f = fname(cap)[:-4] + '.webp'
         Image.open(src).save(f'{DST}/{f}', 'WEBP', quality=82, method=6)
-        rows.append((term, 'meal' if cap == 'lamb (meat)' else 'rhyme' if cap == 'lamb' else '', URL + f))
+        rows.append((term, {'lamb (meat)': 'meal', 'lamb': 'rhyme', 'pass (give)': 'u5', 'pass (go by)': 'u11'}.get(cap, ''), URL + f))
 # числа: цифры в стиле листов — тёплый цвет, тёмно-коричневый контур
 DIG = {'seventy': '70', 'eighty': '80', 'ninety': '90', 'hundred': '100', 'first': '1st', 'second': '2nd', 'third': '3rd'}
 COL = [(240, 120, 60), (70, 150, 220), (90, 180, 90), (230, 80, 120), (250, 180, 40), (150, 100, 210), (40, 170, 170)]
@@ -39,6 +39,7 @@ FROM (VALUES
 {vals}) AS v(t, k, u), word_decks d, deck_folders f
 WHERE w.term = v.t AND w.image_url IS NULL AND d.id = w.deck_id AND f.id = d.folder_id
   AND f.parent_folder_id = (SELECT id FROM deck_folders WHERE title = 'Spotlight 4' AND deleted_at IS NULL)
-  AND (v.k = '' OR (v.k = 'meal' AND d.title LIKE 'Unit 6%') OR (v.k = 'rhyme' AND d.title LIKE 'Culture Corner 6%'))
+  AND (v.k = '' OR (v.k = 'meal' AND d.title LIKE 'Unit 6%') OR (v.k = 'rhyme' AND d.title LIKE 'Culture Corner 6%')
+       OR (v.k = 'u5' AND d.title LIKE 'Unit 5:%') OR (v.k = 'u11' AND d.title LIKE 'Unit 11:%'))
 RETURNING w.id;""")
 print(len(rows))
