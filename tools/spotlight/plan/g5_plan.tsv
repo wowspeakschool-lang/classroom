@@ -28,7 +28,7 @@ Starter Unit	Starter Unit · действия	Starter Unit		draw	рисоват�
 Starter Unit	Starter Unit · действия	Starter Unit		eat	есть	new
 Starter Unit	Starter Unit · еда	Starter Unit		egg	яйцо	reuse:453
 Starter Unit	Starter Unit · в школе и счёт	Starter Unit		equals	равняется	new
-Starter Unit	Starter Unit · школьные принадлежности	Starter Unit		eraser	ластик	new
+Starter Unit	Starter Unit · школьные принадлежности	Starter Unit		eraser	ластик	reuse:212
 Starter Unit	Starter Unit · действия	Starter Unit		finish	финиш, окончание; заканчивать	new
 Starter Unit	Starter Unit · другие слова	Starter Unit		flag	флаг	new
 Starter Unit	Starter Unit · животные и природа	Starter Unit		fox	лиса	reuse:1265
@@ -60,7 +60,7 @@ Starter Unit	Starter Unit · еда	Starter Unit		melon	дыня	reuse:2696
 Starter Unit	Starter Unit · в школе и счёт	Starter Unit		minus	минус	new
 Starter Unit	Starter Unit · места и люди	Starter Unit		museum	музей	reuse:745
 Starter Unit	Starter Unit · другие слова	Starter Unit		music	музыка	reuse:310
-Starter Unit	Starter Unit · в школе и счёт	Starter Unit		name	имя	new
+Starter Unit	Starter Unit · в школе и счёт	Starter Unit		name	имя	reuse:2276
 Starter Unit	Starter Unit · животные и природа	Starter Unit		nest	гнездо	reuse:4217
 Starter Unit	Starter Unit · другие слова	Starter Unit		nose	нос	reuse:66
 Starter Unit	Starter Unit · школьные принадлежности	Starter Unit		notebook	тетрадь	reuse:215
@@ -88,7 +88,7 @@ Starter Unit	Starter Unit · школьные принадлежности	Start
 Starter Unit	Starter Unit · действия	Starter Unit		run	бегать	reuse:596
 Starter Unit	Starter Unit · действия	Starter Unit		say	сказать	new
 Starter Unit	Starter Unit · в школе и счёт	Starter Unit		school	школа	reuse:32
-Starter Unit	Starter Unit · школьные принадлежности	Starter Unit		schoolbag	портфель, ранец	new
+Starter Unit	Starter Unit · школьные принадлежности	Starter Unit		schoolbag	портфель, ранец	reuse:4153
 Starter Unit	Starter Unit · школьные принадлежности	Starter Unit		sharpener	точилка	new
 Starter Unit	Starter Unit · места и люди	Starter Unit		shop	магазин	reuse:29
 Starter Unit	Starter Unit · действия	Starter Unit		sing	петь	reuse:597
@@ -108,7 +108,7 @@ Starter Unit	Starter Unit · действия	Starter Unit		walk	ходить, �
 Starter Unit	Starter Unit · цвета	Starter Unit		white	белый	reuse:4174
 Starter Unit	Starter Unit · другие слова	Starter Unit		window	окно	reuse:222
 Starter Unit	Starter Unit · действия	Starter Unit		write	писать	reuse:600
-Starter Unit	Starter Unit · в школе и счёт	Starter Unit		wrong	неправильный	new
+Starter Unit	Starter Unit · в школе и счёт	Starter Unit		wrong	неправильный	reuse:2758
 Starter Unit	Starter Unit · игрушки и одежда	Starter Unit		yacht	яхта	new
 Starter Unit	Starter Unit · цвета	Starter Unit		yellow	жёлтый	reuse:208
 Starter Unit	Starter Unit · животные и природа	Starter Unit		zebra	зебра	reuse:15
@@ -124,7 +124,7 @@ Starter Unit	Starter Unit · фразы	Starter Unit		Goodbye! Bye!	До сви�
 Starter Unit	Starter Unit · фразы	Starter Unit		Where are you from?	Откуда ты (из какой страны, города)?	new
 Module 1	1a · школьные предметы	Module 1	1a	art	изобразительное искусство	reuse:304
 Module 1	1a · в школе	Module 1	1a	atlas	атлас	new
-Module 1	1a · школьные предметы	Module 1	1a	break	перемена	new
+Module 1	1a · школьные предметы	Module 1	1a	break	перемена	reuse:3343
 Module 1	1a · школьные предметы	Module 1	1a	class	класс, урок	reuse:4167
 Module 1	1a · в школе	Module 1	1a	dictionary	словарь	reuse:476
 Module 1	1a · школьные предметы	Module 1	1a	English	английский язык	reuse:305
@@ -132,7 +132,7 @@ Module 1	1a · школьные предметы	Module 1	1a	favourite	люби�
 Module 1	1a · школьные предметы	Module 1	1a	geography	география	reuse:306
 Module 1	1a · школьные предметы	Module 1	1a	history	история	reuse:307
 Module 1	1a · школьные предметы	Module 1	1a	information technology (IT)	информационные технологии	new
-Module 1	1a · школьные предметы	Module 1	1a	mathematics (maths)	математика	new
+Module 1	1a · школьные предметы	Module 1	1a	mathematics (maths)	математика	reuse:309
 Module 1	1a · в школе	Module 1	1a	notepad	блокнот	new
 Module 1	1a · школьные предметы	Module 1	1a	physical education (PE)	физическое воспитание	new
 Module 1	1a · школьные предметы	Module 1	1a	science	естествознание	reuse:474
@@ -161,7 +161,7 @@ Module 1	1b · числа	Module 1	1b	nineteen	девятнадцать	new
 Module 1	1b · другие слова и фразы	Module 1	1b	new	новый	reuse:524
 Module 1	1b · числа	Module 1	1b	seventeen	семнадцать	new
 Module 1	1b · числа	Module 1	1b	sixteen	шестнадцать	new
-Module 1	1b · другие слова и фразы	Module 1	1b	strange	странный	new
+Module 1	1b · другие слова и фразы	Module 1	1b	strange	странный	reuse:3810
 Module 1	1b · числа	Module 1	1b	twelve	двенадцать	new
 Module 1	1b · другие слова и фразы	Module 1	1b	then	затем	new
 Module 1	1b · числа	Module 1	1b	thirteen	тринадцать	new
@@ -240,11 +240,11 @@ Module 2	2a · описание и действия	Module 2	2a	who	кто	new
 Module 2	2a · страны и национальности	Module 2	2a	next door	по соседству	new
 Module 2	2a · страны и национальности	Module 2	2a	speak English	разговаривать по-английски	new
 Module 2	2b · личные вещи	Module 2	2b	basketball	баскетбольный мяч	new
-Module 2	2b · личные вещи	Module 2	2b	bicycle (bike)	велосипед	new
-Module 2	2b · необычное множественное число	Module 2	2b	child (pl: children)	ребёнок	new
+Module 2	2b · личные вещи	Module 2	2b	bicycle (bike)	велосипед	reuse:229
+Module 2	2b · необычное множественное число	Module 2	2b	child (pl: children)	ребёнок	reuse:1437
 Module 2	2b · личные вещи	Module 2	2b	digital camera	цифровой фотоаппарат	reuse:1647
 Module 2	2b · необычное множественное число	Module 2	2b	fly	муха	reuse:638
-Module 2	2b · необычное множественное число	Module 2	2b	foot (pl: feet)	ступня	new
+Module 2	2b · необычное множественное число	Module 2	2b	foot (pl: feet)	ступня	reuse:574
 Module 2	2b · личные вещи	Module 2	2b	gloves	перчатки	reuse:1156
 Module 2	2b · личные вещи	Module 2	2b	guitar	гитара	reuse:58
 Module 2	2b · личные вещи	Module 2	2b	handbag	сумочка	reuse:1026
@@ -252,7 +252,7 @@ Module 2	2b · личные вещи	Module 2	2b	helmet	шлем	reuse:1158
 Module 2	2b · личные вещи	Module 2	2b	knife	нож	reuse:957
 Module 2	2b · личные вещи	Module 2	2b	lamp	лампа	reuse:53
 Module 2	2b · необычное множественное число	Module 2	2b	man (pl: men)	человек, мужчина	new
-Module 2	2b · необычное множественное число	Module 2	2b	mouse (pl: mice)	мышь	new
+Module 2	2b · необычное множественное число	Module 2	2b	mouse (pl: mice)	мышь	reuse:247
 Module 2	2b · личные вещи	Module 2	2b	personal things	личные вещи	new
 Module 2	2b · личные вещи	Module 2	2b	present	подарок	reuse:4328
 Module 2	2b · личные вещи	Module 2	2b	scarf	шарф	reuse:1033
@@ -261,7 +261,7 @@ Module 2	2b · личные вещи	Module 2	2b	teddy bear	плюшевый м�
 Module 2	2b · личные вещи	Module 2	2b	thing	вещь, предмет	new
 Module 2	2b · личные вещи	Module 2	2b	tie	галстук	reuse:1038
 Module 2	2b · личные вещи	Module 2	2b	toy	игрушка	reuse:237
-Module 2	2b · необычное множественное число	Module 2	2b	tooth (pl: teeth)	зуб	new
+Module 2	2b · необычное множественное число	Module 2	2b	tooth (pl: teeth)	зуб	reuse:1527
 Module 2	2b · личные вещи	Module 2	2b	trainers	кроссовки	reuse:484
 Module 2	2b · личные вещи	Module 2	2b	watch	часы	reuse:1417
 Module 2	2b · необычное множественное число	Module 2	2b	woman (pl: women)	женщина	new
@@ -318,7 +318,7 @@ Module 2	English in Use 2	Module 2	English in Use 2	How can I help you?	Чем �
 Module 2	English in Use 2	Module 2	English in Use 2	How much is it?	Сколько это стоит?	new
 Module 2	English in Use 2	Module 2	English in Use 2	I want to buy ... .	Я хочу купить ... .	new
 Module 2	English in Use 2	Module 2	English in Use 2	That's a good idea.	Это хорошая идея.	new
-Module 2	Across the Curriculum 2: Geography	Module 2	Across the Curriculum 2: Geography	awful	ужасный, страшный	new
+Module 2	Across the Curriculum 2: Geography	Module 2	Across the Curriculum 2: Geography	awful	ужасный, страшный	reuse:1906
 Module 2	Across the Curriculum 2: Geography	Module 2	Across the Curriculum 2: Geography	capital (city)	столица	reuse:4659
 Module 2	Across the Curriculum 2: Geography	Module 2	Across the Curriculum 2: Geography	continent	континент, материк	new
 Module 2	Across the Curriculum 2: Geography	Module 2	Across the Curriculum 2: Geography	English-speaking countries	англоговорящие страны	new
@@ -340,7 +340,7 @@ Module 3	3a · комнаты	Module 3	3a	garage	гараж	reuse:538
 Module 3	3a · описание	Module 3	3a	great	великий, большой, отличный	new
 Module 3	3a · дом и этажи	Module 3	3a	ground floor	первый этаж	reuse:983
 Module 3	3a · комнаты	Module 3	3a	hall	коридор, холл	reuse:262
-Module 3	3a · дом и этажи	Module 3	3a	home	дом	new
+Module 3	3a · дом и этажи	Module 3	3a	home	дом	reuse:34
 Module 3	3a · комнаты	Module 3	3a	kitchen	кухня	reuse:264
 Module 3	3a · объявление о продаже	Module 3	3a	letter	письмо	new
 Module 3	3a · комнаты	Module 3	3a	lift	лифт	reuse:355
@@ -380,7 +380,7 @@ Module 3	3b · мебель	Module 3	3b	painting	картина	reuse:269
 Module 3	3b · кухня, ванная и фразы	Module 3	3b	sink	раковина (на кухне)	reuse:990
 Module 3	3b · мебель	Module 3	3b	sofa	диван, софа	reuse:56
 Module 3	3b · мебель	Module 3	3b	table	стол	reuse:55
-Module 3	3b · мебель	Module 3	3b	television (TV)	телевизор	new
+Module 3	3b · мебель	Module 3	3b	television (TV)	телевизор	reuse:558
 Module 3	3b · кухня, ванная и фразы	Module 3	3b	toilet	туалет	reuse:1468
 Module 3	3b · мебель	Module 3	3b	wardrobe	гардероб	reuse:552
 Module 3	3b · кухня, ванная и фразы	Module 3	3b	washbasin	раковина (в ванной)	new
@@ -440,7 +440,7 @@ Module 4	4a · семья	Module 4	4a	baby	ребёнок	reuse:1434
 Module 4	4a · семья	Module 4	4a	boy	мальчик	new
 Module 4	4a · семья	Module 4	4a	brother	брат	reuse:422
 Module 4	4a · действия и хобби	Module 4	4a	burn	гореть, пригорать	reuse:3388
-Module 4	4a · характер	Module 4	4a	caring	заботливый, внимательный	new
+Module 4	4a · характер	Module 4	4a	caring	заботливый, внимательный	reuse:3193
 Module 4	4a · характер	Module 4	4a	clever	умный	reuse:580
 Module 4	4a · действия и хобби	Module 4	4a	cookie	домашнее печенье	reuse:4598
 Module 4	4a · характер	Module 4	4a	cool	классный	reuse:522
@@ -466,7 +466,7 @@ Module 4	4a · действия и хобби	Module 4	4a	make	делать, г�
 Module 4	4a · семья	Module 4	4a	mother	мать	reuse:411
 Module 4	4a · семья	Module 4	4a	mum	мама	reuse:412
 Module 4	4a · характер	Module 4	4a	naughty	непослушный	reuse:4646
-Module 4	4a · характер	Module 4	4a	noisy	шумный	new
+Module 4	4a · характер	Module 4	4a	noisy	шумный	reuse:851
 Module 4	4a · действия и хобби	Module 4	4a	piano	фортепиано	reuse:1229
 Module 4	4a · действия и хобби	Module 4	4a	pilot	пилот	reuse:777
 Module 4	4a · действия и хобби	Module 4	4a	play	играть	reuse:1506
@@ -513,7 +513,7 @@ Module 4	4c	Module 4	4c	full name	полное имя	new
 Module 4	4c	Module 4	4c	grace	грация, изящество	new
 Module 4	4c	Module 4	4c	guess	угадывать	reuse:2629
 Module 4	4c	Module 4	4c	jazz	джаз	reuse:831
-Module 4	4c	Module 4	4c	painting	рисование	new
+Module 4	4c	Module 4	4c	painting	рисование	reuse:304
 Module 4	4c	Module 4	4c	person	личность, человек	new
 Module 4	4c	Module 4	4c	place	место	reuse:4356
 Module 4	4c	Module 4	4c	profile	анкета, краткие сведения	new
@@ -569,7 +569,7 @@ Module 5	5a · животные	Module 5	5a	creature	создание, твор�
 Module 5	5a · животные	Module 5	5a	crocodile	крокодил	reuse:17
 Module 5	5a · действия	Module 5	5a	cry	плакать	new
 Module 5	5a · описание и природа	Module 5	5a	dangerous	опасный	reuse:657
-Module 5	5a · животные	Module 5	5a	deer (pl: deer)	олень	new
+Module 5	5a · животные	Module 5	5a	deer (pl: deer)	олень	reuse:2995
 Module 5	5a · животные	Module 5	5a	elephant	слон	reuse:238
 Module 5	5a · описание и природа	Module 5	5a	female	женский	new
 Module 5	5a · описание и природа	Module 5	5a	grass	трава	reuse:1764
@@ -584,7 +584,7 @@ Module 5	5a · описание и природа	Module 5	5a	metre	метр	new
 Module 5	5a · описание и природа	Module 5	5a	mud	грязь	new
 Module 5	5a · описание и природа	Module 5	5a	permanent	постоянный	new
 Module 5	5a · описание и природа	Module 5	5a	plant	растение	reuse:556
-Module 5	5a · действия	Module 5	5a	relax	отдыхать, расслабляться	new
+Module 5	5a · действия	Module 5	5a	relax	отдыхать, расслабляться	reuse:2109
 Module 5	5a · животные	Module 5	5a	rhino	носорог	reuse:1272
 Module 5	5a · действия	Module 5	5a	sleep	спать	new
 Module 5	5a · животные	Module 5	5a	stripe	полоса	new
@@ -640,12 +640,12 @@ Module 5	5c · домашние животные	Module 5	5c	goldfish	золот
 Module 5	5c · домашние животные	Module 5	5c	goose (pl: geese)	гусь	new
 Module 5	5c · домашние животные	Module 5	5c	guinea pig	морская свинка	new
 Module 5	5c · другие слова	Module 5	5c	guy	парень	new
-Module 5	5c · домашние животные	Module 5	5c	hen	курица	new
+Module 5	5c · домашние животные	Module 5	5c	hen	курица	reuse:255
 Module 5	5c · другие слова	Module 5	5c	list	составлять список, относить к чему-либо	reuse:2630
 Module 5	5c · другие слова	Module 5	5c	notify	оповещать, уведомлять	new
 Module 5	5c · домашние животные	Module 5	5c	pet	домашний питомец	new
 Module 5	5c · домашние животные	Module 5	5c	rabbit	кролик	reuse:654
-Module 5	5c · домашние животные	Module 5	5c	sheep (pl: sheep)	овца	new
+Module 5	5c · домашние животные	Module 5	5c	sheep (pl: sheep)	овца	reuse:1832
 Module 5	5c · другие слова	Module 5	5c	take	брать	reuse:4149
 Module 5	5c · домашние животные	Module 5	5c	tortoise	черепаха	reuse:655
 Module 5	5c · другие слова	Module 5	5c	all day long	весь день	new
@@ -673,7 +673,7 @@ Module 5	5d - Culture Corner · описание	Module 5	5d - Culture Corner	so
 Module 5	5d - Culture Corner · коала и природа	Module 5	5d - Culture Corner	zoologist	зоолог	new
 Module 5	5d - Culture Corner · другие слова	Module 5	5d - Culture Corner	during the day	в течение дня	new
 Module 5	5d - Culture Corner · другие слова	Module 5	5d - Culture Corner	they don't make good pets	они не поддаются приручению	new
-Module 5	English in Use 5	Module 5	English in Use 5	breast	грудь	new
+Module 5	English in Use 5	Module 5	English in Use 5	breast	грудь	reuse:2956
 Module 5	English in Use 5	Module 5	English in Use 5	breath	дыхание	new
 Module 5	English in Use 5	Module 5	English in Use 5	broken	сломанный	reuse:2968
 Module 5	English in Use 5	Module 5	English in Use 5	earache	боль в ухе	reuse:365
@@ -705,11 +705,11 @@ Module 5	Across the Curriculum 5: Science · насекомые	Module 5	Across 
 Module 5	Across the Curriculum 5: Science · природа и отходы	Module 5	Across the Curriculum 5: Science	ground	земля	new
 Module 5	Across the Curriculum 5: Science · насекомые	Module 5	Across the Curriculum 5: Science	honey	мёд	reuse:1869
 Module 5	Across the Curriculum 5: Science · другие слова	Module 5	Across the Curriculum 5: Science	important	важный	reuse:1689
-Module 5	Across the Curriculum 5: Science · насекомые	Module 5	Across the Curriculum 5: Science	insect	насекомое	new
+Module 5	Across the Curriculum 5: Science · насекомые	Module 5	Across the Curriculum 5: Science	insect	насекомое	reuse:3397
 Module 5	Across the Curriculum 5: Science · насекомые	Module 5	Across the Curriculum 5: Science	ladybird	божья коровка	new
 Module 5	Across the Curriculum 5: Science · природа и отходы	Module 5	Across the Curriculum 5: Science	life	жизнь	new
 Module 5	Across the Curriculum 5: Science · другие слова	Module 5	Across the Curriculum 5: Science	keep	хранить	new
-Module 5	Across the Curriculum 5: Science · другие слова	Module 5	Across the Curriculum 5: Science	million	миллион	new
+Module 5	Across the Curriculum 5: Science · другие слова	Module 5	Across the Curriculum 5: Science	million	миллион	reuse:1294
 Module 5	Across the Curriculum 5: Science · насекомые	Module 5	Across the Curriculum 5: Science	mosquito	комар	reuse:3001
 Module 5	Across the Curriculum 5: Science · другие слова	Module 5	Across the Curriculum 5: Science	present	представлять	new
 Module 5	Across the Curriculum 5: Science · природа и отходы	Module 5	Across the Curriculum 5: Science	rubbish	мусор	reuse:2873
@@ -737,9 +737,9 @@ Module 6	6a · распорядок дня	Module 6	6a	at home	дома	new
 Module 6	6a · время	Module 6	6a	at midnight/at night	в полночь/ночью	new
 Module 6	6a · время	Module 6	6a	at noon	в полдень	new
 Module 6	6a · распорядок дня	Module 6	6a	do homework	делать домашнее задание	reuse:2228
-Module 6	6a · распорядок дня	Module 6	6a	do the/go shopping	ходить за покупками	new
-Module 6	6a · распорядок дня	Module 6	6a	have/eat dinner	ужинать	new
-Module 6	6a · распорядок дня	Module 6	6a	have/eat lunch	обедать	new
+Module 6	6a · распорядок дня	Module 6	6a	do the/go shopping	ходить за покупками	reuse:1706
+Module 6	6a · распорядок дня	Module 6	6a	have/eat dinner	ужинать	reuse:8
+Module 6	6a · распорядок дня	Module 6	6a	have/eat lunch	обедать	reuse:6
 Module 6	6a · время	Module 6	6a	for a while	некоторое время	reuse:4664
 Module 6	6a · распорядок дня	Module 6	6a	get dressed	одеваться	reuse:2
 Module 6	6a · спорт и герои	Module 6	6a	go jogging	совершать пробежку	new
@@ -799,7 +799,7 @@ Module 6	6d - Culture Corner	Module 6	6d - Culture Corner	above	над	new
 Module 6	6d - Culture Corner	Module 6	6d - Culture Corner	belfry	колокольня	new
 Module 6	6d - Culture Corner	Module 6	6d - Culture Corner	exactly	точно	new
 Module 6	6d - Culture Corner	Module 6	6d - Culture Corner	hour hand	часовая стрелка	new
-Module 6	6d - Culture Corner	Module 6	6d - Culture Corner	huge	огромный	new
+Module 6	6d - Culture Corner	Module 6	6d - Culture Corner	huge	огромный	reuse:3295
 Module 6	6d - Culture Corner	Module 6	6d - Culture Corner	interesting	интересный	reuse:763
 Module 6	6d - Culture Corner	Module 6	6d - Culture Corner	know	знать	new
 Module 6	6d - Culture Corner	Module 6	6d - Culture Corner	landmark	достопримечательность	new
@@ -813,12 +813,12 @@ Module 6	6d - Culture Corner	Module 6	6d - Culture Corner	tourist attraction	м�
 Module 6	6d - Culture Corner	Module 6	6d - Culture Corner	wide	широкий	new
 Module 6	6d - Culture Corner	Module 6	6d - Culture Corner	commissioner of works	руководитель работ	new
 Module 6	6d - Culture Corner	Module 6	6d - Culture Corner	every year	каждый год	new
-Module 6	English in Use 6	Module 6	English in Use 6	agree	соглашаться	new
+Module 6	English in Use 6	Module 6	English in Use 6	agree	соглашаться	reuse:3937
 Module 6	English in Use 6	Module 6	English in Use 6	free	свободный	new
 Module 6	English in Use 6	Module 6	English in Use 6	respond	отвечать	new
 Module 6	English in Use 6	Module 6	English in Use 6	suggestion	предложение	new
 Module 6	English in Use 6	Module 6	English in Use 6	go to the cinema	ходить в кино	new
-Module 6	English in Use 6	Module 6	English in Use 6	be tired	уставать	new
+Module 6	English in Use 6	Module 6	English in Use 6	be tired	уставать	reuse:896
 Module 6	English in Use 6	Module 6	English in Use 6	See you at ... o'clock.	Увидимся в ... часов.	new
 Module 6	English in Use 6	Module 6	English in Use 6	Sure, that's a good idea.	Конечно, это хорошая идея.	new
 Module 6	English in Use 6	Module 6	English in Use 6	What/How about having a coffee?	Как насчёт кофе?	new
@@ -840,7 +840,7 @@ Module 6	Across the Curriculum 6: Science · другие слова	Module 6	Ac
 Module 6	Across the Curriculum 6: Science · солнце и стороны света	Module 6	Across the Curriculum 6: Science	north	север	reuse:4367
 Module 6	Across the Curriculum 6: Science · другие слова	Module 6	Across the Curriculum 6: Science	perfect	идеальный, отличный	reuse:1909
 Module 6	Across the Curriculum 6: Science · предметы и действия	Module 6	Across the Curriculum 6: Science	place	место	reuse:4356
-Module 6	Across the Curriculum 6: Science · предметы и действия	Module 6	Across the Curriculum 6: Science	point	указывать	new
+Module 6	Across the Curriculum 6: Science · предметы и действия	Module 6	Across the Curriculum 6: Science	point	указывать	reuse:2837
 Module 6	Across the Curriculum 6: Science · предметы и действия	Module 6	Across the Curriculum 6: Science	put	класть	reuse:4151
 Module 6	Across the Curriculum 6: Science · солнце и стороны света	Module 6	Across the Curriculum 6: Science	shadow	тень	new
 Module 6	Across the Curriculum 6: Science · солнце и стороны света	Module 6	Across the Curriculum 6: Science	sky	небо	new
@@ -863,7 +863,7 @@ Module 7	7a · занятия и другие слова	Module 7	7a	computer sc
 Module 7	7a · занятия и другие слова	Module 7	7a	go swimming	идти купаться/плавать; ходить купаться	reuse:1403
 Module 7	7a · занятия и другие слова	Module 7	7a	image	изображение, образ	new
 Module 7	7a · занятия и другие слова	Module 7	7a	magazine	журнал	new
-Module 7	7a · занятия и другие слова	Module 7	7a	mind	ум, разум	new
+Module 7	7a · занятия и другие слова	Module 7	7a	mind	ум, разум	reuse:1254
 Module 7	7a · времена года и месяцы	Module 7	7a	month	месяц	new
 Module 7	7a · времена года и месяцы	Module 7	7a	January	январь	reuse:621
 Module 7	7a · времена года и месяцы	Module 7	7a	February	февраль	reuse:622
@@ -896,7 +896,7 @@ Module 7	7a · погода	Module 7	7a	It's (very) hot.	(Очень) жарко
 Module 7	7a · фразы	Module 7	7a	It's awful!	Это ужасно!	new
 Module 7	7a · погода	Module 7	7a	It's cold.	Холодно.	new
 Module 7	7a · погода	Module 7	7a	It's freezing.	Морозно.	new
-Module 7	7a · погода	Module 7	7a	It's raining (heavily).	Идёт (сильный) дождь.	new
+Module 7	7a · погода	Module 7	7a	It's raining (heavily).	Идёт (сильный) дождь.	reuse:2787
 Module 7	7a · погода	Module 7	7a	It's snowing.	Идёт снег.	new
 Module 7	7a · фразы	Module 7	7a	It's terrible!	Это ужасно!	new
 Module 7	7a · погода	Module 7	7a	It's warm.	Тепло.	new
@@ -921,7 +921,7 @@ Module 7	7b · одежда	Module 7	7b	high heels	высокие каблуки
 Module 7	7b · другие слова	Module 7	7b	joke	шутка	reuse:3433
 Module 7	7b · одежда	Module 7	7b	jumper	джемпер	reuse:511
 Module 7	7b · как сидит одежда	Module 7	7b	light	лёгкий, светлый	reuse:1307
-Module 7	7b · как сидит одежда	Module 7	7b	loose	свободный (об одежде)	new
+Module 7	7b · как сидит одежда	Module 7	7b	loose	свободный (об одежде)	reuse:2773
 Module 7	7b · как сидит одежда	Module 7	7b	put on	надевать	new
 Module 7	7b · одежда	Module 7	7b	raincoat	плащ	reuse:386
 Module 7	7b · одежда	Module 7	7b	shirt	рубашка	reuse:512
@@ -945,7 +945,7 @@ Module 7	7c	Module 7	7c	greeting	приветствие; поздравлени�
 Module 7	7c	Module 7	7c	local club	местный клуб	new
 Module 7	7c	Module 7	7c	postcard	открытка	reuse:4360
 Module 7	7c	Module 7	7c	stay	останавливаться, оставаться	reuse:1793
-Module 7	7c	Module 7	7c	sunbathe	загорать	new
+Module 7	7c	Module 7	7c	sunbathe	загорать	reuse:3620
 Module 7	7c	Module 7	7c	go camping	ходить в поход	reuse:883
 Module 7	7c	Module 7	7c	go skiing	кататься на лыжах	new
 Module 7	7c	Module 7	7c	have a picnic	устраивать пикник	new
@@ -953,7 +953,7 @@ Module 7	7c	Module 7	7c	It's fun.	Весело.	new
 Module 7	7c	Module 7	7c	make a snowman	лепить снеговика	new
 Module 7	7c	Module 7	7c	play golf	играть в гольф	new
 Module 7	7c	Module 7	7c	See you soon.	Скоро увидимся.	new
-Module 7	7d - Culture Corner	Module 7	7d - Culture Corner	calm	спокойный, тихий	new
+Module 7	7d - Culture Corner	Module 7	7d - Culture Corner	calm	спокойный, тихий	reuse:2337
 Module 7	7d - Culture Corner	Module 7	7d - Culture Corner	climate	климат	new
 Module 7	7d - Culture Corner	Module 7	7d - Culture Corner	cool	прохладный	reuse:2333
 Module 7	7d - Culture Corner	Module 7	7d - Culture Corner	decide	решать	new
@@ -991,9 +991,9 @@ Module 7	Across the Curriculum 7: Literature	Module 7	Across the Curriculum 7: L
 Module 7	Across the Curriculum 7: Literature	Module 7	Across the Curriculum 7: Literature	sky	небо	new
 Module 7	Across the Curriculum 7: Literature	Module 7	Across the Curriculum 7: Literature	wind	ветер	reuse:1784
 Module 8	8a · еда и урожай	Module 8	8a	banana	банан	reuse:10
-Module 8	8a · еда и урожай	Module 8	8a	biscuit	печенье	new
+Module 8	8a · еда и урожай	Module 8	8a	biscuit	печенье	reuse:428
 Module 8	8a · другие слова	Module 8	8a	both	оба	reuse:4513
-Module 8	8a · еда и урожай	Module 8	8a	carrot	морковь	new
+Module 8	8a · еда и урожай	Module 8	8a	carrot	морковь	reuse:258
 Module 8	8a · праздники	Module 8	8a	celebrate	праздновать	reuse:4235
 Module 8	8a · праздники	Module 8	8a	celebration	празднование, праздник	new
 Module 8	8a · другие слова	Module 8	8a	choose	выбирать	reuse:3471
@@ -1046,10 +1046,10 @@ Module 8	8b · напитки и другие слова	Module 8	8b	everything	
 Module 8	8b · фрукты и овощи	Module 8	8b	garlic	чеснок	reuse:2695
 Module 8	8b · упаковка и посуда	Module 8	8b	glass	стакан	reuse:323
 Module 8	8b · фрукты и овощи	Module 8	8b	grapes	виноград	reuse:44
-Module 8	8b · еда	Module 8	8b	ice cream	мороженое	new
+Module 8	8b · еда	Module 8	8b	ice cream	мороженое	reuse:4135
 Module 8	8b · упаковка и посуда	Module 8	8b	jar	банка	reuse:4601
 Module 8	8b · напитки и другие слова	Module 8	8b	lemonade	лимонад	reuse:316
-Module 8	8b · напитки и другие слова	Module 8	8b	master chef	шеф-повар	new
+Module 8	8b · напитки и другие слова	Module 8	8b	master chef	шеф-повар	reuse:771
 Module 8	8b · напитки и другие слова	Module 8	8b	meal	приём пищи	reuse:4559
 Module 8	8b · еда	Module 8	8b	meat	мясо	reuse:437
 Module 8	8b · напитки и другие слова	Module 8	8b	milk	молоко	reuse:456
@@ -1148,15 +1148,15 @@ Module 9	9a · магазины	Module 9	9a	record shop	музыкальный �
 Module 9	9a · покупки и другие слова	Module 9	9a	sell	продавать	new
 Module 9	9a · магазины	Module 9	9a	shoe shop	обувной магазин	reuse:878
 Module 9	9a · магазины	Module 9	9a	shop	магазин; делать покупки	reuse:29
-Module 9	9a · магазины	Module 9	9a	shopping centre/mall	торговый центр	new
+Module 9	9a · магазины	Module 9	9a	shopping centre/mall	торговый центр	reuse:754
 Module 9	9a · покупки и другие слова	Module 9	9a	tulip	тюльпан	new
 Module 9	9a · магазины	Module 9	9a	fast food restaurant	ресторан быстрого питания, фаст-фуд	new
 Module 9	9a · покупки и другие слова	Module 9	9a	look for	искать	reuse:995
 Module 9	9a · покупки и другие слова	Module 9	9a	pair of shoes	пара туфель	new
-Module 9	9b	Module 9	9b	adventure park	парк аттракционов	new
+Module 9	9b	Module 9	9b	adventure park	парк аттракционов	reuse:335
 Module 9	9b	Module 9	9b	advertise	рекламировать	new
 Module 9	9b	Module 9	9b	art gallery	картинная галерея	reuse:2489
-Module 9	9b	Module 9	9b	candyfloss	сахарная вата	new
+Module 9	9b	Module 9	9b	candyfloss	сахарная вата	reuse:4257
 Module 9	9b	Module 9	9b	classical	классический	reuse:830
 Module 9	9b	Module 9	9b	concert hall	концертный зал	reuse:3254
 Module 9	9b	Module 9	9b	exhibition	выставка	new
@@ -1181,7 +1181,7 @@ Module 9	9c · кино	Module 9	9c	hero	герой	new
 Module 9	9c · кино	Module 9	9c	horror film	фильм ужасов	reuse:1173
 Module 9	9c · кино	Module 9	9c	romance	романтический фильм	new
 Module 9	9c · другие слова	Module 9	9c	face	сталкиваться (зд.)	new
-Module 9	9c · кино	Module 9	9c	heading	заголовок	new
+Module 9	9c · кино	Module 9	9c	heading	заголовок	reuse:2210
 Module 9	9c · кино	Module 9	9c	leading star	актёр/актриса в главной роли	new
 Module 9	9c · кино	Module 9	9c	main character	главный персонаж	new
 Module 9	9c · другие слова	Module 9	9c	miss	пропускать	new
@@ -1222,7 +1222,7 @@ Module 10	10a · виды отдыха и транспорт	Module 10	10a	activ
 Module 10	10a · путешествие	Module 10	10a	advert	реклама	reuse:3137
 Module 10	10a · действия	Module 10	10a	advise	советовать	reuse:3935
 Module 10	10a · места и описание	Module 10	10a	ancient culture	древняя культура	new
-Module 10	10a · путешествие	Module 10	10a	apartment	квартира, апартаменты	new
+Module 10	10a · путешествие	Module 10	10a	apartment	квартира, апартаменты	reuse:35
 Module 10	10a · места и описание	Module 10	10a	beauty	красота	new
 Module 10	10a · путешествие	Module 10	10a	book	заказывать, бронировать	new
 Module 10	10a · виды отдыха и транспорт	Module 10	10a	camp	лагерь; разбивать лагерь	new
@@ -1239,7 +1239,7 @@ Module 10	10a · путешествие	Module 10	10a	full board	полный п
 Module 10	10a · места и описание	Module 10	10a	historic	исторический	reuse:3287
 Module 10	10a · путешествие	Module 10	10a	holiday	каникулы, праздник, отпуск	new
 Module 10	10a · путешествие	Module 10	10a	hotel	гостиница	reuse:743
-Module 10	10a · действия	Module 10	10a	join (in)	присоединяться	new
+Module 10	10a · действия	Module 10	10a	join (in)	присоединяться	reuse:3480
 Module 10	10a · действия	Module 10	10a	learn (about)	узнавать (о)	new
 Module 10	10a · действия	Module 10	10a	leisure	свободное время, досуг	new
 Module 10	10a · места и описание	Module 10	10a	magic	волшебство, магия	new
@@ -1248,7 +1248,7 @@ Module 10	10a · виды отдыха и транспорт	Module 10	10a	motor
 Module 10	10a · виды отдыха и транспорт	Module 10	10a	mountaineering	альпинизм	new
 Module 10	10a · путешествие	Module 10	10a	price	цена	reuse:2034
 Module 10	10a · действия	Module 10	10a	rest	отдых	reuse:4757
-Module 10	10a · виды отдыха и транспорт	Module 10	10a	rock climbing	скалолазание	new
+Module 10	10a · виды отдыха и транспорт	Module 10	10a	rock climbing	скалолазание	reuse:2437
 Module 10	10a · виды отдыха и транспорт	Module 10	10a	safari	сафари	new
 Module 10	10a · места и описание	Module 10	10a	sand	песок	reuse:4443
 Module 10	10a · виды отдыха и транспорт	Module 10	10a	ship	теплоход, корабль	reuse:72
@@ -1273,7 +1273,7 @@ Module 10	10b · чувства и описание	Module 10	10b	hard	тяжё�
 Module 10	10b · виды отдыха	Module 10	10b	hiking	поход	reuse:4682
 Module 10	10b · чувства и описание	Module 10	10b	hungry	голодный	reuse:1454
 Module 10	10b · виды отдыха	Module 10	10b	jet skiing	катание на гидроцикле	new
-Module 10	10b · другие слова	Module 10	10b	mind	ум	new
+Module 10	10b · другие слова	Module 10	10b	mind	ум	reuse:1254
 Module 10	10b · чувства и описание	Module 10	10b	relaxed	расслабленный	reuse:3018
 Module 10	10b · чувства и описание	Module 10	10b	relaxing	расслабляющий	reuse:3028
 Module 10	10b · виды отдыха	Module 10	10b	sailing	хождение на яхте	reuse:669
@@ -1290,16 +1290,16 @@ Module 10	10c	Module 10	10c	dentist	стоматолог	reuse:1354
 Module 10	10c	Module 10	10c	headache	головная боль	reuse:366
 Module 10	10c	Module 10	10c	health matters	вопросы здоровья	new
 Module 10	10c	Module 10	10c	note	записка	reuse:3142
-Module 10	10c	Module 10	10c	pharmacy	аптека	new
+Module 10	10c	Module 10	10c	pharmacy	аптека	reuse:873
 Module 10	10c	Module 10	10c	reception	стойка администратора	new
-Module 10	10c	Module 10	10c	stomachache	боль в животе	new
+Module 10	10c	Module 10	10c	stomachache	боль в животе	reuse:368
 Module 10	10c	Module 10	10c	sunburn	ожог от солнца	new
-Module 10	10c	Module 10	10c	temperature	температура	new
+Module 10	10c	Module 10	10c	temperature	температура	reuse:925
 Module 10	10c	Module 10	10c	toothache	зубная боль	reuse:369
 Module 10	10c	Module 10	10c	put lotion	наносить мазь, лосьон	new
 Module 10	10c	Module 10	10c	see a doctor	посещать доктора	new
 Module 10	10c	Module 10	10c	stay out of the sun	не выходить на солнце	new
-Module 10	10d - Culture Corner	Module 10	10d - Culture Corner	aboard	на борту	new
+Module 10	10d - Culture Corner	Module 10	10d - Culture Corner	aboard	на борту	reuse:3362
 Module 10	10d - Culture Corner	Module 10	10d - Culture Corner	castle	замок	reuse:1933
 Module 10	10d - Culture Corner	Module 10	10d - Culture Corner	cathedral	собор	reuse:1934
 Module 10	10d - Culture Corner	Module 10	10d - Culture Corner	flat tyre	спущенная шина	new
@@ -1316,7 +1316,7 @@ Module 10	English in Use 10	Module 10	English in Use 10	rent	брать напр
 Module 10	English in Use 10	Module 10	English in Use 10	sign	подписывать(ся), ставить подпись	new
 Module 10	English in Use 10	Module 10	English in Use 10	per day	в день	new
 Module 10	Across the Curriculum 10: Geography	Module 10	Across the Curriculum 10: Geography	bottled water	бутилированная вода	new
-Module 10	Across the Curriculum 10: Geography	Module 10	Across the Curriculum 10: Geography	cartoon strip	комикс	new
+Module 10	Across the Curriculum 10: Geography	Module 10	Across the Curriculum 10: Geography	cartoon strip	комикс	reuse:2209
 Module 10	Across the Curriculum 10: Geography	Module 10	Across the Curriculum 10: Geography	leaflet	листовка	new
 Module 10	Across the Curriculum 10: Geography	Module 10	Across the Curriculum 10: Geography	point	пункт	new
 Module 10	Across the Curriculum 10: Geography	Module 10	Across the Curriculum 10: Geography	reason	причина	new
