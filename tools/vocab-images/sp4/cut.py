@@ -46,6 +46,8 @@ LAYOUT_SHEET = {}
 ROW_TOP = {18: {0: 0}}
 # мелкие отдельные детали — часть смысла (пустые кружки недели): не выкидывать как крошки
 EDGE_D = 6
+# рваный белый край (парус, стена): маску сглаживаем — закрываем рваные выемки, дыры, срезаем зубцы
+SMOOTH = {'crew': 14, 'wake up': 18}
 CUT_BOTTOM = {'sound': 0.83}  # остаток подписи под рисунком
 NO_SPECK = {'usually', 'sometimes', 'never'}
 
@@ -205,6 +207,24 @@ def cut(sheet, path, out='out'):
             m = binary_fill_holes(binary_closing(im[..., 3] > 40, iterations=CLOSE[t]))
             im[m & (im[..., 3] <= 40), :3] = 255; im[m, 3] = 255
             Image.fromarray(im).save(p)
+    for _, t, _ in items:
+        p = f'{out}/{sheet}/{fname(t)}'
+        if t in SMOOTH and os.path.exists(p):
+            from scipy.ndimage import binary_closing, binary_opening, binary_fill_holes, gaussian_filter
+            im = np.array(Image.open(p).convert('RGBA')).astype(float)
+            r = SMOOTH[t]; yy, xx = np.mgrid[-r:r + 1, -r:r + 1]; disk = xx ** 2 + yy ** 2 <= r * r
+            m0 = im[..., 3] > 40
+            m = binary_fill_holes(binary_closing(np.pad(m0, r), structure=disk))[r:-r, r:-r]
+            m = binary_opening(m, structure=disk[::2, ::2]) | (m0 & (im[..., :3].min(-1) < 200))
+            add = m & ~m0
+            dark = im[..., :3].max(-1) < 30  # пустое поле квадрата — без цвета
+            im[add & dark, :3] = 250
+            im[add, 3] = 255
+            soft = gaussian_filter(m.astype(float), 1.2)
+            im[..., 3] = np.where(m, np.minimum(255, np.maximum(im[..., 3], soft * 255)), 0)
+            im[..., 3] = np.minimum(im[..., 3], soft * 255 + 0)
+            Image.fromarray(im.clip(0, 255).astype(np.uint8)).save(p)
+            report.append(f'  {t}: край сглажен')
     print(f'лист {sheet} {title}:'); print('\n'.join(report))
 
 
