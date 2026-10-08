@@ -45,6 +45,8 @@ IMAGES = '/tmp/claude-0/-home-user-classroom/d4a2a0a4-519c-5b81-af84-18451bfcf9d
 LAYOUT_SHEET = {}
 ROW_TOP = {18: {0: 0}}
 # мелкие отдельные детали — часть смысла (пустые кружки недели): не выкидывать как крошки
+EDGE_D = 6
+CUT_BOTTOM = {'sound': 0.83}  # остаток подписи под рисунком
 NO_SPECK = {'usually', 'sometimes', 'never'}
 
 LAYOUT = {6: [3, 3], 7: [4, 3], 8: [4, 4], 9: [5, 4], 10: [5, 5], 11: [4, 4, 3], 12: [4, 4, 4], 13: [5, 4, 4]}
@@ -206,7 +208,7 @@ def cut(sheet, path, out='out'):
     print(f'лист {sheet} {title}:'); print('\n'.join(report))
 
 
-def clean_png(p, peel=4, pale=212, grey=32, speck=0.004, pure=250):
+def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
     """Белая кайма и крошки после вырезки: снимаем по контуру светлые бесцветные
     пиксели (не глубже peel), выкидываем мелкие островки отдельно от рисунка."""
     from scipy.ndimage import label, binary_dilation
@@ -278,6 +280,21 @@ def clean_png(p, peel=4, pale=212, grey=32, speck=0.004, pure=250):
         labm, _ = label(M)
         touch = np.unique(labm[binary_dilation(out) & M]); touch = touch[touch > 0]
         a[np.isin(labm, touch)] = 0
+    # кайма: у края рисунок акварельно переходит в белый. Вычитаем белый из цвета
+    # цвет не трогаем (иначе серое у белых предметов темнеет в кольцо), только прозрачность:
+    # чем белее пиксель у края, тем прозрачнее
+    from scipy.ndimage import distance_transform_edt
+    near = (a > 40) & (distance_transform_edt(a > 40) <= EDGE_D)
+    if near.any():
+        c = rgb[near].astype(float)
+        al = np.clip((255 - c.min(-1)) / 255 * 1.6, 0, 1)  # белое → 0, насыщенное и тёмное → 1
+        al = np.where(c.min(-1) < 120, 1, al)
+        a[near] = np.minimum(a[near], (al * 255).astype(np.int32))
+    # полупрозрачное светлое за контуром: на тёмном фоне читается серой каймой — убираем целиком
+    rgb2 = im[..., :3]; mn2, mx2 = rgb2.min(-1), rgb2.max(-1)
+    a[(a < 235) & (mn2 >= 140) & (mx2 - mn2 <= 70)] = 0
+    for w, frac in CUT_BOTTOM.items():
+        if p.endswith(f'/{fname(w)}'): a[int(a.shape[0] * frac):] = 0
     lab, n = label(a > 40)
     if n > 1 and not p.endswith(tuple(f'/{fname(w)}' for w in NO_SPECK)):
         sizes = np.bincount(lab.ravel()); sizes[0] = 0
