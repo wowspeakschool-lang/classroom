@@ -17,7 +17,8 @@ FILL_OLD = None  # заливка дыр больше не нужна: её за
 FILL = set()
 # вырезать зажатый белый фон (не везде: белое внутри пузырей пропадало)
 # белое, которое чистка кусков фона не трогает: облачка, снег, разметка, облака у края сцены
-KEEP_WHITE = {'lemon meringue', 'ingredients', 'injection', 'tin', 'dairy', 'beanstalk', 'national park', 'sandy', 'cloudy', 'sight', 'Paris', 'Greece', 'Canada'}
+KEEP_WHITE = {'lemon meringue', 'ingredients', 'injection', 'tin', 'dairy', 'beanstalk', 'national park', 'sandy', 'cloudy', 'sight', 'Paris', 'Greece', 'Canada',
+              'always', 'never', 'make sure', 'almost', 'Bon voyage', 'Excuse me', 'resolution'}
 # ровно-белое внутри рисунка своё (облака в окне, мяч): снимаем только куски, выходящие наружу
 PURE_EDGE = {'curtain', 'play sports', 'wake up'}
 # сцены, где фон застрял между фигурами и под ногами: чистим жёстче
@@ -33,7 +34,8 @@ NO_SHADOW = {'fleece', 'beanstalk', 'crew', 'cloudy', 'Greece', 'Florida', 'Germ
 
 # Листы, где генератор разложил картинки иначе, чем в промпте
 # Границы клеток вручную: {лист: {номер ряда: [границы]}}; граница-ступенька (y, x_выше, x_ниже)
-CUTS = {12: {1: [415, 808, (670, 1236, 1162)]},
+CUTS = {19: {1: [338, 694, (806, 1019, 1032)]},
+        12: {1: [415, 808, (670, 1236, 1162)]},
         13: {0: [(200, 392, 366), 642, 993, 1322]},
         6: {0: [283, 526, (215, 910, 896), 1238], 1: [391, (660, 756, 738), 1116]},
         7: {1: [400, (800, 757, 765), 1112]}}
@@ -41,6 +43,9 @@ CUTS = {12: {1: [415, 808, (670, 1236, 1162)]},
 IMAGES = '/tmp/claude-0/-home-user-classroom/d4a2a0a4-519c-5b81-af84-18451bfcf9dd/images'
 
 LAYOUT_SHEET = {}
+ROW_TOP = {18: {0: 0}}
+# мелкие отдельные детали — часть смысла (пустые кружки недели): не выкидывать как крошки
+NO_SPECK = {'usually', 'sometimes', 'never'}
 
 LAYOUT = {6: [3, 3], 7: [4, 3], 8: [4, 4], 9: [5, 4], 10: [5, 5], 11: [4, 4, 3], 12: [4, 4, 4], 13: [5, 4, 4]}
 
@@ -144,6 +149,8 @@ def cut(sheet, path, out='out'):
     title, note, items = S[sheet - 1]
     lay = LAYOUT_SHEET.get(sheet) or LAYOUT[len(items)]
     rows = split_rows(path, bands(path), len(lay))
+    for ri, y in ROW_TOP.get(sheet, {}).items():  # мелкая полоса над рисунком (кружки недели) — не подпись
+        rows[ri] = (y, rows[ri][1])
     # подписи, слипшиеся со следующим рядом, сидят внизу полос ряда — стираем по рядам
     path = erase_glued_captions(path, rows)
     k = 0; report = []
@@ -272,7 +279,7 @@ def clean_png(p, peel=4, pale=212, grey=32, speck=0.004, pure=250):
         touch = np.unique(labm[binary_dilation(out) & M]); touch = touch[touch > 0]
         a[np.isin(labm, touch)] = 0
     lab, n = label(a > 40)
-    if n > 1:
+    if n > 1 and not p.endswith(tuple(f'/{fname(w)}' for w in NO_SPECK)):
         sizes = np.bincount(lab.ravel()); sizes[0] = 0
         big = sizes.max()
         small = np.isin(lab, np.where((sizes < speck * a.size) & (sizes < big))[0])
