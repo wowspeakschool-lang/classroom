@@ -1,0 +1,636 @@
+module	section	term	reuse_id	note
+Starter Unit		ant	2991	
+Starter Unit		apple	248	
+Starter Unit		ball	235	
+Starter Unit		bird	633	
+Starter Unit		black	224	
+Starter Unit		blackboard	3342	
+Starter Unit		blue	205	
+Starter Unit		book	214	
+Starter Unit		box	47	
+Starter Unit		café	26	
+Starter Unit		cake	250	
+Starter Unit		cap	279	
+Starter Unit		cat	245	
+Starter Unit		chair	547	
+Starter Unit		climb	1923	
+Starter Unit		cup	322	
+Starter Unit		desk	548	
+Starter Unit		doctor	364	
+Starter Unit		doll	230	
+Starter Unit		draw	590	
+Starter Unit		egg	453	
+Starter Unit		fox	1265	
+Starter Unit		flower	100	
+Starter Unit		garlic	2695	
+Starter Unit		glass	1296	
+Starter Unit		glue	4275	
+Starter Unit		grass	1764	
+Starter Unit		green	207	
+Starter Unit		gym	499	
+Starter Unit		hat	22	
+Starter Unit		hand	286	
+Starter Unit		house	34	
+Starter Unit		jam	1871	
+Starter Unit		jeans	270	
+Starter Unit		kite	227	
+Starter Unit		lemon	455	
+Starter Unit		look		кандидат «выглядеть», нужно «смотреть»
+Starter Unit		market	2125	
+Starter Unit		melon	2696	
+Starter Unit		museum	745	
+Starter Unit		music	310	
+Starter Unit		nest	4217	
+Starter Unit		nose	66	
+Starter Unit		notebook	215	
+Starter Unit		orange	11	
+Starter Unit		park	31	
+Starter Unit		pen	211	
+Starter Unit		pencil	213	
+Starter Unit		pencil case	219	
+Starter Unit		pink	225	
+Starter Unit		purple	209	
+Starter Unit		red	206	
+Starter Unit		right		кандидат «справа», нужно «правильный»
+Starter Unit		robot	70	
+Starter Unit		ruler	218	
+Starter Unit		run	596	
+Starter Unit		school	32	
+Starter Unit		shop	29	
+Starter Unit		sing	597	
+Starter Unit		snake	21	
+Starter Unit		speak	1512	
+Starter Unit		spell	2634	
+Starter Unit		song	1645	
+Starter Unit		sun	101	
+Starter Unit		train	232	
+Starter Unit		tree	102	
+Starter Unit		uniform	4157	
+Starter Unit		vet	782	
+Starter Unit		white	4174	
+Starter Unit		window	222	
+Starter Unit		write	600	
+Starter Unit		yellow	208	
+Starter Unit		zebra	15	
+Starter Unit		zoo	4619	
+Starter Unit		Nice to meet you.	4825	
+Module 1	1a	art	304	
+Module 1	1a	break		кандидат «ломать», нужно «перемена»
+Module 1	1a	class	4167	
+Module 1	1a	dictionary	476	
+Module 1	1a	English	305	
+Module 1	1a	geography	306	
+Module 1	1a	history	307	
+Module 1	1a	science	474	
+Module 1	1a	teacher	781	
+Module 1	1a	textbook	3349	
+Module 1	1a	timetable	3350	
+Module 1	1a	Monday	614	
+Module 1	1a	Tuesday	615	
+Module 1	1a	Wednesday	616	
+Module 1	1a	Thursday	617	
+Module 1	1a	Friday	618	
+Module 1	1a	Saturday	619	
+Module 1	1a	Sunday	620	
+Module 1	1b	same	4495	
+Module 1	1b	new	524	
+Module 1	1c	choose	3471	
+Module 1	1d - Culture Corner	university	1684	
+Module 1	Across the Curriculum 1: Citizenship	share	3374	
+Module 1	Across the Curriculum 1: Citizenship	think	1595	
+Module 2	2a	amazing	1768	
+Module 2	2a	aunt	303	
+Module 2	2a	bite	3386	
+Module 2	2a	brilliant	4736	
+Module 2	2a	English	467	
+Module 2	2a	fast	658	
+Module 2	2a	find out	994	
+Module 2	2a	French	468	
+Module 2	2a	Italian	1425	
+Module 2	2a	Japanese		только «японец» (человек), нужно сначала «японский»
+Module 2	2a	live		кандидат «в прямом эфире», нужно «жить»
+Module 2	2a	quiet	766	
+Module 2	2a	Russian	1429	
+Module 2	2a	spider	242	
+Module 2	2a	strong	660	
+Module 2	2a	wall	542	
+Module 2	2a	watch	3160	
+Module 2	2b	basketball		кандидат «баскетбол» (игра), нужно «баскетбольный мяч»
+Module 2	2b	digital camera	1647	
+Module 2	2b	fly	638	
+Module 2	2b	gloves	1156	
+Module 2	2b	guitar	58	
+Module 2	2b	handbag	1026	
+Module 2	2b	helmet	1158	
+Module 2	2b	knife	957	
+Module 2	2b	lamp	53	
+Module 2	2b	present	4328	
+Module 2	2b	scarf	1033	
+Module 2	2b	skateboard	76	
+Module 2	2b	teddy bear	4099	
+Module 2	2b	tie	1038	
+Module 2	2b	toy	237	
+Module 2	2b	trainers	484	
+Module 2	2b	watch	1417	
+Module 2	2c	age	2273	
+Module 2	2c	hundred	4786	
+Module 2	2c	easy	726	
+Module 2	2c	eighty	4784	
+Module 2	2c	feel	4491	
+Module 2	2c	fifty	1552	
+Module 2	2c	forty	1553	
+Module 2	2c	great		кандидат «отличный», первое значение «большой, великий»
+Module 2	2c	happy	705	
+Module 2	2c	nice	584	
+Module 2	2c	ninety	4787	
+Module 2	2c	seventy	4789	
+Module 2	2c	sixty	1554	
+Module 2	2c	thirty	1555	
+Module 2	2d - Culture Corner	buy	4336	
+Module 2	2d - Culture Corner	cow	1825	
+Module 2	2d - Culture Corner	dragon	4096	
+Module 2	2d - Culture Corner	map	337	
+Module 2	2d - Culture Corner	mug	958	
+Module 2	2d - Culture Corner	pin		кандидат «PIN-код», нужно «значок»
+Module 2	2d - Culture Corner	popular	1772	
+Module 2	English in Use 2	shop assistant	779	
+Module 2	English in Use 2	T-shirt	277	
+Module 2	English in Use 2	umbrella	388	
+Module 2	Across the Curriculum 2: Geography	capital (city)	4659	
+Module 3	3a	advert	3137	
+Module 3	3a	architect	1351	
+Module 3	3a	article	2208	
+Module 3	3a	bathroom	259	
+Module 3	3a	beautiful	732	
+Module 3	3a	bedroom	260	
+Module 3	3a	dining room	263	
+Module 3	3a	false	4277	
+Module 3	3a	famous	3694	
+Module 3	3a	first	4785	
+Module 3	3a	flat	35	
+Module 3	3a	floor	537	
+Module 3	3a	garage	538	
+Module 3	3a	great		кандидат «отличный», первое значение «великий, большой»
+Module 3	3a	ground floor	983	
+Module 3	3a	hall	262	
+Module 3	3a	kitchen	264	
+Module 3	3a	lift	355	
+Module 3	3a	living room	261	
+Module 3	3a	price	2034	
+Module 3	3a	roof	1939	
+Module 3	3a	true	4276	
+Module 3	3a	second	4788	
+Module 3	3a	step	3892	
+Module 3	3a	swimming pool	33	
+Module 3	3a	third	4791	
+Module 3	3a	tower	341	
+Module 3	3a	unusual	1773	
+Module 3	3a	block of flats	967	
+Module 3	3a	keep fit	2110	
+Module 3	3b	armchair	52	
+Module 3	3b	bath	545	
+Module 3	3b	bed	54	
+Module 3	3b	bookcase	268	
+Module 3	3b	carpet	553	
+Module 3	3b	cooker	2320	
+Module 3	3b	fridge	549	
+Module 3	3b	furniture	2505	
+Module 3	3b	mirror	51	
+Module 3	3b	painting	269	
+Module 3	3b	sink	990	
+Module 3	3b	sofa	56	
+Module 3	3b	table	55	
+Module 3	3b	toilet	1468	
+Module 3	3b	wardrobe	552	
+Module 3	3b	window	222	
+Module 3	3c	call		кандидат «звонить», нужно «называть»
+Module 3	3c	computer	685	
+Module 3	3c	poster	557	
+Module 3	3c	wall	542	
+Module 3	3d - Culture Corner	downstairs	292	
+Module 3	3d - Culture Corner	inside	4641	
+Module 3	3d - Culture Corner	outside	4650	
+Module 3	3d - Culture Corner	plan	3960	
+Module 3	3d - Culture Corner	upstairs	291	
+Module 3	English in Use 3	big	520	
+Module 3	English in Use 3	key	4502	
+Module 3	English in Use 3	quite	2260	
+Module 3	Across the Curriculum 3: Art & Design	admire	3469	
+Module 3	Across the Curriculum 3: Art & Design	design	3234	кандидат-глагол «проектировать», в учебнике сущ. «дизайн»
+Module 3	Across the Curriculum 3: Art & Design	fantastic	1771	
+Module 3	Across the Curriculum 3: Art & Design	palace	1938	
+Module 3	Across the Curriculum 3: Art & Design	shine	4434	
+Module 3	Across the Curriculum 3: Art & Design	wonder		кандидат «интересоваться», нужно «чудо»
+Module 3	Across the Curriculum 3: Art & Design	world	4612	
+Module 4	4a	baby	1434	
+Module 4	4a	brother	422	
+Module 4	4a	burn	3388	
+Module 4	4a	clever	580	
+Module 4	4a	cookie	4598	
+Module 4	4a	cool	522	
+Module 4	4a	dad	414	
+Module 4	4a	dance	4144	
+Module 4	4a	diary	1743	
+Module 4	4a	family	4264	
+Module 4	4a	food	2504	
+Module 4	4a	friendly	581	
+Module 4	4a	father	413	
+Module 4	4a	funny	582	
+Module 4	4a	grandfather	296	
+Module 4	4a	grandma	4474	
+Module 4	4a	grandmother	297	
+Module 4	4a	grandpa	4263	
+Module 4	4a	grandparents	1407	
+Module 4	4a	kind	737	
+Module 4	4a	mother	411	
+Module 4	4a	mum	412	
+Module 4	4a	naughty	4646	
+Module 4	4a	piano	1229	
+Module 4	4a	pilot	777	
+Module 4	4a	play	1506	
+Module 4	4a	see	1594	
+Module 4	4a	sister	423	
+Module 4	4a	sweet	966	
+Module 4	4a	tell	3765	
+Module 4	4a	violin	1232	
+Module 4	4a	visit	1796	
+Module 4	4b	classmate	2468	
+Module 4	4b	come	1591	
+Module 4	4b	ear	1515	
+Module 4	4b	eye	1516	
+Module 4	4b	fair	2735	
+Module 4	4b	fat	1733	
+Module 4	4b	hair	63	
+Module 4	4b	long	523	
+Module 4	4b	lovely	1907	
+Module 4	4b	moustache	1059	
+Module 4	4b	mouth	69	
+Module 4	4b	nose	66	
+Module 4	4b	plump	4518	
+Module 4	4b	short	526	
+Module 4	4b	tall	1693	
+Module 4	4c	cooking	2596	
+Module 4	4c	dancing	1599	
+Module 4	4c	guess	2629	
+Module 4	4c	jazz	831	
+Module 4	4c	painting		кандидат «картина», нужно «рисование» (занятие)
+Module 4	4c	place	4356	
+Module 4	4c	singer	780	
+Module 4	4c	singing	2606	
+Module 4	4c	voice	3915	
+Module 4	4c	young	1741	
+Module 4	4d - Culture Corner	cook	324	
+Module 4	4d - Culture Corner	patient	854	
+Module 4	4d - Culture Corner	saxophone	1230	
+Module 4	4d - Culture Corner	slim	1739	
+Module 4	4d - Culture Corner	show		кандидат «показывать», нужно «шоу»
+Module 4	English in Use 4	pretty	2252	
+Module 4	Across the Curriculum 4: Literature	bee	2993	
+Module 4	Across the Curriculum 4: Literature	busy	1960	
+Module 4	Across the Curriculum 4: Literature	granny	419	
+Module 4	Across the Curriculum 4: Literature	lamb	4720	
+Module 4	Across the Curriculum 4: Literature	playful	4298	
+Module 4	Across the Curriculum 4: Literature	slow	659	
+Module 4	Across the Curriculum 4: Literature	title	2681	
+Module 4	Across the Curriculum 4: Literature	send an email	698	
+Module 5	5a	amazing	1768	
+Module 5	5a	bite	3386	
+Module 5	5a	camel	4728	
+Module 5	5a	carry	4529	
+Module 5	5a	creature	3311	
+Module 5	5a	crocodile	17	
+Module 5	5a	dangerous	657	
+Module 5	5a	elephant	238	
+Module 5	5a	grass	1764	
+Module 5	5a	heavy	1306	
+Module 5	5a	horn	4424	
+Module 5	5a	hunt	1275	
+Module 5	5a	leopard	1267	
+Module 5	5a	lion	642	
+Module 5	5a	plant	556	
+Module 5	5a	rhino	1272	
+Module 5	5a	swim	599	
+Module 5	5a	tiger	16	
+Module 5	5b	address	2272	
+Module 5	5b	bear	14	
+Module 5	5b	cute	656	
+Module 5	5b	find	4181	
+Module 5	5b	fish	254	
+Module 5	5b	fruit	435	
+Module 5	5b	giraffe	640	
+Module 5	5b	leg	288	
+Module 5	5b	monkey	20	
+Module 5	5b	neck	578	
+Module 5	5b	penguin	1270	
+Module 5	5b	sound	4522	
+Module 5	5b	tail	4423	
+Module 5	5b	ticket	1983	
+Module 5	5c	activity	4489	
+Module 5	5c	bright	4088	
+Module 5	5c	cow	1825	
+Module 5	5c	dog	244	
+Module 5	5c	duck	243	
+Module 5	5c	golden	4250	
+Module 5	5c	goldfish	650	
+Module 5	5c	list	2630	кандидат-сущ. «список», в учебнике глагол
+Module 5	5c	rabbit	654	
+Module 5	5c	take	4149	
+Module 5	5c	tortoise	655	
+Module 5	5d - Culture Corner	cute	656	
+Module 5	5d - Culture Corner	get	1592	
+Module 5	5d - Culture Corner	little	1691	
+Module 5	5d - Culture Corner	mean		кандидат «жадный», нужно «иметь в виду»
+Module 5	5d - Culture Corner	need	4222	
+Module 5	5d - Culture Corner	never	4540	
+Module 5	5d - Culture Corner	round	2378	
+Module 5	5d - Culture Corner	soft	1309	
+Module 5	English in Use 5	broken	2968	
+Module 5	English in Use 5	earache	365	
+Module 5	English in Use 5	parrot	19	
+Module 5	English in Use 5	toothache	369	
+Module 5	English in Use 5	vet	782	
+Module 5	English in Use 5	visit	1796	
+Module 5	English in Use 5	be ill	2979	
+Module 5	Across the Curriculum 5: Science	ant	2991	
+Module 5	Across the Curriculum 5: Science	bee	2993	
+Module 5	Across the Curriculum 5: Science	butterfly	634	
+Module 5	Across the Curriculum 5: Science	call		кандидат «звонить», нужно «называть»
+Module 5	Across the Curriculum 5: Science	detective	1243	
+Module 5	Across the Curriculum 5: Science	fly	638	
+Module 5	Across the Curriculum 5: Science	forest	390	
+Module 5	Across the Curriculum 5: Science	honey	1869	
+Module 5	Across the Curriculum 5: Science	important	1689	
+Module 5	Across the Curriculum 5: Science	mosquito	3001	
+Module 5	Across the Curriculum 5: Science	present		кандидат «подарок», нужно «представлять»
+Module 5	Across the Curriculum 5: Science	rubbish	2873	
+Module 6	6a	always	4525	
+Module 6	6a	clock	1474	
+Module 6	6a	get up	1	
+Module 6	6a	late	1810	
+Module 6	6a	sometimes	4547	
+Module 6	6a	usually	4549	
+Module 6	6a	wake up	996	
+Module 6	6a	do homework	2228	
+Module 6	6a	for a while	4664	
+Module 6	6a	get dressed	2	
+Module 6	6a	go to bed	9	
+Module 6	6a	go to school	5	
+Module 6	6b	baker	4527	
+Module 6	6b	baker's	871	
+Module 6	6b	bakery	2568	
+Module 6	6b	café	26	
+Module 6	6b	doctor	364	
+Module 6	6b	drive	1788	
+Module 6	6b	hospital	24	
+Module 6	6b	mechanic	1951	
+Module 6	6b	nurse	367	
+Module 6	6b	paint	1316	
+Module 6	6b	painter		кандидат «художник», первое значение «маляр»
+Module 6	6b	postman	4544	
+Module 6	6b	serve	4545	
+Module 6	6b	taxi driver	4567	
+Module 6	6b	wait	4569	
+Module 6	6b	waiter	1662	
+Module 6	6b	waitress	1663	
+Module 6	6c	boring	521	
+Module 6	6c	hard work	1253	
+Module 6	6c	newspaper	1644	
+Module 6	6d - Culture Corner	interesting	763	
+Module 6	6d - Culture Corner	top		кандидат «кофточка», нужно «верхушка, шпиль»
+Module 6	6d - Culture Corner	tour guide	1361	
+Module 6	Across the Curriculum 6: Science	compass	4366	
+Module 6	Across the Curriculum 6: Science	early	2784	
+Module 6	Across the Curriculum 6: Science	east	4370	
+Module 6	Across the Curriculum 6: Science	mobile phone	356	
+Module 6	Across the Curriculum 6: Science	need	4222	
+Module 6	Across the Curriculum 6: Science	north	4367	
+Module 6	Across the Curriculum 6: Science	perfect	1909	
+Module 6	Across the Curriculum 6: Science	place	4356	
+Module 6	Across the Curriculum 6: Science	put	4151	
+Module 6	Across the Curriculum 6: Science	south	4368	
+Module 6	Across the Curriculum 6: Science	top		кандидат «кофточка», нужно «верх, верхушка»
+Module 6	Across the Curriculum 6: Science	west	4369	
+Module 7	7a	autumn	1775	
+Module 7	7a	balcony	979	
+Module 7	7a	go swimming	1403	
+Module 7	7a	January	621	
+Module 7	7a	February	622	
+Module 7	7a	March	623	
+Module 7	7a	April	624	
+Module 7	7a	May	625	
+Module 7	7a	June	626	
+Module 7	7a	July	627	
+Module 7	7a	August	628	
+Module 7	7a	September	629	
+Module 7	7a	October	630	
+Module 7	7a	November	631	
+Module 7	7a	December	632	
+Module 7	7a	season	3405	
+Module 7	7a	snow	1779	
+Module 7	7a	spring	1780	
+Module 7	7a	statement		кандидат «заявление», нужно «утверждение»
+Module 7	7a	summer	1781	
+Module 7	7a	winter	1785	
+Module 7	7a	year		кандидат «учебный год / класс», нужно «год»
+Module 7	7b	airport	1974	
+Module 7	7b	bag	48	
+Module 7	7b	boots	504	
+Module 7	7b	clothes	1476	
+Module 7	7b	coat	506	
+Module 7	7b	dress	280	
+Module 7	7b	get on	802	
+Module 7	7b	joke	3433	кандидат-глагол «шутить», в учебнике сущ.
+Module 7	7b	jumper	511	
+Module 7	7b	light	1307	
+Module 7	7b	raincoat	386	
+Module 7	7b	shirt	512	
+Module 7	7b	shoes	1725	
+Module 7	7b	shorts	274	
+Module 7	7b	skirt	273	
+Module 7	7b	socks	276	
+Module 7	7b	suit	2019	
+Module 7	7b	tight	1050	
+Module 7	7b	trainers	484	
+Module 7	7b	trousers	519	
+Module 7	7c	beach	710	
+Module 7	7c	postcard	4360	
+Module 7	7c	stay	1793	
+Module 7	7c	go camping	883	
+Module 7	7d - Culture Corner	cool	2333	
+Module 7	7d - Culture Corner	jacket	271	
+Module 7	7d - Culture Corner	sad	706	
+Module 7	7d - Culture Corner	stressed	3020	
+Module 7	7d - Culture Corner	make sure	4580	
+Module 7	Across the Curriculum 7: Literature	blow away	3225	
+Module 7	Across the Curriculum 7: Literature	go away	2918	
+Module 7	Across the Curriculum 7: Literature	land		кандидат «приземляться», нужно «земля»
+Module 7	Across the Curriculum 7: Literature	sea	718	
+Module 7	Across the Curriculum 7: Literature	wind	1784	
+Module 8	8a	banana	10	
+Module 8	8a	both	4513	
+Module 8	8a	celebrate	4235	
+Module 8	8a	choose	3471	
+Module 8	8a	cut		кандидат «порезать(ся)» — травма, нужно «резать»
+Module 8	8a	crop	3312	
+Module 8	8a	dessert	4672	
+Module 8	8a	farmer	773	
+Module 8	8a	festival	3256	
+Module 8	8a	fresh	2941	
+Module 8	8a	rice	442	
+Module 8	8a	turkey		кандидат «Турция», нужно «индейка»
+Module 8	8b	bottle	1664	
+Module 8	8b	bowl	321	
+Module 8	8b	box	47	
+Module 8	8b	bread	42	
+Module 8	8b	burger	2039	
+Module 8	8b	butter	451	
+Module 8	8b	cabbage	1863	
+Module 8	8b	cake	250	
+Module 8	8b	carton	4596	
+Module 8	8b	cereal	430	
+Module 8	8b	cheese	315	
+Module 8	8b	cherry	4597	
+Module 8	8b	chicken	255	
+Module 8	8b	chocolate	452	
+Module 8	8b	cupboard	987	
+Module 8	8b	garlic	2695	
+Module 8	8b	glass	323	
+Module 8	8b	grapes	44	
+Module 8	8b	jar	4601	
+Module 8	8b	lemonade	316	
+Module 8	8b	meal	4559	
+Module 8	8b	meat	437	
+Module 8	8b	milk	456	
+Module 8	8b	olive oil	4582	
+Module 8	8b	onion	4605	
+Module 8	8b	orange juice	438	
+Module 8	8b	packet	4606	
+Module 8	8b	pasta	440	
+Module 8	8b	pineapple	4585	
+Module 8	8b	pizza	251	
+Module 8	8b	sausage	252	
+Module 8	8b	strawberry	457	
+Module 8	8b	shopping list	860	
+Module 8	8b	sugar	458	
+Module 8	8b	tomato	4590	
+Module 8	8c	balloon	210	неоднозначно: 210 «шарик» (праздничный), 4702 «воздушный шар» — возможно аэростат
+Module 8	8c	Chinese	1423	
+Module 8	8c	mean		кандидат «жадный», нужно «значить»
+Module 8	8c	money	2510	
+Module 8	8c	noodles	2049	
+Module 8	8c	paper	220	
+Module 8	8c	soup	318	
+Module 8	8c	stick		кандидаты «клюшка»/«приклеивать», нужно «палка, палочка»
+Module 8	8c	treat	4591	
+Module 8	8c	unlucky	2766	
+Module 8	8d - Culture Corner	baseball	85	
+Module 8	8d - Culture Corner	basketball	84	
+Module 8	8d - Culture Corner	score	1151	кандидат-глагол «забивать», в учебнике сущ. «очко, гол»
+Module 8	English in Use 8	beef	4594	
+Module 8	English in Use 8	cashier	857	
+Module 8	English in Use 8	chips		кандидат «картошка фри», нужно «чипсы»
+Module 8	English in Use 8	fast food	4763	
+Module 8	English in Use 8	menu	2480	
+Module 8	English in Use 8	mineral water	2060	
+Module 8	English in Use 8	order		кандидат «приказывать», нужно «заказ»
+Module 8	English in Use 8	tuna	447	
+Module 8	Across the Curriculum 8: PSHE	back		кандидат «спина», нужно «назад»
+Module 8	Across the Curriculum 8: PSHE	carefully	2783	
+Module 8	Across the Curriculum 8: PSHE	chop	943	
+Module 8	Across the Curriculum 8: PSHE	clean	4530	
+Module 8	Across the Curriculum 8: PSHE	first		кандидат «первый», нужно «сначала»
+Module 8	Across the Curriculum 8: PSHE	knife	957	
+Module 8	Across the Curriculum 8: PSHE	prepare	2691	
+Module 8	Across the Curriculum 8: PSHE	surface	3893	
+Module 8	Across the Curriculum 8: PSHE	touch	4413	
+Module 8	Across the Curriculum 8: PSHE	yoghurt	450	
+Module 9	9a	baker's	871	
+Module 9	9a	bakery	2568	
+Module 9	9a	chemist's	873	
+Module 9	9a	greengrocer's	876	
+Module 9	9a	mean		кандидат «жадный», нужно «иметь в виду»
+Module 9	9a	newsagent's	877	
+Module 9	9a	shoe shop	878	
+Module 9	9a	shop	29	
+Module 9	9a	look for	995	
+Module 9	9b	art gallery	2489	
+Module 9	9b	classical	830	
+Module 9	9b	concert hall	3254	
+Module 9	9b	museum	745	
+Module 9	9b	play		кандидат «играть», первое значение «пьеса»
+Module 9	9b	queue	2912	
+Module 9	9b	ride		кандидат «кататься», нужно «аттракцион»
+Module 9	9b	theatre	751	
+Module 9	9b	theme park	4738	
+Module 9	9b	yesterday	4694	
+Module 9	9b	zoo	4619	
+Module 9	9c	action film	1167	
+Module 9	9c	adventure film	1168	
+Module 9	9c	animated	3415	
+Module 9	9c	comedy	1170	
+Module 9	9c	horror film	1173	
+Module 9	9c	romance		кандидат «любовный роман» (книга), нужно «романтический фильм»
+Module 9	9c	face		кандидат «лицо», нужно глагол «сталкиваться»
+Module 9	9c	plot	3045	
+Module 9	9c	recommendation	3511	
+Module 9	9c	review	2214	
+Module 9	9c	save	1280	
+Module 9	9d - Culture Corner	cinema	25	
+Module 9	9d - Culture Corner	seat	2419	
+Module 9	9d - Culture Corner	square	1940	
+Module 9	9d - Culture Corner	statue	1942	
+Module 9	English in Use 9	supermarket	340	
+Module 9	Across the Curriculum 9: Maths	bar	4592	
+Module 9	Across the Curriculum 9: Maths	change	2924	
+Module 9	Across the Curriculum 9: Maths	pence	1757	
+Module 9	Across the Curriculum 9: Maths	pound	1758	
+Module 10	10a	abroad	3352	
+Module 10	10a	advert	3137	
+Module 10	10a	advise	3935	
+Module 10	10a	book		кандидат «книга», нужно «бронировать»
+Module 10	10a	coach	1698	
+Module 10	10a	countryside	1760	
+Module 10	10a	cruise	3619	
+Module 10	10a	discover	4717	
+Module 10	10a	historic	3287	
+Module 10	10a	hotel	743	
+Module 10	10a	motorbike	77	
+Module 10	10a	price	2034	
+Module 10	10a	rest	4757	
+Module 10	10a	sand	4443	
+Module 10	10a	ship	72	
+Module 10	10a	spend		кандидат «тратить», нужно «проводить (время)»
+Module 10	10a	travel	1795	
+Module 10	10b	airport	1974	
+Module 10	10b	bored	704	
+Module 10	10b	boring	521	
+Module 10	10b	canoeing	2215	
+Module 10	10b	difficult	725	
+Module 10	10b	enjoyable	3692	
+Module 10	10b	excited	1808	
+Module 10	10b	exciting	727	
+Module 10	10b	fishing	2441	
+Module 10	10b	hard		кандидат «твёрдый», нужно «трудный»
+Module 10	10b	hiking	4682	
+Module 10	10b	hungry	1454	
+Module 10	10b	relaxed	3018	
+Module 10	10b	relaxing	3028	
+Module 10	10b	sailing	669	
+Module 10	10b	tiring	3030	
+Module 10	10b	tired	708	
+Module 10	10b	windsurfing	677	
+Module 10	10c	dentist	1354	
+Module 10	10c	headache	366	
+Module 10	10c	note	3142	
+Module 10	10c	toothache	369	
+Module 10	10d - Culture Corner	castle	1933	
+Module 10	10d - Culture Corner	cathedral	1934	
+Module 10	10d - Culture Corner	square	4171	
+Module 10	10d - Culture Corner	team	4426	
+Module 10	10d - Culture Corner	win	1154	
+Module 10	English in Use 10	kind		кандидат «добрый», нужно «вид, тип»
+Module 10	English in Use 10	sign		кандидат «указатель», нужно «подписывать»
+Module 10	Across the Curriculum 10: Geography	stream		кандидат «стримить», нужно «ручей»
+Module 10	Across the Curriculum 10: Geography	tent	811	
+Module 10	Across the Curriculum 10: Geography	whistle		кандидат «свистеть», нужно сущ. «свисток»
+Module 10	Across the Curriculum 10: Geography	get lost	895	
