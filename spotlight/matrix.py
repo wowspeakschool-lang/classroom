@@ -136,8 +136,11 @@ def main():
         'Цвет клетки: оттенок = группа вебинара (оранжевый 7–9 лет, голубой 10+), насыщенность = статус (ярче — новое, бледнее — повторение).',
         'Группы вебинаров: 7–9 лет = 1–3 класс → Spotlight 2–3 (у Spotlight 2 нет грамматического справочника, поэтому 2 класса нет). 10+ = Spotlight 4–11; 4 класс (9–10 лет) отнесён к 10+.',
         '«Видео 7–9» / «Видео 10+»: «есть» / «нет» (выпадающий список), рядом — название или ссылка вебинара. «—» — подтема этой группе не нужна.',
-        '«Папки уроков»: Spotlight / класс / модуль / тема (папка) / подтема (урок). Видео подтягивается из «Темы × классы» само; колонка «Готовность» — для отметок.',
-        '«Итоги»: сколько уроков нужно каждой группе, у скольких есть видео.',
+        '«Уроки»: один урок = подтема × группа. Если подтема повторяется в нескольких классах одной группы, это один и тот же урок (Мл-… для 7–9 лет, Ст-… для 10+): в колонке «Где используется» — все классы и модули. Видео подтягивается из «Темы × классы»; «Готовность» отмечается здесь.',
+        '«Папки уроков»: Spotlight / класс / модуль / тема (папка) / подтема — какой урок (№) куда положить. Видео и готовность подтягиваются из «Уроков».',
+        '«Пересечения»: одна и та же вещь в двух-трёх темах — где предлагаю держать урок, где поставить ссылку.',
+        'Утверждение, отрицание и вопрос разделены там, где книга даёт их по отдельности; где справочник даёт их вместе (модальные глаголы старших классов) — одна подтема.',
+        '«Итоги»: сколько уроков сделать каждой группе, у скольких есть видео, сколько готово и опубликовано.',
         '',
         'Источник: грамматический справочник учебников (Use of English — оглавление и приложения). Подробный объём по строкам — в Spotlight_грамматика.xlsx.',
     ]:
@@ -159,6 +162,7 @@ def main():
     dv = DataValidation(type='list', formula1='"есть,нет"', allow_blank=True)
     ws.add_data_validation(dv)
     prev = None
+    mrow = {}
     thick = Side(style='medium', color='555555')
     for i, n in enumerate(order, 1):
         u = units[n]
@@ -180,6 +184,7 @@ def main():
             vid += [('есть' if have else 'нет') if need else '—', have if need else '']
         ws.append([i, u['block'], u['cat'], u['topic'], n, grp] + cells + vid + [''])
         r = ws.max_row
+        mrow[n] = r
         newtopic = u['topic'] != prev
         prev = u['topic']
         for c in ws[r]:
@@ -218,71 +223,128 @@ def main():
     vcol = {g: ws.cell(row=1, column=V + 2 * k).column_letter for k, g in enumerate(GROUPS)}
     wcol = {g: ws.cell(row=1, column=V + 2 * k + 1).column_letter for k, g in enumerate(GROUPS)}
 
-    # --- Папки уроков
-    ws2 = wb.create_sheet('Папки уроков')
-    header(ws2, ['Класс', 'Модуль', 'Урок учебника', 'Тема (папка)', 'Подтема (урок)', 'В учебнике', 'Что именно',
-                 'Группа', 'Видео', 'Вебинар', 'Готовность', 'Путь'],
-           [7, 26, 9, 22, 44, 11, 50, 8, 9, 26, 18, 60])
-    ws2.freeze_panes = 'F2'
-    dv2 = DataValidation(type='list', formula1='"не начат,готов без видео,готов с видео,опубликован"', allow_blank=True)
-    ws2.add_data_validation(dv2)
-    items = []
-    for n in order:
-        u = units[n]
-        for g, es in u['cells'].items():
-            mods = {}
-            for e in es:
-                m = mods.setdefault(e['module'], {'lessons': [], 'status': e['status'], 'detail': []})
-                if e['lesson'] and e['lesson'] not in m['lessons']:
-                    m['lessons'].append(e['lesson'])
-                if RANK.get(e['status'], 1) > RANK.get(m['status'], 1):
-                    m['status'] = e['status']
-                if e['detail']:
-                    m['detail'].append(e['detail'])
-            for m, v in mods.items():
-                items.append((g, m, n, v))
-    items.sort(key=lambda x: (x[0], modnum(x[1]), order.index(x[2])))
+    # --- Уроки: один урок на подтему внутри группы; повтор в другом классе той же группы — тот же урок
     mt = "'Темы × классы'"
-    for i, (g, m, n, v) in enumerate(items, 2):
-        grp = group(g)
+    PREFIX = {'7–9': 'Мл', '10+': 'Ст'}
+    lessons = {}  # (подтема, группа) -> id
+    places = {}   # (подтема, группа) -> [(класс, модуль, урок учебника, статус, detail)]
+    for gname in GROUPS:
+        k = 0
+        for n in order:
+            gs = sorted(g for g in units[n]['cells'] if group(g) == gname)
+            if not gs:
+                continue
+            k += 1
+            lessons[(n, gname)] = f'{PREFIX[gname]}-{k:03d}'
+            pl = places.setdefault((n, gname), [])
+            for g in gs:
+                mods = {}
+                for e in units[n]['cells'][g]:
+                    m = mods.setdefault(e['module'], {'lessons': [], 'status': e['status'], 'detail': []})
+                    if e['lesson'] and e['lesson'] not in m['lessons']:
+                        m['lessons'].append(e['lesson'])
+                    if RANK.get(e['status'], 1) > RANK.get(m['status'], 1):
+                        m['status'] = e['status']
+                    if e['detail']:
+                        m['detail'].append(e['detail'])
+                for m, v in mods.items():
+                    pl.append((g, m, ', '.join(v['lessons']), v['status'], '; '.join(v['detail'])))
+
+    wsl = wb.create_sheet('Уроки')
+    header(wsl, ['№ урока', 'Группа', 'Блок', 'Тема', 'Подтема (урок)', 'Где используется (класс · модуль · статус)',
+                 'Папок', 'Видео', 'Вебинар', 'Готовность', 'Комментарий'],
+           [9, 8, 12, 22, 44, 46, 7, 9, 26, 18, 26])
+    wsl.freeze_panes = 'F2'
+    dvl = DataValidation(type='list', formula1='"не начат,готов без видео,готов с видео,опубликован"', allow_blank=True)
+    wsl.add_data_validation(dvl)
+    for (n, gname), lid in sorted(lessons.items(), key=lambda x: x[1]):
         u = units[n]
-        detail = '; '.join(v['detail'])[:400]
-        if detail.startswith('='):
-            detail = ' ' + detail
-        ws2.append([g, m, ', '.join(v['lessons']), u['topic'], n, v['status'], detail, grp,
-                    f'=IFERROR(INDEX({mt}!${vcol[grp]}:${vcol[grp]},MATCH(E{i},{mt}!$E:$E,0)),"")',
-                    f'=IFERROR(INDEX({mt}!${wcol[grp]}:${wcol[grp]},MATCH(E{i},{mt}!$E:$E,0))&"","")',
-                    'не начат', f"Spotlight / {g} класс / {m} / {u['topic']} / {n}"])
-        dv2.add(ws2.cell(row=i, column=11))
+        pl = places[(n, gname)]
+        used = '\n'.join(f"{g} кл. · {where({'module': m, 'lesson': les})} · {SHORT.get(st, st)}" for g, m, les, st, _ in pl)
+        i = wsl.max_row + 1
+        wsl.append([lid, gname, u['block'], u['topic'], n, used, len(pl),
+                    f'={mt}!{vcol[gname]}{mrow[n]}',
+                    f'={mt}!{wcol[gname]}{mrow[n]}&""',
+                    'не начат', ''])
+        dvl.add(wsl.cell(row=i, column=10))
+    body(wsl)
+    for row in wsl.iter_rows(min_row=2):
+        row[0].fill = row[1].fill = PatternFill('solid', fgColor=LIGHT[row[1].value])
+        row[0].font = row[4].font = Font(bold=True)
+    for col in ('H',):
+        rng = f'{col}2:{col}{wsl.max_row}'
+        wsl.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"есть"'], fill=YES))
+        wsl.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"нет"'], fill=NO))
+    wsl.auto_filter.ref = wsl.dimensions
+
+    # --- Папки уроков: куда кладётся каждый урок
+    ws2 = wb.create_sheet('Папки уроков')
+    header(ws2, ['Класс', 'Модуль', 'Урок учебника', 'Тема (папка)', 'Подтема (урок)', '№ урока', 'В учебнике',
+                 'Что именно в этом классе', 'Группа', 'Видео', 'Готовность', 'Путь'],
+           [7, 26, 9, 22, 44, 9, 11, 50, 8, 9, 18, 60])
+    ws2.freeze_panes = 'F2'
+    items = []
+    for (n, gname), pl in places.items():
+        for g, m, les, st, det in pl:
+            items.append((g, m, les, n, lessons[(n, gname)], st, det))
+    items.sort(key=lambda x: (x[0], modnum(x[1]), order.index(x[3])))
+    L = "'Уроки'"
+    for i, (g, m, les, n, lid, st, det) in enumerate(items, 2):
+        det = det[:400]
+        if det.startswith('='):
+            det = ' ' + det
+        ws2.append([g, m, les, units[n]['topic'], n, lid, st, det, group(g),
+                    f'=IFERROR(INDEX({L}!$H:$H,MATCH(F{i},{L}!$A:$A,0)),"")',
+                    f'=IFERROR(INDEX({L}!$J:$J,MATCH(F{i},{L}!$A:$A,0)),"")',
+                    f"Spotlight / {g} класс / {m} / {units[n]['topic']} / {n}"])
     body(ws2)
     for row in ws2.iter_rows(min_row=2):
-        grp = row[7].value
-        row[0].fill = PatternFill('solid', fgColor=LIGHT[grp]); row[7].fill = PatternFill('solid', fgColor=LIGHT[grp])
-        pal = {3: STRONG, 2: MID, 1: LIGHT}[RANK.get(row[5].value, 1)]
-        row[5].fill = PatternFill('solid', fgColor=pal[grp])
+        grp = row[8].value
+        row[0].fill = row[8].fill = PatternFill('solid', fgColor=LIGHT[grp])
+        pal = {3: STRONG, 2: MID, 1: LIGHT}[RANK.get(row[6].value, 1)]
+        row[6].fill = PatternFill('solid', fgColor=pal[grp])
         row[4].font = Font(bold=True)
-    rng = f'I2:I{ws2.max_row}'
+    rng = f'J2:J{ws2.max_row}'
     ws2.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"есть"'], fill=YES))
     ws2.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"нет"'], fill=NO))
     ws2.auto_filter.ref = ws2.dimensions
 
+    # --- Пересечения
+    p = os.path.join(D, 'data', 'overlaps.json')
+    if os.path.exists(p):
+        wso = wb.create_sheet('Пересечения')
+        header(wso, ['№', 'Что повторяется', 'Где встречается (тема: подтема — классы)', 'Где живёт урок (предложение)',
+                     'Что делать в остальных местах', 'Решение методиста'], [4, 30, 60, 34, 50, 24])
+        wso.freeze_panes = 'C2'
+        dvo = DataValidation(type='list', formula1='"согласна,по-другому (см. комментарий)"', allow_blank=True)
+        wso.add_data_validation(dvo)
+        for i, o in enumerate(json.load(open(p)), 1):
+            wso.append([i, o['what'], '\n'.join('• ' + x for x in o['places']), o['home'], o['others'], ''])
+            dvo.add(wso.cell(row=wso.max_row, column=6))
+        body(wso)
+        for row in wso.iter_rows(min_row=2):
+            row[1].font = row[3].font = Font(bold=True)
+
     # --- Итоги
     ws3 = wb.create_sheet('Итоги')
-    header(ws3, ['Группа', 'Классы', 'Подтем (уроков) нужно', 'Видео есть', 'Видео нет', 'Уроков в папках (с повторами по классам)'],
-           [10, 14, 14, 11, 11, 22])
-    for k, gname in enumerate(GROUPS, 2):
-        c = vcol[gname]
+    header(ws3, ['Группа', 'Классы', 'Уроков сделать', 'Видео есть', 'Видео нет', 'Готовы', 'Опубликованы',
+                 'Мест в папках (урок × класс × модуль)'],
+           [10, 16, 12, 11, 11, 10, 13, 20])
+    for gname in GROUPS:
         cls = ', '.join(str(g) for g in grades if group(g) == gname) or '—'
         ws3.append([gname, cls,
-                    f'=COUNTIF({mt}!{c}:{c},"есть")+COUNTIF({mt}!{c}:{c},"нет")',
-                    f'=COUNTIF({mt}!{c}:{c},"есть")', f'=COUNTIF({mt}!{c}:{c},"нет")',
-                    f"=COUNTIF('Папки уроков'!H:H,\"{gname}\")"])
+                    f'=COUNTIF({L}!B:B,"{gname}")',
+                    f'=COUNTIFS({L}!B:B,"{gname}",{L}!H:H,"есть")',
+                    f'=COUNTIFS({L}!B:B,"{gname}",{L}!H:H,"нет")',
+                    f'=COUNTIFS({L}!B:B,"{gname}",{L}!J:J,"готов*")',
+                    f'=COUNTIFS({L}!B:B,"{gname}",{L}!J:J,"опубликован")',
+                    f"=COUNTIF('Папки уроков'!I:I,\"{gname}\")"])
     body(ws3)
     for row in ws3.iter_rows(min_row=2):
         row[0].fill = PatternFill('solid', fgColor=LIGHT[row[0].value])
 
     wb.save(OUT)
-    print(OUT, len(order), 'подтем;', len({u['topic'] for u in units.values()}), 'тем;', len(items), 'уроков в папках')
+    print(OUT, len(order), 'подтем;', {g: sum(1 for k in lessons if k[1] == g) for g in GROUPS}, 'уроков;', len(items), 'мест в папках')
     return units, order
 
 
