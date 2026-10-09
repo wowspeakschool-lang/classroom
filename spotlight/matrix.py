@@ -145,6 +145,7 @@ def main():
         '«Папки уроков»: Spotlight / класс / модуль / тема (папка) / подтема — какой урок (№) куда положить. Видео и готовность подтягиваются из «Уроков».',
         '«Пересечения»: одна и та же вещь в двух-трёх темах — где предлагаю держать урок, где поставить ссылку.',
         'Утверждение, отрицание и вопрос разделены там, где книга даёт их по отдельности; где справочник даёт их вместе (модальные глаголы старших классов) — одна подтема.',
+        '«Кандидаты в вебинары»: по каждой группе — темы, где у подтем нет видео и нет вебинара в расписании; отсортировано по классу, где тема появляется. Из них выбираем следующие вебинары.',
         '«Итоги»: сколько уроков сделать каждой группе, у скольких есть видео, сколько готово и опубликовано.',
         '',
         'Источник: грамматический справочник учебников (Use of English — оглавление и приложения). Подробный объём по строкам — в Spotlight_грамматика.xlsx.',
@@ -334,6 +335,39 @@ def main():
         body(wso)
         for row in wso.iter_rows(min_row=2):
             row[1].font = row[3].font = Font(bold=True)
+
+    # --- Кандидаты в вебинары: подтемы без видео и без вебинара в расписании, по темам
+    wsk = wb.create_sheet('Кандидаты в вебинары')
+    header(wsk, ['Группа', 'Тема', 'С какого класса', 'Подтем без видео', 'из них новое в учебнике', 'Подтемы без видео', 'Уже есть / будет по теме'],
+           [8, 30, 10, 10, 12, 70, 40])
+    wsk.freeze_panes = 'C2'
+    for gname in GROUPS:
+        bytopic = {}
+        for n in order:
+            u = units[n]
+            gs = [g for g in u['cells'] if group(g) == gname]
+            if not gs:
+                continue
+            t = bytopic.setdefault((u['block'], u['topic']), {'no': [], 'new': 0, 'have': 0, 'soon': 0, 'first': 99})
+            t['first'] = min(t['first'], min(gs))
+            if videos.get(n, {}).get(gname):
+                t['have'] += 1
+            elif planned.get(n, {}).get(gname):
+                t['soon'] += 1
+            else:
+                t['no'].append(n.split(': ', 1)[-1])
+                if any(e['status'] == 'новое' for g in gs for e in u['cells'][g]):
+                    t['new'] += 1
+        for (block, topic), t in sorted(bytopic.items(), key=lambda x: (x[1]['first'], -len(x[1]['no']), x[0][1])):
+            if not t['no']:
+                continue
+            wsk.append([gname, topic, f"{t['first']} кл.", len(t['no']), t['new'], '\n'.join('• ' + x for x in t['no']),
+                        f"есть: {t['have']}, будет: {t['soon']}" if t['have'] or t['soon'] else ''])
+    body(wsk)
+    for row in wsk.iter_rows(min_row=2):
+        row[0].fill = PatternFill('solid', fgColor=LIGHT[row[0].value])
+        row[1].font = Font(bold=True)
+    wsk.auto_filter.ref = wsk.dimensions
 
     # --- Итоги
     ws3 = wb.create_sheet('Итоги')
