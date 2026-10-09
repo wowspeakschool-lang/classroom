@@ -43,6 +43,9 @@ LAYOUT_SHEET = {}
 ROW_TOP = {}
 # мелкие отдельные детали — часть смысла (пустые кружки недели): не выкидывать как крошки
 EDGE_D = 6
+# В тренажёре под картинкой белая подложка: остатки белого не видны, а лишняя вырезка
+# съедает облака и белую одежду. Режем мягко: только фон, связанный с краем листа
+GENTLE = True
 EW_MN, EW_SP = 228, 22
 # рваный белый край (парус, стена): маску сглаживаем — закрываем рваные выемки, дыры, срезаем зубцы
 SMOOTH = {}
@@ -258,7 +261,10 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
         if n:
             sz = np.bincount(lab.ravel()); sz[0] = 0
             big = np.where(sz >= PURE_MIN)[0]
-            if not p.endswith(tuple(f'/{fname(w)}' for w in PURE_ALL)):
+            if GENTLE and not p.endswith(tuple(f'/{fname(w)}' for w in PURE_ALL)):
+                edge = np.unique(lab[binary_dilation(a <= 40, iterations=2)])
+                big = np.array([i for i in big if i in edge], dtype=int)
+            elif not p.endswith(tuple(f'/{fname(w)}' for w in PURE_ALL)):
                 # касается края — фон; внутри рисунка — фон, только если вокруг него сплошной
                 # рисунок (просвет между фигурами). Пузырь речи и листок висят на прозрачном
                 # фоне — кольцо вокруг них в основном пустое, их оставляем
@@ -271,7 +277,7 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
                     if ring.any() and (a[ring] > 40).mean() >= 0.93: keep.append(i)
                 big = np.array(keep, dtype=int)
             a[np.isin(lab, big)] = 0
-    if not p.endswith(tuple(f'/{fname(w)}' for w in NO_SHADOW)):
+    if not GENTLE and not p.endswith(tuple(f'/{fname(w)}' for w in NO_SHADOW)):
         from scipy.ndimage import distance_transform_edt
         out = a <= 40
         ys = np.where((~out).any(1))[0]
@@ -283,7 +289,7 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
             touch = np.unique(labl[binary_dilation(out, iterations=2) & light]); touch = touch[touch > 0]
             a[np.isin(labl, touch) & (distance_transform_edt(~out) <= SHADOW_D)] = 0
     whitish = (mn >= pale) & (mx - mn <= grey)
-    for _ in range(peel):
+    for _ in range(3 if GENTLE else peel):
         solid = a > 128
         edge = solid & binary_dilation(~solid)
         hit = edge & whitish
@@ -306,7 +312,7 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
             a[c] = 0
     # куски фона, отрезанные от края тенью или землёй: светлое и бесцветное,
     # связанное с прозрачным краем через светло-серое
-    if not p.endswith(tuple(f'/{fname(w)}' for w in KEEP_WHITE)):
+    if not GENTLE and not p.endswith(tuple(f'/{fname(w)}' for w in KEEP_WHITE)):
         from scipy.ndimage import distance_transform_edt
         out = a <= 40
         M = (~out) & (mn >= 215) & (mx - mn <= 20)
@@ -347,7 +353,8 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
         a[near] = np.minimum(a[near], (al * 255).astype(np.int32))
     # полупрозрачное светлое за контуром: на тёмном фоне читается серой каймой — убираем целиком
     rgb2 = im[..., :3]; mn2, mx2 = rgb2.min(-1), rgb2.max(-1)
-    a[(a < 235) & (mn2 >= 140) & (mx2 - mn2 <= 70)] = 0
+    if not GENTLE:
+        a[(a < 235) & (mn2 >= 140) & (mx2 - mn2 <= 70)] = 0
     for w, frac in CUT_BOTTOM.items():
         if p.endswith(f'/{fname(w)}'): a[int(a.shape[0] * frac):] = 0
     lab, n = label(a > 40)
