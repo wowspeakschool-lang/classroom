@@ -1270,10 +1270,11 @@ var SHOW = { all:[], blocks:[], i:0, answer:false, title:'', mode:'list' };
 
 // Готовит состояние интерактивных блоков (перемешивание и т.п.)
 function prepRunState(blocks){
-  RUN_MATCH={}; RUN_ORDER={}; RUN_SORT={}; RUN_FC={}; RUN_FC_DATA={};
+  RUN_MATCH={}; RUN_ORDER={}; RUN_SORT={}; RUN_FC={}; RUN_FC_DATA={}; RUN_QUIZ={};
   (blocks||[]).forEach(b=>{
     if(b.type==='match'){ RUN_MATCH[b.id]={ map:{}, sel:null, rights:shuffle(((b.payload&&b.payload.pairs)||[]).map((x,ix)=>({val:(x.right!=null?x.right:('#'+ix)), image:x.right_image, audio:x.right_audio}))) }; }
     if(b.type==='order'){ RUN_ORDER[b.id]={ bank:shuffle(((b.payload&&b.payload.words)||[])), answer:[] }; }
+    if(b.type==='quiz'){ prepQuiz(b); }
     if(b.type==='sort'){ prepSort(b); }
     if(b.type==='flashcards'){ RUN_FC[b.id]={ i:0, flip:false, queue:null, done:0, again:0 }; RUN_FC_DATA[b.id]={ cards:(b.payload&&b.payload.cards)||[] }; }
     if(b.type==='sequence'){ prepSeq(b); }
@@ -1428,6 +1429,7 @@ let RUN_MATCH = {};   // { blockId: { map:{leftIdx:rightVal}, sel, rights:[{val,
 let RUN_ORDER = {};   // { blockId: { bank:[...], answer:[...] } }
 let RUN_SORT = {};    // { blockId: { items:[{gi,text,image}], groups:[names], place:{gi:groupIdx}, sel } }
 let RUN_FC = {};      // { blockId: { i, flip } }
+let RUN_QUIZ = {};    // { blockId: { qi: [исходные индексы вариантов в порядке вывода] } }
 const MATCH_COLORS = ['#7c3aed','#16a34a','#f59e0b','#0891b2','#db2777','#4f46e5','#ea580c','#0d9488'];
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
 function isPreview(){ return RUN && RUN.preview; }
@@ -1496,6 +1498,7 @@ async function bootRunPage(params){
     blocks.forEach(b=>{
       if(b.type==='match'){ RUN_MATCH[b.id]={ map:{}, sel:null, rights:shuffle(((b.payload&&b.payload.pairs)||[]).map((x,ix)=>({val:(x.right!=null?x.right:('#'+ix)), image:x.right_image, audio:x.right_audio}))) }; }
       if(b.type==='order'){ RUN_ORDER[b.id]={ bank:shuffle(((b.payload&&b.payload.words)||[])), answer:[] }; }
+      if(b.type==='quiz'){ prepQuiz(b); }
       if(b.type==='sort'){ prepSort(b); }
       if(b.type==='flashcards'){ RUN_FC[b.id]={ i:0, flip:false, queue:null, done:0, again:0 }; RUN_FC_DATA[b.id]={ cards:(b.payload&&b.payload.cards)||[] }; }
       if(b.type==='sequence'){ prepSeq(b); }
@@ -1589,7 +1592,10 @@ function runBlock(b){
   if(b.type==='quiz'){
     const qs=(p.questions||[]).map((q,qi)=>{
       const inp=(q.type==='multiple')?'checkbox':'radio';
-      const opts=(q.options||[]).map((o,oi)=>{
+      const perm=(RUN_QUIZ[id]&&RUN_QUIZ[id][qi])||null;
+      const ord=perm||((q.options||[]).map((_,k)=>k));
+      const opts=ord.map(oi=>{
+        const o=(q.options||[])[oi];
         const label=(o&&o.image)?`<img src="${esc(o.image)}" style="max-height:170px;max-width:230px;border-radius:14px;display:block;margin:4px auto" onerror="this.replaceWith(document.createTextNode('[картинка]'))">`:esc(o&&o.text!=null?o.text:o);
         const oaud=(o&&o.audio)?`<div style="text-align:center">${audBtn(o.audio)}</div>`:'';
         return `<label class="chk" style="flex-direction:column;align-items:center">${label}${oaud}<input type="${inp}" name="q-${id}-${qi}" value="${oi}" style="margin-top:10px"></label>`;
@@ -1755,6 +1761,15 @@ function fcFlip(id){ const st=RUN_FC[id]; if(!st) return; st.flip=!st.flip; fcRe
 
 async function submitBlock(blockId, answers){ return rpc('classroom_submit_block', { p_block_id:blockId, p_enrollment_id:RUN.enr, p_answers:answers }); }
 
+// Порядок вывода вариантов quiz. Перемешиваем только показ: в value радиокнопки
+// остаётся исходный индекс, поэтому и runQuiz, и проверка на сервере
+// (classroom_submit_block сверяет индексы с payload.correct) работают как были.
+// Без этого верный ответ стоит там, где его положил составитель, — а в курсе
+// нашлось 17 блоков, где он везде первый.
+function prepQuiz(b){
+  const qs=(b.payload&&b.payload.questions)||[];
+  RUN_QUIZ[b.id]=qs.map(q=>shuffle(((q&&q.options)||[]).map((_,k)=>k)));
+}
 async function runQuiz(id){
   if(isPreview()){ runResult(id,'Предпросмотр — не сохраняю',true); return; }
   const ans={};
