@@ -17,12 +17,12 @@ FILL_OLD = None  # заливка дыр больше не нужна: её за
 FILL = {'subject choice form'}
 # вырезать зажатый белый фон (не везде: белое внутри пузырей пропадало)
 # белое, которое чистка кусков фона не трогает: облачка, снег, разметка, облака у края сцены
-KEEP_WHITE = {'subject choice form', 'grey'}
+KEEP_WHITE = {'subject choice form', 'grey', 'What subjects does he do?'}
 # ровно-белое внутри рисунка своё (облака в окне, мяч): снимаем только куски, выходящие наружу
 PURE_EDGE = set()
 # В Spotlight 5 много нарисованного белого (пузыри речи, бумага, облака): ровно-белое снимаем
 # только если оно касается внешнего края; внутри рисунка — только для слов из PURE_ALL
-PURE_ALL = {'equals', 'colour', 'mime'}
+PURE_ALL = {'equals', 'colour', 'mime', 'Where are you from?'}
 # сцены, где фон застрял между фигурами и под ногами: чистим жёстче
 EXTRA = set()
 HOLES = set()
@@ -43,8 +43,25 @@ LAYOUT_SHEET = {}
 ROW_TOP = {}
 # мелкие отдельные детали — часть смысла (пустые кружки недели): не выкидывать как крошки
 EDGE_D = 6
+EW_MN, EW_SP = 228, 22
 # рваный белый край (парус, стена): маску сглаживаем — закрываем рваные выемки, дыры, срезаем зубцы
 SMOOTH = {}
+# Сцена (картинка-виньетка с фоном) сплошная: её край, изъеденный по светлому небу и стенам,
+# закрываем большим кругом и возвращаем исходные пиксели. Фигуры (люди, предметы) не трогаем —
+# у них между руками и ногами настоящий фон. Сцена = доля заполнения выпуклой оболочки ≥ SCENE_SOLID.
+SCENE_R, SCENE_SOLID = 24, 2.0  # выключено: закрытие заливало белым вогнутости у фигур
+NO_SCENE = set()
+def is_scene(p):
+    from scipy.spatial import ConvexHull
+    from PIL import ImageDraw
+    m = np.array(Image.open(p).convert('RGBA'))[..., 3] > 40
+    ys, xs = np.nonzero(m)
+    if len(xs) < 2000: return False
+    pts = np.c_[xs, ys][::7]
+    hull = ConvexHull(pts)
+    hm = Image.new('L', (m.shape[1], m.shape[0]), 0)
+    ImageDraw.Draw(hm).polygon([tuple(map(int, pts[v])) for v in hull.vertices], fill=1)
+    return m.sum() / max(1, np.array(hm).sum()) >= SCENE_SOLID
 CUT_BOTTOM = {}
 NO_SPECK = set()
 
@@ -206,7 +223,8 @@ def cut(sheet, path, out='out'):
             Image.fromarray(im).save(p)
     for _, t, _ in items:
         p = f'{out}/{sheet}/{fname(t)}'
-        if t in SMOOTH and os.path.exists(p):
+        if os.path.exists(p) and t not in NO_SCENE and (t in SMOOTH or is_scene(p)):
+            SMOOTH.setdefault(t, SCENE_R)
             from scipy.ndimage import binary_closing, binary_opening, binary_fill_holes, gaussian_filter
             im = np.array(Image.open(p).convert('RGBA')).astype(float)
             r = SMOOTH[t]; yy, xx = np.mgrid[-r:r + 1, -r:r + 1]; disk = xx ** 2 + yy ** 2 <= r * r
@@ -241,7 +259,17 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
             sz = np.bincount(lab.ravel()); sz[0] = 0
             big = np.where(sz >= PURE_MIN)[0]
             if not p.endswith(tuple(f'/{fname(w)}' for w in PURE_ALL)):
-                big = np.intersect1d(big, np.unique(lab[binary_dilation(a <= 40, iterations=2)]))
+                # касается края — фон; внутри рисунка — фон, только если вокруг него сплошной
+                # рисунок (просвет между фигурами). Пузырь речи и листок висят на прозрачном
+                # фоне — кольцо вокруг них в основном пустое, их оставляем
+                edge = np.unique(lab[binary_dilation(a <= 40, iterations=2)])
+                keep = []
+                for i in big:
+                    c = lab == i
+                    if i in edge: keep.append(i); continue
+                    ring = binary_dilation(c, iterations=14) & ~binary_dilation(c, iterations=5)
+                    if ring.any() and (a[ring] > 40).mean() >= 0.93: keep.append(i)
+                big = np.array(keep, dtype=int)
             a[np.isin(lab, big)] = 0
     if not p.endswith(tuple(f'/{fname(w)}' for w in NO_SHADOW)):
         from scipy.ndimage import distance_transform_edt
@@ -287,6 +315,16 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
         T = np.isin(labm, touch)
         dist = distance_transform_edt(~out)
         a[T & (((mn >= 245) & (mx - mn <= 10)) | ((mn >= 225) & (dist <= 6)))] = 0
+        # белые куски у края целиком: светлое и бесцветное, связанное с прозрачным краем,
+        # снимаем на всю глубину (небо, стены сцен, остатки листа). Повторяем: после первого
+        # прохода открываются следующие слои
+        for _ in range(3):
+            out = a <= 40
+            M = (~out) & (mn >= EW_MN) & (mx - mn <= EW_SP)
+            labm, _ = label(M)
+            touch = np.unique(labm[binary_dilation(out) & M]); touch = touch[touch > 0]
+            if not len(touch): break
+            a[np.isin(labm, touch)] = 0
     if p.endswith(tuple(f'/{fname(w)}' for w in EXTRA)):
         out = a <= 40
         W = (~out) & (mn >= 244) & (mx - mn <= 10)
