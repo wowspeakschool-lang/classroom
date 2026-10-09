@@ -1,0 +1,1248 @@
+[
+ {
+  "group": "7-9",
+  "video": "A day in my life+adver...ency in Present Simple",
+  "subtopics": [
+   "Present Simple: значение — регулярные действия, распорядок дня, привычки"
+  ],
+  "confidence": "по материалам",
+  "comment": "Наречий частоты в плане 7–9 нет; совпадает только значение Present Simple — распорядок дня, привычки"
+ },
+ {
+  "group": "7-9",
+  "video": "A,An+This,That+various subjects",
+  "subtopics": [
+   "a/an: a перед согласной, an перед гласной",
+   "Demonstratives: this/these vs that/those — близко vs далеко"
+  ],
+  "confidence": "по материалам",
+  "comment": "a/an по звуку и this/that близко–далеко; these/those и 'только с исчисляемыми в ед. ч.' не разбираются"
+ },
+ {
+  "group": "7-9",
+  "video": "At the weekend+ prepositions of time",
+  "subtopics": [
+   "Prepositions of time: at — время, праздники, at night/at noon/at the weekend",
+   "Prepositions of time: on — дни недели и праздничные дни",
+   "Prepositions of time: in — части суток (in the morning/afternoon/evening)"
+  ],
+  "confidence": "по материалам",
+  "comment": "in/on/at: части дня, дни недели, at night/at the weekend; месяцы (in May) в плане 7–9 нет"
+ },
+ {
+  "group": "7-9",
+  "video": "Can questions + actions",
+  "subtopics": [
+   "can (ability): вопросы и краткие ответы"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только вопрос Can you…? и краткие ответы; утверждение лишь как опора"
+ },
+ {
+  "group": "7-9",
+  "video": "Can requests+dinner",
+  "subtopics": [],
+  "confidence": "по материалам",
+  "comment": "Can для просьбы (Can you pass me…?) — такой подтемы в плане 7–9 нет"
+ },
+ {
+  "group": "7-9",
+  "video": "Fairy-tales+comparatives",
+  "subtopics": [],
+  "confidence": "по материалам",
+  "comment": "Сравнительной степени в плане 7–9 нет (план — только 3 класс)"
+ },
+ {
+  "group": "7-9",
+  "video": "Farm animals+irregular plurals",
+  "subtopics": [
+   "Plurals (irregular): одинаковая форма ед. и мн. ч. (fish, sheep)"
+  ],
+  "confidence": "по материалам",
+  "comment": "sheep → sheep; goose/mouse — исключения, но подтема 'man–men… mouse–mice' целиком не проходится"
+ },
+ {
+  "group": "7-9",
+  "video": "Favourite activities Present Cont",
+  "subtopics": [
+   "Present Continuous: утверждение (am/is/are + V-ing)",
+   "Present Continuous: значение — действие сейчас (now)"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только утверждение во всех лицах + значение 'сейчас'"
+ },
+ {
+  "group": "7-9",
+  "video": "Food.Much.Many.A lot of.",
+  "subtopics": [
+   "Countable / Uncountable: различие исчисляемых и неисчисляемых"
+  ],
+  "confidence": "по материалам",
+  "comment": "Явное деление на исчисляемые/неисчисляемые; much/many/a lot of как подтемы в плане 7–9 нет"
+ },
+ {
+  "group": "7-9",
+  "video": "Free time Like _ing",
+  "subtopics": [
+   "Present Simple: утверждение (I/you/we/they V, he/she/it V-s)",
+   "Present Simple: отрицание (don't/doesn't)"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только на глаголе like: like/likes, don't/doesn't like + V-ing; вопросы не разбираются"
+ },
+ {
+  "group": "7-9",
+  "video": "Have got Yes No questions animals",
+  "subtopics": [
+   "have got: вопросы и краткие ответы"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только Have you got…? и краткие ответы"
+ },
+ {
+  "group": "7-9",
+  "video": "Have got+3 лицо, е...о+игрушки+внешность",
+  "subtopics": [
+   "have got: утверждение — have got / has got (полные и краткие формы)",
+   "have got: отрицание — haven't got / hasn't got",
+   "have got: значение — описание внешности людей, животных, предметов",
+   "have got: It's got (= It has got) vs It's (= It is)"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только 3 л. ед. ч. (He's got / hasn't got), внешность; He's got = has got, а не is"
+ },
+ {
+  "group": "7-9",
+  "video": "Have to don't have to + chores",
+  "subtopics": [],
+  "confidence": "по материалам",
+  "comment": "have to / don't have to — такой подтемы в плане 7–9 нет"
+ },
+ {
+  "group": "7-9",
+  "video": "Holidays+going to",
+  "subtopics": [],
+  "confidence": "по материалам",
+  "comment": "be going to — такой подтемы в плане 7–9 нет"
+ },
+ {
+  "group": "7-9",
+  "video": "Homes, rooms + prepositions of place",
+  "subtopics": [
+   "Prepositions of place: in, on, under"
+  ],
+  "confidence": "по материалам",
+  "comment": "in/on/under (+ above, between, next to); behind/in front of нет, поэтому вторая подтема не покрыта"
+ },
+ {
+  "group": "7-9",
+  "video": "How much many a lot of not much not many",
+  "subtopics": [
+   "Countable / Uncountable: различие исчисляемых и неисчисляемых"
+  ],
+  "confidence": "по материалам",
+  "comment": "Деление можно/нельзя посчитать; How much/How many как подтемы в плане 7–9 нет"
+ },
+ {
+  "group": "7-9",
+  "video": "Irregular plurals",
+  "subtopics": [
+   "Plurals (irregular): man — men, child — children, tooth — teeth, foot — feet, mouse — mice"
+  ],
+  "confidence": "по материалам",
+  "comment": "Ровно 5 пар man/child/tooth/mouse/foot"
+ },
+ {
+  "group": "7-9",
+  "video": "May I+dinner table.",
+  "subtopics": [],
+  "confidence": "по материалам",
+  "comment": "May I…? — такой подтемы в плане 7–9 нет"
+ },
+ {
+  "group": "7-9",
+  "video": "My best Friend, numerals 30-100",
+  "subtopics": [],
+  "confidence": "по материалам",
+  "comment": "Числительные 30–100 — лексика, подтемы в плане нет"
+ },
+ {
+  "group": "7-9",
+  "video": "Past Simple Regular+a funny story",
+  "subtopics": [
+   "Past Simple: правильные глаголы — утверждение (-ed)",
+   "Past Simple: значение — действие в прошлом (yesterday, ago)"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только утверждение правильных глаголов (+ed) и маркер yesterday; орфография/произношение -ed не разбираются"
+ },
+ {
+  "group": "7-9",
+  "video": "Past Simple irregular verbs",
+  "subtopics": [
+   "Past Simple: неправильные глаголы — утверждение",
+   "Past Simple: значение — действие в прошлом (yesterday, ago)"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только утверждение, 5 неправильных глаголов"
+ },
+ {
+  "group": "7-9",
+  "video": "Past Simple regular questions and negatives",
+  "subtopics": [
+   "Past Simple: правильные глаголы — отрицание (didn't + V)",
+   "Past Simple: правильные глаголы — вопросы (Did …?)",
+   "Past Simple: краткие ответы (Yes, I did / No, I didn't)"
+  ],
+  "confidence": "по материалам",
+  "comment": "Did…? / didn't + V и краткие ответы на правильных глаголах"
+ },
+ {
+  "group": "7-9",
+  "video": "Plurals -es, -ies, -ves",
+  "subtopics": [
+   "Plurals (regular): орфография — + -es после -s, -ss, -sh, -ch, -x, -o",
+   "Plurals (regular): орфография — -y → -ies (но гласная + y → -s)",
+   "Plurals (regular): орфография — -f/-fe → -ves"
+  ],
+  "confidence": "по материалам",
+  "comment": "-es, -ies, -ves (без -o и исключений гласная + y)"
+ },
+ {
+  "group": "7-9",
+  "video": "Plurals+regular(s)+What is it? What are they?",
+  "subtopics": [
+   "Plurals (regular): основное правило — + -s"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только +s; What is it / What are they?"
+ },
+ {
+  "group": "7-9",
+  "video": "Plurals-es,ies,ves",
+  "subtopics": [
+   "Plurals (regular): орфография — + -es после -s, -ss, -sh, -ch, -x, -o",
+   "Plurals (regular): орфография — -y → -ies (но гласная + y → -s)",
+   "Plurals (regular): орфография — -f/-fe → -ves"
+  ],
+  "confidence": "по материалам",
+  "comment": "-es, -ies, -ves (без -o и исключений гласная + y); вероятный дубль видео 22"
+ },
+ {
+  "group": "7-9",
+  "video": "Possesive adjectives+extended Family",
+  "subtopics": [
+   "Possessive adjectives: формы my, your, his, her, its, our, their",
+   "Possessive adjectives: значение — принадлежность и отношения между людьми"
+  ],
+  "confidence": "по материалам",
+  "comment": "Полная таблица форм, фокус his/her/their; семья"
+ },
+ {
+  "group": "7-9",
+  "video": "Possesive adjectives+extened",
+  "subtopics": [
+   "Possessive adjectives: формы my, your, his, her, its, our, their",
+   "Possessive adjectives: значение — принадлежность и отношения между людьми"
+  ],
+  "confidence": "по материалам",
+  "comment": "Полная таблица форм, фокус his/her/their; вероятный дубль видео 25"
+ },
+ {
+  "group": "7-9",
+  "video": "Possessive case ('s) + Whose is this + toys",
+  "subtopics": [
+   "Possessive case ('s): 's в ед. ч. — принадлежность",
+   "Possessive case ('s): вопрос Whose?",
+   "Question words: Whose? — чья вещь"
+  ],
+  "confidence": "по материалам",
+  "comment": "'s в ед. ч. + Whose is this?"
+ },
+ {
+  "group": "7-9",
+  "video": "Prepositions of place+extended+object",
+  "subtopics": [
+   "Prepositions of place: next to, in front of, behind"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только next to, in front of, behind в утверждении"
+ },
+ {
+  "group": "7-9",
+  "video": "Present Continuous+ activities",
+  "subtopics": [
+   "Present Continuous: утверждение (am/is/are + V-ing)",
+   "Present Continuous: значение — действие сейчас (now)"
+  ],
+  "confidence": "по материалам",
+  "comment": "Частично: только we're + V-ing, значение 'сейчас'"
+ },
+ {
+  "group": "7-9",
+  "video": "Present Simple vs Present Continuous",
+  "subtopics": [
+   "Present Simple: значение — регулярные действия, распорядок дня, привычки",
+   "Present Continuous: значение — действие сейчас (now)"
+  ],
+  "confidence": "по материалам",
+  "comment": "Сопоставление привычки и 'сейчас', только утверждения; отдельной подтемы-сравнения в плане 7–9 нет"
+ },
+ {
+  "group": "7-9",
+  "video": "Tea Party+порядковые числительные",
+  "subtopics": [],
+  "confidence": "по материалам",
+  "comment": "Порядковые числительные — в плане 7–9 подтемы нет"
+ },
+ {
+  "group": "7-9",
+  "video": "Telling the time + sports, days of the week",
+  "subtopics": [],
+  "confidence": "по материалам",
+  "comment": "Время по часам + дни недели — лексика; on/at даны готовой формулой, не объясняются"
+ },
+ {
+  "group": "7-9",
+  "video": "There is are furniture",
+  "subtopics": [
+   "There is / There are: there is — утверждение (ед. ч.)",
+   "There is / There are: there are — утверждение (мн. ч.)",
+   "There is / There are: отрицание — there isn't / there aren't"
+  ],
+  "confidence": "по материалам",
+  "comment": "there is / there are + кратко отрицание; вопросов нет"
+ },
+ {
+  "group": "7-9",
+  "video": "There was there were + past scenes",
+  "subtopics": [],
+  "confidence": "по материалам",
+  "comment": "there was / there were — в плане 7–9 подтемы нет"
+ },
+ {
+  "group": "7-9",
+  "video": "These those + room items",
+  "subtopics": [
+   "Demonstratives: this — these (ед. и мн. ч.)",
+   "Demonstratives: that — those (ед. и мн. ч.)",
+   "Demonstratives: this/these vs that/those — близко vs далеко"
+  ],
+  "confidence": "по материалам",
+  "comment": "these/those в сравнении с this/that, только утверждения"
+ },
+ {
+  "group": "7-9",
+  "video": "To be (am is are) + school subjects",
+  "subtopics": [
+   "to be (Present): утверждение — am/is/are, полные и краткие формы"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только утверждение am/is/are"
+ },
+ {
+  "group": "7-9",
+  "video": "Travelling+questions words",
+  "subtopics": [],
+  "confidence": "по материалам",
+  "comment": "What/Where/When/Who/How — в плане 7–9 только Whose?"
+ },
+ {
+  "group": "7-9",
+  "video": "Was, were+your week",
+  "subtopics": [
+   "to be (Past): утверждение — was / were",
+   "to be (Past): слова-указатели прошедшего времени"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только утверждение was/were + yesterday, on Saturday"
+ },
+ {
+  "group": "7-9",
+  "video": "Was,were+Feelings",
+  "subtopics": [
+   "to be (Past): утверждение — was / were",
+   "to be (Past): слова-указатели прошедшего времени"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только утверждение was/were + yesterday; дубль темы видео 38 с другой лексикой"
+ },
+ {
+  "group": "7-9",
+  "video": "Will(Future Simple)+weather,holiday items",
+  "subtopics": [],
+  "confidence": "по материалам",
+  "comment": "will — в плане 7–9 подтемы нет"
+ },
+ {
+  "group": "7-9",
+  "video": "have got has got pets",
+  "subtopics": [
+   "have got: утверждение — have got / has got (полные и краткие формы)",
+   "have got: отрицание — haven't got / hasn't got",
+   "have got: значение — принадлежность (иметь)"
+  ],
+  "confidence": "по материалам",
+  "comment": "Утверждение и отрицание (только полная форма have not got), принадлежность; вопросы не разбираются"
+ },
+ {
+  "group": "10+",
+  "video": "Adjectives -ing -ed + ...ons and characteristics",
+  "subtopics": [
+   "Adjectives -ed/-ing: -ing — каков предмет/явление (amazing)",
+   "Adjectives -ed/-ing: -ed — что чувствует человек (amazed)"
+  ],
+  "confidence": "по названию",
+  "comment": "-ing vs -ed прилагательные (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Adjectives+Appearance",
+  "subtopics": [
+   "Adjectives (order): мнение перед объективными характеристиками",
+   "Adjectives (order): размер – возраст – форма – цвет – происхождение – материал"
+  ],
+  "confidence": "по материалам",
+  "comment": "Порядок OSASCOMP; узор (pattern) не разбирается"
+ },
+ {
+  "group": "10+",
+  "video": "Adverb comparatives + landmarks",
+  "subtopics": [
+   "Comparatives & Superlatives: наречия — -er/-est (hard, fast, early)",
+   "Comparatives & Superlatives: наречия — more/most (slowly)",
+   "Comparatives & Superlatives: неправильные наречия (well, badly)"
+  ],
+  "confidence": "по названию",
+  "comment": "Сравнительные наречия (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Alternative questions + introducing yourself",
+  "subtopics": [
+   "Alternative questions: образование (общий вопрос + or) — be, have got",
+   "Alternative questions: в Present Simple (do/does … or …)"
+  ],
+  "confidence": "по материалам",
+  "comment": "Are you/Is it … or …? и Do you … or …?"
+ },
+ {
+  "group": "10+",
+  "video": "Alternative questions+Introducing yourself",
+  "subtopics": [
+   "Alternative questions: образование (общий вопрос + or) — be, have got",
+   "Alternative questions: в Present Simple (do/does … or …)"
+  ],
+  "confidence": "по материалам",
+  "comment": "То же, вероятный дубль видео 45"
+ },
+ {
+  "group": "10+",
+  "video": "Animals body parts. Tag questions.",
+  "subtopics": [
+   "Question tags: образование — вспомогательный глагол + местоимение (do/does)",
+   "Question tags: с be и модальными глаголами (isn't she, can't she)",
+   "Question tags: утверждение → отрицательный хвост, отрицание → утвердительный"
+  ],
+  "confidence": "по названию",
+  "comment": "Базовые question tags (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Can can't — permission...f holiday travel rules",
+  "subtopics": [
+   "can (permission/request): спросить разрешения — Can I…?",
+   "can (permission/request): can't — запрет"
+  ],
+  "confidence": "по названию",
+  "comment": "Can — разрешение и can't — запрет (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Comparatives superlatives Places in town",
+  "subtopics": [
+   "Comparatives & Superlatives: сравнительная степень — -er + than",
+   "Comparatives & Superlatives: сравнительная степень — more (многосложные)",
+   "Comparatives & Superlatives: превосходная степень — the -est + of/in",
+   "Comparatives & Superlatives: превосходная степень — the most"
+  ],
+  "confidence": "по названию",
+  "comment": "Сравнительная и превосходная степени прилагательных (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Comparison extended+famous people",
+  "subtopics": [
+   "Comparative structures: as … as / not as (so) … as",
+   "Comparative structures: less … than / the least … of/in",
+   "Comparative structures: much/a lot/far/a bit/slightly + comparative",
+   "Comparative structures: the + comparative …, the + comparative",
+   "Comparative structures: comparative and comparative (shorter and shorter)",
+   "Comparative structures: by far + the superlative"
+  ],
+  "confidence": "по материалам",
+  "comment": "as…as, less/least, усилители, the…the, comp and comp, by far"
+ },
+ {
+  "group": "10+",
+  "video": "Compound Nouns + free time",
+  "subtopics": [
+   "Word formation: compound nouns"
+  ],
+  "confidence": "по названию",
+  "comment": "Сложные существительные (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Conditionals type 0and type 1",
+  "subtopics": [
+   "Conditionals Type 0: форма If/When + Present Simple — Present Simple",
+   "Conditionals Type 0: значение — общие истины, научные факты",
+   "Conditionals Type 1: форма If + Present Simple — will + V",
+   "Conditionals Type 1: значение — реальная/вероятная ситуация в настоящем/будущем"
+  ],
+  "confidence": "по материалам",
+  "comment": "Тип 0 и 1: форма и значение; unless, when вместо if, запятая не разбираются"
+ },
+ {
+  "group": "10+",
+  "video": "Daily Activities. Adverbs of Frequency in Pr.S.",
+  "subtopics": [
+   "Adverbs of frequency: значение — never, sometimes, usually, often, always",
+   "Adverbs of frequency: место — перед смысловым глаголом, после be",
+   "Adverbs of frequency: шкала частотности в % (always 100% … never 0%)",
+   "Present Simple: значение — регулярные действия, распорядок дня, привычки"
+  ],
+  "confidence": "по материалам",
+  "comment": "Шкала, место наречия, распорядок дня; rarely/seldom и вопросы нет"
+ },
+ {
+  "group": "10+",
+  "video": "Extreme sports have to and don't have to",
+  "subtopics": [
+   "have to: значение — необходимость из-за обстоятельств (утверждение)",
+   "have to: don't / doesn't have to — отсутствие необходимости"
+  ],
+  "confidence": "по названию",
+  "comment": "have to / don't have to (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Extreme sports have to don't have to",
+  "subtopics": [
+   "have to: значение — необходимость из-за обстоятельств (утверждение)",
+   "have to: don't / doesn't have to — отсутствие необходимости"
+  ],
+  "confidence": "по названию",
+  "comment": "То же (по названию), вероятный дубль видео 54"
+ },
+ {
+  "group": "10+",
+  "video": "Food Quantifiers, countables-uncountables",
+  "subtopics": [
+   "Countable / Uncountable: различие исчисляемых и неисчисляемых",
+   "Countable / Uncountable: неисчисляемые — еда и жидкости",
+   "Countable / Uncountable: There is/are + исчисляемые/неисчисляемые — утверждение",
+   "Countable / Uncountable: There is/are + исчисляемые/неисчисляемые — отрицание",
+   "Countable / Uncountable: There is/are + исчисляемые/неисчисляемые — вопрос",
+   "a/an/some/any: some — в утверждениях (неисчисляемые и мн. ч.)",
+   "a/an/some/any: any — в отрицаниях",
+   "a/an/some/any: any — в вопросах",
+   "much/many/a lot of: a lot of / lots of — в утверждениях (исчисляемые и неисчисляемые)",
+   "much/many/a lot of: much/many — отрицание",
+   "much/many/a lot of: much/many — вопросы",
+   "much/many/a lot of: How much? / How many?",
+   "Quantifiers: a lot of / lots of",
+   "Quantifiers: much/many — отрицания и вопросы"
+  ],
+  "confidence": "по материалам",
+  "comment": "C/U, some/any, a lot of, much/many в отрицаниях и вопросах, There is/are"
+ },
+ {
+  "group": "10+",
+  "video": "Future tenses + school and jobs",
+  "subtopics": [
+   "Future forms: обзор всех способов выражения будущего",
+   "Future forms: Future Continuous/Future Perfect в системе будущих форм",
+   "Future Continuous: образование (will be + V-ing)",
+   "Future Continuous: значение — действие в процессе в момент будущего",
+   "Future Perfect: образование (will have + V3)",
+   "Future Perfect: значение — завершится к моменту в будущем",
+   "Future Simple (will): значение — предсказание/предположение",
+   "Future Simple (will): значение — решение в момент речи",
+   "Future forms: Present Continuous — договорённости на ближайшее будущее",
+   "Future forms: Present Simple — расписания и программы",
+   "Future forms: will vs be going to — решение в момент речи vs план",
+   "Future forms: will vs be going to — прогноз-мнение vs прогноз по признакам",
+   "be going to: значение — планы и намерения",
+   "be going to: значение — предсказание по очевидным признакам",
+   "be going to vs will: план/признаки vs решение в момент речи/мнение"
+  ],
+  "confidence": "по материалам",
+  "comment": "Обзор: will, going to, PC и PS для будущего, Future Continuous/Perfect; только утверждения"
+ },
+ {
+  "group": "10+",
+  "video": "Hobbies. free time, idioms about free time",
+  "subtopics": [
+   "Idioms & collocations"
+  ],
+  "confidence": "по названию",
+  "comment": "Идиомы о свободном времени (по названию); грамматики нет"
+ },
+ {
+  "group": "10+",
+  "video": "It sentences+seasons, months, weather",
+  "subtopics": [
+   "Impersonal it: время и расстояние",
+   "Impersonal it: погода и явления природы"
+  ],
+  "confidence": "по материалам",
+  "comment": "It's + погода/время (+ дни, даты, сезоны)"
+ },
+ {
+  "group": "10+",
+  "video": "Linkers— time and seq...nce + your typical day",
+  "subtopics": [
+   "Linkers: слова-связки времени (and, then, after that, when, before, later)"
+  ],
+  "confidence": "по материалам",
+  "comment": "first/then/after that/later/finally, when/before/after"
+ },
+ {
+  "group": "10+",
+  "video": "Movies+Irregular verbs",
+  "subtopics": [
+   "Past Simple: неправильные глаголы — утверждение",
+   "Past Simple: значение — действие в прошлом (yesterday, ago)",
+   "Past Simple: одна форма для всех лиц, исключение was/were"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только утверждение, 5 неправильных глаголов; вопросы/отрицания нет"
+ },
+ {
+  "group": "10+",
+  "video": "Mustn't have to do+rules about animals",
+  "subtopics": [
+   "must/mustn't: must — обязанность, необходимость",
+   "must/mustn't: mustn't — запрет",
+   "have to: значение — необходимость из-за обстоятельств (утверждение)",
+   "have to: don't / doesn't have to — отсутствие необходимости"
+  ],
+  "confidence": "по названию",
+  "comment": "must/mustn't и have to (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Object Pronounce+describing relashiionship",
+  "subtopics": [
+   "Object pronouns: формы me, you, him, her, it, us, them",
+   "Object pronouns: употребление — дополнение, после предлогов"
+  ],
+  "confidence": "по названию",
+  "comment": "Объектные местоимения (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Past Continuous + news stories",
+  "subtopics": [
+   "Past Continuous: утверждение (was/were + V-ing)",
+   "Past Continuous: значение — действие в процессе в момент прошлого",
+   "Past Continuous: значение — длительное действие, прерванное другим (when)",
+   "Past Continuous: значение — одновременные действия (while)",
+   "Past Continuous: значение — фон и атмосфера в рассказе"
+  ],
+  "confidence": "по названию",
+  "comment": "Past Continuous в рассказе (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Past Tenses Review + travel and holidays",
+  "subtopics": [
+   "Past Simple: правильные глаголы — утверждение (-ed)",
+   "Past Simple: произношение -ed (/t/, /d/, /ɪd/)",
+   "Past Simple: неправильные глаголы — утверждение",
+   "Past Simple: значение — действие в прошлом (yesterday, ago)",
+   "Past Continuous: утверждение (was/were + V-ing)",
+   "Past Continuous: значение — действие в процессе в момент прошлого",
+   "Past Continuous: значение — длительное действие, прерванное другим (when)",
+   "Past Continuous: значение — одновременные действия (while)",
+   "Past Continuous: значение — фон и атмосфера в рассказе",
+   "Past Perfect: образование (had + V3)",
+   "Past Perfect: значение — действие до другого действия/момента в прошлом",
+   "Past Perfect Continuous: образование (had been + V-ing)",
+   "Past Perfect Continuous: значение — длительность до другого прошлого действия"
+  ],
+  "confidence": "по материалам",
+  "comment": "Обзор 4 прошедших времён, только утверждения"
+ },
+ {
+  "group": "10+",
+  "video": "Phrasal Verbs Movement and Travel",
+  "subtopics": [
+   "Phrasal verbs: get",
+   "Phrasal verbs: set",
+   "Phrasal verbs: take",
+   "Phrasal verbs: check"
+  ],
+  "confidence": "по материалам",
+  "comment": "Частично: get on/off/in/out, set off, take off, check in"
+ },
+ {
+  "group": "10+",
+  "video": "Places to go.Past Simple regular verbs.",
+  "subtopics": [
+   "Past Simple: правильные глаголы — утверждение (-ed)",
+   "Past Simple: орфография -ed",
+   "Past Simple: произношение -ed (/t/, /d/, /ɪd/)",
+   "Past Simple: значение — действие в прошлом (yesterday, ago)"
+  ],
+  "confidence": "по названию",
+  "comment": "Past Simple правильных глаголов (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Plans for summer + Going to",
+  "subtopics": [
+   "be going to: утверждение (am/is/are going to + V)",
+   "be going to: значение — планы и намерения"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только утверждение, планы"
+ },
+ {
+  "group": "10+",
+  "video": "Plans for summer+to be going to",
+  "subtopics": [
+   "be going to: утверждение (am/is/are going to + V)",
+   "be going to: значение — планы и намерения"
+  ],
+  "confidence": "по материалам",
+  "comment": "То же, вероятный дубль видео 68"
+ },
+ {
+  "group": "10+",
+  "video": "Possesive pronounce+f...tification_09.06.2026",
+  "subtopics": [
+   "Possessive pronouns: формы mine, yours, his, hers, its, ours, theirs — без существительного",
+   "Possessive pronouns: my vs mine — сопоставление основной и абсолютной формы"
+  ],
+  "confidence": "по материалам",
+  "comment": "mine/yours… и my vs mine; its не даётся"
+ },
+ {
+  "group": "10+",
+  "video": "Pr.Perfect already+just+yet+summer camp",
+  "subtopics": [
+   "Present Perfect: утверждение (have/has + V3)",
+   "Present Perfect: отрицание (haven't/hasn't)",
+   "Present Perfect: вопросы и краткие ответы",
+   "Present Perfect: слова-маркеры already / yet / just / ever / never",
+   "Present Perfect: значение — недавно завершённое действие (just)"
+  ],
+  "confidence": "по материалам",
+  "comment": "already/just/yet: утверждение, отрицание с yet, общий вопрос; краткие ответы нет"
+ },
+ {
+  "group": "10+",
+  "video": "Present Perfect Contin... eco-helping activities",
+  "subtopics": [
+   "Present Perfect Continuous: образование (have/has been + V-ing)",
+   "Present Perfect Continuous: значение — длительность до настоящего (since/for/how long)",
+   "Present Perfect Continuous: значение — видимый результат длительного действия"
+  ],
+  "confidence": "по материалам",
+  "comment": "Образование, длительность (How long), видимый результат; отрицаний нет"
+ },
+ {
+  "group": "10+",
+  "video": "Present Perfect for since + experiences",
+  "subtopics": [
+   "Present Perfect: утверждение (have/has + V3)",
+   "Present Perfect: вопросы и краткие ответы",
+   "Present Perfect: значение — с прошлого до настоящего (stative verbs, for/since)"
+  ],
+  "confidence": "по материалам",
+  "comment": "for/since, How long…?; отрицаний нет"
+ },
+ {
+  "group": "10+",
+  "video": "Present PerfectvsPast Simple+films",
+  "subtopics": [
+   "Present Perfect vs Past Simple: указанное время vs неуказанное время",
+   "Present Perfect: утверждение (have/has + V3)",
+   "Present Perfect: отрицание (haven't/hasn't)",
+   "Present Perfect: вопросы и краткие ответы",
+   "Present Perfect: значение — жизненный опыт, перемены (ever/never)",
+   "Present Perfect: слова-маркеры already / yet / just / ever / never"
+  ],
+  "confidence": "по материалам",
+  "comment": "PP vs PS: указанное vs неуказанное время, ever/never, маркеры"
+ },
+ {
+  "group": "10+",
+  "video": "Present Simple for shedules and timetables",
+  "subtopics": [
+   "Present Simple: значение — расписания и программы (будущее по расписанию)",
+   "Future forms: Present Simple — расписания и программы"
+  ],
+  "confidence": "по материалам",
+  "comment": "Present Simple для расписаний; вопросов/отрицаний нет"
+ },
+ {
+  "group": "10+",
+  "video": "Present Simple+Present Con-s+Clothes",
+  "subtopics": [
+   "Present Simple vs Present Continuous: привычка vs сейчас"
+  ],
+  "confidence": "по названию",
+  "comment": "PS vs PC (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Quantifiers extended ...d and drinks shopping",
+  "subtopics": [
+   "Quantifiers: a few/few vs a little/little",
+   "a few/a little: a few — с исчисляемыми мн. ч. («несколько»)",
+   "a few/a little: a little — с неисчисляемыми («немного»)",
+   "a few/a little: few / little — «мало»",
+   "a few/a little: a few vs few, a little vs little — «немного, но достаточно» vs «почти нет»",
+   "Partitives: a bottle/glass/carton/cup/bowl/packet/slice/loaf/kilo/bar of"
+  ],
+  "confidence": "по материалам",
+  "comment": "a few/few, a little/little, партитивы"
+ },
+ {
+  "group": "10+",
+  "video": "Reflexive pronouns",
+  "subtopics": [
+   "Reflexive pronouns: формы myself … themselves",
+   "Reflexive pronouns: подлежащее = дополнение (cut himself)",
+   "Reflexive pronouns: by myself — «сам, в одиночку»"
+  ],
+  "confidence": "по материалам",
+  "comment": "Формы, подлежащее = дополнение, by myself; эмфатическое не разбирается"
+ },
+ {
+  "group": "10+",
+  "video": "Road safety + imperatives",
+  "subtopics": [
+   "Imperative: утверждение — инфинитив без to",
+   "Imperative: отрицание — Don't + инфинитив",
+   "Imperative: значение — приказание"
+  ],
+  "confidence": "по материалам",
+  "comment": "Утверждение, Don't + V, команда; please нет"
+ },
+ {
+  "group": "10+",
+  "video": "Rules must-mustnt",
+  "subtopics": [
+   "Modal verbs: общие правила формы — без -s/-ing/-ed, + инфинитив без to",
+   "must/mustn't: must — обязанность, необходимость",
+   "must/mustn't: mustn't — запрет"
+  ],
+  "confidence": "по материалам",
+  "comment": "must/mustn't, без to и -s; вопросов нет"
+ },
+ {
+  "group": "10+",
+  "video": "Shopping .Articles.",
+  "subtopics": [
+   "Articles: a/an — первое упоминание, значение «один»",
+   "Articles: the — известный, упомянутый ранее предмет",
+   "Articles: нулевой артикль — мн. ч. и неисчисляемые в общем значении",
+   "a/an: неопределённый артикль — только с исчисляемыми в ед. ч.",
+   "a/an: a перед согласной, an перед гласной"
+  ],
+  "confidence": "по материалам",
+  "comment": "a/an по звуку, the, нулевой артикль"
+ },
+ {
+  "group": "10+",
+  "video": "Shopping. Articles.",
+  "subtopics": [
+   "Articles: a/an — первое упоминание, значение «один»",
+   "Articles: the — известный, упомянутый ранее предмет",
+   "a/an: неопределённый артикль — только с исчисляемыми в ед. ч.",
+   "a/an: a перед согласной, an перед гласной"
+  ],
+  "confidence": "по материалам",
+  "comment": "a/an, the; нулевой артикль не вводится"
+ },
+ {
+  "group": "10+",
+  "video": "Shouldn't + safety and crime prevention",
+  "subtopics": [
+   "should/shouldn't: значение — совет, рекомендация; утверждение should + глагол без to",
+   "should/shouldn't: отрицание — shouldn't",
+   "should/shouldn't: вопросы — Should I…?"
+  ],
+  "confidence": "по материалам",
+  "comment": "should/shouldn't, Should I…?"
+ },
+ {
+  "group": "10+",
+  "video": "Stative verbs + perception and feelings",
+  "subtopics": [
+   "Stative verbs: глаголы состояния не употребляются в Continuous",
+   "Stative verbs: группы глаголов (восприятие, мышление, чувства, прочие)",
+   "Stative verbs: разное значение в Simple и Continuous (think, have, see, taste…)"
+  ],
+  "confidence": "по материалам",
+  "comment": "Глаголы состояния и двойные значения; только утверждения"
+ },
+ {
+  "group": "10+",
+  "video": "Stative verbs.Preceive+feelings.",
+  "subtopics": [
+   "Stative verbs: глаголы состояния не употребляются в Continuous",
+   "Stative verbs: группы глаголов (восприятие, мышление, чувства, прочие)",
+   "Stative verbs: разное значение в Simple и Continuous (think, have, see, taste…)"
+  ],
+  "confidence": "по материалам",
+  "comment": "То же, вероятный дубль видео 84"
+ },
+ {
+  "group": "10+",
+  "video": "Tense overview (Prese...mple, Present Perfect)",
+  "subtopics": [
+   "Present Simple: значение — регулярные действия, распорядок дня, привычки",
+   "Past Simple: значение — действие в прошлом (yesterday, ago)",
+   "Past Simple: значение — действие в указанное время в прошлом",
+   "Present Perfect: утверждение (have/has + V3)",
+   "Present Perfect: значение — жизненный опыт, перемены (ever/never)",
+   "Present Perfect: слова-маркеры already / yet / just / ever / never",
+   "Present Perfect: значение — с прошлого до настоящего (stative verbs, for/since)",
+   "Present Perfect vs Past Simple: указанное время vs неуказанное время"
+  ],
+  "confidence": "по материалам",
+  "comment": "Обзор PS / Past Simple / Present Perfect, в основном утверждения"
+ },
+ {
+  "group": "10+",
+  "video": "Tenses overview 1",
+  "subtopics": [
+   "Present Simple: значение — регулярные действия, распорядок дня, привычки",
+   "Past Simple: значение — действие в прошлом (yesterday, ago)",
+   "Past Simple: значение — действие в указанное время в прошлом",
+   "Present Perfect: утверждение (have/has + V3)",
+   "Present Perfect: значение — жизненный опыт, перемены (ever/never)",
+   "Present Perfect: слова-маркеры already / yet / just / ever / never",
+   "Present Perfect: значение — с прошлого до настоящего (stative verbs, for/since)",
+   "Present Perfect vs Past Simple: указанное время vs неуказанное время"
+  ],
+  "confidence": "по материалам",
+  "comment": "То же, вероятный дубль видео 86"
+ },
+ {
+  "group": "10+",
+  "video": "Used to + infinitive + vanished things",
+  "subtopics": [
+   "used to: значение — прошлые привычки и регулярные действия",
+   "used to: значение — прошлые состояния, которых больше нет"
+  ],
+  "confidence": "по материалам",
+  "comment": "used to: все три формы, привычки и состояния; would и be used to нет"
+ },
+ {
+  "group": "10+",
+  "video": "Weekend fun + linkers",
+  "subtopics": [
+   "Linkers: слова-связки времени (and, then, after that, when, before, later)"
+  ],
+  "confidence": "по названию",
+  "comment": "Связки (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Your schedule + Prese...ous for future meaning",
+  "subtopics": [
+   "Present Continuous: значение — запланированное будущее",
+   "Future forms: Present Continuous — договорённости на ближайшее будущее"
+  ],
+  "confidence": "по материалам",
+  "comment": "PC для договорённостей, только утверждения"
+ },
+ {
+  "group": "10+",
+  "video": "Adverbs of degree + p...ance and relationships",
+  "subtopics": [
+   "Adverbs of degree: сильная степень — really, very, extremely",
+   "Adverbs of degree: средняя степень — pretty, quite, rather",
+   "Adverbs of degree: слабая степень — a little, a bit"
+  ],
+  "confidence": "по названию",
+  "comment": "Наречия степени (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Articles review + travel and holidays",
+  "subtopics": [
+   "Articles: a/an — первое упоминание, значение «один»",
+   "Articles: the — известный, упомянутый ранее предмет",
+   "Articles: нулевой артикль — мн. ч. и неисчисляемые в общем значении",
+   "Articles: the — уникальные объекты, музыкальные инструменты, исторические события",
+   "Articles: the и нулевой — географические названия",
+   "Articles: нулевой артикль — имена, спорт, дни, месяцы, праздники, цвета, напитки, еда, языки",
+   "a/an: неопределённый артикль — только с исчисляемыми в ед. ч.",
+   "a/an: a перед согласной, an перед гласной"
+  ],
+  "confidence": "по материалам",
+  "comment": "a/an, the, нулевой артикль, страны/города, уникальные объекты"
+ },
+ {
+  "group": "10+",
+  "video": "Educaiton + mixed conditionals",
+  "subtopics": [],
+  "confidence": "по названию",
+  "comment": "Смешанных условных в плане 10+ нет (есть только типы 0–3)"
+ },
+ {
+  "group": "10+",
+  "video": "Farm animals+irregular plurals",
+  "subtopics": [
+   "Plurals (irregular): man — men, child — children, tooth — teeth, foot — feet, mouse — mice"
+  ],
+  "confidence": "по названию",
+  "comment": "Неправильное мн. ч. (по названию; материалы 7–9 — sheep/geese/mice)"
+ },
+ {
+  "group": "10+",
+  "video": "Fashion trends+Causative have",
+  "subtopics": [
+   "Causative: форма have + object + V3",
+   "Causative: значение — действие выполняет кто-то другой для подлежащего"
+  ],
+  "confidence": "по названию",
+  "comment": "have something done (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Future tenses + school and jobs",
+  "subtopics": [
+   "Future forms: обзор всех способов выражения будущего",
+   "Future forms: Future Continuous/Future Perfect в системе будущих форм",
+   "Future Continuous: образование (will be + V-ing)",
+   "Future Continuous: значение — действие в процессе в момент будущего",
+   "Future Perfect: образование (will have + V3)",
+   "Future Perfect: значение — завершится к моменту в будущем",
+   "Future Simple (will): значение — предсказание/предположение",
+   "Future Simple (will): значение — решение в момент речи",
+   "Future forms: Present Continuous — договорённости на ближайшее будущее",
+   "Future forms: Present Simple — расписания и программы",
+   "Future forms: will vs be going to — решение в момент речи vs план",
+   "Future forms: will vs be going to — прогноз-мнение vs прогноз по признакам",
+   "be going to: значение — планы и намерения",
+   "be going to: значение — предсказание по очевидным признакам",
+   "be going to vs will: план/признаки vs решение в момент речи/мнение"
+  ],
+  "confidence": "по материалам",
+  "comment": "То же, что видео 57, вероятный дубль"
+ },
+ {
+  "group": "10+",
+  "video": "Gerunds and infinitives, experiences",
+  "subtopics": [
+   "-ing form: после глаголов admit, avoid, consider, deny, fancy, go, imagine, mind, miss, practise, suggest…",
+   "-ing form: после like, love, enjoy, prefer, dislike, hate — общее предпочтение",
+   "-ing form: после выражений it's no use, it's (not) worth, can't help, there's no point…",
+   "-ing form: после предлогов (look forward to, be used to, object to…)",
+   "to-infinitive: цель",
+   "to-infinitive: после agree, decide, expect, hope, plan, promise, refuse, want",
+   "to-infinitive: после прилагательных (happy, eager, kind, lucky…); It was kind of you to…",
+   "Expressing preference: prefer + noun/-ing to noun/-ing — общее предпочтение"
+  ],
+  "confidence": "по материалам",
+  "comment": "Герундий после enjoy/avoid/предлогов, инфинитив после want/decide, цели, прилагательных; prefer"
+ },
+ {
+  "group": "10+",
+  "video": "Get be used to + Global issues",
+  "subtopics": [
+   "used to: значение — прошлые привычки и регулярные действия",
+   "used to: значение — прошлые состояния, которых больше нет"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только used to; be/get used to в материалах нет"
+ },
+ {
+  "group": "10+",
+  "video": "Holidays + Word formation",
+  "subtopics": [
+   "Word formation: -ful, -able",
+   "Word formation: -ful"
+  ],
+  "confidence": "по материалам",
+  "comment": "Только -ful и -able"
+ },
+ {
+  "group": "10+",
+  "video": "Inventions + Past PerfectPast Perfect Cont",
+  "subtopics": [
+   "Past Perfect: образование (had + V3)",
+   "Past Perfect: значение — действие до другого действия/момента в прошлом",
+   "Past Perfect Continuous: образование (had been + V-ing)",
+   "Past Perfect Continuous: значение — длительность до другого прошлого действия"
+  ],
+  "confidence": "по материалам",
+  "comment": "Past Perfect и Past Perfect Continuous: образование и значение"
+ },
+ {
+  "group": "10+",
+  "video": "Media Modals of advice",
+  "subtopics": [
+   "should/shouldn't: значение — совет, рекомендация; утверждение should + глагол без to",
+   "Modal verbs: значение — совет (should / ought to / shall)"
+  ],
+  "confidence": "по названию",
+  "comment": "Модальные для совета (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Present Simple Present Continuous + Clothes",
+  "subtopics": [
+   "Present Simple vs Present Continuous: привычка vs сейчас"
+  ],
+  "confidence": "по названию",
+  "comment": "PS vs PC (по названию), вероятный дубль видео 76"
+ },
+ {
+  "group": "10+",
+  "video": "Present tenses (review...cter and relationships",
+  "subtopics": [
+   "Present Simple: значение — регулярные действия, распорядок дня, привычки",
+   "Present Simple: значение — постоянные состояния и действия",
+   "Present Continuous: значение — действие сейчас (now)",
+   "Present Continuous: значение — действие в настоящий период (these days)",
+   "Present Continuous: значение — временные ситуации",
+   "Present Perfect: значение — результат в настоящем",
+   "Present Perfect: значение — с прошлого до настоящего (stative verbs, for/since)",
+   "Present Perfect Continuous: значение — длительность до настоящего (since/for/how long)",
+   "Stative verbs: глаголы состояния не употребляются в Continuous",
+   "Present Perfect vs Present Perfect Continuous: stative verbs — только Present Perfect"
+  ],
+  "confidence": "по материалам",
+  "comment": "Обзор 4 настоящих времён + глаголы состояния"
+ },
+ {
+  "group": "10+",
+  "video": "Quantifiers extended + travel",
+  "subtopics": [
+   "Quantifiers: a few/few vs a little/little",
+   "Quantifiers: hardly any",
+   "a few/a little: a few — с исчисляемыми мн. ч. («несколько»)",
+   "a few/a little: a little — с неисчисляемыми («немного»)",
+   "a few/a little: few / little — «мало»",
+   "a few/a little: a few vs few, a little vs little — «немного, но достаточно» vs «почти нет»",
+   "Determiners: both — о двух, глагол во мн. ч.",
+   "Determiners: either / neither (+ of)",
+   "Determiners: all — о более чем двух; all + that-clause",
+   "Determiners: none / none of",
+   "Determiners: whole vs all (the whole morning = all morning)",
+   "Determiners (every/each): every + ед. ч. — вся группа (= all)",
+   "Determiners (every/each): each + ед. ч. — каждый в отдельности",
+   "Quantifiers: every vs each",
+   "Indefinite pronouns: производные — люди, вещи, места (somebody, anything, nowhere)",
+   "Indefinite pronouns: some- — в утверждениях",
+   "Indefinite pronouns: any- — в вопросах",
+   "Indefinite pronouns: not any- в отрицаниях; any после without, never, rarely",
+   "Indefinite pronouns: no- вместо not any (глагол утвердительный)",
+   "Indefinite pronouns: hardly any"
+  ],
+  "confidence": "по материалам",
+  "comment": "Расширенные квантификаторы, both/either/neither, every/each, some-/any-/no-"
+ },
+ {
+  "group": "10+",
+  "video": "Science, word formation (adjectives)",
+  "subtopics": [
+   "Word formation: forming adjectives"
+  ],
+  "confidence": "по названию",
+  "comment": "Образование прилагательных (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Shopping+Present Per...nt Perfect Continuous",
+  "subtopics": [
+   "Present Perfect: утверждение (have/has + V3)",
+   "Present Perfect Continuous: образование (have/has been + V-ing)",
+   "Present Perfect vs Present Perfect Continuous: результат vs длительность",
+   "Present Perfect vs Present Perfect Continuous: результат завершённого действия vs следы процесса"
+  ],
+  "confidence": "по материалам",
+  "comment": "PP (результат) vs PPC (процесс), только утверждения"
+ },
+ {
+  "group": "10+",
+  "video": "Singular vs plural no... countable uncountable",
+  "subtopics": [
+   "Countable / Uncountable: различие исчисляемых и неисчисляемых",
+   "Countable / Uncountable: неисчисляемые — еда и жидкости",
+   "Countable / Uncountable: количество с неисчисляемыми (a jar of, a bottle of)",
+   "Countable / Uncountable: существительные без ед. числа (clothes, jeans)",
+   "Countable / Uncountable: неисчисляемые без a/an, глагол в ед. ч.",
+   "Countable / Uncountable: собирательные (family, team) и составные (homework, countryside)",
+   "Partitives: a bottle/glass/carton/cup/bowl/packet/slice/loaf/kilo/bar of",
+   "Plurals (irregular): существительные только во мн. ч. (jeans, scissors)",
+   "Plurals (only plural / collective nouns): только мн. ч. — одежда, приборы, инструменты, people, stairs",
+   "Plurals (only plural / collective nouns): собирательные (team, family, police) — глагол в ед. или мн. ч.",
+   "much/many/a lot of: How much? / How many?"
+  ],
+  "confidence": "по материалам",
+  "comment": "C/U, plural-only, collective, партитивы, How much/many"
+ },
+ {
+  "group": "10+",
+  "video": "Socializing+forming nouns from verbs",
+  "subtopics": [
+   "Word formation: nouns from verbs"
+  ],
+  "confidence": "по названию",
+  "comment": "Существительные от глаголов (по названию)"
+ },
+ {
+  "group": "10+",
+  "video": "Sport + Conditionals 0-1",
+  "subtopics": [
+   "Conditionals Type 0: форма If/When + Present Simple — Present Simple",
+   "Conditionals Type 0: значение — общие истины, научные факты",
+   "Conditionals Type 1: форма If + Present Simple — will + V",
+   "Conditionals Type 1: значение — реальная/вероятная ситуация в настоящем/будущем"
+  ],
+  "confidence": "по материалам",
+  "comment": "Тип 0 и 1 на лексике спорта"
+ },
+ {
+  "group": "10+",
+  "video": "Sport+Compound adjectives.",
+  "subtopics": [
+   "Word formation: compound adjectives"
+  ],
+  "confidence": "по материалам",
+  "comment": "Сложные прилагательные"
+ },
+ {
+  "group": "10+",
+  "video": "Too + Enough + clothes",
+  "subtopics": [
+   "too / enough: too + прил./нареч. — чрезмерность",
+   "too / enough: прил./нареч. + enough — достаточность"
+  ],
+  "confidence": "по материалам",
+  "comment": "too + прил., прил. + enough; enough + сущ. и to-inf нет"
+ },
+ {
+  "group": "10+",
+  "video": "Travelling Phrasal Verbs",
+  "subtopics": [
+   "Phrasal verbs: get",
+   "Phrasal verbs: set",
+   "Phrasal verbs: take",
+   "Phrasal verbs: check"
+  ],
+  "confidence": "по материалам",
+  "comment": "Частично: get on/off/in/out, set off, take off, check in; та же папка, что видео 66"
+ }
+]
