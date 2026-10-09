@@ -11,6 +11,7 @@ from build import D, header, body
 
 OUT = os.path.join(D, 'Вебинары_опись.xlsx')
 FILL = {'7-9': PatternFill('solid', fgColor='FCE4D6'), '10+': PatternFill('solid', fgColor='DDEBF7')}
+VID = {'есть': PatternFill('solid', fgColor='C6EFCE'), 'нет': PatternFill('solid', fgColor='FFC7CE')}
 KIND = {'грамматика': PatternFill('solid', fgColor='E2EFDA'), 'лексика': PatternFill('solid', fgColor='FFF2CC')}
 
 
@@ -40,6 +41,12 @@ def role(name, mime):
 
 def main():
     items = json.load(open(os.path.join(D, 'data', 'webinars.json')))
+    vmap = {}
+    p = os.path.join(D, 'data', 'video_map.json')
+    if os.path.exists(p):
+        for v in json.load(open(p)):
+            vmap.setdefault((v['group'], v['folder']), []).append(v)
+    lists = {g: os.path.exists(os.path.join(D, 'data', f'videos_{g}.txt')) for g in ('7-9', '10+')}
     wb = Workbook()
     ws = wb.active; ws.title = 'Как читать'
     for line in [
@@ -47,8 +54,8 @@ def main():
         '',
         'Строка = папка вебинара. «Название» — точное имя папки: так же будут называться видео, по нему потом сопоставляем.',
         '«Что разбирается» — по материалам внутри папки (план урока, презентация, самостоятельная): объём темы — формы, лица, значения, чего нет; замечания (дубли, ошибки, файлы не на месте).',
-        '«Видео в папке» — есть ли видео/аудио файл в папке сейчас (на момент описи — ни в одной).',
-        'Листы: «7-9», «10+» и «Все» (с фильтрами).',
+        '«Видео» / «Название видео» — есть ли запись вебинара (по списку видео от методиста; в самих папках видеофайлов нет). Сопоставление названий видео и папок — data/video_map.json; спорные места — в «Замечание к видео». «нет данных» — список видео этой группы ещё не прислан.',
+        'Листы: «7-9», «10+», «Все» (с фильтрами) и «Видео без папки» — записи, к которым не нашлось папки с материалами.',
     ]:
         ws.append([line])
     ws['A1'].font = Font(bold=True, size=14)
@@ -56,8 +63,8 @@ def main():
     for row in ws.iter_rows(min_row=2):
         row[0].alignment = Alignment(wrap_text=True)
 
-    cols = ['№', 'Группа', 'Название (как папка)', 'Тип', 'Тема (англ.)', 'Что разбирается', 'Материалы в папке', 'Видео в папке', 'Ссылка на папку']
-    W = [5, 7, 36, 11, 26, 90, 34, 9, 18]
+    cols = ['№', 'Группа', 'Название (как папка)', 'Видео', 'Название видео', 'Тип', 'Тема (англ.)', 'Что разбирается', 'Материалы в папке', 'Замечание к видео', 'Ссылка на папку']
+    W = [5, 7, 36, 9, 34, 11, 26, 90, 34, 30, 12]
     def sheet(title, rs):
         w = wb.create_sheet(title)
         header(w, cols, W)
@@ -66,20 +73,31 @@ def main():
             mats = '\n'.join(f"{role(f['name'], f.get('mimeType', ''))}: {f['name']}" for f in e['files'])
             url = f"https://drive.google.com/drive/folders/{e['folder_id']}"
             name = e['path'].split('/', 1)[1] if '/' in e['path'] else e['folder']
-            w.append([i, e['group'], name, e['kind'], e['topic'], e['comment'], mats,
-                      'есть' if e['has_video'] else 'нет', 'открыть'])
-            c = w.cell(row=w.max_row, column=9)
+            vs = vmap.get((e['group'], e['folder']), [])
+            have = 'есть' if vs or e['has_video'] else ('нет' if lists[e['group']] else 'нет данных')
+            w.append([i, e['group'], name, have, '\n'.join(v['video'] for v in vs), e['kind'], e['topic'], e['comment'], mats,
+                      '\n'.join(v['note'] for v in vs if v['note']), 'открыть'])
+            c = w.cell(row=w.max_row, column=11)
             c.hyperlink = url
             c.font = Font(color='0563C1', underline='single')
         body(w)
         for row in w.iter_rows(min_row=2):
             row[1].fill = FILL.get(row[1].value, PatternFill())
             row[2].font = Font(bold=True)
-            row[3].fill = KIND.get(row[3].value, PatternFill())
+            row[5].fill = KIND.get(row[5].value, PatternFill())
+            row[3].fill = VID.get(row[3].value, PatternFill())
         w.auto_filter.ref = w.dimensions
     for g in ('7-9', '10+'):
         sheet(g, [e for e in items if e['group'] == g])
     sheet('Все', items)
+    w = wb.create_sheet('Видео без папки')
+    header(w, ['Группа', 'Название видео'], [8, 50])
+    folders = {(e['group'], e['folder']) for e in items}
+    p = os.path.join(D, 'data', 'video_map.json')
+    for v in (json.load(open(p)) if os.path.exists(p) else []):
+        if (v['group'], v['folder']) not in folders:
+            w.append([v['group'], v['video']])
+    body(w)
     wb.save(OUT)
     print(OUT, {g: sum(e['group'] == g for e in items) for g in ('7-9', '10+')})
 
