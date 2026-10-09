@@ -91,12 +91,12 @@ def main():
         sheet(g, [e for e in items if e['group'] == g])
     sheet('Все', items)
     w = wb.create_sheet('Видео без папки')
-    header(w, ['Группа', 'Название видео'], [8, 50])
+    header(w, ['Группа', 'Название видео', 'Замечание'], [8, 50, 70])
     folders = {(e['group'], e['folder']) for e in items}
     p = os.path.join(D, 'data', 'video_map.json')
     for v in (json.load(open(p)) if os.path.exists(p) else []):
         if (v['group'], v['folder']) not in folders:
-            w.append([v['group'], v['video']])
+            w.append([v['group'], v['video'], v['note']])
     body(w)
     wb.save(OUT)
     print(OUT, {g: sum(e['group'] == g for e in items) for g in ('7-9', '10+')})
