@@ -1,0 +1,1046 @@
+[
+{
+"term": "alphabet",
+"translation": "алфавит",
+"deck": "Starter Unit · в школе и счёт",
+"folder": "Starter Unit"
+},
+{
+"term": "count",
+"translation": "считать, подсчитывать",
+"deck": "Starter Unit · в школе и счёт",
+"folder": "Starter Unit"
+},
+{
+"term": "date",
+"translation": "дата",
+"deck": "Starter Unit · в школе и счёт",
+"folder": "Starter Unit"
+},
+{
+"term": "equals",
+"translation": "равняется",
+"deck": "Starter Unit · в школе и счёт",
+"folder": "Starter Unit"
+},
+{
+"term": "minus",
+"translation": "минус",
+"deck": "Starter Unit · в школе и счёт",
+"folder": "Starter Unit"
+},
+{
+"term": "number",
+"translation": "число",
+"deck": "Starter Unit · в школе и счёт",
+"folder": "Starter Unit"
+},
+{
+"term": "plus",
+"translation": "плюс",
+"deck": "Starter Unit · в школе и счёт",
+"folder": "Starter Unit"
+},
+{
+"term": "pupil",
+"translation": "ученик",
+"deck": "Starter Unit · в школе и счёт",
+"folder": "Starter Unit"
+},
+{
+"term": "question",
+"translation": "вопрос",
+"deck": "Starter Unit · в школе и счёт",
+"folder": "Starter Unit"
+},
+{
+"term": "reading rules",
+"translation": "правила чтения",
+"deck": "Starter Unit · в школе и счёт",
+"folder": "Starter Unit"
+},
+{
+"term": "right",
+"translation": "правильный",
+"deck": "Starter Unit · в школе и счёт",
+"folder": "Starter Unit"
+},
+{
+"term": "sky",
+"translation": "небо",
+"deck": "Starter Unit · животные и природа",
+"folder": "Starter Unit"
+},
+{
+"term": "game",
+"translation": "игра",
+"deck": "Starter Unit · игрушки и одежда",
+"folder": "Starter Unit"
+},
+{
+"term": "yacht",
+"translation": "яхта",
+"deck": "Starter Unit · игрушки и одежда",
+"folder": "Starter Unit"
+},
+{
+"term": "brown",
+"translation": "коричневый",
+"deck": "Starter Unit · цвета",
+"folder": "Starter Unit"
+},
+{
+"term": "colour",
+"translation": "цвет",
+"deck": "Starter Unit · цвета",
+"folder": "Starter Unit"
+},
+{
+"term": "grey",
+"translation": "серый",
+"deck": "Starter Unit · цвета",
+"folder": "Starter Unit"
+},
+{
+"term": "rainbow",
+"translation": "радуга",
+"deck": "Starter Unit · цвета",
+"folder": "Starter Unit"
+},
+{
+"term": "crayon",
+"translation": "цветной карандаш",
+"deck": "Starter Unit · школьные принадлежности",
+"folder": "Starter Unit"
+},
+{
+"term": "ink",
+"translation": "чернила",
+"deck": "Starter Unit · школьные принадлежности",
+"folder": "Starter Unit"
+},
+{
+"term": "paper clips",
+"translation": "скрепки",
+"deck": "Starter Unit · школьные принадлежности",
+"folder": "Starter Unit"
+},
+{
+"term": "sharpener",
+"translation": "точилка",
+"deck": "Starter Unit · школьные принадлежности",
+"folder": "Starter Unit"
+},
+{
+"term": "flag",
+"translation": "флаг",
+"deck": "Starter Unit · другие слова",
+"folder": "Starter Unit"
+},
+{
+"term": "now",
+"translation": "сейчас",
+"deck": "Starter Unit · другие слова",
+"folder": "Starter Unit"
+},
+{
+"term": "friend",
+"translation": "друг",
+"deck": "Starter Unit · места и люди",
+"folder": "Starter Unit"
+},
+{
+"term": "girl",
+"translation": "девочка",
+"deck": "Starter Unit · места и люди",
+"folder": "Starter Unit"
+},
+{
+"term": "I",
+"translation": "я",
+"deck": "Starter Unit · места и люди",
+"folder": "Starter Unit"
+},
+{
+"term": "queen",
+"translation": "королева",
+"deck": "Starter Unit · места и люди",
+"folder": "Starter Unit"
+},
+{
+"term": "eat",
+"translation": "есть",
+"deck": "Starter Unit · действия",
+"folder": "Starter Unit"
+},
+{
+"term": "finish",
+"translation": "финиш, окончание; заканчивать",
+"deck": "Starter Unit · действия",
+"folder": "Starter Unit"
+},
+{
+"term": "have got",
+"translation": "иметь",
+"deck": "Starter Unit · действия",
+"folder": "Starter Unit"
+},
+{
+"term": "know",
+"translation": "знать",
+"deck": "Starter Unit · действия",
+"folder": "Starter Unit"
+},
+{
+"term": "look",
+"translation": "смотреть",
+"deck": "Starter Unit · действия",
+"folder": "Starter Unit"
+},
+{
+"term": "say",
+"translation": "сказать",
+"deck": "Starter Unit · действия",
+"folder": "Starter Unit"
+},
+{
+"term": "sleep",
+"translation": "спать",
+"deck": "Starter Unit · действия",
+"folder": "Starter Unit"
+},
+{
+"term": "start",
+"translation": "начинать",
+"deck": "Starter Unit · действия",
+"folder": "Starter Unit"
+},
+{
+"term": "walk",
+"translation": "ходить, гулять",
+"deck": "Starter Unit · действия",
+"folder": "Starter Unit"
+},
+{
+"term": "please",
+"translation": "пожалуйста",
+"deck": "Starter Unit · фразы",
+"folder": "Starter Unit"
+},
+{
+"term": "Hello!",
+"translation": "Здравствуйте!",
+"deck": "Starter Unit · фразы",
+"folder": "Starter Unit"
+},
+{
+"term": "Hi!",
+"translation": "Привет!",
+"deck": "Starter Unit · фразы",
+"folder": "Starter Unit"
+},
+{
+"term": "What's your name?",
+"translation": "Как тебя зовут?",
+"deck": "Starter Unit · фразы",
+"folder": "Starter Unit"
+},
+{
+"term": "My name's ...",
+"translation": "Меня зовут ...",
+"deck": "Starter Unit · фразы",
+"folder": "Starter Unit"
+},
+{
+"term": "How are you?",
+"translation": "Как дела?",
+"deck": "Starter Unit · фразы",
+"folder": "Starter Unit"
+},
+{
+"term": "I'm fine, thanks.",
+"translation": "Спасибо, хорошо.",
+"deck": "Starter Unit · фразы",
+"folder": "Starter Unit"
+},
+{
+"term": "Goodbye! Bye!",
+"translation": "До свидания! Пока!",
+"deck": "Starter Unit · фразы",
+"folder": "Starter Unit"
+},
+{
+"term": "Where are you from?",
+"translation": "Откуда ты (из какой страны, города)?",
+"deck": "Starter Unit · фразы",
+"folder": "Starter Unit"
+},
+{
+"term": "favourite",
+"translation": "любимый",
+"deck": "1a School! · школьные предметы",
+"folder": "Module 1: School days"
+},
+{
+"term": "information technology (IT)",
+"translation": "информационные технологии",
+"deck": "1a School! · школьные предметы",
+"folder": "Module 1: School days"
+},
+{
+"term": "physical education (PE)",
+"translation": "физическое воспитание",
+"deck": "1a School! · школьные предметы",
+"folder": "Module 1: School days"
+},
+{
+"term": "subject",
+"translation": "предмет",
+"deck": "1a School! · школьные предметы",
+"folder": "Module 1: School days"
+},
+{
+"term": "atlas",
+"translation": "атлас",
+"deck": "1a School! · в школе",
+"folder": "Module 1: School days"
+},
+{
+"term": "notepad",
+"translation": "блокнот",
+"deck": "1a School! · в школе",
+"folder": "Module 1: School days"
+},
+{
+"term": "school objects",
+"translation": "предметы школьного обихода",
+"deck": "1a School! · в школе",
+"folder": "Module 1: School days"
+},
+{
+"term": "student",
+"translation": "учащийся",
+"deck": "1a School! · в школе",
+"folder": "Module 1: School days"
+},
+{
+"term": "days of the week",
+"translation": "дни недели",
+"deck": "1a School! · дни недели",
+"folder": "Module 1: School days"
+},
+{
+"term": "best",
+"translation": "лучший",
+"deck": "1b First day! · другие слова и фразы",
+"folder": "Module 1: School days"
+},
+{
+"term": "grade",
+"translation": "класс",
+"deck": "1b First day! · другие слова и фразы",
+"folder": "Module 1: School days"
+},
+{
+"term": "then",
+"translation": "затем",
+"deck": "1b First day! · другие слова и фразы",
+"folder": "Module 1: School days"
+},
+{
+"term": "together",
+"translation": "вместе",
+"deck": "1b First day! · другие слова и фразы",
+"folder": "Module 1: School days"
+},
+{
+"term": "Excuse me, ...",
+"translation": "Простите, ... Извините, ...",
+"deck": "1b First day! · другие слова и фразы",
+"folder": "Module 1: School days"
+},
+{
+"term": "How do you spell it?",
+"translation": "Как это пишется? Как ты это произносишь по буквам?",
+"deck": "1b First day! · другие слова и фразы",
+"folder": "Module 1: School days"
+},
+{
+"term": "How old are you?",
+"translation": "Сколько тебе лет?",
+"deck": "1b First day! · другие слова и фразы",
+"folder": "Module 1: School days"
+},
+{
+"term": "Let's go!",
+"translation": "Пошли! Давай пойдём!",
+"deck": "1b First day! · другие слова и фразы",
+"folder": "Module 1: School days"
+},
+{
+"term": "eighteen",
+"translation": "восемнадцать",
+"deck": "1b First day! · числа",
+"folder": "Module 1: School days"
+},
+{
+"term": "eleven",
+"translation": "одиннадцать",
+"deck": "1b First day! · числа",
+"folder": "Module 1: School days"
+},
+{
+"term": "fifteen",
+"translation": "пятнадцать",
+"deck": "1b First day! · числа",
+"folder": "Module 1: School days"
+},
+{
+"term": "fourteen",
+"translation": "четырнадцать",
+"deck": "1b First day! · числа",
+"folder": "Module 1: School days"
+},
+{
+"term": "nineteen",
+"translation": "девятнадцать",
+"deck": "1b First day! · числа",
+"folder": "Module 1: School days"
+},
+{
+"term": "seventeen",
+"translation": "семнадцать",
+"deck": "1b First day! · числа",
+"folder": "Module 1: School days"
+},
+{
+"term": "sixteen",
+"translation": "шестнадцать",
+"deck": "1b First day! · числа",
+"folder": "Module 1: School days"
+},
+{
+"term": "twelve",
+"translation": "двенадцать",
+"deck": "1b First day! · числа",
+"folder": "Module 1: School days"
+},
+{
+"term": "thirteen",
+"translation": "тринадцать",
+"deck": "1b First day! · числа",
+"folder": "Module 1: School days"
+},
+{
+"term": "twenty",
+"translation": "двадцать",
+"deck": "1b First day! · числа",
+"folder": "Module 1: School days"
+},
+{
+"term": "capital letter",
+"translation": "прописная буква",
+"deck": "1c My favourite subjects",
+"folder": "Module 1: School days"
+},
+{
+"term": "country",
+"translation": "страна",
+"deck": "1c My favourite subjects",
+"folder": "Module 1: School days"
+},
+{
+"term": "full stop",
+"translation": "точка",
+"deck": "1c My favourite subjects",
+"folder": "Module 1: School days"
+},
+{
+"term": "language",
+"translation": "язык",
+"deck": "1c My favourite subjects",
+"folder": "Module 1: School days"
+},
+{
+"term": "other",
+"translation": "другой",
+"deck": "1c My favourite subjects",
+"folder": "Module 1: School days"
+},
+{
+"term": "secondary school",
+"translation": "средняя школа",
+"deck": "1c My favourite subjects",
+"folder": "Module 1: School days"
+},
+{
+"term": "subject choice form",
+"translation": "анкета (форма) выбора предметов",
+"deck": "1c My favourite subjects",
+"folder": "Module 1: School days"
+},
+{
+"term": "What class is he in?",
+"translation": "В каком он классе?",
+"deck": "1c My favourite subjects",
+"folder": "Module 1: School days"
+},
+{
+"term": "What subjects does he do?",
+"translation": "Какие предметы он изучает?",
+"deck": "1c My favourite subjects",
+"folder": "Module 1: School days"
+},
+{
+"term": "corner",
+"translation": "угол, уголок",
+"deck": "1d Culture Corner: Schools in England",
+"folder": "Module 1: School days"
+},
+{
+"term": "culture",
+"translation": "культура",
+"deck": "1d Culture Corner: Schools in England",
+"folder": "Module 1: School days"
+},
+{
+"term": "diagram",
+"translation": "диаграмма",
+"deck": "1d Culture Corner: Schools in England",
+"folder": "Module 1: School days"
+},
+{
+"term": "education system",
+"translation": "образовательная система",
+"deck": "1d Culture Corner: Schools in England",
+"folder": "Module 1: School days"
+},
+{
+"term": "primary school",
+"translation": "начальная школа",
+"deck": "1d Culture Corner: Schools in England",
+"folder": "Module 1: School days"
+},
+{
+"term": "Sixth Form",
+"translation": "старшие классы (Великобритания)",
+"deck": "1d Culture Corner: Schools in England",
+"folder": "Module 1: School days"
+},
+{
+"term": "type",
+"translation": "тип, вид",
+"deck": "1d Culture Corner: Schools in England",
+"folder": "Module 1: School days"
+},
+{
+"term": "Good afternoon!",
+"translation": "Добрый день!",
+"deck": "English in Use 1",
+"folder": "Module 1: School days"
+},
+{
+"term": "Good evening!",
+"translation": "Добрый вечер!",
+"deck": "English in Use 1",
+"folder": "Module 1: School days"
+},
+{
+"term": "Good morning!",
+"translation": "Доброе утро!",
+"deck": "English in Use 1",
+"folder": "Module 1: School days"
+},
+{
+"term": "Good night!",
+"translation": "Спокойной ночи!",
+"deck": "English in Use 1",
+"folder": "Module 1: School days"
+},
+{
+"term": "See you (later)!",
+"translation": "Увидимся (позже)!",
+"deck": "English in Use 1",
+"folder": "Module 1: School days"
+},
+{
+"term": "See you tomorrow!",
+"translation": "До завтра!",
+"deck": "English in Use 1",
+"folder": "Module 1: School days"
+},
+{
+"term": "ask",
+"translation": "спрашивать",
+"deck": "Across the Curriculum 1: Citizenship",
+"folder": "Module 1: School days"
+},
+{
+"term": "citizenship",
+"translation": "гражданство; граждановедение",
+"deck": "Across the Curriculum 1: Citizenship",
+"folder": "Module 1: School days"
+},
+{
+"term": "mime",
+"translation": "изображать мимикой и жестами",
+"deck": "Across the Curriculum 1: Citizenship",
+"folder": "Module 1: School days"
+},
+{
+"term": "smile",
+"translation": "улыбаться",
+"deck": "Across the Curriculum 1: Citizenship",
+"folder": "Module 1: School days"
+},
+{
+"term": "thank",
+"translation": "благодарить",
+"deck": "Across the Curriculum 1: Citizenship",
+"folder": "Module 1: School days"
+},
+{
+"term": "work",
+"translation": "работать",
+"deck": "Across the Curriculum 1: Citizenship",
+"folder": "Module 1: School days"
+},
+{
+"term": "alone",
+"translation": "один, в одиночку",
+"deck": "Across the Curriculum 1: Citizenship",
+"folder": "Module 1: School days"
+},
+{
+"term": "in groups",
+"translation": "в группах",
+"deck": "Across the Curriculum 1: Citizenship",
+"folder": "Module 1: School days"
+},
+{
+"term": "in pairs",
+"translation": "в парах",
+"deck": "Across the Curriculum 1: Citizenship",
+"folder": "Module 1: School days"
+},
+{
+"term": "can",
+"translation": "мочь; уметь",
+"deck": "2a I'm from… · описание и действия",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "cartoon character",
+"translation": "персонаж мультфильма",
+"deck": "2a I'm from… · описание и действия",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "evil",
+"translation": "злой",
+"deck": "2a I'm from… · описание и действия",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "powers",
+"translation": "силы",
+"deck": "2a I'm from… · описание и действия",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "special",
+"translation": "особенный",
+"deck": "2a I'm from… · описание и действия",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "stop",
+"translation": "останавливать(ся)",
+"deck": "2a I'm from… · описание и действия",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "who",
+"translation": "кто",
+"deck": "2a I'm from… · описание и действия",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "American",
+"translation": "американский; американец",
+"deck": "2a I'm from… · страны и национальности",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "Australian",
+"translation": "австралийский; австралиец",
+"deck": "2a I'm from… · страны и национальности",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "British",
+"translation": "британский; британец",
+"deck": "2a I'm from… · страны и национальности",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "Canadian",
+"translation": "канадский; канадец",
+"deck": "2a I'm from… · страны и национальности",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "Japanese",
+"translation": "японский; японец",
+"deck": "2a I'm from… · страны и национальности",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "live",
+"translation": "жить",
+"deck": "2a I'm from… · страны и национальности",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "nationality",
+"translation": "национальность",
+"deck": "2a I'm from… · страны и национальности",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "New Zealander",
+"translation": "житель Новой Зеландии",
+"deck": "2a I'm from… · страны и национальности",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "people",
+"translation": "люди",
+"deck": "2a I'm from… · страны и национальности",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "next door",
+"translation": "по соседству",
+"deck": "2a I'm from… · страны и национальности",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "speak English",
+"translation": "разговаривать по-английски",
+"deck": "2a I'm from… · страны и национальности",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "basketball",
+"translation": "баскетбольный мяч",
+"deck": "2b My things! · личные вещи",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "personal things",
+"translation": "личные вещи",
+"deck": "2b My things! · личные вещи",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "thing",
+"translation": "вещь, предмет",
+"deck": "2b My things! · личные вещи",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "Happy birthday!",
+"translation": "С днём рождения!",
+"deck": "2b My things! · личные вещи",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "man (pl: men)",
+"translation": "человек, мужчина",
+"deck": "2b My things! · необычное множественное число",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "woman (pl: women)",
+"translation": "женщина",
+"deck": "2b My things! · необычное множественное число",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "album",
+"translation": "альбом",
+"deck": "2c My collection · коллекции и описание",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "but",
+"translation": "но",
+"deck": "2c My collection · коллекции и описание",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "because",
+"translation": "потому что",
+"deck": "2c My collection · коллекции и описание",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "coin",
+"translation": "монета",
+"deck": "2c My collection · коллекции и описание",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "collection",
+"translation": "коллекция",
+"deck": "2c My collection · коллекции и описание",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "great",
+"translation": "большой, великий, отличный",
+"deck": "2c My collection · коллекции и описание",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "picture",
+"translation": "картинка",
+"deck": "2c My collection · коллекции и описание",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "stamp",
+"translation": "марка",
+"deck": "2c My collection · коллекции и описание",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "be proud of",
+"translation": "гордиться чем-либо, кем-либо",
+"deck": "2c My collection · коллекции и описание",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "double decker",
+"translation": "двухэтажный автобус",
+"deck": "2d Culture Corner: Souvenirs from Great Britain",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "holidays",
+"translation": "каникулы",
+"deck": "2d Culture Corner: Souvenirs from Great Britain",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "Northern Irish",
+"translation": "ирландец (житель Северной Ирландии)",
+"deck": "2d Culture Corner: Souvenirs from Great Britain",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "pin",
+"translation": "значок (зд.)",
+"deck": "2d Culture Corner: Souvenirs from Great Britain",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "Scottish",
+"translation": "шотландский",
+"deck": "2d Culture Corner: Souvenirs from Great Britain",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "shamrock",
+"translation": "трилистник (эмблема Ирландии)",
+"deck": "2d Culture Corner: Souvenirs from Great Britain",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "souvenir",
+"translation": "сувенир",
+"deck": "2d Culture Corner: Souvenirs from Great Britain",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "stuffed toy",
+"translation": "мягкая игрушка",
+"deck": "2d Culture Corner: Souvenirs from Great Britain",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "tartan",
+"translation": "шерстяная клетчатая материя",
+"deck": "2d Culture Corner: Souvenirs from Great Britain",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "Union Jack",
+"translation": "флаг Великобритании",
+"deck": "2d Culture Corner: Souvenirs from Great Britain",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "Welsh",
+"translation": "валлийский, валлиец (житель Уэльса)",
+"deck": "2d Culture Corner: Souvenirs from Great Britain",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "bell",
+"translation": "колокольчик",
+"deck": "English in Use 2",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "customer",
+"translation": "покупатель, клиент",
+"deck": "English in Use 2",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "key ring",
+"translation": "брелок для ключей",
+"deck": "English in Use 2",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "thermos flask",
+"translation": "термос",
+"deck": "English in Use 2",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "Here you are.",
+"translation": "Вот, пожалуйста.",
+"deck": "English in Use 2",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "How about ...?",
+"translation": "Как насчёт ... ?",
+"deck": "English in Use 2",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "How can I help you?",
+"translation": "Чем я могу помочь?",
+"deck": "English in Use 2",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "How much is it?",
+"translation": "Сколько это стоит?",
+"deck": "English in Use 2",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "I want to buy ... .",
+"translation": "Я хочу купить ... .",
+"deck": "English in Use 2",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "That's a good idea.",
+"translation": "Это хорошая идея.",
+"deck": "English in Use 2",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "continent",
+"translation": "континент, материк",
+"deck": "Across the Curriculum 2: Geography",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "English-speaking countries",
+"translation": "англоговорящие страны",
+"deck": "Across the Curriculum 2: Geography",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "hole",
+"translation": "отверстие, дырка",
+"deck": "Across the Curriculum 2: Geography",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "quiz",
+"translation": "викторина",
+"deck": "Across the Curriculum 2: Geography",
+"folder": "Module 2: That's me!"
+},
+{
+"term": "letter",
+"translation": "письмо",
+"deck": "3a At home · объявление о продаже",
+"folder": "Module 3: My home, my castle"
+},
+{
+"term": "number (of)",
+"translation": "количество",
+"deck": "3a At home · объявление о продаже",
+"folder": "Module 3: My home, my castle"
+},
+{
+"term": "pay",
+"translation": "платить",
+"deck": "3a At home · объявление о продаже",
+"folder": "Module 3: My home, my castle"
+},
+{
+"term": "for sale",
+"translation": "на продажу",
+"deck": "3a At home · объявление о продаже",
+"folder": "Module 3: My home, my castle"
+},
+{
+"term": "reception room",
+"translation": "зал для приёма гостей",
+"deck": "3a At home · комнаты",
+"folder": "Module 3: My home, my castle"
+},
+{
+"term": "great",
+"translation": "великий, большой, отличный",
+"deck": "3a At home · описание",
+"folder": "Module 3: My home, my castle"
+},
+{
+"term": "own",
+"translation": "собственный",
+"deck": "3a At home · описание",
+"folder": "Module 3: My home, my castle"
+},
+{
+"term": "view",
+"translation": "вид",
+"deck": "3a At home · описание",
+"folder": "Module 3: My home, my castle"
+},
+{
+"term": "villa",
+"translation": "вилла",
+"deck": "3a At home · дом и этажи",
+"folder": "Module 3: My home, my castle"
+},
+{
+"term": "live high up",
+"translation": "жить на верхних этажах",
+"deck": "3a At home · дом и этажи",
+"folder": "Module 3: My home, my castle"
+},
+{
+"term": "appliance",
+"translation": "бытовой прибор, устройство",
+"deck": "3b Move in! · кухня, ванная и фразы",
+"folder": "Module 3: My home, my castle"
+},
+{
+"term": "washbasin",
+"translation": "раковина (в ванной)",
+"deck": "3b Move in! · кухня, ванная и фразы",
+"folder": "Module 3: My home, my castle"
+}
+]
