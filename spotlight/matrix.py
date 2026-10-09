@@ -19,8 +19,8 @@ from build import D, CATS, LEX, load_rows, sort_rows, modnum, header, body, BOX,
 
 OUT = os.path.join(D, 'Spotlight_темы_уроков.xlsx')
 
-# 7–9 лет — 1–3 класс; Spotlight начинается со 2-го. С 4 класса (9–10 лет) — группа 10+.
-JUNIOR = {2, 3}
+# 7–9 лет — Spotlight 2–4 (4 класс — по решению методиста: его темы идут в вебинарах 7–9). 10+ — с 5 класса.
+JUNIOR = {2, 3, 4}
 GROUPS = ['7–9', '10+']
 def group(g):
     return '7–9' if g in JUNIOR else '10+'
@@ -29,6 +29,7 @@ FILL = {'7–9': PatternFill('solid', fgColor='FCE4D6'), '10+': PatternFill('sol
 GREY = PatternFill('solid', fgColor='EDEDED')
 YES = PatternFill('solid', fgColor='C6EFCE')
 NO = PatternFill('solid', fgColor='FFC7CE')
+SOON = PatternFill('solid', fgColor='FFEB9C')
 
 WF = [  # модели словообразования, когда в строке нет явных суффиксов
     ('national', 'national'), ('compound noun', 'compound nouns'), ('сложные существ', 'compound nouns'),
@@ -114,6 +115,10 @@ def main():
     p = os.path.join(D, 'data', 'videos.json')
     if os.path.exists(p):
         videos = json.load(open(p))
+    planned = {}
+    p = os.path.join(D, 'data', 'planned.json')
+    if os.path.exists(p):
+        planned = json.load(open(p))
 
     first = {}
     for n, u in units.items():
@@ -134,8 +139,8 @@ def main():
         '«Темы × классы»: строка = подтема (один короткий урок: видео → правило → мини-тест). Подтемы сгруппированы по темам: Past Simple делится на правильные/неправильные глаголы, утверждение, отрицание, вопросы, орфографию, каждое значение; сравнения времён — отдельными подтемами.',
         'В клетке класса — где в учебнике (М9 (9b) = Module 9, урок 9b) и статус: «новое» — подтема в Spotlight впервые; «расш.» — была, здесь добавлено; «повт.» — дана снова. Наведите на клетку — во всплывающей подсказке что именно дано (лица, слова-сигналы, список глаголов).',
         'Цвет клетки: оттенок = группа вебинара (оранжевый 7–9 лет, голубой 10+), насыщенность = статус (ярче — новое, бледнее — повторение).',
-        'Группы вебинаров: 7–9 лет = 1–3 класс → Spotlight 2–3 (у Spotlight 2 нет грамматического справочника, поэтому 2 класса нет). 10+ = Spotlight 4–11; 4 класс (9–10 лет) отнесён к 10+.',
-        '«Видео 7–9» / «Видео 10+»: «есть» / «нет» (выпадающий список), рядом — название или ссылка вебинара. «—» — подтема этой группе не нужна.',
+        'Группы вебинаров: 7–9 лет = Spotlight 2–4 (у Spotlight 2 нет грамматического справочника, поэтому 2 класса нет; 4 класс — в группе 7–9, его темы идут в вебинарах 7–9). 10+ = Spotlight 5–11.',
+        '«Видео 7–9» / «Видео 10+»: «есть» — запись уже есть (рядом названия видео); «будет» — вебинар по теме проведён или стоит в расписании, запись появится (рядом дата и тема) — такие темы для новых вебинаров не берём; «нет» — видео нет и не запланировано, кандидаты в следующие вебинары. «—» — подтема этой группе не нужна.',
         '«Уроки»: один урок = подтема × группа. Если подтема повторяется в нескольких классах одной группы, это один и тот же урок (Мл-… для 7–9 лет, Ст-… для 10+): в колонке «Где используется» — все классы и модули. Видео подтягивается из «Темы × классы»; «Готовность» отмечается здесь.',
         '«Папки уроков»: Spotlight / класс / модуль / тема (папка) / подтема — какой урок (№) куда положить. Видео и готовность подтягиваются из «Уроков».',
         '«Пересечения»: одна и та же вещь в двух-трёх темах — где предлагаю держать урок, где поставить ссылку.',
@@ -159,7 +164,7 @@ def main():
     ws.freeze_panes = 'F2'
     G0 = 7
     V = G0 + len(grades)
-    dv = DataValidation(type='list', formula1='"есть,нет"', allow_blank=True)
+    dv = DataValidation(type='list', formula1='"есть,будет,нет"', allow_blank=True)
     ws.add_data_validation(dv)
     prev = None
     mrow = {}
@@ -181,7 +186,9 @@ def main():
         for gname in GROUPS:
             need = grp in (gname, 'обе')
             have = videos.get(n, {}).get(gname, '')
-            vid += [('есть' if have else 'нет') if need else '—', have if need else '']
+            plan = planned.get(n, {}).get(gname, '')
+            st = 'есть' if have else ('будет' if plan else 'нет')
+            vid += [st if need else '—', (have or plan) if need else '']
         ws.append([i, u['block'], u['cat'], u['topic'], n, grp] + cells + vid + [''])
         r = ws.max_row
         mrow[n] = r
@@ -219,6 +226,7 @@ def main():
         rng = f'{col}2:{col}{last}'
         ws.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"есть"'], fill=YES))
         ws.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"нет"'], fill=NO))
+        ws.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"будет"'], fill=SOON))
     ws.auto_filter.ref = ws.dimensions
     vcol = {g: ws.cell(row=1, column=V + 2 * k).column_letter for k, g in enumerate(GROUPS)}
     wcol = {g: ws.cell(row=1, column=V + 2 * k + 1).column_letter for k, g in enumerate(GROUPS)}
@@ -275,6 +283,7 @@ def main():
         rng = f'{col}2:{col}{wsl.max_row}'
         wsl.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"есть"'], fill=YES))
         wsl.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"нет"'], fill=NO))
+        wsl.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"будет"'], fill=SOON))
     wsl.auto_filter.ref = wsl.dimensions
 
     # --- Папки уроков: куда кладётся каждый урок
@@ -307,6 +316,7 @@ def main():
     rng = f'J2:J{ws2.max_row}'
     ws2.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"есть"'], fill=YES))
     ws2.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"нет"'], fill=NO))
+    ws2.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"будет"'], fill=SOON))
     ws2.auto_filter.ref = ws2.dimensions
 
     # --- Пересечения
@@ -327,14 +337,15 @@ def main():
 
     # --- Итоги
     ws3 = wb.create_sheet('Итоги')
-    header(ws3, ['Группа', 'Классы', 'Уроков сделать', 'Видео есть', 'Видео нет', 'Готовы', 'Опубликованы',
+    header(ws3, ['Группа', 'Классы', 'Уроков сделать', 'Видео есть', 'Видео будет (вебинар в расписании)', 'Видео нет', 'Готовы', 'Опубликованы',
                  'Мест в папках (урок × класс × модуль)'],
-           [10, 16, 12, 11, 11, 10, 13, 20])
+           [10, 16, 12, 11, 16, 11, 10, 13, 20])
     for gname in GROUPS:
         cls = ', '.join(str(g) for g in grades if group(g) == gname) or '—'
         ws3.append([gname, cls,
                     f'=COUNTIF({L}!B:B,"{gname}")',
                     f'=COUNTIFS({L}!B:B,"{gname}",{L}!H:H,"есть")',
+                    f'=COUNTIFS({L}!B:B,"{gname}",{L}!H:H,"будет")',
                     f'=COUNTIFS({L}!B:B,"{gname}",{L}!H:H,"нет")',
                     f'=COUNTIFS({L}!B:B,"{gname}",{L}!J:J,"готов*")',
                     f'=COUNTIFS({L}!B:B,"{gname}",{L}!J:J,"опубликован")',

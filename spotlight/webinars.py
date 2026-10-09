@@ -46,6 +46,11 @@ def main():
     if os.path.exists(p):
         for v in json.load(open(p)):
             vmap.setdefault((v['group'], v['folder']), []).append(v)
+    sched = {}
+    for f in sorted(os.listdir(os.path.join(D, 'data'))):
+        if f.startswith('schedule_') and f.endswith('.json'):
+            for x in json.load(open(os.path.join(D, 'data', f))):
+                sched.setdefault((x['group'], x['folder']), []).append(x)
     lists = {g: os.path.exists(os.path.join(D, 'data', f'videos_{g}.txt')) for g in ('7-9', '10+')}
     wb = Workbook()
     ws = wb.active; ws.title = 'Как читать'
@@ -63,8 +68,8 @@ def main():
     for row in ws.iter_rows(min_row=2):
         row[0].alignment = Alignment(wrap_text=True)
 
-    cols = ['№', 'Группа', 'Название (как папка)', 'Видео', 'Название видео', 'Тип', 'Тема (англ.)', 'Что разбирается', 'Материалы в папке', 'Замечание к видео', 'Ссылка на папку']
-    W = [5, 7, 36, 9, 34, 11, 26, 90, 34, 30, 12]
+    cols = ['№', 'Группа', 'Название (как папка)', 'Видео', 'Название видео', 'Тип', 'Тема (англ.)', 'Что разбирается', 'Материалы в папке', 'Замечание к видео', 'В расписании', 'Ссылка на папку']
+    W = [5, 7, 36, 9, 34, 11, 26, 90, 34, 30, 22, 12]
     def sheet(title, rs):
         w = wb.create_sheet(title)
         header(w, cols, W)
@@ -76,8 +81,10 @@ def main():
             vs = vmap.get((e['group'], e['folder']), [])
             have = 'есть' if vs or e['has_video'] else ('нет' if lists[e['group']] else 'нет данных')
             w.append([i, e['group'], name, have, '\n'.join(v['video'] for v in vs), e['kind'], e['topic'], e['comment'], mats,
-                      '\n'.join(v['note'] for v in vs if v['note']), 'открыть'])
-            c = w.cell(row=w.max_row, column=11)
+                      '\n'.join(v['note'] for v in vs if v['note']),
+                      '\n'.join(f"{x['date'][8:10]}.{x['date'][5:7]} · {x['status']} · {x['teacher']}" for x in sched.get((e['group'], e['folder']), [])),
+                      'открыть'])
+            c = w.cell(row=w.max_row, column=12)
             c.hyperlink = url
             c.font = Font(color='0563C1', underline='single')
         body(w)
