@@ -43,6 +43,27 @@ def main():
             else:
                 d = v['kind'].split()[1]
                 add(planned, s, g, f"вебинар {d[8:10]}.{d[5:7]}: {v['name']}")
+    # материалы: папки вебинаров, которые закрывают подтему (с видео и без)
+    materials = {}
+    folder_of = {(v['group'], v['video']): v['folder'] for v in json.load(open(os.path.join(D, 'data', 'video_map.json')))}
+    for v in json.load(open(os.path.join(D, 'data', 'video_subtopics.json'))):
+        f = folder_of.get((v['group'], v['video']))
+        if v['group'] == '10+' and f and v['video'] not in EXCLUDE:
+            for s in v['subtopics']:
+                if s in valid['10+']:
+                    add(materials, s, '10+', f)
+    sched = {(x['group'], x['title']): x['folder'] for x in json.load(open(os.path.join(D, 'data', 'schedule_2026-10.json')))}
+    for v in json.load(open(os.path.join(D, 'data', 'remap_7-9_and_october.json'))):
+        g = '7–9' if v['group'] == '7-9' else '10+'
+        f = folder_of.get((v['group'], v['name'])) if v['kind'] == 'video' else sched.get((v['group'], v['name']))
+        if f and v['name'] not in EXCLUDE:
+            for s in v['subtopics']:
+                add(materials, s, g, f)
+    for v in json.load(open(os.path.join(D, 'data', 'folders_materials_only.json'))):
+        g = '7–9' if v['group'] == '7-9' else '10+'
+        for s in v['subtopics']:
+            add(materials, s, g, v['folder'])
+    json.dump(materials, open(os.path.join(D, 'data', 'materials.json'), 'w'), ensure_ascii=False, indent=1)
     json.dump(videos, open(os.path.join(D, 'data', 'videos.json'), 'w'), ensure_ascii=False, indent=1)
     json.dump(planned, open(os.path.join(D, 'data', 'planned.json'), 'w'), ensure_ascii=False, indent=1)
 
@@ -54,7 +75,7 @@ def main():
             v['folder'] = ''
             v['note'] = EXCLUDE[v['video']]
     json.dump(m, open(p, 'w'), ensure_ascii=False, indent=1)
-    print('subtopics with video:', len(videos), 'planned:', len(planned))
+    print('subtopics with video:', len(videos), 'planned:', len(planned), 'with materials:', len(materials))
 
 
 if __name__ == '__main__':

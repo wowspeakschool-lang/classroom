@@ -27,9 +27,11 @@ def group(g):
 
 FILL = {'7–9': PatternFill('solid', fgColor='FCE4D6'), '10+': PatternFill('solid', fgColor='DDEBF7')}
 GREY = PatternFill('solid', fgColor='EDEDED')
-YES = PatternFill('solid', fgColor='C6EFCE')
-NO = PatternFill('solid', fgColor='FFC7CE')
-SOON = PatternFill('solid', fgColor='FFEB9C')
+YES = PatternFill('solid', fgColor='92D050')
+NO = PatternFill('solid', fgColor='FF7C80')
+SOON = PatternFill('solid', fgColor='FFC000')
+STFILL = {'видео': YES, 'материалы': SOON, 'нет': NO}
+STRANK = {'нет': 0, 'материалы': 1, 'видео': 2}
 
 WF = [  # модели словообразования, когда в строке нет явных суффиксов
     ('national', 'national'), ('compound noun', 'compound nouns'), ('сложные существ', 'compound nouns'),
@@ -115,10 +117,23 @@ def main():
     p = os.path.join(D, 'data', 'videos.json')
     if os.path.exists(p):
         videos = json.load(open(p))
-    planned = {}
+    planned, materials = {}, {}
+    p = os.path.join(D, 'data', 'materials.json')
+    if os.path.exists(p):
+        materials = json.load(open(p))
     p = os.path.join(D, 'data', 'planned.json')
     if os.path.exists(p):
         planned = json.load(open(p))
+
+    def status(n, gname):
+        have = videos.get(n, {}).get(gname, '')
+        if have:
+            return 'видео', have
+        mat = materials.get(n, {}).get(gname, '')
+        plan = planned.get(n, {}).get(gname, '')
+        if mat or plan:
+            return 'материалы', '\n'.join(x for x in ('материалы: ' + mat.replace('\n', '; ') if mat else '', plan) if x)
+        return 'нет', ''
 
     first = {}
     for n, u in units.items():
@@ -140,12 +155,12 @@ def main():
         'В клетке класса — где в учебнике (М9 (9b) = Module 9, урок 9b) и статус: «новое» — подтема в Spotlight впервые; «расш.» — была, здесь добавлено; «повт.» — дана снова. Наведите на клетку — во всплывающей подсказке что именно дано (лица, слова-сигналы, список глаголов).',
         'Цвет клетки: оттенок = группа вебинара (оранжевый 7–9 лет, голубой 10+), насыщенность = статус (ярче — новое, бледнее — повторение).',
         'Группы вебинаров: 7–9 лет = Spotlight 2–4 (у Spotlight 2 нет грамматического справочника, поэтому 2 класса нет; 4 класс — в группе 7–9, его темы идут в вебинарах 7–9). 10+ = Spotlight 5–11.',
-        '«Видео 7–9» / «Видео 10+»: «есть» — запись уже есть (рядом названия видео); «будет» — вебинар по теме проведён или стоит в расписании, запись появится (рядом дата и тема) — такие темы для новых вебинаров не берём; «нет» — видео нет и не запланировано, кандидаты в следующие вебинары. «—» — подтема этой группе не нужна.',
+        'Цвет подтемы: ЗЕЛЁНЫЙ — есть видео; ОРАНЖЕВЫЙ — есть только материалы вебинара (папка на Диске), видео нет — сюда же вебинары из расписания, запись которых ещё не появилась; КРАСНЫЙ — ничего нет. Если подтема нужна обеим группам, цвет — по худшей из двух; по каждой группе — в колонках «Видео 7–9» / «Видео 10+» (видео / материалы / нет), рядом названия видео или папок и дата вебинара. «—» — подтема этой группе не нужна.',
         '«Уроки»: один урок = подтема × группа. Если подтема повторяется в нескольких классах одной группы, это один и тот же урок (Мл-… для 7–9 лет, Ст-… для 10+): в колонке «Где используется» — все классы и модули. Видео подтягивается из «Темы × классы»; «Готовность» отмечается здесь.',
         '«Папки уроков»: Spotlight / класс / модуль / тема (папка) / подтема — какой урок (№) куда положить. Видео и готовность подтягиваются из «Уроков».',
         '«Пересечения»: одна и та же вещь в двух-трёх темах — где предлагаю держать урок, где поставить ссылку.',
         'Утверждение, отрицание и вопрос разделены там, где книга даёт их по отдельности; где справочник даёт их вместе (модальные глаголы старших классов) — одна подтема.',
-        '«Кандидаты в вебинары»: по каждой группе — темы, где у подтем нет видео и нет вебинара в расписании; отсортировано по классу, где тема появляется. Из них выбираем следующие вебинары.',
+        '«Кандидаты в вебинары»: по каждой группе — темы с красными подтемами (нет ни видео, ни материалов); отсортировано по классу, где тема появляется. Из них выбираем следующие вебинары.',
         '«Итоги»: сколько уроков сделать каждой группе, у скольких есть видео, сколько готово и опубликовано.',
         '',
         'Источник: грамматический справочник учебников (Use of English — оглавление и приложения). Подробный объём по строкам — в Spotlight_грамматика.xlsx.',
@@ -165,7 +180,7 @@ def main():
     ws.freeze_panes = 'F2'
     G0 = 7
     V = G0 + len(grades)
-    dv = DataValidation(type='list', formula1='"есть,будет,нет"', allow_blank=True)
+    dv = DataValidation(type='list', formula1='"видео,материалы,нет"', allow_blank=True)
     ws.add_data_validation(dv)
     prev = None
     mrow = {}
@@ -186,10 +201,8 @@ def main():
         vid = []
         for gname in GROUPS:
             need = grp in (gname, 'обе')
-            have = videos.get(n, {}).get(gname, '')
-            plan = planned.get(n, {}).get(gname, '')
-            st = 'есть' if have else ('будет' if plan else 'нет')
-            vid += [st if need else '—', (have or plan) if need else '']
+            st, txt = status(n, gname)
+            vid += [st if need else '—', txt if need else '']
         ws.append([i, u['block'], u['cat'], u['topic'], n, grp] + cells + vid + [''])
         r = ws.max_row
         mrow[n] = r
@@ -199,6 +212,8 @@ def main():
             c.alignment = WRAP
             c.border = Border(left=BOX.left, right=BOX.right, bottom=BOX.bottom, top=thick if newtopic else BOX.top)
         ws.cell(row=r, column=4).font = Font(bold=newtopic, color='000000' if newtopic else '888888')
+        sts = [status(n, gname)[0] for gname in GROUPS if grp in (gname, 'обе')]
+        ws.cell(row=r, column=5).fill = STFILL[min(sts, key=STRANK.get)]
         for j, g in enumerate(grades):
             es = u['cells'].get(g)
             if not es:
@@ -225,9 +240,9 @@ def main():
     for off in (0, 2):
         col = ws.cell(row=1, column=V + off).column_letter
         rng = f'{col}2:{col}{last}'
-        ws.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"есть"'], fill=YES))
+        ws.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"видео"'], fill=YES))
         ws.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"нет"'], fill=NO))
-        ws.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"будет"'], fill=SOON))
+        ws.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"материалы"'], fill=SOON))
     ws.auto_filter.ref = ws.dimensions
     vcol = {g: ws.cell(row=1, column=V + 2 * k).column_letter for k, g in enumerate(GROUPS)}
     wcol = {g: ws.cell(row=1, column=V + 2 * k + 1).column_letter for k, g in enumerate(GROUPS)}
@@ -280,11 +295,12 @@ def main():
     for row in wsl.iter_rows(min_row=2):
         row[0].fill = row[1].fill = PatternFill('solid', fgColor=LIGHT[row[1].value])
         row[0].font = row[4].font = Font(bold=True)
+        row[4].fill = STFILL[status(row[4].value, row[1].value)[0]]
     for col in ('H',):
         rng = f'{col}2:{col}{wsl.max_row}'
-        wsl.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"есть"'], fill=YES))
+        wsl.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"видео"'], fill=YES))
         wsl.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"нет"'], fill=NO))
-        wsl.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"будет"'], fill=SOON))
+        wsl.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"материалы"'], fill=SOON))
     wsl.auto_filter.ref = wsl.dimensions
 
     # --- Папки уроков: куда кладётся каждый урок
@@ -314,10 +330,11 @@ def main():
         pal = {3: STRONG, 2: MID, 1: LIGHT}[RANK.get(row[6].value, 1)]
         row[6].fill = PatternFill('solid', fgColor=pal[grp])
         row[4].font = Font(bold=True)
+        row[4].fill = STFILL[status(row[4].value, row[8].value)[0]]
     rng = f'J2:J{ws2.max_row}'
-    ws2.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"есть"'], fill=YES))
+    ws2.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"видео"'], fill=YES))
     ws2.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"нет"'], fill=NO))
-    ws2.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"будет"'], fill=SOON))
+    ws2.conditional_formatting.add(rng, CellIsRule(operator='equal', formula=['"материалы"'], fill=SOON))
     ws2.auto_filter.ref = ws2.dimensions
 
     # --- Пересечения
@@ -338,7 +355,7 @@ def main():
 
     # --- Кандидаты в вебинары: подтемы без видео и без вебинара в расписании, по темам
     wsk = wb.create_sheet('Кандидаты в вебинары')
-    header(wsk, ['Группа', 'Тема', 'С какого класса', 'Подтем без видео', 'из них новое в учебнике', 'Подтемы без видео', 'Уже есть / будет по теме'],
+    header(wsk, ['Группа', 'Тема', 'С какого класса', 'Подтем без ничего (красные)', 'из них новое в учебнике', 'Красные подтемы', 'Остальные подтемы темы'],
            [8, 30, 10, 10, 12, 70, 40])
     wsk.freeze_panes = 'C2'
     for gname in GROUPS:
@@ -350,9 +367,10 @@ def main():
                 continue
             t = bytopic.setdefault((u['block'], u['topic']), {'no': [], 'new': 0, 'have': 0, 'soon': 0, 'first': 99})
             t['first'] = min(t['first'], min(gs))
-            if videos.get(n, {}).get(gname):
+            st = status(n, gname)[0]
+            if st == 'видео':
                 t['have'] += 1
-            elif planned.get(n, {}).get(gname):
+            elif st == 'материалы':
                 t['soon'] += 1
             else:
                 t['no'].append(n.split(': ', 1)[-1])
@@ -362,7 +380,7 @@ def main():
             if not t['no']:
                 continue
             wsk.append([gname, topic, f"{t['first']} кл.", len(t['no']), t['new'], '\n'.join('• ' + x for x in t['no']),
-                        f"есть: {t['have']}, будет: {t['soon']}" if t['have'] or t['soon'] else ''])
+                        f"с видео: {t['have']}, только материалы: {t['soon']}" if t['have'] or t['soon'] else ''])
     body(wsk)
     for row in wsk.iter_rows(min_row=2):
         row[0].fill = PatternFill('solid', fgColor=LIGHT[row[0].value])
@@ -371,15 +389,15 @@ def main():
 
     # --- Итоги
     ws3 = wb.create_sheet('Итоги')
-    header(ws3, ['Группа', 'Классы', 'Уроков сделать', 'Видео есть', 'Видео будет (вебинар в расписании)', 'Видео нет', 'Готовы', 'Опубликованы',
+    header(ws3, ['Группа', 'Классы', 'Уроков сделать', 'Есть видео (зелёные)', 'Только материалы (оранжевые)', 'Ничего нет (красные)', 'Готовы', 'Опубликованы',
                  'Мест в папках (урок × класс × модуль)'],
            [10, 16, 12, 11, 16, 11, 10, 13, 20])
     for gname in GROUPS:
         cls = ', '.join(str(g) for g in grades if group(g) == gname) or '—'
         ws3.append([gname, cls,
                     f'=COUNTIF({L}!B:B,"{gname}")',
-                    f'=COUNTIFS({L}!B:B,"{gname}",{L}!H:H,"есть")',
-                    f'=COUNTIFS({L}!B:B,"{gname}",{L}!H:H,"будет")',
+                    f'=COUNTIFS({L}!B:B,"{gname}",{L}!H:H,"видео")',
+                    f'=COUNTIFS({L}!B:B,"{gname}",{L}!H:H,"материалы")',
                     f'=COUNTIFS({L}!B:B,"{gname}",{L}!H:H,"нет")',
                     f'=COUNTIFS({L}!B:B,"{gname}",{L}!J:J,"готов*")',
                     f'=COUNTIFS({L}!B:B,"{gname}",{L}!J:J,"опубликован")',
