@@ -66,10 +66,10 @@
   "7–9": "вебинар 22.10 (по расписанию): Some / any + Can I have some… + food"
  },
  "Possessive case ('s): 's в ед. ч. — принадлежность": {
-  "10+": "вебинар 23.10 (по расписанию): Possessive of vs 's"
+  "10+": "вебинар 23.10 (по расписанию): Possessive of vs 's\nвебинар 03.11 (по расписанию): Possessive adjectives + possessive case, Whose?"
  },
  "Possessive case ('s): мн. ч. — s' (the boys') и исключения 's (the children's)": {
-  "10+": "вебинар 23.10 (по расписанию): Possessive of vs 's"
+  "10+": "вебинар 23.10 (по расписанию): Possessive of vs 's\nвебинар 03.11 (по расписанию): Possessive adjectives + possessive case, Whose?"
  },
  "Possessive case ('s): of для неодушевлённых (the windows of the house)": {
   "10+": "вебинар 23.10 (по расписанию): Possessive of vs 's"
@@ -87,12 +87,224 @@
   "10+": "вебинар 27.10 (по расписанию): Tenses overview 2"
  },
  "Past Continuous: утверждение (was/were + V-ing)": {
-  "10+": "вебинар 27.10 (по расписанию): Tenses overview 2"
+  "10+": "вебинар 27.10 (по расписанию): Tenses overview 2\nвебинар 24.11 (по расписанию): Narrative tenses + history"
  },
  "Past Simple vs Past Continuous: прерванное (PC) и прерывающее (PS) действие": {
   "10+": "вебинар 27.10 (по расписанию): Tenses overview 2"
  },
  "Comparatives & Superlatives: сравнительная степень — -er + than": {
   "7–9": "вебинар 29.10 (по расписанию): Comparatives vs Superlatives"
+ },
+ "to be (Present): отрицание — am not / isn't / aren't": {
+  "7–9": "вебинар 02.11 (по расписанию): To be (am/is/are): отрицание и вопросы"
+ },
+ "to be (Present): вопросы и краткие ответы": {
+  "7–9": "вебинар 02.11 (по расписанию): To be (am/is/are): отрицание и вопросы"
+ },
+ "can (ability): значение — умение; утверждение can + глагол без to": {
+  "7–9": "вебинар 05.11 (по расписанию): Can / can't + body parts"
+ },
+ "can (ability): отрицание — cannot / can't": {
+  "7–9": "вебинар 05.11 (по расписанию): Can / can't + body parts"
+ },
+ "can (ability): вопросы и краткие ответы": {
+  "7–9": "вебинар 05.11 (по расписанию): Can / can't + body parts"
+ },
+ "Present Simple: общие вопросы (Do/Does …?)": {
+  "7–9": "вебинар 09.11 (по расписанию): Present Simple: вопросы и краткие ответы"
+ },
+ "Present Simple: краткие ответы (Yes, I do / No, he doesn't)": {
+  "7–9": "вебинар 09.11 (по расписанию): Present Simple: вопросы и краткие ответы"
+ },
+ "Present Simple: орфография окончания -s/-es (3 л. ед. ч.)": {
+  "7–9": "вебинар 09.11 (по расписанию): Present Simple: вопросы и краткие ответы"
+ },
+ "Present Continuous: отрицание (I'm not / isn't / aren't)": {
+  "7–9": "вебинар 12.11 (по расписанию): Present Continuous: отрицание и вопросы"
+ },
+ "Present Continuous: общие вопросы (Am/Is/Are …?)": {
+  "7–9": "вебинар 12.11 (по расписанию): Present Continuous: отрицание и вопросы"
+ },
+ "Present Continuous: краткие ответы (Yes, I am / No, he isn't)": {
+  "7–9": "вебинар 12.11 (по расписанию): Present Continuous: отрицание и вопросы"
+ },
+ "to be (Past): отрицание — wasn't / weren't": {
+  "7–9": "вебинар 16.11 (по расписанию): Was / were: отрицание и вопросы"
+ },
+ "to be (Past): вопросы и краткие ответы": {
+  "7–9": "вебинар 16.11 (по расписанию): Was / were: отрицание и вопросы"
+ },
+ "Past Simple: неправильные глаголы — отрицание (didn't go)": {
+  "7–9": "вебинар 19.11 (по расписанию): Past Simple: неправильные глаголы — отрицание и вопросы"
+ },
+ "Past Simple: неправильные глаголы — вопросы (Did … go?)": {
+  "7–9": "вебинар 19.11 (по расписанию): Past Simple: неправильные глаголы — отрицание и вопросы"
+ },
+ "Past Simple: орфография -ed": {
+  "7–9": "вебинар 19.11 (по расписанию): Past Simple: неправильные глаголы — отрицание и вопросы"
+ },
+ "Past Simple: произношение -ed (/t/, /d/, /ɪd/)": {
+  "7–9": "вебинар 19.11 (по расписанию): Past Simple: неправильные глаголы — отрицание и вопросы"
+ },
+ "must/mustn't: must — обязанность, необходимость": {
+  "7–9": "вебинар 23.11 (по расписанию): Must / mustn't + school rules"
+ },
+ "must/mustn't: mustn't — запрет": {
+  "7–9": "вебинар 23.11 (по расписанию): Must / mustn't + school rules"
+ },
+ "be going to: отрицание": {
+  "7–9": "вебинар 26.11 (по расписанию): Be going to: отрицание и вопросы",
+  "10+": "вебинар 10.11 (по расписанию): Be going to: отрицание, вопросы, предсказания"
+ },
+ "be going to: вопросы и краткие ответы": {
+  "7–9": "вебинар 26.11 (по расписанию): Be going to: отрицание и вопросы",
+  "10+": "вебинар 10.11 (по расписанию): Be going to: отрицание, вопросы, предсказания"
+ },
+ "Future Simple (will): отрицание (will not/won't)": {
+  "7–9": "вебинар 30.11 (по расписанию): Will: отрицание, вопросы, решения и обещания",
+  "10+": "вебинар 06.11 (по расписанию): Will (Future Simple): формы и значения"
+ },
+ "Future Simple (will): вопросы и краткие ответы": {
+  "7–9": "вебинар 30.11 (по расписанию): Will: отрицание, вопросы, решения и обещания",
+  "10+": "вебинар 06.11 (по расписанию): Will (Future Simple): формы и значения"
+ },
+ "Future Simple (will): значение — решение в момент речи": {
+  "7–9": "вебинар 30.11 (по расписанию): Will: отрицание, вопросы, решения и обещания"
+ },
+ "Future Simple (will): значение — обещания": {
+  "7–9": "вебинар 30.11 (по расписанию): Will: отрицание, вопросы, решения и обещания",
+  "10+": "вебинар 06.11 (по расписанию): Will (Future Simple): формы и значения"
+ },
+ "Possessive adjectives: формы my, your, his, her, its, our, their": {
+  "10+": "вебинар 03.11 (по расписанию): Possessive adjectives + possessive case, Whose?"
+ },
+ "Possessive adjectives: значение — принадлежность и отношения между людьми": {
+  "10+": "вебинар 03.11 (по расписанию): Possessive adjectives + possessive case, Whose?"
+ },
+ "Possessive case ('s): вопрос Whose?": {
+  "10+": "вебинар 03.11 (по расписанию): Possessive adjectives + possessive case, Whose?"
+ },
+ "Possessive adjectives: обязательны с частями тела, одеждой, родственниками (vs русский)": {
+  "10+": "вебинар 03.11 (по расписанию): Possessive adjectives + possessive case, Whose?"
+ },
+ "Possessive case ('s): имена на -s — 's или только апостроф": {
+  "10+": "вебинар 03.11 (по расписанию): Possessive adjectives + possessive case, Whose?"
+ },
+ "Future Simple (will): утверждение (will/'ll + V)": {
+  "10+": "вебинар 06.11 (по расписанию): Will (Future Simple): формы и значения"
+ },
+ "Future Simple (will): значение — просьбы (Will you…?)": {
+  "10+": "вебинар 06.11 (по расписанию): Will (Future Simple): формы и значения"
+ },
+ "Future Simple (will): значение — угрозы и предупреждения": {
+  "10+": "вебинар 06.11 (по расписанию): Will (Future Simple): формы и значения"
+ },
+ "Future Simple (will): значение — ещё не решили/не уверены (Maybe I'll…)": {
+  "10+": "вебинар 06.11 (по расписанию): Will (Future Simple): формы и значения"
+ },
+ "Future Simple (will): Shall I/we? — предложение, просьба о совете": {
+  "10+": "вебинар 06.11 (по расписанию): Will (Future Simple): формы и значения"
+ },
+ "be going to: утверждение (am/is/are going to + V)": {
+  "10+": "вебинар 10.11 (по расписанию): Be going to: отрицание, вопросы, предсказания"
+ },
+ "be going to: значение — планы и намерения": {
+  "10+": "вебинар 10.11 (по расписанию): Be going to: отрицание, вопросы, предсказания"
+ },
+ "be going to: значение — предсказание по очевидным признакам": {
+  "10+": "вебинар 10.11 (по расписанию): Be going to: отрицание, вопросы, предсказания"
+ },
+ "be going to vs will: план/признаки vs решение в момент речи/мнение": {
+  "10+": "вебинар 10.11 (по расписанию): Be going to: отрицание, вопросы, предсказания"
+ },
+ "Future forms: will vs be going to — прогноз-мнение vs прогноз по признакам": {
+  "10+": "вебинар 10.11 (по расписанию): Be going to: отрицание, вопросы, предсказания"
+ },
+ "be going to: значение — уже принятое решение на ближайшее будущее": {
+  "10+": "вебинар 10.11 (по расписанию): Be going to: отрицание, вопросы, предсказания"
+ },
+ "Question tags: there is → is there?": {
+  "10+": "вебинар 13.11 (по расписанию): Question tags: особые случаи"
+ },
+ "Question tags: never/hardly/seldom/rarely → утвердительный хвост": {
+  "10+": "вебинар 13.11 (по расписанию): Question tags: особые случаи"
+ },
+ "Question tags: I am → aren't I?": {
+  "10+": "вебинар 13.11 (по расписанию): Question tags: особые случаи"
+ },
+ "Question tags: Let's → shall we? / Let me → will you?": {
+  "10+": "вебинар 13.11 (по расписанию): Question tags: особые случаи"
+ },
+ "Question tags: повелительное наклонение → will you?": {
+  "10+": "вебинар 13.11 (по расписанию): Question tags: особые случаи"
+ },
+ "Present Perfect: вопросы и краткие ответы": {
+  "10+": "вебинар 17.11 (по расписанию): Present Perfect: Have you ever + неправильные глаголы"
+ },
+ "Present Perfect: V3 неправильных глаголов": {
+  "10+": "вебинар 17.11 (по расписанию): Present Perfect: Have you ever + неправильные глаголы"
+ },
+ "Present Perfect: значение — жизненный опыт, перемены (ever/never)": {
+  "10+": "вебинар 17.11 (по расписанию): Present Perfect: Have you ever + неправильные глаголы"
+ },
+ "-ing form: после like, love, enjoy, prefer, dislike, hate — общее предпочтение": {
+  "10+": "вебинар 17.11 (по расписанию): Present Perfect: Have you ever + неправильные глаголы"
+ },
+ "Present Perfect: утверждение (have/has + V3)": {
+  "10+": "вебинар 17.11 (по расписанию): Present Perfect: Have you ever + неправильные глаголы"
+ },
+ "Present Perfect vs Past Simple: указанное время vs неуказанное время": {
+  "10+": "вебинар 17.11 (по расписанию): Present Perfect: Have you ever + неправильные глаголы"
+ },
+ "Present Perfect: V3 правильных глаголов (-ed, орфография)": {
+  "10+": "вебинар 17.11 (по расписанию): Present Perfect: Have you ever + неправильные глаголы"
+ },
+ "Present Perfect: значение — незаконченный период (today, this week, so far)": {
+  "10+": "вебинар 17.11 (по расписанию): Present Perfect: Have you ever + неправильные глаголы"
+ },
+ "should/shouldn't: ought to (= should)": {
+  "10+": "вебинар 20.11 (по расписанию): Should / shouldn't, ought to, had better"
+ },
+ "should/shouldn't: значение — обязательство, долг (слабая обязанность)": {
+  "10+": "вебинар 20.11 (по расписанию): Should / shouldn't, ought to, had better"
+ },
+ "should/shouldn't: значение — критика (should / should have V3)": {
+  "10+": "вебинар 20.11 (по расписанию): Should / shouldn't, ought to, had better"
+ },
+ "should/shouldn't: Shall I…? — просьба о совете": {
+  "10+": "вебинар 20.11 (по расписанию): Should / shouldn't, ought to, had better"
+ },
+ "should/shouldn't: Shall I…? — предложение помощи": {
+  "10+": "вебинар 20.11 (по расписанию): Should / shouldn't, ought to, had better"
+ },
+ "should/shouldn't: had better (= should)": {
+  "10+": "вебинар 20.11 (по расписанию): Should / shouldn't, ought to, had better"
+ },
+ "Past Simple: значение — последовательные действия": {
+  "10+": "вебинар 24.11 (по расписанию): Narrative tenses + history"
+ },
+ "Past Continuous: значение — фон и атмосфера в рассказе": {
+  "10+": "вебинар 24.11 (по расписанию): Narrative tenses + history"
+ },
+ "Past Perfect: образование (had + V3)": {
+  "10+": "вебинар 24.11 (по расписанию): Narrative tenses + history"
+ },
+ "Past Perfect: значение — действие до другого действия/момента в прошлом": {
+  "10+": "вебинар 24.11 (по расписанию): Narrative tenses + history"
+ },
+ "Conditionals Type 2: форма If + Past Simple — would/could/might + V": {
+  "10+": "вебинар 27.11 (по расписанию): Conditionals 2 и 3 + health"
+ },
+ "Conditionals Type 2: значение — воображаемая/маловероятная ситуация в настоящем/будущем": {
+  "10+": "вебинар 27.11 (по расписанию): Conditionals 2 и 3 + health"
+ },
+ "Conditionals Type 3: форма If + Past Perfect — would/could/might have + V3": {
+  "10+": "вебинар 27.11 (по расписанию): Conditionals 2 и 3 + health"
+ },
+ "Conditionals Type 3: значение — нереальная ситуация в прошлом": {
+  "10+": "вебинар 27.11 (по расписанию): Conditionals 2 и 3 + health"
+ },
+ "Conditionals Type 3: значение — сожаление, критика": {
+  "10+": "вебинар 27.11 (по расписанию): Conditionals 2 и 3 + health"
  }
 }

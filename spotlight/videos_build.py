@@ -66,6 +66,20 @@ def main():
         for s in v['subtopics']:
             add(materials, s, g, v['folder'])
     json.dump(materials, open(os.path.join(D, 'data', 'materials.json'), 'w'), ensure_ascii=False, indent=1)
+    # расписания с явным списком подтем (с ноября 2026): data/schedule_YYYY-MM.json, поле subtopics
+    for fn in sorted(os.listdir(os.path.join(D, 'data'))):
+        if not (fn.startswith('schedule_') and fn.endswith('.json')):
+            continue
+        for x in json.load(open(os.path.join(D, 'data', fn))):
+            if 'subtopics' not in x:
+                continue
+            g = '7–9' if x['group'] == '7-9' else '10+'
+            d = x['date']
+            when = 'проведён, ждём видео' if d < date.today().isoformat() else 'по расписанию'
+            for s in x['subtopics']:
+                if s not in valid[g]:
+                    raise SystemExit(f'нет такой подтемы в группе {g}: {s}')
+                add(planned, s, g, f"вебинар {d[8:10]}.{d[5:7]} ({when}): {x['title']}")
     json.dump(videos, open(os.path.join(D, 'data', 'videos.json'), 'w'), ensure_ascii=False, indent=1)
     json.dump(planned, open(os.path.join(D, 'data', 'planned.json'), 'w'), ensure_ascii=False, indent=1)
 
