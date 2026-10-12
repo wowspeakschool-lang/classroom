@@ -4,6 +4,8 @@
     python3 spotlight/webinars.py
 """
 import json, os, re, sys
+from datetime import date
+TODAY = date.today().isoformat()
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, PatternFill
@@ -82,7 +84,7 @@ def main():
             have = 'есть' if vs or e['has_video'] else ('нет' if lists[e['group']] else 'нет данных')
             w.append([i, e['group'], name, have, '\n'.join(v['video'] for v in vs), e['kind'], e['topic'], e['comment'], mats,
                       '\n'.join(v['note'] for v in vs if v['note']),
-                      '\n'.join(f"{x['date'][8:10]}.{x['date'][5:7]} · {x['status']} · {x['teacher']}" for x in sched.get((e['group'], e['folder']), [])),
+                      '\n'.join(f"{x['date'][8:10]}.{x['date'][5:7]} · {'проведён' if x['date'] < TODAY else 'по расписанию'} · {x['teacher']}" for x in sched.get((e['group'], e['folder']), [])),
                       'открыть'])
             c = w.cell(row=w.max_row, column=12)
             c.hyperlink = url

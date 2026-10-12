@@ -7,6 +7,7 @@
     python3 spotlight/videos_build.py && python3 spotlight/matrix.py
 """
 import json, os, sys
+from datetime import date
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build import D
 from matrix import load_units, group
@@ -42,7 +43,8 @@ def main():
                 add(videos, s, g, v['name'])
             else:
                 d = v['kind'].split()[1]
-                add(planned, s, g, f"вебинар {d[8:10]}.{d[5:7]}: {v['name']}")
+                when = 'проведён, ждём видео' if d < date.today().isoformat() else 'по расписанию'
+                add(planned, s, g, f"вебинар {d[8:10]}.{d[5:7]} ({when}): {v['name']}")
     # материалы: папки вебинаров, которые закрывают подтему (с видео и без)
     materials = {}
     folder_of = {(v['group'], v['video']): v['folder'] for v in json.load(open(os.path.join(D, 'data', 'video_map.json')))}
