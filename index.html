@@ -1494,7 +1494,7 @@ async function bootRunPage(params){
     // Ученику не должны попасть сценарий урока, тайминги и ответы
     CR_VIEW = { role:'student', variant:'any', format:'any' };
     const blocks = (bl.data||[]).filter(crBlockVisible);
-    $('runPageHead').innerHTML = `🚀 <b>${esc((ls.data&&ls.data.title)||'Урок')}</b><div style="font-size:14px;opacity:.95;margin-top:2px">Поехали! Отвечай на задания и собирай звёздочки ⭐</div>`;
+    $('runPageHead').innerHTML = `🚀 <b>${esc((ls.data&&ls.data.title)||'Урок')}</b><div style="font-size:14px;opacity:.95;margin-top:2px">Поехали! Отвечай на задания — у тебя всё получится</div>`;
     blocks.forEach(b=>{
       if(b.type==='match'){ RUN_MATCH[b.id]={ map:{}, sel:null, rights:shuffle(((b.payload&&b.payload.pairs)||[]).map((x,ix)=>({val:(x.right!=null?x.right:('#'+ix)), image:x.right_image, audio:x.right_audio}))) }; }
       if(b.type==='order'){ RUN_ORDER[b.id]={ bank:shuffle(((b.payload&&b.payload.words)||[])), answer:[] }; }
