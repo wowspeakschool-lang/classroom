@@ -1270,7 +1270,7 @@ var SHOW = { all:[], blocks:[], i:0, answer:false, title:'', mode:'list' };
 
 // Готовит состояние интерактивных блоков (перемешивание и т.п.)
 function prepRunState(blocks){
-  RUN_MATCH={}; RUN_ORDER={}; RUN_SORT={}; RUN_FC={}; RUN_FC_DATA={};
+  RUN_MATCH={}; RUN_ORDER={}; RUN_SORT={}; RUN_FC={}; RUN_FC_DATA={}; RUN_QUIZ={};
   (blocks||[]).forEach(b=>{
     if(b.type==='match'){ RUN_MATCH[b.id]={ map:{}, sel:null, rights:shuffle(((b.payload&&b.payload.pairs)||[]).map((x,ix)=>({val:(x.right!=null?x.right:('#'+ix)), image:x.right_image, audio:x.right_audio}))) }; }
     if(b.type==='order'){ RUN_ORDER[b.id]={ bank:shuffle(((b.payload&&b.payload.words)||[])), answer:[] }; }
@@ -1428,6 +1428,20 @@ let RUN_MATCH = {};   // { blockId: { map:{leftIdx:rightVal}, sel, rights:[{val,
 let RUN_ORDER = {};   // { blockId: { bank:[...], answer:[...] } }
 let RUN_SORT = {};    // { blockId: { items:[{gi,text,image}], groups:[names], place:{gi:groupIdx}, sel } }
 let RUN_FC = {};      // { blockId: { i, flip } }
+let RUN_QUIZ = {};    // { blockId: { qi: [исходные индексы вариантов в порядке показа] } }
+// Порядок вариантов вопроса для ученика. Перемешиваем, иначе верный ответ
+// угадывается по месту. Value у варианта остаётся исходным индексом, так что
+// проверка и сохранённые ответы не меняются. «Да / нет» из двух текстовых
+// вариантов не трогаем: ✅ всегда слева.
+function quizOrder(id,qi,q){
+  const n=(q.options||[]).length, st=(RUN_QUIZ[id]=RUN_QUIZ[id]||{});
+  if(!st[qi]){
+    const idx=[...Array(n).keys()];
+    const yesNo = n===2 && !(q.options||[]).some(o=>o&&o.image);
+    st[qi]= yesNo ? idx : shuffle(idx);
+  }
+  return st[qi];
+}
 const MATCH_COLORS = ['#7c3aed','#16a34a','#f59e0b','#0891b2','#db2777','#4f46e5','#ea580c','#0d9488'];
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
 function isPreview(){ return RUN && RUN.preview; }
@@ -1482,7 +1496,7 @@ async function bootRunPage(params){
       <div class="kidhead" id="runPageHead">🚀 Урок</div>
       <div id="runBody"><div class="loading">Загружаю…</div></div>
     </div></div>`);
-  RUN = { lessonId, enr }; RUN_MATCH = {}; RUN_ORDER = {}; RUN_SORT = {}; RUN_FC = {}; RUN_FC_DATA = {};
+  RUN = { lessonId, enr }; RUN_MATCH = {}; RUN_ORDER = {}; RUN_SORT = {}; RUN_FC = {}; RUN_FC_DATA = {}; RUN_QUIZ = {};
   try{
     const [ls, bl] = await Promise.all([
       sb.from('classroom_lessons').select('title').eq('id', lessonId).maybeSingle(),
@@ -1589,7 +1603,7 @@ function runBlock(b){
   if(b.type==='quiz'){
     const qs=(p.questions||[]).map((q,qi)=>{
       const inp=(q.type==='multiple')?'checkbox':'radio';
-      const opts=(q.options||[]).map((o,oi)=>{
+      const opts=quizOrder(id,qi,q).map(oi=>{ const o=q.options[oi];
         const label=(o&&o.image)?`<img src="${esc(o.image)}" style="max-height:170px;max-width:230px;border-radius:14px;display:block;margin:4px auto" onerror="this.replaceWith(document.createTextNode('[картинка]'))">`:esc(o&&o.text!=null?o.text:o);
         const oaud=(o&&o.audio)?`<div style="text-align:center">${audBtn(o.audio)}</div>`:'';
         return `<label class="chk" style="flex-direction:column;align-items:center">${label}${oaud}<input type="${inp}" name="q-${id}-${qi}" value="${oi}" style="margin-top:10px"></label>`;
