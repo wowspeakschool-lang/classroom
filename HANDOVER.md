@@ -419,6 +419,12 @@ nginx                      location /tts на api.wowteach.ru
   под него чужое содержимое;
 * ответы и оценки **не удаляются** вместе с заданием — внешние ключи
   `classroom_submissions.block_id` и `classroom_grades.block_id` сняты;
+* **комментарии учителя** — отдельная таблица `classroom_comments`: ко всей
+  домашке, к заданию или к пункту, сколько угодно, без привязки к оценке
+  (`classroom_comment_save` / `classroom_comment_remove`). Ученик видит их
+  после проверки или при переделке (оба события шлют уведомление), в
+  `classroom_lesson_grade` → `comments`. При переделке ответ уходит в историю,
+  а комментарий остаётся — в нём написано, что исправить;
 * уведомления «отправил» и «переделать» — вид `info` с `payload.event`
   (`submitted` / `retake` / `reviewed`); CHECK на `kind` не трогали.
 

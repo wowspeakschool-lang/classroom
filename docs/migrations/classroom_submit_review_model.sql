@@ -568,6 +568,81 @@ begin
   return jsonb_build_object('ok', true, 'needs_review', v_needs_review);
 end $$;
 
+-- ── 5а. Комментарии учителя ───────────────────────────────────────────────
+-- Учитель пишет сколько угодно комментариев: ко всей домашке (block_id null),
+-- к заданию или к пункту задания (item — номер пункта, как в __results).
+-- Комментарии живут отдельно от ответов: при переделке ответ уходит в историю,
+-- а комментарий остаётся — в нём как раз написано, что исправить.
+-- Ученик видит их, когда учитель закончил проверку или отдал на переделку
+-- (оба события присылают ему уведомление), а не пока учитель ещё пишет.
+
+create table if not exists public.classroom_comments (
+  id             uuid primary key default gen_random_uuid(),
+  enrollment_id  uuid not null references public.classroom_enrollments(id) on delete cascade,
+  lesson_id      uuid not null references public.classroom_lessons(id) on delete cascade,
+  block_id       uuid,
+  item           text,
+  body           text not null,
+  author_user_id uuid,
+  created_at     timestamptz not null default now(),
+  updated_at     timestamptz not null default now()
+);
+create index if not exists classroom_comments_enr_lesson_idx
+  on public.classroom_comments (enrollment_id, lesson_id, created_at);
+alter table public.classroom_comments enable row level security;
+do $$
+begin
+  if not exists (select 1 from pg_policies where tablename = 'classroom_comments'
+                  and policyname = 'classroom_comments_read') then
+    create policy classroom_comments_read on public.classroom_comments
+      for select using (
+        public.classroom__can_review(enrollment_id)
+        or (public.classroom__can_see_enrollment(enrollment_id)
+            and exists (select 1 from public.classroom_progress p
+                         where p.enrollment_id = classroom_comments.enrollment_id
+                           and p.lesson_id = classroom_comments.lesson_id
+                           and p.status in ('reviewed', 'retake'))));
+  end if;
+end $$;
+
+-- Новый комментарий (p_id null) или правка своего. Пустой текст — ошибка.
+create or replace function public.classroom_comment_save(
+  p_enrollment_id uuid, p_lesson_id uuid, p_block_id uuid, p_item text, p_body text,
+  p_id uuid default null)
+returns jsonb language plpgsql security definer set search_path = public as $$
+declare v_id uuid;
+begin
+  if not public.classroom__can_review(p_enrollment_id) then
+    raise exception 'Комментировать может только учитель ученика или методист';
+  end if;
+  if btrim(coalesce(p_body, '')) = '' then raise exception 'Пустой комментарий'; end if;
+  if p_id is null then
+    insert into public.classroom_comments (enrollment_id, lesson_id, block_id, item, body, author_user_id)
+    values (p_enrollment_id, p_lesson_id, p_block_id, nullif(p_item, ''), p_body,
+            public.classroom__my_user_id())
+    returning id into v_id;
+  else
+    update public.classroom_comments set body = p_body, updated_at = now()
+     where id = p_id and enrollment_id = p_enrollment_id
+    returning id into v_id;
+    if v_id is null then raise exception 'Комментарий не найден'; end if;
+  end if;
+  return jsonb_build_object('ok', true, 'id', v_id);
+end $$;
+
+create or replace function public.classroom_comment_remove(p_id uuid)
+returns jsonb language plpgsql security definer set search_path = public as $$
+declare v_enr uuid;
+begin
+  select enrollment_id into v_enr from public.classroom_comments where id = p_id;
+  if v_enr is null then raise exception 'Комментарий не найден'; end if;
+  if not public.classroom__can_review(v_enr) then
+    raise exception 'Удалять комментарии может только учитель ученика или методист';
+  end if;
+  delete from public.classroom_comments where id = p_id;
+  return jsonb_build_object('ok', true);
+end $$;
+
 -- ── 6. Ученик: «Завершить и отправить» ─────────────────────────────────────
 
 create or replace function public.classroom_finish_lesson(p_enrollment_id uuid, p_lesson_id uuid)
@@ -662,7 +737,7 @@ end $$;
 
 -- p_score = null снимает оценку учителя — блок снова считается по пунктам
 create or replace function public.classroom_review_block(
-  p_enrollment_id uuid, p_block_id uuid, p_score integer, p_comment text default null)
+  p_enrollment_id uuid, p_block_id uuid, p_score integer)
 returns jsonb language plpgsql security definer set search_path = public as $$
 declare
   v_block public.classroom_blocks%rowtype; v_sub public.classroom_submissions%rowtype;
@@ -683,8 +758,7 @@ begin
   end if;
 
   update public.classroom_submissions
-     set teacher_score = p_score, reviewer_note = p_comment,
-         review_status = null, reviewed_at = now()
+     set teacher_score = p_score, review_status = null, reviewed_at = now()
    where enrollment_id = p_enrollment_id and block_id = p_block_id and section_key is null
    returning * into v_sub;
   if not found then raise exception 'Ответ на это задание не найден'; end if;
@@ -834,6 +908,12 @@ begin
       'submitted_at', v_prog.submitted_at,
       'retake_blocks', to_jsonb(v_prog.retake_blocks),
       'teacher_note', case when v_prog.status = 'retake' then v_prog.teacher_note end,
+      'comments', case when v_prog.status = 'retake' then (
+         select coalesce(jsonb_agg(jsonb_build_object('id', c.id, 'block_id', c.block_id,
+                  'item', c.item, 'body', c.body, 'created_at', c.created_at)
+                  order by c.created_at), '[]'::jsonb)
+           from public.classroom_comments c
+          where c.enrollment_id = p_enrollment_id and c.lesson_id = p_lesson_id) end,
       'submittable', v_check->'submittable', 'submitted', v_check->'submitted',
       'can_finish', v_check->'can_finish', 'incomplete', v_check->'incomplete');
   end if;
@@ -852,7 +932,6 @@ begin
            'auto_score', case when v_teacher then s.auto_score end,
            'teacher_score', case when v_teacher then s.teacher_score end,
            'score', case when v_open then public.classroom__block_score(b, s) end,
-           'comment', s.reviewer_note,
            'review_pending', s.review_status = 'pending',
            'parts', case when v_teacher and b.type = 'task' then (
               select jsonb_agg(jsonb_build_object('section_key', g.section_key, 'score', g.score,
@@ -875,6 +954,11 @@ begin
                        then public.classroom__lesson_auto_score(p_enrollment_id, p_lesson_id) end,
     'teacher_score', case when v_teacher then v_prog.teacher_score end,
     'teacher_note', v_prog.teacher_note,
+    'comments', (select coalesce(jsonb_agg(jsonb_build_object('id', c.id, 'block_id', c.block_id,
+                    'item', c.item, 'body', c.body, 'created_at', c.created_at,
+                    'updated_at', c.updated_at) order by c.created_at), '[]'::jsonb)
+                   from public.classroom_comments c
+                  where c.enrollment_id = p_enrollment_id and c.lesson_id = p_lesson_id),
     'show_answers', coalesce(v_prog.show_answers, false),
     'retake_blocks', to_jsonb(v_prog.retake_blocks),
     'history', case when v_teacher then v_prog.history end,
