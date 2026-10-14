@@ -24,6 +24,36 @@ id `1SRSGPx3_A7Q4Z-vFvg-D3KrDHa7X49cr`). Это **опорный докумен�
 | **8** | спорт: badminton, table tennis, tennis, basketball, baseball, volleyball, swimming, **football**, hockey, athletics · снаряжение: bat, racket, helmet, board, goggles, net · места: court, track, pitch | **[Verb+ING]'s [adjective]** (Swimming's fun!) · **I like / I don't like + …ing** · согласие: So do I! / Me too! · несогласие: I don't | «The Football Club»: Can I join? · The team's full. · Let's start a team! · Join our team! · It's going to be easy. · We've got our team! |
 | **9** | каникулы: read a comic, go hiking, visit cousins, help in the garden, take riding lessons, build a tree house, keep a scrapbook, learn to swim, go camping | **Can I / Can we…? — Yes, of course you can / No, you can't** · **вопросительные слова**: Are there…? Can…? Does…? Has/Have…got? How many…? Whose…? · **So do I!** · I'd like to… | — |
 
+## Фонетика — слой, которого в конспекте нет
+
+Конспект курса её не упоминает, а в планах она есть в **уроке 4 каждого юнита**:
+отдельный этап на 4–6 минут, слова из учебника, скороговорка и своя строка в
+чеклисте «I CAN». В домашках её не было ни одной — добавлена при вычитке.
+
+| юнит | звук | слова | скороговорка |
+|---|---|---|---|
+| 1 | `-ee` / `-ea` | teeth, three, cheese, eat, peas, clean | At three o'clock, I eat my cheese and peas and then I clean my teeth. |
+| 2 | /aɪ/ — `i_e`, `y` | Mike, smile, crocodile, my, try | Don't try and smile at my crocodile, Mike! |
+| 3 | `tr` / `gr` / `dr` | tree, track, train, green, grey, drum | In Tricia's playground, there's a green drum and a grey train. |
+| 4 | `w` / `wh` | water, watermelon, window, what, where, white | — (в плане нет) |
+| 5 | `oo` | room, book, look, moon, boots, spoon | Look at the books all over the room! |
+| 6 | `a_e` / `ai` / `ay` | Jane, tail, rainy, play, day | Jane, it's a rainy day! |
+| 7 | `u_e`, `ew`, `ue`, `oo` | Luke, new, blue, scooter, zoo | Luke rides his new blue scooter to the zoo. |
+| 8 | `o` / `oa` / `o_e` | hot, job, goat, boat, goal, hole, note, home | A hippo and a goat with a hole in their boat. |
+| 9 | /s/ против /z/ | cousins, lizards, bananas, zoo | My cousins and I are giving lizards bananas at the zoo. |
+
+**Как собраны задания.** В каждом ДЗ 4 два блока перед прощанием: сначала
+узнавание звука, потом чтение вслух. Механика узнавания **чередуется**, чтобы
+задание не повторялось из юнита в юнит, и в соседних юнитах нигде не совпадает:
+
+| ю1 | ю2 | ю3 | ю4 | ю5 | ю6 | ю7 | ю8 | ю9 |
+|---|---|---|---|---|---|---|---|---|
+| разложи по написанию | послушай и впиши | верно / неверно | разложи по написанию | послушай и выбери | собери скороговорку | послушай и впиши | разложи по написанию | какой звук даёт буква |
+
+Второй блок везде — запись голоса, но формулировка тоже разная: где-то прочитать
+слова и предложение, где-то скороговорка на скорость, где-то ещё и найти слова с
+этим звуком в истории урока.
+
 ## На что это сразу повлияло
 
 - **`there is / there are` курс даёт — в юните 0**, отдельной грамматической
