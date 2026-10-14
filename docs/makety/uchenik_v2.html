@@ -230,6 +230,11 @@ img{display:block;max-width:100%}
   .tt b{font-size:15px}
   .tt span{display:none}
   .logo,.coins{display:none}
+  .top-in{flex-wrap:wrap;row-gap:8px}
+  .tt{flex:1 1 calc(100% - 60px)}
+  .due{order:3}
+  .zoom{order:4;margin-left:auto}
+  .netbar{margin:0 12px 8px;font-size:13px}
   .back{padding:0 10px;font-size:0}
   .back:before{content:"←";font-size:18px}
   .due{font-size:12px;padding:5px 9px}
@@ -253,6 +258,10 @@ img{display:block;max-width:100%}
   .img-side .ph{width:100%;max-height:150px}
   .fit .img-side .ph{height:auto;flex:1;min-height:0}
   .bar-in{padding:10px 12px 12px;gap:8px}
+  .ic{width:40px;height:40px;font-size:21px;border-radius:12px}
+  .redo{font-size:0;padding:0 10px}
+  .redo:before{content:"↺";font-size:16px}
+  .zoom button{padding:0 7px;font-size:12px}
   .bar .left span{display:none}
   .fin{padding:14px 18px;font-size:16px}
   .nav{width:46px;height:46px}
@@ -266,6 +275,48 @@ img{display:block;max-width:100%}
 @container main (orientation: portrait){
   .cards{grid-template-columns:repeat(2,1fr)}
 }
+/* значок типа задания */
+.ic{flex:0 0 auto;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:27px;margin-top:2px}
+.ic small{display:none}
+.ic.watch{background:#EFEBFF}.ic.flip{background:#FFF0DE}.ic.listen{background:#E6F3FF}
+.ic.link{background:#FFE9EF}.ic.build{background:#E3F7EE}.ic.write{background:#FFF6D6}.ic.say{background:#FFE9EF}
+/* рука-подсказка при первой встрече с типом задания */
+.hand{position:absolute;right:10%;bottom:6%;font-size:42px;pointer-events:none;z-index:2;
+  filter:drop-shadow(0 4px 6px rgba(0,0,0,.25));animation:tap 1.5s ease-in-out infinite}
+@keyframes tap{0%,100%{transform:translate(8px,10px)}40%{transform:translate(0,0)}50%{transform:translate(0,0) scale(.86)}60%{transform:translate(0,0)}}
+.opt,.ml,.chip{position:relative}
+.chip .hand{right:-18px;bottom:-26px;font-size:34px}
+/* «начать задание заново» */
+.redo{flex:0 0 auto;height:32px;border-radius:99px;padding:0 12px;background:rgba(0,0,0,.04);color:var(--mute);
+  font-size:13px;font-weight:700;margin-top:4px;white-space:nowrap}
+/* звук: обычный и медленный */
+.sndrow{display:flex;gap:8px;flex-wrap:wrap;flex:0 0 auto}
+.snd.slow{background:#FFF0DE;color:#B4610F}
+.snd.playing{box-shadow:0 0 0 3px currentColor inset}
+.phr{font-size:15px;color:var(--mute);font-weight:600;align-self:center}
+/* связь */
+.netbar{max-width:900px;margin:0 auto 8px;padding:9px 14px;border-radius:14px;font-size:14px;font-weight:700;
+  display:flex;gap:10px;align-items:center}
+.netbar.off{background:#FFF0DE;color:#9A5A12}
+.netbar.online{background:var(--ok-soft);color:var(--ok)}
+.saved.local{color:var(--warn)}
+/* с возвращением */
+.welcome{display:flex;align-items:center;gap:12px;background:var(--pick);color:#fff;border-radius:18px;padding:12px 16px;
+  margin-bottom:14px;font-weight:700;animation:rise .35s cubic-bezier(.2,1,.4,1)}
+.welcome b{flex:1}
+.welcome button{background:rgba(255,255,255,.2);color:#fff;border-radius:12px;padding:8px 14px;font-weight:800}
+/* микрофон */
+.meter{display:flex;align-items:center;gap:3px;height:42px;flex:1;min-width:140px}
+.meter i{flex:1;max-width:8px;border-radius:4px;background:var(--act);height:12%;transition:height .08s linear}
+.micwarn{background:var(--late-soft);color:var(--late);border-radius:12px;padding:8px 12px;font-size:14px;font-weight:700}
+/* размер текста для родителя */
+.zoom{display:inline-flex;background:#fff;border-radius:99px;box-shadow:var(--shadow);flex:0 0 auto}
+.zoom button{height:34px;padding:0 10px;font-weight:800;color:var(--mute);font-size:14px}
+.zoom button+button{border-left:1px solid var(--line)}
+.zoom button:disabled{opacity:.3}
+/* серия вовремя */
+.streak{display:inline-flex;gap:8px;align-items:center;margin-top:14px;background:#FFF0DE;color:#B4610F;border-radius:99px;
+  padding:9px 16px;font-weight:800}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -303,7 +354,23 @@ const N = TASKS.length;
 const PAIRC = ['#FDE7EF','#E6F3FF','#E8F6F0'];
 
 let S = { variant:'A', fit:false, device:'desktop', course:'SM', stage:'doing', score:95, due:'soon',
-          cur:0, a:{}, confirm:null, parentPct:false, viewWork:false, retakeSet:[4,5] };
+          cur:0, a:{}, confirm:null, parentPct:false, viewWork:false, retakeSet:[4,5],
+          icons:'on', net:'on', netBack:false, scen:'fresh', welcome:false, zoom:1 };
+const ZOOMS=[0.85,1,1.15,1.3];
+const KIND_IC = { video:['watch','🎬'], cards:['flip','🃏'], quiz:['listen','👂'], match:['link','🔗'],
+                  order:['build','🧩'], gaps:['write','✏️'], speak:['say','🎤'] };
+function hasAny(i){
+  const a=S.a[i], t=TASKS[i];
+  if(t.kind==='video') return a.p>0;
+  if(t.kind==='cards') return Object.keys(a.f).length>0;
+  if(t.kind==='quiz')  return a.sel!==null;
+  if(t.kind==='match') return a.sel!==null || Object.keys(a.map).length>0;
+  if(t.kind==='order') return a.line.length>0;
+  if(t.kind==='gaps')  return a.pick!==null;
+  if(t.kind==='speak') return a.st!=='idle';
+}
+// рука показывается, пока ребёнок не начал задание (в жизни — при первой встрече с типом)
+function hand(i){ return (S.icons==='on' && !hasAny(i)) ? '<span class="hand">👆</span>' : ''; }
 function freshAnswers(){
   return { 0:{p:0}, 1:{f:{}}, 2:{sel:null}, 3:{sel:null,map:{}}, 4:{line:[]}, 5:{pick:null}, 6:{st:'idle',t:0} };
 }
@@ -337,6 +404,9 @@ function panel(){
   h += grp('Курс','course',[['SM','SM'],['WD','WD'],['GG','GG']]);
   h += grp('Состояние','stage',[['doing','выполняет'],['sent','отправлено'],['checked','проверено'],['retake','переделка']]);
   h += grp('Срок','due',[['ok','к пятнице'],['soon','сегодня'],['late','просрочено']]);
+  h += grp('Значки заданий','icons',[['on','с ними'],['off','без']]);
+  h += grp('Связь','net',[['on','есть'],['off','пропала']]);
+  h += grp('Сценарий','scen',[['fresh','открыл впервые'],['resume','вернулся к домашке']]);
   if(S.stage==='checked') h += grp('Оценка','score',[[95,'95'],[78,'78'],[58,'58'],[30,'30']]);
   h += `<div class="note">${S.variant==='B'
       ? 'Б: одно задание на экран, картинки сжимаются под высоту — листать не нужно.'
@@ -346,7 +416,14 @@ function panel(){
   document.getElementById('panel').innerHTML = h;
 }
 function setOpt(k,v){
+  const was = S[k];
   S[k] = (k==='score') ? Number(v) : v;
+  if(k==='net' && was==='off' && v==='on'){ S.netBack=true; setTimeout(()=>{ S.netBack=false; renderMain(); }, 3500); }
+  if(k==='scen'){
+    S.stage='doing'; S.a=freshAnswers(); S.welcome=false; S.cur=0;
+    if(v==='resume'){ S.a[0]={p:100}; S.a[1]={f:{0:1,1:1,2:1,3:1}}; S.a[2]={sel:1}; S.cur=3; S.welcome=true; }
+    render(); if(v==='resume') setTimeout(()=>jump(3), 350); return;
+  }
   if(k==='stage'){
     S.confirm=null; S.viewWork=false; S.parentPct=false; S.a=freshAnswers();
     if(v!=='doing'){ fillAll(); }
@@ -392,8 +469,36 @@ function topBar(){
       <span class="logo">Wow<i>Speak</i></span>
       <button class="back">← Домашка</button>
       <span class="tt"><b>${c.title}</b><span>${c.sub}</span></span>${dueHtml}
+      <span class="zoom" title="Размер текста — для родителей"><button onclick="setZoom(-1)" ${S.zoom===ZOOMS[0]?'disabled':''}>A−</button><button onclick="setZoom(1)" ${S.zoom===ZOOMS[ZOOMS.length-1]?'disabled':''}>A+</button></span>
       <span class="coins">🪙 955</span>
-    </div>${steps}</div>`;
+    </div>${steps}${netBar()}</div>`;
+}
+
+function netBar(){
+  if(!(S.stage==='doing'||S.stage==='retake')) return '';
+  if(S.net==='off') return `<div class="netbar off">📶 Нет связи — ответы сохранены на этом устройстве. Отправим сами, когда появится интернет.</div>`;
+  if(S.netBack) return `<div class="netbar online">✓ Связь есть — всё сохранено на сервере</div>`;
+  return '';
+}
+function setZoom(d){
+  const k=Math.max(0,Math.min(ZOOMS.length-1, ZOOMS.indexOf(S.zoom)+d)); S.zoom=ZOOMS[k];
+  document.getElementById('app').style.zoom = S.zoom; document.querySelector('.top').outerHTML = topBar();
+}
+/* ── звук: обычный и медленный (в макете — синтез речи браузера; в жизни тот же файл на скорости 0,75) ── */
+function sndRow(text, label){
+  const t=text.replace(/'/g,"\\'");
+  return `<div class="sndrow"><button class="snd" onclick="say('${t}',false,this)">🔊 ${label||'Послушать'}</button>
+    <button class="snd slow" onclick="say('${t}',true,this)">🐢 Медленнее</button></div>`;
+}
+function say(text, slow, btn){
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate = slow ? 0.6 : 0.95;
+    const v=speechSynthesis.getVoices().find(v=>/en(-|_)US/i.test(v.lang)); if(v) u.voice=v;
+    document.querySelectorAll('.snd.playing').forEach(b=>b.classList.remove('playing'));
+    if(btn){ btn.classList.add('playing'); u.onend=()=>btn.classList.remove('playing'); }
+    speechSynthesis.speak(u);
+  }catch(e){}
 }
 
 /* ── задания ── */
@@ -409,12 +514,12 @@ function taskInner(i){
   if(t.kind==='cards'){
     const n=Object.keys(a.f).length;
     return `<div class="cards">${t.cards.map(([im,w],k)=>`<button class="fc ${a.f[k]?'flip':''}" onclick="flipCard(${i},${k})">
-        ${img(im)}${a.f[k]?`<span class="w">${w} 🔊</span>`:'<span class="tap">нажми</span>'}</button>`).join('')}</div>
+        ${img(im)}${a.f[k]?`<span class="w">${w} 🔊</span>`:'<span class="tap">нажми</span>'}${k===0?hand(i):''}</button>`).join('')}</div>
       <div class="need">Посмотрено ${n} из ${t.cards.length}</div>`;
   }
   if(t.kind==='quiz'){
-    return `<button class="snd">🔊 Послушать</button>
-      <div class="opts">${t.opts.map((o,k)=>`<button class="opt ${a.sel===k?'sel':''}" onclick="pickQuiz(${i},${k})">${img(o)}</button>`).join('')}</div>`;
+    return `${sndRow('get up','Послушать слово')}
+      <div class="opts">${t.opts.map((o,k)=>`<button class="opt ${a.sel===k?'sel':''}" onclick="pickQuiz(${i},${k})">${img(o)}${k===0?hand(i):''}</button>`).join('')}</div>`;
   }
   if(t.kind==='match'){
     const rightUsed = Object.entries(a.map); // leftIdx -> rightIdx
@@ -422,33 +527,35 @@ function taskInner(i){
     return `<div class="match">${t.left.map(([im,lbl],k)=>{
         const r = t.right[k]; const pl = pairOfRight(k);
         const lp = a.map[k]!==undefined;
-        return `<button class="ml ${a.sel===k?'sel':''} ${lp?'pair':''}" style="--pc:${PAIRC[k]}" onclick="matchL(${i},${k})">${img(im)}</button>
+        return `<button class="ml ${a.sel===k?'sel':''} ${lp?'pair':''}" style="--pc:${PAIRC[k]}" onclick="matchL(${i},${k})">${img(im)}${k===0?hand(i):''}</button>
                 <button class="mr ${pl!==null?'pair':''}" style="--pc:${pl!==null?PAIRC[pl]:''}" onclick="matchR(${i},${k})">${r}</button>`;
       }).join('')}</div>
       <div class="mhint">Нажми картинку, потом слова</div>`;
   }
   if(t.kind==='order'){
-    return `<div class="img-side">${img(t.img)}<div class="r">
+    return `${sndRow('I get up at seven o’clock.','Послушать фразу')}<div class="img-side">${img(t.img)}<div class="r">
         <div class="line ${a.line.length===t.words.length?'full':''}">${a.line.map((w,k)=>
           `<button class="chip" onclick="unOrder(${i},${k})">${t.words[w]}</button>`).join('') || '<span style="color:var(--faint);font-size:15px">Нажимай слова по порядку</span>'}</div>
-        <div class="bank">${t.words.map((w,k)=>`<button class="chip ${a.line.includes(k)?'used':''}" onclick="addOrder(${i},${k})">${w}</button>`).join('')}</div>
+        <div class="bank">${t.words.map((w,k)=>`<button class="chip ${a.line.includes(k)?'used':''}" onclick="addOrder(${i},${k})">${w}${k===1?hand(i):''}</button>`).join('')}</div>
       </div></div>`;
   }
   if(t.kind==='gaps'){
     return `<div class="img-side">${img(t.img)}<div class="r">
         <div class="sent">I <span class="slot ${a.pick!==null?'full':''}">${a.pick!==null?t.chips[a.pick]:'&nbsp;'}</span> breakfast at eight.</div>
-        <div class="bank">${t.chips.map((c,k)=>`<button class="chip ${a.pick===k?'used':''}" onclick="pickGap(${i},${k})">${c}</button>`).join('')}</div>
+        <div class="bank">${t.chips.map((c,k)=>`<button class="chip ${a.pick===k?'used':''}" onclick="pickGap(${i},${k})">${c}${k===0?hand(i):''}</button>`).join('')}</div>
       </div></div>`;
   }
   if(t.kind==='speak'){
     let ctl;
-    if(a.st==='idle') ctl = `<button class="recbtn" onclick="rec(${i},'start')">🎤 Записать</button>`;
-    else if(a.st==='rec') ctl = `<span class="timer" id="tm">0:${String(a.t).padStart(2,'0')}</span><button class="recbtn stop" onclick="rec(${i},'stop')">■ Стоп</button>`;
-    else ctl = `<button class="ghost" onclick="void 0">▶ Послушать себя</button><span class="wave"></span>
+    if(a.st==='idle') ctl = `<button class="recbtn" onclick="rec(${i},'start')">🎤 Записать${hand(i)}</button>`;
+    else if(a.st==='rec') ctl = `<span class="timer" id="tm">0:${String(a.t).padStart(2,'0')}</span>
+        <span class="meter" id="meter">${'<i></i>'.repeat(18)}</span><button class="recbtn stop" onclick="rec(${i},'stop')">■ Стоп</button>`;
+    else ctl = `<button class="ghost" onclick="playMine()">▶ Послушать себя</button><span class="wave"></span>
                 <button class="ghost" onclick="rec(${i},'again')">↺ Перезаписать</button>`;
-    return `<button class="snd">🔊 Послушать образец</button>
+    return `${sndRow(t.sample,'Послушать образец')}
       <div style="font-size:19px;font-weight:700;color:var(--mute)">${t.sample}</div>
       <div class="rec">${ctl}</div>
+      <div id="micwarn"></div>
       <div class="need">${a.st==='done'?'Запись готова. Можно перезаписать, пока не отправил.':'Учитель послушает твою запись'}</div>`;
   }
 }
@@ -462,12 +569,15 @@ function taskCard(i, opts={}){
   const fit = (S.variant==='B' || S.fit) ? 'fit' : '';
   const ro = opts.ro ? 'ro' : '';
   const showComment = S.stage==='retake' || (S.stage==='checked' && S.viewWork);
+  const [icc, ice] = KIND_IC[t.kind];
+  const icon = S.icons==='on' ? `<span class="ic ${icc}">${ice}</span>` : '';
+  const redo = (!opts.ro && hasAny(i)) ? `<button class="redo" onclick="resetTask(${i})" title="Начать задание заново">↺ Заново</button>` : '';
   return `<div class="task ${fit} ${ro}" id="t${i}">
-    <div class="hd"><div class="t"><div class="no">Задание ${i+1} из ${N}</div><h3 class="q">${t.q}</h3></div>
-      ${d && !opts.ro ? '<span class="ready">✓ готово</span>' : ''}</div>
+    <div class="hd">${icon}<div class="t"><div class="no">Задание ${i+1} из ${N}</div><h3 class="q">${t.q}</h3></div>
+      ${d && !opts.ro ? '<span class="ready">✓ готово</span>' : ''}${redo}</div>
     ${showComment?comment(i):''}
     <div class="body" id="b${i}">${taskInner(i)}</div>
-    ${opts.ro?'':`<div class="saved" id="sv${i}">${d?'сохранено':''}</div>`}
+    ${opts.ro?'':`<div class="saved ${S.net==='off'?'local':''}" id="sv${i}">${hasAny(i)?(S.net==='off'?'сохранено на устройстве':'сохранено'):''}</div>`}
   </div>`;
 }
 
@@ -500,13 +610,50 @@ function matchR(i,r){
 function addOrder(i,k){ S.a[i].line.push(k); upd(i); }
 function unOrder(i,k){ S.a[i].line.splice(k,1); upd(i); }
 function pickGap(i,k){ S.a[i].pick=k; upd(i); }
-let recIv=null;
+/* Запись: настоящий микрофон, если браузер разрешит; уровень громкости — полоски.
+   Тишина 3 с — подсказка «Тебя не слышно». Без микрофона — имитация. */
+let recIv=null, MIC={};
 function rec(i,what){
   const a=S.a[i];
-  if(what==='start'||what==='again'){ a.st='rec'; a.t=0; upd(i);
-    recIv=setInterval(()=>{ a.t++; const el=document.getElementById('tm'); if(el) el.textContent='0:'+String(a.t).padStart(2,'0'); },1000); }
-  if(what==='stop'){ clearInterval(recIv); a.st='done'; upd(i); }
+  if(what==='start'||what==='again'){
+    a.st='rec'; a.t=0; upd(i);
+    recIv=setInterval(()=>{ a.t++; const el=document.getElementById('tm'); if(el) el.textContent='0:'+String(a.t).padStart(2,'0'); },1000);
+    startMic();
+  }
+  if(what==='stop'){ clearInterval(recIv); stopMic(); a.st='done'; upd(i); }
 }
+async function startMic(){
+  MIC={ quietSince:performance.now(), chunks:[] };
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    const an = ctx.createAnalyser(); an.fftSize=512; ctx.createMediaStreamSource(stream).connect(an);
+    MIC.stream=stream; MIC.ctx=ctx; MIC.an=an; MIC.buf=new Uint8Array(an.fftSize);
+    try{ MIC.rec=new MediaRecorder(stream); MIC.rec.ondataavailable=e=>MIC.chunks.push(e.data); MIC.rec.start(); }catch(e){}
+  }catch(e){ MIC.fake=true; }
+  const tick=()=>{
+    const bars=document.querySelectorAll('#meter i'); if(!bars.length) return;
+    let lvl;
+    if(MIC.an){ MIC.an.getByteTimeDomainData(MIC.buf); let m=0; for(const v of MIC.buf) m=Math.max(m,Math.abs(v-128)); lvl=m/128; }
+    else lvl = 0.15+Math.random()*0.5;
+    const hist = (MIC.hist = (MIC.hist||[]).concat(lvl).slice(-bars.length));
+    bars.forEach((b,k)=>{ const v=hist[hist.length-bars.length+k]||0; b.style.height=Math.max(10,Math.min(100,v*220))+'%'; });
+    const now=performance.now();
+    if(lvl>0.04) MIC.quietSince=now;
+    const w=document.getElementById('micwarn');
+    if(w) w.innerHTML = (now-MIC.quietSince>3000) ? '<div class="micwarn">🙉 Тебя не слышно. Проверь, что микрофон включён, и говори громче.</div>' : '';
+    MIC.raf=requestAnimationFrame(tick);
+  };
+  MIC.raf=requestAnimationFrame(tick);
+}
+function stopMic(){
+  cancelAnimationFrame(MIC.raf);
+  if(MIC.rec && MIC.rec.state!=='inactive'){ MIC.rec.onstop=()=>{ MIC.url=URL.createObjectURL(new Blob(MIC.chunks)); }; MIC.rec.stop(); }
+  if(MIC.stream) MIC.stream.getTracks().forEach(t=>t.stop());
+  if(MIC.ctx) MIC.ctx.close();
+}
+function playMine(){ if(MIC.url) new Audio(MIC.url).play(); }
+function resetTask(i){ S.a[i]=freshAnswers()[i]; upd(i); }
 
 /* ── навигация ── */
 function jump(i){
@@ -591,6 +738,8 @@ function weatherSvg(kind){
       <path d="M108 134 Q124 124 140 134" stroke="#46536B" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
 }
 function sentScreen(){
+  if(S.net==='off') return `<div class="center"><div class="done"><div class="em">📶</div><h2>Готово к отправке</h2>
+    <p>Сейчас нет интернета. Домашка сохранена на этом устройстве и уйдёт учителю сама, как только связь появится.</p></div></div>`;
   return `<div class="center"><div class="done"><div class="em">📨</div><h2>Отправлено!</h2>
     <p>Учитель проверит, и здесь появится оценка</p></div></div>`;
 }
@@ -607,6 +756,7 @@ function checkedScreen(){
     grade = `<div class="score" style="color:${s>=70?'var(--ok)':s>=50?'var(--warn)':'var(--late)'}">${s}%</div>`;
   }
   return `<div class="center"><div class="done">${grade}
+    <div><span class="streak">🔥 3 домашки подряд вовремя</span></div>
     <div><button class="link" onclick="S.viewWork=true; render()">Посмотреть мою работу</button></div></div></div>`;
 }
 function workView(){
@@ -629,10 +779,12 @@ function mainHtml(){
   if(S.variant==='B'){
     const i=S.cur;
     if(S.stage==='retake') return `<div class="list" style="padding-top:0;padding-bottom:0">${taskCard(i)}</div>`;
-    return `<div class="list" style="padding-top:0;padding-bottom:0">${taskCard(i)}</div>`;
+    const wel = S.welcome ? `<div class="welcome" style="margin:14px 0 0">👋<b>С возвращением! Продолжаем с задания ${S.cur+1}</b><button onclick="S.welcome=false; renderMain()">Понятно</button></div>` : '';
+    return `<div class="list" style="padding-top:0;padding-bottom:0">${wel}${taskCard(i)}</div>`;
   }
   if(S.stage==='retake') return `<div class="list">${retakeList()}</div>`;
-  return `<div class="list">${TASKS.map((_,i)=>taskCard(i)).join('')}</div>`;
+  const wel = S.welcome ? `<div class="welcome">👋<b>С возвращением! Продолжаем с задания ${S.cur+1}</b><button onclick="S.welcome=false; renderMain()">Понятно</button></div>` : '';
+  return `<div class="list">${wel}${TASKS.map((_,i)=>taskCard(i)).join('')}</div>`;
 }
 function renderMain(){
   const m=document.getElementById('main');
@@ -645,6 +797,7 @@ function render(){
   if(S.confirm){ clearInterval(S.confirm.iv); S.confirm=null; }
   panel(); layoutFrame();
   document.getElementById('app').innerHTML = topBar() + `<div class="main" id="main"></div><div class="bar" id="barwrap"></div>`;
+  document.getElementById('app').style.zoom = S.zoom;
   renderMain();
 }
 window.addEventListener('resize', layoutFrame);
