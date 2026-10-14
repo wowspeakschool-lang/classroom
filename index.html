@@ -1112,6 +1112,14 @@ function edGapClear(i){
   edGapsPreview(i);
 }
 
+// Неверные варианты для пропуска: строка «a / b / c» → массив
+function edGapChoice(i, gi, val){
+  const p = EDIT.blocks[i].payload;
+  if(!Array.isArray(p.choices)) p.choices = [];
+  p.choices[gi] = String(val||'').split('/').map(s=>s.trim()).filter(Boolean);
+  edTouch();
+}
+
 // Обновляем только предпросмотр, чтобы не терять курсор в поле при вводе
 function edGapsPreview(i){
   const box = document.getElementById('gpv-'+i);
@@ -1537,13 +1545,18 @@ function runBlock(b){
   if(b.type==='gaps'){
     const parts = gapsParse(p.text||'');
     const drag = p.mode === 'drag';
+    const choice = p.mode === 'choice';
     const bank = shuffle(parts.filter(x=>x.kind==='gap').map(x=>(x.accept||[])[0]||''));
+    // В режиме выбора у каждого пропуска свой список: верный ответ плюс дистракторы
+    const gapChoices = x => shuffle([((x.accept||[])[0]||'')].concat(((p.choices||[])[x.index])||[]).filter(Boolean));
     const line = parts.map(x => x.kind==='text'
       ? esc(x.value).replace(/\n/g,'<br>')
       : (drag
           ? `<span class="gapslot" id="gp-${id}-${x.index}" data-val=""
                ondragover="event.preventDefault()" ondrop="gapDrop(event,'${id}',${x.index})"
                onclick="gapClear('${id}',${x.index})" title="Перетащи сюда; клик — очистить"></span>`
+          : choice
+          ? `<select id="gp-${id}-${x.index}" class="gapin" style="width:auto;display:inline-block;margin:0 4px"><option value="">— выбери —</option>${gapChoices(x).map(o=>`<option value="${esc(o)}">${esc(o)}</option>`).join('')}</select>`
           : `<input id="gp-${id}-${x.index}" class="gapin" autocomplete="off" style="width:120px;display:inline-block;margin:0 4px">`)).join('');
     return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px"><b>${esc(p.title)}</b></div>`:''}
       ${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:240px;border-radius:12px"></div>`:''}
@@ -2019,7 +2032,7 @@ async function runGaps(id){
   const ans={};
   document.querySelectorAll(`[id^="gp-${id}-"]`).forEach(el=>{
     const key = el.id.split('-').pop();
-    ans[key] = el.tagName === 'INPUT' ? el.value : (el.dataset.val || '');
+    ans[key] = (el.tagName === 'INPUT' || el.tagName === 'SELECT') ? el.value : (el.dataset.val || '');
   });
   try{ const r=await submitBlock(id, ans); runResult(id, scoreMsg(r), true); if(!r.needs_review && r.score===100) celebrate(); }
   catch(e){ runResult(id, e.message||String(e), false); }
@@ -4046,9 +4059,18 @@ function edBlockEditor(b,i){
       <div class="muted" style="font-size:12px;margin-top:8px">Как увидит ученик:</div>
       <div id="gpv-${i}" style="border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:4px;line-height:2.2">${edGapsPreviewHtml(p)}</div>
       <div class="row" style="margin-top:6px;align-items:center">
-        <label class="chk" style="max-width:230px"><input type="radio" name="gm${i}" ${p.mode!=='drag'?'checked':''} onchange="EDIT.blocks[${i}].payload.mode='type'; edRenderBlocks()"> Вписывать с клавиатуры</label>
+        <label class="chk" style="max-width:230px"><input type="radio" name="gm${i}" ${(p.mode!=='drag'&&p.mode!=='choice')?'checked':''} onchange="EDIT.blocks[${i}].payload.mode='type'; edRenderBlocks()"> Вписывать с клавиатуры</label>
         <label class="chk" style="max-width:230px"><input type="radio" name="gm${i}" ${p.mode==='drag'?'checked':''} onchange="EDIT.blocks[${i}].payload.mode='drag'; edRenderBlocks()"> Перетаскивать слова</label>
+        <label class="chk" style="max-width:230px"><input type="radio" name="gm${i}" ${p.mode==='choice'?'checked':''} onchange="EDIT.blocks[${i}].payload.mode='choice'; edRenderBlocks()"> Выбирать из вариантов</label>
       </div>
+      ${p.mode==='choice' ? `<div style="margin-top:8px">
+        <div class="muted" style="font-size:12px;margin-bottom:4px">Неверные варианты для каждого пропуска — через косую черту. Верный ответ подставляется сам, порядок у ученика перемешивается.</div>
+        ${gaps.map((g,gi)=>`<div class="row" style="align-items:center;margin-bottom:6px">
+            <span class="muted" style="min-width:150px;font-size:13px">${gi+1}. <b>${esc(g.accept[0]||'')}</b></span>
+            <input class="grow" value="${esc((((p.choices||[])[gi])||[]).join(' / '))}"
+              oninput="edGapChoice(${i},${gi},this.value)" placeholder="напр. No, they aren't. / Yes, it is.">
+          </div>`).join('')}
+      </div>` : ''}
       ${edAudioField(p.audio, `EDIT.blocks[${i}].payload.audio`)}
       ${edImageBox(i, 'image', 'Картинка:')}
       <div class="muted" style="font-size:12px;margin-top:6px">Пропусков: <b>${gaps.length}</b>${gaps.length?' · ответы: '+gaps.map(g=>esc(g.accept.join(' / '))).join(', '):''}</div>`;
