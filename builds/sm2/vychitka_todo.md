@@ -148,10 +148,151 @@ READING, и аудиозаписи, и картинки к устным зада
 | 6 | Homework 5 | 15 картинок нарезаны, запись в бакете — **ждёт ответов 2–5, см. раздел 0** |
 | 7 | Homework 5 | подложка и шесть фигурок готовы, запись в бакете — **ждёт расстановки, см. раздел 0** |
 
-## 3. 🟥 Картинки, которые надо переделать
+## 3. 🟥 Картинки, которые надо переделать — с промптами
 
 | юнит | файл | что не так |
 |---|---|---|
+| 3 | `t_dog_behind.webp` | собака лежит **на крыше**, а не за домом; используется трижды, в том числе в тесте |
+| 3 | `town_hw7.webp` | школа не подписана, хотя вопрос 3 спрашивает именно про неё; на столбике мусорный текст «boo» |
+| 3 | `map_town_quiz.webp` | стоковая картинка с водяным знаком фотобанка поверх парка |
+| 4 | `f_beans.webp` | зелёная стручковая фасоль, а на карточке-материале — красная |
+| 4 | `fridge_red.webp` | на дверце бутылка вина; плюс гроздь на этикетке противоречит ответу «винограда нет» |
+| 5 | `family.webp` | в первой рамке уже напечатано имя «Lucy» — ответ выдан заранее |
+| 5 | `t_bedroom.webp` | 440 px, пикселит; жёлтый предмет справа от кровати — комод, а в ответе `wardrobe` |
+| 6 | `monster.webp` | у монстра рога, а в ответе `ears` |
+| 6 | `q_forest.webp` | девочка с козой на газоне, леса нет, а ответ «Yes, they are» на вопрос «Are they in the forest?» |
+| 8 | `g_bat.webp` | бейсбольная бита, а слово `bat` нужно для настольного тенниса |
+| 6 | `face_boy.webp` | ✅ заменена на `hw1_face.webp` — водяного знака в курсе больше нет |
+
+### Две строки стиля — вклеиваются в начало промпта
+
+**ПРЕДМЕТ** (один предмет на белом фоне):
+
+> Children's coursebook illustration, friendly 3D-rendered cartoon style with soft
+> rounded shapes, smooth matte surfaces and gentle studio lighting, bright saturated
+> colours, thick clean silhouette, centred, plain flat pure white background, no
+> shadow on the background under the object, no text, no letters, no signs, no
+> border, no frame. IMPORTANT FRAMING: the whole subject is small in the frame and
+> fully visible, with a generous empty white margin on all four sides; nothing
+> touches or crosses the edge of the image.
+
+**СЦЕНА** (комната, улица, вид сверху):
+
+> Children's coursebook illustration, friendly 3D-rendered cartoon style with soft
+> rounded shapes, smooth matte surfaces and gentle lighting, bright saturated
+> colours, wide landscape scene, no text, no letters, no signs, no border, no frame.
+> IMPORTANT FRAMING: the whole subject is small in the frame and fully visible, with
+> a generous empty white margin on all four sides; nothing touches or crosses the
+> edge of the image.
+
+### Промпты
+
+**1. `media/sm2/u3/t_dog_behind.webp` — ПРЕДМЕТ.** Задание проверяет предлог
+`behind`, поэтому собака должна быть именно **за** домом, а не на нём.
+
+> [ПРЕДМЕТ] A small cute cartoon house with a red roof, seen straight from the
+> front, and a friendly brown dog standing on the ground BEHIND the house: only the
+> dog's head and front paws peek out past the left wall of the house and only its
+> wagging tail past the right wall, the rest of the dog is hidden behind the
+> building. The dog is clearly behind the house, not on the roof and not in front
+> of it; nothing is on the roof.
+
+**2. `media/sm2/u3/town_hw7.webp` — СЦЕНА.** От картинки зависят четыре ответа:
+кафе **между** больницей и кинотеатром, машина **перед** кафе, парк **за** школой,
+кафе **рядом** с больницей. Вывески я подпишу сама — просите пустые таблички,
+генератор пишет на них ерунду.
+
+> [СЦЕНА] A town street seen from the front. Left to right along the pavement:
+> a hospital with a red cross, a café with a striped awning and small round tables
+> outside, a cinema with a glowing marquee, and a school building with a bell
+> tower. A yellow car is parked on the road directly in front of the café. A green
+> park with trees, a bench and a slide is behind the school. Above the entrance of
+> each of the four buildings there is a plain blank white rectangular sign board,
+> completely empty, no writing on it.
+
+**3. `media/sm2/u3/map_town_quiz.webp` — СЦЕНА.** Квиз спрашивает: кафе — есть,
+школа — есть, кинотеатр — есть, вокзал — **нет**, бассейн — **нет**. Поэтому
+вокзала и бассейна на картинке быть не должно совсем. Вывески тоже подпишу сама.
+
+> [СЦЕНА] A small toy-like town seen from above at a slight angle, with streets
+> crossing in the middle. The town has a café, a school with a playground, a
+> cinema, a hospital, a shop, a bus stop, a park with trees and a pond, and a few
+> ordinary houses. There is NO railway, NO train station, NO train and NO swimming
+> pool anywhere in the picture. Above the entrance of the café, the school, the
+> cinema, the hospital and the shop there is a plain blank white rectangular sign
+> board, completely empty, no writing on it.
+
+**4. `media/sm2/u4/f_beans.webp` — ПРЕДМЕТ.** Красные, как на карточке урока.
+
+> [ПРЕДМЕТ] A small neat pile of dark red kidney beans, about fifteen smooth shiny
+> beans lying together, seen from slightly above.
+
+**5. `media/sm2/u4/fridge_red.webp` — ПРЕДМЕТ.** От картинки зависят четыре
+ответа: **курица есть, яйца есть, хлеба нет, винограда нет.** Виноград не должен
+попасть даже на этикетку, и никакого алкоголя.
+
+> [ПРЕДМЕТ] An open red fridge seen from the front, both doors wide open, with
+> three white shelves. On the shelves: a whole raw chicken on a white plate, a
+> carton of six eggs, a bottle of milk, red tomatoes, green lettuce, two lemons and
+> a small watermelon. There is NO bread, NO grapes and NO bottle of wine anywhere,
+> and no picture of grapes on any label. The door racks hold only a milk bottle and
+> a juice carton with a plain orange label.
+
+**6. `media/sm2/u5/family.webp` — СЦЕНА.** Ребёнок слушает запись и сам
+расставляет пять имён, поэтому подписей быть не должно ни одной.
+
+> [СЦЕНА] A cosy living room seen from the front. Five people: a girl reading a
+> book on the left armchair, a boy with a TV remote on the right sofa, a woman
+> standing in the doorway with a phone, a man sitting in the armchair behind, and a
+> small child playing with a teddy bear on the rug in front of the television. Next
+> to each of the five people there is a plain blank white rounded name plate,
+> completely empty, no writing on it.
+
+**7. `media/sm2/u5/t_bedroom.webp` — СЦЕНА.** Этой картинкой проверяются пять
+ответов, поэтому важно всё: **большая зелёная кровать, синий коврик рядом с
+кроватью, зеркала нет совсем, маленькая зелёная лампа слева от кровати, жёлтый
+шкаф справа.** Шкаф должен быть именно шкафом с дверцами, а не комодом.
+
+> [СЦЕНА] A child's bedroom seen from the front. A big bed with a green blanket
+> stands in the middle. A round blue rug lies on the floor next to the bed. On the
+> left of the bed there is a small bedside table with a small green table lamp on
+> it. On the right of the bed there is a tall yellow wardrobe with two closed
+> doors and a handle on each door. A window with curtains is on the left wall.
+> There is NO mirror anywhere in the room.
+
+**8. `media/sm2/u6/monster.webp` — ПРЕДМЕТ.** От картинки зависят пять пропусков:
+**чёрные очки, два голубых глаза, оранжевые волосы, два фиолетовых уха, четыре
+зуба.** Рогов быть не должно — именно из-за них задание сейчас не сходится.
+
+> [ПРЕДМЕТ] A friendly fluffy cartoon monster with bright orange fur, standing on
+> two thin legs. It wears round black glasses over two big light blue eyes. It has
+> a tuft of orange hair on top of its head and two purple ears, one on each side of
+> the head — ears shaped like soft rounded leaves, definitely NOT horns and not
+> pointed. Its open smiling mouth shows exactly four white teeth.
+
+**9. `media/sm2/u6/q_forest.webp` — СЦЕНА.** Ответ — «Yes, they are», значит лес
+должен быть очевиден: деревья со всех сторон, а не газон с кустиком.
+
+> [СЦЕНА] A girl in a summer dress hugging a small brown and white goat, both
+> standing on a forest path. Tall trees with thick green crowns surround them on
+> every side, more trees are visible behind, sunlight comes through the leaves. It
+> is clearly a forest, not a lawn and not a garden.
+
+**10. `media/sm2/u8/g_bat.webp` — ПРЕДМЕТ.** Слово `bat` в юните 8 — ракетка для
+настольного тенниса, а не бейсбольная бита.
+
+> [ПРЕДМЕТ] A table tennis bat seen from the front at a slight angle: a round
+> wooden blade covered with bright red rubber on the face, a thin dark red edge,
+> and a short rounded wooden handle with a black grip. A small white table tennis
+> ball lies next to it.
+
+**Что делаю я после генерации.** Обрезаю по краю, жму в webp, проверяю долю
+не-белых пикселей вдоль каждой стороны и показываю превью контактным листом.
+На картинках 2, 3 и 6 — подписываю пустые таблички сама, ровным шрифтом:
+HOSPITAL · CAFE · CINEMA · SCHOOL для улицы, названия мест для карты, и имена
+на карте остаются пустыми, потому что их вписывает ребёнок.
+
+---|---|---|
 | 3 | `t_dog_behind.webp` | собака лежит **на крыше**, а не за домом; используется трижды, в том числе в тесте. Запасной промпт `b_behind` есть в `u3_prompts.json`, но картинка не сгенерирована |
 | 3 | `town_hw7.webp` | школа не подписана, хотя вопрос 3 спрашивает именно про неё; на столбике мусорный текст «boo» |
 | 3 | `map_town_quiz.webp` | стоковая картинка с водяным знаком фотобанка поверх парка |
