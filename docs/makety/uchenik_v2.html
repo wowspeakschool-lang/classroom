@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Домашка ученика — макет v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* Тёплая тема, подогнана под кабинет ученика app.wowspeak-online.ru/child:
+   кремово-персиковый фон, белые карточки, фиолетовый и розовый, жёлтые монеты */
+:root{
+  --bg:linear-gradient(160deg,#FFF8EF 0%,#FFF1E6 45%,#FFF6DF 100%);
+  --ink:#1F1A3D; --mute:#6F6A8A; --faint:#ABA6C2; --line:#EEEAF3;
+  --card:#fff; --r:26px;
+  --act:#F7628C; --act-d:#E54474; --act-soft:#FFE9EF;
+  --pick:#6A4DF4; --pick-d:#5236DB; --pick-soft:#EFEBFF;
+  --ok:#2FB57C; --ok-soft:#E3F7EE;
+  --warn:#E8862A; --warn-soft:#FFF0DE;
+  --late:#E5484D; --late-soft:#FFE8E8;
+  --coin:#FFE7A3; --coin-ink:#9A6A00;
+  --shadow:0 8px 26px rgba(43,37,69,.07);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:'Montserrat',system-ui,sans-serif;color:var(--ink);background:#2A2638;overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;
+  transition:transform .09s ease, box-shadow .12s, background .15s, border-color .15s, opacity .15s}
+button:active{transform:scale(.96)}
+img{display:block;max-width:100%}
+
+/* ── панель макета (не часть интерфейса) ── */
+.panel{position:fixed;left:0;right:0;top:0;z-index:100;background:#1D1A29;color:#fff;
+  display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding:8px 12px;font-size:13px}
+.grp{display:flex;align-items:center;gap:3px;flex-wrap:wrap}
+.grp>span{opacity:.5;margin-right:4px}
+.grp button{color:#fff;opacity:.6;padding:5px 10px;border-radius:8px;font-size:13px}
+.grp button.on{background:rgba(255,255,255,.16);opacity:1;font-weight:700}
+.note{opacity:.55;font-size:12px;flex-basis:100%}
+
+/* ── сцена с «устройством» ── */
+.stagewrap{position:fixed;left:0;right:0;bottom:0;display:grid;place-items:center;overflow:hidden}
+.frame{position:absolute;left:50%;top:50%;background:var(--bg);overflow:hidden;border-radius:18px;
+  box-shadow:0 30px 80px rgba(0,0,0,.45);transform-origin:center center;container-type:size;container-name:frame}
+.frame.full{border-radius:0}
+
+/* ── приложение ученика ── */
+.app{position:absolute;inset:0;display:flex;flex-direction:column}
+.top{background:rgba(255,255,255,.75);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.04);flex:0 0 auto}
+.top-in{max-width:900px;margin:0 auto;padding:10px 16px 8px;display:flex;align-items:center;gap:12px}
+.back{height:38px;border-radius:99px;background:var(--pick-soft);color:var(--pick-d);display:inline-flex;align-items:center;
+  padding:0 14px;font-weight:800;font-size:13px;flex:0 0 auto;text-transform:uppercase;letter-spacing:.02em}
+.logo{font-weight:900;font-size:20px;letter-spacing:-.02em;color:var(--ink);flex:0 0 auto}
+.logo i{font-style:normal;color:var(--pick)}
+.coins{background:var(--coin);color:var(--coin-ink);border-radius:99px;padding:7px 13px;font-weight:800;font-size:14px;
+  white-space:nowrap;box-shadow:0 6px 16px rgba(255,190,60,.3);flex:0 0 auto}
+.tt{flex:1;min-width:0}
+.tt b{display:block;font-size:17px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tt span{font-size:13px;color:var(--mute)}
+.due{border-radius:99px;padding:6px 12px;font-size:13px;font-weight:800;white-space:nowrap;background:var(--warn-soft);color:var(--warn)}
+.due.soon{background:var(--warn-soft);color:var(--warn)}
+.due.late{background:var(--late-soft);color:var(--late)}
+.steps{max-width:900px;margin:0 auto;padding:0 16px 10px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.steps::-webkit-scrollbar{display:none}
+.st{flex:1 0 34px;height:34px;border-radius:11px;background:rgba(0,0,0,.05);color:var(--mute);font-weight:700;
+  font-size:14px;display:grid;place-items:center;position:relative}
+.st.ok{background:var(--ok);color:#fff}
+.st.cur{box-shadow:0 0 0 2px var(--pick) inset;color:var(--pick-d)}
+.st.ok.cur{box-shadow:0 0 0 3px #fff inset, 0 0 0 2px var(--ok)}
+.st.acc{background:var(--ok-soft);color:var(--ok)}
+
+.main{flex:1;min-height:0;overflow-y:auto;container-type:size;container-name:main;scroll-behavior:smooth}
+.main.snap{scroll-snap-type:y mandatory}
+.list{max-width:900px;margin:0 auto;padding:16px 16px 24px}
+
+/* ── карточка задания ── */
+.task{background:var(--card);border-radius:var(--r);padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+  position:relative;display:flex;flex-direction:column}
+.task.flash{animation:flash 1.1s ease}
+@keyframes flash{0%,100%{box-shadow:var(--shadow)}20%,60%{box-shadow:0 0 0 4px var(--act),var(--shadow)}}
+.task.fit{height:calc(100cqh - 32px);margin:16px auto;scroll-snap-align:center;overflow:hidden}
+.main.snap .task.fit{margin:16px auto}
+.hd{display:flex;align-items:flex-start;gap:10px;flex:0 0 auto}
+.hd .t{flex:1;min-width:0}
+.no{font-size:13px;color:var(--faint);font-weight:700;letter-spacing:.01em}
+.q{font-size:21px;font-weight:800;line-height:1.3;margin:2px 0 14px}
+.ready{flex:0 0 auto;background:var(--ok-soft);color:var(--ok);border-radius:99px;padding:5px 12px;
+  font-size:13px;font-weight:800;animation:pop .3s cubic-bezier(.2,1.3,.4,1)}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.body{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px}
+.saved{font-size:12px;color:var(--faint);margin-top:10px;flex:0 0 auto;min-height:16px}
+.need{font-size:13px;color:var(--mute);margin-top:6px}
+
+.snd{display:inline-flex;align-items:center;gap:8px;background:var(--pick-soft);color:var(--pick-d);
+  border-radius:99px;padding:10px 18px;font-weight:700;align-self:flex-start;flex:0 0 auto}
+
+/* картинки: в обычном режиме по ширине, в «по экрану» — сжимаются по высоте */
+.ph{width:100%;border-radius:14px;object-fit:contain;aspect-ratio:4/3}
+.fit .ph{aspect-ratio:auto;height:100%;min-height:0}
+
+/* видео */
+.video{position:relative;border-radius:16px;overflow:hidden;background:#2B2545;aspect-ratio:16/9;
+  align-self:center;width:min(100%, 92cqh);display:grid;place-items:center}
+.fit .video{flex:1 1 0;min-height:0;aspect-ratio:16/9;width:auto;max-width:100%;height:auto}
+.video .pl{width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--act);font-size:28px;display:grid;place-items:center}
+.video .vb{position:absolute;left:0;right:0;bottom:0;height:6px;background:rgba(255,255,255,.2)}
+.video .vb i{display:block;height:100%;background:var(--act);width:0;transition:width .2s linear}
+.video .cap{position:absolute;left:14px;top:12px;color:#fff;font-weight:700;font-size:14px;opacity:.85}
+
+/* карточки слов */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;flex:1;min-height:0}
+.fit .cards{grid-auto-rows:minmax(0,1fr)}
+.fc{border:2px solid var(--line);border-radius:18px;background:#fff;padding:10px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;min-height:0;font-weight:800;font-size:17px;text-align:center}
+.fc .ph{flex:1;min-height:0}
+.fc.flip{border-color:var(--ok);background:var(--ok-soft)}
+.fc .w{color:var(--pick-d)}
+.fc .tap{font-size:12px;color:var(--faint);font-weight:600}
+
+/* выбор картинки */
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;flex:1;min-height:0}
+.fit .opts{grid-auto-rows:minmax(0,1fr)}
+.opt{border:3px solid var(--line);border-radius:18px;background:#fff;padding:8px;display:flex;min-height:0}
+.opt.sel{border-color:var(--pick);background:var(--pick-soft);box-shadow:var(--shadow);transform:translateY(-2px)}
+
+/* соедини */
+.match{display:grid;grid-template-columns:1fr 1fr;gap:12px 22px;flex:1;min-height:0}
+.fit .match{grid-auto-rows:minmax(0,1fr)}
+.ml{border:3px solid var(--line);border-radius:16px;background:#fff;padding:6px;display:flex;align-items:center;justify-content:center;gap:10px;min-height:0}
+.ml .ph{width:auto;height:100%;max-height:120px;aspect-ratio:4/3;flex:0 0 auto}
+.fit .ml .ph{max-height:none}
+.ml .lbl{font-weight:800;color:var(--pick-d);font-size:16px}
+.mr{border:3px solid var(--line);border-radius:16px;background:#fff;padding:10px 14px;font-weight:800;font-size:18px;
+  display:flex;align-items:center;justify-content:center;min-height:0}
+.ml.sel,.mr.sel{border-color:var(--pick);background:var(--pick-soft)}
+.ml.pair,.mr.pair{border-color:transparent;background:var(--pc)}
+.mhint{font-size:13px;color:var(--mute)}
+
+/* составь предложение / пропуски */
+.line{min-height:62px;border-radius:16px;border:2px dashed var(--line);padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+  font-size:20px;flex:0 0 auto}
+.line.full{border-style:solid;border-color:var(--pick);background:#FCFBFF}
+.bank{display:flex;flex-wrap:wrap;gap:9px;flex:0 0 auto}
+.chip{background:var(--pick-soft);color:var(--pick-d);border-radius:14px;padding:11px 18px;font-weight:800;font-size:19px}
+.chip.used{opacity:.25;pointer-events:none}
+.line .chip{background:var(--pick);color:#fff}
+.sent{font-size:24px;line-height:2.4;font-weight:600}
+.slot{display:inline-block;min-width:110px;border-bottom:3px solid var(--pick);margin:0 6px;text-align:center;font-weight:800;color:var(--pick-d)}
+.slot.full{background:var(--pick-soft);border-radius:10px 10px 0 0;padding:0 10px}
+.img-side{display:flex;gap:16px;flex:1;min-height:0}
+.img-side .ph{width:40%;flex:0 0 auto;height:auto;max-height:260px}
+.fit .img-side .ph{max-height:100%;height:100%}
+.img-side .r{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px;justify-content:center}
+
+/* устное */
+.rec{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.recbtn{background:var(--act);color:#fff;border-radius:16px;padding:14px 24px;font-weight:800;font-size:17px;box-shadow:0 6px 18px rgba(245,96,138,.35)}
+.recbtn.stop{background:#2B2545;box-shadow:none}
+.ghost{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px 18px;font-weight:700}
+.timer{font-weight:800;font-size:20px;color:var(--act);display:flex;align-items:center;gap:8px}
+.timer:before{content:"";width:12px;height:12px;border-radius:50%;background:var(--act);animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.25}}
+.wave{flex:1;min-width:120px;height:38px;border-radius:10px;background:repeating-linear-gradient(90deg,var(--ok) 0 3px,transparent 3px 7px);
+  -webkit-mask:linear-gradient(transparent 30%,#000 30% 70%,transparent 70%);opacity:.55}
+
+/* комментарий учителя (переделка / просмотр работы) */
+.tc{display:flex;gap:10px;align-items:flex-start;background:#FFF8E8;border-radius:14px;padding:10px 12px;margin:-4px 0 12px;font-size:15px;flex:0 0 auto}
+.tc b{display:block;font-size:12px;color:var(--warn);text-transform:uppercase;letter-spacing:.04em}
+.acc-row{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.6);border-radius:16px;padding:12px 16px;
+  margin-bottom:10px;color:var(--mute);font-weight:600}
+.acc-row i{font-style:normal;background:var(--ok-soft);color:var(--ok);border-radius:99px;padding:3px 10px;font-size:13px;font-weight:800}
+
+.ro .body{pointer-events:none}
+
+/* ── низ ── */
+.bar{flex:0 0 auto;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-top:1px solid rgba(0,0,0,.04)}
+.bar-in{max-width:900px;margin:0 auto;padding:12px 16px 14px;display:flex;align-items:center;gap:12px}
+.bar .left{flex:1;min-width:0}
+.bar .left b{display:block;font-weight:800}
+.bar .left span{font-size:13px;color:var(--mute)}
+.nav{width:50px;height:50px;border-radius:16px;background:#fff;border:2px solid var(--line);font-size:20px;font-weight:800;flex:0 0 auto}
+.nav:disabled{opacity:.3;cursor:default}
+.fin{background:var(--act);color:#fff;border-radius:18px;padding:15px 26px;font-weight:800;font-size:17px;
+  box-shadow:0 8px 22px rgba(245,96,138,.35);white-space:nowrap}
+.fin.off{background:rgba(0,0,0,.08);color:var(--faint);box-shadow:none}
+.fin.next{background:var(--pick);box-shadow:0 8px 22px rgba(122,107,232,.3)}
+
+/* ── окно подтверждения ── */
+.modal{position:absolute;inset:0;background:rgba(43,37,69,.45);display:grid;place-items:center;z-index:30;padding:16px;
+  animation:fade .2s ease}
+@keyframes fade{from{opacity:0}}
+.dlg{background:#fff;border-radius:26px;padding:26px 24px 22px;max-width:440px;width:100%;text-align:center;
+  box-shadow:0 30px 70px rgba(0,0,0,.25);animation:rise .28s cubic-bezier(.2,1.2,.4,1)}
+@keyframes rise{from{transform:translateY(24px);opacity:0}}
+.dlg h2{margin:6px 0 6px;font-size:23px;font-weight:800}
+.dlg p{margin:0 0 18px;color:var(--mute)}
+.ring{width:74px;height:74px;margin:0 auto 8px;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:24px;font-weight:800;color:var(--act)}
+.dlg .row{display:flex;gap:10px;flex-wrap:wrap}
+.dlg .row button{flex:1 1 160px}
+.dlg small{display:block;margin-top:12px;color:var(--faint);font-size:12px}
+
+/* ── экраны после отправки ── */
+.center{min-height:100%;display:grid;place-items:center;padding:20px 16px}
+.done{background:#fff;border-radius:30px;padding:34px 26px;text-align:center;box-shadow:var(--shadow);max-width:520px;width:100%;
+  animation:rise .35s cubic-bezier(.2,1,.4,1)}
+.done .em{font-size:56px}
+.done h2{font-size:27px;margin:10px 0 6px;font-weight:800}
+.done p{color:var(--mute);margin:0}
+.score{font-size:min(30cqw,140px);font-weight:800;line-height:1;color:var(--ok);margin:6px 0 4px;letter-spacing:-.03em}
+.weather{width:min(52cqw,240px);margin:0 auto}
+.wname{font-size:24px;font-weight:800;margin:4px 0 2px}
+.parent{margin-top:18px;font-size:14px;color:var(--mute);background:rgba(0,0,0,.04);border-radius:99px;padding:8px 16px}
+.pct{font-size:30px;font-weight:800;color:var(--ink);margin-top:10px}
+.link{margin-top:22px;color:var(--pick-d);font-weight:700;background:var(--pick-soft);border-radius:14px;padding:12px 20px}
+.banner{max-width:900px;margin:16px auto 0;padding:0 16px}
+.banner .in{background:#fff;border-radius:20px;padding:16px 18px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:center}
+.banner .in .em{font-size:34px}
+.banner b{display:block;font-size:18px}
+.banner span{color:var(--mute);font-size:14px}
+
+/* ── адаптация под ширину устройства ── */
+@container frame (max-width: 900px){
+  .logo{display:none}
+}
+@container frame (max-width: 640px){
+  .top-in{padding:8px 12px 6px;gap:10px}
+  .tt b{font-size:15px}
+  .tt span{display:none}
+  .logo,.coins{display:none}
+  .back{padding:0 10px;font-size:0}
+  .back:before{content:"←";font-size:18px}
+  .due{font-size:12px;padding:5px 9px}
+  .steps{padding:0 12px 8px;gap:5px}
+  .st{flex-basis:30px;height:30px;font-size:13px}
+  .list{padding:12px 10px 18px}
+  .task{padding:16px 14px;border-radius:18px}
+  .task.fit{height:calc(100cqh - 20px);margin:10px auto}
+  .q{font-size:18px;margin-bottom:10px}
+  .cards{grid-template-columns:repeat(2,1fr);gap:8px}
+  .opts{gap:8px}
+  .match{gap:8px 10px}
+  .ml{flex-direction:column;gap:4px;padding:4px}
+  .ml .ph{width:100%;height:auto;max-height:90px}
+  .fit .ml .ph{height:100%;max-height:none}
+  .ml .lbl{display:none}
+  .mr{font-size:15px;padding:8px}
+  .chip{font-size:17px;padding:9px 14px}
+  .sent{font-size:20px}
+  .img-side{flex-direction:column;gap:10px}
+  .img-side .ph{width:100%;max-height:150px}
+  .fit .img-side .ph{height:auto;flex:1;min-height:0}
+  .bar-in{padding:10px 12px 12px;gap:8px}
+  .bar .left span{display:none}
+  .fin{padding:14px 18px;font-size:16px}
+  .nav{width:46px;height:46px}
+}
+@container frame (min-width: 1100px){
+  .list{max-width:1000px}
+  .top-in,.steps,.bar-in{max-width:1000px}
+  .q{font-size:23px}
+}
+/* высокий экран (планшет стоя, телефон): карточки и варианты сеткой 2×2, а не вытянутым рядом */
+@container main (orientation: portrait){
+  .cards{grid-template-columns:repeat(2,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="panel" id="panel"></div>
+<div class="stagewrap" id="stagewrap"><div class="frame" id="frame"><div class="app" id="app"></div></div></div>
+
+<script>
+const IMG = 'https://classroom.wowteach.ru/media/sm2/u1/';
+const COURSES = {
+  SM:{ title:'SM2 Unit 1 Homework 1', sub:'Super Minds 2 · My day' },
+  WD:{ title:'WD1 Homework 12', sub:'Wow Dragon 1 · Мой день' },
+  GG:{ title:'GG1 Unit 3 Homework 2', sub:'Go Getter 1 · My day' },
+};
+const DEVICES = {
+  desktop:{ w:1280, h:780, label:'Компьютер' },
+  tablet: { w:820,  h:1100, label:'Планшет' },
+  phone:  { w:390,  h:800,  label:'Телефон' },
+  full:   { w:0,    h:0,    label:'Во всё окно' },
+};
+
+// Задания макета. Видео и карточки тоже обязательны — их надо досмотреть / пролистать.
+const TASKS = [
+  { kind:'video', q:'Посмотри видео', cap:'Daily routine song' },
+  { kind:'cards', q:'Посмотри все карточки', cards:[['get_up','get up'],['brush_your_teeth','brush your teeth'],['have_breakfast','have breakfast'],['go_to_school','go to school']] },
+  { kind:'quiz',  q:'Послушай и выбери картинку', opts:['go_to_bed','get_up','have_lunch'] },
+  { kind:'match', q:'Соедини картинку и слова', left:[['get_dressed','1'],['brush_your_teeth','2'],['go_to_school','3']],
+    right:['go to school','get dressed','brush your teeth'] },
+  { kind:'order', q:'Составь предложение', img:'get_up', words:['at','I','seven','get','up','o’clock.'] },
+  { kind:'gaps',  q:'Вставь пропущенное слово', img:'have_breakfast', chips:['have','go','get'] },
+  { kind:'speak', q:'Расскажи, что ты делаешь утром', sample:'I get up. I brush my teeth. I have breakfast.' },
+];
+const N = TASKS.length;
+const PAIRC = ['#FDE7EF','#E6F3FF','#E8F6F0'];
+
+let S = { variant:'A', fit:false, device:'desktop', course:'SM', stage:'doing', score:95, due:'soon',
+          cur:0, a:{}, confirm:null, parentPct:false, viewWork:false, retakeSet:[4,5] };
+function freshAnswers(){
+  return { 0:{p:0}, 1:{f:{}}, 2:{sel:null}, 3:{sel:null,map:{}}, 4:{line:[]}, 5:{pick:null}, 6:{st:'idle',t:0} };
+}
+S.a = freshAnswers();
+
+/* ── готово ли задание ── */
+function isDone(i){
+  const a=S.a[i], t=TASKS[i];
+  if(t.kind==='video') return a.p>=100;
+  if(t.kind==='cards') return Object.keys(a.f).length===t.cards.length;
+  if(t.kind==='quiz')  return a.sel!==null;
+  if(t.kind==='match') return Object.keys(a.map).length===t.left.length;
+  if(t.kind==='order') return a.line.length===t.words.length;
+  if(t.kind==='gaps')  return a.pick!==null;
+  if(t.kind==='speak') return a.st==='done';
+}
+function activeIdx(){ return S.stage==='retake' ? S.retakeSet : TASKS.map((_,i)=>i); }
+function left(){ return activeIdx().filter(i=>!isDone(i)); }
+
+/* ── панель макета ── */
+function grp(label, key, items){
+  return `<div class="grp"><span>${label}</span>${items.map(([v,t])=>
+    `<button class="${S[key]===v?'on':''}" onclick="setOpt('${key}','${v}')">${t}</button>`).join('')}</div>`;
+}
+function panel(){
+  let h = grp('Вариант','variant',[['A','А · лентой'],['B','Б · по одному']]);
+  if(S.variant==='A') h += `<div class="grp"><span>Экран</span>
+    <button class="${!S.fit?'on':''}" onclick="setFit(false)">свободно</button>
+    <button class="${S.fit?'on':''}" onclick="setFit(true)">каждое задание на экран</button></div>`;
+  h += grp('Устройство','device',Object.entries(DEVICES).map(([k,v])=>[k,v.label]));
+  h += grp('Курс','course',[['SM','SM'],['WD','WD'],['GG','GG']]);
+  h += grp('Состояние','stage',[['doing','выполняет'],['sent','отправлено'],['checked','проверено'],['retake','переделка']]);
+  h += grp('Срок','due',[['ok','к пятнице'],['soon','сегодня'],['late','просрочено']]);
+  if(S.stage==='checked') h += grp('Оценка','score',[[95,'95'],[78,'78'],[58,'58'],[30,'30']]);
+  h += `<div class="note">${S.variant==='B'
+      ? 'Б: одно задание на экран, картинки сжимаются под высоту — листать не нужно.'
+      : (S.fit ? 'А + «на экран»: каждое задание занимает ровно экран и защёлкивается при прокрутке.'
+               : 'А: все задания одной лентой, обычная прокрутка.')}
+    ${S.course==='WD'?' · WD: оценка погодой — ☀️ от 90, 🌤 70–89, ☁️ 50–69, 🌧 ниже 50.':''}</div>`;
+  document.getElementById('panel').innerHTML = h;
+}
+function setOpt(k,v){
+  S[k] = (k==='score') ? Number(v) : v;
+  if(k==='stage'){
+    S.confirm=null; S.viewWork=false; S.parentPct=false; S.a=freshAnswers();
+    if(v!=='doing'){ fillAll(); }
+    if(v==='retake'){ S.retakeSet.forEach(i=>{ S.a[i]=freshAnswers()[i]; }); S.cur=S.retakeSet[0]; }
+    else S.cur=0;
+  }
+  if(k==='variant'){ S.cur = activeIdx()[0]; }
+  render();
+}
+function setFit(v){ S.fit=v; render(); }
+function fillAll(){
+  S.a = { 0:{p:100}, 1:{f:{0:1,1:1,2:1,3:1}}, 2:{sel:1}, 3:{sel:null,map:{0:1,1:2,2:0}},
+          4:{line:[1,3,4,0,2,5]}, 5:{pick:0}, 6:{st:'done',t:9} };
+}
+
+/* ── устройство ── */
+function layoutFrame(){
+  const panelH = document.getElementById('panel').offsetHeight;
+  const wrap = document.getElementById('stagewrap'); wrap.style.top = panelH+'px';
+  const fr = document.getElementById('frame');
+  const d = DEVICES[S.device];
+  const W = wrap.clientWidth, H = wrap.clientHeight;
+  if(S.device==='full'){ fr.className='frame full'; fr.style.width=W+'px'; fr.style.height=H+'px'; fr.style.transform='translate(-50%,-50%)'; return; }
+  fr.className='frame';
+  fr.style.width=d.w+'px'; fr.style.height=d.h+'px';
+  const sc = Math.min(1, (W-32)/d.w, (H-32)/d.h);
+  fr.style.transform = `translate(-50%,-50%) scale(${sc})`;
+}
+
+/* ── шапка ── */
+function topBar(){
+  const c = COURSES[S.course];
+  const dueTxt = {ok:'⏰ К пятнице, 16 окт', soon:'🔥 Сделать сегодня', late:'⚠️ Просрочено 2 дня назад'}[S.due];
+  const showSteps = (S.stage==='doing' || S.stage==='retake' || (S.viewWork));
+  const steps = showSteps ? `<div class="steps">${TASKS.map((_,i)=>{
+      const accepted = S.stage==='retake' && !S.retakeSet.includes(i);
+      const cls = accepted ? 'acc' : (isDone(i)?'ok':'');
+      const cur = (S.variant==='B' && i===S.cur) ? 'cur' : '';
+      return `<button class="st ${cls} ${cur}" onclick="jump(${i})">${isDone(i)&&!accepted?'✓':i+1}</button>`;
+    }).join('')}</div>` : '';
+  const dueHtml = (S.stage==='doing'||S.stage==='retake') ? `<span class="due ${S.due==='ok'?'':S.due}">${dueTxt}</span>` : '';
+  return `<div class="top"><div class="top-in">
+      <span class="logo">Wow<i>Speak</i></span>
+      <button class="back">← Домашка</button>
+      <span class="tt"><b>${c.title}</b><span>${c.sub}</span></span>${dueHtml}
+      <span class="coins">🪙 955</span>
+    </div>${steps}</div>`;
+}
+
+/* ── задания ── */
+function img(name, cls='ph'){ return `<img class="${cls}" src="${IMG}${name}.webp" alt="" onerror="this.style.visibility='hidden'">`; }
+
+function taskInner(i){
+  const t=TASKS[i], a=S.a[i];
+  if(t.kind==='video'){
+    return `<div class="video" onclick="playVideo(${i})"><span class="cap">${t.cap}</span>
+      <span class="pl">${a.p>=100?'↺':'▶'}</span><span class="vb"><i style="width:${a.p}%"></i></span></div>
+      <div class="need">${a.p>=100?'Видео просмотрено':'Досмотри до конца — без этого домашку не отправить'}</div>`;
+  }
+  if(t.kind==='cards'){
+    const n=Object.keys(a.f).length;
+    return `<div class="cards">${t.cards.map(([im,w],k)=>`<button class="fc ${a.f[k]?'flip':''}" onclick="flipCard(${i},${k})">
+        ${img(im)}${a.f[k]?`<span class="w">${w} 🔊</span>`:'<span class="tap">нажми</span>'}</button>`).join('')}</div>
+      <div class="need">Посмотрено ${n} из ${t.cards.length}</div>`;
+  }
+  if(t.kind==='quiz'){
+    return `<button class="snd">🔊 Послушать</button>
+      <div class="opts">${t.opts.map((o,k)=>`<button class="opt ${a.sel===k?'sel':''}" onclick="pickQuiz(${i},${k})">${img(o)}</button>`).join('')}</div>`;
+  }
+  if(t.kind==='match'){
+    const rightUsed = Object.entries(a.map); // leftIdx -> rightIdx
+    const pairOfRight = r => { const e=rightUsed.find(([l,rr])=>rr===r); return e?Number(e[0]):null; };
+    return `<div class="match">${t.left.map(([im,lbl],k)=>{
+        const r = t.right[k]; const pl = pairOfRight(k);
+        const lp = a.map[k]!==undefined;
+        return `<button class="ml ${a.sel===k?'sel':''} ${lp?'pair':''}" style="--pc:${PAIRC[k]}" onclick="matchL(${i},${k})">${img(im)}</button>
+                <button class="mr ${pl!==null?'pair':''}" style="--pc:${pl!==null?PAIRC[pl]:''}" onclick="matchR(${i},${k})">${r}</button>`;
+      }).join('')}</div>
+      <div class="mhint">Нажми картинку, потом слова</div>`;
+  }
+  if(t.kind==='order'){
+    return `<div class="img-side">${img(t.img)}<div class="r">
+        <div class="line ${a.line.length===t.words.length?'full':''}">${a.line.map((w,k)=>
+          `<button class="chip" onclick="unOrder(${i},${k})">${t.words[w]}</button>`).join('') || '<span style="color:var(--faint);font-size:15px">Нажимай слова по порядку</span>'}</div>
+        <div class="bank">${t.words.map((w,k)=>`<button class="chip ${a.line.includes(k)?'used':''}" onclick="addOrder(${i},${k})">${w}</button>`).join('')}</div>
+      </div></div>`;
+  }
+  if(t.kind==='gaps'){
+    return `<div class="img-side">${img(t.img)}<div class="r">
+        <div class="sent">I <span class="slot ${a.pick!==null?'full':''}">${a.pick!==null?t.chips[a.pick]:'&nbsp;'}</span> breakfast at eight.</div>
+        <div class="bank">${t.chips.map((c,k)=>`<button class="chip ${a.pick===k?'used':''}" onclick="pickGap(${i},${k})">${c}</button>`).join('')}</div>
+      </div></div>`;
+  }
+  if(t.kind==='speak'){
+    let ctl;
+    if(a.st==='idle') ctl = `<button class="recbtn" onclick="rec(${i},'start')">🎤 Записать</button>`;
+    else if(a.st==='rec') ctl = `<span class="timer" id="tm">0:${String(a.t).padStart(2,'0')}</span><button class="recbtn stop" onclick="rec(${i},'stop')">■ Стоп</button>`;
+    else ctl = `<button class="ghost" onclick="void 0">▶ Послушать себя</button><span class="wave"></span>
+                <button class="ghost" onclick="rec(${i},'again')">↺ Перезаписать</button>`;
+    return `<button class="snd">🔊 Послушать образец</button>
+      <div style="font-size:19px;font-weight:700;color:var(--mute)">${t.sample}</div>
+      <div class="rec">${ctl}</div>
+      <div class="need">${a.st==='done'?'Запись готова. Можно перезаписать, пока не отправил.':'Учитель послушает твою запись'}</div>`;
+  }
+}
+function comment(i){
+  const C = { 4:'Сначала кто — «I», потом что делаешь: «I get up…». Попробуй ещё раз 🙂',
+              5:'Завтрак мы «имеем» — have breakfast.' };
+  return C[i] ? `<div class="tc">💬<span><b>Учитель</b>${C[i]}</span></div>` : '';
+}
+function taskCard(i, opts={}){
+  const t=TASKS[i], d=isDone(i);
+  const fit = (S.variant==='B' || S.fit) ? 'fit' : '';
+  const ro = opts.ro ? 'ro' : '';
+  const showComment = S.stage==='retake' || (S.stage==='checked' && S.viewWork);
+  return `<div class="task ${fit} ${ro}" id="t${i}">
+    <div class="hd"><div class="t"><div class="no">Задание ${i+1} из ${N}</div><h3 class="q">${t.q}</h3></div>
+      ${d && !opts.ro ? '<span class="ready">✓ готово</span>' : ''}</div>
+    ${showComment?comment(i):''}
+    <div class="body" id="b${i}">${taskInner(i)}</div>
+    ${opts.ro?'':`<div class="saved" id="sv${i}">${d?'сохранено':''}</div>`}
+  </div>`;
+}
+
+/* ── точечные обновления: перерисовываем одно задание, шапку и низ ── */
+function upd(i){
+  const card=document.getElementById('t'+i); if(!card) return;
+  const wasDone = card.querySelector('.ready')!==null;
+  const tmp=document.createElement('div'); tmp.innerHTML=taskCard(i);
+  const fresh=tmp.firstElementChild;
+  // не проигрываем «✓ готово» заново, если оно уже было
+  if(wasDone){ const r=fresh.querySelector('.ready'); if(r) r.style.animation='none'; }
+  card.replaceWith(fresh);
+  document.querySelector('.top').outerHTML = topBar();
+  document.getElementById('barwrap').innerHTML = bar();
+}
+function playVideo(i){
+  const a=S.a[i]; if(a.p>=100){ a.p=0; }
+  const iv=setInterval(()=>{ a.p=Math.min(100,a.p+5);
+    const bar=document.querySelector('#t'+i+' .vb i'); if(bar) bar.style.width=a.p+'%';
+    if(a.p>=100){ clearInterval(iv); upd(i); } },110);
+}
+function flipCard(i,k){ S.a[i].f[k]=1; upd(i); }
+function pickQuiz(i,k){ S.a[i].sel=k; upd(i); }
+function matchL(i,k){ const a=S.a[i]; delete a.map[k]; a.sel=k; upd(i); }
+function matchR(i,r){
+  const a=S.a[i]; if(a.sel===null) return;
+  for(const l in a.map) if(a.map[l]===r) delete a.map[l];
+  a.map[a.sel]=r; a.sel=null; upd(i);
+}
+function addOrder(i,k){ S.a[i].line.push(k); upd(i); }
+function unOrder(i,k){ S.a[i].line.splice(k,1); upd(i); }
+function pickGap(i,k){ S.a[i].pick=k; upd(i); }
+let recIv=null;
+function rec(i,what){
+  const a=S.a[i];
+  if(what==='start'||what==='again'){ a.st='rec'; a.t=0; upd(i);
+    recIv=setInterval(()=>{ a.t++; const el=document.getElementById('tm'); if(el) el.textContent='0:'+String(a.t).padStart(2,'0'); },1000); }
+  if(what==='stop'){ clearInterval(recIv); a.st='done'; upd(i); }
+}
+
+/* ── навигация ── */
+function jump(i){
+  if(S.stage==='retake' && !S.retakeSet.includes(i)) return;
+  if(S.variant==='B'){ S.cur=i; renderMain(); return; }
+  const el=document.getElementById('t'+i); if(!el) return;
+  el.scrollIntoView({behavior:'smooth', block: S.fit?'center':'start'});
+  el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+}
+function step(d){
+  const idx=activeIdx(); const p=idx.indexOf(S.cur);
+  const n=idx[Math.max(0,Math.min(idx.length-1,p+d))]; S.cur=n; renderMain();
+}
+
+/* ── низ ── */
+function bar(){
+  if(!(S.stage==='doing'||S.stage==='retake')) return '';
+  const l=left(), all=activeIdx().length;
+  const ready = l.length===0;
+  const txt = ready ? '<b>Всё готово!</b><span>Можно отправлять учителю</span>'
+                    : `<b>Осталось ${l.length} из ${all}</b><span>задания: ${l.map(i=>i+1).join(', ')}</span>`;
+  let navs='';
+  if(S.variant==='B'){
+    const idx=activeIdx(), p=idx.indexOf(S.cur);
+    navs = `<button class="nav" ${p<=0?'disabled':''} onclick="step(-1)">←</button>`;
+    if(p<idx.length-1 && !ready) return `<div class="bar-in">${navs}<span class="left">${txt}</span>
+        <button class="fin next" onclick="step(1)">Дальше →</button></div>`;
+  }
+  return `<div class="bar-in">${navs}<span class="left">${txt}</span>
+    <button class="fin ${ready?'':'off'}" onclick="finish()">${S.stage==='retake'?'Отправить ещё раз':'Завершить и отправить'}</button></div>`;
+}
+function finish(){
+  const l=left();
+  if(l.length){ jump(l[0]); return; }   // серая кнопка ведёт к первому недоделанному
+  S.confirm = { n:10 }; renderModal();
+  S.confirm.iv = setInterval(()=>{ if(!S.confirm) return; S.confirm.n--; if(S.confirm.n<=0){ sendNow(); } else renderModal(); },1000);
+}
+function cancelConfirm(){ if(S.confirm){ clearInterval(S.confirm.iv); } S.confirm=null; renderModal(); }
+function sendNow(){ if(S.confirm) clearInterval(S.confirm.iv); S.confirm=null; S.stage='sent'; render(); }
+function renderModal(){
+  const old=document.querySelector('.modal'); if(old) old.remove();
+  if(!S.confirm) return;
+  const n=S.confirm.n, C=2*Math.PI*32;
+  document.getElementById('app').insertAdjacentHTML('beforeend', `<div class="modal"><div class="dlg">
+    <div class="ring"><svg width="74" height="74"><circle cx="37" cy="37" r="32" fill="none" stroke="#F3EEF6" stroke-width="7"/>
+      <circle cx="37" cy="37" r="32" fill="none" stroke="var(--act)" stroke-width="7" stroke-linecap="round"
+        stroke-dasharray="${C}" stroke-dashoffset="${C*(1-n/10)}" style="transition:stroke-dashoffset 1s linear"/></svg><b>${n}</b></div>
+    <h2>Отправить учителю?</h2>
+    <p>После отправки ответы изменить нельзя.</p>
+    <div class="row">
+      <button class="ghost" onclick="cancelConfirm()">Проверить ещё раз</button>
+      <button class="fin" onclick="sendNow()">Отправить</button>
+    </div>
+    <small>Если ничего не нажать, через ${n} с домашка отправится сама — даже если закрыть сайт.</small>
+  </div></div>`);
+}
+
+/* ── экраны после отправки ── */
+function weatherOf(s){
+  if(s>=90) return ['sun','Солнышко!'];
+  if(s>=70) return ['suncloud','Солнышко за тучкой'];
+  if(s>=50) return ['cloud','Тучка'];
+  return ['rain','Дождик'];
+}
+function weatherSvg(kind){
+  const sun = (cx,cy,r)=>`<g><circle cx="${cx}" cy="${cy}" r="${r}" fill="#FFC93C"/>${Array.from({length:10},(_,k)=>{
+      const a=k*Math.PI/5, x1=cx+Math.cos(a)*(r+10), y1=cy+Math.sin(a)*(r+10), x2=cx+Math.cos(a)*(r+24), y2=cy+Math.sin(a)*(r+24);
+      return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#FFC93C" stroke-width="7" stroke-linecap="round"/>`; }).join('')}
+      <circle cx="${cx-r*.33}" cy="${cy-r*.1}" r="${r*.09}" fill="#7A4B12"/><circle cx="${cx+r*.33}" cy="${cy-r*.1}" r="${r*.09}" fill="#7A4B12"/>
+      <path d="M${cx-r*.38} ${cy+r*.22} Q${cx} ${cy+r*.62} ${cx+r*.38} ${cy+r*.22}" stroke="#7A4B12" stroke-width="5" fill="none" stroke-linecap="round"/></g>`;
+  const cloud = (dx,dy,s,fill,stroke)=>`<g transform="translate(${dx} ${dy}) scale(${s})" fill="${fill}" ${stroke?`stroke="${stroke}" stroke-width="3"`:''}>
+      <circle cx="60" cy="70" r="34"/><circle cx="102" cy="52" r="44"/><circle cx="146" cy="74" r="30"/>
+      <rect x="40" y="70" width="128" height="34" rx="17"/></g>`;
+  if(kind==='sun') return `<svg viewBox="0 0 240 240">${sun(120,120,56)}</svg>`;
+  if(kind==='suncloud') return `<svg viewBox="0 0 240 240">${sun(92,92,46)}${cloud(40,96,1,'#DCE3F0')}${cloud(43,99,.97,'#fff')}</svg>`;
+  if(kind==='cloud') return `<svg viewBox="0 0 240 240">${cloud(16,50,1.2,'#C9D3E6')}
+      <circle cx="100" cy="128" r="5" fill="#5E6B85"/><circle cx="148" cy="128" r="5" fill="#5E6B85"/>
+      <path d="M110 148 L138 148" stroke="#5E6B85" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
+  return `<svg viewBox="0 0 240 240">${cloud(16,30,1.2,'#A9B5CC')}
+      ${[70,110,150,190].map((x,k)=>`<path d="M${x} ${170+k%2*10} l-8 22" stroke="#5DA9E9" stroke-width="7" stroke-linecap="round"/>`).join('')}
+      <circle cx="100" cy="108" r="5" fill="#46536B"/><circle cx="148" cy="108" r="5" fill="#46536B"/>
+      <path d="M108 134 Q124 124 140 134" stroke="#46536B" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
+}
+function sentScreen(){
+  return `<div class="center"><div class="done"><div class="em">📨</div><h2>Отправлено!</h2>
+    <p>Учитель проверит, и здесь появится оценка</p></div></div>`;
+}
+function checkedScreen(){
+  if(S.viewWork) return workView();
+  const s=S.score;
+  let grade;
+  if(S.course==='WD'){
+    const [k,name]=weatherOf(s);
+    grade = `<div class="weather">${weatherSvg(k)}</div><div class="wname">${name}</div>
+      ${S.parentPct?`<div class="pct">${s} %</div>`:''}
+      <button class="parent" onclick="S.parentPct=!S.parentPct; renderMain()">${S.parentPct?'Скрыть проценты':'Для родителей: показать в процентах'}</button>`;
+  } else {
+    grade = `<div class="score" style="color:${s>=70?'var(--ok)':s>=50?'var(--warn)':'var(--late)'}">${s}%</div>`;
+  }
+  return `<div class="center"><div class="done">${grade}
+    <div><button class="link" onclick="S.viewWork=true; render()">Посмотреть мою работу</button></div></div></div>`;
+}
+function workView(){
+  return `<div class="banner"><div class="in"><span class="em">👀</span><span style="flex:1"><b>Твоя работа</b>
+      <span>Только посмотреть. Комментарии учителя — у заданий.</span></span>
+      <button class="ghost" onclick="S.viewWork=false; render()">← К оценке</button></div></div>
+    <div class="list">${TASKS.map((_,i)=>taskCard(i,{ro:true})).join('')}</div>`;
+}
+function retakeList(){
+  const head = `<div class="banner" style="padding:0;margin:0 0 14px;max-width:none"><div class="in"><span class="em">🔁</span>
+    <span><b>Учитель попросил переделать ${S.retakeSet.length} задания</b><span>Остальное принято</span></span></div></div>`;
+  return head + TASKS.map((t,i)=> S.retakeSet.includes(i) ? taskCard(i)
+      : `<div class="acc-row"><i>✓ принято</i>${i+1}. ${t.q}</div>`).join('');
+}
+
+/* ── сборка ── */
+function mainHtml(){
+  if(S.stage==='sent') return sentScreen();
+  if(S.stage==='checked') return checkedScreen();
+  if(S.variant==='B'){
+    const i=S.cur;
+    if(S.stage==='retake') return `<div class="list" style="padding-top:0;padding-bottom:0">${taskCard(i)}</div>`;
+    return `<div class="list" style="padding-top:0;padding-bottom:0">${taskCard(i)}</div>`;
+  }
+  if(S.stage==='retake') return `<div class="list">${retakeList()}</div>`;
+  return `<div class="list">${TASKS.map((_,i)=>taskCard(i)).join('')}</div>`;
+}
+function renderMain(){
+  const m=document.getElementById('main');
+  m.className = 'main' + (S.variant==='A' && S.fit && (S.stage==='doing'||S.stage==='retake') ? ' snap' : '');
+  m.innerHTML = mainHtml();
+  document.querySelector('.top').outerHTML = topBar();
+  const b=document.getElementById('barwrap'); b.innerHTML = bar(); b.style.display = b.innerHTML ? '' : 'none';
+}
+function render(){
+  if(S.confirm){ clearInterval(S.confirm.iv); S.confirm=null; }
+  panel(); layoutFrame();
+  document.getElementById('app').innerHTML = topBar() + `<div class="main" id="main"></div><div class="bar" id="barwrap"></div>`;
+  renderMain();
+}
+window.addEventListener('resize', layoutFrame);
+render();
+</script>
+</body>
+</html>
