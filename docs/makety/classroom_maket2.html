@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classroom — макет 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#171A33; --mute:#6B7185; --line:#E3E5ED; --field:#F2F3F7; --paper:#fff;
+  --accent:#5B4BE0; --accent-soft:#EFEDFD;
+  --amber:#B87309; --amber-soft:#FBF1DF;
+  --teal:#0F6E63;  --teal-soft:#E3F2EF;
+  --course:#5B4BE0; --course-soft:#EFEDFD;   /* подменяется под курс */
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:'Golos Text',system-ui,sans-serif;color:var(--ink);background:var(--field);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+svg{display:block}
+
+.app{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
+
+/* ── боковая полоса ── */
+.rail{background:var(--paper);border-right:1px solid var(--line);display:flex;flex-direction:column}
+.brand{height:58px;display:flex;align-items:center;gap:10px;padding:0 18px;border-bottom:1px solid var(--line)}
+.brand b{font-size:16px;letter-spacing:-.01em}
+.spark{width:24px;height:24px;border-radius:8px;background:var(--course);flex:0 0 auto;display:grid;place-items:center;color:#fff;font-size:12px;font-weight:700}
+.nav{padding:12px 10px;display:flex;flex-direction:column;gap:1px}
+.nav small{color:var(--mute);font-size:12px;padding:14px 8px 5px}
+.nav a{display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:10px;text-decoration:none;color:var(--ink);cursor:pointer}
+.nav a:hover{background:var(--field)}
+.nav a.on{background:var(--course-soft);color:var(--course);font-weight:600}
+.nav a svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;opacity:.8}
+.nav a.on svg{opacity:1}
+.nav a .n{margin-left:auto;font-size:12px;color:var(--mute)}
+.nav a.on .n{color:var(--course)}
+.find{margin:10px;display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;color:var(--mute);cursor:pointer;font-size:14px}
+.find:hover{border-color:#C9CDDB}
+.find kbd{margin-left:auto;font:inherit;font-size:11px;border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+.who{margin-top:auto;padding:12px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.ava{width:31px;height:31px;border-radius:9px;background:var(--field);display:grid;place-items:center;font-size:12px;font-weight:600;flex:0 0 auto}
+.who div{line-height:1.25;min-width:0}
+.who span{display:block;font-size:12px;color:var(--mute)}
+
+/* ── верх ── */
+.main{display:flex;flex-direction:column;min-width:0}
+.top{height:58px;background:var(--paper);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 22px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:4px 10px 4px 6px;border-radius:9px;background:var(--course-soft);color:var(--course);font-size:13px;font-weight:600}
+.chip i{width:14px;height:14px;border-radius:5px;background:var(--course);display:block}
+.crumbs{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--mute);min-width:0}
+.crumbs b{color:var(--ink);font-weight:600;font-size:15px}
+.crumbs em{font-style:normal;opacity:.45}
+.grow{flex:1}
+.work{padding:22px;min-width:0}
+
+.btn{border:1px solid var(--line);background:var(--paper);padding:7px 13px;border-radius:9px;cursor:pointer;font-size:14px;font-weight:500}
+.btn:hover{border-color:#C9CDDB}
+.btn.pri{background:var(--course);border-color:var(--course);color:#fff}
+.btn.sm{padding:5px 9px;font-size:13px}
+.btn.icon{padding:5px 7px;color:var(--mute)}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px}
+.h1{font-size:25px;font-weight:700;letter-spacing:-.02em;margin:0 0 3px}
+.sub{color:var(--mute);font-size:14px;margin:0 0 18px}
+
+/* тип материала — форма */
+.kind{width:24px;height:24px;flex:0 0 auto;display:grid;place-items:center}
+.kind i{display:block}
+.kind.lesson   i{width:15px;height:15px;border-radius:5px;background:var(--course)}
+.kind.homework i{width:15px;height:15px;border-radius:50%;background:var(--teal)}
+.kind.test     i{width:13px;height:13px;background:var(--amber);transform:rotate(45deg);border-radius:3px}
+.dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto}
+.dot.pub{background:var(--teal)}
+.dot.draft{border:1.5px solid var(--amber)}
+
+.tree{padding:8px}
+.tw{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:9px;cursor:pointer;text-decoration:none;color:inherit}
+.tw:hover{background:var(--field)}
+.tw.on{background:var(--course-soft)}
+.tw .tt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tw .cnt{font-size:12px;color:var(--mute)}
+.tw.unit{font-weight:600}
+.tw.lesson{padding-left:14px;font-size:14px}
+.chev{width:13px;color:var(--mute);font-size:11px}
+.code{font-size:11px;color:var(--mute);letter-spacing:.02em}
+
+/* готовность — только методисту */
+.ready{display:flex;align-items:center;gap:14px;padding:9px 15px;border-top:1px solid var(--line);background:#FBFBFE;font-size:13px;color:var(--mute);flex-wrap:wrap}
+.ready b{color:var(--ink);font-weight:600}
+.ready .bar{flex:1;min-width:120px;height:6px;border-radius:99px;background:var(--field);overflow:hidden;display:flex}
+.ready .bar span{display:block;height:100%}
+.mo{display:none}
+body.methodist .mo{display:flex}
+
+/* строки блоков */
+.rows{display:flex;flex-direction:column}
+.row{display:flex;align-items:center;gap:12px;padding:10px 14px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row:hover{background:#FAFAFD}
+.num{width:26px;font-size:12px;color:var(--mute);text-align:center;border:1px solid var(--line);border-radius:7px;padding:2px 0;background:var(--paper);flex:0 0 auto}
+.thumb{width:52px;height:38px;border-radius:8px;flex:0 0 auto;background:var(--field);display:grid;place-items:center;font-size:15px;overflow:hidden}
+.thumb.a{background:linear-gradient(140deg,#DCEAFB,#B9D4F4)}
+.thumb.b{background:linear-gradient(140deg,#FBE6EE,#F5C3D6)}
+.thumb.c{background:linear-gradient(140deg,#E4F3E2,#BFE3BD)}
+.thumb.d{background:linear-gradient(140deg,#FBF0DC,#F3DCAE)}
+.ttl{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ttl em{font-style:normal;color:var(--mute);font-size:13px;display:block;font-weight:400}
+.tag{font-size:12px;padding:2px 8px;border-radius:7px;background:var(--field);color:var(--mute);white-space:nowrap}
+.tag.t{background:var(--teal-soft);color:var(--teal)}
+.tag.a{background:var(--amber-soft);color:var(--amber)}
+.tag.v{background:var(--course-soft);color:var(--course)}
+.acts{display:flex;gap:3px;opacity:0;transition:opacity .12s}
+.row:hover .acts{opacity:1}
+
+.grid2{display:grid;grid-template-columns:296px 1fr;gap:18px;align-items:start}
+.panel-h{display:flex;align-items:center;gap:10px;padding:13px 15px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.panel-h b{font-size:15px}
+
+/* поиск */
+.veil{position:fixed;inset:0;background:rgba(23,26,51,.34);display:none;align-items:flex-start;justify-content:center;padding-top:11vh;z-index:20}
+.veil.on{display:flex}
+.finder{width:min(560px,92vw);background:var(--paper);border-radius:16px;box-shadow:0 22px 60px rgba(23,26,51,.3);overflow:hidden}
+.finder input{width:100%;border:0;outline:0;padding:17px 18px;font:inherit;font-size:17px}
+.finder .res{border-top:1px solid var(--line);max-height:52vh;overflow:auto}
+.fr{display:flex;align-items:center;gap:11px;padding:10px 16px;cursor:pointer}
+.fr:hover,.fr.sel{background:var(--course-soft)}
+.fr .p{flex:1;min-width:0}
+.fr .p em{font-style:normal;display:block;font-size:12px;color:var(--mute)}
+.hint{padding:9px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--mute);display:flex;gap:14px}
+
+/* переключатели демо */
+.switch{position:fixed;right:16px;bottom:16px;background:var(--ink);color:#fff;border-radius:13px;padding:7px;display:flex;gap:5px;box-shadow:0 8px 28px rgba(23,26,51,.3);z-index:9}
+.switch button{background:transparent;border:0;color:#fff;opacity:.6;padding:6px 11px;border-radius:9px;cursor:pointer;font-size:13px}
+.switch button.on{background:rgba(255,255,255,.17);opacity:1;font-weight:600}
+.switch .sep{width:1px;background:rgba(255,255,255,.2);margin:4px 3px}
+
+@media (max-width:900px){.app{grid-template-columns:1fr}.rail{display:none}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="methodist">
+
+<div class="app">
+  <aside class="rail">
+    <div class="brand"><span class="spark" id="sp">S</span><b>Classroom</b></div>
+
+    <div class="find" onclick="openFind()">
+      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      Найти материал<kbd>Ctrl K</kbd>
+    </div>
+
+    <nav class="nav">
+      <a class="on"><svg viewBox="0 0 24 24"><path d="M4 6h7v12H4zM13 6h7v12h-7z"/></svg>Библиотека</a>
+      <a><svg viewBox="0 0 24 24"><path d="M6 4l13 8-13 8z"/></svg>Уроки</a>
+      <a><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Проверка<span class="n">4</span></a>
+      <a><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3 3-4.6 5.5-4.6S14 16 14.6 19"/><path d="M16.5 8.5a3 3 0 010 5"/></svg>Ученики<span class="n">62</span></a>
+      <small>Материалы</small>
+      <a><svg viewBox="0 0 24 24"><path d="M12 4v11M8 11l4 4 4-4M5 19h14"/></svg>Выдать задание</a>
+      <a><svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="7" cy="18" r="2.2"/><circle cx="17" cy="16" r="2.2"/></svg>Медиа</a>
+    </nav>
+
+    <div class="who">
+      <span class="ava">ДШ</span>
+      <div>Дарья<span id="role">методист</span></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <span class="chip"><i></i><span id="cname">SM0 — Starter</span></span>
+      <div class="crumbs"><span>Unit 1 · My body</span><em>›</em><b>Homework 2</b><span class="code">SM0-U1-HW2</span></div>
+      <div class="grow"></div>
+      <button class="btn sm">Глазами ученика</button>
+      <button class="btn sm">Как на уроке</button>
+      <button class="btn pri sm">Сохранить</button>
+    </header>
+
+    <div class="work">
+      <div class="grid2">
+        <div class="card tree">
+          <div class="tw unit"><span class="chev">▾</span><span class="tt">Unit 1 · My body</span><span class="cnt">9</span></div>
+          <a class="tw lesson"><span class="kind lesson"><i></i></span><span class="tt">Lesson 1 · Parts of the body</span><span class="dot pub"></span></a>
+          <a class="tw lesson on"><span class="kind homework"><i></i></span><span class="tt">Homework 2</span><span class="dot pub"></span></a>
+          <a class="tw lesson"><span class="kind test"><i></i></span><span class="tt">Unit test</span><span class="dot draft"></span></a>
+          <div class="tw unit"><span class="chev">▸</span><span class="tt">Unit 2 · My family</span><span class="cnt">7</span></div>
+          <div class="tw unit"><span class="chev">▸</span><span class="tt">Unit 3 · Jobs</span><span class="cnt">8</span></div>
+          <div class="tw unit"><span class="chev">▸</span><span class="tt">Final Revision</span><span class="cnt">4</span></div>
+        </div>
+
+        <div class="card">
+          <div class="panel-h">
+            <b>Homework 2</b><span class="tag t">опубликовано</span>
+            <div class="grow"></div>
+            <button class="btn sm">Свернуть все</button>
+            <button class="btn sm">Оглавление</button>
+            <button class="btn sm">＋ Блок</button>
+          </div>
+
+          <div class="ready mo">
+            <b>Готовность</b>
+            <div class="bar">
+              <span style="width:64%;background:var(--teal)"></span>
+              <span style="width:22%;background:#E8B75E"></span>
+              <span style="width:14%;background:#E3E5ED"></span>
+            </div>
+            <span>5 блоков без звука · 3 без картинки · 2 ждут проверки</span>
+            <button class="btn sm">Озвучить это</button>
+          </div>
+
+          <div class="rows">
+            <div class="row">
+              <span class="num">1</span><span class="thumb a">🖼</span>
+              <span class="ttl">Look and say<em>Посмотри на картинки и назови части тела</em></span>
+              <span class="tag">Текст</span>
+              <div class="acts"><button class="btn icon sm">↑</button><button class="btn icon sm">↓</button><button class="btn icon sm">⧉</button><button class="btn icon sm">🗑</button></div>
+            </div>
+            <div class="row">
+              <span class="num">2</span><span class="thumb b">🃏</span>
+              <span class="ttl">head, mouth, nose, ear<em>4 карточки, все озвучены</em></span>
+              <span class="tag">Карточки</span>
+              <div class="acts"><button class="btn icon sm">↑</button><button class="btn icon sm">↓</button><button class="btn icon sm">⧉</button><button class="btn icon sm">🗑</button></div>
+            </div>
+            <div class="row">
+              <span class="num">3</span><span class="thumb c">❓</span>
+              <span class="ttl">Послушай и нажми на нужную картинку<em>3 вопроса, картинки в вариантах</em></span>
+              <span class="tag">Тест</span>
+              <div class="acts"><button class="btn icon sm">↑</button><button class="btn icon sm">↓</button><button class="btn icon sm">⧉</button><button class="btn icon sm">🗑</button></div>
+            </div>
+            <div class="row mo">
+              <span class="num">4</span><span class="thumb">📝</span>
+              <span class="ttl">Тайминг этапа: 4 минуты<em>Если группа большая — сократить до двух</em></span>
+              <span class="tag v">Только преподавателю</span>
+              <div class="acts"><button class="btn icon sm">↑</button><button class="btn icon sm">↓</button><button class="btn icon sm">⧉</button><button class="btn icon sm">🗑</button></div>
+            </div>
+            <div class="row">
+              <span class="num">5</span><span class="thumb d">🎤</span>
+              <span class="ttl">Say the words<em>ждёт проверки у 2 учеников</em></span>
+              <span class="tag">Запись голоса</span>
+              <div class="acts"><button class="btn icon sm">↑</button><button class="btn icon sm">↓</button><button class="btn icon sm">⧉</button><button class="btn icon sm">🗑</button></div>
+            </div>
+            <div class="row">
+              <span class="num">6</span><span class="thumb">🔈</span>
+              <span class="ttl">Listen and repeat<em>помечено к озвучке, звука пока нет</em></span>
+              <span class="tag a mo">Нет звука</span>
+              <div class="acts"><button class="btn icon sm">↑</button><button class="btn icon sm">↓</button><button class="btn icon sm">⧉</button><button class="btn icon sm">🗑</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="veil" id="veil" onclick="if(event.target===this)closeFind()">
+  <div class="finder">
+    <input id="q" placeholder="Название или код: parts, U1-HW2, dragon" oninput="draw()" autocomplete="off">
+    <div class="res" id="res"></div>
+    <div class="hint"><span>↑↓ выбрать</span><span>Enter открыть</span><span>Ctrl+Enter в новой вкладке</span></div>
+  </div>
+</div>
+
+<div class="switch">
+  <button class="on" onclick="setRole('methodist',this)">методист</button>
+  <button onclick="setRole('teacher',this)">преподаватель</button>
+  <div class="sep"></div>
+  <button class="on" onclick="setCourse('sm0',this)">SM0</button>
+  <button onclick="setCourse('dragon',this)">Wow Dragon</button>
+</div>
+
+<script>
+const DATA=[
+  {c:'SM0-U1-L1', t:'Lesson 1 · Parts of the body', u:'SM0 · Unit 1', k:'lesson'},
+  {c:'SM0-U1-HW2', t:'Homework 2', u:'SM0 · Unit 1', k:'homework'},
+  {c:'SM0-U1-T1', t:'Unit test', u:'SM0 · Unit 1', k:'test'},
+  {c:'SM0-U3-HW1', t:'Jobs · Homework 1', u:'SM0 · Unit 3', k:'homework'},
+  {c:'WD1-U2-HW4', t:'Dragon and the cave', u:'Wow Dragon 1 · Unit 2', k:'homework'},
+  {c:'WD1-U2-L1', t:'Lesson 1 · Colours', u:'Wow Dragon 1 · Unit 2', k:'lesson'},
+];
+let sel=0;
+function draw(){
+  const q=(document.getElementById('q').value||'').toLowerCase().trim();
+  const list=q? DATA.filter(d=>(d.c+' '+d.t+' '+d.u).toLowerCase().includes(q)) : DATA;
+  sel=0;
+  document.getElementById('res').innerHTML = list.length
+    ? list.map((d,i)=>`<div class="fr ${i===0?'sel':''}"><span class="kind ${d.k}"><i></i></span>
+        <span class="p">${d.t}<em>${d.u}</em></span><span class="code">${d.c}</span></div>`).join('')
+    : '<div class="fr"><span class="p">Ничего не нашлось<em>Попробуйте часть названия или код</em></span></div>';
+}
+function openFind(){ document.getElementById('veil').classList.add('on'); document.getElementById('q').value=''; draw(); document.getElementById('q').focus(); }
+function closeFind(){ document.getElementById('veil').classList.remove('on'); }
+document.addEventListener('keydown', e=>{
+  if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); openFind(); }
+  if(e.key==='Escape') closeFind();
+});
+function setRole(r,el){
+  document.body.classList.toggle('methodist', r==='methodist');
+  document.getElementById('role').textContent = r==='methodist' ? 'методист' : 'преподаватель';
+  el.parentNode.querySelectorAll('button')[0].classList.toggle('on', r==='methodist');
+  el.parentNode.querySelectorAll('button')[1].classList.toggle('on', r!=='methodist');
+}
+function setCourse(c,el){
+  const root=document.documentElement.style;
+  if(c==='dragon'){ root.setProperty('--course','#9B7BEA'); root.setProperty('--course-soft','#F1ECFD');
+    document.getElementById('cname').textContent='Wow Dragon 1'; document.getElementById('sp').textContent='W'; }
+  else { root.setProperty('--course','#5B4BE0'); root.setProperty('--course-soft','#EFEDFD');
+    document.getElementById('cname').textContent='SM0 — Starter'; document.getElementById('sp').textContent='S'; }
+  const b=el.parentNode.querySelectorAll('button');
+  b[2].classList.toggle('on', c==='sm0'); b[3].classList.toggle('on', c==='dragon');
+}
+draw();
+</script>
+</body>
+</html>

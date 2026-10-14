@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Домашка глазами ученика</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2B2545; --mute:#7C7596; --faint:#B3ADC6; --line:#EFEBF5;
+  --pink:#F5608A; --pink-d:#E04873; --pink-soft:#FDEDF2;
+  --violet:#7A6BE8; --violet-d:#5B4BC9; --violet-soft:#F1EEFE;
+  --mint:#3FA97C; --mint-soft:#E8F6F0;
+  --sun:#E8A33D; --sun-soft:#FDF3E3;
+  --r:24px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:'Golos Text',system-ui,sans-serif;color:var(--ink);font-size:16px;line-height:1.55;
+  background:linear-gradient(175deg,#FFF6E9 0%,#FDEDF2 42%,#F1EDFC 100%);
+  background-attachment:fixed;min-height:100vh}
+button{font:inherit;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+
+/* шапка */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.9)}
+.top-in{max-width:740px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:14px}
+.back{border:0;background:#fff;color:var(--mute);width:38px;height:38px;border-radius:13px;
+  display:grid;place-items:center;font-size:18px;box-shadow:0 2px 8px rgba(43,37,69,.08)}
+.tt{flex:1;min-width:0}
+.tt b{display:block;font-size:16px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tt span{font-size:12px;color:var(--mute)}
+.coins{display:flex;align-items:center;gap:6px;background:#FDF0D8;color:#A8761C;border-radius:99px;
+  padding:6px 13px;font-size:14px;font-weight:700;white-space:nowrap}
+.pline{max-width:740px;margin:0 auto;padding:0 18px 11px;display:flex;gap:4px}
+.pline i{height:6px;border-radius:99px;background:rgba(122,107,232,.16);flex:1;transition:background .2s}
+.pline i.ok{background:var(--mint)}
+
+.page{max-width:740px;margin:0 auto;padding:22px 18px 130px}
+
+/* задание */
+.task{background:#fff;border-radius:var(--r);padding:24px;margin-bottom:18px;
+  box-shadow:0 8px 26px rgba(43,37,69,.07);position:relative}
+.task.ok:after{content:"✓";position:absolute;right:20px;top:20px;width:28px;height:28px;border-radius:50%;
+  background:var(--mint-soft);color:var(--mint);display:grid;place-items:center;font-weight:800;font-size:15px}
+.no{font-size:13px;color:var(--faint);font-weight:600;letter-spacing:.02em}
+.q{font-size:19px;font-weight:700;line-height:1.35;margin:6px 0 16px}
+.hint{font-size:14px;color:var(--mute);margin-top:12px}
+
+/* звук */
+.snd{display:inline-flex;align-items:center;gap:10px;border:0;background:var(--violet-soft);color:var(--violet-d);
+  border-radius:99px;padding:11px 20px;font-weight:700;margin-bottom:16px}
+.snd:hover{background:#E7E2FC}
+.sndmini{border:0;background:var(--violet-soft);color:var(--violet-d);width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;font-size:13px;flex:0 0 auto}
+
+/* картинка-заглушка */
+.ph{border-radius:14px;background:linear-gradient(135deg,#E8EEF9,#CFDCF1);aspect-ratio:4/3}
+.ph.b{background:linear-gradient(135deg,#FCE7EF,#F3C6D8)}
+.ph.c{background:linear-gradient(135deg,#E7F5EC,#C4E6CF)}
+.ph.d{background:linear-gradient(135deg,#FBF1DE,#F1DCAE)}
+
+/* варианты */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.opt{border:2px solid var(--line);background:#fff;border-radius:18px;padding:12px;display:flex;
+  flex-direction:column;gap:9px;align-items:center;font-weight:600;min-height:54px;text-align:center}
+.opt:hover{border-color:#DDD6EF}
+.opt.sel{border-color:var(--violet);background:var(--violet-soft)}
+.opt .ph{width:100%}
+
+/* карточки-слова */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;padding:14px;border-radius:16px;
+  background:#FBFAFE;border:1px dashed var(--line)}
+.chip{background:var(--violet-soft);color:var(--violet-d);border-radius:13px;padding:10px 17px;font-weight:700;border:0}
+.chip.used{opacity:.3}
+.sent{font-size:19px;line-height:2.6}
+.slot{display:inline-block;min-width:98px;border-bottom:3px solid var(--violet);margin:0 6px;
+  text-align:center;font-weight:700;color:var(--violet-d)}
+.slot.full{background:var(--violet-soft);border-radius:10px 10px 0 0;padding:3px 10px}
+
+/* пары */
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pill{border:2px solid var(--line);background:#fff;border-radius:15px;padding:12px;font-weight:600;text-align:center}
+.pill.sel{border-color:var(--violet);background:var(--violet-soft)}
+.pill.tied{border-color:var(--mint);background:var(--mint-soft);color:var(--mint)}
+
+/* по порядку */
+.seq{display:flex;flex-direction:column;gap:9px}
+.srow{display:flex;align-items:center;gap:12px;border:2px solid var(--line);border-radius:15px;padding:10px 12px;background:#fff}
+.srow .n{width:28px;height:28px;border-radius:9px;background:var(--violet-soft);color:var(--violet-d);
+  display:grid;place-items:center;font-weight:700;font-size:13px;flex:0 0 auto}
+.srow .ph{width:64px;aspect-ratio:4/3;flex:0 0 auto}
+.srow .g{flex:1;font-weight:600}
+.srow .ar{border:0;background:#F7F5FC;color:var(--mute);width:32px;height:32px;border-radius:10px}
+
+/* запись */
+.rec{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.recbtn{border:0;background:var(--pink);color:#fff;border-radius:16px;padding:13px 24px;font-weight:700;
+  box-shadow:0 6px 18px rgba(245,96,138,.3)}
+.recbtn.done{background:var(--mint-soft);color:var(--mint);box-shadow:none}
+
+/* низ */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:25;background:rgba(255,255,255,.9);
+  backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.9);padding:14px 18px 18px}
+.bar-in{max-width:740px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.bar .left{flex:1;min-width:160px}
+.bar .left b{display:block;font-weight:700}
+.bar .left span{font-size:13px;color:var(--mute)}
+.fin{border:0;background:var(--pink);color:#fff;border-radius:17px;padding:15px 30px;font-weight:700;font-size:17px;
+  box-shadow:0 8px 22px rgba(245,96,138,.34)}
+.fin:disabled{background:#E7E3F0;color:#A9A3BE;box-shadow:none;cursor:not-allowed}
+
+.done{background:#fff;border-radius:28px;padding:38px 26px;text-align:center;box-shadow:0 10px 30px rgba(43,37,69,.09)}
+.done .em{font-size:54px}
+.done h2{font-size:26px;margin:12px 0 6px;font-weight:800}
+.done p{color:var(--mute);margin:0}
+.big{display:inline-flex;align-items:center;gap:9px;background:#FDF0D8;color:#A8761C;border-radius:99px;
+  padding:12px 22px;font-weight:800;font-size:19px;margin:18px 0}
+
+.switch{position:fixed;right:16px;bottom:96px;background:var(--ink);color:#fff;border-radius:14px;padding:6px;
+  display:flex;gap:4px;box-shadow:0 10px 30px rgba(43,37,69,.32);z-index:40}
+.switch button{background:transparent;border:0;color:#fff;opacity:.55;padding:7px 12px;border-radius:10px;font-size:13px}
+.switch button.on{background:rgba(255,255,255,.18);opacity:1;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="top-in">
+    <button class="back">←</button>
+    <span class="tt"><b>Части тела</b><span>Super Minds 0 · Unit 1</span></span>
+    <span class="coins">🪙 10</span>
+  </div>
+  <div class="pline" id="pline"></div>
+</div>
+
+<div class="page" id="page"></div>
+<div class="bar" id="bar"></div>
+
+<div class="switch">
+  <button class="on" onclick="go('do',this)">домашка</button>
+  <button onclick="go('sent',this)">отправлено</button>
+</div>
+
+<script>
+const N = 6;
+let done = {}, view='do', sel={}, order=[2,0,1];
+
+function pline(){
+  document.getElementById('pline').innerHTML =
+    Array.from({length:N},(_,i)=>`<i class="${done[i]?'ok':''}"></i>`).join('');
+}
+
+function task(i, inner, title, sub){
+  return `<div class="task ${done[i]?'ok':''}">
+    <div class="no">Задание ${i+1} из ${N}</div>
+    <h3 class="q">${title}</h3>
+    ${inner}
+    ${sub?`<div class="hint">${sub}</div>`:''}
+  </div>`;
+}
+
+function doPage(){
+  return [
+    // 1 — материал, ничего делать не надо
+    `<div class="task">
+      <div class="no">Материал</div>
+      <h3 class="q">Привет! Сегодня повторим части тела 👋</h3>
+      <div class="ph b" style="max-width:280px;margin:0 auto"></div>
+      <div class="hint">Посмотри картинку и послушай слова.</div>
+      <div style="margin-top:14px"><button class="snd">🔈 Послушать</button></div>
+    </div>`,
+
+    // 2 — тест с картинками
+    task(0, `<button class="snd">🔈 Послушать слово</button>
+      <div class="opts">
+        ${[['','нос'],['b','рот'],['c','ухо']].map((o,k)=>
+          `<button class="opt ${sel[0]===k?'sel':''}" onclick="pickOpt(0,${k})">
+             <span class="ph ${o[0]}"></span>${o[1]}</button>`).join('')}
+      </div>`, 'Послушай и нажми на нужную картинку'),
+
+    // 3 — карточки для заучивания
+    task(1, `<div class="chips" style="border-style:solid;background:#fff">
+        ${['head','mouth','nose','ear'].map(w=>`<span class="chip">${w}</span>`).join('')}
+      </div>
+      <div class="rec"><button class="recbtn ${done[1]?'done':''}" onclick="mark(1)">
+        ${done[1]?'✓ Посмотрел все':'Листать карточки'}</button></div>`,
+      'Выучи слова', 'Переворачивай карточки, пока не запомнишь все четыре.'),
+
+    // 4 — пропуски
+    task(2, `<div class="chips">
+        ${['two','ten'].map((w,k)=>`<button class="chip ${sel[2]===w?'used':''}" onclick="pickGap(${2},'${w}')">${w}</button>`).join('')}
+      </div>
+      <div class="sent">I have <span class="slot ${sel[2]?'full':''}">${sel[2]||'&nbsp;&nbsp;&nbsp;'}</span> eyes.</div>`,
+      'Вставь пропущенное слово'),
+
+    // 5 — по порядку
+    task(3, `<div class="seq">
+        ${order.map((o,k)=>`<div class="srow">
+          <span class="n">${k+1}</span><span class="ph ${['','c','d'][o]}"></span>
+          <span class="g">${['Гусеница ест листья','Она делает кокон','Появляется бабочка'][o]}</span>
+          <button class="ar" onclick="move(${k},-1)">↑</button>
+          <button class="ar" onclick="move(${k},1)">↓</button>
+        </div>`).join('')}
+      </div>`, 'Расставь картинки по порядку'),
+
+    // 6 — запись голоса
+    task(4, `<button class="snd">🔈 Послушать образец</button>
+      <div style="font-weight:800;font-size:24px;margin:6px 0 16px">head · mouth · nose</div>
+      <div class="rec">
+        <button class="recbtn ${done[4]?'done':''}" onclick="mark(4)">${done[4]?'✓ Записано':'🎤 Записать'}</button>
+        ${done[4]?'<button class="snd" style="margin:0">▶ Послушать себя</button>':''}
+      </div>`, 'Прочитай слова вслух', 'Учитель послушает и поставит оценку.'),
+
+    // 7 — пары
+    task(5, `<div class="pairs">
+        <div><div class="pill tied">cat</div><div class="pill" style="margin-top:10px">dog</div></div>
+        <div><div class="pill tied">кот</div><div class="pill" style="margin-top:10px">собака</div></div>
+      </div>
+      <div style="margin-top:14px"><button class="recbtn ${done[5]?'done':''}" onclick="mark(5)">
+        ${done[5]?'✓ Соединил все':'Соединить пары'}</button></div>`,
+      'Соедини слово и перевод'),
+  ].join('');
+}
+
+function pickOpt(i,k){ sel[i]=k; done[i]=true; render(); }
+function pickGap(i,w){ sel[i]=w; done[i]=true; render(); }
+function mark(i){ done[i]=true; render(); }
+function move(k,d){
+  const j=k+d; if(j<0||j>=order.length) return;
+  [order[k],order[j]]=[order[j],order[k]];
+  done[3]=true; render();
+}
+
+function bar(){
+  if(view!=='do') return '';
+  const left = N - Object.values(done).filter(Boolean).length;
+  return `<div class="bar-in">
+    <span class="left">
+      <b>${left? 'Ещё не всё готово' : 'Все задания выполнены'}</b>
+      <span>${left? `осталось ${left} из ${N}` : 'можно отправлять учителю'}</span>
+    </span>
+    <button class="fin" ${left?'disabled':''} onclick="go('sent')">Завершить и отправить</button>
+  </div>`;
+}
+
+function sent(){
+  return `<div class="done">
+    <div class="em">📨</div>
+    <h2>Отправлено учителю</h2>
+    <p>Ответы больше нельзя изменить</p>
+    <div class="big">⏳ Ждём проверки</div>
+    <p style="font-size:14px">Оценка появится, когда учитель проверит работу</p>
+  </div>`;
+}
+
+function go(v, el){
+  view=v;
+  if(el){ el.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on')); el.classList.add('on'); }
+  render();
+}
+function render(){
+  document.getElementById('page').innerHTML = view==='do' ? doPage() : sent();
+  document.getElementById('bar').innerHTML = bar();
+  document.getElementById('bar').style.display = view==='do' ? 'block' : 'none';
+  pline();
+}
+render();
+</script>
+</body>
+</html>

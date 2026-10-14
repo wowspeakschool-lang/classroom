@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Домашка ученика — три варианта</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── ТЁПЛЫЙ (как кабинет) ── */
+body.t-warm{
+  --bg:linear-gradient(175deg,#FFF6E9 0%,#FDEDF2 42%,#F1EDFC 100%);
+  --ink:#2B2545; --mute:#7C7596; --faint:#B3ADC6; --line:#EFEBF5;
+  --card:#fff; --r:24px; --fs:18px; --font:'Golos Text';
+  --act:#F5608A; --act-d:#E04873; --act-soft:#FDEDF2;
+  --pick:#7A6BE8; --pick-d:#5B4BC9; --pick-soft:#F1EEFE;
+  --ok:#3FA97C; --ok-soft:#E8F6F0; --shadow:0 8px 26px rgba(43,37,69,.07);
+}
+/* ── СПОКОЙНЫЙ ── */
+body.t-calm{
+  --bg:#F6F6F8;
+  --ink:#1D2033; --mute:#6D7183; --faint:#A7AAB8; --line:#E7E7EC;
+  --card:#fff; --r:16px; --fs:18px; --font:'Golos Text';
+  --act:#3E6FD9; --act-d:#2F57B0; --act-soft:#ECF1FC;
+  --pick:#3E6FD9; --pick-d:#2F57B0; --pick-soft:#ECF1FC;
+  --ok:#2E7D62; --ok-soft:#E7F2EE; --shadow:0 1px 3px rgba(29,32,51,.08);
+}
+/* ── ИГРОВОЙ ── */
+body.t-play{
+  --bg:linear-gradient(160deg,#E9F4FF 0%,#F6EAFF 50%,#FFF0E6 100%);
+  --ink:#231C3D; --mute:#6E6690; --faint:#A79FC4; --line:#EAE3F7;
+  --card:#fff; --r:30px; --fs:19px; --font:'Nunito';
+  --act:#FF7A3D; --act-d:#EC5F1F; --act-soft:#FFEDE2;
+  --pick:#8B5CF6; --pick-d:#6D3EDB; --pick-soft:#F3EBFF;
+  --ok:#28B487; --ok-soft:#E3F8F0; --shadow:0 12px 30px rgba(35,28,61,.10);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--font),system-ui,sans-serif;color:var(--ink);font-size:var(--fs);line-height:1.55;
+  background:var(--bg);background-attachment:fixed;min-height:100vh}
+button{font:inherit;color:inherit;cursor:pointer;transition:transform .09s ease, box-shadow .12s, background .15s, border-color .15s}
+button:active{transform:scale(.96)}
+img,svg{display:block;max-width:100%}
+
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.72);backdrop-filter:blur(10px)}
+.top-in{max-width:760px;margin:0 auto;padding:13px 18px;display:flex;align-items:center;gap:14px}
+.back{border:0;background:var(--card);color:var(--mute);width:40px;height:40px;border-radius:13px;
+  display:grid;place-items:center;font-size:19px;box-shadow:var(--shadow)}
+.tt{flex:1;min-width:0}
+.tt b{display:block;font-size:17px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tt span{font-size:13px;color:var(--mute)}
+.coins{display:flex;align-items:center;gap:6px;background:#FDF0D8;color:#A8761C;border-radius:99px;
+  padding:7px 14px;font-size:15px;font-weight:700;white-space:nowrap}
+.pline{max-width:760px;margin:0 auto;padding:0 18px 12px;display:flex;gap:4px}
+.pline i{height:7px;border-radius:99px;background:rgba(0,0,0,.08);flex:1;overflow:hidden;position:relative}
+.pline i:after{content:"";position:absolute;inset:0;width:0;background:var(--ok);
+  transition:width .45s cubic-bezier(.2,.8,.3,1)}
+.pline i.ok:after{width:100%}
+
+.page{max-width:760px;margin:0 auto;padding:22px 18px 140px}
+.task{background:var(--card);border-radius:var(--r);padding:26px;margin-bottom:18px;box-shadow:var(--shadow);position:relative}
+body.t-calm .task{border:1px solid var(--line)}
+.task.ok:after{content:"✓";position:absolute;right:22px;top:22px;width:30px;height:30px;border-radius:50%;
+  background:var(--ok-soft);color:var(--ok);display:grid;place-items:center;font-weight:800;font-size:16px;
+  animation:pop .3s cubic-bezier(.2,1.3,.4,1)}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.no{font-size:14px;color:var(--faint);font-weight:600}
+.q{font-size:calc(var(--fs) + 3px);font-weight:700;line-height:1.35;margin:6px 0 18px}
+.hint{font-size:15px;color:var(--mute);margin-top:14px}
+
+.snd{display:inline-flex;align-items:center;gap:10px;border:0;background:var(--pick-soft);color:var(--pick-d);
+  border-radius:99px;padding:12px 22px;font-weight:700;margin-bottom:16px}
+.ph{border-radius:14px;background:linear-gradient(135deg,#E8EEF9,#CFDCF1);aspect-ratio:4/3}
+.ph.b{background:linear-gradient(135deg,#FCE7EF,#F3C6D8)}
+.ph.c{background:linear-gradient(135deg,#E7F5EC,#C4E6CF)}
+.ph.d{background:linear-gradient(135deg,#FBF1DE,#F1DCAE)}
+
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:13px}
+.opt{border:2px solid var(--line);background:var(--card);border-radius:calc(var(--r) - 6px);padding:13px;
+  display:flex;flex-direction:column;gap:9px;align-items:center;font-weight:700;min-height:56px}
+.opt.sel{border-color:var(--pick);background:var(--pick-soft);transform:translateY(-2px);box-shadow:var(--shadow)}
+.opt .ph{width:100%}
+
+.chips{display:flex;flex-wrap:wrap;gap:11px;margin-bottom:18px;padding:15px;border-radius:calc(var(--r) - 6px);
+  background:rgba(0,0,0,.02);border:1px dashed var(--line)}
+.chip{background:var(--pick-soft);color:var(--pick-d);border-radius:14px;padding:11px 19px;font-weight:700;border:0}
+.chip.used{opacity:.3}
+.sent{font-size:calc(var(--fs) + 2px);line-height:2.7}
+.slot{display:inline-block;min-width:104px;border-bottom:3px solid var(--pick);margin:0 6px;text-align:center;
+  font-weight:700;color:var(--pick-d)}
+.slot.full{background:var(--pick-soft);border-radius:10px 10px 0 0;padding:3px 10px}
+
+.seq{display:flex;flex-direction:column;gap:10px}
+.srow{display:flex;align-items:center;gap:13px;border:2px solid var(--line);border-radius:calc(var(--r) - 8px);
+  padding:11px 13px;background:var(--card)}
+.srow .n{width:30px;height:30px;border-radius:10px;background:var(--pick-soft);color:var(--pick-d);
+  display:grid;place-items:center;font-weight:800;font-size:14px;flex:0 0 auto}
+.srow .ph{width:68px;aspect-ratio:4/3;flex:0 0 auto}
+.srow .g{flex:1;font-weight:600}
+.srow .ar{border:0;background:rgba(0,0,0,.04);color:var(--mute);width:34px;height:34px;border-radius:11px}
+
+.recbtn{border:0;background:var(--act);color:#fff;border-radius:16px;padding:14px 26px;font-weight:700;
+  box-shadow:0 6px 18px rgba(0,0,0,.12)}
+.recbtn.done{background:var(--ok-soft);color:var(--ok);box-shadow:none}
+
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:25;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);padding:15px 18px 20px;border-top:1px solid rgba(0,0,0,.04)}
+.bar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.bar .left{flex:1;min-width:170px}
+.bar .left b{display:block;font-weight:700}
+.bar .left span{font-size:14px;color:var(--mute)}
+.fin{border:0;background:var(--act);color:#fff;border-radius:18px;padding:16px 32px;font-weight:800;
+  font-size:calc(var(--fs) + 1px);box-shadow:0 8px 22px rgba(0,0,0,.14)}
+.fin:disabled{background:rgba(0,0,0,.08);color:var(--faint);box-shadow:none;cursor:not-allowed;transform:none}
+.fin.alive{animation:alive .6s cubic-bezier(.2,1.2,.4,1)}
+@keyframes alive{0%{transform:scale(1)}40%{transform:scale(1.07)}100%{transform:scale(1)}}
+
+.screen{animation:slide .32s cubic-bezier(.2,.8,.3,1)}
+@keyframes slide{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.done{background:var(--card);border-radius:calc(var(--r) + 6px);padding:40px 26px;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.done .em{font-size:58px;animation:pop .45s cubic-bezier(.2,1.3,.4,1)}
+.done h2{font-size:28px;margin:12px 0 6px;font-weight:800}
+.done p{color:var(--mute);margin:0}
+.big{display:inline-flex;align-items:center;gap:10px;border-radius:99px;padding:13px 24px;font-weight:800;
+  font-size:20px;margin:18px 0;background:var(--ok-soft);color:var(--ok)}
+.big.wait{background:#FDF0D8;color:#A8761C}
+
+/* праздник */
+.conf{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.conf span{position:absolute;top:-14px;width:9px;height:14px;border-radius:2px;animation:fall 1.9s linear forwards}
+@keyframes fall{to{transform:translateY(420px) rotate(560deg);opacity:0}}
+
+.switch{position:fixed;right:16px;bottom:100px;background:#1D2033;color:#fff;border-radius:14px;padding:6px;
+  display:flex;gap:4px;box-shadow:0 10px 30px rgba(0,0,0,.3);z-index:40;flex-wrap:wrap;max-width:92vw}
+.switch button{background:transparent;border:0;color:#fff;opacity:.55;padding:7px 11px;border-radius:10px;font-size:13px}
+.switch button.on{background:rgba(255,255,255,.18);opacity:1;font-weight:700}
+.switch .sep{width:1px;background:rgba(255,255,255,.2);margin:5px 3px}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important}
+}
+</style>
+</head>
+<body class="t-warm">
+
+<div class="top">
+  <div class="top-in">
+    <button class="back">←</button>
+    <span class="tt"><b>Части тела</b><span>Super Minds 0 · Unit 1</span></span>
+    <span class="coins">🪙 10</span>
+  </div>
+  <div class="pline" id="pline"></div>
+</div>
+
+<div class="page" id="page"></div>
+<div class="bar" id="bar"></div>
+
+<div class="switch">
+  <button class="on" onclick="theme('warm',this)">тёплый</button>
+  <button onclick="theme('calm',this)">спокойный</button>
+  <button onclick="theme('play',this)">игровой</button>
+  <div class="sep"></div>
+  <button class="on" onclick="go('do',this)">домашка</button>
+  <button onclick="go('sent',this)">отправлено</button>
+  <button onclick="go('mark',this)">оценка</button>
+</div>
+
+<script>
+const N=5;
+let done={}, sel={}, order=[2,0,1], view='do', wasFull=false;
+
+function pline(){
+  document.getElementById('pline').innerHTML =
+    Array.from({length:N},(_,i)=>`<i class="${done[i]?'ok':''}"></i>`).join('');
+}
+function task(i, inner, title, sub){
+  return `<div class="task ${done[i]?'ok':''}">
+    <div class="no">Задание ${i+1} из ${N}</div><h3 class="q">${title}</h3>${inner}
+    ${sub?`<div class="hint">${sub}</div>`:''}</div>`;
+}
+function doPage(){
+  return `<div class="screen">
+  <div class="task">
+    <div class="no">Материал</div>
+    <h3 class="q">Привет! Сегодня повторим части тела 👋</h3>
+    <div class="ph b" style="max-width:290px;margin:0 auto"></div>
+    <div style="margin-top:16px"><button class="snd">🔈 Послушать</button></div>
+  </div>` +
+  task(0,`<button class="snd">🔈 Послушать слово</button>
+    <div class="opts">${[['','нос'],['b','рот'],['c','ухо']].map((o,k)=>
+      `<button class="opt ${sel[0]===k?'sel':''}" onclick="pick(0,${k})"><span class="ph ${o[0]}"></span>${o[1]}</button>`).join('')}</div>`,
+    'Послушай и нажми на нужную картинку') +
+  task(1,`<div class="chips">${['two','ten'].map(w=>
+      `<button class="chip ${sel[1]===w?'used':''}" onclick="pick(1,'${w}')">${w}</button>`).join('')}</div>
+    <div class="sent">I have <span class="slot ${sel[1]?'full':''}">${sel[1]||'&nbsp;&nbsp;&nbsp;'}</span> eyes.</div>`,
+    'Вставь пропущенное слово') +
+  task(2,`<div class="seq">${order.map((o,k)=>`<div class="srow">
+      <span class="n">${k+1}</span><span class="ph ${['','c','d'][o]}"></span>
+      <span class="g">${['Гусеница ест листья','Она делает кокон','Появляется бабочка'][o]}</span>
+      <button class="ar" onclick="move(${k},-1)">↑</button><button class="ar" onclick="move(${k},1)">↓</button>
+    </div>`).join('')}</div>`, 'Расставь картинки по порядку') +
+  task(3,`<button class="snd">🔈 Послушать образец</button>
+    <div style="font-weight:800;font-size:calc(var(--fs) + 7px);margin:6px 0 18px">head · mouth · nose</div>
+    <button class="recbtn ${done[3]?'done':''}" onclick="mark(3)">${done[3]?'✓ Записано':'🎤 Записать'}</button>`,
+    'Прочитай слова вслух','Учитель послушает и поставит оценку.') +
+  task(4,`<div class="chips" style="border-style:solid;background:var(--card)">
+      ${['head','mouth','nose','ear'].map(w=>`<span class="chip">${w}</span>`).join('')}</div>
+    <button class="recbtn ${done[4]?'done':''}" onclick="mark(4)">${done[4]?'✓ Посмотрел все':'Листать карточки'}</button>`,
+    'Выучи слова') + `</div>`;
+}
+// Перерисовываем только то, что изменилось: полная перерисовка
+// заново проигрывала въезд экрана, и это читалось как моргание.
+function pick(i,v){
+  sel[i]=v; done[i]=true;
+  const t=taskEl(i);
+  if(i===0){
+    t.querySelectorAll('.opt').forEach((el,k)=> el.classList.toggle('sel', k===v));
+  } else if(i===1){
+    t.querySelectorAll('.chip').forEach(el=> el.classList.toggle('used', el.textContent===v));
+    const sl=t.querySelector('.slot');
+    sl.textContent=v; sl.classList.add('full');
+  }
+  markDone(i); sync();
+}
+
+function mark(i){
+  done[i]=true;
+  const t=taskEl(i), b=t.querySelector('.recbtn');
+  if(b){ b.classList.add('done'); b.textContent = i===3 ? '✓ Записано' : '✓ Посмотрел все'; }
+  markDone(i); sync();
+}
+
+function move(k,d){
+  const j=k+d; if(j<0||j>=order.length) return;
+  [order[k],order[j]]=[order[j],order[k]];
+  done[2]=true;
+  const t=taskEl(2);
+  t.querySelector('.seq').innerHTML = order.map((o,n)=>`<div class="srow">
+      <span class="n">${n+1}</span><span class="ph ${['','c','d'][o]}"></span>
+      <span class="g">${['Гусеница ест листья','Она делает кокон','Появляется бабочка'][o]}</span>
+      <button class="ar" onclick="move(${n},-1)">↑</button><button class="ar" onclick="move(${n},1)">↓</button>
+    </div>`).join('');
+  markDone(2); sync();
+}
+
+// задания идут после карточки «Материал», поэтому смещение на один
+function taskEl(i){ return document.querySelectorAll('.page .task')[i+1]; }
+function markDone(i){ const t=taskEl(i); if(t) t.classList.add('ok'); }
+
+// обновляем полоску и низ, не трогая сами задания
+function sync(){
+  pline();
+  document.getElementById('bar').innerHTML = bar();
+}
+
+function bar(){
+  if(view!=='do') return '';
+  const left=N-Object.values(done).filter(Boolean).length;
+  const alive = (left===0 && !wasFull);
+  wasFull = (left===0);
+  return `<div class="bar-in">
+    <span class="left"><b>${left?'Ещё не всё готово':'Все задания выполнены'}</b>
+      <span>${left?`осталось ${left} из ${N}`:'можно отправлять учителю'}</span></span>
+    <button class="fin ${alive?'alive':''}" ${left?'disabled':''} onclick="go('sent')">Завершить и отправить</button></div>`;
+}
+function sent(){
+  return `<div class="screen"><div class="done">${confetti()}
+    <div class="em">📨</div><h2>Отправлено!</h2>
+    <p>Ответы больше нельзя изменить</p>
+    <div class="big wait">⏳ Ждём проверки</div>
+    <p style="font-size:15px">Оценка появится, когда учитель проверит работу</p></div></div>`;
+}
+// После проверки — только оценка. Работу можно открыть отдельно,
+// в режиме чтения: без кнопок, изменить ничего нельзя.
+function markScreen(){
+  return `<div class="screen"><div class="done">${confetti()}
+    <div class="em">🎉</div><h2>Проверено!</h2>
+    <div class="big">✅ 88%</div>
+    <div class="big" style="background:#FDF0D8;color:#A8761C">🪙 +3 монетки</div>
+    <p>Учитель проверил домашку</p>
+    <div style="margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="recbtn" onclick="go('read')">Посмотреть мою работу</button>
+      <button class="snd" style="margin:0">К списку домашек</button>
+    </div></div></div>`;
+}
+
+// Режим чтения: те же задания, но ничего не нажимается
+function readScreen(){
+  return `<div class="screen">
+    <div class="task" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <span style="flex:1;min-width:180px"><b style="font-size:calc(var(--fs) + 1px)">Твоя работа</b>
+        <span style="display:block;font-size:14px;color:var(--mute)">Только посмотреть, изменить нельзя</span></span>
+      <button class="snd" style="margin:0" onclick="go('mark')">← К оценке</button>
+    </div>
+    <div style="pointer-events:none;opacity:.96">${doPage()}</div></div>`;
+}
+
+function confetti(){
+  const c=['#F5608A','#7A6BE8','#3FA97C','#E8A33D','#43A7E8'];
+  let s='';
+  for(let i=0;i<26;i++){
+    s+=`<span style="left:${Math.random()*100}%;background:${c[i%c.length]};
+      animation-delay:${(Math.random()*.7).toFixed(2)}s"></span>`;
+  }
+  return `<div class="conf">${s}</div>`;
+}
+
+function theme(t, el){
+  document.body.className='t-'+t;   // только переменные, разметка не трогается
+  const b=el.parentNode.querySelectorAll('button');
+  [0,1,2].forEach(i=>b[i].classList.toggle('on', b[i]===el));
+}
+function go(v, el){
+  view=v;
+  if(el){ const b=el.parentNode.querySelectorAll('button'); [3,4,5].forEach(i=>b[i].classList.toggle('on', b[i]===el)); }
+  render();
+}
+function render(){
+  document.getElementById('page').innerHTML =
+    view==='do'?doPage(): view==='sent'?sent(): view==='read'?readScreen(): markScreen();
+  document.getElementById('bar').innerHTML = bar();
+  document.getElementById('bar').style.display = view==='do'?'block':'none';
+  // в режиме чтения полоска прогресса не нужна — работа уже сдана
+  document.querySelector('.pline').style.display = (view==='do')?'flex':'none';
+  pline();
+}
+render();
+</script>
+</body>
+</html>
