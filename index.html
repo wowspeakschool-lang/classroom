@@ -2494,12 +2494,12 @@ async function edOpenLesson(lessonId, unitId, courseId){
   try{
     const { data:lesson } = await sb.from('classroom_lessons').select('*').eq('id',lessonId).single();
     const { data:blocks } = await sb.from('classroom_blocks').select('id,type,payload,sort_order,audience,variant,format').eq('lesson_id',lessonId).order('sort_order');
-    // audience/variant/format держим в блоке, а не в строке таблицы:
-    // ключ upsert — (lesson_id, sort_order), и без этого при перестановке
-    // блоков разметка осталась бы на старых позициях.
+    // id едет вместе с блоком: урок сохраняется по номеру задания, а не по
+    // месту (classroom_save_lesson), иначе после перестановки ответы учеников
+    // оказались бы привязаны к чужому заданию.
     ED_OPEN = new Set(); ED_INSERT_AT = null;
     ED_HIST = []; ED_REDO = []; ED_LAST = null; EDIT.savedJson = null;
-    EDIT.blocks = (blocks||[]).map(b=>({ type:b.type, payload:b.payload||{},
+    EDIT.blocks = (blocks||[]).map(b=>({ id:b.id, type:b.type, payload:b.payload||{},
       audience:b.audience||'shared', variant:b.variant||'any', format:b.format||'any' }));
     // Название курса и юнита для шапки; тип материала решает, что показывать
     let courseTitle='', unitTitle='';
@@ -3300,6 +3300,7 @@ function edAudioField(val, setExpr){
 function edDupBlock(i){
   const src = EDIT.blocks[i];
   const copy = JSON.parse(JSON.stringify(src));
+  delete copy.id;                      // копия — новое задание
   EDIT.blocks.splice(i+1, 0, copy);
   edShiftOpen(x => x>i ? x+1 : x);
   edRenderBlocks();
@@ -4616,13 +4617,11 @@ async function edSave(){
     const pub=$('edPub')?$('edPub').checked:true;
     const thrRaw=$('edThreshold')?$('edThreshold').value:'';
     await sb.from('classroom_lessons').update({ is_published:pub, pass_threshold: thrRaw===''?null:Math.max(0,Math.min(100,parseInt(thrRaw,10))) }).eq('id',EDIT.lessonId);
-    if(EDIT.blocks.length){
-      const rows=EDIT.blocks.map((b,idx)=>({ lesson_id:EDIT.lessonId, type:b.type, payload:b.payload, sort_order:idx,
-        audience:b.audience||'shared', variant:b.variant||'any', format:b.format||'any' }));
-      const { error } = await sb.from('classroom_blocks').upsert(rows, { onConflict:'lesson_id,sort_order' });
-      if(error) throw error;
-    }
-    await sb.from('classroom_blocks').delete().eq('lesson_id',EDIT.lessonId).gte('sort_order',EDIT.blocks.length);
+    // Одной транзакцией: правка — по id, новое — вставкой, пропавшее — удаляется
+    const ids = await rpc('classroom_save_lesson', { p_lesson_id:EDIT.lessonId,
+      p_blocks: EDIT.blocks.map(b=>({ id:b.id||null, type:b.type, payload:b.payload,
+        audience:b.audience||'shared', variant:b.variant||'any', format:b.format||'any' })) });
+    (ids||[]).forEach((id,idx)=>{ if(EDIT.blocks[idx]) EDIT.blocks[idx].id = id; });
     $('edSaveRes').textContent='Сохранено ✅'; toast('Урок сохранён');
     EDIT.savedJson = edSnapshot(); edDockSync();   // с этой точки правок нет
     // отразить статус публикации в дереве, не сворачивая редактор

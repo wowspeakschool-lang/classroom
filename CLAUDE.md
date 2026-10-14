@@ -42,6 +42,12 @@ classroom_courses → classroom_units → classroom_lessons → classroom_blocks
 | `is_published` | заливать **всегда `false`**, включает методист вручную |
 | `sort_order` | задавать числом явно, не `max+1` |
 
+**Заданный урок у ученика заморожен** (`classroom_lesson_snapshots`, с миграции
+`classroom_submit_review_model`): правка урока миграцией или в редакторе
+ученикам, которым он уже задан, не видна. Чтобы исправление дошло до них, копию
+нужно удалить руками — только с согласия Анны: ответы ученика по этому уроку
+могут перестать совпадать с заданиями.
+
 15 типов блоков: `text · video · quiz · exact_input · match · task · embed · order ·
 sort · flashcards · gaps · truefalse · speaking · sequence · hotspot`.
 Точные поля payload смотреть в `index.html` — там и рендер, и редактор.

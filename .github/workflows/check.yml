@@ -1,0 +1,41 @@
+# Проверка при каждом пуше и PR (HANDOVER, раздел 9):
+# index.html — синтаксис JS и вызовы из атрибутов, миграции — разбор SQL.
+name: Проверка
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: index.html
+        run: python3 tools/check_index.py index.html
+      - name: SQL миграций
+        run: |
+          pip install --quiet pglast
+          python3 - <<'PY'
+          import glob, sys, pglast
+          bad = 0
+          for f in sorted(glob.glob('docs/migrations/*.sql')):
+              src = open(f, encoding='utf-8').read()
+              try:
+                  for st in pglast.split(src):
+                      low = st.lower()
+                      if 'plpgsql' in low or low.lstrip().startswith('do'):
+                          pglast.parse_plpgsql(st)
+                  pglast.parse_sql(src)
+                  print('ok ', f)
+              except Exception as e:
+                  bad += 1
+                  print('ОШИБКА', f, e)
+          sys.exit(1 if bad else 0)
+          PY

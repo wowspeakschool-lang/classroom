@@ -7,11 +7,198 @@
 --   → учитель правит вердикты пунктов и оценки блоков (classroom_review_item,
 --     classroom_review_block) → выставляет итог (classroom_review_finish)
 --     или отдаёт на переделку весь урок / выбранные задания (classroom_retake).
+-- Заданная домашка заморожена: при назначении урок копируется ученику
+-- (classroom_lesson_snapshots), и правки методиста его не трогают — ни
+-- содержимое, ни состав заданий. Проверка идёт по той же копии.
+-- Редактор сохраняет урок по номеру задания, а не по месту (classroom_save_lesson),
+-- и удаление задания больше не стирает ответы учеников.
 -- Порога нет: оценку и переделку решает учитель. Попыток сколько угодно,
 -- каждая отправка, проверка и переделка пишется в classroom_progress.history.
 --
 -- submit_block правится точечно (якоря в живом теле, как в 033/034),
 -- остальные функции маленькие и переписаны целиком по живым телам 14.10.2026.
+
+
+-- ── 0. Заданное не меняется ────────────────────────────────────────────────
+
+-- Ответы и оценки ученика больше не удаляются вместе с заданием:
+-- задание живёт в копии урока у ученика, даже если методист убрала его из урока.
+alter table public.classroom_submissions drop constraint if exists classroom_submissions_block_id_fkey;
+alter table public.classroom_grades      drop constraint if exists classroom_grades_block_id_fkey;
+
+-- Копия урока, какой его задали ученику: строки classroom_blocks в jsonb.
+create table if not exists public.classroom_lesson_snapshots (
+  enrollment_id uuid not null references public.classroom_enrollments(id) on delete cascade,
+  lesson_id     uuid not null references public.classroom_lessons(id) on delete cascade,
+  blocks        jsonb not null,
+  created_at    timestamptz not null default now(),
+  primary key (enrollment_id, lesson_id)
+);
+alter table public.classroom_lesson_snapshots enable row level security;
+do $$
+begin
+  if not exists (select 1 from pg_policies where tablename = 'classroom_lesson_snapshots'
+                  and policyname = 'classroom_lesson_snapshots_read') then
+    create policy classroom_lesson_snapshots_read on public.classroom_lesson_snapshots
+      for select using (public.classroom__can_see_enrollment(enrollment_id));
+  end if;
+end $$;
+
+-- Снять копию, если её ещё нет. Возвращает копию.
+create or replace function public.classroom__ensure_snapshot(p_enrollment_id uuid, p_lesson_id uuid)
+returns jsonb language plpgsql security definer set search_path = public as $$
+declare v jsonb;
+begin
+  insert into public.classroom_lesson_snapshots (enrollment_id, lesson_id, blocks)
+  select p_enrollment_id, p_lesson_id,
+         coalesce(jsonb_agg(to_jsonb(b) order by b.sort_order), '[]'::jsonb)
+    from public.classroom_blocks b where b.lesson_id = p_lesson_id
+  on conflict (enrollment_id, lesson_id) do nothing;
+  select blocks into v from public.classroom_lesson_snapshots
+   where enrollment_id = p_enrollment_id and lesson_id = p_lesson_id;
+  return v;
+end $$;
+
+-- Задания урока для этого ученика: из копии, если она есть, иначе живые.
+create or replace function public.classroom__lesson_blocks(p_enrollment_id uuid, p_lesson_id uuid)
+returns setof public.classroom_blocks language sql stable set search_path = public as $$
+  select r.*
+    from public.classroom_lesson_snapshots s
+    cross join lateral jsonb_populate_recordset(null::public.classroom_blocks, s.blocks) r
+   where s.enrollment_id = p_enrollment_id and s.lesson_id = p_lesson_id
+  union all
+  select b.*
+    from public.classroom_blocks b
+   where b.lesson_id = p_lesson_id
+     and not exists (select 1 from public.classroom_lesson_snapshots s
+                      where s.enrollment_id = p_enrollment_id and s.lesson_id = p_lesson_id);
+$$;
+
+-- Одно задание для этого ученика: из его копии, иначе живое. 0 или 1 строка.
+create or replace function public.classroom__enr_block(p_enrollment_id uuid, p_block_id uuid)
+returns setof public.classroom_blocks language sql stable set search_path = public as $$
+  select r.*
+    from public.classroom_lesson_snapshots s
+    cross join lateral jsonb_populate_recordset(null::public.classroom_blocks, s.blocks) r
+   where s.enrollment_id = p_enrollment_id and r.id = p_block_id
+  union all
+  select b.* from public.classroom_blocks b
+   where b.id = p_block_id
+     -- живое задание — только если урок ученику ещё не копировали:
+     -- добавленное после назначения к нему не попадает
+     and not exists (select 1 from public.classroom_lesson_snapshots s
+                      where s.enrollment_id = p_enrollment_id and s.lesson_id = b.lesson_id)
+  limit 1;
+$$;
+
+-- Копия снимается в момент, когда урок задан ученику (бегунок «Доступ» или
+-- «Задать материал»), и когда у ученика появляется запись на курс.
+create or replace function public.classroom__snapshot_on_assign()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if tg_table_name = 'classroom_assignments' then
+    if new.status = 'active' and new.target_type = 'student' then
+      perform public.classroom__ensure_snapshot(e.id, new.lesson_id)
+         from public.classroom_enrollments e
+         join public.classroom_units u on u.course_id = e.course_id
+         join public.classroom_lessons l on l.unit_id = u.id and l.id = new.lesson_id
+        where e.student_id = new.target_id;
+    end if;
+  else -- classroom_enrollments
+    perform public.classroom__ensure_snapshot(new.id, a.lesson_id)
+       from public.classroom_assignments a
+       join public.classroom_lessons l on l.id = a.lesson_id
+       join public.classroom_units u on u.id = l.unit_id and u.course_id = new.course_id
+      where a.target_type = 'student' and a.target_id = new.student_id and a.status = 'active';
+  end if;
+  return new;
+end $$;
+
+do $$
+begin
+  if not exists (select 1 from pg_trigger where tgname = 'classroom_assignments_snapshot') then
+    create trigger classroom_assignments_snapshot
+      after insert or update of status on public.classroom_assignments
+      for each row execute function public.classroom__snapshot_on_assign();
+  end if;
+  if not exists (select 1 from pg_trigger where tgname = 'classroom_enrollments_snapshot') then
+    create trigger classroom_enrollments_snapshot
+      after insert on public.classroom_enrollments
+      for each row execute function public.classroom__snapshot_on_assign();
+  end if;
+end $$;
+
+-- Уже заданные уроки: копия с нынешнего состояния.
+select public.classroom__ensure_snapshot(e.id, a.lesson_id)
+  from public.classroom_assignments a
+  join public.classroom_lessons l on l.id = a.lesson_id
+  join public.classroom_units u on u.id = l.unit_id
+  join public.classroom_enrollments e on e.course_id = u.course_id and e.student_id = a.target_id
+ where a.target_type = 'student' and a.status = 'active';
+
+-- Прохождение: задания урока для ученика (из его копии; копия снимается при
+-- первом открытии, если урок задан в обход бегунка, например группе).
+create or replace function public.classroom_run_blocks(p_enrollment_id uuid, p_lesson_id uuid)
+returns jsonb language plpgsql security definer set search_path = public as $$
+begin
+  if not public.classroom__can_see_enrollment(p_enrollment_id) then
+    raise exception 'Нет доступа к этой работе';
+  end if;
+  return public.classroom__ensure_snapshot(p_enrollment_id, p_lesson_id);
+end $$;
+
+-- Сохранение урока в редакторе — по номеру задания, а не по месту.
+-- p_blocks: [{id?, type, payload, audience, variant, format}] в нужном порядке.
+-- Задание с id обновляется, без id — создаётся, пропавшее из списка — удаляется.
+-- Возвращает id всех заданий по порядку (редактор запоминает id новых).
+create or replace function public.classroom_save_lesson(p_lesson_id uuid, p_blocks jsonb)
+returns jsonb language plpgsql security definer set search_path = public as $$
+declare
+  v_keep uuid[]; v_item jsonb; v_idx int := 0; v_id uuid; v_out uuid[] := '{}';
+begin
+  if not public.classroom_is_editor() then
+    raise exception 'Сохранять уроки может только методист';
+  end if;
+  if jsonb_typeof(p_blocks) <> 'array' then raise exception 'p_blocks — не массив'; end if;
+
+  select coalesce(array_agg((x->>'id')::uuid), '{}') into v_keep
+    from jsonb_array_elements(p_blocks) x
+   where x->>'id' is not null
+     and exists (select 1 from public.classroom_blocks b
+                  where b.id = (x->>'id')::uuid and b.lesson_id = p_lesson_id);
+
+  delete from public.classroom_blocks
+   where lesson_id = p_lesson_id and not (id = any (v_keep));
+
+  -- освободить номера мест, чтобы переставлять без столкновений
+  update public.classroom_blocks set sort_order = -1 - sort_order where lesson_id = p_lesson_id;
+
+  for v_item in select * from jsonb_array_elements(p_blocks) loop
+    -- id из урока и ещё не занятый (дубль задания в редакторе мог унести чужой id)
+    v_id := case when (v_item->>'id')::uuid = any (v_keep)
+                  and not ((v_item->>'id')::uuid = any (v_out))
+                 then (v_item->>'id')::uuid end;
+    if v_id is not null then
+      update public.classroom_blocks
+         set type = v_item->>'type', payload = coalesce(v_item->'payload', '{}'::jsonb),
+             sort_order = v_idx,
+             audience = coalesce(v_item->>'audience', 'shared'),
+             variant  = coalesce(v_item->>'variant', 'any'),
+             format   = coalesce(v_item->>'format', 'any')
+       where id = v_id;
+    else
+      insert into public.classroom_blocks (lesson_id, type, payload, sort_order, audience, variant, format)
+      values (p_lesson_id, v_item->>'type', coalesce(v_item->'payload', '{}'::jsonb), v_idx,
+              coalesce(v_item->>'audience', 'shared'), coalesce(v_item->>'variant', 'any'),
+              coalesce(v_item->>'format', 'any'))
+      returning id into v_id;
+    end if;
+    v_out := v_out || v_id;
+    v_idx := v_idx + 1;
+  end loop;
+
+  return to_jsonb(v_out);
+end $$;
 
 -- ── 1. Колонки ─────────────────────────────────────────────────────────────
 
@@ -107,10 +294,10 @@ end $$;
 create or replace function public.classroom__lesson_auto_score(p_enrollment_id uuid, p_lesson_id uuid)
 returns integer language sql stable set search_path = public as $$
   select round(avg(public.classroom__block_score(b, s)))::int
-    from public.classroom_blocks b
+    from public.classroom__lesson_blocks(p_enrollment_id, p_lesson_id) b
     join public.classroom_submissions s
       on s.block_id = b.id and s.enrollment_id = p_enrollment_id and s.section_key is null
-   where b.lesson_id = p_lesson_id and public.classroom__block_counts(b);
+   where public.classroom__block_counts(b);
 $$;
 
 -- ── 3. Выполнено ли задание и можно ли отправлять ─────────────────────────
@@ -194,10 +381,10 @@ begin
                             order by b.sort_order)
                   filter (where not public.classroom__block_complete(b, s.answers)), '[]'::jsonb)
     into v_submittable, v_done, v_left
-    from public.classroom_blocks b
+    from public.classroom__lesson_blocks(p_enrollment_id, p_lesson_id) b
     left join public.classroom_submissions s
       on s.block_id = b.id and s.enrollment_id = p_enrollment_id and s.section_key is null
-   where b.lesson_id = p_lesson_id and public.classroom__block_counts(b);
+   where public.classroom__block_counts(b);
 
   return jsonb_build_object(
     'can_finish', v_submittable > 0 and v_done >= v_submittable,
@@ -222,6 +409,12 @@ begin
     return;
   end if;
 
+  -- а) задание берётся из копии урока у ученика
+  a := '  select * into v_block from public.classroom_blocks where id = p_block_id;';
+  n := (length(d) - length(replace(d, a, ''))) / length(a);
+  if n <> 1 then raise exception 'submit_block: якорь выборки блока найден % раз', n; end if;
+  d := replace(d, a, '  select * into v_block from public.classroom__enr_block(p_enrollment_id, p_block_id);');
+
   -- а) объявление
   a := 'v_lscore int; v_threshold int;';
   n := (length(d) - length(replace(d, a, ''))) / length(a);
@@ -233,7 +426,10 @@ begin
   n := (length(d) - length(replace(d, a, ''))) / length(a);
   if n <> 1 then raise exception 'submit_block: якорь needs_review найден % раз', n; end if;
   d := replace(d, a,
-'  -- домашку после отправки не меняют; на переделке — только отданные задания
+'  -- копия урока снимается при первом ответе, если её ещё нет
+  perform public.classroom__ensure_snapshot(p_enrollment_id, v_lesson.id);
+
+  -- домашку после отправки не меняют; на переделке — только отданные задания
   select * into v_prog from public.classroom_progress
    where enrollment_id = p_enrollment_id and lesson_id = v_lesson.id;
   if found then
@@ -320,7 +516,7 @@ declare
   v_course_id uuid;
   v_needs_review boolean; v_status text; v_store jsonb;
 begin
-  select * into v_block from public.classroom_blocks where id = p_block_id;
+  select * into v_block from public.classroom__enr_block(p_enrollment_id, p_block_id);
   if not found then raise exception 'Блок не найден'; end if;
   if v_block.type <> 'embed' then raise exception 'Блок не типа embed'; end if;
   select * into v_lesson from public.classroom_lessons where id = v_block.lesson_id;
@@ -441,7 +637,7 @@ begin
   if not public.classroom__can_review(p_enrollment_id) then
     raise exception 'Проверять может только учитель ученика или методист';
   end if;
-  select * into v_block from public.classroom_blocks where id = p_block_id;
+  select * into v_block from public.classroom__enr_block(p_enrollment_id, p_block_id);
   if not found then raise exception 'Блок не найден'; end if;
   select status into v_status from public.classroom_progress
    where enrollment_id = p_enrollment_id and lesson_id = v_block.lesson_id;
@@ -478,7 +674,7 @@ begin
   if p_score is not null and (p_score < 0 or p_score > 100) then
     raise exception 'Оценка — от 0 до 100';
   end if;
-  select * into v_block from public.classroom_blocks where id = p_block_id;
+  select * into v_block from public.classroom__enr_block(p_enrollment_id, p_block_id);
   if not found then raise exception 'Блок не найден'; end if;
   select status into v_status from public.classroom_progress
    where enrollment_id = p_enrollment_id and lesson_id = v_block.lesson_id;
@@ -535,8 +731,8 @@ begin
 
   update public.classroom_submissions s
      set review_status = null, reviewed_at = coalesce(s.reviewed_at, now())
-    from public.classroom_blocks b
-   where b.id = s.block_id and b.lesson_id = p_lesson_id and s.enrollment_id = p_enrollment_id;
+   where s.enrollment_id = p_enrollment_id
+     and s.block_id in (select b.id from public.classroom__lesson_blocks(p_enrollment_id, p_lesson_id) b);
 
   select student_id into v_student from public.classroom_enrollments where id = p_enrollment_id;
   select title into v_title from public.classroom_lessons where id = p_lesson_id;
@@ -571,8 +767,8 @@ begin
 
   v_all := coalesce(cardinality(p_blocks), 0) = 0;
   select coalesce(array_agg(b.id order by b.sort_order), '{}') into v_blocks
-    from public.classroom_blocks b
-   where b.lesson_id = p_lesson_id and public.classroom__block_counts(b)
+    from public.classroom__lesson_blocks(p_enrollment_id, p_lesson_id) b
+   where public.classroom__block_counts(b)
      and (v_all or b.id = any (p_blocks));
   if not v_all and cardinality(v_blocks) <> cardinality(p_blocks) then
     raise exception 'Часть выбранных заданий не из этого урока';
@@ -665,10 +861,10 @@ begin
                where g.enrollment_id = p_enrollment_id and g.block_id = b.id) end
          ) order by b.sort_order), '[]'::jsonb)
     into v_blocks
-    from public.classroom_blocks b
+    from public.classroom__lesson_blocks(p_enrollment_id, p_lesson_id) b
     left join public.classroom_submissions s
       on s.block_id = b.id and s.enrollment_id = p_enrollment_id and s.section_key is null
-   where b.lesson_id = p_lesson_id and public.classroom__block_counts(b);
+   where public.classroom__block_counts(b);
 
   return jsonb_build_object(
     'status', coalesce(v_prog.status, 'in_progress'),
@@ -776,7 +972,7 @@ begin
     set score = excluded.score, max_score = excluded.max_score, comment = excluded.comment,
         graded_by = excluded.graded_by, graded_at = now();
   select case when jsonb_typeof(payload->'parts') = 'array' then jsonb_array_length(payload->'parts') else 1 end
-    into v_parts from public.classroom_blocks where id = p_block_id;
+    into v_parts from public.classroom__enr_block(p_enrollment_id, p_block_id);
   select count(*) into v_graded from public.classroom_grades
    where enrollment_id = p_enrollment_id and block_id = p_block_id;
   if v_graded >= coalesce(v_parts,1) then
