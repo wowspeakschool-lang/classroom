@@ -353,7 +353,7 @@ const TASKS = [
 const N = TASKS.length;
 const PAIRC = ['#FDE7EF','#E6F3FF','#E8F6F0'];
 
-let S = { variant:'A', fit:false, device:'desktop', course:'SM', stage:'doing', score:95, due:'soon',
+let S = { variant:'B', fit:false, device:'desktop', course:'SM', stage:'doing', score:95, due:'soon',
           cur:0, a:{}, confirm:null, parentPct:false, viewWork:false, retakeSet:[4,5],
           icons:'on', net:'on', netBack:false, scen:'fresh', welcome:false, zoom:1 };
 const ZOOMS=[0.85,1,1.15,1.3];
@@ -716,7 +716,7 @@ function weatherOf(s){
   if(s>=90) return ['sun','Солнышко!'];
   if(s>=70) return ['suncloud','Солнышко за тучкой'];
   if(s>=50) return ['cloud','Тучка'];
-  return ['rain','Дождик'];
+  return ['rain','Дождик — после него растут цветы!'];
 }
 function weatherSvg(kind){
   const sun = (cx,cy,r)=>`<g><circle cx="${cx}" cy="${cy}" r="${r}" fill="#FFC93C"/>${Array.from({length:10},(_,k)=>{
@@ -732,10 +732,15 @@ function weatherSvg(kind){
   if(kind==='cloud') return `<svg viewBox="0 0 240 240">${cloud(16,50,1.2,'#C9D3E6')}
       <circle cx="100" cy="128" r="5" fill="#5E6B85"/><circle cx="148" cy="128" r="5" fill="#5E6B85"/>
       <path d="M110 148 L138 148" stroke="#5E6B85" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
-  return `<svg viewBox="0 0 240 240">${cloud(16,30,1.2,'#A9B5CC')}
-      ${[70,110,150,190].map((x,k)=>`<path d="M${x} ${170+k%2*10} l-8 22" stroke="#5DA9E9" stroke-width="7" stroke-linecap="round"/>`).join('')}
-      <circle cx="100" cy="108" r="5" fill="#46536B"/><circle cx="148" cy="108" r="5" fill="#46536B"/>
-      <path d="M108 134 Q124 124 140 134" stroke="#46536B" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
+  return `<svg viewBox="0 0 240 240">
+      <g fill="none" stroke-width="9" stroke-linecap="round" opacity=".9">
+        <path d="M24 150 A96 96 0 0 1 216 150" stroke="#FF8FA3"/><path d="M36 150 A84 84 0 0 1 204 150" stroke="#FFD166"/>
+        <path d="M48 150 A72 72 0 0 1 192 150" stroke="#7BD389"/><path d="M60 150 A60 60 0 0 1 180 150" stroke="#74C0FC"/></g>
+      ${cloud(16,40,1.2,'#9FC6F5')}
+      ${[[70,'#5DA9E9'],[110,'#B197FC'],[150,'#5DA9E9'],[190,'#B197FC']].map(([x,c],k)=>`<path d="M${x} ${178+k%2*12} q-6 10 0 14 q6 -4 0 -14z" fill="${c}"/>`).join('')}
+      <circle cx="100" cy="116" r="5" fill="#2B4C7E"/><circle cx="148" cy="116" r="5" fill="#2B4C7E"/>
+      <circle cx="90" cy="128" r="6" fill="#FFB3C1" opacity=".7"/><circle cx="158" cy="128" r="6" fill="#FFB3C1" opacity=".7"/>
+      <path d="M108 130 Q124 142 140 130" stroke="#2B4C7E" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
 }
 function sentScreen(){
   if(S.net==='off') return `<div class="center"><div class="done"><div class="em">📶</div><h2>Готово к отправке</h2>
