@@ -113,29 +113,97 @@ returns integer language sql stable set search_path = public as $$
    where b.lesson_id = p_lesson_id and public.classroom__block_counts(b);
 $$;
 
--- ── 3. completion_check: учительские блоки не мешают ученику (HANDOVER 8.5) ──
+-- ── 3. Выполнено ли задание и можно ли отправлять ─────────────────────────
+-- «Сдано» мало: интерфейс отправляет и пустой ответ (тест без отметок,
+-- пропуски без слов). Задание выполнено, когда отвечен каждый его пункт.
 
+create or replace function public.classroom__block_complete(
+  b public.classroom_blocks, p_answers jsonb)
+returns boolean language plpgsql stable set search_path = public as $$
+declare
+  v_a jsonb := coalesce(p_answers, '{}'::jsonb);
+  v_n int; v_i int; v_q jsonb;
+begin
+  if p_answers is null then return false; end if;   -- ответа нет совсем
+
+  if b.type = 'quiz' then
+    v_i := 0;
+    for v_q in select * from jsonb_array_elements(coalesce(b.payload->'questions', '[]'::jsonb)) loop
+      if coalesce(v_q->>'type', '') <> 'text'
+         and coalesce(jsonb_array_length(case when jsonb_typeof(v_a->v_i::text) = 'array'
+                                              then v_a->v_i::text end), 0) = 0 then
+        return false;
+      end if;
+      v_i := v_i + 1;
+    end loop;
+    return true;
+
+  elsif b.type in ('exact_input', 'match', 'gaps', 'truefalse', 'sequence', 'hotspot') then
+    v_n := case b.type
+      when 'exact_input' then jsonb_array_length(coalesce(b.payload->'items', '[]'::jsonb))
+      when 'match'       then jsonb_array_length(coalesce(b.payload->'pairs', '[]'::jsonb))
+      when 'gaps'        then jsonb_array_length(public.classroom__gaps_accept(b.payload->>'text'))
+      when 'truefalse'   then jsonb_array_length(coalesce(b.payload->'statements', '[]'::jsonb))
+      when 'sequence'    then jsonb_array_length(coalesce(b.payload->'items', '[]'::jsonb))
+      when 'hotspot'     then jsonb_array_length(coalesce(b.payload->'points', '[]'::jsonb))
+    end;
+    for v_i in 0 .. coalesce(v_n, 0) - 1 loop
+      if not (v_a ? v_i::text) then return false; end if;
+      -- в точках пустая строка = ребёнок промахнулся, это ответ (неверный);
+      -- в остальных пустое поле = не ответил
+      if b.type not in ('hotspot', 'truefalse', 'sequence')
+         and btrim(coalesce(v_a->>v_i::text, '')) = '' then
+        return false;
+      end if;
+    end loop;
+    return true;
+
+  elsif b.type = 'order' then
+    return coalesce(jsonb_array_length(case when jsonb_typeof(v_a->'order') = 'array'
+                                            then v_a->'order' end), 0)
+         = coalesce(jsonb_array_length(b.payload->'words'), 0);
+
+  elsif b.type = 'sort' then
+    select coalesce(sum(jsonb_array_length(coalesce(g->'items', '[]'::jsonb))), 0) into v_n
+      from jsonb_array_elements(coalesce(b.payload->'groups', '[]'::jsonb)) g;
+    return (select count(*) from jsonb_object_keys(
+              case when jsonb_typeof(v_a->'assign') = 'object' then v_a->'assign' else '{}'::jsonb end))
+           >= v_n;
+
+  elsif b.type = 'speaking' then
+    return btrim(coalesce(v_a->>'audio', '')) <> '';
+
+  elsif b.type = 'task' then
+    return btrim(coalesce(v_a->>'text', '')) <> '' or btrim(coalesce(v_a->>'audio', '')) <> '';
+  end if;
+
+  return true;   -- embed: «пройдено по факту»
+end $$;
+
+-- completion_check: считает выполненные, а не просто сданные задания,
+-- и называет невыполненные номерами как в редакторе (sort_order + 1).
+-- Учительские блоки не в счёт (HANDOVER 8.5).
 create or replace function public.classroom__completion_check(p_enrollment_id uuid, p_lesson_id uuid)
 returns jsonb language plpgsql stable security definer set search_path = public as $$
 declare
-  v_submittable int;
-  v_submitted   int;
+  v_submittable int; v_done int; v_left jsonb;
 begin
-  select count(*) into v_submittable
+  select count(*),
+         count(*) filter (where public.classroom__block_complete(b, s.answers)),
+         coalesce(jsonb_agg(jsonb_build_object('block_id', b.id, 'no', b.sort_order + 1)
+                            order by b.sort_order)
+                  filter (where not public.classroom__block_complete(b, s.answers)), '[]'::jsonb)
+    into v_submittable, v_done, v_left
     from public.classroom_blocks b
+    left join public.classroom_submissions s
+      on s.block_id = b.id and s.enrollment_id = p_enrollment_id and s.section_key is null
    where b.lesson_id = p_lesson_id and public.classroom__block_counts(b);
 
-  select count(distinct s.block_id) into v_submitted
-    from public.classroom_submissions s
-    join public.classroom_blocks b on b.id = s.block_id
-   where s.enrollment_id = p_enrollment_id
-     and b.lesson_id = p_lesson_id
-     and public.classroom__block_counts(b);
-
   return jsonb_build_object(
-    'can_finish', v_submittable > 0 and v_submitted >= v_submittable,
+    'can_finish', v_submittable > 0 and v_done >= v_submittable,
     'submittable', v_submittable,
-    'submitted', v_submitted
+    'submitted', v_done,
+    'incomplete', v_left
   );
 end $$;
 
@@ -230,7 +298,8 @@ begin
     ''needs_review'', v_needs_review,
     ''submittable'', v_check->''submittable'',
     ''submitted'', v_check->''submitted'',
-    ''can_finish'', v_check->''can_finish''
+    ''can_finish'', v_check->''can_finish'',
+    ''incomplete'', v_check->''incomplete''
   );
 end
 $function$
@@ -317,7 +386,8 @@ begin
 
   v_check := public.classroom__completion_check(p_enrollment_id, p_lesson_id);
   if not coalesce((v_check->>'can_finish')::boolean, false) then
-    raise exception 'Выполнено не всё: % из %', v_check->>'submitted', v_check->>'submittable';
+    raise exception 'Выполнены не все задания. Осталось: %',
+      (select string_agg(x->>'no', ', ') from jsonb_array_elements(v_check->'incomplete') x);
   end if;
 
   select * into v_prog from public.classroom_progress
@@ -569,7 +639,7 @@ begin
       'retake_blocks', to_jsonb(v_prog.retake_blocks),
       'teacher_note', case when v_prog.status = 'retake' then v_prog.teacher_note end,
       'submittable', v_check->'submittable', 'submitted', v_check->'submitted',
-      'can_finish', v_check->'can_finish');
+      'can_finish', v_check->'can_finish', 'incomplete', v_check->'incomplete');
   end if;
 
   v_open := v_teacher or coalesce(v_prog.show_answers, false);
@@ -613,7 +683,7 @@ begin
     'retake_blocks', to_jsonb(v_prog.retake_blocks),
     'history', case when v_teacher then v_prog.history end,
     'submittable', v_check->'submittable', 'submitted', v_check->'submitted',
-    'can_finish', v_check->'can_finish',
+    'can_finish', v_check->'can_finish', 'incomplete', v_check->'incomplete',
     'blocks', v_blocks);
 end $$;
 
