@@ -293,6 +293,14 @@ img{display:block;max-width:100%}
 .sndrow{display:flex;gap:8px;flex-wrap:wrap;flex:0 0 auto}
 .snd.slow{background:#FFF0DE;color:#B4610F}
 .snd.playing{box-shadow:0 0 0 3px currentColor inset}
+.dlg.sl{max-width:720px;text-align:left}
+.sl-tab{border-collapse:collapse;width:100%}
+.sl-tab td{padding:6px 4px;vertical-align:middle}
+.sl-tab .snd{padding:8px 12px;font-size:14px;white-space:nowrap}
+.sl-t{font-size:12px;color:var(--faint);font-weight:700;min-width:170px}
+.sl-t b{display:block;font-size:15px;color:var(--ink)}
+.ghost.on{border-color:var(--pick);background:var(--pick-soft);color:var(--pick-d)}
+.fires{font-size:30px;letter-spacing:4px;margin:-8px 0 8px;animation:pop .4s cubic-bezier(.2,1.3,.4,1)}
 .phr{font-size:15px;color:var(--mute);font-weight:600;align-self:center}
 /* связь */
 .netbar{max-width:900px;margin:0 auto 8px;padding:9px 14px;border-radius:14px;font-size:14px;font-weight:700;
@@ -346,17 +354,25 @@ const TASKS = [
   { kind:'quiz',  q:'Послушай и выбери картинку', opts:['go_to_bed','get_up','have_lunch'] },
   { kind:'match', q:'Соедини картинку и слова', left:[['get_dressed','1'],['brush_your_teeth','2'],['go_to_school','3']],
     right:['go to school','get dressed','brush your teeth'] },
-  { kind:'order', q:'Составь предложение', img:'get_up', words:['at','I','seven','get','up','o’clock.'] },
+  { kind:'order', q:'Составь предложение', img:'have_lunch', words:['lunch','I','two','have','at','o’clock.'] },
   { kind:'gaps',  q:'Вставь пропущенное слово', img:'have_breakfast', chips:['have','go','get'] },
-  { kind:'speak', q:'Расскажи, что ты делаешь утром', sample:'I get up. I brush my teeth. I have breakfast.' },
+  { kind:'speak', q:'Ответь на вопрос', sample:'When do you have breakfast?' },
 ];
 const N = TASKS.length;
+// Настоящие файлы озвучки из SM2 Unit 1 (голос en_US-amy, «Озвучить пачкой»)
+const AUDIO = {
+  'get up':                      'https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1791461406158_tts_1791461406158.mp3',
+  'I have lunch at two o’clock.': 'https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1791458690186_tts_1791458690186.mp3',
+  'When do you have breakfast?':  'https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1791458686545_tts_1791458686545.mp3',
+};
+const SPEEDS = [1, 0.75, 0.6, 0.5, 0.4];
 const PAIRC = ['#FDE7EF','#E6F3FF','#E8F6F0'];
 
 let S = { variant:'B', fit:false, device:'desktop', course:'SM', stage:'doing', score:95, due:'soon',
           cur:0, a:{}, confirm:null, parentPct:false, viewWork:false, retakeSet:[4,5],
-          icons:'on', net:'on', netBack:false, scen:'fresh', welcome:false, zoom:1 };
-const ZOOMS=[0.85,1,1.15,1.3];
+          icons:'on', net:'on', netBack:false, scen:'fresh', welcome:false, zoom:1,
+          slowRate:0.5, streak:'3', streakTxt:'A' };
+const ZOOMS=[0.7,0.775,0.85,0.925,1,1.1,1.2,1.3,1.4];
 const KIND_IC = { video:['watch','🎬'], cards:['flip','🃏'], quiz:['listen','👂'], match:['link','🔗'],
                   order:['build','🧩'], gaps:['write','✏️'], speak:['say','🎤'] };
 function hasAny(i){
@@ -370,7 +386,7 @@ function hasAny(i){
   if(t.kind==='speak') return a.st!=='idle';
 }
 // рука показывается, пока ребёнок не начал задание (в жизни — при первой встрече с типом)
-function hand(i){ return (S.icons==='on' && !hasAny(i)) ? '<span class="hand">👆</span>' : ''; }
+function hand(i){ return ''; }   // подсказку-руку убрали: она указывала на вариант, как на верный
 function freshAnswers(){
   return { 0:{p:0}, 1:{f:{}}, 2:{sel:null}, 3:{sel:null,map:{}}, 4:{line:[]}, 5:{pick:null}, 6:{st:'idle',t:0} };
 }
@@ -405,9 +421,12 @@ function panel(){
   h += grp('Состояние','stage',[['doing','выполняет'],['sent','отправлено'],['checked','проверено'],['retake','переделка']]);
   h += grp('Срок','due',[['ok','к пятнице'],['soon','сегодня'],['late','просрочено']]);
   h += grp('Значки заданий','icons',[['on','с ними'],['off','без']]);
+  h += `<div class="grp"><span>Звук</span><button onclick="speedLabOpen()">🐢 примеры скорости</button></div>`;
   h += grp('Связь','net',[['on','есть'],['off','пропала']]);
   h += grp('Сценарий','scen',[['fresh','открыл впервые'],['resume','вернулся к домашке']]);
-  if(S.stage==='checked') h += grp('Оценка','score',[[95,'95'],[78,'78'],[58,'58'],[30,'30']]);
+  if(S.stage==='checked'){ h += grp('Оценка','score',[[95,'95'],[78,'78'],[58,'58'],[30,'30']]);
+    h += grp('Серия','streak',[['1','1'],['2','2'],['3','3'],['5','5'],['12','12']]);
+    h += grp('Фраза','streakTxt',[['A','А'],['B','Б'],['C','В'],['D','Г'],['E','Д']]); }
   h += `<div class="note">${S.variant==='B'
       ? 'Б: одно задание на экран, картинки сжимаются под высоту — листать не нужно.'
       : (S.fit ? 'А + «на экран»: каждое задание занимает ровно экран и защёлкивается при прокрутке.'
@@ -436,7 +455,7 @@ function setOpt(k,v){
 function setFit(v){ S.fit=v; render(); }
 function fillAll(){
   S.a = { 0:{p:100}, 1:{f:{0:1,1:1,2:1,3:1}}, 2:{sel:1}, 3:{sel:null,map:{0:1,1:2,2:0}},
-          4:{line:[1,3,4,0,2,5]}, 5:{pick:0}, 6:{st:'done',t:9} };
+          4:{line:[1,3,0,4,2,5]}, 5:{pick:0}, 6:{st:'done',t:9} };
 }
 
 /* ── устройство ── */
@@ -476,7 +495,7 @@ function topBar(){
 
 function netBar(){
   if(!(S.stage==='doing'||S.stage==='retake')) return '';
-  if(S.net==='off') return `<div class="netbar off">📶 Нет связи — ответы сохранены на этом устройстве. Отправим сами, когда появится интернет.</div>`;
+  if(S.net==='off') return `<div class="netbar off">📶 Нет интернета. Ответы сохраняются на этом устройстве.</div>`;
   if(S.netBack) return `<div class="netbar online">✓ Связь есть — всё сохранено на сервере</div>`;
   return '';
 }
@@ -490,16 +509,38 @@ function sndRow(text, label){
   return `<div class="sndrow"><button class="snd" onclick="say('${t}',false,this)">🔊 ${label||'Послушать'}</button>
     <button class="snd slow" onclick="say('${t}',true,this)">🐢 Медленнее</button></div>`;
 }
-function say(text, slow, btn){
-  try{
-    speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate = slow ? 0.6 : 0.95;
-    const v=speechSynthesis.getVoices().find(v=>/en(-|_)US/i.test(v.lang)); if(v) u.voice=v;
-    document.querySelectorAll('.snd.playing').forEach(b=>b.classList.remove('playing'));
-    if(btn){ btn.classList.add('playing'); u.onend=()=>btn.classList.remove('playing'); }
-    speechSynthesis.speak(u);
-  }catch(e){}
+let PLAYER=null;
+function say(text, slow, btn, rate){
+  const r = rate || (slow ? S.slowRate : 1);
+  document.querySelectorAll('.playing').forEach(b=>b.classList.remove('playing'));
+  if(PLAYER){ PLAYER.pause(); PLAYER=null; }
+  if(btn) btn.classList.add('playing');
+  const done=()=>{ if(btn) btn.classList.remove('playing'); };
+  if(AUDIO[text]){
+    // тот же файл, медленнее; высота голоса сохраняется
+    PLAYER=new Audio(AUDIO[text]); PLAYER.preservesPitch=true; PLAYER.mozPreservesPitch=true; PLAYER.webkitPreservesPitch=true;
+    PLAYER.playbackRate=r; PLAYER.onended=done; PLAYER.play().catch(done); return;
+  }
+  try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=r; u.onend=done; speechSynthesis.speak(u); }catch(e){ done(); }
 }
+/* окно «Скорость звука»: все записи на всех скоростях */
+function speedLab(){
+  const rows = Object.keys(AUDIO).map(t=>{
+    const esc=t.replace(/'/g,"\\'");
+    return `<tr><td class="sl-t">${t.split(' ').length>2?'фраза':'слово'}<b>${t}</b></td>${SPEEDS.map(r=>
+      `<td><button class="snd ${r===1?'':'slow'}" onclick="say('${esc}',false,this,${r})">${r===1?'🔊 обычно':'🐢 ×'+r}</button></td>`).join('')}</tr>`;
+  }).join('');
+  document.getElementById('app').insertAdjacentHTML('beforeend', `<div class="modal" id="speedlab"><div class="dlg sl">
+    <h2>Скорость звука</h2>
+    <p>Настоящие записи голосом amy. ×0,5 — вдвое медленнее. Высота голоса не меняется.</p>
+    <div style="overflow-x:auto"><table class="sl-tab">${rows}</table></div>
+    <p style="margin:14px 0 0">В задании у кнопки «🐢 Медленнее» будет одна скорость — какую выберете. Сейчас стоит ×${S.slowRate}.</p>
+    <div class="row" style="margin-top:12px">${SPEEDS.slice(1).map(r=>`<button class="ghost ${S.slowRate===r?'on':''}" onclick="S.slowRate=${r}; speedLabOpen()">🐢 = ×${r}</button>`).join('')}</div>
+    <div class="row" style="margin-top:10px"><button class="fin" onclick="closeLab()">Закрыть</button></div>
+  </div></div>`);
+}
+function speedLabOpen(){ closeLab(); speedLab(); }
+function closeLab(){ const m=document.getElementById('speedlab'); if(m) m.remove(); if(PLAYER) PLAYER.pause(); }
 
 /* ── задания ── */
 function img(name, cls='ph'){ return `<img class="${cls}" src="${IMG}${name}.webp" alt="" onerror="this.style.visibility='hidden'">`; }
@@ -533,7 +574,7 @@ function taskInner(i){
       <div class="mhint">Нажми картинку, потом слова</div>`;
   }
   if(t.kind==='order'){
-    return `${sndRow('I get up at seven o’clock.','Послушать фразу')}<div class="img-side">${img(t.img)}<div class="r">
+    return `${sndRow('I have lunch at two o’clock.','Послушать фразу')}<div class="img-side">${img(t.img)}<div class="r">
         <div class="line ${a.line.length===t.words.length?'full':''}">${a.line.map((w,k)=>
           `<button class="chip" onclick="unOrder(${i},${k})">${t.words[w]}</button>`).join('') || '<span style="color:var(--faint);font-size:15px">Нажимай слова по порядку</span>'}</div>
         <div class="bank">${t.words.map((w,k)=>`<button class="chip ${a.line.includes(k)?'used':''}" onclick="addOrder(${i},${k})">${w}${k===1?hand(i):''}</button>`).join('')}</div>
@@ -560,7 +601,7 @@ function taskInner(i){
   }
 }
 function comment(i){
-  const C = { 4:'Сначала кто — «I», потом что делаешь: «I get up…». Попробуй ещё раз 🙂',
+  const C = { 4:'Сначала кто — «I», потом что делаешь: «I have lunch…». Попробуй ещё раз 🙂',
               5:'Завтрак мы «имеем» — have breakfast.' };
   return C[i] ? `<div class="tc">💬<span><b>Учитель</b>${C[i]}</span></div>` : '';
 }
@@ -689,17 +730,24 @@ function finish(){
   const l=left();
   if(l.length){ jump(l[0]); return; }   // серая кнопка ведёт к первому недоделанному
   S.confirm = { n:10 }; renderModal();
-  S.confirm.iv = setInterval(()=>{ if(!S.confirm) return; S.confirm.n--; if(S.confirm.n<=0){ sendNow(); } else renderModal(); },1000);
+  S.confirm.iv = setInterval(()=>{ if(!S.confirm) return; S.confirm.n--; if(S.confirm.n<=0){ sendNow(); } else tickModal(); },1000);
 }
 function cancelConfirm(){ if(S.confirm){ clearInterval(S.confirm.iv); } S.confirm=null; renderModal(); }
 function sendNow(){ if(S.confirm) clearInterval(S.confirm.iv); S.confirm=null; S.stage='sent'; render(); }
+// каждую секунду меняются только цифра и дуга — окно не перерисовывается и не мигает
+function tickModal(){
+  const n=S.confirm.n, C=2*Math.PI*32;
+  const b=document.querySelector('.modal .ring b'); if(b) b.textContent=n;
+  const c=document.querySelector('.modal .ring .arc'); if(c) c.style.strokeDashoffset = C*(1-n/10);
+  const sm=document.querySelector('.modal .dlg small'); if(sm) sm.textContent=`Если ничего не нажать, через ${n} с домашка отправится сама — даже если закрыть сайт.`;
+}
 function renderModal(){
   const old=document.querySelector('.modal'); if(old) old.remove();
   if(!S.confirm) return;
   const n=S.confirm.n, C=2*Math.PI*32;
   document.getElementById('app').insertAdjacentHTML('beforeend', `<div class="modal"><div class="dlg">
     <div class="ring"><svg width="74" height="74"><circle cx="37" cy="37" r="32" fill="none" stroke="#F3EEF6" stroke-width="7"/>
-      <circle cx="37" cy="37" r="32" fill="none" stroke="var(--act)" stroke-width="7" stroke-linecap="round"
+      <circle class="arc" cx="37" cy="37" r="32" fill="none" stroke="var(--act)" stroke-width="7" stroke-linecap="round"
         stroke-dasharray="${C}" stroke-dashoffset="${C*(1-n/10)}" style="transition:stroke-dashoffset 1s linear"/></svg><b>${n}</b></div>
     <h2>Отправить учителю?</h2>
     <p>После отправки ответы изменить нельзя.</p>
@@ -743,8 +791,9 @@ function weatherSvg(kind){
       <path d="M108 130 Q124 142 140 130" stroke="#2B4C7E" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
 }
 function sentScreen(){
-  if(S.net==='off') return `<div class="center"><div class="done"><div class="em">📶</div><h2>Готово к отправке</h2>
-    <p>Сейчас нет интернета. Домашка сохранена на этом устройстве и уйдёт учителю сама, как только связь появится.</p></div></div>`;
+  if(S.net==='off') return `<div class="center"><div class="done"><div class="em">📶</div><h2>Нет интернета</h2>
+    <p>Домашка пока не отправлена — ответы сохранены на этом устройстве. Проверь подключение и нажми «Отправить ещё раз».</p>
+    <div><button class="fin" style="margin-top:18px" onclick="if(S.net==='on') render();">Отправить ещё раз</button></div></div></div>`;
   return `<div class="center"><div class="done"><div class="em">📨</div><h2>Отправлено!</h2>
     <p>Учитель проверит, и здесь появится оценка</p></div></div>`;
 }
@@ -760,10 +809,20 @@ function checkedScreen(){
   } else {
     grade = `<div class="score" style="color:${s>=70?'var(--ok)':s>=50?'var(--warn)':'var(--late)'}">${s}%</div>`;
   }
-  return `<div class="center"><div class="done">${grade}
-    <div><span class="streak">🔥 3 домашки подряд вовремя</span></div>
+  const n=Number(S.streak);
+  return `<div class="center"><div class="done"><div class="fires">${'🔥'.repeat(Math.min(7,n))}${n>7?' ×'+n:''}</div>${grade}
+    <div><span class="streak">${n===1?'Первый огонёк! Сдавай вовремя — и он разгорится':STREAK_TXT[S.streakTxt](n)}</span></div>
     <div><button class="link" onclick="S.viewWork=true; render()">Посмотреть мою работу</button></div></div></div>`;
 }
+function hw(n){ const m10=n%10, m100=n%100;
+  return (m10===1&&m100!==11)?'домашка':(m10>=2&&m10<=4&&(m100<12||m100>14))?'домашки':'домашек'; }
+const STREAK_TXT = {
+  A: n=>`${n} ${hw(n)} подряд — вовремя!`,
+  B: n=>`Ты в ударе: ${n} ${hw(n)} без опозданий`,
+  C: n=>`Огонь! Уже ${n} ${hw(n)} вовремя`,
+  D: n=>`Так держать: ${n} раза подряд вовремя`,
+  E: n=>`Серия: ${n} ${hw(n)} вовремя подряд`,
+};
 function workView(){
   return `<div class="banner"><div class="in"><span class="em">👀</span><span style="flex:1"><b>Твоя работа</b>
       <span>Только посмотреть. Комментарии учителя — у заданий.</span></span>
@@ -777,6 +836,11 @@ function retakeList(){
       : `<div class="acc-row"><i>✓ принято</i>${i+1}. ${t.q}</div>`).join('');
 }
 
+function welcomeHtml(st){
+  return `<div class="welcome" style="${st}">👋<b>С возвращением! Продолжаем с задания ${S.cur+1}.
+    <small style="display:block;font-weight:600;opacity:.9;margin-top:3px">Перед отправкой не забудь ещё раз проверить все задания 😉</small></b>
+    <button onclick="S.welcome=false; renderMain()">Понятно</button></div>`;
+}
 /* ── сборка ── */
 function mainHtml(){
   if(S.stage==='sent') return sentScreen();
@@ -784,11 +848,11 @@ function mainHtml(){
   if(S.variant==='B'){
     const i=S.cur;
     if(S.stage==='retake') return `<div class="list" style="padding-top:0;padding-bottom:0">${taskCard(i)}</div>`;
-    const wel = S.welcome ? `<div class="welcome" style="margin:14px 0 0">👋<b>С возвращением! Продолжаем с задания ${S.cur+1}</b><button onclick="S.welcome=false; renderMain()">Понятно</button></div>` : '';
+    const wel = S.welcome ? welcomeHtml('margin:14px 0 0') : '';
     return `<div class="list" style="padding-top:0;padding-bottom:0">${wel}${taskCard(i)}</div>`;
   }
   if(S.stage==='retake') return `<div class="list">${retakeList()}</div>`;
-  const wel = S.welcome ? `<div class="welcome">👋<b>С возвращением! Продолжаем с задания ${S.cur+1}</b><button onclick="S.welcome=false; renderMain()">Понятно</button></div>` : '';
+  const wel = S.welcome ? welcomeHtml('') : '';
   return `<div class="list">${wel}${TASKS.map((_,i)=>taskCard(i)).join('')}</div>`;
 }
 function renderMain(){
