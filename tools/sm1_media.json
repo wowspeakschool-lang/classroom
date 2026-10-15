@@ -2,7 +2,6 @@
  "rows": [
   {
    "lesson": "Тест Unit 1",
-   "link": "https://shkola.app/material/folders/2335906/lesson/update/assessment/gnKzEdMF",
    "kind": "аудио",
    "what": "Запись к заданию «Выбери предметы, которые услышишь»",
    "hint": "Аудио внутри задания «Тест»: «Внимательно послушай аудио. Выбери предметы, которые ты услышишь» (book, notebook, pen…). Перед ним — «Запись голоса» с предложениями «I spin a top…»",
@@ -10,7 +9,6 @@
   },
   {
    "lesson": "Тест Unit 1",
-   "link": "https://shkola.app/material/folders/2335906/lesson/update/assessment/gnKzEdMF",
    "kind": "аудио",
    "what": "Запись к заданию «номер — картинка»",
    "hint": "Аудио в «Тексте»: «Внизу у тебя есть картинки… Послушай аудио и узнай, какой номер принадлежит какой картинке!»; дальше идёт задание «Диаграмма» — соединить картинки с номерами",
@@ -18,7 +16,6 @@
   },
   {
    "lesson": "Тест Unit 2",
-   "link": "https://shkola.app/material/folders/2335907/lesson/update/assessment/dCYKnCyt",
    "kind": "аудио",
    "what": "Запись к заданию «соедини имя с ребёнком»",
    "hint": "Аудио «Послушай аудио и выполни задание ниже»; дальше идёт задание «Диаграмма»: «Послушай аудио выше и соедини имя с ребёнком» (Amy, Tom, Sam, Ben, Lily)",
@@ -26,7 +23,6 @@
   },
   {
    "lesson": "Тест Unit 3",
-   "link": "https://shkola.app/material/folders/2335908/lesson/update/assessment/uc8Xn1JZ",
    "kind": "аудио",
    "what": "LISTENING: «Какое животное нравится каждому ребёнку?» (Tom, Lucy, Ben, Ann, Kim)",
    "hint": "Задание «Найди пару» с подписью LISTENING, после «Заполни пропуски» READING про животных; перед SPEAKING TASK «Посмотри на картинку и расскажи, кто где находится»",
@@ -34,7 +30,6 @@
   },
   {
    "lesson": "Тест Unit 4",
-   "link": "https://shkola.app/material/folders/2335909/lesson/update/assessment/AOxtYJZ0",
    "kind": "аудио",
    "what": "LISTENING — запись к вопросам про бананы, Сэма и Лизу",
    "hint": "Аудио внутри задания «Выбери правильный вариант»: «LISTENING. Послушай запись. Выбери правильный ответ» (1. Have they got any bananas?). Перед ним — READING «Верно / неверно» про ланч-бокс Бена",
@@ -42,7 +37,6 @@
   },
   {
    "lesson": "Unit 5 · ДЗ 4 (часть 1)",
-   "link": "https://shkola.app/material/folders/2335859/lesson/update/assessment/epGPP4q0",
    "kind": "аудио",
    "what": "История «We're lost!»",
    "hint": "«Медиафайл» после текста «Прежде чем мы послушаем и прочитаем текст, попробуй вспомнить — куда шли ребята: lake, forest, river?»; дальше картинка истории и «Тест»: «Прочитай, послушай и выбери предложения, которые произнёс зайчик»",
@@ -50,7 +44,6 @@
   },
   {
    "lesson": "Unit 5 · ДЗ 4 (часть 2)",
-   "link": "https://shkola.app/material/folders/2335859/lesson/update/video/rTv7ARoZ",
    "kind": "видео",
    "what": "Интерактивное видео «SM2ed Animated story video L1 U5» (1:44)",
    "hint": "Это вся вторая часть домашки: интерактивное видео с вопросами по ходу просмотра (7 вопросов, «Добро пожаловать во вторую часть домашнего задания!»)",
@@ -58,15 +51,21 @@
   },
   {
    "lesson": "Unit 5 · ДЗ 5",
-   "link": "",
    "kind": "аудио",
    "what": "LISTENING: «Послушай про ребят и выбери вариант» (James, Emma, Charles, Hannah)",
    "hint": "пятое задание урока",
    "name": "sm1_u5_hw5_b4"
   },
   {
+   "lesson": "Unit 5 · ДЗ 5",
+   "kind": "картинка",
+   "what": "Картинки к этому же заданию LISTENING: по 3 у каждого ребёнка, всего 12. В выгрузке двух не хватает — сохраните все 12 по порядку на экране",
+   "hint": "пятое задание урока",
+   "name": "sm1_u5_hw5_b4_1",
+   "name_text": "sm1_u5_hw5_b4_1.png … sm1_u5_hw5_b4_12.png"
+  },
+  {
    "lesson": "Тест Unit 5",
-   "link": "https://shkola.app/material/folders/2335910/lesson/update/assessment/XLAdxhGj",
    "kind": "аудио",
    "what": "LISTENING: дни и занятия Tom / Lucy / Ben",
    "hint": "Аудио внутри задания «Классификация»: «LISTENING. Послушай запись. Перетащи дни недели и занятия в колонку нужного ребёнка» (Tom, Lucy, Ben). Перед ним — READING «Hi! I'm Sam. Here is my week!»",
@@ -74,7 +73,6 @@
   },
   {
    "lesson": "Unit 6 · ДЗ 2",
-   "link": "https://shkola.app/material/folders/2335860/lesson/update/assessment/5Bk1bwDi",
    "kind": "видео",
    "what": "Девочка описывает любимую комнату",
    "hint": "«Медиафайл» «Для начала посмотри видео. В видео девочка описывает свою любимую комнату»; дальше идёт задание «Найди пару»: «Посмотри видео ещё раз и соедини левый столбик с правым» (There is one bed.)",
@@ -82,7 +80,6 @@
   },
   {
    "lesson": "Unit 6 · ДЗ 3",
-   "link": "",
    "kind": "видео",
    "what": "Животные: Is there…? / Are there…?",
    "hint": "Видео после текста «Ура! Мы с тобой посмотрим интересное видео… много животных»; дальше идёт задание «Посмотри видео ещё раз. Соедини вопросы и ответы» (Are there five lions?)",
@@ -90,7 +87,6 @@
   },
   {
    "lesson": "Unit 6 · ДЗ 4",
-   "link": "https://shkola.app/material/folders/2335860/lesson/update/assessment/o0fS86xc",
    "kind": "аудио",
    "what": "История «The old house»",
    "hint": "«Медиафайл» «Для начала прослушай аудио и выполни задание» — после текста «Наши супер друзья… отправляются в жуткий дом»; дальше идёт «Тест»: «Прослушай историю ещё раз. Какие слова упоминаются в истории?» (house, stairs, kitchen…)",
@@ -98,7 +94,6 @@
   },
   {
    "lesson": "Unit 6 · ДЗ 4",
-   "link": "https://shkola.app/material/folders/2335860/lesson/update/assessment/o0fS86xc",
    "kind": "видео",
    "what": "Мультфильм по истории «The old house» (доп. задание)",
    "hint": "«Медиафайл» «Смотри, наша история ожила и превратилась в мультик!»; дальше идёт «Порядок предложений»: «Посмотри видео ещё раз. Расставь предложения из видео» (There's the old house.)",
@@ -106,7 +101,6 @@
   },
   {
    "lesson": "Unit 6 · ДЗ 5",
-   "link": "",
    "kind": "видео",
    "what": "Экскурсия по дому",
    "hint": "Видео «Герой видео проведёт небольшую экскурсию по своему дому. Попробуй угадать, какие комнаты есть у него в доме»; дальше идёт «Тест»: «Отметь, какие комнаты показывал герой видео» (a hall, a bedroom…)",
@@ -114,7 +108,6 @@
   },
   {
    "lesson": "Unit 6 · ДЗ 6",
-   "link": "",
    "kind": "видео",
    "what": "Сэм путешествует по миру, виды домов",
    "hint": "Видео «Посмотри видео ниже… Сэм путешествует по всему миру и узнаёт о различных видах домов»; дальше идёт «Тест»: «Выбери только те виды домов, которые звучали в видео» (castle, hut, cave house…)",
@@ -122,7 +115,6 @@
   },
   {
    "lesson": "Тест Unit 6",
-   "link": "https://shkola.app/material/folders/2335911/lesson/update/assessment/9KWrIrYx",
    "kind": "аудио",
    "what": "Диалог Тома и Сары: Том пришёл к Саре в гости",
    "hint": "Аудио внутри задания «Верно / неверно»: «Послушай диалог Тома и Сары… отметь True или False» (1. The kitchen is big.). Перед ним — «Заполни пропуски» «This is Ben's house»",
@@ -130,7 +122,6 @@
   },
   {
    "lesson": "Unit 7 · ДЗ 2",
-   "link": "https://shkola.app/material/folders/2335861/lesson/update/assessment/eigmFxG3",
    "kind": "видео",
    "what": "Видео 1: This is a flower / These are rabbits",
    "hint": "«Медиафайл» после текста «Мы начнём с видео… какие предметы есть у главного героя?»; дальше идёт «Найди пару»: «Посмотри видео ещё раз и соедини предложения и подходящие картинки» (This is a flower.)",
@@ -138,7 +129,6 @@
   },
   {
    "lesson": "Unit 7 · ДЗ 2",
-   "link": "https://shkola.app/material/folders/2335861/lesson/update/assessment/eigmFxG3",
    "kind": "видео",
    "what": "Видео 2: Do you like this cap?",
    "hint": "«Медиафайл» «Посмотри ещё одно видео… какую одежду ты в нём увидишь? A T-shirt? A cap? Shoes?»; дальше идёт «Найди пару»: «Обрати внимание, какая одежда нравится герою видео» (Do you like this cap? — Yes, I do.)",
@@ -146,7 +136,6 @@
   },
   {
    "lesson": "Unit 7 · ДЗ 3",
-   "link": "",
    "kind": "видео",
    "what": "Видео 1: Mabel — pink jumper, purple skirt",
    "hint": "Видео после текста «Мы начнём с видео… во что одеты главные персонажи? A T-shirt? A skirt? A cap?»; дальше идёт «Соедини предложения и подходящие картинки» (He's wearing a white T-shirt — Darius)",
@@ -154,7 +143,6 @@
   },
   {
    "lesson": "Unit 7 · ДЗ 3",
-   "link": "",
    "kind": "видео",
    "what": "Видео 2: Gravity Falls",
    "hint": "Видео «Посмотри ещё одно видео. Но сначала посмотри на картинку и угадай…»; дальше идёт «Соедини вопрос с правильным ответом» (Is Dipper wearing a cap?)",
@@ -162,7 +150,6 @@
   },
   {
    "lesson": "Unit 7 · ДЗ 4 (часть 1)",
-   "link": "",
    "kind": "аудио",
    "what": "История «The cap»",
    "hint": "Аудио «Твоё первое задание — послушать аудио… Название истории — The cap»; дальше идёт «Тест»: «Посчитай, сколько раз звучит слово cap»",
@@ -170,7 +157,6 @@
   },
   {
    "lesson": "Unit 7 · ДЗ 4 (часть 2)",
-   "link": "https://shkola.app/material/folders/2335861/lesson/update/video/ZaQlCgz2",
    "kind": "видео",
    "what": "Мультфильм Unit 7 «SM2ed Animated story video» (1:39)",
    "hint": "Это вся вторая часть домашки: интерактивное видео с вопросами по ходу просмотра (9 заданий)",
@@ -178,15 +164,27 @@
   },
   {
    "lesson": "Unit 7 · ДЗ 5",
-   "link": "",
    "kind": "видео",
    "what": "Шоу талантов",
    "hint": "Видео «Главные герои видео выступают на шоу талантов и показывают фокусы с помощью одежды»; дальше идёт «Тест»: «Отметь, какая одежда была на главных героях видео» (trousers, skirt, shorts…)",
    "name": "sm1_u7_hw5_b3"
   },
   {
+   "lesson": "Тест Unit 7",
+   "kind": "аудио",
+   "what": "Аудирование «Speaker 1–5 + Extra» — кто что говорит",
+   "hint": "пятое задание теста в ShkolaApp",
+   "name": "sm1_u7_test_b9"
+  },
+  {
+   "lesson": "Тест Unit 7",
+   "kind": "картинка",
+   "what": "Картинка к аудированию «Speaker 1–5 + Extra»",
+   "hint": "пятое задание теста в ShkolaApp",
+   "name": "sm1_u7_test_b9"
+  },
+  {
    "lesson": "Unit 8 · ДЗ 2",
-   "link": "https://shkola.app/material/folders/2335862/lesson/update/assessment/oR7PmzIa",
    "kind": "видео",
    "what": "Что умеют животные",
    "hint": "«Медиафайл» «Для начала давай посмотрим видео! Как думаешь, каких животных ты увидишь там?»; дальше текст «What can you do?» и «Найди пару»: «Посмотри видео ещё раз и соедини картинки и предложения» (I can swim…)",
@@ -194,7 +192,6 @@
   },
   {
    "lesson": "Unit 8 · ДЗ 2",
-   "link": "https://shkola.app/material/folders/2335862/lesson/update/assessment/oR7PmzIa",
    "kind": "аудио",
    "what": "Боб рассказывает, что умеет",
    "hint": "Аудио внутри «Записи голоса»: «Давай познакомимся с новым героем! Это — Боб… Послушай запись и узнай, что умеет Боб». Перед ним — «Выбери правильный вариант» (I ski. can / can't)",
@@ -202,7 +199,6 @@
   },
   {
    "lesson": "Unit 8 · ДЗ 3",
-   "link": "https://shkola.app/material/folders/2335862/lesson/update/assessment/e0Vh6oEq",
    "kind": "видео",
    "what": "Can you …?",
    "hint": "«Медиафайл» «Ура! Мы посмотрим видео! Как думаешь, с какими персонажами ты познакомишься?»; дальше идёт «Найди пару»: «Посмотри видео ещё раз и соедини вопросы и ответы» (Can you swim?)",
@@ -210,7 +206,6 @@
   },
   {
    "lesson": "Unit 8 · ДЗ 3",
-   "link": "https://shkola.app/material/folders/2335862/lesson/update/assessment/e0Vh6oEq",
    "kind": "аудио",
    "what": "«Что умеет мой монстрик»",
    "hint": "Аудио внутри «Записи голоса»: «Посмотри, это мой монстрик! Послушай, как я описываю, что он умеет делать». Перед ним — «Выбери правильный вариант» (✓ She __ do ballet.)",
@@ -218,7 +213,6 @@
   },
   {
    "lesson": "Unit 8 · ДЗ 4 (часть 1)",
-   "link": "https://shkola.app/material/folders/2335862/lesson/update/assessment/64Nml9dX",
    "kind": "аудио",
    "what": "История «The Problem»",
    "hint": "«Медиафайл» после текста «Сегодня Misty, Flash, Thunder и Whisper подготовили для тебя историю!»; дальше картинки истории и «Диаграмма»: «Картинки перемешались! Соедини картинку и номер»",
@@ -226,7 +220,6 @@
   },
   {
    "lesson": "Unit 8 · ДЗ 4 (часть 2)",
-   "link": "https://shkola.app/material/folders/2335862/lesson/update/video/Lpzf1s8Y",
    "kind": "видео",
    "what": "Интерактивное видео (2:11)",
    "hint": "Это вся вторая часть домашки: интерактивное видео с вопросами по ходу просмотра (6 заданий)",
@@ -234,7 +227,6 @@
   },
   {
    "lesson": "Unit 8 · ДЗ 5",
-   "link": "https://shkola.app/material/folders/2335862/lesson/update/assessment/0fSqaQcX",
    "kind": "аудио",
    "what": "«Как я описала своего питомца»",
    "hint": "Аудио внутри «Записи голоса»: «Послушай, как я описала своего домашнего животного! Тебе понравился мой дружок?». Перед ним — «Верно / неверно» (Patch can swim.)",
@@ -242,7 +234,6 @@
   },
   {
    "lesson": "Тест Unit 8",
-   "link": "https://shkola.app/material/folders/2335913/lesson/update/assessment/SJYOyFrI",
    "kind": "аудио",
    "what": "Разговор Лили и Тома о новом роботе",
    "hint": "Аудио внутри задания «Впиши в пропуски»: «Прочитай разговор Лили и Тома о новом роботе. Впиши только ОДНО недостающее слово» (The robot's name is …). Перед ним — «Тест» про робота Beep",
@@ -250,7 +241,6 @@
   },
   {
    "lesson": "Unit 9 · ДЗ 2",
-   "link": "https://shkola.app/material/folders/2335863/lesson/update/assessment/iNpSvpUS",
    "kind": "видео",
    "what": "Подружки решают, чем заняться",
    "hint": "«Медиафайл» после текста «Для начала посмотри видеоролик. В видео подружки решают, чем им заняться»; дальше идёт «Найди пару»: «Посмотри видео ещё раз и соедини левый столбик с правым» (Let's eat ice cream. — Good idea!)",
@@ -258,7 +248,6 @@
   },
   {
    "lesson": "Unit 9 · ДЗ 3",
-   "link": "https://shkola.app/material/folders/2335863/lesson/update/assessment/uNIIfMPn",
    "kind": "видео",
    "what": "Где котик?",
    "hint": "«Медиафайл» «Давай начнём с видео… где спрятался котик (cat)?»; дальше идёт «Найди пару»: «Посмотри видео ещё раз. Соедини вопросы и ответы» (Where are the candies?)",
@@ -266,7 +255,6 @@
   },
   {
    "lesson": "Unit 9 · ДЗ 4",
-   "link": "https://shkola.app/material/folders/2335863/lesson/update/assessment/Ou97I6UQ",
    "kind": "аудио",
    "what": "История «The top of the hill»",
    "hint": "«Медиафайл» «Твоё первое задание — послушать запись истории… взобраться на вершину холма наперегонки»; дальше идёт «Порядок предложений»: «Прослушай историю ещё раз… расставь предложения» (A race?)",
@@ -274,7 +262,6 @@
   },
   {
    "lesson": "Unit 9 · ДЗ 4",
-   "link": "https://shkola.app/material/folders/2335863/lesson/update/assessment/Ou97I6UQ",
    "kind": "видео",
    "what": "Мультфильм «The top of the hill» (доп. задание)",
    "hint": "«Медиафайл» «Смотри, наша история ожила и превратилась в мультик!»; дальше идёт «Заполни пропуски»: «Вставь пропущенные слова в предложения» (Let's go.)",
@@ -282,7 +269,6 @@
   },
   {
    "lesson": "Unit 9 · ДЗ 5",
-   "link": "",
    "kind": "аудио",
    "what": "Как зовут детей на пляже",
    "hint": "Аудио «Сейчас тебе нужно прослушать аудио и соединить имена с детьми на картинке ниже»; дальше идёт «Послушай аудио и соедини имена с детьми на картинке» (Sue, Jim, Tom, Mia, Bob)",
@@ -290,7 +276,6 @@
   },
   {
    "lesson": "Тест Unit 9",
-   "link": "https://shkola.app/material/folders/2335914/lesson/update/assessment/z654glzO",
    "kind": "аудио",
    "what": "Бен и семья на пляже",
    "hint": "Аудио внутри задания «Тест»: «Послушай аудио: Бен и его семья проводят выходной на пляже» (1. What does Ben want to do?). Перед ним — «Составь предложение» «They are on my head.»",
@@ -298,11 +283,18 @@
   },
   {
    "lesson": "Final Test (Listening)",
-   "link": "https://shkola.app/material/folders/2335915/lesson/update/assessment/JsTTJIn5",
    "kind": "аудио",
    "what": "Final test Listening (2:46)",
    "hint": "Первое задание урока Listening — «Медиафайл» «Послушай аудио и выполни задание ниже»; дальше идёт «Диаграмма»: «Послушай аудио и соедини имена людей с их изображениями» (Jane, Mike, Laura, Clare, Paul)",
    "name": "sm1_final_b1"
+  },
+  {
+   "lesson": "Final Test",
+   "kind": "картинка",
+   "what": "Картинки вариантов к 5 вопросам Listening (Tom, Anna, Sue, Ben, Nick) — по 3 на вопрос, всего 15",
+   "hint": "вопросы сразу после записи Listening",
+   "name": "sm1_final_q1_1",
+   "name_text": "sm1_final_q1_1.png … sm1_final_q5_3.png (вопрос_вариант)"
   }
  ]
 }

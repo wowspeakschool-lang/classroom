@@ -1,25 +1,26 @@
 // Собирает docx «что скачать с ShkolaApp — аудио и видео» для Super Minds 1.
 // Альбомный А4, одна таблица: галочка,
-// урок со ссылкой на него в ShkolaApp, тип, подсказка «по какому заданию
+// урок, тип, подсказка «по какому заданию
 // узнать» и имя файла для бакета classroom-media.
 //   node tools/sm1_media_docx.js [выход.docx]
 // Данные — tools/sm1_media.json:
-//   { "rows": [ { "lesson": "Unit 6 · ДЗ 2", "link": "https://shkola.app/...",
-//                 "kind": "видео" | "аудио", "what": "...", "hint": "...",
+//   { "rows": [ { "lesson": "Unit 6 · ДЗ 2",
+//                 "kind": "видео" | "аудио" | "картинка", "what": "...", "hint": "...",
+//                 "name_text": "..." (необязательно: имя для нескольких файлов),
 //                 "name": "sm1_u6_hw2_b3" } ] }
 // Одна таблица — методист просила без разделов и без лишнего (15.10.2026).
 const fs = require('fs');
 const path = require('path');
 const {
-  Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, ExternalHyperlink,
+  Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
   WidthType, ShadingType, AlignmentType, PageOrientation, HeadingLevel,
 } = require('docx');
 
 const DATA = JSON.parse(fs.readFileSync(path.join(__dirname, 'sm1_media.json'), 'utf8'));
-const COLS = [420, 520, 3000, 1000, 6460, 3000];   // сумма 14400
+const COLS = [420, 520, 2200, 1300, 6660, 3300];   // сумма 14400
 const HEAD = ['✔', '№', 'Урок', 'Тип', 'Что это и где искать в ShkolaApp', 'Как назвать файл'];
-const ICON = { 'видео': '🎬 видео', 'аудио': '🔊 аудио' };
-const EXT  = { 'видео': '.mp4', 'аудио': '.mp3' };
+const ICON = { 'видео': '🎬 видео', 'аудио': '🔊 аудио', 'картинка': '🖼 картинка' };
+const EXT  = { 'видео': '.mp4', 'аудио': '.mp3', 'картинка': '.png' };
 
 function para(children, opts = {}) {
   return new Paragraph({
@@ -42,8 +43,6 @@ const t = (text, o = {}) => new TextRun({ text, size: o.small ? 18 : 20, bold: !
 
 function lessonCell(r) {
   const lines = [[t(r.lesson, { bold: true })]];
-  if (r.link) lines.push([new ExternalHyperlink({ link: r.link,
-    children: [new TextRun({ text: r.link, style: 'Hyperlink', size: 16 })] })]);
   return lines;
 }
 
@@ -59,7 +58,7 @@ function table(rows, startNo) {
       cell(lessonCell(r), 2),
       cell([t(ICON[r.kind])], 3),
       cell(what, 4),
-      cell([t(r.name + EXT[r.kind], { bold: true })], 5),
+      cell([t(r.name_text || r.name + EXT[r.kind], { bold: true })], 5),
     ]}));
   });
   return new Table({ columnWidths: COLS, width: { size: 14400, type: WidthType.DXA }, rows: trs });
@@ -76,14 +75,15 @@ function plural(n, one, few, many) {
 const ROWS = DATA.rows;
 const nVideo = ROWS.filter(r => r.kind === 'видео').length;
 const nAudio = ROWS.filter(r => r.kind === 'аудио').length;
+const nPic = ROWS.filter(r => r.kind === 'картинка').length;
 const P = (text, o = {}) => new Paragraph({ spacing: { after: 120 }, children: [t(text, o)] });
 
 const kids = [
   new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun({
     text: 'Super Minds 1 · аудио и видео — что скачать с ShkolaApp', bold: true, size: 32 })] }),
-  P(`${ROWS.length} ${plural(ROWS.length, 'файл', 'файла', 'файлов')}: ${nVideo} видео и ${nAudio} аудио. `
+  P(`${nVideo} видео, ${nAudio} аудио и ${nPic} ${plural(nPic, 'строка', 'строки', 'строк')} с картинками. `
     + 'Класть в бакет classroom-media, папка sm1/u<номер юнита>/ (Final Test — в sm1/u9/), '
-    + 'имя — из последней колонки.'),
+    + 'имя — из последней колонки. Картинки можно сохранить скриншотом.'),
   table(ROWS, 1),
 ];
 
