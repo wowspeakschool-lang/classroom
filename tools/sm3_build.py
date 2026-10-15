@@ -1201,6 +1201,20 @@ LESSONS = {
         # with my little eye» разбирается на то же самое — услышал букву,
         # нашёл картинку, — и собирается из наших карточек еды.
         #
+        # Второе, «соедини людей и блюда», заменено там же (Анна: «замени»):
+        # блок 7, СОСТАВ МОЙ. Людей рисовать нельзя, но они и не нужны —
+        # слева стоит имя и то, чего человек хочет, справа наша карточка еды.
+        # Имена взяты из диалогов этого же урока (Ким, Дэниэль, Том, Мэри)
+        # плюс Бен и Люси, герои курса.
+        #
+        # Каждая реплика отсекает все пять чужих карточек, а не только
+        # похожие: «холодное с лимоном» — это лимонад, а не вода; «попить, но
+        # не сок и не лимонад» — вода, а не лимонад.
+        #
+        # Поставлен последним перед прощанием, и это не лень: так не поехал
+        # ни один номер, кроме самого прощания. Игра «I spy» осталась рядом
+        # со своим образцом (блоки 4-6), а блоки 2 и 4 с аудио — на месте.
+        #
         # Блок поставлен ПЕРЕД устной игрой, а не в конец: сперва ребёнок
         # пробует букву на готовых картинках, потом играет сам. И номера
         # блоков 2 и 4 при этом не поехали — а на них висят `sm3_u2_hw5_b2`
@@ -1272,6 +1286,30 @@ LESSONS = {
                     "<p>Назови первую букву и сам предмет, который не подписан — "
                     "рядом с ним стоит пустая строчка. Начинай так:</p>"
                     "<p><i>I spy with my little eye something beginning with…</i></p>",
+            }),
+
+            ("match", {
+                "title": "Прочитай, чего хочет каждый, и подбери ему еду",
+                "pairs": [
+                    {"left": "Kim: I’m thirsty. I’d like something cold with lemon.",
+                     "right": "lemonade", "right_audio_tts": "lemonade",
+                     "right_image": img("u2", "food_lemonade")},
+                    {"left": "Daniel: It’s cold today. Shall I have something hot?",
+                     "right": "soup", "right_audio_tts": "soup",
+                     "right_image": img("u2", "food_soup")},
+                    {"left": "Tom: I don’t want meat. I’d like something green.",
+                     "right": "salad", "right_audio_tts": "salad",
+                     "right_image": img("u2", "food_salad")},
+                    {"left": "Mary: I’d like some fruit — something big and yellow.",
+                     "right": "pineapple", "right_audio_tts": "pineapple",
+                     "right_image": img("u2", "food_pineapple")},
+                    {"left": "Ben: I’m very hungry! I’d like something with meat.",
+                     "right": "sausages", "right_audio_tts": "sausages",
+                     "right_image": img("u2", "food_sausages")},
+                    {"left": "Lucy: I’d like a drink, but not juice and not lemonade.",
+                     "right": "water", "right_audio_tts": "water",
+                     "right_image": img("u2", "food_water")},
+                ],
             }),
 
             ("text", {"html":
