@@ -3,7 +3,9 @@
 Один промпт = одна картинка-лист с сеткой внутри. Потом лист режется на отдельные PNG.
 **85 листов** на 9 юнитов + Final Test.
 
-**Состояние: все 85 листов сгенерированы и проверены.** Осталось по
+**Состояние: все 85 листов сгенерированы и проверены.** Плюс четыре листа
+добора в конце файла (Л2.13, Л6.12, Л7.5, Л7.6) — они закрывают задания,
+ушедшие без картинок, и ждут генерации. Осталось по
 желанию перезапустить ЛФ.2 и ЛФ.3 — на бутсах три полосы. Пометки «что реально
 вышло» стоят у Л4.9 и ЛФ.4: там картинка принята, но ключ задания надо ставить
 по факту, а не по промпту. Следующий этап — нарезка листов на карточки, webp
@@ -1073,3 +1075,88 @@ Output size: 2048 x 1024 px.
    между собой не нужно.
 3. Флаги (Л8.4, Л8.5) — если с 2–3 попыток не точно, берём SVG.
 4. Циферблаты — уже сделаны кодом: `python3 tools/gen_clocks.py`.
+
+---
+
+# ДОБОРЫ · четыре листа к заданиям, которые ушли без картинок (15.10.2026)
+
+Эти листы **не входят в 85**. Они закрывают три места, где задание собрано
+текстом, потому что картинок не было: реплики ящериц (U2 HW3), наскальные
+рисунки (U6 HW7) и слова о болезнях (U7 HW1 и Test). Анна генерирует сама.
+
+Правила листа те же, что выше: промпт копируется целиком, ничего не
+дописывать; 3 колонки максимум; один регистр на лист.
+
+## 🟥 Два решения, которые нужно подтвердить
+
+**1. Болезни — через зверя, а не через человека.** Правило «без людей»
+остаётся, но пациента можно сделать мультяшным медвежонком: зверята в курсе
+разрешены (кошка, собака, дельфин). Тогда earache и toothache читаются
+мгновенно, и правило не нарушено. Если это не годится — листы Л7.5 и Л7.6
+просто не запускаем, задания остаются текстовыми, как сейчас.
+
+**2. Наскальные рисунки — это рисунок на камне, а не люди.** На Л6.12 стоят
+охряные фигурки-палочки, какие и бывают в настоящей наскальной живописи.
+Формально это изображение людей, по сути — узор на скале. Считаю, что правило
+«без людей» здесь не работает (оно про фотореалистичных людей и детей), но
+решение за Анной.
+
+### Л2.13 · Ящерицы: хлеб с сыром и тарелка мух — 2 карточки (2×1)
+```
+A two-panel strip in one horizontal row, two equal panels separated by a thin light-grey gutter, each panel a complete standalone picture on pure white, nothing crossing between panels:
+1) a thick slice of fresh bread topped with two slices of yellow cheese, on a small white plate; 2) a white plate with five plump friendly cartoon flies sitting on it - round glossy dark-blue bodies, big cute eyes, small transparent wings - funny and cute, not disgusting.
+No people, no hands anywhere.
+Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left, appetising. Absolutely no text, no letters, no numbers, no labels, no brand marks anywhere.
+Output size: 2048 x 1024 px.
+```
+Регистр тот же, что у Л2.2 и Л2.3: карточки встанут в ряд с готовым
+`food_peas`. Ячейки → `food_bread_cheese`, `food_flies`.
+
+### Л6.12 · Три наскальных рисунка — 3 карточки (3×1)
+```
+A three-panel strip in one horizontal row, three equal panels separated by thin light-grey gutters, each panel a complete standalone picture, nothing crossing between panels. Each panel is a close-up of a prehistoric cave painting on a rough stone wall, painted in red ochre, dark brown and charcoal pigment, simple flat stick-figure rock-art style, slightly faded and uneven over the natural texture of the rock:
+1) one stick figure standing beside a very tall giraffe with a long neck, the giraffe about twice the height of the figure; 2) a travelling group - two stick figures riding camels and three stick figures walking beside them, all moving in the same direction; 3) a hunting scene - three stick figures with bows and spears aiming at a deer, and two more figures standing face to face as if talking.
+Only painted rock-art figures - no real or photographic people, no faces, no modern objects, no animals other than the ones listed.
+Realistic photographic texture of the cave wall, warm raking light, muted earthy palette. Absolutely no text, no letters, no numbers, no labels, no modern signs anywhere.
+Output size: 2048 x 683 px.
+```
+Свой регистр: камень фотографической текстуры. В одну сетку с мультяшными
+карточками не складывать. Ячейки → `caveart_giraffe`, `caveart_camels`,
+`caveart_hunting`.
+
+### Л7.5 · Болезни — 6 карточек (3×2)
+```
+A sheet of six separate cards in a clean 3x2 grid, equal cells separated by thin light-grey gutters, each cell a complete standalone picture on pure white, nothing crossing between cells. Every cell shows the same character - one friendly round cartoon teddy-bear cub with light brown fur, the same proportions and the same colours in every cell - showing one health problem clearly:
+1) earache - the cub presses one paw to its ear, eyes squeezed shut, a small red glow around that ear; 2) toothache - the cub holds its cheek with both paws, a white cloth tied round its head, a small red glow on the cheek; 3) headache - the cub holds its forehead with both paws, a folded cold flannel on its head, small red zigzags above the head; 4) stomachache - the cub sitting down, hugging its tummy with both paws, a small red glow on the tummy; 5) a cold - the cub with a red nose and a paper tissue in its paw, a scarf round its neck, tiny sneeze droplets in the air; 6) a cough - the cub with one paw in front of its open mouth and the other paw on its chest, small puffs of air in front of the mouth.
+No people at all - no humans, no human hands, no human faces anywhere; the patient is an animal character.
+Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left, kind and reassuring, never frightening or sad. Absolutely no text, no letters, no numbers, no labels, no brand marks anywhere.
+Output size: 2048 x 1365 px, each cell at least 650 px.
+```
+Один и тот же медвежонок во всех шести ячейках — иначе ребёнок будет
+различать карточки по зверю, а не по симптому. Ячейки → `ill_earache`,
+`ill_toothache`, `ill_headache`, `ill_stomachache`, `ill_cold`, `ill_cough`.
+
+### Л7.6 · Врач и медсестра — 2 карточки (2×1)
+```
+A two-panel strip in one horizontal row, two equal panels separated by a thin light-grey gutter, each panel one complete standalone character on pure white, nothing crossing between panels:
+1) a doctor - a friendly cartoon elephant standing upright in an open white coat, a stethoscope round its neck, holding a small clipboard; 2) a nurse - a friendly cartoon rabbit standing upright in a light-blue uniform with a small white cap, holding a tray with a thermometer and a roll of bandage.
+No people at all - no humans, no human hands, no human faces anywhere; both characters are animals.
+Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left, kind and reassuring. Absolutely no text, no letters, no numbers, no labels, no brand marks anywhere.
+Output size: 2048 x 1024 px.
+```
+Регистр тот же, что у Л7.5, зверь другой: пациент — медвежонок, персонал —
+слон и зайчик, их не спутать. Ячейки → `med_doctor`, `med_nurse`.
+
+## Что меняется в заданиях, когда листы придут
+
+| Урок · блок | Сейчас | Станет |
+|---|---|---|
+| U2 HW3 блок 5 | пропуски на три реплики | «соедини реплику с картинкой» — как в выгрузке: горошек · хлеб с сыром · мухи |
+| U6 HW7 блок 4 | описание → текст «что на рисунке» | описание → наскальный рисунок |
+| U7 HW1 блоки 2–4 | карточки, квиз и «напиши слово» текстом | те же три блока с картинками |
+| U7 HW1 блок 6 | симптом → диагноз текстом | остаётся как есть: это задание про чтение |
+| U7 Test блок 1 | описание → слово | «соедини слово с картинкой», как в выгрузке |
+
+Нарезка — `tools/sm3_cut.py`, строки в `SHEETS` дописываются по именам ячеек
+выше. После нарезки обязательно скопировать `media/sm3/` в `main`, иначе
+картинки будут битыми: сайт отдаётся из `main`.
