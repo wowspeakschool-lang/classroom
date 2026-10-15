@@ -747,6 +747,33 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
   .asg-row:hover{ background:#FBFAFD; }
   .asg-row input{ width:17px; height:17px; accent-color:var(--course); flex:0 0 auto; }
   @media (max-width:1000px){ .asg-grid{ grid-template-columns:1fr; } }
+  /* «Задать материал»: чуть больше воздуха, номера шагов, отмеченное подсвечено */
+  #tab-assign .asg-grid{ gap:16px; }
+  #tab-assign .card{ border-radius:18px; border-color:#ECEBF2; box-shadow:0 1px 2px rgba(26,27,46,.03), 0 8px 24px rgba(26,27,46,.04); }
+  #tab-assign .asg-h{ padding:16px 18px 14px; gap:8px; border-bottom-color:#F0EFF5; }
+  .asg-t{ display:flex; align-items:center; gap:10px; font-size:16px; font-weight:600; color:var(--ink); margin-bottom:4px; }
+  .asg-t i{ font-style:normal; width:26px; height:26px; border-radius:50%; background:var(--course-soft); color:var(--course-d);
+    display:inline-flex; align-items:center; justify-content:center; font-size:13.5px; font-weight:700; flex:0 0 auto; }
+  #tab-assign .asg-h input, #tab-assign .asg-h select{ height:40px; border-radius:12px; border-color:#E6E5EE; font-size:14.5px; }
+  #tab-assign .asg-row{ padding:11px 18px; font-size:14.5px; border-bottom-color:#F3F2F7; transition:background .12s; }
+  #tab-assign .asg-row:last-child{ border-bottom:0; }
+  #tab-assign .asg-row:has(input:checked){ background:#F7F5FF; }
+  #tab-assign .asg-row .grow b{ font-weight:600; }
+  #tab-assign .asg-row.all{ background:#FAFAFC; font-weight:600; }
+  #tab-assign .asg-row.all b{ font-weight:600; }
+  .asg-eye{ width:30px; height:30px; border-radius:9px; display:inline-flex; align-items:center; justify-content:center; opacity:.55; flex:0 0 auto; }
+  .asg-eye:hover{ background:var(--bg); opacity:1; }
+  #tab-assign .asg-due{ padding:16px 18px !important; }
+  #asgChips .pill{ padding:6px 12px; border-radius:99px; font-size:13px; }
+  #tab-assign .asg-cal-h b{ font-size:15px; font-weight:600; }
+  #tab-assign .asg-cal-h button{ width:32px; height:32px; border-radius:10px; }
+  #tab-assign .asg-cal-g{ gap:4px; font-size:14px; }
+  #tab-assign .asg-cal-g .h{ font-size:12px; text-transform:uppercase; letter-spacing:.03em; }
+  #tab-assign .asg-cal-g .d{ height:36px; padding:0; border-radius:10px; font-weight:500; }
+  #tab-assign .asg-cal-g .d.on{ box-shadow:0 4px 12px rgba(91,71,224,.25); }
+  #tab-assign .asg-cal-g .d.past{ color:#D3D2DC; font-weight:400; }
+  .asg-sum{ margin-top:16px; padding:14px 18px !important; font-size:15px; }
+  .asg-sum .btn{ padding:10px 26px; font-size:15px; border-radius:12px; }
   .stu-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:14px; }
   .stu-stats .card{ padding:12px 14px; }
   .stu-stats b{ display:block; font-size:21px; }
@@ -895,27 +922,27 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
       <p class="section-sub">Кому → что → до какого числа. Уже заданное повторно не задаётся — у ученика останутся его ответы.</p>
       <div class="asg-grid">
         <div class="card asg-col">
-          <div class="asg-h"><b>1. Кому</b>
+          <div class="asg-h"><div class="asg-t"><i>1</i>Кому</div>
             <input id="asgSearch" placeholder="Поиск по имени или родителю" oninput="asgRenderStudents()">
             <div class="row" style="gap:8px;align-items:center;margin-top:6px"><button class="btn sec sm" onclick="asgSelectAll(true)">Выбрать видимых</button>
               <button class="btn sec sm" onclick="asgSelectAll(false)">Снять</button><span id="asgCount" class="muted" style="font-size:12.5px"></span></div></div>
           <div id="asgStudents" class="asg-list"></div>
         </div>
         <div class="card asg-col">
-          <div class="asg-h"><b>2. Что</b>
+          <div class="asg-h"><div class="asg-t"><i>2</i>Что</div>
             <div class="row" style="gap:8px"><select id="asgCourse" onchange="onCourseChange()"></select><select id="asgUnit" onchange="asgRenderLessons()"></select></div>
             <div class="rv-seg" style="margin-top:8px"><button id="asgKindHw" class="on" onclick="asgSetKind('hw')">Домашки и тесты</button><button id="asgKindPlan" onclick="asgSetKind('plan')">Планы уроков</button></div></div>
           <div id="asgLessons" class="asg-list"></div>
         </div>
-        <div class="card asg-col" style="padding:12px 14px">
-          <b>3. Срок сдачи</b>
+        <div class="card asg-col asg-due">
+          <div class="asg-t"><i>3</i>Срок сдачи</div>
           <div id="asgChips" class="row" style="gap:6px;margin:8px 0"></div>
           <div id="asgCal" class="asg-cal"></div>
           <div id="asgDueInfo" style="margin-top:8px"></div>
           <div class="muted" style="font-size:12.5px;margin-top:8px">Без срока задать нельзя — день выбирается каждый раз. Срок — до 23:59 этого дня.</div>
         </div>
       </div>
-      <div class="card" style="margin-top:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <div class="card asg-sum" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
         <span id="asgSummary"></span><span style="flex:1"></span>
         <button class="btn" id="asgBtn" onclick="doAssign()">Задать</button></div>
       <div class="err" id="asgErr"></div>
@@ -3695,12 +3722,12 @@ async function asgRenderLessons(noLoad){
   if(!noLoad){ host.innerHTML='<div class="loading">Загружаю…</div>'; await asgLoadGiven(ls.map(l=>l.id)); }
   const picked=[...ASG_PICKED];
   const allOn = ls.length && ls.every(l=>ASG.les.has(l.id));
-  host.innerHTML = ls.length ? `<label class="asg-row" style="background:#FAF9FC"><input type="checkbox" ${allOn?'checked':''} onchange="asgAll(this.checked)"><b class="grow">Весь юнит</b></label>`
+  host.innerHTML = ls.length ? `<label class="asg-row all"><input type="checkbox" ${allOn?'checked':''} onchange="asgAll(this.checked)"><b class="grow">Весь юнит</b></label>`
     + ls.map(l=>{ const g=ASG.given[l.id]||new Set(), who=picked.filter(p=>g.has(p));
       return `<label class="asg-row"><input type="checkbox" ${ASG.les.has(l.id)?'checked':''} onchange="asgLes('${l.id}',this.checked)">
         <span class="grow"><b>${esc(l.code)}</b>${who.length?`<div style="font-size:12px;color:var(--warn)">уже задано: ${who.map(w=>esc(studentName(w))).join(', ')}</div>`:''}</span>
         ${g.size?`<span class="muted" style="font-size:12px">задано ${g.size}</span>`:''}
-        <span title="Глазами ученика" style="cursor:pointer" onclick="event.preventDefault(); openPreview('${l.id}')">👁</span></label>`; }).join('')
+        <span class="asg-eye" title="Глазами ученика" onclick="event.preventDefault(); openPreview('${l.id}')">👁</span></label>`; }).join('')
     : '<div class="muted" style="padding:12px">В юните нет опубликованных материалов этого вида.</div>';
   asgSummary();
 }
