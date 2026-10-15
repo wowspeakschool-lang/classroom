@@ -4725,7 +4725,8 @@ function libListRender(){
       const ls=u.lessons||[], plans=ls.filter(l=>(l.kind||'homework')==='lesson'), hws=ls.filter(l=>(l.kind||'homework')!=='lesson');
       const kind=LIBL.ukind[u.id] || (!hws.length && plans.length ? 'plans' : 'hw');
       return { u, kind, plans:plans.filter(l=>ed||l.is_published).length, hws:hws.filter(l=>ed||l.is_published).length,
-               ls:q ? ls.filter(l=>libLVisible(l,'plans')||libLVisible(l,'hw')) : ls.filter(l=>libLVisible(l, kind)),   // в поиске — оба вида any:ls.some(l=>libLVisible(l,'plans')||libLVisible(l,'hw')),
+               ls:q ? ls.filter(l=>libLVisible(l,'plans')||libLVisible(l,'hw')) : ls.filter(l=>libLVisible(l, kind)),   // в поиске — оба вида
+               any:ls.some(l=>libLVisible(l,'plans')||libLVisible(l,'hw')),
                drafts:ls.filter(l=>!l.is_published).length };
     }).filter(x=>(!q || x.any) && (ed || x.plans+x.hws));
     if(q && !units.length) return;
