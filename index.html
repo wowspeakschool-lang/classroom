@@ -1125,17 +1125,34 @@ async function loadStudents(){
   STUDENTS = all;
 }
 
-async function loadLibrary(){
+// Все курсы, юниты и уроки — тремя запросами (раньше — по запросу на юнит,
+// и при сотне юнитов «Задать материал» успевали открыть до конца загрузки)
+async function sbAll(q){
+  let out=[], from=0; const size=1000;
+  while(true){ const { data, error } = await q().range(from, from+size-1); if(error) throw error;
+    out=out.concat(data||[]); if(!data || data.length<size) break; from+=size; }
+  return out;
+}
+let LIB_P = null;
+function loadLibrary(){ LIB_P = loadLibraryNow(); return LIB_P; }
+async function loadLibraryNow(){
   const { data:courses } = await sb.from('classroom_courses').select('id, slug, title, subject, level, is_published').order('sort_order');
   const list = (courses||[]);
-  // уроки по курсам (через юниты)
+  const ids = list.map(c=>c.id);
+  const units = ids.length ? await sbAll(()=>sb.from('classroom_units').select('id, course_id, title, sort_order').in('course_id', ids).order('sort_order').order('id')) : [];
+  const uids = units.map(u=>u.id);
+  let ls = [];
+  for(let i=0;i<uids.length;i+=150){   // адрес запроса не должен быть слишком длинным
+    const part=uids.slice(i,i+150);
+    ls = ls.concat(await sbAll(()=>sb.from('classroom_lessons').select('id, unit_id, title, sort_order, is_published, kind').in('unit_id', part).order('sort_order').order('id')));
+  }
+  const byUnit={}; ls.forEach(l=>{ (byUnit[l.unit_id]=byUnit[l.unit_id]||[]).push(l); });
+  const byCourse={}; units.forEach(u=>{ (byCourse[u.course_id]=byCourse[u.course_id]||[]).push(u); });
   for(const c of list){
-    const { data:units } = await sb.from('classroom_units').select('id, title, sort_order').eq('course_id', c.id).order('sort_order');
     let lessons=[]; c.units=[];
-    for(const un of (units||[])){
+    for(const un of (byCourse[c.id]||[])){
       const unit={ id:un.id, title:un.title, no:un.sort_order, lessons:[] }; c.units.push(unit);
-      const { data:ls } = await sb.from('classroom_lessons').select('id, title, sort_order, is_published, kind').eq('unit_id', un.id).order('sort_order');
-      (ls||[]).forEach(l=>{
+      (byUnit[un.id]||[]).forEach(l=>{
         KIND_BY_LESSON[l.id] = l.kind || 'homework';
         const it={ id:l.id, title:`${un.title} · ${l.title}`, is_published:l.is_published, kind:l.kind,
                    name:l.title, unit_id:un.id, unit_title:un.title, unit_no:un.sort_order, code:hwCode(c.slug, un.sort_order, l.title) };
@@ -1194,9 +1211,13 @@ function showStudentPage(id){
   $('stuName').textContent = s?.name || 'Ученик';
   $('stuMeta').textContent = `Уровень ${s?.level||'—'} · Юнит ${s?.unit||'—'}`;
   const sel = $('stuCourse');
+  if(!LIBRARY.length && LIB_P){ sel.innerHTML='<option>Загружаю курсы…</option>'; LIB_P.then(()=>{ if(CUR_STU && CUR_STU.id===id) showStudentPage(id); }); return; }
   sel.innerHTML = '<option value="">— выбери курс —</option>' + LIBRARY.map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');
   $('stuBody').innerHTML = '<div class="muted">Выбери курс — увидишь уроки и сможешь включать их ученику.</div>';
-  if(LIBRARY.length){ sel.value = LIBRARY[0].id; loadStudentLessons(); }
+  // сразу курс ученика: уровень в анкете обычно совпадает с названием курса
+  const lvl=String(s?.level||'').toLowerCase().trim();
+  const mine = lvl && (LIBRARY.find(c=>String(c.title).toLowerCase()===lvl) || LIBRARY.find(c=>lvl.includes(String(c.title).toLowerCase())));
+  if(LIBRARY.length){ sel.value = (mine||LIBRARY[0]).id; loadStudentLessons(); }
   window.scrollTo(0,0);
 }
 
@@ -3494,16 +3515,17 @@ async function kpPreviewOpen(lessonId, mode){
 var ASG_PICKED = new Set();
 var ASG = { kind:'hw', les:new Set(), day:null, given:{} };   // given: { lesson_id: Set(student_id) } — уже задано
 
-function fillCourses(){
+async function fillCourses(){
   const sel=$('asgCourse'), cur=sel.value;
+  if(!LIBRARY.length && LIB_P){ sel.innerHTML='<option>Загружаю курсы…</option>'; try{ await LIB_P; }catch(e){} }
   sel.innerHTML = LIBRARY.map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');
   if(cur && LIBRARY.some(c=>c.id===cur)) sel.value=cur;
   onCourseChange(true);
   asgRenderStudents(); asgRenderDue();
 }
 // Из карточки ученика: открыть «Задать материал» с отмеченным учеником (и уроком)
-function asgFor(studentId, lessonId){
-  location.hash=''; switchTab('assign');
+async function asgFor(studentId, lessonId){
+  location.hash=''; switchTab('assign'); if(LIB_P) await LIB_P; await fillCourses();
   ASG_PICKED.clear(); if(studentId) ASG_PICKED.add(studentId);
   if(lessonId){
     const c=LIBRARY.find(c=>(c.lessons||[]).some(l=>l.id===lessonId));
