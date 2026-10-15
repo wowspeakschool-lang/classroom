@@ -331,7 +331,7 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
             touch = np.unique(labm[binary_dilation(out) & M]); touch = touch[touch > 0]
             if not len(touch): break
             a[np.isin(labm, touch)] = 0
-    if p.endswith(tuple(f'/{fname(w)}' for w in EXTRA)):
+    if not GENTLE and p.endswith(tuple(f'/{fname(w)}' for w in EXTRA)):
         out = a <= 40
         W = (~out) & (mn >= 244) & (mx - mn <= 10)
         labw, nw = label(W); sz = np.bincount(labw.ravel())

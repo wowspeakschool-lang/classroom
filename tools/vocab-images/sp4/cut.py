@@ -47,6 +47,11 @@ ROW_TOP = {18: {0: 0}}
 # мелкие отдельные детали — часть смысла (пустые кружки недели): не выкидывать как крошки
 EDGE_D = 6
 # рваный белый край (парус, стена): маску сглаживаем — закрываем рваные выемки, дыры, срезаем зубцы
+PURE_ALL = set()
+# В тренажёре под картинкой белая подложка: остатки белого не видны, а лишняя вырезка
+# съедает облака и белую одежду. Режем мягко: только фон, связанный с краем листа
+GENTLE = True
+EW_MN, EW_SP = 228, 22
 SMOOTH = {'crew': 14, 'wake up': 18}
 CUT_BOTTOM = {'sound': 0.83}  # остаток подписи под рисунком
 NO_SPECK = {'usually', 'sometimes', 'never'}
@@ -243,10 +248,23 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
         if n:
             sz = np.bincount(lab.ravel()); sz[0] = 0
             big = np.where(sz >= PURE_MIN)[0]
-            if p.endswith(tuple(f'/{fname(w)}' for w in PURE_EDGE)):
-                big = np.intersect1d(big, np.unique(lab[binary_dilation(a <= 40, iterations=2)]))
+            if GENTLE and not p.endswith(tuple(f'/{fname(w)}' for w in PURE_ALL)):
+                edge = np.unique(lab[binary_dilation(a <= 40, iterations=2)])
+                big = np.array([i for i in big if i in edge], dtype=int)
+            elif not p.endswith(tuple(f'/{fname(w)}' for w in PURE_ALL)):
+                # касается края — фон; внутри рисунка — фон, только если вокруг него сплошной
+                # рисунок (просвет между фигурами). Пузырь речи и листок висят на прозрачном
+                # фоне — кольцо вокруг них в основном пустое, их оставляем
+                edge = np.unique(lab[binary_dilation(a <= 40, iterations=2)])
+                keep = []
+                for i in big:
+                    c = lab == i
+                    if i in edge: keep.append(i); continue
+                    ring = binary_dilation(c, iterations=14) & ~binary_dilation(c, iterations=5)
+                    if ring.any() and (a[ring] > 40).mean() >= 0.93: keep.append(i)
+                big = np.array(keep, dtype=int)
             a[np.isin(lab, big)] = 0
-    if not p.endswith(tuple(f'/{fname(w)}' for w in NO_SHADOW)):
+    if not GENTLE and not p.endswith(tuple(f'/{fname(w)}' for w in NO_SHADOW)):
         from scipy.ndimage import distance_transform_edt
         out = a <= 40
         ys = np.where((~out).any(1))[0]
@@ -258,7 +276,7 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
             touch = np.unique(labl[binary_dilation(out, iterations=2) & light]); touch = touch[touch > 0]
             a[np.isin(labl, touch) & (distance_transform_edt(~out) <= SHADOW_D)] = 0
     whitish = (mn >= pale) & (mx - mn <= grey)
-    for _ in range(peel):
+    for _ in range(3 if GENTLE else peel):
         solid = a > 128
         edge = solid & binary_dilation(~solid)
         hit = edge & whitish
@@ -281,7 +299,7 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
             a[c] = 0
     # куски фона, отрезанные от края тенью или землёй: светлое и бесцветное,
     # связанное с прозрачным краем через светло-серое
-    if not p.endswith(tuple(f'/{fname(w)}' for w in KEEP_WHITE)):
+    if not GENTLE and not p.endswith(tuple(f'/{fname(w)}' for w in KEEP_WHITE)):
         from scipy.ndimage import distance_transform_edt
         out = a <= 40
         M = (~out) & (mn >= 215) & (mx - mn <= 20)
@@ -290,7 +308,17 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
         T = np.isin(labm, touch)
         dist = distance_transform_edt(~out)
         a[T & (((mn >= 245) & (mx - mn <= 10)) | ((mn >= 225) & (dist <= 6)))] = 0
-    if p.endswith(tuple(f'/{fname(w)}' for w in EXTRA)):
+        # белые куски у края целиком: светлое и бесцветное, связанное с прозрачным краем,
+        # снимаем на всю глубину (небо, стены сцен, остатки листа). Повторяем: после первого
+        # прохода открываются следующие слои
+        for _ in range(3):
+            out = a <= 40
+            M = (~out) & (mn >= EW_MN) & (mx - mn <= EW_SP)
+            labm, _ = label(M)
+            touch = np.unique(labm[binary_dilation(out) & M]); touch = touch[touch > 0]
+            if not len(touch): break
+            a[np.isin(labm, touch)] = 0
+    if not GENTLE and p.endswith(tuple(f'/{fname(w)}' for w in EXTRA)):
         out = a <= 40
         W = (~out) & (mn >= 244) & (mx - mn <= 10)
         labw, nw = label(W); sz = np.bincount(labw.ravel())
@@ -312,7 +340,8 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
         a[near] = np.minimum(a[near], (al * 255).astype(np.int32))
     # полупрозрачное светлое за контуром: на тёмном фоне читается серой каймой — убираем целиком
     rgb2 = im[..., :3]; mn2, mx2 = rgb2.min(-1), rgb2.max(-1)
-    a[(a < 235) & (mn2 >= 140) & (mx2 - mn2 <= 70)] = 0
+    if not GENTLE:
+        a[(a < 235) & (mn2 >= 140) & (mx2 - mn2 <= 70)] = 0
     for w, frac in CUT_BOTTOM.items():
         if p.endswith(f'/{fname(w)}'): a[int(a.shape[0] * frac):] = 0
     lab, n = label(a > 40)
