@@ -714,6 +714,59 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
   .kq-t{ font-size:23px; }
 }
 @media (prefers-reduced-motion:reduce){ #kp *{ animation:none !important; transition:none !important; } }
+
+  /* ── Проверка домашки (rv) ── */
+  .rv-grid{ display:grid; grid-template-columns:210px 1fr; gap:16px; align-items:start; }
+  .rv-toc{ position:sticky; top:14px; padding:8px; }
+  .rv-toc a{ display:flex; gap:8px; align-items:center; padding:6px 9px; border-radius:9px; font-size:13.5px; color:var(--ink); text-decoration:none; }
+  .rv-toc a:hover{ background:var(--bg); }
+  .rv-toc .sc{ margin-left:auto; font-size:12px; font-weight:700; }
+  .rv-task-card{ padding:14px 16px; margin-bottom:12px; }
+  .rv-task-card.sel{ outline:2px solid #E9C58F; background:#FFFCF6; }
+  .rv-thd{ display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+  .rv-thd b{ flex:1; }
+  .rv-item{ display:flex; align-items:center; gap:10px; padding:7px 8px; border-radius:10px; }
+  .rv-item:hover{ background:#FAF9FC; }
+  .rv-item .q{ flex:1; min-width:0; }
+  .rv-item .ans{ font-weight:600; display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+  .rv-img{ width:52px; height:52px; object-fit:contain; border-radius:8px; background:#FAF9FC; vertical-align:middle; }
+  .rv-right{ font-size:12.5px; color:var(--mut); display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+  .rv-fixed{ font-size:11.5px; color:var(--course); font-weight:600; }
+  .rv-mark{ width:34px; height:34px; border-radius:10px; border:1px solid var(--line); background:#fff; font-weight:800; font-size:16px; flex:0 0 auto; cursor:pointer; }
+  .rv-mark.ok{ background:var(--ok-soft); border-color:#BFE0D9; color:var(--ok); }
+  .rv-mark.no{ background:#FBE9E7; border-color:#F2C6C1; color:var(--bad); }
+  .rv-mark.fixed{ box-shadow:0 0 0 2px var(--course); }
+  .rv-cm{ border:0; background:none; color:var(--faint); font-size:16px; padding:4px 6px; border-radius:8px; cursor:pointer; }
+  .rv-cm:hover{ background:var(--bg); color:var(--course); }
+  .rv-cm.has{ color:var(--course); }
+  .rv-cbox{ display:flex; gap:8px; margin:4px 0 6px; }
+  .rv-cbox textarea{ min-height:46px; flex:1; }
+  .rv-cshow{ margin:4px 0 6px; background:#FFF8E8; border-radius:10px; padding:8px 12px; font-size:14px; cursor:pointer; }
+  .rv-cshow b{ font-size:11px; color:var(--warn); text-transform:uppercase; letter-spacing:.04em; display:block; }
+  .rv-ck{ width:19px; height:19px; accent-color:#C9821D; flex:0 0 auto; }
+  .rv-seg{ display:inline-flex; background:#EFEEF3; border-radius:11px; padding:3px; }
+  .rv-seg button{ border:0; background:none; padding:6px 13px; border-radius:9px; font-size:13.5px; color:var(--mut); }
+  .rv-seg button.on{ background:#fff; color:var(--ink); font-weight:600; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+  .rv-text{ background:var(--bg); border-radius:10px; padding:9px 12px; white-space:pre-wrap; }
+  .rv-task{ font-size:14px; color:var(--mut); margin-bottom:8px; }
+  .rv-task img{ max-width:220px; max-height:140px; border-radius:8px; }
+  .rv-bar{ position:fixed; left:236px; right:0; bottom:0; background:rgba(255,255,255,.97); border-top:1px solid var(--line); z-index:30; }
+  .rv-bar-in{ padding:11px 24px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .rv-bar-in .btn, .rv-bar-in .pill{ white-space:nowrap; }
+  .btn.rv-warn{ background:#fff; border-color:#E9C58F; color:var(--warn); font-weight:600; }
+  .btn.rv-warn:hover{ background:#FFF8EC; border-color:#E0B36F; }
+  body.rv-on #reviewWrap{ padding-bottom:130px; }
+  @media (max-width:900px){ .rv-bar{ left:0; } .rv-grid{ grid-template-columns:1fr; } .rv-toc{ display:none; } .rv-bar-in{ flex-wrap:wrap; } }
+  /* колокольчик */
+  .logo-row{ display:flex; align-items:center; }
+  .logo-row .logo{ flex:1; }
+  #bellBtn{ position:relative; width:36px; height:36px; border-radius:11px; border:1px solid var(--line); background:#fff; font-size:16px; margin-right:12px; cursor:pointer; }
+  #bellBtn i{ position:absolute; top:-6px; right:-6px; background:#E5484D; color:#fff; font-style:normal; font-size:11px; font-weight:700; border-radius:99px; padding:1px 6px; }
+  #bellDrop{ position:fixed; left:244px; top:10px; width:380px; max-height:70vh; overflow:auto; background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:0 18px 50px rgba(30,20,80,.16); z-index:60; }
+  .bell-h{ padding:11px 14px; font-weight:700; border-bottom:1px solid var(--line); }
+  .bell-it{ padding:10px 14px; border-bottom:1px solid var(--line); cursor:pointer; font-size:14px; }
+  .bell-it:hover{ background:#FBFAFD; }
+  .bell-it.new{ background:#FBFAFF; }
 </style>
 </head>
 <body>
@@ -734,7 +787,7 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
 <div id="app" class="hidden">
   <header>
     <div class="head-in">
-      <span class="logo">Classroom</span>
+      <div class="logo-row"><span class="logo">Classroom</span><button id="bellBtn" onclick="bellToggle(event)" title="Уведомления">🔔</button></div><div id="bellDrop" class="hidden"></div>
       <button class="findBtn" onclick="findOpen()" title="Ctrl+K">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
         Найти материал<kbd>Ctrl K</kbd>
@@ -1080,6 +1133,7 @@ async function loadPending(){
   catch(e){ console.warn('pending', e); PENDING=[]; }
   const b=$('reviewBadge');
   if(PENDING.length){ b.textContent=PENDING.length; b.classList.remove('hidden'); } else b.classList.add('hidden');
+  bellRender();
 }
 
 function studentName(id){ const s=STUDENTS.find(x=>x.id===id); return s?s.name:('#'+String(id).slice(0,6)); }
@@ -3099,12 +3153,19 @@ function kpCardHtml(i, ro){
     <div class="khd" id="kph-${id}"><img class="kic" src="media/shared/icons/ic_${kpIcon(b)}.webp" alt="" onerror="this.remove()">
       <div class="t"><div class="kno">${counted?'Задание':'Материал'} ${i+1} из ${total}</div><h3 class="kq-t">${kpHeading(b)}</h3></div>
       ${ready?`<span class="kready${readyCls}">✓ готово</span>`:''}${badge}${redo}</div>
-    ${showC?kpCommentsHtml(id):''}
+    ${showC?kpCommentsHtml(id):''}${kpRetakeItemsHtml(id, ro)}
     <div class="kbody">${kpBody(b)}</div>
     ${ro?'':`<div class="ksaved${(KP.pending.has(id)&&KP.offline)?' local':''}" data-id="${id}">${kpSavedTxt(id)}</div>`}
   </div>`;
 }
 
+// Переделка по пунктам: эти пункты стёрты, остальные ответы сохранены
+function kpRetakeItemsHtml(id, ro){
+  const it=KP.status==='retake' && !ro && KP.grade && KP.grade.retake_items && KP.grade.retake_items[id];
+  if(!Array.isArray(it) || !it.length) return '';
+  const nums=it.map(k=>Number(k)+1).sort((a,b)=>a-b);
+  return `<div class="ktc" style="background:#FFF0DE">✏️<span><b>Исправь</b>${nums.length===1?'пункт '+nums[0]:'пункты '+nums.join(', ')} — ${nums.length===1?'он пустой':'они пустые'}, остальное уже сохранено</span></div>`;
+}
 function kpDueHtml(){
   const d=(KP.meta||{}).deadline_at; if(!d) return '';
   const dt=new Date(d), now=new Date();
@@ -3413,85 +3474,315 @@ async function doAssign(){
 }
 
 // ============================================================
-//  РЕНДЕР: ПРОВЕРКА
+//  РЕНДЕР: ПРОВЕРКА (макет docs/makety/uchitel_proverka.html)
+//  Очередь — сданные домашки целиком; экран проверки — все задания ученика
+//  с вердиктами по пунктам. Вердикт, балл и комментарий сохраняются сразу —
+//  закрыл вкладку, вернулся, продолжил.
 // ============================================================
+let RV = null;   // открытая проверка: { row, grade, blocks:{id:block}, order:[ids], no:{id:n}, mode, sel, only, total, show, cmOpen, day, note }
+let RV_F = { course:'', q:'' };
+
+// Полный шифр: SM2 Unit 1 Homework 1 · SM2 Unit 2 Test · SM2 Final Test · WD1 Homework 12
+function hwCode(slug, unitNo, title){
+  const code=String(slug||'').toUpperCase(), t=title||'';
+  if(!code) return t;
+  if(/^WD/.test(code) || /^(unit|final)\b/i.test(t) || unitNo==null) return `${code} ${t}`;
+  return `${code} Unit ${unitNo} ${t}`;
+}
+function rvAgo(iso){
+  const d=new Date(iso), now=new Date(), day=x=>new Date(x.getFullYear(),x.getMonth(),x.getDate()).getTime();
+  const n=Math.round((day(now)-day(d))/864e5), hm=d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+  return n===0 ? `сегодня, ${hm}` : n===1 ? `вчера, ${hm}` : d.toLocaleDateString('ru-RU',{day:'numeric',month:'short'})+', '+hm;
+}
+function rvDays(iso){ return Math.floor((Date.now()-new Date(iso).getTime())/864e5); }
+
 function renderReview(){
+  if(RV) return rvRenderPage();
   const wrap=$('reviewWrap');
+  const courses=[...new Set(PENDING.map(p=>p.course_slug).filter(Boolean))];
+  const q=RV_F.q.toLowerCase().trim();
+  const list=PENDING.filter(p=>(!RV_F.course || p.course_slug===RV_F.course) && (!q || studentName(p.student_id).toLowerCase().includes(q)));
+  const head=`<div class="row" style="margin-bottom:12px;gap:10px;flex-wrap:wrap;align-items:center">
+      <b>Ждут проверки · ${PENDING.length}</b>
+      ${courses.length>1?`<select style="max-width:170px" onchange="RV_F.course=this.value; renderReview()"><option value="">Все курсы</option>${courses.map(c=>`<option ${RV_F.course===c?'selected':''} value="${esc(c)}">${esc(String(c).toUpperCase())}</option>`).join('')}</select>`:''}
+      <input placeholder="Ученик" value="${esc(RV_F.q)}" style="max-width:200px" onchange="RV_F.q=this.value; renderReview()"></div>`;
   if(!PENDING.length){ wrap.innerHTML='<div class="empty">Нет работ на проверке 🎉</div>'; return; }
-  wrap.innerHTML = `<table><thead><tr><th>Ученик</th><th>ДЗ</th><th>Отправлено</th><th></th></tr></thead><tbody>
-    ${PENDING.map(p=>`<tr>
+  wrap.innerHTML = head + `<table><thead><tr><th>Ученик</th><th>Материал</th><th>Сдано</th><th>Попытка</th><th>Система насчитала</th><th></th></tr></thead><tbody>
+    ${list.map(p=>`<tr style="cursor:pointer" onclick="rvOpen('${p.enrollment_id}','${p.lesson_id}')">
       <td><b>${esc(studentName(p.student_id))}</b></td>
-      <td>${esc(lessonTitle(p.lesson_id))}</td>
-      <td class="muted">${fmtDate(p.submitted_at)}</td>
-      <td style="text-align:right"><button class="btn sm" onclick='openReview(${JSON.stringify(p)})'>Проверить</button></td>
-    </tr>`).join('')}
-  </tbody></table>`;
+      <td>${esc(hwCode(p.course_slug, p.unit_no, p.lesson_title))}</td>
+      <td>${rvAgo(p.submitted_at)}<div>${p.late?'<span class="pill r">с опозданием</span>':'<span class="pill g">вовремя</span>'}
+        ${rvDays(p.submitted_at)>=1?`<span class="pill y">ждёт ${rvDays(p.submitted_at)} ${plural(rvDays(p.submitted_at),'день','дня','дней')}</span>`:''}</div></td>
+      <td>${p.attempt>1?`<span class="pill y">${p.attempt}-я · после переделки</span>`:'<span class="pill n">1-я</span>'}</td>
+      <td>${p.auto_score!=null?`<b>${p.auto_score}%</b>`:'—'}${p.has_manual?' <span class="muted" style="font-size:12px">+ оценить устные/письменные</span>':''}</td>
+      <td style="text-align:right"><button class="btn sm">Проверить</button></td></tr>`).join('') || '<tr><td colspan="6" class="muted">Никого не найдено</td></tr>'}
+  </tbody></table>
+  <p class="muted" style="font-size:13px;margin-top:8px">«Система насчитала» — по заданиям с ответами. Устные и письменные оценивает учитель, итог пересчитается.</p>`;
+}
+function plural(n,a,b,c){ const m10=n%10, m100=n%100; return (m10===1&&m100!==11)?a:(m10>=2&&m10<=4&&(m100<12||m100>14))?b:c; }
+
+async function rvOpen(enr, lesson){
+  const row=PENDING.find(p=>p.enrollment_id===enr && p.lesson_id===lesson) || { enrollment_id:enr, lesson_id:lesson };
+  RV={ row, grade:null, blocks:{}, order:[], no:{}, mode:null, sel:{b:{}, i:{}}, only:false, total:null, show:false, cmOpen:null, day:null, note:'' };
+  $('reviewWrap').innerHTML='<div class="loading">Загружаю работу…</div>';
+  try{
+    const args={ p_enrollment_id:enr, p_lesson_id:lesson };
+    const [grade, blocks]=await Promise.all([ rpc('classroom_lesson_grade', args), rpc('classroom_run_blocks', args) ]);
+    RV.grade=grade||{};
+    (blocks||[]).sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));
+    // номера — как у ученика: «Задание N» на его экране
+    let n=0;
+    (blocks||[]).forEach(b=>{
+      RV.blocks[b.id]=b;
+      const aud=b.audience||'shared', p=b.payload||{};
+      const shown=(aud==='shared'||aud==='student') && !(b.type==='video' && !String(p.url||'').trim()) && !(b.type==='flashcards' && !(p.cards||[]).length);
+      if(shown) RV.no[b.id]=++n;
+    });
+    RV.order=(RV.grade.blocks||[]).map(x=>x.block_id);
+    RV.show=!!RV.grade.show_answers;
+    rvRenderPage();
+  }catch(e){ $('reviewWrap').innerHTML=`<div class="err">${esc(e.message||e)}</div>`; }
+}
+function rvClose(){ RV=null; document.body.classList.remove('rv-on'); renderReview(); }
+function rvGB(id){ return (RV.grade.blocks||[]).find(x=>x.block_id===id); }
+
+// ── что ответил ученик: пункты с вердиктами
+function rvImg(u){ return u?`<img src="${esc(u)}" class="rv-img" alt="" onerror="this.style.visibility='hidden'">`:''; }
+function rvOpt(o){ return (o&&o.image)?rvImg(o.image):esc(o&&o.text!=null?o.text:(o==null?'':o)); }
+function rvItems(b, a){
+  const p=b.payload||{}; a=a||{};
+  const it=(key,label,ans,right)=>({key:String(key),label,ans,right});
+  switch(b.type){
+    case 'quiz': return (p.questions||[]).map((q,qi)=>{
+      if(q.type==='text') return it(qi, esc(q.q||''), esc(a[qi]||''), '');
+      const pick=Array.isArray(a[qi])?a[qi]:[];
+      return it(qi, `${q.image?rvImg(q.image):''}${q.audio||q.audio_url?'🔊 ':''}${q.q||''}`,
+        pick.map(oi=>rvOpt((q.options||[])[oi])).join(' ') || '—',
+        (q.correct||[]).map(oi=>rvOpt((q.options||[])[oi])).join(' '));
+    });
+    case 'exact_input': return (p.items||[]).map((x,i)=>it(i, `${x.image?rvImg(x.image):''}${x.audio?'🔊 ':''}${esc(x.prompt||'')}`, esc(a[i]||'—'), esc((x.accept||[])[0]||'')));
+    case 'match': return (p.pairs||[]).map((x,i)=>{
+      const v=a[i]; let ans=esc(v==null?'—':v);
+      if(typeof v==='string' && /^#\d+$/.test(v)){ const px=(p.pairs||[])[Number(v.slice(1))]; ans=px&&px.right_image?rvImg(px.right_image):esc(v); }
+      return it(i, x.left_image?rvImg(x.left_image):esc(x.left||''), ans, x.right_image?rvImg(x.right_image):esc(x.right||''));
+    });
+    case 'gaps': return gapsParse(p.text||'').filter(x=>x.kind==='gap').map(x=>it(x.index, `Пропуск ${x.index+1}`, esc(a[x.index]||'—'), esc((x.accept||[]).join(' / '))));
+    case 'truefalse': return (p.statements||[]).map((s,i)=>it(i, esc(s.text||''), a[i]===true?'Верно':a[i]===false?'Неверно':'—', s.correct?'Верно':'Неверно'));
+    case 'sequence': { const its=p.items||[]; const lab=x=>x?(x.image?rvImg(x.image):'')+esc(x.text||''):'—';
+      return its.map((_,pos)=>it(pos, `Место ${pos+1}`, lab(its[Number(a[pos])]), lab(its[pos]))); }
+    case 'hotspot': return (p.points||[]).map((pt,i)=>it(i, p.mode==='find'?`Найти: ${esc(pt.text||'')}`:`Точка ${i+1}`, a[i]==null?'—':(a[i]===''?'мимо':esc(a[i])), esc(pt.text||'')));
+    case 'order': { const w=p.words||[], o=Array.isArray(a.order)?a.order:[];
+      return w.map((x,i)=>it(i, `Слово ${i+1}`, esc(o[i]==null?'—':o[i]), esc(x))); }
+    case 'sort': { const out=[]; let gi=0; const asg=a.assign||{}, gs=p.groups||[];
+      gs.forEach((g,gx)=>(g.items||[]).forEach(x=>{ const ch=asg[gi]; out.push(it(gi, x.image?rvImg(x.image):esc(x.text||''), ch==null?'—':esc((gs[ch]||{}).name||('Группа '+(Number(ch)+1))), esc(g.name||('Группа '+(gx+1))))); gi++; }));
+      return out; }
+  }
+  return [];
+}
+function rvOk(gb, key){
+  const ov=gb.overrides||{}, res=gb.results||{};
+  if(Object.prototype.hasOwnProperty.call(ov,key)) return ov[key];
+  return Object.prototype.hasOwnProperty.call(res,key) ? res[key] : null;
+}
+function rvNeedsScore(gb){ return gb.needs_review && gb.teacher_score==null && gb.score==null; }
+
+// ── комментарии: ко всей домашке, к заданию, к пункту
+function rvCm(block, item){ return (RV.grade.comments||[]).find(c=>(c.block_id||null)===(block||null) && (c.item||null)===(item==null?null:String(item))); }
+function rvCmKey(block,item){ return (block||'all')+'|'+(item==null?'':item); }
+function rvCmBtn(block,item){
+  const c=rvCm(block,item);
+  return `<button class="rv-cm${c?' has':''}" title="Комментарий ученику" onclick="RV.cmOpen='${rvCmKey(block,item)}'; rvRenderPage()">💬</button>`;
+}
+function rvCmBox(block,item){
+  const k=rvCmKey(block,item), c=rvCm(block,item);
+  if(RV.cmOpen===k) return `<div class="rv-cbox"><textarea id="rvCmTa" placeholder="Комментарий ученику — увидит после проверки">${esc(c?c.body:'')}</textarea>
+    <div style="display:flex;flex-direction:column;gap:6px"><button class="btn sm" onclick="rvCmSave(${block?`'${block}'`:'null'},${item==null?'null':`'${item}'`})">Сохранить</button>
+    <button class="btn sec sm" onclick="RV.cmOpen=null; rvRenderPage()">Отмена</button></div></div>`;
+  return c?`<div class="rv-cshow" onclick="RV.cmOpen='${k}'; rvRenderPage()"><b>Ваш комментарий</b>${esc(c.body)}</div>`:'';
+}
+async function rvCmSave(block,item){
+  const body=($('rvCmTa').value||'').trim(), c=rvCm(block,item);
+  try{
+    if(!body){ if(c){ await rpc('classroom_comment_remove',{ p_id:c.id }); RV.grade.comments=RV.grade.comments.filter(x=>x.id!==c.id); } }
+    else{
+      const r=await rpc('classroom_comment_save',{ p_enrollment_id:RV.row.enrollment_id, p_lesson_id:RV.row.lesson_id, p_block_id:block, p_item:item, p_body:body, p_id:c?c.id:null });
+      if(c) c.body=body; else (RV.grade.comments=RV.grade.comments||[]).push({ id:r.id, block_id:block, item:item==null?null:String(item), body });
+    }
+    RV.cmOpen=null; rvRenderPage();
+  }catch(e){ toast(e.message||String(e)); }
 }
 
-async function openReview(p){
-  openModal(`<button class="close" onclick="closeModal()">×</button>
-    <h2>Проверка работы</h2>
-    <p class="muted" style="margin:0 0 14px">${esc(studentName(p.student_id))} · ${esc(lessonTitle(p.lesson_id))}</p>
-    <div id="revBody"><div class="loading">Загружаю ответ…</div></div>`);
+// ── вердикт пункта и балл задания — сразу в базу
+async function rvFlip(blockId, key){
+  const gb=rvGB(blockId); if(!gb) return;
+  const cur=rvOk(gb,key), nv=!cur, auto=(gb.results||{})[key];
   try{
-    const { data:block } = await sb.from('classroom_blocks').select('id, type, payload').eq('id', p.block_id).maybeSingle();
-    const { data:sub } = await sb.from('classroom_submissions').select('answers, storage_path, submitted_at')
-      .eq('enrollment_id', p.enrollment_id).eq('block_id', p.block_id).maybeSingle();
-    const parts = (block?.payload?.parts && Array.isArray(block.payload.parts)) ? block.payload.parts : null;
-    let body = `<div class="block"><div class="bt">Задание</div>${esc(block?.payload?.title||block?.type||'')}
-      ${block?.payload?.html?`<div style="margin-top:6px">${block.payload.html}</div>`:''}
-      ${sub?.storage_path?`<div class="muted" style="margin-top:8px">📎 Файл ученика: ${esc(sub.storage_path)}</div>`:''}
-      ${sub?.answers?.audio?`<div style="margin-top:10px"><div class="muted" style="font-size:13px;margin-bottom:4px">🎤 Запись ученика:</div><audio controls src="${esc(sub.answers.audio)}" style="width:100%;max-width:340px"></audio></div>`:''}
-      ${sub?.answers?.text?`<div style="margin-top:10px"><div class="muted" style="font-size:13px;margin-bottom:4px">Ответ ученика:</div><div style="white-space:pre-wrap;background:#faf9ff;padding:10px;border-radius:8px">${esc(sub.answers.text)}</div></div>`:''}
-      ${sub?.answers && Object.keys(sub.answers).filter(k=>!['audio','text','__results'].includes(k)).length?`<div class="muted" style="margin-top:8px">Ответ: <code>${esc(JSON.stringify(sub.answers))}</code></div>`:''}
-    </div>`;
-    if(parts){
-      body += parts.map((pt,idx)=>`<div class="block"><div class="bt">Часть ${idx+1}${pt.title?' · '+esc(pt.title):''}</div>
-        <div class="row"><input type="number" min="0" max="100" placeholder="балл 0–100" class="grow gradeScore" data-sec="part_${idx}" style="max-width:140px">
-        <input placeholder="комментарий" class="grow gradeComment" data-sec="part_${idx}"></div></div>`).join('');
-      body += `<button class="btn" onclick='saveGrades(${JSON.stringify(p)})'>Сохранить оценки</button>`;
-    } else {
-      body += `<div class="row" style="margin-bottom:10px">
-        <input type="number" min="0" max="100" placeholder="балл 0–100" id="revScore" class="grow" style="max-width:160px">
-        <input placeholder="комментарий" id="revComment" class="grow"></div>
-        <div class="row">
-          <button class="btn" onclick='saveSingleGrade(${JSON.stringify(p)})'>Оценить</button>
-          <button class="btn sec" onclick='approve(${JSON.stringify(p)})'>Принять без балла</button>
-        </div>`;
-    }
-    body += `<div class="err" id="revErr"></div>`;
-    $('revBody').innerHTML = body;
-  }catch(e){ $('revBody').innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
+    const r=await rpc('classroom_review_item',{ p_enrollment_id:RV.row.enrollment_id, p_block_id:blockId, p_item:key, p_verdict: nv===auto?null:nv });
+    gb.overrides=Object.assign({}, gb.overrides||{}); if(nv===auto) delete gb.overrides[key]; else gb.overrides[key]=nv;
+    gb.score=r.block_score; RV.grade.auto_score=r.lesson_score; rvRenderPage();
+  }catch(e){ toast(e.message||String(e)); }
+}
+async function rvScore(blockId, el){
+  const v=el.value===''?null:Math.max(0,Math.min(100,Math.round(Number(el.value))));
+  try{
+    const r=await rpc('classroom_review_block',{ p_enrollment_id:RV.row.enrollment_id, p_block_id:blockId, p_score:v });
+    const gb=rvGB(blockId); gb.teacher_score=v; gb.score=r.block_score; RV.grade.auto_score=r.lesson_score; rvRenderPage();
+  }catch(e){ toast(e.message||String(e)); }
 }
 
-async function saveGrades(p){
-  const scores=[...document.querySelectorAll('.gradeScore')];
-  const comments=[...document.querySelectorAll('.gradeComment')];
-  try{
-    for(let i=0;i<scores.length;i++){
-      const sec=scores[i].dataset.sec;
-      const val=scores[i].value===''?null:parseInt(scores[i].value,10);
-      if(val===null) continue;
-      await rpc('classroom_grade_task', { p_enrollment_id:p.enrollment_id, p_block_id:p.block_id, p_section_key:sec, p_score:val, p_max_score:100, p_comment:comments[i].value||null });
-    }
-    toast('Оценки сохранены'); closeModal(); await refreshReview();
-  }catch(e){ $('revErr').textContent=e.message||String(e); }
+// ── отметки для частичной доработки
+function rvSelTask(id,on){ if(on) RV.sel.b[id]=1; else { delete RV.sel.b[id]; delete RV.sel.i[id]; } rvRenderPage(); }
+function rvSelItem(id,key,on){
+  const s=new Set(RV.sel.i[id]||[]); if(on) s.add(key); else s.delete(key);
+  if(s.size){ RV.sel.i[id]=[...s]; } else delete RV.sel.i[id];
+  rvRenderPage();
 }
-async function saveSingleGrade(p){
-  try{
-    const val=$('revScore').value===''?null:parseInt($('revScore').value,10);
-    if(val===null){ $('revErr').textContent='Введи балл или нажми «Принять без балла».'; return; }
-    await rpc('classroom_grade_task', { p_enrollment_id:p.enrollment_id, p_block_id:p.block_id, p_section_key:'_task', p_score:val, p_max_score:100, p_comment:$('revComment').value||null });
-    toast('Оценка сохранена'); closeModal(); await refreshReview();
-  }catch(e){ $('revErr').textContent=e.message||String(e); }
+
+function rvBlockHtml(gb){
+  const b=RV.blocks[gb.block_id]||{ payload:{}, type:gb.type }, p=b.payload||{}, a=gb.answers||{};
+  const part=RV.mode==='part', id=gb.block_id;
+  const sel=!!RV.sel.b[id] || !!RV.sel.i[id];
+  const sc=gb.score;
+  let body='';
+  if(!gb.submitted) body='<div class="muted">Ответа нет</div>';
+  else if(b.type==='video') body=`<div class="muted" style="font-size:13px">${a.watched?'✓ досмотрено до конца':'не досмотрено'} — без оценки</div>`;
+  else if(b.type==='flashcards') body=`<div class="muted" style="font-size:13px">✓ открыты все ${(p.cards||[]).length} — без оценки</div>`;
+  else if(b.type==='embed') body='<div class="muted" style="font-size:13px">✓ отмечено выполненным</div>';
+  else if(b.type==='speaking' || b.type==='task'){
+    body = `${p.html?`<div class="rv-task">${p.html}</div>`:''}
+      ${a.audio?`<audio controls src="${esc(a.audio)}" style="width:100%;max-width:520px;height:40px"></audio>`:''}
+      ${a.text?`<div class="rv-text">${esc(a.text)}</div>`:''}
+      ${a.no_mic?'<div class="pill y" style="margin-top:6px">не работал микрофон — ответ текстом</div>':''}`;
+  } else {
+    const items=rvItems(b,a);
+    let top='';
+    if(b.type==='gaps') top=`<div class="rv-text" style="margin-bottom:6px">${gapsParse(p.text||'').map(x=>x.kind==='text'?esc(x.value):`<b>[${esc(a[x.index]||'…')}]</b>`).join('')}</div>`;
+    if(b.type==='order') top=`<div class="rv-text" style="margin-bottom:6px"><b>${esc((a.order||[]).join(' '))}</b><div class="muted" style="font-size:12.5px">верно: ${esc(p.sentence||(p.words||[]).join(' '))}</div></div>`;
+    const show = items.filter(x=>!RV.only || rvOk(gb,x.key)===false);
+    body = top + show.map(x=>{
+      const ok=rvOk(gb,x.key), fixed=Object.prototype.hasOwnProperty.call(gb.overrides||{},x.key);
+      const ck=part && gb.itemized ? `<input type="checkbox" class="rv-ck" ${(RV.sel.i[id]||[]).includes(x.key)?'checked':''} onchange="rvSelItem('${id}','${x.key}',this.checked)" title="Переделать этот пункт">`:'';
+      return `<div class="rv-item"><div class="q">${x.label?`<div class="muted" style="font-size:12.5px">${x.label}</div>`:''}<div class="ans">${x.ans}</div>
+          ${ok===false&&x.right?`<div class="rv-right">верно: ${x.right}</div>`:''}${fixed?`<div class="rv-fixed">поправлено вами (система: ${(gb.results||{})[x.key]?'верно':'неверно'})</div>`:''}</div>
+          ${ck}${rvCmBtn(id,x.key)}${ok==null?'':`<button class="rv-mark ${ok?'ok':'no'}${fixed?' fixed':''}" title="Нажмите, чтобы поменять" onclick="rvFlip('${id}','${x.key}')">${ok?'✓':'✗'}</button>`}</div>${rvCmBox(id,x.key)}`;
+    }).join('') || (RV.only?'<div class="muted" style="font-size:13px">Ошибок нет</div>':'');
+  }
+  const manual = gb.needs_review && gb.submitted ? `<div class="row" style="margin-top:10px;align-items:center;gap:8px"><span class="muted" style="font-size:13px">Балл:</span>
+      <input type="number" min="0" max="100" value="${gb.teacher_score??''}" placeholder="0–100" style="width:90px;font-weight:700;text-align:center" onchange="rvScore('${id}',this)"><span class="muted">%</span>
+      ${rvNeedsScore(gb)?'<span class="pill y">нужно оценить</span>':''}</div>` : '';
+  return `<div class="card rv-task-card${sel&&part?' sel':''}" id="rvb-${id}"><div class="rv-thd">
+      ${part?`<input type="checkbox" class="rv-ck" ${RV.sel.b[id]||RV.sel.i[id]?'checked':''} onchange="rvSelTask('${id}',this.checked)" title="Переделать всё задание">`:''}
+      <span class="muted">${RV.no[id]||''}</span><b>${esc(p.title||blockTypeLabel(b.type))}</b><span class="pill n">${esc(blockTypeLabel(b.type))}</span>
+      ${sc!=null?`<span class="pill ${sc>=90?'g':sc>=50?'y':'r'}">${sc}%</span>`:''}${rvCmBtn(id,null)}</div>${rvCmBox(id,null)}${body}${manual}</div>`;
 }
-async function approve(p){
-  try{
-    await rpc('classroom_finish_review', { p_enrollment_id:p.enrollment_id, p_block_id:p.block_id, p_note:$('revComment')?$('revComment').value||null:null });
-    toast('Работа принята'); closeModal(); await refreshReview();
-  }catch(e){ if($('revErr')) $('revErr').textContent=e.message||String(e); }
+
+function rvRenderPage(){
+  const wrap=$('reviewWrap'); if(!RV||!RV.grade) return;
+  document.body.classList.add('rv-on');
+  const r=RV.row, g=RV.grade, gbs=g.blocks||[];
+  const shown=gbs.filter(gb=>!RV.only || rvNeedsScore(gb) || rvItems(RV.blocks[gb.block_id]||{type:gb.type,payload:{}}, gb.answers).some(x=>rvOk(gb,x.key)===false));
+  const toc=gbs.map(gb=>{ const s=gb.score, b=RV.blocks[gb.block_id]||{};
+    return `<a href="#rvb-${gb.block_id}" onclick="event.preventDefault(); const el=document.getElementById('rvb-${gb.block_id}'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'})"><span class="muted">${RV.no[gb.block_id]||''}</span>${esc(blockTypeLabel(b.type||gb.type))}
+      <span class="sc" style="color:${s==null?'var(--faint)':s>=90?'var(--ok)':s>=50?'var(--warn)':'var(--bad)'}">${s==null?(gb.needs_review?'оценить':'—'):s+'%'}</span></a>`; }).join('');
+  const title = r.course_slug ? hwCode(r.course_slug, r.unit_no, r.lesson_title) : (r.lesson_title||'Домашка');
+  wrap.innerHTML = `<div class="row" style="margin-bottom:14px;align-items:center;gap:10px;flex-wrap:wrap">
+      <button class="btn sec sm" onclick="rvClose()">← Все на проверке</button>
+      <div><b>${esc(studentName(r.student_id))}</b> · ${esc(title)}
+        <div class="muted" style="font-size:13px">сдано ${g.submitted_at?rvAgo(g.submitted_at):'—'} · ${r.late?'<span style="color:var(--bad)">с опозданием</span>':'вовремя'} · ${r.attempt>1?r.attempt+'-я попытка, после переделки':'1-я попытка'}
+        ${r.student_id?` · <a href="#" onclick="openStudent('${r.student_id}'); return false">карточка ученика</a>`:''}</div></div></div>
+    <div class="card" style="padding:10px 14px;margin-bottom:12px">${rvCmBtn(null,null)} <span class="muted" style="font-size:13px">Комментарий ко всей домашке</span>${rvCmBox(null,null)}</div>
+    <div class="row" style="margin-bottom:12px;align-items:center;gap:10px;flex-wrap:wrap"><div class="rv-seg"><button class="${RV.only?'':'on'}" onclick="RV.only=false; rvRenderPage()">Все задания</button><button class="${RV.only?'on':''}" onclick="RV.only=true; rvRenderPage()">Только ошибки и что оценить</button></div>
+      <span class="muted" style="font-size:12.5px">✓ Отметки, баллы и комментарии сохраняются сразу — можно закрыть и вернуться</span></div>
+    <div class="rv-grid"><div class="card rv-toc">${toc}</div><div>${shown.map(rvBlockHtml).join('') || '<div class="empty">Ошибок нет, оценивать нечего</div>'}</div></div>
+    <div class="rv-bar">${rvBarHtml()}</div>`;
 }
-async function refreshReview(){ await loadPending(); renderReview(); }
+
+function rvYmd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function rvBarHtml(){
+  const g=RV.grade, gbs=g.blocks||[], need=gbs.filter(rvNeedsScore), auto=g.auto_score;
+  if(RV.mode){
+    const nb=Object.keys(RV.sel.b).filter(id=>!RV.sel.i[id]).length + Object.keys(RV.sel.i).length;
+    const ni=Object.values(RV.sel.i).reduce((s,a)=>s+a.length,0);
+    const what = RV.mode==='full' ? 'вся домашка' : nb ? `заданий: ${nb}${ni?` · пунктов: ${ni}`:''}` : 'ничего не выбрано';
+    const t=new Date(), chips=[1,2,3,7].map(n=>{ const d=new Date(t.getFullYear(),t.getMonth(),t.getDate()+n), v=rvYmd(d);
+      return `<button class="pill ${RV.day===v?'g':'n'}" style="border:0;cursor:pointer" onclick="RV.day='${v}'; rvRenderPage()">${n===1?'Завтра':n===7?'Через неделю':`Через ${n} дня`}</button>`; }).join(' ');
+    const can=(RV.mode==='full'||nb) && RV.day;
+    return `<div class="rv-bar-in" style="flex-wrap:wrap">
+      <b>${RV.mode==='full'?'На доработку полностью':'Частично на доработку'}</b><span class="pill ${RV.mode==='full'||nb?'y':'n'}">${what}</span>
+      ${RV.mode==='part'?'<span class="muted" style="font-size:12.5px">Ставьте ☐ у задания целиком или у отдельных пунктов — даже если они верные.</span>':''}
+      <span style="flex-basis:100%;height:0"></span>
+      <b style="font-size:13px">Новый срок:</b>${chips}
+      <input type="date" min="${rvYmd(new Date())}" value="${RV.day||''}" onchange="RV.day=this.value||null; rvRenderPage()" style="width:150px">
+      ${RV.day?'':'<span class="pill y">выберите срок</span>'}
+      <input id="rvNote" placeholder="Что исправить (увидит ученик)" value="${esc(RV.note)}" oninput="RV.note=this.value" style="flex:1;min-width:200px">
+      <button class="btn sec" onclick="RV.mode=null; RV.sel={b:{},i:{}}; RV.day=null; rvRenderPage()">Отмена</button>
+      <button class="btn rv-warn" ${can?'':'disabled'} onclick="rvRetake()">Отправить на доработку</button></div>`;
+  }
+  const tot = RV.total!=null ? RV.total : auto;
+  return `<div class="rv-bar-in">
+    <button class="btn rv-warn" onclick="RV.mode='full'; rvRenderPage()">↺ На доработку полностью</button>
+    <button class="btn rv-warn" onclick="RV.mode='part'; rvRenderPage()">☐ На доработку частично</button>
+    <span style="flex:1"></span>
+    <span class="muted" style="font-size:13px">Итог</span><input type="number" min="0" max="100" value="${tot==null?'':tot}" style="width:76px;font-weight:700;font-size:17px;text-align:center"
+      onchange="RV.total=this.value===''?null:Math.max(0,Math.min(100,Math.round(Number(this.value)))); rvRenderPage()">%
+    <span class="muted" style="font-size:12.5px">${RV.total!=null&&RV.total!==auto?`система: ${auto==null?'—':auto+'%'} <a href="#" onclick="RV.total=null; rvRenderPage(); return false">вернуть</a>`:'авто'}</span>
+    <label class="chk" style="max-width:none;white-space:nowrap;margin:0"><input type="checkbox" ${RV.show?'checked':''} onchange="RV.show=this.checked"> Показать верные ответы</label>
+    ${need.length?`<span class="pill y">${need.length===1?'Оцените задание':'Оцените следующие задания'}: ${need.map(x=>RV.no[x.block_id]||'').join(', ')}</span>`:''}
+    <button class="btn" ${need.length?'disabled':''} onclick="rvFinish()">✓ Завершить проверку</button></div>`;
+}
+async function rvFinish(){
+  const auto=RV.grade.auto_score;
+  try{
+    const r=await rpc('classroom_review_finish',{ p_enrollment_id:RV.row.enrollment_id, p_lesson_id:RV.row.lesson_id,
+      p_score: RV.total!=null && RV.total!==auto ? RV.total : null, p_show_answers:RV.show, p_note:null });
+    toast(`Проверка завершена: ${r.score==null?'—':r.score+'%'}. Ученик получил уведомление`);
+    RV=null; document.body.classList.remove('rv-on'); await refreshReview();
+  }catch(e){ toast(e.message||String(e)); }
+}
+async function rvRetake(){
+  if(!RV.day){ toast('Выберите новый срок'); return; }
+  const [y,m,d]=RV.day.split('-').map(Number), deadline=new Date(y,m-1,d,23,59,0).toISOString();
+  let blocks=null, items=null;
+  if(RV.mode==='part'){
+    blocks=Object.keys(RV.sel.b).filter(id=>!RV.sel.i[id]);
+    items={}; Object.keys(RV.sel.i).forEach(id=>{ items[id]=RV.sel.i[id]; });
+    if(!blocks.length && !Object.keys(items).length){ toast('Отметьте задания или пункты'); return; }
+    if(!Object.keys(items).length) items=null;
+  }
+  try{
+    await rpc('classroom_retake',{ p_enrollment_id:RV.row.enrollment_id, p_lesson_id:RV.row.lesson_id, p_deadline:deadline,
+      p_blocks:blocks, p_items:items, p_note:(RV.note||'').trim()||null });
+    toast(`Отправлено на доработку до ${d}.${String(m).padStart(2,'0')}`);
+    RV=null; document.body.classList.remove('rv-on'); await refreshReview();
+  }catch(e){ toast(e.message||String(e)); }
+}
+async function refreshReview(){ await loadPending(); renderReview(); bellRender(); }
+
+// ── колокольчик: сдано недавно и напоминания через 1, 3 и 7 дней
+function bellItems(){
+  const out=[];
+  PENDING.forEach(p=>{
+    const d=rvDays(p.submitted_at), who=studentName(p.student_id), code=hwCode(p.course_slug,p.unit_no,p.lesson_title);
+    if(d<1) out.push({ t:`${who} — ${code} сдана${p.attempt>1?' после переделки':''}`, w:rvAgo(p.submitted_at), p, fresh:true });
+    else out.push({ t:`⏰ Ждёт проверки ${d} ${plural(d,'день','дня','дней')}: ${who} · ${code}`, w:rvAgo(p.submitted_at), p });
+  });
+  return out.sort((a,b)=>new Date(b.p.submitted_at)-new Date(a.p.submitted_at));
+}
+function bellRender(){
+  const b=$('bellBtn'); if(!b) return;
+  const n=PENDING.length;
+  b.innerHTML=`🔔${n?`<i>${n}</i>`:''}`;
+  const d=$('bellDrop'); if(d && !d.classList.contains('hidden')) bellFill();
+}
+function bellFill(){
+  const its=bellItems();
+  $('bellDrop').innerHTML=`<div class="bell-h">Уведомления</div>${its.map((x,i)=>`<div class="bell-it${x.fresh?' new':''}" onclick="bellGo(${i})"><div>${esc(x.t)}</div><div class="muted" style="font-size:12px">${x.w}</div></div>`).join('') || '<div class="bell-it muted">Нового нет</div>'}`;
+  window._bellItems=its;
+}
+function bellToggle(e){ if(e) e.stopPropagation(); const d=$('bellDrop'); d.classList.toggle('hidden'); if(!d.classList.contains('hidden')) bellFill(); }
+function bellGo(i){ const x=(window._bellItems||[])[i]; $('bellDrop').classList.add('hidden'); if(!x) return; switchTab('review'); rvOpen(x.p.enrollment_id, x.p.lesson_id); }
+document.addEventListener('click', e=>{ const d=$('bellDrop'); if(d && !d.classList.contains('hidden') && !e.target.closest('#bellDrop')) d.classList.add('hidden'); });
+
 
 // ============================================================
 //  НАВИГАЦИЯ
