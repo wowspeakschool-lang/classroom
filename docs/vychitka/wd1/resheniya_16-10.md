@@ -16,3 +16,11 @@
 
 Служебные блоки (5) Анна удалила сама в SQL Editor 16.10.
 Единорог — мальчик (правки — insert/edinorog_odezhda.md).
+
+## Сделано по ответам 5, 7, 9, 10
+- ДЗ 6 б9: speaking → quiz multiple «Выбери две картинки»: dinosaur and fish / butterfly and dog / unicorn and butterfly.
+- ДЗ 9 б10: speaking → quiz «Послушай и выбери»: green butterfly / yellow fish / yellow butterfly / green fish.
+- ДЗ 36 б4: три вопроса «uniform» → match «Послушай и соедини»: uniform, clothes, bag, book, pencil.
+- ДЗ 56 б6: мебель из копии — wardrobe → bedroom, fridge → kitchen, toilet → bathroom; звук одним словом.
+- ДЗ 68 б4: «Послушай и соедини» картинка ↔ слово: berry, honey, toothbrush, boat, bear, eagle.
+Звук пустой — «Озвучить пачкой».
