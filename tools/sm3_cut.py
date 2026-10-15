@@ -186,7 +186,24 @@ SHEETS = [
     ("70.webp", "ЛФ.5",  "ft", 2, 3, ["riddle_cheese", "riddle_stomach", "riddle_coffee",
                                       "riddle_cinema", "riddle_dolphin", "riddle_soup"]),
     ("71.webp", "ЛФ.6",  "ft", 1, 2, ["riddle_lift", "riddle_supermarket"]),
+    # --- ДОБОРЫ 15.10.2026: листы к заданиям, ушедшим без картинок ---
+    ("109.webp", "Л2.13", "u2", 1, 2, ["food_bread_cheese", "food_flies"]),
+    # Л6.12 — единственный лист, у которого ячейка не на белом: три фотографии
+    # скалы во весь кадр. Предмет в ней не ищем, ячейка берётся целиком, см.
+    # FULL_BLEED ниже.
+    ("110.webp", "Л6.12", "u6", 1, 3, ["caveart_giraffe", "caveart_camels",
+                                       "caveart_hunting"]),
+    ("111.webp", "Л7.5",  "u7", 2, 3, ["ill_earache", "ill_toothache", "ill_headache",
+                                       "ill_stomachache", "ill_cold", "ill_cough"]),
+    ("112.webp", "Л7.6",  "u7", 1, 2, ["med_doctor", "med_nurse"]),
 ]
+
+# Листы, у которых ячейка — картинка во весь кадр, а не предмет на белом.
+# Связных областей в такой ячейке нет: тёмная скала занимает её целиком,
+# и обычный путь (маска непустых пикселей → связная фигура → её bbox)
+# даёт тот же прямоугольник, но по дороге может отъесть край через чистку
+# полей. Поэтому такие ячейки режем ровно по сетке и ничего не ищем.
+FULL_BLEED = {"Л6.12"}
 
 
 def _line_is_clean(vals, spread=18):
@@ -567,6 +584,71 @@ def add_margin(im, pad):
     return out
 
 
+def light_runs(grey, vertical, need):
+    """Полосы светлого насквозь — разделители листа с ячейками во весь кадр.
+
+    Возвращает `need` самых широких полос (их середины и края), отсортированных
+    по положению, или None, если столько не нашлось.
+    """
+    w, h = grey.size
+    px = grey.load()
+    span, limit = (h, w) if vertical else (w, h)
+    step = max(1, span // 120)
+    runs, cur = [], None
+    for i in range(limit):
+        vals = ([px[i, y] for y in range(0, span, step)] if vertical
+                else [px[x, i] for x in range(0, span, step)])
+        if min(vals) >= 200:
+            cur = [i, i] if cur is None else [cur[0], i]
+        elif cur is not None:
+            runs.append(cur)
+            cur = None
+    if cur is not None:
+        runs.append(cur)
+    runs = [r for r in runs if r[0] > limit * 0.03 and r[1] < limit * 0.97]
+    if len(runs) < need:
+        return None
+    runs.sort(key=lambda r: r[1] - r[0], reverse=True)
+    return sorted(runs[:need])
+
+
+def grid_pieces(sheet, rows, cols, inset=0.015):
+    """Ячейки листа по разделителям, а не по расчётной сетке.
+
+    Для листов из FULL_BLEED: картинка занимает ячейку целиком, искать в ней
+    предмет нечего и опасно — тёмная скала и так одна связная область, зато
+    чистка полей может отъесть край кадра.
+
+    Ровные трети не годятся: генератор делит лист на глаз. На Л6.12 ячейки
+    вышли 520 · 840 · 624 px вместо 667 каждая, и при делении по трети в
+    карточку с жирафом попадал шов и кусок соседней скалы, а у верблюдов
+    срезался первый верблюд. Зато сам шов виден отлично: это единственные
+    столбцы, светлые по всей высоте листа.
+    """
+    W, H = sheet.size
+    grey = sheet.convert("L")
+    vruns = light_runs(grey, True, cols - 1) if cols > 1 else []
+    hruns = light_runs(grey, False, rows - 1) if rows > 1 else []
+    if vruns is None or hruns is None:      # швов не видно — делим поровну
+        vruns = [[round(W * c / cols)] * 2 for c in range(1, cols)]
+        hruns = [[round(H * r / rows)] * 2 for r in range(1, rows)]
+    xs = [0] + [r[0] for r in vruns] + [W]
+    xe = [0] + [r[1] + 1 for r in vruns] + [W]
+    ys = [0] + [r[0] for r in hruns] + [H]
+    ye = [0] + [r[1] + 1 for r in hruns] + [H]
+    dx, dy = W / cols * inset, H / rows * inset
+    out = []
+    for r in range(rows):
+        for c in range(cols):
+            out.append(sheet.crop((
+                round(xe[c] + (dx if c else 0)),
+                round(ye[r] + (dy if r else 0)),
+                round(xs[c + 1] - (dx if c + 1 < cols else 0)),
+                round(ys[r + 1] - (dy if r + 1 < rows else 0)),
+            )))
+    return out
+
+
 def cut_sheet(sheet, rows, cols):
     """Вернуть список вырезанных ячеек листа (None там, где ячейка пуста)."""
     W, H = sheet.size
@@ -794,7 +876,13 @@ def main():
         if args.cells and not any(n in args.cells for n in names if n):
             continue
         scene = rows == 1 and cols == 1
-        pieces = [sheet] if scene else cut_sheet(sheet, rows, cols)
+        full = sid in FULL_BLEED
+        if scene:
+            pieces = [sheet]
+        elif full:
+            pieces = grid_pieces(sheet, rows, cols)
+        else:
+            pieces = cut_sheet(sheet, rows, cols)
         for i, name in enumerate(names):
             if name is None:
                 continue
@@ -806,7 +894,10 @@ def main():
                 continue
             # серая линия сетки остаётся и на ячейках, нарезанных по сетке
             # (фото во весь кадр), поэтому край чистим у всех кусков
-            if not args.plain:
+            # У FULL_BLEED чистки не запускаем: они ищут «кусок соседа» по
+            # непохожести края на середину, а у трёх кадров одной и той же
+            # скалы непохожим выглядит сам кадр.
+            if not args.plain and not full:
                 piece = strip_lines(cut_off_line(cut_foreign_strip(piece)))
             out = fit(piece, SCENE if scene else CARD)
             dst = os.path.join(outdir, f"{name}.webp")

@@ -123,6 +123,16 @@ U6_GADGETS = [
 
 # Слова Unit 7 идут без картинок: болезнь рисуется только через человека,
 # а людей мы не генерируем. Тренажёр текстовый.
+# Картинка к каждому слову: шесть симптомов на мультяшном медвежонке (лист
+# Л7.5) и двое из персонала — слон и зайчик (Л7.6). Людей на них нет, правило
+# генерации не нарушено; подход согласован с Анной 15.10.2026.
+U7_HEALTH_IMG = {
+    "earache": "ill_earache", "toothache": "ill_toothache",
+    "headache": "ill_headache", "stomachache": "ill_stomachache",
+    "cold": "ill_cold", "cough": "ill_cough",
+    "doctor": "med_doctor", "nurse": "med_nurse",
+}
+
 U7_HEALTH = [
     ("earache", "боль в ухе"),
     ("toothache", "зубная боль"),
@@ -996,10 +1006,10 @@ LESSONS = {
         "lesson_title": "Homework 3",
         "lesson_sort": 2,
         "kind": "homework",
-        # Блок 4 в выгрузке — «соедини предложения ящериц с картинками», но
-        # картинок там не было ни одной, а горошек у нас есть, хлеб с сыром и
-        # мухи — нет. Сделан пропусками на те же три реплики: отрабатываются
-        # ровно те обороты, ради которых задание и стояло.
+        # Блок 5 в выгрузке — «соедини предложения ящериц с картинками». Хлеб
+        # с сыром и мухи появились 15.10.2026 (лист Л2.13), горошек был, и
+        # блок вернулся к виду выгрузки. Подпись к картинке живёт в `right`:
+        # на экране её перекрывает сама картинка, но ответ проверяется по ней.
         "blocks": [
             ("text", {"html":
                 f'<p><img src="{shared("hello_rocket")}" alt="" style="height:200px"></p>'
@@ -1022,14 +1032,21 @@ LESSONS = {
                 "correct": [2],
             }]}),
 
-            ("gaps", {
-                "title": "Вспомни, что говорили ящерицы, и вставь нужные слова",
-                "mode": "drag",
-                "text":
-                    "__How about__ some peas?\n"
-                    "__Shall we__ have some bread with cheese?\n"
-                    "__I’d like__ some flies.",
-                "gaps_expected": 3,
+            ("match", {
+                "title": "Вспомни, что говорили ящерицы, и подбери картинку "
+                         "к каждой реплике",
+                "pairs": [
+                    {"left": "How about some peas?",
+                     "left_audio_tts": "How about some peas?",
+                     "right": "peas", "right_image": img("u2", "food_peas")},
+                    {"left": "Shall we have some bread with cheese?",
+                     "left_audio_tts": "Shall we have some bread with cheese?",
+                     "right": "bread with cheese",
+                     "right_image": img("u2", "food_bread_cheese")},
+                    {"left": "I’d like some flies.",
+                     "left_audio_tts": "I’d like some flies.",
+                     "right": "flies", "right_image": img("u2", "food_flies")},
+                ],
             }),
 
             ("gaps", {
@@ -4333,9 +4350,12 @@ LESSONS = {
         "kind": "homework",
         # Блоков столько же, сколько в выгрузке.
         # Блок 4: в выгрузке правая колонка пустая — там должны были стоять
-        # три наскальных рисунка, которых у нас нет. Поэтому пары
-        # «описание → что на рисунке»: место из текста в ответ не берём,
-        # иначе задание решалось бы без чтения.
+        # три наскальных рисунка. Они появились 15.10.2026 (лист Л6.12), и
+        # теперь стоят на своём месте. Подпись под картинкой оставлена: она
+        # идёт в `right` и держит проверку ответа, а на экране ребёнок видит
+        # рисунок — картинка в плитке перекрывает текст.
+        # Место из текста (Сахара, Алжир, Таиланд) в ответ по-прежнему не
+        # берём: иначе задание решалось бы по одному слову, без чтения.
         "blocks": [
             ("text", {"html":
                 f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
@@ -4381,16 +4401,19 @@ LESSONS = {
                              "a tall giraffe. It tells us that giraffes are thousands of "
                              "years old and live in the desert.",
                      "right": "a man and a tall giraffe",
+                     "right_image": img("u6", "caveart_giraffe"),
                      "right_audio_tts": "a man and a tall giraffe"},
                     {"left": "This painting tells us how people travelled. Some people "
                              "are on camels and some are walking. This picture is from "
                              "a cave in Algeria.",
                      "right": "people on camels and people walking",
+                     "right_image": img("u6", "caveart_camels"),
                      "right_audio_tts": "people on camels and people walking"},
                     {"left": "In this picture we can see people hunting. Some people are "
                              "talking, too. You can see this picture in a cave in "
                              "Thailand.",
                      "right": "people hunting and talking",
+                     "right_image": img("u6", "caveart_hunting"),
                      "right_audio_tts": "people hunting and talking"},
                 ],
             }),
@@ -4653,12 +4676,14 @@ LESSONS = {
                 "по желанию, НО если сделаешь, будешь нереально крут!</p>"}),
 
             ("flashcards", {"cards": [
-                {"text": en, "translation": ru, "audio_tts": en}
+                {"text": en, "translation": ru, "audio_tts": en,
+                 "image": img("u7", U7_HEALTH_IMG[en])}
                 for en, ru in U7_HEALTH
             ]}),
 
             ("quiz", {"questions": [
                 {"q": f"Как по-английски «{ru}»?", "type": "single",
+                 "image": img("u7", U7_HEALTH_IMG[en]),
                  "options": [{"text": o} for o in opts],
                  "correct": [opts.index(en)]}
                 for en, ru, opts in [
@@ -4670,6 +4695,7 @@ LESSONS = {
 
             ("exact_input", {"items": [
                 {"prompt": f"Напиши по-английски: «{ru}»",
+                 "image": img("u7", U7_HEALTH_IMG[en]),
                  "accept": [en, en.capitalize()], "audio_tts": en}
                 for en, ru in U7_HEALTH
             ]}),
@@ -5226,25 +5252,27 @@ LESSONS = {
         # Нумерация блоков как в выгрузке: match, пять «выбери правильный
         # вариант» (у нас quiz, чтобы сохранить неверные варианты), пять
         # «составь предложение», запись голоса.
-        # Блок 1 в выгрузке — «соедини слова с картинками», но картинок болезней
-        # у нас нет (их не нарисовать без человека). Поэтому пары
-        # «описание → слово», формулировки другие, чем в Homework 1.
+        # Блок 1 в выгрузке — «соедини слова с картинками». Картинки появились
+        # 15.10.2026 (листы Л7.5 и Л7.6, пациент-медвежонок), поэтому блок
+        # вернулся к виду выгрузки: слово → картинка. Описания, которыми он
+        # держался без картинок, сняты — иначе задание решалось бы по ним,
+        # а картинку ребёнок бы не читал.
         "blocks": [
             ("match", {
-                "title": "Прочитай и подбери слово",
+                "title": "Соедини слово с картинкой",
                 "pairs": [
-                    {"left": "At night I cough a lot.", "right": "cough",
-                     "right_audio_tts": "cough"},
-                    {"left": "My head hurts and I want to lie down.", "right": "headache",
-                     "right_audio_tts": "headache"},
-                    {"left": "This person gives you medicine when you are ill.",
-                     "right": "doctor", "right_audio_tts": "doctor"},
-                    {"left": "I ate too much cake and now my tummy hurts.",
-                     "right": "stomachache", "right_audio_tts": "stomachache"},
-                    {"left": "My ear hurts and I can’t hear well.", "right": "earache",
-                     "right_audio_tts": "earache"},
-                    {"left": "This tooth hurts when I eat something sweet.",
-                     "right": "toothache", "right_audio_tts": "toothache"},
+                    {"left": "cough", "left_audio_tts": "cough",
+                     "right": "cough", "right_image": img("u7", "ill_cough")},
+                    {"left": "headache", "left_audio_tts": "headache",
+                     "right": "headache", "right_image": img("u7", "ill_headache")},
+                    {"left": "doctor", "left_audio_tts": "doctor",
+                     "right": "doctor", "right_image": img("u7", "med_doctor")},
+                    {"left": "stomachache", "left_audio_tts": "stomachache",
+                     "right": "stomachache", "right_image": img("u7", "ill_stomachache")},
+                    {"left": "earache", "left_audio_tts": "earache",
+                     "right": "earache", "right_image": img("u7", "ill_earache")},
+                    {"left": "toothache", "left_audio_tts": "toothache",
+                     "right": "toothache", "right_image": img("u7", "ill_toothache")},
                 ],
             }),
 
