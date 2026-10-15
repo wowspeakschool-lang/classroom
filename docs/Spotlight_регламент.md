@@ -65,8 +65,19 @@
 
 ## 7. Загрузка картинок (Claude)
 
-webp → репозиторий wowspeak-train `media/spotlightN/<колода>/<слово>.webp`, push main,
-затем `UPDATE words SET image_url = …` только там, где `image_url is null`. Контрольный count.
+С 14.10.2026 тренажёр — в платформе (app.wowteach.ru), train.wowteach.ru закрыт,
+туда ничего не класть. Порядок — `wowspeak-platform/CLAUDE.md`, «Картинки тренажёра»;
+картинки выкладываются без отдельного «да» (решение владельца 15.10.2026).
+
+1. `spN/export.py <листы>` → `wowspeak-platform/public/trainer/media/spotlightN/`, коммит в `main`.
+2. Те же файлы — в ветку `gh-pages` репозитория wowspeak-team, `trainer/media/spotlightN/`,
+   только эта папка, без `--force`.
+3. Через минуту проверить адреса с сервера базы: `net.http_get(url)` →
+   `net._http_response`, нужен `content-type = image/webp` (пока сервер не забрал
+   ветку, отвечает 200 со страницей сайта).
+4. Снимок `words_backup_YYYYMMDD_…` с RLS, затем `UPDATE … image_url` только там,
+   где `image_url is null`. Перерезанную — под новым именем `…_v2.webp`.
+5. Размер файлов — 300×300, как все картинки тренажёра.
 
 ## 8. Коммит
 
