@@ -1,0 +1,272 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Собирает Word-файл «Что нужно от вас» для методиста.
+
+Запуск:  python3 tools/make_todo_docx.py [куда_положить.docx]
+
+Содержимое набрано здесь руками: файл читают, а не ищут в нём, поэтому порядок
+такой — сначала три действия, потом решения таблицей, потом промпты целиком.
+Промпты берутся из builds/sm2/prompts_redraw.md, чтобы не расходились с ним.
+"""
+
+import os
+import re
+import sys
+
+from docx import Document
+from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.shared import Pt, RGBColor, Cm
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROMPTS_MD = os.path.join(ROOT, 'builds', 'sm2', 'prompts_redraw.md')
+
+RED = RGBColor(0xC0, 0x1A, 0x1A)
+GREY = RGBColor(0x66, 0x66, 0x66)
+
+
+def style_doc(doc):
+    normal = doc.styles['Normal']
+    normal.font.name = 'Calibri'
+    normal.font.size = Pt(11)
+    for name, size, color in (('Heading 1', 18, RGBColor(0x1A, 0x1A, 0x1A)),
+                              ('Heading 2', 14, RGBColor(0x1A, 0x1A, 0x1A)),
+                              ('Heading 3', 12, RGBColor(0x33, 0x33, 0x33))):
+        st = doc.styles[name]
+        st.font.name = 'Calibri'
+        st.font.size = Pt(size)
+        st.font.color.rgb = color
+        st.font.bold = True
+
+
+def para(doc, text='', bold=False, italic=False, color=None, size=None, space_after=6):
+    p = doc.add_paragraph()
+    run = p.add_run(text)
+    run.bold = bold
+    run.italic = italic
+    if color is not None:
+        run.font.color.rgb = color
+    if size is not None:
+        run.font.size = Pt(size)
+    p.paragraph_format.space_after = Pt(space_after)
+    return p
+
+
+def bullet(doc, text, style='List Bullet'):
+    p = doc.add_paragraph(text, style=style)
+    p.paragraph_format.space_after = Pt(3)
+    return p
+
+
+def table(doc, header, rows, widths=None):
+    t = doc.add_table(rows=1, cols=len(header))
+    t.style = 'Light Grid Accent 1'
+    t.alignment = WD_TABLE_ALIGNMENT.LEFT
+    hdr = t.rows[0].cells
+    for i, h in enumerate(header):
+        hdr[i].text = ''
+        run = hdr[i].paragraphs[0].add_run(h)
+        run.bold = True
+    for row in rows:
+        cells = t.add_row().cells
+        for i, value in enumerate(row):
+            cells[i].text = ''
+            p = cells[i].paragraphs[0]
+            text = str(value)
+            run = p.add_run(text)
+            if text.startswith('🟥'):
+                run.font.color.rgb = RED
+            p.paragraph_format.space_after = Pt(2)
+    if widths:
+        for row in t.rows:
+            for i, w in enumerate(widths):
+                row.cells[i].width = Cm(w)
+    doc.add_paragraph()
+    return t
+
+
+def mono(doc, text):
+    p = doc.add_paragraph()
+    run = p.add_run(text)
+    run.font.name = 'Consolas'
+    run.font.size = Pt(9)
+    p.paragraph_format.space_after = Pt(10)
+    p.paragraph_format.left_indent = Cm(0.5)
+    return p
+
+
+def read_prompts():
+    """Возвращает список (заголовок, пояснение, промпт) из prompts_redraw.md."""
+    if not os.path.exists(PROMPTS_MD):
+        return []
+    text = open(PROMPTS_MD, encoding='utf-8').read()
+    out = []
+    for chunk in re.split(r'\n## ', text)[1:]:
+        head, _, rest = chunk.partition('\n')
+        body, prompt = rest, ''
+        m = re.search(r'```\n(.*?)\n```', rest, re.S)
+        if m:
+            prompt = m.group(1).strip()
+            body = rest[:m.start()]
+        note = ' '.join(line.strip() for line in body.strip().splitlines() if line.strip())
+        out.append((head.strip(), note, prompt))
+    return out
+
+
+DECISIONS = [
+    # (№, где, что решить)
+    ('1', 'Юнит 0, тест, блок 9',
+     'Ключ «Where is the bookcase?» поставлен по картинке — near the window. Сверьте по записи sm2_u0_test_b7.mp3: запись мы прослушать не можем.'),
+    ('2', 'Юнит 0, тест, текст READING',
+     'В тексте шкаф у окна и «тридцать детей», на картинке шкаф у двери и детей четверо. Что первично — текст или картинка?'),
+    ('3', 'Юнит 1, тест, блок 16',
+     'Расписание Эммы приведено к тексту READING, получасовые времена убраны. Запись sm2_u1_test_b14.mp3 надо сверить или перезаписать.'),
+    ('4', 'Юнит 1, ДЗ 4, блок 11',
+     'Пара «He goes to school at three o\'clock» проверяется только по аудио истории — сверьте время по записи.'),
+    ('5', 'Юнит 1, ДЗ 7',
+     'Стало 11 заданий при ориентире 8. Если длинно — уберу один из двух похожих квизов (блоки 12 и 14).'),
+    ('6', 'Юнит 8, ДЗ 3, карточка card_like',
+     'Слайд с текстом, генератор его не соберёт. Нужна одна строка в вашем редакторе: было «I don\'t like hockey. — I don\'t.» / «Я тоже не люблю хоккей», надо «I like hockey. — I don\'t.» / «А я не люблю хоккей».'),
+    ('7', 'Юнит 3, три картинки',
+     't_dog_behind, town_hw7, map_town_quiz — промпты в конце файла. Пока не перерисованы, три места остаются спорными: собака «behind» лежит на крыше, школа на карте не подписана, карта с водяным знаком.'),
+    ('8', 'Юниты 2 и 3, написание cafe',
+     'В текстах заданий везде cafe, принимаются оба написания. На карточке card_places подписано café, на карте map_greenville — Cafè (опечатка генератора). Карточки не правлю.'),
+    ('9', 'Юнит 3, ДЗ 1, карточки',
+     'На card_places 11 слов, в карточках урока 10. Добавлять одиннадцатую карточку?'),
+    ('10', 'Юнит 3, план урока 4',
+     'План требует фразу «Never give up!», в тексте истории и на кадрах её нет. Пропуск в выгрузке или ошибка плана?'),
+    ('11', 'Юнит 3, чант',
+     'На уроке 7 учитель просит спеть чант, которого ребёнок дома не слышал. Нужна запись.'),
+    ('12', 'Юнит 3, ДЗ 3, блок 12',
+     'План предлагал развернуть задание (вписывать место, а не предлог). Для этого надо сверить ч/б карту по каждому пункту. Разворачивать?'),
+    ('13', 'Юнит 4, fridge_red',
+     'От картинки зависят четыре ключа (винограда нет, курица есть, хлеба нет, яйца есть). После перерисовки сверю заново.'),
+    ('14', 'Юнит 5, family.webp',
+     'После перерисовки (убрать напечатанное «Lucy») подтвердить имена по записи sm2_u5_hw5_b6.mp3 — особенно третью точку, подписанную «Tom».'),
+    ('15', 'Юнит 5, t_bedroom.webp',
+     'В тесте «There is a yellow wardrobe on the right of my bed», на картинке комод. Текст верен для новой картинки; после перерисовки сверю.'),
+    ('16', 'Юнит 4, f_lemon',
+     'На картинке целый лимон и половинка — как на арбузе, где вы оставили единственное число. Ответ lemon, lemons тоже принимается. Нужно строго множественное?'),
+    ('17', 'Юнит 4, веса продуктов',
+     'ДЗ 6 и ДЗ 7 опираются на две разные картинки с разными весами. Пока в ДЗ 7 добавлена строка «в этом магазине свои веса». Свести к одному набору — это перерисовка weights_hw7.'),
+    ('18', 'Юнит 6, ДЗ 1 и ДЗ 7, юнит 7, ДЗ 1',
+     'В блоках «собери слово из букв» озвучка проговаривает искомое слово. Там, где пересобирали, звук сняли. Снимать везде или оставить как подсказку?'),
+    ('19', 'Юнит 7, ДЗ 4, блок 7',
+     '«Now it\'s my turn to help you» — по комиксу это водитель, по плану урока Thunder. Ключ оставлен как в комиксе. Кто прав?'),
+    ('20', 'Юнит 6, monster и q_forest',
+     'Вы их перерисовываете. Ключи («two purple ears», «Are they in the forest? — Yes») оставлены под новую версию — после перерисовки сверю.'),
+    ('21', 'Юнит 6, ДЗ 6, блок 9',
+     'Состав ответов по видео (birds, a pig, a dog) стоит сверить с залитым мультиком; вариант «a cat» добавлен как неверный.'),
+    ('22', 'Юнит 7, тест, пять фотографий',
+     'tt_skate, tt_football, tt_book, tt_plane, tt_kite — стоковые фото среди 3D-рисунков. Перерисовывать?'),
+    ('23', 'Юнит 7, media/sm2/u7/',
+     'После правок четыре файла больше не используются: d_plane, d_train, d_jump, d_dance. Удалять из репозитория?'),
+    ('24', 'Юнит 8, ДЗ 4, блок 7, точка (50, 75)',
+     'Подпись поставлена дословно по кадру 8 комикса. Если на мультфильме это не финальная сцена — замените.'),
+    ('25', 'Юнит 8, ДЗ 5, запись Мэдди',
+     'sm2_u8_hw5_b6.mp3 — содержимое записи мы проверить не можем. Нужны автопроверяемые вопросы по ней — пришлите расшифровку.'),
+    ('26', 'Юнит 9, ДЗ 6, три новые фразы',
+     'Добавлены recycling bins (стояла в задании, но нигде не вводилась), take your rubbish home и pick the flowers — иначе в корзинах не набиралось восемь карточек. Оставляем?'),
+    ('27', 'Финальный тест, запись 5:21',
+     'Решение принято: задание на семью убрано, запись sm2_final_b4.mp3 не используется. Из бакета файл не удаляли — лежит там.'),
+    ('28', 'Финальный тест, блок 16',
+     'Текст READING про Джейка написан мной, в выгрузке его не было. Прочитайте: по нему решаются шесть утверждений блока 17.'),
+    ('29', 'Super Minds 1, юнит 5, ДЗ 1',
+     'Картинок для дней недели в курсе нет, поэтому два блока подряд на порядок дней (пропуск в середине и в конце). Если однообразно — удалю один.'),
+    ('30', 'Super Minds 1, юнит 1, ДЗ 3',
+     'В блоке «картинка → команда» осталось 5 вопросов из 9: команды без предмета («Stand up») картинкой не покажешь. Все девять команд остались в соседнем блоке.'),
+    ('31', 'Super Minds 3, юнит 5, to dive',
+     'Отдельной картинки действия нет, поставлена картинка снаряжения (маска, трубка, ласты). Если неточно — нужна отдельная картинка.'),
+]
+
+LOOK = [
+    ('88 пересобранных игр Wordwall',
+     'Содержимого выгрузка не отдаёт никогда, состав подобрала я.'),
+    ('14 блоков с точками на картинке',
+     'Координаты расставлены вручную. Чтобы не открывать уроки по одному, лежат листы builds/sm2/hotspot_check/: картинка с пронумерованными кружками и подписи списком.'),
+    ('Тексты READING, которых не было в выгрузке',
+     'Написаны мной так, чтобы сходились все ответы. Четыре вы прислали, остальные — мои.'),
+    ('10 картинок на перерисовку',
+     'Промпты — в конце этого файла, готовы к копированию.'),
+    ('18 новых блоков фонетики',
+     'Добавлены в ДЗ 4 юнитов 1–9, механика узнавания чередуется.'),
+]
+
+
+def build(path):
+    doc = Document()
+    style_doc(doc)
+
+    doc.add_heading('Что нужно от вас', level=0)
+    para(doc, 'Super Minds 2 — вычитка курса. Плюс задания на перевод по всем курсам.',
+         color=GREY)
+    para(doc, 'Красным помечено то, где нужно ваше решение. Номера блоков — как в редакторе.',
+         color=GREY, italic=True, space_after=14)
+
+    doc.add_heading('Сначала три действия', level=1)
+    para(doc, 'Они закрывают большую часть списка.')
+    bullet(doc, '1. Нажать «Озвучить пачкой». Super Minds 2 — 182 места, Super Minds 1 — 51, '
+                'Super Minds 3 — 41, Go Getter 1 — 17. Без этого не работают новые блоки фонетики '
+                'и задания «послушай слово и выбери картинку»: у них просто нет звука. '
+                'Кнопка сама находит размеченные места и не трогает уже озвученное.',
+           style='List Number')
+    bullet(doc, '2. Включить публикацию. Ни один из 79 уроков Super Minds 2 не опубликован — '
+                'так и задумано, заливаю всегда выключенными. Тесты включать после того, как '
+                'закроете вопросы 1–4 из таблицы ниже: там ключи, которые без записи не сверить.',
+           style='List Number')
+    bullet(doc, '3. Перерисовать десять картинок. Промпты — в конце файла, целиком, '
+                'копировать и вставлять. Пока не перерисованы, пять мест в заданиях остаются спорными.',
+           style='List Number')
+    doc.add_paragraph()
+
+    doc.add_heading('Решения за вами', level=1)
+    para(doc, 'Каждый пункт — место, где я могу ошибиться без вас. Если пункт не решить, '
+              'задание останется в нынешнем виде.', color=GREY, italic=True)
+    table(doc, ['№', 'Где', 'Что решить'],
+          [(n, w, t) for n, w, t in DECISIONS], widths=[1.0, 4.5, 11.0])
+
+    doc.add_heading('Посмотреть глазами', level=1)
+    para(doc, 'Это не ошибки, а места, где состав придумала я и его стоит пролистать.',
+         color=GREY, italic=True)
+    for head, note in LOOK:
+        p = doc.add_paragraph(style='List Bullet')
+        r = p.add_run(head + '. ')
+        r.bold = True
+        p.add_run(note)
+        p.paragraph_format.space_after = Pt(3)
+    doc.add_paragraph()
+
+    doc.add_heading('Промпты на перерисовку', level=1)
+    prompts = read_prompts()
+    para(doc, 'Каждый промпт полный: строка стиля уже внутри, собирать ничего не нужно. '
+              'Имя файла — как назвать готовую картинку.', color=GREY, italic=True)
+    for head, note, prompt in prompts:
+        doc.add_heading(head.replace('`', ''), level=3)
+        if note:
+            para(doc, note, size=10)
+        if prompt:
+            mono(doc, prompt)
+
+    doc.add_heading('Что уже сделано — проверять не нужно', level=1)
+    for line in [
+        'Вычитаны все 79 уроков Super Minds 2: девять юнитов, десять тестов и итоговый тест.',
+        'Объём домашек доведён до 6–11 заданий, в каждой есть устное или письменное задание.',
+        'Перегруженные домашки разгружены: юнит 6 ДЗ 2 — с 20 заданий до 10, юнит 7 ДЗ 3 — с 21 до 12.',
+        'Итоговый тест собран заново: 20 блоков и 14 заданий вместо 10 и 4.',
+        'У всех десяти тестов одинаковая шапка и финальная плашка.',
+        'Деление на основную и дополнительную часть убрано везде, звёздочки убраны.',
+        'Задания на поиск перевода убраны из всех курсов: 69 блоков, около 630 вопросов — '
+        'теперь это картинка и английские варианты или задание на слух.',
+        'Сверены ключи во всех заданиях с выбором ответа: 136 блоков, 320 вопросов, 26 блоков «верно/неверно».',
+        'Всё присланное вами аудио и видео привязано к блокам.',
+        'Блоки с одним пропуском переведены в режим «выбери вариант».',
+    ]:
+        bullet(doc, line)
+
+    doc.save(path)
+    return path
+
+
+if __name__ == '__main__':
+    out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, 'builds', 'sm2', 'Что нужно от вас.docx')
+    print(build(out))
