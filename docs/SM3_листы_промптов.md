@@ -1164,6 +1164,23 @@ Output size: 2048 x 1024 px.
 Регистр тот же, что у Л7.5, зверь другой: пациент — медвежонок, персонал —
 слон и зайчик, их не спутать. Ячейки → `med_doctor`, `med_nurse`.
 
+### Л6.13 · Мультики и книги, физкультура и математика — 2 карточки (2×1) · ПО ЖЕЛАНИЮ
+
+Единственное место в курсе, где у соседних блоков картинки есть, а у двух
+нет: в Unit 6 Homework 2 к «Cartoons are funnier than books» и «PE is funnier
+than Maths» пары в выгрузке не было. Задание и без картинок решается, это
+косметика.
+
+```
+A two-panel strip in one horizontal row, two equal panels separated by a thin light-grey gutter, each panel a complete standalone comparison picture on pure white, two objects side by side, same viewpoint, nothing crossing between panels:
+1) a television whose screen shows a simple colourful cartoon landscape - a smiling sun, a rainbow and green hills, no characters - with a bowl of popcorn in front of it, next to a closed hardback book with a ribbon bookmark; 2) a football with a skipping rope and a whistle, next to a calculator with a ruler, a compass and a few small floating geometric shapes.
+No people at all - no humans, no hands, no faces anywhere.
+Bright 3D-rendered cartoon style, Pixar-like, soft rounded glossy shapes, vivid saturated colours, soft even light from the top-left. Absolutely no text, no letters, no numbers, no labels, no brand marks anywhere.
+Output size: 2048 x 1024 px.
+```
+Регистр тот же, что у Л6.3 и Л6.4 — карточки встанут в один ряд с готовыми
+парами. Ячейки → `pair_cartoons_books`, `pair_pe_maths`.
+
 ## Что меняется в заданиях, когда листы придут
 
 | Урок · блок | Сейчас | Станет |
