@@ -3958,6 +3958,7 @@ LESSONS = {
             }),
 
             ("order", {
+                "image": img("u6", "pair_cartoons_books"),
                 "words": ["Cartoons", "are", "funnier", "than", "books."],
                 "sentence": "Cartoons are funnier than books.",
                 "audio_tts": "Cartoons are funnier than books.",
@@ -3988,6 +3989,7 @@ LESSONS = {
 
             ("quiz", {"title": "Выбери правильный вариант ответа", "questions": [
                 {"q": "PE is ___ than Maths.", "type": "single",
+                 "image": img("u6", "pair_pe_maths"),
                  "options": [{"text": "funnier"}, {"text": "more funny"},
                              {"text": "funnyer"}],
                  "correct": [0]},

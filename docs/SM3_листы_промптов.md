@@ -1164,12 +1164,12 @@ Output size: 2048 x 1024 px.
 Регистр тот же, что у Л7.5, зверь другой: пациент — медвежонок, персонал —
 слон и зайчик, их не спутать. Ячейки → `med_doctor`, `med_nurse`.
 
-### Л6.13 · Мультики и книги, физкультура и математика — 2 карточки (2×1) · ПО ЖЕЛАНИЮ
+### Л6.13 · Мультики и книги, физкультура и математика — 2 карточки (2×1)
 
 Единственное место в курсе, где у соседних блоков картинки есть, а у двух
 нет: в Unit 6 Homework 2 к «Cartoons are funnier than books» и «PE is funnier
-than Maths» пары в выгрузке не было. Задание и без картинок решается, это
-косметика.
+than Maths» пары в выгрузке не было. **Сделано 15.10.2026**, карточки стоят
+в блоках 8 и 12.
 
 ```
 A two-panel strip in one horizontal row, two equal panels separated by a thin light-grey gutter, each panel a complete standalone comparison picture on pure white, two objects side by side, same viewpoint, nothing crossing between panels:

@@ -196,6 +196,7 @@ SHEETS = [
     ("111.webp", "Л7.5",  "u7", 2, 3, ["ill_earache", "ill_toothache", "ill_headache",
                                        "ill_stomachache", "ill_cold", "ill_cough"]),
     ("112.webp", "Л7.6",  "u7", 1, 2, ["med_doctor", "med_nurse"]),
+    ("113.webp", "Л6.13", "u6", 1, 2, ["pair_cartoons_books", "pair_pe_maths"]),
 ]
 
 # Листы, у которых ячейка — картинка во весь кадр, а не предмет на белом.
