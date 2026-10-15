@@ -4136,6 +4136,12 @@ document.addEventListener('click', e=>{ const d=$('bellDrop'); if(d && !d.classL
 function tabLink(e, name){
   if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button===1) return true;
   e.preventDefault();
+  // «Библиотека» в меню — всегда к началу: к папкам курсов, а не к открытому уроку
+  if(name==='library' && EDIT && EDIT.lessonId){
+    if(EDIT.savedJson != null && edSnapshot() !== EDIT.savedJson && !confirm('В уроке есть несохранённые правки. Уйти без сохранения?')) return false;
+    libGo('courses');
+  }
+  if(name==='library'){ LIBL.q=''; if(LIB.level!=='courses') libGo('courses'); }
   switchTab(name);
   try{ history.replaceState(null,'',location.pathname+'?tab='+name); }catch(_){}
   return false;
