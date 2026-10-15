@@ -235,7 +235,7 @@ function needManual(){ return HW.filter(t=>(t.oral||t.text) && S.sc[t.id]==null)
 /* ── панель макета ── */
 function grp(label,key,items){ return `<div class="grp"><span>${label}</span>${items.map(([v,t])=>`<button class="${S[key]===v?'on':''}" onclick="set('${key}','${v}')">${t}</button>`).join('')}</div>`; }
 function panel(){
-  let h = grp('Экран','scr',[['queue','Проверка — список'],['review','Проверка домашки'],['student','Карточка ученика'],['assign','Задать материал'],['library','Библиотека'],['preview','Просмотр урока учителем'],['method','Методист']]);
+  let h = grp('Экран','scr',[['queue','Проверка — список'],['review','Проверка домашки'],['student','Карточка ученика'],['assign','Задать материал'],['library','Библиотека'],['preview','Просмотр урока учителем'],['method','Контроль качества']]);
   if(S.scr==='review'||S.scr==='queue') h += grp('Устройство','dev',[['pc','компьютер'],['phone','телефон']]);
   h += grp('Кто вошёл','role',[['teacher','учитель'],['editor','методист']]);
   h += `<div class="note">${NOTE[S.scr]||''} · Колокольчик сверху справа нажимается.</div>`;
@@ -260,7 +260,7 @@ function set(k,v){
 
 /* ── оболочка ── */
 function side(){
-  const tabs=[['students','Мои ученики'],['assign','Задать материал'],['queue','Проверка',QUEUE.length],['lessons','Уроки'],['library','Библиотека']].concat(S.role==='editor'?[['method','Методист',3]]:[]);
+  const tabs=[['students','Мои ученики'],['assign','Задать материал'],['queue','Проверка',QUEUE.length],['lessons','Уроки'],['library','Библиотека']].concat(S.role==='editor'?[['method','Контроль качества',3]]:[]);
   const cur = S.scr==='review'?'queue':S.scr==='student'?'students':S.scr==='preview'?'library':S.scr;
   document.getElementById('side').innerHTML = `<div class="logo">Classroom</div>` + tabs.map(([k,t,n])=>
     `<div class="tab ${cur===k?'on':''}" onclick="${['students','lessons'].includes(k)?(k==='students'?"set('scr','student')":''):`set('scr','${k}')`}">${t}${n?`<span class="cnt">${n}</span>`:''}</div>`).join('')
@@ -535,7 +535,7 @@ function pgPreview(){
     ${PV.map(t=>`<div class="card task" style="max-width:820px"><div class="thd"><b>${t.title}</b><span class="pill n">${t.type}</span>${flagBtn(t)}</div>${flagBox(t)}
       ${t.rows.map(([q,img],i)=>`<div class="item">${img?`<img class="img" src="${IMG[img]}">`:''}<div class="q">${q?`<div class="${img?'muted small':''}">${q}</div>`:''}
         ${t.ans[i]&&!S.hideAns?`<div class="ans" style="color:var(--ok)">✓ ${t.ans[i]}</div>`:''}</div></div>`).join('')}</div>`).join('')}
-    <p class="muted small">⚑ у задания — «здесь ошибка». Сообщения уходят методисту во вкладку «Методист».</p></div>`;
+    <p class="muted small">⚑ у задания — «здесь ошибка». Сообщения уходят методисту во вкладку «Контроль качества».</p></div>`;
 }
 
 /* ── 7. методист ── */
@@ -571,7 +571,7 @@ function pgMethod(){
 function render(){
   document.body.classList.toggle('phone', S.dev==='phone' && (S.scr==='review'||S.scr==='queue'));
   panel(); side();
-  const T={queue:'Проверка',review:'Проверка домашки',student:'Карточка ученика',assign:'Задать материал',library:'Библиотека',preview:'Просмотр урока',method:'Методист'};
+  const T={queue:'Проверка',review:'Проверка домашки',student:'Карточка ученика',assign:'Задать материал',library:'Библиотека',preview:'Просмотр урока',method:'Контроль качества'};
   document.getElementById('top').innerHTML = topBar(T[S.scr]);
   const P={queue:pgQueue,review:pgReview,student:pgStudent,assign:pgAssign,library:pgLibrary,preview:pgPreview,method:pgMethod};
   document.getElementById('page').innerHTML = P[S.scr]();
