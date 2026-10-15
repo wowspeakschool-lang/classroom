@@ -15,3 +15,8 @@
 - ДЗ 78 б7 rubber_band — пары rubber band в блоке нет.
 - ДЗ 51 б9 robot_shapes — образец «A pink circle, an orange triangle, a green square.» не совпадёт с цветами нового робота.
 - ДЗ 65 б3 mountain — осталась старая гора с двумя вершинами.
+
+Дополнительно по решению Анны:
+- ДЗ 8 б6 «three fish»: d59ea0103d4a → fish_yellow_3
+- ДЗ 65 б3, вариант mountain во всех 4 вопросах: 1cdb10b2b2c3 → mountain
+- Картинка белых кроссовок для ДЗ 42 б6 не нужна.
