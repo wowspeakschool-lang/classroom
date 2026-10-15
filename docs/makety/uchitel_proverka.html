@@ -307,7 +307,7 @@ function taskHtml(t){
       ${S.sc[t.id]==null?'<span class="pill y">нужно оценить</span>':''}<span class="muted small">впишите любое число и нажмите Enter</span></div>` : '';
   const again = QUEUE[S.qi] && QUEUE[S.qi].att>1 && t.prev ? `<div class="cshow" style="margin:0 0 8px;background:#F4F2FF"><b style="color:var(--brand-d)">Переделано · в прошлый раз ${t.prev.sc}%</b>${t.prev.ans}<div class="muted small">ваш комментарий: ${t.prev.cm}</div></div>` : '';
   return `<div class="card task ${ret?'ret':''}" id="${t.id}"><div class="thd">
-      ${S.retake && !t.noscore ? `<input type="checkbox" class="rtcheck" ${ret?'checked':''} onchange="retTask('${t.id}',this.checked)" title="Переделать всё задание">`:''}
+      ${S.retake ? `<input type="checkbox" class="rtcheck" ${ret?'checked':''} onchange="retTask('${t.id}',this.checked)" title="Переделать всё задание">`:''}
       <span class="muted small">${t.no}</span><b>${t.title}</b><span class="pill n">${t.type}</span>
       ${sc!=null?`<span class="pill ${sc>=90?'g':sc>=50?'y':'r'}">${sc}%</span>`:''}${again?'<span class="pill b">переделано</span>':''}${cmBtn(t.id)}</div>${again}${cmBox(t.id)}${body}${manual}</div>`;
 }
