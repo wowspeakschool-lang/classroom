@@ -716,6 +716,19 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
 @media (prefers-reduced-motion:reduce){ #kp *{ animation:none !important; transition:none !important; } }
 
   /* ── Проверка домашки (rv) ── */
+  .asg-grid{ display:grid; grid-template-columns:1fr 1.3fr .9fr; gap:12px; align-items:start; }
+  .asg-col{ overflow:hidden; }
+  .asg-h{ padding:12px 14px; border-bottom:1px solid var(--line); display:flex; flex-direction:column; gap:6px; }
+  .asg-list{ max-height:440px; overflow:auto; }
+  .asg-row{ display:flex; align-items:center; gap:10px; padding:8px 14px; border-bottom:1px solid var(--line); font-size:14px; cursor:pointer; }
+  .asg-row:hover{ background:#FBFAFD; }
+  .asg-row input{ width:17px; height:17px; accent-color:var(--course); flex:0 0 auto; }
+  @media (max-width:1000px){ .asg-grid{ grid-template-columns:1fr; } }
+  .stu-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:14px; }
+  .stu-stats .card{ padding:12px 14px; }
+  .stu-stats b{ display:block; font-size:21px; }
+  .stu-stats span{ font-size:12.5px; color:var(--mut); }
+  @media (max-width:900px){ .stu-stats{ grid-template-columns:repeat(2,1fr); } }
   .rv-grid{ display:grid; grid-template-columns:210px 1fr; gap:16px; align-items:start; }
   .rv-toc{ position:sticky; top:14px; padding:8px; }
   .rv-toc a{ display:flex; gap:8px; align-items:center; padding:6px 9px; border-radius:9px; font-size:13.5px; color:var(--ink); text-decoration:none; }
@@ -830,30 +843,33 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
     <!-- ЗАДАТЬ ДЗ -->
     <section id="tab-assign" class="hidden">
       <h2 class="section-title">Задать материал</h2>
-      <p class="section-sub">Домашнее задание, тест или план урока: выбери из библиотеки, отметь учеников, поставь дедлайн.</p>
-      <div class="card" style="padding:18px">
-        <div class="row">
-          <div class="grow field"><label>Курс</label><select id="asgCourse" onchange="onCourseChange()"><option value="">— выбери курс —</option></select></div>
-          <div class="grow field"><label>Материал</label><select id="asgLesson"><option value="">—</option></select></div>
+      <p class="section-sub">Кому → что → до какого числа. Уже заданное повторно не задаётся — у ученика останутся его ответы.</p>
+      <div class="asg-grid">
+        <div class="card asg-col">
+          <div class="asg-h"><b>1. Кому</b>
+            <input id="asgSearch" placeholder="Поиск по имени или родителю" oninput="asgRenderStudents()">
+            <div class="row" style="gap:8px;align-items:center;margin-top:6px"><button class="btn sec sm" onclick="asgSelectAll(true)">Выбрать видимых</button>
+              <button class="btn sec sm" onclick="asgSelectAll(false)">Снять</button><span id="asgCount" class="muted" style="font-size:12.5px"></span></div></div>
+          <div id="asgStudents" class="asg-list"></div>
         </div>
-        <div style="margin:-4px 0 10px"><button class="btn sec sm" type="button" onclick="openPreview($('asgLesson').value)">👁 Предпросмотр выбранного</button></div>
-        <div class="row">
-          <div class="grow field"><label>Дедлайн (необязательно)</label><input id="asgDeadline" type="datetime-local" /></div>
-          <div class="grow field"><label>Порог зачёта, % (необязательно)</label><input id="asgThreshold" type="number" min="0" max="100" placeholder="напр. 60" /></div>
+        <div class="card asg-col">
+          <div class="asg-h"><b>2. Что</b>
+            <div class="row" style="gap:8px"><select id="asgCourse" onchange="onCourseChange()"></select><select id="asgUnit" onchange="asgRenderLessons()"></select></div>
+            <div class="rv-seg" style="margin-top:8px"><button id="asgKindHw" class="on" onclick="asgSetKind('hw')">Домашки и тесты</button><button id="asgKindPlan" onclick="asgSetKind('plan')">Планы уроков</button></div></div>
+          <div id="asgLessons" class="asg-list"></div>
         </div>
-        <div class="field">
-          <label>Кому назначить</label>
-          <div class="row" style="margin-bottom:8px; align-items:center; gap:8px; flex-wrap:wrap">
-            <input id="asgSearch" class="grow" placeholder="Поиск по имени или родителю" oninput="asgRenderStudents()" style="min-width:200px">
-            <button class="btn sec sm" onclick="asgSelectAll(true)">Выбрать всех</button>
-            <button class="btn sec sm" onclick="asgSelectAll(false)">Снять</button>
-            <span id="asgCount" class="muted" style="font-size:13px"></span>
-          </div>
-          <div id="asgStudents" style="max-height:260px; overflow:auto"></div>
+        <div class="card asg-col" style="padding:12px 14px">
+          <b>3. Срок сдачи</b>
+          <div id="asgChips" class="row" style="gap:6px;margin:8px 0"></div>
+          <input id="asgDeadline" type="date" onchange="asgSetDay(this.value)" style="max-width:180px">
+          <div id="asgDueInfo" style="margin-top:8px"></div>
+          <div class="muted" style="font-size:12.5px;margin-top:8px">Без срока задать нельзя — день выбирается каждый раз. Срок — до 23:59 этого дня.</div>
         </div>
-        <button class="btn" id="asgBtn" onclick="doAssign()">Назначить ДЗ</button>
-        <div class="err" id="asgErr"></div>
       </div>
+      <div class="card" style="margin-top:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span id="asgSummary"></span><span style="flex:1"></span>
+        <button class="btn" id="asgBtn" onclick="doAssign()">Задать</button></div>
+      <div class="err" id="asgErr"></div>
     </section>
 
     <!-- ПРОВЕРКА -->
@@ -1110,17 +1126,20 @@ async function loadStudents(){
 }
 
 async function loadLibrary(){
-  const { data:courses } = await sb.from('classroom_courses').select('id, title, subject, level, is_published').order('sort_order');
+  const { data:courses } = await sb.from('classroom_courses').select('id, slug, title, subject, level, is_published').order('sort_order');
   const list = (courses||[]);
   // уроки по курсам (через юниты)
   for(const c of list){
     const { data:units } = await sb.from('classroom_units').select('id, title, sort_order').eq('course_id', c.id).order('sort_order');
-    let lessons=[];
+    let lessons=[]; c.units=[];
     for(const un of (units||[])){
+      const unit={ id:un.id, title:un.title, no:un.sort_order, lessons:[] }; c.units.push(unit);
       const { data:ls } = await sb.from('classroom_lessons').select('id, title, sort_order, is_published, kind').eq('unit_id', un.id).order('sort_order');
       (ls||[]).forEach(l=>{
         KIND_BY_LESSON[l.id] = l.kind || 'homework';
-        lessons.push({ id:l.id, title:`${un.title} · ${l.title}`, is_published:l.is_published, kind:l.kind });
+        const it={ id:l.id, title:`${un.title} · ${l.title}`, is_published:l.is_published, kind:l.kind,
+                   name:l.title, unit_id:un.id, unit_title:un.title, unit_no:un.sort_order, code:hwCode(c.slug, un.sort_order, l.title) };
+        lessons.push(it); unit.lessons.push(it);
       });
     }
     c.lessons = lessons;
@@ -1213,9 +1232,76 @@ function stLessonStatus(l){
 function fmtDateInput(iso){ if(!iso) return ''; try{ return new Date(iso).toISOString().slice(0,10); }catch(e){ return ''; } }
 
 var STU_KIND = 'homework';   // какой тип материалов показан на карточке
+var STU_VIEW = 'given';      // given — заданное ученику; all — все материалы курса с бегунком доступа
+function stuViewSeg(){
+  return `<div class="row" style="margin-bottom:12px;gap:10px;align-items:center;flex-wrap:wrap"><div class="rv-seg">
+      <button class="${STU_VIEW==='given'?'on':''}" onclick="STU_VIEW='given'; renderStudentLessons()">Задано</button>
+      <button class="${STU_VIEW==='all'?'on':''}" onclick="STU_VIEW='all'; renderStudentLessons()">Все материалы курса</button></div>
+      <span style="flex:1"></span><button class="btn sm" onclick="asgFor('${CUR_STU.id}')">Задать материал</button></div>`;
+}
+function renderStudentLessons(){ if(STU_VIEW==='all') return renderStudentLessonsAll(); return renderStudentGiven(); }
+function stuCode(l){ return hwCode(l.course_slug || (LIBRARY.find(c=>c.id===CUR_STU.courseId)||{}).slug, l.unit_no, l.title); }
+// Огоньки: сданные домашки от последней к первой, пока ПЕРВАЯ сдача не позже срока
+function stuStreak(ls){
+  const sub=ls.filter(l=>l.first_submitted_at).sort((a,b)=>new Date(b.first_submitted_at)-new Date(a.first_submitted_at));
+  let n=0; for(const l of sub){ if(l.deadline_at && new Date(l.first_submitted_at)>new Date(l.deadline_at)) break; n++; } return n;
+}
+function stuDay(iso){ const d=new Date(iso); return d.toLocaleDateString('ru-RU',{day:'numeric',month:'short'}); }
+function stuGivenStatus(l){
+  if(l.review_pending) return '<span class="pill y">ждёт проверки</span>';
+  if(l.retake) return `<span class="pill r">на переделке${l.retake_n?` · ${l.retake_n} ${plural(l.retake_n,'задание','задания','заданий')}`:''}</span>`;
+  if(l.completed) return `<span class="pill g">проверена${l.score!=null?' · '+l.score+'%':''}</span>`;
+  if(l.hw_status==='in_progress'){ const p=l.progress||{}; return `<span class="pill" style="background:var(--course-soft);color:var(--course-d)">в работе${p.submittable?` · ${p.submitted||0} из ${p.submittable}`:''}</span>`; }
+  if(l.status==='paused') return '<span class="pill n">на паузе</span>';
+  if(l.active) return '<span class="pill n">задана, не начата</span>';
+  return '<span class="muted" style="font-size:13px">не задана</span>';
+}
+function renderStudentGiven(){
+  const all=(CUR_STU.lessons||[]);
+  const kindOf=l=>l.kind||KIND_BY_LESSON[l.lesson_id]||'homework';
+  const hw=all.filter(l=>kindOf(l)!=='lesson');
+  const given=hw.filter(l=>l.assigned || l.hw_status).slice().reverse();   // новые сверху
+  const now=new Date();
+  const month=hw.filter(l=>l.completed && l.score!=null && l.reviewed_at && (now-new Date(l.reviewed_at))<30*864e5);
+  const avg=month.length?Math.round(month.reduce((s,l)=>s+l.score,0)/month.length):null;
+  const assignedN=hw.filter(l=>l.assigned).length, doneN=hw.filter(l=>l.first_submitted_at).length;
+  const waitN=hw.filter(l=>l.review_pending).length, streak=stuStreak(hw);
+  const rows=given.map(l=>{
+    const dl = l.retake ? l.retake_deadline_at : l.deadline_at;
+    const late = dl && !l.submitted && !l.completed && new Date(dl)<now;
+    const soon = dl && !late && !l.submitted && !l.completed && (new Date(dl)-now)<2*864e5;
+    const onTime = l.first_submitted_at && (!l.deadline_at || new Date(l.first_submitted_at)<=new Date(l.deadline_at));
+    let act='';
+    if(l.review_pending) act=`<button class="btn sm" onclick="stuReview('${l.lesson_id}')">Проверить</button>`;
+    else if(!l.assigned) act=`<button class="btn sec sm" onclick="asgFor('${CUR_STU.id}','${l.lesson_id}')">Задать</button>`;
+    const dateEd = l.active && !l.retake && !l.submitted && !l.completed
+      ? `<input type="date" value="${fmtDateInput(l.deadline_at)}" title="${late?'Продлить срок':'Изменить срок'}" onchange="setLessonDeadline('${l.lesson_id}', this.value)" style="width:142px;padding:5px 8px">`
+      : (dl?`${l.retake?'до ':''}${stuDay(dl)}${l.retake&&l.deadline_at?`<div class="muted" style="font-size:12px">первый срок ${stuDay(l.deadline_at)}</div>`:''}`:'—');
+    return `<tr><td><b style="cursor:pointer;color:var(--course-d)" onclick="openPreview('${l.lesson_id}')">${esc(stuCode(l))}</b>${l.attempt>1?` <span class="muted" style="font-size:12px">· попытка ${l.attempt}</span>`:''}</td>
+      <td>${stuGivenStatus(l)}</td><td>${dateEd}</td>
+      <td>${late?'<span class="pill r">просрочено</span>':soon?'<span class="pill y">скоро срок</span>':onTime?'<span class="pill g">вовремя</span>':''}</td>
+      <td style="text-align:right">${act}</td></tr>`;
+  }).join('');
+  $('stuBody').innerHTML = `${stuViewSeg()}
+    <div class="stu-stats">
+      <div class="card"><b>🔥 ${streak}</b><span>${plural(streak,'домашка','домашки','домашек')} подряд без опозданий</span></div>
+      <div class="card"><b>${avg==null?'—':avg+'%'}</b><span>средняя оценка за месяц</span></div>
+      <div class="card"><b>${doneN} из ${assignedN}</b><span>заданных сдано</span></div>
+      <div class="card"><b>${waitN}</b><span>ждёт проверки</span></div></div>
+    ${given.length?`<table><thead><tr><th>Материал</th><th>Статус</th><th>Срок</th><th></th><th></th></tr></thead><tbody>${rows}</tbody></table>`
+      :'<div class="empty">Ученику ещё ничего не задано. Нажмите «Задать материал».</div>'}
+    <p class="muted" style="font-size:13px;margin-top:8px">Новые сверху. «Сдано» считает и сданное с опозданием. Срок можно изменить в строке, пока работа не сдана.</p>`;
+}
+async function stuReview(lessonId){
+  if(!CUR_STU.enrollmentId){ toast('Нет записи ученика на курс'); return; }
+  const l=(CUR_STU.lessons||[]).find(x=>x.lesson_id===lessonId)||{}, sid=CUR_STU.id, enr=CUR_STU.enrollmentId;
+  location.hash=''; switchTab('review'); await loadPending();
+  rvOpen(enr, lessonId, { student_id:sid, course_slug:l.course_slug, unit_no:l.unit_no, lesson_title:l.title, attempt:l.attempt||1,
+    late: !!(l.deadline_at && l.submitted_at && new Date(l.submitted_at)>new Date(l.deadline_at)) });
+}
 function stuSetKind(k){ STU_KIND = k; renderStudentLessons(); }
 
-function renderStudentLessons(){
+function renderStudentLessonsAll(){
   const all = CUR_STU.lessons||[];
   const kindOf = l => KIND_BY_LESSON[l.lesson_id] || 'homework';
   const counts = { homework:0, lesson:0, test:0 };
@@ -1242,7 +1328,7 @@ function renderStudentLessons(){
           onchange="toggleLesson('${l.lesson_id}', this.checked)"><span class="slider"></span></label>
       </td>
     </tr>`).join('');
-  $('stuBody').innerHTML = `
+  $('stuBody').innerHTML = `${stuViewSeg()}
     <div class="row" style="margin-bottom:10px; gap:8px; flex-wrap:wrap">${tabs}</div>
     <div class="row" style="margin-bottom:12px; align-items:center">
       <div class="card" style="padding:10px 14px"><div class="muted" style="font-size:12px">Активных</div><b style="font-size:18px" id="stActiveN">${activeN}</b></div>
@@ -3403,74 +3489,126 @@ async function kpPreviewOpen(lessonId, mode){
 // ============================================================
 //  РЕНДЕР: ЗАДАТЬ ДЗ
 // ============================================================
-function fillCourses(){
-  const sel=$('asgCourse');
-  sel.innerHTML = '<option value="">— выбери курс —</option>' + LIBRARY.map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');
-  onCourseChange();
-  asgRenderStudents();
-}
-
 // Отмеченных держим отдельно: при поиске список перерисовывается,
 // и галочки иначе слетали бы вместе с отфильтрованными строками.
 var ASG_PICKED = new Set();
+var ASG = { kind:'hw', les:new Set(), day:null, given:{} };   // given: { lesson_id: Set(student_id) } — уже задано
 
+function fillCourses(){
+  const sel=$('asgCourse'), cur=sel.value;
+  sel.innerHTML = LIBRARY.map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');
+  if(cur && LIBRARY.some(c=>c.id===cur)) sel.value=cur;
+  onCourseChange(true);
+  asgRenderStudents(); asgRenderDue();
+}
+// Из карточки ученика: открыть «Задать материал» с отмеченным учеником (и уроком)
+function asgFor(studentId, lessonId){
+  location.hash=''; switchTab('assign');
+  ASG_PICKED.clear(); if(studentId) ASG_PICKED.add(studentId);
+  if(lessonId){
+    const c=LIBRARY.find(c=>(c.lessons||[]).some(l=>l.id===lessonId));
+    if(c){ $('asgCourse').value=c.id; onCourseChange(true); const l=c.lessons.find(x=>x.id===lessonId);
+      $('asgUnit').value=l.unit_id; ASG.kind = l.kind==='lesson'?'plan':'hw'; ASG.les=new Set([lessonId]); asgRenderLessons(); }
+  }
+  asgRenderStudents();
+}
 function asgRenderStudents(){
   const host=$('asgStudents'); if(!host) return;
   const term=(($('asgSearch')&&$('asgSearch').value)||'').toLowerCase().trim();
   const list = !term ? STUDENTS : STUDENTS.filter(s=>
     (s.name||'').toLowerCase().includes(term) || (s.parent_text||'').toLowerCase().includes(term));
   host.innerHTML = list.length
-    ? list.map(s=>`<label class="chk"><input type="checkbox" class="asgStu" value="${s.id}"
+    ? list.map(s=>`<label class="asg-row"><input type="checkbox" class="asgStu" value="${s.id}"
         ${ASG_PICKED.has(s.id)?'checked':''} onchange="asgPick('${s.id}',this.checked)">
-        <span>${esc(s.name)} <span class="muted">· ${esc(s.level||'')}</span></span></label>`).join('')
-    : '<div class="muted">Никого не найдено.</div>';
+        <span class="grow">${esc(s.name)}</span><span class="muted" style="font-size:12px">${esc(s.level||'')}</span></label>`).join('')
+    : '<div class="muted" style="padding:12px">Никого не найдено.</div>';
   const c=$('asgCount');
-  if(c) c.textContent = `Найдено ${list.length} из ${STUDENTS.length} · отмечено ${ASG_PICKED.size}`;
+  if(c) c.textContent = `отмечено ${ASG_PICKED.size}`;
+  asgRenderLessons(true); asgSummary();
 }
 function asgPick(id,on){ if(on) ASG_PICKED.add(id); else ASG_PICKED.delete(id); asgRenderStudents(); }
-function onCourseChange(){
-  const cid=$('asgCourse').value;
-  const c=LIBRARY.find(x=>x.id===cid);
-  // Ограничения по типу нет: назначить можно и план урока, и ДЗ, и тест
-  const kindLabel = { lesson:'план урока', homework:'ДЗ', test:'тест' };
-  const lessons = c? (c.lessons||[]).filter(l=>l.is_published) : [];
-  $('asgLesson').innerHTML = lessons.length
-    ? lessons.map(l=>`<option value="${l.id}">${esc(l.title)}${l.kind?' · '+kindLabel[l.kind]||'':''}</option>`).join('')
-    : '<option value="">— нет опубликованных материалов —</option>';
-}
-// «Выбрать всех» относится к тому, что сейчас видно в списке,
-// иначе при поиске кнопка отмечала бы и скрытых.
 function asgSelectAll(on){
-  document.querySelectorAll('.asgStu').forEach(c=>{
-    if(on) ASG_PICKED.add(c.value); else ASG_PICKED.delete(c.value);
-  });
+  document.querySelectorAll('.asgStu').forEach(c=>{ if(on) ASG_PICKED.add(c.value); else ASG_PICKED.delete(c.value); });
   asgRenderStudents();
+}
+function asgCourse(){ return LIBRARY.find(x=>x.id===$('asgCourse').value); }
+function onCourseChange(keep){
+  const c=asgCourse(); const us=(c&&c.units)||[];
+  $('asgUnit').innerHTML = us.map(u=>`<option value="${u.id}">${esc(u.title)}</option>`).join('') || '<option value="">— нет юнитов —</option>';
+  if(!keep) ASG.les=new Set();
+  asgRenderLessons();
+}
+function asgSetKind(k){ ASG.kind=k; ASG.les=new Set(); $('asgKindHw').classList.toggle('on',k==='hw'); $('asgKindPlan').classList.toggle('on',k==='plan'); asgRenderLessons(); }
+function asgUnitLessons(){
+  const c=asgCourse(); if(!c) return [];
+  const u=(c.units||[]).find(x=>x.id===$('asgUnit').value); if(!u) return [];
+  return u.lessons.filter(l=>l.is_published && ((ASG.kind==='plan')===(l.kind==='lesson')));
+}
+// Кому из отмеченных урок уже задан — читаем назначения юнита
+async function asgLoadGiven(ids){
+  ASG.given={};
+  if(!ids.length) return;
+  try{
+    const { data } = await sb.from('classroom_assignments').select('lesson_id, target_id, status')
+      .in('lesson_id', ids).eq('target_type','student').eq('status','active');
+    (data||[]).forEach(r=>{ (ASG.given[r.lesson_id]=ASG.given[r.lesson_id]||new Set()).add(r.target_id); });
+  }catch(e){ console.warn('given', e); }
+}
+async function asgRenderLessons(noLoad){
+  const host=$('asgLessons'); if(!host) return;
+  const ls=asgUnitLessons();
+  $('asgKindHw').classList.toggle('on',ASG.kind==='hw'); $('asgKindPlan').classList.toggle('on',ASG.kind==='plan');
+  if(!noLoad){ host.innerHTML='<div class="loading">Загружаю…</div>'; await asgLoadGiven(ls.map(l=>l.id)); }
+  const picked=[...ASG_PICKED];
+  const allOn = ls.length && ls.every(l=>ASG.les.has(l.id));
+  host.innerHTML = ls.length ? `<label class="asg-row" style="background:#FAF9FC"><input type="checkbox" ${allOn?'checked':''} onchange="asgAll(this.checked)"><b class="grow">Весь юнит</b></label>`
+    + ls.map(l=>{ const g=ASG.given[l.id]||new Set(), who=picked.filter(p=>g.has(p));
+      return `<label class="asg-row"><input type="checkbox" ${ASG.les.has(l.id)?'checked':''} onchange="asgLes('${l.id}',this.checked)">
+        <span class="grow"><b>${esc(l.code)}</b>${who.length?`<div style="font-size:12px;color:var(--warn)">уже задано: ${who.map(w=>esc(studentName(w))).join(', ')}</div>`:''}</span>
+        ${g.size?`<span class="muted" style="font-size:12px">задано ${g.size}</span>`:''}
+        <span title="Глазами ученика" style="cursor:pointer" onclick="event.preventDefault(); openPreview('${l.id}')">👁</span></label>`; }).join('')
+    : '<div class="muted" style="padding:12px">В юните нет опубликованных материалов этого вида.</div>';
+  asgSummary();
+}
+function asgAll(on){ asgUnitLessons().forEach(l=>{ if(on) ASG.les.add(l.id); else ASG.les.delete(l.id); }); asgRenderLessons(true); }
+function asgLes(id,on){ if(on) ASG.les.add(id); else ASG.les.delete(id); asgRenderLessons(true); }
+function asgYmd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function asgSetDay(v){ ASG.day=v||null; asgRenderDue(); }
+function asgRenderDue(){
+  const t=new Date();
+  $('asgChips').innerHTML=[[1,'Завтра'],[3,'Через 3 дня'],[7,'Через неделю']].map(([n,l])=>{ const v=asgYmd(new Date(t.getFullYear(),t.getMonth(),t.getDate()+n));
+    return `<button class="pill ${ASG.day===v?'g':'n'}" style="border:0;cursor:pointer" onclick="asgSetDay('${v}')">${l}</button>`; }).join('');
+  const inp=$('asgDeadline'); inp.min=asgYmd(t); inp.value=ASG.day||'';
+  $('asgDueInfo').innerHTML = ASG.day ? `<span class="pill g">до ${new Date(ASG.day+'T12:00').toLocaleDateString('ru-RU',{day:'numeric',month:'long'})}, 23:59</span>` : '<span class="pill y">выберите день</span>';
+  asgSummary();
+}
+function asgSummary(){
+  const el=$('asgSummary'); if(!el) return;
+  const n=ASG.les.size, m=ASG_PICKED.size;
+  el.innerHTML = `Задать <b>${n}</b> ${plural(n,'материал','материала','материалов')} · <b>${m}</b> ${plural(m,'ученику','ученикам','ученикам')}${ASG.day?` · до ${new Date(ASG.day+'T12:00').toLocaleDateString('ru-RU',{day:'numeric',month:'short'})}`:''}`;
+  const b=$('asgBtn'); if(b) b.disabled = !(n && m && ASG.day);
 }
 
 async function doAssign(){
   $('asgErr').textContent='';
-  const lessonId=$('asgLesson').value;
-  const chosen=[...ASG_PICKED];
-  const deadline = $('asgDeadline').value ? new Date($('asgDeadline').value).toISOString() : null;
-  const thrRaw = $('asgThreshold').value;
-  const threshold = thrRaw==='' ? null : Math.max(0,Math.min(100,parseInt(thrRaw,10)));
-  if(!lessonId){ $('asgErr').textContent='Выбери материал.'; return; }
+  const lessons=[...ASG.les], chosen=[...ASG_PICKED];
+  if(!lessons.length){ $('asgErr').textContent='Выбери материал.'; return; }
   if(!chosen.length){ $('asgErr').textContent='Отметь хотя бы одного ученика.'; return; }
+  if(!ASG.day){ $('asgErr').textContent='Выбери срок сдачи.'; return; }
+  const [y,m,d]=ASG.day.split('-').map(Number), deadline=new Date(y,m-1,d,23,59,0).toISOString();
   $('asgBtn').disabled=true;
   try{
-    let ok=0;
-    for(const sid of chosen){
-      await rpc('classroom_assign_lesson', {
-        p_lesson_id:lessonId, p_target_type:'student', p_target_id:sid,
-        p_student_ids:[sid], p_deadline:deadline, p_pass_threshold:threshold
-      });
+    let ok=0, skip=0;
+    for(const lid of lessons) for(const sid of chosen){
+      if((ASG.given[lid]||new Set()).has(sid)){ skip++; continue; }
+      await rpc('classroom_assign_lesson', { p_lesson_id:lid, p_target_type:'student', p_target_id:sid,
+        p_student_ids:[sid], p_deadline:deadline, p_pass_threshold:null });
       ok++;
     }
-    toast(`ДЗ назначено: ${ok} ${ok===1?'ученику':'ученикам'}`);
-    ASG_PICKED.clear(); asgRenderStudents();
-    await loadPending();
+    toast(`Задано: ${ok}${skip?` · уже было задано: ${skip}`:''}`);
+    ASG.les=new Set(); await asgRenderLessons(); await loadPending();
   }catch(e){ $('asgErr').textContent = e.message||String(e); }
-  finally{ $('asgBtn').disabled=false; }
+  finally{ asgSummary(); }
 }
 
 // ============================================================
@@ -3521,8 +3659,8 @@ function renderReview(){
 }
 function plural(n,a,b,c){ const m10=n%10, m100=n%100; return (m10===1&&m100!==11)?a:(m10>=2&&m10<=4&&(m100<12||m100>14))?b:c; }
 
-async function rvOpen(enr, lesson){
-  const row=PENDING.find(p=>p.enrollment_id===enr && p.lesson_id===lesson) || { enrollment_id:enr, lesson_id:lesson };
+async function rvOpen(enr, lesson, extra){
+  const row=PENDING.find(p=>p.enrollment_id===enr && p.lesson_id===lesson) || Object.assign({ enrollment_id:enr, lesson_id:lesson }, extra||{});
   RV={ row, grade:null, blocks:{}, order:[], no:{}, mode:null, sel:{b:{}, i:{}}, only:false, total:null, show:false, cmOpen:null, day:null, note:'' };
   $('reviewWrap').innerHTML='<div class="loading">Загружаю работу…</div>';
   try{
