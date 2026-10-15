@@ -774,6 +774,15 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
   #tab-assign .asg-cal-g .d.past{ color:#D3D2DC; font-weight:400; }
   .asg-sum{ margin-top:16px; padding:14px 18px !important; font-size:15px; }
   .asg-sum .btn{ padding:10px 26px; font-size:15px; border-radius:12px; }
+  /* вариант «крупный» — выбран Анной 15.10 */
+  #tab-assign{ font-size:15.5px; }
+  #tab-assign .asg-t{ font-size:18px; font-weight:700; }
+  #tab-assign .asg-t i{ width:30px; height:30px; font-size:15px; }
+  #tab-assign .asg-row{ padding:13px 20px; font-size:15.5px; }
+  #tab-assign .asg-row input{ width:20px; height:20px; }
+  #tab-assign .card{ border-radius:22px; border-color:transparent; box-shadow:0 10px 30px rgba(60,40,140,.07); }
+  #tab-assign .asg-row:has(input:checked){ background:#EFEBFF; }
+  #tab-assign .asg-cal-g .d{ height:40px; font-size:15px; }
   .stu-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:14px; }
   .stu-stats .card{ padding:12px 14px; }
   .stu-stats b{ display:block; font-size:21px; }
@@ -832,6 +841,7 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
   .bell-it.new{ background:#FBFAFF; }
   /* библиотека списком */
   .libl{ overflow:hidden; }
+  .libl-q{ flex:1 1 320px; max-width:440px; height:40px; border-radius:12px; font-size:14.5px; }
   .libl-a{ font-size:13.5px; color:var(--course-d); text-decoration:none; }
   .libl-a:hover{ text-decoration:underline; }
   .libl-c{ display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid var(--line); font-weight:700; cursor:pointer; }
@@ -4653,6 +4663,7 @@ function libRender(){
     // порядок меняем только когда виден весь список, иначе фильтр перемешает
     if(LIB.kind==='all' && !LIB.unpub) libDragInit('lesson', list.map(l=>l.id));
   }
+  f.insertAdjacentHTML('afterbegin', `<input class="libl-q" placeholder="🔍 Найти материал: SM2 Unit 1 Homework 2" oninput="libLSearch(this.value)">`);
   f.insertAdjacentHTML('beforeend', `<button class="tgl" onclick="libViewSet('list')" title="Список: свернуть, отфильтровать, опубликовать пачкой">☰ Списком</button>`);
   libFocusRename();   // поле переименования появляется после отрисовки
 }
@@ -4662,17 +4673,20 @@ function libRender(){
 // Методист отмечает галочками и публикует пачкой. Учитель видит только
 // опубликованное и открывает урок глазами ученика — с верными ответами.
 var LIBL = { pub:'all', q:'', open:new Set(), ukind:{}, sel:new Set(), groups:{} };
-function libIsList(){ return !ME || !ME.isEditor || LIB.view!=='tiles'; }
+function libIsList(){ return !ME || !ME.isEditor || LIB.view!=='tiles' || !!LIBL.q.trim(); }
 function libViewSet(v){ LIB.view=v; try{ localStorage.setItem('lib:view', v); }catch(e){} libRender(); }
 function libLVisible(l, kind){
   if((kind==='plans')!==((l.kind||'homework')==='lesson')) return false;
   if(!ME.isEditor && !l.is_published) return false;
   if(LIBL.pub==='pub' && !l.is_published) return false;
   if(LIBL.pub==='draft' && l.is_published) return false;
-  const q=LIBL.q.toLowerCase().trim();
-  if(q && !(String(l.code||'').toLowerCase().includes(q) || String(l.title||'').toLowerCase().includes(q))) return false;
+  const q=libNorm(LIBL.q);
+  if(q){ const tk=libNorm((l.code||'')+' '+(l.title||'')).split(' ');   // каждое слово — начало какого-то слова в названии
+    if(!q.split(' ').every(w=>tk.some(t=>t.startsWith(w)))) return false; }
   return true;
 }
+// «sm2 unit1 hw 2», «SM2 Unit 1 Homework 2», «homework 2» — находят одно и то же
+function libNorm(t){ return String(t||'').toLowerCase().replace(/\bhw\s*/g,'homework ').replace(/unit\s*/g,'unit').replace(/\s+/g,' ').trim(); }
 function libLOpen(k){ if(LIBL.open.has(k)) LIBL.open.delete(k); else LIBL.open.add(k); libRender(); }
 function libLAll(on){
   LIBL.open.clear();
@@ -4693,11 +4707,12 @@ function libListRender(){
   ld.textContent = ed ? 'Все курсы школы. Галочками можно опубликовать или снять с публикации сразу несколько материалов.'
                       : 'Опубликованные материалы. Откройте урок, чтобы увидеть его глазами ученика — с верными ответами.';
   const seg=(cur, items, fn)=>`<span class="rv-seg">${items.map(([k,tx])=>`<button class="${cur===k?'on':''}" onclick="${fn}('${k}')">${tx}</button>`).join('')}</span>`;
-  f.innerHTML = (ed?seg(LIBL.pub, [['all','Все'],['pub','Опубликованные'],['draft','Неопубликованные']], "libLPub") : '')
-    + `<input id="libLQ" placeholder="Поиск: SM2 Unit 1 Homework 2" value="${esc(LIBL.q)}" oninput="libLSearch(this.value)" style="max-width:240px">
+  f.innerHTML = `<input id="libLQ" class="libl-q" placeholder="🔍 Найти материал: SM2 Unit 1 Homework 2" value="${esc(LIBL.q)}" oninput="libLSearch(this.value)">
+       ${q?`<a href="#" class="libl-a" onclick="libLSearch('');return false">✕ очистить</a>`:''}
        <a href="#" class="libl-a" onclick="libLAll(true);return false">развернуть всё</a>
        <a href="#" class="libl-a" onclick="libLAll(false);return false">свернуть всё</a>
-       <span class="fsp"></span>${ed?`<button class="tgl" onclick="libViewSet('tiles')" title="Плитки: создать, переименовать, поменять порядок">▦ Плитки</button>`:''}`;
+       <span class="fsp"></span>${ed?seg(LIBL.pub, [['all','Все'],['pub','Опубликованные'],['draft','Неопубликованные']], "libLPub"):''}
+       ${ed&&LIB.view!=='tiles'?`<button class="tgl" onclick="libViewSet('tiles')" title="Плитки: создать, переименовать, поменять порядок">▦ Плитки</button>`:''}`;
 
   const box=(key, ids)=>ed ? `<input type="checkbox" class="libl-ck" ${ids.length&&ids.every(id=>LIBL.sel.has(id))?'checked':''} ${ids.length?'':'disabled'}
       onclick="event.stopPropagation()" onchange="libLSel('${key}', this.checked)">` : '';
@@ -4710,7 +4725,7 @@ function libListRender(){
       const ls=u.lessons||[], plans=ls.filter(l=>(l.kind||'homework')==='lesson'), hws=ls.filter(l=>(l.kind||'homework')!=='lesson');
       const kind=LIBL.ukind[u.id] || (!hws.length && plans.length ? 'plans' : 'hw');
       return { u, kind, plans:plans.filter(l=>ed||l.is_published).length, hws:hws.filter(l=>ed||l.is_published).length,
-               ls:ls.filter(l=>libLVisible(l, kind)), any:ls.some(l=>libLVisible(l,'plans')||libLVisible(l,'hw')),
+               ls:q ? ls.filter(l=>libLVisible(l,'plans')||libLVisible(l,'hw')) : ls.filter(l=>libLVisible(l, kind)),   // в поиске — оба вида any:ls.some(l=>libLVisible(l,'plans')||libLVisible(l,'hw')),
                drafts:ls.filter(l=>!l.is_published).length };
     }).filter(x=>(!q || x.any) && (ed || x.plans+x.hws));
     if(q && !units.length) return;
@@ -4727,7 +4742,7 @@ function libListRender(){
         <span class="muted small" style="font-weight:400">планов ${x.plans} · домашек и тестов ${x.hws}</span>
         <span style="margin-left:auto">${state(x.drafts)}</span></div>`;
       if(!uopen) return;
-      html += `<div class="libl-l libl-k"><span class="rv-seg">${[['plans','Планы уроков'],['hw','Домашки и тесты']].map(([k,tx])=>
+      if(!q) html += `<div class="libl-l libl-k"><span class="rv-seg">${[['plans','Планы уроков'],['hw','Домашки и тесты']].map(([k,tx])=>
         `<button class="${x.kind===k?'on':''}" onclick="libLKind('${x.u.id}','${k}')">${tx}</button>`).join('')}</span></div>`;
       html += x.ls.map(l=>{
         const open = ed ? `<a class="btn sec sm" href="?lesson=${l.id}" onclick="return libLink(event,'lesson',null,null,'${l.id}')">Редактировать</a>`
