@@ -260,11 +260,16 @@ end $$;
 -- ── 2. Помощники ───────────────────────────────────────────────────────────
 
 -- Блок, который ученик обязан сдать. Учительские блоки (audience='teacher') не в счёт.
+-- Видео и карточки тоже обязательны (решение Анны): без просмотра отправить нельзя.
+-- В оценку они не входят — у них нет автобалла. Видео без ссылки не требуем:
+-- его невозможно досмотреть (таких блоков сейчас 84, ссылки пришлёт методист).
 create or replace function public.classroom__block_counts(b public.classroom_blocks)
 returns boolean language sql stable as $$
-  select b.type in ('quiz','exact_input','match','task','embed','order','sort',
-                    'gaps','truefalse','speaking','sequence','hotspot')
-     and coalesce(b.audience, 'shared') in ('shared','student');
+  select coalesce(b.audience, 'shared') in ('shared','student')
+     and (b.type in ('quiz','exact_input','match','task','embed','order','sort',
+                     'gaps','truefalse','speaking','sequence','hotspot')
+          or (b.type = 'video' and coalesce(b.payload->>'url', '') <> '')
+          or (b.type = 'flashcards' and jsonb_array_length(coalesce(b.payload->'cards', '[]'::jsonb)) > 0));
 $$;
 
 -- Может ли текущий пользователь проверять эту работу (учитель ученика или методист).
@@ -376,8 +381,13 @@ begin
 
   elsif b.type = 'task' then
     return btrim(coalesce(v_a->>'text', '')) <> '' or btrim(coalesce(v_a->>'audio', '')) <> '';
-  end if;
 
+  elsif b.type = 'video' then
+    return coalesce((v_a->>'watched')::boolean, false);   -- досмотрел до конца
+  elsif b.type = 'flashcards' then
+    return coalesce(jsonb_array_length(case when jsonb_typeof(v_a->'seen') = 'array' then v_a->'seen' end), 0)
+         >= jsonb_array_length(coalesce(b.payload->'cards', '[]'::jsonb));   -- открыл каждую карточку
+  end if;
   return true;   -- embed: «пройдено по факту»
 end $$;
 
@@ -1096,6 +1106,51 @@ begin
 end $$;
 
 
+-- ── 14. Страница ученика: всё, что нужно для шапки и экранов ────────────────
+-- Курс, юнит, урок (для шифра «SM2 Unit 1 Homework 1»), срок сдачи, статус,
+-- серия «домашки подряд без опозданий». Серия: отправленные домашки этой записи
+-- от последней к первой, пока отправлены не позже срока (без срока — в срок).
+create or replace function public.classroom_run_meta(p_enrollment_id uuid, p_lesson_id uuid)
+returns jsonb language plpgsql stable security definer set search_path = public as $$
+declare
+  v_student uuid; v_out jsonb; v_streak int := 0; r record;
+begin
+  if not public.classroom__can_see_enrollment(p_enrollment_id) then
+    raise exception 'Нет доступа к этой работе';
+  end if;
+  select student_id into v_student from public.classroom_enrollments where id = p_enrollment_id;
+
+  for r in
+    select p.submitted_at, a.deadline_at
+      from public.classroom_progress p
+      left join public.classroom_assignments a
+        on a.lesson_id = p.lesson_id and a.target_type = 'student' and a.target_id = v_student
+     where p.enrollment_id = p_enrollment_id and p.submitted_at is not null
+     order by p.submitted_at desc
+  loop
+    exit when r.deadline_at is not null and r.submitted_at > r.deadline_at;
+    v_streak := v_streak + 1;
+  end loop;
+
+  select jsonb_build_object(
+           'course_title', c.title, 'course_slug', c.slug,
+           'unit_title', u.title, 'unit_no', u.sort_order,
+           'lesson_title', l.title, 'kind', l.kind,
+           'deadline_at', (select a.deadline_at from public.classroom_assignments a
+                            where a.lesson_id = l.id and a.target_type = 'student' and a.target_id = v_student
+                            order by a.assigned_at desc limit 1),
+           'status', coalesce((select p.status from public.classroom_progress p
+                                where p.enrollment_id = p_enrollment_id and p.lesson_id = l.id), 'new'),
+           'streak', v_streak)
+    into v_out
+    from public.classroom_lessons l
+    join public.classroom_units u on u.id = l.unit_id
+    join public.classroom_courses c on c.id = u.course_id
+   where l.id = p_lesson_id;
+  return v_out;
+end $$;
+
+
 -- ── ТЕСТ ──
 do $t$
 declare
@@ -1142,6 +1197,8 @@ begin
             cross join lateral jsonb_array_elements(g.v->'items') with ordinality it(x, iord)) z))
       when 'speaking' then '{"audio":"https://x/a.webm"}'::jsonb
       when 'task' then '{"text":"мой ответ"}'::jsonb
+      when 'video' then '{"watched":true}'::jsonb
+      when 'flashcards' then jsonb_build_object('seen', (select coalesce(jsonb_agg(i-1), '[]') from jsonb_array_elements(b.payload->'cards') with ordinality t(q,i)))
       else '{}'::jsonb end;
     r := public.classroom_submit_block(b.id, e, ans);
     if b.type = 'quiz' and v_q is null then v_q := b.id; end if;
@@ -1193,5 +1250,11 @@ begin
         from public.classroom_progress where enrollment_id = e and lesson_id = l));
   o := o || jsonb_build_object('notifs', (select jsonb_agg(kind || ': ' || title) from public.classroom_notifications where created_at > now() - interval '1 minute'));
   o := o || jsonb_build_object('comments_after_retake', jsonb_array_length(public.classroom_lesson_grade(e, l)->'comments'));
+  o := o || jsonb_build_object('run_meta', public.classroom_run_meta(e, l),
+     'run_blocks_n', jsonb_array_length(public.classroom_run_blocks(e, l)),
+     'video_unwatched_incomplete', (select not public.classroom__block_complete(x, '{"watched":false}'::jsonb)
+        from public.classroom_blocks x where x.type = 'video' limit 1),
+     'cards_partial_incomplete', (select not public.classroom__block_complete(x, '{"seen":[0]}'::jsonb)
+        from public.classroom_blocks x where x.type = 'flashcards' and jsonb_array_length(x.payload->'cards') > 1 limit 1));
   raise exception 'ТЕСТ %', o;
 end $t$;
