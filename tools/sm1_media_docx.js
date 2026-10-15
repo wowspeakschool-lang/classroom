@@ -1,13 +1,13 @@
 // Собирает docx «что скачать с ShkolaApp — аудио и видео» для Super Minds 1.
-// Форма — как у файла SM3: альбомный А4, по таблице на раздел, галочка,
+// Альбомный А4, одна таблица: галочка,
 // урок со ссылкой на него в ShkolaApp, тип, подсказка «по какому заданию
 // узнать» и имя файла для бакета classroom-media.
 //   node tools/sm1_media_docx.js [выход.docx]
 // Данные — tools/sm1_media.json:
-//   { "sections": [ { "title": "Unit 6 · My house", "note": "...",
-//       "rows": [ { "lesson": "ДЗ 2", "link": "https://shkola.app/...",
-//                   "kind": "видео" | "аудио", "what": "...", "hint": "...",
-//                   "name": "sm1_u6_hw2_b3" } ] } ] }
+//   { "rows": [ { "lesson": "Unit 6 · ДЗ 2", "link": "https://shkola.app/...",
+//                 "kind": "видео" | "аудио", "what": "...", "hint": "...",
+//                 "name": "sm1_u6_hw2_b3" } ] }
+// Одна таблица — методист просила без разделов и без лишнего (15.10.2026).
 const fs = require('fs');
 const path = require('path');
 const {
@@ -17,8 +17,7 @@ const {
 
 const DATA = JSON.parse(fs.readFileSync(path.join(__dirname, 'sm1_media.json'), 'utf8'));
 const COLS = [420, 520, 3000, 1000, 6460, 3000];   // сумма 14400
-const HEAD = ['✔', '№', 'Урок', 'Тип',
-              'Что это и по какому заданию узнать в ShkolaApp', 'Как назвать файл'];
+const HEAD = ['✔', '№', 'Урок', 'Тип', 'Что это и где искать в ShkolaApp', 'Как назвать файл'];
 const ICON = { 'видео': '🎬 видео', 'аудио': '🔊 аудио' };
 const EXT  = { 'видео': '.mp4', 'аудио': '.mp3' };
 
@@ -74,34 +73,19 @@ function plural(n, one, few, many) {
   return b === 1 ? one : many;
 }
 
-const ALL = DATA.sections.flatMap(s => s.rows);
-const nVideo = ALL.filter(r => r.kind === 'видео').length;
-const nAudio = ALL.filter(r => r.kind === 'аудио').length;
+const ROWS = DATA.rows;
+const nVideo = ROWS.filter(r => r.kind === 'видео').length;
+const nAudio = ROWS.filter(r => r.kind === 'аудио').length;
 const P = (text, o = {}) => new Paragraph({ spacing: { after: 120 }, children: [t(text, o)] });
 
 const kids = [
   new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun({
-    text: 'Super Minds 1 · что скачать с ShkolaApp — аудио и видео', bold: true, size: 32 })] }),
-  P(`Всего ${ALL.length} ${plural(ALL.length, 'файл', 'файла', 'файлов')}: ${nVideo} видео и ${nAudio} аудио. `
-    + 'Это всё, чего не было в выгрузке. В уроках под них уже стоят пустые блоки, номера не сдвинутся.'),
-  P('Куда класть: бакет classroom-media, папка sm1/u<номер юнита>/ — например sm1/u6/. '
-    + 'Файлы Final Test — в папку sm1/u9/. Имя брать из последней колонки и не переименовывать: '
-    + 'по нему я пойму, в какой блок вставить файл. Видео — .mp4, аудио — .mp3. '
-    + 'Если вместо файла есть ссылка на YouTube — пришлите строкой «имя = ссылка». '
-    + 'Когда зальёте, напишите — я пропишу ссылки в блоки.'),
-  P('Ссылка в колонке «Урок» открывает этот урок в ShkolaApp. Курсивом — какое задание стоит '
-    + 'там рядом с нужным файлом, чтобы не искать вслепую.', { it: true }),
+    text: 'Super Minds 1 · аудио и видео — что скачать с ShkolaApp', bold: true, size: 32 })] }),
+  P(`${ROWS.length} ${plural(ROWS.length, 'файл', 'файла', 'файлов')}: ${nVideo} видео и ${nAudio} аудио. `
+    + 'Класть в бакет classroom-media, папка sm1/u<номер юнита>/ (Final Test — в sm1/u9/), '
+    + 'имя — из последней колонки.'),
+  table(ROWS, 1),
 ];
-
-let no = 1;
-for (const s of DATA.sections) {
-  if (!s.rows.length) continue;
-  kids.push(new Paragraph({ heading: HeadingLevel.HEADING_2, spacing: { before: 240, after: 80 },
-    children: [new TextRun({ text: s.title, bold: true, size: 26 })] }));
-  if (s.note) kids.push(P(s.note, { it: true }));
-  kids.push(table(s.rows, no));
-  no += s.rows.length;
-}
 
 const doc = new Document({ sections: [{
   properties: { page: {
@@ -113,5 +97,5 @@ const doc = new Document({ sections: [{
 
 Packer.toBuffer(doc).then(b => {
   fs.writeFileSync(process.argv[2] || 'SM1_аудио_видео.docx', b);
-  console.log('готово,', no - 1, 'строк');
+  console.log('готово,', ROWS.length, 'строк');
 });
