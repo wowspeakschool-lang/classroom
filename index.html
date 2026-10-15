@@ -716,6 +716,18 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
 @media (prefers-reduced-motion:reduce){ #kp *{ animation:none !important; transition:none !important; } }
 
   /* ── Проверка домашки (rv) ── */
+  .asg-cal{ margin-top:4px; }
+  .asg-cal-h{ display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+  .asg-cal-h b{ flex:1; text-align:center; font-size:14px; }
+  .asg-cal-h button{ width:30px; height:30px; border-radius:9px; border:1px solid var(--line); background:#fff; font-size:16px; cursor:pointer; }
+  .asg-cal-h button:disabled{ opacity:.3; cursor:default; }
+  .asg-cal-g{ display:grid; grid-template-columns:repeat(7,1fr); gap:3px; text-align:center; font-size:13px; }
+  .asg-cal-g .h{ color:var(--faint); font-size:11.5px; padding:4px 0; }
+  .asg-cal-g .d{ border:0; background:none; padding:7px 0; border-radius:9px; font:inherit; cursor:pointer; color:var(--ink); }
+  .asg-cal-g .d:hover{ background:var(--bg); }
+  .asg-cal-g .d.today{ box-shadow:0 0 0 1px var(--course) inset; }
+  .asg-cal-g .d.on{ background:var(--course); color:#fff; font-weight:700; }
+  .asg-cal-g .d.past{ color:#CFCFD8; cursor:default; background:none; }
   .asg-grid{ display:grid; grid-template-columns:1fr 1.3fr .9fr; gap:12px; align-items:start; }
   .asg-col{ overflow:hidden; }
   .asg-h{ padding:12px 14px; border-bottom:1px solid var(--line); display:flex; flex-direction:column; gap:6px; }
@@ -861,7 +873,7 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
         <div class="card asg-col" style="padding:12px 14px">
           <b>3. Срок сдачи</b>
           <div id="asgChips" class="row" style="gap:6px;margin:8px 0"></div>
-          <input id="asgDeadline" type="date" onchange="asgSetDay(this.value)" style="max-width:180px">
+          <div id="asgCal" class="asg-cal"></div>
           <div id="asgDueInfo" style="margin-top:8px"></div>
           <div class="muted" style="font-size:12.5px;margin-top:8px">Без срока задать нельзя — день выбирается каждый раз. Срок — до 23:59 этого дня.</div>
         </div>
@@ -3595,15 +3607,32 @@ async function asgRenderLessons(noLoad){
 function asgAll(on){ asgUnitLessons().forEach(l=>{ if(on) ASG.les.add(l.id); else ASG.les.delete(l.id); }); asgRenderLessons(true); }
 function asgLes(id,on){ if(on) ASG.les.add(id); else ASG.les.delete(id); asgRenderLessons(true); }
 function asgYmd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-function asgSetDay(v){ ASG.day=v||null; asgRenderDue(); }
+function asgSetDay(v){ ASG.day=v||null; if(v) ASG.cal=new Date(v.slice(0,7)+'-01T12:00'); asgRenderDue(); }
 function asgRenderDue(){
   const t=new Date();
   $('asgChips').innerHTML=[[1,'Завтра'],[3,'Через 3 дня'],[7,'Через неделю']].map(([n,l])=>{ const v=asgYmd(new Date(t.getFullYear(),t.getMonth(),t.getDate()+n));
     return `<button class="pill ${ASG.day===v?'g':'n'}" style="border:0;cursor:pointer" onclick="asgSetDay('${v}')">${l}</button>`; }).join('');
-  const inp=$('asgDeadline'); inp.min=asgYmd(t); inp.value=ASG.day||'';
+  asgRenderCal();
   $('asgDueInfo').innerHTML = ASG.day ? `<span class="pill g">до ${new Date(ASG.day+'T12:00').toLocaleDateString('ru-RU',{day:'numeric',month:'long'})}, 23:59</span>` : '<span class="pill y">выберите день</span>';
   asgSummary();
 }
+// Календарь месяца: прошедшие дни не выбираются, стрелки листают месяцы
+function asgRenderCal(){
+  const el=$('asgCal'); if(!el) return;
+  const t=new Date(), today=asgYmd(t);
+  if(!ASG.cal) ASG.cal = ASG.day ? new Date(ASG.day+'T12:00') : new Date(t.getFullYear(), t.getMonth(), 1);
+  const y=ASG.cal.getFullYear(), m=ASG.cal.getMonth();
+  const first=new Date(y,m,1), shift=(first.getDay()+6)%7, days=new Date(y,m+1,0).getDate();
+  const title=first.toLocaleDateString('ru-RU',{month:'long', year:'numeric'});
+  const canPrev = new Date(y,m,1) > new Date(t.getFullYear(), t.getMonth(), 1);
+  let cells=['пн','вт','ср','чт','пт','сб','вс'].map(d=>`<span class="h">${d}</span>`).join('') + '<span></span>'.repeat(shift);
+  for(let d=1; d<=days; d++){
+    const v=asgYmd(new Date(y,m,d)), past=v<today;
+    cells+=`<button type="button" class="d${past?' past':''}${v===today?' today':''}${v===ASG.day?' on':''}" ${past?'disabled':''} onclick="asgSetDay('${v}')">${d}</button>`;
+  }
+  el.innerHTML=`<div class="asg-cal-h"><button type="button" ${canPrev?'':'disabled'} onclick="asgCalMove(-1)">‹</button><b>${title[0].toUpperCase()+title.slice(1)}</b><button type="button" onclick="asgCalMove(1)">›</button></div><div class="asg-cal-g">${cells}</div>`;
+}
+function asgCalMove(d){ ASG.cal=new Date(ASG.cal.getFullYear(), ASG.cal.getMonth()+d, 1); asgRenderCal(); }
 function asgSummary(){
   const el=$('asgSummary'); if(!el) return;
   const n=ASG.les.size, m=ASG_PICKED.size;
