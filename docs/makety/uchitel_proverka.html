@@ -322,13 +322,13 @@ function cmSave(k){ const v=document.getElementById('cmta').value.trim(); if(v) 
 function flip(t,i){ const k=t+':'+i, task=HW.find(x=>x.id===t); const cur=itemOk(task,i); const nv=!cur;
   if(nv===task.items[i].auto) delete S.ov[k]; else S.ov[k]=nv; S.total=null; render(); }
 function taskHtml(t){
-  const sc=taskScore(t), ret=S.retake && S.ret[t.id];
+  const sc=taskScore(t), ret=S.retake && !S.rfull && S.ret[t.id];
   let body='';
   if(t.noscore) body=`<div class="muted small">✓ ${t.info} — без оценки, обязательное</div>`;
   else if(t.items) body=t.items.map((it,i)=>{ const ok=itemOk(t,i), k=t.id+':'+i, fixed=k in S.ov;
       return `<div class="item">${it.img?`<img class="img" src="${IMG[it.img]}">`:''}<div class="q">${it.q?`<div class="muted small">${it.q}</div>`:''}<div class="ans">${it.ans}</div>
         ${!ok&&it.right?`<div class="right">${it.right}</div>`:''}${fixed?`<div class="fixednote">поправлено вами (система: ${it.auto?'верно':'неверно'})</div>`:''}</div>
-        ${S.retake && !t.noscore ? `<input type="checkbox" class="rtcheck" ${S.reti[k]?'checked':''} onchange="retItem('${t.id}',${i},this.checked)" title="Переделать этот пункт">`:''}${cmBtn(k)}<button class="mark ${ok?'ok':'no'} ${fixed?'fixed':''}" title="Нажмите, чтобы поменять" onclick="flip('${t.id}',${i})">${ok?'✓':'✗'}</button></div>${cmBox(k)}`; }).join('');
+        ${S.retake && !S.rfull && !t.noscore ? `<input type="checkbox" class="rtcheck" ${S.reti[k]?'checked':''} onchange="retItem('${t.id}',${i},this.checked)" title="Переделать этот пункт">`:''}${cmBtn(k)}<button class="mark ${ok?'ok':'no'} ${fixed?'fixed':''}" title="Нажмите, чтобы поменять" onclick="flip('${t.id}',${i})">${ok?'✓':'✗'}</button></div>${cmBox(k)}`; }).join('');
   else if(t.oral) body=`<div class="player"><button class="pb">▶</button><span class="wave"></span><span class="muted small">${t.len}</span></div>`;
   else body=`<div style="background:var(--bg);border-radius:12px;padding:10px 14px">${t.text}</div>`;
   const manual = (t.oral||t.text) ? `<div class="row" style="margin-top:10px"><span class="small muted">Балл:</span>
@@ -337,7 +337,7 @@ function taskHtml(t){
       ${S.sc[t.id]==null?'<span class="pill y">нужно оценить</span>':''}<span class="muted small">впишите любое число и нажмите Enter</span></div>` : '';
   const again = QUEUE[S.qi] && QUEUE[S.qi].att>1 && t.prev ? `<div class="cshow" style="margin:0 0 8px;background:#F4F2FF"><b style="color:var(--brand-d)">Переделано · в прошлый раз ${t.prev.sc}%</b>${t.prev.ans}<div class="muted small">ваш комментарий: ${t.prev.cm}</div></div>` : '';
   return `<div class="card task ${ret?'ret':''}" id="${t.id}"><div class="thd">
-      ${S.retake ? `<input type="checkbox" class="rtcheck" ${ret?'checked':''} onchange="retTask('${t.id}',this.checked)" title="Переделать всё задание">`:''}
+      ${S.retake && !S.rfull ? `<input type="checkbox" class="rtcheck" ${ret?'checked':''} onchange="retTask('${t.id}',this.checked)" title="Переделать всё задание">`:''}
       <span class="muted small">${t.no}</span><b>${t.title}</b><span class="pill n">${t.type}</span>
       ${sc!=null?`<span class="pill ${sc>=90?'g':sc>=50?'y':'r'}">${sc}%</span>`:''}${again?'<span class="pill b">переделано</span>':''}${flagBtn(t)}${cmBtn(t.id)}</div>${flagBox(t)}${again}${cmBox(t.id)}${body}${manual}</div>`;
 }
