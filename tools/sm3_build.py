@@ -1193,8 +1193,23 @@ LESSONS = {
         "kind": "homework",
         # Два задания из выгрузки сюда не попали: «послушай аудио и соедини
         # картинку с её номером» и «соедини людей и блюда» — у первого нет ни
-        # картинок, ни записи, у второго в выгрузке пусты обе колонки. Оба
-        # вынесены строками в файл «доработать руками».
+        # картинок, ни записи, у второго в выгрузке пусты обе колонки.
+        #
+        # 15.10.2026 первое заменено своим (Анна: «замени задание на другое,
+        # с нашими картинками») — блок 5, СОСТАВ МОЙ. Восстановить исходное
+        # нельзя: в нём звучали номера, а записи нет. Зато игра урока «I spy
+        # with my little eye» разбирается на то же самое — услышал букву,
+        # нашёл картинку, — и собирается из наших карточек еды.
+        #
+        # Блок поставлен ПЕРЕД устной игрой, а не в конец: сперва ребёнок
+        # пробует букву на готовых картинках, потом играет сам. И номера
+        # блоков 2 и 4 при этом не поехали — а на них висят `sm3_u2_hw5_b2`
+        # и `sm3_u2_hw5_b4`, имена в бакете остались верными.
+        #
+        # Вариантов в квизе не перемешивают при показе, поэтому верный ответ
+        # стоит каждый раз на другом месте. И в каждом вопросе все четыре
+        # картинки начинаются с разных букв: иначе у «p» подошли бы и peas,
+        # и pineapple, а у «s» — salad, sausages и soup сразу.
         "blocks": [
             ("text", {"html":
                 f'<p><img src="{shared("hello_headphones")}" alt="" style="height:200px"></p>'
@@ -1221,6 +1236,33 @@ LESSONS = {
 
             ("video", {"title": "Послушай образец к игре «I spy with my little eye»",
                        "url": "", "provider": ""}),
+
+            ("quiz", {
+                "title": "Потренируемся перед игрой: слушай букву и выбирай картинку",
+                "questions": [
+                    {"q": q, "type": "single", "audio": "", "audio_tts": q,
+                     "options": [{"image": img("u2", f)} for f in opts],
+                     "correct": [ci]}
+                    for q, opts, ci in [
+                        ("I spy with my little eye something beginning with «c».",
+                         ["food_peas", "food_cheese", "food_water", "food_onions"], 1),
+                        ("I spy with my little eye something beginning with «s».",
+                         ["food_soup", "food_bread_rolls", "food_lemonade",
+                          "food_pineapple"], 0),
+                        ("I spy with my little eye something beginning with «p».",
+                         ["food_onions", "food_water", "food_cheese", "food_peas"], 3),
+                        ("I spy with my little eye something beginning with «l».",
+                         ["food_salad", "food_lemonade", "food_bread_rolls",
+                          "food_onions"], 1),
+                        ("I spy with my little eye something beginning with «w».",
+                         ["food_vegetables", "food_pineapple", "food_water",
+                          "food_cheese"], 2),
+                        ("I spy with my little eye something beginning with «o».",
+                         ["food_onions", "food_sausages", "food_apple_juice",
+                          "food_bread_rolls"], 0),
+                    ]
+                ],
+            }),
 
             ("speaking", {
                 "title": "Поиграем в «I spy with my little eye» 🎤",
