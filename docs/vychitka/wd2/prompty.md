@@ -2,7 +2,7 @@
 - Дракоша — `docs/vychitka/wd1/obrazcy/obrazec_drakosha.png`;
 - Принцесса — `docs/vychitka/wd1/obrazcy/obrazec_princessa.png`;
 - Единорог — `docs/vychitka/wd1/obrazcy/obrazec_edinorog.png`;
-- бабушка — `media/wow-dragon-2/legacy/85463528a5cb.webp`.
+- бабушка Дракоши — `docs/vychitka/wd1/obrazcy/obrazec_babushka.png`.
 
 Где нужен образец предмета, путь указан в строке листа.
 
@@ -46,7 +46,7 @@
 **12. `wd2_scene_family_tree` · ДЗ 12 б3, ДЗ 16 б12 · СЦЕНА, по желанию, 🔴 образцы Дракоши и бабушки обязательны.** Ещё прикрепите маму `f522af87c6ce.webp`, папу `cd740262ae48.webp` и дедушку `3673a1e66158.webp` из `media/wow-dragon-2/legacy/`. Отдельной картинкой.
 > The purple baby dragon, the granny, the grandpa, the mother and the father from the attached reference images, exactly the same characters. Flat 2D cartoon illustration for preschool kids, bold dark purple outlines, bright cheerful colours, simple uncluttered scene, white margin around the whole picture. The family stands happily together next to a big hand-drawn family tree on a stand, the tree has round empty picture frames on its branches. Everything complete, nothing cut off at the edges. No text, no letters, no numbers.
 
-**13. `wd2_scene_doctor` · ДЗ 15 б4, б8, б10 · СЦЕНА, только если по вопросу 3 выберете «а». 🔴 Образцы: бабушка `media/wow-dragon-2/legacy/85463528a5cb.webp`, доктор `media/wow-dragon-2/legacy/159ba115c97f.webp`.** Отдельной картинкой.
+**13. `wd2_scene_doctor` · ДЗ 15 б4, б8, б10 · СЦЕНА, только если по вопросу 3 выберете «а». 🔴 Образцы: бабушка Дракоши `docs/vychitka/wd1/obrazcy/obrazec_babushka.png`, доктор `media/wow-dragon-2/legacy/159ba115c97f.webp`.** Отдельной картинкой.
 > The granny and the woman doctor from the attached reference images, exactly the same characters. Flat 2D cartoon illustration for preschool kids, bold dark purple outlines, bright cheerful colours, simple uncluttered scene, white margin around the whole picture. The granny lies in a cosy bed under a blanket, and the doctor stands next to the bed, leaning forward and looking carefully at the granny with a kind smile. Everything complete, nothing cut off at the edges. No text, no letters, no numbers.
 
 **Не перерисовываем:**
