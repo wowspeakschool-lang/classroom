@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
 <title>Classroom · Кабинет учителя</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -415,6 +415,305 @@
   .confetti{ position:fixed; top:-30px; z-index:200; pointer-events:none; animation:fall 1.6s ease-in forwards; }
   @keyframes fall{ to{ transform:translateY(105vh) rotate(360deg); opacity:.2; } }
   .runpage{ position:fixed; inset:0; overflow:auto; background:linear-gradient(180deg,#faf5ff,#fdf2f8); z-index:100; }
+
+/* ============================================================
+   СТРАНИЦА УЧЕНИКА (?run=…&enroll=…) — макет docs/makety/uchenik_v2.html, вариант Б.
+   Всё под #kp и с префиксом k, чтобы не пересекаться с редактором.
+   ============================================================ */
+body.kp-on{ overflow:hidden; background:#FFF6EC; }
+#kp{
+  --kbg:linear-gradient(160deg,#FFF8EF 0%,#FFF1E6 45%,#FFF6DF 100%);
+  --kink:#1F1A3D; --kmute:#6F6A8A; --kfaint:#ABA6C2; --kline:#EEEAF3;
+  --kact:#F7628C; --kpick:#6A4DF4; --kpick-d:#5236DB; --kpick-soft:#EFEBFF;
+  --kok:#2FB57C; --kok-soft:#E3F7EE; --kwarn:#E8862A; --kwarn-soft:#FFF0DE;
+  --klate:#E5484D; --klate-soft:#FFE8E8; --kshadow:0 8px 26px rgba(43,37,69,.07);
+  position:fixed; inset:0; background:var(--kbg); color:var(--kink);
+  font-family:'Montserrat','Golos Text',system-ui,sans-serif; container-type:inline-size; container-name:kp; z-index:50;
+}
+#kp *{ box-sizing:border-box; }
+:where(#kp button){ font:inherit; color:inherit; cursor:pointer; border:0; background:none;
+  transition:transform .09s ease, box-shadow .12s, background .15s, border-color .15s, opacity .15s; }
+:where(#kp button:active){ transform:scale(.96); }
+:where(#kp img){ display:block; max-width:100%; }
+#kp textarea, #kp input{ font:inherit; color:inherit; }
+.kload{ display:grid; place-items:center; height:100%; font-weight:700; color:#6F6A8A; }
+.kapp{ position:absolute; inset:0; display:flex; flex-direction:column; }
+
+/* шапка */
+.ktop{ background:rgba(255,255,255,.75); backdrop-filter:blur(10px); border-bottom:1px solid rgba(0,0,0,.04); flex:0 0 auto; }
+.ktop-in{ max-width:900px; margin:0 auto; padding:10px 16px 8px; display:flex; align-items:center; gap:12px; }
+.kback{ height:38px; border-radius:99px; background:var(--kpick-soft); color:var(--kpick-d); display:inline-flex; align-items:center;
+  padding:0 14px; font-weight:800; font-size:13px; flex:0 0 auto; text-transform:uppercase; letter-spacing:.02em; text-decoration:none; }
+.ktt{ flex:1; min-width:0; }
+.ktt b{ display:block; font-size:17px; font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ktt span{ font-size:13px; color:var(--kmute); }
+.kdue{ border-radius:99px; padding:6px 12px; font-size:13px; font-weight:800; white-space:nowrap; background:var(--kpick-soft); color:var(--kpick-d); }
+.kdue.soon{ background:var(--kwarn-soft); color:var(--kwarn); }
+.kdue.late{ background:var(--klate-soft); color:var(--klate); }
+.kprev{ border-radius:99px; padding:6px 12px; font-size:13px; font-weight:800; white-space:nowrap; background:#2B2545; color:#fff; }
+.kzoom{ display:inline-flex; background:#fff; border-radius:99px; box-shadow:var(--kshadow); flex:0 0 auto; }
+.kzoom button{ height:34px; padding:0 10px; font-weight:800; color:var(--kmute); font-size:14px; }
+.kzoom button+button{ border-left:1px solid var(--kline); }
+.kzoom button:disabled{ opacity:.3; }
+.ksteps{ max-width:900px; margin:0 auto; padding:0 16px 10px; display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; }
+.ksteps::-webkit-scrollbar{ display:none; }
+.kst{ flex:1 0 34px; height:34px; border-radius:11px; background:rgba(0,0,0,.05) !important; color:var(--kmute) !important; font-weight:700;
+  font-size:14px; display:grid; place-items:center; }
+.kst.ok{ background:var(--kok) !important; color:#fff !important; }
+.kst.cur{ box-shadow:0 0 0 2px var(--kpick) inset; color:var(--kpick-d) !important; }
+.kst.ok.cur{ box-shadow:0 0 0 3px #fff inset, 0 0 0 2px var(--kok); }
+.kst.acc{ background:var(--kok-soft) !important; color:var(--kok) !important; cursor:default !important; }
+.kst.mat{ background:rgba(0,0,0,.03) !important; }
+.knetbar{ max-width:900px; margin:0 auto 8px; padding:9px 14px; border-radius:14px; font-size:14px; font-weight:700; display:flex; gap:10px; align-items:center; }
+.knetbar.off{ background:#FFF0DE; color:#9A5A12; }
+.knetbar.online{ background:var(--kok-soft); color:var(--kok); }
+
+/* лента и карточка задания */
+.kmain{ flex:1; min-height:0; overflow-y:auto; }
+.klist{ max-width:900px; margin:0 auto; padding:16px 16px 20px; min-height:100%; display:flex; flex-direction:column; }
+.klist.flow{ display:block; }
+.ktask{ background:#fff; border-radius:26px; padding:20px; margin-bottom:16px; box-shadow:var(--kshadow); display:flex; flex-direction:column; }
+.ktask.fit{ flex:1 0 auto; margin-bottom:0; }
+.khd{ display:flex; align-items:flex-start; gap:6px 10px; flex:0 0 auto; flex-wrap:wrap; }
+.khd .t{ flex:1 1 55%; min-width:0; }
+.kno{ font-size:13px; color:var(--kfaint); font-weight:700; }
+.kq-t{ font-size:21px; font-weight:800; line-height:1.3; margin:2px 0 14px; }
+.kic{ flex:0 0 auto; width:56px; height:56px; object-fit:contain; margin-top:-2px; }
+.kready{ flex:0 0 auto; background:var(--kok-soft); color:var(--kok); border-radius:99px; padding:5px 12px; font-size:13px; font-weight:800;
+  animation:kpop .3s cubic-bezier(.2,1.3,.4,1); white-space:nowrap; }
+.kready.still{ animation:none; }
+.kscore-b{ flex:0 0 auto; background:var(--kpick-soft); color:var(--kpick-d); border-radius:99px; padding:5px 12px; font-size:13px; font-weight:800; }
+@keyframes kpop{ from{ transform:scale(.4); opacity:0 } to{ transform:scale(1); opacity:1 } }
+.kredo{ flex:0 0 auto; height:32px; border-radius:99px; padding:0 12px; background:rgba(0,0,0,.04) !important; color:var(--kmute) !important;
+  font-size:13px; font-weight:700; margin-top:4px; white-space:nowrap; }
+.kbody{ flex:1; display:flex; flex-direction:column; gap:12px; }
+.ksaved{ font-size:12px; color:var(--kfaint); margin-top:10px; min-height:16px; }
+.ksaved.local{ color:var(--kwarn); }
+.kneed{ font-size:13px; color:var(--kmute); }
+.khint{ font-size:13px; color:var(--kmute); }
+.khtml{ font-size:17px; line-height:1.5; }
+.khtml img{ max-width:100%; height:auto; border-radius:12px; }
+.ktc{ display:flex; gap:10px; align-items:flex-start; background:#FFF8E8; border-radius:14px; padding:10px 12px; margin:-4px 0 12px; font-size:15px; }
+.ktc b{ display:block; font-size:12px; color:var(--kwarn); text-transform:uppercase; letter-spacing:.04em; }
+
+/* звук */
+.ksnd-row{ display:flex; gap:8px; flex-wrap:wrap; flex:0 0 auto; }
+.ksnd{ display:inline-flex; align-items:center; gap:8px; background:var(--kpick-soft) !important; color:var(--kpick-d) !important;
+  border-radius:99px; padding:10px 18px; font-weight:700; }
+.ksnd.slow{ background:#FFF0DE !important; color:#B4610F !important; }
+.ksnd.playing, .kmini.playing{ box-shadow:0 0 0 3px currentColor inset; }
+.kmini{ display:inline-grid; place-items:center; width:34px; height:34px; border-radius:50%; background:var(--kpick-soft); color:var(--kpick-d);
+  font-size:15px; flex:0 0 auto; cursor:pointer; }
+
+/* картинки */
+.kph{ width:100%; border-radius:14px; object-fit:contain; max-height:min(40vh,320px); }
+.kqimg{ max-height:min(32vh,260px); }
+
+/* выбор ответа */
+.kq{ display:flex; flex-direction:column; gap:10px; }
+.kq + .kq{ border-top:1px dashed var(--kline); padding-top:14px; }
+.kqq{ font-size:18px; font-weight:700; display:flex; gap:10px; align-items:center; }
+.kqn{ flex:0 0 auto; width:28px; height:28px; border-radius:50%; background:var(--kpick-soft); color:var(--kpick-d); display:grid; place-items:center; font-size:14px; font-weight:800; }
+.kopts{ display:flex; flex-wrap:wrap; gap:10px; }
+.kopts.img{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+.kopt{ border:3px solid var(--kline) !important; border-radius:18px; background:#fff !important; padding:12px 18px; font-weight:700; font-size:18px;
+  display:flex; align-items:center; justify-content:center; gap:8px; text-align:center; }
+.kopt.img{ padding:8px; flex-direction:column; }
+.kopt.img .kph{ max-height:min(24vh,200px); }
+.kopt.sel{ border-color:var(--kpick) !important; background:var(--kpick-soft) !important; box-shadow:var(--kshadow); transform:translateY(-2px); }
+.kta{ width:100%; min-height:110px; border:2px solid var(--kline); border-radius:16px; padding:12px 14px; font-size:17px; resize:vertical; background:#fff; }
+.kta:focus, .kin:focus{ outline:none; border-color:var(--kpick); }
+.kin{ border:2px solid var(--kline); border-radius:14px; padding:10px 14px; font-size:18px; background:#fff; width:100%; max-width:340px; }
+.kei{ display:flex; flex-direction:column; gap:8px; }
+.kei + .kei{ border-top:1px dashed var(--kline); padding-top:12px; }
+.keip{ font-size:18px; font-weight:600; }
+
+/* соедини */
+.kmatch{ display:grid; grid-template-columns:1fr 1fr; gap:12px 22px; }
+.kml, .kmr{ border:3px solid var(--kline) !important; border-radius:16px; background:#fff !important; padding:8px 12px; display:flex; align-items:center;
+  justify-content:center; gap:8px; font-weight:800; font-size:17px; min-height:56px; text-align:center; }
+.kml .kph, .kmr .kph{ max-height:110px; width:auto; }
+.kml.sel, .kmr.sel{ border-color:var(--kpick) !important; background:var(--kpick-soft) !important; }
+.kml.pair, .kmr.pair{ border-color:transparent !important; background:var(--pc) !important; }
+
+/* составь / пропуски / слова */
+.kline{ min-height:62px; border-radius:16px; border:2px dashed var(--kline); padding:10px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:20px; }
+.kline.full{ border-style:solid; border-color:var(--kpick); background:#FCFBFF; }
+.kbank{ display:flex; flex-wrap:wrap; gap:9px; }
+.kchip{ background:var(--kpick-soft) !important; color:var(--kpick-d) !important; border-radius:14px; padding:11px 18px; font-weight:800; font-size:19px; }
+.kchip.used{ opacity:.25; pointer-events:none; }
+.kline .kchip{ background:var(--kpick) !important; color:#fff !important; }
+.ksent{ font-size:22px; line-height:2.3; font-weight:600; }
+.kslot{ display:inline-block; min-width:100px; border-bottom:3px solid var(--kpick); margin:0 6px; text-align:center; font-weight:800; color:var(--kpick-d);
+  cursor:pointer; line-height:1.4; vertical-align:baseline; }
+.kslot.full{ background:var(--kpick-soft); border-radius:10px 10px 0 0; padding:0 10px; }
+.kslot.sel{ background:#FFF0DE; }
+.kgin{ display:inline-block; width:130px; border:0; border-bottom:3px solid var(--kpick); background:var(--kpick-soft); border-radius:10px 10px 0 0;
+  padding:0 8px; font-size:20px; font-weight:800; color:var(--kpick-d); text-align:center; margin:0 4px; }
+.kgin:focus{ outline:none; background:#E4DDFF; }
+.kside{ display:flex; gap:16px; }
+.kside > .kph{ width:40%; flex:0 0 auto; height:auto; }
+.kside .r{ flex:1; min-width:0; display:flex; flex-direction:column; gap:12px; justify-content:center; }
+
+/* верно / неверно */
+.ktf{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:10px 0; }
+.ktf + .ktf{ border-top:1px dashed var(--kline); }
+.ktf .s{ flex:1 1 260px; font-size:18px; font-weight:600; display:flex; gap:8px; align-items:center; }
+.ktfb{ border:3px solid var(--kline) !important; border-radius:14px; padding:9px 16px; font-weight:800; background:#fff !important; }
+.ktfb.sel{ border-color:var(--kpick) !important; background:var(--kpick-soft) !important; color:var(--kpick-d) !important; }
+
+/* распредели */
+.kpool{ display:flex; flex-wrap:wrap; gap:9px; min-height:52px; }
+.kbins{ display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; }
+.kbin{ cursor:pointer; border:2px dashed var(--kline) !important; border-radius:18px; padding:10px; min-height:110px; display:flex; flex-direction:column; gap:8px;
+  align-items:stretch; background:#FCFBFF !important; text-align:left; }
+.kbin.can{ border-color:var(--kpick) !important; background:var(--kpick-soft) !important; }
+.kbin h4{ margin:0 0 4px; font-size:16px; font-weight:800; color:var(--kpick-d); text-align:center; }
+.kbin .in{ display:flex; flex-wrap:wrap; gap:6px; }
+.kitem{ background:#fff !important; border:2px solid var(--kline) !important; border-radius:14px; padding:8px 12px; font-weight:800; font-size:17px;
+  display:inline-flex; align-items:center; gap:6px; }
+.kitem .kph{ max-height:70px; width:auto; }
+.kitem.sel{ border-color:var(--kpick) !important; background:var(--kpick-soft) !important; transform:translateY(-2px); }
+
+/* по порядку */
+.kseq{ display:flex; flex-direction:column; gap:8px; }
+.kseqr{ display:flex; align-items:center; gap:10px; border:2px solid var(--kline); border-radius:16px; padding:8px 10px; background:#fff; }
+.kseqr .n{ width:30px; height:30px; border-radius:50%; background:var(--kpick-soft); color:var(--kpick-d); display:grid; place-items:center; font-weight:800; flex:0 0 auto; }
+.kseqr .x{ flex:1; min-width:0; font-weight:700; font-size:17px; display:flex; align-items:center; gap:10px; }
+.kseqr .kph{ max-height:70px; width:auto; }
+.kmv{ width:42px; height:42px; border-radius:12px; background:#F5F3FA !important; font-weight:800; font-size:18px; flex:0 0 auto; }
+.kmv:disabled{ opacity:.25; }
+
+/* точки на картинке */
+.khs{ position:relative; align-self:center; max-width:100%; }
+.khs img{ max-height:min(50vh,460px); width:auto; border-radius:14px; }
+.khs.find{ cursor:crosshair; }
+.khm{ position:absolute; transform:translate(-50%,-50%); min-width:34px; height:34px; border-radius:99px; background:#fff !important; border:3px solid var(--kpick) !important;
+  color:var(--kpick-d) !important; font-weight:800; font-size:14px; padding:0 8px; box-shadow:0 3px 10px rgba(0,0,0,.2); }
+.khm.full{ background:var(--kpick) !important; color:#fff !important; }
+.khm.sel{ background:#FFF0DE !important; border-color:var(--kwarn) !important; }
+.khm.dot{ min-width:18px; width:18px; height:18px; padding:0; background:var(--kact) !important; border-color:#fff !important; pointer-events:none; }
+.kfind{ font-size:20px; font-weight:800; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+
+/* видео */
+.kvid{ width:100%; max-height:min(58vh,520px); border-radius:16px; background:#2B2545; aspect-ratio:16/9; }
+.kyt{ width:100%; aspect-ratio:16/9; max-height:min(58vh,520px); border:0; border-radius:16px; background:#2B2545; }
+
+/* карточки слов */
+.kcards{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.kfc{ border:2px solid var(--kline) !important; border-radius:18px; background:#fff !important; padding:10px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:8px; font-weight:800; font-size:17px; text-align:center; min-height:150px; }
+.kfc .kph{ max-height:130px; }
+.kfc.flip{ border-color:var(--kok) !important; background:var(--kok-soft) !important; }
+.kfc .w{ color:var(--kpick-d); }
+.kfc .tr{ color:var(--kmute); font-size:14px; font-weight:600; }
+.kfc .big{ font-size:22px; }
+.kfc .tap{ font-size:12px; color:var(--kfaint); font-weight:600; }
+
+/* запись голоса */
+.krec{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.krecbtn{ background:var(--kact) !important; color:#fff !important; border-radius:16px; padding:14px 24px; font-weight:800; font-size:17px; box-shadow:0 6px 18px rgba(245,96,138,.35); }
+.krecbtn.stop{ background:#2B2545 !important; box-shadow:none; }
+.kghost{ background:#fff !important; border:2px solid var(--kline) !important; border-radius:14px; padding:12px 18px; font-weight:700; }
+.ktimer{ font-weight:800; font-size:20px; color:var(--kact); display:flex; align-items:center; gap:8px; }
+.ktimer:before{ content:""; width:12px; height:12px; border-radius:50%; background:var(--kact); animation:kblink 1s infinite; }
+@keyframes kblink{ 50%{ opacity:.25 } }
+.kmeter{ display:flex; align-items:center; gap:3px; height:42px; flex:1; min-width:140px; }
+.kmeter i{ flex:1; max-width:8px; border-radius:4px; background:var(--kact); height:12%; transition:height .08s linear; }
+.kmicwarn{ background:var(--klate-soft); color:var(--klate); border-radius:12px; padding:8px 12px; font-size:14px; font-weight:700; }
+
+/* низ */
+.kbar{ flex:0 0 auto; background:rgba(255,255,255,.92); backdrop-filter:blur(10px); border-top:1px solid rgba(0,0,0,.04); }
+.kbar:empty{ display:none; }
+.kbar-in{ max-width:900px; margin:0 auto; padding:12px 16px 14px; display:flex; align-items:center; gap:12px; }
+.kleft{ flex:1; min-width:0; }
+.kleft b{ display:block; font-weight:800; }
+.kleft span{ font-size:13px; color:var(--kmute); }
+.knav{ width:50px; height:50px; border-radius:16px; background:#fff !important; border:2px solid var(--kline) !important; font-size:20px; font-weight:800; flex:0 0 auto; }
+.knav:disabled{ opacity:.3; cursor:default; }
+.kfin{ background:var(--kact) !important; color:#fff !important; border-radius:18px; padding:15px 26px; font-weight:800; font-size:17px;
+  box-shadow:0 8px 22px rgba(245,96,138,.35); white-space:nowrap; }
+.kfin.off{ background:rgba(0,0,0,.08) !important; color:var(--kfaint) !important; box-shadow:none; }
+.kfin.next{ background:var(--kpick) !important; box-shadow:0 8px 22px rgba(122,107,232,.3); }
+
+/* окно подтверждения */
+.kmodal{ position:absolute; inset:0; background:rgba(43,37,69,.45); display:grid; place-items:center; z-index:30; padding:16px; animation:kfade .2s ease; }
+@keyframes kfade{ from{ opacity:0 } }
+.kdlg{ background:#fff; border-radius:26px; padding:26px 24px 22px; max-width:440px; width:100%; text-align:center;
+  box-shadow:0 30px 70px rgba(0,0,0,.25); animation:krise .28s cubic-bezier(.2,1.2,.4,1); }
+@keyframes krise{ from{ transform:translateY(24px); opacity:0 } }
+.kdlg h2{ margin:6px 0 6px; font-size:23px; font-weight:800; }
+.kdlg p{ margin:0 0 18px; color:var(--kmute); }
+.kring{ width:74px; height:74px; margin:0 auto 8px; position:relative; }
+.kring svg{ transform:rotate(-90deg); }
+.kring b{ position:absolute; inset:0; display:grid; place-items:center; font-size:24px; font-weight:800; color:var(--kact); }
+.kdlg .row{ display:flex; gap:10px; flex-wrap:wrap; }
+.kdlg .row button{ flex:1 1 160px; }
+.kdlg small{ display:block; margin-top:12px; color:var(--kfaint); font-size:12px; }
+
+/* экраны после отправки */
+.kcenter{ min-height:100%; display:grid; place-items:center; padding:20px 16px; }
+.kdone{ background:#fff; border-radius:30px; padding:34px 26px; text-align:center; box-shadow:var(--kshadow); max-width:520px; width:100%;
+  animation:krise .35s cubic-bezier(.2,1,.4,1); }
+.kdone .em{ font-size:56px; }
+.kdone h2{ font-size:27px; margin:10px 0 6px; font-weight:800; }
+.kdone p{ color:var(--kmute); margin:0; }
+.kscore{ font-size:min(30cqw,140px); font-weight:800; line-height:1; margin:6px 0 4px; letter-spacing:-.03em; }
+.kweather{ width:min(52cqw,240px); margin:0 auto; }
+.kweather img{ width:100%; }
+.kwname{ font-size:24px; font-weight:800; margin:4px 0 2px; }
+.kparent{ margin-top:18px; font-size:14px; color:var(--kmute) !important; background:rgba(0,0,0,.04) !important; border-radius:99px; padding:8px 16px; }
+.kpct{ font-size:30px; font-weight:800; margin-top:10px; }
+.klink{ margin-top:22px; color:var(--kpick-d) !important; font-weight:700; background:var(--kpick-soft) !important; border-radius:14px; padding:12px 20px; }
+.kfires{ font-size:30px; letter-spacing:4px; margin:-8px 0 8px; animation:kpop .4s cubic-bezier(.2,1.3,.4,1); }
+.kstreak{ display:inline-flex; gap:8px; align-items:center; margin-top:14px; background:#FFF0DE; color:#B4610F; border-radius:99px; padding:9px 16px; font-weight:800; }
+.kbanner{ background:#fff; border-radius:20px; padding:14px 18px; box-shadow:var(--kshadow); display:flex; gap:14px; align-items:center; margin-bottom:14px; flex:0 0 auto; }
+.kbanner .em{ font-size:32px; }
+.kbanner b{ display:block; font-size:17px; }
+.kbanner span{ color:var(--kmute); font-size:14px; }
+.kwelcome{ display:flex; align-items:center; gap:12px; background:var(--kpick); color:#fff; border-radius:18px; padding:12px 16px;
+  margin-bottom:14px; font-weight:700; animation:krise .35s cubic-bezier(.2,1,.4,1); flex:0 0 auto; }
+.kwelcome b{ flex:1; }
+.kwelcome small{ display:block; font-weight:600; opacity:.9; margin-top:3px; }
+.kwelcome button{ background:rgba(255,255,255,.2) !important; color:#fff !important; border-radius:12px; padding:8px 14px; font-weight:800; }
+
+@container kp (max-width: 640px){
+  .ktop-in{ padding:8px 12px 6px; gap:10px; flex-wrap:wrap; row-gap:8px; }
+  .ktt{ flex:1 1 calc(100% - 60px); }
+  .ktt b{ font-size:15px; }
+  .ktt span{ display:none; }
+  .kdue{ order:3; font-size:12px; padding:5px 9px; }
+  .kzoom{ order:4; margin-left:auto; }
+  .kzoom button{ padding:0 7px; font-size:12px; }
+  .kback{ padding:0 10px; font-size:0; }
+  .kback:before{ content:"←"; font-size:18px; }
+  .knetbar{ margin:0 12px 8px; font-size:13px; }
+  .ksteps{ padding:0 12px 8px; gap:5px; }
+  .kst{ flex-basis:30px; height:30px; font-size:13px; }
+  .klist{ padding:10px 10px 14px; }
+  .ktask{ padding:16px 14px; border-radius:18px; }
+  .kq-t{ font-size:18px; margin-bottom:10px; }
+  .kic{ width:42px; height:42px; }
+  .kredo{ font-size:0; padding:0 10px; }
+  .kredo:before{ content:"↺"; font-size:16px; }
+  .kmatch{ gap:8px 10px; }
+  .kml, .kmr{ font-size:15px; padding:6px; }
+  .kchip{ font-size:17px; padding:9px 14px; }
+  .ksent{ font-size:19px; }
+  .kside{ flex-direction:column; gap:10px; }
+  .kside > .kph{ width:100%; max-height:150px; }
+  .kcards{ grid-template-columns:repeat(2,1fr); gap:8px; }
+  .kopts.img{ grid-template-columns:repeat(auto-fit,minmax(96px,1fr)); gap:8px; }
+  .kbar-in{ padding:10px 12px 12px; gap:8px; }
+  .kleft span{ display:none; }
+  .kfin{ padding:14px 18px; font-size:16px; }
+  .knav{ width:46px; height:46px; }
+}
+@container kp (min-width: 1100px){
+  .klist, .ktop-in, .ksteps, .kbar-in, .knetbar{ max-width:1000px; }
+  .kq-t{ font-size:23px; }
+}
+@media (prefers-reduced-motion:reduce){ #kp *{ animation:none !important; transition:none !important; } }
 </style>
 </head>
 <body>
@@ -1191,7 +1490,7 @@ function previewBlock(b){
 // отличается только начальный режим. Раньше предпросмотр жил
 // в модалке с max-width:640px и на весь экран не разворачивался.
 // Режим не навязываем — его выберет showOpen по типу материала
-function openPreview(lessonId){ showOpen(lessonId, null, null, 'student'); }
+function openPreview(lessonId){ kpPreviewOpen(lessonId); }
 
 // ---------- Вкладка «Уроки»: планы для проведения занятия ----------
 // Отдельно от редактора: у преподавателя нет методистской роли,
@@ -1241,7 +1540,7 @@ function lsRenderTree(){
             <div>📘 ${esc(l.title)}${l.is_published?'':' <span class="pill n">черновик</span>'}</div>
             ${l.summary?`<div class="muted" style="font-size:12px">${esc(l.summary)}</div>`:''}
           </div>
-          <button class="btn sec sm" onclick="showOpen('${l.id}', null, 'one', 'student')">👁 Глазами ученика</button>
+          <button class="btn sec sm" onclick="kpPreviewOpen('${l.id}','one')">👁 Глазами ученика</button>
           <button class="btn sm" onclick="showOpen('${l.id}', null, 'one')">▶ Показ</button>
         </div>`).join('');
       return `<div style="padding-left:14px">
@@ -1486,41 +1785,6 @@ async function openRunner(lessonId){
   if(!CUR_STU.enrollmentId){ toast('Урок ещё не активирован ученику'); return; }
   const url = location.pathname + '?run=' + encodeURIComponent(lessonId) + '&enroll=' + encodeURIComponent(CUR_STU.enrollmentId) + '&sid=' + encodeURIComponent(CUR_STU.id);
   window.open(url, '_blank');
-}
-
-// Отдельная страница прохождения — открывается в новом окне (?run=lesson&enroll=enr)
-async function bootRunPage(params){
-  const lessonId=params.get('run'); const enr=params.get('enroll');
-  $('loginScreen').classList.add('hidden'); $('app').classList.add('hidden');
-  document.body.insertAdjacentHTML('beforeend', `<div id="runPage" class="runpage"><div class="kid" style="max-width:1040px;margin:0 auto;padding:28px 24px 80px">
-      <div class="kidhead" id="runPageHead">🚀 Урок</div>
-      <div id="runBody"><div class="loading">Загружаю…</div></div>
-    </div></div>`);
-  RUN = { lessonId, enr }; RUN_MATCH = {}; RUN_ORDER = {}; RUN_SORT = {}; RUN_FC = {}; RUN_FC_DATA = {}; RUN_QUIZ = {};
-  try{
-    const [ls, bl] = await Promise.all([
-      sb.from('classroom_lessons').select('title').eq('id', lessonId).maybeSingle(),
-      sb.from('classroom_blocks').select('id, type, payload, sort_order, audience, variant, format').eq('lesson_id', lessonId).order('sort_order')
-    ]);
-    if(bl.error) throw bl.error;
-    // Ученику не должны попасть сценарий урока, тайминги и ответы
-    CR_VIEW = { role:'student', variant:'any', format:'any' };
-    const blocks = (bl.data||[]).filter(crBlockVisible);
-    $('runPageHead').innerHTML = `🚀 <b>${esc((ls.data&&ls.data.title)||'Урок')}</b><div style="font-size:14px;opacity:.95;margin-top:2px">Поехали! Отвечай на задания и собирай звёздочки ⭐</div>`;
-    blocks.forEach(b=>{
-      if(b.type==='match'){ RUN_MATCH[b.id]={ map:{}, sel:null, rights:shuffle(((b.payload&&b.payload.pairs)||[]).map((x,ix)=>({val:(x.right!=null?x.right:('#'+ix)), image:x.right_image, audio:x.right_audio}))) }; }
-      if(b.type==='order'){ RUN_ORDER[b.id]={ bank:shuffle(((b.payload&&b.payload.words)||[])), answer:[] }; }
-      if(b.type==='sort'){ prepSort(b); }
-      if(b.type==='flashcards'){ RUN_FC[b.id]={ i:0, flip:false, queue:null, done:0, again:0 }; RUN_FC_DATA[b.id]={ cards:(b.payload&&b.payload.cards)||[] }; }
-      if(b.type==='sequence'){ prepSeq(b); }
-      if(b.type==='hotspot'){ prepHotspot(b); }
-    if(b.type==='hotspot'){ prepHotspot(b); }
-    if(b.type==='sequence'){ prepSeq(b); }
-    if(b.type==='hotspot'){ prepHotspot(b); }
-    });
-    $('runBody').innerHTML = blocks.length ? blocks.map(runBlock).join('') : '<div class="empty">В уроке нет блоков.</div>';
-    blocks.forEach(b=>{ if(b.type==='order') orderRender(b.id); if(b.type==='sort') sortRender(b.id); if(b.type==='sequence') seqRender(b.id); if(b.type==='hotspot') hsRender(b.id); if(b.type==='flashcards') fcRender(b.id); });
-  }catch(e){ $('runBody').innerHTML = `<div class="err">${esc(e.message||e)}</div>`; }
 }
 
 function runResult(id, txt, ok){ const el=$('res-'+id); if(el){ el.textContent=txt; el.className = ok?'kidres':'muted'; el.style.marginLeft='10px'; } }
@@ -2107,6 +2371,975 @@ async function runEmbed(id){
 }
 
 // ============================================================
+//  СТРАНИЦА УЧЕНИКА: ДОМАШКА  (?run=<lesson>&enroll=<enrollment>)
+//  Макет — docs/makety/uchenik_v2.html, вариант Б: одно задание на экран.
+//  Ученик отвечает вслепую: ответ сохраняется сразу (classroom_submit_block),
+//  процента и вердиктов нет до проверки. «Завершить и отправить» —
+//  classroom_finish_lesson. ?preview=1 (или без enroll) — «Глазами ученика»:
+//  тот же экран, ответы никуда не уходят.
+// ============================================================
+const KP_SLOW = 0.6;                 // «🐢 Медленнее» — выбрано Анной
+const KP_ZOOMS = [0.7,0.775,0.85,0.925,1,1.1,1.2,1.3,1.4];
+const KP_BACK_URL = '';              // список домашек в кабинете — адрес даст разработчик (docs/dlya_razrabotchika.md, п. 4)
+const KP_PAIRC = ['#FDE7EF','#E6F3FF','#E8F6F0','#FFF4D6','#EFEBFF','#FFE9DD','#E2F5F8','#F3E8FF'];
+const KP_COUNTED = ['quiz','exact_input','match','task','embed','order','sort','gaps','truefalse','speaking','sequence','hotspot'];
+let KP = null;
+
+function kpA(s){ return esc(s).replace(/"/g,'&quot;'); }
+function kpHash(s){ let h=2166136261; for(const c of String(s)){ h^=c.charCodeAt(0); h=Math.imul(h,16777619); } return (h>>>0)||1; }
+// Перемешивание с зерном: порядок вариантов не прыгает при перезагрузке
+function kpShuffle(arr, seed){
+  const a=arr.slice(); let x=kpHash(seed);
+  const r=()=>{ x^=x<<13; x>>>=0; x^=x>>>17; x^=x<<5; x>>>=0; return x/4294967296; };
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(r()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; }
+  return a;
+}
+// Перестановка, не совпадающая с верным порядком
+function kpPerm(n, seed){
+  const id=[...Array(n).keys()]; if(n<2) return id;
+  for(let t=0;t<12;t++){ const p=kpShuffle(id, seed+'#'+t); if(p.some((v,i)=>v!==i)) return p; }
+  return id.slice().reverse();
+}
+function kpPlural(n,a,b,c){ const m10=n%10, m100=n%100; return (m10===1&&m100!==11)?a:(m10>=2&&m10<=4&&(m100<12||m100>14))?b:c; }
+function kpHas(a){ return a!=null && typeof a==='object' && Object.keys(a).length>0; }
+
+// ── что считается заданием и когда оно выполнено (как в базе: classroom__block_counts / __block_complete)
+function kpCounts(b){
+  const p=b.payload||{};
+  if(KP_COUNTED.includes(b.type)) return true;
+  if(b.type==='video') return !!String(p.url||'').trim();
+  if(b.type==='flashcards') return (p.cards||[]).length>0;
+  return false;
+}
+function kpGapsN(text){ return gapsParse(text||'').filter(x=>x.kind==='gap').length; }
+function kpSortItems(b){
+  const p=b.payload||{}; const out=[]; let gi=0;
+  (p.groups||[]).forEach((g,gx)=>(g.items||[]).forEach(it=>out.push({ gi:gi++, group:gx, text:it.text, image:it.image, audio:it.audio })));
+  return out;
+}
+function kpComplete(b, a){
+  if(!kpHas(a) && b.type!=='embed') return false;
+  if(a==null) return false;
+  const p=b.payload||{};
+  const has=k=>Object.prototype.hasOwnProperty.call(a,String(k));
+  const filled=k=>String(a[k]==null?'':a[k]).trim()!=='';
+  const all=(n,f)=>{ for(let i=0;i<n;i++) if(!f(i)) return false; return true; };
+  switch(b.type){
+    case 'quiz': return (p.questions||[]).every((q,qi)=> q.type==='text' || (Array.isArray(a[qi]) && a[qi].length>0));
+    case 'exact_input': return all((p.items||[]).length, filled);
+    case 'match': return all((p.pairs||[]).length, filled);
+    case 'gaps': return all(kpGapsN(p.text), filled);
+    case 'truefalse': return all((p.statements||[]).length, has);
+    case 'sequence': return all((p.items||[]).length, has);
+    case 'hotspot': return all((p.points||[]).length, has);
+    case 'order': return Array.isArray(a.order) && a.order.length===(p.words||[]).length;
+    case 'sort': return Object.keys(a.assign||{}).length >= kpSortItems(b).length;
+    case 'speaking': return !!String(a.audio||'').trim();
+    case 'task': return !!String(a.text||'').trim() || !!String(a.audio||'').trim();
+    case 'video': return a.watched===true;
+    case 'flashcards': return Array.isArray(a.seen) && new Set(a.seen).size >= (p.cards||[]).length;
+    default: return true;
+  }
+}
+
+// ── запуск
+async function kpBoot(params){
+  const lessonId=params.get('run'), enr=params.get('enroll');
+  const preview = params.get('preview')==='1' || !enr;
+  $('loginScreen').classList.add('hidden'); $('app').classList.add('hidden');
+  document.body.classList.add('kp-on');
+  document.body.insertAdjacentHTML('beforeend', `<div id="kp"><div class="kload">Загружаю…</div></div>`);
+  let zoom=1; try{ zoom=Number(localStorage.getItem('kp:zoom'))||1; }catch(e){}
+  KP = { lessonId, enr, preview, ans:{}, ui:{}, pending:new Set(), seen:new Set(), cur:0, status:'in_progress',
+         view:'doing', zoom, offline:false, netBack:false, comments:[], retake:null, note:'', grade:null, meta:{},
+         readyShown:new Set(), pick:Math.floor(Math.random()*1e6), parentPct:false, welcome:false };
+  CR_VIEW = { role:'student', variant:'any', format:'any' };
+  try{
+    let blocks=[];
+    if(preview){
+      const { data:bl, error } = await sb.from('classroom_blocks')
+        .select('id, type, payload, sort_order, audience, variant, format').eq('lesson_id', lessonId).order('sort_order');
+      if(error) throw error;
+      blocks = bl||[];
+      KP.meta = await kpPreviewMeta(lessonId);
+    } else {
+      const args={ p_enrollment_id:enr, p_lesson_id:lessonId };
+      const [meta, bl, grade] = await Promise.all([
+        rpc('classroom_run_meta', args), rpc('classroom_run_blocks', args), rpc('classroom_lesson_grade', args) ]);
+      KP.meta = meta||{}; blocks = bl||[]; KP.grade = grade||{};
+      KP.status = KP.grade.status || 'in_progress';
+      KP.comments = KP.grade.comments || [];
+      KP.note = KP.grade.teacher_note || '';
+      if(KP.status==='retake' && Array.isArray(KP.grade.retake_blocks)) KP.retake = new Set(KP.grade.retake_blocks);
+      const ids = blocks.map(b=>b.id);
+      if(ids.length){
+        const { data:subs, error } = await sb.from('classroom_submissions').select('block_id, answers')
+          .eq('enrollment_id', enr).is('section_key', null).in('block_id', ids);
+        if(error) throw error;
+        (subs||[]).forEach(s=>{ const a=Object.assign({}, s.answers||{}); delete a.__results; KP.ans[s.block_id]=a; });
+      }
+    }
+    blocks.sort((x,y)=>(x.sort_order||0)-(y.sort_order||0));
+    KP.screens = blocks.filter(b=>crBlockVisible(b) && (b.type!=='video' && b.type!=='flashcards' || kpCounts(b)));
+    KP.byId = {}; KP.screens.forEach(b=>{ KP.byId[b.id]=b; });
+    KP.view = KP.status==='submitted' ? 'sent' : KP.status==='reviewed' ? 'checked' : 'doing';
+    if(KP.view==='doing'){
+      const hadAny = KP.screens.some(b=>kpHas(KP.ans[b.id]));
+      kpLocalLoad();
+      const act=kpActive();
+      const firstLeft = act.find(i=>kpCounts(KP.screens[i]) && !kpComplete(KP.screens[i], KP.ans[KP.screens[i].id]));
+      // впервые — с начала (там может быть материал), вернулся — с первого невыполненного
+      KP.cur = (hadAny && firstLeft!=null) ? firstLeft : (act[0]||0);
+      KP.welcome = hadAny && KP.status!=='retake' && KP.cur>0;
+      kpMarkSeen();
+    }
+    kpRender();
+    if(!preview){
+      window.addEventListener('online', ()=>{ kpFlush(); kpUploadRetry(); });
+      window.addEventListener('offline', ()=>kpNet(false));
+      setInterval(()=>{ if(KP.pending.size) kpFlush(); kpUploadRetry(); }, 15000);
+      window.addEventListener('pagehide', kpPageHide);
+      if(KP.pending.size) kpFlush();
+    }
+    window.addEventListener('message', kpYtMessage);
+  }catch(e){
+    $('kp').innerHTML = `<div class="kcenter"><div class="kdone"><div class="em">😕</div><h2>Не получилось открыть домашку</h2><p>${esc(e.message||e)}</p></div></div>`;
+  }
+}
+async function kpPreviewMeta(lessonId){
+  const m={ status:'new', streak:0 };
+  try{
+    const { data:le } = await sb.from('classroom_lessons').select('title, kind, unit_id').eq('id', lessonId).maybeSingle();
+    if(!le) return m; m.lesson_title=le.title; m.kind=le.kind;
+    const { data:un } = await sb.from('classroom_units').select('title, sort_order, course_id').eq('id', le.unit_id).maybeSingle();
+    if(un){ m.unit_title=un.title; m.unit_no=un.sort_order;
+      const { data:co } = await sb.from('classroom_courses').select('title, slug').eq('id', un.course_id).maybeSingle();
+      if(co){ m.course_title=co.title; m.course_slug=co.slug; } }
+  }catch(e){}
+  return m;
+}
+
+// Шифр: SM2 Unit 1 Homework 1 · GG1 Unit 3 Homework 2 · WD1 Homework 12 (у Wow Dragon без юнита)
+function kpTitle(){
+  const m=KP.meta||{}, code=String(m.course_slug||'').toUpperCase(), t=m.lesson_title||'Домашка';
+  if(!code) return t;
+  if(/^WD/.test(code) || /^(unit|final)\b/i.test(t) || m.unit_no==null) return `${code} ${t}`;
+  return `${code} Unit ${m.unit_no} ${t}`;
+}
+function kpSub(){
+  const m=KP.meta||{}; const theme=String(m.unit_title||'').split(' · ').slice(1).join(' · ');
+  return [m.course_title, theme].filter(Boolean).join(' · ');
+}
+function kpIsWD(){ return /^wd/i.test(String((KP.meta||{}).course_slug||'')); }
+
+// ── какие экраны сейчас можно менять
+function kpActive(){
+  return KP.screens.map((b,i)=>i).filter(i=> KP.retake==null || KP.retake.has(KP.screens[i].id));
+}
+function kpEditable(id){
+  return KP.view==='doing' && !KP.sending && (KP.retake==null || KP.retake.has(id));
+}
+function kpDone(i){
+  const b=KP.screens[i]; if(!b) return false;
+  if(!kpCounts(b)) return KP.seen.has(b.id);
+  return kpComplete(b, KP.ans[b.id]);
+}
+function kpLeft(){ return kpActive().filter(i=>kpCounts(KP.screens[i]) && !kpDone(i)); }
+function kpMarkSeen(){ const b=KP.screens[KP.cur]; if(b && !kpCounts(b)) KP.seen.add(b.id); }
+
+// ── хранение на устройстве: несохранённые на сервере ответы и номер экрана
+function kpKey(){ return 'kp:'+KP.enr+':'+KP.lessonId; }
+function kpLocalSave(){
+  if(KP.preview) return;
+  try{
+    const ans={}; KP.pending.forEach(id=>{ ans[id]=KP.ans[id]; });
+    localStorage.setItem(kpKey(), JSON.stringify({ v:1, ans, pending:[...KP.pending], seen:[...KP.seen], cur:KP.cur }));
+  }catch(e){}
+}
+function kpLocalLoad(){
+  if(KP.preview) return;
+  try{
+    const s=JSON.parse(localStorage.getItem(kpKey())||'null'); if(!s) return;
+    (s.pending||[]).forEach(id=>{ if(KP.byId[id] && kpEditable(id) && s.ans && id in s.ans){ KP.ans[id]=s.ans[id]; KP.pending.add(id); } });
+    (s.seen||[]).forEach(id=>KP.seen.add(id));
+  }catch(e){}
+}
+function kpLocalClear(){ try{ localStorage.removeItem(kpKey()); }catch(e){} }
+
+// ── сохранение ответа
+function kpSet(id, a, soft){
+  if(!kpEditable(id)) return;
+  KP.ans[id]=a;
+  if(!KP.preview){ KP.pending.add(id); kpLocalSave(); kpFlushSoon(); }
+  if(soft) kpSoft(); else kpUpd();
+}
+function kpFlushSoon(){ clearTimeout(KP.ft); KP.ft=setTimeout(kpFlush, 600); }
+function kpIsNetErr(e){
+  const m=String((e&&(e.message||e.details))||e||'');
+  return !navigator.onLine || /failed to fetch|networkerror|load failed|network request|fetch failed/i.test(m);
+}
+async function kpFlush(){
+  if(KP.preview || KP.flushing) return;
+  KP.flushing=true;
+  try{
+    for(const id of [...KP.pending]){
+      const a=KP.ans[id], b=KP.byId[id];
+      if(!b){ KP.pending.delete(id); continue; }
+      try{
+        if(b.type==='embed') await rpc('classroom_submit_embed', { p_block_id:id, p_enrollment_id:KP.enr, p_score:null, p_payload:{} });
+        else await rpc('classroom_submit_block', { p_block_id:id, p_enrollment_id:KP.enr, p_answers:a||{} });
+        if(KP.ans[id]===a) KP.pending.delete(id);   // за время запроса ответ не менялся
+        kpNet(true);
+      }catch(e){
+        if(kpIsNetErr(e)){ kpNet(false); break; }
+        KP.pending.delete(id);
+        const msg=e.message||String(e);
+        if(/уже отправлена|уже принял/i.test(msg)){ kpLocalClear(); toast(msg); setTimeout(()=>location.reload(), 1500); return; }
+        toast(msg);
+      }
+    }
+  } finally {
+    KP.flushing=false; kpLocalSave(); kpSavedRefresh();
+    if(KP.pending.size && !KP.offline) kpFlushSoon();
+  }
+}
+function kpNet(on){
+  if(on){
+    if(KP.offline){ KP.offline=false; KP.netBack=true; kpNetRefresh(); setTimeout(()=>{ KP.netBack=false; kpNetRefresh(); }, 3500); }
+  } else if(!KP.offline){ KP.offline=true; KP.netBack=false; kpNetRefresh(); }
+  kpSavedRefresh();
+}
+function kpSavedTxt(id){
+  if(KP.preview) return KP.ans[id]!=null ? 'предпросмотр — ответ не сохраняется' : '';
+  const u=KP.ui[id]||{};
+  if(u.up==='busy') return 'сохраняю запись…';
+  if(u.up==='wait') return 'запись сохранится, когда появится интернет';
+  if(KP.pending.has(id)) return KP.offline ? 'сохранено на устройстве' : 'сохраняю…';
+  return kpHas(KP.ans[id]) ? 'сохранено' : '';
+}
+function kpSavedRefresh(){
+  document.querySelectorAll('#kp .ksaved[data-id]').forEach(el=>{
+    const id=el.dataset.id; el.textContent=kpSavedTxt(id);
+    el.classList.toggle('local', (KP.pending.has(id) && KP.offline) || (KP.ui[id]||{}).up==='wait');
+  });
+}
+
+// ── звук: обычный и медленный (тот же файл, высота голоса сохраняется)
+let KP_PLAYER=null, KP_PBTN=null;
+function kpPlay(btn, rate){
+  const src=btn && btn.dataset.src; if(!src) return;
+  const same = KP_PBTN===btn && KP_PLAYER && !KP_PLAYER.paused;
+  document.querySelectorAll('#kp .playing').forEach(x=>x.classList.remove('playing'));
+  if(KP_PLAYER){ KP_PLAYER.pause(); KP_PLAYER=null; }
+  KP_PBTN=null;
+  if(same) return;   // второе нажатие — стоп
+  const a=new Audio(src); a.preservesPitch=true; a.mozPreservesPitch=true; a.webkitPreservesPitch=true;
+  a.playbackRate = rate||1;
+  const done=()=>{ btn.classList.remove('playing'); if(KP_PBTN===btn){ KP_PBTN=null; KP_PLAYER=null; } };
+  a.onended=done; KP_PLAYER=a; KP_PBTN=btn; btn.classList.add('playing');
+  a.play().catch(()=>{ done(); toast('Не удалось включить звук'); });
+}
+function kpSnd(url, label){
+  if(!url) return '';
+  return `<div class="ksnd-row"><button class="ksnd" data-src="${kpA(url)}" onclick="kpPlay(this)">🔊 ${label||'Послушать'}</button>
+    <button class="ksnd slow" data-src="${kpA(url)}" onclick="kpPlay(this,KP_SLOW)">🐢 Медленнее</button></div>`;
+}
+function kpMini(url){ return url ? `<span class="kmini" role="button" data-src="${kpA(url)}" onclick="event.stopPropagation();kpPlay(this)">🔊</span>` : ''; }
+function kpImg(url, cls){ return url ? `<img class="${cls||'kph'}" src="${kpA(url)}" alt="" onerror="this.style.visibility='hidden'">` : ''; }
+function kpTile(text, image, audio){ return (image ? kpImg(image) : `<span>${esc(text==null?'':text)}</span>`) + kpMini(audio); }
+
+// ── значок и заголовок задания
+function kpIcon(b){
+  const p=b.payload||{};
+  const m={ video:'video', flashcards:'cards', match:'match', order:'build', gaps:'write', exact_input:'write', truefalse:'truefalse',
+            sort:'sort', sequence:'sequence', hotspot:'hotspot', speaking:'speak', text:'text', embed:'task' };
+  if(b.type==='quiz') return (p.questions||[]).some(q=>q.audio||q.audio_url) ? 'listen' : 'choose';
+  if(b.type==='task') return p.answer_kind==='audio' ? 'speak' : 'task';
+  return m[b.type]||'task';
+}
+function kpHeading(b){
+  const p=b.payload||{};
+  if(p.title) return esc(p.title);
+  return ({ video:'Посмотри видео', flashcards:'Посмотри все карточки', quiz:'Выбери ответ', match:'Соедини пары',
+    order:'Составь предложение', gaps:'Вставь пропущенные слова', exact_input:'Напиши ответ', truefalse:'Верно или неверно?',
+    sort:'Разложи по группам', sequence:'Расставь по порядку', hotspot:(p.mode==='find'?'Найди на картинке':'Подпиши картинку'),
+    speaking:'Запиши ответ голосом', task:'Задание', text:'Прочитай', embed:'Выполни упражнение' })[b.type] || 'Задание';
+}
+
+// ============================================================
+//  ЗАДАНИЯ ПО ТИПАМ
+// ============================================================
+function kpBody(b){
+  const f = window['kpB_'+b.type];
+  return f ? f(b) : '<div class="kneed">Это задание пока не открывается здесь.</div>';
+}
+
+function kpB_text(b){ const p=b.payload||{}; return `${kpSnd(p.audio)}<div class="khtml">${crTextHtml(p)}</div>`; }
+
+function kpYtId(url){
+  const m=String(url||'').match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{6,})/); return m ? m[1] : '';
+}
+function kpB_video(b){
+  const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, u=KP.ui[id]||{};
+  const yt = p.provider==='youtube' || /youtu/.test(p.url||'');
+  let media;
+  if(yt){
+    const vid=kpYtId(p.url);
+    media = `<iframe class="kyt" id="kyt-${id}" src="https://www.youtube.com/embed/${kpA(vid)}?enablejsapi=1&rel=0&playsinline=1&origin=${encodeURIComponent(location.origin)}"
+      allow="autoplay; encrypted-media; fullscreen" allowfullscreen onload="kpYtHook(this,'${id}')"></iframe>`;
+  } else {
+    media = `<video class="kvid" src="${kpA(p.url)}" controls playsinline preload="metadata"
+      onended="kpVideoDone('${id}')" ontimeupdate="kpVideoTime(this,'${id}')" onerror="kpVideoBroken('${id}')"></video>`;
+  }
+  const need = a.watched ? 'Видео просмотрено ✓' : 'Досмотри до конца — без этого домашку не отправить';
+  const fb = (u.broken && !a.watched && kpEditable(id))
+    ? `<button class="kghost" onclick="kpVideoDone('${id}')">Видео не открывается — отметить просмотренным</button>` : '';
+  return `${media}<div class="kneed" id="kvn-${id}">${need}</div><div id="kvf-${id}">${fb}</div>`;
+}
+function kpVideoTime(el, id){ if(el.duration && el.currentTime >= el.duration-0.6) kpVideoDone(id); }
+function kpVideoDone(id){
+  const a=KP.ans[id]||{}; if(a.watched || !kpEditable(id)) return;
+  kpSet(id, { watched:true }, true);
+  const n=document.getElementById('kvn-'+id); if(n) n.textContent='Видео просмотрено ✓';
+  const f=document.getElementById('kvf-'+id); if(f) f.innerHTML='';
+}
+function kpVideoBroken(id){
+  (KP.ui[id]=KP.ui[id]||{}).broken=true;
+  const f=document.getElementById('kvf-'+id);
+  if(f && kpEditable(id) && !(KP.ans[id]||{}).watched)
+    f.innerHTML=`<button class="kghost" onclick="kpVideoDone('${id}')">Видео не открывается — отметить просмотренным</button>`;
+}
+// YouTube: подписываемся на события плеера через postMessage (enablejsapi=1).
+// Не ответил за 10 с — значит, плеер не сообщает о конце, даём отметить вручную.
+function kpYtHook(fr, id){
+  const u=(KP.ui[id]=KP.ui[id]||{}); u.yt=false;
+  const ping=()=>{ try{ fr.contentWindow.postMessage(JSON.stringify({ event:'listening', id, channel:'widget' }), '*'); }catch(e){} };
+  ping(); let n=0; const iv=setInterval(()=>{ if(u.yt || ++n>10){ clearInterval(iv); if(!u.yt) kpVideoBroken(id); return; } ping(); }, 1000);
+}
+function kpYtMessage(e){
+  if(!/youtube(-nocookie)?\.com$/.test(String(e.origin).replace(/^https?:\/\//,''))) return;
+  let d; try{ d = typeof e.data==='string' ? JSON.parse(e.data) : e.data; }catch(_){ return; }
+  if(!d || !d.id || !KP || !KP.byId[d.id]) return;
+  (KP.ui[d.id]=KP.ui[d.id]||{}).yt=true;
+  const st = d.event==='onStateChange' ? d.info : (d.info && d.info.playerState);
+  if(st===0) kpVideoDone(d.id);
+}
+
+function kpB_flashcards(b){
+  const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, u=KP.ui[id]||{}, flip=u.flip||{};
+  const seen=new Set(a.seen||[]), cards=p.cards||[];
+  const html = cards.map((c,k)=>{
+    const f=!!flip[k];
+    let inner;
+    if(c.image) inner = kpImg(c.image) + (f ? `<span class="w">${esc(c.text||'')}</span>${c.translation?`<span class="tr">${esc(c.translation)}</span>`:''}` : '<span class="tap">нажми</span>');
+    else inner = `<span class="w big">${esc(c.text||'')}</span>` + (f ? (c.translation?`<span class="tr">${esc(c.translation)}</span>`:'') : (c.translation?'<span class="tap">нажми — перевод</span>':''));
+    return `<button class="kfc${f?' flip':''}" data-src="${kpA(c.audio||'')}" onclick="kpCard('${id}',${k},this)">${inner}${f&&c.audio?' <span class="tr">🔊</span>':''}</button>`;
+  }).join('');
+  return `<div class="kcards">${html}</div><div class="kneed">Посмотрено ${seen.size} из ${cards.length}</div>`;
+}
+function kpCard(id, k, el){
+  const u=(KP.ui[id]=KP.ui[id]||{}); u.flip=u.flip||{}; u.flip[k]=!u.flip[k];
+  if(u.flip[k] && el.dataset.src) kpPlay(el);
+  const a=KP.ans[id]||{}; const seen=Array.isArray(a.seen)?a.seen.slice():[];
+  if(!seen.includes(k) && kpEditable(id)){ seen.push(k); kpSet(id, { seen }); }
+  else kpUpd();
+}
+
+function kpB_quiz(b){
+  const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, qs=p.questions||[];
+  return qs.map((q,qi)=>{
+    const head = (q.q || qs.length>1) ? `<div class="kqq">${qs.length>1?`<span class="kqn">${qi+1}</span>`:''}<span>${q.q||''}</span></div>` : '';
+    const top = head + kpSnd(q.audio||q.audio_url, 'Послушать') + kpImg(q.image, 'kph kqimg');
+    if(q.type==='text')
+      return `<div class="kq">${top}<textarea class="kta" data-id="${id}" data-k="${qi}" oninput="kpInput(this)" placeholder="Напиши ответ">${esc(a[qi]||'')}</textarea></div>`;
+    const opts=q.options||[], hasImg=opts.some(o=>o&&o.image);
+    const yesNo = opts.length===2 && !hasImg;   // «да / нет» не перемешиваем
+    const order = yesNo ? [0,1] : kpShuffle([...Array(opts.length).keys()], id+':'+qi);
+    const picked = Array.isArray(a[qi]) ? a[qi] : [];
+    const btns = order.map(oi=>{ const o=opts[oi];
+      const lab = (o&&o.image) ? kpImg(o.image) : `<span>${esc(o&&o.text!=null?o.text:o)}</span>`;
+      return `<button class="kopt${hasImg?' img':''}${picked.includes(oi)?' sel':''}" onclick="kpQuizPick('${id}',${qi},${oi})">${lab}${kpMini(o&&o.audio)}</button>`;
+    }).join('');
+    return `<div class="kq">${top}<div class="kopts${hasImg?' img':''}">${btns}</div>${q.type==='multiple'?'<div class="khint">Можно выбрать несколько</div>':''}</div>`;
+  }).join('');
+}
+function kpQuizPick(id, qi, oi){
+  if(!kpEditable(id)) return;
+  const q=((KP.byId[id].payload||{}).questions||[])[qi]||{};
+  const a=Object.assign({}, KP.ans[id]||{}); let cur=Array.isArray(a[qi])?a[qi].slice():[];
+  if(q.type==='multiple') cur = cur.includes(oi) ? cur.filter(x=>x!==oi) : cur.concat(oi);
+  else cur=[oi];
+  a[qi]=cur; kpSet(id, a);
+}
+// Поля ввода: не перерисовываем задание, чтобы не терять курсор
+function kpInput(el){
+  const id=el.dataset.id, k=el.dataset.k; if(!kpEditable(id)) return;
+  const a=Object.assign({}, KP.ans[id]||{}); a[k]=el.value; kpSet(id, a, true);
+}
+
+function kpB_exact_input(b){
+  const p=b.payload||{}, id=b.id, a=KP.ans[id]||{};
+  return (p.items||[]).map((it,ii)=>`<div class="kei">${kpSnd(it.audio)}${kpImg(it.image,'kph kqimg')}
+      ${it.prompt?`<div class="keip">${esc(it.prompt)}</div>`:''}
+      <input class="kin" value="${kpA(a[ii]||'')}" data-id="${id}" data-k="${ii}" oninput="kpInput(this)"
+        autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="ответ"></div>`).join('');
+}
+
+function kpRights(b){
+  const pairs=(b.payload||{}).pairs||[];
+  return kpShuffle(pairs.map((x,ix)=>({ val:(x.right!=null?x.right:('#'+ix)), image:x.right_image, audio:x.right_audio })), b.id);
+}
+function kpB_match(b){
+  const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, u=KP.ui[id]||{}, pairs=p.pairs||[], rights=kpRights(b);
+  const ownerOf = val => { const k=Object.keys(a).find(k=>a[k]===val); return k==null?null:Number(k); };
+  let html='';
+  pairs.forEach((pr,k)=>{
+    const lp = a[k]!=null && a[k]!=='';
+    html += `<button class="kml${u.sel===k?' sel':''}${lp?' pair':''}" style="--pc:${KP_PAIRC[k%KP_PAIRC.length]}" onclick="kpMatchL('${id}',${k})">${kpTile(pr.left, pr.left_image, pr.left_audio)}</button>`;
+    const r=rights[k], o=ownerOf(r.val);
+    html += `<button class="kmr${o!=null?' pair':''}" style="--pc:${o!=null?KP_PAIRC[o%KP_PAIRC.length]:'#fff'}" onclick="kpMatchR('${id}',${k})">${kpTile(r.val, r.image, r.audio)}</button>`;
+  });
+  return `<div class="kmatch">${html}</div><div class="khint">Нажми слева, потом пару справа. Нажми на пару ещё раз — она разъединится.</div>`;
+}
+function kpMatchL(id, k){
+  if(!kpEditable(id)) return;
+  const u=(KP.ui[id]=KP.ui[id]||{}), a=KP.ans[id]||{};
+  if(a[k]!=null && a[k]!==''){ const n=Object.assign({},a); delete n[k]; u.sel=k; kpSet(id, n); return; }
+  u.sel = (u.sel===k ? null : k); kpUpd();
+}
+function kpMatchR(id, vi){
+  if(!kpEditable(id)) return;
+  const u=(KP.ui[id]=KP.ui[id]||{}), a=Object.assign({}, KP.ans[id]||{}), val=kpRights(KP.byId[id])[vi].val;
+  const owner=Object.keys(a).find(k=>a[k]===val);
+  if(u.sel==null){
+    if(owner!=null){ delete a[owner]; kpSet(id, a); } else toast('Сначала нажми слева');
+    return;
+  }
+  if(owner!=null) delete a[owner];
+  a[u.sel]=val; u.sel=null; kpSet(id, a);
+}
+
+// Составь предложение: строка — номера слов из банка; в ответ уходят сами слова
+function kpOrderLine(b){
+  const words=(b.payload||{}).words||[], a=KP.ans[b.id]||{}, u=(KP.ui[b.id]=KP.ui[b.id]||{});
+  if(!u.line){
+    u.line=[]; const used=new Set();
+    (Array.isArray(a.order)?a.order:[]).forEach(w=>{ const i=words.findIndex((x,ix)=>x===w && !used.has(ix)); if(i>=0){ used.add(i); u.line.push(i); } });
+  }
+  return u.line;
+}
+function kpB_order(b){
+  const p=b.payload||{}, id=b.id, words=p.words||[], line=kpOrderLine(b), bank=kpShuffle([...Array(words.length).keys()], id);
+  const full=line.length===words.length && words.length>0;
+  const right = `<div class="r">
+      <div class="kline${full?' full':''}">${line.map((w,k)=>`<button class="kchip" onclick="kpOrderOut('${id}',${k})">${esc(words[w])}</button>`).join('')
+        || '<span style="color:var(--kfaint);font-size:15px">Нажимай слова по порядку</span>'}</div>
+      <div class="kbank">${bank.map(k=>`<button class="kchip${line.includes(k)?' used':''}" onclick="kpOrderIn('${id}',${k})">${esc(words[k])}</button>`).join('')}</div></div>`;
+  return `${kpSnd(p.audio,'Послушать фразу')}${p.image?`<div class="kside">${kpImg(p.image)}${right}</div>`:right}`;
+}
+function kpOrderSave(id){ const words=(KP.byId[id].payload||{}).words||[]; kpSet(id, { order: KP.ui[id].line.map(i=>words[i]) }); }
+function kpOrderIn(id, k){ if(!kpEditable(id)) return; const l=kpOrderLine(KP.byId[id]); if(!l.includes(k)){ l.push(k); kpOrderSave(id); } }
+function kpOrderOut(id, k){ if(!kpEditable(id)) return; kpOrderLine(KP.byId[id]).splice(k,1); kpOrderSave(id); }
+
+function kpB_gaps(b){
+  const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, u=KP.ui[id]||{}, parts=gapsParse(p.text||''), drag=p.mode==='drag';
+  const words = kpShuffle(parts.filter(x=>x.kind==='gap').map(x=>(x.accept||[])[0]||''), id);
+  const sent = parts.map(x=>{
+    if(x.kind==='text') return esc(x.value).replace(/\n/g,'<br>');
+    const v=a[x.index]||'';
+    if(drag) return `<span class="kslot${v?' full':''}${u.slot===x.index?' sel':''}" onclick="kpGapSlot('${id}',${x.index})">${v?esc(v):'&nbsp;'}</span>`;
+    return `<input class="kgin" value="${kpA(v)}" data-id="${id}" data-k="${x.index}" oninput="kpInput(this)" autocomplete="off" autocapitalize="off" spellcheck="false">`;
+  }).join('');
+  let bank='';
+  if(drag){
+    const left={}; Object.keys(a).forEach(k=>{ const v=a[k]; if(v) left[v]=(left[v]||0)+1; });
+    bank = `<div class="kbank">${words.map((w,wi)=>{ const used=left[w]>0; if(used) left[w]--;
+      return `<button class="kchip${used?' used':''}" onclick="kpGapWord('${id}',${wi})">${esc(w)}</button>`; }).join('')}</div>`;
+  }
+  const right = `<div class="r"><div class="ksent">${sent}</div>${bank}</div>`;
+  return `${kpSnd(p.audio)}${p.image?`<div class="kside">${kpImg(p.image)}${right}</div>`:right}${drag?'<div class="khint">Нажми слово — оно встанет в пропуск. Нажми на пропуск, чтобы очистить.</div>':''}`;
+}
+function kpGapSlot(id, idx){
+  if(!kpEditable(id)) return;
+  const a=KP.ans[id]||{}, u=(KP.ui[id]=KP.ui[id]||{});
+  if(a[idx]){ const n=Object.assign({},a); delete n[idx]; u.slot=idx; kpSet(id, n); return; }
+  u.slot = (u.slot===idx?null:idx); kpUpd();
+}
+function kpGapWord(id, wi){
+  if(!kpEditable(id)) return;
+  const b=KP.byId[id], p=b.payload||{}, parts=gapsParse(p.text||'').filter(x=>x.kind==='gap');
+  const words=kpShuffle(parts.map(x=>(x.accept||[])[0]||''), id), w=words[wi];
+  const a=Object.assign({}, KP.ans[id]||{}), u=(KP.ui[id]=KP.ui[id]||{});
+  let idx = (u.slot!=null && !a[u.slot]) ? u.slot : null;
+  if(idx==null){ const g=parts.find(x=>!a[x.index]); if(!g) return; idx=g.index; }
+  a[idx]=w; u.slot=null; kpSet(id, a);
+}
+
+function kpB_truefalse(b){
+  const p=b.payload||{}, id=b.id, a=KP.ans[id]||{};
+  return (p.statements||[]).map((s,si)=>`<div class="ktf"><div class="s">${(p.statements.length>1)?`<span class="kqn">${si+1}</span>`:''}<span>${esc(s.text||'')}</span>${kpMini(s.audio)}</div>
+      <button class="ktfb${a[si]===true?' sel':''}" onclick="kpTF('${id}',${si},true)">✓ Верно</button>
+      <button class="ktfb${a[si]===false?' sel':''}" onclick="kpTF('${id}',${si},false)">✗ Неверно</button></div>`).join('');
+}
+function kpTF(id, si, v){ if(!kpEditable(id)) return; const a=Object.assign({}, KP.ans[id]||{}); a[si]=v; kpSet(id, a); }
+
+function kpB_sort(b){
+  const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, asg=a.assign||{}, u=KP.ui[id]||{};
+  const items=kpShuffle(kpSortItems(b), id);
+  const it = x=>`<button class="kitem${u.sel===x.gi?' sel':''}" onclick="event.stopPropagation();kpSortPick('${id}',${x.gi})">${x.image?kpImg(x.image):esc(x.text||'')}${kpMini(x.audio)}</button>`;
+  const pool=items.filter(x=>asg[x.gi]==null);
+  // корзина — div: кнопки карточек внутри кнопки браузер выносит наружу
+  const bins=(p.groups||[]).map((g,gx)=>`<div class="kbin${u.sel!=null?' can':''}" role="button" onclick="kpSortDrop('${id}',${gx})">
+      <h4>${esc(g.name||('Группа '+(gx+1)))}</h4><div class="in">${items.filter(x=>String(asg[x.gi])===String(gx)).map(it).join('')}</div></div>`).join('');
+  return `<div class="kpool">${pool.length?pool.map(it).join(''):'<span class="khint">Все карточки разложены ✓</span>'}</div>
+    <div class="kbins">${bins}</div><div class="khint">Нажми карточку, потом — нужную группу. Нажми карточку в группе, чтобы вернуть её.</div>`;
+}
+function kpSortPick(id, gi){
+  if(!kpEditable(id)) return;
+  const a=KP.ans[id]||{}, u=(KP.ui[id]=KP.ui[id]||{});
+  if(a.assign && a.assign[gi]!=null){ const asg=Object.assign({}, a.assign); delete asg[gi]; u.sel=null; kpSet(id, { assign:asg }); return; }
+  u.sel = (u.sel===gi?null:gi); kpUpd();
+}
+function kpSortDrop(id, gx){
+  if(!kpEditable(id)) return;
+  const u=(KP.ui[id]=KP.ui[id]||{}); if(u.sel==null) return;
+  const asg=Object.assign({}, (KP.ans[id]||{}).assign||{}); asg[u.sel]=gx; u.sel=null; kpSet(id, { assign:asg });
+}
+
+function kpSeqOrd(b){
+  const items=(b.payload||{}).items||[], a=KP.ans[b.id]||{}, u=(KP.ui[b.id]=KP.ui[b.id]||{});
+  if(!u.ord){
+    const full = items.length>0 && items.every((_,i)=>a[i]!=null);
+    u.ord = full ? items.map((_,i)=>Number(a[i])) : kpPerm(items.length, b.id);
+  }
+  return u.ord;
+}
+function kpB_sequence(b){
+  const p=b.payload||{}, id=b.id, items=p.items||[], ord=kpSeqOrd(b);
+  const rows = ord.map((oi,pos)=>{ const x=items[oi]||{};
+    return `<div class="kseqr"><span class="n">${pos+1}</span><span class="x">${kpImg(x.image)}${x.text?`<span>${esc(x.text)}</span>`:''}${kpMini(x.audio)}</span>
+      <button class="kmv" ${pos===0?'disabled':''} onclick="kpSeqMove('${id}',${pos},-1)" title="Выше">↑</button>
+      <button class="kmv" ${pos===ord.length-1?'disabled':''} onclick="kpSeqMove('${id}',${pos},1)" title="Ниже">↓</button></div>`; }).join('');
+  return `${kpSnd(p.audio)}${kpImg(p.image,'kph kqimg')}<div class="kseq">${rows}</div><div class="khint">Двигай строки стрелками, чтобы получился правильный порядок.</div>`;
+}
+function kpSeqMove(id, pos, d){
+  if(!kpEditable(id)) return;
+  const ord=kpSeqOrd(KP.byId[id]), j=pos+d; if(j<0||j>=ord.length) return;
+  const t=ord[pos]; ord[pos]=ord[j]; ord[j]=t;
+  const a={}; ord.forEach((oi,p)=>{ a[p]=oi; }); kpSet(id, a);
+}
+
+function kpHsBank(b){
+  const p=b.payload||{};
+  return kpShuffle((p.points||[]).map(pt=>({ text:pt.text||'', audio:pt.audio||'' }))
+    .concat((p.extras||[]).map(x=> typeof x==='string' ? { text:x, audio:'' } : { text:(x&&x.text)||'', audio:(x&&x.audio)||'' })), b.id);
+}
+function kpB_hotspot(b){
+  const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, u=KP.ui[id]||{}, pts=p.points||[], find=p.mode==='find';
+  if(find){
+    const step=Object.keys(a).length, cur=pts[step];
+    return `<div class="khs find" onclick="kpHsFind(event,'${id}')"><img src="${kpA(p.image||'')}" alt=""></div>
+      ${cur ? `<div class="kfind">Найди: <span>${esc(cur.text||'')}</span>${kpMini(cur.audio)}</div><div class="khint">Нажми на картинку. Осталось: ${pts.length-step}</div>`
+            : '<div class="kfind">Все найдены ✓</div>'}`;
+  }
+  const marks = pts.map((pt,ix)=>{ const v=a[ix];
+    return `<button class="khm${v?' full':''}${u.pick===ix?' sel':''}" style="left:${Number(pt.x)||0}%;top:${Number(pt.y)||0}%" onclick="kpHsPoint('${id}',${ix})">${v?esc(v):ix+1}</button>`; }).join('');
+  const left={}; Object.keys(a).forEach(k=>{ const v=a[k]; if(v) left[v]=(left[v]||0)+1; });
+  const bank = kpHsBank(b).map((w,wi)=>{ const used=left[w.text]>0; if(used) left[w.text]--;
+    return `<button class="kchip${used?' used':''}" onclick="kpHsWord('${id}',${wi})">${esc(w.text)}${kpMini(w.audio)}</button>`; }).join('');
+  return `<div class="khs"><img src="${kpA(p.image||'')}" alt="">${marks}</div><div class="kbank">${bank}</div>
+    <div class="khint">Нажми номер на картинке, потом подпись. Нажми на подписанную точку, чтобы очистить.</div>`;
+}
+function kpHsPoint(id, ix){
+  if(!kpEditable(id)) return;
+  const a=KP.ans[id]||{}, u=(KP.ui[id]=KP.ui[id]||{});
+  if(a[ix]){ const n=Object.assign({},a); delete n[ix]; u.pick=ix; kpSet(id, n); return; }
+  u.pick=(u.pick===ix?null:ix); kpUpd();
+}
+function kpHsWord(id, wi){
+  if(!kpEditable(id)) return;
+  const u=(KP.ui[id]=KP.ui[id]||{}), a=Object.assign({}, KP.ans[id]||{}), pts=(KP.byId[id].payload||{}).points||[];
+  let ix=u.pick; if(ix==null){ ix=pts.findIndex((_,i)=>!a[i]); if(ix<0){ toast('Сначала нажми точку на картинке'); return; } }
+  a[ix]=kpHsBank(KP.byId[id])[wi].text; u.pick=null; kpSet(id, a);
+}
+// Попадание — ближайшая точка в пределах 12% картинки
+function kpHsFind(e, id){
+  if(!kpEditable(id)) return;
+  const pts=(KP.byId[id].payload||{}).points||[], a=Object.assign({}, KP.ans[id]||{}), step=Object.keys(a).length;
+  if(step>=pts.length) return;
+  const img=e.currentTarget.querySelector('img'), box=img.getBoundingClientRect();
+  const x=((e.clientX-box.left)/box.width)*100, y=((e.clientY-box.top)/box.height)*100;
+  let best=-1, bd=1e9; pts.forEach((pt,ix)=>{ const d=Math.hypot(x-(Number(pt.x)||0), y-(Number(pt.y)||0)); if(d<bd){ bd=d; best=ix; } });
+  a[step] = (bd<=12 && best>=0) ? (pts[best].text||'') : '';
+  kpSet(id, a);
+}
+
+// ── запись голоса: speaking и task с ответом голосом
+function kpB_speaking(b){
+  const p=b.payload||{};
+  return `${p.html?`<div class="khtml">${p.html}</div>`:''}${kpImg(p.image,'kph kqimg')}${kpSnd(p.sample,'Послушать образец')}${kpRecBox(b.id)}`;
+}
+function kpB_task(b){
+  const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, audio=p.answer_kind==='audio';
+  return `${kpImg(p.image,'kph kqimg')}${kpSnd(p.audio)}${p.html?`<div class="khtml">${p.html}</div>`:''}
+    ${audio?kpRecBox(id):''}
+    <textarea class="kta" data-id="${id}" data-k="text" oninput="kpInput(this)" placeholder="${audio?'Можно добавить текст (необязательно)':'Напиши ответ'}">${esc(a.text||'')}</textarea>`;
+}
+function kpRecBox(id){
+  const a=KP.ans[id]||{}, u=KP.ui[id]||{}, ed=kpEditable(id);
+  let ctl;
+  if(u.rec==='on') ctl = `<span class="ktimer" id="ktm-${id}">0:00</span><span class="kmeter" id="kme-${id}">${'<i></i>'.repeat(18)}</span>
+      <button class="krecbtn stop" onclick="kpRecStop('${id}')">■ Стоп</button>`;
+  else if(u.blobUrl || a.audio) ctl = `<button class="kghost" data-src="${kpA(u.blobUrl||a.audio)}" onclick="kpPlay(this)">▶ Послушать себя</button>
+      ${ed?`<button class="kghost" onclick="kpRecStart('${id}')">↺ Перезаписать</button>`:''}`;
+  else ctl = ed ? `<button class="krecbtn" onclick="kpRecStart('${id}')">🎤 Записать</button>` : '<span class="kneed">Записи нет</span>';
+  const need = (a.audio||u.blobUrl) ? (ed?'Запись готова. Можно перезаписать, пока не отправил домашку.':'') : 'Учитель послушает твою запись';
+  return `<div class="krec">${ctl}</div><div id="kmw-${id}"></div>${need?`<div class="kneed">${need}</div>`:''}`;
+}
+let KP_MIC=null;
+async function kpRecStart(id){
+  if(!kpEditable(id)) return;
+  if(KP_MIC) kpRecStop(KP_MIC.id);
+  if(!navigator.mediaDevices || !window.MediaRecorder){ toast('Этот браузер не умеет записывать звук'); return; }
+  let stream; try{ stream=await navigator.mediaDevices.getUserMedia({ audio:true }); }
+  catch(e){ toast('Разреши доступ к микрофону'); return; }
+  const m = KP_MIC = { id, stream, chunks:[], t0:Date.now(), quiet:performance.now(), hist:[] };
+  try{ const ctx=new (window.AudioContext||window.webkitAudioContext)(); const an=ctx.createAnalyser(); an.fftSize=512;
+       ctx.createMediaStreamSource(stream).connect(an); m.ctx=ctx; m.an=an; m.buf=new Uint8Array(an.fftSize); }catch(e){}
+  m.rec=new MediaRecorder(stream);
+  m.rec.ondataavailable=e=>{ if(e.data && e.data.size) m.chunks.push(e.data); };
+  m.rec.onstop=()=>kpRecDone(m);
+  m.rec.start();
+  (KP.ui[id]=KP.ui[id]||{}).rec='on'; kpUpd();
+  const tick=()=>{
+    if(KP_MIC!==m) return;
+    const s=Math.floor((Date.now()-m.t0)/1000), tm=document.getElementById('ktm-'+id);
+    if(tm) tm.textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+    const bars=document.querySelectorAll('#kme-'+id+' i');
+    if(m.an && bars.length){
+      m.an.getByteTimeDomainData(m.buf); let mx=0; for(const v of m.buf) mx=Math.max(mx, Math.abs(v-128));
+      const lvl=mx/128; m.hist=m.hist.concat(lvl).slice(-bars.length);
+      bars.forEach((bb,k)=>{ const v=m.hist[m.hist.length-bars.length+k]||0; bb.style.height=Math.max(10,Math.min(100,v*220))+'%'; });
+      const now=performance.now(); if(lvl>0.04) m.quiet=now;
+      const w=document.getElementById('kmw-'+id);
+      if(w) w.innerHTML = now-m.quiet>3000 ? '<div class="kmicwarn">🙉 Тебя не слышно. Проверь, что микрофон включён, и говори громче.</div>' : '';
+    }
+    m.raf=requestAnimationFrame(tick);
+  };
+  m.raf=requestAnimationFrame(tick);
+}
+function kpRecStop(id){
+  const m=KP_MIC; if(!m || m.id!==id) return;
+  KP_MIC=null; cancelAnimationFrame(m.raf);
+  try{ if(m.rec.state!=='inactive') m.rec.stop(); }catch(e){}
+  try{ m.stream.getTracks().forEach(t=>t.stop()); }catch(e){}
+  try{ m.ctx && m.ctx.close(); }catch(e){}
+}
+function kpRecDone(m){
+  const id=m.id, u=(KP.ui[id]=KP.ui[id]||{});
+  u.rec=null; u.blob=new Blob(m.chunks, { type:(m.rec.mimeType||'audio/webm') });
+  if(u.blobUrl) URL.revokeObjectURL(u.blobUrl);
+  u.blobUrl=URL.createObjectURL(u.blob);
+  if(KP.preview){ const a=Object.assign({}, KP.ans[id]||{}); a.audio=u.blobUrl; kpSet(id, a); return; }
+  u.up='wait'; kpUpd(); kpUpload(id);
+}
+// Запись уходит в хранилище сразу; без интернета ждёт и повторяется сама
+async function kpUpload(id){
+  const u=KP.ui[id]||{}; if(!u.blob || u.up==='busy') return;
+  u.up='busy'; kpSavedRefresh();
+  try{
+    const ext=(u.blob.type||'').includes('ogg')?'ogg':(u.blob.type||'').includes('mp4')?'m4a':'webm';
+    const file=new File([u.blob], 'speaking_'+Date.now()+'.'+ext, { type:u.blob.type });
+    const url=await uploadToBucket(file, await myUploadFolder());
+    u.up=null; u.blob=null;
+    const a=Object.assign({}, KP.ans[id]||{}); a.audio=url; kpSet(id, a);
+  }catch(e){
+    u.up='wait';
+    if(kpIsNetErr(e)) kpNet(false); else toast(e.message||String(e));
+    kpUpd();
+  }
+}
+function kpUploadRetry(){ Object.keys(KP.ui).forEach(id=>{ if(KP.ui[id].up==='wait' && KP.ui[id].blob) kpUpload(id); }); }
+function kpUploadsPending(){ return Object.keys(KP.ui).some(id=>KP.ui[id].up); }
+
+function kpB_embed(b){
+  const p=b.payload||{}, id=b.id, done=!!KP.ans[id];
+  return `${p.url?`<iframe src="${kpA(p.url)}" style="width:100%;height:min(60vh,520px);border:0;border-radius:16px;background:#fff"></iframe>`:'<div class="kneed">Нет ссылки на упражнение</div>'}
+    ${done ? '<div class="kneed">Отмечено ✓</div>' : (kpEditable(id)?`<button class="kghost" onclick="kpSet('${id}',{done:true})">Готово — упражнение выполнено</button>`:'')}`;
+}
+
+// ── «↺ Заново»: пустой ответ уходит и на сервер, иначе старый остался бы засчитан
+function kpRedo(id){
+  if(!kpEditable(id)) return;
+  KP.ui[id]={}; kpSet(id, {});
+}
+
+// ============================================================
+//  СБОРКА ЭКРАНА
+// ============================================================
+function kpCommentsHtml(id){
+  const list=(KP.comments||[]).filter(c=>c.block_id===id);
+  return list.map(c=>`<div class="ktc">💬<span><b>Учитель</b>${esc(c.body||'')}</span></div>`).join('');
+}
+function kpCardHtml(i, ro){
+  const b=KP.screens[i], id=b.id, counted=kpCounts(b), done=kpDone(i), a=KP.ans[id];
+  const total=KP.screens.length;
+  const ready = !ro && counted && done;
+  const readyCls = KP.readyShown.has(id) ? ' still' : '';
+  if(ready) KP.readyShown.add(id); else KP.readyShown.delete(id);
+  const redoable = ['quiz','match','order','gaps','truefalse','sort','sequence','hotspot','exact_input'].includes(b.type);
+  const redo = (!ro && redoable && kpHas(a) && kpEditable(id)) ? `<button class="kredo" onclick="kpRedo('${id}')" title="Начать задание заново">↺ Заново</button>` : '';
+  let badge='';
+  if(ro && KP.grade && KP.grade.show_answers){
+    const gb=(KP.grade.blocks||[]).find(x=>x.block_id===id);
+    if(gb && gb.score!=null) badge=`<span class="kscore-b">${gb.score}%</span>`;
+  }
+  const showC = KP.status==='retake' || ro;
+  return `<div class="ktask${ro?'':' fit'}" id="kpc-${id}">
+    <div class="khd" id="kph-${id}"><img class="kic" src="media/shared/icons/ic_${kpIcon(b)}.webp" alt="" onerror="this.remove()">
+      <div class="t"><div class="kno">${counted?'Задание':'Материал'} ${i+1} из ${total}</div><h3 class="kq-t">${kpHeading(b)}</h3></div>
+      ${ready?`<span class="kready${readyCls}">✓ готово</span>`:''}${badge}${redo}</div>
+    ${showC?kpCommentsHtml(id):''}
+    <div class="kbody">${kpBody(b)}</div>
+    ${ro?'':`<div class="ksaved${(KP.pending.has(id)&&KP.offline)?' local':''}" data-id="${id}">${kpSavedTxt(id)}</div>`}
+  </div>`;
+}
+
+function kpDueHtml(){
+  const d=(KP.meta||{}).deadline_at; if(!d) return '';
+  const dt=new Date(d), now=new Date();
+  const day=x=>new Date(x.getFullYear(), x.getMonth(), x.getDate()).getTime();
+  const diff=Math.round((day(dt)-day(now))/864e5);
+  if(dt<now){ const ago=-diff; return `<span class="kdue late">⚠️ Просрочено${ago>=1?` ${ago} ${kpPlural(ago,'день','дня','дней')} назад`:''}</span>`; }
+  if(diff===0) return '<span class="kdue soon">🔥 Сделать сегодня</span>';
+  if(diff===1) return '<span class="kdue">⏰ Сделать до завтра</span>';
+  const wd=['воскресенью','понедельнику','вторнику','среде','четвергу','пятнице','субботе'][dt.getDay()];
+  const mon=['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'][dt.getMonth()];
+  return `<span class="kdue">⏰ К ${wd}, ${dt.getDate()} ${mon}</span>`;
+}
+function kpStepsHtml(){
+  if(!(KP.view==='doing')) return '';
+  return `<div class="ksteps" id="kpSteps">${KP.screens.map((b,i)=>{
+    const acc = KP.retake!=null && !KP.retake.has(b.id);
+    const d=kpDone(i);
+    const cls = acc ? 'acc' : (d ? 'ok' : (kpCounts(b)?'':'mat'));
+    return `<button class="kst ${cls}${i===KP.cur?' cur':''}" ${acc?'disabled title="Принято"':''} onclick="kpGo(${i})">${d&&!acc?'✓':i+1}</button>`;
+  }).join('')}</div>`;
+}
+function kpNetHtml(){
+  if(KP.view!=='doing' || KP.preview) return '';
+  if(KP.offline) return '<div class="knetbar off">📶 Нет интернета. Ответы сохраняются на этом устройстве.</div>';
+  if(KP.netBack) return '<div class="knetbar online">✓ Связь есть — всё сохранено на сервере</div>';
+  return '';
+}
+function kpTopHtml(){
+  const zi=KP_ZOOMS.indexOf(KP.zoom);
+  return `<div class="ktop" id="kpTop"><div class="ktop-in">
+      ${KP_BACK_URL?`<a class="kback" href="${kpA(KP_BACK_URL)}">← Домашка</a>`:''}
+      <span class="ktt"><b>${esc(kpTitle())}</b><span>${esc(kpSub())}</span></span>
+      ${KP.preview?'<span class="kprev">👁 Предпросмотр</span>':''}
+      ${KP.view==='doing'?kpDueHtml():''}
+      <span class="kzoom" title="Размер текста"><button onclick="kpZoom(-1)" ${zi<=0?'disabled':''}>A−</button><button onclick="kpZoom(1)" ${zi>=KP_ZOOMS.length-1?'disabled':''}>A+</button></span>
+    </div>${kpStepsHtml()}<div id="kpNet">${kpNetHtml()}</div></div>`;
+}
+function kpBarHtml(){
+  if(KP.view!=='doing') return '';
+  const act=kpActive(), left=kpLeft(), p=act.indexOf(KP.cur), ready=!left.length;
+  const need=act.filter(i=>kpCounts(KP.screens[i])).length;
+  const txt = KP.sending ? '<b>Отправляю…</b><span>Не закрывай страницу</span>'
+    : ready ? '<b>Всё готово!</b><span>Можно отправлять учителю</span>'
+    : `<b>Осталось ${left.length} из ${need}</b><span>${kpPlural(left.length,'задание','задания','заданий')}: ${left.map(i=>i+1).join(', ')}</span>`;
+  const prev = `<button class="knav" ${p<=0?'disabled':''} onclick="kpStep(-1)" aria-label="Назад">←</button>`;
+  if(p<act.length-1 && !ready) return `<div class="kbar-in">${prev}<span class="kleft">${txt}</span><button class="kfin next" onclick="kpStep(1)">Дальше →</button></div>`;
+  return `<div class="kbar-in">${prev}<span class="kleft">${txt}</span>
+    <button class="kfin${ready&&!KP.sending?'':' off'}" onclick="kpFinish()">${KP.status==='retake'?'Отправить ещё раз':'Завершить и отправить'}</button></div>`;
+}
+function kpWelcomeHtml(){
+  return KP.welcome ? `<div class="kwelcome">👋<b>С возвращением! Продолжаем с задания ${KP.cur+1}.
+    <small>Перед отправкой не забудь ещё раз проверить все задания 😉</small></b><button onclick="KP.welcome=false; kpRenderMain()">Понятно</button></div>` : '';
+}
+function kpRetakeHtml(){
+  if(KP.status!=='retake') return '';
+  const n = KP.retake ? KP.retake.size : KP.screens.filter(kpCounts).length;
+  const all = KP.retake==null;
+  return `<div class="kbanner"><span class="em">🔁</span><span><b>${all?'Учитель попросил переделать домашку':`Учитель попросил переделать ${n} ${kpPlural(n,'задание','задания','заданий')}`}</b>
+    <span>${KP.note?esc(KP.note):(all?'Выполни задания ещё раз':'Остальное принято')}</span></span></div>`;
+}
+function kpMainHtml(){
+  if(KP.view==='sent') return kpSentHtml();
+  if(KP.view==='sendfail') return kpSendFailHtml();
+  if(KP.view==='checked') return kpCheckedHtml();
+  if(KP.view==='work') return kpWorkHtml();
+  if(!KP.screens.length) return '<div class="kcenter"><div class="kdone"><div class="em">📭</div><h2>В домашке пока нет заданий</h2></div></div>';
+  return `<div class="klist">${kpRetakeHtml()}${kpWelcomeHtml()}${kpCardHtml(KP.cur)}</div>`;
+}
+function kpRender(){
+  const root=$('kp'); if(!root) return;
+  root.innerHTML = `<div class="kapp" id="kpApp" style="zoom:${KP.zoom}">${kpTopHtml()}<div class="kmain" id="kpMain"></div><div class="kbar" id="kpBar"></div></div>`;
+  kpRenderMain();
+}
+function kpRenderMain(){
+  const m=$('kpMain'); if(!m) return;
+  m.innerHTML=kpMainHtml(); m.scrollTop=0;
+  kpRefreshChrome();
+}
+function kpRefreshChrome(){
+  const t=$('kpTop'); if(t) t.outerHTML=kpTopHtml();
+  const b=$('kpBar'); if(b) b.innerHTML=kpBarHtml();
+}
+function kpNetRefresh(){ const n=$('kpNet'); if(n) n.innerHTML=kpNetHtml(); }
+// Перерисовать текущее задание целиком (после нажатия), шапку и низ
+function kpUpd(){
+  const b=KP.screens[KP.cur]; if(!b || KP.view!=='doing') return;
+  const el=document.getElementById('kpc-'+b.id); if(!el) return;
+  const m=$('kpMain'), st=m?m.scrollTop:0;
+  const tmp=document.createElement('div'); tmp.innerHTML=kpCardHtml(KP.cur);
+  // видео не перезапускаем: заменяем всё, кроме плеера
+  const v=el.querySelector('video,iframe.kyt');
+  if(v){ const nb=tmp.firstElementChild.querySelector('video,iframe.kyt'); if(nb) nb.replaceWith(v); }
+  el.replaceWith(tmp.firstElementChild);
+  if(m) m.scrollTop=st;
+  kpRefreshChrome();
+}
+// Без перерисовки задания: только «✓ готово», «сохранено», шаги и низ
+function kpSoft(){
+  const b=KP.screens[KP.cur]; if(!b) return;
+  const hd=document.getElementById('kph-'+b.id);
+  if(hd){ const tmp=document.createElement('div'); tmp.innerHTML=kpCardHtml(KP.cur); const nh=tmp.querySelector('#kph-'+b.id); if(nh) hd.replaceWith(nh); }
+  kpSavedRefresh(); kpRefreshChrome();
+}
+function kpZoom(d){
+  const k=Math.max(0, Math.min(KP_ZOOMS.length-1, KP_ZOOMS.indexOf(KP.zoom)+d)); KP.zoom=KP_ZOOMS[k];
+  try{ localStorage.setItem('kp:zoom', String(KP.zoom)); }catch(e){}
+  const app=$('kpApp'); if(app) app.style.zoom=KP.zoom;
+  kpRefreshChrome();
+}
+
+// ── навигация
+function kpGo(i){
+  if(KP.view!=='doing' || i<0 || i>=KP.screens.length) return;
+  if(KP.retake!=null && !KP.retake.has(KP.screens[i].id)) return;
+  if(KP_MIC) kpRecStop(KP_MIC.id);
+  if(KP_PLAYER){ KP_PLAYER.pause(); KP_PLAYER=null; }
+  KP.cur=i; KP.welcome=false; kpMarkSeen(); kpLocalSave(); kpRenderMain();
+}
+function kpStep(d){ const act=kpActive(), p=act.indexOf(KP.cur); const n=act[Math.max(0, Math.min(act.length-1, p+d))]; if(n!=null) kpGo(n); }
+
+// ── отправка: окно с отсчётом 10 с; цифра и дуга меняются без перерисовки окна
+function kpFinish(){
+  if(KP.sending) return;
+  const l=kpLeft();
+  if(l.length){ kpGo(l[0]); toast(`Сначала доделай ${kpPlural(l.length,'задание','задания','задания')} ${l.map(i=>i+1).join(', ')}`); return; }
+  if(KP_MIC) kpRecStop(KP_MIC.id);
+  KP.confirm={ n:10 };
+  if(!KP.preview) sb.auth.getSession().then(r=>{ if(KP.confirm) KP.confirm.token=r && r.data && r.data.session && r.data.session.access_token; }).catch(()=>{});
+  const C=2*Math.PI*32;
+  $('kpApp').insertAdjacentHTML('beforeend', `<div class="kmodal" id="kpModal"><div class="kdlg">
+    <div class="kring"><svg width="74" height="74"><circle cx="37" cy="37" r="32" fill="none" stroke="#F3EEF6" stroke-width="7"/>
+      <circle class="arc" cx="37" cy="37" r="32" fill="none" stroke="var(--kact)" stroke-width="7" stroke-linecap="round"
+        stroke-dasharray="${C}" stroke-dashoffset="0" style="transition:stroke-dashoffset 1s linear"/></svg><b>10</b></div>
+    <h2>Отправить учителю?</h2>
+    <p>После отправки ответы изменить нельзя.</p>
+    <div class="row"><button class="kghost" onclick="kpCancelSend()">Проверить ещё раз</button><button class="kfin" onclick="kpSendNow()">Отправить</button></div>
+    <small>Если ничего не нажать, через 10 с домашка отправится сама.</small></div></div>`);
+  KP.confirm.iv=setInterval(()=>{
+    if(!KP.confirm) return;
+    const n=--KP.confirm.n;
+    if(n<=0){ kpSendNow(); return; }
+    const md=$('kpModal'); if(!md) return;
+    md.querySelector('.kring b').textContent=n;
+    md.querySelector('.kring .arc').style.strokeDashoffset = C*(1-n/10);
+    md.querySelector('small').textContent=`Если ничего не нажать, через ${n} с домашка отправится сама.`;
+  }, 1000);
+}
+function kpCloseModal(){ if(KP.confirm) clearInterval(KP.confirm.iv); KP.confirm=null; const m=$('kpModal'); if(m) m.remove(); }
+function kpCancelSend(){ kpCloseModal(); }
+// Закрыли страницу во время отсчёта — отправляем запросом, который переживает закрытие
+function kpPageHide(){
+  const c=KP && KP.confirm; if(!c || !c.token || KP.pending.size || kpUploadsPending()) return;
+  try{ fetch(SUPABASE_URL+'/rest/v1/rpc/classroom_finish_lesson', { method:'POST', keepalive:true,
+    headers:{ apikey:SUPABASE_KEY, Authorization:'Bearer '+c.token, 'Content-Type':'application/json' },
+    body:JSON.stringify({ p_enrollment_id:KP.enr, p_lesson_id:KP.lessonId }) }); }catch(e){}
+}
+async function kpSendNow(){
+  kpCloseModal();
+  if(KP.preview){ KP.status='submitted'; KP.view='sent'; kpRender(); return; }
+  KP.sending=true; kpRefreshChrome();
+  clearTimeout(KP.ft); await kpFlush();
+  if(KP.pending.size || kpUploadsPending()){ KP.sending=false; KP.view='sendfail'; kpRender(); return; }
+  try{
+    await rpc('classroom_finish_lesson', { p_enrollment_id:KP.enr, p_lesson_id:KP.lessonId });
+    KP.sending=false; KP.status='submitted'; KP.view='sent'; kpLocalClear(); kpRender();
+  }catch(e){
+    KP.sending=false;
+    if(kpIsNetErr(e)){ KP.view='sendfail'; kpRender(); }
+    else { toast(e.message||String(e)); kpRefreshChrome(); }
+  }
+}
+function kpRetrySend(){ KP.view='doing'; kpRender(); kpSendNow(); }
+
+// ── экраны после отправки
+function kpSentHtml(){
+  return `<div class="kcenter"><div class="kdone"><div class="em">📨</div><h2>Отправлено!</h2>
+    <p>Учитель проверит, и здесь появится оценка</p></div></div>`;
+}
+function kpSendFailHtml(){
+  return `<div class="kcenter"><div class="kdone"><div class="em">📶</div><h2>Нет интернета</h2>
+    <p>Домашка пока не отправлена — ответы сохранены на этом устройстве. Проверь подключение и нажми «Отправить ещё раз».</p>
+    <div><button class="kfin" style="margin-top:18px" onclick="kpRetrySend()">Отправить ещё раз</button></div></div></div>`;
+}
+// Wow Dragon: погода вместо процентов. Пороги утверждены Анной
+function kpWeather(s){
+  if(s>=90) return ['sun','Солнышко!'];
+  if(s>=70) return ['sun_cloud','Солнышко за тучкой'];
+  if(s>=50) return ['cloud','Тучка'];
+  return ['rain','Дождик'];
+}
+const KP_STREAK = [
+  n=>`Ты в ударе: ${n} ${kpPlural(n,'домашка','домашки','домашек')} без опозданий`,
+  n=>`Огонь! Уже ${n} ${kpPlural(n,'домашка','домашки','домашек')} подряд`,
+  n=>`Так держать: ${n} ${kpPlural(n,'домашка','домашки','домашек')} подряд`,
+  n=>`Вот это серия: ${n} ${kpPlural(n,'домашка','домашки','домашек')} подряд!`,
+  n=>`Ещё один огонёк! Уже ${n} ${kpPlural(n,'домашка','домашки','домашек')} подряд`,
+  n=>`Супер! ${n} ${kpPlural(n,'домашка','домашки','домашек')} подряд — и ни одного опоздания`,
+];
+function kpCheckedHtml(){
+  const g=KP.grade||{}, s=g.score;
+  let grade;
+  if(s==null) grade='<div class="em">✅</div><h2>Проверено</h2>';
+  else if(kpIsWD()){
+    const [k,name]=kpWeather(s);
+    grade = `<div class="kweather"><img src="media/shared/grade/grade_${k}.webp" alt=""></div><div class="kwname">${name}</div>
+      ${KP.parentPct?`<div class="kpct">${s} %</div>`:''}
+      <button class="kparent" onclick="KP.parentPct=!KP.parentPct; kpRenderMain()">${KP.parentPct?'Скрыть проценты':'Для родителей: показать в процентах'}</button>`;
+  } else {
+    grade = `<div class="kscore" style="color:${s>=70?'var(--kok)':s>=50?'var(--kwarn)':'var(--klate)'}">${s}%</div>`;
+  }
+  const n=Number((KP.meta||{}).streak)||0;
+  const streak = n<1 ? '' : `<div class="kfires">${'🔥'.repeat(Math.min(7,n))}${n>7?' ×'+n:''}</div>`;
+  const phrase = n<1 ? '' : `<div><span class="kstreak">${n===1?'Первый огонёк! Сдавай вовремя — и он разгорится':KP_STREAK[KP.pick % KP_STREAK.length](n)}</span></div>`;
+  return `<div class="kcenter"><div class="kdone">${streak}${grade}${phrase}
+    <div><button class="klink" onclick="KP.view='work'; kpRender()">Посмотреть мою работу</button></div></div></div>`;
+}
+function kpWorkHtml(){
+  return `<div class="klist flow"><div class="kbanner"><span class="em">👀</span><span style="flex:1"><b>Твоя работа</b>
+      <span>Только посмотреть. Комментарии учителя — у заданий.</span>${KP.note?`<span style="display:block;margin-top:4px">💬 ${esc(KP.note)}</span>`:''}</span>
+      <button class="kghost" onclick="KP.view='checked'; kpRender()">← К оценке</button></div>
+    ${KP.screens.map((b,i)=>kpCardHtml(i,true)).join('')}</div>`;
+}
+
+// «Глазами ученика»: домашку и тест открываем этой страницей, план урока — как раньше
+async function kpPreviewOpen(lessonId, mode){
+  let kind = (typeof KIND_BY_LESSON!=='undefined') && KIND_BY_LESSON[lessonId];
+  if(!kind){
+    try{ const { data:le } = await sb.from('classroom_lessons').select('kind').eq('id', lessonId).maybeSingle(); kind=(le&&le.kind)||'homework'; KIND_BY_LESSON[lessonId]=kind; }
+    catch(e){ kind='homework'; }
+  }
+  if(kind==='lesson') return showOpen(lessonId, null, mode||null, 'student');
+  window.open(location.pathname + '?run=' + encodeURIComponent(lessonId) + '&preview=1', '_blank');
+}
+
+// ============================================================
 //  РЕНДЕР: ЗАДАТЬ ДЗ
 // ============================================================
 function fillCourses(){
@@ -2534,7 +3767,7 @@ async function edOpenLesson(lessonId, unitId, courseId){
       <div class="hero">
         <div class="hero-acts">
           <button class="hb" onclick="edRenameLesson('${lessonId}')">Переименовать</button>
-          <button class="hb" onclick="showOpen('${lessonId}', null, null, 'student')">Глазами ученика</button>
+          <button class="hb" onclick="kpPreviewOpen('${lessonId}')">Глазами ученика</button>
           ${isLesson?`<button class="hb" onclick="showOpen('${lessonId}', null, 'one')">Как на уроке</button>`:''}
         </div>
         <div class="hero-path"><a onclick="libGo('courses')" style="cursor:pointer">Библиотека</a><span>›</span><a onclick="libGo('units','${EDIT.courseId||''}')" style="cursor:pointer">${esc(courseTitle)}</a><span>›</span><a onclick="libGo('items','${EDIT.courseId||''}','${EDIT.unitId||''}')" style="cursor:pointer">${esc(unitTitle)}</a></div>
@@ -4655,7 +5888,7 @@ async function boot(){
   const { data:{ session } } = await sb.auth.getSession();
   if(!session){ $('loginScreen').classList.remove('hidden'); $('app').classList.add('hidden'); return; }
   const _p = new URLSearchParams(location.search);
-  if(_p.get('run')){ return bootRunPage(_p); }
+  if(_p.get('run')){ return kpBoot(_p); }
   try{
     await loadMe(session.user.id);
   }catch(e){ $('loginErr').textContent=e.message||String(e); await sb.auth.signOut(); $('loginScreen').classList.remove('hidden'); return; }
