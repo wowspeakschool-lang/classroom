@@ -281,6 +281,41 @@ orange hair.*
 
 ---
 
+### Ещё два промпта — юнит 6, ДЗ 2, блок «я / ты»
+
+Сейчас там фотографии `ph_i` (испуганный мальчик) и `ph_you` (сердитый взрослый
+мужчина). Задание — соединить картинку с фразой «I am scared» / «You are angry»,
+но местоимение по картинке не видно: ребёнок соединяет по настроению, а само
+местоимение — то, что и проверяется, — остаётся непроверенным. Нужны картинки,
+на которых видно именно «я» и «ты»: герой показывает на себя и на зрителя.
+Промпты готовы к копированию, строка стиля уже внутри.
+
+**`media/sm2/u6/ph_i.webp`**
+
+> Children's coursebook illustration, friendly 3D-rendered cartoon character in
+> Pixar-like style, soft rounded shapes, smooth matte surfaces, gentle studio
+> lighting, bright saturated colours, plain flat pure white background, no shadow
+> on the background, no text, no letters, no numbers, no border, no frame. A boy of
+> about eight in an orange hoodie, pointing at his own chest with both thumbs,
+> clearly indicating himself; his face is frightened — wide eyes, raised eyebrows,
+> open mouth. Head and upper body only, facing the viewer. IMPORTANT FRAMING: the
+> whole figure is small in the frame and fully visible, with a generous empty white
+> margin on all four sides; nothing touches or crosses the edge of the image.
+
+**`media/sm2/u6/ph_you.webp`**
+
+> Children's coursebook illustration, friendly 3D-rendered cartoon character in
+> Pixar-like style, soft rounded shapes, smooth matte surfaces, gentle studio
+> lighting, bright saturated colours, plain flat pure white background, no shadow
+> on the background, no text, no letters, no numbers, no border, no frame. A girl of
+> about eight in a blue t-shirt, pointing straight at the viewer with her index
+> finger, arm stretched towards the camera; her face is angry — frowning eyebrows,
+> pressed lips. Head and upper body only, facing the viewer. IMPORTANT FRAMING: the
+> whole figure is small in the frame and fully visible, with a generous empty white
+> margin on all four sides; nothing touches or crosses the edge of the image.
+
+---
+
 ## 4. ✅ Финальный тест собран заново — 20 блоков вместо 10
 
 Было 10 блоков и 4 задания — меньше любого теста юнита. Стало 20 блоков и
