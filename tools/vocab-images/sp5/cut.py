@@ -65,7 +65,8 @@ def is_scene(p):
     hm = Image.new('L', (m.shape[1], m.shape[0]), 0)
     ImageDraw.Draw(hm).polygon([tuple(map(int, pts[v])) for v in hull.vertices], fill=1)
     return m.sum() / max(1, np.array(hm).sum()) >= SCENE_SOLID
-CUT_BOTTOM = {}
+CUT_BOTTOM = {"Let's have fun!": 0.83}  # остаток подписи под рисунком
+CUT_LEFT = {'coke': 0.24}  # край соседней тарелки с chips
 NO_SPECK = set()
 
 LAYOUT = {6: [3, 3], 7: [4, 3], 8: [4, 4], 9: [5, 4], 10: [5, 5], 11: [4, 4, 3], 12: [4, 4, 4], 13: [5, 4, 4]}
@@ -357,6 +358,8 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
         a[(a < 235) & (mn2 >= 140) & (mx2 - mn2 <= 70)] = 0
     for w, frac in CUT_BOTTOM.items():
         if p.endswith(f'/{fname(w)}'): a[int(a.shape[0] * frac):] = 0
+    for w, frac in CUT_LEFT.items():
+        if p.endswith(f'/{fname(w)}'): a[:, :int(a.shape[1] * frac)] = 0
     lab, n = label(a > 40)
     if n > 1 and not p.endswith(tuple(f'/{fname(w)}' for w in NO_SPECK)):
         sizes = np.bincount(lab.ravel()); sizes[0] = 0
