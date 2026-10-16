@@ -516,6 +516,14 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
 .kq{ display:flex; flex-direction:column; gap:10px; }
 .kq + .kq{ border-top:1px dashed var(--kline); padding-top:14px; }
 .kqq{ font-size:18px; font-weight:700; display:flex; gap:10px; align-items:center; }
+.kqdots{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:4px; }
+.kqdots span{ color:var(--kmute); font-size:13px; font-weight:700; margin-left:4px; }
+.kqdot{ width:34px; height:34px; border-radius:50%; border:2px solid var(--kline) !important; background:#fff !important; font-weight:800; color:var(--kmute); }
+.kqdot.cur{ border-color:var(--kpick) !important; color:var(--kpick-d); }
+.kqdot.ok{ background:#22B07D !important; border-color:#22B07D !important; color:#fff; }
+.kqdot.ok.cur{ box-shadow:0 0 0 3px #CDEFE1; }
+.kqnav{ display:flex; justify-content:space-between; gap:10px; margin-top:6px; }
+.kqnav button:disabled{ opacity:.35; }
 .kqn{ flex:0 0 auto; width:28px; height:28px; border-radius:50%; background:var(--kpick-soft); color:var(--kpick-d); display:grid; place-items:center; font-size:14px; font-weight:800; }
 .kopts{ display:flex; flex-wrap:wrap; gap:10px; }
 .kopts.img{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
@@ -3015,10 +3023,24 @@ function kpCard(id, k, el){
   else kpUpd();
 }
 
+// От трёх вопросов в задании — по одному на экране, кружки 1…N сверху (решение Анны 16.10)
+const KP_QSTEP_MIN = 3;
+function kpQAnswered(q, v){ return q.type==='text' ? !!String(v||'').trim() : Array.isArray(v) && v.length>0; }
+function kpQStepOn(b){ return KP.view==='doing' && kpEditable(b.id) && ((b.payload||{}).questions||[]).length>=KP_QSTEP_MIN; }
+function kpQCur(b){
+  const qs=(b.payload||{}).questions||[], a=KP.ans[b.id]||{}, u=KP.ui[b.id]||{};
+  if(u.qi!=null && u.qi<qs.length) return u.qi;
+  const f=qs.findIndex((q,i)=>!kpQAnswered(q, a[i]));
+  return f<0 ? 0 : f;
+}
+function kpQGo(id, i){ (KP.ui[id]=KP.ui[id]||{}).qi=i; kpUpd(); }
 function kpB_quiz(b){
   const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, qs=p.questions||[];
-  return qs.map((q,qi)=>{
-    const head = (q.q || qs.length>1) ? `<div class="kqq">${qs.length>1?`<span class="kqn">${qi+1}</span>`:''}<span>${q.q||''}</span></div>` : '';
+  const step=kpQStepOn(b), cur=step?kpQCur(b):-1;
+  const html = qs.map((q,qi)=>{
+    if(step && qi!==cur) return '';
+    const num = qs.length>1 && !step;   // по одному вопросу номер уже в кружках сверху
+    const head = (q.q || num) ? `<div class="kqq">${num?`<span class="kqn">${qi+1}</span>`:''}<span>${q.q||''}</span></div>` : '';
     const top = head + kpSnd(q.audio||q.audio_url, 'Послушать') + kpImg(q.image, 'kph kqimg');
     if(q.type==='text')
       return `<div class="kq">${top}<textarea class="kta" data-id="${id}" data-k="${qi}" oninput="kpInput(this)" placeholder="Напиши ответ">${esc(a[qi]||'')}</textarea></div>`;
@@ -3032,6 +3054,12 @@ function kpB_quiz(b){
     }).join('');
     return `<div class="kq">${top}<div class="kopts${hasImg?' img':''}">${btns}</div>${q.type==='multiple'?'<div class="khint">Можно выбрать несколько</div>':''}</div>`;
   }).join('');
+  if(!step) return html;
+  const dots = qs.map((q,i)=>{ const ok=kpQAnswered(q, a[i]);
+    return `<button class="kqdot${i===cur?' cur':''}${ok?' ok':''}" onclick="kpQGo('${id}',${i})">${ok&&i!==cur?'✓':i+1}</button>`; }).join('');
+  return `<div class="kqdots">${dots}<span>Вопрос ${cur+1} из ${qs.length}</span></div>${html}
+    <div class="kqnav"><button class="kghost" ${cur>0?'':'disabled'} onclick="kpQGo('${id}',${cur-1})">← Предыдущий</button>
+      <button class="kghost" ${cur<qs.length-1?'':'disabled'} onclick="kpQGo('${id}',${cur+1})">Следующий →</button></div>`;
 }
 function kpQuizPick(id, qi, oi){
   if(!kpEditable(id)) return;
@@ -3040,6 +3068,12 @@ function kpQuizPick(id, qi, oi){
   if(q.type==='multiple') cur = cur.includes(oi) ? cur.filter(x=>x!==oi) : cur.concat(oi);
   else cur=[oi];
   a[qi]=cur; kpSet(id, a);
+  // по одному вопросу: выбрал — через полсекунды следующий (кроме «можно несколько»)
+  const b=KP.byId[id], qs=((b&&b.payload)||{}).questions||[];
+  if(b && kpQStepOn(b) && q.type!=='multiple' && qi<qs.length-1){
+    (KP.ui[id]=KP.ui[id]||{}).qi=qi;
+    setTimeout(()=>{ const u=KP.ui[id]||{}; if(KP.screens[KP.cur]===b && u.qi===qi){ u.qi=qi+1; kpUpd(); } }, 600);
+  }
 }
 // Поля ввода: не перерисовываем задание, чтобы не терять курсор
 function kpInput(el){
