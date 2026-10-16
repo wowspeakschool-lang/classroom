@@ -10,7 +10,8 @@ from sheets import S, DIGITS
 # с 14.10.2026 тренажёр живёт на app.wowteach.ru, картинки — в wowspeak-platform/public/trainer/media
 DST = '/home/user/wowspeak-platform/public/trainer/media/spotlight5'
 URL = 'https://app.wowteach.ru/trainer/media/spotlight5/'
-# не прошли проверку (дети, алкоголь) — ждут перерисовки
+# не прошли проверку (дети, алкоголь). culture, street parade, Thanksgiving (и carnival из Spotlight 4)
+# перерисованы листом замен images/177.webp → out/78, выложены 16.10.2026 вручную; nightclub ждёт
 SKIP = {'culture', 'street parade', 'nightclub', 'Thanksgiving'}
 # омонимы: подпись → начало названия колоды, где этот смысл
 HOMO = {'great (excellent)': '2c', 'great (big)': '3a', 'mean': '5d', 'mean (signify)': '8c',
