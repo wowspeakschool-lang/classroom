@@ -506,6 +506,7 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
 .ksnd.playing, .kmini.playing{ box-shadow:0 0 0 3px currentColor inset; }
 .kmini{ display:inline-grid; place-items:center; width:34px; height:34px; border-radius:50%; background:var(--kpick-soft); color:var(--kpick-d);
   font-size:15px; flex:0 0 auto; cursor:pointer; }
+.kmini.big{ width:52px; height:52px; font-size:24px; }
 
 /* картинки */
 .kph{ width:100%; border-radius:14px; object-fit:contain; max-height:min(40vh,320px); }
@@ -2180,7 +2181,7 @@ function runBlock(b){
 
 // Плитка match: картинка / текст, плюс кнопка звука
 function matchTile(val, image, audio){
-  let inner = image ? `<img src="${esc(image)}" style="max-height:90px;max-width:130px;border-radius:10px;display:block;margin:0 auto">` : esc(val);
+  let inner = image ? `<img src="${esc(image)}" style="max-height:90px;max-width:130px;border-radius:10px;display:block;margin:0 auto">` : (audio && isSpkOnly(val) ? '' : esc(val));
   if(audio) inner += `<div style="margin-top:6px">${audBtn(audio)}</div>`;
   return inner;
 }
@@ -2910,7 +2911,12 @@ function kpSnd(url, label){
 }
 function kpMini(url){ return url ? `<span class="kmini" role="button" data-src="${kpA(url)}" onclick="event.stopPropagation();kpPlay(this)">🔊</span>` : ''; }
 function kpImg(url, cls){ return url ? `<img class="${cls||'kph'}" src="${kpA(url)}" alt="" onerror="this.style.visibility='hidden'">` : ''; }
-function kpTile(text, image, audio){ return (image ? kpImg(image) : `<span>${esc(text==null?'':text)}</span>`) + kpMini(audio); }
+// Текст пункта — один значок 🔊, а рядом настоящая кнопка звука: значок не дублируем, кнопку делаем крупнее
+function isSpkOnly(t){ t=String(t==null?'':t).trim(); return !!t && /^[\s\u{1F508}-\u{1F50A}\uFE0F]+$/u.test(t); }
+function kpTile(text, image, audio){
+  if(audio && !image && isSpkOnly(text)) return kpMini(audio).replace('class="kmini"','class="kmini big"');
+  return (image ? kpImg(image) : `<span>${esc(text==null?'':text)}</span>`) + kpMini(audio);
+}
 
 // ── значок и заголовок задания
 function kpIcon(b){
