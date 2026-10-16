@@ -1713,6 +1713,14 @@ function edGapClear(i){
   edGapsPreview(i);
 }
 
+// Неверные варианты для пропуска: строка «a / b / c» → массив
+function edGapChoice(i, gi, val){
+  const p = EDIT.blocks[i].payload;
+  if(!Array.isArray(p.choices)) p.choices = [];
+  p.choices[gi] = String(val||'').split('/').map(s=>s.trim()).filter(Boolean);
+  edTouch();
+}
+
 // Обновляем только предпросмотр, чтобы не терять курсор в поле при вводе
 function edGapsPreview(i){
   const box = document.getElementById('gpv-'+i);
@@ -1875,6 +1883,7 @@ function prepRunState(blocks){
   (blocks||[]).forEach(b=>{
     if(b.type==='match'){ RUN_MATCH[b.id]={ map:{}, sel:null, rights:shuffle(((b.payload&&b.payload.pairs)||[]).map((x,ix)=>({val:(x.right!=null?x.right:('#'+ix)), image:x.right_image, audio:x.right_audio}))) }; }
     if(b.type==='order'){ RUN_ORDER[b.id]={ bank:shuffle(((b.payload&&b.payload.words)||[])), answer:[] }; }
+    if(b.type==='quiz'){ prepQuiz(b); }
     if(b.type==='sort'){ prepSort(b); }
     if(b.type==='flashcards'){ RUN_FC[b.id]={ i:0, flip:false, queue:null, done:0, again:0 }; RUN_FC_DATA[b.id]={ cards:(b.payload&&b.payload.cards)||[] }; }
     if(b.type==='sequence'){ prepSeq(b); }
@@ -2114,16 +2123,21 @@ function runBlock(b){
   if(b.type==='gaps'){
     const parts = gapsParse(p.text||'');
     const drag = p.mode === 'drag';
+    const choice = p.mode === 'choice';
     const bank = shuffle(parts.filter(x=>x.kind==='gap').map(x=>(x.accept||[])[0]||''));
+    // В режиме выбора у каждого пропуска свой список: верный ответ плюс дистракторы
+    const gapChoices = x => shuffle([((x.accept||[])[0]||'')].concat(((p.choices||[])[x.index])||[]).filter(Boolean));
     const line = parts.map(x => x.kind==='text'
       ? esc(x.value).replace(/\n/g,'<br>')
       : (drag
           ? `<span class="gapslot" id="gp-${id}-${x.index}" data-val=""
                ondragover="event.preventDefault()" ondrop="gapDrop(event,'${id}',${x.index})"
                onclick="gapClear('${id}',${x.index})" title="Перетащи сюда; клик — очистить"></span>`
+          : choice
+          ? `<select id="gp-${id}-${x.index}" class="gapin" style="width:auto;display:inline-block;margin:0 4px"><option value="">— выбери —</option>${gapChoices(x).map(o=>`<option value="${esc(o)}">${esc(o)}</option>`).join('')}</select>`
           : `<input id="gp-${id}-${x.index}" class="gapin" autocomplete="off" style="width:120px;display:inline-block;margin:0 4px">`)).join('');
     return `<div class="block">${head}${p.title?`<div style="margin-bottom:8px"><b>${esc(p.title)}</b></div>`:''}
-      ${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:240px;border-radius:12px"></div>`:''}
+      ${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:460px;border-radius:12px"></div>`:''}
       ${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}
       ${drag?`<div id="gbank-${id}" class="gapbank">${bank.map((w,wi)=>`<span class="gapchip" draggable="true" data-w="${esc(w)}"
           ondragstart="gapDragStart(event,'${esc(w)}')" onclick="gapPlace('${id}',this)">${esc(w)}</span>`).join('')}</div>`:''}
@@ -2142,7 +2156,7 @@ function runBlock(b){
     return `<div class="block">${head}
       ${p2.title?`<div style="font-weight:700;margin-bottom:8px">${esc(p2.title)}</div>`:''}
       ${p2.audio?`<div style="margin-bottom:10px">${audBtn(p2.audio,true)}</div>`:''}
-      ${p2.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p2.image)}" style="max-width:100%;max-height:240px;border-radius:12px"></div>`:''}
+      ${p2.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p2.image)}" style="max-width:100%;max-height:460px;border-radius:12px"></div>`:''}
       <div class="muted" style="font-size:13px;margin-bottom:8px">Перетащи строки или подвинь стрелками, чтобы получился правильный порядок.</div>
       <div id="sq-${id}"></div>
       <div style="margin-top:10px"><button class="btn sm" onclick="runSequence('${id}')">Проверить</button><span id="res-${id}" class="muted"></span></div></div>`;
@@ -2159,7 +2173,7 @@ function runBlock(b){
   if(b.type==='speaking'){
     return `<div class="block">${head}${p.title?`<div style="margin-bottom:6px"><b>${esc(p.title)}</b></div>`:''}
       <div>${p.html||''}</div>
-      ${p.image?`<div style="margin:10px 0;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:240px;border-radius:12px"></div>`:''}
+      ${p.image?`<div style="margin:10px 0;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:460px;border-radius:12px"></div>`:''}
       ${p.sample?`<div style="margin:10px 0"><span class="muted" style="font-size:13px">Послушай образец:</span> ${audBtn(p.sample,true)}</div>`:''}
       <div id="sp-${id}" style="margin-top:10px"><button class="btn" onclick="spStart('${id}')">🎤 Записать ответ</button></div>
       <span id="res-${id}" class="muted"></span></div>`;
@@ -2175,7 +2189,7 @@ function runBlock(b){
         return `<label class="chk" style="flex-direction:column;align-items:center">${label}${oaud}<input type="${inp}" name="q-${id}-${qi}" value="${oi}" style="margin-top:10px"></label>`;
       }).join('');
       const audio=(q.audio||q.audio_url)?` ${audBtn(q.audio||q.audio_url,true)}`:'';
-      const qimg=q.image?`<div style="text-align:center;margin:6px 0"><img src="${esc(q.image)}" style="max-height:220px;max-width:80%;border-radius:12px"></div>`:'';
+      const qimg=q.image?`<div style="text-align:center;margin:6px 0"><img src="${esc(q.image)}" style="max-height:360px;max-width:92%;border-radius:12px"></div>`:'';
       return `<div style="margin-bottom:10px"><div style="font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span>${qi+1}. ${q.q||''}</span>${audio}</div>${qimg}${opts}</div>`;
     }).join('');
     return `<div class="block">${head}${p.title?`<div style="margin-bottom:10px"><b>${esc(p.title)}</b></div>`:''}${qs}<button class="btn sm" onclick="runQuiz('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
@@ -2202,13 +2216,13 @@ function runBlock(b){
       <button class="btn sm" style="margin-top:12px" onclick="runSort('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
   }
   if(b.type==='task'){
-    return `<div class="block">${head}${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:260px;border-radius:12px"></div>`:''}${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}${p.title?`<b>${esc(p.title)}</b>`:''}<div style="margin-top:6px">${p.html||''}</div>
+    return `<div class="block">${head}${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:460px;border-radius:12px"></div>`:''}${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}${p.title?`<b>${esc(p.title)}</b>`:''}<div style="margin-top:6px">${p.html||''}</div>
       ${p.answer_kind==='audio'?`<div id="sp-${id}" style="margin:10px 0"><button class="btn" onclick="spStart('${id}')">🎤 Записать ответ</button></div>`:''}
       <textarea id="tk-${id}" placeholder="${p.answer_kind==='audio'?'Комментарий (необязательно)':'Ответ или комментарий (необязательно)'}" style="margin-top:6px"></textarea>
       <div style="margin-top:6px"><button class="btn${p.answer_kind==='audio'?' sec':''} sm" onclick="runTask('${id}')">${p.answer_kind==='audio'?'Отправить без записи':'Отправить на проверку'}</button><span id="res-${id}" class="muted"></span></div></div>`;
   }
   if(b.type==='order'){
-    return `<div class="block">${head}${p.title?`<div style="margin-bottom:10px"><b>${esc(p.title)}</b></div>`:''}${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:260px;border-radius:12px"></div>`:''}${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}<div style="margin-bottom:8px">Нажимай слова по порядку, чтобы собрать предложение:</div>
+    return `<div class="block">${head}${p.title?`<div style="margin-bottom:10px"><b>${esc(p.title)}</b></div>`:''}${p.image?`<div style="margin-bottom:10px;text-align:center"><img src="${esc(p.image)}" style="max-width:100%;max-height:460px;border-radius:12px"></div>`:''}${p.audio?`<div style="margin-bottom:10px">${audBtn(p.audio,true)}</div>`:''}<div style="margin-bottom:8px">Нажимай слова по порядку, чтобы собрать предложение:</div>
       <div class="worder-ans" id="oa-${id}"></div>
       <div id="ob-${id}"></div>
       <button class="btn sm" style="margin-top:8px" onclick="runOrder('${id}')">Сдать</button><span id="res-${id}" class="muted"></span></div>`;
@@ -2335,6 +2349,15 @@ function fcFlip(id){ const st=RUN_FC[id]; if(!st) return; st.flip=!st.flip; fcRe
 
 async function submitBlock(blockId, answers){ return rpc('classroom_submit_block', { p_block_id:blockId, p_enrollment_id:RUN.enr, p_answers:answers }); }
 
+// Порядок вывода вариантов quiz. Перемешиваем только показ: в value радиокнопки
+// остаётся исходный индекс, поэтому и runQuiz, и проверка на сервере
+// (classroom_submit_block сверяет индексы с payload.correct) работают как были.
+// Без этого верный ответ стоит там, где его положил составитель, — а в курсе
+// нашлось 17 блоков, где он везде первый.
+function prepQuiz(b){
+  const qs=(b.payload&&b.payload.questions)||[];
+  RUN_QUIZ[b.id]=qs.map(q=>shuffle(((q&&q.options)||[]).map((_,k)=>k)));
+}
 async function runQuiz(id){
   if(isPreview()){ runResult(id,'Предпросмотр — не сохраняю',true); return; }
   const ans={};
@@ -2584,7 +2607,7 @@ async function runGaps(id){
   const ans={};
   document.querySelectorAll(`[id^="gp-${id}-"]`).forEach(el=>{
     const key = el.id.split('-').pop();
-    ans[key] = el.tagName === 'INPUT' ? el.value : (el.dataset.val || '');
+    ans[key] = (el.tagName === 'INPUT' || el.tagName === 'SELECT') ? el.value : (el.dataset.val || '');
   });
   try{ const r=await submitBlock(id, ans); runResult(id, scoreMsg(r), true); if(!r.needs_review && r.score===100) celebrate(); }
   catch(e){ runResult(id, e.message||String(e), false); }
@@ -6218,9 +6241,18 @@ function edBlockEditor(b,i){
       <div class="muted" style="font-size:12px;margin-top:8px">Как увидит ученик:</div>
       <div id="gpv-${i}" style="border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:4px;line-height:2.2">${edGapsPreviewHtml(p)}</div>
       <div class="row" style="margin-top:6px;align-items:center">
-        <label class="chk" style="max-width:230px"><input type="radio" name="gm${i}" ${p.mode!=='drag'?'checked':''} onchange="EDIT.blocks[${i}].payload.mode='type'; edRenderBlocks()"> Вписывать с клавиатуры</label>
+        <label class="chk" style="max-width:230px"><input type="radio" name="gm${i}" ${(p.mode!=='drag'&&p.mode!=='choice')?'checked':''} onchange="EDIT.blocks[${i}].payload.mode='type'; edRenderBlocks()"> Вписывать с клавиатуры</label>
         <label class="chk" style="max-width:230px"><input type="radio" name="gm${i}" ${p.mode==='drag'?'checked':''} onchange="EDIT.blocks[${i}].payload.mode='drag'; edRenderBlocks()"> Перетаскивать слова</label>
+        <label class="chk" style="max-width:230px"><input type="radio" name="gm${i}" ${p.mode==='choice'?'checked':''} onchange="EDIT.blocks[${i}].payload.mode='choice'; edRenderBlocks()"> Выбирать из вариантов</label>
       </div>
+      ${p.mode==='choice' ? `<div style="margin-top:8px">
+        <div class="muted" style="font-size:12px;margin-bottom:4px">Неверные варианты для каждого пропуска — через косую черту. Верный ответ подставляется сам, порядок у ученика перемешивается.</div>
+        ${gaps.map((g,gi)=>`<div class="row" style="align-items:center;margin-bottom:6px">
+            <span class="muted" style="min-width:150px;font-size:13px">${gi+1}. <b>${esc(g.accept[0]||'')}</b></span>
+            <input class="grow" value="${esc((((p.choices||[])[gi])||[]).join(' / '))}"
+              oninput="edGapChoice(${i},${gi},this.value)" placeholder="напр. No, they aren't. / Yes, it is.">
+          </div>`).join('')}
+      </div>` : ''}
       ${edAudioField(p.audio, `EDIT.blocks[${i}].payload.audio`)}
       ${edImageBox(i, 'image', 'Картинка:')}
       <div class="muted" style="font-size:12px;margin-top:6px">Пропусков: <b>${gaps.length}</b>${gaps.length?' · ответы: '+gaps.map(g=>esc(g.accept.join(' / '))).join(', '):''}</div>`;

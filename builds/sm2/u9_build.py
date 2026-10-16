@@ -298,14 +298,14 @@ h4.add('truefalse', {'title': 'Отлично! А теперь следующе�
                               'Не торопись! 😁',
                      'statements': [
                          {'text': 'Thunder would like to build a tree house.',
-                          'answer': True},
+                          'correct': True},
                          {'text': 'Whisper would like to take riding lessons.',
-                          'answer': False},
+                          'correct': False},
                          {'text': 'Misty would like to visit her grandparents.',
-                          'answer': False},
-                         {'text': 'Flash would like to help in the garden.', 'answer': True},
+                          'correct': False},
+                         {'text': 'Flash would like to help in the garden.', 'correct': True},
                          {'text': 'Children are happy when they have got a picnic.',
-                          'answer': True}]},
+                          'correct': True}]},
        'ответы отмечены в выгрузке')
 
 h4.add('task', {'title': 'А теперь задание посложнее!',
@@ -567,14 +567,14 @@ t.add('truefalse', {'title': 'Прочитай текст. Прочитай пр
                              '«Верно» или «Неверно»',
                     'statements': [
                         {'text': 'Jake would like to go camping near a river.',
-                         'answer': True},
-                        {'text': "Jake can't build a tree house.", 'answer': False},
-                        {'text': 'Jake would like to learn to swim.', 'answer': True},
-                        {'text': "Emma is Jake's friend.", 'answer': False},
+                         'correct': True},
+                        {'text': "Jake can't build a tree house.", 'correct': False},
+                        {'text': 'Jake would like to learn to swim.', 'correct': True},
+                        {'text': "Emma is Jake's friend.", 'correct': False},
                         {'text': 'Jake and Emma would like to keep a scrapbook.',
-                         'answer': True},
+                         'correct': True},
                         {'text': 'Jake can take riding lessons this summer.',
-                         'answer': False}]},
+                         'correct': False}]},
        'ответы отмечены в выгрузке')
 
 t.add('speaking', {'title': 'SPEAKING TASK 🎤',
