@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Слова из тренажёра — макет</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Цвета и шрифт — как в index.html */
+:root{
+  --brand:#5B4BE0; --brand-d:#3A2FA8; --brand-soft:#F0EEFD;
+  --ink:#1A1B2E; --mut:#7A7F92; --faint:#A6AAB9; --line:#E8E7EE; --bg:#F7F6F9;
+  --ok:#0D6155; --ok-soft:#E2F1EE; --warn:#A9660B; --warn-soft:#FBF0DE; --bad:#B3261E; --bad-soft:#FBE9E7;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Golos Text',-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.5}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:14px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+textarea{width:100%;resize:vertical;min-height:60px}
+
+/* панель макета */
+.panel{position:sticky;top:0;z-index:100;background:#1D1A29;color:#fff;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;padding:8px 12px;font-size:13px}
+.grp{display:flex;align-items:center;gap:3px;flex-wrap:wrap}
+.grp>span{opacity:.5;margin-right:4px}
+.grp button{color:#fff;opacity:.6;padding:5px 10px;border-radius:8px;font-size:13px;border:0;background:none}
+.grp button.on{background:rgba(255,255,255,.16);opacity:1;font-weight:700}
+.note{opacity:.6;font-size:12px;flex-basis:100%}
+
+/* оболочка как в classroom */
+.app{display:grid;grid-template-columns:236px 1fr;min-height:calc(100vh - 44px)}
+.side{background:#fff;border-right:1px solid var(--line);padding-bottom:16px}
+.logo{font-weight:700;font-size:16px;height:58px;display:flex;align-items:center;gap:10px;padding:0 18px}
+.logo:before{content:"C";width:25px;height:25px;border-radius:8px;background:var(--brand);color:#fff;font-size:12px;display:grid;place-items:center}
+.tab{display:flex;align-items:center;gap:10px;padding:9px 12px;margin:1px 10px;border-radius:10px;color:#3d4052;font-size:14.5px;cursor:pointer}
+.tab:hover{background:var(--bg)}
+.tab.on{background:var(--brand-soft);color:var(--brand-d);font-weight:600}
+.tab .cnt{margin-left:auto;background:var(--warn-soft);color:var(--warn);border-radius:99px;padding:0 8px;font-size:12px;font-weight:700}
+.main{min-width:0}
+.topbar{height:58px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 24px;position:relative}
+.topbar h1{font-size:18px;margin:0;flex:1}
+.bell{position:relative;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:#fff;font-size:18px}
+.bell i{position:absolute;top:-5px;right:-5px;background:#E5484D;color:#fff;font-style:normal;font-size:11px;font-weight:700;border-radius:99px;padding:1px 6px}
+.who{font-size:13px;color:var(--mut)}
+.page{padding:22px 24px 120px;max-width:1100px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:16px}
+.btn{border:1px solid var(--brand);background:var(--brand);color:#fff;padding:8px 14px;border-radius:10px;font-weight:600;font-size:14px}
+.btn:hover{background:var(--brand-d)}
+.btn.sec{background:#fff;border-color:var(--line);color:var(--ink);font-weight:500}
+.btn.sm{padding:5px 11px;font-size:13px;border-radius:9px}
+.btn.warn{background:#fff;border-color:#E9C58F;color:var(--warn)}
+.btn.big{padding:11px 20px;font-size:15px}
+.pill{display:inline-block;border-radius:99px;padding:2px 10px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.pill.g{background:var(--ok-soft);color:var(--ok)} .pill.y{background:var(--warn-soft);color:var(--warn)}
+.pill.r{background:var(--bad-soft);color:var(--bad)} .pill.n{background:#EFEEF3;color:var(--mut)} .pill.b{background:var(--brand-soft);color:var(--brand-d)}
+.muted{color:var(--mut)} .small{font-size:13px}
+table{width:100%;border-collapse:collapse}
+th{font-size:12px;font-weight:600;color:var(--mut);text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tr.click:hover td{background:#FBFAFD;cursor:pointer}
+.ava{width:34px;height:34px;border-radius:50%;display:inline-grid;place-items:center;font-weight:700;font-size:13px;color:#fff;margin-right:10px;vertical-align:middle}
+.seg{display:inline-flex;background:#EFEEF3;border-radius:11px;padding:3px}
+.seg button{border:0;background:none;padding:6px 14px;border-radius:9px;font-size:14px;color:var(--mut)}
+.seg button.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.h2{font-size:16px;font-weight:700;margin:0 0 10px}
+
+/* колокольчик */
+.drop{position:absolute;right:20px;top:54px;width:380px;z-index:40;box-shadow:0 18px 50px rgba(30,20,80,.16)}
+.drop .it{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);cursor:pointer}
+.drop .it:hover{background:#FBFAFD}
+.drop .it.new{background:#FBFAFF}
+.drop .it .dot{width:8px;height:8px;border-radius:50%;background:var(--brand);margin-top:8px;flex:0 0 auto}
+.drop .it .dot.off{background:transparent}
+
+/* проверка */
+.rv{display:grid;grid-template-columns:220px 1fr;gap:18px;align-items:start}
+.toc{position:sticky;top:120px}
+.toc a{display:flex;gap:8px;align-items:center;padding:7px 10px;border-radius:9px;font-size:13.5px;color:var(--ink);text-decoration:none}
+.toc a:hover{background:#fff}
+.toc .sc{margin-left:auto;font-size:12px;font-weight:700}
+.task{padding:16px 18px;margin-bottom:14px}
+.task.ret{outline:2px solid #E9C58F;background:#FFFCF6}
+.thd{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.thd b{flex:1}
+.item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;margin:2px 0}
+.item:hover{background:#FAF9FC}
+.item .q{flex:1;min-width:0}
+.ans{font-weight:600}
+.right{font-size:12.5px;color:var(--mut)}
+.mark{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:#fff;font-weight:800;font-size:16px;flex:0 0 auto}
+.mark.ok{background:var(--ok-soft);border-color:#BFE0D9;color:var(--ok)}
+.mark.no{background:var(--bad-soft);border-color:#F2C6C1;color:var(--bad)}
+.mark.fixed{box-shadow:0 0 0 2px var(--brand)}
+.cm{border:0;background:none;color:var(--faint);font-size:16px;padding:4px 6px;border-radius:8px}
+.cm:hover{background:#EFEEF3;color:var(--brand)}
+.cm.has{color:var(--brand)}
+.cbox{display:flex;gap:8px;margin:4px 0 6px 44px}
+.cbox textarea{min-height:44px}
+.cshow{margin:4px 0 6px 44px;background:#FFF8E8;border-radius:10px;padding:8px 12px;font-size:14px}
+.cshow b{font-size:11.5px;color:var(--warn);text-transform:uppercase;letter-spacing:.04em;display:block}
+.fixednote{font-size:11.5px;color:var(--brand);font-weight:600}
+.img{width:62px;height:62px;object-fit:contain;border-radius:8px;background:#FAF9FC}
+.player{display:flex;align-items:center;gap:10px;background:var(--bg);border-radius:12px;padding:8px 12px}
+.player .pb{width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;border:0}
+.player .wave{flex:1;height:26px;background:repeating-linear-gradient(90deg,#B9B1F3 0 3px,transparent 3px 6px);-webkit-mask:linear-gradient(transparent 20%,#000 20% 80%,transparent 80%)}
+.score5{display:inline-flex;gap:4px}
+.score5 button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:5px 10px;font-weight:600;font-size:13px}
+.score5 button.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.bar{position:fixed;left:236px;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);z-index:30}
+.bar-in{max-width:none;padding:12px 24px;display:flex;align-items:center;gap:12px;flex-wrap:nowrap}
+.bar-in .btn{white-space:nowrap}
+.total{display:flex;align-items:center;gap:8px}
+.total input{width:70px;font-size:18px;font-weight:700;text-align:center;padding:6px}
+.chk{display:inline-flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;white-space:nowrap}
+.chk input{width:18px;height:18px;accent-color:var(--brand)}
+.rtcheck{width:20px;height:20px;accent-color:var(--warn)}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#1A1B2E;color:#fff;padding:10px 18px;border-radius:12px;font-size:14px;z-index:200}
+
+/* карточка ученика */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.stat{padding:14px 16px}
+.stat b{display:block;font-size:22px}
+.stat span{font-size:13px;color:var(--mut)}
+.unit td.u{background:#FAF9FC;font-weight:700;font-size:13px;color:var(--mut);padding:8px 14px}
+
+/* задать */
+.steps3{display:grid;grid-template-columns:1fr 1.3fr .9fr;gap:14px;align-items:start}
+.lst{max-height:430px;overflow:auto}
+.lrow{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--line);font-size:14px}
+.lrow input{width:17px;height:17px;accent-color:var(--brand)}
+.lrow .grow{flex:1;min-width:0}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;font-size:13px}
+.cal div{padding:6px 0;border-radius:8px}
+.cal .h{color:var(--faint);font-size:11.5px}
+.cal .d{cursor:pointer}
+.cal .d:hover{background:var(--bg)}
+.cal .d.on{background:var(--brand);color:#fff;font-weight:700}
+.cal .d.today{box-shadow:0 0 0 1px var(--brand) inset}
+.cal .d.past{color:#cfcfd8}
+
+/* библиотека */
+.tree .c{font-weight:700;padding:10px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.tree .c i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.tree .u{padding:8px 14px 8px 34px;border-bottom:1px solid var(--line);font-weight:600;font-size:14px;color:#3d4052}
+.tree .l{padding:7px 14px 7px 56px;border-bottom:1px solid var(--line);font-size:14px;display:flex;gap:10px;align-items:center}
+.tree .l .grow{flex:1}
+/* телефон: проверка в одну колонку */
+body.phone{background:#2A2638}
+body.phone .app{grid-template-columns:1fr;max-width:390px;margin:16px auto;border-radius:22px;overflow:hidden;background:var(--bg);min-height:780px}
+body.phone .side{display:none}
+body.phone .topbar{padding:0 14px}
+body.phone .page{padding:14px 12px 170px}
+body.phone .rv{grid-template-columns:1fr}
+body.phone .toc{display:none}
+body.phone .item{flex-wrap:wrap}
+body.phone .img{width:48px;height:48px}
+body.phone .bar{left:50%;right:auto;width:390px;transform:translateX(-50%);bottom:0}
+body.phone .bar-in{flex-wrap:wrap;padding:10px 12px;gap:8px}
+body.phone .bar-in .btn.big{flex:1 1 100%}
+body.phone .bar-in .btn.warn{flex:1 1 40%;font-size:13px;padding:7px 8px}
+body.phone .bar-in>span[style*="flex:1"]{display:none}
+body.phone table th:nth-child(3),body.phone table td:nth-child(3),body.phone table th:nth-child(4),body.phone table td:nth-child(4),body.phone table th:nth-child(5),body.phone table td:nth-child(5){display:none}
+body.phone .drop{width:340px;right:10px}
+
+.grid3{display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:14px;align-items:start}
+@media(max-width:1100px){.grid3{grid-template-columns:1fr}}
+.colh{padding:14px 16px;border-bottom:1px solid var(--line)}
+.colh b{display:flex;gap:9px;align-items:center;font-size:16px}
+.colh b i{font-style:normal;width:26px;height:26px;border-radius:50%;background:var(--brand-soft);color:var(--brand-d);display:grid;place-items:center;font-size:13px}
+.lst{max-height:420px;overflow:auto}
+.r{display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid var(--line);font-size:14.5px;cursor:pointer}
+.r:hover{background:#FBFAFD} .r.on{background:#F4F1FF}
+.r input{width:17px;height:17px;accent-color:var(--brand)}
+.seg2{display:inline-flex;background:#EFEEF3;border-radius:11px;padding:3px;flex-wrap:wrap}
+.seg2 button{border:0;background:none;padding:6px 12px;border-radius:9px;font-size:13.5px;color:var(--mut)}
+.seg2 button.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.mode{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--line)}
+.mode .ic{width:34px;height:34px;border-radius:10px;background:var(--brand-soft);display:grid;place-items:center;font-size:17px}
+.mode.off{opacity:.45}
+.step{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.step button{border:0;background:#fff;width:30px;height:30px;font-size:16px}
+.step b{min-width:36px;text-align:center;font-size:14px}
+.wd{font-weight:600} .tr{color:var(--mut);font-size:13px}
+.sumbar{margin-top:14px;padding:14px 18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.prog{height:8px;background:#EFEEF3;border-radius:99px;overflow:hidden;flex:1;min-width:80px}
+.prog i{display:block;height:100%;background:var(--brand)}
+.tag{display:inline-block;background:#EFEEF3;border-radius:8px;padding:2px 8px;font-size:12.5px;margin:2px}
+.tag.bad{background:var(--bad-soft);color:var(--bad)}
+.k{font-family:Montserrat,'Golos Text',sans-serif;background:linear-gradient(180deg,#FFF7EC,#FBEFF7);border-radius:20px;padding:20px}
+.kcard{background:#fff;border-radius:22px;padding:18px;box-shadow:0 10px 30px rgba(80,40,90,.08);max-width:620px;margin:0 auto}
+.km{display:flex;align-items:center;gap:12px;padding:12px;border:2px solid #F0ECF6;border-radius:16px;margin-bottom:8px}
+.km .ic{font-size:24px} .km b{flex:1}
+.km .dots{display:flex;gap:4px} .km .dots i{width:12px;height:12px;border-radius:50%;background:#ECE8F3} .km .dots i.ok{background:#22B07D}
+.c{display:inline-block;min-width:70px;text-align:center;border-radius:9px;padding:4px 8px;font-size:12.5px;font-weight:600}
+.c.ok{background:var(--ok-soft);color:var(--ok)} .c.wd2{background:#EEF4FF;color:#2F5BD3} .c.wait{background:var(--brand-soft);color:var(--brand-d)} .c.late{border:1.5px dashed var(--bad);color:var(--bad)}
+</style></head><body>
+<div class="panel"><div class="grp"><span>Экран</span>
+<button data-s="assign" class="on">1. Учитель: задать слова</button>
+<button data-s="card">2. Учитель: карточка ученика</button>
+<button data-s="student">3. Что видит ученик</button>
+<button data-s="sets">4. Методист: наборы слов</button>
+<button data-s="journal">5. Методист: журнал</button></div>
+<div class="note">Макет. Ученики, слова и режимы условные — режимы будут те, что есть в тренажёре. Кнопки работают.</div></div>
+<div id="root"></div>
+<script>
+const MODES=[['cards','🃏','Карточки','смотрит слово, картинку, слушает'],['pick','✅','Выбери перевод','4 варианта'],['pic','🖼','Выбери картинку','слышит слово — выбирает картинку'],['listen','🎧','Послушай и напиши','диктант по слову'],['build','🧩','Собери слово','из букв'],['write','✏️','Напиши слово','по переводу']];
+const SETS=[
+ {id:'s1',t:'SM2 Unit 1 · Daily routine',by:'методист',words:[['get up','вставать'],['have breakfast','завтракать'],['go to school','идти в школу'],['have lunch','обедать'],['do homework','делать уроки'],['watch TV','смотреть телевизор'],['go to bed','ложиться спать'],['brush your teeth','чистить зубы'],['get dressed','одеваться'],['wash your face','умываться']]},
+ {id:'s2',t:'SM2 Unit 2 · Food',by:'методист',words:[['apple','яблоко'],['bread','хлеб'],['cheese','сыр'],['milk','молоко'],['juice','сок'],['sandwich','бутерброд'],['salad','салат'],['soup','суп']]},
+ {id:'s3',t:'WD1 · Animals',by:'методист',words:[['cat','кошка'],['dog','собака'],['frog','лягушка'],['fish','рыба'],['bird','птица'],['horse','лошадь']]},
+];
+const STU=[['Маша Котова','SM2'],['Лёва Дронов','SM2'],['Соня Петрова','SM2'],['Тимур Алиев','SM2'],['Ева Смирнова','WD1']];
+const S={s:'assign', stu:{'Маша Котова':1}, src:'set', set:'s1', sel:{}, own:'', mode:{cards:1,pick:2,write:3}, day:'пт, 23 окт', done:false, setOpen:'s1', jn:'all'};
+SETS[0].words.forEach((w,i)=>{ if(i<8) S.sel[w[0]]=1; });
+document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{ S.s=b.dataset.s; S.done=false; document.querySelectorAll('[data-s]').forEach(x=>x.classList.toggle('on',x===b)); R(); });
+function shell(tab,title,body){
+  const T=[['st','Мои ученики'],['as','Задать материал'],['rv','Проверка'],['jn','Журнал'],['ws','Наборы слов'],['lb','Библиотека']];
+  return `<div class="app"><div class="side"><div class="logo">Classroom</div>${T.map(([k,t])=>`<div class="tab ${k===tab?'on':''}">${t}</div>`).join('')}</div>
+   <div class="main"><div class="topbar"><h1>${title}</h1><span class="who">${tab==='ws'||tab==='jn'?'Анна · методист':'Ольга · учитель'}</span></div><div class="page" style="max-width:1300px">${body}</div></div></div>`;
+}
+const seg=(key,items)=>`<span class="seg2">${items.map(([k,t])=>`<button class="${S[key]===k?'on':''}" onclick="S['${key}']='${k}';R()">${t}</button>`).join('')}</span>`;
+function words(){ if(S.src==='own') return S.own.split('\n').map(x=>x.trim()).filter(Boolean).map(x=>x.split(/\s*[—-]\s*/)); return (SETS.find(x=>x.id===S.set)||SETS[0]).words; }
+function pickedWords(){ return S.src==='own' ? words() : words().filter(w=>S.sel[w[0]]); }
+function runs(){ return Object.values(S.mode).reduce((a,b)=>a+b,0); }
+function assign(){
+  if(S.done) return shell('as','Задать материал',`<div class="card" style="padding:30px;text-align:center"><div style="font-size:40px">✅</div><h2>Задано: ${pickedWords().length} слов · ${Object.keys(S.mode).length} режима</h2>
+    <p class="muted">${Object.keys(S.stu).join(', ')} · до ${S.day}. Ученик увидит задание среди домашек, вы — в карточке ученика.</p><button class="btn" onclick="S.done=false;R()">Задать ещё</button></div>`);
+  const ws=words(), pw=pickedWords();
+  const col1=`<div class="card"><div class="colh"><b><i>1</i>Кому</b><input placeholder="Поиск ученика" style="width:100%;margin-top:10px"></div><div class="lst">
+    ${STU.map(([n,c])=>`<label class="r ${S.stu[n]?'on':''}"><input type="checkbox" ${S.stu[n]?'checked':''} onchange="if(this.checked)S.stu['${n}']=1;else delete S.stu['${n}'];R()"><span style="flex:1">${n}</span><span class="muted small">${c}</span></label>`).join('')}</div></div>`;
+  const col2=`<div class="card"><div class="colh"><b><i>2</i>Какие слова</b>
+     <div style="margin:10px 0 6px">${seg('src',[['set','Готовый набор'],['search','Найти в словаре'],['own','Свой список']])}</div>
+     ${S.src==='set'?`<select style="width:100%" onchange="S.set=this.value;S.sel={};R()">${SETS.map(x=>`<option value="${x.id}" ${S.set===x.id?'selected':''}>${x.t} · ${x.words.length} слов</option>`).join('')}</select>`:''}
+     ${S.src==='search'?`<input placeholder="🔍 слово или перевод, например «school»" style="width:100%">`:''}
+     ${S.src==='own'?`<textarea placeholder="По слову на строке: get up — вставать" oninput="S.own=this.value;" onchange="R()" style="min-height:120px">${S.own}</textarea><div class="muted small">Перевод через тире; без перевода — подставим из словаря тренажёра.</div>`:''}
+   </div>
+   ${S.src!=='own'?`<div class="r" style="background:#FAFAFC;font-weight:600"><input type="checkbox" ${ws.every(w=>S.sel[w[0]])?'checked':''} onchange="words().forEach(w=>{ if(this.checked)S.sel[w[0]]=1; else delete S.sel[w[0]]; });R()">Все слова набора <span class="muted small" style="margin-left:auto">отмечено ${pw.length}</span></div>
+   <div class="lst">${ws.map(w=>`<label class="r ${S.sel[w[0]]?'on':''}"><input type="checkbox" ${S.sel[w[0]]?'checked':''} onchange="if(this.checked)S.sel['${w[0]}']=1;else delete S.sel['${w[0]}'];R()"><span class="wd">${w[0]}</span><span class="tr">— ${w[1]}</span><span style="margin-left:auto">🔊</span></label>`).join('')}</div>`:''}</div>`;
+  const col3=`<div class="card"><div class="colh"><b><i>3</i>Режимы и сколько раз</b><div class="muted small" style="margin-top:6px">Галочка — включить режим, число — сколько раз пройти</div></div>
+    ${MODES.map(([k,ic,t,d])=>{ const on=S.mode[k]!=null; return `<div class="mode ${on?'':'off'}"><input type="checkbox" ${on?'checked':''} onchange="if(this.checked)S.mode['${k}']=1;else delete S.mode['${k}'];R()" style="width:17px;height:17px;accent-color:var(--brand)">
+      <span class="ic">${ic}</span><span style="flex:1"><b style="font-size:14.5px">${t}</b><div class="muted small">${d}</div></span>
+      ${on?`<span class="step"><button onclick="S.mode['${k}']=Math.max(1,S.mode['${k}']-1);R()">−</button><b>×${S.mode[k]}</b><button onclick="S.mode['${k}']=Math.min(9,S.mode['${k}']+1);R()">+</button></span>`:''}</div>`; }).join('')}
+    <div style="padding:14px 16px"><b>Срок</b><div class="row" style="gap:6px;margin-top:8px">${['завтра','через 3 дня','пт, 23 окт','через неделю'].map(d=>`<button class="pill ${S.day===d?'g':'n'}" style="border:0;padding:6px 12px" onclick="S.day='${d}';R()">${d}</button>`).join('')}</div>
+    <label class="small" style="display:flex;gap:8px;align-items:center;margin-top:12px"><input type="checkbox" checked> Засчитать прохождение, только если без ошибок или ≥ 80% верно</label></div></div>`;
+  return shell('as','Задать материал',`<div class="row" style="margin-bottom:14px">${'<span class="seg2"><button>Домашки и тесты</button><button>Планы уроков</button><button class="on">Слова из тренажёра</button></span>'}</div>
+   <div class="grid3">${col1}${col2}${col3}</div>
+   <div class="card sumbar"><span>Задать <b>${pw.length}</b> слов · <b>${Object.keys(S.mode).length}</b> режима · всего <b>${runs()}</b> прохождений · <b>${Object.keys(S.stu).length}</b> ученику · до ${S.day}</span>
+     <span style="flex:1"></span><button class="btn big" ${pw.length&&Object.keys(S.mode).length&&Object.keys(S.stu).length?'':'disabled style="opacity:.5"'} onclick="S.done=true;R()">Задать</button></div>`);
+}
+function card(){
+  const M=[['cards','🃏','Карточки',1,1],['pick','✅','Выбери перевод',2,2],['write','✏️','Напиши слово',3,1]];
+  const b=`<div class="row" style="margin-bottom:12px"><button class="btn sec sm">← Назад к ученикам</button></div>
+   <h2 style="margin:0">Маша Котова</h2><div class="muted small" style="margin-bottom:14px">SM2 · учитель: Ольга</div>
+   <div class="card"><table><thead><tr><th>Материал</th><th>Статус</th><th>Срок</th><th></th></tr></thead><tbody>
+    <tr><td><b>SM2 Unit 1 Homework 2</b></td><td><span class="pill g">проверено · 85%</span></td><td>15 окт</td><td></td></tr>
+    <tr style="background:#F8F7FF"><td><b>🔤 Слова · Daily routine</b><div class="muted small">8 слов · 3 режима</div></td><td><span class="pill b">в работе · 4 из 6</span></td><td>23 окт</td><td style="text-align:right"><button class="btn sec sm" onclick="S.open=!S.open;R()">${S.open?'Свернуть':'Подробнее'}</button></td></tr>
+    ${S.open?`<tr><td colspan="4" style="background:#FCFBFE">
+      ${M.map(([k,ic,t,need,done])=>`<div class="row" style="gap:12px;padding:6px 0"><span style="width:26px">${ic}</span><span style="width:170px">${t}</span><div class="prog"><i style="width:${done/need*100}%"></i></div><b style="width:60px;text-align:right">${done} из ${need}</b><span class="muted small" style="width:150px">${done>=need?'✓ пройдено':'осталось '+(need-done)}</span></div>`).join('')}
+      <div style="margin-top:10px"><b class="small">Трудные слова</b> <span class="muted small">— ошибался чаще всего</span><div style="margin-top:6px"><span class="tag bad">brush your teeth · 4 ошибки</span><span class="tag bad">get dressed · 3</span><span class="tag">have lunch · 1</span></div></div>
+      <div class="row" style="margin-top:12px;gap:8px"><button class="btn sm">Задать трудные слова ещё раз</button><button class="btn sec sm">Продлить срок</button></div></td></tr>`:''}
+    <tr><td><b>SM2 Unit 1 Homework 3</b></td><td><span class="pill y">ждёт проверки</span></td><td>18 окт</td><td style="text-align:right"><button class="btn sm">Проверить</button></td></tr>
+    <tr><td><b>🔤 Слова · Food</b><div class="muted small">6 слов · 2 режима</div></td><td><span class="pill g">✓ пройдено</span></td><td>12 окт</td><td></td></tr>
+   </tbody></table></div>
+   <p class="muted small">Слова не нужно проверять: задание закрывается само, когда пройдены все режимы нужное число раз. Учитель видит прогресс и трудные слова; одной кнопкой задаёт их ещё раз.</p>`;
+  return shell('st','Карточка ученика',b);
+}
+function student(){
+  const M=[['🃏','Карточки',1,1],['✅','Выбери перевод',2,1],['✏️','Напиши слово',3,0]];
+  return shell('st','Что видит ученик (в кабинете)',`<div class="k"><div class="kcard"><div class="muted small" style="font-weight:700">Домашка · до пятницы</div><h2 style="margin:4px 0 4px">🔤 Слова · Daily routine</h2>
+    <div class="muted" style="margin-bottom:14px">8 слов. Пройди каждый режим столько раз, сколько кружков.</div>
+    ${M.map(([ic,t,need,done])=>`<div class="km"><span class="ic">${ic}</span><b>${t}</b><span class="dots">${Array.from({length:need},(_,i)=>`<i class="${i<done?'ok':''}"></i>`).join('')}</span>
+      <button class="btn sm" ${done>=need?'disabled style="opacity:.5"':''}>${done>=need?'✓ готово':'Начать'}</button></div>`).join('')}
+    <div class="muted small" style="margin-top:8px">Режим открывается в тренажёре с этими словами. Когда пройдёшь всё — задание закроется само, учитель увидит.</div></div></div>`);
+}
+function sets(){
+  const cur=SETS.find(x=>x.id===S.setOpen)||SETS[0];
+  return shell('ws','Наборы слов',`<p class="muted" style="margin-top:0">Готовые наборы по юнитам — учитель выбирает их в «Задать материал → Слова из тренажёра» одним щелчком. Можно задать режимы по умолчанию.</p>
+   <div class="grid3" style="grid-template-columns:1fr 1.6fr"><div class="card">${SETS.map(x=>`<div class="r ${S.setOpen===x.id?'on':''}" onclick="S.setOpen='${x.id}';R()"><span style="flex:1"><b>${x.t}</b><div class="muted small">${x.words.length} слов</div></span><span class="muted small">задавали 12 раз</span></div>`).join('')}
+     <div style="padding:12px 16px"><button class="btn sm">＋ Новый набор</button> <button class="btn sec sm">Взять слова из юнита</button></div></div>
+   <div class="card"><div class="colh"><input value="${cur.t}" style="width:100%;font-weight:700"></div>
+     ${cur.words.map(w=>`<div class="r"><span class="wd">${w[0]}</span><span class="tr">— ${w[1]}</span><span style="margin-left:auto" class="muted small">🔊 есть звук · 🖼 картинка</span></div>`).join('')}
+     <div class="r"><input placeholder="＋ слово — перевод" style="flex:1"></div>
+     <div style="padding:12px 16px"><b class="small">Режимы по умолчанию</b><div style="margin-top:6px">${MODES.slice(0,4).map(m=>`<span class="tag">${m[1]} ${m[2]} ×${m[0]==='write'?3:m[0]==='pick'?2:1}</span>`).join('')}</div>
+     <div class="muted small" style="margin-top:6px">Учитель может поменять под ученика.</div></div></div></div>
+   <div class="card" style="margin-top:14px;padding:14px 16px"><b>Трудные слова по школе</b> <span class="muted small">— где ошибаются чаще всего (как «Сложные задания» в контроле качества)</span>
+     <div style="margin-top:8px"><span class="tag bad">brush your teeth · 64% ошибок · 22 ученика</span><span class="tag bad">get dressed · 58%</span><span class="tag">sandwich · 41%</span></div></div>`);
+}
+function journal(){
+  const R1=[['Маша Котова','Ольга','<span class="c ok">92%</span>','<span class="c wait">проверить</span>','<span class="c wd2">слова 4/6</span>'],
+            ['Лёва Дронов','Ольга','<span class="c ok">78%</span>','<span class="c late">просрочено</span>','<span class="c late">слова 1/6</span>'],
+            ['Соня Петрова','Ирина','<span class="c ok">100%</span>','<span class="c ok">96%</span>','<span class="c ok">слова ✓</span>']];
+  return shell('jn','Журнал',`<div class="row" style="gap:10px;margin-bottom:12px"><select><option>Super Minds 2</option></select>${seg('jn',[['all','Всё'],['hw','Только домашки'],['w','Только слова']])}</div>
+   <div class="card"><table><thead><tr><th>Ученик</th><th>SM2 Unit 1 Homework 1</th><th>SM2 Unit 1 Homework 2</th><th>🔤 Слова · Daily routine</th></tr></thead><tbody>
+   ${R1.map(r=>`<tr><td><b>${r[0]}</b><div class="muted small">учитель: ${r[1]}</div></td>${S.jn==='w'?'<td></td><td></td>':`<td>${r[2]}</td><td>${r[3]}</td>`}<td>${S.jn==='hw'?'':r[4]}</td></tr>`).join('')}</tbody></table></div>
+   <p class="muted small">Задания со словами — отдельные колонки «🔤 Слова · …»: сколько прохождений из нужных, просрочено ли. В сводке «Все программы» — ещё колонка «Слова: пройдено N из M». В «Контроле качества» у методиста — раздел «Трудные слова».</p>`);
+}
+function R(){ document.getElementById('root').innerHTML = ({assign,card,student,sets,journal})[S.s](); }
+R();
+</script></body></html>
