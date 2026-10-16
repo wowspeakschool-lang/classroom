@@ -195,7 +195,32 @@ const ST=[
  {n:'Аня Ким', t:'Мария', s:{'Unit 1':[90,91,'wait:0','',''],'Unit 2':['','','','']}, fire:2},
  {n:'Гриша Резник', t:'Мария', s:{'Unit 1':[45,58,'redo','',''],'Unit 2':['','','','']}, fire:1},
 ];
-const S={unit:'Unit 1', teach:'', q:'', only:'', pop:null};
+const S={prog:'SM2', unit:'Unit 1', teach:'', q:'', only:'', pop:null};
+// «Все программы» — сводка по ученику: сколько задано, сдано, ждёт, просрочено, средний
+const ALL=[
+ {n:'Маша Котова', t:'Ольга', p:'SM2', g:14, d:12, w:1, l:0, r:0, a:88, f:3},
+ {n:'Лёва Дронов', t:'Ольга', p:'SM2', g:12, d:8, w:0, l:2, r:1, a:74, f:0},
+ {n:'Соня Петрова', t:'Ирина', p:'SM2', g:15, d:14, w:1, l:0, r:0, a:95, f:5},
+ {n:'Тимур Алиев', t:'Ирина', p:'SM2', g:11, d:6, w:0, l:3, r:0, a:61, f:0},
+ {n:'Аня Ким', t:'Мария', p:'SM2', g:9, d:9, w:1, l:0, r:0, a:90, f:2},
+ {n:'Гриша Резник', t:'Мария', p:'SM2', g:10, d:7, w:0, l:0, r:2, a:52, f:1},
+ {n:'Ева Смирнова', t:'Ольга', p:'WD1', g:20, d:19, w:2, l:0, r:0, a:93, f:8},
+ {n:'Артём Белов', t:'Мария', p:'WD1', g:18, d:12, w:0, l:4, r:1, a:67, f:0},
+ {n:'Лиза Орлова', t:'Ирина', p:'SM3', g:6, d:5, w:1, l:0, r:0, a:84, f:4},
+];
+const PROGS=[['','Все программы'],['SM2','Super Minds 2'],['SM3','Super Minds 3'],['WD1','Wow Dragon 1']];
+function allView(seg){
+  let rows=ALL.filter(r=>(!S.teach||r.t===S.teach)&&(!S.q||r.n.toLowerCase().includes(S.q.toLowerCase())));
+  if(S.only==='late') rows=rows.filter(r=>r.l); if(S.only==='wait') rows=rows.filter(r=>r.w); if(S.only==='low') rows=rows.filter(r=>r.a<60);
+  const pc=a=>`<span class="c ${a>=90?'ok':a>=60?'mid':'low'}">${a}%</span>`;
+  return `<div class="card jt"><table><thead><tr><th class="st">Ученик</th><th>Программа</th><th>Средний за месяц</th><th>🔥</th><th>Задано</th><th>Сдано</th><th>Ждут проверки</th><th>На доработке</th><th>Просрочено</th></tr></thead><tbody>
+    ${rows.map(r=>`<tr><td class="st"><span class="who"><b>${r.n}</b><i>учитель: ${r.t}</i></span></td>
+      <td><a href="#" onclick="S.prog='${r.p}';R();return false">${r.p}</a></td><td>${pc(r.a)}</td><td>${r.f?'🔥'+r.f:''}</td><td>${r.g}</td><td>${r.d} <span class="muted small">из ${r.g}</span></td>
+      <td>${r.w?`<span class="c wait">${r.w}</span>`:'<span class="muted">0</span>'}</td><td>${r.r?`<span class="c redo">${r.r}</span>`:'<span class="muted">0</span>'}</td>
+      <td>${r.l?`<span class="c late">${r.l}</span>`:'<span class="muted">0</span>'}</td></tr>`).join('')||'<tr><td class="st muted">Никого нет</td></tr>'}
+  </tbody></table></div>
+  <p class="muted small">Все программы сразу: по ученику — сколько задано и сдано, что ждёт и что просрочено. Нажмите на программу — откроется её таблица по материалам; на имя — карточка ученика.</p>`;
+}
 function cell(v,i,j){
   if(v==='') return '';
   const [k,x]=String(v).split(':');
@@ -206,8 +231,19 @@ function cell(v,i,j){
   if(k==='redo') return `<span class="c redo" ${on}>на доработке</span>`;
   const n=+v; return `<span class="c ${n>=90?'ok':n>=60?'mid':'low'}" ${on}>${n}%</span>`;
 }
+function tools(){
+  const seg=(key,items)=>`<span class="seg2">${items.map(([k,t])=>`<button class="${S[key]===k?'on':''}" onclick="S['${key}']='${k}';S.pop=null;R()">${t}</button>`).join('')}</span>`;
+  return `<div class="tools">
+    <select onchange="S.prog=this.value;S.pop=null;R()">${PROGS.map(([k,t])=>`<option value="${k}" ${S.prog===k?'selected':''}>${t}</option>`).join('')}</select>
+    ${S.prog?seg('unit',Object.keys(UNITS).map(u=>[u,u])):''}
+    <select onchange="S.teach=this.value;R()"><option value="">Все учителя</option>${['Ольга','Ирина','Мария'].map(t=>`<option ${S.teach===t?'selected':''}>${t}</option>`).join('')}</select>
+    <input placeholder="Ученик" value="${S.q}" oninput="S.q=this.value;R()" style="width:170px">
+    <span style="flex:1"></span><button class="btn sec sm">⬇ Скачать в Excel</button></div>`;
+}
 const nums=a=>a.filter(x=>typeof x==='number');
 function R(){
+  if(!S.prog){ const seg=(key,items)=>`<span class="seg2">${items.map(([k,t])=>`<button class="${S[key]===k?'on':''}" onclick="S['${key}']='${k}';R()">${t}</button>`).join('')}</span>`;
+    document.getElementById('pg').innerHTML=tools()+`<div class="tools">${seg('only',[['','Все'],['late','Просрочено · '+ALL.filter(r=>r.l).length],['wait','Ждут проверки · '+ALL.filter(r=>r.w).length],['low','Средний ниже 60%']])}</div>`+allView(); return; }
   const ls=UNITS[S.unit];
   let rows=ST.filter(r=>(!S.teach||r.t===S.teach)&&(!S.q||r.n.toLowerCase().includes(S.q.toLowerCase())));
   if(S.only==='late') rows=rows.filter(r=>r.s[S.unit].some(v=>String(v).startsWith('late')));
@@ -222,13 +258,7 @@ function R(){
     pop=`<div class="pop"><div style="display:flex"><b style="flex:1">${r.n} · ${code}</b><a href="#" onclick="S.pop=null;R();return false">✕</a></div>
       <div class="muted small" style="margin:6px 0 10px">задано 12 окт · срок 15 окт${v.startsWith('late')?' · <b style="color:var(--bad)">не сдано</b>':''}${v.startsWith('wait')?' · сдано вовремя':''}</div>
       <div class="row" style="gap:8px">${v.startsWith('wait')?'<button class="btn sm">Проверить</button>':''}${/^\d/.test(v)||v.startsWith('redo')?'<button class="btn sec sm">Открыть работу</button>':''}<button class="btn sec sm">Карточка ученика</button></div></div>`; }
-  document.getElementById('pg').innerHTML=`
-  <div class="tools">
-    <select><option>Super Minds 2</option><option>Super Minds 3</option><option>Wow Dragon 1</option></select>
-    ${seg('unit',Object.keys(UNITS).map(u=>[u,u]))}
-    <select onchange="S.teach=this.value;R()"><option value="">Все учителя</option>${[...new Set(ST.map(r=>r.t))].map(t=>`<option ${S.teach===t?'selected':''}>${t}</option>`).join('')}</select>
-    <input placeholder="Ученик" value="${S.q}" oninput="S.q=this.value;R()" style="width:170px">
-    <span style="flex:1"></span><button class="btn sec sm">⬇ Скачать в Excel</button></div>
+  document.getElementById('pg').innerHTML=tools()+`
   <div class="tools">${seg('only',[['','Все'],['late','Просрочено · '+cnt('late')],['wait','Ждут проверки · '+cnt('wait')],['low','Средний ниже 60%']])}</div>
   <div class="card jt"><table><thead><tr><th class="st">Ученик</th><th>Средний</th><th>🔥</th>${ls.map(l=>`<th>SM2 ${l.startsWith('Unit')?l:S.unit+' '+l}</th>`).join('')}</tr></thead><tbody>
   <tr class="sum"><td class="st">${rows.length} учеников</td><td></td><td></td>${sum.map(x=>`<td>${x}</td>`).join('')}</tr>
