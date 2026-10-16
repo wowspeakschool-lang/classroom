@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Журнал — макет</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Цвета и шрифт — как в index.html */
+:root{
+  --brand:#5B4BE0; --brand-d:#3A2FA8; --brand-soft:#F0EEFD;
+  --ink:#1A1B2E; --mut:#7A7F92; --faint:#A6AAB9; --line:#E8E7EE; --bg:#F7F6F9;
+  --ok:#0D6155; --ok-soft:#E2F1EE; --warn:#A9660B; --warn-soft:#FBF0DE; --bad:#B3261E; --bad-soft:#FBE9E7;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Golos Text',-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.5}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:14px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+textarea{width:100%;resize:vertical;min-height:60px}
+
+/* панель макета */
+.panel{position:sticky;top:0;z-index:100;background:#1D1A29;color:#fff;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;padding:8px 12px;font-size:13px}
+.grp{display:flex;align-items:center;gap:3px;flex-wrap:wrap}
+.grp>span{opacity:.5;margin-right:4px}
+.grp button{color:#fff;opacity:.6;padding:5px 10px;border-radius:8px;font-size:13px;border:0;background:none}
+.grp button.on{background:rgba(255,255,255,.16);opacity:1;font-weight:700}
+.note{opacity:.6;font-size:12px;flex-basis:100%}
+
+/* оболочка как в classroom */
+.app{display:grid;grid-template-columns:236px 1fr;min-height:calc(100vh - 44px)}
+.side{background:#fff;border-right:1px solid var(--line);padding-bottom:16px}
+.logo{font-weight:700;font-size:16px;height:58px;display:flex;align-items:center;gap:10px;padding:0 18px}
+.logo:before{content:"C";width:25px;height:25px;border-radius:8px;background:var(--brand);color:#fff;font-size:12px;display:grid;place-items:center}
+.tab{display:flex;align-items:center;gap:10px;padding:9px 12px;margin:1px 10px;border-radius:10px;color:#3d4052;font-size:14.5px;cursor:pointer}
+.tab:hover{background:var(--bg)}
+.tab.on{background:var(--brand-soft);color:var(--brand-d);font-weight:600}
+.tab .cnt{margin-left:auto;background:var(--warn-soft);color:var(--warn);border-radius:99px;padding:0 8px;font-size:12px;font-weight:700}
+.main{min-width:0}
+.topbar{height:58px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 24px;position:relative}
+.topbar h1{font-size:18px;margin:0;flex:1}
+.bell{position:relative;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:#fff;font-size:18px}
+.bell i{position:absolute;top:-5px;right:-5px;background:#E5484D;color:#fff;font-style:normal;font-size:11px;font-weight:700;border-radius:99px;padding:1px 6px}
+.who{font-size:13px;color:var(--mut)}
+.page{padding:22px 24px 120px;max-width:1100px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:16px}
+.btn{border:1px solid var(--brand);background:var(--brand);color:#fff;padding:8px 14px;border-radius:10px;font-weight:600;font-size:14px}
+.btn:hover{background:var(--brand-d)}
+.btn.sec{background:#fff;border-color:var(--line);color:var(--ink);font-weight:500}
+.btn.sm{padding:5px 11px;font-size:13px;border-radius:9px}
+.btn.warn{background:#fff;border-color:#E9C58F;color:var(--warn)}
+.btn.big{padding:11px 20px;font-size:15px}
+.pill{display:inline-block;border-radius:99px;padding:2px 10px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.pill.g{background:var(--ok-soft);color:var(--ok)} .pill.y{background:var(--warn-soft);color:var(--warn)}
+.pill.r{background:var(--bad-soft);color:var(--bad)} .pill.n{background:#EFEEF3;color:var(--mut)} .pill.b{background:var(--brand-soft);color:var(--brand-d)}
+.muted{color:var(--mut)} .small{font-size:13px}
+table{width:100%;border-collapse:collapse}
+th{font-size:12px;font-weight:600;color:var(--mut);text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tr.click:hover td{background:#FBFAFD;cursor:pointer}
+.ava{width:34px;height:34px;border-radius:50%;display:inline-grid;place-items:center;font-weight:700;font-size:13px;color:#fff;margin-right:10px;vertical-align:middle}
+.seg{display:inline-flex;background:#EFEEF3;border-radius:11px;padding:3px}
+.seg button{border:0;background:none;padding:6px 14px;border-radius:9px;font-size:14px;color:var(--mut)}
+.seg button.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.h2{font-size:16px;font-weight:700;margin:0 0 10px}
+
+/* колокольчик */
+.drop{position:absolute;right:20px;top:54px;width:380px;z-index:40;box-shadow:0 18px 50px rgba(30,20,80,.16)}
+.drop .it{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);cursor:pointer}
+.drop .it:hover{background:#FBFAFD}
+.drop .it.new{background:#FBFAFF}
+.drop .it .dot{width:8px;height:8px;border-radius:50%;background:var(--brand);margin-top:8px;flex:0 0 auto}
+.drop .it .dot.off{background:transparent}
+
+/* проверка */
+.rv{display:grid;grid-template-columns:220px 1fr;gap:18px;align-items:start}
+.toc{position:sticky;top:120px}
+.toc a{display:flex;gap:8px;align-items:center;padding:7px 10px;border-radius:9px;font-size:13.5px;color:var(--ink);text-decoration:none}
+.toc a:hover{background:#fff}
+.toc .sc{margin-left:auto;font-size:12px;font-weight:700}
+.task{padding:16px 18px;margin-bottom:14px}
+.task.ret{outline:2px solid #E9C58F;background:#FFFCF6}
+.thd{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.thd b{flex:1}
+.item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;margin:2px 0}
+.item:hover{background:#FAF9FC}
+.item .q{flex:1;min-width:0}
+.ans{font-weight:600}
+.right{font-size:12.5px;color:var(--mut)}
+.mark{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:#fff;font-weight:800;font-size:16px;flex:0 0 auto}
+.mark.ok{background:var(--ok-soft);border-color:#BFE0D9;color:var(--ok)}
+.mark.no{background:var(--bad-soft);border-color:#F2C6C1;color:var(--bad)}
+.mark.fixed{box-shadow:0 0 0 2px var(--brand)}
+.cm{border:0;background:none;color:var(--faint);font-size:16px;padding:4px 6px;border-radius:8px}
+.cm:hover{background:#EFEEF3;color:var(--brand)}
+.cm.has{color:var(--brand)}
+.cbox{display:flex;gap:8px;margin:4px 0 6px 44px}
+.cbox textarea{min-height:44px}
+.cshow{margin:4px 0 6px 44px;background:#FFF8E8;border-radius:10px;padding:8px 12px;font-size:14px}
+.cshow b{font-size:11.5px;color:var(--warn);text-transform:uppercase;letter-spacing:.04em;display:block}
+.fixednote{font-size:11.5px;color:var(--brand);font-weight:600}
+.img{width:62px;height:62px;object-fit:contain;border-radius:8px;background:#FAF9FC}
+.player{display:flex;align-items:center;gap:10px;background:var(--bg);border-radius:12px;padding:8px 12px}
+.player .pb{width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;border:0}
+.player .wave{flex:1;height:26px;background:repeating-linear-gradient(90deg,#B9B1F3 0 3px,transparent 3px 6px);-webkit-mask:linear-gradient(transparent 20%,#000 20% 80%,transparent 80%)}
+.score5{display:inline-flex;gap:4px}
+.score5 button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:5px 10px;font-weight:600;font-size:13px}
+.score5 button.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.bar{position:fixed;left:236px;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);z-index:30}
+.bar-in{max-width:none;padding:12px 24px;display:flex;align-items:center;gap:12px;flex-wrap:nowrap}
+.bar-in .btn{white-space:nowrap}
+.total{display:flex;align-items:center;gap:8px}
+.total input{width:70px;font-size:18px;font-weight:700;text-align:center;padding:6px}
+.chk{display:inline-flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;white-space:nowrap}
+.chk input{width:18px;height:18px;accent-color:var(--brand)}
+.rtcheck{width:20px;height:20px;accent-color:var(--warn)}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#1A1B2E;color:#fff;padding:10px 18px;border-radius:12px;font-size:14px;z-index:200}
+
+/* карточка ученика */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.stat{padding:14px 16px}
+.stat b{display:block;font-size:22px}
+.stat span{font-size:13px;color:var(--mut)}
+.unit td.u{background:#FAF9FC;font-weight:700;font-size:13px;color:var(--mut);padding:8px 14px}
+
+/* задать */
+.steps3{display:grid;grid-template-columns:1fr 1.3fr .9fr;gap:14px;align-items:start}
+.lst{max-height:430px;overflow:auto}
+.lrow{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--line);font-size:14px}
+.lrow input{width:17px;height:17px;accent-color:var(--brand)}
+.lrow .grow{flex:1;min-width:0}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;font-size:13px}
+.cal div{padding:6px 0;border-radius:8px}
+.cal .h{color:var(--faint);font-size:11.5px}
+.cal .d{cursor:pointer}
+.cal .d:hover{background:var(--bg)}
+.cal .d.on{background:var(--brand);color:#fff;font-weight:700}
+.cal .d.today{box-shadow:0 0 0 1px var(--brand) inset}
+.cal .d.past{color:#cfcfd8}
+
+/* библиотека */
+.tree .c{font-weight:700;padding:10px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.tree .c i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.tree .u{padding:8px 14px 8px 34px;border-bottom:1px solid var(--line);font-weight:600;font-size:14px;color:#3d4052}
+.tree .l{padding:7px 14px 7px 56px;border-bottom:1px solid var(--line);font-size:14px;display:flex;gap:10px;align-items:center}
+.tree .l .grow{flex:1}
+/* телефон: проверка в одну колонку */
+body.phone{background:#2A2638}
+body.phone .app{grid-template-columns:1fr;max-width:390px;margin:16px auto;border-radius:22px;overflow:hidden;background:var(--bg);min-height:780px}
+body.phone .side{display:none}
+body.phone .topbar{padding:0 14px}
+body.phone .page{padding:14px 12px 170px}
+body.phone .rv{grid-template-columns:1fr}
+body.phone .toc{display:none}
+body.phone .item{flex-wrap:wrap}
+body.phone .img{width:48px;height:48px}
+body.phone .bar{left:50%;right:auto;width:390px;transform:translateX(-50%);bottom:0}
+body.phone .bar-in{flex-wrap:wrap;padding:10px 12px;gap:8px}
+body.phone .bar-in .btn.big{flex:1 1 100%}
+body.phone .bar-in .btn.warn{flex:1 1 40%;font-size:13px;padding:7px 8px}
+body.phone .bar-in>span[style*="flex:1"]{display:none}
+body.phone table th:nth-child(3),body.phone table td:nth-child(3),body.phone table th:nth-child(4),body.phone table td:nth-child(4),body.phone table th:nth-child(5),body.phone table td:nth-child(5){display:none}
+body.phone .drop{width:340px;right:10px}
+
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.seg2{display:inline-flex;background:#EFEEF3;border-radius:11px;padding:3px}
+.seg2 button{border:0;background:none;padding:6px 12px;border-radius:9px;font-size:13.5px;color:var(--mut)}
+.seg2 button.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.jt{overflow:auto;max-height:70vh}
+.jt table{border-collapse:separate;border-spacing:0;min-width:900px}
+.jt th,.jt td{border-bottom:1px solid var(--line);padding:9px 10px;white-space:nowrap;background:#fff}
+.jt th{position:sticky;top:0;z-index:2;font-size:12px;vertical-align:bottom}
+.jt .st{position:sticky;left:0;z-index:1;min-width:210px;border-right:1px solid var(--line)}
+.jt th.st{z-index:3}
+.jt .sum td{background:#FAFAFC;font-size:12.5px;color:var(--mut)}
+.c{display:inline-block;min-width:76px;text-align:center;border-radius:9px;padding:4px 8px;font-size:12.5px;font-weight:600;cursor:pointer}
+.c.ok{background:var(--ok-soft);color:var(--ok)} .c.mid{background:var(--warn-soft);color:var(--warn)} .c.low{background:var(--bad-soft);color:var(--bad)}
+.c.wait{background:var(--brand-soft);color:var(--brand-d)} .c.redo{background:#FFF0DE;color:#B4610F} .c.late{background:#fff;border:1.5px dashed var(--bad);color:var(--bad)}
+.c.work{background:#fff;border:1px solid var(--line);color:var(--mut)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:13px;color:var(--mut);align-items:center}
+.who{display:flex;flex-direction:column} .who b{cursor:pointer;color:var(--ink)} .who b:hover{color:var(--brand-d)} .who i{font-style:normal;font-size:12px;color:var(--mut)}
+.pop{position:fixed;right:24px;bottom:24px;width:340px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px rgba(30,20,80,.16);padding:14px 16px;font-size:14px;z-index:20}
+</style></head><body>
+<div class="panel"><div class="grp"><span>Макет</span><span style="opacity:.7">Журнал — только для методиста. Данные ненастоящие. Нажимайте на ячейки, фильтры и имена.</span></div></div>
+<div class="app"><div class="side"><div class="logo">Classroom</div>
+<div class="tab">Мои ученики</div><div class="tab">Задать материал</div><div class="tab">Проверка</div><div class="tab">Контроль качества</div><div class="tab on">Журнал</div><div class="tab">Библиотека</div></div>
+<div class="main"><div class="topbar"><h1>Журнал</h1><span class="who" style="font-size:13px;color:var(--mut)">Анна · методист</span></div><div class="page" id="pg" style="max-width:none"></div></div></div>
+<script>
+const UNITS={'Unit 1':['Homework 1','Homework 2','Homework 3','Homework 4','Unit 1 Test'],'Unit 2':['Homework 1','Homework 2','Homework 3','Unit 2 Test']};
+// v: '' не задано · w N/M в работе · late просрочено · wait ждёт проверки (дней) · redo на доработке · число — оценка
+const ST=[
+ {n:'Маша Котова', t:'Ольга', s:{'Unit 1':[92,85,'wait:1','w:6/11',''],'Unit 2':['','','','']}, fire:3},
+ {n:'Лёва Дронов', t:'Ольга', s:{'Unit 1':[78,'redo','late:2','',''],'Unit 2':['','','','']}, fire:0},
+ {n:'Соня Петрова', t:'Ирина', s:{'Unit 1':[100,96,88,'wait:4',''],'Unit 2':['w:2/9','','','']}, fire:5},
+ {n:'Тимур Алиев', t:'Ирина', s:{'Unit 1':[64,'late:5','late:3','',''],'Unit 2':['','','','']}, fire:0},
+ {n:'Аня Ким', t:'Мария', s:{'Unit 1':[90,91,'wait:0','',''],'Unit 2':['','','','']}, fire:2},
+ {n:'Гриша Резник', t:'Мария', s:{'Unit 1':[45,58,'redo','',''],'Unit 2':['','','','']}, fire:1},
+];
+const S={unit:'Unit 1', teach:'', q:'', only:'', pop:null};
+function cell(v,i,j){
+  if(v==='') return '';
+  const [k,x]=String(v).split(':');
+  const on=`onclick="S.pop=[${i},${j}];R()"`;
+  if(k==='w') return `<span class="c work" ${on}>в работе · ${x}</span>`;
+  if(k==='late') return `<span class="c late" ${on}>просрочено ${x} дн.</span>`;
+  if(k==='wait') return `<span class="c wait" ${on}>проверить${+x?` · ${x} дн.`:''}</span>`;
+  if(k==='redo') return `<span class="c redo" ${on}>на доработке</span>`;
+  const n=+v; return `<span class="c ${n>=90?'ok':n>=60?'mid':'low'}" ${on}>${n}%</span>`;
+}
+const nums=a=>a.filter(x=>typeof x==='number');
+function R(){
+  const ls=UNITS[S.unit];
+  let rows=ST.filter(r=>(!S.teach||r.t===S.teach)&&(!S.q||r.n.toLowerCase().includes(S.q.toLowerCase())));
+  if(S.only==='late') rows=rows.filter(r=>r.s[S.unit].some(v=>String(v).startsWith('late')));
+  if(S.only==='wait') rows=rows.filter(r=>r.s[S.unit].some(v=>String(v).startsWith('wait')));
+  if(S.only==='low') rows=rows.filter(r=>{const a=nums(r.s[S.unit]); return a.length && a.reduce((x,y)=>x+y,0)/a.length<60;});
+  const cnt=k=>ST.filter(r=>r.s[S.unit].some(v=>String(v).startsWith(k))).length;
+  const sum=ls.map((_,j)=>{ const col=rows.map(r=>r.s[S.unit][j]), given=col.filter(v=>v!=='').length, done=col.filter(v=>typeof v==='number'||String(v).startsWith('wait')).length, a=nums(col);
+    return given?`сдали ${done} из ${given}${a.length?` · ср. ${Math.round(a.reduce((x,y)=>x+y,0)/a.length)}%`:''}`:'не задано'; });
+  const seg=(key,items)=>`<span class="seg2">${items.map(([k,t])=>`<button class="${S[key]===k?'on':''}" onclick="S['${key}']='${k}';S.pop=null;R()">${t}</button>`).join('')}</span>`;
+  let pop='';
+  if(S.pop){ const [i,j]=S.pop, r=rows[i], v=String(r.s[S.unit][j]), code='SM2 '+(ls[j].startsWith('Unit')?ls[j]:S.unit+' '+ls[j]);
+    pop=`<div class="pop"><div style="display:flex"><b style="flex:1">${r.n} · ${code}</b><a href="#" onclick="S.pop=null;R();return false">✕</a></div>
+      <div class="muted small" style="margin:6px 0 10px">задано 12 окт · срок 15 окт${v.startsWith('late')?' · <b style="color:var(--bad)">не сдано</b>':''}${v.startsWith('wait')?' · сдано вовремя':''}</div>
+      <div class="row" style="gap:8px">${v.startsWith('wait')?'<button class="btn sm">Проверить</button>':''}${/^\d/.test(v)||v.startsWith('redo')?'<button class="btn sec sm">Открыть работу</button>':''}<button class="btn sec sm">Карточка ученика</button></div></div>`; }
+  document.getElementById('pg').innerHTML=`
+  <div class="tools">
+    <select><option>Super Minds 2</option><option>Super Minds 3</option><option>Wow Dragon 1</option></select>
+    ${seg('unit',Object.keys(UNITS).map(u=>[u,u]))}
+    <select onchange="S.teach=this.value;R()"><option value="">Все учителя</option>${[...new Set(ST.map(r=>r.t))].map(t=>`<option ${S.teach===t?'selected':''}>${t}</option>`).join('')}</select>
+    <input placeholder="Ученик" value="${S.q}" oninput="S.q=this.value;R()" style="width:170px">
+    <span style="flex:1"></span><button class="btn sec sm">⬇ Скачать в Excel</button></div>
+  <div class="tools">${seg('only',[['','Все'],['late','Просрочено · '+cnt('late')],['wait','Ждут проверки · '+cnt('wait')],['low','Средний ниже 60%']])}</div>
+  <div class="card jt"><table><thead><tr><th class="st">Ученик</th><th>Средний</th><th>🔥</th>${ls.map(l=>`<th>SM2 ${l.startsWith('Unit')?l:S.unit+' '+l}</th>`).join('')}</tr></thead><tbody>
+  <tr class="sum"><td class="st">${rows.length} учеников</td><td></td><td></td>${sum.map(x=>`<td>${x}</td>`).join('')}</tr>
+  ${rows.map((r,i)=>{ const a=nums(r.s[S.unit]); const av=a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length):null;
+    return `<tr><td class="st"><span class="who"><b>${r.n}</b><i>учитель: ${r.t}</i></span></td><td>${av==null?'—':`<b>${av}%</b>`}</td><td>${r.fire?'🔥'+r.fire:''}</td>${r.s[S.unit].map((v,j)=>`<td>${cell(v,i,j)}</td>`).join('')}</tr>`; }).join('')||'<tr><td class="st muted">Никого нет</td></tr>'}
+  </tbody></table></div>
+  <div class="legend"><span class="c ok">92%</span>проверено <span class="c wait">проверить</span>сдано, ждёт учителя <span class="c redo">на доработке</span>
+    <span class="c work">в работе · 6/11</span>начал, не отправил <span class="c late">просрочено</span>срок прошёл, не сдано · пустая клетка — не задано</div>
+  <p class="muted small">Колонки — материалы выбранного юнита. Нажмите на клетку: что за работа, срок, кнопки «Проверить» / «Открыть». Имя ученика — его карточка (колёсиком — в новой вкладке). «Средний» — по проверенным в этом юните.</p>
+  ${pop}`;
+}
+R();
+</script></body></html>
