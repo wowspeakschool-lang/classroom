@@ -857,6 +857,20 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
   .bell-it{ padding:10px 14px; border-bottom:1px solid var(--line); cursor:pointer; font-size:14px; }
   .bell-it:hover{ background:#FBFAFD; }
   .bell-it.new{ background:#FBFAFF; }
+  /* журнал */
+  .jn-t{ overflow:auto; max-height:72vh; }
+  .jn-t table{ border-collapse:separate; border-spacing:0; }
+  .jn-t th, .jn-t td{ white-space:nowrap; background:#fff; }
+  .jn-t th{ position:sticky; top:0; z-index:2; font-size:12px; vertical-align:bottom; }
+  .jn-t .jn-st{ position:sticky; left:0; z-index:1; min-width:200px; border-right:1px solid var(--line); }
+  .jn-t th.jn-st{ z-index:3; }
+  .jn-t .jn-sum td{ background:#FAFAFC; font-size:12.5px; color:var(--mut); }
+  .jn-c{ display:inline-block; min-width:70px; text-align:center; border-radius:9px; padding:4px 8px; font-size:12.5px; font-weight:600; cursor:pointer; }
+  .jn-c.ok{ background:var(--ok-soft); color:var(--ok); } .jn-c.mid{ background:var(--warn-soft); color:var(--warn); } .jn-c.low{ background:#FBE9E7; color:var(--bad); }
+  .jn-c.wait{ background:var(--course-soft); color:var(--course-d); } .jn-c.redo{ background:#FFF0DE; color:#B4610F; }
+  .jn-c.late{ background:#fff; border:1.5px dashed var(--bad); color:var(--bad); } .jn-c.work{ background:#fff; border:1px solid var(--line); color:var(--mut); }
+  .jn-c.given{ background:#fff; border:1px dashed var(--line); color:var(--faint); font-weight:500; }
+  .jn-pop{ position:fixed; right:24px; bottom:24px; width:360px; background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:0 18px 50px rgba(30,20,80,.16); padding:14px 16px; font-size:14px; z-index:40; }
   a.btn{ text-decoration:none; display:inline-block; }
   a.stu-a{ color:inherit; text-decoration:none; }
   a.stu-a:hover b{ color:var(--course-d); }
@@ -916,6 +930,7 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
         <a class="tab" data-tab="assign" href="?tab=assign" onclick="return tabLink(event,'assign')"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><path d="M12 4.5v10M8.2 10.8L12 14.5l3.8-3.7M5 19h14"/></svg>Задать материал</a>
         <a class="tab" data-tab="review" href="?tab=review" onclick="return tabLink(event,'review')"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><path d="M4 12.5l5 5L20 6.5"/></svg>Проверка <span id="reviewBadge" class="pill y hidden" style="margin-left:auto"></span></a>
         <a class="tab" data-tab="quality" href="?tab=quality" onclick="return tabLink(event,'quality')" style="display:none"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><path d="M6 20V4.5M6 5h11l-2.5 4L17 13H6"/></svg>Контроль качества <span id="qcBadge" class="pill r hidden" style="margin-left:auto"></span></a>
+        <a class="tab" data-tab="journal" href="?tab=journal" onclick="return tabLink(event,'journal')" style="display:none"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><rect x="4" y="4.5" width="16" height="15" rx="2"/><path d="M4 9.5h16M9.5 9.5v10"/></svg>Журнал</a>
         <a class="tab" data-tab="lessons" href="?tab=lessons" onclick="return tabLink(event,'lessons')"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><path d="M6.5 4.5l12 7.5-12 7.5z"/></svg>Уроки</a>
         <a class="tab" data-tab="library" href="?tab=library" onclick="return tabLink(event,'library')"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><path d="M4 5.5h6.5v13H4zM13.5 5.5H20v13h-6.5z"/></svg>Библиотека</a>
         <a class="tab" data-tab="media" href="?tab=media" onclick="return tabLink(event,'media')"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;opacity:.78"><path d="M9.5 17.5V6.2l9.5-1.9v11.4"/><circle cx="7.3" cy="17.6" r="2.3"/><circle cx="16.8" cy="15.7" r="2.3"/></svg>Медиа</a>
@@ -991,6 +1006,13 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
       <h2 class="section-title">Контроль качества</h2>
       <p class="section-sub">Сообщения учителей об ошибках в заданиях, задания, на которых ошибается большинство, и нагрузка учителей.</p>
       <div id="qcWrap"><div class="loading">Загружаю…</div></div>
+    </section>
+
+    <!-- ЖУРНАЛ (методист) -->
+    <section id="tab-journal" class="hidden">
+      <h2 class="section-title">Журнал</h2>
+      <p class="section-sub">Кто что сдал, что ждёт проверки, что просрочено — по всем ученикам школы.</p>
+      <div id="jnWrap"><div class="loading">Загружаю…</div></div>
     </section>
 
     <!-- МЕДИА -->
@@ -1820,8 +1842,8 @@ function lsRenderTree(){
             <div>📘 ${esc(l.title)}${l.is_published?'':' <span class="pill n">черновик</span>'}</div>
             ${l.summary?`<div class="muted" style="font-size:12px">${esc(l.summary)}</div>`:''}
           </div>
-          <button class="btn sec sm" onclick="kpPreviewOpen('${l.id}','one')">👁 Глазами ученика</button>
-          <button class="btn sm" onclick="showOpen('${l.id}', null, 'one')">▶ Показ</button>
+          <button class="btn sec sm" onclick="if(!ntCtrl(event,'?show=${l.id}&as=student')) kpPreviewOpen('${l.id}','one')" ${ntAttrs('?show='+l.id+'&as=student')}>👁 Глазами ученика</button>
+          <button class="btn sm" onclick="if(!ntCtrl(event,'?show=${l.id}')) showOpen('${l.id}', null, 'one')" ${ntAttrs('?show='+l.id)}>▶ Показ</button>
         </div>`).join('');
       return `<div style="padding-left:14px">
           <div class="row" style="align-items:center; cursor:pointer; padding:6px 0" onclick="lsToggle('${uk}')">
@@ -3345,7 +3367,7 @@ function kpHsFind(e, id){
 // ── запись голоса: speaking и task с ответом голосом
 function kpB_speaking(b){
   const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, u=KP.ui[id]||{}, ed=kpEditable(id);
-  const head=`${p.html?`<div class="khtml">${p.html}</div>`:''}${kpImg(p.image,'kph kqimg')}${kpSnd(p.sample,'Послушать образец')}`;
+  const head=`${kpSnd(p.audio)}${p.html?`<div class="khtml">${p.html}</div>`:''}${kpImg(p.image,'kph kqimg')}${kpSnd(p.sample,'Послушать образец')}`;
   // Микрофон не работает — отвечает текстом, учитель получит уведомление
   if(a.no_mic) return head + `<textarea class="kta" data-id="${id}" data-k="text" oninput="kpInput(this)" ${ed?'':'readonly'} placeholder="Напиши ответ по-английски">${esc(a.text||'')}</textarea>
     <div class="kneed">✏️ Отвечаешь текстом — учитель узнает, что микрофон не работал.
@@ -4311,12 +4333,13 @@ function switchTab(name){
   $('mainViews').classList.remove('hidden');
   if(location.hash) history.replaceState(null,'',location.pathname+location.search);
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
-  ['students','assign','review','media','library','lessons','quality'].forEach(n=> $('tab-'+n).classList.toggle('hidden', n!==name));
+  ['students','assign','review','media','library','lessons','quality','journal'].forEach(n=> $('tab-'+n).classList.toggle('hidden', n!==name));
   if(name==='assign') fillCourses();
   if(name==='review') renderReview();
   if(name==='library') edInit();
   if(name==='lessons') lsInit();
   if(name==='quality') qcLoad();
+  if(name==='journal') jnLoad();
   edDockSync();
 }
 
@@ -6270,6 +6293,8 @@ function edBlockEditor(b,i){
     body=`<input value="${esc(p.title||'')}" oninput="EDIT.blocks[${i}].payload.title=this.value" placeholder="Заголовок (напр. «Прочитай вслух»)">
       <textarea rows="3" style="margin-top:6px" oninput="EDIT.blocks[${i}].payload.html=this.value" placeholder="Что нужно сказать или прочитать">${esc(p.html||'')}</textarea>
       <div class="muted" style="font-size:12px;margin-top:4px">Ученик запишет свой голос, преподаватель прослушает при проверке.</div>
+      ${edAudioField(p.audio, `EDIT.blocks[${i}].payload.audio`)}
+      <div class="muted" style="font-size:12px">↑ звук задания — вопрос или текст, который слушают (необязательно)</div>
       ${edAudioField(p.sample, `EDIT.blocks[${i}].payload.sample`)}
       <div class="muted" style="font-size:12px">↑ образец произношения (необязательно)</div>
       ${edImageBox(i, 'image', 'Картинка:')}`;
@@ -6898,6 +6923,133 @@ async function qcResolve(id, status){
   }catch(e){ toast(e.message||String(e)); }
 }
 
+
+// ============================================================
+//  ЖУРНАЛ (методист): таблица по юниту или сводка по всем программам
+// ============================================================
+var JN = { rows:null, course:'', unit:'', teach:'', q:'', only:'', pop:null, err:'' };
+async function jnLoad(){
+  $('jnWrap').innerHTML='<div class="loading">Загружаю…</div>';
+  try{ JN.rows = await rpc('classroom_journal', {}) || []; JN.err=''; }
+  catch(e){ JN.err=e.message||String(e); }
+  jnRender();
+}
+// Состояние клетки: оценка, ждёт проверки, на доработке, в работе, просрочено, задано
+function jnCell(r){
+  const now=Date.now(), dl=r.status==='retake' ? r.retake_deadline_at : r.deadline_at, late=dl && new Date(dl).getTime()<now;
+  const pg=r.progress||{};
+  if(r.status==='reviewed') return { k:'ok', score:r.score };
+  if(r.status==='submitted') return { k:'wait', days:rvDays(r.submitted_at) };
+  if(r.status==='retake') return late ? { k:'late', days:Math.floor((now-new Date(dl))/864e5), redo:true } : { k:'redo' };
+  if(late) return { k:'late', days:Math.floor((now-new Date(dl))/864e5), pg };
+  if(r.status==='in_progress') return { k:'work', pg };
+  return { k:'given', dl };
+}
+function jnCellHtml(r, idx){
+  const c=jnCell(r), on=`onclick="JN.pop=${idx}; jnRender()"`;
+  if(c.k==='ok'){ const n=c.score; return `<span class="jn-c ${n==null?'mid':n>=90?'ok':n>=60?'mid':'low'}" ${on}>${n==null?'✓':n+'%'}</span>`; }
+  if(c.k==='wait') return `<span class="jn-c wait" ${on}>проверить${c.days?` · ${c.days} дн.`:''}</span>`;
+  if(c.k==='redo') return `<span class="jn-c redo" ${on}>на доработке</span>`;
+  if(c.k==='late') return `<span class="jn-c late" ${on}>${c.redo?'доработка ':''}просрочено${c.days?` ${c.days} дн.`:''}</span>`;
+  if(c.k==='work') return `<span class="jn-c work" ${on}>в работе${c.pg.submittable?` · ${c.pg.submitted}/${c.pg.submittable}`:''}</span>`;
+  return `<span class="jn-c given" ${on}>задано${c.dl?` · до ${new Date(c.dl).toLocaleDateString('ru-RU',{day:'numeric',month:'short'})}`:''}</span>`;
+}
+function jnAvg(list){ const n=list.filter(r=>r.status==='reviewed' && r.score!=null).map(r=>r.score); return n.length?Math.round(n.reduce((a,b)=>a+b,0)/n.length):null; }
+// Огоньки — подряд сданные в срок, по первой сдаче (как в карточке ученика)
+function jnFire(list){
+  const hw=list.filter(r=>r.deadline_at && (r.first_submitted_at || new Date(r.deadline_at)<new Date()))
+    .sort((a,b)=>new Date(b.deadline_at)-new Date(a.deadline_at));
+  let n=0; for(const r of hw){ if(r.first_submitted_at && new Date(r.first_submitted_at)<=new Date(r.deadline_at)) n++; else break; } return n;
+}
+function jnFiltered(){
+  const q=JN.q.toLowerCase().trim();
+  return (JN.rows||[]).filter(r=>(!JN.course || r.course_id===JN.course) && (!JN.teach || r.teacher_id===JN.teach)
+    && (!q || String(r.student||'').toLowerCase().includes(q)));
+}
+function jnSeg(key, items){ return `<span class="rv-seg">${items.map(([k,t])=>`<button class="${JN[key]===k?'on':''}" onclick="JN['${key}']='${k}'; JN.pop=null; jnRender()">${t}</button>`).join('')}</span>`; }
+function jnRender(){
+  const w=$('jnWrap'); if(!w) return;
+  if(JN.err){ w.innerHTML=`<div class="err">${esc(JN.err)}</div><p class="muted small">Если пишет, что функции нет, — нужно накатить миграцию classroom_journal.</p>`; return; }
+  const all=JN.rows||[];
+  const courses=[...new Map(all.map(r=>[r.course_id, r])).values()].sort((a,b)=>String(a.course_title).localeCompare(b.course_title));
+  const teachers=[...new Map(all.filter(r=>r.teacher_id).map(r=>[r.teacher_id, r.teacher])).entries()].sort((a,b)=>String(a[1]).localeCompare(b[1]));
+  let rows=jnFiltered();
+  const units = JN.course ? [...new Map(rows.map(r=>[r.unit_id, r])).values()].sort((a,b)=>(a.unit_no??0)-(b.unit_no??0)) : [];
+  if(JN.course && !units.some(u=>u.unit_id===JN.unit)) JN.unit = units.length ? units[0].unit_id : '';
+  const head=`<div class="row" style="gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
+      <select onchange="JN.course=this.value; JN.unit=''; JN.pop=null; jnRender()" style="max-width:220px"><option value="">Все программы</option>
+        ${courses.map(c=>`<option value="${c.course_id}" ${JN.course===c.course_id?'selected':''}>${esc(c.course_title)}</option>`).join('')}</select>
+      ${units.length>1?jnSeg('unit', units.map(u=>[u.unit_id, esc(String(u.unit_title||'').split(' · ')[0]||('Unit '+u.unit_no))])):''}
+      <select onchange="JN.teach=this.value; JN.pop=null; jnRender()" style="max-width:200px"><option value="">Все учителя</option>
+        ${teachers.map(([id,n])=>`<option value="${id}" ${JN.teach===id?'selected':''}>${esc(n||'—')}</option>`).join('')}</select>
+      <input id="jnQ" placeholder="Ученик" value="${esc(JN.q)}" oninput="JN.q=this.value; jnRender(); const i=$('jnQ'); i.focus(); i.setSelectionRange(99,99)" style="max-width:180px">
+      <span style="flex:1"></span><button class="btn sec sm" onclick="jnExport()">⬇ Скачать в Excel</button></div>`;
+  if(!all.length){ w.innerHTML=head+'<div class="empty">Пока ничего не задано.</div>'; return; }
+  const scope = JN.course ? rows.filter(r=>r.unit_id===JN.unit) : rows;
+  const byStu = {}; scope.forEach(r=>{ (byStu[r.student_id]=byStu[r.student_id]||[]).push(r); });
+  const has = (list,k)=>list.some(r=>jnCell(r).k===k);
+  const flt = (list)=> JN.only==='late' ? has(list,'late') : JN.only==='wait' ? has(list,'wait') : JN.only==='low' ? (jnAvg(list)!=null && jnAvg(list)<60) : true;
+  const stuIds = Object.keys(byStu).filter(id=>flt(byStu[id])).sort((a,b)=>String(byStu[a][0].student).localeCompare(byStu[b][0].student));
+  const cnt = k=>Object.values(byStu).filter(l=>has(l,k)).length;
+  const quick = `<div class="row" style="margin-bottom:12px">${jnSeg('only', [['','Все'],['late','Просрочено · '+cnt('late')],['wait','Ждут проверки · '+cnt('wait')],['low','Средний ниже 60%']])}</div>`;
+  const who = id=>{ const r=byStu[id][0]; return `<td class="jn-st"><a class="stu-a" href="#student=${id}"><b>${esc(r.student||'—')}</b></a><div class="muted" style="font-size:12px">учитель: ${esc(r.teacher||'—')}</div></td>`; };
+  let body='';
+  JN.cells=[];
+  if(!JN.course){
+    // «Все программы»: сводка по ученику
+    const pc=a=>a==null?'—':`<span class="jn-c ${a>=90?'ok':a>=60?'mid':'low'}">${a}%</span>`;
+    const monthAvg=list=>jnAvg(list.filter(r=>r.reviewed_at && Date.now()-new Date(r.reviewed_at)<30*864e5));
+    const num=(n,cls)=>n?`<span class="jn-c ${cls}">${n}</span>`:'<span class="muted">0</span>';
+    body=`<div class="card jn-t"><table><thead><tr><th class="jn-st">Ученик</th><th>Программа</th><th>Средний за месяц</th><th>🔥</th><th>Задано</th><th>Сдано</th><th>Ждут проверки</th><th>На доработке</th><th>Просрочено</th></tr></thead><tbody>
+      ${stuIds.map(id=>{ const l=byStu[id], progs=[...new Map(l.map(r=>[r.course_id,r])).values()];
+        const k=x=>l.filter(r=>jnCell(r).k===x).length, done=l.filter(r=>r.first_submitted_at).length;
+        return `<tr>${who(id)}<td>${progs.map(r=>`<a href="#" onclick="JN.course='${r.course_id}'; JN.unit=''; jnRender(); return false">${esc(String(r.course_slug||'').toUpperCase())}</a>`).join(', ')}</td>
+          <td>${pc(monthAvg(l))}</td><td>${jnFire(l)?'🔥'+jnFire(l):''}</td><td>${l.length}</td><td>${done} <span class="muted small">из ${l.length}</span></td>
+          <td>${num(k('wait'),'wait')}</td><td>${num(l.filter(r=>r.status==='retake').length,'redo')}</td><td>${num(k('late'),'late')}</td></tr>`; }).join('')
+        || '<tr><td class="jn-st muted" colspan="9">Никого нет</td></tr>'}
+      </tbody></table></div>
+      <p class="muted small" style="margin-top:8px">Все программы сразу. Нажмите на программу — откроется её таблица по материалам; на имя — карточка ученика (колёсиком — в новой вкладке). «Сдано» считает и сданное с опозданием.</p>`;
+  } else {
+    const ls=[...new Map(scope.map(r=>[r.lesson_id, r])).values()].sort((a,b)=>(a.lesson_sort??0)-(b.lesson_sort??0));
+    const sum=ls.map(l=>{ const col=scope.filter(r=>r.lesson_id===l.lesson_id && stuIds.includes(r.student_id)), done=col.filter(r=>r.first_submitted_at).length, a=jnAvg(col);
+      return `сдали ${done} из ${col.length}${a!=null?` · ср. ${a}%`:''}`; });
+    body=`<div class="card jn-t"><table><thead><tr><th class="jn-st">Ученик</th><th>Средний</th><th>🔥</th>${ls.map(l=>`<th>${esc(hwCode(l.course_slug,l.unit_no,l.lesson_title))}</th>`).join('')}</tr></thead><tbody>
+      <tr class="jn-sum"><td class="jn-st">${stuIds.length} ${plural(stuIds.length,'ученик','ученика','учеников')}</td><td></td><td></td>${sum.map(x=>`<td>${x}</td>`).join('')}</tr>
+      ${stuIds.map(id=>{ const l=byStu[id], a=jnAvg(l), f=jnFire((JN.rows||[]).filter(r=>r.student_id===id));
+        return `<tr>${who(id)}<td>${a==null?'—':`<b>${a}%</b>`}</td><td>${f?'🔥'+f:''}</td>${ls.map(x=>{ const r=l.find(y=>y.lesson_id===x.lesson_id); if(!r) return '<td></td>';
+          JN.cells.push(r); return `<td>${jnCellHtml(r, JN.cells.length-1)}</td>`; }).join('')}</tr>`; }).join('')
+        || '<tr><td class="jn-st muted">Никого нет</td></tr>'}
+      </tbody></table></div>
+      <div class="row" style="gap:12px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:var(--mut);align-items:center">
+        <span class="jn-c ok">92%</span>проверено <span class="jn-c wait">проверить</span>сдано, ждёт учителя <span class="jn-c redo">на доработке</span>
+        <span class="jn-c work">в работе · 6/11</span>начал, не отправил <span class="jn-c given">задано</span>ещё не начинал <span class="jn-c late">просрочено</span>срок прошёл · пусто — не задано</div>`;
+  }
+  let pop='';
+  if(JN.pop!=null && JN.cells[JN.pop]){
+    const r=JN.cells[JN.pop], c=jnCell(r), d=x=>x?new Date(x).toLocaleDateString('ru-RU',{day:'numeric',month:'short'}):'—';
+    const late=r.first_submitted_at && r.deadline_at && new Date(r.first_submitted_at)>new Date(r.deadline_at);
+    const rv=r.enrollment_id?rvUrl(r.enrollment_id, r.lesson_id):'';
+    pop=`<div class="jn-pop"><div class="row" style="align-items:flex-start"><b style="flex:1">${esc(r.student||'')} · ${esc(hwCode(r.course_slug,r.unit_no,r.lesson_title))}</b>
+        <a href="#" onclick="JN.pop=null; jnRender(); return false">✕</a></div>
+      <div class="muted small" style="margin:6px 0 10px">задано ${d(r.assigned_at)} · срок ${d(r.deadline_at)}${r.first_submitted_at?` · сдано ${d(r.first_submitted_at)}${late?' (после срока)':''}`:''}${r.status==='retake'&&r.retake_deadline_at?` · доработка до ${d(r.retake_deadline_at)}`:''}</div>
+      <div class="row" style="gap:8px;flex-wrap:wrap">
+        ${c.k==='wait'&&rv?`<a class="btn sm" href="${rv}" onclick="if(event.ctrlKey||event.metaKey)return true; switchTab('review'); rvOpen('${r.enrollment_id}','${r.lesson_id}'); return false">Проверить</a>`:''}
+        ${(c.k==='ok'||r.status==='retake')&&rv?`<a class="btn sec sm" href="${rv}" onclick="if(event.ctrlKey||event.metaKey)return true; switchTab('review'); rvOpen('${r.enrollment_id}','${r.lesson_id}'); return false">Открыть работу</a>`:''}
+        <a class="btn sec sm" href="#student=${r.student_id}">Карточка ученика</a></div></div>`;
+  }
+  w.innerHTML=head+quick+body+pop;
+}
+// Excel: CSV с разделителем «;» и BOM — открывается двойным щелчком с кириллицей
+function jnExport(){
+  const rows=jnFiltered(), lab=r=>{ const c=jnCell(r);
+    return c.k==='ok'?(r.score!=null?r.score+'%':'проверено'):c.k==='wait'?'ждёт проверки':c.k==='redo'?'на доработке':c.k==='late'?'просрочено':c.k==='work'?'в работе':'задано'; };
+  const d=x=>x?new Date(x).toLocaleDateString('ru-RU'):'';
+  const lines=[['Ученик','Учитель','Материал','Задано','Срок','Сдано','Статус']].concat(rows.map(r=>[r.student, r.teacher, hwCode(r.course_slug,r.unit_no,r.lesson_title), d(r.assigned_at), d(r.deadline_at), d(r.first_submitted_at), lab(r)]));
+  const csv='﻿'+lines.map(l=>l.map(x=>'"'+String(x==null?'':x).replace(/"/g,'""')+'"').join(';')).join('\r\n');
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+  a.download='zhurnal_'+new Date().toISOString().slice(0,10)+'.csv'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+}
+
 // ============================================================
 //  BOOT
 // ============================================================
@@ -6918,7 +7070,7 @@ async function boot(){
     ['media'].forEach(t=>{ const el=document.querySelector('[data-tab='+t+']'); if(el) el.style.display='none'; });
     const fb=document.querySelector('.findBtn'); if(fb) fb.style.display='none';
   }
-  if(ME.isEditor){ const q=document.querySelector('[data-tab=quality]'); if(q) q.style.display=''; qcBadge(); }
+  if(ME.isEditor){ ['quality','journal'].forEach(t=>{ const q=document.querySelector('[data-tab='+t+']'); if(q) q.style.display=''; }); qcBadge(); }
   // «Уроки» доступны и преподавателю: редактора он не видит, а вести урок должен
   await Promise.all([ loadStudents(), loadLibrary(), loadPending(), bellLoadReplies(), bellLoadNoMic() ]);
   renderStudents();
@@ -6927,9 +7079,10 @@ async function boot(){
   // Раздел из адреса. Ссылка на курс или юнит — это тоже библиотека,
   // иначе после перезагрузки выбрасывало на «Моих учеников».
   const _tab = _p.get('tab');
-  if(_tab==='quality' && !ME.isEditor){}
+  if((_tab==='quality' || _tab==='journal') && !ME.isEditor){}
   else if(_tab && $('tab-'+_tab)) switchTab(_tab);
   if(_tab==='assign' && (_p.get('assign') || _p.get('student'))) asgFor(_p.get('student')||null, _p.get('assign')||null);
+  if(_p.get('show')) showOpen(_p.get('show'), null, 'one', _p.get('as')==='student'?'student':undefined);
   if(_tab==='review' && _p.get('rv')){ const [e,l]=_p.get('rv').split('.'); if(e && l) rvOpen(e, l); }
   else if((_p.get('course') || _p.get('unit')) && ME.isEditor) switchTab('library');
 
