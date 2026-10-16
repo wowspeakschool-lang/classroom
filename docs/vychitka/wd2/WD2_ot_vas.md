@@ -7,10 +7,11 @@
 | № | что сделать | готово |
 |---|---|---|
 | 1 | Записать голосом буквы (раздел 1) и вставить запись в звук вопроса или карточки | ☐ |
-| 2 | Скачать с Диска аудио (раздел 2), переименовать по таблице и загрузить в Supabase: бакет `classroom-media`, папка `wow-dragon-2` | ☐ |
-| 3 | Комиксы (раздел 3): сохранить картинкой слайды комикса из презентации урока, назвать по таблице, положить в одну папку на Google Диске; аудио реплик — в бакет, как в п. 2 | ☐ |
-| 4 | Сгенерировать картинки по промптам (прислал в чат, файл `docs/vychitka/wd2/prompty.md`) и положить в папку на Google Диске | ☐ |
-| 5 | Написать мне: «аудио в бакете», «комиксы и картинки в папке …» — я всё вставлю и покажу картинки контактным листом | ☐ |
+| 2 | Скачать с Диска аудио (раздел 2), переименовать по таблице и загрузить в Supabase: бакет `classroom-media`, папка `wow-dragon-2` | ✅ сделано, вставлено |
+| 3 | Комиксы: картинки и аудио реплик | ✅ сделано, вставлено |
+| 3а | Посмотреть комиксы и задания по ним в 9 домашках (раздел 3) — подходит ли, верно ли сопоставлены реплики | ☐ |
+| 4 | Сгенерировать картинки по промптам | ✅ сделано, вставлено |
+| 5 | Удалить временное правило загрузки в SQL Editor: `drop policy tmp_sm2_media_upload on storage.objects;` (оно уже выключено, загрузить через него ничего нельзя — это уборка) | ☐ |
 | 6 | Удалить ДЗ 81 в SQL Editor: `delete from classroom_lessons where id = 'a974c662-02e6-43d7-8d14-806a119277fc';` (урок уже скрыт и подписан «Удалить») | ☐ |
 | 7 | После того как я всё вставлю — нажать «Озвучить пачкой» по курсу и открыть 3–4 домашки глазами ученика (например ДЗ 6, 34, 48, 80) | ☐ |
 
@@ -60,22 +61,20 @@
 | `wd2_hw22_b9.mp3` | Chant L22.mp3 | [открыть](https://drive.google.com/file/d/1E-g5z_X1zir3VVQ8qkQtRyPN4LwyJipm/view) | ДЗ 22, б9 «Собери песенку по порядку» |
 | `wd2_hw70_b11.mp3` | Chant Lesson 70.mp3 | [открыть](https://drive.google.com/file/d/13aklltN4Mu9ux-idj6bJoCw1-mfdbMaI/view) | ДЗ 70, б11 «Спой чант 🎤» |
 
-## 3. Комиксы
+## 3. Комиксы — посмотреть
 
-**Картинки.** Комиксов отдельными файлами на Диске нет (кроме урока 50) — они на слайдах презентации урока (`Wow Dragon 2 Lesson N.pptx` в папке урока). Сохраните слайды комикса картинкой (png или jpg), каждый слайд — отдельный файл, и назовите `wd2_hwN_comic_1`, `wd2_hwN_comic_2`… по порядку. Положите в папку на Google Диске.
+В каждой из 9 домашек: блок с самим комиксом (картинка и кнопки «Кадр 1…5» — каждая проигрывает реплики этого кадра подряд, английского текста нет) и 2–3 задания по нему. Где домашка и так длинная (ДЗ 11, 18, 26, 34), заданий два, где был фальшивый комикс (ДЗ 42, 50, 59, 67, 75) — три. Номера блоков — как в редакторе.
 
-**Аудио реплик.** Скачайте все mp3 из указанного места и загрузите в бакет (`classroom-media/wow-dragon-2`), добавив к исходному имени приставку: `D1.mp3` → `wd2_hw18_comic_D1.mp3`. Буквы в именах: D — Дракоша, P — Принцесса, U — Единорог, G — бабушка, B — Doctor Bunny, M — марсиане.
+| ДЗ | комикс | задания |
+|---|---|---|
+| 11 | б10 «В гостях у бабушки» | б11 Кто это сказал? (3 реплики) · б12 Повтори за героем («Hello! Nice to meet you! My name is Princess!») |
+| 18 | б10 «Доктор Банни» | б11 Расставь картинки по порядку (кадры 1, 3, 5) · б12 Кто это сказал? (бабушка, Банни, Дракоша) |
+| 26 | б10 «Волшебный мишка» | б11 Послушай и соедини с кадром (3 кадра) · б12 Что ты видишь? (кадр 3) |
+| 34 | б9 «Самый лучший план» | б10 Нажми на героя, который говорит (кадр 3: Дракоша, Единорог) · б11 Повтори за героем («I want to eat flying cupcakes!») |
+| 42 | б7 «Собираем чемоданы» | б8 Расставь по порядку (1, 3, 5) · б9 Кто это сказал? · б10 Что ты видишь? (кадр 2) |
+| 50 | б7 «В музее» | б8 Кто это сказал? · б9 Послушай и соедини (кадры 1, 2, 5) · б10 Повтори за героем («Wow… so beautiful!») |
+| 59 | б8 «Ракета» | б9 Расставь по порядку (1, 3, 5) · б10 Нажми на героя (кадр 4: Принцесса, Дракоша) · б11 Что ты видишь? (кадр 1) |
+| 67 | б7 «Скафандры» | б8 Послушай и соедини (кадры 1, 2, 5) · б9 Кто это сказал? («My horn / My gloves / My tail») · б10 Повтори за героем («It's easy!») |
+| 75 | б6 «На Марсе» | б7 Кто это сказал? (с марсианином) · б8 Расставь по порядку (2, 4, 5) · б9 Что ты видишь? (кадр 5) |
 
-| ДЗ | картинки комикса | имена картинок | аудио реплик | куда поставлю |
-|---|---|---|---|---|
-| 11 | .pptx урока 11, слайды 11–16 | wd2_hw11_comic_1, _2… | файлы в папке урока: 1 [открыть](https://drive.google.com/file/d/1aMEyM7RfmTuTAV37E_M5Vam90JbggA4a/view), 2 [открыть](https://drive.google.com/file/d/1c4ec03T4YIqGNoaO_xhto0VsBQWsgDl8/view), 3 [открыть](https://drive.google.com/file/d/1iEW53bYY7ISSbJ3T88BTOQOfCyk8r_Xs/view), 4 [открыть](https://drive.google.com/file/d/183MEIoDxb3sIxI2JsUfgkjzaAAi-JeCD/view), 5 [открыть](https://drive.google.com/file/d/1Gc9ta576b_efP2GH3AZ_mVbOjeXZVsUf/view), 6 [открыть](https://drive.google.com/file/d/1docmSt6bmDS9IfpGR7rTjsRClHZeA0CB/view), 7 [открыть](https://drive.google.com/file/d/1D1nshWajYR0dijHF4YLtfVHoD80pVPl2/view), 8 [открыть](https://drive.google.com/file/d/1QeazPKcLQzbV0YHEL_yWA81BabkZh-or/view), 9 [открыть](https://drive.google.com/file/d/1WHV6aFLjaqYoKxyf5w1JAKX1ZJweZckA/view) | новым блоком после б9 (перед устными) |
-| 18 | .pptx урока 18, номер слайда в плане не указан | wd2_hw18_comic_1, _2… | папка [открыть](https://drive.google.com/drive/folders/1UumOe-WeFDkz6yotdY1Rw6vEaHVIfWu0) — все mp3 | новым блоком после б9 |
-| 26 | .pptx урока 26, номер слайда в плане не указан | wd2_hw26_comic_1, _2… | папка [открыть](https://drive.google.com/drive/folders/1Jsdu3myz9jv9iOfWzMWk8JT725r3VBlO) — все mp3 | новым блоком после б9 |
-| 34 | .pptx урока 34, слайд 15 | wd2_hw34_comic_1, _2… | файлы в папке урока: P1 [открыть](https://drive.google.com/file/d/11Ppmw0fR-j8LXPmzjlilEdEnUpmcjg5_/view), P2 [открыть](https://drive.google.com/file/d/1u6eCFF5hGXYPMDueRjQAthDrsFpohm2i/view), P3 [открыть](https://drive.google.com/file/d/1z5Id7zrHmqg2EulSJonxr5ZwtM7v488P/view), P4 [открыть](https://drive.google.com/file/d/1NL3Onof3x5PRa9uVpZS5Qw4tlTwjwq4U/view), U1 [открыть](https://drive.google.com/file/d/1r_26XTH0CaMvDEz3MXbOEsc0Rt9HwunK/view), U2 [открыть](https://drive.google.com/file/d/1KUh5vY5O6YmOt4tu3cMhVDmTyi4-b7Zj/view), U3 [открыть](https://drive.google.com/file/d/1ivxnmpRAHrpy0KnWJa3EYQfHx3x95J-M/view), U4 [открыть](https://drive.google.com/file/d/1TUvldav7TQRK_2iOIti77LKe2DNdDbVM/view), D1 [открыть](https://drive.google.com/file/d/1nhBiMpttqL3QgpSrdnC784SsUaHGn4Uc/view), D2 [открыть](https://drive.google.com/file/d/1XH8Sok8wjvMBjGyTqfyd7Oos1egxFc42/view), D3 [открыть](https://drive.google.com/file/d/1EJ2fwiuVJl7o2DqZmgr2QS_Zg8y1Yx_H/view), G1 [открыть](https://drive.google.com/file/d/1h29gJrr9Q5DtSJ7HqbNH2iHfCXEN8t-k/view), G2 [открыть](https://drive.google.com/file/d/1C9BYZK-pP9FsAkh-EaVRz-xqR6GGEEiY/view) | новым блоком после б8 |
-| 42 | .pptx урока 42, слайд 11 | wd2_hw42_comic_1, _2… | папка [открыть](https://drive.google.com/drive/folders/1n123kTWIzehSCkq3YA9n0CquqobA3Ooc) — все mp3 | на место б7 — там фальшивый комикс «Комикс про Дракошу. Расставь кадры» |
-| 50 | готовая картинка [открыть](https://drive.google.com/file/d/1YdCFB16xVfQ2Rj1slLsKJd-TBvlnNy_G/view) | wd2_hw50_comic_1, _2… | папка [открыть](https://drive.google.com/drive/folders/16G8gSFATO3qSd7mvgNoHJuJ0OcqBu4oz) — все mp3 | на место б7 — фальшивый комикс «Комикс про музей» |
-| 59 | .pptx урока 59, номер слайда в плане не указан | wd2_hw59_comic_1, _2… | папка [открыть](https://drive.google.com/drive/folders/1cVQev5G-ipFE7anygkqSpMDujldi-kUo) — все mp3 | на место б8 — фальшивый комикс «Комикс про полёт» |
-| 67 | .pptx урока 67, номер слайда в плане не указан | wd2_hw67_comic_1, _2… | папка [открыть](https://drive.google.com/drive/folders/1BHT9OKoEo-4iw950i2n-MgMF-b1LQOju) — все mp3 | на место б7 — фальшивый комикс «Комикс про полёт» |
-| 75 | .pptx урока 75, номер слайда в плане не указан | wd2_hw75_comic_1, _2… | папка [открыть](https://drive.google.com/drive/folders/1r5MWpJef0LGYLICnOE5PXxoIaUAvimVq) — все mp3 | на место б6 — фальшивый комикс «Комикс про пустыню с минералами» |
-
-Если номер слайда не указан — комикс в презентации идёт подряд несколькими слайдами с репликами героев; возьмите их все.
+Кто какую реплику говорит, я брал из имени файла (D — Дракоша, P — Принцесса, U — Единорог, G — бабушка, B — Банни, M — марсианин), а сами реплики расшифровал распознаванием речи и сверил с картинкой. Полный список — `docs/vychitka/wd2/komiksy.md`.
