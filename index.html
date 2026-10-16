@@ -841,6 +841,9 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
   .bell-it{ padding:10px 14px; border-bottom:1px solid var(--line); cursor:pointer; font-size:14px; }
   .bell-it:hover{ background:#FBFAFD; }
   .bell-it.new{ background:#FBFAFF; }
+  a.btn{ text-decoration:none; display:inline-block; }
+  a.stu-a{ color:inherit; text-decoration:none; }
+  a.stu-a:hover b{ color:var(--course-d); }
   /* библиотека списком */
   .libl{ overflow:hidden; }
   .libl-q{ flex:1 1 320px; max-width:440px; height:40px; border-radius:12px; font-size:14.5px; }
@@ -1284,9 +1287,9 @@ function renderStudents(){
   if(!list.length){ wrap.innerHTML = '<div class="empty">Учеников не найдено.</div>'; return; }
   wrap.innerHTML = `<table><thead><tr><th>Ученик</th><th>Уровень</th><th>Юнит</th><th></th></tr></thead><tbody>
     ${list.map(s=>`<tr>
-      <td><b>${esc(s.name)}</b>${s.parent_text?`<div class="muted" style="font-size:12px">${esc(s.parent_text)}</div>`:''}</td>
+      <td><a class="stu-a" href="#student=${s.id}"><b>${esc(s.name)}</b></a>${s.parent_text?`<div class="muted" style="font-size:12px">${esc(s.parent_text)}</div>`:''}</td>
       <td>${esc(s.level||'—')}</td><td>${esc(s.unit||'—')}</td>
-      <td style="text-align:right"><button class="btn sec sm" onclick="openStudent('${s.id}')">Открыть</button></td>
+      <td style="text-align:right"><a class="btn sec sm" href="#student=${s.id}">Открыть</a></td>
     </tr>`).join('')}
   </tbody></table>`;
 }
@@ -1295,6 +1298,11 @@ let CUR_STU = null;   // { id, name, courseId, lessons:[] }
 
 // Клик по ученику — переход на страницу через hash (#student=ID)
 function openStudent(id){ location.hash = '#student=' + encodeURIComponent(id); }
+// Колёсико мыши и Ctrl/⌘ — открыть в новой вкладке браузера; обычный щелчок — как раньше
+function ntAttrs(url){ return `onauxclick="if(event.button===1){event.preventDefault();window.open('${url}','_blank')}" onmousedown="if(event.button===1)event.preventDefault()"`; }
+function ntCtrl(e, url){ if(e && (e.ctrlKey||e.metaKey||e.shiftKey)){ window.open(url,'_blank'); return true; } return false; }
+function rvUrl(enr, lesson){ return '?tab=review&rv='+enr+'.'+lesson; }
+function asgUrl(stu, lesson){ return '?tab=assign'+(stu?'&student='+stu:'')+(lesson?'&assign='+lesson:''); }
 
 function hideStudentPage(){ $('tab-student').classList.add('hidden'); $('mainViews').classList.remove('hidden'); }
 
@@ -1353,7 +1361,7 @@ function stuViewSeg(){
   return `<div class="row" style="margin-bottom:12px;gap:10px;align-items:center;flex-wrap:wrap"><div class="rv-seg">
       <button class="${STU_VIEW==='given'?'on':''}" onclick="STU_VIEW='given'; renderStudentLessons()">Задано</button>
       <button class="${STU_VIEW==='all'?'on':''}" onclick="STU_VIEW='all'; renderStudentLessons()">Все материалы курса</button></div>
-      <span style="flex:1"></span><button class="btn sm" onclick="asgFor('${CUR_STU.id}')">Задать материал</button></div>`;
+      <span style="flex:1"></span><button class="btn sm" onclick="if(!ntCtrl(event,'${asgUrl(CUR_STU.id)}')) asgFor('${CUR_STU.id}')" ${ntAttrs(asgUrl(CUR_STU.id))}>Задать материал</button></div>`;
 }
 function renderStudentLessons(){ if(STU_VIEW==='all') return renderStudentLessonsAll(); return renderStudentGiven(); }
 function stuCode(l){ return hwCode(l.course_slug || (LIBRARY.find(c=>c.id===CUR_STU.courseId)||{}).slug, l.unit_no, l.title); }
@@ -1388,8 +1396,8 @@ function renderStudentGiven(){
     const soon = dl && !late && !l.submitted && !l.completed && (new Date(dl)-now)<2*864e5;
     const onTime = l.first_submitted_at && (!l.deadline_at || new Date(l.first_submitted_at)<=new Date(l.deadline_at));
     let act='';
-    if(l.review_pending) act=`<button class="btn sm" onclick="stuReview('${l.lesson_id}')">Проверить</button>`;
-    else if(!l.assigned) act=`<button class="btn sec sm" onclick="asgFor('${CUR_STU.id}','${l.lesson_id}')">Задать</button>`;
+    if(l.review_pending){ const u=rvUrl(CUR_STU.enrollmentId, l.lesson_id); act=`<button class="btn sm" onclick="if(!ntCtrl(event,'${u}')) stuReview('${l.lesson_id}')" ${ntAttrs(u)}>Проверить</button>`; }
+    else if(!l.assigned){ const u=asgUrl(CUR_STU.id, l.lesson_id); act=`<button class="btn sec sm" onclick="if(!ntCtrl(event,'${u}')) asgFor('${CUR_STU.id}','${l.lesson_id}')" ${ntAttrs(u)}>Задать</button>`; }
     const dateEd = l.active && !l.retake && !l.submitted && !l.completed
       ? `<input type="date" value="${fmtDateInput(l.deadline_at)}" title="${late?'Продлить срок':'Изменить срок'}" onchange="setLessonDeadline('${l.lesson_id}', this.value)" style="width:142px;padding:5px 8px">`
       : (dl?`${l.retake?'до ':''}${stuDay(dl)}${l.retake&&l.deadline_at?`<div class="muted" style="font-size:12px">первый срок ${stuDay(l.deadline_at)}</div>`:''}`:'—');
@@ -3849,7 +3857,7 @@ function renderReview(){
       <input placeholder="Ученик" value="${esc(RV_F.q)}" style="max-width:200px" onchange="RV_F.q=this.value; renderReview()"></div>`;
   if(!PENDING.length){ wrap.innerHTML='<div class="empty">Нет работ на проверке 🎉</div>'; return; }
   wrap.innerHTML = head + `<table><thead><tr><th>Ученик</th><th>Материал</th><th>Сдано</th><th>Попытка</th><th>Система насчитала</th><th></th></tr></thead><tbody>
-    ${list.map(p=>`<tr style="cursor:pointer" onclick="rvOpen('${p.enrollment_id}','${p.lesson_id}')">
+    ${list.map(p=>`<tr style="cursor:pointer" onclick="if(!ntCtrl(event,'${rvUrl(p.enrollment_id,p.lesson_id)}')) rvOpen('${p.enrollment_id}','${p.lesson_id}')" ${ntAttrs(rvUrl(p.enrollment_id,p.lesson_id))}>
       <td><b>${esc(studentName(p.student_id))}</b></td>
       <td>${esc(hwCode(p.course_slug, p.unit_no, p.lesson_title))}</td>
       <td>${rvAgo(p.submitted_at)}<div>${p.late?'<span class="pill r">с опозданием</span>':'<span class="pill g">вовремя</span>'}
@@ -3870,6 +3878,9 @@ async function rvOpen(enr, lesson, extra){
     const args={ p_enrollment_id:enr, p_lesson_id:lesson };
     const [grade, blocks]=await Promise.all([ rpc('classroom_lesson_grade', args), rpc('classroom_run_blocks', args) ]);
     RV.grade=grade||{};
+    if(!RV.row.student_id){ try{ const { data:en } = await sb.from('classroom_enrollments').select('student_id').eq('id', enr).maybeSingle(); if(en) RV.row.student_id=en.student_id; }catch(e){} }
+    if(!RV.row.lesson_title) for(const c of LIBRARY){ const l=(c.lessons||[]).find(x=>x.id===lesson); if(l){ Object.assign(RV.row, { lesson_title:l.name, unit_no:l.unit_no, course_slug:c.slug }); break; } }
+    if(RV.row.attempt==null) RV.row.attempt=(RV.grade.history||[]).filter(h=>h.event==='submitted').length||1;
     (blocks||[]).sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));
     // номера — как у ученика: «Задание N» на его экране
     let n=0;
@@ -4032,7 +4043,7 @@ function rvRenderPage(){
       <button class="btn sec sm" onclick="rvClose()">← Все на проверке</button>
       <div><b>${esc(studentName(r.student_id))}</b> · ${esc(title)}
         <div class="muted" style="font-size:13px">сдано ${g.submitted_at?rvAgo(g.submitted_at):'—'} · ${r.late?'<span style="color:var(--bad)">с опозданием</span>':'вовремя'} · ${r.attempt>1?r.attempt+'-я попытка, после переделки':'1-я попытка'}
-        ${r.student_id?` · <a href="#" onclick="openStudent('${r.student_id}'); return false">карточка ученика</a>`:''}</div></div></div>
+        ${r.student_id?` · <a href="#student=${r.student_id}">карточка ученика</a>`:''}</div></div></div>
     <div class="card" style="padding:10px 14px;margin-bottom:12px">${rvCmBtn(null,null)} <span class="muted" style="font-size:13px">Комментарий ко всей домашке</span>${rvCmBox(null,null)}
       <span style="float:right">${fbBtn('all','rvRedraw')} <span class="muted" style="font-size:13px">Сообщение методисту</span></span>${fbBox('all', RV.row.lesson_id, 'review', RV.row.enrollment_id, 'rvRedraw')}</div>
     <div class="row" style="margin-bottom:12px;align-items:center;gap:10px;flex-wrap:wrap"><div class="rv-seg"><button class="${RV.only?'':'on'}" onclick="RV.only=false; rvRenderPage()">Все задания</button><button class="${RV.only?'on':''}" onclick="RV.only=true; rvRenderPage()">Только ошибки и что оценить</button></div>
@@ -4148,8 +4159,14 @@ function bellRender(){
 }
 function bellFill(){
   const its=bellItems();
-  $('bellDrop').innerHTML=`<div class="bell-h">Уведомления</div>${its.map((x,i)=>`<div class="bell-it${x.fresh?' new':''}" onclick="bellGo(${i})"><div>${esc(x.t)}</div>${x.warn?`<div style="color:var(--bad);font-size:13px;margin-top:3px">${esc(x.warn)}</div>`:''}<div class="muted" style="font-size:12px">${x.w}</div></div>`).join('') || '<div class="bell-it muted">Нового нет</div>'}`;
+  $('bellDrop').innerHTML=`<div class="bell-h">Уведомления</div>${its.map((x,i)=>{ const u=bellUrl(x); return `<div class="bell-it${x.fresh?' new':''}" onclick="if(!ntCtrl(event,'${u}')) bellGo(${i})" ${ntAttrs(u)}><div>${esc(x.t)}</div>${x.warn?`<div style="color:var(--bad);font-size:13px;margin-top:3px">${esc(x.warn)}</div>`:''}<div class="muted" style="font-size:12px">${x.w}</div></div>`; }).join('') || '<div class="bell-it muted">Нового нет</div>'}`;
   window._bellItems=its;
+}
+function bellUrl(x){
+  if(x.f) return '?run='+x.f.lesson_id+'&preview=1';
+  const p=x.p || (x.n && x.n.payload) || {};
+  if(x.n && !PENDING.some(r=>r.enrollment_id===p.enrollment_id && r.lesson_id===p.lesson_id)) return '#student='+p.student_id;
+  return rvUrl(p.enrollment_id, p.lesson_id);
 }
 function bellToggle(e){ if(e) e.stopPropagation(); const d=$('bellDrop'); d.classList.toggle('hidden'); if(!d.classList.contains('hidden')) bellFill(); }
 function bellGo(i){ const x=(window._bellItems||[])[i]; $('bellDrop').classList.add('hidden'); if(!x) return;
@@ -4573,8 +4590,9 @@ function edRedo(){
 // ---------- Библиотека плитками ----------
 // Три уровня: курсы → юниты → материалы. Тип делим переключателем,
 // а не подпапками: лишний уровень ради одного числа.
-var LIB = { level:'courses', courseId:null, unitId:null, kind:'all', unpub:false, view:'list' };
-try{ if(localStorage.getItem('lib:view')==='tiles') LIB.view='tiles'; }catch(e){}
+var LIB = { level:'courses', courseId:null, unitId:null, kind:'all', unpub:false, view:'tiles' };
+// Методист работает плитками по папкам (решение Анны 16.10); список — по кнопке «☰ Списком»
+try{ if(localStorage.getItem('lib:view2')==='list') LIB.view='list'; }catch(e){}
 
 // Обложка рисуется из названия курса: ни файлов, ни прав, ни загрузок.
 function libCover(title, tint){
@@ -4716,7 +4734,7 @@ function libRender(){
 // опубликованное и открывает урок глазами ученика — с верными ответами.
 var LIBL = { pub:'all', q:'', open:new Set(), ukind:{}, sel:new Set(), groups:{} };
 function libIsList(){ return !ME || !ME.isEditor || LIB.view!=='tiles' || !!LIBL.q.trim(); }
-function libViewSet(v){ LIB.view=v; try{ localStorage.setItem('lib:view', v); }catch(e){} libRender(); }
+function libViewSet(v){ LIB.view=v; try{ localStorage.setItem('lib:view2', v); }catch(e){} libRender(); }
 function libLVisible(l, kind){
   if((kind==='plans')!==((l.kind||'homework')==='lesson')) return false;
   if(!ME.isEditor && !l.is_published) return false;
@@ -4775,13 +4793,13 @@ function libListRender(){
     if(!ed && !units.some(x=>x.plans+x.hws)) return;
     const cids=units.flatMap(x=>x.ls.map(l=>l.id)); all.push(...cids); LIBL.groups['c:'+c.id]=cids;
     const copen=!!q || LIBL.open.has('c:'+c.id);
-    html += `<div class="libl-c" onclick="libLOpen('c:${c.id}')">${arrow(copen)}${box('c:'+c.id, cids)}<i style="background:${libTintFor(c.title)[0]}"></i>${esc(c.title)}
+    html += `<div class="libl-c" onclick="if(!ntCtrl(event,'?course=${c.id}')) libLOpen('c:${c.id}')" ${ed?ntAttrs('?course='+c.id):''}>${arrow(copen)}${box('c:'+c.id, cids)}<i style="background:${libTintFor(c.title)[0]}"></i>${esc(c.title)}
       <span class="muted small" style="font-weight:400">${units.length} ${plural(units.length,'юнит','юнита','юнитов')}</span>
       <span style="margin-left:auto">${state(units.reduce((a,x)=>a+x.drafts,0))}</span></div>`;
     if(!copen) return;
     units.forEach(x=>{
       const uopen=!!q || LIBL.open.has('u:'+x.u.id), uids=x.ls.map(l=>l.id); LIBL.groups['u:'+x.u.id]=uids;
-      html += `<div class="libl-u" onclick="libLOpen('u:${x.u.id}')">${arrow(uopen)}${box('u:'+x.u.id, uids)}<span>${esc(x.u.title)}</span>
+      html += `<div class="libl-u" onclick="if(!ntCtrl(event,'?unit=${x.u.id}')) libLOpen('u:${x.u.id}')" ${ed?ntAttrs('?unit='+x.u.id):''}>${arrow(uopen)}${box('u:'+x.u.id, uids)}<span>${esc(x.u.title)}</span>
         <span class="muted small" style="font-weight:400">планов ${x.plans} · домашек и тестов ${x.hws}</span>
         <span style="margin-left:auto">${state(x.drafts)}</span></div>`;
       if(!uopen) return;
@@ -4794,7 +4812,7 @@ function libListRender(){
           <span class="grow">${esc(l.code||l.title)}</span>
           ${(l.kind||'homework')==='test'?'<span class="pill n">тест</span>':''}${ed?(l.is_published?'<span class="pill g">опубликован</span>':'<span class="pill y">черновик</span>'):''}
           <button class="btn sec sm" onclick="kpPreviewOpen('${l.id}')" title="Глазами ученика">👁 Посмотреть</button>${open}
-          ${!ed&&(l.kind||'homework')!=='lesson'?`<button class="btn sm" onclick="asgFor(null,'${l.id}')">Задать</button>`:''}</div>`;
+          ${!ed&&(l.kind||'homework')!=='lesson'?`<button class="btn sm" onclick="if(!ntCtrl(event,'${asgUrl(null,l.id)}')) asgFor(null,'${l.id}')" ${ntAttrs(asgUrl(null,l.id))}>Задать</button>`:''}</div>`;
       }).join('') || `<div class="libl-l muted small">${q||LIBL.pub!=='all'?'ничего не подходит под фильтр':'пусто'}</div>`;
       x.ls.forEach(l=>{ LIBL.groups['l:'+l.id]=[l.id]; });
     });
@@ -6720,10 +6738,10 @@ function qcRender(){
       <td style="max-width:360px">${esc(r.body)}${r.reply?`<div class="muted small" style="margin-top:4px">ваш ответ: ${esc(r.reply)}</div>`:''}</td>
       <td style="text-align:right;min-width:300px">${r.status==='open'
         ? `<input id="qcR-${r.id}" placeholder="Ответ учителю (необязательно)" style="width:100%;margin-bottom:6px">
-           <div class="qc-act"><button class="btn sec sm" onclick="qcOpenLesson('${r.lesson_id}')">Открыть</button>
+           <div class="qc-act"><button class="btn sec sm" onclick="if(!ntCtrl(event,'?lesson=${r.lesson_id}')) qcOpenLesson('${r.lesson_id}')" ${ntAttrs('?lesson='+r.lesson_id)}>Открыть</button>
            <button class="btn sm" onclick="qcResolve('${r.id}','fixed')">Исправлено</button><button class="btn sec sm" onclick="qcResolve('${r.id}','not_error')">Не ошибка</button></div>`
         : `<span class="pill ${r.status==='fixed'?'g':'n'}">${r.status==='fixed'?'исправлено':'не ошибка'}</span>
-           <div class="qc-act" style="margin-top:6px"><button class="btn sec sm" onclick="qcOpenLesson('${r.lesson_id}')">Открыть</button>
+           <div class="qc-act" style="margin-top:6px"><button class="btn sec sm" onclick="if(!ntCtrl(event,'?lesson=${r.lesson_id}')) qcOpenLesson('${r.lesson_id}')" ${ntAttrs('?lesson='+r.lesson_id)}>Открыть</button>
            <button class="btn sec sm" onclick="qcResolve('${r.id}','open')">Вернуть в новые</button></div>`}</td></tr>`).join('')}</tbody></table></div>`
       : `<div class="empty">${QC.status==='open'?'Новых сообщений нет 🎉':'Разобранных пока нет.'}</div>`;
     body += '<p class="muted small" style="margin-top:8px">Учитель получит ответ в колокольчик: «исправлено» или «не ошибка» и ваш текст, если он есть. Ученикам, которые уже начали домашку, правка не дойдёт — у них своя копия.</p>';
@@ -6737,7 +6755,7 @@ function qcRender(){
         <td><span class="pill r">${r.rate}%</span> <span class="muted small">${r.wrong} из ${r.answers}</span>
           ${r.teacher_fixed?`<div class="small" style="color:var(--bad);margin-top:3px">учителя поправили на «верно»: ${r.teacher_fixed}</div>`:''}</td>
         <td>${qcAns(b, r.item, r.top_wrong)}</td>
-        <td style="text-align:right"><button class="btn sec sm" onclick="qcOpenLesson('${r.lesson_id}')">Открыть</button></td></tr>`; }).join('')}</tbody></table></div>`
+        <td style="text-align:right"><button class="btn sec sm" onclick="if(!ntCtrl(event,'?lesson=${r.lesson_id}')) qcOpenLesson('${r.lesson_id}')" ${ntAttrs('?lesson='+r.lesson_id)}>Открыть</button></td></tr>`; }).join('')}</tbody></table></div>`
       : '<div class="empty">Пока таких заданий нет.</div>';
     body += '<p class="muted small" style="margin-top:8px">Сюда попадает пункт, если система ставит «неверно» 60% учеников и больше (и ответили хотя бы 5). Частый неверный ответ и поправки учителей подсказывают, не в ключе ли ошибка.</p>';
   }
@@ -6805,7 +6823,8 @@ async function boot(){
   const _tab = _p.get('tab');
   if(_tab==='quality' && !ME.isEditor){}
   else if(_tab && $('tab-'+_tab)) switchTab(_tab);
-  if(_tab==='assign' && _p.get('assign')) asgFor(null, _p.get('assign'));
+  if(_tab==='assign' && (_p.get('assign') || _p.get('student'))) asgFor(_p.get('student')||null, _p.get('assign')||null);
+  if(_tab==='review' && _p.get('rv')){ const [e,l]=_p.get('rv').split('.'); if(e && l) rvOpen(e, l); }
   else if((_p.get('course') || _p.get('unit')) && ME.isEditor) switchTab('library');
 
   // Пришли по ссылке на материал — открываем библиотеку прямо на нём
