@@ -490,6 +490,8 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
 .ksaved{ font-size:12px; color:var(--kfaint); margin-top:10px; min-height:16px; }
 .ksaved.local{ color:var(--kwarn); }
 .kneed{ font-size:13px; color:var(--kmute); }
+.knomic{ align-self:center; background:none !important; border:0; color:var(--kpick-d) !important; font-weight:700; font-size:14px; text-decoration:underline; padding:6px 4px; }
+.kmicerr{ align-self:center; background:#FFF0EE; color:#B3261E; border-radius:14px; padding:9px 14px; font-size:14px; font-weight:700; }
 .khint{ font-size:13px; color:var(--kmute); }
 .khtml{ font-size:17px; line-height:1.5; }
 .khtml img{ max-width:100%; height:auto; border-radius:12px; }
@@ -2688,7 +2690,7 @@ function kpComplete(b, a){
     case 'hotspot': return all((p.points||[]).length, has);
     case 'order': return Array.isArray(a.order) && a.order.length===(p.words||[]).length;
     case 'sort': return Object.keys(a.assign||{}).length >= kpSortItems(b).length;
-    case 'speaking': return !!String(a.audio||'').trim();
+    case 'speaking': return !!String(a.audio||'').trim() || (a.no_mic===true && !!String(a.text||'').trim());
     case 'task': return !!String(a.text||'').trim() || !!String(a.audio||'').trim();
     case 'video': return a.watched===true;
     case 'flashcards': return Array.isArray(a.seen) && new Set(a.seen).size >= (p.cards||[]).length;
@@ -3230,8 +3232,21 @@ function kpHsFind(e, id){
 
 // ── запись голоса: speaking и task с ответом голосом
 function kpB_speaking(b){
-  const p=b.payload||{};
-  return `${p.html?`<div class="khtml">${p.html}</div>`:''}${kpImg(p.image,'kph kqimg')}${kpSnd(p.sample,'Послушать образец')}${kpRecBox(b.id)}`;
+  const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, u=KP.ui[id]||{}, ed=kpEditable(id);
+  const head=`${p.html?`<div class="khtml">${p.html}</div>`:''}${kpImg(p.image,'kph kqimg')}${kpSnd(p.sample,'Послушать образец')}`;
+  // Микрофон не работает — отвечает текстом, учитель получит уведомление
+  if(a.no_mic) return head + `<textarea class="kta" data-id="${id}" data-k="text" oninput="kpInput(this)" ${ed?'':'readonly'} placeholder="Напиши ответ по-английски">${esc(a.text||'')}</textarea>
+    <div class="kneed">✏️ Отвечаешь текстом — учитель узнает, что микрофон не работал.
+      ${ed?`<button class="knomic" onclick="kpNoMic('${id}',false)">Вернуться к записи</button>`:''}</div>`;
+  const off = ed && !a.audio && !u.blobUrl && u.rec!=='on';
+  return head + kpRecBox(id) + (off ? `${u.micErr?'<div class="kmicerr">😕 Не получается включить микрофон</div>':''}
+    <button class="knomic" onclick="kpNoMic('${id}',true)">Не работает микрофон — написать текстом</button>` : '');
+}
+function kpNoMic(id, on){
+  if(!kpEditable(id)) return;
+  const a=Object.assign({}, KP.ans[id]||{});
+  if(on) a.no_mic=true; else { delete a.no_mic; delete a.text; }
+  kpSet(id, a);
 }
 function kpB_task(b){
   const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, audio=p.answer_kind==='audio';
@@ -3254,9 +3269,9 @@ let KP_MIC=null;
 async function kpRecStart(id){
   if(!kpEditable(id)) return;
   if(KP_MIC) kpRecStop(KP_MIC.id);
-  if(!navigator.mediaDevices || !window.MediaRecorder){ toast('Этот браузер не умеет записывать звук'); return; }
+  if(!navigator.mediaDevices || !window.MediaRecorder){ toast('Этот браузер не умеет записывать звук'); (KP.ui[id]=KP.ui[id]||{}).micErr=true; kpUpd(); return; }
   let stream; try{ stream=await navigator.mediaDevices.getUserMedia({ audio:true }); }
-  catch(e){ toast('Разреши доступ к микрофону'); return; }
+  catch(e){ toast('Разреши доступ к микрофону'); (KP.ui[id]=KP.ui[id]||{}).micErr=true; kpUpd(); return; }
   const m = KP_MIC = { id, stream, chunks:[], t0:Date.now(), quiet:performance.now(), hist:[] };
   try{ const ctx=new (window.AudioContext||window.webkitAudioContext)(); const an=ctx.createAnalyser(); an.fftSize=512;
        ctx.createMediaStreamSource(stream).connect(an); m.ctx=ctx; m.an=an; m.buf=new Uint8Array(an.fftSize); }catch(e){}
@@ -4098,8 +4113,23 @@ function bellItems(){
   out.sort((a,b)=>new Date(b.p.submitted_at)-new Date(a.p.submitted_at));
   // ответы методиста на ⚑ — за две недели, непрочитанные сверху
   const seen=bellSeen();
-  return FB_MINE.map(f=>({ t:`${f.status==='fixed'?'✅ Методист исправил':'💬 Методист ответил'}: ${hwCode(f.course_slug,f.unit_no,f.lesson_title)}${f.block_no?' · задание '+f.block_no:''} — ${f.reply||(f.status==='fixed'?'исправлено':'не ошибка')}`,
-    w:rvAgo(f.resolved_at), f, fresh:!seen.includes(f.id) })).sort((a,b)=>b.fresh-a.fresh).concat(out);
+  const mic=NOMIC.map(n=>{ const p=n.payload||{}, r=Number(p.repeat)||1;
+    return { t:`🎤 ${n.title} — в ${hwCode(p.course_slug,p.unit_no,p.lesson_title)} ${p.blocks>1?'ответил(а) текстом '+p.blocks+' '+plural(p.blocks,'задание','задания','заданий'):'ответил(а) текстом'}`,
+      warn: r>=3 ? `Уже ${r}-я домашка за месяц без микрофона — попросите ассистентов связаться с родителями.` : '',
+      w:rvAgo(n.created_at), n, fresh:!n.read_at }; });
+  return mic.concat(FB_MINE.map(f=>({ t:`${f.status==='fixed'?'✅ Методист исправил':'💬 Методист ответил'}: ${hwCode(f.course_slug,f.unit_no,f.lesson_title)}${f.block_no?' · задание '+f.block_no:''} — ${f.reply||(f.status==='fixed'?'исправлено':'не ошибка')}`,
+    w:rvAgo(f.resolved_at), f, fresh:!seen.includes(f.id) }))).sort((a,b)=>b.fresh-a.fresh).concat(out);
+}
+var NOMIC=[];
+async function bellLoadNoMic(){
+  if(!ME || !ME.teacherId) return;
+  try{
+    const { data, error } = await sb.from('classroom_notifications').select('id, title, payload, created_at, read_at')
+      .eq('recipient_kind','teacher').eq('recipient_id', ME.teacherId).eq('payload->>event','no_mic')
+      .gte('created_at', new Date(Date.now()-14*864e5).toISOString()).order('created_at', { ascending:false }).limit(50);
+    if(error) throw error; NOMIC=data||[];
+  }catch(e){ NOMIC=[]; }
+  bellRender();
 }
 var FB_MINE=[];
 function bellSeen(){ try{ return JSON.parse(localStorage.getItem('fb:seen')||'[]'); }catch(e){ return []; } }
@@ -4112,17 +4142,23 @@ async function bellLoadReplies(){
 }
 function bellRender(){
   const b=$('bellBtn'); if(!b) return;
-  const seen=bellSeen(), n=PENDING.length + FB_MINE.filter(f=>!seen.includes(f.id)).length;
+  const seen=bellSeen(), n=PENDING.length + FB_MINE.filter(f=>!seen.includes(f.id)).length + NOMIC.filter(x=>!x.read_at).length;
   b.innerHTML=`🔔${n?`<i>${n}</i>`:''}`;
   const d=$('bellDrop'); if(d && !d.classList.contains('hidden')) bellFill();
 }
 function bellFill(){
   const its=bellItems();
-  $('bellDrop').innerHTML=`<div class="bell-h">Уведомления</div>${its.map((x,i)=>`<div class="bell-it${x.fresh?' new':''}" onclick="bellGo(${i})"><div>${esc(x.t)}</div><div class="muted" style="font-size:12px">${x.w}</div></div>`).join('') || '<div class="bell-it muted">Нового нет</div>'}`;
+  $('bellDrop').innerHTML=`<div class="bell-h">Уведомления</div>${its.map((x,i)=>`<div class="bell-it${x.fresh?' new':''}" onclick="bellGo(${i})"><div>${esc(x.t)}</div>${x.warn?`<div style="color:var(--bad);font-size:13px;margin-top:3px">${esc(x.warn)}</div>`:''}<div class="muted" style="font-size:12px">${x.w}</div></div>`).join('') || '<div class="bell-it muted">Нового нет</div>'}`;
   window._bellItems=its;
 }
 function bellToggle(e){ if(e) e.stopPropagation(); const d=$('bellDrop'); d.classList.toggle('hidden'); if(!d.classList.contains('hidden')) bellFill(); }
 function bellGo(i){ const x=(window._bellItems||[])[i]; $('bellDrop').classList.add('hidden'); if(!x) return;
+  if(x.n){ const p=x.n.payload||{};
+    if(!x.n.read_at){ x.n.read_at=new Date().toISOString(); sb.from('classroom_notifications').update({ read_at:x.n.read_at }).eq('id', x.n.id).then(()=>{}); }
+    bellRender();
+    if(PENDING.some(r=>r.enrollment_id===p.enrollment_id && r.lesson_id===p.lesson_id)){ switchTab('review'); rvOpen(p.enrollment_id, p.lesson_id); }
+    else if(p.student_id) openStudent(p.student_id);
+    return; }
   if(x.f){ const s=bellSeen(); if(!s.includes(x.f.id)){ s.push(x.f.id); try{ localStorage.setItem('fb:seen', JSON.stringify(s.slice(-300))); }catch(e){} }
     bellRender(); kpPreviewOpen(x.f.lesson_id); return; }
   switchTab('review'); rvOpen(x.p.enrollment_id, x.p.lesson_id); }
@@ -6760,7 +6796,7 @@ async function boot(){
   }
   if(ME.isEditor){ const q=document.querySelector('[data-tab=quality]'); if(q) q.style.display=''; qcBadge(); }
   // «Уроки» доступны и преподавателю: редактора он не видит, а вести урок должен
-  await Promise.all([ loadStudents(), loadLibrary(), loadPending(), bellLoadReplies() ]);
+  await Promise.all([ loadStudents(), loadLibrary(), loadPending(), bellLoadReplies(), bellLoadNoMic() ]);
   renderStudents();
   route();
 
