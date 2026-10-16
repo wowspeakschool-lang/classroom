@@ -490,6 +490,8 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
 .ksaved{ font-size:12px; color:var(--kfaint); margin-top:10px; min-height:16px; }
 .ksaved.local{ color:var(--kwarn); }
 .kneed{ font-size:13px; color:var(--kmute); }
+.knomic{ align-self:center; background:none !important; border:0; color:var(--kpick-d) !important; font-weight:700; font-size:14px; text-decoration:underline; padding:6px 4px; }
+.kmicerr{ align-self:center; background:#FFF0EE; color:#B3261E; border-radius:14px; padding:9px 14px; font-size:14px; font-weight:700; }
 .khint{ font-size:13px; color:var(--kmute); }
 .khtml{ font-size:17px; line-height:1.5; }
 .khtml img{ max-width:100%; height:auto; border-radius:12px; }
@@ -504,6 +506,7 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
 .ksnd.playing, .kmini.playing{ box-shadow:0 0 0 3px currentColor inset; }
 .kmini{ display:inline-grid; place-items:center; width:34px; height:34px; border-radius:50%; background:var(--kpick-soft); color:var(--kpick-d);
   font-size:15px; flex:0 0 auto; cursor:pointer; }
+.kmini.big{ width:52px; height:52px; font-size:24px; }
 
 /* картинки */
 .kph{ width:100%; border-radius:14px; object-fit:contain; max-height:min(40vh,320px); }
@@ -513,6 +516,14 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
 .kq{ display:flex; flex-direction:column; gap:10px; }
 .kq + .kq{ border-top:1px dashed var(--kline); padding-top:14px; }
 .kqq{ font-size:18px; font-weight:700; display:flex; gap:10px; align-items:center; }
+.kqdots{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:4px; }
+.kqdots span{ color:var(--kmute); font-size:13px; font-weight:700; margin-left:4px; }
+.kqdot{ width:34px; height:34px; border-radius:50%; border:2px solid var(--kline) !important; background:#fff !important; font-weight:800; color:var(--kmute); }
+.kqdot.cur{ border-color:var(--kpick) !important; color:var(--kpick-d); }
+.kqdot.ok{ background:#22B07D !important; border-color:#22B07D !important; color:#fff; }
+.kqdot.ok.cur{ box-shadow:0 0 0 3px #CDEFE1; }
+.kqnav{ display:flex; justify-content:space-between; gap:10px; margin-top:6px; }
+.kqnav button:disabled{ opacity:.35; }
 .kqn{ flex:0 0 auto; width:28px; height:28px; border-radius:50%; background:var(--kpick-soft); color:var(--kpick-d); display:grid; place-items:center; font-size:14px; font-weight:800; }
 .kopts{ display:flex; flex-wrap:wrap; gap:10px; }
 .kopts.img{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
@@ -839,6 +850,9 @@ body.kp-on{ overflow:hidden; background:#FFF6EC; }
   .bell-it{ padding:10px 14px; border-bottom:1px solid var(--line); cursor:pointer; font-size:14px; }
   .bell-it:hover{ background:#FBFAFD; }
   .bell-it.new{ background:#FBFAFF; }
+  a.btn{ text-decoration:none; display:inline-block; }
+  a.stu-a{ color:inherit; text-decoration:none; }
+  a.stu-a:hover b{ color:var(--course-d); }
   /* библиотека списком */
   .libl{ overflow:hidden; }
   .libl-q{ flex:1 1 320px; max-width:440px; height:40px; border-radius:12px; font-size:14.5px; }
@@ -1282,9 +1296,9 @@ function renderStudents(){
   if(!list.length){ wrap.innerHTML = '<div class="empty">Учеников не найдено.</div>'; return; }
   wrap.innerHTML = `<table><thead><tr><th>Ученик</th><th>Уровень</th><th>Юнит</th><th></th></tr></thead><tbody>
     ${list.map(s=>`<tr>
-      <td><b>${esc(s.name)}</b>${s.parent_text?`<div class="muted" style="font-size:12px">${esc(s.parent_text)}</div>`:''}</td>
+      <td><a class="stu-a" href="#student=${s.id}"><b>${esc(s.name)}</b></a>${s.parent_text?`<div class="muted" style="font-size:12px">${esc(s.parent_text)}</div>`:''}</td>
       <td>${esc(s.level||'—')}</td><td>${esc(s.unit||'—')}</td>
-      <td style="text-align:right"><button class="btn sec sm" onclick="openStudent('${s.id}')">Открыть</button></td>
+      <td style="text-align:right"><a class="btn sec sm" href="#student=${s.id}">Открыть</a></td>
     </tr>`).join('')}
   </tbody></table>`;
 }
@@ -1293,6 +1307,11 @@ let CUR_STU = null;   // { id, name, courseId, lessons:[] }
 
 // Клик по ученику — переход на страницу через hash (#student=ID)
 function openStudent(id){ location.hash = '#student=' + encodeURIComponent(id); }
+// Колёсико мыши и Ctrl/⌘ — открыть в новой вкладке браузера; обычный щелчок — как раньше
+function ntAttrs(url){ return `onauxclick="if(event.button===1){event.preventDefault();window.open('${url}','_blank')}" onmousedown="if(event.button===1)event.preventDefault()"`; }
+function ntCtrl(e, url){ if(e && (e.ctrlKey||e.metaKey||e.shiftKey)){ window.open(url,'_blank'); return true; } return false; }
+function rvUrl(enr, lesson){ return '?tab=review&rv='+enr+'.'+lesson; }
+function asgUrl(stu, lesson){ return '?tab=assign'+(stu?'&student='+stu:'')+(lesson?'&assign='+lesson:''); }
 
 function hideStudentPage(){ $('tab-student').classList.add('hidden'); $('mainViews').classList.remove('hidden'); }
 
@@ -1351,7 +1370,7 @@ function stuViewSeg(){
   return `<div class="row" style="margin-bottom:12px;gap:10px;align-items:center;flex-wrap:wrap"><div class="rv-seg">
       <button class="${STU_VIEW==='given'?'on':''}" onclick="STU_VIEW='given'; renderStudentLessons()">Задано</button>
       <button class="${STU_VIEW==='all'?'on':''}" onclick="STU_VIEW='all'; renderStudentLessons()">Все материалы курса</button></div>
-      <span style="flex:1"></span><button class="btn sm" onclick="asgFor('${CUR_STU.id}')">Задать материал</button></div>`;
+      <span style="flex:1"></span><button class="btn sm" onclick="if(!ntCtrl(event,'${asgUrl(CUR_STU.id)}')) asgFor('${CUR_STU.id}')" ${ntAttrs(asgUrl(CUR_STU.id))}>Задать материал</button></div>`;
 }
 function renderStudentLessons(){ if(STU_VIEW==='all') return renderStudentLessonsAll(); return renderStudentGiven(); }
 function stuCode(l){ return hwCode(l.course_slug || (LIBRARY.find(c=>c.id===CUR_STU.courseId)||{}).slug, l.unit_no, l.title); }
@@ -1386,8 +1405,8 @@ function renderStudentGiven(){
     const soon = dl && !late && !l.submitted && !l.completed && (new Date(dl)-now)<2*864e5;
     const onTime = l.first_submitted_at && (!l.deadline_at || new Date(l.first_submitted_at)<=new Date(l.deadline_at));
     let act='';
-    if(l.review_pending) act=`<button class="btn sm" onclick="stuReview('${l.lesson_id}')">Проверить</button>`;
-    else if(!l.assigned) act=`<button class="btn sec sm" onclick="asgFor('${CUR_STU.id}','${l.lesson_id}')">Задать</button>`;
+    if(l.review_pending){ const u=rvUrl(CUR_STU.enrollmentId, l.lesson_id); act=`<button class="btn sm" onclick="if(!ntCtrl(event,'${u}')) stuReview('${l.lesson_id}')" ${ntAttrs(u)}>Проверить</button>`; }
+    else if(!l.assigned){ const u=asgUrl(CUR_STU.id, l.lesson_id); act=`<button class="btn sec sm" onclick="if(!ntCtrl(event,'${u}')) asgFor('${CUR_STU.id}','${l.lesson_id}')" ${ntAttrs(u)}>Задать</button>`; }
     const dateEd = l.active && !l.retake && !l.submitted && !l.completed
       ? `<input type="date" value="${fmtDateInput(l.deadline_at)}" title="${late?'Продлить срок':'Изменить срок'}" onchange="setLessonDeadline('${l.lesson_id}', this.value)" style="width:142px;padding:5px 8px">`
       : (dl?`${l.retake?'до ':''}${stuDay(dl)}${l.retake&&l.deadline_at?`<div class="muted" style="font-size:12px">первый срок ${stuDay(l.deadline_at)}</div>`:''}`:'—');
@@ -2170,7 +2189,7 @@ function runBlock(b){
 
 // Плитка match: картинка / текст, плюс кнопка звука
 function matchTile(val, image, audio){
-  let inner = image ? `<img src="${esc(image)}" style="max-height:90px;max-width:130px;border-radius:10px;display:block;margin:0 auto">` : esc(val);
+  let inner = image ? `<img src="${esc(image)}" style="max-height:90px;max-width:130px;border-radius:10px;display:block;margin:0 auto">` : (audio && isSpkOnly(val) ? '' : esc(val));
   if(audio) inner += `<div style="margin-top:6px">${audBtn(audio)}</div>`;
   return inner;
 }
@@ -2688,7 +2707,7 @@ function kpComplete(b, a){
     case 'hotspot': return all((p.points||[]).length, has);
     case 'order': return Array.isArray(a.order) && a.order.length===(p.words||[]).length;
     case 'sort': return Object.keys(a.assign||{}).length >= kpSortItems(b).length;
-    case 'speaking': return !!String(a.audio||'').trim();
+    case 'speaking': return !!String(a.audio||'').trim() || (a.no_mic===true && !!String(a.text||'').trim());
     case 'task': return !!String(a.text||'').trim() || !!String(a.audio||'').trim();
     case 'video': return a.watched===true;
     case 'flashcards': return Array.isArray(a.seen) && new Set(a.seen).size >= (p.cards||[]).length;
@@ -2900,7 +2919,12 @@ function kpSnd(url, label){
 }
 function kpMini(url){ return url ? `<span class="kmini" role="button" data-src="${kpA(url)}" onclick="event.stopPropagation();kpPlay(this)">🔊</span>` : ''; }
 function kpImg(url, cls){ return url ? `<img class="${cls||'kph'}" src="${kpA(url)}" alt="" onerror="this.style.visibility='hidden'">` : ''; }
-function kpTile(text, image, audio){ return (image ? kpImg(image) : `<span>${esc(text==null?'':text)}</span>`) + kpMini(audio); }
+// Текст пункта — один значок 🔊, а рядом настоящая кнопка звука: значок не дублируем, кнопку делаем крупнее
+function isSpkOnly(t){ t=String(t==null?'':t).trim(); return !!t && /^[\s\u{1F508}-\u{1F50A}\uFE0F]+$/u.test(t); }
+function kpTile(text, image, audio){
+  if(audio && !image && isSpkOnly(text)) return kpMini(audio).replace('class="kmini"','class="kmini big"');
+  return (image ? kpImg(image) : `<span>${esc(text==null?'':text)}</span>`) + kpMini(audio);
+}
 
 // ── значок и заголовок задания
 function kpIcon(b){
@@ -2999,10 +3023,24 @@ function kpCard(id, k, el){
   else kpUpd();
 }
 
+// От трёх вопросов в задании — по одному на экране, кружки 1…N сверху (решение Анны 16.10)
+const KP_QSTEP_MIN = 3;
+function kpQAnswered(q, v){ return q.type==='text' ? !!String(v||'').trim() : Array.isArray(v) && v.length>0; }
+function kpQStepOn(b){ return KP.view==='doing' && kpEditable(b.id) && ((b.payload||{}).questions||[]).length>=KP_QSTEP_MIN; }
+function kpQCur(b){
+  const qs=(b.payload||{}).questions||[], a=KP.ans[b.id]||{}, u=KP.ui[b.id]||{};
+  if(u.qi!=null && u.qi<qs.length) return u.qi;
+  const f=qs.findIndex((q,i)=>!kpQAnswered(q, a[i]));
+  return f<0 ? 0 : f;
+}
+function kpQGo(id, i){ (KP.ui[id]=KP.ui[id]||{}).qi=i; kpUpd(); }
 function kpB_quiz(b){
   const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, qs=p.questions||[];
-  return qs.map((q,qi)=>{
-    const head = (q.q || qs.length>1) ? `<div class="kqq">${qs.length>1?`<span class="kqn">${qi+1}</span>`:''}<span>${q.q||''}</span></div>` : '';
+  const step=kpQStepOn(b), cur=step?kpQCur(b):-1;
+  const html = qs.map((q,qi)=>{
+    if(step && qi!==cur) return '';
+    const num = qs.length>1 && !step;   // по одному вопросу номер уже в кружках сверху
+    const head = (q.q || num) ? `<div class="kqq">${num?`<span class="kqn">${qi+1}</span>`:''}<span>${q.q||''}</span></div>` : '';
     const top = head + kpSnd(q.audio||q.audio_url, 'Послушать') + kpImg(q.image, 'kph kqimg');
     if(q.type==='text')
       return `<div class="kq">${top}<textarea class="kta" data-id="${id}" data-k="${qi}" oninput="kpInput(this)" placeholder="Напиши ответ">${esc(a[qi]||'')}</textarea></div>`;
@@ -3016,6 +3054,12 @@ function kpB_quiz(b){
     }).join('');
     return `<div class="kq">${top}<div class="kopts${hasImg?' img':''}">${btns}</div>${q.type==='multiple'?'<div class="khint">Можно выбрать несколько</div>':''}</div>`;
   }).join('');
+  if(!step) return html;
+  const dots = qs.map((q,i)=>{ const ok=kpQAnswered(q, a[i]);
+    return `<button class="kqdot${i===cur?' cur':''}${ok?' ok':''}" onclick="kpQGo('${id}',${i})">${ok&&i!==cur?'✓':i+1}</button>`; }).join('');
+  return `<div class="kqdots">${dots}<span>Вопрос ${cur+1} из ${qs.length}</span></div>${html}
+    <div class="kqnav"><button class="kghost" ${cur>0?'':'disabled'} onclick="kpQGo('${id}',${cur-1})">← Предыдущий</button>
+      <button class="kghost" ${cur<qs.length-1?'':'disabled'} onclick="kpQGo('${id}',${cur+1})">Следующий →</button></div>`;
 }
 function kpQuizPick(id, qi, oi){
   if(!kpEditable(id)) return;
@@ -3024,6 +3068,12 @@ function kpQuizPick(id, qi, oi){
   if(q.type==='multiple') cur = cur.includes(oi) ? cur.filter(x=>x!==oi) : cur.concat(oi);
   else cur=[oi];
   a[qi]=cur; kpSet(id, a);
+  // по одному вопросу: выбрал — через полсекунды следующий (кроме «можно несколько»)
+  const b=KP.byId[id], qs=((b&&b.payload)||{}).questions||[];
+  if(b && kpQStepOn(b) && q.type!=='multiple' && qi<qs.length-1){
+    (KP.ui[id]=KP.ui[id]||{}).qi=qi;
+    setTimeout(()=>{ const u=KP.ui[id]||{}; if(KP.screens[KP.cur]===b && u.qi===qi){ u.qi=qi+1; kpUpd(); } }, 600);
+  }
 }
 // Поля ввода: не перерисовываем задание, чтобы не терять курсор
 function kpInput(el){
@@ -3230,8 +3280,21 @@ function kpHsFind(e, id){
 
 // ── запись голоса: speaking и task с ответом голосом
 function kpB_speaking(b){
-  const p=b.payload||{};
-  return `${p.html?`<div class="khtml">${p.html}</div>`:''}${kpImg(p.image,'kph kqimg')}${kpSnd(p.sample,'Послушать образец')}${kpRecBox(b.id)}`;
+  const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, u=KP.ui[id]||{}, ed=kpEditable(id);
+  const head=`${p.html?`<div class="khtml">${p.html}</div>`:''}${kpImg(p.image,'kph kqimg')}${kpSnd(p.sample,'Послушать образец')}`;
+  // Микрофон не работает — отвечает текстом, учитель получит уведомление
+  if(a.no_mic) return head + `<textarea class="kta" data-id="${id}" data-k="text" oninput="kpInput(this)" ${ed?'':'readonly'} placeholder="Напиши ответ по-английски">${esc(a.text||'')}</textarea>
+    <div class="kneed">✏️ Отвечаешь текстом — учитель узнает, что микрофон не работал.
+      ${ed?`<button class="knomic" onclick="kpNoMic('${id}',false)">Вернуться к записи</button>`:''}</div>`;
+  const off = ed && !a.audio && !u.blobUrl && u.rec!=='on';
+  return head + kpRecBox(id) + (off ? `${u.micErr?'<div class="kmicerr">😕 Не получается включить микрофон</div>':''}
+    <button class="knomic" onclick="kpNoMic('${id}',true)">Не работает микрофон — написать текстом</button>` : '');
+}
+function kpNoMic(id, on){
+  if(!kpEditable(id)) return;
+  const a=Object.assign({}, KP.ans[id]||{});
+  if(on) a.no_mic=true; else { delete a.no_mic; delete a.text; }
+  kpSet(id, a);
 }
 function kpB_task(b){
   const p=b.payload||{}, id=b.id, a=KP.ans[id]||{}, audio=p.answer_kind==='audio';
@@ -3254,9 +3317,9 @@ let KP_MIC=null;
 async function kpRecStart(id){
   if(!kpEditable(id)) return;
   if(KP_MIC) kpRecStop(KP_MIC.id);
-  if(!navigator.mediaDevices || !window.MediaRecorder){ toast('Этот браузер не умеет записывать звук'); return; }
+  if(!navigator.mediaDevices || !window.MediaRecorder){ toast('Этот браузер не умеет записывать звук'); (KP.ui[id]=KP.ui[id]||{}).micErr=true; kpUpd(); return; }
   let stream; try{ stream=await navigator.mediaDevices.getUserMedia({ audio:true }); }
-  catch(e){ toast('Разреши доступ к микрофону'); return; }
+  catch(e){ toast('Разреши доступ к микрофону'); (KP.ui[id]=KP.ui[id]||{}).micErr=true; kpUpd(); return; }
   const m = KP_MIC = { id, stream, chunks:[], t0:Date.now(), quiet:performance.now(), hist:[] };
   try{ const ctx=new (window.AudioContext||window.webkitAudioContext)(); const an=ctx.createAnalyser(); an.fftSize=512;
        ctx.createMediaStreamSource(stream).connect(an); m.ctx=ctx; m.an=an; m.buf=new Uint8Array(an.fftSize); }catch(e){}
@@ -3834,7 +3897,7 @@ function renderReview(){
       <input placeholder="Ученик" value="${esc(RV_F.q)}" style="max-width:200px" onchange="RV_F.q=this.value; renderReview()"></div>`;
   if(!PENDING.length){ wrap.innerHTML='<div class="empty">Нет работ на проверке 🎉</div>'; return; }
   wrap.innerHTML = head + `<table><thead><tr><th>Ученик</th><th>Материал</th><th>Сдано</th><th>Попытка</th><th>Система насчитала</th><th></th></tr></thead><tbody>
-    ${list.map(p=>`<tr style="cursor:pointer" onclick="rvOpen('${p.enrollment_id}','${p.lesson_id}')">
+    ${list.map(p=>`<tr style="cursor:pointer" onclick="if(!ntCtrl(event,'${rvUrl(p.enrollment_id,p.lesson_id)}')) rvOpen('${p.enrollment_id}','${p.lesson_id}')" ${ntAttrs(rvUrl(p.enrollment_id,p.lesson_id))}>
       <td><b>${esc(studentName(p.student_id))}</b></td>
       <td>${esc(hwCode(p.course_slug, p.unit_no, p.lesson_title))}</td>
       <td>${rvAgo(p.submitted_at)}<div>${p.late?'<span class="pill r">с опозданием</span>':'<span class="pill g">вовремя</span>'}
@@ -3855,6 +3918,9 @@ async function rvOpen(enr, lesson, extra){
     const args={ p_enrollment_id:enr, p_lesson_id:lesson };
     const [grade, blocks]=await Promise.all([ rpc('classroom_lesson_grade', args), rpc('classroom_run_blocks', args) ]);
     RV.grade=grade||{};
+    if(!RV.row.student_id){ try{ const { data:en } = await sb.from('classroom_enrollments').select('student_id').eq('id', enr).maybeSingle(); if(en) RV.row.student_id=en.student_id; }catch(e){} }
+    if(!RV.row.lesson_title) for(const c of LIBRARY){ const l=(c.lessons||[]).find(x=>x.id===lesson); if(l){ Object.assign(RV.row, { lesson_title:l.name, unit_no:l.unit_no, course_slug:c.slug }); break; } }
+    if(RV.row.attempt==null) RV.row.attempt=(RV.grade.history||[]).filter(h=>h.event==='submitted').length||1;
     (blocks||[]).sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));
     // номера — как у ученика: «Задание N» на его экране
     let n=0;
@@ -4017,7 +4083,7 @@ function rvRenderPage(){
       <button class="btn sec sm" onclick="rvClose()">← Все на проверке</button>
       <div><b>${esc(studentName(r.student_id))}</b> · ${esc(title)}
         <div class="muted" style="font-size:13px">сдано ${g.submitted_at?rvAgo(g.submitted_at):'—'} · ${r.late?'<span style="color:var(--bad)">с опозданием</span>':'вовремя'} · ${r.attempt>1?r.attempt+'-я попытка, после переделки':'1-я попытка'}
-        ${r.student_id?` · <a href="#" onclick="openStudent('${r.student_id}'); return false">карточка ученика</a>`:''}</div></div></div>
+        ${r.student_id?` · <a href="#student=${r.student_id}">карточка ученика</a>`:''}</div></div></div>
     <div class="card" style="padding:10px 14px;margin-bottom:12px">${rvCmBtn(null,null)} <span class="muted" style="font-size:13px">Комментарий ко всей домашке</span>${rvCmBox(null,null)}
       <span style="float:right">${fbBtn('all','rvRedraw')} <span class="muted" style="font-size:13px">Сообщение методисту</span></span>${fbBox('all', RV.row.lesson_id, 'review', RV.row.enrollment_id, 'rvRedraw')}</div>
     <div class="row" style="margin-bottom:12px;align-items:center;gap:10px;flex-wrap:wrap"><div class="rv-seg"><button class="${RV.only?'':'on'}" onclick="RV.only=false; rvRenderPage()">Все задания</button><button class="${RV.only?'on':''}" onclick="RV.only=true; rvRenderPage()">Только ошибки и что оценить</button></div>
@@ -4098,8 +4164,23 @@ function bellItems(){
   out.sort((a,b)=>new Date(b.p.submitted_at)-new Date(a.p.submitted_at));
   // ответы методиста на ⚑ — за две недели, непрочитанные сверху
   const seen=bellSeen();
-  return FB_MINE.map(f=>({ t:`${f.status==='fixed'?'✅ Методист исправил':'💬 Методист ответил'}: ${hwCode(f.course_slug,f.unit_no,f.lesson_title)}${f.block_no?' · задание '+f.block_no:''} — ${f.reply||(f.status==='fixed'?'исправлено':'не ошибка')}`,
-    w:rvAgo(f.resolved_at), f, fresh:!seen.includes(f.id) })).sort((a,b)=>b.fresh-a.fresh).concat(out);
+  const mic=NOMIC.map(n=>{ const p=n.payload||{}, r=Number(p.repeat)||1;
+    return { t:`🎤 ${n.title} — в ${hwCode(p.course_slug,p.unit_no,p.lesson_title)} ${p.blocks>1?'ответил(а) текстом '+p.blocks+' '+plural(p.blocks,'задание','задания','заданий'):'ответил(а) текстом'}`,
+      warn: r>=3 ? `Уже ${r}-я домашка за месяц без микрофона — попросите ассистентов связаться с родителями.` : '',
+      w:rvAgo(n.created_at), n, fresh:!n.read_at }; });
+  return mic.concat(FB_MINE.map(f=>({ t:`${f.status==='fixed'?'✅ Методист исправил':'💬 Методист ответил'}: ${hwCode(f.course_slug,f.unit_no,f.lesson_title)}${f.block_no?' · задание '+f.block_no:''} — ${f.reply||(f.status==='fixed'?'исправлено':'не ошибка')}`,
+    w:rvAgo(f.resolved_at), f, fresh:!seen.includes(f.id) }))).sort((a,b)=>b.fresh-a.fresh).concat(out);
+}
+var NOMIC=[];
+async function bellLoadNoMic(){
+  if(!ME || !ME.teacherId) return;
+  try{
+    const { data, error } = await sb.from('classroom_notifications').select('id, title, payload, created_at, read_at')
+      .eq('recipient_kind','teacher').eq('recipient_id', ME.teacherId).eq('payload->>event','no_mic')
+      .gte('created_at', new Date(Date.now()-14*864e5).toISOString()).order('created_at', { ascending:false }).limit(50);
+    if(error) throw error; NOMIC=data||[];
+  }catch(e){ NOMIC=[]; }
+  bellRender();
 }
 var FB_MINE=[];
 function bellSeen(){ try{ return JSON.parse(localStorage.getItem('fb:seen')||'[]'); }catch(e){ return []; } }
@@ -4112,17 +4193,29 @@ async function bellLoadReplies(){
 }
 function bellRender(){
   const b=$('bellBtn'); if(!b) return;
-  const seen=bellSeen(), n=PENDING.length + FB_MINE.filter(f=>!seen.includes(f.id)).length;
+  const seen=bellSeen(), n=PENDING.length + FB_MINE.filter(f=>!seen.includes(f.id)).length + NOMIC.filter(x=>!x.read_at).length;
   b.innerHTML=`🔔${n?`<i>${n}</i>`:''}`;
   const d=$('bellDrop'); if(d && !d.classList.contains('hidden')) bellFill();
 }
 function bellFill(){
   const its=bellItems();
-  $('bellDrop').innerHTML=`<div class="bell-h">Уведомления</div>${its.map((x,i)=>`<div class="bell-it${x.fresh?' new':''}" onclick="bellGo(${i})"><div>${esc(x.t)}</div><div class="muted" style="font-size:12px">${x.w}</div></div>`).join('') || '<div class="bell-it muted">Нового нет</div>'}`;
+  $('bellDrop').innerHTML=`<div class="bell-h">Уведомления</div>${its.map((x,i)=>{ const u=bellUrl(x); return `<div class="bell-it${x.fresh?' new':''}" onclick="if(!ntCtrl(event,'${u}')) bellGo(${i})" ${ntAttrs(u)}><div>${esc(x.t)}</div>${x.warn?`<div style="color:var(--bad);font-size:13px;margin-top:3px">${esc(x.warn)}</div>`:''}<div class="muted" style="font-size:12px">${x.w}</div></div>`; }).join('') || '<div class="bell-it muted">Нового нет</div>'}`;
   window._bellItems=its;
+}
+function bellUrl(x){
+  if(x.f) return '?run='+x.f.lesson_id+'&preview=1';
+  const p=x.p || (x.n && x.n.payload) || {};
+  if(x.n && !PENDING.some(r=>r.enrollment_id===p.enrollment_id && r.lesson_id===p.lesson_id)) return '#student='+p.student_id;
+  return rvUrl(p.enrollment_id, p.lesson_id);
 }
 function bellToggle(e){ if(e) e.stopPropagation(); const d=$('bellDrop'); d.classList.toggle('hidden'); if(!d.classList.contains('hidden')) bellFill(); }
 function bellGo(i){ const x=(window._bellItems||[])[i]; $('bellDrop').classList.add('hidden'); if(!x) return;
+  if(x.n){ const p=x.n.payload||{};
+    if(!x.n.read_at){ x.n.read_at=new Date().toISOString(); sb.from('classroom_notifications').update({ read_at:x.n.read_at }).eq('id', x.n.id).then(()=>{}); }
+    bellRender();
+    if(PENDING.some(r=>r.enrollment_id===p.enrollment_id && r.lesson_id===p.lesson_id)){ switchTab('review'); rvOpen(p.enrollment_id, p.lesson_id); }
+    else if(p.student_id) openStudent(p.student_id);
+    return; }
   if(x.f){ const s=bellSeen(); if(!s.includes(x.f.id)){ s.push(x.f.id); try{ localStorage.setItem('fb:seen', JSON.stringify(s.slice(-300))); }catch(e){} }
     bellRender(); kpPreviewOpen(x.f.lesson_id); return; }
   switchTab('review'); rvOpen(x.p.enrollment_id, x.p.lesson_id); }
@@ -4537,8 +4630,9 @@ function edRedo(){
 // ---------- Библиотека плитками ----------
 // Три уровня: курсы → юниты → материалы. Тип делим переключателем,
 // а не подпапками: лишний уровень ради одного числа.
-var LIB = { level:'courses', courseId:null, unitId:null, kind:'all', unpub:false, view:'list' };
-try{ if(localStorage.getItem('lib:view')==='tiles') LIB.view='tiles'; }catch(e){}
+var LIB = { level:'courses', courseId:null, unitId:null, kind:'all', unpub:false, view:'tiles' };
+// Методист работает плитками по папкам (решение Анны 16.10); список — по кнопке «☰ Списком»
+try{ if(localStorage.getItem('lib:view2')==='list') LIB.view='list'; }catch(e){}
 
 // Обложка рисуется из названия курса: ни файлов, ни прав, ни загрузок.
 function libCover(title, tint){
@@ -4680,7 +4774,7 @@ function libRender(){
 // опубликованное и открывает урок глазами ученика — с верными ответами.
 var LIBL = { pub:'all', q:'', open:new Set(), ukind:{}, sel:new Set(), groups:{} };
 function libIsList(){ return !ME || !ME.isEditor || LIB.view!=='tiles' || !!LIBL.q.trim(); }
-function libViewSet(v){ LIB.view=v; try{ localStorage.setItem('lib:view', v); }catch(e){} libRender(); }
+function libViewSet(v){ LIB.view=v; try{ localStorage.setItem('lib:view2', v); }catch(e){} libRender(); }
 function libLVisible(l, kind){
   if((kind==='plans')!==((l.kind||'homework')==='lesson')) return false;
   if(!ME.isEditor && !l.is_published) return false;
@@ -4739,13 +4833,13 @@ function libListRender(){
     if(!ed && !units.some(x=>x.plans+x.hws)) return;
     const cids=units.flatMap(x=>x.ls.map(l=>l.id)); all.push(...cids); LIBL.groups['c:'+c.id]=cids;
     const copen=!!q || LIBL.open.has('c:'+c.id);
-    html += `<div class="libl-c" onclick="libLOpen('c:${c.id}')">${arrow(copen)}${box('c:'+c.id, cids)}<i style="background:${libTintFor(c.title)[0]}"></i>${esc(c.title)}
+    html += `<div class="libl-c" onclick="if(!ntCtrl(event,'?course=${c.id}')) libLOpen('c:${c.id}')" ${ed?ntAttrs('?course='+c.id):''}>${arrow(copen)}${box('c:'+c.id, cids)}<i style="background:${libTintFor(c.title)[0]}"></i>${esc(c.title)}
       <span class="muted small" style="font-weight:400">${units.length} ${plural(units.length,'юнит','юнита','юнитов')}</span>
       <span style="margin-left:auto">${state(units.reduce((a,x)=>a+x.drafts,0))}</span></div>`;
     if(!copen) return;
     units.forEach(x=>{
       const uopen=!!q || LIBL.open.has('u:'+x.u.id), uids=x.ls.map(l=>l.id); LIBL.groups['u:'+x.u.id]=uids;
-      html += `<div class="libl-u" onclick="libLOpen('u:${x.u.id}')">${arrow(uopen)}${box('u:'+x.u.id, uids)}<span>${esc(x.u.title)}</span>
+      html += `<div class="libl-u" onclick="if(!ntCtrl(event,'?unit=${x.u.id}')) libLOpen('u:${x.u.id}')" ${ed?ntAttrs('?unit='+x.u.id):''}>${arrow(uopen)}${box('u:'+x.u.id, uids)}<span>${esc(x.u.title)}</span>
         <span class="muted small" style="font-weight:400">планов ${x.plans} · домашек и тестов ${x.hws}</span>
         <span style="margin-left:auto">${state(x.drafts)}</span></div>`;
       if(!uopen) return;
@@ -4758,7 +4852,7 @@ function libListRender(){
           <span class="grow">${esc(l.code||l.title)}</span>
           ${(l.kind||'homework')==='test'?'<span class="pill n">тест</span>':''}${ed?(l.is_published?'<span class="pill g">опубликован</span>':'<span class="pill y">черновик</span>'):''}
           <button class="btn sec sm" onclick="kpPreviewOpen('${l.id}')" title="Глазами ученика">👁 Посмотреть</button>${open}
-          ${!ed&&(l.kind||'homework')!=='lesson'?`<button class="btn sm" onclick="asgFor(null,'${l.id}')">Задать</button>`:''}</div>`;
+          ${!ed&&(l.kind||'homework')!=='lesson'?`<button class="btn sm" onclick="if(!ntCtrl(event,'${asgUrl(null,l.id)}')) asgFor(null,'${l.id}')" ${ntAttrs(asgUrl(null,l.id))}>Задать</button>`:''}</div>`;
       }).join('') || `<div class="libl-l muted small">${q||LIBL.pub!=='all'?'ничего не подходит под фильтр':'пусто'}</div>`;
       x.ls.forEach(l=>{ LIBL.groups['l:'+l.id]=[l.id]; });
     });
@@ -6684,10 +6778,10 @@ function qcRender(){
       <td style="max-width:360px">${esc(r.body)}${r.reply?`<div class="muted small" style="margin-top:4px">ваш ответ: ${esc(r.reply)}</div>`:''}</td>
       <td style="text-align:right;min-width:300px">${r.status==='open'
         ? `<input id="qcR-${r.id}" placeholder="Ответ учителю (необязательно)" style="width:100%;margin-bottom:6px">
-           <div class="qc-act"><button class="btn sec sm" onclick="qcOpenLesson('${r.lesson_id}')">Открыть</button>
+           <div class="qc-act"><button class="btn sec sm" onclick="if(!ntCtrl(event,'?lesson=${r.lesson_id}')) qcOpenLesson('${r.lesson_id}')" ${ntAttrs('?lesson='+r.lesson_id)}>Открыть</button>
            <button class="btn sm" onclick="qcResolve('${r.id}','fixed')">Исправлено</button><button class="btn sec sm" onclick="qcResolve('${r.id}','not_error')">Не ошибка</button></div>`
         : `<span class="pill ${r.status==='fixed'?'g':'n'}">${r.status==='fixed'?'исправлено':'не ошибка'}</span>
-           <div class="qc-act" style="margin-top:6px"><button class="btn sec sm" onclick="qcOpenLesson('${r.lesson_id}')">Открыть</button>
+           <div class="qc-act" style="margin-top:6px"><button class="btn sec sm" onclick="if(!ntCtrl(event,'?lesson=${r.lesson_id}')) qcOpenLesson('${r.lesson_id}')" ${ntAttrs('?lesson='+r.lesson_id)}>Открыть</button>
            <button class="btn sec sm" onclick="qcResolve('${r.id}','open')">Вернуть в новые</button></div>`}</td></tr>`).join('')}</tbody></table></div>`
       : `<div class="empty">${QC.status==='open'?'Новых сообщений нет 🎉':'Разобранных пока нет.'}</div>`;
     body += '<p class="muted small" style="margin-top:8px">Учитель получит ответ в колокольчик: «исправлено» или «не ошибка» и ваш текст, если он есть. Ученикам, которые уже начали домашку, правка не дойдёт — у них своя копия.</p>';
@@ -6701,7 +6795,7 @@ function qcRender(){
         <td><span class="pill r">${r.rate}%</span> <span class="muted small">${r.wrong} из ${r.answers}</span>
           ${r.teacher_fixed?`<div class="small" style="color:var(--bad);margin-top:3px">учителя поправили на «верно»: ${r.teacher_fixed}</div>`:''}</td>
         <td>${qcAns(b, r.item, r.top_wrong)}</td>
-        <td style="text-align:right"><button class="btn sec sm" onclick="qcOpenLesson('${r.lesson_id}')">Открыть</button></td></tr>`; }).join('')}</tbody></table></div>`
+        <td style="text-align:right"><button class="btn sec sm" onclick="if(!ntCtrl(event,'?lesson=${r.lesson_id}')) qcOpenLesson('${r.lesson_id}')" ${ntAttrs('?lesson='+r.lesson_id)}>Открыть</button></td></tr>`; }).join('')}</tbody></table></div>`
       : '<div class="empty">Пока таких заданий нет.</div>';
     body += '<p class="muted small" style="margin-top:8px">Сюда попадает пункт, если система ставит «неверно» 60% учеников и больше (и ответили хотя бы 5). Частый неверный ответ и поправки учителей подсказывают, не в ключе ли ошибка.</p>';
   }
@@ -6760,7 +6854,7 @@ async function boot(){
   }
   if(ME.isEditor){ const q=document.querySelector('[data-tab=quality]'); if(q) q.style.display=''; qcBadge(); }
   // «Уроки» доступны и преподавателю: редактора он не видит, а вести урок должен
-  await Promise.all([ loadStudents(), loadLibrary(), loadPending(), bellLoadReplies() ]);
+  await Promise.all([ loadStudents(), loadLibrary(), loadPending(), bellLoadReplies(), bellLoadNoMic() ]);
   renderStudents();
   route();
 
@@ -6769,7 +6863,8 @@ async function boot(){
   const _tab = _p.get('tab');
   if(_tab==='quality' && !ME.isEditor){}
   else if(_tab && $('tab-'+_tab)) switchTab(_tab);
-  if(_tab==='assign' && _p.get('assign')) asgFor(null, _p.get('assign'));
+  if(_tab==='assign' && (_p.get('assign') || _p.get('student'))) asgFor(_p.get('student')||null, _p.get('assign')||null);
+  if(_tab==='review' && _p.get('rv')){ const [e,l]=_p.get('rv').split('.'); if(e && l) rvOpen(e, l); }
   else if((_p.get('course') || _p.get('unit')) && ME.isEditor) switchTab('library');
 
   // Пришли по ссылке на материал — открываем библиотеку прямо на нём
