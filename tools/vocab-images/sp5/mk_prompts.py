@@ -13,7 +13,7 @@ START = int(__import__('sys').argv[1]) if len(__import__('sys').argv) > 1 else 1
 for i, (title, note, ws) in enumerate(S, 1):
     if i < START: continue
     out += [f'**{i}** — {title}', '```', STYLE, '',
-            f'Сетка {GRID[len(ws)]}, ровно {len(ws)} картинок. {note}']
+            f'Сетка {GRID[len(ws)]}, ровно {len(ws)} {"картинки" if len(ws) in (2, 3, 4) else "картинок"}. {note}']
     out += [f'{j}. {cap} — {what}' for j, (_, cap, what) in enumerate(ws, 1)]
     out += ['```', '']
 if START >= 79:  # листы по 6 (16.10.2026) — отдельным файлом, прежний остаётся как был
