@@ -167,7 +167,7 @@ def outline_only(png):
     im[..., 3] = np.where(solid, 255, 0).astype(np.uint8)
     Image.fromarray(im).save(png)
 
-def cut(sheet, path, out='out'):
+def cut(sheet, path, out='out', raw=False):
     title, note, items = S[sheet - 1]
     lay = LAYOUT_SHEET.get(sheet) or LAYOUT[len(items)]
     rows = split_rows(path, bands(path), len(lay))
@@ -212,6 +212,8 @@ def cut(sheet, path, out='out'):
             y0, y1 = bands(src)[0]
             wrow(src, y0, y1, [word], f'{out}/{sheet}', gap=400, min_area=150)
             report.append(f'  {word}: заменён картинкой {f}')
+    if raw:  # только вырезка для hires.py, без очистки
+        return
     for _, t, _ in items:
         if t in OUTLINE_ONLY:
             outline_only(f'{out}/{sheet}/{fname(t)}'); report.append(f'  {t}: по контуру')
@@ -370,6 +372,8 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
     Image.fromarray(im.astype(np.uint8), 'RGBA').save(p)
 
 if __name__ == '__main__':
+    import hires
     a = sys.argv[1:]
     for i in range(0, len(a), 2):
         cut(int(a[i]), a[i + 1])
+        hires.make(sys.modules[__name__], int(a[i]), a[i + 1])  # out512/<лист>/
