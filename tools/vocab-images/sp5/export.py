@@ -12,7 +12,10 @@ DST = '/home/user/wowspeak-platform/public/trainer/media/spotlight5'
 URL = 'https://app.wowteach.ru/trainer/media/spotlight5/'
 # не прошли проверку (дети, алкоголь). culture, street parade, Thanksgiving (и carnival из Spotlight 4)
 # перерисованы листом замен images/177.webp → out/78, выложены 16.10.2026 вручную; nightclub ждёт
-SKIP = {'culture', 'street parade', 'nightclub', 'Thanksgiving'}
+SKIP = {'culture', 'street parade', 'Thanksgiving',
+        # 17.10.2026: не прошли проверку (ночной клуб со взрослыми, мёд вместо keep out) и рыцарь с мечом — ждёт решения
+        'not my kind of place', 'keep out', 'face (difficulty)'}
+# nightclub перерисован на листе 142 (вход без людей) — выкладывается оттуда; лист 78 больше не выгружать
 # омонимы: подпись → начало названия колоды, где этот смысл
 HOMO = {'great (excellent)': '2c', 'great (big)': '3a', 'mean': '5d', 'mean (signify)': '8c',
         'mean (intend)': '9a', 'top (of a tower)': '6d', 'top (of a box)': 'Across the Curriculum 6:',
