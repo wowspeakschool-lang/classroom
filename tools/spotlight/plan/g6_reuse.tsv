@@ -1,0 +1,1057 @@
+module	section	term	translation	reuse_id	image	reason
+Module 1	1a Family Members	age	возраст	2273	reuse	совпал перевод
+Module 1	1a Family Members	aunt	тетя	303	reuse	совпал перевод
+Module 1	1a Family Members	big	большой	520	reuse	совпал перевод
+Module 1	1a Family Members	brother	брат	422	reuse	совпал перевод
+Module 1	1a Family Members	child	ребенок	1437	reuse	совпал перевод
+Module 1	1a Family Members	children	дети	1438	reuse	совпал перевод
+Module 1	1a Family Members	cousin	двоюродный брат/сестра	426	reuse	совпал перевод
+Module 1	1a Family Members	curly	кудрявый	2732	reuse	совпал перевод
+Module 1	1a Family Members	daughter	дочь	299	reuse	совпал перевод
+Module 1	1a Family Members	dad	папа	414	reuse	совпал перевод
+Module 1	1a Family Members	fair	светлый	2735	reuse	совпал перевод
+Module 1	1a Family Members	fat	толстый	1733	reuse	совпал перевод
+Module 1	1a Family Members	grey	седой		new	в тренажёре «серый», у нас «седой»
+Module 1	1a Family Members	hair	волосы	63	reuse	совпал перевод
+Module 1	1a Family Members	height	рост	5319	reuse	совпал перевод
+Module 1	1a Family Members	husband	муж	1442	reuse	совпал перевод
+Module 1	1a Family Members	long	длинный	523	reuse	совпал перевод
+Module 1	1a Family Members	middle-aged	среднего возраста	2739	reuse	совпал перевод
+Module 1	1a Family Members	mum	мама	412	reuse	совпал перевод
+Module 1	1a Family Members	old	старый	525	reuse	совпал перевод
+Module 1	1a Family Members	parents	родители	294	reuse	совпал перевод
+Module 1	1a Family Members	short	короткий	526	reuse	совпал перевод
+Module 1	1a Family Members	sister	сестра	423	reuse	совпал перевод
+Module 1	1a Family Members	slim	стройный	1739	reuse	совпал перевод
+Module 1	1a Family Members	son	сын	298	reuse	совпал перевод
+Module 1	1a Family Members	straight	прямые (о волосах)	2741	reuse	совпал перевод
+Module 1	1a Family Members	twins	близнецы		new	в тренажёре нет
+Module 1	1a Family Members	uncle	дядя	302	reuse	совпал перевод
+Module 1	1a Family Members	wavy	волнистые (о волосах)	567	reuse	совпал перевод
+Module 1	1a Family Members	weight	вес		new	в тренажёре нет
+Module 1	1a Family Members	wife	жена	1448	reuse	совпал перевод
+Module 1	1a Family Members	young	молодой	1741	reuse	совпал перевод
+Module 1	1a Family Members	be in one's early sixties	быть немногим старше 60		new	в тренажёре нет
+Module 1	1a Family Members	be in late thirties	быть немногим младше 40		new	в тренажёре нет
+Module 1	1a Family Members	be in mid twenties	быть в возрасте 25 лет		new	в тренажёре нет
+Module 1	1a Family Members	be married to smb.	быть женатым, замужем за кем-либо		new	в тренажёре нет
+Module 1	1a Family Members	facial features	черты лица	5315	reuse	совпал перевод
+Module 1	1b Who are you?	address	адрес	2272	reuse	совпал перевод
+Module 1	1b Who are you?	camera	фотоаппарат	684	reuse	совпал перевод
+Module 1	1b Who are you?	computer	компьютер	685	reuse	совпал перевод
+Module 1	1b Who are you?	nationality	национальность	5063	reuse	совпал перевод
+Module 1	1b Who are you?	postcode	почтовый индекс		new	в тренажёре нет
+Module 1	1b Who are you?	skateboard	скейтборд	76	reuse	совпал перевод
+Module 1	1b Who are you?	surname	фамилия	2279	reuse	совпал перевод
+Module 1	1b Who are you?	watch	часы	282	reuse	совпал перевод
+Module 1	1b Who are you?	alarm clock	будильник		new	в тренажёре нет
+Module 1	1b Who are you?	credit card	кредитная карта	6051	reuse	совпал перевод
+Module 1	1b Who are you?	date of birth	дата рождения		new	в тренажёре нет
+Module 1	1b Who are you?	driving licence	водительское удостоверение		new	в тренажёре нет
+Module 1	1b Who are you?	expiry date	дата истечения срока действия		new	в тренажёре нет
+Module 1	1b Who are you?	full name	полное имя	5339	reuse	совпал перевод
+Module 1	1b Who are you?	home address	домашний адрес		new	в тренажёре нет
+Module 1	1b Who are you?	identity card	удостоверение личности		new	в тренажёре нет
+Module 1	1b Who are you?	identification number	идентификационный номер		new	в тренажёре нет
+Module 1	1b Who are you?	join a club	вступать в клуб	3199	reuse	совпал перевод
+Module 1	1b Who are you?	membership card	членский билет (карта)		new	в тренажёре нет
+Module 1	1b Who are you?	telephone number	телефонный номер		new	в тренажёре нет
+Module 1	1b Who are you?	register a library	записываться в библиотеку		new	в тренажёре нет
+Module 1	1c My Country	Brazil	Бразилия	373	reuse	совпал перевод
+Module 1	1c My Country	Brazilian	бразильский/бразилец	1421	reuse	совпал перевод
+Module 1	1c My Country	Britain	Великобритания		new	в тренажёре нет
+Module 1	1c My Country	British	британский/британец	5056	reuse	совпал перевод
+Module 1	1c My Country	Chile	Чили	374	reuse	совпал перевод
+Module 1	1c My Country	Chilean	чилийский/чилиец		new	в тренажёре нет
+Module 1	1c My Country	compass	компас	4366	reuse	совпал перевод
+Module 1	1c My Country	desert	пустыня	712	reuse	совпал перевод
+Module 1	1c My Country	east	восток	4370	reuse	совпал перевод
+Module 1	1c My Country	exactly	точно	5627	reuse	совпал перевод
+Module 1	1c My Country	German	немецкий/немец		new	в тренажёре нет
+Module 1	1c My Country	Germany	Германия	4799	reuse	совпал перевод
+Module 1	1c My Country	include	включать		none	связка / отвлечённое слово
+Module 1	1c My Country	Japan	Япония	4803	reuse	совпал перевод
+Module 1	1c My Country	Japanese	японский/японец	5061	reuse	совпал перевод
+Module 1	1c My Country	location	местонахождение		new	в тренажёре нет
+Module 1	1c My Country	mountains	горы		new	в тренажёре нет
+Module 1	1c My Country	north	север	4367	reuse	совпал перевод
+Module 1	1c My Country	north-east	северо-восток		new	в тренажёре нет
+Module 1	1c My Country	north-west	северо-запад		new	в тренажёре нет
+Module 1	1c My Country	Poland	Польша	4792	reuse	совпал перевод
+Module 1	1c My Country	Polish	польский/поляк		new	в тренажёре нет
+Module 1	1c My Country	Russia	Россия	1428	reuse	совпал перевод
+Module 1	1c My Country	Russian	русский/русский	1429	reuse	совпал перевод
+Module 1	1c My Country	south	юг	4368	reuse	совпал перевод
+Module 1	1c My Country	Spain	Испания	379	reuse	совпал перевод
+Module 1	1c My Country	Spanish	испанский/испанец	1431	reuse	совпал перевод
+Module 1	1c My Country	valley	долина	2287	reuse	совпал перевод
+Module 1	1c My Country	west	запад	4369	reuse	совпал перевод
+Module 1	1d Culture Corner	Belfast	Белфаст	6169	reuse	совпал перевод
+Module 1	1d Culture Corner	Cardiff	Кардифф		new	в тренажёре нет
+Module 1	1d Culture Corner	country	страна	5001	reuse	совпал перевод
+Module 1	1d Culture Corner	currency	валюта		new	в тренажёре нет
+Module 1	1d Culture Corner	Edinburgh	Эдинбург	6173	reuse	совпал перевод
+Module 1	1d Culture Corner	England	Англия	4796	reuse	совпал перевод
+Module 1	1d Culture Corner	Ireland	Ирландия	4801	reuse	совпал перевод
+Module 1	1d Culture Corner	London	Лондон	4318	reuse	совпал перевод
+Module 1	1d Culture Corner	map	карта	337	reuse	совпал перевод
+Module 1	1d Culture Corner	population	население	3320	reuse	совпал перевод
+Module 1	1d Culture Corner	Scotland	Шотландия	4808	reuse	совпал перевод
+Module 1	1d Culture Corner	Wales	Уэльс	6238	reuse	совпал перевод
+Module 1	1d Culture Corner	as well as	а также, так же как		none	связка / отвлечённое слово
+Module 1	1d Culture Corner	British pound	британский фунт стерлингов (£)		new	в тренажёре нет
+Module 1	1d Culture Corner	the Union Jack	флаг Великобритании	5133	reuse	совпал перевод
+Module 1	1d Culture Corner	the United Kingdom	Соединенное Королевство		new	в тренажёре нет
+Module 1	English in Use/Extensive Reading 1	diameter	диаметр		new	в тренажёре нет
+Module 1	English in Use/Extensive Reading 1	distance	расстояние		new	в тренажёре нет
+Module 1	English in Use/Extensive Reading 1	Earth	Земля (планета)		new	в тренажёре нет
+Module 1	English in Use/Extensive Reading 1	greet	приветствовать		new	в тренажёре нет
+Module 1	English in Use/Extensive Reading 1	per cent	процент		new	в тренажёре нет
+Module 1	English in Use/Extensive Reading 1	total	общий, полный		none	связка / отвлечённое слово
+Module 1	English in Use/Extensive Reading 1	conditions suitable for life	условия, пригодные для жизни		new	в тренажёре нет
+Module 1	English in Use/Extensive Reading 1	introduce smb to smb	представлять кого-либо кому-либо		new	в тренажёре нет
+Module 1	English in Use/Extensive Reading 1	solar system	солнечная система	4381	reuse	совпал перевод
+Module 1	English in Use/Extensive Reading 1	surface area	площадь поверхности		new	в тренажёре нет
+Module 2	2a Happy Times	April	апрель	624	reuse	совпал перевод
+Module 2	2a Happy Times	at midnight	в полночь		new	в тренажёре нет
+Module 2	2a Happy Times	at midday	в полдень		new	в тренажёре нет
+Module 2	2a Happy Times	August	август	628	reuse	совпал перевод
+Module 2	2a Happy Times	birthday	день рождения		new	в тренажёре нет
+Module 2	2a Happy Times	celebrate	праздновать	4235	reuse	совпал перевод
+Module 2	2a Happy Times	December	декабрь	632	reuse	совпал перевод
+Module 2	2a Happy Times	eighteenth	восемнадцатый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	eighth	восьмой		digits	порядковое число — цифрами
+Module 2	2a Happy Times	eleventh	одиннадцатый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	event	событие		none	связка / отвлечённое слово
+Module 2	2a Happy Times	February	февраль	622	reuse	совпал перевод
+Module 2	2a Happy Times	first	первый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	fifteenth	пятнадцатый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	fifth	пятый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	fortieth	сороковой		digits	порядковое число — цифрами
+Module 2	2a Happy Times	forty-fourth	сорок четвертый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	fourteenth	четырнадцатый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	fourth	четвертый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	Friday	пятница	618	reuse	совпал перевод
+Module 2	2a Happy Times	graduation	окончание учебного заведения		new	в тренажёре нет
+Module 2	2a Happy Times	invitation	приглашение		new	в тренажёре нет
+Module 2	2a Happy Times	January	январь	621	reuse	совпал перевод
+Module 2	2a Happy Times	July	июль	627	reuse	совпал перевод
+Module 2	2a Happy Times	June	июнь	626	reuse	совпал перевод
+Module 2	2a Happy Times	March	март	623	reuse	совпал перевод
+Module 2	2a Happy Times	May	май	625	reuse	совпал перевод
+Module 2	2a Happy Times	Monday	понедельник	614	reuse	совпал перевод
+Module 2	2a Happy Times	nineteenth	девятнадцатый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	ninth	девятый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	noon	полдень		new	в тренажёре нет
+Module 2	2a Happy Times	November	ноябрь	631	reuse	совпал перевод
+Module 2	2a Happy Times	occasion	случай		none	связка / отвлечённое слово
+Module 2	2a Happy Times	o'clock	на часах, ровно	1550	reuse	совпал перевод
+Module 2	2a Happy Times	October	октябрь	630	reuse	совпал перевод
+Module 2	2a Happy Times	Saturday	суббота	619	reuse	совпал перевод
+Module 2	2a Happy Times	second	второй		digits	порядковое число — цифрами
+Module 2	2a Happy Times	sixteenth	шестнадцатый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	sixth	шестой		digits	порядковое число — цифрами
+Module 2	2a Happy Times	September	сентябрь	629	reuse	совпал перевод
+Module 2	2a Happy Times	seventeenth	семнадцатый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	seventh	седьмой		digits	порядковое число — цифрами
+Module 2	2a Happy Times	Sunday	воскресенье	620	reuse	совпал перевод
+Module 2	2a Happy Times	take place	проходить		new	в тренажёре нет
+Module 2	2a Happy Times	tenth	десятый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	third	третий		digits	порядковое число — цифрами
+Module 2	2a Happy Times	thirteenth	тринадцатый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	thirtieth	тридцатый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	thirty-second	тридцать второй		digits	порядковое число — цифрами
+Module 2	2a Happy Times	Thursday	четверг	617	reuse	совпал перевод
+Module 2	2a Happy Times	Tuesday	вторник	615	reuse	совпал перевод
+Module 2	2a Happy Times	twelfth	двенадцатый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	twentieth	двадцатый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	twenty-first	двадцать первый		digits	порядковое число — цифрами
+Module 2	2a Happy Times	Wednesday	среда	616	reuse	совпал перевод
+Module 2	2a Happy Times	a quarter past	четверть часа		new	в тренажёре нет
+Module 2	2a Happy Times	a quarter to	без четверти		new	в тренажёре нет
+Module 2	2a Happy Times	half past	половина		new	в тренажёре нет
+Module 2	2a Happy Times	Halloween holiday	праздник Хэллоуин		new	в тренажёре нет
+Module 2	2a Happy Times	invite smb. to a party	приглашать кого-либо на вечеринку		new	в тренажёре нет
+Module 2	2a Happy Times	trick or treat	угости, а не то пожалеешь		new	в тренажёре нет
+Module 2	2b My place	armchair	кресло	52	reuse	совпал перевод
+Module 2	2b My place	basin	таз		new	в тренажёре нет
+Module 2	2b My place	bathroom	ванная комната	1459	reuse	совпал перевод
+Module 2	2b My place	bathtub	ванна		new	в тренажёре нет
+Module 2	2b My place	bedroom	спальня	260	reuse	совпал перевод
+Module 2	2b My place	bookcase	книжный шкаф	268	reuse	совпал перевод
+Module 2	2b My place	carpet	ковер	553	reuse	совпал перевод
+Module 2	2b My place	ceiling	потолок	1935	reuse	совпал перевод
+Module 2	2b My place	cooker	кухонная плита	5196	reuse	совпал перевод
+Module 2	2b My place	cupboard	шкаф для посуды (буфет)	5861	reuse	совпал перевод
+Module 2	2b My place	cushion	диванная подушка	554	reuse	совпал перевод
+Module 2	2b My place	curtain	штора	4531	reuse	совпал перевод
+Module 2	2b My place	expensive	дорогой	728	reuse	совпал перевод
+Module 2	2b My place	fireplace	камин	5232	reuse	совпал перевод
+Module 2	2b My place	floor	пол	537	reuse	совпал перевод
+Module 2	2b My place	flower	цветок	100	reuse	совпал перевод
+Module 2	2b My place	fridge	холодильник	549	reuse	совпал перевод
+Module 2	2b My place	kitchen	кухня	264	reuse	совпал перевод
+Module 2	2b My place	mirror	зеркало	51	reuse	совпал перевод
+Module 2	2b My place	newspaper	газета	1644	reuse	совпал перевод
+Module 2	2b My place	painting	картина	269	reuse	совпал перевод
+Module 2	2b My place	shelf	полка	2680	reuse	совпал перевод
+Module 2	2b My place	sink	раковина	990	reuse	совпал перевод
+Module 2	2b My place	study	кабинет		new	в тренажёре нет
+Module 2	2b My place	vase	ваза		new	в тренажёре нет
+Module 2	2b My place	wardrobe	гардероб	5218	reuse	совпал перевод
+Module 2	2b My place	coffee table	журнальный столик	5211	reuse	совпал перевод
+Module 2	2b My place	dining room	столовая	263	reuse	совпал перевод
+Module 2	2b My place	do one's best	делать все от себя зависящее		new	в тренажёре нет
+Module 2	2b My place	living room	гостиная	261	reuse	совпал перевод
+Module 2	2b My place	move house	переезжать	2724	reuse	совпал перевод
+Module 2	2b My place	give smb. a hand	помогать кому-либо		new	в тренажёре нет
+Module 2	2b My place	Watch out!	Осторожно!		new	в тренажёре нет
+Module 2	2b My place	Calm down!	Успокойся!		new	в тренажёре нет
+Module 2	2c My neighbourhood	aspirin	аспирин	5964	reuse	совпал перевод
+Module 2	2c My neighbourhood	baker's	булочная	4528	reuse	совпал перевод
+Module 2	2c My neighbourhood	bank	банк	332	reuse	совпал перевод
+Module 2	2c My neighbourhood	café	кафе	26	reuse	совпал перевод
+Module 2	2c My neighbourhood	chemist's	аптека	873	reuse	совпал перевод
+Module 2	2c My neighbourhood	greengrocer's	овощной магазин	876	reuse	совпал перевод
+Module 2	2c My neighbourhood	library	библиотека	336	reuse	совпал перевод
+Module 2	2c My neighbourhood	neighbourhood	окрестности		new	в тренажёре нет
+Module 2	2c My neighbourhood	newsagent's	газетный киоск	877	reuse	совпал перевод
+Module 2	2c My neighbourhood	stamp	марка	5108	reuse	совпал перевод
+Module 2	2c My neighbourhood	supermarket	супермаркет	340	reuse	совпал перевод
+Module 2	2c My neighbourhood	vegetables	овощи	319	reuse	совпал перевод
+Module 2	2c My neighbourhood	bus station	автовокзал	333	reuse	совпал перевод
+Module 2	2c My neighbourhood	coffee shop	кафетерий		new	в тренажёре нет
+Module 2	2c My neighbourhood	pet shop	зоомагазин		new	в тренажёре нет
+Module 2	2c My neighbourhood	post office	почта	753	reuse	совпал перевод
+Module 2	2c My neighbourhood	sports shop	спортивный магазин	879	reuse	совпал перевод
+Module 2	2c My neighbourhood	teddy bear	плюшевый медведь (игрушка)	5082	reuse	совпал перевод
+Module 2	2c My neighbourhood	toy shop	магазин игрушек		new	в тренажёре нет
+Module 2	2d Culture Corner	avenue	проспект		new	в тренажёре нет
+Module 2	2d Culture Corner	boulevard	бульвар		new	в тренажёре нет
+Module 2	2d Culture Corner	lane	переулок		new	в тренажёре нет
+Module 2	2d Culture Corner	place	площадь		new	в тренажёре «место», у нас «площадь»
+Module 2	2d Culture Corner	road	шоссе		new	в тренажёре нет
+Module 2	2d Culture Corner	street	улица	30	reuse	совпал перевод
+Module 2	2d Culture Corner	pavement	тротуар		new	в тренажёре нет
+Module 2	2d Culture Corner	narrow	узкий		new	в тренажёре нет
+Module 2	2d Culture Corner	power	власть, сила		new	в тренажёре «энергия», у нас «власть, сила»
+Module 2	2d Culture Corner	store	магазин		new	в тренажёре «хранить», у нас «магазин»
+Module 2	2d Culture Corner	fashionable clothes	модная одежда		new	в тренажёре нет
+Module 2	2d Culture Corner	outdoor café	уличное кафе		new	в тренажёре нет
+Module 2	English in Use/Extensive Reading 2	come over	приезжать		new	в тренажёре нет
+Module 2	English in Use/Extensive Reading 2	choose	выбирать	3471	reuse	совпал перевод
+Module 2	English in Use/Extensive Reading 2	heating	отопление	2416	reuse	совпал перевод
+Module 2	English in Use/Extensive Reading 2	measurements	измерения		new	в тренажёре нет
+Module 2	English in Use/Extensive Reading 2	plumber	водопроводчик		new	в тренажёре нет
+Module 2	English in Use/Extensive Reading 2	a scale of a map	масштаб карты		new	в тренажёре нет
+Module 2	English in Use/Extensive Reading 2	at the bottom	внизу		new	в тренажёре нет
+Module 2	English in Use/Extensive Reading 2	heel and toe	от пятки до мыска (стопа)		new	в тренажёре нет
+Module 2	English in Use/Extensive Reading 2	measure the distance	измерять расстояние		new	в тренажёре нет
+Module 2	English in Use/Extensive Reading 2	requiring services	службы по вызову		none	связка / отвлечённое слово
+Module 2	English in Use/Extensive Reading 2	the tap is leaking	кран течет		new	в тренажёре нет
+Module 2	English in Use/Extensive Reading 2	What's up?	Что случилось?		none	связка / отвлечённое слово
+Module 3	3a Road safety	annoy	досаждать, раздражать		new	в тренажёре нет
+Module 3	3a Road safety	block	загораживать		new	в тренажёре «заблокировать», у нас «загораживать»
+Module 3	3a Road safety	brakes	тормоза		new	в тренажёре нет
+Module 3	3a Road safety	check	проверять	4635	reuse	совпал перевод
+Module 3	3a Road safety	clear	свободный		new	в тренажёре нет
+Module 3	3a Road safety	cross	пересекать	1924	reuse	совпал перевод
+Module 3	3a Road safety	dangerous	опасный	657	reuse	совпал перевод
+Module 3	3a Road safety	driver	водитель		new	в тренажёре нет
+Module 3	3a Road safety	enter	входить		new	в тренажёре нет
+Module 3	3a Road safety	flow of	поток чего-либо		none	связка / отвлечённое слово
+Module 3	3a Road safety	handgrip	поручень		new	в тренажёре нет
+Module 3	3a Road safety	kerb	обочина		new	в тренажёре нет
+Module 3	3a Road safety	park	парковать(ся)		new	в тренажёре «парк», у нас «парковать(ся)»
+Module 3	3a Road safety	pedestrian	пешеход		new	в тренажёре нет
+Module 3	3a Road safety	push	толкать		new	в тренажёре нет
+Module 3	3a Road safety	ride	ехать	595	reuse	совпал перевод
+Module 3	3a Road safety	safe	безопасный, в безопасности	731	reuse	совпал перевод
+Module 3	3a Road safety	traffic	движение	2513	reuse	совпал перевод
+Module 3	3a Road safety	use	использовать	5507	reuse	совпал перевод
+Module 3	3a Road safety	tyre	шина		new	в тренажёре нет
+Module 3	3a Road safety	back seat	заднее сиденье		new	в тренажёре нет
+Module 3	3a Road safety	bike lane	велосипедная дорожка		new	в тренажёре нет
+Module 3	3a Road safety	bicycle helmet	велосипедный шлем		new	в тренажёре нет
+Module 3	3a Road safety	lean out of the window	высовываться из окна		new	в тренажёре нет
+Module 3	3a Road safety	look both ways	смотреть в обе стороны		new	в тренажёре нет
+Module 3	3a Road safety	on foot	пешком	2309	reuse	совпал перевод
+Module 3	3a Road safety	parking zone	парковка		new	в тренажёре нет
+Module 3	3a Road safety	seat belt	ремень безопасности		new	в тренажёре нет
+Module 3	3a Road safety	traffic lights	светофор		new	в тренажёре нет
+Module 3	3a Road safety	traffic sign	дорожный знак		new	в тренажёре нет
+Module 3	3a Road safety	traffic warden	дорожный инспектор, регулировщик		new	в тренажёре нет
+Module 3	3a Road safety	zebra crossing	пешеходный переход, «зебра»		new	в тренажёре нет
+Module 3	3b On the move	careful	осторожный	2743	reuse	совпал перевод
+Module 3	3b On the move	excellent	отличный		new	в тренажёре нет
+Module 3	3b On the move	gallery	галерея	3087	reuse	совпал перевод
+Module 3	3b On the move	perfect	превосходный	1909	reuse	совпал перевод
+Module 3	3b On the move	plane	самолет	228	reuse	совпал перевод
+Module 3	3b On the move	remember	помнить	1507	reuse	совпал перевод
+Module 3	3b On the move	train	поезд	232	reuse	совпал перевод
+Module 3	3b On the move	be careful	будь осторожен		new	в тренажёре нет
+Module 3	3b On the move	draw a map	рисовать карту		new	в тренажёре нет
+Module 3	3b On the move	driving school	автошкола		new	в тренажёре нет
+Module 3	3b On the move	go straight on	идти прямо		new	в тренажёре нет
+Module 3	3b On the move	go towards	идти по направлению к		new	в тренажёре нет
+Module 3	3b On the move	turn green	смениться на зеленый		new	в тренажёре нет
+Module 3	3b On the move	turn right/left	повернуть направо/налево		new	в тренажёре нет
+Module 3	3c Hot wheels	bring (brought)	приносить	5897	reuse	совпал перевод
+Module 3	3c Hot wheels	deserve	заслуживать		new	в тренажёре нет
+Module 3	3c Hot wheels	fan	фанат, болельщик	2185	reuse	совпал перевод
+Module 3	3c Hot wheels	fast	быстрый	658	reuse	совпал перевод
+Module 3	3c Hot wheels	hobby	хобби	5287	reuse	совпал перевод
+Module 3	3c Hot wheels	jogging	оздоровительный бег	2819	reuse	совпал перевод
+Module 3	3c Hot wheels	nickname	прозвище		new	в тренажёре нет
+Module 3	3c Hot wheels	occupation	занятие		new	в тренажёре нет
+Module 3	3c Hot wheels	team	команда	4426	reuse	совпал перевод
+Module 3	3c Hot wheels	be born	родиться	1185	reuse	совпал перевод
+Module 3	3c Hot wheels	famous for	знаменитый благодаря чему-либо		new	в тренажёре нет
+Module 3	3c Hot wheels	personal details	личные данные		new	в тренажёре нет
+Module 3	3c Hot wheels	racing car driver	автогонщик		new	в тренажёре нет
+Module 3	3d Culture Corner	amber	желтый (сигнал светофора)		new	в тренажёре нет
+Module 3	3d Culture Corner	city centre	центр города		new	в тренажёре нет
+Module 3	3d Culture Corner	forget (forgot)	забывать	5944	reuse	совпал перевод
+Module 3	3d Culture Corner	get around	передвигаться	3631	reuse	совпал перевод
+Module 3	3d Culture Corner	journey	поездка	4626	reuse	совпал перевод
+Module 3	3d Culture Corner	luggage	багаж	2312	reuse	совпал перевод
+Module 3	3d Culture Corner	room	место, пространство		new	в тренажёре «комната», у нас «место, пространство»
+Module 3	3d Culture Corner	tourist	турист	1985	reuse	совпал перевод
+Module 3	3d Culture Corner	underground	метро	1703	reuse	совпал перевод
+Module 3	3d Culture Corner	a nice view	прекрасный вид		new	в тренажёре нет
+Module 3	3d Culture Corner	black cab	черный кэб (такси в Лондоне)		new	в тренажёре нет
+Module 3	3d Culture Corner	double-decker bus	двухэтажный автобус		new	в тренажёре нет
+Module 3	English in Use/Extensive Reading 3	protection	защита		new	в тренажёре нет
+Module 3	English in Use/Extensive Reading 3	respect	уважение		new	в тренажёре нет
+Module 3	English in Use/Extensive Reading 3	soldier	солдат		new	в тренажёре нет
+Module 3	English in Use/Extensive Reading 3	townhall	мэрия		new	в тренажёре нет
+Module 3	English in Use/Extensive Reading 3	war	война		new	в тренажёре нет
+Module 3	English in Use/Extensive Reading 3	warn	извещать, предупреждать	3436	reuse	совпал перевод
+Module 4	4a Day in, Day out	always	всегда	4525	reuse	совпал перевод
+Module 4	4a Day in, Day out	catch (caught)	ловить	1590	reuse	совпал перевод
+Module 4	4a Day in, Day out	cook	готовить	324	reuse	совпал перевод
+Module 4	4a Day in, Day out	cry	плакать	5501	reuse	совпал перевод
+Module 4	4a Day in, Day out	dormitory	общежитие, общая спальня (для учащихся)		new	в тренажёре нет
+Module 4	4a Day in, Day out	dungeon	темница, подземелье		new	в тренажёре нет
+Module 4	4a Day in, Day out	frog	лягушка	59	reuse	совпал перевод
+Module 4	4a Day in, Day out	fix	устанавливать		new	в тренажёре «чинить», у нас «устанавливать»
+Module 4	4a Day in, Day out	greenhouse	оранжерея		new	в тренажёре нет
+Module 4	4a Day in, Day out	habit	привычка	5479	reuse	совпал перевод
+Module 4	4a Day in, Day out	kick	ударять, пинать		new	в тренажёре нет
+Module 4	4a Day in, Day out	kiss	целовать	1010	reuse	совпал перевод
+Module 4	4a Day in, Day out	laugh	смеяться	5288	reuse	совпал перевод
+Module 4	4a Day in, Day out	lose (lost)	терять	3966	reuse	совпал перевод
+Module 4	4a Day in, Day out	never	никогда	4540	reuse	совпал перевод
+Module 4	4a Day in, Day out	often	часто	5557	reuse	совпал перевод
+Module 4	4a Day in, Day out	rarely	редко		new	в тренажёре нет
+Module 4	4a Day in, Day out	sometimes	иногда	4547	reuse	совпал перевод
+Module 4	4a Day in, Day out	spend (spent)	проводить (время)	6079	reuse	совпал перевод
+Module 4	4a Day in, Day out	teach (taught)	обучать		new	в тренажёре нет
+Module 4	4a Day in, Day out	treat (well)	обращаться (хорошо)		new	в тренажёре «угощение», у нас «обращаться (хорошо)»
+Module 4	4a Day in, Day out	usually	обычно	4549	reuse	совпал перевод
+Module 4	4a Day in, Day out	brush my teeth	чистить зубы		new	в тренажёре нет
+Module 4	4a Day in, Day out	common room	комната отдыха		new	в тренажёре нет
+Module 4	4a Day in, Day out	do my homework	делать домашнее задание	601	reuse	совпал перевод
+Module 4	4a Day in, Day out	get dressed	одеваться	2	reuse	совпал перевод
+Module 4	4a Day in, Day out	go out with friends	выходить (на прогулку) с друзьями	1704	reuse	совпал перевод
+Module 4	4a Day in, Day out	have a shower	принимать душ	606	reuse	совпал перевод
+Module 4	4a Day in, Day out	hide and seek	игра в прятки		new	в тренажёре нет
+Module 4	4a Day in, Day out	listen to music	слушать музыку	393	reuse	совпал перевод
+Module 4	4a Day in, Day out	magic tricks	волшебство		new	в тренажёре нет
+Module 4	4a Day in, Day out	once a month	раз в месяц		new	в тренажёре нет
+Module 4	4a Day in, Day out	play sports	играть в спортивные игры	4542	reuse	совпал перевод
+Module 4	4a Day in, Day out	twice a week	дважды в неделю		new	в тренажёре нет
+Module 4	4b How about...?	awful	ужасный	5148	reuse	совпал перевод
+Module 4	4b How about...?	be on	идти (на сцене, на экране)		new	в тренажёре нет
+Module 4	4b How about...?	boring	скучный	521	reuse	совпал перевод
+Module 4	4b How about...?	chicken	курица, цыпленок	255	reuse	совпал перевод
+Module 4	4b How about...?	comedy	комедия	1170	reuse	совпал перевод
+Module 4	4b How about...?	dancing	танцы	1599	reuse	совпал перевод
+Module 4	4b How about...?	decide	решать	5786	reuse	совпал перевод
+Module 4	4b How about...?	delicious	восхитительный	961	reuse	совпал перевод
+Module 4	4b How about...?	disgusting	отвратительный	962	reuse	совпал перевод
+Module 4	4b How about...?	drama	драма		new	в тренажёре «театральный кружок», у нас «драма»
+Module 4	4b How about...?	dull	скучный		new	в тренажёре нет
+Module 4	4b How about...?	enjoyable	приятный	3692	reuse	совпал перевод
+Module 4	4b How about...?	exciting	захватывающий	727	reuse	совпал перевод
+Module 4	4b How about...?	fine	хороший, прекрасный	1904	reuse	совпал перевод
+Module 4	4b How about...?	fish	рыба	254	reuse	совпал перевод
+Module 4	4b How about...?	great	замечательный	1688	reuse	совпал перевод
+Module 4	4b How about...?	hamburger	гамбургер	5921	reuse	совпал перевод
+Module 4	4b How about...?	horrible	жуткий, страшный	1906	reuse	совпал перевод
+Module 4	4b How about...?	interesting	интересный	763	reuse	совпал перевод
+Module 4	4b How about...?	news	новости	2511	reuse	совпал перевод
+Module 4	4b How about...?	pizza	пицца	251	reuse	совпал перевод
+Module 4	4b How about...?	science fiction	фантастика	3040	reuse	совпал перевод
+Module 4	4b How about...?	sitcom	комедия положений		new	в тренажёре нет
+Module 4	4b How about...?	skiing	лыжи	671	reuse	совпал перевод
+Module 4	4b How about...?	spaghetti	спагетти		new	в тренажёре нет
+Module 4	4b How about...?	star	сниматься в главной роли		new	в тренажёре «звезда», у нас «сниматься в главной роли»
+Module 4	4b How about...?	sports	спортивные программы		new	в тренажёре нет
+Module 4	4b How about...?	talk show	ток-шоу		new	в тренажёре нет
+Module 4	4b How about...?	teenager	подросток		new	в тренажёре нет
+Module 4	4b How about...?	terrible	страшный	1911	reuse	совпал перевод
+Module 4	4b How about...?	thriller	триллер		new	в тренажёре нет
+Module 4	4b How about...?	windsurfing	виндсерфинг	677	reuse	совпал перевод
+Module 4	4b How about...?	wonderful	изумительный, чудесный	1774	reuse	совпал перевод
+Module 4	4b How about...?	eat out	питаться вне дома (в кафе и т. п.)	3582	reuse	совпал перевод
+Module 4	4b How about...?	music shows	музыкальные шоу		new	в тренажёре нет
+Module 4	4b How about...?	pop concert	концерт поп-музыки		new	в тренажёре нет
+Module 4	4b How about...?	pop music	популярная музыка		new	в тренажёре нет
+Module 4	4b How about...?	reality shows	реалити-шоу		new	в тренажёре нет
+Module 4	4c My favourite day	camp	лагерь отдыха	6061	reuse	совпал перевод
+Module 4	4c My favourite day	climb/go climbing	взбираться	1923	reuse	совпал перевод
+Module 4	4c My favourite day	meet (met)	встречать(ся)	1593	reuse	совпал перевод
+Module 4	4c My favourite day	movie	фильм		new	в тренажёре нет
+Module 4	4c My favourite day	put on (a dress)	надевать (платье)	5763	reuse	совпал перевод
+Module 4	4c My favourite day	put up (a tent)	ставить (палатку)		new	в тренажёре нет
+Module 4	4c My favourite day	set off	отправляться (в путь)	2921	reuse	совпал перевод
+Module 4	4c My favourite day	arrive in Moscow/at the airport	прибывать в Москву/аэропорт		new	в тренажёре нет
+Module 4	4c My favourite day	build a fire	сложить костер		new	в тренажёре нет
+Module 4	4c My favourite day	leisure activities	занятия в свободное время		new	в тренажёре нет
+Module 4	4c My favourite day	scout club	клуб скаутов		new	в тренажёре нет
+Module 4	4c My favourite day	scout leader	лидер, вожатый скаутов		new	в тренажёре нет
+Module 4	4c My favourite day	the rest of	остальные		none	связка / отвлечённое слово
+Module 4	4c My favourite day	tell a story	рассказывать историю		new	в тренажёре нет
+Module 4	4c My favourite day	tie knots	завязывать узлы		new	в тренажёре нет
+Module 4	4d Culture Corner	disagree	не соглашаться	3175	reuse	совпал перевод
+Module 4	4d Culture Corner	get along with	ладить с кем-либо		new	в тренажёре нет
+Module 4	4d Culture Corner	playstation	игровая приставка		new	в тренажёре нет
+Module 4	4d Culture Corner	teenage	подростковый	2742	reuse	совпал перевод
+Module 4	4d Culture Corner	mobile phone	мобильный телефон	356	reuse	совпал перевод
+Module 4	4d Culture Corner	pocket money	карманные деньги		new	в тренажёре нет
+Module 4	4d Culture Corner	semi-detached house	дом, имеющий общую стену с другим	971	reuse	совпал перевод
+Module 4	4d Culture Corner	surf the net	бродить по Интернету		new	в тренажёре нет
+Module 4	4d Culture Corner	soap opera	мыльная опера	3041	reuse	совпал перевод
+Module 4	English in Use/Extensive Reading 4	appointment	встреча, свидание		new	в тренажёре нет
+Module 4	English in Use/Extensive Reading 4	cancel	отменять		new	в тренажёре нет
+Module 4	English in Use/Extensive Reading 4	chart	диаграмма		new	в тренажёре нет
+Module 4	English in Use/Extensive Reading 4	compare	сравнивать		new	в тренажёре нет
+Module 4	English in Use/Extensive Reading 4	definitely	определенно, точно		none	связка / отвлечённое слово
+Module 4	English in Use/Extensive Reading 4	graph	график		new	в тренажёре нет
+Module 4	English in Use/Extensive Reading 4	hope	надеяться	4492	reuse	совпал перевод
+Module 4	English in Use/Extensive Reading 4	worry	беспокоиться	4828	reuse	совпал перевод
+Module 4	English in Use/Extensive Reading 4	feel better	чувствовать себя лучше	1611	reuse	совпал перевод
+Module 4	English in Use/Extensive Reading 4	have got a cold	быть простуженным		new	в тренажёре нет
+Module 4	English in Use/Extensive Reading 4	pass along	давать, передавать		new	в тренажёре нет
+Module 5	5a Festive time	bake	печь	4526	reuse	совпал перевод
+Module 5	5a Festive time	dance	танцевать	4144	reuse	совпал перевод
+Module 5	5a Festive time	grapes	виноград	44	reuse	совпал перевод
+Module 5	5a Festive time	wish	желать		new	в тренажёре нет
+Module 5	5a Festive time	as for	что касается		none	связка / отвлечённое слово
+Module 5	5a Festive time	be busy	быть занятым		new	в тренажёре нет
+Module 5	5a Festive time	be excited	быть взволнованным		new	в тренажёре нет
+Module 5	5a Festive time	blow a horn	дуть в рожок		new	в тренажёре нет
+Module 5	5a Festive time	council workers	работники городских служб		new	в тренажёре нет
+Module 5	5a Festive time	do the dusting	вытирать пыль		new	в тренажёре нет
+Module 5	5a Festive time	do the gardening	заниматься садоводством		new	в тренажёре нет
+Module 5	5a Festive time	do the shopping	делать покупки	325	reuse	совпал перевод
+Module 5	5a Festive time	do the washing up	мыть посуду		new	в тренажёре нет
+Module 5	5a Festive time	Good luck!	Удачи!		new	в тренажёре нет
+Module 5	5a Festive time	make preparations	готовиться		new	в тренажёре нет
+Module 5	5a Festive time	make a cake	печь торт, пирожное	2706	reuse	совпал перевод
+Module 5	5a Festive time	make a phone call	звонить по телефону		new	в тренажёре нет
+Module 5	5a Festive time	make tea	заваривать чай		new	в тренажёре нет
+Module 5	5a Festive time	play the drums	играть на барабанах	2002	reuse	совпал перевод
+Module 5	5b Let's celebrate	be over	заканчиваться		new	в тренажёре нет
+Module 5	5b Let's celebrate	celebration	празднование	5844	reuse	совпал перевод
+Module 5	5b Let's celebrate	clean up	прибирать(ся)	993	reuse	совпал перевод
+Module 5	5b Let's celebrate	cool	классный	522	reuse	совпал перевод
+Module 5	5b Let's celebrate	costume	костюм	5845	reuse	совпал перевод
+Module 5	5b Let's celebrate	dress up	наряжаться	5846	reuse	совпал перевод
+Module 5	5b Let's celebrate	exchange	обменивать	3572	reuse	совпал перевод
+Module 5	5b Let's celebrate	gang	банда		new	в тренажёре нет
+Module 5	5b Let's celebrate	guest	гость	2310	reuse	совпал перевод
+Module 5	5b Let's celebrate	join in	присоединяться	3480	reuse	совпал перевод
+Module 5	5b Let's celebrate	offer	предлагать		new	в тренажёре нет
+Module 5	5b Let's celebrate	pumpkin	тыква		new	в тренажёре нет
+Module 5	5b Let's celebrate	run out of	исчерпать		new	в тренажёре нет
+Module 5	5b Let's celebrate	terrify	пугать, ужасать		new	в тренажёре нет
+Module 5	5b Let's celebrate	Thanksgiving	День благодарения		new	в тренажёре нет
+Module 5	5b Let's celebrate	witch	ведьма		new	в тренажёре нет
+Module 5	5b Let's celebrate	wreath	венок, гирлянда		new	в тренажёре нет
+Module 5	5b Let's celebrate	bobbing for apples	откусывание яблока без помощи рук (игра)		new	в тренажёре нет
+Module 5	5b Let's celebrate	Guy Fawkes Day	День Гая Фокса		new	в тренажёре нет
+Module 5	5b Let's celebrate	May Day	1 Мая		new	в тренажёре нет
+Module 5	5b Let's celebrate	perform tricks	показывать фокусы		new	в тренажёре нет
+Module 5	5b Let's celebrate	pin the tail on the donkey	прикреплять ослу хвост (игра)		new	в тренажёре нет
+Module 5	5b Let's celebrate	St. Patrick's Day	День Святого Патрика		new	в тренажёре нет
+Module 5	5b Let's celebrate	throw streamers	бросать серпантин		new	в тренажёре нет
+Module 5	5b Let's celebrate	toffee apple	яблоко в карамельной глазури		new	в тренажёре нет
+Module 5	5b Let's celebrate	Valentine's Day	День Святого Валентина		new	в тренажёре нет
+Module 5	5c Special days	activities	занятия, деятельность		new	в тренажёре нет
+Module 5	5c Special days	colourful	красочный, яркий	2370	reuse	совпал перевод
+Module 5	5c Special days	display	показ		new	в тренажёре «дисплей», у нас «показ»
+Module 5	5c Special days	festive	праздничный, радостный	5847	reuse	совпал перевод
+Module 5	5c Special days	finally	в заключение, окончательно		none	связка / отвлечённое слово
+Module 5	5c Special days	goddess	богиня		new	в тренажёре нет
+Module 5	5c Special days	last	длиться	5850	reuse	совпал перевод
+Module 5	5c Special days	pray	молиться		new	в тренажёре нет
+Module 5	5c Special days	important	важный	1689	reuse	совпал перевод
+Module 5	5c Special days	whole	весь, целый		none	связка / отвлечённое слово
+Module 5	5c Special days	wealth	богатство		new	в тренажёре нет
+Module 5	5c Special days	decorate the house	украшать дом		new	в тренажёре нет
+Module 5	5c Special days	exchange gifts	обмениваться подарками	5855	reuse	совпал перевод
+Module 5	5c Special days	have a great time	прекрасно проводить время	2624	reuse	совпал перевод
+Module 5	5c Special days	have a meal	кушать, принимать пищу		new	в тренажёре нет
+Module 5	5c Special days	light lamps	зажигать фонари		new	в тренажёре нет
+Module 5	5c Special days	make a speech	выступать с речью		new	в тренажёре нет
+Module 5	5c Special days	put in order	расставить по порядку		new	в тренажёре нет
+Module 5	5c Special days	put up decorations	развешивать украшения		new	в тренажёре нет
+Module 5	5c Special days	watch the fireworks	смотреть фейерверк		new	в тренажёре нет
+Module 5	5d Culture Corner	advertisement	реклама	2207	reuse	совпал перевод
+Module 5	5d Culture Corner	annual	ежегодный		new	в тренажёре нет
+Module 5	5d Culture Corner	athlete	спортсмен		new	в тренажёре нет
+Module 5	5d Culture Corner	available	доступный		none	связка / отвлечённое слово
+Module 5	5d Culture Corner	before	перед	5554	reuse	совпал перевод
+Module 5	5d Culture Corner	upright	прямой, вертикальный		new	в тренажёре нет
+Module 5	5d Culture Corner	compete	соревноваться	1149	reuse	совпал перевод
+Module 5	5d Culture Corner	competition	соревнование	4056	reuse	совпал перевод
+Module 5	5d Culture Corner	crowd	толпа		new	в тренажёре нет
+Module 5	5d Culture Corner	hill run	бег по холмам		new	в тренажёре нет
+Module 5	5d Culture Corner	hold onto	держаться за		new	в тренажёре нет
+Module 5	5d Culture Corner	popular	популярный	1772	reuse	совпал перевод
+Module 5	5d Culture Corner	pull over	перетягивать		new	в тренажёре нет
+Module 5	5d Culture Corner	rope	канат	4345	reuse	совпал перевод
+Module 5	5d Culture Corner	sell out	распродавать		new	в тренажёре нет
+Module 5	5d Culture Corner	traditional	традиционный	3291	reuse	совпал перевод
+Module 5	5d Culture Corner	try	пробовать		new	в тренажёре нет
+Module 5	5d Culture Corner	towards	к, по направлению к		none	связка / отвлечённое слово
+Module 5	5d Culture Corner	hammer throw	метание молота		new	в тренажёре нет
+Module 5	5d Culture Corner	marching band	марширующий оркестр		new	в тренажёре нет
+Module 5	5d Culture Corner	shot put	толкание ядра		new	в тренажёре нет
+Module 5	5d Culture Corner	take part in the game	участвовать в игре		new	в тренажёре нет
+Module 5	5d Culture Corner	take place	состояться, происходить		new	в тренажёре нет
+Module 5	5d Culture Corner	tossing the caber	подбрасывание столба		new	в тренажёре нет
+Module 5	5d Culture Corner	tree trunk	ствол дерева		new	в тренажёре нет
+Module 5	5d Culture Corner	tug of war	перетягивание каната		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	adventure	приключение		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	belt	ремень	1019	reuse	совпал перевод
+Module 5	English in Use/Extensive Reading 5	carnation	гвоздика		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	cravat	галстук		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	create	создавать	3231	reuse	совпал перевод
+Module 5	English in Use/Extensive Reading 5	daisy	маргаритка		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	extract	отрывок, фрагмент		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	lucky	удачный		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	quantity	количество		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	rose	роза		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	strange	странный	4984	reuse	совпал перевод
+Module 5	English in Use/Extensive Reading 5	sunflower	подсолнух		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	tulip	тюльпан	5968	reuse	совпал перевод
+Module 5	English in Use/Extensive Reading 5	a/two dozen (roses/tulips/daisies)	дюжина/две (роз, тюльпанов, и т. п.)		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	a fictional character	вымышленный персонаж		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	be offended	быть обиженным		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	have in mind	иметь в виду		none	связка / отвлечённое слово
+Module 5	English in Use/Extensive Reading 5	I beg your pardon!	Прошу прощения!		none	связка / отвлечённое слово
+Module 5	English in Use/Extensive Reading 5	include a card	приложить открытку		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	including delivery	включая доставку		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	send flowers	отправлять цветы		new	в тренажёре нет
+Module 5	English in Use/Extensive Reading 5	through a looking glass	сквозь зеркало		new	в тренажёре нет
+Module 6	6a Free time	acting	выступление		new	в тренажёре нет
+Module 6	6a Free time	at the weekend	в выходные дни		new	в тренажёре нет
+Module 6	6a Free time	brilliant	выдающийся	1802	reuse	совпал перевод
+Module 6	6a Free time	brochure	брошюра, проспект	3139	reuse	совпал перевод
+Module 6	6a Free time	leaflet	листовка, буклет	6147	reuse	совпал перевод
+Module 6	6a Free time	learn	учиться	4145	reuse	совпал перевод
+Module 6	6a Free time	novel	роман	3088	reuse	совпал перевод
+Module 6	6a Free time	PC (personal computer)	персональный компьютер		new	в тренажёре нет
+Module 6	6a Free time	paint	рисовать	1316	reuse	совпал перевод
+Module 6	6a Free time	photography	фотография	2601	reuse	совпал перевод
+Module 6	6a Free time	present	дарить; подарок	4328	reuse	совпал перевод
+Module 6	6a Free time	print	печатать		new	в тренажёре нет
+Module 6	6a Free time	tiring	утомительный	3030	reuse	совпал перевод
+Module 6	6a Free time	art museum	художественный музей		new	в тренажёре нет
+Module 6	6a Free time	be good at	преуспевать в чем-либо		new	в тренажёре нет
+Module 6	6a Free time	be fond of	любить что-либо		new	в тренажёре нет
+Module 6	6a Free time	be keen on	быть увлеченным чем-либо		new	в тренажёре нет
+Module 6	6a Free time	be mad about	сходить с ума по чему-то, безумно нравиться		new	в тренажёре нет
+Module 6	6a Free time	be interested in	интересоваться чем-либо		new	в тренажёре нет
+Module 6	6a Free time	go cycling	кататься на велосипеде	884	reuse	совпал перевод
+Module 6	6a Free time	go on trips	совершать поездки		new	в тренажёре нет
+Module 6	6a Free time	go windsurfing	заниматься виндсерфингом		new	в тренажёре нет
+Module 6	6a Free time	have fun	веселиться	2626	reuse	совпал перевод
+Module 6	6a Free time	join a club	вступать в клуб	3199	reuse	совпал перевод
+Module 6	6a Free time	let the good times rock	давай хорошо повеселимся		new	в тренажёре нет
+Module 6	6a Free time	present plays	ставить постановки		new	в тренажёре нет
+Module 6	6b Game on!	annoyance	раздражение, досада		new	в тренажёре нет
+Module 6	6b Game on!	agree	соглашаться	5643	reuse	совпал перевод
+Module 6	6b Game on!	argue	спорить	1331	reuse	совпал перевод
+Module 6	6b Game on!	arrangement	договоренность	3558	reuse	совпал перевод
+Module 6	6b Game on!	backgammon	нарды		new	в тренажёре нет
+Module 6	6b Game on!	billiards	бильярд		new	в тренажёре нет
+Module 6	6b Game on!	chess	шахматы	490	reuse	совпал перевод
+Module 6	6b Game on!	darts	дартс		new	в тренажёре нет
+Module 6	6b Game on!	dominoes	домино		new	в тренажёре нет
+Module 6	6b Game on!	enjoy	любить, обожать	5770	reuse	совпал перевод
+Module 6	6b Game on!	fair	честный	4637	reuse	совпал перевод
+Module 6	6b Game on!	lose (lost)	терять, проигрывать	1150	reuse	совпал перевод
+Module 6	6b Game on!	marbles	шарики		new	в тренажёре нет
+Module 6	6b Game on!	monopoly	монополия		new	в тренажёре нет
+Module 6	6b Game on!	permanent	постоянный	5483	reuse	совпал перевод
+Module 6	6b Game on!	points	очки (в играх)		new	в тренажёре нет
+Module 6	6b Game on!	prefer	предпочитать		new	в тренажёре нет
+Module 6	6b Game on!	scrabble	скрэбл (игра в слова)		new	в тренажёре нет
+Module 6	6b Game on!	state	состояние		new	в тренажёре нет
+Module 6	6b Game on!	suggest	предлагать	3429	reuse	совпал перевод
+Module 6	6b Game on!	win (won)	выигрывать, побеждать	1154	reuse	совпал перевод
+Module 6	6b Game on!	board game	настольная игра	2435	reuse	совпал перевод
+Module 6	6b Game on!	for a change	для разнообразия		new	в тренажёре нет
+Module 6	6b Game on!	in the end	в конце концов		none	связка / отвлечённое слово
+Module 6	6b Game on!	I bet	держу пари		none	связка / отвлечённое слово
+Module 6	6b Game on!	I don't care (about)	мне все равно		new	в тренажёре нет
+Module 6	6b Game on!	jigsaw puzzle	пазл, мозаика		new	в тренажёре нет
+Module 6	6b Game on!	wait for smb.	ждать кого-либо		new	в тренажёре нет
+Module 6	6c Pastimes	about	о		none	связка / отвлечённое слово
+Module 6	6c Pastimes	coconut	кокос	12	reuse	совпал перевод
+Module 6	6c Pastimes	corn	кукуруза	5918	reuse	совпал перевод
+Module 6	6c Pastimes	dice	кубик	4249	reuse	совпал перевод
+Module 6	6c Pastimes	explore	исследовать		new	в тренажёре нет
+Module 6	6c Pastimes	go down	опускаться		new	в тренажёре нет
+Module 6	6c Pastimes	go up	подниматься	5815	reuse	совпал перевод
+Module 6	6c Pastimes	grow (grew)	расти		new	в тренажёре нет
+Module 6	6c Pastimes	hear (heard)	слышать	5393	reuse	совпал перевод
+Module 6	6c Pastimes	in	в	4206	reuse	совпал перевод
+Module 6	6c Pastimes	island	остров	714	reuse	совпал перевод
+Module 6	6c Pastimes	lonely	одинокий	2659	reuse	совпал перевод
+Module 6	6c Pastimes	miss	скучать		new	в тренажёре «пропускать», у нас «скучать»
+Module 6	6c Pastimes	parrot	попугай	19	reuse	совпал перевод
+Module 6	6c Pastimes	pawn	пешка		new	в тренажёре нет
+Module 6	6c Pastimes	rice	рис	442	reuse	совпал перевод
+Module 6	6c Pastimes	sing (sang)	петь	597	reuse	совпал перевод
+Module 6	6c Pastimes	square	клеточка	4171	reuse	совпал перевод
+Module 6	6c Pastimes	think (thought)	думать	1595	reuse	совпал перевод
+Module 6	6c Pastimes	under	под	4204	reuse	совпал перевод
+Module 6	6c Pastimes	warm	теплый	1783	reuse	совпал перевод
+Module 6	6c Pastimes	snakes and ladders	«змеи и лестницы» (игра)		new	в тренажёре нет
+Module 6	6d Culture Corner	aim	цель		new	в тренажёре «стремиться», у нас «цель»
+Module 6	6d Culture Corner	at random	наугад		none	связка / отвлечённое слово
+Module 6	6d Culture Corner	customer	покупатель	5136	reuse	совпал перевод
+Module 6	6d Culture Corner	cost (cost)	стоить	6042	reuse	совпал перевод
+Module 6	6d Culture Corner	discover	обнаруживать	4717	reuse	совпал перевод
+Module 6	6d Culture Corner	design	разрабатывать	1313	reuse	совпал перевод
+Module 6	6d Culture Corner	invent	изобретать	1315	reuse	совпал перевод
+Module 6	6d Culture Corner	property	имущество		new	в тренажёре нет
+Module 6	6d Culture Corner	release	выпускать (в свет)		new	в тренажёре «освобождать», у нас «выпускать (в свет)»
+Module 6	6d Culture Corner	weapon	оружие		new	в тренажёре нет
+Module 6	6d Culture Corner	as much as possible	как можно больше		none	связка / отвлечённое слово
+Module 6	6d Culture Corner	be/become a great success	пользоваться огромным успехом		new	в тренажёре нет
+Module 6	6d Culture Corner	bonus points	призовые очки (бонус)		new	в тренажёре нет
+Module 6	6d Culture Corner	come up with	предлагать		new	в тренажёре нет
+Module 6	6d Culture Corner	letter tiles	плитки (фишки) с буквами		new	в тренажёре нет
+Module 6	6d Culture Corner	solve a crime	раскрыть преступление		new	в тренажёре нет
+Module 6	6d Culture Corner	the scene of crime	место преступления		new	в тренажёре нет
+Module 6	English in Use/Extensive Reading 6	attach	прикреплять	4397	reuse	совпал перевод
+Module 6	English in Use/Extensive Reading 6	drawing	рисование		new	в тренажёре нет
+Module 6	English in Use/Extensive Reading 6	educate	обучать		new	в тренажёре нет
+Module 6	English in Use/Extensive Reading 6	glove	перчатка	4499	reuse	совпал перевод
+Module 6	English in Use/Extensive Reading 6	glue	клей	4275	reuse	совпал перевод
+Module 6	English in Use/Extensive Reading 6	look for	искать	995	reuse	совпал перевод
+Module 6	English in Use/Extensive Reading 6	marionette	марионетка		new	в тренажёре нет
+Module 6	English in Use/Extensive Reading 6	only	только		none	связка / отвлечённое слово
+Module 6	English in Use/Extensive Reading 6	puppet	кукла (в кукольном театре)		new	в тренажёре нет
+Module 6	English in Use/Extensive Reading 6	puppeteer	кукловод		new	в тренажёре нет
+Module 6	English in Use/Extensive Reading 6	rubber	резина		new	в тренажёре «ластик», у нас «резина»
+Module 6	English in Use/Extensive Reading 6	scissors	ножницы	483	reuse	совпал перевод
+Module 6	English in Use/Extensive Reading 6	string	веревка		new	в тренажёре нет
+Module 6	English in Use/Extensive Reading 6	wooden	деревянный	2382	reuse	совпал перевод
+Module 6	English in Use/Extensive Reading 6	wrap	завертывать	3077	reuse	совпал перевод
+Module 6	English in Use/Extensive Reading 6	chess board	шахматная доска		new	в тренажёре нет
+Module 6	English in Use/Extensive Reading 6	dart set	набор для игры в дартс		new	в тренажёре нет
+Module 6	English in Use/Extensive Reading 6	hang gliding plane	модель планера		new	в тренажёре нет
+Module 6	English in Use/Extensive Reading 6	make us laugh	заставляет нас смеяться		new	в тренажёре нет
+Module 6	English in Use/Extensive Reading 6	roller skates	роликовые коньки		new	в тренажёре нет
+Module 6	English in Use/Extensive Reading 6	table tennis set	набор для игры в настольный теннис		new	в тренажёре нет
+Module 6	English in Use/Extensive Reading 6	What about...?	Как насчет...?		none	связка / отвлечённое слово
+Module 7	7a In the past	ago	тому назад		none	связка / отвлечённое слово
+Module 7	7a In the past	busy	суетливый, занятой	760	reuse	совпал перевод
+Module 7	7a In the past	crowded	переполненный	4323	reuse	совпал перевод
+Module 7	7a In the past	deserted	безлюдный, пустынный		new	в тренажёре нет
+Module 7	7a In the past	different	другой, непохожий	5251	reuse	совпал перевод
+Module 7	7a In the past	empty	пустой		new	в тренажёре нет
+Module 7	7a In the past	even	даже		none	связка / отвлечённое слово
+Module 7	7a In the past	horse	лошадь		new	в тренажёре нет
+Module 7	7a In the past	mine	рудник, шахта		new	в тренажёре «мой», у нас «рудник, шахта»
+Module 7	7a In the past	modern	современный	764	reuse	совпал перевод
+Module 7	7a In the past	quiet	тихий	766	reuse	совпал перевод
+Module 7	7a In the past	ruined	разрушенный		new	в тренажёре нет
+Module 7	7a In the past	saloon	салун		new	в тренажёре нет
+Module 7	7a In the past	wealthy	богатый	3662	reuse	совпал перевод
+Module 7	7a In the past	ugly	безобразный	661	reuse	совпал перевод
+Module 7	7a In the past	yesterday	вчера	4694	reuse	совпал перевод
+Module 7	7a In the past	be called	называться		new	в тренажёре нет
+Module 7	7a In the past	ghost town	город-призрак		new	в тренажёре нет
+Module 7	7a In the past	last night	вчера вечером		new	в тренажёре нет
+Module 7	7a In the past	last week	на прошлой неделе		new	в тренажёре нет
+Module 7	7b Halloween Spirit	anyway	в любом случае, все равно	5390	reuse	совпал перевод
+Module 7	7b Halloween Spirit	bored	скучающий	704	reuse	совпал перевод
+Module 7	7b Halloween Spirit	creature	создание, существо	3311	reuse	совпал перевод
+Module 7	7b Halloween Spirit	fortnight	две недели		new	в тренажёре нет
+Module 7	7b Halloween Spirit	huge	огромный	5629	reuse	совпал перевод
+Module 7	7b Halloween Spirit	introduce	представлять(ся)		new	в тренажёре нет
+Module 7	7b Halloween Spirit	knock	стучать	4642	reuse	совпал перевод
+Module 7	7b Halloween Spirit	miserable	несчастный	2749	reuse	совпал перевод
+Module 7	7b Halloween Spirit	naughty	непослушный	4646	reuse	совпал перевод
+Module 7	7b Halloween Spirit	owl	сова	5371	reuse	совпал перевод
+Module 7	7b Halloween Spirit	puzzled	озадаченный		new	в тренажёре нет
+Module 7	7b Halloween Spirit	rush	мчаться, устремляться	4018	reuse	совпал перевод
+Module 7	7b Halloween Spirit	scared	испуганный	707	reuse	совпал перевод
+Module 7	7b Halloween Spirit	scream	крик		new	в тренажёре нет
+Module 7	7b Halloween Spirit	shout	кричать	1333	reuse	совпал перевод
+Module 7	7b Halloween Spirit	stairs	лестница	265	reuse	совпал перевод
+Module 7	7b Halloween Spirit	stressed	напряженный	5793	reuse	совпал перевод
+Module 7	7b Halloween Spirit	suddenly	вдруг		new	в тренажёре нет
+Module 7	7b Halloween Spirit	tired	уставший	708	reuse	совпал перевод
+Module 7	7b Halloween Spirit	treat	угощение	5915	reuse	совпал перевод
+Module 7	7b Halloween Spirit	worried	озабоченный	709	reuse	совпал перевод
+Module 7	7b Halloween Spirit	by the time	к тому времени		none	связка / отвлечённое слово
+Module 7	7c Famous firsts	alive	живой		new	в тренажёре нет
+Module 7	7c Famous firsts	biography	биография	3085	reuse	совпал перевод
+Module 7	7c Famous firsts	cartoon	мультфильм	2183	reuse	совпал перевод
+Module 7	7c Famous firsts	death	смерть		new	в тренажёре нет
+Module 7	7c Famous firsts	die	умирать	1925	reuse	совпал перевод
+Module 7	7c Famous firsts	garage	гараж	538	reuse	совпал перевод
+Module 7	7c Famous firsts	generation	поколение		new	в тренажёре нет
+Module 7	7c Famous firsts	live on	продолжать жить		new	в тренажёре «жить на (доход)», у нас «продолжать жить»
+Module 7	7c Famous firsts	receive	получать	1930	reuse	совпал перевод
+Module 7	7c Famous firsts	sketch	эскиз, набросок		new	в тренажёре нет
+Module 7	7c Famous firsts	studio	студия	2203	reuse	совпал перевод
+Module 7	7c Famous firsts	academy award	премия Академии («Оскар»)		new	в тренажёре нет
+Module 7	7c Famous firsts	in his lifetime	при жизни		new	в тренажёре нет
+Module 7	7c Famous firsts	in total	всего, в сумме		none	связка / отвлечённое слово
+Module 7	7c Famous firsts	sound film	звуковой фильм		new	в тренажёре нет
+Module 7	7d Culture Corner	able	способный		new	в тренажёре нет
+Module 7	7d Culture Corner	adopt	усыновлять	4692	reuse	совпал перевод
+Module 7	7d Culture Corner	adult	взрослый	5399	reuse	совпал перевод
+Module 7	7d Culture Corner	Batman	Бэтмен		new	в тренажёре нет
+Module 7	7d Culture Corner	bullet	пуля		new	в тренажёре нет
+Module 7	7d Culture Corner	cape	накидка с капюшоном		new	в тренажёре нет
+Module 7	7d Culture Corner	fantasy	фантазия		new	в тренажёре нет
+Module 7	7d Culture Corner	farmer	фермер	773	reuse	совпал перевод
+Module 7	7d Culture Corner	helpless	беспомощный		new	в тренажёре нет
+Module 7	7d Culture Corner	just	справедливый		none	связка / отвлечённое слово
+Module 7	7d Culture Corner	invisible	невидимый	2761	reuse	совпал перевод
+Module 7	7d Culture Corner	leap	перепрыгивать		new	в тренажёре нет
+Module 7	7d Culture Corner	make up	выдумывать		new	в тренажёре «мириться», у нас «выдумывать»
+Module 7	7d Culture Corner	powerful	сильный	3817	reuse	совпал перевод
+Module 7	7d Culture Corner	rescue	спасать		new	в тренажёре нет
+Module 7	7d Culture Corner	rocket	ракета		new	в тренажёре нет
+Module 7	7d Culture Corner	shy	застенчивый	1072	reuse	совпал перевод
+Module 7	7d Culture Corner	smart	умный	4402	reuse	совпал перевод
+Module 7	7d Culture Corner	Spiderman	Человек-паук		new	в тренажёре нет
+Module 7	7d Culture Corner	Superman	Супермен		new	в тренажёре нет
+Module 7	7d Culture Corner	superhero	супергерой		new	в тренажёре нет
+Module 7	7d Culture Corner	Zorro	Зорро		new	в тренажёре нет
+Module 7	7d Culture Corner	trunks	плавки		new	в тренажёре нет
+Module 7	7d Culture Corner	unpopular	непопулярный		new	в тренажёре нет
+Module 7	7d Culture Corner	American dream	американская мечта		new	в тренажёре нет
+Module 7	7d Culture Corner	fight criminals	бороться с преступниками		new	в тренажёре нет
+Module 7	7d Culture Corner	fire heat vision	стрелять огненными лучами		new	в тренажёре нет
+Module 7	7d Culture Corner	gain strength	получать силу		new	в тренажёре нет
+Module 7	7d Culture Corner	in order to	с целью, чтобы		none	связка / отвлечённое слово
+Module 7	English in Use/Extensive Reading 7	century	век		new	в тренажёре нет
+Module 7	English in Use/Extensive Reading 7	common	распространенный		none	связка / отвлечённое слово
+Module 7	English in Use/Extensive Reading 7	familiar	хорошо знакомый		none	связка / отвлечённое слово
+Module 7	English in Use/Extensive Reading 7	handle	ручка		new	в тренажёре «справляться», у нас «ручка»
+Module 7	English in Use/Extensive Reading 7	imagination	воображение		new	в тренажёре нет
+Module 7	English in Use/Extensive Reading 7	item	предмет	6043	reuse	совпал перевод
+Module 7	English in Use/Extensive Reading 7	leather	кожа	1298	reuse	совпал перевод
+Module 7	English in Use/Extensive Reading 7	poor	бедный		new	в тренажёре нет
+Module 7	English in Use/Extensive Reading 7	report	сообщать		new	в тренажёре нет
+Module 7	English in Use/Extensive Reading 7	at the touch of	прикосновением, нажатием		new	в тренажёре нет
+Module 7	English in Use/Extensive Reading 7	build bricks	строить из кубиков		new	в тренажёре нет
+Module 7	English in Use/Extensive Reading 7	clay and wax	глина и воск		new	в тренажёре нет
+Module 7	English in Use/Extensive Reading 7	lost property office	бюро находок		new	в тренажёре нет
+Module 7	English in Use/Extensive Reading 7	rocking horse	конь-качалка		new	в тренажёре нет
+Module 7	English in Use/Extensive Reading 7	run a home	вести хозяйство		new	в тренажёре нет
+Module 7	English in Use/Extensive Reading 7	the Victorian times	Викторианская эпоха		new	в тренажёре нет
+Module 7	English in Use/Extensive Reading 7	throughout the ages	через годы		new	в тренажёре нет
+Module 7	English in Use/Extensive Reading 7	tool kit	набор инструментов		new	в тренажёре нет
+Module 8	8a That's the rule	accommodation	размещение, расселение		new	в тренажёре нет
+Module 8	8a That's the rule	barefoot	босиком		new	в тренажёре нет
+Module 8	8a That's the rule	campus	территория (школы и т. п.)		new	в тренажёре нет
+Module 8	8a That's the rule	cottage	коттедж	969	reuse	совпал перевод
+Module 8	8a That's the rule	hotel	гостиница	6056	reuse	совпал перевод
+Module 8	8a That's the rule	palace	дворец	1938	reuse	совпал перевод
+Module 8	8a That's the rule	poster	плакат	50	reuse	совпал перевод
+Module 8	8a That's the rule	premise	помещение		none	связка / отвлечённое слово
+Module 8	8a That's the rule	squirrel	белка		new	в тренажёре нет
+Module 8	8a That's the rule	student	учащийся	4969	reuse	совпал перевод
+Module 8	8a That's the rule	tidy	опрятный, чистый	856	reuse	совпал перевод
+Module 8	8a That's the rule	get permission	получать разрешение		new	в тренажёре нет
+Module 8	8a That's the rule	it's forbidden	это запрещено		new	в тренажёре нет
+Module 8	8a That's the rule	it's (not) allowed	это (не) разрешено		new	в тренажёре нет
+Module 8	8a That's the rule	kitchen appliances	кухонное оборудование		new	в тренажёре нет
+Module 8	8a That's the rule	make noise	шуметь		new	в тренажёре нет
+Module 8	8a That's the rule	outdoor area	прилегающая территория		new	в тренажёре нет
+Module 8	8a That's the rule	register overnight guests	регистрировать гостей, остающихся на ночь		new	в тренажёре нет
+Module 8	8a That's the rule	remove food from	выносить еду из		new	в тренажёре нет
+Module 8	8a That's the rule	school building	здание школы		new	в тренажёре нет
+Module 8	8a That's the rule	types of dwelling	типы жилищ		new	в тренажёре нет
+Module 8	8a That's the rule	university halls of residence	университетское общежитие		new	в тренажёре нет
+Module 8	8a That's the rule	block of flats	многоквартирный дом	967	reuse	совпал перевод
+Module 8	8a That's the rule	feed animals	кормить животных		new	в тренажёре нет
+Module 8	8b Shall we?	aquarium	аквариум		new	в тренажёре нет
+Module 8	8b Shall we?	colleague	коллега		new	в тренажёре нет
+Module 8	8b Shall we?	experienced	опытный		new	в тренажёре нет
+Module 8	8b Shall we?	friendly	дружелюбный	581	reuse	совпал перевод
+Module 8	8b Shall we?	glamorous	обаятельный		new	в тренажёре нет
+Module 8	8b Shall we?	gym	спортивный зал	4916	reuse	совпал перевод
+Module 8	8b Shall we?	intelligent	умный	736	reuse	совпал перевод
+Module 8	8b Shall we?	pretty	приятный, симпатичный	5364	reuse	совпал перевод
+Module 8	8b Shall we?	relax	отдыхать	5504	reuse	совпал перевод
+Module 8	8b Shall we?	serve	подавать (на стол)	4545	reuse	совпал перевод
+Module 8	8b Shall we?	stadium	стадион	749	reuse	совпал перевод
+Module 8	8b Shall we?	Are you joking?	Вы шутите?		new	в тренажёре нет
+Module 8	8b Shall we?	Are you serious?	Вы серьезно?		new	в тренажёре нет
+Module 8	8b Shall we?	come on	давай(те)		new	в тренажёре нет
+Module 8	8b Shall we?	department store	универмаг	875	reuse	совпал перевод
+Module 8	8b Shall we?	fast food (restaurant)	ресторан быстрого обслуживания	5982	reuse	совпал перевод
+Module 8	8b Shall we?	have a snack	перекусывать		new	в тренажёре нет
+Module 8	8b Shall we?	smoked salmon	копченый лосось		new	в тренажёре нет
+Module 8	8b Shall we?	sports centre	спортивный центр	755	reuse	совпал перевод
+Module 8	8b Shall we?	swimming pool	бассейн	33	reuse	совпал перевод
+Module 8	8b Shall we?	What do you feel like doing?	Чем бы ты хотел заняться?		new	в тренажёре нет
+Module 8	8c Rules & Regulations	bedsheet	простыня		new	в тренажёре нет
+Module 8	8c Rules & Regulations	comfortable	удобный	2332	reuse	совпал перевод
+Module 8	8c Rules & Regulations	own	собственный	5176	reuse	совпал перевод
+Module 8	8c Rules & Regulations	rent	арендовать	6142	reuse	совпал перевод
+Module 8	8d Culture Corner	amazing	изумительный	5036	reuse	совпал перевод
+Module 8	8d Culture Corner	complete	заканчивать, завершать	5456	reuse	совпал перевод
+Module 8	8d Culture Corner	floor	этаж		new	в тренажёре «пол», у нас «этаж»
+Module 8	8d Culture Corner	ground	земля	5541	reuse	совпал перевод
+Module 8	8d Culture Corner	historic	исторический	3287	reuse	совпал перевод
+Module 8	8d Culture Corner	metre	метр	5481	reuse	совпал перевод
+Module 8	8d Culture Corner	observatory	смотровая площадка		new	в тренажёре нет
+Module 8	8d Culture Corner	occasion	случай		none	связка / отвлечённое слово
+Module 8	8d Culture Corner	step	шаг		new	в тренажёре «ступенька», у нас «шаг»
+Module 8	8d Culture Corner	visitor	посетитель	2317	reuse	совпал перевод
+Module 8	8d Culture Corner	depending on the occasion	в зависимости от ситуации		none	связка / отвлечённое слово
+Module 8	8d Culture Corner	office space	офисное пространство		new	в тренажёре нет
+Module 8	English in Use/Extensive Reading 8	broken	сломанный	2968	reuse	совпал перевод
+Module 8	English in Use/Extensive Reading 8	collect	собирать, коллекционировать		new	в тренажёре нет
+Module 8	English in Use/Extensive Reading 8	damaged	поврежденный		new	в тренажёре нет
+Module 8	English in Use/Extensive Reading 8	front	передняя сторона (чего-либо)		new	в тренажёре нет
+Module 8	English in Use/Extensive Reading 8	graffiti	граффити	2868	reuse	совпал перевод
+Module 8	English in Use/Extensive Reading 8	expire	истекать		new	в тренажёре нет
+Module 8	English in Use/Extensive Reading 8	litter	мусор		new	в тренажёре нет
+Module 8	English in Use/Extensive Reading 8	look after	ухаживать за кем-либо, чем-либо	1276	reuse	совпал перевод
+Module 8	English in Use/Extensive Reading 8	messy	запачканный, грязный		new	в тренажёре «неряшливый» (о человеке), у нас «запачканный, грязный»
+Module 8	English in Use/Extensive Reading 8	pay (paid)	платить	5159	reuse	совпал перевод
+Module 8	English in Use/Extensive Reading 8	performance	представление, постановка	4740	reuse	совпал перевод
+Module 8	English in Use/Extensive Reading 8	questionnaire	анкета		new	в тренажёре нет
+Module 8	English in Use/Extensive Reading 8	receptionist	администратор	3130	reuse	совпал перевод
+Module 8	English in Use/Extensive Reading 8	row	ряд		new	в тренажёре нет
+Module 8	English in Use/Extensive Reading 8	seat	место	6027	reuse	совпал перевод
+Module 8	English in Use/Extensive Reading 8	show	спектакль, шоу	5357	reuse	совпал перевод
+Module 8	English in Use/Extensive Reading 8	swing	качели	4247	reuse	совпал перевод
+Module 8	English in Use/Extensive Reading 8	book tickets	заказывать билеты		new	в тренажёре нет
+Module 8	English in Use/Extensive Reading 8	out of order	в нерабочем состоянии		new	в тренажёре нет
+Module 8	English in Use/Extensive Reading 8	rubbish bins	урны		new	в тренажёре нет
+Module 8	English in Use/Extensive Reading 8	ticket counter	билетная касса		new	в тренажёре нет
+Module 8	English in Use/Extensive Reading 8	you're on the right track	вы на правильном пути		new	в тренажёре нет
+Module 9	9a Food & Drink	biscuit	печенье	5821	reuse	совпал перевод
+Module 9	9a Food & Drink	bitter	горький	2938	reuse	совпал перевод
+Module 9	9a Food & Drink	carrot	морковь	5822	reuse	совпал перевод
+Module 9	9a Food & Drink	cereal	крупа	5869	reuse	совпал перевод
+Module 9	9a Food & Drink	chocolate	шоколад	452	reuse	совпал перевод
+Module 9	9a Food & Drink	cuisine	кухня		new	в тренажёре нет
+Module 9	9a Food & Drink	dairy	молочный	4599	reuse	совпал перевод
+Module 9	9a Food & Drink	dessert	десерт	4672	reuse	совпал перевод
+Module 9	9a Food & Drink	either	тоже (в отрицательных предложениях)		none	связка / отвлечённое слово
+Module 9	9a Food & Drink	gravy	подливка		new	в тренажёре нет
+Module 9	9a Food & Drink	home-made	домашнего приготовления		new	в тренажёре нет
+Module 9	9a Food & Drink	honey	мед	1869	reuse	совпал перевод
+Module 9	9a Food & Drink	hot	горячий		new	в тренажёре «жаркий/жарко», у нас «горячий»
+Module 9	9a Food & Drink	lamb	ягненок	4603	reuse	совпал перевод
+Module 9	9a Food & Drink	meat	мясо	437	reuse	совпал перевод
+Module 9	9a Food & Drink	onion	лук	4605	reuse	совпал перевод
+Module 9	9a Food & Drink	pepper	перец	1670	reuse	совпал перевод
+Module 9	9a Food & Drink	potato	картофель		new	в тренажёре нет
+Module 9	9a Food & Drink	poultry	домашняя птица		new	в тренажёре нет
+Module 9	9a Food & Drink	pound	фунт (о весе, 453 грамма)		new	в тренажёре «фунт» без пояснения и «фунт стерлингов», у нас фунт веса
+Module 9	9a Food & Drink	pudding	пудинг		new	в тренажёре нет
+Module 9	9a Food & Drink	salty	соленый	963	reuse	совпал перевод
+Module 9	9a Food & Drink	sausage	сосиска, колбаса	252	reuse	совпал перевод
+Module 9	9a Food & Drink	sour	кислый	964	reuse	совпал перевод
+Module 9	9a Food & Drink	spicy	острый	965	reuse	совпал перевод
+Module 9	9a Food & Drink	starter	закуска		new	в тренажёре нет
+Module 9	9a Food & Drink	sweet	сладкий	966	reuse	совпал перевод
+Module 9	9a Food & Drink	takeaway	блюдо с доставкой на дом	5936	reuse	совпал перевод
+Module 9	9a Food & Drink	toast	тост (поджаренный хлеб)	1875	reuse	совпал перевод
+Module 9	9a Food & Drink	tomato	помидор	4590	reuse	совпал перевод
+Module 9	9a Food & Drink	trifle	бисквит со взбитыми сливками		new	в тренажёре нет
+Module 9	9a Food & Drink	vegetables	овощи	319	reuse	совпал перевод
+Module 9	9a Food & Drink	yoghurt	йогурт	450	reuse	совпал перевод
+Module 9	9a Food & Drink	bacon and eggs	яичница с беконом		new	в тренажёре нет
+Module 9	9a Food & Drink	chilli con carne	чили кон карне (второе блюдо, популярно в Великобритании)		new	в тренажёре нет
+Module 9	9a Food & Drink	fish and chips	рыба с жареным картофелем		new	в тренажёре нет
+Module 9	9a Food & Drink	main course	основное (горячее) блюдо		new	в тренажёре нет
+Module 9	9a Food & Drink	olive oil	оливковое масло	4582	reuse	совпал перевод
+Module 9	9a Food & Drink	packed lunch	ланч с собой		new	в тренажёре нет
+Module 9	9a Food & Drink	roast beef	ростбиф		new	в тренажёре нет
+Module 9	9a Food & Drink	rush to work	спешить на работу		new	в тренажёре нет
+Module 9	9a Food & Drink	shepherd's pie	картофельная запеканка с мясом		new	в тренажёре нет
+Module 9	9a Food & Drink	spaghetti bolognaise	спагетти с соусом Болонез		new	в тренажёре нет
+Module 9	9b On the menu	bean	боб, фасоль		new	в тренажёре нет
+Module 9	9b On the menu	beef	говядина	4594	reuse	совпал перевод
+Module 9	9b On the menu	celery	сельдерей		new	в тренажёре нет
+Module 9	9b On the menu	crisps	чипсы	5910	reuse	совпал перевод
+Module 9	9b On the menu	diet	диета		new	в тренажёре нет
+Module 9	9b On the menu	greens	зелень	38	reuse	совпал перевод
+Module 9	9b On the menu	melon	дыня	2696	reuse	совпал перевод
+Module 9	9b On the menu	mushroom	гриб	2053	reuse	совпал перевод
+Module 9	9b On the menu	pie	пирог		new	в тренажёре нет
+Module 9	9b On the menu	steak	мясо (стейк)	256	reuse	совпал перевод
+Module 9	9b On the menu	waiter	официант	1662	reuse	совпал перевод
+Module 9	9b On the menu	add	добавлять	939	reuse	совпал перевод
+Module 9	9b On the menu	boil	кипятить	942	reuse	совпал перевод
+Module 9	9b On the menu	dice	нарезать кубиками		new	в тренажёре «кубик», у нас «нарезать кубиками»
+Module 9	9b On the menu	fry	жарить	944	reuse	совпал перевод
+Module 9	9b On the menu	mix	перемешать	945	reuse	совпал перевод
+Module 9	9b On the menu	peel	очищать	946	reuse	совпал перевод
+Module 9	9b On the menu	pour	наливать	3072	reuse	совпал перевод
+Module 9	9b On the menu	preheat	разогревать		new	в тренажёре нет
+Module 9	9b On the menu	stir	размешивать	3075	reuse	совпал перевод
+Module 9	9b On the menu	taste	пробовать	4610	reuse	совпал перевод
+Module 9	9b On the menu	pasta	паста, макароны	5876	reuse	совпал перевод
+Module 9	9b On the menu	spice	специя, пряность		new	в тренажёре нет
+Module 9	9b On the menu	be on a diet	быть на диете		new	в тренажёре нет
+Module 9	9b On the menu	chef's salad	салат от шеф-повара		new	в тренажёре нет
+Module 9	9b On the menu	grilled chicken	жареная курица		new	в тренажёре нет
+Module 9	9b On the menu	milk shake	молочный коктейль		new	в тренажёре нет
+Module 9	9b On the menu	sirloin steak	стейк из филе		new	в тренажёре нет
+Module 9	9c Let's cook!	bowl	миска	321	reuse	совпал перевод
+Module 9	9c Let's cook!	carton	пакет	4596	reuse	совпал перевод
+Module 9	9c Let's cook!	degree	градус		new	в тренажёре «учёная степень», у нас «градус»
+Module 9	9c Let's cook!	flour	мука	454	reuse	совпал перевод
+Module 9	9c Let's cook!	jar	банка	4601	reuse	совпал перевод
+Module 9	9c Let's cook!	kilo	килограмм	4602	reuse	совпал перевод
+Module 9	9c Let's cook!	loaf	батон	4604	reuse	совпал перевод
+Module 9	9c Let's cook!	melt	растапливать, растворять		new	в тренажёре нет
+Module 9	9c Let's cook!	mixture	смесь		new	в тренажёре нет
+Module 9	9c Let's cook!	muffin	кекс		new	в тренажёре нет
+Module 9	9c Let's cook!	packet	пакет, пачка	5864	reuse	совпал перевод
+Module 9	9c Let's cook!	portion	порция		new	в тренажёре нет
+Module 9	9c Let's cook!	raisin	изюм		new	в тренажёре нет
+Module 9	9c Let's cook!	receipt	чек, квитанция	2036	reuse	совпал перевод
+Module 9	9c Let's cook!	recipe	рецепт (кулинарный)		new	в тренажёре нет
+Module 9	9c Let's cook!	tablespoon (tbsp)	столовая ложка		new	в тренажёре нет
+Module 9	9c Let's cook!	teaspoon (tsp)	чайная ложка		new	в тренажёре нет
+Module 9	9c Let's cook!	baking powder	разрыхлитель теста		new	в тренажёре нет
+Module 9	9c Let's cook!	baking soda	пищевая сода		new	в тренажёре нет
+Module 9	9c Let's cook!	shopping list	список покупок	860	reuse	совпал перевод
+Module 9	9d Culture Corner	anniversary	юбилей, памятная дата		new	в тренажёре нет
+Module 9	9d Culture Corner	pastries	выпечка		new	в тренажёре нет
+Module 9	9d Culture Corner	vinegar	уксус		new	в тренажёре нет
+Module 9	9d Culture Corner	herb sauce	соус из трав		new	в тренажёре нет
+Module 9	English in Use/Extensive Reading 9	fibre	клетчатка		new	в тренажёре нет
+Module 9	English in Use/Extensive Reading 9	grains	злаки, зерно		new	в тренажёре нет
+Module 9	English in Use/Extensive Reading 9	healthy	здоровый		new	в тренажёре нет
+Module 9	English in Use/Extensive Reading 9	iron	железо		new	в тренажёре нет
+Module 9	English in Use/Extensive Reading 9	protein	белок		new	в тренажёре нет
+Module 9	English in Use/Extensive Reading 9	potassium	калий		new	в тренажёре нет
+Module 9	English in Use/Extensive Reading 9	protect	защищать	1278	reuse	совпал перевод
+Module 9	English in Use/Extensive Reading 9	vitamin	витамин		new	в тренажёре нет
+Module 9	English in Use/Extensive Reading 9	wisely	разумно, мудро		new	в тренажёре нет
+Module 9	English in Use/Extensive Reading 9	be based on	быть основанным на		new	в тренажёре нет
+Module 9	English in Use/Extensive Reading 9	reserve a table	зарезервировать столик		new	в тренажёре нет
+Module 10	10a Holiday plans	caviar	икра		new	в тренажёре нет
+Module 10	10a Holiday plans	collection	коллекция, собрание	5101	reuse	совпал перевод
+Module 10	10a Holiday plans	couple	пара	5737	reuse	совпал перевод
+Module 10	10a Holiday plans	exotic	экзотический		new	в тренажёре нет
+Module 10	10a Holiday plans	flood	наводнение	1284	reuse	совпал перевод
+Module 10	10a Holiday plans	species	вид		new	в тренажёре нет
+Module 10	10a Holiday plans	terrific	прекрасный, отличный		new	в тренажёре нет
+Module 10	10a Holiday plans	tomb	мавзолей		new	в тренажёре нет
+Module 10	10a Holiday plans	attend a performance	посещать представление		new	в тренажёре нет
+Module 10	10a Holiday plans	buy souvenirs	покупать сувениры		new	в тренажёре нет
+Module 10	10a Holiday plans	go on a boat cruise	ехать в круиз (на теплоходе)		new	в тренажёре нет
+Module 10	10a Holiday plans	go/do sightseeing	осматривать достопримечательности	815	reuse	совпал перевод
+Module 10	10a Holiday plans	hire a car	брать автомобиль напрокат		new	в тренажёре нет
+Module 10	10a Holiday plans	holiday activities	занятия на отдыхе		new	в тренажёре нет
+Module 10	10a Holiday plans	next month	в следующем месяце		new	в тренажёре нет
+Module 10	10a Holiday plans	post some letters	отправлять письма по почте		new	в тренажёре нет
+Module 10	10a Holiday plans	rent a boat	брать лодку напрокат		new	в тренажёре нет
+Module 10	10a Holiday plans	stay in a luxurious hotel	останавливаться в роскошном отеле		new	в тренажёре нет
+Module 10	10a Holiday plans	taste local food	пробовать местную еду		new	в тренажёре нет
+Module 10	10a Holiday plans	travel abroad	путешествовать за границей		new	в тренажёре нет
+Module 10	10b What's the weather like?	borrow	взять на время		new	в тренажёре нет
+Module 10	10b What's the weather like?	chilly	прохладный		new	в тренажёре нет
+Module 10	10b What's the weather like?	cloud	облако		new	в тренажёре нет
+Module 10	10b What's the weather like?	cloudy	облачный	4754	reuse	совпал перевод
+Module 10	10b What's the weather like?	fog	туман		new	в тренажёре нет
+Module 10	10b What's the weather like?	foggy	туманный		new	в тренажёре нет
+Module 10	10b What's the weather like?	hang on	подождать		new	в тренажёре нет
+Module 10	10b What's the weather like?	hurry	торопиться, спешить		new	в тренажёре нет
+Module 10	10b What's the weather like?	jacket	куртка	271	reuse	совпал перевод
+Module 10	10b What's the weather like?	rainy	дождливый	4751	reuse	совпал перевод
+Module 10	10b What's the weather like?	raincoat	плащ	386	reuse	совпал перевод
+Module 10	10b What's the weather like?	sandal	сандалия		new	в тренажёре нет
+Module 10	10b What's the weather like?	scarf	шарф	1033	reuse	совпал перевод
+Module 10	10b What's the weather like?	shirt	рубашка	512	reuse	совпал перевод
+Module 10	10b What's the weather like?	shorts	шорты	274	reuse	совпал перевод
+Module 10	10b What's the weather like?	skirt	юбка	273	reuse	совпал перевод
+Module 10	10b What's the weather like?	snowy	снежный		new	в тренажёре нет
+Module 10	10b What's the weather like?	storm	ураган, буря, гроза		new	в тренажёре нет
+Module 10	10b What's the weather like?	stormy	штормовой, бурный		new	в тренажёре нет
+Module 10	10b What's the weather like?	sunny	солнечный	4240	reuse	совпал перевод
+Module 10	10b What's the weather like?	sweater	свитер	272	reuse	совпал перевод
+Module 10	10b What's the weather like?	top	топ	516	reuse	совпал перевод
+Module 10	10b What's the weather like?	trainers	кроссовки	484	reuse	совпал перевод
+Module 10	10b What's the weather like?	trousers	брюки	519	reuse	совпал перевод
+Module 10	10b What's the weather like?	T-shirt	футболка, тенниска	277	reuse	совпал перевод
+Module 10	10b What's the weather like?	wet	мокрый, влажный		new	в тренажёре нет
+Module 10	10b What's the weather like?	windy	ветреный	4241	reuse	совпал перевод
+Module 10	10b What's the weather like?	boiling hot	очень жарко		new	в тренажёре нет
+Module 10	10b What's the weather like?	brand new	совершенно новый	2770	reuse	совпал перевод
+Module 10	10b What's the weather like?	day off	выходной		new	в тренажёре нет
+Module 10	10b What's the weather like?	freezing cold	очень холодно		new	в тренажёре нет
+Module 10	10b What's the weather like?	get soaked	промокнуть		new	в тренажёре нет
+Module 10	10c Weekend fun	fabulous	потрясающий		new	в тренажёре нет
+Module 10	10c Weekend fun	head back home	направляться домой		new	в тренажёре нет
+Module 10	10c Weekend fun	look forward to smth./doing smth.	ожидать чего-либо с нетерпением		new	в тренажёре нет
+Module 10	10c Weekend fun	run errands	выполнять задания, поручения		new	в тренажёре нет
+Module 10	10d Culture Corner	accurate	точный		new	в тренажёре нет
+Module 10	10d Culture Corner	admire	восхищаться	3469	reuse	совпал перевод
+Module 10	10d Culture Corner	architecture	архитектура		new	в тренажёре нет
+Module 10	10d Culture Corner	bagpipes	волынка		new	в тренажёре нет
+Module 10	10d Culture Corner	band	оркестр		new	в тренажёре «группа (музыкальная)», у нас «оркестр»
+Module 10	10d Culture Corner	castle	замок	1933	reuse	совпал перевод
+Module 10	10d Culture Corner	chant	петь, воспевать		new	в тренажёре нет
+Module 10	10d Culture Corner	childhood	детство		new	в тренажёре нет
+Module 10	10d Culture Corner	except	за исключением		none	связка / отвлечённое слово
+Module 10	10d Culture Corner	experience	испытать	6074	reuse	совпал перевод
+Module 10	10d Culture Corner	fire	стрелять		new	в тренажёре нет
+Module 10	10d Culture Corner	kilt	килт (шотландская мужская юбка)		new	в тренажёре нет
+Module 10	10d Culture Corner	lifetime	целая жизнь		new	в тренажёре нет
+Module 10	10d Culture Corner	military	военный		new	в тренажёре нет
+Module 10	10d Culture Corner	musician	музыкант	1659	reuse	совпал перевод
+Module 10	10d Culture Corner	object	предмет, вещь		none	связка / отвлечённое слово
+Module 10	10d Culture Corner	piper	волынщик		new	в тренажёре нет
+Module 10	10d Culture Corner	provide	обеспечивать		new	в тренажёре нет
+Module 10	10d Culture Corner	tour	совершать тур, осматривать	3360	reuse	совпал перевод
+Module 10	10d Culture Corner	transparent	прозрачный	1311	reuse	совпал перевод
+Module 10	10d Culture Corner	treasure	сокровище	4180	reuse	совпал перевод
+Module 10	10d Culture Corner	tricycle	трехколесный велосипед		new	в тренажёре нет
+Module 10	10d Culture Corner	tunnel	туннель		new	в тренажёре нет
+Module 10	10d Culture Corner	crown jewels	драгоценности короны		new	в тренажёре нет
+Module 10	10d Culture Corner	folk music	народная музыка		new	в тренажёре нет
+Module 10	10d Culture Corner	hot air balloon	воздушный шар		new	в тренажёре нет
+Module 10	10d Culture Corner	multiplication table	таблица умножения		new	в тренажёре нет
+Module 10	10d Culture Corner	range from	варьироваться (от ... до ...)		none	связка / отвлечённое слово
+Module 10	10d Culture Corner	remind smb. of smth.	напоминать кому-либо о чем-либо		new	в тренажёре нет
+Module 10	10d Culture Corner	sea life	морская жизнь		new	в тренажёре нет
+Module 10	10d Culture Corner	underwater safari	подводное сафари		new	в тренажёре нет
+Module 10	English in Use/Extensive Reading 10	check in/out	зарегистрироваться/выписаться из гостиницы	3629	reuse	совпал перевод
+Module 10	English in Use/Extensive Reading 10	crash	разбиваться		new	в тренажёре нет
+Module 10	English in Use/Extensive Reading 10	dunes	дюны		new	в тренажёре нет
+Module 10	English in Use/Extensive Reading 10	grind	стирать в порошок		new	в тренажёре нет
+Module 10	English in Use/Extensive Reading 10	pebbles	галька		new	в тренажёре нет
+Module 10	English in Use/Extensive Reading 10	stretch	участок, полоса		new	в тренажёре нет
+Module 10	English in Use/Extensive Reading 10	reservation	резервирование, бронирование		new	в тренажёре нет
+Module 10	English in Use/Extensive Reading 10	ultimate	максимальный, наивысший		none	связка / отвлечённое слово
+Module 10	English in Use/Extensive Reading 10	volcano	вулкан	720	reuse	совпал перевод
+Module 10	English in Use/Extensive Reading 10	double room	номер на двоих		new	в тренажёре нет
+Module 10	English in Use/Extensive Reading 10	en suite bathroom	отдельная ванная комната в номере		new	в тренажёре нет
+Module 10	English in Use/Extensive Reading 10	per night	за ночь		new	в тренажёре нет
+Module 10	English in Use/Extensive Reading 10	single room	номер на одного		new	в тренажёре нет
