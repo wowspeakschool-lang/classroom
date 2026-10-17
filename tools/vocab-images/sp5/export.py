@@ -14,7 +14,8 @@ URL = 'https://app.wowteach.ru/trainer/media/spotlight5/'
 # перерисованы листом замен images/177.webp → out/78, выложены 16.10.2026 вручную; nightclub ждёт
 SKIP = {'culture', 'street parade', 'Thanksgiving',
         # 17.10.2026: не прошли проверку (ночной клуб со взрослыми, мёд вместо keep out) и рыцарь с мечом — ждёт решения
-        'not my kind of place', 'keep out', 'face (difficulty)'}
+        'not my kind of place', 'keep out', 'face (difficulty)',
+        'sunbathing'}  # 17.10: взрослая в купальнике позирует на шезлонге — ждёт замены
 SKIP -= set(filter(None, os.environ.get('ALLOW', '').split('|')))  # ALLOW='keep out|…' — выгрузить перерисованные (лист 160)
 # nightclub перерисован на листе 142 (вход без людей) — выкладывается оттуда; лист 78 больше не выгружать
 # омонимы: подпись → начало названия колоды, где этот смысл
@@ -29,7 +30,8 @@ def put(src, stem, q):
     """Кладёт 512×512; если под этим именем уже выложен 300×300 — рядом …_v2. → (новый адрес, прежний)"""
     old = f'{DST}/{stem}.webp'
     name = stem
-    if os.path.exists(old) and Image.open(old).size != (512, 512):
+    # FORCE_V2=1 — перерисованная картинка: новое имя, чтобы браузеры не показывали прежнюю
+    if os.path.exists(old) and (Image.open(old).size != (512, 512) or os.environ.get('FORCE_V2')):
         name = stem + '_v2'
     dst = f'{DST}/{name}.webp'
     # уже выгружено из этой же нарезки — не пережимаем заново (method=6 медленный)

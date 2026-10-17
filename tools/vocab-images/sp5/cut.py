@@ -65,7 +65,8 @@ def is_scene(p):
     hm = Image.new('L', (m.shape[1], m.shape[0]), 0)
     ImageDraw.Draw(hm).polygon([tuple(map(int, pts[v])) for v in hull.vertices], fill=1)
     return m.sum() / max(1, np.array(hm).sum()) >= SCENE_SOLID
-CUT_BOTTOM = {"Let's have fun!": 0.83, 'hour hand': 0.873, 'landmark': 0.877, 'minute hand': 0.88, 'Would you like...?': 0.827, 'sandwich': 0.847}  # остаток подписи под рисунком
+# ключ «лист/подпись» — только для этого листа (часы листа 166 те же подписи, что у 117)
+CUT_BOTTOM = {"Let's have fun!": 0.83, '117/hour hand': 0.873, '117/landmark': 0.877, '117/minute hand': 0.88, '137/Would you like...?': 0.827, '137/sandwich': 0.847}  # остаток подписи под рисунком
 CUT_LEFT = {'coke': 0.24}  # край соседней тарелки с chips
 NO_SPECK = set()
 
@@ -359,7 +360,8 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
     if not GENTLE:
         a[(a < 235) & (mn2 >= 140) & (mx2 - mn2 <= 70)] = 0
     for w, frac in CUT_BOTTOM.items():
-        if p.endswith(f'/{fname(w)}'): a[int(a.shape[0] * frac):] = 0
+        sh, _, ww = w.rpartition('/') if w.split('/', 1)[0].isdigit() else ('', '', w)
+        if p.endswith(f'/{sh}/{fname(ww)}' if sh else f'/{fname(ww)}'): a[int(a.shape[0] * frac):] = 0
     for w, frac in CUT_LEFT.items():
         if p.endswith(f'/{fname(w)}'): a[:, :int(a.shape[1] * frac)] = 0
     lab, n = label(a > 40)
