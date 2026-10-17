@@ -6,8 +6,15 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)) + '/..')
 # 🟥 названия модулей — по памяти, сверить с учебником
 MOD = {1: "Who's who?", 2: 'Here we are!', 3: 'Getting around', 4: 'Day after day', 5: 'Feasts',
        6: 'Leisure activities', 7: 'Now and then', 8: 'Rules and regulations', 9: 'Food and refreshments', 10: 'Holiday time'}
+# названия Culture Corner — из содержания учебника (Spotlight 6 SB, Table of Contents)
+CC = {'1d': 'The United Kingdom', '2d': 'Famous streets', '3d': 'Getting around London', '4d': 'Teenage life in Britain',
+      '5d': 'The Highland games', '6d': 'Board games', '7d': 'Superman', '8d': 'Building Big',
+      '9d': 'Places to eat in the UK', '10d': 'The Edinburgh Experience'}
 def sec_name(s):
-    return s.replace('Use of English/', 'English in Use/')
+    s = s.replace('Use of English/', 'English in Use/')
+    k = s.split(' ')[0]
+    if s == f'{k} Culture Corner' and k in CC: s += ': ' + CC[k]
+    return s
 # lower(term) → id; ключ с разделом — для омонимов внутри класса
 REUSE = {
  'age': 2273, 'aunt': 303, 'big': 520, 'brother': 422, 'child': 1437, 'children': 1438, 'cousin': 426, 'curly': 2732,
