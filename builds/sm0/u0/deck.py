@@ -1,22 +1,28 @@
 # -*- coding: utf-8 -*-
 """Презентация «Unit 0 · Say Hello! — Lesson 6 (Revision + Test)».
 
-    python3.13 builds/sm0/u0/deck.py <папка-с-png> <куда-положить.pptx>
+    python3.13 builds/sm0/u0/deck.py <шаблон.pptx> <png-папка> <куда.pptx>
 
-Игры собраны переходами по клику: ребёнок кликает по фигуре, презентация
-прыгает на слайд-ответ и возвращается назад. Работает в PowerPoint на
-компьютере без настройки, ничего не ломается при показе.
+Оформление берётся из присланного методистом файла Unit 1 Lesson 7.pptx:
+скрипт открывает его как шаблон, удаляет слайды и собирает свои в том же
+стиле — те же фоны (FFE4EA / E3F0FB), белые круги по углам, белая карточка,
+Verdana и Trebuchet MS, те же цвета заголовков.
+
+На слайдах — только английский: короткая инструкция вида «Click the colour!».
+Русский остаётся в плане урока и на слайде «Я могу!», как в образце.
+
+Игры собраны переходами по клику: клик по фигуре открывает слайд-ответ,
+кнопка возвращает назад. Работает в PowerPoint без настройки.
 """
 import sys, os
 from pptx import Presentation
-from pptx.util import Inches, Pt, Emu
+from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
 
-PNG, OUT = sys.argv[1], sys.argv[2]
+TEMPLATE, PNG, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
 
-# шарики лежат в репозитории в webp; PowerPoint их не ест — переводим в png
 HASH = {'red': '8b38abac4dbc', 'green': '481214562a38', 'blue': '34b8efecd4b2',
         'orange': 'ce01e4bbf55f', 'pink': 'f40c937be9f8', 'yellow': 'fccf971c0287'}
 if not all(os.path.exists(f'{PNG}/{n}.png') for n in HASH):
@@ -30,28 +36,48 @@ if not all(os.path.exists(f'{PNG}/{n}.png') for n in HASH):
         bg.alpha_composite(im)
         bg.convert('RGB').save(f'{PNG}/{name}.png')
 
-INK = RGBColor(0x1F, 0x2A, 0x44)      # тёмно-синий текст
-ACC = RGBColor(0xFF, 0x6B, 0x35)      # оранжевый акцент
-SOFT = RGBColor(0xEF, 0xF3, 0xFB)     # светлая плашка
+# ── палитра образца ───────────────────────────────────────────────────────
+PINK_BG = RGBColor(0xFF, 0xE4, 0xEA)
+BLUE_BG = RGBColor(0xE3, 0xF0, 0xFB)
+WHITE = RGBColor(0xFF, 0xFF, 0xFF)
+BLUE = RGBColor(0x15, 0x65, 0xC0)
+PURPLE = RGBColor(0x7B, 0x1F, 0xA2)
+TEAL = RGBColor(0x0E, 0x74, 0x90)
+INK = RGBColor(0x3A, 0x2A, 0x4D)
+GREY = RGBColor(0x6B, 0x72, 0x80)
 GREEN = RGBColor(0x2E, 0xA8, 0x4F)
-W, H = Inches(13.333), Inches(7.5)
+HEAD = 'Verdana'
+BODY = 'Trebuchet MS'
 
-prs = Presentation()
-prs.slide_width, prs.slide_height = W, H
-BLANK = prs.slide_layouts[6]
+prs = Presentation(TEMPLATE)
+RID = '{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id'
+for sld in list(prs.slides._sldIdLst):          # шаблон чистим, дизайн остаётся
+    prs.part.drop_rel(sld.get(RID))
+    prs.slides._sldIdLst.remove(sld)
+LAYOUT = prs.slide_layouts[0]
+W, H = prs.slide_width, prs.slide_height
+_n = [0]
 
 
-def slide():
-    s = prs.slides.add_slide(BLANK)
+def slide(bg=None):
+    """Новый слайд: фон через один розовый/голубой, два белых круга по углам."""
+    s = prs.slides.add_slide(LAYOUT)
+    _n[0] += 1
     s.background.fill.solid()
-    s.background.fill.fore_color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+    s.background.fill.fore_color.rgb = bg or (PINK_BG if _n[0] % 2 else BLUE_BG)
+    for left, top, size in ((Inches(-1.3), Inches(-1.3), Inches(3.2)),
+                            (Inches(11.4), Inches(5.5), Inches(3.4))):
+        blob = s.shapes.add_shape(MSO_SHAPE.OVAL, left, top, size, size)
+        blob.fill.solid()
+        blob.fill.fore_color.rgb = WHITE
+        blob.line.fill.background()
+        blob.shadow.inherit = False
     return s
 
 
-def text(s, txt, *, top, size, bold=True, color=INK, left=Inches(0.6),
-         width=None, align=PP_ALIGN.CENTER, height=Inches(1.2)):
-    width = width or (W - Inches(1.2))
-    box = s.shapes.add_textbox(left, top, width, height)
+def text(s, txt, *, top, size, color=INK, font=HEAD, bold=True,
+         left=Inches(0.6), width=None, height=Inches(1.1), align=PP_ALIGN.CENTER):
+    box = s.shapes.add_textbox(left, top, width or (W - Inches(1.2)), height)
     tf = box.text_frame
     tf.word_wrap = True
     tf.vertical_anchor = MSO_ANCHOR.MIDDLE
@@ -62,190 +88,216 @@ def text(s, txt, *, top, size, bold=True, color=INK, left=Inches(0.6),
         r.text = line
         r.font.size = Pt(size)
         r.font.bold = bold
+        r.font.name = font
         r.font.color.rgb = color
-        r.font.name = 'Segoe UI'
     return box
 
 
-def button(s, txt, *, left, top, width, height, target=None,
-           fill=SOFT, color=INK, size=28):
+def title(s, txt, color=None):
+    return text(s, txt, top=Inches(0.5), size=38, color=color or
+                (PURPLE if _n[0] % 2 else BLUE))
+
+
+def card(s, left, top, width, height):
     sh = s.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left, top, width, height)
     sh.fill.solid()
-    sh.fill.fore_color.rgb = fill
-    sh.line.color.rgb = RGBColor(0xD6, 0xDE, 0xEC)
+    sh.fill.fore_color.rgb = WHITE
+    sh.line.fill.background()
     sh.shadow.inherit = False
+    sh.adjustments[0] = 0.04
+    return sh
+
+
+def tile(s, txt, *, left, top, width, height, size=28, color=INK, target=None):
+    sh = card(s, left, top, width, height)
     tf = sh.text_frame
     tf.word_wrap = True
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     p = tf.paragraphs[0]
     p.alignment = PP_ALIGN.CENTER
     r = p.add_run()
     r.text = txt
     r.font.size = Pt(size)
     r.font.bold = True
+    r.font.name = HEAD
     r.font.color.rgb = color
-    r.font.name = 'Segoe UI'
     if target is not None:
         sh.click_action.target_slide = target
     return sh
 
 
-def picture(s, name, left, top, height):
-    return s.shapes.add_picture(f'{PNG}/{name}.png', left, top, height=height)
-
-
-def footer(s, txt):
-    text(s, txt, top=H - Inches(0.85), size=14, bold=False,
-         color=RGBColor(0x8A, 0x93, 0xA6), height=Inches(0.5))
+def balloon(s, name, left, top, height, target=None):
+    pic = s.shapes.add_picture(f'{PNG}/{name}.png', left, top, height=height)
+    if target is not None:
+        pic.click_action.target_slide = target
+    return pic
 
 
 COLOURS = ['red', 'green', 'blue', 'orange', 'pink', 'yellow']
 WORDS = ['sat', 'pin', 'ten', 'red', 'kit', 'dad']
+ROUNDS = [('red', 4, 'four'), ('blue', 5, 'five'), ('yellow', 3, 'three')]
 
-# ── 1. титул ──────────────────────────────────────────────────────────────
-s1 = slide()
-text(s1, 'Unit 0 · Lesson 6', top=Inches(2.0), size=30, color=ACC)
-text(s1, 'Say Hello! 👋', top=Inches(2.8), size=72)
-text(s1, 'Revision + Test · Super Minds Starter · WowSpeak',
-     top=Inches(4.3), size=22, bold=False, color=RGBColor(0x6B, 0x74, 0x88))
+# 1 · титул ────────────────────────────────────────────────────────────────
+s = slide(PINK_BG)
+text(s, 'Unit 0 · Lesson 6', top=Inches(2.1), size=40, color=BLUE, height=Inches(1.2))
+text(s, 'Say Hello! 👋', top=Inches(3.3), size=60, color=PURPLE, height=Inches(1.5))
+text(s, 'Revision + Test · Super Minds Starter · WowSpeak',
+     top=Inches(5.0), size=20, color=GREY, font=BODY, bold=False, height=Inches(0.7))
 
-# ── 2. greeting ───────────────────────────────────────────────────────────
-s2 = slide()
-text(s2, 'How are you?', top=Inches(1.0), size=54)
+# 2 · greeting ─────────────────────────────────────────────────────────────
+s = slide()
+title(s, 'How are you?')
+card(s, Inches(1.6), Inches(1.9), Inches(10.1), Inches(4.6))
 for i, (emo, word) in enumerate([('😀', 'happy'), ('😢', 'sad'), ('😠', 'angry')]):
-    left = Inches(1.6) + i * Inches(3.5)
-    text(s2, emo, top=Inches(2.6), size=96, left=left, width=Inches(3.0), height=Inches(1.8))
-    text(s2, word, top=Inches(4.6), size=36, left=left, width=Inches(3.0), color=ACC)
+    left = Inches(2.2) + i * Inches(3.2)
+    text(s, emo, top=Inches(2.4), size=96, left=left, width=Inches(2.8), height=Inches(2.2))
+    text(s, word, top=Inches(4.6), size=28, left=left, width=Inches(2.8), height=Inches(0.9))
 
-# ── 3. warm-up reading ────────────────────────────────────────────────────
-s3 = slide()
-text(s3, 'Read! 📖', top=Inches(0.8), size=48)
-text(s3, 'sat    pin    ten    red', top=Inches(2.4), size=60)
-text(s3, 'kit    dad    rat    pen', top=Inches(3.9), size=60)
-footer(s3, 'Ребёнок читает сам. Второй круг — быстрее.')
+# 3 · warm-up reading ──────────────────────────────────────────────────────
+s = slide()
+title(s, 'Read! 📖')
+card(s, Inches(1.4), Inches(1.9), Inches(10.5), Inches(4.4))
+box = s.shapes.add_textbox(Inches(1.6), Inches(2.1), Inches(10.1), Inches(3.9))
+tf = box.text_frame
+tf.word_wrap = True
+tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+for i, row in enumerate([['sat', 'pin', 'ten', 'red'], ['kit', 'dad', 'rat', 'pen']]):
+    p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
+    p.alignment = PP_ALIGN.CENTER
+    for j, w in enumerate(row):
+        if j:
+            sp = p.add_run(); sp.text = '    '
+            sp.font.size = Pt(38); sp.font.name = HEAD
+        r = p.add_run()
+        r.text = w
+        r.font.size = Pt(38)
+        r.font.bold = True
+        r.font.name = HEAD
+        r.font.color.rgb = (PURPLE, TEAL, INK, BLUE)[j % 4]
 
-# ── 4. HW check ───────────────────────────────────────────────────────────
-s4 = slide()
-text(s4, 'HW check ✅', top=Inches(3.0), size=60)
+# 4 · HW check ─────────────────────────────────────────────────────────────
+s = slide()
+text(s, 'HW check ✅', top=Inches(2.8), size=60, color=BLUE, height=Inches(1.6))
 
-# ── 5–11. игра 1: поймай цвет ─────────────────────────────────────────────
+# 5–11 · игра 1: цвета ─────────────────────────────────────────────────────
 board1 = slide()
-colour_slides = {}
-for c in COLOURS:
-    sc = slide()
-    text(sc, c, top=Inches(0.8), size=72, color=ACC)
-    picture(sc, c, left=int((W - Inches(2.2)) / 2), top=Inches(2.2), height=Inches(3.4))
-    colour_slides[c] = sc
+colour_slides = {c: slide() for c in COLOURS}
 
-text(board1, 'Поймай цвет! 🎈', top=Inches(0.5), size=48)
-text(board1, 'Listen and click: "Click red!"', top=Inches(1.4), size=24,
-     bold=False, color=RGBColor(0x6B, 0x74, 0x88), height=Inches(0.6))
+title(board1, 'Colours 🎈', color=PURPLE)
+text(board1, 'Click the colour!', top=Inches(1.35), size=20, color=GREY,
+     font=BODY, bold=False, height=Inches(0.6))
+card(board1, Inches(1.4), Inches(1.95), Inches(10.5), Inches(4.5))
 for i, c in enumerate(COLOURS):
     col, row = i % 3, i // 3
-    left = Inches(2.2) + col * Inches(3.2)
-    top = Inches(2.2) + row * Inches(2.5)
-    pic = picture(board1, c, left=left, top=top, height=Inches(2.2))
-    pic.click_action.target_slide = colour_slides[c]
+    balloon(board1, c, Inches(2.4) + col * Inches(3.1), Inches(2.2) + row * Inches(2.2),
+            Inches(2.0), target=colour_slides[c])
 for c, sc in colour_slides.items():
-    button(sc, '↩ назад к шарикам', left=int((W - Inches(4.6)) / 2), top=Inches(6.0),
-           width=Inches(4.6), height=Inches(0.8), target=board1, size=22)
-footer(board1, 'Клик по шарику открывает его название — проверка себя.')
+    title(sc, c, color=PURPLE)
+    card(sc, Inches(4.2), Inches(1.7), Inches(4.9), Inches(4.1))
+    balloon(sc, c, int((W - Inches(2.1)) / 2), Inches(2.0), Inches(3.4))
+    tile(sc, '↩ Back', left=Inches(5.4), top=Inches(6.1), width=Inches(2.5),
+         height=Inches(0.8), size=20, color=GREY, target=board1)
 
-# ── 12–17. числа: сколько шариков ─────────────────────────────────────────
-rounds = [('red', 4, 'four'), ('blue', 5, 'five'), ('yellow', 3, 'three')]
-q_slides, a_slides = [], []
-for colour, n, word in rounds:
-    q_slides.append(slide())
-    a_slides.append(slide())
-for i, (colour, n, word) in enumerate(rounds):
+# 12–17 · How many ─────────────────────────────────────────────────────────
+q_slides = [slide() for _ in ROUNDS]
+a_slides = [slide() for _ in ROUNDS]
+for i, (colour, n, word) in enumerate(ROUNDS):
     sq, sa = q_slides[i], a_slides[i]
-    text(sq, 'How many? 🔢', top=Inches(0.5), size=44)
-    total = n * Inches(1.5)
-    start = int((W - total) / 2)
+    title(sq, 'How many? 🔢', color=BLUE)
+    card(sq, Inches(1.4), Inches(1.9), Inches(10.5), Inches(3.6))
+    step = Inches(1.95)
+    start = int((W - n * step) / 2 + (step - Inches(1.6)) / 2)
     for k in range(n):
-        picture(sq, colour, left=start + k * Inches(1.5), top=Inches(2.2), height=Inches(2.6))
-    button(sq, 'Проверить →', left=int((W - Inches(3.6)) / 2), top=Inches(5.6),
-           width=Inches(3.6), height=Inches(0.9), target=sa, size=26, fill=SOFT)
-    text(sa, f'{n} — {word} 🎉', top=Inches(2.6), size=80, color=GREEN)
-    nxt = q_slides[i + 1] if i + 1 < len(rounds) else None
-    if nxt is not None:
-        button(sa, 'Дальше →', left=int((W - Inches(3.2)) / 2), top=Inches(5.6),
-               width=Inches(3.2), height=Inches(0.9), target=nxt, size=26)
+        balloon(sq, colour, start + k * step, Inches(2.3), Inches(2.6))
+    tile(sq, 'Check →', left=int((W - Inches(3.2)) / 2), top=Inches(5.8),
+         width=Inches(3.2), height=Inches(0.9), size=24, color=BLUE, target=sa)
+    title(sa, 'How many? 🔢', color=BLUE)
+    card(sa, Inches(3.0), Inches(2.0), Inches(7.3), Inches(3.4))
+    text(sa, f'{n} — {word} 🎉', top=Inches(2.9), size=66, color=GREEN, height=Inches(1.6))
+    if i + 1 < len(ROUNDS):
+        tile(sa, 'Next →', left=int((W - Inches(3.0)) / 2), top=Inches(5.8),
+             width=Inches(3.0), height=Inches(0.9), size=24, color=BLUE,
+             target=q_slides[i + 1])
 
-# ── 18–24. игра 2: кубик и чтение ─────────────────────────────────────────
+# 18–24 · игра 2: кубик и чтение ───────────────────────────────────────────
 board2 = slide()
 dice_slides = [slide() for _ in WORDS]
-text(board2, 'Кубик и чтение 🎲', top=Inches(0.5), size=48)
+title(board2, 'Roll & read 🎲', color=PURPLE)
+card(board2, Inches(1.4), Inches(1.6), Inches(10.5), Inches(3.4))
 for i, w in enumerate(WORDS):
     col, row = i % 3, i // 3
-    left = Inches(2.0) + col * Inches(3.3)
-    top = Inches(1.9) + row * Inches(1.6)
-    button(board2, f'{i + 1}   {w}', left=left, top=top, width=Inches(2.8),
-           height=Inches(1.2), size=34, target=dice_slides[i])
-dice = button(board2, '🎲  бросить кубик', left=int((W - Inches(5.0)) / 2),
-              top=Inches(5.4), width=Inches(5.0), height=Inches(1.0),
-              target=dice_slides[0], size=28, fill=RGBColor(0xFF, 0xE8, 0xDC), color=ACC)
-footer(board2, 'Кубик идёт по кругу 1→6: каждый клик — следующее слово.')
+    tile(board2, f'{i + 1}   {w}', left=Inches(2.0) + col * Inches(3.2),
+         top=Inches(1.9) + row * Inches(1.5), width=Inches(2.8), height=Inches(1.1),
+         size=32, color=(PURPLE, TEAL, BLUE)[i % 3], target=dice_slides[i])
+tile(board2, '🎲  Roll the dice', left=int((W - Inches(4.8)) / 2), top=Inches(5.4),
+     width=Inches(4.8), height=Inches(1.0), size=26, color=PURPLE, target=dice_slides[0])
 for i, w in enumerate(WORDS):
     sd = dice_slides[i]
-    text(sd, f'🎲 {i + 1}', top=Inches(0.8), size=44, color=ACC)
-    text(sd, w, top=Inches(2.4), size=110)
-    button(sd, '🎲 ещё раз', left=Inches(3.6), top=Inches(5.8), width=Inches(3.0),
-           height=Inches(0.9), target=dice_slides[(i + 1) % len(WORDS)], size=24)
-    button(sd, '↩ к словам', left=Inches(6.9), top=Inches(5.8), width=Inches(3.0),
-           height=Inches(0.9), target=board2, size=24)
+    title(sd, f'🎲 {i + 1}', color=BLUE)
+    card(sd, Inches(3.0), Inches(1.8), Inches(7.3), Inches(3.5))
+    text(sd, w, top=Inches(2.4), size=96, color=PURPLE, height=Inches(2.3))
+    tile(sd, '🎲 Again', left=Inches(3.9), top=Inches(5.7), width=Inches(2.6),
+         height=Inches(0.9), size=20, color=BLUE, target=dice_slides[(i + 1) % len(WORDS)])
+    tile(sd, '↩ Back', left=Inches(6.9), top=Inches(5.7), width=Inches(2.6),
+         height=Inches(0.9), size=20, color=GREY, target=board2)
 
-# ── 25. тест ──────────────────────────────────────────────────────────────
-s_test = slide()
-text(s_test, 'Test 📝', top=Inches(1.2), size=64)
-text(s_test, 'Unit 0', top=Inches(2.4), size=44, color=ACC)
-button(s_test, 'ссылку на тест вставить сюда перед уроком',
-       left=Inches(2.6), top=Inches(3.6), width=Inches(8.1), height=Inches(1.0), size=22)
-text(s_test, 'You can do it! 💪', top=Inches(5.0), size=36, color=GREEN)
+# 25 · тест ────────────────────────────────────────────────────────────────
+s = slide()
+title(s, 'Test 📝', color=BLUE)
+card(s, Inches(3.0), Inches(2.0), Inches(7.3), Inches(3.9))
+text(s, 'Unit 0', top=Inches(2.4), size=44, color=PURPLE, height=Inches(1.3))
+text(s, '💪', top=Inches(3.7), size=54, height=Inches(1.1))
+text(s, 'paste the test link here', top=Inches(4.9), size=18, color=GREY,
+     font=BODY, bold=False, height=Inches(0.9))
 
-# ── 26. я могу ────────────────────────────────────────────────────────────
-s_can = slide()
-text(s_can, 'Я могу! ✅', top=Inches(0.6), size=48)
-text(s_can,
-     'Здороваться и знакомиться: Hello! I’m …\n'
-     'Называть цвета: red, green, blue, orange, pink, yellow\n'
-     'Считать до 10\n'
-     'Читать слова: sat, pin, ten, red, kit, dad',
-     top=Inches(2.0), size=30, bold=False, align=PP_ALIGN.LEFT,
-     left=Inches(2.4), width=Inches(9.0), height=Inches(3.4))
+# 26 · я могу ──────────────────────────────────────────────────────────────
+s = slide()
+title(s, 'Я могу! 🎉', color=PURPLE)
+card(s, Inches(2.0), Inches(1.9), Inches(9.3), Inches(4.5))
+text(s, 'Здороваться и знакомиться: Hello! I’m …\n'
+        'Называть цвета: red, green, blue, orange, pink, yellow\n'
+        'Считать до 10\n'
+        'Читать слова: sat, pin, ten, red, kit, dad',
+     top=Inches(2.3), size=24, color=INK, font=BODY, bold=False,
+     left=Inches(2.7), width=Inches(7.9), height=Inches(3.7), align=PP_ALIGN.LEFT)
 
-# ── 27. домашнее задание ──────────────────────────────────────────────────
-s_hw = slide()
-text(s_hw, 'Assign HW', top=Inches(2.6), size=54)
-text(s_hw, 'NO HW — юнит закончен', top=Inches(3.9), size=32, bold=False, color=ACC)
+# 27 · домашнее задание ────────────────────────────────────────────────────
+s = slide()
+text(s, 'Assign HW 📝', top=Inches(2.6), size=60, color=BLUE, height=Inches(1.6))
+text(s, 'NO HW', top=Inches(4.2), size=32, color=GREY, font=BODY, bold=False)
 
-# ── 28. финал ─────────────────────────────────────────────────────────────
-s_end = slide()
-text(s_end, 'Rate the lesson', top=Inches(1.4), size=48)
-text(s_end, '⭐ ⭐ ⭐ ⭐ ⭐', top=Inches(2.8), size=72)
-text(s_end, 'Bye-bye! 👋', top=Inches(4.6), size=54, color=ACC)
+# 28 · финал ───────────────────────────────────────────────────────────────
+s = slide()
+title(s, 'Rate the lesson', color=PURPLE)
+card(s, Inches(2.2), Inches(2.2), Inches(8.9), Inches(3.4))
+text(s, '⭐ ⭐ ⭐ ⭐ ⭐', top=Inches(2.5), size=60, height=Inches(2.0))
+text(s, 'Bye-bye! 👋', top=Inches(5.7), size=32, color=PURPLE, height=Inches(0.8))
 
-# ── 29–31. запас ──────────────────────────────────────────────────────────
-s_r1 = slide()
-text(s_r1, '⏱ Reading race', top=Inches(0.8), size=44, color=ACC)
-text(s_r1, 'sat  pin  ten  red  kit  dad  rat  pen  den  as', top=Inches(2.6), size=46)
-footer(s_r1, 'Кто быстрее и без ошибок прочитает строку. Побей свой рекорд.')
+# 29–31 · запас ────────────────────────────────────────────────────────────
+s = slide()
+title(s, '⏱ Reading race', color=BLUE)
+card(s, Inches(1.4), Inches(2.0), Inches(10.5), Inches(3.4))
+text(s, 'sat   pin   ten   red   kit   dad   rat   pen   den   as',
+     top=Inches(3.0), size=36, color=INK, height=Inches(1.4))
+text(s, 'Read the line. Faster!', top=Inches(5.7), size=20, color=GREY,
+     font=BODY, bold=False, height=Inches(0.7))
 
-s_r2 = slide()
-text(s_r2, '🔍 Find & read', top=Inches(0.6), size=44, color=ACC)
-grid = [['sat', 'pin', 'ten'], ['red', 'kit', 'dad'], ['rat', 'pen', 'as']]
-for r, row in enumerate(grid):
+s = slide()
+title(s, '🔍 Find & read', color=PURPLE)
+card(s, Inches(3.2), Inches(1.7), Inches(7.0), Inches(4.3))
+for r, row in enumerate([['sat', 'pin', 'ten'], ['red', 'kit', 'dad'], ['rat', 'pen', 'as']]):
     for c, w in enumerate(row):
-        text(s_r2, w, top=Inches(1.8) + r * Inches(1.4), size=44,
-             left=Inches(3.2) + c * Inches(2.6), width=Inches(2.4), height=Inches(1.0))
-footer(s_r2, 'Учитель называет слово — ребёнок находит его и читает вслух.')
+        text(s, w, top=Inches(1.9) + r * Inches(1.35), size=36,
+             color=(PURPLE, TEAL, BLUE)[c], left=Inches(3.4) + c * Inches(2.2),
+             width=Inches(2.0), height=Inches(1.0))
 
-s_r3 = slide()
-text(s_r3, '🎯 Colour bingo', top=Inches(0.5), size=44, color=ACC)
+s = slide()
+title(s, '🎯 Colour bingo', color=BLUE)
+card(s, Inches(1.4), Inches(1.6), Inches(10.5), Inches(4.6))
 for i, c in enumerate(COLOURS):
     col, row = i % 3, i // 3
-    picture(s_r3, c, left=Inches(2.6) + col * Inches(3.0), top=Inches(1.8) + row * Inches(2.4),
-            height=Inches(2.1))
-footer(s_r3, 'Учитель называет цвета подряд — ребёнок отмечает, кто первым соберёт ряд.')
+    balloon(s, c, Inches(2.4) + col * Inches(3.1), Inches(1.9) + row * Inches(2.3),
+            Inches(2.1))
 
 prs.save(OUT)
-print(f'слайдов: {len(prs.slides.__iter__.__self__._sldIdLst)} → {OUT}')
+print(f'слайдов: {_n[0]} → {OUT}')

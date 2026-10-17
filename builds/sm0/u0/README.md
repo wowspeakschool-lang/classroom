@@ -24,8 +24,7 @@ SQL — для текущей схемы (`classroom_lessons` / `classroom_block
 * Записать **звук /s/ и /æ/** (звук, не имя буквы) — ДЗ 1, блок 2, вопросы 1 и 2.
   Пока там пустое `audio`.
 * Нажать «Озвучить пачкой» для фраз Hello! / What's your name? / How are you? /
-  I'm Misty — они помечены `audio_tts`. Либо записать своим голосом: в домашках
-  юнита 0 весь звук записан её голосом, а не синтезом.
+  I'm Misty — они помечены `audio_tts`. Решение методиста: эти фразы синтезом.
 * Решить, что делать с чужой «Homework 1» юнита 0 (сейчас `sort_order` 1).
   Новая ДЗ 1 встаёт на свободный `sort_order` 0, поэтому они не конфликтуют,
   но в списке будет два урока с одним названием.
@@ -39,8 +38,14 @@ SQL — для текущей схемы (`classroom_lessons` / `classroom_block
 | `deck.py` → `Unit 0 Lesson 6.pptx` | презентация к нему, 31 слайд, с двумя играми внутри |
 
 Пересобрать: `python3.13 builds/sm0/u0/plan.py "builds/sm0/u0/Unit 0 Lesson 6.docx"`
-и `python3.13 builds/sm0/u0/deck.py /tmp/png "builds/sm0/u0/Unit 0 Lesson 6.pptx"`
+и `python3.13 builds/sm0/u0/deck.py "builds/sm0/u0/template_Unit 1 Lesson 7.pptx" /tmp/png "builds/sm0/u0/Unit 0 Lesson 6.pptx"`
 (папку png скрипт создаёт сам из `media/sm0/legacy`).
+
+Презентация собирается на шаблоне `template_Unit 1 Lesson 7.pptx` (прислан
+методистом): скрипт открывает его, удаляет слайды и строит свои в том же
+оформлении — фоны FFE4EA / E3F0FB, белые круги по углам, белая карточка,
+Verdana и Trebuchet MS. На слайдах только английский, короткой строкой
+(«Click the colour!»); русский — в плане урока и на слайде «Я могу!».
 
 Игры собраны переходами по клику, без Wordwall:
 * **«Поймай цвет»** — шесть шариков, клик открывает название цвета и
