@@ -1,0 +1,637 @@
+{
+ "course": "sm0",
+ "unit_sort_order": 0,
+ "lesson": "Test",
+ "kind": "test",
+ "lesson_sort_order": 6,
+ "pass_threshold": 90,
+ "is_published": false,
+ "media_base": "https://classroom.wowteach.ru/media/",
+ "blocks": [
+  {
+   "sort_order": 0,
+   "type": "text",
+   "payload": {
+    "html": "<p>Сегодня у нас с тобой тест. Проверим, как хорошо ты знаешь буквы, цвета и числа и умеешь читать слова. Уверена, ты справишься!</p>"
+   }
+  },
+  {
+   "sort_order": 1,
+   "type": "match",
+   "payload": {
+    "title": "Соедини большую и маленькую букву.",
+    "pairs": [
+     {
+      "left": "S",
+      "right": "s"
+     },
+     {
+      "left": "A",
+      "right": "a"
+     },
+     {
+      "left": "E",
+      "right": "e"
+     },
+     {
+      "left": "D",
+      "right": "d"
+     },
+     {
+      "left": "R",
+      "right": "r"
+     },
+     {
+      "left": "K",
+      "right": "k"
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 2,
+   "type": "quiz",
+   "payload": {
+    "questions": [
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "r"
+       },
+       {
+        "text": "k"
+       },
+       {
+        "text": "d"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788808314749_rec_1788808314748.webm"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "options": [
+       {
+        "text": "r"
+       },
+       {
+        "text": "k"
+       },
+       {
+        "text": "d"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788808327805_rec_1788808327805.webm"
+     },
+     {
+      "q": "",
+      "type": "multiple",
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788806756568_rec_1788806756568.webm",
+      "correct": [
+       0,
+       2
+      ],
+      "options": [
+       {
+        "text": "e"
+       },
+       {
+        "text": "d"
+       },
+       {
+        "text": "p"
+       }
+      ]
+     },
+     {
+      "q": "",
+      "type": "multiple",
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788806780166_rec_1788806780166.webm",
+      "correct": [
+       0,
+       2
+      ],
+      "options": [
+       {
+        "text": "d"
+       },
+       {
+        "text": "p"
+       },
+       {
+        "text": "a"
+       }
+      ]
+     }
+    ],
+    "needs_review": false,
+    "title": "Послушай звук и выбери букву."
+   }
+  },
+  {
+   "sort_order": 3,
+   "type": "quiz",
+   "payload": {
+    "questions": [
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "n"
+       },
+       {
+        "text": "i"
+       },
+       {
+        "text": "p"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788806302367_rec_1788806302367.webm"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "options": [
+       {
+        "text": "n"
+       },
+       {
+        "text": "i"
+       },
+       {
+        "text": "p"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788806324376_rec_1788806324376.webm"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       2
+      ],
+      "options": [
+       {
+        "text": "n"
+       },
+       {
+        "text": "i"
+       },
+       {
+        "text": "p"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788806337276_rec_1788806337276.webm"
+     }
+    ],
+    "needs_review": false,
+    "title": "Послушай слово. С какой буквы оно начинается?"
+   }
+  },
+  {
+   "sort_order": 4,
+   "type": "quiz",
+   "payload": {
+    "questions": [
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "tap"
+       },
+       {
+        "text": "as"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788459694262_rec_1788459694261.webm"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "pat"
+       },
+       {
+        "text": "sat"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788459890618_rec_1788459890618.webm"
+     }
+    ],
+    "needs_review": false,
+    "title": "Послушай звук и выбери слово, в котором есть эта буква."
+   }
+  },
+  {
+   "sort_order": 5,
+   "type": "quiz",
+   "payload": {
+    "questions": [
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "audio": "",
+      "audio_tts": "What's your name?",
+      "options": [
+       {
+        "text": "I'm Misty.",
+        "audio": "",
+        "audio_tts": "I'm Misty."
+       },
+       {
+        "text": "How are you?",
+        "audio": "",
+        "audio_tts": "How are you?"
+       },
+       {
+        "text": "Hello, hello!",
+        "audio": "",
+        "audio_tts": "Hello, hello!"
+       }
+      ]
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "audio": "",
+      "audio_tts": "How are you?",
+      "options": [
+       {
+        "text": "I'm Misty.",
+        "audio": "",
+        "audio_tts": "I'm Misty."
+       },
+       {
+        "text": "I'm happy!",
+        "audio": "",
+        "audio_tts": "I'm happy!"
+       },
+       {
+        "text": "What's your name?",
+        "audio": "",
+        "audio_tts": "What's your name?"
+       }
+      ]
+     }
+    ],
+    "needs_review": false,
+    "title": "Послушай вопрос и выбери ответ."
+   }
+  },
+  {
+   "sort_order": 6,
+   "type": "order",
+   "payload": {
+    "words": [
+     "s",
+     "a",
+     "t"
+    ],
+    "sentence": "sat",
+    "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788806353766_rec_1788806353766.webm"
+   }
+  },
+  {
+   "sort_order": 7,
+   "type": "order",
+   "payload": {
+    "words": [
+     "k",
+     "i",
+     "t"
+    ],
+    "sentence": "kit",
+    "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788808132346_rec_1788808132346.webm"
+   }
+  },
+  {
+   "sort_order": 8,
+   "type": "quiz",
+   "payload": {
+    "questions": [
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "image": "@@MEDIA@@sm0/legacy/8b38abac4dbc.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/481214562a38.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/34b8efecd4b2.webp"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788808191679_rec_1788808191679.webm"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "options": [
+       {
+        "image": "@@MEDIA@@sm0/legacy/fccf971c0287.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/f40c937be9f8.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/34b8efecd4b2.webp"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788808198640_rec_1788808198639.webm"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       2
+      ],
+      "options": [
+       {
+        "image": "@@MEDIA@@sm0/legacy/481214562a38.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/8b38abac4dbc.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/ce01e4bbf55f.webp"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788808205132_rec_1788808205132.webm"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "image": "@@MEDIA@@sm0/legacy/481214562a38.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/ce01e4bbf55f.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/f40c937be9f8.webp"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788808211949_rec_1788808211949.webm"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "image": "@@MEDIA@@sm0/legacy/34b8efecd4b2.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/fccf971c0287.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/8b38abac4dbc.webp"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788808218715_rec_1788808218715.webm"
+     }
+    ],
+    "needs_review": false,
+    "title": "Послушай цвет и выбери его."
+   }
+  },
+  {
+   "sort_order": 9,
+   "type": "quiz",
+   "payload": {
+    "questions": [
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "1"
+       },
+       {
+        "text": "4"
+       },
+       {
+        "text": "7"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788806448522_rec_1788806448522.webm"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "2"
+       },
+       {
+        "text": "5"
+       },
+       {
+        "text": "8"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788806458771_rec_1788806458771.webm"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "options": [
+       {
+        "text": "3"
+       },
+       {
+        "text": "6"
+       },
+       {
+        "text": "9"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788806475433_rec_1788806475433.webm"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "options": [
+       {
+        "text": "4"
+       },
+       {
+        "text": "7"
+       },
+       {
+        "text": "10"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788806485334_rec_1788806485334.webm"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "5"
+       },
+       {
+        "text": "8"
+       },
+       {
+        "text": "1"
+       }
+      ],
+      "audio": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1788806494048_rec_1788806494047.webm"
+     }
+    ],
+    "needs_review": false,
+    "title": "Слушай и выбирай числа."
+   }
+  },
+  {
+   "sort_order": 10,
+   "type": "quiz",
+   "payload": {
+    "questions": [
+     {
+      "q": "<b>RED</b>",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "image": "@@MEDIA@@sm0/legacy/8b38abac4dbc.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/34b8efecd4b2.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/fccf971c0287.webp"
+       }
+      ]
+     },
+     {
+      "q": "<b>pink</b>",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "options": [
+       {
+        "image": "@@MEDIA@@sm0/legacy/481214562a38.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/f40c937be9f8.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/ce01e4bbf55f.webp"
+       }
+      ]
+     },
+     {
+      "q": "<b>TEN</b>",
+      "type": "single",
+      "correct": [
+       2
+      ],
+      "options": [
+       {
+        "image": "@@MEDIA@@sm0/legacy/627e87247d6d.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/b1483e6028be.webp"
+       },
+       {
+        "image": "@@MEDIA@@sm0/legacy/5390b2ec3d05.webp"
+       }
+      ]
+     }
+    ],
+    "needs_review": false,
+    "title": "Прочитай слово и выбери картинку."
+   }
+  },
+  {
+   "sort_order": 11,
+   "type": "speaking",
+   "payload": {
+    "title": "Нажми на микрофон и прочитай слова вслух 🎤",
+    "html": "<p><b>SAT &nbsp;·&nbsp; pin &nbsp;·&nbsp; TEN &nbsp;·&nbsp; den &nbsp;·&nbsp; rat &nbsp;·&nbsp; KIT</b></p>",
+    "needs_review": true
+   }
+  },
+  {
+   "sort_order": 12,
+   "type": "speaking",
+   "payload": {
+    "title": "Нажми на микрофон и назови, сколько предметов каждого цвета ты видишь 🎤",
+    "html": "<p style=\"text-align:center\"><img src=\"@@MEDIA@@sm0/legacy/143c8106fe9d.webp\" alt=\"\"></p>",
+    "needs_review": true
+   }
+  },
+  {
+   "sort_order": 13,
+   "type": "text",
+   "payload": {
+    "html": "<p>Ты справился! 🌟 Это был тест за весь Unit 0 — буквы, цвета, числа и первые слова, которые ты читаешь сам.</p>"
+   }
+  }
+ ]
+}

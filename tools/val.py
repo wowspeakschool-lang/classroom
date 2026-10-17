@@ -38,7 +38,8 @@ for fn in FILES:
             print(f'  !! JSON {t}#{so}: {e}'); bad += 1; continue
         if t == 'quiz':
             for qi, q in enumerate(p['questions']):
-                opts = [o['text'] for o in q['options']]
+                opts = [o.get('text') or o.get('image') or o.get('audio_tts')
+                        for o in q['options']]
                 if len(set(opts)) != len(opts):
                     print(f'  !! дубль вариантов {so}/q{qi}: {opts}'); bad += 1
                 for c in q['correct']:
@@ -73,7 +74,8 @@ for fn in FILES:
                 if not it.get('accept'):
                     print(f'  !! нет accept {so}'); bad += 1
         elif t == 'order':
-            if ' '.join(p['words']) != p['sentence']:
+            # склейка через пробел — предложение, без пробела — слово из букв
+            if p['sentence'] not in (' '.join(p['words']), ''.join(p['words'])):
                 print(f"  !! порядок не сходится {so}"); bad += 1
         elif t == 'truefalse':
             if not p.get('statements'):
