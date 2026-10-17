@@ -12,7 +12,6 @@ DST = '/home/user/wowspeak-platform/public/trainer/media/spotlight6'
 URL = 'https://app.wowteach.ru/trainer/media/spotlight6/'
 SKIP = set()  # подписи, не прошедшие проверку: не выгружать
 SKIP -= set(filter(None, os.environ.get('ALLOW', '').split('|')))  # ALLOW='keep out|…' — выгрузить перерисованные (после перерисовки)
-# омонимы: подпись → начало названия колоды, где этот смысл
 # омонимы: подпись → перевод слова (колоды Spotlight 6 переименовывались, по названию колоды не привязываем)
 HOMO = {'floor (storey)': 'этаж', 'dice (cut)': 'нарезать кубиками'}  # у «пол» и «кубик» картинки уже есть
 os.makedirs(DST, exist_ok=True)
@@ -39,7 +38,7 @@ for n in sheets:
     for term, cap, _ in S[n - 1][2]:
         if cap in SKIP: continue
         if cap in HOMO and HOMO[cap] is None:
-            sys.exit(f'омоним {cap}: впишите колоду в HOMO')
+            sys.exit(f'омоним {cap}: впишите перевод в HOMO')
         rows.append((term, HOMO.get(cap) or '', *put(f'out512/{n}/{fname(cap)}', fname(cap)[:-4], 82)))
 for term, cap, _ in ([] if os.environ.get('NO_DIGITS') else DIGITS):  # NO_DIGITS=1 — без порядковых чисел
     rows.append((term, '', *put(f'out512/digits/{fname(cap)}', fname(cap)[:-4], 90)))
