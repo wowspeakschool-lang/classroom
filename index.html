@@ -327,6 +327,14 @@
     border-radius:3px; background:var(--course); z-index:3; }
   .tile.insertL:before{ left:-9px; }
   .tile.insertR:after{ right:-9px; }
+  .tck{ position:absolute; right:40px; top:8px; z-index:3; width:24px; height:24px; border-radius:7px; border:2px solid #CFCCDD; background:rgba(255,255,255,.95);
+    color:#fff; font-weight:800; font-size:14px; line-height:18px; padding:0; cursor:pointer; opacity:0; transition:opacity .12s; }
+  .tile:hover .tck, body.lib-selecting .tck, .tck.on, .tck.some{ opacity:1; }
+  .tck.on{ background:var(--course); border-color:var(--course); }
+  .tck.some{ background:var(--course-soft); border-color:var(--course); color:var(--course-d); }
+  .tile.tsel{ outline:2px solid var(--course); }
+  .lib-pubrow{ flex-basis:100%; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  body.lib-selecting #libTiles{ padding-bottom:90px; }
   .tdots{ position:absolute; right:8px; top:8px; border:0; background:rgba(255,255,255,.9); color:var(--faint);
     padding:3px 8px; border-radius:8px; opacity:0; font-size:16px; line-height:1.2; cursor:pointer; z-index:4; }
   .tile:hover .tdots{ opacity:1; }
@@ -4765,11 +4773,29 @@ function libGo(level, courseId, unitId){
 function libSetKind(k){ LIB.kind=k; libRender(); }
 function libToggleUnpub(){ LIB.unpub=!LIB.unpub; libRender(); }
 
+// Плитки: галочка у курса, юнита или материала — отметить для публикации пачкой
+var LIBT = {};
+function libPubOk(l){ return LIBL.pub==='all' || (LIBL.pub==='pub') === !!l.is_published; }
+function libTck(ids){
+  if(!ids.length) return '';
+  const on=ids.every(id=>LIBL.sel.has(id)), some=!on && ids.some(id=>LIBL.sel.has(id));
+  const key='t'+Object.keys(LIBT).length; LIBT[key]=ids;
+  return `<button class="tck${on?' on':some?' some':''}" title="Отметить, чтобы опубликовать или снять с публикации"
+    onclick="event.preventDefault(); event.stopPropagation(); libTSel('${key}')">${on?'✓':some?'–':''}</button>`;
+}
+function libTSel(key){
+  const ids=LIBT[key]||[], on=ids.every(id=>LIBL.sel.has(id));
+  ids.forEach(id=>{ if(on) LIBL.sel.delete(id); else LIBL.sel.add(id); }); libRender();
+}
+function libDraftPill(ls){ const n=ls.filter(l=>!l.is_published).length; return n ? ` · <span class="np">черновиков: ${n}</span>` : (ls.length?' · <span style="color:var(--ok)">всё опубликовано</span>':''); }
+
 function libRender(){
   const cr=$('libCrumbs'), t=$('libTitle'), ld=$('libLead'), f=$('libFilters'), g=$('libTiles');
   if(!g) return;
   if(libIsList()) return libListRender();
   g.classList.add('grid');
+  LIBT = {};
+  let visible = [];   // что сейчас видно — для «Отметить всё»
   const course = (EDTREE||[]).find(c=>c.id===LIB.courseId);
   const unit   = course && (course.units||[]).find(u=>u.id===LIB.unitId);
 
@@ -4792,15 +4818,17 @@ function libRender(){
     ld.textContent='Курсы школы. Откройте курс, чтобы увидеть юниты.';
     f.innerHTML = `<span class="fsp"></span><button class="ghost" onclick="edNewCourse()">＋ Курс</button>`;
     g.innerHTML = (EDTREE||[]).map((c,i)=>{
-      const n = (c.units||[]).reduce((a,u)=>a+(u.lessons||[]).length,0);
+      const all=(c.units||[]).flatMap(u=>u.lessons||[]), ls=all.filter(libPubOk);
+      if(LIBL.pub!=='all' && !ls.length) return '';
+      const n = all.length; visible.push(...ls.map(l=>l.id));
       return `<a class="tile" draggable="true" data-i="${i}" href="?course=${c.id}" onclick="return libLink(event,'units','${c.id}')">
-        <button class="tdots" onclick="libMenu('course','${c.id}',event)">⋯</button>
+        ${libTck(ls.map(l=>l.id))}<button class="tdots" onclick="libMenu('course','${c.id}',event)">⋯</button>
         ${libMenuHtml('course', c)}
         ${libCover(c.title, libTintFor(c.title))}
         <span class="tl-body">${libName('course', c)}
-        <span class="tl-s">${(c.units||[]).length} юнитов · ${n} материалов</span></span></a>`;
-    }).join('') || '<div class="empty">Курсов пока нет.</div>';
-    libDragInit('course', (EDTREE||[]).map(c=>c.id));
+        <span class="tl-s">${(c.units||[]).length} юнитов · ${n} материалов${libDraftPill(all)}</span></span></a>`;
+    }).join('') || `<div class="empty">${LIBL.pub==='all'?'Курсов пока нет.':'Ничего не подходит под фильтр.'}</div>`;
+    if(LIBL.pub==='all') libDragInit('course', (EDTREE||[]).map(c=>c.id));
   }
 
   else if(LIB.level==='units' && course){
@@ -4809,18 +4837,20 @@ function libRender(){
     ld.textContent='Юниты курса. Откройте юнит, чтобы увидеть материалы.';
     f.innerHTML = `<span class="fsp"></span><button class="ghost" onclick="edNewUnit('${course.id}')">＋ Юнит</button>`;
     g.innerHTML = (course.units||[]).map((u,i)=>{
-      const ls=(u.lessons||[]);
+      const ls=(u.lessons||[]), vis=ls.filter(libPubOk);
+      if(LIBL.pub!=='all' && !vis.length) return '';
+      visible.push(...vis.map(l=>l.id));
       const by=k=>ls.filter(x=>(x.kind||'homework')===k).length;
       const bits=[]; if(by('homework')) bits.push(by('homework')+' ДЗ');
       if(by('lesson')) bits.push(by('lesson')+' уроков'); if(by('test')) bits.push(by('test')+' тестов');
       return `<a class="tile" draggable="true" data-i="${i}" href="?unit=${u.id}" onclick="return libLink(event,'items','${course.id}','${u.id}')">
-        <button class="tdots" onclick="libMenu('unit','${u.id}',event)">⋯</button>
+        ${libTck(vis.map(l=>l.id))}<button class="tdots" onclick="libMenu('unit','${u.id}',event)">⋯</button>
         ${libMenuHtml('unit', u)}
         <span class="tl-body"><span class="tl-ic lesson">${svgFolderIc()}</span>
         ${libName('unit', u)}
-        <span class="tl-s">${bits.join(' · ')||'пусто'}</span></span></a>`;
-    }).join('') || '<div class="empty">В курсе пока нет юнитов.</div>';
-    libDragInit('unit', (course.units||[]).map(u=>u.id));
+        <span class="tl-s">${bits.join(' · ')||'пусто'}${libDraftPill(ls)}</span></span></a>`;
+    }).join('') || `<div class="empty">${LIBL.pub==='all'?'В курсе пока нет юнитов.':'Ничего не подходит под фильтр.'}</div>`;
+    if(LIBL.pub==='all') libDragInit('unit', (course.units||[]).map(u=>u.id));
   }
 
   else if(unit){
@@ -4833,27 +4863,37 @@ function libRender(){
     f.innerHTML =
       libChip('all','Все',all.length)+libChip('homework','Домашки',cnt('homework'))+
       libChip('lesson','Уроки',cnt('lesson'))+libChip('test','Тесты',cnt('test'))+
-      `<span class="fsp"></span>
-       <button class="tgl ${LIB.unpub?'on':''}" onclick="libToggleUnpub()">Не опубликовано <b>${all.filter(x=>!x.is_published).length}</b></button>
+ `<span class="fsp"></span>
        <button class="ghost" onclick="edNewLesson('${unit.id}','${course.id}','${LIB.kind==='all'?'homework':LIB.kind}')">＋ Материал</button>`;
     let list = LIB.kind==='all' ? all : all.filter(x=>(x.kind||'homework')===LIB.kind);
-    if(LIB.unpub) list = list.filter(x=>!x.is_published);
+ list = list.filter(libPubOk); visible.push(...list.map(l=>l.id));
     g.innerHTML = list.length ? list.map((l,i)=>{
       const k=KW[l.kind||'homework']||KW.homework;
-      return `<a class="tile ${l.is_published?'':'unpub'}" draggable="true" data-i="${i}" href="?lesson=${l.id}"
+      return `<a class="tile ${l.is_published?'':'unpub'}${LIBL.sel.has(l.id)?' tsel':''}" draggable="true" data-i="${i}" href="?lesson=${l.id}"
           onclick="return libLink(event,'lesson',null,null,'${l.id}')">
-        <button class="tdots" onclick="libMenu('lesson','${l.id}',event)">⋯</button>
+        ${libTck([l.id])}<button class="tdots" onclick="libMenu('lesson','${l.id}',event)">⋯</button>
         ${libMenuHtml('lesson', l)}
         <span class="tl-body"><span class="tl-ic ${l.kind||'homework'}">${k[1]}</span>
         ${libName('lesson', l)}
         <span class="tl-s">${k[0]}${l.is_published?'':' · <span class="np">не опубликовано</span>'}</span></span></a>`;
     }).join('')
-      : `<div class="empty">${LIB.unpub?'Всё опубликовано.':'Материалов этого типа пока нет.'}</div>`;
+      : `<div class="empty">${LIBL.pub==='draft'?'Всё опубликовано.':LIBL.pub==='pub'?'Опубликованного здесь нет.':'Материалов этого типа пока нет.'}</div>`;
     // порядок меняем только когда виден весь список, иначе фильтр перемешает
-    if(LIB.kind==='all' && !LIB.unpub) libDragInit('lesson', list.map(l=>l.id));
+    if(LIB.kind==='all' && LIBL.pub==='all') libDragInit('lesson', list.map(l=>l.id));
   }
   f.insertAdjacentHTML('afterbegin', `<input class="libl-q" placeholder="🔍 Найти материал: SM2 Unit 1 Homework 2" oninput="libLSearch(this.value)">`);
   f.insertAdjacentHTML('beforeend', `<button class="tgl" onclick="libViewSet('list')" title="Список: свернуть, отфильтровать, опубликовать пачкой">☰ Списком</button>`);
+  // публикация пачкой прямо в плитках: фильтр, «отметить всё», панель снизу
+  const allOn = visible.length && visible.every(id=>LIBL.sel.has(id));
+  f.insertAdjacentHTML('beforeend', `<div class="lib-pubrow"><span class="rv-seg">${[['all','Все'],['pub','Опубликованные'],['draft','Неопубликованные']].map(([k,tx])=>
+      `<button class="${LIBL.pub===k?'on':''}" onclick="libLPub('${k}')">${tx}</button>`).join('')}</span>
+    ${visible.length?`<button class="tgl" onclick="${allOn?'LIBL.sel.clear()':'LIBT.all.forEach(id=>LIBL.sel.add(id))'}; libRender()">${allOn?'Снять отметки':'Отметить всё видимое ('+visible.length+')'}</button>`:''}
+    <span class="muted" style="font-size:12.5px">Галочка в углу курса или юнита отмечает всё внутри.</span></div>`);
+  LIBT.all = visible;
+  const n=LIBL.sel.size;
+  g.insertAdjacentHTML('beforeend', n ? `<div class="rv-bar"><div class="rv-bar-in"><b>Отмечено: ${n}</b><a href="#" class="small" onclick="LIBL.sel.clear(); libRender(); return false">снять отметки</a><span style="flex:1"></span>
+      <button class="btn sec" onclick="libLPublish(false)">Снять с публикации</button><button class="btn" onclick="libLPublish(true)">✓ Опубликовать</button></div></div>` : '');
+  document.body.classList.toggle('lib-selecting', n>0);
   libFocusRename();   // поле переименования появляется после отрисовки
 }
 
