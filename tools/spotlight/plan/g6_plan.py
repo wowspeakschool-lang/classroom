@@ -171,6 +171,19 @@ for r, t in zip(src, top):
     out.append([folder, deck, r['module'], sec_name(r['section']), r['term'], r['translation'], img])
     reuse_rows.append([r['module'], sec_name(r['section']), r['term'], r['translation'],
                        img.split(':')[1] if img.startswith('reuse') else '', img.split(':')[0], why])
+# крошечные «другие слова» (2–3 слова) влиты в соседнюю тему раздела (решение 17.10.2026)
+MERGE = {
+    "8a That's the rule · другие слова": "8a That's the rule · правила и другие слова",
+    "8a That's the rule · правила": "8a That's the rule · правила и другие слова",
+    '9a Food & Drink · другие слова': '9a Food & Drink · продукты и другие слова',
+    '9a Food & Drink · продукты': '9a Food & Drink · продукты и другие слова',
+    '9b On the menu · другие слова': '9b On the menu · блюда, продукты и другие слова',
+    '9b On the menu · продукты и блюда': '9b On the menu · блюда, продукты и другие слова',
+    "9c Let's cook! · другие слова": "9c Let's cook! · упаковка, меры и покупки",
+    "9c Let's cook! · упаковка и меры": "9c Let's cook! · упаковка, меры и покупки",
+}
+assert all(any(x[1] == k for x in out) for k in MERGE), [k for k in MERGE if not any(x[1] == k for x in out)]
+for x in out: x[1] = MERGE.get(x[1], x[1])
 w = csv.writer(open('plan/g6_plan.tsv', 'w'), delimiter='\t', lineterminator='\n')
 w.writerow(['folder', 'deck', 'module', 'section', 'term', 'translation', 'image']); w.writerows(out)
 w = csv.writer(open('plan/g6_reuse.tsv', 'w'), delimiter='\t', lineterminator='\n')
