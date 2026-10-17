@@ -14,7 +14,7 @@ lib.BG_MIN, lib.BG_GREY, lib.KEEP_SOFT = 250, 8, True
 
 # Сцены с белым содержимым (лёд, снег): фон вырезается вместе с ним — заливаем сцену целиком
 FILL_OLD = None  # заливка дыр больше не нужна: её заменил строгий порог фона
-FILL = {'subject choice form'}
+FILL = {'subject choice form', 'nationality'}  # nationality: белый флаг Японии вырезался вместе с кругом (17.10)
 # вырезать зажатый белый фон (не везде: белое внутри пузырей пропадало)
 # белое, которое чистка кусков фона не трогает: облачка, снег, разметка, облака у края сцены
 KEEP_WHITE = {'subject choice form', 'grey', 'What subjects does he do?'}
@@ -65,7 +65,7 @@ def is_scene(p):
     hm = Image.new('L', (m.shape[1], m.shape[0]), 0)
     ImageDraw.Draw(hm).polygon([tuple(map(int, pts[v])) for v in hull.vertices], fill=1)
     return m.sum() / max(1, np.array(hm).sum()) >= SCENE_SOLID
-CUT_BOTTOM = {"Let's have fun!": 0.83}  # остаток подписи под рисунком
+CUT_BOTTOM = {"Let's have fun!": 0.83, 'hour hand': 0.873, 'landmark': 0.877, 'minute hand': 0.88, 'Would you like...?': 0.827, 'sandwich': 0.847}  # остаток подписи под рисунком
 CUT_LEFT = {'coke': 0.24}  # край соседней тарелки с chips
 NO_SPECK = set()
 
