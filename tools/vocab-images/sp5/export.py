@@ -15,6 +15,7 @@ URL = 'https://app.wowteach.ru/trainer/media/spotlight5/'
 SKIP = {'culture', 'street parade', 'Thanksgiving',
         # 17.10.2026: не прошли проверку (ночной клуб со взрослыми, мёд вместо keep out) и рыцарь с мечом — ждёт решения
         'not my kind of place', 'keep out', 'face (difficulty)'}
+SKIP -= set(filter(None, os.environ.get('ALLOW', '').split('|')))  # ALLOW='keep out|…' — выгрузить перерисованные (лист 160)
 # nightclub перерисован на листе 142 (вход без людей) — выкладывается оттуда; лист 78 больше не выгружать
 # омонимы: подпись → начало названия колоды, где этот смысл
 HOMO = {'great (excellent)': '2c', 'great (big)': '3a', 'mean': '5d', 'mean (signify)': '8c',
@@ -30,9 +31,12 @@ def put(src, stem, q):
     name = stem
     if os.path.exists(old) and Image.open(old).size != (512, 512):
         name = stem + '_v2'
-    im = Image.open(src)
-    assert im.size == (512, 512), src
-    im.save(f'{DST}/{name}.webp', 'WEBP', quality=q, method=6)
+    dst = f'{DST}/{name}.webp'
+    # уже выгружено из этой же нарезки — не пережимаем заново (method=6 медленный)
+    if not (os.path.exists(dst) and os.path.getmtime(dst) >= os.path.getmtime(src) and Image.open(dst).size == (512, 512)):
+        im = Image.open(src)
+        assert im.size == (512, 512), src
+        im.save(dst, 'WEBP', quality=q, method=6)
     return URL + name + '.webp', URL + stem + '.webp'
 
 rows = []  # (термин, колода-признак, url)
@@ -42,7 +46,7 @@ for n in sheets:
         if cap in HOMO and HOMO[cap] is None:
             sys.exit(f'омоним {cap}: впишите колоду в HOMO')
         rows.append((term, HOMO.get(cap) or '', *put(f'out512/{n}/{fname(cap)}', fname(cap)[:-4], 82)))
-for term, cap, _ in DIGITS:
+for term, cap, _ in ([] if os.environ.get('NO_DIGITS') else DIGITS):  # цифры выложены 15.10; NO_DIGITS=1 — без них
     rows.append((term, '', *put(f'out512/digits/{fname(cap)}', fname(cap)[:-4], 90)))
 q = lambda s: "'" + s.replace("'", "''") + "'"
 vals = ',\n'.join(f'({q(t)},{q(k)},{q(u)},{q(o)})' for t, k, u, o in rows)
