@@ -14,7 +14,7 @@ Verdana и Trebuchet MS, те же цвета заголовков.
 Игры собраны переходами по клику: клик по фигуре открывает слайд-ответ,
 кнопка возвращает назад. Работает в PowerPoint без настройки.
 """
-import sys, os
+import sys, os, tempfile
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
@@ -22,6 +22,26 @@ from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
 
 TEMPLATE, OUT = sys.argv[1], sys.argv[2]
+
+# шарики сгенерированы методистом, лежат в media/sm0/u0 в webp;
+# PowerPoint webp не ест — переводим в png во временную папку
+COLOURS_SRC = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           '..', '..', '..', 'media', 'sm0', 'u0')
+PNG = tempfile.mkdtemp(prefix='sm0_balloons_')
+from PIL import Image, ImageDraw
+import numpy as _np
+for _name in ('red', 'green', 'blue', 'orange', 'pink', 'yellow'):
+    _im = Image.open(f'{COLOURS_SRC}/balloon_{_name}.webp').convert('RGB')
+    # фон листа не идеально белый — заливаем от углов и делаем прозрачным,
+    # иначе на слайде вокруг шарика виден серый прямоугольник
+    for _corner in ((0, 0), (_im.width - 1, 0), (0, _im.height - 1),
+                    (_im.width - 1, _im.height - 1)):
+        ImageDraw.floodfill(_im, _corner, (255, 0, 255), thresh=30)
+    _a = _np.asarray(_im)
+    _bg = (_a[:, :, 0] == 255) & (_a[:, :, 1] == 0) & (_a[:, :, 2] == 255)
+    _rgba = _im.convert('RGBA')
+    _rgba.putalpha(Image.fromarray(((~_bg) * 255).astype('uint8')))
+    _rgba.save(f'{PNG}/{_name}.png')
 
 
 # ── палитра образца ───────────────────────────────────────────────────────
@@ -114,61 +134,12 @@ def tile(s, txt, *, left, top, width, height, size=28, color=INK, target=None):
     return sh
 
 
-BALLOON = {'red': RGBColor(0xFD, 0x20, 0x1F), 'green': RGBColor(0x67, 0xC1, 0x2E),
-           'blue': RGBColor(0x00, 0x9D, 0xFE), 'orange': RGBColor(0xFE, 0x7E, 0x03),
-           'pink': RGBColor(0xFF, 0x69, 0xAB), 'yellow': RGBColor(0xFF, 0xD7, 0x03)}
-CHEEK = RGBColor(0xFF, 0xA8, 0xBD)
-DARK = RGBColor(0x2B, 0x2B, 0x2B)
-
-
-def _oval(s, left, top, w, h, fill, line=None):
-    sh = s.shapes.add_shape(MSO_SHAPE.OVAL, int(left), int(top), int(w), int(h))
-    sh.fill.solid()
-    sh.fill.fore_color.rgb = fill
-    if line is None:
-        sh.line.fill.background()
-    else:
-        sh.line.color.rgb = line
-    sh.shadow.inherit = False
-    return sh
-
-
 def balloon(s, name, left, top, height, target=None):
-    """Шарик фигурами: овал, узелок, ниточка, глаза, щёки, ротик.
-
-    Вектор — на любом размере чёткий, растровых картинок в презентации нет.
-    """
-    col = BALLOON[name]
-    h = int(height * 0.78)                 # тело; остальное — ниточка
-    w = int(h * 0.70)
-    cx = int(left + w / 2)
-    body = _oval(s, left, top, w, h, col)
+    """Шарик картинкой из media/sm0/u0 (лист сгенерирован методистом)."""
+    pic = s.shapes.add_picture(f'{PNG}/{name}.png', int(left), int(top), height=int(height))
     if target is not None:
-        body.click_action.target_slide = target
-
-    knot = s.shapes.add_shape(MSO_SHAPE.ISOSCELES_TRIANGLE,
-                              int(cx - h * 0.055), int(top + h * 0.98),
-                              int(h * 0.11), int(h * 0.08))
-    knot.fill.solid(); knot.fill.fore_color.rgb = col
-    knot.line.fill.background(); knot.shadow.inherit = False
-    knot.rotation = 180
-
-    string = s.shapes.add_shape(MSO_SHAPE.ARC, int(cx - h * 0.09),
-                                int(top + h * 1.05), int(h * 0.18), int(h * 0.26))
-    string.fill.background()
-    string.line.color.rgb = col
-    string.line.width = Pt(1.75)
-    string.shadow.inherit = False
-
-    eye_w, eye_h = int(h * 0.15), int(h * 0.19)
-    for dx in (-0.17, 0.17):
-        _oval(s, cx + h * dx - eye_w / 2, top + h * 0.33, eye_w, eye_h, DARK)
-        _oval(s, cx + h * dx - eye_w / 2 + eye_w * 0.22, top + h * 0.36,
-              eye_w * 0.34, eye_h * 0.3, WHITE)
-    for dx in (-0.29, 0.29):
-        _oval(s, cx + h * dx - h * 0.07, top + h * 0.54, h * 0.14, h * 0.09, CHEEK)
-    _oval(s, cx - h * 0.1, top + h * 0.55, h * 0.2, h * 0.13, DARK)
-    return body
+        pic.click_action.target_slide = target
+    return pic
 
 
 COLOURS = ['red', 'green', 'blue', 'orange', 'pink', 'yellow']
