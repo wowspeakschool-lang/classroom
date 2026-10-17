@@ -21,20 +21,8 @@ from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
 
-TEMPLATE, PNG, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
+TEMPLATE, OUT = sys.argv[1], sys.argv[2]
 
-HASH = {'red': '8b38abac4dbc', 'green': '481214562a38', 'blue': '34b8efecd4b2',
-        'orange': 'ce01e4bbf55f', 'pink': 'f40c937be9f8', 'yellow': 'fccf971c0287'}
-if not all(os.path.exists(f'{PNG}/{n}.png') for n in HASH):
-    from PIL import Image
-    os.makedirs(PNG, exist_ok=True)
-    legacy = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                          '..', '..', '..', 'media', 'sm0', 'legacy')
-    for name, h in HASH.items():
-        im = Image.open(f'{legacy}/{h}.webp').convert('RGBA')
-        bg = Image.new('RGBA', im.size, (255, 255, 255, 255))
-        bg.alpha_composite(im)
-        bg.convert('RGB').save(f'{PNG}/{name}.png')
 
 # ── палитра образца ───────────────────────────────────────────────────────
 PINK_BG = RGBColor(0xFF, 0xE4, 0xEA)
@@ -126,11 +114,61 @@ def tile(s, txt, *, left, top, width, height, size=28, color=INK, target=None):
     return sh
 
 
+BALLOON = {'red': RGBColor(0xFD, 0x20, 0x1F), 'green': RGBColor(0x67, 0xC1, 0x2E),
+           'blue': RGBColor(0x00, 0x9D, 0xFE), 'orange': RGBColor(0xFE, 0x7E, 0x03),
+           'pink': RGBColor(0xFF, 0x69, 0xAB), 'yellow': RGBColor(0xFF, 0xD7, 0x03)}
+CHEEK = RGBColor(0xFF, 0xA8, 0xBD)
+DARK = RGBColor(0x2B, 0x2B, 0x2B)
+
+
+def _oval(s, left, top, w, h, fill, line=None):
+    sh = s.shapes.add_shape(MSO_SHAPE.OVAL, int(left), int(top), int(w), int(h))
+    sh.fill.solid()
+    sh.fill.fore_color.rgb = fill
+    if line is None:
+        sh.line.fill.background()
+    else:
+        sh.line.color.rgb = line
+    sh.shadow.inherit = False
+    return sh
+
+
 def balloon(s, name, left, top, height, target=None):
-    pic = s.shapes.add_picture(f'{PNG}/{name}.png', left, top, height=height)
+    """Шарик фигурами: овал, узелок, ниточка, глаза, щёки, ротик.
+
+    Вектор — на любом размере чёткий, растровых картинок в презентации нет.
+    """
+    col = BALLOON[name]
+    h = int(height * 0.78)                 # тело; остальное — ниточка
+    w = int(h * 0.70)
+    cx = int(left + w / 2)
+    body = _oval(s, left, top, w, h, col)
     if target is not None:
-        pic.click_action.target_slide = target
-    return pic
+        body.click_action.target_slide = target
+
+    knot = s.shapes.add_shape(MSO_SHAPE.ISOSCELES_TRIANGLE,
+                              int(cx - h * 0.055), int(top + h * 0.98),
+                              int(h * 0.11), int(h * 0.08))
+    knot.fill.solid(); knot.fill.fore_color.rgb = col
+    knot.line.fill.background(); knot.shadow.inherit = False
+    knot.rotation = 180
+
+    string = s.shapes.add_shape(MSO_SHAPE.ARC, int(cx - h * 0.09),
+                                int(top + h * 1.05), int(h * 0.18), int(h * 0.26))
+    string.fill.background()
+    string.line.color.rgb = col
+    string.line.width = Pt(1.75)
+    string.shadow.inherit = False
+
+    eye_w, eye_h = int(h * 0.15), int(h * 0.19)
+    for dx in (-0.17, 0.17):
+        _oval(s, cx + h * dx - eye_w / 2, top + h * 0.33, eye_w, eye_h, DARK)
+        _oval(s, cx + h * dx - eye_w / 2 + eye_w * 0.22, top + h * 0.36,
+              eye_w * 0.34, eye_h * 0.3, WHITE)
+    for dx in (-0.29, 0.29):
+        _oval(s, cx + h * dx - h * 0.07, top + h * 0.54, h * 0.14, h * 0.09, CHEEK)
+    _oval(s, cx - h * 0.1, top + h * 0.55, h * 0.2, h * 0.13, DARK)
+    return body
 
 
 COLOURS = ['red', 'green', 'blue', 'orange', 'pink', 'yellow']
@@ -221,25 +259,23 @@ for i, (colour, n, word) in enumerate(ROUNDS):
 
 # 18–24 · игра 2: кубик и чтение ───────────────────────────────────────────
 board2 = slide()
-dice_slides = [slide() for _ in WORDS]
-title(board2, 'Roll & read 🎲', color=PURPLE)
-card(board2, Inches(1.4), Inches(1.6), Inches(10.5), Inches(3.4))
+card_slides = [slide() for _ in WORDS]
+title(board2, 'Pick & read 🃏', color=PURPLE)
+text(board2, 'Pick a card and read!', top=Inches(1.3), size=20,
+     color=GREY, font=BODY, bold=False, height=Inches(0.5))
+card(board2, Inches(1.4), Inches(1.95), Inches(10.5), Inches(4.3))
 for i, w in enumerate(WORDS):
     col, row = i % 3, i // 3
-    tile(board2, f'{i + 1}   {w}', left=Inches(2.0) + col * Inches(3.2),
-         top=Inches(1.9) + row * Inches(1.5), width=Inches(2.8), height=Inches(1.1),
-         size=32, color=(PURPLE, TEAL, BLUE)[i % 3], target=dice_slides[i])
-tile(board2, '🎲  Roll the dice', left=int((W - Inches(4.8)) / 2), top=Inches(5.4),
-     width=Inches(4.8), height=Inches(1.0), size=26, color=PURPLE, target=dice_slides[0])
+    tile(board2, '?', left=Inches(2.2) + col * Inches(3.1),
+         top=Inches(2.3) + row * Inches(1.8), width=Inches(2.6), height=Inches(1.5),
+         size=44, color=(PURPLE, TEAL, BLUE)[i % 3], target=card_slides[i])
 for i, w in enumerate(WORDS):
-    sd = dice_slides[i]
-    title(sd, f'🎲 {i + 1}', color=BLUE)
+    sd = card_slides[i]
+    title(sd, 'Read it! 🃏', color=BLUE)
     card(sd, Inches(3.0), Inches(1.8), Inches(7.3), Inches(3.5))
     text(sd, w, top=Inches(2.4), size=96, color=PURPLE, height=Inches(2.3))
-    tile(sd, '🎲 Again', left=Inches(3.9), top=Inches(5.7), width=Inches(2.6),
-         height=Inches(0.9), size=20, color=BLUE, target=dice_slides[(i + 1) % len(WORDS)])
-    tile(sd, '↩ Back', left=Inches(6.9), top=Inches(5.7), width=Inches(2.6),
-         height=Inches(0.9), size=20, color=GREY, target=board2)
+    tile(sd, '↩ Back', left=int((W - Inches(2.6)) / 2), top=Inches(5.7),
+         width=Inches(2.6), height=Inches(0.9), size=20, color=GREY, target=board2)
 
 # 25 · тест ────────────────────────────────────────────────────────────────
 s = slide()
