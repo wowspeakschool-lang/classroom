@@ -1,4 +1,4 @@
-"""Превью нарезанных листов Spotlight 5 в порядке промпта: python3 preview.py 1 2 3"""
+"""Превью нарезанных листов Spotlight 6 в порядке промпта: python3 preview.py 1 2 3"""
 import os, sys
 from PIL import Image, ImageDraw, ImageFont
 sys.path.insert(0, '..')

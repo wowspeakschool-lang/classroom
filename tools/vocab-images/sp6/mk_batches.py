@@ -1,10 +1,10 @@
 """Промпты пачками по 10 для GPT (просьба Анны 16.10.2026): одно сообщение — 10 листов,
-каждый лист — одна строка «N <промпт>». python3 mk_batches.py 79 → docs/Тренажёр_Spotlight5_пачки.md"""
+каждый лист — одна строка «N <промпт>». python3 mk_batches.py → docs/Тренажёр_Spotlight6_пачки.md"""
 import sys
 from sheets import S
 from mk_prompts_style import STYLE
 
-START = int(sys.argv[1]) if len(sys.argv) > 1 else 79
+START = int(sys.argv[1]) if len(sys.argv) > 1 else 1
 NUM = {1: 'одну отдельную картинку', 2: 'две отдельные картинки', 3: 'три отдельные картинки',
        4: 'четыре отдельные картинки', 5: 'пять отдельных картинок', 6: 'шесть отдельных картинок',
        7: 'семь отдельных картинок', 8: 'восемь отдельных картинок', 9: 'девять отдельных картинок',
@@ -26,7 +26,7 @@ def one(ws, note):
 
 
 sheets = list(range(START, len(S) + 1))
-out = ['# Spotlight 5 — пачки по 10 для GPT', '',
+out = ['# Spotlight 6 — пачки по 10 для GPT', '',
        'Каждый блок — одно сообщение целиком. Номер в сообщении (1–10) → номер листа указан в заголовке.', '']
 for b in range(0, len(sheets), 10):
     chunk = sheets[b:b + 10]
@@ -37,5 +37,5 @@ for b in range(0, len(sheets), 10):
         title, note, ws = S[n - 1]
         msg += [f'{i} {one(ws, note.strip())}', '']
     out += ['```'] + msg[:-1] + ['```', '']
-open('../../../docs/Тренажёр_Spotlight5_пачки.md', 'w').write('\n'.join(out))
+open('../../../docs/Тренажёр_Spotlight6_пачки.md', 'w').write('\n'.join(out))
 print(len(sheets), (len(sheets) + 9) // 10)
