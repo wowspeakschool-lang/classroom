@@ -44,6 +44,66 @@ def speaking(title, html):
     return 'speaking', {'title': title, 'html': html, 'needs_review': True}
 
 
+READING_SM3 = [
+    t('<p><b>READING.</b> Прочитай текст и ответь, верно или неверно.</p>'
+      '<p>Nick is nine years old. He lives in a big house with his mum, his dad '
+      'and his sister Penny. His bedroom is upstairs and the kitchen is '
+      'downstairs. There are a lot of old boxes in the cellar. Nick is good at '
+      'riding a bike and playing football, but he isn’t good at swimming. '
+      'His cousin Zoe is eight. She is good at painting, and she loves her '
+      'grandmother Julia.</p>'),
+
+    ('truefalse', {'title': 'Верно или неверно?', 'statements': [
+        {'text': 'Nick is nine years old.', 'correct': True},
+        {'text': 'Nick’s bedroom is downstairs.', 'correct': False},
+        {'text': 'There are old boxes in the cellar.', 'correct': True},
+        {'text': 'Nick is good at swimming.', 'correct': False},
+        {'text': 'Zoe is Nick’s cousin.', 'correct': True},
+    ]}),
+]
+
+LISTENING_SM3 = [
+    ('text', {'html': '<p><b>LISTENING 🎧</b> Послушай рассказ про Пенни. '
+                      'Текста не будет — слушай и отвечай на вопросы ниже. '
+                      'Можно послушать два раза.</p>',
+              **tts('This is Penny. Penny is seven years old. She lives with her '
+                    'mum Claire, her dad Ted and her brother Nick. Penny’s bedroom '
+                    'is upstairs. Penny is good at dancing and she is good at '
+                    'telling stories, but she isn’t good at swimming. Her '
+                    'grandmother Julia is good at making cakes. Penny has got '
+                    'twenty-four books in her room.')}),
+
+    quiz('Послушай ещё раз и выбери правильный ответ.', [
+        q('How old is Penny?', ['seven', 'nine', 'twenty-four'], 0),
+        q('Where is Penny’s bedroom?', ['upstairs', 'downstairs', 'in the cellar'], 0),
+        q('What is Penny NOT good at?', ['swimming', 'dancing', 'telling stories'], 0),
+        q('Who is good at making cakes?',
+          ['her grandmother', 'her mum', 'her brother'], 0),
+        q('How many books has Penny got?', ['24', '14', '42'], 0),
+    ]),
+]
+
+DICTATION_SM3 = ('exact_input', {
+    'title': 'DICTATION ✍️ Послушай предложение и запиши его целиком.',
+    'needs_review': False,
+    'items': [
+        {**tts('Nick is good at playing football.'),
+         'prompt': '1.', 'accept': ['Nick is good at playing football.',
+                                    'Nick is good at playing football']},
+        {**tts('The cellar is under the house.'),
+         'prompt': '2.', 'accept': ['The cellar is under the house.',
+                                    'The cellar is under the house']},
+        {**tts('Penny is Jack’s granddaughter.'),
+         'prompt': '3.', 'accept': ['Penny is Jack’s granddaughter.',
+                                    'Penny is Jack’s granddaughter',
+                                    "Penny is Jack's granddaughter.",
+                                    "Penny is Jack's granddaughter"]},
+        {**tts('There are twenty-four books in the room.'),
+         'prompt': '4.', 'accept': ['There are twenty-four books in the room.',
+                                    'There are twenty-four books in the room']},
+    ]})
+
+
 TEST = [
     t('<p>Сегодня у нас с тобой тест по нулевому юниту. Проверим числа, '
       'be good at, семью и историю про The Explorers. Уверена, ты справишься!</p>'),
@@ -116,6 +176,10 @@ TEST = [
         q('<b>big</b>', ['fish', 'bike', 'five'], 0),
         q('<b>cup</b>', ['run', 'cube', 'blue'], 0),
     ]),
+
+    *READING_SM3,
+    *LISTENING_SM3,
+    DICTATION_SM3,
 
     speaking('SPEAKING TASK 🎤',
              '<p>Расскажи про себя и свою семью, 5–7 предложений. Нажми на микрофон '

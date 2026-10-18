@@ -594,6 +594,199 @@
   },
   {
    "sort_order": 13,
+   "type": "text",
+   "payload": {
+    "html": "<p><b>READING.</b> Прочитай текст и ответь, верно или неверно.</p><p>Nick is nine years old. He lives in a big house with his mum, his dad and his sister Penny. His bedroom is upstairs and the kitchen is downstairs. There are a lot of old boxes in the cellar. Nick is good at riding a bike and playing football, but he isn’t good at swimming. His cousin Zoe is eight. She is good at painting, and she loves her grandmother Julia.</p>"
+   }
+  },
+  {
+   "sort_order": 14,
+   "type": "truefalse",
+   "payload": {
+    "title": "Верно или неверно?",
+    "statements": [
+     {
+      "text": "Nick is nine years old.",
+      "correct": true
+     },
+     {
+      "text": "Nick’s bedroom is downstairs.",
+      "correct": false
+     },
+     {
+      "text": "There are old boxes in the cellar.",
+      "correct": true
+     },
+     {
+      "text": "Nick is good at swimming.",
+      "correct": false
+     },
+     {
+      "text": "Zoe is Nick’s cousin.",
+      "correct": true
+     }
+    ]
+   }
+  },
+  {
+   "sort_order": 15,
+   "type": "text",
+   "payload": {
+    "html": "<p><b>LISTENING 🎧</b> Послушай рассказ про Пенни. Текста не будет — слушай и отвечай на вопросы ниже. Можно послушать два раза.</p>",
+    "audio": "",
+    "audio_tts": "This is Penny. Penny is seven years old. She lives with her mum Claire, her dad Ted and her brother Nick. Penny’s bedroom is upstairs. Penny is good at dancing and she is good at telling stories, but she isn’t good at swimming. Her grandmother Julia is good at making cakes. Penny has got twenty-four books in her room."
+   }
+  },
+  {
+   "sort_order": 16,
+   "type": "quiz",
+   "payload": {
+    "title": "Послушай ещё раз и выбери правильный ответ.",
+    "questions": [
+     {
+      "q": "How old is Penny?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "seven"
+       },
+       {
+        "text": "nine"
+       },
+       {
+        "text": "twenty-four"
+       }
+      ]
+     },
+     {
+      "q": "Where is Penny’s bedroom?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "upstairs"
+       },
+       {
+        "text": "downstairs"
+       },
+       {
+        "text": "in the cellar"
+       }
+      ]
+     },
+     {
+      "q": "What is Penny NOT good at?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "swimming"
+       },
+       {
+        "text": "dancing"
+       },
+       {
+        "text": "telling stories"
+       }
+      ]
+     },
+     {
+      "q": "Who is good at making cakes?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "her grandmother"
+       },
+       {
+        "text": "her mum"
+       },
+       {
+        "text": "her brother"
+       }
+      ]
+     },
+     {
+      "q": "How many books has Penny got?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "24"
+       },
+       {
+        "text": "14"
+       },
+       {
+        "text": "42"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 17,
+   "type": "exact_input",
+   "payload": {
+    "title": "DICTATION ✍️ Послушай предложение и запиши его целиком.",
+    "needs_review": false,
+    "items": [
+     {
+      "audio": "",
+      "audio_tts": "Nick is good at playing football.",
+      "prompt": "1.",
+      "accept": [
+       "Nick is good at playing football.",
+       "Nick is good at playing football"
+      ]
+     },
+     {
+      "audio": "",
+      "audio_tts": "The cellar is under the house.",
+      "prompt": "2.",
+      "accept": [
+       "The cellar is under the house.",
+       "The cellar is under the house"
+      ]
+     },
+     {
+      "audio": "",
+      "audio_tts": "Penny is Jack’s granddaughter.",
+      "prompt": "3.",
+      "accept": [
+       "Penny is Jack’s granddaughter.",
+       "Penny is Jack’s granddaughter",
+       "Penny is Jack's granddaughter.",
+       "Penny is Jack's granddaughter"
+      ]
+     },
+     {
+      "audio": "",
+      "audio_tts": "There are twenty-four books in the room.",
+      "prompt": "4.",
+      "accept": [
+       "There are twenty-four books in the room.",
+       "There are twenty-four books in the room"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "sort_order": 18,
    "type": "speaking",
    "payload": {
     "title": "SPEAKING TASK 🎤",
@@ -602,7 +795,7 @@
    }
   },
   {
-   "sort_order": 14,
+   "sort_order": 19,
    "type": "text",
    "payload": {
     "html": "<p>Ты справился! 🌟 Это был тест за весь нулевой юнит: числа, комнаты, be good at, семья и история про The Explorers.</p>"

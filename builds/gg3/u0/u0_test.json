@@ -797,6 +797,199 @@
   },
   {
    "sort_order": 14,
+   "type": "text",
+   "payload": {
+    "html": "<p><b>READING.</b> Прочитай текст и ответь, верно или неверно.</p><p>The Nichols family live in London. Peter is George and Harry’s dad. He is a doctor and he works at Park Hill General Hospital. He usually starts work at eight o’clock and he travels to work by motorbike. Angela, their mum, is a teacher. She often takes the bus to school. Harry is thirteen. He is good at tennis and he is interested in art. George doesn’t like sport, but he is excited about his new computer. At the weekend the family always go to the park.</p>"
+   }
+  },
+  {
+   "sort_order": 15,
+   "type": "truefalse",
+   "payload": {
+    "title": "True or false?",
+    "statements": [
+     {
+      "text": "Peter works at a hospital.",
+      "correct": true
+     },
+     {
+      "text": "Peter travels to work by bus.",
+      "correct": false
+     },
+     {
+      "text": "Angela is a doctor.",
+      "correct": false
+     },
+     {
+      "text": "Harry is interested in art.",
+      "correct": true
+     },
+     {
+      "text": "The family never go to the park.",
+      "correct": false
+     }
+    ]
+   }
+  },
+  {
+   "sort_order": 16,
+   "type": "text",
+   "payload": {
+    "html": "<p><b>LISTENING 🎧</b> Послушай рассказ про Эмму. Текста не будет — слушай и отвечай на вопросы ниже. Можно послушать два раза.</p>",
+    "audio": "",
+    "audio_tts": "This is Emma. Emma is thirteen years old. She lives with her mum and her gran Bertie. Emma usually goes to school by bike, but when it rains her mum drives her. Emma is good at dancing and she has got dance classes twice a week. This year she is going to study Geography more. Emma is scared of spiders. Her favourite food is pancakes: her gran always makes pancakes for breakfast on Sunday."
+   }
+  },
+  {
+   "sort_order": 17,
+   "type": "quiz",
+   "payload": {
+    "title": "Послушай ещё раз и выбери правильный ответ.",
+    "questions": [
+     {
+      "q": "How old is Emma?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "thirteen"
+       },
+       {
+        "text": "nine"
+       },
+       {
+        "text": "thirty"
+       }
+      ]
+     },
+     {
+      "q": "How does Emma usually go to school?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "by bike"
+       },
+       {
+        "text": "by car"
+       },
+       {
+        "text": "by bus"
+       }
+      ]
+     },
+     {
+      "q": "How often has she got dance classes?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "twice a week"
+       },
+       {
+        "text": "every day"
+       },
+       {
+        "text": "at the weekend"
+       }
+      ]
+     },
+     {
+      "q": "What is she going to study more this year?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "Geography"
+       },
+       {
+        "text": "Maths"
+       },
+       {
+        "text": "Art"
+       }
+      ]
+     },
+     {
+      "q": "What is Emma scared of?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "spiders"
+       },
+       {
+        "text": "dogs"
+       },
+       {
+        "text": "the dark"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 18,
+   "type": "exact_input",
+   "payload": {
+    "title": "DICTATION ✍️ Послушай предложение и запиши его целиком.",
+    "needs_review": false,
+    "items": [
+     {
+      "audio": "",
+      "audio_tts": "Harry usually plays tennis on Thursdays.",
+      "prompt": "1.",
+      "accept": [
+       "Harry usually plays tennis on Thursdays.",
+       "Harry usually plays tennis on Thursdays"
+      ]
+     },
+     {
+      "audio": "",
+      "audio_tts": "My dad travels to work by motorbike.",
+      "prompt": "2.",
+      "accept": [
+       "My dad travels to work by motorbike.",
+       "My dad travels to work by motorbike"
+      ]
+     },
+     {
+      "audio": "",
+      "audio_tts": "There isn’t any milk in the fridge.",
+      "prompt": "3.",
+      "accept": [
+       "There isn’t any milk in the fridge.",
+       "There isn’t any milk in the fridge",
+       "There isn't any milk in the fridge.",
+       "There isn't any milk in the fridge"
+      ]
+     },
+     {
+      "audio": "",
+      "audio_tts": "We are going to visit a museum.",
+      "prompt": "4.",
+      "accept": [
+       "We are going to visit a museum.",
+       "We are going to visit a museum"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "sort_order": 19,
    "type": "speaking",
    "payload": {
     "title": "SPEAKING TASK 🎤",
@@ -805,7 +998,7 @@
    }
   },
   {
-   "sort_order": 15,
+   "sort_order": 20,
    "type": "text",
    "payload": {
     "html": "<p>Ты справился! 🌟 Это был тест за весь нулевой юнит: город и транспорт, профессии, школа, характер и еда.</p>"

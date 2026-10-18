@@ -43,6 +43,69 @@ def order(words, sentence):
     return 'order', {'words': words, 'sentence': sentence, **tts(sentence)}
 
 
+READING = [
+    t('<p><b>READING.</b> Прочитай текст и ответь, верно или неверно.</p>'
+      '<p>The Nichols family live in London. Peter is George and Harry’s dad. '
+      'He is a doctor and he works at Park Hill General Hospital. He usually '
+      'starts work at eight o’clock and he travels to work by motorbike. '
+      'Angela, their mum, is a teacher. She often takes the bus to school. '
+      'Harry is thirteen. He is good at tennis and he is interested in art. '
+      'George doesn’t like sport, but he is excited about his new computer. '
+      'At the weekend the family always go to the park.</p>'),
+
+    ('truefalse', {'title': 'True or false?', 'statements': [
+        {'text': 'Peter works at a hospital.', 'correct': True},
+        {'text': 'Peter travels to work by bus.', 'correct': False},
+        {'text': 'Angela is a doctor.', 'correct': False},
+        {'text': 'Harry is interested in art.', 'correct': True},
+        {'text': 'The family never go to the park.', 'correct': False},
+    ]}),
+]
+
+LISTENING = [
+    ('text', {'html': '<p><b>LISTENING 🎧</b> Послушай рассказ про Эмму. '
+                      'Текста не будет — слушай и отвечай на вопросы ниже. '
+                      'Можно послушать два раза.</p>',
+              **tts('This is Emma. Emma is thirteen years old. She lives with her '
+                    'mum and her gran Bertie. Emma usually goes to school by bike, '
+                    'but when it rains her mum drives her. Emma is good at dancing '
+                    'and she has got dance classes twice a week. This year she is '
+                    'going to study Geography more. Emma is scared of spiders. '
+                    'Her favourite food is pancakes: her gran always makes pancakes '
+                    'for breakfast on Sunday.')}),
+
+    quiz('Послушай ещё раз и выбери правильный ответ.', [
+        q('How old is Emma?', ['thirteen', 'nine', 'thirty'], 0),
+        q('How does Emma usually go to school?', ['by bike', 'by car', 'by bus'], 0),
+        q('How often has she got dance classes?',
+          ['twice a week', 'every day', 'at the weekend'], 0),
+        q('What is she going to study more this year?',
+          ['Geography', 'Maths', 'Art'], 0),
+        q('What is Emma scared of?', ['spiders', 'dogs', 'the dark'], 0),
+    ]),
+]
+
+DICTATION = ('exact_input', {
+    'title': 'DICTATION ✍️ Послушай предложение и запиши его целиком.',
+    'needs_review': False,
+    'items': [
+        {**tts('Harry usually plays tennis on Thursdays.'),
+         'prompt': '1.', 'accept': ['Harry usually plays tennis on Thursdays.',
+                                    'Harry usually plays tennis on Thursdays']},
+        {**tts('My dad travels to work by motorbike.'),
+         'prompt': '2.', 'accept': ['My dad travels to work by motorbike.',
+                                    'My dad travels to work by motorbike']},
+        {**tts('There isn’t any milk in the fridge.'),
+         'prompt': '3.', 'accept': ['There isn’t any milk in the fridge.',
+                                    'There isn’t any milk in the fridge',
+                                    "There isn't any milk in the fridge.",
+                                    "There isn't any milk in the fridge"]},
+        {**tts('We are going to visit a museum.'),
+         'prompt': '4.', 'accept': ['We are going to visit a museum.',
+                                    'We are going to visit a museum']},
+    ]})
+
+
 TEST = [
     t('<p>Сегодня у нас с тобой тест по нулевому юниту Get started! Проверим '
       'Present Simple, be going to, вопросы, еду и всё, что мы повторяли. '
@@ -142,6 +205,10 @@ TEST = [
                          {'prompt': '4. a ___ of milk', 'accept': ['carton', 'Carton']},
                          {'prompt': '5. a ___ of flour', 'accept': ['packet', 'Packet']},
                      ], 'needs_review': False}),
+
+    *READING,
+    *LISTENING,
+    DICTATION,
 
     ('speaking', {'title': 'SPEAKING TASK 🎤', 'needs_review': True,
                   'html': '<p>Ответь на вопросы, 6–8 предложений. Нажми на микрофон '
