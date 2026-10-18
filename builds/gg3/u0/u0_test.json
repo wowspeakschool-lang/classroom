@@ -1,0 +1,815 @@
+{
+ "course": "gg3",
+ "unit": "Unit 0",
+ "unit_sort_order": 0,
+ "lesson": "Unit 0 Test",
+ "kind": "test",
+ "lesson_sort_order": 0,
+ "pass_threshold": 90,
+ "is_published": false,
+ "blocks": [
+  {
+   "sort_order": 0,
+   "type": "text",
+   "payload": {
+    "html": "<p>Сегодня у нас с тобой тест по нулевому юниту Get started! Проверим Present Simple, be going to, вопросы, еду и всё, что мы повторяли. Уверена, ты справишься!</p>"
+   }
+  },
+  {
+   "sort_order": 1,
+   "type": "match",
+   "payload": {
+    "title": "Match the place with what you can do there.",
+    "pairs": [
+     {
+      "left": "You can see paintings here.",
+      "right": "museum",
+      "right_audio": "",
+      "right_audio_tts": "museum"
+     },
+     {
+      "left": "You can watch a film here.",
+      "right": "cinema",
+      "right_audio": "",
+      "right_audio_tts": "cinema"
+     },
+     {
+      "left": "You can stay here on holiday.",
+      "right": "hotel",
+      "right_audio": "",
+      "right_audio_tts": "hotel"
+     },
+     {
+      "left": "You can watch a football match here.",
+      "right": "stadium",
+      "right_audio": "",
+      "right_audio_tts": "stadium"
+     },
+     {
+      "left": "You can have dinner here.",
+      "right": "restaurant",
+      "right_audio": "",
+      "right_audio_tts": "restaurant"
+     },
+     {
+      "left": "A doctor works here.",
+      "right": "hospital",
+      "right_audio": "",
+      "right_audio_tts": "hospital"
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 2,
+   "type": "quiz",
+   "payload": {
+    "title": "Means of transport and places — choose the right word.",
+    "questions": [
+     {
+      "q": "Harry goes to school ___ bike.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "by"
+       },
+       {
+        "text": "on"
+       },
+       {
+        "text": "with"
+       }
+      ]
+     },
+     {
+      "q": "It goes under the ground. It’s the ___.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "underground"
+       },
+       {
+        "text": "tram"
+       },
+       {
+        "text": "boat"
+       }
+      ]
+     },
+     {
+      "q": "Emma and Gran travel to France ___ plane.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "by"
+       },
+       {
+        "text": "in"
+       },
+       {
+        "text": "at"
+       }
+      ]
+     },
+     {
+      "q": "George and his dad go to the ___ to watch the football.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "stadium"
+       },
+       {
+        "text": "museum"
+       },
+       {
+        "text": "bank"
+       }
+      ]
+     },
+     {
+      "q": "You can take money out at the ___.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "bank"
+       },
+       {
+        "text": "park"
+       },
+       {
+        "text": "theatre"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 3,
+   "type": "quiz",
+   "payload": {
+    "title": "Present Simple and adverbs of frequency — choose the right option.",
+    "questions": [
+     {
+      "q": "George ___ karate on Tuesdays.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "does"
+       },
+       {
+        "text": "do"
+       },
+       {
+        "text": "doing"
+       }
+      ]
+     },
+     {
+      "q": "Emma ___ have dance classes on Mondays.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "doesn’t"
+       },
+       {
+        "text": "don’t"
+       },
+       {
+        "text": "isn’t"
+       }
+      ]
+     },
+     {
+      "q": "___ Harry play tennis on Thursdays?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "Does"
+       },
+       {
+        "text": "Do"
+       },
+       {
+        "text": "Is"
+       }
+      ]
+     },
+     {
+      "q": "I ___ late for school.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "am never"
+       },
+       {
+        "text": "never am"
+       },
+       {
+        "text": "never"
+       }
+      ]
+     },
+     {
+      "q": "She ___ to school by bike.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "always goes"
+       },
+       {
+        "text": "goes always"
+       },
+       {
+        "text": "always go"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 4,
+   "type": "quiz",
+   "payload": {
+    "title": "Question words — complete the questions about Harry’s dad.",
+    "questions": [
+     {
+      "q": "___ does your dad do?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "What"
+       },
+       {
+        "text": "Who"
+       },
+       {
+        "text": "When"
+       }
+      ]
+     },
+     {
+      "q": "___ does he work?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "Where"
+       },
+       {
+        "text": "How"
+       },
+       {
+        "text": "What"
+       }
+      ]
+     },
+     {
+      "q": "___ does he start work?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "When"
+       },
+       {
+        "text": "Where"
+       },
+       {
+        "text": "Who"
+       }
+      ]
+     },
+     {
+      "q": "___ does he travel to work?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "How"
+       },
+       {
+        "text": "What"
+       },
+       {
+        "text": "When"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 5,
+   "type": "quiz",
+   "payload": {
+    "title": "Jobs — who is it?",
+    "questions": [
+     {
+      "q": "This person looks after animals when they are ill.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "a vet"
+       },
+       {
+        "text": "a farmer"
+       },
+       {
+        "text": "a nurse"
+       }
+      ]
+     },
+     {
+      "q": "This person cooks in a restaurant.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "a chef"
+       },
+       {
+        "text": "a waiter"
+       },
+       {
+        "text": "a shop assistant"
+       }
+      ]
+     },
+     {
+      "q": "This person helps people in hospital and works with a doctor.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "a nurse"
+       },
+       {
+        "text": "a teacher"
+       },
+       {
+        "text": "a pilot"
+       }
+      ]
+     },
+     {
+      "q": "This person flies a plane.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "a pilot"
+       },
+       {
+        "text": "a bus driver"
+       },
+       {
+        "text": "a builder"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 6,
+   "type": "quiz",
+   "payload": {
+    "title": "be going to — choose the right option.",
+    "questions": [
+     {
+      "q": "I ___ study Geography more this year.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "am going to"
+       },
+       {
+        "text": "going to"
+       },
+       {
+        "text": "am going"
+       }
+      ]
+     },
+     {
+      "q": "My parents ___ buy me a laptop.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "are going to"
+       },
+       {
+        "text": "is going to"
+       },
+       {
+        "text": "going to"
+       }
+      ]
+     },
+     {
+      "q": "___ you going to have lunch at school?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "Are"
+       },
+       {
+        "text": "Do"
+       },
+       {
+        "text": "Is"
+       }
+      ]
+     },
+     {
+      "q": "He ___ going to get up late again.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "isn’t"
+       },
+       {
+        "text": "aren’t"
+       },
+       {
+        "text": "doesn’t"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 7,
+   "type": "quiz",
+   "payload": {
+    "title": "Adjectives with prepositions — choose the right word.",
+    "questions": [
+     {
+      "q": "I’m bad ___ cooking.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "at"
+       },
+       {
+        "text": "in"
+       },
+       {
+        "text": "of"
+       }
+      ]
+     },
+     {
+      "q": "She’s interested ___ science.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "in"
+       },
+       {
+        "text": "at"
+       },
+       {
+        "text": "about"
+       }
+      ]
+     },
+     {
+      "q": "He’s scared ___ spiders.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "of"
+       },
+       {
+        "text": "at"
+       },
+       {
+        "text": "for"
+       }
+      ]
+     },
+     {
+      "q": "They’re excited ___ the new game.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "about"
+       },
+       {
+        "text": "of"
+       },
+       {
+        "text": "in"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 8,
+   "type": "quiz",
+   "payload": {
+    "title": "Food and drink — some, any, how much, how many.",
+    "questions": [
+     {
+      "q": "There ___ some apples in the kitchen.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "are"
+       },
+       {
+        "text": "is"
+       },
+       {
+        "text": "be"
+       }
+      ]
+     },
+     {
+      "q": "There isn’t ___ sugar in my tea.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "any"
+       },
+       {
+        "text": "some"
+       },
+       {
+        "text": "a"
+       }
+      ]
+     },
+     {
+      "q": "___ milk is there?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "How much"
+       },
+       {
+        "text": "How many"
+       },
+       {
+        "text": "How long"
+       }
+      ]
+     },
+     {
+      "q": "___ eggs are there?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "How many"
+       },
+       {
+        "text": "How much"
+       },
+       {
+        "text": "How often"
+       }
+      ]
+     },
+     {
+      "q": "Have we got ___ bread?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "any"
+       },
+       {
+        "text": "many"
+       },
+       {
+        "text": "a"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 9,
+   "type": "order",
+   "payload": {
+    "words": [
+     "She",
+     "doesn’t go",
+     "to the gym",
+     "on Mondays."
+    ],
+    "sentence": "She doesn’t go to the gym on Mondays.",
+    "audio": "",
+    "audio_tts": "She doesn’t go to the gym on Mondays."
+   }
+  },
+  {
+   "sort_order": 10,
+   "type": "order",
+   "payload": {
+    "words": [
+     "How often",
+     "do you",
+     "travel",
+     "by train?"
+    ],
+    "sentence": "How often do you travel by train?",
+    "audio": "",
+    "audio_tts": "How often do you travel by train?"
+   }
+  },
+  {
+   "sort_order": 11,
+   "type": "order",
+   "payload": {
+    "words": [
+     "I’m",
+     "going to",
+     "study",
+     "English",
+     "this year."
+    ],
+    "sentence": "I’m going to study English this year.",
+    "audio": "",
+    "audio_tts": "I’m going to study English this year."
+   }
+  },
+  {
+   "sort_order": 12,
+   "type": "order",
+   "payload": {
+    "words": [
+     "There",
+     "isn’t",
+     "any juice",
+     "in the fridge."
+    ],
+    "sentence": "There isn’t any juice in the fridge.",
+    "audio": "",
+    "audio_tts": "There isn’t any juice in the fridge."
+   }
+  },
+  {
+   "sort_order": 13,
+   "type": "exact_input",
+   "payload": {
+    "title": "Containers — write the missing word.",
+    "items": [
+     {
+      "prompt": "1. a ___ of chocolate",
+      "accept": [
+       "bar",
+       "Bar"
+      ]
+     },
+     {
+      "prompt": "2. a ___ of water",
+      "accept": [
+       "bottle",
+       "Bottle"
+      ]
+     },
+     {
+      "prompt": "3. a ___ of tuna",
+      "accept": [
+       "can",
+       "Can"
+      ]
+     },
+     {
+      "prompt": "4. a ___ of milk",
+      "accept": [
+       "carton",
+       "Carton"
+      ]
+     },
+     {
+      "prompt": "5. a ___ of flour",
+      "accept": [
+       "packet",
+       "Packet"
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 14,
+   "type": "speaking",
+   "payload": {
+    "title": "SPEAKING TASK 🎤",
+    "needs_review": true,
+    "html": "<p>Ответь на вопросы, 6–8 предложений. Нажми на микрофон и запиши ответ.</p><ol><li>What do you usually do at the weekend?</li><li>How do you travel to school?</li><li>What are you good at? What are you scared of?</li><li>What are you going to do this year?</li><li>What is there in your fridge at home?</li></ol>"
+   }
+  },
+  {
+   "sort_order": 15,
+   "type": "text",
+   "payload": {
+    "html": "<p>Ты справился! 🌟 Это был тест за весь нулевой юнит: город и транспорт, профессии, школа, характер и еда.</p>"
+   }
+  }
+ ]
+}
