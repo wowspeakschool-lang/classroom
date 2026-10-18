@@ -1,0 +1,5 @@
+with i as (insert into words (deck_id, term, translation, "order", image_url)
+select d.id, v.t, v.tr, v.o, (select image_url from words x where x.id = v.src)
+from (values (1280, 'journalist', 'журналист', 14, 1359), (1270, 'lively', 'живой', 2, null), (1270, 'miserable', 'несчастный', 3, 2749), (1260, 'roast', 'запекать на огне', 6, 947), (1260, 'rum', 'ром', 7, null), (1260, 'shipwrecked', 'потерпевший кораблекрушение', 8, null), (1260, 'sickness', 'болезнь', 9, null), (1270, 'smooth', 'гладкий', 4, 2380), (1260, 'supper', 'ужин', 10, null), (1260, 'syrup', 'сироп', 11, null), (1260, 'tablet', 'таблетка', 12, null), (1270, 'weak', 'слабый', 5, 4405)) v(s, t, tr, o, src)
+join word_decks d on d.sort_order = v.s and d.deleted_at is null and d.folder_id in (select id from deck_folders where deleted_at is null and (parent_folder_id = (select id from deck_folders where title='Spotlight 7' and deleted_at is null) or parent_folder_id in (select id from deck_folders where parent_folder_id = (select id from deck_folders where title='Spotlight 7' and deleted_at is null) and deleted_at is null)))
+returning id) select count(*) from i;

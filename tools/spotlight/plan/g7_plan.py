@@ -161,8 +161,8 @@ NOPIC = {'eventually', 'according to', 'several', 'let alone', 'at first glance'
          'forgettable', 'basic', 'complete', 'obsession', 'psychology', 'enable', 'cause', 'exist', 'believe',
          'value', 'moral', 'duty', 'occasion', 'formal', 'incident', 'detail', 'copy', 'affect', 'choice', 'stuff',
          'designate', 'function', 'identify', 'fault', 'compound', 'organic', 'primary', 'secondary', 'tertiary',
-         'conditions', 'event', 'order', 'excitement', 'enthusiasm', 'inform', 'opinion',
-         'rum', 'gun'}  # rum — алкоголь, gun — оружие: детям не рисуем
+         'conditions', 'event', 'order', 'excitement', 'enthusiasm', 'inform', 'opinion'}
+# rum и gun рисуем (Анна, 18.10.2026): rum — пиратская бутылка без надписей, gun — старинный пистолет на сундуке
 def nopic(term, pos):
     t = term.lower()
     if t in NOPIC: return True

@@ -1,0 +1,2 @@
+with u as (update word_decks d set word_count = (select count(*) from words w where w.deck_id = d.id)
+where d.folder_id in (select id from deck_folders where deleted_at is null and (parent_folder_id = (select id from deck_folders where title='Spotlight 7' and deleted_at is null) or parent_folder_id in (select id from deck_folders where parent_folder_id = (select id from deck_folders where title='Spotlight 7' and deleted_at is null) and deleted_at is null))) returning id) select count(*) from u;
