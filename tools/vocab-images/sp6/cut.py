@@ -66,9 +66,10 @@ def is_scene(p):
     ImageDraw.Draw(hm).polygon([tuple(map(int, pts[v])) for v in hull.vertices], fill=1)
     return m.sum() / max(1, np.array(hm).sum()) >= SCENE_SOLID
 # ключ «лист/подпись» — только для этого листа (часы листа 166 те же подписи, что у 117)
-CUT_BOTTOM = {}  # остаток подписи под рисунком; ключ «подпись» или «лист/подпись»
+CUT_BOTTOM = {'4/Polish': 0.855, '4/north-east': 0.83, '4/north-west': 0.83, '7/at midday': 0.875,
+              '7/quarter past': 0.83, '8/half past': 0.81, '8/quarter to': 0.81, '51/drawing': 0.865, '51/rubber': 0.77}  # остаток подписи под рисунком; ключ «подпись» или «лист/подпись»
 CUT_LEFT = {}
-NO_SPECK = set()
+NO_SPECK = {'distance'}
 
 LAYOUT = {1: [1], 3: [3], 4: [2, 2], 5: [3, 2], 6: [3, 3], 7: [4, 3], 8: [4, 4], 9: [5, 4], 10: [5, 5], 11: [4, 4, 3], 12: [4, 4, 4], 13: [5, 4, 4]}
 
