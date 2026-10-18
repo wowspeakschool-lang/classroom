@@ -10,7 +10,7 @@ from sheets import S, DIGITS
 # с 14.10.2026 тренажёр живёт на app.wowteach.ru, картинки — в wowspeak-platform/public/trainer/media
 DST = '/home/user/wowspeak-platform/public/trainer/media/spotlight6'
 URL = 'https://app.wowteach.ru/trainer/media/spotlight6/'
-SKIP = {'art museum', 'currency', 'British pound', 'upright', 'war', 'brush my teeth', 'distance', 'reserve a table'}  # подписи, не прошедшие проверку: не выгружать
+SKIP = {'art museum', 'currency', 'British pound', 'upright', 'war', 'brush my teeth', 'distance', 'reserve a table', 'hire a car'}  # подписи, не прошедшие проверку: не выгружать
 SKIP -= set(filter(None, os.environ.get('ALLOW', '').split('|')))  # ALLOW='keep out|…' — выгрузить перерисованные (после перерисовки)
 # омонимы: подпись → перевод слова (колоды Spotlight 6 переименовывались, по названию колоды не привязываем)
 HOMO = {'floor (storey)': 'этаж', 'dice (cut)': 'нарезать кубиками'}  # у «пол» и «кубик» картинки уже есть
