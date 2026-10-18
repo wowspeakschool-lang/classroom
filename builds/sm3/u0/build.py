@@ -93,9 +93,9 @@ TEST = [
 
     ('exact_input', {'items': [
         {'prompt': '1. Julia is Penny’s ___.', 'accept': ['grandmother', 'Grandmother']},
-        {'prompt': '2. Claire is Julia’s ___.', 'accept': ['daughter', 'Daughter']},
-        {'prompt': '3. Oliver is Nick’s ___.', 'accept': ['uncle', 'Uncle']},
-        {'prompt': '4. Paula is Zoe’s ___.', 'accept': ['sister', 'Sister']},
+        {'prompt': '2. Jack is Paula’s ___.', 'accept': ['grandfather', 'Grandfather']},
+        {'prompt': '3. Paula is Zoe’s ___.', 'accept': ['sister', 'Sister']},
+        {'prompt': '4. Zoe is Nick’s ___.', 'accept': ['cousin', 'Cousin']},
     ], 'needs_review': False}),
 
     ('truefalse', {'title': 'История «The old book» — верно или неверно?',
@@ -262,6 +262,54 @@ HW2 = [
       'об этом друга.</p>'),
 ]
 
+
+# ══════════════════════════════════════════════════════════════════════════
+# ДЗ 3 — Lesson 3: семья и притяжательный ’s
+# ══════════════════════════════════════════════════════════════════════════
+TREE = f'<p style="text-align:center"><img src="{M}family_tree.webp" alt=""></p>'
+
+HW3 = [
+    t('<p>Привет! 👋 В этой домашке — семья и маленькая буква <b>’s</b>, '
+      'которая показывает, чей это человек или предмет.</p>'),
+
+    t('<p><b>Посмотри на семейное дерево — оно понадобится в заданиях.</b></p>' + TREE),
+
+    quiz('Посмотри на дерево и выбери правильный вариант.', [
+        q('Nick is Penny’s ___.', ['brother', 'father', 'cousin'], 0),
+        q('Paula is Zoe’s ___.', ['cousin', 'sister', 'aunt'], 1),
+        q('Ted is Penny’s ___.', ['uncle', 'father', 'grandfather'], 1),
+        q('Lisa is Paula’s ___.', ['mother', 'sister', 'aunt'], 0),
+        q('Oliver is Nick’s ___.', ['uncle', 'grandfather', 'brother'], 0),
+    ]),
+
+    exact('Посмотри на дерево и впиши слово.', [
+        {'prompt': '1. Julia is Nick’s ___.', 'accept': ['grandmother', 'Grandmother']},
+        {'prompt': '2. Nick is Jack’s ___.', 'accept': ['grandson', 'Grandson']},
+        {'prompt': '3. Zoe is Penny’s ___.', 'accept': ['cousin', 'Cousin']},
+        {'prompt': '4. Lisa is Nick’s ___.', 'accept': ['aunt', 'Aunt']},
+    ]),
+
+    quiz('Выбери правильный вариант.', [
+        q('This is Nick___ dog.', ['’s', 's', 's’'], 0),
+        q('Penny is Ted___ daughter.', ['’s', 's', 's’'], 0),
+        q('«Julia’s son» — у кого есть сын?', ['Julia', 'the son', 'Jack'], 0),
+        q('Paula and Zoe are Oliver and Lisa___ daughters.', ['’s', 's', 's’'], 0),
+    ]),
+
+    order(['Penny', 'is', 'Jack’s', 'granddaughter.'], 'Penny is Jack’s granddaughter.'),
+    order(['Zoe', 'is', 'Lisa’s', 'daughter.'], 'Zoe is Lisa’s daughter.'),
+    order(['This', 'is', 'my mum’s', 'brother.'], 'This is my mum’s brother.'),
+
+    speaking('SPEAKING TASK 🎤',
+             '<p>Расскажи про свою семью, 5–6 предложений. Используй ’s. Нажми на '
+             'микрофон и запиши ответ.</p>'
+             '<p><i>For example:<br>This is my mum’s sister. She’s my aunt.<br>'
+             'Her son is my cousin.<br>My dad’s father is my grandfather.</i></p>'),
+
+    t('<p>Молодец! 🌟 Теперь ты умеешь рассказать, кто кому кем приходится, '
+      'и не путаешь ’s.</p>'),
+]
+
 HEAD = """\
 -- {title}
 -- Собрано скриптом builds/sm3/u0/build.py. Не заливать, пока не назовут,
@@ -335,5 +383,7 @@ emit('u0_hw1', HW1, 'SM3 · Unit 0 · Homework 1 — к уроку Lesson 1',
      'Homework 1', 'homework', 0, 60)
 emit('u0_hw2', HW2, 'SM3 · Unit 0 · Homework 2 — к уроку Lesson 2',
      'Homework 2', 'homework', 1, 60)
+emit('u0_hw3', HW3, 'SM3 · Unit 0 · Homework 3 — к уроку Lesson 3',
+     'Homework 3', 'homework', 2, 60)
 emit('u0_test', TEST, 'SM3 · Unit 0 · Test — к уроку Lesson 5 «Revision + Test»',
      'Test', 'test', 5, 90)

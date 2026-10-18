@@ -453,24 +453,24 @@
       ]
      },
      {
-      "prompt": "2. Claire is Julia’s ___.",
+      "prompt": "2. Jack is Paula’s ___.",
       "accept": [
-       "daughter",
-       "Daughter"
+       "grandfather",
+       "Grandfather"
       ]
      },
      {
-      "prompt": "3. Oliver is Nick’s ___.",
-      "accept": [
-       "uncle",
-       "Uncle"
-      ]
-     },
-     {
-      "prompt": "4. Paula is Zoe’s ___.",
+      "prompt": "3. Paula is Zoe’s ___.",
       "accept": [
        "sister",
        "Sister"
+      ]
+     },
+     {
+      "prompt": "4. Zoe is Nick’s ___.",
+      "accept": [
+       "cousin",
+       "Cousin"
       ]
      }
     ],
