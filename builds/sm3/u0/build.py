@@ -128,6 +128,140 @@ TEST = [
       'be good at, семья и история про The Explorers.</p>'),
 ]
 
+
+def gaps(title, text, mode='type'):
+    return 'gaps', {'title': title, 'text': text, 'mode': mode}
+
+
+def exact(title, items):
+    return 'exact_input', {'title': title, 'items': items, 'needs_review': False}
+
+
+def qimg(qtext, images, correct, audio=None):
+    o = {'q': qtext, 'type': 'single', 'correct': [correct],
+         'options': [{'image': M + i + '.webp'} for i in images]}
+    if audio:
+        o.update(tts(audio))
+    return o
+
+
+def pic(name, alt=''):
+    return f'<p style="text-align:center"><img src="{M}{name}.webp" alt="{alt}"></p>'
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# ДЗ 1 — Lesson 1: upstairs / downstairs / cellar, числа 21–100
+# ══════════════════════════════════════════════════════════════════════════
+HW1 = [
+    t('<p>Привет! 👋 В этой домашке повторим числа от 21 до 100 и новые слова: '
+      '<b>upstairs</b>, <b>downstairs</b>, <b>cellar</b>.</p>'),
+
+    quiz('Посмотри на картинку и выбери правильный вариант.', [
+        {'q': 'Where is the cat?', 'type': 'single', 'correct': [0],
+         'image': M + 'house_upstairs.webp',
+         'options': [{'text': 'Upstairs.'}, {'text': 'Downstairs.'},
+                     {'text': 'In the cellar.'}]},
+        {'q': 'Where is the cat?', 'type': 'single', 'correct': [1],
+         'image': M + 'house_downstairs.webp',
+         'options': [{'text': 'Upstairs.'}, {'text': 'Downstairs.'},
+                     {'text': 'In the cellar.'}]},
+        {'q': 'Where is the cat?', 'type': 'single', 'correct': [2],
+         'image': M + 'house_cellar.webp',
+         'options': [{'text': 'Upstairs.'}, {'text': 'Downstairs.'},
+                     {'text': 'In the cellar.'}]},
+    ]),
+
+    quiz('Послушай и выбери число.', [
+        q('', ['34', '43', '14'], 0, 'thirty-four'),
+        q('', ['17', '70', '77'], 1, 'seventy'),
+        q('', ['58', '85', '55'], 0, 'fifty-eight'),
+        q('', ['61', '16', '66'], 0, 'sixty-one'),
+        q('', ['99', '79', '19'], 0, 'ninety-nine'),
+    ]),
+
+    exact('Прочитай число словами и впиши его цифрами.', [
+        {'prompt': '1. forty-two', 'accept': ['42']},
+        {'prompt': '2. sixty-three', 'accept': ['63']},
+        {'prompt': '3. eighty-seven', 'accept': ['87']},
+        {'prompt': '4. one hundred', 'accept': ['100']},
+    ]),
+
+    gaps('Вставь пропущенные слова: upstairs · downstairs · cellar.',
+         'My bedroom is __upstairs__.\n'
+         'The kitchen is __downstairs__, next to the front door.\n'
+         'The old boxes are in the __cellar__.'),
+
+    order(['My', 'bedroom', 'is', 'upstairs.'], 'My bedroom is upstairs.'),
+    order(['The', 'cellar', 'is', 'under', 'the house.'],
+          'The cellar is under the house.'),
+
+    speaking('SPEAKING TASK 🎤',
+             '<p>Расскажи про свой дом или квартиру, 4–5 предложений. Нажми на '
+             'микрофон и запиши ответ.</p>'
+             '<p><i>For example:<br>My bedroom is upstairs.<br>The kitchen is '
+             'downstairs.<br>We haven’t got a cellar.</i></p>'),
+
+    t('<p>Молодец! 🌟 Теперь ты знаешь, где upstairs, где downstairs и что такое '
+      'cellar, и считаешь до ста.</p>'),
+]
+
+# ══════════════════════════════════════════════════════════════════════════
+# ДЗ 2 — Lesson 2: be good at + Ving
+# ══════════════════════════════════════════════════════════════════════════
+HW2 = [
+    t('<p>Привет! 👋 В этой домашке тренируем <b>be good at + Ving</b> — '
+      'рассказываем, что получается хорошо, а что не очень.</p>'),
+
+    quiz('Посмотри на картинку и выбери правильный вариант.', [
+        {'q': 'What is she good at?', 'type': 'single', 'correct': [0],
+         'image': M + 'act_dancing.webp',
+         'options': [{'text': 'dancing'}, {'text': 'painting'}, {'text': 'swimming'}]},
+        {'q': 'What is he good at?', 'type': 'single', 'correct': [1],
+         'image': M + 'act_painting.webp',
+         'options': [{'text': 'climbing'}, {'text': 'painting'}, {'text': 'riding a bike'}]},
+        {'q': 'What is she good at?', 'type': 'single', 'correct': [2],
+         'image': M + 'act_swimming.webp',
+         'options': [{'text': 'dancing'}, {'text': 'playing football'}, {'text': 'swimming'}]},
+        {'q': 'What is he good at?', 'type': 'single', 'correct': [1],
+         'image': M + 'act_football.webp',
+         'options': [{'text': 'swimming'}, {'text': 'playing football'}, {'text': 'painting'}]},
+        {'q': 'What is she good at?', 'type': 'single', 'correct': [0],
+         'image': M + 'act_riding.webp',
+         'options': [{'text': 'riding a bike'}, {'text': 'climbing trees'}, {'text': 'dancing'}]},
+        {'q': 'What is he good at?', 'type': 'single', 'correct': [2],
+         'image': M + 'act_climbing.webp',
+         'options': [{'text': 'swimming'}, {'text': 'painting'}, {'text': 'climbing trees'}]},
+    ]),
+
+    quiz('Выбери правильный вариант.', [
+        q('I’m good at ___ pictures.', ['painting', 'paint', 'paints'], 0),
+        q('He isn’t good at ___ football.', ['playing', 'play', 'played'], 0),
+        q('___ she good at dancing?', ['Is', 'Does', 'Do'], 0),
+        q('We ___ good at climbing trees.', ['are', 'is', 'am'], 0),
+        q('They aren’t good ___ swimming.', ['at', 'in', 'to'], 0),
+    ]),
+
+    exact('Поставь глагол в правильную форму.', [
+        {'prompt': '1. I’m good at ___ (ride) a bike.', 'accept': ['riding', 'Riding']},
+        {'prompt': '2. She’s not good at ___ (tell) lies.', 'accept': ['telling', 'Telling']},
+        {'prompt': '3. Are you good at ___ (dance)?', 'accept': ['dancing', 'Dancing']},
+        {'prompt': '4. He’s good at ___ (climb) trees.', 'accept': ['climbing', 'Climbing']},
+    ]),
+
+    order(['I’m', 'good at', 'playing', 'the guitar.'], 'I’m good at playing the guitar.'),
+    order(['Lucy', 'isn’t', 'good at', 'painting.'], 'Lucy isn’t good at painting.'),
+    order(['Are', 'you', 'good at', 'doing', 'puzzles?'], 'Are you good at doing puzzles?'),
+
+    speaking('SPEAKING TASK 🎤',
+             '<p>Расскажи, что у тебя получается хорошо, а что не очень — '
+             '4–6 предложений. Нажми на микрофон и запиши ответ.</p>'
+             '<p><i>For example:<br>I’m good at swimming and riding a bike.<br>'
+             'I’m not good at painting.<br>My friend is good at playing football.</i></p>'),
+
+    t('<p>Отлично! 🌟 Теперь ты умеешь рассказать, в чём ты хорош, и спросить '
+      'об этом друга.</p>'),
+]
+
 HEAD = """\
 -- {title}
 -- Собрано скриптом builds/sm3/u0/build.py. Не заливать, пока не назовут,
@@ -197,5 +331,9 @@ def emit(name, blocks, title, lesson_title, kind, lesson_sort, threshold):
     print(f'{name}: {len(blocks)} блоков → {name}.sql, {name}.json')
 
 
+emit('u0_hw1', HW1, 'SM3 · Unit 0 · Homework 1 — к уроку Lesson 1',
+     'Homework 1', 'homework', 0, 60)
+emit('u0_hw2', HW2, 'SM3 · Unit 0 · Homework 2 — к уроку Lesson 2',
+     'Homework 2', 'homework', 1, 60)
 emit('u0_test', TEST, 'SM3 · Unit 0 · Test — к уроку Lesson 5 «Revision + Test»',
      'Test', 'test', 5, 90)
