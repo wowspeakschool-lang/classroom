@@ -740,45 +740,53 @@
    "sort_order": 17,
    "type": "exact_input",
    "payload": {
-    "title": "DICTATION ✍️ Послушай предложение и запиши его целиком.",
+    "title": "DICTATION ✍️ Посмотри на картинку и напиши слово.",
     "needs_review": false,
     "items": [
      {
-      "audio": "",
-      "audio_tts": "Nick is good at playing football.",
+      "image": "@@MEDIA@@sm3/u0/house_upstairs.webp",
       "prompt": "1.",
       "accept": [
-       "Nick is good at playing football.",
-       "Nick is good at playing football"
+       "upstairs",
+       "Upstairs"
       ]
      },
      {
-      "audio": "",
-      "audio_tts": "The cellar is under the house.",
+      "image": "@@MEDIA@@sm3/u0/house_downstairs.webp",
       "prompt": "2.",
       "accept": [
-       "The cellar is under the house.",
-       "The cellar is under the house"
+       "downstairs",
+       "Downstairs"
       ]
      },
      {
-      "audio": "",
-      "audio_tts": "Penny is Jack’s granddaughter.",
+      "image": "@@MEDIA@@sm3/u0/house_cellar.webp",
       "prompt": "3.",
       "accept": [
-       "Penny is Jack’s granddaughter.",
-       "Penny is Jack’s granddaughter",
-       "Penny is Jack's granddaughter.",
-       "Penny is Jack's granddaughter"
+       "cellar",
+       "Cellar",
+       "a cellar",
+       "the cellar"
       ]
      },
      {
-      "audio": "",
-      "audio_tts": "There are twenty-four books in the room.",
+      "image": "@@MEDIA@@sm3/u0/num_47.webp",
       "prompt": "4.",
       "accept": [
-       "There are twenty-four books in the room.",
-       "There are twenty-four books in the room"
+       "forty-seven",
+       "Forty-seven",
+       "forty seven",
+       "Forty seven"
+      ]
+     },
+     {
+      "image": "@@MEDIA@@sm3/u0/num_82.webp",
+      "prompt": "5.",
+      "accept": [
+       "eighty-two",
+       "Eighty-two",
+       "eighty two",
+       "Eighty two"
       ]
      }
     ]

@@ -88,23 +88,22 @@ LISTENING_SM3 = [
 ]
 
 DICTATION_SM3 = ('exact_input', {
-    'title': 'DICTATION ✍️ Послушай предложение и запиши его целиком.',
+    # Решение Анны от 18.10: диктант — не на слух, а «посмотри на картинку и
+    # напиши слово». Пять слов из целевой лексики урока 1: upstairs, downstairs,
+    # cellar и числа 21–100 (карточки num_*.webp нарисованы скриптом).
+    'title': 'DICTATION ✍️ Посмотри на картинку и напиши слово.',
     'needs_review': False,
     'items': [
-        {**tts('Nick is good at playing football.'),
-         'prompt': '1.', 'accept': ['Nick is good at playing football.',
-                                    'Nick is good at playing football']},
-        {**tts('The cellar is under the house.'),
-         'prompt': '2.', 'accept': ['The cellar is under the house.',
-                                    'The cellar is under the house']},
-        {**tts('Penny is Jack’s granddaughter.'),
-         'prompt': '3.', 'accept': ['Penny is Jack’s granddaughter.',
-                                    'Penny is Jack’s granddaughter',
-                                    "Penny is Jack's granddaughter.",
-                                    "Penny is Jack's granddaughter"]},
-        {**tts('There are twenty-four books in the room.'),
-         'prompt': '4.', 'accept': ['There are twenty-four books in the room.',
-                                    'There are twenty-four books in the room']},
+        {'image': M + 'house_upstairs.webp', 'prompt': '1.',
+         'accept': ['upstairs', 'Upstairs']},
+        {'image': M + 'house_downstairs.webp', 'prompt': '2.',
+         'accept': ['downstairs', 'Downstairs']},
+        {'image': M + 'house_cellar.webp', 'prompt': '3.',
+         'accept': ['cellar', 'Cellar', 'a cellar', 'the cellar']},
+        {'image': M + 'num_47.webp', 'prompt': '4.',
+         'accept': ['forty-seven', 'Forty-seven', 'forty seven', 'Forty seven']},
+        {'image': M + 'num_82.webp', 'prompt': '5.',
+         'accept': ['eighty-two', 'Eighty-two', 'eighty two', 'Eighty two']},
     ]})
 
 
