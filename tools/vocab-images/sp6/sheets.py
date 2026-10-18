@@ -30,7 +30,8 @@ for r in _rows:
 # Листы замен (после проверки) — номера с 90. Списки — подписи, сцены — в промпте замены
 # (docs/Тренажёр_Spotlight6_замены.md). Лист 90: 4+3, прислан 18.10.2026 в чат.
 REPL = {90: ['art museum', 'currency', 'British pound', 'upright', 'war', 'brush my teeth', 'distance'],
-        91: ['architecture', 'lifetime', 'provide', 'remind', 'bagpipes', 'band', 'reserve a table']}  # лист 85 не пришёл + reserve a table (бокал на столе)
+        91: ['architecture', 'lifetime', 'provide', 'remind', 'bagpipes', 'band', 'reserve a table'],
+        92: ['hire a car']}  # 92 — hire a car без вывески CAR RENTAL; лист 85 не пришёл + reserve a table (бокал на столе)
 _w = {c: (t, c, d) for t, c, d in WORDS}  # по подписи: term бывает длиннее
 for _n, _terms in sorted(REPL.items()):
     S.append(('замены', '', [_w[t] for t in _terms]))
