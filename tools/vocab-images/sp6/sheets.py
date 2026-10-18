@@ -26,3 +26,10 @@ for r in _rows:
     if r['image'].startswith('digits:'):
         DIGITS.append((r['term'], r['term'], 'ЦИФРЫ'))
         DIGIT_TEXT[r['term']] = r['image'].split(':', 1)[1]
+
+# Листы замен (после проверки) — номера с 90. Подпись = term, сцены — в промпте замены
+# (docs/Тренажёр_Spotlight6_замены.md). Лист 90: 4+3, прислан 18.10.2026 в чат.
+REPL = {90: ['art museum', 'currency', 'British pound', 'upright', 'war', 'brush my teeth', 'distance']}
+_w = {t: (t, c, d) for t, c, d in WORDS}
+for _n, _terms in sorted(REPL.items()):
+    S.append(('замены', '', [_w[t] for t in _terms]))

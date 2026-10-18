@@ -2,7 +2,8 @@
 import csv, sys
 sys.path.insert(0, '..')
 from lib import fname
-from sheets import S, DIGITS, PLAN
+from sheets import S, DIGITS, PLAN, REPL
+S = S[:len(S) - len(REPL)]  # листы замен повторяют слова — проверяем только основные
 rows = list(csv.DictReader(open(PLAN), delimiter='\t'))
 new = list(dict.fromkeys(r['term'] for r in rows if r['image'] == 'new'))
 got = [t for _, _, ws in S for t, _, _ in ws]
