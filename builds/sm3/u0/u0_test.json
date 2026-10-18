@@ -633,8 +633,7 @@
    "type": "text",
    "payload": {
     "html": "<p><b>LISTENING 🎧</b> Послушай рассказ про Пенни. Текста не будет — слушай и отвечай на вопросы ниже. Можно послушать два раза.</p>",
-    "audio": "",
-    "audio_tts": "This is Penny. Penny is seven years old. She lives with her mum Claire, her dad Ted and her brother Nick. Penny’s bedroom is upstairs. Penny is good at dancing and she is good at telling stories, but she isn’t good at swimming. Her grandmother Julia is good at making cakes. Penny has got twenty-four books in her room."
+    "audio": ""
    }
   },
   {

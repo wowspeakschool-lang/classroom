@@ -836,8 +836,7 @@
    "type": "text",
    "payload": {
     "html": "<p><b>LISTENING 🎧</b> Послушай рассказ про Эмму. Текста не будет — слушай и отвечай на вопросы ниже. Можно послушать два раза.</p>",
-    "audio": "",
-    "audio_tts": "This is Emma. Emma is thirteen years old. She lives with her mum and her gran Bertie. Emma usually goes to school by bike, but when it rains her mum drives her. Emma is good at dancing and she has got dance classes twice a week. This year she is going to study Geography more. Emma is scared of spiders. Her favourite food is pancakes: her gran always makes pancakes for breakfast on Sunday."
+    "audio": ""
    }
   },
   {

@@ -62,16 +62,20 @@ READING_SM3 = [
     ]}),
 ]
 
+# Текст аудирования методист начитывает своим голосом — синтезом не озвучиваем,
+# поэтому audio_tts здесь нет и «Озвучить пачкой» этот блок не тронет.
+NARRATION_SM3 = (
+    'This is Penny. Penny is seven years old. She lives with her mum Claire, '
+    'her dad Ted and her brother Nick. Penny’s bedroom is upstairs. Penny is '
+    'good at dancing and she is good at telling stories, but she isn’t good at '
+    'swimming. Her grandmother Julia is good at making cakes. Penny has got '
+    'twenty-four books in her room.')
+
 LISTENING_SM3 = [
     ('text', {'html': '<p><b>LISTENING 🎧</b> Послушай рассказ про Пенни. '
                       'Текста не будет — слушай и отвечай на вопросы ниже. '
                       'Можно послушать два раза.</p>',
-              **tts('This is Penny. Penny is seven years old. She lives with her '
-                    'mum Claire, her dad Ted and her brother Nick. Penny’s bedroom '
-                    'is upstairs. Penny is good at dancing and she is good at '
-                    'telling stories, but she isn’t good at swimming. Her '
-                    'grandmother Julia is good at making cakes. Penny has got '
-                    'twenty-four books in her room.')}),
+              'audio': ''}),
 
     quiz('Послушай ещё раз и выбери правильный ответ.', [
         q('How old is Penny?', ['seven', 'nine', 'twenty-four'], 0),
