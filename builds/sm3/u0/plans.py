@@ -12,19 +12,127 @@ Alternative. Презентаций в SM3 нет — урок идёт по у�
 без объяснений по-русски и без лекции, обязательно CCQ.
 """
 import sys, os
+import re
 from docx import Document
-from docx.shared import Pt, Cm
+from docx.shared import Pt, Cm, RGBColor
 from docx.enum.section import WD_ORIENT
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
+from docx.opc.constants import RELATIONSHIP_TYPE as RT
+
+INK = RGBColor(0x1F, 0x29, 0x37)        # основной текст
+HEADC = RGBColor(0x14, 0x3A, 0x6B)      # заголовки и названия этапов
+ENG = RGBColor(0x0B, 0x61, 0x6E)        # реплики на английском
+ACC = RGBColor(0xB1, 0x3E, 0x0F)        # пометки: CCQ, SPEAKING, +40 мин
+LINK = RGBColor(0x11, 0x55, 0xCC)
+HEAD_FILL = '1F3A6B'                    # шапка таблицы — тёмно-синяя
+STAGE_FILL = 'F3F7FC'                   # колонка «Stage»
+ALT = RGBColor(0x5A, 0x63, 0x72)        # колонка «Alternative» — приглушённая
+GRID = 'C9D4E4'
+
+
+def grid(table):
+    tbl = table._tbl.tblPr
+    borders = OxmlElement('w:tblBorders')
+    for edge in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV'):
+        el = OxmlElement(f'w:{edge}')
+        el.set(qn('w:val'), 'single'); el.set(qn('w:sz'), '4')
+        el.set(qn('w:space'), '0'); el.set(qn('w:color'), GRID)
+        borders.append(el)
+    tbl.append(borders)
+
+
+def fixed_widths(table, cms):
+    layout = OxmlElement('w:tblLayout')
+    layout.set(qn('w:type'), 'fixed')
+    table._tbl.tblPr.append(layout)
+    gridel = table._tbl.find(qn('w:tblGrid'))
+    for gc, cm in zip(gridel.findall(qn('w:gridCol')), cms):
+        gc.set(qn('w:w'), str(int(cm * 567)))
+
+
+def cell_margins(table, top=60, bottom=60, left=90, right=90):
+    el = OxmlElement('w:tblCellMar')
+    for side, val in (('top', top), ('left', left), ('bottom', bottom), ('right', right)):
+        node = OxmlElement(f'w:{side}')
+        node.set(qn('w:w'), str(val)); node.set(qn('w:type'), 'dxa')
+        el.append(node)
+    table._tbl.tblPr.append(el)
+
+
+def shade(cell, fill):
+    tc = cell._tc.get_or_add_tcPr()
+    shd = OxmlElement('w:shd')
+    shd.set(qn('w:val'), 'clear'); shd.set(qn('w:color'), 'auto')
+    shd.set(qn('w:fill'), fill)
+    tc.append(shd)
+
+
+def hyperlink(par, url, label, size=9):
+    rid = par.part.relate_to(url, RT.HYPERLINK, is_external=True)
+    hl = OxmlElement('w:hyperlink'); hl.set(qn('r:id'), rid)
+    r = OxmlElement('w:r'); rPr = OxmlElement('w:rPr')
+    for tag, val in (('w:color', '1155CC'), ('w:sz', str(int(size * 2)))):
+        el = OxmlElement(tag); el.set(qn('w:val'), val); rPr.append(el)
+    u = OxmlElement('w:u'); u.set(qn('w:val'), 'single'); rPr.append(u)
+    r.append(rPr)
+    tnode = OxmlElement('w:t'); tnode.text = label; tnode.set(qn('xml:space'), 'preserve')
+    r.append(tnode); hl.append(r); par._p.append(hl)
+
+
+MARKS = ('GUIDED DISCOVERY', 'SPEAKING TASK', 'SPEAKING', 'CCQ:', 'EXTRA',
+         '⏱ +40 мин:', '⏱ If time', 'FAMILY WORDS', 'GRAMMAR ’s', 'NO HW')
+LINK_RE = re.compile(r'\[\[([^|\]]+)\|([^\]]+)\]\]')
+
+
+def rich(par, line, size=9, base_colour=None, italic=False):
+    """Строка с разметкой: [[подпись|url]] — ссылка, реплики T:/S: цветом,
+    пометки вроде CCQ и SPEAKING — жирным оранжевым, ссылки на учебник жирным."""
+    base = base_colour or (ENG if re.match(r'^\s*(T|S|S1|S2):', line) else INK)
+    pos = 0
+    for m in LINK_RE.finditer(line):
+        _plain(par, line[pos:m.start()], base, size, italic)
+        hyperlink(par, m.group(2), m.group(1), size)
+        pos = m.end()
+    _plain(par, line[pos:], base, size, italic)
+
+
+def _plain(par, text, base, size, italic=False):
+    if not text:
+        return
+    # жирным: пометки, ссылки на учебник (SB p. 5 ex. 2), подписи T:/S:
+    pat = re.compile('(' + '|'.join(re.escape(m) for m in MARKS) +
+                     r'|SB pp?\.\s?\d+(?:[-–]\d+)?(?:\s?ex\.\s?\d+)?'
+                     r'|^\s*(?:T|S|S1|S2):)')
+    i = 0
+    for m in pat.finditer(text):
+        if m.start() > i:
+            _run(par, text[i:m.start()], base, size, False, italic)
+        hit = m.group(0)
+        colour = ACC if hit.strip() in MARKS else (base if hit.strip().endswith(':') else HEADC)
+        _run(par, hit, colour, size, True, italic)
+        i = m.end()
+    if i < len(text):
+        _run(par, text[i:], base, size, False, italic)
+
+
+def _run(par, text, colour, size, bold, italic=False):
+    r = par.add_run(text)
+    r.font.size = Pt(size)
+    r.font.color.rgb = colour
+    r.bold = bold
+    r.italic = italic
 
 OUT = sys.argv[1]
 
-BAAM = ('Baamboozle - name 3 https://www.baamboozle.com/game/202322\n'
+BAAM = ('[[Baamboozle — name 3|https://www.baamboozle.com/game/202322]]\n'
         'Hangman\n“Simon says…”')
 BYE = ('Ask to send a reaction\n'
-       'Goodbye song https://www.youtube.com/watch?v=UQfvAlmr5g0 you can use the '
+       'Goodbye song [[Goodbye song (YouTube)|https://www.youtube.com/watch?v=UQfvAlmr5g0]] you can use the '
        'link or you can find the video "See You Later Alligator  Goodbye Songs" '
        'in the folder.')
-DOJO = ('Class Dojo https://www.classdojo.com/\n'
+DOJO = ('[[Class Dojo|https://www.classdojo.com/]]\n'
         'Give students feedback and give them start/points. ALWAYS tell them what '
         'that point is for - for hard work, for correct answers, for behavior, for '
         'homework. Tell what they need to improve.\n'
@@ -46,7 +154,7 @@ LESSONS = [
     'Ask students about their mood, if they have anything new, anything '
     'interesting, etc.', BAAM),
    ('Revision\\HW check', '5', 'Start of the course - no homework.', ''),
-   ('PlAN of the lesson', '',
+   ('PLAN of the lesson', '',
     'Meet the characters\nLearn new words\nRevise numbers\nPlay and have fun', ''),
    ('LEAD in', '2-5',
     'SB p. 4 - look at the picture, books closed is not needed here. Ask:\n'
@@ -56,7 +164,7 @@ LESSONS = [
     'Show the picture of a castle and ask what can be inside.'),
    ('Presentation', '10-15',
     'Pre-teach the words with pictures (match the word to the picture): '
-    'https://wordwall.net/resource/4108558/english/sm3-unit-0\n'
+    '[[Wordwall — соедини слово с картинкой|https://wordwall.net/resource/4108558/english/sm3-unit-0]]\n'
     'SB p. 4 ex. 1 (audio 001) - listen and say the words: upstairs, '
     'twenty-one – fifty, downstairs, fifty-one – one hundred, cellar.\n'
     'CCQ: Is the cellar under the house or on the top? Is it usually dark there? '
@@ -67,7 +175,7 @@ LESSONS = [
    ('Controlled Practice', '10-15',
     'SB p. 4 ex. 2 (audio 002) - listen and answer: What do Ben and Lucy want to '
     'find? Where are they? Where does Lucy want to go? Where is the cellar?\n'
-    'Numbers: flashcards https://wordwall.net/resource/121672835/numbers-0-100-flashcards '
+    'Numbers: flashcards [[Wordwall — флеш-карточки чисел 0–100|https://wordwall.net/resource/121672835/numbers-0-100-flashcards]] '
     '- open about 10 cards only, students read the number aloud. '
     '(не открывайте все карточки, 10 достаточно)',
     'Dictation: say 6 numbers (34, 48, 55, 67, 81, 100), students write them down '
@@ -85,8 +193,8 @@ LESSONS = [
    ('Cooler', '5',
     'Number race: say a number (21-100), students write it as fast as they can and '
     'show you; then one student says a number and the others write.',
-    'Play a game https://www.baamboozle.com/game/202322'),
-   ('PlAN of the lesson CHECK', '', CHECK, ''),
+    'Play a game [[Baamboozle — name 3|https://www.baamboozle.com/game/202322]]'),
+   ('PLAN of the lesson CHECK', '', CHECK, ''),
    ('Feedback\\HW', '5', DOJO, BYE),
   ]),
 
@@ -104,7 +212,7 @@ LESSONS = [
    ('Revision\\HW check', '5',
     'Give a little feedback on the students’ homework. Check the words: upstairs, '
     'downstairs, cellar, and a few numbers 21-100.', ''),
-   ('PlAN of the lesson', '',
+   ('PLAN of the lesson', '',
     'Learn new grammar\nPractise new grammar\nSing a song\nHave fun', ''),
    ('LEAD in', '2-5',
     'Mime two things: one you do well and one you do badly (dancing, cooking, '
@@ -130,13 +238,13 @@ LESSONS = [
    ('Controlled Practice', '10-15',
     'SB p. 5 ex. 1 - look, read and write B (Ben) or L (Lucy).\n'
     'SB p. 5 ex. 2 - put the words in order and say the sentences.\n'
-    'OR instead of ex. 2: https://wordwall.net/resource/21668829/sm3-good-at\n'
+    'OR instead of ex. 2: [[Wordwall — good at (вместо ex. 2)|https://wordwall.net/resource/21668829/sm3-good-at]]\n'
     'SB p. 5 ex. 4 - look at the table and make sentences: Lucy isn’t good at '
     'painting.',
     'Ask students to correct wrong sentences you say: “Ben is good at play the '
     'guitar” - students fix it.'),
    ('Freer Practice', '10-15',
-    'SPEAKING - activity cards: https://wordwall.net/resource/21590223/english/good-at-bad-at\n'
+    'SPEAKING - activity cards: [[Wordwall — карточки активностей (speaking)|https://wordwall.net/resource/21590223/english/good-at-bad-at]]\n'
     'A student opens a card and says a true sentence about himself: I’m good at '
     'dancing / I’m not good at dancing. Then he asks another student: Are you good '
     'at dancing?\n'
@@ -148,7 +256,7 @@ LESSONS = [
     '“The Explorers”. SB p. 6 ex. 3 - write your own verse: I’m good at … And … '
     'I’m an action hero. Just like Ben and Lucy.',
     'SB p. 6 ex. 2 - ask and answer in pairs: What are you good at?'),
-   ('PlAN of the lesson CHECK', '', CHECK, ''),
+   ('PLAN of the lesson CHECK', '', CHECK, ''),
    ('Feedback\\HW', '5', DOJO, BYE),
   ]),
 
@@ -166,7 +274,7 @@ LESSONS = [
    ('Revision\\HW check', '5',
     'Give a little feedback on the students’ homework. Ask two or three students: '
     'What are you good at? What are you not good at?', ''),
-   ('PlAN of the lesson', '',
+   ('PLAN of the lesson', '',
     'Learn family words\nLearn how to use ’s\nTalk about your family\nHave fun', ''),
    ('LEAD in', '2-5',
     'Show your own family photo or a drawing of a family tree on the board. Point '
@@ -193,7 +301,7 @@ LESSONS = [
     'SB p. 7 ex. 1 - look at the family tree and circle the right word (brother / '
     'father, cousin / sister, uncle / father, mother / sister).\n'
     'SB p. 7 ex. 2 - add the missing ’s: Tom is Simon father. Simon is Tom son.\n'
-    'Choose the right answer: https://wordwall.net/resource/27447398/u1-p13-possessive-s-s',
+    'Choose the right answer: [[Wordwall — выбери правильный ’s|https://wordwall.net/resource/27447398/u1-p13-possessive-s-s]]',
     'Say a sentence with a mistake - “Nick is Julia grandson” - students correct it.'),
    ('Freer Practice', '10-15',
     'SPEAKING - “Guess who”.\n'
@@ -208,8 +316,8 @@ LESSONS = [
    ('Cooler', '5',
     'Quick chain: teacher says “Nick’s grandmother” - students answer “Julia”, and '
     'so on by the family tree from SB p. 7.',
-    'Play a game https://www.baamboozle.com/game/202322'),
-   ('PlAN of the lesson CHECK', '', CHECK, ''),
+    'Play a game [[Baamboozle — name 3|https://www.baamboozle.com/game/202322]]'),
+   ('PLAN of the lesson CHECK', '', CHECK, ''),
    ('Feedback\\HW', '5', DOJO, BYE),
   ]),
 
@@ -227,7 +335,7 @@ LESSONS = [
    ('Revision\\HW check', '5',
     'Give a little feedback on the students’ homework. Ask: Who is Nick’s '
     'grandfather? Who is your mother’s sister?', ''),
-   ('PlAN of the lesson', '',
+   ('PLAN of the lesson', '',
     'Read the story\nFind out who gets the book\nPractise sounds\nAct and have fun', ''),
    ('LEAD in', '2-5',
     'SB p. 8 - look at the pictures only, do not read yet. Ask: Who is in the '
@@ -245,7 +353,7 @@ LESSONS = [
     'happened before.'),
    ('Listening', '10-15',
     'Put the pictures of the story in the right order: '
-    'https://wordwall.net/resource/75226934/sm3-unit-0-story\n'
+    '[[Wordwall — расставь кадры истории|https://wordwall.net/resource/75226934/sm3-unit-0-story]]\n'
     'Then close the books and retell the story together: first…, then…, after '
     'that…, at the end…',
     'Say a line from the story - students say who said it and what happened next.'),
@@ -267,7 +375,7 @@ LESSONS = [
     'story.',
     'Hot seat: one student is Horax, the others ask him questions - Why do you '
     'want the book? Are you a good person?'),
-   ('PlAN of the lesson CHECK', '', CHECK, ''),
+   ('PLAN of the lesson CHECK', '', CHECK, ''),
    ('Feedback\\HW', '5', DOJO, BYE),
   ]),
 ]
@@ -287,22 +395,23 @@ def build(les):
     st.font.name = 'Calibri'
     st.font.size = Pt(10)
 
-    def para(text, size=10, bold=False, after=2):
+    def para(text, size=10, bold=False, after=2, colour=INK):
         p = doc.add_paragraph()
         p.paragraph_format.space_after = Pt(after)
         r = p.add_run(text)
         r.font.size = Pt(size)
         r.bold = bold
+        r.font.color.rgb = colour
         return p
 
-    para(f'Unit 0 Lesson {les["num"]}', size=14, bold=True)
-    para(f'Topic: {les["topic"]}', size=11, bold=True, after=4)
-    para('Aims:', bold=True)
+    para(f'Unit 0 Lesson {les["num"]}', size=16, bold=True, colour=HEADC)
+    para(f'Topic: {les["topic"]}', size=11, bold=True, after=6, colour=ACC)
+    para('Aims:', bold=True, colour=HEADC)
     for a in les['aims']:
-        para(a)
+        para('•  ' + a)
     para('')
-    para('HOMEWORK:', bold=True)
-    para(f'Домашнее задание на платформе. Название: {les["hw"]}')
+    para('HOMEWORK:', bold=True, colour=HEADC)
+    para(f'Домашнее задание на платформе. Название: {les["hw"]}', bold=True)
     para('Зайдите на платформу, добавьте урок, войдите в Мой класс и впишите '
          'домашнее задание.', after=8)
 
@@ -310,18 +419,38 @@ def build(les):
     t = doc.add_table(rows=len(rows), cols=4)
     t.style = 'Table Grid'
     t.autofit = False
+    grid(t)
+    cell_margins(t)
+    WIDTHS = (2.6, 1.8, 12.9, 7.4)
+    fixed_widths(t, WIDTHS)
     for ri, row in enumerate(rows):
         for ci, val in enumerate(row):
             cell = t.rows[ri].cells[ci]
             cell.text = ''
+            if ri == 0:
+                shade(cell, HEAD_FILL)
+            elif ci == 0:
+                shade(cell, STAGE_FILL)
             for li, line in enumerate(str(val).split('\n')):
                 p = cell.paragraphs[0] if li == 0 else cell.add_paragraph()
-                p.paragraph_format.space_after = Pt(1)
-                r = p.add_run(line)
-                r.font.size = Pt(9)
-                r.bold = (ri == 0) or (ci == 0 and ri > 0)
+                p.paragraph_format.space_after = Pt(2)
+                if ci == 1:
+                    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                if ri == 0:
+                    r = p.add_run(line); r.font.size = Pt(10)
+                    r.bold = True; r.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+                elif ci == 0:
+                    r = p.add_run(line); r.font.size = Pt(10)
+                    r.bold = True; r.font.color.rgb = HEADC
+                elif ci == 1:
+                    r = p.add_run(line); r.font.size = Pt(10)
+                    r.font.color.rgb = HEADC; r.bold = True
+                elif ci == 3:
+                    rich(p, line, size=9, base_colour=ALT, italic=True)
+                else:
+                    rich(p, line, size=9.5)
     for row in t.rows:
-        for i, w in enumerate((2.5, 2.2, 12.5, 8.5)):   # как в образцах
+        for i, w in enumerate(WIDTHS):
             row.cells[i].width = Cm(w)
 
     path = os.path.join(OUT, f'Unit 0 Lesson {les["num"]}.docx')
@@ -343,7 +472,7 @@ LESSONS.append(dict(
    ('Revision\\HW check', '5',
     'Give a little feedback on the students’ homework. Ask two or three questions '
     'from the story: Who’s got the book at the end? Who is Horax?', ''),
-   ('PlAN of the lesson', '',
+   ('PLAN of the lesson', '',
     'Revise the unit\nDo the test\nSee what you can do now', ''),
    ('Revision - words and numbers', '5-7',
     'Quick rounds, no marks - this is a warm-up before the test, keep the pace up.\n'
@@ -353,13 +482,13 @@ LESSONS.append(dict(
     'Family: use the tree from SB p. 7 - Who is Nick’s grandmother? Who is Zoe’s '
     'sister?',
     'Play the flashcards again: '
-    'https://wordwall.net/resource/121672835/numbers-0-100-flashcards'),
+    '[[Wordwall — флеш-карточки чисел 0–100|https://wordwall.net/resource/121672835/numbers-0-100-flashcards]]'),
    ('Revision - grammar', '5-7',
     'be good at + Ving: each student says one true sentence about himself and one '
     'about a friend - I’m good at…, He isn’t good at…\n'
     '’s: say a pair of names from the family tree (Jack - Nick) and students make '
     'the sentence: Nick is Jack’s grandson.',
-    'https://wordwall.net/resource/27447398/u1-p13-possessive-s-s'),
+    '[[Wordwall — выбери правильный ’s|https://wordwall.net/resource/27447398/u1-p13-possessive-s-s]]'),
    ('Test', '10-15',
     'Start the test on the platform (the link is set before the lesson).\n'
     'Students work on their own; support them, but do not give the answers.\n'
@@ -368,14 +497,14 @@ LESSONS.append(dict(
     'methodologist, so the final mark appears later.',
     'If a student finishes early, ask him to write two more sentences: one with '
     'be good at and one with ’s.'),
-   ('PlAN of the lesson CHECK', '', CHECK, ''),
+   ('PLAN of the lesson CHECK', '', CHECK, ''),
    ('Feedback\\HW', '5',
     DOJO + '\nNO HW - the unit is finished. Tell the students what they did well '
     'in the test and what to revise.', BYE),
    ('Cooler', '5',
     'Ask the students to say one thing they can do now that they could not do '
     'before this unit: Now I can talk about my family / Now I can say what I’m '
-    'good at.', 'Play a game https://www.baamboozle.com/game/202322'),
+    'good at.', 'Play a game [[Baamboozle — name 3|https://www.baamboozle.com/game/202322]]'),
   ]))
 
 for l in LESSONS:
