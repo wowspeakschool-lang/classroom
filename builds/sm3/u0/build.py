@@ -310,6 +310,55 @@ HW3 = [
       'и не путаешь ’s.</p>'),
 ]
 
+
+# ══════════════════════════════════════════════════════════════════════════
+# ДЗ 4 — Lesson 4: история «The old book» и короткие гласные
+# ══════════════════════════════════════════════════════════════════════════
+HW4 = [
+    t('<p>Привет! 👋 В этой домашке вспоминаем историю <b>«The old book»</b> '
+      'и тренируем короткие гласные звуки.</p>'),
+
+    ('sequence', {'title': 'Расставь кадры истории по порядку.',
+                  'items': [{'text': '', 'image': M + f'story_{i}.webp'}
+                            for i in range(1, 7)]}),
+
+    ('truefalse', {'title': 'Верно или неверно?', 'statements': [
+        {'text': 'Lucy and Ben find a secret door.', 'correct': True},
+        {'text': 'Buster goes down with Ben and Lucy.', 'correct': False},
+        {'text': 'The book is old.', 'correct': True},
+        {'text': 'Horax and Zelda want the book.', 'correct': True},
+        {'text': 'Zelda ties Ben up.', 'correct': False},
+        {'text': 'At the end The Explorers have got the book.', 'correct': True},
+    ]}),
+
+    quiz('Кто это сказал?', [
+        q('“Let’s get them.”', ['Zelda', 'Lucy', 'Buster'], 0),
+        q('“Good dog, Buster!”', ['Ben', 'Horax', 'Zelda'], 0),
+        q('“You can’t keep the book. It’s ours.”', ['Lucy', 'Horax', 'Ben'], 0),
+        q('“It’s ours now! And all the treasure it brings.”', ['Horax', 'Ben', 'Lucy'], 0),
+    ]),
+
+    quiz('Выбери слово, в котором такой же гласный звук.', [
+        q('<b>cat</b>', ['hat', 'cake', 'car'], 0),
+        q('<b>pet</b>', ['ten', 'tree', 'me'], 0),
+        q('<b>big</b>', ['fish', 'bike', 'five'], 0),
+        q('<b>dog</b>', ['box', 'nose', 'go'], 0),
+        q('<b>cup</b>', ['run', 'cube', 'blue'], 0),
+    ]),
+
+    order(['Gus', 'pats', 'his pets', 'a lot.'], 'Gus pats his pets a lot.'),
+
+    speaking('SPEAKING TASK 🎤',
+             '<p>Расскажи историю своими словами, 4–6 предложений: что случилось '
+             'сначала, что потом и чем всё закончилось. Нажми на микрофон и '
+             'запиши ответ.</p>'
+             '<p><i>For example:<br>Ben and Lucy are in a castle. Buster finds a '
+             'secret door…</i></p>'),
+
+    t('<p>Молодец! 🌟 Ты вспомнил всю историю и научился слышать короткие '
+      'гласные звуки.</p>'),
+]
+
 HEAD = """\
 -- {title}
 -- Собрано скриптом builds/sm3/u0/build.py. Не заливать, пока не назовут,
@@ -385,5 +434,7 @@ emit('u0_hw2', HW2, 'SM3 · Unit 0 · Homework 2 — к уроку Lesson 2',
      'Homework 2', 'homework', 1, 60)
 emit('u0_hw3', HW3, 'SM3 · Unit 0 · Homework 3 — к уроку Lesson 3',
      'Homework 3', 'homework', 2, 60)
+emit('u0_hw4', HW4, 'SM3 · Unit 0 · Homework 4 — к уроку Lesson 4',
+     'Homework 4', 'homework', 3, 60)
 emit('u0_test', TEST, 'SM3 · Unit 0 · Test — к уроку Lesson 5 «Revision + Test»',
      'Test', 'test', 5, 90)
