@@ -29,7 +29,7 @@ for r in _rows:
 
 # Листы замен (после проверки) — номера после основных. Списки — подписи, сцены — в промпте замены
 # (docs/Тренажёр_Spotlight7_замены.md).
-REPL = {}
+REPL = {97: ['beast', 'tan', 'guard', 'guide', 'shake hands', 'crayon', 'rich']}  # 18.10.2026: сходство с Диснеем/Smokey Bear, голый торс, копьё, статуя без одежды, Crayola, Rolls-Royce
 _w = {c: (t, c, d) for t, c, d in WORDS}  # по подписи: term бывает длиннее
 for _n, _terms in sorted(REPL.items()):
     S.append(('замены', '', [_w[t] for t in _terms]))
