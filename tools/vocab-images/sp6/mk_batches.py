@@ -1,7 +1,8 @@
 """Промпты пачками по 10 для GPT (просьба Анны 16.10.2026): одно сообщение — 10 листов,
 каждый лист — одна строка «N <промпт>». python3 mk_batches.py → docs/Тренажёр_Spotlight6_пачки.md"""
 import sys
-from sheets import S
+from sheets import S, REPL
+S = S[:len(S) - len(REPL)]  # листы замен идут своим файлом
 from mk_prompts_style import STYLE
 
 START = int(sys.argv[1]) if len(sys.argv) > 1 else 1
