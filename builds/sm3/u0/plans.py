@@ -329,5 +329,54 @@ def build(les):
     print('сохранён:', path)
 
 
+LESSONS.append(dict(
+  num=5,
+  topic='Revision + Test',
+  aims=['Revise the whole unit',
+        'Do the unit test',
+        'See what you can do now'],
+  hw='NO HW - the unit is finished',
+  rows=[
+   ('Warm-up', '3-5',
+    'Ask students about their mood, if they have anything new, anything '
+    'interesting, etc.', BAAM),
+   ('Revision\\HW check', '5',
+    'Give a little feedback on the students’ homework. Ask two or three questions '
+    'from the story: Who’s got the book at the end? Who is Horax?', ''),
+   ('PlAN of the lesson', '',
+    'Revise the unit\nDo the test\nSee what you can do now', ''),
+   ('Revision - words and numbers', '5-7',
+    'Quick rounds, no marks - this is a warm-up before the test, keep the pace up.\n'
+    'Numbers: say a number 21-100, students write it; then one student says a '
+    'number for the others.\n'
+    'Words: Where is your bedroom? Where is the kitchen? What is in the cellar?\n'
+    'Family: use the tree from SB p. 7 - Who is Nick’s grandmother? Who is Zoe’s '
+    'sister?',
+    'Play the flashcards again: '
+    'https://wordwall.net/resource/121672835/numbers-0-100-flashcards'),
+   ('Revision - grammar', '5-7',
+    'be good at + Ving: each student says one true sentence about himself and one '
+    'about a friend - I’m good at…, He isn’t good at…\n'
+    '’s: say a pair of names from the family tree (Jack - Nick) and students make '
+    'the sentence: Nick is Jack’s grandson.',
+    'https://wordwall.net/resource/27447398/u1-p13-possessive-s-s'),
+   ('Test', '10-15',
+    'Start the test on the platform (the link is set before the lesson).\n'
+    'Students work on their own; support them, but do not give the answers.\n'
+    'T: "Now a little test. You can do it!"\n'
+    'There is one speaking task at the end - the recording is checked by the '
+    'methodologist, so the final mark appears later.',
+    'If a student finishes early, ask him to write two more sentences: one with '
+    'be good at and one with ’s.'),
+   ('PlAN of the lesson CHECK', '', CHECK, ''),
+   ('Feedback\\HW', '5',
+    DOJO + '\nNO HW - the unit is finished. Tell the students what they did well '
+    'in the test and what to revise.', BYE),
+   ('Cooler', '5',
+    'Ask the students to say one thing they can do now that they could not do '
+    'before this unit: Now I can talk about my family / Now I can say what I’m '
+    'good at.', 'Play a game https://www.baamboozle.com/game/202322'),
+  ]))
+
 for l in LESSONS:
     build(l)
