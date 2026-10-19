@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Домашка глазами ученика</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2B2545; --mute:#7C7596; --faint:#A9A3BE;
+  --line:#EEEAF4; --paper:#fff;
+  --pink:#F5608A; --pink-d:#E04873; --pink-soft:#FDEDF2;
+  --violet:#7A6BE8; --violet-soft:#F0EDFE;
+  --green:#3FA97C; --green-soft:#E7F6EF;
+  --amber:#D79733; --amber-soft:#FCF3E2;
+  --r:22px; --fs:16px; --tap:52px;
+}
+body.big{ --fs:19px; --tap:62px; --r:26px; }
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:'Golos Text',system-ui,sans-serif;color:var(--ink);font-size:var(--fs);line-height:1.5;
+  background:linear-gradient(170deg,#FFF7EC 0%,#FDEEF3 45%,#F4EEFC 100%);min-height:100vh}
+button{font:inherit;color:inherit;cursor:pointer}
+svg{display:block}
+
+.top{position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);background:rgba(255,255,255,.72);
+  border-bottom:1px solid rgba(0,0,0,.04)}
+.top-in{max-width:720px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:14px}
+.back{border:0;background:transparent;color:var(--mute);padding:6px;border-radius:10px;font-size:18px}
+.tt{flex:1;min-width:0}
+.tt b{display:block;font-size:15px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tt span{font-size:12px;color:var(--mute)}
+.coins{display:flex;align-items:center;gap:6px;background:#FDF3DE;color:#A8761C;border-radius:99px;
+  padding:5px 12px;font-size:14px;font-weight:700}
+
+.pbar{max-width:720px;margin:0 auto;padding:0 18px 10px;display:flex;gap:5px}
+.pbar i{height:6px;border-radius:99px;background:rgba(0,0,0,.07);flex:1}
+.pbar i.done{background:var(--green)}
+.pbar i.now{background:var(--pink)}
+
+.page{max-width:720px;margin:0 auto;padding:20px 18px 120px}
+
+.task{background:var(--paper);border-radius:var(--r);padding:22px;margin-bottom:16px;
+  box-shadow:0 6px 22px rgba(43,37,69,.07)}
+.tnum{font-size:13px;color:var(--faint);font-weight:600;margin-bottom:6px}
+.tq{font-size:calc(var(--fs) + 3px);font-weight:700;line-height:1.3;margin:0 0 16px}
+
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.opt{border:2px solid var(--line);background:#fff;border-radius:18px;padding:12px;display:flex;
+  flex-direction:column;align-items:center;gap:8px;min-height:var(--tap);text-align:center;font-weight:600}
+.opt:hover{border-color:#DCD5EC}
+.opt.sel{border-color:var(--violet);background:var(--violet-soft)}
+.opt.right{border-color:var(--green);background:var(--green-soft)}
+.opt.wrong{border-color:var(--pink);background:var(--pink-soft)}
+.opt .ph{width:100%;height:78px;border-radius:13px;background:linear-gradient(135deg,#E8EEF9,#CFDCF1)}
+.opt .ph.b{background:linear-gradient(135deg,#FBE7EF,#F3C6D8)}
+.opt .ph.c{background:linear-gradient(135deg,#E6F4EA,#C4E6CF)}
+
+.snd{display:inline-flex;align-items:center;gap:9px;border:0;background:var(--violet-soft);color:var(--violet);
+  border-radius:99px;padding:10px 18px;font-weight:700;margin-bottom:14px}
+
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:14px}
+.chip{background:var(--violet-soft);color:#4B3FBF;border-radius:12px;padding:9px 16px;font-weight:700}
+.chip.used{opacity:.32}
+.sent{font-size:calc(var(--fs) + 2px);line-height:2.4}
+.slot{display:inline-block;min-width:92px;border-bottom:3px solid var(--violet);margin:0 5px;
+  text-align:center;font-weight:700}
+.slot.full{background:var(--violet-soft);border-radius:8px 8px 0 0;padding:2px 8px}
+
+.act{display:flex;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+.go{border:0;background:var(--pink);color:#fff;border-radius:16px;padding:14px 28px;font-weight:700;
+  font-size:var(--fs);min-height:var(--tap);box-shadow:0 6px 18px rgba(245,96,138,.34)}
+.go:hover{background:var(--pink-d)}
+.go.ghost{background:#fff;color:var(--ink);box-shadow:none;border:2px solid var(--line)}
+.fb{font-weight:700}
+.fb.ok{color:var(--green)}
+.fb.no{color:var(--pink)}
+.hintline{font-size:14px;color:var(--mute);margin-top:10px}
+
+.done{background:var(--paper);border-radius:28px;padding:34px 24px;text-align:center;
+  box-shadow:0 10px 30px rgba(43,37,69,.1)}
+.done .em{font-size:52px}
+.done h2{font-size:26px;margin:10px 0 4px;font-weight:800}
+.done p{color:var(--mute);margin:0 0 18px}
+.reward{display:inline-flex;align-items:center;gap:9px;background:#FDF3DE;color:#A8761C;border-radius:99px;
+  padding:11px 20px;font-weight:800;font-size:18px;margin-bottom:20px}
+
+.switch{position:fixed;right:16px;bottom:16px;background:var(--ink);color:#fff;border-radius:14px;padding:6px;
+  display:flex;gap:4px;box-shadow:0 10px 30px rgba(43,37,69,.32);z-index:40}
+.switch button{background:transparent;border:0;color:#fff;opacity:.55;padding:7px 12px;border-radius:10px;font-size:13px}
+.switch button.on{background:rgba(255,255,255,.18);opacity:1;font-weight:600}
+.switch .sep{width:1px;background:rgba(255,255,255,.2);margin:5px 3px}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="top-in">
+    <button class="back">←</button>
+    <span class="tt"><b>Части тела</b><span>Super Minds 0 · Unit 1</span></span>
+    <span class="coins">🪙 10</span>
+  </div>
+  <div class="pbar" id="pbar"></div>
+</div>
+
+<div class="page" id="page"></div>
+
+<div class="switch">
+  <button class="on" onclick="setSize('big',this)">малышам</button>
+  <button onclick="setSize('norm',this)">старшим</button>
+  <div class="sep"></div>
+  <button class="on" onclick="show('tasks',this)">задания</button>
+  <button onclick="show('done',this)">финал</button>
+</div>
+
+<script>
+let state = { step:0, tries:{}, answered:{} };
+const TOTAL = 5;
+
+function pbar(){
+  document.getElementById('pbar').innerHTML =
+    Array.from({length:TOTAL},(_,i)=>`<i class="${state.answered[i]?'done':i===state.step?'now':''}"></i>`).join('');
+}
+
+function tasks(){
+  return `
+  <div class="task">
+    <div class="tnum">Задание 1 из ${TOTAL}</div>
+    <h3 class="tq">Послушай и нажми на нужную картинку</h3>
+    <button class="snd">🔈 Послушать</button>
+    <div class="opts">
+      ${opt(0,'a','нос')}${opt(1,'b','рот')}${opt(2,'c','ухо')}
+    </div>
+    <div class="act">
+      <button class="go" onclick="check(0,1)">Проверить</button>
+      <span class="fb" id="fb0"></span>
+    </div>
+    <div class="hintline" id="h0"></div>
+  </div>
+
+  <div class="task">
+    <div class="tnum">Задание 2 из ${TOTAL}</div>
+    <h3 class="tq">Вставь пропущенные слова</h3>
+    <div class="chips">
+      <span class="chip">have</span><span class="chip">two</span><span class="chip used">a</span>
+    </div>
+    <div class="sent">I <span class="slot full">have</span> <span class="slot"></span> eyes.</div>
+    <div class="act">
+      <button class="go" onclick="check(1,0)">Проверить</button>
+      <span class="fb" id="fb1"></span>
+    </div>
+    <div class="hintline" id="h1"></div>
+  </div>
+
+  <div class="task">
+    <div class="tnum">Задание 3 из ${TOTAL}</div>
+    <h3 class="tq">Прочитай слова вслух</h3>
+    <button class="snd">🔈 Послушать образец</button>
+    <div class="sent" style="font-weight:800;font-size:calc(var(--fs) + 8px)">head · mouth · nose</div>
+    <div class="act">
+      <button class="go">🎤 Записать</button>
+      <button class="go ghost">Пропустить</button>
+    </div>
+    <div class="hintline">Учитель послушает и поставит оценку</div>
+  </div>`;
+}
+
+function opt(i,ph,label){
+  return `<button class="opt" data-i="${i}" onclick="pick(this)"><span class="ph ${ph}"></span>${label}</button>`;
+}
+function pick(el){
+  el.parentNode.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+// вторая попытка, потом показываем правильный
+function check(task, correctIdx){
+  const card = document.querySelectorAll('.task')[task];
+  const sel = card.querySelector('.opt.sel');
+  const fb = document.getElementById('fb'+task);
+  const hint = document.getElementById('h'+task);
+  if(task===0 && !sel){ fb.className='fb no'; fb.textContent='Сначала выбери картинку'; return; }
+  const ok = task===0 ? (+sel.dataset.i === correctIdx) : false;
+  state.tries[task] = (state.tries[task]||0) + 1;
+
+  if(ok){
+    if(sel) sel.classList.add('right');
+    fb.className='fb ok'; fb.textContent='Верно! 🎉';
+    hint.textContent = state.tries[task]>1 ? 'Со второй попытки' : '';
+    state.answered[task]=true; pbar();
+    return;
+  }
+  if(state.tries[task]===1){
+    if(sel) sel.classList.add('wrong');
+    fb.className='fb no'; fb.textContent='Попробуй ещё раз';
+    hint.textContent='У тебя есть вторая попытка';
+    setTimeout(()=>{ if(sel) sel.classList.remove('wrong','sel'); }, 900);
+  } else {
+    if(sel) sel.classList.add('wrong');
+    const right = card.querySelectorAll('.opt')[correctIdx];
+    if(right) right.classList.add('right');
+    fb.className='fb no'; fb.textContent='Правильный ответ подсвечен';
+    hint.textContent='Ничего страшного, запомним и пойдём дальше';
+    state.answered[task]=true; pbar();
+  }
+}
+
+function done(){
+  return `<div class="done">
+    <div class="em">🎉</div>
+    <h2>Домашка готова!</h2>
+    <p>Ты справился с 5 заданиями из 5</p>
+    <div class="reward">🪙 +3 монетки</div>
+    <div><button class="go">Вернуться к домашкам</button></div>
+    <div class="hintline" style="margin-top:14px">Одно задание учитель проверит сам — оценка появится позже</div>
+  </div>`;
+}
+
+function show(what, el){
+  document.getElementById('page').innerHTML = what==='done' ? done() : tasks();
+  const b=el.parentNode.querySelectorAll('button');
+  b[2].classList.toggle('on', what!=='done'); b[3].classList.toggle('on', what==='done');
+  pbar();
+}
+function setSize(s, el){
+  document.body.classList.toggle('big', s==='big');
+  const b=el.parentNode.querySelectorAll('button');
+  b[0].classList.toggle('on', s==='big'); b[1].classList.toggle('on', s!=='big');
+}
+document.getElementById('page').innerHTML = tasks();
+pbar();
+</script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+{
+ "course": "sm3",
+ "unit": "Unit 0 · Meet The Explorers",
+ "unit_sort_order": 0,
+ "lesson": "Homework 4",
+ "kind": "homework",
+ "lesson_sort_order": 3,
+ "pass_threshold": 60,
+ "is_published": false,
+ "media_base": "https://classroom.wowteach.ru/media/",
+ "blocks": [
+  {
+   "sort_order": 0,
+   "type": "text",
+   "payload": {
+    "html": "<p>Привет! 👋 В этой домашке вспоминаем историю <b>«The old book»</b> и тренируем короткие гласные звуки.</p>"
+   }
+  },
+  {
+   "sort_order": 1,
+   "type": "sequence",
+   "payload": {
+    "title": "Расставь кадры истории по порядку.",
+    "items": [
+     {
+      "text": "",
+      "image": "@@MEDIA@@sm3/u0/story_1.webp"
+     },
+     {
+      "text": "",
+      "image": "@@MEDIA@@sm3/u0/story_2.webp"
+     },
+     {
+      "text": "",
+      "image": "@@MEDIA@@sm3/u0/story_3.webp"
+     },
+     {
+      "text": "",
+      "image": "@@MEDIA@@sm3/u0/story_4.webp"
+     },
+     {
+      "text": "",
+      "image": "@@MEDIA@@sm3/u0/story_5.webp"
+     },
+     {
+      "text": "",
+      "image": "@@MEDIA@@sm3/u0/story_6.webp"
+     }
+    ]
+   }
+  },
+  {
+   "sort_order": 2,
+   "type": "truefalse",
+   "payload": {
+    "title": "Верно или неверно?",
+    "statements": [
+     {
+      "text": "Lucy and Ben find a secret door.",
+      "correct": true
+     },
+     {
+      "text": "Buster goes down with Ben and Lucy.",
+      "correct": false
+     },
+     {
+      "text": "The book is old.",
+      "correct": true
+     },
+     {
+      "text": "Horax and Zelda want the book.",
+      "correct": true
+     },
+     {
+      "text": "Zelda ties Ben up.",
+      "correct": false
+     },
+     {
+      "text": "At the end The Explorers have got the book.",
+      "correct": true
+     }
+    ]
+   }
+  },
+  {
+   "sort_order": 3,
+   "type": "quiz",
+   "payload": {
+    "title": "Кто это сказал?",
+    "questions": [
+     {
+      "q": "“Let’s get them.”",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "Zelda"
+       },
+       {
+        "text": "Lucy"
+       },
+       {
+        "text": "Buster"
+       }
+      ]
+     },
+     {
+      "q": "“Good dog, Buster!”",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "Ben"
+       },
+       {
+        "text": "Horax"
+       },
+       {
+        "text": "Zelda"
+       }
+      ]
+     },
+     {
+      "q": "“You can’t keep the book. It’s ours.”",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "Lucy"
+       },
+       {
+        "text": "Horax"
+       },
+       {
+        "text": "Ben"
+       }
+      ]
+     },
+     {
+      "q": "“It’s ours now! And all the treasure it brings.”",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "Horax"
+       },
+       {
+        "text": "Ben"
+       },
+       {
+        "text": "Lucy"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 4,
+   "type": "quiz",
+   "payload": {
+    "title": "Выбери слово, в котором такой же гласный звук.",
+    "questions": [
+     {
+      "q": "<b>cat</b>",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "hat"
+       },
+       {
+        "text": "cake"
+       },
+       {
+        "text": "car"
+       }
+      ]
+     },
+     {
+      "q": "<b>pet</b>",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "ten"
+       },
+       {
+        "text": "tree"
+       },
+       {
+        "text": "me"
+       }
+      ]
+     },
+     {
+      "q": "<b>big</b>",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "fish"
+       },
+       {
+        "text": "bike"
+       },
+       {
+        "text": "five"
+       }
+      ]
+     },
+     {
+      "q": "<b>dog</b>",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "box"
+       },
+       {
+        "text": "nose"
+       },
+       {
+        "text": "go"
+       }
+      ]
+     },
+     {
+      "q": "<b>cup</b>",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "run"
+       },
+       {
+        "text": "cube"
+       },
+       {
+        "text": "blue"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 5,
+   "type": "order",
+   "payload": {
+    "words": [
+     "Gus",
+     "pats",
+     "his pets",
+     "a lot."
+    ],
+    "sentence": "Gus pats his pets a lot.",
+    "audio": "",
+    "audio_tts": "Gus pats his pets a lot."
+   }
+  },
+  {
+   "sort_order": 6,
+   "type": "speaking",
+   "payload": {
+    "title": "SPEAKING TASK 🎤",
+    "html": "<p>Расскажи историю своими словами, 4–6 предложений: что случилось сначала, что потом и чем всё закончилось. Нажми на микрофон и запиши ответ.</p><p><i>For example:<br>Ben and Lucy are in a castle. Buster finds a secret door…</i></p>",
+    "needs_review": true
+   }
+  },
+  {
+   "sort_order": 7,
+   "type": "text",
+   "payload": {
+    "html": "<p>Молодец! 🌟 Ты вспомнил всю историю и научился слышать короткие гласные звуки.</p>"
+   }
+  }
+ ]
+}

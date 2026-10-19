@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classroom — макет оболочки</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#171A33; --mute:#6B7185; --line:#E3E5ED; --field:#F2F3F7; --paper:#fff;
+  --accent:#5B4BE0; --accent-soft:#EFEDFD; --amber:#C77B12; --amber-soft:#FBF1DF;
+  --teal:#147A6E; --teal-soft:#E3F2EF;
+  --r:10px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  font-family:'Golos Text',system-ui,sans-serif; color:var(--ink); background:var(--field);
+  font-size:15px; line-height:1.45; -webkit-font-smoothing:antialiased;
+}
+button{font:inherit;color:inherit}
+
+/* ── каркас ────────────────────────────────── */
+.app{display:grid;grid-template-columns:232px 1fr;min-height:100vh}
+.rail{background:var(--paper);border-right:1px solid var(--line);display:flex;flex-direction:column}
+.brand{height:56px;display:flex;align-items:center;gap:9px;padding:0 18px;border-bottom:1px solid var(--line)}
+.brand b{font-size:16px;letter-spacing:-.01em}
+.spark{width:22px;height:22px;border-radius:7px;background:var(--accent);flex:0 0 auto;
+  display:grid;place-items:center;color:#fff;font-size:12px;font-weight:700}
+.nav{padding:12px 10px;display:flex;flex-direction:column;gap:1px}
+.nav small{color:var(--mute);font-size:12px;padding:12px 8px 5px}
+.nav a{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--r);
+  text-decoration:none;color:var(--ink);cursor:pointer}
+.nav a:hover{background:var(--field)}
+.nav a.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.nav a .ic{width:18px;text-align:center;opacity:.75;font-size:15px}
+.nav a.on .ic{opacity:1}
+.nav a .n{margin-left:auto;font-size:12px;color:var(--mute)}
+.nav a.on .n{color:var(--accent)}
+.who{margin-top:auto;padding:12px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.ava{width:30px;height:30px;border-radius:9px;background:var(--field);display:grid;place-items:center;font-size:12px;font-weight:600}
+.who div{line-height:1.25}
+.who span{display:block;font-size:12px;color:var(--mute)}
+
+.main{display:flex;flex-direction:column;min-width:0}
+.top{height:56px;background:var(--paper);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:14px;padding:0 22px}
+.crumbs{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--mute);min-width:0}
+.crumbs b{color:var(--ink);font-weight:600;font-size:15px}
+.crumbs i{font-style:normal;opacity:.5}
+.top .grow{flex:1}
+.work{padding:22px;min-width:0}
+
+/* ── элементы ──────────────────────────────── */
+.btn{border:1px solid var(--line);background:var(--paper);padding:7px 13px;border-radius:9px;
+  cursor:pointer;font-size:14px;font-weight:500}
+.btn:hover{border-color:#C9CDDB}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.pri:hover{background:#4F40CC}
+.btn.sm{padding:5px 9px;font-size:13px}
+.btn.icon{padding:5px 8px;color:var(--mute)}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px}
+.h1{font-size:24px;font-weight:700;letter-spacing:-.02em;margin:0 0 3px}
+.sub{color:var(--mute);font-size:14px;margin:0 0 18px}
+
+/* значок типа материала: форма несёт смысл */
+.kind{width:26px;height:26px;flex:0 0 auto;display:grid;place-items:center;font-size:12px;font-weight:700;color:#fff}
+.kind.lesson  {background:var(--accent);border-radius:8px}                    /* квадрат  — план урока */
+.kind.homework{background:var(--teal);border-radius:50%}                      /* круг     — домашка   */
+.kind.test    {background:var(--amber);border-radius:8px;transform:rotate(45deg)}
+.kind.test span{transform:rotate(-45deg)}                                     /* ромб     — тест      */
+
+/* состояние публикации: заливка точки */
+.dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto}
+.dot.pub{background:var(--teal)}
+.dot.draft{background:transparent;border:1.5px solid var(--amber)}
+
+.tree{padding:8px}
+.tw{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:9px;cursor:pointer}
+.tw:hover{background:var(--field)}
+.tw.on{background:var(--accent-soft)}
+.tw .tt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tw .cnt{font-size:12px;color:var(--mute)}
+.tw.unit{font-weight:600}
+.tw.lesson{padding-left:16px;font-size:14px}
+.chev{width:14px;color:var(--mute);font-size:11px}
+
+.rows{display:flex;flex-direction:column}
+.row{display:flex;align-items:center;gap:11px;padding:11px 14px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row:hover{background:#FAFAFD}
+.row .num{width:26px;font-size:12px;color:var(--mute);text-align:center;
+  border:1px solid var(--line);border-radius:7px;padding:2px 0;background:var(--paper)}
+.row .ttl{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .ttl em{font-style:normal;color:var(--mute);font-size:13px;display:block}
+.tag{font-size:12px;padding:2px 8px;border-radius:7px;background:var(--field);color:var(--mute)}
+.tag.t{background:var(--teal-soft);color:var(--teal)}
+.tag.a{background:var(--amber-soft);color:var(--amber)}
+.tag.v{background:var(--accent-soft);color:var(--accent)}
+.acts{display:flex;gap:4px;opacity:0;transition:opacity .12s}
+.row:hover .acts{opacity:1}
+
+.grid2{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:start}
+.panel-h{display:flex;align-items:center;gap:10px;padding:13px 15px;border-bottom:1px solid var(--line)}
+.panel-h b{font-size:15px}
+.panel-h .grow{flex:1}
+
+.empty{padding:56px 20px;text-align:center;color:var(--mute)}
+.empty b{display:block;color:var(--ink);font-size:17px;margin-bottom:5px}
+
+.screen{display:none}
+.screen.on{display:block}
+.switch{position:fixed;right:16px;bottom:16px;background:var(--ink);color:#fff;border-radius:12px;
+  padding:7px;display:flex;gap:5px;box-shadow:0 6px 24px rgba(23,26,51,.28);z-index:9}
+.switch button{background:transparent;border:0;color:#fff;opacity:.6;padding:6px 11px;border-radius:8px;
+  cursor:pointer;font-size:13px}
+.switch button.on{background:rgba(255,255,255,.16);opacity:1;font-weight:600}
+
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .rail{display:none}
+  .grid2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <aside class="rail">
+    <div class="brand"><span class="spark">W</span><b>Classroom</b></div>
+    <nav class="nav">
+      <a class="on"><span class="ic">◳</span>Библиотека</a>
+      <a><span class="ic">▷</span>Уроки</a>
+      <a><span class="ic">✓</span>Проверка<span class="n">4</span></a>
+      <a><span class="ic">☺</span>Ученики<span class="n">62</span></a>
+      <small>Материалы</small>
+      <a><span class="ic">↗</span>Выдать задание</a>
+      <a><span class="ic">♫</span>Медиа</a>
+    </nav>
+    <div class="who">
+      <span class="ava">ДШ</span>
+      <div>Дарья<span>методист</span></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <div class="crumbs"><span>SM0 — Starter</span><i>›</i><span>Unit 1 · My body</span><i>›</i><b>Homework 2</b></div>
+      <div class="grow"></div>
+      <button class="btn sm">Глазами ученика</button>
+      <button class="btn sm">Как на уроке</button>
+      <button class="btn pri sm">Сохранить</button>
+    </header>
+
+    <!-- ЭКРАН 1 — библиотека -->
+    <div class="work screen on" id="s1">
+      <h1 class="h1">Библиотека</h1>
+      <p class="sub">Планы уроков, домашние задания и тесты курса.</p>
+      <div class="grid2">
+        <div class="card tree">
+          <div class="tw unit"><span class="chev">▾</span><span class="tt">Unit 1 · My body</span><span class="cnt">9</span></div>
+          <div class="tw lesson"><span class="kind lesson">▢</span><span class="tt">Lesson 1 · Parts of the body</span><span class="dot pub"></span></div>
+          <div class="tw lesson on"><span class="kind homework">●</span><span class="tt">Homework 2</span><span class="dot pub"></span></div>
+          <div class="tw lesson"><span class="kind test"><span>◆</span></span><span class="tt">Unit test</span><span class="dot draft"></span></div>
+          <div class="tw unit"><span class="chev">▸</span><span class="tt">Unit 2 · My family</span><span class="cnt">7</span></div>
+          <div class="tw unit"><span class="chev">▸</span><span class="tt">Unit 3 · Jobs</span><span class="cnt">8</span></div>
+          <div class="tw unit"><span class="chev">▸</span><span class="tt">Final Revision</span><span class="cnt">4</span></div>
+        </div>
+
+        <div class="card">
+          <div class="panel-h">
+            <b>Homework 2</b>
+            <span class="tag t">опубликовано</span>
+            <span class="grow"></span>
+            <button class="btn sm">Свернуть все</button>
+            <button class="btn sm">Оглавление</button>
+            <button class="btn sm">＋ Блок</button>
+          </div>
+          <div class="rows">
+            <div class="row"><span class="num">1</span><span class="tag">Текст</span>
+              <span class="ttl">Look and say<em>Посмотри на картинки и назови части тела</em></span>
+              <div class="acts"><button class="btn icon sm">↑</button><button class="btn icon sm">↓</button><button class="btn icon sm">⧉</button><button class="btn icon sm">🗑</button></div></div>
+            <div class="row"><span class="num">2</span><span class="tag">Карточки</span>
+              <span class="ttl">head, mouth, nose, ear<em>4 карточки · озвучены</em></span>
+              <div class="acts"><button class="btn icon sm">↑</button><button class="btn icon sm">↓</button><button class="btn icon sm">⧉</button><button class="btn icon sm">🗑</button></div></div>
+            <div class="row"><span class="num">3</span><span class="tag">Тест</span>
+              <span class="ttl">Послушай и нажми на нужную картинку<em>3 вопроса</em></span>
+              <div class="acts"><button class="btn icon sm">↑</button><button class="btn icon sm">↓</button><button class="btn icon sm">⧉</button><button class="btn icon sm">🗑</button></div></div>
+            <div class="row"><span class="num">4</span><span class="tag v">Только преподавателю</span>
+              <span class="ttl">Тайминг этапа: 4 минуты<em>Если группа большая — сократить до двух</em></span>
+              <div class="acts"><button class="btn icon sm">↑</button><button class="btn icon sm">↓</button><button class="btn icon sm">⧉</button><button class="btn icon sm">🗑</button></div></div>
+            <div class="row"><span class="num">5</span><span class="tag">Запись голоса</span>
+              <span class="ttl">Say the words<em>ждёт проверки у 2 учеников</em></span>
+              <div class="acts"><button class="btn icon sm">↑</button><button class="btn icon sm">↓</button><button class="btn icon sm">⧉</button><button class="btn icon sm">🗑</button></div></div>
+            <div class="row"><span class="num">6</span><span class="tag a">Нет звука</span>
+              <span class="ttl">Listen and repeat<em>помечено к озвучке, ещё не сделано</em></span>
+              <div class="acts"><button class="btn icon sm">↑</button><button class="btn icon sm">↓</button><button class="btn icon sm">⧉</button><button class="btn icon sm">🗑</button></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ЭКРАН 2 — проверка -->
+    <div class="work screen" id="s2">
+      <h1 class="h1">Проверка</h1>
+      <p class="sub">Задания, которые ждут вашей оценки.</p>
+      <div class="card">
+        <div class="rows">
+          <div class="row"><span class="ava">АК</span>
+            <span class="ttl">Аня Королёва<em>Unit 1 · Homework 2 · запись голоса · вчера</em></span>
+            <span class="tag a">ждёт 1 день</span><button class="btn sm">Слушать</button><button class="btn pri sm">Оценить</button></div>
+          <div class="row"><span class="ava">МП</span>
+            <span class="ttl">Миша Петров<em>Unit 1 · Homework 2 · развёрнутый ответ · сегодня</em></span>
+            <span class="tag">сегодня</span><button class="btn sm">Открыть</button><button class="btn pri sm">Оценить</button></div>
+          <div class="row"><span class="ava">СЛ</span>
+            <span class="ttl">Соня Литвин<em>Unit 2 · Homework 1 · запись голоса · сегодня</em></span>
+            <span class="tag">сегодня</span><button class="btn sm">Слушать</button><button class="btn pri sm">Оценить</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ЭКРАН 3 — пусто -->
+    <div class="work screen" id="s3">
+      <h1 class="h1">Уроки</h1>
+      <p class="sub">Планы уроков для проведения занятия.</p>
+      <div class="card empty">
+        <b>Планов уроков пока нет</b>
+        Методист добавит их в библиотеке — они появятся здесь.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="switch">
+  <button class="on" onclick="go(1,this)">Библиотека</button>
+  <button onclick="go(2,this)">Проверка</button>
+  <button onclick="go(3,this)">Пусто</button>
+</div>
+
+<script>
+function go(n, el){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  document.getElementById('s'+n).classList.add('on');
+  document.querySelectorAll('.switch button').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+}
+</script>
+</body>
+</html>

@@ -1,4 +1,6 @@
+node_modules/
 __pycache__/
 *.pyc
 tools/.kids46_images.json
 tools/vocab-images/__pycache__/
+builds/sm2/*sql/

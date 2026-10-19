@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halloween Lesson 🎃 7–9 continuing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#7b4bd6;--purple2:#5a2ea8;--orange:#ff8a1e;--orange2:#e8631a;--gold:#ffc63a;--green:#4fc04f;--pink:#ff6fae;--ink:#2a1550;
+  --disp:'Fredoka','Baloo 2',sans-serif;--round:'Baloo 2','Segoe UI',sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%}
+body{font-family:var(--round);overflow:hidden;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;user-select:none;background:#1a0b2e;touch-action:manipulation}
+#game{position:relative;width:100vw;height:100vh;overflow:hidden}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center}
+.screen.active{display:flex}
+.bg-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}
+
+/* top bar */
+.topbar{position:absolute;top:0;left:0;right:0;z-index:40;display:none;justify-content:space-between;align-items:center;padding:12px 16px;pointer-events:none}
+.progress-pips{display:flex;gap:5px;background:rgba(20,8,40,.55);padding:7px 12px;border-radius:16px;backdrop-filter:blur(4px);pointer-events:auto;flex-wrap:wrap;max-width:50vw}
+.pip{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s}
+.pip.done{background:var(--gold)}.pip.cur{background:var(--orange);transform:scale(1.3);box-shadow:0 0 8px var(--orange)}
+.topbtns{display:flex;gap:8px;pointer-events:auto}
+.tb{font-family:var(--disp);font-weight:700;font-size:14px;color:#fff;border:none;border-radius:12px;padding:9px 14px;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.25)}
+.tb.plan{background:linear-gradient(180deg,#ffd36a,var(--gold));color:var(--ink)}.tb.music{background:linear-gradient(180deg,#9d84ff,var(--purple))}
+.tb:active{transform:translateY(2px)}
+
+/* nav bar (back / page / next) */
+.navbar{position:absolute;bottom:0;left:0;right:0;z-index:40;display:none;justify-content:space-between;align-items:center;padding:12px 18px;pointer-events:none}
+.navbar{justify-content:center;gap:16px}
+.nav-arrow{font-family:var(--disp);font-weight:700;font-size:22px;color:#fff;border:none;border-radius:50%;width:48px;height:48px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.3);pointer-events:auto;background:rgba(123,75,214,.6);display:flex;align-items:center;justify-content:center;opacity:.7}
+.nav-arrow:hover{opacity:1}.nav-arrow:active{transform:translateY(2px)}
+.nav-main{font-family:var(--disp);font-weight:700;font-size:20px;color:#fff;border:none;border-radius:16px;padding:12px 40px;cursor:pointer;box-shadow:0 5px 0 #c44f12;pointer-events:auto;background:linear-gradient(180deg,#ff9f3e,var(--orange2));transition:transform .1s,box-shadow .15s}
+.nav-main:active{transform:translateY(3px);box-shadow:0 2px 0 #c44f12}
+.nav-main.ready{animation:nextpulse 1.1s ease-in-out infinite}
+@keyframes nextpulse{0%,100%{transform:scale(1);box-shadow:0 5px 0 #c44f12,0 0 0 rgba(255,159,62,.6)}50%{transform:scale(1.05);box-shadow:0 5px 0 #c44f12,0 0 24px rgba(255,159,62,.9)}}
+.page-num{position:absolute;right:16px;font-family:var(--round);font-weight:700;font-size:12px;color:rgba(255,255,255,.55);background:rgba(20,8,40,.5);padding:5px 10px;border-radius:10px;pointer-events:auto}
+
+.big-title{font-family:var(--disp);font-weight:700;font-size:clamp(26px,5vw,50px);color:#fff;text-shadow:0 4px 0 var(--purple2),0 0 22px rgba(123,75,214,.6);text-align:center;z-index:10}
+.sub{font-family:var(--round);font-weight:700;font-size:clamp(15px,2.5vw,21px);color:var(--ink);margin-top:10px;line-height:1.45}
+.sub.light{color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.panel{background:rgba(255,253,246,.96);border:5px solid #fff;border-radius:28px;padding:22px 32px;box-shadow:0 14px 40px rgba(0,0,0,.3);text-align:center;z-index:10;max-width:92vw}
+
+.btn{font-family:var(--disp);font-weight:700;font-size:clamp(20px,3.2vw,28px);color:#fff;border:none;border-radius:18px;padding:15px 44px;cursor:pointer;
+  background:linear-gradient(180deg,#ff9f3e,var(--orange2));box-shadow:0 6px 0 #c44f12;transition:transform .1s,box-shadow .1s;margin-top:8px}
+.btn:hover{transform:translateY(2px);box-shadow:0 4px 0 #c44f12}.btn:active{transform:translateY(6px);box-shadow:0 0 0 #c44f12}
+.btn.purple{background:linear-gradient(180deg,#9d6cff,var(--purple2));box-shadow:0 6px 0 #3f1f78}.btn.purple:active{box-shadow:0 0 0 #3f1f78}
+.btn.green{background:linear-gradient(180deg,#6fe06f,#3a9c3a);box-shadow:0 6px 0 #2a7a2a}.btn.green:active{box-shadow:0 0 0 #2a7a2a}
+/* pulsing start */
+.btn.pulse{animation:btnpulse 1.3s ease-in-out infinite}
+@keyframes btnpulse{0%,100%{transform:scale(1);box-shadow:0 6px 0 #c44f12,0 0 0 rgba(255,159,62,.6)}50%{transform:scale(1.06);box-shadow:0 6px 0 #c44f12,0 0 30px rgba(255,159,62,.9)}}
+
+#start .dragon-hero{width:min(220px,30vw);filter:drop-shadow(0 10px 14px rgba(0,0,0,.35));animation:bob 2.4s ease-in-out infinite;margin-bottom:8px}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+.choices{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:20px;z-index:10}
+.choice{background:rgba(255,255,255,.92);border:4px solid #fff;border-radius:22px;padding:14px;cursor:pointer;transition:transform .15s,box-shadow .15s;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.choice:hover{transform:translateY(-6px) scale(1.03)}
+.choice img{width:clamp(120px,16vw,180px);height:clamp(120px,16vw,180px);object-fit:contain}
+.choice .lbl{font-family:var(--disp);font-weight:700;font-size:16px;color:var(--ink)}
+.choice.sel{border-color:var(--gold);box-shadow:0 0 0 4px var(--gold),0 10px 24px rgba(255,198,58,.5)}
+
+/* fog present */
+.fog-card{position:relative;width:min(400px,50vw);z-index:10}
+.fog-card .word-img{width:100%;filter:drop-shadow(0 8px 14px rgba(0,0,0,.3))}
+.fog-card{cursor:pointer}
+.fog-card .word-img{transition:filter .8s ease}
+.fog-card .fog{position:absolute;inset:-22%;border-radius:45%;filter:blur(22px);opacity:1;
+  background:radial-gradient(circle at 30% 35%,#f4efff 0,rgba(244,239,255,0) 42%),radial-gradient(circle at 70% 65%,#e7defa 0,rgba(231,222,250,0) 45%),
+  radial-gradient(circle at 50% 50%,#d8cdee 0 62%,rgba(216,205,238,.85) 74%,rgba(216,205,238,0) 92%);
+  animation:fogdrift 6s ease-in-out infinite alternate}
+@keyframes fogdrift{0%{transform:translate(-2%,0) scale(1)}100%{transform:translate(2%,-2%) scale(1.04)}}
+.fog.clear{opacity:0}
+.word-label{font-family:var(--disp);font-weight:700;font-size:clamp(34px,6vw,64px);color:#fff;text-shadow:0 4px 0 var(--orange2),0 0 20px rgba(255,138,30,.6);margin-top:14px;text-transform:lowercase;opacity:0;transition:opacity .5s}
+.word-label.show{opacity:1}
+
+.pic-grid{display:flex;gap:clamp(14px,3vw,36px);flex-wrap:wrap;justify-content:center;z-index:10}
+.pic-item{background:rgba(255,255,255,.9);border:5px solid #fff;border-radius:22px;padding:14px;cursor:pointer;transition:transform .12s;box-shadow:0 8px 20px rgba(0,0,0,.25);position:relative}
+.pic-item:hover{transform:translateY(-5px)}
+.pic-item img{width:clamp(110px,14vw,170px);height:clamp(110px,14vw,170px);object-fit:contain}
+.pic-item.right{border-color:var(--green);box-shadow:0 0 0 5px var(--green),0 0 26px rgba(79,192,79,.6);animation:rpop .5s ease}
+@keyframes rpop{0%,100%{transform:scale(1)}40%{transform:scale(1.12)}}
+.pic-item.wrong{animation:wshake .4s ease}@keyframes wshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+.pic-item .circle-mark{position:absolute;inset:-6px;border:7px solid var(--pink);border-radius:50%;opacity:0;pointer-events:none}
+.pic-item.right .circle-mark{opacity:1;animation:drawcircle .5s ease}
+@keyframes drawcircle{0%{transform:scale(.5) rotate(-20deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
+#spotlight-screen{background:radial-gradient(ellipse at 50% 30%,#3a1a66,#1a0b2e)}
+.spot-field{position:absolute;inset:0;z-index:6}
+.spot-item{position:absolute;width:clamp(110px,11vw,170px);transform:translate(-50%,-50%);cursor:pointer;filter:drop-shadow(0 6px 10px rgba(0,0,0,.5))}
+.spot-item.right{filter:drop-shadow(0 0 18px #6fe06f) drop-shadow(0 0 8px #6fe06f);animation:rpop .5s ease}
+.spot-item.wrong{animation:wshake2 .4s ease}
+@keyframes wshake2{0%,100%{transform:translate(-50%,-50%)}25%{transform:translate(calc(-50% - 10px),-50%)}75%{transform:translate(calc(-50% + 10px),-50%)}}
+/* flashlight: dark layer with a hole of light + glowing ring */
+.spot-dark{position:absolute;inset:0;z-index:8;pointer-events:none;
+  background:radial-gradient(circle var(--r,120px) at var(--x,50%) var(--y,50%),rgba(255,236,170,.10) 0%,rgba(255,236,170,.05) 70%,#05010d 100%)}
+.spot-ring{position:absolute;z-index:9;pointer-events:none;border-radius:50%;border:4px solid rgba(255,222,130,.75);
+  box-shadow:0 0 28px 6px rgba(255,200,80,.45),inset 0 0 30px rgba(255,220,130,.25);transform:translate(-50%,-50%);transition:border-color .2s,box-shadow .2s}
+.spot-ring.ok{border-color:#6fe06f;box-shadow:0 0 34px 10px rgba(79,192,79,.6),inset 0 0 30px rgba(79,192,79,.3)}
+.spot-ring.bad{border-color:#ff6fae;box-shadow:0 0 34px 10px rgba(255,111,174,.5)}
+#spotlight-screen .big-title,#spotlight-screen .sub{z-index:10}
+.spot-stop{position:absolute;bottom:92px;z-index:10;font-size:clamp(24px,3.6vw,34px);padding:14px 54px;
+  background:linear-gradient(180deg,#ff6b6b,#d63031);box-shadow:0 6px 0 #9b1c1c}
+.spot-stop:hover{box-shadow:0 4px 0 #9b1c1c}.spot-stop:active{box-shadow:0 0 0 #9b1c1c}
+
+
+/* room */
+#room-screen,#finish-screen{overflow:hidden}
+.room-wrap{position:absolute;inset:0;z-index:1}
+.room-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.room-bg.top{opacity:0;transition:opacity 1.4s ease}
+.room-bg.top.show{opacity:1}
+.room-dragon{position:absolute;pointer-events:none;z-index:3;filter:drop-shadow(2px 8px 10px rgba(0,0,0,.35))}
+.room-cap{position:absolute;top:18px;left:50%;transform:translateX(-50%);z-index:5;background:rgba(20,8,40,.72);backdrop-filter:blur(4px);
+  border:3px solid var(--gold);border-radius:20px;padding:10px 30px;font-family:var(--disp);font-weight:700;font-size:clamp(24px,4vw,44px);color:#fff;
+  text-shadow:0 3px 0 var(--purple2);white-space:nowrap}
+.room-cap.pop{animation:cappop .6s ease}
+@keyframes cappop{0%{transform:translateX(-50%) scale(.6);opacity:0}60%{transform:translateX(-50%) scale(1.08);opacity:1}100%{transform:translateX(-50%) scale(1)}}
+
+/* candy jar */
+.candy-pill{display:flex;align-items:center;gap:6px;background:rgba(20,8,40,.7);border:2px solid var(--gold);color:#fff;font:700 18px var(--disp);padding:4px 12px;border-radius:14px;pointer-events:auto}
+.candy-pill.bump{animation:rpop .4s ease}
+.candy-fly{position:fixed;left:0;top:0;z-index:80;font-size:34px;pointer-events:none}
+.pip{cursor:pointer;width:13px;height:13px}.pip:hover{background:#fff}
+/* shop */
+.shop-item img{width:clamp(130px,16vw,220px)!important;height:clamp(110px,13vw,180px)!important;object-fit:contain}
+/* story bubble (7-9) */
+#story{position:absolute;right:3%;bottom:13%;z-index:30;display:none;flex-direction:column;align-items:flex-end;gap:4px;pointer-events:none}
+#story img{width:clamp(110px,12vw,170px);animation:bob 2.4s ease-in-out infinite;filter:drop-shadow(0 8px 12px rgba(0,0,0,.45))}
+#story .say{background:#fff;color:var(--ink);font:700 clamp(17px,1.9vw,24px) var(--disp);padding:14px 20px;border-radius:22px 22px 4px 22px;box-shadow:0 8px 24px rgba(0,0,0,.35);width:min(480px,46vw);order:-1;margin-right:40px}
+#story.in{animation:storyin .6s cubic-bezier(.3,1.4,.5,1)}
+@keyframes storyin{0%{transform:translateX(60px);opacity:0}100%{transform:none;opacity:1}}
+#party .party-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* round dots (several rounds inside one page) */
+.round-dots{position:absolute;bottom:20px;left:20px;z-index:41;display:none;gap:12px;background:rgba(20,8,40,.55);padding:7px 14px;border-radius:16px;pointer-events:none}
+.round-dots span{width:18px;height:18px;border-radius:50%;border:3px solid rgba(255,255,255,.75);transition:.3s}
+.round-dots span.done{background:var(--gold);border-color:var(--gold)}
+.round-dots span.cur{border-color:var(--orange);box-shadow:0 0 10px var(--orange);transform:scale(1.2)}
+
+/* presentation */
+.present-card{background:rgba(255,253,246,.96);border:6px solid #fff;border-radius:30px;padding:20px;box-shadow:0 14px 40px rgba(0,0,0,.35);z-index:10;cursor:pointer}
+.present-card img{width:min(380px,44vh);height:min(320px,38vh);object-fit:contain;display:block}
+.present-card.pop{animation:cardpop .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes cardpop{0%{transform:scale(.3) rotate(-8deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
+
+/* new item highlight in the room */
+.hl-dim{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;transition:opacity .6s}
+.hl-dim.on{opacity:1}
+.hl-ring{position:absolute;z-index:5;pointer-events:none;border-radius:50%;border:6px solid var(--gold);box-shadow:0 0 30px 8px rgba(255,198,58,.7),inset 0 0 26px rgba(255,198,58,.5);opacity:0;transition:opacity .5s}
+.hl-ring.on{opacity:1;animation:hlpulse 1s ease-in-out infinite}
+@keyframes hlpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+
+/* cloud for What's missing */
+.cloud{position:absolute;left:-22%;right:-22%;top:-18%;bottom:-18%;z-index:4;pointer-events:none;
+  background:radial-gradient(circle at 28% 58%,#fff 0 27%,transparent 28%),radial-gradient(circle at 52% 38%,#fff 0 33%,transparent 34%),
+  radial-gradient(circle at 76% 56%,#fff 0 27%,transparent 28%),radial-gradient(ellipse 46% 32% at 50% 64%,#fff 0 99%,transparent 100%);
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.3))}
+
+/* freeze/act practice cards */
+.fz-prac{display:flex;gap:clamp(12px,2.4vw,28px);flex-wrap:wrap;justify-content:center}
+.fz-prac .pic-item .lbl{font-family:var(--disp);font-weight:700;color:var(--ink);text-align:center;font-size:18px}
+.wiggle{animation:wiggle .5s ease-in-out 3}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg) scale(1.06)}75%{transform:rotate(8deg) scale(1.06)}}
+
+/* 16:9 stage that covers the screen like object-fit:cover — overlays use % of the picture */
+.stage{position:absolute;left:50%;top:50%;width:max(100vw,177.78vh);height:max(56.25vw,100vh);transform:translate(-50%,-50%)}
+.stage>.room-bg{position:absolute;inset:0;width:100%;height:100%}
+
+/* KNOCK KNOCK doors */
+#knock{background:radial-gradient(ellipse at 50% 0%,#4a2a86 0%,#1d0e3a 55%,#0c0518 100%)}
+.doors{display:grid;grid-template-columns:repeat(var(--cols,4),auto);gap:clamp(14px,2.4vh,28px) clamp(30px,4vw,70px);z-index:10;margin-top:70px;justify-content:center}
+.door{--df:none;position:relative;width:min(9.5vw,17vh);aspect-ratio:276/420;cursor:pointer;perspective:900px}
+.door .frame{position:absolute;inset:0;border-radius:50% 50% 6px 6px/33% 33% 6px 6px;background:var(--c2);box-shadow:0 10px 24px rgba(0,0,0,.5)}
+.door .inside{position:absolute;inset:7% 9% 0 9%;border-radius:50% 50% 3px 3px/33% 33% 3px 3px;background:radial-gradient(circle at 50% 62%,#ffd27a 0,#c4651c 35%,#3a1608 72%,#140606 100%);overflow:hidden}
+.door .who{position:absolute;left:50%;bottom:10%;width:88%;transform:translateX(-50%) translateY(30%) scale(0);transition:transform .5s cubic-bezier(.3,1.7,.5,1);filter:drop-shadow(0 6px 8px rgba(0,0,0,.5))}
+.door.open .who{transform:translateX(-50%) translateY(0) scale(1)}
+.door .leaf{position:absolute;inset:0;transform-origin:left center;transition:transform 1s cubic-bezier(.5,0,.3,1);
+  background:var(--img) center/100% 100% no-repeat;filter:var(--df) drop-shadow(0 8px 14px rgba(0,0,0,.45));z-index:2}
+.door .leaf .num{position:absolute;top:66%;left:50%;transform:translateX(-50%);background:#ffe6a6;color:#5a2ea8;font-family:var(--disp);font-weight:700;
+  font-size:clamp(20px,2.4vw,32px);width:1.6em;height:1.6em;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 0 rgba(0,0,0,.3)}
+.door:not(.open):hover .leaf{filter:var(--df) brightness(1.12) drop-shadow(0 8px 14px rgba(0,0,0,.45))}
+.door.knocking .leaf{animation:knockshake .22s 3}
+@keyframes knockshake{0%,100%{transform:rotate(0)}30%{transform:rotate(-1.6deg)}70%{transform:rotate(1.6deg)}}
+.door.open .leaf{transform:rotateY(-100deg);filter:var(--df) brightness(.7) drop-shadow(0 8px 14px rgba(0,0,0,.45))}
+.door .lbl{position:absolute;z-index:3;left:50%;bottom:-46px;transform:translateX(-50%);font-family:var(--disp);font-weight:700;font-size:clamp(18px,2.2vw,28px);color:#fff;
+  text-shadow:0 3px 0 var(--purple2);opacity:0;transition:opacity .4s;white-space:nowrap}
+.door .lbl.show{opacity:1}
+
+/* PEEKABOO */
+#peek{background:#1a0b2e;overflow:hidden}
+.peek-clip{position:absolute;inset:0}
+.peek-sprite,.peek-out{position:absolute;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35));cursor:pointer}
+.peek-out{display:none;z-index:4;pointer-events:none}
+#peekCap{z-index:6}
+#peekShow{position:absolute;bottom:92px;z-index:6}
+
+/* CAULDRON */
+#cauldron{background:radial-gradient(ellipse at 50% 35%,#3a1a66,#14072a)}
+#cauldTitle img{height:1.15em;vertical-align:-0.25em;margin:0 .1em;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+.cauld-row{display:flex;align-items:center;gap:clamp(14px,3vw,40px);z-index:10;margin-top:40px}
+.cauld-wrap{position:relative;width:min(440px,46vh);aspect-ratio:480/393}
+.cauld-fire{position:absolute;left:36%;width:28%;bottom:-6%;z-index:0;overflow:visible}
+.cauld-pot{position:absolute;inset:0;width:100%;height:100%;z-index:1;filter:drop-shadow(0 10px 16px rgba(0,0,0,.45))}
+.cauld-pot.potion{filter:none;transition:filter .6s}
+#cauldBubbles{position:absolute;inset:0;z-index:2;pointer-events:none}
+.cauld-wrap.hit{animation:wobble .4s ease}
+@keyframes wobble{0%,100%{transform:rotate(0)}30%{transform:rotate(-3deg)}70%{transform:rotate(3deg)}}
+.bubble{position:absolute;border-radius:50%;background:var(--potion-l,#b6ffb0);opacity:.85;pointer-events:none;animation:bub 1.6s ease-in infinite}
+@keyframes bub{0%{transform:translateY(0) scale(.4);opacity:0}20%{opacity:.9}100%{transform:translateY(-70px) scale(1);opacity:0}}
+.flame{transform-origin:50% 100%;animation:flick .35s ease-in-out infinite alternate}
+@keyframes flick{0%{transform:scaleY(1) scaleX(1)}100%{transform:scaleY(1.18) scaleX(.92)}}
+.cauld-count{font-family:var(--disp);font-weight:700;font-size:clamp(70px,10vw,130px);color:var(--gold);text-shadow:0 6px 0 #a8661a,0 0 30px rgba(255,198,58,.6);min-width:1.2em;text-align:center}
+.cauld-count.pop{animation:rpop .4s ease}
+.cauld-dots{display:flex;gap:8px;justify-content:center;margin-top:4px}
+.cauld-dots span{width:20px;height:20px;border-radius:50%;border:3px solid var(--gold)}
+.cauld-dots span.on{background:var(--gold)}
+.cauld-shelf{display:flex;gap:clamp(12px,2.4vw,28px);z-index:10;margin-top:34px;margin-bottom:70px}
+.cauld-item{background:rgba(255,255,255,.92);border:4px solid #fff;border-radius:20px;padding:10px;cursor:grab;touch-action:none;box-shadow:0 8px 18px rgba(0,0,0,.3);transition:transform .12s}
+.cauld-item:hover{transform:translateY(-5px)}
+.cauld-item img{width:clamp(80px,9vw,120px);height:clamp(70px,8vw,100px);object-fit:contain;pointer-events:none}
+.flyer{position:fixed;z-index:70;pointer-events:none;width:clamp(80px,9vw,120px);filter:drop-shadow(0 6px 8px rgba(0,0,0,.4))}
+.smoke{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95),rgba(220,190,255,.7) 60%,rgba(220,190,255,0) 72%);pointer-events:none;z-index:5}
+.cauld-popclip{position:absolute;inset:0;z-index:3;pointer-events:none;clip-path:polygon(-50% -150%,150% -150%,150% 21%,-50% 21%)}
+.cauld-pop{position:absolute;left:50%;top:4%;width:38%;transform:translateX(-50%);z-index:3;pointer-events:none}
+
+/* FREEZE DANCE */
+.fz-dragon{width:min(240px,30vh);filter:drop-shadow(0 10px 14px rgba(0,0,0,.4))}
+.fz-dragon.dance{animation:dance .5s ease-in-out infinite alternate}
+@keyframes dance{0%{transform:rotate(-10deg) translateY(0)}50%{transform:rotate(0) translateY(-22px)}100%{transform:rotate(10deg) translateY(0)}}
+.fz-notes{font-size:34px;height:44px;letter-spacing:18px;opacity:0;transition:opacity .3s}
+.fz-notes.on{opacity:1;animation:bob .6s ease-in-out infinite}
+.fz-card{display:none;flex-direction:column;align-items:center;background:rgba(255,253,246,.97);border:6px solid var(--gold);border-radius:28px;padding:20px 34px;box-shadow:0 0 40px rgba(255,198,58,.6)}
+.fz-card.show{display:flex;animation:rpop .45s ease}
+.fz-card .fz-big{font-family:var(--disp);font-weight:700;font-size:clamp(34px,5vw,58px);color:#1b8fd6}
+.fz-card img{width:min(280px,34vh);height:min(240px,30vh);object-fit:contain}
+.fz-card .fz-do{font-family:var(--disp);font-weight:700;font-size:clamp(20px,2.8vw,30px);color:var(--ink)}
+
+/* SPOT THE DIFFERENCE */
+#spotdiff .sd-row{display:flex;gap:clamp(10px,1.6vw,24px);z-index:10;margin-top:40px}
+.sd-wrap{position:relative;width:min(47vw,78vh);aspect-ratio:16/9;border:5px solid #fff;border-radius:16px;overflow:hidden;cursor:crosshair;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.sd-wrap img{width:100%;height:100%;display:block;pointer-events:none}
+.sd-mark{position:absolute;border:4px solid #6fe06f;border-radius:50%;box-shadow:0 0 14px #6fe06f;pointer-events:none;animation:drawcircle .4s ease}
+.sd-miss{position:absolute;color:#ff6b6b;font:700 34px var(--disp);transform:translate(-50%,-50%);pointer-events:none;text-shadow:0 2px 4px #000}
+.sd-lbl{position:absolute;top:8px;left:10px;background:rgba(20,8,40,.75);color:#fff;font:700 18px var(--disp);padding:2px 12px;border-radius:10px;pointer-events:none}
+
+/* BUILD A MONSTER */
+#monster .mon-row{display:flex;gap:clamp(16px,3vw,50px);align-items:center;z-index:10;margin-top:70px}
+.mon-stage{position:relative;width:min(52vh,40vw);aspect-ratio:1;background:rgba(255,255,255,.08);border-radius:30px}
+.mon-panel{background:rgba(255,253,246,.96);border-radius:24px;padding:18px 22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.mon-panel .r{display:flex;align-items:center;gap:10px;font:700 22px var(--disp);color:var(--ink)}
+.mon-panel .r .ic{width:34px;height:34px;object-fit:contain}
+.mon-panel .r button{width:42px;height:42px;border-radius:50%;border:none;font:700 24px var(--disp);background:var(--purple);color:#fff;cursor:pointer}
+.mon-panel .r b{min-width:28px;text-align:center;font-size:26px}
+#monColors{display:flex;gap:10px}
+#monColors .mc{width:44px;height:44px;border-radius:50%;border:4px solid #fff;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+#monColors .mc.on{border-color:var(--ink);transform:scale(1.15)}
+#monTask{position:absolute;top:26px;left:50%;transform:translateX(-50%);z-index:12;background:rgba(20,8,40,.78);color:#fff;font:700 clamp(18px,2.4vw,28px) var(--disp);padding:10px 24px;border-radius:18px;border:3px solid var(--gold);max-width:90vw;text-align:center}
+
+/* ANAGRAM */
+#anagram .ana-img{width:min(220px,26vh);filter:drop-shadow(0 8px 12px rgba(0,0,0,.4));z-index:10}
+.ana-slots{display:flex;gap:10px;margin:18px 0;z-index:10}
+.ana-slot{width:clamp(44px,5vw,64px);height:clamp(54px,6vw,76px);border-bottom:5px solid #fff;color:#fff;font:700 clamp(32px,4vw,52px) var(--disp);display:flex;align-items:center;justify-content:center}
+.ana-slot.on{color:var(--gold)}
+.ana-slot.gap{border-bottom-color:transparent;width:clamp(16px,2vw,28px)}
+.ana-slots.win .ana-slot{color:#6fe06f;animation:rpop .5s ease}
+.ana-tiles{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;z-index:10}
+.ana-tile{width:clamp(50px,5.5vw,70px);height:clamp(50px,5.5vw,70px);border-radius:14px;border:none;background:linear-gradient(180deg,#ffd36a,var(--gold));color:var(--ink);font:700 clamp(28px,3.4vw,42px) var(--disp);box-shadow:0 5px 0 #b8861a;cursor:pointer}
+.ana-tile.used{opacity:.25}
+.ana-tile.shake{animation:wshake .4s ease}
+
+/* BOARD GAME */
+#board{background:#0b0718}
+.bsq{position:absolute;width:3.8%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:rgba(255,248,230,.92);border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(0,0,0,.5)}
+.bsq img{width:80%;height:80%;object-fit:contain}
+.bsq span{font:700 clamp(10px,1.1vw,18px) var(--disp);color:var(--purple2)}
+.bsq.sp{background:#ffe6a6;border-color:#ff8a1e}.bsq.end{width:4.6%;background:#6fe06f;border-color:#fff}
+.bsq::after{content:attr(data-n);position:absolute;bottom:-38%;font:700 clamp(9px,.8vw,13px) var(--disp);color:#fff;text-shadow:0 1px 3px #000}
+.bpawn{position:absolute;width:4.6%;transform:translate(-50%,-92%);z-index:5;transition:left .25s,top .25s;display:flex;flex-direction:column;align-items:center}
+.bpawn img{width:100%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.6))}
+.bpawn span{margin-top:-4px;background:rgba(20,8,40,.85);color:#fff;font:700 clamp(10px,.9vw,14px) var(--disp);padding:1px 7px;border-radius:8px;white-space:nowrap}
+.bpawn.cur img{filter:drop-shadow(0 0 10px var(--gold)) drop-shadow(0 6px 6px rgba(0,0,0,.6))}
+.bp-col{display:flex;flex-direction:column;align-items:center;gap:8px}
+.bp-name{width:clamp(90px,9vw,140px);font:700 18px var(--disp);text-align:center;border-radius:10px;border:3px solid #fff;padding:5px;color:var(--ink);visibility:hidden}
+.bp-col.on .bp-name{visibility:visible}.bp-col.on .bp-opt{border-color:var(--gold);box-shadow:0 0 0 4px var(--gold)}
+#boardWhoName{color:#fff;font:700 20px var(--disp)}
+.board-ui{position:absolute;right:20px;bottom:90px;z-index:12;display:flex;flex-direction:column;align-items:center;gap:10px;background:rgba(20,8,40,.8);padding:14px 18px;border-radius:20px;border:3px solid var(--gold)}
+.board-ui img.who{width:70px}
+#diceBtn{font-size:74px;line-height:1;background:#fff;border:none;border-radius:16px;width:96px;height:96px;cursor:pointer;color:var(--ink);box-shadow:0 5px 0 #aaa}
+#boardPick{position:absolute;inset:0;z-index:13;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:rgba(10,4,25,.6)}
+#boardPawns{display:flex;gap:18px}
+.bp-opt{background:rgba(255,255,255,.92);border:5px solid #fff;border-radius:20px;padding:10px;cursor:pointer}
+.bp-opt img{width:clamp(70px,8vw,120px);height:clamp(90px,10vw,150px);object-fit:contain}
+.bp-opt.on{border-color:var(--gold);box-shadow:0 0 0 4px var(--gold)}
+#boardCard{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.6);opacity:0;pointer-events:none;z-index:14;background:rgba(255,253,246,.98);border:6px solid var(--gold);border-radius:28px;padding:18px 34px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:.3s}
+#boardCard.show{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto}
+#boardCard img{width:min(220px,28vh);height:min(200px,25vh);object-fit:contain}
+#boardCardT{font:700 clamp(24px,3vw,38px) var(--disp);color:var(--purple2);text-align:center}
+
+/* emotions big row */
+.emo-big-row{display:flex;gap:clamp(16px,4vw,50px);justify-content:center;z-index:10;flex-wrap:wrap;margin-top:10px}
+
+/* I like */
+.like-stage{display:flex;flex-direction:column;align-items:center;gap:18px;z-index:10}
+.like-card{background:rgba(255,255,255,.95);border:5px solid #fff;border-radius:26px;padding:20px;box-shadow:0 10px 28px rgba(0,0,0,.3)}
+.like-card img{width:min(210px,28vw);height:min(210px,28vw);object-fit:contain}
+.like-thumbs{display:flex;gap:40px}
+.thumb{font-size:58px;cursor:pointer;transition:transform .12s;background:none;border:none}
+.thumb:hover{transform:scale(1.2)}
+.thumb.chosen{animation:thumbpop .8s ease}
+@keyframes thumbpop{0%{transform:scale(1)}35%{transform:scale(1.6)}100%{transform:scale(1)}}
+
+/* bonus screen */
+#bonus-screen{background:radial-gradient(ellipse at 50% 30%,#3a1a66,#1a0b2e)}
+.mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;z-index:10}
+.mem-txt{font:700 clamp(18px,1.8vw,26px) var(--disp);color:var(--ink);text-align:center;padding:6px;line-height:1.15}
+.mem-card{position:relative;width:clamp(90px,10vw,140px);height:clamp(80px,9vw,120px);perspective:600px;cursor:pointer}
+.mem-face{position:absolute;inset:0;border-radius:16px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;transition:transform .4s;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.mem-back{background:linear-gradient(180deg,#9d6cff,var(--purple2));font-size:44px}
+.mem-front{background:#fff;transform:rotateY(180deg)}
+.mem-front img{width:80%;height:80%;object-fit:contain}
+.mem-card.flip .mem-back{transform:rotateY(180deg)}
+.mem-card.flip .mem-front{transform:rotateY(360deg)}
+.mem-card.done{opacity:.45}
+
+/* confetti/toast */
+.confetti{position:fixed;inset:0;z-index:60;pointer-events:none;overflow:hidden}.conf{position:absolute;width:12px;height:12px;opacity:0}
+.done-check{position:absolute;bottom:62px;right:18px;transform:translateY(20px);z-index:45;background:linear-gradient(180deg,#6fe06f,#3a9c3a);color:#fff;font-family:var(--disp);font-weight:700;font-size:20px;padding:8px 24px;border-radius:16px;box-shadow:0 6px 18px rgba(58,156,58,.5);opacity:0;transition:opacity .3s,transform .3s;pointer-events:none}
+.done-check.show{opacity:1;transform:translateY(0)}
+.toast{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%) scale(.6);z-index:50;font-family:var(--disp);font-weight:700;font-size:clamp(28px,5vw,54px);color:#fff;text-shadow:2px 2px 0 rgba(0,0,0,.3);opacity:0;pointer-events:none;text-align:center}
+.toast.show{animation:tpop 1.2s ease-out}@keyframes tpop{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}25%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}75%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-56%) scale(1)}}
+
+/* finish */
+#finish-screen{background:radial-gradient(ellipse at 50% 30%,#3a1266,#10061f)}
+.photo-frame{position:relative;z-index:10;background:#fff;border-radius:18px;padding:14px 14px 50px;box-shadow:0 20px 60px rgba(0,0,0,.5);transform:rotate(-2deg);max-width:88vw}
+.photo-frame img{width:min(720px,80vw);height:auto;border-radius:8px;display:block}
+.photo-frame .cap{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-family:'Fredoka',cursive;font-weight:700;font-size:22px;color:#5a2ea8}
+.finish-actions{display:flex;gap:14px;margin-top:22px;z-index:10;flex-wrap:wrap;justify-content:center}
+@media(max-width:820px){.mem-grid{grid-template-columns:repeat(4,1fr)}.choice img{width:120px;height:120px}}
+</style>
+</head>
+<body>
+<div id="game">
+  <div class="topbar" id="topbar">
+    <div class="progress-pips" id="pips"></div>
+    <div class="topbtns">
+      <div class="candy-pill" id="candyPill" title="candies">🍬 <b id="candyN">0</b></div>
+      <button class="tb plan" id="planBtn" title="План урока">📋</button>
+      <button class="tb music" id="musicBtn">🎵 ON</button><input type="range" id="musicVol" min="0" max="100" value="18" title="volume" style="width:70px;pointer-events:auto;vertical-align:middle">
+    </div>
+  </div>
+  <div class="round-dots" id="roundDots"></div>
+  <div class="navbar" id="navbar">
+    <button class="nav-arrow" id="navBack" title="back">&#8592;</button>
+    <button class="nav-main" id="navNextMain">Next 👉</button>
+    <button class="nav-arrow" id="navFwd" title="skip">&#8594;</button>
+    <span class="page-num" id="pageNum">1 / 17</span>
+  </div>
+
+  <!-- START -->
+  <div class="screen active" id="start" style="background:radial-gradient(ellipse at 50% 30%,#3a1a66,#1a0b2e)">
+    <div class="big-title" style="font-size:clamp(34px,6vw,64px)">Halloween Room 🎃</div>
+    <button class="btn pulse" id="startBtn" style="margin-top:22px">Start! 🎃</button>
+  </div>
+
+  <div class="screen" id="wu-topic">
+    <img class="bg-cover" id="wuTopicBg" alt="">
+  </div>
+
+  <div class="screen" id="wu-emo" style="background:radial-gradient(ellipse at 50% 30%,#3a1a66,#1a0b2e)">
+    <div class="emo-big-row" id="emoBigRow"></div>
+  </div>
+
+  <div class="screen" id="wu-costume" style="background:radial-gradient(ellipse at 50% 30%,#3a1a66,#1a0b2e)">
+    <div class="choices" id="costumeChoices"></div>
+  </div>
+
+  <div class="screen" id="present" style="background:radial-gradient(ellipse at 50% 30%,#3a1a66,#1a0b2e)">
+    <div class="present-card" id="presentCard"><img id="presentImg" alt=""></div>
+    <div class="word-label show" id="presentWord"></div>
+  </div>
+
+  <div class="screen" id="fog">
+    <div class="fog-card" id="fogCard"><img class="word-img" id="fogImg" alt=""><div class="fog" id="fogFog"></div></div>
+    <div class="word-label" id="fogWord"></div>
+    <button class="btn purple" id="fogShow" style="position:absolute;bottom:92px">👀</button>
+  </div>
+
+  <div class="screen" id="miming" style="background:radial-gradient(ellipse at 50% 30%,#3a1a66,#1a0b2e)">
+    <div class="big-title" style="position:absolute;top:36px">Guess the word! 🎭</div>
+    <div class="pic-grid" id="mimingGrid"></div>
+  </div>
+
+  <div class="screen" id="circle" style="background:radial-gradient(ellipse at 50% 30%,#3a1a66,#1a0b2e)">
+    <div class="big-title" id="circleTitle" style="position:absolute;top:40px"></div>
+    <div class="pic-grid" id="circleGrid"></div>
+  </div>
+
+  <div class="screen" id="spotlight-screen">
+    <div class="spot-field" id="spotField"></div>
+    <div class="spot-dark" id="spotDark"></div>
+    <div class="spot-ring" id="spotRing"></div>
+    <div class="big-title" id="spotTitle" style="position:absolute;top:30px"></div>
+  </div>
+
+  <div class="screen" id="knock">
+    <div class="big-title" style="position:absolute;top:28px">Knock, knock! Who's there? 🚪</div>
+    <div class="doors" id="doors"></div>
+  </div>
+
+  <div class="screen" id="peek">
+    <div class="stage" id="peekStage">
+      <img class="room-bg" id="peekBg" alt="">
+      <div class="peek-clip" id="peekClip"><img class="peek-sprite" id="peekSprite" alt=""></div>
+      <img class="peek-out" id="peekOut" alt="">
+    </div>
+    <div class="room-cap" id="peekCap"></div>
+    <button class="btn purple" id="peekShow">👀</button>
+  </div>
+
+  <div class="screen" id="cauldron">
+    <div class="big-title" id="cauldTitle" style="position:absolute;top:28px"></div>
+    <div class="cauld-row">
+      <div class="cauld-wrap" id="cauldWrap">
+        <svg class="cauld-fire" viewBox="80 170 150 80" aria-hidden="true">
+          <g class="flame"><path d="M95 250 Q100 205 125 190 Q120 220 140 228 Q145 195 165 180 Q170 215 185 222 Q195 200 210 195 Q205 230 210 250 Z" fill="#ff8a1e"/>
+            <path d="M120 250 Q125 220 140 212 Q142 232 155 236 Q160 214 172 206 Q176 232 185 250 Z" fill="#ffd34a"/></g>
+        </svg>
+        <img class="cauld-pot" id="cauldPot" alt="">
+        <img class="cauld-pot potion" id="cauldPotion" alt="">
+        <div id="cauldBubbles"></div>
+        <div class="cauld-popclip" id="cauldPopClip"></div>
+      </div>
+      <div><div class="cauld-count" id="cauldCount">0</div><div class="cauld-dots" id="cauldDots"></div></div>
+    </div>
+    <div class="cauld-shelf" id="cauldShelf"></div>
+  </div>
+
+  <div class="screen" id="spotdiff">
+    <div class="big-title" style="position:absolute;top:28px">Spot the difference! 🔍</div>
+    <div class="sd-row"><div class="sd-wrap" id="sdWrapA"><img id="sdA" alt=""><span class="sd-lbl">1</span></div><div class="sd-wrap" id="sdWrapB"><img id="sdB" alt=""><span class="sd-lbl">2</span></div></div>
+  </div>
+
+  <div class="screen" id="monster">
+    <div id="monTask"></div>
+    <div class="mon-row">
+      <div class="mon-stage" id="monStage"></div>
+      <div class="mon-panel">
+        <div id="monColors"></div>
+        <div class="r"><img class="ic" id="icEye"><button onclick="monSet('eyes',-1)">−</button><b id="monEyes"></b><button onclick="monSet('eyes',1)">+</button></div>
+        <div class="r"><img class="ic" id="icArm"><button onclick="monSet('arms',-1)">−</button><b id="monArms"></b><button onclick="monSet('arms',1)">+</button></div>
+        <div class="r"><img class="ic" id="icLeg"><button onclick="monSet('legs',-1)">−</button><b id="monLegs"></b><button onclick="monSet('legs',1)">+</button></div>
+        <div class="r"><img class="ic" id="icHorn"><button onclick="monSet('horns',-1)">−</button><b id="monHorns"></b><button onclick="monSet('horns',1)">+</button></div>
+        <button class="btn green" id="monCheck" onclick="monCheck()">✓</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="anagram">
+    <img class="ana-img" id="anaImg" alt="">
+    <div class="ana-slots" id="anaSlots"></div>
+    <div class="ana-tiles" id="anaTiles"></div>
+  </div>
+
+  <div class="screen" id="board">
+    <div class="stage" id="boardStage"><img class="room-bg" id="boardBg" alt=""></div>
+    <div id="boardPick"><div class="big-title">🎲</div><div id="boardPawns"></div><button class="btn green" id="boardGo">▶</button></div>
+    <div class="board-ui" id="boardDice" style="display:none"><img class="who" id="boardWho" alt=""><div id="boardWhoName"></div><button id="diceBtn"><span id="diceFace">⚀</span></button></div>
+    <div id="boardCard"><img id="boardCardImg" alt=""><div id="boardCardT"></div><div id="boardCardS"></div><button class="btn green" id="boardCardOk">✓</button></div>
+  </div>
+
+  <div class="screen" id="odd" style="background:radial-gradient(ellipse at 50% 30%,#3a1a66,#1a0b2e)">
+    <div class="big-title" id="oddTitle" style="position:absolute;top:40px"></div>
+    <div class="pic-grid" id="oddGrid"></div>
+  </div>
+
+  <div class="screen" id="howmany" style="background:radial-gradient(ellipse at 50% 30%,#3a1a66,#1a0b2e)">
+    <div class="big-title" id="howmanyTitle" style="position:absolute;top:36px"></div>
+    <div id="howmanyScene" style="position:relative;width:min(720px,84vw);height:min(320px,38vh);z-index:10"></div>
+    <div class="pic-grid" id="howmanyOpts" style="margin-top:6px"></div>
+  </div>
+
+  <div class="screen" id="ilike" style="background:radial-gradient(ellipse at 50% 30%,#3a1a66,#1a0b2e)">
+    <div class="big-title" style="position:absolute;top:32px">Do you like it? 👍👎</div>
+    <div class="like-stage" id="likeCardWrap">
+      <div class="like-card"><img id="likeImg" alt=""></div>
+      <div class="like-thumbs"><button class="thumb" id="likeUp">👍</button><button class="thumb" id="likeDown">👎</button></div>
+    </div>
+  </div>
+
+  <div class="screen" id="missing" style="background:radial-gradient(ellipse at 50% 30%,#3a1a66,#1a0b2e)">
+    <div class="big-title" id="missingTitle" style="position:absolute;top:40px"></div>
+    <div class="pic-grid" id="missingGrid"></div>
+    <button class="btn purple" id="missingReveal" style="margin-top:22px;display:none">👀</button>
+  </div>
+
+  <!-- ROOM -->
+  <div class="screen" id="room-screen">
+    <div class="room-wrap" id="room-wrap"><div class="stage">
+      <img class="room-bg" id="roomBg" alt="room">
+      <img class="room-bg top" id="roomBgNew" alt="">
+      <img class="room-dragon" id="roomDragon" alt="">
+      <div class="hl-dim" id="hlDim"></div>
+      <div class="hl-ring" id="hlRing"></div>
+    </div></div>
+    <div class="room-cap" id="roomCap"></div>
+    <button class="btn purple" id="roomGames" style="position:absolute;bottom:92px;z-index:6;display:none">🎮 ←</button>
+  </div>
+
+  <!-- IF-TIME -->
+  <div class="screen" id="iftime" style="background:radial-gradient(ellipse at 50% 30%,#3a1a66,#1a0b2e)">
+    <div class="big-title" style="position:absolute;top:44px">Bonus games! 🎁</div>
+    <div class="choices" id="iftimeMenu"></div>
+    <button class="btn green" id="toFinish" style="margin-top:34px">Finish 🏁</button>
+  </div>
+
+  <!-- BONUS game screen -->
+  <div class="screen" id="bonus-screen">
+    <div class="big-title" id="bonusTitle" style="position:absolute;top:34px"></div>
+    <div id="bonusBody" style="display:flex;flex-direction:column;align-items:center;z-index:10;margin-top:30px"></div>
+    <div style="position:absolute;bottom:84px;right:20px;display:flex;flex-direction:column;align-items:flex-end;gap:10px;z-index:10">
+      <button class="btn purple" id="bonusBack" style="font-size:20px;padding:10px 26px">←</button>
+      <button class="btn green pulse" id="bonusDone" style="display:none;font-size:26px;padding:12px 30px">🎁</button>
+    </div>
+  </div>
+
+  <!-- FINISH -->
+  <div class="screen" id="finish">
+    <div class="big-title" style="position:absolute;top:24px">🎉 Your Spooky Room! 🎃</div>
+    <div class="photo-frame"><img id="finishPhoto" alt="room photo"><div class="cap">My Halloween Room 🎃</div></div>
+    <div class="finish-actions">
+      <button class="btn purple" id="finishBack">←</button>
+      <button class="btn green" id="saveBtn">💾 Save photo</button>
+      <button class="btn purple" id="replayBtn">🔄 Play again</button>
+    </div>
+  </div>
+
+  <div class="screen" id="shop">
+    <div class="big-title" style="position:absolute;top:40px">🍬 × <span id="shopN">0</span> — choose a surprise! 🎁</div>
+    <div class="choices" id="shopRow"></div>
+  </div>
+  <div class="screen" id="party"><img class="party-bg" id="partyBg" alt=""></div>
+  <div id="story"><img id="storyImg" alt=""><div class="say" id="storyText"></div></div>
+  <div class="done-check" id="doneCheck">✓ Well done!</div>
+  <div class="toast" id="toast"></div>
+  <div class="confetti" id="confetti"></div>
+  <canvas id="photoCanvas" style="display:none"></canvas>
+  <audio id="bgMusic" loop></audio>
+</div>
+<script>
+const ASSETS={"room_01": "https://classroom.wowteach.ru/media/halloween/7-9/room_01.webp", "door_3": "https://classroom.wowteach.ru/media/halloween/7-9/door_3.webp", "w_pumpkin": "https://classroom.wowteach.ru/media/halloween/7-9/w_pumpkin.webp", "arm": "https://classroom.wowteach.ru/media/halloween/7-9/arm.webp", "door_2": "https://classroom.wowteach.ru/media/halloween/7-9/door_2.webp", "w_house": "https://classroom.wowteach.ru/media/halloween/7-9/w_house.webp", "w_mummy": "https://classroom.wowteach.ru/media/halloween/7-9/w_mummy.webp", "pawn_bat": "https://classroom.wowteach.ru/media/halloween/7-9/pawn_bat.webp", "room_07": "https://classroom.wowteach.ru/media/halloween/7-9/room_07.webp", "w_cat": "https://classroom.wowteach.ru/media/halloween/7-9/w_cat.webp", "room_05": "https://classroom.wowteach.ru/media/halloween/7-9/room_05.webp", "body_orange": "https://classroom.wowteach.ru/media/halloween/7-9/body_orange.webp", "diff_5": "https://classroom.wowteach.ru/media/halloween/7-9/diff_5.webp", "mouth": "https://classroom.wowteach.ru/media/halloween/7-9/mouth.webp", "room_00": "https://classroom.wowteach.ru/media/halloween/7-9/room_00.webp", "w_ghost": "https://classroom.wowteach.ru/media/halloween/7-9/w_ghost.webp", "eye": "https://classroom.wowteach.ru/media/halloween/7-9/eye.webp", "room_03": "https://classroom.wowteach.ru/media/halloween/7-9/room_03.webp", "horn_r": "https://classroom.wowteach.ru/media/halloween/7-9/horn_r.webp", "room_04": "https://classroom.wowteach.ru/media/halloween/7-9/room_04.webp", "w_spider": "https://classroom.wowteach.ru/media/halloween/7-9/w_spider.webp", "pawn_cat": "https://classroom.wowteach.ru/media/halloween/7-9/pawn_cat.webp", "door_5": "https://classroom.wowteach.ru/media/halloween/7-9/door_5.webp", "horn_l": "https://classroom.wowteach.ru/media/halloween/7-9/horn_l.webp", "w_broom": "https://classroom.wowteach.ru/media/halloween/7-9/w_broom.webp", "body_purple": "https://classroom.wowteach.ru/media/halloween/7-9/body_purple.webp", "room_02": "https://classroom.wowteach.ru/media/halloween/7-9/room_02.webp", "candy": "https://classroom.wowteach.ru/media/halloween/7-9/candy.webp", "diff_6b": "https://classroom.wowteach.ru/media/halloween/7-9/diff_6b.webp", "pawn_pumpkin": "https://classroom.wowteach.ru/media/halloween/7-9/pawn_pumpkin.webp", "leg": "https://classroom.wowteach.ru/media/halloween/7-9/leg.webp", "room_06": "https://classroom.wowteach.ru/media/halloween/7-9/room_06.webp", "body_blue": "https://classroom.wowteach.ru/media/halloween/7-9/body_blue.webp", "door_1": "https://classroom.wowteach.ru/media/halloween/7-9/door_1.webp", "w_bat": "https://classroom.wowteach.ru/media/halloween/7-9/w_bat.webp", "pawn_ghost": "https://classroom.wowteach.ru/media/halloween/7-9/pawn_ghost.webp", "bg7_night": "https://classroom.wowteach.ru/media/halloween/7-9/bg7_night.webp", "room_08": "https://classroom.wowteach.ru/media/halloween/7-9/room_08.webp", "w_vampire": "https://classroom.wowteach.ru/media/halloween/7-9/w_vampire.webp", "body_green": "https://classroom.wowteach.ru/media/halloween/7-9/body_green.webp", "room_11": "https://classroom.wowteach.ru/media/halloween/7-9/room_11.webp", "w_witch": "https://classroom.wowteach.ru/media/halloween/7-9/w_witch.webp", "w_monster": "https://classroom.wowteach.ru/media/halloween/7-9/w_monster.webp", "room_09": "https://classroom.wowteach.ru/media/halloween/7-9/room_09.webp", "pawn_5": "https://classroom.wowteach.ru/media/halloween/7-9/pawn_5.webp", "w_skeleton": "https://classroom.wowteach.ru/media/halloween/7-9/w_skeleton.webp", "diff_0": "https://classroom.wowteach.ru/media/halloween/7-9/diff_0.webp", "board7": "https://classroom.wowteach.ru/media/halloween/7-9/board7.webp", "warmup7": "https://classroom.wowteach.ru/media/halloween/7-9/warmup7.webp", "room_10": "https://classroom.wowteach.ru/media/halloween/7-9/room_10.webp", "door_4": "https://classroom.wowteach.ru/media/halloween/7-9/door_4.webp", "party": "https://classroom.wowteach.ru/media/halloween/7-9/party.webp", "shop_a": "https://classroom.wowteach.ru/media/halloween/7-9/shop_a.webp", "shop_a_thumb": "https://classroom.wowteach.ru/media/halloween/7-9/shop_a_thumb.webp", "shop_b": "https://classroom.wowteach.ru/media/halloween/7-9/shop_b.webp", "shop_b_thumb": "https://classroom.wowteach.ru/media/halloween/7-9/shop_b_thumb.webp", "shop_c": "https://classroom.wowteach.ru/media/halloween/7-9/shop_c.webp", "shop_c_thumb": "https://classroom.wowteach.ru/media/halloween/7-9/shop_c_thumb.webp"};
+const SLOTS={};
+const MUSIC="https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/halloween/music_2c44a14b.mp3";
+const $=id=>document.getElementById(id);
+function img(k){return ASSETS[k];}
+const PLAN_HTML="<!DOCTYPE html><html lang=\"ru\"><head><meta charset=\"UTF-8\"><title>\u041f\u043b\u0430\u043d \u0443\u0440\u043e\u043a\u0430 \u2014 Halloween 7\u20139 \u2014 \u043f\u0440\u043e\u0434\u043e\u043b\u0436\u0430\u044e\u0449\u0438\u0435</title><style>body{font-family:'Segoe UI',Arial,sans-serif;background:#f5f0fa;color:#2a1550;padding:24px;max-width:1050px;margin:0 auto;line-height:1.5}\nh1{color:#5a2ea8;font-size:26px}.meta,.voc{background:#fff;border-radius:12px;padding:14px 18px;margin:12px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.meta b{color:#5a2ea8}\ntable{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.1)}\nth{background:#7b4bd6;color:#fff;padding:10px 12px;text-align:left;font-size:14px}td{padding:10px 12px;border-bottom:1px solid #eee;vertical-align:top;font-size:14px}\ntr:nth-child(even){background:#faf7fe}.pg{font-weight:700;color:#e8631a;font-size:18px;text-align:center;width:50px}.tl{color:#1a7a3a;font-style:italic;width:24%}.sa{color:#1f5fa8;font-style:italic;width:24%}</style></head><body><h1>\ud83c\udf83 \u041f\u043b\u0430\u043d \u0443\u0440\u043e\u043a\u0430: Halloween 7\u20139 \u2014 \u043f\u0440\u043e\u0434\u043e\u043b\u0436\u0430\u044e\u0449\u0438\u0435</h1><div class=\"meta\"><b>\u0414\u043b\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c:</b> 35\u201340 \u043c\u0438\u043d. &nbsp; <b>\u041c\u043e\u0442\u0438\u0432\u0430\u0446\u0438\u044f:</b> \u0443\u043a\u0440\u0430\u0448\u0430\u0435\u043c \u043a\u043e\u043c\u043d\u0430\u0442\u0443 \u043a \u0425\u044d\u043b\u043b\u043e\u0443\u0438\u043d\u0443 \u2014 \u0437\u0430 \u043a\u0430\u0436\u0434\u0443\u044e \u0438\u0433\u0440\u0443 \u043d\u043e\u0432\u043e\u0435 \u0443\u043a\u0440\u0430\u0448\u0435\u043d\u0438\u0435, \u0432 \u043a\u043e\u043d\u0446\u0435 \u0444\u043e\u0442\u043e.</div><table><tr><th>\u0421\u0442\u0440.</th><th>\u0417\u0430\u0434\u0430\u043d\u0438\u0435 \u0438 \u0438\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u044f</th><th>Teacher's language</th><th>Suggested answers / Students' answers</th></tr><tr><td class=\"pg\">1</td><td><b>Warm-up.</b> \u041a\u0430\u0440\u0442\u0438\u043d\u043a\u0430 \u0445\u044d\u043b\u043b\u043e\u0443\u0438\u043d\u0441\u043a\u043e\u0439 \u0443\u043b\u0438\u0446\u044b. \u041d\u0430 \u044d\u043a\u0440\u0430\u043d\u0435 \u043d\u0438\u0447\u0435\u0433\u043e \u043d\u0435 \u043d\u0430\u043f\u0438\u0441\u0430\u043d\u043e \u2014 \u0432\u043e\u043f\u0440\u043e\u0441\u044b \u0437\u0430\u0434\u0430\u0451\u0442 \u0443\u0447\u0438\u0442\u0435\u043b\u044c.</td><td class=\"tl\">\"What can you see?\" \"What is the witch doing?\" \"What holiday is it?\"</td><td class=\"sa\">\"There is a witch on a broom. There are bats in the sky.\" \"She is flying.\" \"It's Halloween!\"</td></tr><tr><td class=\"pg\">2</td><td><b>\u041d\u043e\u0432\u044b\u0435 \u0441\u043b\u043e\u0432\u0430</b> (8). \u041f\u043e\u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0430 \u2014 \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u043d\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u0441\u043b\u043e\u0432\u043e, \u0443\u0447\u0435\u043d\u0438\u043a \u043f\u043e\u0432\u0442\u043e\u0440\u044f\u0435\u0442. \u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u0435 \u0441\u043b\u043e\u0432\u043e \u2014 Next \u0438\u043b\u0438 \u043d\u0430\u0436\u0430\u0442\u0438\u0435 \u043d\u0430 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0443.</td><td class=\"tl\">\"Look! It's a vampire. He's scary! Say: vampire!\"</td><td class=\"sa\">\"Vampire!\" \"It's a vampire. He's scary.\"</td></tr><tr><td class=\"pg\">3</td><td><b>\u041a\u043e\u043c\u043d\u0430\u0442\u0430.</b> \u041f\u0443\u0441\u0442\u0430\u044f \u043a\u043e\u043c\u043d\u0430\u0442\u0430. \u041f\u0440\u0438\u043b\u0435\u0442\u0430\u0435\u0442 \u043f\u0440\u0438\u0432\u0438\u0434\u0435\u043d\u0438\u0435 Boo \u0438 \u043f\u0440\u043e\u0441\u0438\u0442 \u043f\u043e\u043c\u043e\u0447\u044c \u0443\u043a\u0440\u0430\u0441\u0438\u0442\u044c \u043a\u043e\u043c\u043d\u0430\u0442\u0443 \u043a \u0432\u0435\u0447\u0435\u0440\u0438\u043d\u043a\u0435. \u0417\u0430 \u043a\u0430\u0436\u0434\u0443\u044e \u0438\u0433\u0440\u0443 \u0432 \u043a\u043e\u043c\u043d\u0430\u0442\u0435 \u043f\u043e\u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u0443\u043a\u0440\u0430\u0448\u0435\u043d\u0438\u0435.</td><td class=\"tl\">\"This is the room. Is it nice? Let's decorate it for Halloween!\"</td><td class=\"sa\">\"It's empty!\" \"Let's decorate it!\"</td></tr><tr><td class=\"pg\">4</td><td><b>\u0412\u043e\u043b\u0448\u0435\u0431\u043d\u044b\u0439 \u0442\u0443\u043c\u0430\u043d (8 \u0440\u0430\u0443\u043d\u0434\u043e\u0432 \u2014 \u0432\u0441\u0435 \u0441\u043b\u043e\u0432\u0430).</b> \u0422\u0443\u043c\u0430\u043d \u043c\u0435\u0434\u043b\u0435\u043d\u043d\u043e \u0440\u0430\u0441\u0441\u0435\u0438\u0432\u0430\u0435\u0442\u0441\u044f, \u0443\u0447\u0435\u043d\u0438\u043a \u0443\u0433\u0430\u0434\u044b\u0432\u0430\u0435\u0442 \u043a\u0430\u043a \u043c\u043e\u0436\u043d\u043e \u0440\u0430\u043d\u044c\u0448\u0435. \u0423\u0433\u0430\u0434\u0430\u043b \u2014 \u043d\u0430\u0436\u043c\u0438\u0442\u0435 \u043d\u0430 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0443 \u0438\u043b\u0438 \ud83d\udc40. \u041f\u0440\u043e\u0441\u0438\u0442\u0435 \u043e\u0442\u0432\u0435\u0442 \u0441 \u043f\u0440\u0438\u043b\u0430\u0433\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u043c. \u041f\u043e\u0441\u043b\u0435 \u0438\u0433\u0440\u044b \u0437\u0430\u0433\u043e\u0440\u0430\u0435\u0442\u0441\u044f Next \u2014 \u043e\u0442\u043a\u0440\u043e\u0435\u0442\u0441\u044f \u043a\u043e\u043c\u043d\u0430\u0442\u0430, \u043d\u043e\u0432\u043e\u0435 \u0443\u043a\u0440\u0430\u0448\u0435\u043d\u0438\u0435 \u043f\u043e\u0434\u0441\u0432\u0435\u0442\u0438\u0442\u0441\u044f. \u0421\u043f\u0440\u043e\u0441\u0438\u0442\u0435 \u00abWhat's new?\u00bb. \u041a\u0440\u0443\u0436\u043e\u0447\u043a\u0438 \u0432\u0432\u0435\u0440\u0445\u0443 \u2014 \u0440\u0430\u0443\u043d\u0434\u044b.</td><td class=\"tl\">\"What is it? Describe it.\"</td><td class=\"sa\">\"It's a big black spider!\" \"It's a scary haunted house.\"</td></tr><tr><td class=\"pg\">5</td><td><b>Knock, knock! (8 \u0434\u0432\u0435\u0440\u0435\u0439 \u2014 \u0432\u0441\u0435 \u0441\u043b\u043e\u0432\u0430).</b> \u0414\u0432\u0435\u0440\u0438 \u0440\u0430\u0437\u043d\u044b\u0445 \u0446\u0432\u0435\u0442\u043e\u0432, \u0431\u0435\u0437 \u043d\u043e\u043c\u0435\u0440\u043e\u0432: \u0443\u0447\u0435\u043d\u0438\u043a \u0432\u044b\u0431\u0438\u0440\u0430\u0435\u0442 \u0434\u0432\u0435\u0440\u044c \u043f\u043e \u0446\u0432\u0435\u0442\u0443, \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u043d\u0430\u0436\u0438\u043c\u0430\u0435\u0442 \u2014 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u0436 \u0432\u044b\u043f\u0440\u044b\u0433\u0438\u0432\u0430\u0435\u0442. \u041f\u043e\u0434\u043f\u0438\u0441\u0435\u0439 \u043d\u0435\u0442: \u0443\u0447\u0435\u043d\u0438\u043a \u0441\u0430\u043c \u043d\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u0435\u0433\u043e. \u041f\u043e\u0441\u043b\u0435 \u0438\u0433\u0440\u044b \u0437\u0430\u0433\u043e\u0440\u0430\u0435\u0442\u0441\u044f Next \u2014 \u043e\u0442\u043a\u0440\u043e\u0435\u0442\u0441\u044f \u043a\u043e\u043c\u043d\u0430\u0442\u0430, \u043d\u043e\u0432\u043e\u0435 \u0443\u043a\u0440\u0430\u0448\u0435\u043d\u0438\u0435 \u043f\u043e\u0434\u0441\u0432\u0435\u0442\u0438\u0442\u0441\u044f. \u0421\u043f\u0440\u043e\u0441\u0438\u0442\u0435 \u00abWhat's new?\u00bb. \u041a\u0440\u0443\u0436\u043e\u0447\u043a\u0438 \u0432\u0432\u0435\u0440\u0445\u0443 \u2014 \u0440\u0430\u0443\u043d\u0434\u044b.</td><td class=\"tl\">\"Which door do you want?\" \"Knock, knock! Who's there? Is it scary?\"</td><td class=\"sa\">\"The yellow door, please!\" \"It's a vampire. He's scary!\"</td></tr><tr><td class=\"pg\">6</td><td><b>\u0424\u043e\u043d\u0430\u0440\u0438\u043a (3 \u0440\u0430\u0443\u043d\u0434\u0430).</b> \u042d\u043a\u0440\u0430\u043d \u0442\u0451\u043c\u043d\u044b\u0439, \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0438 \u0441\u043f\u0440\u044f\u0442\u0430\u043d\u044b. \u0423\u0447\u0438\u0442\u0435\u043b\u044c \u0432\u043e\u0434\u0438\u0442 \u0444\u043e\u043d\u0430\u0440\u0438\u043a \u043c\u044b\u0448\u043a\u043e\u0439, \u0443\u0447\u0435\u043d\u0438\u043a \u0433\u043e\u0432\u043e\u0440\u0438\u0442, \u043a\u0443\u0434\u0430 \u0441\u0432\u0435\u0442\u0438\u0442\u044c. \u041d\u0430\u0448\u043b\u0438 \u2014 \u043d\u0430\u0436\u043c\u0438\u0442\u0435 \u043d\u0430 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0443. \u0412\u0432\u0435\u0440\u0445\u0443 \u2014 \u0437\u0430\u0433\u0430\u0434\u043a\u0430-\u043e\u043f\u0438\u0441\u0430\u043d\u0438\u0435, \u0443\u0447\u0435\u043d\u0438\u043a \u0447\u0438\u0442\u0430\u0435\u0442 \u0435\u0451 \u0438 \u0438\u0449\u0435\u0442. \u041f\u043e\u0441\u043b\u0435 \u0438\u0433\u0440\u044b \u0437\u0430\u0433\u043e\u0440\u0430\u0435\u0442\u0441\u044f Next \u2014 \u043e\u0442\u043a\u0440\u043e\u0435\u0442\u0441\u044f \u043a\u043e\u043c\u043d\u0430\u0442\u0430, \u043d\u043e\u0432\u043e\u0435 \u0443\u043a\u0440\u0430\u0448\u0435\u043d\u0438\u0435 \u043f\u043e\u0434\u0441\u0432\u0435\u0442\u0438\u0442\u0441\u044f. \u0421\u043f\u0440\u043e\u0441\u0438\u0442\u0435 \u00abWhat's new?\u00bb. \u041a\u0440\u0443\u0436\u043e\u0447\u043a\u0438 \u0432\u0432\u0435\u0440\u0445\u0443 \u2014 \u0440\u0430\u0443\u043d\u0434\u044b.</td><td class=\"tl\">\"Read the riddle. What is it? Where is it?\"</td><td class=\"sa\">\"It's black. It's got eight legs. It's a spider!\" \"Go left!\"</td></tr><tr><td class=\"pg\">7</td><td><b>Peekaboo (6 \u0440\u0430\u0443\u043d\u0434\u043e\u0432 \u2014 \u0432\u0441\u0435 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u0436\u0438).</b> \u041f\u0435\u0440\u0441\u043e\u043d\u0430\u0436 \u043f\u0440\u044f\u0447\u0435\u0442\u0441\u044f \u0432 \u043a\u043e\u043c\u043d\u0430\u0442\u0435: \u0437\u0430 \u0448\u043a\u0430\u0444\u043e\u043c, \u043f\u043e\u0434 \u043a\u0440\u043e\u0432\u0430\u0442\u044c\u044e, \u0437\u0430 \u0434\u0432\u0435\u0440\u044c\u044e, \u0432 \u043e\u043a\u043d\u0435. \u0412\u0438\u0434\u043d\u043e \u0442\u043e\u043b\u044c\u043a\u043e \u043a\u0443\u0441\u043e\u0447\u0435\u043a \u2014 \u0443\u0447\u0435\u043d\u0438\u043a \u0443\u0433\u0430\u0434\u044b\u0432\u0430\u0435\u0442. \u041d\u0430\u0436\u043c\u0438\u0442\u0435 \u043d\u0430 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u0436\u0430 \u0438\u043b\u0438 \ud83d\udc40. \u0423\u0447\u0435\u043d\u0438\u043a \u0433\u043e\u0432\u043e\u0440\u0438\u0442, \u043a\u0442\u043e \u043f\u0440\u044f\u0447\u0435\u0442\u0441\u044f \u0438 <b>\u0433\u0434\u0435</b>. \u041f\u043e\u0441\u043b\u0435 \u0438\u0433\u0440\u044b \u0437\u0430\u0433\u043e\u0440\u0430\u0435\u0442\u0441\u044f Next \u2014 \u043e\u0442\u043a\u0440\u043e\u0435\u0442\u0441\u044f \u043a\u043e\u043c\u043d\u0430\u0442\u0430, \u043d\u043e\u0432\u043e\u0435 \u0443\u043a\u0440\u0430\u0448\u0435\u043d\u0438\u0435 \u043f\u043e\u0434\u0441\u0432\u0435\u0442\u0438\u0442\u0441\u044f. \u0421\u043f\u0440\u043e\u0441\u0438\u0442\u0435 \u00abWhat's new?\u00bb. \u041a\u0440\u0443\u0436\u043e\u0447\u043a\u0438 \u0432\u0432\u0435\u0440\u0445\u0443 \u2014 \u0440\u0430\u0443\u043d\u0434\u044b.</td><td class=\"tl\">\"Who's hiding? Where is it?\"</td><td class=\"sa\">\"The bat is behind the door.\" \"The cat is under the bed.\"</td></tr><tr><td class=\"pg\">8</td><td><b>\u041d\u0430\u0439\u0434\u0438 \u043e\u0442\u043b\u0438\u0447\u0438\u044f (6).</b> \u0414\u0432\u0435 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0438. \u0423\u0447\u0435\u043d\u0438\u043a \u0438\u0449\u0435\u0442 \u043e\u0442\u043b\u0438\u0447\u0438\u044f, \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u043d\u0430\u0436\u0438\u043c\u0430\u0435\u0442 \u043d\u0430 \u043d\u0430\u0439\u0434\u0435\u043d\u043d\u043e\u0435 (\u043d\u0430 \u043b\u044e\u0431\u043e\u0439 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0435) \u2014 \u043e\u0442\u043b\u0438\u0447\u0438\u0435 \u043e\u0431\u0432\u043e\u0434\u0438\u0442\u0441\u044f \u043d\u0430 \u043e\u0431\u0435\u0438\u0445. \u041f\u043e\u0441\u043b\u0435 \u0438\u0433\u0440\u044b \u0437\u0430\u0433\u043e\u0440\u0430\u0435\u0442\u0441\u044f Next \u2014 \u043e\u0442\u043a\u0440\u043e\u0435\u0442\u0441\u044f \u043a\u043e\u043c\u043d\u0430\u0442\u0430, \u043d\u043e\u0432\u043e\u0435 \u0443\u043a\u0440\u0430\u0448\u0435\u043d\u0438\u0435 \u043f\u043e\u0434\u0441\u0432\u0435\u0442\u0438\u0442\u0441\u044f. \u0421\u043f\u0440\u043e\u0441\u0438\u0442\u0435 \u00abWhat's new?\u00bb. \u041a\u0440\u0443\u0436\u043e\u0447\u043a\u0438 \u0432\u0432\u0435\u0440\u0445\u0443 \u2014 \u0440\u0430\u0443\u043d\u0434\u044b.</td><td class=\"tl\">\"What's different? Compare the pictures.\"</td><td class=\"sa\">\"In picture 1 the cat is under the bench. In picture 2 it's on the bench.\" \"In picture 1 there are two bats. In picture 2 there is one bat.\" \"In picture 2 there isn't a spider.\" \"In picture 1 the broom is next to the door. In picture 2 it's on the roof.\"</td></tr><tr><td class=\"pg\">9</td><td><b>\u0421\u043e\u0431\u0435\u0440\u0438 \u043c\u043e\u043d\u0441\u0442\u0440\u0430 (3 \u0440\u0430\u0443\u043d\u0434\u0430 + \u0441\u0432\u043e\u0439 \u043c\u043e\u043d\u0441\u0442\u0440).</b> \u0412\u0432\u0435\u0440\u0445\u0443 \u0437\u0430\u0434\u0430\u043d\u0438\u0435. \u0423\u0447\u0435\u043d\u0438\u043a \u0441\u043e\u0431\u0438\u0440\u0430\u0435\u0442 \u043c\u043e\u043d\u0441\u0442\u0440\u0430 \u043a\u043d\u043e\u043f\u043a\u0430\u043c\u0438: \u0446\u0432\u0435\u0442, \u0433\u043b\u0430\u0437\u0430, \u0440\u0443\u043a\u0438, \u043d\u043e\u0433\u0438, \u0440\u043e\u0433\u0430. \u2713 \u2014 \u043f\u0440\u043e\u0432\u0435\u0440\u0438\u0442\u044c. \u0412 \u043a\u043e\u043d\u0446\u0435 \u0443\u0447\u0435\u043d\u0438\u043a \u0441\u043e\u0431\u0438\u0440\u0430\u0435\u0442 \u0441\u0432\u043e\u0435\u0433\u043e \u043c\u043e\u043d\u0441\u0442\u0440\u0430.</td><td class=\"tl\">\"Read and make the monster.\" \"Describe your monster.\"</td><td class=\"sa\">\"My monster is purple. It has got four eyes, four arms and two horns.\"</td></tr><tr><td class=\"pg\">10</td><td><b>\u0410\u043d\u0430\u0433\u0440\u0430\u043c\u043c\u0430 (8 \u0441\u043b\u043e\u0432).</b> \u041a\u0430\u0440\u0442\u0438\u043d\u043a\u0430-\u043f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0430 \u0438 \u043f\u0435\u0440\u0435\u043f\u0443\u0442\u0430\u043d\u043d\u044b\u0435 \u0431\u0443\u043a\u0432\u044b. \u0423\u0447\u0435\u043d\u0438\u043a \u043d\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u0431\u0443\u043a\u0432\u044b \u043f\u043e \u043f\u043e\u0440\u044f\u0434\u043a\u0443, \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u043d\u0430\u0436\u0438\u043c\u0430\u0435\u0442. <b>\u0415\u0441\u043b\u0438 \u0443\u0447\u0435\u043d\u0438\u043a \u0435\u0449\u0451 \u043d\u0435 \u0447\u0438\u0442\u0430\u0435\u0442</b> \u2014 \u043f\u0443\u0441\u0442\u044c \u043f\u0440\u043e\u0441\u0442\u043e \u043d\u0430\u0437\u043e\u0432\u0451\u0442 \u0441\u043b\u043e\u0432\u043e \u043f\u043e \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0435, \u0430 \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u0441\u043e\u0431\u0435\u0440\u0451\u0442 \u0435\u0433\u043e \u043a\u043d\u043e\u043f\u043a\u043e\u0439 Next (\u043e\u0434\u043d\u0430 \u0431\u0443\u043a\u0432\u0430 \u0437\u0430 \u043d\u0430\u0436\u0430\u0442\u0438\u0435). \u041f\u043e\u0441\u043b\u0435 \u0438\u0433\u0440\u044b \u0437\u0430\u0433\u043e\u0440\u0430\u0435\u0442\u0441\u044f Next \u2014 \u043e\u0442\u043a\u0440\u043e\u0435\u0442\u0441\u044f \u043a\u043e\u043c\u043d\u0430\u0442\u0430, \u043d\u043e\u0432\u043e\u0435 \u0443\u043a\u0440\u0430\u0448\u0435\u043d\u0438\u0435 \u043f\u043e\u0434\u0441\u0432\u0435\u0442\u0438\u0442\u0441\u044f. \u0421\u043f\u0440\u043e\u0441\u0438\u0442\u0435 \u00abWhat's new?\u00bb. \u041a\u0440\u0443\u0436\u043e\u0447\u043a\u0438 \u0432\u0432\u0435\u0440\u0445\u0443 \u2014 \u0440\u0430\u0443\u043d\u0434\u044b.</td><td class=\"tl\">\"Spell the word!\"</td><td class=\"sa\">\"Vampire! V-A-M-P-I-R-E.\"</td></tr><tr><td class=\"pg\">11</td><td><b>I like / I don't like (8 \u043a\u0430\u0440\u0442\u043e\u0447\u0435\u043a \u2014 \u0432\u0441\u0435 \u0441\u043b\u043e\u0432\u0430).</b> \u0423\u0447\u0435\u043d\u0438\u043a \u043e\u0442\u0432\u0435\u0447\u0430\u0435\u0442, \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u043d\u0430\u0436\u0438\u043c\u0430\u0435\u0442 \ud83d\udc4d \u0438\u043b\u0438 \ud83d\udc4e. \u041a\u043e\u043d\u0444\u0435\u0442\u0430 \u0434\u0430\u0451\u0442\u0441\u044f \u0437\u0430 \u043b\u044e\u0431\u043e\u0439 \u043e\u0442\u0432\u0435\u0442. \u041e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u043e \u0441 \u043f\u0440\u0438\u0447\u0438\u043d\u043e\u0439. \u041f\u043e\u0441\u043b\u0435 \u0438\u0433\u0440\u044b \u0437\u0430\u0433\u043e\u0440\u0430\u0435\u0442\u0441\u044f Next \u2014 \u043e\u0442\u043a\u0440\u043e\u0435\u0442\u0441\u044f \u043a\u043e\u043c\u043d\u0430\u0442\u0430, \u043d\u043e\u0432\u043e\u0435 \u0443\u043a\u0440\u0430\u0448\u0435\u043d\u0438\u0435 \u043f\u043e\u0434\u0441\u0432\u0435\u0442\u0438\u0442\u0441\u044f. \u0421\u043f\u0440\u043e\u0441\u0438\u0442\u0435 \u00abWhat's new?\u00bb. \u041a\u0440\u0443\u0436\u043e\u0447\u043a\u0438 \u0432\u0432\u0435\u0440\u0445\u0443 \u2014 \u0440\u0430\u0443\u043d\u0434\u044b.</td><td class=\"tl\">\"Do you like spiders? Why?\"</td><td class=\"sa\">\"I don't like spiders because they are scary.\" \"I like bats because they can fly.\"</td></tr><tr><td class=\"pg\">12</td><td><b>\u041d\u0430\u0441\u0442\u043e\u043b\u044c\u043d\u0430\u044f \u0438\u0433\u0440\u0430 \u00ab\u0414\u043e\u043c \u0441 \u043f\u0440\u0438\u0432\u0438\u0434\u0435\u043d\u0438\u044f\u043c\u0438\u00bb.</b> \u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u043e\u0442 1 \u0434\u043e 5 \u0444\u0438\u0448\u0435\u043a (\u0443\u0447\u0435\u043d\u0438\u043a\u0438 \u0438 \u0443\u0447\u0438\u0442\u0435\u043b\u044c) \u0438 \u043f\u043e\u0434\u043f\u0438\u0448\u0438\u0442\u0435 \u0438\u043c\u0435\u043d\u0430 \u043f\u043e\u0434 \u0444\u0438\u0448\u043a\u0430\u043c\u0438, \u043f\u043e\u0442\u043e\u043c \u25b6. \u041a\u0438\u0434\u0430\u0435\u043c \u043a\u0443\u0431\u0438\u043a (\ud83c\udfb2 \u0438\u043b\u0438 Next), \u0444\u0438\u0448\u043a\u0430 \u0438\u0434\u0451\u0442 \u0441\u0430\u043c\u0430. \u041d\u0430 \u043a\u043b\u0435\u0442\u043a\u0435 \u0441 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u043e\u0439 \u2014 \u043e\u0442\u0432\u0435\u0442\u0438\u0442\u044c \u043d\u0430 \u0432\u043e\u043f\u0440\u043e\u0441 \u043e \u043d\u0435\u0439. \u2b50 \u2014 \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u044c \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435, \u23e9 \u2014 \u0432\u043f\u0435\u0440\u0451\u0434 \u043d\u0430 2, \u23ea \u2014 \u043d\u0430\u0437\u0430\u0434 \u043d\u0430 2. \u041a\u0442\u043e \u043f\u0435\u0440\u0432\u044b\u043c \u0434\u043e\u0439\u0434\u0451\u0442 \u0434\u043e \u0434\u043e\u043c\u0430 \u2014 \u043f\u043e\u0431\u0435\u0434\u0438\u043b. \u041f\u043e\u0441\u043b\u0435 \u0438\u0433\u0440\u044b \u0437\u0430\u0433\u043e\u0440\u0430\u0435\u0442\u0441\u044f Next \u2014 \u043e\u0442\u043a\u0440\u043e\u0435\u0442\u0441\u044f \u043a\u043e\u043c\u043d\u0430\u0442\u0430, \u043d\u043e\u0432\u043e\u0435 \u0443\u043a\u0440\u0430\u0448\u0435\u043d\u0438\u0435 \u043f\u043e\u0434\u0441\u0432\u0435\u0442\u0438\u0442\u0441\u044f. \u0421\u043f\u0440\u043e\u0441\u0438\u0442\u0435 \u00abWhat's new?\u00bb. \u041a\u0440\u0443\u0436\u043e\u0447\u043a\u0438 \u0432\u0432\u0435\u0440\u0445\u0443 \u2014 \u0440\u0430\u0443\u043d\u0434\u044b.</td><td class=\"tl\">\"Roll the dice!\" \"Can it fly?\" \"How many legs has it got?\" \"Your turn!\"</td><td class=\"sa\">\"Yes, it can.\" \"It has got eight legs.\"</td></tr><tr><td class=\"pg\">13</td><td><b>\u0411\u043e\u043d\u0443\u0441\u043d\u044b\u0435 \u0438\u0433\u0440\u044b (\u0435\u0441\u043b\u0438 \u0435\u0441\u0442\u044c \u0432\u0440\u0435\u043c\u044f).</b> \u041c\u043e\u0436\u043d\u043e \u0441\u044b\u0433\u0440\u0430\u0442\u044c \u0432\u043e \u0432\u0441\u0435 \u0438\u043b\u0438 \u0441\u0440\u0430\u0437\u0443 \u043d\u0430\u0436\u0430\u0442\u044c Finish \ud83c\udfc1. \u041f\u043e\u0441\u043b\u0435 \u0438\u0433\u0440\u044b \u2014 \ud83c\udf81: \u0432 \u043a\u043e\u043c\u043d\u0430\u0442\u0435 \u043d\u043e\u0432\u043e\u0435 \u0443\u043a\u0440\u0430\u0448\u0435\u043d\u0438\u0435, \u00ab\ud83c\udfae \u2190\u00bb \u2014 \u043d\u0430\u0437\u0430\u0434 \u043a \u0441\u043f\u0438\u0441\u043a\u0443 \u0438\u0433\u0440.<br>\u2022 <b>Dance</b>: \u0441\u043d\u0430\u0447\u0430\u043b\u0430 4 \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0438 \u2014 \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u043f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u0434\u0432\u0438\u0436\u0435\u043d\u0438\u0435, \u0443\u0447\u0435\u043d\u0438\u043a \u043f\u043e\u0432\u0442\u043e\u0440\u044f\u0435\u0442. \u25b6 \u2014 \u043c\u0443\u0437\u044b\u043a\u0430, \u0441\u043a\u0435\u043b\u0435\u0442 \u0442\u0430\u043d\u0446\u0443\u0435\u0442, \u0443\u0447\u0435\u043d\u0438\u043a \u0442\u043e\u0436\u0435; \u043c\u0443\u0437\u044b\u043a\u0430 \u043e\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u043b\u0430\u0441\u044c \u2014 \u043f\u043e\u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0430, \u0443\u0447\u0435\u043d\u0438\u043a \u043f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u0434\u0432\u0438\u0436\u0435\u043d\u0438\u0435.<br>\u2022 <b>Memory</b>: \u043f\u0430\u0440\u044b \u00ab\u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0430 \u2014 \u0441\u043b\u043e\u0432\u043e\u00bb.<br>\u2022 <b>Shadows</b>: \u043d\u0430\u0439\u0442\u0438 \u0442\u0435\u043d\u044c (4 \u0440\u0430\u0443\u043d\u0434\u0430).</td><td class=\"tl\">\"Let's dance!\" \"Stop! What is it? Show me!\" \"Find the pairs!\"</td><td class=\"sa\">\"It's a bat. It can fly!\"</td></tr><tr><td class=\"pg\">14</td><td><b>\u041f\u043e\u0434\u0430\u0440\u043e\u043a \u0437\u0430 \u043a\u043e\u043d\u0444\u0435\u0442\u044b.</b> \u0412\u0432\u0435\u0440\u0445\u0443 \u2014 \u0441\u043a\u043e\u043b\u044c\u043a\u043e \u043a\u043e\u043d\u0444\u0435\u0442 \u0441\u043e\u0431\u0440\u0430\u043b \u0443\u0447\u0435\u043d\u0438\u043a (\ud83c\udf6c \u043f\u0430\u0434\u0430\u0435\u0442 \u0437\u0430 \u043a\u0430\u0436\u0434\u044b\u0439 \u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u044b\u0439 \u043e\u0442\u0432\u0435\u0442). \u0421\u043a\u043e\u043b\u044c\u043a\u043e \u0431\u044b \u043d\u0438 \u0441\u043e\u0431\u0440\u0430\u043b \u2014 \u0432\u044b\u0431\u0438\u0440\u0430\u0435\u0442 \u043e\u0434\u0438\u043d \u043f\u043e\u0434\u0430\u0440\u043e\u043a \u0432 \u043a\u043e\u043c\u043d\u0430\u0442\u0443: \u043a\u043e\u0442\u0451\u043b, \u0448\u0430\u0440\u0438\u043a\u0438 \u0438\u043b\u0438 \u043f\u043e\u0434\u0430\u0440\u043a\u0438. \u041d\u043e\u0432\u043e\u0435 \u0443\u043a\u0440\u0430\u0448\u0435\u043d\u0438\u0435 \u043f\u043e\u0434\u0441\u0432\u0435\u0442\u0438\u0442\u0441\u044f.</td><td class=\"tl\">\"How many candies have you got? What would you like for your room? Why?\"</td><td class=\"sa\">\"I've got 25 candies. I'd like the cauldron because it's magic.\"</td></tr><tr><td class=\"pg\">15</td><td><b>\u0412\u0435\u0447\u0435\u0440\u0438\u043d\u043a\u0430 Boo.</b> \u041f\u0440\u0438\u0432\u0438\u0434\u0435\u043d\u0438\u0435 Boo \u0431\u043b\u0430\u0433\u043e\u0434\u0430\u0440\u0438\u0442 \u0437\u0430 \u043f\u043e\u043c\u043e\u0449\u044c, \u0433\u043e\u0441\u0442\u0438 \u0442\u0430\u043d\u0446\u0443\u044e\u0442. \u0421\u043f\u0440\u043e\u0441\u0438\u0442\u0435, \u043a\u043e\u0433\u043e \u0443\u0447\u0435\u043d\u0438\u043a \u0432\u0438\u0434\u0438\u0442 \u043d\u0430 \u0432\u0435\u0447\u0435\u0440\u0438\u043d\u043a\u0435.</td><td class=\"tl\">\"Who is at the party? What are they doing?\"</td><td class=\"sa\">\"The skeleton is dancing. The ghost is flying.\"</td></tr><tr><td class=\"pg\">16</td><td><b>\u0424\u0438\u043d\u0430\u043b.</b> \u0424\u043e\u0442\u043e \u043a\u043e\u043c\u043d\u0430\u0442\u044b \u0441 \u0432\u044b\u0431\u0440\u0430\u043d\u043d\u044b\u043c \u043f\u043e\u0434\u0430\u0440\u043a\u043e\u043c. \u00abSave photo\u00bb \u2014 \u0441\u043a\u0430\u0447\u0430\u0442\u044c \u0438 \u043e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u0440\u043e\u0434\u0438\u0442\u0435\u043b\u044f\u043c. \u2190 \u2014 \u043d\u0430\u0437\u0430\u0434.</td><td class=\"tl\">\"Look at your room! Happy Halloween!\"</td><td class=\"sa\">\"Happy Halloween!\" \"Thank you!\"</td></tr></table><div class=\"voc\"><b>\ud83d\uddc2\ufe0f \u041b\u0435\u043a\u0441\u0438\u043a\u0430 \u0438 \u0433\u0440\u0430\u043c\u043c\u0430\u0442\u0438\u043a\u0430:</b> ghost, spider, witch, skeleton, vampire, mummy, broom, haunted house \u2022 scary, big, small, tall \u2022 There is / There are \u2022 in, on, under, behind, next to \u2022 has got \u2022 I like \u2026 because \u2026</div><div class=\"voc\" style=\"font-size:13px;color:#777\"><b>\u041d\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u044f:</b> \u2190 \u2192 \u2014 \u043d\u0430\u0437\u0430\u0434 / \u043f\u0440\u043e\u043f\u0443\u0441\u0442\u0438\u0442\u044c; Next \u0437\u0430\u0433\u043e\u0440\u0430\u0435\u0442\u0441\u044f, \u043a\u043e\u0433\u0434\u0430 \u0437\u0430\u0434\u0430\u043d\u0438\u0435 \u0432\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u043e, \u0430 \u0432 \u0438\u0433\u0440\u0430\u0445 \u0441 \u0440\u0430\u0443\u043d\u0434\u0430\u043c\u0438 \u0432\u0435\u0434\u0451\u0442 \u043a \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u043c\u0443 \u0440\u0430\u0443\u043d\u0434\u0443. \ud83d\udccb \u2014 \u044d\u0442\u043e\u0442 \u043f\u043b\u0430\u043d, \ud83c\udfb5 \u2014 \u043c\u0443\u0437\u044b\u043a\u0430. \u041a\u0440\u0443\u0436\u043e\u0447\u043a\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446 \u0432\u0432\u0435\u0440\u0445\u0443 \u0441\u043b\u0435\u0432\u0430 \u043a\u043b\u0438\u043a\u0430\u0431\u0435\u043b\u044c\u043d\u044b \u2014 \u043c\u043e\u0436\u043d\u043e \u0441\u0440\u0430\u0437\u0443 \u043f\u0435\u0440\u0435\u0439\u0442\u0438 \u043d\u0430 \u043b\u044e\u0431\u0443\u044e \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0443. \ud83c\udf6c \u0432\u0432\u0435\u0440\u0445\u0443 \u0441\u043f\u0440\u0430\u0432\u0430 \u2014 \u043a\u043e\u043f\u0438\u043b\u043a\u0430: \u0437\u0430 \u043a\u0430\u0436\u0434\u044b\u0439 \u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u044b\u0439 \u043e\u0442\u0432\u0435\u0442 \u0443\u0447\u0435\u043d\u0438\u043a\u0443 \u043f\u0430\u0434\u0430\u0435\u0442 \u043a\u043e\u043d\u0444\u0435\u0442\u0430.</div><div class=\"voc\"><b>\ud83c\udfe0 \u0414\u043e\u043c\u0430\u0448\u043d\u0435\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435</b> \u2014 \u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b <b>\u00abHalloween Homework \u00b7 7\u20139 \u00b7 continuing\u00bb</b> \u043d\u0430 \u043f\u043b\u0430\u0442\u0444\u043e\u0440\u043c\u0435: \u00ab\u041c\u0430\u0442\u0435\u0440\u0438\u0430\u043b\u044b\u00bb \u2192 \u00ab\u0417\u0430\u0434\u0430\u0442\u044c \u0414\u0417\u00bb \u2192 \u0443\u0447\u0435\u043d\u0438\u043a \u2192 \u043e\u0442\u043c\u0435\u0442\u0438\u0442\u044c. \u0422\u043e\u043b\u044c\u043a\u043e \u0441\u043b\u043e\u0432\u0430 \u0443\u0440\u043e\u043a\u0430, 10\u201315 \u043c\u0438\u043d\u0443\u0442. \u0417\u0430\u0434\u0430\u043d\u0438\u044f:<ol style=\"margin:6px 0 0 22px\"><li>\u041a\u0430\u0440\u0442\u043e\u0447\u043a\u0438 \u0441\u043e \u0437\u0432\u0443\u043a\u043e\u043c</li><li>\u0421\u043e\u0435\u0434\u0438\u043d\u0438 \u0441\u043b\u043e\u0432\u043e \u0438 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0443</li><li>\u0421\u043e\u0431\u0435\u0440\u0438 \u0441\u043b\u043e\u0432\u043e \u0438\u0437 \u0431\u0443\u043a\u0432</li><li>There is / There are</li><li>in / on / under</li><li>True / False \u043f\u043e \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0435</li><li>\ud83c\udfa4 \u0420\u0430\u0441\u0441\u043a\u0430\u0436\u0438 \u043f\u0440\u043e \u043a\u043e\u043c\u043d\u0430\u0442\u0443</li></ol><div style=\"color:#777;font-size:13px;margin-top:4px\">\u0423\u0441\u0442\u043d\u044b\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u044f \u0443\u0447\u0435\u043d\u0438\u043a \u0437\u0430\u043f\u0438\u0441\u044b\u0432\u0430\u0435\u0442 \u0433\u043e\u043b\u043e\u0441\u043e\u043c \u2014 \u0438\u0445 \u0432\u044b \u0441\u043b\u0443\u0448\u0430\u0435\u0442\u0435 \u0438 \u043e\u0446\u0435\u043d\u0438\u0432\u0430\u0435\u0442\u0435 \u0432 \u00ab\u041f\u0440\u043e\u0432\u0435\u0440\u043a\u0435 \u0414\u0417\u00bb.</div></div></body></html>";
+document.getElementById('bgMusic').src=MUSIC;
+</script>
+<script>"use strict";
+/* ===== Halloween Lesson Engine v2 (ages 4-6) ===== */
+const LEVEL="cont";
+const room={};           // room.dragon = chosen costume
+/* Room chain: room_00 (empty) ... room_10 (fully decorated). Each task opens the next picture. */
+const ROOM_COUNT=12;
+let ROOM_NEW=[];  // set from the level config
+/* where the new thing of each room is (x0,y0,x1,y1 in % of the picture) — for the highlight */
+const ROOM_HL=[null,[3,0,97,16],[24.5,8.5,35.5,31],[7.4,42.3,20.7,51.9],[51.8,21.5,66.9,35.3],[77,21.9,82.4,53],[85,19.6,92.6,77],[36.5,20,46.8,43.8],[67,42.8,71.7,51.3],[46.3,20.2,52.8,34],[22.1,24.7,25.5,32.3],[67.5,62,74.5,69.5]];
+let roomLevel=0;          // highest room already opened
+let revealCtx=null;       // {onContinue} while a new room is on screen
+
+/* ---- sound fx ---- */
+let ac=null,sfxOn=true;
+function audio(){if(!ac){try{ac=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}return ac;}
+function tone(f,d,t,v,sl){if(!sfxOn)return;const c=audio();if(!c)return;const o=c.createOscillator(),g=c.createGain();
+  o.type=t||"sine";o.frequency.setValueAtTime(f,c.currentTime);if(sl)o.frequency.exponentialRampToValueAtTime(sl,c.currentTime+d);
+  g.gain.setValueAtTime(v||.1,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);
+  o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+d+.02);}
+let sRight=()=>{tone(660,.08,"square",.1);setTimeout(()=>tone(990,.14,"square",.1),80);};
+const sWrong=()=>tone(200,.22,"sawtooth",.1,150);
+const sPick=()=>tone(700,.08,"triangle",.1);
+const sPop=()=>{tone(500,.08,"sine",.1,760);setTimeout(()=>tone(300,.08,"sine",.1),80);};
+const sReveal=()=>{tone(523,.1,"sine",.1);setTimeout(()=>tone(784,.14,"sine",.1),100);};
+function sCheer(){[523,659,784,1046,1319].forEach((f,i)=>setTimeout(()=>tone(f,.18,"triangle",.11),i*100));}
+
+/* ---- background music (real mp3) ---- */
+let musicOn=true;
+let musicVol=0.18;
+function playMusic(){const a=$("bgMusic");if(!musicOn)return;try{a.volume=musicVol;a.play().catch(()=>{});}catch(e){}}
+function setMusicVol(v){musicVol=v;const a=$("bgMusic");if(a)a.volume=v;}
+function stopMusic(){try{$("bgMusic").pause();}catch(e){}}
+
+/* ---- confetti / toast ---- */
+function confetti(){const wrap=$("confetti");const colors=["#ffc63a","#ff8a1e","#7b4bd6","#4fc04f","#ff6fae"];
+  for(let i=0;i<40;i++){const c=document.createElement("div");c.className="conf";c.style.left=Math.random()*100+"vw";c.style.background=colors[i%colors.length];c.style.borderRadius=Math.random()<.5?"50%":"2px";
+    c.animate([{transform:"translateY(-10vh) rotate(0)",opacity:1},{transform:"translateY(110vh) rotate("+(360+Math.random()*360)+"deg)",opacity:.9}],{duration:2000+Math.random()*1300,delay:Math.random()*300,easing:"linear"});
+    wrap.appendChild(c);setTimeout(()=>c.remove(),3500);}}
+function toast(t,c){const el=$("toast");el.textContent=t;el.style.color=c||"#fff";el.classList.remove("show");void el.offsetWidth;el.classList.add("show");}
+
+/* ================= STEP SYSTEM =================
+   Each step has an id + config. Navigation: Back / Next (skip) always available to teacher.
+   Rewards are chosen with a "Continue" button (look first, then continue). */
+let steps=[], stepIdx=0;
+function buildSteps(){
+  steps=[
+    {page:1, id:"wu-topic"},
+    {page:2, id:"present"},
+    {page:3, id:"roomintro"},
+    {page:4, id:"fog", rounds:8, room:1},
+    {page:5, id:"knock", room:2},
+    {page:6, id:"spotlight", rounds:3, room:3},
+    {page:7, id:"peek", rounds:8, room:4},
+    {page:8, id:"spotdiff", room:5},
+    {page:9, id:"monster", room:6},
+    {page:10, id:"anagram", room:7},
+    {page:11, id:"ilike", room:8},
+    {page:12, id:"board", room:9},
+    {page:13, id:"iftime"},
+    {page:14, id:"finish"}
+  ];
+  const fin=steps.pop();
+  if(ASSETS.shop_a)steps.push({id:"shop"});
+  if(ASSETS.party)steps.push({id:"party"});
+  steps.push(fin);steps.forEach((x,k)=>x.page=k+1);
+}
+/*MARKER*/
+/* ---- step completion + center Next ---- */
+let stepComplete=false;
+let roundNext=null;   // set by a multi-round game: what the big Next does before the game is finished
+function markStepDone(){
+  stepComplete=true;
+  const nb=$("navNextMain");
+  if(nb){nb.classList.add("ready");nb.textContent="Next 👉";}
+  sReveal();
+  // show a gentle "done" check
+  const chk=$("doneCheck");if(chk){chk.classList.add("show");}
+}
+function resetStepDone(){
+  stepComplete=false;
+  const nb=$("navNextMain");if(nb){nb.classList.remove("ready");nb.textContent="Next 👉";}
+  const chk=$("doneCheck");if(chk){chk.classList.remove("show");}
+}
+
+function updatePips(){const pips=$("pips");pips.innerHTML="";
+  for(let i=0;i<steps.length;i++){const d=document.createElement("div");d.className="pip"+(i<stepIdx?" done":(i===stepIdx?" cur":""));pips.appendChild(d);}
+  if(typeof pipsClickable==="function")pipsClickable();}
+function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));$(id+"-screen")?$(id+"-screen").classList.add("active"):$(id).classList.add("active");}
+function setPageNum(p){const el=$("pageNum");if(el)el.textContent=p+" / "+steps.length;}
+
+function goStep(i){
+  if(i<0)i=0; if(i>=steps.length)i=steps.length-1;
+  stepIdx=i;updatePips();resetStepDone();
+  const st=steps[i];st._roomShown=false;revealCtx=null;roundNext=null;stopSpot();clearGameTimers();freezeCleanup();setDots(0);hideHighlight();$("confetti").innerHTML="";storySay(null);
+  $("topbar").style.display="flex";$("navbar").style.display="flex";$("roomGames").style.display="none";
+  // on the bonus menu there is no big Next (it was mixed up with "finish") — only the arrows and the Finish button
+  $("navNextMain").style.display=(st.id==="iftime")?"none":"";
+  setPageNum(st.page);
+  const map={"wu-topic":setupTopic,"wu-emo":setupEmo,"wu-costume":setupCostume,"present":setupPresent,
+    "roomintro":setupRoomIntro,"shop":setupShop,"party":setupParty,"fog":setupFog,"miming":setupMiming,"circle":setupCircle,"spotlight":setupSpotlight,
+    "odd":setupOdd,"howmany":setupHowMany,"knock":setupKnock,"spotdiff":setupSpotDiff,"monster":setupMonster,"anagram":setupAnagram,"board":setupBoard,"peek":setupPeek,"cauldron":setupCauldron,"ilike":setupILike,"missing":setupMissing,"iftime":setupIfTime,"finish":setupFinish};
+  (map[st.id]||(()=>{}))(st);
+}
+function nextStep(){goStep(stepIdx+1);}
+/* round dots: several rounds inside one page */
+function setDots(total,done){const el=$("roundDots");if(!total){el.style.display="none";el.innerHTML="";return;}
+  el.style.display="flex";el.innerHTML="";
+  for(let i=0;i<total;i++){const d=document.createElement("span");d.className=i<done?"done":(i===done?"cur":"");el.appendChild(d);}}
+function prevStep(){goStep(stepIdx-1);}
+
+/* ---- screens ---- */
+function setupTopic(st){$("wuTopicBg").src=img("warmup7");showScreen("wu-topic");}
+
+function setupEmo(st){
+  // 3 big pumpkins, choose one (no overlay)
+  const box=$("emoBigRow");box.innerHTML="";
+  [["emo_happy","happy"],["emo_sad","sad"],["emo_angry","angry"]].forEach(([k,en])=>{
+    const d=document.createElement("div");d.className="choice";
+    d.innerHTML='<img src="'+img(k)+'"><span class="lbl">'+en+'</span>';
+    d.onclick=()=>{sPick();box.querySelectorAll('.choice').forEach(c=>c.classList.remove('sel'));d.classList.add('sel');};
+    box.appendChild(d);
+  });
+  showScreen("wu-emo");
+}
+
+function setupCostume(st){
+  const box=$("costumeChoices");box.innerHTML="";
+  [["dragon_vampire","Vampire 🧛"],["dragon_ghost","Ghost 👻"],["dragon_pumpkin","Pumpkin 🎃"]].forEach(([k,lbl])=>{
+    const d=document.createElement("div");d.className="choice";
+    d.innerHTML='<img src="'+img(k)+'"><span class="lbl">'+lbl+'</span>';
+    d.onclick=()=>{sPick();box.querySelectorAll('.choice').forEach(c=>c.classList.remove('sel'));d.classList.add('sel');room["dragon"]=k;sPop();};
+    box.appendChild(d);
+  });
+  showScreen("wu-costume");
+}
+
+let presentIdx=0;
+function setupPresent(st){presentIdx=0;showScreen("present");showPresentWord();}
+function showPresentWord(){
+  const wd=WORDS[presentIdx];
+  $("presentImg").src=img(wd.key);$("presentWord").textContent=wd.word;
+  const c=$("presentCard");c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");later(()=>charSound(wd.word),250);
+  setDots(WORDS.length,presentIdx);
+  if(presentIdx===WORDS.length-1)later(markStepDone,600);
+}
+function presentNext(){if(presentIdx<WORDS.length-1){presentIdx++;showPresentWord();return true;}return false;}
+$("presentCard").onclick=presentNext;
+
+/* MAGIC FOG — thick fog clears very slowly; child guesses as early as possible */
+let fogState=null;
+function setupFog(st){fogState={done:0,total:WORDS.length,order:shuffle(WORDS),busy:false,raf:0};showScreen("fog");roundNext=fogRoundNext;nextFog();}
+function nextFog(){
+  const fs=fogState,wd=fs.order[fs.done];fs.busy=false;
+  const fog=$("fogFog"),im=$("fogImg");
+  fog.style.transition="none";im.style.transition="none";fog.style.opacity="1";im.style.filter="blur(28px)";
+  $("fogWord").classList.remove("show");$("fogWord").textContent=wd.word;$("fogShow").style.display="";
+  setDots(fs.total,fs.done);
+  const nim=Object.assign(new Image(),{crossOrigin:'anonymous'});nim.onload=()=>{im.src=nim.src;};nim.src=img(wd.key);
+  void fog.offsetWidth;
+  // the fog thins out little by little over FOG_SECONDS (driven frame by frame, so it works in every browser)
+  cancelAnimationFrame(fs.raf);const t0=performance.now()+300;
+  const step=now=>{
+    if(fs.busy||!$("fog").classList.contains("active"))return;
+    const t=Math.max(0,Math.min(1,(now-t0)/(FOG_SECONDS*1000))),e=Math.pow(t,1.15);
+    fog.style.opacity=String(1-e);im.style.filter="blur("+(28*(1-e)).toFixed(1)+"px)";
+    if(t<1)fs.raf=requestAnimationFrame(step);};
+  fs.raf=requestAnimationFrame(step);
+}
+const FOG_SECONDS=6;
+function revealFog(){
+  const fs=fogState;if(!fs||fs.busy)return;fs.busy=true;cancelAnimationFrame(fs.raf);
+  const fog=$("fogFog"),im=$("fogImg");
+  fog.style.transition="opacity .9s ease";im.style.transition="filter .9s ease";fog.style.opacity="0";im.style.filter="blur(0px)";
+  $("fogShow").style.display="none";
+  const wdF=fs.order[fs.done];later(()=>{$("fogWord").classList.add("show");sRight();charSound(wdF.word);},700);
+  fs.done++;
+  if(fs.done>=fs.total)later(()=>{setDots(fs.total,fs.done);markStepDone();},1500);
+  else later(nextFog,3000);
+}
+$("fogShow").onclick=revealFog;
+function fogRoundNext(){if(!fogState.busy)revealFog();}$("fogCard").onclick=revealFog;
+
+/* room intro: show the (still empty) room — "let's decorate it!" */
+function setupRoomIntro(st){showRoom(roomLevel);setCap("Let's decorate! 🎃",true);showScreen("room");if(STORY)later(()=>storySay(STORY.start),700);}
+
+/* miming — teacher acts, child guesses. Click any word = correct. 1 pass (all 4 words shown). */
+function setupMiming(st){
+  const grid=$("mimingGrid");grid.innerHTML="";
+  WORDS.forEach(wd=>{const d=document.createElement("div");d.className="pic-item";
+    d.innerHTML='<img src="'+img(wd.key)+'"><div class="circle-mark"></div>';
+    d.onclick=()=>{sRight();d.classList.add("right");markStepDone();};
+    grid.appendChild(d);});
+  showScreen("miming");
+}
+
+/* CIRCLE IT — multiple rounds */
+let roundState={};
+function setupCircle(st){
+  roundState={done:0,total:st.rounds||3,reward:st.reward};
+  nextCircleRound();
+  showScreen("circle");
+}
+function nextCircleRound(){
+  const target=WORDS[Math.floor(Math.random()*WORDS.length)];
+  $("circleTitle").textContent="Circle the "+target.word+"! ⭕ ("+(roundState.done+1)+"/"+roundState.total+")";
+  const grid=$("circleGrid");grid.innerHTML="";
+  const order=WORDS.slice();for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  order.forEach(wd=>{const d=document.createElement("div");d.className="pic-item";
+    d.innerHTML='<img src="'+img(wd.key)+'"><div class="circle-mark"></div>';
+    d.onclick=()=>{
+      if(wd.key===target.key){sRight();d.classList.add("right");
+        roundState.done++;
+        if(roundState.done>=roundState.total){setTimeout(markStepDone,700);}
+        else setTimeout(nextCircleRound,900);
+      }else{sWrong();d.classList.add("wrong");setTimeout(()=>d.classList.remove("wrong"),400);}
+    };grid.appendChild(d);});
+  
+}
+
+
+/* SPOTLIGHT — the screen is dark; pictures are hidden in different places.
+   The teacher moves the light with the mouse (when the mouse rests, the light wanders by itself).
+   Tap the right picture when it is in the light. */
+const spot={raf:0,x:0,y:0,tx:0,ty:0,r:120,manualUntil:0,wanderAt:0,paused:false,target:null,last:0,done:0,total:4,order:[]};
+const SPOT_DECOYS=["pumpkin_big","candy"];
+function setupSpotlight(st){
+  spot.done=0;spot.total=st.rounds||3;spot.order=shuffle(WORDS);
+  showScreen("spotlight");
+  const o=$("spotlight-screen").getBoundingClientRect();
+  spot.x=spot.tx=o.width*0.5;spot.y=spot.ty=o.height*0.5;spot.paused=false;spot.manualUntil=0;spot.wanderAt=0;spot.last=0;
+  nextSpotRound();
+  roundNext=()=>{if(spot.paused)return;const it=[...$("spotField").children].find(c=>c.dataset.key===spot.target.key);
+    if(it){spot.tx=parseFloat(it.style.left);spot.ty=parseFloat(it.style.top);spotCheck(it);}};
+  cancelAnimationFrame(spot.raf);spot.raf=requestAnimationFrame(spotLoop);
+}
+function stopSpot(){cancelAnimationFrame(spot.raf);spot.raf=0;}
+function nextSpotRound(){
+  const target=spot.order[spot.done];spot.target=target;
+  $("spotTitle").textContent=LEVEL==="beg"?"Find the "+target.word+"! 🔦":target.riddle+" 🔦";
+  setDots(spot.total,spot.done);
+  const field=$("spotField"),o=field.getBoundingClientRect();field.innerHTML="";
+  const keys=shuffle([target.key].concat(shuffle(WORDS.filter(w=>w!==target)).slice(0,5).map(w=>w.key)));
+  const iw=Math.min(170,Math.max(110,o.width*0.11)),pts=[];
+  keys.forEach(k=>{
+    let best=null;
+    for(let t=0;t<200;t++){ // random places, not too close to each other, away from the title and the buttons
+      const x=o.width*(0.08+Math.random()*0.84),y=o.height*(0.26+Math.random()*0.52);
+      const dmin=Math.min(...pts.map(p=>Math.hypot(p[0]-x,p[1]-y)),1e9);
+      if(!best||dmin>best[2])best=[x,y,dmin];
+      if(dmin>iw*1.55)break;}
+    pts.push(best);
+    const im=document.createElement("img");im.className="spot-item";im.src=img(k);im.dataset.key=k;
+    im.style.left=best[0]+"px";im.style.top=best[1]+"px";im.style.width=iw+"px";
+    im.onclick=()=>{spot.tx=best[0];spot.ty=best[1];spotCheck(im);};
+    field.appendChild(im);});
+  spot.paused=false;$("spotRing").className="spot-ring";
+}
+function spotLoop(ts){
+  if(!$("spotlight-screen").classList.contains("active")){spot.raf=0;return;}
+  const dt=spot.last?Math.min(50,ts-spot.last):16;spot.last=ts;
+  const o=$("spotlight-screen").getBoundingClientRect();
+  spot.r=Math.max(95,Math.min(150,o.width*0.085));
+  const now=performance.now();
+  if(!spot.paused&&now>spot.manualUntil&&now>spot.wanderAt){ // wander slowly to a new random place
+    spot.tx=o.width*(0.1+Math.random()*0.8);spot.ty=o.height*(0.28+Math.random()*0.5);spot.wanderAt=now+2600;}
+  const k=1-Math.pow(now<spot.manualUntil?0.8:0.965,dt/16);spot.x+=(spot.tx-spot.x)*k;spot.y+=(spot.ty-spot.y)*k;
+  const dark=$("spotDark");dark.style.setProperty("--x",spot.x+"px");dark.style.setProperty("--y",spot.y+"px");dark.style.setProperty("--r",spot.r+"px");
+  const ring=$("spotRing");ring.style.left=spot.x+"px";ring.style.top=spot.y+"px";ring.style.width=ring.style.height=(spot.r*2)+"px";
+  spot.raf=requestAnimationFrame(spotLoop);
+}
+function spotCheck(item){
+  if(spot.paused||spot.done>=spot.total)return;
+  const ring=$("spotRing");
+  if(item.dataset.key===spot.target.key){
+    spot.paused=true;spot.manualUntil=performance.now()+1e6;
+    sRight();later(()=>charSound((WORDS.find(w=>w.key===item.dataset.key)||{}).word),250);item.classList.add("right");ring.className="spot-ring ok";spot.done++;setDots(spot.total,spot.done);
+    if(spot.done>=spot.total)later(markStepDone,700);
+    else later(()=>{spot.manualUntil=0;nextSpotRound();},1600);
+  }else{
+    sWrong();ring.className="spot-ring bad";item.classList.add("wrong");
+    later(()=>{item.classList.remove("wrong");ring.className="spot-ring";},500);
+  }
+}
+$("spotlight-screen").addEventListener("pointermove",e=>{
+  if(e.pointerType==="touch"||spot.paused)return;
+  const o=$("spotlight-screen").getBoundingClientRect();spot.tx=e.clientX-o.left;spot.ty=e.clientY-o.top;spot.manualUntil=performance.now()+2500;});
+
+
+/* timers of the new games — cleared on every page change */
+let gameTimers=[];
+function later(fn,ms){const t=setTimeout(fn,ms);gameTimers.push(t);return t;}
+function clearGameTimers(){gameTimers.forEach(clearTimeout);gameTimers=[];}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const sKnock=()=>[0,230,460].forEach(t=>setTimeout(()=>tone(150,.1,"triangle",.3,70),t));
+const sCreak=()=>tone(170,.8,"sawtooth",.035,330);
+const sBoo=()=>{tone(440,.25,"sine",.12,520);setTimeout(()=>tone(500,.9,"sine",.12,170),180);};
+const sPlop=()=>{tone(300,.12,"sine",.14,90);setTimeout(()=>tone(700,.06,"sine",.06),90);};
+const sPoof=()=>{tone(900,.5,"triangle",.08,120);setTimeout(()=>sCheer(),250);};
+const WORD_EMOJI={ghost:"👻",bat:"🦇",spider:"🕷️",monster:"👾"};
+
+/* KNOCK, KNOCK — 5 doors: 4 creatures + candy. Child says "It's a …!" */
+const DOOR_COLORS=[["#7b4bd6","#3e1f78"],["#ff8a1e","#8a3c08"],["#7cb82a","#3d6410"],["#2a9db0","#145560"],["#d64545","#7a1f1f"]];
+/* [door picture, colour filter] — purple, orange, green, blue, red, pink, yellow, grey */
+const DOOR_LOOK=[[1,""],[2,""],[3,""],[4,"hue-rotate(25deg) saturate(1.3)"],[5,""],[1,"hue-rotate(30deg) saturate(1.5) brightness(1.55)"],[2,"hue-rotate(28deg) saturate(1.3) brightness(1.25)"],[3,"saturate(0) brightness(1.15)"]];
+function setupKnock(st){
+  const box=$("doors");box.innerHTML="";let opened=0;
+  const inside=shuffle(WORDS.map(w=>w.key));
+  inside.forEach((k,i)=>{
+    const d=document.createElement("div");d.className="door";
+    const lk=DOOR_LOOK[i%8];d.style.setProperty("--c2","#2a1550");d.style.setProperty("--img","url("+img("door_"+lk[0])+")");d.style.setProperty("--df",lk[1]||"none");
+    const w=WORDS.find(x=>x.key===k);
+    d.innerHTML='<div class="frame"></div><div class="inside">'
+      +'<img class="who" src="'+img(k==="candy"?"candy":k)+'">'
+      +'</div><div class="leaf"></div>'
+      ;
+    d.onclick=()=>{
+      if(d.dataset.state)return;d.dataset.state="knock";
+      d.classList.add("knocking");sKnock();
+      later(()=>{d.classList.remove("knocking");d.classList.add("open");sCreak();},750);
+      later(()=>{if(k==="candy"){sCheer();confetti();toast("Trick or treat! 🍬","#ffc63a");}else charSound(w.word);},1250);
+      later(()=>{opened++;setDots(inside.length,opened);if(opened===inside.length)later(markStepDone,600);},1600);
+    };
+    box.appendChild(d);
+  });
+  box.style.setProperty("--cols",Math.ceil(inside.length/2));showScreen("knock");setDots(inside.length,0);
+  roundNext=()=>{const d=[...box.children].find(x=>!x.dataset.state);if(d)d.click();};
+}
+
+/* PEEKABOO — a creature hides in the room, only a part of it peeks out */
+const PEEK_SPOTS=[
+  {id:"wardrobe",where:"behind the wardrobe",clip:"polygon(0 0,76.3% 0,76.3% 100%,0 100%)",left:76.4,top:30,w:11,peek:[-55,0],rot:-10,edge:"left"},
+  {id:"bed",where:"under the bed",clip:"polygon(66.5% 63.6%,76.2% 63.6%,76.2% 71%,66.5% 71%)",left:71.3,top:71,w:8,peekY:6.5,rot:0},
+  {id:"door",where:"behind the door",clip:"polygon(0 0,91.3% 0,91.3% 100%,0 100%)",left:91.4,top:33,w:11,peek:[-50,0],rot:-10,edge:"left"},
+  {id:"window",where:"at the window",clip:"polygon(5% 4.5%,17.3% 4.5%,17.3% 41.5%,5% 41.5%)",left:11.2,top:41.8,w:9,peekY:9,rot:0}
+];
+let peekState=null;
+function setupPeek(st){
+  $("peekBg").src=img(roomKey(roomLevel));
+  const spots=shuffle(PEEK_SPOTS);
+  const pw=shuffle(CREATURES());
+  peekState={done:0,total:pw.length,words:pw,spots,anim:null,busy:false};
+  showScreen("peek");roundNext=revealPeek;nextPeek();
+}
+function nextPeek(){
+  const ps=peekState,wd=ps.words[ps.done%ps.words.length],sp=ps.spots[ps.done%ps.spots.length];ps.cur=wd;ps.busy=false;
+  $("peekCap").textContent=LEVEL==="beg"?"Who's hiding? 👀":"Who's hiding? Where? 👀";$("peekCap").style.display="";setDots(ps.total,ps.done);
+  const clip=$("peekClip"),spr=$("peekSprite"),out=$("peekOut");
+  out.style.display="none";out.getAnimations().forEach(a=>a.cancel());
+  clip.style.clipPath=sp.clip;spr.style.display="";spr.src=img(wd.key);
+  spr.style.width=sp.w+"%";spr.style.top=sp.top+"%";
+  spr.style.left=(sp.edge==="left"?sp.left:sp.left-sp.w/2)+"%";
+  if(ps.anim)ps.anim.cancel();
+  // horizontal peeks move by a share of the sprite width; vertical ones by a share of the picture height
+  const H=$("peekStage").getBoundingClientRect().height;
+  const mv=k=>sp.peekY?"translate(0,"+(-sp.peekY*H/100*k)+"px)":"translate("+sp.peek[0]*k+"%,0)";
+  const hid="translate(0,0) rotate(0deg)",pk=mv(1)+" rotate("+sp.rot+"deg)",pk2=mv(0.8)+" rotate("+(sp.rot*0.5)+"deg)";
+  ps.anim=spr.animate([{transform:hid},{transform:pk,offset:.18},{transform:pk2,offset:.45},{transform:pk,offset:.7},{transform:hid,offset:.9},{transform:hid}],
+    {duration:3400,iterations:Infinity,easing:"ease-in-out"});
+}
+function revealPeek(){
+  const ps=peekState;if(!ps||ps.busy)return;ps.busy=true;
+  const spr=$("peekSprite"),out=$("peekOut"),stage=$("peekStage").getBoundingClientRect();
+  if(ps.anim)ps.anim.pause();
+  const r=spr.getBoundingClientRect();
+  out.src=spr.src;out.style.left=(r.left-stage.left)+"px";out.style.top=(r.top-stage.top)+"px";out.style.width=r.width+"px";out.style.display="block";spr.style.display="none";
+  const scr=$("peek").getBoundingClientRect();
+  const dx=(scr.left+scr.width/2)-(r.left+r.width/2),dy=(scr.top+scr.height*0.52)-(r.top+r.height/2);
+  out.animate([{transform:"translate(0,0) scale(1)"},{transform:"translate("+dx+"px,"+dy+"px) scale(1.35)"}],{duration:650,easing:"cubic-bezier(.3,1.5,.5,1)",fill:"forwards"});
+  const sp=ps.spots[(ps.done)%ps.spots.length];
+  charSound(ps.cur.word);$("peekCap").textContent=LEVEL==="beg"?"It's a "+ps.cur.word+"!":"The "+ps.cur.word+" is "+sp.where+"!";
+  ps.done++;setDots(ps.total,ps.done);
+  if(ps.done>=ps.total)later(markStepDone,1800);
+  else later(nextPeek,2800);
+}
+$("peekSprite").onclick=revealPeek;$("peekShow").onclick=revealPeek;
+
+/* MAGIC CAULDRON — "Put 2 spiders in!" drag (or tap) the right creatures into the pot */
+const POTIONS=[[0,"#c8ff9a"],[230,"#ffc2dc"],[115,"#b8e4ff"],[300,"#ffe9a6"],[175,"#dcc6ff"]];  // [hue-rotate of the pot picture, bubble colour]
+let cauld=null;
+/* candies: pictures candy_1..candy_6 when they exist, emoji until then */
+const CANDY_EMOJI=["🍬","🍭","🍫","🧁","🍩","🍪"];
+function candyNode(i,cls){const k="candy_"+(i+1);
+  if(ASSETS[k]){const e=document.createElement("img");e.src=img(k);if(cls)e.className=cls;return e;}
+  const e=document.createElement("div");e.textContent=CANDY_EMOJI[i];e.style.cssText="font-size:1em;line-height:1;text-align:center";if(cls)e.className=cls;return e;}
+function setupCauldron(st){
+  const nums=shuffle([2,3,4,5]).slice(0,st.rounds||3);
+  cauld={round:0,total:nums.length,plan:nums.map(n=>({n})),count:0,potion:0,lock:false};
+  $("cauldPot").src=img("cauldron");$("cauldPotion").src=img("cauldron_potion");setPotion(0);
+  const bub=$("cauldBubbles");bub.innerHTML="";
+  for(let i=0;i<7;i++){const b=document.createElement("div");b.className="bubble";const sz=8+Math.random()*14;
+    b.style.cssText="width:"+sz+"px;height:"+sz+"px;left:"+(24+Math.random()*52)+"%;top:"+(12+Math.random()*7)+"%;animation-delay:"+(Math.random()*1.6)+"s";bub.appendChild(b);}
+  const shelf=$("cauldShelf");shelf.innerHTML="";
+  CANDY_EMOJI.forEach((_,i)=>{const d=document.createElement("div");d.className="cauld-item";const n=candyNode(i);
+    if(n.tagName==="DIV")n.style.fontSize="clamp(54px,6vw,80px)";d.appendChild(n);
+    d.addEventListener("pointerdown",e=>cauldDrag(e,d,i));shelf.appendChild(d);});
+  showScreen("cauldron");cauldRound();
+  roundNext=()=>{if(cauld.lock)return;cauld.count=cauld.plan[cauld.round].n-1;cauldGot();};
+}
+function setPotion(i){const p=POTIONS[i%POTIONS.length];$("cauldPotion").style.filter="hue-rotate("+p[0]+"deg)";$("cauldWrap").style.setProperty("--potion-l",p[1]);}
+function cauldRound(){
+  const r=cauld.plan[cauld.round];cauld.count=0;cauld.lock=false;
+  $("cauldTitle").innerHTML="Put "+r.n+" "+(ASSETS.candy_1?'<img src="'+img("candy_1")+'">':"🍬")+" in! 🧪";setDots(cauld.total,cauld.round);
+  $("cauldCount").textContent="0";
+  $("cauldDots").innerHTML="";for(let i=0;i<r.n;i++)$("cauldDots").appendChild(document.createElement("span"));
+}
+function cauldDrag(e,el,ci){
+  if(cauld.lock)return;e.preventDefault();
+  const r=el.getBoundingClientRect(),fl=candyNode(ci,"flyer");document.body.appendChild(fl);
+  const fw=r.width*0.8;fl.style.width=fw+"px";if(fl.tagName==="DIV")fl.style.fontSize=(fw*0.8)+"px";
+  const sx=e.clientX,sy=e.clientY;let moved=false;
+  const place=(x,y)=>{fl.style.left=(x-fw/2)+"px";fl.style.top=(y-fw*0.45)+"px";};place(sx,sy);
+  const mv=ev=>{if(Math.hypot(ev.clientX-sx,ev.clientY-sy)>8)moved=true;place(ev.clientX,ev.clientY);};
+  const up=ev=>{document.removeEventListener("pointermove",mv);document.removeEventListener("pointerup",up);document.removeEventListener("pointercancel",up);
+    const c=$("cauldWrap").getBoundingClientRect();
+    const over=ev.clientX>c.left&&ev.clientX<c.right&&ev.clientY>c.top-40&&ev.clientY<c.bottom;
+    if(!moved||over)flyIntoPot(fl);
+    else{fl.animate([{opacity:1},{opacity:0,transform:"scale(.5)"}],{duration:250}).onfinish=()=>fl.remove();}};
+  document.addEventListener("pointermove",mv);document.addEventListener("pointerup",up);document.addEventListener("pointercancel",up);
+}
+function flyIntoPot(fl){
+  const c=$("cauldWrap").getBoundingClientRect(),f=fl.getBoundingClientRect();
+  const tx=c.left+c.width/2-(f.left+f.width/2),ty=c.top+c.height*0.18-(f.top+f.height/2);
+  if(!cauld.lock){
+    fl.animate([{transform:"translate(0,0) scale(1)"},{transform:"translate("+tx+"px,"+(ty-60)+"px) scale(.8)",offset:.6},{transform:"translate("+tx+"px,"+ty+"px) scale(.1)"}],{duration:600,easing:"ease-in"}).onfinish=()=>{fl.remove();cauldGot();};
+  }else{
+    fl.animate([{transform:"translate(0,0)"},{transform:"translate("+tx+"px,"+(ty-50)+"px) scale(.8)",offset:.45},{transform:"translate("+(tx+180)+"px,"+(ty-260)+"px) rotate(200deg) scale(.6)",opacity:0}],{duration:1000,easing:"ease-out"}).onfinish=()=>fl.remove();
+
+  }
+}
+function cauldGot(){
+  const r=cauld.plan[cauld.round];if(cauld.lock)return;cauld.count++;sPlop();
+  const w=$("cauldWrap");w.classList.remove("hit");void w.offsetWidth;w.classList.add("hit");
+  const cnt=$("cauldCount");cnt.textContent=cauld.count;cnt.classList.remove("pop");void cnt.offsetWidth;cnt.classList.add("pop");
+  [...$("cauldDots").children].forEach((d,i)=>d.classList.toggle("on",i<cauld.count));
+  if(cauld.count>=r.n){cauld.lock=true;later(cauldPoof,700);}
+}
+function cauldPoof(){
+  const w=$("cauldWrap");sPoof();
+  for(let i=0;i<6;i++){const s=document.createElement("div");s.className="smoke";const sz=80+Math.random()*90;
+    s.style.cssText="width:"+sz+"px;height:"+sz+"px;left:"+(30+Math.random()*40)+"%;top:"+(-5+Math.random()*25)+"%;margin:-"+sz/2+"px 0 0 -"+sz/2+"px";w.appendChild(s);
+    s.animate([{transform:"scale(.2)",opacity:.9},{transform:"scale(1.6) translateY(-30px)",opacity:0}],{duration:1300,delay:i*60,easing:"ease-out"}).onfinish=()=>s.remove();}
+  cauld.potion++;later(()=>setPotion(cauld.potion),300);
+  for(let i=0;i<9;i++){const st=document.createElement("div");st.textContent=["✨","⭐","🌟"][i%3];
+    st.style.cssText="position:absolute;z-index:4;pointer-events:none;font-size:"+(26+Math.random()*22)+"px;left:"+(25+Math.random()*50)+"%;top:14%";w.appendChild(st);
+    st.animate([{transform:"translate(0,0) scale(.3)",opacity:0},{transform:"translate("+(Math.random()*120-60)+"px,-"+(80+Math.random()*90)+"px) scale(1)",opacity:1,offset:.5},{transform:"translate("+(Math.random()*160-80)+"px,-"+(150+Math.random()*80)+"px) scale(.8)",opacity:0}],{duration:1600,delay:i*70,easing:"ease-out"}).onfinish=()=>st.remove();}
+  cauld.round++;setDots(cauld.total,cauld.round);
+  if(cauld.round>=cauld.total)later(markStepDone,1800);else later(cauldRound,2500);
+}
+
+/* ODD ONE OUT — multiple rounds */
+function setupOdd(st){roundState={done:0,total:st.rounds||3,reward:st.reward};nextOddRound();showScreen("odd");}
+function nextOddRound(){
+  $("oddTitle").textContent="Which one is different? 🤔 ("+(roundState.done+1)+"/"+roundState.total+")";
+  const base=WORDS[Math.floor(Math.random()*WORDS.length)];let other=base;while(other===base)other=WORDS[Math.floor(Math.random()*WORDS.length)];
+  let items=[base.key,base.key,base.key,other.key];
+  for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]];}
+  const grid=$("oddGrid");grid.innerHTML="";
+  items.forEach(k=>{const d=document.createElement("div");d.className="pic-item";
+    d.innerHTML='<img src="'+img(k)+'"><div class="circle-mark"></div>';
+    d.onclick=()=>{const cnt=items.filter(x=>x===k).length;
+      if(cnt===1){sRight();d.classList.add("right");roundState.done++;
+        if(roundState.done>=roundState.total)setTimeout(markStepDone,700);
+        else setTimeout(nextOddRound,900);
+      }else{sWrong();d.classList.add("wrong");setTimeout(()=>d.classList.remove("wrong"),400);}};
+    grid.appendChild(d);});
+  
+}
+
+
+/* HOW MANY — multiple rounds */
+function setupHowMany(st){roundState={done:0,total:st.rounds||3,reward:st.reward};nextHowMany();showScreen("howmany");}
+function nextHowMany(){
+  const n=2+Math.floor(Math.random()*4);const which=WORDS[Math.floor(Math.random()*WORDS.length)];
+  $("howmanyTitle").textContent="How many "+which.word+"s? 🔢 ("+(roundState.done+1)+"/"+roundState.total+")";
+  const scene=$("howmanyScene");scene.innerHTML="";
+  const positions=[];
+  for(let i=0;i<n;i++){const im=document.createElement("img");im.src=img(which.key);
+    im.style.cssText="position:absolute;width:"+(68+Math.random()*16)+"px;left:"+(8+Math.random()*78)+"%;top:"+(8+Math.random()*62)+"%;filter:drop-shadow(0 4px 6px rgba(0,0,0,.3))";
+    scene.appendChild(im);}
+  const opts=$("howmanyOpts");opts.innerHTML="";
+  let nums=new Set([n]);while(nums.size<3)nums.add(1+Math.floor(Math.random()*5));nums=[...nums];
+  for(let i=nums.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[nums[i],nums[j]]=[nums[j],nums[i]];}
+  nums.forEach(num=>{const d=document.createElement("div");d.className="pic-item";d.style.minWidth="90px";
+    d.innerHTML='<div style="font-family:var(--disp);font-weight:700;font-size:56px;color:var(--purple2);padding:8px 22px">'+num+'</div><div class="circle-mark"></div>';
+    d.onclick=()=>{if(num===n){sRight();d.classList.add("right");roundState.done++;
+        if(roundState.done>=roundState.total)setTimeout(markStepDone,700);
+        else setTimeout(nextHowMany,900);
+      }else{sWrong();d.classList.add("wrong");setTimeout(()=>d.classList.remove("wrong"),400);}};
+    opts.appendChild(d);});
+  
+}
+
+
+/* I LIKE */
+let likeQueue=[],likeIdx=0,likeReward=null;
+function setupILike(st){likeQueue=shuffle(WORDS);likeIdx=0;likeReward=st.reward;showLikeCard();showScreen("ilike");
+  roundNext=()=>{if(likeIdx<likeQueue.length){likeIdx++;showLikeCard();}};}
+function showLikeCard(){
+  if(likeIdx>=likeQueue.length){setDots(likeQueue.length,likeIdx);$("likeCardWrap").style.display="none";markStepDone();return;}
+  $("likeCardWrap").style.display="flex";
+  $("likeImg").src=img(likeQueue[likeIdx].key);
+  setDots(likeQueue.length,likeIdx);
+}
+function likeAnswer(btn,up){if(likeIdx>=likeQueue.length)return;sRight();
+  btn.classList.remove("chosen");void btn.offsetWidth;btn.classList.add("chosen");likeIdx++;setTimeout(()=>{btn.classList.remove("chosen");showLikeCard();},800);}
+$("likeUp")&&($("likeUp").onclick=function(){likeAnswer(this,true);});
+$("likeDown")&&($("likeDown").onclick=function(){likeAnswer(this,false);});
+
+
+/* WHAT'S MISSING — multiple rounds */
+function setupMissing(st){roundState={done:0,total:st.rounds||2,reward:st.reward};nextMissing();showScreen("missing");
+  roundNext=()=>{const b=$("missingReveal");if(b.style.display!=="none")b.click();};}
+function nextMissing(){
+  $("missingTitle").textContent="What's missing? 🤔";setDots(roundState.total,roundState.done);
+  const grid=$("missingGrid");grid.innerHTML="";
+  const sh=shuffle(WORDS);
+  sh.forEach(wd=>{const d=document.createElement("div");d.className="pic-item";d.dataset.key=wd.key;
+    d.innerHTML='<img src="'+img(wd.key)+'"><div class="circle-mark"></div>';grid.appendChild(d);});
+  const el=[...grid.children][Math.floor(Math.random()*sh.length)];
+  $("missingReveal").style.display="none";
+  later(()=>{ // a cloud flies in and covers the picture…
+    const cl=document.createElement("div");cl.className="cloud";el.appendChild(cl);
+    cl.animate([{transform:"translateY(-140%) scale(.7)",opacity:0},{transform:"translateY(0) scale(1)",opacity:1}],{duration:1100,easing:"cubic-bezier(.3,1.3,.5,1)",fill:"forwards"});
+    tone(260,.6,"sine",.08,180);
+    later(()=>{ // …and flies away together with it
+      el.animate([{opacity:1,transform:"translateY(0)"},{opacity:0,transform:"translateY(-40px)"}],{duration:900,easing:"ease-in",fill:"forwards"});
+      $("missingReveal").style.display="";
+    },1700);
+  },2500);
+  $("missingReveal").onclick=()=>{
+    $("missingReveal").style.display="none";
+    el.getAnimations().forEach(a=>a.cancel());const cl=el.querySelector(".cloud");if(cl)cl.remove();
+    el.classList.add("right");sReveal();
+    roundState.done++;setDots(roundState.total,roundState.done);
+    if(roundState.done>=roundState.total)later(markStepDone,900);
+    else later(nextMissing,1600);
+  };
+}
+
+
+/* ===================== 7–9: level config + new games ===================== */
+/* LEVEL is set at build time: "beg" (начинающие) or "cont" (продолжающие) */
+const W7={
+  ghost:{key:"w_ghost",word:"ghost",riddle:"It's white. It can fly. Boo!",q:"Can it fly?"},
+  bat:{key:"w_bat",word:"bat",riddle:"It's black. It's got wings. It can fly.",q:"What colour is it?"},
+  spider:{key:"w_spider",word:"spider",riddle:"It's black. It's got eight legs.",q:"How many legs has it got?"},
+  monster:{key:"w_monster",word:"monster",riddle:"It's green. It's got two horns.",q:"Is it scary?"},
+  witch:{key:"w_witch",word:"witch",riddle:"She's got a hat and a broom.",q:"What has she got?"},
+  pumpkin:{key:"w_pumpkin",word:"pumpkin",riddle:"It's orange and round.",q:"What colour is it?"},
+  cat:{key:"w_cat",word:"cat",riddle:"It's black. It's got four legs and a tail.",q:"Has it got a tail?"},
+  skeleton:{key:"w_skeleton",word:"skeleton",riddle:"It's white. It's got lots of bones.",q:"Is it tall or short?"},
+  vampire:{key:"w_vampire",word:"vampire",riddle:"He's got a black and red cape.",q:"What colour is his cape?"},
+  mummy:{key:"w_mummy",word:"mummy",riddle:"It's white. It's got bandages.",q:"Is it scary?"},
+  broom:{key:"w_broom",word:"broom",riddle:"A witch can fly on it.",q:"Who has got a broom?"},
+  house:{key:"w_house",word:"haunted house",riddle:"It's big and spooky. Ghosts live there.",q:"Who lives there?"}
+};
+const LV={
+  beg:{
+    words:["ghost","bat","spider","witch","pumpkin","skeleton"],
+    anagrams:["bat","ghost","witch","spider","pumpkin","skeleton"],
+    diff:{a:"diff_0",b:"diff_5",zones:[
+      {n:"ghost",z:[[32.3,32.3,46.2,61.9]]},{n:"cat",z:[[61.7,51.3,72.4,84.9]]},{n:"bats",z:[[80.9,15.7,90.7,32.8]]},
+      {n:"pumpkin",z:[[31.9,68.1,41.6,81.7]]},{n:"monster",z:[[89,48.3,94,62.8]]}]},
+    roomNew:["","Lights! ✨","A spider's web! 🕸️","Pumpkins! 🎃","Bats! 🦇","A skeleton! 💀","A witch's hat! 🧹","A poster! 🏚️","A black cat! 🐈‍⬛","A ghost! 👻","A mummy! 🧻","A monster! 👾"]
+  },
+  cont:{
+    words:["ghost","spider","witch","skeleton","vampire","mummy","broom","house"],
+    anagrams:["ghost","spider","witch","skeleton","vampire","mummy","broom","haunted house"],
+    diff:{a:"diff_5",b:"diff_6b",zones:[
+      {n:"cat",z:[[61.6,51.5,72.4,84.9]]},{n:"ghost",z:[[32.3,32.3,46.1,61.9]]},{n:"bats",z:[[80.9,15.7,90.7,32.8]]},
+      {n:"broom",z:[[5.1,46,11.8,78.5],[15.5,15.5,28.7,25.5]]},{n:"spider",z:[[1,29,7.5,39]]},{n:"monster",z:[[89,48.3,93.9,62.8]]}]},
+    roomNew:["","There are lights on the walls!","There's a web in the corner!","There are pumpkins on the desk!","There are bats on the wall!","There's a skeleton on the wardrobe!","There's a witch's hat next to the door!","There's a poster on the wall!","There's a cat on the bed!","There's a ghost under the lamp!","There's a mummy on the shelf!","There's a monster under the bed!"]
+  }
+}[LEVEL];
+const WORDS=LV.words.map(k=>W7[k]);
+
+/* ---------- SPOT THE DIFFERENCE ---------- */
+let sd=null;
+function setupSpotDiff(st){
+  const D=LV.diff;sd={found:new Set(),total:D.zones.length};
+  $("sdA").src=img(D.a);$("sdB").src=img(D.b);
+  [$("sdWrapA"),$("sdWrapB")].forEach(w=>{w.querySelectorAll(".sd-mark,.sd-miss").forEach(e=>e.remove());});
+  setDots(sd.total,0);showScreen("spotdiff");
+  roundNext=()=>{const i=D.zones.findIndex((z,i)=>!sd.found.has(i));if(i>=0)sdFound(i);};
+}
+function sdClick(e,wrap){
+  const r=wrap.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*100,y=(e.clientY-r.top)/r.height*100;
+  const D=LV.diff;let hit=-1;
+  D.zones.forEach((zn,i)=>{zn.z.forEach(b=>{if(x>b[0]-2.5&&x<b[2]+2.5&&y>b[1]-3.5&&y<b[3]+3.5)hit=i;});});
+  if(hit>=0&&!sd.found.has(hit)){sdFound(hit);return;}
+  if(hit<0){sWrong();const m=document.createElement("div");m.className="sd-miss";m.textContent="✗";m.style.left=x+"%";m.style.top=y+"%";wrap.appendChild(m);
+    m.animate([{opacity:1,transform:"translate(-50%,-50%) scale(1)"},{opacity:0,transform:"translate(-50%,-50%) scale(1.6)"}],{duration:700}).onfinish=()=>m.remove();}
+}
+function sdFound(i){
+  sd.found.add(i);sRight();
+  LV.diff.zones[i].z.forEach(b=>{[$("sdWrapA"),$("sdWrapB")].forEach(w=>{const m=document.createElement("div");m.className="sd-mark";
+    m.style.left=(b[0]-1)+"%";m.style.top=(b[1]-1.5)+"%";m.style.width=(b[2]-b[0]+2)+"%";m.style.height=(b[3]-b[1]+3)+"%";w.appendChild(m);});});
+  setDots(sd.total,sd.found.size);
+  if(sd.found.size>=sd.total)later(markStepDone,700);
+}
+
+/* ---------- BUILD A MONSTER ---------- */
+const MON_COLORS=[["green",0,"#7cc242"],["purple",205,"#a46cd6"],["orange",-60,"#ff9a2e"],["blue",125,"#4aa3e8"]];
+let mon=null;
+function monTask(){
+  const c=MON_COLORS[Math.floor(Math.random()*4)][0],eyes=1+Math.floor(Math.random()*5);
+  if(LEVEL==="beg")return {color:c,eyes,text:(c==="orange"?"An ":"A ")+c+" monster with "+eyes+" "+(eyes>1?"eyes":"eye")+"!"};
+  const arms=[2,4][Math.floor(Math.random()*2)],legs=2+Math.floor(Math.random()*3),horns=Math.random()<.5?2:0;
+  return {color:c,eyes,arms,legs,horns,text:"My monster is "+c+". It has got "+eyes+" "+(eyes>1?"eyes":"eye")+", "+arms+" arms, "+legs+" legs"+(horns?" and 2 horns.":" and no horns.")};
+}
+function setupMonster(st){
+  mon={round:0,total:3,s:{color:"green",eyes:2,arms:2,legs:2,horns:2},task:monTask(),free:false};
+  showScreen("monster");monRender();monTaskShow();
+  roundNext=()=>{if(mon.free)return;Object.assign(mon.s,mon.task);monRender();monCheck();};
+}
+function monTaskShow(){
+  $("monTask").textContent=mon.free?(LEVEL==="beg"?"Make your monster! 🎨":"Make your monster and describe it! 🎨"):mon.task.text;
+  $("monCheck").style.display=mon.free?"none":"";setDots(mon.total,mon.round);
+}
+function monRender(){
+  const s=mon.s,box=$("monStage");box.innerHTML="";
+  const col=MON_COLORS.find(c=>c[0]===s.color),filt="hue-rotate("+col[1]+"deg)";
+  const add=(k,css,f)=>{const e=document.createElement("img");e.src=img(k);e.style.cssText="position:absolute;"+css;if(f)e.style.filter=f;box.appendChild(e);return e;};
+  // arms and legs behind the body
+  const armY=s.arms===4?[40,58]:[48];
+  armY.forEach(y=>{add("arm","left:-6%;top:"+y+"%;width:34%;z-index:1",filt);add("arm","right:-6%;top:"+y+"%;width:34%;z-index:1;transform:scaleX(-1)",filt);});
+  for(let i=0;i<s.legs;i++){const x=50+(i-(s.legs-1)/2)*16;add("leg","left:"+(x-8)+"%;top:76%;width:16%;z-index:1",filt);}
+  add("body_green","left:15%;top:14%;width:70%;z-index:2",filt);
+  if(s.horns)["horn_l","horn_r"].forEach((k,i)=>add(k,"left:"+(i?57:31)+"%;top:8%;width:12%;z-index:1"));
+  const n=s.eyes,rows=n>3?[Math.ceil(n/2),Math.floor(n/2)]:[n];
+  rows.forEach((cnt,r)=>{const w=Math.min(18,46/cnt);for(let i=0;i<cnt;i++){const x=50+(i-(cnt-1)/2)*(w+2);add("eye","left:"+(x-w/2)+"%;top:"+(28+r*15-(rows.length>1?6:0))+"%;width:"+w+"%;z-index:3");}});
+  add("mouth","left:33%;top:"+(rows.length>1?58:54)+"%;width:34%;z-index:3");
+  $("monEyes").textContent=s.eyes;$("monArms").textContent=s.arms;$("monLegs").textContent=s.legs;$("monHorns").textContent=s.horns;
+  document.querySelectorAll("#monColors .mc").forEach(b=>b.classList.toggle("on",b.dataset.c===s.color));
+}
+function monSet(f,d){const lim={eyes:[1,5],arms:[2,4],legs:[1,4],horns:[0,2]}[f],step=(f==="arms"||f==="horns")?2:1;
+  mon.s[f]=Math.max(lim[0],Math.min(lim[1],mon.s[f]+d*step));sPick();monRender();}
+function monCheck(){
+  if(mon.free)return;const t=mon.task,s=mon.s;
+  const ok=["color","eyes","arms","legs","horns"].every(k=>t[k]===undefined||t[k]===s[k]);
+  if(!ok){sWrong();toast("Try again! 👀","#ffc63a");return;}
+  sRight();confetti();mon.round++;setDots(mon.total,mon.round);
+  if(mon.round>=mon.total){mon.free=true;later(()=>{monTaskShow();markStepDone();},900);}
+  else later(()=>{mon.task=monTask();monTaskShow();},1100);
+}
+
+/* ---------- ANAGRAM ---------- */
+let ana=null;
+function setupAnagram(st){ana={i:0,words:shuffle(LV.anagrams)};showScreen("anagram");anaRound();
+  roundNext=()=>{if(!ana.busy){const need=ana.w[ana.pos];const t=[...$("anaTiles").children].find(b=>!b.disabled&&b.textContent===need);if(t)t.click();}};}
+function anaRound(){
+  const key=Object.keys(W7).find(k=>W7[k].word===ana.words[ana.i]);
+  ana.w=ana.words[ana.i].toUpperCase();ana.pos=0;ana.busy=false;setDots(ana.words.length,ana.i);
+  $("anaImg").src=img(W7[key].key);
+  const sl=$("anaSlots");sl.innerHTML="";[...ana.w].forEach(ch=>{const s=document.createElement("div");s.className="ana-slot"+(ch===" "?" gap":"");sl.appendChild(s);});
+  let letters=shuffle([...ana.w].filter(ch=>ch!==" "));while(letters.join("")===ana.w&&ana.w.length>1)letters=shuffle(letters);
+  const tl=$("anaTiles");tl.innerHTML="";
+  letters.forEach(ch=>{const b=document.createElement("button");b.className="ana-tile";b.textContent=ch;
+    b.onclick=()=>{if(ana.busy||b.disabled)return;
+      if(ch===ana.w[ana.pos]){sPick();b.disabled=true;b.classList.add("used");sl.children[ana.pos].textContent=ch;sl.children[ana.pos].classList.add("on");ana.pos++;
+        if(ana.w[ana.pos]===" ")ana.pos++;
+        if(ana.pos>=ana.w.length){ana.busy=true;sRight();sl.classList.add("win");later(()=>{sl.classList.remove("win");ana.i++;setDots(ana.words.length,ana.i);
+          if(ana.i>=ana.words.length)markStepDone();else anaRound();},1400);}}
+      else{sWrong();b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");}};
+    tl.appendChild(b);});
+}
+
+/* ---------- BOARD GAME "Haunted house" ---------- */
+const BOARD_SQ=[[7.09, 84.98], [8.18, 73.71], [12.14, 64.97], [18.19, 61.13], [24.62, 60.04], [31.07, 60.59], [35.4, 54.88], [31.3, 46.13], [27.57, 36.93], [30.64, 27.88], [36.92, 25.5], [43.34, 26.74], [49.31, 30.98], [54.03, 38.69], [58.75, 46.52], [64.52, 51.61], [70.76, 54.57], [77.19, 55.58], [83.59, 54.25], [89.43, 49.46], [92.99, 40.19], [91.13, 29.78]];
+const PAWNS=["pawn_pumpkin","pawn_ghost","pawn_bat","pawn_cat","pawn_5"];
+const PAWN_MAX=5;
+const BOARD_SPECIAL={4:{t:"⏩",txt:"+2",move:2},8:{t:"⭐",txt:"Fly like a bat! 🦇"},12:{t:"⏪",txt:"−2",move:-2},15:{t:"⭐",txt:"Dance like a skeleton! 💀"},18:{t:"⭐",txt:"Say BOO! 👻"}};
+let bd=null;
+function setupBoard(st){
+  const words=shuffle(WORDS);
+  bd={players:[],turn:0,busy:false,started:false,sq:BOARD_SQ.map((p,i)=>i===0?{t:"start"}:i===BOARD_SQ.length-1?{t:"end"}:BOARD_SPECIAL[i]?Object.assign({},BOARD_SPECIAL[i],{t:"sp"}):{t:"w",w:words[i%words.length]})};
+  const st_=$("boardStage");st_.querySelectorAll(".bsq,.bpawn").forEach(e=>e.remove());
+  bd.sq.forEach((q,i)=>{const d=document.createElement("div");d.className="bsq"+(q.t==="sp"?" sp":"")+(q.t==="end"?" end":"");
+    d.style.left=BOARD_SQ[i][0]+"%";d.style.top=BOARD_SQ[i][1]+"%";
+    d.innerHTML=q.t==="w"?'<img src="'+img(q.w.key)+'">':q.t==="sp"?'<span>'+BOARD_SPECIAL[i].t+'</span>':q.t==="start"?'<span>GO</span>':'<span>🏁</span>';
+    d.dataset.n=i+1;st_.appendChild(d);});
+  $("boardPick").style.display="flex";$("boardDice").style.display="none";$("boardCard").classList.remove("show");
+  const pk=$("boardPawns");pk.innerHTML="";
+  // up to 5 players (a group), each pawn gets a name typed under it
+  PAWNS.forEach((k,j)=>{const w=document.createElement("div");w.className="bp-col";
+    w.innerHTML='<div class="bp-opt"><img src="'+img(k)+'"></div><input class="bp-name" maxlength="12" placeholder="Name">';
+    const b=w.firstChild,inp=w.lastChild;
+    b.onclick=()=>{const i=bd.players.findIndex(p=>p.k===k);if(i>=0)bd.players.splice(i,1);else if(bd.players.length<PAWN_MAX)bd.players.push({k,pos:0,inp});
+      sPick();[...pk.children].forEach((c,jj)=>c.classList.toggle("on",bd.players.some(p=>p.k===PAWNS[jj])));$("boardGo").disabled=!bd.players.length;
+      if(bd.players.some(p=>p.k===k))inp.focus();};
+    pk.appendChild(w);});
+  $("boardGo").disabled=true;showScreen("board");
+  roundNext=()=>{if(!bd.started){if(!bd.players.length)bd.players.push({k:PAWNS[0],pos:0});boardStart();}else if(!bd.busy&&!$("boardCard").classList.contains("show"))boardRoll();else if($("boardCard").classList.contains("show"))$("boardCardOk").click();};
+}
+function boardStart(){
+  bd.started=true;$("boardPick").style.display="none";$("boardDice").style.display="flex";
+  bd.players.forEach((p,i)=>{p.name=(p.inp&&p.inp.value.trim())||"";const e=document.createElement("div");e.className="bpawn";e.id="bpawn"+i;
+    e.innerHTML='<img src="'+img(p.k)+'">'+(p.name?'<span>'+p.name.replace(/[<>&]/g,"")+'</span>':'');$("boardStage").appendChild(e);});
+  boardPlaceAll();
+  boardTurnShow();
+}
+function boardPlaceAll(){bd.players.forEach((_,i)=>boardPlace(i));}
+function boardPlace(i){const p=bd.players[i],e=$("bpawn"+i),q=BOARD_SQ[p.pos];
+  const same=bd.players.map((x,j)=>j).filter(j=>bd.players[j].pos===p.pos),k=same.indexOf(i),n=same.length;
+  const off=n>1?(k-(n-1)/2)*2.6:0,dy=n>2&&k%2?4.5:0;   // fan out pawns that share a square
+  e.style.left=(q[0]+off)+"%";e.style.top=(q[1]+dy)+"%";e.style.zIndex=5+k+(dy?10:0);}
+function boardTurnShow(){const p=bd.players[bd.turn];$("boardWho").src=img(p.k);$("boardWhoName").textContent=p.name||"";
+  bd.players.forEach((_,i)=>$("bpawn"+i).classList.toggle("cur",i===bd.turn));}
+function boardRoll(){
+  if(bd.busy)return;bd.busy=true;const face=$("diceFace");const F="⚀⚁⚂⚃⚄⚅";let n=0;
+  const spin=setInterval(()=>{face.textContent=F[Math.floor(Math.random()*6)];tone(500+Math.random()*300,.04,"square",.05);},80);
+  later(()=>{clearInterval(spin);n=1+Math.floor(Math.random()*6);face.textContent=F[n-1];boardMove(n);},900);
+}
+function boardMove(n){
+  const p=bd.players[bd.turn],last=BOARD_SQ.length-1,i=bd.turn;let k=0;
+  const stepFn=()=>{if(k>=Math.abs(n)||p.pos===(n>0?last:0)){boardLand();return;}p.pos+=n>0?1:-1;k++;sPick();boardPlaceAll();later(stepFn,320);};
+  stepFn();
+}
+function boardLand(){
+  const p=bd.players[bd.turn],q=bd.sq[p.pos];
+  if(q.t==="end"){sCheer();confetti();boardCard(img(p.k),"🏁 "+(p.name?p.name+" wins!":"Winner!")+" 🎉","");bd.over=true;later(markStepDone,600);return;}
+  if(q.t==="sp"&&q.move){toast(q.txt,"#ffc63a");later(()=>boardMove(q.move),700);return;}
+  if(q.t==="sp"){boardCard(null,q.txt,"");return;}
+  if(q.t==="w"){boardCard(img(q.w.key),LEVEL==="beg"?"What is it?":q.w.q,LEVEL==="beg"?"":q.w.riddle);return;}
+  boardNext();
+}
+function boardCard(src,title,sub){
+  const c=$("boardCard");$("boardCardImg").style.display=src?"":"none";if(src)$("boardCardImg").src=src;
+  $("boardCardT").textContent=title;$("boardCardS").textContent=sub||"";$("boardCardS").style.display="none";c.classList.add("show");sReveal();
+}
+$("boardCardOk").onclick=()=>{$("boardCard").classList.remove("show");if(bd.over)return;boardNext();};
+function boardNext(){bd.busy=false;bd.turn=(bd.turn+1)%bd.players.length;boardTurnShow();}
+$("boardGo").onclick=boardStart;$("diceBtn").onclick=boardRoll;
+$("sdWrapA").onclick=e=>sdClick(e,$("sdWrapA"));$("sdWrapB").onclick=e=>sdClick(e,$("sdWrapB"));
+
+const NOT_CREATURES=["broom","haunted house"];
+function CREATURES(){return WORDS.filter(w=>!NOT_CREATURES.includes(w.word));}
+/* ---- ROOM: chain of ready pictures, no layers ---- */
+function roomKey(i){return "room_"+String(i).padStart(2,"0");}
+function placeDragon(el){
+  const k=room.dragon;if(!k){el.style.display="none";return;}
+  const c=SLOTS.dragon;el.style.display="";el.src=img(k);
+  el.style.left=(c.cx*100)+"%";el.style.top=(c.cy*100)+"%";el.style.width=(c.w*100)+"%";el.style.transform="translate(-50%,-100%)";
+}
+function showRoom(i){
+  $("roomBg").src=img(roomKey(i));const nw=$("roomBgNew");nw.classList.remove("show");nw.removeAttribute("src");
+  placeDragon($("roomDragon"));
+}
+function setCap(t,pop){const c=$("roomCap");c.textContent=t;c.style.display=t?"":"none";if(pop){c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");}}
+/* open room `to` (never goes backwards). onContinue runs on the center Next button. */
+/* bonus=true: on the bonus page — a "back to games" button instead of Next */
+function revealRoom(to,onContinue,bonus){
+  to=Math.min(ROOM_COUNT-1,Math.max(to,roomLevel));
+  const from=roomLevel;roomLevel=to;
+  revealCtx={onContinue};hideHighlight();setDots(0);
+  showRoom(from);showScreen("room");
+  const nb=$("navNextMain");nb.classList.remove("ready");$("doneCheck").classList.remove("show");
+  const ready=()=>{if(bonus){const b=$("roomGames");b.style.display="";b.onclick=()=>{b.style.display="none";const f=revealCtx&&revealCtx.onContinue;revealCtx=null;hideHighlight();if(f)f();};}else nb.classList.add("ready");};
+  if(to===from){setCap(to===ROOM_COUNT-1?"Your room! 🎃":(ROOM_NEW[to]||""),true);ready();return;}
+  setCap("What's new? 👀",true);
+  const nw=$("roomBgNew");
+  nw.onload=()=>{later(()=>{nw.classList.add("show");sPop();},600);
+    later(()=>{showHighlight(to);sReveal();},1900);
+    later(()=>{setCap(ROOM_NEW[to],true);sCheer();confetti();ready();},2700);};
+  nw.src=img(roomKey(to));
+}
+/* glow around the new thing: the rest of the room gets darker for a few seconds */
+function showHighlight(i){
+  const b=ROOM_HL[i];if(!b)return;const pad=2.5;
+  const x0=Math.max(0,b[0]-pad),y0=Math.max(0,b[1]-pad*1.6),x1=Math.min(100,b[2]+pad),y1=Math.min(100,b[3]+pad*1.6);
+  const cx=(x0+x1)/2,cy=(y0+y1)/2,rx=(x1-x0)/2*1.25,ry=(y1-y0)/2*1.25;
+  const dim=$("hlDim");dim.style.background="radial-gradient(ellipse "+rx+"% "+ry+"% at "+cx+"% "+cy+"%,rgba(10,4,25,0) 0,rgba(10,4,25,0) 80%,rgba(10,4,25,.62) 100%)";
+  const r=$("hlRing");r.style.left=(cx-rx*0.86)+"%";r.style.top=(cy-ry*0.86)+"%";r.style.width=(rx*1.72)+"%";r.style.height=(ry*1.72)+"%";
+  dim.classList.add("on");r.classList.add("on");
+  later(()=>dim.classList.remove("on"),4200);later(()=>r.classList.remove("on"),5200);
+}
+function hideHighlight(){$("hlDim").classList.remove("on");$("hlRing").classList.remove("on");}
+
+/* ---- IF-TIME: all 3 bonus games playable ---- */
+function setupIfTime(st){
+  renderBonusMenu();
+  showScreen("iftime");
+}
+let bonusDone={song:false,memory:false,shadow:false};
+function renderBonusMenu(){
+  const menu=$("iftimeMenu");menu.innerHTML="";
+  const games=[
+    {id:"song",icon:"💃",t:"Dance"},
+    {id:"memory",icon:"🧩",t:"Memory"},
+    {id:"shadow",icon:"👤",t:"Shadows"}
+  ];
+  games.forEach(g=>{const d=document.createElement("div");d.className="choice"+(bonusDone[g.id]?" sel":"");
+    d.style.minWidth="clamp(140px,14vw,200px)";d.style.padding="22px";
+    d.innerHTML='<div style="font-size:clamp(60px,7vw,96px);line-height:1.1">'+g.icon+'</div><span class="lbl" style="font-size:22px">'+g.t+(bonusDone[g.id]?" ✓":"")+'</span>';
+    d.onclick=()=>{ openBonus(g); };
+    menu.appendChild(d);});
+}
+let currentBonus=null;
+function openBonus(g){
+  clearGameTimers();freezeCleanup();setDots(0);
+  currentBonus=g;
+  if(g.id==="memory")startMemory();
+  else if(g.id==="shadow")startShadow();
+  else startSong();
+}
+function finishBonus(){
+  clearGameTimers();freezeCleanup();setDots(0);
+  const g=currentBonus;const first=!bonusDone[g.id];bonusDone[g.id]=true;
+  // each bonus game opens the next room (9, 10 — in the order they are played), then back to the games list
+  const to=first?Math.max(roomLevel+1,9):roomLevel;
+  revealRoom(to,()=>{resetStepDone();showScreen("iftime");renderBonusMenu();},true);
+}
+
+/* bonus: DANCE & SHOW — first the teacher shows the 4 moves with the child,
+   then music + dancing dragon; music stops → a picture → the child shows that move */
+let fz=null;
+function startSong(){
+  $("bonusTitle").textContent="💃🕺";
+  let html='<div class="fz-prac" id="fzPrac">';
+  const dw=shuffle(CREATURES()).slice(0,4);
+  dw.forEach(w=>{html+='<div class="pic-item" data-w="'+w.word+'"><img src="'+img(w.key)+'"><div class="lbl">'+w.word+'</div></div>';});
+  html+='</div>'
+    +'<div class="fz-notes" id="fzNotes" style="display:none">🎵🎶🎵</div>'
+    +'<img class="fz-dragon" id="fzDragon" style="display:none" src="'+img("w_skeleton")+'">'
+    +'<div class="fz-card" id="fzCard"><img id="fzImg"></div>'
+    +'<button class="btn" id="fzGo" style="margin-top:18px">▶ 💃</button>';
+  $("bonusBody").innerHTML=html;
+  [...$("fzPrac").children].forEach(c=>c.onclick=()=>{sPick();c.classList.remove("wiggle");void c.offsetWidth;c.classList.add("wiggle");});
+  fz={order:shuffle(dw),n:0,on:false};setDots(4,0);
+  $("fzGo").onclick=fzDance;
+  $("bonusDone").style.display="none";
+  showScreen("bonus");
+}
+function fzDance(){
+  const a=$("bgMusic");a.volume=Math.max(musicVol,0.5);a.play().catch(()=>{});fz.on=true;
+  $("fzPrac").style.display="none";$("fzCard").classList.remove("show");
+  $("fzDragon").style.display="";$("fzDragon").classList.add("dance");$("fzNotes").style.display="";$("fzNotes").classList.add("on");
+  $("fzGo").style.display="none";
+  later(fzStop,4000+Math.random()*3500);
+}
+function fzStop(){
+  try{$("bgMusic").pause();}catch(e){}fz.on=false;tone(880,.12,"square",.12);
+  const wd=fz.order[fz.n%fz.order.length];fz.n++;setDots(4,Math.min(fz.n,4));
+  $("fzDragon").classList.remove("dance");$("fzDragon").style.display="none";$("fzNotes").classList.remove("on");$("fzNotes").style.display="none";
+  $("fzImg").src=img(wd.key);$("fzCard").classList.add("show");
+  const im=$("fzImg");im.classList.remove("wiggle");void im.offsetWidth;im.classList.add("wiggle");
+  $("fzGo").textContent="▶ 💃";$("fzGo").style.display="";
+  if(fz.n>=4){$("bonusDone").style.display="";}
+}
+function freezeCleanup(){
+  if(!fz)return;fz=null;const a=$("bgMusic");
+  try{a.volume=musicVol;if(musicOn)a.play().catch(()=>{});else a.pause();}catch(e){}
+}
+/* bonus: MEMORY match (4 pairs of the words) */
+function startMemory(){
+  $("bonusTitle").textContent="🧩";
+  const mw=shuffle(WORDS).slice(0,6),deck=[];mw.forEach(w=>{deck.push(w.key+"|p");deck.push(w.key+"|t");});
+  for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}
+  let open=[],matched=0,lock=false;
+  const body=$("bonusBody");body.innerHTML='<div class="mem-grid" id="memGrid"></div>';
+  const grid=$("memGrid");
+  deck.forEach((k,idx)=>{const card=document.createElement("div");card.className="mem-card";card.dataset.key=k;card.dataset.i=idx;
+    const [kk,kind]=k.split("|"),ww=WORDS.find(w=>w.key===kk);card.dataset.key=kk;
+    const asPic=kind==="p"||LEVEL==="beg";
+    card.innerHTML='<div class="mem-face mem-back">🎃</div><div class="mem-face mem-front">'+(asPic?'<img src="'+img(kk)+'">':'<div class="mem-txt">'+ww.word+'</div>')+'</div>';
+    card.onclick=()=>{
+      if(lock||card.classList.contains("flip")||card.classList.contains("done"))return;
+      card.classList.add("flip");sPick();open.push(card);
+      if(open.length===2){lock=true;
+        if(open[0].dataset.key===open[1].dataset.key){
+          sRight();setTimeout(()=>{open.forEach(c=>c.classList.add("done"));open=[];lock=false;matched++;
+            if(matched===mw.length){setTimeout(()=>{sCheer();$("bonusDone").style.display="";},400);}},500);
+        }else{sWrong();setTimeout(()=>{open.forEach(c=>c.classList.remove("flip"));open=[];lock=false;},LEVEL==="beg"?1500:2200);}
+      }
+    };grid.appendChild(card);});
+  $("bonusDone").style.display="none";
+  showScreen("bonus");
+}
+/* bonus: SHADOW match (match word to its shadow) */
+let shState=null;
+function startShadow(){
+  $("bonusTitle").textContent="👤";
+  shState={done:0,order:shuffle(WORDS)};
+  $("bonusDone").style.display="none";
+  showScreen("bonus");shadowRound();
+}
+function shadowRound(){
+  const target=shState.order[shState.done];setDots(4,shState.done);
+  let html='<img src="'+img(target.key)+'" style="width:150px;margin-bottom:14px;filter:drop-shadow(0 6px 8px rgba(0,0,0,.3))">';
+  html+='<div class="pic-grid" id="shadowGrid"></div>';
+  $("bonusBody").innerHTML=html;
+  const grid=$("shadowGrid");let lock=false;
+  shuffle([target].concat(shuffle(WORDS.filter(w=>w!==target)).slice(0,3))).forEach(wd=>{const d=document.createElement("div");d.className="pic-item";
+    d.innerHTML='<img src="'+img(wd.key)+'" style="filter:brightness(0) opacity(.8)"><div class="circle-mark"></div>';
+    d.onclick=()=>{if(lock)return;
+      if(wd.key===target.key){lock=true;sRight();d.classList.add("right");d.querySelector("img").style.filter="none";
+        shState.done++;setDots(4,shState.done);
+        if(shState.done>=4)later(()=>{$("bonusDone").style.display="";},600);else later(shadowRound,1300);}
+      else{sWrong();d.classList.add("wrong");setTimeout(()=>d.classList.remove("wrong"),400);}};
+    grid.appendChild(d);});
+}
+$("bonusDone")&&($("bonusDone").onclick=finishBonus);
+$("toFinish").onclick=()=>{const i=steps.findIndex(s=>s.id==="shop");goStep(i>=0?i:steps.findIndex(s=>s.id==="finish"));};
+$("finishBack").onclick=()=>goStep(steps.findIndex(s=>s.id==="iftime"));
+function backToBonusMenu(){clearGameTimers();freezeCleanup();setDots(0);hideHighlight();revealCtx=null;$("roomGames").style.display="none";showScreen("iftime");renderBonusMenu();}
+$("bonusBack")&&($("bonusBack").onclick=backToBonusMenu);
+
+/* ---- FINISH / PHOTO ---- */
+function setupFinish(st){roomLevel=ROOM_COUNT-1;composePhoto();showScreen("finish");$("topbar").style.display="none";$("navbar").style.display="none";sCheer();confetti();}
+function composePhoto(){
+  const canvas=$("photoCanvas");const W=1672,H=941;canvas.width=W;canvas.height=H;
+  const ctx=canvas.getContext("2d");const bg=Object.assign(new Image(),{crossOrigin:'anonymous'});
+  const dk=room.dragon,dr=Object.assign(new Image(),{crossOrigin:'anonymous'});let left=dk?2:1;
+  function done(){if(--left>0)return;
+    ctx.drawImage(bg,0,0,W,H);
+    if(dk&&dr.width){const c=SLOTS.dragon,tw=c.w*W,th=tw*dr.height/dr.width;ctx.drawImage(dr,c.cx*W-tw/2,c.cy*H-th,tw,th);}
+    $("finishPhoto").src=canvas.toDataURL("image/png");}
+  bg.onload=done;bg.onerror=done;bg.src=img(chosenRoom||roomKey(ROOM_COUNT-1));
+  if(dk){dr.onload=done;dr.onerror=done;dr.src=img(dk);}
+}
+$("saveBtn")&&($("saveBtn").onclick=()=>{const a=document.createElement("a");a.href=$("finishPhoto").src;a.download="halloween_room.png";a.click();});
+$("replayBtn")&&($("replayBtn").onclick=()=>{Object.keys(room).forEach(k=>delete room[k]);roomLevel=0;candies=0;$("candyN").textContent=0;chosenRoom=null;bonusDone={song:false,memory:false,shadow:false};buildSteps();goStep(0);});
+
+/* ---- NAV buttons ---- */
+$("navBack")&&($("navBack").onclick=()=>{      // left arrow (teacher); inside a bonus game → back to the games list
+  const st=steps[stepIdx];
+  if(st&&st.id==="iftime"&&!$("iftime").classList.contains("active")){backToBonusMenu();return;}
+  prevStep();});
+$("navFwd")&&($("navFwd").onclick=()=>{
+  const st=steps[stepIdx];
+  if(st&&st.id==="iftime"&&!$("iftime").classList.contains("active")){backToBonusMenu();return;}
+  nextStep();});        // right arrow (teacher skip)
+// center Next: after a game → show the next room; on the room screen → go on
+$("navNextMain")&&($("navNextMain").onclick=()=>{
+  if(revealCtx){const f=revealCtx.onContinue;revealCtx=null;hideHighlight();f();return;}
+  const st=steps[stepIdx];
+  if(st && st.id==="present" && presentNext())return;   // presentation: Next = next word
+  if(!stepComplete && roundNext){roundNext();return;}    // several rounds: Next = next round
+  if(st && st.room && !st._roomShown){st._roomShown=true;stopSpot();revealRoom(st.room,nextStep);}
+  else nextStep();
+});
+
+/* ---- LESSON PLAN in new window ---- */
+function openPlan(){
+  const W=Math.min(1050,screen.availWidth-80),H=Math.min(900,screen.availHeight-80);
+  const w=window.open("","wowspeak_plan","popup=yes,width="+W+",height="+H+",left="+(screen.availWidth-W-20)+",top=30,resizable=yes,scrollbars=yes");
+  if(!w){alert("Please allow pop-ups to open the lesson plan.");return;}
+  w.document.write(PLAN_HTML);w.document.close();w.document.title="План урока — Halloween 7-9";
+}
+$("planBtn")&&($("planBtn").onclick=openPlan);
+
+/* ---- MUSIC toggle ---- */
+$("musicBtn")&&($("musicBtn").onclick=function(){musicOn=!musicOn;this.textContent="🎵 "+(musicOn?"ON":"OFF");if(musicOn)playMusic();else stopMusic();});
+$("musicVol")&&($("musicVol").addEventListener("input",function(){setMusicVol(this.value/100);}));
+
+/* night background picture for the game screens */
+["wu-emo","wu-costume","present","miming","circle","odd","howmany","ilike","missing","iftime","bonus-screen","knock","cauldron","finish","fog","shop","spotdiff","monster","anagram"].forEach(id=>{
+  const el=$(id);if(el)el.style.background="linear-gradient(rgba(16,6,34,.30),rgba(16,6,34,.30)),url("+img("bg7_night")+") center/cover";});
+
+/* ---- 7–9 extras ---- */
+ROOM_NEW=LV.roomNew;
+$("boardBg").src=img("board7");
+$("monColors").innerHTML=MON_COLORS.map(c=>'<div class="mc" data-c="'+c[0]+'" title="'+c[0]+'" style="background:'+c[2]+'"></div>').join("");
+document.querySelectorAll("#monColors .mc").forEach(b=>b.onclick=()=>{mon.s.color=b.dataset.c;sPick();monRender();});
+$("icEye").src=img("eye");$("icArm").src=img("arm");$("icLeg").src=img("leg");$("icHorn").src=img("horn_l");
+
+const STORY={"start": "Hi! I'm Boo, a friendly ghost! \ud83d\udc7b My friends are coming to a Halloween party tonight, but the room is empty! Can you help me decorate it?", "end": "Wow! Thank you! The room looks amazing. Now let's have a party! \ud83c\udf89"};const STORY_IMG="w_ghost";const SHOP=[{"key": "shop_a", "name": "A cauldron", "cap": "A magic cauldron! \ud83e\uddea", "box": [39.2, 46.0, 60.5, 85.7]}, {"key": "shop_b", "name": "Balloons", "cap": "Balloons! \ud83c\udf88", "box": [17.0, 13.8, 31.1, 42.3]}, {"key": "shop_c", "name": "Presents", "cap": "Presents! \ud83c\udf81", "box": [51.3, 62.8, 65.4, 80.6]}];
+/* ===================== shared extras: character sounds, candy jar, shop, story ===================== */
+
+/* ---- character sounds (synthesised, no files) ---- */
+let noiseBuf=null;
+function noise(){const c=audio();if(!c)return null;if(!noiseBuf){noiseBuf=c.createBuffer(1,c.sampleRate,c.sampleRate);const d=noiseBuf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;}return noiseBuf;}
+function nz(t0,dur,freq,q,vol,type){const c=audio();if(!c||!sfxOn)return;const s=c.createBufferSource();s.buffer=noise();
+  const f=c.createBiquadFilter();f.type=type||"bandpass";f.frequency.value=freq;f.Q.value=q||1;const g=c.createGain();
+  const t=c.currentTime+t0;g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+0.01);g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  s.connect(f);f.connect(g);g.connect(c.destination);s.start(t);s.stop(t+dur+0.02);}
+function osc(t0,dur,f0,f1,type,vol,vib){const c=audio();if(!c||!sfxOn)return;const o=c.createOscillator(),g=c.createGain(),t=c.currentTime+t0;
+  o.type=type||"sine";o.frequency.setValueAtTime(f0,t);if(f1)o.frequency.exponentialRampToValueAtTime(f1,t+dur);
+  if(vib){const l=c.createOscillator(),lg=c.createGain();l.frequency.value=vib[0];lg.gain.value=vib[1];l.connect(lg);lg.connect(o.frequency);l.start(t);l.stop(t+dur);}
+  g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol||.12,t+0.04);g.gain.setValueAtTime(vol||.12,t+dur*0.7);g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+dur+0.02);}
+const CHAR_SOUNDS={
+  ghost:()=>{osc(0,1.1,330,240,"sine",.13,[5,18]);osc(0,1.1,495,360,"sine",.05,[5,25]);},                       // "wooo-oo"
+  bat:()=>{[0,.13,.26].forEach(t=>osc(t,.08,3200,4200,"sine",.06));nz(.05,.25,1800,.7,.04);},                   // squeaks + flap
+  spider:()=>{[0,.07,.14,.21,.28,.35].forEach(t=>nz(t,.03,5000,4,.08));},                                       // tiny tapping legs
+  monster:()=>{osc(0,.9,85,60,"sawtooth",.10,[22,12]);nz(0,.9,300,1.2,.10,"lowpass");},                         // growl
+  witch:()=>{[0,.17,.34,.51].forEach((t,i)=>{osc(t,.12,900-i*60,700-i*60,"square",.05);nz(t,.12,2500,2,.05);});}, // he-he-he-he
+  pumpkin:()=>{osc(0,.18,220,520,"sine",.14);osc(.16,.2,520,260,"sine",.1);},                                  // bloop
+  cat:()=>{osc(0,.7,560,700,"sawtooth",.05,[6,10]);osc(0,.7,1120,1300,"sine",.04);},                            // meow-ish
+  skeleton:()=>{[0,.09,.18,.32,.41].forEach(t=>{nz(t,.04,2200,6,.12);osc(t,.04,900,700,"square",.04);});},      // bones clacking
+  vampire:()=>{[[220,277,330],[208,262,311]].forEach((ch,j)=>ch.forEach(f=>osc(j*.35,.6,f,null,"triangle",.05)));}, // dramatic organ
+  mummy:()=>{osc(0,1.2,140,110,"sawtooth",.06,[3,6]);nz(0,1.2,500,1,.04,"lowpass");},                           // moan
+  broom:()=>{nz(0,.6,1200,.6,.10);nz(.1,.5,2400,.8,.06);},                                                      // whoosh
+  house:()=>{osc(0,.9,180,320,"sawtooth",.035);osc(.9,.35,420,400,"sine",.08);osc(1.3,.5,400,380,"sine",.08);}, // creak + hoo-hoo
+  candy:()=>{[1047,1319,1568].forEach((f,i)=>osc(i*.07,.15,f,null,"triangle",.07));}
+};
+function charSound(word){/* character sounds switched off — they did not sound good */}
+
+/* ---- candy jar: every right answer drops a candy into the jar ---- */
+let candies=0,candyLast=0;
+function addCandy(){
+  const now=performance.now();if(now-candyLast<350)return;candyLast=now;candies++;
+  const pill=$("candyPill");if(!pill)return;const r=pill.getBoundingClientRect();
+  const c=document.createElement("div");c.className="candy-fly";c.textContent="🍬";document.body.appendChild(c);
+  const sx=window.innerWidth/2,sy=window.innerHeight*0.45;
+  c.animate([{transform:"translate("+sx+"px,"+sy+"px) scale(1.4)",opacity:1},{transform:"translate("+(r.left+14)+"px,"+(r.top+4)+"px) scale(.6)",opacity:.9}],{duration:700,easing:"cubic-bezier(.5,0,.6,1)"}).onfinish=()=>{c.remove();
+    $("candyN").textContent=candies;pill.classList.remove("bump");void pill.offsetWidth;pill.classList.add("bump");};
+}
+/* every "right!" sound also earns a candy */
+const _sRight=sRight;sRight=function(){_sRight();addCandy();};
+
+/* ---- clickable page dots ---- */
+function pipsClickable(){[...$("pips").children].forEach((d,i)=>{d.title=String(steps[i]&&steps[i].page||"");d.onclick=()=>goStep(i);});}
+
+/* ---- shop: spend the candies on one more surprise for the room ---- */
+let chosenRoom=null;
+function setupShop(st){
+  chosenRoom=null;$("shopN").textContent=candies;
+  const row=$("shopRow");row.innerHTML="";
+  SHOP.forEach((it,i)=>{const d=document.createElement("div");d.className="choice shop-item";
+    d.innerHTML='<img src="'+img(it.key+"_thumb")+'"><span class="lbl">'+it.name+'</span>';
+    d.onclick=()=>{if(chosenRoom)return;chosenRoom=it.key;sPick();d.classList.add("sel");later(()=>shopReveal(it),500);};
+    row.appendChild(d);});
+  showScreen("shop");
+}
+function shopReveal(it){
+  revealCtx={onContinue:nextStep};hideHighlight();setDots(0);
+  showRoom(ROOM_COUNT-1);showScreen("room");setCap("What's new? 👀",true);
+  const nw=$("roomBgNew"),nb=$("navNextMain");nb.classList.remove("ready");
+  nw.onload=()=>{later(()=>{nw.classList.add("show");sPop();},500);
+    later(()=>{showHighlightBox(it.box);charSound("candy");},1700);
+    later(()=>{setCap(it.cap,true);sCheer();confetti();nb.classList.add("ready");},2500);};
+  nw.src=img(it.key);
+}
+function showHighlightBox(b){const save=ROOM_HL[0];ROOM_HL[0]=b;showHighlight(0);ROOM_HL[0]=save;}
+
+/* ---- story (7–9): Boo the ghost asks for help and throws a party at the end ---- */
+function storySay(text){const s=$("story");if(!s)return;if(!text){s.style.display="none";return;}
+  $("storyText").textContent=text;s.style.display="flex";s.classList.remove("in");void s.offsetWidth;s.classList.add("in");charSound("ghost");}
+function setupParty(st){
+  $("partyBg").src=img("party");showScreen("party");sCheer();confetti();later(confetti,1200);
+  storySay(STORY.end);
+}
+
+$("storyImg").src=img(STORY_IMG);
+
+/* ---- START ---- */
+
+$("startBtn").onclick=()=>{audio();musicOn=true;playMusic();buildSteps();goStep(0);};
+</script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+{
+ "course": "sm0",
+ "unit_sort_order": 0,
+ "lesson": "Homework 1",
+ "kind": "homework",
+ "lesson_sort_order": 0,
+ "pass_threshold": 60,
+ "is_published": false,
+ "media_base": "https://classroom.wowteach.ru/media/",
+ "blocks": [
+  {
+   "sort_order": 0,
+   "type": "text",
+   "payload": {
+    "html": "<p>Привет! 👋 Сегодня повторим, как знакомиться по-английски, и выучим буквы <b>S</b> и <b>A</b>.</p>"
+   }
+  },
+  {
+   "sort_order": 1,
+   "type": "quiz",
+   "payload": {
+    "questions": [
+     {
+      "q": "",
+      "type": "single",
+      "audio": "",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "s"
+       },
+       {
+        "text": "a"
+       }
+      ]
+     },
+     {
+      "q": "",
+      "type": "single",
+      "audio": "",
+      "correct": [
+       1
+      ],
+      "options": [
+       {
+        "text": "s"
+       },
+       {
+        "text": "a"
+       }
+      ]
+     }
+    ],
+    "needs_review": false,
+    "title": "Послушай звук и выбери букву."
+   }
+  },
+  {
+   "sort_order": 2,
+   "type": "quiz",
+   "payload": {
+    "questions": [
+     {
+      "q": "<b>S</b>",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "s"
+       },
+       {
+        "text": "a"
+       },
+       {
+        "text": "t"
+       }
+      ]
+     },
+     {
+      "q": "<b>A</b>",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "options": [
+       {
+        "text": "s"
+       },
+       {
+        "text": "a"
+       },
+       {
+        "text": "p"
+       }
+      ]
+     }
+    ],
+    "needs_review": false,
+    "title": "Это большая буква. Выбери её маленькую пару."
+   }
+  },
+  {
+   "sort_order": 3,
+   "type": "quiz",
+   "payload": {
+    "questions": [
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "audio": "",
+      "audio_tts": "What's your name?",
+      "options": [
+       {
+        "text": "I'm Misty.",
+        "audio": "",
+        "audio_tts": "I'm Misty."
+       },
+       {
+        "text": "How are you?",
+        "audio": "",
+        "audio_tts": "How are you?"
+       },
+       {
+        "text": "Hello, hello!",
+        "audio": "",
+        "audio_tts": "Hello, hello!"
+       }
+      ]
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "audio": "",
+      "audio_tts": "How are you?",
+      "options": [
+       {
+        "text": "I'm Misty.",
+        "audio": "",
+        "audio_tts": "I'm Misty."
+       },
+       {
+        "text": "I'm happy!",
+        "audio": "",
+        "audio_tts": "I'm happy!"
+       },
+       {
+        "text": "What's your name?",
+        "audio": "",
+        "audio_tts": "What's your name?"
+       }
+      ]
+     }
+    ],
+    "needs_review": false,
+    "title": "Послушай вопрос и выбери ответ."
+   }
+  },
+  {
+   "sort_order": 4,
+   "type": "order",
+   "payload": {
+    "words": [
+     "a",
+     "s"
+    ],
+    "sentence": "as",
+    "audio": "",
+    "audio_tts": "as"
+   }
+  },
+  {
+   "sort_order": 5,
+   "type": "order",
+   "payload": {
+    "words": [
+     "s",
+     "a"
+    ],
+    "sentence": "sa",
+    "audio": "",
+    "audio_tts": "sa"
+   }
+  },
+  {
+   "sort_order": 6,
+   "type": "speaking",
+   "payload": {
+    "title": "Нажми на микрофон и прочитай слоги вслух 🎤",
+    "html": "<p><b>as &nbsp;·&nbsp; sa &nbsp;·&nbsp; AS &nbsp;·&nbsp; SA</b></p>",
+    "needs_review": true
+   }
+  },
+  {
+   "sort_order": 7,
+   "type": "speaking",
+   "payload": {
+    "title": "Поздоровайся и назови своё имя 🎤",
+    "html": "<p>Нажми на микрофон и скажи: <b>Hello! I’m …</b></p>",
+    "needs_review": true
+   }
+  },
+  {
+   "sort_order": 8,
+   "type": "text",
+   "payload": {
+    "html": "<p>Молодец! 🌟 Ты познакомился по-английски и сам прочитал первые слоги — <b>as</b> и <b>sa</b>.</p>"
+   }
+  }
+ ]
+}

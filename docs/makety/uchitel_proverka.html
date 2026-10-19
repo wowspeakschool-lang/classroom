@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Учитель: проверка, задать, карточка — макет</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Цвета и шрифт — как в index.html */
+:root{
+  --brand:#5B4BE0; --brand-d:#3A2FA8; --brand-soft:#F0EEFD;
+  --ink:#1A1B2E; --mut:#7A7F92; --faint:#A6AAB9; --line:#E8E7EE; --bg:#F7F6F9;
+  --ok:#0D6155; --ok-soft:#E2F1EE; --warn:#A9660B; --warn-soft:#FBF0DE; --bad:#B3261E; --bad-soft:#FBE9E7;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Golos Text',-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.5}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:14px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+textarea{width:100%;resize:vertical;min-height:60px}
+
+/* панель макета */
+.panel{position:sticky;top:0;z-index:100;background:#1D1A29;color:#fff;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;padding:8px 12px;font-size:13px}
+.grp{display:flex;align-items:center;gap:3px;flex-wrap:wrap}
+.grp>span{opacity:.5;margin-right:4px}
+.grp button{color:#fff;opacity:.6;padding:5px 10px;border-radius:8px;font-size:13px;border:0;background:none}
+.grp button.on{background:rgba(255,255,255,.16);opacity:1;font-weight:700}
+.note{opacity:.6;font-size:12px;flex-basis:100%}
+
+/* оболочка как в classroom */
+.app{display:grid;grid-template-columns:236px 1fr;min-height:calc(100vh - 44px)}
+.side{background:#fff;border-right:1px solid var(--line);padding-bottom:16px}
+.logo{font-weight:700;font-size:16px;height:58px;display:flex;align-items:center;gap:10px;padding:0 18px}
+.logo:before{content:"C";width:25px;height:25px;border-radius:8px;background:var(--brand);color:#fff;font-size:12px;display:grid;place-items:center}
+.tab{display:flex;align-items:center;gap:10px;padding:9px 12px;margin:1px 10px;border-radius:10px;color:#3d4052;font-size:14.5px;cursor:pointer}
+.tab:hover{background:var(--bg)}
+.tab.on{background:var(--brand-soft);color:var(--brand-d);font-weight:600}
+.tab .cnt{margin-left:auto;background:var(--warn-soft);color:var(--warn);border-radius:99px;padding:0 8px;font-size:12px;font-weight:700}
+.main{min-width:0}
+.topbar{height:58px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 24px;position:relative}
+.topbar h1{font-size:18px;margin:0;flex:1}
+.bell{position:relative;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:#fff;font-size:18px}
+.bell i{position:absolute;top:-5px;right:-5px;background:#E5484D;color:#fff;font-style:normal;font-size:11px;font-weight:700;border-radius:99px;padding:1px 6px}
+.who{font-size:13px;color:var(--mut)}
+.page{padding:22px 24px 120px;max-width:1100px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:16px}
+.btn{border:1px solid var(--brand);background:var(--brand);color:#fff;padding:8px 14px;border-radius:10px;font-weight:600;font-size:14px}
+.btn:hover{background:var(--brand-d)}
+.btn.sec{background:#fff;border-color:var(--line);color:var(--ink);font-weight:500}
+.btn.sm{padding:5px 11px;font-size:13px;border-radius:9px}
+.btn.warn{background:#fff;border-color:#E9C58F;color:var(--warn)}
+.btn.big{padding:11px 20px;font-size:15px}
+.pill{display:inline-block;border-radius:99px;padding:2px 10px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.pill.g{background:var(--ok-soft);color:var(--ok)} .pill.y{background:var(--warn-soft);color:var(--warn)}
+.pill.r{background:var(--bad-soft);color:var(--bad)} .pill.n{background:#EFEEF3;color:var(--mut)} .pill.b{background:var(--brand-soft);color:var(--brand-d)}
+.muted{color:var(--mut)} .small{font-size:13px}
+table{width:100%;border-collapse:collapse}
+th{font-size:12px;font-weight:600;color:var(--mut);text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tr.click:hover td{background:#FBFAFD;cursor:pointer}
+.ava{width:34px;height:34px;border-radius:50%;display:inline-grid;place-items:center;font-weight:700;font-size:13px;color:#fff;margin-right:10px;vertical-align:middle}
+.seg{display:inline-flex;background:#EFEEF3;border-radius:11px;padding:3px}
+.seg button{border:0;background:none;padding:6px 14px;border-radius:9px;font-size:14px;color:var(--mut)}
+.seg button.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.h2{font-size:16px;font-weight:700;margin:0 0 10px}
+
+/* колокольчик */
+.drop{position:absolute;right:20px;top:54px;width:380px;z-index:40;box-shadow:0 18px 50px rgba(30,20,80,.16)}
+.drop .it{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);cursor:pointer}
+.drop .it:hover{background:#FBFAFD}
+.drop .it.new{background:#FBFAFF}
+.drop .it .dot{width:8px;height:8px;border-radius:50%;background:var(--brand);margin-top:8px;flex:0 0 auto}
+.drop .it .dot.off{background:transparent}
+
+/* проверка */
+.rv{display:grid;grid-template-columns:220px 1fr;gap:18px;align-items:start}
+.toc{position:sticky;top:120px}
+.toc a{display:flex;gap:8px;align-items:center;padding:7px 10px;border-radius:9px;font-size:13.5px;color:var(--ink);text-decoration:none}
+.toc a:hover{background:#fff}
+.toc .sc{margin-left:auto;font-size:12px;font-weight:700}
+.task{padding:16px 18px;margin-bottom:14px}
+.task.ret{outline:2px solid #E9C58F;background:#FFFCF6}
+.thd{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.thd b{flex:1}
+.item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;margin:2px 0}
+.item:hover{background:#FAF9FC}
+.item .q{flex:1;min-width:0}
+.ans{font-weight:600}
+.right{font-size:12.5px;color:var(--mut)}
+.mark{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:#fff;font-weight:800;font-size:16px;flex:0 0 auto}
+.mark.ok{background:var(--ok-soft);border-color:#BFE0D9;color:var(--ok)}
+.mark.no{background:var(--bad-soft);border-color:#F2C6C1;color:var(--bad)}
+.mark.fixed{box-shadow:0 0 0 2px var(--brand)}
+.cm{border:0;background:none;color:var(--faint);font-size:16px;padding:4px 6px;border-radius:8px}
+.cm:hover{background:#EFEEF3;color:var(--brand)}
+.cm.has{color:var(--brand)}
+.cbox{display:flex;gap:8px;margin:4px 0 6px 44px}
+.cbox textarea{min-height:44px}
+.cshow{margin:4px 0 6px 44px;background:#FFF8E8;border-radius:10px;padding:8px 12px;font-size:14px}
+.cshow b{font-size:11.5px;color:var(--warn);text-transform:uppercase;letter-spacing:.04em;display:block}
+.fixednote{font-size:11.5px;color:var(--brand);font-weight:600}
+.img{width:62px;height:62px;object-fit:contain;border-radius:8px;background:#FAF9FC}
+.player{display:flex;align-items:center;gap:10px;background:var(--bg);border-radius:12px;padding:8px 12px}
+.player .pb{width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;border:0}
+.player .wave{flex:1;height:26px;background:repeating-linear-gradient(90deg,#B9B1F3 0 3px,transparent 3px 6px);-webkit-mask:linear-gradient(transparent 20%,#000 20% 80%,transparent 80%)}
+.score5{display:inline-flex;gap:4px}
+.score5 button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:5px 10px;font-weight:600;font-size:13px}
+.score5 button.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.bar{position:fixed;left:236px;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);z-index:30}
+.bar-in{max-width:none;padding:12px 24px;display:flex;align-items:center;gap:12px;flex-wrap:nowrap}
+.bar-in .btn{white-space:nowrap}
+.total{display:flex;align-items:center;gap:8px}
+.total input{width:70px;font-size:18px;font-weight:700;text-align:center;padding:6px}
+.chk{display:inline-flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;white-space:nowrap}
+.chk input{width:18px;height:18px;accent-color:var(--brand)}
+.rtcheck{width:20px;height:20px;accent-color:var(--warn)}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#1A1B2E;color:#fff;padding:10px 18px;border-radius:12px;font-size:14px;z-index:200}
+
+/* карточка ученика */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.stat{padding:14px 16px}
+.stat b{display:block;font-size:22px}
+.stat span{font-size:13px;color:var(--mut)}
+.unit td.u{background:#FAF9FC;font-weight:700;font-size:13px;color:var(--mut);padding:8px 14px}
+
+/* задать */
+.steps3{display:grid;grid-template-columns:1fr 1.3fr .9fr;gap:14px;align-items:start}
+.lst{max-height:430px;overflow:auto}
+.lrow{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--line);font-size:14px}
+.lrow input{width:17px;height:17px;accent-color:var(--brand)}
+.lrow .grow{flex:1;min-width:0}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;font-size:13px}
+.cal div{padding:6px 0;border-radius:8px}
+.cal .h{color:var(--faint);font-size:11.5px}
+.cal .d{cursor:pointer}
+.cal .d:hover{background:var(--bg)}
+.cal .d.on{background:var(--brand);color:#fff;font-weight:700}
+.cal .d.today{box-shadow:0 0 0 1px var(--brand) inset}
+.cal .d.past{color:#cfcfd8}
+
+/* библиотека */
+.tree .c{font-weight:700;padding:10px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.tree .c i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.tree .u{padding:8px 14px 8px 34px;border-bottom:1px solid var(--line);font-weight:600;font-size:14px;color:#3d4052}
+.tree .l{padding:7px 14px 7px 56px;border-bottom:1px solid var(--line);font-size:14px;display:flex;gap:10px;align-items:center}
+.tree .l .grow{flex:1}
+/* телефон: проверка в одну колонку */
+body.phone{background:#2A2638}
+body.phone .app{grid-template-columns:1fr;max-width:390px;margin:16px auto;border-radius:22px;overflow:hidden;background:var(--bg);min-height:780px}
+body.phone .side{display:none}
+body.phone .topbar{padding:0 14px}
+body.phone .page{padding:14px 12px 170px}
+body.phone .rv{grid-template-columns:1fr}
+body.phone .toc{display:none}
+body.phone .item{flex-wrap:wrap}
+body.phone .img{width:48px;height:48px}
+body.phone .bar{left:50%;right:auto;width:390px;transform:translateX(-50%);bottom:0}
+body.phone .bar-in{flex-wrap:wrap;padding:10px 12px;gap:8px}
+body.phone .bar-in .btn.big{flex:1 1 100%}
+body.phone .bar-in .btn.warn{flex:1 1 40%;font-size:13px;padding:7px 8px}
+body.phone .bar-in>span[style*="flex:1"]{display:none}
+body.phone table th:nth-child(3),body.phone table td:nth-child(3),body.phone table th:nth-child(4),body.phone table td:nth-child(4),body.phone table th:nth-child(5),body.phone table td:nth-child(5){display:none}
+body.phone .drop{width:340px;right:10px}
+</style>
+</head>
+<body>
+<div class="panel" id="panel"></div>
+<div class="app">
+  <div class="side" id="side"></div>
+  <div class="main"><div class="topbar" id="top"></div><div id="page"></div></div>
+</div>
+<div id="bar"></div>
+<script>
+const IMG = {"get_up": "data:image/webp;base64,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", "have_lunch": "data:image/webp;base64,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", "brush_your_teeth": "data:image/webp;base64,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", "go_to_school": "data:image/webp;base64,UklGRkoNAABXRUJQVlA4ID4NAAAQQACdASqcAKAAPplAnEglpCMhL1WsSLATCWgA0BBkSufNf1j0s7A/e+ENOj2w8zvwy9UnmEc8PzI+bL/zP1d9/P9m9Qr+d/8DrXfQx8Iz4i/3Er1nTvCd2pfaQQwfL35IZf8S1jFjWgJ4y2i5/GTGlHYIKuXLzJ7yYOzSMoF6sX16P7BS5o8o34B810G9JL8Azh63ZXaK48f8kkoztHapncQwjWaNGlssAAbG3DNkn7DNjqGXwCJ5IJVTheeQwyJTmaKI8Xwo+JoLQlqnMQvlP164/YRbun14OzOGfCK8xKMVjQjgVzp7tOVh5OTUQ8+drt2uAPN6prsF8/8UJHe3w2deQboOBr24yRe1SpjeOqZMfiI4B6Aaxluam3HRv+jbz/6vB/zBSn2ReEtl1gjaGbgwIdwJXj0Yxg+sRdKN8KVPogj4xi4wGjejVdl6yJElMeNAy0UKyLPWmVdCFVrRAAslS5j4vRuz8EhurirfvN2AfVear9jLA4Qq3sUSzHW67fwuwjLPhjNuE2gs/X6r2uVTUxEW3AUKkczPUZiD9jxSWo/l5s2gyXW3Oy68ownddzguG2bBpwCCTG9FXygMdFeTiLFajBkZlad/gX3Yn6DfF85A85g+05eMTVtDT621dbBgnRFOra6yN9fJ50BiLwB2te6owHRUXmjGAO6BdgNhzkC8K7wmAAD++yGeQNugI4sJ37J1pwxaVaZ21rtbr75e4A+In7L+Din4YcdyOiKbFTgGi52GUHpuiXJbluxcn3GOTn8fwT62GOw5fJ9Rz5SUBSDBaFnsTXDY/Thl+qxaJZQgcPaTndNRN023peSXDhNN5jJTPiJJMbDSat/NzxO/7yST6jna2S+FSmIIJaD1XH0thy2fn8ioS5rnqRf6kQEEI6iwjr2CcYhf64J0CvZW6WVJzSbWMG7sC//LaBLl2JftHf20B4xjvdw8x7bLlBINmUA4o9c4KWJv/n952tVXTW5aITZUNiGbr4fwdKuChgcXVcZMcj1r9wxDdJPkZO+aOxs7zDbFox9jzZW0fmMiJNCeDK2D9kNQDgLV5IyKl5R3pIRYq+4r1ymCLshc381Fqf66lNWytDvcdy6p2bJOiVpkZO7ONz+jqAmStfi9m3e+m3wGXPkyhWK+jGCQxJuYFmhq4NNxgBP+S/3nL56IFjKegkQr7LopgCsl8Mvln5jj62rihDYqPKWmIIu2n6M7aTZqfsZUckE2NIADzE16zF+nOxkwOnQ+8K5zMwF6oPT2/cz/FU7F/Bl9YPw99unbPBnwDIQyDQjomMpJwvGQ2fEBDer+tl3Z741w01S1Jp0S/ODsyISuvFJ60NMKMEnD7eaKqVRmWOADEcgyA9BomhOYKo/lEzNmk8/oef4UY/OsX2iAzbACRSQIvWITNmT7SqwT+m+hOtM7QZl9Gs26cEl899+6ufspc+w3Fz8iyDh7P0TjEweHJH/Zk0EyCuN1fB2NomzYOJxQe1s1CeyRNHh38B0wFe2nsxKxyIMa++ayKynVYJJ6+lGCgwAn/c/wScTJNQqZYS0LpWbfjlnCR4j91r0oChrdHg9uCounmU7WQuGWVFGjbBCxS2apavJxJ8T41P2wrnDvn9iGjmV1u1FG7p6iTYIXp1QyZIhz6qMhmfqODbSgeuZC+dEdOcqfk2dQUFqQcpSoBA+yr1TH7vpL67FKGBSB7WVvWW7bcyYECKl+XGxjLjbvkAcE6ZcfWdYGrDMjV7M7ytczGPDc0Ewj0XbEGvM3/C2J9dOsKwysKPpd8HKslHwCjEcq7Flpx/O35r+PBSoVV+OXUzzxjkBnI6yjgTUeFvjD8p1l3IH1uco4EGl7oCct/D9UN/zdjdCgmCukYfdEb+5HerSlTnUlrE8noMRWGYqiNh1VP6v/SFR6butxQS3fTfIVfbPCdOBryyNs8tQkH9yr7ifBnUuGUJCCXjeELi5QQBZPlBsA96pxaU7mELsst/zBqi8p99CZsY6CVomaP6Up2WIry7YVq9g6DsYoGsqun7JlU7DQG6XfXwERnVXj2EE7dtZ/ZgXp15E6cBxPrbOOjCRae2NGxa2ZkLZb4AdgBIlzCUuq6VOPFRjXct54uvPx3Zkq/UN7PYYMbZ9s4iBk9L2w+QEyXb9Ctf6wQDfZDB/xAk4SucB3YXUc9ZuPrZ1uTeVYU1wI+hN+1BdUyM71u4KKiwBBIk/Ow7m/dor/jbi6HkEweuQd72PKSlmVrzIpCRdWBwlaUu6tyhtfMDSVGXMQZau5/ZIFsbDFsYCLZWzkypPtGTxuL9qC6Tf5ih0V8yKU8/MQaMm+GXSNmUpw29+aLPh8nxgVLR9/RTCwPFKrozW2vzdQhE7M1TLmiKSBPTG2C9aw35DZGr7sLldcOmB/wcZFYnBUAutXY1P6igheCbgYutxb4wrf2OELQU96JvAsnhBFI0xKHTiPmppzlpmy+ocaPLxg8vMArlePvJ0ziifiEKPXcyIFUaROZ3I7VBvoz4wXjXWSDmGMCJAM0SOdza4SjJ5Exw0xICTbnPEGs65kAQVr5i9b9uIyOAFvNKd4mVp3qTGEiLoIIjQsVBx6XOmd4kgqudyvrtLQw9SBB3ajm+j4ROJNxyEOkFDq9HvtaVnD5X6Kqb6+pCU/GF+3SzV99e4LBf7wiQzQrUx6fZjmdzmBz+65HaKHLSj86Esa/ZDPSNoO0p/WAosUQ2gEyBUCg7Ss5tMw3rsDfDJScaF0X0yXjd9V+WGp5TxSLYi8FYslV610HUTi1NM1RE36ybAJDckQpCStQ5mS/hx3GBdnYCHmLhhoxf/yBZc3zbkqP17DZY9VP2AOwTTCAUUOM88nVXN1rnl2vMPaEz1TZinRDN9a2HqOTvStLJ5EKc3DVOWdTap1ZLdtIbhhbb4eDI9Nvv0bI0K7YpE0ZTJSj5tXRokwWPkw3d3cZ8o8UF+xJV8LzgW8Vrvr0jq5L+GlKpUPDfe2nYpG4pogPC2BBAzChqse6NRJhmInMApa7047oHjYSGaptHgQu7FT6cFMS5NAal+Z5luTP13tif/0ODQTDfnJ0g4JYU/lxQHQaekaVIgFvXgj2qgOoY2WiXuCAsxGRd/kus8F8BtQ+HbWCB5u1gGAObZ1nX7FKIN1bScLpuC2bBl7Q4Fk5XKcfXPAOOuhGa+IeH43ptOeD+xaFNxHMgSIM6iAeiiMIq85meNF7BMLvbHhLTU7Z8wdyPwSjWFw+Ggpkti8ukIic36Qzx9afCUjQnTHfj36gji2brpF52yyphDW/1P128OIGA1lbbt7SObWx9viXdGt2PLwMx34jGThyN7AWUUPEtURkmb2bHzPoAkwJNtIt895fu2j9QYD4Zu1JjV81nDb9pfS8vt63DNqYgzoF00pftfb1HOKcU5196RkZoqHg7of8hIfqI5zMRAGmsfoMMDv7T5pK/P8mtBzMW7aJvKNps9JWzjukSzti6gNxmsO4vS2tfwD7yAH9wItqbhiLJaP4wqntNURuogGaLaFUtkuccd2Wjlf7c0Ys91q0YmREhqB+MPqcdXmhnTUlMo3OR60/isK6O7wQzy8nhnrSGtNlxmWUIpk4J0Daze2DXbDzj9/HbMr43AcbOSTedpoBuaAGS3YtLUT52AAbvhJkxOlh3bKWkRESapgvY28lq6IhJ9VIt3uoZq0MX1c/7qokiCqjn4AP0gB94MoQDYp47KwF54Qc1YbCNZhRL2bVUTv2vAgrAAD8s8rh552BZgBVgE0Bp+PRtxKby5y1Gad3JGzl1SFA/3sxl9mU7i4iCELuA4YtPjMgwHjuwf6KUtP99OuUxiED8JrdgN/1IxiaIcleRPbWpPIF7kEisqcNBnGhzlzvX1FRcCYD6JiWYek3EKeMnATfyNEoj5pwpkolE1/2E8fHCov5aTDGcTeXkHRAeyZIDFqSyHsm+x0ijAbAsbW3EcGP/+nDqv4rpZSTb7+ZWzXPwah3UApMMtSBh7Ra783XOzBFAAAdasATNtsqEn3eBNrvwNoN8chuo62zIyWKNRn1b+WixkEgO3kiCDJ5K1PDy/OX+fEn5ZcZ8fBaDg7Xd/BmdeMSCsrr34CFb68wCd7bfq70sgYl8HJQ+NW1mmAQ1YHBp87SN6E1CdSdZJeNPX/N8W9addpGwLd5D1I9mblCdCP1RsUOKIc9zINbWsEaDPBJmZEX2wj9uszkdKLp4jA/85nY3qbbHAVvYWM9RDdice3x7PvujNJ5wwnCF8C9Ao3ea2WkQmqJglIhg/IlrBRD04n5bkdNYIGLVUgWf3YRBO+CCNGSAn/ojnVJkDDZyZUVv/Mdi7N56rMwhnlbvhQ3fwd1s/P0ZwBMBCbFPJ+cVvUW8dO7Yb8kdoxW3v8P1sA3A/j5sx8v/YbjJRwfzY8unIilKDx29zexKhaai+Er73dyaSbdhAr4SixtBBeRCqADinN38XcnxVjcz6wPYJf54tcCtMYGxk7cOpgOmYRMsWvcrsc+ZJS2Q7/ZAzyxhCdHaB14DyfiAAAAAA="};
+let S = { scr:'queue', lib:'A', showDef:'off', due:'manual', bell:false, retake:false, ret:{}, ov:{}, cm:{}, cmOpen:null,
+          sc:{}, total:null, show:false, pub:'all', libKind:'hw', toast:'', role:'teacher', dev:'pc', qi:0, sel:{}, q:'', speed:1, reti:{}, rday:null, only:false, flag:null, flags:{}, hideAns:false, mtab:'msg', sub:false, msgDone:{}, rfull:false, open:{c0:1,'c0:u0':1}, ukind:{}, asg:{stu:{s1:1,s3:1}, les:{h3:1}, day:null} };
+
+/* ── данные макета: ученики выдуманные ── */
+const STU = [
+  {id:'s1', name:'Маша К.', c:'#E07B9B', course:'SM2'}, {id:'s2', name:'Тимур А.', c:'#5B9BE0', course:'SM2'},
+  {id:'s3', name:'Ева Л.', c:'#5BB98C', course:'SM2'},  {id:'s4', name:'Лёва Д.', c:'#E0A85B', course:'WD1'},
+  {id:'s5', name:'Соня П.', c:'#9B7BE0', course:'GG1'},
+];
+const QUEUE = [
+  {s:'s1', code:'SM2 Unit 1 Homework 2', when:'сегодня, 14:20', att:1, auto:86, late:false},
+  {s:'s2', code:'SM2 Unit 1 Homework 1', when:'сегодня, 11:05', att:2, auto:94, late:false},
+  {s:'s4', code:'WD1 Homework 12',        when:'вчера, 19:40',   att:1, auto:71, late:true},
+  {s:'s5', code:'GG1 Unit 3 Homework 2',  when:'вчера, 17:12',   att:1, auto:null, late:false, note:'только устные'},
+];
+const NOTIF = [
+  {t:'Маша К. сдала SM2 Unit 1 Homework 2', w:'сегодня, 14:20', n:1, go:'review'},
+  {t:'Тимур А. сдал SM2 Unit 1 Homework 1 — 2-я попытка', w:'сегодня, 11:05', n:1, go:'review'},
+  {t:'Лёва Д. сдал WD1 Homework 12 с опозданием на 1 день', w:'вчера, 19:40', n:0, go:'review'},
+  {t:'Ева Л. не сдала SM2 Unit 1 Homework 2 — срок прошёл', w:'вчера, 23:59', n:0, go:'student'},
+  {t:'⏰ Ждёт проверки 3 дня: Соня П. · GG1 Unit 3 Homework 2', w:'сегодня, 9:00', n:1, go:'review'},
+  {t:'🎙 У Лёвы Д. не работает микрофон — 2-й раз. Попросите ассистентов связаться с родителями', w:'вчера, 19:40', n:0, go:'student'},
+];
+/* домашка на проверке: задания и пункты, auto — вердикт системы */
+const HW = [
+  {id:'t1', no:1, type:'Видео', title:'Daily routine song', info:'досмотрено до конца', noscore:true},
+  {id:'t2', no:2, type:'Карточки', title:'Посмотри все карточки', info:'открыты все 8', noscore:true},
+  {id:'t3', no:3, type:'Выбор ответа', title:'Послушай и выбери картинку', items:[
+     {q:'🔊 get up', img:'get_up', ans:'картинка 2', right:'', auto:true},
+     {q:'🔊 have lunch', img:'have_lunch', ans:'картинка 1', right:'верно: картинка 3', auto:false}]},
+  {id:'t4', no:4, type:'Соедини пары', title:'Соедини картинку и слова', items:[
+     {q:'', img:'brush_your_teeth', ans:'brush your teeth', right:'', auto:true},
+     {q:'', img:'go_to_school', ans:'go to school', right:'', auto:true},
+     {q:'', img:'get_up', ans:'get dressed', right:'верно: get up', auto:false}]},
+  {id:'t5', no:5, type:'Составь предложение', title:'Составь предложение', items:[
+     {q:'', ans:'Have I lunch at two o’clock.', right:'верно: I have lunch at two o’clock.', auto:false, words:true}],
+     prev:{sc:0, ans:'Lunch I have at two o’clock.', cm:'Сначала кто — I, потом действие.'}},
+  {id:'t6', no:6, type:'Пропуски', title:'Вставь пропущенное слово', items:[
+     {q:'I ___ breakfast at eight.', ans:'have', right:'', auto:true},
+     {q:'I ___ to school at nine.', ans:'goes', right:'верно: go', auto:false}]},
+  {id:'t7', no:7, type:'Короткий ответ', title:'Напиши слово', items:[
+     {q:'завтрак', ans:'brekfast', right:'верно: breakfast', auto:false}]},
+  {id:'t8', no:8, type:'Устный ответ', title:'Ответь на вопрос: When do you have breakfast?', oral:true, len:'0:09'},
+  {id:'t9', no:9, type:'Письменный ответ', title:'Напиши про свой день', text:'I get up at seven. I have breakfast at eight. I go to school.'},
+];
+
+/* ── расчёт оценки ── */
+function itemOk(t,i){ const k=t.id+':'+i; return k in S.ov ? S.ov[k] : t.items[i].auto; }
+function taskScore(t){
+  if(t.noscore) return null;
+  if(t.items){ const ok=t.items.filter((_,i)=>itemOk(t,i)).length; return Math.round(ok*100/t.items.length); }
+  return S.sc[t.id]!=null ? S.sc[t.id] : null;
+}
+function autoTotal(){
+  const xs=HW.map(taskScore).filter(x=>x!=null); return xs.length ? Math.round(xs.reduce((a,b)=>a+b,0)/xs.length) : null;
+}
+function needManual(){ return HW.filter(t=>(t.oral||t.text) && S.sc[t.id]==null); }
+
+/* ── панель макета ── */
+function grp(label,key,items){ return `<div class="grp"><span>${label}</span>${items.map(([v,t])=>`<button class="${S[key]===v?'on':''}" onclick="set('${key}','${v}')">${t}</button>`).join('')}</div>`; }
+function panel(){
+  let h = grp('Экран','scr',[['queue','Проверка — список'],['review','Проверка домашки'],['student','Карточка ученика'],['assign','Задать материал'],['library','Библиотека'],['preview','Просмотр урока учителем'],['method','Контроль качества']]);
+  if(S.scr==='review'||S.scr==='queue') h += grp('Устройство','dev',[['pc','компьютер'],['phone','телефон']]);
+  h += grp('Кто вошёл','role',[['teacher','учитель'],['editor','методист']]);
+  h += `<div class="note">${NOTE[S.scr]||''} · Колокольчик сверху справа нажимается.</div>`;
+  document.getElementById('panel').innerHTML=h;
+}
+const NOTE = {
+  preview:'Учитель открывает урок из библиотеки — видит его глазами ученика, но с верными ответами. «Скрыть ответы» — как у ученика. ⚑ у задания — сообщить методисту.',
+  method:'Только у методиста: сообщения учителей об ошибках, задания, где ошибаются 60% и больше, сводка по учителям.',
+  queue:'Сданные домашки ждут проверки — старые сверху. Нажмите строку. Вторая строка — пример повторной сдачи после переделки.',
+  review:'✓/✗ — поправить вердикт; 💬 — комментарий; балл — любое число. Внизу слева — «На доработку полностью» и «частично» (галочки у заданий и пунктов) — обе с новым сроком, без срока не отправить. Справа — «Завершить проверку».',
+  student:'Все домашки курса со статусом. «Сдано» считает и сданное с опозданием. У просроченной — «Продлить срок».',
+  assign:'Ученики → уроки → срок (обязательно). У урока видно, кому он уже задан.',
+  library:'Курсы и юниты сворачиваются. Внутри юнита — переключатель «Планы уроков · Домашки и тесты». Галочки у урока, юнита, курса → внизу «Опубликовать».',
+};
+function set(k,v){
+  S[k]=v;
+  if(k==='scr' && v==='method') S.role='editor';
+  if(k==='scr'){ S.bell=false; S.retake=false; window.scrollTo(0,0); if(v==='review'){ S.show = false; } }
+  if(k==='showDef') S.show = v==='on';
+  render();
+}
+
+/* ── оболочка ── */
+function side(){
+  const tabs=[['students','Мои ученики'],['assign','Задать материал'],['queue','Проверка',QUEUE.length],['lessons','Уроки'],['library','Библиотека']].concat(S.role==='editor'?[['method','Контроль качества',3]]:[]);
+  const cur = S.scr==='review'?'queue':S.scr==='student'?'students':S.scr==='preview'?'library':S.scr;
+  document.getElementById('side').innerHTML = `<div class="logo">Classroom</div>` + tabs.map(([k,t,n])=>
+    `<div class="tab ${cur===k?'on':''}" onclick="${['students','lessons'].includes(k)?(k==='students'?"set('scr','student')":''):`set('scr','${k}')`}">${t}${n?`<span class="cnt">${n}</span>`:''}</div>`).join('')
+    + `<div class="who" style="padding:14px 22px">${S.role==='editor'?'Анна · методист':'Ольга · учитель'}</div>`;
+}
+function topBar(title){
+  const n=NOTIF.filter(x=>x.n).length;
+  return `<h1>${title}</h1><button class="bell" onclick="S.bell=!S.bell; render()">🔔${n?`<i>${n}</i>`:''}</button>${S.bell?bellDrop():''}`;
+}
+function bellDrop(){
+  return `<div class="card drop"><div style="padding:12px 14px;font-weight:700;border-bottom:1px solid var(--line);display:flex">Уведомления<span class="muted small" style="margin-left:auto;font-weight:400;cursor:pointer">прочитать все</span></div>
+    ${NOTIF.map(x=>`<div class="it ${x.n?'new':''}" onclick="set('scr','${x.go}')"><span class="dot ${x.n?'':'off'}"></span><div><div>${x.t}</div><div class="muted small">${x.w}</div></div></div>`).join('')}
+    <div class="muted small" style="padding:10px 14px">Ученик сдал → нажмите, откроется проверка этой домашки</div></div>`;
+}
+// Полный шифр материала: SM2 Unit 1 Homework 1 · SM2 Unit 2 Test · SM2 Final Test · WD1 Homework 12
+function code(cc, unitNo, title){
+  if(/^WD/.test(cc) || /^(Unit|Final)\b/.test(title) || unitNo==null) return cc+' '+title;
+  return cc+' Unit '+unitNo+' '+title;
+}
+function stuById(id){ return STU.find(s=>s.id===id); }
+function ava(s){ return `<span class="ava" style="background:${s.c}">${s.name[0]}</span>`; }
+
+/* ── 1. очередь проверки ── */
+function pgQueue(){
+  return `<div class="page">
+    <div class="row" style="margin-bottom:14px"><div class="seg"><button class="on">Ждут проверки · ${QUEUE.length}</button><button>Проверенные</button></div>
+      <select><option>Все курсы</option><option>SM2</option><option>WD1</option><option>GG1</option></select><input placeholder="Ученик" style="width:160px">
+      ${S.role==='editor'?'<select style="margin-left:auto"><option>Все учителя</option><option>Ольга</option><option>Ирина</option></select>':''}</div>
+    <div class="card"><table><thead><tr><th>Ученик</th><th>Домашка</th><th>Сдал</th><th>Попытка</th><th>Система насчитала</th><th></th></tr></thead><tbody>
+    ${QUEUE.map((q,qi)=>{ const s=stuById(q.s); return `<tr class="click" onclick="S.qi=${qi}; set('scr','review')">
+      <td>${ava(s)}<b>${s.name}</b></td><td>${q.code}${q.note?`<div class="muted small">${q.note}</div>`:''}</td>
+      <td>${q.when}<div>${q.late?'<span class="pill r">опоздал на 1 день</span>':'<span class="pill g">вовремя</span>'}</div></td>
+      <td>${q.att>1?`<span class="pill y">${q.att}-я · после переделки</span>`:'<span class="pill n">1-я</span>'}</td>
+      <td>${q.auto!=null?`<b>${q.auto}%</b> <span class="muted small">+ устные</span>`:'<span class="muted">—</span>'}</td>
+      <td style="text-align:right"><button class="btn sm">Проверить</button></td></tr>`; }).join('')}
+    </tbody></table></div>
+    ${QUEUE.length?'':'<div class="card" style="padding:30px;text-align:center;margin-top:12px">🎉 Всё проверено</div>'}
+    <p class="muted small" style="margin-top:10px">«Система насчитала» — по заданиям с ответами. Устные и письменные оценивает учитель, итог пересчитается.</p></div>`;
+}
+
+/* ── 2. проверка домашки ── */
+function cmBox(key){
+  const has=S.cm[key];
+  if(S.cmOpen===key) return `<div class="cbox"><textarea id="cmta" style="flex:1" placeholder="Комментарий ученику — увидит после проверки">${has||''}</textarea>
+    <div style="display:flex;flex-direction:column;gap:6px"><button class="btn sm" onclick="cmSave('${key}')">Сохранить</button>${has?`<button class="btn sec sm" onclick="delete S.cm['${key}']; S.cmOpen=null; render()">Удалить</button>`:''}</div></div>`;
+  return has ? `<div class="cshow" onclick="S.cmOpen='${key}'; render()"><b>Ваш комментарий</b>${has}</div>` : '';
+}
+const QUICK=['Молодец! 🌟','Проверь, как пишется слово','Послушай ещё раз','Посмотри на порядок слов','Почти получилось!'];
+function cmAdd(b){ const t=document.getElementById('cmta'); t.value=(t.value?t.value+' ':'')+b.textContent; t.focus(); }
+// «Ошибка в задании» — сообщение методисту: из проверки и из просмотра урока
+function flagBtn(t){ return `<button class="cm ${S.flags[t.id]?'has':''}" title="Ошибка в задании — сообщить методисту" onclick="S.flag='${t.id}'; render()" style="${S.flags[t.id]?'color:var(--bad)':''}">⚑</button>`; }
+function flagBox(t){
+  if(S.flag===t.id) return `<div class="cbox"><textarea id="flta" style="flex:1" placeholder="Что не так с заданием? Например: «в ключе опечатка — shcool», «картинка не та», «нет звука»">${S.flags[t.id]||''}</textarea>
+    <div style="display:flex;flex-direction:column;gap:6px"><button class="btn sm" onclick="const v=document.getElementById('flta').value.trim(); if(v) S.flags['${t.id}']=v; S.flag=null; render()">Отправить методисту</button><button class="btn sec sm" onclick="S.flag=null; render()">Отмена</button></div></div>`;
+  return S.flags[t.id] ? `<div class="cshow" style="background:var(--bad-soft)"><b style="color:var(--bad)">Отправлено методисту</b>${S.flags[t.id]}</div>` : '';
+}
+function cmBtn(key){ return `<button class="cm ${S.cm[key]?'has':''}" title="Комментарий" onclick="S.cmOpen='${key}'; render()">💬</button>`; }
+function cmSave(k){ const v=document.getElementById('cmta').value.trim(); if(v) S.cm[k]=v; else delete S.cm[k]; S.cmOpen=null; render(); }
+function flip(t,i){ const k=t+':'+i, task=HW.find(x=>x.id===t); const cur=itemOk(task,i); const nv=!cur;
+  if(nv===task.items[i].auto) delete S.ov[k]; else S.ov[k]=nv; S.total=null; render(); }
+function taskHtml(t){
+  const sc=taskScore(t), ret=S.retake && !S.rfull && S.ret[t.id];
+  let body='';
+  if(t.noscore) body=`<div class="muted small">✓ ${t.info} — без оценки, обязательное</div>`;
+  else if(t.items) body=t.items.map((it,i)=>{ const ok=itemOk(t,i), k=t.id+':'+i, fixed=k in S.ov;
+      return `<div class="item">${it.img?`<img class="img" src="${IMG[it.img]}">`:''}<div class="q">${it.q?`<div class="muted small">${it.q}</div>`:''}<div class="ans">${it.ans}</div>
+        ${!ok&&it.right?`<div class="right">${it.right}</div>`:''}${fixed?`<div class="fixednote">поправлено вами (система: ${it.auto?'верно':'неверно'})</div>`:''}</div>
+        ${S.retake && !S.rfull && !t.noscore ? `<input type="checkbox" class="rtcheck" ${S.reti[k]?'checked':''} onchange="retItem('${t.id}',${i},this.checked)" title="Переделать этот пункт">`:''}${cmBtn(k)}<button class="mark ${ok?'ok':'no'} ${fixed?'fixed':''}" title="Нажмите, чтобы поменять" onclick="flip('${t.id}',${i})">${ok?'✓':'✗'}</button></div>${cmBox(k)}`; }).join('');
+  else if(t.oral) body=`<div class="player"><button class="pb">▶</button><span class="wave"></span><span class="muted small">${t.len}</span></div>`;
+  else body=`<div style="background:var(--bg);border-radius:12px;padding:10px 14px">${t.text}</div>`;
+  const manual = (t.oral||t.text) ? `<div class="row" style="margin-top:10px"><span class="small muted">Балл:</span>
+      <input type="number" min="0" max="100" value="${S.sc[t.id]??''}" placeholder="0–100" style="width:90px;font-size:16px;font-weight:700;text-align:center"
+        onchange="const v=this.value===''?null:Math.max(0,Math.min(100,Math.round(Number(this.value)))); if(v==null) delete S.sc['${t.id}']; else S.sc['${t.id}']=v; S.total=null; render()"><span class="muted">%</span>
+      ${S.sc[t.id]==null?'<span class="pill y">нужно оценить</span>':''}<span class="muted small">впишите любое число и нажмите Enter</span></div>` : '';
+  const again = QUEUE[S.qi] && QUEUE[S.qi].att>1 && t.prev ? `<div class="cshow" style="margin:0 0 8px;background:#F4F2FF"><b style="color:var(--brand-d)">Переделано · в прошлый раз ${t.prev.sc}%</b>${t.prev.ans}<div class="muted small">ваш комментарий: ${t.prev.cm}</div></div>` : '';
+  return `<div class="card task ${ret?'ret':''}" id="${t.id}"><div class="thd">
+      ${S.retake && !S.rfull ? `<input type="checkbox" class="rtcheck" ${ret?'checked':''} onchange="retTask('${t.id}',this.checked)" title="Переделать всё задание">`:''}
+      <span class="muted small">${t.no}</span><b>${t.title}</b><span class="pill n">${t.type}</span>
+      ${sc!=null?`<span class="pill ${sc>=90?'g':sc>=50?'y':'r'}">${sc}%</span>`:''}${again?'<span class="pill b">переделано</span>':''}${flagBtn(t)}${cmBtn(t.id)}</div>${flagBox(t)}${again}${cmBox(t.id)}${body}${manual}</div>`;
+}
+function pgReview(){
+  const q=QUEUE[S.qi]||QUEUE[0], s=stuById(q.s);
+  const toc = HW.map(t=>{ const sc=taskScore(t); return `<a href="#${t.id}"><span class="muted">${t.no}</span>${t.type}<span class="sc" style="color:${sc==null?'var(--faint)':sc>=90?'var(--ok)':sc>=50?'var(--warn)':'var(--bad)'}">${sc==null?((t.oral||t.text)?'оценить':'—'):sc+'%'}</span></a>`; }).join('');
+  return `<div class="page">
+    <div class="row" style="margin-bottom:16px"><button class="btn sec sm" onclick="set('scr','queue')">← Все на проверке</button>
+      ${ava(s)}<div><b>${s.name}</b> · ${q.code}<div class="muted small">сдано ${q.when} · ${q.late?'<span style="color:var(--bad)">с опозданием</span>':'вовремя'} · ${q.att>1?q.att+'-я попытка, после переделки':'1-я попытка'} · <a href="#" onclick="set('scr','student');return false">карточка ученика</a></div></div>
+</div>
+    <div class="card" style="padding:12px 16px;margin-bottom:14px">${cmBtn('all')} <span class="small muted">Комментарий ко всей домашке</span>${cmBox('all')}</div>
+    <div class="row" style="margin-bottom:12px"><div class="seg"><button class="${S.only?'':'on'}" onclick="S.only=false; render()">Все задания</button><button class="${S.only?'on':''}" onclick="S.only=true; render()">Только ошибки и что оценить</button></div>
+      <span class="muted small">✓ Черновик проверки сохраняется сам — можно закрыть и вернуться</span></div>
+    <div class="rv"><div class="card toc" style="padding:8px">${toc}</div><div>${HW.filter(t=>!S.only || t.oral || t.text || (t.items && t.items.some((_,i)=>!itemOk(t,i)))).map(taskHtml).join('')}</div></div></div>`;
+}
+function barReview(){
+  const auto=autoTotal(), man=needManual(), tot = S.total!=null ? S.total : auto;
+  if(S.retake){
+    const ts=HW.filter(t=>S.ret[t.id]), ni=Object.keys(S.reti).length;
+    const what = S.rfull ? 'вся домашка' : ts.length ? `заданий: ${ts.length}${ni?` · пунктов: ${ni}`:''}` : 'ничего не выбрано';
+    const d=S.rday, mon=' окт';
+    const chips=[[16,'Завтра'],[17,'Через 2 дня'],[18,'Через 3 дня'],[22,'Через неделю']].map(([x,t])=>`<button class="pill ${d===x?'b':'n'}" style="border:0;cursor:pointer" onclick="S.rday=${x}; render()">${t}</button>`).join('');
+    const can=(S.rfull||ts.length) && d;
+    return `<div class="bar"><div class="bar-in" style="flex-wrap:wrap">
+      <b>${S.rfull?'На доработку полностью':'Частично на доработку'}</b><span class="pill ${S.rfull||ts.length?'y':'n'}">${what}</span>
+      ${S.rfull?'':'<span class="muted small">Ставьте ☐ у задания целиком или у отдельных пунктов — даже если они верные.</span>'}
+      <span style="flex-basis:100%;height:0"></span>
+      <span class="small"><b>Новый срок:</b></span>${chips}
+      <input type="date" value="${d?'2026-10-'+String(d).padStart(2,'0'):''}" onchange="S.rday=Number(this.value.slice(-2))||null; render()" style="width:150px">
+      ${d?'':'<span class="pill y">выберите срок</span>'}
+      <input placeholder="Что исправить (увидит ученик)" style="flex:1;min-width:200px">
+      <button class="btn sec" onclick="S.retake=false; S.rfull=false; S.ret={}; S.reti={}; S.rday=null; render()">Отмена</button>
+      <button class="btn warn big" ${can?'':'disabled style="opacity:.45"'} onclick="next('На доработку: ${what}, до ${d}${mon}')">Отправить на доработку</button></div></div>`;
+  }
+  return `<div class="bar"><div class="bar-in">
+    <button class="btn warn" onclick="S.retake=true; S.rfull=true; render()">↺ На доработку полностью</button>
+    <button class="btn warn" onclick="S.retake=true; S.rfull=false; render(); window.scrollTo(0,0)">☐ На доработку частично</button>
+    <span style="flex:1"></span>
+    <div class="total"><span class="small muted">Итог</span><input value="${tot==null?'':tot}" oninput="S.total=Number(this.value)">%<span class="small muted">${S.total!=null&&S.total!==auto?`система: ${auto}% <a href="#" onclick="S.total=null;render();return false">вернуть</a>`:'авто'}</span></div>
+    <label class="chk small"><input type="checkbox" ${S.show?'checked':''} onchange="S.show=this.checked; render()">Показать верные ответы</label>
+    ${man.length?`<span class="pill y">${man.length===1?'Оцените задание':'Оцените следующие задания'}: ${man.map(t=>t.no).join(', ')}</span>`:''}
+    <button class="btn big" ${man.length?'disabled style="opacity:.45"':''} onclick="next('Проверка завершена: ${tot}%. Ученик получил уведомление')">✓ Завершить проверку</button></div></div>`;
+}
+function next(t){ QUEUE.splice(S.qi,1); S.qi=0; S.ov={}; S.sc={}; S.cm={}; S.total=null; S.show=false; S.reti={}; S.rday=null; S.rfull=false; done(t); window.scrollTo(0,0); }
+// Пункт отмечен — задание возвращается целиком, но ученик увидит свои ответы, а отмеченные пункты подсвечены
+function retItem(t,i,on){ const k=t+':'+i; if(on) S.reti[k]=1; else delete S.reti[k];
+  S.ret[t]=Object.keys(S.reti).some(x=>x.startsWith(t+':')); render(); }
+function retTask(t,on){ S.ret[t]=on; const task=HW.find(x=>x.id===t); (task.items||[]).forEach((_,i)=>{ if(on) S.reti[t+':'+i]=1; else delete S.reti[t+':'+i]; }); render(); }
+function done(t){ S.toast=t; S.retake=false; S.ret={}; S.scr='queue'; render(); setTimeout(()=>{ S.toast=''; render(); },2600); }
+
+/* ── 3. карточка ученика ── */
+function pgStudent(){
+  const s=stuById('s1');
+  const R = [
+    ['', [
+      ['SM2 Unit 1 Homework 1','<span class="pill g">проверена · 92%</span>','12 окт','<span class="pill g">вовремя</span>',''],
+      ['SM2 Unit 1 Homework 2','<span class="pill y">ждёт проверки</span>','15 окт','<span class="pill g">вовремя</span>','<button class="btn sm" onclick="set(\'scr\',\'review\')">Проверить</button>'],
+      ['SM2 Unit 1 Homework 3','<span class="pill r">на переделке · 2 задания</span>','до 17 окт<div class="muted small">первый срок 12 окт</div>','','<button class="btn sec sm">Открыть</button>'],
+      ['SM2 Unit 1 Homework 4','<span class="pill b">в работе · 6 из 11</span>','вчера','<span class="pill r">просрочено</span>','<button class="btn sec sm">Продлить срок</button>'],
+      ['SM2 Unit 1 Homework 5','<span class="pill n">задана, не начата</span>','20 окт','','<button class="btn sec sm">Изменить срок</button>'],
+      ['SM2 Unit 2 Homework 1','<span class="muted small">не задана</span>','','','<button class="btn sec sm" onclick="set(\'scr\',\'assign\')">Задать</button>'],
+      ['SM2 Unit 1 Test','<span class="muted small">не задан</span>','','','<button class="btn sec sm" onclick="set(\'scr\',\'assign\')">Задать</button>'],
+    ]],
+  ];
+  return `<div class="page">
+    <div class="row" style="margin-bottom:16px">${ava(s)}<div><div style="font-size:20px;font-weight:700">${s.name}</div><div class="muted small">Super Minds 2 · учитель Ольга · занимается с сентября</div>
+      <div class="small" style="margin-top:4px">${S.sub?'<span class="pill b">Замена: Ирина · с 16 по 30 окт</span> <a href="#" onclick="S.sub=false; render(); return false">убрать</a>':'<a href="#" onclick="S.sub=true; render(); return false">+ Заменяющий учитель</a>'}</div></div>
+      <span style="flex:1"></span><button class="btn" onclick="set('scr','assign')">Задать материал</button></div>
+    <div class="stats"><div class="card stat"><b>🔥 3</b><span>домашки подряд без опозданий</span></div>
+      <div class="card stat"><b>88%</b><span>средняя оценка за месяц</span></div>
+      <div class="card stat"><b>10 из 11</b><span>заданных сдано</span></div>
+      <div class="card stat"><b>1</b><span>ждёт проверки</span></div></div>
+    <div class="row" style="margin-bottom:10px"><div class="seg"><button class="on">Задано</button><button>Все материалы курса</button></div><span class="muted small">новые сверху</span></div>
+    <div class="card"><table><thead><tr><th>Материал</th><th>Статус</th><th>Срок</th><th></th><th></th></tr></thead><tbody>
+      ${R.map(([u,rows])=>rows.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td style="text-align:right">${r[4]}</td></tr>`).join('')).join('')}
+    </tbody></table></div>
+    <p class="muted small">Строку «проверена» можно открыть — там ответы, ваша оценка, комментарии и история попыток.
+    ${S.sub?'<br>На время замены Ирина видит все домашки, задаёт новые и проверяет. Всё, что она задала и проверила, остаётся видно Ольге.':''}</p></div>`;
+}
+
+/* ── 4. задать материал ── */
+function pgAssign(){
+  const L=[['h1','SM2 Unit 1 Homework 1',{s1:1,s2:1,s3:1}],['h2','SM2 Unit 1 Homework 2',{s1:1,s2:1}],['h3','SM2 Unit 1 Homework 3',{s1:1}],['h4','SM2 Unit 1 Homework 4',{}],['h5','SM2 Unit 1 Homework 5',{}],['t1','SM2 Unit 1 Test',{}]];
+  const picked=Object.keys(S.asg.stu).filter(k=>S.asg.stu[k]), les=Object.keys(S.asg.les).filter(k=>S.asg.les[k]);
+  const today=15; let day=S.asg.day; if(day==null) day = S.due==='week'?22:null;
+  let cal='<div class="cal">'+['пн','вт','ср','чт','пт','сб','вс'].map(x=>`<div class="h">${x}</div>`).join('')+'<div></div><div></div>';
+  for(let d=1; d<=31; d++) cal+=`<div class="d ${d<today?'past':''} ${d===today?'today':''} ${d===day?'on':''}" onclick="S.asg.day=${d}; render()">${d}</div>`;
+  cal+='</div>';
+  const can = picked.length && les.length && (S.due!=='manual' || day!=null);
+  return `<div class="page">
+    <div class="steps3">
+      <div class="card"><div style="padding:12px 14px;border-bottom:1px solid var(--line)"><div class="h2">1. Кому</div><input placeholder="Поиск по имени" style="width:100%"></div>
+        <div class="lst">${STU.filter(s=>s.course==='SM2').map(s=>`<label class="lrow"><input type="checkbox" ${S.asg.stu[s.id]?'checked':''} onchange="S.asg.stu['${s.id}']=this.checked; render()">${ava(s)}<span class="grow">${s.name}</span><span class="muted small">SM2 · Unit 1</span></label>`).join('')}</div></div>
+      <div class="card"><div style="padding:12px 14px;border-bottom:1px solid var(--line)"><div class="h2">2. Что</div>
+        <div class="row"><select style="flex:1"><option>Super Minds 2</option></select><select style="flex:1"><option>Unit 1 · My day</option></select></div>
+        <div class="seg" style="margin-top:8px"><button>Планы уроков</button><button class="on">Домашки и тесты</button></div></div>
+        <label class="lrow" style="background:#FAF9FC"><input type="checkbox" ${L.every(([id])=>S.asg.les[id])?'checked':''} onchange="${L.map(([id])=>`S.asg.les['${id}']=this.checked;`).join('')} render()"><b class="grow">Весь юнит</b></label>
+        <div class="lst">${L.map(([id,t,has])=>{ const who=picked.filter(p=>has[p]); return `<label class="lrow"><input type="checkbox" ${S.asg.les[id]?'checked':''} onchange="S.asg.les['${id}']=this.checked; render()"><span class="grow"><b>${t}</b>
+            ${who.length?`<div class="small" style="color:var(--warn)">уже задано: ${who.map(w=>stuById(w).name).join(', ')}</div>`:''}</span>
+            ${Object.keys(has).length?`<span class="muted small">задано ${Object.keys(has).length}</span>`:''}</label>`; }).join('')}</div></div>
+      <div class="card" style="padding:12px 14px"><div class="h2">3. Срок сдачи</div>
+        <div class="row" style="gap:6px;margin-bottom:10px">${[[16,'Завтра'],[18,'Через 3 дня'],[22,'Через неделю']].map(([d,t])=>`<button class="pill ${day===d?'b':'n'}" style="border:0;cursor:pointer" onclick="S.asg.day=${d}; render()">${t}</button>`).join('')}</div>
+        <div class="muted small" style="margin-bottom:8px">Октябрь 2026</div>${cal}
+        <div class="row" style="margin-top:10px">${day?`<span class="pill b">до ${day} окт, 23:59</span>`:(S.due==='manual'?'<span class="pill y">выберите день</span>':'<span class="pill n">без срока</span>')}
+</div><div class="muted small" style="margin-top:6px">Без срока задать нельзя — день выбирается каждый раз.</div></div>
+    </div>
+    <div class="card" style="margin-top:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <span>Задать <b>${les.length}</b> ${les.length===1?'урок':'урока'} · <b>${picked.length}</b> ${picked.length===1?'ученику':'ученикам'}${day?` · до ${day} окт`:''}</span>
+      <span class="muted small">Уже заданное повторно не задаётся — у этих учеников останутся их ответы.</span><span style="flex:1"></span>
+      <button class="btn big" ${can?'':'disabled style="opacity:.45"'} onclick="done('Задано. Ученики увидят домашку в кабинете')">Задать</button></div></div>`;
+}
+
+/* ── 5. библиотека ── */
+// Данные: курс → юниты → уроки (kind: plan / hw), опубликован или нет
+const LIB = [
+  {c:'Super Minds 2', cc:'SM2', col:'#5B4BE0', units:[
+    {u:'Unit 1 · My day', n:1, ls:[['p11','Lesson 1 · Vocabulary 1','plan',1],['p12','Lesson 2 · Grammar','plan',1],['h11','Homework 1','hw',1],['h12','Homework 2','hw',1],['h13','Homework 3','hw',0],['t1','Unit 1 Test','hw',0]]},
+    {u:'Unit 2 · Free time', n:2, ls:[['p21','Lesson 1 · Vocabulary 1','plan',0],['h21','Homework 1','hw',0],['h22','Homework 2','hw',0],['h23','Homework 3','hw',0],['t2','Unit 2 Test','hw',0]]},
+    {u:'Final Test', n:null, ls:[['ft','Final Test','hw',0]]},
+  ]},
+  {c:'Wow Dragon 1', cc:'WD1', col:'#0D8A6A', units:[
+    {u:'Module 1', ls:[['w1','Homework 1','hw',1],['w2','Homework 2','hw',1],['w3','Homework 3','hw',0],['wp1','Lesson 1','plan',0]]},
+  ]},
+];
+function libVisible(l, kind){
+  const [id,t,k,p]=l;
+  if((kind==='plans')!==(k==='plan')) return false;
+  if(S.pub==='pub' && !p) return false;
+  if(S.pub==='draft' && p) return false;
+  if(S.q && !t.toLowerCase().includes(S.q.toLowerCase().replace(/^(sm|wd|gg)\d+\s*/,'').replace(/^unit \d+\s*/,''))) return false;
+  return true;
+}
+function libToggle(ids, on){ ids.forEach(id=>{ if(on) S.sel[id]=1; else delete S.sel[id]; }); render(); }
+function libPublish(on){
+  const ids=Object.keys(S.sel); let n=0;
+  LIB.forEach(c=>c.units.forEach(u=>u.ls.forEach(l=>{ if(ids.includes(l[0]) && l[3]!==(on?1:0)){ l[3]=on?1:0; n++; } })));
+  S.sel={}; S.toast=(on?'Опубликовано: ':'Снято с публикации: ')+n; render(); setTimeout(()=>{ S.toast=''; render(); },2600);
+}
+function libOpen(k){ if(S.open[k]) delete S.open[k]; else S.open[k]=1; render(); }
+function libAll(on){ S.open={}; if(on) LIB.forEach((c,ci)=>{ S.open['c'+ci]=1; c.units.forEach((_,ui)=>S.open['c'+ci+':u'+ui]=1); }); render(); }
+function pgLibrary(){
+  const pubSeg = `<div class="seg">${[['all','Все'],['pub','Опубликованные'],['draft','Неопубликованные']].map(([k,t])=>`<button class="${S.pub===k?'on':''}" onclick="S.pub='${k}'; render()">${t}</button>`).join('')}</div>`;
+  const box=(ids,on,title)=>`<input type="checkbox" style="width:17px;height:17px;accent-color:var(--brand)" ${on?'checked':''} ${ids.length?'':'disabled'} title="${title}" onclick="event.stopPropagation()" onchange="libToggle(${JSON.stringify(ids).replace(/"/g,"'")}, this.checked)">`;
+  const arrow=o=>`<span style="width:16px;color:var(--mut);display:inline-block">${o?'▾':'▸'}</span>`;
+  let html='', all=[];
+  LIB.forEach((c,ci)=>{
+    const ck='c'+ci, copen=!!S.open[ck];
+    const units=c.units.map((u,ui)=>{ const uk=ck+':u'+ui, kind=S.ukind[uk]||'hw';
+      return {u, uk, kind, ls:u.ls.filter(l=>libVisible(l,kind)), plans:u.ls.filter(l=>l[2]==='plan').length, hws:u.ls.filter(l=>l[2]!=='plan').length,
+              drafts:u.ls.filter(l=>!l[3]).length}; });
+    const cids=units.flatMap(x=>x.ls.map(l=>l[0])); all.push(...cids);
+    const cdrafts=units.reduce((a,x)=>a+x.drafts,0);
+    html += `<div class="c" style="cursor:pointer" onclick="libOpen('${ck}')">${arrow(copen)}${box(cids, cids.length&&cids.every(id=>S.sel[id]), 'Выбрать видимое в курсе')}<i style="background:${c.col}"></i>${c.c}
+      <span style="margin-left:auto">${cdrafts?`<span class="pill y">черновиков: ${cdrafts}</span>`:'<span class="pill g">всё опубликовано</span>'}</span></div>`;
+    if(!copen) return;
+    units.forEach(x=>{
+      const uopen=!!S.open[x.uk], uids=x.ls.map(l=>l[0]);
+      html += `<div class="u" style="display:flex;align-items:center;gap:10px;cursor:pointer" onclick="libOpen('${x.uk}')">${arrow(uopen)}${box(uids, uids.length&&uids.every(id=>S.sel[id]), 'Выбрать видимое в юните')}${x.u.u}
+        <span class="muted small" style="font-weight:400">планов ${x.plans} · домашек и тестов ${x.hws}</span>
+        <span style="margin-left:auto">${x.drafts?`<span class="pill y">черновиков: ${x.drafts}</span>`:'<span class="pill g">всё опубликовано</span>'}</span></div>`;
+      if(!uopen) return;
+      html += `<div class="l" style="padding-left:56px;background:#FCFBFE"><div class="seg">${[['plans','Планы уроков'],['hw','Домашки и тесты']].map(([k,t])=>`<button class="${x.kind===k?'on':''}" onclick="S.ukind['${x.uk}']='${k}'; render()">${t}</button>`).join('')}</div></div>`;
+      html += x.ls.map(([id,t,k,p])=>`<div class="l" style="padding-left:72px;${S.sel[id]?'background:#F7F5FF':''}">${box([id], S.sel[id], '')}<span class="grow">${code(c.cc,x.u.n,t)}</span>
+          ${/Test/.test(t)?'<span class="pill n">тест</span>':''}${p?'<span class="pill g">опубликован</span>':'<span class="pill y">черновик</span>'}<button class="btn sec sm" onclick="set('scr','preview')">Открыть</button></div>`).join('')
+        || `<div class="l muted small" style="padding-left:72px">ничего не подходит под фильтр</div>`;
+    });
+  });
+  const n=Object.keys(S.sel).length;
+  return `<div class="page"><div class="row" style="margin-bottom:14px">${pubSeg}
+      <input placeholder="Поиск по названию" value="${S.q}" onchange="S.q=this.value; render()" style="width:200px">
+      <a href="#" class="small" onclick="libAll(true);return false">развернуть всё</a><a href="#" class="small" onclick="libAll(false);return false">свернуть всё</a>
+      <span style="flex:1"></span><button class="btn">+ Материал</button></div>
+    <div class="row" style="margin-bottom:8px"><label class="chk small">${box(all, all.length && all.every(id=>S.sel[id]), '')} Выбрать всё видимое (${all.length})</label>
+      <span class="muted small">Галочка у курса или юнита выбирает всё, что сейчас видно внутри.</span></div>
+    <div class="card tree">${html}</div>
+    ${n?`<div class="bar"><div class="bar-in"><b>Выбрано: ${n}</b><a href="#" class="small" onclick="S.sel={}; render(); return false">снять выбор</a><span style="flex:1"></span>
+      <button class="btn sec big" onclick="libPublish(false)">Снять с публикации</button><button class="btn big" onclick="libPublish(true)">✓ Опубликовать</button></div></div>`:''}</div>`;
+}
+
+/* ── 6. просмотр урока учителем ── */
+const PV = [
+  {id:'t3', title:'Послушай и выбери картинку', type:'Выбор ответа', rows:[['🔊 get up','get_up'],['🔊 have lunch','have_lunch']], ans:['картинка 2','картинка 3']},
+  {id:'t4', title:'Соедини картинку и слова', type:'Соедини пары', rows:[['','brush_your_teeth'],['','go_to_school'],['','get_up']], ans:['brush your teeth','go to school','get up']},
+  {id:'t5', title:'Составь предложение', type:'Составь предложение', rows:[['lunch · I · two · have · at · o’clock.','']], ans:['I have lunch at two o’clock.']},
+  {id:'t6', title:'Вставь пропущенное слово', type:'Пропуски', rows:[['I ___ breakfast at eight.',''],['I ___ to school at nine.','']], ans:['have','go']},
+  {id:'t8', title:'Ответь на вопрос: When do you have breakfast?', type:'Устный ответ', rows:[['ответ записывает голосом, проверяет учитель','']], ans:[null]},
+];
+function pgPreview(){
+  return `<div class="page">
+    <div class="row" style="margin-bottom:14px"><button class="btn sec sm" onclick="set('scr','library')">← Библиотека</button>
+      <div><b>SM2 Unit 1 Homework 2</b><div class="muted small">так её видит ученик · 9 заданий</div></div><span style="flex:1"></span>
+      <label class="chk"><input type="checkbox" ${S.hideAns?'checked':''} onchange="S.hideAns=this.checked; render()">Скрыть ответы</label>
+      <button class="btn sec">Открыть как ученик ↗</button><button class="btn">Задать</button></div>
+    <div class="card" style="padding:12px 16px;margin-bottom:14px">${cmBtn('m_all')} <span class="small muted">Сообщение методисту про всю домашку</span>${cmBox('m_all')}</div>
+    ${PV.map(t=>`<div class="card task" style="max-width:820px"><div class="thd"><b>${t.title}</b><span class="pill n">${t.type}</span>${flagBtn(t)}</div>${flagBox(t)}
+      ${t.rows.map(([q,img],i)=>`<div class="item">${img?`<img class="img" src="${IMG[img]}">`:''}<div class="q">${q?`<div class="${img?'muted small':''}">${q}</div>`:''}
+        ${t.ans[i]&&!S.hideAns?`<div class="ans" style="color:var(--ok)">✓ ${t.ans[i]}</div>`:''}</div></div>`).join('')}</div>`).join('')}
+    <p class="muted small">⚑ у задания — «здесь ошибка». Сообщения уходят методисту во вкладку «Контроль качества».</p></div>`;
+}
+
+/* ── 7. методист ── */
+function pgMethod(){
+  const tabs=`<div class="seg" style="margin-bottom:14px">${[['msg','Сообщения учителей · 3'],['hard','Сложные задания · 2'],['tch','Учителя']].map(([k,t])=>`<button class="${S.mtab===k?'on':''}" onclick="S.mtab='${k}'; render()">${t}</button>`).join('')}</div>`;
+  let body='';
+  if(S.mtab==='msg'){
+    const M=[['m1','Ольга','SM2 Unit 1 Homework 2 · задание 4, пункт 3','В ключе «get dressed», а на картинке мальчик встаёт — get up.','при проверке, Маша К.'],
+             ['m2','Ирина','WD1 Homework 12 · задание 2','Нет звука у второго вопроса.','при просмотре'],
+             ['m3','Ольга','SM2 Unit 2 Homework 1 · вся домашка','Слишком длинная для первого урока юнита, дети не успевают.','при просмотре']];
+    body=`<div class="card"><table><thead><tr><th>Учитель</th><th>Где</th><th>Что не так</th><th></th></tr></thead><tbody>${M.map(([id,w,where,txt,src])=>`<tr style="${S.msgDone[id]?'opacity:.45':''}">
+      <td><b>${w}</b><div class="muted small">${src}</div></td><td>${where}</td><td>${txt}</td>
+      <td style="text-align:right;white-space:nowrap">${S.msgDone[id]?`<span class="pill g">${S.msgDone[id]}</span>`:`<button class="btn sec sm">Открыть задание</button> <button class="btn sm" onclick="S.msgDone['${id}']='исправлено'; render()">Исправлено</button> <button class="btn sec sm" onclick="S.msgDone['${id}']='не ошибка'; render()">Не ошибка</button>`}</td></tr>`).join('')}</tbody></table></div>
+      <p class="muted small">Учитель получит ответ: «исправлено» или «не ошибка».</p>`;
+  }
+  if(S.mtab==='hard'){
+    const H=[['SM2 Unit 1 Homework 2','задание 4, пункт 3','get up',78,23,'«get dressed» — 15 раз'],['WD1 Homework 12','задание 6, пункт 1','cat',64,14,'«cap» — 6 раз']];
+    body=`<div class="card"><table><thead><tr><th>Материал</th><th>Где</th><th>Верный ответ</th><th>Ошибаются</th><th>Частый ответ учеников</th><th></th></tr></thead><tbody>${H.map(r=>`<tr>
+      <td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td><span class="pill r">${r[3]}%</span> <span class="muted small">из ${r[4]}</span></td><td>${r[5]}</td>
+      <td style="text-align:right"><button class="btn sec sm">Открыть задание</button></td></tr>`).join('')}</tbody></table></div>
+      <p class="muted small">Сюда попадает пункт, если ошибаются 60% учеников и больше (и ответили хотя бы 5). Частый неверный ответ подсказывает, ключ ли это виноват.</p>`;
+  }
+  if(S.mtab==='tch'){
+    const T=[['Ольга',12,4,'3 дня','r'],['Ирина',8,1,'сегодня','g'],['Мария',15,0,'—','g']];
+    body=`<div class="card"><table><thead><tr><th>Учитель</th><th>Учеников</th><th>Ждут проверки</th><th>Самая старая</th><th>Проверено за неделю</th></tr></thead><tbody>${T.map(r=>`<tr>
+      <td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]?`<b>${r[2]}</b>`:'0'}</td><td><span class="pill ${r[4]}">${r[3]}</span></td><td>${r[1]*2-3}</td></tr>`).join('')}</tbody></table></div>
+      <p class="muted small">Учителю приходят напоминания: домашка ждёт проверки 1 день, 3 дня, неделю.</p>`;
+  }
+  return `<div class="page">${tabs}${body}</div>`;
+}
+
+/* ── сборка ── */
+function render(){
+  document.body.classList.toggle('phone', S.dev==='phone' && (S.scr==='review'||S.scr==='queue'));
+  panel(); side();
+  const T={queue:'Проверка',review:'Проверка домашки',student:'Карточка ученика',assign:'Задать материал',library:'Библиотека',preview:'Просмотр урока',method:'Контроль качества'};
+  document.getElementById('top').innerHTML = topBar(T[S.scr]);
+  const P={queue:pgQueue,review:pgReview,student:pgStudent,assign:pgAssign,library:pgLibrary,preview:pgPreview,method:pgMethod};
+  document.getElementById('page').innerHTML = P[S.scr]();
+  document.getElementById('bar').innerHTML = (S.scr==='review'?barReview():'') + (S.toast?`<div class="toast">${S.toast}</div>`:'');
+}
+render();
+</script>
+</body>
+</html>
