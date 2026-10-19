@@ -76,7 +76,7 @@ classroom_courses → classroom_units → classroom_lessons → classroom_blocks
 | колонка | значения |
 |---|---|
 | `kind` | `homework` · `test` · `lesson`. По умолчанию `homework`. **Тест без `kind='test'` ляжет обычной домашкой.** |
-| `pass_threshold` | домашки 60, тесты 90 |
+| `pass_threshold` | **у домашек порога нет — `null`** (решение Анны от 19.10, применено ко всем курсам: 355 домашек). Тесты 90, итоговый 80 |
 | `is_published` | заливать **всегда `false`**, включает методист вручную |
 | `sort_order` | задавать числом явно, не `max+1` |
 
@@ -442,7 +442,7 @@ Wow Dragon 1 и 2 при этом уехали на 4 и 5.
 **SM3, нулевой юнит — тоже готов.** Папка `builds/sm3/u0/`:
 юнита 0 в базе нет, SQL заводит его сам («Unit 0 · Meet The Explorers»,
 `sort_order` 0). Заливать `u0_hw1.sql` … `u0_hw4.sql` (`sort_order` 0–3,
-порог 60) и `u0_test.sql` (`sort_order` 5, `kind='test'`, порог 90, 20 блоков,
+без порога) и `u0_test.sql` (`sort_order` 5, `kind='test'`, порог 90, 20 блоков,
 включая reading, listening и диктант), все с `is_published = false`. Картинки уже в `media/sm3/u0`: шесть действий для
 be good at, три дома в разрезе, семейное дерево с именами, восемь кадров
 истории. Весь звук размечен `audio_tts` — нужна одна «Озвучить пачкой».
