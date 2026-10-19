@@ -146,9 +146,7 @@ LESSONS["u8_hw1"] = {**base(1, "Homework 1", 0), "blocks": [
         {"left_image": I(f), "right": en, "right_audio_tts": en} for en, ru, f in BODY]}),
     ("text", {"html": f'<p><img src="{shared("hello_wave")}" alt="" style="height:180px"></p>'
               "<h3>Основная часть позади — ты большой молодец! 🎉</h3>"
-              "<p>Добро пожаловать в дополнительную часть домашнего задания! Эти задания "
-              "можно выполнить по желанию, НО если ты выполнишь их, то будешь нереально "
-              "крут!</p>"}),                                                          # 6
+              "<p>Добро пожаловать во вторую часть домашнего задания! </p>"}),                                                          # 6
     ("text", {"html": "<p>Давай повторим всё, что выучили с тобой на уроке:</p>"
               + pic("vocab_body", "Vocabulary — The Body")}),
     ("speaking", {"title": "Мой монстр 🎤",
@@ -175,14 +173,13 @@ LESSONS["u8_hw2"] = {**base(2, "Homework 2", 1), "blocks": [
     hello("<h2>Привет! 👋</h2>"
           "<p>В этом уроке тебя ждут несколько интересных заданий! Выполни все "
           "упражнения, если хочешь выучить тему на все 100!</p>"
-          "<p>В конце тебя будет ждать дополнительное задание. Если ты его сделаешь, "
-          "то получишь дополнительную ⭐ от учителя!</p>"),
+          "<p>В конце тебя будет ждать ещё одно задание. Если ты его сделаешь, то получишь ⭐ от учителя!</p>"),
     ("text", {"html": "<p>Давай повторим всё, что выучили с тобой на уроке:</p>"
               + pic("grammar_can_cant", "I can / I can't")}),
     ("text", {"html": "<p>Для начала давай посмотрим видео! Как думаешь, каких животных ты "
               "увидишь там?</p><p>Посмотри видео один раз, внимательно слушай и проверь — "
               "угадал ли ты?</p><p>Затем посмотри видео снова и повторяй за животными.</p>"}),
-    ("video", {"title": "Видео: что умеют животные?", "url": "", "provider": "file"}),   # 4
+    ("video", {"title": "Видео: что умеют животные?", "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u8_hw2_b4.mp4", "provider": "file"}),   # 4
     ("hotspot", {
         "title": "Отлично! У меня для тебя есть ещё одно задание! Посмотри внимательно "
                  "на картинку. Соедини предложения с подходящей картинкой!",
@@ -219,8 +216,7 @@ LESSONS["u8_hw2"] = {**base(2, "Homework 2", 1), "blocks": [
                           "и запиши свой ответ на платформе!</p>",
                   "sample": "", "needs_review": True}),                                 # 7
     # 8–9. Игры Wordwall, обложки в выгрузке пустые — СОСТАВ МОЙ.
-    ("match", {"title": "Ты выполнил все задания из основной части! А это дополнительное "
-                        "задание — для настоящих чемпионов! Соедини описание с картинкой.",
+    ("match", {"title": "Соедини описание с картинкой.",
                "pairs": [{"left_image": I(f), "right": s, "right_audio_tts": s} for s, f in ABILITIES]}),
     ("quiz", {"questions": [
         {"q": "A fish ___ swim.", "type": "single",
@@ -242,14 +238,13 @@ LESSONS["u8_hw2"] = {**base(2, "Homework 2", 1), "blocks": [
 LESSONS["u8_hw3"] = {**base(3, "Homework 3", 2), "blocks": [
     hello("<h2>Добро пожаловать в домашнее задание! 👋</h2>"
           "<p>В этом уроке тебя ждут интерактивные видео и много интересных упражнений!</p>"
-          "<p>В конце урока есть дополнительные задания — их можно выполнить по желанию, "
-          "но если ты их сделаешь, то получишь дополнительный балл от учителя! ⭐</p>"),
+          ""),
     ("text", {"html": "<p>Давай повторим всё, что выучили с тобой на уроке:</p>"
               + pic("grammar_can_you", "Can you …?")}),
     ("text", {"html": "<p>Ура! Мы посмотрим видео! Как думаешь, с какими персонажами ты "
               "познакомишься?</p><p>Для начала посмотри видео один раз, внимательно слушай, "
               "что говорят персонажи.</p><p>Посмотри видео ещё раз и повторяй за персонажами.</p>"}),
-    ("video", {"title": "Видео: Can you …?", "url": "", "provider": "file"}),            # 4
+    ("video", {"title": "Видео: Can you …?", "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u8_hw3_b4.mp4", "provider": "file"}),            # 4
     ("match", {"title": "Посмотри видео ещё раз и соедини вопросы и ответы",
                "pairs": [
                    {"left": "Can you swim?", "right": "Yes, I can.", "right_audio_tts": "Yes, I can."},
@@ -284,8 +279,7 @@ LESSONS["u8_hw3"] = {**base(3, "Homework 3", 2), "blocks": [
                   "image": I("monster"), "sample": "", "needs_review": True}),              # 8
     # 9–12. Игры Wordwall, обложки пустые — СОСТАВ МОЙ.
     ("quiz", {"questions": [
-        {"q": "Ты выполнил все задания из основной части! А это дополнительное задание — "
-              "для настоящих чемпионов!<br>Can a fish swim?", "type": "single",
+        {"q": "<br>Can a fish swim?", "type": "single",
          "options": [{"text": "Yes, it can."}, {"text": "No, it can't."}], "correct": [0]},
         {"q": "Can a dog fly?", "type": "single",
          "options": [{"text": "Yes, it can."}, {"text": "No, it can't."}], "correct": [1]},
@@ -314,14 +308,13 @@ STORY_PICS = [  # точка на перемешанной картинке → 
 LESSONS["u8_hw4"] = {**base(4, "Homework 4", 3), "blocks": [
     hello("<h2>Привет! 👋</h2>"
           "<p>Добро пожаловать в домашнее задание! Нас сегодня ждёт много интересных "
-          "упражнений!</p><p>В конце тебя ждёт интерактивное видео — оно дополнительное, "
-          "но ты будешь большой молодец, если справишься с ним!</p>"),
+          "упражнений!</p><p>В конце тебя ждёт интерактивное видео — не пропусти его!</p>"),
     ("text", {"html": "<p>Давай повторим всё, что выучили с тобой на уроке:</p>"
               + pic("story_key_phrases", "The Problem — key phrases")}),
     ("text", {"html": "<p>Сегодня Misty, Flash, Thunder и Whisper подготовили для тебя историю!</p>"
               "<p>Как думаешь, что с ними случилось на этот раз? Послушай историю, прочитай "
               "текст и выполни задания!</p>"}),
-    ("video", {"title": "Послушай историю «The Problem»", "url": "", "provider": "file"}),  # 4
+    ("video", {"title": "Послушай историю «The Problem»", "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u8_hw4_b4.mp3", "provider": "file"}),  # 4
     ("text", {"html": "<h3>The Problem</h3>" + pic("story_robot_1_6", "Кадры 1–6")
               + pic("story_robot_7_8", "Кадры 7–8")}),
     ("hotspot", {
@@ -343,7 +336,7 @@ LESSONS["u8_hw4"] = {**base(4, "Homework 4", 3), "blocks": [
                ]}),
     ("text", {"html": f'<p><img src="{shared("hello_rocket")}" alt="" style="height:180px"></p>'
               "<h3>Поздравляю! Основная часть позади, ты большой молодец! ✨</h3>"
-              "<p>А теперь дополнительное задание — интерактивное видео. Внимательно посмотри "
+              "<p>А теперь ещё одно задание — интерактивное видео. Внимательно посмотри "
               "видео и выполни все задания в нём. Удачи!</p>"}),
     ("video", {"title": "Интерактивное видео", "url": "", "provider": "file"}),           # 9
     bye("<h3>Ты завершил домашнее задание, ты большой молодец! 🌟</h3>"
@@ -354,9 +347,7 @@ LESSONS["u8_hw4"] = {**base(4, "Homework 4", 3), "blocks": [
 LESSONS["u8_hw5"] = {**base(5, "Homework 5", 4), "blocks": [
     hello("<h2>Добро пожаловать в домашнее задание! 👋</h2>"
           "<p>Сегодня тебя ждут много интересных историй и задания к ним! Внимательно читай "
-          "инструкцию к каждому заданию!</p><p>В конце тебя ждёт дополнительное задание! Его "
-          "делать необязательно, но если ты его выполнишь, то будешь супер мега крутым "
-          "учеником!</p><p>Let's go!</p>"),
+          "инструкцию к каждому заданию!</p><p>В конце тебя ждёт ещё одно задание!</p><p>Let's go!</p>"),
     ("text", {"html": "<p>Начнём с практики!</p><p>Внимательно посмотри на картинку. Прочитай "
               "вопрос и ответь: <b>Yes, he/she/it can</b> или <b>No, he/she/it can't</b>!</p>"}),
     ("quiz", {"questions": [
@@ -390,8 +381,7 @@ LESSONS["u8_hw5"] = {**base(5, "Homework 5", 4), "blocks": [
                           "His name is Tabby. He can swim and he can play football.</p>",
                   "sample": "", "needs_review": True}),                                 # 11
     # 12–13. Игры Wordwall, обложки пустые — СОСТАВ МОЙ, по тексту форума.
-    ("gaps", {"title": "Ты выполнил все задания из основной части! А это дополнительное задание — "
-                       "для настоящих чемпионов! Впиши слова can или can't.",
+    ("gaps", {"title": "Впиши слова can или can't.",
               "mode": "type",
               "text": "Bob is a cat. He __can__ run and jump and he __can__ sing!\n"
                       "Harry's cat __can't__ sing.\n"
@@ -408,7 +398,7 @@ LESSONS["u8_hw5"] = {**base(5, "Homework 5", 4), "blocks": [
                     "right_audio_tts": "Jazzy"},
                ]}),
     bye("<h3>Поздравляю! Ты завершил домашнее задание! Молодец!</h3>"
-        "<p>За прохождение домашнего задания держи ещё одну дополнительную ⭐. "
+        "<p>За прохождение домашнего задания держи ещё одну ⭐. "
         "Жду тебя на занятии!</p>"),
 ]}
 
@@ -492,8 +482,7 @@ LESSONS["u8_hw7"] = {**base(7, "Homework 7", 6), "blocks": [
     # 6–9. Игры Wordwall «Super Minds 1 Unit 8 Voc spelling» (Spell the word)
     # и «Unit 8 Can / Can't» (Unjumble) — пересобраны штатными блоками, СОСТАВ МОЙ.
     ("exact_input", {"items": [
-        {"prompt": "Ты выполнил все задания из основной части! А это дополнительное задание — "
-                   "для настоящих чемпионов! Впиши слово." if i == 0 else "Впиши слово.",
+        {"prompt": "Впиши слово." if i == 0 else "Впиши слово.",
          "image": I(f), "accept": [en, en.capitalize()], "audio_tts": en}
         for i, (en, ru, f) in enumerate(BODY)]}),
     order("I can touch my toes."),
@@ -567,7 +556,7 @@ LESSONS["u8_test"] = {**base(8, "Unit 8 Test", 7, "test"), "blocks": [
          "options": [{"text": "Buy a robot."}, {"text": "Play football."},
                      {"text": "Come and see Beep."}], "correct": [2]},
     ]}),
-    ("video", {"title": "Послушай разговор Лили и Тома о новом роботе", "url": "",
+    ("video", {"title": "Послушай разговор Лили и Тома о новом роботе", "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u8_test_b11.mp3",
                "provider": "file"}),                                                        # 11
     ("gaps", {"title": "Впиши только ОДНО недостающее слово в пропуски",
               "mode": "type",

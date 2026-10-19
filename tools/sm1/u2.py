@@ -113,7 +113,7 @@ LESSONS = {
                   c("t_purple_monster")),
 
             # 10 — аудио к «Диаграмме»
-            ("video", {"title": "Послушай аудио и выполни задание ниже 🎧", "url": "", "provider": "file"}),
+            ("video", {"title": "Послушай аудио и выполни задание ниже 🎧", "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u2_test_b10.mp3.mp3", "provider": "file"}),
 
             # 11 — «Диаграмма»: в выгрузке точка k ↔ вариант k, лишних нет
             ("hotspot", {

@@ -67,7 +67,7 @@ LESSONS = {
             }),
 
             # 3 — аудио к блоку 4
-            ("video", {"title": "Внимательно послушай аудио 🎧", "url": "", "provider": "file"}),
+            ("video", {"title": "Внимательно послушай аудио 🎧", "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u1_test_b3.mp3", "provider": "file"}),
 
             # 4
             ("quiz", {"questions": [{
@@ -82,7 +82,7 @@ LESSONS = {
 
             # 5 — аудио к «Диаграмме»
             ("video", {"title": "Послушай аудио и узнай, какой номер принадлежит какой картинке 🎧",
-                       "url": "", "provider": "file"}),
+                       "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u1_test_b5.mp3", "provider": "file"}),
 
             # 6 — «Диаграмма»: метки 1–5 стояли в углах картинок, ставим по центрам
             ("hotspot", {

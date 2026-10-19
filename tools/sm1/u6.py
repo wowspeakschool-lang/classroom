@@ -28,7 +28,7 @@ ROOMS = [  # (en, ru, файл)
 ]
 
 
-def rotate_quiz(items, q_text, per_question=4, with_image=False, option_audio=False):
+def rotate_quiz(items, q_text, per_question=4, with_image=False, option_audio=False, title=None):
     """Квиз «выбери слово»: верный вариант гуляет по позициям 0..3.
 
     Варианты при показе не перемешиваются, поэтому позицию верного задаём сами:
@@ -47,13 +47,14 @@ def rotate_quiz(items, q_text, per_question=4, with_image=False, option_audio=Fa
         else:
             q["audio_tts"] = en
         qs.append(q)
-    return {"questions": qs}
+    return {"title": title, "questions": qs} if title else {"questions": qs}
 
 
 def scramble(en, ru, f):
     letters = [c for c in en if c != " "]
     return ("order", {
-        "title": f"Собери слово: {ru}" + (" (два слова)" if " " in en else ""),
+        # без русского слова: заданий на перевод не делаем (решение Анны от 19.10)
+        "title": "Посмотри на картинку и собери слово" + (" (два слова)" if " " in en else ""),
         "image": img(U, f),
         "words": letters,
         "sentence": " ".join(letters),
@@ -90,8 +91,7 @@ LESSONS["u6_hw1"] = dict(base("u6_hw1", "Homework 1", 0), blocks=[
           "<h2>Привет! 👋</h2>"
           "<p>Сейчас мы с тобой выучим все слова, которые разобрали на уроке: комнаты в доме. "
           "Выполни все задания, чтобы выучить слова на 100%!</p>"
-          "<p>В конце первой части тебя ждёт тест. А потом — вторая часть и ДОПОЛНИТЕЛЬНОЕ задание. "
-          "Его можно выполнить по желанию, но если ты его сделаешь — ты будешь МЕГА КРУТЫМ! "
+          "<p>В конце первой части тебя ждёт тест. А потом — вторая часть и ещё одно задание. "
           "У тебя всё получится. Удачи! ❤</p>"
           f'<p><img src="{img(U, "house_outside")}" alt="" style="max-width:100%;max-height:260px"></p>'),
 
@@ -100,16 +100,20 @@ LESSONS["u6_hw1"] = dict(base("u6_hw1", "Homework 1", 0), blocks=[
 
     ("quiz", rotate_quiz(ROOMS, "Послушай слово и выбери его.")),
 
-    ("match", {"title": "Найди пару: слово и перевод", "pairs": [
-        {"left": en, "right": ru, "left_audio_tts": en} for en, ru, f in ROOMS]}),
+    # Было «Найди пару: слово и перевод». Заданий на перевод не делаем (решение
+    # Анны от 19.10); «картинка — слово» уже есть во второй части — здесь на слух.
+    ("match", {"title": "Послушай слово и найди к нему картинку", "pairs": [
+        {"left": "🔊", "left_audio_tts": en, "right": en, "right_image": img(U, f)} for en, ru, f in ROOMS]}),
 
     *[scramble(en, ru, f) for en, ru, f in ROOMS],
 
-    ("quiz", rotate_quiz(ROOMS, "Посмотри на картинку и выбери слово.", with_image=True, option_audio=True)),
+    ("quiz", rotate_quiz(ROOMS, "", with_image=True, option_audio=True,
+                         title="Посмотри на картинку и выбери правильный вариант")),
 
-    ("exact_input", {"items": [
-        {"image": img(U, f), "prompt": f"Напиши по-английски: {ru}",
-         "accept": [en, en.capitalize()], "audio_tts": en} for en, ru, f in ROOMS]}),
+    # Было «Напиши по-английски: ванная». Слово по картинке пишут во второй части
+    # (последнее задание) — здесь диктант на слух.
+    ("exact_input", {"title": "Послушай слово и напиши его", "items": [
+        {"prompt": "", "accept": [en, en.capitalize()], "audio_tts": en} for en, ru, f in ROOMS]}),
 
     # 15 — перемычка: прощание (1) + приветствие (2)
     ("text", {"html":
@@ -132,13 +136,13 @@ LESSONS["u6_hw1"] = dict(base("u6_hw1", "Homework 1", 0), blocks=[
                   "needs_review": True}),
 
     # Игра «Соедини картинки со словами» — содержимого в выгрузке нет. СОСТАВ МОЙ: комнаты Л6.1.
-    ("match", {"title": "⭐ Ты выполнил все задания из основной части! А это дополнительное задание — "
-                        "для настоящих чемпионов! Соедини картинки со словами:",
+    ("match", {"title": "Соедини картинки со словами:",
                "pairs": [{"left_image": img(U, f), "right": en, "right_audio_tts": en}
                          for en, ru, f in ROOMS]}),
 
     # Игра «Впиши слова» — содержимого нет. СОСТАВ МОЙ: комната по картинке, без перевода.
-    ("exact_input", {"items": [{"image": img(U, f), "prompt": "⭐ Впиши слово: что это за комната?",
+    ("exact_input", {"title": "Посмотри на картинку и напиши, что это за комната",
+                     "items": [{"image": img(U, f), "prompt": "",
                                 "accept": [en, en.capitalize(), f"a {en}", f"the {en}"]}
                                for en, ru, f in ROOMS]}),
 
@@ -151,7 +155,7 @@ LESSONS["u6_hw2"] = dict(base("u6_hw2", "Homework 2", 1), blocks=[
     hello("hello_book",
           "<h2>Добро пожаловать в домашнее задание!</h2>"
           "<p>В этом уроке тебя ждут интересные упражнения и видео!</p>"
-          "<p>В конце урока есть два дополнительных задания — их можно выполнить по желанию! "
+          "<p> "
           "Их выполняют самые смелые и крутые ученики.</p>"),
 
     ("text", {"html":
@@ -161,7 +165,7 @@ LESSONS["u6_hw2"] = dict(base("u6_hw2", "Homework 2", 1), blocks=[
     ("video", {"title": "Для начала посмотри видео. В видео девочка описывает свою любимую комнату. "
                         "Как думаешь, какая её любимая комната? Внимательно слушай, что говорит персонаж. "
                         "Посмотри видео ещё раз и повторяй за персонажами.",
-               "url": "", "provider": "file"}),
+               "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u6_hw2_b3.mp4", "provider": "file"}),
 
     ("match", {"title": "Посмотри видео ещё раз и соедини левый столбик с правым, "
                         "чтобы получились правильные предложения!",
@@ -214,7 +218,7 @@ LESSONS["u6_hw2"] = dict(base("u6_hw2", "Homework 2", 1), blocks=[
 
     # Wordwall «Соедини картинки с описанием» — обложка пустая, содержимого нет.
     # СОСТАВ МОЙ: те же предметы, что в «Диаграмме», вырезаны из её картинки.
-    ("match", {"title": "⭐ Дополнительное задание для настоящих чемпионов! Соедини картинки с описанием",
+    ("match", {"title": "Соедини картинки с описанием",
                "pairs": [
                    {"left_image": img(U, "food_apples"), "right": "There are four apples.",
                     "right_audio_tts": "There are four apples."},
@@ -292,7 +296,7 @@ LESSONS["u6_hw3"] = dict(base("u6_hw3", "Homework 3", 2), blocks=[
                         "Попробуй угадать, какие животные встретятся тебе в видео? "
                         "Для начала посмотри видео один раз, внимательно слушай, что говорят персонажи. "
                         "Потом посмотри видео ещё раз и повторяй за персонажами.",
-               "url": "", "provider": "file"}),
+               "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u6_hw3_b3.mp4", "provider": "file"}),
 
     ("quiz", {"questions": [
         yn_q("Are there five lions?", "No, there aren't.", "hw3_lions", (0, 3, 1, 2),
@@ -326,8 +330,7 @@ LESSONS["u6_hw3"] = dict(base("u6_hw3", "Homework 3", 2), blocks=[
 
     # Бл. 10 — игра «Выбери правильный вариант», содержимого нет. СОСТАВ МОЙ.
     ("quiz", {"questions": [
-        pick("⭐ Ты выполнил все задания из основной части! А это дополнительное задание — для настоящих "
-             "чемпионов! Выбери правильный вариант: ___ there a kitchen in the house?", ["Is", "Are"], "Is"),
+        pick("Выбери правильный вариант: ___ there a kitchen in the house?", ["Is", "Are"], "Is"),
         pick("___ there any chairs in the dining room?", ["Is", "Are"], "Are"),
         pick("___ there a sofa in the living room?", ["Are", "Is"], "Is"),
         pick("How many bedrooms ___ there?", ["are", "is"], "are"),
@@ -365,8 +368,7 @@ STORY_ORDER = [
 LESSONS["u6_hw4"] = dict(base("u6_hw4", "Homework 4", 3), blocks=[
     hello("hello_headphones",
           "<h2>Привет!</h2>"
-          "<p>Сегодня мы с тобой послушаем и прочитаем рассказ. А в конце тебя ждёт дополнительное задание, "
-          "которое выполняется по желанию. Но ты будешь МЕГА крут, когда справишься с ним!</p>"),
+          "<p>Сегодня мы с тобой послушаем и прочитаем рассказ. Но ты будешь МЕГА крут, когда справишься с ним!</p>"),
 
     ("text", {"html":
         "<h3>Давай повторим всё, что выучили с тобой на уроке:</h3>"
@@ -377,7 +379,7 @@ LESSONS["u6_hw4"] = dict(base("u6_hw4", "Homework 4", 3), blocks=[
         "<p>Наши супер друзья — Misty, Thunder, Flash и Whisper — отправляются в жуткий дом. "
         "Как думаешь, встретят ли ребята в этом доме привидений?</p>"}),
 
-    ("video", {"title": "Для начала прослушай аудио и выполни задание.", "url": "", "provider": "file"}),
+    ("video", {"title": "Для начала прослушай аудио и выполни задание.", "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u6_hw4_b4.mp3", "provider": "file"}),
 
     ("quiz", {"questions": [
         {"q": "Прослушай историю ещё раз. Какие слова из перечисленных упоминаются в истории? "
@@ -418,9 +420,10 @@ LESSONS["u6_hw4"] = dict(base("u6_hw4", "Homework 4", 3), blocks=[
                    {"left": "Careful, Misty.", "right": "Thunder", "left_audio_tts": "Careful, Misty."},
                ]}),
 
-    ("video", {"title": "⭐ ДОПОЛНИТЕЛЬНОЕ ЗАДАНИЕ. Смотри, наша история ожила и превратилась в мультик! "
+    ("video", {"title": "Ещё одно задание. Смотри, наша история ожила и превратилась в мультик! "
                         "Давай посмотрим его и выполним упражнение!",
-               "url": "", "provider": "file"}),
+               "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u6_hw4_b9.mp4",
+               "provider": "file"}),
 
     ("sequence", {"title": "Посмотри видео ещё раз. Расставь предложения из видео в правильном порядке:",
                   "items": [{"text": s, "audio_tts": s} for s in STORY_ORDER]}),
@@ -448,14 +451,13 @@ def order_s(sentence, words, image):
 LESSONS["u6_hw5"] = dict(base("u6_hw5", "Homework 5", 4), blocks=[
     hello("hello_highfive",
           "<h2>Добро пожаловать в домашнее задание!</h2>"
-          "<p>Тебя ждут интересные упражнения и увлекательное видео, а также ДОПОЛНИТЕЛЬНОЕ задание, "
-          "которое можно выполнить ПО ЖЕЛАНИЮ и получить дополнительные кристаллы 💎</p>"
+          "<p>Тебя ждут интересные упражнения и увлекательное видео, а также ещё одно задание, которое можно выполнить ПО ЖЕЛАНИЮ и получить кристаллы 💎</p>"
           "<p>Чтобы стать ЧЕМПИОНОМ — собери все кристаллы, которые ты будешь получать "
           "за выполнение каждого задания.</p>"),
 
     ("video", {"title": "Сейчас тебе нужно будет посмотреть видео. Герой видео проведёт небольшую экскурсию "
                         "по своему дому. Попробуй угадать, какие комнаты есть у него в доме 🏡",
-               "url": "", "provider": "file"}),
+               "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u6_hw5_b2.mp4", "provider": "file"}),
 
     ("text", {"html":
         "<p>Внимательно посмотри на картинку. Под картинкой есть предложения: прочитай их и скажи, "
@@ -503,11 +505,11 @@ LESSONS["u6_hw5"] = dict(base("u6_hw5", "Homework 5", 4), blocks=[
                       "Используй предыдущее упражнение как пример.</p>"
                       "<p>Напиши 5–7 предложений.</p>"
                       "<p>(По желанию можешь нарисовать рисунок своего дома и показать учителю на уроке. "
-                      "За рисунок я подарю тебе дополнительный 💎)</p>"}),
+                      "За рисунок я подарю тебе 💎)</p>"}),
 
     # Бл. 13 — игра «Впиши слова», содержимого нет. СОСТАВ МОЙ: комнаты по картинке и переводу.
     ("exact_input", {"items": [
-        {"image": img(U, f), "prompt": f"⭐ Дополнительное задание. Впиши слово: {ru}",
+        {"image": img(U, f), "prompt": f"Ещё одно задание. Впиши слово: {ru}",
          "accept": [en, en.capitalize(), f"a {en}"]}
         for en, ru, f in ROOMS if en in ("bedroom", "bathroom", "living room", "kitchen", "hall", "cellar")]}),
 
@@ -531,7 +533,7 @@ LESSONS["u6_hw5"] = dict(base("u6_hw5", "Homework 5", 4), blocks=[
 
     bye("well_done_star",
         "<h3>Поздравляю! Ты завершил домашнее задание! Молодец! 💎</h3>"
-        "<p>За прохождение домашнего задания держи ещё 1 дополнительный 💎</p><p>Жду тебя на занятии!</p>"),
+        "<p>За прохождение домашнего задания держи ещё 1 💎</p><p>Жду тебя на занятии!</p>"),
 ])
 
 # ---------------------------------------------------------------- Homework 6
@@ -558,7 +560,7 @@ LESSONS["u6_hw6"] = dict(base("u6_hw6", "Homework 6", 5), blocks=[
 
     ("video", {"title": "Посмотри видео и выполни задание под ним. В этом видео Сэм путешествует по всему миру "
                         "и узнаёт о различных видах домов. А где живёшь ты?",
-               "url": "", "provider": "file"}),
+               "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u6_hw6_b3.mp4", "provider": "file"}),
 
     ("match", {"title": "А теперь давай вспомним названия домиков, которые мы выучили на уроке. "
                         "Соедини название с картинкой.",
@@ -679,7 +681,7 @@ LESSONS["u6_hw7"] = dict(base("u6_hw7", "Homework 7", 6), blocks=[
                   "needs_review": True}),
 
     # Wordwall «SM1 U6 matching» (Match up) — содержимого нет. СОСТАВ МОЙ: комнаты Л6.1.
-    ("match", {"title": "⭐ Дополнительное задание для настоящих чемпионов! Соедини картинку со словом",
+    ("match", {"title": "Соедини картинку со словом",
                "pairs": [{"left_image": img(U, f), "right": en, "right_audio_tts": en}
                          for en, ru, f in ROOMS]}),
 
@@ -779,7 +781,7 @@ LESSONS["u6_test"] = dict(base("u6_test", "Unit 6 Test", 7, kind="test"), blocks
 
     # Блок 6 — аудио диалога Тома и Сары: у «Верно / неверно» нет поля
     # для звука, поэтому аудио отдельным блоком перед утверждениями.
-    ("video", {"title": "Послушай диалог Тома и Сары: Том пришёл к Саре в гости.", "url": "", "provider": "file"}),
+    ("video", {"title": "Послушай диалог Тома и Сары: Том пришёл к Саре в гости.", "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u6_test_b10.mp3", "provider": "file"}),
     ("truefalse", {"title": "Прочитай предложения и отметь — True (верно) или False (неверно).",
                    "statements": [
                        {"text": "The kitchen is big.", "correct": False},

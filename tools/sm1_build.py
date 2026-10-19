@@ -18,6 +18,8 @@ import argparse, glob, hashlib, importlib.util, json, os, re, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA = "@@MEDIA@@"
 MEDIA_URL = "https://classroom.wowteach.ru/media/"
+# аудио и видео методиста — в Supabase Storage (CLAUDE.md, «Аудио и видео от методиста»)
+STORAGE = "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/"
 
 
 def img(unit, name):

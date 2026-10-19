@@ -33,14 +33,18 @@ LESSONS = {
         "lesson_title": "Unit 4 Test", "lesson_sort": 7, "kind": "test",
         "blocks": [
             # 1 — словарный тренажёр «Впиши буквы» (11 слов)
-            ("exact_input", {"items": [
-                {"prompt": f"Напиши по-английски: {ru}", "accept": [en, en.capitalize()],
+            # Заданий на перевод не делаем (решение Анны от 19.10): вместо русского
+            # слова — звук и картинка. Для рыбы картинки нет — только звук.
+            ("exact_input", {"title": "Послушай слово, посмотри на картинку и напиши его", "items": [
+                {**({"image": pic} if pic else {}), "prompt": "", "accept": [en, en.capitalize()],
                  "audio_tts": en}
-                for en, ru in [
-                    ("banana", "банан"), ("cake", "торт"), ("sandwich", "бутерброд"),
-                    ("apple", "яблоко"), ("pizza", "пицца"), ("sausage", "сосиска"),
-                    ("chicken", "курица"), ("steak", "стейк"), ("peas", "горох"),
-                    ("carrots", "морковь"), ("fish", "рыба"),
+                for en, pic in [
+                    ("banana", f("food_banana")), ("cake", f("food_cake")),
+                    ("sandwich", f("food_cheese_sandwich")), ("apple", img("u6", "food_apples")),
+                    ("pizza", f("food_pizza")), ("sausage", f("food_sausage")),
+                    ("chicken", f("food_chicken")), ("steak", f("food_steak")),
+                    ("peas", f("food_peas_carrots")), ("carrots", f("food_peas_carrots")),
+                    ("fish", None),
                 ]
             ]}),
 

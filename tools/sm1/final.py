@@ -34,7 +34,7 @@ LESSONS = {
             # ---------------- Listening
             # 1 — аудио 2:46 на всю часть Listening
             ("video", {"title": "Final test · Listening. Послушай аудио и выполни задание ниже",
-                       "url": "", "provider": "file"}),
+                       "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_final_b1.mp3", "provider": "file"}),
 
             # 2 — «Диаграмма»: точка k ↔ вариант k (Jane, Mike, Laura, Clare, Paul);
             # координаты сняты с маркеров на странице PDF

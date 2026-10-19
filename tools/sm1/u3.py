@@ -34,8 +34,9 @@ LESSONS = {
         "lesson_title": "Unit 3 Test", "lesson_sort": 7, "kind": "test",
         "blocks": [
             # Блок 1 выгрузки — словарный тест «Впиши буквы» по 9 словам.
-            ("exact_input", {"items": [
-                {"prompt": f"Напиши по-английски: {ru}", "accept": [en, en.capitalize()]}
+            # Заданий на перевод не делаем (решение Анны от 19.10): слово — по картинке.
+            ("exact_input", {"title": "Посмотри на картинку и напиши слово", "items": [
+                {"image": img(U, f), "prompt": "", "accept": [en, en.capitalize()]}
                 for en, ru, f in ANIMALS]}),
 
             # Блок 2 «Соедини слова с картинками»: справа в выгрузке пусто,
@@ -94,8 +95,16 @@ LESSONS = {
                               "5. The __rat__ is under the table.",
                       "gaps_expected": 5}),
 
-            # Блок 7 LISTENING «Какое животное нравится каждому ребёнку?» —
-            # справа плейсхолдеры, аудио нет: по-настоящему пустой, в урок не кладём.
+            # Блок 7 LISTENING «Какое животное нравится каждому ребёнку?»: в выгрузке
+            # справа плейсхолдеры, аудио нет. 19.10 Анна прислала запись
+            # (sm1_u3_test_b11.mp3) и ключ скрином: Tom — lizard, Lucy — dog,
+            # Ben — elephant, Ann — frog, Kim — spider.
+            ("video", {"title": "LISTENING. Послушай запись",
+                       "url": f"{STORAGE}sm1/sm1_u3_test_b11.mp3", "provider": "file"}),
+            ("match", {"title": "Послушай запись ещё раз. Какое животное нравится каждому ребёнку? Соедини.",
+                       "pairs": [{"left": name, "right": w, "right_image": img(U, FILE[w])}
+                                 for name, w in (("Tom", "lizard"), ("Lucy", "dog"), ("Ben", "elephant"),
+                                                 ("Ann", "frog"), ("Kim", "spider"))]}),
 
             ("speaking", {"title": "SPEAKING TASK 🎤",
                           "html": "<p>Посмотри на картинку и расскажи, кто где находится.</p>"

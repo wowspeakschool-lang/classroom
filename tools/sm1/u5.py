@@ -72,6 +72,30 @@ STORY_LOST = (
 )
 
 
+# HW5, LISTENING выгрузки (блок 5): James, Emma, Charles, Hannah. Ключ — Анна,
+# 19.10.2026. Неверные варианты — как в выгрузке. Верный стоит на разных местах.
+def _listen_q(q, options, correct):
+    return {"q": q, "type": "single", "options": [{"image": c(o)} for o in options],
+            "correct": [options.index(correct)]}
+
+
+LISTENING_U5_HW5 = [
+    ("video", {"title": "LISTENING. Послушай, что делают James, Emma, Charles и Hannah на этой неделе 🎧",
+               "url": f"{STORAGE}sm1/sm1_u5_hw5_b4.mp3", "provider": "file"}),
+    ("quiz", {"title": "Послушай запись ещё раз и выбери правильную картинку.", "questions": [
+        _listen_q("On Mondays James …", ["act_ride_bike", "t_piano", "act_play_football"], "act_play_football"),
+        _listen_q("On Wednesdays Emma …", ["act_play_frisbee", "act_ride_bike", "act_computer_games"],
+                  "act_play_frisbee"),
+        _listen_q("On Fridays Charles …", ["t_piano", "act_watch_tv", "act_play_football"], "act_watch_tv"),
+        _listen_q("On Saturdays Hannah …", ["act_ride_bike", "act_watch_tv", "act_ride_pony"], "act_ride_pony"),
+    ]}),
+]
+# Карточки Emma (act_play_frisbee) ещё нет — промпт отдан Анне 19.10. Пока файла
+# нет, блоки в урок не входят, чтобы исходник совпадал с базой.
+if not os.path.exists(os.path.join(ROOT, "media", "sm1", U, "act_play_frisbee.webp")):
+    LISTENING_U5_HW5 = []
+
+
 LESSONS = {
     # ------------------------------------------------------------------ HW4
     "u5_hw4": {
@@ -88,9 +112,7 @@ LESSONS = {
                 f'<p><img src="{shared("hello_wave")}" alt="" style="height:200px"></p>'
                 "<h2>Добро пожаловать в домашнюю работу!</h2>"
                 "<p>Здесь тебя ждут задания по истории, которую мы обсуждали на уроке. "
-                "Будет очень-очень интересно.</p>"
-                "<p>В конце тебя ждёт вторая часть — интерактивное видео. Делать его "
-                "необязательно, но если у тебя получится его выполнить, ты будешь супер крут 😀</p>"}),
+                "Будет очень-очень интересно.</p>"}),
 
             # 2
             ("text", {"html":
@@ -106,7 +128,7 @@ LESSONS = {
                 + pic("story_lost_forest", 567)}),
 
             # 4 — аудио истории (в выгрузке «Медиафайл» без файла)
-            ("video", {"title": "Послушай историю «We’re lost!» 🎧", "url": "", "provider": "file"}),
+            ("video", {"title": "Послушай историю «We’re lost!» 🎧", "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u5_hw4_b4.mp3", "provider": "file"}),
 
             # 5
             ("text", {"html": pic("story_lost_comic", 630) + STORY_LOST}),
@@ -145,20 +167,10 @@ LESSONS = {
                      "right_audio_tts": "Come with me."},
                 ]}),
 
-            # 9 — перемычка: прощание (1) + приветствие (2)
-            ("text", {"html":
-                f'<p><img src="{shared("hello_rocket")}" alt="" style="height:180px"></p>'
-                "<h3>Ну вот и всё! Первая часть домашней работы выполнена 🎉</h3>"
-                "<p>А это значит, что ты невероятный молодец.</p>"
-                "<p>Дальше — дополнительная часть: интерактивное видео с вопросами. Делать её "
-                "не обязательно, но она очень-очень интересная. Давай посмотрим видео и сделаем "
-                "все упражнения 👍</p>"}),
+            # Перемычка к «(2)» и само интерактивное видео убраны: интерактивные
+            # видео не берём (решение Анны от 19.10.2026).
 
-            # 10 — интерактивное видео из «(2)»
-            ("video", {"title": "Дополнительное задание: мультфильм «We’re lost!»",
-                       "url": "", "provider": "file"}),
-
-            # 11
+            # 9
             ("text", {"html":
                 f'<p><img src="{shared("well_done_star")}" alt="" style="height:180px"></p>'
                 "<h3>Домашнее задание сделано!</h3>"
@@ -173,8 +185,9 @@ LESSONS = {
         # «SM1 Unit 5 Homework 5» — догружена 07.10.2026 в корень SM1.
         # Блок 3 выгрузки: клипарт с детьми-спортсменами — украшение, не взят.
         # Блок 5 LISTENING (James, Emma, Charles, Hannah — по три картинки на
-        # выбор): аудио нет, ключа нет (все кружки пустые), две картинки из
-        # двенадцати не выгрузились — в урок НЕ положен, строка в доработке.
+        # выбор): 19.10 Анна прислала запись (sm1_u5_hw5_b4.mp3) и ключ. Варианты —
+        # наши 3D-карточки; для Emma (летающая тарелка) нужна новая карточка
+        # act_play_frisbee — пока её нет, блоки 4–5 в урок не входят (LISTENING_U5_HW5).
         # Блок 8 — две пустые игры («Впиши слова», «Составь предложения») — СОСТАВ МОЙ.
         # Блок 10 — реклама розыгрыша, не перенесена.
         "blocks": [
@@ -218,6 +231,8 @@ LESSONS = {
                      "right_audio_tts": "On Wednesdays I play computer games."},
                 ]}),
 
+            *LISTENING_U5_HW5,
+
             # 4 — письмо Милы (блок 6 выгрузки)
             ("text", {"html":
                 "<p>Мы с тобой сейчас познакомимся с Милой и узнаем, как проходит её неделя.</p>"
@@ -234,30 +249,30 @@ LESSONS = {
                         "<p>Начни, пожалуйста, письмо с таких слов: <i>Hello, Mila! My name is … "
                         "This is my week!</i></p>"}),
 
-            # 6 — игра «Впиши слова», содержимого нет. СОСТАВ МОЙ.
-            ("exact_input", {"items": [
-                {"prompt": "⭐ Ты выполнил все задания из основной части! А это дополнительное задание — "
-                           "для настоящих чемпионов! Впиши по-английски: смотреть телевизор",
-                 "accept": ["watch TV", "watch tv", "Watch TV"]},
-                {"prompt": "кататься на велосипеде", "accept": ["ride a bike", "ride my bike", "Ride a bike"]},
-                {"prompt": "играть на пианино", "accept": ["play the piano", "Play the piano"]},
-                {"prompt": "играть в прятки", "accept": ["play hide-and-seek", "play hide and seek",
-                                                         "Play hide-and-seek"]},
-                {"prompt": "заниматься плаванием", "accept": ["go swimming", "Go swimming"]},
-                {"prompt": "играть в компьютерные игры", "accept": ["play computer games",
-                                                                    "Play computer games"]},
+            # 6 — игра «Впиши слова», содержимого нет. СОСТАВ МОЙ. Заданий на перевод
+            # не делаем (решение Анны от 19.10): фраза — по картинке.
+            ("exact_input", {"title": "Посмотри на картинку и напиши, что это за занятие", "items": [
+                {"image": c("act_watch_tv"), "prompt": "", "accept": ["watch TV", "watch tv", "Watch TV"]},
+                {"image": c("act_ride_bike"), "prompt": "",
+                 "accept": ["ride a bike", "ride my bike", "Ride a bike"]},
+                {"image": c("t_piano"), "prompt": "", "accept": ["play the piano", "Play the piano"]},
+                {"image": c("act_hide_and_seek"), "prompt": "",
+                 "accept": ["play hide-and-seek", "play hide and seek", "Play hide-and-seek"]},
+                {"image": c("act_go_swimming"), "prompt": "", "accept": ["go swimming", "Go swimming"]},
+                {"image": c("act_computer_games"), "prompt": "",
+                 "accept": ["play computer games", "Play computer games"]},
             ]}),
 
             # 7–9 — игра «Составь предложения», содержимого нет. СОСТАВ МОЙ: фразы из письма Милы.
             order("On Mondays I watch TV for two hours.",
                   ["On", "Mondays", "I", "watch", "TV", "for", "two", "hours."],
-                  title="⭐ Составь предложение из письма Милы"),
+                  title="Составь предложение из письма Милы"),
             order("I play tennis for one hour.",
                   ["I", "play", "tennis", "for", "one", "hour."],
-                  title="⭐ Составь предложение из письма Милы"),
+                  title="Составь предложение из письма Милы"),
             order("On Saturdays and Sundays I do nothing!",
                   ["On", "Saturdays", "and", "Sundays", "I", "do", "nothing!"],
-                  title="⭐ Составь предложение из письма Милы"),
+                  title="Составь предложение из письма Милы"),
 
             # 10
             ("text", {"html":
@@ -287,8 +302,7 @@ LESSONS = {
                 "<h2>Добро пожаловать в домашнюю работу!</h2>"
                 "<p>Здесь мы с тобой повторим тему, которую ты уже прошёл на уроке. "
                 "Как всегда, тебя ждут классные задания 😄</p>"
-                "<p>В конце есть вторая, дополнительная часть. Её не обязательно делать, но "
-                "если у тебя получится её выполнить, то ты будешь мега крут!</p>"}),
+                "<p>В конце есть вторая часть.</p>"}),
 
             # 2
             ("text", {"html": "<p>Давай повторим всё, что выучили с тобой на уроке:</p>"
@@ -355,12 +369,14 @@ LESSONS = {
                 f'<p><img src="{shared("hello_rocket")}" alt="" style="height:180px"></p>'
                 "<h3>Вау! Отличная работа!</h3>"
                 "<p>Не забудь показать свой рисунок учителю. Он очень-очень хочет его увидеть.</p>"
-                "<p>А теперь — дополнительная часть. Соедини английские фразы с переводом!</p>"}),
+                "<p>А теперь — вторая часть. Послушай фразы и найди к ним картинки!</p>"}),
 
-            # 8 — «Homework 6 (1)»: Activity Matching Columns Game
+            # 8 — «Homework 6 (1)»: Activity Matching Columns Game. Была «фраза —
+            # перевод»; заданий на перевод не делаем (решение Анны от 19.10), а
+            # «картинка — фраза» уже есть в блоке 3, поэтому здесь — на слух.
             ("match", {
-                "title": "Соедини фразу с переводом",
-                "pairs": [{"left": en, "right": ru, "left_audio_tts": en}
+                "title": "Послушай фразу и найди к ней картинку",
+                "pairs": [{"left": "🔊", "left_audio_tts": en, "right": en, "right_image": c(f)}
                           for en, ru, f in GO_SPORTS]}),
 
             # 9
@@ -387,10 +403,11 @@ LESSONS = {
                 "<h2>Привет! Как здорово, что ты решил сделать домашнее задание!</h2>"
                 "<p>Это повторение перед тестом — давай вспомним всё!</p>"}),
 
-            # 2 — «Найди слово»
-            ("match", {
-                "title": "Вспомни дни недели: соедини слово с переводом",
-                "pairs": [{"left": en, "right": ru, "left_audio_tts": en} for en, ru in DAYS]}),
+            # 2 — «Найди слово». Было «день — перевод»; заданий на перевод не делаем
+            # (решение Анны от 19.10), у дней недели картинки нет — расставляем по порядку.
+            ("sequence", {
+                "title": "Вспомни дни недели: расставь их по порядку, начиная с понедельника",
+                "items": [{"text": en, "audio_tts": en} for en, ru in DAYS]}),
 
             # 3
             ("sort", {
@@ -406,11 +423,12 @@ LESSONS = {
             ("gaps", {
                 "title": "Впиши нужный день недели",
                 "mode": "type",
-                "text": "1. I play football on __Monday__. (понедельник)\n"
-                        "2. I go swimming on __Wednesday__. (среда)\n"
-                        "3. I ride my bike on __Friday__. (пятница)\n"
-                        "4. I watch TV on __Saturday__. (суббота)\n"
-                        "5. I play tennis on __Thursday__. (четверг)",
+                # подсказка — сокращение дня, а не перевод
+                "text": "1. I play football on __Monday__. (Mon)\n"
+                        "2. I go swimming on __Wednesday__. (Wed)\n"
+                        "3. I ride my bike on __Friday__. (Fri)\n"
+                        "4. I watch TV on __Saturday__. (Sat)\n"
+                        "5. I play tennis on __Thursday__. (Thu)",
                 "gaps_expected": 5,
             }),
 
@@ -444,8 +462,7 @@ LESSONS = {
 
             # 9
             ("text", {"html":
-                "<h3>Ты выполнил все задания из основной части!</h3>"
-                "<p>А это дополнительное задание — для настоящих чемпионов! 🏆</p>"}),
+                "<h3>Отлично! Продолжаем 💪 🏆</h3>"}),
 
             # 10 — Wordwall Anagram «SM1 Unit 5 Days of the week», СОСТАВ МОЙ
             ("exact_input", {"items": [
@@ -490,10 +507,12 @@ LESSONS = {
         # выгрузке нет — лист ЛТ5.1. В order 6–8 в выгрузке фото детей —
         # заменены картинками листов Л5.1 / ЛТ5.1.
         "blocks": [
-            # 1 — «Впиши буквы»
-            ("exact_input", {"items": [
-                {"prompt": f"Напиши по-английски: {ru}", "accept": [en], "audio_tts": en}
-                for en, ru in DAYS]}),
+            # 1 — «Впиши буквы». Было «Напиши по-английски: понедельник»; заданий на
+            # перевод не делаем (решение Анны от 19.10), у дней картинки нет —
+            # пропущенный день между соседними.
+            ("exact_input", {"title": "Какой день недели пропущен? Напиши его.", "items": [
+                {"prompt": f"{DAYS[i - 1][0]} → ___ → {DAYS[(i + 1) % 7][0]}", "accept": [en, en.lower()]}
+                for i, (en, ru) in enumerate(DAYS)]}),
 
             # 2
             ("match", {
@@ -550,7 +569,7 @@ LESSONS = {
                 ]]}),
 
             # 10 — LISTENING, аудио
-            ("video", {"title": "LISTENING. Послушай запись 🎧", "url": "", "provider": "file"}),
+            ("video", {"title": "LISTENING. Послушай запись 🎧", "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u5_test_b10.mp3", "provider": "file"}),
 
             # 11
             ("sort", {
