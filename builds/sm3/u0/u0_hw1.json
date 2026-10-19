@@ -1,0 +1,287 @@
+{
+ "course": "sm3",
+ "unit": "Unit 0 · Meet The Explorers",
+ "unit_sort_order": 0,
+ "lesson": "Homework 1",
+ "kind": "homework",
+ "lesson_sort_order": 0,
+ "pass_threshold": 60,
+ "is_published": false,
+ "media_base": "https://classroom.wowteach.ru/media/",
+ "blocks": [
+  {
+   "sort_order": 0,
+   "type": "text",
+   "payload": {
+    "html": "<p>Привет! 👋 В этой домашке повторим числа от 21 до 100 и новые слова: <b>upstairs</b>, <b>downstairs</b>, <b>cellar</b>.</p>"
+   }
+  },
+  {
+   "sort_order": 1,
+   "type": "quiz",
+   "payload": {
+    "title": "Посмотри на картинку и выбери правильный вариант.",
+    "questions": [
+     {
+      "q": "Where is the cat?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "image": "@@MEDIA@@sm3/u0/house_upstairs.webp",
+      "options": [
+       {
+        "text": "Upstairs."
+       },
+       {
+        "text": "Downstairs."
+       },
+       {
+        "text": "In the cellar."
+       }
+      ]
+     },
+     {
+      "q": "Where is the cat?",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "image": "@@MEDIA@@sm3/u0/house_downstairs.webp",
+      "options": [
+       {
+        "text": "Upstairs."
+       },
+       {
+        "text": "Downstairs."
+       },
+       {
+        "text": "In the cellar."
+       }
+      ]
+     },
+     {
+      "q": "Where is the cat?",
+      "type": "single",
+      "correct": [
+       2
+      ],
+      "image": "@@MEDIA@@sm3/u0/house_cellar.webp",
+      "options": [
+       {
+        "text": "Upstairs."
+       },
+       {
+        "text": "Downstairs."
+       },
+       {
+        "text": "In the cellar."
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 2,
+   "type": "quiz",
+   "payload": {
+    "title": "Послушай и выбери число.",
+    "questions": [
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "34"
+       },
+       {
+        "text": "43"
+       },
+       {
+        "text": "14"
+       }
+      ],
+      "audio": "",
+      "audio_tts": "thirty-four"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "options": [
+       {
+        "text": "17"
+       },
+       {
+        "text": "70"
+       },
+       {
+        "text": "77"
+       }
+      ],
+      "audio": "",
+      "audio_tts": "seventy"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "58"
+       },
+       {
+        "text": "85"
+       },
+       {
+        "text": "55"
+       }
+      ],
+      "audio": "",
+      "audio_tts": "fifty-eight"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "61"
+       },
+       {
+        "text": "16"
+       },
+       {
+        "text": "66"
+       }
+      ],
+      "audio": "",
+      "audio_tts": "sixty-one"
+     },
+     {
+      "q": "",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "99"
+       },
+       {
+        "text": "79"
+       },
+       {
+        "text": "19"
+       }
+      ],
+      "audio": "",
+      "audio_tts": "ninety-nine"
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 3,
+   "type": "exact_input",
+   "payload": {
+    "title": "Прочитай число словами и впиши его цифрами.",
+    "items": [
+     {
+      "prompt": "1. forty-two",
+      "accept": [
+       "42"
+      ]
+     },
+     {
+      "prompt": "2. sixty-three",
+      "accept": [
+       "63"
+      ]
+     },
+     {
+      "prompt": "3. eighty-seven",
+      "accept": [
+       "87"
+      ]
+     },
+     {
+      "prompt": "4. one hundred",
+      "accept": [
+       "100"
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 4,
+   "type": "gaps",
+   "payload": {
+    "title": "Вставь пропущенные слова: upstairs · downstairs · cellar.",
+    "text": "My bedroom is __upstairs__.\nThe kitchen is __downstairs__, next to the front door.\nThe old boxes are in the __cellar__.",
+    "mode": "type"
+   }
+  },
+  {
+   "sort_order": 5,
+   "type": "order",
+   "payload": {
+    "words": [
+     "My",
+     "bedroom",
+     "is",
+     "upstairs."
+    ],
+    "sentence": "My bedroom is upstairs.",
+    "audio": "",
+    "audio_tts": "My bedroom is upstairs."
+   }
+  },
+  {
+   "sort_order": 6,
+   "type": "order",
+   "payload": {
+    "words": [
+     "The",
+     "cellar",
+     "is",
+     "under",
+     "the house."
+    ],
+    "sentence": "The cellar is under the house.",
+    "audio": "",
+    "audio_tts": "The cellar is under the house."
+   }
+  },
+  {
+   "sort_order": 7,
+   "type": "speaking",
+   "payload": {
+    "title": "SPEAKING TASK 🎤",
+    "html": "<p>Расскажи про свой дом или квартиру, 4–5 предложений. Нажми на микрофон и запиши ответ.</p><p><i>For example:<br>My bedroom is upstairs.<br>The kitchen is downstairs.<br>We haven’t got a cellar.</i></p>",
+    "needs_review": true
+   }
+  },
+  {
+   "sort_order": 8,
+   "type": "text",
+   "payload": {
+    "html": "<p>Молодец! 🌟 Теперь ты знаешь, где upstairs, где downstairs и что такое cellar, и считаешь до ста.</p>"
+   }
+  }
+ ]
+}

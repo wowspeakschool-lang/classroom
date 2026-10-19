@@ -1,0 +1,344 @@
+{
+ "course": "sm3",
+ "unit": "Unit 0 · Meet The Explorers",
+ "unit_sort_order": 0,
+ "lesson": "Homework 2",
+ "kind": "homework",
+ "lesson_sort_order": 1,
+ "pass_threshold": 60,
+ "is_published": false,
+ "media_base": "https://classroom.wowteach.ru/media/",
+ "blocks": [
+  {
+   "sort_order": 0,
+   "type": "text",
+   "payload": {
+    "html": "<p>Привет! 👋 В этой домашке тренируем <b>be good at + Ving</b> — рассказываем, что получается хорошо, а что не очень.</p>"
+   }
+  },
+  {
+   "sort_order": 1,
+   "type": "quiz",
+   "payload": {
+    "title": "Посмотри на картинку и выбери правильный вариант.",
+    "questions": [
+     {
+      "q": "What is she good at?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "image": "@@MEDIA@@sm3/u0/act_dancing.webp",
+      "options": [
+       {
+        "text": "dancing"
+       },
+       {
+        "text": "painting"
+       },
+       {
+        "text": "swimming"
+       }
+      ]
+     },
+     {
+      "q": "What is he good at?",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "image": "@@MEDIA@@sm3/u0/act_painting.webp",
+      "options": [
+       {
+        "text": "climbing"
+       },
+       {
+        "text": "painting"
+       },
+       {
+        "text": "riding a bike"
+       }
+      ]
+     },
+     {
+      "q": "What is she good at?",
+      "type": "single",
+      "correct": [
+       2
+      ],
+      "image": "@@MEDIA@@sm3/u0/act_swimming.webp",
+      "options": [
+       {
+        "text": "dancing"
+       },
+       {
+        "text": "playing football"
+       },
+       {
+        "text": "swimming"
+       }
+      ]
+     },
+     {
+      "q": "What is he good at?",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "image": "@@MEDIA@@sm3/u0/act_football.webp",
+      "options": [
+       {
+        "text": "swimming"
+       },
+       {
+        "text": "playing football"
+       },
+       {
+        "text": "painting"
+       }
+      ]
+     },
+     {
+      "q": "What is she good at?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "image": "@@MEDIA@@sm3/u0/act_riding.webp",
+      "options": [
+       {
+        "text": "riding a bike"
+       },
+       {
+        "text": "climbing trees"
+       },
+       {
+        "text": "dancing"
+       }
+      ]
+     },
+     {
+      "q": "What is he good at?",
+      "type": "single",
+      "correct": [
+       2
+      ],
+      "image": "@@MEDIA@@sm3/u0/act_climbing.webp",
+      "options": [
+       {
+        "text": "swimming"
+       },
+       {
+        "text": "painting"
+       },
+       {
+        "text": "climbing trees"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 2,
+   "type": "quiz",
+   "payload": {
+    "title": "Выбери правильный вариант.",
+    "questions": [
+     {
+      "q": "I’m good at ___ pictures.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "painting"
+       },
+       {
+        "text": "paint"
+       },
+       {
+        "text": "paints"
+       }
+      ]
+     },
+     {
+      "q": "He isn’t good at ___ football.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "playing"
+       },
+       {
+        "text": "play"
+       },
+       {
+        "text": "played"
+       }
+      ]
+     },
+     {
+      "q": "___ she good at dancing?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "Is"
+       },
+       {
+        "text": "Does"
+       },
+       {
+        "text": "Do"
+       }
+      ]
+     },
+     {
+      "q": "We ___ good at climbing trees.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "are"
+       },
+       {
+        "text": "is"
+       },
+       {
+        "text": "am"
+       }
+      ]
+     },
+     {
+      "q": "They aren’t good ___ swimming.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "at"
+       },
+       {
+        "text": "in"
+       },
+       {
+        "text": "to"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 3,
+   "type": "exact_input",
+   "payload": {
+    "title": "Поставь глагол в правильную форму.",
+    "items": [
+     {
+      "prompt": "1. I’m good at ___ (ride) a bike.",
+      "accept": [
+       "riding",
+       "Riding"
+      ]
+     },
+     {
+      "prompt": "2. She’s not good at ___ (tell) lies.",
+      "accept": [
+       "telling",
+       "Telling"
+      ]
+     },
+     {
+      "prompt": "3. Are you good at ___ (dance)?",
+      "accept": [
+       "dancing",
+       "Dancing"
+      ]
+     },
+     {
+      "prompt": "4. He’s good at ___ (climb) trees.",
+      "accept": [
+       "climbing",
+       "Climbing"
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 4,
+   "type": "order",
+   "payload": {
+    "words": [
+     "I’m",
+     "good at",
+     "playing",
+     "the guitar."
+    ],
+    "sentence": "I’m good at playing the guitar.",
+    "audio": "",
+    "audio_tts": "I’m good at playing the guitar."
+   }
+  },
+  {
+   "sort_order": 5,
+   "type": "order",
+   "payload": {
+    "words": [
+     "Lucy",
+     "isn’t",
+     "good at",
+     "painting."
+    ],
+    "sentence": "Lucy isn’t good at painting.",
+    "audio": "",
+    "audio_tts": "Lucy isn’t good at painting."
+   }
+  },
+  {
+   "sort_order": 6,
+   "type": "order",
+   "payload": {
+    "words": [
+     "Are",
+     "you",
+     "good at",
+     "doing",
+     "puzzles?"
+    ],
+    "sentence": "Are you good at doing puzzles?",
+    "audio": "",
+    "audio_tts": "Are you good at doing puzzles?"
+   }
+  },
+  {
+   "sort_order": 7,
+   "type": "speaking",
+   "payload": {
+    "title": "SPEAKING TASK 🎤",
+    "html": "<p>Расскажи, что у тебя получается хорошо, а что не очень — 4–6 предложений. Нажми на микрофон и запиши ответ.</p><p><i>For example:<br>I’m good at swimming and riding a bike.<br>I’m not good at painting.<br>My friend is good at playing football.</i></p>",
+    "needs_review": true
+   }
+  },
+  {
+   "sort_order": 8,
+   "type": "text",
+   "payload": {
+    "html": "<p>Отлично! 🌟 Теперь ты умеешь рассказать, в чём ты хорош, и спросить об этом друга.</p>"
+   }
+  }
+ ]
+}
