@@ -82,12 +82,12 @@ classroom_courses → classroom_units → classroom_lessons → classroom_blocks
 | `kind` | `homework` · `test` · `lesson`. По умолчанию `homework`. **Тест без `kind='test'` ляжет обычной домашкой.** |
 | `pass_threshold` | **у домашек порога нет — `null`** (решение Анны от 19.10, применено ко всем курсам: 355 домашек). Тесты 90, итоговый 80 |
 | `is_published` | заливать **всегда `false`**, включает методист вручную |
+| `sort_order` | задавать числом явно, не `max+1` |
 
 **Курсы всегда опубликованы** (`classroom_courses.is_published = true`, по умолчанию
 `true`) — решение Анны от 19.10.2026. Видимость решают только уроки: в скрытом
 курсе преподаватель не видел даже опубликованный урок (так было с тестом
 Go Getter 3, Unit 2). Курс не скрывать; новый заводить без `is_published`.
-| `sort_order` | задавать числом явно, не `max+1` |
 
 **Урок у ученика замораживается при его первом ответе** (`classroom_lesson_snapshots`,
 миграция `classroom_freeze_first_answer`): пока ученик не начал, правка урока
