@@ -83,7 +83,7 @@ LESSONS = {
                 for en, ru, p in U1_FAMILY_FORMAL
             ]}),
 
-            ("quiz", quiz_ru_to_en(U1_FAMILY_FORMAL)),
+            picture_quiz([(en, u(p)) for en, ru, p in U1_FAMILY_FORMAL]),
 
             ("match", {"title": "Как сказать то же самое по-домашнему? Соедини пары", "pairs": [
                 {"left": "mother", "right": "mum"},
@@ -158,10 +158,18 @@ LESSONS = {
             }),
 
             # Wordwall «Match up · gg1 1.1» — СОСТАВ МОЙ
-            ("match", {"title": "Соедини пары ⭐", "pairs": [
-                {"left": en, "right": ru, "left_audio_tts": en}
-                for en, ru, p in U1_FAMILY
-                if en in ("mum", "dad", "granny", "son", "daughter", "aunt", "uncle", "cousin")
+            ("match", {"title": "Соедини слово и его объяснение ⭐", "pairs": [
+                {"left": en, "right": d, "left_audio_tts": en}
+                for en, d in [
+                    ("mum", "my mother"),
+                    ("dad", "my father"),
+                    ("granny", "my mum's mother"),
+                    ("son", "a boy — his mum and dad's child"),
+                    ("daughter", "a girl — her mum and dad's child"),
+                    ("aunt", "my dad's sister"),
+                    ("uncle", "my mum's brother"),
+                    ("cousin", "my aunt's son or daughter"),
+                ]
             ]}),
 
             bye("<h3>У тебя отлично получилось! 🎉</h3><p>Увидимся на занятии!</p>"),
@@ -635,7 +643,7 @@ LESSONS = {
             ("exact_input", {
                 "title": "Впиши слово целиком — недостающие буквы заменены чёрточками",
                 "items": [
-                    {"prompt": f"{gapped(en)} — {ru}", "accept": [en, en.capitalize()],
+                    {"prompt": gapped(en), "accept": [en, en.capitalize()],
                      "image": u(p)}
                     for en, ru, p in U1_FAMILY_FORMAL
                     if en not in ("grandparents",)

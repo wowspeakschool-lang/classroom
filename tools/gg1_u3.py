@@ -90,6 +90,24 @@ def spell(title, words, how):
          "image": p, "audio_tts": en} for en, ru, p in words]})
 
 
+def listen_pick(items, per_question=4, title="Послушай и выбери нужную картинку"):
+    """Вместо «Как по-английски …?»: слово звучит (audio_tts у вопроса), варианты —
+    картинки. Русского в задании нет. Отвлекающие — соседние по кругу, верный
+    вариант ходит по кругу на разные места. items: [(английское слово, картинка)]."""
+    qs = []
+    n = len(items)
+    k = min(per_question, n)
+    for i, (en, image) in enumerate(items):
+        wrong = [items[(i + j) % n] for j in range(1, k)]
+        random.Random(en).shuffle(wrong)
+        opts = wrong[:]
+        opts.insert(i % k, (en, image))
+        qs.append({"q": "", "type": "single", "audio_tts": en,
+                   "options": [{"image": im} for _, im in opts],
+                   "correct": [i % k]})
+    return ("quiz", {"title": title, "questions": qs})
+
+
 LESSONS = {
     # Homework 1: (1) тренажёр «части дома», (2) тренажёр «предметы в доме»,
     # (3) задания. Один урок.
@@ -104,14 +122,14 @@ LESSONS = {
 
             cards(U3_ROOMS),
             pic_match("Соедини картинку и слово", U3_ROOMS),
-            ("quiz", quiz_ru_to_en(U3_ROOMS)),
+            listen_pick([(en, p) for en, ru, p in U3_ROOMS]),
             spell("Расшифруй слово и впиши его",
                   [w for w in U3_ROOMS if w[0] in ("bathroom", "bedroom", "kitchen", "garage",
                                                    "garden", "window")], anagram),
 
             cards(U3_FURN),
             pic_match("Соедини картинку и слово", U3_FURN),
-            ("quiz", quiz_ru_to_en(U3_FURN)),
+            listen_pick([(en, p) for en, ru, p in U3_FURN]),
             spell("Вставь пропущенные буквы и впиши слово целиком", U3_FURN, gapped),
 
             ("text", {"html": "<h3>Привет! Как поживаешь? (How are you doing?)</h3>"
@@ -483,7 +501,7 @@ LESSONS = {
 
             cards(U3_THINGS),
             pic_match("Соедини картинку и слово", U3_THINGS),
-            ("quiz", quiz_ru_to_en(U3_THINGS)),
+            listen_pick([(en, p) for en, ru, p in U3_THINGS]),
             # у TV gapped() не прячет ни одной буквы — подсказка своя
             spell("Вставь пропущенные буквы и впиши слово целиком", U3_THINGS,
                   lambda en: "T _" if en == "TV" else gapped(en)),

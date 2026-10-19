@@ -146,10 +146,10 @@ LESSONS = {
                 for en, ru, c in U0_COLOURS
             ]}),
 
-            ("quiz", quiz_ru_to_en(U0_COLOURS)),
+            picture_quiz([(en, colour(c)) for en, ru, c in U0_COLOURS]),
 
             ("exact_input", {"items": [
-                {"prompt": f"Напиши по-английски: {ru}", "accept": [en, en.capitalize()],
+                {"prompt": "What colour is it?", "accept": [en, en.capitalize()],
                  "image": colour(c), "audio_tts": en}
                 for en, ru, c in U0_COLOURS
             ]}),
@@ -267,7 +267,7 @@ LESSONS = {
                 for en, ru, f in U0_CLASSROOM[7:]
             ]}),
 
-            ("quiz", quiz_ru_to_en(U0_CLASSROOM)),
+            picture_quiz([(en, img("u0", f)) for en, ru, f in U0_CLASSROOM]),
 
             ("text", {"html":
                 "<h3>Слова выучены! ✏️</h3>"
@@ -339,19 +339,16 @@ LESSONS = {
                 + pic(img("u0", "card_classroom_language"), "Classroom language")}),
 
             ("match", {
-                "title": "Поработаешь немного переводчиком? Соедини фразы на английском "
-                         "с переводом",
+                "title": "Собери фразы, которые пригодятся на уроке: соедини начало и конец",
                 "pairs": [
-                    {"left": "Close your books.", "right": "Закройте книги."},
-                    {"left": "Open your books.", "right": "Откройте книги."},
-                    {"left": "Look (at the photo).", "right": "Посмотрите (на фото)."},
-                    {"left": "Listen (to the story).", "right": "Послушайте (историю)."},
-                    {"left": "Read (the text).", "right": "Прочитайте (текст)."},
-                    {"left": "Write (your name).", "right": "Напишите (своё имя)."},
-                    {"left": "Can you help me?", "right": "Можете мне помочь?"},
-                    {"left": "Can you repeat?", "right": "Можете повторить?"},
-                    {"left": "I'm ready.", "right": "Я готов."},
-                    {"left": "What is … in English?", "right": "Как будет … по-английски?"},
+                    {"left": "Open your", "right": "books."},
+                    {"left": "Look at", "right": "the photo."},
+                    {"left": "Listen to", "right": "the teacher."},
+                    {"left": "Read", "right": "the text."},
+                    {"left": "Write", "right": "your name."},
+                    {"left": "Can you", "right": "help me?"},
+                    {"left": "I'm", "right": "ready."},
+                    {"left": "What is … in", "right": "English?"},
                 ],
             }),
 

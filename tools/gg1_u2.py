@@ -54,6 +54,10 @@ CHAMPION = ("Ты выполнил все задания из основной �
 REVIEW = "<p>Давай повторим всё, что выучили сегодня на уроке.</p>"
 
 
+# слова, у которых «What are these?», а не «What's this?»
+PLURAL = {"jeans", "shoes", "trousers", "boots", "gloves", "shorts", "trainers"}
+
+
 def clothes(en):
     return u(next(p for e, r, p in U2_CLOTHES if e == en))
 
@@ -84,10 +88,11 @@ LESSONS = {
                 for en, ru, p in U2_CLOTHES[10:]
             ]}),
 
-            ("quiz", quiz_ru_to_en(U2_CLOTHES[:10])),
+            picture_quiz([(en, u(p)) for en, ru, p in U2_CLOTHES[:10]]),
 
             ("exact_input", {"title": "Посмотри на картинку и напиши слово по-английски", "items": [
-                {"prompt": ru, "accept": list(dict.fromkeys([en, en.lower(), en.capitalize()])), "image": u(p),
+                {"prompt": "What are these?" if en in PLURAL else "What's this?",
+                 "accept": list(dict.fromkeys([en, en.lower(), en.capitalize()])), "image": u(p),
                  "audio_tts": en}
                 for en, ru, p in U2_CLOTHES[10:]
             ]}),
@@ -95,8 +100,8 @@ LESSONS = {
             ("text", {"html": "<h3>Добро пожаловать во вторую часть домашнего задания! 👋</h3>"
                               + REVIEW + pic(u("card_clothes"), "Clothes")}),
 
-            ("match", {"title": "Найди пары", "pairs": [
-                {"left": en, "right": ru, "left_audio_tts": en}
+            ("match", {"title": "Найди пары: слово и картинка", "pairs": [
+                {"left": en, "right_image": u(p), "left_audio_tts": en}
                 for en, ru, p in U2_CLOTHES[:10]
             ]}),
 
@@ -163,7 +168,17 @@ LESSONS = {
                 for en, ru, p in U2_ADJ
             ]}),
 
-            ("quiz", quiz_ru_to_en(U2_ADJ)),
+            mcq("Выбери слово, которое подходит по смыслу", [
+                ("An elephant is ___.", ["big", "small", "short"], "big"),
+                ("A mouse is ___.", ["small", "big", "long"], "small"),
+                ("A giraffe's neck is very ___.", ["long", "short", "small"], "long"),
+                ("This skirt isn't long. It's ___.", ["short", "long", "big"], "short"),
+                ("My bike isn't old. It's ___.", ["new", "old", "boring"], "new"),
+                ("These trainers aren't new. They're ___.", ["old", "new", "cool"], "old"),
+                ("This film isn't cool. It's ___.", ["boring", "cool", "new"], "boring"),
+                ("Your skateboard isn't boring. It's ___!", ["cool", "boring", "short"], "cool"),
+                ("These jeans are ___ big for me.", ["too", "big", "new"], "too"),
+            ]),
 
             ("match", {"title": "Соедини слова с противоположным значением", "pairs": [
                 {"left": "big", "right": "small"},
@@ -228,8 +243,16 @@ LESSONS = {
             ]),
 
             # Wordwall «Find the match · gg1 2.2» — СОСТАВ МОЙ
-            ("match", {"title": CHAMPION + "Соедини слово и перевод ⭐", "pairs": [
-                {"left": en, "right": ru, "left_audio_tts": en} for en, ru, p in U2_ADJ
+            ("match", {"title": CHAMPION + "Соедини начало и конец предложения ⭐", "pairs": [
+                {"left": "An elephant isn't small. It's", "right": "big."},
+                {"left": "A mouse isn't big. It's", "right": "small."},
+                {"left": "Rapunzel's hair is very", "right": "long."},
+                {"left": "My hair isn't long. It's", "right": "short."},
+                {"left": "My shoes are from the shop today. They're", "right": "new."},
+                {"left": "This castle is 500 years", "right": "old."},
+                {"left": "I love this game! It's", "right": "cool."},
+                {"left": "I don't like this film. It's", "right": "boring."},
+                {"left": "My dad's T-shirt is", "right": "too big for me."},
             ]}),
 
             # Wordwall «Unjumble · GG1 2.2» — СОСТАВ МОЙ

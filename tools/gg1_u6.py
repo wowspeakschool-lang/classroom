@@ -7,6 +7,8 @@
 учебника и рисованные иллюстрации — кадры из выгрузки. Циферблаты рисует
 tools/gg1_clocks.py (svg): стрелки должны стоять точно.
 """
+import random
+
 from gg1_lib import *  # noqa: F401,F403
 
 U = "u6"
@@ -57,6 +59,28 @@ def hide_vowels(phrase):
                     for w in phrase.split(" "))
 
 
+def sound_quiz(items, per_question=4, title="Послушай и выбери правильную картинку"):
+    """Вместо «Как по-английски …?»: слово звучит (audio_tts у вопроса), варианты —
+    картинки. Русского нет; верный вариант идёт по кругу, отвлекающие — соседи по кругу."""
+    qs = []
+    n = len(items)
+    k = min(per_question, n)
+    for i, (en, image) in enumerate(items):
+        wrong = [items[(i + j) % n][1] for j in range(1, k)]
+        random.Random(en).shuffle(wrong)
+        opts = wrong[:]
+        opts.insert(i % k, image)
+        qs.append({"q": "", "type": "single", "audio_tts": en,
+                   "options": [{"image": o} for o in opts],
+                   "correct": [opts.index(image)]})
+    return ("quiz", {"title": title, "questions": qs})
+
+
+def first_letters(phrase):
+    """Подсказка без перевода: первая буква каждого слова и чёрточки по числу букв."""
+    return "   ".join(w[0] + " _" * (len(w) - 1) for w in phrase.split(" "))
+
+
 def accept(phrase):
     return list(dict.fromkeys([phrase, phrase[0].upper() + phrase[1:], phrase.lower(),
                                phrase.capitalize()]))
@@ -89,10 +113,10 @@ LESSONS = {
                 for en, ru, p in U6_DAY[7:]
             ]}),
 
-            ("quiz", quiz_ru_to_en(U6_DAY)),
+            sound_quiz([(en, u(p)) for en, ru, p in U6_DAY]),
 
             ("exact_input", {"title": "Посмотри на картинку и напиши фразу по-английски", "items": [
-                {"prompt": ru, "accept": accept(en), "image": u(p), "audio_tts": en}
+                {"prompt": hide_vowels(en), "accept": accept(en), "image": u(p), "audio_tts": en}
                 for en, ru, p in U6_DAY if en in ("get up", "have breakfast", "go to school",
                                                   "have lunch", "listen to music", "go to bed")
             ]}),
@@ -134,13 +158,13 @@ LESSONS = {
             }),
 
             # Wordwall «Соедини: gg1unit-61» (обложка пустая) — СОСТАВ МОЙ
-            ("match", {"title": CHAMPION + "Соедини фразу и перевод ⭐", "pairs": [
-                {"left": en, "right": ru, "left_audio_tts": en} for en, ru, p in U6_DAY
+            ("match", {"title": CHAMPION + "Соедини картинку и фразу ⭐", "pairs": [
+                {"left_image": u(p), "right": en, "right_audio_tts": en} for en, ru, p in U6_DAY
             ]}),
 
             # Wordwall «Впиши фразы: GG1 U6 6.1 Daily activities» (обложка пустая) — СОСТАВ МОЙ
             ("exact_input", {"title": "Впиши фразы по-английски ⭐", "items": [
-                {"prompt": ru, "accept": accept(en), "image": u(p), "audio_tts": en}
+                {"prompt": first_letters(en), "accept": accept(en), "image": u(p), "audio_tts": en}
                 for en, ru, p in U6_DAY if en in ("have a shower", "have dinner", "have lessons",
                                                   "do my homework", "tidy my room", "watch TV")
             ]}),
@@ -307,11 +331,11 @@ LESSONS = {
 
             # Wordwall «Match up · Adverbs of frequency GG1 Un.6.3» — СОСТАВ МОЙ
             ("match", {"title": CHAMPION + "Соедини наречие и то, как часто это бывает ⭐", "pairs": [
-                {"left": "always", "right": "100% — всегда", "left_audio_tts": "always"},
-                {"left": "usually", "right": "75% — обычно", "left_audio_tts": "usually"},
-                {"left": "often", "right": "50% — часто", "left_audio_tts": "often"},
-                {"left": "sometimes", "right": "25% — иногда", "left_audio_tts": "sometimes"},
-                {"left": "never", "right": "0% — никогда", "left_audio_tts": "never"},
+                {"left": "always", "right": "100%", "left_audio_tts": "always"},
+                {"left": "usually", "right": "75%", "left_audio_tts": "usually"},
+                {"left": "often", "right": "50%", "left_audio_tts": "often"},
+                {"left": "sometimes", "right": "25%", "left_audio_tts": "sometimes"},
+                {"left": "never", "right": "0%", "left_audio_tts": "never"},
             ]}),
 
             # Wordwall «Unjumble · Gg1 6.3» — СОСТАВ МОЙ
@@ -619,10 +643,11 @@ LESSONS = {
             ]),
 
             # Wordwall «Find the match · gg1 6.3» — СОСТАВ МОЙ
-            ("match", {"title": "Соедини наречие и перевод ⭐", "pairs": [
-                {"left": en, "right": ru, "left_audio_tts": en} for en, ru in [
-                    ("always", "всегда"), ("usually", "обычно"), ("often", "часто"),
-                    ("sometimes", "иногда"), ("never", "никогда")]
+            ("match", {"title": "Соедини наречие и его значение ⭐", "pairs": [
+                {"left": en, "right": meaning, "left_audio_tts": en} for en, meaning in [
+                    ("always", "every time — 100%"), ("usually", "most of the time — 75%"),
+                    ("often", "many times — 50%"), ("sometimes", "not very often — 25%"),
+                    ("never", "not at all — 0%")]
             ]}),
 
             bye("<h3>Ура! Ты справился с домашней работой. Ты молодец! 🎉</h3>"
@@ -638,7 +663,7 @@ LESSONS = {
         "blocks": [
             # в выгрузке скрытые буквы не видны — прячем гласные, фразу пишем целиком
             ("exact_input", {"title": "Впиши фразу целиком, вставив недостающие буквы", "items": [
-                {"prompt": f"{hide_vowels(en)} — {ru}", "accept": accept(en), "image": u(p)}
+                {"prompt": hide_vowels(en), "accept": accept(en), "image": u(p)}
                 for en, ru, p in U6_DAY if en in (
                     "do my homework", "tidy my room", "go to school", "have lessons",
                     "hang out with my friends", "listen to music", "have a shower",

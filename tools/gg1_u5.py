@@ -7,6 +7,8 @@
 методиста и иллюстрации учебника (пляж a–h, Оливер и Сара, Superdug, мишка-шифр)
 — кадры из выгрузки (tools/gg1_pdf_frames.py). Фото людей из выгрузки не берём.
 """
+import random
+
 from gg1_lib import *  # noqa: F401,F403
 
 U = "u5"
@@ -57,6 +59,23 @@ def quiz_ru_en(words):
     return out
 
 
+def sound_quiz(items, per_question=4, title="Послушай и выбери правильную картинку"):
+    """Вместо «Как по-английски …?»: слово звучит (audio_tts у вопроса), варианты —
+    картинки. Русского нет; верный вариант идёт по кругу, отвлекающие — соседи по кругу."""
+    qs = []
+    n = len(items)
+    k = min(per_question, n)
+    for i, (en, image) in enumerate(items):
+        wrong = [items[(i + j) % n][1] for j in range(1, k)]
+        random.Random(en).shuffle(wrong)
+        opts = wrong[:]
+        opts.insert(i % k, image)
+        qs.append({"q": "", "type": "single", "audio_tts": en,
+                   "options": [{"image": o} for o in opts],
+                   "correct": [opts.index(image)]})
+    return ("quiz", {"title": title, "questions": qs})
+
+
 def ask(*variants):
     """Ответ-предложение: с вопросительным знаком и без, как напишет ребёнок."""
     out = []
@@ -91,10 +110,10 @@ LESSONS = {
                 for en, ru, p in U5_VERBS[8:]
             ]}),
 
-            ("quiz", quiz_ru_en(U5_VERBS[:8])),
+            sound_quiz([(en, u(p)) for en, ru, p in U5_VERBS[:8]]),
 
             ("exact_input", {"title": "Посмотри на картинку и напиши слово по-английски", "items": [
-                {"prompt": ru, "accept": list(dict.fromkeys([en, en.capitalize()])), "image": u(p),
+                {"prompt": gapped(en), "accept": list(dict.fromkeys([en, en.capitalize()])), "image": u(p),
                  "audio_tts": en}
                 for en, ru, p in U5_VERBS[8:]
             ]}),
@@ -579,8 +598,8 @@ LESSONS = {
             }),
 
             # Wordwall «Match up · GG1 unit 5.1» — СОСТАВ МОЙ
-            ("match", {"title": CHAMPION + "Соедини слово и перевод ⭐", "pairs": [
-                {"left": en, "right": ru, "left_audio_tts": en}
+            ("match", {"title": CHAMPION + "Соедини картинку и слово ⭐", "pairs": [
+                {"left_image": u(p), "right": en, "right_audio_tts": en}
                 for en, ru, p in U5_VERBS if en in ("act", "climb", "dive", "fix", "ride", "sing",
                                                     "write", "skateboard")
             ]}),

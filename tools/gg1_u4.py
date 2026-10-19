@@ -69,10 +69,11 @@ REVIEW = "<p>Давай повторим всё, что выучили сего�
 ORDER = "Расставь слова в правильном порядке"
 
 
-def listen_write(words, title="Послушай и впиши слово"):
-    """«Послушай и впиши» тренажёра: слово звучит, подсказка — перевод."""
+def listen_write(words, title="Послушай, вставь пропущенные буквы и впиши слово целиком"):
+    """«Послушай и впиши» тренажёра: слово звучит, подсказка — буквы с пропусками
+    (перевода в задании нет — решение методиста)."""
     return ("exact_input", {"title": title, "items": [
-        {"prompt": ru, "accept": list(dict.fromkeys([en, en.capitalize()])), "audio_tts": en}
+        {"prompt": hint(en), "accept": list(dict.fromkeys([en, en.capitalize()])), "audio_tts": en}
         for en, ru, p in words
     ]})
 
@@ -86,6 +87,30 @@ def hair_quiz(items):
                    "options": [{"text": o} for o in opts],
                    "correct": [opts.index(o) for o in ok]})
     return ("quiz", {"title": "Какие у них волосы?", "questions": qs})
+
+
+def listen_pick(items, per_question=4, title="Послушай и выбери нужную картинку"):
+    """Вместо «Как по-английски …?»: слово звучит (audio_tts у вопроса), варианты —
+    картинки. Русского в задании нет. Отвлекающие — соседние по кругу, верный
+    вариант ходит по кругу на разные места. items: [(английское слово, картинка)]."""
+    qs = []
+    n = len(items)
+    k = min(per_question, n)
+    for i, (en, image) in enumerate(items):
+        wrong = [items[(i + j) % n] for j in range(1, k)]
+        random.Random(en).shuffle(wrong)
+        opts = wrong[:]
+        opts.insert(i % k, (en, image))
+        qs.append({"q": "", "type": "single", "audio_tts": en,
+                   "options": [{"image": im} for _, im in opts],
+                   "correct": [i % k]})
+    return ("quiz", {"title": title, "questions": qs})
+
+
+def hint(en):
+    """Подсказка без перевода: буквы с пропусками; во «… hair» слово hair целиком."""
+    words = en.split()
+    return " ".join(w if w == "hair" and len(words) > 1 else gapped(w) for w in words)
 
 
 LESSONS = {
@@ -105,10 +130,10 @@ LESSONS = {
                 {"text": en, "translation": ru, "audio_tts": en, "image": u(p)}
                 for en, ru, p in U4_FACE
             ]}),
-            ("match", {"title": "Найди пары", "pairs": [
-                {"left": en, "right": ru, "left_audio_tts": en} for en, ru, p in U4_FACE
+            ("match", {"title": "Соедини картинку и слово", "pairs": [
+                {"left_image": u(p), "right": en, "right_audio_tts": en} for en, ru, p in U4_FACE
             ]}),
-            ("quiz", quiz_ru_to_en(U4_FACE)),
+            listen_pick([(en, u(p)) for en, ru, p in U4_FACE]),
             listen_write(U4_FACE),
 
             # тренажёр «волосы»
@@ -119,7 +144,7 @@ LESSONS = {
             ("match", {"title": "Соедини картинку и слово", "pairs": [
                 {"left_image": u(p), "right": en, "right_audio_tts": en} for en, ru, p in U4_HAIR
             ]}),
-            ("quiz", quiz_ru_to_en(U4_HAIR)),
+            listen_pick([(en, u(p)) for en, ru, p in U4_HAIR]),
             listen_write(U4_HAIR),
 
             # задания
@@ -199,7 +224,7 @@ LESSONS = {
             ("match", {"title": "Соедини картинку и слово", "pairs": [
                 {"left_image": u(p), "right": en, "right_audio_tts": en} for en, ru, p in U4_BODY
             ]}),
-            ("quiz", quiz_ru_to_en(U4_BODY)),
+            listen_pick([(en, u(p)) for en, ru, p in U4_BODY]),
             listen_write(U4_BODY),
 
             ("text", {"html":
