@@ -164,7 +164,7 @@ def payload_json(payload):
 def setup_sql(lesson, course=COURSE):
     ut, lt = q(lesson["unit_title"]), q(lesson["lesson_title"])
     kind = lesson["kind"]
-    thr = 90 if kind == "test" else 60
+    thr = 90 if kind == "test" else "null"  # у домашек порога нет (Анна, 19.10.2026)
     return f"""insert into classroom_units (course_id, title, sort_order)
 select c.id, '{ut}', {lesson['unit_sort']} from classroom_courses c
 where c.slug = '{course['slug']}'
