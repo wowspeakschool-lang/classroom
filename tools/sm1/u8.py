@@ -154,10 +154,11 @@ LESSONS["u8_hw1"] = {**base(1, "Homework 1", 0), "blocks": [
                   "image": I("monster_draw"), "sample": "",
                   "sample_tts": "2 legs, 4 arms, 10 teeth.", "needs_review": True}),  # 8
     # 9–10. Игры (2), в выгрузке пустые — СОСТАВ МОЙ.
-    ("exact_input", {"items": [
-        {"prompt": ("Задание для настоящих чемпионов! 🏆 Впиши слова! " if i == 0 else "") + f"Напиши по-английски: {ru}",
-         "accept": [en, en.capitalize()], "audio_tts": en}
-        for i, (en, ru, f) in enumerate(BODY)]}),                                    # 9
+    # Было «Напиши по-английски: голова» — заданий на перевод не делаем (решение
+    # Анны от 19.10): слово по картинке.
+    ("exact_input", {"title": "Задание для настоящих чемпионов! 🏆 Посмотри на картинку и напиши слово",
+                     "items": [{"image": I(f), "prompt": "", "accept": [en, en.capitalize()], "audio_tts": en}
+                               for en, ru, f in BODY]}),                                    # 9
     bye("<h3>Поздравляю! Ты завершил домашнее задание, ты замечательный ученик! 🌟</h3>"
         "<p>За это лови звёздочку :)</p><p>Увидимся на занятии!</p>"),
 ]}
@@ -166,7 +167,17 @@ LESSONS["u8_hw1"] = {**base(1, "Homework 1", 0), "blocks": [
 # Задание «Найди пару» после видео (соедини картинку и предложение: I can
 # swim, I can't walk, I can climb trees, I can't fly, I can ski, I can't
 # stop) в выгрузке без картинок — левый столбец пустой, «Введите слово».
-# Блок не переносим, он в «доработать руками».
+# Решение Анны от 19.10 — пустым не оставлять: блок 5 — замена на тот же
+# материал (can / can't у животных) по нашим картинкам. «Картинка — описание»
+# уже есть в блоке 9, поэтому здесь на слух. СОСТАВ МОЙ.
+CAN_ANIMALS = [
+    ("I can swim.", "ab_dog_swim"),
+    ("I can ski.", "ab_can_ski"),
+    ("I can dance.", "ab_cat_dance"),
+    ("I can't ride a bike.", "ab_bear_cant_ride_bike"),
+    ("I can play the guitar.", "t_cat_guitar"),
+    ("I can play football.", "t_dog_football"),
+]
 LESSONS["u8_hw2"] = {**base(2, "Homework 2", 1), "blocks": [
     hello("<h2>Привет! 👋</h2>"
           "<p>В этом уроке тебя ждут несколько интересных заданий! Выполни все "
@@ -178,6 +189,9 @@ LESSONS["u8_hw2"] = {**base(2, "Homework 2", 1), "blocks": [
               "увидишь там?</p><p>Посмотри видео один раз, внимательно слушай и проверь — "
               "угадал ли ты?</p><p>Затем посмотри видео снова и повторяй за животными.</p>"}),
     ("video", {"title": "Видео: что умеют животные?", "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u8_hw2_b4.mp4", "provider": "file"}),   # 4
+    ("match", {"title": "Послушай, что рассказывают о себе животные, и найди картинку",
+               "pairs": [{"left": "🔊", "left_audio_tts": t, "right": t, "right_image": I(f)}
+                         for t, f in CAN_ANIMALS]}),                                    # 5
     ("hotspot", {
         "title": "Отлично! У меня для тебя есть ещё одно задание! Посмотри внимательно "
                  "на картинку. Соедини предложения с подходящей картинкой!",
@@ -296,9 +310,10 @@ LESSONS["u8_hw3"] = {**base(3, "Homework 3", 2), "blocks": [
 ]}
 
 # ---------------------------------------------------------------- HW4
-# «Homework 4 (1)» + «(2)» одним уроком. Прощание первой части и
-# приветствие второй сведены в перемычку — блок 8. Часть (2) — интерактивное
-# видео (2:11) с шестью вопросами по таймкодам; текста вопросов в выгрузке нет.
+# «Homework 4 (1)» + «(2)». Часть (2) — интерактивное видео (2:11) с шестью
+# вопросами по таймкодам; интерактивные видео не берём (решение Анны от
+# 19.10.2026) — перемычка ко второй части и само видео убраны.
+# Номера кадров в углах story_robot_shuffled закрашены 19.10 (выдавали порядок).
 STORY_PICS = [  # точка на перемешанной картинке → какой это кадр истории
     (62, 75, 1), (12, 25, 2), (37, 25, 3), (12, 75, 4),
     (37, 75, 5), (87, 25, 6), (62, 25, 7), (87, 75, 8),
@@ -306,7 +321,7 @@ STORY_PICS = [  # точка на перемешанной картинке → 
 LESSONS["u8_hw4"] = {**base(4, "Homework 4", 3), "blocks": [
     hello("<h2>Привет! 👋</h2>"
           "<p>Добро пожаловать в домашнее задание! Нас сегодня ждёт много интересных "
-          "упражнений!</p><p>В конце тебя ждёт интерактивное видео — не пропусти его!</p>"),
+          "упражнений!</p>"),
     ("text", {"html": "<p>Давай повторим всё, что выучили с тобой на уроке:</p>"
               + pic("story_key_phrases", "The Problem — key phrases")}),
     ("text", {"html": "<p>Сегодня Misty, Flash, Thunder и Whisper подготовили для тебя историю!</p>"
@@ -332,11 +347,6 @@ LESSONS["u8_hw4"] = {**base(4, "Homework 4", 3), "blocks": [
                    {"left": "It can't speak.", "right": "Thunder", "right_audio_tts": "Thunder"},
                    {"left": "Robot, can you speak now?", "right": "Misty", "right_audio_tts": "Misty"},
                ]}),
-    ("text", {"html": f'<p><img src="{shared("hello_rocket")}" alt="" style="height:180px"></p>'
-              "<h3>Поздравляю! Основная часть позади, ты большой молодец! ✨</h3>"
-              "<p>А теперь ещё одно задание — интерактивное видео. Внимательно посмотри "
-              "видео и выполни все задания в нём. Удачи!</p>"}),
-    ("video", {"title": "Интерактивное видео", "url": "", "provider": "file"}),           # 9
     bye("<h3>Ты завершил домашнее задание, ты большой молодец! 🌟</h3>"
         "<p>До встречи на уроке!</p>"),
 ]}
@@ -430,12 +440,13 @@ LESSONS["u8_hw6"] = {**base(6, "Homework 6", 5), "blocks": [
     ("quiz", listen_quiz(MOVES)),
     ("match", {"title": "Найди пару: соедини картинку и слово", "pairs": [
         {"left_image": I(f), "right": en, "right_audio_tts": en} for en, ru, f in MOVES]}),
-    ("exact_input", {"items": [
-        {"prompt": f"Собери слово из букв: {SCRAMBLE[en]} ({ru})", "accept": [en, en.capitalize()],
+    # Без перевода (решение Анны от 19.10): подсказка к анаграмме — картинка,
+    # а следующее задание — диктант на слух.
+    ("exact_input", {"title": "Посмотри на картинку и собери слово из букв", "items": [
+        {"image": I(f), "prompt": SCRAMBLE[en], "accept": [en, en.capitalize()],
          "audio_tts": en} for en, ru, f in MOVES]}),
-    ("exact_input", {"items": [
-        {"prompt": f"Напиши по-английски: {ru}", "accept": [en, en.capitalize()],
-         "image": I(f), "audio_tts": en} for en, ru, f in MOVES]}),
+    ("exact_input", {"title": "Послушай слово и напиши его", "items": [
+        {"prompt": "", "accept": [en, en.capitalize()], "audio_tts": en} for en, ru, f in MOVES]}),
     ("text", {"html": f'<p><img src="{shared("hello_highfive")}" alt="" style="height:180px"></p>'
               "<h3>Отличная работа! Слова выучены 🎉</h3>"
               "<p>Давай продолжим — впереди ещё несколько заданий!</p>"}),          # 7
