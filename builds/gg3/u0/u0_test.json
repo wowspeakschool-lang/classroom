@@ -943,45 +943,52 @@
    "sort_order": 18,
    "type": "exact_input",
    "payload": {
-    "title": "DICTATION ✍️ Послушай предложение и запиши его целиком.",
+    "title": "DICTATION ✍️ Посмотри на картинку и напиши слово.",
     "needs_review": false,
     "items": [
      {
-      "audio": "",
-      "audio_tts": "Harry usually plays tennis on Thursdays.",
+      "image": "@@MEDIA@@gg3/u0/bus.webp",
       "prompt": "1.",
       "accept": [
-       "Harry usually plays tennis on Thursdays.",
-       "Harry usually plays tennis on Thursdays"
+       "bus",
+       "Bus",
+       "a bus"
       ]
      },
      {
-      "audio": "",
-      "audio_tts": "My dad travels to work by motorbike.",
+      "image": "@@MEDIA@@gg3/u0/taxi.webp",
       "prompt": "2.",
       "accept": [
-       "My dad travels to work by motorbike.",
-       "My dad travels to work by motorbike"
+       "taxi",
+       "Taxi",
+       "a taxi"
       ]
      },
      {
-      "audio": "",
-      "audio_tts": "There isn’t any milk in the fridge.",
+      "image": "@@MEDIA@@gg3/u0/train.webp",
       "prompt": "3.",
       "accept": [
-       "There isn’t any milk in the fridge.",
-       "There isn’t any milk in the fridge",
-       "There isn't any milk in the fridge.",
-       "There isn't any milk in the fridge"
+       "train",
+       "Train",
+       "a train"
       ]
      },
      {
-      "audio": "",
-      "audio_tts": "We are going to visit a museum.",
+      "image": "@@MEDIA@@gg3/u0/motorbike.webp",
       "prompt": "4.",
       "accept": [
-       "We are going to visit a museum.",
-       "We are going to visit a museum"
+       "motorbike",
+       "Motorbike",
+       "a motorbike"
+      ]
+     },
+     {
+      "image": "@@MEDIA@@gg3/u0/plane.webp",
+      "prompt": "5.",
+      "accept": [
+       "plane",
+       "Plane",
+       "a plane"
       ]
      }
     ]

@@ -20,6 +20,7 @@
 import json, os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+M = '@@MEDIA@@gg3/u0/'
 
 
 def tts(text):
@@ -89,28 +90,23 @@ LISTENING = [
     ]),
 ]
 
-# Диктант переделывается в «посмотри на картинку и напиши слово» (решение Анны
-# от 18.10): пять слов из лексики страниц 4–5 — bus, taxi, train, motorbike,
-# plane. Ждём картинки: промпт на лист отправлен в чат. Пока блок остаётся на
-# слух, чтобы тест был рабочим целиком.
+# Диктант — «посмотри на картинку и напиши слово» (решение Анны от 18.10):
+# пять слов из лексики страниц 4–5, means of transport. Картинки нарезаны из
+# листа, который прислала Анна, лежат в media/gg3/u0.
 DICTATION = ('exact_input', {
-    'title': 'DICTATION ✍️ Послушай предложение и запиши его целиком.',
+    'title': 'DICTATION ✍️ Посмотри на картинку и напиши слово.',
     'needs_review': False,
     'items': [
-        {**tts('Harry usually plays tennis on Thursdays.'),
-         'prompt': '1.', 'accept': ['Harry usually plays tennis on Thursdays.',
-                                    'Harry usually plays tennis on Thursdays']},
-        {**tts('My dad travels to work by motorbike.'),
-         'prompt': '2.', 'accept': ['My dad travels to work by motorbike.',
-                                    'My dad travels to work by motorbike']},
-        {**tts('There isn’t any milk in the fridge.'),
-         'prompt': '3.', 'accept': ['There isn’t any milk in the fridge.',
-                                    'There isn’t any milk in the fridge',
-                                    "There isn't any milk in the fridge.",
-                                    "There isn't any milk in the fridge"]},
-        {**tts('We are going to visit a museum.'),
-         'prompt': '4.', 'accept': ['We are going to visit a museum.',
-                                    'We are going to visit a museum']},
+        {'image': M + 'bus.webp', 'prompt': '1.',
+         'accept': ['bus', 'Bus', 'a bus']},
+        {'image': M + 'taxi.webp', 'prompt': '2.',
+         'accept': ['taxi', 'Taxi', 'a taxi']},
+        {'image': M + 'train.webp', 'prompt': '3.',
+         'accept': ['train', 'Train', 'a train']},
+        {'image': M + 'motorbike.webp', 'prompt': '4.',
+         'accept': ['motorbike', 'Motorbike', 'a motorbike']},
+        {'image': M + 'plane.webp', 'prompt': '5.',
+         'accept': ['plane', 'Plane', 'a plane']},
     ]})
 
 
