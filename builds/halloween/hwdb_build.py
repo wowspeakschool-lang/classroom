@@ -232,15 +232,16 @@ def plan_html(path):
 def plan(title, summary, order, file, src, hwtitle):
     les = Lesson(title, summary, order, kind='lesson', threshold=60)
     url = LESSON_URL + file
-    les.text(f'''<div style="text-align:center;padding:22px 16px;background:linear-gradient(180deg,#fff7ec,#ffe9cc);border-radius:18px;border:2px solid #f3d3a3">
-<h2 style="margin:0 0 6px;color:#8a3c08">🎃 {title}</h2>
-<p style="margin:0 0 16px;color:#6b4a2a">Интерактивный урок. Откройте его и демонстрируйте в Zoom <b>эту вкладку</b>, а не весь экран.</p>
-<p style="margin:0"><a href="{url}" style="display:inline-block;padding:14px 38px;border-radius:99px;background:#c0612b;color:#fff;font-weight:700;font-size:18px;text-decoration:none">▶ Открыть урок на весь экран</a></p>
-<p style="margin:14px 0 0;color:#8a6a4a;font-size:13px">План урока — кнопка 📋 вверху справа внутри урока (откроется отдельным окном) или ниже на этой странице.<br>Нужен интернет: картинки и музыка загружаются с сервера.</p></div>''', 'кнопка: урок в новой вкладке')
-    les.add('embed', {'url': url}, 'превью урока')
+    # урок — первым блоком: «▶ Показ» сразу открывает его на весь экран (платформа, 19.10.2026)
+    les.add('embed', {'url': url}, 'интерактивный урок')
+    les.text(f'''<div style="padding:16px 18px;background:#fff7ec;border-radius:14px;border:2px solid #f3d3a3">
+<h3 style="margin:0 0 6px;color:#8a3c08">🎃 Как провести урок</h3>
+<p style="margin:0 0 8px">«Планы уроков» → этот урок → <b>«▶ Показ»</b>: урок откроется на весь экран. Демонстрируйте в Zoom <b>эту вкладку</b>, а не весь экран.</p>
+<p style="margin:0 0 8px">План урока — кнопка 📋 вверху справа внутри урока (откроется отдельным окном) или ниже на этой странице.</p>
+<p style="margin:0">Если удобнее отдельной вкладкой: <a href="{url}">открыть урок</a>. Нужен интернет: картинки и музыка загружаются с сервера.</p></div>''', 'как провести — только преподавателю')
     les.text('<h3>План урока</h3>' + plan_html(src), 'план — только преподавателю')
     les.text(f'<h3>Домашнее задание</h3><p>Материал <b>«{hwtitle}»</b> в этом же юните. «Материалы» → «Задать ДЗ» → ученик → отметить.</p>', 'ДЗ — только преподавателю')
-    les.audience = {0: 'teacher', 2: 'teacher', 3: 'teacher'}
+    les.audience = {0: 'shared', 1: 'teacher', 2: 'teacher', 3: 'teacher'}
     PLANS.append(les)
 
 
