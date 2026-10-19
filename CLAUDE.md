@@ -495,6 +495,23 @@ forty-seven, eighty-two); в GG3 — bus, taxi, train, motorbike, plane
   `select … where payload::text like '%ВАШ-ПРОЕКТ%'`. Лечится переозвучкой
   («Озвучить пачкой» после замены ссылки на пустую строку и разметки `audio_tts`).
 
+## Курс Holidays — Halloween (19.10.2026)
+
+Курс `holidays`, юнит `Halloween`: 7 планов уроков (`kind='lesson'`, sort 0–6) и
+7 домашек (`kind='homework'`, sort 10–16), все черновиками. Интерактивные уроки —
+`lessons/halloween/*.html`, картинки — `media/halloween/<возраст>/`, музыка — Storage
+`classroom-media/halloween/`. Сборка и SQL — `builds/halloween/` (README там).
+
+- В плане урока: кнопка «▶ Открыть урок на весь экран» (новая вкладка), `embed` с
+  превью и план текстом с `audience='teacher'`. **В «Показе» платформа выводит
+  `embed` окном не выше 520 px** (`EmbedBlock` в `wowspeak-platform`), на весь экран
+  урок там не растягивается — правка платформы только с «да» Анны.
+- Уроки ссылаются на картинки по URL и рисуют их на canvas (сертификат, значок) —
+  поэтому `crossOrigin='anonymous'`; GitHub Pages отдаёт `Access-Control-Allow-Origin: *`.
+- Большой SQL не перепечатывать в вызов MCP: файл коммитится в `builds/…/sql/`,
+  после выкладки Pages база забирает его `net.http_get(...)` и выполняет из
+  `net._http_response` со сверкой `md5` (так залит Halloween).
+
 ## Git
 
 Работаем в `main`, пушим сразу — контейнер сессии временный, незакоммиченное
