@@ -602,10 +602,25 @@ LESSONS["u7_hw1"] = {
         ("flashcards", {"title": "Запомни слова. Нажми на карточку, чтобы увидеть перевод",
                         "cards": [{"text": en, "translation": ru, "audio_tts": en,
                                    "image": c(f)} for en, ru, f in CLOTHES]}),
-        ("quiz", quiz_ru_to_en(CLOTHES)),
+        # Было «Как по-английски «джинсы»?» — заданий на перевод не делаем
+        # (решение Анны от 19.10): картинка и английские варианты.
+        ("quiz", quiz_pic(U, [
+            ("clothes_jeans", ["jacket", "jeans", "skirt", "sweater"], 1),
+            ("clothes_sweater", ["jacket", "shorts", "skirt", "sweater"], 3),
+            ("clothes_jacket", ["baseball cap", "jacket", "shorts", "skirt"], 1),
+            ("clothes_skirt", ["baseball cap", "shoes", "shorts", "skirt"], 3),
+            ("clothes_shorts", ["baseball cap", "shoes", "shorts", "socks"], 2),
+            ("clothes_cap", ["T-shirt", "baseball cap", "shoes", "socks"], 1),
+            ("clothes_shoes", ["T-shirt", "shoes", "socks", "trousers"], 1),
+            ("clothes_socks", ["T-shirt", "jeans", "socks", "trousers"], 2),
+            ("clothes_tshirt", ["T-shirt", "jeans", "sweater", "trousers"], 0),
+            ("clothes_trousers", ["jacket", "jeans", "sweater", "trousers"], 3),
+        ])),
         ("quiz", listen_quiz(CLOTHES)),
-        ("match", {"title": "Найди пару: соедини слово и перевод", "pairs": [
-            {"left": en, "left_audio_tts": en, "right": ru} for en, ru, f in CLOTHES]}),
+        # Было «соедини слово и перевод». «Картинка — слово» уже есть во второй
+        # части (бл. 9), поэтому здесь на слух.
+        ("match", {"title": "Послушай слово и найди к нему картинку", "pairs": [
+            {"left": "🔊", "left_audio_tts": en, "right": en, "right_image": c(f)} for en, ru, f in CLOTHES]}),
 
         # 6 — перемычка: прощание (1) + приветствие (2)
         ("text", {"html":

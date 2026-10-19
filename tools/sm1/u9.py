@@ -108,19 +108,6 @@ def listen_quiz(words, title="Послушай и выбери, что проз�
     return {"questions": qs}
 
 
-def en_to_ru_quiz(words):
-    """«Найди определение»: английское слово → перевод."""
-    n = len(words)
-    qs = []
-    for i, (en, ru, f) in enumerate(words):
-        wrong = [words[(i + k) % n][1] for k in range(1, 4)]
-        pos = (i + 2) % 4
-        opts = wrong[:pos] + [ru] + wrong[pos:]
-        qs.append({"q": f"Что значит <b>{en}</b>?", "type": "single", "audio_tts": en,
-                   "image": c(f), "options": [{"text": o} for o in opts], "correct": [pos]})
-    return {"questions": qs}
-
-
 def scramble(word):
     """Буквы слова вразброс, детерминированно: чётные позиции с конца, потом нечётные."""
     s = word[1::2][::-1] + word[0::2]
@@ -165,7 +152,19 @@ LESSONS = {
                                       for en, ru, f in ACT_WORDS]}),
 
             # 3 — «Remember»
-            ("quiz", quiz_ru_to_en(ACT_WORDS)),
+            # Было «Как по-английски «поймать рыбу»?» — заданий на перевод не делаем
+            # (решение Анны от 19.10): картинка и английские варианты.
+            ("quiz", quiz_pic(U, [
+                ("act_catch_fish", ["catch a fish", "eat ice cream", "paint a picture", "take a photo"], 0),
+                ("act_paint_picture", ["eat ice cream", "listen to music", "paint a picture", "take a photo"], 2),
+                ("act_eat_ice_cream", ["eat ice cream", "listen to music", "look for shells", "take a photo"], 0),
+                ("act_take_photo", ["listen to music", "look for shells", "read a book", "take a photo"], 3),
+                ("act_listen_music", ["listen to music", "look for shells", "make a sandcastle", "read a book"], 0),
+                ("act_look_shells", ["look for shells", "make a sandcastle", "play the guitar", "read a book"], 0),
+                ("act_read_book", ["catch a fish", "make a sandcastle", "play the guitar", "read a book"], 3),
+                ("act_make_sandcastle", ["catch a fish", "make a sandcastle", "paint a picture", "play the guitar"], 1),
+                ("act_play_guitar", ["catch a fish", "eat ice cream", "paint a picture", "play the guitar"], 3),
+            ])),
 
             # 4 — «Listen»
             ("quiz", listen_quiz(ACT_WORDS)),
@@ -613,10 +612,28 @@ LESSONS = {
                                       for en, ru, f in PLACES]}),
 
             # 3 — «Remember»
-            ("quiz", quiz_ru_to_en(PLACES)),
+            # Было «Как по-английски «горы»?» — картинка и английские варианты.
+            ("quiz", quiz_pic(U, [
+                ("place_mountains", ["beach", "city", "countryside", "mountains"], 3),
+                ("place_countryside", ["beach", "city", "countryside", "theme park"], 2),
+                ("place_beach", ["beach", "campsite", "city", "theme park"], 0),
+                ("place_city", ["campsite", "city", "lake", "theme park"], 1),
+                ("place_theme_park", ["campsite", "lake", "mountains", "theme park"], 3),
+                ("place_campsite", ["campsite", "countryside", "lake", "mountains"], 0),
+                ("place_lake", ["beach", "campsite", "countryside", "lake"], 3),
+            ])),
 
             # 4 — «Find the definition»
-            ("quiz", en_to_ru_quiz(PLACES)),
+            # Было «Что значит mountains?» с русскими вариантами — теперь на слух.
+            ("quiz", quiz_listen_pic(U, [
+                ("mountains", ["place_beach", "place_mountains", "place_city"], 1),
+                ("countryside", ["place_city", "place_theme_park", "place_countryside"], 2),
+                ("beach", ["place_beach", "place_campsite", "place_city"], 0),
+                ("city", ["place_lake", "place_city", "place_theme_park"], 1),
+                ("theme park", ["place_campsite", "place_theme_park", "place_mountains"], 1),
+                ("campsite", ["place_campsite", "place_lake", "place_city"], 0),
+                ("lake", ["place_beach", "place_campsite", "place_lake"], 2),
+            ])),
 
             # 5 — «Listen»
             ("quiz", listen_quiz(PLACES)),

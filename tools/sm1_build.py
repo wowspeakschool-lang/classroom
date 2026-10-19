@@ -4,7 +4,7 @@
 Копия tools/sm3_build.py, но уроки лежат не здесь, а по юнитам в
 tools/sm1/uN.py — в каждом словарь LESSONS. Так юниты можно собирать
 параллельно, не толкаясь в одном файле. Общие помощники (img, shared,
-quiz_ru_to_en) — здесь, юнит берёт их через `from sm1_build import *`.
+quiz_pic, quiz_listen_pic) — здесь, юнит берёт их через `from sm1_build import *`.
 
 Ключи уроков: u5_hw4 … u9_hw7, u1_test … u9_test, final_test.
 
@@ -30,24 +30,30 @@ def shared(name):
     return f"{MEDIA}shared/{name}.webp"
 
 
-def quiz_ru_to_en(words, per_question=4):
-    """Вопросы «как по-английски». words — список (en, ru, файл).
+# Заданий «найди перевод» в курсах нет (решение методиста от 19.10.2026,
+# CLAUDE.md и tools/vychitka.md): вместо «Как по-английски «стул»?» — картинка
+# и английские варианты, вопрос пустой (нумерует рендер). Прежний помощник
+# quiz_ru_to_en убран, чтобы им не воспользовались снова.
 
-    Отвлекающие берём по кругу от самого слова, а не первые из списка: иначе
-    во всех вопросах стоят одни и те же три варианта.
+def quiz_pic(unit, rows, title="Посмотри на картинку и выбери правильный вариант"):
+    """Квиз «посмотри на картинку и выбери слово».
+
+    rows — (файл картинки в media/sm1/<unit>/, варианты, номер верного). Варианты
+    при показе не перемешиваются: верный ставим на разные места сами.
     """
-    qs = []
-    n = len(words)
-    for i, (en, ru, _) in enumerate(words):
-        wrong = [words[(i + k) % n][0] for k in range(1, per_question)]
-        options = sorted([en] + wrong, key=str.lower)
-        qs.append({
-            "q": f"Как по-английски «{ru}»?",
-            "type": "single",
-            "options": [{"text": o} for o in options],
-            "correct": [options.index(en)],
-        })
-    return {"questions": qs}
+    return {"title": title, "needs_review": False, "questions": [
+        {"q": "", "type": "single", "image": img(unit, f),
+         "options": [{"text": o} for o in options], "correct": [correct]}
+        for f, options, correct in rows]}
+
+
+def quiz_listen_pic(unit, rows, title="Послушай слово и выбери картинку"):
+    """Квиз «послушай слово и выбери картинку» — второй блок той же механики в
+    уроке делается на слух. rows — (слово, файлы картинок-вариантов, номер верного)."""
+    return {"title": title, "needs_review": False, "questions": [
+        {"q": "", "type": "single", "audio_tts": word,
+         "options": [{"image": img(unit, f)} for f in files], "correct": [correct]}
+        for word, files, correct in rows]}
 
 
 def load_lessons():

@@ -48,19 +48,6 @@ def listen_quiz(words, title="Послушай слово и выбери его
     return {"questions": qs}
 
 
-def en_to_ru_quiz(words):
-    """«Найди определение»: английское слово → перевод."""
-    n = len(words)
-    qs = []
-    for i, (en, ru, f) in enumerate(words):
-        wrong = [words[(i + k) % n][1] for k in range(1, 4)]
-        pos = (i + 2) % 4
-        opts = wrong[:pos] + [ru] + wrong[pos:]
-        qs.append({"q": f"Что значит <b>{en}</b>?", "type": "single", "audio_tts": en,
-                   "image": I(f), "options": [{"text": o} for o in opts], "correct": [pos]})
-    return {"questions": qs}
-
-
 def yn(q, image, yes_text, no_text, yes, yes_first):
     """Вопрос с двумя ответами; yes_first разводит позицию верного."""
     opts = [yes_text, no_text] if yes_first else [no_text, yes_text]
@@ -140,7 +127,18 @@ LESSONS["u8_hw1"] = {**base(1, "Homework 1", 0), "blocks": [
           "<p>Выполни все задания, если хочешь выучить тему на все 100!</p>"),
     ("flashcards", {"title": "Запомни слова", "cards": [
         {"text": en, "translation": ru, "audio_tts": en, "image": I(f)} for en, ru, f in BODY]}),
-    ("quiz", quiz_ru_to_en(BODY)),
+    # Было «Как по-английски «голова»?» — заданий на перевод не делаем (решение
+    # Анны от 19.10): картинка и английские варианты.
+    ("quiz", quiz_pic(U, [
+        ("body_head", ["arms", "head", "knee", "leg"], 1),
+        ("body_fingers", ["fingers", "foot", "head", "leg"], 0),
+        ("body_hand", ["hand", "knee", "leg", "toes"], 0),
+        ("body_knee", ["arms", "foot", "knee", "toes"], 2),
+        ("body_leg", ["arms", "hand", "head", "leg"], 3),
+        ("body_toes", ["arms", "head", "knee", "toes"], 3),
+        ("body_foot", ["arms", "fingers", "foot", "head"], 2),
+        ("body_arms", ["arms", "foot", "head", "knee"], 0),
+    ])),
     ("quiz", listen_quiz(BODY)),
     ("match", {"title": "Найди пару: соедини картинку и слово", "pairs": [
         {"left_image": I(f), "right": en, "right_audio_tts": en} for en, ru, f in BODY]}),
@@ -459,7 +457,17 @@ LESSONS["u8_hw7"] = {**base(7, "Homework 7", 6), "blocks": [
     hello("<h2>Привет, изобретатель! 👋</h2>"
           "<p>Это последняя домашка перед тестом! Повтори все части тела, I can / I can't и "
           "вопросы Can you…?</p>" + pic("inventors_robot", "", "320px")),
-    ("quiz", en_to_ru_quiz(BODY)),                                                          # 2
+    # Было «Что значит head?» с русскими вариантами — теперь на слух: слово → картинка.
+    ("quiz", quiz_listen_pic(U, [
+        ("head", ["body_hand", "body_head", "body_leg"], 1),
+        ("fingers", ["body_knee", "body_foot", "body_fingers"], 2),
+        ("hand", ["body_toes", "body_hand", "body_knee"], 1),
+        ("knee", ["body_arms", "body_foot", "body_knee"], 2),
+        ("leg", ["body_leg", "body_head", "body_hand"], 0),
+        ("toes", ["body_arms", "body_toes", "body_head"], 1),
+        ("foot", ["body_head", "body_foot", "body_fingers"], 1),
+        ("arms", ["body_knee", "body_toes", "body_arms"], 2),
+    ])),                                                          # 2
     ("gaps", {"title": "Посмотри на картинку. Впиши can или can't.",
               "mode": "type", "image": I("animals_can_cant"),
               "text": "1. A penguin __can't__ fly.\n2. A fish __can__ swim.\n"
