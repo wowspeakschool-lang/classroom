@@ -18,7 +18,7 @@ begin
 
   insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)
   select v_unit, 'Final Test', 'test',
-         90, false, 0
+         80, false, 0
   where not exists (select 1 from classroom_lessons
                     where unit_id = v_unit and title = 'Final Test');
   select id into v_lesson from classroom_lessons

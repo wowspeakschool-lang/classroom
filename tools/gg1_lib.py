@@ -174,3 +174,25 @@ def listening(title, picture=None):
         html += pic(picture)
     return ("text", {"audio": "", "html": html})
 
+
+
+PICK_TITLE = "Посмотри на картинку и выбери правильный вариант"
+
+
+def picture_quiz(items, per_question=4, title=PICK_TITLE):
+    """Вместо «Как по-английски …?» (решение методиста: заданий «найди перевод»
+    в курсах нет). items: [(английское слово, ссылка на картинку)]. Вопрос пустой —
+    нумерацию ставит приложение, русского в задании нет. Отвлекающие — соседние
+    слова по кругу, верный вариант идёт по кругу на разные места."""
+    qs = []
+    n = len(items)
+    k = min(per_question, n)
+    for i, (en, image) in enumerate(items):
+        wrong = [items[(i + j) % n][0] for j in range(1, k)]
+        random.Random(en).shuffle(wrong)
+        opts = wrong[:]
+        opts.insert(i % k, en)
+        qs.append({"q": "", "type": "single", "image": image,
+                   "options": [{"text": o} for o in opts],
+                   "correct": [opts.index(en)]})
+    return ("quiz", {"title": title, "questions": qs})

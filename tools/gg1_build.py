@@ -93,6 +93,13 @@ def check(lesson, errors):
 
 # ---------- SQL ----------
 
+def threshold(lesson):
+    """У домашек порога нет (решение Анны от 19.10.2026), тесты 90, итоговый 80."""
+    if lesson["kind"] != "test":
+        return "null"
+    return 80 if lesson["unit"] == "final" else 90
+
+
 def sql_for(key, lesson):
     out = [
         f"-- {COURSE} · " + lesson["unit_title"] + " · " + lesson["lesson_title"],
@@ -115,7 +122,7 @@ def sql_for(key, lesson):
         "",
         "  insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)",
         f"  select v_unit, '{lesson['lesson_title']}', '{lesson['kind']}',",
-        f"         {90 if lesson['kind'] == 'test' else 60}, false, {lesson['lesson_sort']}",
+        f"         {threshold(lesson)}, false, {lesson['lesson_sort']}",
         "  where not exists (select 1 from classroom_lessons",
         f"                    where unit_id = v_unit and title = '{lesson['lesson_title']}');",
         f"  select id into v_lesson from classroom_lessons",

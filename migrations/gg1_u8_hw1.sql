@@ -18,7 +18,7 @@ begin
 
   insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)
   select v_unit, 'Homework 1', 'homework',
-         60, false, 0
+         null, false, 0
   where not exists (select 1 from classroom_lessons
                     where unit_id = v_unit and title = 'Homework 1');
   select id into v_lesson from classroom_lessons
