@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classroom — библиотека плитками</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1A1B2E; --mute:#7A7F92; --faint:#A6AAB9;
+  --line:#E8E7EE; --field:#F7F6F9; --paper:#fff;
+  --ok:#0D6155; --ok-soft:#E2F1EE; --warn:#A9660B; --warn-soft:#FBF0DE;
+  --course:#6B5AD6; --course-d:#4A3BAF; --course-soft:#F1EFFC;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:'Golos Text',system-ui,sans-serif;color:var(--ink);background:var(--field);font-size:15px;line-height:1.5}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+
+.wrap{max-width:1120px;margin:0 auto;padding:26px 24px 60px}
+
+/* путь */
+.crumbs{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--mute);margin-bottom:6px;flex-wrap:wrap}
+.crumbs a{color:var(--mute)}
+.crumbs a:hover{color:var(--ink)}
+.crumbs i{font-style:normal;color:var(--faint)}
+.crumbs b{color:var(--ink);font-weight:600}
+h1{font-size:27px;font-weight:700;letter-spacing:-.025em;margin:0 0 3px}
+.lead{color:var(--mute);font-size:14px;margin:0 0 20px}
+
+/* переключатель типов */
+.filters{display:flex;gap:7px;margin-bottom:18px;flex-wrap:wrap;align-items:center}
+.f{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 13px;font-size:14px;color:var(--ink);display:flex;align-items:center;gap:8px}
+.f:hover{border-color:#CFCDDA}
+.f.on{background:var(--course-soft);border-color:transparent;color:var(--course-d);font-weight:600}
+.f span{font-size:12px;color:var(--faint)}
+.f.on span{color:var(--course-d);opacity:.7}
+.sp{flex:1}
+.ghost{border:1px dashed #D2D0DD;background:transparent;border-radius:10px;padding:7px 13px;font-size:14px;color:var(--mute)}
+.ghost:hover{border-color:var(--course);color:var(--course)}
+.tgl{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 13px;font-size:14px;
+  color:var(--mute);display:flex;align-items:center;gap:8px}
+.tgl:hover{border-color:#CFCDDA}
+.tgl.on{background:var(--warn-soft);border-color:transparent;color:var(--warn);font-weight:600}
+
+/* сетка */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:14px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;display:flex;
+  flex-direction:column;gap:10px;min-height:126px;position:relative;cursor:pointer}
+.tile:hover{border-color:#D6D3E4;box-shadow:0 4px 14px rgba(26,27,46,.07)}
+.tile.drag{opacity:.4}
+.tile.over{border-color:var(--course);box-shadow:0 0 0 3px var(--course-soft)}
+.tile .ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:0 0 auto}
+.tile h3{margin:0;font-size:15px;font-weight:600;line-height:1.3}
+.tile .sub{font-size:12px;color:var(--faint);margin-top:auto}
+.tile.unpub{background:#FCFCFD}
+.tile.unpub h3{color:#5A5F73}
+.tile.unpub .ic{opacity:.65}
+.tile .nopub{color:var(--warn)}
+.tile .grip{position:absolute;left:6px;top:50%;transform:translateY(-50%);color:#D6D3E4;font-size:13px;
+  opacity:0;transition:opacity .12s;cursor:grab}
+.tile:hover .grip{opacity:1}
+
+/* значки типов */
+.ic.course{background:var(--course-soft);color:var(--course-d)}
+.ic.unit{background:#EEF1F7;color:#5C6478}
+.ic.lesson{background:var(--course-soft);color:var(--course-d)}
+.ic.homework{background:var(--ok-soft);color:var(--ok)}
+.ic.test{background:var(--warn-soft);color:var(--warn)}
+
+/* полоска готовности на плитке материала */
+.bar{height:5px;border-radius:99px;background:var(--field);display:flex;overflow:hidden}
+.bar i{display:block;height:100%}
+
+.hintbar{margin-top:20px;font-size:13px;color:var(--faint);display:flex;gap:16px;flex-wrap:wrap}
+kbd{font:inherit;font-size:11px;border:1px solid var(--line);border-radius:5px;padding:1px 5px;background:#fff}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="crumbs" id="crumbs"></div>
+  <h1 id="title">Библиотека</h1>
+  <p class="lead" id="lead">Курсы школы. Откройте курс, чтобы увидеть юниты.</p>
+
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="grid"></div>
+
+  <div class="hintbar">
+    <span>Перетащите плитку, чтобы поменять порядок</span>
+    <span>Колесом мыши или <kbd>Ctrl</kbd> + клик — в новой вкладке</span>
+  </div>
+</div>
+
+<script>
+// ── данные для показа ──
+const TINT = {
+  sm0:['#3E7F73','#2B5C52','#EAF3F1'],
+  wd1:['#6B5AD6','#4A3BAF','#F1EFFC'],
+  wd2:['#9D85E3','#6F57C4','#F4F0FD'],
+  oge:['#B07A33','#855824','#F8F1E6'],
+};
+const DATA = {
+  courses:[
+    {id:'sm0', title:'SM0 — Starter',  units:6,  n:37, pub:true},
+    {id:'wd1', title:'Wow Dragon 1',   units:3,  n:56, pub:true},
+    {id:'wd2', title:'Wow Dragon 2',   units:2,  n:14, pub:false},
+    {id:'oge', title:'ОГЭ 9 класс',    units:4,  n:22, pub:true},
+  ],
+  units:{
+    sm0:[
+      {id:'u0', title:'Unit 0 · Say Hello!', hw:5, ls:0, ts:0},
+      {id:'u1', title:'Unit 1 · My body',    hw:4, ls:1, ts:1},
+      {id:'u2', title:'Unit 2 · My family',  hw:6, ls:0, ts:1},
+      {id:'u3', title:'Unit 3 · Jobs',       hw:6, ls:0, ts:1},
+      {id:'u4', title:'Unit 4 · My hobbies', hw:6, ls:0, ts:1},
+      {id:'fr', title:'Final Revision',      hw:4, ls:0, ts:0},
+    ],
+    wd1:[{id:'m1', title:'Модуль 1 · уроки 1–27', hw:26, ls:0, ts:1}],
+    wd2:[{id:'m1', title:'Модуль 1', hw:14, ls:0, ts:0}],
+    oge:[{id:'l1', title:'Лекции', hw:8, ls:4, ts:2}],
+  },
+  items:{
+    u1:[
+      {t:'homework', title:'Homework 1', pub:true,  ok:100, snd:0,  pic:0},
+      {t:'homework', title:'Homework 2', pub:true,  ok:70,  snd:22, pic:8},
+      {t:'homework', title:'Homework 3', pub:false, ok:100, snd:0,  pic:0},
+      {t:'homework', title:'Homework 4', pub:false, ok:40,  snd:45, pic:15},
+      {t:'lesson',   title:'Lesson 1 · Parts of the body', pub:true, ok:88, snd:12, pic:0},
+      {t:'test',     title:'Unit test', pub:false, ok:60, snd:30, pic:10},
+    ],
+  },
+};
+const KIND = { lesson:['план урока','▢'], homework:['ДЗ','●'], test:['тест','◆'] };
+
+let level='courses', course=null, unit=null, filter='all', onlyUnpub=false;
+
+function tint(id){
+  const c = TINT[id] || TINT.wd1;
+  const s = document.documentElement.style;
+  s.setProperty('--course',c[0]); s.setProperty('--course-d',c[1]); s.setProperty('--course-soft',c[2]);
+}
+
+function render(){
+  const cr=document.getElementById('crumbs'), t=document.getElementById('title'),
+        ld=document.getElementById('lead'), f=document.getElementById('filters'), g=document.getElementById('grid');
+
+  // путь
+  let path = `<a onclick="go('courses')">Библиотека</a>`;
+  if(course) path += `<i>›</i><a onclick="go('units','${course.id}')">${course.title}</a>`;
+  if(unit)   path += `<i>›</i><b>${unit.title}</b>`;
+  cr.innerHTML = (course||unit) ? path : '';
+
+  if(level==='courses'){
+    t.textContent='Библиотека';
+    ld.textContent='Курсы школы. Откройте курс, чтобы увидеть юниты.';
+    f.innerHTML = `<span class="sp"></span><button class="ghost">＋ Курс</button>`;
+    g.innerHTML = DATA.courses.map((c,i)=>`
+      <div class="tile ${c.pub?'':'unpub'}" draggable="true" data-i="${i}" onclick="go('units','${c.id}')">
+        <span class="grip">⠿</span>
+        <span class="ic course">${svgFolder()}</span>
+        <h3>${c.title}</h3>
+        <span class="sub">${c.units} юнитов · ${c.n} материалов${c.pub?'':' · <span class="nopub">не опубликован</span>'}</span>
+      </div>`).join('');
+  }
+
+  else if(level==='units'){
+    tint(course.id);
+    t.textContent=course.title;
+    ld.textContent='Юниты курса. Откройте юнит, чтобы увидеть материалы.';
+    f.innerHTML = `<span class="sp"></span><button class="ghost">＋ Юнит</button>`;
+    g.innerHTML = (DATA.units[course.id]||[]).map((u,i)=>`
+      <div class="tile" draggable="true" data-i="${i}" onclick="go('items','${course.id}','${u.id}')">
+        <span class="grip">⠿</span>
+        <span class="ic unit">${svgFolder()}</span>
+        <h3>${u.title}</h3>
+        <span class="sub">${u.hw} ДЗ${u.ls?` · ${u.ls} уроков`:''}${u.ts?` · ${u.ts} тестов`:''}</span>
+      </div>`).join('');
+  }
+
+  else {
+    tint(course.id);
+    t.textContent=unit.title;
+    ld.textContent='Материалы юнита.';
+    const all = DATA.items[unit.id] || fake(unit);
+    const cnt = k => all.filter(x=>x.t===k).length;
+    f.innerHTML = `
+      ${chip('all','Все',all.length)}
+      ${chip('homework','Домашки',cnt('homework'))}
+      ${chip('lesson','Уроки',cnt('lesson'))}
+      ${chip('test','Тесты',cnt('test'))}
+      <span class="sp"></span>
+      <button class="tgl ${onlyUnpub?'on':''}" onclick="toggleUnpub()">Не опубликовано <span>${all.filter(x=>!x.pub).length}</span></button>
+      <button class="ghost">＋ Материал</button>`;
+    let list = filter==='all' ? all : all.filter(x=>x.t===filter);
+    if(onlyUnpub) list = list.filter(x=>!x.pub);
+    g.innerHTML = list.length ? list.map((m,i)=>`
+      <div class="tile ${m.pub?'':'unpub'}" draggable="true" data-i="${i}">
+        <span class="grip">⠿</span>
+        <span class="ic ${m.t}">${KIND[m.t][1]}</span>
+        <h3>${m.title}</h3>
+        <div class="bar" title="готовность">
+          <i style="width:${m.ok}%;background:var(--ok)"></i>
+          <i style="width:${m.snd}%;background:var(--warn)"></i>
+          <i style="width:${m.pic}%;background:var(--faint)"></i>
+        </div>
+        <span class="sub">${KIND[m.t][0]}${m.snd?` · ждёт озвучки`:''}${m.pub?'':' · <span class="nopub">не опубликовано</span>'}</span>
+      </div>`).join('')
+      : `<div style="color:var(--mute);padding:20px 2px">${onlyUnpub?'Всё опубликовано.':'Материалов этого типа пока нет.'}</div>`;
+  }
+  dragInit();
+}
+
+function chip(k,label,n){
+  return `<button class="f ${filter===k?'on':''}" onclick="setFilter('${k}')">${label}<span>${n}</span></button>`;
+}
+function setFilter(k){ filter=k; render(); }
+function toggleUnpub(){ onlyUnpub=!onlyUnpub; render(); }
+function svgFolder(){
+  return '<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 014.5 6h4l2 2.4h7A1.5 1.5 0 0119 10v7.5a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 013 17.5z"/></svg>';
+}
+function fake(u){
+  const out=[];
+  for(let i=1;i<=u.hw;i++) out.push({t:'homework',title:'Homework '+i,pub:true,ok:100,snd:0,pic:0});
+  for(let i=1;i<=u.ls;i++) out.push({t:'lesson',title:'Lesson '+i,pub:true,ok:90,snd:10,pic:0});
+  for(let i=1;i<=u.ts;i++) out.push({t:'test',title:'Test',pub:false,ok:70,snd:20,pic:10});
+  return out;
+}
+function go(l, cid, uid){
+  level=l;
+  course = cid ? DATA.courses.find(c=>c.id===cid) : null;
+  unit   = uid ? (DATA.units[cid]||[]).find(u=>u.id===uid) : null;
+  if(l==='courses'){ course=null; unit=null; document.documentElement.style.setProperty('--course','#6B5AD6');
+    document.documentElement.style.setProperty('--course-d','#4A3BAF');
+    document.documentElement.style.setProperty('--course-soft','#F1EFFC'); }
+  filter='all'; onlyUnpub=false;
+  render();
+}
+
+// перетаскивание плиток
+let dragEl=null;
+function dragInit(){
+  document.querySelectorAll('.tile').forEach(el=>{
+    el.ondragstart=e=>{ dragEl=el; el.classList.add('drag'); e.dataTransfer.effectAllowed='move'; };
+    el.ondragend=()=>{ el.classList.remove('drag'); document.querySelectorAll('.tile').forEach(x=>x.classList.remove('over')); };
+    el.ondragover=e=>{ e.preventDefault(); if(el!==dragEl) el.classList.add('over'); };
+    el.ondragleave=()=>el.classList.remove('over');
+    el.ondrop=e=>{
+      e.preventDefault(); el.classList.remove('over');
+      if(!dragEl || dragEl===el) return;
+      const g=document.getElementById('grid');
+      const nodes=[...g.children];
+      nodes.indexOf(dragEl) < nodes.indexOf(el) ? el.after(dragEl) : el.before(dragEl);
+    };
+  });
+}
+render();
+</script>
+</body>
+</html>

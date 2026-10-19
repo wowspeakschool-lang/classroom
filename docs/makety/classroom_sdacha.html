@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сдача и проверка домашки</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2B2545; --mute:#7C7596; --faint:#A9A3BE; --line:#EEEAF4;
+  --pink:#F5608A; --pink-d:#E04873; --pink-soft:#FDEDF2;
+  --violet:#7A6BE8; --violet-soft:#F0EDFE;
+  --green:#3FA97C; --green-soft:#E7F6EF;
+  --amber:#D79733; --amber-soft:#FCF3E2;
+  --red:#D9534F; --red-soft:#FBEBEA;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:'Golos Text',system-ui,sans-serif;color:var(--ink);font-size:16px;line-height:1.5}
+body.kid{background:linear-gradient(170deg,#FFF7EC 0%,#FDEEF3 45%,#F4EEFC 100%);min-height:100vh}
+body.teach{background:#F7F6F9}
+button{font:inherit;color:inherit;cursor:pointer}
+.page{max-width:760px;margin:0 auto;padding:20px 18px 130px}
+
+/* ── общее ── */
+.card{background:#fff;border-radius:22px;padding:22px;margin-bottom:16px;box-shadow:0 6px 22px rgba(43,37,69,.07)}
+body.teach .card{border-radius:16px;box-shadow:none;border:1px solid var(--line);padding:18px}
+.h{font-size:17px;font-weight:700;margin:0 0 4px}
+.sub{color:var(--mute);font-size:14px;margin:0}
+.num{font-size:13px;color:var(--faint);font-weight:600;margin-bottom:6px}
+
+.top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.8);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,0,0,.04)}
+.top-in{max-width:760px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:14px}
+.tt{flex:1;min-width:0}
+.tt b{display:block;font-size:15px;font-weight:700}
+.tt span{font-size:12px;color:var(--mute)}
+.pbar{max-width:760px;margin:0 auto;padding:0 18px 10px;display:flex;gap:5px}
+.pbar i{height:6px;border-radius:99px;background:rgba(0,0,0,.07);flex:1}
+.pbar i.done{background:var(--green)}
+
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.opt{border:2px solid var(--line);background:#fff;border-radius:18px;padding:12px;display:flex;flex-direction:column;
+  align-items:center;gap:8px;min-height:52px;font-weight:600}
+.opt.sel{border-color:var(--violet);background:var(--violet-soft)}
+.opt .ph{width:100%;height:72px;border-radius:13px;background:linear-gradient(135deg,#E8EEF9,#CFDCF1)}
+.opt .ph.b{background:linear-gradient(135deg,#FBE7EF,#F3C6D8)}
+.opt .ph.c{background:linear-gradient(135deg,#E6F4EA,#C4E6CF)}
+.snd{display:inline-flex;align-items:center;gap:9px;border:0;background:var(--violet-soft);color:var(--violet);
+  border-radius:99px;padding:10px 18px;font-weight:700;margin-bottom:14px}
+
+.go{border:0;background:var(--pink);color:#fff;border-radius:16px;padding:14px 28px;font-weight:700;min-height:52px;
+  box-shadow:0 6px 18px rgba(245,96,138,.34)}
+.go:disabled{background:#E3DFEC;color:#A9A3BE;box-shadow:none;cursor:not-allowed}
+.go.gh{background:#fff;color:var(--ink);border:2px solid var(--line);box-shadow:none}
+.bar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);padding:14px 18px;z-index:20}
+.bar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bar .note{color:var(--mute);font-size:14px;flex:1;min-width:150px}
+
+/* ── проверка учителем ── */
+.q{display:flex;align-items:center;gap:11px;padding:9px 0;border-top:1px solid var(--line)}
+.q:first-of-type{border-top:0}
+.q .qt{flex:1;min-width:0}
+.q .qt em{font-style:normal;display:block;font-size:13px;color:var(--mute)}
+.v{border:1px solid var(--line);background:#fff;border-radius:9px;padding:5px 12px;font-size:13px;font-weight:600;white-space:nowrap}
+.v.ok{background:var(--green-soft);border-color:transparent;color:var(--green)}
+.v.no{background:var(--red-soft);border-color:transparent;color:var(--red)}
+.v.edited:after{content:" ✎";font-size:11px;opacity:.7}
+.score{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px;color:var(--mute)}
+.score b{color:var(--ink);font-size:18px}
+.mark{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.mark button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 14px;font-weight:600;font-size:14px}
+.mark button.on{background:var(--green-soft);border-color:transparent;color:var(--green)}
+.mark button.no.on{background:var(--red-soft);color:var(--red)}
+.retake{display:flex;align-items:center;gap:9px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);
+  font-size:14px;color:var(--mute)}
+.retake input{width:18px;height:18px;accent-color:var(--pink)}
+.hidden{display:none}
+.ans{display:inline-block;border:2px solid var(--green);color:var(--green);border-radius:10px;
+  padding:2px 10px;font-weight:600;background:#fff}
+.ans.n{border-color:var(--red);color:var(--red)}
+.ans.big{font-size:17px;padding:4px 14px}
+.rl{font-size:12px;color:var(--mute)}
+
+.done{background:#fff;border-radius:26px;padding:32px 24px;text-align:center;box-shadow:0 10px 30px rgba(43,37,69,.1)}
+.done .em{font-size:48px}
+.done h2{font-size:25px;margin:10px 0 4px;font-weight:800}
+.big{display:inline-flex;align-items:center;gap:9px;background:var(--green-soft);color:var(--green);
+  border-radius:99px;padding:11px 22px;font-weight:800;font-size:20px;margin:14px 0}
+.wait{background:var(--amber-soft);color:var(--amber)}
+
+.switch{position:fixed;right:16px;bottom:88px;background:var(--ink);color:#fff;border-radius:14px;padding:6px;
+  display:flex;gap:4px;box-shadow:0 10px 30px rgba(43,37,69,.32);z-index:40;flex-wrap:wrap;max-width:92vw}
+.switch button{background:transparent;border:0;color:#fff;opacity:.55;padding:7px 11px;border-radius:10px;font-size:13px}
+.switch button.on{background:rgba(255,255,255,.18);opacity:1;font-weight:600}
+.switch .sep{width:1px;background:rgba(255,255,255,.2);margin:5px 3px}
+</style>
+</head>
+<body class="kid">
+
+<div class="top" id="top"></div>
+<div class="page" id="page"></div>
+<div class="bar" id="bar"></div>
+
+<div class="switch">
+  <button class="on" onclick="go('doing',this)">проходит</button>
+  <button onclick="go('sent',this)">сдал</button>
+  <button onclick="go('check',this)">учитель</button>
+  <button onclick="go('graded',this)">оценка</button>
+  <button onclick="go('redo',this)">переделать</button>
+</div>
+
+<script>
+let view='doing';
+let answered={0:false,1:false,2:false};
+let verdict={ q0:true, q1:true, q2:false };   // вердикты по вопросам теста
+let manual=null;                              // оценка за устное
+let retake={};                                // отмеченные на переделку
+let reveal=false;                             // показывать верные ответы на экране
+
+function topHtml(){
+  if(view==='check') return `<div class="top-in"><span class="tt"><b>Аня Королёва</b>
+    <span>Части тела · сдано вчера в 19:40</span></span>
+    <button class="v ${reveal?'ok':''}" onclick="toggleReveal()">${reveal?'✓ Верные ответы видны':'Показать верные ответы'}</button></div>`;
+  const n=Object.values(answered).filter(Boolean).length;
+  return `<div class="top-in"><span class="tt"><b>Части тела</b><span>Super Minds 0 · Unit 1</span></span></div>
+    <div class="pbar">${[0,1,2].map(i=>`<i class="${answered[i]?'done':''}"></i>`).join('')}</div>`;
+}
+
+// ── ученик проходит: никаких «верно / неверно» ──
+function doing(){
+  return `
+  <div class="card">
+    <div class="num">Задание 1 из 3</div>
+    <h3 class="h">Послушай и нажми на нужную картинку</h3>
+    <button class="snd">🔈 Послушать</button>
+    <div class="opts">
+      ${[['a','нос'],['b','рот'],['c','ухо']].map((o,i)=>
+        `<button class="opt ${answered[0]===i?'sel':''}" onclick="pick(0,${i})"><span class="ph ${o[0]}"></span>${o[1]}</button>`).join('')}
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">Задание 2 из 3</div>
+    <h3 class="h">Вставь пропущенное слово</h3>
+    <div style="font-size:18px;line-height:2.2">I have <span style="display:inline-block;min-width:92px;
+      border-bottom:3px solid var(--violet);text-align:center;font-weight:700;${answered[1]?'background:var(--violet-soft);border-radius:8px 8px 0 0':''}"
+      onclick="pick(1,'two')">${answered[1]?'two':'&nbsp;'}</span> eyes.</div>
+    <div style="display:flex;gap:9px;margin-top:14px">
+      <span onclick="pick(1,'two')" style="background:var(--violet-soft);color:#4B3FBF;border-radius:12px;padding:9px 16px;font-weight:700;cursor:pointer">two</span>
+      <span style="background:var(--violet-soft);color:#4B3FBF;border-radius:12px;padding:9px 16px;font-weight:700;opacity:.4">ten</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">Задание 3 из 3</div>
+    <h3 class="h">Прочитай слова вслух</h3>
+    <div style="font-weight:800;font-size:24px;margin:12px 0">head · mouth · nose</div>
+    <button class="go gh" onclick="pick(2,true)">🎤 ${answered[2]?'Перезаписать':'Записать'}</button>
+    ${answered[2]?'<div class="sub" style="margin-top:10px">Запись готова</div>':''}
+  </div>`;
+}
+function pick(i,val){ answered[i]= (val===undefined?true:val); render(); }
+
+function barHtml(){
+  if(view==='doing'){
+    const left=[0,1,2].filter(i=>answered[i]===false).length;
+    return `<div class="bar-in">
+      <span class="note">${left?`Осталось заданий: ${left}`:'Все задания выполнены'}</span>
+      <button class="go" ${left?'disabled':''} onclick="go('sent')">Завершить и отправить</button></div>`;
+  }
+  if(view==='check'){
+    const marked=Object.values(retake).filter(Boolean).length;
+    return `<div class="bar-in">
+      <span class="note">${marked?`На переделку отмечено: ${marked}`:'Отметьте задания на переделку, если нужно'}</span>
+      <button class="go gh" onclick="alert('Весь материал задан заново')">Задать весь заново</button>
+      <button class="go" onclick="go('graded')">${marked?'Отправить на переделку':'Поставить оценку'}</button></div>`;
+  }
+  return '';
+}
+
+// ── сдал, ждёт проверки ──
+function sent(){
+  return `<div class="done">
+    <div class="em">📨</div><h2>Отправлено учителю</h2>
+    <p class="sub">Ответы больше нельзя менять</p>
+    <div class="big wait">⏳ Ждём проверки</div>
+    <div><button class="go gh">К списку домашек</button></div>
+  </div>`;
+}
+
+// ── учитель проверяет ──
+function check(){
+  const auto = [verdict.q0,verdict.q1,verdict.q2].filter(Boolean).length;
+  const pct = Math.round(auto*100/3);
+  const total = manual===null ? null : Math.round((pct + manual)/2);
+  return `
+  <div class="card">
+    <div class="num">Задание 1 · тест</div>
+    <h3 class="h">Послушай и нажми на нужную картинку</h3>
+    ${[['q0','Послушай: /n/','нос','нос'],['q1','Послушай: /m/','рот','рот'],['q2','Послушай: /r/','нос','ухо']]
+      .map(([k,t,given,right],i)=>{
+        const kk=['q0','q1','q2'][i];
+        const ok=verdict[kk];
+        return `<div class="q"><span class="qt">${t}
+          <em><span class="ans ${ok?'y':'n'}">${given}</span>${(!ok&&reveal)?` <span class="ans y">${right}</span> <span class="rl">верный ответ</span>`:''}</em></span>
+          <button class="v ${ok?'ok':'no'}" onclick="flip('${kk}')">${ok?'верно':'неверно'}</button></div>`;
+      }).join('')}
+    <div class="score">Автоматически: <b>${pct}%</b> ${pct!==67?'<span style="color:var(--amber)">· исправлено вручную</span>':''}</div>
+    <div class="retake"><input type="checkbox" id="r0" ${retake[0]?'checked':''} onchange="mark(0,this.checked)">
+      <label for="r0">Задать это задание заново</label></div>
+  </div>
+
+  <div class="card">
+    <div class="num">Задание 2 · пропуски</div>
+    <h3 class="h">Вставь пропущенное слово</h3>
+    <div style="font-size:17px;line-height:2.4;margin-bottom:6px">I have <span class="ans y big">two</span> eyes.</div>
+    <div class="q"><span class="qt">Пропуск 1<em>вписала «two»</em></span>
+      <button class="v ok">верно</button></div>
+    <div class="score">Автоматически: <b>100%</b></div>
+    <div class="retake"><input type="checkbox" id="r1" ${retake[1]?'checked':''} onchange="mark(1,this.checked)">
+      <label for="r1">Задать это задание заново</label></div>
+  </div>
+
+  <div class="card">
+    <div class="num">Задание 3 · запись голоса</div>
+    <h3 class="h">Прочитай слова вслух</h3>
+    <div class="sub">head · mouth · nose</div>
+    <div style="margin:12px 0"><button class="snd">▶ Слушать запись</button></div>
+    <div class="mark">
+      ${[100,75,50,0].map(v=>`<button class="${manual===v?'on':''} ${v<50?'no':''}" onclick="setManual(${v})">${v}%</button>`).join('')}
+    </div>
+    <div class="retake"><input type="checkbox" id="r2" ${retake[2]?'checked':''} onchange="mark(2,this.checked)">
+      <label for="r2">Задать это задание заново</label></div>
+  </div>
+
+  <div class="card" style="background:#FBFAFD">
+    <div class="score" style="margin:0">Итоговая оценка за домашку:
+      <b>${total===null?'—':total+'%'}</b>
+      ${total===null?'<span style="color:var(--amber)">· оцените устное задание</span>':''}</div>
+  </div>`;
+}
+function flip(k){ verdict[k]=!verdict[k]; render(); }
+function toggleReveal(){ reveal=!reveal; render(); }
+function setManual(v){ manual=v; render(); }
+function mark(i,on){ retake[i]=on; render(); }
+
+// ── ребёнок видит результат ──
+function graded(){
+  const marked=Object.values(retake).filter(Boolean).length;
+  if(marked) return redo();
+  return `<div class="done">
+    <div class="em">🎉</div><h2>Проверено!</h2>
+    <div class="big">✅ 84%</div>
+    <p class="sub">Учитель проверил домашку. Ниже — всё, что ты выполнял.</p>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="num">Задание 1</div><h3 class="h">Послушай и нажми на нужную картинку</h3>
+    <p class="sub">Твои ответы: нос · рот · нос</p></div>
+  <div class="card">
+    <div class="num">Задание 3</div><h3 class="h">Прочитай слова вслух</h3>
+    <div><button class="snd">▶ Твоя запись</button></div></div>`;
+}
+
+// ── отправлено на переделку ──
+function redo(){
+  const list=[0,1,2].filter(i=>retake[i]);
+  const names={0:'Послушай и нажми на нужную картинку',1:'Вставь пропущенное слово',2:'Прочитай слова вслух'};
+  return `<div class="done">
+    <div class="em">🔁</div><h2>Нужно переделать</h2>
+    <div class="big wait">${list.length} ${list.length===1?'задание':'задания'}</div>
+    <p class="sub">Остальное учитель принял</p>
+  </div>
+  ${list.map(i=>`<div class="card" style="margin-top:16px">
+    <div class="num">Переделать</div><h3 class="h">${names[i]}</h3>
+    <button class="go" style="margin-top:12px">Выполнить заново</button></div>`).join('')
+    || '<div class="card" style="margin-top:16px"><p class="sub">Ничего не отмечено — вернитесь на экран учителя и отметьте задания.</p></div>'}`;
+}
+
+function go(v, el){
+  view=v;
+  document.body.className = v==='check' ? 'teach' : 'kid';
+  if(el){ el.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on')); el.classList.add('on'); }
+  render();
+}
+function render(){
+  document.getElementById('top').innerHTML = (view==='doing'||view==='check') ? topHtml() : '';
+  document.getElementById('page').innerHTML =
+    view==='doing'?doing(): view==='sent'?sent(): view==='check'?check(): view==='graded'?graded(): redo();
+  document.getElementById('bar').innerHTML = barHtml();
+  document.getElementById('bar').style.display = barHtml()?'block':'none';
+}
+render();
+</script>
+</body>
+</html>

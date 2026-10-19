@@ -1,3 +1,5 @@
+node_modules/
 __pycache__/
 *.pyc
+builds/sm2/*sql/
 tools/.kids46_images.json

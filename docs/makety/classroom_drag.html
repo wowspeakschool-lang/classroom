@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classroom — перетаскивание и переименование</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1A1B2E; --mute:#7A7F92; --faint:#A6AAB9;
+  --line:#E8E7EE; --field:#F7F6F9;
+  --ok:#0D6155; --ok-soft:#E2F1EE; --warn:#A9660B; --warn-soft:#FBF0DE;
+  --course:#5C9B7A; --course-d:#3F7458; --course-soft:#EAF4EE;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:'Golos Text',system-ui,sans-serif;color:var(--ink);background:var(--field);font-size:15px;line-height:1.5}
+button{font:inherit;color:inherit;cursor:pointer}
+svg{display:block}
+.wrap{max-width:1000px;margin:0 auto;padding:26px 24px 80px}
+h1{font-size:26px;font-weight:700;letter-spacing:-.025em;margin:0 0 3px}
+.lead{color:var(--mute);font-size:14px;margin:0 0 18px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+
+.tile{background:#fff;border:1px solid var(--line);border-radius:16px;min-height:128px;
+  display:flex;flex-direction:column;position:relative;cursor:pointer;transition:transform .1s}
+.tile:hover{border-color:#D6D3E4;box-shadow:0 4px 14px rgba(26,27,46,.07)}
+.tile.unpub{background:#FCFCFD}
+.tile.dragging{opacity:.35;transform:scale(.97)}
+.tile.insertL:before,.tile.insertR:after{content:"";position:absolute;top:8px;bottom:8px;width:3px;
+  border-radius:3px;background:var(--course)}
+.tile.insertL:before{left:-9px}
+.tile.insertR:after{right:-9px}
+.body{padding:14px 15px;display:flex;flex-direction:column;gap:6px;flex:1}
+.ic{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;font-size:15px}
+.ic.homework{background:var(--ok-soft);color:var(--ok)}
+.ic.lesson{background:var(--course-soft);color:var(--course-d)}
+.ic.test{background:var(--warn-soft);color:var(--warn)}
+.t{font-size:15px;font-weight:600;line-height:1.3;word-break:break-word}
+.s{font-size:12px;color:var(--faint);margin-top:auto}
+.s .np{color:var(--warn)}
+.grip{position:absolute;left:7px;top:50%;transform:translateY(-50%);color:#D8D5E2;font-size:13px;
+  opacity:0;cursor:grab;padding:6px 2px}
+.tile:hover .grip{opacity:1}
+.dots{position:absolute;right:8px;top:8px;border:0;background:transparent;color:var(--faint);
+  padding:4px 7px;border-radius:8px;opacity:0;font-size:16px;line-height:1}
+.tile:hover .dots{opacity:1}
+.dots:hover{background:var(--field);color:var(--ink)}
+
+.menu{position:absolute;right:8px;top:36px;background:#fff;border:1px solid var(--line);border-radius:12px;
+  padding:5px;min-width:196px;box-shadow:0 12px 34px rgba(26,27,46,.16);z-index:12;display:flex;flex-direction:column;gap:1px}
+.menu button{border:0;background:transparent;text-align:left;padding:8px 11px;border-radius:9px;font-size:14px}
+.menu button:hover{background:var(--field)}
+.menu button.dn{color:#B3261E}
+.menu hr{border:0;border-top:1px solid var(--line);margin:4px 2px}
+
+.rename{width:100%;font:inherit;font-size:15px;font-weight:600;border:1px solid var(--course);
+  border-radius:8px;padding:5px 8px;outline:0;background:#fff}
+
+.snack{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(80px);
+  background:var(--ink);color:#fff;border-radius:13px;padding:11px 14px 11px 18px;display:flex;
+  align-items:center;gap:14px;box-shadow:0 12px 34px rgba(26,27,46,.3);transition:transform .18s;z-index:30}
+.snack.on{transform:translateX(-50%) translateY(0)}
+.snack button{background:rgba(255,255,255,.16);border:0;color:#fff;border-radius:9px;padding:6px 12px;font-size:13px;font-weight:600}
+.snack button:hover{background:rgba(255,255,255,.26)}
+
+.hint{margin-top:22px;font-size:13px;color:var(--faint);display:flex;gap:18px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Unit 1 · My body</h1>
+  <p class="lead">Перетащите плитку, чтобы поменять порядок. Кнопка ⋯ — переименовать и прочее.</p>
+  <div class="grid" id="grid"></div>
+
+  <div class="hint">
+    <span>Перетаскивание работает только внутри юнита</span>
+    <span>Порядок сохраняется сразу, с возможностью отменить</span>
+  </div>
+</div>
+
+<div class="snack" id="snack"><span id="snackText"></span><button onclick="undo()">Отменить</button></div>
+
+<script>
+let items=[
+  {id:1,t:'homework',title:'Homework 1',pub:true},
+  {id:2,t:'homework',title:'Homework 2',pub:true},
+  {id:3,t:'homework',title:'Homework 3',pub:false},
+  {id:4,t:'homework',title:'Homework 4',pub:true},
+  {id:5,t:'lesson',  title:'Lesson 1 · Parts of the body',pub:true},
+  {id:6,t:'test',    title:'Unit test',pub:false},
+];
+const KIND={lesson:['план урока','▢'],homework:['ДЗ','●'],test:['тест','◆']};
+let menuFor=null, editing=null, before=null, snackTimer=null;
+
+function render(){
+  document.getElementById('grid').innerHTML = items.map((m,i)=>{
+    const k=KIND[m.t];
+    return `<div class="tile ${m.pub?'':'unpub'}" draggable="${editing===null}" data-i="${i}"
+         onclick="if(!editing)open_(${m.id})">
+      <span class="grip">⠿</span>
+      <button class="dots" onclick="event.stopPropagation();toggleMenu(${m.id})">⋯</button>
+      ${menuFor===m.id?menu(m):''}
+      <div class="body">
+        <span class="ic ${m.t}">${k[1]}</span>
+        ${editing===m.id
+          ? `<input class="rename" value="${m.title.replace(/"/g,'&quot;')}" autofocus
+                onclick="event.stopPropagation()"
+                onkeydown="if(event.key==='Enter')saveName(${m.id},this.value);if(event.key==='Escape')cancelName()"
+                onblur="saveName(${m.id},this.value)">`
+          : `<span class="t">${m.title}</span>`}
+        <span class="s">${k[0]}${m.pub?'':' · <span class="np">не опубликовано</span>'}</span>
+      </div>
+    </div>`;
+  }).join('');
+  bindDrag();
+  const inp=document.querySelector('.rename'); if(inp){ inp.focus(); inp.select(); }
+}
+
+function menu(m){
+  return `<div class="menu" onclick="event.stopPropagation()">
+    <button onclick="startName(${m.id})">Переименовать</button>
+    <button onclick="togglePub(${m.id})">${m.pub?'Снять с публикации':'Опубликовать'}</button>
+    <button onclick="dup(${m.id})">Дублировать</button>
+    <hr>
+    <button class="dn" onclick="del(${m.id})">Удалить</button>
+  </div>`;
+}
+function toggleMenu(id){ menuFor = menuFor===id?null:id; render(); }
+document.addEventListener('click',()=>{ if(menuFor!==null){ menuFor=null; render(); } });
+
+function startName(id){ menuFor=null; editing=id; render(); }
+function cancelName(){ editing=null; render(); }
+function saveName(id,val){
+  const m=items.find(x=>x.id===id);
+  if(m && val.trim()) m.title=val.trim();
+  editing=null; render();
+}
+function togglePub(id){ const m=items.find(x=>x.id===id); m.pub=!m.pub; menuFor=null; render(); }
+function dup(id){
+  const i=items.findIndex(x=>x.id===id);
+  const c=JSON.parse(JSON.stringify(items[i])); c.id=Date.now(); c.title+=' (копия)'; c.pub=false;
+  items.splice(i+1,0,c); menuFor=null; render();
+}
+function del(id){ if(!confirm('Удалить материал?')) return; items=items.filter(x=>x.id!==id); menuFor=null; render(); }
+function open_(id){ /* в работе — открытие редактора */ }
+
+// перетаскивание: показываем, куда встанет, а не меняем местами
+let from=null;
+function bindDrag(){
+  document.querySelectorAll('.tile').forEach(el=>{
+    el.ondragstart=e=>{ from=+el.dataset.i; el.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; };
+    el.ondragend=()=>{ from=null; clearMarks(); render(); };
+    el.ondragover=e=>{
+      e.preventDefault(); if(from===null) return;
+      const i=+el.dataset.i; if(i===from){ clearMarks(); return; }
+      const r=el.getBoundingClientRect();
+      const left = e.clientX < r.left + r.width/2;
+      clearMarks();
+      el.classList.add(left?'insertL':'insertR');
+    };
+    el.ondrop=e=>{
+      e.preventDefault(); if(from===null) return;
+      const i=+el.dataset.i;
+      const r=el.getBoundingClientRect();
+      const left = e.clientX < r.left + r.width/2;
+      let to = left ? i : i+1;
+      if(from < to) to--;
+      if(to===from){ clearMarks(); return; }
+      before=items.slice();
+      const [m]=items.splice(from,1);
+      items.splice(to,0,m);
+      clearMarks(); from=null; render();
+      showSnack(`«${m.title}» теперь ${to+1}-й`);
+    };
+  });
+}
+function clearMarks(){ document.querySelectorAll('.tile').forEach(x=>x.classList.remove('insertL','insertR')); }
+
+function showSnack(text){
+  document.getElementById('snackText').textContent=text;
+  const s=document.getElementById('snack'); s.classList.add('on');
+  clearTimeout(snackTimer); snackTimer=setTimeout(()=>s.classList.remove('on'),6000);
+}
+function undo(){
+  if(before){ items=before; before=null; render(); }
+  document.getElementById('snack').classList.remove('on');
+}
+render();
+</script>
+</body>
+</html>

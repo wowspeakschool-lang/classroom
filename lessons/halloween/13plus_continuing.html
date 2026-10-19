@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samhain Mansion · 13+ continuing</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Nunito:wght@600;700;800;900&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2a1a10;--gold:#e8b94a;--gold2:#b8861a;--amber:#ff9a3c;--red:#c0392b;--green:#3fae5a;--paper:#f6ecd6;
+  --disp:'Cinzel',Georgia,serif;--ui:'Nunito','Segoe UI',sans-serif;--read:'Lora',Georgia,serif}
+*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%}
+body{font-family:var(--ui);overflow:hidden;user-select:none;background:#0b0705;-webkit-font-smoothing:antialiased}
+#game{position:relative;width:100vw;height:100vh;overflow:hidden}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center}
+.screen.active{display:flex}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.shade{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(10,6,4,.15),rgba(10,6,4,.7));z-index:1;pointer-events:none}
+.title{font:700 clamp(24px,3vw,40px) var(--disp);color:#fbe7b5;text-shadow:0 2px 0 #3a2208,0 0 22px rgba(0,0,0,.8);text-align:center;position:absolute;top:22px;left:0;right:0;z-index:20;padding:0 140px;letter-spacing:1px}
+.panel{background:linear-gradient(180deg,#f8eed8,#efe0bf);border-radius:16px;box-shadow:0 14px 40px rgba(0,0,0,.6),inset 0 0 0 2px rgba(184,134,26,.35);color:var(--ink);position:relative;z-index:5}
+.btn{font:800 clamp(16px,1.8vw,22px) var(--ui);color:#fff;border:none;border-radius:12px;padding:11px 28px;cursor:pointer;background:linear-gradient(180deg,#d9822b,#a4521a);box-shadow:0 4px 0 #6e3510}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #6e3510}
+.btn.green{background:linear-gradient(180deg,#4fbf6a,#2f8a45);box-shadow:0 4px 0 #1f5e2f}
+.btn.dark{background:linear-gradient(180deg,#5a4636,#352619);box-shadow:0 4px 0 #1c130b}
+.btn.pulse{animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.05);filter:brightness(1.12)}}
+.shake{animation:shake .4s}@keyframes shake{25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
+.pop{animation:pop .45s cubic-bezier(.3,1.6,.5,1)}@keyframes pop{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
+.fadein{animation:fadein .6s}@keyframes fadein{from{opacity:0}to{opacity:1}}
+.stage{position:absolute;left:50%;top:50%;width:max(100vw,177.78vh);height:max(56.25vw,100vh);transform:translate(-50%,-50%);z-index:0}
+.stage>img.bg{object-fit:fill}
+
+/* top bar + nav */
+.topbar{position:absolute;top:0;left:0;right:0;z-index:60;display:none;justify-content:space-between;align-items:center;padding:10px 14px;pointer-events:none}
+.pips{display:flex;gap:6px;background:rgba(10,6,4,.65);padding:7px 12px;border-radius:14px;pointer-events:auto}
+.pip{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.28);cursor:pointer}
+.pip.done{background:var(--gold)}.pip.cur{background:var(--amber);transform:scale(1.3);box-shadow:0 0 8px var(--amber)}
+.topbar.pre .pips,.topbar.pre .tbtns>*:not(#planBtn){display:none!important}
+.tbtns{display:flex;gap:8px;pointer-events:auto;align-items:center}
+.tb{font:800 15px var(--ui);color:#fff;border:none;border-radius:10px;padding:8px 13px;cursor:pointer;background:linear-gradient(180deg,#6b5442,#3d2b1d)}
+.tb.plan{background:linear-gradient(180deg,#ffdc85,var(--gold));color:var(--ink)}
+.tb.code{font-size:20px;padding:5px 11px;background:linear-gradient(180deg,#ffe9a6,#c9952a);box-shadow:0 0 0 3px rgba(232,185,74,.45)}
+.navbar{position:absolute;bottom:0;left:0;right:0;z-index:60;display:none;justify-content:center;align-items:center;gap:16px;padding:12px;pointer-events:none}
+.arrow{font:800 22px var(--ui);color:#fff;border:none;border-radius:50%;width:48px;height:48px;cursor:pointer;background:rgba(90,70,54,.75);pointer-events:auto}
+.nextbtn{font:800 20px var(--ui);color:#fff;border:none;border-radius:14px;padding:11px 38px;cursor:pointer;pointer-events:auto;background:linear-gradient(180deg,#d9822b,#a4521a);box-shadow:0 4px 0 #6e3510}
+.nextbtn.ready{animation:pulse 1.1s ease-in-out infinite}
+.xbtn{display:none;background:linear-gradient(180deg,#c0392b,#86261b);box-shadow:0 4px 0 #561710}
+.xbtn.extra{background:linear-gradient(180deg,#ffe07a,#d4a017);box-shadow:0 4px 0 #8a6a0c;color:var(--ink)}
+.pagenum{position:absolute;right:16px;font:800 12px var(--ui);color:rgba(255,255,255,.6);background:rgba(10,6,4,.6);padding:5px 10px;border-radius:10px}
+.dots{position:absolute;bottom:72px;left:18px;z-index:61;display:none;gap:10px;background:rgba(10,6,4,.6);padding:7px 12px;border-radius:14px}
+.dots span{width:15px;height:15px;border-radius:50%;border:3px solid rgba(255,255,255,.75)}
+.dots span.done{background:var(--gold);border-color:var(--gold)}.dots span.cur{border-color:var(--amber);box-shadow:0 0 8px var(--amber)}
+
+/* key + code bar */
+.inv{position:absolute;top:58px;left:14px;z-index:55;display:none;flex-direction:column;gap:6px;background:rgba(20,12,6,.82);border:2px solid rgba(232,185,74,.6);border-radius:14px;padding:8px}
+.inv .h{font:800 11px var(--ui);color:#e8cf95;text-align:center;letter-spacing:1px}
+.inv .keybox{position:relative;width:176px;height:64px;border-radius:10px;border:2px dashed rgba(232,185,74,.55)}
+.inv .keybox.whole{border-style:solid;background:rgba(232,185,74,.18)}
+.inv .keybox img{position:absolute;left:4px;top:2px;width:166px;height:auto;opacity:.18;filter:grayscale(1) brightness(1.8)}
+.inv .keybox img.got{opacity:1;filter:none}
+.inv .keybox img.kr:not(.got){transform:translateX(10px)}
+.inv .keybox img.new{animation:pop .5s}
+.inv .keybox img.join{animation:kjoin 1s}
+@keyframes kjoin{0%{transform:translateX(60px);opacity:0}60%{transform:translateX(6px);opacity:1}100%{transform:none}}
+.inv .slot{width:50px;height:50px;border-radius:10px;border:2px dashed rgba(232,185,74,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fbe7b5;font:800 24px var(--disp);line-height:1}
+.inv .slot small{font-size:15px;opacity:.85}
+.inv .slot.got{border-style:solid;background:rgba(232,185,74,.18)}
+.inv .slot.new{animation:pop .5s}
+
+/* modal */
+.modal{position:absolute;inset:0;z-index:80;display:none;align-items:center;justify-content:center;background:rgba(8,4,2,.62)}
+.modal.show{display:flex}
+.modal .card{background:linear-gradient(180deg,#f8eed8,#ead8b0);border-radius:20px;padding:22px 34px;text-align:center;border:4px solid var(--gold);box-shadow:0 0 60px rgba(232,185,74,.45);max-width:min(680px,90vw);min-width:min(460px,80vw)}
+.modal .card .h{font:700 clamp(22px,2.5vw,32px) var(--disp);color:#8a3c08}
+.modal .card .big{font:800 clamp(70px,10vh,110px) var(--disp);color:#8a3c08;line-height:1.1;margin:6px 0}
+.modal .card img{max-width:min(320px,40vw);max-height:min(240px,30vh);object-fit:contain;margin:10px 0;border-radius:10px}
+.modal .card .t{font:600 clamp(18px,2vw,24px) var(--read);color:var(--ink);margin-bottom:16px;line-height:1.4}
+
+/* start */
+#start .big{font:800 clamp(34px,5vw,66px) var(--disp);color:#fbe7b5;text-shadow:0 4px 0 #3a2208,0 0 30px #000;margin:0 0 26px;text-align:center;z-index:5;letter-spacing:2px}
+#start .sub{font:600 clamp(18px,2vw,24px) var(--read);color:#f0dcb0;font-style:italic;z-index:5;margin-bottom:22px;text-shadow:0 2px 8px #000}
+
+/* lead-in */
+.leadcard{position:absolute;bottom:90px;left:50%;transform:translateX(-50%);display:flex;gap:22px;align-items:center;padding:18px 26px;max-width:92vw;z-index:5}
+.leadcard img{width:min(300px,30vh);height:min(300px,30vh);object-fit:cover;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.4)}
+.leadcard .q{font:700 clamp(26px,3.2vw,46px) var(--disp);color:#4a2508;max-width:min(760px,60vw);line-height:1.2}
+.leadcard .a{font:800 clamp(30px,4vw,56px) var(--disp);color:#c0392b;margin-top:8px}
+
+/* words */
+.wgrid{display:grid;gap:18px 22px;z-index:5;margin-top:40px}
+.wc{width:clamp(150px,15vw,230px);display:flex;flex-direction:column;align-items:center;cursor:pointer;padding:12px 10px;transition:transform .15s}
+.wc:hover{transform:translateY(-4px)}
+.wc img{width:100%;height:clamp(110px,14vh,170px);object-fit:contain;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
+.wc .w{font:800 clamp(18px,1.9vw,26px) var(--ui);color:var(--ink);min-height:1.5em;visibility:hidden;margin-top:6px}
+.wc.open .w{visibility:visible;animation:pop .4s}.wc.open{box-shadow:0 0 0 4px var(--gold),0 14px 40px rgba(0,0,0,.6)}
+
+/* zoom in */
+.zoombox{position:relative;width:min(62vh,56vw);aspect-ratio:1;border-radius:20px;overflow:hidden;z-index:5;margin-top:30px;background:radial-gradient(circle,#4a3020,#1c120a);border:5px solid var(--gold);box-shadow:0 14px 40px rgba(0,0,0,.7)}
+.zoombox img{position:absolute;left:10%;top:10%;width:80%;height:80%;object-fit:contain;transform-origin:var(--ox,50%) var(--oy,50%)}
+.zoomword{font:800 clamp(30px,4vw,54px) var(--ui);color:#fbe7b5;margin-top:16px;z-index:5;min-height:1.3em;text-shadow:0 3px 10px #000}
+
+/* ghost hangman / missing letters */
+.hgrow{display:flex;gap:40px;align-items:center;z-index:5;margin-top:40px}
+.hghost{width:min(260px,30vh);height:min(320px,38vh);position:relative}
+.hghost img{width:100%;height:100%;object-fit:contain;transition:opacity .4s,transform .4s;transform-origin:50% 80%;filter:drop-shadow(0 0 20px rgba(255,255,255,.4))}
+.hghost .boo{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font:800 64px var(--disp);color:#c0392b;text-shadow:0 0 20px #fff}
+.hword{display:flex;gap:10px;justify-content:center;margin-bottom:22px}
+.hword span{width:clamp(44px,4.4vw,64px);height:clamp(56px,5.6vw,80px);border-bottom:5px solid #6e3510;font:800 clamp(34px,3.6vw,54px) var(--ui);color:var(--ink);display:flex;align-items:center;justify-content:center}
+.hword span.blank{background:rgba(232,185,74,.25);border-radius:8px 8px 0 0}
+.keys{display:grid;grid-template-columns:repeat(9,1fr);gap:8px}
+.keys button{font:800 22px var(--ui);width:46px;height:46px;border:none;border-radius:10px;background:#fff8e8;color:var(--ink);cursor:pointer;box-shadow:0 3px 0 #b39a6a}
+.keys button.used{opacity:.25;cursor:default}.keys button.ok{background:#bff0c8}
+.hpic{width:90px;height:90px;object-fit:contain;margin-bottom:8px}
+
+/* mansion */
+.dwrap{position:absolute;left:51.0%;top:41.5%;width:6.7%;height:19.5%;perspective:500px;z-index:2;pointer-events:none}
+.dwrap .dglow{position:absolute;inset:0;clip-path:polygon(50% 0,72% 6%,88% 13%,100% 22%,100% 100%,0 100%,0 22%,12% 13%,28% 6%);background:radial-gradient(ellipse at 50% 70%,#fff3c4 0%,#ffb84a 35%,#a8501a 75%,#3a1606 100%);opacity:0;transition:opacity 1.2s}
+.dwrap.open .dglow{opacity:1}
+.dwrap .leaf{position:absolute;top:0;width:50%;height:100%;background-image:var(--mimg);transition:transform 1.8s cubic-bezier(.45,.05,.3,1),filter 1.8s;opacity:0}
+.dwrap.ready .leaf{opacity:1}
+.dwrap .leaf.l{left:0;transform-origin:0 50%;clip-path:polygon(100% 0,56% 6%,24% 13%,0 22%,0 100%,100% 100%);background-size:2985.07% 512.82%;background-position:52.768% 51.553%}
+.dwrap .leaf.r{left:50%;transform-origin:100% 50%;clip-path:polygon(0 0,44% 6%,76% 13%,100% 22%,100% 100%,0 100%);background-size:2985.07% 512.82%;background-position:56.234% 51.553%}
+.dwrap.open .leaf.l{transform:rotateY(72deg);filter:brightness(.55)}.dwrap.open .leaf.r{transform:rotateY(-72deg);filter:brightness(.55)}
+#mansionStage{transition:transform 2.2s ease-in-out}
+.flykey.turn img{animation:kturn .7s ease-in-out}
+@keyframes kturn{0%{transform:scaleY(1)}50%{transform:scaleY(-.15)}100%{transform:scaleY(1)}}
+.doorhot{position:absolute;left:51%;top:41%;width:8%;height:23%;cursor:pointer;border-radius:40% 40% 4px 4px;z-index:3}
+.doorhot.hint{animation:dglow 1.4s ease-in-out infinite}
+@keyframes dglow{50%{box-shadow:0 0 0 4px rgba(255,210,120,.7),0 0 40px rgba(255,190,90,.9)}}
+.flykey{position:absolute;font-size:60px;z-index:6;transition:left 1.2s ease-in,top 1.2s ease-in,transform 1.2s;pointer-events:none}
+
+/* hall flashlight */
+.fdark{position:absolute;inset:0;z-index:8;pointer-events:none;background:radial-gradient(circle var(--r,140px) at var(--x,50%) var(--y,50%),rgba(255,236,170,.06) 0,rgba(255,236,170,.03) 70%,rgba(3,2,1,.97) 100%);transition:opacity 2s}
+.fdark.off{opacity:0}
+.fring{position:absolute;z-index:9;pointer-events:none;border-radius:50%;border:3px solid rgba(255,222,130,.6);box-shadow:0 0 28px 6px rgba(255,200,80,.35);transform:translate(-50%,-50%)}
+.hitem{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:4;filter:drop-shadow(0 4px 8px rgba(0,0,0,.7))}
+.hitem.found{filter:drop-shadow(0 0 14px #ffd36a)}
+.hfound{position:absolute;top:74px;left:50%;transform:translateX(-50%);z-index:12;display:flex;gap:8px;padding:6px 12px}
+.hfound div{white-space:nowrap;min-width:34px;text-align:center;font:800 15px var(--ui);color:#8a7a60;padding:4px 10px;border-radius:8px;background:rgba(255,255,255,.5)}
+.hfound div.ok{color:#1f5e2f;background:#c8f0cf}
+.slamview{position:absolute;inset:0;z-index:30;opacity:0;pointer-events:none;transition:opacity .6s;background:#000}.slamview.on{opacity:1}
+.slamview img{width:100%;height:100%;object-fit:cover}.slamview.shut img{animation:shut .7s}
+@keyframes shut{0%{transform:scale(1.04)}15%{transform:scale(1) translate(-12px,5px)}35%{transform:translate(12px,-5px)}55%{transform:translate(-8px,3px)}75%{transform:translate(5px,-2px)}100%{transform:none}}
+.slam{animation:slam .6s}@keyframes slam{10%,50%{transform:translate(-50%,-50%) translate(-10px,4px)}30%,70%{transform:translate(-50%,-50%) translate(10px,-4px)}}
+
+/* reading text with icons */
+.read{max-width:min(980px,88vw);padding:24px 32px;font:500 clamp(19px,1.75vw,25px)/1.75 var(--read);color:var(--ink);margin-top:34px}
+.read .ic{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;cursor:pointer;margin:0 3px;padding:0 4px;border-radius:8px;background:rgba(232,185,74,.25)}
+.read .ic img{height:2.1em;object-fit:contain}
+.read .ic b{font:800 .9em var(--ui);color:#a4521a;display:none;line-height:1.1}
+.read .ic.open b{display:block}
+.read .ic.open{background:rgba(63,174,90,.18)}
+.readgo{margin-top:16px;z-index:5}
+.read.small{font-size:clamp(14px,min(1.35vw,2.4vh),20px);line-height:1.5;padding:12px 22px;margin-top:58px;max-width:min(1100px,90vw)}
+.read.small .ic img{height:1.4em}
+#libBox .tf .st{padding:10px 24px;font-size:clamp(18px,min(1.8vw,3.2vh),26px)}#libBox .tf{gap:12px}
+
+/* true/false + myth/fact */
+.tf{z-index:5;display:flex;flex-direction:column;align-items:center;gap:20px;margin-top:30px}
+.tf .st{font:600 clamp(22px,2.6vw,36px) var(--read);color:var(--ink);padding:22px 34px;max-width:80vw;text-align:center}
+.tf .st img{display:block;margin:0 auto 12px;max-height:min(30vh,240px);max-width:min(420px,60vw);object-fit:contain;border-radius:12px}
+.tf .bt{display:flex;gap:30px}
+.tf .bt button{font:800 28px var(--ui);border:none;border-radius:14px;padding:12px 40px;color:#fff;cursor:pointer}
+.tf .T{background:linear-gradient(180deg,#4fbf6a,#2f8a45);box-shadow:0 4px 0 #1f5e2f}.tf .F{background:linear-gradient(180deg,#e0604f,#a8281b);box-shadow:0 4px 0 #6a160d}
+.tf .bt button.hit{transform:translateY(4px);box-shadow:0 0 0 5px #fff,0 0 26px 8px rgba(111,224,111,.9)!important}
+.tf .bt button.hit::after{content:" ✓"}
+.tf .st.ok{box-shadow:0 0 0 6px #4fbf6a,0 10px 26px rgba(0,0,0,.45)}
+.tf .why{font:600 clamp(17px,1.7vw,22px) var(--read);color:#fbe7b5;background:rgba(20,12,6,.8);padding:8px 18px;border-radius:12px;min-height:2em;max-width:80vw;text-align:center;visibility:hidden}
+.tf .why.show{visibility:visible;animation:pop .35s}
+.tftry{font:800 clamp(22px,2.4vw,32px) var(--ui);color:#fff;background:#c0392b;border-radius:12px;padding:4px 22px;visibility:hidden}
+.tftry.show{visibility:visible;animation:pop .35s}
+
+/* comic */
+.comicrow{display:flex;gap:20px;z-index:5;margin-top:40px;align-items:flex-start}
+.comic{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;width:min(62vw,calc(((100vh - 230px)/2 - 62px)/1.075*3 + 32px));background:#111;padding:8px;border-radius:10px;box-shadow:0 14px 40px rgba(0,0,0,.7)}
+.comic.cont{width:min(62vw,calc(((100vh - 230px)/2 - 96px)/1.075*3 + 32px))}
+.pn{position:relative;overflow:visible;border-radius:4px}
+
+.pn .n{position:absolute;left:6px;bottom:6px;background:#111;color:#fff;font:800 14px var(--ui);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.pn>svg{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.pn .strip{height:62px;display:flex;gap:6px;align-items:flex-end;padding:0 2px 10px;position:relative;z-index:3}
+.comic.cont .pn .strip{height:96px}
+.pn .im{position:relative}.pn .im>img{width:100%;height:auto;display:block;border-radius:4px}
+.cb{flex:1;min-width:0;min-height:38px;background:#fff;border:2px solid #222;border-radius:16px;padding:3px 7px 5px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(0,0,0,.4);position:relative;z-index:3}
+.cb i{font:800 9px var(--ui);color:#a4521a;font-style:normal;text-transform:uppercase;letter-spacing:.5px;align-self:flex-start}
+.cb span{font:800 clamp(11px,.95vw,15px)/1.2 var(--ui);color:#1a1a1a;text-align:center;min-height:1.2em}.comic.cont .cb span{font-size:clamp(10px,.8vw,13px);line-height:1.15}
+.cb:not(.full){box-shadow:0 0 0 3px rgba(232,185,74,.95),0 3px 8px rgba(0,0,0,.4)}
+.cb.full{cursor:default}
+.bub{position:absolute;cursor:pointer;border-radius:50%;z-index:2}
+.said{position:absolute;transform:translate(-50%,-50%);background:#fff;border:2px solid #222;border-radius:16px;padding:6px 10px;font:800 clamp(11px,1vw,16px)/1.2 var(--ui);color:#1a1a1a;text-align:center;z-index:3;box-shadow:0 4px 12px rgba(0,0,0,.45);animation:popxy .35s}
+.bub.target{box-shadow:inset 0 0 0 3px rgba(232,185,74,.9)}
+.bub.done{cursor:default}
+.phr{display:flex;flex-direction:column;gap:9px;width:min(24vw,330px)}
+.phr div{font:700 clamp(13px,1.15vw,17px) var(--ui);background:#fff8e8;border-radius:12px;padding:8px 12px;cursor:pointer;box-shadow:0 3px 0 #b39a6a;color:var(--ink)}
+.phr div.sel{background:#ffe08a;box-shadow:0 0 0 3px var(--amber)}
+.phr div.used{visibility:hidden}
+
+/* matching */
+.match{display:grid;grid-template-columns:1fr 1fr;gap:12px 40px;z-index:5;margin-top:44px;padding:22px 26px;max-width:min(1100px,92vw)}
+.mi{font:700 clamp(15px,1.4vw,20px) var(--ui);background:#fff8e8;border-radius:12px;padding:10px 14px;cursor:pointer;box-shadow:0 3px 0 #b39a6a;color:var(--ink);border:3px solid transparent}
+.mi.sel{border-color:var(--amber)}.mi.ok{background:#c8f0cf;box-shadow:0 3px 0 #6fb57e;cursor:default}
+.mi .k{display:inline-block;min-width:26px;font-weight:900;color:#a4521a}
+.costrow{display:flex;gap:16px;z-index:5;margin-top:40px;flex-wrap:wrap;justify-content:center;max-width:94vw}
+.cc{width:clamp(140px,13vw,200px);display:flex;flex-direction:column;align-items:center;cursor:pointer;position:relative;padding:8px}
+.cc img{width:100%;height:clamp(150px,22vh,230px);object-fit:contain;object-position:bottom}
+.cc .w{font:800 clamp(15px,1.4vw,19px) var(--ui);color:var(--ink);margin-top:4px}
+.cc .say{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#fff;padding:6px 12px;border-radius:14px;font:800 15px var(--ui);color:var(--ink);white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.4);animation:popx .35s}
+.discuss{font:700 clamp(24px,2.8vw,38px) var(--disp);color:#fbe7b5;z-index:5;text-shadow:0 2px 10px #000;margin-top:22px;text-align:center}
+
+/* timeline */
+.tline{display:flex;gap:14px;z-index:5;margin-top:44px}
+.tslot{width:clamp(150px,15vw,220px);min-height:clamp(230px,32vh,320px);border:3px dashed rgba(251,231,181,.6);border-radius:14px;display:flex;flex-direction:column;align-items:center;padding:6px;position:relative;background:rgba(20,12,6,.45)}
+.tslot .n{position:absolute;top:-16px;left:-12px;width:34px;height:34px;border-radius:50%;background:#a4521a;color:#fff;font:800 18px var(--ui);display:flex;align-items:center;justify-content:center}
+.tcard{width:clamp(150px,15vw,220px);padding:6px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer}
+.tcard img{width:100%;height:clamp(100px,14vh,150px);object-fit:cover;border-radius:10px}
+.tcard .y{font:800 clamp(16px,1.5vw,21px) var(--disp);color:#8a3c08}
+.tcard span{font:600 clamp(12px,1.1vw,15px)/1.25 var(--read);color:var(--ink);text-align:center}
+.tslot .tcard{box-shadow:0 0 0 3px #e8b94a;flex:1;width:100%;margin:0}.tslot .tcard.ok{cursor:default;box-shadow:0 0 0 4px var(--green)}
+.tcards{display:flex;gap:14px;z-index:5;margin-top:22px;min-height:120px}
+
+/* code room */
+.cq{z-index:5;display:flex;flex-direction:column;align-items:center;gap:16px;padding:22px 30px;margin-top:40px;max-width:min(900px,90vw)}
+.cq .q{font:600 clamp(22px,2.4vw,32px) var(--read);text-align:center}
+.cq .opts{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.cq .opts button{font:800 clamp(17px,1.6vw,22px) var(--ui);border:none;border-radius:12px;padding:12px 20px;background:#fff8e8;color:var(--ink);cursor:pointer;box-shadow:0 3px 0 #b39a6a}
+.cq .left{font:700 16px var(--ui);color:#8a6a40}
+
+/* door + keypad */
+.lock{position:absolute;right:6%;top:50%;transform:translateY(-50%);z-index:5;padding:18px;display:flex;flex-direction:column;gap:12px;align-items:center;background:linear-gradient(180deg,#5a4426,#2e2010);border:3px solid var(--gold);border-radius:16px;box-shadow:0 14px 40px rgba(0,0,0,.7)}
+.lock .disp{display:flex;gap:8px}
+.lock .disp span{width:46px;height:58px;background:#120b05;border:2px solid #8a6a30;border-radius:8px;color:#ffd36a;font:800 34px var(--disp);display:flex;align-items:center;justify-content:center}
+.lock .pad{display:grid;grid-template-columns:repeat(3,58px);gap:8px}
+.lock .pad button{height:52px;font:800 24px var(--ui);border:none;border-radius:10px;background:linear-gradient(180deg,#e9d3a0,#b8955a);color:#2a1a10;cursor:pointer;box-shadow:0 3px 0 #6e5226}
+.lock .msg{font:800 15px var(--ui);color:#ffd36a;min-height:1.2em}
+#escBg2{opacity:0;transition:opacity 1.6s}
+.escaped{font:800 clamp(44px,7vw,96px) var(--disp);color:#ffe9a6;text-shadow:0 4px 0 #6e3510,0 0 40px #ff9a3c;z-index:6;display:none}
+.cert{z-index:7;display:none;flex-direction:column;align-items:center;gap:12px}.cert img{width:min(74vw,calc((100vh - 200px)*1.78));border-radius:10px;box-shadow:0 16px 50px rgba(0,0,0,.7)}
+.cert .h{font:800 clamp(28px,3.4vw,46px) var(--disp);color:#8a3c08;letter-spacing:3px}
+.cert .t{font:500 clamp(18px,1.9vw,24px) var(--read);margin:8px 0}
+.cert .nm{font:800 clamp(34px,4.4vw,60px) var(--disp);color:#4a2508;border-bottom:2px solid #8a6a30;padding:0 30px;margin:6px 0}
+.cert .row{display:flex;gap:12px;margin-top:14px}
+.namepop{position:absolute;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(8,4,2,.6)}
+.namepop.show{display:flex}
+.namepop .card{background:linear-gradient(180deg,#f8eed8,#ead8b0);border:5px solid var(--gold);border-radius:22px;padding:26px 40px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.namepop .h{font:700 clamp(24px,2.8vw,38px) var(--disp);color:#8a3c08}
+.namepop input{font:800 clamp(28px,3.2vw,44px) var(--ui);text-align:center;width:min(520px,70vw);padding:10px 16px;border-radius:14px;border:3px solid #8a6a30;color:var(--ink)}
+
+/* bucket */
+.brow{display:flex;gap:22px;z-index:5;margin-top:50px;align-items:flex-start}
+.bcards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.bc{background:#fff8e8;border-radius:12px;padding:6px;cursor:pointer;width:clamp(110px,11vw,160px);text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.5);transition:transform .15s,opacity .2s}
+.bc:hover{transform:translateY(-4px)}
+.bc img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px}
+.bc span{font:800 clamp(12px,1.15vw,15px) var(--ui);color:var(--ink);display:block;line-height:1.1;margin-top:4px}
+.bc.used{opacity:.3}
+.blist{width:min(380px,30vw);padding:16px;min-height:52vh}
+.blist .h{font:700 24px var(--disp);color:#8a3c08;text-align:center;margin-bottom:8px}
+.bitem{display:flex;align-items:center;gap:10px;padding:6px 8px;border-bottom:2px dashed #cdb58a;font:700 17px var(--ui);color:var(--ink);cursor:pointer}
+.bitem img{width:42px;height:42px;object-fit:cover;border-radius:8px}
+.bitem::before{content:"☐";font-size:22px;color:#a4521a}
+.badd{display:flex;gap:6px;margin-top:10px}
+.badd input{flex:1;font:600 16px var(--ui);padding:8px 10px;border-radius:10px;border:2px solid #cdb58a}
+.badd button{font:800 20px var(--ui);border:none;border-radius:10px;background:#a4521a;color:#fff;padding:0 14px;cursor:pointer}
+
+/* board */
+.bsq{position:absolute;width:4.2%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:rgba(255,248,230,.92);border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(0,0,0,.5);z-index:2}
+.bsq img{width:82%;height:82%;object-fit:contain}
+.bsq span{font:800 clamp(12px,1.3vw,22px) var(--ui);color:#6e3510}
+.bsq.sp{background:#ffe6a6;border-color:#d9822b}.bsq.start,.bsq.end{width:6.4%;background:#7fd38f;border-color:#fff}
+.bsq::after{content:attr(data-n);position:absolute;bottom:-34%;font:800 clamp(10px,.85vw,14px) var(--ui);color:#fff;text-shadow:0 1px 3px #000,0 0 4px #000}
+.bsq.start::after,.bsq.end::after{content:""}
+.bpawn{position:absolute;width:4.4%;transform:translate(-50%,-92%);z-index:5;transition:left .25s,top .25s;display:flex;flex-direction:column;align-items:center;pointer-events:none}
+.bpawn img{width:100%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.6))}
+.bpawn span{margin-top:-4px;background:rgba(20,10,4,.85);color:#fff;font:800 clamp(10px,.9vw,14px) var(--ui);padding:1px 7px;border-radius:8px;white-space:nowrap}
+.bpawn.cur img{filter:drop-shadow(0 0 10px var(--gold)) drop-shadow(0 6px 6px rgba(0,0,0,.6))}
+.board-ui{position:absolute;right:20px;bottom:150px;z-index:12;display:flex;flex-direction:column;align-items:center;gap:10px;background:rgba(20,10,4,.82);padding:14px 18px;border-radius:18px;border:3px solid var(--gold)}
+.board-ui img.who{width:70px}#boardWhoName{color:#fff;font:800 20px var(--ui)}
+#diceBtn{font-size:74px;line-height:1;background:#fff;border:none;border-radius:16px;width:96px;height:96px;cursor:pointer;color:var(--ink);box-shadow:0 5px 0 #aaa}
+#boardPick{position:absolute;inset:0;z-index:13;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:rgba(10,6,4,.6)}
+#boardPick .bpt{font:700 clamp(28px,3.4vw,46px) var(--disp);color:#fbe7b5}
+#boardPawns{display:flex;gap:18px}
+.bp-col{display:flex;flex-direction:column;align-items:center;gap:8px}
+.bp-opt{background:rgba(255,248,232,.92);border:4px solid #fff;border-radius:18px;padding:10px;cursor:pointer}
+.bp-opt img{width:clamp(80px,9vw,130px);height:clamp(100px,11vw,160px);object-fit:contain}
+.bp-name{width:clamp(90px,9vw,140px);font:800 18px var(--ui);text-align:center;border-radius:10px;border:3px solid #fff;padding:5px;color:var(--ink);visibility:hidden}
+.bp-col.on .bp-name{visibility:visible}.bp-col.on .bp-opt{border-color:var(--gold);box-shadow:0 0 0 4px var(--gold)}
+#boardCard{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.6);opacity:0;pointer-events:none;z-index:14;background:linear-gradient(180deg,#f8eed8,#ead8b0);border:5px solid var(--gold);border-radius:24px;padding:18px 34px;display:flex;flex-direction:column;align-items:center;gap:12px;transition:.3s;max-width:min(760px,86vw)}
+#boardCard.show{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto}
+#boardCard img{width:min(220px,28vh);height:min(200px,25vh);object-fit:contain}
+#boardCardT{font:700 clamp(24px,2.8vw,38px) var(--disp);color:#4a2508;text-align:center;line-height:1.25}
+#boardToast{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);z-index:15;font:800 clamp(40px,6vw,80px) var(--disp);color:var(--gold);text-shadow:0 4px 0 #3a2208,0 0 20px #000;display:none}
+
+/* finish */
+.finbox{display:flex;flex-direction:column;align-items:center;gap:10px;z-index:5}
+.finbox .big{font:800 clamp(36px,5vw,68px) var(--disp);color:#fbe7b5;text-shadow:0 4px 0 #3a2208,0 0 24px #000;text-align:center}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:90}
+.conf{position:absolute;top:-20px;width:11px;height:11px;will-change:transform}
+
+@keyframes popx{0%{transform:translateX(-50%) scale(.4);opacity:0}100%{transform:translateX(-50%) scale(1);opacity:1}}
+@keyframes popxy{0%{transform:translate(-50%,-50%) scale(.4);opacity:0}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
+.popx{animation:popx .45s cubic-bezier(.3,1.6,.5,1)}
+</style>
+</head>
+<body>
+<div id="game">
+  <div class="topbar pre" id="topbar" style="display:flex"><div class="pips" id="pips"></div>
+    <div class="tbtns"><button class="tb code" id="codeBtn" title="Code room — сундук с вопросами">🗝</button><button class="tb plan" id="planBtn" title="План урока">📋</button><button class="tb" id="musicBtn">🎵 ON</button><input type="range" id="musicVol" min="0" max="100" value="18" style="width:70px"></div></div>
+  <div class="inv" id="inv"></div>
+  <div class="dots" id="dots"></div>
+  <div class="navbar" id="navbar"><button class="arrow" id="navBack">←</button><button class="nextbtn" id="navNext">Next ➜</button><button class="nextbtn xbtn" data-go="finish" id="navFinish">🏁 Finish</button><button class="nextbtn xbtn extra" data-go="next" id="navExtra">⭐ Extra</button><button class="arrow" id="navFwd">→</button><span class="pagenum" id="pageNum"></span></div>
+
+  <div class="screen active" id="start"><img class="bg" id="startBg"><div class="shade"></div><div class="big">SAMHAIN MANSION</div><div class="sub">A Halloween escape room</div><button class="btn pulse" id="startBtn" style="z-index:5">Enter 🕯</button></div>
+
+  <div class="screen" id="lead"><img class="bg" id="leadBg"><div class="shade" style="background:linear-gradient(transparent 40%,rgba(10,6,4,.6))"></div><div class="leadcard panel" id="leadCard"></div></div>
+
+  <div class="screen" id="words"><img class="bg" id="wordsBg"><div class="shade"></div><div class="title">Halloween words</div><div class="wgrid" id="wgrid"></div></div>
+
+  <div class="screen" id="zoom"><img class="bg" id="zoomBg"><div class="shade"></div><div class="title">Zoom in: what is it? 🔍</div><div class="zoombox" id="zoombox"><img id="zoomImg"></div><div class="zoomword" id="zoomWord"></div></div>
+
+  <div class="screen" id="hang"><img class="bg" id="hangBg"><div class="shade"></div><div class="title" id="hangTitle"></div><div class="hgrow" id="hgrow"></div></div>
+
+  <div class="screen" id="mansion"><div class="stage" id="mansionStage"><img class="bg" id="mansionBg"><div class="dwrap" id="dWrap"><div class="dglow"></div><div class="leaf l" id="leafL"></div><div class="leaf r" id="leafR"></div></div><div class="doorhot hint" id="doorHot"></div></div><div class="title">The mansion</div><div class="flykey" id="flyKey"><img id="flyKeyImg" style="width:150px;display:block"></div></div>
+
+  <div class="screen" id="hall"><div class="stage" id="hallStage"><img class="bg" id="hallBg"></div><div class="slamview" id="slamView"><img id="slamImg"></div><div class="fdark" id="fdark"></div><div class="fring" id="fring"></div><div class="title" id="hallTitle">Find the Halloween things 🔦</div><div class="hfound panel" id="hfound"></div></div>
+
+  <div class="screen" id="library"><img class="bg" id="libraryBg"><div class="shade"></div><div class="title">The library: Samhain 📖</div><div id="libBox" style="z-index:5;display:flex;flex-direction:column;align-items:center"></div></div>
+
+  <div class="screen" id="kitchen"><img class="bg" id="kitchenBg"><div class="shade"></div><div class="title">The kitchen: Samhain night 🏮</div><div class="comicrow"><div class="comic" id="comic"></div><div class="phr" id="phr"></div></div></div>
+
+  <div class="screen" id="ballroom"><img class="bg" id="ballroomBg"><div class="shade"></div><div class="title" id="ballTitle">The ballroom: costumes 🎭</div><div id="ballBox" style="z-index:5;display:flex;flex-direction:column;align-items:center"></div></div>
+
+  <div class="screen" id="cellar"><img class="bg" id="cellarBg"><div class="shade"></div><div class="title">The cellar: myth or fact? 🍎</div><div class="tf"><div class="st panel" id="mfSt"></div><div class="bt"><button class="F" id="mfM">MYTH</button><button class="T" id="mfF">FACT</button></div><div class="why" id="mfWhy"></div><div class="tftry" id="mfTry">Try again!</div></div></div>
+
+  <div class="screen" id="attic"><img class="bg" id="atticBg"><div class="shade"></div><div class="title">The attic: Halloween goes to America ⛵</div><div class="tline" id="tline"></div><div class="tcards" id="tcards"></div><button class="btn green pulse" id="tlCheck" style="z-index:5;margin-top:10px;display:none">✓ Check</button><div class="tftry" id="tlTry" style="margin-top:12px;z-index:5">Try again!</div></div>
+
+  <div class="screen" id="coderoom"><img class="bg" id="codeBg"><div class="shade"></div><div class="title">🗝 Code room — answer to get the missing digits</div><div class="cq panel" id="cq"></div></div>
+
+  <div class="screen" id="door"><div class="stage"><img class="bg" id="doorBg"></div><div class="title">The front door 🚪</div>
+    <div class="lock" id="lock"><div class="disp" id="lockDisp"></div><div class="pad" id="lockPad"></div><div class="msg" id="lockMsg"></div></div></div>
+
+  <div class="screen" id="escape"><div class="stage"><img class="bg" id="escBg1"><img class="bg" id="escBg2"></div><div class="escaped" id="escTitle">YOU ESCAPED! 🎉</div>
+    <div class="cert" id="cert"><img id="certImg" alt="certificate"><div class="row"><button class="btn dark" id="nameEdit">✏️ Name</button><button class="btn green" id="saveBtn">💾 Save</button></div></div>
+    <div class="namepop" id="namePop"><div class="card pop"><div class="h">What's your name? 🗝</div><input id="nameIn" maxlength="16" placeholder="Your name"><button class="btn green pulse" id="nameOk">✓</button></div></div></div>
+
+  <div class="screen" id="bucket"><img class="bg" id="bucketBg"><div class="shade"></div><div class="title">My Halloween bucket list</div><div class="brow"><div class="bcards" id="bcards"></div><div class="blist panel"><div class="h">Bucket list</div><div id="blist"></div><div class="badd"><input id="bIn" maxlength="40" placeholder="+ my idea…"><button id="bAdd">+</button></div></div></div></div>
+
+  <div class="screen" id="board"><div class="stage" id="boardStage"><img class="bg" id="boardBg"></div>
+    <div id="boardPick"><div class="bpt">Choose your tokens 🎲</div><div id="boardPawns"></div><button class="btn green" id="boardGo">▶ Play</button></div>
+    <div class="board-ui" id="boardDice" style="display:none"><img class="who" id="boardWho" alt=""><div id="boardWhoName"></div><button id="diceBtn"><span id="diceFace">⚀</span></button></div>
+    <div id="boardCard"><img id="boardCardImg" alt=""><div id="boardCardT"></div><button class="btn green" id="boardCardOk">✓</button></div>
+    <div id="boardToast"></div></div>
+
+  <div class="screen" id="finish"><img class="bg" id="finishBg"><div class="shade"></div><div class="finbox"><div class="big">Well done!<br>Happy Halloween!</div></div></div>
+
+  <div class="modal" id="modal"><div class="card pop" id="mCard"><div class="h" id="mH"></div><div class="big" id="mBig"></div><img id="mImg"><div class="t" id="mT"></div><button class="btn green" id="mOk">✓</button></div></div>
+  <div class="confetti" id="confetti"></div>
+  <canvas id="cv" style="display:none"></canvas>
+  <audio id="music" loop></audio>
+</div>
+<script>
+const ASSETS={"key_left": "https://classroom.wowteach.ru/media/halloween/13/key_left.webp", "b13_decorate": "https://classroom.wowteach.ru/media/halloween/13/b13_decorate.webp", "w_candle": "https://classroom.wowteach.ru/media/halloween/13/w_candle.webp", "b13_costume": "https://classroom.wowteach.ru/media/halloween/13/b13_costume.webp", "cellar13": "https://classroom.wowteach.ru/media/halloween/13/cellar13.webp", "m_hooded": "https://classroom.wowteach.ru/media/halloween/13/m_hooded.webp", "library13": "https://classroom.wowteach.ru/media/halloween/13/library13.webp", "nora4": "https://classroom.wowteach.ru/media/halloween/13/nora4.webp", "w_pumpkin": "https://classroom.wowteach.ru/media/halloween/13/w_pumpkin.webp", "q_decorate": "https://classroom.wowteach.ru/media/halloween/13/q_decorate.webp", "c_superhero": "https://classroom.wowteach.ru/media/halloween/13/c_superhero.webp", "t_newspaper": "https://classroom.wowteach.ru/media/halloween/13/t_newspaper.webp", "m_cat": "https://classroom.wowteach.ru/media/halloween/13/m_cat.webp", "t_usa": "https://classroom.wowteach.ru/media/halloween/13/t_usa.webp", "b13_haunted": "https://classroom.wowteach.ru/media/halloween/13/b13_haunted.webp", "c_witch": "https://classroom.wowteach.ru/media/halloween/13/c_witch.webp", "m_apples": "https://classroom.wowteach.ru/media/halloween/13/m_apples.webp", "key_full": "https://classroom.wowteach.ru/media/halloween/13/key_full.webp", "tk_key": "https://classroom.wowteach.ru/media/halloween/13/tk_key.webp", "b13_stories": "https://classroom.wowteach.ru/media/halloween/13/b13_stories.webp", "b13_trick": "https://classroom.wowteach.ru/media/halloween/13/b13_trick.webp", "outside13": "https://classroom.wowteach.ru/media/halloween/13/outside13.webp", "board13": "https://classroom.wowteach.ru/media/halloween/13/board13.webp", "w_ghost": "https://classroom.wowteach.ru/media/halloween/13/w_ghost.webp", "q_carve": "https://classroom.wowteach.ru/media/halloween/13/q_carve.webp", "b13_film": "https://classroom.wowteach.ru/media/halloween/13/b13_film.webp", "c_pirate": "https://classroom.wowteach.ru/media/halloween/13/c_pirate.webp", "door13": "https://classroom.wowteach.ru/media/halloween/13/door13.webp", "t_1950s": "https://classroom.wowteach.ru/media/halloween/13/t_1950s.webp", "t_ship": "https://classroom.wowteach.ru/media/halloween/13/t_ship.webp", "m_calendar": "https://classroom.wowteach.ru/media/halloween/13/m_calendar.webp", "lead13": "https://classroom.wowteach.ru/media/halloween/13/lead13.webp", "ballroom13": "https://classroom.wowteach.ru/media/halloween/13/ballroom13.webp", "hall13": "https://classroom.wowteach.ru/media/halloween/13/hall13.webp", "tk_candle": "https://classroom.wowteach.ru/media/halloween/13/tk_candle.webp", "nora6": "https://classroom.wowteach.ru/media/halloween/13/nora6.webp", "b13_apples": "https://classroom.wowteach.ru/media/halloween/13/b13_apples.webp", "kitchen13": "https://classroom.wowteach.ru/media/halloween/13/kitchen13.webp", "w_costume": "https://classroom.wowteach.ru/media/halloween/13/w_costume.webp", "m_pumpkin": "https://classroom.wowteach.ru/media/halloween/13/m_pumpkin.webp", "nora5": "https://classroom.wowteach.ru/media/halloween/13/nora5.webp", "m_turnip": "https://classroom.wowteach.ru/media/halloween/13/m_turnip.webp", "w_harvest": "https://classroom.wowteach.ru/media/halloween/13/w_harvest.webp", "nora2": "https://classroom.wowteach.ru/media/halloween/13/nora2.webp", "nora3": "https://classroom.wowteach.ru/media/halloween/13/nora3.webp", "nora1": "https://classroom.wowteach.ru/media/halloween/13/nora1.webp", "attic13": "https://classroom.wowteach.ru/media/halloween/13/attic13.webp", "tk_cat": "https://classroom.wowteach.ru/media/halloween/13/tk_cat.webp", "b13_pie": "https://classroom.wowteach.ru/media/halloween/13/b13_pie.webp", "mansion13": "https://classroom.wowteach.ru/media/halloween/13/mansion13.webp", "c_skeleton": "https://classroom.wowteach.ru/media/halloween/13/c_skeleton.webp", "w_lantern": "https://classroom.wowteach.ru/media/halloween/13/w_lantern.webp", "t_celts": "https://classroom.wowteach.ru/media/halloween/13/t_celts.webp", "coderoom13": "https://classroom.wowteach.ru/media/halloween/13/coderoom13.webp", "c_vampire": "https://classroom.wowteach.ru/media/halloween/13/c_vampire.webp", "tk_raven": "https://classroom.wowteach.ru/media/halloween/13/tk_raven.webp", "w_turnip": "https://classroom.wowteach.ru/media/halloween/13/w_turnip.webp", "b13_carve": "https://classroom.wowteach.ru/media/halloween/13/b13_carve.webp", "c_zombie": "https://classroom.wowteach.ru/media/halloween/13/c_zombie.webp", "key_right": "https://classroom.wowteach.ru/media/halloween/13/key_right.webp", "dooropen13": "https://classroom.wowteach.ru/media/halloween/13/dooropen13.webp", "w_bonfire": "https://classroom.wowteach.ru/media/halloween/13/w_bonfire.webp", "t_church": "https://classroom.wowteach.ru/media/halloween/13/t_church.webp", "b13_party": "https://classroom.wowteach.ru/media/halloween/13/b13_party.webp", "q_costume": "https://classroom.wowteach.ru/media/halloween/13/q_costume.webp", "q_sweets": "https://classroom.wowteach.ru/media/halloween/13/q_sweets.webp", "tk_pumpkin": "https://classroom.wowteach.ru/media/halloween/13/tk_pumpkin.webp"};
+const MUSIC="https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/halloween/music_771d164b.mp3";
+const LEVEL="cont";
+const PLAN_HTML="<!DOCTYPE html><html lang=\"ru\"><head><meta charset=\"UTF-8\"><title>\u041f\u043b\u0430\u043d \u0443\u0440\u043e\u043a\u0430 \u2014 Halloween 13+ \u2014 \u043f\u0440\u043e\u0434\u043e\u043b\u0436\u0430\u044e\u0449\u0438\u0435: \u00abSamhain Mansion\u00bb</title><style>body{font-family:'Segoe UI',Arial,sans-serif;background:#f6efe2;color:#2a1a10;padding:24px;max-width:1150px;margin:0 auto;line-height:1.5}\nh1{color:#8a3c08;font-size:26px}.meta,.voc{background:#fff;border-radius:12px;padding:14px 18px;margin:12px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)}.meta b{color:#8a3c08}\n.warn{background:#fff3cd;border:3px solid #c0392b;border-radius:12px;padding:14px 18px;margin:12px 0;font-weight:700;color:#7a1f12;font-size:16px}\ntable{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.1)}\nth{background:#6e3510;color:#fff;padding:10px 12px;text-align:left;font-size:14px}td{padding:10px 12px;border-bottom:1px solid #eee;vertical-align:top;font-size:14px}\ntr:nth-child(even){background:#fbf6ec}.pron{width:auto;min-width:420px;box-shadow:none;margin:10px 0 0}.pron td{padding:5px 14px;font-size:15px}.pg{font-weight:700;color:#c0392b;font-size:18px;text-align:center;width:46px}.tl{color:#1a7a3a;font-style:italic;width:22%}.sa{color:#1f5fa8;font-style:italic;width:22%}</style></head><body><h1>\ud83d\udddd \u041f\u043b\u0430\u043d \u0443\u0440\u043e\u043a\u0430: Halloween 13+ \u2014 \u043f\u0440\u043e\u0434\u043e\u043b\u0436\u0430\u044e\u0449\u0438\u0435: \u00abSamhain Mansion\u00bb</h1><div class=\"meta\"><b>\u0414\u043b\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c:</b> 40 \u043c\u0438\u043d. &nbsp; <b>\u041c\u043e\u0442\u0438\u0432\u0430\u0446\u0438\u044f:</b> escape room \u2014 \u0443\u0447\u0435\u043d\u0438\u043a \u0441\u043e\u0431\u0438\u0440\u0430\u0435\u0442 \u043a\u043b\u044e\u0447 \u043e\u0442 \u043e\u0441\u043e\u0431\u043d\u044f\u043a\u0430, \u043f\u043e\u043f\u0430\u0434\u0430\u0435\u0442 \u0432\u043d\u0443\u0442\u0440\u044c, \u0434\u0432\u0435\u0440\u044c \u0437\u0430\u0445\u043b\u043e\u043f\u044b\u0432\u0430\u0435\u0442\u0441\u044f; \u0432 \u043a\u0430\u0436\u0434\u043e\u0439 \u0438\u0437 5 \u043a\u043e\u043c\u043d\u0430\u0442 \u043e\u043d \u0443\u0437\u043d\u0430\u0451\u0442 \u043a\u0443\u0441\u043e\u043a \u0438\u0441\u0442\u043e\u0440\u0438\u0438 \u0425\u044d\u043b\u043b\u043e\u0443\u0438\u043d\u0430 \u0438 \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u0442 \u0446\u0438\u0444\u0440\u0443 \u043a\u043e\u0434\u0430. \u041a\u043e\u0434 \u043a\u0430\u0436\u0434\u044b\u0439 \u0443\u0440\u043e\u043a \u043d\u043e\u0432\u044b\u0439.</div><div class=\"meta\"><b>\ud83d\udcd6 \u0418\u0441\u0442\u043e\u0440\u0438\u044f \u0434\u043b\u044f \u0443\u0447\u0438\u0442\u0435\u043b\u044f:</b> \u0425\u044d\u043b\u043b\u043e\u0443\u0438\u043d \u043d\u0430\u0447\u0430\u043b\u0441\u044f \u0431\u043e\u043b\u044c\u0448\u0435 2000 \u043b\u0435\u0442 \u043d\u0430\u0437\u0430\u0434 \u0441 \u043a\u0435\u043b\u044c\u0442\u0441\u043a\u043e\u0433\u043e \u043f\u0440\u0430\u0437\u0434\u043d\u0438\u043a\u0430 <b>Samhain</b> \u2014 \u043a\u043e\u043d\u0435\u0446 \u0443\u0440\u043e\u0436\u0430\u044f \u0438 \u043d\u0430\u0447\u0430\u043b\u043e \u0437\u0438\u043c\u044b; \u0432\u0435\u0440\u0438\u043b\u0438, \u0447\u0442\u043e \u0433\u0440\u0430\u043d\u0438\u0446\u0430 \u043c\u0435\u0436\u0434\u0443 \u043c\u0438\u0440\u043e\u043c \u0436\u0438\u0432\u044b\u0445 \u0438 \u043c\u0451\u0440\u0442\u0432\u044b\u0445 \u0432 \u044d\u0442\u0443 \u043d\u043e\u0447\u044c \u0442\u043e\u043d\u043a\u0430\u044f, \u0436\u0433\u043b\u0438 \u043a\u043e\u0441\u0442\u0440\u044b \u0438 \u043d\u0430\u0440\u044f\u0436\u0430\u043b\u0438\u0441\u044c, \u0447\u0442\u043e\u0431\u044b \u0434\u0443\u0445\u0438 \u043d\u0435 \u0443\u0437\u043d\u0430\u043b\u0438. \u041f\u043e\u0437\u0436\u0435 \u0426\u0435\u0440\u043a\u043e\u0432\u044c \u0441\u0434\u0435\u043b\u0430\u043b\u0430 1 \u043d\u043e\u044f\u0431\u0440\u044f \u0414\u043d\u0451\u043c \u0432\u0441\u0435\u0445 \u0441\u0432\u044f\u0442\u044b\u0445 (All Hallows' Day), \u0432\u0435\u0447\u0435\u0440 \u043d\u0430\u043a\u0430\u043d\u0443\u043d\u0435 \u2014 <b>All Hallows' Eve \u2192 Halloween</b>. \u041b\u0435\u0433\u0435\u043d\u0434\u0430 \u043e <b>\u0421\u043a\u0443\u043f\u043e\u043c \u0414\u0436\u0435\u043a\u0435</b> \u043e\u0431\u044a\u044f\u0441\u043d\u044f\u0435\u0442 \u0444\u043e\u043d\u0430\u0440\u044c jack-o'-lantern: \u0432 \u0418\u0440\u043b\u0430\u043d\u0434\u0438\u0438 \u0438 \u0428\u043e\u0442\u043b\u0430\u043d\u0434\u0438\u0438 \u0438\u0445 \u0440\u0435\u0437\u0430\u043b\u0438 \u0438\u0437 <b>\u0440\u0435\u043f\u044b</b>, \u0432 \u0410\u043c\u0435\u0440\u0438\u043a\u0435 \u2014 \u0438\u0437 \u0442\u044b\u043a\u0432\u044b. \u0414\u0435\u0442\u0438 \u0445\u043e\u0434\u0438\u043b\u0438 \u043f\u043e \u0434\u043e\u043c\u0430\u043c \u0432 \u043c\u0430\u0441\u043a\u0430\u0445, \u043f\u0435\u043b\u0438 \u0438 \u0447\u0438\u0442\u0430\u043b\u0438 \u0441\u0442\u0438\u0445\u0438 \u0437\u0430 \u0443\u0433\u043e\u0449\u0435\u043d\u0438\u0435 (<b>guising</b>) \u2014 \u043e\u0442\u0441\u044e\u0434\u0430 trick-or-treat. \u0412 1840-\u0445 \u0438\u0440\u043b\u0430\u043d\u0434\u0441\u043a\u0438\u0435 \u043f\u0435\u0440\u0435\u0441\u0435\u043b\u0435\u043d\u0446\u044b \u043f\u0440\u0438\u0432\u0435\u0437\u043b\u0438 \u043f\u0440\u0430\u0437\u0434\u043d\u0438\u043a \u0432 \u0410\u043c\u0435\u0440\u0438\u043a\u0443; \u0441\u043b\u043e\u0432\u0430 \u00abtrick or treat\u00bb \u0432\u043f\u0435\u0440\u0432\u044b\u0435 \u043d\u0430\u043f\u0435\u0447\u0430\u0442\u0430\u043d\u044b \u0432 \u041a\u0430\u043d\u0430\u0434\u0435 (\u0410\u043b\u044c\u0431\u0435\u0440\u0442\u0430) \u0432 1927 \u0433. \u0421\u0435\u0433\u043e\u0434\u043d\u044f \u0430\u043c\u0435\u0440\u0438\u043a\u0430\u043d\u0446\u044b \u0442\u0440\u0430\u0442\u044f\u0442 \u043d\u0430 \u0425\u044d\u043b\u043b\u043e\u0443\u0438\u043d \u043e\u043a\u043e\u043b\u043e 13,1 \u043c\u043b\u0440\u0434 $ (\u043f\u0440\u043e\u0433\u043d\u043e\u0437 NRF \u043d\u0430 2025 \u0433.). \u0424\u0430\u043a\u0442\u044b \u0441\u0432\u0435\u0440\u0435\u043d\u044b \u0441 \u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0430\u043c\u0438 (Tourism Ireland, Smithsonian, Guinness, NRF).</div><div class=\"meta\"><b>\ud83d\udde3 \u041f\u0440\u043e\u0438\u0437\u043d\u043e\u0448\u0435\u043d\u0438\u0435.</b> \u041f\u0435\u0440\u0435\u0434 \u0443\u0440\u043e\u043a\u043e\u043c \u0443\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044c, \u0447\u0442\u043e \u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u043e \u043f\u0440\u043e\u0438\u0437\u043d\u043e\u0441\u0438\u0442\u0435 \u044d\u0442\u0438 \u0441\u043b\u043e\u0432\u0430 (\u0431\u0440\u0438\u0442\u0430\u043d\u0441\u043a\u0430\u044f \u0442\u0440\u0430\u043d\u0441\u043a\u0440\u0438\u043f\u0446\u0438\u044f):<table class=\"pron\"><tr><td><b>Samhain</b></td><td>/\u02c8sa\u028a\u026an/</td><td><b>Halloween</b></td><td>/\u02cch\u00e6l\u0259\u028a\u02c8i\u02d0n/</td></tr><tr><td><b>All Hallows' Eve</b></td><td>/\u02cc\u0254\u02d0l \u02c8h\u00e6l\u0259\u028az \u02c8i\u02d0v/</td><td><b>All Saints' Day</b></td><td>/\u02cc\u0254\u02d0l \u02c8se\u026ants de\u026a/</td></tr><tr><td><b>Celts</b></td><td>/kelts/</td><td><b>Celtic</b></td><td>/\u02c8kelt\u026ak/</td></tr><tr><td><b>harvest</b></td><td>/\u02c8h\u0251\u02d0v\u026ast/</td><td><b>costume</b></td><td>/\u02c8k\u0252stju\u02d0m/</td></tr><tr><td><b>guising</b></td><td>/\u02c8\u0261a\u026az\u026a\u014b/</td><td><b>mansion</b></td><td>/\u02c8m\u00e6n\u0283n/</td></tr><tr><td><b>spirits</b></td><td>/\u02c8sp\u026ar\u026ats/</td><td><b>haunted</b></td><td>/\u02c8h\u0254\u02d0nt\u026ad/</td></tr><tr><td><b>vampire</b></td><td>/\u02c8v\u00e6mpa\u026a\u0259/</td><td><b>pirate</b></td><td>/\u02c8pa\u026ar\u0259t/</td></tr><tr><td><b>myth</b></td><td>/m\u026a\u03b8/</td><td><b>centuries</b></td><td>/\u02c8sent\u0283\u0259riz/</td></tr><tr><td><b>recognise</b></td><td>/\u02c8rek\u0259\u0261na\u026az/</td><td><b>Guinness</b></td><td>/\u02c8\u0261\u026an\u026as/</td></tr><tr><td><b>carve</b></td><td>/k\u0251\u02d0v/</td><td><b>carving</b></td><td>/\u02c8k\u0251\u02d0v\u026a\u014b/</td></tr></table></div><div class=\"warn\">\u26a0\ufe0f \u0415\u0421\u041b\u0418 \u041d\u0415 \u0425\u0412\u0410\u0422\u0410\u0415\u0422 \u0412\u0420\u0415\u041c\u0415\u041d\u0418 \u2014 \u041d\u0410\u0416\u041c\u0418\u0422\u0415 \u0417\u041d\u0410\u0427\u041e\u041a \ud83d\udddd (CODE ROOM, \u0412\u0412\u0415\u0420\u0425\u0423 \u0421\u041f\u0420\u0410\u0412\u0410, \u0420\u042f\u0414\u041e\u041c \u0421 \ud83d\udccb). \u041e\u041d \u0415\u0421\u0422\u042c \u041d\u0410 \u0412\u0421\u0415\u0425 \u0421\u0422\u0420\u0410\u041d\u0418\u0426\u0410\u0425 \u0414\u041e \u0414\u0412\u0415\u0420\u0418. \u0417\u0410 \u041a\u0410\u0416\u0414\u0423\u042e \u041d\u0415\u0414\u041e\u0421\u0422\u0410\u042e\u0429\u0423\u042e \u0426\u0418\u0424\u0420\u0423 \u0423\u0427\u0415\u041d\u0418\u041a \u041e\u0422\u0412\u0415\u0427\u0410\u0415\u0422 \u041d\u0410 \u041e\u0414\u0418\u041d \u0411\u042b\u0421\u0422\u0420\u042b\u0419 \u0412\u041e\u041f\u0420\u041e\u0421 (\u0412\u042b\u0411\u041e\u0420 \u0418\u0417 \u0422\u0420\u0401\u0425), \u041f\u041e\u0422\u041e\u041c \u2014 \u0421\u0420\u0410\u0417\u0423 \u041a \u0414\u0412\u0415\u0420\u0418. \u0421\u0422\u0420\u0415\u041b\u041a\u0410 \u2190 \u0412\u0415\u0420\u041d\u0401\u0422 \u0422\u0423\u0414\u0410, \u041e\u0422\u041a\u0423\u0414\u0410 \u0412\u042b \u041f\u0420\u0418\u0428\u041b\u0418.</div><table><tr><th>\u0421\u0442\u0440.</th><th>\u0417\u0430\u0434\u0430\u043d\u0438\u0435 \u0438 \u0438\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u044f</th><th>Teacher's language</th><th>Suggested answers / Students' answers</th></tr><tr><td class=\"pg\">1</td><td><b>Lead-in.</b> \u0423\u043b\u0438\u0446\u0430 \u0432 \u043d\u043e\u0447\u044c \u0425\u044d\u043b\u043b\u043e\u0443\u0438\u043d\u0430. \u0412\u043e\u043f\u0440\u043e\u0441 <b>What's the topic?</b> \u2014 \u0443\u0447\u0435\u043d\u0438\u043a \u0443\u0433\u0430\u0434\u044b\u0432\u0430\u0435\u0442, Next \u043e\u0442\u043a\u0440\u044b\u0432\u0430\u0435\u0442 \u043e\u0442\u0432\u0435\u0442 \u00abHalloween\u00bb. \u0414\u0430\u043b\u044c\u0448\u0435 \u0443\u0447\u0438\u0442\u0435\u043b\u044c <b>\u0441\u0430\u043c \u0437\u0430\u0434\u0430\u0451\u0442 1\u20132 \u0432\u043e\u043f\u0440\u043e\u0441\u0430</b> (\u043d\u0430 \u044d\u043a\u0440\u0430\u043d\u0435 \u0438\u0445 \u043d\u0435\u0442).</td><td class=\"tl\">\"What's the topic?\" \"What symbols of Halloween do you know?\" \"Do people celebrate Halloween in your country?\"</td><td class=\"sa\">\"Halloween!\" \"Pumpkins, ghosts, bats, witches\u2026\" \"Not really, but some young people have parties.\"</td></tr><tr><td class=\"pg\">2</td><td><b>\u0421\u043b\u043e\u0432\u0430 (8).</b> \u0421\u043d\u0430\u0447\u0430\u043b\u0430 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0430: \u0443\u0447\u0435\u043d\u0438\u043a \u043f\u0440\u043e\u0431\u0443\u0435\u0442 \u043d\u0430\u0437\u0432\u0430\u0442\u044c, \u043d\u0430\u0436\u0430\u0442\u0438\u0435 \u043f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u0441\u043b\u043e\u0432\u043e \u0438 <b>\u043f\u0440\u043e\u0438\u0437\u043d\u043e\u0441\u0438\u0442</b>. Next \u043e\u0442\u043a\u0440\u044b\u0432\u0430\u0435\u0442 \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0443\u044e.</td><td class=\"tl\">\"What's this?\" \"Repeat!\"</td><td class=\"sa\">\"A lantern. The harvest\u2026\"</td></tr><tr><td class=\"pg\">3</td><td><b>Zoom in (6 \u0440\u0430\u0443\u043d\u0434\u043e\u0432).</b> \u041a\u0430\u0440\u0442\u0438\u043d\u043a\u0430 \u0441\u0438\u043b\u044c\u043d\u043e \u0443\u0432\u0435\u043b\u0438\u0447\u0435\u043d\u0430 \u0438 \u043c\u0435\u0434\u043b\u0435\u043d\u043d\u043e \u043e\u0442\u0434\u0430\u043b\u044f\u0435\u0442\u0441\u044f. \u0423\u0447\u0435\u043d\u0438\u043a \u043d\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u0441\u043b\u043e\u0432\u043e \u043a\u0430\u043a \u043c\u043e\u0436\u043d\u043e \u0440\u0430\u043d\u044c\u0448\u0435; \u043d\u0430\u0436\u0430\u0442\u0438\u0435 \u043d\u0430 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0443 / Next \u2014 \u0441\u043b\u043e\u0432\u043e \u043f\u043e\u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u043d\u0430 \u044d\u043a\u0440\u0430\u043d\u0435 (\u0431\u0435\u0437 \u043e\u0437\u0432\u0443\u0447\u043a\u0438: \u043f\u0440\u043e\u0438\u0437\u043d\u043e\u0441\u0438\u0442 \u0443\u0447\u0435\u043d\u0438\u043a). \u0412 \u043a\u043e\u043d\u0446\u0435 \u2014 <b>\u043f\u043e\u043b\u043e\u0432\u0438\u043d\u043a\u0430 \u043a\u043b\u044e\u0447\u0430</b>.</td><td class=\"tl\">\"What is it? Guess!\" \"Quick!\"</td><td class=\"sa\">\"Is it a candle?\" \"It's a bonfire!\"</td></tr><tr><td class=\"pg\">4</td><td><b>Missing letters (6 \u0441\u043b\u043e\u0432).</b> \u041a\u0430\u0440\u0442\u0438\u043d\u043a\u0430 \u0438 \u0441\u043b\u043e\u0432\u043e, \u0432 \u043a\u043e\u0442\u043e\u0440\u043e\u043c \u043f\u0440\u043e\u043f\u0443\u0449\u0435\u043d\u044b 3\u20134 \u0431\u0443\u043a\u0432\u044b. \u0423\u0447\u0435\u043d\u0438\u043a \u043d\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u0431\u0443\u043a\u0432\u044b, \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u043d\u0430\u0436\u0438\u043c\u0430\u0435\u0442 \u0438\u0445 \u043d\u0430 \u043a\u043b\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0435. \u0421\u043b\u0435\u0432\u0430 \u043c\u0435\u0434\u043b\u0435\u043d\u043d\u043e \u043f\u0440\u043e\u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u0438 \u0440\u0430\u0441\u0442\u0451\u0442 <b>\u043f\u0440\u0438\u0437\u0440\u0430\u043a</b> (18 \u0441\u0435\u043a.), \u043a\u0430\u0436\u0434\u0430\u044f \u043d\u0435\u0432\u0435\u0440\u043d\u0430\u044f \u0431\u0443\u043a\u0432\u0430 \u0435\u0433\u043e \u043f\u0440\u0438\u0431\u043b\u0438\u0436\u0430\u0435\u0442. \u0423\u0441\u043f\u0435\u043b\u0438 \u2014 \u043f\u0440\u0438\u0437\u0440\u0430\u043a \u0438\u0441\u0447\u0435\u0437\u0430\u0435\u0442; \u043d\u0435 \u0443\u0441\u043f\u0435\u043b\u0438 \u2014 \u00abBOO!\u00bb, \u043d\u0435\u0434\u043e\u0441\u0442\u0430\u044e\u0449\u0438\u0435 \u0431\u0443\u043a\u0432\u044b \u043f\u043e\u044f\u0432\u043b\u044f\u044e\u0442\u0441\u044f \u043a\u0440\u0430\u0441\u043d\u044b\u043c. Next \u2014 \u043f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0430. \u0412 \u043a\u043e\u043d\u0446\u0435 \u2014 <b>\u0432\u0442\u043e\u0440\u0430\u044f \u043f\u043e\u043b\u043e\u0432\u0438\u043d\u043a\u0430 \u043a\u043b\u044e\u0447\u0430</b>.</td><td class=\"tl\">\"Which letters are missing? Spell the word.\"</td><td class=\"sa\">\"B-O-N-F-I-R-E.\"</td></tr><tr><td class=\"pg\">5</td><td><b>\u041e\u0441\u043e\u0431\u043d\u044f\u043a.</b> \u0414\u0432\u0435 \u043f\u043e\u043b\u043e\u0432\u0438\u043d\u043a\u0438 \u043a\u043b\u044e\u0447\u0430 (\u0437\u0430 Zoom in \u0438 Missing letters) \u0443\u0436\u0435 \u0441\u043e\u0435\u0434\u0438\u043d\u0438\u043b\u0438\u0441\u044c \u0432 \u043f\u0430\u043d\u0435\u043b\u0438 KEY. \u041d\u0430\u0436\u043c\u0438\u0442\u0435 \u043d\u0430 \u0434\u0432\u0435\u0440\u044c (\u0438\u043b\u0438 Next) \u2014 \u043a\u043b\u044e\u0447 \u043b\u0435\u0442\u0438\u0442 \u0432 \u0437\u0430\u043c\u043e\u043a, \u0434\u0432\u0435\u0440\u044c \u0441\u043e \u0441\u043a\u0440\u0438\u043f\u043e\u043c \u043e\u0442\u043a\u0440\u044b\u0432\u0430\u0435\u0442\u0441\u044f.</td><td class=\"tl\">\"What can you see? Would you go inside?\"</td><td class=\"sa\">\"It looks scary but I'd go in.\"</td></tr><tr><td class=\"pg\">6</td><td><b>\u0425\u043e\u043b\u043b: \u0444\u043e\u043d\u0430\u0440\u0438\u043a.</b> \u0422\u0435\u043c\u043d\u043e. \u0423\u0447\u0438\u0442\u0435\u043b\u044c \u0432\u043e\u0434\u0438\u0442 \u0444\u043e\u043d\u0430\u0440\u0438\u043a \u043c\u044b\u0448\u043a\u043e\u0439 (\u0431\u0435\u0437 \u043c\u044b\u0448\u0438 \u043e\u043d \u0431\u0440\u043e\u0434\u0438\u0442 \u0441\u0430\u043c), \u0443\u0447\u0435\u043d\u0438\u043a \u0433\u043e\u0432\u043e\u0440\u0438\u0442, \u043a\u0443\u0434\u0430 \u0441\u0432\u0435\u0442\u0438\u0442\u044c, \u0438 \u043d\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u043d\u0430\u0439\u0434\u0435\u043d\u043d\u044b\u0435 \u043f\u0440\u0435\u0434\u043c\u0435\u0442\u044b \u2014 \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u043d\u0430\u0436\u0438\u043c\u0430\u0435\u0442. \u041d\u0430\u0448\u043b\u0438 \u0432\u0441\u0451 \u2014 \u0437\u0430\u0436\u0438\u0433\u0430\u0435\u0442\u0441\u044f \u0441\u0432\u0435\u0442, \u043d\u0430 \u044d\u043a\u0440\u0430\u043d\u0435 \u0440\u0430\u0441\u043f\u0430\u0445\u043d\u0443\u0442\u0430\u044f \u0432\u0445\u043e\u0434\u043d\u0430\u044f \u0434\u0432\u0435\u0440\u044c\u2026 \u0438 \u043e\u043d\u0430 <b>\u0437\u0430\u0445\u043b\u043e\u043f\u044b\u0432\u0430\u0435\u0442\u0441\u044f</b>. \u0417\u0430\u043f\u0438\u0441\u043a\u0430: \u00abThe door is locked. To escape, find the 5-digit code. Each room hides one digit.\u00bb \u0414\u0430\u043b\u044c\u0448\u0435 5 \u043a\u043e\u043c\u043d\u0430\u0442 = 5 \u0446\u0438\u0444\u0440.</td><td class=\"tl\">\"Where shall I shine the torch? Left or right?\" \"What's that?\"</td><td class=\"sa\">\"Go up\u2026 stop! It's an old lantern.\"</td></tr><tr><td class=\"pg\">7</td><td><b>\u0411\u0438\u0431\u043b\u0438\u043e\u0442\u0435\u043a\u0430: Samhain.</b> \u0422\u0435\u043a\u0441\u0442, \u0433\u0434\u0435 \u0432\u044b\u0443\u0447\u0435\u043d\u043d\u044b\u0435 \u0441\u043b\u043e\u0432\u0430 \u0437\u0430\u043c\u0435\u043d\u0435\u043d\u044b \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0430\u043c\u0438: \u0443\u0447\u0435\u043d\u0438\u043a \u0447\u0438\u0442\u0430\u0435\u0442 \u0432\u0441\u043b\u0443\u0445 \u0438 \u0432\u043c\u0435\u0441\u0442\u043e \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0438 \u043d\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u0441\u043b\u043e\u0432\u043e (\u043d\u0430\u0436\u0430\u0442\u0438\u0435 \u043d\u0430 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0443 \u043f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u0441\u043b\u043e\u0432\u043e). \u041f\u043e\u0442\u043e\u043c \u2014 <b>True / False</b> (6); \u0442\u0435\u043a\u0441\u0442 \u043e\u0441\u0442\u0430\u0451\u0442\u0441\u044f \u043d\u0430 \u044d\u043a\u0440\u0430\u043d\u0435, \u0443\u0447\u0435\u043d\u0438\u043a \u0438\u0449\u0435\u0442 \u043e\u0442\u0432\u0435\u0442 \u0432 \u043d\u0451\u043c. Past Simple, passive (were lit), used to. \u0417\u0430 \u0437\u0430\u0434\u0430\u043d\u0438\u0435 \u2014 <b>\u0446\u0438\u0444\u0440\u0430 \u043a\u043e\u0434\u0430</b> (\u043f\u043e\u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u0432 \u043f\u0430\u043d\u0435\u043b\u0438 CODE \u0441\u043b\u0435\u0432\u0430).</td><td class=\"tl\">\"Read the text, please.\" \"Is it true or false?\"</td><td class=\"sa\">\"False \u2014 bonfires were lit at the end of the harvest, not to celebrate the summer.\"</td></tr><tr><td class=\"pg\">8</td><td><b>\u041a\u0443\u0445\u043d\u044f: \u043a\u043e\u043c\u0438\u043a\u0441 \u00abSamhain night\u00bb.</b> \u0418\u0440\u043b\u0430\u043d\u0434\u0438\u044f, \u0434\u0430\u0432\u043d\u044b\u043c-\u0434\u0430\u0432\u043d\u043e: \u041d\u043e\u0440\u0430 \u0438 \u0435\u0451 \u0431\u0440\u0430\u0442 \u041b\u0438\u0430\u043c \u0433\u043e\u0442\u043e\u0432\u044f\u0442\u0441\u044f \u043a \u0421\u0430\u043c\u0430\u0439\u043d\u0443 \u2014 \u0444\u043e\u043d\u0430\u0440\u044c \u0438\u0437 \u0440\u0435\u043f\u044b, \u043a\u043e\u0441\u0442\u0451\u0440, \u043f\u0440\u0438\u0437\u0440\u0430\u043a, \u043c\u0430\u0441\u043a\u0438. 6 \u043a\u0430\u0434\u0440\u043e\u0432, \u0432 \u043a\u0430\u0436\u0434\u043e\u043c \u0434\u0432\u0430 \u043e\u0431\u043b\u0430\u0447\u043a\u0430. \u0423\u0447\u0435\u043d\u0438\u043a \u0432\u043f\u0438\u0441\u044b\u0432\u0430\u0435\u0442 \u0432\u0441\u0435 12 \u0440\u0435\u043f\u043b\u0438\u043a (\u0441\u043d\u0430\u0447\u0430\u043b\u0430 \u0444\u0440\u0430\u0437\u044b \u043a \u043a\u0430\u0434\u0440\u0430\u043c 1\u20133, \u043f\u043e\u0442\u043e\u043c \u043a 4\u20136): \u0432\u044b\u0431\u0438\u0440\u0430\u0435\u0442 \u0444\u0440\u0430\u0437\u0443 \u0441\u043f\u0440\u0430\u0432\u0430 \u0438 \u043d\u0430\u0436\u0438\u043c\u0430\u0435\u0442 \u043d\u0430 \u043e\u0431\u043b\u0430\u0447\u043a\u043e. \u041f\u043e\u0442\u043e\u043c <b>\u043f\u0435\u0440\u0435\u0441\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u0438\u0441\u0442\u043e\u0440\u0438\u044e</b>: First\u2026 Then\u2026 In the end\u2026 \u041d\u0435\u0432\u0435\u0440\u043d\u043e \u2014 \u043a\u0430\u0434\u0440 \u0442\u0440\u044f\u0441\u0451\u0442\u0441\u044f. \u0412 \u043a\u043e\u043d\u0446\u0435 \u2014 \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430 \u043e \u0444\u043e\u043d\u0430\u0440\u044f\u0445 \u0438\u0437 \u0440\u0435\u043f\u044b. \u0417\u0430 \u0437\u0430\u0434\u0430\u043d\u0438\u0435 \u2014 <b>\u0446\u0438\u0444\u0440\u0430 \u043a\u043e\u0434\u0430</b> (\u043f\u043e\u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u0432 \u043f\u0430\u043d\u0435\u043b\u0438 CODE \u0441\u043b\u0435\u0432\u0430).</td><td class=\"tl\">\"Who says this? Why do they wear masks? Retell the story.\"</td><td class=\"sa\">\"First, Nora carved a turnip\u2026 In the end the ghost ran away from the lantern.\"</td></tr><tr><td class=\"pg\">9</td><td><b>\u0411\u0430\u043b\u044c\u043d\u044b\u0439 \u0437\u0430\u043b: \u043e\u0442\u043a\u0443\u0434\u0430 \u0442\u0440\u0430\u0434\u0438\u0446\u0438\u0438.</b> \u0421\u043e\u0435\u0434\u0438\u043d\u0438\u0442\u0435 \u0442\u0440\u0430\u0434\u0438\u0446\u0438\u044e \u0438 \u0435\u0451 \u043f\u0440\u043e\u0438\u0441\u0445\u043e\u0436\u0434\u0435\u043d\u0438\u0435 (\u043d\u0430\u0436\u0430\u0442\u044c \u0441\u043b\u0435\u0432\u0430, \u043f\u043e\u0442\u043e\u043c \u0441\u043f\u0440\u0430\u0432\u0430). \u041f\u043e\u0442\u043e\u043c \u043e\u0431\u0441\u0443\u0436\u0434\u0435\u043d\u0438\u0435: \u00abWhat would you dress up as and why?\u00bb \u2014 6 \u043a\u043e\u0441\u0442\u044e\u043c\u043e\u0432 \u0434\u043b\u044f \u043e\u043f\u043e\u0440\u044b. \u0417\u0430 \u0437\u0430\u0434\u0430\u043d\u0438\u0435 \u2014 <b>\u0446\u0438\u0444\u0440\u0430 \u043a\u043e\u0434\u0430</b> (\u043f\u043e\u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u0432 \u043f\u0430\u043d\u0435\u043b\u0438 CODE \u0441\u043b\u0435\u0432\u0430).</td><td class=\"tl\">\"Where does trick-or-treating come from?\" \"What would you dress up as? Why?\"</td><td class=\"sa\">\"I'd dress up as a pirate because\u2026\"</td></tr><tr><td class=\"pg\">10</td><td><b>\u041f\u043e\u0434\u0432\u0430\u043b: Myth or fact? (6).</b> \u0423\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u0435 \u0441 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u043e\u0439, \u043a\u043d\u043e\u043f\u043a\u0438 MYTH / FACT. \u041f\u043e\u0441\u043b\u0435 \u0432\u0435\u0440\u043d\u043e\u0433\u043e \u043e\u0442\u0432\u0435\u0442\u0430 \u2014 \u043a\u043e\u0440\u043e\u0442\u043a\u043e\u0435 \u043e\u0431\u044a\u044f\u0441\u043d\u0435\u043d\u0438\u0435. \u0421\u0440\u0435\u0434\u0438 \u0444\u0430\u043a\u0442\u043e\u0432 \u2014 \u0441\u0430\u043c\u0430\u044f \u0442\u044f\u0436\u0451\u043b\u0430\u044f \u0442\u044b\u043a\u0432\u0430 \u0432 \u043c\u0438\u0440\u0435: 1 247 \u043a\u0433 (\u0440\u0435\u043a\u043e\u0440\u0434 \u0413\u0438\u043d\u043d\u0435\u0441\u0441\u0430, 2023). \u0417\u0430 \u0437\u0430\u0434\u0430\u043d\u0438\u0435 \u2014 <b>\u0446\u0438\u0444\u0440\u0430 \u043a\u043e\u0434\u0430</b> (\u043f\u043e\u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u0432 \u043f\u0430\u043d\u0435\u043b\u0438 CODE \u0441\u043b\u0435\u0432\u0430).</td><td class=\"tl\">\"Myth or fact? Why do you think so?\"</td><td class=\"sa\">\"It's a myth \u2014 the first lanterns were turnips.\"</td></tr><tr><td class=\"pg\">11</td><td><b>\u0427\u0435\u0440\u0434\u0430\u043a: Halloween goes to America.</b> 6 \u043a\u0430\u0440\u0442\u043e\u0447\u0435\u043a \u0431\u0435\u0437 \u0434\u0430\u0442. \u0423\u0447\u0435\u043d\u0438\u043a \u0433\u043e\u0432\u043e\u0440\u0438\u0442, \u0447\u0442\u043e \u0431\u044b\u043b\u043e \u0440\u0430\u043d\u044c\u0448\u0435, \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u043d\u0430\u0436\u0438\u043c\u0430\u0435\u0442 \u043d\u0430 \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0443 \u2014 \u043e\u043d\u0430 \u0432\u0441\u0442\u0430\u0451\u0442 \u0432 \u043f\u0435\u0440\u0432\u0443\u044e \u0441\u0432\u043e\u0431\u043e\u0434\u043d\u0443\u044e \u044f\u0447\u0435\u0439\u043a\u0443 (\u043d\u0430\u0436\u0430\u0442\u0438\u0435 \u043d\u0430 \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0443 \u0432 \u044f\u0447\u0435\u0439\u043a\u0435 \u0432\u043e\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442 \u0435\u0451). \u041a\u043e\u0433\u0434\u0430 \u0432\u0441\u0435 \u0440\u0430\u0437\u043b\u043e\u0436\u0435\u043d\u044b \u2014 <b>\u2713 Check</b>: \u043d\u0430 \u0432\u0441\u0435\u0445 \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430\u0445 \u043f\u043e\u044f\u0432\u043b\u044f\u044e\u0442\u0441\u044f \u0434\u0430\u0442\u044b, \u0432\u0435\u0440\u043d\u044b\u0435 \u043e\u0441\u0442\u0430\u044e\u0442\u0441\u044f \u043d\u0430 \u043c\u0435\u0441\u0442\u0435 (\u0437\u0435\u043b\u0451\u043d\u044b\u0435), \u043d\u0435\u0432\u0435\u0440\u043d\u044b\u0435 \u0432\u043e\u0437\u0432\u0440\u0430\u0449\u0430\u044e\u0442\u0441\u044f \u0432\u043d\u0438\u0437 \u2014 \u0443\u0447\u0435\u043d\u0438\u043a \u0440\u0430\u0441\u043a\u043b\u0430\u0434\u044b\u0432\u0430\u0435\u0442 \u0438\u0445 \u0437\u0430\u043d\u043e\u0432\u043e, \u0443\u0436\u0435 \u043f\u043e \u0434\u0430\u0442\u0430\u043c. \u0417\u0430 \u0437\u0430\u0434\u0430\u043d\u0438\u0435 \u2014 <b>\u0446\u0438\u0444\u0440\u0430 \u043a\u043e\u0434\u0430</b> (\u043f\u043e\u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u0432 \u043f\u0430\u043d\u0435\u043b\u0438 CODE \u0441\u043b\u0435\u0432\u0430).</td><td class=\"tl\">\"What happened first? And then? Now look at the dates.\"</td><td class=\"sa\">\"In the 1840s Irish families moved to America and brought Halloween with them.\"</td></tr><tr><td class=\"pg\">12</td><td><b>\u0414\u0432\u0435\u0440\u044c.</b> \u0423\u0447\u0435\u043d\u0438\u043a \u043d\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u043a\u043e\u0434 \u043f\u043e \u0446\u0438\u0444\u0440\u0430\u043c \u0438\u0437 \u043f\u0430\u043d\u0435\u043b\u0438 CODE, \u0443\u0447\u0438\u0442\u0435\u043b\u044c \u0432\u0432\u043e\u0434\u0438\u0442 \u0435\u0433\u043e \u043d\u0430 \u0437\u0430\u043c\u043a\u0435. \u041d\u0435\u0432\u0435\u0440\u043d\u043e \u2014 \u0437\u0430\u043c\u043e\u043a \u0442\u0440\u044f\u0441\u0451\u0442\u0441\u044f. Next \u0432\u0432\u043e\u0434\u0438\u0442 \u043a\u043e\u0434 \u0441\u0430\u043c.</td><td class=\"tl\">\"What's the code?\"</td><td class=\"sa\">\"Seven, two, nine, four, one!\"</td></tr><tr><td class=\"pg\">13</td><td><b>Escaped!</b> \u0414\u0432\u0435\u0440\u044c \u043e\u0442\u043a\u0440\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u043d\u0430 \u043f\u0440\u0430\u0437\u0434\u043d\u0438\u043a. \u041e\u043a\u043d\u043e \u00abWhat's your name?\u00bb \u2192 <b>\u0441\u0435\u0440\u0442\u0438\u0444\u0438\u043a\u0430\u0442</b> \u00abThis is to certify that [\u0438\u043c\u044f] escaped from Samhain Mansion on Halloween night\u00bb, \ud83d\udcbe Save \u2014 \u0441\u043a\u0430\u0447\u0430\u0442\u044c \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u043e\u0439. \u0412\u043d\u0438\u0437\u0443 <b>\ud83c\udfc1 Finish</b> (\u0444\u0438\u043d\u0430\u043b\u044c\u043d\u044b\u0439 \u0441\u043b\u0430\u0439\u0434) \u0438 <b>\u2b50 Extra</b> (\u0434\u043e\u043f. \u0437\u0430\u0434\u0430\u043d\u0438\u044f).</td><td class=\"tl\">\"Congratulations! You escaped!\"</td><td class=\"sa\">\"Yay!\"</td></tr><tr><td class=\"pg\">14</td><td><b>Extra 1: Halloween bucket list.</b> \u041d\u0430\u0436\u0430\u0442\u0438\u0435 \u043d\u0430 \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0443 \u2014 \u0432 \u0441\u043f\u0438\u0441\u043e\u043a, \u0432 \u0441\u043f\u0438\u0441\u043a\u0435 \u2014 \u0443\u0431\u0440\u0430\u0442\u044c, \u0432\u043d\u0438\u0437\u0443 \u0441\u0432\u043e\u0439 \u043f\u0443\u043d\u043a\u0442.</td><td class=\"tl\">\"Imagine your perfect Halloween night. What would you do?\"</td><td class=\"sa\">\"I'd like to visit a haunted house because\u2026\"</td></tr><tr><td class=\"pg\">15</td><td><b>Extra 2: \u043d\u0430\u0441\u0442\u043e\u043b\u044c\u043d\u0430\u044f \u0438\u0433\u0440\u0430.</b> \u0424\u0438\u0448\u043a\u0438 (1\u20135 \u0438\u0433\u0440\u043e\u043a\u043e\u0432, \u043c\u043e\u0436\u043d\u043e \u0432\u043f\u0438\u0441\u0430\u0442\u044c \u0438\u043c\u0435\u043d\u0430) \u2192 \u25b6 Play. \u041a\u0443\u0431\u0438\u043a \u043f\u043e \u043e\u0447\u0435\u0440\u0435\u0434\u0438. \u041d\u0430 \u043a\u043b\u0435\u0442\u043a\u0430\u0445 \u00ab?\u00bb \u2014 \u0432\u043e\u043f\u0440\u043e\u0441\u044b \u043e \u0425\u044d\u043b\u043b\u043e\u0443\u0438\u043d\u0435, \u043e\u0442\u0432\u0435\u0447\u0430\u0442\u044c \u0440\u0430\u0437\u0432\u0451\u0440\u043d\u0443\u0442\u043e. \u23e9 +2, \u23ea \u22122, \u2b50 \u0432\u0435\u0441\u0451\u043b\u044b\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u044f. \u041f\u0435\u0440\u0432\u044b\u0439 \u0443 \u0434\u0432\u0435\u0440\u0435\u0439 \u043e\u0441\u043e\u0431\u043d\u044f\u043a\u0430 \u2014 \u043f\u043e\u0431\u0435\u0434\u0438\u043b.</td><td class=\"tl\">\"Answer the question. Why?\"</td><td class=\"sa\">\"I don't believe in ghosts because\u2026\"</td></tr><tr><td class=\"pg\">16</td><td><b>Finish.</b> \u00abWell done! Happy Halloween!\u00bb</td><td class=\"tl\">\"Happy Halloween! Bye!\"</td><td class=\"sa\">\"Happy Halloween!\"</td></tr></table><div class=\"voc\"><b>\ud83d\uddc2\ufe0f \u041b\u0435\u043a\u0441\u0438\u043a\u0430 \u0438 \u0433\u0440\u0430\u043c\u043c\u0430\u0442\u0438\u043a\u0430:</b> pumpkin, turnip, bonfire, costume, ghost, candle, lantern, harvest \u2022 Past Simple, Past Continuous, used to, passive (were lit, was shortened) \u2022 I'd dress up as\u2026 because\u2026 \u2022 myth / fact</div><div class=\"voc\" style=\"font-size:13px;color:#777\"><b>\u041d\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u044f:</b> \u2190 \u2192 \u2014 \u043d\u0430\u0437\u0430\u0434 / \u043f\u0440\u043e\u043f\u0443\u0441\u0442\u0438\u0442\u044c; Next \u0432\u0435\u0434\u0451\u0442 \u043a \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u043c\u0443 \u0440\u0430\u0443\u043d\u0434\u0443 (\u043f\u043e\u0434\u0441\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u043e\u0442\u0432\u0435\u0442), \u043a\u043e\u0433\u0434\u0430 \u0437\u0430\u0434\u0430\u043d\u0438\u0435 \u0432\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u043e \u2014 \u043a \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435. \u041a\u0440\u0443\u0436\u043e\u0447\u043a\u0438 \u0432\u0432\u0435\u0440\u0445\u0443 \u0441\u043b\u0435\u0432\u0430 \u043a\u043b\u0438\u043a\u0430\u0431\u0435\u043b\u044c\u043d\u044b. \ud83d\udddd \u2014 Code room, \ud83d\udccb \u2014 \u044d\u0442\u043e\u0442 \u043f\u043b\u0430\u043d, \ud83c\udfb5 \u2014 \u043c\u0443\u0437\u044b\u043a\u0430.</div><div class=\"voc\"><b>\ud83c\udfe0 \u0414\u043e\u043c\u0430\u0448\u043d\u0435\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u0435</b> \u2014 \u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b <b>\u00abHalloween Homework \u00b7 13+ \u00b7 continuing\u00bb</b> \u043d\u0430 \u043f\u043b\u0430\u0442\u0444\u043e\u0440\u043c\u0435: \u00ab\u041c\u0430\u0442\u0435\u0440\u0438\u0430\u043b\u044b\u00bb \u2192 \u00ab\u0417\u0430\u0434\u0430\u0442\u044c \u0414\u0417\u00bb \u2192 \u0443\u0447\u0435\u043d\u0438\u043a \u2192 \u043e\u0442\u043c\u0435\u0442\u0438\u0442\u044c. \u0422\u043e\u043b\u044c\u043a\u043e \u0441\u043b\u043e\u0432\u0430 \u0443\u0440\u043e\u043a\u0430, 10\u201315 \u043c\u0438\u043d\u0443\u0442. \u0417\u0430\u0434\u0430\u043d\u0438\u044f:<ol style=\"margin:6px 0 0 22px\"><li>\u041a\u0430\u0440\u0442\u043e\u0447\u043a\u0438 \u0441 \u043f\u0435\u0440\u0435\u0432\u043e\u0434\u043e\u043c</li><li>\u0421\u043e\u0435\u0434\u0438\u043d\u0438 \u0441\u043b\u043e\u0432\u043e \u0438 \u043e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u0438\u0435</li><li>\u0421\u043e\u0431\u0435\u0440\u0438 \u0441\u043b\u043e\u0432\u043e \u0438\u0437 \u0431\u0443\u043a\u0432</li><li>\u041f\u043e\u0441\u043b\u0443\u0448\u0430\u0439 \u0438 \u043d\u0430\u043f\u0438\u0448\u0438</li><li>\u0422\u0435\u043a\u0441\u0442 \u043e \u0421\u0430\u043c\u0430\u0439\u043d\u0435 \u0441 \u043f\u0440\u043e\u043f\u0443\u0441\u043a\u0430\u043c\u0438</li><li>True / False \u043f\u043e \u0442\u0435\u043a\u0441\u0442\u0443</li><li>\ud83c\udfa4 \u0420\u0430\u0441\u0441\u043a\u0430\u0436\u0438, \u043a\u0430\u043a \u0442\u044b \u043f\u0440\u0430\u0437\u0434\u043d\u0443\u0435\u0448\u044c \u0425\u044d\u043b\u043b\u043e\u0443\u0438\u043d</li></ol><div style=\"color:#777;font-size:13px;margin-top:4px\">\u0423\u0441\u0442\u043d\u044b\u0435 \u0437\u0430\u0434\u0430\u043d\u0438\u044f \u0443\u0447\u0435\u043d\u0438\u043a \u0437\u0430\u043f\u0438\u0441\u044b\u0432\u0430\u0435\u0442 \u0433\u043e\u043b\u043e\u0441\u043e\u043c \u2014 \u0438\u0445 \u0432\u044b \u0441\u043b\u0443\u0448\u0430\u0435\u0442\u0435 \u0438 \u043e\u0446\u0435\u043d\u0438\u0432\u0430\u0435\u0442\u0435 \u0432 \u00ab\u041f\u0440\u043e\u0432\u0435\u0440\u043a\u0435 \u0414\u0417\u00bb.</div></div></body></html>";
+const BUBBLES={"1": [[70.5, 1.7, 25.1, 19.2], [5.4, 4.9, 28.3, 22.6]], "2": [[2.9, 2.3, 36.9, 19.0]], "3": [[68.8, 3.2, 27.6, 17.3], [2.7, 57.4, 25.5, 17.1]], "4": [[51.4, 3.3, 29.8, 19.0], [28.3, 33.6, 22.0, 12.6]], "5": [[21.3, 5.2, 30.1, 14.5], [62.4, 49.6, 32.4, 15.2]], "6": [[70.0, 0.9, 28.0, 15.7]]};
+const $=id=>document.getElementById(id);
+const img=k=>ASSETS[k];
+const rnd=n=>Math.floor(Math.random()*n);
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+const BEG=LEVEL==="beg";
+const B=(b,c)=>BEG?b:c;
+
+/* ---------- sound ---------- */
+let ac=null;function actx(){if(!ac){try{ac=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}return ac;}
+function tone(f,d,t,v,sl){const c=actx();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type=t||"sine";o.frequency.setValueAtTime(f,c.currentTime);
+  if(sl)o.frequency.exponentialRampToValueAtTime(sl,c.currentTime+d);g.gain.setValueAtTime(v||.1,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+d+.02);}
+function noise(d,v){const c=actx();if(!c)return;const b=c.createBuffer(1,c.sampleRate*d,c.sampleRate),x=b.getChannelData(0);for(let i=0;i<x.length;i++)x[i]=(Math.random()*2-1)*Math.pow(1-i/x.length,3);
+  const s=c.createBufferSource();s.buffer=b;const f=c.createBiquadFilter();f.type="lowpass";f.frequency.value=400;const g=c.createGain();g.gain.value=v||.6;s.connect(f);f.connect(g);g.connect(c.destination);s.start();}
+const sRight=()=>{tone(660,.08,"triangle",.09);setTimeout(()=>tone(990,.14,"triangle",.09),80);};
+const sWrong=()=>tone(200,.22,"sawtooth",.08,150);
+const sPick=()=>tone(700,.07,"triangle",.08);
+const sSlam=()=>{noise(.9,.9);tone(70,.5,"square",.15,40);};
+const sCreak=()=>tone(180,1.1,"sawtooth",.04,320);
+function sCheer(){[523,659,784,1046,1319].forEach((f,i)=>setTimeout(()=>tone(f,.18,"triangle",.1),i*100));}
+function say(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+let musicOn=true,musicVol=.18;
+function playMusic(){const a=$("music");if(!musicOn)return;a.volume=musicVol;a.play().catch(()=>{});}
+function confetti(){const w=$("confetti"),cl=["#e8b94a","#ff9a3c","#c0392b","#3fae5a","#fbe7b5"];
+  for(let i=0;i<40;i++){const c=document.createElement("div");c.className="conf";c.style.left=Math.random()*100+"vw";c.style.background=cl[i%5];
+    w.appendChild(c);const an=c.animate([{transform:"translateY(-10vh) rotate(0)"},{transform:"translateY(110vh) rotate(540deg)"}],{duration:2000+Math.random()*1200,delay:Math.random()*250,easing:"linear",fill:"both"});
+    an.onfinish=an.oncancel=()=>c.remove();setTimeout(()=>c.remove(),4000);}}
+let timers=[];const later=(f,ms)=>{const t=setTimeout(f,ms);timers.push(t);return t;};
+let diceSpin=null;function clearTimers(){timers.forEach(clearTimeout);timers=[];clearInterval(diceSpin);diceSpin=null;}
+
+/* ---------- content ---------- */
+const WORDS=[["w_pumpkin","a pumpkin"],["w_turnip","a turnip"],["w_bonfire","a bonfire"],["w_costume","a costume"],["w_ghost","a ghost"],["w_candle","a candle"]]
+  .concat(BEG?[]:[["w_lantern","a lantern"],["w_harvest","the harvest"]]);
+const ICON={pumpkin:"w_pumpkin",turnip:"w_turnip",bonfire:"w_bonfire",costume:"w_costume",ghost:"w_ghost",candle:"w_candle",lantern:"w_lantern",harvest:"w_harvest"};
+const ROOMS=[["library","📖"],["kitchen","🍳"],["ballroom","🎭"],["cellar","🍎"],["attic","⛵"]];
+let ST=null;
+function newGame(){ST={code:[0,0,0,0,0].map(()=>rnd(10)),dig:[false,false,false,false,false],key:0,slammed:false,escaped:false,name:""};}
+
+/* ---------- steps ---------- */
+const STEPS=[{id:"lead"},{id:"words"},{id:"zoom"},{id:"hang"},{id:"mansion"},{id:"hall"},
+ {id:"library",d:0},{id:"kitchen",d:1},{id:"ballroom",d:2},{id:"cellar",d:3},{id:"attic",d:4},
+ {id:"door"},{id:"escape"},{id:"bucket"},{id:"board"},{id:"finish"},{id:"coderoom",hidden:true}];
+let idx=0,done=false,roundNext=null,codeFrom=0;
+const SETUP={};
+function pips(){const p=$("pips");p.innerHTML="";STEPS.forEach((s,i)=>{if(s.hidden)return;const d=document.createElement("div");d.className="pip"+(i<idx?" done":i===idx?" cur":"");d.onclick=()=>go(i);p.appendChild(d);});}
+function setDots(t,n){const d=$("dots");if(!t){d.style.display="none";return;}d.style.display="flex";d.innerHTML="";for(let i=0;i<t;i++){const s=document.createElement("span");s.className=i<n?"done":i===n?"cur":"";d.appendChild(s);}}
+function markDone(){done=true;$("navNext").classList.add("ready");}
+function show(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));$(id).classList.add("active");}
+const sIdx=id=>STEPS.findIndex(s=>s.id===id);
+const realNext=()=>{let j=idx+1;while(j<STEPS.length&&STEPS[j].hidden)j++;return j<STEPS.length?j:idx;};
+function go(i){
+  i=Math.max(0,Math.min(STEPS.length-1,i));clearTimers();idx=i;done=false;roundNext=null;stopFlash();
+  $("navNext").classList.remove("ready");$("modal").classList.remove("show");setDots(0);
+  const st=STEPS[i];pips();$("pageNum").textContent=st.hidden?"🗝":(i+1)+" / "+STEPS.filter(s=>!s.hidden).length;
+  const fx=["escape","bucket","board"].includes(st.id),fin=st.id==="finish";
+  $("navNext").style.display=fx||fin?"none":"";$("navFwd").style.visibility=fin?"hidden":"";
+  $("navFinish").style.display=fx?"inline-block":"none";$("navExtra").style.display=fx&&STEPS[realNext()].id!=="finish"?"inline-block":"none";
+  $("codeBtn").style.display=i<sIdx("door")||st.hidden?"":"none";
+  drawInv();SETUP[st.id](st);
+}
+/* inventory: key halves before the hall, code digits after */
+function drawInv(flash){const v=$("inv"),id=STEPS[idx].id;v.innerHTML="";
+  const rooms=["hall","library","kitchen","ballroom","cellar","attic","door","coderoom"].includes(id);
+  if(["zoom","hang","mansion"].includes(id)){v.style.display="flex";v.innerHTML='<div class="h">KEY</div>';
+    v.insertAdjacentHTML("beforeend",'<div class="keybox'+(ST.key>=2?" whole":"")+'"><img class="kl'+(ST.key>0?" got":"")+(flash===0?" new":"")+'" src="'+img("key_left")+'"><img class="kr'+(ST.key>1?" got":"")+(flash===1?" join":"")+'" src="'+img("key_right")+'"></div>');return;}
+  if(rooms&&ST.slammed){v.style.display="flex";v.innerHTML='<div class="h">CODE</div>';
+    ROOMS.forEach(([r,e],k)=>v.insertAdjacentHTML("beforeend",'<div class="slot'+(ST.dig[k]?" got":"")+(flash===k?" new":"")+'">'+(ST.dig[k]?ST.code[k]:"")+'</div>'));return;}
+  v.style.display="none";}
+function modal(h,big,im,t,ok){$("mH").textContent=h;$("mBig").textContent=big||"";$("mBig").style.display=big!==null&&big!==undefined&&big!==""?"":"none";
+  $("mImg").style.display=im?"":"none";if(im)$("mImg").src=im;$("mT").innerHTML=t||"";$("modal").classList.add("show");
+  $("mOk").onclick=()=>{$("modal").classList.remove("show");if(ok)ok();};}
+function giveKey(){ST.key=Math.min(2,ST.key+1);sCheer();confetti();
+  modal(ST.key===1?"Half a key!":"The key is complete!","",img(ST.key===1?"key_left":"key_full"),ST.key===1?"One more game — and the key is yours.":"Now you can open the mansion.",()=>{drawInv(ST.key-1);markDone();});}
+const ORD=["1st","2nd","3rd","4th","5th"];
+function giveDigit(k,after){ST.dig[k]=true;sCheer();confetti();
+  modal("🔢 You found the "+ORD[k]+" digit!",String(ST.code[k]),null,B("Remember it!","Remember it — you will need it at the door."),()=>{drawInv(k);if(after)after();else markDone();});}
+
+/* ---------- 1 lead-in ---------- */
+const LEAD=[["What's the topic?",null,"Halloween"]];
+let LI=0,LA=false;
+SETUP.lead=()=>{$("leadBg").src=img("lead13");LI=0;LA=false;show("lead");leadShow();roundNext=leadNext;};
+function leadShow(){const [q,k,a]=LEAD[LI],c=$("leadCard");setDots(LEAD.length,LI);
+  c.innerHTML=(k?'<img src="'+img(k)+'">':"")+'<div><div class="q">'+q+'</div><div class="a" id="leadA"></div></div>';c.classList.remove("popx");void c.offsetWidth;c.classList.add("popx");}
+function leadNext(){const a=LEAD[LI][2];if(a&&!LA){LA=true;$("leadA").textContent=a;sRight();markDone();return;}
+  markDone();}
+$("leadCard").onclick=()=>{if(!done)leadNext();};
+
+/* ---------- 2 words ---------- */
+SETUP.words=()=>{$("wordsBg").src=img("hall13");const g=$("wgrid");g.innerHTML="";g.style.gridTemplateColumns="repeat("+(BEG?3:4)+",1fr)";let n=0;setDots(WORDS.length,0);
+  WORDS.forEach(([k,w])=>{const d=document.createElement("div");d.className="wc panel";d.innerHTML='<img src="'+img(k)+'"><div class="w">'+w+'</div>';
+    d.onclick=()=>{say(w);if(d.classList.contains("open"))return;sPick();d.classList.add("open");n++;setDots(WORDS.length,n);if(n>=WORDS.length)markDone();};g.appendChild(d);});
+  show("words");roundNext=()=>{const d=[...g.children].find(c=>!c.classList.contains("open"));if(d)d.click();};};
+
+/* ---------- 3 zoom in ---------- */
+let ZW=[],ZI=0,ZA=null;
+SETUP.zoom=()=>{$("zoomBg").src=img("library13");ZW=shuffle(WORDS).slice(0,BEG?5:6);ZI=0;show("zoom");zoomRound();
+  roundNext=()=>{if(ZA&&ZA.playState==="running"){zoomReveal();return;}};};
+function zoomRound(){const [k,w]=ZW[ZI],im=$("zoomImg");setDots(ZW.length,ZI);$("zoomWord").textContent="";
+  im.src=img(k);im.style.setProperty("--ox",(35+rnd(30))+"%");im.style.setProperty("--oy",(35+rnd(30))+"%");
+  if(ZA)ZA.cancel();ZA=im.animate([{transform:"scale(7)"},{transform:"scale(1)"}],{duration:11000,easing:"cubic-bezier(.3,0,.4,1)",fill:"forwards"});
+  ZA.onfinish=()=>zoomReveal();}
+function zoomReveal(){if(!ZA||$("zoomWord").textContent)return;ZA.finish();const w=ZW[ZI][1];$("zoomWord").textContent=w;sRight();ZI++;setDots(ZW.length,ZI);
+  if(ZI>=ZW.length)later(giveKey,1300);else later(zoomRound,1900);}
+$("zoombox").onclick=()=>zoomReveal();
+
+/* ---------- 4 beginners: the ghost appears / continuing: missing letters ---------- */
+let HW=[],HI=0,HS=null;
+SETUP.hang=()=>{$("hangBg").src=img("kitchen13");HI=0;$("hangTitle").textContent="Missing letters ✍️";
+  HW=shuffle(WORDS).slice(0,BEG?5:6);show("hang");missRound();};
+function hangRound(){const [k,w0]=HW[HI],word=w0.replace(/^(a|the) /,"").toUpperCase();HS={word,got:new Set(),miss:0,over:false};setDots(HW.length,HI);
+  const g=$("hgrow");g.innerHTML='<div class="hghost"><img src="'+img("w_ghost")+'" id="hgImg" style="opacity:.08"><div class="boo" id="hgBoo">BOO!</div></div><div class="panel" style="padding:20px 26px"><div class="hword" id="hword"></div><div class="keys" id="hkeys"></div></div>';
+  hangDraw();const K=$("hkeys");[..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"].forEach(c=>{const b=document.createElement("button");b.textContent=c;b.onclick=()=>hangTry(c,b);K.appendChild(b);});}
+function hangDraw(){$("hword").innerHTML=[...HS.word].map(c=>'<span>'+(HS.got.has(c)?c:"")+'</span>').join("");}
+function hangTry(c,b){if(HS.over||HS.got.has(c))return;b=b||[...$("hkeys").children].find(x=>x.textContent===c);
+  if(b&&b.classList.contains("used"))return;if(b)b.classList.add("used");
+  if(HS.word.includes(c)){HS.got.add(c);if(b)b.classList.add("ok");sPick();hangDraw();
+    if([...HS.word].every(x=>HS.got.has(x))){HS.over=true;sRight();say(HW[HI][1]);hangEnd(true);}}
+  else{HS.miss++;sWrong();$("hgImg").style.opacity=Math.min(1,.08+HS.miss/6);if(HS.miss>=6){HS.over=true;$("hgBoo").style.display="flex";tone(140,.8,"sawtooth",.12,60);[...HS.word].forEach(x=>HS.got.add(x));hangDraw();hangEnd(false);}}}
+function hangEnd(win){HI++;setDots(HW.length,HI);later(()=>{if(HI>=HW.length)giveKey();else hangRound();},win?1500:2300);}
+function missRound(){const [k,w0]=HW[HI],word=w0.replace(/^(a|the) /,"").toUpperCase();setDots(HW.length,HI);
+  const n=word.length,hide=new Set(shuffle([...Array(n).keys()]).slice(0,Math.min(n-2,n<=6?3:4)));
+  HS={word,hide,miss:0,over:false,t:0};
+  const g=$("hgrow");g.innerHTML='<div class="hghost"><img src="'+img("w_ghost")+'" id="hgImg" style="opacity:.05;transform:scale(.55)"><div class="boo" id="hgBoo">BOO!</div></div><div class="panel" style="padding:18px 26px;display:flex;flex-direction:column;align-items:center"><img class="hpic" src="'+img(k)+'"><div class="hword" id="hword"></div><div class="keys" id="hkeys"></div></div>';
+  const W=$("hword");[...word].forEach((c,i)=>{const s=document.createElement("span");if(hide.has(i))s.className="blank";else s.textContent=c;W.appendChild(s);});
+  const K=$("hkeys");[..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"].forEach(c=>{const b=document.createElement("button");b.textContent=c;b.onclick=()=>missTry(c,b);K.appendChild(b);});
+  roundNext=()=>{if(HS.over)return;const i=[...HS.hide][0];missTry(HS.word[i]);};
+  const T=BEG?24:18,tick=()=>{if(HS.over)return;HS.t+=.25/T;ghostShow();if(ghostLevel()>=1){missBoo();return;}later(tick,250);};later(tick,900);}
+function ghostLevel(){return Math.min(1,HS.t+HS.miss*.2);}
+function ghostShow(){const v=ghostLevel(),g=$("hgImg");if(!g)return;g.style.opacity=(.05+.95*v).toFixed(3);g.style.transform="scale("+(.55+.55*v).toFixed(3)+")";}
+function missBoo(){HS.over=true;const sp=$("hword").children;$("hgBoo").style.display="flex";tone(140,.8,"sawtooth",.12,60);
+  [...HS.hide].forEach(i=>{sp[i].classList.remove("blank");sp[i].textContent=HS.word[i];sp[i].style.color="#c0392b";});
+  HI++;setDots(HW.length,HI);later(()=>{if(HI>=HW.length)giveKey();else missRound();},2300);}
+function missTry(c,b){if(HS.over)return;b=b||[...$("hkeys").children].find(x=>x.textContent===c);if(b.classList.contains("used"))return;b.classList.add("used");
+  const pos=[...HS.hide].filter(i=>HS.word[i]===c),sp=$("hword").children;
+  if(pos.length){b.classList.add("ok");sPick();pos.forEach(i=>{HS.hide.delete(i);sp[i].classList.remove("blank");sp[i].textContent=c;});
+    if(!HS.hide.size){HS.over=true;sRight();$("hgImg").style.opacity=0;HI++;setDots(HW.length,HI);later(()=>{if(HI>=HW.length)giveKey();else missRound();},1300);}}
+  else{HS.miss++;sWrong();ghostShow();if(ghostLevel()>=1)missBoo();}}
+
+/* ---------- 5 mansion ---------- */
+SETUP.mansion=()=>{ST.opening=false;$("mansionBg").src=img("mansion13");$("flyKeyImg").src=img("key_full");const k=$("flyKey");k.style.transition="none";k.style.display="none";k.classList.remove("turn");
+  const D=$("dWrap");D.className="dwrap ready";D.style.setProperty("--mimg",'url("'+img("mansion13")+'")');$("mansionStage").style.transform="translate(-50%,-50%)";
+  $("doorHot").classList.add("hint");show("mansion");roundNext=openDoor;};
+function openDoor(){if(done||ST.opening)return;ST.opening=true;const k=$("flyKey"),kb=document.querySelector("#inv .keybox"),r=$("doorHot").getBoundingClientRect();
+  const src=kb?kb.getBoundingClientRect():{left:20,top:70,width:170};
+  k.style.transition="none";k.style.left=src.left+"px";k.style.top=(src.top+4)+"px";k.style.transform="scale("+(src.width/150)+")";k.style.transformOrigin="0 0";k.style.display="";
+  if(kb)kb.style.visibility="hidden";$("doorHot").classList.remove("hint");void k.offsetWidth;
+  const sc=Math.max(.22,r.width*.75/150),kx=r.left+r.width/2-150*sc*.82,ky=r.top+r.height*.6-26*sc;
+  k.style.transition="left 1.3s ease-in-out,top 1.3s ease-in-out,transform 1.3s ease-in-out";k.style.left=kx+"px";k.style.top=ky+"px";k.style.transform="scale("+sc+")";
+  later(()=>{k.classList.add("turn");tone(1200,.05,"square",.08);later(()=>tone(500,.12,"square",.1),350);},1400);
+  later(()=>{k.style.transition="opacity .4s";k.style.opacity="0";$("dWrap").classList.add("open");sCreak();},2200);
+  later(()=>{const st=$("mansionStage");st.style.transformOrigin="54.4% 52%";st.style.transform="translate(-50%,-50%) scale(1.8)";},3200);
+  later(()=>{k.style.display="none";k.style.opacity="";ST.opening=false;sRight();markDone();},4600);}
+$("doorHot").onclick=openDoor;
+
+/* ---------- 6 hall: flashlight ---------- */
+const HALLPOS=[[41,78],[16,58],[88,45],[6,40],[57,84],[27,82],[73,50],[50,62]];
+const FL={raf:0,x:0,y:0,tx:0,ty:0,manual:0,wander:0,last:0,on:false};
+let HF=0;
+SETUP.hall=()=>{$("hallBg").src=img("hall13");$("slamView").classList.remove("on","shut");const S=$("hallStage");S.querySelectorAll(".hitem").forEach(e=>e.remove());HF=0;
+  $("fdark").classList.remove("off");$("hallTitle").textContent=B("Find the Halloween things 🔦","Find the Halloween things — say what they are 🔦");
+  const pos=shuffle(HALLPOS),F=$("hfound");F.innerHTML="";
+  WORDS.forEach(([k,w],i)=>{const e=document.createElement("img");e.className="hitem";e.src=img(k);e.style.left=pos[i][0]+"%";e.style.top=pos[i][1]+"%";e.style.width=(k==="w_harvest"||k==="w_bonfire"?6:5)+"%";
+    e.onclick=()=>{if(e.classList.contains("found"))return;e.classList.add("found");sRight();say(w);F.children[i].classList.add("ok");F.children[i].textContent=w;HF++;setDots(WORDS.length,HF);if(HF>=WORDS.length)hallLights();};S.appendChild(e);
+    F.insertAdjacentHTML("beforeend","<div>?</div>");});
+  setDots(WORDS.length,0);show("hall");const o=$("hall").getBoundingClientRect();FL.x=FL.tx=o.width/2;FL.y=FL.ty=o.height/2;FL.on=true;
+  if(ST.slammed){$("fdark").classList.add("off");[...S.querySelectorAll(".hitem")].forEach(e=>e.classList.add("found"));[...F.children].forEach((c,i)=>{c.classList.add("ok");c.textContent=WORDS[i][1];});setDots(0);FL.on=false;markDone();return;}
+  cancelAnimationFrame(FL.raf);FL.raf=requestAnimationFrame(flashLoop);
+  roundNext=()=>{const e=[...S.querySelectorAll(".hitem")].find(x=>!x.classList.contains("found"));if(e){const r=e.getBoundingClientRect(),o=$("hall").getBoundingClientRect();FL.tx=r.left+r.width/2-o.left;FL.ty=r.top+r.height/2-o.top;FL.manual=performance.now()+2000;later(()=>e.click(),500);}};};
+function stopFlash(){cancelAnimationFrame(FL.raf);FL.raf=0;}
+function flashLoop(ts){if(!$("hall").classList.contains("active")||!FL.on)return;
+  const dt=FL.last?Math.min(50,ts-FL.last):16;FL.last=ts;const o=$("hall").getBoundingClientRect(),now=performance.now(),r=Math.max(110,Math.min(170,o.width*.1));
+  if(now>FL.manual&&now>FL.wander){FL.tx=o.width*(.08+Math.random()*.84);FL.ty=o.height*(.3+Math.random()*.6);FL.wander=now+2600;}
+  const k=1-Math.pow(now<FL.manual?.8:.965,dt/16);FL.x+=(FL.tx-FL.x)*k;FL.y+=(FL.ty-FL.y)*k;
+  const d=$("fdark");d.style.setProperty("--x",FL.x+"px");d.style.setProperty("--y",FL.y+"px");d.style.setProperty("--r",r+"px");
+  const g=$("fring");g.style.display="";g.style.left=FL.x+"px";g.style.top=FL.y+"px";g.style.width=g.style.height=2*r+"px";FL.raf=requestAnimationFrame(flashLoop);}
+$("hall").addEventListener("pointermove",e=>{if(!FL.on||e.pointerType==="touch")return;const o=$("hall").getBoundingClientRect();FL.tx=e.clientX-o.left;FL.ty=e.clientY-o.top;FL.manual=performance.now()+2500;});
+function hallLights(){FL.on=false;stopFlash();$("fring").style.display="none";later(()=>{$("fdark").classList.add("off");sCheer();},600);
+  const V=$("slamView");later(()=>{$("slamImg").src=img("dooropen13");V.classList.remove("shut");V.classList.add("on");sCreak();},2400);
+  later(()=>{$("slamImg").src=img("door13");V.classList.add("shut");sSlam();},4300);
+  later(()=>{ST.slammed=true;drawInv();modal("💥 BANG! The door is locked!","",null,B("A note on the door:<br><i>“You can't go out! Find the code. Every room has one number.”</i>","A note on the door:<br><i>“The door is locked. To escape, find the 5-digit code. Each room hides one digit.”</i>"),()=>{V.classList.remove("on","shut");markDone();});},5200);}
+
+/* ---------- reading text with picture-words ---------- */
+function richText(t){return t.replace(/\{(\w+):([^}]+)\}/g,(m,k,w)=>'<span class="ic" data-w="'+w+'"><img src="'+img(ICON[k])+'"><b>'+w+'</b></span>');}
+function wireIcons(box){box.querySelectorAll(".ic").forEach(s=>s.onclick=()=>{s.classList.add("open");say(s.dataset.w);sPick();});}
+
+/* ---------- 7 library: Samhain ---------- */
+const LIBTXT=BEG?"Halloween is very old. It comes from a Celtic festival. The name of the festival is <b>Samhain</b>. Samhain is more than 2,000 years old. It is at the end of summer. People make big {bonfire:bonfires}. They wear {costume:costumes}. Why? They think {ghost:ghosts} come on this night! The festival is on 31 October. Today we call this night <b>Halloween</b>.":
+ "Halloween began more than 2,000 years ago as <b>Samhain</b>, a festival of the Celts, who lived in Ireland, Britain and northern France. Samhain marked the end of the {harvest:harvest} and the beginning of winter. The Celts believed that on this night the border between the world of the living and the world of the dead became thin, so {ghost:ghosts} and spirits could walk on Earth. Huge {bonfire:bonfires} were lit, and people used to wear {costume:costumes} so that the spirits would not recognise them. Centuries later, the Church made 1 November All Saints' Day, also called All Hallows' Day. The evening before became <b>All Hallows' Eve</b> — and later this name was shortened to <b>Halloween</b>.";
+const LIBTF=BEG?[["Samhain is a Celtic festival.",1],["Samhain is 200 years old.",0],["People make big bonfires.",1],["People wear costumes.",1],["The festival is on 31 December.",0],["People think ghosts come on this night.",1]]:
+ [["Samhain is about 200 years old.",0],["Samhain marked the end of the harvest.",1],["The Celts believed spirits could walk on Earth that night.",1],["Bonfires were lit to celebrate the summer.",0],["People wore costumes so the spirits would not recognise them.",1],["“Halloween” comes from “All Hallows' Eve”.",1]];
+let TQ=null,TI=0,tBusy=false;
+SETUP.library=()=>{$("libraryBg").src=img("library13");const b=$("libBox");
+  b.innerHTML='<div class="read panel">'+richText(LIBTXT)+'</div><button class="btn readgo" id="libGo">True or false? ➜</button>';wireIcons(b);$("libGo").onclick=libTF;show("library");
+  roundNext=()=>{const s=b.querySelector(".ic:not(.open)");if(s){s.click();return;}if($("libGo"))libTF();};};
+function libTF(){const b=$("libBox");TQ=LIBTF;TI=0;tBusy=false;
+  b.innerHTML='<div class="read panel small">'+richText(LIBTXT)+'</div><div class="tf" style="margin-top:14px"><div class="st panel" id="tfSt"></div><div class="bt"><button class="T" id="tfT">TRUE</button><button class="F" id="tfF">FALSE</button></div><div class="tftry" id="tfTry">Try again!</div></div>';
+  wireIcons(b);b.querySelectorAll(".ic").forEach(x=>x.classList.add("open"));$("tfT").onclick=()=>tfAns(1);$("tfF").onclick=()=>tfAns(0);tfShow();roundNext=()=>{if(TI<TQ.length)tfAns(TQ[TI][1]);};}
+function tfShow(){setDots(TQ.length,TI);const s=$("tfSt");s.textContent=TQ[TI][0];s.classList.remove("pop");void s.offsetWidth;s.classList.add("pop");}
+function tfAns(v){if(TI>=TQ.length||tBusy)return;const b=$(v?"tfT":"tfF");
+  if(v!==TQ[TI][1]){sWrong();b.classList.add("shake");$("tfTry").classList.add("show");later(()=>{b.classList.remove("shake");$("tfTry").classList.remove("show");},1500);return;}
+  tBusy=true;sRight();b.classList.add("hit");$("tfSt").classList.add("ok");TI++;setDots(TQ.length,TI);
+  later(()=>{tBusy=false;b.classList.remove("hit");$("tfSt").classList.remove("ok");if(TI<TQ.length)tfShow();else giveDigit(0);},900);}
+
+/* ---------- 8 kitchen: Samhain night comic ---------- */
+// per panel: two bubbles [speaker, bubble centre x %, bubble top %, tail target x %, tail target y %, beginners text, continuing text]
+const NORA=[
+ [["Nora",0,0,40,35,"It's Samhain!","It's Samhain tonight — the end of summer!"],["Mum",0,0,60,24,"Make a lantern!","Then we need a lantern before it gets dark."]],
+ [["Nora",0,0,28,30,"I have a turnip.","I'm carving a scary face into this turnip."],["Mum",0,0,62,10,"Put a candle in it!","Good. Now put this candle inside it."]],
+ [["Liam",0,0,54,61,"Look! A big bonfire!","Look how big the bonfire is!"],["Nora",0,0,33,49,"It's warm!","Everyone in the village has come to the hill."]],
+ [["Ghost",0,0,35,10,"Boo!","Boo! Tonight the spirits walk among you!"],["Liam",0,0,44,42,"A ghost!","Nora, there's a ghost behind that tree!"]],
+ [["Nora",0,0,24,18,"Wear a costume!","Quick, put on your mask!"],["Liam",0,0,50,33,"The ghost doesn't see us!","If we look like spirits, the ghost won't recognise us."]],
+ [["Ghost",0,0,80,14,"Oh no! A lantern!","Oh no, a glowing face! I'm getting out of here!"],["Nora",0,0,34,36,"Go away, ghost!","Go away, ghost, and don't come back!"]]];
+const NT=(p,b)=>NORA[p][b][BEG?5:6];
+let JS=null,JN=0,JTOT=0,JPAGE=0;
+function noraBank(){const P=$("phr");P.innerHTML="";const items=[];
+  NORA.forEach((pn,p)=>pn.forEach((x,b)=>{if(BEG&&b===0)return;if(!BEG&&(p<3)!==(JPAGE===0))return;items.push([p,b]);}));
+  shuffle(items).forEach(([p,b])=>{const d=document.createElement("div");d.textContent=NT(p,b);d.dataset.k=p+"_"+b;
+    if($("comic").querySelector('.cb[data-k="'+p+"_"+b+'"]').classList.contains("full"))d.classList.add("used");
+    d.onclick=()=>{if(d.classList.contains("used"))return;sPick();JS=d.dataset.k;P.querySelectorAll("div").forEach(x=>x.classList.remove("sel"));d.classList.add("sel");};P.appendChild(d);});}
+SETUP.kitchen=()=>{$("kitchenBg").src=img("kitchen13");const C=$("comic");C.innerHTML="";C.classList.toggle("cont",!BEG);JS=null;JN=0;JPAGE=0;JTOT=BEG?6:12;setDots(JTOT,0);
+  NORA.forEach((pn,p)=>{const d=document.createElement("div");d.className="pn";d.innerHTML='<div class="strip"></div><div class="im"><img src="'+img("nora"+(p+1))+'"><div class="n">'+(p+1)+'</div></div><svg></svg>';
+    const order=[0,1].sort((x,y)=>pn[x][3]-pn[y][3]);
+    order.forEach(b=>{const x=pn[b],c=document.createElement("div");c.className="cb";c.dataset.k=p+"_"+b;
+      c.innerHTML='<i>'+x[0]+'</i><span></span>';if(BEG&&b===0){c.classList.add("full");c.querySelector("span").textContent=NT(p,b);}else c.onclick=()=>noraDrop(c);d.querySelector(".strip").appendChild(c);});
+    C.appendChild(d);});
+  noraBank();show("kitchen");requestAnimationFrame(noraTails);
+  roundNext=()=>{const c=[...C.querySelectorAll(".cb:not(.full)")].find(c=>!BEG&&JPAGE===0?+c.dataset.k[0]<3:true);if(!c)return;JS=c.dataset.k;noraDrop(c);};}
+function noraTails(){$("comic").querySelectorAll(".pn").forEach((d,p)=>{const R=d.getBoundingClientRect(),I=d.querySelector(".im").getBoundingClientRect(),sv=d.querySelector("svg");if(!R.width)return;
+  sv.setAttribute("viewBox","0 0 "+R.width+" "+R.height);let h="";
+  d.querySelectorAll(".cb").forEach(c=>{const r=c.getBoundingClientRect(),x=NORA[p][+c.dataset.k.split("_")[1]];
+    const cx=r.left+r.width/2-R.left,cy=r.bottom-R.top-6,tx=I.left-R.left+I.width*x[3]/100,ty=I.top-R.top+I.height*x[4]/100,w=7;
+    h+='<polygon points="'+(cx-w)+","+cy+" "+(cx+w)+","+cy+" "+tx+","+ty+'" fill="#fff" stroke="#222" stroke-width="1.5"/>';});
+  sv.innerHTML=h;});}
+addEventListener("resize",()=>{if(STEPS[idx]&&STEPS[idx].id==="kitchen")noraTails();});
+function noraDrop(c){if(!JS||c.classList.contains("full"))return;const P=$("phr"),ch=P.querySelector('[data-k="'+JS+'"]');
+  if(c.dataset.k!==JS){sWrong();c.parentNode.classList.add("shake");later(()=>c.parentNode.classList.remove("shake"),400);return;}
+  sRight();const [p,b]=JS.split("_").map(Number);c.classList.add("full");c.querySelector("span").textContent=NT(p,b);c.style.animation="pop .35s";
+  if(ch){ch.classList.add("used");ch.classList.remove("sel");}JS=null;JN++;setDots(JTOT,JN);noraTails();
+  if(!BEG&&JPAGE===0&&JN===6){JPAGE=1;later(noraBank,500);}
+  if(JN>=JTOT)later(()=>modal("Turnip lanterns","",img("w_turnip"),B("Long ago, people in Ireland made <b>lanterns from turnips</b>. The scary faces keep the spirits away!","Long ago, people in Ireland and Scotland carved <b>lanterns from turnips</b> to scare away the spirits on Samhain night.<br><br>Now retell the story: <i>First… Then… After that… In the end…</i>"),()=>giveDigit(1)),900);}
+
+/* ---------- 9 ballroom: guising and costumes ---------- */
+const BALLTXT="In Scotland and Ireland, children wear {costume:costumes}. They go from house to house. They sing a song or tell a joke. They get sweets or fruit. This is <b>guising</b>. In America, it is <b>trick-or-treating</b>!";
+const COST=[["c_vampire","a vampire"],["c_witch","a witch"],["c_zombie","a zombie"],["c_skeleton","a skeleton"],["c_pirate","a pirate"],["c_superhero","a superhero"]];
+const MATCH=[["trick-or-treating","guising and souling: songs, jokes and prayers in exchange for treats"],["jack-o'-lanterns","carved turnips in Ireland and Scotland"],["costumes","hiding from the spirits at Samhain"],["bobbing for apples","apple games to guess who you would marry"],["Halloween bonfires","the bonfires of Samhain"],["the name “Halloween”","All Hallows' Eve"]];
+let MS=-1,MN=0;
+SETUP.ballroom=()=>{$("ballroomBg").src=img("ballroom13");show("ballroom");BEG?ballText():ballMatch();};
+function ballText(){const b=$("ballBox");$("ballTitle").textContent="The ballroom: guising 🎭";b.innerHTML='<div class="read panel">'+richText(BALLTXT)+'</div><button class="btn readgo" id="ballGo">Costumes ➜</button>';wireIcons(b);$("ballGo").onclick=ballCost;
+  roundNext=()=>{const s=b.querySelector(".ic:not(.open)");if(s){s.click();return;}ballCost();};}
+function ballCost(){const b=$("ballBox");$("ballTitle").textContent=B("I want to be a… 🎭","What would you dress up as? Why? 🎭");b.innerHTML='<div class="costrow" id="costrow"></div>'+(BEG?"":'<div class="discuss">“I\'d dress up as … because …”</div>');let n=0;setDots(BEG?6:0,0);
+  COST.forEach(([k,w])=>{const d=document.createElement("div");d.className="cc panel";d.innerHTML='<img src="'+img(k)+'"><div class="w">'+w+'</div>';
+    d.onclick=()=>{say(w);if(d.querySelector(".say"))return;sPick();d.insertAdjacentHTML("beforeend",'<div class="say">'+B("I want to be "+w+"!","I\'d dress up as "+w+"…")+'</div>');n++;if(BEG){setDots(6,n);if(n>=6)later(()=>giveDigit(2),700);}};$("costrow").appendChild(d);});
+  if(!BEG)markDone();roundNext=()=>{const d=[...$("costrow").children].find(c=>!c.querySelector(".say"));if(d)d.click();};}
+function ballMatch(){const b=$("ballBox");$("ballTitle").textContent="The ballroom: where do the traditions come from? 🎭";MS=-1;MN=0;setDots(6,0);
+  b.innerHTML='<div class="match panel" id="match"></div>';const M=$("match"),R=shuffle(MATCH.map((x,i)=>i));
+  for(let r=0;r<6;r++){const L=document.createElement("div");L.className="mi";L.dataset.i=r;L.innerHTML='<span class="k">'+(r+1)+'</span> '+MATCH[r][0];
+    L.onclick=()=>{if(L.classList.contains("ok"))return;sPick();MS=r;M.querySelectorAll(".mi").forEach(x=>x.classList.remove("sel"));L.classList.add("sel");};
+    const Rt=document.createElement("div");Rt.className="mi";Rt.dataset.j=R[r];Rt.textContent=MATCH[R[r]][1];Rt.onclick=()=>matchTry(Rt);M.appendChild(L);M.appendChild(Rt);}
+  roundNext=()=>{const i=[...Array(6).keys()].find(i=>!M.querySelector('[data-i="'+i+'"]').classList.contains("ok"));if(i===undefined)return;MS=i;matchTry(M.querySelector('[data-j="'+i+'"]'));};}
+function matchTry(Rt){if(MS<0||Rt.classList.contains("ok"))return;const M=$("match"),L=M.querySelector('[data-i="'+MS+'"]');
+  if(+Rt.dataset.j!==MS){sWrong();Rt.classList.add("shake");later(()=>Rt.classList.remove("shake"),400);return;}
+  sRight();L.classList.add("ok");L.classList.remove("sel");Rt.classList.add("ok");Rt.insertAdjacentHTML("afterbegin",'<span class="k">'+(MS+1)+'</span> ');MS=-1;MN++;setDots(6,MN);
+  if(MN>=6)later(()=>giveDigit(2,ballCost),700);}
+
+/* ---------- 10 cellar: myth or fact ---------- */
+const MF=BEG?[["m_pumpkin","The biggest pumpkin is 1,247 kg.",1,"Fact! It's a Guinness World Record."],["m_hooded","Samhain is a monster.",0,"Myth! Samhain is a festival."],
+ ["m_cat","Black cats are Halloween animals.",1,"Fact! In old stories, witches can be black cats."],["m_turnip","The first jack-o'-lanterns are turnips.",1,"Fact! People in Ireland make them from turnips."],
+ ["m_calendar","Halloween is in December.",0,"Myth! Halloween is on 31 October."],["m_apples","On Halloween, people play games with apples.",1,"Fact! It's a very old Halloween game."]]:
+ [["m_pumpkin","The heaviest pumpkin in the world weighs 1,247 kg.",1,"Fact! It was grown in the USA and set a Guinness World Record in 2023."],["m_hooded","Samhain was the name of a Celtic god of death.",0,"Myth! Samhain was the name of the festival, not a god."],
+ ["m_cat","In the Middle Ages, people believed witches could turn into black cats.",1,"Fact! That's one reason black cats are linked with Halloween."],["m_turnip","The first jack-o'-lanterns were made from pumpkins.",0,"Myth! In Ireland and Scotland people carved turnips. Pumpkins came later, in America."],
+ ["m_apples","In Ireland and Scotland, apple games were used to guess who you would marry.",1,"Fact! Young people played them on Halloween night."],["t_newspaper","The words “trick or treat” were first printed in the USA.",0,"Myth! They were first printed in Alberta, Canada, in 1927."]];
+let MI=0,mBusy=false;
+SETUP.cellar=()=>{$("cellarBg").src=img("cellar13");MI=0;mBusy=false;show("cellar");mfShow();roundNext=()=>{if(MI<MF.length&&!mBusy)mfAns(MF[MI][2]);};};
+function mfShow(){setDots(MF.length,MI);const q=MF[MI],s=$("mfSt");s.innerHTML='<img src="'+img(q[0])+'">'+q[1];s.classList.remove("pop","ok");void s.offsetWidth;s.classList.add("pop");$("mfWhy").classList.remove("show");}
+function mfAns(v){if(MI>=MF.length||mBusy)return;const b=$(v?"mfF":"mfM");
+  if(v!==MF[MI][2]){sWrong();b.classList.add("shake");$("mfTry").classList.add("show");later(()=>{b.classList.remove("shake");$("mfTry").classList.remove("show");},1500);return;}
+  mBusy=true;sRight();b.classList.add("hit");$("mfSt").classList.add("ok");const w=$("mfWhy");w.textContent=MF[MI][3];w.classList.add("show");MI++;setDots(MF.length,MI);
+  later(()=>{mBusy=false;b.classList.remove("hit");if(MI<MF.length)mfShow();else giveDigit(3);},2600);}
+$("tlCheck").onclick=tlCheck;$("mfM").onclick=()=>mfAns(0);$("mfF").onclick=()=>mfAns(1);
+
+/* ---------- 11 attic: timeline ---------- */
+const TL=BEG?[["t_celts","2,000 years ago","The Celts celebrate Samhain."],["t_church","700s","1 November is All Saints' Day."],["t_ship","1840s","Irish families go to America."],
+  ["t_newspaper","1927","“Trick or treat!” is in a newspaper."],["t_usa","Today","Americans love Halloween!"]]:
+ [["t_celts","2,000+ years ago","The Celts celebrated Samhain."],["t_church","700s","1 November became All Saints' Day; the night before — All Hallows' Eve."],["t_ship","1840s","Thousands of Irish families moved to America and brought Halloween with them."],
+  ["t_newspaper","1927","The words “trick or treat” were printed for the first time (Canada)."],["t_1950s","1950s","Trick-or-treating became popular all over the USA."],["t_usa","Today","Americans spend about $13.1 billion on Halloween."]];
+let TLD=false;
+SETUP.attic=()=>{$("atticBg").src=img("attic13");TLD=false;const L=$("tline"),C=$("tcards");L.innerHTML="";C.innerHTML="";setDots(0);
+  TL.forEach((x,i)=>L.insertAdjacentHTML("beforeend",'<div class="tslot" data-s="'+i+'"><div class="n">'+(i+1)+'</div></div>'));
+  shuffle(TL.map((x,i)=>i)).forEach(i=>{const [k,y,t]=TL[i],d=document.createElement("div");d.className="tcard panel";d.dataset.i=i;
+    d.innerHTML='<img src="'+(img(k)||img("t_usa"))+'"><div class="y" style="visibility:hidden">'+y+'</div><span>'+t+'</span>';d.onclick=()=>tlPick(d);C.appendChild(d);});
+  $("tlCheck").style.display="none";show("attic");
+  roundNext=()=>{const C=$("tcards");if(C.children.length===0){tlCheck();return;}
+    const free=[...$("tline").children].find(s=>!s.querySelector(".tcard"));const want=+free.dataset.s;const d=[...C.children].find(x=>+x.dataset.i===want)||C.children[0];tlPick(d);};};
+function tlPick(d){const L=$("tline"),C=$("tcards");
+  if(d.parentNode===C){const free=[...L.children].find(s=>!s.querySelector(".tcard"));if(!free)return;sPick();free.appendChild(d);}
+  else if(!d.classList.contains("ok")){sPick();C.appendChild(d);}
+  $("tlCheck").style.display=C.children.length?"none":"";}
+function tlCheck(){const L=$("tline"),C=$("tcards");if(C.children.length)return;TLD=true;let bad=0;
+  document.querySelectorAll("#attic .tcard .y").forEach(y=>y.style.visibility="visible");
+  [...L.children].forEach(s=>{const d=s.querySelector(".tcard");if(+d.dataset.i===+s.dataset.s){d.classList.add("ok");}else{bad++;d.classList.add("shake");}});
+  $("tlCheck").style.display="none";
+  if(!bad){sRight();later(()=>giveDigit(4),800);return;}
+  sWrong();$("tlTry").textContent="Look at the dates and try again!";$("tlTry").classList.add("show");
+  later(()=>{[...L.children].forEach(s=>{const d=s.querySelector(".tcard");if(d&&!d.classList.contains("ok")){d.classList.remove("shake");C.appendChild(d);}});$("tlTry").classList.remove("show");},1400);}
+
+/* ---------- code room: one question for every missing digit ---------- */
+const CQ=BEG?[["Samhain is…",["a festival","a city","a cake"]],["In Ireland, the first lanterns are from…",["turnips","apples","bananas"]],["In Scotland, children sing and get…",["sweets","books","shoes"]],
+ ["Halloween is on…",["31 October","1 January","25 December"]],["At Samhain, people make big…",["bonfires","pizzas","snowmen"]],["The first “Trick or treat!” in a newspaper is from…",["Canada","Italy","Japan"]]]:
+ [["Samhain marked…",["the end of the harvest","the start of spring","the New Year"]],["The first jack-o'-lanterns in Ireland were made from…",["turnips","apples","candles"]],["In guising, children…",["sang songs or told jokes","cooked dinner","planted trees"]],
+  ["“Halloween” comes from…",["All Hallows' Eve","Hello Evening","Hall of Eve"]],["Who brought Halloween to America?",["Irish families","the Romans","the Vikings"]],["How much do Americans spend on Halloween?",["about $13.1 billion","about $13 million","about $1,300"]]];
+let CQL=[],CQI=0;
+SETUP.coderoom=()=>{$("codeBg").src=img("coderoom13");CQL=shuffle(CQ);show("coderoom");cqShow();roundNext=()=>{const b=$("cq").querySelector("button[data-ok='1']");if(b)b.click();else{const g=$("cqGo");if(g)g.click();}};};
+function cqShow(){const miss=ST.dig.map((x,i)=>x?-1:i).filter(i=>i>=0),C=$("cq");setDots(0);
+  if(!miss.length){C.innerHTML='<div class="q">You have all the digits! 🗝</div><button class="btn green pulse" id="cqGo">🚪 Go to the door</button>';$("cqGo").onclick=()=>go(sIdx("door"));markDone();return;}
+  const [q,opts]=CQL[CQI%CQL.length];
+  C.innerHTML='<div class="left">Missing digits: '+miss.length+'</div><div class="q">'+q+'</div><div class="opts" id="cqo"></div>';
+  shuffle(opts.map((o,i)=>i)).forEach(i=>{const b=document.createElement("button");b.textContent=opts[i];b.dataset.ok=i===0?"1":"0";
+    b.onclick=()=>{if(i!==0){sWrong();b.classList.add("shake");later(()=>b.classList.remove("shake"),400);return;}CQI++;giveDigit(miss[0],cqShow);};$("cqo").appendChild(b);});}
+$("codeBtn").onclick=()=>{if(!STEPS[idx].hidden)codeFrom=idx;ST.slammed=true;go(sIdx("coderoom"));};
+
+/* ---------- 12 door: code lock ---------- */
+let CODEIN=[];
+SETUP.door=()=>{$("doorBg").src=img("door13");CODEIN=[];lockDraw();$("lockMsg").textContent=ST.dig.every(x=>x)?"Enter the code":"Some digits are missing! 🗝";
+  const P=$("lockPad");P.innerHTML="";["1","2","3","4","5","6","7","8","9","⌫","0","✓"].forEach(c=>{const b=document.createElement("button");b.textContent=c;b.onclick=()=>lockKey(c);P.appendChild(b);});
+  show("door");roundNext=()=>{if(CODEIN.length<5)lockKey(String(ST.code[CODEIN.length]));else lockKey("✓");};};
+function lockDraw(){$("lockDisp").innerHTML=[0,1,2,3,4].map(i=>'<span>'+(CODEIN[i]!==undefined?CODEIN[i]:"")+'</span>').join("");}
+function lockKey(c){if(c==="⌫"){CODEIN.pop();sPick();lockDraw();return;}
+  if(c==="✓"){if(CODEIN.length<5){sWrong();return;}
+    if(CODEIN.join("")===ST.code.join("")){sRight();$("lockMsg").textContent="🔓 Click!";ST.escaped=true;later(()=>go(sIdx("escape")),900);}
+    else{sWrong();$("lock").classList.add("shake");$("lockMsg").textContent="Wrong code! Try again.";later(()=>{$("lock").classList.remove("shake");CODEIN=[];lockDraw();},700);}return;}
+  if(CODEIN.length>=5)return;CODEIN.push(+c);sPick();lockDraw();if(CODEIN.length===5)later(()=>lockKey("✓"),300);}
+
+/* ---------- 13 escape + certificate ---------- */
+SETUP.escape=()=>{$("escBg1").src=img("door13");$("escBg2").src=img("outside13");$("escBg2").style.opacity=0;$("escTitle").style.display="none";$("cert").style.display="none";show("escape");
+  later(()=>{sCreak();$("escBg2").style.opacity=1;},300);later(()=>{$("escTitle").style.display="block";$("escTitle").classList.add("pop");sCheer();confetti();later(confetti,900);},1700);
+  later(()=>{$("escTitle").style.display="none";if(!ST.name)namePopup();else showCert();},4200);markDone();};
+function namePopup(){$("namePop").classList.add("show");later(()=>$("nameIn").focus(),100);}
+function nameDone(){$("namePop").classList.remove("show");ST.name=$("nameIn").value.trim();showCert();}
+const CERT=BEG?{t1:"This certificate is for",lines:["✓  All the tasks — done!","✓  The secret code — found!","✓  Samhain Mansion — escaped!"]}
+ :{t1:"This is to certify that",lines:["completed all the challenges, cracked the secret code","and escaped from Samhain Mansion on Halloween night."]};
+function drawCert(cb){const c=$("cv"),W=1600,H=900;c.width=W;c.height=H;const x=c.getContext("2d");const bg=Object.assign(new Image(),{crossOrigin:'anonymous'}),key=Object.assign(new Image(),{crossOrigin:'anonymous'});let n=0;
+  const go2=()=>{if(++n<2)return;
+  x.drawImage(bg,0,0,W,H);x.fillStyle="rgba(0,0,0,.35)";x.fillRect(0,0,W,H);
+  x.shadowColor="rgba(0,0,0,.6)";x.shadowBlur=40;x.fillStyle="#f8eed8";x.fillRect(230,70,1140,760);x.shadowBlur=0;
+  x.strokeStyle="#b8861a";x.lineWidth=10;x.strokeRect(255,95,1090,710);x.lineWidth=3;x.strokeRect(275,115,1050,670);
+  x.textAlign="center";x.fillStyle="#8a3c08";x.font="800 78px Cinzel, Georgia, serif";x.fillText("CERTIFICATE",W/2,215);
+  x.fillStyle="#a4521a";x.font="600 24px Lora, Georgia, serif";x.fillText("·  SAMHAIN MANSION  ·  ESCAPE ROOM  ·",W/2,258);
+  x.fillStyle="#2a1a10";x.font="italic 500 32px Lora, Georgia, serif";x.fillText(CERT.t1,W/2,320);
+  const nm=ST.name||"Escape Artist";let fs=86;do{x.font="800 "+fs+"px Cinzel, Georgia, serif";fs-=4;}while(x.measureText(nm).width>900&&fs>40);
+  x.fillStyle="#4a2508";x.fillText(nm,W/2,415);x.strokeStyle="#b8861a";x.lineWidth=2;x.beginPath();x.moveTo(470,440);x.lineTo(1130,440);x.stroke();
+  x.fillStyle="#2a1a10";x.font=(BEG?"600 34px":"500 31px")+" Lora, Georgia, serif";CERT.lines.forEach((l,i)=>x.fillText(l,W/2,495+i*(BEG?50:46)));
+  const cy=BEG?680:650;x.font="700 24px Lora, Georgia, serif";x.fillStyle="#8a3c08";x.fillText("SECRET CODE",W/2,cy-36);
+  ST.code.forEach((d,i)=>{const bx=W/2-150+i*62;x.fillStyle="#fff8e8";x.fillRect(bx,cy-22,50,60);x.strokeStyle="#6e3510";x.lineWidth=3;x.strokeRect(bx,cy-22,50,60);
+    x.fillStyle="#4a2508";x.font="800 40px Cinzel, Georgia, serif";x.fillText(d,bx+25,cy+22);});
+  x.save();x.translate(380,700);x.rotate(-.25);x.drawImage(key,-130,-45,260,90);x.restore();
+  x.beginPath();x.arc(1215,690,62,0,7);x.fillStyle="#9b1d1d";x.fill();x.lineWidth=5;x.strokeStyle="#6e1010";x.stroke();
+  x.fillStyle="#ffe9c9";x.font="800 22px Cinzel, Georgia, serif";x.fillText("ESCAPED",1215,684);x.font="700 15px Lora, Georgia, serif";x.fillText("HALLOWEEN",1215,710);
+  cb(c);};
+  bg.onload=go2;key.onload=go2;bg.src=img("outside13");key.src=img("key_full");}
+function showCert(){const c=$("cert");c.style.display="flex";(document.fonts?document.fonts.ready:Promise.resolve()).then(()=>drawCert(cv=>{$("certImg").src=cv.toDataURL("image/png");c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");sCheer();}));}
+$("nameOk").onclick=nameDone;$("nameIn").addEventListener("keydown",e=>{if(e.key==="Enter")nameDone();});$("nameEdit").onclick=namePopup;
+$("saveBtn").onclick=()=>drawCert(cv=>{const a=document.createElement("a");a.href=cv.toDataURL("image/png");a.download="samhain_mansion_certificate.png";a.click();});
+
+/* ---------- 14 bucket list ---------- */
+const BUCK=[["b13_carve","carve a pumpkin"],["b13_trick","go trick-or-treating"],["b13_costume","try on a costume"],["b13_film","watch a horror film"],["b13_decorate","decorate my room"],
+ ["b13_party","go to a Halloween party"],["b13_pie","bake a pumpkin pie"],["b13_apples","bob for apples"],["b13_stories","tell ghost stories"],["b13_haunted","visit a haunted house"]];
+let bl=[];
+SETUP.bucket=()=>{$("bucketBg").src=img("ballroom13");const g=$("bcards");g.innerHTML="";
+  BUCK.forEach(([k,t])=>{const d=document.createElement("div");d.className="bc"+(bl.some(x=>x.k===k)?" used":"");d.innerHTML='<img src="'+img(k)+'"><span>'+t+'</span>';
+    d.onclick=()=>{if(bl.some(x=>x.k===k))return;bl.push({k,t});sPick();drawBucket();d.classList.add("used");};g.appendChild(d);});
+  drawBucket();show("bucket");markDone();};
+function drawBucket(){const l=$("blist");l.innerHTML="";
+  bl.forEach((it,i)=>{const d=document.createElement("div");d.className="bitem";d.innerHTML=(it.k?'<img src="'+img(it.k)+'">':"")+'<span></span>';d.querySelector("span").textContent=it.t;
+    d.onclick=()=>{bl.splice(i,1);sPick();drawBucket();[...$("bcards").children].forEach((c,j)=>c.classList.toggle("used",bl.some(x=>x.k===BUCK[j][0])));};l.appendChild(d);});}
+function addOwn(){const v=$("bIn").value.trim();if(!v)return;bl.push({k:null,t:v});$("bIn").value="";sPick();drawBucket();}
+$("bAdd").onclick=addOwn;$("bIn").addEventListener("keydown",e=>{if(e.key==="Enter")addOwn();});
+
+/* ---------- 15 board game ---------- */
+const BOARD_SQ=[[190,830],[382,768],[449,717],[537,690],[620,662],[632,601],[582,551],[572,494],[645,462],[738,451],[830,462],[921,457],[986,418],[1023,368],[1111,345],[1201,353],[1289,365],[1366,343],[1393,292],[1455,266],[1498,220]].map(([x,y])=>[x/16.72,y/9.41]);
+const PAWNS=["tk_cat","tk_raven","tk_pumpkin","tk_candle","tk_key"];
+const BOARD_SPECIAL={4:{t:"⏩",txt:"+2",move:2},8:{t:"⭐",txt:"Make a scary face! 😱"},12:{t:"⏪",txt:"−2",move:-2},16:{t:"⭐",txt:"Say BOO like a ghost! 👻"}};
+const BOARD_W=WORDS;  // beginners: only the target words of the lesson
+const BOARD_Q=["How do people celebrate Halloween in your country?","What do you like about Halloween?","What don't you like about Halloween?","What costume would you like to wear this year? Why?",
+ "What was your best costume ever?","What's your favourite Halloween sweet?","Have you ever carved a pumpkin?","What scares you the most?","Do you believe in ghosts? Why / why not?",
+ "If you were a Halloween monster, which one would you be? Why?","Describe a perfect Halloween party.","What would you do if you met a ghost?","What Halloween decorations do you like?","Tell a short scary story in three sentences."];
+let bd=null;
+SETUP.board=()=>{$("boardBg").src=img("board13");
+  const words=shuffle(BOARD_W),qs=shuffle(BOARD_Q).concat(shuffle(BOARD_Q));let wi=0,qi=0;
+  bd={players:[],turn:0,busy:false,started:false,over:false,sq:BOARD_SQ.map((p,i)=>i===0?{t:"start"}:i===BOARD_SQ.length-1?{t:"end"}:BOARD_SPECIAL[i]?Object.assign({},BOARD_SPECIAL[i],{t:"sp"}):BEG?{t:"w",w:words[wi++%words.length]}:{t:"q",q:qs[qi++]})};
+  const S=$("boardStage");S.querySelectorAll(".bsq,.bpawn").forEach(e=>e.remove());
+  bd.sq.forEach((q,i)=>{const d=document.createElement("div");d.className="bsq"+(q.t==="sp"?" sp":"")+(q.t==="end"?" end":"")+(q.t==="start"?" start":"");
+    d.style.left=BOARD_SQ[i][0]+"%";d.style.top=BOARD_SQ[i][1]+"%";
+    d.innerHTML=q.t==="w"?'<img src="'+img(q.w[0])+'">':q.t==="q"?'<span>?</span>':q.t==="sp"?'<span>'+q.t+'</span>':q.t==="start"?'<span>GO</span>':'<span>🏁</span>';
+    if(q.t==="sp")d.querySelector("span").textContent=BOARD_SPECIAL[i].t;d.dataset.n=i;S.appendChild(d);});
+  $("boardPick").style.display="flex";$("boardDice").style.display="none";$("boardCard").classList.remove("show");
+  const pk=$("boardPawns");pk.innerHTML="";
+  PAWNS.forEach((k,j)=>{const w=document.createElement("div");w.className="bp-col";w.innerHTML='<div class="bp-opt"><img src="'+img(k)+'"></div><input class="bp-name" maxlength="12" placeholder="Name">';
+    const b=w.firstChild,inp=w.lastChild;
+    b.onclick=()=>{const i=bd.players.findIndex(p=>p.k===k);if(i>=0)bd.players.splice(i,1);else bd.players.push({k,pos:0,inp});
+      sPick();[...pk.children].forEach((c,jj)=>c.classList.toggle("on",bd.players.some(p=>p.k===PAWNS[jj])));$("boardGo").disabled=!bd.players.length;if(bd.players.some(p=>p.k===k))inp.focus();};
+    pk.appendChild(w);});
+  $("boardGo").disabled=true;show("board");
+  roundNext=()=>{if(!bd.started){if(!bd.players.length)bd.players.push({k:PAWNS[0],pos:0});boardStart();}else if($("boardCard").classList.contains("show"))$("boardCardOk").click();else if(!bd.busy)boardRoll();};};
+function boardStart(){bd.started=true;$("boardPick").style.display="none";$("boardDice").style.display="flex";
+  bd.players.forEach((p,i)=>{p.name=(p.inp&&p.inp.value.trim())||"";const e=document.createElement("div");e.className="bpawn";e.id="bpawn"+i;
+    e.innerHTML='<img src="'+img(p.k)+'">'+(p.name?'<span></span>':'');if(p.name)e.querySelector("span").textContent=p.name;$("boardStage").appendChild(e);});
+  boardPlaceAll();boardTurnShow();}
+function boardPlaceAll(){bd.players.forEach((_,i)=>boardPlace(i));}
+function boardPlace(i){const p=bd.players[i],e=$("bpawn"+i),q=BOARD_SQ[p.pos];
+  const same=bd.players.map((x,j)=>j).filter(j=>bd.players[j].pos===p.pos),k=same.indexOf(i),n=same.length;
+  const off=n>1?(k-(n-1)/2)*2.4:0,dy=n>2&&k%2?4:0;e.style.left=(q[0]+off)+"%";e.style.top=(q[1]+dy)+"%";e.style.zIndex=5+k+(dy?10:0);}
+function boardTurnShow(){const p=bd.players[bd.turn];$("boardWho").src=img(p.k);$("boardWhoName").textContent=p.name||"";bd.players.forEach((_,i)=>$("bpawn"+i).classList.toggle("cur",i===bd.turn));}
+function boardRoll(){if(bd.busy||bd.over)return;bd.busy=true;const face=$("diceFace"),F="⚀⚁⚂⚃⚄⚅";
+  clearInterval(diceSpin);diceSpin=setInterval(()=>{face.textContent=F[rnd(6)];tone(500+Math.random()*300,.04,"square",.05);},80);
+  later(()=>{clearInterval(diceSpin);diceSpin=null;const n=1+rnd(6);face.textContent=F[n-1];boardMove(n);},900);}
+function boardMove(n){const p=bd.players[bd.turn],last=BOARD_SQ.length-1;let k=0;
+  const stepFn=()=>{if(k>=Math.abs(n)||p.pos===(n>0?last:0)){boardLand();return;}p.pos+=n>0?1:-1;k++;sPick();boardPlaceAll();later(stepFn,320);};stepFn();}
+function boardToast(t){const e=$("boardToast");e.textContent=t;e.style.display="block";later(()=>e.style.display="none",900);}
+function boardLand(){const p=bd.players[bd.turn],q=bd.sq[p.pos];
+  if(q.t==="end"){sCheer();confetti();bd.over=true;boardCard(img(p.k),"🏁 "+(p.name?p.name+" wins!":"Winner!")+" 🎉");later(markDone,600);return;}
+  if(q.t==="sp"&&q.move){boardToast(q.txt);later(()=>boardMove(q.move),900);return;}
+  if(q.t==="sp"){boardCard(null,q.txt);return;}
+  if(q.t==="w"){boardCard(img(q.w[0]),q.w[0].startsWith("c_")?"Who is it?":"What is it?");return;}
+  if(q.t==="q"){boardCard(null,q.q);return;}
+  boardNext();}
+function boardCard(src,title){$("boardCardImg").style.display=src?"":"none";if(src)$("boardCardImg").src=src;$("boardCardT").textContent=title;$("boardCard").classList.add("show");sPick();}
+$("boardCardOk").onclick=()=>{$("boardCard").classList.remove("show");if(bd.over)return;boardNext();};
+function boardNext(){bd.busy=false;bd.turn=(bd.turn+1)%bd.players.length;boardTurnShow();}
+$("boardGo").onclick=boardStart;$("diceBtn").onclick=boardRoll;
+
+/* ---------- finish ---------- */
+SETUP.finish=()=>{$("finishBg").src=img("outside13");show("finish");sCheer();confetti();later(confetti,1000);markDone();};
+
+/* ---------- nav / plan / music / start ---------- */
+document.querySelectorAll(".xbtn").forEach(b=>b.onclick=()=>{sPick();go(b.dataset.go==="finish"?sIdx("finish"):realNext());});
+$("navNext").onclick=()=>{if($("modal").classList.contains("show")){$("mOk").click();return;}if(!done&&roundNext){roundNext();return;}if(STEPS[idx].id==="finish")return;
+  if(STEPS[idx].hidden)return go(sIdx("door"));go(realNext());};
+$("navFwd").onclick=()=>{if(STEPS[idx].hidden)return go(sIdx("door"));go(realNext());};
+$("navBack").onclick=()=>{if(STEPS[idx].hidden)return go(codeFrom);go(idx-1);};
+$("planBtn").onclick=()=>{const W=Math.min(1100,screen.availWidth-80),H=Math.min(900,screen.availHeight-80);
+  const w=window.open("","wowspeak_plan","popup=yes,width="+W+",height="+H+",left="+(screen.availWidth-W-20)+",top=30,resizable=yes,scrollbars=yes");
+  if(!w){alert("Please allow pop-ups to open the lesson plan.");return;}w.document.write(PLAN_HTML);w.document.close();};
+$("musicBtn").onclick=function(){musicOn=!musicOn;this.textContent="🎵 "+(musicOn?"ON":"OFF");musicOn?playMusic():$("music").pause();};
+$("musicVol").oninput=function(){musicVol=this.value/100;$("music").volume=musicVol;};
+$("music").src=MUSIC;$("startBg").src=img("mansion13");
+$("startBtn").onclick=()=>{actx();playMusic();newGame();bl=[];$("nameIn").value="";$("topbar").style.display="flex";$("topbar").classList.remove("pre");$("navbar").style.display="flex";go(0);};
+</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classroom — журнал</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1A1B2E; --mute:#7A7F92; --faint:#A6AAB9; --line:#E8E7EE; --bg:#F7F6F9;
+  --course:#5C9B7A; --course-d:#3F7458; --course-soft:#EAF4EE;
+  --ok:#0D6155; --ok-soft:#E2F1EE; --warn:#A9660B; --warn-soft:#FBF0DE;
+  --bad:#B3261E; --bad-soft:#FBEBEA; --violet:#6B5AD6; --violet-soft:#F1EFFC;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:'Golos Text',system-ui,sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.5}
+button{font:inherit;color:inherit;cursor:pointer}
+svg{display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 22px 70px}
+h1{font-size:25px;font-weight:700;letter-spacing:-.025em;margin:0 0 3px}
+.lead{color:var(--mute);font-size:14px;margin:0 0 18px}
+
+.tools{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.inp{border:1px solid var(--line);border-radius:11px;background:#fff;padding:9px 13px;font:inherit;min-width:210px}
+select.inp{min-width:auto;cursor:pointer}
+.chip{border:1px solid var(--line);background:#fff;border-radius:11px;padding:9px 13px;font-size:14px;display:flex;align-items:center;gap:8px}
+.chip.on{background:var(--warn-soft);border-color:transparent;color:var(--warn);font-weight:600}
+.chip b{font-size:12px;font-weight:600;opacity:.7}
+.sp{flex:1}
+
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:860px}
+th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:12px;color:var(--mute);font-weight:600;background:#FBFAFD;position:sticky;top:0;z-index:2}
+tbody tr:hover{background:#FBFAFD}
+.stick{position:sticky;left:0;background:#fff;z-index:1;border-right:1px solid var(--line)}
+th.stick{background:#FBFAFD;z-index:3}
+tbody tr:hover .stick{background:#FBFAFD}
+.who{display:flex;align-items:center;gap:10px;min-width:190px}
+.ava{width:30px;height:30px;border-radius:9px;background:var(--violet-soft);color:var(--violet);
+  display:grid;place-items:center;font-size:12px;font-weight:700;flex:0 0 auto}
+.who i{font-style:normal;font-size:12px;color:var(--faint);display:block;font-weight:400}
+.who b{font-weight:600}
+.mini{font-size:12px;color:var(--faint)}
+
+/* ячейка статуса */
+.cell{display:inline-flex;align-items:center;justify-content:center;min-width:46px;height:28px;
+  border-radius:9px;font-size:13px;font-weight:600}
+.cell.todo{background:var(--bg);color:var(--mute)}
+.cell.wait{background:var(--warn-soft);color:var(--warn)}
+.cell.ok{background:var(--ok-soft);color:var(--ok)}
+.cell.redo{background:var(--violet-soft);color:var(--violet)}
+.colh{display:flex;flex-direction:column;gap:2px;max-width:120px}
+.colh b{font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:13px;color:var(--mute)}
+.legend span{display:flex;align-items:center;gap:7px}
+
+/* дневник */
+.diary{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.d{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:7px}
+.d h4{margin:0;font-size:15px;font-weight:600}
+.d .row{display:flex;align-items:center;gap:9px;justify-content:space-between}
+.back{border:0;background:transparent;color:var(--mute);padding:0;margin-bottom:8px;font-size:14px}
+
+.switch{position:fixed;right:18px;bottom:18px;background:var(--ink);color:#fff;border-radius:14px;padding:6px;
+  display:flex;gap:4px;box-shadow:0 10px 30px rgba(26,27,46,.3);z-index:30}
+.switch button{background:transparent;border:0;color:#fff;opacity:.55;padding:7px 12px;border-radius:10px;font-size:13px}
+.switch button.on{background:rgba(255,255,255,.18);opacity:1;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="wrap" id="app"></div>
+
+<div class="switch">
+  <button class="on" onclick="go('journal',this)">журнал</button>
+  <button onclick="go('diary',this)">дневник ученика</button>
+</div>
+
+<script>
+const MAT=[
+  {c:'SM0', t:'U1 · Homework 1'},
+  {c:'SM0', t:'U1 · Homework 2'},
+  {c:'SM0', t:'U1 · Unit test'},
+  {c:'SM0', t:'U2 · Homework 1'},
+  {c:'SM0', t:'U2 · Homework 2'},
+  {c:'WD1', t:'М1 · Homework 12'},
+];
+// '' не задано · todo задано не сделано · wait ждёт проверки · число оценка · redo переделка
+const ST=[
+  {n:'Аня Королёва',   g:'8D', t:'Юлия Любивая',   p:'Super Minds 0', s:[100,84,'wait',92,'todo','']},
+  {n:'Миша Петров',    g:'8D', t:'Юлия Любивая',   p:'Super Minds 0', s:[100,'redo','todo',78,'todo','']},
+  {n:'Соня Литвин',    g:'8D', t:'Юлия Любивая',   p:'Super Minds 0', s:[88,91,100,'wait','todo','']},
+  {n:'Гриша Резько',   g:'5A', t:'Мария Ковалёва', p:'Wow Dragon 1',  s:['','','','','',72]},
+  {n:'Лев Филимонов',  g:'5A', t:'Мария Ковалёва', p:'Wow Dragon 1',  s:['','','','','','wait']},
+  {n:'Даша Кислова',   g:'5A', t:'Мария Ковалёва', p:'Wow Dragon 1',  s:['','','','','','todo']},
+];
+let view='journal', q='', prog='', teach='', onlyWait=false, who=0;
+
+function cell(v){
+  if(v==='')      return '';                       // не задавали — пусто
+  if(v==='todo')  return `<span class="cell todo">не сдал</span>`;
+  if(v==='wait')  return `<span class="cell wait">проверить</span>`;
+  if(v==='redo')  return `<span class="cell redo">переделка</span>`;
+  return `<span class="cell ok">${v}%</span>`;
+}
+function avg(s){
+  const n=s.filter(x=>typeof x==='number');
+  return n.length ? Math.round(n.reduce((a,b)=>a+b,0)/n.length) : null;
+}
+
+function journal(){
+  const waitAll = ST.reduce((a,r)=>a+r.s.filter(x=>x==='wait').length,0);
+  let rows = ST.filter(r=>
+    (!q || (r.n+' '+r.g).toLowerCase().includes(q.toLowerCase())) &&
+    (!prog || r.p===prog) && (!teach || r.t===teach) &&
+    (!onlyWait || r.s.some(x=>x==='wait')));
+  const progs=[...new Set(ST.map(r=>r.p))], teachs=[...new Set(ST.map(r=>r.t))];
+  return `
+  <h1>Журнал</h1>
+  <p class="lead">Кто что сдал, что ждёт проверки и с каким результатом.</p>
+  <div class="tools">
+    <input class="inp" placeholder="Поиск по ученику или группе" value="${q}" oninput="q=this.value;render()">
+    <select class="inp" onchange="prog=this.value;render()">
+      <option value="">Все программы</option>
+      ${progs.map(p=>`<option ${prog===p?'selected':''}>${p}</option>`).join('')}
+    </select>
+    <select class="inp" onchange="teach=this.value;render()">
+      <option value="">Все преподаватели</option>
+      ${teachs.map(t=>`<option ${teach===t?'selected':''}>${t}</option>`).join('')}
+    </select>
+    <button class="chip ${onlyWait?'on':''}" onclick="onlyWait=!onlyWait;render()">Ждут проверки <b>${waitAll}</b></button>
+    <span class="sp"></span>
+    <span class="mini">${rows.length} из ${ST.length}</span>
+  </div>
+
+  <div class="panel"><div class="scroll"><table>
+    <thead><tr>
+      <th class="stick">Ученик</th>
+      <th>Средний</th>
+      ${MAT.map(m=>`<th><span class="colh"><span class="mini">${m.c}</span><b>${m.t}</b></span></th>`).join('')}
+    </tr></thead>
+    <tbody>
+      ${rows.map((r,i)=>{
+        const a=avg(r.s);
+        return `<tr>
+          <td class="stick"><span class="who"><span class="ava">${r.n.split(' ').map(x=>x[0]).join('')}</span>
+            <span><b onclick="openDiary(${ST.indexOf(r)})" style="cursor:pointer">${r.n}</b>
+            <i>${r.g} · ${r.t}</i></span></span></td>
+          <td>${a===null?'':`<span class="cell ok">${a}%</span>`}</td>
+          ${r.s.map(v=>`<td>${cell(v)}</td>`).join('')}
+        </tr>`;
+      }).join('') || `<tr><td colspan="9" style="color:var(--mute);padding:22px">Никого не нашлось.</td></tr>`}
+    </tbody>
+  </table></div></div>
+
+  <div class="legend">
+    <span><span class="cell ok">92%</span> проверено</span>
+    <span><span class="cell wait">проверить</span> ждёт учителя</span>
+    <span><span class="cell redo">переделка</span> отправлено заново</span>
+    <span><span class="cell todo">не сдал</span> задано, но не сделано</span>
+  </div>`;
+}
+
+function openDiary(i){ who=i; view='diary'; render(); }
+
+function diary(){
+  const r=ST[who];
+  return `
+  <button class="back" onclick="view='journal';render()">← Журнал</button>
+  <h1>${r.n}</h1>
+  <p class="lead">${r.g} · ${r.t} · ${r.p}</p>
+  <div class="tools">
+    <span class="chip">Средний результат <b>${avg(r.s)??'—'}%</b></span>
+    <span class="chip">Сдано <b>${r.s.filter(x=>typeof x==='number').length}</b></span>
+    <span class="chip">Ждут проверки <b>${r.s.filter(x=>x==='wait').length}</b></span>
+    <span class="sp"></span>
+    <button class="chip">Задать материал</button>
+  </div>
+  <div class="diary">
+    ${MAT.map((m,i)=>{
+      const v=r.s[i];
+      if(v==='') return '';
+      return `<div class="d">
+        <span class="mini">${m.c}</span>
+        <h4>${m.t}</h4>
+        <div class="row">${cell(v)||'<span class="mini">не задавали</span>'}
+          <button class="chip" style="padding:5px 11px;font-size:13px">${v==='wait'?'Проверить':'Открыть'}</button></div>
+      </div>`;
+    }).join('') || '<p class="lead">Материалов пока не задавали.</p>'}
+  </div>`;
+}
+
+function go(v, el){
+  view=v; if(el){ el.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on')); el.classList.add('on'); }
+  render();
+}
+function render(){ document.getElementById('app').innerHTML = view==='journal'?journal():diary(); }
+render();
+</script>
+</body>
+</html>

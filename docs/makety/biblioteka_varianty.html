@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Библиотека: четыре варианта</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{ --brand:#5B4BE0; --brand-d:#3A2FA8; --brand-soft:#F0EEFD; --ink:#1A1B2E; --mut:#7A7F92; --faint:#A6AAB9;
+  --line:#E8E7EE; --bg:#F7F6F9; --ok:#0D6155; --ok-soft:#E2F1EE; --warn:#A9660B; --warn-soft:#FBF0DE; }
+*{ box-sizing:border-box }
+body{ margin:0; font-family:'Golos Text',-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--ink); background:var(--bg); font-size:15px; line-height:1.45 }
+button{ font-family:inherit; cursor:pointer }
+input{ font-family:inherit; font-size:14.5px; padding:9px 12px; border:1px solid var(--line); border-radius:12px; background:#fff }
+.panel{ position:sticky; top:0; z-index:50; background:#1D1A29; color:#fff; display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; padding:8px 12px; font-size:13px }
+.panel button{ color:#fff; opacity:.6; padding:6px 11px; border-radius:8px; border:0; background:none; font-size:13px }
+.panel button.on{ background:rgba(255,255,255,.16); opacity:1; font-weight:700 }
+.panel .note{ opacity:.65; font-size:12px; flex-basis:100% }
+.app{ display:grid; grid-template-columns:220px 1fr; min-height:calc(100vh - 62px) }
+.side{ background:#fff; border-right:1px solid var(--line) }
+.logo{ font-weight:700; height:58px; display:flex; align-items:center; gap:10px; padding:0 18px }
+.logo:before{ content:"C"; width:25px; height:25px; border-radius:8px; background:var(--brand); color:#fff; font-size:12px; display:grid; place-items:center }
+.tab{ padding:9px 12px; margin:1px 10px; border-radius:10px; color:#3d4052; font-size:14.5px }
+.tab.on{ background:var(--brand-soft); color:var(--brand-d); font-weight:600 }
+.page{ padding:24px 28px 60px; min-width:0 }
+h2{ margin:0 0 4px; font-size:24px } .lead{ color:var(--mut); font-size:14px; margin:0 0 16px }
+.bar{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:16px }
+.bar input{ flex:1 1 300px; max-width:420px }
+.seg{ display:inline-flex; background:#EFEEF3; border-radius:11px; padding:3px }
+.seg button{ border:0; background:none; padding:6px 12px; border-radius:9px; font-size:13.5px; color:var(--mut) }
+.seg button.on{ background:#fff; color:var(--ink); font-weight:600; box-shadow:0 1px 3px rgba(0,0,0,.08) }
+.crumbs{ display:flex; gap:8px; align-items:center; font-size:14px; color:var(--mut); margin-bottom:10px; min-height:22px }
+.crumbs a{ color:var(--brand-d); cursor:pointer } .crumbs b{ color:var(--ink) }
+.card{ background:#fff; border:1px solid var(--line); border-radius:16px }
+.pill{ display:inline-block; border-radius:99px; padding:2px 9px; font-size:12px; font-weight:600; white-space:nowrap }
+.pill.g{ background:var(--ok-soft); color:var(--ok) } .pill.y{ background:var(--warn-soft); color:var(--warn) } .pill.n{ background:#EFEEF3; color:var(--mut) }
+.muted{ color:var(--mut) } .small{ font-size:13px }
+.btn{ border:1px solid var(--line); background:#fff; border-radius:9px; padding:5px 11px; font-size:13px }
+/* плитки */
+.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:14px }
+.tile{ background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; cursor:pointer; min-height:120px; display:flex; flex-direction:column }
+.tile:hover{ box-shadow:0 6px 18px rgba(26,27,46,.08) }
+.cover{ height:62px } .tb{ padding:12px 14px } .tb b{ display:block } .tb span{ font-size:12.5px; color:var(--mut) }
+.ic{ width:34px; height:34px; border-radius:10px; display:grid; place-items:center; margin-bottom:8px; font-size:16px }
+/* дерево */
+.tr-c,.tr-u,.tr-l{ display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--line) }
+.tr-c{ padding:11px 14px; font-weight:700; cursor:pointer } .tr-u{ padding:9px 14px 9px 36px; font-weight:600; font-size:14px; cursor:pointer }
+.tr-l{ padding:8px 14px 8px 64px; font-size:14px } .tr-l .grow{ flex:1 }
+.ar{ width:14px; color:var(--mut) } .dot{ width:10px; height:10px; border-radius:3px }
+/* проводник */
+.ex{ display:grid; grid-template-columns:260px 1fr; gap:16px; align-items:start }
+.ex-tree{ padding:6px; position:sticky; top:72px }
+.ex-c{ padding:8px 10px; font-weight:700; border-radius:9px; cursor:pointer; display:flex; gap:8px; align-items:center }
+.ex-u{ padding:6px 10px 6px 30px; border-radius:9px; cursor:pointer; font-size:14px; display:flex; justify-content:space-between }
+.ex-u:hover,.ex-c:hover{ background:var(--bg) } .ex-u.on{ background:var(--brand-soft); color:var(--brand-d); font-weight:600 }
+.row{ display:flex; gap:12px; align-items:center; padding:11px 16px; border-bottom:1px solid var(--line) } .row:last-child{ border-bottom:0 } .row .grow{ flex:1 }
+/* курс на одной странице */
+.useq{ margin-bottom:22px } .useq h3{ font-size:16px; margin:0 0 10px; display:flex; gap:10px; align-items:center }
+.strip{ display:flex; gap:10px; overflow-x:auto; padding-bottom:6px }
+.mini{ flex:0 0 170px; background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px; cursor:pointer }
+.mini:hover{ border-color:#D6D3E4; box-shadow:0 4px 12px rgba(26,27,46,.06) }
+.mini b{ display:block; font-size:14px; margin:6px 0 4px }
+.verdict{ margin-top:22px; padding:14px 16px; background:#FFFBF2; border:1px solid #F2E3C2; border-radius:14px; font-size:14px }
+.verdict b{ display:block; margin-bottom:4px }
+</style>
+</head>
+<body>
+<div class="panel">
+  <button data-v="tiles" class="on">1. Папки плитками</button>
+  <button data-v="tree">2. Список с ветками</button>
+  <button data-v="ex">3. Проводник: дерево слева</button>
+  <button data-v="course">4. Курс одной страницей</button>
+  <div class="note">Макет: данные ненастоящие. Кликайте по папкам, пробуйте поиск. Во всех вариантах колёсико мыши открывает папку или урок в новой вкладке.</div>
+</div>
+<div class="app">
+  <div class="side"><div class="logo">Classroom</div>
+    <div class="tab">Мои ученики</div><div class="tab">Задать материал</div><div class="tab">Проверка</div><div class="tab on">Библиотека</div></div>
+  <div class="page" id="page"></div>
+</div>
+<script>
+const LIB=[
+ {c:'Super Minds 2', cc:'SM2', col:['#4E9A7B','#2F7A5E'], units:[
+   {n:1,t:'Unit 1 · My day', ls:[['Homework 1','hw',1],['Homework 2','hw',1],['Homework 3','hw',0],['Unit 1 Test','test',1],['Lesson 1','plan',1],['Lesson 2','plan',1]]},
+   {n:2,t:'Unit 2 · Food', ls:[['Homework 1','hw',1],['Homework 2','hw',0],['Unit 2 Test','test',0],['Lesson 1','plan',1]]},
+   {n:3,t:'Unit 3 · Animals', ls:[['Homework 1','hw',0],['Homework 2','hw',0],['Lesson 1','plan',0]]} ]},
+ {c:'Super Minds 3', cc:'SM3', col:['#6C7BE0','#4A55B8'], units:[
+   {n:1,t:'Unit 1 · School', ls:[['Homework 1','hw',0],['Homework 2','hw',0],['Lesson 1','plan',0]]} ]},
+ {c:'Wow Dragon 1', cc:'WD1', col:['#E08A4E','#B8642F'], units:[
+   {n:1,t:'Module 1', ls:[['Homework 1','hw',1],['Homework 2','hw',1],['Homework 12','hw',1],['Lesson 1','plan',1]]} ]},
+];
+const S={ v:'tiles', c:null, u:null, q:'', kind:'hw', open:{c0:1,'c0u0':1}, exu:'0:0' };
+const code=(c,u,l)=>/^(Unit|Final)/.test(l[0])||c.cc.startsWith('WD')?`${c.cc} ${l[0]}`:`${c.cc} Unit ${u.n} ${l[0]}`;
+const KI={hw:['●','#EEF7F3','#2F7A5E','ДЗ'],test:['◆','#F0EEFD','#3A2FA8','тест'],plan:['▢','#FBF0DE','#A9660B','план урока']};
+const pub=l=>l[2]?'<span class="pill g">опубликован</span>':'<span class="pill y">черновик</span>';
+const isPlan=l=>l[1]==='plan';
+function match(c,u,l){ const q=S.q.toLowerCase().trim(); return !q || code(c,u,l).toLowerCase().includes(q); }
+function search(){ return `<input placeholder="🔍 Найти материал: SM2 Unit 1 Homework 2" value="${S.q}" oninput="S.q=this.value;R();const i=document.querySelector('.bar input');i.focus();i.setSelectionRange(99,99)">`; }
+function kindSeg(){ return `<span class="seg"><button class="${S.kind==='hw'?'on':''}" onclick="S.kind='hw';R()">Домашки и тесты</button><button class="${S.kind==='plan'?'on':''}" onclick="S.kind='plan';R()">Планы уроков</button></span>`; }
+function lsOf(u){ return u.ls.filter(l=>S.kind==='plan'?isPlan(l):!isPlan(l)); }
+function found(){ // результаты поиска — общие для вариантов
+  let r=[]; LIB.forEach(c=>c.units.forEach(u=>u.ls.forEach(l=>{ if(match(c,u,l)) r.push(`<div class="row"><span class="grow"><b>${code(c,u,l)}</b> <span class="muted small">${c.c} › ${u.t}</span></span>${pub(l)}<button class="btn">👁 Посмотреть</button><button class="btn">Редактировать</button></div>`); })));
+  return `<div class="card">${r.join('')||'<div class="row muted">Ничего не найдено</div>'}</div>`;
+}
+
+function vTiles(){
+  const c=LIB[S.c], u=c&&c.units[S.u];
+  const cr = c ? `<a onclick="S.c=null;S.u=null;R()">Библиотека</a> › ${u?`<a onclick="S.u=null;R()">${c.c}</a> › <b>${u.t}</b>`:`<b>${c.c}</b>`}` : '';
+  let body;
+  if(S.q) body=found();
+  else if(!c) body=`<div class="grid">${LIB.map((x,i)=>`<div class="tile" onclick="S.c=${i};R()"><div class="cover" style="background:linear-gradient(135deg,${x.col[0]},${x.col[1]})"></div>
+      <div class="tb"><b>${x.c}</b><span>${x.units.length} юнита · ${x.units.reduce((a,y)=>a+y.ls.length,0)} материалов</span></div></div>`).join('')}</div>`;
+  else if(!u) body=`<div class="grid">${c.units.map((x,i)=>`<div class="tile" onclick="S.u=${i};R()"><div class="tb"><div class="ic" style="background:#EEF7F3">📁</div><b>${x.t}</b>
+      <span>${x.ls.filter(l=>!isPlan(l)).length} ДЗ и тестов · ${x.ls.filter(isPlan).length} планов</span></div></div>`).join('')}</div>`;
+  else body=`<div style="margin-bottom:12px">${kindSeg()}</div><div class="grid">${lsOf(u).map(l=>{ const k=KI[l[1]];
+      return `<div class="tile"><div class="tb"><div class="ic" style="background:${k[1]};color:${k[2]}">${k[0]}</div><b>${l[0]}</b><span>${k[3]}${l[2]?'':' · <span style="color:var(--warn)">черновик</span>'}</span></div></div>`; }).join('')}</div>`;
+  return head('Как было: курс → юнит → материалы. Крупно и наглядно, но чтобы попасть в другой юнит, нужно выйти назад.')+`<div class="crumbs">${cr}</div>`+body
+    + verdict('Плюсы: привычно, крупные кнопки, удобно перетаскивать и переименовывать. Минусы: три щелчка до урока, не видно сразу весь курс; массовая публикация — отдельным списком.');
+}
+function vTree(){
+  let h='';
+  if(S.q) h=found(); else { h='<div class="card">';
+  LIB.forEach((c,ci)=>{ const ck='c'+ci, o=S.open[ck];
+    h+=`<div class="tr-c" onclick="tg('${ck}')"><span class="ar">${o?'▾':'▸'}</span><input type="checkbox" onclick="event.stopPropagation()"><span class="dot" style="background:${c.col[0]}"></span>${c.c}<span class="muted small" style="font-weight:400">${c.units.length} юнита</span></div>`;
+    if(!o) return;
+    c.units.forEach((u,ui)=>{ const uk=ck+'u'+ui, uo=S.open[uk];
+      h+=`<div class="tr-u" onclick="tg('${uk}')"><span class="ar">${uo?'▾':'▸'}</span><input type="checkbox" onclick="event.stopPropagation()">${u.t}<span class="muted small" style="font-weight:400">планов ${u.ls.filter(isPlan).length} · домашек и тестов ${u.ls.filter(l=>!isPlan(l)).length}</span></div>`;
+      if(!uo) return;
+      h+=`<div class="tr-l" style="background:#FCFBFE;padding-left:56px">${kindSeg()}</div>`;
+      h+=lsOf(u).map(l=>`<div class="tr-l"><input type="checkbox"><span class="grow">${code(c,u,l)}</span>${pub(l)}<button class="btn">👁</button><button class="btn">Редактировать</button></div>`).join('');
+    }); });
+  h+='</div>'; }
+  return head('Всё дерево на одной странице: курсы и юниты раскрываются стрелкой, галочками — массовая публикация.')+h
+    + verdict('Плюсы: видно несколько юнитов сразу, удобно публиковать пачкой. Минусы: мелко и плотно, длинная простыня, если раскрыть много.');
+}
+function vEx(){
+  const [ci,ui]=S.exu.split(':').map(Number), c=LIB[ci], u=c.units[ui];
+  const tree=LIB.map((x,i)=>`<div class="ex-c"><span class="dot" style="background:${x.col[0]}"></span>${x.c}</div>`+x.units.map((y,j)=>`<div class="ex-u ${S.exu===i+':'+j?'on':''}" onclick="S.exu='${i}:${j}';S.q='';R()"><span>${y.t}</span><span class="muted small">${y.ls.length}</span></div>`).join('')).join('');
+  const right = S.q ? found() : `<div class="crumbs"><span>${c.c}</span> › <b>${u.t}</b></div><div style="margin-bottom:12px">${kindSeg()}</div>
+     <div class="card">${lsOf(u).map(l=>`<div class="row"><input type="checkbox"><span class="ic" style="margin:0;background:${KI[l[1]][1]};color:${KI[l[1]][2]}">${KI[l[1]][0]}</span><span class="grow"><b>${code(c,u,l)}</b></span>${pub(l)}<button class="btn">👁 Посмотреть</button><button class="btn">Редактировать</button></div>`).join('')}</div>`;
+  return head('Как проводник в компьютере: слева всегда видны все курсы и юниты, справа — содержимое выбранного юнита.')+`<div class="ex"><div class="card ex-tree">${tree}</div><div>${right}</div></div>`
+    + verdict('Плюсы: в соседний юнит — один щелчок, ничего не надо раскрывать и закрывать, слева всегда понятно, где вы. Минусы: при 10+ курсах левая колонка длинная (курсы можно сворачивать); на телефоне колонки встают друг под друга.');
+}
+function vCourse(){
+  if(S.q) return head('')+found();
+  if(S.c==null) return head('Сначала курс плиткой, а внутри — сразу все юниты лентами: юнит → его материалы в ряд.')+`<div class="grid">${LIB.map((x,i)=>`<div class="tile" onclick="S.c=${i};R()"><div class="cover" style="background:linear-gradient(135deg,${x.col[0]},${x.col[1]})"></div><div class="tb"><b>${x.c}</b><span>${x.units.length} юнита</span></div></div>`).join('')}</div>`;
+  const c=LIB[S.c];
+  return head('Сначала курс плиткой, а внутри — сразу все юниты лентами: юнит → его материалы в ряд.')
+    +`<div class="crumbs"><a onclick="S.c=null;R()">Библиотека</a> › <b>${c.c}</b></div><div style="margin-bottom:14px">${kindSeg()}</div>`
+    + c.units.map(u=>`<div class="useq"><h3>${u.t}<span class="muted small" style="font-weight:400">${lsOf(u).length}</span></h3><div class="strip">${lsOf(u).map(l=>{ const k=KI[l[1]];
+        return `<div class="mini"><span class="pill ${l[2]?'g':'y'}">${l[2]?'опубликован':'черновик'}</span><b>${l[0]}</b><span class="muted small">${k[3]}</span></div>`; }).join('')||'<span class="muted small">пусто</span>'}</div></div>`).join('')
+    + verdict('Плюсы: весь курс перед глазами одной прокруткой, наглядно, где черновики. Минусы: у большого курса (9 юнитов × 8 материалов) длинная страница; перетаскивание между юнитами сложнее.');
+}
+function head(lead){ return `<h2>Библиотека</h2><p class="lead">${lead}</p><div class="bar">${search()}<span style="flex:1"></span><span class="seg"><button class="on">Все</button><button>Опубликованные</button><button>Черновики</button></span></div>`; }
+function verdict(t){ return `<div class="verdict"><b>Как в работе</b>${t}</div>`; }
+function tg(k){ if(S.open[k]) delete S.open[k]; else S.open[k]=1; R(); }
+document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{ S.v=b.dataset.v; S.q=''; S.c=null; S.u=null; document.querySelectorAll('[data-v]').forEach(x=>x.classList.toggle('on',x===b)); R(); });
+function R(){ document.getElementById('page').innerHTML = {tiles:vTiles, tree:vTree, ex:vEx, course:vCourse}[S.v](); }
+R();
+</script>
+</body>
+</html>

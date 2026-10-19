@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classroom — макет 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1A1B2E; --mute:#7A7F92; --faint:#A6AAB9;
+  --line:#E8E7EE; --field:#F7F6F9; --paper:#fff;
+  --course:#5B4BE0; --course-soft:#F0EEFD; --course-deep:#3A2FA8;
+  --amber:#A9660B; --amber-soft:#FBF0DE;
+  --teal:#0D6155;  --teal-soft:#E2F1EE;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:'Golos Text',system-ui,sans-serif;color:var(--ink);background:var(--field);
+  font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+svg{display:block}
+a{color:inherit;text-decoration:none}
+
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+
+/* ── полоса ── */
+.rail{background:var(--paper);border-right:1px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.brand{height:60px;display:flex;align-items:center;gap:10px;padding:0 20px}
+.brand b{font-size:16px;letter-spacing:-.015em}
+.spark{width:25px;height:25px;border-radius:8px;background:var(--course);display:grid;place-items:center;color:#fff;font-size:12px;font-weight:700;flex:0 0 auto}
+.find{margin:2px 12px 10px;display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:11px;background:var(--field);color:var(--mute);font-size:14px}
+.find:hover{background:#F0EFF4}
+.find kbd{margin-left:auto;font:inherit;font-size:11px;color:var(--faint);border:1px solid var(--line);border-radius:5px;padding:1px 5px;background:var(--paper)}
+.nav{padding:0 12px;display:flex;flex-direction:column;gap:2px}
+.nav .grp{color:var(--faint);font-size:12px;padding:16px 11px 6px}
+.nav a{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:11px}
+.nav a:hover{background:var(--field)}
+.nav a.on{background:var(--course-soft);color:var(--course-deep);font-weight:600}
+.nav a svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
+.nav a.on svg{opacity:1}
+.nav a .n{margin-left:auto;font-size:12px;color:var(--faint)}
+.nav a.on .n{color:var(--course)}
+.who{margin-top:auto;padding:14px 16px;display:flex;align-items:center;gap:11px;border-top:1px solid var(--line)}
+.ava{width:32px;height:32px;border-radius:10px;background:var(--course-soft);color:var(--course-deep);display:grid;place-items:center;font-size:12px;font-weight:700;flex:0 0 auto}
+.who p{margin:0;line-height:1.25;font-weight:500}
+.who span{display:block;font-size:12px;color:var(--faint);font-weight:400}
+
+.main{min-width:0;padding:20px 26px 44px}
+.cols{display:grid;grid-template-columns:264px 1fr;gap:26px;align-items:start}
+
+/* дерево */
+.tree .unit{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:10px;font-weight:600;font-size:14px}
+.tree .unit:hover{background:#EFEEF3}
+.tree .chev{color:var(--faint);font-size:10px;width:10px}
+.tree .cnt{margin-left:auto;font-size:12px;color:var(--faint);font-weight:400}
+.tree .it{display:flex;align-items:center;gap:10px;padding:7px 10px 7px 28px;border-radius:10px;font-size:14px;color:#3D4055}
+.tree .it:hover{background:#EFEEF3}
+.tree .it.on{background:var(--paper);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(26,27,46,.07)}
+.mark{width:9px;height:9px;flex:0 0 auto}
+.mark.lesson{border-radius:3px;background:var(--course)}
+.mark.homework{border-radius:50%;background:var(--teal)}
+.mark.test{background:var(--amber);transform:rotate(45deg);border-radius:2px}
+.state{margin-left:auto;font-size:11px;color:var(--faint)}
+
+/* шапка материала */
+.hero{border-radius:20px;padding:22px 24px 20px;color:#fff;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--course) 0%,var(--course-deep) 100%)}
+.hero:after{content:"";position:absolute;right:-70px;top:-90px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.08)}
+.hero .path{font-size:13px;opacity:.75;display:flex;align-items:center;gap:7px;position:relative;z-index:2}
+.hero h1{margin:5px 0 0;font-size:30px;line-height:1.15;letter-spacing:-.025em;font-weight:700;position:relative;z-index:2}
+.hero .sub{font-size:12px;opacity:.72;letter-spacing:.04em;margin-top:6px;position:relative;z-index:2}
+.hero .acts{position:absolute;right:24px;top:22px;display:flex;gap:8px;z-index:3}
+.gb{background:rgba(255,255,255,.16);border:0;border-radius:10px;padding:8px 13px;color:#fff;font-size:13px;font-weight:500}
+.gb:hover{background:rgba(255,255,255,.26)}
+.gb.solid{background:#fff;color:var(--course-deep);font-weight:600}
+.ready{margin-top:18px;align-items:center;gap:14px;flex-wrap:wrap;position:relative;z-index:2}
+.ready .bar{flex:1;min-width:140px;height:7px;border-radius:99px;background:rgba(255,255,255,.22);display:flex;overflow:hidden}
+.ready .bar i{display:block;height:100%}
+.ready small{font-size:13px;opacity:.85}
+
+/* режим показа — только у плана урока */
+.modes{display:none;align-items:center;gap:8px;margin-top:16px;flex-wrap:wrap;position:relative;z-index:2}
+body.lesson .modes{display:flex}
+.modes span{font-size:12px;opacity:.72}
+.seg{display:inline-flex;background:rgba(255,255,255,.16);border-radius:10px;padding:2px}
+.seg button{border:0;background:transparent;color:#fff;opacity:.72;padding:5px 11px;border-radius:8px;font-size:13px}
+.seg button.on{background:#fff;color:var(--course-deep);opacity:1;font-weight:600}
+
+/* видимость по типу материала и роли */
+.mo,.lo{display:none}
+body.methodist .mo{display:flex}
+body.lesson .lo{display:flex}
+body.lesson.methodist .lomo{display:flex}
+.lomo{display:none}
+
+/* блоки */
+.list{margin-top:20px}
+.blk{display:flex;gap:16px;padding:16px 4px;border-bottom:1px solid var(--line);align-items:flex-start}
+.blk:hover{background:#FBFAFD}
+.blk .no{width:24px;flex:0 0 auto;font-size:13px;color:var(--faint);padding-top:3px;text-align:right}
+.pic{width:78px;height:58px;border-radius:10px;flex:0 0 auto;overflow:hidden;background:var(--field)}
+.body{flex:1;min-width:0}
+.body h3{margin:0;font-size:17px;font-weight:600;letter-spacing:-.01em}
+.body p{margin:3px 0 0;color:var(--mute);font-size:14px}
+.meta{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:var(--faint);flex-wrap:wrap}
+.pill{padding:2px 9px;border-radius:8px;background:var(--field);color:var(--mute)}
+.pill.warn{background:var(--amber-soft);color:var(--amber)}
+.pill.only{background:var(--course-soft);color:var(--course-deep)}
+.tools{display:flex;gap:2px;opacity:0;transition:opacity .12s;flex:0 0 auto}
+.blk:hover .tools{opacity:1}
+.tools button{border:0;background:transparent;color:var(--faint);padding:6px 7px;border-radius:8px;font-size:14px}
+.tools button:hover{background:var(--field);color:var(--ink)}
+.addrow{display:flex;align-items:center;gap:10px;padding:16px 4px;color:var(--faint);font-size:14px}
+.addrow button{border:1px dashed #D2D0DD;background:transparent;border-radius:11px;padding:9px 16px;color:var(--mute)}
+.addrow button:hover{border-color:var(--course);color:var(--course)}
+
+/* подсветка того, чего ещё нет в системе */
+body.showNew [data-new]{outline:2px dashed #E0863A;outline-offset:3px;border-radius:12px;position:relative}
+body.showNew [data-new]:before{content:"надо дописать";position:absolute;top:-9px;left:8px;z-index:5;
+  background:#E0863A;color:#fff;font-size:10px;font-weight:600;padding:1px 6px;border-radius:5px;letter-spacing:.02em}
+
+/* поиск */
+.veil{position:fixed;inset:0;background:rgba(26,27,46,.38);display:none;justify-content:center;padding-top:11vh;z-index:20}
+.veil.on{display:flex}
+.finder{width:min(580px,92vw);background:var(--paper);border-radius:18px;box-shadow:0 26px 70px rgba(26,27,46,.34);overflow:hidden;height:max-content}
+.finder input{width:100%;border:0;outline:0;padding:18px 20px;font:inherit;font-size:17px}
+.res{border-top:1px solid var(--line);max-height:50vh;overflow:auto}
+.fr{display:flex;align-items:center;gap:12px;padding:11px 18px}
+.fr.sel,.fr:hover{background:var(--course-soft)}
+.fr .p{flex:1;min-width:0;font-weight:500}
+.fr .p em{font-style:normal;display:block;font-size:12px;color:var(--faint);font-weight:400}
+.fr .c{font-size:11px;color:var(--faint);letter-spacing:.04em}
+.hint{padding:10px 18px;border-top:1px solid var(--line);font-size:12px;color:var(--faint);display:flex;gap:16px}
+
+.switch{position:fixed;right:18px;bottom:18px;background:var(--ink);color:#fff;border-radius:14px;padding:6px;display:flex;gap:4px;box-shadow:0 10px 32px rgba(26,27,46,.32);z-index:30;flex-wrap:wrap;max-width:min(92vw,720px)}
+.switch button{background:transparent;border:0;color:#fff;opacity:.55;padding:7px 12px;border-radius:10px;font-size:13px}
+.switch button.on{background:rgba(255,255,255,.18);opacity:1;font-weight:600}
+.switch .sep{width:1px;background:rgba(255,255,255,.2);margin:5px 3px}
+
+@media (max-width:960px){.app{grid-template-columns:1fr}.rail{display:none}.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="methodist">
+
+<div class="app">
+  <aside class="rail" data-new>
+    <div class="brand"><span class="spark" id="sp">S</span><b>Classroom</b></div>
+    <div class="find" onclick="openFind()" data-new>
+      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+      Найти материал<kbd>Ctrl K</kbd>
+    </div>
+    <nav class="nav">
+      <a class="on"><svg viewBox="0 0 24 24"><path d="M4 5.5h6.5v13H4zM13.5 5.5H20v13h-6.5z"/></svg>Библиотека</a>
+      <a><svg viewBox="0 0 24 24"><path d="M6.5 4.5l12 7.5-12 7.5z"/></svg>Уроки</a>
+      <a><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>Проверка<span class="n">4</span></a>
+      <a><svg viewBox="0 0 24 24"><circle cx="9.5" cy="8" r="3.2"/><path d="M4 19c.6-3.1 3-4.8 5.5-4.8S14.4 15.9 15 19"/><path d="M17 8.6a3 3 0 010 5"/></svg>Мои ученики<span class="n">62</span></a>
+      <span class="grp">Материалы</span>
+      <a><svg viewBox="0 0 24 24"><path d="M12 4.5v10M8.2 10.8L12 14.5l3.8-3.7M5 19h14"/></svg>Задать материал</a>
+      <a><svg viewBox="0 0 24 24"><path d="M9.5 17.5V6.2l9.5-1.9v11.4"/><circle cx="7.3" cy="17.6" r="2.3"/><circle cx="16.8" cy="15.7" r="2.3"/></svg>Медиа</a>
+    </nav>
+    <div class="who">
+      <span class="ava">ДШ</span>
+      <p>Дарья<span id="role">методист</span></p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="cols">
+
+      <div class="tree">
+        <div class="unit"><span class="chev">▾</span>Unit 1 · My body<span class="cnt">9</span></div>
+        <a class="it" id="t1"><span class="mark lesson"></span>Lesson 1 · Parts of the body<span class="state">опубликован</span></a>
+        <a class="it on" id="t2"><span class="mark homework"></span>Homework 2<span class="state">опубликована</span></a>
+        <a class="it"><span class="mark test"></span>Unit test<span class="state">черновик</span></a>
+        <div class="unit"><span class="chev">▸</span>Unit 2 · My family<span class="cnt">7</span></div>
+        <div class="unit"><span class="chev">▸</span>Unit 3 · Jobs<span class="cnt">8</span></div>
+        <div class="unit"><span class="chev">▸</span>Final Revision<span class="cnt">4</span></div>
+      </div>
+
+      <div>
+        <section class="hero">
+          <div class="acts">
+            <button class="gb">Глазами ученика</button>
+            <button class="gb lo">Как на уроке</button>
+            <button class="gb solid">Сохранить</button>
+          </div>
+          <div class="path"><span id="cname">SM0 — Starter</span><span style="opacity:.5">›</span><span>Unit 1 · My body</span></div>
+          <h1 id="htitle">Homework 2</h1>
+          <div class="sub"><span data-new id="hcode">SM0-U1-HW2</span> <span id="hstate">· опубликована · 5 блоков</span></div>
+
+          <div class="modes">
+            <span>Показывать как</span>
+            <span class="seg"><button class="on">индивидуальный</button><button>групповой</button></span>
+            <span class="seg"><button class="on">любая длительность</button><button>30</button><button>40</button></span>
+          </div>
+
+          <div class="ready mo" data-new>
+            <div class="bar">
+              <i style="width:64%;background:#fff"></i>
+              <i style="width:22%;background:rgba(255,255,255,.55)"></i>
+              <i style="width:14%;background:rgba(255,255,255,.2)"></i>
+            </div>
+            <small id="rtext">5 блоков без звука, 3 без картинки</small>
+            <button class="gb">Озвучить это</button>
+          </div>
+        </section>
+
+        <div class="list">
+
+          <article class="blk">
+            <span class="no">1</span>
+            <span class="pic" data-new><svg viewBox="0 0 78 58"><rect width="78" height="58" fill="#E7EFFA"/><circle cx="26" cy="24" r="11" fill="#BBD3F0"/><path d="M0 58l24-22 16 13 14-11 24 20z" fill="#9CBEE6"/></svg></span>
+            <div class="body">
+              <h3>Look and say</h3>
+              <p>Посмотри на картинки и назови части тела.</p>
+              <div class="meta"><span class="pill">Материал</span><span>картинка, звук</span></div>
+            </div>
+            <div class="tools"><button>↑</button><button>↓</button><button>⧉</button><button>🗑</button></div>
+          </article>
+
+          <article class="blk lomo">
+            <span class="no">2</span>
+            <span class="pic"><svg viewBox="0 0 78 58"><rect width="78" height="58" fill="#F0EEFD"/><rect x="12" y="16" width="44" height="6" rx="3" fill="#CBC3F4"/><rect x="12" y="28" width="54" height="6" rx="3" fill="#DAD4F7"/><rect x="12" y="40" width="30" height="6" rx="3" fill="#DAD4F7"/></svg></span>
+            <div class="body">
+              <h3>Этап 3. Разминка, 4 минуты</h3>
+              <p>Teacher's language: Stand up! Touch your nose.</p>
+              <div class="meta"><span class="pill only">Только преподавателю</span><span class="pill">Материал</span></div>
+            </div>
+            <div class="tools"><button>↑</button><button>↓</button><button>⧉</button><button>🗑</button></div>
+          </article>
+
+          <article class="blk">
+            <span class="no" id="n3">2</span>
+            <span class="pic"><svg viewBox="0 0 78 58"><rect width="78" height="58" fill="#FBE9F0"/><rect x="10" y="12" width="26" height="34" rx="5" fill="#F3C0D4"/><rect x="42" y="12" width="26" height="34" rx="5" fill="#EFAAC6"/></svg></span>
+            <div class="body">
+              <h3>head, mouth, nose, ear</h3>
+              <p>Четыре карточки с картинками, все озвучены.</p>
+              <div class="meta"><span class="pill">Карточки</span><span>4 слова</span></div>
+            </div>
+            <div class="tools"><button>↑</button><button>↓</button><button>⧉</button><button>🗑</button></div>
+          </article>
+
+          <article class="blk">
+            <span class="no" id="n4">3</span>
+            <span class="pic"><svg viewBox="0 0 78 58"><rect width="78" height="58" fill="#E6F2E5"/><rect x="9" y="10" width="60" height="11" rx="5" fill="#BEDFBC"/><rect x="9" y="27" width="60" height="11" rx="5" fill="#A9D5A7"/><rect x="9" y="44" width="34" height="8" rx="4" fill="#C9E6C7"/></svg></span>
+            <div class="body">
+              <h3>Послушай и нажми на нужную картинку</h3>
+              <p>Три вопроса, в вариантах картинки.</p>
+              <div class="meta"><span class="pill">Тест</span><span>3 вопроса</span></div>
+            </div>
+            <div class="tools"><button>↑</button><button>↓</button><button>⧉</button><button>🗑</button></div>
+          </article>
+
+          <article class="blk">
+            <span class="no" id="n5">4</span>
+            <span class="pic"><svg viewBox="0 0 78 58"><rect width="78" height="58" fill="#FBF2E2"/><rect x="34" y="12" width="11" height="20" rx="5.5" fill="#E7C177"/><path d="M28 28c0 6.1 5 11 11 11s11-4.9 11-11" stroke="#D9A94E" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M39 39v7" stroke="#D9A94E" stroke-width="3" stroke-linecap="round"/></svg></span>
+            <div class="body">
+              <h3>Say the words</h3>
+              <p>Ребёнок записывает голос, оценку ставит преподаватель.</p>
+              <div class="meta"><span class="pill">Запись голоса</span><span>есть образец</span></div>
+            </div>
+            <div class="tools"><button>↑</button><button>↓</button><button>⧉</button><button>🗑</button></div>
+          </article>
+
+          <article class="blk">
+            <span class="no" id="n6">5</span>
+            <span class="pic"><svg viewBox="0 0 78 58"><rect width="78" height="58" fill="#F5F4F8"/><path d="M26 24h8l10-8v26l-10-8h-8z" fill="#C8C6D4"/><path d="M50 22c2.6 2.8 2.6 11.2 0 14" stroke="#C8C6D4" stroke-width="3" fill="none" stroke-linecap="round"/></svg></span>
+            <div class="body">
+              <h3>Listen and repeat</h3>
+              <p>Помечено к озвучке, звука пока нет.</p>
+              <div class="meta"><span class="pill">Материал</span><span class="pill warn mo" data-new>Нет звука</span></div>
+            </div>
+            <div class="tools"><button>↑</button><button>↓</button><button>⧉</button><button>🗑</button></div>
+          </article>
+
+          <div class="addrow"><button>＋ Добавить блок</button><span>или вставьте между блоками</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="veil" id="veil" onclick="if(event.target===this)closeFind()">
+  <div class="finder">
+    <input id="q" placeholder="Название или код: parts, U1-HW2, jobs" oninput="draw()" autocomplete="off">
+    <div class="res" id="res"></div>
+    <div class="hint"><span>↑↓ выбрать</span><span>Enter открыть</span><span>Ctrl+Enter в новой вкладке</span></div>
+  </div>
+</div>
+
+<div class="switch">
+  <button class="on" onclick="setKind('hw',this)">домашка</button>
+  <button onclick="setKind('lesson',this)">план урока</button>
+  <div class="sep"></div>
+  <button class="on" onclick="setRole('m',this)">методист</button>
+  <button onclick="setRole('t',this)">преподаватель</button>
+  <div class="sep"></div>
+  <button class="on" onclick="setCourse('sm0',this)">SM0</button>
+  <button onclick="setCourse('other',this)">другой курс</button>
+  <div class="sep"></div>
+  <button onclick="toggleNew(this)">что дописать</button>
+</div>
+
+<script>
+const DATA=[
+  {c:'SM0-U1-L1',  t:'Lesson 1 · Parts of the body', u:'SM0 · Unit 1', k:'lesson'},
+  {c:'SM0-U1-HW2', t:'Homework 2',                   u:'SM0 · Unit 1', k:'homework'},
+  {c:'SM0-U1-T1',  t:'Unit test',                    u:'SM0 · Unit 1', k:'test'},
+  {c:'SM0-U3-HW1', t:'Jobs · Homework 1',            u:'SM0 · Unit 3', k:'homework'},
+  {c:'SM0-U4-HW2', t:'My hobbies · Homework 2',      u:'SM0 · Unit 4', k:'homework'},
+  {c:'SM0-FR-HW1', t:'Final Revision · Homework 1',  u:'SM0 · Final Revision', k:'homework'},
+];
+function draw(){
+  const q=(document.getElementById('q').value||'').toLowerCase().trim();
+  const list=q?DATA.filter(d=>(d.c+' '+d.t+' '+d.u).toLowerCase().includes(q)):DATA;
+  document.getElementById('res').innerHTML = list.length
+    ? list.map((d,i)=>`<div class="fr ${i?'':'sel'}"><span class="mark ${d.k}"></span>
+        <span class="p">${d.t}<em>${d.u}</em></span><span class="c">${d.c}</span></div>`).join('')
+    : '<div class="fr"><span class="p">Ничего не нашлось<em>Попробуйте часть названия или код</em></span></div>';
+}
+function openFind(){const v=document.getElementById('veil');v.classList.add('on');const q=document.getElementById('q');q.value='';draw();q.focus();}
+function closeFind(){document.getElementById('veil').classList.remove('on');}
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openFind();}
+  if(e.key==='Escape')closeFind();
+});
+
+function pick(el,i,j){const b=el.parentNode.querySelectorAll('button');b[i].classList.add('on');b[j].classList.remove('on');}
+
+function setKind(k,el){
+  const lesson = k==='lesson';
+  document.body.classList.toggle('lesson', lesson);
+  document.getElementById('htitle').textContent = lesson ? 'Lesson 1 · Parts of the body' : 'Homework 2';
+  document.getElementById('hcode').textContent  = lesson ? 'SM0-U1-L1' : 'SM0-U1-HW2';
+  document.getElementById('hstate').textContent = lesson ? '· опубликован · 6 блоков' : '· опубликована · 5 блоков';
+  document.getElementById('rtext').textContent  = lesson ? '4 блока без звука, 2 без картинки' : '5 блоков без звука, 3 без картинки';
+  document.getElementById('t1').classList.toggle('on', lesson);
+  document.getElementById('t2').classList.toggle('on', !lesson);
+  // нумерация: у плана урока появляется учительский блок вторым
+  ['n3','n4','n5','n6'].forEach((id,i)=> document.getElementById(id).textContent = (lesson?3:2)+i);
+  pick(el, lesson?1:0, lesson?0:1);
+}
+function setRole(r,el){
+  document.body.classList.toggle('methodist', r==='m');
+  document.getElementById('role').textContent = r==='m'?'методист':'преподаватель';
+  pick(el, r==='m'?0:1, r==='m'?1:0);
+}
+function setCourse(c,el){
+  const s=document.documentElement.style;
+  if(c==='other'){ s.setProperty('--course','#9B7BEA'); s.setProperty('--course-deep','#6D4FC7'); s.setProperty('--course-soft','#F3EFFE');
+    document.getElementById('cname').textContent='Другой курс'; document.getElementById('sp').textContent='К'; }
+  else { s.setProperty('--course','#5B4BE0'); s.setProperty('--course-deep','#3A2FA8'); s.setProperty('--course-soft','#F0EEFD');
+    document.getElementById('cname').textContent='SM0 — Starter'; document.getElementById('sp').textContent='S'; }
+  pick(el, c==='sm0'?0:1, c==='sm0'?1:0);
+}
+function toggleNew(el){
+  document.body.classList.toggle('showNew');
+  el.classList.toggle('on', document.body.classList.contains('showNew'));
+}
+draw();
+</script>
+</body>
+</html>

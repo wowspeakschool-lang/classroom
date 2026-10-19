@@ -1,0 +1,308 @@
+{
+ "course": "sm3",
+ "unit": "Unit 0 · Meet The Explorers",
+ "unit_sort_order": 0,
+ "lesson": "Homework 3",
+ "kind": "homework",
+ "lesson_sort_order": 2,
+ "pass_threshold": 60,
+ "is_published": false,
+ "media_base": "https://classroom.wowteach.ru/media/",
+ "blocks": [
+  {
+   "sort_order": 0,
+   "type": "text",
+   "payload": {
+    "html": "<p>Привет! 👋 В этой домашке — семья и маленькая буква <b>’s</b>, которая показывает, чей это человек или предмет.</p>"
+   }
+  },
+  {
+   "sort_order": 1,
+   "type": "text",
+   "payload": {
+    "html": "<p><b>Посмотри на семейное дерево — оно понадобится в заданиях.</b></p><p style=\"text-align:center\"><img src=\"@@MEDIA@@sm3/u0/family_tree.webp\" alt=\"\"></p>"
+   }
+  },
+  {
+   "sort_order": 2,
+   "type": "quiz",
+   "payload": {
+    "title": "Посмотри на дерево и выбери правильный вариант.",
+    "questions": [
+     {
+      "q": "Nick is Penny’s ___.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "brother"
+       },
+       {
+        "text": "father"
+       },
+       {
+        "text": "cousin"
+       }
+      ]
+     },
+     {
+      "q": "Paula is Zoe’s ___.",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "options": [
+       {
+        "text": "cousin"
+       },
+       {
+        "text": "sister"
+       },
+       {
+        "text": "aunt"
+       }
+      ]
+     },
+     {
+      "q": "Ted is Penny’s ___.",
+      "type": "single",
+      "correct": [
+       1
+      ],
+      "options": [
+       {
+        "text": "uncle"
+       },
+       {
+        "text": "father"
+       },
+       {
+        "text": "grandfather"
+       }
+      ]
+     },
+     {
+      "q": "Lisa is Paula’s ___.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "mother"
+       },
+       {
+        "text": "sister"
+       },
+       {
+        "text": "aunt"
+       }
+      ]
+     },
+     {
+      "q": "Oliver is Nick’s ___.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "uncle"
+       },
+       {
+        "text": "grandfather"
+       },
+       {
+        "text": "brother"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 3,
+   "type": "exact_input",
+   "payload": {
+    "title": "Посмотри на дерево и впиши слово.",
+    "items": [
+     {
+      "prompt": "1. Julia is Nick’s ___.",
+      "accept": [
+       "grandmother",
+       "Grandmother"
+      ]
+     },
+     {
+      "prompt": "2. Nick is Jack’s ___.",
+      "accept": [
+       "grandson",
+       "Grandson"
+      ]
+     },
+     {
+      "prompt": "3. Zoe is Penny’s ___.",
+      "accept": [
+       "cousin",
+       "Cousin"
+      ]
+     },
+     {
+      "prompt": "4. Lisa is Nick’s ___.",
+      "accept": [
+       "aunt",
+       "Aunt"
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 4,
+   "type": "quiz",
+   "payload": {
+    "title": "Выбери правильный вариант.",
+    "questions": [
+     {
+      "q": "This is Nick___ dog.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "’s"
+       },
+       {
+        "text": "s"
+       },
+       {
+        "text": "s’"
+       }
+      ]
+     },
+     {
+      "q": "Penny is Ted___ daughter.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "’s"
+       },
+       {
+        "text": "s"
+       },
+       {
+        "text": "s’"
+       }
+      ]
+     },
+     {
+      "q": "«Julia’s son» — у кого есть сын?",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "Julia"
+       },
+       {
+        "text": "the son"
+       },
+       {
+        "text": "Jack"
+       }
+      ]
+     },
+     {
+      "q": "Paula and Zoe are Oliver and Lisa___ daughters.",
+      "type": "single",
+      "correct": [
+       0
+      ],
+      "options": [
+       {
+        "text": "’s"
+       },
+       {
+        "text": "s"
+       },
+       {
+        "text": "s’"
+       }
+      ]
+     }
+    ],
+    "needs_review": false
+   }
+  },
+  {
+   "sort_order": 5,
+   "type": "order",
+   "payload": {
+    "words": [
+     "Penny",
+     "is",
+     "Jack’s",
+     "granddaughter."
+    ],
+    "sentence": "Penny is Jack’s granddaughter.",
+    "audio": "",
+    "audio_tts": "Penny is Jack’s granddaughter."
+   }
+  },
+  {
+   "sort_order": 6,
+   "type": "order",
+   "payload": {
+    "words": [
+     "Zoe",
+     "is",
+     "Lisa’s",
+     "daughter."
+    ],
+    "sentence": "Zoe is Lisa’s daughter.",
+    "audio": "",
+    "audio_tts": "Zoe is Lisa’s daughter."
+   }
+  },
+  {
+   "sort_order": 7,
+   "type": "order",
+   "payload": {
+    "words": [
+     "This",
+     "is",
+     "my mum’s",
+     "brother."
+    ],
+    "sentence": "This is my mum’s brother.",
+    "audio": "",
+    "audio_tts": "This is my mum’s brother."
+   }
+  },
+  {
+   "sort_order": 8,
+   "type": "speaking",
+   "payload": {
+    "title": "SPEAKING TASK 🎤",
+    "html": "<p>Расскажи про свою семью, 5–6 предложений. Используй ’s. Нажми на микрофон и запиши ответ.</p><p><i>For example:<br>This is my mum’s sister. She’s my aunt.<br>Her son is my cousin.<br>My dad’s father is my grandfather.</i></p>",
+    "needs_review": true
+   }
+  },
+  {
+   "sort_order": 9,
+   "type": "text",
+   "payload": {
+    "html": "<p>Молодец! 🌟 Теперь ты умеешь рассказать, кто кому кем приходится, и не путаешь ’s.</p>"
+   }
+  }
+ ]
+}
