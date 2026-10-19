@@ -47,6 +47,23 @@ EXTRA = ("В конце тебя будет ждать дополнительн�
          "сильных учеников 💪")
 
 
+def listen_quiz(items, per_question=4, title="Послушай и выбери правильную картинку"):
+    """Вопрос на слух: звучит слово (audio_tts), варианты — картинки. Отвлекающие
+    по кругу, верный вариант ходит по местам — как в picture_quiz."""
+    qs = []
+    n = len(items)
+    k = min(per_question, n)
+    for i, (en, image) in enumerate(items):
+        wrong = [items[(i + j) % n][1] for j in range(1, k)]
+        random.Random(en).shuffle(wrong)
+        opts = wrong[:]
+        opts.insert(i % k, image)
+        qs.append({"q": "", "type": "single", "audio_tts": en,
+                   "options": [{"image": o} for o in opts],
+                   "correct": [opts.index(image)]})
+    return ("quiz", {"title": title, "questions": qs})
+
+
 def sport(en):
     return u(next(p for e, r, p in U8_SPORTS if e == en))
 
@@ -91,10 +108,10 @@ LESSONS = {
                 for en, ru, p in U8_SPORTS[8:]
             ]}),
 
-            ("quiz", quiz_ru_to_en(U8_SPORTS[:8])),
+            listen_quiz([(en, u(p)) for en, ru, p in U8_SPORTS[:8]]),
 
             ("exact_input", {"title": "Посмотри на картинку и напиши слово по-английски", "items": [
-                {"prompt": ru, "accept": list(dict.fromkeys([en, en.capitalize()])), "image": u(p),
+                {"prompt": "What sport is it?", "accept": list(dict.fromkeys([en, en.capitalize()])), "image": u(p),
                  "audio_tts": en}
                 for en, ru, p in U8_SPORTS[8:]
             ]}),
@@ -771,7 +788,9 @@ LESSONS = {
         "kind": "test",
         "blocks": [
             ("exact_input", {"title": "Посмотри на картинку и впиши слово по-английски", "items": [
-                {"prompt": ru, "accept": list(dict.fromkeys([en, en.capitalize()])),
+                {"prompt": "What sport is it?", "accept": list(dict.fromkeys(
+                    [en, en.capitalize()] + ([en.replace("-", " "), en.replace("-", " ").capitalize()]
+                                             if "-" in en else []))),
                  "image": u(p)}
                 for en, ru, p in U8_SPORTS
                 if en in ["badminton", "basketball", "cycling", "hockey", "ice-skating", "sailing",

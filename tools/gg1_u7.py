@@ -48,6 +48,23 @@ CHAMPION = ("Ты выполнил все задания из основной �
 REVIEW = "<p>Давай повторим всё, что выучили сегодня на уроке.</p>"
 
 
+def listen_quiz(items, per_question=4, title="Послушай и выбери правильную картинку"):
+    """Вопрос на слух: звучит слово (audio_tts), варианты — картинки. Отвлекающие
+    по кругу, верный вариант ходит по местам — как в picture_quiz."""
+    qs = []
+    n = len(items)
+    k = min(per_question, n)
+    for i, (en, image) in enumerate(items):
+        wrong = [items[(i + j) % n][1] for j in range(1, k)]
+        random.Random(en).shuffle(wrong)
+        opts = wrong[:]
+        opts.insert(i % k, image)
+        qs.append({"q": "", "type": "single", "audio_tts": en,
+                   "options": [{"image": o} for o in opts],
+                   "correct": [opts.index(image)]})
+    return ("quiz", {"title": title, "questions": qs})
+
+
 def animal(en):
     return u(next(p for e, r, p in U7_ANIMALS if e == en))
 
@@ -78,17 +95,14 @@ LESSONS = {
                 for en, ru, p in U7_ANIMALS
             ]}),
 
-            ("quiz", quiz_ru_to_en(U7_ANIMALS)),
+            picture_quiz([(en, u(p)) for en, ru, p in U7_ANIMALS]),
 
-            ("match", {"title": "Найди пару", "pairs": [
-                {"left": en, "right": ru, "left_audio_tts": en}
+            ("match", {"title": "Соедини картинку и слово", "pairs": [
+                {"left_image": u(p), "right": en, "right_audio_tts": en}
                 for en, ru, p in U7_ANIMALS[:8]
             ]}),
 
-            ("match", {"title": "И ещё: найди пару", "pairs": [
-                {"left": en, "right": ru, "left_audio_tts": en}
-                for en, ru, p in U7_ANIMALS[8:]
-            ]}),
+            listen_quiz([(en, u(p)) for en, ru, p in U7_ANIMALS[8:]]),
 
             # «Заполни пропуски» тренажёра: какие буквы пропускала платформа, не видно — свои
             ("exact_input", {"title": "Впиши слово целиком: некоторые буквы пропущены", "items": [
@@ -398,7 +412,7 @@ LESSONS = {
                 for en, ru, p in U7_ADJ
             ]}),
 
-            ("quiz", quiz_ru_to_en(U7_ADJ)),
+            picture_quiz([(en, u(p)) for en, ru, p in U7_ADJ]),
 
             ("match", {"title": "Соедини картинку и слово", "pairs": [
                 {"left_image": u(p), "right": en, "right_audio_tts": en} for en, ru, p in U7_ADJ
