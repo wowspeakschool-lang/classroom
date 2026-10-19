@@ -1,0 +1,834 @@
+section	term	translation	kind	id	db_translation
+1a	advise	советовать	reuse	6072	советовать
+1a	bite	кусать, обкусывать	reuse	5499	кусать
+1a	blush	краснеть от смущения	reuse	3787	краснеть
+1a	bright	яркий	reuse	8193	яркий
+1a	caring	заботливый, внимательный	reuse	5301	заботливый, внимательный
+1a	comfortable	удобный, спокойный	reuse	7044	удобный
+1a	confident	уверенный	reuse	2746	уверенный
+1a	cross	скрещивать	mismatch	6493	пересекать
+1a	develop	развивать(ся)	reuse	7918	развивать
+1a	easy-going	лёгкий в общении	reuse	3711	лёгкий в общении
+1a	energy	энергия, сила	reuse	8236	энергия
+1a	furious	разъярённый, свирепый	mismatch	4003	в ярости
+1a	nervous	нервный	reuse	1918	нервный
+1a	optimistic	оптимистичный	reuse	4005	оптимистичный
+1a	passion	страстное увлечение, страсть	reuse	3838	страсть
+1a	patient	терпеливый	reuse	7597	терпеливый
+1a	persuade	убеждать	reuse	3944	убеждать
+1a	pessimistic	пессимистичный	reuse	4007	пессимистичный
+1a	puzzled	озадаченный	reuse	6936	озадаченный
+1a	raise	поднимать	mismatch	4690	растить
+1a	reason	причина	reuse	6149	причина
+1a	reliable	надёжный, заслуживающий доверия	reuse	3719	надёжный
+1a	selfish	самолюбивый, эгоистичный	reuse	1070	эгоистичный
+1a	silent	молчаливый, тихий	reuse	8110	тихий
+1a	stranger	незнакомец	reuse	7335	незнакомец
+1a	stay	оставаться	reuse	5774	останавливаться, оставаться
+1a	stubborn	упрямый	reuse	5379	упрямый
+1a	tap	стучать, постукивать	reuse	4023	стучать (легонько)
+1a Phrasals & Phrases	help out	выручать, помогать	reuse	8040	выручать, помогать
+1b	annoyed	раздражённый	reuse	3438	раздражённый
+1b	argument	доказательство, аргумент	mismatch	3557	спор
+1b	greet	здороваться, приветствовать	reuse	6348	приветствовать
+1b	move	переезжать, переселяться	reuse	8397	переезжать
+1b	neighbourhood	округа, район	mismatch	6459	окрестности
+1b	old-fashioned	старомодный	reuse	7550	старомодный
+1b	pretty	довольно, достаточно	mismatch	7660	симпатичный, миловидный
+1b	relationship	отношение	reuse	4062	отношения
+1b	rise	подниматься	reuse	3221	подниматься
+1b	view	мнение, точка зрения	mismatch	7373	вид
+1b	welcome	приветствовать	mismatch	4269	добро пожаловать
+1b Phrasals & Phrases	take care of	заботиться	reuse	7729	заботиться
+1c	attic	чердак, мансарда	reuse	978	чердак
+1c	cool	классный, крутой	reuse	6699	классный
+1c	cute	привлекательный, миловидный, сообразительный	reuse	7662	привлекательный, интересный
+1c	diary	дневник	reuse	8326	дневник
+1c	literature	литература	reuse	5383	литература
+1c	local	местный	reuse	7520	местный житель
+1c	messy	грязный, беспорядочный	reuse	7061	запачканный, грязный
+1c	naughty	непослушный, шаловливый	reuse	6927	непослушный
+1c	permanent	постоянный	reuse	6818	постоянный
+1c	prediction	прогнозирование, предсказание	reuse	3747	предсказание
+1c	state	состояние	reuse	6817	состояние
+1c	stuff	вещи, имущество, хлам	mismatch	4302	набивать
+1c	trip	споткнуться	reuse	7472	спотыкаться
+1c Phrasals & Phrases	come across	наткнуться, натолкнуться	reuse	7944	натолкнуться, встретиться
+1c Phrasals & Phrases	for a while	на время; на некоторое время	reuse	5564	некоторое время
+1d	bossy	властный; любящий распоряжаться	reuse	849	любящий командовать
+1d	build	телосложение	reuse	5311	телосложение
+1d	colleague	коллега	reuse	7033	коллега
+1d	complain	жаловаться; выражать недовольство	reuse	7723	жаловаться
+1d	creative	творческий	reuse	7604	творческий, созидательный
+1d	disagree	не соглашаться	reuse	8416	не соглашаться, противоречить
+1d	dull	унылый; скучный; бестолковый	reuse	6609	скучный
+1d	generous	великодушный; щедрый; благородный	reuse	3712	щедрый
+1d	humorous	веселый; смешной	mismatch	7573	юмористический
+1d	middle-aged	средних лет	reuse	7636	средних лет
+1d	nephew	племянник	reuse	7458	племянник
+1d	niece	племянница	reuse	2244	племянница
+1d	plump	пухлый	reuse	7670	полный, пухлый
+1d	present	представлять; показывать	reuse	5537	представлять
+1d	shoulder-length	длиной до плеч	reuse	7643	до плеч (о длине волос)
+1d	sporty	спортивный	reuse	4507	спортивный
+1d	sensible	разумный; здравомыслящий	mismatch	3190	благоразумный
+1d	talkative	разговорчивый	reuse	1073	разговорчивый
+1d Phrasals & Phrases	run into	неожиданно встретить; столкнуться; наткнуться	mismatch	7345	сталкиваться, наталкиваться
+1e	abbreviation	аббревиатура; сокращение	reuse	6115	аббревиатура, сокращение
+1e	anniversary	годовщина (свадьбы)	mismatch	7183	юбилей, памятная дата
+1e	attend	присутствовать; посещать	reuse	3329	посещать
+1e	degree	звание, учёная степень	reuse	3332	учёная степень
+1e	grateful	благодарный; признательный	reuse	3015	благодарный
+1e	wish	желать	reuse	6690	желать
+1e Phrasals & Phrases	Good luck!	Желаю успеха! удачи!	reuse	6684	Удачи!
+1e Phrasals & Phrases	find out	выяснить; узнавать; понять	reuse	8007	выяснять
+1f	attractive	привлекательный	reuse	8032	привлекательный
+1f	careless	небрежный, беспечный	reuse	3688	небрежный
+1f	close	близкий	mismatch	4035	сплочённый
+1f	communicate	общаться	reuse	7695	общаться
+1f	enjoyable	приятный	reuse	6608	приятный
+1f	generous	щедрый, благородный	reuse	3712	щедрый
+1f	helpless	беспомощный	reuse	6963	беспомощный
+1f	jealous	ревнивый; завистливый	reuse	7598	завистливый
+1f	proud	гордый	reuse	8024	гордый
+1f	recover	выздоравливать	reuse	7766	выздоравливать, излечиваться
+1f	report	доклад; отчёт	mismatch	6993	сообщать
+1f	stylish	стильный	reuse	1262	стильный
+1f	successful	успешный	reuse	8021	успешный
+1f	traditional	традиционный	reuse	6742	традиционный
+Culture Corner 1	cheek	щека	reuse	2955	щека
+Culture Corner 1	custom	обычай	reuse	5919	обычай
+Culture Corner 1	hug	объятие	mismatch	4684	обнимать
+Culture Corner 1	mate	товарищ, друг, приятель	reuse	8413	товарищ
+Culture Corner 1	relative	родственник	reuse	2476	родственник
+Culture Corner 1	respect	уважать	reuse	6547	уважение
+Culture Corner 1	rude	грубый	reuse	3446	грубый
+Across the Curriculum: PSHE	accuse	обвинять	reuse	3534	обвинять
+Across the Curriculum: PSHE	argument	спор	reuse	3557	спор
+Across the Curriculum: PSHE	disappointed	разочарованный	reuse	3012	разочарованный
+Across the Curriculum: PSHE	forgive	прощать	reuse	1332	прощать
+Across the Curriculum: PSHE	handle	управлять, регулировать	mismatch	7005	ручка
+Across the Curriculum: PSHE	natural	естественный	mismatch	3100	природный
+Across the Curriculum: PSHE	opinion	мнение	reuse	8411	мнение
+Across the Curriculum: PSHE Phrasals & Phrases	deal with	ладить (с людьми), иметь дело с кем-либо, чем-либо	reuse	8490	иметь дело с
+2a	airport	аэропорт	reuse	6087	аэропорт
+2a	attractive	привлекательный	reuse	8032	привлекательный
+2a	balanced	гармоничный, сбалансированный	mismatch	7972	уравновешенный
+2a	biscuit	печенье	reuse	8280	сухое печенье
+2a	canteen	столовая	reuse	496	столовая
+2a	character	персонаж; герой	reuse	7593	персонаж
+2a	create	создавать	reuse	6778	создавать
+2a	crisp	чипс	reuse	8300	хрустящий картофель, чипсы
+2a	delicious	вкусный	reuse	7422	очень вкусный
+2a	diet	диета	reuse	7145	диета
+2a	dish	блюдо	reuse	5827	блюдо
+2a	encourage	ободрять, воодушевлять, вселять надежду	mismatch	3939	поощрять
+2a	fried	жареный	reuse	2688	жареный
+2a	frozen	замороженный	reuse	2942	замороженный
+2a	grilled	зажаренный или запечённый на решётке	mismatch	8298	приготовленный на гриле
+2a	important	важный	reuse	6721	важный
+2a	meal	еда, пища	reuse	8449	еда, прием пищи
+2a	portion	порция	reuse	7164	порция
+2a	prepare	приготовить, готовить	reuse	5958	готовить, подготавливать
+2a	raw	сырой	reuse	2945	сырой
+2a	roast	зажаренный, запечённый	reuse	8501	запекать на огне
+2a	sour	кислый	reuse	7111	кислый
+2a	spicy	пряный, ароматный, острый	reuse	7110	острый
+2a	typical	типичный	reuse	7568	обычный, типичный
+2a	tasty	вкусный	reuse	4589	вкусный
+2a	train station	железнодорожная станция	mismatch	2135	вокзал
+2a	vegetarian	вегетарианец	reuse	3135	вегетарианец
+2a	vinegar	уксус	reuse	7181	уксус
+2a	weight	вес	reuse	6263	вес
+2a Phrasals & Phrases	date back	брать начало	mismatch	7433	относиться к (о времени)
+2a Phrasals & Phrases	packed lunch	бутерброды, сухой паёк	mismatch	7121	ланч с собой
+2a Phrasals & Phrases	put on	прибавлять	mismatch	5763	надевать
+2b	bakery	булочная	reuse	5972	булочная
+2b	bargain	выгодная покупка	reuse	3651	выгодная покупка
+2b	brilliant	блестящий, гениальный	reuse	7588	выдающийся, блестящий
+2b	butcher's	мясной магазин	reuse	2570	мясная лавка
+2b	chemist's	аптека	reuse	8341	аптека
+2b	comment	комментарий	reuse	3900	комментарий
+2b	credit card	кредитная карта	reuse	8216	кредитная карта
+2b	department store	универмаг	reuse	7083	универмаг
+2b	exchange	обменивать	reuse	8375	обменять, поменять
+2b	fashion	мода, стиль одежды	reuse	7627	мода
+2b	fit	подходить по размеру	reuse	8374	подходить по размеру
+2b	florist's	цветочный магазин	reuse	5974	цветочный магазин
+2b	gold	золото	reuse	7510	золото
+2b	jeweller's	ювелирный магазин	reuse	8338	ювелирный магазин
+2b	newsagent's	газетный киоск	reuse	6458	газетный киоск
+2b	optician's	оптика	reuse	8337	оптика
+2b	oven	духовка	reuse	952	духовка
+2b	post office	почта	reuse	6453	почта
+2b	sausage	колбаса, сосиска	reuse	7095	сосиска, колбаса
+2b	suit	подходить, быть к лицу	mismatch	5758	костюм
+2b	silver	серебро	reuse	8361	серебро
+2b	stamp	марка	reuse	6449	марка
+2b	tour guide	гид	reuse	1984	гид
+2b	tulip	тюльпан	reuse	6783	тюльпан
+2b	underground	метро	reuse	6534	метро
+2b Phrasals & Phrases	on sale	в продаже	reuse	3367	в продаже
+2b Phrasals & Phrases	pick up	собирать	mismatch	2920	забирать
+2c	abroad	за границей	reuse	6047	за границей
+2c	celebrate	праздновать	reuse	6379	праздновать
+2c	coat	пальто	reuse	5748	пальто
+2c	cold	простуда	reuse	2969	простуда
+2c	crash	потерпеть аварию, разбить(ся)	reuse	7294	разбиваться
+2c	exhausted	измождённый, истощённый	reuse	8461	истощенный
+2c	jewellery	ювелирные изделия	mismatch	2508	украшения
+2c	library	библиотека	reuse	6460	библиотека
+2c	organise	организовывать	reuse	3464	организовывать
+2c	pocket money	карманные деньги	reuse	7897	карманные деньги
+2c	prize	приз	reuse	4234	приз
+2c	salty	солёный	reuse	7112	соленый
+2c	snack	легкая закуска, перекус	reuse	8292	закуска
+2c	Thanksgiving	День благодарения	reuse	6706	День благодарения
+2c	trip	поездка, путешествие	mismatch	7472	спотыкаться
+2c	receive	получать	reuse	7896	получать
+2d	add	добавить	reuse	7159	добавлять
+2d	bar	плитка, кусок	reuse	8257	плитка
+2d	beat	взбивать	reuse	941	взбивать
+2d	billiards	бильярд	reuse	6839	бильярд
+2d	chop	рубить	mismatch	5952	резать
+2d	dominoes	домино	reuse	6836	домино
+2d	equipment	оборудование	reuse	7822	оборудование
+2d	flour	мука	reuse	7179	мука
+2d	fold	заворачивать, сворачивать	mismatch	4225	складывать
+2d	gymnastics	гимнастика	reuse	2816	гимнастика
+2d	huge	огромный, громадный	reuse	7461	огромный
+2d	instrument	инструмент, прибор	reuse	7956	музыкальный инструмент
+2d	lecture	лекция, нотация	reuse	7870	лекция
+2d	loaf	буханка хлеба, булка	reuse	4604	батон, буханка
+2d	luggage	багаж	reuse	6537	багаж
+2d	melt	таять	mismatch	7178	растапливать, растворять
+2d	omelette	омлет	reuse	2050	омлет
+2d	order	заказывать, делать заказ	reuse	5935	заказ; заказывать
+2d	peel	чистить, срезать кожицу (с овощей, фруктов)	reuse	946	чистить (от кожуры)
+2d	place	положить на место	reuse	5666	место
+2d	pop	кинуть, швырнуть, бросить	mismatch	8073	поп
+2d	pour	наливать	reuse	7153	наливать
+2d	preheat	предварительно разогревать	reuse	7152	разогревать
+2d	queue	очередь	reuse	5993	очередь
+2d	rare	непрожаренный	mismatch	8198	редкий
+2d	reasonable	приемлемый, умеренный	mismatch	6141	справедливый, разумный
+2d	recommend	рекомендовать, советовать	reuse	6017	рекомендовать
+2d	replace	заменять что-либо	reuse	7866	заменять
+2d	slice	ломтик, тонкий кусочек; тонко резать	reuse	948	нарезать ломтиками
+2d	secret	секрет	reuse	5293	секрет; тайный, секретный
+2d	serve	подавать, сервировать	reuse	7040	подавать (на стол)
+2d	triangle	треугольник	reuse	4172	треугольник
+2d Phrasals & Phrases	eat out	есть вне дома	reuse	6626	питаться вне дома (в кафе и т. п.)
+2d Phrasals & Phrases	turn out	оказаться	mismatch	8491	закончиться
+2e	checked	клетчатый	reuse	8357	клетчатый
+2e	china	фарфоровый	mismatch	6188	Китай
+2e	frame	рамка, рама	reuse	8346	рамка
+2e	introduction	начало, введение	reuse	3506	введение
+2e	leather	кожаный	reuse	8365	кожа
+2e	light	светлый, лёгкий	reuse	5761	лёгкий, светлый
+2e	mention	упоминать, ссылаться	reuse	5966	упоминать
+2e	plain	простой	mismatch	8354	однотонный
+2e	point	суть, смысл	mismatch	6148	пункт
+2e	polka dot	в горошек	reuse	8355	в горошек
+2e	project	проект	reuse	4666	проект
+2e	purse	кошелёк	reuse	2035	кошелёк (женский)
+2e	scarf	шарф	reuse	7243	шарф
+2e	unique	уникальный	reuse	7374	уникальный
+2e	rectangular	прямоугольный	reuse	8353	прямоугольный
+2e	round	круглый	reuse	8352	круглый
+2e	square	квадратный	reuse	8351	квадратный
+2e	stripe	полоса	reuse	5496	полоса
+2e	striped	полосатый, в полоску	reuse	8350	полосатый
+2e	tiny	крошечный	reuse	8008	крошечный
+2e	wooden	деревянный	reuse	6881	деревянный
+2e	woollen	шерстяной	reuse	8358	шерстяной
+2e Phrasals & Phrases	break down	сломать(ся), разрушить(ся)	mismatch	8342	ломать
+2e Phrasals & Phrases	in detail	в деталях, подробно	reuse	4082	подробно
+2f	cash	наличные деньги	reuse	8219	наличные
+2f	cheque	чек	reuse	8218	чек
+2f	behave	вести себя, поступать	reuse	7873	вести себя
+2f	demand	требовать, предъявлять требование	reuse	3426	требовать
+2f	experience	получать опыт, узнавать	reuse	7821	опыт
+2f	journalist	журналист	reuse	8506	журналист
+2f	increase	возрастать	mismatch	7900	повышать
+2f	kitten	котёнок	reuse	4766	котенок
+2f	label	ярлык, этикетка, бирка	reuse	8384	ярлык, этикетка
+2f	match	соответствовать, подходить	reuse	8373	подходить по цвету
+2f	respect	уважать	reuse	6547	уважение
+2f	role	роль	reuse	8061	роль
+Culture Corner 2	donate	делать пожертвование	mismatch	4686	жертвовать, дарить
+Culture Corner 2	establish	основать, учреждать, создавать (компанию, организацию и т.д.)	reuse	3825	учреждать
+Culture Corner 2	item	пункт, отдельный предмет в списке	reuse	7004	предмет
+Culture Corner 2	raise	собирать (деньги), поднимать	mismatch	4690	растить
+Culture Corner 2	run	вести дела	mismatch	4933	бегать
+Culture Corner 2	store	магазин	reuse	6475	магазин
+Culture Corner 2	support	поддерживать, помогать	mismatch	1152	болеть (за команду)
+Culture Corner 2	waste	тратить	mismatch	5545	отходы
+Going Green 2	anyway	в любом случае	reuse	6931	в любом случае, все равно
+Going Green 2	appear	появляться	reuse	3416	появляться
+Going Green 2	chart	таблица, схема, план	mismatch	7826	список музыкальных хитов
+Going Green 2	diagram	диаграмма, схема	reuse	5011	диаграмма
+Going Green 2	energy	энергия	reuse	8236	энергия
+Going Green 2	harm	вредить	reuse	8122	наносить вред
+Going Green 2	industry	промышленность	reuse	8141	промышленность
+Going Green 2	light	лёгкий	reuse	5761	лёгкий, светлый
+Going Green 2	mistake	ошибаться	reuse	4645	ошибка
+Going Green 2	oil	нефть	mismatch	8310	масло
+Going Green 2	persuade	убеждать	reuse	3944	убеждать
+Going Green 2	pollution	загрязнение	reuse	7788	загрязнение
+Going Green 2	print	печатать	reuse	6793	печатать
+Going Green 2	recycle	перерабатывать	reuse	3238	перерабатывать
+Going Green 2	statement	утверждение	reuse	5713	утверждение
+Going Green 2	ton	тонна	reuse	5636	тонна
+Going Green 2	waste	отходы, мусор	reuse	5545	отходы
+Going Green 2 Phrasals & Phrases	break down	разбивать, разделять	mismatch	8342	ломать
+Going Green 2 Phrasals & Phrases	break up	распадаться, разлагаться	mismatch	3484	заканчивать учебный год
+Going Green 2 Phrasals & Phrases	throw away	выбрасывать	reuse	1281	выбрасывать
+3a	astronomy	астрономия	reuse	4379	астрономия
+3a	biology	биология	reuse	2341	биология
+3a	chemistry	химия	reuse	2342	химия
+3a	chimney	труба, дымоход	reuse	7719	труба
+3a	crowd	толпа	reuse	6761	толпа
+3a	curious	любопытный	reuse	7603	любопытный
+3a	dry	сушить	reuse	2686	сушить
+3a	ecology	экология	reuse	8149	экология
+3a	education	образование, просвещение, обучение	reuse	3503	образование
+3a	expect	ожидать, ждать	reuse	5533	ожидать
+3a	field	область (изучения)	mismatch	5539	поле
+3a	flight	полёт	mismatch	1977	рейс
+3a	float	плыть на поверхности, в воздухе	reuse	3552	плавать (на поверхности)
+3a	gather	собирать	reuse	8171	собираться
+3a	heat	жара, жар	mismatch	8142	обогревать
+3a	height	высота	mismatch	6269	рост
+3a	history	история	reuse	7561	история
+3a	human	человеческий	reuse	3316	человек
+3a	inventor	изобретатель	reuse	7680	изобретатель
+3a	journey	путешествие, поездка	reuse	7459	путешествие
+3a	lift	поднимать	mismatch	5168	лифт
+3a	member	член, участник	reuse	7790	член
+3a	nearby	рядом, неподалеку	mismatch	6023	поблизости
+3a	notice	замечать	reuse	7537	замечать
+3a	passenger	пассажир	reuse	7398	пассажир
+3a	perform	выполнять, исполнять, делать	mismatch	7926	показывать, представлять
+3a	permission	разрешение	reuse	3509	разрешение
+3a	physics	физика	reuse	2351	физика
+3a	power	сила	reuse	6476	власть, сила
+3a	reach	достигать, добираться	mismatch	3357	добраться
+3a	science	наука	mismatch	4962	естествознание
+3a	straw	соломинка, солома	reuse	5671	соломинка
+3a	table	таблица	mismatch	5216	стол
+3a	unusual	необычный	reuse	7566	необычный
+3a Phrasals & Phrases	take place	происходить; иметь место; случаться	reuse	6739	состояться, происходить
+3b	achieve	достигать, добиваться, успешно выполнять	reuse	7686	достигать, добиваться
+3b	architect	архитектор	reuse	5155	архитектор
+3b	cashier	кассир	reuse	8334	кассир
+3b	computer programmer	программист	reuse	1353	программист
+3b	customer	заказчик, покупатель	reuse	6870	покупатель
+3b	mechanic	механик	reuse	5593	механик
+3b	meet	сталкиваться с чем-либо	mismatch	1593	встречать
+3b	mind	возражать, обращать внимание	mismatch	6090	ум
+3b	pay	оплата	mismatch	5159	платить
+3b	rise	повышение	mismatch	3221	подниматься
+3b	traffic warden	регулировщик дорожного движения	reuse	6561	дорожный инспектор, регулировщик
+3b	uniform	форма, униформа	reuse	7698	форменная одежда, форма
+3b	vet	ветеринар	reuse	7726	ветеринар
+3c	announce	объявлять, заявлять, извещать	reuse	3425	объявлять
+3c	article	статья	reuse	5156	статья
+3c	but	но	mismatch	5098	но
+3c	coin	монета	reuse	6041	монета
+3c	culture	культура (бактерий)	reuse	5010	культура
+3c	ground	земля	reuse	7054	земля
+3c	guest	приглашённый, гость	reuse	7439	гость
+3c	harmful	вредный, приносящий вред	reuse	8121	вредный
+3c	highlighted	выделенный, освещённый	reuse	5394	выделенный
+3c	invention	изобретение	reuse	3507	изобретение
+3c	investigate	исследовать, расследовать	reuse	3858	расследовать
+3c	look	внешний вид, взгляд	mismatch	4932	смотреть
+3c	mystery	загадка	mismatch	7560	детективный роман, рассказ
+3c	refuse	отказываться	reuse	3946	отказываться
+3c	scientist	учёный	reuse	7677	ученый
+3c	spot	обнаруживать, обозначать	mismatch	8184	замечать, определять
+3c	work	работать	reuse	5030	работать
+3d	adult	взрослый	reuse	7724	взрослый
+3d	bill	счёт	reuse	4365	счёт
+3d	biography	биография	reuse	7565	биография
+3d	degree	степень	reuse	3332	учёная степень
+3d	dizzy	чувствующий головокружение, ошеломлённый	reuse	8487	испытывающий головокружение
+3d	graduate	оканчивать	mismatch	1191	окончить университет
+3d	heading	заголовок	reuse	6008	заголовок
+3d	law	закон	reuse	7679	закон
+3d	lawyer	адвокат	reuse	7728	юрист, адвокат
+3d	miss	скучать	reuse	7318	скучать
+3d	mobile	мобильный	reuse	2278	мобильный телефон
+3d	number	нумеровать, давать номер	mismatch	4835	число
+3d	respect	уважение	reuse	6547	уважение
+3d	stage	место действия	mismatch	2201	сцена
+3d	swap	обмениваться	reuse	8380	обмениваться
+3d	X-ray	рентген	reuse	370	рентген
+3e	adventure	приключение	reuse	8036	приключение
+3e	ancient	древний	reuse	3294	древний
+3e	cave	пещера	reuse	8203	пещера
+3e	climb	карабкаться, лезть, залезать	reuse	4926	карабкаться, взбираться
+3e	comedy	комедия	reuse	8034	комедия
+3e	competition	соревнование	reuse	7799	конкурс, соревнование
+3e	confirm	подтверждать	reuse	3758	подтверждать
+3e	cover	закрывать, укрывать	mismatch	3070	накрывать
+3e	crawl	ползти	reuse	7480	ползать
+3e	drawer	ящик	reuse	2414	выдвижной ящик
+3e	fairy tale	сказка	reuse	7562	сказка
+3e	gallery	галерея	reuse	6517	галерея
+3e	gasp	затруднённое дыхание	reuse	7478	тяжелое дыхание/открывать рот (от удивления)
+3e	incorrect	неправильный	reuse	2758	неправильный
+3e	order	порядок	mismatch	5935	заказ; заказывать
+3e	plot	сюжет	reuse	8063	сюжет
+3e	point	указывать, направлять в нужную сторону	reuse	5667	указывать
+3e	relieved	испытывающий облегчение	reuse	7484	испытывающий облегчение
+3e	return	возвращать(ся)	reuse	4654	возвращаться
+3e	scene	сцена, эпизод	reuse	8102	сцена
+3e	set	устанавливать, определять	reuse	3829	устанавливать
+3e	torch	факел, фонарик	reuse	2405	фонарик
+3e	treasure	сокровище	reuse	7508	сокровище
+3e	tunnel	туннель	reuse	7263	туннель
+3e	wallet	кошелёк, бумажник	reuse	8345	бумажник
+3e	wood	лес	reuse	4658	лес
+3e Phrasals & Phrases	at least	по крайней мере	reuse	4674	по крайней мере
+3e Phrasals & Phrases	stay behind	задержаться	reuse	3495	задерживаться (после уроков)
+3e Phrasals & Phrases	turn on	включать	reuse	8054	включать
+3f	career	карьера	reuse	8037	карьера
+3f	childhood	детство	reuse	7281	детство
+3f	earn	зарабатывать	reuse	1962	зарабатывать
+3f	government	правительство	reuse	8143	правительство
+3f	raise	растить, поднимать, воспитывать	reuse	4690	растить
+3f	responsible	ответственный	reuse	7967	ответственный
+3f	wage	заработная плата, почасовая оплата труда	reuse	7882	заработная плата
+3f Phrasals & Phrases	pass out	падать в обморок	mismatch	3969	терять сознание
+Culture Corner 3	compose	сочинять, создавать, писать (в музыке, литературе)	reuse	3901	сочинять
+Culture Corner 3	develop	развивать	reuse	7918	развивать
+Culture Corner 3	director	директор, управляющий	mismatch	3903	режиссёр
+Culture Corner 3	historical	исторический	reuse	3099	исторический
+Culture Corner 3	image	изображение, образ	reuse	5709	изображение, образ
+Culture Corner 3	note	банкнота	mismatch	6119	записка
+Culture Corner 3	pound	фунт стерлингов	reuse	7096	фунт (о весе, 453 грамма)
+Culture Corner 3	rude	грубый	reuse	3446	грубый
+Culture Corner 3	site	площадка, место	reuse	7712	место
+Culture Corner 3	vary	менять, изменяться	mismatch	5795	различаться
+Across the Curriculum: History	continent	континент	reuse	7431	континент
+Across the Curriculum: History	cross	пересекать, переходить, переправляться	reuse	6493	пересекать
+Across the Curriculum: History	fortune	состояние, богатство, удача	reuse	3956	удача
+Across the Curriculum: History	map	карта	reuse	7399	карта
+Across the Curriculum: History	master	специалист, мастер	mismatch	7888	хозяин
+Across the Curriculum: History	route	маршрут	reuse	4331	маршрут
+Across the Curriculum: History	sail	плыть по морю, идти под парусами	reuse	3358	плыть под парусом
+Across the Curriculum: History	storm	шторм	mismatch	7490	буря, гроза
+Across the Curriculum: History	thief	вор	reuse	4722	вор
+Across the Curriculum: History	valuable	дорогой, ценный, дорогостоящий	reuse	8394	ценный
+Across the Curriculum: History	violent	сильный, ожесточённый, яростный	mismatch	8085	жестокий
+4a	appearance	внешний вид	reuse	7443	внешность
+4a	case	дело	mismatch	8348	чемодан
+4a	classmate	одноклассник	reuse	5329	одноклассник
+4a	compare	сравнивать	reuse	6670	сравнивать
+4a	confidence	уверенность	reuse	1250	уверенность
+4a	curly	кудрявый, вьющийся	reuse	7651	кудрявый
+4a	fair	светлый	reuse	7649	светлый
+4a	false	ложный, лживый, ненастоящий	mismatch	5173	неверный
+4a	fantasy	фантазия, вымысел	reuse	6969	фантазия
+4a	fat	жир	mismatch	7672	толстый, тучный
+4a	fictional	вымышленный, выдуманный	reuse	7584	вымышленный
+4a	popular	популярный	reuse	7434	популярный
+4a	pound	фунт	reuse	7096	фунт (о весе, 453 грамма)
+4a	skinny	тощий	reuse	7668	худой, тощий
+4a	speed	скорость	reuse	7732	скорость
+4a	stare	уставиться, пристально смотреть	reuse	3792	пристально смотреть
+4a	thick	толстый	reuse	5408	толстый
+4a	wide	широкий	reuse	5640	широкий
+4b	awful	ужасный	reuse	7780	ужасный
+4b	baggy	мешковатый, обвисший	reuse	1047	мешковатый
+4b	casual	повседневный	reuse	2771	повседневный
+4b	character	характер	mismatch	7593	персонаж
+4b	cotton	хлопок	reuse	8366	хлопок
+4b	disgusting	отвратительный, неприятный	reuse	6610	отвратительный
+4b	floral	цветастый	reuse	1043	в цветочек
+4b	loose-fitting	свободный, просторный	reuse	2773	свободный (об одежде)
+4b	mark	заметка, метка	mismatch	5664	отметка
+4b	mind	обращать внимание, возражать	mismatch	6090	ум
+4b	smart	нарядный, красивый	reuse	2776	нарядный
+4b	state	утверждать	mismatch	6817	состояние
+4b	stressed	напряжённый, нагруженный	reuse	6934	напряженный
+4b	suit	подходить	mismatch	5758	костюм
+4b	sweater	свитер	reuse	7239	свитер
+4b	top	блузка, топ	reuse	7238	топ
+4b	trendy	модный	reuse	2777	модный
+4b	velvet	бархат	reuse	8360	бархат
+4b Phrasals & Phrases	get dressed	одеваться	reuse	6597	одеваться
+4b Phrasals & Phrases	hang on	ожидать, ждать	mismatch	7218	подождать
+4c	blouse	блузка	reuse	5745	блузка
+4c	borrow	занимать, брать в долг	mismatch	7219	взять на время
+4c	chef	повар	reuse	771	шеф-повар
+4c	collection	коллекция	reuse	7202	коллекция, собрание
+4c	complex	комплекс	reuse	3884	комплекс (зданий)
+4c	costume	костюм	reuse	6718	костюм
+4c	design	дизайн	reuse	5250	конструирование, дизайн
+4c	director	режиссёр	reuse	3903	режиссёр
+4c	editor	редактор	reuse	3904	редактор
+4c	knit	вязать	reuse	7622	вязать
+4c	mayor	мэр	reuse	7792	мэр
+4c	parcel	посылка	reuse	4560	посылка
+4c	play	пьеса	reuse	5992	пьеса; играть
+4c	poem	стихотворение	reuse	7557	стихотворение
+4c	produce	делать, производить	reuse	3465	производить
+4c	project	представлять, демонстрировать	mismatch	4666	проект
+4c	publish	публиковать, издавать	reuse	1929	публиковать
+4c	sort	сорт, тип	reuse	3668	сортировать
+4c	stage	инсценировать	mismatch	2201	сцена
+4c	translate	переводить	reuse	2636	переводить
+4d	ankle	лодыжка, щиколотка	reuse	8435	лодыжка
+4d	bleed	кровоточить	reuse	3242	кровоточить
+4d	century	век	reuse	7385	век
+4d	exercise	упражняться, делать упражнения, тренироваться	reuse	2628	упражнение
+4d	fix	ремонтировать, налаживать, чинить	reuse	7892	ремонтировать, чинить
+4d	ink	чернила	reuse	4894	чернила
+4d	lifetime	жизненный период, жизнь	reuse	7255	целая жизнь
+4d	mark	знак, метка, клеймо, заметка	mismatch	5664	отметка
+4d	mend	штопать, чинить	reuse	3236	чинить
+4d	needle	игла	mismatch	4303	иголка
+4d	panic	паниковать, беспокоиться	reuse	7768	паника
+4d	polish	красить	mismatch	6301	польский/поляк
+4d	repair	чинить, ремонтировать	reuse	5612	ремонтировать
+4d	rub	тереть, втирать	reuse	3073	тереть
+4d	scary	страшный	mismatch	7775	устрашающий, жуткий
+4d	scream	кричать	mismatch	6940	крик
+4d	sharp	острый	reuse	5959	острый
+4d	stick	палка	reuse	5914	палка, палочка
+4d	tribe	род, клан, племя	reuse	3985	племя
+4e	bright	яркий, живой, оживлённый	reuse	8193	яркий
+4e	extract	отрывок	reuse	8105	фрагмент, отрывок
+4e	face	сталкиваться с ч.-л.	reuse	6015	сталкиваться (зд.)
+4e	fit	подходить, прилегать, быть в пору	reuse	8374	подходить по размеру
+4e	mark	оценка, отметка	reuse	5664	отметка
+4e	miss	опаздывать, промахиваться, упустить	mismatch	7318	скучать
+4e	nasty	неприятный, негодный, плохой	mismatch	3444	отвратительный
+4e	overcome	освободиться, побеждать, преодолевать	reuse	7514	преодолевать
+4e	shy	стеснительный, робкий	reuse	4730	застенчивый, робкий
+4e	team	команда	reuse	8087	команда
+4e	vitamin	витамин	reuse	8448	витамин
+4f	afford	иметь возможность, быть в состоянии	mismatch	7903	позволять себе
+4f	argument	аргумент, обстоятельство	mismatch	3557	спор
+4f	balanced	сбалансированный	mismatch	7972	уравновешенный
+4f	community centre	культурный и общественный центр микрорайона	reuse	3883	общественный центр
+4f	furry	меховой, пушистый, подбитый мехом	reuse	5464	пушистый, меховой
+4f	independent	независимый	reuse	2759	независимый
+4f	original	оригинальный, подлинный	reuse	3700	оригинальный
+4f	rent	брать в аренду, сдавать в аренду	reuse	7042	арендовать
+4f	sew	шить	reuse	7618	шить
+Culture Corner 4	bell	колокольчик	reuse	5135	колокольчик
+Culture Corner 4	check	клетка, клетчатая материя	mismatch	6495	проверять
+Culture Corner 4	folk	национальный, традиционный	mismatch	1215	фолк
+Culture Corner 4	kilt	килт	reuse	7268	килт (шотландская мужская юбка)
+Culture Corner 4	performer	артист-исполнитель	reuse	8010	исполнитель
+Culture Corner 4	pin	булавка	mismatch	5126	значок (зд.)
+Culture Corner 4	spot	место	reuse	7355	место
+Culture Corner 4	tartan	шотландка, клетчатая шотландская шерстяная ткань	reuse	5132	шерстяная клетчатая материя
+Culture Corner 4 Phrasals & Phrases	make up	придавать форму, формировать	mismatch	8175	выдумывать
+Going Green 4	chop	рубить	mismatch	5952	резать
+Going Green 4	cosy	уютный	reuse	7485	уютный, удобный
+Going Green 4	fleece	флис	mismatch	4719	овечья шерсть
+Going Green 4	fibre	волокно, нить	mismatch	7194	клетчатка
+Going Green 4	label	этикетка, метка	reuse	8384	ярлык, этикетка
+Going Green 4	natural	естественный, натуральный	mismatch	3100	природный
+Going Green 4	treat	обрабатывать, обращаться (с)	mismatch	8462	лечить
+Going Green 4 Phrasals & Phrases	environmentally friendly	безвредный для окружающей среды	mismatch	3797	экологичный
+5a	bridge	мост	reuse	2116	мост
+5a	crack	давать трещину, трескаться, ломаться	reuse	3549	трескаться
+5a	drought	засуха	reuse	1282	засуха
+5a	earthquake	землетрясение	reuse	3215	землетрясение
+5a	emergency	неотложный случай, экстренная ситуация	reuse	8472	критическое положение, непредвиденный случай
+5a	flood	наводнение	reuse	7199	наводнение
+5a	habitat	среда обитания	reuse	8134	естественная среда, ареал
+5a	hit	ударять	reuse	4092	ударять
+5a	litter	сорить, мусорить	reuse	7062	мусор
+5a	ruined	разрушенный	reuse	6912	разрушенный
+5a	reach	достигать, добираться	mismatch	3357	добраться
+5a	rescue	спасать, освобождать, выручать	reuse	6981	спасать
+5a	rush	мчаться, кидаться, бросаться	reuse	6941	мчаться, устремляться
+5a	scream	визжать, кричать	mismatch	6940	крик
+5a	search	искать, исследовать	reuse	2485	искать
+5a	shake	трясти(сь)	reuse	4431	трясти
+5a	smash	разбивать вдребезги, ломать	reuse	3556	разбивать вдребезги
+5a	tornado	торнадо	reuse	3224	торнадо
+5a	treat	лечить	reuse	8462	лечить
+5a	tsunami	цунами	reuse	1288	цунами
+5a	violent	неистовый, яростный, жестокий	reuse	8085	жестокий
+5b	documentary	документальный фильм	reuse	7758	документальный фильм
+5b	feed	кормить	reuse	7299	кормить
+5b	hunt	охотиться	reuse	8228	охотиться
+5b	interact	взаимодействовать	reuse	3574	взаимодействовать
+5b	plant	сажать, сеять	reuse	8146	сажать (растения)
+5b	pollution	загрязнение	reuse	7788	загрязнение
+5b	protect	защищать, сохранять	reuse	7328	защищать
+5b	reduce	сокращать	reuse	8139	сокращать
+5b	train	обучать, готовить	mismatch	7911	тренировать(ся)
+5b Phrasals & Phrases	global warming	глобальное потепление	reuse	3800	глобальное потепление
+5c	cry	кричать, плакать	reuse	7479	кричать
+5c	donation	пожертвование	reuse	8344	пожертвование
+5c	feed	кормить	reuse	7299	кормить
+5c	intend	намереваться, планировать	reuse	3943	намереваться
+5c	ladder	лестница, трап	reuse	8157	лестница
+5c	mean	значить	reuse	5902	значить, означать
+5c	nearly	почти	reuse	2258	почти
+5c	promise	обещать	reuse	3434	обещать
+5c	reach	доезжать, добираться	mismatch	3357	добраться
+5c	risk	рисковать	reuse	8463	риск
+5c	stubborn	упрямый	reuse	5379	упрямый
+5c	warn	предупреждать, предостерегать	reuse	7744	предупреждать
+5c Phrasals & Phrases	look forward to	ждать с нетерпением	reuse	7844	ждать чего-либо с нетерпением
+5c Phrasals & Phrases	wildlife documentary	фильм о дикой природе	reuse	7803	документальный фильм о природе
+5d	pour	лить	reuse	3220	лить (о дожде)
+5d	power cut	отключение электричества	reuse	7492	отключение электричества
+5d	roar	реветь, громыхать, шуметь	mismatch	4296	рычать
+5d	rock	скала	reuse	7455	скала
+5d	tower	башня	reuse	7375	башня
+5d	satellite	спутник	reuse	3310	спутник
+5d	shower	ливень	mismatch	1467	душ
+5d	sign	знак	reuse	7992	знак
+5d	whistle	свистеть	reuse	6153	свисток
+5d Phrasals & Phrases	boiling hot	очень жаркий	reuse	7222	очень жарко
+5d Phrasals & Phrases	clear up	очиститься	mismatch	3663	прибираться
+5d Phrasals & Phrases	weather forecast	прогноз погоды	reuse	5718	прогноз погоды
+5e	argue	спорить	reuse	8418	спорить
+5e	encourage	поощрять, стимулировать, способствовать	reuse	3939	поощрять
+5e	introduce	представлять кого-либо (в первый раз), знакомить	reuse	8185	представлять
+5e	litter	мусор	reuse	7062	мусор
+5e	pack	упаковать	reuse	5790	упаковывать
+5e	point	дело, суть, смысл	mismatch	6148	пункт
+5e	public transport	общественный транспорт	reuse	2872	общественный транспорт
+5e	recycle	перерабатывать	reuse	3238	перерабатывать
+5e	reduce	снижать, понижать	mismatch	8139	сокращать
+5e	traffic	движение, трафик	reuse	6566	движение
+5e Phrasals & Phrases	set up	запускать	mismatch	8489	основывать
+5f	crew	команда (на корабле или самолете)	reuse	4514	команда
+5f	exhaust fumes	выхлопные газы	reuse	3798	выхлопные газы
+5f	faint	падать в обморок	reuse	3964	падать в обморок
+5f	nickname	неофициальное имя, прозвище	reuse	6524	прозвище
+5f	staff	коллектив (на работе)	mismatch	2512	персонал
+5f	team	команда (спортивная)	reuse	8087	команда
+5f	thunderstorm	гроза	reuse	1286	гроза
+Culture Corner 5	cancel	отменять, останавливать	reuse	6672	отменять
+Culture Corner 5	creature	создание, существо	reuse	7842	создание, существо
+Culture Corner 5	cute	хорошенький, привлекательный	reuse	7662	привлекательный, интересный
+Culture Corner 5	horn	рог	reuse	5492	рог
+Culture Corner 5	spot	обнаруживать, определять местонахождение	reuse	8184	замечать, определять
+Culture Corner 5	tourist attraction	достопримечательность	reuse	7709	место, привлекательное для туристов, достопримечательность
+Across the Curriculum: Science	drop	капля	reuse	8451	капля
+Across the Curriculum: Science	freeze	мерзнуть	mismatch	4090	замерзать
+Across the Curriculum: Science	pavement	тротуар	reuse	6466	тротуар
+Across the Curriculum: Science	violent	жестокий	reuse	8085	жестокий
+6a	cuisine	кухня, кулинарное искусство	reuse	7116	кухня
+6a	explore	исследовать	reuse	7940	исследовать
+6a	landmark	достопримечательность	reuse	7928	достопримечательность
+6a	view	вид	reuse	7373	вид
+6a	wonder	удивляться, интересоваться	reuse	3437	интересоваться
+6b	amazing	поразительный, удивительный	reuse	7781	удивительный, поразительный
+6b	annoying	раздражающий	reuse	3184	раздражающий
+6b	baggage	багаж	reuse	2904	багаж
+6b	communicate	общаться	reuse	7695	общаться
+6b	confused	поставленный в тупик, смущённый	reuse	7486	смущенный
+6b	delighted	восхищённый, восторженный	reuse	3441	восхищённый
+6b	engine	двигатель, мотор	reuse	4391	двигатель
+6b	ferry	паром	reuse	1976	паром
+6b	flat tyre	спущенная шина	reuse	6132	спущенная шина
+6b	imagine	воображать, представлять	reuse	3474	представлять
+6b	irritated	раздражённый	reuse	4004	раздражённый
+6b	landing	посадка	reuse	8468	посадка, приземление
+6b	luckily	к счастью	reuse	2790	к счастью
+6b	manage	справляться, управлять, управляться	reuse	3463	управлять
+6b	manager	управляющий, менеджер	reuse	8332	управляющий
+6b	miss	пропускать, опаздывать	reuse	6016	пропускать
+6b	monument	памятник	reuse	4662	памятник
+6b	palace	дворец	reuse	7700	дворец
+6b	passport	паспорт	reuse	4629	паспорт
+6b	reservation	бронь, забронированный номер или место	reuse	7286	резервирование, бронирование
+6b	rob	грабить	reuse	7338	грабить, воровать
+6b	route	маршрут	reuse	4331	маршрут
+6b	steal	воровать, красть	reuse	7336	воровать
+6b	theme park	парк отдыха с аттракционами	reuse	7922	тематический парк
+6b Phrasals & Phrases	go wrong	не удаваться, пойти не так	reuse	4065	идти не так
+6c	experience	опыт	reuse	7821	опыт
+6c	probably	возможно	mismatch	2259	вероятно
+6c	report	докладывать	mismatch	6993	сообщать
+6d	board	садиться в самолет, на корабль	mismatch	1848	доска (для сноуборда)
+6d	boarding school	закрытое учебное заведение, школа-интернат	reuse	3330	школа-пансион
+6d	book	бронировать	reuse	6050	заказывать, бронировать
+6d	coach	туристический или междугородный автобус	reuse	6062	автобус (междугородний)
+6d	cruise	круиз	reuse	6063	круиз
+6d	helicopter	вертолёт	reuse	71	вертолёт
+6d	invent	изобретать	reuse	6876	изобретать
+6d	lane	улочка, переулок	reuse	6470	переулок
+6d	sign	знак	reuse	7992	знак
+6d	traffic lights	светофор	reuse	6563	светофор
+6d Phrasals & Phrases	get off	сходить	mismatch	801	выходить (из транспорта)
+6e	accommodation	жильё	mismatch	7017	размещение, расселение
+6e	culture	культура	reuse	5010	культура
+6e	kindness	доброта	reuse	3837	доброта
+6e	model	модель, образец	reuse	4420	модель
+6e	penfriend	друг по переписке	reuse	2475	друг по переписке
+6e	recipe	рецепт, инструкция	reuse	7174	рецепт (кулинарный)
+6e	swap	обмениваться	reuse	8380	обмениваться
+6e	welcoming	гостеприимный	reuse	4044	гостеприимный
+6e Phrases	keep in touch	поддерживать отношения	reuse	4093	поддерживать связь
+6f	achieve	достигать	reuse	7686	достигать, добиваться
+6f	curious	любопытный	reuse	7603	любопытный
+6f	deliver	доставлять	reuse	3459	доставлять
+6f	excited	взволнованный	reuse	7779	взволнованный
+6f	hire	брать напрокат, нанимать	mismatch	3622	арендовать
+6f	journey	поездка, путешествие	reuse	7459	путешествие
+6f	room	пространство	reuse	6536	место, пространство
+6f	sink	затонуть	mismatch	6429	раковина
+6f	trip	поездка, путешествие	mismatch	7472	спотыкаться
+6f Phrasals & Phrases	in advance	раньше времени, заранее	reuse	4080	заранее
+6f Phrasals & Phrases	on time	вовремя, по расписанию	reuse	3368	вовремя
+Culture Corner 6	bank	берег	mismatch	6464	банк
+Culture Corner 6	castle	замок	reuse	7386	замок
+Culture Corner 6	flow	течь	reuse	3218	течь
+Culture Corner 6	liquid	жидкий	reuse	5452	жидкость
+Culture Corner 6	mouth	устье реки	mismatch	5323	рот
+Culture Corner 6	provide	обеспечивать, снабжать	reuse	8343	обеспечивать
+Culture Corner 6	protect	защищать	reuse	7328	защищать
+Culture Corner 6	sight	вид	mismatch	4663	достопримечательность
+Going Green 6	ancestor	предок	reuse	3977	предок
+Going Green 6	coal	уголь	reuse	7717	уголь
+Going Green 6	fossil fuel	органическое топливо	reuse	3799	ископаемое топливо
+Going Green 6	marble	мрамор	reuse	7527	мрамор
+Going Green 6	mixture	смесь	reuse	7177	смесь
+Going Green 6	petrol	бензин	reuse	7836	бензин
+Going Green 6	release	высвобождать, выпускать	reuse	6875	выпускать (в свет)
+Going Green 6	repair	восстанавливать, ремонтировать	reuse	5612	ремонтировать
+Going Green 6	sculpture	скульптура	reuse	3093	скульптура
+Going Green 6	statue	статуя	reuse	6029	статуя
+7a	complete	заканчивать, завершать	reuse	7056	заканчивать, завершать
+7a	connect	соединять(ся)	mismatch	1320	подключать
+7a	cope (with)	справляться	reuse	7693	справиться
+7a	deny	отрицать, отвергать	reuse	3856	отрицать
+7a	download	загружать	mismatch	2478	скачивать
+7a	file	файл, документ	reuse	7855	файл
+7a	games console	игровая приставка	reuse	7908	игровая приставка
+7a	install	устанавливать	reuse	7331	устанавливать
+7a	screen	экран	reuse	2071	экран
+7a Phrasals & Phrases	chat online	беседовать онлайн	mismatch	696	общаться в чате
+7b	degree	учёная степень	reuse	3332	учёная степень
+7b	graffiti	граффити, рисунки на стенах	reuse	7063	граффити
+7b	mark	ставить отметку (оценку), отмечать	reuse	5664	отметка
+7b	timetable	расписание	reuse	4964	расписание
+7c	cheat	обманывать, списывать	mismatch	4231	жульничать
+7c	ordinary	обыкновенный	mismatch	7571	обычный
+7c Phrasals & Phrases	do the washing up	мыть посуду	reuse	6678	мыть посуду
+7d	bark	кора	mismatch	4760	лаять
+7d	cover	давать репортаж	mismatch	3070	накрывать
+7d	director	режиссёр	reuse	3903	режиссёр
+7d	editor	редактор	reuse	3904	редактор
+7d	presenter	ведущий	reuse	7817	ведущий, диктор
+7d	producer	продюсер	reuse	7816	продюсер, режиссер
+7d	review	обзор	reuse	7814	делать обзор
+7d	sitcom	комедийное шоу, комедийный сериал	reuse	6620	комедия положений
+7d Phrasals & Phrases	rush hour	час пик	reuse	2874	час пик
+7e	development	развитие, усовершенствование	reuse	3955	развитие
+7e	high-tech	высокотехнологичный	reuse	7906	высокотехнологичный
+7e	inaccurate	неверный, некорректный	mismatch	3874	неточный
+7e	violent	жестокий	reuse	8085	жестокий
+7f	advertisement	реклама	reuse	7761	реклама
+7f	educate	обучать, давать образование	reuse	6895	обучать
+7f	hurt	обижать, причинять боль	mismatch	8430	повредить, ударить
+7f	mean	скупой, злой	mismatch	8412	жадный
+7f	mood	настроение	reuse	8112	настроение, расположение духа
+7f	reveal	разоблачать, раскрывать	reuse	3764	раскрывать
+Culture Corner 7	medieval	средневековый	reuse	7379	средневековый
+Culture Corner 7	precious	ценный, дорогой	mismatch	5258	драгоценный
+Culture Corner 7	survive	выживать	reuse	7955	выживать
+Culture Corner 7	wealthy	состоятельный, богатый	reuse	6910	богатый
+Across the Curriculum: ICT	handle	обрабатывать	mismatch	7005	ручка
+Across the Curriculum: ICT	share	использовать совместно, делиться	reuse	8382	делиться
+8a	bizarre	причудливый, чудной, необычный	mismatch	3810	странный
+8a	board	доска	reuse	1848	доска (для сноуборда)
+8a	bounce	отскакивать, отпрыгивать	reuse	4013	отскакивать
+8a	bump	ударяться, налетать	reuse	3767	удариться
+8a	competitor	участник состязания, соперник	reuse	3206	участник соревнования
+8a	discover	обнаруживать, открывать	reuse	7465	обнаруживать, находить
+8a	dive	погружаться с аквалангом, нырять	reuse	4515	нырять
+8a	equipment	оборудование, снаряжение	reuse	7822	оборудование
+8a	flippers	ласты	reuse	4752	ласты
+8a	goal	ворота, гол	mismatch	4060	цель
+8a	hill	холм, возвышенность	reuse	2282	холм
+8a	invent	изобретать	reuse	6876	изобретать
+8a	knock	удар, столкновение, толчок	mismatch	6942	стучать
+8a	mountaineering	альпинизм	reuse	6066	альпинизм
+8a	roll	катиться	reuse	3577	катиться
+8a	rope	канат, веревка	reuse	6758	канат
+8a	slide	скользить	reuse	3578	скользить
+8a	slip	поскользнуться, скользить	reuse	7991	скользить, поскользнуться
+8a	splash	брызгаться, плескаться	reuse	7990	брызгать, плескать
+8a	swing	втыкать с размаху	mismatch	7060	качели
+8a	waterfall	водопад	reuse	721	водопад
+8a Phrasals & Phrases	rock climbing	скалолазание	reuse	6067	скалолазание
+8a Phrasals & Phrases	take part in	принимать участие в	reuse	7783	участвовать в
+8a Phrasals & Phrases	work out	отрабатывать, улучшать	mismatch	3483	разобраться
+8b	athletics	атлетика	reuse	2812	лёгкая атлетика
+8b	court	корт	mismatch	3855	суд
+8b	cricket	крикет	reuse	2438	крикет
+8b	experience	опыт	reuse	7821	опыт
+8b	flat	невыразительный, однообразный	mismatch	5182	квартира
+8b	gymnastics	гимнастика	reuse	2816	гимнастика
+8b	jogging	бег трусцой	reuse	6525	оздоровительный бег
+8b	karate	каратэ	reuse	2444	карате
+8b	lovely	красивый, прекрасный, очаровательный	reuse	7324	прекрасный, чудесный
+8b	match	матч, встреча	mismatch	8373	подходить по цвету
+8b	mumble	бормотать	reuse	4025	бормотать
+8b	rugby	рэгби	mismatch	2820	регби
+8b	scuba diving	плавание под водой с аквалангом или спецоборудованием	reuse	6111	подводное плавание, погружение с аквалангом
+8b	squash	сквош	reuse	2821	сквош
+8b	trainers	кроссовки	reuse	8372	кроссовки
+8b	wonder	интересоваться, желать узнать	reuse	3437	интересоваться
+8c	boil	кипеть	mismatch	7158	кипятить
+8c	cup	кубок	mismatch	8252	чашка
+8c	drop	ронять	mismatch	8451	капля
+8c	exhibition	выставка	reuse	7358	выставка
+8c	fix	чинить	reuse	7892	ремонтировать, чинить
+8c	iron	железо	reuse	7191	железо
+8c	reservation	предварительный заказ	mismatch	7286	резервирование, бронирование
+8c	splash	всплеск	mismatch	7990	брызгать, плескать
+8c	steam	пар	mismatch	3393	готовить на пару
+8c	tidy	убираться, наводить чистоту, порядок	reuse	7578	чистый, опрятный
+8c Phrasals & Phrases	at least	во всяком случае, по крайней мере	reuse	4674	по крайней мере
+8d	amazed	изумлённый	mismatch	3009	поражённый
+8d	bat	бита	reuse	1847	бита
+8d	beat	побить (в соревнованиях), победить	mismatch	3241	биться (о сердце)
+8d	competitor	соперник, конкурент, участник состязания	reuse	3206	участник соревнования
+8d	create	создавать	reuse	6778	создавать
+8d	fan	болельщик, фанат	reuse	6528	фанат, болельщик
+8d	helmet	шлем	reuse	5075	шлем
+8d	pitch	игровая (спортивная) площадка	mismatch	8091	футбольное поле
+8d	record	рекорд	mismatch	2483	записывать
+8d	score	забивать	reuse	7764	забивать
+8d	spectator	зритель, посетитель	reuse	3210	зритель
+8d	tournament	соревнование, турнир	reuse	2454	турнир
+8d	win	победить, выигрывать	reuse	6137	выигрывать
+8d Phrasals & Phrases	come up with	предложить	reuse	7784	предлагать
+8e	annual	ежегодный	reuse	6749	ежегодный
+8e	depend on	зависеть от	reuse	3926	зависеть от
+8e	postcode	почтовый индекс	reuse	6289	почтовый индекс
+8e	surname	фамилия	reuse	6288	фамилия
+8e	timetable	расписание	reuse	4964	расписание
+8f	coach	тренер	reuse	3110	тренер
+8f	junk food	еда всухомятку, неполноценная пища	reuse	8296	нездоровая пища
+8f	tracksuit	спортивный тренировочный костюм	reuse	517	спортивный костюм
+8f	upset	расстроенный	reuse	7553	расстроенный, разочарованный
+Culture Corner 8	beak	клюв	reuse	5410	клюв
+Culture Corner 8	dinosaur	динозавр	reuse	4727	динозавр
+Culture Corner 8	goalkeeper	вратарь	reuse	8094	голкипер, вратарь
+Culture Corner 8	hen	курица	reuse	5442	курица
+Culture Corner 8	striped	полосатый	reuse	8350	полосатый
+Culture Corner 8	title	титул	mismatch	5387	заглавие, название
+Culture Corner 8	wander	бродить, слоняться без дела	reuse	4024	бродить
+Going Green 8	aim	цель	reuse	6872	цель
+Going Green 8	case	дело, особая ситуация	mismatch	8348	чемодан
+Going Green 8	generation	поколение	reuse	6952	поколение
+Going Green 8	interact	взаимодействовать, воздействовать	reuse	3574	взаимодействовать
+Going Green 8	responsibility	ответственность	reuse	4063	ответственность
