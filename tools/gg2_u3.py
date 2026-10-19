@@ -6,7 +6,7 @@ Homework 6, блоки 4–5: варианты восстановлены — Г
 (подтверждено Анной, «Закрытые вопросы», п. 4).
 Кадры учебника с нарисованными людьми берём как есть (там же, п. 5).
 """
-from gg2_build import img, shared, todo, video
+from gg2_build import listen_pick, write_item, img, shared, todo, video
 
 U = "u3"
 UNIT = {"unit": U, "unit_title": "Unit 3", "unit_sort": 3}
@@ -61,15 +61,17 @@ def match_pics(words, title="Соедини картинку со словом")
         for en, ru, f in words]})
 
 
-def quiz_ru_to_en(words, per_question=4):
-    """Отвлекающие — по кругу от самого слова, варианты по алфавиту."""
-    qs, n = [], len(words)
-    for i, (en, ru, _) in enumerate(words):
-        wrong = [words[(i + k) % n][0] for k in range(1, per_question)]
-        options = sorted([en] + wrong, key=str.lower)
-        qs.append({"q": f"Как по-английски «{ru}»?", "type": "single",
-                   "options": [{"text": o} for o in options], "correct": [options.index(en)]})
-    return ("quiz", {"questions": qs})
+def quiz_ru_to_en(words):
+    """Было «Как по-английски»; переводных заданий не делаем — слушаем слово, выбираем картинку.
+    Экраны и телефоны на картинках похожи, их друг другу в отвлекающие не ставим."""
+    return listen_pick([(en, img(U, f)) for en, ru, f in words],
+                       groups=[("computer", "laptop", "screen", "TV"), ("mobile phone", "tablet"),
+                               ("headphones", "speakers")])
+
+
+# фразы, которые картинка не выдаёт однозначно (ноутбук с пузырями — и chat online, и
+# send an email; телефон в руках — и text a friend, и download a song): у них русское слово
+NEED_RU = ("chat online", "download a song", "surf the Internet", "text a friend")
 
 
 def quiz(*items):
@@ -131,11 +133,10 @@ LESSONS = {
                           "которые связаны с интернетом и гаджетами. Они лёгкие и при этом очень полезные!</p>"}),
         flashcards(ACTIONS, "Действия с гаджетами: посмотри, послушай и запомни"),
         match_pics(ACTIONS, "Соедини картинку с выражением"),
-        ("exact_input", {"items": [
-            {"image": img(U, f), "prompt": f"Напиши по-английски: {ru}",
-             "accept": ([en, "take a selfie", "take a photo"] if "/" in en
-                        else [en] + (["surf the internet"] if en == "surf the Internet" else [])),
-             "audio_tts": en.replace("/photo", "")}
+        ("exact_input", {"title": "Напиши выражение по-английски — по картинке или по русскому слову", "items": [
+            write_item([en, "take a selfie", "take a photo"] if "/" in en
+                       else [en] + (["surf the internet"] if en == "surf the Internet" else []),
+                       img(U, f), ru if en in NEED_RU else None, audio_tts=en.replace("/photo", ""))
             for en, ru, f in ACTIONS]}),
 
         hello("hello_highfive",
@@ -579,15 +580,15 @@ LESSONS = {
 
     # ------------------------------------------------------------------ TEST
     "u3_test": {**UNIT, "lesson_title": "Unit 3 Test", "lesson_sort": 7, "kind": "test", "blocks": [
-        ("exact_input", {"items": [
-            {"prompt": f"Напиши по-английски: {ru}", "accept": acc}  # без audio_tts: в тесте звук выдал бы ответ
-            for ru, acc in [
-                ("общаться онлайн", ["chat online"]),
-                ("скачать песню", ["download a song"]),
-                ("сидеть в интернете", ["surf the Internet"]),
-                ("планшет", ["tablet", "a tablet"]),
-                ("наушники", ["headphones"]),
-                ("клавиатура", ["keyboard", "a keyboard"])]]}),
+        ("exact_input", {"title": "Напиши слово по-английски — по картинке или по русскому слову", "items": [
+            write_item(acc, img(U, f), ru if acc[0] in NEED_RU else None)  # без звука: в тесте он выдал бы ответ
+            for ru, acc, f in [
+                ("общаться онлайн", ["chat online"], "chat_online"),
+                ("скачать песню", ["download a song"], "download_song"),
+                ("сидеть в интернете", ["surf the Internet", "surf the internet"], "surf_internet"),
+                ("планшет", ["tablet", "a tablet"], "tablet"),
+                ("наушники", ["headphones"], "headphones"),
+                ("клавиатура", ["keyboard", "a keyboard"], "keyboard")]]}),
         todo(quiz(("Выбери правильный вариант. Look! Tom ___ a selfie with his new phone.",
                    ["takes", "is taking", "is take"], 1),
                   ("We ___ TV right now — we're surfing the Internet.",

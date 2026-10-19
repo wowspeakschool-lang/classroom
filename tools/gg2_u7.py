@@ -1,5 +1,5 @@
 """Go Getter 2 · Unit 7 · Travel — 6 домашек и тест. Источник: docs/GG2_разбор_u7.md."""
-from gg2_build import img, shared, todo, video
+from gg2_build import write_item, write_title, img, shared, todo, video
 
 U = "u7"
 UNIT = {"unit": U, "unit_title": "Unit 7", "unit_sort": 7}
@@ -54,9 +54,17 @@ def cards(items):
                                      for t, tr, im in items]})
 
 
-def exact(items, title="Напиши слово по-английски"):
-    return ("exact_input", {"title": title, "items": [
-        {"prompt": f"Напиши по-английски: {ru}", "accept": acc, "audio_tts": acc[0]} for ru, acc in items]})
+# транспорт на картинке однозначен; глаголы (arrive, get on, get off, leave, take) — нет:
+# высадка из поезда — это и arrive, и get off, поэтому у них остаётся русское слово
+PICTURED = ("car", "boat", "bike", "bus", "motorbike", "plane", "taxi", "train", "tram", "underground")
+
+
+def exact(items, title=None, sound=True):
+    """Было «Напиши по-английски: …» на всё; теперь картинка, а перевод — только у глаголов."""
+    its = [write_item(acc, img(U, acc[0]) if acc[0] in PICTURED else None,
+                      None if acc[0] in PICTURED else ru, audio_tts=acc[0] if sound else None)
+           for ru, acc in items]
+    return ("exact_input", {"title": title or write_title(its), "items": its})
 
 
 def task(title, html):
@@ -394,7 +402,9 @@ HW6 = [
 TEST = [
     exact([("прибыть", ["arrive"]), ("лодка", ["boat", "a boat"]), ("мотоцикл", ["motorbike", "a motorbike"]),
            ("самолёт", ["plane", "a plane"]), ("поезд", ["train", "a train"]),
-           ("метро", ["underground", "the underground"])], title="VOCABULARY. Напиши слова по-английски"),
+           ("метро", ["underground", "the underground"])],
+          title="VOCABULARY. Напиши слово по-английски — по картинке или по русскому слову",
+          sound=False),  # без звука: в тесте он выдал бы ответ
     todo(quiz(q("We ___ the bus yesterday — we walked.", ["didn't took", "didn't take", "wasn't take"], 1),
          q("___ the museum last weekend?", ["Did you visit", "Did you visited", "Were you visit"], 0),
          q("My parents ___ in a hotel — they stayed with friends.", ["weren't stay", "didn't stayed", "didn't stay"], 2),

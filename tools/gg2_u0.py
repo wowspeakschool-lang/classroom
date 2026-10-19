@@ -3,7 +3,7 @@
 Источник: docs/GG2_разбор_u0.md. Блоки 4 и 5 выгрузки разложены: пять
 предложений → пять order, текст Marta → text + quiz.
 """
-from gg2_build import img, shared, todo, video
+from gg2_build import write_item, img, shared, todo, video
 
 U = "u0"
 UNIT = {"unit": U, "unit_title": "Unit 0", "unit_sort": 0}
@@ -31,19 +31,15 @@ LESSONS = {
             "месяцы, глаголы <i>have got</i> и <i>can</i>, <i>there is / there are</i>.</p>"
             "<p>Чтобы пройти тест, нужно набрать 90 баллов. Не торопись и внимательно читай задания. Удачи!</p>"}),
 
-        ("exact_input", {"title": "Напиши слова по-английски", "items": [
-            {"prompt": "1. Напиши по-английски: февраль", "image": img(U, "february"),
-             "accept": ["February", "february"], "audio_tts": "February"},
-            {"prompt": "2. Напиши по-английски: кататься на скейтборде", "image": img(U, "skateboard"),
-             "accept": ["skateboard", "Skateboard"], "audio_tts": "skateboard"},
-            {"prompt": "3. Напиши по-английски: рисовать", "image": img(U, "draw"),
-             "accept": ["draw", "Draw"], "audio_tts": "draw"},
-            {"prompt": "4. Напиши по-английски: кресло", "image": img(U, "armchair"),
-             "accept": ["armchair", "Armchair", "an armchair"], "audio_tts": "armchair"},
-            {"prompt": "5. Напиши по-английски: шкаф для одежды", "image": img(U, "wardrobe"),
-             "accept": ["wardrobe", "Wardrobe", "a wardrobe"], "audio_tts": "wardrobe"},
-            {"prompt": "6. Напиши по-английски: полки", "image": img(U, "shelves"),
-             "accept": ["shelves", "Shelves"], "audio_tts": "shelves"},
+        # без перевода, кроме февраля: зимний календарь не отличить от января и декабря;
+        # звука нет — в тесте он подсказал бы ответ
+        ("exact_input", {"title": "Напиши слово по-английски — по картинке или по русскому слову", "items": [
+            write_item(["February", "february"], img(U, "february"), "февраль", 1),
+            write_item(["skateboard", "Skateboard"], img(U, "skateboard"), None, 2),
+            write_item(["draw", "Draw"], img(U, "draw"), None, 3),
+            write_item(["armchair", "Armchair", "an armchair"], img(U, "armchair"), None, 4),
+            write_item(["wardrobe", "Wardrobe", "a wardrobe"], img(U, "wardrobe"), None, 5),
+            write_item(["shelves", "Shelves"], img(U, "shelves"), None, 6),
         ]}),
 
         ("quiz", {"title": "Выбери правильный вариант, чтобы предложение было грамматически верным", "questions": [

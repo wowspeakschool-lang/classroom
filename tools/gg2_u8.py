@@ -3,7 +3,7 @@
 Источник содержания — docs/GG2_разбор_u8.md. Подтверждённые правки (Анна, 05.10.2026):
 HW2 (1)·12 ключ «going» (не «going to»), HW2 (1)·8 «her homework».
 """
-from gg2_build import img, shared, todo, video
+from gg2_build import listen_pick, write_item, img, shared, todo, video
 
 U = "u8"
 UNIT = {"unit": U, "unit_title": "Unit 8", "unit_sort": 8}
@@ -64,6 +64,10 @@ EVENTS = [  # (англ, рус, картинка)
     ("talent competition", "конкурс талантов", "talent_competition"),
 ]
 
+# пустая сцена, сцена с замком и вешалка с костюмами не называют слово однозначно — у них русское слово
+NEED_RU = ("dance show", "play", "fancy dress party")
+EVENT_FILE = {en: f for en, ru, f in EVENTS}
+
 ACTIONS = [
     ("cook food", "готовить пищу", "cook_food"),
     ("get presents", "получать подарки", "get_presents"),
@@ -112,24 +116,18 @@ LESSONS = {
               "Выполни все задания, чтобы выучить слова на 100%!"),
         flashcards(EVENTS),
         match_pics(EVENTS, "Соедини картинки со словами"),
-        ("exact_input", {"items": [
-            {"prompt": f"Напиши по-английски: {ru}", "accept": [en], "audio_tts": en}
+        ("exact_input", {"title": "Напиши слово по-английски — по картинке или по русскому слову", "items": [
+            write_item([en], img(U, f), ru if en in NEED_RU else None, audio_tts=en)
             for en, ru, f in EVENTS]}),
         # часть (2) — словарный тренажёр
         text("Что ты любишь делать на вечеринках? Выучи ещё шесть фраз — и выполни задания, "
              "чтобы запомнить их на 100%!", h="Что делают на празднике 🎉"),
         flashcards(ACTIONS),
         match_pics(ACTIONS, "Соедини картинки с фразами"),
-        ("quiz", {"title": "Как это по-английски?", "questions": [
-            q("Как по-английски «готовить пищу»?", ["get presents", "cook food", "wear a costume"], 1),
-            q("Как по-английски «получать подарки»?", ["get presents", "sleep on the floor", "cook food"], 0),
-            q("Как по-английски «спеть «С днём рождения»»?",
-              ["take part in a competition", "get presents", 'sing "Happy Birthday"'], 2),
-            q("Как по-английски «спать на полу»?", ["wear a costume", "sleep on the floor", "cook food"], 1),
-            q("Как по-английски «принять участие в конкурсе»?",
-              ["take part in a competition", 'sing "Happy Birthday"', "sleep on the floor"], 0),
-            q("Как по-английски «носить костюм»?", ["cook food", "get presents", "wear a costume"], 2),
-        ]}),
+        # было «Как по-английски …?»; переводных заданий не делаем — слушаем фразу, выбираем картинку
+        listen_pick([(en, img(U, f)) for en, ru, f in ACTIONS],
+                    groups=[("get presents", 'sing "Happy Birthday"')],
+                    title="Послушай фразу и выбери картинку"),
         # часть (3)
         hello("hello_highfive", "Привет ещё раз! 🙌",
               "Добро пожаловать в третью ДОПОЛНИТЕЛЬНУЮ часть домашнего задания. Выполни все задания, "
@@ -465,8 +463,8 @@ LESSONS = {
 
     # ------------------------------------------------------------------ TEST
     "u8_test": {**UNIT, "lesson_title": "Unit 8 Test", "lesson_sort": 6, "kind": "test", "blocks": [
-        ("exact_input", {"items": [
-            {"prompt": f"Напиши по-английски: {ru}", "accept": [en], "audio_tts": en}
+        ("exact_input", {"title": "Напиши слово по-английски — по картинке или по русскому слову", "items": [
+            write_item([en], img(U, EVENT_FILE[en]), ru if en in NEED_RU else None)  # без звука: в тесте он выдал бы ответ
             for en, ru in [("barbecue", "барбекю"), ("dance show", "танцевальное шоу"),
                            ("fancy dress party", "костюмированная вечеринка"), ("picnic", "пикник"),
                            ("sleepover", "ночёвка"), ("talent competition", "конкурс талантов")]]}),

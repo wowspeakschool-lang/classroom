@@ -8,7 +8,7 @@
 """
 import random
 
-from gg2_build import img, shared, todo, video
+from gg2_build import listen_pick, write_item, img, shared, todo, video
 
 U = "u2"
 UNIT = {"unit": U, "unit_title": "Unit 2", "unit_sort": 2}
@@ -43,18 +43,17 @@ def match_pics(words, title="Соедини картинку со словом")
         {"left_image": img(U, f), "right": en, "right_audio_tts": en} for en, ru, f in words]})
 
 
-def quiz_ru_to_en(words, per_question=4):
-    """«Как по-английски»: отвлекающие — соседи по списку с обеих сторон, варианты перемешаны
-    с постоянным зерном (сборка повторяема), чтобы верный не стоял всегда на одном месте."""
-    qs, n = [], len(words)
-    step = 3 if n > 3 * per_question else 1
-    for i, (en, ru, _) in enumerate(words):
-        wrong = [words[(i + k * step) % n][0] for k in (-1, 1, 2)[:per_question - 1]]
-        options = [en] + wrong
-        random.Random(f"{en}|{n}").shuffle(options)
-        qs.append({"q": f"Как по-английски «{ru}»?", "type": "single",
-                   "options": [{"text": o} for o in options], "correct": [options.index(en)]})
-    return ("quiz", {"questions": qs})
+def quiz_ru_to_en(words, keep=None):
+    """Было «Как по-английски»; переводных заданий не делаем — слушаем слово, выбираем картинку.
+    keep — какие слова взять (24 вопроса подряд — много, все слова и так есть в карточках)."""
+    chosen = [w for w in words if keep is None or w[0] in keep]
+    return listen_pick([(en, img(U, f)) for en, ru, f in chosen])
+
+
+# 12 из 24: без пар, которые на картинке не различить (chips / potato, fruit / apple,
+# meat / ham / sausage, vegetables / salad / tomato, fish / tuna)
+FOOD_PICK = ("apple", "bread", "cheese", "chicken", "chips", "fish", "pancakes", "pasta",
+             "rice", "sandwich", "tomato", "yoghurt")
 
 
 def accept(en):
@@ -106,7 +105,7 @@ LESSONS = {
         match_pics(FOOD_1[:8]),
         match_pics(FOOD_1[8:16]),
         match_pics(FOOD_1[16:]),
-        quiz_ru_to_en(FOOD_1),
+        quiz_ru_to_en(FOOD_1, FOOD_PICK),
         hello("hello_rocket", "Дополнительная часть 🚀",
               "<p>Добро пожаловать во вторую, ДОПОЛНИТЕЛЬНУЮ часть домашки. Выполни все упражнения, "
               "чтобы хорошенько запомнить новые слова! Выполнив эти задания, ты станешь МЕГА крутым "
@@ -486,10 +485,8 @@ LESSONS = {
 
     # ------------------------------------------------------------------ Test
     "u2_test": {**UNIT, "lesson_title": "Unit 2 Test", "lesson_sort": 7, "kind": "test", "blocks": [
-        ("exact_input", {"items": [
-            {"prompt": f"Напиши по-английски: {ru}", "accept": accept(en), "audio_tts": en}
-            for en, ru in [("biscuits", "печенье"), ("cereal", "хлопья"), ("ham", "ветчина"),
-                           ("sausage", "сосиска"), ("water", "вода"), ("yoghurt", "йогурт")]]}),
+        ("exact_input", {"title": "Посмотри на картинку и напиши слово по-английски", "items": [
+            write_item(accept(en), img(U, en)) for en in ("biscuits", "cereal", "ham", "sausage", "water", "yoghurt")]}),
         ("quiz", {"questions": [
             q("Выбери правильный вариант. There ___ apples on the table.",
               ["is some", "are some", "are any"], 1),

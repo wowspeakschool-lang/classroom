@@ -5,7 +5,7 @@
 Апострофы в английском — прямые ('), в пропусках принимаются оба (' и ’):
 сервер сравнивает ответы без учёта регистра, но апострофы не сводит.
 """
-from gg2_build import img, shared, todo, video
+from gg2_build import listen_pick, write_item, img, shared, todo, video
 
 U = "u5"
 UNIT = {"unit": U, "unit_title": "Unit 5", "unit_sort": 5}
@@ -74,15 +74,13 @@ def tts(word):
 
 
 def quiz_ru_to_en(words):
-    """«Как по-английски …?» — по три варианта, верный на разных местах."""
-    en = [w for w, _, _ in words]
-    qs = []
-    for i, (w, ru, _) in enumerate(words):
-        others = [en[(i + 3) % len(en)], en[(i + 7) % len(en)]]
-        pos = i % 3
-        opts = others[:pos] + [w] + others[pos:]
-        qs.append(q(f"Как по-английски «{ru}»?", opts, w))
-    return {"title": "Выбери правильное слово", "questions": qs}
+    """Было «Как по-английски …?»; переводных заданий не делаем — слушаем слово, выбираем картинку.
+    Здания с колоннами (банк, библиотека, музей, отель) и пары кафе/ресторан, кинотеатр/театр,
+    супермаркет/магазин друг другу в отвлекающие не ставим."""
+    _, payload = listen_pick([(w, img(U, f)) for w, ru, f in words],
+                             groups=[("bank", "library", "museum", "hotel"), ("café", "restaurant"),
+                                     ("cinema", "theatre"), ("supermarket", "shop")])
+    return payload
 
 
 # ---------- Homework 1 ----------
@@ -595,9 +593,8 @@ TFN = ["True", "False", "Not stated"]
 
 TEST = [
     # 1
-    ("exact_input", {"items": [
-        {"image": img(U, w), "prompt": f"Напиши по-английски: {ru}",
-         "accept": [w] + (["theater"] if w == "theatre" else []), "audio_tts": w}
+    ("exact_input", {"title": "Посмотри на картинку и напиши слово по-английски", "items": [
+        write_item([w] + (["theater"] if w == "theatre" else []), img(U, w))  # без звука: в тесте он выдал бы ответ
         for w, ru in TEST_WORDS]}),
     # 2
     ("quiz", {"title": "Выбери правильный вариант, чтобы предложение было грамматически верным", "questions": [

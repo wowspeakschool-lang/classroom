@@ -5,7 +5,7 @@
 """
 import random
 
-from gg2_build import img, shared, todo, video
+from gg2_build import listen_pick, write_item, img, shared, todo, video
 
 U = "u6"
 UNIT = {"unit": U, "unit_title": "Unit 6", "unit_sort": 6}
@@ -54,16 +54,12 @@ def q1(question, options, correct):
     return {"q": question, "type": "single", "options": [{"text": o} for o in options], "correct": [correct]}
 
 
-def quiz_ru_to_en(items, seed):
-    rnd = random.Random(seed)
-    words = [en for en, ru, f in items]
-    out = []
-    for en, ru, f in items:
-        wrong = rnd.sample([w for w in words if w != en], 3)
-        opts = wrong[:]
-        opts.insert(rnd.randrange(4), en)
-        out.append(q1(f"Как по-английски «{ru}»?", opts, opts.index(en)))
-    return {"title": "Выбери правильный перевод", "questions": out}
+def quiz_ru_to_en(items, seed=None):
+    """Было «Как по-английски»; переводных заданий не делаем — слушаем слово, выбираем картинку.
+    Врач, медсестра и ветеринар в белых халатах — друг другу в отвлекающие не ставятся."""
+    _, payload = listen_pick([(en, img(U, f)) for en, ru, f in items],
+                             groups=[("doctor", "nurse", "vet")])
+    return payload
 
 
 LESSONS = {
@@ -76,10 +72,9 @@ LESSONS = {
         ("flashcards", {"cards": [
             {"text": en, "translation": ru, "audio_tts": en, "image": img(U, f)} for en, ru, f in JOBS]}),
         ("quiz", quiz_ru_to_en(JOBS, seed=61)),
-        ("exact_input", {"title": "Напиши слово по-английски", "items": [
-            {"prompt": f"Напиши по-английски: {ru}", "accept": [en, en.capitalize()], "audio_tts": en,
-             "image": img(U, JOB_FILE[en])}
-            for en, ru in [("doctor", "врач"), ("chef", "повар"), ("bus driver", "водитель автобуса")]]}),
+        ("exact_input", {"title": "Посмотри на картинку и напиши слово по-английски", "items": [
+            write_item([en, en.capitalize()], img(U, JOB_FILE[en]), audio_tts=en)
+            for en in ("doctor", "chef", "bus driver")]}),
         ("text", {"html": f'<p><img src="{shared("hello_rocket")}" alt="" style="height:180px"></p>'
                           "<h3>А теперь — задания! 💪</h3>"
                           "<p>Сейчас мы закрепим знания, полученные на уроке. "
@@ -177,15 +172,17 @@ LESSONS = {
                           "3. March — __2 months ago__\n"
                           "4. Saturday — __3 days ago__",
                   "gaps_expected": 4}),
-        todo(("match", {"title": "Здорово! Ты так хорошо справляешься! Посмотри на маркеры Past Simple "
-                                 "и соедини их с переводом",
-                        "pairs": [{"left": en, "right": ru} for en, ru in [
-                            ("yesterday", "вчера"), ("last week", "на прошлой неделе"),
-                            ("last year", "в прошлом году"), ("last Saturday", "в прошлую субботу"),
-                            ("two days ago", "два дня назад"), ("an hour ago", "час назад"),
-                            ("in 1999", "в 1999 году"), ("this morning", "сегодня утром")]]}),
-             ("game", "СОСТАВ МОЙ: пересобрана игра Wordwall «Match up — Past simple time markers» "
-                      "(маркер ↔ перевод, 8 пар)")),
+        # было «маркер ↔ перевод»; переводных заданий не делаем — распределяем маркеры по времени
+        todo(("sort", {"title": "Здорово! Ты так хорошо справляешься! Какие слова говорят о прошлом "
+                                "(Past Simple), а какие — о настоящем или будущем? Распредели их",
+                       "groups": [
+                           {"name": "Past · прошлое", "items": [{"text": t} for t in (
+                               "yesterday", "last week", "last year", "last Saturday",
+                               "two days ago", "an hour ago", "in 1999")]},
+                           {"name": "Now / Future · сейчас и будущее", "items": [{"text": t} for t in (
+                               "now", "today", "every day", "tomorrow", "next week")]}]}),
+             ("game", "СОСТАВ МОЙ: пересобрана игра Wordwall «Match up — Past simple time markers»; "
+                      "вместо «маркер ↔ перевод» — распределить 7 маркеров прошлого и 5 настоящего/будущего")),
         bye("well_done_trophy", "Hurray! 🌟",
             "Домашняя работа выполнена на отлично — всё благодаря твоим стараниям. Увидимся на занятии!"),
     ]},
@@ -426,11 +423,9 @@ LESSONS = {
 
     # ------------------------------------------------------------ Test
     "u6_test": {**UNIT, "lesson_title": "Unit 6 Test", "lesson_sort": 6, "kind": "test", "blocks": [
-        ("exact_input", {"title": "Напиши слово по-английски", "items": [
-            {"prompt": f"Напиши по-английски: {ru}", "accept": [en, en.capitalize()], "audio_tts": en}
-            for en, ru in [("builder", "строитель"), ("nurse", "медсестра"), ("pilot", "пилот"),
-                           ("police officer", "полицейский"), ("shop assistant", "продавец"),
-                           ("teacher", "учитель")]]}),
+        ("exact_input", {"title": "Посмотри на картинку и напиши слово по-английски", "items": [
+            write_item([en, en.capitalize()], img(U, JOB_FILE[en]))  # без звука: в тесте он выдал бы ответ
+            for en in ("builder", "nurse", "pilot", "police officer", "shop assistant", "teacher")]}),
         ("quiz", {"title": "Выбери правильный вариант, чтобы предложение было грамматически верным",
                   "questions": [
                       q1("Yesterday my dad ___ the car after work.", ["washd", "washed", "washes"], 1),

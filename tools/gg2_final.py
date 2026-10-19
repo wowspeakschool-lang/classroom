@@ -3,7 +3,7 @@
 Источник содержания — docs/GG2_разбор_final.md. Комикс SPEAKING I — кадр учебника,
 берём как есть (Анна: кадры с нарисованными людьми — как есть).
 """
-from gg2_build import img, todo, video
+from gg2_build import write_item, img, todo, video
 
 U = "final"
 UNIT = {"unit": U, "unit_title": "Final Test", "unit_sort": 9}
@@ -13,18 +13,24 @@ def q(question, options, correct):
     return {"q": question, "type": "single", "options": [{"text": o} for o in options], "correct": [correct]}
 
 
+# диктант — по картинке, без звука (как в тестах SM3 и GG3, решение Анны от 18.10);
+# русское слово только там, где картинка не выдаёт слово: словарь — просто книга,
+# «опасный» не нарисуешь одним предметом
 DICTATION = [
-    ("wardrobe", "шкаф для одежды"), ("dictionary", "словарь"), ("vegetables", "овощи"),
-    ("headphones", "наушники"), ("waterfall", "водопад"), ("museum", "музей"),
-    ("builder", "строитель"), ("suitcase", "чемодан"), ("sleepover", "ночёвка"),
-    ("dangerous", "опасный"),
+    ("wardrobe", "шкаф для одежды", "u0", "wardrobe"), ("dictionary", "словарь", "u1", None),
+    ("vegetables", "овощи", "u2", "vegetables"), ("headphones", "наушники", "u3", "headphones"),
+    ("waterfall", "водопад", "u4", "waterfall"), ("museum", "музей", "u5", "museum"),
+    ("builder", "строитель", "u6", "builder"), ("suitcase", "чемодан", "u7", "suitcase"),
+    ("sleepover", "ночёвка", "u8", "sleepover"), ("dangerous", "опасный", "u4", None),
 ]
 
 LESSONS = {
     "final": {**UNIT, "lesson_title": "Final Test", "lesson_sort": 0, "kind": "test", "blocks": [
-        ("text", {"html": "<h3>DICTATION ✍️</h3><p>Впиши слова по-английски.</p>"}),
+        ("text", {"html": "<h3>DICTATION ✍️</h3><p>Посмотри на картинку и впиши слово по-английски. "
+                          "Где картинки нет — переведи русское слово.</p>"}),
         ("exact_input", {"items": [
-            {"prompt": f"Напиши по-английски: {ru}", "accept": [en], "audio_tts": en} for en, ru in DICTATION]}),
+            write_item([en, en.capitalize()], img(u, f) if f else None, None if f else ru)
+            for en, ru, u, f in DICTATION]}),
 
         ("text", {"html": "<h3>VOCABULARY 📚</h3><p>Выбери правильный ответ.</p>"}),
         ("quiz", {"title": "VOCABULARY. Выбери правильный ответ", "questions": [

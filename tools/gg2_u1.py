@@ -5,7 +5,7 @@ Homework 5 и теста (утв. 6) заменены на «Неверно» �
 05.10.2026 (docs/GG2_доработать_руками.md, «Закрытые вопросы», п. 4).
 Промо-баннер «Новогодний челлендж» выброшен во всех уроках.
 """
-from gg2_build import img, shared, todo, video
+from gg2_build import listen_pick, write_item, img, shared, todo, video
 
 U = "u1"
 UNIT = {"unit": U, "unit_title": "Unit 1", "unit_sort": 1}
@@ -58,15 +58,9 @@ def match_pics(words, title="Соедини картинку со словом")
         {"left_image": img(U, f), "right": en, "right_audio_tts": en} for en, ru, f in words]})
 
 
-def quiz_ru_to_en(words, per_question=4):
-    """«Как по-английски…» — отвлекающие по кругу, варианты по алфавиту (позиция верного гуляет)."""
-    qs, n = [], len(words)
-    for i, (en, ru, _) in enumerate(words):
-        wrong = [words[(i + k * 3) % n][0] for k in range(1, per_question)]
-        options = sorted([en] + wrong, key=str.lower)
-        qs.append({"q": f"Как по-английски «{ru}»?", "type": "single",
-                   "options": [{"text": o} for o in options], "correct": [options.index(en)]})
-    return ("quiz", {"title": "Выбери правильный перевод", "questions": qs})
+def quiz_ru_to_en(words):
+    """Было «Как по-английски…»; переводных заданий не делаем — слушаем слово, выбираем картинку."""
+    return listen_pick([(en, img(U, f)) for en, ru, f in words])
 
 
 def single(q, options, right, image=None):
@@ -112,9 +106,10 @@ LESSONS = {
             "Посмотри карточки, послушай слова и выполни задания. Удачи! ❤️</p>"}),
         flashcards(THINGS),
         match_pics(THINGS, "Соедини картинку со словом"),
-        ("exact_input", {"title": "Напиши слово по-английски", "items": [
-            {"prompt": f"Напиши по-английски: {ru}", "image": img(U, f),
-             "accept": [en, en.capitalize()], "audio_tts": en} for en, ru, f in THINGS]}),
+        # словарь на картинке — просто синяя книга, поэтому у него русское слово
+        ("exact_input", {"title": "Напиши слово по-английски — по картинке или по русскому слову", "items": [
+            write_item([en, en.capitalize()], img(U, f), ru if f == "dictionary" else None, audio_tts=en)
+            for en, ru, f in THINGS]}),
 
         ("text", {"html": pic(shared("hello_rocket")) +
             "<h3>Дополнительная часть 🚀</h3><p>Добро пожаловать в ДОПОЛНИТЕЛЬНУЮ часть домашнего задания! "
@@ -464,9 +459,9 @@ LESSONS = {
         ("text", {"html": pic(shared("good_luck_clover"), 180) +
             "<h2>Тест Unit 1 📝</h2><p>Пора проверить, как ты запомнил школьные предметы, принадлежности и "
             "Present Simple. Чтобы пройти тест, нужно набрать 90 баллов. Читай задания внимательно. Удачи!</p>"}),
-        ("exact_input", {"title": "Напиши слова по-английски", "items": [
-            {"prompt": f"{i}. Напиши по-английски: {ru}", "image": img(U, f), "accept": [en, en.lower() if en[0].isupper() else en.capitalize()],
-             "audio_tts": en}
+        ("exact_input", {"title": "Напиши слово по-английски — по картинке или по русскому слову", "items": [
+            write_item([en, en.lower() if en[0].isupper() else en.capitalize()], img(U, f),
+                       ru if f == "dictionary" else None, i)
             for i, (en, ru, f) in enumerate([
                 ("calculator", "калькулятор", "calculator"), ("dictionary", "словарь", "dictionary"),
                 ("scissors", "ножницы", "scissors"), ("Geography", "география", "subj_geography"),

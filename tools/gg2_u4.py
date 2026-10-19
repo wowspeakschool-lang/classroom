@@ -12,7 +12,7 @@
 * HW6 №9: еда Ленни и Зака в ключе выгрузки перепутана — исправлено по тексту
   (Lenny — hamburgers, Zach — pizza), подтверждено Анной.
 """
-from gg2_build import img, shared, todo, video
+from gg2_build import listen_pick, write_item, img, shared, todo, video
 
 U = "u4"
 UNIT = {"unit": U, "unit_title": "Unit 4", "unit_sort": 4}
@@ -42,6 +42,12 @@ def q1(q, options, correct, **extra):
     return d
 
 
+# картинки, которые легко перепутать: их друг другу в отвлекающие не ставим
+LOOKALIKE = [("city", "town"), ("beach", "island", "lake", "river", "sea", "waterfall"),
+             ("mountain", "volcano"), ("cheap", "expensive"), ("difficult", "easy"), ("high", "low"),
+             ("dangerous", "safe"), ("friendly", "funny", "kind")]
+
+
 def vocab_blocks(words, match_title):
     """flashcards → match картинка↔слово → quiz «как по-английски»."""
     blocks = [
@@ -51,15 +57,8 @@ def vocab_blocks(words, match_title):
                    "pairs": [{"left_image": img(U, f), "right": en, "right_audio_tts": en}
                              for en, ru, f in words]}),
     ]
-    n = len(words)
-    qs = []
-    for i, (en, ru, f) in enumerate(words):
-        others = [words[(i + k) % n][0] for k in (3, 5, 7) if (i + k) % n != i]
-        others = list(dict.fromkeys(o for o in others if o != en))[:2]
-        pos = i % 3
-        opts = others[:pos] + [en] + others[pos:]
-        qs.append(q1(f"Как по-английски «{ru}»?", opts, pos))
-    blocks.append(("quiz", {"questions": qs}))
+    # было «Как по-английски»; переводных заданий не делаем — слушаем слово, выбираем картинку
+    blocks.append(listen_pick([(en, img(U, f)) for en, ru, f in words], groups=LOOKALIKE))
     return blocks
 
 
@@ -649,13 +648,9 @@ LESSONS = {
 
     # ------------------------------------------------------------------ Test
     "u4_test": {**UNIT, "lesson_title": "Unit 4 Test", "lesson_sort": 7, "kind": "test", "blocks": [
-        ("exact_input", {"items": [
-            {"image": img(U, f), "prompt": f"Напиши по-английски: {ru}", "accept": [en, en.capitalize()],
-             "audio_tts": en}
-            for en, ru, f in [("beach", "пляж", "beach"), ("desert", "пустыня", "desert"),
-                              ("island", "остров", "island"), ("mountain", "гора", "mountain"),
-                              ("volcano", "вулкан", "volcano"), ("waterfall", "водопад", "waterfall")]
-        ]}),
+        ("exact_input", {"title": "Посмотри на картинку и напиши слово по-английски", "items": [
+            write_item([en, en.capitalize()], img(U, en))  # без звука: в тесте он выдал бы ответ
+            for en in ("beach", "desert", "island", "mountain", "volcano", "waterfall")]}),
         tx("<p>Выбери правильный вариант, чтобы предложение было грамматически верным.</p>"),
         ("quiz", {"questions": [
             q1("The Nile is ___ the Thames.", ["longer than", "more long than", "longer that"], 0),

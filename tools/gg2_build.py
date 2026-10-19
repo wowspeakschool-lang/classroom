@@ -51,6 +51,50 @@ def todo(block, *items):
     return (btype, payload, {"todo": list(items)})
 
 
+def listen_pick(words, groups=(), title="Послушай слово и выбери картинку"):
+    """Вместо «Как по-английски «…»?»: звучит слово, ребёнок выбирает картинку из трёх.
+
+    Заданий на перевод в курсах нет (решение Анны на все курсы). Картинка-ответ
+    должна быть однозначной, поэтому отвлекающие не берутся из одной группы
+    похожих картинок (groups: наборы слов, которые легко перепутать на глаз).
+    words — [(слово, ссылка на картинку)]; позиция верной картинки гуляет.
+    """
+    near = {w: set(g) for g in groups for w in g}
+    qs = []
+    for i, (en, image) in enumerate(words):
+        pool = [(w, im) for w, im in words if w != en and w not in near.get(en, ())]
+        wrong = [pool[(i * 2 + k) % len(pool)] for k in (0, 1)]
+        if wrong[0][0] == wrong[1][0]:
+            wrong[1] = pool[(i * 2 + 2) % len(pool)]
+        pos = i % 3
+        options = [im for _, im in wrong]
+        options.insert(pos, image)
+        qs.append({"q": "", "type": "single", "audio_tts": en.replace("’", "'"),
+                   "options": [{"image": im} for im in options], "correct": [pos]})
+    return ("quiz", {"title": title, "questions": qs})
+
+
+def write_item(accept, image=None, ru=None, n=None, audio_tts=None):
+    """Пункт «напиши слово»: подсказка — картинка; русское слово — только там, где
+    картинка слово не заменит (February, глаголы движения, abstract)."""
+    prompt = (f"{n}. " if n else "") + (ru or "")
+    d = {"prompt": prompt.strip(), "accept": list(accept)}
+    if image:
+        d["image"] = image
+    if audio_tts:
+        d["audio_tts"] = audio_tts
+    return d
+
+
+def write_title(items):
+    ru = [any("а" <= ch.lower() <= "я" for ch in it["prompt"]) for it in items]
+    if not any(ru):
+        return "Посмотри на картинку и напиши слово по-английски"
+    if all(ru) and not any(it.get("image") for it in items):
+        return "Напиши слово по-английски"
+    return "Напиши слово по-английски — по картинке или по русскому слову"
+
+
 def video(title, todo_text):
     """Пустой видеоблок — файла в выгрузке нет, ссылку пришлёт методист."""
     return todo(("video", {"title": title, "url": "", "provider": "file"}), ("video", todo_text))
