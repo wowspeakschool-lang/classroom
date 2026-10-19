@@ -6,11 +6,11 @@ select c.id, 'Unit 2', 2 from classroom_courses c
 where c.slug = 'gg2'
   and not exists (select 1 from classroom_units u where u.course_id = c.id and u.title = 'Unit 2');
 insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)
-select u.id, 'Unit 2 Test', 'test', 90, false, 7
+select u.id, 'Unit 2 Test', 'test', null, false, 7
 from classroom_units u join classroom_courses c on c.id = u.course_id
 where c.slug = 'gg2' and u.title = 'Unit 2'
   and not exists (select 1 from classroom_lessons l where l.unit_id = u.id and l.title = 'Unit 2 Test');
-update classroom_lessons l set kind = 'test', pass_threshold = 90, sort_order = 7
+update classroom_lessons l set kind = 'test', pass_threshold = null, sort_order = 7
 from classroom_units u join classroom_courses c on c.id = u.course_id
 where l.unit_id = u.id and c.slug = 'gg2' and u.title = 'Unit 2' and l.title = 'Unit 2 Test';
 select l.id, l.kind, l.pass_threshold, l.is_published from classroom_lessons l
@@ -20,7 +20,7 @@ where c.slug = 'gg2' and u.title = 'Unit 2' and l.title = 'Unit 2 Test';
 -- затем: delete блоков урока (CTE) и вставка:
 -- кусок 1
 insert into classroom_blocks (lesson_id, type, payload, sort_order) values
-('<lesson_id>', 'exact_input', replace($blk${"items": [{"prompt": "Напиши по-английски: печенье", "accept": ["biscuits", "Biscuits"], "audio_tts": "biscuits"}, {"prompt": "Напиши по-английски: хлопья", "accept": ["cereal", "Cereal"], "audio_tts": "cereal"}, {"prompt": "Напиши по-английски: ветчина", "accept": ["ham", "Ham"], "audio_tts": "ham"}, {"prompt": "Напиши по-английски: сосиска", "accept": ["sausage", "Sausage"], "audio_tts": "sausage"}, {"prompt": "Напиши по-английски: вода", "accept": ["water", "Water"], "audio_tts": "water"}, {"prompt": "Напиши по-английски: йогурт", "accept": ["yoghurt", "Yoghurt"], "audio_tts": "yoghurt"}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 0),
+('<lesson_id>', 'exact_input', replace($blk${"title": "Посмотри на картинку и напиши слово по-английски", "items": [{"prompt": "", "accept": ["biscuits", "Biscuits"], "image": "@@MEDIA@@gg2/u2/biscuits.webp"}, {"prompt": "", "accept": ["cereal", "Cereal"], "image": "@@MEDIA@@gg2/u2/cereal.webp"}, {"prompt": "", "accept": ["ham", "Ham"], "image": "@@MEDIA@@gg2/u2/ham.webp"}, {"prompt": "", "accept": ["sausage", "Sausage"], "image": "@@MEDIA@@gg2/u2/sausage.webp"}, {"prompt": "", "accept": ["water", "Water"], "image": "@@MEDIA@@gg2/u2/water.webp"}, {"prompt": "", "accept": ["yoghurt", "Yoghurt"], "image": "@@MEDIA@@gg2/u2/yoghurt.webp"}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 0),
 ('<lesson_id>', 'quiz', replace($blk${"questions": [{"q": "Выбери правильный вариант. There ___ apples on the table.", "type": "single", "options": [{"text": "is some"}, {"text": "are some"}, {"text": "are any"}], "correct": [1]}, {"q": "We haven't got ___ bread for breakfast.", "type": "single", "options": [{"text": "some"}, {"text": "a"}, {"text": "any"}], "correct": [2]}, {"q": "How ___ milk do you drink every day?", "type": "single", "options": [{"text": "much"}, {"text": "many"}, {"text": "a lot"}], "correct": [0]}, {"q": "I'd like ___ egg and a sandwich, please.", "type": "single", "options": [{"text": "a"}, {"text": "an"}, {"text": "some"}], "correct": [1]}, {"q": "How ___ sausages are there in the packet?", "type": "single", "options": [{"text": "much"}, {"text": "many"}], "correct": [1]}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 1),
 ('<lesson_id>', 'gaps', replace($blk${"title": "Вставь нужное слово", "mode": "drag", "text": "1. There are __some__ tomatoes in the salad.\n2. There isn't __any__ sugar in my tea, thanks.\n3. Can I have __an__ apple, please?\n4. How __much__ chocolate do you eat in a week?\n5. How __many__ eggs do we need for the pancakes?"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 2),
 ('<lesson_id>', 'text', replace($blk${"html": "<h3>Расставь части предложения в правильном порядке</h3><p>Ниже пять предложений — собери каждое.</p>"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 3),

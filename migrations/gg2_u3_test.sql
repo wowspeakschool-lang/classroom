@@ -6,11 +6,11 @@ select c.id, 'Unit 3', 3 from classroom_courses c
 where c.slug = 'gg2'
   and not exists (select 1 from classroom_units u where u.course_id = c.id and u.title = 'Unit 3');
 insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)
-select u.id, 'Unit 3 Test', 'test', 90, false, 7
+select u.id, 'Unit 3 Test', 'test', null, false, 7
 from classroom_units u join classroom_courses c on c.id = u.course_id
 where c.slug = 'gg2' and u.title = 'Unit 3'
   and not exists (select 1 from classroom_lessons l where l.unit_id = u.id and l.title = 'Unit 3 Test');
-update classroom_lessons l set kind = 'test', pass_threshold = 90, sort_order = 7
+update classroom_lessons l set kind = 'test', pass_threshold = null, sort_order = 7
 from classroom_units u join classroom_courses c on c.id = u.course_id
 where l.unit_id = u.id and c.slug = 'gg2' and u.title = 'Unit 3' and l.title = 'Unit 3 Test';
 select l.id, l.kind, l.pass_threshold, l.is_published from classroom_lessons l
@@ -20,7 +20,7 @@ where c.slug = 'gg2' and u.title = 'Unit 3' and l.title = 'Unit 3 Test';
 -- затем: delete блоков урока (CTE) и вставка:
 -- кусок 1
 insert into classroom_blocks (lesson_id, type, payload, sort_order) values
-('<lesson_id>', 'exact_input', replace($blk${"items": [{"prompt": "Напиши по-английски: общаться онлайн", "accept": ["chat online"]}, {"prompt": "Напиши по-английски: скачать песню", "accept": ["download a song"]}, {"prompt": "Напиши по-английски: сидеть в интернете", "accept": ["surf the Internet"]}, {"prompt": "Напиши по-английски: планшет", "accept": ["tablet", "a tablet"]}, {"prompt": "Напиши по-английски: наушники", "accept": ["headphones"]}, {"prompt": "Напиши по-английски: клавиатура", "accept": ["keyboard", "a keyboard"]}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 0),
+('<lesson_id>', 'exact_input', replace($blk${"title": "Напиши слово по-английски — по картинке или по русскому слову", "items": [{"prompt": "общаться онлайн", "accept": ["chat online"], "image": "@@MEDIA@@gg2/u3/chat_online.webp"}, {"prompt": "скачать песню", "accept": ["download a song"], "image": "@@MEDIA@@gg2/u3/download_song.webp"}, {"prompt": "сидеть в интернете", "accept": ["surf the Internet", "surf the internet"], "image": "@@MEDIA@@gg2/u3/surf_internet.webp"}, {"prompt": "", "accept": ["tablet", "a tablet"], "image": "@@MEDIA@@gg2/u3/tablet.webp"}, {"prompt": "", "accept": ["headphones"], "image": "@@MEDIA@@gg2/u3/headphones.webp"}, {"prompt": "", "accept": ["keyboard", "a keyboard"], "image": "@@MEDIA@@gg2/u3/keyboard.webp"}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 0),
 ('<lesson_id>', 'quiz', replace($blk${"questions": [{"q": "Выбери правильный вариант. Look! Tom ___ a selfie with his new phone.", "type": "single", "options": [{"text": "takes"}, {"text": "is taking"}, {"text": "is take"}], "correct": [1]}, {"q": "We ___ TV right now — we're surfing the Internet.", "type": "single", "options": [{"text": "aren't watching"}, {"text": "don't watch"}, {"text": "not watching"}], "correct": [0]}, {"q": "— ___ your sister chatting online? — Yes, she is.", "type": "single", "options": [{"text": "Does"}, {"text": "Are"}, {"text": "Is"}], "correct": [2]}, {"q": "I ___ an email to my grandma at the moment.", "type": "single", "options": [{"text": "write"}, {"text": "am writeing"}, {"text": "am writing"}], "correct": [2]}, {"q": "What ___ now?", "type": "single", "options": [{"text": "you do"}, {"text": "are you doing"}, {"text": "you are"}], "correct": [1]}]}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 1),
 ('<lesson_id>', 'gaps', replace($blk${"title": "Поставь глагол в скобках в правильную форму Present Continuous", "mode": "type", "text": "1. My brother __is downloading__ (download) a new song right now.\n2. We __are sitting__ (sit) in the kitchen and having lunch.\n3. They __aren't listening|aren’t listening|are not listening__ (not listen) to music — they're studying.\n4. — What __is__ Anna __writing__ (write)? — A text message to her friend.\n5. I __am not using__ (not use) my laptop now, you can take it."}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 2),
 ('<lesson_id>', 'order', replace($blk${"words": ["What", "are", "your", "friends", "doing", "today?"], "sentence": "What are your friends doing today?", "audio_tts": "What are your friends doing today?"}$blk$, '@@MEDIA@@', 'https://classroom.wowteach.ru/media/')::jsonb, 3),
