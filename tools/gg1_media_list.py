@@ -57,6 +57,10 @@ def main():
                 "folder": f"gg1/{folder}/",
                 "key": key, "sort_order": i,
             })
+    if not rows:
+        # все медиа уже на месте — таблицу для методиста не затираем
+        print("пустых медиа не осталось, tools/gg1_media.json не тронут")
+        return
     out = os.path.join(ROOT, "tools", "gg1_media.json")
     with open(out, "w", encoding="utf-8") as f:
         json.dump(rows, f, ensure_ascii=False, indent=1)

@@ -28,7 +28,7 @@ begin
 
   insert into classroom_blocks (lesson_id, type, payload, sort_order) values
     (v_lesson, 'text', replace($blk${"html": "<p><img src=\"@@MEDIA@@shared/hello_laptop.webp\" alt=\"\" style=\"height:200px\"></p><h2>Добро пожаловать! 👋</h2><p>Сегодня тебя ждут интересные задания, поехали!</p>"}$blk$, '@@MEDIA@@', v_media)::jsonb, 0),
-    (v_lesson, 'text', replace($blk${"audio": "", "html": "<p><b>Послушай диалог. О чём он?</b></p>"}$blk$, '@@MEDIA@@', v_media)::jsonb, 1),
+    (v_lesson, 'text', replace($blk${"audio": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u3_hw6_b2.mp3", "html": "<p><b>Послушай диалог. О чём он?</b></p>"}$blk$, '@@MEDIA@@', v_media)::jsonb, 1),
     (v_lesson, 'quiz', replace($blk${"title": "О чём диалог? Выбери правильный ответ", "questions": [{"q": "The dialogue is about…", "type": "single", "options": [{"text": "Nancy's bedroom"}, {"text": "Nancy's new house"}, {"text": "Nancy's family"}], "correct": [1]}]}$blk$, '@@MEDIA@@', v_media)::jsonb, 2),
     (v_lesson, 'task', replace($blk${"title": "Послушай ещё раз. Перепиши предложения, чтобы они стали верными ✍", "needs_review": true, "html": "<ol><li>In Nancy's house there are five rooms.</li><li>The bathroom is upstairs.</li><li>There are two bedrooms.</li><li>There's a TV in Nancy's bedroom.</li></ol>"}$blk$, '@@MEDIA@@', v_media)::jsonb, 3),
     (v_lesson, 'quiz', replace($blk${"title": "Выбери дом Нэнси. Если нужно — можно прослушать диалог ещё раз", "questions": [{"q": "Which is Nancy's house?", "type": "single", "options": [{"text": "House 1"}, {"text": "House 2"}, {"text": "House 3"}], "correct": [2]}]}$blk$, '@@MEDIA@@', v_media)::jsonb, 4),

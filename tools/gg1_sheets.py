@@ -259,6 +259,15 @@ SHEETS = [
         ("scene_guests_door", "a boy opening the front door of a house to welcome two smiling guests, a hallway with stairs going up behind him"),
     ]),
 
+    # Вместо кадра выгрузки с водяным знаком стока. Задание «верно / неверно»:
+    # есть кровать, книги, компьютер; нет телевизора и письменного стола.
+    ("Л3.6", "u3", 1, 1, "scene", "Беспорядок в спальне", "Homework 3: верно или неверно по картинке.", [
+        ("messy_bedroom", "a very messy child's bedroom seen from the doorway: an unmade bed with a crumpled duvet, "
+                          "lots of books scattered on the bed and on the floor, a desktop computer with a monitor and a "
+                          "keyboard standing on the floor next to the bed, socks and a T-shirt lying around; the room "
+                          "has no desk and no television"),
+    ]),
+
     # ---------------- UNIT 4 ----------------
     # Части тела и волосы — ждём решения Анны.
     ("Л4.1", "u4", 2, 3, "people", "Характер",
