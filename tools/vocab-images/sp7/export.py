@@ -10,7 +10,7 @@ from sheets import S, DIGITS
 # с 14.10.2026 тренажёр живёт на app.wowteach.ru, картинки — в wowspeak-platform/public/trainer/media
 DST = '/home/user/wowspeak-platform/public/trainer/media/spotlight7'
 URL = 'https://app.wowteach.ru/trainer/media/spotlight7/'
-SKIP = {'beast', 'tan', 'guard', 'guide', 'shake hands', 'crayon', 'rich', 'wrist', 'MP3 player', 'digital music player'}  # подписи, не прошедшие проверку: не выгружать
+SKIP = {'beast', 'tan', 'guard', 'guide', 'shake hands', 'crayon', 'rich', 'wrist', 'MP3 player', 'digital music player', 'unemployment', 'funk', 'polar region', 'direct debit'}  # подписи, не прошедшие проверку: не выгружать
 SKIP -= set(filter(None, os.environ.get('ALLOW', '').split('|')))  # ALLOW='keep out|…' — выгрузить перерисованные (после перерисовки)
 # омонимы: подпись из столбца caption плана → перевод слова (у омонимов в плане подпись своя)
 import csv

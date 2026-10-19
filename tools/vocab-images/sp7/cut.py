@@ -66,8 +66,9 @@ def is_scene(p):
     ImageDraw.Draw(hm).polygon([tuple(map(int, pts[v])) for v in hull.vertices], fill=1)
     return m.sum() / max(1, np.array(hm).sum()) >= SCENE_SOLID
 # ключ «лист/подпись» — только для этого листа (часы листа 166 те же подписи, что у 117)
-CUT_BOTTOM = {}  # остаток подписи под рисунком; ключ «подпись» или «лист/подпись»
+CUT_BOTTOM = {'67/atmosphere': 0.865, '67/factory waste': 0.87, '68/plant species': 0.83, '68/poison': 0.895}  # остаток подписи под рисунком; ключ «подпись» или «лист/подпись»
 CUT_LEFT = {}
+CUT_RIGHT = {'65/background': 0.885}  # кусок соседнего рисунка у правого края; ключ как у CUT_BOTTOM
 NO_SPECK = set()
 
 LAYOUT = {1: [1], 3: [3], 4: [2, 2], 5: [3, 2], 6: [3, 3], 7: [4, 3], 8: [4, 4], 9: [5, 4], 10: [5, 5], 11: [4, 4, 3], 12: [4, 4, 4], 13: [5, 4, 4]}
@@ -364,6 +365,9 @@ def clean_png(p, peel=12, pale=188, grey=30, speck=0.004, pure=250):
         if p.endswith(f'/{sh}/{fname(ww)}' if sh else f'/{fname(ww)}'): a[int(a.shape[0] * frac):] = 0
     for w, frac in CUT_LEFT.items():
         if p.endswith(f'/{fname(w)}'): a[:, :int(a.shape[1] * frac)] = 0
+    for w, frac in CUT_RIGHT.items():
+        sh, _, ww = w.rpartition('/') if w.split('/', 1)[0].isdigit() else ('', '', w)
+        if p.endswith(f'/{sh}/{fname(ww)}' if sh else f'/{fname(ww)}'): a[:, int(a.shape[1] * frac):] = 0
     lab, n = label(a > 40)
     if n > 1 and not p.endswith(tuple(f'/{fname(w)}' for w in NO_SPECK)):
         sizes = np.bincount(lab.ravel()); sizes[0] = 0
