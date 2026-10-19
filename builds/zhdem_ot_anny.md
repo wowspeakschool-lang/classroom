@@ -47,6 +47,7 @@
 
 ## Когда станет не нужно
 
-13. Снести копии удалённой чужой ДЗ:
-    `classroom_backup_sm0_u0_hw1_20261019_{lesson,blocks,assign,snap}`
-    (`drop` — из SQL Editor).
+13. Запустить в SQL Editor `builds/sm0/u0/u0_hw1_backup_drop.sql` — снести
+    четыре копии удалённой чужой ДЗ
+    (`classroom_backup_sm0_u0_hw1_20261019_{lesson,blocks,assign,snap}`).
+    Решение принято 19.10; `drop` через наш инструмент до базы не доходит.
