@@ -24,6 +24,25 @@ def yes_no(q, image, options, correct):
             "options": [{"text": o} for o in options], "correct": [correct]}
 
 
+# HW6, блок 4 в исходном виде: картинка с тремя девочками, по описанию одежды
+# выбрать имя. Слева направо: Lily (голубая рубашка в горошек, розовая юбка в
+# цветочек), Kate (майка в красно-белую полоску, жёлтая юбка в чёрный горох),
+# Anna (свитер с фиолетово-белым зигзагом, однотонная тёмно-синяя юбка). Имена
+# подписываем под фигурами сами при нарезке — генератору текст не доверяем.
+HW6_NAMES = ["Anna", "Lily", "Kate"]
+HW6_GIRLS = ("quiz", {
+    "title": "Посмотри на картинку и прочитай описание. Как зовут девочку?",
+    "questions": [
+        {"q": d, "type": "single", "audio_tts": d, "image": c("hw6_three_girls"),
+         "options": [{"text": n} for n in HW6_NAMES], "correct": [HW6_NAMES.index(who)]}
+        for d, who in ([
+            ("She is wearing a T-shirt with stripes and a skirt with spots.", "Kate"),
+            ("She is wearing a plain skirt and a sweater with zigzags.", "Anna"),
+            ("She is wearing a shirt with spots and a skirt with flowers.", "Lily"),
+        ])]})
+HW6_GIRLS_READY = os.path.exists(os.path.join(ROOT, "media", "sm1", U, "hw6_three_girls.webp"))
+
+
 LESSONS = {
     # ------------------------------------------------------------------ HW2
     "u7_hw2": {
@@ -202,6 +221,7 @@ LESSONS = {
     },
 
     # ------------------------------------------------------------------ HW6
+    # (HW6_GIRLS — исходный вид блока 4, см. перед LESSONS)
     "u7_hw6": {
         "unit": U, "unit_title": UNIT, "unit_sort": 7,
         "lesson_title": "Homework 6", "lesson_sort": 5, "kind": "homework",
@@ -239,9 +259,10 @@ LESSONS = {
             }),
 
             # 4 — в выгрузке «Выбери правильный вариант»: картинка с тремя
-            # девочками (не выгрузилась) + описание → имя. Людей не рисуем,
-            # поэтому наоборот: по описанию найти одежду девочки.
-            ("quiz", {"title": "Прочитай описание и найди одежду девочки", "questions": [
+            # девочками (не выгрузилась) + описание → имя. Пока картинки нет —
+            # наоборот: по описанию найти одежду девочки. Когда Анна пришлёт
+            # hw6_three_girls (19.10 решила вернуть исходный вид), встанет HW6_GIRLS.
+            HW6_GIRLS if HW6_GIRLS_READY else ("quiz", {"title": "Прочитай описание и найди одежду девочки", "questions": [
                 {"q": "Внимательно прочитай описание девочек и найди их одежду.<br>"
                       "<b>Anna</b>: She is wearing a plain skirt and a sweater with zigzags.",
                  "type": "single", "audio_tts": "She is wearing a plain skirt and a sweater with zigzags.",
@@ -400,19 +421,21 @@ LESSONS = {
         # Стоковые фото людей (в т. ч. детей) заменены предметами, лист ЛТ7.1;
         # фото детей в speaking — сценой магазина (ЛТ7.2) и кадрами героев.
         "blocks": [
-            ("exact_input", {"items": [
-                {"prompt": f"Напиши по-английски: {ru}", "accept": acc, "audio_tts": acc[0]}
-                for ru, acc in [
-                    ("джинсы", ["jeans", "Jeans"]),
-                    ("свитер", ["sweater", "Sweater"]),
-                    ("пиджак, куртка", ["jacket", "Jacket"]),
-                    ("юбка", ["skirt", "Skirt"]),
-                    ("шорты", ["shorts", "Shorts"]),
-                    ("бейсболка, кепка", ["baseball cap", "Baseball cap", "cap"]),
-                    ("обувь", ["shoes", "Shoes"]),
-                    ("носки", ["socks", "Socks"]),
-                    ("футболка", ["T-shirt", "t-shirt", "T shirt", "tshirt"]),
-                    ("брюки", ["trousers", "Trousers"]),
+            # Было «Напиши по-английски: джинсы» — заданий на перевод не делаем
+            # (решение Анны от 19.10): звук остаётся, русское слово — картинкой.
+            ("exact_input", {"title": "Послушай слово, посмотри на картинку и напиши его", "items": [
+                {"image": c(f), "prompt": "", "accept": acc, "audio_tts": acc[0]}
+                for f, acc in [
+                    ("clothes_jeans", ["jeans", "Jeans"]),
+                    ("clothes_sweater", ["sweater", "Sweater"]),
+                    ("clothes_jacket", ["jacket", "Jacket"]),
+                    ("clothes_skirt", ["skirt", "Skirt"]),
+                    ("clothes_shorts", ["shorts", "Shorts"]),
+                    ("clothes_cap", ["baseball cap", "Baseball cap", "cap"]),
+                    ("clothes_shoes", ["shoes", "Shoes"]),
+                    ("clothes_socks", ["socks", "Socks"]),
+                    ("clothes_tshirt", ["T-shirt", "t-shirt", "T shirt", "tshirt"]),
+                    ("clothes_trousers", ["trousers", "Trousers"]),
                 ]
             ]}),
 
@@ -853,14 +876,8 @@ LESSONS["u7_hw4"] = {
                       "image": c("cap_yellow_clipart"),
                       "items": [{"text": t, "audio_tts": t} for t in CAP_ORDER]}),
 
-        # 7 — перемычка: прощание (1) + приветствие (2)
-        ("text", {"html":
-            f'<p><img src="{shared("well_done_clap")}" alt="" style="height:160px"></p>'
-            "<h3>Поздравляю! Первая часть готова, ты замечательный ученик! ✨</h3><p>А теперь — ещё одно задание: мультфильм. Посмотри его "
-            "внимательно, а потом посмотри ещё раз и повторяй за героями.</p>"}),
-
-        # 8
-        ("video", {"title": "Мультфильм Unit 7", "url": "", "provider": "file"}),
+        # Перемычка к «(2)» и само интерактивное видео убраны: интерактивные
+        # видео не берём (решение Анны от 19.10.2026).
 
         bye("<h3>Отличная работа!</h3>"
             "<p>Жду тебя на занятии!</p>", "well_done_trophy"),
@@ -871,7 +888,8 @@ LESSONS["u7_hw4"] = {
 # Бл. 2 — реклама для родителей (и ещё раз на стр. 17), не переносим. Фото
 # фокусника (бл. 4) — стоковое, не берём. Бл. 6 (отметь одежду героев
 # видео: trousers, skirt, shorts, cap, jeans, shoes, sweater, jacket) — ответы
-# не отмечены, видео нет: в урок не положен, в доработку. Фото людей к
+# в выгрузке не отмечены, 19.10 ключ дала Анна: jacket, shoes, skirt, trousers.
+# Стоит сразу после видео. Фото людей к
 # «расставь слова» заменены нашими картинками и клипартом из PDF.
 # Бл. 14 — две игры Wordwall, обложки пустые: СОСТАВ МОЙ.
 TFN = ["True", "False", "Not stated"]
@@ -894,6 +912,12 @@ LESSONS["u7_hw5"] = {
 
         # 3
         ("video", {"title": "Видео: шоу талантов", "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u7_hw5_b3.mp4", "provider": "file"}),
+
+        ("quiz", {"title": "Отметь всю одежду, которая была на героях видео", "questions": [
+            {"q": "", "type": "multiple",
+             "options": [{"text": w, "audio_tts": w} for w in
+                         ["trousers", "a skirt", "shorts", "a cap", "jeans", "shoes", "a sweater", "a jacket"]],
+             "correct": [0, 1, 5, 7]}]}),
 
         ("text", {"html":
             "<p>Внимательно посмотри на картинку.</p>"
