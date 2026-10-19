@@ -436,9 +436,9 @@ LESSONS["u6_hw4"] = dict(base("u6_hw4", "Homework 4", 3), blocks=[
 # ---------------------------------------------------------------- Homework 5
 # «SM1 Unit 6 Homework 5» (догружена). Бл. 2 — реклама, не перенесена.
 # Бл. 6 «Отметь, какие комнаты показывал герой видео» (a hall, a bedroom,
-# a bathroom, a garage, a toilet, a kitchen, a garden, a living room):
-# ключа в выгрузке нет (все чекбоксы пустые), видео нет — в урок НЕ положен,
-# строка в доработке. Бл. 13–14 — три пустые игры — СОСТАВ МОЙ.
+# a bathroom, a garage, a toilet, a kitchen, a garden, a living room): ключа в
+# выгрузке нет, 19.10 его дала Анна — верные hall, toilet, bedroom, bathroom,
+# kitchen, living room; garden и garage — нет. Стоит сразу после видео. Бл. 13–14 — три пустые игры — СОСТАВ МОЙ.
 HOUSE_TEXT = ("I live in a nice house. There are 4 rooms. There is a bedroom, a bathroom, "
               "a living room and a kitchen. There isn't a cellar. There isn't a hall. I like my house!")
 
@@ -458,6 +458,13 @@ LESSONS["u6_hw5"] = dict(base("u6_hw5", "Homework 5", 4), blocks=[
     ("video", {"title": "Сейчас тебе нужно будет посмотреть видео. Герой видео проведёт небольшую экскурсию "
                         "по своему дому. Попробуй угадать, какие комнаты есть у него в доме 🏡",
                "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u6_hw5_b2.mp4", "provider": "file"}),
+
+    ("quiz", {"title": "Отметь все комнаты, которые показывал герой видео 🏡", "questions": [
+        {"q": "", "type": "multiple",
+         "options": [{"text": w, "audio_tts": w} for w in
+                     ["a hall", "a bedroom", "a bathroom", "a garage", "a toilet", "a kitchen", "a garden",
+                      "a living room"]],
+         "correct": [0, 1, 2, 4, 5, 7]}]}),
 
     ("text", {"html":
         "<p>Внимательно посмотри на картинку. Под картинкой есть предложения: прочитай их и скажи, "
@@ -507,15 +514,16 @@ LESSONS["u6_hw5"] = dict(base("u6_hw5", "Homework 5", 4), blocks=[
                       "<p>(По желанию можешь нарисовать рисунок своего дома и показать учителю на уроке. "
                       "За рисунок я подарю тебе 💎)</p>"}),
 
-    # Бл. 13 — игра «Впиши слова», содержимого нет. СОСТАВ МОЙ: комнаты по картинке и переводу.
-    ("exact_input", {"items": [
-        {"image": img(U, f), "prompt": f"Ещё одно задание. Впиши слово: {ru}",
+    # Бл. 13 — игра «Впиши слова», содержимого нет. СОСТАВ МОЙ: комнаты по картинке
+    # (без перевода — заданий на перевод не делаем, решение Анны от 19.10).
+    ("exact_input", {"title": "Ещё одно задание. Посмотри на картинку и напиши, что это за комната", "items": [
+        {"image": img(U, f), "prompt": "",
          "accept": [en, en.capitalize(), f"a {en}"]}
         for en, ru, f in ROOMS if en in ("bedroom", "bathroom", "living room", "kitchen", "hall", "cellar")]}),
 
     # Бл. 14 — две игры «Выбери правильный вариант», содержимого нет. СОСТАВ МОЙ: по картинке домика.
     ("quiz", {"questions": [
-        {"q": "⭐ Посмотри на картинку домика и выбери правильный вариант: ___ a bedroom.", "type": "single",
+        {"q": "Посмотри на картинку домика и выбери правильный вариант: ___ a bedroom.", "type": "single",
          "image": img(U, "hw5_house_attic"),
          "options": [{"text": "There is"}, {"text": "There are"}, {"text": "There isn't"}], "correct": [0]},
         {"q": "___ a hall.", "type": "single",
@@ -540,7 +548,8 @@ LESSONS["u6_hw5"] = dict(base("u6_hw5", "Homework 5", 4), blocks=[
 # «SM1 Unit 6 Homework 6» (догружена). Тема — виды домов (CLIL Geography).
 # Бл. 2 — реклама, не перенесена. Бл. 6 «выбери виды домов, которые звучали в
 # видео» (castle, hut, cave house, tree house, igloo, caravan, yurt, boat house):
-# ключа нет, видео нет — в урок НЕ положен, строка в доработке.
+# ключа в выгрузке нет, 19.10 его дала Анна — верные tree house, igloo, castle,
+# hut, boat house, caravan; yurt и cave house — нет. Стоит сразу после видео.
 # Бл. 9 — выпадающие списки: варианты в выгрузку не попали — СОСТАВ ВАРИАНТОВ МОЙ.
 HOMES = [  # (en, файл)
     ("tree house", "home_tree"),
@@ -561,6 +570,12 @@ LESSONS["u6_hw6"] = dict(base("u6_hw6", "Homework 6", 5), blocks=[
     ("video", {"title": "Посмотри видео и выполни задание под ним. В этом видео Сэм путешествует по всему миру "
                         "и узнаёт о различных видах домов. А где живёшь ты?",
                "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u6_hw6_b3.mp4", "provider": "file"}),
+
+    ("quiz", {"title": "Отметь все виды домов, которые были в видео", "questions": [
+        {"q": "", "type": "multiple",
+         "options": [{"text": w, "audio_tts": w} for w in
+                     ["castle", "hut", "cave house", "tree house", "igloo", "caravan", "yurt", "boat house"]],
+         "correct": [0, 1, 3, 4, 5, 7]}]}),
 
     ("match", {"title": "А теперь давай вспомним названия домиков, которые мы выучили на уроке. "
                         "Соедини название с картинкой.",
@@ -709,8 +724,9 @@ LESSONS["u6_hw7"] = dict(base("u6_hw7", "Homework 7", 6), blocks=[
 # ---------------------------------------------------------------- Unit 6 Test
 LESSONS["u6_test"] = dict(base("u6_test", "Unit 6 Test", 7, kind="test"), blocks=[
     # Блок 1 выгрузки — словарный тест «Заполни пропуски» по 8 словам юнита.
-    ("exact_input", {"items": [
-        {"prompt": f"Напиши по-английски: {ru}", "accept": [en, en.capitalize()]} for en, ru, f in ROOMS]}),
+    # Без перевода (решение Анны от 19.10): слово — по картинке.
+    ("exact_input", {"title": "Посмотри на картинку и напиши слово", "items": [
+        {"image": img(U, f), "prompt": "", "accept": [en, en.capitalize()]} for en, ru, f in ROOMS]}),
 
     # Блок 2 «Соедини слова с картинками»: в выгрузке справа пусто, картинок нет —
     # ставим карточки комнат Л6.1.
