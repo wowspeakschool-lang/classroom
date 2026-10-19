@@ -148,7 +148,7 @@ def sql_for(key, lesson):
         "",
         "  insert into classroom_lessons (unit_id, title, kind, pass_threshold, is_published, sort_order)",
         f"  select v_unit, '{lesson['lesson_title']}', '{lesson['kind']}',",
-        f"         {90 if lesson['kind'] == 'test' else 60}, false, {lesson['lesson_sort']}",
+        f"         {threshold(lesson)}, false, {lesson['lesson_sort']}",
         "  where not exists (select 1 from classroom_lessons",
         f"                    where unit_id = v_unit and title = '{lesson['lesson_title']}');",
         f"  select id into v_lesson from classroom_lessons",
@@ -170,6 +170,14 @@ def sql_for(key, lesson):
 
 # ---------- заливка ----------
 
+def threshold(lesson):
+    """Порог прохождения (CLAUDE.md, решение Анны от 19.10.2026): у домашек
+    порога нет — null, тест юнита 90, итоговый тест 80."""
+    if lesson["kind"] != "test":
+        return "null"
+    return "80" if lesson["unit_title"] == "Final Test" else "90"
+
+
 def jsonb_text(v):
     """Текст jsonb так, как его отдаёт Postgres (payload::text): ключи по длине,
     потом по байтам, разделители ', ' и ': '. Нужен, чтобы сверить залитый блок
@@ -190,7 +198,7 @@ def final_payload(payload):
 def lesson_sql(lesson):
     """Юнит (если нет) и урок (если нет) одним запросом; возвращает id урока."""
     ut, lt = lesson["unit_title"].replace("'", "''"), lesson["lesson_title"].replace("'", "''")
-    thr = 90 if lesson["kind"] == "test" else 60
+    thr = threshold(lesson)
     return f"""with c as (select id from classroom_courses where slug = 'sm1'),
 nu as (insert into classroom_units (course_id, title, sort_order)
        select c.id, '{ut}', {lesson['unit_sort']} from c
