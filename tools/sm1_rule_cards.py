@@ -5,7 +5,7 @@ FB='/usr/share/fonts/opentype/inter/Inter-Bold.otf'
 FR='/usr/share/fonts/opentype/inter/Inter-Medium.otf'
 FX='/usr/share/fonts/opentype/inter/Inter-ExtraBold.otf'
 def f(p,s): return ImageFont.truetype(p,s)
-INK=(23,49,92); MUTE=(80,90,110); A=(229,57,53); AN=(30,136,229)
+G=(46,125,50); INK=(23,49,92); MUTE=(80,90,110); A=(229,57,53); AN=(30,136,229)
 
 # ---- number cards 1..10 (same look as media/sm3/u0/num_*.webp)
 for n in range(1,11):
@@ -50,6 +50,17 @@ def card(name,title,band,body):
                 d.rounded_rectangle((60,y,W-60,y+78),22,fill='white',outline=(214,222,236),width=2)
                 rich(d,90,y+16,parts,f(FB,40)); y+=94
             y+=10
+        elif kind=='pairs':   # пары-противоположности с переводом курсивом
+            FI='/usr/share/fonts/opentype/inter/Inter-Italic.otf'
+            for (e1,r1),(e2,r2) in val:
+                d.rounded_rectangle((60,y,W-60,y+70),22,fill='white',outline=(214,222,236),width=2)
+                x=90
+                for txt,fnt,col in ((e1,f(FB,36),G),(' ‘'+r1+'’',f(FI,32),MUTE),('  ↔  ',f(FB,36),MUTE),
+                                    (e2,f(FB,36),G),(' ‘'+r2+'’',f(FI,32),MUTE)):
+                    d.text((x,y+16+(3 if fnt.size==32 else 0)),txt,font=fnt,fill=col); x+=d.textlength(txt,font=fnt)
+                assert x<W-70, (e1,x)
+                y+=84
+            y+=10
         elif kind=='h':
             rich(d,60,y,val,f(FB,38)); y+=60
     im=im.crop((0,0,W-20,y+20))
@@ -60,7 +71,6 @@ def card(name,title,band,body):
     im=out
     im.save(OUT+name+'.webp','WEBP',quality=88); im.save(PRE+name+'.png')
 
-G=(46,125,50)
 card('u2_hw3_rule_adjectives','Какой? Слова-признаки',(251,140,0),[
   ('p','Слово-признак говорит, какой предмет: большой, маленький, новый.'),
   ('h',[('По-английски оно стоит ',INK),('перед',(229,57,53)),(' словом:',INK)]),
@@ -68,8 +78,10 @@ card('u2_hw3_rule_adjectives','Какой? Слова-признаки',(251,140
          [('a ',INK),('small',(229,57,53)),(' doll',INK),(' — маленькая кукла',MUTE)],
          [('a ',INK),('new',(229,57,53)),(' bike',INK),(' — новый велосипед',MUTE)]]),
   ('h',[('Слова-противоположности:',INK)]),
-  ('ex',[[('big ',G),('↔',MUTE),(' small     ',G),('new ',G),('↔',MUTE),(' old',G)],
-         [('long ',G),('↔',MUTE),(' short     ',G),('ugly ',G),('↔',MUTE),(' beautiful',G)]]),
+  ('pairs',[(('big','большой'),('small','маленький')),
+             (('new','новый'),('old','старый')),
+             (('long','длинный'),('short','короткий')),
+             (('ugly','некрасивый'),('beautiful','красивый'))]),
 ])
 card('u2_hw3_rule_a_an','a или an?',(30,136,229),[
   ('h',[('an',AN),(' — если слово начинается',INK)]),

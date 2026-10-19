@@ -88,6 +88,14 @@ SHEETS = {
     "Л8.5": (2, 3, ["u8/move_he_stretches_forwards", "u8/move_she_jumps_forwards",
                     "u8/move_she_stretches_sideways", "u8/move_she_jumps_backwards",
                     "u8/move_he_runs_sideways", "u8/move_she_steps_forwards"], CARD, 82),
+    # 19.10, листы для старых уроков и догенерация новых
+    "ЛС.1": (3, (4, 4, 3), ["old/u3_hw2_cake", "old/u3_hw2_snake", "old/u3_hw2_plane", "old/u3_hw2_gate",
+                            "old/u3_hw2_spy", "old/u3_hw2_fly", "old/u4_hw5_straw", "old/u4_hw5_paw",
+                            "old/u4_hw5_cloud", "old/u4_hw5_house", "old/u4_hw5_mouse"], CARD, 82),
+    "ЛС.2": (2, 3, ["old/u1_paper", "old/u1_look", "old/u1_listen",
+                    "old/u1_touch", "old/u1_smell", "old/u1_taste"], CARD, 82),
+    "ЛТ5.3": (1, 1, ["u5/act_play_frisbee"], CARD, 82),
+    "Л7.8": (1, 3, ["u7/girl_lily", "u7/girl_kate", "u7/girl_anna"], CARD, 82),
 }
 
 # Стоковые картинки тестов, которые по разбору заменяются ячейками уже нарезанных
