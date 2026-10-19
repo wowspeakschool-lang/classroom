@@ -456,6 +456,18 @@ SHEETS = [
         ("scene_cafe_counter", "a cafe counter with a cheese sandwich on a plate and a till"),
     ]),
 
+    # Тест Unit 8, говорение: вместо таблицы «кто что любит / не любит».
+    # В строке один и тот же ребёнок дважды: слева доволен, справа недоволен.
+    ("Л8.6", "u8", 1, 1, "people_scene", "Кто что любит — тест Unit 8", "Speaking Part 1 теста.", [
+        ("t8_likes", "a picture laid out as a grid of 4 rows and 2 columns separated by thin white lines; "
+                     "each row shows the same child twice - in the left half the child is happy and smiling, "
+                     "in the right half the same child, is unhappy and frowning. "
+                     "Row 1: a girl with red pigtails - left: swimming in a pool; right: on an indoor climbing wall. "
+                     "Row 2: a boy with dark curly hair in a blue T-shirt - left: kicking a football; right: stirring a pot in a kitchen. "
+                     "Row 3: a girl with long blond hair in yellow pyjamas - left: reading a book on a sofa; right: in bed while an alarm clock rings in the early morning. "
+                     "Row 4: a boy with glasses in an orange T-shirt - left: riding a bicycle; right: holding a tennis racket on a tennis court"),
+    ]),
+
     # ---------------- UNIT 8 ----------------
     ("Л8.1", "u8", 3, 3, "object", "Спорт 1", "Спорт — инвентарём, без людей.", [
         ("sport_badminton", "a badminton racket and a shuttlecock"),

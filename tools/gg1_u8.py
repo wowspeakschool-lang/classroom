@@ -843,10 +843,11 @@ LESSONS = {
                   ["It is", "good", "to brush", "your", "teeth."],
                   title="Расставь слова в правильном порядке", image=u("life_brush_teeth")),
 
-            # текста Сары в выгрузке нет — написан под утверждения, ТЕКСТ МОЙ
+            # текста в выгрузке нет — написан под утверждения, ТЕКСТ МОЙ. Рассказчик —
+            # мальчик Лео (в выгрузке Сара): озвучка Яндекса, английский голос только мужской.
             ("text", {"html":
-                "<h3>READING</h3><p>Прочитай рассказ Сары о своём образе жизни.</p>"
-                "<p><i>Hi! I'm Sara and I love sports! In summer I go swimming every day, and in "
+                "<h3>READING</h3><p>Прочитай рассказ Лео о его образе жизни.</p>"
+                "<p><i>Hi! I'm Leo and I love sports! In summer I go swimming every day, and in "
                 "winter I go ice-skating with my brother. I go to bed at half past nine and I get "
                 "up at seven o'clock. I drink two litres of water a day. I eat a lot of fruit — "
                 "apples and bananas are my favourite. I brush my teeth two times a day, in the "
@@ -854,14 +855,14 @@ LESSONS = {
                 "volleyball in the park at the weekend.</i></p>"}),
 
             ("truefalse", {"title": "READING. Правда или неправда?", "statements": [
-                {"text": "Sara doesn't like sports.", "correct": False},
-                {"text": "She goes swimming in summer.", "correct": True},
-                {"text": "She loves ice-skating in autumn.", "correct": False},
-                {"text": "She goes to bed at ten o'clock.", "correct": False},
-                {"text": "She drinks two litres of water a day.", "correct": True},
-                {"text": "Sara eats a lot of fruit.", "correct": True},
-                {"text": "She brushes her teeth one time a day.", "correct": False},
-                {"text": "Sara has only a few friends.", "correct": False},
+                {"text": "Leo doesn't like sports.", "correct": False},
+                {"text": "He goes swimming in summer.", "correct": True},
+                {"text": "He loves ice-skating in autumn.", "correct": False},
+                {"text": "He goes to bed at ten o'clock.", "correct": False},
+                {"text": "He drinks two litres of water a day.", "correct": True},
+                {"text": "Leo eats a lot of fruit.", "correct": True},
+                {"text": "He brushes his teeth one time a day.", "correct": False},
+                {"text": "Leo has only a few friends.", "correct": False},
             ]}),
 
             # аудио в выгрузке пустое — строка в доработать
