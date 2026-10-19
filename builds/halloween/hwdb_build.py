@@ -108,11 +108,11 @@ def hw(title, summary, order, blocks):
 
 
 hw('Halloween Homework · 4–6', 'Хэллоуин: ghost, bat, spider, monster', 10, [
-    ('flashcards', cards(W46, 'Карточки: смотрите, слушайте и повторяйте вместе с ребёнком'), ''),
-    ('quiz', listen(W46, 46, '🔊 Послушайте слово — ребёнок выбирает картинку'), ''),
-    ('match', same(W46, 'Найдите одинаковые картинки — и назовите их вслух'), 'вместо игры «найди пару»'),
-    ('quiz', yesno(W46, 47, '🔊 Послушайте слово: это оно? 👍 или 👎'), ''),
-    ('speaking', speak('🎤 Что ты видишь?', '<p>Нажмите на запись — пусть ребёнок назовёт всё, что видит на картинке.</p><p><i>ghost, bat, spider, monster…</i></p>', '4-6/hw_scene'), ''),
+    ('flashcards', cards(W46, 'Посмотри карточки, послушай и повтори'), ''),
+    ('quiz', listen(W46, 46, '🔊 Послушай и выбери картинку'), ''),
+    ('match', same(W46, 'Найди одинаковые картинки и назови их'), 'вместо игры «найди пару»'),
+    ('quiz', yesno(W46, 47, '🔊 Послушай: это то слово? 👍 или 👎'), ''),
+    ('speaking', speak('🎤 Что ты видишь?', '<p>Нажми на запись и назови всё, что видишь на картинке.</p><p><i>ghost, bat, spider, monster…</i></p>', '4-6/hw_scene'), ''),
 ])
 hw('Halloween Homework · 7–9 · beginners', 'Хэллоуин: ghost, bat, spider, witch, pumpkin, skeleton', 11, [
     ('flashcards', cards(W7B), ''),
