@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Планы уроков — список</title>
+<style>
+:root{
+  --bg:#17151f; --card:#1f1c2a; --line:#2e2a3d; --ink:#ecebf3; --mute:#9a96ad; --faint:#6f6b82;
+  --violet:#7b5cf0; --violet-d:#6a4be0; --warn:#e3a63a; --warn-bg:#3a2c12;
+  --c1:#5aa7ff; --c2:#43c59e; --c3:#f08a4b; --c4:#e05aa8; --c5:#b38cff;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.45}
+.wrap{max-width:1100px;margin:0 auto;padding:20px 16px 90px}
+h1{font-size:22px;margin:0 0 4px}
+.lead{color:var(--mute);margin:0 0 16px;font-size:14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:8px 12px;font:inherit;font-size:14px;cursor:pointer}
+.tabs button.on{background:var(--violet);border-color:var(--violet)}
+.note{background:#221f30;border:1px dashed var(--line);border-radius:12px;padding:10px 14px;color:var(--mute);font-size:14px;margin-bottom:14px}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg span{padding:7px 12px;font-size:14px;color:var(--mute)}
+.seg span.on{background:var(--violet);color:#fff}
+.search{flex:1;min-width:200px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;color:var(--mute);font-size:14px}
+.pill{font-size:12px;font-weight:600;color:var(--warn);background:var(--warn-bg);border-radius:999px;padding:3px 10px}
+.show{background:var(--violet);color:#fff;border-radius:10px;padding:6px 12px;font-size:13px;font-weight:600;white-space:nowrap}
+.cnt{color:var(--faint);font-size:12px;font-weight:400}
+.ar{display:inline-block;width:14px;color:var(--mute);font-size:11px}
+
+/* как сейчас */
+.now{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.now .r{display:flex;align-items:center;gap:10px;padding:11px 14px;border-top:1px solid var(--line)}
+.now .r:first-child{border-top:0}
+.now .c{font-weight:700;font-size:16px}
+.now .u{padding-left:30px;font-weight:600}
+.now .l{padding-left:48px}
+.now .l .t{flex:1}
+
+/* А — цветная полоса программы */
+.a .prog{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--pc);border-radius:14px;margin-bottom:14px;overflow:hidden}
+.a .ph{display:flex;align-items:center;gap:10px;padding:12px 16px;background:color-mix(in srgb,var(--pc) 16%,var(--card))}
+.a .ph b{font-size:17px}
+.a .code{font-size:12px;font-weight:700;color:#fff;background:var(--pc);border-radius:6px;padding:2px 7px}
+.a .uh{display:flex;align-items:center;gap:8px;padding:9px 16px 9px 22px;font-weight:600;border-top:1px solid var(--line);color:var(--ink)}
+.a .ls{margin:0 16px 10px 38px;border-left:2px solid color-mix(in srgb,var(--pc) 45%,transparent)}
+.a .l{display:flex;align-items:center;gap:10px;padding:8px 0 8px 14px}
+.a .l .t{flex:1}
+
+/* Б — программы карточками, юниты свёрнуты */
+.b .prog{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:16px;padding:6px 0}
+.b .ph{display:flex;align-items:center;gap:10px;padding:10px 16px 8px}
+.b .ph b{font-size:18px}
+.b .dot{width:12px;height:12px;border-radius:50%;background:var(--pc)}
+.b .units{display:flex;flex-wrap:wrap;gap:8px;padding:4px 16px 10px}
+.b .chip{border:1px solid var(--line);border-radius:10px;padding:7px 12px;font-size:14px;background:#262236}
+.b .chip.open{border-color:var(--pc);background:color-mix(in srgb,var(--pc) 14%,#262236)}
+.b .ls{margin:0 16px 10px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.b .l{display:flex;align-items:center;gap:10px;padding:9px 12px;border-top:1px solid var(--line)}
+.b .l:first-child{border-top:0}
+.b .l .t{flex:1}
+
+/* В — закреплённый заголовок программы */
+.v{background:var(--card);border:1px solid var(--line);border-radius:14px;max-height:520px;overflow:auto}
+.v .ph{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 16px;background:#2a2540;border-bottom:2px solid var(--pc);font-weight:700;font-size:16px}
+.v .uh{position:sticky;top:44px;z-index:1;padding:7px 16px 7px 30px;background:#221e31;font-weight:600;font-size:14px;color:var(--mute);text-transform:none;border-bottom:1px solid var(--line)}
+.v .l{display:flex;align-items:center;gap:10px;padding:9px 16px 9px 46px;border-bottom:1px solid var(--line)}
+.v .l .t{flex:1}
+
+/* Папки */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.tile{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--pc);border-radius:14px;padding:14px;min-height:96px;display:flex;flex-direction:column;gap:6px}
+.tile b{font-size:16px}
+.crumbs{color:var(--mute);font-size:14px;margin-bottom:10px}
+.crumbs a{color:#b9a8ff;text-decoration:none}
+.sw{display:none}.sw.on{display:block}
+@media (max-width:600px){.now .l,.a .ls{margin-left:16px}.now .u{padding-left:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Планы уроков — как сделать список понятнее</h1>
+  <p class="lead">Сверху, как в «Библиотеке», переключатель «Папки / Список» и поиск. Ниже — четыре вида списка и вид «Папки».</p>
+
+  <div class="tabs" id="tabs">
+    <button data-k="now" class="on">Как сейчас</button>
+    <button data-k="a">А · цветная полоса</button>
+    <button data-k="b">Б · программы карточками</button>
+    <button data-k="v">В · заголовок не уезжает</button>
+    <button data-k="f">Папки</button>
+  </div>
+
+  <div class="tools">
+    <span class="seg"><span id="segF">▦ Папки</span><span id="segL" class="on">☰ Список</span></span>
+    <span class="search">🔎 Найти: SM0 Unit 1, Halloween…</span>
+  </div>
+
+  <!-- как сейчас -->
+  <div class="sw on" data-k="now">
+    <div class="note">Все строки одного цвета и одной высоты: программа, юнит и план отличаются только отступом и жирностью. Где кончается одна программа — не видно.</div>
+    <div class="now" id="nowList"></div>
+  </div>
+
+  <!-- А -->
+  <div class="sw a" data-k="a">
+    <div class="note">Каждая программа — отдельный блок со своим цветом: полоса слева, тонированная шапка, код программы. Планы юнита собраны под тонкой цветной линией. Между программами — воздух.</div>
+    <div id="aList"></div>
+  </div>
+
+  <!-- Б -->
+  <div class="sw b" data-k="b">
+    <div class="note">Программа — карточка, юниты внутри — кнопками в ряд. Нажали юнит — под ним открылись его планы. Список короткий, даже когда юнитов много.</div>
+    <div id="bList"></div>
+  </div>
+
+  <!-- В -->
+  <div class="sw v" data-k="v">
+    <div class="note">Длинный список, но шапка программы и юнита прилипает к верху, пока листаете. Всегда видно, в какой программе вы сейчас. Прокрутите блок ниже.</div>
+    <div class="v" id="vList"></div>
+  </div>
+
+  <!-- Папки -->
+  <div class="sw" data-k="f">
+    <div class="note">Как в «Библиотеке»: плитки программ → плитки юнитов → планы. Колесом мыши папка открывается в новой вкладке. Нажмите на плитку.</div>
+    <div class="crumbs" id="crumbs"></div>
+    <div id="fView"></div>
+  </div>
+</div>
+
+<script>
+const DATA=[
+  {code:'SM0',name:'Super Minds 0',c:'var(--c1)',units:[{n:'Unit 1 · My body',ls:['Lesson 1 · Vocabulary 1 — Parts of the body','Lesson 2 · Vocabulary 2 — Face','Lesson 3 · Story — Funny monster']},{n:'Unit 2 · My family',ls:['Lesson 1 · Vocabulary — Family']}]},
+  {code:'WD1',name:'Wow Dragon 1',c:'var(--c2)',units:[{n:'Модуль 2 · уроки 28–54',ls:['Lesson 42 — I like my uniform!','Lesson 43 — My school bag']}]},
+  {code:'HOL',name:'Holidays',c:'var(--c3)',units:[{n:'Halloween',ls:['Halloween · 4–6','Halloween · 7–9 · beginners','Halloween · 7–9 · continuing','Halloween · 10–12 · beginners','Halloween · 10–12 · continuing','Halloween · 13+ · beginners','Halloween · 13+ · continuing']}]},
+];
+const pl=(n,a,b,c)=>{n=Math.abs(n)%100;const d=n%10;return n>10&&n<20?c:d===1?a:d>=2&&d<=4?b:c};
+const row=t=>`<span class="t">📘 ${t}</span><span class="pill">черновик</span><span class="show">▶ Показ</span>`;
+
+// как сейчас
+document.getElementById('nowList').innerHTML=DATA.map(p=>
+  `<div class="r c"><span class="ar">▾</span>${p.name} <span class="cnt">${p.units.length} ${pl(p.units.length,'юнит','юнита','юнитов')}</span></div>`+
+  p.units.map(u=>`<div class="r u"><span class="ar">▾</span>${u.n} <span class="cnt">${u.ls.length}</span></div>`+u.ls.map(l=>`<div class="r l">${row(l)}</div>`).join('')).join('')).join('');
+
+// А
+document.getElementById('aList').innerHTML=DATA.map(p=>
+  `<div class="prog" style="--pc:${p.c}"><div class="ph"><span class="ar">▾</span><span class="code">${p.code}</span><b>${p.name}</b><span class="cnt">${p.units.length} ${pl(p.units.length,'юнит','юнита','юнитов')}</span></div>`+
+  p.units.map(u=>`<div class="uh"><span class="ar">▾</span>${u.n} <span class="cnt">${u.ls.length} ${pl(u.ls.length,'план','плана','планов')}</span></div><div class="ls">`+u.ls.map(l=>`<div class="l">${row(l)}</div>`).join('')+`</div>`).join('')+`</div>`).join('');
+
+// Б
+let bOpen={0:0,2:0};
+function renderB(){
+  document.getElementById('bList').innerHTML=DATA.map((p,pi)=>{
+    const o=bOpen[pi];
+    return `<div class="prog" style="--pc:${p.c}"><div class="ph"><span class="dot"></span><b>${p.name}</b><span class="cnt">${p.units.length} ${pl(p.units.length,'юнит','юнита','юнитов')}</span></div>
+    <div class="units">${p.units.map((u,ui)=>`<span class="chip${o===ui?' open':''}" style="cursor:pointer" onclick="bOpen[${pi}]=bOpen[${pi}]===${ui}?null:${ui};renderB()">${u.n} <span class="cnt">${u.ls.length}</span></span>`).join('')}</div>
+    ${o!=null&&p.units[o]?`<div class="ls">${p.units[o].ls.map(l=>`<div class="l">${row(l)}</div>`).join('')}</div>`:''}</div>`}).join('');
+}
+renderB();
+
+// В
+document.getElementById('vList').innerHTML=DATA.map(p=>
+  `<section><div class="ph" style="--pc:${p.c}"><span class="ar">▾</span>${p.name} <span class="cnt">${p.units.length} ${pl(p.units.length,'юнит','юнита','юнитов')}</span></div>`+
+  p.units.map(u=>`<div><div class="uh">${u.n} · ${u.ls.length}</div>`+u.ls.map(l=>`<div class="l">${row(l)}</div>`).join('')+`</div>`).join('')+`</section>`).join('');
+
+// Папки
+let fp=null,fu=null;
+function renderF(){
+  const cr=document.getElementById('crumbs'),v=document.getElementById('fView');
+  if(fp===null){cr.innerHTML='Все программы';
+    v.innerHTML=`<div class="grid">${DATA.map((p,i)=>{const n=p.units.reduce((s,u)=>s+u.ls.length,0);return `<div class="tile" style="--pc:${p.c};cursor:pointer" onclick="fp=${i};fu=null;renderF()"><b>${p.name}</b><span class="cnt">${p.units.length} ${pl(p.units.length,'юнит','юнита','юнитов')} · ${n} ${pl(n,'план','плана','планов')}</span></div>`}).join('')}</div>`;return}
+  const p=DATA[fp];
+  if(fu===null){cr.innerHTML=`<a href="#" onclick="fp=null;renderF();return false">Все программы</a> › ${p.name}`;
+    v.innerHTML=`<div class="grid">${p.units.map((u,i)=>`<div class="tile" style="--pc:${p.c};cursor:pointer" onclick="fu=${i};renderF()"><b>${u.n}</b><span class="cnt">${u.ls.length} ${pl(u.ls.length,'план','плана','планов')}</span></div>`).join('')}</div>`;return}
+  const u=p.units[fu];
+  cr.innerHTML=`<a href="#" onclick="fp=null;renderF();return false">Все программы</a> › <a href="#" onclick="fu=null;renderF();return false">${p.name}</a> › ${u.n}`;
+  v.innerHTML=`<div class="b"><div class="ls" style="margin:0">${u.ls.map(l=>`<div class="l">${row(l)}</div>`).join('')}</div></div>`;
+}
+renderF();
+
+document.getElementById('tabs').onclick=e=>{
+  const k=e.target.dataset.k; if(!k) return;
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));
+  document.querySelectorAll('.sw').forEach(s=>s.classList.toggle('on',s.dataset.k===k));
+  document.getElementById('segF').classList.toggle('on',k==='f');
+  document.getElementById('segL').classList.toggle('on',k!=='f');
+};
+</script>
+</body>
+</html>
