@@ -49,14 +49,9 @@
 
 ## Чат «Halloween (курс Holidays)»
 
-1. «Озвучить пачкой» для 7 домашек — «Контент» → «Медиа», Holidays → Halloween.
-2. Посмотреть 14 материалов (7 планов, 7 домашек) — «Контент» → «Библиотека»
+1. Посмотреть 14 материалов (7 планов, 7 домашек) — «Контент» → «Библиотека»
    → Holidays → Halloween → 👁 — и опубликовать (сейчас все черновики).
-3. SQL Editor: `drop policy tmp_html_probe_insert on storage.objects;
-   drop policy tmp_halloween_music_insert on storage.objects;` и удалить
-   `halloween/probe.html` в Storage (бакет `classroom-media`).
-4. Проверить в «Показе»: ⛶ разворачивает только урок, без полосы сверху;
-   📋 на стартовом экране уроков 4–6 и 7–9 (обновить страницу Ctrl+Shift+R).
+2. Storage, бакет `classroom-media`: удалить пробный файл `halloween/probe.html`.
 
 ## Чат «SM1 — Super Minds 1»
 
