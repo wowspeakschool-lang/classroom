@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Библиотека — отбор</title>
+<style>
+:root{--bg:#17151f;--card:#1f1c2a;--line:#2e2a3d;--ink:#ecebf3;--mute:#9a96ad;--faint:#6f6b82;--violet:#7b5cf0;--warn:#e3a63a;--warn-bg:#3a2c12;
+--c0:#5aa7ff;--c1:#f08a4b;--c2:#43c59e;--c3:#e05aa8;--c4:#b38cff;--c5:#e3c54a}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.45}
+.wrap{max-width:1150px;margin:0 auto;padding:20px 16px 80px}
+h1{font-size:22px;margin:0 0 4px}.lead{color:var(--mute);margin:0 0 14px;font-size:14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tabs button{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:8px 12px;font:inherit;font-size:14px;cursor:pointer}
+.tabs button.on{background:var(--violet);border-color:var(--violet)}
+.note{background:#221f30;border:1px dashed var(--line);border-radius:12px;padding:10px 14px;color:var(--mute);font-size:14px;margin-bottom:12px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg span{padding:8px 12px;font-size:14px;color:var(--mute)}.seg span.on{background:var(--violet);color:#fff}
+.inp,select{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;color:var(--ink);font:inherit;font-size:14px}
+.inp{flex:1;min-width:200px;color:var(--mute)}
+.sel{display:flex;align-items:center;gap:10px;color:var(--mute);font-size:14px;margin:0 0 10px}
+.pill{font-size:12px;font-weight:600;color:var(--warn);background:var(--warn-bg);border-radius:999px;padding:3px 10px}
+.b{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:5px 10px;font-size:13px;font-weight:600;white-space:nowrap}
+.cnt{color:var(--faint);font-size:12px;font-weight:400}
+.ar{display:inline-block;width:14px;color:var(--mute);font-size:11px}
+.ck{width:16px;height:16px;accent-color:var(--violet)}
+.kind{font-size:12px;color:var(--mute);width:22px;text-align:center}
+/* как сейчас */
+.flat{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.flat .r{display:flex;align-items:center;gap:10px;padding:10px 14px;border-top:1px solid var(--line)}
+.flat .r:first-child{border-top:0}.flat .t{flex:1}
+/* А */
+.prog{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--pc);border-radius:14px;margin-bottom:14px;overflow:hidden}
+.ph{display:flex;align-items:center;gap:10px;padding:11px 16px;background:color-mix(in srgb,var(--pc) 16%,var(--card))}
+.ph b{font-size:17px}.code{font-size:12px;font-weight:700;color:#fff;background:var(--pc);border-radius:6px;padding:2px 7px}
+.uh{display:flex;align-items:center;gap:8px;padding:8px 16px 8px 20px;font-weight:600;border-top:1px solid var(--line)}
+.ls{margin:0 16px 8px 38px;border-left:2px solid color-mix(in srgb,var(--pc) 45%,transparent)}
+.l{display:flex;align-items:center;gap:10px;padding:7px 0 7px 12px}.l .t{flex:1}
+.found{font-size:12px;font-weight:600;color:#fff;background:color-mix(in srgb,var(--pc) 70%,#000);border-radius:999px;padding:2px 9px}
+/* Б */
+.crumbs{color:var(--mute);font-size:14px;margin-bottom:10px}.crumbs a{color:#b9a8ff;text-decoration:none;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.tile{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--pc);border-radius:14px;padding:14px;min-height:100px;display:flex;flex-direction:column;gap:6px;cursor:pointer}
+.tile b{font-size:16px}.tile.dim{opacity:.35;cursor:default}
+.hide{display:none}
+.bar{position:sticky;bottom:10px;margin-top:12px;background:#2a2540;border:1px solid var(--violet);border-radius:12px;padding:10px 14px;display:flex;gap:10px;align-items:center}
+.bar .p{background:var(--violet);color:#fff;border:0;border-radius:10px;padding:7px 12px;font-weight:600}
+@media(max-width:640px){.ls{margin-left:16px}.b{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Библиотека: отбор, не теряя папок</h1>
+<p class="lead">Макет, данные выдуманы. Попробуйте менять «Курс» и «Вид» — во всех трёх вкладках.</p>
+<div class="tabs" id="tabs">
+  <button data-k="now">Как сейчас</button>
+  <button data-k="a" class="on">А · Список с отбором</button>
+  <button data-k="b">Б · Папки с отбором</button>
+</div>
+<div class="tools">
+  <span class="seg"><span id="sF">▦ Папки</span><span id="sL" class="on">☰ Список</span></span>
+  <span class="inp">🔎 Найти: Homework 2, SM2 Unit 1, family…</span>
+  <select id="fc"><option value="">Все курсы</option></select>
+  <select id="fk"><option value="">Все виды</option><option value="hw">Домашки</option><option value="test">Тесты</option><option value="plan">Планы уроков</option></select>
+  <select id="fp"><option value="">Опубликованные и черновики</option><option value="pub">Опубликованные</option><option value="draft">Черновики</option></select>
+</div>
+<div class="note" id="note"></div>
+<div id="out"></div>
+<div class="bar" id="bar"><b id="barN"></b><span class="cnt" style="flex:1">выбрано</span><button class="b">Снять с публикации</button><button class="p">✓ Опубликовать</button></div>
+</div>
+<script>
+const C=[
+ {code:'SM0',n:'Super Minds 0',u:[['Unit 0',5,1,1],['Unit 1',6,1,2],['Unit 2',5,1,2]]},
+ {code:'SM1',n:'Super Minds 1',u:[['Unit 1 · Hello',7,1,0],['Unit 2 · My school',7,1,0]]},
+ {code:'SM2',n:'Super Minds 2',u:[['Unit 1 · Free time',7,1,0],['Unit 2 · The zoo',6,1,0]]},
+ {code:'GG3',n:'Go Getter 3',u:[['Unit 0',0,1,0],['Unit 2',0,1,0]]},
+ {code:'WD1',n:'Wow Dragon 1',u:[['Модуль 2 · уроки 28–54',4,0,1]]},
+ {code:'HOL',n:'Holidays',u:[['Halloween',7,0,7]]},
+];
+// материалы: [вид, название, опубликован]
+const items=[];C.forEach((c,ci)=>c.u.forEach((u,ui)=>{
+ for(let i=1;i<=u[1];i++)items.push({ci,ui,k:'hw',t:'Homework '+i,pub:(ci+ui+i)%3===0});
+ for(let i=1;i<=u[2];i++)items.push({ci,ui,k:'test',t:u[0].split(' ·')[0]+' Test',pub:ci===3&&ui===1});
+ for(let i=1;i<=u[3];i++)items.push({ci,ui,k:'plan',t:ci===5?['Halloween · 4–6','7–9 · beginners','7–9 · continuing','10–12 · beginners','10–12 · continuing','13+ · beginners','13+ · continuing'][i-1]:'Lesson '+i,pub:false});
+}));
+const KI={hw:'●',test:'◆',plan:'▢'};
+C.forEach((c,i)=>{const o=document.createElement('option');o.value=i;o.textContent=c.n;fc.appendChild(o)});
+let tab='a',fp0=null,fu0=null,sel=new Set();
+const st=()=>({c:fc.value,k:fk.value,p:fp.value});
+const match=(it,f)=>(f.c===''||+f.c===it.ci)&&(f.k===''||f.k===it.k)&&(f.p===''||(f.p==='pub')===it.pub);
+const pc=i=>`var(--c${i%6})`;
+const pl=(n,a,b,c)=>{n=Math.abs(n)%100;const d=n%10;return n>10&&n<20?c:d===1?a:d>=2&&d<=4?b:c};
+const row=(it,id)=>`<div class="l"><input type="checkbox" class="ck" ${sel.has(id)?'checked':''} onchange="tg(${id},this.checked)"><span class="kind">${KI[it.k]}</span><span class="t">${it.t}</span>${it.pub?'':'<span class="pill">черновик</span>'}<span class="b">👁 Посмотреть</span><span class="b">Редактировать</span></div>`;
+function tg(id,on){on?sel.add(id):sel.delete(id);bar()}
+function tgMany(ids,on){ids.forEach(i=>on?sel.add(i):sel.delete(i));render()}
+function bar(){document.getElementById('bar').style.display=sel.size?'flex':'none';barN.textContent=sel.size}
+function render(){
+ const f=st(),any=f.c||f.k||f.p,hit=items.map((it,id)=>({it,id})).filter(x=>match(x.it,f));
+ sF.classList.toggle('on',tab==='b');sL.classList.toggle('on',tab!=='b');
+ if(tab==='now'){
+  note.textContent='Сейчас: стоит выбрать курс, вид или публикацию — папки и группировка пропадают, всё одним длинным списком, и показаны только первые 300.';
+  out.innerHTML=any?`<div class="sel"><input type="checkbox" class="ck"> Выбрать все найденные · Найдено: ${hit.length}</div><div class="flat">${hit.map(x=>`<div class="r"><input type="checkbox" class="ck"><span class="t">${C[x.it.ci].code} ${C[x.it.ci].u[x.it.ui][0].split(' ·')[0]} ${x.it.t}</span>${x.it.pub?'':'<span class="pill">черновик</span>'}<span class="b">👁 Посмотреть</span><span class="b">Редактировать</span></div>`).join('')}</div>`:'<div class="note">Выберите «Вид» или «Курс» сверху, чтобы увидеть, как сейчас.</div>';
+  return bar()}
+ if(tab==='a'){
+  note.textContent='А: найденное — тем же цветным списком, по программам и юнитам. Только подходящее, без предела в 300. Галочка у программы и у юнита выбирает всё найденное в них.';
+  const g=C.map((c,ci)=>({c,ci,units:c.u.map((u,ui)=>({u,ui,xs:hit.filter(x=>x.it.ci===ci&&x.it.ui===ui)})).filter(z=>z.xs.length)})).filter(z=>z.units.length);
+  const all=hit.map(x=>x.id);
+  out.innerHTML=`<div class="sel"><input type="checkbox" class="ck" ${all.length&&all.every(i=>sel.has(i))?'checked':''} onchange="tgMany([${all}],this.checked)"> Выбрать все найденные · Найдено: ${hit.length} · в ${g.length} ${pl(g.length,'программе','программах','программах')}</div>`+
+  (g.map(z=>{const ids=z.units.flatMap(u=>u.xs.map(x=>x.id));return `<div class="prog" style="--pc:${pc(z.ci)}"><div class="ph"><span class="ar">▾</span><input type="checkbox" class="ck" ${ids.every(i=>sel.has(i))?'checked':''} onchange="tgMany([${ids}],this.checked)"><span class="code">${z.c.code}</span><b>${z.c.n}</b><span class="found">найдено ${ids.length}</span></div>`+
+   z.units.map(u=>{const uid=u.xs.map(x=>x.id);return `<div class="uh"><span class="ar">▾</span><input type="checkbox" class="ck" ${uid.every(i=>sel.has(i))?'checked':''} onchange="tgMany([${uid}],this.checked)">${u.u[0]} <span class="cnt">${uid.length}</span></div><div class="ls">${u.xs.map(x=>row(x.it,x.id)).join('')}</div>`}).join('')+`</div>`}).join('')||'<div class="note">Ничего не нашлось.</div>');
+  return bar()}
+ // Б
+ note.textContent='Б: в «Папках» отбор тоже работает. Остаются программы и юниты, где есть подходящее; на плитке — «найдено N». Внутри юнита — только подходящие материалы. Нажмите на плитку.';
+ const lnk=(t,js)=>`<a onclick="${js};render()">${t}</a>`;
+ if(fp0===null){out.innerHTML=`<div class="crumbs">Все программы${any?` · найдено ${hit.length}`:''}</div><div class="grid">${C.map((c,ci)=>{const n=hit.filter(x=>x.it.ci===ci).length,un=new Set(hit.filter(x=>x.it.ci===ci).map(x=>x.it.ui)).size;
+   return n||!any?`<div class="tile" style="--pc:${pc(ci)}" onclick="fp0=${ci};fu0=null;render()"><b>${c.n}</b><span class="cnt">${any?`найдено ${n} · в ${un} ${pl(un,'юните','юнитах','юнитах')}`:`${c.u.length} ${pl(c.u.length,'юнит','юнита','юнитов')}`}</span></div>`:''}).join('')}</div>${any?'<div class="cnt" style="margin-top:8px">Программы, где ничего не найдено, скрыты.</div>':''}`;return bar()}
+ const c=C[fp0];
+ if(fu0===null){out.innerHTML=`<div class="crumbs">${lnk('Все программы','fp0=null')} › ${c.n}</div><div class="grid">${c.u.map((u,ui)=>{const n=hit.filter(x=>x.it.ci===fp0&&x.it.ui===ui).length;
+   return n||!any?`<div class="tile" style="--pc:${pc(fp0)}" onclick="fu0=${ui};render()"><b>${u[0]}</b><span class="cnt">${any?'найдено '+n:(u[1]+u[2]+u[3])+' материалов'}</span></div>`:''}).join('')||'<div class="note">В этой программе ничего не найдено.</div>'}</div>`;return bar()}
+ const xs=hit.filter(x=>x.it.ci===fp0&&x.it.ui===fu0);
+ out.innerHTML=`<div class="crumbs">${lnk('Все программы','fp0=null')} › ${lnk(c.n,'fu0=null')} › ${c.u[fu0][0]}</div><div class="prog" style="--pc:${pc(fp0)}"><div class="ls" style="margin:8px 16px">${xs.map(x=>row(x.it,x.id)).join('')||'<div class="note">Ничего не найдено.</div>'}</div></div>`;bar();
+}
+[fc,fk,fp].forEach(s=>s.onchange=()=>{fp0=null;fu0=null;render()});
+tabs.onclick=e=>{const k=e.target.dataset.k;if(!k)return;tab=k;document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));render()};
+fk.value='hw';render();
+</script>
+</body>
+</html>
