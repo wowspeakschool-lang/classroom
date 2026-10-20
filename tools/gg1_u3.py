@@ -593,11 +593,13 @@ LESSONS = {
                 "gaps_expected": 4,
             }),
 
-            # картинки домов — лист Л3.7; пока их нет, варианты подписаны словами
+            # картинки домов — лист Л3.7: одноэтажный с красной дверью, двухэтажный
+            # с синей, двухэтажный с красной (верный)
             ("quiz", {"title": "Какой дом у Дэнни? Если нужно — послушай рассказ ещё раз",
                       "questions": [{
                           "q": "Which is Danny's house?", "type": "single",
-                          "options": [{"text": "House 1"}, {"text": "House 2"}, {"text": "House 3"}],
+                          "options": [{"image": u("house_danny_1")}, {"image": u("house_danny_2")},
+                                      {"image": u("house_danny_3")}],
                           "correct": [2],
                       }]}),
 
