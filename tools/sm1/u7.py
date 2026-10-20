@@ -416,8 +416,7 @@ LESSONS = {
     "u7_test": {
         "unit": U, "unit_title": UNIT, "unit_sort": 7,
         "lesson_title": "Unit 7 Test", "lesson_sort": 7, "kind": "test",
-        # Блок 5 выгрузки (аудирование «Speaker 1–5 + Extra → картинки») не
-        # перенесён: нет ни аудио, ни картинок, ни ответов — в доработку.
+        # Блок 5 выгрузки (аудирование «Speaker 1–5 + Extra») пересобран 20.10 — блоки 9–10.
         # Стоковые фото людей (в т. ч. детей) заменены предметами, лист ЛТ7.1;
         # фото детей в speaking — сценой магазина (ЛТ7.2) и кадрами героев.
         "blocks": [
@@ -492,7 +491,18 @@ LESSONS = {
                        "sentence": "Is Bobby eating a sandwich?",
                        "audio_tts": "Is Bobby eating a sandwich?"}),
 
-            # 9 — текст к чтению (в выгрузке — описание блока 6)
+            # 9–10 — LISTENING (блок 5 выгрузки «Speaker 1–5 + Extra»): исходной записи
+            # нет, 20.10 текст свой, озвучен Яндексом (docs/SM1_тексты_для_записи.md),
+            # картинки — наряды из HW3. Ученик соединяет наряд с номером говорящего.
+            ("video", {"title": "LISTENING. Послушай запись",
+                       "url": f"{STORAGE}sm1/sm1_u7_test_b9.mp3", "provider": "file"}),
+            ("match", {"title": "Послушай запись ещё раз. Кто во что одет? Соедини картинку с номером.",
+                       "pairs": [{"left": "", "left_image": c(f), "right": n}
+                                 for f, n in (("outfit_sam", "Number 1"), ("outfit_lily", "Number 2"),
+                                              ("outfit_any", "Number 3"), ("outfit_tom", "Number 4"),
+                                              ("outfit_anna", "Number 5"))]}),
+
+            # 11 — текст к чтению (в выгрузке — описание блока 6)
             ("text", {"html":
                 "<p><b>Прочитай текст и выбери правильный вариант ответа к вопросам 1–5.</b></p>"
                 "<p>Today is a fun day! The children are at a fashion show at school.</p>"

@@ -67,7 +67,9 @@ LESSONS = {
             # 1 — запись Анны (NARRATION_STORY + NARRATION_PICNIC), будет под тем же
             # именем sm1_final_b1.mp3; пока url пустой
             ("video", {"title": "Final test · Listening. Послушай рассказ",
-                       "url": "", "provider": "file"}),
+                       # 20.10 озвучено Яндексом; в бакете файл лёг как «sm1_final_b1 (1).mp3»
+                       # (старое имя занято прежней записью)
+                       "url": f"{STORAGE}sm1/sm1_final_b1%20(1).mp3", "provider": "file"}),
 
             # 2 — по рассказу; верный на разных местах
             ("quiz", {"title": "Послушай рассказ ещё раз и выбери правильную картинку.", "questions": [
