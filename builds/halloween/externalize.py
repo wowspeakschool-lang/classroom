@@ -39,6 +39,18 @@ def run(src, grp, dst):
             url=MEDIA_URL+f'halloween/{grp}/{fn}'
         cache[uri]=url;return url
     t=re.sub(r'data:[a-z]+/[a-z0-9+.-]+;base64,[A-Za-z0-9+/=]+',repl,s)
+    # предзагрузка: раньше картинки были вшиты и показывались мгновенно; теперь грузятся
+    # по сети — без предзагрузки урок «заедает» при первом показе каждой картинки (20.10.2026)
+    urls=sorted(set(re.findall(r'https://classroom\.wowteach\.ru/media/[^"\'\s)]+\.webp',t)))
+    pre=('<div id="hwPre" style="position:fixed;inset:0;z-index:99999;background:#1a1024;color:#ffe9c9;display:flex;flex-direction:column;'
+         'align-items:center;justify-content:center;font:700 22px Arial,sans-serif;gap:14px"><div>Loading…</div>'
+         '<div style="width:260px;height:10px;border-radius:6px;background:#3a2a4a;overflow:hidden"><div id="hwPreBar" style="height:100%;width:0;background:#f0a040"></div></div></div>'
+         '<script>(function(){var U='+json.dumps(urls)+',n=0,done=false,K=window.__hwImgs=[];'
+         'function fin(){if(done)return;done=true;var e=document.getElementById("hwPre");if(e)e.remove();}'
+         'function one(){n++;var b=document.getElementById("hwPreBar");if(b)b.style.width=Math.round(100*n/U.length)+"%";if(n>=U.length)fin();}'
+         'U.forEach(function(u){var i=new Image();i.onload=function(){(i.decode?i.decode():Promise.resolve()).then(one,one)};i.onerror=one;i.src=u;K.push(i);});'
+         'if(!U.length)fin();setTimeout(fin,20000);})();</script>')
+    t=re.sub(r'(<body[^>]*>)',lambda m:m.group(1)+pre,t,count=1)
     # картинки для canvas (сертификат, значок, фото комнаты) — с CORS, иначе «Save» не сработает вне своего домена
     t=t.replace('new Image()',"Object.assign(new Image(),{crossOrigin:'anonymous'})")
     os.makedirs(os.path.dirname(dst),exist_ok=True);open(dst,'w').write(t)
