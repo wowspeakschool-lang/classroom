@@ -324,3 +324,56 @@ select count(*) from u;
 
 -- Ждут листа картинок Анны (не применено): U1 HW1 бл. 4 (paper), U1 HW6 бл. 5 (look, touch, smell, taste).
 -- Применено 19.10.2026: части A, B, C (функция pg_temp.pic_pairs создаётся и вызывается в одном запросе).
+
+-- =====================================================================
+-- Часть 3 (20.10.2026): картинки Анны вставлены — U3 HW2 бл. 4, U4 HW5 бл. 9, U1 HW1 бл. 4, U1 HW6 бл. 5
+-- Все 17 файлов media/sm1/old/… проверены через net.http_get: 200, image/webp.
+-- =====================================================================
+insert into classroom_blocks_backup_sm1_edit_20261019 (id, lesson_id, sort_order, type, payload)
+select b.id, b.lesson_id, b.sort_order, b.type, b.payload from classroom_blocks b
+where b.lesson_id in ('ea3aaa0b-76af-494b-968a-19632ec6c483','82b8420e-dccf-4130-a2b5-b4a9d373ad48',
+                      '5965d94d-9279-42fe-a70c-66d70268a340','0fcc69fc-2b29-4598-888d-85cd9462b171')
+  and not exists (select 1 from classroom_blocks_backup_sm1_edit_20261019 k where k.id = b.id);
+
+with u3 as (update classroom_blocks set payload = replace($j${"questions": [
+  {"q": "Послушай звук. Посмотри на картинки. В названии каких предметов есть этот звук? Выбери все подходящие картинки!",
+   "type": "multiple", "audio": "", "audio_tts": {"text": "day, play, name", "voice": "en_US-amy"}, "correct": [0, 1],
+   "options": [{"image": "@@M@@u3_hw2_cake.webp"}, {"image": "@@M@@u3_hw2_snake.webp"}, {"image": "@@M@@u3_hw2_spy.webp"}, {"image": "@@M@@u3_hw2_fly.webp"}]},
+  {"q": "Послушай звук. Посмотри на картинки. В названии каких предметов есть этот звук? Выбери все подходящие картинки!",
+   "type": "multiple", "audio": "", "audio_tts": {"text": "my, by, why", "voice": "en_US-amy"}, "correct": [2, 3],
+   "options": [{"image": "@@M@@u3_hw2_plane.webp"}, {"image": "@@M@@u3_hw2_gate.webp"}, {"image": "@@M@@u3_hw2_fly.webp"}, {"image": "@@M@@u3_hw2_spy.webp"}]}],
+  "needs_review": false}$j$, '@@M@@', 'https://classroom.wowteach.ru/media/sm1/old/')::jsonb
+  where lesson_id='5965d94d-9279-42fe-a70c-66d70268a340' and sort_order=3 and type='quiz' returning id),
+u4 as (update classroom_blocks set payload = replace($j${"questions": [
+  {"q": "Послушай звук. Посмотри на картинки. В названии каких предметов есть этот звук? Выбери все подходящие картинки!",
+   "type": "multiple", "audio": "", "audio_tts": {"text": "saw, draw, jaw", "voice": "en_US-amy"}, "correct": [0],
+   "options": [{"image": "@@M@@u4_hw5_straw.webp"}, {"image": "@@M@@u4_hw5_cloud.webp"}, {"image": "@@M@@u4_hw5_house.webp"}]},
+  {"q": "Послушай звук. Посмотри на картинки. В названии каких предметов есть этот звук? Выбери все подходящие картинки!",
+   "type": "multiple", "audio": "", "audio_tts": {"text": "how, now, wow", "voice": "en_US-amy"}, "correct": [1, 2],
+   "options": [{"image": "@@M@@u4_hw5_paw.webp"}, {"image": "@@M@@u4_hw5_mouse.webp"}, {"image": "@@M@@u4_hw5_cloud.webp"}]}],
+  "needs_review": false}$j$, '@@M@@', 'https://classroom.wowteach.ru/media/sm1/old/')::jsonb
+  where lesson_id='0fcc69fc-2b29-4598-888d-85cd9462b171' and sort_order=8 and type='quiz' returning id)
+select (select count(*) from u3) u3, (select count(*) from u4) u4;
+
+-- pic_pairs — функция из части 2 (pg_temp, создаётся в том же запросе)
+select pg_temp.pic_pairs('ea3aaa0b-76af-494b-968a-19632ec6c483', 3, $m${
+  "pen": "https://classroom.wowteach.ru/media/sm1/u1/school_pen.webp",
+  "rubber": "https://classroom.wowteach.ru/media/sm1/u1/school_rubber.webp",
+  "pencil": "https://classroom.wowteach.ru/media/sm1/u1/school_pencil.webp",
+  "ruler": "https://classroom.wowteach.ru/media/sm1/u1/school_ruler.webp",
+  "book": "https://classroom.wowteach.ru/media/sm1/u1/school_book.webp",
+  "notebook": "https://classroom.wowteach.ru/media/sm1/u1/t_notebook.webp",
+  "desk": "https://classroom.wowteach.ru/media/sm1/u1/t_wooden_desk.webp",
+  "pencil case": "https://classroom.wowteach.ru/media/sm1/u1/t_pencil_case.webp",
+  "bag": "https://classroom.wowteach.ru/media/sm1/u1/school_bag.webp",
+  "paper": "https://classroom.wowteach.ru/media/sm1/old/u1_paper.webp"}$m$::jsonb,
+  'Найди пару: картинка и слово') u1hw1,
+pg_temp.pic_pairs('82b8420e-dccf-4130-a2b5-b4a9d373ad48', 4, $m${
+  "Listen": "https://classroom.wowteach.ru/media/sm1/old/u1_listen.webp",
+  "Look":   "https://classroom.wowteach.ru/media/sm1/old/u1_look.webp",
+  "Touch":  "https://classroom.wowteach.ru/media/sm1/old/u1_touch.webp",
+  "Smell":  "https://classroom.wowteach.ru/media/sm1/old/u1_smell.webp",
+  "Taste":  "https://classroom.wowteach.ru/media/sm1/old/u1_taste.webp"}$m$::jsonb,
+  'Найди пару: картинка и слово') u1hw6;
+-- Применено 20.10.2026 (часть 3). Контрольный select по 36 урокам: 506 блоков, sort_order подряд,
+-- пустых вариантов квизов 0, match с русским словом 0, дублей right 0, битых video 0.
