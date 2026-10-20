@@ -87,7 +87,9 @@ const items=[];C.forEach((c,ci)=>c.u.forEach((u,ui)=>{
 }));
 const KI={hw:'●',test:'◆',plan:'▢'};
 C.forEach((c,i)=>{const o=document.createElement('option');o.value=i;o.textContent=c.n;fc.appendChild(o)});
-let tab='a',fp0=null,fu0=null,sel=new Set();
+let tab='a',fp0=null,fu0=null,sel=new Set(),shut=new Set();
+function fold(k){shut.has(k)?shut.delete(k):shut.add(k);render()}
+const arr=k=>`<span class="ar" style="cursor:pointer;padding:4px" onclick="fold('${k}')">${shut.has(k)?'▸':'▾'}</span>`;
 const st=()=>({c:fc.value,k:fk.value,p:fp.value});
 const match=(it,f)=>(f.c===''||+f.c===it.ci)&&(f.k===''||f.k===it.k)&&(f.p===''||(f.p==='pub')===it.pub);
 const pc=i=>`var(--c${i%6})`;
@@ -104,12 +106,12 @@ function render(){
   out.innerHTML=any?`<div class="sel"><input type="checkbox" class="ck"> Выбрать все найденные · Найдено: ${hit.length}</div><div class="flat">${hit.map(x=>`<div class="r"><input type="checkbox" class="ck"><span class="t">${C[x.it.ci].code} ${C[x.it.ci].u[x.it.ui][0].split(' ·')[0]} ${x.it.t}</span>${x.it.pub?'':'<span class="pill">черновик</span>'}<span class="b">👁 Посмотреть</span><span class="b">Редактировать</span></div>`).join('')}</div>`:'<div class="note">Выберите «Вид» или «Курс» сверху, чтобы увидеть, как сейчас.</div>';
   return bar()}
  if(tab==='a'){
-  note.textContent='А: найденное — тем же цветным списком, по программам и юнитам. Только подходящее, без предела в 300. Галочка у программы и у юнита выбирает всё найденное в них.';
+  note.textContent='А: найденное — тем же цветным списком, по программам и юнитам. Только подходящее, без предела в 300. Галочка у программы и у юнита выбирает всё найденное в них. ▾ — свернуть.';
   const g=C.map((c,ci)=>({c,ci,units:c.u.map((u,ui)=>({u,ui,xs:hit.filter(x=>x.it.ci===ci&&x.it.ui===ui)})).filter(z=>z.xs.length)})).filter(z=>z.units.length);
   const all=hit.map(x=>x.id);
   out.innerHTML=`<div class="sel"><input type="checkbox" class="ck" ${all.length&&all.every(i=>sel.has(i))?'checked':''} onchange="tgMany([${all}],this.checked)"> Выбрать все найденные · Найдено: ${hit.length} · в ${g.length} ${pl(g.length,'программе','программах','программах')}</div>`+
-  (g.map(z=>{const ids=z.units.flatMap(u=>u.xs.map(x=>x.id));return `<div class="prog" style="--pc:${pc(z.ci)}"><div class="ph"><span class="ar">▾</span><input type="checkbox" class="ck" ${ids.every(i=>sel.has(i))?'checked':''} onchange="tgMany([${ids}],this.checked)"><span class="code">${z.c.code}</span><b>${z.c.n}</b><span class="found">найдено ${ids.length}</span></div>`+
-   z.units.map(u=>{const uid=u.xs.map(x=>x.id);return `<div class="uh"><span class="ar">▾</span><input type="checkbox" class="ck" ${uid.every(i=>sel.has(i))?'checked':''} onchange="tgMany([${uid}],this.checked)">${u.u[0]} <span class="cnt">${uid.length}</span></div><div class="ls">${u.xs.map(x=>row(x.it,x.id)).join('')}</div>`}).join('')+`</div>`}).join('')||'<div class="note">Ничего не нашлось.</div>');
+  (g.map(z=>{const ids=z.units.flatMap(u=>u.xs.map(x=>x.id));return `<div class="prog" style="--pc:${pc(z.ci)}"><div class="ph">${arr('p'+z.ci)}<input type="checkbox" class="ck" ${ids.every(i=>sel.has(i))?'checked':''} onchange="tgMany([${ids}],this.checked)"><span class="code">${z.c.code}</span><b>${z.c.n}</b><span class="found">найдено ${ids.length}</span></div>`+
+   (shut.has('p'+z.ci)?'':z.units.map(u=>{const uid=u.xs.map(x=>x.id),k='u'+z.ci+'_'+u.ui;return `<div class="uh">${arr(k)}<input type="checkbox" class="ck" ${uid.every(i=>sel.has(i))?'checked':''} onchange="tgMany([${uid}],this.checked)">${u.u[0]} <span class="cnt">${uid.length}</span></div>${shut.has(k)?'':`<div class="ls">${u.xs.map(x=>row(x.it,x.id)).join('')}</div>`}`}).join(''))+`</div>`}).join('')||'<div class="note">Ничего не нашлось.</div>');
   return bar()}
  // Б
  note.textContent='Б: в «Папках» отбор тоже работает. Остаются программы и юниты, где есть подходящее; на плитке — «найдено N». Внутри юнита — только подходящие материалы. Нажмите на плитку.';
