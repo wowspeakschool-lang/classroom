@@ -1,8 +1,10 @@
 # SM1 — тексты, которые Анна записывает голосом
 
-Решение Анны от 19.10.2026: большой связный текст не синтезируем — Анна
-записывает сама и присылает файл с именем из таблицы. Мы кладём его в бакет
-`classroom-media/sm1/` и вставляем блок.
+Решение Анны от 20.10.2026: аудирования озвучиваем Yandex SpeechKit (английский
+голос, отдельная сессия «озвучка», где есть ключ Яндекса). Готовый mp3 — с именем
+из заголовка раздела — кладётся в бакет `classroom-media/sm1/`, после этого чат
+SM1 вставляет блок в урок. Каждый текст — одна дорожка; между репликами пауза
+~1,5 с, перед «Number N» — ~2 с.
 
 ## Unit 7 Test — аудирование «Who is speaking?» → `sm1_u7_test_b9.mp3`
 
@@ -12,12 +14,13 @@
 (outfit_kate — лишняя картинка в задании «Extra» выгрузки, в match не входит).
 
 ```
-Speaker 1. Hello! I'm wearing a grey T-shirt and red shorts. I'm wearing a cap, too.
-Speaker 2. Hi! I'm wearing a blue shirt with spots and a pink skirt with flowers.
-Speaker 3. Hello! I'm wearing a pink sweater and a long red skirt. My shoes are white.
-Speaker 4. Hi! I'm wearing a black coat, black trousers and brown boots.
-Speaker 5. Hello! I'm wearing a purple sweater with zigzags and a blue skirt.
+Number one. Look at this child. The child is wearing a grey T-shirt and red shorts, and a cap, too.
+Number two. Look at this child. The child is wearing a blue shirt with spots and a pink skirt with flowers.
+Number three. Look at this child. The child is wearing a pink sweater and a long red skirt. The shoes are white.
+Number four. Look at this child. The child is wearing a black coat, black trousers and brown boots.
+Number five. Look at this child. The child is wearing a purple sweater with zigzags and a blue skirt.
 ```
+(Текст в третьем лице: голос синтеза один, мужской.)
 
 ## Final Test — аудирование → `sm1_final_b1.mp3` (одним файлом, две части)
 
