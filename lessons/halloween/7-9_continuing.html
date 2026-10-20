@@ -359,6 +359,7 @@ body{font-family:var(--round);overflow:hidden;-webkit-font-smoothing:antialiased
 
   <!-- START -->
   <div class="screen active" id="start" style="background:radial-gradient(ellipse at 50% 30%,#3a1a66,#1a0b2e)">
+    <button class="tb plan" id="planBtnStart" title="План урока" style="position:absolute;top:12px;right:16px;z-index:41">📋</button>
     <div class="big-title" style="font-size:clamp(34px,6vw,64px)">Halloween Room 🎃</div>
     <button class="btn pulse" id="startBtn" style="margin-top:22px">Start! 🎃</button>
   </div>
@@ -1505,7 +1506,7 @@ function openPlan(){
   if(!w){alert("Please allow pop-ups to open the lesson plan.");return;}
   w.document.write(PLAN_HTML);w.document.close();w.document.title="План урока — Halloween 7-9";
 }
-$("planBtn")&&($("planBtn").onclick=openPlan);
+$("planBtn")&&($("planBtn").onclick=openPlan);$("planBtnStart")&&($("planBtnStart").onclick=openPlan);
 
 /* ---- MUSIC toggle ---- */
 $("musicBtn")&&($("musicBtn").onclick=function(){musicOn=!musicOn;this.textContent="🎵 "+(musicOn?"ON":"OFF");if(musicOn)playMusic();else stopMusic();});

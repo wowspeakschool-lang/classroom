@@ -47,6 +47,17 @@
 (Пункты про вычитку SM0 переехали в раздел «Вычитка курсов — SM3 и SM0»:
 решение Анны от 19.10 — SM0 вычитывается в том чате.)
 
+## Чат «Halloween (курс Holidays)»
+
+1. «Озвучить пачкой» для 7 домашек — «Контент» → «Медиа», Holidays → Halloween.
+2. Посмотреть 14 материалов (7 планов, 7 домашек) — «Контент» → «Библиотека»
+   → Holidays → Halloween → 👁 — и опубликовать (сейчас все черновики).
+3. SQL Editor: `drop policy tmp_html_probe_insert on storage.objects;
+   drop policy tmp_halloween_music_insert on storage.objects;` и удалить
+   `halloween/probe.html` в Storage (бакет `classroom-media`).
+4. Проверить в «Показе»: ⛶ разворачивает только урок, без полосы сверху;
+   📋 на стартовом экране уроков 4–6 и 7–9 (обновить страницу Ctrl+Shift+R).
+
 ## Чат «SM1 — Super Minds 1»
 
 1. Послушать аудирования: Unit 7 Test бл. 9–10, Final Test бл. 1–3.
