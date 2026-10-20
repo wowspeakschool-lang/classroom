@@ -74,7 +74,8 @@ td.n{text-align:left}
 <h1>Тест на уроке и ссылка для ученика</h1>
 <p class="lead">Макет, данные выдуманы. Переключайте шаги вкладками.</p>
 <div class="tabs" id="tabs">
-  <button data-k="1" class="on">1 · Задать тест</button>
+  <button data-k="1" class="on">1 · Задать тест группе</button>
+  <button data-k="1b">1б · Задать тест одному ученику</button>
   <button data-k="2">2 · Ссылки для учеников</button>
   <button data-k="3">3 · Ученик открыл ссылку</button>
   <button data-k="4">4 · Табло группы</button>
@@ -95,6 +96,32 @@ td.n{text-align:left}
       <button class="btn green" onclick="go('4')">▶ Пройти на уроке</button>
     </div>
     <p class="mini" style="margin:10px 0 0">«▶ Пройти на уроке» задаёт тест всем сразу, открывает ссылки и табло группы. У одного ученика — сразу открывает тест на вашем экране (вкладка 5).</p>
+  </div>
+</div>
+
+<!-- 1б -->
+<div class="sw" data-k="1b">
+  <div class="note">«Задать ДЗ» → ученик → отмечаем тест. Те же три действия. «Ссылка» открывает ссылку и QR-код прямо здесь; «Пройти на уроке» — тест у вас на экране (вкладка 5).</div>
+  <div class="card">
+    <div class="row"><span class="ava">ПИ</span><div class="grow"><b>Петя Иванов · Go Getter 3</b><div class="mini">индивидуально · урок сегодня 16:00</div></div><span class="chip">ученик</span></div>
+    <div class="mat"><input type="checkbox" checked> <span class="grow">Unit 2 Test</span><span class="chip test">тест</span><span class="mini">21 задание</span></div>
+    <div class="mat"><input type="checkbox"> <span class="grow">Unit 2 · Homework 5</span><span class="chip">ДЗ</span></div>
+    <div class="row" style="margin-top:14px">
+      <button class="btn ghost">Задать на дом</button>
+      <button class="btn ghost" onclick="document.getElementById('one').style.display='block'">🔗 Ссылка для ученика</button>
+      <span class="grow"></span>
+      <button class="btn green" onclick="go('5')">▶ Пройти на уроке</button>
+    </div>
+    <div id="one" style="display:none;margin-top:14px;border-top:1px solid var(--line);padding-top:12px">
+      <div class="row"><span class="mini">Ссылка действует:</span><span class="seg"><span class="on">на урок · 3 часа</span><span>до срока сдачи</span></span></div>
+      <div class="row" style="margin-top:10px"><span class="url grow" style="max-width:none">app.wowteach.ru/?hw=8f3c…&t=…ПИ</span><button class="btn sm">⧉ Копировать</button></div>
+      <div class="qrbox" id="qrOne"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="mini" style="margin-bottom:8px">Если тест уже задан на дом — те же кнопки есть в карточке ученика у задания:</div>
+    <div class="mat" style="margin-top:0"><span class="grow">Unit 2 Test <span class="mini">· задано, до 22.10 · не начат</span></span>
+      <button class="btn sm ghost">🔗 Ссылка</button><button class="btn sm green" onclick="go('5')">▶ Пройти на уроке</button></div>
   </div>
 </div>
 
@@ -169,6 +196,7 @@ function qrSvg(seed){let s=seed*9301+49297,c='';const n=25,p=6;
  return `<svg width="150" height="150" viewBox="0 0 ${n*p} ${n*p}"><rect width="100%" height="100%" fill="#fff"/>${c}${fin(0,0)}${fin(18,0)}${fin(0,18)}</svg>`}
 function qr(i){document.getElementById('qrb').innerHTML=qrSvg(i+3)+`<div><b>${ST[i][0]}</b><div style="margin-top:6px">Наведи камеру телефона — откроется твой тест.</div><div style="margin-top:6px;font-size:12px;color:#666">Макет: QR-код нарисован для вида, никуда не ведёт.</div></div>`}
 qr(1);
+document.getElementById('qrOne').innerHTML=qrSvg(7)+`<div><b>Петя Иванов</b><div style="margin-top:6px">Наведи камеру телефона — откроется твой тест.</div><div style="margin-top:6px;font-size:12px;color:#666">Макет: QR-код нарисован для вида.</div></div>`;
 const TASKS=21, B=[[1,1,0,1,1,'now'],[1,1,'now'],[1,0,1,1,1,1,1,0,'now'],[]];
 const mark=v=>v==='now'?'<span class="c now">…</span>':v===1?'<span class="c ok">✓</span>':v===0?'<span class="c bad">✗</span>':'<span class="c no">·</span>';
 document.getElementById('board').innerHTML=`<tr><th style="text-align:left">Ученик</th>${Array.from({length:10},(_,i)=>`<th>${i+1}${i===4?' 🎤':''}</th>`).join('')}<th>…</th><th>Итог</th><th></th></tr>`+
