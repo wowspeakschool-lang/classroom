@@ -32,8 +32,10 @@ def single(q, options, correct, image=None):
     return d
 
 
-def order(sentence, words, image=None, title="Расставь слова в правильном порядке"):
-    d = {"title": title, "words": words, "sentence": sentence, "audio_tts": sentence}
+def order(sentence, words, image=None, title="Расставь слова в правильном порядке", tts=True):
+    d = {"title": title, "words": words, "sentence": sentence}
+    if tts:
+        d["audio_tts"] = sentence
     if image:
         d["image"] = image
     return ("order", d)
@@ -264,15 +266,16 @@ LESSONS = {
             ]}),
 
             # 7–9 — игра «Составь предложения», содержимого нет. СОСТАВ МОЙ: фразы из письма Милы.
+            # Без звука: 19.10 озвучку у этих блоков убрали в базе (предложения читают сами).
             order("On Mondays I watch TV for two hours.",
                   ["On", "Mondays", "I", "watch", "TV", "for", "two", "hours."],
-                  title="Составь предложение из письма Милы"),
+                  title="Составь предложение из письма Милы", tts=False),
             order("I play tennis for one hour.",
                   ["I", "play", "tennis", "for", "one", "hour."],
-                  title="Составь предложение из письма Милы"),
+                  title="Составь предложение из письма Милы", tts=False),
             order("On Saturdays and Sundays I do nothing!",
                   ["On", "Saturdays", "and", "Sundays", "I", "do", "nothing!"],
-                  title="Составь предложение из письма Милы"),
+                  title="Составь предложение из письма Милы", tts=False),
 
             # 10
             ("text", {"html":
