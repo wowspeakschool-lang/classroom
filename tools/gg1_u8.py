@@ -879,19 +879,15 @@ LESSONS = {
                 "gaps_expected": 7,
             }),
 
-            # картинка задания потеряна (видимо, люди со смайликами) — таблица, СОСТАВ МОЙ
+            # картинка задания потеряна — нарисована заново (лист Л8.6, Анна 20.10):
+            # в каждом ряду один ребёнок — слева то, что любит, справа то, что не любит
             ("speaking", {
                 "title": "SPEAKING TASK PART 1 🎤",
-                "html": "<p>Посмотри на таблицу. Расскажи, кто что любит или не любит делать. "
-                        "Затем расскажи, что любишь / не любишь делать ты. Запиши свой ответ, "
-                        "нажав на кнопку микрофона 🙌</p>"
-                        "<table border=\"1\" cellpadding=\"6\" style=\"border-collapse:collapse\">"
-                        "<tr><th></th><th>😊 likes</th><th>😫 doesn't like</th></tr>"
-                        "<tr><td><b>Mary</b></td><td>swimming</td><td>climbing</td></tr>"
-                        "<tr><td><b>Tom</b></td><td>playing football</td><td>cooking</td></tr>"
-                        "<tr><td><b>Lucy</b></td><td>reading</td><td>getting up early</td></tr>"
-                        "<tr><td><b>Ben</b></td><td>cycling</td><td>playing tennis</td></tr>"
-                        "</table>"
+                "html": "<p>Посмотри на картинку. Слева — что ребята любят делать, справа — что "
+                        "не любят. Расскажи о каждом, а потом о себе: что любишь и что не любишь "
+                        "делать ты. Запиши свой ответ, нажав на кнопку микрофона 🙌</p>"
+                        + pic(u("t8_likes"), "Mary, Tom, Lucy, Ben")
+                        + "<p>Сверху вниз: <b>Mary</b>, <b>Tom</b>, <b>Lucy</b>, <b>Ben</b>.</p>"
                         "<p><i>Пример: Mary likes swimming, but she doesn't like climbing. As for "
                         "me, I like…, I don't like…</i></p>",
                 "needs_review": True,

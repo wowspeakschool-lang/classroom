@@ -684,16 +684,17 @@ LESSONS = {
                   image=u("sport_balls")),
             order("What does she have for dinner?", title="Расставь слова в правильном порядке"),
 
-            # картинка письма в выгрузке повреждена — текст составлен заново по ответам, ТЕКСТ МОЙ
+            # картинка письма в выгрузке повреждена — текст составлен заново по ответам, ТЕКСТ МОЙ.
+            # Письмо от мальчика Макса (в выгрузке Мия): озвучка Яндекса — мужской голос.
             ("text", {"html":
-                "<h3>READING</h3><p>Прочитай письмо Мии подруге и выбери правильные ответы.</p>"
+                "<h3>READING</h3><p>Прочитай письмо Макса другу и выбери правильные ответы.</p>"
                 + pic(u("animal_rabbit"), "Coco", 200)
-                + "<p><i>Hi Olivia,<br>How are you? I'm fine. I have great news! We have a new pet. "
+                + "<p><i>Hi Oliver,<br>How are you? I'm fine. I have great news! We have a new pet. "
                 "It's a small rabbit and her name is Coco. She is white and grey and she is very cute. "
                 "Coco doesn't eat meat or fish. She eats leaves and vegetables. She drinks about one "
                 "litre of water in a week. Every day my brother walks Coco in the garden — she loves "
                 "it! I wanted a cat too, but we don't have one because my mum doesn't like cats.<br>"
-                "Write soon!<br>Mia</i></p>"}),
+                "Write soon!<br>Max</i></p>"}),
 
             mcq("READING. Выбери правильный ответ", [
                 ("What animal is Coco?", ["a hamster", "a rabbit", "a cat"], "a rabbit"),
@@ -702,10 +703,10 @@ LESSONS = {
                 ("What does Coco eat?", ["meat", "leaves and vegetables", "fish"], "leaves and vegetables"),
                 ("How much water does Coco drink in a week?", ["1 litre", "2 litres", "5 litres"],
                  "1 litre"),
-                ("Who walks Coco in the garden?", ["Mia", "her mum", "her brother"], "her brother"),
-                ("Why doesn't Mia's family have a cat?",
-                 ["Cats are dangerous.", "Mia doesn't like cats.", "Her mum doesn't like cats."],
-                 "Her mum doesn't like cats."),
+                ("Who walks Coco in the garden?", ["Max", "his mum", "his brother"], "his brother"),
+                ("Why doesn't Max's family have a cat?",
+                 ["Cats are dangerous.", "Max doesn't like cats.", "His mum doesn't like cats."],
+                 "His mum doesn't like cats."),
             ]),
 
             listening("LISTENING. Прослушай объявление в Лондонском зоопарке."),

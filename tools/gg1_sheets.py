@@ -259,6 +259,15 @@ SHEETS = [
         ("scene_guests_door", "a boy opening the front door of a house to welcome two smiling guests, a hallway with stairs going up behind him"),
     ]),
 
+    # Unit 3, Homework 6, блок 5: «Какой дом у Дэнни?» Верный — третий: белый,
+    # два этажа, красная дверь, большой сад с яблоней. У первого один этаж,
+    # у второго синяя дверь — остальное как у верного.
+    ("Л3.7", "u3", 1, 3, "cartoon", "Три дома", "Homework 6: выбери дом Дэнни по рассказу.", [
+        ("house_danny_1", "a small white one-storey house with a red front door and a garden with an apple tree"),
+        ("house_danny_2", "a white two-storey house with a blue front door and a big garden with an apple tree"),
+        ("house_danny_3", "a white two-storey house with a red front door and a big garden with an apple tree"),
+    ]),
+
     # Вместо кадра выгрузки с водяным знаком стока. Задание «верно / неверно»:
     # есть кровать, книги, компьютер; нет телевизора и письменного стола.
     ("Л3.6", "u3", 1, 1, "scene", "Беспорядок в спальне", "Homework 3: верно или неверно по картинке.", [

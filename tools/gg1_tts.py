@@ -24,21 +24,28 @@ VOICE, SPEED = "john", 0.9          # чуть медленнее обычног
 TRACKS = {
     # Unit 1, Homework 5, блок 2 — чтение (ТЕКСТ МОЙ)
     "gg1_u1_hw5_b2": (
-        "Silvia. Hi. My name's Silvia. I'm 12 and I'm British. My brother is 9. My dad is "
-        "Spanish. Ellie is my aunt. She's Spanish too. Bea is my friend. Sweep is a dog. "
+        "Simon. Hi. My name's Simon. I'm 12 and I'm British. My brother is 9. My dad is "
+        "Spanish. Ellie is my aunt. She's Spanish too. Ben is my friend. Sweep is a dog. "
         "He's our dog! "
         "Nick. Hello! I'm Nick. I'm British. I'm at a party today. It's my cousin's birthday. "
         "My mum and dad are at the party too. "
-        "Bea. Hi! I'm Bea. My mother is Italian and my father is British. We aren't at school "
+        "Ben. Hi! I'm Ben. My mother is Italian and my father is British. We aren't at school "
         "today. My granny and my grandad are in the park and my sister and my mother are in "
         "the garden."),
-    # Unit 7, Test, блок 12 — письмо Мии (ТЕКСТ МОЙ)
+    # Unit 3, Homework 6, блок 2 — рассказ Дэнни о доме (ТЕКСТ МОЙ, под блоки 3–5)
+    "gg1_u3_hw6_b2": (
+        "Hi, I'm Danny. This is my new house. It's white and it's got a red door. It's got two "
+        "floors and a big garden with an apple tree. Downstairs there's a kitchen, a living room "
+        "and a bathroom. Upstairs there are three bedrooms. So there are six rooms in my house! "
+        "My bedroom is small, but it's cool. There's a bed, a desk and a computer. There isn't a "
+        "TV in my bedroom. The TV is in the living room."),
+    # Unit 7, Test, блок 12 — письмо Макса (ТЕКСТ МОЙ)
     "gg1_u7_test_b12": (
-        "Hi Olivia, How are you? I'm fine. I have great news! We have a new pet. It's a small "
+        "Hi Oliver, How are you? I'm fine. I have great news! We have a new pet. It's a small "
         "rabbit and her name is Coco. She is white and grey and she is very cute. Coco doesn't "
         "eat meat or fish. She eats leaves and vegetables. She drinks about one litre of water "
         "in a week. Every day my brother walks Coco in the garden. She loves it! I wanted a cat "
-        "too, but we don't have one because my mum doesn't like cats. Write soon! Mia."),
+        "too, but we don't have one because my mum doesn't like cats. Write soon! Max."),
     # Unit 8, Test, блок 12 — рассказ Лео (ТЕКСТ МОЙ)
     "gg1_u8_test_b12": (
         "Hi! I'm Leo and I love sports! In summer I go swimming every day, and in winter I go "
@@ -94,6 +101,46 @@ def speak(text):
     return audio
 
 
+def chunks(text, limit=230):
+    """Яндекс v3 принимает не больше ~250 знаков за запрос: режем по предложениям."""
+    import re
+    parts, cur = [], ""
+    for sent in re.split(r"(?<=[.!?])\s+", text.strip()):
+        if cur and len(cur) + 1 + len(sent) > limit:
+            parts.append(cur)
+            cur = sent
+        else:
+            cur = (cur + " " + sent).strip()
+    if cur:
+        parts.append(cur)
+    return parts
+
+
+def speak_long(text, pause=0.5):
+    """Куски по отдельности, склейка ffmpeg с паузой между кусками."""
+    import subprocess, tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        files = []
+        for i, part in enumerate(chunks(text)):
+            f = os.path.join(tmp, f"{i:02d}.mp3")
+            with open(f, "wb") as fh:
+                fh.write(speak(part))
+            files.append(f)
+        silence = os.path.join(tmp, "pause.mp3")
+        subprocess.run(["ffmpeg", "-loglevel", "error", "-f", "lavfi", "-i",
+                        "anullsrc=r=48000:cl=mono", "-t", str(pause), "-q:a", "4", silence], check=True)
+        lst = os.path.join(tmp, "list.txt")
+        with open(lst, "w") as fh:
+            for k, f in enumerate(files):
+                if k:
+                    fh.write(f"file '{silence}'\n")
+                fh.write(f"file '{f}'\n")
+        out = os.path.join(tmp, "out.mp3")
+        subprocess.run(["ffmpeg", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", lst,
+                        "-ar", "48000", "-ac", "1", "-b:a", "96k", out], check=True)
+        return open(out, "rb").read()
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--list", action="store_true")
@@ -107,7 +154,7 @@ def main():
             continue
         if os.path.exists(path) and name not in args.force:
             continue
-        data = speak(text)
+        data = speak_long(text)
         with open(path, "wb") as f:
             f.write(data)
         print(os.path.relpath(path, ROOT), len(data) // 1024, "КБ")

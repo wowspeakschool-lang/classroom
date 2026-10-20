@@ -36,7 +36,8 @@ for _m in UNIT_MODULES:
         if e.name != _m:
             raise
 
-# Аудио и видео, которые методист залила в бакет classroom-media (19.10.2026):
+# Аудио и видео, которые методист залила в бакет classroom-media (19.10.2026),
+# и записи Яндекса из tools/gg1_tts.py (media/gg1/audio/, source = yandex):
 # список — tools/gg1_media_files.json, имена файлов — из таблицы
 # docs/GG1_аудио_видео.docx. Подставляются в сборку, чтобы пересборка их не теряла.
 with open(os.path.join(ROOT, "tools", "gg1_media_files.json"), encoding="utf-8") as _f:
@@ -47,7 +48,8 @@ for _r in MEDIA_FILES:
         assert _t == "video", _r
         _p["url"], _p["provider"] = _r["url"], "file"
     else:
-        assert "audio" in _p, _r
+        # у текстового блока поля audio может не быть: запись к чтению (Яндекс)
+        assert "audio" in _p or _t == "text", _r
         _p["audio"] = _r["url"]
 
 

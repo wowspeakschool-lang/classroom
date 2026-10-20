@@ -572,28 +572,31 @@ LESSONS = {
             hello("<h2>Добро пожаловать! 👋</h2><p>Сегодня тебя ждут интересные задания, "
                   "поехали!</p>", "hello_laptop"),
 
-            listening("Послушай диалог. О чём он?"),
+            # Записи из выгрузки нет, а ответы трёх заданий держались на ней. Текст
+            # записи и задания составлены заново (Анна, 20.10): рассказ мальчика Дэнни о
+            # новом доме, озвучка Яндекса — tools/gg1_tts.py, ТЕКСТ МОЙ.
+            listening("Послушай, что Дэнни рассказывает о своём новом доме. "
+                      "Потом выполни задания ниже."),
 
-            mcq("О чём диалог? Выбери правильный ответ", [
-                ("The dialogue is about…", ["Nancy's new house", "Nancy's bedroom",
-                                            "Nancy's family"], "Nancy's new house"),
+            mcq("О чём рассказ? Выбери правильный ответ", [
+                ("Danny talks about…", ["his new house", "his bedroom", "his family"],
+                 "his new house"),
             ]),
 
-            # верных версий в выгрузке нет — зависят от аудио, проверяет учитель
-            ("task", {
-                "title": "Послушай ещё раз. Перепиши предложения, чтобы они стали верными ✍",
-                "needs_review": True,
-                "html": "<ol><li>In Nancy's house there are five rooms.</li>"
-                        "<li>The bathroom is upstairs.</li>"
-                        "<li>There are two bedrooms.</li>"
-                        "<li>There's a TV in Nancy's bedroom.</li></ol>",
+            ("gaps", {
+                "title": "Послушай ещё раз. Эти предложения неверные — впиши правильное слово",
+                "mode": "type",
+                "text": "1. In Danny's house there are five rooms. → There are __six|6__ rooms.\n"
+                        "2. The bathroom is upstairs. → The bathroom is __downstairs__.\n"
+                        "3. There are two bedrooms. → There are __three|3__ bedrooms.\n"
+                        "4. There's a TV in Danny's bedroom. → There's a __computer__ in his bedroom.",
+                "gaps_expected": 4,
             }),
 
-            # в выгрузке три варианта без картинок, верный — третий; картинки домов
-            # из учебника вставит методист (строка в доработать)
-            ("quiz", {"title": "Выбери дом Нэнси. Если нужно — можно прослушать диалог ещё раз",
+            # картинки домов — лист Л3.7; пока их нет, варианты подписаны словами
+            ("quiz", {"title": "Какой дом у Дэнни? Если нужно — послушай рассказ ещё раз",
                       "questions": [{
-                          "q": "Which is Nancy's house?", "type": "single",
+                          "q": "Which is Danny's house?", "type": "single",
                           "options": [{"text": "House 1"}, {"text": "House 2"}, {"text": "House 3"}],
                           "correct": [2],
                       }]}),

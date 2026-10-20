@@ -416,36 +416,37 @@ LESSONS = {
 
             # Тексты чтения учебника (Silvia, Nick, Bea) в выгрузку не попали —
             # блок «Найди пару» в ней пустой. Тексты составлены по ответам
-            # следующих двух заданий; ТЕКСТ МОЙ, строка в доработать.
+            # следующих двух заданий; ТЕКСТ МОЙ, строка в доработать. Рассказчики — мальчики:
+            # озвучка Яндекса, английский голос у него только мужской (Анна, 20.10).
             ("text", {"html":
                 "<p><b>Прочитай, что ребята рассказывают о себе 😃</b></p>"
-                "<p><b>Silvia:</b> Hi. My name's Silvia. I'm 12 and I'm British. "
+                "<p><b>Simon:</b> Hi. My name's Simon. I'm 12 and I'm British. "
                 "My brother is 9. My dad is Spanish. Ellie is my aunt — she's Spanish too. "
-                "Bea is my friend. Sweep is a dog. He's our dog!</p>"
+                "Ben is my friend. Sweep is a dog. He's our dog!</p>"
                 "<p><b>Nick:</b> Hello! I'm Nick. I'm British. I'm at a party today — "
                 "it's my cousin's birthday. My mum and dad are at the party too.</p>"
-                "<p><b>Bea:</b> Hi! I'm Bea. My mother is Italian and my father is British. "
+                "<p><b>Ben:</b> Hi! I'm Ben. My mother is Italian and my father is British. "
                 "We aren't at school today. My granny and my grandad are in the park "
                 "and my sister and my mother are in the garden.</p>"}),
 
             ("match", {"title": "Прочитай тексты ещё раз и соедини части предложений", "pairs": [
-                {"left": "Hi. My name's", "right": "Silvia."},
+                {"left": "Hi. My name's", "right": "Simon."},
                 {"left": "I'm", "right": "12."},
                 {"left": "My brother is", "right": "9."},
                 {"left": "Ellie is", "right": "my aunt."},
-                {"left": "Bea is", "right": "my friend."},
+                {"left": "Ben is", "right": "my friend."},
                 {"left": "Sweep is", "right": "a dog."},
             ]}),
 
             ("gaps", {
                 "title": "Заполни пропуски словами British, Italian или Spanish",
                 "mode": "drag",
-                "text": "1. Silvia is __British__.\n"
+                "text": "1. Simon is __British__.\n"
                         "2. Nick is __British__.\n"
-                        "3. Silvia's dad is __Spanish__.\n"
+                        "3. Simon's dad is __Spanish__.\n"
                         "4. Aunt Ellie is __Spanish__.\n"
-                        "5. Bea's mother is __Italian__.\n"
-                        "6. Bea's father is __British__.",
+                        "5. Ben's mother is __Italian__.\n"
+                        "6. Ben's father is __British__.",
                 "gaps_expected": 6,
             }),
 

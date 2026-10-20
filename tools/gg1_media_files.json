@@ -75,7 +75,8 @@
   "key": "u3_hw6",
   "sort_order": 1,
   "kind": "audio",
-  "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u3_hw6_b2.mp3"
+  "url": "https://classroom.wowteach.ru/media/gg1/audio/gg1_u3_hw6_b2.mp3",
+  "source": "yandex"
  },
  {
   "key": "u3_test",
@@ -231,7 +232,8 @@
   "key": "final_test",
   "sort_order": 1,
   "kind": "audio",
-  "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_ft_test_b2.mp3"
+  "url": "https://classroom.wowteach.ru/media/gg1/audio/gg1_ft_test_b2.mp3",
+  "source": "yandex"
  },
  {
   "key": "final_test",
@@ -243,6 +245,28 @@
   "key": "final_test",
   "sort_order": 5,
   "kind": "audio",
-  "url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_ft_test_b6.mp3"
+  "url": "https://classroom.wowteach.ru/media/gg1/audio/gg1_ft_test_b6.mp3",
+  "source": "yandex"
+ },
+ {
+  "key": "u1_hw5",
+  "sort_order": 1,
+  "kind": "audio",
+  "url": "https://classroom.wowteach.ru/media/gg1/audio/gg1_u1_hw5_b2.mp3",
+  "source": "yandex"
+ },
+ {
+  "key": "u7_test",
+  "sort_order": 11,
+  "kind": "audio",
+  "url": "https://classroom.wowteach.ru/media/gg1/audio/gg1_u7_test_b12.mp3",
+  "source": "yandex"
+ },
+ {
+  "key": "u8_test",
+  "sort_order": 11,
+  "kind": "audio",
+  "url": "https://classroom.wowteach.ru/media/gg1/audio/gg1_u8_test_b12.mp3",
+  "source": "yandex"
  }
 ]
