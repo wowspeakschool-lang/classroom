@@ -77,6 +77,10 @@ for fn in FILES:
             # склейка через пробел — предложение, без пробела — слово из букв
             if p['sentence'] not in (' '.join(p['words']), ''.join(p['words'])):
                 print(f"  !! порядок не сходится {so}"); bad += 1
+            # решение Анны 19.10.2026: звук в «Составь предложение» только в SM0,
+            # где ученик ещё учится читать; в остальных курсах он подсказывает ответ
+            if not MDIR.startswith('sm0') and ('audio' in p or 'audio_tts' in p):
+                print(f"  !! звук в «Составь предложение» вне SM0 {so}"); bad += 1
         elif t == 'truefalse':
             if not p.get('statements'):
                 print(f'  !! нет утверждений {so}'); bad += 1

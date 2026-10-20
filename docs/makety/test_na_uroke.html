@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тест на уроке</title>
+<style>
+:root{--bg:#17151f;--card:#1f1c2a;--card2:#262236;--line:#2e2a3d;--ink:#ecebf3;--mute:#9a96ad;--faint:#6f6b82;
+--violet:#7b5cf0;--ok:#3fbf8f;--ok-bg:#163a2e;--bad:#e8676b;--bad-bg:#3d1d22;--warn:#e3a63a;--warn-bg:#3a2c12;--blue:#5aa7ff}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.45}
+.wrap{max-width:1100px;margin:0 auto;padding:20px 16px 80px}
+h1{font-size:22px;margin:0 0 4px}.lead{color:var(--mute);margin:0 0 14px;font-size:14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.tabs button{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:8px 12px;font:inherit;font-size:14px;cursor:pointer}
+.tabs button.on{background:var(--violet);border-color:var(--violet)}
+.sw{display:none}.sw.on{display:block}
+.note{background:#221f30;border:1px dashed var(--line);border-radius:12px;padding:10px 14px;color:var(--mute);font-size:14px;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.grow{flex:1}
+.btn{border:0;border-radius:10px;padding:9px 14px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;color:#fff;background:var(--violet)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.btn.green{background:#2f9e74}
+.btn.sm{padding:6px 10px;font-size:13px}
+.chip{font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;background:var(--card2);color:var(--mute)}
+.chip.test{background:#2a2350;color:#c4b5ff}.chip.warn{background:var(--warn-bg);color:var(--warn)}.chip.ok{background:var(--ok-bg);color:var(--ok)}
+.mini{font-size:13px;color:var(--mute)}
+.ava{width:30px;height:30px;border-radius:9px;background:#2a2350;color:#c4b5ff;display:grid;place-items:center;font-size:12px;font-weight:700;flex:0 0 auto}
+.mat{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;margin-top:8px;background:var(--card2)}
+/* модалка ссылок */
+.modal{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;max-width:760px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.lk{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.lk:first-of-type{border-top:0}
+.url{font-family:ui-monospace,monospace;font-size:12px;color:var(--mute);background:var(--bg);border-radius:8px;padding:6px 8px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:320px}
+.qrbox{display:flex;gap:16px;align-items:center;background:#fff;color:#111;border-radius:14px;padding:14px;margin-top:12px}
+.qrbox b{font-size:20px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg span{padding:6px 10px;font-size:13px;color:var(--mute);cursor:pointer}.seg span.on{background:var(--violet);color:#fff}
+/* табло */
+table{border-collapse:collapse;width:100%}
+th,td{padding:8px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:12px;color:var(--mute);font-weight:600}
+td.n{text-align:left}
+.c{display:inline-grid;place-items:center;width:30px;height:28px;border-radius:8px;font-size:13px;font-weight:700}
+.c.ok{background:var(--ok-bg);color:var(--ok)}.c.bad{background:var(--bad-bg);color:var(--bad)}.c.no{background:var(--card2);color:var(--faint)}
+.c.now{outline:2px solid var(--blue);background:#1d2b44;color:var(--blue)}
+/* экран ученика / урока */
+.phone{max-width:390px;margin:0 auto;background:#fff;color:#1a1b2e;border-radius:28px;padding:14px;border:8px solid #2b2838}
+.laptop{background:#fff;color:#1a1b2e;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.who{display:flex;align-items:center;gap:8px;background:#efeafe;color:#4b3bb8;border-radius:12px;padding:8px 12px;font-size:14px;margin-bottom:10px}
+.who b{color:#2d2380}.who a{margin-left:auto;font-size:12px;color:#6b5ad6}
+.lesson{display:flex;align-items:center;gap:10px;background:#fff4dd;color:#8a5a06;padding:9px 14px;font-size:14px;border-bottom:1px solid #f1dfb3}
+.lesson b{color:#6b4405}
+.steps{display:flex;gap:6px;padding:10px 14px;flex-wrap:wrap}
+.st{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-size:12px;font-weight:700;background:#f1f0f5;color:#7a7f92}
+.st.ok{background:#dff3ec;color:#0d6155}.st.cur{background:#6b5ad6;color:#fff}
+.task{padding:14px 18px 18px}
+.task h3{margin:0 0 4px;font-size:17px}.task .q{margin:12px 0;font-size:18px;font-weight:600}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{border:2px solid #e3e1ec;border-radius:12px;padding:12px;font-size:16px;text-align:center}
+.opt.sel{border-color:#6b5ad6;background:#f3f0ff}
+.saved{font-size:12px;color:#0d6155;margin-top:10px}
+.oral{border:2px dashed #e3e1ec;border-radius:12px;padding:12px;margin-top:10px;font-size:14px;color:#555}
+.score{display:inline-flex;gap:6px;margin-top:8px}.score span{border:1px solid #d6d3e2;border-radius:8px;padding:4px 10px;cursor:pointer}.score span.on{background:#6b5ad6;color:#fff;border-color:#6b5ad6}
+.bar{display:flex;justify-content:space-between;padding:12px 18px;border-top:1px solid #eee}
+.wb{border:0;border-radius:10px;padding:9px 14px;font-weight:600;font-size:14px}
+.wb.p{background:#6b5ad6;color:#fff}.wb.g{background:#f1f0f5;color:#333}
+@media(max-width:640px){.lk{grid-template-columns:auto 1fr}.lk .url{display:none}.opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Тест на уроке и ссылка для ученика</h1>
+<p class="lead">Макет, данные выдуманы. Переключайте шаги вкладками.</p>
+<div class="tabs" id="tabs">
+  <button data-k="1" class="on">1 · Задать тест группе</button>
+  <button data-k="1b">1б · Задать тест одному ученику</button>
+  <button data-k="2">2 · Ссылки для учеников</button>
+  <button data-k="3">3 · Ученик открыл ссылку</button>
+  <button data-k="4">4 · Табло группы</button>
+  <button data-k="5">5 · Один ученик на уроке</button>
+</div>
+
+<!-- 1 -->
+<div class="sw on" data-k="1">
+  <div class="note">«Задать ДЗ» → группа или ученик → отмечаем тест. Внизу три действия: задать на дом (как сейчас), получить ссылки или пройти прямо сейчас.</div>
+  <div class="card">
+    <div class="row"><span class="ava">5A</span><div class="grow"><b>Группа 5A · Go Getter 3</b><div class="mini">4 ученика · урок сегодня 17:00</div></div><span class="chip">группа</span></div>
+    <div class="mat"><input type="checkbox" checked> <span class="grow">Unit 2 Test</span><span class="chip test">тест</span><span class="mini">21 задание</span></div>
+    <div class="mat"><input type="checkbox"> <span class="grow">Unit 2 · Homework 5</span><span class="chip">ДЗ</span></div>
+    <div class="row" style="margin-top:14px">
+      <button class="btn ghost">Задать на дом</button>
+      <button class="btn ghost" onclick="go('2')">🔗 Ссылки для учеников</button>
+      <span class="grow"></span>
+      <button class="btn green" onclick="go('4')">▶ Пройти на уроке</button>
+    </div>
+    <p class="mini" style="margin:10px 0 0">«▶ Пройти на уроке» задаёт тест всем сразу, открывает ссылки и табло группы. У одного ученика — сразу открывает тест на вашем экране (вкладка 5).</p>
+  </div>
+</div>
+
+<!-- 1б -->
+<div class="sw" data-k="1b">
+  <div class="note">«Задать ДЗ» → ученик → отмечаем тест. Те же три действия. «Ссылка» открывает ссылку и QR-код прямо здесь; «Пройти на уроке» — тест у вас на экране (вкладка 5).</div>
+  <div class="card">
+    <div class="row"><span class="ava">ПИ</span><div class="grow"><b>Петя Иванов · Go Getter 3</b><div class="mini">индивидуально · урок сегодня 16:00</div></div><span class="chip">ученик</span></div>
+    <div class="mat"><input type="checkbox" checked> <span class="grow">Unit 2 Test</span><span class="chip test">тест</span><span class="mini">21 задание</span></div>
+    <div class="mat"><input type="checkbox"> <span class="grow">Unit 2 · Homework 5</span><span class="chip">ДЗ</span></div>
+    <div class="row" style="margin-top:14px">
+      <button class="btn ghost">Задать на дом</button>
+      <button class="btn ghost" onclick="document.getElementById('one').style.display='block'">🔗 Ссылка для ученика</button>
+      <span class="grow"></span>
+      <button class="btn green" onclick="go('5')">▶ Пройти на уроке</button>
+    </div>
+    <div id="one" style="display:none;margin-top:14px;border-top:1px solid var(--line);padding-top:12px">
+      <div class="row"><span class="mini">Ссылка действует:</span><span class="seg"><span class="on">на урок · 3 часа</span><span>до срока сдачи</span></span></div>
+      <div class="row" style="margin-top:10px"><span class="url grow" style="max-width:none">app.wowteach.ru/?hw=8f3c…&t=…ПИ</span><button class="btn sm">⧉ Копировать</button></div>
+      <div class="qrbox" id="qrOne"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="mini" style="margin-bottom:8px">Если тест уже задан на дом — те же кнопки есть в карточке ученика у задания:</div>
+    <div class="mat" style="margin-top:0"><span class="grow">Unit 2 Test <span class="mini">· задано, до 22.10 · не начат</span></span>
+      <button class="btn sm ghost">🔗 Ссылка</button><button class="btn sm green" onclick="go('5')">▶ Пройти на уроке</button></div>
+  </div>
+</div>
+
+<!-- 2 -->
+<div class="sw" data-k="2">
+  <div class="note">У каждого ученика своя ссылка. Входить в кабинет не нужно: ссылка открывает только этот тест этого ученика, на любом устройстве. Можно кинуть в чат Zoom, в WhatsApp маме или показать QR-код на экране.</div>
+  <div class="modal">
+    <div class="row"><b class="grow" style="font-size:17px">Ссылки на «Unit 2 Test» · группа 5A</b><button class="btn ghost sm">✕</button></div>
+    <div class="row" style="margin:10px 0 6px"><span class="mini">Ссылка действует:</span>
+      <span class="seg"><span class="on">на урок · 3 часа</span><span>до срока сдачи</span></span></div>
+    <div id="links"></div>
+    <div class="row" style="margin-top:8px"><button class="btn sm">⧉ Скопировать все ссылки списком</button><span class="mini">— удобно вставить в чат Zoom целиком</span></div>
+    <div class="qrbox" id="qrb"></div>
+  </div>
+</div>
+
+<!-- 3 -->
+<div class="sw" data-k="3">
+  <div class="note">Так ученик видит тест по ссылке — на телефоне мамы или любом компьютере. Сверху имя: открыл чужую ссылку — сразу видно. Ответы сохраняются на ходу и попадают в его работу; пропал интернет — подождут и отправятся сами.</div>
+  <div class="phone">
+    <div class="who">👤 Тест для: <b>Маша Петрова</b><a href="#">Это не я</a></div>
+    <div style="font-weight:700">Unit 2 Test</div>
+    <div class="steps" style="padding:8px 0"><span class="st ok">✓</span><span class="st ok">✓</span><span class="st cur">3</span><span class="st">4</span><span class="st">5</span><span class="st">6</span><span class="st">…</span></div>
+    <div style="padding:4px 2px">
+      <div style="font-weight:700">Выбери правильный вариант</div>
+      <div class="q" style="font-size:17px;margin:10px 0">My brother ___ a doctor.</div>
+      <div class="opts"><div class="opt">am</div><div class="opt sel">is</div><div class="opt">are</div><div class="opt">be</div></div>
+      <div class="saved">✓ Сохранено</div>
+    </div>
+    <div class="bar" style="padding:12px 2px 2px;border:0"><button class="wb g">← Назад</button><button class="wb p">Дальше →</button></div>
+  </div>
+</div>
+
+<!-- 4 -->
+<div class="sw" data-k="4">
+  <div class="note">Табло у преподавателя: ответы появляются сами, пока ученики решают. ✓ верно, ✗ неверно, синим — где ученик сейчас. Если у ученика нет второго устройства — «Отмечаю сам»: тест открывается у вас, а вы отвечаете за него.</div>
+  <div class="card">
+    <div class="row" style="margin-bottom:10px"><b class="grow">Unit 2 Test · группа 5A · идёт сейчас</b><button class="btn ghost sm" onclick="go('2')">🔗 Ссылки и QR</button><button class="btn sm">Завершить для всех</button></div>
+    <div style="overflow-x:auto"><table id="board"></table></div>
+    <p class="mini" style="margin:10px 0 0">Устные задания (🎤) на уроке оцениваете вы: «Ответил устно» и балл — вместо записи голоса.</p>
+  </div>
+</div>
+
+<!-- 5 -->
+<div class="sw" data-k="5">
+  <div class="note">Один ученик, без ссылки: тест открывается у преподавателя в новой вкладке. Её показываете в Zoom; отвечает ученик (удалённое управление) или вы за него. Всё сохраняется в работу ученика, как будто он делал дома, с пометкой «на уроке».</div>
+  <div class="laptop">
+    <div class="lesson">🧑‍🏫 Тест на уроке · отвечаем за: <b>Петя Иванов</b><span style="margin-left:auto" class="mini">ответы сохраняются ему</span></div>
+    <div class="steps"><span class="st ok">✓</span><span class="st ok">✓</span><span class="st ok">✓</span><span class="st ok">✓</span><span class="st cur">5</span><span class="st">6</span><span class="st">7</span><span class="st">…</span><span class="st">21</span></div>
+    <div class="task">
+      <h3>🎤 Расскажи о своей семье</h3>
+      <div class="mini" style="color:#666">Устное задание. Дома ученик записывает голос, на уроке — оцените сами.</div>
+      <div class="oral">Ученик ответил устно на уроке
+        <div class="score"><span>0</span><span>1</span><span class="on">2</span><span>3</span></div>
+        <div style="margin-top:8px;font-size:13px;color:#888">Комментарий (по желанию): забыл «brother», остальное хорошо</div>
+      </div>
+      <div class="saved">✓ Сохранено</div>
+    </div>
+    <div class="bar"><button class="wb g">← Назад</button><button class="wb p">Дальше →</button></div>
+  </div>
+</div>
+</div>
+
+<script>
+const ST=[['Петя Иванов','ПИ'],['Маша Петрова','МП'],['Коля Смирнов','КС'],['Аня Белова','АБ']];
+document.getElementById('links').innerHTML=ST.map(([n,a],i)=>
+ `<div class="lk"><span class="ava">${a}</span><div><b>${n}</b><div class="mini">${i===3?'<span class="chip warn">нет устройства → «Отмечаю сам» на табло</span>':'не открыта'}</div></div>
+  <div class="row"><span class="url">app.wowteach.ru/?hw=8f3c…&t=…${a}</span><button class="btn sm ghost" onclick="qr(${i})">QR</button><button class="btn sm">⧉ Копировать</button></div></div>`).join('');
+function qrSvg(seed){let s=seed*9301+49297,c='';const n=25,p=6;
+ const fin=(x,y)=>`<rect x="${x*p}" y="${y*p}" width="${7*p}" height="${7*p}" fill="#111"/><rect x="${(x+1)*p}" y="${(y+1)*p}" width="${5*p}" height="${5*p}" fill="#fff"/><rect x="${(x+2)*p}" y="${(y+2)*p}" width="${3*p}" height="${3*p}" fill="#111"/>`;
+ for(let y=0;y<n;y++)for(let x=0;x<n;x++){if((x<8&&y<8)||(x>16&&y<8)||(x<8&&y>16))continue;s=(s*9301+49297)%233280;if(s/233280>.5)c+=`<rect x="${x*p}" y="${y*p}" width="${p}" height="${p}" fill="#111"/>`}
+ return `<svg width="150" height="150" viewBox="0 0 ${n*p} ${n*p}"><rect width="100%" height="100%" fill="#fff"/>${c}${fin(0,0)}${fin(18,0)}${fin(0,18)}</svg>`}
+function qr(i){document.getElementById('qrb').innerHTML=qrSvg(i+3)+`<div><b>${ST[i][0]}</b><div style="margin-top:6px">Наведи камеру телефона — откроется твой тест.</div><div style="margin-top:6px;font-size:12px;color:#666">Макет: QR-код нарисован для вида, никуда не ведёт.</div></div>`}
+qr(1);
+document.getElementById('qrOne').innerHTML=qrSvg(7)+`<div><b>Петя Иванов</b><div style="margin-top:6px">Наведи камеру телефона — откроется твой тест.</div><div style="margin-top:6px;font-size:12px;color:#666">Макет: QR-код нарисован для вида.</div></div>`;
+const TASKS=21, B=[[1,1,0,1,1,'now'],[1,1,'now'],[1,0,1,1,1,1,1,0,'now'],[]];
+const mark=v=>v==='now'?'<span class="c now">…</span>':v===1?'<span class="c ok">✓</span>':v===0?'<span class="c bad">✗</span>':'<span class="c no">·</span>';
+document.getElementById('board').innerHTML=`<tr><th style="text-align:left">Ученик</th>${Array.from({length:10},(_,i)=>`<th>${i+1}${i===4?' 🎤':''}</th>`).join('')}<th>…</th><th>Итог</th><th></th></tr>`+
+ ST.map(([n,a],i)=>{const r=B[i],done=r.filter(v=>v===0||v===1),ok=done.filter(v=>v===1).length;
+  return `<tr><td class="n"><span class="row" style="gap:8px"><span class="ava">${a}</span>${n}</span></td>${Array.from({length:10},(_,k)=>`<td>${mark(r[k])}</td>`).join('')}<td class="mini">…</td>
+  <td>${done.length?`<b>${ok}/${done.length}</b><div class="mini">из ${TASKS}</div>`:'<span class="mini">не начал</span>'}</td>
+  <td>${i===3?'<button class="btn sm" onclick="go(\'5\')">Отмечаю сам</button>':'<span class="chip ok">по ссылке</span>'}</td></tr>`}).join('');
+function go(k){document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));document.querySelectorAll('.sw').forEach(s=>s.classList.toggle('on',s.dataset.k===k));scrollTo(0,0)}
+document.getElementById('tabs').onclick=e=>{if(e.target.dataset.k)go(e.target.dataset.k)};
+</script>
+</body>
+</html>
