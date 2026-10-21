@@ -58,6 +58,12 @@ def run(src, grp, dst):
     SAY='function say(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}'
     if SAY in t:
         V=json.load(open(os.path.join(REPO,'builds/halloween/voice.json')))
+        # слов, которых нет в домашках, — синтез тем же Piper en_US-amy-medium здесь (builds/halloween/voice_gen.sh),
+        # вшиты в урок: в платформе под них ничего не заводим (решение Анны от 21.10.2026)
+        VD=os.path.join(os.path.dirname(os.path.abspath(__file__)),'piper/out')
+        for k in ['golden pumpkin','zombie','pirate','superhero','bonfires','costumes','ghosts']:
+            if k in t.lower() and k not in V:
+                V[k]='data:audio/mpeg;base64,'+base64.b64encode(open(os.path.join(VD,'hw_voice_'+k.replace(' ','_')+'.mp3'),'rb').read()).decode()
         t=t.replace(SAY,'const VOICE='+json.dumps(V)+',VA={};let sayA=null;'
             'Object.keys(VOICE).forEach(k=>{try{const a=new Audio();a.preload="auto";a.src=VOICE[k];VA[k]=a;}catch(e){}});'
             'function say(t){const k=String(t).toLowerCase().trim().replace(/^(a|an|the) /,"");const a=VA[k];if(!a)return;'
