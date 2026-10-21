@@ -670,8 +670,8 @@ no labels, no numbers.
 
 | где | было | станет |
 |---|---|---|
-| юнит 7 · ДЗ 5 блок 17 (`exact_input`, «Oscar is ___ football.») | `u7/football_ball.webp` (204×217) | `u5/act_play_football.webp` (400×338, уже в репозитории) |
-| юнит 2 · ДЗ 2 блок 12, вопрос 1 («Her name's Flash.») | `legacy/4a5a6041d17a.webp` — кадр из чужого мультфильма, пол героя не читается | новый Flash с листа 1.1, как только он будет нарисован |
+| юнит 7 · ДЗ 5 блок 13 (`exact_input`, «Oscar is ___ football.») | `u7/football_ball.webp` (204×217) | `u5/act_play_football.webp`. **Сделано 21.10.2026** |
+| юнит 2 · ДЗ 2 блок 12, все три вопроса (Flash, Thunder, Misty) | `legacy/4a5a6041d17a` · `9e83f1cc97bd` · `11e6279a79c2` — кадры из мультфильма курса, 300 px, фон улицы, головы крупным планом | `geroi/flash.webp` · `thunder.webp` · `misty.webp` — портреты с разворотов учебника, 420 px на белом. **Сделано 21.10.2026** |
 
 ---
 
