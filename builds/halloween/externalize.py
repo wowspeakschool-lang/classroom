@@ -69,6 +69,15 @@ def run(src, grp, dst):
             'function say(t){const k=String(t).toLowerCase().trim().replace(/^(a|an|the) /,"");const a=VA[k];if(!a)return;'
             'try{if(sayA&&sayA!==a)sayA.pause();a.currentTime=0;sayA=a;a.play().catch(()=>{});}catch(e){}}')
     assert 'speechSynthesis' not in t, src
+    # план урока можно скачать: Word и PDF лежат рядом, в lessons/halloween/plans/ (решение Анны от 21.10.2026)
+    m=re.search(r'const PLAN_HTML=("(?:[^"\\]|\\.)*");',t)
+    if m:
+        h=json.loads(m.group(1)); base='https://classroom.wowteach.ru/lessons/halloween/plans/halloween_'+os.path.basename(dst)[:-5]
+        B='display:inline-block;margin:0 8px 0 0;padding:8px 16px;border-radius:10px;background:#e8631a;color:#fff;font-weight:700;text-decoration:none'
+        dl=('<p class="dl" style="margin:0 0 14px"><a href="'+base+'.docx" download style="'+B+'">⬇ Скачать план (Word)</a>'
+            '<a href="'+base+'.pdf" download style="'+B+';background:#7b4bd6">⬇ Скачать план (PDF)</a></p>')
+        if 'class="dl"' not in h: h=re.sub(r'(</h1>)',lambda x:x.group(1)+dl,h,count=1)
+        t=t[:m.start(1)]+json.dumps(h,ensure_ascii=False).replace('</','<\\/')+t[m.end(1):]
     os.makedirs(os.path.dirname(dst),exist_ok=True);open(dst,'w').write(t)
     print(src,'->',dst,len(t)//1024,'KB')
 if __name__=='__main__':
