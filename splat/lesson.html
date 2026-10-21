@@ -20,6 +20,9 @@ body{font-family:var(--text);color:var(--ink);user-select:none;-webkit-tap-highl
 .sp{position:absolute;transform:translate(-50%,-50%);height:auto;pointer-events:none}
 .sp.click{pointer-events:auto;cursor:pointer}
 .layer{position:absolute;inset:0;transition:opacity .5s ease}
+/* слои лежат друг на друге: сами слои клики пропускают, кликаются только кнопки, карточки и .sp.click —
+   иначе верхний слой перекрывает льдинки и сугробы в слое земли */
+.layer{pointer-events:none}.layer>:not(.sp){pointer-events:auto}.layer>.flake{pointer-events:none}
 .layer.fade{opacity:0}
 
 /* верхняя панель */
