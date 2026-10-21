@@ -51,19 +51,13 @@ are the fish / is the frog, подсказка «in · on · under · next to».
 текст:
 
 ```
-<p>Посмотри на картинку и расскажи, что ты видишь. Ответь на вопросы:</p>
-<ol>
-  <li>What can you see?</li>
-  <li>How many elephants are there?</li>
-  <li>Where are the children?</li>
-  <li>Where is the crocodile?</li>
-  <li>Where is the monkey?</li>
-  <li>Where is the frog?</li>
-</ol>
-<p>Слова-помощники: <b>there is · there are · in · on · under · next to</b></p>
-<p><i>For example: I can see a boat. There are two elephants. There is a duck on
-the water. The crocodile is in the water. The monkey is on the tree.</i></p>
-<p>Запиши свой ответ, нажав на кнопку микрофона 🙌</p>
+Посмотри на картинку и расскажи, что ты видишь. Ответь на вопросы:
+1. What can you see? · 2. How many elephants are there? · 3. Where are the
+children? · 4. Where is the crocodile? · 5. Where is the monkey? · 6. Where is
+the frog?
+Слова-помощники: there is · there are · in · on · under · next to
+For example: I can see a boat. There are two elephants. There is a duck on the
+water. The crocodile is in the water. The monkey is on the tree.
 ```
 
 `sample_tts` — та же строка примера. «How many … are there?» даётся в юните 6
@@ -125,28 +119,13 @@ Do you like (frogs)? **Can you (skip)?**». В базе блок 12: «**Выб�
 юнита 8, а на «Can you paint it?» ответ всегда «yes». Сейчас `can` в финале
 проверяется только пассивно — вопросом «What can Ben do?» в блоке 2.
 
-Предлагаю (замена в `html` блока 12):
-
-```
-<p>Выбери <b>две</b> картинки и расскажи о каждой. Ответь на вопросы:</p>
-<ol>
-  <li>What is it?</li>
-  <li>What colour is it?</li>
-  <li>Have you got a …?</li>
-  <li>Do you like …?</li>
-</ol>
-<p>А потом расскажи о себе:</p>
-<ol>
-  <li>What's your name?</li>
-  <li>How old are you?</li>
-  <li>Can you swim? Can you ride a bike?</li>
-</ol>
-```
-
-Пример оставить прежний, дописав «My name's Masha. I'm seven. I can swim, but I
-can't ride a bike.» Такой хвост закрывает сразу и `can + глагол` (юнит 8, как в
-плане), и юнит 0 (см. A5) — и это ровно та форма, что уже есть в тесте юнита 2
-(блок 14: What's your name? How old are you?).
+Предлагаю в `html` блока 12: «Выбери **две** картинки и расскажи о каждой» и те
+же четыре вопроса (What is it? · What colour is it? · Have you got a…? · Do you
+like…?), а пятым — хвост про себя: «What's your name? · How old are you? · Can
+you swim? Can you ride a bike?». Пример оставить прежний, дописав «My name's
+Masha. I'm seven. I can swim, but I can't ride a bike.» Такой хвост закрывает и
+`can + глагол` (юнит 8, как в плане), и юнит 0 (см. A5), и это ровно та форма,
+что уже есть в тесте юнита 2 (блок 14).
 
 ### A5. План обещает «все юниты», а юниты 0, 5 и 9 тест не проверяет
 
