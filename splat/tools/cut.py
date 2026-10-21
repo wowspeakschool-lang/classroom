@@ -11,6 +11,10 @@ from PIL import Image, ImageFilter
 from scipy import ndimage as ndi
 
 
+ERODE = 3
+GRAY = False
+
+
 def cut(src, out_dir, names, max_side=520, grow=18, thr=10):
     im = Image.open(src).convert('RGB')
     a = np.asarray(im).astype(int)
@@ -46,9 +50,15 @@ def cut(src, out_dir, names, max_side=520, grow=18, thr=10):
         own = lab[y0:y1, x0:x1] == i
         d = 255 - crop.min(axis=2)
         nearwhite = d <= max(2, thr // 2)
+        if GRAY:   # цветной предмет на белом: светло-серую тень фона (без цвета) тоже считаем фоном
+            sat = crop.max(axis=2) - crop.min(axis=2)
+            nearwhite |= (sat < 14) & (crop.min(axis=2) > 190)
         bl, _ = ndi.label(nearwhite)
         border = set(np.unique(np.concatenate([bl[0], bl[-1], bl[:, 0], bl[:, -1]]))) - {0}
-        bg = np.isin(bl, list(border)) | ~own
+        # фон — «почти белые» области, связанные с краем картинки или с тем, что заведомо не предмет (~own):
+        # так прозрачными становятся и большие просветы внутри (ручка стаканчика), а не только внешний фон
+        seeds = set(np.unique(bl[~own])) - {0}
+        bg = np.isin(bl, list(border | seeds)) | ~own
         # замкнутые белые пятна внутри: мелкие или не чисто белые (глаза, блики) — часть предмета;
         # крупные и чисто белые (просвет в ручке стаканчика) — фон, остаются прозрачными
         hl, hn = ndi.label(bg & ~ndi.binary_fill_holes(~bg) | (bg & False))
@@ -65,6 +75,15 @@ def cut(src, out_dir, names, max_side=520, grow=18, thr=10):
         rgba = np.dstack([crop.astype(np.uint8), alpha])
         pim = Image.fromarray(rgba, 'RGBA')
         pim.putalpha(pim.getchannel('A').filter(ImageFilter.GaussianBlur(0.6)))
+        # белая кайма: полупрозрачные края смешаны с белым фоном — сжимаем край на 1 px и «вычитаем» белое из цвета
+        A = np.asarray(pim.getchannel('A')).astype(float)
+        A = np.minimum(A, ndi.grey_erosion(A, size=(ERODE, ERODE)))
+        rgb = np.asarray(pim.convert('RGB')).astype(float)
+        a1 = np.clip(A / 255.0, 1e-3, 1)[..., None]
+        edge = (A < 250)[..., None]
+        fixed = np.clip((rgb - 255.0 * (1 - a1)) / a1, 0, 255)
+        rgb = np.where(edge, fixed, rgb)
+        pim = Image.fromarray(np.dstack([rgb.astype(np.uint8), A.astype(np.uint8)]), 'RGBA')
         bb = pim.getchannel('A').point(lambda v: 255 if v > 8 else 0).getbbox()
         pim = pim.crop(bb)
         pim.thumbnail((max_side, max_side), Image.LANCZOS)
@@ -74,8 +93,11 @@ def cut(src, out_dir, names, max_side=520, grow=18, thr=10):
 
 if __name__ == '__main__':
     args = sys.argv[1:]
-    opt = {'--max': 520, '--grow': 18, '--thr': 10}
+    GRAY = '--gray' in args
+    if GRAY: args.remove('--gray')
+    opt = {'--max': 520, '--grow': 18, '--thr': 10, '--erode': 3}
     for key in list(opt):
         if key in args:
             k = args.index(key); opt[key] = int(args[k + 1]); del args[k:k + 2]
+    ERODE = opt['--erode']
     cut(args[0], args[1], args[2].split(','), opt['--max'], opt['--grow'], opt['--thr'])
