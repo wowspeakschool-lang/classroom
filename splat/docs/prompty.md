@@ -178,3 +178,35 @@ Use the attached castle picture as the exact reference for the castle and the sn
 ```
 Use the attached sheet with the penguin holding a toothbrush as the exact reference for the penguin and for the size of the toothbrush. Use the attached penguin, tube and toothbrush images as exact references. A character of the same baby penguin chick: fluffy grey-and-white down, black head, white face, big shiny dark eyes, a small black beak — sitting on the snow and fishing. In his right flipper he holds the small red Splat children's toothbrush with a suction cup, exactly as in the attached toothbrush image and exactly the same small size relative to the penguin as in the attached sheet (about half of the penguin's height). In his left flipper he holds a fishing rod. The rod is thick and clearly visible, it goes far to the right and up; a thick, clearly visible dark fishing line hangs straight down from the tip of the rod to a small white-and-mint float with a hook. The penguin is on the left part of the picture, the tip of the rod and the float are on the right part. Visual style: exactly the same rendering as the attached Splat Kids images — a soft photorealistic 3D render with fluffy, velvety, realistic textures, soft bright studio light, a clean and airy look. Color palette: white, light sky blue and icy turquoise, with small fresh mint green accents and a few tiny warm golden accents. No pink anywhere. The whole character, the whole rod, the line and the float complete, not touching the edge. Plain flat pure white background, no snow under him, no shadow on the background, no text, no letters, no labels, no numbers.
 ```
+
+## Сайт — игры «7 льдинок до замка» (22.10.2026)
+
+**20. map_sea** — карта «7 льдинок до замка» — фон. Приложить: ref_penguin, ref_tube и картинку замка (castle_lights)
+```
+Use the attached castle picture as the exact reference for the castle. Use the attached images only as a style reference: do not copy the penguin, the tube or any text from them, and do not copy their pink colors. A wide 16:9 winter scene: a calm light blue arctic sea seen from a slight top view. The same tooth castle stands small and far away on a snowy shore in the upper right corner, with warm lights in the windows. The rest of the sea, from the lower left corner to the castle, is open calm water with no ice floes, so a path of floes can be placed on it later. Snowy hills and a light blue sky with white clouds. Visual style: exactly the same rendering as the attached Splat Kids images — a soft photorealistic 3D render with fluffy, velvety, realistic textures, soft bright studio light, a clean and airy look. Color palette: white, light sky blue and icy turquoise, with small fresh mint green accents and a few tiny warm golden accents. No pink anywhere. No characters, no text, no letters, no numbers. Wide 16:9 picture.
+```
+
+**21. ice_cube** — ледяной кубик для игры «пары». Приложить: ref_penguin, ref_tube
+```
+Use the attached images only as a style reference: do not copy the penguin, the tube or any text from them, and do not copy their pink colors. One single object: a cute rounded transparent ice cube, light blue and glossy, with soft frost on the edges and small sparkles, empty inside, front view. Visual style: exactly the same rendering as the attached Splat Kids images — a soft photorealistic 3D render with fluffy, velvety, realistic textures, soft bright studio light, a clean and airy look. Color palette: white, light sky blue and icy turquoise, with small fresh mint green accents and a few tiny warm golden accents. No pink anywhere. The object complete, not touching the edge. Plain flat pure white background, no shadow on the background, no text, no letters, no labels, no numbers.
+```
+
+**22. castle_room_night** — комната в замке ночью — фон игры «Фонарик». Приложить: ref_penguin, ref_tube
+```
+Use the attached images only as a style reference: do not copy the penguin, the tube or any text from them, and do not copy their pink colors. A wide 16:9 scene: a cozy children's bedroom inside a white tooth castle at night, seen from the front. A small bed with a blue blanket, a shelf, a little table, a soft rug, a round window with a starry night sky and the moon. Several empty places on the floor, the shelf, the table and the bed where small objects can be placed later. The room is shown in normal light (it will be darkened in the game). Visual style: exactly the same rendering as the attached Splat Kids images — a soft photorealistic 3D render with fluffy, velvety, realistic textures, soft bright studio light, a clean and airy look. Color palette: white, light sky blue and icy turquoise, with small fresh mint green accents and a few tiny warm golden accents. No pink anywhere. No characters, no text, no letters, no numbers. Wide 16:9 picture.
+```
+
+**23. castle_night** — замок вечером — финал 7-го дня. Приложить: картинку замка castle_lights
+```
+Use the attached image: keep exactly the same castle, the same snowy landscape and the same composition. Now it is a calm evening: a deep blue sky with the first stars and a soft moon, warm golden light in every window, snow glowing softly blue. Cozy and magical. No pink. No characters, no text, no letters, no numbers.
+```
+
+**24. gift** — подарок за 7 дней. Приложить: ref_penguin, ref_tube
+```
+Use the attached images only as a style reference: do not copy the penguin, the tube or any text from them, and do not copy their pink colors. One single object: a cute gift box, white and light sky blue with a big mint green ribbon bow and small golden stars, closed, front view. Visual style: exactly the same rendering as the attached Splat Kids images — a soft photorealistic 3D render with fluffy, velvety, realistic textures, soft bright studio light, a clean and airy look. Color palette: white, light sky blue and icy turquoise, with small fresh mint green accents and a few tiny warm golden accents. No pink anywhere. The object complete, not touching the edge. Plain flat pure white background, no shadow on the background, no text, no letters, no labels, no numbers.
+```
+
+**25. teeth** — зубки для игры «Почисти зубки». Приложить: ref_penguin, ref_tube
+```
+Use the attached images only as a style reference: do not copy the penguin, the tube or any text from them, and do not copy their pink colors. One single object: a cute cartoon model of a child's smile — one row of six big shiny white teeth standing on a soft light pink gum, seen from the front, clean and glossy, no face, no eyes, no lips. Visual style: exactly the same rendering as the attached Splat Kids images — a soft photorealistic 3D render with fluffy, velvety, realistic textures, soft bright studio light, a clean and airy look. Color palette: white, light sky blue and icy turquoise, with small fresh mint green accents and a few tiny warm golden accents. No pink anywhere. The gum may be soft light pink only because it is a gum. The object complete, not touching the edge. Plain flat pure white background, no shadow on the background, no text, no letters, no labels, no numbers.
+```
