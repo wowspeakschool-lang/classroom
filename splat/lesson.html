@@ -473,7 +473,7 @@ S[12] = { bg: 'snow_meadow', go(n, c) {
   sph('germ_purple', 84, 34, 18, 'bob');
   const RD = roundsBar(rounds.length + words.length);
   function show() {
-    layer.querySelectorAll('.card,.btn,.yn,.wordcard').forEach(x => x.remove());
+    layer.querySelectorAll('.card,.btn:not(.next),.yn,.wordcard').forEach(x => x.remove());
     if (r >= rounds.length) return whatIs();
     const [pic, said] = rounds[r];
     const cd = card(pic, 50, 50);
@@ -791,7 +791,8 @@ function go(n) {
   s.go(n, ctx);
   [...PL.children].forEach(e => { if (e.dataset.stale) { delete e.dataset.stale; fadeOut(e); } });
   // «Next ▶» на каждом слайде: один шаг вперёд — следующее действие задания, а если шагов нет — следующий слайд
-  if (n < TOTAL) { const nb = btn('Next ▶', 92, 91, 'sun', forward); nb.classList.add('next'); ctx.nb = nb; }
+  // на последнем слайде Next — праздничный звук и прыжок пингвинёнка (дальше слайдов нет)
+  { const nb = btn('Next ▶', 92, 91, 'sun', n < TOTAL ? forward : () => { sfx.win(); PL.querySelectorAll('img.peng').forEach(wobble); }); nb.classList.add('next'); ctx.nb = nb; }
   // слайд без игры: дальше можно и нажатием на пингвинёнка
   if (!GAME.has(n) && n < TOTAL)
     PL.querySelectorAll('img.peng').forEach(pi => { if (pi.dataset.stale) return; pi.classList.add('click'); pi.onclick = () => go(n + 1); });
