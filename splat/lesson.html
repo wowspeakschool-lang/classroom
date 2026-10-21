@@ -109,6 +109,7 @@ body{font-family:var(--text);color:var(--ink);user-select:none;-webkit-tap-highl
 <body>
 <div id="stage">
   <img class="bg" id="bg1" alt=""><img class="bg" id="bg2" alt="" style="opacity:0">
+  <div class="layer" id="pl"></div>
   <div class="layer" id="slide"></div>
   <div id="top">
     <div class="logo"><span class="sk"><b>SPLAT</b><i>KIDS</i></span><span class="x">×</span><span class="ws">WowSpeak</span></div>
@@ -121,7 +122,7 @@ body{font-family:var(--text);color:var(--ink);user-select:none;-webkit-tap-highl
 
 <script>
 /* План урока — из docs/plan_uroka.md, вставляется скриптом tools/build_lesson.py (не править руками). */
-const PLAN = /*PLAN_START*/[{"n": 1, "sec": "Приветствие — 1 мин", "todo": "—", "say": "Hello! I'm (имя). What's your name? <i>(если ученик не понимает: «Как тебя зовут?»)</i>", "ans": "I'm Masha. / Masha."}, {"n": 2, "sec": "Приветствие — 1 мин", "todo": "—", "say": "Look! (TPR: пальчик к глазу) Who is it? Кто это? Это пингвинёнок. Penguin. Say: penguin! (TPR: рука к уху) Давай с ним поздороваемся. Say: Hello, Penguin! (TPR: машем рукой)", "ans": "Penguin! Hello, Penguin!"}, {"n": 3, "sec": "Завязка — 1,5 мин", "todo": "—", "say": "Look! (TPR: пальчик к глазу) What is it? Что это? Да, замок! Посмотри, какой он. Это обычный замок или зубной? Здесь живёт пингвинёнок.", "ans": "Замок! Зубной!"}, {"n": 4, "sec": "Завязка — 1,5 мин", "todo": "—", "say": "А кто это у ворот? Это микробы. Как думаешь, они пустят пингвинёнка домой? Нет, не пускают. Поможем прогнать микробов?", "ans": "Микробы! Нет. Да!"}, {"n": 5, "sec": "Шаг 1 — tooth — 3 мин", "todo": "На каждый счёт нажать на следующую льдинку — пингвинёнок прыгает", "say": "Ой, что-то блестит! Давай допрыгаем! Say: one, two, three, four! (TPR: показываем пальцы)", "ans": "One, two, three, four!"}, {"n": 6, "sec": "Шаг 1 — tooth — 3 мин", "todo": "Нажать на зубик — он увеличивается и сияет", "say": "What is it? Что это? Look! (TPR: пальчик к глазу) Это волшебный зубик. Say: tooth! (TPR: рука к уху) Как мы покажем зубик? (TPR: пальчик на свои зубки) Say: tooth! Whisper! Tooth. (TPR: палец к губам) Loud! Tooth! (TPR: ладони рупором)", "ans": "tooth (шёпотом, громко)"}, {"n": 7, "sec": "Шаг 1 — tooth — 3 мин", "todo": "На каждый счёт нажать на льдинку — прыгаем обратно", "say": "Прыгаем обратно к замку! One, two, three, four!", "ans": "One, two, three, four!"}, {"n": 8, "sec": "Шаг 1 — tooth — 3 мин", "todo": "Когда ребёнок скажет tooth — нажать на зубик: лучики, микроб исчезает", "say": "Этот зубик волшебный — микробы его испугались! Давай скажем громче, чтобы он засиял. Say: tooth!", "ans": "TOOTH!"}, {"n": 9, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "Нажимать на сугробы по одному: валенок, рыбка, сосулька, щётка", "say": "Смотри, сколько сугробиков! В них что-то спряталось. Что нам поможет прогнать микробов? Look! (TPR: пальчик к глазу) Это поможет? Yes or no? (TPR: yes — «класс» или киваем; no — несколько раз мотаем головой)", "ans": "No! No! No! Yes!"}, {"n": 10, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "Нажать на щётку — она увеличивается", "say": "What is it? Toothbrush! Say: toothbrush! (TPR: рука к уху) Как мы покажем зубную щётку? (TPR: показываем, как щётка чистит зубки) Say: toothbrush! <i>(если ребёнок не показывает: «Покажи, как щётка чистит зубки»)</i>", "ans": "toothbrush + жест"}, {"n": 11, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "<b>Игра «Послушай и выбери»</b>: две картинки, 4–5 раундов. Сказать слово; после ответа — нажать на картинку", "say": "Пингвинёнок собирает рюкзак. Listen! (TPR: пальчик к ушку) Toothbrush! Circle! (TPR: обводим пальцем в воздухе)", "ans": "обводит нужную картинку"}, {"n": 12, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "<b>Игра «Правда или нет»</b>: картинка + учитель называет слово (иногда неверное). Потом наоборот — картинка без слова", "say": "О нет, микроб хочет нас обмануть! Он называет картинки — правильно или нет? Look! (TPR: пальчик к глазу) Tooth? Yes or no? … What is it?", "ans": "No! Toothbrush! / Yes! / tooth, toothbrush"}, {"n": 13, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "Ребёнок называет оба слова — нажать: микроб исчезает", "say": "Возвращаемся к воротам! Назовём всё, что нашли, — и микроб убежит. What is it? (показываем зубик) What is it? (показываем щётку)", "ans": "Tooth! Toothbrush!"}, {"n": 14, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "Под водой плывёт тень. Когда ребёнок скажет stop — нажать: пингвинёнок вытаскивает пасту", "say": "Пингвинёнок любит рыбачить. Look! (TPR: пальчик к глазу) Кто-то плывёт… Stop! (TPR: ладонь вперёд) Say: stop!", "ans": "Stop!"}, {"n": 15, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "Нажать на тюбик — он увеличивается", "say": "What is it? Это зубная паста Splat Kids. Say: toothpaste! (TPR: выдавливаем пасту на щётку) Show me toothpaste!", "ans": "toothpaste + жест"}, {"n": 16, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "<b>Игра «Что под снежком?»</b>: нажать — микроб прячет три вещи под снежки, один снежок трясётся; после ответа нажать на снежок", "say": "О нет! Микроб прячет наши вещи под снежки! Какой снежок трясётся? Что там спрятано? What is it?", "ans": "Toothpaste! / Tooth! / Toothbrush!"}, {"n": 17, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "<b>Игра «Плитки»</b>: нажимать — квадратики исчезают по одному", "say": "Картинка спряталась под квадратиками. Что там? What is it? Guess! (TPR: пожимаем плечами, рука к уху)", "ans": "называет как можно раньше"}, {"n": 18, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "Ребёнок называет три слова — нажать: микроб исчезает", "say": "Возвращаемся к воротам! Назовём всё, что нашли. What is it? What is it? What is it?", "ans": "Tooth! Toothbrush! Toothpaste!"}, {"n": 19, "sec": "Шаг 4 — cup — 4 мин", "todo": "Когда ребёнок подует — нажать: снег слетает с горки", "say": "Ух, ветер! Let's blow! Ф-ф-ф! (TPR: дуем)", "ans": "дует"}, {"n": 20, "sec": "Шаг 4 — cup — 4 мин", "todo": "Нажать на стаканчик — он увеличивается", "say": "What is it? Это стаканчик. Say: cup! (TPR: держим стаканчик и пьём)", "ans": "cup + жест"}, {"n": 21, "sec": "Шаг 4 — cup — 4 мин", "todo": "<b>Игра «Стоп!»</b>: вещи медленно едут по ленте; когда ребёнок скажет stop — нажать", "say": "Наши вещи едут по ленте. Я называю вещь — когда она будет в рамке, говори «Stop!» Cup! (TPR: ладонь вперёд) … What is it?", "ans": "Stop! Cup!"}, {"n": 22, "sec": "Шаг 4 — cup — 4 мин", "todo": "<b>Игра «Show me»</b> — без экрана", "say": "Поиграем! Я говорю — ты показываешь. Show me toothbrush! Show me cup! Show me toothpaste! Show me tooth! Faster!", "ans": "показывает жесты"}, {"n": 23, "sec": "Шаг 4 — cup — 4 мин", "todo": "Ребёнок называет четыре слова — нажать: микроб исчезает", "say": "Возвращаемся к воротам! Назовём всё, что нашли. What is it? (×4)", "ans": "Tooth! Toothbrush! Toothpaste! Cup!"}, {"n": 24, "sec": "Главный микроб — 1,5 мин", "todo": "По ленте едут торт, конфета, газировка, щётка, паста, стаканчик. На каждый верный ответ нажать «✓» — микроб уменьшается. Что ребёнок пропустил — проедет ещё раз в следующем ряду", "say": "Остался самый большой микроб. Он хитрый — подсовывает сладости! Называем только то, что полезно для зубок. Look! (TPR: пальчик к глазу) Yes or no? … Yes! What is it?", "ans": "No! / Yes! Toothbrush! …"}, {"n": 25, "sec": "Главный микроб — 1,5 мин", "todo": "Последний верный ответ — микроб исчезает", "say": "Ура! Все микробы убежали!", "ans": "Ура!"}, {"n": 26, "sec": "Финал — 2 мин", "todo": "Ворота открываются, в замке загораются огни", "say": "Пингвинёнок дома! Чтобы микробы больше не возвращались, давай научим его чистить зубки!", "ans": "Да!"}, {"n": 27, "sec": "Финал — 2 мин", "todo": "Нажимать по шагам — пингвинёнок повторяет", "say": "Take a toothbrush! (TPR: берём щётку) Take some toothpaste! (TPR: выдавливаем пасту) Brush, brush, brush! (TPR: чистим) Smile! (TPR: улыбаемся)", "ans": "повторяет движения; brush, brush, brush; smile"}, {"n": 28, "sec": "Финал — 2 мин", "todo": "Вписать имя ребёнка в сертификат «Защитник Зубного замка / Tooth Castle Hero»", "say": "Сегодня ты победил всех микробов! Ты большой молодец, ты справился! <i>(скажите, что лучше всего получилось у ученика: запомнил слова, считал льдинки, ловил вещи на ленте, угадывал, что под снежком)</i> Ты — защитник Зубного замка! (TPR: показываем «класс»)", "ans": "Ура! / Yes!"}, {"n": 29, "sec": "Обратная связь и прощание — 2 мин", "todo": "На экране только пингвинёнок у замка. Варианты, что понравилось, — устно, на экране их нет", "say": "Было сложно или легко? (TPR: «легко» — машем рукой, «сложно» — хватаемся за голову) А что тебе больше всего понравилось? <i>(если ребёнок затрудняется — предложите варианты устно: прыгать по льдинкам, открывать сундук, рыбачить, угадывать, что под снежком, ловить вещи на ленте, прогонять микробов)</i>", "ans": "Легко! / Сложно! Понравилось…"}, {"n": 30, "sec": "Обратная связь и прощание — 2 мин", "todo": "Пингвинёнок машет; рядом — «7 дней с пингвинёнком» и рисунок", "say": "Пингвинёнку очень понравилось с тобой играть! Он приготовил для тебя игры на каждый день — «7 дней с пингвинёнком»: будешь вместе с ним чистить зубки и учить слова. Напоминай пингвинёнку чистить зубки утром и вечером! А ещё нарисуй рисунок с пингвинёнком — мы его очень ждём. Goodbye! (TPR: машем рукой)", "ans": "Goodbye!"}]/*PLAN_END*/;
+const PLAN = /*PLAN_START*/[{"n": 1, "sec": "Приветствие — 1 мин", "todo": "—", "say": "Hello! I'm (имя). What's your name? <i>(если ученик не понимает: «Как тебя зовут?»)</i>", "ans": "I'm Masha. / Masha."}, {"n": 2, "sec": "Приветствие — 1 мин", "todo": "—", "say": "Look! (TPR: пальчик к глазу) Who is it? Кто это? Это пингвинёнок. Penguin. Say: penguin! (TPR: рука к уху) Давай с ним поздороваемся. Say: Hello, Penguin! (TPR: машем рукой)", "ans": "Penguin! Hello, Penguin!"}, {"n": 3, "sec": "Завязка — 1,5 мин", "todo": "—", "say": "Look! (TPR: пальчик к глазу) What is it? Что это? Да, замок! Посмотри, какой он. Это обычный замок или зубной? Здесь живёт пингвинёнок.", "ans": "Замок! Зубной!"}, {"n": 4, "sec": "Завязка — 1,5 мин", "todo": "—", "say": "А кто это у ворот? Это микробы. Как думаешь, они пустят пингвинёнка домой? Нет, не пускают. Поможем прогнать микробов?", "ans": "Микробы! Нет. Да!"}, {"n": 5, "sec": "Шаг 1 — tooth — 3 мин", "todo": "На каждый счёт нажать на следующую льдинку — пингвинёнок прыгает", "say": "Ой, что-то блестит! Давай допрыгаем! Say: one, two, three, four! (TPR: показываем пальцы)", "ans": "One, two, three, four!"}, {"n": 6, "sec": "Шаг 1 — tooth — 3 мин", "todo": "Нажать на зубик — он увеличивается и сияет", "say": "What is it? Что это? Look! (TPR: пальчик к глазу) Это волшебный зубик. Say: tooth! (TPR: рука к уху) Как мы покажем зубик? (TPR: пальчик на свои зубки) Say: tooth! Whisper! Tooth. (TPR: палец к губам) Loud! Tooth! (TPR: ладони рупором)", "ans": "tooth (шёпотом, громко)"}, {"n": 7, "sec": "Шаг 1 — tooth — 3 мин", "todo": "На каждый счёт нажать на льдинку — прыгаем обратно", "say": "Прыгаем обратно к замку! One, two, three, four!", "ans": "One, two, three, four!"}, {"n": 8, "sec": "Шаг 1 — tooth — 3 мин", "todo": "Когда ребёнок скажет tooth — нажать на зубик: лучики, микроб исчезает", "say": "Этот зубик волшебный — микробы его испугались! Давай скажем громче, чтобы он засиял. Say: tooth!", "ans": "TOOTH!"}, {"n": 9, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "Нажимать на сугробы по одному: валенок, рыбка, сосулька, щётка", "say": "Смотри, сколько сугробиков! В них что-то спряталось. Что нам поможет прогнать микробов? Look! (TPR: пальчик к глазу) Это поможет? Yes or no? (TPR: yes — «класс» или киваем; no — несколько раз мотаем головой)", "ans": "No! No! No! Yes!"}, {"n": 10, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "Нажать на щётку — она увеличивается", "say": "What is it? Toothbrush! Say: toothbrush! (TPR: рука к уху) Как мы покажем зубную щётку? (TPR: показываем, как щётка чистит зубки) Say: toothbrush! <i>(если ребёнок не показывает: «Покажи, как щётка чистит зубки»)</i>", "ans": "toothbrush + жест"}, {"n": 11, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "<b>Игра «Послушай и выбери»</b>: две картинки, 4–5 раундов. Сказать слово; после ответа — нажать на картинку", "say": "Пингвинёнок собирает рюкзак. Listen! (TPR: пальчик к ушку) Toothbrush! Circle! (TPR: обводим пальцем в воздухе)", "ans": "обводит нужную картинку"}, {"n": 12, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "<b>Игра «Правда или нет»</b>: картинка + учитель называет слово (иногда неверное). Потом наоборот — картинка без слова", "say": "О нет, микроб хочет нас обмануть! Он называет картинки — правильно или нет? Look! (TPR: пальчик к глазу) Tooth? Yes or no? … What is it?", "ans": "No! Toothbrush! / Yes! / tooth, toothbrush"}, {"n": 13, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "Ребёнок называет оба слова — нажать: микроб исчезает", "say": "Возвращаемся к воротам! Назовём всё, что нашли, — и микроб убежит. What is it? (показываем зубик) What is it? (показываем щётку)", "ans": "Tooth! Toothbrush!"}, {"n": 14, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "Под водой плывёт тень. Когда ребёнок скажет stop — нажать: пингвинёнок вытаскивает пасту", "say": "Пингвинёнок любит рыбачить. Look! (TPR: пальчик к глазу) Кто-то плывёт… Stop! (TPR: ладонь вперёд) Say: stop!", "ans": "Stop!"}, {"n": 15, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "Нажать на тюбик — он увеличивается", "say": "What is it? Это зубная паста Splat Kids. Say: toothpaste! (TPR: выдавливаем пасту на щётку) Show me toothpaste!", "ans": "toothpaste + жест"}, {"n": 16, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "<b>Игра «Что под снежком?»</b>: нажать — микроб прячет три вещи под снежки, один снежок трясётся; после ответа нажать на снежок", "say": "О нет! Микроб прячет наши вещи под снежки! Какой снежок трясётся? Что там спрятано? What is it?", "ans": "Toothpaste! / Tooth! / Toothbrush!"}, {"n": 17, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "<b>Игра «Плитки»</b>: нажимать — квадратики исчезают по одному", "say": "Картинка спряталась под квадратиками. Что там? What is it? Guess! (TPR: пожимаем плечами, рука к уху)", "ans": "называет как можно раньше"}, {"n": 18, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "Ребёнок называет три слова — нажать: микроб исчезает", "say": "Возвращаемся к воротам! Назовём всё, что нашли. What is it? What is it? What is it?", "ans": "Tooth! Toothbrush! Toothpaste!"}, {"n": 19, "sec": "Шаг 4 — cup — 4 мин", "todo": "Когда ребёнок подует — нажать: снег слетает с горки", "say": "Ух, ветер! Let's blow! Ф-ф-ф! (TPR: дуем)", "ans": "дует"}, {"n": 20, "sec": "Шаг 4 — cup — 4 мин", "todo": "Нажать на стаканчик — он увеличивается", "say": "What is it? Это стаканчик. Say: cup! (TPR: держим стаканчик и пьём)", "ans": "cup + жест"}, {"n": 21, "sec": "Шаг 4 — cup — 4 мин", "todo": "<b>Игра «Стоп!»</b>: вещи медленно едут по ленте; когда ребёнок скажет stop — нажать", "say": "Наши вещи едут по ленте. Я называю вещь — когда она будет в рамке, говори «Stop!» Cup! (TPR: ладонь вперёд) … What is it?", "ans": "Stop! Cup!"}, {"n": 22, "sec": "Шаг 4 — cup — 4 мин", "todo": "<b>Игра «Show me»</b> — без экрана", "say": "Поиграем! Я говорю — ты показываешь. Show me toothbrush! Show me cup! Show me toothpaste! Show me tooth! Faster!", "ans": "показывает жесты"}, {"n": 23, "sec": "Шаг 4 — cup — 4 мин", "todo": "Ребёнок называет четыре слова — нажать: микроб исчезает", "say": "Возвращаемся к воротам! Назовём всё, что нашли. What is it? (×4)", "ans": "Tooth! Toothbrush! Toothpaste! Cup!"}, {"n": 24, "sec": "Главный микроб — 1,5 мин", "todo": "По одной появляются вещи: торт, конфета, газировка, щётка, паста, стаканчик. Ребёнок решает — нажать на рюкзак пингвинёнка (полезное) или на мешок микроба (вредное). Верно в рюкзак — микроб уменьшается; сладость в рюкзак — подрастает. Потом рюкзак открывается: нажимать на вещи по одной, когда ребёнок называет", "say": "Остался самый большой микроб. Он хитрый — подсовывает сладости! Полезное — в рюкзак пингвинёнка, вредное — в мешок микроба. Look! (TPR: пальчик к глазу) Это полезно для зубок? Yes or no? … Давай заглянем в рюкзак! What is it?", "ans": "Yes! / No! … Toothbrush! Toothpaste! Cup!"}, {"n": 25, "sec": "Главный микроб — 1,5 мин", "todo": "Последний верный ответ — микроб исчезает", "say": "Ура! Все микробы убежали!", "ans": "Ура!"}, {"n": 26, "sec": "Финал — 2 мин", "todo": "Ворота открываются, в замке загораются огни", "say": "Пингвинёнок дома! Чтобы микробы больше не возвращались, давай научим его чистить зубки!", "ans": "Да!"}, {"n": 27, "sec": "Финал — 2 мин", "todo": "Нажимать по шагам — пингвинёнок повторяет", "say": "Take a toothbrush! (TPR: берём щётку) Take some toothpaste! (TPR: выдавливаем пасту) Brush, brush, brush! (TPR: чистим) Smile! (TPR: улыбаемся)", "ans": "повторяет движения; brush, brush, brush; smile"}, {"n": 28, "sec": "Финал — 2 мин", "todo": "Вписать имя ребёнка в сертификат «Защитник Зубного замка / Tooth Castle Hero»", "say": "Сегодня ты победил всех микробов! Ты большой молодец, ты справился! <i>(скажите, что лучше всего получилось у ученика: запомнил слова, считал льдинки, ловил вещи на ленте, угадывал, что под снежком)</i> Ты — защитник Зубного замка! (TPR: показываем «класс»)", "ans": "Ура! / Yes!"}, {"n": 29, "sec": "Обратная связь и прощание — 2 мин", "todo": "На экране только пингвинёнок у замка. Варианты, что понравилось, — устно, на экране их нет", "say": "Было сложно или легко? (TPR: «легко» — машем рукой, «сложно» — хватаемся за голову) А что тебе больше всего понравилось? <i>(если ребёнок затрудняется — предложите варианты устно: прыгать по льдинкам, открывать сундук, рыбачить, угадывать, что под снежком, ловить вещи на ленте, прогонять микробов)</i>", "ans": "Легко! / Сложно! Понравилось…"}, {"n": 30, "sec": "Обратная связь и прощание — 2 мин", "todo": "Пингвинёнок машет; рядом — «7 дней с пингвинёнком» и рисунок", "say": "Пингвинёнку очень понравилось с тобой играть! Он приготовил для тебя игры на каждый день — «7 дней с пингвинёнком»: будешь вместе с ним чистить зубки и учить слова. Напоминай пингвинёнку чистить зубки утром и вечером! А ещё нарисуй рисунок с пингвинёнком — мы его очень ждём. Goodbye! (TPR: машем рукой)", "ans": "Goodbye!"}]/*PLAN_END*/;
 
 const M = 'media/lesson/';
 // В автономной версии (tools/bundle_lesson.py) картинки и звук вшиты сюда; в обычной — null, берём файлы рядом.
@@ -236,7 +237,23 @@ function peng(pose, n) {
   return map[set][pose] || map[set].stand;
 }
 const SIDE = [10, 70, 30];        // пингвинёнок сбоку: x, y, высота в % — одинаково на всех слайдах
-const sidePeng = (pose, n, cls = 'pop') => sph(peng(pose, n), SIDE[0], SIDE[1], SIDE[2], cls);
+/* Пингвинёнок живёт в своём слое (#pl) между фоном и слайдом. Если на следующем слайде он стоит там же,
+   он не исчезает — старая поза плавно перетекает в новую (решение Анны 21.10.2026, вариант 5).
+   Если место другое — старый плавно гаснет, новый плавно проявляется. */
+const PL = $('#pl');
+const fadeIn = e => { e.style.opacity = 0; e.style.transition = 'opacity .45s'; requestAnimationFrame(() => requestAnimationFrame(() => { e.style.opacity = 1; })); };
+const fadeOut = e => { e.style.transition = 'opacity .45s'; e.style.opacity = 0; setTimeout(() => e.remove(), 500); };
+const placeKey = e => [e.style.left, e.style.top, e.style.height].map(v => Math.round(parseFloat(v) * 10)).join('|');
+function pengAt(name, x, y, h, cls = '') {
+  const key = [x, y, h].map(v => Math.round(v * 10)).join('|');
+  const same = [...PL.children].find(e => e.dataset.stale && placeKey(e) === key);
+  if (same && same.dataset.name === name) { delete same.dataset.stale; same.className = 'sp peng ' + cls; return same; }
+  const i = sp(name, x, y, h, 'peng ' + cls, PL, 'h'); i.dataset.name = name;
+  fadeIn(i);
+  if (same) { delete same.dataset.stale; fadeOut(same); }
+  return i;
+}
+const sidePeng = (pose, n, cls = '') => pengAt(peng(pose, n), SIDE[0], SIDE[1], SIDE[2], cls);
 
 /* ---------- микробы у ворот ---------- */
 const GERMS = ['germ_green', 'germ_purple', 'germ_orange', 'germ_blue'];
@@ -270,8 +287,8 @@ function newCtx(n) {
 /* ---------- слайды ---------- */
 const S = [];
 // 1–2. Приветствие
-S[1] = { bg: 'snow_meadow', go(n) { sph(peng('stand', n), 50, 58, 52, 'pop bob'); } };
-S[2] = { bg: 'snow_meadow', go(n) { sph(peng('happy', n), 50, 58, 52, 'pop bob'); title('penguin'); } };
+S[1] = { bg: 'snow_meadow', go(n) { pengAt(peng('stand', n), 50, 58, 52, 'bob'); } };
+S[2] = { bg: 'snow_meadow', go(n) { pengAt(peng('happy', n), 50, 58, 52, 'bob'); title('penguin'); } };
 // 3–4. Завязка
 S[3] = { bg: 'castle_dark', go() {} };
 S[4] = { bg: 'castle_dark', go(n) { gateGerms(); sidePeng('sad', n); } };
@@ -287,7 +304,7 @@ function drawFloes(withChest, chestOpen) {
 }
 // подписи 1–4 появляются по мере прыжков
 function hopper(n, path, onEnd) {
-  const p = sph(peng('stand', n), path.start[0], path.start[1], 22);
+  const p = pengAt(peng('stand', n), path.start[0], path.start[1], 22);
   let k = 0;
   async function hop() {
     if (k >= path.points.length || hop.busy) return;
@@ -309,7 +326,7 @@ S[5] = { bg: 'ice_sea', go(n, c) {
 } };
 S[6] = { bg: 'ice_sea', go(n, c) {
   drawFloes(false);
-  const p = sph(peng('wow', n), 78, 55, 22);
+  const p = pengAt(peng('wow', n), 78, 55, 22);
   const chest = sph('chest_closed', 85, 57, 13, 'click glow');
   const open = () => {
     if (chest.dataset.open) return; chest.dataset.open = 1;
@@ -442,7 +459,7 @@ S[13] = gateSlide(['tooth', 'toothbrush']);
 S[14] = { bg: 'ice_fishing', go(n, c) {
   const HX = 61, HY = 73;
   // пингвинёнок с удочкой поставлен так, чтобы крючок висел над лункой (крючок — 93 % ширины, 69 % высоты картинки)
-  sph('pb_fishing', 41.8, 61.6, 60);
+  pengAt('pb_fishing', 41.8, 61.6, 60);
   // леска на картинке слишком тонкая и при вырезке пропала — рисуем от кончика удочки до поплавка
   const line = el('div'); line.style.cssText = 'position:absolute;left:61.3%;top:32.8%;width:2px;height:29.4%;background:rgba(70,70,80,.75)';
   const hook = { remove() {} };
@@ -580,24 +597,49 @@ S[22] = { bg: 'snow_meadow', go(n) {
 } };
 S[23] = gateSlide(['tooth', 'toothbrush', 'toothpaste', 'cup']);
 
-// 24. Главный микроб (временный вариант — до выбора сортировки): нажимаем на полезное, когда ребёнок назвал
+// 24. Главный микроб: полезное — в рюкзак пингвинёнка, сладости — в мешок микроба; потом заглядываем в рюкзак
 S[24] = { bg: 'castle_dark', go(n, c) {
-  const boss = sph('boss', 50, 34, 30, 'bob');
-  let scale = 1, got = 0;
-  const useful = ['toothbrush', 'toothpaste', 'cup'];
-  const belt = el('div', 'belt', ''); belt.style.top = '62%';
-  const list = shuffle(['cake', 'toothbrush', 'candy', 'toothpaste', 'soda', 'cup']);
-  list.forEach((w, i) => {
-    const im = el('img', 'item', null, belt); im.src = U(WORDS[w] || w); im.style.left = 9 + i * 16.4 + '%'; im.style.cursor = 'pointer';
-    im.onclick = () => {
-      if (im.dataset.done) return;
-      if (useful.includes(w)) {
-        im.dataset.done = 1; im.style.opacity = .25; say(w); sfx.shrink(); got++;
-        scale -= .22; boss.style.transition = 'height .4s'; boss.style.height = 30 * scale + '%'; wobble(boss);
-        if (got === useful.length) later(() => { poof(boss); c.done(); }, 700);
-      } else { wobble(im); sfx.grow(); scale = Math.min(1.25, scale + .06); boss.style.height = 30 * scale + '%'; }
-    };
-  });
+  sidePeng('stand', n);
+  const boss = sph('boss', 50, 30, 30, 'bob');
+  let scale = 1;
+  const setBoss = () => { boss.style.transition = 'height .45s'; boss.style.height = 30 * scale + '%'; };
+  const bag = sph('backpack', 27, 75, 24, 'click'), sack = sph('germ_sack', 78, 75, 24, 'click');
+  const useful = new Set(['toothbrush', 'toothpaste', 'cup']);
+  const items = shuffle(['toothbrush', 'cake', 'toothpaste', 'candy', 'cup', 'soda']);
+  const inBag = [];
+  let cur = null, idx = 0;
+  function next() {
+    if (idx >= items.length) return later(openBag, 600);
+    const w = items[idx++];
+    cur = sph(WORDS[w] || w, 52, 60, 20, 'pop'); cur.dataset.w = w;
+  }
+  function put(toBag) {
+    if (!cur || cur.dataset.busy) return;
+    const w = cur.dataset.w, ok = useful.has(w) === toBag, t = toBag ? bag : sack;
+    if (ok) {
+      const it = cur; cur = null; it.dataset.busy = 1; sfx.ok();
+      it.style.transition = 'all .6s ease-in'; it.style.left = t.style.left; it.style.top = t.style.top; it.style.height = '5%'; it.style.opacity = 0;
+      wobble(t);
+      if (toBag) { inBag.push(w); scale -= .15; setBoss(); sfx.shrink(); wobble(boss); }
+      setTimeout(() => it.remove(), 650); later(next, 900);
+    } else {
+      sfx.no(); wobble(cur);
+      if (toBag) { scale = Math.min(1.3, scale + .08); setBoss(); sfx.grow(); }   // сладость в рюкзак — микроб подрастает
+    }
+  }
+  bag.onclick = () => put(true); sack.onclick = () => put(false);
+  function openBag() {
+    title('What is it?');
+    inBag.forEach((w, i) => {
+      const cd = card(w, 32 + i * 18, 58);
+      cd.onclick = () => {
+        if (cd.classList.contains('good')) return;
+        cd.classList.add('good'); say(w); sfx.ok(); scale -= .1; setBoss();
+        if (layer.querySelectorAll('.card.good').length === inBag.length) later(() => { poof(boss); c.done(); }, 800);
+      };
+    });
+  }
+  next();
 } };
 S[25] = { bg: 'castle_dark', go(n, c) {
   const s = sph('boss_scared', 50, 62, 26, 'pop');
@@ -606,10 +648,10 @@ S[25] = { bg: 'castle_dark', go(n, c) {
 } };
 // 26–27. Финал: пингвинёнок одного размера и на одном месте на обоих слайдах
 const FIN = [50, 66, 44];
-S[26] = { bg: 'castle_lights', go(n) { sph('ph_jump', FIN[0], FIN[1], FIN[2], 'bob'); sfx.win(); } };
+S[26] = { bg: 'castle_lights', go(n) { pengAt('ph_jump', FIN[0], FIN[1], FIN[2], 'bob'); sfx.win(); } };
 S[27] = { bg: 'castle_lights', go(n, c) {
   const steps = [['Take a toothbrush!', 'brush'], ['Take some toothpaste!', 'tube'], ['Brush, brush, brush!', 'ph_brush'], ['Smile!', 'ph_jump']];
-  const p = sph('ph_stand', FIN[0], FIN[1], FIN[2]);
+  const p = pengAt('ph_stand', FIN[0], FIN[1], FIN[2]);
   let k = 0;
   const b = btn(steps[0][0], 50, 22, 'sun', next);
   function next() {
@@ -633,10 +675,10 @@ S[28] = { bg: 'castle_lights', go(n) {
 } };
 
 // 29. Обратная связь: на экране только пингвинёнок — варианты, что понравилось, учитель предлагает устно
-S[29] = { bg: 'castle_lights', go(n) { sph('ph_stand', FIN[0], FIN[1], FIN[2]); } };
+S[29] = { bg: 'castle_lights', go(n) { pengAt('ph_stand', FIN[0], FIN[1], FIN[2]); } };
 // 30. Прощание: «7 дней с пингвинёнком» и рисунок
 S[30] = { bg: 'castle_lights', go(n) {
-  sph('ph_jump', 50, 64, 44, 'bob');
+  pengAt('ph_jump', FIN[0], FIN[1], FIN[2], 'bob');
   const a = el('div', 'card pop', '<div style="font-size:calc(var(--u)*5)">⭐</div><b style="font-family:var(--disp);font-size:calc(var(--u)*1.8)">7 дней<br>с пингвинёнком</b>');
   a.style.left = '18%'; a.style.top = '55%';
   const b = el('div', 'card pop', '<div style="font-size:calc(var(--u)*5)">🖍️</div><b style="font-family:var(--disp);font-size:calc(var(--u)*1.8)">Нарисуй<br>пингвинёнка</b>');
@@ -669,7 +711,9 @@ function go(n) {
   const s = S[n];
   setBg(s.bg);
   ctx = newCtx(n);
+  [...PL.children].forEach(e => { e.dataset.stale = 1; });
   s.go(n, ctx);
+  [...PL.children].forEach(e => { if (e.dataset.stale) { delete e.dataset.stale; fadeOut(e); } });
   $('#pageno').textContent = `${n} / ${TOTAL}`;
   renderPlan();
 }
@@ -715,7 +759,7 @@ ${planAll ? '<table><tr><th>№</th><th>Что сделать</th><th>Teacher\'s
 
 // все картинки заранее в кэш — чтобы на слайдах ничего не «доезжало» после показа
 const ALL = ['castle_dark','castle_lights','ice_sea','snow_meadow','ice_fishing','ice_hill','p_wave','p_jump','p_happy','p_sad','p_point','p_surprised','pb_stand','pb_jump','pb_fishing','ph_stand','ph_jump','ph_brush',
-  'magic_tooth','brush','tube','cup','boot','fish','icicle','cake','candy','soda','snowball','floe1','floe2','mound1','mound2','chest_closed','chest_open','germ_green','germ_purple','germ_orange','germ_blue','boss','boss_scared'];
+  'magic_tooth','brush','tube','cup','boot','fish','icicle','cake','candy','soda','snowball','floe1','floe2','mound1','mound2','chest_closed','chest_open','germ_green','germ_purple','germ_orange','germ_blue','boss','boss_scared','backpack','germ_sack'];
 Promise.all(ALL.map(n => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = U(n); }))).then(() => go(1));
 </script>
 </body>
