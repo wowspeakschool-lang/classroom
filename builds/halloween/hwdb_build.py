@@ -91,7 +91,7 @@ W7B = [('7-9/w_ghost', 'a ghost'), ('7-9/w_bat', 'a bat'), ('7-9/w_spider', 'a s
 W7C = [('7-9/w_ghost', 'a ghost'), ('7-9/w_spider', 'a spider'), ('7-9/w_witch', 'a witch'), ('7-9/w_skeleton', 'a skeleton'),
        ('7-9/w_vampire', 'a vampire'), ('7-9/w_mummy', 'a mummy'), ('7-9/w_broom', 'a broom'), ('7-9/w_house', 'a haunted house')]
 WM = [('10-12/s_witch', 'a witch'), ('10-12/s_vampire', 'a vampire'), ('10-12/s_mummy', 'a mummy'), ('10-12/s_werewolf', 'a werewolf'), ('10-12/s_skeleton', 'a skeleton'), ('10-12/s_ghost', 'a ghost')]
-WC = [('10-12/o_watch', 'a watch'), ('10-12/o_scarf', 'a scarf'), ('10-12/o_glasses', 'glasses'), ('10-12/o_boot', 'boots'), ('10-12/o_lollipops', 'a lollipop'), ('10-12/o_ticket', 'a ticket')]
+WC = [('10-12/o_watch', 'a watch'), ('10-12/o_scarf', 'a scarf'), ('10-12/o_glasses', 'glasses'), ('10-12/o_boot', 'boots'), ('10-12/o_lollipops', 'lollipops'), ('10-12/o_ticket', 'a ticket')]
 W13B = [('13/w_pumpkin', 'a pumpkin'), ('13/w_turnip', 'a turnip'), ('13/w_bonfire', 'a bonfire'), ('13/w_costume', 'a costume'), ('13/w_ghost', 'a ghost'), ('13/w_candle', 'a candle')]
 W13C = W13B + [('13/w_lantern', 'a lantern'), ('13/w_harvest', 'the harvest')]
 TR13 = {'13/w_pumpkin': 'тыква', '13/w_turnip': 'репа', '13/w_bonfire': 'костёр', '13/w_costume': 'костюм', '13/w_ghost': 'привидение',
@@ -160,17 +160,17 @@ ODD = [(['s_witch', 's_mummy', 'o_scarf', 's_vampire'], 'o_scarf'), (['o_watch',
        (['s_vampire', 's_ghost', 'o_boot', 's_skeleton'], 'o_boot')]
 WD10 = dict((k.split('/')[1], w) for k, w in WM + WC)
 GOLD = ('Last night someone stole the Golden Pumpkin! The detectives found a broken __watch__ in the square. It stopped at 9:15. '
-        'A witness saw a long red __scarf__ in the park. Next to the old tower there were footprints of big __boots__. '
-        'Somebody ate all the __lollipops__ at the cafe. Is the thief the __vampire__? Or the __werewolf__? '
+        'A witness saw a long red __scarf__ in the park. Next to the old tower there were footprints of somebody in big __boots__. '
+        'Somebody ate all the __lollipops__ at the cafe. Is the thief the __vampire__ in the black cape? Or the hairy __werewolf__? '
         'The __mummy__ has got an alibi: a cinema __ticket__ for nine o\'clock.')
 hw('Halloween Homework · 10–12 · continuing', 'Хэллоуин: 6 монстров + улики (watch, scarf, glasses, boots, lollipop, ticket)', 14, [
     ('flashcards', cards(WM + WC), ''),
     ('match', match(WM), ''),
     ('match', match(WC), ''),
+    ('quiz', {'title': 'Найди лишнюю картинку', 'questions': [
+        {'q': '', 'type': 'single', 'correct': [ks.index(odd)], 'options': [{'text': strip(WD10[k]), 'image': U('10-12/' + k)} for k in ks]} for ks, odd in ODD]}, ''),
     ('exact_input', unscramble(random.Random(5).sample(WM + WC, 8), 1100), ''),
     ('exact_input', dictation(random.Random(6).sample(WM + WC, 6)), ''),
-    ('quiz', {'title': 'Какое слово лишнее?', 'questions': [
-        {'q': '', 'type': 'single', 'correct': [ks.index(odd)], 'options': [{'text': strip(WD10[k]), 'image': U('10-12/' + k)} for k in ks]} for ks, odd in ODD]}, ''),
     ('gaps', {'mode': 'drag', 'title': 'The Golden Pumpkin: вставь слова', 'text': GOLD}, ''),
     ('speaking', speak('🎤 Опиши подозреваемого', '<p>Нажми на запись и расскажи, что ты видишь на картинке.</p><p><i>I can see a vampire. I can see a red scarf, glasses…</i></p>', '10-12/hw_suspect'), ''),
 ])
@@ -188,7 +188,7 @@ DEF = [('pumpkin', 'a big orange vegetable; people carve faces in it on Hallowee
        ('ghost', 'the spirit of a dead person'), ('candle', 'a stick of wax that gives light when it burns'),
        ('lantern', 'a light in a case that you can carry'), ('harvest', 'the time when farmers collect fruit and vegetables')]
 SAM = ('Long ago in Ireland, people celebrated Samhain at the end of the __harvest__. They made big __bonfires__ on the hills. '
-       'They believed that a __ghost__ could walk on Earth that night, so they wore a __costume__ and a mask. '
+       'They believed that __ghosts__ could walk on Earth that night, so they wore __costumes__ and masks. '
        'Children carved a scary face into a __turnip__, put a __candle__ inside and made a __lantern__. '
        'Later, in America, people used a __pumpkin__ instead.')
 hw('Halloween Homework · 13+ · continuing', 'Хэллоуин: 8 слов с переводом, текст о Самайне', 16, [
