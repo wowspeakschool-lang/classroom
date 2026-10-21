@@ -49,7 +49,14 @@ def cut(src, out_dir, names, max_side=520, grow=18, thr=10):
         bl, _ = ndi.label(nearwhite)
         border = set(np.unique(np.concatenate([bl[0], bl[-1], bl[:, 0], bl[:, -1]]))) - {0}
         bg = np.isin(bl, list(border)) | ~own
-        bg = ~ndi.binary_fill_holes(~bg)          # замкнутые белые пятна внутри (глаза, блики) — часть предмета
+        # замкнутые белые пятна внутри: мелкие или не чисто белые (глаза, блики) — часть предмета;
+        # крупные и чисто белые (просвет в ручке стаканчика) — фон, остаются прозрачными
+        hl, hn = ndi.label(bg & ~ndi.binary_fill_holes(~bg) | (bg & False))
+        holes, hn = ndi.label(ndi.binary_fill_holes(~bg) & bg)
+        for k in range(1, hn + 1):
+            m = holes == k
+            if m.sum() < bg.size * 0.01 or d[m].mean() >= 1.8:
+                bg[m] = False
         alpha = np.where(bg, 0, 255).astype(np.uint8)
         # мягкий край: переход 6..18 «темнее белого» у границы с фоном
         edge = ndi.binary_dilation(bg, iterations=2) & ~bg
