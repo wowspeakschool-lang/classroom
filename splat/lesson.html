@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Splat Kids — The Tooth Castle in the Sky</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+body{overflow:hidden;user-select:none;touch-action:none}
+#stage{position:fixed;inset:0;z-index:1}
+.scr{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;padding:84px 20px 96px}
+.scr.on{display:flex}
+/* верх: бренд, башни прогресса, кнопки учителя */
+#top{position:fixed;left:0;right:0;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;gap:10px}
+#towers{display:flex;gap:6px;background:rgba(255,255,255,.55);backdrop-filter:blur(6px);padding:6px 12px;border-radius:999px}
+#towers i{width:28px;height:28px;display:block;opacity:.35;filter:grayscale(1);transition:.4s}
+#towers i.lit{opacity:1;filter:none;transform:scale(1.15)}
+.tb{font-family:var(--disp);font-weight:600;font-size:15px;border:none;border-radius:999px;padding:9px 14px;cursor:pointer;background:#fff;color:var(--ink);box-shadow:0 3px 0 rgba(0,0,0,.1)}
+#nav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;align-items:center;gap:14px;padding:14px}
+.arrow{width:52px;height:52px;border-radius:50%;border:none;background:rgba(255,255,255,.75);font-size:24px;cursor:pointer;color:var(--ink);box-shadow:0 4px 0 rgba(0,0,0,.1)}
+#pageno{position:fixed;right:16px;bottom:22px;z-index:20;font-weight:800;font-size:13px;color:var(--ink);opacity:.5}
+/* заметки учителя */
+#notes{position:fixed;right:16px;top:70px;z-index:30;width:min(380px,90vw);max-height:70vh;overflow:auto;background:var(--paper);border-radius:22px;padding:18px 20px;
+  box-shadow:0 18px 50px rgba(59,45,92,.3);font-size:15px;line-height:1.5;display:none}
+#notes.on{display:block}
+#notes h4{font-family:var(--disp);font-size:18px;margin-bottom:6px;color:var(--brand-d)}
+#notes .t{font-size:12px;font-weight:900;color:var(--accent-d);text-transform:uppercase;letter-spacing:.06em}
+#notes ul{margin:8px 0 0 18px}#notes li{margin:4px 0}
+#notes q{font-family:var(--disp);color:var(--accent-d);quotes:none;font-weight:600}
+/* общие элементы сцен */
+.h1{font-family:var(--disp);font-weight:700;font-size:clamp(30px,5.6vw,64px);color:#fff;text-align:center;line-height:1.05;
+  text-shadow:0 4px 0 var(--brand-d),0 8px 24px rgba(31,158,139,.45)}
+.h2{font-family:var(--disp);font-weight:700;font-size:clamp(24px,3.8vw,42px);color:var(--ink);text-align:center;background:rgba(255,255,255,.8);
+  padding:8px 26px;border-radius:999px;box-shadow:0 6px 0 rgba(59,45,92,.08)}
+.sub{font-family:var(--disp);font-weight:600;font-size:clamp(16px,2.2vw,22px);color:var(--ink);background:rgba(255,255,255,.75);border-radius:999px;padding:6px 18px;margin-top:12px;text-align:center}
+.presents{display:flex;flex-direction:column;align-items:center;gap:4px;margin-bottom:6px}
+.presents .brandmark img{height:70px}.presents .brandmark .wm b{font-size:34px}.presents .brandmark .wm s{font-size:26px}
+.presents small{font-family:var(--disp);font-weight:600;color:#fff;font-size:16px;letter-spacing:.2em;text-transform:uppercase;text-shadow:0 1px 4px rgba(0,0,0,.25)}
+.bubble{position:relative;background:#fff;border-radius:26px;padding:14px 24px;font-family:var(--disp);font-weight:700;font-size:clamp(20px,3vw,32px);
+  box-shadow:0 10px 30px rgba(59,45,92,.18);color:var(--ink)}
+.bubble:after{content:'';position:absolute;left:30px;bottom:-16px;border:12px solid transparent;border-top:18px solid #fff}
+.card{background:#fff;border-radius:28px;padding:14px;box-shadow:0 8px 0 rgba(59,45,92,.08),0 14px 30px rgba(59,45,92,.15);cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:6px;transition:transform .15s}
+.card:hover{transform:translateY(-6px) rotate(-1deg)}
+.card .pic{width:clamp(90px,12vw,160px);height:clamp(90px,12vw,160px);display:flex;align-items:center;justify-content:center}
+#s-bag .card .pic,#s-pack .card .pic{width:clamp(70px,9vw,130px);height:clamp(70px,9vw,130px)}
+#s-bag .card,#s-pack .card{padding:10px}
+.card .w{font-family:var(--disp);font-weight:700;font-size:clamp(18px,2.4vw,28px)}
+.card.good{outline:6px solid var(--brand);}
+.row{display:flex;gap:clamp(12px,2.4vw,28px);flex-wrap:wrap;justify-content:center;align-items:flex-end}
+.speaker{width:72px;height:72px;border-radius:50%;border:none;background:var(--accent);color:#fff;font-size:34px;cursor:pointer;box-shadow:0 6px 0 var(--accent-d)}
+.speaker:active{transform:translateY(4px);box-shadow:0 2px 0 var(--accent-d)}
+/* 0 — старт */
+#s-start .hero{width:min(240px,30vw)}
+#s-start .pack{position:absolute;width:min(150px,16vw);bottom:110px}
+#s-start .pack.l{left:5vw;transform:rotate(-12deg)}#s-start .pack.r{right:5vw;transform:rotate(14deg)}
+/* 1 — полёт */
+#s-fly .castle{width:min(620px,80vw);cursor:pointer;transition:transform 2.2s cubic-bezier(.2,.8,.2,1)}
+#s-fly .castle.below{transform:translateY(80vh)}
+#s-fly .fairy{position:absolute;left:6vw;bottom:110px;width:min(200px,22vw);display:none}
+#s-fly .fairy.on{display:block}
+#s-fly .fairy .bubble{position:absolute;left:80%;top:-30px;white-space:nowrap}
+/* 2 — микробы */
+#s-germs .castle{width:min(560px,70vw);opacity:.92}
+#s-germs .g{position:absolute;width:clamp(70px,9vw,120px);cursor:pointer;transition:transform .2s}
+#s-germs .g.gone{transform:scale(0) rotate(180deg)}
+/* 3 — волшебная сумка */
+#s-bag .bagwrap{width:min(220px,26vw);cursor:pointer}
+#s-bag .row{margin-top:18px;min-height:220px}
+/* 5 — чистка */
+#s-brush .arena{position:relative;width:min(520px,70vw);height:min(520px,60vh)}
+#s-brush .bigtooth{position:absolute;inset:0}
+#s-brush .dirt{position:absolute;width:20%;transition:opacity .2s,transform .3s;pointer-events:none}
+#s-brush .dirt.gone{opacity:0;transform:scale(2)}
+#brushCursor{position:fixed;width:150px;height:150px;pointer-events:none;z-index:15;transform:translate(-30%,-30%);display:none}
+#s-brush .tray{position:absolute;right:4vw;bottom:110px;width:min(150px,16vw);cursor:grab}
+#s-brush .meter{width:min(420px,70vw);height:22px;background:#fff;border-radius:999px;overflow:hidden;margin-top:14px;box-shadow:inset 0 2px 4px rgba(0,0,0,.1)}
+#s-brush .meter b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--sun));transition:width .2s}
+/* 6 — песенка */
+#s-chant .mirror{position:relative;width:min(460px,60vw);height:min(360px,46vh);background:rgba(255,255,255,.7);border-radius:50% 50% 46% 46%;border:10px solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 40px rgba(59,45,92,.2)}
+#s-chant .mirror .sm{width:70%}
+#s-chant .mirror .tb2{position:absolute;width:40%;left:30%;top:10%}
+.updown{animation:ud .5s ease-in-out infinite alternate}@keyframes ud{from{transform:translateY(-30px)}to{transform:translateY(40px)}}
+.round{animation:rr 1s linear infinite}@keyframes rr{from{transform:rotate(0) translateX(40px) rotate(0)}to{transform:rotate(360deg) translateX(40px) rotate(-360deg)}}
+#s-chant .lyr{font-family:var(--disp);font-weight:700;font-size:clamp(20px,3vw,34px);color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.25);margin-top:16px;min-height:1.3em;text-align:center}
+/* 7 — собери сумку */
+#s-pack .bagwrap{width:min(200px,22vw);margin-top:14px}
+#s-pack .card.in{transform:scale(0);opacity:0;transition:.5s}
+/* 8 — финал */
+#s-final .castle{width:min(560px,70vw)}
+.cert{background:var(--paper);border-radius:30px;padding:20px 28px;text-align:center;box-shadow:0 18px 50px rgba(59,45,92,.25);border:6px dashed var(--brand);max-width:640px}
+.cert h3{font-family:var(--disp);font-size:clamp(26px,4vw,40px);color:var(--accent-d)}
+.cert input{font-family:var(--disp);font-size:26px;text-align:center;border:none;border-bottom:3px solid var(--brand);background:transparent;outline:none;width:80%;margin:8px 0;color:var(--ink)}
+.cert .medal{width:110px;height:110px;margin:0 auto}
+.gift{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.twk{position:absolute;width:24px;animation:twinkle 2s ease-in-out infinite}
+@media (max-width:700px){#towers{display:none}.tb span{display:none}}
+</style>
+</head>
+<body>
+<div id="top">
+  <div id="brand"></div>
+  <div id="towers"></div>
+  <div><button class="tb" id="bMute">🔊</button> <button class="tb" id="bNotes">📋 <span>Учителю</span></button></div>
+</div>
+<div id="notes"></div>
+<img id="brushCursor" alt="">
+
+<div id="stage">
+  <!-- 0. Старт -->
+  <section class="scr" id="s-start">
+    <div class="presents"><div id="brandBig"></div><small>presents</small></div>
+    <div class="hero bob" data-art="fairy"></div>
+    <div class="h1">The Tooth Castle<br>in the Sky</div>
+    <div class="sub">Splat Kids приглашает в Зубной замок в облаках ✨</div>
+    <button class="btn pulse" style="margin-top:22px" data-next>▶ Start</button>
+    <div class="pack l" data-art="toothpaste"></div><div class="pack r" data-art="toothbrush"></div>
+  </section>
+
+  <!-- 1. Полёт к замку -->
+  <section class="scr" id="s-fly">
+    <div class="h2">What is it?</div>
+    <div class="castle below" data-art="castle" data-lit="0"></div>
+    <div class="fairy"><div data-art="fairy" class="bob"></div><div class="bubble">Hello! 👋</div></div>
+  </section>
+
+  <!-- 2. Микробы -->
+  <section class="scr" id="s-germs">
+    <div class="h2">Oh no! Germs! 🦠</div>
+    <div class="castle" data-art="castle" data-lit="0"></div>
+  </section>
+
+  <!-- 3. Волшебная сумка: лексика -->
+  <section class="scr" id="s-bag">
+    <div class="h2">Magic bag! ✨</div>
+    <div class="bagwrap bob" data-art="bag"></div>
+    <div class="row" id="bagItems"></div>
+  </section>
+
+  <!-- 4. Послушай и найди -->
+  <section class="scr" id="s-listen">
+    <div class="h2" id="lsQ">Where is the toothbrush?</div>
+    <div style="margin:18px 0"><button class="speaker" id="lsPlay">🔊</button></div>
+    <div class="row" id="lsCards"></div>
+  </section>
+
+  <!-- 5. Почисти зубик -->
+  <section class="scr" id="s-brush">
+    <div class="h2">Brush, brush, brush! 🪥</div>
+    <div class="arena" id="arena"><div class="bigtooth" data-art="tooth" data-mood="sad"></div></div>
+    <div class="meter"><b id="meter"></b></div>
+  </section>
+
+  <!-- 6. Песенка-движение -->
+  <section class="scr" id="s-chant">
+    <div class="h2">Let's sing! 🎵</div>
+    <div class="mirror" style="margin-top:16px"><div class="sm" data-art="smile"></div><div class="tb2" id="chBrush" data-art="toothbrush"></div></div>
+    <div class="lyr" id="lyr">&nbsp;</div>
+    <button class="btn pink" id="chPlay" style="margin-top:8px">▶ Song</button>
+  </section>
+
+  <!-- 7. Собери сумку -->
+  <section class="scr" id="s-pack">
+    <div class="h2">What do we need? 🪥</div>
+    <div class="row" id="packCards" style="margin-top:20px"></div>
+    <div class="bagwrap" data-art="bag"></div>
+  </section>
+
+  <!-- 8. Финал -->
+  <section class="scr" id="s-final">
+    <div class="castle" data-art="castle" data-lit="5"></div>
+    <div class="h1" style="margin-top:-10px">Clean teeth! Shiny teeth!</div>
+    <button class="btn sun pulse" style="margin-top:16px" data-next>🏅 Big smile!</button>
+  </section>
+
+  <!-- 9. Сертификат и подарок родителям -->
+  <section class="scr" id="s-cert">
+    <div class="cert pop">
+      <div class="medal" data-art="star"></div>
+      <h3>Clean Teeth Hero</h3>
+      <input id="kid" placeholder="Имя героя" maxlength="24">
+      <div style="font-weight:800">побывал(а) в Зубном замке Splat Kids и выучил(а) слова<br>
+        <span style="font-family:var(--disp);color:var(--brand-d)">tooth · toothbrush · toothpaste · water · cup · smile</span></div>
+      <div class="gift">
+        <a class="btn" href="index.html" target="_blank">🎮 Тренажёр</a>
+        <a class="btn pink" href="print.html" target="_blank">🖨 Задания с мамой</a>
+      </div>
+      <div style="margin-top:12px;font-size:14px;font-weight:800;opacity:.75">Конкурс рисунков Splat Kids: нарисуй щётку или Зубную фею, подпиши английское слово — и пришли нам!</div>
+    </div>
+    <button class="btn pink" style="margin-top:16px" data-next>👋 Goodbye!</button>
+  </section>
+
+  <!-- 10. Пока -->
+  <section class="scr" id="s-bye">
+    <div class="hero bob" style="width:min(260px,34vw)" data-art="tooth" data-shine="1" data-crown="1"></div>
+    <div class="h1">Goodbye! 👋</div>
+    <div class="sub">Чисти зубки утром и вечером — и до встречи в Зубном замке!</div>
+  </section>
+</div>
+
+<div id="nav"><button class="arrow" id="prev">◀</button><button class="btn" id="next">Next ▶</button><button class="arrow" id="fwd">▶</button></div>
+<div id="pageno"></div>
+
+<script src="assets/art.js"></script>
+<script src="assets/common.js"></script>
+<script>
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const W = Object.fromEntries(ART.WORDS.map(x => [x.w, x]));
+function drawArt(root = document) {
+  $$('[data-art]', root).forEach(el => {
+    const d = el.dataset, o = {};
+    if (d.lit !== undefined) o.lit = +d.lit;
+    if (d.mood) o.mood = d.mood; if (d.shine) o.shine = 1; if (d.crown) o.crown = 1;
+    el.innerHTML = ART[d.art](o);
+  });
+}
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/* ---------- прогресс: пять башен замка ---------- */
+let lit = 0;
+const towersEl = $('#towers');
+towersEl.innerHTML = '<i></i>'.repeat(5);
+$$('#towers i').forEach(i => i.innerHTML = ART.star({ face: false }));
+function lightTower() {
+  if (lit >= 5) return;
+  lit++; $$('#towers i').forEach((t, k) => t.classList.toggle('lit', k < lit));
+  confetti(1600);
+}
+
+/* ---------- заметки учителя по сценам ---------- */
+const NOTES = {
+  'start': ['1 мин', 'Встреча', ['Поздоровайтесь: <q>Hello!</q> — машем рукой, дети повторяют.', 'Покажите на фею: «Сегодня летим в Зубной замок в облаках! Его охраняет Зубная фея, а помогает ей Splat Kids».', 'Нажмите <b>Start</b>.']],
+  'fly': ['2 мин', 'Летим к замку', ['Замок поднимается из облаков. Спросите <q>What is it?</q> — нажмите на замок, прозвучит <q>castle</q>. Повторяем хором 2–3 раза.', 'Появится фея: <q>Hello!</q> Дети здороваются с феей.', 'Обратите внимание: башни тёмные, замок грустный. «Что-то случилось!»']],
+  'germs': ['2 мин', 'Микробы', ['<q>Oh no! Germs!</q> Корчим страшные рожицы.', 'Дети по очереди нажимают на микробов (<q>germ!</q>) — те пропадают, но замок всё ещё грустный.', '«Чтобы зажечь башни, нам нужны волшебные вещи из сумки Splat Kids!»']],
+  'bag': ['4 мин', 'Лексика: волшебная сумка', ['Нажимайте на сумку — по одной вылетают <q>toothbrush, toothpaste, cup, water, tooth, smile</q>.', 'Каждое слово: прозвучало → хором → шёпотом → громко. Нажмите на карточку ещё раз, чтобы повторить звук.', 'Покажите жестом: toothbrush — «чистим» пальцем, cup — «пьём», smile — улыбаемся.', 'Когда все вещи достанутся — загорается первая башня.']],
+  'listen': ['3 мин', 'Послушай и найди', ['Звучит вопрос <q>Where is the toothbrush?</q> — ребёнок показывает/нажимает.', 'Хвалите: <q>Good job!</q> Ошибся — <q>Try again!</q>', 'На онлайн-уроке ребёнок называет цвет/место, а нажимает преподаватель.']],
+  'brush': ['3 мин', 'Почисти зубик', ['Возьмите щётку в правом нижнем углу и водите по микробам, пока зубик не заблестит.', 'Все вместе приговариваем <q>Up and down! Round and round!</q>', 'Онлайн: ребёнок говорит «up and down», вы чистите. Или дайте ребёнку управление экраном.']],
+  'chant': ['3 мин', 'Песенка-движение', ['Встаём! Берём «невидимую щётку» (или настоящую щётку Splat Kids).', 'Включите песенку: <q>Brush, brush, brush your teeth. Up and down… Round and round… Big, big smile!</q>', 'Показываем движения вместе со щёткой на экране. Второй раз — быстрее!']],
+  'pack': ['2 мин', 'Что нужно, чтобы чистить зубы?', ['Нажимаем на то, что нужно: toothbrush, toothpaste, cup, water. Конфета и мяч — <q>No!</q>', 'Каждый раз, когда вещь улетает в сумку, повторяем слово.']],
+  'final': ['1 мин', 'Замок сияет', ['Все пять башен горят, замок улыбается! <q>Clean teeth! Shiny teeth!</q>', 'Показываем самую большую улыбку: <q>Big smile!</q>']],
+  'cert': ['1 мин', 'Сертификат и подарок', ['Впишите имя ребёнка — это его сертификат «Clean Teeth Hero». Можно сделать скриншот и отправить родителям.', 'Расскажите родителям про подарок: тренажёр (играть ещё раз, 7-дневный челлендж) и задания для печати.', 'Объявите конкурс рисунков Splat Kids.']],
+  'bye': ['', 'Прощание', ['<q>Goodbye!</q> Машем рукой. Напомните: чистим зубки утром и вечером!']],
+};
+
+/* ---------- навигация ---------- */
+const order = $$('.scr').map(s => s.id.slice(2));
+let cur = -1;
+const enter = {}, leave = {};
+function go(i) {
+  if (i < 0 || i >= order.length) return;
+  if (cur >= 0 && leave[order[cur]]) leave[order[cur]]();
+  SND.stop();
+  $$('.scr').forEach(s => s.classList.remove('on'));
+  cur = i; const id = order[i];
+  $('#s-' + id).classList.add('on');
+  $('#pageno').textContent = `${i + 1} / ${order.length}`;
+  const n = NOTES[id];
+  $('#notes').innerHTML = n ? `<div class="t">${n[0]}</div><h4>${i + 1}. ${n[1]}</h4><ul>${n[2].map(x => `<li>${x}</li>`).join('')}</ul>` : '';
+  $('#nav').style.display = id === 'start' ? 'none' : 'flex';
+  $('#next').style.visibility = $('#fwd').style.visibility = i === order.length - 1 ? 'hidden' : '';
+  $('#next').classList.remove('pulse');
+  if (enter[id]) enter[id]();
+}
+const ready = () => $('#next').classList.add('pulse');
+$('#next').onclick = $('#fwd').onclick = () => go(cur + 1);
+$('#prev').onclick = () => go(cur - 1);
+document.addEventListener('click', e => { if (e.target.closest('[data-next]')) go(cur + 1); });
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key === 'ArrowRight') go(cur + 1); if (e.key === 'ArrowLeft') go(cur - 1);
+});
+$('#bNotes').onclick = () => $('#notes').classList.toggle('on');
+$('#bMute').onclick = () => $('#bMute').textContent = SND.toggle() ? '🔇' : '🔊';
+
+/* ---------- сцены ---------- */
+enter.fly = async () => {
+  const c = $('#s-fly .castle'), f = $('#s-fly .fairy');
+  c.classList.add('below'); f.classList.remove('on');
+  await sleep(80); c.classList.remove('below');
+  c.onclick = async () => {
+    SND.play('w_castle'); c.classList.add('shake'); setTimeout(() => c.classList.remove('shake'), 500);
+    if (f.classList.contains('on')) return;
+    await sleep(1400); f.classList.add('on', 'pop'); SND.play('p_hello'); ready();
+  };
+};
+enter.germs = () => {
+  const s = $('#s-germs'); $$('.g', s).forEach(g => g.remove());
+  const spots = [[10, 26], [82, 22], [8, 62], [84, 60], [26, 74], [68, 76], [90, 40]];
+  let left = spots.length;
+  spots.forEach(([x, y], k) => {
+    const g = document.createElement('div'); g.className = 'g bob';
+    g.style.cssText = `left:${x}%;top:${y}%;animation-delay:${-k * .4}s`;
+    g.innerHTML = ART.germ({ color: ['#8bd34a', '#b18bff', '#ff9f5a'][k % 3] });
+    g.onclick = () => { if (g.classList.contains('gone')) return; SND.play('w_germ'); g.classList.add('gone'); if (--left === 0) ready(); };
+    s.appendChild(g);
+  });
+  SND.play('w_germ');
+};
+enter.bag = () => {
+  const items = ['toothbrush', 'toothpaste', 'cup', 'water', 'tooth', 'smile'];
+  const row = $('#bagItems'); row.innerHTML = ''; let k = 0;
+  const bag = $('#s-bag .bagwrap');
+  bag.onclick = () => {
+    if (k >= items.length) return;
+    const w = W[items[k++]];
+    const c = document.createElement('div'); c.className = 'card pop';
+    c.innerHTML = `<div class="pic">${w.art()}</div><div class="w">${w.label}</div>`;
+    c.onclick = () => { SND.play('w_' + w.w); c.classList.add('shake'); setTimeout(() => c.classList.remove('shake'), 450); };
+    row.appendChild(c); SND.play('w_' + w.w);
+    bag.classList.add('shake'); setTimeout(() => bag.classList.remove('shake'), 450);
+    if (k === items.length) { setTimeout(() => { if (lit < 1) lightTower(); ready(); }, 1200); }
+  };
+};
+enter.listen = () => {
+  const pool = ['toothbrush', 'toothpaste', 'cup', 'water', 'tooth', 'smile'];
+  const rounds = [...pool].sort(() => Math.random() - .5);
+  let r = 0;
+  const ask = () => {
+    const target = rounds[r];
+    const opts = [target, ...pool.filter(x => x !== target).sort(() => Math.random() - .5).slice(0, 2)].sort(() => Math.random() - .5);
+    $('#lsQ').textContent = r === 0 ? 'Where is the toothbrush?' : 'Listen and find!';
+    const box = $('#lsCards'); box.innerHTML = '';
+    opts.forEach(o => {
+      const c = document.createElement('div'); c.className = 'card pop';
+      c.innerHTML = `<div class="pic">${W[o].art()}</div>`;
+      c.onclick = async () => {
+        if (o === target) {
+          c.classList.add('good'); await SND.play('p_goodjob'); r++;
+          if (r < rounds.length) ask(); else { $('#lsQ').textContent = 'Super! ⭐'; if (lit < 2) lightTower(); ready(); }
+        } else { c.classList.add('shake'); SND.play('p_tryagain'); setTimeout(() => c.classList.remove('shake'), 450); }
+      };
+      box.appendChild(c);
+    });
+    $('#lsPlay').onclick = () => SND.play(r === 0 ? 'p_where' : 'w_' + target);
+    setTimeout(() => $('#lsPlay').onclick(), 400);
+  };
+  ask();
+};
+let brushOff = null;
+enter.brush = () => {
+  const arena = $('#arena'), cursor = $('#brushCursor');
+  $$('.dirt,.tray', arena.parentNode).forEach(x => x.remove());
+  arena.querySelector('.bigtooth').innerHTML = ART.tooth({ mood: 'sad' });
+  const spots = [[22, 20], [60, 16], [40, 42], [16, 50], [66, 46], [44, 66]];
+  const dirt = spots.map(([x, y], k) => {
+    const d = document.createElement('div'); d.className = 'dirt';
+    d.style.left = x + '%'; d.style.top = y + '%';
+    d.innerHTML = ART.germ({ color: ['#8bd34a', '#b18bff', '#ff9f5a'][k % 3] });
+    arena.appendChild(d); return { el: d, hp: 22 };
+  });
+  const tray = document.createElement('div'); tray.className = 'tray bob';
+  tray.innerHTML = ART.toothbrush({ paste: true }); arena.parentNode.appendChild(tray);
+  const brushSrc = 'data:image/svg+xml;utf8,' + encodeURIComponent(ART.toothbrush({ paste: true }));
+  cursor.src = brushSrc;
+  let holding = false, total = dirt.length, done = 0, lastSay = 0;
+  const meter = $('#meter'); meter.style.width = '0';
+  const down = e => { if (e.target.closest('.tray') || e.target.closest('#arena')) { holding = true; tray.style.visibility = 'hidden'; move(e); } };
+  const move = e => {
+    if (!holding) return;
+    cursor.style.display = 'block'; cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
+    // кончик щётки — левый верхний угол картинки
+    const tx = e.clientX - 20, ty = e.clientY - 20;
+    for (const d of dirt) {
+      if (d.hp <= 0) continue;
+      const b = d.el.getBoundingClientRect();
+      if (tx > b.left - 20 && tx < b.right + 20 && ty > b.top - 20 && ty < b.bottom + 20) {
+        d.hp--; d.el.style.transform = `rotate(${(Math.random() - .5) * 30}deg) scale(${.6 + d.hp / 55})`;
+        if (d.hp <= 0) {
+          d.el.classList.add('gone'); done++; meter.style.width = (done / total * 100) + '%';
+          if (done === total) {
+            arena.querySelector('.bigtooth').innerHTML = ART.tooth({ shine: true });
+            SND.play('p_clean'); if (lit < 3) lightTower(); ready();
+          }
+        }
+        const now = Date.now();
+        if (now - lastSay > 4000 && done < total) { lastSay = now; SND.play(Math.random() < .5 ? 'p_updown' : 'p_roundround'); }
+      }
+    }
+  };
+  const up = () => { holding = false; cursor.style.display = 'none'; tray.style.visibility = ''; };
+  addEventListener('pointerdown', down); addEventListener('pointermove', move); addEventListener('pointerup', up);
+  brushOff = () => { removeEventListener('pointerdown', down); removeEventListener('pointermove', move); removeEventListener('pointerup', up); up(); };
+};
+leave.brush = () => brushOff && brushOff();
+let chantTimers = [];
+enter.chant = () => {
+  const b = $('#chBrush'), lyr = $('#lyr');
+  const LINES = [[0, 'Brush, brush, brush your teeth', 'updown'], [3.0, 'Up and down, up and down', 'updown'], [6.2, 'Brush, brush, brush your teeth', 'round'],
+    [9.2, 'Round and round, round and round', 'round'], [12.6, 'Brush, brush, brush your teeth', 'updown'], [15.6, 'Big, big smile! 😁', '']];
+  $('#chPlay').onclick = () => {
+    chantTimers.forEach(clearTimeout); chantTimers = [];
+    SND.play('chant').then(() => { b.className = 'tb2'; if (lit < 4) lightTower(); ready(); });
+    LINES.forEach(([t, txt, cls]) => chantTimers.push(setTimeout(() => { lyr.textContent = txt; b.className = 'tb2 ' + cls; }, t * 1000)));
+  };
+};
+leave.chant = () => { chantTimers.forEach(clearTimeout); $('#chBrush').className = 'tb2'; $('#lyr').innerHTML = '&nbsp;'; };
+enter.pack = () => {
+  const items = [['toothbrush', 1], ['candy', 0], ['toothpaste', 1], ['ball', 0], ['cup', 1], ['water', 1]];
+  const box = $('#packCards'); box.innerHTML = ''; let need = items.filter(x => x[1]).length;
+  items.forEach(([k, ok]) => {
+    const c = document.createElement('div'); c.className = 'card pop';
+    c.innerHTML = `<div class="pic">${W[k] ? W[k].art() : ART[k]()}</div>`;
+    c.onclick = () => {
+      if (ok) { if (c.classList.contains('in')) return; SND.play('w_' + k); c.classList.add('in'); if (--need === 0) { setTimeout(() => SND.play('p_wow'), 900); if (lit < 5) lightTower(); ready(); } }
+      else { c.classList.add('shake'); SND.play('p_tryagain'); setTimeout(() => c.classList.remove('shake'), 450); }
+    };
+    box.appendChild(c);
+  });
+};
+enter.final = () => { while (lit < 5) lightTower(); confetti(4000); SND.play('p_clean'); };
+enter.cert = () => { SND.play('p_bigsmile'); };
+enter.bye = () => { SND.play('p_bye'); confetti(2500); };
+
+/* ---------- запуск ---------- */
+$('#brand').innerHTML = brandHTML();
+$('#brandBig').innerHTML = brandHTML().replace(/<span class="x">.*?<\/span><span class="ws">.*?<\/span>/, '');
+mountClouds(7);
+drawArt();
+go(0);
+</script>
+</body>
+</html>
