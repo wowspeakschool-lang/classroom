@@ -438,8 +438,8 @@ S[13] = gateSlide(['tooth', 'toothbrush']);
 
 // 14. Рыбалка: тень плавает, «Stop!» — когда тень под крючком
 S[14] = { bg: 'ice_fishing', go(n, c) {
-  const HX = 52, HY = 79;
-  sph('pb_fishing', 24, 56, 46);                       // крупный пингвинёнок с большой удочкой
+  const HX = 61, HY = 72;
+  sph('pb_fishing', 24, 58, 46);                       // крупный пингвинёнок с большой удочкой
   const line = el('div'); line.style.cssText = `position:absolute;left:${HX}%;top:34%;width:3px;height:${HY - 34}%;background:rgba(60,60,70,.75);transform-origin:top`;
   const hook = el('div'); hook.style.cssText = `position:absolute;left:${HX}%;top:${HY}%;width:1.4%;height:2.6%;border:3px solid #555;border-top:none;border-radius:0 0 50% 50%;transform:translate(-50%,-50%)`;
   const shadow = el('img'); shadow.src = U('fish');
@@ -525,11 +525,11 @@ S[18] = gateSlide(['tooth', 'toothbrush', 'toothpaste']);
 // 19. Горка: ребёнок дует — снег сразу разлетается вправо, под ним стаканчик
 S[19] = { bg: 'ice_hill', go(n, c) {
   sidePeng('stand', n);
-  const cup = sph('cup', 54, 50, 17); cup.style.opacity = 0;
-  const pile = sp('mound2', 54, 53, 20, 'click');
+  const cup = sph('cup', 51, 45, 17); cup.style.opacity = 0;
+  const pile = sp('mound2', 51, 45, 20, 'click');
   const blow = () => {
     if (pile.dataset.gone) return; pile.dataset.gone = 1;
-    snowBurst(54, 50, 1, 40);
+    snowBurst(51, 42, 1, 40);
     pile.style.transition = 'all .9s ease-out'; pile.style.opacity = 0; pile.style.transform = 'translate(-30%,-50%) scale(.5,.3)';
     later(() => { cup.style.transition = 'opacity .5s'; cup.style.opacity = 1; cup.classList.add('pop'); sfx.ok(); }, 500);
     later(() => c.done(), 1600);
