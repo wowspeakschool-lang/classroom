@@ -850,16 +850,19 @@ function renderPlan() {
 .sec{font-weight:900;font-size:12px;color:#e2559a;text-transform:uppercase;letter-spacing:.06em}h2{margin:2px 0 10px;color:#1f9e8b}
 dt{font-weight:900;color:#2f8ee0;margin-top:12px;font-size:13px}dd{margin:4px 0 0;font-size:16px}
 button{font:inherit;font-weight:800;border:none;border-radius:999px;padding:8px 14px;background:#ffe27a;cursor:pointer;margin:14px 6px 0 0}
+button.dl{background:#33c7b0;color:#fff;margin:0 6px 14px 0}#pr{margin:0 0 14px 0}
 table{border-collapse:collapse;width:100%;margin-top:14px;font-size:13px}td,th{border:1px solid #e5dfe9;padding:6px;vertical-align:top;text-align:left}tr.cur{background:#fff3c4}</style>
+<button id="dl" class="dl">⬇ Скачать план урока (Word)</button><button id="pr">🖨 Печать / PDF</button>
 <div class="sec">${p.sec}</div><h2>Слайд ${cur} / ${TOTAL}</h2>
 <dl><dt>Что нужно сделать</dt><dd>${p.todo}</dd><dt>Teacher's language</dt><dd>${p.say}</dd><dt>Suggested answers</dt><dd>${p.ans}</dd></dl>
-<button id="pp">◀ Слайд</button><button id="nn">Дальше ▶</button><button id="aa">${planAll ? 'Скрыть весь план' : 'Весь план урока'}</button><br><button id="dl">⬇ Скачать план (Word)</button><button id="pr">🖨 Печать / PDF</button>
+<button id="pp">◀ Слайд</button><button id="nn">Дальше ▶</button><button id="aa">${planAll ? 'Скрыть весь план' : 'Весь план урока'}</button>
 ${planAll ? '<table><tr><th>№</th><th>Что сделать</th><th>Teacher\'s language</th><th>Answers</th></tr>' + PLAN.map(r => `<tr class="${r.n === cur ? 'cur' : ''}"><td>${r.n}</td><td>${r.todo}</td><td>${r.say}</td><td>${r.ans}</td></tr>`).join('') + '</table>' : ''}`);
   d.close();
   d.getElementById('pp').onclick = () => go(cur - 1);
   d.getElementById('nn').onclick = forward;
   d.getElementById('aa').onclick = () => { planAll = !planAll; renderPlan(); };
-  d.getElementById('dl').onclick = downloadPlan;
+  // скачиваем из окна урока: так браузер надёжно сохраняет файл (в отдельном окне у локального файла бывают сбои)
+  d.getElementById('dl').onclick = () => { const w = planWin; planWin = null; downloadPlan(); planWin = w; };
   d.getElementById('pr').onclick = printPlan;
 }
 
