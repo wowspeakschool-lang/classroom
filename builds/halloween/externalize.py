@@ -74,7 +74,7 @@ def run(src, grp, dst):
 if __name__=='__main__':
     L=os.path.join(REPO,'lessons/halloween')
     for src,grp,name in [('halloween_lesson_4-6.html','4-6','4-6.html'),
-        ('halloween_lesson_7-9_beginners.html','7-9','7-9_beginners.html'),('halloween_lesson_7-9_continuing.html','7-9','7-9_continuing.html'),
-        ('halloween_lesson_10-12_beginners.html','10-12','10-12_beginners.html'),('halloween_lesson_10-12_continuing.html','10-12','10-12_continuing.html'),
-        ('halloween_lesson_13plus_beginners.html','13','13plus_beginners.html'),('halloween_lesson_13plus_continuing.html','13','13plus_continuing.html')]:
+        ('halloween_lesson_7-9_beginners.html','7-9','7-9_beginners.html'),('halloween_lesson_7-9_advanced.html','7-9','7-9_advanced.html'),
+        ('halloween_lesson_10-12_beginners.html','10-12','10-12_beginners.html'),('halloween_lesson_10-12_advanced.html','10-12','10-12_advanced.html'),
+        ('halloween_lesson_13plus_beginners.html','13','13plus_beginners.html'),('halloween_lesson_13plus_advanced.html','13','13plus_advanced.html')]:
         run(src,grp,os.path.join(L,name))

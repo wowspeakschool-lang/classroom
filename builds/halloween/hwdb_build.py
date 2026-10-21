@@ -100,15 +100,8 @@ TR13 = {'13/w_pumpkin': 'тыква', '13/w_turnip': 'репа', '13/w_bonfire':
 HW = []
 
 
-# Фон страницы домашки (решение Анны 21.10.2026): ночь с тыквами из урока
-# своего возраста для 4–6 и 7–9, улица с фонарями для 10–12 и 13+.
-# Платформа берёт его из `page_bg` в payload первого блока.
-PAGE_BG = {10: '4-6/bg_night.webp', 11: '7-9/bg7_night.webp', 12: '7-9/bg7_night.webp'}
-
-
 def hw(title, summary, order, blocks):
     les = Lesson(title, summary, order, kind='homework', threshold=60)
-    blocks[0][1]['page_bg'] = 'https://classroom.wowteach.ru/media/halloween/' + PAGE_BG.get(order, 'hw_bg_street.webp')
     for t, p, c in blocks:
         les.add(t, p, c)
     HW.append(les)
@@ -130,7 +123,7 @@ hw('Halloween Homework · 7–9 · beginners', 'Хэллоуин: ghost, bat, sp
     ('speaking', speak('🎤 Что ты видишь?', '<p>Нажми на запись и назови всё, что видишь на картинке.</p><p><i>I can see a ghost, a bat…</i></p>', '7-9/hw_scene_b'), ''),
 ])
 ROOMQ = lambda s, opts, a, img=None: dict({'q': s, 'type': 'single', 'correct': [a], 'options': [{'text': o} for o in opts]}, **({'image': U(img)} if img else {}))
-hw('Halloween Homework · 7–9 · continuing', 'Хэллоуин: 8 слов, there is / there are, in / on / under', 12, [
+hw('Halloween Homework · 7–9 · advanced', 'Хэллоуин: 8 слов, there is / there are, in / on / under', 12, [
     ('flashcards', cards(W7C), ''),
     ('match', match(W7C), ''),
     ('exact_input', unscramble(W7C, 700), ''),
@@ -170,7 +163,7 @@ GOLD = ('Last night someone stole the Golden Pumpkin! The detectives found a bro
         'A witness saw a long red __scarf__ in the park. Next to the old tower there were footprints of somebody in big __boots__. '
         'Somebody ate all the __lollipops__ at the cafe. Is the thief the __vampire__ in the black cape? Or the hairy __werewolf__? '
         'The __mummy__ has got an alibi: a cinema __ticket__ for nine o\'clock.')
-hw('Halloween Homework · 10–12 · continuing', 'Хэллоуин: 6 монстров + улики (watch, scarf, glasses, boots, lollipop, ticket)', 14, [
+hw('Halloween Homework · 10–12 · advanced', 'Хэллоуин: 6 монстров + улики (watch, scarf, glasses, boots, lollipop, ticket)', 14, [
     ('flashcards', cards(WM + WC), ''),
     ('match', match(WM), ''),
     ('match', match(WC), ''),
@@ -198,7 +191,7 @@ SAM = ('Long ago in Ireland, people celebrated Samhain at the end of the __harve
        'They believed that __ghosts__ could walk on Earth that night, so they wore __costumes__ and masks. '
        'Children carved a scary face into a __turnip__, put a __candle__ inside and made a __lantern__. '
        'Later, in America, people used a __pumpkin__ instead.')
-hw('Halloween Homework · 13+ · continuing', 'Хэллоуин: 8 слов с переводом, текст о Самайне', 16, [
+hw('Halloween Homework · 13+ · advanced', 'Хэллоуин: 8 слов с переводом, текст о Самайне', 16, [
     ('flashcards', cards(W13C, 'Новые слова: слово, перевод, звук', TR13), ''),
     ('match', {'title': 'Соедини слово и определение', 'pairs': [{'left': w, 'right': d, 'left_audio_tts': w} for w, d in DEF]}, ''),
     ('exact_input', unscramble(W13C, 1350), ''),
@@ -255,9 +248,9 @@ def plan(title, summary, order, file, src, hwtitle):
 S = '/tmp/claude-0/-home-user-classroom/804eac6d-911f-5112-b4f5-c1e3887b7b56/scratchpad/'
 plan('Halloween · 4–6', 'Урок-игра для 4–6 лет', 0, '4-6.html', S + 'halloween_lesson_4-6.html', 'Halloween Homework · 4–6')
 for i, (age, f, src, lvl) in enumerate([
-        ('7–9', '7-9_beginners.html', 'halloween_lesson_7-9_beginners.html', 'beginners'), ('7–9', '7-9_continuing.html', 'halloween_lesson_7-9_continuing.html', 'continuing'),
-        ('10–12', '10-12_beginners.html', 'halloween_lesson_10-12_beginners.html', 'beginners'), ('10–12', '10-12_continuing.html', 'halloween_lesson_10-12_continuing.html', 'continuing'),
-        ('13+', '13plus_beginners.html', 'halloween_lesson_13plus_beginners.html', 'beginners'), ('13+', '13plus_continuing.html', 'halloween_lesson_13plus_continuing.html', 'continuing')]):
+        ('7–9', '7-9_beginners.html', 'halloween_lesson_7-9_beginners.html', 'beginners'), ('7–9', '7-9_advanced.html', 'halloween_lesson_7-9_advanced.html', 'advanced'),
+        ('10–12', '10-12_beginners.html', 'halloween_lesson_10-12_beginners.html', 'beginners'), ('10–12', '10-12_advanced.html', 'halloween_lesson_10-12_advanced.html', 'advanced'),
+        ('13+', '13plus_beginners.html', 'halloween_lesson_13plus_beginners.html', 'beginners'), ('13+', '13plus_advanced.html', 'halloween_lesson_13plus_advanced.html', 'advanced')]):
     plan(f'Halloween · {age} · {lvl}', f'Урок-игра для {age} лет, {"начинающие" if lvl == "beginners" else "продолжающие"}', i + 1, f, S + src,
          f'Halloween Homework · {age} · {lvl}')
 
