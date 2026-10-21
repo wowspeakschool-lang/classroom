@@ -37,13 +37,11 @@ boat, tree house, yurt**. Сверено по планам всего юнита
 
 То есть на уроке ребёнок видит слайды 4–6, смотрит видео с SB p. 78 и слушает
 запись «SM1 Unit 6 Lesson 6 Where do these children live_.mp3» — и всё это про
-house / flat / houseboat / tree house. Домой он получает ДЗ 6, где:
-
-* блок 2 — карточка `card_types_of_homes.webp`: cave house, house boat, tree house, yurt;
-* блок 5 (match) — те же четыре: `home_tree`, `home_boat`, `home_yurt`, `home_cave`;
-* блок 6 (quiz) — описание **cave house**;
-* блок 7 (gaps) — четыре пропуска: house boat, tree house, yurt, cave house;
-* блок 8 (speaking) — «выбери один из домиков, которые мы сегодня выучили», картинка `homes_four.webp`.
+house / flat / houseboat / tree house. Домой он получает ДЗ 6, где набор
+конспекта стоит в пяти блоках: карточка `card_types_of_homes.webp` (блок 2),
+match из четырёх картинок `home_tree/boat/yurt/cave` (5), описание cave house (6),
+четыре пропуска house boat · tree house · yurt · cave house (7) и speaking
+«выбери один из домиков, которые мы сегодня выучили» (8).
 
 Пересечение плана и домашки — **одно слово, tree house** (и то `houseboat`
 против `house boat` написано по-разному). `cave house` и `yurt` на уроке не
@@ -119,10 +117,10 @@ house boat, tree house, yurt. Это правка в планах, то есть
 Предлагаю: добавить в ДЗ 7 один `order` после блока 8 (там уже серия сборки
 предложений) и один вопрос в блок 5:
 
-> **order** · Заголовок: «Составь вопрос.»
-> `words`: `["How", "many", "bedrooms", "are", "there", "in", "the house?"]`
+> **order** · «Составь вопрос.» ·
+> `words`: `["How", "many", "bedrooms", "are", "there", "in", "the house?"]` ·
 > `sentence`: `How many bedrooms are there in the house?`
-
+>
 > **в блок 5, седьмым вопросом:** «How many rooms are there? — ___»
 > варианты: «There are five rooms.» (верный) · «There is five rooms.» ·
 > «There are five room.» · «How many rooms?»
@@ -182,27 +180,21 @@ there are / there isn't / there aren't. Напиши 5–7 предложени�
 
 Предлагаю заменить блок 16 на задание урока, с рамкой и объёмом из плана:
 
-> **Заголовок:** Моя комната мечты ✏️
-> **Текст:** «Придумай свою комнату мечты и напиши про неё 3–4 предложения.
-> Можно писать по образцу:
-> *This is my dream kitchen. There's a big table. There are six chairs.
-> There's a cat on the table!*
-> Начни так: This is my dream … There's a … There are …»
+> **Заголовок:** Моя комната мечты ✏️ · **Текст:** «Придумай свою комнату мечты
+> и напиши про неё 3–4 предложения. Можно писать по образцу: *This is my dream
+> kitchen. There's a big table. There are six chairs. There's a cat on the
+> table!* Начни так: This is my dream … There's a … There are …» ·
 > **needs_review:** true
 
-Второе: этап Reading урока 5 в домашку не попал вовсе.
+Второе: этап Reading урока 5 («Read descriptions 1–4 and match each to the
+correct picture. “In this room, there's a big bed and two lamps. There are books
+on the table.”») в домашку не попал вовсе: блок 6 — `truefalse` по одной
+картинке, блок 15 — чтение вслух готового текста. Картинки под задание уже лежат
+в юните, предлагаю `match` картинка ↔ описание, четыре пары:
 
-> Reading … Read descriptions 1–4 and matches each to the correct picture.
-> «In this room, there's a big bed and two lamps. There are books on the table.»
-
-В ДЗ 5 чтения-сопоставления нет: блок 6 — `truefalse` по одной картинке,
-блок 15 — чтение вслух готового текста. А картинки под задание уже лежат в юните
-(`hw5_bedroom.webp`, `hw5_kitchen.webp`, `hw5_living_room.webp`,
-`hw5_house_attic.webp`). Предлагаю `match` картинка ↔ описание, четыре пары:
-
-> «There's a big bed. There are two pillows.» → `hw5_bedroom.webp`
-> «There's a table. There are four chairs.» → `hw5_kitchen.webp`
-> «There's a sofa. There are two lamps.» → `hw5_living_room.webp`
+> «There's a big bed. There are two pillows.» → `hw5_bedroom.webp` ·
+> «There's a table. There are four chairs.» → `hw5_kitchen.webp` ·
+> «There's a sofa. There are two lamps.» → `hw5_living_room.webp` ·
 > «There are four rooms. There isn't a cellar.» → `hw5_house_attic.webp`
 
 Ставить перед блоком 6 — это узнавание глазами, оно легче `truefalse`.
@@ -225,11 +217,10 @@ there are / there isn't / there aren't. Напиши 5–7 предложени�
 Предлагаю добавить после блока 10 короткий `quiz` на два вопроса по картинкам
 истории — он же заодно доберёт домашку по объёму:
 
-> **Заголовок:** «Посмотри на историю ещё раз и ответь.»
+> **Заголовок:** «Посмотри на историю ещё раз и ответь.» ·
 > 1. «Кто из ребят не испугался и вошёл в дом?» — Misty (верно) · Flash ·
->    Thunder · Whisper
-> 2. «Who is brave?» — «Misty is brave.» (верно) · «Flash is brave.» ·
->    «Nobody is brave.»
+> Thunder · Whisper · 2. «Who is brave?» — «Misty is brave.» (верно) ·
+> «Flash is brave.» · «Nobody is brave.»
 
 Сам разговор «а ты чего боишься?» в домашку не переносим — это работа на уроке;
 но слово `brave` в домашке должно прозвучать хотя бы раз.
@@ -255,10 +246,9 @@ there are / there isn't / there aren't. Напиши 5–7 предложени�
   урок 7 — «Simon says… Circle the **GARDEN**!». Претензию к `garden` можно
   снять (карточкой оно всё равно не вводится); `garage` и `toilet` в планах не
   встречаются — к ним находка остаётся.
-* **Домашние задания по форме** (устно / письменно / чтение) плану соответствуют
-  везде, кроме ДЗ 4: там план задаёт «перечитай историю с аудио», а в домашке
-  читать вслух нечего. Блок `speaking` для ДЗ 4 первый проход уже предложил —
-  он же закрывает и это требование плана.
+* **Форма домашки** (устно / письменно / чтение) плану соответствует везде, кроме
+  ДЗ 4: план задаёт «перечитай историю с аудио», а читать вслух в домашке нечего.
+  Предложенный первым проходом `speaking` закрывает и это требование плана.
 
 ---
 
@@ -269,15 +259,13 @@ there are / there isn't / there aren't. Напиши 5–7 предложени�
 домашка отрабатывает вообще другую конструкцию, в юните нет.
 
 Главное, что требует решения, — **типы домов (раздел 1)**: домашка 6 собрана по
-конспекту, как и решила Анна, а план урока 6 учит house и flat, которых в
-домашке нет, и не называет ни cave house, ни yurt. Правка нужна в плане, не в
-домашке, и сделать её может только Анна.
+конспекту, как и решила Анна, а план урока 6 учит house и flat, которых в домашке
+нет, и не называет ни cave house, ни yurt. Правка нужна в плане, не в домашке, и
+сделать её может только Анна.
 
 Остальное — четыре места, где урок дал больше, чем домашка закрепила:
-вопросительная форма в ДЗ 3 (ученик только отвечает), `How many` в ДЗ 7 (тест
-его спрашивает, повторение — нет), «комната мечты» и чтение описаний в ДЗ 5,
-ценность «быть смелым» в ДЗ 4. Для каждого выше дан готовый блок — все собраны
-из материала самих уроков и из картинок, которые уже лежат в `media/sm1/u6`.
-
-Слабее, на выбор методиста: рамка «in the [room]» в ДЗ 2 (сейчас треть домашки
-на конструкции без комнаты) и единая форма `There's` вместо `There is`.
+вопросительная форма в ДЗ 3 (ученик только отвечает), `How many` в ДЗ 7 (тест его
+спрашивает, повторение — нет), «комната мечты» и чтение описаний в ДЗ 5, ценность
+«быть смелым» в ДЗ 4. Для каждого выше дан готовый блок — всё из материала самих
+уроков и из картинок, которые уже лежат в `media/sm1/u6`. Слабее, на выбор
+методиста: рамка «in the [room]» в ДЗ 2 и единая форма `There's` вместо `There is`.
