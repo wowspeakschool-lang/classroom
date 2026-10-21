@@ -9,17 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
 /* Урок «Пингвинёнок идёт домой». Сцена 16:9 вписывается в окно; координаты спрайтов — в % сцены,
-   размеры шрифтов — от ширины сцены (--u = 1% ширины), чтобы при демонстрации экрана в Zoom всё масштабировалось. */
+   размеры — от ширины сцены (--u = 1% ширины), чтобы при демонстрации экрана в Zoom всё масштабировалось. */
 :root{--pink:#ff7eb6;--pink-d:#e2559a;--sky:#5bb8ff;--sky-d:#2f8ee0;--mint:#33c7b0;--mint-d:#1f9e8b;--sun:#ffd23f;--red:#e3262f;
   --ink:#3b2d5c;--paper:#fffdf8;--disp:'Fredoka','Nunito',sans-serif;--text:'Nunito','Segoe UI',sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:#1d2a4a;overflow:hidden}
 body{font-family:var(--text);color:var(--ink);user-select:none;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center}
 #stage{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);overflow:hidden;background:#cfe8f7;--u:calc(min(100vw,177.78vh)/100)}
-.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .7s ease}
 .sp{position:absolute;transform:translate(-50%,-50%);height:auto;pointer-events:none}
 .sp.click{pointer-events:auto;cursor:pointer}
-.layer{position:absolute;inset:0}
+.layer{position:absolute;inset:0;transition:opacity .5s ease}
+.layer.fade{opacity:0}
 
 /* верхняя панель */
 #top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:calc(var(--u)*1) calc(var(--u)*1.4);pointer-events:none}
@@ -30,92 +31,90 @@ body{font-family:var(--text);color:var(--ink);user-select:none;-webkit-tap-highl
 .logo .sk i{display:block;font-style:normal;font-size:calc(var(--u)*.75);letter-spacing:.3em}
 .logo .x{color:#fff;font-size:calc(var(--u)*1.3);text-shadow:0 1px 3px rgba(0,0,0,.3)}
 .logo .ws{background:#fff;border-radius:calc(var(--u)*.6);padding:calc(var(--u)*.4) calc(var(--u)*.8);font-size:calc(var(--u)*1.1)}
-#germbar{display:flex;gap:calc(var(--u)*.4);background:rgba(255,255,255,.75);border-radius:999px;padding:calc(var(--u)*.3) calc(var(--u)*1)}
-#germbar img{width:calc(var(--u)*3);transition:.5s}
-#germbar img.off{filter:grayscale(1);opacity:.25;transform:scale(.7)}
+#germbar{display:flex;align-items:center;gap:calc(var(--u)*.5);background:rgba(255,255,255,.8);border-radius:999px;padding:calc(var(--u)*.35) calc(var(--u)*1.2);transition:opacity .5s}
+#germbar img{height:calc(var(--u)*3.2);width:auto;flex:0 0 auto;transition:.5s}
+#germbar img.boss{height:calc(var(--u)*4)}
+#germbar img.off{filter:grayscale(1);opacity:.25;transform:scale(.75)}
 .tb{border:none;background:#fff;border-radius:999px;font-family:var(--disp);font-weight:600;font-size:calc(var(--u)*1.1);padding:calc(var(--u)*.5) calc(var(--u)*1);cursor:pointer;color:var(--ink);box-shadow:0 2px 0 rgba(0,0,0,.12)}
 
-/* низ: навигация и номер слайда */
-#nav{position:absolute;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*1);padding:calc(var(--u)*.8)}
-.arrow{width:calc(var(--u)*3.6);height:calc(var(--u)*3.6);border-radius:50%;border:none;background:rgba(255,255,255,.85);font-size:calc(var(--u)*1.5);cursor:pointer;color:var(--ink);box-shadow:0 3px 0 rgba(0,0,0,.12)}
+/* низ: навигация для учителя и номер слайда */
+#nav{position:absolute;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*1);padding:calc(var(--u)*.8);opacity:.55;transition:opacity .3s}
+#nav:hover{opacity:1}
+.arrow{width:calc(var(--u)*3.4);height:calc(var(--u)*3.4);border-radius:50%;border:none;background:rgba(255,255,255,.9);font-size:calc(var(--u)*1.4);cursor:pointer;color:var(--ink);box-shadow:0 3px 0 rgba(0,0,0,.12)}
+.arrow.ready{opacity:1;background:var(--sun);animation:breath 1.2s ease-in-out infinite}
 #pageno{position:absolute;right:calc(var(--u)*1.4);bottom:calc(var(--u)*1.2);z-index:30;background:rgba(255,255,255,.85);border-radius:999px;padding:calc(var(--u)*.3) calc(var(--u)*.9);font-family:var(--disp);font-weight:600;font-size:calc(var(--u)*1.1)}
 
 /* общие элементы */
-.title{position:absolute;left:50%;top:14%;transform:translateX(-50%);z-index:5;font-family:var(--disp);font-weight:700;font-size:calc(var(--u)*3);color:var(--ink);background:rgba(255,255,255,.85);padding:calc(var(--u)*.5) calc(var(--u)*2);border-radius:999px;white-space:nowrap;box-shadow:0 4px 0 rgba(59,45,92,.08)}
-.wordcard{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);z-index:6;background:#fff;border-radius:calc(var(--u)*2.4);padding:calc(var(--u)*1.4);display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*.6);box-shadow:0 calc(var(--u)*1) calc(var(--u)*3) rgba(59,45,92,.25)}
-.wordcard img{height:calc(var(--u)*22);width:auto;max-width:calc(var(--u)*30);object-fit:contain}
+.title{position:absolute;left:50%;top:14%;transform:translateX(-50%);z-index:5;font-family:var(--disp);font-weight:700;font-size:calc(var(--u)*3);color:var(--ink);background:rgba(255,255,255,.88);padding:calc(var(--u)*.5) calc(var(--u)*2);border-radius:999px;white-space:nowrap;box-shadow:0 4px 0 rgba(59,45,92,.08)}
+.wordcard{position:absolute;left:50%;top:53%;transform:translate(-50%,-50%);z-index:6;background:#fff;border-radius:calc(var(--u)*2.4);padding:calc(var(--u)*1.4) calc(var(--u)*2);display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*.6);box-shadow:0 calc(var(--u)*1) calc(var(--u)*3) rgba(59,45,92,.25)}
+.wordcard img{height:calc(var(--u)*20);width:auto;max-width:calc(var(--u)*28);object-fit:contain}
 .wordcard .w{font-family:var(--disp);font-weight:700;font-size:calc(var(--u)*3.6)}
 .say{border:none;background:var(--pink);color:#fff;border-radius:50%;width:calc(var(--u)*4.4);height:calc(var(--u)*4.4);font-size:calc(var(--u)*2);cursor:pointer;box-shadow:0 calc(var(--u)*.3) 0 var(--pink-d)}
 .say:active{transform:translateY(2px);box-shadow:none}
-.card{position:absolute;transform:translate(-50%,-50%);background:#fff;border-radius:calc(var(--u)*1.8);padding:calc(var(--u)*1);cursor:pointer;box-shadow:0 calc(var(--u)*.6) calc(var(--u)*1.6) rgba(59,45,92,.2);display:flex;flex-direction:column;align-items:center;transition:transform .2s}
-.card img{height:calc(var(--u)*14);width:calc(var(--u)*14);object-fit:contain}
+.card{position:absolute;transform:translate(-50%,-50%);background:#fff;border-radius:calc(var(--u)*1.8);padding:calc(var(--u)*1);cursor:pointer;box-shadow:0 calc(var(--u)*.6) calc(var(--u)*1.6) rgba(59,45,92,.2);display:flex;flex-direction:column;align-items:center;transition:transform .2s,opacity .4s}
+.card img{height:calc(var(--u)*13);width:calc(var(--u)*13);object-fit:contain}
 .card.good{outline:calc(var(--u)*.5) solid var(--mint)}
 .card.bad{outline:calc(var(--u)*.5) solid var(--pink)}
+.chip{position:absolute;transform:translate(-50%,-50%);width:calc(var(--u)*7.2);height:calc(var(--u)*7.2);border-radius:50%;background:rgba(255,255,255,.95);box-shadow:0 calc(var(--u)*.4) calc(var(--u)*1) rgba(59,45,92,.25);border:calc(var(--u)*.35) solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:7}
+.chip img{width:78%;height:78%;object-fit:contain}
+.chip.used{opacity:0;transition:all .7s ease-in}
 .btn{position:absolute;transform:translate(-50%,-50%);border:none;border-radius:999px;font-family:var(--disp);font-weight:700;font-size:calc(var(--u)*2);padding:calc(var(--u)*.8) calc(var(--u)*2.2);cursor:pointer;color:#fff;background:linear-gradient(180deg,#5fe0cb,var(--mint-d));box-shadow:0 calc(var(--u)*.4) 0 #167a6b;z-index:8}
 .btn.pink{background:linear-gradient(180deg,#ff9fca,var(--pink-d));box-shadow:0 calc(var(--u)*.4) 0 #b83c79}
 .btn.sun{background:linear-gradient(180deg,#ffe27a,#f2a81d);color:var(--ink);box-shadow:0 calc(var(--u)*.4) 0 #c98410}
 .btn:active{transform:translate(-50%,calc(-50% + 3px));box-shadow:none}
-.num{position:absolute;transform:translate(-50%,-50%);font-family:var(--disp);font-weight:700;font-size:calc(var(--u)*3.2);color:#fff;background:var(--sky-d);width:calc(var(--u)*4.6);height:calc(var(--u)*4.6);border-radius:50%;display:flex;align-items:center;justify-content:center;border:calc(var(--u)*.35) solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.2);pointer-events:none}
+.num{position:absolute;transform:translate(-50%,-50%);font-family:var(--disp);font-weight:700;font-size:calc(var(--u)*3.2);color:#fff;background:var(--sky-d);width:calc(var(--u)*4.6);height:calc(var(--u)*4.6);border-radius:50%;display:flex;align-items:center;justify-content:center;border:calc(var(--u)*.35) solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.2);pointer-events:none;transition:.4s}
+.num.dim{background:#9bb9d8}
 .mark{position:absolute;transform:translate(-50%,-50%);font-size:calc(var(--u)*5);pointer-events:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
-.glint{position:absolute;transform:translate(-50%,-50%);width:calc(var(--u)*6);height:calc(var(--u)*6);border-radius:50%;background:radial-gradient(circle,#fff 0,#fff6c0 25%,rgba(255,230,120,0) 70%);animation:twinkle 1.2s ease-in-out infinite;pointer-events:none}
+.glow{filter:drop-shadow(0 0 calc(var(--u)*1.2) #fff3a8) drop-shadow(0 0 calc(var(--u)*2.4) #ffe27a);animation:glow 1.6s ease-in-out infinite}
+.flake{position:absolute;border-radius:50%;background:#fff;pointer-events:none;box-shadow:0 0 4px rgba(255,255,255,.9)}
 
 /* анимации */
-@keyframes bob{0%,100%{translate:0 0}50%{translate:0 calc(var(--u)*-1.2)}}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 calc(var(--u)*-1)}}
 @keyframes shake{0%,100%{rotate:0deg}25%{rotate:-8deg}75%{rotate:8deg}}
-@keyframes pop{0%{scale:.2;opacity:0}70%{scale:1.12}100%{scale:1;opacity:1}}
-@keyframes poof{0%{scale:1;opacity:1}40%{scale:1.3;opacity:1;filter:brightness(1.6)}100%{scale:0;opacity:0;rotate:200deg}}
-@keyframes twinkle{0%,100%{opacity:.4;scale:.8}50%{opacity:1;scale:1.15}}
-@keyframes rays{from{rotate:0deg}to{rotate:360deg}}
-@keyframes wiggle{0%,100%{rotate:-4deg}50%{rotate:4deg}}
-@keyframes swim{0%{left:30%}50%{left:70%}100%{left:30%}}
-.bob{animation:bob 2.4s ease-in-out infinite}
+@keyframes pop{0%{scale:.3;opacity:0}70%{scale:1.08}100%{scale:1;opacity:1}}
+@keyframes poof{0%{scale:1;opacity:1}40%{scale:1.25;opacity:1;filter:brightness(1.6)}100%{scale:0;opacity:0;rotate:200deg}}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 calc(var(--u)*1) #fff3a8) drop-shadow(0 0 calc(var(--u)*2) #ffe27a)}50%{filter:drop-shadow(0 0 calc(var(--u)*2) #fff8c8) drop-shadow(0 0 calc(var(--u)*4) #ffd23f)}}
+@keyframes wiggle{0%,100%{rotate:-5deg}50%{rotate:5deg}}
+@keyframes breath{0%,100%{scale:1}50%{scale:1.12}}
+@keyframes rise{from{translate:0 calc(var(--u)*6);opacity:0}to{translate:0 0;opacity:1}}
+.bob{animation:bob 2.6s ease-in-out infinite}
 .shake{animation:shake .4s}
 .pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
 .poof{animation:poof .7s ease-in forwards}
 .wiggle{animation:wiggle .35s ease-in-out infinite}
-.rays{position:absolute;transform:translate(-50%,-50%);width:calc(var(--u)*40);height:calc(var(--u)*40);border-radius:50%;
-  background:repeating-conic-gradient(rgba(255,240,170,.85) 0 8deg,rgba(255,255,255,0) 8deg 22deg);animation:rays 6s linear infinite;
-  mask:radial-gradient(circle,#000 20%,transparent 70%);-webkit-mask:radial-gradient(circle,#000 20%,transparent 70%);pointer-events:none}
+.rise{animation:rise .7s cubic-bezier(.2,1.4,.4,1) both}
 
 /* лента */
 .belt{position:absolute;left:0;right:0;top:56%;height:26%;background:linear-gradient(180deg,#e9f4ff,#cfe3f7);border-top:calc(var(--u)*.5) solid #fff;border-bottom:calc(var(--u)*.8) solid #9fc3e6;box-shadow:inset 0 0 calc(var(--u)*2) rgba(47,142,224,.25);overflow:hidden}
-.belt .frame{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:22%;height:118%;border:calc(var(--u)*.6) dashed var(--pink);border-radius:calc(var(--u)*1.6);z-index:2}
-.belt .item{position:absolute;top:50%;height:80%;width:auto;transform:translate(-50%,-50%);cursor:pointer}
+.belt .frame{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:20%;height:112%;border:calc(var(--u)*.6) solid var(--red);background:rgba(227,38,47,.14);border-radius:calc(var(--u)*1.6);z-index:0}
+.belt .item{position:absolute;top:50%;height:78%;width:auto;transform:translate(-50%,-50%);z-index:1}
+.dots{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);display:flex;gap:calc(var(--u)*.8)}
+.dots img{height:calc(var(--u)*5);background:#fff;border-radius:50%;padding:calc(var(--u)*.5);opacity:.35;filter:grayscale(1);transition:.4s}
+.dots img.got{opacity:1;filter:none;box-shadow:0 0 0 calc(var(--u)*.35) var(--mint)}
 /* плитки */
-.tiles{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:calc(var(--u)*30);height:calc(var(--u)*30);background:#fff;border-radius:calc(var(--u)*2);overflow:hidden;box-shadow:0 calc(var(--u)*.8) calc(var(--u)*2) rgba(59,45,92,.2)}
+.tiles{position:absolute;left:50%;top:53%;transform:translate(-50%,-50%);width:calc(var(--u)*30);height:calc(var(--u)*30);background:#fff;border-radius:calc(var(--u)*2);overflow:hidden;box-shadow:0 calc(var(--u)*.8) calc(var(--u)*2) rgba(59,45,92,.2);cursor:pointer}
 .tiles img{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain}
 .tiles .grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr)}
-.tiles .grid i{background:linear-gradient(135deg,#ffb3d2,#9fd3ff);border:2px solid #fff;transition:opacity .35s, transform .35s}
-.tiles .grid i.gone{opacity:0;transform:scale(.4)}
+.tiles .grid i{background:linear-gradient(135deg,#ffb3d2,#9fd3ff);border:2px solid #fff;transition:opacity .45s, transform .45s}
+.tiles .grid i.gone{opacity:0;transform:scale(.3) rotate(25deg)}
 /* сертификат */
-.cert{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:70%;height:74%;background:var(--paper);border-radius:calc(var(--u)*2.4);border:calc(var(--u)*.7) solid var(--pink);box-shadow:0 0 0 calc(var(--u)*.6) #fff,0 calc(var(--u)*1) calc(var(--u)*3) rgba(59,45,92,.3);text-align:center;padding:calc(var(--u)*2.4) calc(var(--u)*3)}
+.cert{position:absolute;left:50%;top:53%;transform:translate(-50%,-50%);width:72%;height:76%;background:var(--paper);border-radius:calc(var(--u)*2.4);border:calc(var(--u)*.7) solid var(--pink);box-shadow:0 0 0 calc(var(--u)*.6) #fff,0 calc(var(--u)*1) calc(var(--u)*3) rgba(59,45,92,.3);text-align:center;padding:calc(var(--u)*2.4) calc(var(--u)*3) calc(var(--u)*2) calc(var(--u)*16);overflow:hidden}
 .cert h2{font-family:var(--disp);font-size:calc(var(--u)*3.6);color:var(--pink-d);line-height:1.05}
 .cert h3{font-family:var(--disp);font-size:calc(var(--u)*2.2);color:var(--sky-d);margin-top:calc(var(--u)*.4)}
-.cert input{font-family:var(--disp);font-size:calc(var(--u)*3.2);text-align:center;border:none;border-bottom:calc(var(--u)*.3) solid var(--mint);background:transparent;outline:none;width:60%;margin-top:calc(var(--u)*2.2);color:var(--ink)}
+.cert input{font-family:var(--disp);font-size:calc(var(--u)*3.2);text-align:center;border:none;border-bottom:calc(var(--u)*.3) solid var(--mint);background:transparent;outline:none;width:80%;margin-top:calc(var(--u)*2.2);color:var(--ink)}
 .cert p{font-weight:800;font-size:calc(var(--u)*1.5);margin-top:calc(var(--u)*1.4)}
-/* план учителя */
-#plan{position:absolute;right:calc(var(--u)*1.4);top:calc(var(--u)*5.5);z-index:40;width:44%;max-height:80%;overflow:auto;background:var(--paper);border-radius:calc(var(--u)*1.6);padding:calc(var(--u)*1.4) calc(var(--u)*1.8);box-shadow:0 calc(var(--u)*1) calc(var(--u)*4) rgba(0,0,0,.35);font-size:calc(var(--u)*1.15);line-height:1.45;display:none}
-#plan.on{display:block}
-#plan h4{font-family:var(--disp);font-size:calc(var(--u)*1.6);color:var(--mint-d)}
-#plan .sec{font-weight:900;font-size:calc(var(--u)*.9);color:var(--pink-d);text-transform:uppercase;letter-spacing:.06em}
-#plan dt{font-weight:900;margin-top:calc(var(--u)*.8);font-size:calc(var(--u)*.95);color:var(--sky-d)}
-#plan dd{margin:calc(var(--u)*.2) 0 0}
-#plan .all{margin-top:calc(var(--u)*1)}
-#plan table{border-collapse:collapse;width:100%;font-size:calc(var(--u)*.95)}
-#plan td,#plan th{border:1px solid #e5dfe9;padding:calc(var(--u)*.4);vertical-align:top;text-align:left}
-#plan tr.cur{background:#fff3c4}
+.cert .peng{position:absolute;left:calc(var(--u)*1.5);bottom:calc(var(--u)*1.5);width:calc(var(--u)*14);height:auto}
 </style>
 </head>
 <body>
 <div id="stage">
-  <img class="bg" id="bg" alt="">
+  <img class="bg" id="bg1" alt=""><img class="bg" id="bg2" alt="" style="opacity:0">
   <div class="layer" id="slide"></div>
   <div id="top">
     <div class="logo"><span class="sk"><b>SPLAT</b><i>KIDS</i></span><span class="x">×</span><span class="ws">WowSpeak</span></div>
     <div id="germbar"></div>
     <div><button class="tb" id="bPlan">📋 План</button> <button class="tb" id="bFull">⛶</button></div>
   </div>
-  <div id="plan"></div>
   <div id="nav"><button class="arrow" id="prev">◀</button><button class="arrow" id="next">▶</button></div>
   <div id="pageno"></div>
 </div>
@@ -129,7 +128,8 @@ const M = 'media/lesson/';
 const IMG = /*IMG*/null/*IMG_END*/, AUD = /*AUD*/null/*AUD_END*/;
 const U = n => IMG ? IMG[n] : M + n + '.webp';
 const $ = (s, r = document) => r.querySelector(s);
-const stage = $('#stage'), layer = $('#slide');
+const stage = $('#stage');
+let layer = $('#slide');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const shuffle = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(x => x[1]);
 
@@ -138,38 +138,86 @@ const WORDS = { tooth: 'magic_tooth', toothbrush: 'brush', toothpaste: 'tube', c
 const audio = {};
 function say(w) { const a = audio[w] || (audio[w] = new Audio(AUD ? AUD[w] : `audio/${w}.mp3`)); a.currentTime = 0; a.play().catch(() => {}); }
 
+/* ---------- звуковые эффекты: синтез в браузере, файлов не нужно ---------- */
+let AC = null;
+function ac() { if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === 'suspended') AC.resume(); return AC; }
+function tone(f, t0, dur, type = 'sine', vol = .18, f2) {
+  const c = ac(), o = c.createOscillator(), g = c.createGain(), t = c.currentTime + t0;
+  o.type = type; o.frequency.setValueAtTime(f, t); if (f2) o.frequency.exponentialRampToValueAtTime(f2, t + dur);
+  g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .015); g.gain.exponentialRampToValueAtTime(.001, t + dur);
+  o.connect(g).connect(c.destination); o.start(t); o.stop(t + dur + .05);
+}
+function noise(t0, dur, vol = .12, hp = 1500) {
+  const c = ac(), n = c.sampleRate * dur, b = c.createBuffer(1, n, c.sampleRate), d = b.getChannelData(0);
+  for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+  const s = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain(), t = c.currentTime + t0;
+  s.buffer = b; f.type = 'highpass'; f.frequency.value = hp; g.gain.value = vol; s.connect(f).connect(g).connect(c.destination); s.start(t);
+}
+const sfx = {
+  ok() { tone(660, 0, .14, 'triangle'); tone(880, .1, .14, 'triangle'); tone(1320, .2, .22, 'triangle', .14); },
+  no() { tone(220, 0, .22, 'square', .07, 150); tone(180, .16, .26, 'square', .06, 120); },
+  jump() { tone(300, 0, .22, 'sine', .16, 760); },
+  land() { tone(140, 0, .12, 'sine', .2, 90); },
+  pop() { tone(500, 0, .12, 'sine', .2, 1400); noise(0, .08, .06, 3000); },
+  magic() { [988, 1175, 1319, 1568, 1976].forEach((f, i) => tone(f, i * .07, .3, 'sine', .1)); },
+  snow() { noise(0, .45, .1, 2500); },
+  chest() { tone(200, 0, .18, 'triangle', .14, 260); [784, 988, 1175, 1568].forEach((f, i) => tone(f, .18 + i * .08, .35, 'sine', .1)); },
+  tick() { tone(1200, 0, .05, 'square', .05); },
+  win() { [523, 659, 784, 1047, 784, 1047].forEach((f, i) => tone(f, i * .11, .22, 'triangle', .14)); },
+  grow() { tone(180, 0, .3, 'sawtooth', .06, 260); },
+  shrink() { tone(700, 0, .25, 'sine', .14, 300); },
+};
+
 /* ---------- конструкторы ---------- */
 function el(tag, cls, html, parent = layer) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; parent.appendChild(e); return e; }
-function sp(name, x, y, w, cls = '', parent = layer) {
+// h — высота в % сцены (так предметы соразмерны), w — ширина; задаётся одно из двух
+function sp(name, x, y, size, cls = '', parent = layer, by = 'w') {
   const i = el('img', 'sp ' + cls, null, parent); i.src = U(name); i.alt = '';
-  i.style.left = x + '%'; i.style.top = y + '%'; i.style.width = w + '%'; return i;
+  i.style.left = x + '%'; i.style.top = y + '%';
+  if (by === 'h') { i.style.height = size + '%'; i.style.width = 'auto'; } else i.style.width = size + '%';
+  return i;
 }
+const sph = (name, x, y, h, cls) => sp(name, x, y, h, cls, layer, 'h');
 function btn(text, x, y, cls, fn) { const b = el('button', 'btn ' + (cls || ''), text); b.style.left = x + '%'; b.style.top = y + '%'; b.onclick = fn; return b; }
 function title(t) { return el('div', 'title', t); }
 function wordcard(w) {
   const c = el('div', 'wordcard pop', `<img src="${U(WORDS[w])}" alt=""><div class="w">${w}</div><button class="say">🔊</button>`);
   c.querySelector('.say').onclick = e => { e.stopPropagation(); say(w); };
+  later(() => say(w), 450);
   return c;
 }
-function card(w, x, y, label = false) {
-  const c = el('div', 'card pop', `<img src="${U(WORDS[w] || w)}" alt="">${label ? `<b style="font-family:var(--disp);font-size:calc(var(--u)*2)">${w}</b>` : ''}`);
+function card(w, x, y) {
+  const c = el('div', 'card pop', `<img src="${U(WORDS[w] || w)}" alt="">`);
   c.style.left = x + '%'; c.style.top = y + '%'; return c;
 }
 function wobble(e) { e.classList.remove('shake'); void e.offsetWidth; e.classList.add('shake'); }
-function poof(e) { e.classList.remove('bob'); e.classList.add('poof'); }
+function poof(e) { e.classList.remove('bob'); e.classList.add('poof'); sfx.pop(); }
 const timers = [];
-function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
-function every(fn, ms) { timers.push(setInterval(fn, ms)); }
+function later(fn, ms) { const id = setTimeout(fn, ms); timers.push(id); return id; }
+function snowBurst(x, y, dir = 1, n = 26) {
+  sfx.snow();
+  for (let k = 0; k < n; k++) {
+    const f = el('div', 'flake'); const s = 5 + Math.random() * 12;
+    f.style.cssText += `left:${x + (Math.random() - .5) * 8}%;top:${y + (Math.random() - .5) * 6}%;width:${s}px;height:${s}px;opacity:1;transition:all ${.9 + Math.random() * .6}s cubic-bezier(.2,.7,.4,1)`;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      f.style.left = x + dir * (10 + Math.random() * 40) + '%'; f.style.top = y - 10 - Math.random() * 25 + '%'; f.style.opacity = 0;
+    }));
+  }
+}
 
-/* Прыжок спрайта по дуге к точке (x, y) в % сцены */
-function jumpTo(s, x, y, ms = 520) {
+/* Плавный прыжок по дуге: поза «прыжок» в воздухе, «стоит» на приземлении */
+function jumpTo(s, x, y, poseAir, poseLand, ms = 650) {
   const x0 = parseFloat(s.style.left), y0 = parseFloat(s.style.top), t0 = performance.now();
+  if (poseAir) s.src = U(poseAir);
+  sfx.jump();
+  const ease = k => k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
   return new Promise(res => {
     (function f(t) {
-      const k = Math.min(1, (t - t0) / ms);
-      s.style.left = x0 + (x - x0) * k + '%';
-      s.style.top = y0 + (y - y0) * k - Math.sin(Math.PI * k) * 14 + '%';
-      if (k < 1) requestAnimationFrame(f); else res();
+      const k = Math.min(1, (t - t0) / ms), e = ease(k);
+      s.style.left = x0 + (x - x0) * e + '%';
+      s.style.top = y0 + (y - y0) * e - Math.sin(Math.PI * k) * 12 + '%';
+      if (k < 1) requestAnimationFrame(f);
+      else { if (poseLand) s.src = U(poseLand); sfx.land(); s.animate([{ scale: '1.08 .9' }, { scale: '1 1' }], { duration: 220, easing: 'ease-out' }); res(); }
     })(t0);
   });
 }
@@ -179,12 +227,14 @@ function jumpTo(s, x, y, ms = 520) {
 function peng(pose, n) {
   const map = {
     p: { stand: 'p_wave', jump: 'p_jump', happy: 'p_happy', sad: 'p_sad', think: 'p_point', wow: 'p_surprised' },
-    pb: { stand: 'pb_stand', jump: 'pb_jump', happy: 'pb_stand', sad: 'pb_stand', think: 'pb_stand', wow: 'pb_stand', fish: 'pb_fish' },
+    pb: { stand: 'pb_stand', jump: 'pb_jump', happy: 'pb_jump', sad: 'pb_stand', think: 'pb_stand', wow: 'pb_stand', fish: 'pb_fish' },
     ph: { stand: 'ph_stand', jump: 'ph_jump', happy: 'ph_jump', sad: 'ph_stand', think: 'ph_stand', wow: 'ph_stand', brush: 'ph_brush' },
   };
   const set = n < 10 ? 'p' : n < 15 ? 'pb' : 'ph';
   return map[set][pose] || map[set].stand;
 }
+const SIDE = [10, 70, 30];        // пингвинёнок сбоку: x, y, высота в % — одинаково на всех слайдах
+const sidePeng = (pose, n, cls = 'pop') => sph(peng(pose, n), SIDE[0], SIDE[1], SIDE[2], cls);
 
 /* ---------- микробы у ворот ---------- */
 const GERMS = ['germ_green', 'germ_purple', 'germ_orange', 'germ_blue'];
@@ -192,354 +242,460 @@ const GATES = [8, 13, 18, 23];               // на этих слайдах п�
 let killed = 0;
 function drawGermbar(bossOn = true) {
   $('#germbar').innerHTML = GERMS.map((g, i) => `<img src="${U(g)}" class="${i < killed ? 'off' : ''}">`).join('') +
-    `<img src="${U('boss')}" class="${bossOn ? '' : 'off'}" style="width:calc(var(--u)*3.8)">`;
+    `<img src="${U('boss')}" class="boss ${bossOn ? '' : 'off'}">`;
 }
-// микробы у ворот: четыре маленьких по бокам и главный в центре
-const GPOS = [[30, 58], [70, 58], [22, 74], [78, 74]];
-function gateGerms(n) {
-  const out = [];
-  GERMS.forEach((g, i) => { if (i >= killed) out.push(sp(g, GPOS[i][0], GPOS[i][1], 9, 'bob')); else out.push(null); });
-  const boss = sp('boss', 50, 70, 15, 'bob');
-  return { small: out, boss };
+const GPOS = [[32, 60], [68, 60], [24, 76], [76, 76]];
+function gateGerms() {
+  const small = GERMS.map((g, i) => i >= killed ? sph(g, GPOS[i][0], GPOS[i][1], 17, 'bob') : null);
+  const boss = sph('boss', 50, 72, 27, 'bob');
+  return { small, boss };
+}
+
+/* ---------- ход урока: шаги, завершение задания, автопереход ---------- */
+let ctx = null;
+function newCtx(n) {
+  return {
+    n, steps: [],                      // ▶ сначала выполняет шаги задания, потом листает
+    step(fn) { this.steps.push(fn); },
+    done(auto = true, ms = 3200) {     // задание выполнено: звук, ▶ «дышит», через паузу — следующий слайд
+      if (this.finished) return; this.finished = true; this.steps = [];
+      $('#next').classList.add('ready');
+      if (auto) later(() => { if (ctx === this) go(this.n + 1); }, ms);
+    },
+  };
 }
 
 /* ---------- слайды ---------- */
 const S = [];
 // 1–2. Приветствие
-S[1] = { bg: 'snow_meadow', go(n) { sp(peng('stand', n), 50, 58, 26, 'pop bob'); } };
-S[2] = { bg: 'snow_meadow', go(n) { sp(peng('happy', n), 50, 58, 28, 'pop bob'); title('penguin'); } };
+S[1] = { bg: 'snow_meadow', go(n) { sph(peng('stand', n), 50, 58, 52, 'pop bob'); } };
+S[2] = { bg: 'snow_meadow', go(n) { sph(peng('happy', n), 50, 58, 52, 'pop bob'); title('penguin'); } };
 // 3–4. Завязка
 S[3] = { bg: 'castle_dark', go() {} };
-S[4] = { bg: 'castle_dark', go(n) { gateGerms(n); sp(peng('sad', n), 9, 70, 15, 'pop'); } };
-// 5. Прыгаем к блестящей льдинке
-const FLOES = [[24, 76, 'floe1'], [42, 66, 'floe2'], [60, 76, 'floe1'], [80, 64, 'floe2']];
-function floes(numbersFrom) {
-  return FLOES.map(([x, y, f], i) => { const s = sp(f, x, y, 15, 'click'); return s; });
+S[4] = { bg: 'castle_dark', go(n) { gateGerms(); sidePeng('sad', n); } };
+
+// 5–7. Ледяное море: прыжки по льдинкам к сундуку и обратно
+const FLOES = [[26, 78, 'floe1'], [44, 68, 'floe2'], [62, 78, 'floe1'], [82, 66, 'floe2']];
+const SHORE = [8, 66];
+function drawFloes(withChest, chestOpen) {
+  const fl = FLOES.map(([x, y, f]) => sp(f, x, y, 15, 'click'));
+  let chest = null;
+  if (withChest) chest = sph(chestOpen ? 'chest_open' : 'chest_closed', FLOES[3][0] + 3, FLOES[3][1] - 9, 13, 'click');
+  return { fl, chest };
 }
-S[5] = { bg: 'ice_sea', go(n) {
-  const fl = floes();
-  const g = el('div', 'glint'); g.style.left = '80%'; g.style.top = '58%';
-  const p = sp(peng('jump', n), 8, 64, 11);
+// подписи 1–4 появляются по мере прыжков
+function hopper(n, path, onEnd) {
+  const p = sph(peng('stand', n), path.start[0], path.start[1], 22);
   let k = 0;
-  fl.forEach((f, i) => f.onclick = async () => {
-    if (i !== k) return wobble(f);
-    k++; const num = el('div', 'num pop', String(k)); num.style.left = FLOES[i][0] + '%'; num.style.top = FLOES[i][1] + 7 + '%';
-    await jumpTo(p, FLOES[i][0], FLOES[i][1] - 9);
-  });
-} };
-// 6. Волшебный зубик
-S[6] = { bg: 'ice_sea', go(n) {
-  const r = el('div', 'rays'); r.style.left = '50%'; r.style.top = '52%';
-  const t = sp('magic_tooth', 50, 52, 16, 'click pop bob');
-  t.onclick = () => { t.remove(); r.remove(); wordcard('tooth'); say('tooth'); };
-  sp(peng('wow', n), 14, 66, 13, 'pop');
-} };
-// 7. Прыгаем обратно к замку
-S[7] = { bg: 'ice_sea', go(n) {
-  const fl = floes();
-  const p = sp(peng('jump', n), 80, 55, 11);
-  const order = [2, 1, 0];             // с последней льдинки — обратно к берегу
-  let k = 0;
-  const shore = el('div', 'glint'); shore.style.left = '6%'; shore.style.top = '62%';
-  const steps = [...order.map(i => [FLOES[i][0], FLOES[i][1] - 9, i]), [7, 60, -1]];
-  fl.forEach((f, i) => f.onclick = () => step(i));
-  shore.style.pointerEvents = 'auto'; shore.style.cursor = 'pointer'; shore.onclick = () => step(-1);
-  async function step(i) {
-    if (k >= steps.length || steps[k][2] !== i) return i >= 0 && wobble(fl[i]);
-    const [x, y] = steps[k]; k++;
-    const num = el('div', 'num pop', String(k)); num.style.left = x + '%'; num.style.top = y + 16 + '%';
-    await jumpTo(p, x, y);
+  async function hop() {
+    if (k >= path.points.length || hop.busy) return;
+    hop.busy = true;
+    const [x, y, lx, ly] = path.points[k]; k++;
+    const num = el('div', 'num pop', String(k)); num.style.left = lx + '%'; num.style.top = ly + '%';
+    await jumpTo(p, x, y, peng('jump', n), peng('stand', n));
+    hop.busy = false;
+    if (k === path.points.length) onEnd && onEnd(p);
   }
+  return { p, hop, left: () => path.points.length - k };
+}
+S[5] = { bg: 'ice_sea', go(n, c) {
+  const { fl, chest } = drawFloes(true, false);
+  chest.classList.add('glow');
+  const h = hopper(n, { start: [SHORE[0], SHORE[1]], points: FLOES.map(([x, y]) => [x - (x === 82 ? 4 : 0), y - 11, x, y + 8]) }, () => c.done());
+  fl.forEach(f => f.onclick = () => h.hop());
+  for (let i = 0; i < 4; i++) c.step(h.hop);
 } };
-// Ворота: назвали все найденные слова — нажимаем на каждое, когда все названы, микроб исчезает
+S[6] = { bg: 'ice_sea', go(n, c) {
+  drawFloes(false);
+  const p = sph(peng('wow', n), 78, 55, 22);
+  const chest = sph('chest_closed', 85, 57, 13, 'click glow');
+  const open = () => {
+    if (chest.dataset.open) return; chest.dataset.open = 1;
+    chest.src = U('chest_open'); chest.classList.remove('glow'); sfx.chest();
+    const t = sph('magic_tooth', 85, 44, 12, 'rise glow');
+    later(() => { t.remove(); wordcard('tooth'); }, 1400);
+  };
+  chest.onclick = open; c.step(open);
+} };
+S[7] = { bg: 'ice_sea', go(n, c) {
+  drawFloes(false);
+  const back = [2, 1, 0].map(i => [FLOES[i][0], FLOES[i][1] - 11, FLOES[i][0], FLOES[i][1] + 8]);
+  back.push([SHORE[0] + 2, SHORE[1], SHORE[0] + 2, SHORE[1] + 16]);
+  const h = hopper(n, { start: [FLOES[3][0] - 4, FLOES[3][1] - 11], points: back }, () => c.done());
+  layer.querySelectorAll('.sp.click').forEach(f => f.onclick = () => h.hop());
+  for (let i = 0; i < 4; i++) c.step(h.hop);
+} };
+
+// Ворота: найденные вещи лежат кружками на облаке; ребёнок называет — учитель нажимает, вещь летит к микробу
 function gateSlide(words) {
-  return { bg: 'castle_dark', go(n) {
-    const g = gateGerms(n);
+  return { bg: 'castle_dark', go(n, c) {
+    const g = gateGerms();
     const target = g.small[killed];
-    sp(peng('stand', n), 9, 70, 15, 'pop');
+    sidePeng('stand', n);
     let named = 0;
-    const w0 = 50 - (words.length - 1) * 8;
-    words.forEach((w, i) => {
-      const c = card(w, w0 + i * 16, 30);
-      c.onclick = () => {
-        if (c.classList.contains('good')) return;
-        c.classList.add('good'); say(w);
-        if (++named === words.length) later(() => {
-          if (words.length === 1) {   // первый микроб — его прогоняют лучики волшебного зубика
-            const r = el('div', 'rays'); r.style.left = GPOS[0][0] + '%'; r.style.top = GPOS[0][1] + '%';
-            later(() => { poof(target); r.remove(); c.classList.add('poof'); }, 900);
-          } else poof(target);
-          later(() => { if (killed < GATES.length && GATES[killed] === n) { killed++; drawGermbar(); } }, 700);
-        }, 500);
-      };
+    const tx = GPOS[killed][0], ty = GPOS[killed][1];
+    const chips = words.map((w, i) => {
+      const ch = el('div', 'chip pop', `<img src="${U(WORDS[w])}">`);
+      const x = 18 + i * 8; ch.style.left = x + '%'; ch.style.top = '88%';
+      ch.onclick = () => fly(ch, w);
+      return ch;
     });
+    async function fly(ch, w) {
+      if (ch.dataset.used) return; ch.dataset.used = 1;
+      say(w); sfx.magic();
+      if (words.length === 1) ch.querySelector('img').classList.add('glow');
+      ch.style.transition = 'left .7s ease-in, top .7s ease-in, transform .7s'; ch.style.left = tx + '%'; ch.style.top = ty + '%';
+      ch.style.transform = 'translate(-50%,-50%) scale(.6)';
+      await sleep(700); wobble(target); ch.classList.add('used');
+      if (++named === words.length) {
+        await sleep(400); poof(target);
+        later(() => { killed++; drawGermbar(); c.done(); }, 700);
+      }
+    }
+    chips.forEach((ch, i) => c.step(() => fly(ch, words[i])));
   } };
 }
 S[8] = gateSlide(['tooth']);
-// 9. Сугробы: yes or no
-S[9] = { bg: 'snow_meadow', go(n) {
+
+// 9. Сугробы: из сугроба появляется вещь — yes or no
+S[9] = { bg: 'snow_meadow', go(n, c) {
   const items = [['boot', 0], ['fish', 0], ['icicle', 0], ['brush', 1]];
-  const pos = [[20, 66], [40, 74], [60, 66], [80, 74]];
-  sp(peng('think', n), 8, 50, 11, 'pop');
-  items.forEach(([it, ok], i) => {
+  const pos = [[24, 70], [42, 78], [60, 70], [80, 78]];
+  sidePeng('think', n);
+  let opened = 0;
+  const mounds = items.map(([it, ok], i) => {
     const m = sp(i % 2 ? 'mound2' : 'mound1', pos[i][0], pos[i][1], 17, 'click');
-    m.onclick = () => {
-      if (m.dataset.open) return; m.dataset.open = 1;
-      const s = sp(it, pos[i][0], pos[i][1] - 14, it === 'brush' ? 4.5 : it === 'icicle' ? 4 : 11, 'pop');
-      later(() => { const k = el('div', 'mark pop', ok ? '✅' : '❌'); k.style.left = pos[i][0] + 6 + '%'; k.style.top = pos[i][1] - 24 + '%'; }, 1500);
-    };
+    m.onclick = () => open(i);
+    return m;
   });
+  function open(i) {
+    const m = mounds[i]; if (m.dataset.open) return; m.dataset.open = 1;
+    const [it, ok] = items[i];
+    snowBurst(pos[i][0], pos[i][1] - 4, i % 2 ? 1 : -1);
+    m.style.transition = 'all .6s ease'; m.style.opacity = 0; m.style.transform = 'translate(-50%,-30%) scale(.6)';
+    sph(it, pos[i][0], pos[i][1] - 6, 22, 'rise');
+    later(() => { const k = el('div', 'mark pop', ok ? '✅' : '❌'); k.style.left = pos[i][0] + 7 + '%'; k.style.top = pos[i][1] - 20 + '%'; ok ? sfx.ok() : sfx.no(); }, 1700);
+    if (++opened === items.length) later(() => c.done(), 1800);
+  }
+  items.forEach((_, i) => c.step(() => open(i)));
 } };
 // 10. Toothbrush
-S[10] = { bg: 'snow_meadow', go(n) { wordcard('toothbrush'); say('toothbrush'); sp(peng('stand', n), 14, 64, 13, 'pop'); } };
-// 11. Послушай и выбери
-function listenGame(words, n) {
+S[10] = { bg: 'snow_meadow', go(n) { wordcard('toothbrush'); sidePeng('stand', n); } };
+// 11. Послушай и выбери — слово звучит само
+function listenGame(words, n, c) {
   const rounds = shuffle([...words, ...words, words[0]]).slice(0, 5);
   let r = 0;
-  const b = btn('🔊', 50, 22, 'pink', () => say(rounds[r]));
+  btn('🔊', 50, 24, 'pink', () => say(rounds[r]));
+  sidePeng('stand', n);
   function round() {
-    layer.querySelectorAll('.card').forEach(c => c.remove());
-    const opts = shuffle(words);
-    const x0 = 50 - (opts.length - 1) * 12;
+    layer.querySelectorAll('.card').forEach(x => x.remove());
+    const opts = shuffle(words), x0 = 50 - (opts.length - 1) * 12;
     opts.forEach((w, i) => {
-      const c = card(w, x0 + i * 24, 58);
-      c.onclick = () => {
-        if (w === rounds[r]) { c.classList.add('good'); r++; if (r < rounds.length) later(round, 900); else later(() => { layer.querySelectorAll('.card').forEach(x => x.remove()); b.remove(); sp(peng('happy', n), 50, 58, 22, 'pop'); }, 900); }
-        else { c.classList.add('bad'); wobble(c); later(() => c.classList.remove('bad'), 600); }
+      const cd = card(w, x0 + i * 24, 60);
+      cd.onclick = () => {
+        if (cd.classList.contains('good')) return;
+        if (w === rounds[r]) { cd.classList.add('good'); sfx.ok(); r++; if (r < rounds.length) later(round, 900); else later(() => c.done(), 600); }
+        else { cd.classList.add('bad'); wobble(cd); sfx.no(); later(() => cd.classList.remove('bad'), 600); }
       };
     });
+    later(() => say(rounds[r]), 500);
   }
   round();
 }
-S[11] = { bg: 'snow_meadow', go(n) { listenGame(['tooth', 'toothbrush'], n); } };
-// 12. Правда или нет: учитель называет слово (иногда неверное), ребёнок — yes / no; потом «What is it?»
-S[12] = { bg: 'snow_meadow', go(n) {
+S[11] = { bg: 'snow_meadow', go(n, c) { listenGame(['tooth', 'toothbrush'], n, c); } };
+// 12. Правда или нет: микроб называет картинку (иногда неверно)
+S[12] = { bg: 'snow_meadow', go(n, c) {
   const words = ['tooth', 'toothbrush'];
   const rounds = shuffle([['tooth', 'tooth'], ['toothbrush', 'tooth'], ['toothbrush', 'toothbrush'], ['tooth', 'toothbrush']]);
   let r = 0;
-  sp('germ_purple', 86, 30, 10, 'bob');
+  sph('germ_purple', 84, 34, 18, 'bob');
   function show() {
-    layer.querySelectorAll('.card,.btn,.mark').forEach(x => x.remove());
+    layer.querySelectorAll('.card,.btn,.mark,.wordcard').forEach(x => x.remove());
     if (r >= rounds.length) return whatIs();
     const [pic, said] = rounds[r];
-    const c = card(pic, 50, 50);
-    btn('🔊 ' + said, 50, 80, 'pink', () => say(said));
-    btn('👍 Yes', 30, 50, '', () => answer(pic === said, c));
-    btn('👎 No', 70, 50, '', () => answer(pic !== said, c));
+    const cd = card(pic, 50, 50);
+    btn('🔊', 50, 78, 'pink', () => say(said));
+    btn('👍 Yes', 30, 50, '', () => answer(pic === said, cd));
+    btn('👎 No', 70, 50, '', () => answer(pic !== said, cd));
+    later(() => say(said), 500);
   }
-  function answer(right, c) {
-    const k = el('div', 'mark pop', right ? '✅' : '❌'); k.style.left = '58%'; k.style.top = '34%';
-    if (right) { r++; later(show, 1000); } else { wobble(c); later(() => k.remove(), 800); }
+  function answer(right, cd) {
+    const k = el('div', 'mark pop', right ? '✅' : '❌'); k.style.left = '57%'; k.style.top = '34%';
+    if (right) { sfx.ok(); r++; later(show, 1100); } else { sfx.no(); wobble(cd); later(() => k.remove(), 800); }
   }
   function whatIs() {
-    let i = 0; const ws = shuffle(words);
+    let i = 0; const ws = shuffle(words); title('What is it?');
     (function next() {
       layer.querySelectorAll('.card,.wordcard').forEach(x => x.remove());
-      if (i >= ws.length) return;
-      const c = card(ws[i], 50, 52); title('What is it?');
-      c.onclick = () => { c.remove(); wordcard(ws[i]); say(ws[i]); i++; later(next, 1800); };
+      if (i >= ws.length) return c.done();
+      const cd = card(ws[i], 50, 54);
+      cd.onclick = () => { cd.remove(); wordcard(ws[i]); sfx.ok(); i++; later(next, 2000); };
     })();
   }
   show();
 } };
 S[13] = gateSlide(['tooth', 'toothbrush']);
-// 14. Рыбалка: тень плавает, «Stop!» в момент, когда она под крючком
-S[14] = { bg: 'ice_fishing', go(n) {
-  sp(peng('fish', n), 22, 52, 15);
-  const hookX = 52;
-  const line = el('div'); line.style.cssText = `position:absolute;left:${hookX}%;top:48%;width:3px;height:30%;background:rgba(60,60,70,.7)`;
-  const hook = el('div'); hook.style.cssText = `position:absolute;left:${hookX}%;top:78%;width:1.6%;height:2.8%;border:3px solid #555;border-top:none;border-radius:0 0 50% 50%;transform:translate(-50%,-50%)`;
-  // тень рыбы под водой — силуэт, чтобы его было видно на тёмной воде
+
+// 14. Рыбалка: тень плавает, «Stop!» — когда тень под крючком
+S[14] = { bg: 'ice_fishing', go(n, c) {
+  const HX = 52, HY = 79;
+  sph('pb_fishing', 24, 56, 46);                       // крупный пингвинёнок с большой удочкой
+  const line = el('div'); line.style.cssText = `position:absolute;left:${HX}%;top:34%;width:3px;height:${HY - 34}%;background:rgba(60,60,70,.75);transform-origin:top`;
+  const hook = el('div'); hook.style.cssText = `position:absolute;left:${HX}%;top:${HY}%;width:1.4%;height:2.6%;border:3px solid #555;border-top:none;border-radius:0 0 50% 50%;transform:translate(-50%,-50%)`;
   const shadow = el('img'); shadow.src = U('fish');
-  shadow.style.cssText = 'position:absolute;top:79%;width:9%;transform:translate(-50%,-50%);filter:brightness(2.2) saturate(0) opacity(.55) blur(1px)';
+  shadow.style.cssText = `position:absolute;top:${HY + 1}%;width:9%;transform:translate(-50%,-50%);filter:brightness(2.2) saturate(0) opacity(.55) blur(1px)`;
   let t0 = performance.now(), stopped = false;
   (function f(t) {
     if (stopped || !shadow.isConnected) return;
-    const x = 52 + Math.sin((t - t0) / 900) * 12; shadow.style.left = x + '%'; shadow.style.transform = `translate(-50%,-50%) scaleX(${Math.cos((t - t0) / 900) > 0 ? -1 : 1})`; requestAnimationFrame(f);
+    const x = HX + Math.sin((t - t0) / 1000) * 12; shadow.style.left = x + '%';
+    shadow.style.transform = `translate(-50%,-50%) scaleX(${Math.cos((t - t0) / 1000) > 0 ? -1 : 1})`; requestAnimationFrame(f);
   })(t0);
-  btn('✋ Stop!', 80, 30, 'pink', function () {
+  const b = btn('✋ Stop!', 80, 26, 'pink', stop);
+  function stop() {
+    if (stopped) return;
     const x = parseFloat(shadow.style.left);
-    if (Math.abs(x - hookX) > 4) { wobble(this); return; }
-    stopped = true; shadow.remove(); line.remove(); hook.remove(); this.remove();
-    const t = sp('tube', hookX, 78, 6, 'pop'); jumpTo(t, hookX, 42, 700);
-  });
+    if (Math.abs(x - HX) > 4) { wobble(b); sfx.no(); return; }
+    stopped = true; shadow.remove(); hook.remove(); b.remove(); sfx.ok();
+    line.style.transition = 'height .7s ease-in'; line.style.height = '10%';
+    const t = sph('tube', HX, HY, 14, 'pop'); t.style.transition = 'top .7s ease-in'; requestAnimationFrame(() => t.style.top = '46%');
+    later(() => c.done(), 1200);
+  }
+  c.step(stop);
 } };
 // 15. Toothpaste
-S[15] = { bg: 'ice_fishing', go(n) { wordcard('toothpaste'); say('toothpaste'); sp(peng('stand', n), 14, 64, 14, 'pop'); } };
-// 16. Что под снежком?
-S[16] = { bg: 'snow_meadow', go(n) {
+S[15] = { bg: 'ice_fishing', go(n) { wordcard('toothpaste'); sidePeng('stand', n); } };
+
+// 16. Что под снежком: микроб накрывает ОДНУ вещь — какая спряталась?
+S[16] = { bg: 'snow_meadow', go(n, c) {
   const words = ['tooth', 'toothbrush', 'toothpaste'];
-  const X = [28, 50, 72];
-  let cards = [], balls = [], round = 0;
-  sp(peng('think', n), 8, 52, 11);
+  const X = [30, 50, 70];
+  const order = shuffle([0, 1, 2]);
+  let round = 0, ball = null, cards = [];
+  sidePeng('think', n);
   function lay() {
-    layer.querySelectorAll('.card,.sp.snowball,.btn').forEach(x => x.remove());
-    cards = shuffle(words).map((w, i) => { const c = card(w, X[i], 60); c.dataset.w = w; return c; });
-    btn('❄️ Прячем!', 50, 22, 'pink', hide);
+    layer.querySelectorAll('.card,.snowball,.germ').forEach(x => x.remove());
+    cards = words.map((w, i) => card(w, X[i], 60));
+    later(hide, 2600);
   }
   async function hide() {
-    layer.querySelector('.btn').remove();
-    const g = sp('germ_purple', 50, 30, 9, 'pop');
-    await sleep(700);
-    balls = X.map(x => sp('snowball', x, 60, 15, 'click pop snowball'));
-    await sleep(600); g.remove();
-    const hit = Math.floor(Math.random() * 3);
-    balls[hit].classList.add('wiggle');
-    balls.forEach((b, i) => b.onclick = () => {
-      if (i !== hit) return wobble(b);
-      b.remove(); cards[i].classList.add('good'); say(cards[i].dataset.w);
-      round++; later(round < 3 ? lay : () => { layer.querySelectorAll('.card,.sp.snowball').forEach(x => x.remove()); }, 1600);
-    });
+    const i = order[round];
+    const g = sph('germ_purple', 50, 22, 16, 'pop germ');
+    await sleep(600);
+    g.style.transition = 'left .6s, top .6s'; g.style.left = X[i] + '%'; g.style.top = '40%';
+    await sleep(650);
+    ball = sph('snowball', X[i], 60, 30, 'click pop snowball'); sfx.snow();
+    cards[i].style.opacity = 0;
+    g.style.left = '110%'; g.style.top = '20%';
+    ball.onclick = reveal;
   }
+  function reveal() {
+    if (!ball || ball.dataset.open) return; ball.dataset.open = 1;
+    const i = order[round];
+    snowBurst(X[i], 60, 1, 18); ball.remove();
+    cards[i].style.opacity = 1; cards[i].classList.add('good'); sfx.ok(); say(words[i]);
+    round++;
+    if (round < 3) later(lay, 1800); else later(() => c.done(), 1500);
+  }
+  c.step(reveal); c.step(reveal); c.step(reveal);
   lay();
 } };
-// 17. Плитки
-S[17] = { bg: 'snow_meadow', go(n) {
+// 17. Плитки: квадратики уходят сами
+S[17] = { bg: 'snow_meadow', go(n, c) {
   const ws = shuffle(['tooth', 'toothbrush', 'toothpaste']);
-  let i = 0;
+  let i = 0, tick = null;
+  sidePeng('think', n);
   function show() {
-    layer.querySelectorAll('.tiles,.btn').forEach(x => x.remove());
-    if (i >= ws.length) return;
+    layer.querySelectorAll('.tiles').forEach(x => x.remove());
+    if (i >= ws.length) return c.done();
     const t = el('div', 'tiles pop', `<img src="${U(WORDS[ws[i]])}"><div class="grid">${'<i></i>'.repeat(16)}</div>`);
     const tiles = shuffle([...t.querySelectorAll('i')]);
-    t.onclick = () => { const x = tiles.shift(); if (x) x.classList.add('gone'); };
-    btn('👀 Открыть всё', 80, 86, 'sun', () => { t.querySelectorAll('i').forEach(x => x.classList.add('gone')); say(ws[i]); i++; later(show, 1800); });
+    const openAll = () => {
+      if (t.dataset.done) return; t.dataset.done = 1; clearInterval(tick);
+      t.querySelectorAll('i').forEach(x => x.classList.add('gone')); sfx.ok(); say(ws[i]); i++; later(show, 2000);
+    };
+    tick = setInterval(() => { const x = tiles.shift(); if (x) { x.classList.add('gone'); sfx.tick(); } if (!tiles.length) openAll(); }, 800);
+    timers.push(tick);
+    t.onclick = openAll;
+    c.steps = [openAll];
   }
   show();
 } };
 S[18] = gateSlide(['tooth', 'toothbrush', 'toothpaste']);
-// 19. Горка: ребёнок дует — снег слетает, под ним стаканчик
-S[19] = { bg: 'ice_hill', go(n) {
-  sp(peng('stand', n), 14, 64, 13);
-  const cup = sp('cup', 52, 42, 10);
-  const pile = sp('mound2', 52, 44, 22, 'click');
-  pile.onclick = () => {
-    for (let k = 0; k < 24; k++) {
-      const f = el('div'); const s = 6 + Math.random() * 14;
-      f.style.cssText = `position:absolute;left:${50 + Math.random() * 8}%;top:${40 + Math.random() * 8}%;width:${s}px;height:${s}px;border-radius:50%;background:#fff;transition:all 1.2s ease-out;opacity:1`;
-      requestAnimationFrame(() => { f.style.left = 100 + Math.random() * 20 + '%'; f.style.top = 10 + Math.random() * 50 + '%'; f.style.opacity = 0; });
-    }
-    pile.style.transition = 'all 1s'; pile.style.left = '110%'; pile.style.opacity = 0;
-    cup.classList.add('pop');
+
+// 19. Горка: ребёнок дует — снег сразу разлетается вправо, под ним стаканчик
+S[19] = { bg: 'ice_hill', go(n, c) {
+  sidePeng('stand', n);
+  const cup = sph('cup', 54, 50, 17); cup.style.opacity = 0;
+  const pile = sp('mound2', 54, 53, 20, 'click');
+  const blow = () => {
+    if (pile.dataset.gone) return; pile.dataset.gone = 1;
+    snowBurst(54, 50, 1, 40);
+    pile.style.transition = 'all .9s ease-out'; pile.style.opacity = 0; pile.style.transform = 'translate(-30%,-50%) scale(.5,.3)';
+    later(() => { cup.style.transition = 'opacity .5s'; cup.style.opacity = 1; cup.classList.add('pop'); sfx.ok(); }, 500);
+    later(() => c.done(), 1600);
   };
+  pile.onclick = blow; c.step(blow);
 } };
-S[20] = { bg: 'ice_hill', go(n) { wordcard('cup'); say('cup'); sp(peng('stand', n), 14, 64, 13, 'pop'); } };
-// 21. Лента «Стоп!»
-function beltGame(items, onPick) {
+S[20] = { bg: 'ice_hill', go(n) { wordcard('cup'); sidePeng('stand', n); } };
+
+// 21. «Стоп!»: вещи въезжают по одной; когда вещь в красной рамке — ребёнок кричит «Stop!» и называет
+S[21] = { bg: 'snow_meadow', go(n, c) {
+  const words = ['tooth', 'toothbrush', 'toothpaste', 'cup'];
+  const queue = shuffle(words).concat(shuffle(words), shuffle(words));
+  const got = new Set();
   const belt = el('div', 'belt', '<div class="frame"></div>');
-  let x = 0, running = true, last = performance.now();
-  const els = items.map((w, i) => { const im = el('img', 'item', null, belt); im.src = U(WORDS[w] || w); im.dataset.w = w; return im; });
-  const gap = 100 / Math.min(items.length, 4) + 6;
+  const dots = el('div', 'dots', words.map(w => `<img src="${U(WORDS[w])}" data-w="${w}">`).join(''));
+  const items = []; let running = true, last = performance.now(), spawnIn = 0, qi = 0;
   (function f(t) {
     if (!belt.isConnected) return;
     const dt = t - last; last = t;
-    if (running) x += dt * 0.006;           // медленно: ≈ 6 % ширины в секунду
-    els.forEach((im, i) => { im.style.left = ((i * gap + x) % (els.length * gap)) - 10 + '%'; });
+    if (running) {
+      spawnIn -= dt;
+      if (spawnIn <= 0 && qi < queue.length) {
+        const w = queue[qi++]; const im = el('img', 'item', null, belt); im.src = U(WORDS[w]); im.dataset.w = w; im.dataset.x = -8; items.push(im); spawnIn = 4200;
+      }
+      items.forEach(im => { im.dataset.x = +im.dataset.x + dt * .0055; im.style.left = im.dataset.x + '%'; });
+    }
     requestAnimationFrame(f);
   })(last);
-  return { belt, els, toggle(v) { running = v ?? !running; return running; }, inFrame() {
-    return els.find(im => { const l = parseFloat(im.style.left); return l > 39 && l < 61; }); } };
-}
-S[21] = { bg: 'snow_meadow', go(n) {
-  const b = beltGame(['tooth', 'toothbrush', 'toothpaste', 'cup', 'tooth', 'cup'], null);
-  btn('✋ Stop!', 50, 30, 'pink', function () {
-    const run = b.toggle();
-    this.textContent = run ? '✋ Stop!' : '▶ Go!';
-    b.els.forEach(im => im.style.filter = '');
-    if (!run) { const it = b.inFrame(); if (it) { it.style.filter = 'drop-shadow(0 0 12px #ffd23f)'; say(it.dataset.w); } }
-  });
+  const b = btn('✋ Stop!', 50, 24, 'pink', toggle);
+  function toggle() {
+    if (!running) { running = true; b.textContent = '✋ Stop!'; items.forEach(im => im.style.filter = ''); return; }
+    const it = items.find(im => { const x = +im.dataset.x; return x > 41 && x < 59; });
+    if (!it) { wobble(b); sfx.no(); return; }
+    running = false; b.textContent = '▶ Go!';
+    it.style.filter = 'drop-shadow(0 0 14px #ffd23f)'; sfx.ok(); say(it.dataset.w);
+    got.add(it.dataset.w); dots.querySelector(`[data-w="${it.dataset.w}"]`).classList.add('got');
+    if (got.size === words.length) { b.remove(); c.done(true, 3600); }
+  }
+  for (let k = 0; k < 12; k++) c.step(toggle);
 } };
-// 22. Show me — живая игра
+// 22. Show — живая игра
 S[22] = { bg: 'snow_meadow', go(n) {
-  title('Show me!');
-  ['tooth', 'toothbrush', 'toothpaste', 'cup'].forEach((w, i) => { const c = card(w, 20 + i * 20, 58); c.onclick = () => wobble(c); });
+  title('Show!');
+  ['tooth', 'toothbrush', 'toothpaste', 'cup'].forEach((w, i) => { const cd = card(w, 23 + i * 18, 60); cd.onclick = () => { wobble(cd); say(w); }; });
 } };
 S[23] = gateSlide(['tooth', 'toothbrush', 'toothpaste', 'cup']);
-// 24. Главный микроб: по ленте едет полезное и вредное; нажимаем на полезное, когда ребёнок назвал
-S[24] = { bg: 'castle_dark', go(n) {
-  const boss = sp('boss', 50, 36, 18, 'bob');
+
+// 24. Главный микроб (временный вариант — до выбора сортировки): нажимаем на полезное, когда ребёнок назвал
+S[24] = { bg: 'castle_dark', go(n, c) {
+  const boss = sph('boss', 50, 34, 30, 'bob');
   let scale = 1, got = 0;
   const useful = ['toothbrush', 'toothpaste', 'cup'];
-  const b = beltGame(['cake', 'toothbrush', 'candy', 'toothpaste', 'soda', 'cup'], null);
-  b.belt.style.top = '62%';
-  b.els.forEach(im => im.onclick = () => {
-    if (im.dataset.done) return;
-    if (useful.includes(im.dataset.w)) {
-      im.dataset.done = 1; im.style.opacity = .25; say(im.dataset.w); got++;
-      scale -= .25; boss.style.width = 18 * scale + '%'; wobble(boss);
-      if (got === useful.length) later(() => { poof(boss); b.toggle(false); }, 600);
-    } else { wobble(im); scale = Math.min(1.2, scale + .05); boss.style.width = 18 * scale + '%'; }
+  const belt = el('div', 'belt', ''); belt.style.top = '62%';
+  const list = shuffle(['cake', 'toothbrush', 'candy', 'toothpaste', 'soda', 'cup']);
+  list.forEach((w, i) => {
+    const im = el('img', 'item', null, belt); im.src = U(WORDS[w] || w); im.style.left = 9 + i * 16.4 + '%'; im.style.cursor = 'pointer';
+    im.onclick = () => {
+      if (im.dataset.done) return;
+      if (useful.includes(w)) {
+        im.dataset.done = 1; im.style.opacity = .25; say(w); sfx.shrink(); got++;
+        scale -= .22; boss.style.transition = 'height .4s'; boss.style.height = 30 * scale + '%'; wobble(boss);
+        if (got === useful.length) later(() => { poof(boss); c.done(); }, 700);
+      } else { wobble(im); sfx.grow(); scale = Math.min(1.25, scale + .06); boss.style.height = 30 * scale + '%'; }
+    };
   });
 } };
-S[25] = { bg: 'castle_dark', go(n) {
-  const s = sp('boss_scared', 50, 60, 16, 'pop');
-  later(() => { s.style.transition = 'all 1.4s ease-in'; s.style.left = '120%'; s.style.top = '40%'; drawGermbar(false); }, 900);
+S[25] = { bg: 'castle_dark', go(n, c) {
+  const s = sph('boss_scared', 50, 62, 26, 'pop');
+  later(() => { s.style.transition = 'all 1.4s ease-in'; s.style.left = '120%'; s.style.top = '40%'; drawGermbar(false); sfx.win(); }, 900);
+  later(() => c.done(), 2600);
 } };
-// 26–27. Финал
-S[26] = { bg: 'castle_lights', go(n) { sp(peng('jump', n), 50, 72, 16, 'pop bob'); drawGermbar(false); } };
-S[27] = { bg: 'castle_lights', go(n) {
-  drawGermbar(false);
+// 26–27. Финал: пингвинёнок одного размера и на одном месте на обоих слайдах
+const FIN = [50, 66, 44];
+S[26] = { bg: 'castle_lights', go(n) { sph('ph_jump', FIN[0], FIN[1], FIN[2], 'bob'); sfx.win(); } };
+S[27] = { bg: 'castle_lights', go(n, c) {
   const steps = [['Take a toothbrush!', 'brush'], ['Take some toothpaste!', 'tube'], ['Brush, brush, brush!', 'ph_brush'], ['Smile!', 'ph_jump']];
-  const p = sp('ph_stand', 50, 62, 20, 'pop');
+  const p = sph('ph_stand', FIN[0], FIN[1], FIN[2]);
   let k = 0;
-  const b = btn(steps[0][0], 50, 16, 'sun', () => {
-    const [txt, img] = steps[k];
+  const b = btn(steps[0][0], 50, 22, 'sun', next);
+  function next() {
+    if (k >= steps.length) return;
+    const [, img] = steps[k];
     layer.querySelectorAll('.extra').forEach(x => x.remove());
-    if (img === 'brush' || img === 'tube') sp(img, 76, 52, img === 'brush' ? 4 : 8, 'pop extra');
-    else { p.src = U(img); p.classList.toggle('wiggle', img === 'ph_brush'); }
-    k++; b.textContent = k < steps.length ? steps[k][0] : '⭐ Super!';
-    if (k > steps.length) b.remove();
-  });
+    if (img === 'brush' || img === 'tube') { sph(img, 74, 58, 26, 'pop extra glow'); sfx.magic(); }
+    else { p.src = U(img); p.classList.toggle('wiggle', img === 'ph_brush'); sfx.ok(); }
+    k++;
+    if (k < steps.length) b.textContent = steps[k][0]; else { b.textContent = '⭐ Super!'; c.done(); }
+  }
+  for (let i = 0; i < 4; i++) c.step(next);
 } };
 // 28. Сертификат
 S[28] = { bg: 'castle_lights', go(n) {
-  drawGermbar(false);
-  const c = el('div', 'cert pop', `<h2>Защитник Зубного замка</h2><h3>Tooth Castle Hero</h3><input placeholder="Имя героя" maxlength="22"><p>прогнал всех микробов и выучил слова<br>tooth · toothbrush · toothpaste · cup</p>`);
-  sp('ph_jump', 22, 62, 14, 'pop');
-  const lg = el('div', 'logo', '<span class="sk"><b>SPLAT</b><i>KIDS</i></span><span class="ws" style="color:var(--ink)">WowSpeak</span>', c);
+  const cd = el('div', 'cert pop', `<h2>Защитник Зубного замка</h2><h3>Tooth Castle Hero</h3><input placeholder="Имя героя" maxlength="22"><p>прогнал всех микробов и выучил слова<br>tooth · toothbrush · toothpaste · cup</p>`);
+  const pi = el('img', 'peng', null, cd); pi.src = U('ph_jump');
+  const lg = el('div', 'logo', '<span class="sk"><b>SPLAT</b><i>KIDS</i></span><span class="ws" style="color:var(--ink)">WowSpeak</span>', cd);
   lg.style.cssText = 'justify-content:center;margin-top:calc(var(--u)*1.6)';
+  sfx.win();
 } };
 
 /* ---------- навигация ---------- */
 const TOTAL = 28;
-let cur = 0;
+let cur = 0, bgFront = 1;
+function setBg(name) {
+  const a = $('#bg' + bgFront), b = $('#bg' + (3 - bgFront));
+  if (a.dataset.n === name) return;
+  b.src = U(name); b.dataset.n = name; b.style.opacity = 1; a.style.opacity = 0; bgFront = 3 - bgFront;
+}
 function go(n) {
   if (n < 1 || n > TOTAL) return;
   timers.splice(0).forEach(t => { clearTimeout(t); clearInterval(t); });
-  layer.innerHTML = '';
+  $('#next').classList.remove('ready');
+  // плавный переход: старый слой гаснет, новый проявляется
+  const old = layer;
+  old.id = ''; old.classList.add('fade'); old.style.pointerEvents = 'none'; setTimeout(() => old.remove(), 550);
+  layer = document.createElement('div'); layer.className = 'layer fade'; layer.id = 'slide';
+  stage.insertBefore(layer, $('#top'));
+  requestAnimationFrame(() => requestAnimationFrame(() => layer.classList.remove('fade')));
   cur = n;
   killed = GATES.filter(g => g < n).length;     // сколько микробов уже прогнано к этому слайду
   drawGermbar(n < 25);
-  $('#germbar').style.visibility = n < 4 ? 'hidden' : '';
+  $('#germbar').style.opacity = n < 4 ? 0 : 1;
   const s = S[n];
-  $('#bg').src = U(s.bg);
-  s.go(n);
+  setBg(s.bg);
+  ctx = newCtx(n);
+  s.go(n, ctx);
   $('#pageno').textContent = `${n} / ${TOTAL}`;
   renderPlan();
 }
+// ▶: пока у задания есть шаги — выполняет следующий шаг; когда шагов нет — следующий слайд
+function forward() { ac(); const st = ctx && ctx.steps.shift(); if (st) st(); else go(cur + 1); }
 $('#prev').onclick = () => go(cur - 1);
-$('#next').onclick = () => go(cur + 1);
+$('#next').onclick = forward;
 document.addEventListener('keydown', e => {
   if (e.target.tagName === 'INPUT') return;
-  if (e.key === 'ArrowRight' || e.key === 'PageDown') go(cur + 1);
+  if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); forward(); }
   if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(cur - 1);
 });
+stage.addEventListener('pointerdown', () => ac(), { once: true });
 $('#bFull').onclick = () => document.fullscreenElement ? document.exitFullscreen() : stage.requestFullscreen?.();
 
-/* ---------- план учителя ---------- */
-let planAll = false;
-$('#bPlan').onclick = () => $('#plan').classList.toggle('on');
+/* ---------- план учителя: в отдельном окне, листается вместе с уроком ---------- */
+let planWin = null, planAll = false;
+$('#bPlan').onclick = () => {
+  planWin = window.open('', 'splat_plan', 'width=560,height=820');
+  if (!planWin) return alert('Браузер не дал открыть окно плана — разрешите всплывающие окна для этой страницы.');
+  renderPlan(); planWin.focus();
+};
 function renderPlan() {
-  const p = PLAN.find(r => r.n === cur);
-  const box = $('#plan');
-  if (!p) { box.innerHTML = '<h4>План не загружен</h4>'; return; }
-  let h = `<div class="sec">${p.sec}</div><h4>Слайд ${p.n}</h4><dl>
-    <dt>Что нужно сделать</dt><dd>${p.todo}</dd><dt>Teacher's language</dt><dd>${p.say}</dd><dt>Suggested answers</dt><dd>${p.ans}</dd></dl>
-    <button class="tb all" id="bAll">${planAll ? 'Скрыть весь план' : 'Весь план урока'}</button>`;
-  if (planAll) h += `<table><tr><th>№</th><th>Что сделать</th><th>Teacher's language</th><th>Answers</th></tr>` +
-    PLAN.map(r => `<tr class="${r.n === cur ? 'cur' : ''}"><td>${r.n}</td><td>${r.todo}</td><td>${r.say}</td><td>${r.ans}</td></tr>`).join('') + '</table>';
-  box.innerHTML = h;
-  $('#bAll').onclick = () => { planAll = !planAll; renderPlan(); };
+  if (!planWin || planWin.closed) return;
+  const p = PLAN.find(r => r.n === cur) || { sec: '', todo: '', say: '', ans: '' };
+  const d = planWin.document;
+  d.open();
+  d.write(`<!doctype html><meta charset="utf-8"><title>План — слайд ${cur}</title>
+<style>body{font-family:Nunito,'Segoe UI',sans-serif;color:#3b2d5c;margin:0;padding:18px 22px;background:#fffdf8;line-height:1.5}
+.sec{font-weight:900;font-size:12px;color:#e2559a;text-transform:uppercase;letter-spacing:.06em}h2{margin:2px 0 10px;color:#1f9e8b}
+dt{font-weight:900;color:#2f8ee0;margin-top:12px;font-size:13px}dd{margin:4px 0 0;font-size:16px}
+button{font:inherit;font-weight:800;border:none;border-radius:999px;padding:8px 14px;background:#ffe27a;cursor:pointer;margin:14px 6px 0 0}
+table{border-collapse:collapse;width:100%;margin-top:14px;font-size:13px}td,th{border:1px solid #e5dfe9;padding:6px;vertical-align:top;text-align:left}tr.cur{background:#fff3c4}</style>
+<div class="sec">${p.sec}</div><h2>Слайд ${cur} / ${TOTAL}</h2>
+<dl><dt>Что нужно сделать</dt><dd>${p.todo}</dd><dt>Teacher's language</dt><dd>${p.say}</dd><dt>Suggested answers</dt><dd>${p.ans}</dd></dl>
+<button id="pp">◀ Слайд</button><button id="nn">Дальше ▶</button><button id="aa">${planAll ? 'Скрыть весь план' : 'Весь план урока'}</button>
+${planAll ? '<table><tr><th>№</th><th>Что сделать</th><th>Teacher\'s language</th><th>Answers</th></tr>' + PLAN.map(r => `<tr class="${r.n === cur ? 'cur' : ''}"><td>${r.n}</td><td>${r.todo}</td><td>${r.say}</td><td>${r.ans}</td></tr>`).join('') + '</table>' : ''}`);
+  d.close();
+  d.getElementById('pp').onclick = () => go(cur - 1);
+  d.getElementById('nn').onclick = forward;
+  d.getElementById('aa').onclick = () => { planAll = !planAll; renderPlan(); };
 }
 
 go(1);

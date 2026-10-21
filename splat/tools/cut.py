@@ -45,6 +45,7 @@ def cut(src, out_dir, names, max_side=520, grow=18, thr=10):
         bl, _ = ndi.label(nearwhite)
         border = set(np.unique(np.concatenate([bl[0], bl[-1], bl[:, 0], bl[:, -1]]))) - {0}
         bg = np.isin(bl, list(border)) | ~own
+        bg = ~ndi.binary_fill_holes(~bg)          # замкнутые белые пятна внутри (глаза, блики) — часть предмета
         alpha = np.where(bg, 0, 255).astype(np.uint8)
         # мягкий край: переход 6..18 «темнее белого» у границы с фоном
         edge = ndi.binary_dilation(bg, iterations=2) & ~bg
