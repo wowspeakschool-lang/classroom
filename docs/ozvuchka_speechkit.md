@@ -52,3 +52,27 @@ order by c.slug, u.sort_order, l.sort_order, b.sort_order;
 ```
 
 Пустой результат — значит все аудирования озвучены.
+
+
+## SM1 · Юнит 9 · ДЗ 5 · блок 2 → `sm1_u9_hw5_b2.mp3`
+
+Добавлено 21.10.2026. Аудирование урока 5 («Listen and draw»): ребёнок слушает
+рассказ и находит предметы на пляжной картинке (`media/sm1/u9/hw5_beach_scene.webp`).
+Блок 3 той же домашки — `hotspot` с шестью точками: the ball, the sandcastle,
+the bucket, the boat, the crab, the umbrella.
+
+Голос английский, темп спокойный, паузы между предложениями около секунды.
+
+```
+Look at the beach. It's a sunny day.
+The ball is next to the pink towel.
+A girl is reading a book on the towel.
+The sandcastle is on the sand, next to the girl in the hat.
+The bucket is next to the sandcastle.
+The boat is in the sea.
+A boy is swimming in the water.
+The crab is on the sand, next to the blue umbrella.
+```
+
+В блоке 2 поле `url` пустое и `audio_tts` намеренно не стоит — чтобы «Озвучить
+пачкой» не затёрла место под эту запись.
