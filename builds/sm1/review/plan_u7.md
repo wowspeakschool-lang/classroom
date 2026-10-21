@@ -111,16 +111,12 @@ cap, Gary. / No, it's my cap. / Oh no! That's my cap! / I'm very sorry, Gary.»
 Gary простил. Шесть реплик заканчиваются на извинении, то есть на конфликте;
 ребёнок не видит пары «sorry → It's OK», ради которой урок и построен.
 
-Предлагаю:
-- в блок 6 добавить седьмую реплику «It's OK.» (`audio_tts` такой же, как у
-  остальных) — порядок ответа дополняется в конце, остальные не меняются;
-- в блок 2 (повтор ключевых фраз) дописать строкой пару «**I'm very sorry.** —
-  **It's OK.**» и одну фразу по-русски: «В конце истории Whisper извинился, а
-  Gary его простил»;
-- в `quiz`, который первый проход предлагает добавить в ДЗ 4, взять вопрос на
-  развязку с четырьмя вариантами: «Whose cap is Gary wearing?» → «Gary's cap.» /
-  «Whisper's cap.» / «Flash's cap.» / «Misty's cap.» — он проверяет понимание
-  поворота и слово `same` из пре-тича.
+Предлагаю: в блок 6 добавить седьмую реплику «It's OK.» (`audio_tts` как у
+остальных — порядок дополняется в конце, прежние реплики не меняются); в блок 2
+дописать пару «**I'm very sorry.** — **It's OK.**» и строку по-русски «В конце
+истории Whisper извинился, а Gary его простил»; в `quiz`, который первый проход
+предлагает добавить в ДЗ 4, взять вопрос на развязку — «Whose cap is Gary
+wearing?» → «Gary's cap.» / «Whisper's cap.» / «Flash's cap.» / «Misty's cap.»
 
 ### A4. ДЗ 5 — ступени Reading у домашки нет, а тест её проверяет
 
@@ -139,17 +135,14 @@ True/False по картинке, блоки 7, 10–16 — грамматика
 Ступень урока, которая этому учит, в домашку не попала.
 
 Предлагаю: поставить в ДЗ 5 между блоками 6 и 7 `match` «Прочитай описания и
-найди, кто есть кто» — картинки уже нарезаны и в ДЗ 3 используются только на
-слух, так что повтора не будет:
-- «She is wearing a red sweater, a white skirt and red shoes.» ↔
-  `outfit_kate.webp`
-- «He is wearing a grey T-shirt, red shorts and a cap.» ↔ `outfit_sam.webp`
-- «She is wearing a pink sweater and a red skirt.» ↔ `outfit_amy.webp`
-  (после переименования из `outfit_any.webp` — находка первого прохода)
-- «He is wearing a black jacket, a white T-shirt and black jeans.» ↔
-  `outfit_tom.webp`
-Текст пар брать уже исправленным (`jacket`/`T-shirt` вместо `coat`/`shirt`,
-`shoes` вместо `boots`) — иначе чтение опять упрётся в слова вне программы.
+найди, кто есть кто» — картинки уже нарезаны и в ДЗ 3 идут только на слух,
+так что повтора не будет: «She is wearing a red sweater, a white skirt and red
+shoes.» ↔ `outfit_kate.webp`; «He is wearing a grey T-shirt, red shorts and a
+cap.» ↔ `outfit_sam.webp`; «She is wearing a pink sweater and a red skirt.» ↔
+`outfit_amy.webp` (после переименования из `outfit_any.webp`); «He is wearing a
+black jacket, a white T-shirt and black jeans.» ↔ `outfit_tom.webp`. Текст пар
+брать уже исправленным (`jacket`/`T-shirt` вместо `coat`/`shirt`, `shoes`
+вместо `boots`) — иначе чтение опять упрётся в слова вне программы.
 
 ### A5. ДЗ 5 — ответа-предположения «No, I think he's…» нет
 
