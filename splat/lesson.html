@@ -4,422 +4,542 @@
 <meta charset="UTF-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Splat Kids — The Tooth Castle in the Sky</title>
+<title>Пингвинёнок идёт домой — Splat Kids × WowSpeak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/base.css">
 <style>
-body{overflow:hidden;user-select:none;touch-action:none}
-#stage{position:fixed;inset:0;z-index:1}
-.scr{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;padding:84px 20px 96px}
-.scr.on{display:flex}
-/* верх: бренд, башни прогресса, кнопки учителя */
-#top{position:fixed;left:0;right:0;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;gap:10px}
-#towers{display:flex;gap:6px;background:rgba(255,255,255,.55);backdrop-filter:blur(6px);padding:6px 12px;border-radius:999px}
-#towers i{width:28px;height:28px;display:block;opacity:.35;filter:grayscale(1);transition:.4s}
-#towers i.lit{opacity:1;filter:none;transform:scale(1.15)}
-.tb{font-family:var(--disp);font-weight:600;font-size:15px;border:none;border-radius:999px;padding:9px 14px;cursor:pointer;background:#fff;color:var(--ink);box-shadow:0 3px 0 rgba(0,0,0,.1)}
-#nav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;align-items:center;gap:14px;padding:14px}
-.arrow{width:52px;height:52px;border-radius:50%;border:none;background:rgba(255,255,255,.75);font-size:24px;cursor:pointer;color:var(--ink);box-shadow:0 4px 0 rgba(0,0,0,.1)}
-#pageno{position:fixed;right:16px;bottom:22px;z-index:20;font-weight:800;font-size:13px;color:var(--ink);opacity:.5}
-/* заметки учителя */
-#notes{position:fixed;right:16px;top:70px;z-index:30;width:min(380px,90vw);max-height:70vh;overflow:auto;background:var(--paper);border-radius:22px;padding:18px 20px;
-  box-shadow:0 18px 50px rgba(59,45,92,.3);font-size:15px;line-height:1.5;display:none}
-#notes.on{display:block}
-#notes h4{font-family:var(--disp);font-size:18px;margin-bottom:6px;color:var(--brand-d)}
-#notes .t{font-size:12px;font-weight:900;color:var(--accent-d);text-transform:uppercase;letter-spacing:.06em}
-#notes ul{margin:8px 0 0 18px}#notes li{margin:4px 0}
-#notes q{font-family:var(--disp);color:var(--accent-d);quotes:none;font-weight:600}
-/* общие элементы сцен */
-.h1{font-family:var(--disp);font-weight:700;font-size:clamp(30px,5.6vw,64px);color:#fff;text-align:center;line-height:1.05;
-  text-shadow:0 4px 0 var(--brand-d),0 8px 24px rgba(31,158,139,.45)}
-.h2{font-family:var(--disp);font-weight:700;font-size:clamp(24px,3.8vw,42px);color:var(--ink);text-align:center;background:rgba(255,255,255,.8);
-  padding:8px 26px;border-radius:999px;box-shadow:0 6px 0 rgba(59,45,92,.08)}
-.sub{font-family:var(--disp);font-weight:600;font-size:clamp(16px,2.2vw,22px);color:var(--ink);background:rgba(255,255,255,.75);border-radius:999px;padding:6px 18px;margin-top:12px;text-align:center}
-.presents{display:flex;flex-direction:column;align-items:center;gap:4px;margin-bottom:6px}
-.presents .brandmark img{height:70px}.presents .brandmark .wm b{font-size:34px}.presents .brandmark .wm s{font-size:26px}
-.presents small{font-family:var(--disp);font-weight:600;color:#fff;font-size:16px;letter-spacing:.2em;text-transform:uppercase;text-shadow:0 1px 4px rgba(0,0,0,.25)}
-.bubble{position:relative;background:#fff;border-radius:26px;padding:14px 24px;font-family:var(--disp);font-weight:700;font-size:clamp(20px,3vw,32px);
-  box-shadow:0 10px 30px rgba(59,45,92,.18);color:var(--ink)}
-.bubble:after{content:'';position:absolute;left:30px;bottom:-16px;border:12px solid transparent;border-top:18px solid #fff}
-.card{background:#fff;border-radius:28px;padding:14px;box-shadow:0 8px 0 rgba(59,45,92,.08),0 14px 30px rgba(59,45,92,.15);cursor:pointer;
-  display:flex;flex-direction:column;align-items:center;gap:6px;transition:transform .15s}
-.card:hover{transform:translateY(-6px) rotate(-1deg)}
-.card .pic{width:clamp(90px,12vw,160px);height:clamp(90px,12vw,160px);display:flex;align-items:center;justify-content:center}
-#s-bag .card .pic,#s-pack .card .pic{width:clamp(70px,9vw,130px);height:clamp(70px,9vw,130px)}
-#s-bag .card,#s-pack .card{padding:10px}
-.card .w{font-family:var(--disp);font-weight:700;font-size:clamp(18px,2.4vw,28px)}
-.card.good{outline:6px solid var(--brand);}
-.row{display:flex;gap:clamp(12px,2.4vw,28px);flex-wrap:wrap;justify-content:center;align-items:flex-end}
-.speaker{width:72px;height:72px;border-radius:50%;border:none;background:var(--accent);color:#fff;font-size:34px;cursor:pointer;box-shadow:0 6px 0 var(--accent-d)}
-.speaker:active{transform:translateY(4px);box-shadow:0 2px 0 var(--accent-d)}
-/* 0 — старт */
-#s-start .hero{width:min(240px,30vw)}
-#s-start .pack{position:absolute;width:min(150px,16vw);bottom:110px}
-#s-start .pack.l{left:5vw;transform:rotate(-12deg)}#s-start .pack.r{right:5vw;transform:rotate(14deg)}
-/* 1 — полёт */
-#s-fly .castle{width:min(620px,80vw);cursor:pointer;transition:transform 2.2s cubic-bezier(.2,.8,.2,1)}
-#s-fly .castle.below{transform:translateY(80vh)}
-#s-fly .fairy{position:absolute;left:6vw;bottom:110px;width:min(200px,22vw);display:none}
-#s-fly .fairy.on{display:block}
-#s-fly .fairy .bubble{position:absolute;left:80%;top:-30px;white-space:nowrap}
-/* 2 — микробы */
-#s-germs .castle{width:min(560px,70vw);opacity:.92}
-#s-germs .g{position:absolute;width:clamp(70px,9vw,120px);cursor:pointer;transition:transform .2s}
-#s-germs .g.gone{transform:scale(0) rotate(180deg)}
-/* 3 — волшебная сумка */
-#s-bag .bagwrap{width:min(220px,26vw);cursor:pointer}
-#s-bag .row{margin-top:18px;min-height:220px}
-/* 5 — чистка */
-#s-brush .arena{position:relative;width:min(520px,70vw);height:min(520px,60vh)}
-#s-brush .bigtooth{position:absolute;inset:0}
-#s-brush .dirt{position:absolute;width:20%;transition:opacity .2s,transform .3s;pointer-events:none}
-#s-brush .dirt.gone{opacity:0;transform:scale(2)}
-#brushCursor{position:fixed;width:150px;height:150px;pointer-events:none;z-index:15;transform:translate(-30%,-30%);display:none}
-#s-brush .tray{position:absolute;right:4vw;bottom:110px;width:min(150px,16vw);cursor:grab}
-#s-brush .meter{width:min(420px,70vw);height:22px;background:#fff;border-radius:999px;overflow:hidden;margin-top:14px;box-shadow:inset 0 2px 4px rgba(0,0,0,.1)}
-#s-brush .meter b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--sun));transition:width .2s}
-/* 6 — песенка */
-#s-chant .mirror{position:relative;width:min(460px,60vw);height:min(360px,46vh);background:rgba(255,255,255,.7);border-radius:50% 50% 46% 46%;border:10px solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 40px rgba(59,45,92,.2)}
-#s-chant .mirror .sm{width:70%}
-#s-chant .mirror .tb2{position:absolute;width:40%;left:30%;top:10%}
-.updown{animation:ud .5s ease-in-out infinite alternate}@keyframes ud{from{transform:translateY(-30px)}to{transform:translateY(40px)}}
-.round{animation:rr 1s linear infinite}@keyframes rr{from{transform:rotate(0) translateX(40px) rotate(0)}to{transform:rotate(360deg) translateX(40px) rotate(-360deg)}}
-#s-chant .lyr{font-family:var(--disp);font-weight:700;font-size:clamp(20px,3vw,34px);color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.25);margin-top:16px;min-height:1.3em;text-align:center}
-/* 7 — собери сумку */
-#s-pack .bagwrap{width:min(200px,22vw);margin-top:14px}
-#s-pack .card.in{transform:scale(0);opacity:0;transition:.5s}
-/* 8 — финал */
-#s-final .castle{width:min(560px,70vw)}
-.cert{background:var(--paper);border-radius:30px;padding:20px 28px;text-align:center;box-shadow:0 18px 50px rgba(59,45,92,.25);border:6px dashed var(--brand);max-width:640px}
-.cert h3{font-family:var(--disp);font-size:clamp(26px,4vw,40px);color:var(--accent-d)}
-.cert input{font-family:var(--disp);font-size:26px;text-align:center;border:none;border-bottom:3px solid var(--brand);background:transparent;outline:none;width:80%;margin:8px 0;color:var(--ink)}
-.cert .medal{width:110px;height:110px;margin:0 auto}
-.gift{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px}
-.twk{position:absolute;width:24px;animation:twinkle 2s ease-in-out infinite}
-@media (max-width:700px){#towers{display:none}.tb span{display:none}}
+/* Урок «Пингвинёнок идёт домой». Сцена 16:9 вписывается в окно; координаты спрайтов — в % сцены,
+   размеры шрифтов — от ширины сцены (--u = 1% ширины), чтобы при демонстрации экрана в Zoom всё масштабировалось. */
+:root{--pink:#ff7eb6;--pink-d:#e2559a;--sky:#5bb8ff;--sky-d:#2f8ee0;--mint:#33c7b0;--mint-d:#1f9e8b;--sun:#ffd23f;--red:#e3262f;
+  --ink:#3b2d5c;--paper:#fffdf8;--disp:'Fredoka','Nunito',sans-serif;--text:'Nunito','Segoe UI',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#1d2a4a;overflow:hidden}
+body{font-family:var(--text);color:var(--ink);user-select:none;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center}
+#stage{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);overflow:hidden;background:#cfe8f7;--u:calc(min(100vw,177.78vh)/100)}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s}
+.sp{position:absolute;transform:translate(-50%,-50%);height:auto;pointer-events:none}
+.sp.click{pointer-events:auto;cursor:pointer}
+.layer{position:absolute;inset:0}
+
+/* верхняя панель */
+#top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:calc(var(--u)*1) calc(var(--u)*1.4);pointer-events:none}
+#top>*{pointer-events:auto}
+.logo{display:flex;align-items:center;gap:calc(var(--u)*.6);font-family:var(--disp);font-weight:700}
+.logo .sk{background:var(--red);color:#fff;border-radius:calc(var(--u)*.5);padding:calc(var(--u)*.35) calc(var(--u)*.7);line-height:.9;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.logo .sk b{display:block;font-size:calc(var(--u)*1.6);letter-spacing:.04em}
+.logo .sk i{display:block;font-style:normal;font-size:calc(var(--u)*.75);letter-spacing:.3em}
+.logo .x{color:#fff;font-size:calc(var(--u)*1.3);text-shadow:0 1px 3px rgba(0,0,0,.3)}
+.logo .ws{background:#fff;border-radius:calc(var(--u)*.6);padding:calc(var(--u)*.4) calc(var(--u)*.8);font-size:calc(var(--u)*1.1)}
+#germbar{display:flex;gap:calc(var(--u)*.4);background:rgba(255,255,255,.75);border-radius:999px;padding:calc(var(--u)*.3) calc(var(--u)*1)}
+#germbar img{width:calc(var(--u)*3);transition:.5s}
+#germbar img.off{filter:grayscale(1);opacity:.25;transform:scale(.7)}
+.tb{border:none;background:#fff;border-radius:999px;font-family:var(--disp);font-weight:600;font-size:calc(var(--u)*1.1);padding:calc(var(--u)*.5) calc(var(--u)*1);cursor:pointer;color:var(--ink);box-shadow:0 2px 0 rgba(0,0,0,.12)}
+
+/* низ: навигация и номер слайда */
+#nav{position:absolute;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*1);padding:calc(var(--u)*.8)}
+.arrow{width:calc(var(--u)*3.6);height:calc(var(--u)*3.6);border-radius:50%;border:none;background:rgba(255,255,255,.85);font-size:calc(var(--u)*1.5);cursor:pointer;color:var(--ink);box-shadow:0 3px 0 rgba(0,0,0,.12)}
+#pageno{position:absolute;right:calc(var(--u)*1.4);bottom:calc(var(--u)*1.2);z-index:30;background:rgba(255,255,255,.85);border-radius:999px;padding:calc(var(--u)*.3) calc(var(--u)*.9);font-family:var(--disp);font-weight:600;font-size:calc(var(--u)*1.1)}
+
+/* общие элементы */
+.title{position:absolute;left:50%;top:14%;transform:translateX(-50%);z-index:5;font-family:var(--disp);font-weight:700;font-size:calc(var(--u)*3);color:var(--ink);background:rgba(255,255,255,.85);padding:calc(var(--u)*.5) calc(var(--u)*2);border-radius:999px;white-space:nowrap;box-shadow:0 4px 0 rgba(59,45,92,.08)}
+.wordcard{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);z-index:6;background:#fff;border-radius:calc(var(--u)*2.4);padding:calc(var(--u)*1.4);display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*.6);box-shadow:0 calc(var(--u)*1) calc(var(--u)*3) rgba(59,45,92,.25)}
+.wordcard img{height:calc(var(--u)*22);width:auto;max-width:calc(var(--u)*30);object-fit:contain}
+.wordcard .w{font-family:var(--disp);font-weight:700;font-size:calc(var(--u)*3.6)}
+.say{border:none;background:var(--pink);color:#fff;border-radius:50%;width:calc(var(--u)*4.4);height:calc(var(--u)*4.4);font-size:calc(var(--u)*2);cursor:pointer;box-shadow:0 calc(var(--u)*.3) 0 var(--pink-d)}
+.say:active{transform:translateY(2px);box-shadow:none}
+.card{position:absolute;transform:translate(-50%,-50%);background:#fff;border-radius:calc(var(--u)*1.8);padding:calc(var(--u)*1);cursor:pointer;box-shadow:0 calc(var(--u)*.6) calc(var(--u)*1.6) rgba(59,45,92,.2);display:flex;flex-direction:column;align-items:center;transition:transform .2s}
+.card img{height:calc(var(--u)*14);width:calc(var(--u)*14);object-fit:contain}
+.card.good{outline:calc(var(--u)*.5) solid var(--mint)}
+.card.bad{outline:calc(var(--u)*.5) solid var(--pink)}
+.btn{position:absolute;transform:translate(-50%,-50%);border:none;border-radius:999px;font-family:var(--disp);font-weight:700;font-size:calc(var(--u)*2);padding:calc(var(--u)*.8) calc(var(--u)*2.2);cursor:pointer;color:#fff;background:linear-gradient(180deg,#5fe0cb,var(--mint-d));box-shadow:0 calc(var(--u)*.4) 0 #167a6b;z-index:8}
+.btn.pink{background:linear-gradient(180deg,#ff9fca,var(--pink-d));box-shadow:0 calc(var(--u)*.4) 0 #b83c79}
+.btn.sun{background:linear-gradient(180deg,#ffe27a,#f2a81d);color:var(--ink);box-shadow:0 calc(var(--u)*.4) 0 #c98410}
+.btn:active{transform:translate(-50%,calc(-50% + 3px));box-shadow:none}
+.num{position:absolute;transform:translate(-50%,-50%);font-family:var(--disp);font-weight:700;font-size:calc(var(--u)*3.2);color:#fff;background:var(--sky-d);width:calc(var(--u)*4.6);height:calc(var(--u)*4.6);border-radius:50%;display:flex;align-items:center;justify-content:center;border:calc(var(--u)*.35) solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.2);pointer-events:none}
+.mark{position:absolute;transform:translate(-50%,-50%);font-size:calc(var(--u)*5);pointer-events:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
+.glint{position:absolute;transform:translate(-50%,-50%);width:calc(var(--u)*6);height:calc(var(--u)*6);border-radius:50%;background:radial-gradient(circle,#fff 0,#fff6c0 25%,rgba(255,230,120,0) 70%);animation:twinkle 1.2s ease-in-out infinite;pointer-events:none}
+
+/* анимации */
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 calc(var(--u)*-1.2)}}
+@keyframes shake{0%,100%{rotate:0deg}25%{rotate:-8deg}75%{rotate:8deg}}
+@keyframes pop{0%{scale:.2;opacity:0}70%{scale:1.12}100%{scale:1;opacity:1}}
+@keyframes poof{0%{scale:1;opacity:1}40%{scale:1.3;opacity:1;filter:brightness(1.6)}100%{scale:0;opacity:0;rotate:200deg}}
+@keyframes twinkle{0%,100%{opacity:.4;scale:.8}50%{opacity:1;scale:1.15}}
+@keyframes rays{from{rotate:0deg}to{rotate:360deg}}
+@keyframes wiggle{0%,100%{rotate:-4deg}50%{rotate:4deg}}
+@keyframes swim{0%{left:30%}50%{left:70%}100%{left:30%}}
+.bob{animation:bob 2.4s ease-in-out infinite}
+.shake{animation:shake .4s}
+.pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
+.poof{animation:poof .7s ease-in forwards}
+.wiggle{animation:wiggle .35s ease-in-out infinite}
+.rays{position:absolute;transform:translate(-50%,-50%);width:calc(var(--u)*40);height:calc(var(--u)*40);border-radius:50%;
+  background:repeating-conic-gradient(rgba(255,240,170,.85) 0 8deg,rgba(255,255,255,0) 8deg 22deg);animation:rays 6s linear infinite;
+  mask:radial-gradient(circle,#000 20%,transparent 70%);-webkit-mask:radial-gradient(circle,#000 20%,transparent 70%);pointer-events:none}
+
+/* лента */
+.belt{position:absolute;left:0;right:0;top:56%;height:26%;background:linear-gradient(180deg,#e9f4ff,#cfe3f7);border-top:calc(var(--u)*.5) solid #fff;border-bottom:calc(var(--u)*.8) solid #9fc3e6;box-shadow:inset 0 0 calc(var(--u)*2) rgba(47,142,224,.25);overflow:hidden}
+.belt .frame{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:22%;height:118%;border:calc(var(--u)*.6) dashed var(--pink);border-radius:calc(var(--u)*1.6);z-index:2}
+.belt .item{position:absolute;top:50%;height:80%;width:auto;transform:translate(-50%,-50%);cursor:pointer}
+/* плитки */
+.tiles{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:calc(var(--u)*30);height:calc(var(--u)*30);background:#fff;border-radius:calc(var(--u)*2);overflow:hidden;box-shadow:0 calc(var(--u)*.8) calc(var(--u)*2) rgba(59,45,92,.2)}
+.tiles img{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain}
+.tiles .grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr)}
+.tiles .grid i{background:linear-gradient(135deg,#ffb3d2,#9fd3ff);border:2px solid #fff;transition:opacity .35s, transform .35s}
+.tiles .grid i.gone{opacity:0;transform:scale(.4)}
+/* сертификат */
+.cert{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:70%;height:74%;background:var(--paper);border-radius:calc(var(--u)*2.4);border:calc(var(--u)*.7) solid var(--pink);box-shadow:0 0 0 calc(var(--u)*.6) #fff,0 calc(var(--u)*1) calc(var(--u)*3) rgba(59,45,92,.3);text-align:center;padding:calc(var(--u)*2.4) calc(var(--u)*3)}
+.cert h2{font-family:var(--disp);font-size:calc(var(--u)*3.6);color:var(--pink-d);line-height:1.05}
+.cert h3{font-family:var(--disp);font-size:calc(var(--u)*2.2);color:var(--sky-d);margin-top:calc(var(--u)*.4)}
+.cert input{font-family:var(--disp);font-size:calc(var(--u)*3.2);text-align:center;border:none;border-bottom:calc(var(--u)*.3) solid var(--mint);background:transparent;outline:none;width:60%;margin-top:calc(var(--u)*2.2);color:var(--ink)}
+.cert p{font-weight:800;font-size:calc(var(--u)*1.5);margin-top:calc(var(--u)*1.4)}
+/* план учителя */
+#plan{position:absolute;right:calc(var(--u)*1.4);top:calc(var(--u)*5.5);z-index:40;width:44%;max-height:80%;overflow:auto;background:var(--paper);border-radius:calc(var(--u)*1.6);padding:calc(var(--u)*1.4) calc(var(--u)*1.8);box-shadow:0 calc(var(--u)*1) calc(var(--u)*4) rgba(0,0,0,.35);font-size:calc(var(--u)*1.15);line-height:1.45;display:none}
+#plan.on{display:block}
+#plan h4{font-family:var(--disp);font-size:calc(var(--u)*1.6);color:var(--mint-d)}
+#plan .sec{font-weight:900;font-size:calc(var(--u)*.9);color:var(--pink-d);text-transform:uppercase;letter-spacing:.06em}
+#plan dt{font-weight:900;margin-top:calc(var(--u)*.8);font-size:calc(var(--u)*.95);color:var(--sky-d)}
+#plan dd{margin:calc(var(--u)*.2) 0 0}
+#plan .all{margin-top:calc(var(--u)*1)}
+#plan table{border-collapse:collapse;width:100%;font-size:calc(var(--u)*.95)}
+#plan td,#plan th{border:1px solid #e5dfe9;padding:calc(var(--u)*.4);vertical-align:top;text-align:left}
+#plan tr.cur{background:#fff3c4}
 </style>
 </head>
 <body>
-<div id="top">
-  <div id="brand"></div>
-  <div id="towers"></div>
-  <div><button class="tb" id="bMute">🔊</button> <button class="tb" id="bNotes">📋 <span>Учителю</span></button></div>
-</div>
-<div id="notes"></div>
-<img id="brushCursor" alt="">
-
 <div id="stage">
-  <!-- 0. Старт -->
-  <section class="scr" id="s-start">
-    <div class="presents"><div id="brandBig"></div><small>presents</small></div>
-    <div class="hero bob" data-art="fairy"></div>
-    <div class="h1">The Tooth Castle<br>in the Sky</div>
-    <div class="sub">Splat Kids приглашает в Зубной замок в облаках ✨</div>
-    <button class="btn pulse" style="margin-top:22px" data-next>▶ Start</button>
-    <div class="pack l" data-art="toothpaste"></div><div class="pack r" data-art="toothbrush"></div>
-  </section>
-
-  <!-- 1. Полёт к замку -->
-  <section class="scr" id="s-fly">
-    <div class="h2">What is it?</div>
-    <div class="castle below" data-art="castle" data-lit="0"></div>
-    <div class="fairy"><div data-art="fairy" class="bob"></div><div class="bubble">Hello! 👋</div></div>
-  </section>
-
-  <!-- 2. Микробы -->
-  <section class="scr" id="s-germs">
-    <div class="h2">Oh no! Germs! 🦠</div>
-    <div class="castle" data-art="castle" data-lit="0"></div>
-  </section>
-
-  <!-- 3. Волшебная сумка: лексика -->
-  <section class="scr" id="s-bag">
-    <div class="h2">Magic bag! ✨</div>
-    <div class="bagwrap bob" data-art="bag"></div>
-    <div class="row" id="bagItems"></div>
-  </section>
-
-  <!-- 4. Послушай и найди -->
-  <section class="scr" id="s-listen">
-    <div class="h2" id="lsQ">Where is the toothbrush?</div>
-    <div style="margin:18px 0"><button class="speaker" id="lsPlay">🔊</button></div>
-    <div class="row" id="lsCards"></div>
-  </section>
-
-  <!-- 5. Почисти зубик -->
-  <section class="scr" id="s-brush">
-    <div class="h2">Brush, brush, brush! 🪥</div>
-    <div class="arena" id="arena"><div class="bigtooth" data-art="tooth" data-mood="sad"></div></div>
-    <div class="meter"><b id="meter"></b></div>
-  </section>
-
-  <!-- 6. Песенка-движение -->
-  <section class="scr" id="s-chant">
-    <div class="h2">Let's sing! 🎵</div>
-    <div class="mirror" style="margin-top:16px"><div class="sm" data-art="smile"></div><div class="tb2" id="chBrush" data-art="toothbrush"></div></div>
-    <div class="lyr" id="lyr">&nbsp;</div>
-    <button class="btn pink" id="chPlay" style="margin-top:8px">▶ Song</button>
-  </section>
-
-  <!-- 7. Собери сумку -->
-  <section class="scr" id="s-pack">
-    <div class="h2">What do we need? 🪥</div>
-    <div class="row" id="packCards" style="margin-top:20px"></div>
-    <div class="bagwrap" data-art="bag"></div>
-  </section>
-
-  <!-- 8. Финал -->
-  <section class="scr" id="s-final">
-    <div class="castle" data-art="castle" data-lit="5"></div>
-    <div class="h1" style="margin-top:-10px">Clean teeth! Shiny teeth!</div>
-    <button class="btn sun pulse" style="margin-top:16px" data-next>🏅 Big smile!</button>
-  </section>
-
-  <!-- 9. Сертификат и подарок родителям -->
-  <section class="scr" id="s-cert">
-    <div class="cert pop">
-      <div class="medal" data-art="star"></div>
-      <h3>Clean Teeth Hero</h3>
-      <input id="kid" placeholder="Имя героя" maxlength="24">
-      <div style="font-weight:800">побывал(а) в Зубном замке Splat Kids и выучил(а) слова<br>
-        <span style="font-family:var(--disp);color:var(--brand-d)">tooth · toothbrush · toothpaste · water · cup · smile</span></div>
-      <div class="gift">
-        <a class="btn" href="index.html" target="_blank">🎮 Тренажёр</a>
-        <a class="btn pink" href="print.html" target="_blank">🖨 Задания с мамой</a>
-      </div>
-      <div style="margin-top:12px;font-size:14px;font-weight:800;opacity:.75">Конкурс рисунков Splat Kids: нарисуй щётку или Зубную фею, подпиши английское слово — и пришли нам!</div>
-    </div>
-    <button class="btn pink" style="margin-top:16px" data-next>👋 Goodbye!</button>
-  </section>
-
-  <!-- 10. Пока -->
-  <section class="scr" id="s-bye">
-    <div class="hero bob" style="width:min(260px,34vw)" data-art="tooth" data-shine="1" data-crown="1"></div>
-    <div class="h1">Goodbye! 👋</div>
-    <div class="sub">Чисти зубки утром и вечером — и до встречи в Зубном замке!</div>
-  </section>
+  <img class="bg" id="bg" alt="">
+  <div class="layer" id="slide"></div>
+  <div id="top">
+    <div class="logo"><span class="sk"><b>SPLAT</b><i>KIDS</i></span><span class="x">×</span><span class="ws">WowSpeak</span></div>
+    <div id="germbar"></div>
+    <div><button class="tb" id="bPlan">📋 План</button> <button class="tb" id="bFull">⛶</button></div>
+  </div>
+  <div id="plan"></div>
+  <div id="nav"><button class="arrow" id="prev">◀</button><button class="arrow" id="next">▶</button></div>
+  <div id="pageno"></div>
 </div>
 
-<div id="nav"><button class="arrow" id="prev">◀</button><button class="btn" id="next">Next ▶</button><button class="arrow" id="fwd">▶</button></div>
-<div id="pageno"></div>
-
-<script src="assets/art.js"></script>
-<script src="assets/common.js"></script>
 <script>
-const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
-const W = Object.fromEntries(ART.WORDS.map(x => [x.w, x]));
-function drawArt(root = document) {
-  $$('[data-art]', root).forEach(el => {
-    const d = el.dataset, o = {};
-    if (d.lit !== undefined) o.lit = +d.lit;
-    if (d.mood) o.mood = d.mood; if (d.shine) o.shine = 1; if (d.crown) o.crown = 1;
-    el.innerHTML = ART[d.art](o);
+/* План урока — из docs/plan_uroka.md, вставляется скриптом tools/build_lesson.py (не править руками). */
+const PLAN = /*PLAN_START*/[{"n": 1, "sec": "Приветствие — 1 мин", "todo": "—", "say": "Hello! I'm (имя). What's your name? <i>(если ученик не понимает: «Как тебя зовут?»)</i>", "ans": "I'm Masha. / Masha."}, {"n": 2, "sec": "Приветствие — 1 мин", "todo": "—", "say": "Look! (TPR: пальчик к глазу) Who is it? Кто это? Это пингвинёнок. Penguin. Say: penguin! (TPR: рука к уху) Давай с ним поздороваемся. Say: Hello, Penguin! (TPR: машем рукой)", "ans": "Penguin! Hello, Penguin!"}, {"n": 3, "sec": "Завязка — 1,5 мин", "todo": "—", "say": "Look! (TPR: пальчик к глазу) What is it? Что это? Да, замок! Посмотри, какой он. Это обычный замок или зубной? Здесь живёт пингвинёнок.", "ans": "Замок! Зубной!"}, {"n": 4, "sec": "Завязка — 1,5 мин", "todo": "—", "say": "А кто это у ворот? Это микробы. Как думаешь, они пустят пингвинёнка домой? Нет, не пускают. Поможем прогнать микробов?", "ans": "Микробы! Нет. Да!"}, {"n": 5, "sec": "Шаг 1 — tooth — 3 мин", "todo": "На каждый счёт нажать на следующую льдинку — пингвинёнок прыгает", "say": "Ой, что-то блестит! Давай допрыгаем! Say: one, two, three, four! (TPR: показываем пальцы)", "ans": "One, two, three, four!"}, {"n": 6, "sec": "Шаг 1 — tooth — 3 мин", "todo": "Нажать на зубик — он увеличивается и сияет", "say": "What is it? Что это? Look! (TPR: пальчик к глазу) Это волшебный зубик. Say: tooth! (TPR: рука к уху) Как мы покажем зубик? (TPR: пальчик на свои зубки) Say: tooth! Whisper! Tooth. (TPR: палец к губам) Loud! Tooth! (TPR: ладони рупором)", "ans": "tooth (шёпотом, громко)"}, {"n": 7, "sec": "Шаг 1 — tooth — 3 мин", "todo": "На каждый счёт нажать на льдинку — прыгаем обратно", "say": "Прыгаем обратно к замку! One, two, three, four!", "ans": "One, two, three, four!"}, {"n": 8, "sec": "Шаг 1 — tooth — 3 мин", "todo": "Когда ребёнок скажет tooth — нажать на зубик: лучики, микроб исчезает", "say": "Этот зубик волшебный — микробы его испугались! Давай скажем громче, чтобы он засиял. Say: tooth!", "ans": "TOOTH!"}, {"n": 9, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "Нажимать на сугробы по одному: валенок, рыбка, сосулька, щётка", "say": "Смотри, сколько сугробиков! В них что-то спряталось. Что нам поможет прогнать микробов? Look! (TPR: пальчик к глазу) Это поможет? Yes or no? (TPR: yes — «класс» или киваем; no — несколько раз мотаем головой)", "ans": "No! No! No! Yes!"}, {"n": 10, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "Нажать на щётку — она увеличивается", "say": "What is it? Toothbrush! Say: toothbrush! (TPR: рука к уху) Как мы покажем зубную щётку? (TPR: показываем, как щётка чистит зубки) Say: toothbrush! <i>(если ребёнок не показывает: «Покажи, как щётка чистит зубки»)</i>", "ans": "toothbrush + жест"}, {"n": 11, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "<b>Игра «Послушай и выбери»</b>: две картинки, 4–5 раундов. Сказать слово; после ответа — нажать на картинку", "say": "Пингвинёнок собирает рюкзак. Listen! (TPR: пальчик к ушку) Toothbrush! Circle! (TPR: обводим пальцем в воздухе)", "ans": "обводит нужную картинку"}, {"n": 12, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "<b>Игра «Правда или нет»</b>: картинка + учитель называет слово (иногда неверное). Потом наоборот — картинка без слова", "say": "О нет, микроб хочет нас обмануть! Он называет картинки — правильно или нет? Look! (TPR: пальчик к глазу) Tooth? Yes or no? … What is it?", "ans": "No! Toothbrush! / Yes! / tooth, toothbrush"}, {"n": 13, "sec": "Шаг 2 — toothbrush — 4,5 мин", "todo": "Ребёнок называет оба слова — нажать: микроб исчезает", "say": "Возвращаемся к воротам! Назовём всё, что нашли, — и микроб убежит. What is it? (показываем зубик) What is it? (показываем щётку)", "ans": "Tooth! Toothbrush!"}, {"n": 14, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "Под водой плывёт тень. Когда ребёнок скажет stop — нажать: пингвинёнок вытаскивает пасту", "say": "Пингвинёнок любит рыбачить. Look! (TPR: пальчик к глазу) Кто-то плывёт… Stop! (TPR: ладонь вперёд) Say: stop!", "ans": "Stop!"}, {"n": 15, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "Нажать на тюбик — он увеличивается", "say": "What is it? Это зубная паста Splat Kids. Say: toothpaste! (TPR: выдавливаем пасту на щётку) Show me toothpaste!", "ans": "toothpaste + жест"}, {"n": 16, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "<b>Игра «Что под снежком?»</b>: нажать — микроб прячет три вещи под снежки, один снежок трясётся; после ответа нажать на снежок", "say": "О нет! Микроб прячет наши вещи под снежки! Какой снежок трясётся? Что там спрятано? What is it?", "ans": "Toothpaste! / Tooth! / Toothbrush!"}, {"n": 17, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "<b>Игра «Плитки»</b>: нажимать — квадратики исчезают по одному", "say": "Картинка спряталась под квадратиками. Что там? What is it? Guess! (TPR: пожимаем плечами, рука к уху)", "ans": "называет как можно раньше"}, {"n": 18, "sec": "Шаг 3 — toothpaste — 4,5 мин", "todo": "Ребёнок называет три слова — нажать: микроб исчезает", "say": "Возвращаемся к воротам! Назовём всё, что нашли. What is it? What is it? What is it?", "ans": "Tooth! Toothbrush! Toothpaste!"}, {"n": 19, "sec": "Шаг 4 — cup — 4 мин", "todo": "Когда ребёнок подует — нажать: снег слетает с горки", "say": "Ух, ветер! Let's blow! Ф-ф-ф! (TPR: дуем)", "ans": "дует"}, {"n": 20, "sec": "Шаг 4 — cup — 4 мин", "todo": "Нажать на стаканчик — он увеличивается", "say": "What is it? Это стаканчик. Say: cup! (TPR: держим стаканчик и пьём)", "ans": "cup + жест"}, {"n": 21, "sec": "Шаг 4 — cup — 4 мин", "todo": "<b>Игра «Стоп!»</b>: вещи медленно едут по ленте; когда ребёнок скажет stop — нажать", "say": "Наши вещи едут по ленте. Я называю вещь — когда она будет в рамке, говори «Stop!» Cup! (TPR: ладонь вперёд) … What is it?", "ans": "Stop! Cup!"}, {"n": 22, "sec": "Шаг 4 — cup — 4 мин", "todo": "<b>Игра «Show me»</b> — без экрана", "say": "Поиграем! Я говорю — ты показываешь. Show me toothbrush! Show me cup! Show me toothpaste! Show me tooth! Faster!", "ans": "показывает жесты"}, {"n": 23, "sec": "Шаг 4 — cup — 4 мин", "todo": "Ребёнок называет четыре слова — нажать: микроб исчезает", "say": "Возвращаемся к воротам! Назовём всё, что нашли. What is it? (×4)", "ans": "Tooth! Toothbrush! Toothpaste! Cup!"}, {"n": 24, "sec": "Главный микроб — 1,5 мин", "todo": "По ленте едут торт, конфета, газировка, щётка, паста, стаканчик. На каждый верный ответ нажать «✓» — микроб уменьшается. Что ребёнок пропустил — проедет ещё раз в следующем ряду", "say": "Остался самый большой микроб. Он хитрый — подсовывает сладости! Называем только то, что полезно для зубок. Look! (TPR: пальчик к глазу) Yes or no? … Yes! What is it?", "ans": "No! / Yes! Toothbrush! …"}, {"n": 25, "sec": "Главный микроб — 1,5 мин", "todo": "Последний верный ответ — микроб исчезает", "say": "Ура! Все микробы убежали!", "ans": "Ура!"}, {"n": 26, "sec": "Финал — 2 мин", "todo": "Ворота открываются, в замке загораются огни", "say": "Пингвинёнок дома! Чтобы микробы больше не возвращались, давай научим его чистить зубки!", "ans": "Да!"}, {"n": 27, "sec": "Финал — 2 мин", "todo": "Нажимать по шагам — пингвинёнок повторяет", "say": "Take a toothbrush! (TPR: берём щётку) Take some toothpaste! (TPR: выдавливаем пасту) Brush, brush, brush! (TPR: чистим) Smile! (TPR: улыбаемся)", "ans": "повторяет движения; brush, brush, brush; smile"}, {"n": 28, "sec": "Финал — 2 мин", "todo": "Вписать имя ребёнка в сертификат «Защитник Зубного замка / Tooth Castle Hero»", "say": "Ты — защитник Зубного замка! Чисти зубки утром и вечером. Goodbye! (TPR: машем рукой)", "ans": "Goodbye!"}]/*PLAN_END*/;
+
+const M = 'media/lesson/';
+const $ = (s, r = document) => r.querySelector(s);
+const stage = $('#stage'), layer = $('#slide');
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const shuffle = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(x => x[1]);
+
+/* ---------- звук слов (Piper, голос как в курсах) ---------- */
+const WORDS = { tooth: 'magic_tooth', toothbrush: 'brush', toothpaste: 'tube', cup: 'cup' };
+const audio = {};
+function say(w) { const a = audio[w] || (audio[w] = new Audio(`audio/${w}.mp3`)); a.currentTime = 0; a.play().catch(() => {}); }
+
+/* ---------- конструкторы ---------- */
+function el(tag, cls, html, parent = layer) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; parent.appendChild(e); return e; }
+function sp(name, x, y, w, cls = '', parent = layer) {
+  const i = el('img', 'sp ' + cls, null, parent); i.src = M + name + '.webp'; i.alt = '';
+  i.style.left = x + '%'; i.style.top = y + '%'; i.style.width = w + '%'; return i;
+}
+function btn(text, x, y, cls, fn) { const b = el('button', 'btn ' + (cls || ''), text); b.style.left = x + '%'; b.style.top = y + '%'; b.onclick = fn; return b; }
+function title(t) { return el('div', 'title', t); }
+function wordcard(w) {
+  const c = el('div', 'wordcard pop', `<img src="${M}${WORDS[w]}.webp" alt=""><div class="w">${w}</div><button class="say">🔊</button>`);
+  c.querySelector('.say').onclick = e => { e.stopPropagation(); say(w); };
+  return c;
+}
+function card(w, x, y, label = false) {
+  const c = el('div', 'card pop', `<img src="${M}${WORDS[w] || w}.webp" alt="">${label ? `<b style="font-family:var(--disp);font-size:calc(var(--u)*2)">${w}</b>` : ''}`);
+  c.style.left = x + '%'; c.style.top = y + '%'; return c;
+}
+function wobble(e) { e.classList.remove('shake'); void e.offsetWidth; e.classList.add('shake'); }
+function poof(e) { e.classList.remove('bob'); e.classList.add('poof'); }
+const timers = [];
+function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+function every(fn, ms) { timers.push(setInterval(fn, ms)); }
+
+/* Прыжок спрайта по дуге к точке (x, y) в % сцены */
+function jumpTo(s, x, y, ms = 520) {
+  const x0 = parseFloat(s.style.left), y0 = parseFloat(s.style.top), t0 = performance.now();
+  return new Promise(res => {
+    (function f(t) {
+      const k = Math.min(1, (t - t0) / ms);
+      s.style.left = x0 + (x - x0) * k + '%';
+      s.style.top = y0 + (y - y0) * k - Math.sin(Math.PI * k) * 14 + '%';
+      if (k < 1) requestAnimationFrame(f); else res();
+    })(t0);
   });
 }
-const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-/* ---------- прогресс: пять башен замка ---------- */
-let lit = 0;
-const towersEl = $('#towers');
-towersEl.innerHTML = '<i></i>'.repeat(5);
-$$('#towers i').forEach(i => i.innerHTML = ART.star({ face: false }));
-function lightTower() {
-  if (lit >= 5) return;
-  lit++; $$('#towers i').forEach((t, k) => t.classList.toggle('lit', k < lit));
-  confetti(1600);
+/* ---------- пингвинёнок: что у него в руках, зависит от слайда ---------- */
+// до щётки (слайд 10) — пустые руки, после — со щёткой, после пасты (слайд 15) — со щёткой и пастой
+function peng(pose, n) {
+  const map = {
+    p: { stand: 'p_wave', jump: 'p_jump', happy: 'p_happy', sad: 'p_sad', think: 'p_point', wow: 'p_surprised' },
+    pb: { stand: 'pb_stand', jump: 'pb_jump', happy: 'pb_stand', sad: 'pb_stand', think: 'pb_stand', wow: 'pb_stand', fish: 'pb_fish' },
+    ph: { stand: 'ph_stand', jump: 'ph_jump', happy: 'ph_jump', sad: 'ph_stand', think: 'ph_stand', wow: 'ph_stand', brush: 'ph_brush' },
+  };
+  const set = n < 10 ? 'p' : n < 15 ? 'pb' : 'ph';
+  return map[set][pose] || map[set].stand;
 }
 
-/* ---------- заметки учителя по сценам ---------- */
-const NOTES = {
-  'start': ['1 мин', 'Встреча', ['Поздоровайтесь: <q>Hello!</q> — машем рукой, дети повторяют.', 'Покажите на фею: «Сегодня летим в Зубной замок в облаках! Его охраняет Зубная фея, а помогает ей Splat Kids».', 'Нажмите <b>Start</b>.']],
-  'fly': ['2 мин', 'Летим к замку', ['Замок поднимается из облаков. Спросите <q>What is it?</q> — нажмите на замок, прозвучит <q>castle</q>. Повторяем хором 2–3 раза.', 'Появится фея: <q>Hello!</q> Дети здороваются с феей.', 'Обратите внимание: башни тёмные, замок грустный. «Что-то случилось!»']],
-  'germs': ['2 мин', 'Микробы', ['<q>Oh no! Germs!</q> Корчим страшные рожицы.', 'Дети по очереди нажимают на микробов (<q>germ!</q>) — те пропадают, но замок всё ещё грустный.', '«Чтобы зажечь башни, нам нужны волшебные вещи из сумки Splat Kids!»']],
-  'bag': ['4 мин', 'Лексика: волшебная сумка', ['Нажимайте на сумку — по одной вылетают <q>toothbrush, toothpaste, cup, water, tooth, smile</q>.', 'Каждое слово: прозвучало → хором → шёпотом → громко. Нажмите на карточку ещё раз, чтобы повторить звук.', 'Покажите жестом: toothbrush — «чистим» пальцем, cup — «пьём», smile — улыбаемся.', 'Когда все вещи достанутся — загорается первая башня.']],
-  'listen': ['3 мин', 'Послушай и найди', ['Звучит вопрос <q>Where is the toothbrush?</q> — ребёнок показывает/нажимает.', 'Хвалите: <q>Good job!</q> Ошибся — <q>Try again!</q>', 'На онлайн-уроке ребёнок называет цвет/место, а нажимает преподаватель.']],
-  'brush': ['3 мин', 'Почисти зубик', ['Возьмите щётку в правом нижнем углу и водите по микробам, пока зубик не заблестит.', 'Все вместе приговариваем <q>Up and down! Round and round!</q>', 'Онлайн: ребёнок говорит «up and down», вы чистите. Или дайте ребёнку управление экраном.']],
-  'chant': ['3 мин', 'Песенка-движение', ['Встаём! Берём «невидимую щётку» (или настоящую щётку Splat Kids).', 'Включите песенку: <q>Brush, brush, brush your teeth. Up and down… Round and round… Big, big smile!</q>', 'Показываем движения вместе со щёткой на экране. Второй раз — быстрее!']],
-  'pack': ['2 мин', 'Что нужно, чтобы чистить зубы?', ['Нажимаем на то, что нужно: toothbrush, toothpaste, cup, water. Конфета и мяч — <q>No!</q>', 'Каждый раз, когда вещь улетает в сумку, повторяем слово.']],
-  'final': ['1 мин', 'Замок сияет', ['Все пять башен горят, замок улыбается! <q>Clean teeth! Shiny teeth!</q>', 'Показываем самую большую улыбку: <q>Big smile!</q>']],
-  'cert': ['1 мин', 'Сертификат и подарок', ['Впишите имя ребёнка — это его сертификат «Clean Teeth Hero». Можно сделать скриншот и отправить родителям.', 'Расскажите родителям про подарок: тренажёр (играть ещё раз, 7-дневный челлендж) и задания для печати.', 'Объявите конкурс рисунков Splat Kids.']],
-  'bye': ['', 'Прощание', ['<q>Goodbye!</q> Машем рукой. Напомните: чистим зубки утром и вечером!']],
-};
+/* ---------- микробы у ворот ---------- */
+const GERMS = ['germ_green', 'germ_purple', 'germ_orange', 'germ_blue'];
+const GATES = [8, 13, 18, 23];               // на этих слайдах прогоняем по одному микробу
+let killed = 0;
+function drawGermbar(bossOn = true) {
+  $('#germbar').innerHTML = GERMS.map((g, i) => `<img src="${M}${g}.webp" class="${i < killed ? 'off' : ''}">`).join('') +
+    `<img src="${M}boss.webp" class="${bossOn ? '' : 'off'}" style="width:calc(var(--u)*3.8)">`;
+}
+// микробы у ворот: четыре маленьких по бокам и главный в центре
+const GPOS = [[30, 58], [70, 58], [22, 74], [78, 74]];
+function gateGerms(n) {
+  const out = [];
+  GERMS.forEach((g, i) => { if (i >= killed) out.push(sp(g, GPOS[i][0], GPOS[i][1], 9, 'bob')); else out.push(null); });
+  const boss = sp('boss', 50, 70, 15, 'bob');
+  return { small: out, boss };
+}
+
+/* ---------- слайды ---------- */
+const S = [];
+// 1–2. Приветствие
+S[1] = { bg: 'snow_meadow', go(n) { sp(peng('stand', n), 50, 58, 26, 'pop bob'); } };
+S[2] = { bg: 'snow_meadow', go(n) { sp(peng('happy', n), 50, 58, 28, 'pop bob'); title('penguin'); } };
+// 3–4. Завязка
+S[3] = { bg: 'castle_dark', go() {} };
+S[4] = { bg: 'castle_dark', go(n) { gateGerms(n); sp(peng('sad', n), 9, 70, 15, 'pop'); } };
+// 5. Прыгаем к блестящей льдинке
+const FLOES = [[24, 76, 'floe1'], [42, 66, 'floe2'], [60, 76, 'floe1'], [80, 64, 'floe2']];
+function floes(numbersFrom) {
+  return FLOES.map(([x, y, f], i) => { const s = sp(f, x, y, 15, 'click'); return s; });
+}
+S[5] = { bg: 'ice_sea', go(n) {
+  const fl = floes();
+  const g = el('div', 'glint'); g.style.left = '80%'; g.style.top = '58%';
+  const p = sp(peng('jump', n), 8, 64, 11);
+  let k = 0;
+  fl.forEach((f, i) => f.onclick = async () => {
+    if (i !== k) return wobble(f);
+    k++; const num = el('div', 'num pop', String(k)); num.style.left = FLOES[i][0] + '%'; num.style.top = FLOES[i][1] + 7 + '%';
+    await jumpTo(p, FLOES[i][0], FLOES[i][1] - 9);
+  });
+} };
+// 6. Волшебный зубик
+S[6] = { bg: 'ice_sea', go(n) {
+  const r = el('div', 'rays'); r.style.left = '50%'; r.style.top = '52%';
+  const t = sp('magic_tooth', 50, 52, 16, 'click pop bob');
+  t.onclick = () => { t.remove(); r.remove(); wordcard('tooth'); say('tooth'); };
+  sp(peng('wow', n), 14, 66, 13, 'pop');
+} };
+// 7. Прыгаем обратно к замку
+S[7] = { bg: 'ice_sea', go(n) {
+  const fl = floes();
+  const p = sp(peng('jump', n), 80, 55, 11);
+  const order = [2, 1, 0];             // с последней льдинки — обратно к берегу
+  let k = 0;
+  const shore = el('div', 'glint'); shore.style.left = '6%'; shore.style.top = '62%';
+  const steps = [...order.map(i => [FLOES[i][0], FLOES[i][1] - 9, i]), [7, 60, -1]];
+  fl.forEach((f, i) => f.onclick = () => step(i));
+  shore.style.pointerEvents = 'auto'; shore.style.cursor = 'pointer'; shore.onclick = () => step(-1);
+  async function step(i) {
+    if (k >= steps.length || steps[k][2] !== i) return i >= 0 && wobble(fl[i]);
+    const [x, y] = steps[k]; k++;
+    const num = el('div', 'num pop', String(k)); num.style.left = x + '%'; num.style.top = y + 16 + '%';
+    await jumpTo(p, x, y);
+  }
+} };
+// Ворота: назвали все найденные слова — нажимаем на каждое, когда все названы, микроб исчезает
+function gateSlide(words) {
+  return { bg: 'castle_dark', go(n) {
+    const g = gateGerms(n);
+    const target = g.small[killed];
+    sp(peng('stand', n), 9, 70, 15, 'pop');
+    let named = 0;
+    const w0 = 50 - (words.length - 1) * 8;
+    words.forEach((w, i) => {
+      const c = card(w, w0 + i * 16, 30);
+      c.onclick = () => {
+        if (c.classList.contains('good')) return;
+        c.classList.add('good'); say(w);
+        if (++named === words.length) later(() => {
+          if (words.length === 1) {   // первый микроб — его прогоняют лучики волшебного зубика
+            const r = el('div', 'rays'); r.style.left = GPOS[0][0] + '%'; r.style.top = GPOS[0][1] + '%';
+            later(() => { poof(target); r.remove(); c.classList.add('poof'); }, 900);
+          } else poof(target);
+          later(() => { if (killed < GATES.length && GATES[killed] === n) { killed++; drawGermbar(); } }, 700);
+        }, 500);
+      };
+    });
+  } };
+}
+S[8] = gateSlide(['tooth']);
+// 9. Сугробы: yes or no
+S[9] = { bg: 'snow_meadow', go(n) {
+  const items = [['boot', 0], ['fish', 0], ['icicle', 0], ['brush', 1]];
+  const pos = [[20, 66], [40, 74], [60, 66], [80, 74]];
+  sp(peng('think', n), 8, 50, 11, 'pop');
+  items.forEach(([it, ok], i) => {
+    const m = sp(i % 2 ? 'mound2' : 'mound1', pos[i][0], pos[i][1], 17, 'click');
+    m.onclick = () => {
+      if (m.dataset.open) return; m.dataset.open = 1;
+      const s = sp(it, pos[i][0], pos[i][1] - 14, it === 'brush' ? 4.5 : it === 'icicle' ? 4 : 11, 'pop');
+      later(() => { const k = el('div', 'mark pop', ok ? '✅' : '❌'); k.style.left = pos[i][0] + 6 + '%'; k.style.top = pos[i][1] - 24 + '%'; }, 1500);
+    };
+  });
+} };
+// 10. Toothbrush
+S[10] = { bg: 'snow_meadow', go(n) { wordcard('toothbrush'); say('toothbrush'); sp(peng('stand', n), 14, 64, 13, 'pop'); } };
+// 11. Послушай и выбери
+function listenGame(words, n) {
+  const rounds = shuffle([...words, ...words, words[0]]).slice(0, 5);
+  let r = 0;
+  const b = btn('🔊', 50, 22, 'pink', () => say(rounds[r]));
+  function round() {
+    layer.querySelectorAll('.card').forEach(c => c.remove());
+    const opts = shuffle(words);
+    const x0 = 50 - (opts.length - 1) * 12;
+    opts.forEach((w, i) => {
+      const c = card(w, x0 + i * 24, 58);
+      c.onclick = () => {
+        if (w === rounds[r]) { c.classList.add('good'); r++; if (r < rounds.length) later(round, 900); else later(() => { layer.querySelectorAll('.card').forEach(x => x.remove()); b.remove(); sp(peng('happy', n), 50, 58, 22, 'pop'); }, 900); }
+        else { c.classList.add('bad'); wobble(c); later(() => c.classList.remove('bad'), 600); }
+      };
+    });
+  }
+  round();
+}
+S[11] = { bg: 'snow_meadow', go(n) { listenGame(['tooth', 'toothbrush'], n); } };
+// 12. Правда или нет: учитель называет слово (иногда неверное), ребёнок — yes / no; потом «What is it?»
+S[12] = { bg: 'snow_meadow', go(n) {
+  const words = ['tooth', 'toothbrush'];
+  const rounds = shuffle([['tooth', 'tooth'], ['toothbrush', 'tooth'], ['toothbrush', 'toothbrush'], ['tooth', 'toothbrush']]);
+  let r = 0;
+  sp('germ_purple', 86, 30, 10, 'bob');
+  function show() {
+    layer.querySelectorAll('.card,.btn,.mark').forEach(x => x.remove());
+    if (r >= rounds.length) return whatIs();
+    const [pic, said] = rounds[r];
+    const c = card(pic, 50, 50);
+    btn('🔊 ' + said, 50, 80, 'pink', () => say(said));
+    btn('👍 Yes', 30, 50, '', () => answer(pic === said, c));
+    btn('👎 No', 70, 50, '', () => answer(pic !== said, c));
+  }
+  function answer(right, c) {
+    const k = el('div', 'mark pop', right ? '✅' : '❌'); k.style.left = '58%'; k.style.top = '34%';
+    if (right) { r++; later(show, 1000); } else { wobble(c); later(() => k.remove(), 800); }
+  }
+  function whatIs() {
+    let i = 0; const ws = shuffle(words);
+    (function next() {
+      layer.querySelectorAll('.card,.wordcard').forEach(x => x.remove());
+      if (i >= ws.length) return;
+      const c = card(ws[i], 50, 52); title('What is it?');
+      c.onclick = () => { c.remove(); wordcard(ws[i]); say(ws[i]); i++; later(next, 1800); };
+    })();
+  }
+  show();
+} };
+S[13] = gateSlide(['tooth', 'toothbrush']);
+// 14. Рыбалка: тень плавает, «Stop!» в момент, когда она под крючком
+S[14] = { bg: 'ice_fishing', go(n) {
+  sp(peng('fish', n), 22, 52, 15);
+  const hookX = 52;
+  const line = el('div'); line.style.cssText = `position:absolute;left:${hookX}%;top:48%;width:3px;height:30%;background:rgba(60,60,70,.7)`;
+  const hook = el('div'); hook.style.cssText = `position:absolute;left:${hookX}%;top:78%;width:1.6%;height:2.8%;border:3px solid #555;border-top:none;border-radius:0 0 50% 50%;transform:translate(-50%,-50%)`;
+  // тень рыбы под водой — силуэт, чтобы его было видно на тёмной воде
+  const shadow = el('img'); shadow.src = M + 'fish.webp';
+  shadow.style.cssText = 'position:absolute;top:79%;width:9%;transform:translate(-50%,-50%);filter:brightness(2.2) saturate(0) opacity(.55) blur(1px)';
+  let t0 = performance.now(), stopped = false;
+  (function f(t) {
+    if (stopped || !shadow.isConnected) return;
+    const x = 52 + Math.sin((t - t0) / 900) * 12; shadow.style.left = x + '%'; shadow.style.transform = `translate(-50%,-50%) scaleX(${Math.cos((t - t0) / 900) > 0 ? -1 : 1})`; requestAnimationFrame(f);
+  })(t0);
+  btn('✋ Stop!', 80, 30, 'pink', function () {
+    const x = parseFloat(shadow.style.left);
+    if (Math.abs(x - hookX) > 4) { wobble(this); return; }
+    stopped = true; shadow.remove(); line.remove(); hook.remove(); this.remove();
+    const t = sp('tube', hookX, 78, 6, 'pop'); jumpTo(t, hookX, 42, 700);
+  });
+} };
+// 15. Toothpaste
+S[15] = { bg: 'ice_fishing', go(n) { wordcard('toothpaste'); say('toothpaste'); sp(peng('stand', n), 14, 64, 14, 'pop'); } };
+// 16. Что под снежком?
+S[16] = { bg: 'snow_meadow', go(n) {
+  const words = ['tooth', 'toothbrush', 'toothpaste'];
+  const X = [28, 50, 72];
+  let cards = [], balls = [], round = 0;
+  sp(peng('think', n), 8, 52, 11);
+  function lay() {
+    layer.querySelectorAll('.card,.sp.snowball,.btn').forEach(x => x.remove());
+    cards = shuffle(words).map((w, i) => { const c = card(w, X[i], 60); c.dataset.w = w; return c; });
+    btn('❄️ Прячем!', 50, 22, 'pink', hide);
+  }
+  async function hide() {
+    layer.querySelector('.btn').remove();
+    const g = sp('germ_purple', 50, 30, 9, 'pop');
+    await sleep(700);
+    balls = X.map(x => sp('snowball', x, 60, 15, 'click pop snowball'));
+    await sleep(600); g.remove();
+    const hit = Math.floor(Math.random() * 3);
+    balls[hit].classList.add('wiggle');
+    balls.forEach((b, i) => b.onclick = () => {
+      if (i !== hit) return wobble(b);
+      b.remove(); cards[i].classList.add('good'); say(cards[i].dataset.w);
+      round++; later(round < 3 ? lay : () => { layer.querySelectorAll('.card,.sp.snowball').forEach(x => x.remove()); }, 1600);
+    });
+  }
+  lay();
+} };
+// 17. Плитки
+S[17] = { bg: 'snow_meadow', go(n) {
+  const ws = shuffle(['tooth', 'toothbrush', 'toothpaste']);
+  let i = 0;
+  function show() {
+    layer.querySelectorAll('.tiles,.btn').forEach(x => x.remove());
+    if (i >= ws.length) return;
+    const t = el('div', 'tiles pop', `<img src="${M}${WORDS[ws[i]]}.webp"><div class="grid">${'<i></i>'.repeat(16)}</div>`);
+    const tiles = shuffle([...t.querySelectorAll('i')]);
+    t.onclick = () => { const x = tiles.shift(); if (x) x.classList.add('gone'); };
+    btn('👀 Открыть всё', 80, 86, 'sun', () => { t.querySelectorAll('i').forEach(x => x.classList.add('gone')); say(ws[i]); i++; later(show, 1800); });
+  }
+  show();
+} };
+S[18] = gateSlide(['tooth', 'toothbrush', 'toothpaste']);
+// 19. Горка: ребёнок дует — снег слетает, под ним стаканчик
+S[19] = { bg: 'ice_hill', go(n) {
+  sp(peng('stand', n), 14, 64, 13);
+  const cup = sp('cup', 52, 42, 10);
+  const pile = sp('mound2', 52, 44, 22, 'click');
+  pile.onclick = () => {
+    for (let k = 0; k < 24; k++) {
+      const f = el('div'); const s = 6 + Math.random() * 14;
+      f.style.cssText = `position:absolute;left:${50 + Math.random() * 8}%;top:${40 + Math.random() * 8}%;width:${s}px;height:${s}px;border-radius:50%;background:#fff;transition:all 1.2s ease-out;opacity:1`;
+      requestAnimationFrame(() => { f.style.left = 100 + Math.random() * 20 + '%'; f.style.top = 10 + Math.random() * 50 + '%'; f.style.opacity = 0; });
+    }
+    pile.style.transition = 'all 1s'; pile.style.left = '110%'; pile.style.opacity = 0;
+    cup.classList.add('pop');
+  };
+} };
+S[20] = { bg: 'ice_hill', go(n) { wordcard('cup'); say('cup'); sp(peng('stand', n), 14, 64, 13, 'pop'); } };
+// 21. Лента «Стоп!»
+function beltGame(items, onPick) {
+  const belt = el('div', 'belt', '<div class="frame"></div>');
+  let x = 0, running = true, last = performance.now();
+  const els = items.map((w, i) => { const im = el('img', 'item', null, belt); im.src = M + (WORDS[w] || w) + '.webp'; im.dataset.w = w; return im; });
+  const gap = 100 / Math.min(items.length, 4) + 6;
+  (function f(t) {
+    if (!belt.isConnected) return;
+    const dt = t - last; last = t;
+    if (running) x += dt * 0.006;           // медленно: ≈ 6 % ширины в секунду
+    els.forEach((im, i) => { im.style.left = ((i * gap + x) % (els.length * gap)) - 10 + '%'; });
+    requestAnimationFrame(f);
+  })(last);
+  return { belt, els, toggle(v) { running = v ?? !running; return running; }, inFrame() {
+    return els.find(im => { const l = parseFloat(im.style.left); return l > 39 && l < 61; }); } };
+}
+S[21] = { bg: 'snow_meadow', go(n) {
+  const b = beltGame(['tooth', 'toothbrush', 'toothpaste', 'cup', 'tooth', 'cup'], null);
+  btn('✋ Stop!', 50, 30, 'pink', function () {
+    const run = b.toggle();
+    this.textContent = run ? '✋ Stop!' : '▶ Go!';
+    b.els.forEach(im => im.style.filter = '');
+    if (!run) { const it = b.inFrame(); if (it) { it.style.filter = 'drop-shadow(0 0 12px #ffd23f)'; say(it.dataset.w); } }
+  });
+} };
+// 22. Show me — живая игра
+S[22] = { bg: 'snow_meadow', go(n) {
+  title('Show me!');
+  ['tooth', 'toothbrush', 'toothpaste', 'cup'].forEach((w, i) => { const c = card(w, 20 + i * 20, 58); c.onclick = () => wobble(c); });
+} };
+S[23] = gateSlide(['tooth', 'toothbrush', 'toothpaste', 'cup']);
+// 24. Главный микроб: по ленте едет полезное и вредное; нажимаем на полезное, когда ребёнок назвал
+S[24] = { bg: 'castle_dark', go(n) {
+  const boss = sp('boss', 50, 36, 18, 'bob');
+  let scale = 1, got = 0;
+  const useful = ['toothbrush', 'toothpaste', 'cup'];
+  const b = beltGame(['cake', 'toothbrush', 'candy', 'toothpaste', 'soda', 'cup'], null);
+  b.belt.style.top = '62%';
+  b.els.forEach(im => im.onclick = () => {
+    if (im.dataset.done) return;
+    if (useful.includes(im.dataset.w)) {
+      im.dataset.done = 1; im.style.opacity = .25; say(im.dataset.w); got++;
+      scale -= .25; boss.style.width = 18 * scale + '%'; wobble(boss);
+      if (got === useful.length) later(() => { poof(boss); b.toggle(false); }, 600);
+    } else { wobble(im); scale = Math.min(1.2, scale + .05); boss.style.width = 18 * scale + '%'; }
+  });
+} };
+S[25] = { bg: 'castle_dark', go(n) {
+  const s = sp('boss_scared', 50, 60, 16, 'pop');
+  later(() => { s.style.transition = 'all 1.4s ease-in'; s.style.left = '120%'; s.style.top = '40%'; drawGermbar(false); }, 900);
+} };
+// 26–27. Финал
+S[26] = { bg: 'castle_lights', go(n) { sp(peng('jump', n), 50, 72, 16, 'pop bob'); drawGermbar(false); } };
+S[27] = { bg: 'castle_lights', go(n) {
+  drawGermbar(false);
+  const steps = [['Take a toothbrush!', 'brush'], ['Take some toothpaste!', 'tube'], ['Brush, brush, brush!', 'ph_brush'], ['Smile!', 'ph_jump']];
+  const p = sp('ph_stand', 50, 62, 20, 'pop');
+  let k = 0;
+  const b = btn(steps[0][0], 50, 16, 'sun', () => {
+    const [txt, img] = steps[k];
+    layer.querySelectorAll('.extra').forEach(x => x.remove());
+    if (img === 'brush' || img === 'tube') sp(img, 76, 52, img === 'brush' ? 4 : 8, 'pop extra');
+    else { p.src = M + img + '.webp'; p.classList.toggle('wiggle', img === 'ph_brush'); }
+    k++; b.textContent = k < steps.length ? steps[k][0] : '⭐ Super!';
+    if (k > steps.length) b.remove();
+  });
+} };
+// 28. Сертификат
+S[28] = { bg: 'castle_lights', go(n) {
+  drawGermbar(false);
+  const c = el('div', 'cert pop', `<h2>Защитник Зубного замка</h2><h3>Tooth Castle Hero</h3><input placeholder="Имя героя" maxlength="22"><p>прогнал всех микробов и выучил слова<br>tooth · toothbrush · toothpaste · cup</p>`);
+  sp('ph_jump', 22, 62, 14, 'pop');
+  const lg = el('div', 'logo', '<span class="sk"><b>SPLAT</b><i>KIDS</i></span><span class="ws" style="color:var(--ink)">WowSpeak</span>', c);
+  lg.style.cssText = 'justify-content:center;margin-top:calc(var(--u)*1.6)';
+} };
 
 /* ---------- навигация ---------- */
-const order = $$('.scr').map(s => s.id.slice(2));
-let cur = -1;
-const enter = {}, leave = {};
-function go(i) {
-  if (i < 0 || i >= order.length) return;
-  if (cur >= 0 && leave[order[cur]]) leave[order[cur]]();
-  SND.stop();
-  $$('.scr').forEach(s => s.classList.remove('on'));
-  cur = i; const id = order[i];
-  $('#s-' + id).classList.add('on');
-  $('#pageno').textContent = `${i + 1} / ${order.length}`;
-  const n = NOTES[id];
-  $('#notes').innerHTML = n ? `<div class="t">${n[0]}</div><h4>${i + 1}. ${n[1]}</h4><ul>${n[2].map(x => `<li>${x}</li>`).join('')}</ul>` : '';
-  $('#nav').style.display = id === 'start' ? 'none' : 'flex';
-  $('#next').style.visibility = $('#fwd').style.visibility = i === order.length - 1 ? 'hidden' : '';
-  $('#next').classList.remove('pulse');
-  if (enter[id]) enter[id]();
+const TOTAL = 28;
+let cur = 0;
+function go(n) {
+  if (n < 1 || n > TOTAL) return;
+  timers.splice(0).forEach(t => { clearTimeout(t); clearInterval(t); });
+  layer.innerHTML = '';
+  cur = n;
+  killed = GATES.filter(g => g < n).length;     // сколько микробов уже прогнано к этому слайду
+  drawGermbar(n < 25);
+  $('#germbar').style.visibility = n < 4 ? 'hidden' : '';
+  const s = S[n];
+  $('#bg').src = M + s.bg + '.webp';
+  s.go(n);
+  $('#pageno').textContent = `${n} / ${TOTAL}`;
+  renderPlan();
 }
-const ready = () => $('#next').classList.add('pulse');
-$('#next').onclick = $('#fwd').onclick = () => go(cur + 1);
 $('#prev').onclick = () => go(cur - 1);
-document.addEventListener('click', e => { if (e.target.closest('[data-next]')) go(cur + 1); });
+$('#next').onclick = () => go(cur + 1);
 document.addEventListener('keydown', e => {
   if (e.target.tagName === 'INPUT') return;
-  if (e.key === 'ArrowRight') go(cur + 1); if (e.key === 'ArrowLeft') go(cur - 1);
+  if (e.key === 'ArrowRight' || e.key === 'PageDown') go(cur + 1);
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(cur - 1);
 });
-$('#bNotes').onclick = () => $('#notes').classList.toggle('on');
-$('#bMute').onclick = () => $('#bMute').textContent = SND.toggle() ? '🔇' : '🔊';
+$('#bFull').onclick = () => document.fullscreenElement ? document.exitFullscreen() : stage.requestFullscreen?.();
 
-/* ---------- сцены ---------- */
-enter.fly = async () => {
-  const c = $('#s-fly .castle'), f = $('#s-fly .fairy');
-  c.classList.add('below'); f.classList.remove('on');
-  await sleep(80); c.classList.remove('below');
-  c.onclick = async () => {
-    SND.play('w_castle'); c.classList.add('shake'); setTimeout(() => c.classList.remove('shake'), 500);
-    if (f.classList.contains('on')) return;
-    await sleep(1400); f.classList.add('on', 'pop'); SND.play('p_hello'); ready();
-  };
-};
-enter.germs = () => {
-  const s = $('#s-germs'); $$('.g', s).forEach(g => g.remove());
-  const spots = [[10, 26], [82, 22], [8, 62], [84, 60], [26, 74], [68, 76], [90, 40]];
-  let left = spots.length;
-  spots.forEach(([x, y], k) => {
-    const g = document.createElement('div'); g.className = 'g bob';
-    g.style.cssText = `left:${x}%;top:${y}%;animation-delay:${-k * .4}s`;
-    g.innerHTML = ART.germ({ color: ['#8bd34a', '#b18bff', '#ff9f5a'][k % 3] });
-    g.onclick = () => { if (g.classList.contains('gone')) return; SND.play('w_germ'); g.classList.add('gone'); if (--left === 0) ready(); };
-    s.appendChild(g);
-  });
-  SND.play('w_germ');
-};
-enter.bag = () => {
-  const items = ['toothbrush', 'toothpaste', 'cup', 'water', 'tooth', 'smile'];
-  const row = $('#bagItems'); row.innerHTML = ''; let k = 0;
-  const bag = $('#s-bag .bagwrap');
-  bag.onclick = () => {
-    if (k >= items.length) return;
-    const w = W[items[k++]];
-    const c = document.createElement('div'); c.className = 'card pop';
-    c.innerHTML = `<div class="pic">${w.art()}</div><div class="w">${w.label}</div>`;
-    c.onclick = () => { SND.play('w_' + w.w); c.classList.add('shake'); setTimeout(() => c.classList.remove('shake'), 450); };
-    row.appendChild(c); SND.play('w_' + w.w);
-    bag.classList.add('shake'); setTimeout(() => bag.classList.remove('shake'), 450);
-    if (k === items.length) { setTimeout(() => { if (lit < 1) lightTower(); ready(); }, 1200); }
-  };
-};
-enter.listen = () => {
-  const pool = ['toothbrush', 'toothpaste', 'cup', 'water', 'tooth', 'smile'];
-  const rounds = [...pool].sort(() => Math.random() - .5);
-  let r = 0;
-  const ask = () => {
-    const target = rounds[r];
-    const opts = [target, ...pool.filter(x => x !== target).sort(() => Math.random() - .5).slice(0, 2)].sort(() => Math.random() - .5);
-    $('#lsQ').textContent = r === 0 ? 'Where is the toothbrush?' : 'Listen and find!';
-    const box = $('#lsCards'); box.innerHTML = '';
-    opts.forEach(o => {
-      const c = document.createElement('div'); c.className = 'card pop';
-      c.innerHTML = `<div class="pic">${W[o].art()}</div>`;
-      c.onclick = async () => {
-        if (o === target) {
-          c.classList.add('good'); await SND.play('p_goodjob'); r++;
-          if (r < rounds.length) ask(); else { $('#lsQ').textContent = 'Super! ⭐'; if (lit < 2) lightTower(); ready(); }
-        } else { c.classList.add('shake'); SND.play('p_tryagain'); setTimeout(() => c.classList.remove('shake'), 450); }
-      };
-      box.appendChild(c);
-    });
-    $('#lsPlay').onclick = () => SND.play(r === 0 ? 'p_where' : 'w_' + target);
-    setTimeout(() => $('#lsPlay').onclick(), 400);
-  };
-  ask();
-};
-let brushOff = null;
-enter.brush = () => {
-  const arena = $('#arena'), cursor = $('#brushCursor');
-  $$('.dirt,.tray', arena.parentNode).forEach(x => x.remove());
-  arena.querySelector('.bigtooth').innerHTML = ART.tooth({ mood: 'sad' });
-  const spots = [[22, 20], [60, 16], [40, 42], [16, 50], [66, 46], [44, 66]];
-  const dirt = spots.map(([x, y], k) => {
-    const d = document.createElement('div'); d.className = 'dirt';
-    d.style.left = x + '%'; d.style.top = y + '%';
-    d.innerHTML = ART.germ({ color: ['#8bd34a', '#b18bff', '#ff9f5a'][k % 3] });
-    arena.appendChild(d); return { el: d, hp: 22 };
-  });
-  const tray = document.createElement('div'); tray.className = 'tray bob';
-  tray.innerHTML = ART.toothbrush({ paste: true }); arena.parentNode.appendChild(tray);
-  const brushSrc = 'data:image/svg+xml;utf8,' + encodeURIComponent(ART.toothbrush({ paste: true }));
-  cursor.src = brushSrc;
-  let holding = false, total = dirt.length, done = 0, lastSay = 0;
-  const meter = $('#meter'); meter.style.width = '0';
-  const down = e => { if (e.target.closest('.tray') || e.target.closest('#arena')) { holding = true; tray.style.visibility = 'hidden'; move(e); } };
-  const move = e => {
-    if (!holding) return;
-    cursor.style.display = 'block'; cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
-    // кончик щётки — левый верхний угол картинки
-    const tx = e.clientX - 20, ty = e.clientY - 20;
-    for (const d of dirt) {
-      if (d.hp <= 0) continue;
-      const b = d.el.getBoundingClientRect();
-      if (tx > b.left - 20 && tx < b.right + 20 && ty > b.top - 20 && ty < b.bottom + 20) {
-        d.hp--; d.el.style.transform = `rotate(${(Math.random() - .5) * 30}deg) scale(${.6 + d.hp / 55})`;
-        if (d.hp <= 0) {
-          d.el.classList.add('gone'); done++; meter.style.width = (done / total * 100) + '%';
-          if (done === total) {
-            arena.querySelector('.bigtooth').innerHTML = ART.tooth({ shine: true });
-            SND.play('p_clean'); if (lit < 3) lightTower(); ready();
-          }
-        }
-        const now = Date.now();
-        if (now - lastSay > 4000 && done < total) { lastSay = now; SND.play(Math.random() < .5 ? 'p_updown' : 'p_roundround'); }
-      }
-    }
-  };
-  const up = () => { holding = false; cursor.style.display = 'none'; tray.style.visibility = ''; };
-  addEventListener('pointerdown', down); addEventListener('pointermove', move); addEventListener('pointerup', up);
-  brushOff = () => { removeEventListener('pointerdown', down); removeEventListener('pointermove', move); removeEventListener('pointerup', up); up(); };
-};
-leave.brush = () => brushOff && brushOff();
-let chantTimers = [];
-enter.chant = () => {
-  const b = $('#chBrush'), lyr = $('#lyr');
-  const LINES = [[0, 'Brush, brush, brush your teeth', 'updown'], [3.0, 'Up and down, up and down', 'updown'], [6.2, 'Brush, brush, brush your teeth', 'round'],
-    [9.2, 'Round and round, round and round', 'round'], [12.6, 'Brush, brush, brush your teeth', 'updown'], [15.6, 'Big, big smile! 😁', '']];
-  $('#chPlay').onclick = () => {
-    chantTimers.forEach(clearTimeout); chantTimers = [];
-    SND.play('chant').then(() => { b.className = 'tb2'; if (lit < 4) lightTower(); ready(); });
-    LINES.forEach(([t, txt, cls]) => chantTimers.push(setTimeout(() => { lyr.textContent = txt; b.className = 'tb2 ' + cls; }, t * 1000)));
-  };
-};
-leave.chant = () => { chantTimers.forEach(clearTimeout); $('#chBrush').className = 'tb2'; $('#lyr').innerHTML = '&nbsp;'; };
-enter.pack = () => {
-  const items = [['toothbrush', 1], ['candy', 0], ['toothpaste', 1], ['ball', 0], ['cup', 1], ['water', 1]];
-  const box = $('#packCards'); box.innerHTML = ''; let need = items.filter(x => x[1]).length;
-  items.forEach(([k, ok]) => {
-    const c = document.createElement('div'); c.className = 'card pop';
-    c.innerHTML = `<div class="pic">${W[k] ? W[k].art() : ART[k]()}</div>`;
-    c.onclick = () => {
-      if (ok) { if (c.classList.contains('in')) return; SND.play('w_' + k); c.classList.add('in'); if (--need === 0) { setTimeout(() => SND.play('p_wow'), 900); if (lit < 5) lightTower(); ready(); } }
-      else { c.classList.add('shake'); SND.play('p_tryagain'); setTimeout(() => c.classList.remove('shake'), 450); }
-    };
-    box.appendChild(c);
-  });
-};
-enter.final = () => { while (lit < 5) lightTower(); confetti(4000); SND.play('p_clean'); };
-enter.cert = () => { SND.play('p_bigsmile'); };
-enter.bye = () => { SND.play('p_bye'); confetti(2500); };
+/* ---------- план учителя ---------- */
+let planAll = false;
+$('#bPlan').onclick = () => $('#plan').classList.toggle('on');
+function renderPlan() {
+  const p = PLAN.find(r => r.n === cur);
+  const box = $('#plan');
+  if (!p) { box.innerHTML = '<h4>План не загружен</h4>'; return; }
+  let h = `<div class="sec">${p.sec}</div><h4>Слайд ${p.n}</h4><dl>
+    <dt>Что нужно сделать</dt><dd>${p.todo}</dd><dt>Teacher's language</dt><dd>${p.say}</dd><dt>Suggested answers</dt><dd>${p.ans}</dd></dl>
+    <button class="tb all" id="bAll">${planAll ? 'Скрыть весь план' : 'Весь план урока'}</button>`;
+  if (planAll) h += `<table><tr><th>№</th><th>Что сделать</th><th>Teacher's language</th><th>Answers</th></tr>` +
+    PLAN.map(r => `<tr class="${r.n === cur ? 'cur' : ''}"><td>${r.n}</td><td>${r.todo}</td><td>${r.say}</td><td>${r.ans}</td></tr>`).join('') + '</table>';
+  box.innerHTML = h;
+  $('#bAll').onclick = () => { planAll = !planAll; renderPlan(); };
+}
 
-/* ---------- запуск ---------- */
-$('#brand').innerHTML = brandHTML();
-$('#brandBig').innerHTML = brandHTML().replace(/<span class="x">.*?<\/span><span class="ws">.*?<\/span>/, '');
-mountClouds(7);
-drawArt();
-go(0);
+go(1);
 </script>
 </body>
 </html>
