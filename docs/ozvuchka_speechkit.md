@@ -76,3 +76,24 @@ The crab is on the sand, next to the blue umbrella.
 
 В блоке 2 поле `url` пустое и `audio_tts` намеренно не стоит — чтобы «Озвучить
 пачкой» не затёрла место под эту запись.
+
+
+## SM1 · Юнит 8 · Unit 8 Test · блок 11 → `sm1_u8_test_b11.mp3`
+
+Добавлено 21.10.2026 при вычитке юнита 8. Прежняя запись была **диалогом**
+Лили и Тома и почти дословно повторяла письмо из блока 9 с подменёнными
+деталями (`Bloop` вместо `Beep`, `four arms` вместо `two long arms`) — ребёнок,
+который доверился прочитанному тексту, ошибался именно там, где задание
+проверяло слух. Текст переписан рассказом в третьем лице (решение от
+20.10.2026), `url` блока обнулён, `audio_tts` не ставили.
+
+Блок — `video` с `provider: 'file'`, поэтому контрольный `select` выше его
+не находит: проверять по пустому `url`. Ключи к пропускам — блок 12 того же
+теста (`Lily is seven`, `ride a bike`, `can't play the piano`, `Max`, `fast`).
+
+```
+This is Lily. Lily is seven. She can swim and she can ride a bike. She can't play the piano, but she can sing! Lily has got a dog. His name is Max. Max can run fast and he can jump, but he can't play football.
+```
+
+Старый файл `sm1_u8_test_b11.mp3` в бакете `classroom-media/sm1/` нужно
+**перезалить** — использовать его больше нельзя.
