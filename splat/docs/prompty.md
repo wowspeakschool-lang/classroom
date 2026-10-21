@@ -151,3 +151,8 @@ Use the attached images only as a style reference: do not copy the penguin, the 
 ```
 Use the attached images only as a style reference: do not copy the penguin, the tube or any text from them, and do not copy their pink colors. One single object: a funny lumpy dark green sack tied at the top with a rope, covered with small round bumps like a germ, cute and silly, not scary, front view. Visual style: exactly the same rendering as the attached Splat Kids images — a soft photorealistic 3D render with fluffy, velvety, realistic textures, soft bright studio light, a clean and airy look. No pink anywhere. The object complete, not touching the edge. Plain flat pure white background, no shadow on the background, no text, no letters, no labels, no numbers.
 ```
+
+**19. germ_sack (v2)** — мешок микроба: простой зелёный, без лица. Приложить: ref_penguin, ref_tube
+```
+Use the attached images only as a style reference: do not copy the penguin, the tube or any text from them, and do not copy their pink colors. One single object: a simple soft green fabric sack tied at the top with a golden rope, plain and neat, no face, no eyes, no mouth, no bumps, no spots, front view. Visual style: exactly the same rendering as the attached Splat Kids images — a soft photorealistic 3D render with fluffy, velvety, realistic textures, soft bright studio light, a clean and airy look. No pink anywhere. The object complete, not touching the edge. Plain flat pure white background, no shadow on the background, no text, no letters, no labels, no numbers.
+```
