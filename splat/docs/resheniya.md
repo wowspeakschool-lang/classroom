@@ -55,3 +55,4 @@
 - Сертификат: **«Защитник Зубного замка / Tooth Castle Hero»**.
 - Рыбалка: одна тень, «Stop!», сразу паста (вариант Claude; Анна не возражала).
 - План урока — `plan_uroka.md`: слайды, «что нужно сделать», teacher's language, suggested answers.
+- Голос озвучки слов — **en_US-amy** (Piper), утверждён после прослушивания 21.10.2026. Файлы: `splat/audio/{tooth,toothbrush,toothpaste,cup}.mp3`.
