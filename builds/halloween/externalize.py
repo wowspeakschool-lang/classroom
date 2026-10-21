@@ -53,6 +53,16 @@ def run(src, grp, dst):
     t=re.sub(r'(<body[^>]*>)',lambda m:m.group(1)+pre,t,count=1)
     # картинки для canvas (сертификат, значок, фото комнаты) — с CORS, иначе «Save» не сработает вне своего домена
     t=t.replace('new Image()',"Object.assign(new Image(),{crossOrigin:'anonymous'})")
+    # слова по клику — записанным голосом Piper (тем же, что в домашках), а не голосом браузера:
+    # он на каждом устройстве свой (решение Анны от 21.10.2026). Нет записи — молчим.
+    SAY='function say(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}'
+    if SAY in t:
+        V=json.load(open(os.path.join(REPO,'builds/halloween/voice.json')))
+        t=t.replace(SAY,'const VOICE='+json.dumps(V)+',VA={};let sayA=null;'
+            'Object.keys(VOICE).forEach(k=>{try{const a=new Audio();a.preload="auto";a.src=VOICE[k];VA[k]=a;}catch(e){}});'
+            'function say(t){const k=String(t).toLowerCase().trim().replace(/^(a|an|the) /,"");const a=VA[k];if(!a)return;'
+            'try{if(sayA&&sayA!==a)sayA.pause();a.currentTime=0;sayA=a;a.play().catch(()=>{});}catch(e){}}')
+    assert 'speechSynthesis' not in t, src
     os.makedirs(os.path.dirname(dst),exist_ok=True);open(dst,'w').write(t)
     print(src,'->',dst,len(t)//1024,'KB')
 if __name__=='__main__':
