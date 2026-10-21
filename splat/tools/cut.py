@@ -41,7 +41,7 @@ def cut(src, out_dir, names, max_side=520, grow=18, thr=10):
         crop = a[y0:y1, x0:x1]
         own = lab[y0:y1, x0:x1] == i
         d = 255 - crop.min(axis=2)
-        nearwhite = d <= 6
+        nearwhite = d <= max(2, thr // 2)
         bl, _ = ndi.label(nearwhite)
         border = set(np.unique(np.concatenate([bl[0], bl[-1], bl[:, 0], bl[:, -1]]))) - {0}
         bg = np.isin(bl, list(border)) | ~own
