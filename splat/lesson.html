@@ -488,7 +488,7 @@ S[12] = { bg: 'snow_meadow', go(n, c) {
     if (right) { cd.classList.add('good'); sfx.ok(); RD.tick(); r++; later(show, 900); } else { sfx.no(); wobble(cd); }
   }
   function whatIs() {
-    let i = 0; const ws = shuffle(words); title('What is it?');
+    let i = 0; const ws = shuffle(words);
     (function next() {
       layer.querySelectorAll('.card,.wordcard').forEach(x => x.remove());
       if (i >= ws.length) return c.done();
@@ -645,7 +645,6 @@ S[21] = { bg: 'snow_meadow', go(n, c) {
 } };
 // 22. Show — живая игра
 S[22] = { bg: 'snow_meadow', go(n) {
-  title('Show!');
   ['tooth', 'toothbrush', 'toothpaste', 'cup'].forEach((w, i) => { const cd = card(w, 23 + i * 18, 60); cd.onclick = () => { wobble(cd); say(w); }; });
 } };
 S[23] = gateSlide(['tooth', 'toothbrush', 'toothpaste', 'cup']);
@@ -685,7 +684,6 @@ S[24] = { bg: 'castle_dark', go(n, c) {
   function openBag() {
     sack.style.transition = 'opacity .5s'; sack.style.opacity = 0;
     boss.style.transition = 'all .6s'; boss.style.left = '90%'; boss.style.top = '34%'; scale = Math.min(scale, .7); boss.style.height = 30 * scale + '%';
-    title('What is it?');
     inBag.forEach((w, i) => {
       const cd = card(w, 42 + i * 16.5, 58);
       cd.onclick = () => {
@@ -711,12 +709,10 @@ S[27] = { bg: 'castle_lights', go(n, c) {
   const steps = [['Take a toothbrush!', 'pb_stand'], ['Take some toothpaste!', 'ph_stand'], ['Brush, brush, brush!', 'ph_brush'], ['Smile!', 'ph_jump']];
   let p = pengAt('p_wave', FIN[0], FIN[1], FIN[2], 'click');
   let k = 0;
-  const b = el('div', 'title'); b.style.visibility = 'hidden';
   p.onclick = next;
   function next() {
     if (k >= steps.length) return;
-    const [phrase, img] = steps[k];
-    b.textContent = phrase; b.style.visibility = ''; b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop');
+    const [, img] = steps[k];   // фраза на экране не показывается — её говорит учитель (решение Анны 22.10.2026)
     // поза меняется на месте плавным перетеканием (как между слайдами), без покачивания
     [...PL.querySelectorAll('img.peng'), ...PL.querySelectorAll('.pshadow')].forEach(e => { e.dataset.stale = 1; });
     p = pengAt(img, FIN[0], FIN[1], FIN[2], 'click'); p.onclick = next;
