@@ -20,3 +20,12 @@
    My little sister is going to be a witch. Mum and I are going to cook mummy hot dogs
    and pumpkin soup. In the evening we're going to watch a film about a werewolf and
    tell ghost stories.
+
+## Применено 21.10.2026 (после «закончила вычитку»)
+- 2 (без звука в «Соедини картинку и слово» advanced), 3 (верно/неверно → «выбери ответ» с картинкой),
+  4 (карточки без артикля; harvest — звук без the), 5 (10–12 advanced: 6 монстров, 8 блоков:
+  карточки → послушай и выбери → соедини → «прочитай и выбери, кто это» → собери слово → диктант →
+  Golden Pumpkin про монстров → «Как ты празднуешь Хэллоуин»), 7 (пример Анны). SQL —
+  `sql/hw_vychitka2_1012adv_20261021.sql` + миграция `halloween_hw_vychitka2_20261021`.
+- База — источник истины: `hwdb_build.py` после вычитки 21.10 не пересобирать поверх, он отстал.
+- 1 (👍/👎) — ждём картинки по промпту. 6 (раунды) — правка платформы.
