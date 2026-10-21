@@ -100,8 +100,15 @@ TR13 = {'13/w_pumpkin': 'тыква', '13/w_turnip': 'репа', '13/w_bonfire':
 HW = []
 
 
+# Фон страницы домашки (решение Анны 21.10.2026): ночь с тыквами из урока
+# своего возраста для 4–6 и 7–9, улица с фонарями для 10–12 и 13+.
+# Платформа берёт его из `page_bg` в payload первого блока.
+PAGE_BG = {10: '4-6/bg_night.webp', 11: '7-9/bg7_night.webp', 12: '7-9/bg7_night.webp'}
+
+
 def hw(title, summary, order, blocks):
     les = Lesson(title, summary, order, kind='homework', threshold=60)
+    blocks[0][1]['page_bg'] = 'https://classroom.wowteach.ru/media/halloween/' + PAGE_BG.get(order, 'hw_bg_street.webp')
     for t, p, c in blocks:
         les.add(t, p, c)
     HW.append(les)
