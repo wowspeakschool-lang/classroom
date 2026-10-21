@@ -13,6 +13,7 @@ from scipy import ndimage as ndi
 
 ERODE = 3
 GRAY = False
+HOLES = False   # --holes: замкнутые чисто белые просветы (между удочкой и леской) — всегда фон
 
 
 def cut(src, out_dir, names, max_side=520, grow=18, thr=10):
@@ -65,7 +66,7 @@ def cut(src, out_dir, names, max_side=520, grow=18, thr=10):
         holes, hn = ndi.label(ndi.binary_fill_holes(~bg) & bg)
         for k in range(1, hn + 1):
             m = holes == k
-            if m.sum() < bg.size * 0.01 or d[m].mean() >= 1.8:
+            if (m.sum() < bg.size * 0.01 and not (HOLES and m.sum() > 150)) or d[m].mean() >= 1.8:
                 bg[m] = False
         alpha = np.where(bg, 0, 255).astype(np.uint8)
         # мягкий край: переход 6..18 «темнее белого» у границы с фоном
@@ -94,6 +95,8 @@ def cut(src, out_dir, names, max_side=520, grow=18, thr=10):
 if __name__ == '__main__':
     args = sys.argv[1:]
     GRAY = '--gray' in args
+    HOLES = '--holes' in args
+    if HOLES: args.remove('--holes')
     if GRAY: args.remove('--gray')
     opt = {'--max': 520, '--grow': 18, '--thr': 10, '--erode': 3}
     for key in list(opt):
