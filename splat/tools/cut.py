@@ -21,6 +21,10 @@ def cut(src, out_dir, names, max_side=520, grow=18, thr=10):
     lab, n = ndi.label(grown)
     sizes = ndi.sum(np.ones_like(lab), lab, range(1, n + 1))
     keep = [i + 1 for i, s in enumerate(sizes) if s > lab.size * 0.004]
+    if len(names) == 1 and len(keep) > 1:        # один предмет из нескольких кусков (удочка с леской) — сливаем
+        for i in keep[1:]:
+            lab[lab == i] = keep[0]
+        keep = keep[:1]
     boxes = [(i, ndi.find_objects((lab == i).astype(int))[0]) for i in keep]
     # построчно: группируем по центру по вертикали
     boxes.sort(key=lambda b: (b[1][0].start + b[1][0].stop) / 2)

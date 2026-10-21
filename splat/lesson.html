@@ -438,10 +438,12 @@ S[13] = gateSlide(['tooth', 'toothbrush']);
 
 // 14. Рыбалка: тень плавает, «Stop!» — когда тень под крючком
 S[14] = { bg: 'ice_fishing', go(n, c) {
-  const HX = 61, HY = 72;
-  sph('pb_fishing', 24, 58, 46);                       // крупный пингвинёнок с большой удочкой
-  const line = el('div'); line.style.cssText = `position:absolute;left:${HX}%;top:34%;width:3px;height:${HY - 34}%;background:rgba(60,60,70,.75);transform-origin:top`;
-  const hook = el('div'); hook.style.cssText = `position:absolute;left:${HX}%;top:${HY}%;width:1.4%;height:2.6%;border:3px solid #555;border-top:none;border-radius:0 0 50% 50%;transform:translate(-50%,-50%)`;
+  const HX = 61, HY = 73;
+  // пингвинёнок с удочкой поставлен так, чтобы крючок висел над лункой (крючок — 93 % ширины, 69 % высоты картинки)
+  sph('pb_fishing', 41.8, 61.6, 60);
+  // леска на картинке слишком тонкая и при вырезке пропала — рисуем от кончика удочки до поплавка
+  const line = el('div'); line.style.cssText = 'position:absolute;left:61.3%;top:32.8%;width:2px;height:29.4%;background:rgba(70,70,80,.75)';
+  const hook = { remove() {} };
   const shadow = el('img'); shadow.src = U('fish');
   shadow.style.cssText = `position:absolute;top:${HY + 1}%;width:9%;transform:translate(-50%,-50%);filter:brightness(2.2) saturate(0) opacity(.55) blur(1px)`;
   let t0 = performance.now(), stopped = false;
@@ -456,7 +458,6 @@ S[14] = { bg: 'ice_fishing', go(n, c) {
     const x = parseFloat(shadow.style.left);
     if (Math.abs(x - HX) > 4) { wobble(b); sfx.no(); return; }
     stopped = true; shadow.remove(); hook.remove(); b.remove(); sfx.ok();
-    line.style.transition = 'height .7s ease-in'; line.style.height = '10%';
     const t = sph('tube', HX, HY, 14, 'pop'); t.style.transition = 'top .7s ease-in'; requestAnimationFrame(() => t.style.top = '46%');
     later(() => c.done(), 1200);
   }
