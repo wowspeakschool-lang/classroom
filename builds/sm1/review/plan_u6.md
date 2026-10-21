@@ -145,19 +145,17 @@ sandwich.», «There are three sausages.», «There is a doll.» Шесть па
 точек на картинке `food_numbered.webp` — треть домашки на конструкции без той
 самой части, которая на уроке была главной («in the kitchen»).
 
-Предлагаю: блок 8 (match) оставить как есть — он простой и идёт первым, а в
-блоке 5 (hotspot) заменить подписи на комнатные, картинку взять `cats_house.webp`
-(она уже в блоке 6 этой же домашки и показывает дом в разрезе): «There are four
-cats in the kitchen.», «There are two bedrooms.», «There is a dog in the hall.»
-и т. д. Тогда ребёнок дважды пройдёт ровно то, что отрабатывал на уроке.
+Предлагаю: блок 8 (match) оставить как есть, а в блоке 5 (hotspot) заменить
+подписи на комнатные и взять картинку `cats_house.webp` (она уже в блоке 6 этой
+же домашки и показывает дом в разрезе): «There are four cats in the kitchen.»,
+«There are two bedrooms.», «There is a dog in the hall.» и т. д.
 
 Там же, блок 11 (speaking): задание просит перечислить комнаты — «There is a
-kitchen. There are two bedrooms. There is a bathroom.» Это продукт **урока 1**
-(«Say 8 new room words», «describe a house»), а урок 2 просит сказать, **что
-в комнате стоит**. Предлагаю заменить пример и `sample_tts` на:
-«There is a bed in my bedroom. There are two chairs in the kitchen. There is a
-TV in the living room.» — и в тексте задания попросить назвать не комнаты,
-а предметы в них.
+kitchen. There are two bedrooms.» Это продукт **урока 1** («describe a house»),
+а урок 2 просит сказать, **что в комнате стоит**. Предлагаю заменить пример и
+`sample_tts` на «There is a bed in my bedroom. There are two chairs in the
+kitchen. There is a TV in the living room.», а в тексте задания попросить назвать
+не комнаты, а предметы в них.
 
 ---
 
