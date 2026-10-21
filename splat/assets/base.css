@@ -11,7 +11,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{font-family:var(--text);color:var(--ink);background:linear-gradient(180deg,var(--sky1),var(--sky2) 55%,var(--sky3));
-  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+  background-attachment:fixed;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 svg.art{display:block;width:100%;height:auto;max-height:100%;overflow:visible}
 .btn{font-family:var(--disp);font-weight:700;font-size:clamp(18px,2.6vw,26px);color:#fff;border:none;border-radius:999px;
   padding:14px 36px;cursor:pointer;background:linear-gradient(180deg,#5fe0cb,var(--brand-d));box-shadow:0 6px 0 #167a6b,0 10px 24px rgba(31,158,139,.35);

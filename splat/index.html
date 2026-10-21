@@ -20,10 +20,26 @@ header{width:100%;max-width:1100px;display:flex;justify-content:space-between;al
 .h2{font-family:var(--disp);font-weight:700;font-size:clamp(22px,4vw,36px);text-align:center;background:rgba(255,255,255,.85);padding:8px 24px;border-radius:999px;margin:6px 0 14px}
 .lead{font-weight:800;font-size:clamp(16px,2.2vw,20px);text-align:center;background:rgba(255,255,255,.75);padding:8px 18px;border-radius:20px;max-width:640px}
 /* главная */
-#home .castle{width:min(400px,80vw);margin:4px 0 -6px}
-#home .big{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:20px}
-#home .big .btn{font-size:clamp(20px,3vw,28px);padding:18px 38px}
-#home .brandbig .brandmark img{height:76px}#home .brandbig .wm b{font-size:36px}#home .brandbig .wm s{font-size:28px}
+#home .hero{position:relative;width:min(520px,92vw);margin-top:4px}
+#home .hero .castle{width:100%}
+#home .hero .fz{position:absolute;left:-4%;bottom:6%;width:30%;transform:scale(0);transition:transform .6s cubic-bezier(.3,1.6,.5,1)}
+#home .hero .fz.on{transform:scale(1)}
+#home .hero .say{position:absolute;left:24%;top:4%;background:#fff;border-radius:22px;padding:10px 16px;font-family:var(--disp);font-weight:600;font-size:clamp(14px,2vw,18px);box-shadow:0 8px 24px rgba(59,45,92,.18);opacity:0;transition:opacity .4s;max-width:60%}
+#home .hero .say.on{opacity:1}
+#home .stars{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.8);border-radius:999px;padding:6px 16px;margin-top:12px;font-family:var(--disp);font-weight:600;cursor:pointer}
+#home .stars{white-space:nowrap}#home .stars i{width:clamp(18px,5vw,26px);display:block}
+header>div:last-child{display:flex;gap:6px;align-items:center}#home .stars i.off{filter:grayscale(1);opacity:.35}
+#home .two{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:min(620px,94vw);margin-top:18px}
+#home .two .btn{justify-content:center;font-size:clamp(19px,3vw,28px);padding:20px 10px;width:100%}
+.signup{background:linear-gradient(180deg,#ffe27a,var(--sun-d));color:var(--ink);border:none;border-radius:999px;padding:10px 18px;font-family:var(--disp);font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 4px 0 #c98410;text-decoration:none}
+.parents{width:min(820px,94vw);margin-top:26px;background:#fff;border-radius:30px;padding:20px 24px;box-shadow:0 10px 30px rgba(59,45,92,.1);display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+.parents h3{font-family:var(--disp);font-size:22px;color:var(--brand-d);margin-bottom:6px}
+.parents ul{list-style:none;font-weight:700;line-height:1.6}
+.parents li:before{content:'✓ ';color:var(--brand);font-weight:900}
+@media (max-width:620px){.parents{grid-template-columns:1fr;text-align:center}.signup span{display:none}}
+#splash{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:linear-gradient(180deg,var(--sky1),var(--sky2));cursor:pointer}
+#splash .fz{width:min(220px,50vw)}
+#splash.off{display:none}
 .sharebar{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 .packs{display:flex;gap:30px;justify-content:center;margin-top:24px;align-items:flex-end}
 .packs>div{width:min(110px,22vw)}
@@ -92,21 +108,39 @@ footer{margin-top:28px;font-size:13px;font-weight:800;opacity:.6;text-align:cent
 
 <!-- Главная: две кнопки -->
 <section class="scr on" id="home">
-  <header><span></span><button class="ib" id="mute">🔊</button></header>
-  <div class="brandbig" id="brandBig"></div>
-  <div class="castle bob" data-art="castle" data-lit="5" style="cursor:pointer"></div>
+  <header><div id="brandTop"></div><div><a class="signup" href="#signup" id="signupTop">📅 <span>Записаться на урок</span></a> <button class="ib" id="mute">🔊</button></div></header>
+  <div class="hero">
+    <div class="castle" data-art="castle" data-lit="5"></div>
+    <div class="fz bob" id="homeHero" data-art="fairy"></div>
+    <div class="say" id="homeSay">Привет! Это Зубной замок Splat Kids 👋</div>
+  </div>
   <div class="title">Зубной замок<br>в облаках</div>
-  <div class="lead" style="margin-top:10px">Чистим зубки — учим английский! Игры, челлендж на 7 дней и задания, которые можно распечатать и сделать вместе с мамой.</div>
-  <div class="big">
-    <button class="btn pulse" data-go="menu">🎮 Играть</button>
-    <a class="btn pink" href="print.html" target="_blank">🖨 Задания с мамой</a>
+  <div class="stars" data-go="challenge" id="homeStars"></div>
+  <div class="two">
+    <button class="btn" data-go="menu">🎮 Играть</button>
+    <button class="btn pink" data-go="hands">✂️ Своими руками</button>
   </div>
-  <div class="sharebar">
-    <button class="ib" data-go="challenge">⭐ Челлендж 7 дней</button>
-    <button class="ib" id="share">💌 Отправить другу</button>
+  <div class="sharebar"><button class="ib" id="share">💌 Отправить другу</button></div>
+  <div class="parents" id="parents">
+    <div>
+      <h3>Для родителей</h3>
+      <ul>
+        <li>Ребёнок играет и запоминает английские слова про чистку зубов</li>
+        <li>Челлендж 7 дней превращает чистку зубов в игру — утром и вечером</li>
+        <li>Задания «Своими руками» можно распечатать и сделать вместе</li>
+      </ul>
+    </div>
+    <a class="btn sun" href="#signup">📅 Бесплатный урок<br>с преподавателем</a>
   </div>
-  <div class="packs"><div data-art="toothbrush"></div><div data-art="toothpaste"></div><div data-art="cup"></div></div>
   <footer>Splat Kids × WowSpeak · бесплатно для детей</footer>
+</section>
+
+<div id="splash"><div class="fz bob" data-art="fairy"></div><div class="title">Зубной замок<br>в облаках</div><button class="btn pulse">▶ Войти в замок</button></div>
+
+<!-- Своими руками (заглушка) -->
+<section class="scr" id="hands">
+  <header><button class="ib" data-go="home">◀ Домой</button><div class="h2" style="margin:0">Своими руками ✂️</div><span></span></header>
+  <div class="lead">Скоро здесь будет конкурс Splat Kids: нарисуй щётку или Зубную фею, подпиши английское слово — и покажи нам! 🎨</div>
 </section>
 
 <!-- Меню игр -->
@@ -384,10 +418,21 @@ enter.words = () => {
 };
 
 /* ---------- запуск ---------- */
-$('#brandBig').innerHTML = brandHTML().replace(/<span class="x">.*?<\/span><span class="ws">.*?<\/span>/, '');
+$('#brandTop').innerHTML = brandHTML();
 $('#brandSm').innerHTML = brandHTML();
 mountClouds(7); drawArt();
-$('#home .castle').onclick = () => SND.play('r_welcome');
+function renderStars() {
+  const ch = store.get('ch', {}), n = DAYS.filter((_, i) => dayDone(ch[i])).length;
+  $('#homeStars').innerHTML = 'Твои звёзды: ' + DAYS.map((_, i) => `<i class="${i < n ? '' : 'off'}">${ART.star({ face: false })}</i>`).join('');
+}
+enter.home = renderStars; renderStars();
+async function greet() {
+  await sleep(300); $('#homeHero').classList.add('on');
+  await sleep(500); $('#homeSay').classList.add('on'); SND.play('r_welcome');
+}
+$('#splash').onclick = () => { $('#splash').classList.add('off'); if (cur === 'home') greet(); };
+$('#homeHero').onclick = () => SND.play('r_welcome');
+if (new URLSearchParams(location.search).get('parents') === '0') $('#parents').remove();
 const start = location.hash.slice(1);
 if (start && $('#' + start)) go(start);
 </script>
