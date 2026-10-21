@@ -22,7 +22,7 @@ def accept(w):
     return out
 
 
-def cards(ws, title='Карточки: смотри, слушай, повторяй', tr=None):
+def cards(ws, title='Посмотри карточки, послушай и повтори слова', tr=None):
     cs = []
     for k, w in ws:
         c = {'text': w, 'image': U(k), 'audio_tts': strip(w) if w.startswith('a ') else w}
@@ -49,7 +49,7 @@ def listen(ws, seed, title='🔊 Послушай и выбери картинк
     return {'title': title, 'questions': qs}
 
 
-def yesno(ws, seed, title='🔊 Послушай: это то слово? 👍 или 👎'):
+def yesno(ws, seed, title='🔊 Послушай слово и посмотри на картинку. Это она? Нажми 👍, если да, и 👎, если нет'):
     rnd = random.Random(seed)
     qs = []
     pairs = [(x, x) for x in ws] + [(x, rnd.choice([y for y in ws if y != x])) for x in ws]
@@ -61,15 +61,16 @@ def yesno(ws, seed, title='🔊 Послушай: это то слово? 👍 �
     return {'title': title, 'questions': qs}
 
 
-def same(ws, title='Найди одинаковые картинки и назови их'):
-    return {'title': title, 'pairs': [{'left_image': U(k), 'right': strip(w), 'right_image': U(k)} for k, w in ws]}
+def same(ws, title='🔊 Нажми на динамик слева, послушай слово и найди его картинку справа'):
+    # звук ↔ картинка (решение Анны от 21.10.2026: «одинаковые картинки» — слишком просто)
+    return {'title': title, 'pairs': [{'left': '🔊', 'left_audio_tts': strip(w), 'right': strip(w), 'right_image': U(k)} for k, w in ws]}
 
 
 def match(ws, title='Соедини картинку и слово'):
     return {'title': title, 'pairs': [{'left_image': U(k), 'right': strip(w), 'right_audio_tts': strip(w)} for k, w in ws]}
 
 
-def unscramble(ws, seed, title='Собери слово из букв'):
+def unscramble(ws, seed, title='Переставь буквы по порядку и напиши слово'):
     items = []
     for i, (k, w) in enumerate(ws):
         b = strip(w)
@@ -110,8 +111,8 @@ def hw(title, summary, order, blocks):
 hw('Halloween Homework · 4–6', 'Хэллоуин: ghost, bat, spider, monster', 10, [
     ('flashcards', cards(W46, 'Посмотри карточки, послушай и повтори'), ''),
     ('quiz', listen(W46, 46, '🔊 Послушай и выбери картинку'), ''),
-    ('match', same(W46, 'Найди одинаковые картинки и назови их'), 'вместо игры «найди пару»'),
-    ('quiz', yesno(W46, 47, '🔊 Послушай: это то слово? 👍 или 👎'), ''),
+    ('match', same(W46), 'вместо игры «найди пару»'),
+    ('quiz', yesno(W46, 47, '🔊 Послушай слово и посмотри на картинку. Это она? Нажми 👍, если да, и 👎, если нет'), ''),
     ('speaking', speak('🎤 Что ты видишь?', '<p>Нажми на запись и назови всё, что видишь на картинке.</p><p><i>ghost, bat, spider, monster…</i></p>', '4-6/hw_scene'), ''),
 ])
 hw('Halloween Homework · 7–9 · beginners', 'Хэллоуин: ghost, bat, spider, witch, pumpkin, skeleton', 11, [
@@ -127,21 +128,21 @@ hw('Halloween Homework · 7–9 · advanced', 'Хэллоуин: 8 слов, the
     ('flashcards', cards(W7C), ''),
     ('match', match(W7C), ''),
     ('exact_input', unscramble(W7C, 700), ''),
-    ('quiz', {'title': 'Посмотри на картинку: is или are?', 'questions': [
+    ('quiz', {'title': 'Посмотри на картинку и выбери is или are', 'questions': [
         ROOMQ('There ___ a witch in the room.', ['is', 'are'], 0, '7-9/hw_room'),
         ROOMQ('There ___ three pumpkins under the bed.', ['is', 'are'], 1, '7-9/hw_room'),
         ROOMQ('There ___ a ghost on the bed.', ['is', 'are'], 0, '7-9/hw_room'),
         ROOMQ('There ___ two spiders on the table.', ['is', 'are'], 1, '7-9/hw_room'),
         ROOMQ('There ___ a mummy in the box.', ['is', 'are'], 0, '7-9/hw_room'),
         ROOMQ('There ___ a vampire next to the window.', ['is', 'are'], 0, '7-9/hw_room')]}, ''),
-    ('quiz', {'title': 'In, on или under?', 'questions': [
+    ('quiz', {'title': 'Посмотри на картинку и выбери in, on или under', 'questions': [
         ROOMQ('The ghost is ___ the bed.', ['in', 'on', 'under'], 1, '7-9/hw_r_ghostbed'),
         ROOMQ('The pumpkins are ___ the bed.', ['in', 'on', 'under'], 2, '7-9/hw_r_pumpkins'),
         ROOMQ('The spiders are ___ the table.', ['in', 'on', 'under'], 1, '7-9/hw_r_spiders'),
         ROOMQ('The broom is ___ the table.', ['in', 'on', 'under'], 2, '7-9/hw_r_broom'),
         ROOMQ('The mummy is ___ the box.', ['in', 'on', 'under'], 0, '7-9/hw_r_mummy'),
         ROOMQ('The skeleton is ___ the chair.', ['in', 'on', 'under'], 1, '7-9/hw_r_skeleton')]}, ''),
-    ('truefalse', {'title': 'Посмотри на картинку: верно или неверно?', 'image': U('7-9/hw_room'), 'statements': [
+    ('truefalse', {'title': 'Посмотри на картинку и прочитай предложения. Верно или неверно?', 'image': U('7-9/hw_room'), 'statements': [
         {'text': 'There is a ghost on the bed.', 'correct': True}, {'text': 'There are two pumpkins under the bed.', 'correct': False},
         {'text': 'The broom is on the table.', 'correct': False}, {'text': 'There is a mummy in the box.', 'correct': True},
         {'text': 'The skeleton is on the chair.', 'correct': True}, {'text': 'There are three spiders on the table.', 'correct': False}]}, ''),
@@ -167,11 +168,11 @@ hw('Halloween Homework · 10–12 · advanced', 'Хэллоуин: 6 монст�
     ('flashcards', cards(WM + WC), ''),
     ('match', match(WM), ''),
     ('match', match(WC), ''),
-    ('quiz', {'title': 'Найди лишнюю картинку', 'questions': [
+    ('quiz', {'title': 'Какая картинка лишняя? Выбери её', 'questions': [
         {'q': '', 'type': 'single', 'correct': [ks.index(odd)], 'options': [{'text': strip(WD10[k]), 'image': U('10-12/' + k)} for k in ks]} for ks, odd in ODD]}, ''),
     ('exact_input', unscramble(random.Random(5).sample(WM + WC, 8), 1100), ''),
     ('exact_input', dictation(random.Random(6).sample(WM + WC, 6)), ''),
-    ('gaps', {'mode': 'drag', 'title': 'The Golden Pumpkin: вставь слова', 'text': GOLD}, ''),
+    ('gaps', {'mode': 'drag', 'title': 'The Golden Pumpkin: расставь слова по пропускам', 'text': GOLD}, ''),
     ('speaking', speak('🎤 Опиши подозреваемого', '<p>Нажми на запись и расскажи, что ты видишь на картинке.</p><p><i>I can see a vampire. I can see a red scarf, glasses…</i></p>', '10-12/hw_suspect'), ''),
 ])
 hw('Halloween Homework · 13+ · beginners', 'Хэллоуин: pumpkin, turnip, bonfire, costume, ghost, candle', 15, [
@@ -192,12 +193,12 @@ SAM = ('Long ago in Ireland, people celebrated Samhain at the end of the __harve
        'Children carved a scary face into a __turnip__, put a __candle__ inside and made a __lantern__. '
        'Later, in America, people used a __pumpkin__ instead.')
 hw('Halloween Homework · 13+ · advanced', 'Хэллоуин: 8 слов с переводом, текст о Самайне', 16, [
-    ('flashcards', cards(W13C, 'Новые слова: слово, перевод, звук', TR13), ''),
+    ('flashcards', cards(W13C, 'Новые слова: посмотри карточки, послушай и повтори', TR13), ''),
     ('match', {'title': 'Соедини слово и определение', 'pairs': [{'left': w, 'right': d, 'left_audio_tts': w} for w, d in DEF]}, ''),
     ('exact_input', unscramble(W13C, 1350), ''),
     ('exact_input', dictation(random.Random(7).sample(W13C, 6)), ''),
-    ('gaps', {'mode': 'drag', 'title': 'Samhain: вставь слова', 'text': SAM}, ''),
-    ('truefalse', {'title': 'Прочитай текст ещё раз: верно или неверно?', 'statements': [
+    ('gaps', {'mode': 'drag', 'title': 'Samhain: расставь слова по пропускам', 'text': SAM}, ''),
+    ('truefalse', {'title': 'Вспомни текст о Самайне из прошлого задания. Верно или неверно?', 'statements': [
         {'text': 'Samhain was at the end of the harvest.', 'correct': True}, {'text': 'People made bonfires in their houses.', 'correct': False},
         {'text': 'People wore costumes and masks.', 'correct': True}, {'text': 'The first lanterns were made from pumpkins.', 'correct': False},
         {'text': 'Children put a candle inside the turnip.', 'correct': True}, {'text': 'In America people used a pumpkin.', 'correct': True}]}, ''),
