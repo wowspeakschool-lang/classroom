@@ -57,6 +57,8 @@
 11. 10–12 advanced: целевая лексика — 6 монстров (witch, vampire, mummy, werewolf, skeleton, ghost)?
     Тогда улики (watch, scarf, glasses, boots, lollipops, ticket) убираю отовсюду, текст Golden
     Pumpkin переписываю на монстров.
+14. 10–12 advanced, говорение «Как ты будешь праздновать Хэллоуин?»: согласовать пример
+    (be going to или Present Simple, состав, картинка) — черновик в builds/halloween/vychitka_zamechaniya.md, п. 7.
 13. «Напиши слово» (переставь буквы, диктант) идёт списком, а «выбери ответ» — раундами. Сделать
     раундами и «напиши слово» — правка платформы, сразу во всех курсах (нужно «да»)?
 12. Сказать «закончила вычитку» — тогда применяю все замечания (builds/halloween/vychitka_zamechaniya.md).

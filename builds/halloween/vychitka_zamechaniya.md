@@ -14,3 +14,9 @@
 6. Раунды: «выбери ответ» (quiz) платформа показывает по одному вопросу (1…5, «Вопрос 3 из 5»),
    а «напиши слово» (exact_input: «Переставь буквы», «Послушай и напиши») — все пункты списком.
    Это поведение платформы для всех курсов. Как быть — вопрос 13.
+7. 10–12 advanced, блок 8 «Опиши подозреваемого» → «Как ты будешь праздновать Хэллоуин?»
+   (3–4 предложения + пример). Пример обсуждаем — вопрос 14. Черновик:
+   On Halloween I'm going to dress up as a vampire — with a black cape and big teeth!
+   My little sister is going to be a witch. Mum and I are going to cook mummy hot dogs
+   and pumpkin soup. In the evening we're going to watch a film about a werewolf and
+   tell ghost stories.
