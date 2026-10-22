@@ -6,20 +6,22 @@
 -- в одном два. Ребёнок видит пять одинаковых рамок с одной строкой в каждой и
 -- жмёт «Проверить» пять раз. Во всех остальных тестах курса (юниты 2–8) эта
 -- грамматика — один блок на 5 вопросов. Скрипт сводит Unit 1 к тому же виду:
--- шесть вопросов в блоке 3, блоки 4–7 удаляются, тест становится из 15 блоков
--- одиннадцатиблочным, как и соседние.
+-- шесть вопросов в блоке 5, блоки 6–9 удаляются, тест становится из 22 блоков
+-- восемнадцатиблочным.
 --
--- Ничего не теряется: все шесть вопросов переезжают в блок 3 в прежнем порядке.
+-- Решение Анны от 22.10.2026 — сводить. Нумерация после запуска сходится:
+-- приветствие остаётся блоком 1, прощание последним (18), блок аудирования
+-- переезжает с 17-го места на 13-е. Имя файла записи от этого не меняется:
+-- `gg3_u1_test_b17.mp3` (см. docs/ozvuchka_speechkit.md).
+--
+-- Ничего не теряется: все шесть вопросов переезжают в блок 5 в прежнем порядке.
 --
 -- Скрипт идемпотентен: повторный запуск ничего не сломает (блоков уже нет,
 -- payload уже такой). Запускать в SQL Editor целиком, одним куском.
---
--- 🟥 Это НЕ обязательная правка. Если решите оставить пять блоков как есть —
--- просто не запускайте файл, на работу теста это не влияет.
 
 begin;
 
--- 1. Шесть вопросов собираются в блок 3 (sort_order 2) урока Unit 1 Test.
+-- 1. Шесть вопросов собираются в блок 5 (sort_order 4) урока Unit 1 Test.
 update classroom_blocks
 set payload = jsonb_build_object(
   'title', 'Прочитай предложение и выбери пропущенное слово',
@@ -39,13 +41,13 @@ set payload = jsonb_build_object(
   ]$q$::jsonb)
 where id = '1c4ed0a5-08ae-4e26-b472-bc72e2ba4664';
 
--- 2. Блоки 4–7 (sort_order 3–6) того же урока удаляются.
+-- 2. Блоки 6–9 (sort_order 5–8) того же урока удаляются.
 create temporary table udalyaem_gg3 (id uuid) on commit drop;
 insert into udalyaem_gg3 (id) values
-  ('6a17bb34-f401-4844-8ad2-13a79d8a7d98'::uuid),   -- блок 4, вопрос про hang out
-  ('160b5675-8569-4c57-bf48-86f3b229eb42'::uuid),   -- блок 5, два вопроса про vacuum
-  ('e4b3f0bd-c3c3-4665-afd0-d284d3c51fc1'::uuid),   -- блок 6, вопрос про make the beds
-  ('c513e35a-30c1-452f-b236-d35fd37f4b9c'::uuid);   -- блок 7, вопрос про understand
+  ('6a17bb34-f401-4844-8ad2-13a79d8a7d98'::uuid),   -- блок 6, вопрос про hang out
+  ('160b5675-8569-4c57-bf48-86f3b229eb42'::uuid),   -- блок 7, два вопроса про vacuum
+  ('e4b3f0bd-c3c3-4665-afd0-d284d3c51fc1'::uuid),   -- блок 8, вопрос про make the beds
+  ('c513e35a-30c1-452f-b236-d35fd37f4b9c'::uuid);   -- блок 9, вопрос про understand
 
 create temporary table zatronutye_uroki_gg3 on commit drop as
 select distinct lesson_id from classroom_blocks where id in (select id from udalyaem_gg3);
@@ -66,8 +68,8 @@ where lesson_id in (select lesson_id from zatronutye_uroki_gg3) and sort_order >
 
 commit;
 
--- Проверка после запуска: ostalos_udalyaemyh = 0, blokov_v_teste = 11,
--- voprosov_v_bloke_3 = 6, dyr_v_numeratsii = 0.
+-- Проверка после запуска: ostalos_udalyaemyh = 0, blokov_v_teste = 18,
+-- voprosov_v_svodnom_bloke = 6, dyr_v_numeratsii = 0.
 select
   (select count(*) from classroom_blocks where id in (
      '6a17bb34-f401-4844-8ad2-13a79d8a7d98',
@@ -77,7 +79,7 @@ select
   (select count(*) from classroom_blocks
      where lesson_id = '87f1ce1e-8300-43d2-82b0-594ff8099a0f') as blokov_v_teste,
   (select jsonb_array_length(payload->'questions') from classroom_blocks
-     where id = '1c4ed0a5-08ae-4e26-b472-bc72e2ba4664') as voprosov_v_bloke_3,
+     where id = '1c4ed0a5-08ae-4e26-b472-bc72e2ba4664') as voprosov_v_svodnom_bloke,
   (select count(*) from classroom_blocks
      where lesson_id = '87f1ce1e-8300-43d2-82b0-594ff8099a0f'
        and sort_order <> (select count(*) from classroom_blocks x
