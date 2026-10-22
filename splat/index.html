@@ -294,11 +294,11 @@ const starsHtml = () => `<span class="stars">${[1, 2, 3, 4, 5, 6, 7].map(n => `<
 /* ---------- экраны ---------- */
 const GAMES = [
   null,
-  { name: 'Рюкзак пингвинёнка', pic: 'backpack', run: gBackpack },
+  { name: 'Рюкзак и «Лови!»', pic: 'backpack', run: gBackpack },
   { name: 'Почисти зубки', pic: 'teeth', run: gTeeth },
   { name: 'Ледяные кубики', pic: 'ice_cube', run: gCubes },
   { name: 'Чьи тени?', pic: 'cup', run: gShadows },
-  { name: 'Лови!', pic: 'p_happy', run: gCatch },
+  { name: 'Сугробы', pic: 'mound1', run: gDrifts },
   { name: 'Фонарик', pic: 'castle_room_night', run: gTorch },
   { name: 'Мыльные пузыри', pic: 'tube', run: gBubbles },
 ];
@@ -389,7 +389,7 @@ function finish(n) {
   el('button', 'btn pb', 'На карту ▶', row).onclick = map;
 }
 
-/* ---------- день 1. Рюкзак пингвинёнка: знакомство со словами → «послушай и выбери» ---------- */
+/* ---------- день 1. Знакомство со словами (вещи выпрыгивают из рюкзака) → «Лови!» ---------- */
 function gBackpack(n) {
   setBg('snow_meadow');
   const pen = sp('p_wave', 13, 60, 46, 'bob');
@@ -409,34 +409,8 @@ function gBackpack(n) {
       if (i === W5.length) { h.remove(); h = hint('Нажимай на картинки, слушай и повторяй'); bag.classList.remove('click'); btn('Играем! ▶', 50, 90, 'sun ready', play); }
     }, 650);
   };
-  function play() {
-    scr.querySelectorAll('.btn').forEach(b => b.remove()); h.remove();
-    out.forEach(c => { c.style.opacity = 0; setTimeout(() => c.remove(), 500); });
-    pen.src = U('p_happy');
-    hint('Слушай, повторяй и найди картинку');
-    const fr = frame(5, () => finish(n));
-    const order = shuffle(W5); let r = 0, cards = [], target, bagScale = 1;
-    sayBtn(50, 17, () => say(target));
-    function round() {
-      cards.forEach(c => c.remove()); cards = [];
-      target = order[r];
-      const opts = shuffle([target, ...shuffle(W5.filter(w => w !== target)).slice(0, 2)]);
-      opts.forEach((w, j) => {
-        const c = el('div', 'card pop', `<img src="${U(PIC[w])}" alt="">`); c.style.left = [31, 50, 69][j] + '%'; c.style.top = '40%'; c.style.scale = .85;
-        c.onclick = () => {
-          if (c._done) return;
-          if (w === target) {
-            cards.forEach(o => o._done = true); sfx.ok(); say(w);
-            fly(c, 52, 80, .15, 650).then(() => { c.remove(); sfx.pop(); bagScale += .05; bag.style.scale = bagScale; re(bag, 'hop'); });
-            fr.step(); r++; if (r < order.length) later(round, 1300);
-          } else { sfx.no(); re(c, 'shake'); say(w); }
-        };
-        cards.push(c);
-      });
-      later(() => say(target), 500);
-    }
-    round();
-  }
+  // после знакомства — «Лови!» (решение Анны 22.10.2026: «Рюкзак» скучный, в день 1 — знакомство, потом «Лови!»)
+  function play() { clear(); el('button', 'tb close', '✕').onclick = map; gCatch(n); }
 }
 
 /* ---------- день 2. Почисти зубки: сначала всё берём (слушай и найди внизу), потом чистим, потом полощем ---------- */
@@ -602,7 +576,7 @@ function gShadows(n) {
   play();
 }
 
-/* ---------- день 5. Лови!: пингвинёнок ловит названную вещь; снежки и другие вещи не ловим ---------- */
+/* ---------- «Лови!» (день 1, после знакомства): пингвинёнок ловит названную вещь; снежки и другие вещи не ловим ---------- */
 function gCatch(n) {
   setBg('snow_meadow');
   hint('Лови то, что услышишь. Слушай и повторяй <small>— води пальцем</small>');
@@ -641,6 +615,48 @@ function gCatch(n) {
     });
     items = items.filter(o => { if (o.y > 110) { o.it.remove(); return false; } return true; });
   });
+}
+
+/* ---------- день 5. Сугробы: из сугроба торчит кусочек вещи — угадай, назови, нажми и проверь себя ---------- */
+// 2 круга; во втором торчат другие части тех же вещей, сугробы меняются местами (Анна, 22.10.2026)
+const PEEK = [
+  // слово: [поворот, dx, dy, высота, вид] относительно центра сугроба, в % сцены;
+  // вид 1 — зеркально (ручка кружки слева), 2 — пингвинёнок, у которого видна только лапка
+  { tooth: [0, 0, -13, 15], toothbrush: [0, 0, -11, 26], toothpaste: [-25, 0, -11, 22], cup: [0, 0, -13, 14], penguin: [0, 0, -3, 26] },
+  { tooth: [180, 0, -13, 15], toothbrush: [180, 0, -10, 26], toothpaste: [180, 0, -7, 22], cup: [0, -7, -2, 14, 1], penguin: [0, -5, -5, 22, 2] },
+];
+function gDrifts(n) {
+  setBg('snow_meadow');
+  hint('Что в сугробе? Назови и нажми! <small>Слушай и повторяй</small>');
+  const fr = frame(10, () => finish(n));
+  let round = 0;
+  function play() {
+    scr.querySelectorAll('.drift,.hid').forEach(e => e.remove());
+    const words = shuffle(W5); let left = 5;
+    words.forEach((w, i) => {
+      const x = 12 + i * 19, y = 70, [rot, dx, dy, h, kind] = PEEK[round][w];
+      const it = sp(kind === 2 ? 'p_wave' : PIC[w], x + dx, y + dy, h, 'hid');
+      it.style.transform = `translate(-50%,-50%) rotate(${rot}deg)` + (kind === 1 ? ' scaleX(-1)' : '');
+      // сугробы перекрывают соседей слева направо: вещь видна поверх левого соседа, но прячется за своим
+      it.style.zIndex = 10 + 2 * i;
+      if (kind === 2) it.style.clipPath = 'inset(16% 78% 48% 0)';
+      if (w === 'tooth') it.style.filter = 'drop-shadow(0 0 calc(var(--u)*.4) #6aa8d8)';   // белый зубик на белом снегу
+      const m = sp(i % 2 ? 'mound2' : 'mound1', x, y, 27, 'click drift pop'); m.style.zIndex = 11 + 2 * i;
+      m.onclick = () => {
+        if (m._open) return; m._open = true;
+        snow(x, y - 6); m.classList.remove('pop'); m.style.transition = 'opacity .5s,scale .5s'; m.style.opacity = 0; m.style.scale = 1.2;
+        it.style.zIndex = 30; it.style.filter = ''; it.style.clipPath = 'none';
+        it.style.transition = 'left .5s cubic-bezier(.3,1.5,.5,1),top .5s cubic-bezier(.3,1.5,.5,1),transform .5s,height .5s';
+        it.style.left = x + '%'; it.style.top = y - 8 + '%'; it.style.transform = 'translate(-50%,-50%) rotate(0deg)';
+        if (w === 'penguin') it.style.height = '30%';
+        later(() => { say(w); sfx.ok(); sparkle(x, y - 10, 10); re(it, 'hop'); }, 450);
+        fr.step();
+        if (--left === 0 && ++round < 2) later(play, 2200);
+      };
+    });
+  }
+  function snow(x, y) { sfx.snow(); sparkle(x, y, 16, '❄'); }
+  play();
 }
 
 /* ---------- день 6. Фонарик: в комнате темно, светим и находим то, что услышали ---------- */
