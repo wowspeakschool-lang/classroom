@@ -49,3 +49,344 @@
   плитки в одном предложении (`I'm … I'm`) блок не ломают.
 
 ---
+
+## B. Что изменено — применено миграциями
+
+Миграции: `gg2_test_backup`, `gg2_test_diktant_u0_u4`,
+`gg2_test_diktant_u5_final`, `gg2_test_order_titles_i_porog`,
+`gg2_test_quiz_zagolovki`, `gg2_test_u4_listening_u7_u8`,
+`gg2_test_u0_vstuplenie`. Копии всех 145 блоков тестов —
+`classroom_backup_gg_tests_20261022`.
+
+### B1. Диктант — во всех десяти тестах
+
+Было везде одинаково: **шесть пунктов** (в Final Test — десять), заголовок
+«Напиши слово по-английски — **по картинке или по русскому слову**», и у части
+пунктов вместо картинки или вместе с ней стояла русская подсказка. Это задание
+на перевод — его в курсах нет (CLAUDE.md, «Заданий „найди перевод“ не делаем»),
+а диктант по решению от 21.10.2026 — ровно пять слов.
+
+Стало везде: заголовок «Посмотри на картинку и напиши слово по-английски»,
+**пять пунктов, у каждого картинка и пустой `prompt`**, `audio_tts` нет.
+`accept` расширен естественными вариантами (`a tablet`, `yogurt`, `talent show`).
+
+Отдельно пришлось выбросить пункты, где **картинка не показывает слово** — без
+русской подсказки они становились нерешаемыми:
+
+| где | пункт | что на картинке | почему убран |
+|---|---|---|---|
+| Unit 0, блок 2 | *February* | `u0/february.webp` — пустая сетка календаря и снежинка | месяц не назван, с тем же успехом декабрь или январь |
+| Unit 1, блок 2 | *Geography, History, Science* | `u1/subj_*.webp` | школьный предмет с картинки не читается однозначно |
+| Unit 3, блок 1 | *surf the Internet* | `u3/surf_internet.webp` — мальчик с планшетом | в этом же блоке пункт «tablet» с такой же картинкой |
+| Unit 3, блок 1 | *download a song* | `u3/download_song.webp` — девочка в наушниках с телефоном | в этом же блоке пункт «headphones» |
+| Unit 3, блок 1 | *chat online* | `u3/chat_online.webp` | глагольная фраза на диктант с картинки не ложится |
+| Unit 7, блок 1 | *arrive* | **картинки не было вовсе**, только слово «прибыть» | чистый перевод |
+| Unit 8, блок 1 | *dance show* | `u8/dance_show.webp` — **пустая сцена с занавесом**, никто не танцует | слово с картинки не восстанавливается |
+| Unit 8, блок 1 | *fancy dress party* | `u8/fancy_dress.webp` — вешалка с костюмами | читается как «costumes», вечеринки на картинке нет |
+| Final Test, блок 2 | *dictionary, dangerous* | картинки не было | чистый перевод |
+
+Состав после правки:
+
+| тест | пять слов |
+|---|---|
+| Unit 0 | skateboard · draw · armchair · wardrobe · shelves |
+| Unit 1 | calculator · dictionary · scissors · **ruler** · **pencil case** |
+| Unit 2 | biscuits · cereal · ham · sausage · yoghurt |
+| Unit 3 | tablet · headphones · keyboard · **camera** · **printer** |
+| Unit 4 | beach · desert · island · volcano · waterfall |
+| Unit 5 | cinema · library · museum · restaurant · stadium |
+| Unit 6 | builder · nurse · pilot · police officer · shop assistant |
+| Unit 7 | boat · motorbike · plane · train · underground |
+| Unit 8 | barbecue · picnic · sleepover · talent competition · **invitation** |
+| Final | wardrobe · vegetables · headphones · museum · sleepover |
+
+Картинки, набранные взамен, уже лежат в `media/gg2/` и проверены глазами:
+`u1/ruler.webp`, `u1/pencil_case.webp`, `u3/camera.webp`, `u3/printer.webp`,
+`u8/invitation.webp`.
+
+### B2. Инструкция вместо блока-разделителя
+
+В Unit 0, 1, 2, 4 и 8 перед серией «Составь предложение» стоял **отдельный
+текстовый блок** с инструкцией, а в Unit 3, 5, 6 и 7 такого блока не было —
+и там ученик видел подряд пять безымянных рамок с плитками **вообще без
+задания**. Инструкция перенесена в поле `title` каждого из 45 блоков `order`
+(«Расставь части предложения в правильном порядке»), сами текстовые блоки
+вынесены на удаление (раздел C).
+
+То же самое с тремя `quiz`, где инструкция была вшита в первый вопрос:
+рендер нумерует вопросы сам, и ученик читал «1. Выбери правильный вариант.
+There ___ apples…». Инструкция вынесена в `title`, из вопроса убрана:
+Unit 2 блок 2, Unit 3 блок 2, Unit 4 блок 13.
+
+### B3. Порога нет нигде
+
+Unit 0 блок 1 и Unit 1 блок 1 обещали ученику «Чтобы пройти тест, нужно
+набрать 90 баллов». Порогов в базе нет (решение от 19.10.2026), фраза убрана.
+Заодно из вступления Unit 0 убрано «месяцы»: после правки диктанта месяцев
+в тесте не осталось.
+
+### B4. Точечные правки
+
+| где | было | стало | почему |
+|---|---|---|---|
+| Unit 0, блок 14 (`sort`) | «**Соедини** каждого подростка с двумя фактами» | «…**распредели** факты: перетащи каждый факт к нужному имени» | блок корзинный, линий в нём нет — инструкция обещала не то, что блок делает |
+| Unit 2, блок 11 (`sort`) | «**Соедини** каждого человека с фактами» | «**Распредели** факты по людям…» | то же |
+| Unit 6, блок 12 (`sort`) | «**Соедини** каждого человека с двумя фактами» | «**Распредели** факты…» | то же |
+| Unit 1, блок 12, вопрос 7 | «Daniel can play computer games on Saturday.» → **True** | «Daniel plays computer games on Saturday.» → **Not stated** | в тексте сказано только «I never play computer games **on weekdays**»; про выходные там нет ни слова, ответ «True» был догадкой |
+| Unit 2, блок 2, вопрос 5 | два варианта (`much` / `many`) при трёх у остальных четырёх | три (`much` / `many` / `a lot`) | у однотипных вопросов одинаковое число вариантов; к тому же движок не перемешивает варианты, когда их ровно два |
+| Unit 4, блок 3, вопрос 5 | «**Russian** is ___ than English for tourists.» | «**Maths** is ___ than English for me.» | курс для русскоязычных детей не должен утверждать, что их родной язык труднее английского |
+| Unit 4, блок 4, пункт 1 | «**The Sahara** is __the biggest__ (big) desert in the world.» | «**The Pacific** is __the biggest__ (big) ocean in the world.» | этот же факт слово в слово спрашивался в блоке 12 по тексту чтения |
+| Unit 4, блок 13 (аудирование) | 6 вопросов, из них «Where **did** Marco **go** last year?» и «What **was** the weather like…» | 4 вопроса | Past Simple курс даёт с юнита 6, `did` — с юнита 7. Запись не переделывается: сняты два вопроса, остальное слушается как было |
+| Unit 6, блок 5 | «We **didn't** go to school last Friday.» | «We visited our grandparents last Friday.» | `didn't` в GG2 появляется только в юните 7 (проверено по домашкам: в юните 6 его нет ни разу) |
+| Unit 6, блок 10, вопрос 6 | дистрактор «**didn't** want to do anything» | «wanted to change her job» | то же |
+| Unit 7, блок 2, вопрос 6 | «— Did you ___ any souvenirs?» сразу после вопроса 5 «— ___ you buy any souvenirs?» | «— Did you ___ the underground in London? — No, we took a taxi.» | два вопроса стояли на одном предложении и подсказывали друг друга |
+| Unit 7, блок 3 | `accept`: `didn't go` / `did not go` | добавлено `didn’t go`, `didn’t make`, `didn’t take` | `classroom__norm` апострофы не приводит: ученик с типографским апострофом получал «неверно» в трёх пунктах из пяти |
+| Unit 7, блок 10 (`match`) | у каждого правого элемента `right_audio` + `right_audio_tts` — синтез зачитывал ответ | звук снят со всех семи пар | «озвучка не должна проговаривать ответ»; это единственный блок в тестах GG2, где такой звук был |
+| Unit 8, блок 6 | плитки `… "to the fancy", "dress party?"` | `… "to the fancy dress party?"` | устойчивое сочетание было разрезано посередине |
+| Unit 8, блок 8 | плитки `… "to classical", "music", …` | `… "to classical music", …` | то же |
+
+Апострофы в `gaps` в режиме `drag` намеренно **не трогали**: там варианты из
+текста становятся фишками, и второй вариант написания добавил бы лишнюю фишку
+и сломал бы задание (Unit 8, блок 11, `isn't going to`).
+
+---
+
+## C. Что вынесено на удаление
+
+Файл `builds/gg_tests/udalit_gg2.sql` — **9 текстовых блоков-инструкций**
+(раздел B2). Скрипт удаляет их, перенумеровывает шесть затронутых уроков без
+дыр и печатает две проверочные цифры (обе должны быть 0) и новый размер
+каждого теста. Запускать в SQL Editor целиком — через MCP `delete` зависает.
+
+| тест | блок | текст |
+|---|---|---|
+| Unit 0 Test | 5 | «Расставь части предложения в правильном порядке» |
+| Unit 1 Test | 5 | то же |
+| Unit 2 Test | 4 | то же |
+| Unit 4 Test | 2 | «Выбери правильный вариант, чтобы предложение было…» |
+| Unit 4 Test | 5 | «Расставь части предложения в правильном порядке.» |
+| Unit 8 Test | 4 | то же |
+| Final Test | 1 | «DICTATION ✍️ … Где картинки нет — переведи русское слово» |
+| Final Test | 3 | «VOCABULARY 📚 Выбери правильный ответ.» |
+| Final Test | 5 | «GRAMMAR ✏️ Выбери правильный ответ.» |
+
+В Final Test блоки 3 и 5 дублировали заголовки блоков 4 и 6 слово в слово —
+ученик читал одну и ту же инструкцию дважды подряд.
+
+После запуска размеры тестов: Unit 0 — 16, Unit 1 — 15, Unit 2 — 14,
+Unit 4 — 13, Unit 8 — 14, Final — 9. Остальные без изменений.
+**Больше ничего из тестов GG2 удалять не нужно.**
+
+---
+
+## D. Что ждёт картинки
+
+Три картинки в курсе показывают не то, что подписано. Промпты готовы к
+копированию — каждый отдельным цельным блоком, строка стиля уже внутри.
+Это **сцены**, в сетку они не складываются, поэтому по одному промпту на
+картинку.
+
+### D1. `media/gg2/u8/dance_show.webp` — сейчас пустая сцена, танцев нет
+
+Картинка стоит в семи блоках юнита 8 (ДЗ 1 карточки, ДЗ 1 блок 3 «соедини
+картинку со словом», ДЗ 1 блок 4 «напиши слово», ДЗ 1 блок 10, ДЗ 2 блок 12,
+ДЗ 4 блок 5, ДЗ 6 блоки 3 и 12). Из теста я её убрала, но в домашках она
+осталась — а там по ней надо назвать слово `dance show`.
+
+```
+A 3D rendered cartoon illustration in a warm Pixar-style look: soft rounded
+shapes, friendly faces, gentle rim lighting, clean and colourful. Square
+composition. A school dance show on a small theatre stage: four children aged
+about ten, two girls and two boys, in bright dance costumes, caught mid-dance
+with their arms up and one leg lifted. Purple stage curtains at both sides,
+three warm spotlights from above, a wooden stage floor. In the dark foreground
+the backs of a few seated heads in the audience. The dancers are the clear
+subject and fill most of the frame. No text, no letters, no labels, no numbers,
+no logos, no signs anywhere in the image.
+```
+
+### D2. `media/gg2/u8/fancy_dress.webp` — сейчас вешалка с костюмами
+
+Та же история: по картинке надо назвать `fancy dress party`, а изображена
+гардеробная стойка — ребёнок скажет «costumes».
+
+```
+A 3D rendered cartoon illustration in a warm Pixar-style look: soft rounded
+shapes, friendly faces, gentle rim lighting, clean and colourful. Square
+composition. A children's fancy dress party in a living room: five children
+aged about ten in costumes — a pirate, a princess, a superhero with a red cape,
+a dinosaur and a wizard in a starry hat — standing together, laughing, with
+their arms around each other. Behind them colourful balloons, a paper garland
+and a table with a cake and paper cups. Warm afternoon light through a window.
+The costumed children fill most of the frame. No text, no letters, no labels,
+no numbers, no logos, no signs anywhere in the image.
+```
+
+### D3. `media/gg2/u5/scene_street.webp` — улица без мест из юнита
+
+Картинка стоит в Unit 5 Test, блок 12 (SPEAKING I). Вопросы к ней —
+«What buildings can you see?», а на картинке средиземноморский переулок с
+кафе и пекарней: **ни одного из шести мест юнита** (cinema, library, museum,
+restaurant, stadium, theatre). Ответить словами юнита нельзя.
+
+```
+A 3D rendered cartoon illustration in a warm Pixar-style look: soft rounded
+shapes, friendly faces, gentle rim lighting, clean and colourful. Wide
+horizontal composition, about 900 pixels across. A clean, busy town street
+seen from across the road, with four separate buildings standing side by side
+along the pavement, each clearly recognisable by its shape alone: a cinema with
+a rounded marquee canopy and light bulbs around it, a library with stone steps
+and tall arched windows full of bookshelves, a museum with white columns and a
+triangular pediment, and a restaurant with an awning and small tables with
+chairs outside on the pavement. A bus stop, a zebra crossing, a few trees in
+planters and a dozen adults and children walking along the street. Blue sky,
+bright daytime light. Every building is complete and none is cut off by the
+edge of the picture. The signboards above the doors are left completely blank.
+No text, no letters, no labels, no numbers, no logos anywhere in the image.
+```
+
+Подписи на вывесках генератору не доверяем: просим пустые таблички, узнавать
+здание ребёнок должен по форме (это и есть задание).
+
+Если картинки переделывать не будем — по D3 альтернатива без генерации:
+поменять в Unit 5 блоке 12 вопрос «What buildings can you see?» на «What can
+you see in the street: a café, a shop, a bicycle?». Решать Анне (вопрос 2 ниже).
+
+---
+## 🔴 E. Вопросы к методисту
+
+### 🔴 1. Все десять аудирований в GG2 — диалоги и многоголосые записи
+
+Это самая крупная находка по курсу, и починить её без Анны нельзя: записи уже
+лежат в бакете (`classroom-media/gg2 + gg3/`, залиты 19.10.2026).
+
+Правило: «аудирование — рассказ в третьем лице, без диалогов, английский голос
+в синтезе один». В GG2 из десяти записей **шесть прямо диалоги или несколько
+говорящих**, ещё три — рассказ от первого лица от имени девочки:
+
+| тест | блок | что в записи |
+|---|---|---|
+| Unit 0 | 13 | «три подростка рассказывают о себе **на видеозвонке**» — три голоса |
+| Unit 1 | 13 | рассказ Софии о её вторнике — первое лицо, девочка |
+| Unit 2 | 12 | рассказ Мии о покупках — первое лицо, девочка |
+| Unit 3 | 11 | **разговор по телефону** Эммы с мамой |
+| Unit 4 | 13 | **интервью** с туристом Марко |
+| Unit 5 | 11 | Лиам объясняет туристу дорогу |
+| Unit 6 | 11 | **четыре человека** рассказывают, что делали вчера |
+| Unit 7 | 11 | **разговор в кассе** на вокзале |
+| Unit 8 | 12 | **разговор** Софи и Бена |
+| Final | 9 | **разговор** Софи с её мамой |
+
+Хуже всего Unit 7: вопросы блока 12 («Where is **the customer** going?», «What
+kind of ticket does **she** want?») требуют различать кассира и покупательницу
+на слух. Если обе роли читает один голос, задание не решается.
+
+**Что нужно от вас:** послушать эти десять записей и сказать, нормально ли они
+звучат. Если нет — какие переписать рассказом в третьем лице (тексты напишу,
+запись за вами). **Если не ответить:** тесты уйдут к ученикам с аудированием,
+которое может быть непроходимым, и узнаем мы об этом от преподавателей.
+
+### 🔴 2. Текстов аудирований в репозитории нет ни одного
+
+Ни скриптов, ни расшифровок — ни в `builds/gg2/`, ни в `docs/`. Из-за этого:
+
+1. **ключи к десяти блокам после аудирования нечем сверить** — я проверила в
+   них механику, но не могу сказать, верно ли «Mia is shopping with her dad —
+   False» или «Lily's dad is cooking dinner — True»;
+2. если запись когда-нибудь придётся перезаписать, текст придётся сочинять
+   заново, и ответы разойдутся с ключами.
+
+**Что нужно от вас:** прислать десять текстов (или файл, из которого вы их
+читали) — я положу их в репозиторий рядом со сборкой и сверю с ключами.
+**Если не ответить:** ключи аудирований остаются непроверенными, а записи —
+невоспроизводимыми.
+
+### 🔴 3. Диктант в Final Test: было десять слов, стало пять
+
+По решению от 21.10.2026 диктант — ровно пять слов. В итоговом тесте их было
+десять, и это единственное место, где правило спорит со здравым смыслом:
+итоговый тест закрывает восемь юнитов. Сейчас стоят пять (wardrobe, vegetables,
+headphones, museum, sleepover), остальная лексика проверяется блоком 4
+(VOCABULARY, семь вопросов).
+
+**Что нужно от вас:** оставляем пять или для итогового теста делаем исключение?
+**Если не ответить:** останется пять — это соответствует правилу.
+
+### 🔴 4. Восемь тестов из десяти без приветствия и прощания
+
+Приветствие («Удачи!») и финальный блок («Тест завершён! 🎉») есть только в
+Unit 0 и Unit 1. Остальные восемь начинаются прямо с диктанта и обрываются на
+блоке SPEAKING. Это заметно, когда открываешь тесты подряд.
+
+**Что нужно от вас:** решить — добавляем приветствие и прощание во все тесты
+(сделаю одним заходом) или, наоборот, убираем их из Unit 0 и Unit 1, чтобы
+тест везде начинался с задания. **Если не ответить:** останется как есть,
+вразнобой.
+
+### 🔴 5. Картинки D1–D3 (раздел выше)
+
+Перерисовывать `dance_show`, `fancy_dress` и `scene_street` или оставить?
+Промпты готовы. **Если не ответить:** в домашках юнита 8 останутся два задания,
+где слово по картинке не угадывается, а в Unit 5 Test — вопрос, на который
+нечем ответить словами юнита.
+
+---
+
+## F. Наблюдения без правок
+
+Не ошибки — то, что заметила, но трогать не стала.
+
+1. **Чтение в Unit 5 Test (блок 9) написано в Past Simple**, который курс даёт
+   с юнита 6: «we **went** for a walk», «he **told** me», «we **played**
+   football and **rode** our bikes». Прямая речь дедушки — на `was/were`, то
+   есть на материале юнита. Ответы на вопросы прошедших форм не требуют, поэтому
+   это рецептивное опережение на один юнит — для чтения нормально. Переписывать
+   текст рискованно: поедут ключи.
+2. **`not as … as` в чтении Unit 4 (блок 11)**: «it's not as popular as Niagara
+   Falls». Курс даёт только `-er / more` и `the -est / the most`. В пропуске
+   ответ «more popular» — то, что учили; конструкция встречается только в самом
+   тексте.
+3. **`will` в чтении Unit 8 (блок 10)**: «I'll bring you a present». Юнит про
+   `be going to`; `will` в курсе не вводится. Одна реплика в переписке, на
+   ответы не влияет.
+4. **Вопросы `Did you…?` в устной части Unit 6** (блок 14, вопросы 5–8). Их
+   задаёт учитель, а ученик отвечает Past Simple в утверждении — материалом
+   юнита. Оставила: это понятный ввод, а не то, что ученик должен произвести.
+5. **`gg2/u1/calculator.webp` — 255×299 px**, чуть меньше порога 300. В диктанте
+   Unit 1 он остался. Единственная мелкая картинка в тестах; остальные 16
+   мелких лежат в домашках (`u3/book_*`, `u5/book_dog_*`, `u2/apple`,
+   `u2/tomato`, `u1/rubber`, `u4/book_*`) — это материал заданий, по CLAUDE.md
+   такое не перерисовываем.
+6. **Unit 6, блок 13 (SPEAKING I)** просит описать картинку в Present
+   Continuous («What is each person doing?»), хотя юнит про Past Simple.
+   Картинка (`u6/scene_cleaning.webp`) подходит и под прошедшее — если захотите,
+   можно поменять вопросы на «What did each person do this morning?».
+7. **«Напиши слово по-английски — по картинке или по русскому слову» осталось
+   в домашках**: Unit 1 ДЗ 1 блок 8, Unit 3 ДЗ 1 блок 9, Unit 8 ДЗ 1 блок 4,
+   Unit 7 ДЗ 1 блоки 4 и 8. Это тот же перевод, что я убрала из тестов. Домашки
+   GG2 идут отдельным заходом — передаю туда, сама не трогала.
+8. **Картинки, проверенные глазами и признанные годными** (задания по ним
+   решаются): `u0/scene_bedroom`, `u1/scene_canteen`, `u2/scene_breakfast`
+   (сыр на столе есть — вопрос «Is there any cheese?» отвечается),
+   `u3/scene_gadgets_breakfast` (наушники на мальчике), `u6/scene_cleaning`,
+   `u7/scene_airport`, `u8/scene_birthday`, `final/book_tom_surprise` (пять
+   кадров ровно под пять вопросов, текст открытки читается — «Meet me at the
+   park at 3 p.m. — Mum»).
+
+---
+
+## Итог
+
+- Диктант приведён к правилу во всех десяти тестах: пять слов, только картинки,
+  перевода нет нигде.
+- Серии «Составь предложение» получили инструкцию (в четырёх тестах её не было
+  вовсе), блоки-разделители вынесены на удаление.
+- Исправлено 15 точечных мест: один неверный ключ, один непринимаемый ответ
+  из-за апострофа, озвучка, читавшая ответ, две склейки плиток, материал
+  вперёд программы в Unit 4 и Unit 6, дубль факта, оценочное утверждение
+  про русский язык, обещание порога.
+- Механика тестов в остальном чистая: `match` с пустым `right` — нет,
+  расхождений `words`/`sentence` — нет, звука в `order` — нет, битых ссылок —
+  нет.
+- Открыто пять вопросов к Анне, главный — аудирования: все десять записей
+  диалоговые или многоголосые, и ни одного текста к ним в репозитории нет.
