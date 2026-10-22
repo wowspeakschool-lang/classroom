@@ -63,10 +63,12 @@ img{-webkit-user-drag:none;user-drag:none}
 @keyframes shake{0%,100%{rotate:0deg}20%{rotate:-10deg}40%{rotate:9deg}60%{rotate:-7deg}80%{rotate:5deg}}
 @keyframes pop{0%{scale:.3;opacity:0}70%{scale:1.1}100%{scale:1;opacity:1}}
 @keyframes breath{0%,100%{scale:1}50%{scale:1.08}}
+@keyframes dust{0%,100%{rotate:0deg;translate:0 0}15%{rotate:-14deg;translate:calc(var(--u)*-1) 0}30%{rotate:12deg;translate:calc(var(--u)*1) 0}45%{rotate:-10deg}60%{rotate:8deg}75%{rotate:-5deg}}
 @keyframes hop{0%,100%{translate:0 0}40%{translate:0 calc(var(--u)*-4)}}
 @keyframes glow{0%,100%{filter:drop-shadow(0 0 calc(var(--u)*1) #fff3a8) drop-shadow(0 0 calc(var(--u)*2) #ffe27a)}50%{filter:drop-shadow(0 0 calc(var(--u)*2) #fff8c8) drop-shadow(0 0 calc(var(--u)*4) #ffd23f)}}
 .bob{animation:bob 2.6s ease-in-out infinite}
 .shake{animation:shake .5s}
+.dust{animation:dust .9s ease-in-out}
 .pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
 .hop{animation:hop .5s ease-out}
 .glow{animation:glow 1.6s ease-in-out infinite}
@@ -595,21 +597,24 @@ function gCatch(n) {
     spawnT -= dt;
     if (spawnT <= 0) {
       spawnT = 1500; since++;
-      // названная вещь падает часто — не реже чем каждый третий раз
-      let w; if (since >= 3 || Math.random() < .4) { w = target; since = 0; } else w = Math.random() < .35 ? 'snowball' : pick(W4.filter(x => x !== target));
+      // названная вещь падает часто — не реже чем каждый третий раз; снежков — примерно каждый третий из остальных
+      let w; if (since >= 3 || Math.random() < .35) { w = target; since = 0; } else w = Math.random() < .5 ? 'snowball' : pick(W4.filter(x => x !== target));
       const x = 10 + Math.random() * 80, it = sp(w === 'snowball' ? 'snowball' : PIC[w], x, -10, H[w]);
       items.push({ it, w, x, y: -10, v: .011 + Math.random() * .004, r: (Math.random() - .5) * .05 });
     }
     items.forEach(o => {
-      o.y += o.v * dt; o.it.style.top = o.y + '%'; o.it.style.rotate = (o.r * o.y * 10) + 'deg';
+      if (o.bounce) { o.v += .00006 * dt; o.x += o.bounce * .03 * dt; o.it.style.left = o.x + '%'; }
+      o.y += o.v * dt; o.it.style.top = o.y + '%'; o.it.style.rotate = (o.r * o.y * 10 + (o.bounce ? o.y * 6 : 0)) + 'deg';
       if (!o.hit && o.y > 64 && o.y < 76 && Math.abs(o.x - px) < 9) {
         o.hit = true;
         if (o.w === target) {
           sfx.ok(); say(o.w); o.it.style.transition = 'scale .3s,opacity .3s'; o.it.style.scale = .3; o.it.style.opacity = 0; sparkle(px, 66, 10); re(pen, 'hop');
           if (fr.step() < 5) { const prev = target; target = pick(W4.filter(x => x !== prev)); since = 2; later(() => say(target), 900); }
         } else {
-          sfx.no(); re(pen, 'shake');
-          if (o.w === 'snowball') { o.it.style.opacity = 0; sfx.snow(); sparkle(px, 66, 12, '❄'); }
+          // не то — пингвинёнок удивляется и забавно отряхивается, вещь отскакивает (игры дня 5 до 22.10.2026)
+          sfx.no(); pen.src = U('p_surprised'); re(pen, 'dust'); later(() => { pen.src = U('p_happy'); }, 900);
+          if (o.w === 'snowball') { o.it.style.opacity = 0; sfx.snow(); sparkle(px, 62, 18, '❄'); }
+          else { o.bounce = (o.x < px ? -1 : 1); o.v = -.02; }
         }
       }
     });
@@ -622,8 +627,8 @@ function gCatch(n) {
 const PEEK = [
   // слово: [поворот, dx, dy, высота, вид] относительно центра сугроба, в % сцены;
   // вид 1 — зеркально (ручка кружки слева), 2 — пингвинёнок, у которого видна только лапка
-  { tooth: [0, 0, -13, 15], toothbrush: [0, 0, -11, 26], toothpaste: [-25, 0, -11, 22], cup: [0, 0, -13, 14], penguin: [0, 0, -3, 26] },
-  { tooth: [180, 0, -13, 15], toothbrush: [180, 0, -10, 26], toothpaste: [180, 0, -7, 22], cup: [0, -7, -2, 14, 1], penguin: [0, -5, -5, 22, 2] },
+  { tooth: [0, 0, -10, 15], toothbrush: [0, 0, -8, 26], toothpaste: [-25, 0, -8, 22], cup: [0, 0, -10.5, 14], penguin: [0, 0, -1.5, 26] },
+  { tooth: [180, 0, -10, 15], toothbrush: [180, 0, -7.5, 26], toothpaste: [180, 0, -4.5, 22], cup: [0, -6.3, -2, 14, 1], penguin: [0, -4.5, -4, 22, 2] },
 ];
 function gDrifts(n) {
   setBg('snow_meadow');
@@ -641,10 +646,10 @@ function gDrifts(n) {
       it.style.zIndex = 10 + 2 * i;
       if (kind === 2) it.style.clipPath = 'inset(16% 78% 48% 0)';
       if (w === 'tooth') it.style.filter = 'drop-shadow(0 0 calc(var(--u)*.4) #6aa8d8)';   // белый зубик на белом снегу
-      const m = sp(i % 2 ? 'mound2' : 'mound1', x, y, 27, 'click drift pop'); m.style.zIndex = 11 + 2 * i;
+      const m = sp(i % 2 ? 'mound2' : 'mound1', x, y, 27, 'click drift'); m.style.zIndex = 11 + 2 * i;
       m.onclick = () => {
         if (m._open) return; m._open = true;
-        snow(x, y - 6); m.classList.remove('pop'); m.style.transition = 'opacity .5s,scale .5s'; m.style.opacity = 0; m.style.scale = 1.2;
+        snow(x, y - 6); m.style.transition = 'opacity .5s,scale .5s'; m.style.opacity = 0; m.style.scale = 1.2;
         it.style.zIndex = 30; it.style.filter = ''; it.style.clipPath = 'none';
         it.style.transition = 'left .5s cubic-bezier(.3,1.5,.5,1),top .5s cubic-bezier(.3,1.5,.5,1),transform .5s,height .5s';
         it.style.left = x + '%'; it.style.top = y - 8 + '%'; it.style.transform = 'translate(-50%,-50%) rotate(0deg)';
@@ -654,6 +659,11 @@ function gDrifts(n) {
         if (--left === 0 && ++round < 2) later(play, 2200);
       };
     });
+    // сугробы и вещи появляются разом: пока не загрузилось всё, круг не показываем (иначе видно, что под сугробом)
+    const imgs = [...scr.querySelectorAll('.drift,.hid')];
+    imgs.forEach(i => i.style.visibility = 'hidden');
+    Promise.all(imgs.map(i => i.complete ? 0 : new Promise(r => { i.addEventListener('load', r, { once: true }); i.addEventListener('error', r, { once: true }); })))
+      .then(() => imgs.forEach(i => i.style.visibility = ''));
   }
   function snow(x, y) { sfx.snow(); sparkle(x, y, 16, '❄'); }
   play();
@@ -722,6 +732,79 @@ function gBubbles(n) {
     });
     bubs = bubs.filter(o => !o.dead);
   });
+}
+
+/* ---------- пузыри без тюбика — два варианта на выбор (Анна, 22.10.2026); смотреть: index.html?demo ----------
+   jump = false: пингвинёнок стоит внизу и радуется, пузырь лопается от нажатия;
+   jump = true: пингвинёнок подпрыгивает к пузырю и лопает его сам */
+function gBubbles2(n, jump) {
+  setBg('snow_meadow');
+  const P0 = { x: 50, y: 80 };
+  const pen = sp('ph_stand', P0.x, P0.y, 30); pen.style.zIndex = 12;
+  hint('Лопни пузырь с тем, что услышишь. <small>Слушай и повторяй</small>');
+  let target = pick(W4), playing = true, bubs = [], spawnT = 300, since = 0, busy = false;
+  const fr = frame(5, () => { playing = false; later(() => n ? finish(n) : demo(), 600); });
+  sayBtn(7, 22, () => say(target));
+  later(() => say(target), 700);
+  function popIt(o) {
+    o.dead = true; sfx.pop(); say(o.w); sparkle(o.x, o.y, 14, '🫧');
+    o.b.style.transition = 'scale .25s,opacity .25s'; o.b.style.scale = 1.5; o.b.style.opacity = 0; setTimeout(() => o.b.remove(), 300);
+    if (fr.step() < 5) { const prev = target; target = pick(W4.filter(x => x !== prev)); since = 2; later(() => say(target), 1100); }
+  }
+  // прыжок по дуге к пузырю и обратно
+  function leap(o, ok) {
+    busy = true; o.hold = true; pen.src = U('ph_jump');
+    const x0 = parseFloat(pen.style.left), y0 = P0.y, x1 = o.x, y1 = o.y + 12, t0 = performance.now(), up = 420, down = 480;
+    tone(300, 0, .22, 'sine', .16, 760);
+    (function f(t) {
+      const k = Math.min(1, (t - t0) / up), e = 1 - (1 - k) * (1 - k);
+      pen.style.left = x0 + (x1 - x0) * e + '%'; pen.style.top = y0 + (y1 - y0) * e + '%';
+      if (k < 1) return requestAnimationFrame(f);
+      if (ok) popIt(o); else { sfx.no(); re(o.b, 'shake'); o.vx = (o.x < 50 ? 1 : -1) * .03; o.hold = false; }
+      const t1 = performance.now();
+      (function g(t) {
+        const m = Math.min(1, (t - t1) / down), q = m * m;
+        pen.style.left = x1 + (P0.x - x1) * m + '%'; pen.style.top = y1 + (y0 - y1) * q + '%';
+        if (m < 1) return requestAnimationFrame(g);
+        pen.src = U('ph_stand'); tone(140, 0, .12, 'sine', .2, 90); pen.animate([{ scale: '1.08 .9' }, { scale: '1 1' }], { duration: 220 });
+        if (!ok) re(pen, 'shake');
+        busy = false;
+      })(t1);
+    })(t0);
+  }
+  loop((dt, t) => {
+    if (!playing) return;
+    spawnT -= dt;
+    if (spawnT <= 0 && bubs.length < 6) {
+      spawnT = 1300; since++;
+      let w; if (since >= 3 || Math.random() < .35) { w = target; since = 0; } else w = pick(W4.filter(x => x !== target));
+      const x = 10 + Math.random() * 80;
+      const b = el('div', 'bub', `<img src="${U(PIC[w])}" alt="">`); b.style.left = x + '%'; b.style.top = '108%';
+      const o = { b, w, x, y: 108, vx: (Math.random() - .5) * .02, vy: -(.008 + Math.random() * .003), ph: Math.random() * 6 };
+      b.onclick = () => {
+        if (!playing || o.dead || busy) return;
+        if (jump) return leap(o, w === o.w && w === target);
+        if (w === target) { popIt(o); pen.src = U('ph_jump'); re(pen, 'hop'); later(() => { pen.src = U('ph_stand'); }, 600); }
+        else { sfx.no(); re(o.b, 'shake'); re(pen, 'shake'); }
+      };
+      bubs.push(o);
+    }
+    bubs.forEach(o => {
+      if (o.dead || o.hold) return;
+      o.y += o.vy * dt; o.x += o.vx * dt + Math.sin(t / 700 + o.ph) * .02;
+      if (o.x < 8 || o.x > 92) o.vx = -o.vx;
+      o.b.style.left = o.x + '%'; o.b.style.top = o.y + '%';
+      if (o.y < -12) { o.dead = true; o.b.remove(); }
+    });
+    bubs = bubs.filter(o => !o.dead);
+  });
+}
+// показ двух вариантов пузырей: index.html?demo
+function demo() {
+  clear(); setBg('snow_meadow');
+  el('div', 'hint', 'Мыльные пузыри — два варианта');
+  btn('1. Пингвинёнок стоит', 26, 50, 'big', () => { clear(); el('button', 'tb close', '✕').onclick = demo; gBubbles2(0, false); });
+  btn('2. Пингвинёнок прыгает', 74, 50, 'big blue', () => { clear(); el('button', 'tb close', '✕').onclick = demo; gBubbles2(0, true); });
 }
 
 /* финал 7-го дня: вечер над замком, фейерверк, звезда, подарок */
@@ -799,8 +882,8 @@ function contest() {
 
 /* картинки — заранее, чтобы в играх ничего не мигало */
 ['home_hero', 'map_sea', 'snow_meadow', 'castle_room_night', 'castle_night', 'floe1', 'floe2', 'ph_stand', 'ph_jump', 'p_happy', 'p_wave', 'pb_stand',
-  'backpack', 'teeth', 'brush', 'brush_paste', 'tube', 'cup', 'magic_tooth', 'ice_cube', 'snowball', 'gift'].forEach(n => { const i = new Image(); i.src = U(n); });
-home();
+  'backpack', 'p_surprised', 'mound1', 'mound2', 'teeth', 'brush', 'brush_paste', 'tube', 'cup', 'magic_tooth', 'ice_cube', 'snowball', 'gift'].forEach(n => { const i = new Image(); i.src = U(n); });
+if (/[?&]demo\b/.test(location.search)) demo(); else home();
 </script>
 </body>
 </html>
