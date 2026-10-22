@@ -1,6 +1,7 @@
 """Автономная копия мини-сайта одним файлом: картинки и звук вшиты внутрь (data:).
 
 python3 splat/tools/bundle_site.py <куда.html> [--all]
+--demo — сразу показ двух вариантов пузырей.
 --all — все льдинки открыты сразу (копия для проверки; у файла нет адреса, куда дописать ?all).
 Файл открывается двойным щелчком — без сайта и без папок рядом. Прогресс челленджа
 хранится в браузере, поэтому у копии он свой, не общий с сайтом.
@@ -29,6 +30,9 @@ def main(out):
     if '--all' in sys.argv:
         s = s.replace('const ALL = /[?&]all\\b/.test(location.search);', 'const ALL = true;')
         assert 'const ALL = true;' in s
+    if '--demo' in sys.argv:   # сразу показ вариантов пузырей
+        s = s.replace('if (/[?&]demo\\b/.test(location.search)) demo(); else home();', 'demo();')
+        assert '\ndemo();' in s
     open(out, 'w', encoding='utf-8').write(s)
     print(len(img), 'картинок,', len(aud), 'звуков,', round(os.path.getsize(out) / 1e6, 1), 'МБ')
 
