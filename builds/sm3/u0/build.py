@@ -65,11 +65,7 @@ READING_SM3 = [
 # Текст аудирования методист начитывает своим голосом — синтезом не озвучиваем,
 # поэтому audio_tts здесь нет и «Озвучить пачкой» этот блок не тронет.
 NARRATION_SM3 = (
-    'This is Penny. Penny is seven years old. She lives with her mum Claire, '
-    'her dad Ted and her brother Nick. Penny’s bedroom is upstairs. Penny is '
-    'good at dancing and she is good at telling stories, but she isn’t good at '
-    'swimming. Her grandmother Julia is good at making cakes. Penny has got '
-    'twenty-four books in her room.')
+    "This is a story about a girl. Her name is Penny. Penny is seven years old. She lives in an old house with her mother, her father and her brother Sam. Sam is nine. Penny's bedroom is upstairs, next to Sam's room. Downstairs there is a kitchen and a big living room. Under the house there is a cellar. It is dark and cold, and Penny doesn't like it. Penny is very good at dancing, and she is good at telling stories. But she isn't good at swimming. She wants to learn in the summer. On Sundays the family goes to Penny's grandmother. Her grandmother is very good at making cakes. Penny's mother isn't good at making cakes, but she is good at painting. Penny loves books. In her bedroom there are twenty-four books. Sam has got fourteen books.")
 
 LISTENING_SM3 = [
     ('text', {'html': '<p><b>LISTENING 🎧</b> Послушай рассказ про Пенни. '

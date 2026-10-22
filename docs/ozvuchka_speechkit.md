@@ -17,10 +17,15 @@
 
 ### 1. SM3, Unit 0, Test, блок 16 → `sm3_u0_test_b16.mp3`
 
-Рассказ про Пенни. Текст в сборке — `builds/sm3/u0/build.py`, `NARRATION_SM3`.
+Рассказ про Пенни. **Текст сверен с ключами 22.10.2026** — это тот вариант,
+по которому собраны вопросы блока 17: «in the cellar» как неверный вариант,
+«her mum» как неверный у вопроса про торты, «14» как неверный у вопроса про
+книги. Прежняя, короткая версия (Claire, Ted, Nick, бабушка Julia) этих трёх
+подсказок не содержала и устарела — в сборке `builds/sm3/u0/build.py`
+(`NARRATION_SM3`) она тоже заменена.
 
 ```
-This is Penny. Penny is seven years old. She lives with her mum Claire, her dad Ted and her brother Nick. Penny's bedroom is upstairs. Penny is good at dancing and she is good at telling stories, but she isn't good at swimming. Her grandmother Julia is good at making cakes. Penny has got twenty-four books in her room.
+This is a story about a girl. Her name is Penny. Penny is seven years old. She lives in an old house with her mother, her father and her brother Sam. Sam is nine. Penny's bedroom is upstairs, next to Sam's room. Downstairs there is a kitchen and a big living room. Under the house there is a cellar. It is dark and cold, and Penny doesn't like it. Penny is very good at dancing, and she is good at telling stories. But she isn't good at swimming. She wants to learn in the summer. On Sundays the family goes to Penny's grandmother. Her grandmother is very good at making cakes. Penny's mother isn't good at making cakes, but she is good at painting. Penny loves books. In her bedroom there are twenty-four books. Sam has got fourteen books.
 ```
 
 ### 2. GG3, Unit 0, Test, блок 17 → `gg3_u0_test_b17.mp3`
