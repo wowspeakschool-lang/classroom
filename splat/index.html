@@ -4,421 +4,763 @@
 <meta charset="UTF-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Зубной замок Splat Kids — играем и учим английский</title>
-<meta name="description" content="Бесплатный тренажёр Splat Kids × WowSpeak: чистим зубки и учим английские слова. Игры, 7-дневный челлендж и задания для печати.">
-<meta property="og:title" content="Зубной замок Splat Kids">
-<meta property="og:description" content="Чистим зубки и учим английский: игры, челлендж 7 дней и раскраски для печати.">
+<title>7 дней с пингвинёнком — Splat Kids × WowSpeak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/base.css">
 <style>
-body{min-height:100%;overflow-x:hidden;user-select:none}
-.scr{display:none;position:relative;z-index:1;min-height:100vh;flex-direction:column;align-items:center;padding:16px 16px 40px}
-.scr.on{display:flex}
-header{width:100%;max-width:1100px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
-.ib{border:none;background:#fff;border-radius:999px;padding:10px 16px;font-family:var(--disp);font-weight:600;font-size:16px;color:var(--ink);cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.08)}
-.title{font-family:var(--disp);font-weight:700;font-size:clamp(30px,6vw,60px);color:#fff;text-align:center;line-height:1.05;text-shadow:0 4px 0 var(--brand-d),0 8px 24px rgba(31,158,139,.4)}
-.h2{font-family:var(--disp);font-weight:700;font-size:clamp(22px,4vw,36px);text-align:center;background:rgba(255,255,255,.85);padding:8px 24px;border-radius:999px;margin:6px 0 14px}
-.lead{font-weight:800;font-size:clamp(16px,2.2vw,20px);text-align:center;background:rgba(255,255,255,.75);padding:8px 18px;border-radius:20px;max-width:640px}
+/* Мини-сайт Splat Kids × WowSpeak: главная, «7 льдинок до замка» (7 игр), конкурс «Своими руками».
+   Как и урок, всё живёт на сцене 16:9, вписанной в окно: координаты — в % сцены, размеры — от её ширины
+   (--u = 1% ширины), поэтому одинаково выглядит на телефоне (горизонтально), планшете и компьютере. */
+:root{--blue:#4fb3ff;--blue-d:#2a86d6;--mint:#33c7b0;--mint-d:#1f9e8b;--sun:#ffd23f;--red:#e3262f;
+  --ink:#2d3a5c;--disp:'Fredoka','Nunito',sans-serif;--text:'Nunito','Segoe UI',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#1d2a4a;overflow:hidden}
+body{font-family:var(--text);color:var(--ink);user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center;touch-action:none}
+#stage{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);overflow:hidden;background:#cfe8f7;--u:calc(min(100vw,177.78vh)/100)}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#scr{position:absolute;inset:0}
+img{-webkit-user-drag:none;user-drag:none}
+.sp{position:absolute;transform:translate(-50%,-50%);pointer-events:none}
+.sp.click{pointer-events:auto;cursor:pointer}
+
+/* верх */
+.top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;gap:calc(var(--u)*1);padding:calc(var(--u)*1) calc(var(--u)*1.4)}
+.logo{display:flex;align-items:center;gap:calc(var(--u)*.6);font-family:var(--disp);font-weight:700}
+.logo .sk{background:var(--red);color:#fff;border-radius:calc(var(--u)*.5);padding:calc(var(--u)*.35) calc(var(--u)*.7);line-height:.9;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.logo .sk b{display:block;font-size:calc(var(--u)*1.6);letter-spacing:.04em}
+.logo .sk i{display:block;font-style:normal;font-size:calc(var(--u)*.75);letter-spacing:.3em}
+.logo .x{color:#fff;font-size:calc(var(--u)*1.3);text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.logo .ws{background:#fff;border-radius:calc(var(--u)*.6);padding:calc(var(--u)*.4) calc(var(--u)*.8);font-size:calc(var(--u)*1.1)}
+.tb{border:none;background:#fff;border-radius:999px;font-family:var(--disp);font-weight:600;font-size:calc(var(--u)*1.25);padding:calc(var(--u)*.6) calc(var(--u)*1.2);cursor:pointer;color:var(--ink);box-shadow:0 calc(var(--u)*.25) 0 rgba(0,0,0,.15);white-space:nowrap}
+.tb.lesson{background:linear-gradient(180deg,#ffe27a,#f2a81d);box-shadow:0 calc(var(--u)*.3) 0 #c98410}
+.tb:active{transform:translateY(2px);box-shadow:none}
+.pill{background:rgba(255,255,255,.88);border-radius:999px;padding:calc(var(--u)*.5) calc(var(--u)*1.4);font-family:var(--disp);font-weight:600;font-size:calc(var(--u)*1.4);display:flex;align-items:center;gap:calc(var(--u)*.6);white-space:nowrap}
+.hint{position:absolute;left:50%;top:calc(var(--u)*3.4);transform:translate(-50%,-50%);z-index:20;background:rgba(255,255,255,.92);border-radius:999px;padding:calc(var(--u)*.5) calc(var(--u)*1.6);font-family:var(--disp);font-weight:600;font-size:calc(var(--u)*1.5);white-space:nowrap;box-shadow:0 calc(var(--u)*.3) calc(var(--u)*1) rgba(45,58,92,.15)}
+.hint small{font-size:.75em;opacity:.7;margin-left:calc(var(--u)*.3)}
+
+/* кнопки */
+.btn{position:absolute;transform:translate(-50%,-50%);border:none;border-radius:999px;font-family:var(--disp);font-weight:700;font-size:calc(var(--u)*2.4);padding:calc(var(--u)*1) calc(var(--u)*2.6);cursor:pointer;color:#fff;background:linear-gradient(180deg,#5fe0cb,var(--mint-d));box-shadow:0 calc(var(--u)*.5) 0 #167a6b;z-index:25;white-space:nowrap}
+.btn.blue{background:linear-gradient(180deg,#7cc8ff,var(--blue-d));box-shadow:0 calc(var(--u)*.5) 0 #1d6fb8}
+.btn.sun{background:linear-gradient(180deg,#ffe27a,#f2a81d);color:var(--ink);box-shadow:0 calc(var(--u)*.5) 0 #c98410}
+.btn:active{transform:translate(-50%,calc(-50% + 3px));box-shadow:none}
+.btn.big{font-size:calc(var(--u)*3);padding:calc(var(--u)*1.3) calc(var(--u)*3.4);min-width:calc(var(--u)*27)}
+.btn.ready{animation:breath 1.3s ease-in-out infinite}
+.say{position:absolute;transform:translate(-50%,-50%);border:none;background:var(--blue);color:#fff;border-radius:50%;width:calc(var(--u)*5.6);height:calc(var(--u)*5.6);font-size:calc(var(--u)*2.6);cursor:pointer;box-shadow:0 calc(var(--u)*.35) 0 var(--blue-d);z-index:22}
+.say:active{transform:translate(-50%,calc(-50% + 2px));box-shadow:none}
+.close{position:absolute;left:calc(var(--u)*1.4);top:calc(var(--u)*1.2);z-index:31}
+
+/* прогресс игры — снежинки */
+.prog{position:absolute;right:calc(var(--u)*1.4);top:calc(var(--u)*1.2);z-index:31;display:flex;gap:calc(var(--u)*.4);background:rgba(255,255,255,.85);border-radius:999px;padding:calc(var(--u)*.4) calc(var(--u)*.9)}
+.prog b{font-size:calc(var(--u)*1.9);line-height:1;filter:grayscale(1);opacity:.3;transition:.4s}
+.prog b.on{filter:none;opacity:1;animation:pop .5s}
+
+/* карточки */
+.card{position:absolute;transform:translate(-50%,-50%);background:#fff;border-radius:calc(var(--u)*2);padding:calc(var(--u)*1);cursor:pointer;box-shadow:0 calc(var(--u)*.6) calc(var(--u)*1.6) rgba(45,58,92,.22);display:flex;align-items:center;justify-content:center;transition:left .6s ease,top .6s ease,scale .6s ease,opacity .5s}
+.card img{height:calc(var(--u)*13);width:calc(var(--u)*13);object-fit:contain;pointer-events:none}
+
+/* общие анимации */
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 calc(var(--u)*-1)}}
+@keyframes shake{0%,100%{rotate:0deg}20%{rotate:-10deg}40%{rotate:9deg}60%{rotate:-7deg}80%{rotate:5deg}}
+@keyframes pop{0%{scale:.3;opacity:0}70%{scale:1.1}100%{scale:1;opacity:1}}
+@keyframes breath{0%,100%{scale:1}50%{scale:1.08}}
+@keyframes hop{0%,100%{translate:0 0}40%{translate:0 calc(var(--u)*-4)}}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 calc(var(--u)*1) #fff3a8) drop-shadow(0 0 calc(var(--u)*2) #ffe27a)}50%{filter:drop-shadow(0 0 calc(var(--u)*2) #fff8c8) drop-shadow(0 0 calc(var(--u)*4) #ffd23f)}}
+.bob{animation:bob 2.6s ease-in-out infinite}
+.shake{animation:shake .5s}
+.pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
+.hop{animation:hop .5s ease-out}
+.glow{animation:glow 1.6s ease-in-out infinite}
+.fx{position:absolute;pointer-events:none;z-index:40}
+
 /* главная */
-#home .hero{position:relative;width:min(520px,92vw);margin-top:4px}
-#home .hero .castle{width:100%}
-#home .hero .fz{position:absolute;left:-4%;bottom:6%;width:30%;transform:scale(0);transition:transform .6s cubic-bezier(.3,1.6,.5,1)}
-#home .hero .fz.on{transform:scale(1)}
-#home .hero .say{position:absolute;left:24%;top:4%;background:#fff;border-radius:22px;padding:10px 16px;font-family:var(--disp);font-weight:600;font-size:clamp(14px,2vw,18px);box-shadow:0 8px 24px rgba(59,45,92,.18);opacity:0;transition:opacity .4s;max-width:60%}
-#home .hero .say.on{opacity:1}
-#home .stars{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.8);border-radius:999px;padding:6px 16px;margin-top:12px;font-family:var(--disp);font-weight:600;cursor:pointer}
-#home .stars{white-space:nowrap}#home .stars i{width:clamp(18px,5vw,26px);display:block}
-header>div:last-child{display:flex;gap:6px;align-items:center}#home .stars i.off{filter:grayscale(1);opacity:.35}
-#home .two{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:min(620px,94vw);margin-top:18px}
-#home .two .btn{justify-content:center;font-size:clamp(19px,3vw,28px);padding:20px 10px;width:100%}
-.signup{background:linear-gradient(180deg,#ffe27a,var(--sun-d));color:var(--ink);border:none;border-radius:999px;padding:10px 18px;font-family:var(--disp);font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 4px 0 #c98410;text-decoration:none}
-@media (max-width:620px){header{flex-wrap:wrap;justify-content:center}.signup{font-size:14px;padding:8px 14px}}
-#splash{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:linear-gradient(180deg,var(--sky1),var(--sky2));cursor:pointer}
-#splash .fz{width:min(220px,50vw)}
-#splash.off{display:none}
-.sharebar{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-.packs{display:flex;gap:30px;justify-content:center;margin-top:24px;align-items:flex-end}
-.packs>div{width:min(110px,22vw)}
-/* меню игр */
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,44vw),1fr));gap:18px;width:100%;max-width:1000px}
-.tile{background:#fff;border-radius:30px;padding:16px;text-align:center;cursor:pointer;box-shadow:0 8px 0 rgba(59,45,92,.08),0 16px 30px rgba(59,45,92,.12);transition:transform .15s;position:relative}
-.tile:hover{transform:translateY(-6px)}
-.tile .pic{height:clamp(100px,16vw,150px);display:flex;justify-content:center}.tile .pic svg{width:auto;height:100%}
-.tile b{display:block;font-family:var(--disp);font-size:clamp(18px,2.4vw,24px);margin-top:8px}
-.tile small{display:block;font-weight:800;opacity:.6;font-size:14px}
-.tile.hot:after{content:'7 дней';position:absolute;top:12px;right:12px;background:var(--accent);color:#fff;font-family:var(--disp);font-weight:600;font-size:13px;border-radius:999px;padding:4px 10px}
-/* карточки игр */
-.card{background:#fff;border-radius:24px;padding:12px;box-shadow:0 6px 0 rgba(59,45,92,.08),0 12px 24px rgba(59,45,92,.12);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .15s}
-.card .pic{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
-.card .w{font-family:var(--disp);font-weight:700;font-size:clamp(16px,2.2vw,22px)}
-.card.good{outline:6px solid var(--brand)}
-.grid{display:grid;gap:14px;width:100%;max-width:760px}
-/* чистка */
-.arena{position:relative;width:min(440px,86vw);aspect-ratio:1;touch-action:none}
-.arena .bt{position:absolute;inset:0}
-.arena .dirt{position:absolute;width:22%;pointer-events:none;transition:opacity .2s,transform .3s}
-.arena .dirt.gone{opacity:0;transform:scale(2)}
-#cursor{position:fixed;width:130px;pointer-events:none;z-index:50;transform:translate(-18%,-18%);display:none}
-.meter{width:min(420px,86vw);height:20px;background:#fff;border-radius:999px;overflow:hidden;margin-top:12px}
-.meter b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--sun));transition:width .25s}
-/* память */
-.mem{grid-template-columns:repeat(4,1fr);max-width:600px}
-.mem .card{aspect-ratio:1;position:relative;padding:8px}
-.mem .card .face{display:none;width:100%;height:100%;align-items:center;justify-content:center}
-.mem .card .back{width:70%}
-.mem .card.open .face{display:flex}.mem .card.open .back{display:none}
-.mem .card.done{opacity:.55;cursor:default}
-.mem .card:not(.open){background:linear-gradient(160deg,#5fe0cb,var(--brand-d))}
-/* таймер */
-.clock{position:relative;width:min(340px,76vw);aspect-ratio:1}
-.clock svg.ring{position:absolute;inset:0;transform:rotate(-90deg)}
-.clock .mid{position:absolute;inset:16%;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer}
-.clock .mid .t{font-family:var(--disp);font-weight:700;font-size:clamp(34px,8vw,56px)}
-.clock .mid .ico{width:56%}
-.zones{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;justify-content:center}
-.zones span{background:#fff;border-radius:999px;padding:6px 14px;font-family:var(--disp);font-weight:600;opacity:.4;transition:.3s}
-.zones span.on{opacity:1;background:var(--sun);transform:scale(1.08)}
-.updown{animation:ud .45s ease-in-out infinite alternate}@keyframes ud{from{transform:translateY(-14px)}to{transform:translateY(14px)}}
-/* челлендж */
-.days{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;width:100%;max-width:820px}
-.day{background:#fff;border-radius:22px;padding:10px 6px;text-align:center;box-shadow:0 5px 0 rgba(59,45,92,.08);cursor:pointer;position:relative}
-.day .n{font-family:var(--disp);font-weight:700;font-size:15px;opacity:.6}
-.day .st{width:70%;margin:4px auto;filter:grayscale(1);opacity:.35}
-.day.done .st{filter:none;opacity:1}
-.day.today{outline:5px solid var(--accent);animation:pulse 1.4s infinite}
-.day.lock{opacity:.5;cursor:default}
-.dayview{background:#fff;border-radius:30px;padding:18px;margin-top:18px;width:100%;max-width:820px;text-align:center;box-shadow:0 10px 30px rgba(59,45,92,.12)}
-.dayview .words{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:10px 0}
-.dayview .words .card{width:min(170px,40vw)}
-.checks{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:10px 0}
-.chk{border:3px dashed var(--brand);background:#fff;border-radius:20px;padding:10px 16px;font-family:var(--disp);font-weight:600;font-size:18px;cursor:pointer;color:var(--ink)}
-.chk.on{background:var(--brand);color:#fff;border-style:solid}
-@media (max-width:620px){.days{grid-template-columns:repeat(4,1fr)}.mem{gap:8px}}
-.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 20px;border-radius:999px;font-weight:800;z-index:99;display:none}
-footer{margin-top:28px;font-size:13px;font-weight:800;opacity:.6;text-align:center}
+.stars{display:flex;gap:calc(var(--u)*.25)}
+.stars i{font-style:normal;font-size:calc(var(--u)*1.7);filter:grayscale(1);opacity:.5}
+.stars i.on{filter:none;opacity:1}
+.mom{position:absolute;left:50%;bottom:calc(var(--u)*1.2);transform:translateX(-50%);z-index:20;background:rgba(255,255,255,.85);border-radius:999px;padding:calc(var(--u)*.4) calc(var(--u)*1.4);font-weight:800;font-size:calc(var(--u)*1.15);white-space:nowrap}
+
+/* карта */
+.floe{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:5}
+.floe img{width:100%;display:block;pointer-events:none;filter:drop-shadow(0 calc(var(--u)*.4) calc(var(--u)*.6) rgba(20,60,110,.35))}
+.floe .n{position:absolute;left:34%;top:46%;transform:translate(-50%,-50%);font-family:var(--disp);font-weight:700;color:#fff;background:var(--blue-d);border:calc(var(--u)*.3) solid #fff;border-radius:50%;width:2em;height:2em;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.floe.done .n{background:linear-gradient(180deg,#ffe27a,#f2a81d);color:var(--ink)}
+.floe.half .n{background:var(--mint-d)}
+.floe.lock{cursor:default}.floe.lock img{filter:grayscale(.5) brightness(.92) drop-shadow(0 calc(var(--u)*.4) calc(var(--u)*.6) rgba(20,60,110,.35))}
+.floe.lock .n{background:#9bb4cc}
+.floe.today .n{animation:breath 1.3s ease-in-out infinite}
+.lockmsg{position:absolute;z-index:26;transform:translate(-50%,-100%);background:#fff;border-radius:calc(var(--u)*1.2);padding:calc(var(--u)*.6) calc(var(--u)*1.2);font-family:var(--disp);font-weight:600;font-size:calc(var(--u)*1.4);white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.2);pointer-events:none}
+
+/* окно дня и итоги */
+.dim{position:absolute;inset:0;z-index:50;background:rgba(20,40,80,.45);display:flex;align-items:center;justify-content:center}
+.panel{position:relative;background:#fff;border-radius:calc(var(--u)*2.6);padding:calc(var(--u)*2) calc(var(--u)*3);min-width:calc(var(--u)*46);max-width:calc(var(--u)*70);display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*1.2);box-shadow:0 calc(var(--u)*1) calc(var(--u)*4) rgba(0,0,0,.3);animation:pop .45s cubic-bezier(.3,1.6,.5,1) both;text-align:center}
+.panel h2{font-family:var(--disp);font-weight:700;font-size:calc(var(--u)*3)}
+.panel p{font-weight:800;font-size:calc(var(--u)*1.5);line-height:1.3}
+.panel .x{position:absolute;right:calc(var(--u)*1.2);top:calc(var(--u)*1);border:none;background:none;font-size:calc(var(--u)*2.2);cursor:pointer;color:#8a96b0}
+.panel .row{display:flex;align-items:center;gap:calc(var(--u)*1.6)}
+.panel .pb{position:static;transform:none}
+.panel .pb:active{transform:translateY(3px)}
+.check{display:flex;align-items:center;gap:calc(var(--u)*1);background:#eef7ff;border-radius:calc(var(--u)*1.4);padding:calc(var(--u)*.9) calc(var(--u)*1.6);cursor:pointer;font-weight:800;font-size:calc(var(--u)*1.6)}
+.check .box{width:calc(var(--u)*3.2);height:calc(var(--u)*3.2);border-radius:calc(var(--u)*.8);border:calc(var(--u)*.3) solid var(--blue-d);background:#fff;display:flex;align-items:center;justify-content:center;font-size:calc(var(--u)*2.2);color:var(--mint-d)}
+.check.on{background:#e3faf4}.check.on .box{border-color:var(--mint-d)}
+.gamepic{display:flex;align-items:center;gap:calc(var(--u)*1);font-family:var(--disp);font-weight:600;font-size:calc(var(--u)*1.9)}
+.gamepic img{height:calc(var(--u)*7);width:auto;max-width:calc(var(--u)*12);object-fit:contain;border-radius:calc(var(--u)*.6)}
+.bigstar{font-size:calc(var(--u)*9);line-height:1;animation:pop .6s cubic-bezier(.3,1.6,.5,1) both}
+.bigstar.off{filter:grayscale(1);opacity:.35}
+.moon{background:#24345e;color:#fff;border-radius:calc(var(--u)*1.4);padding:calc(var(--u)*.8) calc(var(--u)*1.6);font-weight:800;font-size:calc(var(--u)*1.5)}
+
+/* игра 2 — зубки */
+.spot{position:absolute;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#c9b25c 0,#d8c470 45%,rgba(216,196,112,0) 72%);pointer-events:none;z-index:6}
+.foam{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0,#fff 45%,#e9f6ff 70%,#cfe9fb 100%);border:1px solid rgba(160,200,230,.6);pointer-events:none;z-index:8}
+
+/* игра 3 — кубики */
+.cube{position:absolute;transform:translate(-50%,-50%);width:calc(var(--u)*13.5);height:calc(var(--u)*13.5);cursor:pointer}
+.cube>img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;transition:opacity .35s}
+.cube>img.it{left:18%;top:18%;width:64%;height:64%;opacity:0;scale:.5;transition:opacity .3s,scale .35s cubic-bezier(.3,1.6,.5,1)}
+.cube.open>img.it{opacity:1;scale:1}
+.cube.open>img.ice{opacity:.4}
+.crack{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .2s}
+.cube.open .crack{opacity:.9}
+
+/* игра 4 — тени */
+.shadow{filter:brightness(0) opacity(.28)}
+.shadow.filled{filter:none;transition:filter .5s}
+.drag{cursor:grab;pointer-events:auto;touch-action:none}
+.drag.held{cursor:grabbing;z-index:30;scale:1.1;filter:drop-shadow(0 calc(var(--u)*1) calc(var(--u)*1) rgba(0,0,0,.3))}
+
+/* игра 6 — фонарик */
+#dark{position:absolute;inset:0;z-index:12;pointer-events:none;transition:opacity 1.2s}
+
+/* игра 7 — пузыри */
+.bub{position:absolute;transform:translate(-50%,-50%);width:calc(var(--u)*12);height:calc(var(--u)*12);border-radius:50%;cursor:pointer;z-index:10;
+  background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.95) 0,rgba(255,255,255,.4) 12%,rgba(255,255,255,.08) 40%,rgba(180,225,255,.25) 75%,rgba(120,200,255,.55) 100%);
+  border:calc(var(--u)*.2) solid rgba(255,255,255,.8);box-shadow:inset 0 0 calc(var(--u)*1.5) rgba(140,210,255,.6);display:flex;align-items:center;justify-content:center}
+.bub img{width:62%;height:62%;object-fit:contain;pointer-events:none}
+
+/* конкурс */
+.contest{position:absolute;left:4%;right:4%;top:13%;bottom:5%;background:rgba(255,255,255,.95);border-radius:calc(var(--u)*2.4);box-shadow:0 calc(var(--u)*1) calc(var(--u)*3) rgba(45,58,92,.25);display:flex;gap:calc(var(--u)*2.4);padding:calc(var(--u)*2) calc(var(--u)*2.6);z-index:5}
+.contest .txt{flex:1.25;display:flex;flex-direction:column;gap:calc(var(--u)*1)}
+.contest h1{font-family:var(--disp);font-weight:700;font-size:calc(var(--u)*2.9);line-height:1.1}
+.contest h1 small{display:block;font-size:.5em;color:var(--blue-d);letter-spacing:.02em;margin-bottom:calc(var(--u)*.4)}
+.contest .task{font-family:var(--disp);font-weight:600;font-size:calc(var(--u)*1.9);line-height:1.25;background:#eef7ff;border-radius:calc(var(--u)*1.2);padding:calc(var(--u)*.8) calc(var(--u)*1.2)}
+.contest ol{list-style:none;display:flex;flex-direction:column;gap:calc(var(--u)*.75)}
+.contest li{display:flex;gap:calc(var(--u)*.9);align-items:flex-start;font-weight:800;font-size:calc(var(--u)*1.4);line-height:1.3}
+.contest li b{flex:0 0 auto;width:calc(var(--u)*2.6);height:calc(var(--u)*2.6);border-radius:50%;background:var(--blue-d);color:#fff;font-family:var(--disp);display:flex;align-items:center;justify-content:center;font-size:calc(var(--u)*1.4)}
+.contest li em{font-style:normal;color:var(--red)}
+.contest .soon{margin-top:auto;font-weight:800;font-size:calc(var(--u)*1.35);color:#5c6a8a;background:#fff8e0;border-radius:calc(var(--u)*1.2);padding:calc(var(--u)*.7) calc(var(--u)*1.2)}
+.contest .pics{flex:1;display:flex;flex-direction:column;gap:calc(var(--u)*1);align-items:center;justify-content:center}
+.contest .words{display:grid;grid-template-columns:repeat(4,1fr);gap:calc(var(--u)*.8);width:100%}
+.contest .words button{border:none;background:#f3f8fd;border-radius:calc(var(--u)*1.2);padding:calc(var(--u)*.7);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*.3)}
+.contest .words img{height:calc(var(--u)*7);width:100%;object-fit:contain}
+.contest .words span{font-size:calc(var(--u)*1.3)}
+.contest .ex{width:100%;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;background:#f3f8fd;border-radius:calc(var(--u)*1.4);position:relative;overflow:hidden}
+.contest .ex img{max-width:94%;max-height:94%;object-fit:contain;border-radius:calc(var(--u)*.6);box-shadow:0 4px 14px rgba(0,0,0,.15);rotate:-1.5deg}
+.contest .ex .lab{position:absolute;left:calc(var(--u)*1);top:calc(var(--u)*.8);background:#fff;border-radius:999px;padding:calc(var(--u)*.2) calc(var(--u)*.9);font-weight:800;font-size:calc(var(--u)*1.1);z-index:1}
+
+/* телефон вертикально — просим повернуть */
+#rotate{display:none;position:fixed;inset:0;z-index:100;background:#2a5fa0;color:#fff;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;font-family:var(--disp);font-weight:600;font-size:22px}
+#rotate .ph{font-size:64px;animation:rot 2s ease-in-out infinite}
+#rotate button{border:none;background:#fff;color:#2a5fa0;border-radius:999px;padding:10px 20px;font-family:var(--disp);font-weight:600;font-size:16px;margin-top:12px}
+@keyframes rot{0%,30%{rotate:0deg}60%,100%{rotate:-90deg}}
+@media (orientation:portrait) and (max-width:820px){body:not(.anyway) #rotate{display:flex}}
 </style>
 </head>
 <body>
-<img id="cursor" alt="">
-<div class="toast" id="toast"></div>
+<div id="stage">
+  <img class="bg" id="bg" alt="">
+  <div id="scr"></div>
+</div>
+<div id="rotate"><div class="ph">📱</div><div>Поверните телефон —<br>играть удобнее, когда экран лежит горизонтально</div><button onclick="document.body.classList.add('anyway')">Продолжить так</button></div>
 
-<!-- Главная: две кнопки -->
-<section class="scr on" id="home">
-  <header><div id="brandTop"></div><div><a class="signup" href="#signup" id="signupTop">📅 <span>Записаться на урок с преподавателем</span></a> <button class="ib" id="mute">🔊</button></div></header>
-  <div class="hero">
-    <div class="castle" data-art="castle" data-lit="5"></div>
-    <div class="fz bob" id="homeHero" data-art="fairy"></div>
-    <div class="say" id="homeSay">Привет! Это Зубной замок Splat Kids 👋</div>
-  </div>
-  <div class="stars" data-go="challenge" id="homeStars"></div>
-  <div class="two">
-    <button class="btn" data-go="menu">🎮 Играть</button>
-    <button class="btn pink" data-go="hands">✂️ Своими руками</button>
-  </div>
-  <div class="sharebar"><button class="ib" id="share">💌 Отправить другу</button></div>
-  <footer>Splat Kids × WowSpeak</footer>
-</section>
-
-<div id="splash"><div class="fz bob" data-art="fairy"></div><button class="btn pulse">▶ Войти в замок</button></div>
-
-<!-- Своими руками (заглушка) -->
-<section class="scr" id="hands">
-  <header><button class="ib" data-go="home">◀ Домой</button><div class="h2" style="margin:0">Своими руками ✂️</div><span></span></header>
-  <div class="lead">Скоро здесь будет конкурс Splat Kids: нарисуй щётку или Зубную фею, подпиши английское слово — и покажи нам! 🎨</div>
-</section>
-
-<!-- Меню игр -->
-<section class="scr" id="menu">
-  <header><button class="ib" data-go="home">◀ Домой</button><div id="brandSm"></div><button class="ib" id="mute2">🔊</button></header>
-  <div class="h2">Выбирай игру!</div>
-  <div class="tiles">
-    <div class="tile" data-go="brush"><div class="pic" data-art="tooth" data-mood="sad"></div><b>Почисти зубки</b><small>Brush your teeth!</small></div>
-    <div class="tile" data-go="memory"><div class="pic" data-art="toothpaste"></div><b>Найди пары</b><small>Memory</small></div>
-    <div class="tile" data-go="listen"><div class="pic" data-art="water"></div><b>Послушай и найди</b><small>Listen and find</small></div>
-    <div class="tile" data-go="timer"><div class="pic" data-art="toothbrush"></div><b>2 минуты со Splat</b><small>Чистим вместе</small></div>
-    <div class="tile hot" data-go="challenge"><div class="pic" data-art="star"></div><b>Челлендж</b><small>Чисти зубы и учи слова</small></div>
-    <div class="tile" data-go="words"><div class="pic" data-art="smile"></div><b>Все слова</b><small>Words</small></div>
-  </div>
-</section>
-
-<!-- Почисти зубки -->
-<section class="scr" id="brush">
-  <header><button class="ib" data-go="menu">◀ Игры</button><div class="h2" style="margin:0">Brush, brush, brush!</div><span></span></header>
-  <div class="arena" id="arena"><div class="bt"></div></div>
-  <div class="meter"><b id="meter"></b></div>
-  <div class="lead" style="margin-top:12px">Води щёткой по микробам, пока зубик не заблестит ✨</div>
-  <button class="btn" id="brushAgain" style="margin-top:14px;display:none">🔄 Ещё раз</button>
-</section>
-
-<!-- Найди пары -->
-<section class="scr" id="memory">
-  <header><button class="ib" data-go="menu">◀ Игры</button><div class="h2" style="margin:0">Найди пары</div><span></span></header>
-  <div class="grid mem" id="mem"></div>
-  <button class="btn" id="memAgain" style="margin-top:18px;display:none">🔄 Ещё раз</button>
-</section>
-
-<!-- Послушай и найди -->
-<section class="scr" id="listen">
-  <header><button class="ib" data-go="menu">◀ Игры</button><div class="h2" style="margin:0">Listen and find!</div><span></span></header>
-  <button class="btn pink" id="lsPlay" style="margin:6px 0 16px">🔊 Послушать</button>
-  <div class="grid" id="lsGrid" style="grid-template-columns:repeat(3,1fr);max-width:620px"></div>
-  <div class="lead" id="lsScore" style="margin-top:14px"></div>
-</section>
-
-<!-- Таймер 2 минуты -->
-<section class="scr" id="timer">
-  <header><button class="ib" data-go="menu">◀ Игры</button><div class="h2" style="margin:0">2 минуты со Splat Kids</div><span></span></header>
-  <div class="clock">
-    <svg class="ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#fff" stroke="#e6f6f3" stroke-width="8"/>
-      <circle id="ring" cx="50" cy="50" r="45" fill="none" stroke="var(--brand)" stroke-width="8" stroke-linecap="round" stroke-dasharray="282.7" stroke-dashoffset="282.7"/></svg>
-    <div class="mid" id="tmStart"><div class="ico" id="tmIco"></div><div class="t" id="tmT">2:00</div></div>
-  </div>
-  <div class="zones" id="zones"><span>верхние слева</span><span>верхние справа</span><span>нижние слева</span><span>нижние справа</span></div>
-  <div class="lead" style="margin-top:14px">Нажми на щётку и чисти зубки вместе с песенкой. Каждые 30 секунд — новая сторона!</div>
-</section>
-
-<!-- Челлендж 7 дней -->
-<section class="scr" id="challenge">
-  <header><button class="ib" data-go="home">◀ Домой</button><div class="h2" style="margin:0">Челлендж 7 дней ⭐</div><span></span></header>
-  <div class="lead">Каждый день: почисти зубки утром и вечером и выучи два новых слова. Собери 7 звёзд!</div>
-  <div class="days" id="days" style="margin-top:16px"></div>
-  <div class="dayview" id="dayview"></div>
-</section>
-
-<!-- Все слова -->
-<section class="scr" id="words">
-  <header><button class="ib" data-go="menu">◀ Игры</button><div class="h2" style="margin:0">Words</div><span></span></header>
-  <div class="grid" id="wGrid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr));max-width:900px"></div>
-</section>
-
-<script src="assets/art.js"></script>
-<script src="assets/common.js"></script>
 <script>
-const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
-const W = Object.fromEntries(ART.WORDS.map(x => [x.w, x]));
-const shuffle = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(x => x[1]);
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-const store = {
-  get(k, d) { try { return JSON.parse(localStorage.getItem('splat_' + k)) ?? d; } catch { return d; } },
-  set(k, v) { try { localStorage.setItem('splat_' + k, JSON.stringify(v)); } catch {} },
+/* ---------- картинки и звук ---------- */
+// IMG/AUD заполняет tools/bundle_site.py, когда собирается автономная копия одним файлом
+const IMG = /*IMG*/null/*IMG_END*/, AUD = /*AUD*/null/*AUD_END*/;
+const SITE_IMG = new Set(['map_sea', 'castle_room_night', 'castle_night', 'ice_cube', 'gift', 'teeth', 'contest_example']);
+const U = n => IMG ? (IMG[n] || '') : (SITE_IMG.has(n) ? 'media/site/' : 'media/lesson/') + n + '.webp';
+// слова сайта: 4 слова урока + penguin (дни 1, 3, 6 — решение Анны 22.10.2026)
+const PIC = { tooth: 'magic_tooth', toothbrush: 'brush', toothpaste: 'tube', cup: 'cup', penguin: 'p_happy' };
+const W4 = ['tooth', 'toothbrush', 'toothpaste', 'cup'], W5 = [...W4, 'penguin'];
+const audio = {};
+function say(w) { const a = audio[w] || (audio[w] = new Audio(AUD ? AUD[w] : `audio/${w}.mp3`)); a.currentTime = 0; a.play().catch(() => {}); }
+
+/* звуковые эффекты синтезируются в браузере, как в уроке */
+let AC = null;
+function ac() { if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === 'suspended') AC.resume(); return AC; }
+function tone(f, t0, dur, type = 'sine', vol = .18, f2) {
+  const c = ac(), o = c.createOscillator(), g = c.createGain(), t = c.currentTime + t0;
+  o.type = type; o.frequency.setValueAtTime(f, t); if (f2) o.frequency.exponentialRampToValueAtTime(f2, t + dur);
+  g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .015); g.gain.exponentialRampToValueAtTime(.001, t + dur);
+  o.connect(g).connect(c.destination); o.start(t); o.stop(t + dur + .05);
+}
+function noise(t0, dur, vol = .12, hp = 1500) {
+  const c = ac(), n = c.sampleRate * dur, b = c.createBuffer(1, n, c.sampleRate), d = b.getChannelData(0);
+  for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+  const s = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain(), t = c.currentTime + t0;
+  s.buffer = b; f.type = 'highpass'; f.frequency.value = hp; g.gain.value = vol; s.connect(f).connect(g).connect(c.destination); s.start(t);
+}
+const sfx = {
+  ok() { tone(660, 0, .14, 'triangle'); tone(880, .1, .14, 'triangle'); tone(1320, .2, .22, 'triangle', .14); },
+  no() { tone(260, 0, .18, 'sine', .14, 200); tone(210, .14, .22, 'sine', .12, 160); },
+  ding() { tone(1568, 0, .5, 'sine', .12); tone(2093, .06, .5, 'sine', .08); },
+  pop() { tone(500, 0, .12, 'sine', .2, 1400); noise(0, .08, .06, 3000); },
+  magic() { [988, 1175, 1319, 1568, 1976].forEach((f, i) => tone(f, i * .07, .3, 'sine', .1)); },
+  snow() { noise(0, .45, .1, 2500); },
+  crack() { noise(0, .12, .16, 4000); tone(1800, 0, .06, 'square', .04, 900); },
+  freeze() { [1976, 1568, 1319].forEach((f, i) => tone(f, i * .05, .2, 'sine', .06)); },
+  scrub() { noise(0, .09, .05, 5000); },
+  water() { for (let i = 0; i < 6; i++) tone(600 + Math.random() * 900, i * .06, .1, 'sine', .07, 300); },
+  chest() { tone(200, 0, .18, 'triangle', .14, 260); [784, 988, 1175, 1568].forEach((f, i) => tone(f, .18 + i * .08, .35, 'sine', .1)); },
+  win() { [523, 659, 784, 1047, 784, 1047].forEach((f, i) => tone(f, i * .11, .22, 'triangle', .14)); },
+  boom() { noise(0, .5, .1, 300); tone(90, 0, .4, 'sine', .16, 40); },
 };
-function toast(t) { const el = $('#toast'); el.textContent = t; el.style.display = 'block'; clearTimeout(toast.h); toast.h = setTimeout(() => el.style.display = 'none', 2200); }
-function drawArt(root = document) {
-  $$('[data-art]', root).forEach(el => {
-    const d = el.dataset, o = {};
-    if (d.lit !== undefined) o.lit = +d.lit; if (d.mood) o.mood = d.mood;
-    el.innerHTML = ART[d.art](o);
+document.addEventListener('pointerdown', () => ac(), { once: true });
+
+/* ---------- состояние: что пройдено (хранится в браузере ребёнка) ---------- */
+const KEY = 'splat7_v1';
+let ST = { days: {} };
+try { ST = JSON.parse(localStorage.getItem(KEY)) || ST; } catch (e) {}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(ST)); } catch (e) {} }
+const D = n => ST.days[n] || (ST.days[n] = {});
+const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+// ?all — все льдинки открыты сразу (для просмотра и проверки; ребёнку даём ссылку без него)
+const ALL = /[?&]all\b/.test(location.search);
+const hasStar = n => !!(ST.days[n] && ST.days[n].brush && ST.days[n].game);
+// день открывается по календарю: следующий — когда игра предыдущего пройдена и наступил новый день
+function unlocked(n) {
+  if (n === 1 || ALL) return true;
+  const p = ST.days[n - 1];
+  return !!(p && p.game && p.gameDate && today() > p.gameDate);
+}
+
+/* ---------- конструкторы ---------- */
+const stage = document.getElementById('stage'), scr = document.getElementById('scr'), bg = document.getElementById('bg');
+let timers = [], loops = [];
+function later(fn, ms) { const id = setTimeout(fn, ms); timers.push(id); return id; }
+function loop(fn) { let on = true, last = performance.now(); const f = t => { if (!on) return; const dt = Math.min(t - last, 50); last = t; fn(dt, t); requestAnimationFrame(f); }; requestAnimationFrame(f); loops.push(() => on = false); }
+function clear() { timers.forEach(clearTimeout); timers = []; loops.forEach(s => s()); loops = []; scr.innerHTML = ''; scr.onpointermove = scr.onpointerdown = scr.onpointerup = null; document.onkeydown = null; }
+function el(tag, cls, html, parent = scr) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; parent.appendChild(e); return e; }
+function setBg(n) { bg.src = U(n); }
+// картинка с центром в точке (x, y); h — высота в % сцены
+function sp(name, x, y, h, cls = '', parent = scr) {
+  const i = el('img', 'sp ' + cls, null, parent); i.src = U(name); i.alt = ''; i.draggable = false;
+  i.style.left = x + '%'; i.style.top = y + '%'; i.style.height = h + '%'; i.style.width = 'auto';
+  if (!i.complete) { i.style.visibility = 'hidden'; i.addEventListener('load', () => { i.style.visibility = ''; }, { once: true }); }
+  return i;
+}
+function btn(text, x, y, cls, fn, parent = scr) { const b = el('button', 'btn ' + (cls || ''), text, parent); b.style.left = x + '%'; b.style.top = y + '%'; b.onclick = e => { e.stopPropagation(); fn(e); }; return b; }
+function sayBtn(x, y, fn) { const b = el('button', 'say', '🔊'); b.style.left = x + '%'; b.style.top = y + '%'; b.onclick = e => { e.stopPropagation(); fn(); }; return b; }
+const hint = t => el('div', 'hint', t);
+function re(e, cls) { e.classList.remove(cls); void e.offsetWidth; e.classList.add(cls); }
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const pick = a => a[Math.floor(Math.random() * a.length)];
+// координаты указателя в % сцены
+function pt(e) { const r = stage.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width * 100, y: (e.clientY - r.top) / r.height * 100 }; }
+function sparkle(x, y, n = 14, sym = '✨') {
+  for (let k = 0; k < n; k++) {
+    const s = el('div', 'fx', sym); const a = Math.random() * Math.PI * 2, d = 4 + Math.random() * 9;
+    s.style.cssText += `left:${x}%;top:${y}%;font-size:calc(var(--u)*${1.2 + Math.random() * 1.6});transform:translate(-50%,-50%);transition:all .8s ease-out;opacity:1`;
+    requestAnimationFrame(() => requestAnimationFrame(() => { s.style.left = x + Math.cos(a) * d + '%'; s.style.top = y + Math.sin(a) * d * 1.6 + '%'; s.style.opacity = 0; }));
+    setTimeout(() => s.remove(), 900);
+  }
+}
+function confetti(n = 70) {
+  const cols = ['#4fb3ff', '#33c7b0', '#ffd23f', '#ffffff', '#e3262f', '#7cc8ff'];
+  for (let k = 0; k < n; k++) {
+    const c = el('div', 'fx'); const x = Math.random() * 100;
+    c.style.cssText += `left:${x}%;top:-4%;width:calc(var(--u)*${.6 + Math.random() * .8});height:calc(var(--u)*${.9 + Math.random()});background:${pick(cols)};border-radius:2px;z-index:60;transition:top ${1.6 + Math.random() * 1.4}s cubic-bezier(.3,.6,.6,1),left 2.4s ease-out,rotate 2.4s linear;`;
+    requestAnimationFrame(() => requestAnimationFrame(() => { c.style.top = '108%'; c.style.left = x + (Math.random() - .5) * 20 + '%'; c.style.rotate = (Math.random() * 900) + 'deg'; }));
+    setTimeout(() => c.remove(), 3200);
+  }
+}
+// полёт элемента в точку (в %) с уменьшением
+function fly(e, x, y, scale = .3, ms = 600) {
+  e.style.transition = `left ${ms}ms cubic-bezier(.5,0,.6,1),top ${ms}ms cubic-bezier(.3,-.4,.6,1),scale ${ms}ms,opacity ${ms}ms`;
+  e.style.left = x + '%'; e.style.top = y + '%'; e.style.scale = scale;
+  return new Promise(r => setTimeout(r, ms));
+}
+function logo(parent) { return el('div', 'logo', '<span class="sk"><b>SPLAT</b><i>KIDS</i></span><span class="x">×</span><span class="ws">WowSpeak</span>', parent); }
+const starsHtml = () => `<span class="stars">${[1, 2, 3, 4, 5, 6, 7].map(n => `<i class="${hasStar(n) ? 'on' : ''}">⭐</i>`).join('')}</span>`;
+function brushCheck(d, parent, onOn) {
+  const ch = el('div', 'check' + (d.brush ? ' on' : ''), `<span class="box">${d.brush ? '✔' : ''}</span>☀️ Утром почистили зубки`, parent);
+  ch.onclick = () => { d.brush = !d.brush; save(); ch.classList.toggle('on', d.brush); ch.querySelector('.box').textContent = d.brush ? '✔' : ''; if (d.brush) { sfx.ok(); onOn && onOn(); } };
+  return ch;
+}
+
+/* ---------- экраны ---------- */
+const GAMES = [
+  null,
+  { name: 'Рюкзак пингвинёнка', pic: 'backpack', run: gBackpack },
+  { name: 'Почисти зубки', pic: 'teeth', run: gTeeth },
+  { name: 'Ледяные кубики', pic: 'ice_cube', run: gCubes },
+  { name: 'Чьи тени?', pic: 'cup', run: gShadows },
+  { name: 'Лови!', pic: 'p_happy', run: gCatch },
+  { name: 'Фонарик', pic: 'castle_room_night', run: gTorch },
+  { name: 'Мыльные пузыри', pic: 'tube', run: gBubbles },
+];
+
+function home() {
+  clear(); setBg('home_hero');
+  const top = el('div', 'top'); logo(top);
+  const r = el('div', '', null, top); r.style.cssText = 'display:flex;gap:calc(var(--u)*1);align-items:center';
+  el('div', 'pill', starsHtml(), r).title = 'Звёзды за 7 дней';
+  // ссылки пока нет — кнопка никуда не ведёт (решение Анны 21.10.2026)
+  const les = el('button', 'tb lesson', 'Записаться на урок с преподавателем', r);
+  les.onclick = () => re(les, 'shake');
+  btn('🎮 Играть', 21, 82, 'big', map);
+  btn('✏️ Своими руками', 79, 82, 'big blue', contest);
+  el('div', 'mom', '7 дней с пингвинёнком: каждый день чистим зубки и играем с английскими словами');
+}
+
+/* карта «7 льдинок до замка»: x, y, ширина льдинки в % (дальше — меньше) */
+const FLOES = [null, [13, 84, 15], [33, 76, 13.5], [53, 80, 12], [37, 63, 10.5], [53, 55, 9.2], [66, 48.5, 8.2], [77, 43, 7.2]];
+function map() {
+  clear(); setBg('map_sea');
+  const top = el('div', 'top'); el('button', 'tb', '← Домой', top).onclick = home;
+  el('div', 'pill', '7 льдинок до замка ' + starsHtml(), top);
+  el('div', '', null, top).style.width = 'calc(var(--u)*8)';
+  // пингвинёнок стоит на последней пройденной льдинке, а пока не начали — на первой
+  let cur = 0; for (let n = 1; n <= 7; n++) if (ST.days[n] && ST.days[n].game) cur = n;
+  let marked = false;
+  for (let n = 1; n <= 7; n++) {
+    const [x, y, w] = FLOES[n], d = ST.days[n] || {}, open = unlocked(n);
+    const f = el('div', 'floe' + (hasStar(n) ? ' done' : d.game ? ' half' : '') + (open ? '' : ' lock'));
+    f.style.left = x + '%'; f.style.top = y + '%'; f.style.width = w + '%';
+    f.innerHTML = `<img src="${U(n % 2 ? 'floe1' : 'floe2')}" alt=""><span class="n" style="font-size:calc(var(--u)*${(w / 6.5).toFixed(2)})">${hasStar(n) ? '⭐' : open ? n : '🔒'}</span>`;
+    if (open && !d.game && !marked) { marked = true; f.classList.add('today'); }
+    f.onclick = () => {
+      if (open) return dayPanel(n);
+      re(f, 'shake'); sfx.no();
+      const m = el('div', 'lockmsg', n === cur + 1 ? 'Эта льдинка откроется завтра ❄️' : 'Сначала пройди льдинки до неё ❄️');
+      m.style.left = x + '%'; m.style.top = y - 4 + '%'; later(() => m.remove(), 1800);
+    };
+  }
+  const [px, py, pw] = FLOES[cur || 1];
+  const p = sp(cur === 7 ? 'ph_jump' : 'ph_stand', px + pw * .2, py - pw * 1.0, pw * 1.8, 'bob');
+  p.style.zIndex = 6;
+}
+
+function dayPanel(n) {
+  const d = D(n), g = GAMES[n];
+  const dim = el('div', 'dim'); dim.onclick = e => { if (e.target === dim) dim.remove(); };
+  const p = el('div', 'panel', null, dim);
+  el('button', 'x', '✕', p).onclick = () => dim.remove();
+  el('h2', '', `День ${n}`, p);
+  brushCheck(d, p);
+  const row = el('div', 'row', null, p);
+  el('div', 'gamepic', `<img src="${U(g.pic)}" alt="">${g.name}`, row);
+  el('button', 'btn pb', d.game ? '↻ Ещё раз' : '▶ Играть', row).onclick = () => startGame(n);
+  el('p', '', hasStar(n) ? '⭐ Звезда этого дня уже твоя!' : 'Почистили зубки + сыграли = ⭐ звезда дня', p).style.color = '#5c6a8a';
+}
+
+function startGame(n) {
+  clear();
+  el('button', 'tb close', '✕').onclick = map;
+  GAMES[n].run(n);
+}
+
+// снежинки прогресса справа вверху; когда все заполнены — onDone
+function frame(total, onDone) {
+  const pr = el('div', 'prog', '<b>❄️</b>'.repeat(total)); let k = 0;
+  return { step() { const b = pr.children[k++]; if (b) b.classList.add('on'); if (k === total) later(onDone, 900); return k; } };
+}
+
+function finish(n) {
+  const d = D(n); d.game = true; if (!d.gameDate) d.gameDate = today(); save();
+  if (n === 7) return finale();
+  sfx.win(); confetti();
+  const dim = el('div', 'dim'); const p = el('div', 'panel', null, dim);
+  el('h2', '', 'Молодец! 🎉', p);
+  const star = el('div', 'bigstar' + (d.brush ? '' : ' off'), '⭐', p);
+  const msg = el('p', '', d.brush ? 'Звезда дня — твоя!' : 'Отметьте, что утром почистили зубки, — и звезда твоя', p);
+  if (!d.brush) { const ch = brushCheck(d, p, () => { star.classList.remove('off'); re(star, 'pop'); msg.textContent = 'Звезда дня — твоя!'; sfx.magic(); ch.onclick = null; }); }
+  el('div', 'moon', '🌙 Не забудь почистить зубки вечером!', p);
+  const row = el('div', 'row', null, p);
+  el('button', 'btn pb blue', '↻ Ещё раз', row).onclick = () => startGame(n);
+  el('button', 'btn pb', 'На карту ▶', row).onclick = map;
+}
+
+/* ---------- день 1. Рюкзак пингвинёнка: знакомство со словами → «послушай и выбери» ---------- */
+function gBackpack(n) {
+  setBg('snow_meadow');
+  const pen = sp('p_wave', 13, 60, 46, 'bob');
+  const bag = sp('backpack', 50, 68, 34, 'click');
+  let h = hint('Нажми на рюкзак <small>— вещи выпрыгнут и назовут себя</small>');
+  const slots = [22, 36, 50, 64, 78], out = []; let i = 0, busy = false;
+  bag.onclick = () => {
+    if (busy || i >= W5.length) return; busy = true;
+    re(bag, 'hop'); sfx.pop();
+    const w = W5[i], x = slots[i]; i++;
+    const c = el('div', 'card', `<img src="${U(PIC[w])}" alt="">`); c.style.left = '50%'; c.style.top = '62%'; c.style.scale = .3; c.style.opacity = 0;
+    c.onclick = () => { say(w); re(c, 'hop'); };
+    out.push(c);
+    requestAnimationFrame(() => requestAnimationFrame(() => { c.style.left = x + '%'; c.style.top = '30%'; c.style.scale = .78; c.style.opacity = 1; }));
+    later(() => {
+      say(w); busy = false;
+      if (i === W5.length) { h.remove(); h = hint('Нажимай на картинки и повторяй слова'); bag.classList.remove('click'); btn('Играем! ▶', 50, 90, 'sun ready', play); }
+    }, 650);
+  };
+  function play() {
+    scr.querySelectorAll('.btn').forEach(b => b.remove()); h.remove();
+    out.forEach(c => { c.style.opacity = 0; setTimeout(() => c.remove(), 500); });
+    pen.src = U('p_happy');
+    hint('Послушай и найди <small>— картинка прыгнет в рюкзак</small>');
+    const fr = frame(5, () => finish(n));
+    const order = shuffle(W5); let r = 0, cards = [], target, bagScale = 1;
+    sayBtn(50, 17, () => say(target));
+    function round() {
+      cards.forEach(c => c.remove()); cards = [];
+      target = order[r];
+      const opts = shuffle([target, ...shuffle(W5.filter(w => w !== target)).slice(0, 2)]);
+      opts.forEach((w, j) => {
+        const c = el('div', 'card pop', `<img src="${U(PIC[w])}" alt="">`); c.style.left = [31, 50, 69][j] + '%'; c.style.top = '40%'; c.style.scale = .85;
+        c.onclick = () => {
+          if (c._done) return;
+          if (w === target) {
+            cards.forEach(o => o._done = true); sfx.ok(); say(w);
+            fly(c, 50, 68, .15, 650).then(() => { c.remove(); sfx.pop(); bagScale += .05; bag.style.scale = bagScale; re(bag, 'hop'); });
+            fr.step(); r++; if (r < order.length) later(round, 1300);
+          } else { sfx.no(); re(c, 'shake'); say(w); }
+        };
+        cards.push(c);
+      });
+      later(() => say(target), 500);
+    }
+    round();
+  }
+}
+
+/* ---------- день 2. Почисти зубки: паста на щётку → чистим 6 зубиков → полощем из стаканчика ---------- */
+function gTeeth(n) {
+  setBg('snow_meadow');
+  const pen = sp('p_happy', 10, 66, 42, 'bob');
+  const TX = 53, TY = 46, TW = 64;          // зубки: центр и ширина в % сцены
+  const th = TW * 265 / 700 * 16 / 9;       // их высота в % высоты сцены
+  const teeth = sp('teeth', TX, TY, th);
+  const tube = sp('tube', 74, 84, 24, 'click'), brush = sp('brush', 86, 80, 30);
+  let h = hint('Нажми на пасту <small>— выдавим её на щётку</small>');
+  const fr = frame(6, () => {});
+  // пятнышки: по 2 на зубик, центры зубиков — по картинке teeth.webp
+  const TC = [.15, .30, .45, .60, .745, .89].map(f => TX - TW / 2 + TW * f);
+  const spots = [];
+  TC.forEach((x, t) => {
+    for (let k = 0; k < 2; k++) {
+      const s = el('div', 'spot'); const sx = x + (k ? 1.8 : -1.8) + (Math.random() - .5) * 1.2, sy = TY - th / 2 + th * (.17 + .26 * k + Math.random() * .06);
+      const r = 4 + Math.random() * 1.4; s.style.cssText += `left:${sx}%;top:${sy}%;width:${r}%;height:${r * 16 / 9}%;opacity:1`;
+      spots.push({ s, x: sx, y: sy, t, dirt: 1 });
+    }
+  });
+  const clean = [0, 0, 0, 0, 0, 0];
+  let phase = 0;
+  tube.onclick = () => {
+    if (phase) return; phase = 1; say('toothpaste'); re(tube, 'shake'); sfx.pop();
+    later(() => { brush.src = U('brush_paste'); brush.style.height = '24%'; brush.style.left = '84%'; re(brush, 'pop'); say('toothbrush'); }, 1000);
+    later(() => { tube.style.transition = 'opacity .5s'; tube.style.opacity = 0; h.remove(); h = hint('Почисти зубки <small>— води щёткой по пятнышкам</small>'); phase = 2; }, 2000);
+  };
+  // щётка ездит за пальцем; щетинки — в левом нижнем углу картинки, их и ставим под палец
+  let down = false, lastScrub = 0;
+  function moveBrush(e) {
+    if (phase !== 2) return; const p = pt(e);
+    brush.style.left = p.x + 6.5 + '%'; brush.style.top = p.y - 8 + '%'; brush.style.zIndex = 9;
+    if (!down && e.pointerType !== 'mouse') return;
+    const t = performance.now();
+    spots.forEach(o => {
+      if (o.dirt <= 0) return;
+      const dx = o.x - p.x, dy = (o.y - p.y) * 9 / 16;
+      if (dx * dx + dy * dy < 14) {
+        o.dirt -= .09; if (o.dirt < .15) o.dirt = 0; o.s.style.opacity = o.dirt;
+        if (t - lastScrub > 80) { lastScrub = t; sfx.scrub(); foam(p.x, p.y); }
+        if (o.dirt <= 0) checkTooth(o.t);
+      }
+    });
+  }
+  function foam(x, y) {
+    for (let k = 0; k < 2; k++) {
+      const f = el('div', 'foam'); const s = .8 + Math.random() * 1.6;
+      f.style.cssText += `left:${x + (Math.random() - .5) * 4}%;top:${y + (Math.random() - .5) * 5}%;width:calc(var(--u)*${s});height:calc(var(--u)*${s});transition:all 1.4s ease-out;opacity:1`;
+      requestAnimationFrame(() => requestAnimationFrame(() => { f.style.top = parseFloat(f.style.top) - 6 - Math.random() * 6 + '%'; f.style.opacity = 0; }));
+      setTimeout(() => f.remove(), 1500);
+    }
+  }
+  function checkTooth(t) {
+    if (clean[t] || spots.some(o => o.t === t && o.dirt > 0)) return;
+    clean[t] = 1; sfx.ding(); sparkle(TC[t], TY - th * .15, 10); say('tooth'); re(pen, 'hop');
+    if (fr.step() === 6) later(rinse, 1200);
+  }
+  scr.onpointerdown = e => { down = true; moveBrush(e); };
+  scr.onpointerup = () => { down = false; };
+  scr.onpointermove = moveBrush;
+  function rinse() {
+    phase = 3; h.remove(); h = hint('Прополощи ротик <small>— нажми на стаканчик</small>');
+    brush.style.transition = 'opacity .4s'; brush.style.opacity = 0;
+    const cup = sp('cup', 82, 80, 18, 'click pop');
+    cup.onclick = () => {
+      if (phase !== 3) return; phase = 4; say('cup'); sfx.water();
+      cup.style.transition = 'rotate .5s,left .5s,top .5s'; cup.style.rotate = '-35deg'; cup.style.left = '76%'; cup.style.top = '70%';
+      for (let k = 0; k < 18; k++) later(() => {
+        const f = el('div', 'fx', '💧'); f.style.cssText += `left:${TX - 25 + Math.random() * 50}%;top:${TY - 20}%;font-size:calc(var(--u)*1.6);transition:top .8s ease-in,opacity .8s;opacity:1`;
+        requestAnimationFrame(() => requestAnimationFrame(() => { f.style.top = TY + 20 + '%'; f.style.opacity = 0; })); setTimeout(() => f.remove(), 900);
+      }, k * 50);
+      later(() => { teeth.classList.add('glow'); pen.src = U('ph_jump'); re(pen, 'hop'); sparkle(TX, TY, 22); sfx.magic(); }, 900);
+      later(() => finish(n), 2600);
+    };
+  }
+}
+
+/* ---------- день 3. Ледяные кубики: найди пары (5 пар, с penguin) ---------- */
+function gCubes(n) {
+  setBg('snow_meadow');
+  const pen = sp('pb_stand', 90, 62, 46, 'bob');
+  hint('Найди пары <small>— нажми на два кубика</small>');
+  const fr = frame(5, () => finish(n));
+  const deck = shuffle([...W5, ...W5]);
+  let open = [], lock = false;
+  deck.forEach((w, i) => {
+    const x = 10 + (i % 5) * 15, y = i < 5 ? 38 : 72;
+    const c = el('div', 'cube'); c.style.left = x + '%'; c.style.top = y + '%';
+    c.innerHTML = `<img class="ice" src="${U('ice_cube')}" alt=""><img class="it" src="${U(PIC[w])}" alt="">
+      <svg class="crack" viewBox="0 0 100 100"><path d="M50 8 L44 30 L56 42 L40 60 L52 74 L46 92 M44 30 L28 24 M56 42 L74 36 M40 60 L22 66 M52 74 L70 80" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>`;
+    c.onclick = () => {
+      if (lock || c.classList.contains('open')) return;
+      c.classList.add('open'); sfx.crack(); say(w); open.push({ c, w });
+      if (open.length < 2) return;
+      lock = true; const [a, b] = open; open = [];
+      if (a.w === b.w) {
+        later(() => {
+          sfx.ok(); re(pen, 'hop'); pen.src = U('ph_jump');
+          [a, b].forEach(o => { o.c.style.transition = 'left .6s ease-in,top .6s ease-in,scale .6s,opacity .6s'; o.c.style.left = '90%'; o.c.style.top = '55%'; o.c.style.scale = .3; o.c.style.opacity = 0; o.c.style.pointerEvents = 'none'; });
+          later(() => { pen.src = U('pb_stand'); sparkle(90, 50, 8); }, 650);
+          fr.step(); lock = false;
+        }, 700);
+      } else later(() => { a.c.classList.remove('open'); b.c.classList.remove('open'); sfx.freeze(); lock = false; }, 1300);
+    };
   });
 }
-const cardHTML = (w, label = true) => `<div class="pic">${W[w].art()}</div>${label ? `<div class="w">${W[w].label}</div>` : ''}`;
 
-/* ---------- навигация ---------- */
-const enter = {}, leave = {}; let cur = 'home';
-function go(id) {
-  if (leave[cur]) leave[cur]();
-  SND.stop();
-  $$('.scr').forEach(s => s.classList.toggle('on', s.id === id));
-  cur = id; scrollTo(0, 0);
-  if (enter[id]) enter[id]();
-  history.replaceState(null, '', id === 'home' ? location.pathname : '#' + id);
+/* ---------- день 4. Чьи тени?: перетащи вещь на её тень (2 круга по 4 вещи) ---------- */
+function gShadows(n) {
+  setBg('snow_meadow');
+  hint('Перетащи вещь на её тень');
+  const fr = frame(8, () => finish(n));
+  const H = { tooth: 15, toothbrush: 24, toothpaste: 22, cup: 14 };
+  let round = 0;
+  function play() {
+    scr.querySelectorAll('.shadow,.drag,.placed').forEach(e => e.remove());
+    const xs = shuffle([18, 39, 61, 82]), ys = shuffle([18, 39, 61, 82]);
+    let left = 4;
+    W4.forEach((w, i) => {
+      const sx = xs[i], sy = 40, ix = ys[i], iy = 78;
+      const sh = sp(PIC[w], sx, sy, H[w], 'shadow pop');
+      const it = sp(PIC[w], ix, iy, H[w], 'drag pop');
+      let held = false, ox = 0, oy = 0;
+      it.onpointerdown = e => {
+        if (it._done) return; e.preventDefault(); e.stopPropagation(); it.setPointerCapture(e.pointerId); held = true; it.classList.add('held'); say(w);
+        const p = pt(e); ox = parseFloat(it.style.left) - p.x; oy = parseFloat(it.style.top) - p.y; it.style.transition = 'none';
+      };
+      it.onpointermove = e => { if (!held) return; const p = pt(e); it.style.left = p.x + ox + '%'; it.style.top = p.y + oy + '%'; };
+      it.onpointerup = it.onpointercancel = () => {
+        if (!held) return; held = false; it.classList.remove('held');
+        const x = parseFloat(it.style.left), y = parseFloat(it.style.top);
+        let best = null, bd = 1e9;   // ближайшая незаполненная тень
+        scr.querySelectorAll('.shadow:not(.filled)').forEach(s => { const dx = parseFloat(s.style.left) - x, dy = (parseFloat(s.style.top) - y) * 9 / 16; const d = dx * dx + dy * dy; if (d < bd) { bd = d; best = s; } });
+        it.style.transition = 'left .35s ease-out,top .35s ease-out';
+        if (best === sh && bd < 120) {
+          it.style.left = sx + '%'; it.style.top = sy + '%'; it._done = true; it.classList.remove('drag'); it.classList.add('placed');
+          setTimeout(() => { sh.classList.add('filled'); it.style.opacity = 0; }, 350);
+          sfx.ok(); sparkle(sx, sy, 12); say(w); fr.step();
+          if (--left === 0 && ++round < 2) later(play, 1400);
+        } else {
+          if (best && bd < 120) { sfx.no(); re(best, 'shake'); }
+          it.style.left = ix + '%'; it.style.top = iy + '%';
+        }
+      };
+    });
+  }
+  play();
 }
-document.addEventListener('click', e => {
-  const t = e.target.closest('[data-go]'); if (t) go(t.dataset.go);
-});
-const muteBtns = ['#mute', '#mute2'];
-muteBtns.forEach(s => $(s).onclick = () => { const m = SND.toggle(); muteBtns.forEach(x => $(x).textContent = m ? '🔇' : '🔊'); });
-$('#share').onclick = async () => {
-  const data = { title: 'Зубной замок Splat Kids', text: 'Чистим зубки и учим английский — игры и раскраски от Splat Kids × WowSpeak', url: location.href.split('#')[0] };
-  try { if (navigator.share) await navigator.share(data); else { await navigator.clipboard.writeText(data.url); toast('Ссылка скопирована — отправь другу!'); } } catch {}
-};
 
-enter.menu = () => SND.play('r_menu');
-
-/* ---------- Почисти зубки ---------- */
-let brushOff;
-enter.brush = () => {
-  const arena = $('#arena'), cur = $('#cursor'), meter = $('#meter');
-  $$('.dirt', arena).forEach(x => x.remove());
-  arena.querySelector('.bt').innerHTML = ART.tooth({ mood: 'sad' });
-  $('#brushAgain').style.display = 'none'; meter.style.width = '0';
-  const spots = shuffle([[20, 18], [58, 14], [38, 40], [14, 48], [64, 44], [42, 64], [26, 30], [56, 30]]).slice(0, 6);
-  const dirt = spots.map(([x, y], k) => {
-    const d = document.createElement('div'); d.className = 'dirt';
-    d.style.left = x + '%'; d.style.top = y + '%';
-    d.innerHTML = ART.germ({ color: ['#8bd34a', '#b18bff', '#ff9f5a'][k % 3] });
-    arena.appendChild(d); return { el: d, hp: 18 };
-  });
-  cur.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(ART.toothbrush({ paste: true }));
-  let hold = false, done = 0, last = 0;
-  const move = e => {
-    if (!hold) return; e.preventDefault();
-    cur.style.display = 'block'; cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px';
-    for (const d of dirt) {
-      if (d.hp <= 0) continue;
-      const b = d.el.getBoundingClientRect();
-      if (e.clientX > b.left - 24 && e.clientX < b.right + 24 && e.clientY > b.top - 24 && e.clientY < b.bottom + 24) {
-        d.hp--; d.el.style.transform = `rotate(${(Math.random() - .5) * 30}deg) scale(${.6 + d.hp / 45})`;
-        if (Date.now() - last > 3500) { last = Date.now(); SND.play(Math.random() < .5 ? 'p_updown' : 'p_roundround'); }
-        if (d.hp <= 0) {
-          d.el.classList.add('gone'); done++; meter.style.width = done / dirt.length * 100 + '%';
-          if (done === dirt.length) {
-            arena.querySelector('.bt').innerHTML = ART.tooth({ shine: true });
-            SND.play('p_clean').then(() => SND.play('r_win')); confetti(); $('#brushAgain').style.display = '';
-          }
+/* ---------- день 5. Лови!: пингвинёнок ловит названную вещь; снежки и другие вещи не ловим ---------- */
+function gCatch(n) {
+  setBg('snow_meadow');
+  hint('Лови то, что услышишь <small>— води пальцем влево-вправо</small>');
+  let playing = true;
+  const fr = frame(5, () => { playing = false; finish(n); });
+  const pen = sp('p_happy', 50, 80, 30); pen.style.zIndex = 8;
+  const H = { tooth: 11, toothbrush: 17, toothpaste: 16, cup: 11, snowball: 9 };
+  let px = 50, tx = 50, target = pick(W4), items = [], spawnT = 300, since = 0;
+  sayBtn(7, 22, () => say(target));
+  later(() => say(target), 600);
+  scr.onpointermove = scr.onpointerdown = e => { tx = Math.max(8, Math.min(92, pt(e).x)); };
+  document.onkeydown = e => { if (e.key === 'ArrowLeft') tx = Math.max(8, tx - 8); if (e.key === 'ArrowRight') tx = Math.min(92, tx + 8); };
+  loop(dt => {
+    if (!playing) return;
+    px += (tx - px) * Math.min(1, dt / 120); pen.style.left = px + '%';
+    spawnT -= dt;
+    if (spawnT <= 0) {
+      spawnT = 1500; since++;
+      // названная вещь падает часто — не реже чем каждый третий раз
+      let w; if (since >= 3 || Math.random() < .4) { w = target; since = 0; } else w = Math.random() < .35 ? 'snowball' : pick(W4.filter(x => x !== target));
+      const x = 10 + Math.random() * 80, it = sp(w === 'snowball' ? 'snowball' : PIC[w], x, -10, H[w]);
+      items.push({ it, w, x, y: -10, v: .011 + Math.random() * .004, r: (Math.random() - .5) * .05 });
+    }
+    items.forEach(o => {
+      o.y += o.v * dt; o.it.style.top = o.y + '%'; o.it.style.rotate = (o.r * o.y * 10) + 'deg';
+      if (!o.hit && o.y > 64 && o.y < 76 && Math.abs(o.x - px) < 9) {
+        o.hit = true;
+        if (o.w === target) {
+          sfx.ok(); say(o.w); o.it.style.transition = 'scale .3s,opacity .3s'; o.it.style.scale = .3; o.it.style.opacity = 0; sparkle(px, 66, 10); re(pen, 'hop');
+          if (fr.step() < 5) { const prev = target; target = pick(W4.filter(x => x !== prev)); since = 2; later(() => say(target), 900); }
+        } else {
+          sfx.no(); re(pen, 'shake');
+          if (o.w === 'snowball') { o.it.style.opacity = 0; sfx.snow(); sparkle(px, 66, 12, '❄'); }
         }
       }
-    }
-  };
-  const down = e => { if (e.target.closest('#arena')) { hold = true; arena.setPointerCapture?.(e.pointerId); move(e); } };
-  const up = () => { hold = false; cur.style.display = 'none'; };
-  arena.addEventListener('pointerdown', down); addEventListener('pointermove', move, { passive: false }); addEventListener('pointerup', up);
-  brushOff = () => { arena.removeEventListener('pointerdown', down); removeEventListener('pointermove', move); removeEventListener('pointerup', up); up(); };
-  SND.play('r_brush');
-};
-leave.brush = () => brushOff && brushOff();
-$('#brushAgain').onclick = () => { brushOff(); enter.brush(); };
-
-/* ---------- Найди пары ---------- */
-enter.memory = () => {
-  const pick = shuffle(['tooth', 'toothbrush', 'toothpaste', 'water', 'cup', 'smile', 'germ', 'fairy']).slice(0, 6);
-  const deck = shuffle([...pick, ...pick]);
-  const box = $('#mem'); box.innerHTML = ''; $('#memAgain').style.display = 'none';
-  let open = [], left = pick.length, busy = false;
-  deck.forEach(w => {
-    const c = document.createElement('div'); c.className = 'card';
-    c.innerHTML = `<div class="back">${ART.star({ face: false, color: '#fff' })}</div><div class="face">${W[w].art()}</div>`;
-    c.onclick = async () => {
-      if (busy || c.classList.contains('open')) return;
-      c.classList.add('open'); open.push([c, w]); SND.play('w_' + w);
-      if (open.length < 2) return;
-      const [[a, wa], [b, wb]] = open; open = [];
-      if (wa === wb) {
-        a.classList.add('done'); b.classList.add('done');
-        if (--left === 0) { await sleep(700); SND.play('p_wow').then(() => SND.play('r_win')); confetti(); $('#memAgain').style.display = ''; }
-      } else { busy = true; await sleep(900); a.classList.remove('open'); b.classList.remove('open'); busy = false; }
-    };
-    box.appendChild(c);
-  });
-  SND.play('r_memory');
-};
-$('#memAgain').onclick = () => enter.memory();
-
-/* ---------- Послушай и найди ---------- */
-enter.listen = () => {
-  const pool = ['tooth', 'toothbrush', 'toothpaste', 'water', 'cup', 'smile', 'germ', 'fairy', 'castle'];
-  const rounds = shuffle(pool).slice(0, 6); let r = 0, score = 0, miss = false;
-  const ask = () => {
-    const t = rounds[r];
-    const opts = shuffle([t, ...shuffle(pool.filter(x => x !== t)).slice(0, 2)]);
-    const g = $('#lsGrid'); g.innerHTML = '';
-    opts.forEach(o => {
-      const c = document.createElement('div'); c.className = 'card pop'; c.innerHTML = cardHTML(o, false);
-      c.onclick = async () => {
-        if (o === t) {
-          if (!miss) score++; c.classList.add('good'); await SND.play('p_goodjob');
-          r++; miss = false;
-          if (r < rounds.length) ask();
-          else { $('#lsScore').textContent = `⭐ ${score} из ${rounds.length}! Молодец!`; confetti(); SND.play('r_win'); $('#lsPlay').textContent = '🔄 Ещё раз'; $('#lsPlay').onclick = () => { $('#lsPlay').textContent = '🔊 Послушать'; enter.listen(); }; }
-        } else { miss = true; c.classList.add('shake'); SND.play('p_tryagain'); setTimeout(() => c.classList.remove('shake'), 450); }
-      };
-      g.appendChild(c);
     });
-    $('#lsScore').textContent = `${r + 1} / ${rounds.length}`;
-    $('#lsPlay').onclick = () => SND.play('w_' + t);
-    setTimeout(() => SND.play('w_' + t), 500);
-  };
-  SND.play('r_listen').then(() => cur === 'listen' && r === 0 && SND.play('w_' + rounds[0]));
-  ask();
-};
-
-/* ---------- 2 минуты ---------- */
-let tmH = null;
-function tmReset() {
-  clearInterval(tmH); tmH = null;
-  $('#tmT').textContent = '2:00'; $('#ring').style.strokeDashoffset = 282.7;
-  $('#tmIco').className = 'ico'; $('#tmIco').innerHTML = ART.toothbrush({ paste: true });
-  $$('#zones span').forEach(s => s.classList.remove('on'));
-}
-enter.timer = () => { tmReset(); SND.play('r_timer'); };
-leave.timer = tmReset;
-$('#tmStart').onclick = () => {
-  if (tmH) return;
-  const T = 120, t0 = Date.now(); let lastZone = -1, lastChant = -99;
-  $('#tmIco').classList.add('updown');
-  tmH = setInterval(() => {
-    const s = Math.min(T, (Date.now() - t0) / 1000), left = Math.ceil(T - s);
-    $('#tmT').textContent = `${left / 60 | 0}:${String(left % 60).padStart(2, '0')}`;
-    $('#ring').style.strokeDashoffset = 282.7 * (1 - s / T);
-    const z = Math.min(3, s / 30 | 0);
-    if (z !== lastZone) { lastZone = z; $$('#zones span').forEach((x, k) => x.classList.toggle('on', k === z)); }
-    if (s - lastChant > 21) { lastChant = s; SND.play('chant'); }
-    if (s >= T) {
-      clearInterval(tmH); tmH = null; $('#tmIco').classList.remove('updown');
-      $('#tmIco').innerHTML = ART.tooth({ shine: true }); confetti(4000); SND.play('r_timer_end');
-      const ch = store.get('ch', {}); const d = todayIdx(); ch[d] = ch[d] || {}; ch[d].timer = true; store.set('ch', ch);
-    }
-  }, 250);
-};
-
-/* ---------- Челлендж 7 дней ---------- */
-const DAYS = [['tooth', 'smile'], ['toothbrush', 'brush'], ['toothpaste', 'cup'], ['water', 'clean'], ['germ', 'fairy'], ['castle', 'tooth'], ['toothbrush', 'toothpaste']];
-function todayIdx() {
-  let start = store.get('start', null);
-  const today = new Date(); today.setHours(0, 0, 0, 0);
-  if (!start) { start = today.getTime(); store.set('start', start); }
-  return Math.max(0, Math.min(6, Math.round((today - start) / 864e5)));
-}
-function dayDone(x) { return x && x.am && x.pm && x.words; }
-function renderChallenge(sel) {
-  const ch = store.get('ch', {}), t = todayIdx();
-  if (sel === undefined) sel = t;
-  $('#days').innerHTML = DAYS.map((_, i) => `<div class="day ${dayDone(ch[i]) ? 'done' : ''} ${i === t ? 'today' : ''} ${i > t ? 'lock' : ''}" data-d="${i}">
-    <div class="n">День ${i + 1}</div><div class="st">${ART.star({ face: dayDone(ch[i]) })}</div></div>`).join('');
-  $$('#days .day').forEach(d => d.onclick = () => { if (+d.dataset.d <= t) renderChallenge(+d.dataset.d); });
-  const c = ch[sel] || {}, words = sel === 6 ? ['tooth', 'toothbrush', 'toothpaste', 'water', 'cup', 'smile'] : DAYS[sel];
-  $('#dayview').innerHTML = `<div class="h2" style="display:inline-block">День ${sel + 1}${sel === 6 ? ' — повторяем всё!' : ''}</div>
-    <div class="words">${words.map(w => `<div class="card" data-w="${w}">${cardHTML(w)}</div>`).join('')}</div>
-    <div class="checks">
-      <button class="chk ${c.am ? 'on' : ''}" data-k="am">☀️ Почистил утром</button>
-      <button class="chk ${c.pm ? 'on' : ''}" data-k="pm">🌙 Почистил вечером</button>
-      <button class="chk ${c.words ? 'on' : ''}" data-k="words">🔤 Выучил слова</button>
-    </div>
-    <button class="btn pink" data-go="timer" style="margin-top:6px">⏱ Чистить 2 минуты</button>`;
-  $$('#dayview .card').forEach(el => el.onclick = () => SND.play('w_' + el.dataset.w));
-  $$('#dayview .chk').forEach(b => b.onclick = () => {
-    const ch2 = store.get('ch', {}); ch2[sel] = ch2[sel] || {}; ch2[sel][b.dataset.k] = !ch2[sel][b.dataset.k];
-    store.set('ch', ch2);
-    const nowDone = dayDone(ch2[sel]);
-    renderChallenge(sel);
-    if (nowDone && b.classList.contains('on') === false) { confetti(); SND.play('r_star'); }
+    items = items.filter(o => { if (o.y > 110) { o.it.remove(); return false; } return true; });
   });
 }
-enter.challenge = () => { renderChallenge(); SND.play('r_challenge'); };
 
-/* ---------- Все слова ---------- */
-enter.words = () => {
-  $('#wGrid').innerHTML = ART.WORDS.map(x => `<div class="card" data-w="${x.w}">${cardHTML(x.w)}</div>`).join('');
-  $$('#wGrid .card').forEach(el => el.onclick = () => { SND.play('w_' + el.dataset.w); el.classList.add('shake'); setTimeout(() => el.classList.remove('shake'), 450); });
-};
+/* ---------- день 6. Фонарик: в комнате темно, светим и находим то, что услышали ---------- */
+function gTorch(n) {
+  setBg('castle_room_night');
+  // места в комнате castle_room_night: кровать, полка, столик, подоконник, ковёр
+  const POS = { tooth: [23, 60, 9], toothbrush: [78, 30, 12], toothpaste: [86, 55, 12], cup: [52, 47, 8], penguin: [48, 82, 16] };
+  const its = {};
+  W5.forEach(w => { const [x, y, h] = POS[w]; its[w] = sp(PIC[w], x, y, h, 'click'); its[w].style.zIndex = 5; });
+  const dark = el('div'); dark.id = 'dark';
+  let lx = 50, ly = 55;
+  const paint = () => { dark.style.background = `radial-gradient(circle calc(var(--u)*11) at ${lx}% ${ly}%, rgba(8,12,35,0) 0, rgba(8,12,35,0) 60%, rgba(8,12,35,.95) 100%)`; };
+  paint();
+  scr.onpointermove = scr.onpointerdown = e => { const p = pt(e); lx = p.x; ly = p.y; paint(); };
+  let h = hint('Води пальчиком — это фонарик. Найди то, что услышишь');
+  const fr = frame(5, () => {});
+  const order = shuffle(W5); let r = 0, target = order[0];
+  sayBtn(7, 22, () => say(target));
+  later(() => say(target), 800);
+  W5.forEach(w => its[w].onclick = () => {
+    if (its[w]._found || r >= order.length) return;
+    if (w === target) {
+      its[w]._found = true; its[w].classList.add('glow'); sfx.ding(); say(w); sparkle(POS[w][0], POS[w][1], 12);
+      r++; fr.step();
+      if (r < order.length) { target = order[r]; later(() => say(target), 1200); }
+      else later(() => { dark.style.opacity = 0; sfx.magic(); h.remove(); hint('Ура! Свет включился!'); later(() => finish(n), 2000); }, 900);
+    } else { sfx.no(); re(its[w], 'shake'); }
+  });
+}
 
-/* ---------- запуск ---------- */
-$('#brandTop').innerHTML = brandHTML();
-$('#brandSm').innerHTML = brandHTML();
-mountClouds(7); drawArt();
-function renderStars() {
-  const ch = store.get('ch', {}), n = DAYS.filter((_, i) => dayDone(ch[i])).length;
-  $('#homeStars').innerHTML = 'Твои звёзды: ' + DAYS.map((_, i) => `<i class="${i < n ? '' : 'off'}">${ART.star({ face: false })}</i>`).join('');
+/* ---------- день 7. Мыльные пузыри: из тюбика летят пузыри, лопаем названный ---------- */
+function gBubbles(n) {
+  setBg('snow_meadow');
+  const tube = sp('tube', 50, 80, 30); tube.style.zIndex = 11;
+  hint('Лопни пузырь с тем, что услышишь');
+  let target = pick(W4), playing = true, bubs = [], spawnT = 500, since = 0;
+  const fr = frame(5, () => { playing = false; later(() => finish(n), 400); });
+  sayBtn(7, 22, () => say(target));
+  later(() => say(target), 700);
+  loop((dt, t) => {
+    if (!playing) return;
+    spawnT -= dt;
+    if (spawnT <= 0 && bubs.length < 6) {
+      spawnT = 1300; since++;
+      let w; if (since >= 3 || Math.random() < .35) { w = target; since = 0; } else w = pick(W4.filter(x => x !== target));
+      const b = el('div', 'bub', `<img src="${U(PIC[w])}" alt="">`); b.style.left = '50%'; b.style.top = '64%'; b.style.scale = .2;
+      const o = { b, w, x: 50, y: 64, vx: (Math.random() - .5) * .03, vy: -(.0075 + Math.random() * .003), ph: Math.random() * 6, s: .2 };
+      b.onclick = () => {
+        if (!playing || o.dead) return;
+        if (w === target) {
+          o.dead = true; sfx.pop(); say(w); sparkle(o.x, o.y, 14, '🫧'); b.style.transition = 'scale .25s,opacity .25s'; b.style.scale = 1.5; b.style.opacity = 0; setTimeout(() => b.remove(), 300);
+          if (fr.step() < 5) { const prev = target; target = pick(W4.filter(x => x !== prev)); since = 2; later(() => say(target), 900); }
+        } else { sfx.no(); re(b, 'shake'); }
+      };
+      bubs.push(o);
+    }
+    bubs.forEach(o => {
+      if (o.dead) return;
+      o.s = Math.min(1, o.s + dt / 500); o.y += o.vy * dt; o.x += o.vx * dt + Math.sin(t / 700 + o.ph) * .02;
+      if (o.x < 8 || o.x > 92) o.vx = -o.vx;
+      o.b.style.left = o.x + '%'; o.b.style.top = o.y + '%'; o.b.style.scale = o.s;
+      if (o.y < -12) { o.dead = true; o.b.remove(); }
+    });
+    bubs = bubs.filter(o => !o.dead);
+  });
 }
-enter.home = renderStars; renderStars();
-async function greet() {
-  await sleep(300); $('#homeHero').classList.add('on');
-  await sleep(500); $('#homeSay').classList.add('on'); SND.play('r_welcome');
+
+/* финал 7-го дня: вечер над замком, фейерверк, звезда, подарок */
+function finale() {
+  clear(); setBg('castle_night');
+  const cv = el('canvas'); cv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none';
+  const r = stage.getBoundingClientRect(), k = devicePixelRatio || 1; cv.width = r.width * k; cv.height = r.height * k;
+  const ctx = cv.getContext('2d'); let parts = [], next = 0;
+  const cols = ['#ffd23f', '#7cc8ff', '#5fe0cb', '#ffffff', '#ff9b9b', '#c7a6ff'];
+  loop(dt => {
+    next -= dt;
+    if (next <= 0) {
+      next = 700 + Math.random() * 500; sfx.boom();
+      const x = cv.width * (.15 + Math.random() * .7), y = cv.height * (.1 + Math.random() * .28), c = pick(cols);
+      for (let j = 0; j < 60; j++) { const a = Math.random() * Math.PI * 2, v = (1 + Math.random() * 3) * k; parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, life: 1, c }); }
+    }
+    ctx.globalCompositeOperation = 'destination-out'; ctx.fillStyle = 'rgba(0,0,0,.25)'; ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.globalCompositeOperation = 'lighter';
+    parts.forEach(p => { p.x += p.vx * dt / 16; p.y += p.vy * dt / 16; p.vy += .04 * k * dt / 16; p.life -= dt / 1400; ctx.globalAlpha = Math.max(0, p.life); ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(p.x, p.y, 2.4 * k, 0, 7); ctx.fill(); });
+    ctx.globalAlpha = 1; parts = parts.filter(p => p.life > 0);
+  });
+  el('button', 'tb close', '✕').onclick = map;
+  const pen = sp('ph_jump', 18, 70, 44, 'pop'); pen.style.zIndex = 5;
+  later(() => { sfx.win(); confetti(90); }, 300);
+  const star = el('div', 'fx', '⭐'); star.style.cssText += 'left:50%;top:42%;transform:translate(-50%,-50%);font-size:calc(var(--u)*14);z-index:6;transition:all 1s cubic-bezier(.3,1.5,.5,1);scale:0';
+  later(() => { star.style.scale = 1; sfx.magic(); }, 900);
+  later(() => { star.style.top = '20%'; star.style.scale = .55; }, 2400);
+  later(() => {
+    const g = sp('gift', 52, 64, 34, 'click pop glow'); g.style.zIndex = 6;
+    hint('7 дней пройдено! Нажми на подарок 🎁');
+    g.onclick = () => {
+      re(g, 'shake'); sfx.chest(); sparkle(52, 62, 20);
+      // подарка пока нет — заглушка (решение Анны 22.10.2026: «просто подарок»)
+      if (!scr.querySelector('.dim')) later(() => {
+        const dim = el('div', 'dim'); const p = el('div', 'panel', null, dim);
+        el('h2', '', '🎁 Твой подарок', p);
+        el('p', '', 'Ты прошёл все 7 льдинок и дошёл до замка! Подарок скоро появится — мама узнает, как его получить.', p);
+        el('div', 'moon', '🌙 Не забудь почистить зубки вечером!', p);
+        const row = el('div', 'row', null, p);
+        el('button', 'btn pb blue', 'На карту', row).onclick = map;
+        el('button', 'btn pb', 'Домой', row).onclick = home;
+      }, 700);
+    };
+  }, 3200);
+  const d = D(7);
+  if (!d.brush) later(() => { const ch = brushCheck(d, scr); ch.style.cssText += 'position:absolute;left:50%;top:91%;transform:translate(-50%,-50%);z-index:7'; }, 3400);
 }
-$('#splash').onclick = () => { $('#splash').classList.add('off'); if (cur === 'home') greet(); };
-$('#homeHero').onclick = () => SND.play('r_welcome');
-const start = location.hash.slice(1);
-if (start && $('#' + start)) go(start);
+
+/* ---------- «Своими руками» — конкурс рисунков (тестовая версия, решение Анны 22.10.2026) ---------- */
+function contest() {
+  clear(); setBg('snow_meadow');
+  const top = el('div', 'top'); el('button', 'tb', '← Домой', top).onclick = home; logo(top);
+  const c = el('div', 'contest');
+  c.innerHTML = `
+    <div class="txt">
+      <h1><small>КОНКУРС РИСУНКОВ</small>Своими руками</h1>
+      <div class="task">Нарисуй слова, которые ты выучил на уроке с WowSpeak и Splat Kids</div>
+      <ol>
+        <li><b>1</b><span>Ребёнок рисует вещи с урока: зубик, щётку, пасту, стаканчик — что запомнил.</span></li>
+        <li><b>2</b><span>На рисунке <em>обязательно</em> щётка или паста Splat Kids.</span></li>
+        <li><b>3</b><span>Снимите короткое видео: ребёнок показывает пальчиком на рисунок и называет вещи по-английски — <em>обязательно</em>.</span></li>
+        <li><b>4</b><span>Выложите рисунок и видео с отметкой WowSpeak и Splat Kids.</span></li>
+      </ol>
+      <div class="soon">Где выкладывать, сроки и призы — скоро здесь появятся.</div>
+    </div>
+    <div class="pics">
+      <div class="ex" id="ex"><span class="lab">Пример рисунка</span><img id="exImg" alt=""></div>
+      <div class="words">${W4.map(w => `<button data-w="${w}"><img src="${U(PIC[w])}" alt=""><span>🔊</span></button>`).join('')}</div>
+    </div>`;
+  c.querySelectorAll('.words button').forEach(b => b.onclick = () => { say(b.dataset.w); re(b, 'hop'); });
+  // пример рисунка появится, когда будет картинка media/site/contest_example.webp; до тех пор блока нет
+  const ex = c.querySelector('#ex'), img = c.querySelector('#exImg');
+  img.onerror = () => ex.remove();
+  if (U('contest_example')) img.src = U('contest_example'); else ex.remove();
+}
+
+/* картинки — заранее, чтобы в играх ничего не мигало */
+['home_hero', 'map_sea', 'snow_meadow', 'castle_room_night', 'castle_night', 'floe1', 'floe2', 'ph_stand', 'ph_jump', 'p_happy', 'p_wave', 'pb_stand',
+  'backpack', 'teeth', 'brush', 'brush_paste', 'tube', 'cup', 'magic_tooth', 'ice_cube', 'snowball', 'gift'].forEach(n => { const i = new Image(); i.src = U(n); });
+home();
 </script>
 </body>
 </html>
