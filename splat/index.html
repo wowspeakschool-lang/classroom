@@ -302,7 +302,7 @@ const GAMES = [
   { name: 'Чьи тени?', pic: 'cup', run: gShadows },
   { name: 'Сугробы', pic: 'mound1', run: gDrifts },
   { name: 'Фонарик', pic: 'castle_room_night', run: gTorch },
-  { name: 'Мыльные пузыри', pic: 'tube', run: gBubbles },
+  { name: 'Мыльные пузыри', pic: 'ph_jump', run: n => gBubbles2(n, true) },   // вариант «прыгает» (Анна, 22.10.2026)
 ];
 
 function home() {
@@ -697,44 +697,7 @@ function gTorch(n) {
   });
 }
 
-/* ---------- день 7. Мыльные пузыри: из тюбика летят пузыри, лопаем названный ---------- */
-function gBubbles(n) {
-  setBg('snow_meadow');
-  const tube = sp('tube', 50, 80, 30); tube.style.zIndex = 11;
-  hint('Лопни пузырь с тем, что услышишь. Слушай и повторяй');
-  let target = pick(W4), playing = true, bubs = [], spawnT = 500, since = 0;
-  const fr = frame(5, () => { playing = false; later(() => finish(n), 400); });
-  sayBtn(7, 22, () => say(target));
-  later(() => say(target), 700);
-  loop((dt, t) => {
-    if (!playing) return;
-    spawnT -= dt;
-    if (spawnT <= 0 && bubs.length < 6) {
-      spawnT = 1300; since++;
-      let w; if (since >= 3 || Math.random() < .35) { w = target; since = 0; } else w = pick(W4.filter(x => x !== target));
-      const b = el('div', 'bub', `<img src="${U(PIC[w])}" alt="">`); b.style.left = '50%'; b.style.top = '64%'; b.style.scale = .2;
-      const o = { b, w, x: 50, y: 64, vx: (Math.random() - .5) * .03, vy: -(.0075 + Math.random() * .003), ph: Math.random() * 6, s: .2 };
-      b.onclick = () => {
-        if (!playing || o.dead) return;
-        if (w === target) {
-          o.dead = true; sfx.pop(); say(w); sparkle(o.x, o.y, 14, '🫧'); b.style.transition = 'scale .25s,opacity .25s'; b.style.scale = 1.5; b.style.opacity = 0; setTimeout(() => b.remove(), 300);
-          if (fr.step() < 5) { const prev = target; target = pick(W4.filter(x => x !== prev)); since = 2; later(() => say(target), 900); }
-        } else { sfx.no(); re(b, 'shake'); }
-      };
-      bubs.push(o);
-    }
-    bubs.forEach(o => {
-      if (o.dead) return;
-      o.s = Math.min(1, o.s + dt / 500); o.y += o.vy * dt; o.x += o.vx * dt + Math.sin(t / 700 + o.ph) * .02;
-      if (o.x < 8 || o.x > 92) o.vx = -o.vx;
-      o.b.style.left = o.x + '%'; o.b.style.top = o.y + '%'; o.b.style.scale = o.s;
-      if (o.y < -12) { o.dead = true; o.b.remove(); }
-    });
-    bubs = bubs.filter(o => !o.dead);
-  });
-}
-
-/* ---------- пузыри без тюбика — два варианта на выбор (Анна, 22.10.2026); смотреть: index.html?demo ----------
+/* ---------- день 7. Мыльные пузыри без тюбика; в игре — вариант «прыгает» (Анна, 22.10.2026); оба варианта: index.html?demo ----------
    jump = false: пингвинёнок стоит внизу и радуется, пузырь лопается от нажатия;
    jump = true: пингвинёнок подпрыгивает к пузырю и лопает его сам */
 function gBubbles2(n, jump) {
