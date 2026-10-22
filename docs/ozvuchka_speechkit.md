@@ -198,3 +198,27 @@ This is a story about a girl called Ruby. Ruby lives in a terraced house in a sm
 ```
 This is a story about a girl called Ellie and her plans. Ellie is thirteen and she lives in a small town. She says she will not live in this town when she is older. She thinks she will live in a big city, or maybe abroad. Ellie wants to be a vet, because she loves animals. She has got two dogs and a cat. Her mother says the job is difficult, but Ellie says she will study hard. Ellie will learn Spanish at school next year. She says she will need it, because she wants to work in South America for a few years. Ellie doesn't think she will be rich, but she thinks she will be happy. She also says she will have a big family one day, with three or four children and a lot of animals.
 ```
+
+
+## GG1 · Final Test · блок 7 → `gg1_final_b7.mp3`
+
+Добавлено 22.10.2026 при вычитке тестов GG1. Прежняя запись
+(`classroom-media/gg1/gg1_ft_test_b6.mp3`) была **целиком на Present
+Continuous** («What's Pat doing?», «flying a kite»), которого курс не даёт ни
+на одном уроке. Решение Анны от 22.10 — перезаписать. Задание переписано на
+грамматику курса: по вопросу на юниты 2, 4, 5, 6, 3 и 8 (возраст, have got,
+can, время и Present Simple, предлоги места, like + -ing).
+
+Рассказ в третьем лице, без диалогов. Голос английский, темп спокойный, паузы
+между предложениями около секунды.
+
+```
+This is the Brown family. They live in a small house in London. Jack is eleven years old. He has got short dark hair and green eyes. He can swim very well, but he can't ride a bike. His sister Emma is nine. She has got long curly hair. Emma can ride a horse. Jack always gets up at half past seven. He has breakfast with his family and then he goes to school. In Jack's bedroom there is a big desk next to the window. His guitar is under the bed. On Saturday Jack plays football with his friends. Emma doesn't like football. She likes listening to music. They have got a dog. His name is Rex. Rex is big and very friendly.
+```
+
+Ключи к вопросам блока 7: eleven · long curly hair · swim · half past seven ·
+under the bed · listening to music.
+
+Старая запись `gg1_ft_test_b6.mp3` из бакета **не удалена**, на неё просто
+больше нет ссылки. В блоке 6 (`text`, «LISTENING Part 3») стоит пустой `audio`,
+`audio_tts` намеренно не ставили.
