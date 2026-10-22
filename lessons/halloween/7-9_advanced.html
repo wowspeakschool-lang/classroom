@@ -820,8 +820,7 @@ function spotLoop(ts){
   const o=$("spotlight-screen").getBoundingClientRect();
   spot.r=Math.max(95,Math.min(150,o.width*0.085));
   const now=performance.now();
-  if(!spot.paused&&now>spot.manualUntil&&now>spot.wanderAt){ // wander slowly to a new random place
-    spot.tx=o.width*(0.1+Math.random()*0.8);spot.ty=o.height*(0.28+Math.random()*0.5);spot.wanderAt=now+2600;}
+  // фонарь сам не бродит: стоит, где его оставили (решение Анны от 22.10.2026)
   const k=1-Math.pow(now<spot.manualUntil?0.8:0.965,dt/16);spot.x+=(spot.tx-spot.x)*k;spot.y+=(spot.ty-spot.y)*k;
   const dark=$("spotDark");dark.style.setProperty("--x",spot.x+"px");dark.style.setProperty("--y",spot.y+"px");dark.style.setProperty("--r",spot.r+"px");
   const ring=$("spotRing");ring.style.left=spot.x+"px";ring.style.top=spot.y+"px";ring.style.width=ring.style.height=(spot.r*2)+"px";
