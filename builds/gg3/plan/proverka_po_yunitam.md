@@ -131,7 +131,9 @@ Final Test.
 
 ## Названия юнитов
 
-В базе юниты GG3 называются просто `Unit 1` … `Unit 8`. Официальные названия:
-Get started!, Life at home, Shopping, Going on holiday, Useful things, Health
-matters, Cooking and eating, Where I live, A happy life. По соглашению из
-`CLAUDE.md` («Unit 5 · Clothes») их стоит дописать — вопрос к Анне.
+Темы дописаны в названия юнитов 22.10.2026 по соглашению из `CLAUDE.md`
+(«Unit 5 · Clothes» — номер, ` · `, тема): `Unit 0 · Get started!`,
+`Unit 1 · Life at home`, `Unit 2 · Shopping`, `Unit 3 · Going on holiday`,
+`Unit 4 · Useful things`, `Unit 5 · Health matters`, `Unit 6 · Cooking and eating`,
+`Unit 7 · Where I live`, `Unit 8 · A happy life`. Названия уроков остались
+`Unit N Test`, юнит `Final Test` не трогали.
