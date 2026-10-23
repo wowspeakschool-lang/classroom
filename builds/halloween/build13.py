@@ -22,7 +22,7 @@ def plan(beg):
      ('<b>Lead-in.</b> Улица в ночь Хэллоуина. Вопрос <b>What\'s the topic?</b> — ученик угадывает, Next открывает ответ «Halloween». Дальше учитель <b>сам задаёт 1–2 вопроса</b> (на экране их нет).',
       B('"What\'s the topic?" "Do you like Halloween?" "Do you carve a pumpkin?"', '"What\'s the topic?" "What symbols of Halloween do you know?" "Do people celebrate Halloween in your country?"'),
       B('"Halloween!" "Yes, I do. / No, I don\'t."', '"Halloween!" "Pumpkins, ghosts, bats, witches…" "Not really, but some young people have parties."')),
-     ('<b>Слова (' + B('6', '8') + ').</b> Сначала картинка: ученик пробует назвать, нажатие показывает слово и <b>произносит</b>. Next открывает следующую.',
+     ('<b>Слова (' + B('6', '8') + ').</b> Сначала картинка: ученик пробует назвать, нажатие показывает слово, ученик <b>произносит его сам</b> (озвучки в уроке нет). Next открывает следующую.',
       '"What\'s this?" "Repeat!"', B('"A pumpkin! A turnip! A bonfire…"', '"A lantern. The harvest…"')),
      ('<b>Zoom in (' + B('5', '6') + ' раундов).</b> Картинка сильно увеличена и медленно отдаляется. Ученик называет слово как можно раньше; нажатие на картинку / Next — слово появляется на экране (без озвучки: произносит ученик). В конце — <b>половинка ключа</b>.',
       '"What is it? Guess!" "Quick!"', '"Is it a candle?" "It\'s a bonfire!"'),
