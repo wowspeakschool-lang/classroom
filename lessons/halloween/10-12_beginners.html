@@ -151,6 +151,8 @@ body{font-family:var(--round);overflow:hidden;user-select:none;background:#120a2
 
 /* spot diff */
 .sdrow{display:flex;gap:14px;z-index:5;margin-top:44px;margin-left:70px}
+.sdleft{position:absolute;top:calc(24px + clamp(24px,3.4vw,44px) + 18px);left:50%;transform:translateX(-50%);z-index:20;font:700 clamp(18px,1.8vw,24px) var(--disp);color:#2a1508;background:linear-gradient(180deg,#ffd36a,#e8b94a);border-radius:999px;padding:6px 22px;box-shadow:0 4px 12px rgba(0,0,0,.45);white-space:nowrap}
+.sdleft.done{background:linear-gradient(180deg,#6fe06f,#3a9c3a);color:#fff}
 .sdw{position:relative;width:min(44vw,76vh);aspect-ratio:16/9;border:5px solid #fff;border-radius:14px;overflow:hidden;cursor:crosshair;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 .sdw img{width:100%;height:100%;display:block;pointer-events:none}
 .sdword{position:absolute;transform:translateX(-50%);background:#fffaf0;color:var(--ink);font:700 clamp(13px,1.2vw,18px) var(--disp);padding:1px 8px;border-radius:8px;white-space:nowrap;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.5);animation:popx .35s}
@@ -377,7 +379,7 @@ body{font-family:var(--round);overflow:hidden;user-select:none;background:#120a2
 
   <div class="screen bgimg" id="steps"><div class="title">Follow the footprints 👣</div><div class="steprow"><div class="mapbox" id="mapbox"></div><div style="display:flex;flex-direction:column;gap:16px;align-items:center"><div class="instr" id="instr"></div><div class="arrows" id="arrows"></div></div></div></div>
 
-  <div class="screen bgimg" id="diff"><div class="title">Before and after 🔍</div><div class="sdrow"><div class="sdw" id="sdA"><img id="sdAi"><span class="sdlbl">BEFORE</span></div><div class="sdw" id="sdB"><img id="sdBi"><span class="sdlbl">AFTER</span></div></div></div>
+  <div class="screen bgimg" id="diff"><div class="title">Before and after 🔍</div><div class="sdleft" id="sdLeft"></div><div class="sdrow"><div class="sdw" id="sdA"><img id="sdAi"><span class="sdlbl">BEFORE</span></div><div class="sdw" id="sdB"><img id="sdBi"><span class="sdlbl">AFTER</span></div></div></div>
 
   <div class="screen bgimg" id="tf"><div class="title">True or false? ✅❌</div><div class="tf"><div class="st" id="tfSt"></div><div class="bt"><button class="T" id="tfT">TRUE</button><button class="F" id="tfF">FALSE</button></div><div class="tftry" id="tfTry"></div></div></div>
 
@@ -643,15 +645,17 @@ const ZONES=[{n:"pumpkin",z:[43,33,55,50]},{n:"glasses",z:[0,60,14,70]},{n:"jar"
 const DZ=ZONES;
 let SD=null;
 function setupDiff(){SD=new Set();$("sdAi").src=img("square_before");$("sdBi").src=img("square_after");
-  document.querySelectorAll(".sdmark").forEach(e=>e.remove());setDots(DZ.length,0);show("diff");
+  document.querySelectorAll(".sdmark").forEach(e=>e.remove());setDots(DZ.length,0);sdLeft();show("diff");
   roundNext=()=>{const i=DZ.findIndex((z,i)=>!SD.has(i));if(i>=0)sdFound(i);};}
 function sdClick(e,w){const r=w.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*100,y=(e.clientY-r.top)/r.height*100;
   const i=DZ.findIndex(z=>x>z.z[0]-2&&x<z.z[2]+2&&y>z.z[1]-3&&y<z.z[3]+3);
   if(i>=0&&!SD.has(i))sdFound(i);else if(i<0)sWrong();}
 function sdFound(i){SD.add(i);sRight();const b=DZ[i].z;
   ["sdA","sdB"].forEach(id=>{const m=document.createElement("div");m.className="sdmark";m.style.left=b[0]+"%";m.style.top=b[1]+"%";m.style.width=(b[2]-b[0])+"%";m.style.height=(b[3]-b[1])+"%";$(id).appendChild(m);
-    if(BEG&&id==="sdB"){const w=document.createElement("div");w.className="sdword";w.textContent=ZW[DZ[i].n];w.style.left=(b[0]+b[2])/2+"%";w.style.top=Math.min(b[3]+1,90)+"%";$(id).appendChild(w);}});
-  setDots(DZ.length,SD.size);if(SD.size>=DZ.length)later(()=>giveClue(4),800);}
+    if(BEG&&id==="sdB"){const w=document.createElement("div");w.className="sdword";w.textContent=ZW[DZ[i].n];w.style.left=Math.min(Math.max((b[0]+b[2])/2,10),90)+"%";w.style.top=Math.min(b[3]+1,90)+"%";$(id).appendChild(w);}});
+  setDots(DZ.length,SD.size);sdLeft();if(SD.size>=DZ.length)later(()=>giveClue(4),800);}
+/* сколько отличий ещё найти — видно сразу (решение Анны от 23.10.2026) */
+function sdLeft(){const n=DZ.length-SD.size,e=$("sdLeft");e.classList.toggle("done",n===0);e.textContent=n===0?"All "+DZ.length+" differences found! ✓":"🔍 "+n+(n===1?" difference":" differences")+" left";}
 $("sdA").onclick=e=>sdClick(e,$("sdA"));$("sdB").onclick=e=>sdClick(e,$("sdB"));
 
 /* ---------- 8 true / false → elixir ---------- */
