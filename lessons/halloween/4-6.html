@@ -664,6 +664,7 @@ function nextCircleRound(){
 const spot={raf:0,x:0,y:0,tx:0,ty:0,r:120,manualUntil:0,wanderAt:0,paused:false,target:null,last:0,done:0,total:4,order:[]};
 const SPOT_DECOYS=["pumpkin_big","candy"];
 function setupSpotlight(st){
+  $("spotlight-screen").style.background="url("+img(roomKey(roomLevel))+") center/cover no-repeat";/* под фонарём — комната дракона, а не пустой фон (23.10.2026) */
   spot.done=0;spot.total=st.rounds||4;spot.order=shuffle(WORDS);
   showScreen("spotlight");
   const o=$("spotlight-screen").getBoundingClientRect();
