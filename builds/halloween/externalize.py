@@ -56,6 +56,9 @@ def run(src, grp, dst):
     # слова по клику — записанным голосом Piper (тем же, что в домашках), а не голосом браузера:
     # он на каждом устройстве свой (решение Анны от 21.10.2026). Нет записи — молчим.
     SAY='function say(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}'
+    # 23.10.2026: озвучку слов в уроках 10–12 и 13+ убрали совсем (решение Анны) — say() молчит
+    if SAY in t and os.environ.get('HW_VOICE')!='1':
+        t=t.replace(SAY,'function say(t){}')
     if SAY in t:
         V=json.load(open(os.path.join(REPO,'builds/halloween/voice.json')))
         # слов, которых нет в домашках, — синтез тем же Piper en_US-amy-medium здесь (builds/halloween/voice_gen.sh),
@@ -68,7 +71,7 @@ def run(src, grp, dst):
             'Object.keys(VOICE).forEach(k=>{try{const a=new Audio();a.preload="auto";a.src=VOICE[k];VA[k]=a;}catch(e){}});'
             'function say(t){const k=String(t).toLowerCase().trim().replace(/^(a|an|the) /,"");const a=VA[k];if(!a)return;'
             'try{if(sayA&&sayA!==a)sayA.pause();a.currentTime=0;sayA=a;a.play().catch(()=>{});}catch(e){}}')
-    assert 'speechSynthesis' not in t, src
+    assert 'speechSynthesis' not in t and 'const VOICE=' not in t, src
     # план урока можно скачать: Word и PDF лежат рядом, в lessons/halloween/plans/ (решение Анны от 21.10.2026)
     m=re.search(r'const PLAN_HTML=("(?:[^"\\]|\\.)*");',t)
     if m:
