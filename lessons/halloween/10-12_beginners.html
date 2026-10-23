@@ -151,8 +151,9 @@ body{font-family:var(--round);overflow:hidden;user-select:none;background:#120a2
 
 /* spot diff */
 .sdrow{display:flex;gap:14px;z-index:5;margin-top:44px;margin-left:70px}
-.sdleft{position:absolute;top:calc(24px + clamp(24px,3.4vw,44px) + 18px);left:50%;transform:translateX(-50%);z-index:20;font:700 clamp(18px,1.8vw,24px) var(--disp);color:#2a1508;background:linear-gradient(180deg,#ffd36a,#e8b94a);border-radius:999px;padding:6px 22px;box-shadow:0 4px 12px rgba(0,0,0,.45);white-space:nowrap}
-.sdleft.done{background:linear-gradient(180deg,#6fe06f,#3a9c3a);color:#fff}
+.sdleft{position:absolute;top:calc(24px + clamp(24px,3.4vw,44px) + 22px);left:50%;transform:translateX(-50%);z-index:20;display:flex;gap:10px}
+.sdleft span{width:30px;height:30px;border-radius:50%;border:3px solid #ffd36a;box-sizing:border-box;background:rgba(20,10,30,.55);transition:background .3s,box-shadow .3s}
+.sdleft span.on{background:#ffd36a;box-shadow:0 0 12px #ffd36a}
 .sdw{position:relative;width:min(44vw,76vh);aspect-ratio:16/9;border:5px solid #fff;border-radius:14px;overflow:hidden;cursor:crosshair;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 .sdw img{width:100%;height:100%;display:block;pointer-events:none}
 .sdword{position:absolute;transform:translateX(-50%);background:#fffaf0;color:var(--ink);font:700 clamp(13px,1.2vw,18px) var(--disp);padding:1px 8px;border-radius:8px;white-space:nowrap;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.5);animation:popx .35s}
@@ -655,7 +656,7 @@ function sdFound(i){SD.add(i);sRight();const b=DZ[i].z;
     if(BEG&&id==="sdB"){const w=document.createElement("div");w.className="sdword";w.textContent=ZW[DZ[i].n];w.style.left=Math.min(Math.max((b[0]+b[2])/2,10),90)+"%";w.style.top=Math.min(b[3]+1,90)+"%";$(id).appendChild(w);}});
   setDots(DZ.length,SD.size);sdLeft();if(SD.size>=DZ.length)later(()=>giveClue(4),800);}
 /* сколько отличий ещё найти — видно сразу (решение Анны от 23.10.2026) */
-function sdLeft(){const n=DZ.length-SD.size,e=$("sdLeft");e.classList.toggle("done",n===0);e.textContent=n===0?"All "+DZ.length+" differences found! ✓":"🔍 "+n+(n===1?" difference":" differences")+" left";}
+function sdLeft(){$("sdLeft").innerHTML=DZ.map((z,i)=>'<span'+(i<SD.size?' class="on"':"")+'></span>').join("");}
 $("sdA").onclick=e=>sdClick(e,$("sdA"));$("sdB").onclick=e=>sdClick(e,$("sdB"));
 
 /* ---------- 8 true / false → elixir ---------- */
