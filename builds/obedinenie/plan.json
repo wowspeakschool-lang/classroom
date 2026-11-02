@@ -1,0 +1,816 @@
+[
+ {
+  "course": "gg1",
+  "unit": 1,
+  "lesson_title": "Homework 5",
+  "text_block_no": 2,
+  "text_block_id": "ffbefe89-47e1-4c8d-b008-2a562d1ad4ce",
+  "lesson_id": "dc6dc1eb-c9d5-4b1a-9a69-a66f506ecefa",
+  "task_block_ids": [],
+  "new_titles": {},
+  "audio_url": "https://classroom.wowteach.ru/media/gg1/audio/gg1_u1_hw5_b2.mp3",
+  "snapshots": 0,
+  "keep": "в тексте — сами рассказы ребят, их надо читать"
+ },
+ {
+  "course": "gg1",
+  "unit": 1,
+  "lesson_title": "Homework 6",
+  "text_block_no": 2,
+  "text_block_id": "855e65ca-08a6-4e4d-9d5f-32bac22c361c",
+  "lesson_id": "141442fa-dc99-4ed0-bc09-0c5c9754aff4",
+  "task_block_ids": [
+   "1fcba56f-cd71-4387-b61c-422e49102861",
+   "ac010de8-0740-4f69-90aa-8e500d8c0811"
+  ],
+  "new_titles": {
+   "1fcba56f-cd71-4387-b61c-422e49102861": "Послушай, как Роб рассказывает о Викторе и кузине Мел, и скажи: верно или неверно",
+   "ac010de8-0740-4f69-90aa-8e500d8c0811": "Послушай ещё раз и впиши информацию в пропуски"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u1_hw6_b2.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 1,
+  "lesson_title": "Unit 1 Test",
+  "text_block_no": 15,
+  "text_block_id": "66d05574-8d9e-42d8-9b1f-a7107d744534",
+  "lesson_id": "685ab91c-e949-4592-b754-f0132d775375",
+  "task_block_ids": [],
+  "new_titles": {},
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u1_test_b14.mp3",
+  "snapshots": 0,
+  "keep": "в тексте картинка (Эмма в парке) — у задания «верно/неверно» своей картинки нет, она бы пропала"
+ },
+ {
+  "course": "gg1",
+  "unit": 2,
+  "lesson_title": "Homework 6",
+  "text_block_no": 3,
+  "text_block_id": "25fcefec-3045-4153-9f40-f059cadedc33",
+  "lesson_id": "fad3f15e-756a-4e1d-840a-2dea8def50a5",
+  "task_block_ids": [
+   "f2445db4-5c7f-423b-882d-bdac543b34de",
+   "6c54d003-79ff-4929-8486-21186207d858"
+  ],
+  "new_titles": {
+   "f2445db4-5c7f-423b-882d-bdac543b34de": "Послушай разговор Люка и Розы. Какие предметы они упоминают? Отметь все",
+   "6c54d003-79ff-4929-8486-21186207d858": "Послушай ещё раз и допиши предложения"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u2_hw6_b3.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 2,
+  "lesson_title": "Unit 2 Test",
+  "text_block_no": 15,
+  "text_block_id": "2c8e8cfe-5395-46bb-a9f6-aeafee6f889f",
+  "lesson_id": "ec79ff6a-669a-472f-9ee9-acfb46e9cfbc",
+  "task_block_ids": [
+   "a18ab296-bf66-46c2-b232-6be7131fb671"
+  ],
+  "new_titles": {
+   "a18ab296-bf66-46c2-b232-6be7131fb671": "LISTENING. Послушай, как Эмма показывает школьные вещи, и перетащи прилагательные в пропуски"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u2_test_b14.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 3,
+  "lesson_title": "Homework 6",
+  "text_block_no": 2,
+  "text_block_id": "f25415c0-09d2-4663-a73e-4862e2eb4af7",
+  "lesson_id": "f3fe8b5e-e96f-40c5-a745-9e28669044a3",
+  "task_block_ids": [
+   "f82eebd2-31f0-447a-aed9-1fd014ea41f4",
+   "37205e28-01f3-4a09-be95-c843e6a3516c"
+  ],
+  "new_titles": {
+   "f82eebd2-31f0-447a-aed9-1fd014ea41f4": "Послушай Дэнни о его новом доме. О чём рассказ? Выбери правильный ответ",
+   "37205e28-01f3-4a09-be95-c843e6a3516c": "Послушай ещё раз. Эти предложения неверные — впиши правильное слово"
+  },
+  "audio_url": "https://classroom.wowteach.ru/media/gg1/audio/gg1_u3_hw6_b2.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 3,
+  "lesson_title": "Unit 3 Test",
+  "text_block_no": 12,
+  "text_block_id": "20171b81-70cc-49d5-b387-dc0528408b57",
+  "lesson_id": "4f91cdd3-7c75-4cfa-a24d-3cb86cdfc972",
+  "task_block_ids": [
+   "c7c36406-9ae5-49de-ac9e-114fd8205038"
+  ],
+  "new_titles": {
+   "c7c36406-9ae5-49de-ac9e-114fd8205038": "LISTENING. Послушай 5 коротких описаний и соедини каждый номер с названием комнаты"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u3_test_b11.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 4,
+  "lesson_title": "Homework 6",
+  "text_block_no": 2,
+  "text_block_id": "3d8cf87b-2ad8-42cd-bf33-6515e1e4a552",
+  "lesson_id": "7923975f-d05a-4a7b-aedb-148760ed4f42",
+  "task_block_ids": [
+   "74be9d52-3f74-4276-acbb-5144a317ea16"
+  ],
+  "new_titles": {
+   "74be9d52-3f74-4276-acbb-5144a317ea16": "Послушай о Дарле (Darla) и заполни пропуски нужным словом"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u4_hw6_b2.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 4,
+  "lesson_title": "Unit 4 Test",
+  "text_block_no": 12,
+  "text_block_id": "dc08e821-38b3-4089-8fb2-a9a94d68e589",
+  "lesson_id": "2534353e-9ed2-48a5-995d-0a8daf0e1dcd",
+  "task_block_ids": [
+   "82780405-895a-48b8-aabb-5517ba6167e1"
+  ],
+  "new_titles": {
+   "82780405-895a-48b8-aabb-5517ba6167e1": "LISTENING. Послушай рассказ о младшей сестре Мие (Mia) и выбери правильный ответ"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u4_test_b11.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 5,
+  "lesson_title": "Homework 6",
+  "text_block_no": 3,
+  "text_block_id": "381befb6-511e-4262-b9cd-b7d72c4f3110",
+  "lesson_id": "7177dcd7-df37-4427-9278-13a78bcbf199",
+  "task_block_ids": [
+   "e9d3832c-a637-480e-9dc4-e7a32fe4aa0b",
+   "b1af5d62-deb8-4a2e-a9d9-ce012279cebf"
+  ],
+  "new_titles": {
+   "e9d3832c-a637-480e-9dc4-e7a32fe4aa0b": "Послушай рассказ о кружке и выбери правильный вариант ответа",
+   "b1af5d62-deb8-4a2e-a9d9-ce012279cebf": "Послушай ещё раз и выбери правильного мишку"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u5_hw6_b3.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 5,
+  "lesson_title": "Unit 5 Test",
+  "text_block_no": 11,
+  "text_block_id": "546d25aa-413f-4bd6-b979-b4593f290438",
+  "lesson_id": "08c69ee4-7d0d-43f5-8b15-8ccd810de3df",
+  "task_block_ids": [
+   "545f318d-6767-49d1-b7a7-9453933aa1b3"
+  ],
+  "new_titles": {
+   "545f318d-6767-49d1-b7a7-9453933aa1b3": "LISTENING. Послушай Джека о нём и сестре Лили и перетащи каждое умение в нужный столбик"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u5_test_b10.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 6,
+  "lesson_title": "Homework 6",
+  "text_block_no": 2,
+  "text_block_id": "d1abe05a-7617-4a22-a055-d2123f838594",
+  "lesson_id": "2813cf81-2328-4c68-b1e3-f592006f48db",
+  "task_block_ids": [
+   "ce86889e-59cf-4202-9de8-1a56ef9173dd",
+   "34faad7b-2bc8-45fb-8be1-66969980b286"
+  ],
+  "new_titles": {
+   "ce86889e-59cf-4202-9de8-1a56ef9173dd": "Послушай рассказ Энди о каникулах и заполни таблицу — в каждом пропуске одно слово",
+   "34faad7b-2bc8-45fb-8be1-66969980b286": "Послушай ещё раз и выбери правильный ответ. Сначала прочитай предложения"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u6_hw6_b2.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 6,
+  "lesson_title": "Unit 6 Test",
+  "text_block_no": 15,
+  "text_block_id": "69ec8130-6b03-41da-8a96-559f05a362a5",
+  "lesson_id": "5dbafdc6-c32f-4a91-aaad-abb343c22a36",
+  "task_block_ids": [
+   "40a5b09e-6dc8-4607-8c4d-8ea99bcd9946"
+  ],
+  "new_titles": {
+   "40a5b09e-6dc8-4607-8c4d-8ea99bcd9946": "LISTENING. Послушай рассказ Алекса о его обычной субботе: правда или неправда?"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u6_test_b14.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 7,
+  "lesson_title": "Homework 6",
+  "text_block_no": 2,
+  "text_block_id": "8b16f67a-ead0-428c-8ba5-d1487a737db5",
+  "lesson_id": "b62c3514-b467-4836-832f-19e688ff8a17",
+  "task_block_ids": [
+   "6f52e1de-aa83-4a8f-85d1-ba02615ef36d",
+   "613e7e90-7361-4a8a-a935-672d520a7a7c"
+  ],
+  "new_titles": {
+   "6f52e1de-aa83-4a8f-85d1-ba02615ef36d": "Послушай Эмму о её питомцах. Какое домашнее животное есть у Эммы?",
+   "613e7e90-7361-4a8a-a935-672d520a7a7c": "Послушай ещё раз и ответь на вопросы"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u7_hw6_b2.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 7,
+  "lesson_title": "Unit 7 Test",
+  "text_block_no": 15,
+  "text_block_id": "22b2846f-130a-4eba-a808-ff2955e78e30",
+  "lesson_id": "e81b9c6a-f72a-4bb8-a646-7fca8da36c7d",
+  "task_block_ids": [
+   "2878d389-f607-4d01-89e0-1e1fd3180425"
+  ],
+  "new_titles": {
+   "2878d389-f607-4d01-89e0-1e1fd3180425": "LISTENING. Послушай объявление в Лондонском зоопарке и перетащи пропущенные числа и слова"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u7_test_b14.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 8,
+  "lesson_title": "Homework 6",
+  "text_block_no": 3,
+  "text_block_id": "b80a44e6-cc82-49c7-b588-b482481f0735",
+  "lesson_id": "14dbe647-f4f3-4c54-b015-eb15318e687f",
+  "task_block_ids": [
+   "40c971a2-3a36-478b-addc-c70ee5788690"
+  ],
+  "new_titles": {
+   "40c971a2-3a36-478b-addc-c70ee5788690": "Послушай, как Том отвечает на вопросы о своём образе жизни, и соедини номера вопросов с темами"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_u8_hw6_b3.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 9,
+  "lesson_title": "Final Test",
+  "text_block_no": 2,
+  "text_block_id": "8cfed43b-ea3b-4e22-b830-fcd9cb304ba1",
+  "lesson_id": "e7ace143-b17e-4797-b28f-6d8a30b944e9",
+  "task_block_ids": [
+   "6abff15a-2550-4fbe-89db-6f37ca0c62e6"
+  ],
+  "new_titles": {
+   "6abff15a-2550-4fbe-89db-6f37ca0c62e6": "LISTENING Part 1. Послушай и расставь предметы по местам"
+  },
+  "audio_url": "https://classroom.wowteach.ru/media/gg1/audio/gg1_ft_test_b2.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 9,
+  "lesson_title": "Final Test",
+  "text_block_no": 4,
+  "text_block_id": "f0a8359d-3502-4566-8d98-fc5cddbe5d0a",
+  "lesson_id": "e7ace143-b17e-4797-b28f-6d8a30b944e9",
+  "task_block_ids": [
+   "d201f4b9-bc72-4f33-95ac-63597cb30f89"
+  ],
+  "new_titles": {
+   "d201f4b9-bc72-4f33-95ac-63597cb30f89": "LISTENING Part 2. Послушай и выбери верный ответ. Пример: What is the girl's name? — Lucy"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_ft_test_b4.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg1",
+  "unit": 9,
+  "lesson_title": "Final Test",
+  "text_block_no": 6,
+  "text_block_id": "4c2f8c81-e717-4dc1-8f22-dfb83e172aaf",
+  "lesson_id": "e7ace143-b17e-4797-b28f-6d8a30b944e9",
+  "task_block_ids": [
+   "257dfade-97ee-4016-81c2-c1912eea8fb4"
+  ],
+  "new_titles": {
+   "257dfade-97ee-4016-81c2-c1912eea8fb4": "LISTENING Part 3. Послушай рассказ о семье Браун и выбери правильный ответ"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg1_final_b7.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg2",
+  "unit": 2,
+  "lesson_title": "Homework 6",
+  "text_block_no": 2,
+  "text_block_id": "880c8001-d94e-46b5-8d52-8f815d6e6d8a",
+  "lesson_id": "52eaf7a4-b1a7-4a23-9f36-0b9e599a940f",
+  "task_block_ids": [],
+  "new_titles": {},
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg2%20%2B%20gg3/gg2_u2_hw6_b2.mp3",
+  "snapshots": 0,
+  "keep": "в тексте картинка (завтрак Пенни) — у викторины своей картинки нет, она бы пропала"
+ },
+ {
+  "course": "gg2",
+  "unit": 2,
+  "lesson_title": "Unit 2 Test",
+  "text_block_no": 12,
+  "text_block_id": "339652ca-4a33-4e54-8d7a-28b2a76d5477",
+  "lesson_id": "805cc97e-2cd7-4d10-b770-6f84d894a12a",
+  "task_block_ids": [
+   "233cf04b-c1c0-4f29-a14c-32bcaf87cb39"
+  ],
+  "new_titles": {
+   "233cf04b-c1c0-4f29-a14c-32bcaf87cb39": "LISTENING. Послушай рассказ Мии о покупках в супермаркете: True (верно) или False (неверно)?"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg2%20%2B%20gg3/gg2_u2_test_b12.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg2",
+  "unit": 3,
+  "lesson_title": "Homework 4",
+  "text_block_no": 6,
+  "text_block_id": "b711d755-3622-4788-ac6b-0c64b80cd17d",
+  "lesson_id": "9c298871-50b1-4392-b74a-e436e93e54a9",
+  "task_block_ids": [],
+  "new_titles": {},
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg2%20%2B%20gg3/gg2_u3_hw4_b6.mp3",
+  "snapshots": 0,
+  "keep": "в тексте — сам диалог для чтения; задания ниже про другой диалог (Нил, миссис Грин)"
+ },
+ {
+  "course": "gg2",
+  "unit": 3,
+  "lesson_title": "Homework 6",
+  "text_block_no": 2,
+  "text_block_id": "bdb6b14d-7a90-4cf1-8b06-bee8427705cb",
+  "lesson_id": "83a0074c-62b9-4ba7-9716-fede0dc09d26",
+  "task_block_ids": [
+   "22b8af04-6e18-4e82-bc1b-31e9e2458aa4",
+   "fa701666-ecd3-492c-bf86-4f396de538b8"
+  ],
+  "new_titles": {
+   "22b8af04-6e18-4e82-bc1b-31e9e2458aa4": "Послушай разговор Гарри и Лили и выбери любимый гаджет каждого",
+   "fa701666-ecd3-492c-bf86-4f396de538b8": "Послушай разговор Гарри и Лили и выбери любимый гаджет каждого"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg2%20%2B%20gg3/gg2_u3_hw6_b2.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg2",
+  "unit": 3,
+  "lesson_title": "Unit 3 Test",
+  "text_block_no": 12,
+  "text_block_id": "8242b168-6187-4903-aea7-5ce93f9a40b3",
+  "lesson_id": "93339dc2-9ebd-404b-9326-5a9a97e9a311",
+  "task_block_ids": [
+   "705e2982-5e27-4aa2-8111-6248ba0a2f0a"
+  ],
+  "new_titles": {
+   "705e2982-5e27-4aa2-8111-6248ba0a2f0a": "LISTENING. Послушай разговор Эммы с мамой: True (верно), False (неверно) или Not stated (не сказано)?"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg2%20%2B%20gg3/gg2_u3_test_b11.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg2",
+  "unit": 4,
+  "lesson_title": "Homework 6",
+  "text_block_no": 2,
+  "text_block_id": "2eb84e4b-8453-4a4b-aabc-f869d8087153",
+  "lesson_id": "f88cf616-d2dd-48a9-a486-0dc0d6909fbd",
+  "task_block_ids": [
+   "ebcbec43-e564-4efe-88a4-2f554fdef4eb",
+   "be3a2e9c-8cfd-431b-8d0c-c803a47dd192"
+  ],
+  "new_titles": {
+   "ebcbec43-e564-4efe-88a4-2f554fdef4eb": "Послушай, как ребята описывают друзей, и соедини друзей",
+   "be3a2e9c-8cfd-431b-8d0c-c803a47dd192": "Прочитай предложения и вставь пропущенные слова. Если трудно — послушай ещё раз"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg2%20%2B%20gg3/gg2_u4_hw6_b2.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg3",
+  "unit": 0,
+  "lesson_title": "Unit 0 Test",
+  "text_block_no": 19,
+  "text_block_id": "9793286d-f711-4ea8-8cd9-5766c1ae198e",
+  "lesson_id": "c78d7483-02fc-4da9-aab7-6777206ece34",
+  "task_block_ids": [
+   "c7d300fd-52c3-476f-93e1-a39ef13106e0"
+  ],
+  "new_titles": {
+   "c7d300fd-52c3-476f-93e1-a39ef13106e0": "LISTENING 🎧 Послушай рассказ про Эмму и выбери правильный ответ. Можно послушать два раза"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg2%20%2B%20gg3/gg3_u0_test_b17.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg3",
+  "unit": 1,
+  "lesson_title": "Unit 1 Test",
+  "text_block_no": 13,
+  "text_block_id": "781e55e9-bd4e-4f25-8451-20f9069a1137",
+  "lesson_id": "87f1ce1e-8300-43d2-82b0-594ff8099a0f",
+  "task_block_ids": [
+   "ee7dd40c-493d-4dc4-a945-dd1ac5233cc1"
+  ],
+  "new_titles": {
+   "ee7dd40c-493d-4dc4-a945-dd1ac5233cc1": "LISTENING 🎧 Послушай рассказ про Оливера и выбери правильный ответ. Можно послушать два раза"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg3_u1_test_b17.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg3",
+  "unit": 2,
+  "lesson_title": "Unit 2 Test",
+  "text_block_no": 13,
+  "text_block_id": "e7eff1e6-03d3-4899-bd6d-a50a99b12e3f",
+  "lesson_id": "ad6fefbc-b1f5-4acd-a6f7-d79cd15e6c88",
+  "task_block_ids": [
+   "b871b8b4-aca0-4301-98b8-4b92716615aa"
+  ],
+  "new_titles": {
+   "b871b8b4-aca0-4301-98b8-4b92716615aa": "LISTENING 🎧 Послушай рассказ про Зои и выбери правильный ответ. Можно послушать два раза"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg3_u2_test_b13.mp3",
+  "snapshots": 2,
+  "keep": false
+ },
+ {
+  "course": "gg3",
+  "unit": 3,
+  "lesson_title": "Unit 3 Test",
+  "text_block_no": 12,
+  "text_block_id": "726716b1-d522-4291-bb03-0c5e6903d92a",
+  "lesson_id": "58db3616-b9e6-4113-8f1a-d87ab4f7bff4",
+  "task_block_ids": [
+   "e9202c13-352c-4969-9607-ccc9beef56ec"
+  ],
+  "new_titles": {
+   "e9202c13-352c-4969-9607-ccc9beef56ec": "LISTENING 🎧 Послушай рассказ про Дэниела и выбери правильный ответ. Можно послушать два раза"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg3_u3_test_b12.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg3",
+  "unit": 4,
+  "lesson_title": "Unit 4 Test",
+  "text_block_no": 13,
+  "text_block_id": "7ba4ab38-567b-4f2b-bedf-36ac3b300fcc",
+  "lesson_id": "2763c9bf-4b1a-4bff-830c-6f5da5c98e2d",
+  "task_block_ids": [
+   "92344348-a37f-4565-9cfe-a54bbcc04499"
+  ],
+  "new_titles": {
+   "92344348-a37f-4565-9cfe-a54bbcc04499": "LISTENING 🎧 Послушай рассказ про Нину и выбери правильный ответ. Можно послушать два раза"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg3_u4_test_b13.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg3",
+  "unit": 5,
+  "lesson_title": "Unit 5 Test",
+  "text_block_no": 13,
+  "text_block_id": "a34c4b25-a91d-4727-b38b-549ae8ab8f9c",
+  "lesson_id": "a941b58c-a7df-4877-aa62-41bbe488ea2c",
+  "task_block_ids": [
+   "0f9f1b52-fd16-4b4d-aebc-fd4fafa2a9ac"
+  ],
+  "new_titles": {
+   "0f9f1b52-fd16-4b4d-aebc-fd4fafa2a9ac": "LISTENING 🎧 Послушай рассказ про Макса и выбери правильный ответ. Можно послушать два раза"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg3_u5_test_b13.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg3",
+  "unit": 6,
+  "lesson_title": "Unit 6 Test",
+  "text_block_no": 13,
+  "text_block_id": "366c2bcd-a23f-4ea7-9bd7-85ded0819e06",
+  "lesson_id": "e6eeecd4-070f-4818-9cfb-cdc837c7361c",
+  "task_block_ids": [
+   "a43b2278-2f5b-404a-8ad7-242e5a8a97a5"
+  ],
+  "new_titles": {
+   "a43b2278-2f5b-404a-8ad7-242e5a8a97a5": "LISTENING 🎧 Послушай рассказ про Феликса и выбери правильный ответ. Можно послушать два раза"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg3_u6_test_b13.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg3",
+  "unit": 7,
+  "lesson_title": "Unit 7 Test",
+  "text_block_no": 14,
+  "text_block_id": "dbeeb8ce-b490-4500-ba9e-3892dbaae881",
+  "lesson_id": "d72b1e55-b713-4966-9f8d-4fc505021d7a",
+  "task_block_ids": [
+   "e2b1c593-57b9-425f-8023-f4a958960943"
+  ],
+  "new_titles": {
+   "e2b1c593-57b9-425f-8023-f4a958960943": "LISTENING 🎧 Послушай рассказ про Руби и выбери правильный ответ. Можно послушать два раза"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg3_u7_test_b14.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "gg3",
+  "unit": 8,
+  "lesson_title": "Unit 8 Test",
+  "text_block_no": 13,
+  "text_block_id": "ad49b7d0-de42-4ae4-9c89-15ec5c480f17",
+  "lesson_id": "e77318f0-9a9f-4c41-a86a-b7df375ec266",
+  "task_block_ids": [
+   "4f6f73a9-9ea9-4197-9dac-51e3dff213dd"
+  ],
+  "new_titles": {
+   "4f6f73a9-9ea9-4197-9dac-51e3dff213dd": "LISTENING 🎧 Послушай рассказ про Элли и выбери правильный ответ. Можно послушать два раза"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/gg1/gg3_u8_test_b13.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "sm1",
+  "unit": 1,
+  "lesson_title": "Homework 1",
+  "text_block_no": 17,
+  "text_block_id": "5856394b-dd1d-45ab-80d2-ef485c9b4296",
+  "lesson_id": "ea3aaa0b-76af-494b-968a-19632ec6c483",
+  "task_block_ids": [
+   "8ea3f29b-2440-492f-99b8-c57abbb9e8f9"
+  ],
+  "new_titles": {
+   "8ea3f29b-2440-492f-99b8-c57abbb9e8f9": "Выбери цвет, которого не хватает, и шёпотом скажи всё предложение, как в аудио-примере"
+  },
+  "audio_url": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1791396586630_tts_1791396586630.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "sm1",
+  "unit": 1,
+  "lesson_title": "Homework 5",
+  "text_block_no": 2,
+  "text_block_id": "7cdd8acf-36ee-4c3b-8de4-9bf94cca2a6b",
+  "lesson_id": "ed2fb4e6-848e-4f02-8af0-bda2295c9f05",
+  "task_block_ids": [
+   "f3983f5e-f14d-4315-b05c-4c86e61d848e"
+  ],
+  "new_titles": {
+   "f3983f5e-f14d-4315-b05c-4c86e61d848e": "Послушай и узнай, какой номер у какого предмета: нажми кружок на картинке, потом слово"
+  },
+  "audio_url": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1791457837047_tts_1791457837047.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "sm1",
+  "unit": 3,
+  "lesson_title": "Homework 5",
+  "text_block_no": 3,
+  "text_block_id": "a48f98be-de7c-4ede-ab8e-2a4c6d2ca770",
+  "lesson_id": "e1751bdd-951a-4b47-bbe7-a2855838c42d",
+  "task_block_ids": [
+   "e811a444-e108-46ac-a373-765fed7a41f7"
+  ],
+  "new_titles": {
+   "e811a444-e108-46ac-a373-765fed7a41f7": "Послушай и расставь зверюшек по местам. Ослик уже на своём месте — under the tree"
+  },
+  "audio_url": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1791399253624_tts_1791399253624.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "sm1",
+  "unit": 4,
+  "lesson_title": "Homework 4",
+  "text_block_no": 4,
+  "text_block_id": "7d466c9f-4068-40cb-b298-435e63a58611",
+  "lesson_id": "d9c638fc-2298-4987-9d7c-c6a966e1905b",
+  "task_block_ids": [],
+  "new_titles": {},
+  "audio_url": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1793088756161_SM2ed_Student_s_Book_L1_Track_57.mp3",
+  "snapshots": 0,
+  "keep": "в тексте картинка к истории — у викторины своей картинки нет, она бы пропала"
+ },
+ {
+  "course": "sm1",
+  "unit": 4,
+  "lesson_title": "Homework 5",
+  "text_block_no": 13,
+  "text_block_id": "beb2c701-c935-4930-bfcf-3c04cfd50ed1",
+  "lesson_id": "0fcc69fc-2b29-4598-888d-85cd9462b171",
+  "task_block_ids": [],
+  "new_titles": {},
+  "audio_url": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1792619791611_tts_1792619791611.mp3",
+  "snapshots": 0,
+  "keep": "в тексте — описания корзинок, их надо читать (и задание «нарисуй»)"
+ },
+ {
+  "course": "sm1",
+  "unit": 5,
+  "lesson_title": "Homework 2",
+  "text_block_no": 11,
+  "text_block_id": "08d7a1f3-d919-4918-a6e2-1e935c50f99b",
+  "lesson_id": "9068f8af-8b75-457f-9435-a148c545b41d",
+  "task_block_ids": [
+   "27ab7a0d-d398-4dfe-810c-9961312aa486"
+  ],
+  "new_titles": {
+   "27ab7a0d-d398-4dfe-810c-9961312aa486": "Послушай, что Сьюзи делает в разные дни недели. Правда это или нет?"
+  },
+  "audio_url": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1791457610168_tts_1791457610168.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "sm1",
+  "unit": 7,
+  "lesson_title": "Homework 3",
+  "text_block_no": 9,
+  "text_block_id": "8c7b4e2c-3492-435e-b968-61c5ae3ed534",
+  "lesson_id": "640772e4-5270-4813-af66-1f7e5def1add",
+  "task_block_ids": [
+   "ff1380c2-67ee-4b54-942d-902faa10a3b4"
+  ],
+  "new_titles": {
+   "ff1380c2-67ee-4b54-942d-902faa10a3b4": "Послушай и соедини имя с одеждой: где чья одежда?"
+  },
+  "audio_url": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1792619575078_tts_1792619575078.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "sm1",
+  "unit": 7,
+  "lesson_title": "Homework 4",
+  "text_block_no": 3,
+  "text_block_id": "20a84dbd-9d37-41e7-8b72-3a2547da4a50",
+  "lesson_id": "17a18c98-8aa0-48bc-97ec-ed69bbabf928",
+  "task_block_ids": [],
+  "new_titles": {},
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm1/sm1_u7_hw4_b3.mp3",
+  "snapshots": 0,
+  "keep": "в тексте обложка истории и «угадай по картинке» — картинка бы пропала"
+ },
+ {
+  "course": "sm1",
+  "unit": 7,
+  "lesson_title": "Homework 6",
+  "text_block_no": 2,
+  "text_block_id": "0bffc63e-dfba-4012-b599-3bb75fc7eaed",
+  "lesson_id": "53caf30e-8430-4896-a58d-b33e936e3ceb",
+  "task_block_ids": [],
+  "new_titles": {},
+  "audio_url": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1791401010821_tts_1791401010820.mp3",
+  "snapshots": 0,
+  "keep": "это повторение слов с картинками, а не инструкция к заданию"
+ },
+ {
+  "course": "sm2",
+  "unit": 3,
+  "lesson_title": "Homework 5",
+  "text_block_no": 4,
+  "text_block_id": "1ba8204e-4c35-4816-a0b5-31c977f126e1",
+  "lesson_id": "904813dc-51e2-4dcf-b5be-5157b0ec7ff0",
+  "task_block_ids": [],
+  "new_titles": {},
+  "audio_url": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1791484378270_tts_1791484378270.mp3",
+  "snapshots": 0,
+  "keep": "в тексте — слова Грейс, их надо читать, и картинка"
+ },
+ {
+  "course": "sm2",
+  "unit": 4,
+  "lesson_title": "Homework 4",
+  "text_block_no": 3,
+  "text_block_id": "5f72e39c-5401-4fb7-ac27-240dd96a7a20",
+  "lesson_id": "2105be4b-fb53-4d82-8915-27f24dfa7037",
+  "task_block_ids": [],
+  "new_titles": {},
+  "audio_url": "https://api.wowteach.ru/storage/v1/object/public/classroom-media/uploads/1791459006986_tts_1791459006986.mp3",
+  "snapshots": 0,
+  "keep": "в тексте картинка к истории и «угадай по картинке» — она бы пропала"
+ },
+ {
+  "course": "sm2",
+  "unit": 9,
+  "lesson_title": "Homework 4",
+  "text_block_no": 3,
+  "text_block_id": "e8143442-d48e-4200-8682-f79378ebfd8c",
+  "lesson_id": "ea878672-fc97-49bb-bd19-f273b33d5e2d",
+  "task_block_ids": [],
+  "new_titles": {},
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm2/u9/sm2_u9_hw4_b4.mp3",
+  "snapshots": 0,
+  "keep": "в тексте — страницы истории, их читают вместе с записью"
+ },
+ {
+  "course": "sm3",
+  "unit": 0,
+  "lesson_title": "Test",
+  "text_block_no": 16,
+  "text_block_id": "281535a0-7cee-4fb0-b17d-e951a0a694a6",
+  "lesson_id": "3fee5793-968e-4196-b878-65eab514da46",
+  "task_block_ids": [
+   "608acaff-9a70-4c8b-b2a2-308292492d4b"
+  ],
+  "new_titles": {
+   "608acaff-9a70-4c8b-b2a2-308292492d4b": "LISTENING 🎧 Послушай рассказ про Пенни и выбери правильный ответ. Можно послушать два раза"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm3/sm3_u0_test_b16.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "sm3",
+  "unit": 1,
+  "lesson_title": "Homework 5",
+  "text_block_no": 2,
+  "text_block_id": "514f4744-7934-4e7f-8914-ca5375082c9a",
+  "lesson_id": "c1504c6f-93ba-4a86-a576-0ae751f73eac",
+  "task_block_ids": [],
+  "new_titles": {},
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm3/sm3_u1_hw5_b2.mp3",
+  "snapshots": 0,
+  "keep": "в тексте — страницы истории, их читают вместе с записью"
+ },
+ {
+  "course": "sm3",
+  "unit": 2,
+  "lesson_title": "Homework 5",
+  "text_block_no": 2,
+  "text_block_id": "fbe254b5-5747-4794-b845-d3f534da7346",
+  "lesson_id": "1bc8cead-4629-4d42-aa20-e7e6015504a2",
+  "task_block_ids": [
+   "0376eb5c-1ff8-446f-86ef-aa91337bc8b0"
+  ],
+  "new_titles": {
+   "0376eb5c-1ff8-446f-86ef-aa91337bc8b0": "Послушай два диалога (Ким и Дэниэль, потом Том и Мэри) и впиши пропущенные слова"
+  },
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm3/sm3_u2_hw5_b2_v2.mp3",
+  "snapshots": 0,
+  "keep": false
+ },
+ {
+  "course": "sm3",
+  "unit": 2,
+  "lesson_title": "Homework 5",
+  "text_block_no": 4,
+  "text_block_id": "827de31d-0716-4716-a9a2-2e417689baa4",
+  "lesson_id": "1bc8cead-4629-4d42-aa20-e7e6015504a2",
+  "task_block_ids": [],
+  "new_titles": {},
+  "audio_url": "https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm3/sm3_u2_hw5_b4_v2.mp3",
+  "snapshots": 0,
+  "keep": "запись — образец к игре (следующее говорение), а у вопросов викторины свой звук: было бы два источника"
+ }
+]
