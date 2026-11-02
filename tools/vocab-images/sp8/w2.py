@@ -1,6 +1,6 @@
 """Spotlight 8, Module 2: Food & Shopping — сцены картинок."""
-NOTE = {'prescription': 'DOC', 'coupon': 'DOC', 'chart': 'CHART', 'logo': 'BRAND', 'army': 'SAFE',
-        'make a cheque out to sb': 'DOC', 'drop sb a line': 'DOC', 'main body': 'DOC', 'send sth first class': 'DOC',
+NOTE = {'make a cheque out': 'DOC', 'prescription': 'DOC', 'coupon': 'DOC', 'chart': 'CHART', 'logo': 'BRAND', 'army': 'SAFE',
+        'drop sb a line': 'DOC', 'main body': 'DOC', 'send sth first class': 'DOC',
         'profit': 'CHART', 'goods': 'BRAND', 'shopping mall': 'BRAND', 'charity shop': 'DOC', 'committee': 'DOC',
         'reduced': 'DOC', 'verdict': 'SAFE', 'cruelty': 'SAFE', 'misbehave': 'HEAD'}
 W = [
@@ -94,13 +94,13 @@ W = [
   ('trust', 'trust', 'Девочка падает назад с закрытыми глазами, друзья ловят её.'),
   ('well done', 'well done', 'Хорошо прожаренный стейк, внутри коричневый.'),
   ('be a bad egg', 'be a bad egg', 'Мультяшное яйцо-хитрец в маске крадётся среди других яиц.'),
-  ('be as nutty as a fruitcake', 'be as nutty as a fruitcake', 'Весёлый чудак в шапке с пропеллером танцует с кексом с орехами.'),
+  ('be as nutty as a fruitcake', 'nutty as a fruitcake', 'Весёлый чудак в шапке с пропеллером танцует с кексом с орехами.'),
   ('be full', 'be full', 'Мальчик откинулся на стуле, держится за живот, тарелка пустая.'),
   ('be in the soup', 'be in the soup', 'Мультяшный человечек барахтается в огромной тарелке супа.'),
   ('by mistake', 'by mistake', 'Мальчик насыпал соль в чай вместо сахара и морщится.'),
   ('mix up', 'mix up', 'Близнецы, учитель перепутал их имена, над ним знак вопроса.'),
   ('spill the beans', 'spill the beans', 'Девочка шепчет секрет, из её банки высыпаются фасолинки.'),
-  ('take everything with a pinch of salt', 'take with a pinch of salt', 'Мальчик с хитрой улыбкой слушает рыбака, показывающего огромную рыбу, в руке щепотка соли.'),
+  ('take everything with a pinch of salt', 'a pinch of salt', 'Мальчик с хитрой улыбкой слушает рыбака, показывающего огромную рыбу, в руке щепотка соли.'),
   ('turn out', 'turn out', 'Девочка открывает духовку: торт получился высоким и красивым, она удивлена.'),
   ('chatty', 'chatty', 'Болтливый попугай на жёрдочке, вокруг облачка слов без букв.'),
   ('china', 'china', 'Фарфоровый чайник и чашки с синим узором.'),
@@ -139,7 +139,7 @@ W = [
   ('transformation', 'transformation', 'Головастик превращается в лягушку — стадии по стрелкам.'),
   ('act out', 'act out', 'Дети разыгрывают сценку со сказкой в костюмах.'),
   ('go bad', 'go bad', 'Заплесневелый хлеб и мягкий банан с пятнами.'),
-  ('make a cheque out to sb', 'make a cheque out to sb', 'Рука выписывает бумажный чек ручкой, вместо букв волнистые линии.'),
+  ('make a cheque out to sb', 'make a cheque out', 'Рука выписывает бумажный чек ручкой, вместо букв волнистые линии.'),
   ('cancer', 'cancer', 'Учёная в белом халате смотрит в микроскоп в лаборатории.'),
   ('care', 'care', 'Медсестра заботливо укрывает пожилую женщину пледом.'),
   ('cause', 'cause', 'Мяч разбил окно: стрелка от мяча к разбитому стеклу.'),
