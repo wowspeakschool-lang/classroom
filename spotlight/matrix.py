@@ -164,6 +164,7 @@ def main():
         '«Пересечения»: одна и та же вещь в двух-трёх темах — где предлагаю держать урок, где поставить ссылку.',
         'Утверждение, отрицание и вопрос разделены там, где книга даёт их по отдельности; где справочник даёт их вместе (модальные глаголы старших классов) — одна подтема.',
         '«Кандидаты в вебинары»: по каждой группе — темы с красными подтемами (нет ни видео, ни материалов); отсортировано по классу, где тема появляется. Из них выбираем следующие вебинары.',
+        '«Расписание вебинаров»: все вебинары по месяцам — дата, группа, тема, папка с материалами, какие подтемы закрывает; для тем, созданных заново (красных), — что именно должно быть в теме.',
         '«Итоги»: сколько уроков сделать каждой группе, у скольких есть видео, сколько готово и опубликовано.',
         '',
         'Источник: грамматический справочник учебников (Use of English — оглавление и приложения). Подробный объём по строкам — в Spotlight_грамматика.xlsx.',
@@ -394,6 +395,29 @@ def main():
         row[0].fill = PatternFill('solid', fgColor=LIGHT[row[0].value])
         row[1].font = Font(bold=True)
     wsk.auto_filter.ref = wsk.dimensions
+
+    # --- Расписание вебинаров: все месяцы из data/schedule_*.json
+    wss = wb.create_sheet('Расписание вебинаров')
+    header(wss, ['Дата', 'Группа', 'Тема вебинара', 'Цвет темы при планировании', 'Папка с материалами', 'Подтемы, которые закрывает',
+                 'Что должно быть в теме (для красных — создаём заново)', 'Преподаватель'],
+           [11, 8, 36, 14, 34, 50, 80, 18])
+    wss.freeze_panes = 'D2'
+    srows = []
+    for fn in sorted(os.listdir(os.path.join(D, 'data'))):
+        if fn.startswith('schedule_') and fn.endswith('.json'):
+            srows += json.load(open(os.path.join(D, 'data', fn)))
+    CF = {'красный': NO, 'оранжевый': SOON, 'оранжевый + красный': SOON}
+    for x in sorted(srows, key=lambda x: (x['group'] != '7-9', x['date'])):
+        d = x['date']
+        wss.append([f'{d[8:10]}.{d[5:7]}.{d[:4]}', '7–9' if x['group'] == '7-9' else '10+', x['title'], x.get('color', ''),
+                    x.get('folder', ''), '\n'.join('• ' + t for t in x.get('subtopics', [])), x.get('spec', ''), x.get('teacher', '')])
+    body(wss)
+    for row in wss.iter_rows(min_row=2):
+        row[1].fill = PatternFill('solid', fgColor=LIGHT[row[1].value])
+        row[2].font = Font(bold=True)
+        if row[3].value in CF:
+            row[3].fill = CF[row[3].value]
+    wss.auto_filter.ref = wss.dimensions
 
     # --- Итоги
     ws3 = wb.create_sheet('Итоги')
