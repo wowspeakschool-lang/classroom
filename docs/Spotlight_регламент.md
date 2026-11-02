@@ -129,3 +129,15 @@ Spotlight 4 — Unit 2, 3, 5, 16, Goldilocks; Spotlight 5 — 2a, 4a, 6c, 7c, 9b
 супер-админ и автор своих колод двигают папки и колоды долгим нажатием — карточка
 поднимается, её можно перетащить на место соседней в том же уровне. Порядок
 хранится в `deck_folders."order"` (по убыванию) и `word_decks.sort_order` (10, 20, 30…).
+
+## Prepare: картинки и права (02.11.2026, Анна — «ок», «да»)
+
+- В Prepare подставлены готовые картинки из других колод к 70 словам, совпадающим по смыслу.
+  Не подставлены там, где смысл другой: pick up, charge, musical, perform, fit, nature, have, that.
+- Колоды грамматики остаются без картинок: Irregular verbs, Linking words, Adverbs of probability,
+  Expressions with at/in, Frequency adverbs, Reflexive pronouns, Number expressions,
+  Verbs + infinitive vs -ing, Conditional connectors.
+- Недостающие предметные слова Prepare рисуем после Spotlight 8, промптами одним сообщением.
+- Права в базе (миграция `trainer_library_write_only_editors`): колоды и папки тренажёра читают все,
+  а меняют (порядок, название, удаление) только super_admin, methodist, content и автор своей колоды —
+  так же, как это уже показывал интерфейс (`canEditDeck`). Слова колод пока открыты на запись всем вошедшим.
