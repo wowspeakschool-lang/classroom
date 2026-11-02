@@ -123,7 +123,7 @@ for c in C:
         was_t = was[:100] + ('…' if len(was) > 100 else '')
         old = ' / '.join(f'«{t[1]}»' for t in tasks)
         new = ' / '.join(f'«{t[2]}»' for t in tasks)
-        L.append(f'| Unit {un} · {lt} | {bl} | {was_t}<br>Задание: {old} | {new}<br>Запись — в задание{"я" if len(tasks) > 1 else ""} |')
+        L.append(f'| Unit {un} · {lt} | {bl} | {was_t}<br>Задание: {old} | {new}<br>Запись — {"в оба задания" if len(tasks) > 1 else "в задание"} |')
     L.append('')
 L += ['## Оставить как есть', '', '| курс · юнит · урок | блок | почему |', '|---|---|---|']
 for (c, un, lt, n, tid, lid, sn, was, au, tasks, keep) in keepl:
