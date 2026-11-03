@@ -2,3 +2,6 @@ node_modules/
 __pycache__/
 *.pyc
 builds/sm2/*sql/
+
+# Контактные листы вычитки картинок — рабочий материал, пересобирается из media/
+docs/vychitka/kartinki/*_listy/
