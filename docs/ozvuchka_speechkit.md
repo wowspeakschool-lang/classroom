@@ -321,3 +321,14 @@ Last summer Tessa went to Egypt with her family. They stayed in a small hotel ne
 ```
 
 Ключи: to Egypt · two weeks · No, she didn't. · five · fish and rice.
+
+## SM1 Final Test, задание 2 (добавлено 03.11.2026)
+
+Файл `sm1_final_b2.mp3` → бакет `classroom-media`, папка `sm1/`. Своей записи у
+задания «подпиши людей на картинке» не было никогда — стояла ссылка на запись
+соседнего задания 1. Текст и ключ «кто где на картинке» — `builds/sm1/ft_picnic_tekst.md`.
+
+> Look at the picnic. Mike is the boy with the kite. He is wearing a red T-shirt.
+> Paul has got a football. He is wearing a blue T-shirt. Clare is eating a
+> sandwich. She has got a yellow dress. Sam is drinking orange juice. He is
+> wearing a green T-shirt. Jane is reading a book. She has got a purple T-shirt.
