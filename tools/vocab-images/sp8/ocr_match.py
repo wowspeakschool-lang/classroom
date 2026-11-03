@@ -8,16 +8,18 @@ D = sys.argv[1]
 norm = lambda s: re.sub(r'[^a-z0-9 ]', '', s.lower().replace('’', "'").replace("'", '')).split()
 caps = [[' '.join(norm(c)) for _, c, _ in ws] for _, _, ws in S]
 cache_f = os.path.join(D, '_ocr.json')
-cache = json.load(open(cache_f)) if os.path.exists(cache_f) else {}
+cache = {}
 out = []
 for f in sorted(os.listdir(D)):
     if not f.endswith('.png'): continue
     if f not in cache:
-        im = Image.open(os.path.join(D, f)).convert('L')
-        im = im.resize((im.width * 2, im.height * 2))
-        tmp = '/tmp/claude-0/ocr_tmp.png'; im.save(tmp)
-        cache[f] = subprocess.run(['tesseract', tmp, '-', '--psm', '11'], capture_output=True, text=True).stdout
-        json.dump(cache, open(cache_f, 'w'))
+        t = os.path.join(D, '..', 'ocrtxt', f[:-4] + '.txt')
+        if os.path.exists(t): cache[f] = open(t).read()
+        else:
+            im = Image.open(os.path.join(D, f)).convert('L')
+            im = im.resize((im.width * 2, im.height * 2))
+            tmp = '/tmp/claude-0/ocr_tmp.png'; im.save(tmp)
+            cache[f] = subprocess.run(['tesseract', tmp, '-', '--psm', '11'], capture_output=True, text=True).stdout
     words = norm(cache[f]); text = ' '.join(words)
     def hit(c):
         if c in text: return 1
