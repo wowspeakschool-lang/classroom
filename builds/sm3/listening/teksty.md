@@ -26,21 +26,21 @@
 
 | юнит | тема | блок (как в редакторе) | файл | герой |
 |---|---|---|---|---|
-| 1 | School | 12 | `sm3_u1_test_b12.mp3` | Milo (Майло) |
-| 2 | Food | 13 | `sm3_u2_test_b13.mp3` | Freya (Фрея) |
-| 3 | At home | 13 | `sm3_u3_test_b13.mp3` | Hugo (Хьюго) |
-| 4 | In the town | 13 | `sm3_u4_test_b13.mp3` | Greta (Грета) |
-| 5 | Under the sea | 13 | `sm3_u5_test_b13.mp3` | Otis (Отис) |
-| 6 | Gadgets | 13 | `sm3_u6_test_b13.mp3` | Maisie (Мейзи) |
-| 7 | At the doctor’s | 12 | `sm3_u7_test_b12.mp3` | Rufus (Руфус) |
-| 8 | Countries | 12 | `sm3_u8_test_b12.mp3` | Tessa (Тесса) |
+| 1 | School | 14 | `sm3_u1_test_b14.mp3` | Milo (Майло) |
+| 2 | Food | 15 | `sm3_u2_test_b15.mp3` | Freya (Фрея) |
+| 3 | At home | 15 | `sm3_u3_test_b15.mp3` | Hugo (Хьюго) |
+| 4 | In the town | 15 | `sm3_u4_test_b15.mp3` | Greta (Грета) |
+| 5 | Under the sea | 15 | `sm3_u5_test_b15.mp3` | Otis (Отис) |
+| 6 | Gadgets | 15 | `sm3_u6_test_b15.mp3` | Maisie (Мейзи) |
+| 7 | At the doctor’s | 14 | `sm3_u7_test_b14.mp3` | Rufus (Руфус) |
+| 8 | Countries | 14 | `sm3_u8_test_b14.mp3` | Tessa (Тесса) |
 
 Ссылка, которую впишем в `audio` после записи:
 `https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/sm3/<имя файла>`
 
 ---
 
-## Unit 1 · School — Milo, блок 12, `sm3_u1_test_b12.mp3`
+## Unit 1 · School — Milo, блок 14, `sm3_u1_test_b14.mp3`
 
 Грамматика юнита: `Do/Does`, `like/love/hate + -ing`, `have to / has to`.
 Лексика: школьные предметы.
@@ -59,7 +59,7 @@
 
 ---
 
-## Unit 2 · Food — Freya, блок 13, `sm3_u2_test_b13.mp3`
+## Unit 2 · Food — Freya, блок 15, `sm3_u2_test_b15.mp3`
 
 Грамматика юнита: `there is / there are`, `some / any`, `have got`.
 Лексика: еда и напитки.
@@ -78,7 +78,7 @@
 
 ---
 
-## Unit 3 · At home — Hugo, блок 13, `sm3_u3_test_b13.mp3`
+## Unit 3 · At home — Hugo, блок 15, `sm3_u3_test_b15.mp3`
 
 Грамматика юнита: время (`half past`, `quarter past`), наречия частотности
 (`always · sometimes · never`), `like + -ing`, дни недели.
@@ -98,7 +98,7 @@
 
 ---
 
-## Unit 4 · In the town — Greta, блок 13, `sm3_u4_test_b13.mp3`
+## Unit 4 · In the town — Greta, блок 15, `sm3_u4_test_b15.mp3`
 
 Грамматика юнита: предлоги места (`near · opposite · above · below · between`),
 `is going to the … to …`.
@@ -118,7 +118,7 @@
 
 ---
 
-## Unit 5 · Under the sea — Otis, блок 13, `sm3_u5_test_b13.mp3`
+## Unit 5 · Under the sea — Otis, блок 15, `sm3_u5_test_b15.mp3`
 
 Грамматика юнита: `was / were`, `there was / there were`, `wasn’t / weren’t`.
 Лексика: море и морские животные. Других прошедших времён в юните ещё нет —
@@ -138,7 +138,7 @@
 
 ---
 
-## Unit 6 · Gadgets — Maisie, блок 13, `sm3_u6_test_b13.mp3`
+## Unit 6 · Gadgets — Maisie, блок 15, `sm3_u6_test_b15.mp3`
 
 Грамматика юнита: сравнительная степень (`bigger · faster · more expensive ·
 friendlier · stronger`).
@@ -158,7 +158,7 @@ friendlier · stronger`).
 
 ---
 
-## Unit 7 · At the doctor’s — Rufus, блок 12, `sm3_u7_test_b12.mp3`
+## Unit 7 · At the doctor’s — Rufus, блок 14, `sm3_u7_test_b14.mp3`
 
 Грамматика юнита: Past Simple (`woke · felt · watched · played · wrote ·
 listened · cooked · went · had · was/were`).
@@ -178,7 +178,7 @@ listened · cooked · went · had · was/were`).
 
 ---
 
-## Unit 8 · Countries — Tessa, блок 12, `sm3_u8_test_b12.mp3`
+## Unit 8 · Countries — Tessa, блок 14, `sm3_u8_test_b14.mp3`
 
 Грамматика юнита: Past Simple, вопросы и отрицания с `did / didn’t`
 (`Did you have fun…?`, `How long did she stay…?`, `send postcards`).
