@@ -80,3 +80,9 @@ NOTE = {'buy clothes': DOC, 'chat to friends': DOC, 'download music': DOC, 'down
         'importance': DOC, 'qualification': DOC, 'qualified': DOC, 'decade': HEAD, 'personality': HEAD,
         'version': DOC}
 S = [W[k:k + 8] for k in range(0, len(W), 8)]
+# Замены после проверки (03.11.2026): у fit открытый живот, у make the most of купальники и мальчик без футболки
+SKIP = {'fit', 'make the most of'}
+_R = {'fit': 'Подтянутая девушка в футболке с рукавами и длинных спортивных брюках бодро бежит по парку, живот закрыт',
+      'make the most of': 'Семья в тёплых куртках в последний день каникул в парке аттракционов успевает всё: карусель, сахарная вата, воздушные шарики'}
+REPL = [(t, c, _R[c], k) for t, c, d, k in W if c in _R]
+S.append(REPL)
