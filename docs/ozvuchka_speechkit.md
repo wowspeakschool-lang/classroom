@@ -222,3 +222,102 @@ under the bed · listening to music.
 Старая запись `gg1_ft_test_b6.mp3` из бакета **не удалена**, на неё просто
 больше нет ссылки. В блоке 6 (`text`, «LISTENING Part 3») стоит пустой `audio`,
 `audio_tts` намеренно не ставили.
+
+
+## SM3, тесты юнитов 1–8 — восемь рассказов
+
+Добавлено 03.11.2026. Решение Анны от 03.11.2026: «в тестах Super Minds 3
+юнитов 1–8 нужно добавить аудирование» — до этого аудирование в SM3 было только
+в тесте нулевого юнита и в финальном тесте. В каждый тест добавлен один блок
+`quiz` с пятью вопросами: пустой `audio`, **`audio_tts` намеренно нет**,
+`skill = 'listening'`.
+
+Все восемь — рассказ в третьем лице, без диалогов (голос SpeechKit один).
+Длина 76–85 слов, темп спокойный, пауза между предложениями около секунды.
+Текст на экране ученику не показывается — он только слушает; вопросы в том же
+блоке. Лексика и грамматика — строго того юнита, для которого тест.
+
+Файл кладётся в бакет `classroom-media`, папка `sm3/`, ссылка вписывается в
+поле `audio` блока. Тексты и ключи — `builds/sm3/listening/teksty.md`,
+SQL — `builds/sm3/listening/listening.sql`.
+
+Номера блоков — как в редакторе, на 03.11.2026 (блок стоит перед SPEAKING TASK).
+
+| юнит | блок | файл | герой |
+|---|---|---|---|
+| 1 · School | 12 | `sm3_u1_test_b12.mp3` | Milo |
+| 2 · Food | 13 | `sm3_u2_test_b13.mp3` | Freya |
+| 3 · At home | 13 | `sm3_u3_test_b13.mp3` | Hugo |
+| 4 · In the town | 13 | `sm3_u4_test_b13.mp3` | Greta |
+| 5 · Under the sea | 13 | `sm3_u5_test_b13.mp3` | Otis |
+| 6 · Gadgets | 13 | `sm3_u6_test_b13.mp3` | Maisie |
+| 7 · At the doctor’s | 12 | `sm3_u7_test_b12.mp3` | Rufus |
+| 8 · Countries | 12 | `sm3_u8_test_b12.mp3` | Tessa |
+
+### Unit 1 Test, блок 12 → `sm3_u1_test_b12.mp3`
+
+```
+Milo is a pupil at Green Hill School. He likes studying Science and Art, but he doesn't like Maths. His favourite subject is Geography, because he loves looking at maps. Milo has to wear a uniform to school every day. He doesn't have to wear it on Saturday. After school he likes playing computer games with his friend. On Friday Milo has Music, and he hates singing. He has got nine books in his school bag.
+```
+
+Ключи: Geography · Maths · a uniform · singing · nine.
+
+### Unit 2 Test, блок 13 → `sm3_u2_test_b13.mp3`
+
+```
+Freya is making a picnic basket for her family. There are some rolls and some cheese in the basket. There is a big bottle of water, too. There aren't any sausages, because Freya doesn't like them. There is some salad with onions and peas. There isn't any pineapple in the shop today, so Freya has got six apples. Her brother would like some lemonade, but there isn't any lemonade in the fridge. There is some soup for dinner.
+```
+
+Ключи: No, there aren't. · six · onions and peas · some lemonade · some soup.
+
+### Unit 3 Test, блок 13 → `sm3_u3_test_b13.mp3`
+
+```
+Hugo helps his family at home every day. He gets up at half past seven and has breakfast. He always takes the dog for a walk before school. After school Hugo tidies up his room, but he doesn't like washing up. His sister washes up on Monday and Wednesday. Hugo likes sweeping the floor and he sometimes does the shopping with his mum on Saturday. He never feeds the cat. Hugo goes to bed at quarter past nine.
+```
+
+Ключи: at half past seven · He takes the dog for a walk. · washing up ·
+on Saturday · at quarter past nine.
+
+### Unit 4 Test, блок 13 → `sm3_u4_test_b13.mp3`
+
+```
+Greta lives in a small town. Her house is opposite the library, and there is a big tower near the market square. On Monday Greta is going to the library to borrow a book about animals. The bank is between the supermarket and the car park. There is a big clock above the door of the bank. On Saturday Greta is going to the sports centre to go swimming with her friends. She has got a map of the town.
+```
+
+Ключи: the library · near the market square · to borrow a book ·
+between the supermarket and the car park · to the sports centre.
+
+### Unit 5 Test, блок 13 → `sm3_u5_test_b13.mp3`
+
+```
+Yesterday Otis was at the beach with his family. The water was warm. There were two dolphins near the boat and there was a big turtle on the sand. Otis's sister was in the sea with her friend. There weren't any jellyfish, so the children were happy. There was a starfish and a small seahorse in Otis's bucket. The anchor of the old boat was under the water. At six o'clock Otis was in the café.
+```
+
+Ключи: at the beach · two · No, there weren't. · a starfish and a seahorse ·
+in the café.
+
+### Unit 6 Test, блок 13 → `sm3_u6_test_b13.mp3`
+
+```
+Maisie has got a lot of gadgets at home. Her new tablet is bigger than her mobile phone, but her laptop is bigger than the tablet. Maisie thinks her games console is more exciting than her digital radio. Her small torch is cheaper than the electric fan. Maisie's walkie-talkies are louder than her phone. Her favourite gadget is her laptop, because it is faster than the old computer in the kitchen. The lift in her building is slower than the stairs.
+```
+
+Ключи: Yes, it is. · the laptop · her laptop · the torch · the lift.
+
+### Unit 7 Test, блок 12 → `sm3_u7_test_b12.mp3`
+
+```
+Last week Rufus felt very ill. On Monday he woke up with a bad headache and a cough. His mum phoned the doctor. The doctor looked at Rufus and talked to his mum about the medicine. On Tuesday Rufus had a stomachache, so he stayed at home and watched TV. His sister cooked some soup for him. On Wednesday Rufus felt better. He listened to music and wrote a letter to his friend. On Thursday he went to school again.
+```
+
+Ключи: a headache and a cough · his mum · He watched TV. · his sister ·
+on Thursday.
+
+### Unit 8 Test, блок 12 → `sm3_u8_test_b12.mp3`
+
+```
+Last summer Tessa went to Egypt with her family. They stayed in a small hotel near the sea for two weeks. Tessa saw the pyramids and she had a lot of fun. She didn't go to the museum, because it was closed on Monday. Her brother played football on the beach every day. They ate fish and rice every evening. Tessa sent five postcards to her friends. She didn't swim in the sea, but she liked the hotel a lot.
+```
+
+Ключи: to Egypt · two weeks · No, she didn't. · five · fish and rice.
