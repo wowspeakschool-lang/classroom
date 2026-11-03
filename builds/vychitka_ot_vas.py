@@ -136,6 +136,6 @@ if tbl:
     table([r for r in tbl if not all(set(c) <= set('-: ') for c in r)])
 
 para('Документ пересобран ' + datetime.date.today().strftime('%d.%m.%Y') +
-     '. Источник: builds/vychitka_ot_vas.md', size=9, after=0, base=MUTED, italic=True)
+     '. Источник: ' + SRC, size=9, after=0, base=MUTED, italic=True)
 doc.save(OUT)
 print('документ сохранён:', OUT)
