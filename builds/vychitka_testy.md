@@ -278,7 +278,7 @@ listened · cooked · went · had · was/were`).
 
 | юнит | текст (блок) | «верно / неверно» (блок) | диктант (блок) | пять слов |
 |---|---|---|---|---|
-| 1 · School | 12 | 13 | 15 | square · circle · triangle · rectangle · hexagon |
+| 1 · School | 12 | 13 | 15 | English · Geography · History · Science · Music |
 | 2 · Food | 13 | 14 | 16 | cheese · lemonade · sausages · pineapple · vegetables |
 | 3 · At home | 13 | 14 | 16 | vet · nurse · teacher · cleaner · firefighter |
 | 4 · In the town | 13 | 14 | 16 | funfair · car park · lighthouse · skyscraper · clock tower |
@@ -301,7 +301,16 @@ listened · cooked · went · had · was/were`).
 | 4 | Clara has to wear a uniform. | **неверно** |
 | 5 | After school Clara likes playing the guitar. | **верно** |
 
-**Диктант, блок 15:** square (`shape_square.webp`), circle (`shape_circle.webp`), triangle (`shape_triangle.webp`), rectangle (`shape_rectangle.webp`), hexagon (`shape_hexagon.webp`)
+**Диктант, блок 15:** English (`subj_english.webp`), Geography (`subj_geography.webp`), History (`subj_history.webp`), Science (`subj_science.webp`), Music (`subj_music.webp`)
+
+🟥 03.11.2026 диктант юнита 1 переделан с фигур на школьную лексику — тему
+юнита (решение Анны, пункт 69). `I.T.` и `P.E.` не взяты: сокращения; `Art` и
+`Maths` — слишком короткие. `English`, `Geography` и `Music` в тесте больше
+нигде не подписаны; `History` и `Science` подписаны в первом задании теста и
+встречаются в тексте для чтения выше — пяти школьных слов без пересечения в
+юните не набирается (как в юнитах 2 и 7). Посмотреть, не мешает ли это: если
+мешает, перепишу текст для чтения так, чтобы History и Science в нём не
+назывались.
 
 ---
 

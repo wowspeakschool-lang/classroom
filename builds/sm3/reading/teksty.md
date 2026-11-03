@@ -39,7 +39,7 @@ Lara, Toby, Bella, Oscar.
 
 | юнит | тема | текст для чтения (блок) | «верно / неверно» (блок) | диктант (блок) | пять слов диктанта |
 |---|---|---|---|---|---|
-| 1 | School | 12 | 13 | 15 | square · circle · triangle · rectangle · hexagon |
+| 1 | School | 12 | 13 | 15 | English · Geography · History · Science · Music |
 | 2 | Food | 13 | 14 | 16 | cheese · lemonade · sausages · pineapple · vegetables |
 | 3 | At home | 13 | 14 | 16 | vet · nurse · teacher · cleaner · firefighter |
 | 4 | In the town | 13 | 14 | 16 | funfair · car park · lighthouse · skyscraper · clock tower |
@@ -80,16 +80,23 @@ Lara, Toby, Bella, Oscar.
 
 | № | слово | картинка |
 |---|---|---|
-| 1 | square | `media/sm3/u1/shape_square.webp` |
-| 2 | circle | `media/sm3/u1/shape_circle.webp` |
-| 3 | triangle | `media/sm3/u1/shape_triangle.webp` |
-| 4 | rectangle | `media/sm3/u1/shape_rectangle.webp` |
-| 5 | hexagon | `media/sm3/u1/shape_hexagon.webp` |
+| 1 | English | `media/sm3/u1/subj_english.webp` |
+| 2 | Geography | `media/sm3/u1/subj_geography.webp` |
+| 3 | History | `media/sm3/u1/subj_history.webp` |
+| 4 | Science | `media/sm3/u1/subj_science.webp` |
+| 5 | Music | `media/sm3/u1/subj_music.webp` |
 
-Школьные предметы в диктант не взяты: шесть из девяти уже стоят в первом
-задании теста (там картинка подписана английским словом), а `I.T.` и `P.E.` —
-сокращения, писать их на слух нечего. Фигуры — материал урока Maths этого же
-юнита, в тесте они нигде не встречаются.
+03.11.2026 диктант переделан с фигур (square · circle · triangle · rectangle ·
+hexagon) на школьную лексику — тему юнита; решение Анны, пункт 69. Копия
+старого блока — `classroom_backup_sm3_u1_diktant_20261103`.
+
+Почему именно эти пять: из девяти предметов юнита `I.T.` и `P.E.` отпадают
+(сокращения, писать нечего), `Art` и `Maths` — слишком короткие для диктанта
+третьего курса. Из оставшихся `English`, `Geography` и `Music` в тесте больше
+нигде не подписаны, а `History` и `Science` стоят подписанными в первом задании
+(«соедини слова с картинками») и встречаются в тексте для чтения. Пяти слов
+школьной темы без такого пересечения в юните не набирается — как в юнитах 2
+и 7, пересечение оставлено.
 
 ---
 
