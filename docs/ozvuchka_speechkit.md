@@ -332,3 +332,14 @@ Last summer Tessa went to Egypt with her family. They stayed in a small hotel ne
 > Paul has got a football. He is wearing a blue T-shirt. Clare is eating a
 > sandwich. She has got a yellow dress. Sam is drinking orange juice. He is
 > wearing a green T-shirt. Jane is reading a book. She has got a purple T-shirt.
+
+## SM1 Unit 9 ДЗ 5, задание 2 (добавлено 03.11.2026)
+
+Файл `sm1_u9_hw5_b2.mp3` → бакет `classroom-media`, папка `sm1/`, **перезаписать
+поверх старого**. Старая запись перечисляла bucket, umbrella, crab и boat —
+этих слов в SM1 не давали (решение Анны от 03.11). Задание пересобрано на
+занятиях юнита, картинка новая.
+
+> Look at the beach. A girl is making a sandcastle. A boy is looking for shells.
+> A girl is eating ice cream. A boy is taking a photo. A girl is reading a book.
+> A boy is playing the guitar.
