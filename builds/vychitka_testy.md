@@ -94,7 +94,7 @@
 | 13 | Final | 7 | 👀 То же с пятью картинками финального диктанта: крокодил, арбуз, шкаф для одежды, очки, вертолёт |
 | 14 | Final | 7 | 🟥 Блок «Соедини слово с его значением» — проверить, что справа значение по-английски, а не русский перевод. Правило от 22.10: пар «слово ↔ перевод» в курсах нет |
 
-## Super Minds 3 — 11 тестов, 158 блоков
+## Super Minds 3 — 11 тестов, 180 блоков
 
 Техническая вычитка готова 23.10.
 
@@ -104,7 +104,8 @@
 | 2 | Final | 3–5 | 🎧 `sm3_ft_b3.mp3` — одна запись на два задания: «подпиши людей на картинке» (семь точек) и «соедини дни недели и занятия». Сверьте оба ключа |
 | 3 | Final | 6–7 | 🎧 `sm3_ft_b6.mp3` — «выбери подходящую картинку» |
 | 4 | Final | 10 | 👀 Блок «верно / неверно» по картинке с домом. Утверждение «The boy with the scarf has curly hair» заменено 02.11 на «The boy who is riding the skateboard has red hair» (верно): шарфа на картинке нет ни на ком. 🟥 Скажите, согласны ли |
-| 5 | 1–8 | 12 или 13 | 🎧 Аудирования в этих тестах не было совсем — решением от 03.11 добавлены восемь, по одному на тест. Блоки стоят последним заданием перед SPEAKING TASK — там же, где в тесте юнита 0. 🟥 Прочитать восемь рассказов и ключи (ниже, отдельным разделом) и сказать, если какое-то слово в курсе ещё не давалось — заменю до записи. Запись пустая: озвучивает SpeechKit, файлы `sm3_u1_test_b14.mp3` … `sm3_u8_test_b14.mp3`. Когда звук встанет — послушать и сверить ключи |
+| 5 | 1–8 | 14 или 15 | 🎧 Аудирования в этих тестах не было совсем — решением от 03.11 добавлены восемь, по одному на тест. Блок стоит после чтения, перед диктантом — там же, где в тесте юнита 0. 🟥 Прочитать восемь рассказов и ключи (ниже, отдельным разделом) и сказать, если какое-то слово в курсе ещё не давалось — заменю до записи. Запись пустая: озвучивает SpeechKit, файлы `sm3_u1_test_b14.mp3` … `sm3_u8_test_b14.mp3`. Когда звук встанет — послушать и сверить ключи |
+| 6 | 1–8 | чтение 12 или 13, диктант 15 или 16 | 👀 Разделов чтения и диктанта в этих тестах не было совсем — решением от 03.11 (пункт 63) добавлены: текст с «верно / неверно» (`reading`) перед аудированием и диктант из пяти слов по картинкам (`writing`) после него. Порядок разделов повторяет тест юнита 0. 🟥 Прочитать восемь текстов, утверждения и ключи (ниже, отдельным разделом) и сказать, если что-то в курсе ещё не давалось. Картинки диктанта — из этого же юнита, рисовать ничего не нужно |
 
 ### Аудирование SM3, тесты 1–8 — восемь рассказов на вычитку 🟥
 
@@ -265,6 +266,168 @@ listened · cooked · went · had · was/were`).
 | 3 | Did Tessa go to the museum? | No, she didn’t. · Yes, she did. · No, she wasn’t. | **No, she didn’t.** |
 | 4 | How many postcards did Tessa send? | five · four · fifteen | **five** |
 | 5 | What did they eat every evening? | fish and rice · pizza and salad · soup and rolls | **fish and rice** |
+
+### Чтение и диктант SM3, тесты 1–8 — восемь текстов и ключи 🟥
+
+Решение от 03.11.2026, пункт 63: разделов `reading` и `writing` в этих тестах
+не было совсем. Добавлены два блока чтения (текст + «верно / неверно») перед
+аудированием и диктант из пяти слов после него — порядок как в тесте юнита 0.
+Тексты наши, по лексике и грамматике своего юнита; сюжет не повторяет
+аудирование того же теста. Диктант — картинка и поле для слова, звука в нём
+нет; все картинки уже есть в курсе, рисовать ничего не нужно.
+
+| юнит | текст (блок) | «верно / неверно» (блок) | диктант (блок) | пять слов |
+|---|---|---|---|---|
+| 1 · School | 12 | 13 | 15 | square · circle · triangle · rectangle · hexagon |
+| 2 · Food | 13 | 14 | 16 | cheese · lemonade · sausages · pineapple · vegetables |
+| 3 · At home | 13 | 14 | 16 | vet · nurse · teacher · cleaner · firefighter |
+| 4 · In the town | 13 | 14 | 16 | funfair · car park · lighthouse · skyscraper · clock tower |
+| 5 · Under the sea | 13 | 14 | 16 | octopus · shark · jellyfish · shell · coral |
+| 6 · Gadgets | 13 | 14 | 16 | tablet · lift · mobile phone · toothbrush · torch |
+| 7 · At the doctor’s | 12 | 13 | 15 | cold · nurse · medicine · headache · toothache |
+| 8 · Countries | 12 | 13 | 15 | India · Mexico · Chile · Spain · Australia |
+
+#### Unit 1 · School — чтение, блоки 12–13
+
+**Текст (ученик читает его на экране):**
+
+> Clara is nine years old and she goes to Hill Street School. On Monday she has Maths, Art and I.T. She loves drawing animals in her Art book. Clara doesn’t like studying History, but she likes reading about volcanoes in Science. She has to be on time for school every morning, but she doesn’t have to wear a uniform. After school Clara likes playing the guitar with her sister.
+
+| № | утверждение | ключ |
+|---|---|---|
+| 1 | Clara goes to Hill Street School. | **верно** |
+| 2 | On Monday Clara has Maths, Art and I.T. | **верно** |
+| 3 | Clara likes studying History. | **неверно** |
+| 4 | Clara has to wear a uniform. | **неверно** |
+| 5 | After school Clara likes playing the guitar. | **верно** |
+
+**Диктант, блок 15:** square (`shape_square.webp`), circle (`shape_circle.webp`), triangle (`shape_triangle.webp`), rectangle (`shape_rectangle.webp`), hexagon (`shape_hexagon.webp`)
+
+---
+
+#### Unit 2 · Food — чтение, блоки 13–14
+
+**Текст (ученик читает его на экране):**
+
+> Bruno is helping his mum in the kitchen. There are some onions and some peas on the table. There is some salad in the fridge, but there isn’t any soup. Bruno would like some apple juice, but there isn’t any at home, so he drinks some water. His sister says, “Shall we make some sandwiches?” There are five rolls for dinner. Bruno hasn’t got any chocolate, but he has got a big red apple.
+
+| № | утверждение | ключ |
+|---|---|---|
+| 1 | There are some onions on the table. | **верно** |
+| 2 | There is some soup in the fridge. | **неверно** |
+| 3 | Bruno drinks some water. | **верно** |
+| 4 | Bruno’s sister would like to make a cake. | **неверно** |
+| 5 | There are five rolls for dinner. | **верно** |
+
+**Диктант, блок 16:** cheese (`food_cheese.webp`), lemonade (`food_lemonade.webp`), sausages (`food_sausages.webp`), pineapple (`food_pineapple.webp`), vegetables (`food_vegetables.webp`)
+
+---
+
+#### Unit 3 · At home — чтение, блоки 13–14
+
+**Текст (ученик читает его на экране):**
+
+> Nadia lives with her mum, her dad and her baby brother. On Tuesday and Friday she has to dry the dishes after dinner. Her dad cooks and her mum does the shopping on Sunday. Nadia never sweeps the floor, but she always tidies up her room before bed. She has dinner at quarter to seven and she reads a book at half past eight. On Saturday morning Nadia and her dad take the dog for a walk in the park.
+
+| № | утверждение | ключ |
+|---|---|---|
+| 1 | Nadia has to dry the dishes on Tuesday and Friday. | **верно** |
+| 2 | Nadia’s mum does the shopping on Sunday. | **верно** |
+| 3 | Nadia always sweeps the floor. | **неверно** |
+| 4 | Nadia has dinner at quarter to seven. | **верно** |
+| 5 | On Saturday morning Nadia and her dad go to the cinema. | **неверно** |
+
+**Диктант, блок 16:** vet (`job_vet.webp`), nurse (`job_nurse.webp`), teacher (`job_teacher.webp`), cleaner (`job_cleaner.webp`), firefighter (`job_firefighter.webp`)
+
+---
+
+#### Unit 4 · In the town — чтение, блоки 13–14
+
+**Текст (ученик читает его на экране):**
+
+> Today is Saturday and Leo’s family is very busy. Leo is going to the sports centre to play basketball with his cousin. His mum is going to the market square to buy some fruit. His dad is going to the bus station to meet Grandma. The bus station is behind the big park, next to the bank. Leo’s sister is at home with the cat. The cat is under the table, in front of her ball.
+
+| № | утверждение | ключ |
+|---|---|---|
+| 1 | Leo is going to the sports centre to play basketball. | **верно** |
+| 2 | Leo’s mum is going to the supermarket. | **неверно** |
+| 3 | The bus station is behind the big park. | **верно** |
+| 4 | The bus station is next to the bank. | **верно** |
+| 5 | The cat is above the table. | **неверно** |
+
+**Диктант, блок 16:** funfair (`town_funfair.webp`), car park (`town_car_park.webp`), lighthouse (`tower_lighthouse.webp`), skyscraper (`tower_skyscraper.webp`), clock tower (`tower_clock.webp`)
+
+---
+
+#### Unit 5 · Under the sea — чтение, блоки 13–14
+
+**Текст (ученик читает его на экране):**
+
+> Last Saturday Lara and her class were at the sea museum. There were a lot of old boats in the first room and there was a big map of the ocean on the wall. Lara’s favourite room was the dinosaur room, because there was a megalodon tooth in it. The children were very quiet, so the teacher was happy. There weren’t any books about the sea in the museum shop. At four o’clock everybody was on the bus.
+
+| № | утверждение | ключ |
+|---|---|---|
+| 1 | Last Saturday Lara was at the sea museum. | **верно** |
+| 2 | There was a big map of the ocean on the wall. | **верно** |
+| 3 | Lara’s favourite room was the boat room. | **неверно** |
+| 4 | The children were very noisy. | **неверно** |
+| 5 | At four o’clock everybody was on the bus. | **верно** |
+
+**Диктант, блок 16:** octopus (`sea_octopus.webp`), shark (`sea_shark.webp`), jellyfish (`sea_jellyfish.webp`), shell (`sea_shell.webp`), coral (`sea_coral.webp`)
+
+---
+
+#### Unit 6 · Gadgets — чтение, блоки 13–14
+
+**Текст (ученик читает его на экране):**
+
+> Toby and his dad are in the gadget shop in the town. Toby would like a new games console, because his old console is slower than his friend’s console. The blue laptop is two hundred pounds — it is more expensive than the electric fan. The walkie-talkies are twenty pounds, and they are cheaper than the laptop. Toby’s favourite gadget is his bike, because it is faster than the bus in the morning.
+
+| № | утверждение | ключ |
+|---|---|---|
+| 1 | Toby and his dad are in the gadget shop. | **верно** |
+| 2 | Toby’s old console is faster than his friend’s console. | **неверно** |
+| 3 | The blue laptop is more expensive than the electric fan. | **верно** |
+| 4 | The walkie-talkies are cheaper than the laptop. | **верно** |
+| 5 | Toby’s favourite gadget is his games console. | **неверно** |
+
+**Диктант, блок 16:** tablet (`gad_tablet.webp`), lift (`gad_lift.webp`), mobile phone (`gad_phone.webp`), toothbrush (`gad_toothbrush.webp`), torch (`gad_torch.webp`)
+
+---
+
+#### Unit 7 · At the doctor’s — чтение, блоки 12–13
+
+**Текст (ученик читает его на экране):**
+
+> Last Saturday Bella played football with her friends in the park. In the evening she had a stomachache, because she ate a lot of chocolate and drank two glasses of cola. Her dad cooked some soup, but Bella didn’t eat it. On Sunday morning she felt better. She watched a film with her brother and wrote a letter to her grandma. On Monday Bella went to school and played volleyball with her class again.
+
+| № | утверждение | ключ |
+|---|---|---|
+| 1 | On Saturday Bella played football in the park. | **верно** |
+| 2 | Bella drank two glasses of water. | **неверно** |
+| 3 | Bella’s dad cooked some soup. | **верно** |
+| 4 | On Sunday morning Bella felt worse. | **неверно** |
+| 5 | On Monday Bella went to school. | **верно** |
+
+**Диктант, блок 15:** cold (`ill_cold.webp`), nurse (`med_nurse.webp`), medicine (`med_medicine.webp`), headache (`ill_headache.webp`), toothache (`ill_toothache.webp`)
+
+---
+
+#### Unit 8 · Countries — чтение, блоки 12–13
+
+**Текст (ученик читает его на экране):**
+
+> Last summer Oscar went to Brazil with his family. They stayed with his uncle in a small house near the river for ten days. Oscar played football on the beach with his cousins every morning. One day they went on a boat on the Amazon river and they saw a lot of birds. Oscar didn’t see any monkeys, but he liked the boat a lot. He sent a postcard to his teacher.
+
+| № | утверждение | ключ |
+|---|---|---|
+| 1 | Oscar went to Brazil last summer. | **верно** |
+| 2 | Oscar and his family stayed in a big hotel. | **неверно** |
+| 3 | Oscar played football every morning. | **верно** |
+| 4 | Oscar saw a lot of monkeys. | **неверно** |
+| 5 | Oscar sent a postcard to his teacher. | **верно** |
+
+**Диктант, блок 15:** India (`country_india.webp`), Mexico (`country_mexico.webp`), Chile (`country_chile.webp`), Spain (`country_spain.webp`), Australia (`country_australia.webp`)
 
 ## Go Getter 1 — 10 тестов, 157 блоков
 
