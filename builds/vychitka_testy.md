@@ -502,6 +502,22 @@ listened · cooked · went · had · was/were`).
 отдельного блока с записью перед ним быть не должно. Копия до правки —
 `classroom_backup_testy_zapis_20261103`.
 
+🟥 **SM1 Final Test, задание 2 «подпиши людей на картинке» — разобрано.**
+Анна открыла его 03.11 и увидела, что звук не тот. Поломок оказалось три.
+Своей записи у задания не было никогда — стояла ссылка на запись соседнего
+задания 1 (рассказ про Тома, Анну, Сью, Бена и Ника); ссылку убрали, место
+пустое. Ни одна из пяти точек не стояла на ребёнке так, как задумано: «Mike»
+попадал на воздушного змея, «Clare» и «Jane» — на траву рядом с девочкой,
+«Laura» — на мальчика. И имена не сходились с картинкой: три женских имени на
+двух девочек. Точки переставлены по детям, «Laura» заменена на «Sam».
+🎧 Текст для записи (`sm1_final_b2.mp3`, SpeechKit) и ключ «кто где» —
+`builds/sm1/ft_picnic_tekst.md`, продублирован ниже. До записи задание молчит.
+
+> Look at the picnic. Mike is the boy with the kite. He is wearing a red T-shirt.
+> Paul has got a football. He is wearing a blue T-shirt. Clare is eating a
+> sandwich. She has got a yellow dress. Sam is drinking orange juice. He is
+> wearing a green T-shirt. Jane is reading a book. She has got a purple T-shirt.
+
 🟥 **Один починенный звук.** В SM1 Final Test задание 2 («подпиши людей на
 картинке») плеер был, а звука не было: файл в хранилище лежит под именем
 `sm1_final_b1 (1).mp3` — с «(1)» от повторной загрузки, — а в задании стояла

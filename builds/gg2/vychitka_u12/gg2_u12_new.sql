@@ -1,0 +1,68 @@
+-- GG2 юниты 1-2: новые блоки домашек (вычитка 03.11.2026)
+do $$
+declare v_media text := 'https://classroom.wowteach.ru/media/';
+begin
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('829ba270-7377-43f0-b5ad-093441ba6b07', 'quiz', replace($blk${"title": "Как часто это бывает? Прочитай предложение и выбери подходящее наречие", "questions": [{"q": "Sam goes to school from Monday to Friday. He ___ goes to school on Sunday.", "type": "single", "correct": [0], "options": [{"text": "never"}, {"text": "always"}, {"text": "usually"}]}, {"q": "I have breakfast every morning. I ___ have breakfast.", "type": "single", "correct": [1], "options": [{"text": "never"}, {"text": "always"}, {"text": "sometimes"}]}, {"q": "Kate plays tennis on most days. She ___ plays tennis.", "type": "single", "correct": [1], "options": [{"text": "never"}, {"text": "usually"}, {"text": "sometimes"}]}, {"q": "Tom eats pizza two or three times a year. He ___ eats pizza.", "type": "single", "correct": [2], "options": [{"text": "often"}, {"text": "always"}, {"text": "sometimes"}]}, {"q": "We have P.E. on Monday, Tuesday and Thursday. We ___ have P.E.", "type": "single", "correct": [1], "options": [{"text": "never"}, {"text": "often"}, {"text": "always"}]}]}$blk$, '@@MEDIA@@', v_media)::jsonb, 4)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('829ba270-7377-43f0-b5ad-093441ba6b07', 'sort', replace($blk${"title": "Распредели формы глагола: какие подходят к I / we / they, а какие — к he / she / it", "groups": [{"name": "I / we / they", "items": [{"text": "play"}, {"text": "go"}, {"text": "like"}, {"text": "watch"}, {"text": "tidy"}]}, {"name": "he / she / it", "items": [{"text": "plays"}, {"text": "goes"}, {"text": "likes"}, {"text": "watches"}, {"text": "tidies"}]}]}$blk$, '@@MEDIA@@', v_media)::jsonb, 5)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('829ba270-7377-43f0-b5ad-093441ba6b07', 'gaps', replace($blk${"mode": "choice", "title": "Выбери наречие, которое подходит по смыслу", "text": "1. Lessons start at 8.30. We __always__ start at 8.30.\n2. I like vegetables but I __never__ eat fish.\n3. My dad works at home, so he is __usually__ at home in the afternoon.\n4. We go to the cinema two or three times a year. We __sometimes__ go to the cinema.\n5. Anna does karate on Monday, Wednesday and Friday. She __often__ does karate.", "choices": [["never", "sometimes"], ["always", "often"], ["never", "sometimes"], ["always", "often"], ["never", "always"]]}$blk$, '@@MEDIA@@', v_media)::jsonb, 8)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('829ba270-7377-43f0-b5ad-093441ba6b07', 'task', replace($blk${"title": "Расскажи о своём дне ✍️", "html": "<p>Напиши три предложения о своём дне. Используй <b>always</b>, <b>usually</b>, <b>often</b>, <b>sometimes</b> или <b>never</b>.</p><p><i>Например: I always get up at 7 o'clock. I sometimes play football after school.</i></p>", "needs_review": true}$blk$, '@@MEDIA@@', v_media)::jsonb, 9)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('851d9b90-f06b-46e5-8fd5-96cec97d6d69', 'text', replace($blk${"html": "<h3>do или play? 🏀</h3><p>С одними занятиями мы говорим <b>do</b>, с другими — <b>play</b>. Давай потренируемся.</p>"}$blk$, '@@MEDIA@@', v_media)::jsonb, 7)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('851d9b90-f06b-46e5-8fd5-96cec97d6d69', 'sort', replace($blk${"title": "Распредели занятия: с какими говорим do, а с какими — play", "groups": [{"name": "do", "items": [{"text": "ballet"}, {"text": "karate"}, {"text": "pottery"}]}, {"name": "play", "items": [{"text": "basketball"}, {"text": "chess"}, {"text": "football"}, {"text": "tennis"}]}]}$blk$, '@@MEDIA@@', v_media)::jsonb, 8)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('851d9b90-f06b-46e5-8fd5-96cec97d6d69', 'gaps', replace($blk${"mode": "choice", "title": "Выбери do или play в правильной форме", "text": "1. I __play__ chess with my grandfather.\n2. My sister __does__ ballet on Mondays.\n3. We __play__ basketball at school.\n4. Max __does__ karate after school.\n5. Do you __play__ football in your free time?\n6. They __do__ pottery in Art.", "choices": [["do", "does"], ["do", "play"], ["do", "does"], ["do", "plays"], ["do", "does"], ["does", "play"]]}$blk$, '@@MEDIA@@', v_media)::jsonb, 9)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('3894f232-5143-4498-aa0c-c575e0760cc1', 'gaps', replace($blk${"mode": "drag", "title": "Перетащи названия школьных мест в пропуски", "text": "1. We have lunch in the __canteen__.\n2. We play football on the __playground__.\n3. We do P.E. in the __gym__.\n4. We read books in the __library__.\n5. We use laptops in the __computer room__.\n6. The teachers have coffee in the __staff room__."}$blk$, '@@MEDIA@@', v_media)::jsonb, 4)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('17a7a056-ec35-467b-8b6d-031c50fe937a', 'sequence', replace($blk${"title": "Расставь дни недели по порядку — от Monday до Sunday", "items": [{"text": "Monday"}, {"text": "Tuesday"}, {"text": "Wednesday"}, {"text": "Thursday"}, {"text": "Friday"}, {"text": "Saturday"}, {"text": "Sunday"}]}$blk$, '@@MEDIA@@', v_media)::jsonb, 6)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('17a7a056-ec35-467b-8b6d-031c50fe937a', 'gaps', replace($blk${"mode": "choice", "title": "Выбери at, in или on", "text": "1. I get up __at__ 7.30.\n2. We have Music __on__ Tuesday.\n3. __In__ the morning I have breakfast.\n4. Lessons finish __at__ 3 o'clock.\n5. I do ballet __in__ the evening.\n6. We play basketball __on__ Friday.", "choices": [["in", "on"], ["at", "in"], ["At", "On"], ["in", "on"], ["at", "on"], ["at", "in"]]}$blk$, '@@MEDIA@@', v_media)::jsonb, 8)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('d8fbeb71-a2ef-4bfd-a0d9-eb73dae5d5e0', 'text', replace($blk${"html": "<h3>How much или How many? 🤔</h3><p>Если предмет можно посчитать, спрашиваем <b>How many</b>: <i>How many apples are there?</i></p><p>Если посчитать нельзя, спрашиваем <b>How much</b>: <i>How much milk is there?</i></p>"}$blk$, '@@MEDIA@@', v_media)::jsonb, 5)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('d8fbeb71-a2ef-4bfd-a0d9-eb73dae5d5e0', 'sort', replace($blk${"title": "Распредели слова: с какими спросим How many, а с какими — How much", "groups": [{"name": "How many", "items": [{"text": "apples"}, {"text": "eggs"}, {"text": "bananas"}, {"text": "biscuits"}, {"text": "sandwiches"}]}, {"name": "How much", "items": [{"text": "milk"}, {"text": "sugar"}, {"text": "water"}, {"text": "bread"}, {"text": "cheese"}]}]}$blk$, '@@MEDIA@@', v_media)::jsonb, 6)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('d8fbeb71-a2ef-4bfd-a0d9-eb73dae5d5e0', 'gaps', replace($blk${"mode": "type", "title": "Впиши в пропуски How much или How many", "text": "1. __How many|how many__ eggs are there in the fridge?\n2. __How much|how much__ bread do we need?\n3. __How many|how many__ apples would you like?\n4. __How much|how much__ cheese is there on the pizza?\n5. __How many|how many__ biscuits are there in the packet?"}$blk$, '@@MEDIA@@', v_media)::jsonb, 7)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('d8fbeb71-a2ef-4bfd-a0d9-eb73dae5d5e0', 'task', replace($blk${"title": "Спроси сам ✍️", "image": "@@MEDIA@@gg2/u2/scene_breakfast.webp", "html": "<p>Посмотри на картинку и напиши четыре вопроса: два с <b>How many</b> и два с <b>How much</b>.</p><p><i>Например: How many eggs are there? How much milk is there?</i></p>", "needs_review": true}$blk$, '@@MEDIA@@', v_media)::jsonb, 8)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('edb04172-9975-4411-bda8-74f5592a7a13', 'quiz', replace($blk${"title": "Ты в кафе. Выбери подходящую реплику", "questions": [{"q": "Waitress: What would you like? — Guest: ___", "type": "single", "correct": [0], "options": [{"text": "I'd like a ham sandwich, please."}, {"text": "Great, thanks."}, {"text": "Anything else?"}]}, {"q": "Waitress: Would you like anything to drink? — Guest: ___", "type": "single", "correct": [1], "options": [{"text": "Yes, I'm hungry."}, {"text": "Can I have a lemonade, please?"}, {"text": "No, thanks. I'd like a salad."}]}, {"q": "Guest: Can I have some chips, please? — Waitress: ___", "type": "single", "correct": [0], "options": [{"text": "Yes, of course. Anything else?"}, {"text": "I'd like a hot dog."}, {"text": "How much is it?"}]}, {"q": "Waitress: Anything else? — Guest: ___", "type": "single", "correct": [1], "options": [{"text": "What would you like?"}, {"text": "No, thanks. That's all."}, {"text": "Great, thanks."}]}]}$blk$, '@@MEDIA@@', v_media)::jsonb, 3)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('edb04172-9975-4411-bda8-74f5592a7a13', 'gaps', replace($blk${"mode": "drag", "title": "Перетащи в пропуски названия ёмкостей", "text": "Waiter: What would you like?\nKate: Can I have a __bottle__ of water, please?\nWaiter: Anything else?\nKate: Yes. A __packet__ of biscuits and a __bar__ of chocolate, please.\nWaiter: Would you like anything to drink?\nKate: A __can__ of cola and a __carton__ of juice, please.\nWaiter: Great, thanks."}$blk$, '@@MEDIA@@', v_media)::jsonb, 5)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('ccb8ec26-8db1-4014-ba1e-500fc48b8624', 'sequence', replace($blk${"title": "Это рецепт блинчиков. Расставь шаги по порядку", "items": [{"text": "Put some flour in a bowl."}, {"text": "Add two eggs and some milk."}, {"text": "Mix the flour, the eggs and the milk."}, {"text": "Cook the pancakes in some butter."}, {"text": "Put some strawberries and sugar on the pancakes."}, {"text": "Eat the pancakes!"}]}$blk$, '@@MEDIA@@', v_media)::jsonb, 5)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('ccb8ec26-8db1-4014-ba1e-500fc48b8624', 'gaps', replace($blk${"mode": "type", "title": "Впиши some или any", "text": "1. There's __some|Some__ fish in the fridge at Susie's house.\n2. There isn't __any|Any__ chicken at Susie's house.\n3. Is there __any|Any__ rice at her aunt's house?\n4. Susie has __some|Some__ sausages for an English breakfast.\n5. We haven't got __any|Any__ tomatoes."}$blk$, '@@MEDIA@@', v_media)::jsonb, 6)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('52eaf7a4-b1a7-4a23-9f36-0b9e599a940f', 'order', replace($blk${"title": "Собери предложение с because", "words": ["I", "like", "pancakes", "because", "they", "are", "sweet."], "sentence": "I like pancakes because they are sweet."}$blk$, '@@MEDIA@@', v_media)::jsonb, 7)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('52eaf7a4-b1a7-4a23-9f36-0b9e599a940f', 'order', replace($blk${"title": "Собери предложение с so", "words": ["I'm", "hungry", "so", "I", "want", "a", "sandwich."], "sentence": "I'm hungry so I want a sandwich."}$blk$, '@@MEDIA@@', v_media)::jsonb, 8)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+  insert into classroom_blocks (lesson_id, type, payload, sort_order)
+  values ('4d349ca7-4b58-48e8-824a-fcde5e710f54', 'text', replace($blk${"html": "<h3>Теперь заполним пропуски 📝</h3><p>Дальше тебя ждут четыре задания с пропусками. Читай внимательно и вписывай подходящие слова.</p>"}$blk$, '@@MEDIA@@', v_media)::jsonb, 3)
+  on conflict (lesson_id, sort_order) do update set payload = excluded.payload, type = excluded.type;
+end $$;
