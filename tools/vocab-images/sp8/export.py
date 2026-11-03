@@ -6,11 +6,11 @@ import os, sys
 from PIL import Image
 sys.path.insert(0, '..')
 from lib import fname
-from sheets import S, DIGITS
+from sheets import S, DIGITS, SKIP as _SKIP
 # с 14.10.2026 тренажёр живёт на app.wowteach.ru, картинки — в wowspeak-platform/public/trainer/media
 DST = '/home/user/wowspeak-platform/public/trainer/media/spotlight8'
 URL = 'https://app.wowteach.ru/trainer/media/spotlight8/'
-SKIP = set()  # подписи, не прошедшие проверку: не выгружать
+SKIP = set(_SKIP)  # подписи, не прошедшие проверку: не выгружать
 SKIP -= set(filter(None, os.environ.get('ALLOW', '').split('|')))  # ALLOW='keep out|…' — выгрузить перерисованные (после перерисовки)
 # омонимы: подпись из столбца caption плана → перевод слова (у омонимов в плане подпись своя)
 import csv
