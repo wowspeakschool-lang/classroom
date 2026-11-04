@@ -13,3 +13,5 @@ sheet(['an_cat','an_horse','an_cow','an_sheep','an_rabbit','an_dog','an_hamster'
 sheet(['hol_airport','hol_castle','hol_beach','suspect_1','suspect_2','suspect_3','suspect_4'], P+'/kl_holiday_suspects.png', cols=4, cell=300)
 sheet(['geo_river','geo_mountains','geo_desert','geo_waterfall','geo_island','geo_forest','tr_sightseeing','tr_camping','tr_ferry'], P+'/kl_travel.png')
 sheet(['food_spicy','food_crunchy','food_sour','food_sweet','food_bitter','food_salty','dis_volcano','dis_flood','dis_earthquake','dis_wildfire','dis_hurricane','dis_tsunami'], P+'/kl_food_disasters.png', cols=6, cell=230)
+sheet(['fut_travel','fut_graduation','fut_doctor','fut_band'], P+'/kl_future.png', cols=4, cell=320)
+sheet(['crime_scene','street','schoolbag_open','fridge_open'], P+'/kl_sceny.png', cols=2, cell=480)
