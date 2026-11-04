@@ -1,0 +1,2226 @@
+module	section	term	translation	reuse_id	image	reason
+Module 1	1a	bonfire	костер		new	в тренажёре нет
+Module 1	1a	bright	яркий	2	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	burst	лопать(ся)		new	в тренажёре нет
+Module 1	1a	carnival	карнавал	4	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	celebrate	праздновать	5	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	chance	возможность, шанс	6	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	change of clothes	сменная одежда		new	в тренажёре нет
+Module 1	1a	charity	благотворительная организация, благотворительность	8	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	city centre	центр города	9	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	competitor	соперник, конкурент	10	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	contest	соревнование		new	в тренажёре нет
+Module 1	1a	display	показ	12	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	dress up	наряжаться	13	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	enter	зд. принять участие		new	в тренажёре нет
+Module 1	1a	experience	испытывать	15	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	extremely	чрезвычайно, крайне, очень		none	связка / реплика / отвлечённое слово
+Module 1	1a	fancy dress costume	маскарадный костюм		new	в тренажёре нет
+Module 1	1a	farewell	прощание		new	в тренажёре нет
+Module 1	1a	festival	фестиваль	19	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	final	завершающий, конечный, последний		new	в тренажёре нет
+Module 1	1a	firework	фейерверк		new	в тренажёре нет
+Module 1	1a	huge	огромный, гигантский	22	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	in need	нуждающийся в чем-то		new	в тренажёре нет
+Module 1	1a	include	включать		none	связка / реплика / отвлечённое слово
+Module 1	1a	join	присоединяться	25	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	kidnap	похищение человека		new	в тренажёре нет
+Module 1	1a	knight	рыцарь	27	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	local	местный	28	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	march	марш, демонстрация		new	в тренажёре нет
+Module 1	1a	market square	рыночная площадь	30	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	medieval	средневековый	31	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	messy	грязный	32	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	mock	поддельный, притворный, шуточный		new	в тренажёре нет
+Module 1	1a	national dish	национальное блюдо		new	в тренажёре нет
+Module 1	1a	open-air	происходящий на открытом воздухе	35	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	paella	паелла	36	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	pancake	блин	37	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	performance	представление	38	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	pirate	пират		new	в тренажёре нет
+Module 1	1a	raise	собирать	40	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	require	требовать		none	связка / реплика / отвлечённое слово
+Module 1	1a	rowing boat	гребная лодка		new	в тренажёре нет
+Module 1	1a	scarecrow	пугало		new	в тренажёре нет
+Module 1	1a	spare	запасной	44	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	straw	солома	45	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	street parade	уличный парад, демонстрация	46	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	strong	зд. устоявшийся		new	в тренажёре нет
+Module 1	1a	symbolise	символизировать		new	в тренажёре нет
+Module 1	1a	take place	1. происходить, случаться; 2. состояться	49	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	tiny	крошечный	50	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	tradition	традиция	51	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	transform	изменять, преобразовывать		new	в тренажёре нет
+Module 1	1a	treasure hunt	«охота за сокровищами»		new	в тренажёре нет
+Module 1	1a	trip	короткое путешествие, поездка	54	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	typical	типичный	55	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	unusual	необычный	56	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	village	деревня	57	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1a	winner	победитель	58	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Vocabulary: Festivals & Celebrations	annual	ежегодный	59	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Vocabulary: Festivals & Celebrations	attract	привлекать	60	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Vocabulary: Festivals & Celebrations	bright idea	умная мысль или предложение		new	в тренажёре нет
+Module 1	Vocabulary: Festivals & Celebrations	burn	сжигать	62	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Vocabulary: Festivals & Celebrations	colourful street parade	красочный (уличный) парад		new	в тренажёре нет
+Module 1	Vocabulary: Festivals & Celebrations	cooking contest	кулинарный конкурс		new	в тренажёре нет
+Module 1	Vocabulary: Festivals & Celebrations	enter a competition	принять участие в соревновании		new	в тренажёре нет
+Module 1	Vocabulary: Festivals & Celebrations	fireworks display	фейерверк, салют		new	в тренажёре нет
+Module 1	Vocabulary: Festivals & Celebrations	invite	пригласить	67	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Vocabulary: Festivals & Celebrations	let off	зд. запускать		new	в тренажёре нет
+Module 1	Vocabulary: Festivals & Celebrations	make sure	удостовериться, убедиться	69	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Vocabulary: Festivals & Celebrations	monthly	ежемесячный		new	в тренажёре нет
+Module 1	Vocabulary: Festivals & Celebrations	raise money for charity	собирать деньги на благотворительность		new	в тренажёре нет
+Module 1	Vocabulary: Festivals & Celebrations	spare change of clothes	запасная сменная одежда		new	в тренажёре нет
+Module 1	Vocabulary: Festivals & Celebrations	strong tradition	устоявшаяся традиция		new	в тренажёре нет
+Module 1	1b	a load of rubbish	чепуха, ерунда		new	в тренажёре нет
+Module 1	1b	accident	несчастный случай	75	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	alright	в порядке		none	связка / реплика / отвлечённое слово
+Module 1	1b	anxious	нервный, беспокоящийся	77	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	attention	внимание		new	в тренажёре нет
+Module 1	1b	attitude	отношение к чему-либо/кому-либо		none	связка / реплика / отвлечённое слово
+Module 1	1b	butterfly	бабочка	80	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	coincidence	совпадение		new	в тренажёре нет
+Module 1	1b	concern	забота, беспокойство		none	связка / реплика / отвлечённое слово
+Module 1	1b	culture	культура	83	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	dictionary entry	словарная статья	84	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	four-leaf clover	четырехлистный клевер		new	в тренажёре нет
+Module 1	1b	full moon	полная луна, полнолуние		new	в тренажёре нет
+Module 1	1b	harmless	безвредный, безопасный	87	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	kill	убивать	88	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	ladder	лестница	89	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	ladybird	божья коровка	90	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	luck	удача, везение	91	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	lucky charm	счастливый талисман		new	в тренажёре нет
+Module 1	1b	match	матч	93	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	modern	новый, современный	94	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	old wives' tale	бабушкины сказки		new	в тренажёре нет
+Module 1	1b	on one's mind	все время думать о чем-либо		new	в тренажёре нет
+Module 1	1b	pass one's exams	сдать экзамены		new	в тренажёре нет
+Module 1	1b	point	тема разговора, важный момент в речи говорящего		none	связка / реплика / отвлечённое слово
+Module 1	1b	rainbow	радуга	99	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	rationally	рационально, разумно		none	связка / реплика / отвлечённое слово
+Module 1	1b	reassure	успокаивать, утешать		new	в тренажёре нет
+Module 1	1b	shooting star	падающая звезда		new	в тренажёре нет
+Module 1	1b	spider	паук	103	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	superstition	суеверие, предрассудок		new	в тренажёре нет
+Module 1	1b	trouble	беспокоить(ся), тревожить(ся)		new	в тренажёре нет
+Module 1	1b	what's the matter?	в чем дело?		none	связка / реплика / отвлечённое слово
+Module 1	1b	world	мир	107	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	worry	беспокоить(ся), волновать(ся) о чем-либо	108	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1b	wrong	неудовлетворительный, неправильный	109	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	admire	восхищаться чем-либо	110	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	album	музыкальный альбом	111	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	amazing	изумительный, поразительный	112	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	atmosphere	атмосфера, обстановка	113	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	candy floss	сахарная вата		new	в тренажёре нет
+Module 1	1c	congratulate	поздравлять	115	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	dance the evening away	танцевать весь вечер		new	в тренажёре нет
+Module 1	1c	decoration	украшение	117	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	delicious	очень вкусный	118	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	dig	копать, рыть	119	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	DJ (disc jockey)	ди-джей		new	в тренажёре нет
+Module 1	1c	dye	красить, окрашивать	121	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	exhausted	уставший, истощенный	122	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	fantastic	отличный, фантастический	123	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	get-together	встреча, сбор, вечеринка		new	в тренажёре нет
+Module 1	1c	greetings	приветствие		new	в тренажёре нет
+Module 1	1c	important	важный	126	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	in style	элегантно, изящно		new	в тренажёре нет
+Module 1	1c	invitation	приглашение	128	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	midnight	полночь		new	в тренажёре нет
+Module 1	1c	nervous	нервничающий, взволнованный	130	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	organise	организовывать, устраивать	131	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	outdoors	на открытом воздухе, на улице	132	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	outfit	наряд		new	в тренажёре нет
+Module 1	1c	plant	растение	134	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	prom night	выпускной/школьный бал		new	в тренажёре нет
+Module 1	1c	recently	недавно		none	связка / реплика / отвлечённое слово
+Module 1	1c	remind	напоминать	137	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	samba music	самба		new	в тренажёре нет
+Module 1	1c	send out	отправлять		new	в тренажёре нет
+Module 1	1c	stay up all night	не спать всю ночь		new	в тренажёре нет
+Module 1	1c	sunburnt	сгоревший на солнце		new	в тренажёре нет
+Module 1	1c	take a week, some days etc off	взять неделю (несколько дней) отдыха		new	в тренажёре нет
+Module 1	1c	take part in	участвовать в	143	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	team	команда	144	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	terribly	ужасно	145	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	tough	трудный	146	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	unwell	нездоровый, плохо себя чувствующий	147	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1c	weed	сорняк		new	в тренажёре нет
+Module 1	1d Special Occasions	all the best	всего хорошего		new	в тренажёре нет
+Module 1	1d Special Occasions	band	группа	150	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	base on	основывать на чем-либо		new	в тренажёре нет
+Module 1	1d Special Occasions	blow out candles	задуть свечи		new	в тренажёре нет
+Module 1	1d Special Occasions	budget	бюджет	153	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	can't stand	испытывать сильную неприязнь	154	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	casual	повседневный, простой	155	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	clown	клоун	156	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	coming-of-age	достижение совершеннолетия		new	в тренажёре нет
+Module 1	1d Special Occasions	congratulations	поздравления		new	в тренажёре нет
+Module 1	1d Special Occasions	decorate a tree	нарядить, украсить дерево		new	в тренажёре нет
+Module 1	1d Special Occasions	depend on	зависеть от	160	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	eat a special meal	съесть праздничное блюдо		new	в тренажёре нет
+Module 1	1d Special Occasions	enthusiastic	зд. восторженный		new	в тренажёре нет
+Module 1	1d Special Occasions	exchange a gift/card	обмениваться подарками/поздравительными открытками		new	в тренажёре нет
+Module 1	1d Special Occasions	excited	взволнованный	164	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	flower arrangement	цветочная композиция		new	в тренажёре нет
+Module 1	1d Special Occasions	formal	официальный	166	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	fuss	суета, суматоха		new	в тренажёре нет
+Module 1	1d Special Occasions	ghost	привидение	168	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	graduation party	вечер в честь окончания института		new	в тренажёре нет
+Module 1	1d Special Occasions	happening	случай, происшествие		new	в тренажёре нет
+Module 1	1d Special Occasions	Happy anniversary!	С годовщиной!		none	связка / реплика / отвлечённое слово
+Module 1	1d Special Occasions	Happy new year!	С новым годом!	172	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	impatient	нетерпеливый	173	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	informal	неофициальный		new	в тренажёре нет
+Module 1	1d Special Occasions	junior high	средняя школа (в США), в которой обучаются дети в возрасте от 11 до 15 лет		new	в тренажёре нет
+Module 1	1d Special Occasions	limousine	лимузин		new	в тренажёре нет
+Module 1	1d Special Occasions	make a toast	выпить за, провозгласить тост в честь кого-либо/чего-либо		new	в тренажёре нет
+Module 1	1d Special Occasions	Many happy returns	С днем рождения		new	в тренажёре нет
+Module 1	1d Special Occasions	mostly	главным образом, по большей части		none	связка / реплика / отвлечённое слово
+Module 1	1d Special Occasions	plan a party	организовать вечеринку		new	в тренажёре нет
+Module 1	1d Special Occasions	pull a cracker	рождественский обычай в некоторых западных странах — двое берут крекер (кусочек печенья), внутри которого запечен подарок (листок бумаги с названием подарка), и тянут каждый на себя. Тот, кому досталась большая половина крекера, получает этот подарок.		new	в тренажёре нет
+Module 1	1d Special Occasions	rely on	надеяться на кого-либо/что-либо	182	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	rest	опираться, основывать(ся)		new	в тренажёре нет
+Module 1	1d Special Occasions	rich	жирный, питательный		new	в тренажёре нет
+Module 1	1d Special Occasions	season's greetings	поздравления с праздником		new	в тренажёре нет
+Module 1	1d Special Occasions	senior year	выпускной год в школе		new	в тренажёре нет
+Module 1	1d Special Occasions	shock	возмущать, шокировать		new	в тренажёре нет
+Module 1	1d Special Occasions	sing a carol	спеть рождественский гимн		new	в тренажёре нет
+Module 1	1d Special Occasions	specific	особенный		none	связка / реплика / отвлечённое слово
+Module 1	1d Special Occasions	streamer	серпантин		new	в тренажёре нет
+Module 1	1d Special Occasions	strict	строгий, суровый		new	в тренажёре нет
+Module 1	1d Special Occasions	surprise party	вечеринка-сюрприз		new	в тренажёре нет
+Module 1	1d Special Occasions	surprised	удивленный	193	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	take pictures	фотографировать	194	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	teenage	подростковый	195	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	theme	тема		new	в тренажёре нет
+Module 1	1d Special Occasions	thrilled	взволнованный		new	в тренажёре нет
+Module 1	1d Special Occasions	throw	давать, устраивать, организовывать		new	в тренажёре нет
+Module 1	1d Special Occasions	unique	уникальный	199	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	wear a mask	носить маску		new	в тренажёре нет
+Module 1	1d Special Occasions	wedding reception	официальное празднование свадьбы		new	в тренажёре нет
+Module 1	1d Special Occasions	witch	колдунья, ведьма	202	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1d Special Occasions	zoo	зоопарк	203	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	arrival	приезд	204	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	bake	печь, запекать	205	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	banging	громкий стук, шум		new	в тренажёре нет
+Module 1	1e	ceiling	потолок	207	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	cheer	поощрять, поддерживать одобрительными восклицаниями		new	в тренажёре нет
+Module 1	1e	chime	звон		new	в тренажёре нет
+Module 1	1e	crowd	толпа	210	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	display	демонстрировать, показывать	211	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	energetically	энергично		none	связка / реплика / отвлечённое слово
+Module 1	1e	enthusiastically	с энтузиазмом, восторженно		none	связка / реплика / отвлечённое слово
+Module 1	1e	exotically	экзотично, необычно		none	связка / реплика / отвлечённое слово
+Module 1	1e	fabulous	ошеломительный, поразительный, удивительный	215	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	festive	праздничный	216	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	float	платформа на колесах		new	в тренажёре нет
+Module 1	1e	fruit cake	фруктовый торт		new	в тренажёре нет
+Module 1	1e	gather	собирать(ся)	219	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	heartily	сердечно		none	связка / реплика / отвлечённое слово
+Module 1	1e	hurriedly	поспешно, торопливо		none	связка / реплика / отвлечённое слово
+Module 1	1e	join hands	браться за руки		new	в тренажёре нет
+Module 1	1e	maypole	майское дерево		new	в тренажёре нет
+Module 1	1e	medal	медаль	224	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	patiently	терпеливо		none	связка / реплика / отвлечённое слово
+Module 1	1e	pattern	узор	226	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	proudly	гордо		none	связка / реплика / отвлечённое слово
+Module 1	1e	ribbon	лента	228	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	shortbread biscuit	песочное печенье		new	в тренажёре нет
+Module 1	1e	slowly	медленно		none	связка / реплика / отвлечённое слово
+Module 1	1e	smartly	аккуратно, искусно, изящно		none	связка / реплика / отвлечённое слово
+Module 1	1e	stall	прилавок	232	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	stunning	сногсшибательный, великолепный	233	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	success	успех, достижение	234	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	surely	конечно		none	связка / реплика / отвлечённое слово
+Module 1	1e	unwanted	нежелательный	236	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	veteran	ветеран		new	в тренажёре нет
+Module 1	1e	villager	сельский житель		new	в тренажёре нет
+Module 1	1e	wander	бродить	239	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1e	war	война	240	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	allow	разрешать, позволять	241	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	annoy	досаждать, докучать	242	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	audience	публика, зрители, слушатели	243	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	boring	скучный, неинтересный	244	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	bump into	неожиданно встретить кого-либо		new	в тренажёре нет
+Module 1	1f	by chance	случайно	246	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	come up with	придумывать	247	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	crowd	толпа	248	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	custom	обычай, традиция	249	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	embarrass	смущать, приводить в замешательство		new	в тренажёре нет
+Module 1	1f	environmental awareness	осознание необходимости защиты окружающей среды		new	в тренажёре нет
+Module 1	1f	fool	дурачить, обманывать		new	в тренажёре нет
+Module 1	1f	habit	привычка	253	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	head for	двигаться к	254	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	increase	увеличивать	255	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	let	позволять, разрешать		new	в тренажёре нет
+Module 1	1f	luck	удача	257	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	magic	волшебный, сверхъестественный	258	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	make	заставлять, побуждать		new	в тренажёре нет
+Module 1	1f	midday	полдень		new	в тренажёре нет
+Module 1	1f	opportunity	возможность		none	связка / реплика / отвлечённое слово
+Module 1	1f	play a joke on sb	подшутить над кем-либо		new	в тренажёре нет
+Module 1	1f	refuse	отвергнуть, отказать(ся)	263	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	sofa	диван	264	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	spectator	наблюдатель	265	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	tradition	традиция	266	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	trick	обман, хитрость, шутка	267	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	1f	volume	звук		new	в тренажёре нет
+Module 1	Culture Corner 1	arena	арена		new	в тренажёре нет
+Module 1	Culture Corner 1	attraction	аттракцион	270	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Culture Corner 1	charm bag	талисман, амулет (мешочек с амулетами)		new	в тренажёре нет
+Module 1	Culture Corner 1	come alive	ожить		new	в тренажёре нет
+Module 1	Culture Corner 1	entrance	вход	273	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Culture Corner 1	entry	зд. словарная статья		new	в тренажёре нет
+Module 1	Culture Corner 1	explode	взорваться, разразиться		new	в тренажёре нет
+Module 1	Culture Corner 1	grand	грандиозный		new	в тренажёре нет
+Module 1	Culture Corner 1	handicraft	вещь ручной работы, поделка		new	в тренажёре нет
+Module 1	Culture Corner 1	jewellery	драгоценности, ювелирные изделия	278	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Culture Corner 1	movement	движение, перемещение		new	в тренажёре нет
+Module 1	Culture Corner 1	on sale	в продаже, выставленный на продажу	280	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Culture Corner 1	pow-wow	собрание, сборище		new	в тренажёре нет
+Module 1	Culture Corner 1	prize	приз	282	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Culture Corner 1	rhythm	ритм	283	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Culture Corner 1	spectacular	впечатляющий, захватывающий	284	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Culture Corner 1	trader	торговец		new	в тренажёре нет
+Module 1	Culture Corner 1	treat	угощение	286	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Culture Corner 1	tribe	племя	287	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	attend	присутствовать, посещать	288	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	battlefield	поле боя		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	bravely	смело		none	связка / реплика / отвлечённое слово
+Module 1	Across the Curriculum 1 – PSHE	bugle	рог, горн		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	commemoration	(торжественная) церемония в память о чем-либо		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	cross	крест		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	delicate	нежный, тонкий, чувствительный		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	emotional	эмоциональный	295	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	field	поле	296	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	gun	огнестрельное оружие		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	lay	класть, положить		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	lone	одинокий		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	mark	отмечать	300	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	memorial service	заупокойная или поминальная служба		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	memorise	выучивать наизусть, запоминать	302	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	mention	упоминать	303	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	monument	монумент, памятник	304	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	poem	стихотворение	305	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	point out	заметить		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	politician	политик	307	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	poppy	мак		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	remember	помнить	309	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	remind	напоминать, делать напоминание	310	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	row	ряд	311	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	royal	королевский	312	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	signal	сигнализировать, показывать		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	significance	важность		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	silence	тишина, молчание	315	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	soldier	солдат	316	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 1	Across the Curriculum 1 – PSHE	solemn	торжественный		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	symbol	символ		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	top	главный, высший		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	verse	строфа		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	veteran	ветеран		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	wartime	военное время		new	в тренажёре нет
+Module 1	Across the Curriculum 1 – PSHE	wreath	венок	323	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	airless	безвоздушный		new	в тренажёре нет
+Module 2	2a	appliance	бытовой прибор	325	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	armchair	кресло	326	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	astronaut	астронавт, космонавт	327	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	attic	чердак	328	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	bacteria	бактерии	329	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	basement	подвал	330	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	block of flats	многоквартирный дом	331	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	busy schedule	плотный график		new	в тренажёре нет
+Module 2	2a	caravan	трейлер		new	в тренажёре нет
+Module 2	2a	control	панель управления		new	в тренажёре нет
+Module 2	2a	cool	классный	335	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	cottage	коттедж	336	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	cover	накрывать	337	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	crowded	переполненный, оживленный	338	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	detached	отдельно стоящий		new	в тренажёре нет
+Module 2	2a	dishwasher	посудомоечная машина		new	в тренажёре нет
+Module 2	2a	drive	подъездная дорога		new	в тренажёре нет
+Module 2	2a	droplet	капля		new	в тренажёре нет
+Module 2	2a	equipment	оборудование, инструменты	343	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	escape	зд. избегать		new	в тренажёре нет
+Module 2	2a	exercise bike	велотренажер		new	в тренажёре нет
+Module 2	2a	experiment	эксперимент	346	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	feature	особенность		new	в тренажёре нет
+Module 2	2a	float	зд. плавать по воздуху	348	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	football pitch	футбольное поле		new	в тренажёре нет
+Module 2	2a	garage	гараж	350	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	giant	огромный		new	в тренажёре нет
+Module 2	2a	gravity	сила тяготения	352	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	hall	холл, прихожая	353	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	household chore	повседневная работа по дому		new	в тренажёре нет
+Module 2	2a	inhabitant	житель	355	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	lack	недостаток		new	в тренажёре нет
+Module 2	2a	maybe	возможно, вероятно		none	связка / реплика / отвлечённое слово
+Module 2	2a	muscle	мышца	358	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	orbit	вращаться по орбите		new	в тренажёре нет
+Module 2	2a	porch	крыльцо		new	в тренажёре нет
+Module 2	2a	press against	давить, надавливать		new	в тренажёре нет
+Module 2	2a	repair	ремонтировать, чинить	362	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	resident	житель		new	в тренажёре нет
+Module 2	2a	rise	всходить		new	в тренажёре нет
+Module 2	2a	rowing machine	гребной тренажер		new	в тренажёре нет
+Module 2	2a	set	заходить		new	в тренажёре нет
+Module 2	2a	sofa	диван	367	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	space	космос		new	в тренажёре нет
+Module 2	2a	space station	космическая станция		new	в тренажёре нет
+Module 2	2a	spare room	свободная комната		new	в тренажёре нет
+Module 2	2a	stare	пристально смотреть, уставиться	371	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	strap	прикреплять, привязывать	372	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	study	кабинет	373	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	suburb	пригород		new	в тренажёре нет
+Module 2	2a	tray	лоток		new	в тренажёре нет
+Module 2	2a	truly	на самом деле		none	связка / реплика / отвлечённое слово
+Module 2	2a	vacuum cleaner	пылесос		new	в тренажёре нет
+Module 2	2a	vacuum hose	вакуумный шланг		new	в тренажёре нет
+Module 2	2a	village	деревня	379	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2a	washing-up	мойка посуды		new	в тренажёре нет
+Module 2	2a	weird	странный, причудливый		new	в тренажёре нет
+Module 2	2a	work out	упражняться, тренироваться		new	в тренажёре нет
+Module 2	2a	zero gravity	невесомость		new	в тренажёре нет
+Module 2	Vocabulary: household chores	do the ironing	гладить белье		new	в тренажёре нет
+Module 2	Vocabulary: household chores	do the washing	стирать одежду	385	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Vocabulary: household chores	do the washing-up	мыть тарелки	386	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Vocabulary: household chores	dust the furniture	протирать мебель		new	в тренажёре нет
+Module 2	Vocabulary: household chores	instruction	инструкция	388	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Vocabulary: household chores	journalist	журналист	389	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Vocabulary: household chores	keep a room tidy	поддерживать чистоту в комнате		new	в тренажёре нет
+Module 2	Vocabulary: household chores	leaflet	листовка, буклет	391	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Vocabulary: household chores	make the beds	заправлять кровать		new	в тренажёре нет
+Module 2	Vocabulary: household chores	swap	меняться	393	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Vocabulary: household chores	sweep the floor	подметать пол		new	в тренажёре нет
+Module 2	2b	annoyance	раздражение	395	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2b	apologise	извиняться	396	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2b	drive sb crazy	доводить до безумия	397	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2b	fault	вина	398	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2b	get off the phone	прекратить разговаривать по телефону		new	в тренажёре нет
+Module 2	2b	get on sb's nerves	действовать кому-либо на нервы	400	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2b	have a point	говорить по сути		new	в тренажёре нет
+Module 2	2b	Have had enough	С меня хватит		new	в тренажёре нет
+Module 2	2b	make it up to sb	мириться с кем-либо		new	в тренажёре нет
+Module 2	2b	manager	менеджер	404	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2b	matter	дело		new	в тренажёре нет
+Module 2	2b	mess	беспорядок, грязь	406	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2b	part-time	неполный (рабочий) день	407	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2b	pocket money	карманные деньги	408	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2b	reproach	упрекать		new	в тренажёре нет
+Module 2	2b	slave	раб		new	в тренажёре нет
+Module 2	2b	state	состояние	411	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2b	switch off	выключать	412	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2b	treat	относиться к	413	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	admit	принимать, допускать		new	в тренажёре нет
+Module 2	2c	artist	художник	415	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	avoid	избегать	416	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	bedbug	клоп		new	в тренажёре нет
+Module 2	2c	below	зд. менее чем		none	связка / реплика / отвлечённое слово
+Module 2	2c	borrow	одалживать	419	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	break	перерыв, перемена	420	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	bug	докучать, надоедать		new	в тренажёре нет
+Module 2	2c	can't help	быть не в состоянии контролировать свои чувства и поведение		new	в тренажёре нет
+Module 2	2c	can't stand	не выносить кого-либо	423	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	cockroach	таракан		new	в тренажёре нет
+Module 2	2c	complain	жаловаться	425	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	cool	прохладный	426	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	cross	переходить, пересекать	427	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	deliver	доставлять	428	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	deny	отрицать	429	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	disease	болезнь	430	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	dust mite	пылевой клещ		new	в тренажёре нет
+Module 2	2c	expect	ожидать	432	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	fall asleep	уснуть	433	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	feed on	питаться		new	в тренажёре нет
+Module 2	2c	get on	ладить	435	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	get rid of	избавляться от	436	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	go on	продолжать	437	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	gross	омерзительный, отвратительный		new	в тренажёре нет
+Module 2	2c	insect	насекомое	439	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	it's not worth	это не стоит того		new	в тренажёре нет
+Module 2	2c	keep one's word	сдержать слово		new	в тренажёре нет
+Module 2	2c	keep up	продолжать		new	в тренажёре нет
+Module 2	2c	lay	нести		new	в тренажёре нет
+Module 2	2c	look forward to	ждать чего-либо с нетерпением	444	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	member	член	445	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	mind	зд. все равно		none	связка / реплика / отвлечённое слово
+Module 2	2c	nasty	опасный, неприятный	447	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	pest	вредитель, паразит		new	в тренажёре нет
+Module 2	2c	portrait	портрет	449	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	shower	душ	450	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	skin	кожа		new	в тренажёре нет
+Module 2	2c	sleep tight	крепко спать		new	в тренажёре нет
+Module 2	2c	solve	решать		new	в тренажёре нет
+Module 2	2c	temperature	температура	454	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2c	vacuum	пылесосить		new	в тренажёре нет
+Module 2	2d	arrogant	высокомерный, надменный		new	в тренажёре нет
+Module 2	2d	attractive	привлекательный	457	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	babysit	присматривать за детьми		new	в тренажёре нет
+Module 2	2d	baker's	пекарня	459	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	balcony	балкон	460	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	bank	банк	461	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	busy	оживленный	462	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	café	кафе	463	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	caring	заботливый	464	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	chemist's	аптека	465	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	corner shop	мелкий магазин		new	в тренажёре нет
+Module 2	2d	curtain	штора	467	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	dig	копать	468	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	drop	ронять	469	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	easily annoyed	легко раздражимый		new	в тренажёре нет
+Module 2	2d	errand	поручение, задание		new	в тренажёре нет
+Module 2	2d	feed	кормить	472	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	forgetful	забывчивый	473	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	grocer's	бакалея		new	в тренажёре нет
+Module 2	2d	helpful	услужливый	475	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	in return	взамен чего-либо		new	в тренажёре нет
+Module 2	2d	industrial	промышленный	477	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	isolated	изолированный	478	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	keep	продолжать		new	в тренажёре нет
+Module 2	2d	kid	ребенок		new	в тренажёре нет
+Module 2	2d	litter	мусор	481	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	local	местный	482	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	make friends with sb	подружиться с кем-либо		new	в тренажёре нет
+Module 2	2d	modern	современный	484	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	move house	переехать в новый дом	485	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	narrow	узкий	486	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	neighbour	сосед	487	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	neighbourhood	округа	488	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	newsagent's	газетный киоск	489	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	nosy	любопытный		new	в тренажёре нет
+Module 2	2d	peep	подглядывать		new	в тренажёре нет
+Module 2	2d	pleasure	удовольствие	492	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	pretty	хорошенький	493	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	rude	грубый	494	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	selfish	эгоистичный	495	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	silly	глупый	496	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	sociable	общительный	497	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	spacious	просторный		new	в тренажёре нет
+Module 2	2d	talkative	разговорчивый	499	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	traditional	традиционный	500	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	tree-lined	усаженный деревьями		new	в тренажёре нет
+Module 2	2d	ugly	некрасивый, уродливый	502	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	water	поливать	503	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	wedding anniversary	годовщина свадьбы		new	в тренажёре нет
+Module 2	2d	wide	широкий	505	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2d	wonder	интересоваться	506	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	accept	принимать	507	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	appreciate	быть благодарным	508	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	arrangement	договоренность	509	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	cheer sb up	подбадривать кого-либо		new	в тренажёре нет
+Module 2	2e	congratulations	поздравления		new	в тренажёре нет
+Module 2	2e	consist of	состоять из	512	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	cosy	уютный	513	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	daily routine	ежедневные дела	514	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	games arcade	игровой зал		new	в тренажёре нет
+Module 2	2e	hang out	проводить время	516	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	hospitality	гостеприимство	517	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	input	полученная информация		new	в тренажёре нет
+Module 2	2e	invitation	приглашение	519	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	journey	путешествие	520	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	pen friend	друг по переписке		new	в тренажёре нет
+Module 2	2e	permission	разрешение, позволение	522	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	pinball	пинбол		new	в тренажёре нет
+Module 2	2e	refuse	отказываться	524	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	relative	родственник	525	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	remark	комментарий	526	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2e	upstairs	наверху	527	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	address	адрес	528	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	alteration	изменение		new	в тренажёре нет
+Module 2	2f	announcement	объявление	530	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	be sick and tired	устать от чего-либо		new	в тренажёре нет
+Module 2	2f	brush	чистить щеткой		new	в тренажёре нет
+Module 2	2f	Cabinet	Кабинет министров		new	в тренажёре нет
+Module 2	2f	civil servant	государственный служащий		new	в тренажёре нет
+Module 2	2f	clean	чистить	535	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	cleaning	чистка		new	в тренажёре нет
+Module 2	2f	colleague	коллега	537	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	cupboard	шкаф для посуды	538	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	décor	декор		new	в тренажёре нет
+Module 2	2f	elegant	стильный, элегантный	540	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	elf	эльф	541	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	fine	отличный	542	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	furnished	меблированный		new	в тренажёре нет
+Module 2	2f	gentle	добрый, мягкий	544	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	gentleness	доброта, мягкость		new	в тренажёре нет
+Module 2	2f	gift	подарок		new	в тренажёре нет
+Module 2	2f	government minister	министр		new	в тренажёре нет
+Module 2	2f	grand	впечатляющий, внушительный		new	в тренажёре нет
+Module 2	2f	grave	серьезный		new	в тренажёре нет
+Module 2	2f	gravity	гравитация	550	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	guest	гость	551	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	interview	интервью	552	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	move in	переехать	553	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	official function	официальный прием		new	в тренажёре нет
+Module 2	2f	ordinary	обычный	555	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	originally	изначально		none	связка / реплика / отвлечённое слово
+Module 2	2f	past	предыдущий, прошлый		new	в тренажёре нет
+Module 2	2f	prime minister	премьер-министр, глава правительства		new	в тренажёре нет
+Module 2	2f	receive	принимать	559	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	recognise	узнавать		new	в тренажёре нет
+Module 2	2f	sane	здравый		new	в тренажёре нет
+Module 2	2f	sanity	здравый ум		new	в тренажёре нет
+Module 2	2f	security	безопасность		new	в тренажёре нет
+Module 2	2f	state dinner	официальный обед		new	в тренажёре нет
+Module 2	2f	sweep	подметать	565	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	terraced house	дом ленточной застройки	566	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	urgency	срочность		new	в тренажёре нет
+Module 2	2f	urgent	срочный		new	в тренажёре нет
+Module 2	2f	wardrobe	гардероб	569	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	wash	мыть	570	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	2f	washing	стирка		new	в тренажёре нет
+Module 2	Going Green 2	at risk	в опасности	572	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	become extinct	вымирать		new	в тренажёре нет
+Module 2	Going Green 2	charity	благотворительность	574	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	chemical	химическое вещество	575	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	damage	повреждение	576	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	deforestation	вырубка леса		new	в тренажёре нет
+Module 2	Going Green 2	destroy	уничтожать	578	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	feather	перо	579	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	fin	плавник		new	в тренажёре нет
+Module 2	Going Green 2	grain	зд. песчинка		new	в тренажёре нет
+Module 2	Going Green 2	habitat	место обитания	582	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	harm	наносить вред	583	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	hedgerow	живая изгородь		new	в тренажёре нет
+Module 2	Going Green 2	homeless	бездомный		new	в тренажёре нет
+Module 2	Going Green 2	litter	мусор	586	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	local council	местная власть		new	в тренажёре нет
+Module 2	Going Green 2	pick up	подбирать	588	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	playground	игровая площадка	589	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	poisonous	ядовитый		new	в тренажёре нет
+Module 2	Going Green 2	pollution	загрязнение	591	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	pond	пруд		new	в тренажёре нет
+Module 2	Going Green 2	remain unspoiled	оставаться неиспорченным		new	в тренажёре нет
+Module 2	Going Green 2	solution	решение	594	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	species	вид	595	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	survive	выживать	596	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	threaten	угрожать	597	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	tiny	крошечный	598	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	wildlife	дикая природа	599	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	wing	крыло	600	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 2	Going Green 2	woodland	лес		new	в тренажёре нет
+Module 3	3a	across	в ширину		none	связка / реплика / отвлечённое слово
+Module 3	3a	ancient	древний	603	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	ape	(человекообразная) обезьяна, примат		new	в тренажёре нет
+Module 3	3a	approach	приближаться	605	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	blunt	тупой		new	в тренажёре нет
+Module 3	3a	bottom	дно		new	в тренажёре нет
+Module 3	3a	couple	пара	608	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	create	создавать	609	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	creature	существо	610	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	disgusting	отвратительный	611	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	dive	нырять в воду	612	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	doubt	сомнение		new	в тренажёре нет
+Module 3	3a	dragon	дракон	614	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	exactly	точно	615	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	exist	существовать		none	связка / реплика / отвлечённое слово
+Module 3	3a	extinct	вымерший		new	в тренажёре нет
+Module 3	3a	fact	факт, действительность		none	связка / реплика / отвлечённое слово
+Module 3	3a	famous	известный	619	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	fiction	выдумка		new	в тренажёре нет
+Module 3	3a	folklore	фольклор		new	в тренажёре нет
+Module 3	3a	footprint	отпечаток ноги	622	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	force	сила		new	в тренажёре нет
+Module 3	3a	fossil	ископаемое, окаменелость	624	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	giant	огромный, гигантский		new	в тренажёре нет
+Module 3	3a	hairy	волосатый		new	в тренажёре нет
+Module 3	3a	hook	крюк	627	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	horrifying	ужасный, страшный		new	в тренажёре нет
+Module 3	3a	humped	горбатый		new	в тренажёре нет
+Module 3	3a	in search of	в поиске		new	в тренажёре нет
+Module 3	3a	investigator	исследователь		new	в тренажёре нет
+Module 3	3a	legend	легенда	632	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	monster	монстр, чудовище	633	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	mysterious	таинственный, загадочный	634	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	mythical	мифический		new	в тренажёре нет
+Module 3	3a	neck	шея	636	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	off the coast	недалеко от берега		new	в тренажёре нет
+Module 3	3a	probably	возможно		none	связка / реплика / отвлечённое слово
+Module 3	3a	recorded	зд. зафиксированный		new	в тренажёре нет
+Module 3	3a	remain	оставаться		new	в тренажёре нет
+Module 3	3a	report	сообщать, докладывать	641	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	roll	катиться	642	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	sharp	острый	643	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	shocking	шокирующий		new	в тренажёре нет
+Module 3	3a	sighting	наблюдение		new	в тренажёре нет
+Module 3	3a	similar	похожий		none	связка / реплика / отвлечённое слово
+Module 3	3a	skeleton	скелет		new	в тренажёре нет
+Module 3	3a	snake-like	змееподобный		new	в тренажёре нет
+Module 3	3a	species	виды	649	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	squid	кальмар		new	в тренажёре нет
+Module 3	3a	strange	странный, необычный	651	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	tail	хвост	652	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	tentacle	щупальце		new	в тренажёре нет
+Module 3	3a	unfortunately	к сожалению		none	связка / реплика / отвлечённое слово
+Module 3	3a	unicorn	единорог	655	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	various	различный		none	связка / реплика / отвлечённое слово
+Module 3	3a	violent	сильный, мощный	657	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3a	whirlpool	водоворот		new	в тренажёре нет
+Module 3	3a	witness	свидетель, очевидец	659	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: ways to look	briefly	кратко		none	связка / реплика / отвлечённое слово
+Module 3	Vocabulary: ways to look	catch a glimpse of	увидеть мельком		new	в тренажёре нет
+Module 3	Vocabulary: ways to look	glance	бросить быстрый взгляд		new	в тренажёре нет
+Module 3	Vocabulary: ways to look	glare	пристально смотреть		new	в тренажёре нет
+Module 3	Vocabulary: ways to look	impress	впечатлять	664	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: ways to look	notice	замечать	665	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: ways to look	spot	замечать	666	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: ways to look	stare	уставиться, пристально смотреть	667	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3b	anxious	беспокоящийся	668	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3b	appearance	внешность	669	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3b	chase	преследовать	670	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3b	confident	уверенный в себе	671	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3b	confused	озадаченный	672	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3b	deal with	справляться с чем-либо	673	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3b	doubt	сомневаться		new	в тренажёре нет
+Module 3	3b	fail	претерпевать неудачу, завалить	675	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3b	get out of the wrong side of the bed	встать «не с той ноги»		new	в тренажёре нет
+Module 3	3b	horrible	жуткий, страшный	677	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3b	lose one's way	зд. запутаться, потеряться		new	в тренажёре нет
+Module 3	3b	mind	разум	679	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3b	miss	упускать, терять возможность	680	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3b	nightmare	кошмар	681	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3b	opportunity	возможность		none	связка / реплика / отвлечённое слово
+Module 3	3b	over and over	много раз подряд, снова и снова		new	в тренажёре нет
+Module 3	3b	pound	колотиться		new	в тренажёре нет
+Module 3	3b	relief	облегчение	685	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3b	shake like a leaf	дрожать		new	в тренажёре нет
+Module 3	3b	situation	ситуация		new	в тренажёре нет
+Module 3	3b	speculate	размышлять		new	в тренажёре нет
+Module 3	3b	stressed out	нервный, напряженный		new	в тренажёре нет
+Module 3	3b	subconscious	подсознательный		new	в тренажёре нет
+Module 3	3b	surely	несомненно, конечно		none	связка / реплика / отвлечённое слово
+Module 3	3b	under stress	находиться в напряженном состоянии, в стрессе		new	в тренажёре нет
+Module 3	3b	unpleasant	неприятный	693	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3b	unprepared	неподготовленный		new	в тренажёре нет
+Module 3	3c	actually	на самом деле		none	связка / реплика / отвлечённое слово
+Module 3	3c	ankle	лодыжка	696	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	break down	ломаться	697	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	coincidence	совпадение		new	в тренажёре нет
+Module 3	3c	come along	прибывать		new	в тренажёре нет
+Module 3	3c	company	компания		new	в тренажёре нет
+Module 3	3c	drawer	ящик	701	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	earring	серьга		new	в тренажёре нет
+Module 3	3c	equivalent	эквивалент		none	связка / реплика / отвлечённое слово
+Module 3	3c	expect	ожидать	704	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	item	предмет	705	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	make fun of	смеяться (над кем-либо), высмеивать		new	в тренажёре нет
+Module 3	3c	mud	грязь	707	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	promotion	продвижение	708	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	pull out	вынимать, вытаскивать	709	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	receive	получать	710	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	second-hand	подержанный, бывший в употреблении	711	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	shiny	блестящий	712	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	shocked	шокированный	713	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	slip	поскользнуться	714	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	switch off	выключать	715	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	tie	галстук	716	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3c	twist	подвернуть	717	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3d	complicated	сложный для понимания		new	в тренажёре нет
+Module 3	3d	elderly	пожилой	719	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3d	image	картина, изображение	720	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3d	individual	индивидуальный		new	в тренажёре нет
+Module 3	3d	optical illusion	оптическая иллюзия		new	в тренажёре нет
+Module 3	3d	play tricks on	обманывать, дурачить		new	в тренажёре нет
+Module 3	3d	process	процесс		none	связка / реплика / отвлечённое слово
+Module 3	3d	series	ряд, последовательность		new	в тренажёре нет
+Module 3	3d	take in	принимать, пропускать		new	в тренажёре нет
+Module 3	3d	train track	железнодорожный путь		new	в тренажёре нет
+Module 3	Vocabulary: The mind	assumption	предположение		new	в тренажёре нет
+Module 3	Vocabulary: The mind	background	задний план	729	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: The mind	brain	мозг	730	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: The mind	canvas	холст		new	в тренажёре нет
+Module 3	Vocabulary: The mind	cart	повозка, телега		new	в тренажёре нет
+Module 3	Vocabulary: The mind	collect	собирать	733	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: The mind	demonstration	показ, демонстрация		new	в тренажёре нет
+Module 3	Vocabulary: The mind	exhibition	выставка	735	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: The mind	fantasy	фантазия	736	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: The mind	field worker	полевой рабочий		new	в тренажёре нет
+Module 3	Vocabulary: The mind	foreground	передний план		new	в тренажёре нет
+Module 3	Vocabulary: The mind	illusion	иллюзия, обман зрения		new	в тренажёре нет
+Module 3	Vocabulary: The mind	imagination	воображение	740	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: The mind	location	местоположение	741	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: The mind	lose touch with reality	утратить представление о действительности, жить в мире грез		new	в тренажёре нет
+Module 3	Vocabulary: The mind	maid	служанка		new	в тренажёре нет
+Module 3	Vocabulary: The mind	mind	ум, разум	744	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: The mind	oil	масляная краска	745	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: The mind	original	подлинник, оригинал	746	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: The mind	portrait	портрет	747	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: The mind	realistic	реалистичный	748	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: The mind	reflection	отражение		new	в тренажёре нет
+Module 3	Vocabulary: The mind	scene	сцена, пейзаж	750	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: The mind	shade	оттенок		new	в тренажёре нет
+Module 3	Vocabulary: The mind	shadow	тень	752	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Vocabulary: The mind	take up	зд. занимать		new	в тренажёре нет
+Module 3	Vocabulary: The mind	test	проверка, тест		new	в тренажёре нет
+Module 3	3e	bill	счет	755	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3e	chat	беседовать, болтать	756	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3e	climax event	кульминация		new	в тренажёре нет
+Module 3	3e	contrasting	контрастирующий		new	в тренажёре нет
+Module 3	3e	develop	1. развивать; 2. проявлять	759	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3e	fiercely	грубо		none	связка / реплика / отвлечённое слово
+Module 3	3e	gasp	задыхаться	761	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3e	horror	ужас		new	в тренажёре нет
+Module 3	3e	imaginary	воображаемый, выдуманный	763	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3e	include	включать в себя		none	связка / реплика / отвлечённое слово
+Module 3	3e	inn	маленькая гостиница		new	в тренажёре нет
+Module 3	3e	it gets dark	темнеет		new	в тренажёре нет
+Module 3	3e	lounge	комната отдыха		new	в тренажёре нет
+Module 3	3e	old-fashioned	старый, устаревший	768	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3e	passer-by	прохожий		new	в тренажёре нет
+Module 3	3e	police station	полицейский участок	770	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3e	ruined	разрушенный	771	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3e	sequence	порядок		none	связка / реплика / отвлечённое слово
+Module 3	3e	set the scene	зд. описывать место действия		new	в тренажёре нет
+Module 3	3e	simplistic	упрощенческий		new	в тренажёре нет
+Module 3	3e	stay the night	остаться на ночь в каком-либо месте		new	в тренажёре нет
+Module 3	3e	tale	рассказ		new	в тренажёре нет
+Module 3	3e	troubled	обеспокоенный	777	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3e	variety	разнообразие, многообразие		none	связка / реплика / отвлечённое слово
+Module 3	3f	alike	одинаковый, похожий		new	в тренажёре нет
+Module 3	3f	archaeologist	археолог	780	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3f	cellar	подвал	781	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3f	classic	классический	782	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3f	helmet	шлем	783	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3f	investigator	исследователь		new	в тренажёре нет
+Module 3	3f	plumber	водопроводчик	785	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3f	same	такой же, одинаковый		new	в тренажёре нет
+Module 3	3f	scene	сцена, пейзаж	787	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3f	sight	зрение, видимость		new	в тренажёре нет
+Module 3	3f	sighting	наблюдение		new	в тренажёре нет
+Module 3	3f	similar	похожий		none	связка / реплика / отвлечённое слово
+Module 3	3f	soldier	солдат	791	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3f	spectator	зритель	792	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	3f	spine-chilling	ужасающий		new	в тренажёре нет
+Module 3	3f	sword	меч		new	в тренажёре нет
+Module 3	3f	well-preserved	хорошо сохранившийся		new	в тренажёре нет
+Module 3	3f	witness	очевидец, свидетель	796	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Culture Corner 3	bang	очень громкий звук		new	в тренажёре нет
+Module 3	Culture Corner 3	bend	изгиб		new	в тренажёре нет
+Module 3	Culture Corner 3	castle	замок	799	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Culture Corner 3	consider	полагать, считать		new	в тренажёре нет
+Module 3	Culture Corner 3	corridor	коридор		new	в тренажёре нет
+Module 3	Culture Corner 3	date back to	относиться к		new	в тренажёре нет
+Module 3	Culture Corner 3	dungeon	подземелье	803	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Culture Corner 3	go bump in the night	издавать странные звуки по ночам		new	в тренажёре нет
+Module 3	Culture Corner 3	haunted	посещаемый призраками	805	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Culture Corner 3	hunt	преследовать		new	в тренажёре нет
+Module 3	Culture Corner 3	leave sb with a broken heart	разбить кому-либо сердце		new	в тренажёре нет
+Module 3	Culture Corner 3	lurk	прятаться		new	в тренажёре нет
+Module 3	Culture Corner 3	medieval	средневековый	809	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Culture Corner 3	passage	проход, коридор	810	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Culture Corner 3	prison	тюрьма	811	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Culture Corner 3	rustling	шуршащий		new	в тренажёре нет
+Module 3	Culture Corner 3	show up	появляться		new	в тренажёре нет
+Module 3	Culture Corner 3	torture chamber	комната пыток		new	в тренажёре нет
+Module 3	Culture Corner 3	turn	поворот		new	в тренажёре нет
+Module 3	Culture Corner 3	view	видеть		none	связка / реплика / отвлечённое слово
+Module 3	Culture Corner 3	wander	бродить	817	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Across the Curriculum 3	angle	угол		new	в тренажёре нет
+Module 3	Across the Curriculum 3	break sth down	разделять что-либо		new	в тренажёре нет
+Module 3	Across the Curriculum 3	cube	куб		new	в тренажёре нет
+Module 3	Across the Curriculum 3	cylinder	цилиндр		new	в тренажёре нет
+Module 3	Across the Curriculum 3	dull	зд. тусклый		new	в тренажёре нет
+Module 3	Across the Curriculum 3	element	доля		none	связка / реплика / отвлечённое слово
+Module 3	Across the Curriculum 3	impact	влияние	824	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Across the Curriculum 3	layer	слой		new	в тренажёре нет
+Module 3	Across the Curriculum 3	rectangle	прямоугольник		new	в тренажёре нет
+Module 3	Across the Curriculum 3	represent	символизировать		none	связка / реплика / отвлечённое слово
+Module 3	Across the Curriculum 3	shape	форма		new	в тренажёре нет
+Module 3	Across the Curriculum 3	smooth	гладкий	829	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Across the Curriculum 3	square	квадрат	830	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Across the Curriculum 3	triangle	треугольник	831	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 3	Across the Curriculum 3	viewpoint	зд. угол зрения		none	связка / реплика / отвлечённое слово
+Module 4	4a	ability	способность		new	в тренажёре нет
+Module 4	4a	and so on	и так далее		new	в тренажёре нет
+Module 4	4a	artificial	искусственный		new	в тренажёре нет
+Module 4	4a	assistant	помощник, ассистент		new	в тренажёре нет
+Module 4	4a	brain	мозг	837	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	cater for	удовлетворять		new	в тренажёре нет
+Module 4	4a	companion	друг	839	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	conflict	конфликт, ссора	840	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	consciousness	сознание, разум		new	в тренажёре нет
+Module 4	4a	copy	копировать, имитировать	842	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	creativity	творчество	843	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	decision	решение	844	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	divided	зд. разделяющийся		new	в тренажёре нет
+Module 4	4a	emotional response	эмоциональная реакция		new	в тренажёре нет
+Module 4	4a	except for	кроме		new	в тренажёре нет
+Module 4	4a	existence	существование		none	связка / реплика / отвлечённое слово
+Module 4	4a	expert	эксперт, профессионал	849	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	figurative speech	образная речь		new	в тренажёре нет
+Module 4	4a	function	функция		new	в тренажёре нет
+Module 4	4a	gesture	жест	852	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	harm	вред	853	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	helper	помощник	854	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	in theory	теоретически		new	в тренажёре нет
+Module 4	4a	inaction	бездействие		new	в тренажёре нет
+Module 4	4a	injure	ранить, причинять вред	857	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	intelligence	интеллект, рассудок	858	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	invention	изобретение	859	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	ironing	глаженье		new	в тренажёре нет
+Module 4	4a	knowledge	зд. понимание	861	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	mobility	мобильность		new	в тренажёре нет
+Module 4	4a	mow the lawn	косить лужайку		new	в тренажёре нет
+Module 4	4a	nuclear power	атомная энергия		new	в тренажёре нет
+Module 4	4a	obey	подчиняться	865	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	obstacle	помеха, преграда	866	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	perform	выполнять	867	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	power of reasoning	способность к умозаключениям		new	в тренажёре нет
+Module 4	4a	promise	обещать	869	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	protect	защищать	870	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	protection	защита	871	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	reality	реальность		none	связка / реплика / отвлечённое слово
+Module 4	4a	reasoning	умозаключение		new	в тренажёре нет
+Module 4	4a	roboticist	инженер, создающий роботов		new	в тренажёре нет
+Module 4	4a	rocket	ракета	875	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	science fiction	научная фантастика	876	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	scientist	ученый	877	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4a	simply	просто		none	связка / реплика / отвлечённое слово
+Module 4	4a	task	задание		none	связка / реплика / отвлечённое слово
+Module 4	4a	vacuum	пылесосить		new	в тренажёре нет
+Module 4	Vocabulary: Technology	be divided	зд. разделяться		new	в тренажёре нет
+Module 4	Vocabulary: Technology	become a reality	становиться реальным		new	в тренажёре нет
+Module 4	Vocabulary: Technology	build	строить		new	в тренажёре нет
+Module 4	Vocabulary: Technology	cater for one's needs	удовлетворять чьи-либо нужды		new	в тренажёре нет
+Module 4	Vocabulary: Technology	clean	чистить	885	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Vocabulary: Technology	clear	убирать		new	в тренажёре нет
+Module 4	Vocabulary: Technology	common	обычный	887	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Vocabulary: Technology	discovery	открытие	888	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Vocabulary: Technology	functioning	функционирующий		new	в тренажёре нет
+Module 4	Vocabulary: Technology	gadget	прибор	890	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Vocabulary: Technology	high-tech	высокотехнологичный	891	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Vocabulary: Technology	housework	работа по дому	892	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Vocabulary: Technology	invention	изобретение	893	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Vocabulary: Technology	microwave	микроволновая печь		new	в тренажёре нет
+Module 4	Vocabulary: Technology	obstacle	помеха, преграда	895	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Vocabulary: Technology	obstruction	заграждение, барьер		new	в тренажёре нет
+Module 4	Vocabulary: Technology	ordinary	обыкновенный	897	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Vocabulary: Technology	overcome a problem	решить проблему		new	в тренажёре нет
+Module 4	Vocabulary: Technology	own	владеть, иметь в собственности	899	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Vocabulary: Technology	perform a task	выполнять задание		new	в тренажёре нет
+Module 4	Vocabulary: Technology	problem	проблема	901	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Vocabulary: Technology	reality	реальность		none	связка / реплика / отвлечённое слово
+Module 4	Vocabulary: Technology	trouble	проблема, неприятность	903	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	anti-virus	антивирусный		new	в тренажёре нет
+Module 4	4b Computer problems	basics	основы		new	в тренажёре нет
+Module 4	4b Computer problems	by mistake	по ошибке	906	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	connect	соединять, подсоединять	907	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	crash	внезапно ломаться		new	в тренажёре нет
+Module 4	4b Computer problems	cursor	курсор		new	в тренажёре нет
+Module 4	4b Computer problems	delete	удалять		new	в тренажёре нет
+Module 4	4b Computer problems	disc drive	дисковод		new	в тренажёре нет
+Module 4	4b Computer problems	document	файловый документ		new	в тренажёре нет
+Module 4	4b Computer problems	download	загружать данные из Интернета	913	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	frozen	«зависший»		new	в тренажёре нет
+Module 4	4b Computer problems	germ	микроб	915	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	give sb a hand	помогать кому-либо		new	в тренажёре нет
+Module 4	4b Computer problems	hardware	зд. комплектующие	917	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	Internet connection	связь с Интернетом		new	в тренажёре нет
+Module 4	4b Computer problems	Internet service provider (ISP)	Интернет-провайдер		new	в тренажёре нет
+Module 4	4b Computer problems	laptop	ноутбук	920	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	link	ссылка	921	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	memory	зд. компьютерная память	922	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	monitor	монитор		new	в тренажёре нет
+Module 4	4b Computer problems	network	сеть	924	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	pour	наливать	925	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	reboot	зд. перезагружать компьютер		new	в тренажёре нет
+Module 4	4b Computer problems	related to	относящийся к чему-либо		new	в тренажёре нет
+Module 4	4b Computer problems	rely on	полагаться на	928	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	run a search	зд. искать информацию в Интернете		new	в тренажёре нет
+Module 4	4b Computer problems	run out	кончаться		new	в тренажёре нет
+Module 4	4b Computer problems	save	зд. сохранять информацию на компьютере	931	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	scan	зд. проверять компьютер на наличие вирусов		new	в тренажёре нет
+Module 4	4b Computer problems	scanner	сканер		new	в тренажёре нет
+Module 4	4b Computer problems	screen	экран	934	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	software	программное обеспечение для компьютера	935	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	sort out	решить		new	в тренажёре нет
+Module 4	4b Computer problems	spill	проливать		new	в тренажёре нет
+Module 4	4b Computer problems	stick	зд. замирать, зависать		new	в тренажёре нет
+Module 4	4b Computer problems	store	хранить	939	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	take up	занимать		new	в тренажёре нет
+Module 4	4b Computer problems	transfer	зд. передавать		new	в тренажёре нет
+Module 4	4b Computer problems	virus	зд. компьютерный вирус	942	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4b Computer problems	web site	Интернет-сайт		new	в тренажёре нет
+Module 4	4b Computer problems	wipe	чистить	944	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4c	bowling	боулинг		new	в тренажёре нет
+Module 4	4c	broke	обанкротившийся, без денег		new	в тренажёре нет
+Module 4	4c	enter	принимать участие		new	в тренажёре нет
+Module 4	4c	exhibition	выставка	948	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4c	inventor	изобретатель	949	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4c	lend	одалживать	950	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4c	orchestra	оркестр		new	в тренажёре нет
+Module 4	4c	presentation	презентация	952	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4c	tired	уставший	953	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	absolutely	абсолютно		none	связка / реплика / отвлечённое слово
+Module 4	4d	academic	ученый		new	в тренажёре нет
+Module 4	4d	access (to)	доступ		new	в тренажёре нет
+Module 4	4d	alone	только		none	связка / реплика / отвлечённое слово
+Module 4	4d	average	типичный, средний	958	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	awful	ужасный	959	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	bridge the divide	уменьшать разницу		new	в тренажёре нет
+Module 4	4d	broadband	зд. широкополосный		new	в тренажёре нет
+Module 4	4d	browse	просматривать Интернет-сайты		new	в тренажёре нет
+Module 4	4d	busy	занятый	963	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	calendar	календарь	964	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	check	проверять	965	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	compare	сравнивать	966	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	competition	соревнование	967	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	convenient	удобный		new	в тренажёре нет
+Module 4	4d	coordinate	согласовывать		new	в тренажёре нет
+Module 4	4d	crossword	кроссворд		new	в тренажёре нет
+Module 4	4d	deliver	доставлять	971	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	display	выставлять напоказ	972	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	distant	далекий, удаленный		new	в тренажёре нет
+Module 4	4d	electronically	электронно, электронным способом		none	связка / реплика / отвлечённое слово
+Module 4	4d	email account	электронный почтовый адрес		new	в тренажёре нет
+Module 4	4d	feature	статья, сенсационный материал		new	в тренажёре нет
+Module 4	4d	global	глобальный	977	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	government	правительство	978	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	hobby	хобби	979	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	horoscope	гороскоп	980	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	illustrate	демонстрировать		new	в тренажёре нет
+Module 4	4d	image	фотография, картинка	982	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	institution	большая организация		new	в тренажёре нет
+Module 4	4d	look up	зд. искать что-либо	984	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	military	военный	985	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	modem	модем		new	в тренажёре нет
+Module 4	4d	phone line	телефонная линия, телефонное соединение		new	в тренажёре нет
+Module 4	4d	population	население	988	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	product	товар, продукт		new	в тренажёре нет
+Module 4	4d	receive	получать	990	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	regular	обычный, регулярный		new	в тренажёре нет
+Module 4	4d	research	исследование	992	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	review	отзыв	993	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	schedule	расписание		new	в тренажёре нет
+Module 4	4d	search engine	поисковая система		new	в тренажёре нет
+Module 4	4d	server	сервер		new	в тренажёре нет
+Module 4	4d	service	сервис, обслуживание	997	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	site	зд. Интернет-сайт	998	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	subscription	подписка	999	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	surf	проводить время		new	в тренажёре нет
+Module 4	4d	take over	брать под контроль, контролировать		new	в тренажёре нет
+Module 4	4d	upgrade	улучшать		new	в тренажёре нет
+Module 4	4d	website	Интернет-сайт	1003	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4d	wirelessly	без проводов		none	связка / реплика / отвлечённое слово
+Module 4	4d	worldwide	глобально		none	связка / реплика / отвлечённое слово
+Module 4	4e	advance	продвигаться		new	в тренажёре нет
+Module 4	4e	antisocial	недружелюбный		new	в тренажёре нет
+Module 4	4e	break down	ломаться	1008	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	communication	общение		new	в тренажёре нет
+Module 4	4e	concentrate on	концентрироваться на чем-либо		new	в тренажёре нет
+Module 4	4e	convenient	удобный		new	в тренажёре нет
+Module 4	4e	daily	ежедневно	1012	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	device	прибор	1013	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	digitally	электронно		none	связка / реплика / отвлечённое слово
+Module 4	4e	distracted	отвлеченный		new	в тренажёре нет
+Module 4	4e	easy	легкий	1016	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	enjoyable	приятный, доставляющий удовольствие	1017	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	enrich	обогащать	1018	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	entertain	развлекать	1019	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	face-to-face	лицом к лицу	1020	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	fast	быстрый	1021	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	for instance	например	1022	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	gadget	прибор	1023	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	games console	игровая приставка	1024	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	hooked on	«подсесть» на что-либо		new	в тренажёре нет
+Module 4	4e	instant messaging	обмениваться мгновенными сообщениями через Интернет		new	в тренажёре нет
+Module 4	4e	multi-task	делать несколько вещей одновременно		new	в тренажёре нет
+Module 4	4e	online	подключенный к Интернету		new	в тренажёре нет
+Module 4	4e	rely (on)	рассчитывать, надеяться на что-либо		new	в тренажёре нет
+Module 4	4e	research	исследовать	1030	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	resource	ресурс		new	в тренажёре нет
+Module 4	4e	skill	умение	1032	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	solve	решать		new	в тренажёре нет
+Module 4	4e	typical	типичный	1034	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	unreliable	ненадежный	1035	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	valuable	ценный	1036	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4e	waste	тратить попусту	1037	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4f	access	иметь доступ	1038	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4f	affect	влиять	1039	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4f	derive	происходить	1040	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4f	discover	обнаруживать	1041	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4f	effect	достигать		new	в тренажёре нет
+Module 4	4f	electric	электрический		new	в тренажёре нет
+Module 4	4f	electronic	электронный		new	в тренажёре нет
+Module 4	4f	engine	мотор, двигатель	1045	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4f	experiment	эксперимент	1046	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4f	forever	навсегда		none	связка / реплика / отвлечённое слово
+Module 4	4f	invent	изобретать	1048	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4f	machine	аппарат, прибор	1049	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4f	offer	предлагать	1050	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4f	suggest	предлагать	1051	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	4f	vote	голосовать	1052	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Culture Corner 4	air	транслировать в прямом эфире		new	в тренажёре нет
+Module 4	Culture Corner 4	available on	доступный		new	в тренажёре нет
+Module 4	Culture Corner 4	brand	торговая марка, бренд		new	в тренажёре нет
+Module 4	Culture Corner 4	category	категория		new	в тренажёре нет
+Module 4	Culture Corner 4	challenge	испытание		new	в тренажёре нет
+Module 4	Culture Corner 4	judge	судья	1058	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Culture Corner 4	level	зд. уровень сложности		none	связка / реплика / отвлечённое слово
+Module 4	Culture Corner 4	logo	логотип	1060	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Culture Corner 4	satellite	спутник	1061	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Culture Corner 4	to the limit	до предела		new	в тренажёре нет
+Module 4	Culture Corner 4	via	через		none	связка / реплика / отвлечённое слово
+Module 4	Culture Corner 4	viewer	телезритель		new	в тренажёре нет
+Module 4	Going Green 4	affect	влиять	1065	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	agreement	соглашение	1066	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	at the moment	в настоящий момент	1067	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	back up	поддержать		new	в тренажёре нет
+Module 4	Going Green 4	big deal	важно		new	в тренажёре нет
+Module 4	Going Green 4	burn	гореть	1070	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	cadmium	кадмий		new	в тренажёре нет
+Module 4	Going Green 4	chemical	химикат, химическое вещество	1072	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	chromium	хром		new	в тренажёре нет
+Module 4	Going Green 4	component	компонент		new	в тренажёре нет
+Module 4	Going Green 4	conclude	подводить итог		none	связка / реплика / отвлечённое слово
+Module 4	Going Green 4	convince	убеждать		new	в тренажёре нет
+Module 4	Going Green 4	currently	в настоящий момент		none	связка / реплика / отвлечённое слово
+Module 4	Going Green 4	donate	жертвовать	1078	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	drip	капать		new	в тренажёре нет
+Module 4	Going Green 4	dump	бросать		new	в тренажёре нет
+Module 4	Going Green 4	emit	выделять	1081	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	encourage	поощрять	1082	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	eventually	в конце концов		none	связка / реплика / отвлечённое слово
+Module 4	Going Green 4	e-waste	мусор, состоящий из электрических приборов		new	в тренажёре нет
+Module 4	Going Green 4	export	экспортировать	1085	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	food chain	пищевая цепь	1086	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	fume	дым, испарение		new	в тренажёре нет
+Module 4	Going Green 4	goods	товары	1088	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	gradually	постепенно		none	связка / реплика / отвлечённое слово
+Module 4	Going Green 4	harm	причинять вред, боль	1090	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	heavy metal	тяжелый металл	1091	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	landfill	закапывание мусора, мусорная свалка	1092	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	lead	свинец		new	в тренажёре нет
+Module 4	Going Green 4	leak	протекать		new	в тренажёре нет
+Module 4	Going Green 4	little by little	понемногу		new	в тренажёре нет
+Module 4	Going Green 4	manufacturer	производитель		new	в тренажёре нет
+Module 4	Going Green 4	mercury	ртуть		new	в тренажёре нет
+Module 4	Going Green 4	monitor	монитор		new	в тренажёре нет
+Module 4	Going Green 4	no doubt about it	без сомнений		new	в тренажёре нет
+Module 4	Going Green 4	old-fashioned	устаревший	1100	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	ooze	медленно течь		new	в тренажёре нет
+Module 4	Going Green 4	outdated	устаревший		new	в тренажёре нет
+Module 4	Going Green 4	pace	скорость		new	в тренажёре нет
+Module 4	Going Green 4	persuade	убеждать	1104	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	poisonous	ядовитый		new	в тренажёре нет
+Module 4	Going Green 4	print cartridge	картридж для принтера		new	в тренажёре нет
+Module 4	Going Green 4	recycle	перерабатывать отходы	1107	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	reduce	уменьшать	1108	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	refill	заправлять		new	в тренажёре нет
+Module 4	Going Green 4	release	выбрасывать	1110	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	repair	чинить	1111	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	replace	заменять	1112	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	reuse	повторно использовать	1113	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	soil	почва	1114	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	tax	налог		new	в тренажёре нет
+Module 4	Going Green 4	toaster	тостер	1116	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	ton	тонна	1117	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 4	Going Green 4	toxic	ядовитый, токсичный		new	в тренажёре нет
+Module 4	Going Green 4	toxic gas	ядовитый газ		new	в тренажёре нет
+Module 4	Going Green 4	treaty	соглашение		new	в тренажёре нет
+Module 5	5a	ability	возможность		new	в тренажёре нет
+Module 5	5a	add value (to)	увеличить стоимость		new	в тренажёре нет
+Module 5	5a	animal behaviourist	ветеринар-бихевиорист		new	в тренажёре нет
+Module 5	5a	art	искусство	1124	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	artist	художник, мастер	1125	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	artistic creativity	художественное творчество		new	в тренажёре нет
+Module 5	5a	auction	аукцион; выставлять что-либо на аукцион		new	в тренажёре нет
+Module 5	5a	auction house	здание, где проходит аукцион		new	в тренажёре нет
+Module 5	5a	award	награда, приз	1129	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	breathing	дыхание		new	в тренажёре нет
+Module 5	5a	brush	кисть		new	в тренажёре нет
+Module 5	5a	carve	вырезать	1132	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	childish	ребяческий, детский	1133	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	city council	городской совет		new	в тренажёре нет
+Module 5	5a	collect	получать, забирать		new	в тренажёре нет
+Module 5	5a	consider	считать		new	в тренажёре нет
+Module 5	5a	create	создавать	1137	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	creative	творческий	1138	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	creator	создатель		new	в тренажёре нет
+Module 5	5a	desire	сильное желание	1140	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	drawing	рисунок	1141	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	encourage	побуждать	1142	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	exclude	исключать		new	в тренажёре нет
+Module 5	5a	exhibition	выставка	1144	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	eyelash	ресница		new	в тренажёре нет
+Module 5	5a	fan	фанат	1146	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	fetch	выручать (о деньгах), зарабатывать		new	в тренажёре нет
+Module 5	5a	graffiti	граффити, настенный рисунок	1148	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	grain	зерно		new	в тренажёре нет
+Module 5	5a	guest	гость	1150	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	heartbeat	сердцебиение		new	в тренажёре нет
+Module 5	5a	hold	проводить		new	в тренажёре нет
+Module 5	5a	host	вести теле-, радиопрограмму	1153	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	huge	огромный	1154	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	human	человеческий	1155	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	identity	зд. имя		new	в тренажёре нет
+Module 5	5a	impress	впечатлять	1157	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	include	включать		none	связка / реплика / отвлечённое слово
+Module 5	5a	irresponsible	безответственный		new	в тренажёре нет
+Module 5	5a	learning difficulties	необучаемость		new	в тренажёре нет
+Module 5	5a	material(s)	материал(ы)		new	в тренажёре нет
+Module 5	5a	miniature sculpture	миниатюрная скульптура		new	в тренажёре нет
+Module 5	5a	needle	игла	1163	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	opponent	оппонент, противник	1164	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	own	владеть		new	в тренажёре нет
+Module 5	5a	owner	владелец		new	в тренажёре нет
+Module 5	5a	painting	картина	1167	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	patiently	терпеливо		none	связка / реплика / отвлечённое слово
+Module 5	5a	pinhead	головка булавки		new	в тренажёре нет
+Module 5	5a	popular	популярный	1170	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	private property	частная собственность		new	в тренажёре нет
+Module 5	5a	produce	производить, изготавливать	1172	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	remain anonymous	оставаться неизвестным		new	в тренажёре нет
+Module 5	5a	remove	забирать	1174	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	significant	важный		new	в тренажёре нет
+Module 5	5a	stay perfectly still	замирать		new	в тренажёре нет
+Module 5	5a	success	успех	1177	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	take a look (at)	посмотреть		new	в тренажёре нет
+Module 5	5a	the public	публика		new	в тренажёре нет
+Module 5	5a	tiny	крошечный	1180	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	toothpick	зубочистка		new	в тренажёре нет
+Module 5	5a	turn up	появляться		new	в тренажёре нет
+Module 5	5a	ugly	безобразный, уродливый	1183	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	unbelievable	невероятный	1184	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	valuable	ценный	1185	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	valueless	ничего не стоящий		new	в тренажёре нет
+Module 5	5a	vandalism	вандализм	1187	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5a	view	смотреть		none	связка / реплика / отвлечённое слово
+Module 5	5a	warehouse	склад		new	в тренажёре нет
+Module 5	5a	well-known	известный		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	architect	архитектор	1191	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	benefit	помогать, приносить пользу		none	связка / реплика / отвлечённое слово
+Module 5	Vocabulary: Types of art	chisel	стамеска, долото		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	clay	глина		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	colour in	раскрашивать		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	costume	костюм	1196	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	crayon	пастель	1197	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	design	создавать дизайн	1198	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	drawing	рисование	1199	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	easel	мольберт		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	kiln	печь для обжига и сушки глиняных изделий		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	landscape	ландшафт	1202	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	local	местный	1203	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	model making	построение модели, моделирование		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	oil paint	масляная краска		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	outline	набросок, эскиз		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	paint	рисовать краской	1207	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	paintbrush	кисть		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	painting	рисование	1209	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	performance	представление	1210	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	photography	фотография	1211	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	portrait	портрет	1212	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	portray	изображать		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	potter's wheel	гончарный круг		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	pottery	гончарные, керамические изделия	1215	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	sculpture	скульптура	1216	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	set	декорации		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	sketch	делать набросок	1218	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	spidergram	схема		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	spray painting	рисование с помощью аэрозоля		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	stage	сцена	1221	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Vocabulary: Types of art	subject	сюжет		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	tripod	штатив		new	в тренажёре нет
+Module 5	Vocabulary: Types of art	watercolour	акварель		new	в тренажёре нет
+Module 5	5b	affect	влиять	1225	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5b	arrangement	приготовление		new	в тренажёре нет
+Module 5	5b	be keen on	любить что-либо	1227	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5b	broad	широкий		new	в тренажёре нет
+Module 5	5b	content	содержание		new	в тренажёре нет
+Module 5	5b	cool	клевый, крутой	1230	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5b	count sb in	включать кого-либо, брать с собой		new	в тренажёре нет
+Module 5	5b	extract	отрывок	1232	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5b	fancy	нравиться	1233	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5b	funky	классный		new	в тренажёре нет
+Module 5	5b	hum	напевать		new	в тренажёре нет
+Module 5	5b	line	строчка		new	в тренажёре нет
+Module 5	5b	melody	мелодия	1237	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5b	musical instrument	музыкальный инструмент	1238	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5b	practice	практика, тренировка		new	в тренажёре нет
+Module 5	5b	preference	предпочтение		new	в тренажёре нет
+Module 5	5b	sing	петь	1241	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5b	soap opera	мыльная опера	1242	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5b	taste	вкус	1243	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5b	theme tune	главная музыкальная тема		new	в тренажёре нет
+Module 5	5b	training	тренировка	1245	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5b	turn down	уменьшать звук	1246	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5b	turn off	выключать	1247	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5b	verse	строфа, стих		new	в тренажёре нет
+Module 5	5c	accurately	точно, аккуратно		none	связка / реплика / отвлечённое слово
+Module 5	5c	by far	намного		new	в тренажёре нет
+Module 5	5c	can afford	позволить		new	в тренажёре нет
+Module 5	5c	child prodigy	одаренный ребенок		new	в тренажёре нет
+Module 5	5c	compile	составлять		new	в тренажёре нет
+Module 5	5c	composer	композитор		new	в тренажёре нет
+Module 5	5c	composition	зд. музыкальная композиция		new	в тренажёре нет
+Module 5	5c	decrease	уменьшать(ся)		new	в тренажёре нет
+Module 5	5c	equal	одинаковый		new	в тренажёре нет
+Module 5	5c	gallery	галерея	1258	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5c	go out	гаснуть		new	в тренажёре нет
+Module 5	5c	hardworking	работающий не покладая рук		new	в тренажёре нет
+Module 5	5c	improve	улучшать(ся)	1261	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5c	increase	увеличивать(ся)	1262	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5c	leading	ведущий, главный, передовой	1263	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5c	opera house	оперный театр		new	в тренажёре нет
+Module 5	5c	output	музыкальные произведения		new	в тренажёре нет
+Module 5	5c	patient	терпеливый	1266	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5c	quiz	викторина	1267	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5c	repertoire	репертуар		new	в тренажёре нет
+Module 5	5c	sell out	распродавать	1269	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5c	slippery	скользкий	1270	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5c	talented	талантливый	1271	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5c	thrilled	взволнованный, возбужденный		new	в тренажёре нет
+Module 5	5c	unfair	нечестный	1273	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	acting	актерская игра	1274	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	action film	боевик	1275	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	action-packed	насыщенный действием		new	в тренажёре нет
+Module 5	5d	all-star	состоящий только из звезд		new	в тренажёре нет
+Module 5	5d	audience	зрители	1278	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	box office	билетная касса		new	в тренажёре нет
+Module 5	5d	cast	распределение ролей	1280	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	coincidence	совпадение		new	в тренажёре нет
+Module 5	5d	colourful	разноцветный	1282	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	consequence	последствие		none	связка / реплика / отвлечённое слово
+Module 5	5d	exchange	обмениваться	1284	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	focus	сосредоточиваться	1285	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	graphics	компьютерная графика		new	в тренажёре нет
+Module 5	5d	ignore	игнорировать		new	в тренажёре нет
+Module 5	5d	kidnapper	похититель		new	в тренажёре нет
+Module 5	5d	last	длиться	1289	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	look forward to	ждать с нетерпением	1290	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	low-budget	малобюджетный		new	в тренажёре нет
+Module 5	5d	massive	массивный	1292	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	nickname	прозвище	1293	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	perform	выступать	1294	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	plenty (of)	много		new	в тренажёре нет
+Module 5	5d	plot	сюжет	1296	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	predictable	предсказуемый		new	в тренажёре нет
+Module 5	5d	presentation	презентация	1298	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	relationship	отношение	1299	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	scene	сцена	1300	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	scenery	декорации		new	в тренажёре нет
+Module 5	5d	science fiction	научная фантастика	1302	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	set	съемочная площадка		new	в тренажёре нет
+Module 5	5d	shoot	снимать фильм		new	в тренажёре нет
+Module 5	5d	special effects	спецэффекты	1305	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	star	играть главную роль	1306	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	storyline	сюжет	1307	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	stunt	каскадерский трюк		new	в тренажёре нет
+Module 5	5d	takeaway	готовые блюда, отпускаемые на дом	1309	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5d	tale	история		new	в тренажёре нет
+Module 5	5d	twist	неожиданный поворот		new	в тренажёре нет
+Module 5	5d	villain	отрицательный герой		new	в тренажёре нет
+Module 5	5d	waxwork	восковая фигура		new	в тренажёре нет
+Module 5	5e	all in all	в общем и целом	1314	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	author	автор	1315	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	background	подоплека		new	в тренажёре нет
+Module 5	5e	character	герой	1317	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	comment	комментарий, мнение	1318	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	consist of	состоять из	1319	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	director	режиссер	1320	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	disappointing	разочаровывающий	1321	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	dull	скучный	1322	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	evil	злой, злобный	1323	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	evil genius	злой гений		new	в тренажёре нет
+Module 5	5e	exciting	захватывающий	1325	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	fairy	фея	1326	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	fairy tale	сказка	1327	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	fantasy	фэнтези	1328	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	fast-paced	быстро развивающийся	1329	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	intriguing	интригующий		new	в тренажёре нет
+Module 5	5e	irritating	раздражающий		new	в тренажёре нет
+Module 5	5e	kidnap	похищать		new	в тренажёре нет
+Module 5	5e	likeable	приятный, милый		new	в тренажёре нет
+Module 5	5e	main	главный	1334	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	precise	точный		new	в тренажёре нет
+Module 5	5e	recommendation	совет, рекомендация	1336	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	rescue	спасать	1337	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	review	1. писать отзыв; 2. отзыв	1338	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	satisfying	приносящий удовлетворение		new	в тренажёре нет
+Module 5	5e	senior officer	старший офицер		new	в тренажёре нет
+Module 5	5e	shallow	поверхностный		new	в тренажёре нет
+Module 5	5e	slow-paced	медленно развивающийся		new	в тренажёре нет
+Module 5	5e	summary	краткое изложение, резюме		none	связка / реплика / отвлечённое слово
+Module 5	5e	surprising	неожиданный		new	в тренажёре нет
+Module 5	5e	theme	зд. основная идея, мысль		new	в тренажёре нет
+Module 5	5e	unexpected	неожиданный	1346	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5e	unimaginative	лишенный воображения		new	в тренажёре нет
+Module 5	5e	upside down	вверх ногами		none	связка / реплика / отвлечённое слово
+Module 5	5e	variety	разнообразие		none	связка / реплика / отвлечённое слово
+Module 5	5e	versus	против		none	связка / реплика / отвлечённое слово
+Module 5	5e	well-developed	хорошо сформировавшийся		new	в тренажёре нет
+Module 5	5f	act	акт		new	в тренажёре нет
+Module 5	5f	arrange	расставлять, приводить в порядок		new	в тренажёре нет
+Module 5	5f	by accident	случайно	1354	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5f	charge	запрашивать цену		new	в тренажёре нет
+Module 5	5f	estimate	оценивать		new	в тренажёре нет
+Module 5	5f	exhibit	выставочный экземпляр		new	в тренажёре нет
+Module 5	5f	exhibition	выставка	1358	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5f	knock down	сбивать с ног		new	в тренажёре нет
+Module 5	5f	play	играть роль	1360	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	5f	rehearsal	репетиция		new	в тренажёре нет
+Module 5	5f	rehearse	репетировать		new	в тренажёре нет
+Module 5	5f	scenery	декорации		new	в тренажёре нет
+Module 5	5f	sequence	последовательность событий		none	связка / реплика / отвлечённое слово
+Module 5	5f	situated	расположенный		new	в тренажёре нет
+Module 5	5f	take a photograph	делать снимок, фотографировать		new	в тренажёре нет
+Module 5	Culture Corner 5	bloody	кровавый		new	в тренажёре нет
+Module 5	Culture Corner 5	burn down	сжигать	1368	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Culture Corner 5	comedy	комедия	1369	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Culture Corner 5	common	зд. простой (люд), принадлежащий к низшему слою общества		new	в тренажёре нет
+Module 5	Culture Corner 5	deception	обман, ложь		new	в тренажёре нет
+Module 5	Culture Corner 5	destiny	судьба		new	в тренажёре нет
+Module 5	Culture Corner 5	disguise	менять внешность, маскироваться		new	в тренажёре нет
+Module 5	Culture Corner 5	fate	судьба		new	в тренажёре нет
+Module 5	Culture Corner 5	fee	вознаграждение	1375	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Culture Corner 5	flesh	плоть		new	в тренажёре нет
+Module 5	Culture Corner 5	history	зд. историческая пьеса	1377	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Culture Corner 5	hold	вмещать		new	в тренажёре нет
+Module 5	Culture Corner 5	merchant	купец		new	в тренажёре нет
+Module 5	Culture Corner 5	mistake	ошибаться	1380	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Culture Corner 5	mix-up	путаница		new	в тренажёре нет
+Module 5	Culture Corner 5	moneylender	ростовщик		new	в тренажёре нет
+Module 5	Culture Corner 5	pay back	отдавать долг		new	в тренажёре нет
+Module 5	Culture Corner 5	playwright	драматург	1384	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Culture Corner 5	poet	поэт	1385	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Culture Corner 5	pound	фунт	1386	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Culture Corner 5	reflect	зд. показывать		new	в тренажёре нет
+Module 5	Culture Corner 5	reign	правление, царствование		new	в тренажёре нет
+Module 5	Culture Corner 5	replica	точная копия		new	в тренажёре нет
+Module 5	Culture Corner 5	revenge	месть		new	в тренажёре нет
+Module 5	Culture Corner 5	roof	крыша	1391	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Culture Corner 5	rule	править, управлять	1392	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Culture Corner 5	trader	торговец		new	в тренажёре нет
+Module 5	Culture Corner 5	tragedy	трагедия		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	authorise	официально разрешать		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	award	награждать	1396	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Across the Curriculum 5 – Literature	change your mind	передумать		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	chest	грудь	1398	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Across the Curriculum 5 – Literature	confiscate	конфисковывать		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	contract	договор, контракт		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	court	суд	1401	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Across the Curriculum 5 – Literature	emotion	эмоция		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	exchange	обмен репликами	1403	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Across the Curriculum 5 – Literature	expert	эксперт, профессионал	1404	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Across the Curriculum 5 – Literature	extract	отрывок	1405	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Across the Curriculum 5 – Literature	fair	честный	1406	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Across the Curriculum 5 – Literature	fraction	частица		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	get engaged	обручиться		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	heiress	наследница		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	inherit	наследовать	1410	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Across the Curriculum 5 – Literature	judge	судья	1411	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Across the Curriculum 5 – Literature	judgement	решение суда		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	justice	справедливость		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	legal	1. законный, 2. судебный	1414	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Across the Curriculum 5 – Literature	loan	заем, ссуда		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	morally	морально, нравственно		none	связка / реплика / отвлечённое слово
+Module 5	Across the Curriculum 5 – Literature	ounce	унция		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	penalty	наказание		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	possessions	имущество		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	praise	восхвалять		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	quote	цитата		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	rest assured	не волнуйся		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	righteous	справедливый		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	rush	торопиться	1424	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Across the Curriculum 5 – Literature	scale	весы		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	seize	зд. конфисковывать		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	sentence	приговор	1427	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 5	Across the Curriculum 5 – Literature	spill	проливать		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	take part (in)	принимать участие		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	trade	торговля		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	trial	суд		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	upright	честный		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	warning	предупреждение		new	в тренажёре нет
+Module 5	Across the Curriculum 5 – Literature	wise	мудрый	1434	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	a couple of	немного		new	в тренажёре нет
+Module 6	6a	a variety of	множество		new	в тренажёре нет
+Module 6	6a	abandoned	зд. брошенный, покинутый		new	в тренажёре нет
+Module 6	6a	animal shelter	приют для животных		new	в тренажёре нет
+Module 6	6a	burst into tears	расплакаться		new	в тренажёре нет
+Module 6	6a	campaign	кампания		new	в тренажёре нет
+Module 6	6a	charity event	благотворительная акция		new	в тренажёре нет
+Module 6	6a	charity shop	магазин, торгующий подержанными вещами и отдающий выручку на благотворительные цели	1442	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	clean up	прибирать	1443	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	community	общество, община		new	в тренажёре нет
+Module 6	6a	disabled	нетрудоспособный	1445	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	donate	дарить, жертвовать	1446	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	encourage	побуждать	1447	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	farm	ферма		new	в тренажёре нет
+Module 6	6a	feed	кормить	1449	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	field	поле	1450	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	foster home	приют		new	в тренажёре нет
+Module 6	6a	get involved with sth	принимать участие		new	в тренажёре нет
+Module 6	6a	guinea pig	морская свинка	1453	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	hang out	проводить время	1454	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	help out	помогать	1455	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	hen	курица	1456	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	importance	важность	1457	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	kindness	доброта	1458	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	lend (sb) a helping hand	помогать, протянуть руку помощи		new	в тренажёре нет
+Module 6	6a	llama	лама		new	в тренажёре нет
+Module 6	6a	look after	присматривать, заботиться о ком-либо	1461	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	make a full recovery	выздоравливать		new	в тренажёре нет
+Module 6	6a	natural	естественный	1463	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	neglect	зд. бросить, покинуть		new	в тренажёре нет
+Module 6	6a	owner	владелец		new	в тренажёре нет
+Module 6	6a	paraphrase	перефразировать, сказать иначе		none	связка / реплика / отвлечённое слово
+Module 6	6a	persuade	убеждать	1467	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	properly	должным образом, правильно		none	связка / реплика / отвлечённое слово
+Module 6	6a	remove	убирать	1469	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	rescue	спасать	1470	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	senior citizen	пожилой человек	1471	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	staff member	штатный сотрудник		new	в тренажёре нет
+Module 6	6a	support	поддерживать, помогать	1473	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	talk	речь		new	в тренажёре нет
+Module 6	6a	the public	публика		new	в тренажёре нет
+Module 6	6a	victim	жертва	1476	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	volunteer	волонтер, доброволец	1477	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6a	worthwhile	стоящий		new	в тренажёре нет
+Module 6	6b	a long way	далеко от		new	в тренажёре нет
+Module 6	6b	attention	внимание		new	в тренажёре нет
+Module 6	6b	book	бронировать	1481	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6b	cycle lane	велосипедная дорожка		new	в тренажёре нет
+Module 6	6b	cycle trail	велосипедная тропа		new	в тренажёре нет
+Module 6	6b	directions	указание, как дойти куда-либо		new	в тренажёре нет
+Module 6	6b	entrance	вход	1485	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6b	exit	выход		new	в тренажёре нет
+Module 6	6b	messy	грязный	1487	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6b	nature reserve	заповедник		new	в тренажёре нет
+Module 6	6b	overtake	обогнать	1489	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6b	park and ride	временная стоянка		new	в тренажёре нет
+Module 6	6b	parking meter	счетчик времени стоянки автомобиля		new	в тренажёре нет
+Module 6	6b	passerby	прохожий		new	в тренажёре нет
+Module 6	6b	pavement	тротуар	1493	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6b	recommend	рекомендовать	1494	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6b	repeat	повторять	1495	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6b	ride	поездка	1496	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6b	roundabout	кольцевая автотранспортная развязка	1497	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6b	rubbish bin	мусорный бак		new	в тренажёре нет
+Module 6	6b	run	зд. ездить по маршруту		new	в тренажёре нет
+Module 6	6b	sightseeing	осмотр достопримечательностей		new	в тренажёре нет
+Module 6	6b	stay	пребывание		new	в тренажёре нет
+Module 6	6b	tourist information office	справочное бюро для туристов		new	в тренажёре нет
+Module 6	6b	town hall	здание муниципалитета		new	в тренажёре нет
+Module 6	6b	traffic lights	светофор	1504	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6b	traffic sign	дорожный знак	1505	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6b	zebra crossing	наземный переход («зебра»)	1506	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	according to	согласно		none	связка / реплика / отвлечённое слово
+Module 6	6c	all the same	все равно		new	в тренажёре нет
+Module 6	6c	architect	архитектор	1509	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	attempt	попытка		new	в тренажёре нет
+Module 6	6c	bell tower	колокольня		new	в тренажёре нет
+Module 6	6c	break out	начаться, разразиться		new	в тренажёре нет
+Module 6	6c	busload	зд. полный автобус		new	в тренажёре нет
+Module 6	6c	carry out	выполнять	1514	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	cathedral	собор	1515	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	construct	строить	1516	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	cover	покрывать		new	в тренажёре нет
+Module 6	6c	destroy	уничтожать	1518	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	dressmaker	портниха	1519	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	endanger	подвергать опасности		new	в тренажёре нет
+Module 6	6c	essential	важный	1521	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	estimate	приблизительно рассчитывать		new	в тренажёре нет
+Module 6	6c	exhibit	выставочный экземпляр		new	в тренажёре нет
+Module 6	6c	experienced	опытный	1524	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	fence	ограда		new	в тренажёре нет
+Module 6	6c	foundations	фундамент		new	в тренажёре нет
+Module 6	6c	illustrate	изображать	1527	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	ingredient	ингредиент	1528	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	instrument	инструмент	1529	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	lab	лаборатория		new	в тренажёре нет
+Module 6	6c	lead	поводок		new	в тренажёре нет
+Module 6	6c	lean	наклоняться	1532	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	legend	легенда	1533	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	marble	мрамор	1534	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	mechanic	автослесарь	1535	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	mend	чинить	1536	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	monument	памятник	1537	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	mow	косить		new	в тренажёре нет
+Module 6	6c	obvious	очевидный		none	связка / реплика / отвлечённое слово
+Module 6	6c	omit	зд. опускать		new	в тренажёре нет
+Module 6	6c	pass a law	принять закон		new	в тренажёре нет
+Module 6	6c	pharaoh	фараон		new	в тренажёре нет
+Module 6	6c	raven	ворон	1543	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	reinforce	укреплять		new	в тренажёре нет
+Module 6	6c	remove	убирать	1545	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	renovate	реставрировать		new	в тренажёре нет
+Module 6	6c	replace	заменять	1547	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	rod	стержень		new	в тренажёре нет
+Module 6	6c	sandstone	песчаник		new	в тренажёре нет
+Module 6	6c	shed	сарай	1550	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	site	место, где находится известный памятник, здание и т.п.	1551	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	soft	мягкий	1552	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6c	tile	черепица		new	в тренажёре нет
+Module 6	6c	tomb	гробница	1554	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	attendant	обслуживающий персонал		new	в тренажёре нет
+Module 6	6d	badly	сильно		none	связка / реплика / отвлечённое слово
+Module 6	6d	borrow	занимать, брать на время	1557	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	brave	смелый	1558	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	bruise	ставить синяк	1559	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	bump into	натолкнуться на кого-либо неожиданно		new	в тренажёре нет
+Module 6	6d	calm	спокойный	1561	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	careful	осторожный	1562	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	caring	внимательный, заботливый	1563	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	cashier	кассир	1564	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	contain	содержать	1565	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	description	описание	1566	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	detailed	детальный, тщательный		new	в тренажёре нет
+Module 6	6d	draw out	снимать деньги со счета		new	в тренажёре нет
+Module 6	6d	efficient	эффективный		new	в тренажёре нет
+Module 6	6d	enjoy oneself	хорошо проводить время		new	в тренажёре нет
+Module 6	6d	fill in	заполнять	1571	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	fire station	пожарное депо		new	в тренажёре нет
+Module 6	6d	first class	первый класс		new	в тренажёре нет
+Module 6	6d	fit	находящийся в хорошей физической форме	1574	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	forensic scientist	судмедэксперт		new	в тренажёре нет
+Module 6	6d	friendly	дружелюбный	1576	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	gesture	жест	1577	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	hardworking	работающий не покладая рук		new	в тренажёре нет
+Module 6	6d	healthy	здоровый	1579	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	honest	честный	1580	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	in charge (of sth)	ответственный за что-либо		new	в тренажёре нет
+Module 6	6d	incident	инцидент, происшествие		new	в тренажёре нет
+Module 6	6d	intelligent	умный	1583	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	knit	вязать	1584	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	likeable	милый		new	в тренажёре нет
+Module 6	6d	mayor	мэр	1586	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	nurse	медсестра	1587	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	organised	организованный	1588	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	overdue	просроченный		new	в тренажёре нет
+Module 6	6d	parcel	посылка	1590	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	patient	терпеливый	1591	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	pay in	класть деньги на счет		new	в тренажёре нет
+Module 6	6d	petrol station	заправочная станция	1593	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	platform	платформа	1594	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	postal worker	почтальон, почтовый работник		new	в тренажёре нет
+Module 6	6d	practical	зд. практикующий	1596	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	promotion	продвижение по службе	1597	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	public service	зд. государственные службы		new	в тренажёре нет
+Module 6	6d	report	сообщать	1599	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	responsible	ответственный	1600	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	return	возвращать	1601	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	return ticket	обратный билет		new	в тренажёре нет
+Module 6	6d	savings account	сберегательный счет		new	в тренажёре нет
+Module 6	6d	scales	весы	1604	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	second class	второй класс		new	в тренажёре нет
+Module 6	6d	single ticket	билет в один конец		new	в тренажёре нет
+Module 6	6d	skilful	умелый, опытный		new	в тренажёре нет
+Module 6	6d	snatch	хватать		new	в тренажёре нет
+Module 6	6d	speed	спешить, быстро идти		new	в тренажёре нет
+Module 6	6d	stamp	марка	1610	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	strong	сильный	1611	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6d	surgeon	хирург		new	в тренажёре нет
+Module 6	6d	withdraw	снимать деньги со счета		new	в тренажёре нет
+Module 6	6d	witness	свидетель, очевидец; быть свидетелем	1614	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6e	altogether	в общем, в целом		none	связка / реплика / отвлечённое слово
+Module 6	6e	artefact	артефакт, памятник старины		new	в тренажёре нет
+Module 6	6e	awful	ужасный	1617	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6e	collection	коллекция	1618	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6e	consist of	состоять из	1619	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6e	deal with	иметь дело с	1620	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6e	exhibition	выставка	1621	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6e	fascinating	зд. интересный	1622	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6e	filthy	очень грязный		new	в тренажёре нет
+Module 6	6e	furious	в бешенстве	1624	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6e	guide	гид	1625	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6e	hieroglyphics	иероглифы		new	в тренажёре нет
+Module 6	6e	Iron Age	Железный век		new	в тренажёре нет
+Module 6	6e	muddy	грязный		new	в тренажёре нет
+Module 6	6e	pitch	поле	1629	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6e	tiny	крошечный	1630	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6e	vivid	яркий	1631	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6e	wander (around)	бродить		new	в тренажёре нет
+Module 6	6f	abroad	за рубежом	1633	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6f	action group	инициативная группа		new	в тренажёре нет
+Module 6	6f	community	община		new	в тренажёре нет
+Module 6	6f	hiking	поход	1636	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6f	pedestrian	пешеход	1637	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6f	queue	очередь	1638	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6f	register	регистрировать(ся)		new	в тренажёре нет
+Module 6	6f	sign	знак	1640	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6f	signal	сигнал		new	в тренажёре нет
+Module 6	6f	society	общество	1642	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6f	station	(автобусная) станция	1643	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6f	stop	остановка	1644	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	6f	walker	ходок		new	в тренажёре нет
+Module 6	Culture Corner 6	aboriginal	аборигенский		new	в тренажёре нет
+Module 6	Culture Corner 6	approximate	приблизительный		new	в тренажёре нет
+Module 6	Culture Corner 6	arch	арка		new	в тренажёре нет
+Module 6	Culture Corner 6	breathtaking	захватывающий дух	1649	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Culture Corner 6	catch a glimpse	увидеть мельком		new	в тренажёре нет
+Module 6	Culture Corner 6	commentary	комментарий		new	в тренажёре нет
+Module 6	Culture Corner 6	detailed	детальный		new	в тренажёре нет
+Module 6	Culture Corner 6	eco-tour	экологический тур		new	в тренажёре нет
+Module 6	Culture Corner 6	experience	опыт	1654	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Culture Corner 6	harbour	гавань	1655	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Culture Corner 6	head	идти/ехать прямо		new	в тренажёре нет
+Module 6	Culture Corner 6	humpback whale	горбатый кит		new	в тренажёре нет
+Module 6	Culture Corner 6	hustle and bustle	суета, толкотня и шум	1658	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Culture Corner 6	look out for	остерегаться		new	в тренажёре нет
+Module 6	Culture Corner 6	migrate	мигрировать		new	в тренажёре нет
+Module 6	Culture Corner 6	scenic	живописный	1661	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Culture Corner 6	seaplane	гидроплан		new	в тренажёре нет
+Module 6	Culture Corner 6	skyline	горизонт		new	в тренажёре нет
+Module 6	Culture Corner 6	spectacular	впечатляющий	1664	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Culture Corner 6	splash out	тратить деньги на что-либо		new	в тренажёре нет
+Module 6	Culture Corner 6	steep	зд. крутая	1666	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Culture Corner 6	technique	зд. техника	1667	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Culture Corner 6	trendy	модный	1668	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Culture Corner 6	view	вид	1669	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	a huge hit	большой хит		new	в тренажёре нет
+Module 6	Going Green 6	adopt	принимать		new	в тренажёре нет
+Module 6	Going Green 6	available	доступный	1672	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	ban	запрещать	1673	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	basket	корзина	1674	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	carpooling	поочередное использование личных автомобилей группой владельцев для общественных нужд		new	в тренажёре нет
+Module 6	Going Green 6	crowded	заполненный	1676	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	cycle lane	велосипедная дорожка		new	в тренажёре нет
+Module 6	Going Green 6	despair	отчаиваться		new	в тренажёре нет
+Module 6	Going Green 6	destination	место назначения	1679	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	docking station	место, где можно оставить велосипед, машину		new	в тренажёре нет
+Module 6	Going Green 6	efficient	эффективный		new	в тренажёре нет
+Module 6	Going Green 6	environmentally-friendly	не приносящий вреда окружающей среде		new	в тренажёре нет
+Module 6	Going Green 6	exhaust emissions	выхлопные газы		new	в тренажёре нет
+Module 6	Going Green 6	for rent	в аренду		new	в тренажёре нет
+Module 6	Going Green 6	form	вид		new	в тренажёре нет
+Module 6	Going Green 6	handlebar	велосипедный руль		new	в тренажёре нет
+Module 6	Going Green 6	headlight	фара		new	в тренажёре нет
+Module 6	Going Green 6	hood	складной верх		new	в тренажёре нет
+Module 6	Going Green 6	hop (off)	спрыгнуть		new	в тренажёре нет
+Module 6	Going Green 6	individual design	индивидуальный дизайн		new	в тренажёре нет
+Module 6	Going Green 6	keep out	не пропускать	1691	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	locals	местные жители		new	в тренажёре нет
+Module 6	Going Green 6	mean	иметь в виду	1693	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	network of rivers and canals	сеть рек и каналов		new	в тренажёре нет
+Module 6	Going Green 6	number plate	номерной знак		new	в тренажёре нет
+Module 6	Going Green 6	on the way	по пути		new	в тренажёре нет
+Module 6	Going Green 6	operate	работать		new	в тренажёре нет
+Module 6	Going Green 6	pass	зд. билет		new	в тренажёре нет
+Module 6	Going Green 6	pattern	рисунок	1699	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	power	приводить в действие		new	в тренажёре нет
+Module 6	Going Green 6	quote	цитата		new	в тренажёре нет
+Module 6	Going Green 6	reduce	уменьшать	1702	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	rent	арендовать	1703	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	rickshaw	рикша		new	в тренажёре нет
+Module 6	Going Green 6	river taxi	паром		new	в тренажёре нет
+Module 6	Going Green 6	run on	работать на	1706	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	steering wheel	руль		new	в тренажёре нет
+Module 6	Going Green 6	successful	удачный	1708	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	suit	костюм	1709	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	the authorities	власти		new	в тренажёре нет
+Module 6	Going Green 6	the human race	человечество		new	в тренажёре нет
+Module 6	Going Green 6	Union Jack	национальный флаг Великобритании	1712	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	unique	уникальный	1713	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	vehicle	транспортное средство	1714	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 6	Going Green 6	windscreen	переднее стекло		new	в тренажёре нет
+Module 6	Going Green 6	windscreen wiper	дворник		new	в тренажёре нет
+Module 7	7a	activate	приводить в действие	1717	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7a	bite	кусать	1718	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7a	come true	зд. сбыться		new	в тренажёре нет
+Module 7	7a	department store	универмаг	1720	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7a	develop	зд. развиться	1721	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7a	embarrass	смущать		new	в тренажёре нет
+Module 7	7a	enclosed	закрытый		new	в тренажёре нет
+Module 7	7a	fight one's fears	перебороть страхи		new	в тренажёре нет
+Module 7	7a	freeze	замереть, застыть	1725	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7a	human emotion	человеческая эмоция		new	в тренажёре нет
+Module 7	7a	injection	укол, инъекция	1727	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7a	instantly	мгновенно		none	связка / реплика / отвлечённое слово
+Module 7	7a	irrational	нелогичный, абсурдный		new	в тренажёре нет
+Module 7	7a	lift	лифт	1730	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7a	melt away	исчезать		new	в тренажёре нет
+Module 7	7a	miss out on	зд. избегать		new	в тренажёре нет
+Module 7	7a	muscle	мускул	1733	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7a	needle	игла	1734	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7a	public place	общественное место		new	в тренажёре нет
+Module 7	7a	pump	качать		new	в тренажёре нет
+Module 7	7a	react	реагировать	1737	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7a	relieved	испытывающий облегчение	1738	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7a	run away	убегать		new	в тренажёре нет
+Module 7	7a	set off	вызывать что-либо		new	в тренажёре нет
+Module 7	7a	shake like a leaf	дрожать как осиновый лист		new	в тренажёре нет
+Module 7	7a	sound	зд. иметь отношение, звучать		new	в тренажёре нет
+Module 7	7a	sweat	потеть	1743	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7a	tease	дразнить	1744	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7a	tiny	крошечный	1745	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7a	trigger	вызывать что-либо		new	в тренажёре нет
+Module 7	7a	turn one's legs to jelly	зд. подкоситься		new	в тренажёре нет
+Module 7	Vocabulary: Emotions	bark	лаять	1748	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Vocabulary: Emotions	be green with envy	позеленеть от зависти		new	в тренажёре нет
+Module 7	Vocabulary: Emotions	be over the moon	быть безмерно счастливым		new	в тренажёре нет
+Module 7	Vocabulary: Emotions	be scared to death	быть напуганным до смерти		new	в тренажёре нет
+Module 7	Vocabulary: Emotions	confusion	замешательство		new	в тренажёре нет
+Module 7	Vocabulary: Emotions	frown	хмуриться		new	в тренажёре нет
+Module 7	Vocabulary: Emotions	go bright red	краснеть		new	в тренажёре нет
+Module 7	Vocabulary: Emotions	go through the roof	сильно разозлиться		new	в тренажёре нет
+Module 7	Vocabulary: Emotions	have a long face	выглядеть несчастным		new	в тренажёре нет
+Module 7	Vocabulary: Emotions	have butterflies in one's stomach	сильно нервничать		new	в тренажёре нет
+Module 7	Vocabulary: Emotions	jealousy	зависть		new	в тренажёре нет
+Module 7	Vocabulary: Emotions	joy	радость		new	в тренажёре нет
+Module 7	Vocabulary: Emotions	nervousness	нервозность		new	в тренажёре нет
+Module 7	Vocabulary: Emotions	overcome	преодолеть	1761	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Vocabulary: Emotions	performance	выступление	1762	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Vocabulary: Emotions	phobia	страх, фобия		new	в тренажёре нет
+Module 7	Vocabulary: Emotions	stray	бездомный	1764	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Vocabulary: Emotions	tell (sb) off	отчитывать, ругать кого-либо		new	в тренажёре нет
+Module 7	7b	cave rescue	служба спасения спелеологов		new	в тренажёре нет
+Module 7	7b	dial	набирать номер		new	в тренажёре нет
+Module 7	7b	emergency	чрезвычайная ситуация	1768	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7b	handset	телефонная трубка		new	в тренажёре нет
+Module 7	7b	hold the line	не вешать трубку, оставаться на линии		new	в тренажёре нет
+Module 7	7b	involve	включать		none	связка / реплика / отвлечённое слово
+Module 7	7b	knock (off)	зд. сбросить, сбить		new	в тренажёре нет
+Module 7	7b	make a false call	делать ложный вызов		new	в тренажёре нет
+Module 7	7b	mountain rescue	служба спасения альпинистов		new	в тренажёре нет
+Module 7	7b	move	зд. двигать	1775	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7b	on one's way	по пути		new	в тренажёре нет
+Module 7	7b	operator	оператор	1777	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7b	poster	постер	1778	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7b	put (sb) through	соединить с кем-либо		new	в тренажёре нет
+Module 7	7b	require	требовать(ся)		none	связка / реплика / отвлечённое слово
+Module 7	7b	respond	отвечать	1781	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7b	the coastguard	береговая охрана		new	в тренажёре нет
+Module 7	7b	trace	проследить звонок		new	в тренажёре нет
+Module 7	7b	unconscious	без сознания		new	в тренажёре нет
+Module 7	7c	ban	запрещать	1785	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7c	cheat	жульничать	1786	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7c	desert island	необитаемый остров		new	в тренажёре нет
+Module 7	7c	endangered species	вымирающие виды		new	в тренажёре нет
+Module 7	7c	first aid	первая помощь	1789	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7c	imaginary	выдуманный	1790	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7c	pad	наколенник, налокотник	1791	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7c	proper	подходящий		new	в тренажёре нет
+Module 7	7c	regret	жалеть о чем-либо	1793	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7c	set the alarm clock	ставить будильник		new	в тренажёре нет
+Module 7	7c	sunburn	солнечный ожог	1795	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	accompanied	сопровождаемый		new	в тренажёре нет
+Module 7	7d	balanced	гармоничный, сбалансированный	1797	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	bar	зд. плитка	1798	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	be a recipe for disaster	залог провала		new	в тренажёре нет
+Module 7	7d	be part of	быть частью чего-либо		new	в тренажёре нет
+Module 7	7d	build	зд. развивать		new	в тренажёре нет
+Module 7	7d	burn calories	сжигать калории		new	в тренажёре нет
+Module 7	7d	check	проверять	1803	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	chew	жевать	1804	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	concentrate	концентрироваться, сосредоточиваться	1805	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	control	контролировать что-либо, руководить	1806	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	cut down on sth	сокращать что-либо		new	в тренажёре нет
+Module 7	7d	dairy produce	молочная продукция		new	в тренажёре нет
+Module 7	7d	dairy product	молочный продукт		new	в тренажёре нет
+Module 7	7d	dessert	десерт	1810	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	destroy	уничтожать	1811	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	diet	зд. режим питания	1812	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	extremely	чрезвычайно		none	связка / реплика / отвлечённое слово
+Module 7	7d	fizzy drink	газированная вода, лимонад	1814	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	follow a diet	придерживаться диеты		new	в тренажёре нет
+Module 7	7d	full of	заполненный чем-либо	1816	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	give up	сдаваться	1817	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	go on a diet	садиться на диету		new	в тренажёре нет
+Module 7	7d	grain	зерно		new	в тренажёре нет
+Module 7	7d	join	присоединяться	1820	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	keep sth up	продолжать что-либо		new	в тренажёре нет
+Module 7	7d	keep to sth	придерживаться чего-либо		new	в тренажёре нет
+Module 7	7d	key	ключ	1823	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	lack	отсутствие чего-либо		new	в тренажёре нет
+Module 7	7d	let off steam	«выпустить пар», успокоиться		new	в тренажёре нет
+Module 7	7d	locker	шкафчик		new	в тренажёре нет
+Module 7	7d	lose weight	терять вес		new	в тренажёре нет
+Module 7	7d	low in	зд. содержащий небольшое количество чего-либо		new	в тренажёре нет
+Module 7	7d	make	изготавливать, производить	1829	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	nutrition	питание		new	в тренажёре нет
+Module 7	7d	once in a while	время от времени		new	в тренажёре нет
+Module 7	7d	physical	физический	1832	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	put on weight	набирать вес		new	в тренажёре нет
+Module 7	7d	raise	поднимать	1834	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	record	зд. записывать	1835	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	rest	отдых	1836	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	revision	повторение		new	в тренажёре нет
+Module 7	7d	rich in	зд. содержащий большое количество чего-либо		new	в тренажёре нет
+Module 7	7d	rise	подниматься	1839	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	roast	жареный	1840	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	section	секция, часть	1841	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	shallow	неглубокий, мелкий		new	в тренажёре нет
+Module 7	7d	sip	медленно потягивать		new	в тренажёре нет
+Module 7	7d	snack	легкая закуска	1844	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	starter	закуска перед основным блюдом	1845	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	starving	сильно голодный		new	в тренажёре нет
+Module 7	7d	steamed	приготовленный на пару		new	в тренажёре нет
+Module 7	7d	stress out	сильно нервничать		new	в тренажёре нет
+Module 7	7d	swallow	глотать	1849	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	take up	зд. заняться		new	в тренажёре нет
+Module 7	7d	talk through	детально обсуждать что-либо		new	в тренажёре нет
+Module 7	7d	treat oneself	зд. баловать себя		new	в тренажёре нет
+Module 7	7d	valuables	ценности	1853	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7d	work	зд. приносить результат		new	в тренажёре нет
+Module 7	7e	aggressive	агрессивный	1855	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7e	argument	аргумент		none	связка / реплика / отвлечённое слово
+Module 7	7e	consequence	последствие		none	связка / реплика / отвлечённое слово
+Module 7	7e	contrast	отличие		none	связка / реплика / отвлечённое слово
+Module 7	7e	coordination	координация		new	в тренажёре нет
+Module 7	7e	definitely	определенно, точно		none	связка / реплика / отвлечённое слово
+Module 7	7e	identify with	зд. сопоставлять кого-либо с чем/кем-либо		new	в тренажёре нет
+Module 7	7e	individual	индивидуальный		new	в тренажёре нет
+Module 7	7e	install	устанавливать	1863	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7e	invincible	непобедимый		new	в тренажёре нет
+Module 7	7e	justification	зд. обоснование		new	в тренажёре нет
+Module 7	7e	opposed to	выступающий против чего-либо		new	в тренажёре нет
+Module 7	7e	opposing	противостоящий	1867	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7e	outlet	зд. отдушина, выход		new	в тренажёре нет
+Module 7	7e	release	зд. выпускать	1869	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7e	self-defence	самозащита		new	в тренажёре нет
+Module 7	7e	survey	опрос	1871	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7e	tension	напряжение		new	в тренажёре нет
+Module 7	7f	allergic	страдающий аллергией	1873	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7f	alteration	зд. переделка		new	в тренажёре нет
+Module 7	7f	custom	обычай	1875	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7f	damage	повреждать	1876	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7f	good shape	в хорошей форме		new	в тренажёре нет
+Module 7	7f	habit	привычка	1878	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7f	harm	наносить вред	1879	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7f	lead	привести	1880	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7f	lead a quiet, busy etc. life	вести (спокойный, занятый) образ жизни		new	в тренажёре нет
+Module 7	7f	low	низкий	1882	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7f	manner	способ, метод		new	в тренажёре нет
+Module 7	7f	out of sight	вне поля зрения		new	в тренажёре нет
+Module 7	7f	pass	проходить	1885	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7f	poor	зд. скудный		new	в тренажёре нет
+Module 7	7f	protect	защищать	1887	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7f	recover	выздоравливать	1888	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7f	ruin	уничтожать		new	в тренажёре нет
+Module 7	7f	shaky	нестабильный		new	в тренажёре нет
+Module 7	7f	spend	проводить	1891	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	7f	study	детальное изучение		new	в тренажёре нет
+Module 7	7f	weak	слабый	1893	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Culture Corner 7	alligator	аллигатор	1894	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Culture Corner 7	approach	приближаться	1895	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Culture Corner 7	beware	быть осторожным		new	в тренажёре нет
+Module 7	Culture Corner 7	bite	кусать(ся)	1897	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Culture Corner 7	cat flap	маленькая входная дверца в дом для кошек		new	в тренажёре нет
+Module 7	Culture Corner 7	common	обычный, обыкновенный	1899	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Culture Corner 7	continuously	постоянно		none	связка / реплика / отвлечённое слово
+Module 7	Culture Corner 7	cub	детеныш		new	в тренажёре нет
+Module 7	Culture Corner 7	cuddly	приятный, милый	1902	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Culture Corner 7	disease	болезнь	1903	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Culture Corner 7	drag	тащить, волочить	1904	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Culture Corner 7	edge	край	1905	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Culture Corner 7	ferocious	свирепый		new	в тренажёре нет
+Module 7	Culture Corner 7	go through	зд. расходовать		new	в тренажёре нет
+Module 7	Culture Corner 7	grizzly bear	гризли		new	в тренажёре нет
+Module 7	Culture Corner 7	kick	ударять ногой	1909	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Culture Corner 7	marsh	болото	1910	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Culture Corner 7	motionless	неподвижный		new	в тренажёре нет
+Module 7	Culture Corner 7	painful	болезненный	1912	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Culture Corner 7	paw	лапа	1913	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Culture Corner 7	poisonous	ядовитый		new	в тренажёре нет
+Module 7	Culture Corner 7	prey	добыча		new	в тренажёре нет
+Module 7	Culture Corner 7	rabies	бешенство		new	в тренажёре нет
+Module 7	Culture Corner 7	raccoon	енот		new	в тренажёре нет
+Module 7	Culture Corner 7	rattlesnake	гремучая змея		new	в тренажёре нет
+Module 7	Culture Corner 7	scratch	царапать(ся)	1919	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Culture Corner 7	sighting	наблюдение		new	в тренажёре нет
+Module 7	Culture Corner 7	slow-moving river	спокойная река		new	в тренажёре нет
+Module 7	Culture Corner 7	snatch	хватать		new	в тренажёре нет
+Module 7	Culture Corner 7	spit	плевать(ся)		new	в тренажёре нет
+Module 7	Culture Corner 7	sting	жалить		new	в тренажёре нет
+Module 7	Culture Corner 7	swamp	болото		new	в тренажёре нет
+Module 7	Culture Corner 7	unpredictable	непредсказуемый		new	в тренажёре нет
+Module 7	Culture Corner 7	venom	яд		new	в тренажёре нет
+Module 7	Culture Corner 7	warn	предостерегать	1928	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	area	территория	1929	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	beat	зд. побеждать	1930	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	bully	задира	1931	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	class	школьный урок	1932	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	common sense	здравый смысл		new	в тренажёре нет
+Module 7	Across the Curriculum 7	community centre	общественный центр	1934	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	confidently	уверенно		none	связка / реплика / отвлечённое слово
+Module 7	Across the Curriculum 7	department	отдел		new	в тренажёре нет
+Module 7	Across the Curriculum 7	end up	оказаться	1937	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	expert	опытный, квалифицированный	1938	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	find out	обнаружить	1939	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	get across	донести идею		new	в тренажёре нет
+Module 7	Across the Curriculum 7	get back	возвращаться	1941	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	get down	приседать		new	в тренажёре нет
+Module 7	Across the Curriculum 7	get up	вставать	1943	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	in the same way	точно так же		new	в тренажёре нет
+Module 7	Across the Curriculum 7	instinct	инстинкт		new	в тренажёре нет
+Module 7	Across the Curriculum 7	insulting	оскорбительный		new	в тренажёре нет
+Module 7	Across the Curriculum 7	intuition	интуиция		new	в тренажёре нет
+Module 7	Across the Curriculum 7	kick	удар ногой	1948	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	look for	искать что-либо	1949	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	look to	надеяться, рассчитывать на		new	в тренажёре нет
+Module 7	Across the Curriculum 7	manner	метод, манера		new	в тренажёре нет
+Module 7	Across the Curriculum 7	mode	метод, режим		new	в тренажёре нет
+Module 7	Across the Curriculum 7	mugger	грабитель		new	в тренажёре нет
+Module 7	Across the Curriculum 7	poke	тыкать	1954	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	put up a fight	оказать сопротивление		new	в тренажёре нет
+Module 7	Across the Curriculum 7	region	регион		new	в тренажёре нет
+Module 7	Across the Curriculum 7	run around	бегать туда-сюда		new	в тренажёре нет
+Module 7	Across the Curriculum 7	run away	убегать		new	в тренажёре нет
+Module 7	Across the Curriculum 7	run up (a debt or bill)	задолжать кому-либо		new	в тренажёре нет
+Module 7	Across the Curriculum 7	short cut	кратчайший путь		new	в тренажёре нет
+Module 7	Across the Curriculum 7	snatch	хватать		new	в тренажёре нет
+Module 7	Across the Curriculum 7	threatening	угрожающий	1962	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 7	Across the Curriculum 7	vulnerable target	уязвимая цель		new	в тренажёре нет
+Module 7	Across the Curriculum 7	watch out	быть осторожным		new	в тренажёре нет
+Module 7	Across the Curriculum 7	well-lit	хорошо освещенный		new	в тренажёре нет
+Module 8	8a	advantage	преимущество	1966	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	artificial	искусственный, ненатуральный		new	в тренажёре нет
+Module 8	8a	attack	нападать	1968	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	board	доска	1969	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	brain damage	повреждение мозга		new	в тренажёре нет
+Module 8	8a	bump	колдобина, выбоина		new	в тренажёре нет
+Module 8	8a	carefully	аккуратно, осторожно	1972	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	champion	зд. отличный		new	в тренажёре нет
+Module 8	8a	come into sight	попасть в поле зрения, стать видимым		new	в тренажёре нет
+Module 8	8a	concentrate on	сконцентрироваться на чем-либо		new	в тренажёре нет
+Module 8	8a	deal with	разобраться, решить	1976	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	depressed	подавленный, угнетенный	1977	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	disability	инвалидность		new	в тренажёре нет
+Module 8	8a	encouragement	ободрение, поощрение, поддержка	1979	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	experience a disaster	пережить бедствие, несчастье		new	в тренажёре нет
+Module 8	8a	eyebrow	бровь	1981	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	face a challenge	справиться со сложной задачей, проблемой		new	в тренажёре нет
+Module 8	8a	fall off	отвалиться от чего-либо, отпасть		new	в тренажёре нет
+Module 8	8a	fall over	упасть	1984	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	feel sorry for sb	сожалеть, жалеть кого-либо		new	в тренажёре нет
+Module 8	8a	film	снимать на камеру		new	в тренажёре нет
+Module 8	8a	frighten away	спугнуть		new	в тренажёре нет
+Module 8	8a	furiously	яростно, бешено		none	связка / реплика / отвлечённое слово
+Module 8	8a	gigantic	гигантский		new	в тренажёре нет
+Module 8	8a	give up	оставить, отказаться, бросить	1990	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	inspiration	вдохновение, воодушевление	1991	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	keep my mind on	сосредотачиваться на чем-либо		new	в тренажёре нет
+Module 8	8a	lift	поднимать(ся)	1993	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	motto	девиз, лозунг		new	в тренажёре нет
+Module 8	8a	ordinary	простой, обычный	1995	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	paddle	грести		new	в тренажёре нет
+Module 8	8a	perfectly still	совершенно неподвижный		new	в тренажёре нет
+Module 8	8a	plant	ставить, размещать, устанавливать		new	в тренажёре нет
+Module 8	8a	positive attitude	положительное отношение, настрой		new	в тренажёре нет
+Module 8	8a	quit	бросать, прекращать	2000	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	rip (off)	вырвать силой, насильно		new	в тренажёре нет
+Module 8	8a	roll (down)	катить(ся)		new	в тренажёре нет
+Module 8	8a	scare (sb off)	спугнуть		new	в тренажёре нет
+Module 8	8a	scratch	царапать, оцарапать	2004	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	seriously bruised	получивший серьезные повреждения, серьезно раненый		new	в тренажёре нет
+Module 8	8a	set up	настраивать, устанавливать		new	в тренажёре нет
+Module 8	8a	share	делить(ся)	2007	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	slam	захлопывать		new	в тренажёре нет
+Module 8	8a	spine	позвоночник		new	в тренажёре нет
+Module 8	8a	sprain	растянуть (связки, сустав), вывихнуть	2010	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	squawk	пронзительно кричать		new	в тренажёре нет
+Module 8	8a	strap	зд. закрепить ремнем	2012	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	survive an accident	пережить несчастный случай, аварию		new	в тренажёре нет
+Module 8	8a	terrifying experience	ужасное событие, случай		new	в тренажёре нет
+Module 8	8a	total miracle	настоящее чудо		new	в тренажёре нет
+Module 8	8a	trip (over)	спотыкаться		new	в тренажёре нет
+Module 8	8a	tripod	штатив, тренога		new	в тренажёре нет
+Module 8	8a	wannabe	человек, стремящийся стать известным		new	в тренажёре нет
+Module 8	8a	wetlands	заболоченная местность	2019	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	wheelchair	кресло-каталка	2020	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	win a competition	выиграть соревнование	2021	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8a	wireless remote control	беспроводной пульт дистанционного управления		new	в тренажёре нет
+Module 8	8b	accidentally	случайно, нечаянно	2023	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8b	approval	одобрение, благоприятное мнение	2024	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8b	kitesurfing	кайтинг		new	в тренажёре нет
+Module 8	8b	obviously	явно, очевидно		none	связка / реплика / отвлечённое слово
+Module 8	8b	on the way	по пути		new	в тренажёре нет
+Module 8	8b	outfit	наряд		new	в тренажёре нет
+Module 8	8b	risk-taker	человек, идущий на риск; рисковый человек		new	в тренажёре нет
+Module 8	8b	seek	искать		new	в тренажёре нет
+Module 8	8b	skydiving	затяжные прыжки с парашютом	2031	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8b	stick to	придерживаться чего-либо, продолжать делать что-либо		new	в тренажёре нет
+Module 8	8b	take up	браться за что-либо, заинтересоваться чем-либо		new	в тренажёре нет
+Module 8	8b	tightrope	натянутый канат		new	в тренажёре нет
+Module 8	8b	trek	переход, путешествие		new	в тренажёре нет
+Module 8	8b	under the weather	плохо себя чувствовать, выглядеть нездоровым, больным		new	в тренажёре нет
+Module 8	8b	whitewater rafting	сплав на плоту по реке с порогами		new	в тренажёре нет
+Module 8	8c	beg	просить, умолять	2038	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8c	bump	ударять(ся), врезаться	2039	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8c	command	команда, приказ, указание		new	в тренажёре нет
+Module 8	8c	painkiller	болеутоляющее средство, обезболивающее		new	в тренажёре нет
+Module 8	8c	plaster	пластырь		new	в тренажёре нет
+Module 8	8c	shrink	уменьшаться, сжиматься		new	в тренажёре нет
+Module 8	8c	sore throat	больное горло		new	в тренажёре нет
+Module 8	8c	threaten	угрожать, грозить	2045	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8c	warn	предупреждать, предостерегать	2046	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8d	antiseptic cream	антисептический крем		new	в тренажёре нет
+Module 8	8d	bandage	бинт, повязка		new	в тренажёре нет
+Module 8	8d	cast	гипс		new	в тренажёре нет
+Module 8	8d	crash	разбивать(ся)	2050	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8d	creepy-crawly	ползучая тварь (о насекомом), страшное противное насекомое		new	в тренажёре нет
+Module 8	8d	do the trick	добиться своего, достичь цели		new	в тренажёре нет
+Module 8	8d	first aid kit	медицинская аптечка	2053	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8d	graze	оцарапать, ободрать		new	в тренажёре нет
+Module 8	8d	hang on	держаться, продержаться, выжить		new	в тренажёре нет
+Module 8	8d	hold (sth) up	поддерживать что-либо		new	в тренажёре нет
+Module 8	8d	ice pack	пузырь со льдом		new	в тренажёре нет
+Module 8	8d	insect repellent	средство для отпугивания насекомых		new	в тренажёре нет
+Module 8	8d	juicy	сочный	2059	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8d	jungle	джунгли	2060	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8d	low in fat	содержащий мало жира, нежирный		new	в тренажёре нет
+Module 8	8d	mudslide	оползень		new	в тренажёре нет
+Module 8	8d	ointment	мазь		new	в тренажёре нет
+Module 8	8d	overhead	над головой		none	связка / реплика / отвлечённое слово
+Module 8	8d	part	разделять, отделять		new	в тренажёре нет
+Module 8	8d	peek	быстро взглянуть		new	в тренажёре нет
+Module 8	8d	penknife	перочинный нож		new	в тренажёре нет
+Module 8	8d	poisonous	ядовитый		new	в тренажёре нет
+Module 8	8d	protein	протеин, белок	2069	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8d	reflect	отражать(ся)		new	в тренажёре нет
+Module 8	8d	remote	отдаленный, дальний	2071	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8d	rope	веревка, канат	2072	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8d	rucksack	рюкзак	2073	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8d	shelter	приют, кров, пристанище	2074	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8d	signal	давать знак, сигнализировать		new	в тренажёре нет
+Module 8	8d	sling	перевязь (для сломанной руки), повязка		new	в тренажёре нет
+Module 8	8d	source	источник		none	связка / реплика / отвлечённое слово
+Module 8	8d	steep hillside	крутой склон		new	в тренажёре нет
+Module 8	8d	stick	палка	2079	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8d	sunscreen	солнцезащитный крем	2080	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8d	thick	густой, частый		new	в тренажёре нет
+Module 8	8d	thunder	гром	2082	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8d	turn your nose up	воротить нос, пренебрегать		new	в тренажёре нет
+Module 8	8d	vegetation	растительность		new	в тренажёре нет
+Module 8	8d	warning	предупреждение, предостережение		new	в тренажёре нет
+Module 8	8e	advantage	преимущество	2086	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8e	apply	обращаться с просьбой, заявлением		new	в тренажёре нет
+Module 8	8e	conservation	охрана, сохранение	2088	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8e	consider	обдумывать, рассматривать, взвешивать		new	в тренажёре нет
+Module 8	8e	contact	связываться, общаться, контактировать	2090	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8e	disability	бессилие, инвалидность		new	в тренажёре нет
+Module 8	8e	enclose	прилагать, вкладывать		new	в тренажёре нет
+Module 8	8e	evidence	доказательство		new	в тренажёре нет
+Module 8	8e	fit	в хорошей физической форме, здоровый	2094	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8e	fluent	хорошо говорящий		new	в тренажёре нет
+Module 8	8e	get on with	ладить, иметь хорошие отношения с кем-либо	2096	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8e	goalkeeper	голкипер, вратарь	2097	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8e	grateful	благодарный	2098	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8e	indicate	указывать, обозначать		none	связка / реплика / отвлечённое слово
+Module 8	8e	nationality	гражданство, национальность	2100	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8e	opening	вакансия		new	в тренажёре нет
+Module 8	8e	participate	участвовать	2102	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8e	part-time	в режиме неполного рабочего дня (недели)	2103	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8e	personality	личность, индивидуальность	2104	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8e	project	проект	2105	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8e	purpose	назначение, цель		none	связка / реплика / отвлечённое слово
+Module 8	8e	quality	качество		none	связка / реплика / отвлечённое слово
+Module 8	8e	studies	обучение, занятия		new	в тренажёре нет
+Module 8	8e	suitable	пригодный, подходящий		new	в тренажёре нет
+Module 8	8e	volunteer	доброволец, волонтер	2110	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8e	wildlife	живая природа	2111	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8f	artificial	искусственный, сделанный человеком		new	в тренажёре нет
+Module 8	8f	avoid	избегать	2113	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8f	besides	в дополнение, кроме того		none	связка / реплика / отвлечённое слово
+Module 8	8f	crab trap	ловушка для крабов		new	в тренажёре нет
+Module 8	8f	dash	мчаться, нестись		new	в тренажёре нет
+Module 8	8f	disability	бессилие, инвалидность		new	в тренажёре нет
+Module 8	8f	expect	ждать, ожидать, надеяться	2118	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8f	from side to side	из стороны в сторону		new	в тренажёре нет
+Module 8	8f	gain	получать, добиваться	2120	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8f	harmed	травмированный		new	в тренажёре нет
+Module 8	8f	hatch	вылупляться		new	в тренажёре нет
+Module 8	8f	head toward	направляться, следовать куда-либо		new	в тренажёре нет
+Module 8	8f	inability	неспособность		new	в тренажёре нет
+Module 8	8f	injured	поврежденный, раненый		new	в тренажёре нет
+Module 8	8f	inspire	вдохновлять	2126	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8f	instead of	вместо чего-либо		none	связка / реплика / отвлечённое слово
+Module 8	8f	lose	терять, лишаться	2128	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8f	miss	упустить, пропустить	2129	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8f	moonlit	залитый лунным светом		new	в тренажёре нет
+Module 8	8f	nest	гнездо	2131	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8f	parachute	парашют		new	в тренажёре нет
+Module 8	8f	predator	хищник		new	в тренажёре нет
+Module 8	8f	prevent	предотвращать, не допускать	2134	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8f	promising	многообещающий, подающий надежды		new	в тренажёре нет
+Module 8	8f	properly	должным образом, как следует		none	связка / реплика / отвлечённое слово
+Module 8	8f	recover	вновь обретать, возвращать		new	в тренажёре нет
+Module 8	8f	rescue	спасать	2138	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8f	severe	серьезный		new	в тренажёре нет
+Module 8	8f	silicone	силикон		new	в тренажёре нет
+Module 8	8f	suitably	соответственно, подходящим образом		none	связка / реплика / отвлечённое слово
+Module 8	8f	survival	выживание		new	в тренажёре нет
+Module 8	8f	think (sth) up	придумывать, выдумывать что-либо		new	в тренажёре нет
+Module 8	8f	trainer	тренер, инструктор, дрессировщик	2144	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	8f	win	выиграть	2145	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	achievement	достижение	2146	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	admit	признавать	2147	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	attitude	отношение		none	связка / реплика / отвлечённое слово
+Module 8	Culture Corner 8	blind	слепой	2149	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	deaf	глухой	2150	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	deaf-blind	слепоглухой		new	в тренажёре нет
+Module 8	Culture Corner 8	degree	(ученая) степень	2152	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	exist	существовать, жить		none	связка / реплика / отвлечённое слово
+Module 8	Culture Corner 8	eyesight	зрение	2154	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	feel	трогать, прикасаться		new	в тренажёре нет
+Module 8	Culture Corner 8	give a lecture	читать лекцию		new	в тренажёре нет
+Module 8	Culture Corner 8	graduate	оканчивать	2157	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	impress	производить впечатление	2158	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	improve	улучшать	2159	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	incredible	невероятный	2160	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	influence	влиять	2161	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	inspiration	вдохновение, воодушевление	2162	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	living conditions	условия жизни, существования	2163	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	ordinary	обычный, простой	2164	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Culture Corner 8	progress	развиваться, совершенствоваться		new	в тренажёре нет
+Module 8	Culture Corner 8	raise money	собирать деньги		new	в тренажёре нет
+Module 8	Culture Corner 8	rapidly	быстро		none	связка / реплика / отвлечённое слово
+Module 8	Culture Corner 8	spell out	произносить по буквам		new	в тренажёре нет
+Module 8	Culture Corner 8	strict	строгий		new	в тренажёре нет
+Module 8	Culture Corner 8	type	печатать		new	в тренажёре нет
+Module 8	Culture Corner 8	typewriter	пишущая машинка		new	в тренажёре нет
+Module 8	Going Green 8	adventurous tourist	экстремальный турист		new	в тренажёре нет
+Module 8	Going Green 8	affect	затрагивать, оказывать влияние	2173	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	all-expenses-paid	включающий или покрывающий все расходы, оплаченный заранее		new	в тренажёре нет
+Module 8	Going Green 8	base	база		new	в тренажёре нет
+Module 8	Going Green 8	break off	отламывать(ся), обрывать		new	в тренажёре нет
+Module 8	Going Green 8	bring out	производить		new	в тренажёре нет
+Module 8	Going Green 8	burn fossil fuels	сжигать ископаемое топливо		new	в тренажёре нет
+Module 8	Going Green 8	burst its banks	размывать берега		new	в тренажёре нет
+Module 8	Going Green 8	bury	зарывать(ся) в землю		new	в тренажёре нет
+Module 8	Going Green 8	cardboard	картон		new	в тренажёре нет
+Module 8	Going Green 8	carry out	выполнять, осуществлять	2182	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	CO2 emission	выделение углекислого газа (CO2) в атмосферу		new	в тренажёре нет
+Module 8	Going Green 8	continent	континент	2184	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	deforestation	вырубка лесов		new	в тренажёре нет
+Module 8	Going Green 8	direct	направлять, нацеливать		new	в тренажёре нет
+Module 8	Going Green 8	draw	привлекать		new	в тренажёре нет
+Module 8	Going Green 8	endangered	находящийся под угрозой	2188	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	eventually	в итоге, в конечном счете		none	связка / реплика / отвлечённое слово
+Module 8	Going Green 8	explorer	исследователь	2190	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	flood	заливать, затоплять	2191	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	follow	следовать	2192	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	food chain	пищевая цепь	2193	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	glacier	ледник		new	в тренажёре нет
+Module 8	Going Green 8	global warming	всемирное (глобальное) потепление	2195	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	greenhouse gas	парниковый газ	2196	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	ice sheet	ледяной щит		new	в тренажёре нет
+Module 8	Going Green 8	ice shelf	шельфовый ледник		new	в тренажёре нет
+Module 8	Going Green 8	iceberg	айсберг		new	в тренажёре нет
+Module 8	Going Green 8	impact	сильное воздействие	2200	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	laboratory	лаборатория		new	в тренажёре нет
+Module 8	Going Green 8	lead to	приводить к чему-либо, быть причиной чего-либо	2202	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	limpet	блюдечко		new	в тренажёре нет
+Module 8	Going Green 8	make up	составлять, формировать	2204	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	melting ice	тающие льды		new	в тренажёре нет
+Module 8	Going Green 8	mollusk	моллюск		new	в тренажёре нет
+Module 8	Going Green 8	polar	полярный		new	в тренажёре нет
+Module 8	Going Green 8	predator	хищник		new	в тренажёре нет
+Module 8	Going Green 8	put down	класть, опускать	2209	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	put out	тушить, гасить	2210	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	quality	качество		none	связка / реплика / отвлечённое слово
+Module 8	Going Green 8	range	зд. варьироваться		new	в тренажёре нет
+Module 8	Going Green 8	result in	приводить к, давать в результате		new	в тренажёре нет
+Module 8	Going Green 8	rising world temperatures	повышение температуры на Земле		new	в тренажёре нет
+Module 8	Going Green 8	rot	гнить, разлагаться		new	в тренажёре нет
+Module 8	Going Green 8	scallop	гребешок		new	в тренажёре нет
+Module 8	Going Green 8	scenery	пейзаж, вид		new	в тренажёре нет
+Module 8	Going Green 8	seabed	морское дно	2218	reuse	совпал смысл (картинка — из базы по номеру строки)
+Module 8	Going Green 8	set down	записывать		new	в тренажёре нет
+Module 8	Going Green 8	set up	устанавливать		new	в тренажёре нет
+Module 8	Going Green 8	truly	действительно, в самом деле		none	связка / реплика / отвлечённое слово
+Module 8	Going Green 8	unspoilt	неиспорченный		new	в тренажёре нет
+Module 8	Going Green 8	vanish	исчезать		new	в тренажёре нет
+Module 8	Going Green 8	wilderness	дикая местность, пустыня		new	в тренажёре нет
+Module 8	Going Green 8	worrying	тревожный, вызывающий беспокойство		new	в тренажёре нет
