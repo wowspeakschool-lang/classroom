@@ -6,7 +6,7 @@ do $do$
 declare
   p jsonb := $plan$@@PLAN@@$plan$::jsonb;
   e jsonb; g jsonb; h text; mat text; orig text; m text[]; inner_ text; plain text; lat int; let int;
-  n_del int := 0; n_mat int := 0; n_tit int := 0; fid text; fh text;
+  n_del int := 0; n_mat int := 0; n_tit int := 0; n_skip int := 0; fid text; fh text;
 begin
   create table classroom_backup_podvodki_20261104 as
     select * from classroom_blocks where lesson_id in (
@@ -15,7 +15,8 @@ begin
 
   for e in select * from jsonb_array_elements(p) loop
     select payload->>'html' into h from classroom_blocks where id = (e->>'t')::uuid and type = 'text';
-    if h is null then raise exception 'нет текстового блока %', e->>'t'; end if;
+    -- блок уже снял другой чат (04.11.2026: «вторая часть» в SM1/SM3) — пропускаем вместе с заданиями
+    if h is null then n_skip := n_skip + 1; continue; end if;
 
     if e->>'a' = 'material' then
       mat := coalesce(e->>'mh', h);
@@ -67,6 +68,6 @@ begin
            where lesson_id in (select distinct lesson_id from classroom_backup_podvodki_20261104)) r
    where b.id = r.id;
 
-  raise notice 'убрано блоков %, material %, заголовков %', n_del, n_mat, n_tit;
+  raise notice 'убрано блоков %, material %, заголовков %, пропущено (уже сняты) %', n_del, n_mat, n_tit, n_skip;
 end
 $do$;
