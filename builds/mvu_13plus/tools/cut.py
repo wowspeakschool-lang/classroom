@@ -60,7 +60,11 @@ def runs(mask1d, min_gap, min_len):
 
 
 # замкнутые просветы фона убираем только у этих (у остальных белое внутри — блики)
-HOLES = {'schoolbag', 'stethoscope', 'trophy', 'umbrella', 'billboard', 'cat'}
+HOLES = {'schoolbag', 'stethoscope', 'trophy', 'umbrella', 'billboard', 'cat',
+         'an_rabbit', 'an_pig', 'an_chicken', 'an_horse', 'an_hamster', 'an_dog', 'an_cat',
+         'sport_bike'}
+# светящееся (солнце): прозрачность по светлоте, а не резкой маской
+SOFT = {'w_sunny'}
 
 
 def transparent(im, holes=True):
@@ -143,6 +147,21 @@ def cut_sheet(path, names, pad=12, col_gap=18):
             sub = ink[y0:y1, x0:x1]
             ys = np.where(sub.any(axis=1))[0]
             boxes.append((x0, y0 + ys[0], x1, y0 + ys[-1] + 1))
+    # куски одного предмета, разрезанные тонким местом (шея, ручка), — склеиваем
+    merged = True
+    while merged:
+        merged = False
+        for i in range(len(boxes)):
+            for j in range(i + 1, len(boxes)):
+                a0, b0 = boxes[i], boxes[j]
+                xo = min(a0[2], b0[2]) - max(a0[0], b0[0])
+                gap = max(a0[1], b0[1]) - min(a0[3], b0[3])
+                ar = lambda b: (b[2] - b[0]) * (b[3] - b[1])
+                if xo > 0 and gap < 40 and min(ar(a0), ar(b0)) < 0.15 * max(ar(a0), ar(b0)):
+                    boxes[i] = (min(a0[0], b0[0]), min(a0[1], b0[1]), max(a0[2], b0[2]), max(a0[3], b0[3]))
+                    del boxes[j]; merged = True; break
+            if merged:
+                break
     if len(boxes) != len(names):
         print(f'!! {path}: нашлось {len(boxes)} предметов, ждали {len(names)}')
         for b in boxes: print('   ', b)
@@ -150,7 +169,16 @@ def cut_sheet(path, names, pad=12, col_gap=18):
     for b, n in zip(boxes, names):
         x0, y0, x1, y1 = b
         c = im.crop((max(0, x0 - pad), max(0, y0 - pad), min(im.width, x1 + pad), min(im.height, y1 + pad)))
-        t = transparent(c, n in HOLES)
+        if n in SOFT:
+            a = np.asarray(c).astype(int)
+            al = np.clip((255 - a.min(axis=2)) * 4, 0, 255).astype(np.uint8)
+            from PIL import ImageFilter
+            # «закрытие» заливает белый блик в середине, мягкое свечение по краю остаётся
+            cl = Image.fromarray(al).filter(ImageFilter.MaxFilter(21)).filter(ImageFilter.MinFilter(21))
+            al = np.maximum(al, np.asarray(cl))
+            t = Image.fromarray(np.dstack([a.astype(np.uint8), al]), 'RGBA')
+        else:
+            t = transparent(c, n in HOLES)
         bb = t.getchannel('A').getbbox()
         t = t.crop((max(0, bb[0] - 6), max(0, bb[1] - 6), min(t.width, bb[2] + 6), min(t.height, bb[3] + 6)))
         t.save(os.path.join(OUT, n + '.webp'), 'WEBP', quality=88, method=6)
