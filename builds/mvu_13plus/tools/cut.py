@@ -132,7 +132,7 @@ def transparent(im, holes=True):
     return Image.fromarray(rgba, 'RGBA')
 
 
-COL_GAP = {7: 3}
+COL_GAP = {7: 3, 20: 5}
 
 
 def cut_sheet(path, names, pad=12, col_gap=18):
