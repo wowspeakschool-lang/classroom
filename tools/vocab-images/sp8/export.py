@@ -6,7 +6,7 @@ import os, sys
 from PIL import Image
 sys.path.insert(0, '..')
 from lib import fname
-from sheets import S, DIGITS, SKIP as _SKIP
+from sheets import S, DIGITS, SKIP as _SKIP, REPL
 # с 14.10.2026 тренажёр живёт на app.wowteach.ru, картинки — в wowspeak-platform/public/trainer/media
 DST = '/home/user/wowspeak-platform/public/trainer/media/spotlight8'
 URL = 'https://app.wowteach.ru/trainer/media/spotlight8/'
@@ -38,7 +38,7 @@ def put(src, stem, q):
 rows = []  # (термин, колода-признак, url)
 for n in sheets:
     for term, cap, _ in S[n - 1][2]:
-        if cap in SKIP: continue
+        if cap in SKIP and n not in REPL: continue  # старый вариант пропускаем, лист замен — нет
         if cap in HOMO and HOMO[cap] is None:
             sys.exit(f'омоним {cap}: впишите перевод в HOMO')
         rows.append((term, HOMO.get(cap) or '', *put(f'out512/{n}/{fname(cap)}', fname(cap)[:-4], 82)))

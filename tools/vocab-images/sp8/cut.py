@@ -89,7 +89,7 @@ def split_rows(path, bs, n_rows):
     """Полосы рисунков — выше 60 px. Если полоса началась вплотную к предыдущей,
     в её верх влипла подпись прошлого ряда: срезаем по самой пустой строке под ней."""
     c = (min_rgb_of(Image.open(path)) < 200).sum(1)
-    rows, prev, prev_pic = [], -100, False
+    rows, prev, prev_pic, bh = [], -100, False, []
     for i, (y0, y1) in enumerate(bs):
         pic = y1 - y0 > 60
         if pic:
@@ -100,7 +100,7 @@ def split_rows(path, bs, n_rows):
                 # промежуток до предыдущей полосы (подписи), он гарантированно пустой
                 y0 = max(0, prev + 2)
             nxt = bs[i + 1][0] if i + 1 < len(bs) else len(c)
-            rows.append((y0, max(y1, nxt - 2)))
+            rows.append((y0, max(y1, nxt - 2))); bh.append(y1 - bs[i][0])
         prev, prev_pic = y1, pic
     # подписи ряда вплотную к рисункам следующего — две полосы слиплись в одну:
     # режем самую высокую по самой пустой строке в её середине
@@ -108,7 +108,13 @@ def split_rows(path, bs, n_rows):
     while len(rows) > n_rows:
         k = min(range(len(rows)), key=lambda i: rows[i][1] - rows[i][0])
         if rows[k][1] - rows[k][0] > 120: break
-        del rows[k]
+        del rows[k]; del bh[k]
+    # крупная подпись листа из одного ряда (замены по 1–3 картинки) выше 60 px:
+    # полоса самой подписи ниже 110 px — это не рисунок
+    while len(rows) > n_rows and min(bh) < 110:
+        k = bh.index(min(bh))
+        if k > 0: rows[k - 1] = (rows[k - 1][0], rows[k - 1][1])
+        del rows[k]; del bh[k]
     while len(rows) < n_rows:
         k = max(range(len(rows)), key=lambda i: rows[i][1] - rows[i][0])
         a0, a1 = rows[k]; h = a1 - a0
