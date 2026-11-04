@@ -41,7 +41,8 @@ SHEETS = {
          'dis_hurricane', 'dis_tsunami'],
     22: ['fut_travel', 'fut_graduation', 'fut_doctor', 'fut_band'],
 }
-WHITE = 238
+WHITE = 238   # для поиска границ предметов на листе
+BG = 250      # фон листа — 254; блики на белых предметах темнее, их не трогаем
 
 
 def runs(mask1d, min_gap, min_len):
@@ -58,14 +59,15 @@ def runs(mask1d, min_gap, min_len):
     return [r for r in out if r[1] - r[0] >= min_len]
 
 
-NO_HOLES = {'football', 'first_aid_kit', 'cl_swimsuit', 'w_snowy', 'w_cloudy', 'an_sheep', 'an_chicken'}
+# замкнутые просветы фона убираем только у этих (у остальных белое внутри — блики)
+HOLES = {'schoolbag', 'stethoscope', 'trophy', 'umbrella', 'billboard', 'cat'}
 
 
 def transparent(im, holes=True):
     """Белый фон, связанный с краем, → прозрачный (белое внутри предмета остаётся)."""
     a = np.asarray(im.convert('RGB')).astype(int)
     h, w, _ = a.shape
-    white = (a.min(axis=2) >= WHITE)
+    white = (a.min(axis=2) >= BG)
     seen = np.zeros((h, w), bool)
     q = deque()
     for x in range(w):
@@ -115,8 +117,8 @@ def transparent(im, holes=True):
     keep = np.array([s >= big * 0.03 for s in sizes])
     seen = seen | ~keep[lab]
     # светлая кайма по краю: два шага съедаем почти-белые пиксели, граничащие с фоном
-    light = a.min(axis=2) >= 210
-    for _ in range(2):
+    light = a.min(axis=2) >= 225
+    for _ in range(3):
         nb = np.zeros_like(seen)
         nb[1:] |= seen[:-1]; nb[:-1] |= seen[1:]; nb[:, 1:] |= seen[:, :-1]; nb[:, :-1] |= seen[:, 1:]
         seen = seen | (nb & light)
@@ -126,14 +128,17 @@ def transparent(im, holes=True):
     return Image.fromarray(rgba, 'RGBA')
 
 
-def cut_sheet(path, names, pad=12):
+COL_GAP = {7: 3}
+
+
+def cut_sheet(path, names, pad=12, col_gap=18):
     im = Image.open(path).convert('RGB')
     a = np.asarray(im)
     ink = a.min(axis=2) < WHITE
     rows = runs(ink.sum(axis=1) > 40, 6, 40)
     boxes = []
     for (y0, y1) in rows:
-        cols = runs(ink[y0:y1].sum(axis=0) > 3, 18, 40)
+        cols = runs(ink[y0:y1].sum(axis=0) > 3, col_gap, 40)
         for (x0, x1) in cols:
             sub = ink[y0:y1, x0:x1]
             ys = np.where(sub.any(axis=1))[0]
@@ -145,7 +150,7 @@ def cut_sheet(path, names, pad=12):
     for b, n in zip(boxes, names):
         x0, y0, x1, y1 = b
         c = im.crop((max(0, x0 - pad), max(0, y0 - pad), min(im.width, x1 + pad), min(im.height, y1 + pad)))
-        t = transparent(c, n not in NO_HOLES)
+        t = transparent(c, n in HOLES)
         bb = t.getchannel('A').getbbox()
         t = t.crop((max(0, bb[0] - 6), max(0, bb[1] - 6), min(t.width, bb[2] + 6), min(t.height, bb[3] + 6)))
         t.save(os.path.join(OUT, n + '.webp'), 'WEBP', quality=88, method=6)
@@ -168,4 +173,4 @@ if __name__ == '__main__':
         if n in SCENES:
             scene(p, SCENES[n])
         else:
-            cut_sheet(p, SHEETS[n])
+            cut_sheet(p, SHEETS[n], col_gap=COL_GAP.get(n, 18))
