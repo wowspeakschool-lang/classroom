@@ -135,3 +135,49 @@ There is/are в части 2 (уровень части 1); Симпсоны и 
 | Part 1 | гостиная, 7 | фотоальбом (семья, страны, to be, have got) · рюкзак (школьные вещи, there is) · холодильник (еда, some/any/lots of) · телевизор (спорт, тело, развлечения, can) · окно (профессии, транспорт, погода, животные, PS vs PC, сравнения) · тетрадь «домашка» (найди ошибку: Present Simple, наречия, Let's, need/want) · телефон (голосовое: Past Simple + speaking) |
 | Part 2 | кабинет, 8 | шкаф (одежда, мебель, прилагательные) · карта на стене (отпуск, география, путешествия, транспорт) · аптечка (болезни, тело) · книжная полка (отношения, книги и фильмы, эмоции) · ноутбук (компьютер, покупки, look/see/watch, еда) · сейф с газетой (запись «опиши вора»: внешность, преступление) · стол с запиской (грамматика PR2–PR4: найди и исправь / выбери) · телефон (speaking) |
 | Part 3 | тайная лаборатория, 8 | радио (запись Jess и Emma: соцсети, общение, Past Perfect, reporting verbs) · спортивная сумка (sport phrases, health verbs, music, -ing, used to, should/must) · диплом (образование, фразовые глаголы, сложные вопросы, пассив) · глобус (стихийные бедствия, глобальные проблемы, история) · детективная доска (черты характера, преступление, must/might have, reported questions, 3rd Conditional) · капсула времени (Future Continuous/Perfect, narrative tenses, habits) · журнал с рекламой (реклама, медиа, абстрактные слова, идиомы, артикли) · телефон (speaking: conditionals) |
+
+## Версия 6 (идея Анны 04.11.2026): предметы тоже называем
+
+Нажали на предмет → он крупно, «What's this?» → ученик называет → менеджер
+ставит ✓ / ~ / ✗ (это балл по лексической теме) → открывается задание.
+Подписей на предметах нет. Предметы — слова из лексических тем своей части.
+Чем выше часть, тем полнее ответ:
+- Part 1 — назвать: «It's a football»;
+- Part 2 — назвать и описать двумя прилагательными: «a huge old wardrobe»
+  (заодно тема adjectives to describe objects);
+- Part 3 — объяснить, что это и зачем: «It's a device which measures
+  earthquakes» (определение, relative clause).
+
+| часть | предмет (слово) | тема чек-листа | задание внутри |
+|---|---|---|---|
+| P1 гостиная | family photo | families | семейное дерево; to be, have got |
+| | schoolbag | school objects | что в рюкзаке: there is / are |
+| | passport | countries | флаги и национальности |
+| | bowl of fruit / sandwich | food and drinks | холодильник: some / any / lots of |
+| | football | sports | спорт и тело, can / can't |
+| | toy bus | transport | окно на улицу: профессии, PS vs PC |
+| | cinema tickets | entertainment | Let's…, наречия частотности |
+| | umbrella | weather | прогноз → чемодан: одежда, need / want |
+| | cat | pets and farm animals | сравни животных; голосовое (Past Simple) |
+| P2 кабинет | wardrobe | household / clothes / adjectives | найди и исправь: PR2 грамматика |
+| | map | geographical features, holidays | карта путешествия: going to, Past Continuous |
+| | train ticket | ways of travelling, travelling activities | will / may / might, must / have to |
+| | first-aid kit | health and illnesses, body parts | have to / don't have to, PC vs PS |
+| | novel | books and films, relationships, emotions | Present Perfect, 1st Conditional, пассив |
+| | wallet | money and shopping | going to vs PC for future |
+| | wanted poster | describing people, crime | запись «опиши вора», PP vs PS |
+| | laptop | computer phrases | косвенная речь, relative clauses |
+| | binoculars | look / see / watch, food adjectives | 2nd Conditional; speaking |
+| P3 лаборатория | trophy | sport phrases | 10 предложений с выбором (used to, -ing, modals) |
+| | stethoscope | health verbs | — входит в те же 10 предложений |
+| | microphone | music | запись Jess и Emma: Past Perfect, reporting verbs |
+| | smartphone | social media, verbs of communication | causative have |
+| | graduation cap | education, hopes and dreams | сложные вопросы, сложный пассив |
+| | seismograph | natural disasters | modals of possibility |
+| | magnifying glass | crime, personal qualities | детективная доска: must / might have, reported questions, 3rd Conditional |
+| | ancient scroll | history, abstract nouns | narrative tenses, привычки |
+| | time capsule | hopes and dreams | Future Continuous / Perfect (4 картинки) |
+| | billboard | advertising, media, global issues | половинки предложений (идиомы), артикли; speaking на conditionals |
+
+Обрывки записки — за каждый предмет. P1 — 9 обрывков → 4 цифры,
+P2 — 9 → 2 цифры, P3 — 10 → 2 цифры.
