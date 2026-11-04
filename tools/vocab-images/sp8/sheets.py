@@ -47,7 +47,10 @@ REPL_DESC2 = {
 }
 # лист 65: у грустной подруги слеза
 REPL_DESC3 = {'sympathise': 'Девочка обнимает за плечи грустную подругу, та опустила голову, но без слёз; рядом упавшее мороженое'}
-REPL = {152: list(REPL_DESC), 153: list(REPL_DESC2), 154: list(REPL_DESC3)}
+# лист 66: надпись NEW на витрине
+REPL_DESC4 = {'put on the market': 'Новый робот-игрушка на подставке в витрине магазина игрушек, над ним яркая звёздочка-вспышка без букв; покупатели заглядывают в окно'}
+REPL = {152: list(REPL_DESC), 153: list(REPL_DESC2), 154: list(REPL_DESC3), 155: list(REPL_DESC4)}
+REPL_DESC.update(REPL_DESC4)
 REPL_DESC.update(REPL_DESC3)
 REPL_DESC.update(REPL_DESC2)
 SKIP = set(REPL_DESC)
