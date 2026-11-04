@@ -64,7 +64,7 @@ HOLES = {'schoolbag', 'stethoscope', 'trophy', 'umbrella', 'billboard', 'cat',
          'an_rabbit', 'an_pig', 'an_chicken', 'an_horse', 'an_hamster', 'an_dog', 'an_cat',
          'sport_bike'}
 # светящееся (солнце): прозрачность по светлоте, а не резкой маской
-SOFT = {'w_sunny'}
+SOFT = {'w_sunny', 'w_windy'}
 
 
 def transparent(im, holes=True):
@@ -135,7 +135,93 @@ def transparent(im, holes=True):
 COL_GAP = {7: 3, 20: 5}
 
 
-def cut_sheet(path, names, pad=12, col_gap=18):
+# листы-карточки со скруглёнными углами: режем по самой карточке и скругляем сами
+CARD_SHEETS = {16, 17, 20, 22}
+# у этих нейросеть съедает часть картинки (вода, ветер, тучи) — старый способ
+OLD = {'sport_swim', 'w_rainy', 'w_snowy', 'w_cloudy', 'family_photo', 'wanted_poster'}
+# портреты срезаны ровно снизу — ниже края одежды ничего не оставляем
+FLAT_BOTTOM = ('fam_', 'suspect_')
+_SESSION = None
+# BiRefNet заметно чище isnet (бахрома шарфа, кудри), но ~45 с и ~9 ГБ памяти на картинку
+NN_MODEL = os.environ.get('NN_MODEL', 'birefnet-general')
+
+
+def nn_cut(im):
+    """Вырезка фона нейросетью (rembg, BiRefNet) + снятие белой каймы с краёв."""
+    global _SESSION
+    from rembg import remove, new_session
+    if _SESSION is None:
+        _SESSION = new_session(NN_MODEL)
+    t = remove(im.convert('RGB'), session=_SESSION)
+    a = np.asarray(t).astype(float)
+    al = a[..., 3:4] / 255.0
+    rgb = a[..., :3]
+    # полупрозрачный край смешан с белым фоном — вычитаем белое обратно
+    safe = np.maximum(al, 0.05)
+    un = (rgb - (1 - al) * 255.0) / safe
+    edge = (al > 0) & (al < 0.98)
+    rgb = np.where(edge, np.clip(un, 0, 255), rgb)
+    alpha = a[..., 3]
+    alpha = np.where(alpha < 60, 0, alpha)
+    # мелкие отдельные пятнышки (крошки соседних предметов, тени) — убираем
+    solid = alpha > 0
+    h, w = solid.shape
+    lab = np.zeros((h, w), np.int32); sizes = [0]
+    for (y, x) in zip(*np.where(solid)):
+        if lab[y, x]:
+            continue
+        k = len(sizes); lab[y, x] = k; n = 1; q = deque([(y, x)])
+        while q:
+            cy, cx = q.popleft()
+            for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                ny, nx = cy + dy, cx + dx
+                if 0 <= ny < h and 0 <= nx < w and solid[ny, nx] and not lab[ny, nx]:
+                    lab[ny, nx] = k; n += 1; q.append((ny, nx))
+        sizes.append(n)
+    big = max(sizes)
+    keep = np.array([z >= big * 0.02 for z in sizes]); keep[0] = False
+    alpha = np.where(keep[lab], alpha, 0)
+    return Image.fromarray(np.dstack([rgb, alpha]).astype(np.uint8), 'RGBA')
+
+
+def card(im, inset=4):
+    """Карточка-сцена: внутренний прямоугольник без белых краёв + свои ровные скругления."""
+    from PIL import ImageDraw
+    a = np.asarray(im.convert('RGB'))
+    # сама карточка — самый крупный связный кусок не-белого; огрызки соседних отбрасываем
+    ink = a.min(axis=2) < 235
+    h0, w0 = ink.shape
+    lab = np.zeros((h0, w0), np.int32); best, bestk, k = 0, 0, 0
+    for (y, x) in zip(*np.where(ink)):
+        if lab[y, x]:
+            continue
+        k += 1; lab[y, x] = k; n = 1; q = deque([(y, x)])
+        while q:
+            cy, cx = q.popleft()
+            for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                ny, nx = cy + dy, cx + dx
+                if 0 <= ny < h0 and 0 <= nx < w0 and ink[ny, nx] and not lab[ny, nx]:
+                    lab[ny, nx] = k; n += 1; q.append((ny, nx))
+        if n > best:
+            best, bestk = n, k
+    ys, xs = np.where(lab == bestk)
+    y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+    white = ~(lab == bestk)
+    # срезаем края, пока на краю больше 25 % не-карточки (скругления исходника)
+    while y1 - y0 > 20 and white[y0, x0:x1].mean() > 0.25: y0 += 1
+    while y1 - y0 > 20 and white[y1 - 1, x0:x1].mean() > 0.25: y1 -= 1
+    while x1 - x0 > 20 and white[y0:y1, x0].mean() > 0.25: x0 += 1
+    while x1 - x0 > 20 and white[y0:y1, x1 - 1].mean() > 0.25: x1 -= 1
+    c = im.convert('RGB').crop((x0 + inset, y0 + inset, x1 - inset, y1 - inset))
+    w, h = c.size
+    r = int(min(w, h) * 0.12)
+    big = Image.new('L', (w * 4, h * 4), 0)
+    ImageDraw.Draw(big).rounded_rectangle((0, 0, w * 4 - 1, h * 4 - 1), r * 4, fill=255)
+    c.putalpha(big.resize((w, h), Image.LANCZOS))
+    return c
+
+
+def cut_sheet(path, names, pad=24, col_gap=18, sheet_no=0):
     im = Image.open(path).convert('RGB')
     a = np.asarray(im)
     ink = a.min(axis=2) < WHITE
@@ -169,16 +255,27 @@ def cut_sheet(path, names, pad=12, col_gap=18):
     for b, n in zip(boxes, names):
         x0, y0, x1, y1 = b
         c = im.crop((max(0, x0 - pad), max(0, y0 - pad), min(im.width, x1 + pad), min(im.height, y1 + pad)))
-        if n in SOFT:
+        if sheet_no in CARD_SHEETS:
+            t = card(c)
+        elif n in SOFT:
             a = np.asarray(c).astype(int)
             al = np.clip((255 - a.min(axis=2)) * 4, 0, 255).astype(np.uint8)
             from PIL import ImageFilter
             # «закрытие» заливает белый блик в середине, мягкое свечение по краю остаётся
             cl = Image.fromarray(al).filter(ImageFilter.MaxFilter(21)).filter(ImageFilter.MinFilter(21))
-            al = np.maximum(al, np.asarray(cl))
+            if n == 'w_sunny':   # у ветра блика нет, «закрытие» там рисует квадраты
+                al = np.maximum(al, np.asarray(cl))
             t = Image.fromarray(np.dstack([a.astype(np.uint8), al]), 'RGBA')
-        else:
+        elif n in OLD:
             t = transparent(c, n in HOLES)
+        else:
+            t = nn_cut(c)
+            if n.startswith(FLAT_BOTTOM):
+                ink = np.asarray(c.convert('RGB')).min(axis=2) < 235
+                rows = np.where(ink.mean(axis=1) > 0.4)[0]
+                if len(rows):
+                    al = np.asarray(t).copy(); al[rows[-1] + 1:, :, 3] = 0
+                    t = Image.fromarray(al, 'RGBA')
         bb = t.getchannel('A').getbbox()
         t = t.crop((max(0, bb[0] - 6), max(0, bb[1] - 6), min(t.width, bb[2] + 6), min(t.height, bb[3] + 6)))
         t.save(os.path.join(OUT, n + '.webp'), 'WEBP', quality=88, method=6)
@@ -201,4 +298,4 @@ if __name__ == '__main__':
         if n in SCENES:
             scene(p, SCENES[n])
         else:
-            cut_sheet(p, SHEETS[n], col_gap=COL_GAP.get(n, 18))
+            cut_sheet(p, SHEETS[n], col_gap=COL_GAP.get(n, 18), sheet_no=n)
