@@ -1,0 +1,67 @@
+# Вводный урок 13+ — структура (черновик на согласование, 04.11.2026)
+
+Источник: Google Диск, папка «Демо 13+» (чек-лист `Assessment chart and link to
+Vznaniya_13-17.docx`, выгрузки «Часть 1–3.pdf», скриншоты Wordwall).
+
+Решения Анны 04.11.2026:
+- тема — **escape room**;
+- чек-лист не меняем, дублируем его в отдельном окне и связываем с заданиями,
+  баллы считаются во время урока; в план урока его не вставляем;
+- менеджер показывает свой экран, иногда даёт управление; урок 40 минут, из них
+  на задания около 25; каждая тема чек-листа — хотя бы одно задание;
+- speaking cards нужны — по одной в каждой комнате;
+- приветственный экран «Добро пожаловать… это не тест» с пометкой WowSpeak School;
+- вместо видео — своя короткая запись (генерируем сами) и картинка к заданию про еду.
+
+## Общее
+
+- Одна страница, сверху переключатель **Part 1 · Part 2 · Part 3**.
+- Сюжет: ученик заперт в квест-комнате WowSpeak; каждая часть — этаж, каждый
+  блок чек-листа — комната; за пройденную комнату даётся цифра кода, в конце
+  этажа дверь открывается.
+- В каждой комнате: задание на лексику (три темы блока), задание на грамматику
+  (три темы блока), speaking card (2–3 вопроса на грамматику комнаты).
+- Окно 📋 с двумя вкладками: «План урока» (шаг · что делать · teacher's language ·
+  ожидаемые ответы, Word/PDF) и «Чек-лист» (точная копия, 0/1/2 по темам).
+- Чек-лист сам подсвечивает темы текущего экрана; по ответам ученика ставит
+  балл-подсказку (всё верно — 2, половина — 1, мимо — 0), менеджер может
+  поменять одним нажатием; speaking — 0/1/2 руками. Сумма по блоку, подсказка
+  «9 из 12 — дальше», итог «скопировать результат», кнопка «новый ученик».
+  Хранится только в браузере менеджера.
+
+## Part 1 (A1.1–A1.2) — 4 комнаты
+
+| комната | блок чек-листа | задания |
+|---|---|---|
+| Hall | PR1 U0–4: families, countries, school objects · to be, have got, there is | семейное дерево (кто кому кем), флаги и национальности, открытый рюкзак «She's got… / There is…», speaking card |
+| Kitchen | PR1 U5–9: sports, body parts, food & drinks · Present Simple, can/can't, some/any/lots of | холодильник (вместо видео), спорт «Can you…?», части тела на картинке, найди ошибку в Present Simple, speaking card |
+| Living room | PR1 U10–14: jobs, transport, entertainment · PS vs PC, adverbs of frequency, Let's | вид из окна «What is he doing now? He usually…», транспорт, выбор реплики «Let's go to…», место наречия в предложении, speaking card |
+| Attic | PR1 U15–20: weather, pets & farm animals, clothes · need/want, comparatives, Past Simple | собери чемодан по прогнозу погоды, сравни животных, запись «что было вчера» + вопросы, speaking card |
+
+## Part 2 (A2.1–B1.1) — 6 комнат, по нарастанию: PR2 → PR3 → PR4
+
+| комната | блок | лексика | грамматика |
+|---|---|---|---|
+| 1 | PR2 U0–9 | clothes, holidays, emotions — раскладка по группам | Past Simple, PS vs PC, quantifiers — найди и исправь ошибку |
+| 2 | PR2 U10–20 | health, geographical features, travelling activities — слово ↔ картинка | going to, Past Continuous, have to — выбери форму |
+| 3 | PR3 U0–9 | household, ways of travelling, adjectives for objects — опиши комнату по картинке | PC vs PS, will/may/might, must/have to |
+| 4 | PR3 U10–20 | relationships, books & films, body parts | Present Perfect, 1st Conditional, Passive |
+| 5 | PR4 U0–9 | describing people, crime, money & shopping — запись «опиши вора», выбери подозреваемого | PP vs PS, Past Continuous, going to vs PC |
+| 6 | PR4 U10–20 | food adjectives, look/see/watch, computer phrases | reported speech, 2nd Conditional, relative clauses |
+
+В каждой комнате — speaking card.
+
+## Part 3 (B1.2–B2.2) — 6 комнат, PR5 → PR6 → PR7
+
+| комната | блок | что берём / что новое |
+|---|---|---|
+| 1 | PR5 U0–9 | 10 предложений с выбором из выгрузки (опечатки исправлены) |
+| 2 | PR5 U10–20 | запись (одним голосом, в третьем лице, по истории Jess и Emma) + «What had Anna done…»; соцсети, causative have |
+| 3 | PR6 U0–9 | education, phrasal verbs, natural disasters · modals of possibility, complex passive, complex questions |
+| 4 | PR6 U10–20 | детективная сцена: personal qualities, crime, reporting verbs · reported questions, must/might have, 3rd Conditional |
+| 5 | PR7 U0–9 | раскладка (history, media, abstract nouns) + 4 картинки с вопросами про будущее (ошибки в вопросах исправлены) |
+| 6 | PR7 U10–20 | половинки предложений (идиомы), артикли, финальные вопросы на conditionals |
+
+Убираем из выгрузки: 15 слов A2 в начале части 3 (повтор части 2), «любимая
+страна Мардж» и видео There is/are в части 2 (это уровень части 1),
+повтор Симпсонов между частями.
