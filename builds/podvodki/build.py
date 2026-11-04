@@ -9,6 +9,8 @@ dups.txt         — текстовые блоки, чей текст и кар�
 import json, re, subprocess, collections, hashlib
 A = json.load(open('plan_agents.json'))
 D = set(open('dups.txt').read().split())
+LES = json.load(open('lessons.json'))
+URL = lambda x: 'https://app.wowteach.ru/?run=' + LES[f"{x['course']}|{x['unit']}|{x['lesson']}"] + '&preview=1'
 LOST = dict(l.split(' ',1) for l in open('lost_pics.txt').read().strip().split('\n'))
 NAMES = {'sm0': 'Super Minds Starter', 'sm1': 'Super Minds 1', 'sm2': 'Super Minds 2', 'sm3': 'Super Minds 3',
          'gg1': 'Go Getter 1', 'gg2': 'Go Getter 2', 'gg3': 'Go Getter 3',
@@ -34,6 +36,7 @@ L = ['# Подводки — внутрь задания: проверить', '
      '- **Оставляем** (' + str(C['keep']) + ') — разделители серий, «Давай повторим…», карточки-правила, блоки со звуком, прописи, комиксы.', '',
      'Подсказки-правила («Помни: после love глагол с -ing», «Пример: He ___ (play) → is playing») не переносим — решение от 04.11.2026.',
      'Номера блоков — как в редакторе, до правки; после неё номера ниже сдвинутся.', '',
+     'Название урока — ссылка на превью («глазами ученика», с верными ответами). Превью показывает урок **как он есть сейчас**, до правки: видно, какой экран-подводку мы убираем.',
      'Где не нравится — напишите «курс, юнит, урок, блок → как надо».', '']
 for c in ORDER:
     xs = [x for x in A if x['course'] == c and x['action'] != 'keep']
@@ -55,12 +58,12 @@ for c in ORDER:
                 pre = '**в материал** ' if x['action'] == 'material' else '**в заголовок** '
                 st = pre + '<br>'.join(parts)
                 if x['text_id'] in LOST: st += f"<br>🟥 уходит картинка: {LOST[x['text_id']].strip()}"
-            L.append(f"| Unit {x['unit']} · {x['lesson']} | {x['text_no']} | {esc(x['was'])[:180]} | {st} |")
+            L.append(f"| [Unit {x['unit']} · {x['lesson']}]({URL(x)}) | {x['text_no']} | {esc(x['was'])[:180]} | {st} |")
         L.append('')
     if ks:
         L += ['**Оставляем как есть:**', '']
         for x in ks:
-            L.append(f"- Unit {x['unit']} · {x['lesson']}, блок {x['text_no']} — {esc(x['reason'])[:160]}")
+            L.append(f"- [Unit {x['unit']} · {x['lesson']}]({URL(x)}), блок {x['text_no']} — {esc(x['reason'])[:160]}")
         L.append('')
 open('spisok.md', 'w').write('\n'.join(L) + '\n')
 print(C, sum(len(x['targets']) for x in A if x['action'] in ('merge', 'material')))

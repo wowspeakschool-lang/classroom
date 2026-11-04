@@ -32,12 +32,29 @@ doc.styles['Normal'].font.name = 'Calibri'
 doc.styles['Normal'].font.size = Pt(10.5)
 doc.styles['Normal'].font.color.rgb = INK
 
-TOKEN = re.compile(r'(\*\*[^*]+\*\*|`[^`]+`)')
+TOKEN = re.compile(r'(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\(https?://[^)\s]+\))')
+LINK = re.compile(r'\[([^\]]+)\]\((https?://[^)\s]+)\)')
+
+
+def link(par, text, url, size):
+    """Ссылка в Word — [текст](url) в markdown (04.11.2026, ссылки на превью уроков)."""
+    rid = par.part.relate_to(url, 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink', is_external=True)
+    h = OxmlElement('w:hyperlink'); h.set(qn('r:id'), rid)
+    r = OxmlElement('w:r'); rp = OxmlElement('w:rPr')
+    c = OxmlElement('w:color'); c.set(qn('w:val'), '1F5FBF'); rp.append(c)
+    u = OxmlElement('w:u'); u.set(qn('w:val'), 'single'); rp.append(u)
+    sz = OxmlElement('w:sz'); sz.set(qn('w:val'), str(int(size * 2))); rp.append(sz)
+    r.append(rp); t = OxmlElement('w:t'); t.text = text; r.append(t); h.append(r)
+    par._p.append(h)
 
 
 def runs(par, text, size=10.5, base=None, italic=False):
     for part in TOKEN.split(text):
         if not part:
+            continue
+        lm = LINK.fullmatch(part)
+        if lm:
+            link(par, lm.group(1), lm.group(2), size)
             continue
         if part.startswith('**') and part.endswith('**'):
             r = par.add_run(part[2:-2]); r.bold = True
@@ -86,7 +103,10 @@ def table(rows):
             if ci == 0:
                 shade(c, SOFT_FILL)
             p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(1)
-            runs(p, val, 9.5, HEADC if ci == 0 else INK)
+            for k, seg in enumerate(val.split('<br>')):  # <br> — перенос строки в ячейке
+                if k:
+                    p.add_run().add_break()
+                runs(p, seg, 9.5, HEADC if ci == 0 else INK)
     return t
 
 
