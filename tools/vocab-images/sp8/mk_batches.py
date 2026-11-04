@@ -21,7 +21,7 @@ def one(ws, note):
         k += n
     grid = f'{max(rows)}×{len(rows)}' if len(rows) > 1 else f'{rows[0]}×1'
     cnt = len(ws)
-    word = 'картинки' if cnt in (2, 3, 4) else 'картинок'
+    word = 'картинка' if cnt == 1 else 'картинки' if cnt in (2, 3, 4) else 'картинок'
     return (f'{STYLE.replace(" --ar 3:2", "")} Сетка {grid}, ровно {cnt} {word}; подпись под каждой — '
             f'английское слово из кавычек, сами кавычки не рисовать. {note} ' + ' '.join(parts) + ' --ar 3:2')
 
