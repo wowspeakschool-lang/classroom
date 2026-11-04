@@ -151,7 +151,11 @@ def nn_cut(im):
     global _SESSION
     from rembg import remove, new_session
     if _SESSION is None:
-        _SESSION = new_session(NN_MODEL)
+        import onnxruntime as ort
+        so = ort.SessionOptions()
+        so.enable_cpu_mem_arena = False   # без этого память растёт с каждой картинкой и процесс убивают
+        so.enable_mem_pattern = False
+        _SESSION = new_session(NN_MODEL, sess_opts=so)
     t = remove(im.convert('RGB'), session=_SESSION)
     a = np.asarray(t).astype(float)
     al = a[..., 3:4] / 255.0
