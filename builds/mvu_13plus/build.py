@@ -62,7 +62,7 @@ KIND_RU = {'choice': 'выбор ответа', 'family': 'семейное де
 rows = []
 def row(step, do, tl, exp):
     rows.append(f'<tr><td class="st">{step}</td><td>{do}</td><td class="tl">{tl}</td><td class="sa">{exp}</td></tr>')
-row('Старт', 'Откройте 📋 (это окно), впишите имя ученика по-русски, пол и возраст — они попадут в отчёт. Демонстрируйте экран урока, это окно держите на втором мониторе или в отдельной вкладке.', '—', '—')
+row('Старт', 'Вверху урока две кнопки: ✅ — чек-лист, 📋 — этот план. Каждая открывает своё окно. В чек-листе впишите имя ученика по-русски, пол и возраст — они попадут в отчёт. Демонстрируйте экран урока, оба окна держите на втором мониторе или рядом.', '—', '—')
 row('1. Welcome', 'Приветствие WowSpeak School. Снимите напряжение: это не тест, а игра.', 'Hi! Welcome to WowSpeak School! This is not a test — it’s a game. Are you ready?', 'Yes! / I’m ready.')
 row('2. Get to know you', 'Три вопроса для знакомства. Баллов нет — смотрим, как ученик держится, и решаем, нужен ли облегчённый режим 💡.', 'What’s your name? How old are you? What do you like doing in your free time?', 'My name is… I’m 14. I like playing football / drawing…')
 row('3. Briefing', 'Объясните правила квеста: дверь закрыта, в комнате спрятаны кусочки записки с кодом. Сколько цифр в коде — не говорите.', 'You are locked in the escape room! Find the pieces of the secret note to open the door. Click on the glowing objects.', '—')
@@ -72,7 +72,7 @@ for P in data.PARTS:
         row(f'Переход в Part {P["n"]}', 'Только если в предыдущей части каждый блок ≥ 9 из 12 (или вы хотите проверить ещё пару заданий). Нажмите «Keep looking». Не говорите «нам нужно ещё цифр» — просто нашлась новая комната.', e(P['intro_en']), '—')
     for o in P['objects']:
         name = o['name'].split(' — ')[0]
-        row(f'🔎 {e(o["id"].replace("_", " "))}', f'Ученик выбирает предмет, вы нажимаете. <b>Назвать предмет</b> — оцените в окне «Сейчас на экране» (✓ / ~ / ✗).'
+        row(f'🔎 {e(o["id"].replace("_", " "))}', f'Ученик выбирает предмет, вы нажимаете. <b>Назвать предмет</b> — оцените в чек-листе ✅, панель «Сейчас на экране» (✓ / ~ / ✗).'
             + (' В Part 2 — с двумя прилагательными, в Part 3 — объяснить, что это и зачем.' if P['n'] > 1 else ''), e(o['ask']), e(o['name']))
         for t in o['tasks']:
             exp = '<br>'.join(e(ans(it)) for it in t.get('items', []) if ans(it))
@@ -88,18 +88,18 @@ for P in data.PARTS:
             tl = 'Let’s listen to the message.' if t['kind'] == 'listen' else 'Look at the picture. Which one is right? Why?' if t['kind'] in ('choice', 'family') else 'Is it right or wrong? Can you correct it?' if t['kind'] == 'tf' else 'Put the words in the right order.' if t['kind'] == 'order' else 'Put the words into the groups.' if t['kind'] == 'sort' else 'Match the words.' if t['kind'] == 'match' else 'What is it?'
             row('', do, tl, exp)
         for q, _ in o['you']:
-            row('', '<b>And you?</b> Устный вопрос о самом ученике — оцените 0/1/2 в окне «Сейчас на экране». После Next ученик получает обрывок записки и возвращается в комнату.', e(q), 'Полный ответ по теме, без подсказки = 2')
+            row('', '<b>And you?</b> Устный вопрос о самом ученике — оцените 0/1/2 в чек-листе ✅, панель «Сейчас на экране». После Next ученик получает обрывок записки и возвращается в комнату.', e(q), 'Полный ответ по теме, без подсказки = 2')
     row(f'📜 Записка Part {P["n"]}', 'Когда все предметы открыты — «Put the note together»: кусочки слетаются, видны цифры.', 'Look! The pieces make a note. What’s the code?', ' '.join(['X'] * P['digits']))
     if P['n'] < 3:
         row(f'Чекпойнт Part {P["n"]}', 'Посмотрите суммы блоков в чек-листе. ≥ 9 из 12 в каждом блоке → «Keep looking» (следующая часть). Иначе → «Open the lock» (финал).', 'Great job! Shall we open the lock?', '—')
 row('🔐 Замок', 'Ученик читает код вслух по-английски, вы нажимаете «Enter the code». Кнопка 🚪 вверху ведёт сюда в любой момент.', 'Read the code in English, please!', 'four, seven, two, nine…')
-row('🎉 Финал', 'Дверь открыта. Скопируйте отчёт (вкладка «Чек-лист» → «Скопировать отчёт») и переходите к предзакрытию.', 'Well done! You escaped! How did you like the game?', '—')
+row('🎉 Финал', 'Дверь открыта. Скопируйте отчёт (чек-лист ✅ → «Скопировать отчёт») и переходите к предзакрытию.', 'Well done! You escaped! How did you like the game?', '—')
 PLAN_INNER = (
     '<h1 style="color:#6e3510;margin:4px 0 10px">🗝 План урока: Escape Room 13+ (вводный урок)</h1>'
     f'<p class="dl"><a href="{SITE}mvu_13plus_plan.docx" download>⬇ Скачать план (Word)</a><a class="pdf" href="{SITE}mvu_13plus_plan.pdf" download>⬇ Скачать план (PDF)</a></p>'
     '<div class="legend"><b>Длительность:</b> 40 мин, из них ~25 на задания, остальное — маркетинговые этапы. <b>Порядок:</b> всегда с Part 1; дальше — по результату. '
     'Каждый предмет: назвать → задание(я) → вопрос «And you?» → обрывок записки. Ничего не листается само — только Next. '
-    '<b>💡</b> — облегчённый режим (меньше вариантов, подсказки). <b>🚪</b> — сразу к замку. Цифра/обрывок даётся всегда, даже если ученик не справился.</div>'
+    '<b>✅</b> — чек-лист, <b>📋</b> — план (отдельные окна). <b>💡</b> — облегчённый режим (меньше вариантов, подсказки). <b>🚪</b> — сразу к замку. Цифра/обрывок даётся всегда, даже если ученик не справился.</div>'
     '<table class="plan"><tr><th>Шаг</th><th>Что делать</th><th>Teacher’s language</th><th>Ожидаемые ответы</th></tr>' + ''.join(rows) + '</table>'
 )
 PLAN_STYLE = ('table.plan td.st{font-weight:700;white-space:nowrap}table.plan td.tl{color:#7a3d10;font-style:italic;width:24%}'
@@ -111,7 +111,13 @@ D = dict(media=data.M, audio=AUDIO, family=data.FAMILY,
          checklist=[dict(title=p['title'], blocks=[[b, ts] for b, ts in p['blocks']]) for p in data.CHECKLIST],
          parts=[dict(room=P['room'], room_name=P['room_name'], intro=P['intro'] if P['n'] > 1 else '', intro_en=P['intro_en'], objects=P['objects']) for P in data.PARTS],
          preload=sorted(preload))
-mw = open(os.path.join(HERE, 'manager.html')).read().replace('/*PLAN*/', f'<style>{PLAN_STYLE}</style>' + PLAN_INNER)
+mw = open(os.path.join(HERE, 'manager.html')).read()
+D['plan_html'] = ('<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><title>План урока — Escape Room 13+</title><style>'
+    "body{font-family:'Segoe UI',Arial,sans-serif;background:#f6efe2;color:#2a1a10;padding:18px 22px;max-width:1200px;margin:0 auto;font-size:14px}"
+    'table{border-collapse:collapse;width:100%;background:#fff}th,td{border:1px solid #d9cdb8;padding:5px 8px;vertical-align:top}th{background:#6e3510;color:#fff;text-align:left}'
+    '.legend{background:#fffaf0;border-left:4px solid #f2b544;padding:8px 12px;margin:8px 0}'
+    '.dl a{display:inline-block;margin:0 8px 10px 0;padding:8px 16px;border-radius:10px;background:#e8631a;color:#fff;font-weight:700;text-decoration:none}.dl a.pdf{background:#7b4bd6}'
+    + PLAN_STYLE + '</style></head><body>' + PLAN_INNER + '</body></html>')
 D['mw_html'] = mw
 tpl = open(os.path.join(HERE, 'template.html')).read()
 page = tpl.replace('/*DATA*/null', json.dumps(D, ensure_ascii=False).replace('</', '<\\/'))

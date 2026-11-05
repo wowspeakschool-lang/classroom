@@ -133,7 +133,7 @@ h2{font-weight:800;font-size:3.6vh;margin:.2em 0 .5em;color:var(--gold2)}
 <body>
 <div id="loader"><div>Loading…</div><div class="b"><i id="lbar"></i></div></div>
 <div id="app"><div id="stage">
-  <div id="topbar"><button class="tb plan" id="planBtn" title="Чек-лист и план урока (для менеджера)">📋</button><button class="tb" id="hintBtn" title="Подсказка">💡</button><button class="tb" id="finBtn" title="Открыть замок и закончить">🚪</button></div>
+  <div id="topbar"><button class="tb plan" id="checkBtn" title="Чек-лист (для менеджера)">✅</button><button class="tb plan" id="planBtn" title="План урока (для менеджера)">📋</button><button class="tb" id="hintBtn" title="Подсказка">💡</button><button class="tb" id="finBtn" title="Открыть замок и закончить">🚪</button></div>
   <div id="parts"></div>
   <div id="screens"></div>
   <div id="tray"></div><div id="notes"></div>
@@ -475,7 +475,13 @@ const MW = {
   },
   refresh() { if (this.w && !this.w.closed && this.w.render) this.w.render(); },
 };
-$('#planBtn').onclick = () => MW.open();
+$('#checkBtn').onclick = () => MW.open();
+$('#planBtn').onclick = () => {
+  const W = Math.min(1100, screen.availWidth - 80), H = Math.min(900, screen.availHeight - 80);
+  const w = window.open('', 'wowspeak_mvu13_plan', `popup=yes,width=${W},height=${H},left=30,top=30,resizable=yes,scrollbars=yes`);
+  if (!w) { alert('Разрешите всплывающие окна, чтобы открыть план урока.'); return; }
+  w.document.open(); w.document.write(D.plan_html); w.document.close();
+};
 
 function report() {
   const st = S.student, f = st.gender === 'f';

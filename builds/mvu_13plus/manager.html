@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru"><head><meta charset="UTF-8"><title>Менеджер — Escape Room 13+</title>
+<html lang="ru"><head><meta charset="UTF-8"><title>Чек-лист — Escape Room 13+</title>
 <style>
 body{font-family:'Segoe UI',Arial,sans-serif;background:#f6efe2;color:#2a1a10;margin:0;font-size:14px}
 header{position:sticky;top:0;background:#2b2240;color:#fff;padding:10px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;z-index:5}
@@ -33,11 +33,10 @@ textarea{width:100%;height:220px;font-family:Consolas,monospace;font-size:13px}
 .dl a.pdf{background:#7b4bd6}
 </style></head><body>
 <header>
-  <b>🗝 Escape Room 13+</b>
+  <b>✅ Чек-лист · Escape Room 13+</b>
   <label>Имя ученика <input id="nm" placeholder="Имя по-русски"></label>
   <label>Пол <select id="gd"><option value="m">мальчик</option><option value="f">девочка</option></select></label>
   <label>Возраст <input id="ag" size="3"></label>
-  <span class="tabs"><button id="tb1" class="on">Чек-лист</button><button id="tb2">План урока</button></span>
   <span class="code" id="code"></span>
 </header>
 <main>
@@ -51,13 +50,10 @@ textarea{width:100%;height:220px;font-family:Consolas,monospace;font-size:13px}
   <textarea id="rep" readonly></textarea>
   <div class="act"><button id="cp">📋 Скопировать отчёт</button><button class="gray" id="rs">Новый ученик (сбросить всё)</button></div>
 </div>
-<div id="plan" style="display:none">/*PLAN*/</div>
 </main>
 <script>
 const A = window.APP;
 function $(s){return document.querySelector(s)}
-$('#tb1').onclick=()=>{$('#check').style.display='';$('#plan').style.display='none';$('#tb1').className='on';$('#tb2').className=''};
-$('#tb2').onclick=()=>{$('#check').style.display='none';$('#plan').style.display='';$('#tb2').className='on';$('#tb1').className=''};
 const st=A.S.student; $('#nm').value=st.name; $('#gd').value=st.gender; $('#ag').value=st.age;
 $('#nm').oninput=e=>{st.name=e.target.value;A.save();render()}; $('#gd').onchange=e=>{st.gender=e.target.value;A.save();render()}; $('#ag').oninput=e=>{st.age=e.target.value;A.save();render()};
 $('#cp').onclick=()=>{navigator.clipboard.writeText($('#rep').value).then(()=>{$('#cp').textContent='✔ Скопировано';setTimeout(()=>$('#cp').textContent='📋 Скопировать отчёт',1500)})};
