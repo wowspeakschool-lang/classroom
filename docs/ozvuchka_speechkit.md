@@ -371,3 +371,45 @@ Last summer Tessa went to Egypt with her family. They stayed in a small hotel ne
 `audio_tts` со словами на `-ache` — 39 (Wow Dragon 1 — 19, SM0 — 13, SM3 — 5,
 GG2 — 2). Там звук уже синтезирован; прежде чем переозвучивать, надо
 послушать одно слово и понять, та же это беда или нет.
+
+## SM3 Final Test — записи не совпадают с заданиями (нашла Анна 05.11.2026)
+
+Три задания подряд помечены listening, но записей на них две, и обе не о том:
+
+- блок 2 «подпиши людей на картинке» (точки: Peter, Paul, Jane, Fred, Daisy,
+  Sally; лишнее имя Mary) — `sm3_ft_b3.mp3`;
+- блок 3 «соедини дни недели и занятия» — **тот же** `sm3_ft_b3.mp3`;
+- блок 4 «послушай и выбери картинку», шесть вопросов — `sm3_ft_b6.mp3`.
+
+Одна запись на два разных задания не работает: в первом нужны люди в
+библиотеке, во втором — расписание на неделю. Текстов этих записей в
+репозитории нет, поэтому ниже — новые, написанные точно под ключи. Озвучить
+SpeechKit, залить в бакет `classroom-media/sm3/` под теми же именами, плюс
+один новый файл.
+
+**`sm3_ft_b3.mp3` — для блока 2 (люди в библиотеке).** Имена идут по порядку
+точек, последнее имя Mary в картинке лишнее:
+
+> Look at the picture of the library. Peter is reading a book at the table.
+> Paul is standing next to the bookcase. Jane is looking for a book on the
+> shelf. Fred is sitting on the floor with a comic. Daisy is talking to the
+> librarian. Sally is writing in her notebook.
+
+**`sm3_ft_b4.mp3` — новый файл, для блока 3 (дни недели и занятия):**
+
+> This is Emma's week. On Monday she goes swimming. On Tuesday she plays
+> football with her friends. On Wednesday she plays the guitar. On Thursday
+> she goes shopping with her mum. On Friday she rides a bike in the park. On
+> Saturday she bakes a cake.
+
+**`sm3_ft_b6.mp3` — для блока 4 (шесть вопросов).** Ключи: теннис, школьный
+автобус, сад, девять лет, щенок, суп.
+
+> One. John plays tennis every Saturday. He doesn't like football.
+> Two. Yesterday Jack went to school by bus, because it was raining.
+> Three. Where's Vicky? She's in the garden with the dog.
+> Four. It's Jim's birthday today. He is nine years old.
+> Five. Nick got a puppy for his birthday. He is very happy.
+> Six. There is some hot soup in the bowl on the table.
+
+После заливки `sm3_ft_b4.mp3` ссылку в блоке 3 поменяю я.
