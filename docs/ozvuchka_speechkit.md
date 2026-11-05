@@ -438,3 +438,20 @@ SpeechKit, залить в бакет `classroom-media/sm3/` под теми ж�
 > Six. There is some hot soup in the bowl on the table.
 
 После заливки `sm3_ft_b4.mp3` ссылку в блоке 3 поменяю я.
+
+## SM3 · Unit 9 Test · блок 7 → `sm3_u9_test_b7.mp3`
+
+Добавлено 05.11.2026. В тесте юнита 9 аудирования не было совсем — блок
+добавлен вместе с диктантом и чтением (решение Анны «5 да»). Поле `audio`
+пустое, `audio_tts` намеренно не стоит.
+
+Рассказ в третьем лице, без диалогов. Темп спокойный, пауза между
+предложениями около секунды. Ключи — вопросы блока 7: Scotland · cloudy ·
+make pizza · on Tuesday · the old castle.
+
+```
+This is Liam. Liam lives in London. Next week Liam is going to visit his grandma in Scotland. On Monday it's going to be cloudy, so Liam and his grandma are going to make pizza. On Tuesday it's going to be a thunderstorm, so they are going to watch a film at home. On Wednesday it's going to be sunny and warm. They are going to ride their bikes in the forest. Liam is going to take his camera and take photos of the old castle.
+```
+
+Файл кладётся в бакет `classroom-media`, папка `sm3/`, ссылка вписывается в
+поле `audio` блока 7.
