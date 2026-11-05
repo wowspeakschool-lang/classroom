@@ -31,6 +31,16 @@ SpeechKit (голос `john`, en-US) читает часть слов непра
 | Liam | «Lime», «Lam» | Leeam |
 | Jim | «Yim» | Jimm |
 | Amy | «Emma» — как контрольное `Emma` | Aymee |
+| Zoe | «so» | Zowee |
+| Iris | «Eris» | Eyeris |
+| Ada | «Adda» | Ayda |
+| Ava | «ever», как контрольное `Eva` | Ayva |
+| Dylan | «Dailan» | Dillan |
+| Oliver | «a lever» | Olliver |
+| Nina | «Nenah» | Neena |
+| queue | «kui» | kew |
+| karate | «carry it» | ka-rah-tee |
+| laughed | «left» | larfed |
 | bus (в конце фразы) | «buzzer» | buss |
 
 Как нашли: каждую запись прогоняли через распознавание речи (faster-whisper
@@ -49,6 +59,8 @@ grey/gray, цифры вместо чисел и написание имён —
   `gitar` **хуже**: её SpeechKit читает через «дж», как контрольное `jitar`
   (распознаётся «Jaitar»). 05.11 так испорчен и переозвучен `sm3_ft_b4.mp3`
   (→ `sm3_ft_b4_v2.mp3`).
+- имена Mia, Noah, Ellie, Maya, Rex, Ruby, Orla, Elena, Leo, слова foggy, tidying —
+  по отдельности распознаются верно, в рассказе распознаватель их путает сам.
 - `sofa` в конце фразы — распознаётся «Sova», но в слове глухой «ф» (80 мс
   шума, у `sova` его нет вовсе).
 
