@@ -469,3 +469,25 @@ This is Liam. Liam lives in London. Next week Liam is going to visit his grandma
 
 `sm3_ft_b6_v3.mp3` для блока 8 SM3 Final Test записан 05.11.2026 тем же
 текстом, что выше в разделе SM3 Final Test.
+
+## GG1 · Final Test · блок 7 → `gg1_ft_b7_v2.mp3`
+
+Добавлено 05.11.2026. Задание «послушай и расставь предметы по местам»
+пересобирается: на картинке будет пустая комната, предметы ребёнок ставит сам
+(раньше они были нарисованы, и слушать было незачем). Прежние слова — radio,
+robot, kite — в Go Getter 1 не встречаются вовсе; новые взяты из курса.
+
+Шесть предметов: bag · book · guitar · clock · skateboard · laptop.
+Шесть мест: under the desk · on the bed · next to the sofa · on the shelf ·
+next to the door · on the small table.
+
+```
+One. The bag is under the desk.
+Two. The book is on the bed.
+Three. The guitar is next to the sofa.
+Four. The clock is on the shelf.
+Five. The skateboard is next to the door.
+Six. The laptop is on the small table.
+```
+
+Старый файл `gg1_ft_test_b2.mp3` остаётся в бакете, ссылки на него больше нет.
