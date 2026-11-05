@@ -225,7 +225,7 @@ This is a story about a girl called Ellie and her plans. Ellie is thirteen and s
 ```
 
 
-## GG1 · Final Test · блок 7 → `gg1_final_b7.mp3`
+## GG1 · Final Test · блок 9 → `gg1_final_b7.mp3` — готово
 
 Добавлено 22.10.2026 при вычитке тестов GG1. Прежняя запись
 (`classroom-media/gg1/gg1_ft_test_b6.mp3`) была **целиком на Present
@@ -241,12 +241,13 @@ can, время и Present Simple, предлоги места, like + -ing).
 This is the Brown family. They live in a small house in London. Jack is eleven years old. He has got short dark hair and green eyes. He can swim very well, but he can't ride a bike. His sister Emma is nine. She has got long curly hair. Emma can ride a horse. Jack always gets up at half past seven. He has breakfast with his family and then he goes to school. In Jack's bedroom there is a big desk next to the window. His guitar is under the bed. On Saturday Jack plays football with his friends. Emma doesn't like football. She likes listening to music. They have got a dog. His name is Rex. Rex is big and very friendly.
 ```
 
-Ключи к вопросам блока 7: eleven · long curly hair · swim · half past seven ·
+Ключи к вопросам блока 9: eleven · long curly hair · swim · half past seven ·
 under the bed · listening to music.
 
 Старая запись `gg1_ft_test_b6.mp3` из бакета **не удалена**, на неё просто
-больше нет ссылки. В блоке 6 (`text`, «LISTENING Part 3») стоит пустой `audio`,
-`audio_tts` намеренно не ставили.
+больше нет ссылки. Новая запись уже стоит в блоке 9 («LISTENING Part 3.
+Послушай рассказ о семье Браун») — пункт закрыт. Номер блока сменился с 7 на 9
+после правки порядка заданий 05.11.2026.
 
 
 ## SM3, тесты юнитов 1–8 — восемь рассказов
