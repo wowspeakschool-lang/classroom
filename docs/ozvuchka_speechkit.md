@@ -29,6 +29,9 @@ SpeechKit (голос `john`, en-US) читает часть слов непра
 | library (в конце фразы) | «livery» | lybrary |
 | guitar | «guitur» | gitar |
 | bowl | «ball» | bowle |
+| Liam | «Lime», «Lam» | Leeam |
+| Jim | «Yim» | Jimm |
+| bus (в конце фразы) | «buzzer» | buss |
 
 Как нашли: каждую запись прогоняли через распознавание речи (faster-whisper
 `small.en`) и сверяли с текстом; подозрительное слово синтезировали отдельно в
@@ -454,3 +457,15 @@ Six. Is there any salad in the bowl on the table? No, there isn't. There isn't a
 
 Пока запись не придёт, в блоке остаётся `sm3_ft_b6_v2.mp3` — задание рабочее,
 просто лёгкое.
+
+## SM3 Unit 9 Test, блок 7 → `sm3_u9_test_b7.mp3` (05.11.2026)
+
+Аудирование нового блока (`quiz`, listening), рассказ про Лиама. Записано
+05.11.2026, бакет `classroom-media/sm3/`.
+
+```
+This is Liam. Liam lives in London. Next week Liam is going to visit his grandma in Scotland. On Monday it's going to be cloudy, so Liam and his grandma are going to make pizza. On Tuesday it's going to be a thunderstorm, so they are going to watch a film at home. On Wednesday it's going to be sunny and warm. They are going to ride their bikes in the forest. Liam is going to take his camera and take photos of the old castle.
+```
+
+`sm3_ft_b6_v3.mp3` для блока 8 SM3 Final Test записан 05.11.2026 тем же
+текстом, что выше в разделе SM3 Final Test.
