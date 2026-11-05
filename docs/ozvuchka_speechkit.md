@@ -435,32 +435,22 @@ SpeechKit, залить в бакет `classroom-media/sm3/` под теми ж�
 > she goes shopping with her mum. On Friday she rides a bike in the park. On
 > Saturday she bakes a cake.
 
-**`sm3_ft_b6.mp3` — для блока 8 (шесть вопросов). Готово, стоит
-`sm3_ft_b6_v2.mp3`.** Ключи: теннис, школьный
-автобус, сад, девять лет, щенок, суп.
-
-> One. John plays tennis every Saturday. He doesn't like football.
-> Two. Yesterday Jack went to school by bus, because it was raining.
-> Three. Where's Vicky? She's in the garden with the dog.
-> Four. It's Jim's birthday today. He is nine years old.
-> Five. Nick got a puppy for his birthday. He is very happy.
-> Six. There is some hot soup in the bowl on the table.
-
-Все три блока проверены 05.11.2026: звук на месте, номера блоков — после правки порядка заданий.
-
-## SM3 · Unit 9 Test · блок 7 → `sm3_u9_test_b7.mp3`
-
-Добавлено 05.11.2026. В тесте юнита 9 аудирования не было совсем — блок
-добавлен вместе с диктантом и чтением (решение Анны «5 да»). Поле `audio`
-пустое, `audio_tts` намеренно не стоит.
-
-Рассказ в третьем лице, без диалогов. Темп спокойный, пауза между
-предложениями около секунды. Ключи — вопросы блока 7: Scotland · cloudy ·
-make pizza · on Tuesday · the old castle.
+**`sm3_ft_b6.mp3` → переписать в `sm3_ft_b6_v3.mp3`, блок 8 (шесть вопросов).**
+05.11.2026 Анна послушала: «слишком лёгкое аудио. Для SM3 можно посложнее…
+чтобы три варианта как-то прозвучали». Прежний текст просто называл ответ
+одной строкой — ребёнок мог не слушать до конца. Новый вариант в каждом
+пункте проговаривает и неверные варианты: сначала вопрос с неправильным
+предположением, отрицание, потом верный ответ. Ключи прежние: теннис ·
+школьный автобус · сад · девять лет · щенок · суп.
 
 ```
-This is Liam. Liam lives in London. Next week Liam is going to visit his grandma in Scotland. On Monday it's going to be cloudy, so Liam and his grandma are going to make pizza. On Tuesday it's going to be a thunderstorm, so they are going to watch a film at home. On Wednesday it's going to be sunny and warm. They are going to ride their bikes in the forest. Liam is going to take his camera and take photos of the old castle.
+One. Does John play football? No, he doesn't. He plays tennis every Saturday. And he doesn't like swimming.
+Two. Did Jack go to school by bike yesterday? No, he didn't. He didn't walk either, because it was raining. He went by bus.
+Three. Is Vicky in the kitchen? No, she isn't. She isn't in her bedroom either. She's in the garden with the dog.
+Four. Is Jim ten years old today? No, he isn't. He was eight last year, so now he is nine.
+Five. Did Nick get a bicycle for his birthday? No, he didn't. He wanted a games console, but he got a puppy. He is very happy.
+Six. Is there any salad in the bowl on the table? No, there isn't. There isn't any fruit either. There is some hot soup.
 ```
 
-Файл кладётся в бакет `classroom-media`, папка `sm3/`, ссылка вписывается в
-поле `audio` блока 7.
+Пока запись не придёт, в блоке остаётся `sm3_ft_b6_v2.mp3` — задание рабочее,
+просто лёгкое.
