@@ -343,3 +343,31 @@ Last summer Tessa went to Egypt with her family. They stayed in a small hotel ne
 > Look at the beach. A girl is making a sandcastle. A boy is looking for shells.
 > A girl is eating ice cream. A boy is taking a photo. A girl is reading a book.
 > A boy is playing the guitar.
+
+## Переозвучить: SpeechKit читает «ache» через «ч» (найдено Анной 05.11.2026)
+
+В записи SM3 Unit 7 Test («рассказ про Руфуса») слова `headache` и
+`stomachache` звучат с «ч» на конце — как «хэдэч», «стомачэч». Правильно —
+«хэдэйк», «стомакэйк». Виновата не разметка, а синтез: буквосочетание `ch`
+в конце слова читается по общему правилу.
+
+**Что сделать** в сессии, где есть ключ Яндекса:
+
+1. Переозвучить файлы, в тексте которых есть слова на `-ache` и `stomach`:
+   - `sm3_u7_test_b14.mp3` — рассказ про Руфуса (headache, stomachache);
+   - `gg3_u5_test_b13.mp3` — рассказ про Макса (headache);
+   - проверить на слух и остальные: `gg3_u7_test_b14.mp3`,
+     `gg3_u8_test_b13.mp3`, `gg3_final_b2.mp3`, `gg1_u0_test_b10.mp3`,
+     `sm2_u0_test_b7.mp3`.
+2. Если движок снова читает через «ч», подменить написание **только в тексте
+   для синтеза** (на экране ребёнок текст не видит, поэтому подмена безопасна):
+   `headache` → `head ake`, `stomachache` → `stomak ake`,
+   `toothache` → `tooth ake`, `earache` → `ear ake`, `stomach` → `stomak`.
+   Прослушать и выбрать написание, которое звучит верно.
+3. Залить файлы в бакет `classroom-media` под теми же именами — ссылки в
+   блоках менять не придётся.
+
+**То же может быть и в «Озвучить пачкой»** (движок другой, Piper): разметок
+`audio_tts` со словами на `-ache` — 39 (Wow Dragon 1 — 19, SM0 — 13, SM3 — 5,
+GG2 — 2). Там звук уже синтезирован; прежде чем переозвучивать, надо
+послушать одно слово и понять, та же это беда или нет.
