@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8"><title>Менеджер — Escape Room 13+</title>
+<style>
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f6efe2;color:#2a1a10;margin:0;font-size:14px}
+header{position:sticky;top:0;background:#2b2240;color:#fff;padding:10px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;z-index:5}
+header input,header select{padding:5px 8px;border-radius:6px;border:0;font-size:14px}
+header .tabs button{background:#4a3d68;color:#fff;border:0;border-radius:8px;padding:6px 14px;font-weight:700;cursor:pointer}
+header .tabs button.on{background:#f2b544;color:#2a1a10}
+header .code{margin-left:auto;font-weight:700;color:#ffd889}
+main{padding:14px 18px;max-width:1200px;margin:0 auto}
+.now{background:#fff;border:2px solid #f2b544;border-radius:12px;padding:10px 14px;margin-bottom:14px}
+.now h3{margin:0 0 6px;font-size:15px}
+.oral{display:flex;align-items:center;gap:8px;margin:6px 0;flex-wrap:wrap}
+.oral .lab{flex:1;min-width:260px}
+.oral .exp{color:#1f7a3a;font-style:italic}
+.mk button{border:1px solid #bbb;background:#fafafa;border-radius:6px;padding:3px 10px;font-weight:700;cursor:pointer;margin-left:3px}
+.mk button.on2{background:#3fbf6a;color:#fff;border-color:#3fbf6a}.mk button.on1{background:#f2b544;border-color:#f2b544}.mk button.on0{background:#e25555;color:#fff;border-color:#e25555}
+table{border-collapse:collapse;width:100%;background:#fff;margin:6px 0 14px}
+th,td{border:1px solid #d9cdb8;padding:4px 8px;vertical-align:middle}
+th{background:#6e3510;color:#fff;text-align:left}
+td.sc{width:150px;white-space:nowrap}
+tr.cur td{background:#fff3cf}
+tr.unset.past td:first-child{box-shadow:inset 4px 0 #f2b544}
+.sum{font-weight:700}.pass{color:#1f7a3a}.fail{color:#b03030}
+.auto{font-size:11px;color:#8a7a66;margin-left:4px}
+h2{margin:14px 0 4px;color:#6e3510;font-size:17px}
+.legend{background:#fffaf0;border-left:4px solid #f2b544;padding:8px 12px;margin:8px 0;font-size:13px}
+textarea{width:100%;height:220px;font-family:Consolas,monospace;font-size:13px}
+.act button{background:#e8631a;color:#fff;border:0;border-radius:8px;padding:7px 14px;font-weight:700;cursor:pointer;margin-right:8px}
+.act button.gray{background:#888}
+#plan table td{font-size:13px}
+.dl a{display:inline-block;margin:0 8px 10px 0;padding:8px 16px;border-radius:10px;background:#e8631a;color:#fff;font-weight:700;text-decoration:none}
+.dl a.pdf{background:#7b4bd6}
+</style></head><body>
+<header>
+  <b>🗝 Escape Room 13+</b>
+  <label>Имя ученика <input id="nm" placeholder="Имя по-русски"></label>
+  <label>Пол <select id="gd"><option value="m">мальчик</option><option value="f">девочка</option></select></label>
+  <label>Возраст <input id="ag" size="3"></label>
+  <span class="tabs"><button id="tb1" class="on">Чек-лист</button><button id="tb2">План урока</button></span>
+  <span class="code" id="code"></span>
+</header>
+<main>
+<div id="check">
+  <div class="now" id="now"></div>
+  <div class="legend"><b>0 · 1 · 2.</b> 2 — сам, верно, полной фразой (в задании с нажатием — всё верно); 1 — после подсказки, исправил себя, ответил словом вместо фразы (в задании — не меньше половины); 0 — не смог и с подсказкой, по-русски, не понял (в задании — меньше половины).
+  Балл по нажатиям ученика ставится сам (серым — «авто»), устные ответы оцениваете вы. Нажатие на 0/1/2 в таблице заменяет авто-балл; повторное нажатие — снять.
+  Часть пройдена, если в каждом блоке ≥ 9 из 12 — это подсказка, решение за вами.</div>
+  <div id="tables"></div>
+  <h2>Отчёт</h2>
+  <textarea id="rep" readonly></textarea>
+  <div class="act"><button id="cp">📋 Скопировать отчёт</button><button class="gray" id="rs">Новый ученик (сбросить всё)</button></div>
+</div>
+<div id="plan" style="display:none">/*PLAN*/</div>
+</main>
+<script>
+const A = window.APP;
+function $(s){return document.querySelector(s)}
+$('#tb1').onclick=()=>{$('#check').style.display='';$('#plan').style.display='none';$('#tb1').className='on';$('#tb2').className=''};
+$('#tb2').onclick=()=>{$('#check').style.display='none';$('#plan').style.display='';$('#tb2').className='on';$('#tb1').className=''};
+const st=A.S.student; $('#nm').value=st.name; $('#gd').value=st.gender; $('#ag').value=st.age;
+$('#nm').oninput=e=>{st.name=e.target.value;A.save();render()}; $('#gd').onchange=e=>{st.gender=e.target.value;A.save();render()}; $('#ag').oninput=e=>{st.age=e.target.value;A.save();render()};
+$('#cp').onclick=()=>{navigator.clipboard.writeText($('#rep').value).then(()=>{$('#cp').textContent='✔ Скопировано';setTimeout(()=>$('#cp').textContent='📋 Скопировать отчёт',1500)})};
+$('#rs').onclick=()=>{if(confirm('Сбросить все баллы и начать с новым учеником?'))A.reset()};
+function mk(cur,fn){const d=document.createElement('span');d.className='mk';[2,1,0].forEach(v=>{const b=document.createElement('button');b.textContent=v===2?'✓ 2':v===1?'~ 1':'✗ 0';if(cur===v)b.className='on'+v;b.onclick=()=>fn(cur===v?null:v);d.append(b)});return d}
+function screenTopics(s){const t=new Set();if(s.task)(s.task.items||[]).forEach(i=>(i.t||[]).forEach(x=>t.add(x)));(s.oral||[]).forEach(o=>o.topics.forEach(x=>t.add(x)));return t}
+function render(){
+  const S=A.S,D=A.D,s=A.screen();
+  // код
+  const ds=[];for(const p of [1,2,3]) ds.push('Part '+p+': '+S.digits[p].join(''));$('#code').textContent='Код: '+ds.join(' · ');
+  // сейчас на экране
+  const now=$('#now');now.innerHTML='';const h=document.createElement('h3');h.textContent='Сейчас на экране: '+(s?s.title:'—');now.append(h);
+  if(s&&s.oral)s.oral.forEach(o=>{const r=document.createElement('div');r.className='oral';const l=document.createElement('div');l.className='lab';l.innerHTML=o.label+(o.expect?' <span class="exp">→ '+o.expect+'</span>':'');r.append(l);if(o.topics.length){const cur=S.oral[o.key]?S.oral[o.key].v:null;r.append(mk(cur,v=>{if(v===null)delete S.oral[o.key];else A.oralMark(o.key,o.topics,v);A.save();render()}))}else{const i=document.createElement('i');i.textContent='без балла';r.append(i)}now.append(r)});
+  if(s&&s.task){const p=document.createElement('div');p.style.color='#6a5a46';p.textContent='Задание с нажатием — балл ставится сам по ответам ученика. Темы подсвечены в таблице.';now.append(p)}
+  const curT=s?screenTopics(s):new Set();
+  // таблицы
+  const box=$('#tables');box.innerHTML='';
+  D.checklist.forEach((P,pi)=>{const h2=document.createElement('h2');h2.textContent=P.title;box.append(h2);
+    P.blocks.forEach((b,bi)=>{const t=document.createElement('table');const th=document.createElement('tr');th.innerHTML='<th>'+b[0]+'</th><th>балл</th>';t.append(th);let sum=0,filled=0;
+      b[1].forEach((name,ti)=>{const id='p'+(pi+1)+'b'+(bi+1)+'t'+(ti+1);const sc=A.topicScore(id);if(sc.v!==null){sum+=sc.v;filled++}
+        const tr=document.createElement('tr');if(curT.has(id))tr.className='cur';const td=document.createElement('td');td.textContent=name;const td2=document.createElement('td');td2.className='sc';
+        td2.append(mk(S.override[id]!==undefined?S.override[id]:null,v=>A.setOverride(id,v)));if(sc.src==='auto'){const a=document.createElement('span');a.className='auto';a.textContent='авто: '+sc.v;td2.append(a)}
+        tr.append(td,td2);t.append(tr)});
+      const tf=document.createElement('tr');tf.innerHTML='<td class="sum">Сумма блока</td><td class="sum '+(filled?(sum>=9?'pass':'fail'):'')+'">'+(filled?sum+' из 12 '+(sum>=9?'✔':''):'—')+'</td>';t.append(tf);box.append(t)})});
+  $('#rep').value=A.report();
+}
+window.render=render;render();
+</script></body></html>

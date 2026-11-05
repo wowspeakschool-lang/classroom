@@ -150,7 +150,7 @@ P1 = [
                  dict(q='Where can you watch a new film on a big screen?', o=['at the cinema', 'at the library', 'at the hospital'], t=T(1, 'Entertainment')),
              ])],
          you=[('How often do you go to the cinema? What do you like doing at the weekend?', T(1, 'Adverbs of frequency', 'Entertainment'))]),
-    dict(id='umbrella', img='umbrella', x=73, y=88, h=17, name='an umbrella', ask="What's this?",
+    dict(id='umbrella', img='umbrella', x=80, y=93, h=17, name='an umbrella', ask="What's this?",
          name_t=T(1, 'Weather'),
          tasks=[
              dict(kind='choice', title='Какая погода? Выбери верный вариант', items=[
