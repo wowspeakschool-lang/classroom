@@ -8,7 +8,7 @@ jobs = json.load(open(sys.argv[1]))
 out = sys.argv[2]; os.makedirs(out, exist_ok=True)
 url = f"https://api.cloudflare.com/client/v4/accounts/{ACCOUNT}/ai/run/{MODEL}"
 for name, prompt in jobs.items():
-    dst = os.path.join(out, name + ".png")
+    dst = os.path.join(out, name.replace("/", "__") + ".png")
     if os.path.exists(dst):
         print("уже есть", name); continue
     req = urllib.request.Request(url, data=json.dumps({"prompt": prompt, "steps": 8}).encode(),
