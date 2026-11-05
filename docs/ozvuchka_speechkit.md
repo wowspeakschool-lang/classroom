@@ -504,3 +504,43 @@ Six. The laptop is on the small table.
 ```
 
 Старый файл `gg1_ft_test_b2.mp3` остаётся в бакете, ссылки на него больше нет.
+
+## SM1 · Юнит 9 · ДЗ 5 · блок 2 → `sm1_u9_hw5_b2_v2.mp3`
+
+Переписано 05.11.2026 («11 давай»). Задание «расставь по местам» решалось
+глазами: подписи были действиями (make a sandcastle, read a book), а на
+картинке каждый ребёнок занят ровно этим. Теперь подписи — имена, и узнать,
+кто есть кто, можно только по записи: в рассказе каждый ребёнок назван по
+одежде. Прежняя запись описывала другую картинку (мяч, ведёрко, краб,
+зонт) — её больше не используем.
+
+Порядок детей на картинке слева направо: Lily · Tom · Amy · Ben · Clare · Sam.
+
+```
+Look at the children on the beach. Lily has got a pink swimsuit. She is making a sandcastle.
+Tom has got a blue and white T-shirt. He is looking for shells.
+Amy has got a big hat and a purple dress. She is eating an ice cream.
+Ben has got a yellow T-shirt and a blue cap. He is taking a photo.
+Clare has got red hair and a green top. She is reading a book.
+Sam has got a green hoodie. He is playing the guitar.
+```
+
+## SM2 · Юнит 7 · ДЗ 5 · блок 6 → `sm2_u7_hw5_v2.mp3`
+
+Переписано 05.11.2026 («11 давай»). Было: картинка-раскраска (чёрно-белый
+контур), и все шесть предметов на ней нарисованы — слушать незачем, да и
+раскрасок у нас нет по решению от 03.11. Картинка рисуется заново: пустой
+городской парк, предметы ребёнок ставит сам. Подписи — картинки предметов,
+они уже есть (`media/sm2/u7/hw5_boat.webp` и другие).
+
+Места в новом парке: озеро · дерево · скамейка · фонтан · каменная стена ·
+окно кафе.
+
+```
+One. The boat is on the lake.
+Two. The bird is in the tree.
+Three. The boy is on the bench.
+Four. The girl is next to the fountain.
+Five. The flowers are in front of the cafe window.
+Six. The lizard is on the stone wall.
+```
