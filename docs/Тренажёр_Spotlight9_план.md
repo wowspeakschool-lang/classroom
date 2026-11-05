@@ -1,5 +1,6 @@
-# Spotlight 9 — план колод (04.11.2026)
+# Spotlight 9 — план колод (05.11.2026)
 
+Названия модулей и разделов — по содержанию учебника.
 Колонки: слов · есть картинка в тренажёре · рисовать · без картинки.
 
 
@@ -30,13 +31,13 @@
 - 1f · понятия — 9 · 8 · 0 · 1
 - Другие слова / Module 1 · другие слова · описание — 4 · 3 · 1 · 0
 - 1f · фразы — 9 · 4 · 5 · 0
-- Culture Corner 1 · понятия — 7 · 3 · 4 · 0
-- Culture Corner 1 · спорт и увлечения — 5 · 3 · 2 · 0
-- Culture Corner 1 · фразы — 4 · 2 · 2 · 0
-- Across the Curriculum 1 – PSHE · действия — 8 · 6 · 2 · 0
-- Across the Curriculum 1 – PSHE · понятия — 17 · 7 · 10 · 0
-- Across the Curriculum 1 – PSHE · описание — 6 · 2 · 4 · 0
-- Across the Curriculum 1 – PSHE · фразы — 4 · 1 · 3 · 0
+- Culture Corner 1 – Pow-Wow. The Gathering of Nations · понятия — 7 · 3 · 4 · 0
+- Culture Corner 1 – Pow-Wow. The Gathering of Nations · спорт и увлечения — 5 · 3 · 2 · 0
+- Culture Corner 1 – Pow-Wow. The Gathering of Nations · фразы — 4 · 2 · 2 · 0
+- Across the Curriculum 1 – PSHE: Remembrance Day · действия — 8 · 6 · 2 · 0
+- Across the Curriculum 1 – PSHE: Remembrance Day · понятия — 17 · 7 · 10 · 0
+- Across the Curriculum 1 – PSHE: Remembrance Day · описание — 6 · 2 · 4 · 0
+- Across the Curriculum 1 – PSHE: Remembrance Day · фразы — 4 · 1 · 3 · 0
 
 ## Module 2: Life & Living
 
@@ -64,9 +65,9 @@
 - 2f · фразы — 10 · 2 · 8 · 0
 - 2f · действия — 6 · 4 · 2 · 0
 - 2f · описание — 10 · 4 · 6 · 0
-- Going Green 2 · фразы — 9 · 6 · 3 · 0
-- Going Green 2 · понятия — 14 · 8 · 6 · 0
-- Going Green 2 · действия — 4 · 4 · 0 · 0
+- Going Green 2 – In Danger · фразы — 9 · 6 · 3 · 0
+- Going Green 2 – In Danger · понятия — 14 · 8 · 6 · 0
+- Going Green 2 – In Danger · действия — 4 · 4 · 0 · 0
 
 ## Module 3: See it to believe it
 
@@ -94,10 +95,10 @@
 - 3e · фразы — 4 · 0 · 4 · 0
 - 3f · описание — 6 · 1 · 4 · 1
 - 3f · понятия — 12 · 8 · 4 · 0
-- Culture Corner 3 · понятия — 9 · 4 · 5 · 0
-- Culture Corner 3 · действия — 5 · 1 · 3 · 1
-- Culture Corner 3 · фразы — 4 · 0 · 4 · 0
-- Across the Curriculum 3 — 15 · 4 · 8 · 3
+- Culture Corner 3 – The Most Haunted Castle in Britain · понятия — 9 · 4 · 5 · 0
+- Culture Corner 3 – The Most Haunted Castle in Britain · действия — 5 · 1 · 3 · 1
+- Culture Corner 3 – The Most Haunted Castle in Britain · фразы — 4 · 0 · 4 · 0
+- Across the Curriculum 3 – History: Painting Styles — 15 · 4 · 8 · 3
 
 ## Module 4: Technology
 
@@ -126,11 +127,11 @@
 - 4e · фразы — 5 · 2 · 3 · 0
 - 4e · понятия — 6 · 4 · 2 · 0
 - 4f — 14 · 11 · 3 · 0
-- Culture Corner 4 — 11 · 3 · 7 · 1
-- Going Green 4 · действия — 21 · 14 · 6 · 1
-- Going Green 4 · понятия — 15 · 7 · 8 · 0
-- Going Green 4 · фразы — 13 · 3 · 10 · 0
-- Going Green 4 · описание — 4 · 1 · 3 · 0
+- Culture Corner 4 – The Gadget Show on five — 11 · 3 · 7 · 1
+- Going Green 4 – E-waste… Why so much junk? · действия — 21 · 14 · 6 · 1
+- Going Green 4 – E-waste… Why so much junk? · понятия — 15 · 7 · 8 · 0
+- Going Green 4 – E-waste… Why so much junk? · фразы — 13 · 3 · 10 · 0
+- Going Green 4 – E-waste… Why so much junk? · описание — 4 · 1 · 3 · 0
 
 ## Module 5: Art & Literature
 
@@ -158,13 +159,13 @@
 - 5e · понятия — 12 · 8 · 2 · 2
 - 5e · описание — 17 · 7 · 10 · 0
 - 5f — 15 · 3 · 11 · 1
-- Culture Corner 5 · фразы — 7 · 1 · 6 · 0
-- Culture Corner 5 · понятия — 14 · 7 · 7 · 0
-- Culture Corner 5 · действия — 5 · 2 · 3 · 0
-- Across the Curriculum 5 – Literature · действия — 8 · 3 · 5 · 0
-- Across the Curriculum 5 – Literature · фразы — 8 · 0 · 8 · 0
-- Across the Curriculum 5 – Literature · понятия — 18 · 7 · 11 · 0
-- Across the Curriculum 5 – Literature · описание — 5 · 3 · 2 · 0
+- Culture Corner 5 – William Shakespeare · фразы — 7 · 1 · 6 · 0
+- Culture Corner 5 – William Shakespeare · понятия — 14 · 7 · 7 · 0
+- Culture Corner 5 – William Shakespeare · действия — 5 · 2 · 3 · 0
+- Across the Curriculum 5 – Literature: The Merchant of Venice · действия — 8 · 3 · 5 · 0
+- Across the Curriculum 5 – Literature: The Merchant of Venice · фразы — 8 · 0 · 8 · 0
+- Across the Curriculum 5 – Literature: The Merchant of Venice · понятия — 18 · 7 · 11 · 0
+- Across the Curriculum 5 – Literature: The Merchant of Venice · описание — 5 · 3 · 2 · 0
 
 ## Module 6: Town & Community
 
@@ -188,15 +189,15 @@
 - 6e · описание — 7 · 5 · 2 · 0
 - 6e · фразы — 4 · 2 · 2 · 0
 - 6f — 12 · 7 · 5 · 0
-- Culture Corner 6 · описание — 8 · 5 · 3 · 0
-- Culture Corner 6 · понятия — 10 · 4 · 6 · 0
-- Culture Corner 6 · фразы — 4 · 1 · 3 · 0
-- Going Green 6 · фразы — 12 · 2 · 10 · 0
-- Going Green 6 · действия — 9 · 4 · 5 · 0
-- Going Green 6 · описание — 6 · 4 · 2 · 0
-- Going Green 6 · понятия — 20 · 6 · 14 · 0
+- Culture Corner 6 – Welcome to Sydney, Australia · описание — 8 · 5 · 3 · 0
+- Culture Corner 6 – Welcome to Sydney, Australia · понятия — 10 · 4 · 6 · 0
+- Culture Corner 6 – Welcome to Sydney, Australia · фразы — 4 · 1 · 3 · 0
+- Going Green 6 – Green Transport · фразы — 12 · 2 · 10 · 0
+- Going Green 6 – Green Transport · действия — 9 · 4 · 5 · 0
+- Going Green 6 – Green Transport · описание — 6 · 4 · 2 · 0
+- Going Green 6 – Green Transport · понятия — 20 · 6 · 14 · 0
 
-## Module 7: Staying Safe
+## Module 7: Staying safe
 
 - 7a · действия — 11 · 7 · 4 · 0
 - 7a · фразы — 8 · 0 · 8 · 0
@@ -219,13 +220,13 @@
 - 7f · описание — 5 · 3 · 2 · 0
 - 7f · понятия — 5 · 2 · 3 · 0
 - 7f · действия — 8 · 7 · 1 · 0
-- Culture Corner 7 · понятия — 13 · 5 · 8 · 0
-- Culture Corner 7 · действия — 10 · 6 · 4 · 0
-- Culture Corner 7 · описание — 7 · 3 · 4 · 0
-- Culture Corner 7 · фразы — 4 · 0 · 4 · 0
-- Across the Curriculum 7 · понятия — 13 · 5 · 8 · 0
-- Across the Curriculum 7 · фразы — 16 · 5 · 11 · 0
-- Across the Curriculum 7 · описание — 4 · 2 · 2 · 0
+- Culture Corner 7 – BEWARE! The USA's Dangerous Wild Animals · понятия — 13 · 5 · 8 · 0
+- Culture Corner 7 – BEWARE! The USA's Dangerous Wild Animals · действия — 10 · 6 · 4 · 0
+- Culture Corner 7 – BEWARE! The USA's Dangerous Wild Animals · описание — 7 · 3 · 4 · 0
+- Culture Corner 7 – BEWARE! The USA's Dangerous Wild Animals · фразы — 4 · 0 · 4 · 0
+- Across the Curriculum 7 – PSHE: Protect yourself · понятия — 13 · 5 · 8 · 0
+- Across the Curriculum 7 – PSHE: Protect yourself · фразы — 16 · 5 · 11 · 0
+- Across the Curriculum 7 – PSHE: Protect yourself · описание — 4 · 2 · 2 · 0
 
 ## Module 8: Challenges
 
@@ -248,11 +249,11 @@
 - 8f · действия — 12 · 9 · 3 · 0
 - 8f · фразы — 7 · 0 · 7 · 0
 - 8f · понятия — 5 · 2 · 3 · 0
-- Culture Corner 8 · понятия — 4 · 2 · 1 · 1
-- Culture Corner 8 · действия — 9 · 5 · 3 · 1
-- Culture Corner 8 · описание — 6 · 4 · 2 · 0
-- Culture Corner 8 · фразы — 6 · 3 · 3 · 0
-- Going Green 8 · понятия — 18 · 5 · 12 · 1
-- Going Green 8 · действия — 9 · 3 · 6 · 0
-- Going Green 8 · фразы — 21 · 7 · 14 · 0
-- Going Green 8 · описание — 4 · 1 · 3 · 0
+- Culture Corner 8 – Helen Keller · понятия — 4 · 2 · 1 · 1
+- Culture Corner 8 – Helen Keller · действия — 9 · 5 · 3 · 1
+- Culture Corner 8 – Helen Keller · описание — 6 · 4 · 2 · 0
+- Culture Corner 8 – Helen Keller · фразы — 6 · 3 · 3 · 0
+- Going Green 8 – The Challenge of Antarctica · понятия — 18 · 5 · 12 · 1
+- Going Green 8 – The Challenge of Antarctica · действия — 9 · 3 · 6 · 0
+- Going Green 8 – The Challenge of Antarctica · фразы — 21 · 7 · 14 · 0
+- Going Green 8 – The Challenge of Antarctica · описание — 4 · 1 · 3 · 0

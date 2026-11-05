@@ -12,11 +12,25 @@ from g8_match import roots  # noqa: E402
 REUSE = set(map(int, open('plan/g9_reuse_rows.txt').read().strip().split(',')))
 def match(term, tr): raise RuntimeError('не используется')
 # названия модулей — из содержания учебника (gtext/Spotlight_8_SB-страницы.txt)
+# названия модулей и разделов — из содержания учебника (Spotlight_9_SB, стр. iii–vi), сверено 05.11.2026
 MOD = {1: 'Celebrations', 2: 'Life & Living', 3: 'See it to believe it', 4: 'Technology', 5: 'Art & Literature',
-       6: 'Town & Community', 7: 'Staying Safe', 8: 'Challenges'}
-SEC = {'PSHE': 'Across the Curriculum 1 – PSHE',
-       'Literature: Across the Curriculum': 'Across the Curriculum 5 – Literature',
-       'Across the Curriculum': 'Across the Curriculum 7'}
+       6: 'Town & Community', 7: 'Staying safe', 8: 'Challenges'}
+SEC = {'Culture Corner 1': 'Culture Corner 1 – Pow-Wow. The Gathering of Nations',
+       'PSHE': 'Across the Curriculum 1 – PSHE: Remembrance Day',
+       'Culture Corner 2': 'Culture Corner 2 – 10 Downing Street',
+       'Going Green 2': 'Going Green 2 – In Danger',
+       'Culture Corner 3': 'Culture Corner 3 – The Most Haunted Castle in Britain',
+       'Across the Curriculum 3': 'Across the Curriculum 3 – History: Painting Styles',
+       'Culture Corner 4': 'Culture Corner 4 – The Gadget Show on five',
+       'Going Green 4': 'Going Green 4 – E-waste… Why so much junk?',
+       'Culture Corner 5': 'Culture Corner 5 – William Shakespeare',
+       'Literature: Across the Curriculum': 'Across the Curriculum 5 – Literature: The Merchant of Venice',
+       'Culture Corner 6': 'Culture Corner 6 – Welcome to Sydney, Australia',
+       'Going Green 6': 'Going Green 6 – Green Transport',
+       'Culture Corner 7': "Culture Corner 7 – BEWARE! The USA's Dangerous Wild Animals",
+       'Across the Curriculum': 'Across the Curriculum 7 – PSHE: Protect yourself',
+       'Culture Corner 8': 'Culture Corner 8 – Helen Keller',
+       'Going Green 8': 'Going Green 8 – The Challenge of Antarctica'}
 def base(s):
     return s.replace(' Phrasals & Phrases', '').replace(' Phrasal verbs', '').replace(' Phrases', '')
 def sec_name(s):
