@@ -413,7 +413,12 @@ GG2 — 2). Там звук уже синтезирован; прежде чем
 SpeechKit, залить в бакет `classroom-media/sm3/` под теми же именами, плюс
 один новый файл.
 
-**`sm3_ft_b3.mp3` — для блока 2 (люди в библиотеке).** Имена идут по порядку
+**`sm3_ft_b3.mp3` — для блока 6 (люди в библиотеке). 05.11 Анна посмотрела
+задание и сказала: старая запись подходит, менять не надо.** Новая версия
+`sm3_ft_b3_v2.mp3` из блока убрана, ссылка возвращена на `sm3_ft_b3.mp3`.
+Текст ниже оставлен на случай, если запись всё-таки решат переписать.
+
+Прежний текст для блока 6: Имена идут по порядку
 точек, последнее имя Mary в картинке лишнее:
 
 > Look at the picture of the library. Peter is reading a book at the table.
@@ -421,14 +426,17 @@ SpeechKit, залить в бакет `classroom-media/sm3/` под теми ж�
 > shelf. Fred is sitting on the floor with a comic. Daisy is talking to the
 > librarian. Sally is writing in her notebook.
 
-**`sm3_ft_b4.mp3` — новый файл, для блока 3 (дни недели и занятия):**
+**`sm3_ft_b4.mp3` — новый файл, для блока 7 (дни недели и занятия). Готово,
+стоит в блоке.** Заголовок блока исправлен с «Послушай **ещё раз** и соедини»
+на «Послушай и соедини»: запись теперь своя, а не та же, что у блока 6.
 
 > This is Emma's week. On Monday she goes swimming. On Tuesday she plays
 > football with her friends. On Wednesday she plays the guitar. On Thursday
 > she goes shopping with her mum. On Friday she rides a bike in the park. On
 > Saturday she bakes a cake.
 
-**`sm3_ft_b6.mp3` — для блока 4 (шесть вопросов).** Ключи: теннис, школьный
+**`sm3_ft_b6.mp3` — для блока 8 (шесть вопросов). Готово, стоит
+`sm3_ft_b6_v2.mp3`.** Ключи: теннис, школьный
 автобус, сад, девять лет, щенок, суп.
 
 > One. John plays tennis every Saturday. He doesn't like football.
@@ -438,7 +446,7 @@ SpeechKit, залить в бакет `classroom-media/sm3/` под теми ж�
 > Five. Nick got a puppy for his birthday. He is very happy.
 > Six. There is some hot soup in the bowl on the table.
 
-После заливки `sm3_ft_b4.mp3` ссылку в блоке 3 поменяю я.
+Все три блока проверены 05.11.2026: звук на месте, номера блоков — после правки порядка заданий.
 
 ## SM3 · Unit 9 Test · блок 7 → `sm3_u9_test_b7.mp3`
 
