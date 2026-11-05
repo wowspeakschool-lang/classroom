@@ -24,7 +24,6 @@
 🟥 Что от вас нужно: пробежать глазами и назвать номера заданий, где лишнее
 слово выбивается из темы. По таким подберу слова руками.
 
-
 ## 1. Go Getter 1 · Unit 1 · Family and friends · Homework 2 · блок 6
 
 **Заполни пропуски словами am, is или are**
@@ -34,9 +33,9 @@
 3. Harry: Thanks.
 4. Jack: This is Tony. He **is** my classmate. We are best friends too. Mrs Lee and Mr Brown **are** my favourite teachers.
 
-Фишки на экране: a, a, i, a, **an**, **some**
+Фишки на экране: am, are, is, are, **isn't**, **aren't**
 
-Лишние: **an, some**
+Лишние: **isn't, aren't**
 
 ## 2. Go Getter 1 · Unit 1 · Family and friends · Homework 2 · блок 7
 
@@ -48,9 +47,9 @@
 4. This is Ben. **His** mum is a teacher.
 5. **My** name is Anna and I **am** ten.
 
-Фишки на экране: H, i, a, y, H, M, a, **an**, **some**, **any**
+Фишки на экране: Her, is, are, your, His, My, am, **Its**, **Our**, **Their**
 
-Лишние: **an, some, any**
+Лишние: **Its, Our, Their**
 
 ## 3. Go Getter 1 · Unit 1 · Family and friends · Homework 3 · блок 9
 
@@ -59,9 +58,9 @@
 1. Hanna: This is **my** brother. **His** name is Alex. The present is for Granny. **Her** name is Sophie.
 2. Alex: This is **your** present, Granny.
 
-Фишки на экране: m, H, H, y, **His**, **my**
+Фишки на экране: my, His, Her, your, **its**, **our**, **their**
 
-Лишние: **His, my**
+Лишние: **its, our, their**
 
 ## 4. Go Getter 1 · Unit 1 · Family and friends · Homework 4 · блок 7
 
@@ -71,7 +70,7 @@
 2. Stella: **Hi**, Frankie. Nice **to meet you**.
 3. Frankie: **Nice** to meet you too, Stella.
 
-Фишки на экране: t, H, H, t, N, **Hi**, **Nice**
+Фишки на экране: this is, He's, Hi, to meet you, Nice, **Hi**, **Nice**
 
 Лишние: **Hi, Nice**
 
@@ -85,7 +84,7 @@
 4. Auntie Sue: Hello, Nancy. **Nice to meet you.**
 5. Nancy: Hello, Mrs Smith. **Nice to meet you too.**
 
-Фишки на экране: H, S, N, N, **Nice to meet you.**, **Hi, Auntie Sue.**
+Фишки на экране: Hi, Auntie Sue., She's my best friend at school., Nice to meet you., Nice to meet you too., **Nice to meet you.**, **Hi, Auntie Sue.**
 
 Лишние: **Nice to meet you., Hi, Auntie Sue.**
 
@@ -98,9 +97,9 @@
 3. My **hobby** is football. I love it!
 4. My granny's hobby is **music**.
 
-Фишки на экране: a, b, h, m, **an**, **some**, **any**
+Фишки на экране: album, best friend, hobby, music, **music**, **album**
 
-Лишние: **an, some, any**
+Лишние: **music, album**
 
 ## 7. Go Getter 1 · Unit 1 · Family and friends · Homework 5 · блок 6
 
@@ -113,9 +112,9 @@
 5. 5. Ben's mother is **Italian**.
 6. 6. Ben's father is **British**.
 
-Фишки на экране: B, B, S, S, I, B, **He**, **She**
+Фишки на экране: British, British, Spanish, Spanish, Italian, British, **Italian**, **Spanish**
 
-Лишние: **He, She**
+Лишние: **Italian, Spanish**
 
 ## 8. Go Getter 1 · Unit 1 · Family and friends · Homework 7 · блок 7
 
@@ -125,9 +124,9 @@
 2. B: **Hi**, Harry. **Nice** to meet you.
 3. C: Hi, Jack. Nice to **meet** you **too**.
 
-Фишки на экране: t, i, H, N, m, t, **he**, **she**, **it**
+Фишки на экране: this, is, Hi, Nice, meet, too, **that**, **these**, **those**
 
-Лишние: **he, she, it**
+Лишние: **that, these, those**
 
 ## 9. Go Getter 1 · Unit 2 · My things · Homework 2 · блок 6
 
@@ -140,7 +139,7 @@
 5. This T-shirt is very **small**.
 6. That grey cap is **boring**.
 
-Фишки на экране: t, l, o, c, s, b, **small**, **old**
+Фишки на экране: too, long, old, cool, small, boring, **small**, **old**
 
 Лишние: **small, old**
 
@@ -173,7 +172,7 @@
 4. 4. The old trainers are **boring**.
 5. 5. The cap is **cool**.
 
-Фишки на экране: n, b, r, b, c, **small**, **long**, **old**
+Фишки на экране: new, black, red, boring, cool, **small**, **long**, **old**
 
 Лишние: **small, long, old**
 
@@ -183,7 +182,7 @@
 
 1. I live with my parents in a big **house**. The room I like most of all is our **living room**. There are so many things to do in this room. There is a big **bookcase** and I can take any book I like from it. We often spend time watching films on **TV**. We sit on the comfortable **sofa** which is opposite the TV. My dad keeps his car in the **garage** and I like to help him with our **garden** at the weekend.
 
-Фишки на экране: h, l, b, T, s, g, g, **aren't**, **any**, **please**
+Фишки на экране: house, living room, bookcase, TV, sofa, garage, garden, **aren't**, **any**, **please**
 
 Лишние: **aren't, any, please**
 
@@ -198,9 +197,9 @@
 5. 5. There **isn't** a car in the garage.
 6. 6. There **aren't** any books on the desk.
 
-Фишки на экране: i, a, i, a, i, a, **he**, **she**
+Фишки на экране: isn't, aren't, isn't, aren't, isn't, aren't, **am**, **is**
 
-Лишние: **he, she**
+Лишние: **am, is**
 
 ## 14. Go Getter 1 · Unit 3 · My home · Homework 4 · блок 7
 
@@ -213,9 +212,9 @@
 5. B: Where's the **bedroom**?
 6. A: **Let** me **show** you!
 
-Фишки на экране: c, y, l, t, p, b, L, s, **TV**, **sofa**, **any**
+Фишки на экране: come in, you, like, tea, please, bedroom, Let, show, **he**, **she**, **it**
 
-Лишние: **TV, sofa, any**
+Лишние: **he, she, it**
 
 ## 15. Go Getter 1 · Unit 3 · My home · Homework 7 · блок 4
 
@@ -229,9 +228,9 @@
 6. Marina: Is there **a** games console?
 7. Sally: No, there **isn't**, but there's a computer!
 
-Фишки на экране: a, a, a, T, a, i, **an**, **some**
+Фишки на экране: a, any, any, There, a, isn't, **an**, **some**, **am**
 
-Лишние: **an, some**
+Лишние: **an, some, am**
 
 ## 16. Go Getter 1 · Unit 3 · My home · Homework 7 · блок 5
 
@@ -244,9 +243,9 @@
 5. A: It's **upstairs**. It's next to Andrew's bedroom. **Let** me show you.
 6. B: Thanks.
 
-Фишки на экране: c, W, p, u, L, **any**, **There**, **isn't**
+Фишки на экране: come, Would, please, upstairs, Let, **comes**, **coming**, **came**
 
-Лишние: **any, There, isn't**
+Лишние: **comes, coming, came**
 
 ## 17. Go Getter 1 · Unit 4 · Look at me · Homework 2 · блок 9
 
@@ -260,9 +259,9 @@
 6. 6. Alex **hasn't got** a big face, his face is small.
 7. 7. Trevor **hasn't got** a mobile phone, he sends emails.
 
-Фишки на экране: h, h, h, h, h, h, h, h, h, **have got**, **has got**
+Фишки на экране: has got, hasn't got, have got, hasn't got, has got, have got, has got, hasn't got, hasn't got, **have**, **has**
 
-Лишние: **have got, has got**
+Лишние: **have, has**
 
 ## 18. Go Getter 1 · Unit 4 · Look at me · Homework 4 · блок 7
 
@@ -272,9 +271,9 @@
 2. 2. A: Ohhh! I'm so **sorry**! B: It's OK! A: Are you **sure**? B: Yes, I'm **fine**!
 3. 3. A: These aren't my keys. B: Sorry, my **mistake**. Here you are. A: No **problem**!
 
-Фишки на экране: S, a, s, s, f, m, p, **an**, **some**, **any**
+Фишки на экране: Sorry, all right, sorry, sure, fine, mistake, problem, **got**, **clever**, **sporty**
 
-Лишние: **an, some, any**
+Лишние: **got, clever, sporty**
 
 ## 19. Go Getter 1 · Unit 4 · Look at me · Homework 5 · блок 5
 
@@ -286,7 +285,7 @@
 4. 4. Dan is usually **helpful**. He helps me with homework.
 5. 5. My family is **sporty**. We regularly play tennis and go to the gym.
 
-Фишки на экране: c, f, f, h, s, **friend**, **garden**, **skateboard**
+Фишки на экране: clever, friendly, funny, helpful, sporty, **friend**, **garden**, **skateboard**
 
 Лишние: **friend, garden, skateboard**
 
@@ -300,9 +299,9 @@
 4. 4. Our favourite place is his **garden**.
 5. 5. Max and Tim are not very good at **Maths**.
 
-Фишки на экране: r, s, f, g, M, **skateboard**, **friend**
+Фишки на экране: reading, skateboard, friend, garden, Maths, **read**, **reads**
 
-Лишние: **skateboard, friend**
+Лишние: **read, reads**
 
 ## 21. Go Getter 1 · Unit 4 · Look at me · Homework 7 · блок 4
 
@@ -328,9 +327,9 @@
 3. A: **Have** you and Alex got blue eyes? B: Yes, we **have**.
 4. A: **Have** Jane and I got white teeth? B: No, you **haven't**.
 
-Фишки на экране: H, Y, H, g, h, H, h, H, h, **Their**, **Our**
+Фишки на экране: Have, Yes, Has, got, hasn't, Have, have, Have, haven't, **Had**, **Have got**, **Has got**
 
-Лишние: **Their, Our**
+Лишние: **Had, Have got, Has got**
 
 ## 23. Go Getter 1 · Unit 4 · Look at me · Homework 7 · блок 8
 
@@ -342,9 +341,9 @@
 4. Jack and I have got brown hair. **Our** hair is brown.
 5. You and Anna have got a nice brother. **Your** brother is nice.
 
-Фишки на экране: O, I, T, O, Y, **He**, **She**, **It**
+Фишки на экране: Our, Its, Their, Our, Your, **My**, **His**, **Her**
 
-Лишние: **He, She, It**
+Лишние: **My, His, Her**
 
 ## 24. Go Getter 1 · Unit 4 · Look at me · Unit 4 Test · блок 7
 
@@ -352,7 +351,7 @@
 
 1. This is my friend Tom. He's ten years old. Tom has got short, **blond** hair. He has got big blue **eyes**. He's tall and very **sporty** — he plays football every day. He's very **friendly** and helpful. Tom has got a sister. Her name is Lucy. She has got long, **curly** hair. It's not straight. Lucy is very **clever** — she likes maths and she can read very well. Tom and Lucy have got a dog. Its name is Rex. Rex has got big ears, a small **nose** and four white feet. He's a very **funny** dog!
 
-Фишки на экране: b, e, s, f, c, c, n, f, **problem**, **mistake**, **sorry**
+Фишки на экране: blond, eyes, sporty, friendly, curly, clever, nose, funny, **problem**, **mistake**, **sorry**
 
 Лишние: **problem, mistake, sorry**
 
@@ -366,9 +365,9 @@
 4. 4. **run** in new trainers
 5. 5. **swim** with goggles
 
-Фишки на экране: f, w, r, s, **run**, **write**
+Фишки на экране: fix, write, run, swim, **swims**, **swimming**, **swam**
 
-Лишние: **run, write**
+Лишние: **swims, swimming, swam**
 
 ## 26. Go Getter 1 · Unit 5 · I can do it · Homework 2 · блок 4
 
@@ -385,9 +384,9 @@
 9. 9. Sarah **can** write.
 10. 10. Oliver **can't** sing.
 
-Фишки на экране: c, c, c, c, c, c, c, c, c, c, **can**, **can't**
+Фишки на экране: can't, can, can't, can, can't, can, can, can't, can, can't, **could**, **couldn't**
 
-Лишние: **can, can't**
+Лишние: **could, couldn't**
 
 ## 27. Go Getter 1 · Unit 5 · I can do it · Homework 2 · блок 5
 
@@ -399,9 +398,9 @@
 4. 4. My mum can **stomp** like an elephant.
 5. 5. My sister can **swim** like a fish.
 
-Фишки на экране: j, f, r, s, s, **can**, **can't**, **write**
+Фишки на экране: jump, fly, run, stomp, swim, **swims**, **swimming**, **swam**
 
-Лишние: **can, can't, write**
+Лишние: **swims, swimming, swam**
 
 ## 28. Go Getter 1 · Unit 5 · I can do it · Homework 2 · блок 6
 
@@ -417,9 +416,9 @@
 8. 8. A rabbit **can't** write an e-mail, but it **can** eat carrots.
 9. 9. A bee **can't** swim, but it **can** make honey.
 
-Фишки на экране: c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, **can't**, **can**
+Фишки на экране: can't, can, can, can't, can, can't, can, can't, can't, can, can, can't, can't, can, can't, can, can't, can, **could**, **couldn't**
 
-Лишние: **can't, can**
+Лишние: **could, couldn't**
 
 ## 29. Go Getter 1 · Unit 5 · I can do it · Homework 3 · блок 4
 
@@ -434,9 +433,9 @@
 7. A: Can the girl play **the piano** too?
 8. B: No, she **can't**.
 
-Фишки на экране: s, c, C, d, t, c, **the piano**, **see**
+Фишки на экране: see, can, Can, dance, the piano, can't, **could**, **couldn't**, **sees**
 
-Лишние: **the piano, see**
+Лишние: **could, couldn't, sees**
 
 ## 30. Go Getter 1 · Unit 5 · I can do it · Homework 4 · блок 6
 
@@ -447,9 +446,9 @@
 3. 3. Great **idea**! 😊
 4. 4. I'm not **sure**. 😐
 
-Фишки на экране: t, g, i, s, **he**, **she**, **it**
+Фишки на экране: that, good, idea, sure, **this**, **these**, **those**
 
-Лишние: **he, she, it**
+Лишние: **this, these, those**
 
 ## 31. Go Getter 1 · Unit 5 · I can do it · Homework 5 · блок 3
 
@@ -457,7 +456,7 @@
 
 1. Look at these women. They can't **hear**, but they can make words with their **hands**. It's a special sign language. They can use it to speak to their **friends** and family.
 
-Фишки на экране: h, h, f, **hands**, **friends**
+Фишки на экране: hear, hands, friends, **hands**, **friends**
 
 Лишние: **hands, friends**
 
@@ -470,9 +469,9 @@
 3. Sam and Joe can swim **but** they **can't** fix a bike.
 4. Tom and Anna **can** run fast.
 
-Фишки на экране: c, a, b, c, c, **an**, **some**
+Фишки на экране: can, and, but, can't, can, **could**, **couldn't**
 
-Лишние: **an, some**
+Лишние: **could, couldn't**
 
 ## 33. Go Getter 1 · Unit 5 · I can do it · Homework 7 · блок 7
 
@@ -482,9 +481,9 @@
 2. 2. I **can't** fly, but I **can** run fast.
 3. 3. A: **Can** your brother ride a horse? B: No, he **can't**.
 
-Фишки на экране: c, c, c, c, C, c, **Can**, **can**
+Фишки на экране: can, can't, can't, can, Can, can't, **could**, **couldn't**
 
-Лишние: **Can, can**
+Лишние: **could, couldn't**
 
 ## 34. Go Getter 1 · Unit 5 · I can do it · Unit 5 Test · блок 6
 
@@ -496,9 +495,9 @@
 4. 4. On Thursday, you can sing and **dance** in the music room.
 5. 5. On Friday, you can **draw** and paint pictures of the city.
 
-Фишки на экране: s, r, c, d, d, **fly**, **see**, **and**
+Фишки на экране: swim, ride, climb, dance, draw, **swims**, **swimming**, **swam**
 
-Лишние: **fly, see, and**
+Лишние: **swims, swimming, swam**
 
 ## 35. Go Getter 1 · Unit 6 · My day · Homework 1 · блок 8
 
@@ -510,9 +509,9 @@
 4. 4. I **go** to bed.
 5. 5. I **hang** out with my friends.
 
-Фишки на экране: h, g, d, g, h, **watch**, **usually**
+Фишки на экране: have, get up, do, go, hang, **has**, **had**, **haven't**
 
-Лишние: **watch, usually**
+Лишние: **has, had, haven't**
 
 ## 36. Go Getter 1 · Unit 6 · My day · Homework 2 · блок 7
 
@@ -524,9 +523,9 @@
 4. After school he **does** his homework.
 5. In the evening my mum **watches** TV.
 
-Фишки на экране: g, h, m, g, d, w, **always**, **sometimes**
+Фишки на экране: gets, has, makes, goes, does, watches, **get**, **got**, **getting**
 
-Лишние: **always, sometimes**
+Лишние: **get, got, getting**
 
 ## 37. Go Getter 1 · Unit 6 · My day · Homework 3 · блок 5
 
@@ -539,9 +538,9 @@
 5. 5. We **never** watch TV in the morning. ⚪⚪⚪⚪
 6. 6. My parents **often** go out with their friends. 🔴🔴⚪⚪
 
-Фишки на экране: a, u, s, n, o, **an**, **some**, **any**
+Фишки на экране: always, usually, sometimes, never, often, **play**, **do**, **go**
 
-Лишние: **an, some, any**
+Лишние: **play, do, go**
 
 ## 38. Go Getter 1 · Unit 6 · My day · Homework 4 · блок 9
 
@@ -569,9 +568,9 @@
 5. 4. Before bed, I **watch** TV.
 6. 5. At night, I **go** to bed at 9 o'clock.
 
-Фишки на экране: h, h, p, w, g, **watch**, **have**
+Фишки на экране: have, hang, play, watch, go, **has**, **had**, **haven't**
 
-Лишние: **watch, have**
+Лишние: **has, had, haven't**
 
 ## 40. Go Getter 1 · Unit 7 · Animals · Homework 6 · блок 7
 
@@ -583,9 +582,9 @@
 4. Is this **OK**? Let me **know**.
 5. Ben
 
-Фишки на экране: H, l, i, e, c, O, k, **he**, **she**, **it**
+Фишки на экране: Hi, look, is, eats, cute, OK, know, **looks**, **looking**, **looked**
 
-Лишние: **he, she, it**
+Лишние: **looks, looking, looked**
 
 ## 41. Go Getter 1 · Unit 7 · Animals · Homework 7 · блок 4
 
@@ -597,7 +596,7 @@
 4. 4. A crocodile is **dangerous**.
 5. 5. Look at this rabbit! It's so **cute**.
 
-Фишки на экране: f, s, s, d, c, **don't**, **do**, **doesn't**
+Фишки на экране: fast, slow, strong, dangerous, cute, **don't**, **do**, **doesn't**
 
 Лишние: **don't, do, doesn't**
 
@@ -611,9 +610,9 @@
 4. 4. A: Where **do** lions live? B: They live in Africa.
 5. 5. A: **Do** snakes drink milk? B: No, they **don't**.
 
-Фишки на экране: D, d, D, d, D, d, d, D, d, **doesn't**, **Does**
+Фишки на экране: Do, do, Do, do, Does, doesn't, do, Do, don't, **Did**, **Didn't**
 
-Лишние: **doesn't, Does**
+Лишние: **Did, Didn't**
 
 ## 43. Go Getter 1 · Unit 7 · Animals · Unit 7 Test · блок 9
 
@@ -626,7 +625,7 @@
 5. 5. There is a big **elephant** family in the zoo.
 6. 6. A guide costs £**4.20**.
 
-Фишки на экране: 1, 9, 1, g, e, 4, **slow**, **don't**, **look**
+Фишки на экране: 18.50, 9.30, 10, giraffes, elephant, 4.20, **slow**, **don't**, **look**
 
 Лишние: **slow, don't, look**
 
@@ -643,9 +642,9 @@
 7. 7. Mark 😊 **likes** playing basketball.
 8. 8. My cat 😫😫 **hates** getting wet.
 
-Фишки на экране: h, l, d, l, d, l, l, h, **hope**, **her**
+Фишки на экране: hate, like, doesn't like, loves, don't like, love, likes, hates, **liked**, **like doing**, **likes doing**
 
-Лишние: **hope, her**
+Лишние: **liked, like doing, likes doing**
 
 ## 45. Go Getter 1 · Unit 8 · Sport and health · Homework 4 · блок 8
 
@@ -656,9 +655,9 @@
 3. A: I hate getting **wet**!
 4. B: Me too! I **hope** it's sunny and **warm** tomorrow.
 
-Фишки на экране: w, l, r, w, h, w, **love**, **them**, **windy**
+Фишки на экране: what, like, rainy, wet, hope, warm, **who**, **where**, **when**
 
-Лишние: **love, them, windy**
+Лишние: **who, where, when**
 
 ## 46. Go Getter 1 · Unit 8 · Sport and health · Homework 7 · блок 5
 
@@ -670,7 +669,7 @@
 4. 4. A: What's the weather like? B: It's **windy**. Let's go sailing!
 5. 5. A: What's the weather like? B: It's very **hot**. Let's go swimming!
 
-Фишки на экране: s, r, s, w, h, **like**, **her**, **them**
+Фишки на экране: sunny, rainy, snowy, windy, hot, **like**, **her**, **them**
 
 Лишние: **like, her, them**
 
@@ -685,9 +684,9 @@
 5. 5. Kate is my friend. I like **her** a lot.
 6. 6. These are my cats. I love **them**!
 
-Фишки на экране: c, g, l, h, h, t, **windy**, **hot**, **sunny**
+Фишки на экране: cooking, getting, like, hates, her, them, **get**, **gets**, **got**
 
-Лишние: **windy, hot, sunny**
+Лишние: **get, gets, got**
 
 ## 48. Go Getter 1 · Unit 8 · Sport and health · Homework 7 · блок 7
 
@@ -700,9 +699,9 @@
 5. 5. **What** have you got there? — Her autograph!
 6. 6. **How many** photos have you got? — Eighty.
 
-Фишки на экране: W, W, W, W, W, H, **Monday**, **Sunday**
+Фишки на экране: Where, Who, When, Whose, What, How many, **Why**, **How**, **How much**
 
-Лишние: **Monday, Sunday**
+Лишние: **Why, How, How much**
 
 ## 49. Go Getter 1 · Unit 8 · Sport and health · Unit 8 Test · блок 8
 
@@ -714,7 +713,7 @@
 4. 4. On Saturday morning, it's **sunny** and **warm**.
 5. 5. On Tuesday, it's very **windy**.
 
-Фишки на экране: S, r, M, s, s, w, w, **her**, **like**, **them**
+Фишки на экране: Sunday, rainy, Monday, skies, sunny, warm, windy, **her**, **like**, **them**
 
 Лишние: **her, like, them**
 
@@ -731,9 +730,9 @@
 7. 7. This book about the past is for **History**.
 8. 8. Today's grammar lesson for **English** is “I can”.
 
-Фишки на экране: A, F, G, M, S, M, H, E, **An**, **Some**, **Any**
+Фишки на экране: Art, French, Geography, Maths, Science, Music, History, English, **Do**, **Friday**, **In**
 
-Лишние: **An, Some, Any**
+Лишние: **Do, Friday, In**
 
 ## 51. Go Getter 2 · Unit 1 · Homework 2 · блок 8
 
@@ -746,9 +745,9 @@
 5. 5. I **go** to bed at 8 o'clock.
 6. 6. She **plays** computer games on Sunday.
 
-Фишки на экране: l, g, l, p, g, p, **music**, **spell**
+Фишки на экране: likes, goes, like, play, go, plays, **liked**, **don't like**, **doesn't like**
 
-Лишние: **music, spell**
+Лишние: **liked, don't like, doesn't like**
 
 ## 52. Go Getter 2 · Unit 1 · Homework 3 · блок 7
 
@@ -757,9 +756,9 @@
 1. 1. **Do** you play tennis at the weekend?
 2. 2. **Does** your brother do karate?
 
-Фишки на экране: D, D, **Does**, **Do**
+Фишки на экране: Do, Does, **Don't**, **Doesn't**
 
-Лишние: **Does, Do**
+Лишние: **Don't, Doesn't**
 
 ## 53. Go Getter 2 · Unit 1 · Homework 4 · блок 6
 
@@ -782,7 +781,7 @@
 15. Karen: What time does the club **start**?
 16. Mr Tims: At 4 p.m.
 
-Фишки на экране: n, s, l, e, 0, s, **canteen**, **playground**, **lunchtime**
+Фишки на экране: name, spell, live, e-mail address, 08974942345, start, **canteen**, **playground**, **lunchtime**
 
 Лишние: **canteen, playground, lunchtime**
 
@@ -797,7 +796,7 @@
 5. 5. We use laptops in the **computer room**.
 6. 6. The teachers have coffee in the **staff room**.
 
-Фишки на экране: c, p, g, l, c, s, **music**, **start**, **spell**
+Фишки на экране: canteen, playground, gym, library, computer room, staff room, **music**, **start**, **spell**
 
 Лишние: **music, start, spell**
 
@@ -811,9 +810,9 @@
 4. **In** the afternoon, I usually go **skateboarding** in the park with my friends. In the **evening**, we often watch music videos!
 5. Guess what my favourite day is. Yes, it’s **Friday**!
 
-Фишки на экране: f, a, m, f, A, l, I, s, e, F, **an**, **some**, **any**
+Фишки на экране: favourite, at, music, friends, Art, lunchtime, In, skateboarding, evening, Friday, **On**, **Under**, **Next to**
 
-Лишние: **an, some, any**
+Лишние: **On, Under, Next to**
 
 ## 56. Go Getter 2 · Unit 2 · Homework 1 · блок 7
 
@@ -826,9 +825,9 @@
 5. 5. **Apples** are good for you. They're my favourite fruit.
 6. 6. Let's have **pasta** for dinner. I hope you like spaghetti.
 
-Фишки на экране: c, s, t, b, A, p, **An**, **Some**, **Any**
+Фишки на экране: cereal, sandwich, tuna, biscuit, Apples, pasta, **bread**, **some**, **bar**
 
-Лишние: **An, Some, Any**
+Лишние: **bread, some, bar**
 
 ## 57. Go Getter 2 · Unit 2 · Homework 2 · блок 12
 
@@ -841,9 +840,9 @@
 5. Tom: What about **an** orange?
 6. Matt: No. There **aren't** any oranges. Look! There **is** some butter on the list. It's a list for pancakes!
 
-Фишки на экране: a, s, a, t, a, a, i, **an**, **some**, **any**
+Фишки на экране: any, some, are, there, an, aren't, is, **a**, **am**, **isn't**
 
-Лишние: **an, some, any**
+Лишние: **a, am, isn't**
 
 ## 58. Go Getter 2 · Unit 2 · Homework 4 · блок 5
 
@@ -856,9 +855,9 @@
 5. 5. a **jar** of jam
 6. 6. a **packet** of biscuits
 
-Фишки на экране: b, b, c, c, j, p, **some**, **egg**, **are**
+Фишки на экране: bar, bottle, can, carton, jar, packet, **can't**, **could**, **couldn't**
 
-Лишние: **some, egg, are**
+Лишние: **can't, could, couldn't**
 
 ## 59. Go Getter 2 · Unit 2 · Homework 4 · блок 10
 
@@ -872,9 +871,9 @@
 6. Kate: A **can** of cola and a **carton** of juice, please.
 7. Waiter: Great, thanks.
 
-Фишки на экране: b, p, b, c, c, **jar**, **tuna**
+Фишки на экране: bottle, packet, bar, can, carton, **can't**, **could**, **couldn't**
 
-Лишние: **jar, tuna**
+Лишние: **can't, could, couldn't**
 
 ## 60. Go Getter 2 · Unit 2 · Homework 7 · блок 5
 
@@ -889,9 +888,9 @@
 7. 7. Can I have **an** apple, please?
 8. 8. There's **a** lemon in the bag.
 
-Фишки на экране: a, a, s, a, s, a, a, a, **an**, **some**
+Фишки на экране: an, a, some, any, some, any, an, a, **a**, **some**
 
-Лишние: **an, some**
+Лишние: **a, some**
 
 ## 61. Go Getter 2 · Unit 2 · Homework 7 · блок 6
 
@@ -905,9 +904,9 @@
 6. Kate: **Yes**. Can I have a small **salad**, please?
 7. Waiter: Great, **thanks**.
 
-Фишки на экране: w, I, l, l, A, Y, s, t, **He**, **She**, **It**
+Фишки на экране: would, I'd like, like, lemonade, Anything, Yes, salad, thanks, **will**, **shall**, **likes**
 
-Лишние: **He, She, It**
+Лишние: **will, shall, likes**
 
 ## 62. Go Getter 2 · Unit 2 · Homework 7 · блок 8
 
@@ -915,7 +914,7 @@
 
 1. What's toast? It's hot **bread**. You need a **toaster** to cook the bread. I like French toast. What's French toast? Well, you dip your bread in an **egg**. Then you cook it in **butter** in a frying pan. Then put some **sugar** on it and it's ready.
 
-Фишки на экране: b, t, e, b, s, **lemonade**, **any**, **like**
+Фишки на экране: bread, toaster, egg, butter, sugar, **lemonade**, **any**, **like**
 
 Лишние: **lemonade, any, like**
 
@@ -929,9 +928,9 @@
 4. 4. How **much** chocolate do you eat in a week?
 5. 5. How **many** eggs do we need for the pancakes?
 
-Фишки на экране: s, a, a, m, m, **an**, **some**
+Фишки на экране: some, any, an, much, many, **a**, **a lot of**
 
-Лишние: **an, some**
+Лишние: **a, a lot of**
 
 ## 64. Go Getter 2 · Unit 3 · Homework 1 · блок 7
 
@@ -939,7 +938,7 @@
 
 1. Jack is a little boy who loves technology. He has a mobile phone, a laptop, and a tablet. He uses them every day to watch videos and play games. He also has **headphones**, so he can listen to music without disturbing anyone. Jack's favourite device is his **laptop**. He loves playing games on it and watching videos on the big **screen**. He has a **camera**, too, so he can take pictures of himself and his friends. When he needs to type something, he uses a **keyboard**. He also has a **mouse** to help him move things around on the **screen**. Jack's mom has a **printer**, so he can print out pictures and documents when he needs to. Jack likes to connect his devices to **speakers**, so he can listen to music or watch videos with better sound. He even knows how to connect his **laptop** to the **TV**! Jack is very smart and knows a lot about technology.
 
-Фишки на экране: h, l, s, c, k, m, s, p, s, l, T, **text**, **mobile**, **download**
+Фишки на экране: headphones, laptop, screen, camera, keyboard, mouse, screen, printer, speakers, laptop, TV, **text**, **mobile**, **download**
 
 Лишние: **text, mobile, download**
 
@@ -953,7 +952,7 @@
 4. B: Can we use it to **chat** online to Terry?
 5. A: Let's check!
 
-Фишки на экране: s, m, t, d, s, c, **screen**, **keyboard**, **camera**
+Фишки на экране: selfie, mobile, text, download, surf the, chat, **screen**, **keyboard**, **camera**
 
 Лишние: **screen, keyboard, camera**
 
@@ -978,9 +977,9 @@
 5. 5. Are you worried **about** your exams?
 6. 6. Are you bad **at** computer games?
 
-Фишки на экране: i, a, a, o, a, a, **an**, **some**
+Фишки на экране: in, at, about, of, about, at, **on**, **under**, **next to**
 
-Лишние: **an, some**
+Лишние: **on, under, next to**
 
 ## 68. Go Getter 2 · Unit 3 · Homework 6 · блок 6
 
@@ -991,9 +990,9 @@
 3. I listen to music on my CDs. I listen to music on my phone too.
 4. I use the computer to do my homework. I also use it to talk to my grandparents.
 
-Фишки на экране: a, b, **an**, **some**
+Фишки на экране: at the end, before, **at the end**, **before**
 
-Лишние: **an, some**
+Лишние: **at the end, before**
 
 ## 69. Go Getter 2 · Unit 4 · Homework 4 · блок 10
 
@@ -1003,7 +1002,7 @@
 2. 2. The hippo is **the smallest**.
 3. 3. The elephant is **the funniest**.
 
-Фишки на экране: t, t, t, **the smallest**, **the tallest**
+Фишки на экране: the tallest, the smallest, the funniest, **the smallest**, **the tallest**
 
 Лишние: **the smallest, the tallest**
 
@@ -1034,9 +1033,9 @@
 7. 7. Mary is the most **intelligent** girl in the class.
 8. 8. Diana thinks that Mary is a **good** teacher.
 
-Фишки на экране: o, f, s, b, f, b, i, g, **he**, **she**, **it**
+Фишки на экране: older, funny, smaller, beautiful, fastest, best, intelligent, good, **bigger**, **biggest**, **smallest**
 
-Лишние: **he, she, it**
+Лишние: **bigger, biggest, smallest**
 
 ## 72. Go Getter 2 · Unit 4 · Homework 7 · блок 13
 
@@ -1049,7 +1048,7 @@
 5. 5. I can’t buy this watch because it’s very **expensive**.
 6. 6. My bike isn’t dangerous. It’s **safe**.
 
-Фишки на экране: e, f, d, f, e, s, **safe**, **exciting**
+Фишки на экране: exciting, friendly, difficult, fast, expensive, safe, **safe**, **exciting**
 
 Лишние: **safe, exciting**
 
@@ -1062,7 +1061,7 @@
 3. 3. Windermere: **17** kilometres long
 4. 4. Volcanoes: sometimes **very** **dangerous**
 
-Фишки на экране: w, h, m, 1, v, d, **older**, **good**, **best**
+Фишки на экране: waterfalls, highest, mountain, 17, very, dangerous, **older**, **good**, **best**
 
 Лишние: **older, good, best**
 
@@ -1078,9 +1077,9 @@
 6. 6. Angel Falls is in **Venezuela**.
 7. 7. Niagara Falls is **more popular** than Angel Falls for tourists.
 
-Фишки на экране: b, N, d, 1, 9, V, m, **beautiful**, **good**, **older**
+Фишки на экране: biggest, North Africa, deepest, 1,642, 979, Venezuela, more popular, **bigger**, **smaller**, **smallest**
 
-Лишние: **beautiful, good, older**
+Лишние: **bigger, smaller, smallest**
 
 ## 75. Go Getter 2 · Unit 5 · Homework 1 · блок 9
 
@@ -1092,9 +1091,9 @@
 4. B: Yes. The supermarket is **opposite** the café, so we can get some food for a picnic ...
 5. A: ... and have lunch in the park. Good idea!
 
-Фишки на экране: n, b, i, b, o, **he**, **she**, **it**
+Фишки на экране: next to, between, in front of, behind, opposite, **in**, **on**, **under**
 
-Лишние: **he, she, it**
+Лишние: **in, on, under**
 
 ## 76. Go Getter 2 · Unit 5 · Homework 2 · блок 3
 
@@ -1105,7 +1104,7 @@
 3. Lucas: Sorry I'm **late**. There weren't any buses.
 4. Amy: Never **mind**, Lucas. Let's go for a pizza now.
 
-Фишки на экране: m, m, l, m, **mind**, **late**
+Фишки на экране: minutes, morning, late, mind, **mind**, **late**
 
 Лишние: **mind, late**
 
@@ -1135,9 +1134,9 @@
 6. 6. The hospital is **on** the right.
 7. 7. It's **opposite** the museum.
 
-Фишки на экране: G, t, p, l, s, o, o, **mind**, **yesterday**, **late**
+Фишки на экране: Go, turn, past, left, straight, on, opposite, **in**, **under**, **next to**
 
-Лишние: **mind, yesterday, late**
+Лишние: **in, under, next to**
 
 ## 79. Go Getter 2 · Unit 5 · Homework 7 · блок 4
 
@@ -1149,9 +1148,9 @@
 4. 4. The **old** stadium wasn't great. But the **new** stadium is amazing!
 5. 5. The cinema was **clean** before the film, but after the film it was **dirty** because there was popcorn on the floor.
 
-Фишки на экране: b, q, s, b, i, b, o, n, c, d, **he**, **she**, **it**
+Фишки на экране: busy, quiet, small, big, interesting, boring, old, new, clean, dirty, **late**, **straight**, **left**
 
-Лишние: **he, she, it**
+Лишние: **late, straight, left**
 
 ## 80. Go Getter 2 · Unit 6 · Homework 1 · блок 6
 
@@ -1159,9 +1158,9 @@
 
 1. Hi, I'm Mark and this is my family. You can see me with my dad on the left. Dad loves cooking but he isn't a chef. He works at the hospital, but he isn't a doctor. He's a **nurse**. Mum works at my sister's school. She's a French **teacher**. My grandpa and grandma work too. Grandma is a great **artist** and she paints beautiful pictures. She sells them in a shop. Grandpa works in her shop – he's her **shop assistant**. I like animals and when I grow up I want to be a **vet** so I can look after people's pets.
 
-Фишки на экране: n, t, a, s, v, **an**, **some**, **any**
+Фишки на экране: nurse, teacher, artist, shop assistant, vet, **teacher**, **vet**
 
-Лишние: **an, some, any**
+Лишние: **teacher, vet**
 
 ## 81. Go Getter 2 · Unit 6 · Homework 2 · блок 6
 
@@ -1187,9 +1186,9 @@
 3. 3. March — **2 months ago**
 4. 4. Saturday — **3 days ago**
 
-Фишки на экране: a, 1, 2, 3, **an**, **some**, **any**
+Фишки на экране: an hour ago, 10 minutes ago, 2 months ago, 3 days ago, **2 months ago**, **an hour ago**
 
-Лишние: **an, some, any**
+Лишние: **2 months ago, an hour ago**
 
 ## 83. Go Getter 2 · Unit 6 · Homework 5 · блок 5
 
@@ -1222,9 +1221,9 @@
 5. A: And **did** you have lunch there?
 6. B: Yes, we **had** pizza.
 
-Фишки на экране: d, w, s, s, d, h, **please**, **gave**, **met**
+Фишки на экране: did, went, see, saw, did, had, **do**, **does**, **don't**
 
-Лишние: **please, gave, met**
+Лишние: **do, does, don't**
 
 ## 85. Go Getter 2 · Unit 6 · Homework 7 · блок 10
 
@@ -1237,9 +1236,9 @@
 5. 5. Jim **took** lots of photos on holiday last year.
 6. 6. Dad **gave** me a watch for my last birthday.
 
-Фишки на экране: h, m, d, b, t, g, **can**, **see**, **please**
+Фишки на экране: had, met, drank, bought, took, gave, **have**, **has**, **haven't**
 
-Лишние: **can, see, please**
+Лишние: **have, has, haven't**
 
 ## 86. Go Getter 2 · Unit 6 · Homework 7 · блок 11
 
@@ -1254,9 +1253,9 @@
 7. Pam: Come on, dad. Can I use your laptop, **please**? Just for an hour.
 8. Dad: Oh, **all right**.
 
-Фишки на экране: c, s, i, f, p, a, **he**, **she**, **it**
+Фишки на экране: can, sorry, if, fine, please, all right, **can't**, **could**, **couldn't**
 
-Лишние: **he, she, it**
+Лишние: **can't, could, couldn't**
 
 ## 87. Go Getter 2 · Unit 7 · Homework 1 · блок 8
 
@@ -1264,9 +1263,9 @@
 
 1. 14-year-old Enzo Paci lives in Queens in New York City and he travels two hours to a school in the Bronx. It's a very good school. Enzo **takes** a bus and two trains, and the last ten minutes of his journey is **on** foot. At 6.30 a.m. he goes to the train station **by** bus. The train **leaves** at 7 a.m. and arrives in Manhattan at 8 a.m. Then, at 8.30 a.m. Enzo **gets on** another train to his school! It's one of the longest school journeys in the world!
 
-Фишки на экране: t, o, b, l, g, **heavy**, **explorer**, **twelve**
+Фишки на экране: takes, on, by, leaves, gets on, **take**, **taking**, **took**
 
-Лишние: **heavy, explorer, twelve**
+Лишние: **take, taking, took**
 
 ## 88. Go Getter 2 · Unit 7 · Homework 5 · блок 5
 
@@ -1281,9 +1280,9 @@
 7. Boy: What time does it arrive?
 8. Woman: **At 11:45 a.m.**
 
-Фишки на экране: H, I, A, A, **An**, **Some**
+Фишки на экране: Here you are., It is ten pounds, please., At 10:30 a.m., At 11:45 a.m., **At 11:45 a.m.**, **Here you are.**
 
-Лишние: **An, Some**
+Лишние: **At 11:45 a.m., Here you are.**
 
 ## 89. Go Getter 2 · Unit 7 · Homework 6 · блок 7
 
@@ -1310,7 +1309,7 @@
 4. 4. Wow! Five metres in long jump! Mark, this is a school **record**!
 5. 5. My schoolbag is very **heavy** today because I’ve got my P.E. kit.
 
-Фишки на экране: e, d, e, r, h, **twelve**, **by**, **on**
+Фишки на экране: expedition, dangerous, explorer, record, heavy, **twelve**, **by**, **on**
 
 Лишние: **twelve, by, on**
 
@@ -1325,7 +1324,7 @@
 5. **See you soon!**
 6. Lily
 
-Фишки на экране: H, W, Y, S, **See you soon!**, **We’re having a lovely time in**
+Фишки на экране: Hi, We’re having a lovely time in, Yesterday we went, See you soon!, **See you soon!**, **We’re having a lovely time in**
 
 Лишние: **See you soon!, We’re having a lovely time in**
 
@@ -1335,9 +1334,9 @@
 
 1. The Sleep with sharks! night is at the National Marine **Aquarium** in **Plymouth**. **Children** aged 5–15 can go. You can have a **tour** of the aquarium and see amazing underwater **creatures**. Later, you can watch a **movie** and sleep next to the **sharks**!
 
-Фишки на экране: A, P, C, t, c, m, s, **An**, **Some**, **Any**
+Фишки на экране: Aquarium, Plymouth, Children, tour, creatures, movie, sharks, **mum**, **sister**, **At**
 
-Лишние: **An, Some, Any**
+Лишние: **mum, sister, At**
 
 ## 93. Go Getter 2 · Unit 8 · Homework 7 · блок 4
 
@@ -1349,7 +1348,7 @@
 4. 4. Kelly and her **uncle** love the same activity.
 5. 5. David is going to go out with his **dad**.
 
-Фишки на экране: s, b, m, u, d, **collect**, **reply**, **p.m.**
+Фишки на экране: sister, brother, mum, uncle, dad, **collect**, **reply**, **p.m.**
 
 Лишние: **collect, reply, p.m.**
 
@@ -1365,9 +1364,9 @@
 6. Your parents can **collect** you from Patty's Pancakes at 9 o'clock.
 7. Please **reply** to 678954321.
 
-Фишки на экране: A, p, A, P, c, r, **An**, **Some**, **Any**
+Фишки на экране: August, p.m., At, Please, collect, reply, **uncle**, **dad**, **sister**
 
-Лишние: **An, Some, Any**
+Лишние: **uncle, dad, sister**
 
 ## 95. Go Getter 2 · Unit 8 · Unit 8 Test · блок 6
 
@@ -1380,9 +1379,9 @@
 5. 5. Lily isn't going to wear a **costume**.
 6. 6. Lily's sister loves **rap** music.
 
-Фишки на экране: s, T, i, t, c, r, **he**, **she**, **it**
+Фишки на экране: seventh, Taylor Swift, isn't going to, two weeks, costume, rap, **am going to**, **is going to**, **are going to**
 
-Лишние: **he, she, it**
+Лишние: **am going to, is going to, are going to**
 
 ## 96. Go Getter 3 · Final Test · Final Test · блок 3
 
@@ -1402,7 +1401,7 @@
 
 1. Last night someone stole the Golden Pumpkin! The police talked to six suspects. The **witch** was flying on her broom. The **vampire** was sleeping in his coffin. The **mummy** was at the museum in his bandages. The **werewolf** was howling at the moon. The **skeleton** was dancing — rattle, rattle! And the **ghost**? Nobody could see him… Who is the thief?
 
-Фишки на экране: w, v, m, w, s, g, **candle**, **pumpkin**, **turnip**
+Фишки на экране: witch, vampire, mummy, werewolf, skeleton, ghost, **candle**, **pumpkin**, **turnip**
 
 Лишние: **candle, pumpkin, turnip**
 
@@ -1412,7 +1411,7 @@
 
 1. Long ago in Ireland, people celebrated Samhain at the end of the **harvest**. They made big **bonfires** on the hills. They believed that **ghosts** could walk on Earth that night, so they wore **costumes** and masks. Children carved a scary face into a **turnip**, put a **candle** inside and made a **lantern**. Later, in America, people used a **pumpkin** instead.
 
-Фишки на экране: h, b, g, c, t, c, l, p, **skeleton**, **ghost**, **mummy**
+Фишки на экране: harvest, bonfires, ghosts, costumes, turnip, candle, lantern, pumpkin, **skeleton**, **ghost**, **mummy**
 
 Лишние: **skeleton, ghost, mummy**
 
@@ -1427,9 +1426,9 @@
 5. It is **an** old go-kart.
 6. It is **a** beautiful doll.
 
-Фишки на экране: a, a, a, a, a, a, **an**, **some**
+Фишки на экране: an, an, a, a, an, a, **some**, **any**
 
-Лишние: **an, some**
+Лишние: **some, any**
 
 ## 100. Super Minds 1 · Unit 3 · My pets · Unit 3 Test · блок 6
 
@@ -1454,9 +1453,9 @@
 3. 3. Do you **play** football at the weekend?
 4. 4. Do you **watch** TV at the weekend?
 
-Фишки на экране: g, r, p, w, **watch**, **go**
+Фишки на экране: go, ride, play, watch, **goes**, **went**, **going**
 
-Лишние: **watch, go**
+Лишние: **goes, went, going**
 
 ## 102. Super Minds 1 · Unit 5 · My week · Homework 7 · блок 7
 
@@ -1477,7 +1476,7 @@
 3. 3) My house is round. I live in a **yurt**.
 4. 4) My house is in a cave. I live in a **cave house**.
 
-Фишки на экране: h, t, y, c, **cave house**, **yurt**
+Фишки на экране: house boat, tree house, yurt, cave house, **cave house**, **yurt**
 
 Лишние: **cave house, yurt**
 
@@ -1490,9 +1489,9 @@
 3. There's a **bedroom**, too. There are **three** bathrooms.
 4. But there **isn't** a living room. Ben and his family sit in the kitchen together!
 
-Фишки на экране: k, b, t, i, **he**, **she**, **it**
+Фишки на экране: kitchen, bedroom, three, isn't, **am**, **is**, **are**
 
-Лишние: **he, she, it**
+Лишние: **am, is, are**
 
 ## 105. Super Minds 1 · Unit 7 · Get dressed · Homework 2 · блок 11
 
@@ -1505,9 +1504,9 @@
 5. 5. Do you like **these** socks?
 6. 6. Do you like **this** skirt?
 
-Фишки на экране: t, t, t, t, t, t, **these**, **this**
+Фишки на экране: this, these, this, these, these, this, **that**, **those**
 
-Лишние: **these, this**
+Лишние: **that, those**
 
 ## 106. Super Minds 1 · Unit 7 · Get dressed · Homework 3 · блок 12
 
@@ -1519,9 +1518,9 @@
 4. 4. Is Mabel wearing a purple skirt? — Yes, she **is**.
 5. 5. Is Dipper wearing a skirt? — No, he **isn't**.
 
-Фишки на экране: I, i, i, i, i, **He**, **She**
+Фишки на экране: Is, isn't, is, is, isn't, **Am**, **Are**
 
-Лишние: **He, She**
+Лишние: **Am, Are**
 
 ## 107. Super Minds 1 · Unit 7 · Get dressed · Homework 4 · блок 8
 
@@ -1532,7 +1531,7 @@
 3. 3. I'm very **sorry**, Gary.
 4. 4. It's **OK**.
 
-Фишки на экране: c, c, s, O, **sorry**, **OK**
+Фишки на экране: cap, cap, sorry, OK, **sorry**, **OK**
 
 Лишние: **sorry, OK**
 
@@ -1548,7 +1547,7 @@
 6. They are socks with **spots**. They are yellow.
 7. I like my clothes!
 
-Фишки на экране: f, z, p, s, s, **is**, **this**
+Фишки на экране: flowers, zigzags, plain, stripes, spots, **is**, **this**
 
 Лишние: **is, this**
 
@@ -1563,9 +1562,9 @@
 5. 5. Do you like **these** socks?
 6. 6. Do you like **this** jacket?
 
-Фишки на экране: t, t, t, t, t, t, **these**, **this**
+Фишки на экране: these, this, these, this, these, this, **that**, **those**
 
-Лишние: **these, this**
+Лишние: **that, those**
 
 ## 110. Super Minds 1 · Unit 7 · Get dressed · Unit 7 Test · блок 5
 
@@ -1574,9 +1573,9 @@
 1. 1. Do you like **this** jacket?
 2. 2. Do you like **these** socks?
 
-Фишки на экране: t, t, **this**, **these**
+Фишки на экране: this, these, **that**, **those**
 
-Лишние: **this, these**
+Лишние: **that, those**
 
 ## 111. Super Minds 1 · Unit 8 · My body · Homework 3 · блок 9
 
@@ -1589,9 +1588,9 @@
 5. ✓ She **can** ride a bike.
 6. ✓ She **can** sing.
 
-Фишки на экране: c, c, c, c, c, c, **can't**, **can**
+Фишки на экране: can't, can, can, can't, can, can, **could**, **couldn't**
 
-Лишние: **can't, can**
+Лишние: **could, couldn't**
 
 ## 112. Super Minds 1 · Unit 9 · Holidays · Homework 2 · блок 8
 
@@ -1606,9 +1605,9 @@
 7. 4. A: Let's **catch** a fish.
 8. B: I'm not **sure**.
 
-Фишки на экране: r, i, m, S, p, G, c, s, **he**, **she**, **it**
+Фишки на экране: read, idea, make, Sorry, paint, Good, catch, sure, **reads**, **reading**, **makes**
 
-Лишние: **he, she, it**
+Лишние: **reads, reading, makes**
 
 ## 113. Super Minds 1 · Unit 9 · Holidays · Homework 4 · блок 8
 
@@ -1622,9 +1621,9 @@
 6. Let's go **together**.
 7. What a good **idea**!
 
-Фишки на экране: g, t, g, r, r, t, i, **he**, **she**, **it**
+Фишки на экране: go, top, good, run, race, together, idea, **goes**, **went**, **going**
 
-Лишние: **he, she, it**
+Лишние: **goes, went, going**
 
 ## 114. Super Minds 1 · Unit 9 · Holidays · Homework 6 · блок 8
 
@@ -1636,9 +1635,9 @@
 4. My name is Ben. I'm at the **beach**. I can go surfing here.
 5. My name is Tim. I'm in the **countryside**. I can see lots of trees and flowers here.
 
-Фишки на экране: c, c, m, b, c, **idea**, **sure**
+Фишки на экране: campsite, city, mountains, beach, countryside, **idea**, **sure**, **paint**
 
-Лишние: **idea, sure**
+Лишние: **idea, sure, paint**
 
 ## 115. Super Minds 1 · Unit 9 · Holidays · Homework 6 · блок 9
 
@@ -1648,7 +1647,7 @@
 2. I like the **beach**. I can look for shells and **make a sandcastle** here.
 3. I like the **campsite**. I can sleep in a tent here.
 
-Фишки на экране: m, g, b, m, c, **city**, **countryside**, **picture**
+Фишки на экране: mountains, go skiing, beach, make a sandcastle, campsite, **city**, **countryside**, **picture**
 
 Лишние: **city, countryside, picture**
 
@@ -1662,9 +1661,9 @@
 4. 4. Let's **catch** a fish. – **Sorry**, I don't want to.
 5. 5. **Let's** look for **shells**. – Good idea!
 
-Фишки на экране: l, i, p, s, e, G, c, S, L, s, **he**, **she**, **it**
+Фишки на экране: listen, idea, picture, sure, eat, Good, catch, Sorry, Let's, shells, **listens**, **listening**, **listened**
 
-Лишние: **he, she, it**
+Лишние: **listens, listening, listened**
 
 ## 117. Super Minds 2 · Unit 0 · Back to school · Homework 2 · блок 4
 
@@ -1675,9 +1674,9 @@
 3. There **is** a clock on the wall.
 4. There **are** some books on the desk.
 
-Фишки на экране: i, a, i, a, **he**, **she**
+Фишки на экране: is, are, is, are, **am**, **isn't**
 
-Лишние: **he, she**
+Лишние: **am, isn't**
 
 ## 118. Super Minds 2 · Unit 0 · Back to school · Homework 5 · блок 5
 
@@ -1688,11 +1687,11 @@
 3. I've got an **idea**!
 4. We've got **them**!
 
-Фишки на экране: b, c, i, t, **he**, **she**, **it**
+Фишки на экране: burglars, computer, idea, them, **idea**, **computer**
 
-Лишние: **he, she, it**
+Лишние: **idea, computer**
 
-## 119. Super Minds 2 · Unit 0 · Back to school · Unit 0 Test · блок 2
+## 119. Super Minds 2 · Unit 0 · Back to school · Unit 0 Test · блок 3
 
 **Перетащи is или are в пропуски**
 
@@ -1701,9 +1700,9 @@
 3. There **is** a cupboard near the door.
 4. There **are** some books in the bookcase.
 
-Фишки на экране: i, a, i, a, **he**, **she**
+Фишки на экране: is, are, is, are, **am**, **isn't**
 
-Лишние: **he, she**
+Лишние: **am, isn't**
 
 ## 120. Super Minds 2 · Unit 1 · What a day! · Homework 1 · блок 8
 
@@ -1714,9 +1713,9 @@
 3. Then I **go to school**.
 4. In the evening I **go to bed**.
 
-Фишки на экране: g, h, g, g, **get up**, **go to school**
+Фишки на экране: get up, have breakfast, go to school, go to bed, **get**, **gets**, **got**
 
-Лишние: **get up, go to school**
+Лишние: **get, gets, got**
 
 ## 121. Super Minds 2 · Unit 1 · What a day! · Homework 3 · блок 8
 
@@ -1729,9 +1728,9 @@
 5. Dan **has** dinner at six o'clock.
 6. Dan **goes** to bed at ten o'clock.
 
-Фишки на экране: g, h, g, p, h, g, **gets**, **plays**
+Фишки на экране: gets, has, goes, plays, has, goes, **have**, **had**, **haven't**
 
-Лишние: **gets, plays**
+Лишние: **have, had, haven't**
 
 ## 122. Super Minds 2 · Unit 1 · What a day! · Homework 3 · блок 10
 
@@ -1752,9 +1751,9 @@
 3. They're **under** the car.
 4. **Sorry**, Mum!
 
-Фишки на экране: t, l, u, S, **the problem**, **under**
+Фишки на экране: the problem, love, under, Sorry, **in**, **on**, **next to**
 
-Лишние: **the problem, under**
+Лишние: **in, on, next to**
 
 ## 124. Super Minds 2 · Unit 1 · What a day! · Homework 5 · блок 2
 
@@ -1766,7 +1765,7 @@
 4. She has breakfast at **8** o'clock.
 5. Her best friend's name is **Dawn**.
 
-Фишки на экране: S, 8, 7, 8, D, **Dawn**, **7**
+Фишки на экране: Shelley, 8, 7, 8, Dawn, **Dawn**, **7**
 
 Лишние: **Dawn, 7**
 
@@ -1777,7 +1776,7 @@
 1. This is a **sundial**. It's old so it's got **Roman numbers**.
 2. The **sun** makes a shadow on the sundial. To know the time, look at the **shadow** and read the Roman numbers.
 
-Фишки на экране: s, R, s, s, **Roman numbers**, **sun**
+Фишки на экране: sundial, Roman numbers, sun, shadow, **Roman numbers**, **sun**
 
 Лишние: **Roman numbers, sun**
 
@@ -1790,11 +1789,11 @@
 3. She has lunch **at** one o'clock.
 4. What **time** do you go to **bed**?
 
-Фишки на экране: W, u, o, W, e, a, t, b, **an**, **some**, **any**
+Фишки на экране: When, up, o'clock, What's, eight, at, time, bed, **Who**, **What**, **Where**
 
-Лишние: **an, some, any**
+Лишние: **Who, What, Where**
 
-## 127. Super Minds 2 · Unit 1 · What a day! · Unit 1 Test · блок 2
+## 127. Super Minds 2 · Unit 1 · What a day! · Unit 1 Test · блок 3
 
 **Заполни пропуски: выбери подходящий вариант**
 
@@ -1805,9 +1804,9 @@
 5. A: **When** do you go to school?  B: At eight o'clock.
 6. A: When **do** you play in the park?  B: Every Sunday!
 
-Фишки на экране: W, t, h, A, g, g, o, W, d, **An**, **Some**, **Any**
+Фишки на экране: What's, three, have, At, gets, go, o'clock, When, do, **has**, **had**, **haven't**
 
-Лишние: **An, Some, Any**
+Лишние: **has, had, haven't**
 
 ## 128. Super Minds 2 · Unit 2 · The zoo · Homework 2 · блок 9
 
@@ -1820,9 +1819,9 @@
 5. 5. Ben **likes** carrots.
 6. 6. Jane **doesn't like** peas.
 
-Фишки на экране: l, d, d, l, l, d, **likes**, **doesn't like**
+Фишки на экране: likes, doesn't like, doesn't like, likes, likes, doesn't like, **like**, **liked**
 
-Лишние: **likes, doesn't like**
+Лишние: **like, liked**
 
 ## 129. Super Minds 2 · Unit 2 · The zoo · Homework 3 · блок 9
 
@@ -1837,9 +1836,9 @@
 7. Does Penny like polar bears?
 8. **Yes**, she **does**!
 
-Фишки на экране: D, d, D, d, l, d, Y, d, **like**, **Yes**
+Фишки на экране: Does, doesn't, Does, doesn't, like, doesn't, Yes, does, **Do**, **Don't**, **Did**
 
-Лишние: **like, Yes**
+Лишние: **Do, Don't, Did**
 
 ## 130. Super Minds 2 · Unit 2 · The zoo · Homework 5 · блок 3
 
@@ -1847,7 +1846,7 @@
 
 1. I've got four legs, two ears, two eyes and lots of **black** and white stripes. I come from Africa, but now I live in a **zoo**. I like carrots and **grass**. I don't like bananas. I drink **water**. I've got lots of friends here. My best friend is Charlie. He's a **monkey**.
 
-Фишки на экране: b, z, g, w, m, **like**, **ocean**, **rainforest**
+Фишки на экране: black, zoo, grass, water, monkey, **like**, **ocean**, **rainforest**
 
 Лишние: **like, ocean, rainforest**
 
@@ -1862,7 +1861,7 @@
 5. 5. Does the fish live in the ocean? — **Yes, it does.**
 6. 6. Does the zebra live in the grassland? — **Yes, it does.**
 
-Фишки на экране: N, N, Y, N, Y, Y, **Yes, it does.**, **No, it doesn't.**
+Фишки на экране: No, it doesn't., No, it doesn't., Yes, it does., No, it doesn't., Yes, it does., Yes, it does., **Yes, it does.**, **No, it doesn't.**
 
 Лишние: **Yes, it does., No, it doesn't.**
 
@@ -1876,19 +1875,19 @@
 4. Fish live in the **ocean**.
 5. Crocodiles and **snakes** can live in two habitats: in the rainforest and in the grassland.
 
-Фишки на экране: g, p, r, o, s, **water**, **zoo**, **doesn't**
+Фишки на экране: grassland, polar bears, rainforest, ocean, snakes, **water**, **zoo**, **doesn't**
 
 Лишние: **water, zoo, doesn't**
 
-## 133. Super Minds 2 · Unit 2 · The zoo · Unit 2 Test · блок 2
+## 133. Super Minds 2 · Unit 2 · The zoo · Unit 2 Test · блок 3
 
 **Заполни пропуски: выбери подходящий вариант**
 
 1. The zebra **likes** apples, but it **doesn't** like bananas.
 
-Фишки на экране: l, d, **likes**, **doesn't**
+Фишки на экране: likes, doesn't, **like**, **liked**
 
-Лишние: **likes, doesn't**
+Лишние: **like, liked**
 
 ## 134. Super Minds 2 · Unit 2 · The zoo · Unit 2 Test · блок 4
 
@@ -1897,9 +1896,9 @@
 1. A: **Does** Anna like blueberries?
 2. B: Yes, she **does**. They are her favourite.
 
-Фишки на экране: D, d, **Does**, **does**
+Фишки на экране: Does, does, **Do**, **Don't**
 
-Лишние: **Does, does**
+Лишние: **Do, Don't**
 
 ## 135. Super Minds 2 · Unit 3 · My town · Homework 3 · блок 8
 
@@ -1910,9 +1909,9 @@
 3. 3. The swimming pool is **behind** Cafe Blue.
 4. 4. The cinema is **between** the school and the zoo.
 
-Фишки на экране: n, i, b, b, **he**, **she**
+Фишки на экране: next to, in front of, behind, between, **in**, **on**, **under**
 
-Лишние: **he, she**
+Лишние: **in, on, under**
 
 ## 136. Super Minds 2 · Unit 3 · My town · Homework 3 · блок 10
 
@@ -1940,9 +1939,9 @@
 5. 5. The hospital is **in front of** the museum.
 6. 6. The cinema is **behind** the sports centre.
 
-Фишки на экране: n, n, b, n, i, b, **he**, **she**
+Фишки на экране: next to, next to, between, next to, in front of, behind, **in**, **on**, **under**
 
-Лишние: **he, she**
+Лишние: **in, on, under**
 
 ## 138. Super Minds 2 · Unit 3 · My town · Homework 7 · блок 3
 
@@ -1954,9 +1953,9 @@
 4. 4. **Has** your town got a park? — **No**, it hasn't.
 5. 5. **Has** your town got a market? — **Yes**, it has.
 
-Фишки на экране: H, h, H, h, h, H, N, H, Y, **No**, **hasn't**
+Фишки на экране: Has, has, Has, hasn't, has, Has, No, Has, Yes, **Have**, **Had**, **Haven't**
 
-Лишние: **No, hasn't**
+Лишние: **Have, Had, Haven't**
 
 ## 139. Super Minds 2 · Unit 3 · My town · Unit 3 Test · блок 6
 
@@ -1964,9 +1963,9 @@
 
 1. Welcome to Greenville! It's a great town. The cinema is **between** the cafe and the shop. The park is **next to** the school. The school is **behind** the train station. The bus stop is **next to** the train station. The car parks are **in front of** the sports centre. Has Greenville got a swimming pool? Yes, it has! The swimming pool is **between** the car parks.
 
-Фишки на экране: b, n, b, n, i, b, **he**, **she**
+Фишки на экране: between, next to, behind, next to, in front of, between, **in**, **on**, **under**
 
-Лишние: **he, she**
+Лишние: **in, on, under**
 
 ## 140. Super Minds 2 · Unit 4 · Food · Homework 2 · блок 10
 
@@ -1977,9 +1976,9 @@
 3. 3. Would you like **some** beans?
 4. 4. Would you like **some** water?
 
-Фишки на экране: a, a, s, s, **an**, **some**
+Фишки на экране: a, an, some, some, **any**, **a**
 
-Лишние: **an, some**
+Лишние: **any, a**
 
 ## 141. Super Minds 2 · Unit 4 · Food · Homework 3 · блок 9
 
@@ -1989,9 +1988,9 @@
 2. 2. Are there any **apples** in the house? Yes, there **are**.
 3. 3. **Is** there **a** banana in the house? **Yes**, there is.
 
-Фишки на экране: I, N, i, a, a, I, a, Y, **He**, **She**, **It**
+Фишки на экране: Is, No, isn't, apples, are, Is, a, Yes, **Am**, **Aren't**, **Am not**
 
-Лишние: **He, She, It**
+Лишние: **Am, Aren't, Am not**
 
 ## 142. Super Minds 2 · Unit 4 · Food · Homework 4 · блок 9
 
@@ -2004,7 +2003,7 @@
 5. 5. Flash: **Eight** apples, please.
 6. 6. Whisper: Four **bad** apples!
 
-Фишки на экране: e, b, m, s, E, b, **are**, **Would**, **bread**
+Фишки на экране: everyone, bad, market, sweet, Eight, bad, **are**, **Would**, **bread**
 
 Лишние: **are, Would, bread**
 
@@ -2019,9 +2018,9 @@
 5. Dad: Yes, there are. Would you like **an** apple or **a** banana, too?
 6. Sally: Yes, **please**. I'd like a banana.
 
-Фишки на экране: l, Y, W, s, N, A, a, a, a, p, **An**, **Some**, **Any**
+Фишки на экране: like, Yes, Would, some, No, Are, any, an, a, please, **likes**, **liked**, **don't like**
 
-Лишние: **An, Some, Any**
+Лишние: **likes, liked, don't like**
 
 ## 144. Super Minds 2 · Unit 4 · Food · Homework 5 · блок 11
 
@@ -2034,9 +2033,9 @@
 5. Girl: Have you got any **bread**?
 6. Man: Yes, we have. Here you are!
 
-Фишки на экране: H, H, e, h, b, **please**, **any**
+Фишки на экране: Have you got any, How many, eggs, haven't got any, bread, **Who**, **What**, **Where**
 
-Лишние: **please, any**
+Лишние: **Who, What, Where**
 
 ## 145. Super Minds 2 · Unit 4 · Food · Homework 6 · блок 8
 
@@ -2049,9 +2048,9 @@
 5. 5. There **is** some lettuce in the salad.
 6. 6. There **aren't** any lemons in the salad.
 
-Фишки на экране: a, a, a, i, i, a, **an**, **some**
+Фишки на экране: are, are, are, is, is, aren't, **am**, **isn't**
 
-Лишние: **an, some**
+Лишние: **am, isn't**
 
 ## 146. Super Minds 2 · Unit 4 · Food · Homework 6 · блок 10
 
@@ -2064,7 +2063,7 @@
 5. 5. A watermelon is very **heavy**.
 6. 6. A grape is very **light**.
 
-Фишки на экране: w, w, w, w, h, l, **light**, **heavy**
+Фишки на экране: weighs, weighs, weighs, weighs, heavy, light, **light**, **heavy**
 
 Лишние: **light, heavy**
 
@@ -2083,9 +2082,9 @@
 9. A: Would you like **an** orange?
 10. B: Yes, please.
 
-Фишки на экране: a, s, a, s, a, **an**, **some**
+Фишки на экране: a, some, an, some, an, **any**, **a**
 
-Лишние: **an, some**
+Лишние: **any, a**
 
 ## 148. Super Minds 2 · Unit 5 · My room · Homework 1 · блок 11
 
@@ -2098,9 +2097,9 @@
 5. 5. There **is** a red lamp on the table.
 6. 6. There **are** shoes on the floor.
 
-Фишки на экране: i, a, i, a, i, a, **he**, **she**
+Фишки на экране: is, are, is, are, is, are, **am**, **isn't**
 
-Лишние: **he, she**
+Лишние: **am, isn't**
 
 ## 149. Super Minds 2 · Unit 5 · My room · Homework 2 · блок 5
 
@@ -2111,9 +2110,9 @@
 3. I like **these** posters and **those** lovely lamps.
 4. I like it so much. I think I want to camp.
 
-Фишки на экране: b, t, t, t, t, **wood**, **bookcase**
+Фишки на экране: bedroom, this, that, these, those, **wood**, **bookcase**, **under**
 
-Лишние: **wood, bookcase**
+Лишние: **wood, bookcase, under**
 
 ## 150. Super Minds 2 · Unit 5 · My room · Homework 3 · блок 5
 
@@ -2122,9 +2121,9 @@
 1. **Whose** shoes are **these**? **They're** Penny's shoes.
 2. Whose hat is **this**? **It's** Penny's hat.
 
-Фишки на экране: W, t, T, t, I, **He**, **She**
+Фишки на экране: Whose, these, They're, this, It's, **that**, **those**, **Who**
 
-Лишние: **He, She**
+Лишние: **that, those, Who**
 
 ## 151. Super Minds 2 · Unit 5 · My room · Homework 3 · блок 8
 
@@ -2136,9 +2135,9 @@
 4. 4. Whose mirror **is this**? **It's** Anna's.
 5. 5. Whose table **is this**? **It's** Ben's.
 
-Фишки на экране: W, i, a, T, a, T, i, I, i, I, **he**, **she**, **it**
+Фишки на экране: Whose, is this, are these, They're, are these, They're, is this, It's, is this, It's, **Who**, **What**, **Where**
 
-Лишние: **he, she, it**
+Лишние: **Who, What, Where**
 
 ## 152. Super Minds 2 · Unit 5 · My room · Homework 3 · блок 9
 
@@ -2151,9 +2150,9 @@
 5. 5. Whose round rug is this? **It's May's**.
 6. 6. Whose blue armchair is this? **It's Fred's**.
 
-Фишки на экране: I, I, I, I, I, I, **He**, **She**
+Фишки на экране: It's May's, It's Fred's, It's May's, It's Fred's, It's May's, It's Fred's, **It's May's**, **It's Fred's**
 
-Лишние: **He, She**
+Лишние: **It's May's, It's Fred's**
 
 ## 153. Super Minds 2 · Unit 5 · My room · Homework 3 · блок 11
 
@@ -2166,9 +2165,9 @@
 5. 5. Whose wardrobe is this? **It's Lily's**.
 6. 6. Whose mirror is this? **It's Lily's**.
 
-Фишки на экране: I, I, I, T, I, I, **He**, **She**
+Фишки на экране: It's May's, It's May's, It's Fred's, They're Fred's, It's Lily's, It's Lily's, **It's Fred's**, **They're Fred's**
 
-Лишние: **He, She**
+Лишние: **It's Fred's, They're Fred's**
 
 ## 154. Super Minds 2 · Unit 5 · My room · Homework 5 · блок 9
 
@@ -2180,7 +2179,7 @@
 4. There's a brown **bookcase** next to the table. I think there are thirteen **books** on it.
 5. I love my **bedroom**!
 
-Фишки на экране: b, r, j, w, t, p, b, b, b, **on**, **under**, **these**
+Фишки на экране: bed, rug, jeans, window, table, poster, bookcase, books, bedroom, **on**, **under**, **these**
 
 Лишние: **on, under, these**
 
@@ -2195,9 +2194,9 @@
 5. 5. There is a poster **on** the wall.
 6. 6. There is a bookcase **next to** the table.
 
-Фишки на экране: o, u, o, n, o, n, **under**, **next to**
+Фишки на экране: on, under, on, next to, on, next to, **in**, **behind**
 
-Лишние: **under, next to**
+Лишние: **in, behind**
 
 ## 156. Super Minds 2 · Unit 5 · My room · Homework 6 · блок 9
 
@@ -2209,7 +2208,7 @@
 4. My mirror is made of metal and **glass**.
 5. My armchair is made of wood and **fabric**.
 
-Фишки на экране: w, p, l, g, f, **are**, **window**, **under**
+Фишки на экране: wood, plastic, lamp, glass, fabric, **are**, **window**, **under**
 
 Лишние: **are, window, under**
 
@@ -2223,9 +2222,9 @@
 4. 4. There **are** shoes **on** the rug.
 5. 5. There **is** a lamp **next to** the bed.
 
-Фишки на экране: i, o, a, i, i, u, a, o, i, n, **he**, **she**, **it**
+Фишки на экране: is, on, are, in, is, under, are, on, is, next to, **am**, **isn't**, **aren't**
 
-Лишние: **he, she, it**
+Лишние: **am, isn't, aren't**
 
 ## 158. Super Minds 2 · Unit 5 · My room · Homework 7 · блок 10
 
@@ -2237,7 +2236,7 @@
 4. There is a white **lamp** on my table. It's made of plastic.
 5. I want to live in this bedroom!
 
-Фишки на экране: b, w, p, p, l, **are**, **in**, **on**
+Фишки на экране: bedroom, wood, pink, plastic, lamp, **are**, **in**, **on**
 
 Лишние: **are, in, on**
 
@@ -2251,7 +2250,7 @@
 4. 4. There is a small green **lamp** next to my bed on the left.
 5. 5. There is a yellow **wardrobe** on the right of my bed.
 
-Фишки на экране: b, r, m, l, w, **wood**, **these**, **that**
+Фишки на экране: bed, rug, mirror, lamp, wardrobe, **wood**, **these**, **that**
 
 Лишние: **wood, these, that**
 
@@ -2265,9 +2264,9 @@
 4. And **these** are my favourite shoes.
 5. Whose cars are **these**? They're my brother's!
 
-Фишки на экране: T, w, T, T, t, t, **Those**, **wood**
+Фишки на экране: That, wood, Those, That, these, these, **This**, **Those**, **wood**
 
-Лишние: **Those, wood**
+Лишние: **This, Those, wood**
 
 ## 161. Super Minds 2 · Unit 6 · Faces · Homework 2 · блок 7
 
@@ -2277,9 +2276,9 @@
 2. Boy: Yes, I **am**. **Are** you happy?
 3. Girl: No, I **am not**. I **am** scared.
 
-Фишки на экране: A, a, A, a, a, **An**, **Some**
+Фишки на экране: Are, am, Are, am not, am, **Is**, **Isn't**
 
-Лишние: **An, Some**
+Лишние: **Is, Isn't**
 
 ## 162. Super Minds 2 · Unit 6 · Faces · Homework 2 · блок 14
 
@@ -2292,9 +2291,9 @@
 5. 5. Are you **excited**? Yes, I am. It's my party today!
 6. 6. Are you tired? No, I'm not. I'm **sad**. I can't play football today.
 
-Фишки на экране: t, s, A, h, a, e, s, **An**, **Some**, **Any**
+Фишки на экране: tired, scared, Are, happy, angry, excited, sad, **Am**, **Is**, **Isn't**
 
-Лишние: **An, Some, Any**
+Лишние: **Am, Is, Isn't**
 
 ## 163. Super Minds 2 · Unit 6 · Faces · Homework 3 · блок 6
 
@@ -2321,7 +2320,7 @@
 4. 4. You aren't wearing your **blindfold**.
 5. 5. That's not **fair**!
 
-Фишки на экране: t, m, P, b, f, **December**, **hair**, **park**
+Фишки на экране: tug of war, medals, Pin the tail on the donkey, blindfold, fair, **December**, **hair**, **park**
 
 Лишние: **December, hair, park**
 
@@ -2333,9 +2332,9 @@
 2. 2. Please come to my **birthday** party on Saturday. It's in the village hall. You can bring your **sister**. The party starts at three o'clock in the **afternoon**.
 3. 3. Please come to my birthday party on Saturday 6th **May**. The party is in our garden, at my house — **38** Franklin Road. It starts at **eleven** o'clock in the morning.
 
-Фишки на экране: p, f, b, s, a, M, 3, e, **an**, **some**, **any**
+Фишки на экране: park, football, birthday, sister, afternoon, May, 38, eleven, **football**, **afternoon**
 
-Лишние: **an, some, any**
+Лишние: **football, afternoon**
 
 ## 166. Super Minds 2 · Unit 6 · Faces · Homework 7 · блок 7
 
@@ -2346,11 +2345,11 @@
 3. 3. They can have long or **short** hair.
 4. 4. They can be in photos, paper collages, paintings or **drawings**.
 
-Фишки на экране: s, b, s, d, **short**, **sad**
+Фишки на экране: sad, brown eyes, short, drawings, **short**, **sad**
 
 Лишние: **short, sad**
 
-## 167. Super Minds 2 · Unit 6 · Faces · Unit 6 Test · блок 2
+## 167. Super Minds 2 · Unit 6 · Faces · Unit 6 Test · блок 3
 
 **Посмотри на картинку и заполни пропуски**
 
@@ -2359,7 +2358,7 @@
 3. 3. He has got orange **hair** and two purple **ears**.
 4. 4. He has got white teeth in his big **mouth**.
 
-Фишки на экране: g, e, h, e, m, **drawings**, **medals**
+Фишки на экране: glasses, eyes, hair, ears, mouth, **drawings**, **medals**
 
 Лишние: **drawings, medals**
 
@@ -2372,9 +2371,9 @@
 3. 3. I would like to **drive** a lorry.
 4. 4. I would like **to** ride a scooter.
 
-Фишки на экране: w, l, d, t, **to**, **like**
+Фишки на экране: would, like, drive, to, **will**, **shall**, **likes**
 
-Лишние: **to, like**
+Лишние: **will, shall, likes**
 
 ## 169. Super Minds 2 · Unit 7 · Transport · Homework 2 · блок 9
 
@@ -2387,9 +2386,9 @@
 5. 5. I'd like to **sail** around the world.
 6. 6. I'd like to **drive** a bus.
 
-Фишки на экране: g, l, s, f, s, d, **would**, **to**, **bike**
+Фишки на экране: go, like, see, fly, sail, drive, **goes**, **went**, **going**
 
-Лишние: **would, to, bike**
+Лишние: **goes, went, going**
 
 ## 170. Super Minds 2 · Unit 7 · Transport · Homework 3 · блок 11
 
@@ -2400,9 +2399,9 @@
 3. Boy: Are you **driving** a big lorry?
 4. Girl: Yes, I **am**!
 
-Фишки на экране: a, y, n, d, a, **an**, **some**, **any**
+Фишки на экране: are, you, not, driving, am, **is**, **isn't**, **aren't**
 
-Лишние: **an, some, any**
+Лишние: **is, isn't, aren't**
 
 ## 171. Super Minds 2 · Unit 7 · Transport · Homework 5 · блок 4
 
@@ -2413,7 +2412,7 @@
 3. 3. My cousin Sara lives next to me. I ride my **bike**.
 4. 4. My favourite place is Italy. We go there by **car**.
 
-Фишки на экране: p, t, b, c, **train**, **bike**
+Фишки на экране: plane, train, bike, car, **train**, **bike**
 
 Лишние: **train, bike**
 
@@ -2428,9 +2427,9 @@
 5. 5. A bus goes **on land**.
 6. 6. A plane goes **in the air**.
 
-Фишки на экране: i, o, o, o, o, i, **he**, **she**
+Фишки на экране: in the air, on water, on land, on water, on land, in the air, **on land**, **on water**
 
-Лишние: **he, she**
+Лишние: **on land, on water**
 
 ## 173. Super Minds 2 · Unit 7 · Transport · Homework 7 · блок 7
 
@@ -2443,7 +2442,7 @@
 5. 4. a bus — in the air: **no**, on water: **no**, on land: **yes**
 6. 5. a lorry — in the air: **no**, on water: **no**, on land: **yes**
 
-Фишки на экране: y, n, n, n, y, n, n, n, y, n, n, y, n, n, y, **yes**, **no**
+Фишки на экране: yes, no, no, no, yes, no, no, no, yes, no, no, yes, no, no, yes, **yes**, **no**
 
 Лишние: **yes, no**
 
@@ -2457,9 +2456,9 @@
 4. 4. It is big and it carries boxes — it's a **lorry**.
 5. 5. It is yellow and it takes people to the airport — it's a **taxi**.
 
-Фишки на экране: b, b, b, l, t, **see**, **plane**
+Фишки на экране: boat, bike, bus, lorry, taxi, **see**, **plane**, **you**
 
-Лишние: **see, plane**
+Лишние: **see, plane, you**
 
 ## 175. Super Minds 2 · Unit 8 · Sports · Homework 2 · блок 6
 
@@ -2470,9 +2469,9 @@
 3. **Riding** is great.
 4. Swimming is fun. = Swimming's fun.
 
-Фишки на экране: i, a, F, R, **he**, **she**, **it**
+Фишки на экране: ing, activities, Flying, Riding, **Ride**, **Rides**, **Rode**
 
-Лишние: **he, she, it**
+Лишние: **Ride, Rides, Rode**
 
 ## 176. Super Minds 2 · Unit 8 · Sports · Homework 3 · блок 8
 
@@ -2485,9 +2484,9 @@
 5. Matt: So **do I**. I **like** going to the lake on my bike and swimming.
 6. Jane: Me **too**!
 
-Фишки на экране: d, d, r, d, l, t, **do**, **are**, **racket**
+Фишки на экране: doing, don't, riding, do I, like, too, **do**, **does**, **doesn't**
 
-Лишние: **do, are, racket**
+Лишние: **do, does, doesn't**
 
 ## 177. Super Minds 2 · Unit 8 · Sports · Homework 3 · блок 11
 
@@ -2499,9 +2498,9 @@
 4. 4. I like swimming. — So **do** I!
 5. 5. I like hockey. — I **don't**.
 
-Фишки на экране: p, w, d, d, d, **riding**, **fishing**
+Фишки на экране: playing, watching, doing, do, don't, **does**, **doesn't**, **did**
 
-Лишние: **riding, fishing**
+Лишние: **does, doesn't, did**
 
 ## 178. Super Minds 2 · Unit 8 · Sports · Homework 5 · блок 5
 
@@ -2514,9 +2513,9 @@
 5. 5. A boy is **fishing** near the rocks.
 6. 6. A child is **flying** a kite.
 
-Фишки на экране: a, i, p, p, f, f, **an**, **some**, **any**
+Фишки на экране: are, is, playing, painting, fishing, flying, **am**, **isn't**, **aren't**
 
-Лишние: **an, some, any**
+Лишние: **am, isn't, aren't**
 
 ## 179. Super Minds 2 · Unit 8 · Sports · Homework 6 · блок 6
 
@@ -2528,7 +2527,7 @@
 4. 4. For volleyball, we need a **net**.
 5. 5. For table tennis, we need a **bat**.
 
-Фишки на экране: r, h, g, n, b, **hockey**, **are**, **don't**
+Фишки на экране: racket, helmet, goggles, net, bat, **hockey**, **are**, **don't**
 
 Лишние: **hockey, are, don't**
 
@@ -2543,9 +2542,9 @@
 5. 5. I like hockey. — I **don't**.
 6. 6. You need a **racket** to play tennis.
 
-Фишки на экране: r, P, w, S, d, r, **too**, **do**, **are**
+Фишки на экране: riding, Playing, watching, So, don't, racket, **ride**, **rides**, **rode**
 
-Лишние: **too, do, are**
+Лишние: **ride, rides, rode**
 
 ## 181. Super Minds 2 · Unit 8 · Sports · Unit 8 Test · блок 4
 
@@ -2557,9 +2556,9 @@
 4. 4. You run, jump and throw, and you do it on a track — **athletics**.
 5. 5. You need skates and ice to do this sport — **hockey**.
 
-Фишки на экране: s, t, t, a, h, **an**, **some**, **any**
+Фишки на экране: swimming, tennis, table tennis, athletics, hockey, **swim**, **swims**, **swam**
 
-Лишние: **an, some, any**
+Лишние: **swim, swims, swam**
 
 ## 182. Super Minds 2 · Unit 9 · Summer holidays · Homework 1 · блок 6
 
@@ -2575,9 +2574,9 @@
 8. 8. We visit our **cousins** at the weekend.
 9. 9. She keeps a **scrapbook** with photos and stickers.
 
-Фишки на экране: c, g, l, t, c, r, g, c, s, **you**, **rubbish**, **have**
+Фишки на экране: comic, go, learn, tree, camping, riding, garden, cousins, scrapbook, **goes**, **went**, **going**
 
-Лишние: **you, rubbish, have**
+Лишние: **goes, went, going**
 
 ## 183. Super Minds 2 · Unit 9 · Summer holidays · Homework 2 · блок 9
 
@@ -2590,9 +2589,9 @@
 5. 5. **Can** we have pizza for dinner on Friday?
 6. 6. Can we go **swimming** tomorrow evening?
 
-Фишки на экране: h, b, h, v, C, s, **Recycle**, **you**, **garden**
+Фишки на экране: have, build, horse, visit, Can, swimming, **has**, **had**, **haven't**
 
-Лишние: **Recycle, you, garden**
+Лишние: **has, had, haven't**
 
 ## 184. Super Minds 2 · Unit 9 · Summer holidays · Homework 3 · блок 6
 
@@ -2620,9 +2619,9 @@
 5. 5. I'd like to **keep** a scrapbook.
 6. 6. I'd like to **take** riding lessons.
 
-Фишки на экране: b, g, l, v, k, t, **horse**, **you**, **garden**
+Фишки на экране: build, go, learn, visit, keep, take, **goes**, **went**, **going**
 
-Лишние: **horse, you, garden**
+Лишние: **goes, went, going**
 
 ## 186. Super Minds 2 · Unit 9 · Summer holidays · Homework 6 · блок 7
 
@@ -2633,7 +2632,7 @@
 3. 3. **Recycle** your plastic bottles.
 4. 4. Look at the animals in their natural **environment**.
 
-Фишки на экране: r, p, R, e, **environment**, **Recycle**
+Фишки на экране: rubbish, path, Recycle, environment, **environment**, **Recycle**
 
 Лишние: **environment, Recycle**
 
@@ -2648,9 +2647,9 @@
 5. Can we go **fishing**?
 6. **Yes**, of course we can.
 
-Фишки на экране: h, y, t, c, c, f, Y, **have**, **garden**, **go**
+Фишки на экране: house, you, take, course, can, fishing, Yes, **he**, **she**, **it**
 
-Лишние: **have, garden, go**
+Лишние: **he, she, it**
 
 ## 188. Super Minds 3 · Unit 1 · School · Homework 2 · блок 2
 
@@ -2682,9 +2681,9 @@
 5. 5. Oliver wants to start a **puzzle club** at school.
 6. 6. Everyone **likes** Oliver's idea.
 
-Фишки на экране: f, n, d, c, p, l, **late**, **great**
+Фишки на экране: football and computer games, numbers and dates, day, computer, puzzle club, likes, **like**, **liked**, **don't like**
 
-Лишние: **late, great**
+Лишние: **like, liked, don't like**
 
 ## 190. Super Minds 3 · Unit 2 · Food · Homework 1 · блок 4
 
@@ -2697,9 +2696,9 @@
 5. 5. You drink this, it’s sweet. — **apple juice**!
 6. 6. It’s usually hot and you need a spoon to eat it. — **soup**!
 
-Фишки на экране: r, v, c, w, a, s, **an**, **some**, **any**
+Фишки на экране: rolls, vegetables, cheese, water, apple juice, soup, **vegetables**, **apple juice**
 
-Лишние: **an, some, any**
+Лишние: **vegetables, apple juice**
 
 ## 191. Super Minds 3 · Unit 2 · Food · Homework 2 · блок 5
 
@@ -2715,9 +2714,9 @@
 8. Alice: Is there anything else in your lunch box?
 9. Kate: Yes, there’s **some** water too.
 
-Фишки на экране: s, a, a, a, s, **an**, **some**
+Фишки на экране: some, any, any, any, some, **a**, **an**
 
-Лишние: **an, some**
+Лишние: **a, an**
 
 ## 192. Super Minds 3 · Unit 2 · Food · Homework 2 · блок 9
 
@@ -2727,9 +2726,9 @@
 2. **Is** there **any** apple juice in your basket? Yes, there **is** **some** apple juice.
 3. **Are** there **any** tomatoes? No, there **aren’t** **any** tomatoes.
 
-Фишки на экране: A, a, a, s, I, a, i, s, A, a, a, a, **An**, **Some**
+Фишки на экране: Are, any, are, some, Is, any, is, some, Are, any, aren’t, any, **a**, **an**, **Am**
 
-Лишние: **An, Some**
+Лишние: **a, an, Am**
 
 ## 193. Super Minds 3 · Unit 2 · Food · Homework 2 · блок 10
 
@@ -2744,7 +2743,7 @@
 7. Yes, there are lots of yummy things,
 8. For me and my friend Pam!
 
-Фишки на экране: t, j, **tomatoes**, **jam**
+Фишки на экране: tomatoes, jam, **tomatoes**, **jam**
 
 Лишние: **tomatoes, jam**
 
@@ -2759,9 +2758,9 @@
 5. Jack: Shall we **have** some salad with it?
 6. Sara: Yes, please! I like chicken with salad.
 
-Фишки на экране: S, G, a, O, h, **an**, **some**, **any**
+Фишки на экране: Shall, Good, about, OK, have, **Would**, **Will**, **has**
 
-Лишние: **an, some, any**
+Лишние: **Would, Will, has**
 
 ## 195. Super Minds 3 · Unit 2 · Food · Homework 4 · блок 5
 
@@ -2772,9 +2771,9 @@
 3. We can **make some tea for Buster**.
 4. Do you want **any help**?
 
-Фишки на экране: c, t, m, a, **an**, **some**, **any**
+Фишки на экране: call the police, take him to the vet, make some tea for Buster, any help, **make some tea for Buster**, **call the police**
 
-Лишние: **an, some, any**
+Лишние: **make some tea for Buster, call the police**
 
 ## 196. Super Minds 3 · Unit 2 · Food · Homework 5 · блок 2
 
@@ -2789,9 +2788,9 @@
 7. Tom: Shall I help you?
 8. Mary: No, thanks. **I think** **I’ve got it**.
 
-Фишки на экране: W, I, I, **He**, **She**
+Фишки на экране: What’s the matter, I think, I’ve got it, **What’s the matter**, **I’ve got it**
 
-Лишние: **He, She**
+Лишние: **What’s the matter, I’ve got it**
 
 ## 197. Super Minds 3 · Unit 2 · Food · Homework 6 · блок 5
 
@@ -2802,7 +2801,7 @@
 3. What’s for dinner at your home?
 4. Mark
 
-Фишки на экране: l, s, s, r, f, **chips**, **is**, **vegetables**
+Фишки на экране: leaves, stems, seeds, roots, fruit, **chips**, **is**, **vegetables**
 
 Лишние: **chips, is, vegetables**
 
@@ -2814,7 +2813,7 @@
 2. juice: **fruit**, **stems**
 3. salad: **fruit**, **seeds**
 
-Фишки на экране: s, l, f, s, f, s, **seeds**, **leaves**
+Фишки на экране: stems, leaves, fruit, stems, fruit, seeds, **seeds**, **leaves**
 
 Лишние: **seeds, leaves**
 
@@ -2824,7 +2823,7 @@
 
 1. My **favourite** dinner is chicken, peas and **chips**. I have **dinner** at 7 **o’clock**. I **don’t** like fish and rice.
 
-Фишки на экране: f, c, d, o, d, **any**, **cheese**, **about**
+Фишки на экране: favourite, chips, dinner, o’clock, don’t, **any**, **cheese**, **about**
 
 Лишние: **any, cheese, about**
 
@@ -2855,9 +2854,9 @@
 6. 6. My brother **never** feeds the cat.
 7. 7. I **never** cook.
 
-Фишки на экране: n, u, a, s, n, n, n, **an**, **some**, **any**
+Фишки на экране: never, usually, always, sometimes, never, never, never, **often**, **always**, **usually**
 
-Лишние: **an, some, any**
+Лишние: **often, always, usually**
 
 ## 202. Super Minds 3 · Unit 3 · At home · Homework 6 · блок 4
 
@@ -2865,7 +2864,7 @@
 
 1. There is a **shoemaker** who works very hard. One night, he cuts some **leather** and leaves it on the kitchen table. In the morning, there are ten pairs of beautiful shoes. The **next** morning there are twenty pairs of beautiful shoes. Every night, he leaves leather on the table and **every** morning there are beautiful new shoes. Soon, everyone in the town wants more shoes from the shoemaker. But the shoemaker **doesn’t** know who makes the shoes. One night he hides under a table and sees five elves making shoes. They are wearing **old** clothes. The shoemaker makes nice clothes for the elves. The elves take the clothes but they don’t come back to make new shoes. The shoemaker doesn’t mind because he wants the elves to be **happy**.
 
-Фишки на экране: s, l, n, e, d, o, h, **usually**, **never**
+Фишки на экране: shoemaker, leather, next, every, doesn’t, old, happy, **usually**, **never**
 
 Лишние: **usually, never**
 
@@ -2893,9 +2892,9 @@
 4. 4. ‘Lucy! Where are you **going**?’
 5. 5. Lucy and Ben are really **high** on the Pirate Ship.
 
-Фишки на экране: l, d, n, g, h, **below**, **opposite**, **above**
+Фишки на экране: letter, dog, near, going, high, **in**, **on**, **under**
 
-Лишние: **below, opposite, above**
+Лишние: **in, on, under**
 
 ## 205. Super Minds 3 · Unit 4 · In the town · Homework 7 · блок 7
 
@@ -2917,9 +2916,9 @@
 
 1. Yesterday **was** a busy day! We **were** in the park in the morning. There **was** a football match, but there **weren’t** many goals. Only one! In the afternoon we **were** at my cousin’s house. There **were** cheese sandwiches, but there **wasn’t** any cake this time. In the evening we **were** at the cinema for that new film about life under the sea. It **was** interesting! We all **were** very tired at the end of the day.
 
-Фишки на экране: w, w, w, w, w, w, w, w, w, w, **wasn’t**, **weren’t**
+Фишки на экране: was, were, was, weren’t, were, were, wasn’t, were, was, were, **wasn't**, **weren't**
 
-Лишние: **wasn’t, weren’t**
+Лишние: **wasn't, weren't**
 
 ## 207. Super Minds 3 · Unit 5 · Under the sea · Homework 3 · блок 2
 
@@ -2930,7 +2929,7 @@
 3. 3. The **turtle** hid inside its shell.
 4. 4. The **starfish** were all very scared.
 
-Фишки на экране: C, t, s, **turtle**, **Crocorox**
+Фишки на экране: Crocorox, turtle, starfish, **turtle**, **Crocorox**
 
 Лишние: **turtle, Crocorox**
 
@@ -2959,9 +2958,9 @@
 5. 5. «**Were** your friends on the beach?» — «No, they **weren’t**. It was too cold.»
 6. 6. «Where **were** Joe and Bill on Saturday afternoon?» — «I think they were at the cinema.»
 
-Фишки на экране: w, w, W, w, w, W, w, W, w, W, w, w, **wasn’t**, **were**
+Фишки на экране: was, was, Was, wasn’t, was, Were, weren’t, Was, was, Were, weren’t, were, **wasn't**, **weren't**
 
-Лишние: **wasn’t, were**
+Лишние: **wasn't, weren't**
 
 ## 210. Super Minds 3 · Unit 5 · Under the sea · Homework 7 · блок 3
 
@@ -2978,9 +2977,9 @@
 9. 7. There **aren’t** any fish in the sea.
 10. 8. Paul **isn’t** happy.
 
-Фишки на экране: w, w, w, w, i, i, a, i, **he**, **she**
+Фишки на экране: was, were, were, was, isn’t, is, aren’t, isn’t, **wasn't**, **weren't**, **am**
 
-Лишние: **he, she**
+Лишние: **wasn't, weren't, am**
 
 ## 211. Super Minds 3 · Unit 6 · Gadgets · Homework 1 · блок 4
 
@@ -2991,7 +2990,7 @@
 3. 3. A: Hello, can I help you? B: Yes, I’d like a torch and an electric toothbrush, please. A: That’s £**20**.
 4. 4. A: Hello, can I help you? B: Yes, I’d like a tablet and a walkie-talkie, please. A: That’s £**115**.
 
-Фишки на экране: 3, 2, 2, 1, **115**, **20**
+Фишки на экране: 325, 200, 20, 115, **115**, **20**
 
 Лишние: **115, 20**
 
@@ -3008,7 +3007,7 @@
 7. 4. A: What happens when you press the green button?
 8. B: The **phone** comes on. I use it to **phone someone**.
 
-Фишки на экране: s, s, h, f, f, p, p, **the quietest**, **the happiest**, **digital radio**
+Фишки на экране: see everything, song, have fun, fan, feel colder, phone, phone someone, **the quietest**, **the happiest**, **digital radio**
 
 Лишние: **the quietest, the happiest, digital radio**
 
@@ -3018,7 +3017,7 @@
 
 1. Jack can run, he can run very fast, he’s the fastest (fast) boy in school. And Jane tells jokes like no one else, she’s **the funniest** (funny) and she’s cool. Robert’s **the happiest** (happy) — a friendly boy, he laughs and smiles all day, while Sally’s **the quietest** (quiet), she doesn’t speak up, she says she’s got nothing to say. **The best** (good) student in our year is Beth McBeth — she’s with me, I’m going to tell her everything and introduce Class 6C.
 
-Фишки на экране: t, t, t, T, **the quietest**, **the happiest**
+Фишки на экране: the funniest, the happiest, the quietest, The best, **the quietest**, **the happiest**
 
 Лишние: **the quietest, the happiest**
 
@@ -3031,7 +3030,7 @@
 3. 3. Where is the bicycle? — **Behind the tree**.
 4. 4. What can you see on the table? — **Walkie-talkies**.
 
-Фишки на экране: t, T, B, W, **three**, **Behind the tree**
+Фишки на экране: three, T-shirt, Behind the tree, Walkie-talkies, **three**, **Behind the tree**
 
 Лишние: **three, Behind the tree**
 
@@ -3045,7 +3044,7 @@
 4. 4. We saw some bats sleeping on the **cave ceiling**.
 5. 5. Dad had an old oil **lamp** so we could see in the dark.
 
-Фишки на экране: c, t, r, c, l, **phone**, **fan**, **song**
+Фишки на экране: charcoal, twig, rock powder, cave ceiling, lamp, **phone**, **fan**, **song**
 
 Лишние: **phone, fan, song**
 
@@ -3059,7 +3058,7 @@
 4. 4. We use it to study or work in the internet — **laptop**.
 5. 5. We use it when it is dark or at night — **torch**.
 
-Фишки на экране: l, d, m, l, t, **fan**, **charcoal**, **twig**
+Фишки на экране: lift, digital radio, mobile phone, laptop, torch, **fan**, **charcoal**, **twig**
 
 Лишние: **fan, charcoal, twig**
 
@@ -3070,9 +3069,9 @@
 1. Yesterday my friend and I **were** in the park. Suddenly there was this big, black dog. Jonathan **looked** at its eyes. ‘Go away!’ he **shouted**.
 2. On Sunday, Sue **visited** her grandma. Grandma **was** very happy with the flowers and the cake. She **smiled** a lot. Sue and her grandma **listened** to a piano concert together.
 
-Фишки на экране: w, l, s, v, w, s, l, **walked**, **helped**, **swallowed**
+Фишки на экране: were, looked, shouted, visited, was, smiled, listened, **wasn't**, **weren't**, **look**
 
-Лишние: **walked, helped, swallowed**
+Лишние: **wasn't, weren't, look**
 
 ## 218. Super Minds 3 · Unit 7 · At the doctor’s · Homework 3 · блок 2
 
@@ -3086,9 +3085,9 @@
 6. At the market a box of apples **landed** on her knee.
 7. It was a bad day.
 
-Фишки на экране: w, s, g, w, l, w, l, **visited**, **smiled**, **listened**
+Фишки на экране: was, swallowed, got, was, looked up, walked, landed, **were**, **wasn't**, **weren't**
 
-Лишние: **visited, smiled, listened**
+Лишние: **were, wasn't, weren't**
 
 ## 219. Super Minds 3 · Unit 7 · At the doctor’s · Homework 4 · блок 4
 
@@ -3104,9 +3103,9 @@
 8. 8. come → **came**
 9. 9. say → **said**
 
-Фишки на экране: h, w, f, a, w, g, d, c, s, **an**, **some**, **any**
+Фишки на экране: had, went, felt, ate, woke up, gave, drank, came, said, **have**, **has**, **haven't**
 
-Лишние: **an, some, any**
+Лишние: **have, has, haven't**
 
 ## 220. Super Minds 3 · Unit 7 · At the doctor’s · Homework 4 · блок 5
 
@@ -3114,9 +3113,9 @@
 
 1. Last Saturday, Joe Freeze, the small ice-cream monster, woke up at half past eight. He **had** a terrible headache. He **went** into his father’s bedroom. His father **gave** him some medicine. Then Joe said, ‘Can I **have** some ice cream?’ ‘Of course’, he **said**. Joe had some ice-cream and he **felt** better.
 
-Фишки на экране: h, w, g, h, s, f, **came**, **drank**, **ate**
+Фишки на экране: had, went, gave, have, said, felt, **has**, **haven't**, **hasn't**
 
-Лишние: **came, drank, ate**
+Лишние: **has, haven't, hasn't**
 
 ## 221. Super Minds 3 · Unit 7 · At the doctor’s · Homework 6 · блок 4
 
@@ -3124,9 +3123,9 @@
 
 1. Emma liked swimming and riding her bike. Emma’s headache got worse and worse and she **felt** very ill. The doctor **said** Emma needed an operation. After the operation, Emma couldn’t remember how to do anything. She had to use a wheelchair or crutches. Emma didn’t try to walk because she was very tired. One day Emma and her parents **visited** the Helper Dog Project. One of the big dogs came to Emma and put his paw on Emma’s leg. His name was Jasper. He and Emma became best friends. Jasper **helped** Emma and she slowly **learned** to walk again with no crutches. Last week a magazine gave Jasper a big prize: The Best Animal of the Year! Emma said to Jasper, ‘You are now the most famous dog in the world!’ Jasper put his paw on Emma’s leg. She **remembered** the first time she saw Jasper and smiled.
 
-Фишки на экране: f, s, v, h, l, r, **landed**, **smiled**, **swallowed**
+Фишки на экране: felt, said, visited, helped, learned, remembered, **feel**, **feels**, **feeling**
 
-Лишние: **landed, smiled, swallowed**
+Лишние: **feel, feels, feeling**
 
 ## 222. Super Minds 3 · Unit 7 · At the doctor’s · Homework 6 · блок 5
 
@@ -3137,9 +3136,9 @@
 3. 3. **George** instead of **Jasper**.
 4. 4. **Film** instead of **Animal**.
 
-Фишки на экране: s, b, G, J, F, A, **An**, **Some**, **Any**
+Фишки на экране: smallest, biggest, George, Jasper, Film, Animal, **bigger**, **smaller**, **older**
 
-Лишние: **An, Some, Any**
+Лишние: **bigger, smaller, older**
 
 ## 223. Super Minds 3 · Unit 8 · Countries · Homework 6 · блок 2
 
@@ -3168,7 +3167,7 @@
 4. 3. The beach was very: **clean**
 5. 4. She stayed for one or two: **hours**
 
-Фишки на экране: h, f, c, h, **hours**, **clean**
+Фишки на экране: hungry, fish, clean, hours, **hours**, **clean**
 
 Лишние: **hours, clean**
 
@@ -3178,7 +3177,7 @@
 
 1. The weather was terrible yesterday. It was cold and **foggy** in the morning. Then there was no sun because it was **cloudy**. At lunchtime it was very **rainy**, so all my things got wet. And then at about 5 o’clock the **thunderstorm** started. There was lots of **lightning** in the sky. I was quite scared because I was in a tent, camping! And I didn’t have an **umbrella** or a **raincoat** to wear. And I didn’t have any **boots** for my feet. It was awful!
 
-Фишки на экране: f, c, r, t, l, u, r, b, **game**, **hear**, **treasure**
+Фишки на экране: foggy, cloudy, rainy, thunderstorm, lightning, umbrella, raincoat, boots, **game**, **hear**, **treasure**
 
 Лишние: **game, hear, treasure**
 
@@ -3193,7 +3192,7 @@
 5. 5. On Friday I’m going to **fly a kite**.
 6. 6. On Sunday I’m going to **ride a horse**.
 
-Фишки на экране: w, c, p, f, r, **a river**, **the sea**, **puppet show**
+Фишки на экране: watch TV, cook food, play tennis, fly a kite, ride a horse, **a river**, **the sea**, **puppet show**
 
 Лишние: **a river, the sea, puppet show**
 
@@ -3203,7 +3202,7 @@
 
 1. Ben and Lucy go to the castle. They see Horax and Zelda near a door. The door has a **message** with a missing word above it. Horax and Zelda need the letters. They **hear** Ben and they get the children. Ben gives Zelda the letters. Buster pulls off Horax’s **glasses**. Horax is Mr Williams, the librarian! Horax makes the word ‘**finders**’ and Zelda writes it above the door. Horax and Zelda try to go in, but they can’t. Ben and Lucy make the word ‘**friends**’. They go in and find the **treasure**.
 
-Фишки на экране: m, h, g, f, f, t, **don’t**, **thunderstorm**, **raincoat**
+Фишки на экране: message, hear, glasses, finders, friends, treasure, **don’t**, **thunderstorm**, **raincoat**
 
 Лишние: **don’t, thunderstorm, raincoat**
 
@@ -3217,9 +3216,9 @@
 4. Dad switched on the TV. ‘There’s going to be a lot of **rain** in Florida for the next fourteen days,’ said the man on TV. ‘It’s our holiday. We can’t swim or see fish in the rain! It’s going to be **boring**,’ Liam said.
 5. ‘We can have fun in our room. We can read, play games and listen to music,’ said Mum. Two weeks later, their holiday was finished. ‘I **don’t** want to go home, Mum,’ Liam said. ‘It was a beautiful holiday!’ ‘Let’s play another **game**,’ said Mum. Dad went to get their games box. ‘Hooray!’ shouted Liam.
 
-Фишки на экране: f, g, t, r, b, d, g, **umbrella**, **cloudy**, **foggy**
+Фишки на экране: fantastic, going, thunderstorm, rain, boring, don’t, game, **go**, **goes**, **went**
 
-Лишние: **umbrella, cloudy, foggy**
+Лишние: **go, goes, went**
 
 ## 229. Super Minds 3 · Unit 9 · Weather · Homework 6 · блок 5
 
@@ -3230,9 +3229,9 @@
 3. 3. **a thunderstorm** instead of **a lot of rain**
 4. 4. **fantastic** instead of **boring**
 
-Фишки на экране: a, t, a, a, f, b, **an**, **some**, **any**
+Фишки на экране: a river, the sea, a thunderstorm, a lot of rain, fantastic, boring, **watch TV**, **puppet show**, **cook food**
 
-Лишние: **an, some, any**
+Лишние: **watch TV, puppet show, cook food**
 
 ## 230. Super Minds 3 · Unit 9 · Weather · Homework 7 · блок 4
 
@@ -3244,7 +3243,7 @@
 4. Yours truly,
 5. Sandra
 
-Фишки на экране: c, s, p, c, p, d, **swimming boots**, **cart**
+Фишки на экране: crowded, swimming boots, picnic basket, cart, puppet show, donkey rides, **swimming boots**, **cart**
 
 Лишние: **swimming boots, cart**
 
@@ -3258,9 +3257,9 @@
 4. 4. We **aren’t going to have** fish and chips for dinner.
 5. 5. Dad’s **going to build** a tree house.
 
-Фишки на экране: i, g, a, g, **he**, **she**
+Фишки на экране: isn’t going to rain, going to cook, aren’t going to have, going to build, **isn’t going to rain**, **aren’t going to have**
 
-Лишние: **he, she**
+Лишние: **isn’t going to rain, aren’t going to have**
 
 ## 232. Super Minds 3 · Unit 9 · Weather · Homework 7 · блок 11
 
@@ -3272,11 +3271,11 @@
 4. 4. Is your sister **going to give** you a birthday present? (give)
 5. 5. Are we **going to have** pizza tonight? (have)
 
-Фишки на экране: g, g, g, g, **going to sleep**, **going to help**
+Фишки на экране: going to sleep, going to help, going to give, going to have, **going to sleep**, **going to help**
 
 Лишние: **going to sleep, going to help**
 
-## 233. Super Minds 3 · Final Test · Final Test · блок 2
+## 233. Super Minds 3 · Final Test · Final Test · блок 3
 
 **READING & WRITING. Прочитай предложения и заполни пропуски**
 
@@ -3288,9 +3287,9 @@
 6. 6. We eat it for lunch, it is hot with vegetables and meat. **soup**
 7. 7. You can use it to travel between floors in the building. **a lift**
 
-Фишки на экране: c, a, c, a, a, s, a, **an**, **some**
+Фишки на экране: cheese, a stomach, coffee, a cinema, a dolphin, soup, a lift, **living room**, **a cake**
 
-Лишние: **an, some**
+Лишние: **living room, a cake**
 
 ## 234. Super Minds 3 · Final Test · Final Test · блок 5
 
@@ -3301,6 +3300,6 @@
 3. 3. The clown **smiled** at Jim.
 4. 4. The clown was Jim’s **dad**.
 
-Фишки на экране: a, l, s, d, **an**, **some**, **any**
+Фишки на экране: a cake, living room, smiled, dad, **smile**, **smiles**, **smiling**
 
-Лишние: **an, some, any**
+Лишние: **smile, smiles, smiling**
