@@ -24,12 +24,13 @@ SpeechKit (голос `john`, en-US) читает часть слов непра
 | cough | «cuff» | coff |
 | TV | «div», «to» (и `T V`, `T.V.` тоже) | tee vee |
 | recipe | «rasik» | ressipee |
-| café | «calf» | caffay |
+| café, cafe | «calf», «cave» | caffay |
 | anchor | «answer» | anker |
 | library (в конце фразы) | «livery» | lybrary |
 | bowl | «ball» | bowle |
 | Liam | «Lime», «Lam» | Leeam |
 | Jim | «Yim» | Jimm |
+| Amy | «Emma» — как контрольное `Emma` | Aymee |
 | bus (в конце фразы) | «buzzer» | buss |
 
 Как нашли: каждую запись прогоняли через распознавание речи (faster-whisper
