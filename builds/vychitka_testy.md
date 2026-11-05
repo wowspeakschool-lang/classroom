@@ -534,3 +534,29 @@ listened · cooked · went · had · was/were`).
 Проверили заодно все записи всех курсов: больше битых ссылок на звук и видео
 нет нигде, кроме шести мест в Wow Dragon 2 (ДЗ 47, 49, 50) — там синтезированные
 файлы пропали из хранилища, лечится повторным «Озвучить пачкой».
+
+## Добавленные разделы тестов — 05.11.2026 🟥
+
+По решению «в каждом тесте должны быть диктант, чтение, аудирование и
+говорение» (кроме SM0 и Wow Dragon) проверены все 69 тестов. Не хватало
+разделов в четырёх; они добавлены. Посмотрите новые задания глазами.
+
+| № | тест | блок | что добавлено и что посмотреть |
+|---|---|---|---|
+| 1 | SM1 · Unit 0 Test | 3 | ✍️ Диктант: пять цветов (red, blue, green, yellow, orange). Картинка + русское слово + подсказка с пропущенными гласными — юнит самый первый, слово целиком ребёнок ещё не напишет |
+| 2 | SM1 · Unit 0 Test | 8 | 📖 Чтение: две реплики героев (Misty и Flash) и четыре «верно / неверно». Текст очень короткий — скажите, не рано ли чтение в нулевом юните |
+| 3 | SM1 · Unit 1 Test | 9 | 📖 Чтение: «мой школьный рюкзак» и четыре «верно / неверно» на лексику юнита |
+| 4 | SM3 · Unit 9 Test | 3 | ✍️ Диктант: umbrella, boots, raincoat, cloudy, foggy — картинка + русское слово, без подсказок |
+| 5 | SM3 · Unit 9 Test | 6 | 📖 Чтение: рассказ Норы о планах на выходные (going to) и пять «верно / неверно» |
+| 6 | SM3 · Unit 9 Test | 7 | 🎧 Аудирование: рассказ про Лиама, пять вопросов. **Запись нужна** — текст ниже, файл `sm3_u9_test_b7.mp3`, пока в блоке пустой звук |
+| 7 | SM3 · Final Test | 6 | ✍️ Диктант: bicycle, soup, cheese, cinema, football — картинка + русское слово |
+| 8 | SM3 · Final Test | 9 | 🎤 Говорение: четыре вопроса о себе (what are you good at, выходные, любимая еда, планы на лето) |
+
+### Текст аудирования SM3 Unit 9 — для записи 🟥
+
+Файл `sm3_u9_test_b7.mp3`, рассказ в третьем лице (одним голосом, без
+диалога). Ключи: Scotland · cloudy · make pizza · on Tuesday · the old castle.
+
+```
+This is Liam. Liam lives in London. Next week Liam is going to visit his grandma in Scotland. On Monday it's going to be cloudy, so Liam and his grandma are going to make pizza. On Tuesday it's going to be a thunderstorm, so they are going to watch a film at home. On Wednesday it's going to be sunny and warm. They are going to ride their bikes in the forest. Liam is going to take his camera and take photos of the old castle.
+```
