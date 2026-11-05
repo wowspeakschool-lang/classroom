@@ -17,7 +17,7 @@ TV → tee vee, café → caffay, library → lybrary, bowl → bowle, Liam → 
 Имя файла — ровно как указано ниже. Ссылки в блоки уже вписаны: как файл появится
 под этим именем, запись заиграет сама, в базе больше ничего делать не нужно.
 
-Всего 20 файлов: 9 — Go Getter 3, 10 — Super Minds 3, плюс один с числами.
+Всего 21 файл: 9 — Go Getter 3, 10 — Super Minds 3, один с числами и один для GG2.
 
 ---
 
@@ -222,3 +222,15 @@ This is a story about Liam and his sister Orla. Liam's grandma lives in Scotland
 Number one. Twenty-four. Number two. Thirty-nine. Number three. Fifty-two. Number four. Seventy-six. Number five. One hundred.
 ```
 
+---
+
+## GG2 · Unit 4 Test · блок 7 — аудирование, которого не было
+
+У этого блока записи не было вообще: вопросы есть, слушать нечего. Текст наш,
+написан под уже стоящие вопросы. Папка в бакете — `gg2 + gg3`.
+
+Файл: `gg2_u4_test_b7.mp3`
+
+```
+This is a story about three people who travel a lot: Marco, Clara and Danny. Marco is a travel blogger. He writes about the places he visits. Clara is a tour guide in the mountains, and her brother Danny is a photographer. Their mother is a teacher, and she only travels in the summer. Marco says New Zealand is the most beautiful country he knows. Clara says Norway is the most expensive country she knows, and Danny says Iceland is the most dangerous country for photographers, because of the weather. New Zealand isn't the biggest country — Marco says it is quite small. Marco thinks people in New Zealand are friendlier than people in other countries. Clara thinks they are funnier, and Danny thinks they are cleverer. Nobody says they are richer. All three of them know the Amazon forest well. It is dangerous there, but not because the mountains are very high and not because it is too cold — there are dangerous animals in the forest, and the people there are very friendly.
+```
