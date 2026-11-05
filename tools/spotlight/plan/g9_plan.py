@@ -33,8 +33,17 @@ SEC = {'Culture Corner 1': 'Culture Corner 1 – Pow-Wow. The Gathering of Natio
        'Going Green 8': 'Going Green 8 – The Challenge of Antarctica'}
 def base(s):
     return s.replace(' Phrasals & Phrases', '').replace(' Phrasal verbs', '').replace(' Phrases', '')
+# темы уроков из содержания (Vocabulary), Анна «ок» 05.11.2026
+LESSON = {'1a': 'Festivals & Celebrations', '1b': 'Superstitions', '2a': 'Houses & Household Chores',
+          '2d': 'Towns, Villages & Neighbours', '3a': 'Describing Monsters', '3b': 'Dreams & Nightmares',
+          '4a': 'Technology', '4d': 'The Internet', '5a': 'Types of Art', '5b': 'Music', '5d': 'Films & Cinema',
+          '6a': 'Animals & Volunteer Work', '6b': 'Map Symbols & Road Features', '6d': 'Public Services & Jobs',
+          '7a': 'Fears & Emotions', '7b': 'Emergency Services', '7d': 'Food & Health',
+          '8a': 'Body, Injuries & Experiences', '8b': 'Risks & Feelings', '8d': 'Survival & Equipment'}
 def sec_name(s):
-    return SEC.get(base(s), base(s))
+    b = base(s)
+    if b in LESSON: return f'{b} {LESSON[b]}'
+    return SEC.get(b, b)
 # g8_match считает «не совпало», но смысл тот же — берём картинку (раздел, слово)
 # в базе слово то же, перевод другой, но смысл совпал — берём картинку (номера строк grade_9.tsv), разобрано 04.11.2026
 SAME = {36,77,132,146,154,182,204,215,236,243,247,254,255,265,352,397,413,419,423,433,475,508,514,516,526,542,553,559,566,627,649,668,672,673,729,761,777,805,839,857,858,861,887,944,972,982,993,1013,1049,1100,1108,1110,1141,1142,1174,1197,1202,1215,1227,1246,1262,1273,1278,1280,1314,1338,1368,1375,1424,1447,1454,1489,1497,1521,1527,1535,1554,1622,1624,1633,1676,1691,1699,1702,1708,1717,1733,1743,1764,1790,1791,1793,1812,1816,1817,1829,1840,1880,1929,1938,1939,1976,1984,2000,2020,2074,2104,2191,2192,2200,2202}
