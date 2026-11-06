@@ -68,7 +68,7 @@ M = 'https://classroom.wowteach.ru/media/mvu_13plus/'
 # tasks — задания, you — вопросы «And you?» (каждый со своей темой).
 
 P1 = [
-    dict(id='family_photo', img='family_photo', x=84, y=50, h=13, name='a family photo', ask="What's this?",
+    dict(id='family_photo', img='family_photo', x=84, y=50, h=12, wall=0, name='a family photo', ask="What's this?",
          name_t=T(1, 'Families'),
          tasks=[dict(kind='family', title='Посмотри на семью Тома и выбери верный вариант', items=[
              dict(q='Emma is Tom’s ___ .', o=['sister', 'brother', 'aunt'], t=T(1, 'Families')),
@@ -78,9 +78,9 @@ P1 = [
              dict(q='Mark and Kate ___ Tom’s parents.', o=['are', 'is', 'am'], t=T(1, 'To be')),
          ])],
          you=[('Tell me about your family. How many people are there in your family?', T(1, 'Families', 'To be'))]),
-    dict(id='schoolbag', img='schoolbag', x=31, y=88, h=19, name='a schoolbag (a backpack)', ask="What's this?",
+    dict(id='schoolbag', img='schoolbag', x=30.7, y=88, h=19, wall=0, name='a schoolbag (a backpack)', ask="What's this?",
          name_t=T(1, 'School objects'),
-         tasks=[dict(kind='choice', title='Посмотри, что лежит в рюкзаке, и выбери верный вариант', image='schoolbag_open', items=[
+         tasks=[dict(kind='choice', title='Это рюкзак Тома. Посмотри, что в нём лежит, и выбери верный вариант', image='schoolbag_open', items=[
              dict(q='There ___ two pens.', o=['are', 'is', 'am'], t=T(1, 'There is')),
              dict(q='There ___ a calculator.', o=['isn’t', 'aren’t', 'is'], t=T(1, 'There is')),
              dict(q='Tom has got a ___ and a notebook.', o=['ruler', 'rubber', 'calculator'], t=T(1, 'School objects')),
@@ -88,9 +88,9 @@ P1 = [
              dict(q='Tom ___ got a pencil case.', o=['has', 'have', 'is'], t=T(1, 'Have got')),
          ])],
          you=[('What have you got in your school bag?', T(1, 'Have got', 'School objects'))]),
-    dict(id='passport', img='passport', x=41, y=69, h=6, name='a passport', ask="What's this?",
+    dict(id='passport', img='passport', x=41, y=68, h=5, wall=0, name='a passport', ask="What's this?",
          name_t=T(1, 'Countries'),
-         tasks=[dict(kind='choice', title='Посмотри на флаг и выбери верный вариант', items=[
+         tasks=[dict(kind='choice', title='Это паспорта друзей Тома. Посмотри на флаг и выбери верный вариант', items=[
              dict(flag='it', q='Where is Marco from? He’s from ___ .', o=['Italy', 'Spain', 'France'], t=T(1, 'Countries')),
              dict(flag='jp', q='Where is Yuki from? She’s from ___ .', o=['Japan', 'China', 'Germany'], t=T(1, 'Countries')),
              dict(flag='fr', q='Claire is from France. She’s ___ .', o=['French', 'France', 'Frenchy'], t=T(1, 'Countries')),
@@ -98,21 +98,21 @@ P1 = [
              dict(flag='es', q='Where ___ Lucia and Pablo from? — They’re from Spain.', o=['are', 'is', 'am'], t=T(1, 'To be')),
          ])],
          you=[('Where are you from? Which country would you like to visit?', T(1, 'Countries', 'To be'))]),
-    dict(id='fruit_bowl', img='fruit_bowl', x=50, y=69, h=10, name='fruit (a bowl of fruit)', ask="What's this?",
+    dict(id='fruit_bowl', img='fruit_bowl', x=50, y=68.3, h=9, wall=0, name='fruit (a bowl of fruit)', ask="What's this?",
          name_t=T(1, 'Food and drinks'),
-         tasks=[dict(kind='tf', title='Посмотри в холодильник. Верно или неверно?', image='fridge_open', items=[
-             dict(q='There is some milk.', a=True, t=T(1, 'Some, any, lots of')),
-             dict(q='There are lots of eggs.', a=True, t=T(1, 'Some, any, lots of')),
-             dict(q='There isn’t any cheese.', a=False, fix='There is some cheese.', t=T(1, 'Some, any, lots of')),
-             dict(q='There are three tomatoes.', a=True, t=T(1, 'Food and drinks')),
-             dict(q='There is some juice.', a=False, fix='There isn’t any juice.', t=T(1, 'Some, any, lots of')),
-             dict(q='There are some apples.', a=False, fix='There aren’t any apples.', t=T(1, 'Food and drinks')),
+         tasks=[dict(kind='tf', title='Фрукты есть в вазе, а что есть в холодильнике у Тома? Верно или неверно?', image='fridge_open', items=[
+             dict(q='There is some milk in the fridge.', a=True, t=T(1, 'Some, any, lots of')),
+             dict(q='There are lots of eggs in the fridge.', a=True, t=T(1, 'Some, any, lots of')),
+             dict(q='There isn’t any cheese in the fridge.', a=False, fix='There is some cheese in the fridge.', t=T(1, 'Some, any, lots of')),
+             dict(q='There are three tomatoes in the fridge.', a=True, t=T(1, 'Food and drinks')),
+             dict(q='There is some juice in the fridge.', a=False, fix='There isn’t any juice in the fridge.', t=T(1, 'Some, any, lots of')),
+             dict(q='There are some apples in the fridge.', a=False, fix='There aren’t any apples in the fridge — they are in the bowl.', t=T(1, 'Food and drinks')),
          ])],
          you=[('What do you usually have for breakfast?', T(1, 'Food and drinks', 'Present Simple'))]),
-    dict(id='football', img='football', x=21, y=97, h=11, name='a football (a ball)', ask="What's this?",
+    dict(id='football', img='football', x=21, y=96.6, h=11, wall=0, name='a football (a ball)', ask="What's this?",
          name_t=T(1, 'Sports'),
          tasks=[
-             dict(kind='hotspot', title='Что показывает стрелка? Выбери слово', image='athlete',
+             dict(kind='hotspot', title='Это Том, он играет в футбол. Что показывает стрелка? Выбери слово', image='athlete',
                   words=['head', 'arm', 'hand', 'knee', 'foot', 'leg'], items=[
                       dict(x=48, y=6, a='head', t=T(1, 'Body parts')),
                       dict(x=10, y=36, a='arm', t=T(1, 'Body parts')),
@@ -120,14 +120,15 @@ P1 = [
                       dict(x=33, y=71, a='knee', t=T(1, 'Body parts')),
                       dict(x=80, y=94, a='foot', t=T(1, 'Body parts')),
                   ]),
-             dict(kind='choice', title='Посмотри на картинку и выбери верный вариант', items=[
+             dict(kind='choice', title='Том очень любит спорт. Посмотри на картинку и выбери верный вариант', items=[
+                 dict(img='athlete', q='Tom ___ football with his friends after school.', o=['plays', 'play', 'playing'], t=T(1, 'Present Simple')),
                  dict(img='sport_swim', q='Can Tom swim? — Yes, he ___ .', o=['can', 'can’t', 'is'], t=T(1, 'Can/Can’t')),
                  dict(img='sport_tennis', q='Tom ___ tennis every Saturday.', o=['plays', 'play', 'playing'], t=T(1, 'Present Simple')),
                  dict(img='sport_bike', q='___ Tom ride a bike to school? — Yes, he does.', o=['Does', 'Do', 'Is'], t=T(1, 'Present Simple')),
-                 dict(img='sport_bike', q='Penguins ___ fly.', o=['can’t', 'can', 'don’t can'], t=T(1, 'Can/Can’t')),
+                 dict(img='sport_tennis', q='Tom can play tennis, but he ___ play basketball. He doesn’t know how.', o=['can’t', 'can', 'don’t can'], t=T(1, 'Can/Can’t')),
              ])],
          you=[('What sports can you do? How often do you do sport?', T(1, 'Sports', 'Can/Can’t', 'Present Simple'))]),
-    dict(id='bus', img='bus', x=92, y=50, h=6, name='a bus', ask="What's this?",
+    dict(id='bus', img='bus', x=93.5, y=50, h=6, wall=0, name='a bus', ask="What's this?",
          name_t=T(1, 'Transport'),
          tasks=[dict(kind='choice', title='Посмотри в окно и выбери верный вариант', image='street', items=[
              dict(q='The man on the bench is a ___ .', o=['bus driver', 'doctor', 'chef'], t=T(1, 'Jobs')),
@@ -137,20 +138,20 @@ P1 = [
              dict(q='What’s on the bridge?', o=['a train', 'a taxi', 'a bus'], t=T(1, 'Transport')),
          ])],
          you=[('What are you doing now? What do your parents do?', T(1, 'Present Simple vs Present Continuous', 'Jobs'))]),
-    dict(id='cinema_tickets', img='cinema_tickets', x=60, y=69, h=7, name='cinema tickets', ask="What are these?",
+    dict(id='cinema_tickets', img='cinema_tickets', x=59.6, y=68, h=5, wall=0, name='cinema tickets', ask="What are these?",
          name_t=T(1, 'Entertainment'),
          tasks=[
-             dict(kind='order', title='Собери предложения', items=[
+             dict(kind='order', title='Том и его друзья любят кино. Собери предложения', items=[
                  dict(s='I always go to the cinema on Fridays.', t=T(1, 'Adverbs of frequency')),
-                 dict(s='She is never late for school.', t=T(1, 'Adverbs of frequency')),
+                 dict(s='We often watch films at the weekend.', t=T(1, 'Adverbs of frequency')),
              ]),
-             dict(kind='choice', title='Выбери верный вариант', items=[
+             dict(kind='choice', title='У Тома два билета в кино. Выбери верный вариант', items=[
                  dict(q='— Let’s go to the cinema tonight! — ___', o=['Good idea! What film?', 'Yes, I am.', 'I go.'], t=T(1, 'Let’s…')),
                  dict(q='Let’s ___ a film at home.', o=['watch', 'watching', 'to watch'], t=T(1, 'Let’s…')),
                  dict(q='Where can you watch a new film on a big screen?', o=['at the cinema', 'at the library', 'at the hospital'], t=T(1, 'Entertainment')),
              ])],
          you=[('How often do you go to the cinema? What do you like doing at the weekend?', T(1, 'Adverbs of frequency', 'Entertainment'))]),
-    dict(id='umbrella', img='umbrella', x=80, y=93, h=17, name='an umbrella', ask="What's this?",
+    dict(id='umbrella', img='umbrella', x=82, y=93, h=16, wall=0, name='an umbrella', ask="What's this?",
          name_t=T(1, 'Weather'),
          tasks=[
              dict(kind='choice', title='Какая погода? Выбери верный вариант', items=[
@@ -168,20 +169,20 @@ P1 = [
                       dict(w='gloves', img='cl_gloves', g=1, t=T(1, 'Clothes')),
                       dict(w='a woolly hat', img='cl_hat', g=1, t=T(1, 'Clothes')),
                   ]),
-             dict(kind='choice', title='Выбери верный вариант', items=[
+             dict(kind='choice', title='Зачем Тому зонтик? Выбери верный вариант', items=[
                  dict(q='It’s raining. I ___ an umbrella.', o=['need', 'needs', 'am need'], t=T(1, 'Need, want')),
-                 dict(q='I’m hungry. I ___ a sandwich.', o=['want', 'wants', 'wanting'], t=T(1, 'Need, want')),
+                 dict(q='It’s sunny today. I ___ to go to the beach!', o=['want', 'wants', 'wanting'], t=T(1, 'Need, want')),
              ])],
          you=[('What’s the weather like today? What do you need for a trip to the mountains?', T(1, 'Weather', 'Need, want', 'Clothes'))]),
-    dict(id='cat', img='cat', x=66, y=97, h=17, name='a cat', ask="What's this?",
+    dict(id='cat', img='cat', x=66.3, y=96.6, h=17, wall=0, name='a cat', ask="What's this?",
          name_t=T(1, 'Pets and farm animals'),
          tasks=[
-             dict(kind='choice', title='Посмотри на животных и выбери верный вариант', items=[
+             dict(kind='choice', title='Это кошка Тома, а летом он ездит на ферму к бабушке. Посмотри на животных и выбери верный вариант', items=[
                  dict(img2=['an_horse', 'an_cat'], q='A horse is ___ than a cat.', o=['bigger', 'big', 'biggest'], t=T(1, 'Comparatives')),
-                 dict(img2=['an_hamster', 'an_dog'], q='A hamster is ___ than a dog.', o=['smaller', 'small', 'more small'], t=T(1, 'Comparatives')),
+                 dict(img2=['an_cat', 'an_dog'], q='Tom’s cat is ___ than his dog.', o=['smaller', 'small', 'more small'], t=T(1, 'Comparatives')),
                  dict(img2=['an_cow', 'an_pig', 'an_chicken'], q='Which animal gives us milk?', o=['a cow', 'a pig', 'a chicken'], t=T(1, 'Pets and farm animals')),
              ]),
-             dict(kind='listen', title='Тебе голосовое сообщение! Послушай и ответь на вопросы', audio='p1_voicemail',
+             dict(kind='listen', title='Голосовое сообщение про ферму, где живут животные. Послушай и ответь на вопросы', audio='p1_voicemail',
                   text=('Hi, it’s me, the Quest Master! Yesterday I visited my grandparents’ farm. '
                         'In the morning I fed the chickens and the sheep. Then I rode a horse! '
                         'I didn’t see the pigs, because they were asleep. '
@@ -196,10 +197,10 @@ P1 = [
 ]
 
 P2 = [
-    dict(id='wardrobe', img='wardrobe', x=89, y=70, h=40, name='a wardrobe — + 2 adjectives (a big wooden wardrobe)', ask="What's this? Describe it.",
+    dict(id='wardrobe', img='wardrobe', x=89.3, y=77.8, h=40, wall=0, name='a wardrobe — + 2 adjectives (a big wooden wardrobe)', ask="What's this? Describe it.",
          name_t=T(2, 'Household and furniture', 'Adjectives to describe objects'),
          tasks=[
-             dict(kind='sort', title='Разложи слова по группам', groups=['Clothes', 'Furniture', 'Describing objects'], items=[
+             dict(kind='sort', title='Что в шкафу, что рядом и какой он? Разложи слова по группам', groups=['Clothes', 'Furniture', 'Describing objects'], items=[
                  dict(w='a hoodie', g=0, t=T(2, 'Clothes')), dict(w='trainers', g=0, t=T(2, 'Clothes')),
                  dict(w='a jacket', g=0, t=T(2, 'Clothes')), dict(w='jeans', g=0, t=T(2, 'Clothes')),
                  dict(w='a sofa', g=1, t=T(2, 'Household and furniture')), dict(w='a shelf', g=1, t=T(2, 'Household and furniture')),
@@ -207,16 +208,16 @@ P2 = [
                  dict(w='wooden', g=2, t=T(2, 'Adjectives to describe objects')), dict(w='plastic', g=2, t=T(2, 'Adjectives to describe objects')),
                  dict(w='huge', g=2, t=T(2, 'Adjectives to describe objects')), dict(w='round', g=2, t=T(2, 'Adjectives to describe objects')),
              ]),
-             dict(kind='choice', title='Выбери верный вариант', items=[
+             dict(kind='choice', title='Загляни в шкаф и выбери верный вариант', items=[
                  dict(q='There aren’t ___ clothes in the wardrobe.', o=['many', 'much', 'a'], t=T(2, 'Quantifiers (some, any, a lot of)')),
-                 dict(q='How ___ money have you got?', o=['much', 'many', 'any'], t=T(2, 'Quantifiers (some, any, a lot of)')),
-                 dict(q='She’s got ___ shoes — more than fifty pairs!', o=['a lot of', 'much', 'any'], t=T(2, 'Quantifiers (some, any, a lot of)')),
+                 dict(q='There isn’t ___ space in the wardrobe. It’s full!', o=['much', 'many', 'a few'], t=T(2, 'Quantifiers (some, any, a lot of)')),
+                 dict(q='My sister keeps ___ shoes in this wardrobe — more than fifty pairs!', o=['a lot of', 'much', 'any'], t=T(2, 'Quantifiers (some, any, a lot of)')),
              ])],
          you=[('Describe your room. What furniture is there?', T(2, 'Household and furniture', 'Adjectives to describe objects'))]),
-    dict(id='suitcase', img='suitcase', x=55, y=95, h=15, name='a suitcase', ask="What's this? Describe it.",
+    dict(id='suitcase', img='suitcase', x=48.5, y=98, h=14, wall=0, name='a suitcase', ask="What's this? Describe it.",
          name_t=T(2, 'Holidays'),
          tasks=[
-             dict(kind='choice', title='Посмотри на картинку: как чувствует себя Mia?', items=[
+             dict(kind='choice', title='Это чемодан Mia — она вернулась из отпуска. Как она себя чувствовала?', items=[
                  dict(img='hol_airport', q='At the airport Mia was ___ .', o=['bored', 'excited', 'relaxed'], t=T(2, 'Emotions')),
                  dict(img='hol_castle', q='At the castle she was ___ .', o=['excited', 'bored', 'angry'], t=T(2, 'Emotions')),
                  dict(img='hol_beach', q='On the beach she felt ___ .', o=['relaxed', 'scared', 'bored'], t=T(2, 'Emotions')),
@@ -229,10 +230,10 @@ P2 = [
                  dict(q='We booked a hotel and went sightseeing every day.', a=True, t=T(2, 'Holidays')),
              ])],
          you=[('Tell me about your best trip. Where did you go? How did you feel?', T(2, 'Holidays', 'Past Simple irregulars and Regulars', 'Emotions'))]),
-    dict(id='map', img='map', x=50, y=31, h=13, name='a map', ask="What's this? Describe it.",
+    dict(id='map', img='map', x=32.2, y=27.8, h=13, wall=1, name='a map', ask="What's this? Describe it.",
          name_t=T(2, 'Geographical features'),
          tasks=[
-             dict(kind='match', title='Соедини слова с картинками', items=[
+             dict(kind='match', title='Что есть на карте? Соедини слова с картинками', items=[
                  dict(w='a river', img='geo_river', t=T(2, 'Geographical features')),
                  dict(w='a desert', img='geo_desert', t=T(2, 'Geographical features')),
                  dict(w='a waterfall', img='geo_waterfall', t=T(2, 'Geographical features')),
@@ -240,14 +241,14 @@ P2 = [
                  dict(w='go sightseeing', img='tr_sightseeing', t=T(2, 'Travelling activities')),
                  dict(w='go camping', img='tr_camping', t=T(2, 'Travelling activities')),
              ]),
-             dict(kind='choice', title='Выбери верный вариант', items=[
+             dict(kind='choice', title='Это карта путешествий. Выбери верный вариант', items=[
                  dict(img='tr_ferry', q='We crossed the sea ___ .', o=['by ferry', 'on foot', 'by bike'], t=T(2, 'Ways of travelling')),
                  dict(img='geo_mountains', q='Next summer we ___ climb these mountains. We’ve already bought the tickets.', o=['are going to', 'might', 'will can'], t=T(2, 'Going to')),
                  dict(q='I’m not sure, but I ___ go to Italy next year.', o=['might', 'am going to', 'must'], t=T(2, 'Future with will, may, might')),
-                 dict(q='I think people ___ travel to Mars one day.', o=['will', 'are', 'did'], t=T(2, 'Future with will, may, might')),
+                 dict(q='Look at the map! I think we ___ need two days to get to the island.', o=['will', 'are', 'did'], t=T(2, 'Future with will, may, might')),
              ])],
          you=[('What are you going to do this summer? Where would you like to travel?', T(2, 'Going to', 'Travelling activities'))]),
-    dict(id='first_aid_kit', img='first_aid_kit', x=16, y=55, h=11, name='a first-aid kit', ask="What's this? Describe it.",
+    dict(id='first_aid_kit', img='first_aid_kit', x=9.3, y=67.8, h=9, wall=0, name='a first-aid kit', ask="What's this? Describe it.",
          name_t=T(2, 'Health and Illnesses'),
          tasks=[dict(kind='choice', title='Разговор у врача. Выбери верный вариант', items=[
              dict(q='— What’s the matter? — I’ve got a ___ . I ate too much.', o=['stomachache', 'stomach', 'hurt'], t=T(2, 'Health and Illnesses')),
@@ -257,7 +258,7 @@ P2 = [
              dict(q='Do you ___ take this medicine every day?', o=['have to', 'must to', 'has to'], t=T(2, 'Have to/Don’t have to')),
          ])],
          you=[('What do you have to do at home? What must students do at your school?', T(2, 'Have to/Don’t have to', 'Modals of obligation (must, have to)'))]),
-    dict(id='novel', img='novel', x=27, y=55, h=9, name='a book (a novel)', ask="What's this? Describe it.",
+    dict(id='novel', img='novel', x=31.5, y=71, h=5.5, wall=0, name='a book (a novel)', ask="What's this? Describe it.",
          name_t=T(2, 'Free time activities: books and films'),
          tasks=[dict(kind='choice', title='Это отзыв о книге. Выбери верный вариант', items=[
              dict(q='This book ___ by a 15-year-old girl.', o=['was written', 'wrote', 'is writing'], t=T(2, 'Present Simple and Past Simple Passive')),
@@ -267,7 +268,7 @@ P2 = [
              dict(q='A story about the future, robots and space is ___ .', o=['science fiction', 'a comedy', 'a documentary'], t=T(2, 'Free time activities: books and films')),
          ])],
          you=[('What’s the best book or film you’ve ever read or seen? Why do you like it?', T(2, 'Present Perfect', 'Free time activities: books and films'))]),
-    dict(id='wanted_poster', img='wanted_poster', x=50, y=56, h=14, name='a poster (a wanted poster)', ask="What's this? Describe it.",
+    dict(id='wanted_poster', img='wanted_poster', x=50, y=55.6, h=13, wall=1, name='a poster (a wanted poster)', ask="What's this? Describe it.",
          name_t=T(2, 'Crime and criminals'),
          tasks=[dict(kind='listen', title='Голосовое сообщение! Послушай и найди вора', audio='p2_voicemail', suspects=True,
                      text=('Hello, it’s the Quest Master again. Last night somebody broke into the museum and stole a famous painting. '
@@ -279,25 +280,25 @@ P2 = [
                          dict(q='What was he doing when the police arrived?', o=['He was running to his car.', 'He runs to his car.', 'He is running to his car.'], t=T(2, ('Past Continuous', 3))),
                          dict(q='A person who saw the crime is a ___ .', o=['witness', 'thief', 'judge'], t=T(2, 'Crime and criminals')),
                      ]),
-                dict(kind='choice', title='Выбери верный вариант', items=[
-                    dict(q='I ___ TV when the phone rang.', o=['was watching', 'watched', 'am watching'], t=T(2, 'Past continuous vs Past Simple')),
-                    dict(q='At 8 o’clock yesterday I ___ dinner.', o=['was having', 'have', 'am having'], t=T(2, ('Past Continuous', 4))),
+                dict(kind='choice', title='Что было в музее той ночью? Выбери верный вариант', items=[
+                    dict(q='The thief ___ the painting when the alarm rang.', o=['was taking', 'took', 'is taking'], t=T(2, 'Past continuous vs Past Simple')),
+                    dict(q='At midnight the guard ___ in his chair.', o=['was sleeping', 'sleeps', 'is sleeping'], t=T(2, ('Past Continuous', 4))),
                 ])],
          you=[('Describe someone in your family. What does he or she look like?', T(2, 'Describing people'))]),
-    dict(id='wallet', img='wallet', x=38, y=56, h=8, name='a wallet', ask="What's this? Describe it.",
+    dict(id='wallet', img='wallet', x=22.5, y=60.5, h=5, wall=0, name='a wallet', ask="What's this? Describe it.",
          name_t=T(2, 'Money and shopping'),
-         tasks=[dict(kind='choice', title='Выбери верный вариант', items=[
+         tasks=[dict(kind='choice', title='Что купили на эти деньги? Выбери верный вариант', items=[
              dict(q='Look! I’ve just ___ these trainers. They were in the sale!', o=['bought', 'buy', 'buying'], t=T(2, 'Present Perfect vs Past Simple')),
              dict(q='I ___ a new phone last week.', o=['bought', 'have bought', 'buy'], t=T(2, 'Present Perfect vs Past Simple')),
-             dict(q='I ___ my friends at 5 tomorrow — we’ve already got the tickets.', o=['am meeting', 'meet', 'met'], t=T(2, 'Be going to vs Present Continuous for future')),
+             dict(q='I ___ my friends at the shopping centre at 5 tomorrow — it’s all arranged.', o=['am meeting', 'meet', 'met'], t=T(2, 'Be going to vs Present Continuous for future')),
              dict(q='When something is cheaper than usual, it’s on ___ .', o=['sale', 'sell', 'price'], t=T(2, 'Money and shopping')),
              dict(q='You pay at the ___ .', o=['checkout', 'menu', 'pocket'], t=T(2, 'Money and shopping')),
          ])],
          you=[('What are you doing this weekend? What did you buy last time you went shopping?', T(2, 'Be going to vs Present Continuous for future', 'Money and shopping'))]),
-    dict(id='laptop', img='laptop', x=19, y=69, h=12, name='a laptop', ask="What's this? Describe it.",
+    dict(id='laptop', img='laptop', x=18.1, y=69.4, h=11, wall=0, name='a laptop', ask="What's this? Describe it.",
          name_t=T(2, 'Computer phrases'),
          tasks=[
-             dict(kind='choice', title='Выбери верный вариант', items=[
+             dict(kind='choice', title='Включаем ноутбук. Выбери верный вариант', items=[
                  dict(q='First, ___ in with your password.', o=['log', 'click', 'type'], t=T(2, 'Computer phrases')),
                  dict(q='___ on the link to open the page.', o=['Click', 'Log', 'Download'], t=T(2, 'Computer phrases')),
              ]),
@@ -308,10 +309,10 @@ P2 = [
                  dict(q='This is the app that I told you about.', a=True, t=T(2, 'Relative clauses')),
              ])],
          you=[('What do you usually do on your computer or phone?', T(2, 'Computer phrases'))]),
-    dict(id='binoculars', img='binoculars', x=10, y=55, h=8, name='binoculars', ask="What are these? Describe them.",
+    dict(id='binoculars', img='binoculars', x=28.5, y=62, h=6, wall=0, name='binoculars', ask="What are these? Describe them.",
          name_t=T(2, 'Collocations with look, see, watch'),
          tasks=[
-             dict(kind='match', title='Соедини слова с картинками', items=[
+             dict(kind='match', title='Посмотри в бинокль на кафе напротив. Какая там еда на вкус? Соедини слово с блюдом', items=[
                  dict(w='spicy', img='food_spicy', t=T(2, 'Food and drink adjectives')),
                  dict(w='crunchy', img='food_crunchy', t=T(2, 'Food and drink adjectives')),
                  dict(w='sour', img='food_sour', t=T(2, 'Food and drink adjectives')),
@@ -319,38 +320,38 @@ P2 = [
                  dict(w='bitter', img='food_bitter', t=T(2, 'Food and drink adjectives')),
                  dict(w='salty', img='food_salty', t=T(2, 'Food and drink adjectives')),
              ]),
-             dict(kind='choice', title='Выбери верный вариант', items=[
+             dict(kind='choice', title='Что можно делать с биноклем? Выбери верный вариант', items=[
                  dict(q='___ at that bird! It’s huge!', o=['Look', 'See', 'Watch'], t=T(2, 'Collocations with look, see, watch')),
                  dict(q='Can you ___ the castle from here?', o=['see', 'look', 'watch'], t=T(2, 'Collocations with look, see, watch')),
-                 dict(q='Do you ___ TV every evening?', o=['watch', 'look', 'see at'], t=T(2, 'Collocations with look, see, watch')),
-                 dict(q='If I had a million dollars, I ___ buy a new car.', o=['would', 'will', 'am'], t=T(2, '2nd Conditional')),
+                 dict(q='We sat on the hill to ___ the sunset through the binoculars.', o=['watch', 'look', 'see at'], t=T(2, 'Collocations with look, see, watch')),
+                 dict(q='If I had better binoculars, I ___ see the birds on that island.', o=['would', 'will', 'am'], t=T(2, '2nd Conditional')),
              ])],
-         you=[('What would you do if you were invisible for a day?', T(2, '2nd Conditional'))]),
+         you=[('If you had binoculars, what would you like to watch?', T(2, '2nd Conditional', 'Collocations with look, see, watch'))]),
 ]
 
 P3 = [
-    dict(id='trophy', img='trophy', x=12, y=50, h=13, name='a trophy — and what it is for', ask="What's this? What is it for?",
+    dict(id='trophy', img='trophy', x=7, y=57.8, h=11, wall=0, name='a trophy — and what it is for', ask="What's this? What is it for?",
          name_t=T(3, 'Sport phrases'),
-         tasks=[dict(kind='choice', title='Прочитай предложения и выбери более подходящий вариант', items=[
+         tasks=[dict(kind='choice', title='Этот кубок выиграла наша команда! Выбери более подходящий вариант', items=[
              dict(q='Would you like to ___ our tennis club? 🎾', o=['join', 'enter', 'win'], t=T(3, 'Sport phrases')),
              dict(q='Have you ever ___ a goal in a real match? ⚽', o=['scored', 'won', 'given'], t=T(3, 'Sport phrases')),
-             dict(q='Are you good at ___ music? 🎶', o=['making', 'make', 'to making'], t=T(3, 'Ing forms')),
-             dict(q='___ is good for your mental health. 🤗', o=['Hugging', 'Hugged', 'Hugs'], t=T(3, 'Ing forms')),
+             dict(q='___ is my favourite sport — I won this trophy last year. 🏊', o=['Swimming', 'Swim', 'To swimming'], t=T(3, 'Ing forms')),
+             dict(q='I’m really good at ___ penalties. ⚽', o=['scoring', 'score', 'to score'], t=T(3, 'Ing forms')),
              dict(q='Nick ___ like snowboarding, but now he loves it. 🏂', o=['didn’t use to', 'doesn’t used to', 'not used to'], t=T(3, 'Used to')),
          ])],
          you=[('What did you use to do when you were a child that you don’t do now?', T(3, 'Used to'))]),
-    dict(id='stethoscope', img='stethoscope', x=88, y=50, h=13, name='a stethoscope — and what it is for', ask="What's this? What is it for?",
+    dict(id='stethoscope', img='stethoscope', x=89.3, y=57.8, h=9, wall=0, name='a stethoscope — and what it is for', ask="What's this? What is it for?",
          name_t=T(3, 'Health verbs'),
-         tasks=[dict(kind='choice', title='Выбери верный вариант', items=[
+         tasks=[dict(kind='choice', title='Ты на приёме у врача. Выбери верный вариант', items=[
              dict(q='If your nose starts to ___ , you should put your head forward. 👃', o=['bleed', 'ache', 'burn'], t=T(3, 'Health verbs')),
              dict(q='I fell down the stairs and ___ my ankle.', o=['sprained', 'coughed', 'sneezed'], t=T(3, 'Health verbs')),
              dict(q='You ___ go to bed earlier. You look really tired.', o=['should', 'must to', 'have'], t=T(3, 'Modals of obligation and advice')),
              dict(q='Stop! You ___ drink this water — it’s dirty! 🚱', o=['mustn’t', 'don’t have to', 'needn’t'], t=T(3, 'Modals of obligation and advice')),
          ])],
          you=[('What should people do to stay healthy? What do you do?', T(3, 'Modals of obligation and advice', 'Health verbs'))]),
-    dict(id='microphone', img='microphone', x=24, y=56, h=11, name='a microphone — and what it is for', ask="What's this? What is it for?",
+    dict(id='microphone', img='microphone', x=14.4, y=58.3, h=10, wall=0, name='a microphone — and what it is for', ask="What's this? What is it for?",
          name_t=T(3, 'Music'),
-         tasks=[dict(kind='match', title='Соедини слова с определениями', defs=True, items=[
+         tasks=[dict(kind='match', title='Это микрофон с концерта. Соедини слова про музыку с определениями', defs=True, items=[
              dict(w='lyrics', d='the words of a song', t=T(3, 'Music')),
              dict(w='a sound technician', d='a person who controls the sound at a concert', t=T(3, 'Music')),
              dict(w='a concert hall', d='a big building where people listen to live music', t=T(3, 'Music')),
@@ -358,7 +359,7 @@ P3 = [
              dict(w='an album', d='a collection of songs released together', t=T(3, 'Music')),
          ])],
          you=[('What kind of music do you listen to? Have you ever been to a concert?', T(3, 'Music'))]),
-    dict(id='smartphone', img='smartphone', x=33, y=56, h=10, name='a smartphone — and what it is for', ask="What's this? What is it for?",
+    dict(id='smartphone', img='smartphone', x=21.1, y=59.4, h=8, wall=0, name='a smartphone — and what it is for', ask="What's this? What is it for?",
          name_t=T(3, 'Social media'),
          tasks=[
              dict(kind='listen', title='Голосовое сообщение! Послушай историю и ответь на вопросы', audio='p3_voicemail',
@@ -373,14 +374,14 @@ P3 = [
                       dict(q='What did Anna suggest?', o=['recording a video together', 'going to the cinema', 'taking more photos'], t=T(3, ('Reporting verbs', 4))),
                       dict(q='Jess ___ Emma that Anna could be a great photographer.', o=['told', 'said', 'spoke'], t=T(3, 'Verbs of communication')),
                   ]),
-             dict(kind='choice', title='Выбери верный вариант', items=[
-                 dict(q='My phone screen was broken, so I ___ yesterday.', o=['had it repaired', 'had repaired it', 'have it repair'], t=T(3, 'Causative have')),
-                 dict(q='I hope ___ a famous photographer one day.', o=['to become', 'becoming', 'become'], t=T(3, 'Hopes and dreams')),
+             dict(kind='choice', title='Ещё немного про телефон Анны. Выбери верный вариант', items=[
+                 dict(q='Anna’s phone screen was broken, so ___ yesterday.', o=['she had it repaired', 'she had repaired it', 'she have it repair'], t=T(3, 'Causative have')),
+                 dict(q='Anna hopes ___ a famous photographer one day.', o=['to become', 'becoming', 'become'], t=T(3, 'Hopes and dreams')),
              ])],
          you=[('Have you ever had something repaired or done for you? What do you hope to achieve this year?', T(3, 'Causative have', 'Hopes and dreams'))]),
-    dict(id='graduation_cap', img='graduation_cap', x=67, y=56, h=8, name='a graduation cap — and what it is for', ask="What's this? What is it for?",
+    dict(id='graduation_cap', img='graduation_cap', x=96, y=58.5, h=6, wall=0, name='a graduation cap — and what it is for', ask="What's this? What is it for?",
          name_t=T(3, 'Education'),
-         tasks=[dict(kind='choice', title='Выбери верный вариант', items=[
+         tasks=[dict(kind='choice', title='Это шапка выпускника. Выбери верный вариант', items=[
              dict(q='She ___ from university last year and now she works as a lawyer.', o=['graduated', 'passed', 'failed'], t=T(3, 'Education')),
              dict(q='Do you know where the exam room ___ ?', o=['is', 'is it', 'does'], t=T(3, 'Question forms (complex)')),
              dict(q='Could you tell me what time the lesson ___ ?', o=['starts', 'does start', 'start'], t=T(3, 'Question forms (complex)')),
@@ -389,10 +390,10 @@ P3 = [
              dict(q='We fell ___ last week, but now we’re friends again.', o=['out', 'down', 'off'], t=T(3, 'Phrasal verbs for relationships')),
          ])],
          you=[('Do you know what you would like to study in the future? Why?', T(3, 'Education', 'Question forms (complex)'))]),
-    dict(id='seismograph', img='seismograph', x=78, y=56, h=10, name='a seismograph — and what it is for', ask="What's this? What is it for?",
+    dict(id='seismograph', img='seismograph', x=81.1, y=57.8, h=9, wall=0, name='a seismograph — and what it is for', ask="What's this? What is it for?",
          name_t=T(3, 'Natural disasters'),
          tasks=[
-             dict(kind='match', title='Соедини слова с картинками', items=[
+             dict(kind='match', title='Сейсмограф следит за природой. Соедини слова с картинками', items=[
                  dict(w='a volcanic eruption', img='dis_volcano', t=T(3, 'Natural disasters')),
                  dict(w='a flood', img='dis_flood', t=T(3, 'Natural disasters')),
                  dict(w='an earthquake', img='dis_earthquake', t=T(3, 'Natural disasters')),
@@ -400,13 +401,13 @@ P3 = [
                  dict(w='a hurricane', img='dis_hurricane', t=T(3, 'Natural disasters')),
                  dict(w='a tsunami', img='dis_tsunami', t=T(3, 'Natural disasters')),
              ]),
-             dict(kind='choice', title='Выбери верный вариант', items=[
+             dict(kind='choice', title='Сейсмограф записал землетрясение. Выбери верный вариант', items=[
                  dict(img='dis_earthquake', q='During the earthquake the old building ___ .', o=['collapsed', 'erupted', 'flooded'], t=T(3, 'Natural disasters')),
                  dict(q='Nobody ___ predict exactly when an earthquake will happen.', o=['can', 'may to', 'is able'], t=T(3, 'Modals of ability and possibility')),
                  dict(q='When the volcano erupted, most people ___ escape in time.', o=['were able to', 'could to', 'can'], t=T(3, 'Modals of ability and possibility')),
              ])],
          you=[('What could you do to stay safe in an earthquake?', T(3, 'Modals of ability and possibility'))]),
-    dict(id='magnifying_glass', img='magnifying_glass', x=50, y=70, h=11, name='a magnifying glass — and what it is for', ask="What's this? What is it for?",
+    dict(id='magnifying_glass', img='magnifying_glass', x=27.8, y=63.3, h=8, wall=0, name='a magnifying glass — and what it is for', ask="What's this? What is it for?",
          name_t=T(3, ('Crime and criminals', 5)),
          tasks=[dict(kind='choice', title='Ты детектив 🕵️ Посмотри на место кражи и выбери верный вариант', image='crime_scene', items=[
              dict(q='The broken glass is inside the room. The thief ___ through the window.', o=['must have come', 'can’t have come', 'must come'], t=T(3, 'Modals of deduction in the past')),
@@ -419,23 +420,23 @@ P3 = [
              dict(q='A person who breaks into a house and steals things is a ___ .', o=['burglar', 'witness', 'judge'], t=T(3, ('Crime and criminals', 5))),
          ])],
          you=[('What would you have done if you had been the detective?', T(3, '3d conditional'))]),
-    dict(id='scroll', img='scroll', x=91, y=70, h=15, name='a scroll — and what it is for', ask="What's this? What is it for?",
+    dict(id='scroll', img='scroll', x=8.5, y=96.7, h=13, wall=0, name='a scroll — and what it is for', ask="What's this? What is it for?",
          name_t=T(3, 'History'),
          tasks=[
-             dict(kind='sort', title='Распредели слова по темам', groups=['History 🏛', 'Abstract nouns 💭'], items=[
+             dict(kind='sort', title='Это древний свиток. Распредели слова из него по темам', groups=['History 🏛', 'Abstract nouns 💭'], items=[
                  dict(w='ancestor', g=0, t=T(3, 'History')), dict(w='century', g=0, t=T(3, 'History')),
                  dict(w='myth', g=0, t=T(3, 'History')), dict(w='inhabitants', g=0, t=T(3, 'History')),
                  dict(w='freedom', g=1, t=T(3, 'Abstract nouns')), dict(w='honesty', g=1, t=T(3, 'Abstract nouns')),
                  dict(w='happiness', g=1, t=T(3, 'Abstract nouns')), dict(w='knowledge', g=1, t=T(3, 'Abstract nouns')),
              ]),
-             dict(kind='choice', title='Выбери верный вариант', items=[
+             dict(kind='choice', title='История свитка. Выбери верный вариант', items=[
                  dict(q='An old man ___ along the beach when he found an ancient scroll.', o=['was walking', 'walked', 'has walked'], t=T(3, 'Narrative tenses')),
                  dict(q='Someone ___ it there many years before.', o=['had hidden', 'has hidden', 'hides'], t=T(3, 'Narrative tenses')),
                  dict(q='When I was little, my grandfather ___ tell me stories about our ancestors.', o=['would', 'will', 'was'], t=T(3, 'Present and past habits')),
-                 dict(q='My brother ___ taking my things without asking! It’s so annoying.', o=['is always', 'always is', 'was always being'], t=T(3, 'Present and past habits')),
+                 dict(q='My grandmother ___ telling us this old legend — we know it by heart!', o=['is always', 'always is', 'was always being'], t=T(3, 'Present and past habits')),
              ])],
          you=[('What did your grandparents use to do when they were young?', T(3, 'Present and past habits'))]),
-    dict(id='time_capsule', img='time_capsule', x=31, y=96, h=11, name='a time capsule — and what it is for', ask="What's this? What is it for?",
+    dict(id='time_capsule', img='time_capsule', x=32.2, y=95.6, h=9, wall=0, name='a time capsule — and what it is for', ask="What's this? What is it for?",
          name_t=T(3, 'Hopes and dreams'),
          tasks=[dict(kind='choice', title='Загляни в будущее и выбери верный вариант', items=[
              dict(img='fut_travel', q='This time next week Mia ___ to London.', o=['will be flying', 'will have flown', 'flies'], t=T(3, 'Future Continuous and perfect')),
@@ -444,26 +445,26 @@ P3 = [
              dict(img='fut_band', q='In four years this band ___ at the biggest stadiums.', o=['will be playing', 'will have play', 'is played'], t=T(3, 'Future Continuous and perfect')),
          ])],
          you=[('What will you have achieved by the end of this year?', T(3, 'Future Continuous and perfect', 'Hopes and dreams'))]),
-    dict(id='billboard', img='billboard', x=70, y=96, h=19, name='a billboard — and what it is for', ask="What's this? What is it for?",
+    dict(id='billboard', img='billboard', x=70.7, y=96.7, h=17, wall=0, name='a billboard — and what it is for', ask="What's this? What is it for?",
          name_t=T(3, 'Advertising'),
          tasks=[
-             dict(kind='sort', title='Распредели слова по темам', groups=['Advertising', 'Global issues', 'Online & media'], items=[
+             dict(kind='sort', title='Что бывает на рекламных щитах? Распредели слова по темам', groups=['Advertising', 'Global issues', 'Online & media'], items=[
                  dict(w='a slogan', g=0, t=T(3, 'Advertising')), dict(w='a brand', g=0, t=T(3, 'Advertising')), dict(w='a commercial', g=0, t=T(3, 'Advertising')),
                  dict(w='pollution', g=1, t=T(3, 'Global issues')), dict(w='poverty', g=1, t=T(3, 'Global issues')), dict(w='climate change', g=1, t=T(3, 'Global issues')),
                  dict(w='to subscribe', g=2, t=T(3, 'Online, films and media')), dict(w='a podcast', g=2, t=T(3, 'Online, films and media')), dict(w='to stream', g=2, t=T(3, 'Online, films and media')),
              ]),
-             dict(kind='match', title='Собери половинки предложений', halves=True, items=[
-                 dict(w='What is the best way to break', d='the ice when you meet new people?', t=T(3, 'Idioms')),
-                 dict(w='He is always late because he keeps', d='losing track of time.', t=T(3, 'Idioms')),
-                 dict(w='We could have learned to dive', d='if our coach hadn’t gone to help her son.', t=T(3, 'Modals in the past')),
-                 dict(w='If I hadn’t started learning English,', d='my life would be different now.', t=T(3, '3d and mixed Conditionals')),
+             dict(kind='match', title='Это слоганы с рекламных щитов. Собери половинки предложений', halves=True, items=[
+                 dict(w='This new phone is great, but it costs', d='an arm and a leg.', t=T(3, 'Idioms')),
+                 dict(w='Our new board game will help you break', d='the ice at any party!', t=T(3, 'Idioms')),
+                 dict(w='The company could have chosen', d='a better slogan for this advert.', t=T(3, 'Modals in the past')),
+                 dict(w='If I hadn’t seen that advert,', d='I wouldn’t be wearing these trainers now.', t=T(3, '3d and mixed Conditionals')),
              ]),
-             dict(kind='choice', title='Выбери артикль (— значит без артикля)', items=[
-                 dict(q='What is ___ best way to the beach?', o=['the', 'a', '—'], t=T(3, 'Determiners')),
-                 dict(q='Can you speak ___ English?', o=['—', 'the', 'an'], t=T(3, 'Determiners')),
-                 dict(q='Changing the way you speak is ___ great way to make friends.', o=['a', 'the', '—'], t=T(3, 'Determiners')),
+             dict(kind='choice', title='Про рекламу. Выбери артикль (— значит без артикля)', items=[
+                 dict(q='This is ___ best advert of the year!', o=['the', 'a', '—'], t=T(3, 'Determiners')),
+                 dict(q='It’s ___ advert for a new electric car.', o=['an', 'a', 'the'], t=T(3, 'Determiners')),
+                 dict(q='___ people don’t always trust adverts on social media.', o=['—', 'The', 'A'], t=T(3, 'Determiners')),
              ])],
-         you=[('If you could travel anywhere in the world, where would you go? How would your life have been different if you had never started studying English?', T(3, '3d and mixed Conditionals'))]),
+         you=[('Have you ever bought something because of an advert? If you hadn’t seen that advert, would you have bought it?', T(3, '3d and mixed Conditionals', 'Advertising'))]),
 ]
 
 PARTS = [

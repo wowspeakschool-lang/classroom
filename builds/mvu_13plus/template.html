@@ -44,11 +44,12 @@ h2{font-weight:800;font-size:3.6vh;margin:.2em 0 .5em;color:var(--gold2)}
 .room .obj:hover{transform:translate(-50%,-100%) scale(1.08)}
 .room .obj.done{cursor:default;opacity:.55}
 .room .obj.done:hover{transform:translate(-50%,-100%)}
+.room .obj .shd{position:absolute;left:8%;right:8%;bottom:-5%;height:14%;background:radial-gradient(ellipse at center,rgba(0,0,0,.6),rgba(0,0,0,0) 70%);z-index:-1;pointer-events:none}
 .room .obj .tick{position:absolute;right:-.6vw;top:-.6vh;background:var(--ok);color:#fff;border-radius:50%;width:3.2vh;height:3.2vh;font-size:2vh;display:none;align-items:center;justify-content:center;font-weight:800}
 .room .obj.done .tick{display:flex}
 @keyframes glow{0%,100%{filter:drop-shadow(0 0 0 rgba(255,216,137,0)) drop-shadow(0 6px 8px rgba(0,0,0,.6))}50%{filter:drop-shadow(0 0 1.4vh rgba(255,216,137,.95)) drop-shadow(0 6px 8px rgba(0,0,0,.6))}}
 .roomTitle{pointer-events:none;position:absolute;left:50%;top:7vh;transform:translateX(-50%);z-index:4;background:var(--panel);border-radius:14px;padding:.8vh 1.6vw;font-weight:800;font-size:2.4vh;color:var(--gold2);white-space:nowrap}
-.roomTip{pointer-events:none;position:absolute;left:50%;bottom:11vh;transform:translateX(-50%);z-index:4;background:var(--panel);border-radius:14px;padding:.8vh 1.6vw;font-size:2vh;white-space:nowrap}
+.roomTip{pointer-events:none;position:absolute;left:50%;top:13vh;transform:translateX(-50%);z-index:4;background:var(--panel);border-radius:14px;padding:.8vh 1.6vw;font-size:2vh;white-space:nowrap}
 /* лоток с обрывками */
 #tray{pointer-events:none;position:absolute;left:1.2vw;top:1.2vh;z-index:15;display:none;align-items:flex-start;gap:.3vw;max-width:34%;flex-wrap:wrap}
 #tray canvas{width:5.2vh;height:auto;filter:drop-shadow(0 3px 4px rgba(0,0,0,.7));transition:transform .4s}
@@ -197,7 +198,13 @@ function show(i, push = true) {
   $('#nextBtn').disabled = false;
   renderTray(); MW.refresh();
 }
-function next() { const s = SCREENS[cur]; if (s.onNext) return s.onNext(); if (s.next != null) return show(s.next); if (cur < SCREENS.length - 1) show(cur + 1); }
+function cardStep(s, label) {
+  s.ci = s.ci || 0; const many = s.cards.length > 1;
+  const c = el('div', { cls: 'card', style: 'position:relative;z-index:2;cursor:pointer;min-width:40vw' }, el('div', { cls: 'lbl' }, label + (many ? ` · ${s.ci + 1} / ${s.cards.length}` : '')), el('div', { cls: 'qq' }, s.cards[s.ci]), many && s.ci < s.cards.length - 1 ? el('div', { style: 'margin-top:1.4vh;font-size:1.7vh;color:#bfb39e' }, 'tap for the next question ➜') : null);
+  c.onclick = () => next();
+  return c;
+}
+function next() { const s = SCREENS[cur]; if (s.cards && (s.ci || 0) < s.cards.length - 1) { s.ci = (s.ci || 0) + 1; return show(cur, false); } if (s.onNext) return s.onNext(); if (s.next != null) return show(s.next); if (cur < SCREENS.length - 1) show(cur + 1); }
 $('#nextBtn').onclick = () => next();
 $('#backBtn').onclick = () => { if (history.length) show(history.pop(), false); };
 document.addEventListener('keydown', e => { if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') $('#backBtn').click(); });
@@ -380,9 +387,9 @@ function giveScrap(part) {
 /* ───────── построение экранов ───────── */
 function buildScreens() {
   // приветствие
-  addScreen({ id: 'welcome', title: 'Welcome', render(n) { n.append(el('img', { cls: 'bg', src: img('room1_living') }), el('div', { cls: 'shade' }), el('div', { cls: 'brand' }, 'WOWSPEAK SCHOOL', el('small', {}, 'Escape Room · 13+')), el('div', { cls: 'box' }, el('h1', {}, '🔐 Welcome to WowSpeak School!'), el('div', { cls: 'ru' }, 'Это не тест — мы просто познакомимся и посмотрим, что ты уже умеешь.', el('br'), 'Отвечай как получается: ошибаться можно и нужно.'), el('div', { cls: 'en' }, 'This is not a test — just a game. Let’s have fun!'))); } });
-  addScreen({ id: 'meet', title: 'Get to know you', oral: [{ key: 'meet', label: 'Знакомство (имя, возраст, хобби)', topics: [] }], render(n) { n.append(el('img', { cls: 'bg', src: img('room1_living') }), el('div', { cls: 'shade' })); const cards = el('div', { style: 'position:relative;z-index:2;display:flex;gap:2vw' }); ['What’s your name?', 'How old are you?', 'What do you like doing in your free time?'].forEach((q, i) => cards.append(el('div', { cls: 'card', style: 'max-width:26vw' }, el('div', { cls: 'lbl' }, 'QUESTION ' + (i + 1)), el('div', { cls: 'qq' }, q)))); n.append(el('h2', { style: 'position:relative;z-index:2' }, '👋 Let’s get to know each other'), cards); } });
-  addScreen({ id: 'brief', title: 'Briefing', render(n) { n.append(el('img', { cls: 'bg', src: img('room1_living') }), el('div', { cls: 'shade' }), el('div', { cls: 'box' }, el('h1', {}, '🗝 The WowSpeak Escape Room'), el('div', { cls: 'ru' }, 'Дверь закрыта на кодовый замок. В комнате спрятаны кусочки старой записки с кодом.', el('br'), 'Нажимай на предметы, называй их по-английски и выполняй задания — за каждое получишь кусочек записки.'), el('div', { cls: 'en' }, 'Find the pieces of the secret note and escape!'))); } });
+  addScreen({ id: 'welcome', title: 'Welcome', render(n) { n.append(el('img', { cls: 'bg', src: img('room1_living') }), el('div', { cls: 'shade' }), el('div', { cls: 'brand' }, 'WOWSPEAK SCHOOL', el('small', {}, 'Escape Room · 13+')), el('div', { cls: 'box' }, el('h1', {}, '🔐 Welcome to WowSpeak School!'))); } });
+  addScreen({ id: 'meet', title: 'Get to know you', cards: ['What’s your name?', 'How old are you?', 'What do you like doing in your free time?'], oral: [{ key: 'meet', label: 'Знакомство (имя, возраст, хобби)', topics: [] }], render(n) { n.append(el('img', { cls: 'bg', src: img('room1_living') }), el('div', { cls: 'shade' }), el('h2', { style: 'position:relative;z-index:2' }, '👋 Let’s get to know each other'), cardStep(SCREENS[cur], 'QUESTION')); } });
+  addScreen({ id: 'brief', title: 'Briefing', render(n) { n.append(el('img', { cls: 'bg', src: img('room1_living') }), el('div', { cls: 'shade' }), el('div', { cls: 'box' }, el('h1', {}, '🗝 The WowSpeak Escape Room'))); } });
   D.parts.forEach((P, pi) => {
     const part = pi + 1;
     const roomScreen = addScreen({ id: 'room' + part, part, title: P.room_name, noNext: true, cls: 'room', render(n) {
@@ -391,7 +398,7 @@ function buildScreens() {
       n.append(el('div', { cls: 'roomTitle' }, P.room_name));
       const left = P.objects.filter(o => !S.done[o.id]).length;
       P.objects.forEach(o => {
-        const d = el('div', { cls: 'obj' + (S.done[o.id] ? ' done' : ' live'), style: `left:${o.x}%;top:${o.y}%;height:${o.h}%` }, el('img', { src: img(o.img) }), el('div', { cls: 'tick' }, '✓'));
+        const d = el('div', { cls: 'obj' + (S.done[o.id] ? ' done' : ' live'), style: `left:${o.x}%;top:${o.y}%;height:${o.h}%` }, o.wall ? null : el('div', { cls: 'shd' }), el('img', { src: img(o.img) }), el('div', { cls: 'tick' }, '✓'));
         if (!S.done[o.id]) d.onclick = () => show(SCREEN_ID['name_' + o.id]);
         n.append(d);
       });
@@ -399,7 +406,7 @@ function buildScreens() {
       if (!left) { const b = el('button', { cls: 'btn', style: 'position:absolute;z-index:6;left:50%;bottom:3vh;transform:translateX(-50%)' }, 'Put the note together ➜'); b.onclick = () => show(SCREEN_ID['note' + part]); n.append(b); }
     } });
     SCREEN_ID['room' + part] = roomScreen.idx;
-    if (P.intro) { const intro = addScreen({ id: 'intro' + part, part, title: P.room_name + ' — intro', next: roomScreen.idx, render(n) { n.append(el('img', { cls: 'bg', src: img(P.room) }), el('div', { cls: 'shade' }), el('div', { cls: 'box' }, el('h1', {}, P.room_name), el('div', { cls: 'ru' }, P.intro), el('div', { cls: 'en' }, P.intro_en))); } }); SCREEN_ID['intro' + part] = intro.idx; }
+    if (P.intro) { const intro = addScreen({ id: 'intro' + part, part, title: P.room_name + ' — intro', next: roomScreen.idx, render(n) { n.append(el('img', { cls: 'bg', src: img(P.room) }), el('div', { cls: 'shade' }), el('div', { cls: 'box' }, el('h1', {}, P.room_name))); } }); SCREEN_ID['intro' + part] = intro.idx; }
     P.objects.forEach(o => {
       o.part = part;
       const seq = [];
@@ -414,9 +421,9 @@ function buildScreens() {
         const self = SCREENS[cur]; self.step = self.step || {};
         renderTask(n, o, t, self.step, () => show(self.idx + 1));
       } })));
-      o.you.forEach(([q, topics], qi) => seq.push(addScreen({ id: `you_${o.id}_${qi}`, part, obj: o, title: `${o.id} — And you?`, oral: [{ key: `you_${o.id}_${qi}`, label: 'And you? ' + q, topics }], render(n) {
-        n.append(el('img', { cls: 'bg', src: img(P.room) }), el('div', { cls: 'shade' }), el('div', { cls: 'card', style: 'position:relative;z-index:2' }, el('div', { cls: 'lbl' }, '💬 AND YOU?'), el('div', { cls: 'qq' }, q)));
-      } })));
+      o.you.forEach(([q, topics], qi) => { const qs = q.match(/[^?]+\?/g) || [q]; seq.push(addScreen({ id: `you_${o.id}_${qi}`, part, obj: o, title: `${o.id} — And you?`, cards: qs.map(x => x.trim()), oral: qs.map((x, k) => ({ key: `you_${o.id}_${qi}_${k}`, label: 'And you? ' + x.trim(), topics })), render(n) {
+        n.append(el('img', { cls: 'bg', src: img(P.room) }), el('div', { cls: 'shade' }), cardStep(SCREENS[cur], '💬 AND YOU?'));
+      } })); });
       const last = seq[seq.length - 1];
       last.onNext = () => { if (!S.done[o.id]) { S.done[o.id] = true; save(); giveScrap(part); } setTimeout(() => show(roomScreen.idx), 1700); };
       SCREEN_ID['name_' + o.id] = seq[0].idx;

@@ -63,13 +63,13 @@ rows = []
 def row(step, do, tl, exp):
     rows.append(f'<tr><td class="st">{step}</td><td>{do}</td><td class="tl">{tl}</td><td class="sa">{exp}</td></tr>')
 row('Старт', 'Вверху урока две кнопки: ✅ — чек-лист, 📋 — этот план. Каждая открывает своё окно. В чек-листе впишите имя ученика по-русски, пол и возраст — они попадут в отчёт. Демонстрируйте экран урока, оба окна держите на втором мониторе или рядом.', '—', '—')
-row('1. Welcome', 'Приветствие WowSpeak School. Снимите напряжение: это не тест, а игра.', 'Hi! Welcome to WowSpeak School! This is not a test — it’s a game. Are you ready?', 'Yes! / I’m ready.')
-row('2. Get to know you', 'Три вопроса для знакомства. Баллов нет — смотрим, как ученик держится, и решаем, нужен ли облегчённый режим 💡.', 'What’s your name? How old are you? What do you like doing in your free time?', 'My name is… I’m 14. I like playing football / drawing…')
-row('3. Briefing', 'Объясните правила квеста: дверь закрыта, в комнате спрятаны кусочки записки с кодом. Сколько цифр в коде — не говорите.', 'You are locked in the escape room! Find the pieces of the secret note to open the door. Click on the glowing objects.', '—')
+row('1. Welcome', 'На экране только «Welcome to WowSpeak School!». Скажите сами (по-русски или по-английски): это не тест — мы просто познакомимся и посмотрим, что ты уже умеешь; отвечай как получается, ошибаться можно и нужно.', 'Hi! Welcome to WowSpeak School! This is not a test — it’s a game. Let’s have fun! Are you ready?', 'Yes! / I’m ready.')
+row('2. Get to know you', 'Три вопроса по одной карточке: нажмите на карточку или Next — появится следующий. Баллов нет — смотрим, как ученик держится, и решаем, нужен ли облегчённый режим 💡.', 'What’s your name? How old are you? What do you like doing in your free time?', 'My name is… I’m 14. I like playing football / drawing…')
+row('3. Briefing', 'На экране только название. Расскажите историю сами: дверь закрыта на кодовый замок, в комнате спрятаны кусочки старой записки с кодом; нажимай на предметы, называй их по-английски и выполняй задания — за каждое получишь кусочек записки. Сколько цифр в коде — не говорите.', 'You are locked in the escape room! Find the pieces of the secret note to open the door. Click on the glowing objects.', '—')
 for P in data.PARTS:
     rows.append(f'<tr class="part"><td colspan="4">PART {P["n"]} · {e(P["room_name"])} · {len(P["objects"])} предметов → записка с {P["digits"]} цифрами</td></tr>')
     if P['n'] > 1:
-        row(f'Переход в Part {P["n"]}', 'Только если в предыдущей части каждый блок ≥ 9 из 12 (или вы хотите проверить ещё пару заданий). Нажмите «Keep looking». Не говорите «нам нужно ещё цифр» — просто нашлась новая комната.', e(P['intro_en']), '—')
+        row(f'Переход в Part {P["n"]}', 'Только если в предыдущей части каждый блок ≥ 9 из 12 (или вы хотите проверить ещё пару заданий). Нажмите «Keep looking». На экране только название комнаты — расскажите сами: ' + e(P['intro']) + ' Не говорите «нам нужно ещё цифр» — просто нашлась новая комната.', e(P['intro_en']), '—')
     for o in P['objects']:
         name = o['name'].split(' — ')[0]
         row(f'🔎 {e(o["id"].replace("_", " "))}', f'Ученик выбирает предмет, вы нажимаете. <b>Назвать предмет</b> — оцените в чек-листе ✅, панель «Сейчас на экране» (✓ / ~ / ✗).'
@@ -88,7 +88,7 @@ for P in data.PARTS:
             tl = 'Let’s listen to the message.' if t['kind'] == 'listen' else 'Look at the picture. Which one is right? Why?' if t['kind'] in ('choice', 'family') else 'Is it right or wrong? Can you correct it?' if t['kind'] == 'tf' else 'Put the words in the right order.' if t['kind'] == 'order' else 'Put the words into the groups.' if t['kind'] == 'sort' else 'Match the words.' if t['kind'] == 'match' else 'What is it?'
             row('', do, tl, exp)
         for q, _ in o['you']:
-            row('', '<b>And you?</b> Устный вопрос о самом ученике — оцените 0/1/2 в чек-листе ✅, панель «Сейчас на экране». После Next ученик получает обрывок записки и возвращается в комнату.', e(q), 'Полный ответ по теме, без подсказки = 2')
+            row('', '<b>And you?</b> Устные вопросы о самом ученике — по одному на карточке, следующий по нажатию или Next — оцените 0/1/2 в чек-листе ✅, панель «Сейчас на экране». После Next ученик получает обрывок записки и возвращается в комнату.', e(q), 'Полный ответ по теме, без подсказки = 2')
     row(f'📜 Записка Part {P["n"]}', 'Когда все предметы открыты — «Put the note together»: кусочки слетаются, видны цифры.', 'Look! The pieces make a note. What’s the code?', ' '.join(['X'] * P['digits']))
     if P['n'] < 3:
         row(f'Чекпойнт Part {P["n"]}', 'Посмотрите суммы блоков в чек-листе. ≥ 9 из 12 в каждом блоке → «Keep looking» (следующая часть). Иначе → «Open the lock» (финал).', 'Great job! Shall we open the lock?', '—')
