@@ -42,6 +42,30 @@ SpeechKit (голос `john`, en-US) читает часть слов непра
 | karate | «carry it» | ka-rah-tee |
 | laughed | «left» | larfed |
 | bus (в конце фразы) | «buzzer» | buss |
+| lives · live (жить) | «лайвз», «лайв» — читает как live «живой» | livz · liv |
+| Geography | странное, не «джиогрэфи» | Jee-OG-ra-fee |
+| Oliver | неправильное ударение и гласная | OLL-i-ver |
+| Ellie | то «элли», то «эллай» | EL-lee |
+
+Шесть строк снизу нашла Анна 06.11.2026, прослушав новые аудирования:
+«lives через ai, хотя тут имеется в виду „живёт"», «странное произношение
+в слове Geography», «Oliver — неправильно имя произносит», «Ellie иногда
+правильно, а иногда эллай говорит».
+
+**Под перезапись из-за произношения — шесть файлов** (версия `_v3`):
+
+| блок | файл | что чинит |
+|---|---|---|
+| GG3 Unit 1 Test, блок 9 | `gg3_u1_test_b9_v3.mp3` | Oliver |
+| GG3 Unit 7 Test, блок 10 | `gg3_u7_test_b10_v3.mp3` | lives · live |
+| GG3 Unit 8 Test, блок 9 | `gg3_u8_test_b9_v3.mp3` | live · Ellie |
+| SM3 Unit 1 Test, блок 7 | `sm3_u1_test_b7_v3.mp3` | Geography |
+| SM3 Unit 4 Test, блок 7 | `sm3_u4_test_b7_v3.mp3` | lives |
+| SM3 Unit 9 Test, блок 7 | `sm3_u9_test_b7_v3.mp3` | lives |
+
+Тексты у них прежние — те, что в `builds/listening_v2/teksty.py`. Меняется
+только написание для синтеза по таблице выше. Ссылки в блоках уже переставлены
+на `_v3`, так что достаточно положить файлы в бакет под этими именами.
 
 Как нашли: каждую запись прогоняли через распознавание речи (faster-whisper
 `small.en`) и сверяли с текстом; подозрительное слово синтезировали отдельно в
@@ -558,11 +582,23 @@ Tom has got a blue and white T-shirt. He is looking for shells.
 Места в новом парке: озеро · дерево · скамейка · фонтан · каменная стена ·
 окно кафе.
 
+**Переписано ещё раз 06.11.2026.** Анна нашла два изъяна: рассказ шёл по
+порядку слева направо (как и в SM1), и — главное — **слов `fountain` и `bench`
+в курсе SM2 нет вообще**. Проверил по базе: `fountain` не встречается ни в
+одном блоке курса, `bench` тоже. То есть два места из шести ребёнку незнакомы.
+
+Поэтому меняется и картинка: скамейка и фонтан заменяются на **автобусную
+остановку** и **машину** — оба слова в SM2 есть (`bus stop` — юнит 3,
+`car` — 61 урок). Остальные четыре места знакомы: `lake`, `tree`, `wall`,
+`cafe window`. Предлоги все из курса: `on`, `in`, `next to`, `in front of`.
+
+Новый файл — `sm2_u7_hw5_v3.mp3`, порядок вразнобой:
+
 ```
-One. The boat is on the lake.
-Two. The bird is in the tree.
-Three. The boy is on the bench.
-Four. The girl is next to the fountain.
-Five. The flowers are in front of the cafe window.
-Six. The lizard is on the stone wall.
+One. The lizard is on the wall.
+Two. The boat is on the lake.
+Three. The flowers are in front of the cafe window.
+Four. The bird is in the tree.
+Five. The girl is next to the car.
+Six. The boy is next to the bus stop.
 ```
