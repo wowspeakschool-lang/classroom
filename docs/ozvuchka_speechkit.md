@@ -36,16 +36,21 @@ SpeechKit (голос `john`, en-US) читает часть слов непра
 | Ada | «Adda» | Ayda |
 | Ava | «ever», как контрольное `Eva` | Ayva |
 | Dylan | «Dailan» | Dillan |
-| Oliver | «a lever» | Olliver |
 | Nina | «Nenah» | Neena |
 | queue | «kui» | kew |
 | karate | «carry it» | ka-rah-tee |
 | laughed | «left» | larfed |
 | bus (в конце фразы) | «buzzer» | buss |
 | lives · live (жить) | «лайвз», «лайв» — читает как live «живой» | livz · liv |
-| Geography | странное, не «джиогрэфи» | Jee-OG-ra-fee |
-| Oliver | неправильное ударение и гласная | OLL-i-ver |
-| Ellie | то «элли», то «эллай» | EL-lee |
+| Geography | странное, не «джиогрэфи» | Jeeography |
+| Oliver | «a lever»; неправильное ударение и гласная | Olivver |
+| Ellie | то «элли», то «эллай» (распознаётся «L.A.») | Elly |
+
+**Заглавные буквы и дефисы в подмене SpeechKit читает по буквам** (проверено
+06.11.2026): `EL-lee` звучит как «L Lee», `Jee-OG-ra-fee` — как «G O G rafi»,
+в `OLL-i-ver` появляется пауза. Поэтому в таблице для синтеза — слитные
+написания без капса: `Elly`, `Jeeography`, `Olivver`. Прежняя подмена `Olliver`
+тоже была плохой — распознаётся «I'll ever».
 
 Шесть строк снизу нашла Анна 06.11.2026, прослушав новые аудирования:
 «lives через ai, хотя тут имеется в виду „живёт"», «странное произношение
