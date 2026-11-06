@@ -29,6 +29,26 @@ Words are merged across all 4 versions of each theme (Beginners icons + Advanced
 - **A ghost story I heard** — ghost, haunted house, whisper, shiver, chill, freaked out, footsteps, creepy, mysterious, rumour, believe, atmosphere, haunted, eerie, convince
 - **A Halloween memory** — costume, party, decorate, scare, friends, laugh, candy, memory, embarrassing, unforgettable, celebrate, nostalgic, hilarious, spooky
 - **Autumn playlist** — playlist, headphones, track, favourite, slow, mood, earbuds, volume, vibe, melancholy, background, remind, soundtrack, relaxing, atmospheric
+- **My funny dream** — castle, dragon, fairy, monster, rocket, unicorn, maze, staircase, dream, funny, strange, fly, wake up, nightmare, vivid, surreal, recurring, subconscious, drift off
+- **Things I Can't Live Without** — bed, fridge, wifi, shower, kettle, lamp, laptop, washing machine, rely on, daily, convenient, useless, replace, appreciate, indispensable, take for granted, luxury, dependent, bare minimum, manage without
+- **How often do you take photos** — camera, phone, selfie, photo album, tripod, photo frame, polaroid, ring light, capture, pose, blurry, share, delete, moment, candid, curate, aesthetic, filter, archive, document
+- **My neighborhood** — bakery, pharmacy, library, playground, bus stop, park, gym, café, supermarket, neighbour, nearby, noisy, safe, local, crowded, residential, commute, lively, run-down, community, isolated
+- **Ordering at a café** — menu, juice, croissant, cake, sandwich, tea, ice cream, smoothie, hot chocolate, order, allergy, to go, tip, refill, recommend, split the bill, takeaway, bill, receipt, card
+- **Asking for directions** — cinema, museum, post office, zoo, hospital, bus stop, station, stadium, shopping centre, left, right, straight on, traffic lights, block, landmark, nearby, far, opposite, next to, intersection, go past, around the corner, get lost
+- **Shopping for clothes** — t-shirt, jeans, trainers, jacket, dress, cap, hoodie, shirt, bag, try on, fit, size, discount, exchange, return, style, loose, tight, refund, fitting room, price tag, receipt
+- **My online persona vs real me** — quiet, loud, shy, confident, serious, funny, talkative, lazy, active, online, offline, real, honest, pretend, show off, image, fake, pressure, likes, be yourself
+- **My ideal road trip** — car, map, snacks, suitcase, mountains, beach, petrol station, sea, route, destination, view, stop, driver, passenger, detour, scenic, worth it, take turns, get lost, traffic
+- **Books I'd recommend** — comic, fairy tale, adventure, fantasy, detective story, animal story, thriller, romance, sci-fi, true story, story, character, exciting, boring, recommend, ending, plot, twist, worth reading
+- **A song that gets me every time** — song, guitar, drums, microphone, concert, dancing, singer, band, speaker, lyrics, chorus, beat, catchy, cheer up, sing along, emotional, memories, on repeat
+- **My ideal study spot** — desk, lamp, headphones, notebook, laptop, library, café, quiet, noisy, focus, comfortable, light, break, distraction, get things done
+- **My current obsession** — series, video game, puzzle, collection, baking, sport, podcast, gym, drawing, obsessed, into, lately, can't stop, every day, recommend, addicted, binge, phase, worth trying
+- **Who I was 5 years ago** — teddy bear, toy car, cartoon, school bag, old phone, bike, school photo, diary, skateboard, braces, toy, used to, back then, change, grow up, remember, different, embarrassing, proud
+- **Inventions That Changed the World** — wheel, light bulb, telephone, bicycle, plane, computer, printing press, internet, smartphone, invent, inventor, useful, modern, everyday, save time, improve, replace, invention, handy, in the past, these days
+- **My favourite computer games (the game I'd design)** — controller, keyboard, headset, screen, treasure map, trophy, streaming setup, level, unlock, beat, teammate, win, lose, reaction, patience, teamwork, practice, tricky, fair play
+- **Traditions in My Family** — cake, candles, present, dinner table, flowers, fireworks, toast, tradition, celebrate, every year, gather, special, family, custom, grandparents, recipe, dress up
+- **What makes a good friend?** — kind, funny, honest, helpful, patient, friendly, loyal, reliable, calm, listen, share, help, argue, say sorry, trust, keep a secret, make up, help out, be honest
+- **Can boys and girls be best friends?** — friends talking, playing football together, doing homework together, laughing together, sharing lunch, walking home, sports team, studying together, sharing food, gaming together, same, different, tease, join in, fair, normal, gossip, awkward, comfortable, best friends
+- **Memes that make you laugh** — funny cat, laughing kid, silly dog, surprised face, banana peel, thumbs up, laughing teen, phone with laughing emoji, facepalm, funny, joke, laugh, share, silly, boring, screenshot, inside joke, laugh out loud, too much
 
 ## Heavily reused words — try to AVOID these in new themes
 `cozy/cosy`, `atmosphere`, `nostalgic`, `remind`, `chill`, `vibe`, `friends`, `score`, `team`, `magical`, `spacious`, `relaxing`, `mood`.
