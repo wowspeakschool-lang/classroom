@@ -529,13 +529,22 @@ Six. The laptop is on the small table.
 
 Порядок детей на картинке слева направо: Lily · Tom · Amy · Ben · Clare · Sam.
 
+**Переписано ещё раз 06.11.2026.** Анна посмотрела готовое задание: «аудио всё
+говорит по порядку — как идут дети, слева направо, и описывает их, а должен
+в разнобой». Так ребёнок подписывал кружки подряд, не слушая. Новый порядок
+рассказа — **Ben · Clare · Lily · Sam · Amy · Tom**: ни один ребёнок не идёт
+следом за своим соседом по картинке. Запись `sm1_u9_hw5_b2_v2.mp3` больше
+не используется.
+
+Новый файл — `sm1_u9_hw5_b2_v3.mp3`, папка `sm1`:
+
 ```
-Look at the children on the beach. Lily has got a pink swimsuit. She is making a sandcastle.
-Tom has got a blue and white T-shirt. He is looking for shells.
-Amy has got a big hat and a purple dress. She is eating an ice cream.
-Ben has got a yellow T-shirt and a blue cap. He is taking a photo.
+Look at the children on the beach. Ben has got a yellow T-shirt and a blue cap. He is taking a photo.
 Clare has got red hair and a green top. She is reading a book.
+Lily has got a pink swimsuit. She is making a sandcastle.
 Sam has got a green hoodie. He is playing the guitar.
+Amy has got a big hat and a purple dress. She is eating an ice cream.
+Tom has got a blue and white T-shirt. He is looking for shells.
 ```
 
 ## SM2 · Юнит 7 · ДЗ 5 · блок 6 → `sm2_u7_hw5_v2.mp3`

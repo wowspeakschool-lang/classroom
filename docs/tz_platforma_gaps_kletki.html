@@ -1,0 +1,162 @@
+<title>Клеточки в пропусках</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap">
+<style>
+  /* Макет: две колонки «сейчас / предлагаем», внутри — строки заданий. */
+  :root{
+    --bg:#FBFAFE; --card:#FFFFFF; --ink:#1F1A3D; --mute:#6F6A8A; --faint:#ABA6C2;
+    --line:#EEEAF3; --pick:#6A4DF4; --pick-d:#5236DB; --soft:#EFEBFF; --warn:#F7628C;
+    --font:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --bg:#15122A; --card:#1E1A38; --ink:#F2EFFC; --mute:#A9A3C4; --faint:#6E6792;
+    --line:#2C2650; --pick:#8E78FF; --pick-d:#B9A8FF; --soft:#2A2350; --warn:#FF86A8;
+    color-scheme:dark; } }
+  :root[data-theme="dark"]{
+    --bg:#15122A; --card:#1E1A38; --ink:#F2EFFC; --mute:#A9A3C4; --faint:#6E6792;
+    --line:#2C2650; --pick:#8E78FF; --pick-d:#B9A8FF; --soft:#2A2350; --warn:#FF86A8;
+    color-scheme:dark; }
+
+  body{ background:var(--bg); color:var(--ink); font-family:var(--font);
+    padding-left:max(16px,env(safe-area-inset-left,0px));
+    padding-right:max(16px,env(safe-area-inset-right,0px));
+    padding-block:28px 48px; }
+  .wrap{ max-width:880px; margin:0 auto; display:flex; flex-direction:column; gap:26px; }
+  h1{ font-size:27px; font-weight:800; margin:0; text-wrap:balance; letter-spacing:-.4px; }
+  .lead{ margin:0; color:var(--mute); font-size:15px; line-height:1.55; max-width:62ch; }
+  .lead b{ color:var(--ink); }
+  h2{ font-size:13px; font-weight:800; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--faint); margin:0; }
+
+  .case{ background:var(--card); border:1px solid var(--line); border-radius:18px;
+    padding:18px 18px 20px; display:flex; flex-direction:column; gap:14px; }
+  .case > .cap{ display:flex; flex-wrap:wrap; align-items:baseline; gap:8px; }
+  .cap b{ font-size:16px; font-weight:800; }
+  .cap span{ font-size:13px; color:var(--mute); }
+  .cols{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:560px){ .cols{ grid-template-columns:1fr; } }
+  .col{ min-width:0; display:flex; flex-direction:column; gap:9px; }
+  .tag{ font-size:11.5px; font-weight:800; letter-spacing:.07em; text-transform:uppercase;
+    color:var(--faint); }
+  .col.now .tag{ color:var(--warn); }
+  .col.new .tag{ color:var(--pick-d); }
+  .stage{ border:1px dashed var(--line); border-radius:14px; padding:16px 14px;
+    display:flex; flex-wrap:wrap; align-items:center; gap:4px; min-height:62px;
+    font-size:20px; font-weight:800; line-height:2; min-width:0; }
+  .ru{ font-size:14px; font-weight:700; color:var(--mute); margin-left:6px; }
+
+  /* как сейчас: одно поле, ширина по числу букв */
+  .gin{ display:inline-block; border:0; border-bottom:3px solid var(--pick);
+    background:var(--soft); border-radius:10px 10px 0 0; height:30px; margin:0 4px; }
+
+  /* как предлагаем: клеточка на букву */
+  .cells{ display:inline-flex; gap:3px; margin:0 5px; vertical-align:-6px; }
+  .cell{ width:24px; height:30px; border:0; border-bottom:3px solid var(--pick);
+    background:var(--soft); border-radius:7px 7px 0 0; }
+
+  .note{ font-size:13.5px; color:var(--mute); line-height:1.6; }
+  .note b{ color:var(--ink); }
+  ul{ margin:0; padding-left:20px; display:flex; flex-direction:column; gap:7px; }
+  li{ font-size:14.5px; line-height:1.55; }
+  code{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px;
+    background:var(--soft); color:var(--pick-d); padding:1.5px 6px; border-radius:6px; }
+</style>
+
+<div class="wrap">
+  <header style="display:flex;flex-direction:column;gap:10px">
+    <h1>Клеточки в пропусках</h1>
+    <p class="lead">Сейчас в задании «впиши пропущенные буквы» пропуск — <b>одно поле</b>.
+      Его ширина зависит от числа букв, но границы между буквами не видны, и ребёнок не понимает,
+      сколько букв вписывать: одну, две или три. Предложение — рисовать <b>клеточку на букву</b>,
+      с просветом между ними.</p>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <h2>Как это выглядит</h2>
+
+    <div class="case">
+      <div class="cap"><b>Одна буква</b><span>SM1 Unit 0 Test · красный</span></div>
+      <div class="cols">
+        <div class="col now"><span class="tag">сейчас</span>
+          <div class="stage">r<input class="gin" style="width:38px" aria-label="пропуск"/>d<span class="ru">(красный)</span></div></div>
+        <div class="col new"><span class="tag">предлагаем</span>
+          <div class="stage">r<span class="cells"><input class="cell" aria-label="буква 1"/></span>d<span class="ru">(красный)</span></div></div>
+      </div>
+      <p class="note">Здесь разницы почти нет — одна буква читается и так.</p>
+    </div>
+
+    <div class="case">
+      <div class="cap"><b>Две буквы подряд</b><span>SM1 Unit 1 Test · книга</span></div>
+      <div class="cols">
+        <div class="col now"><span class="tag">сейчас</span>
+          <div class="stage">b<input class="gin" style="width:48px" aria-label="пропуск"/>k<span class="ru">(книга)</span></div></div>
+        <div class="col new"><span class="tag">предлагаем</span>
+          <div class="stage">b<span class="cells"><input class="cell" aria-label="буква 1"/><input class="cell" aria-label="буква 2"/></span>k<span class="ru">(книга)</span></div></div>
+      </div>
+      <p class="note">Слева поле чуть шире, чем в прошлом примере, но на глаз это не считывается:
+        <b>одна буква нужна или две — непонятно</b>. Справа видно сразу.</p>
+    </div>
+
+    <div class="case">
+      <div class="cap"><b>Три буквы подряд</b><span>пример: бутерброд</span></div>
+      <div class="cols">
+        <div class="col now"><span class="tag">сейчас</span>
+          <div class="stage">s<input class="gin" style="width:58px" aria-label="пропуск"/>wich<span class="ru">(бутерброд)</span></div></div>
+        <div class="col new"><span class="tag">предлагаем</span>
+          <div class="stage">s<span class="cells"><input class="cell" aria-label="буква 1"/><input class="cell" aria-label="буква 2"/><input class="cell" aria-label="буква 3"/></span>wich<span class="ru">(бутерброд)</span></div></div>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="cap"><b>Два пропуска в разных местах слова</b><span>SM1 Unit 1 Test · линейка</span></div>
+      <div class="cols">
+        <div class="col now"><span class="tag">сейчас</span>
+          <div class="stage">r<input class="gin" style="width:38px" aria-label="пропуск 1"/>l<input class="gin" style="width:38px" aria-label="пропуск 2"/>r<span class="ru">(линейка)</span></div></div>
+        <div class="col new"><span class="tag">предлагаем</span>
+          <div class="stage">r<span class="cells"><input class="cell" aria-label="буква 1"/></span>l<span class="cells"><input class="cell" aria-label="буква 2"/></span>r<span class="ru">(линейка)</span></div></div>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="cap"><b>Три пропуска, два слова</b><span>SM1 Unit 1 Test · пенал</span></div>
+      <div class="cols">
+        <div class="col now"><span class="tag">сейчас</span>
+          <div class="stage">p<input class="gin" style="width:38px" aria-label="пропуск 1"/>nc<input class="gin" style="width:38px" aria-label="пропуск 2"/>l&nbsp; c<input class="gin" style="width:38px" aria-label="пропуск 3"/>se<span class="ru">(пенал)</span></div></div>
+        <div class="col new"><span class="tag">предлагаем</span>
+          <div class="stage">p<span class="cells"><input class="cell" aria-label="буква 1"/></span>nc<span class="cells"><input class="cell" aria-label="буква 2"/></span>l&nbsp; c<span class="cells"><input class="cell" aria-label="буква 3"/></span>se<span class="ru">(пенал)</span></div></div>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="cap"><b>Смешанный случай</b><span>SM1 Unit 4 Test · сосиска — один пропуск на две буквы, один на одну</span></div>
+      <div class="cols">
+        <div class="col now"><span class="tag">сейчас</span>
+          <div class="stage">s<input class="gin" style="width:48px" aria-label="пропуск 1"/>s<input class="gin" style="width:38px" aria-label="пропуск 2"/>ge<span class="ru">(сосиска)</span></div></div>
+        <div class="col new"><span class="tag">предлагаем</span>
+          <div class="stage">s<span class="cells"><input class="cell" aria-label="буква 1"/><input class="cell" aria-label="буква 2"/></span>s<span class="cells"><input class="cell" aria-label="буква 3"/></span>ge<span class="ru">(сосиска)</span></div></div>
+      </div>
+      <p class="note">Самый наглядный случай: слева два поля почти одинаковой ширины,
+        а букв в них разное количество.</p>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:12px">
+    <h2>Что просим у платформы</h2>
+    <ul>
+      <li>В блоке <code>gaps</code> с <code>mode: 'type'</code> рисовать пропуск
+        <b>N клеточками</b> по числу букв верного ответа, а не одним полем.</li>
+      <li>Между клеточками — просвет (2–4 px), чтобы границы читались.</li>
+      <li>Ввод идёт слева направо; после заполненной клеточки курсор сам переходит
+        в следующую, по Backspace — возвращается назад.</li>
+      <li>Если в <code>accept</code> варианты разной длины, клеточек столько,
+        сколько в <code>accept[0]</code>, а засчитываются все варианты, как сейчас.</li>
+      <li>Вставка целого слова из буфера раскладывается по клеточкам.</li>
+      <li>Режимов <code>drag</code> и <code>choice</code> это не касается — там поле
+        другого вида.</li>
+    </ul>
+    <p class="note">Со стороны контента менять ничего не нужно: данные уже лежат так,
+      что число букв известно — это длина ответа в <code>accept[0]</code>.
+      Сейчас платформа считает по ней только ширину поля
+      (<code>calc((len + 0.6)ch + 16px)</code> в <code>blocks.tsx</code>).</p>
+  </section>
+</div>
