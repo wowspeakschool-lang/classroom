@@ -46,6 +46,7 @@ SpeechKit (голос `john`, en-US) читает часть слов непра
 | karate | «carry it», а `ka-rah-tee` в рассказе — «K-Riv-T» | karahtey |
 | laughed | «left» | larfed |
 | bus (в конце фразы) | «buzzer» | buss |
+| teacher (в конце короткой фразы) | «T-shirt», «tisha» | teecher |
 | lives · live (жить) | «лайвз», «лайв» — читает как live «живой» | livz · liv |
 | Geography | ударение на первый слог «джи» | ge+ography |
 | Oliver | «a lever»; неправильное ударение и гласная | Olivver |
