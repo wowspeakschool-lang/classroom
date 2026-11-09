@@ -180,7 +180,7 @@ def v4(its):
 # ---------- вариант 5. дай пингвинёнку то, что нужно ----------
 def v5(its):
     tooth, tube, peng, brush = its
-    p, d = page(4, 'Дай пингвинёнку то, что нужно', 'Нарисуй в лапках у пингвинёнка щётку и пасту SPLAT Kids.')
+    p, d = page(3, 'Дай пингвинёнку то, что нужно', 'Нарисуй в лапках у пингвинёнка щётку и пасту SPLAT Kids.')
     paste_fit(p, peng, (M + 80, TOP + 40, W - M - 80, BOTTOM - 40))
     return p
 
@@ -188,7 +188,7 @@ def v5(its):
 def main():
     os.makedirs(OUT, exist_ok=True)
     its = items(Image.open(os.path.join(SRC, 'outlines_v2.png')), 4)
-    pages = [('raskraska', v1(its)), ('obvedi', v2(its)), ('dorisuy_polovinku', v4(its)), ('day_pingvinyonku', v5(its))]
+    pages = [('raskraska', v1(its)), ('obvedi', v2(its)), ('day_pingvinyonku', v5(its))]
     for name, pg in pages:
         pg.save(os.path.join(OUT, name + '.pdf'), resolution=200)
         pg.resize((W // 4, H // 4), Image.LANCZOS).save(os.path.join(OUT, name + '.png'))
