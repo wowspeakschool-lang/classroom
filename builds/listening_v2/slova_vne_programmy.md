@@ -79,3 +79,15 @@ lift · electric fan · digital radio; castle · park · new bike.
 Все 24 записи аудирований GG3 и SM3 лежали в бакете (проверено 06.11.2026,
 каждая ссылка из блока отдаёт 206). У GG3 находок по сути нет: сверять не с чем,
 а помеченные слова — обычная лексика A1–A2 по теме своего юнита.
+
+## Записи пришли 09.11.2026
+
+Все четыре файла `_v4.mp3` в бакете (`classroom-media/sm3`), 44–49 секунд.
+Расшифрованы (faster-whisper `small.en`) и сверены с текстами: совпадают —
+`boots only when it is raining`, `Otis found a starfish… grandfather found
+nothing`, `the lift is slower than walking upstairs… the second floor`,
+`photos of the park`. Слов вне курса в записях не осталось.
+
+Два места на слух Анне (строка 9 в разделе SM3 файла вычитки): в юните 6 имя
+`Rex` расшифровалось как «Russ», в юните 9 `bike` — как «bake». Может быть и
+огрехом распознавания, и настоящей оговоркой синтеза; решает ухо.
