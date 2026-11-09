@@ -338,9 +338,9 @@ def penguin_pairs():
 
 
 def hidden():
-    """Найди спрятанные предметы (Анна, 09.11.2026): сцена — промпт 37, целые предметы для рамочек — промпт 38
+    """Найди спрятанные предметы (Анна, 09.11.2026): сцена — промпт 39, целые предметы для рамочек — промпт 40
     (тот же стиль, вырезаны tools/cut.py в media/print/hidden). На картинке предметы спрятаны, в рамочках — целые."""
-    sc = Image.open(os.path.join(ROOT, 'media/print/hidden_scene_v3.webp')).convert('RGB')
+    sc = Image.open(os.path.join(ROOT, 'media/print/hidden_scene_v4.webp')).convert('RGB')
     names = ['h_tooth', 'h_tube', 'h_cup', 'h_brush', 'h_penguin', 'h_fish']
     p, d = page('Найди спрятанные предметы', 'Найди на картинке всё, что нарисовано в рамочках внизу.\nНашёл — обведи и поставь галочку!')
     top = M + 380
