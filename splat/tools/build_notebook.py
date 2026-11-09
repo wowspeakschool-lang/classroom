@@ -461,7 +461,7 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     # бинго убрано (Анна, 09.11.2026)
     parts = [('dnevnik', diary()), ('labirinty', mazes()),
-             ('otlichiya', diff_pair('diff_bedroom') + differences(scene_fishing) + differences(scene_bath)),   # рыбалку и ванную заменим готовыми парами (промпты 42, 43)
+             ('otlichiya', diff_pair('diff_bedroom') + diff_pair('diff_fishing') + diff_pair('diff_bath')),   # пары целиком из генератора (промпты 41–43)
              ('ten', shadows()), ('lishnee', odd_one()), ('ryad', pattern()), ('para', penguin_pairs()), ('spryatannoe', hidden()), ('pamyatka', memo())]
     allp = []
     for name, pages in parts:
