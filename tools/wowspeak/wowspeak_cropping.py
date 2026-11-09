@@ -144,21 +144,35 @@ def crop_grid_auto(path,names,outdir,f=3,thr=26,min_area=90,gap=None,pad=10,row_
             if len(cs)==len(flat) or ink(cs[len(flat)])<0.1*ink(cs[len(flat)-1]):
                 gap=g; break
         if verbose: print(f'{os.path.basename(path)}: gap={gap}')
+    def order(groups):
+        """Группы -> список в порядке чтения (строками, слева направо)."""
+        cl=[]
+        for g in groups:
+            xs0=min(boxes[k][0] for k in g); ys0=min(boxes[k][1] for k in g)
+            xs1=max(boxes[k][2] for k in g); ys1=max(boxes[k][3] for k in g)
+            cl.append({'ids':set(g),'box':(xs0,ys0,xs1,ys1),'cy':(ys0+ys1)/2,'cx':(xs0+xs1)/2,
+                       'h':ys1-ys0,'w':xs1-xs0})
+        cl=[c for c in cl if c['w']>=18 and c['h']>=18]
+        if not cl: return [],[]
+        cl.sort(key=lambda c:c['cy'])
+        rows=[[cl[0]]]
+        for c in cl[1:]:
+            ref=rows[-1][0]
+            if abs(c['cy']-ref['cy'])<=row_tol*max(ref['h'],c['h'],1)*2: rows[-1].append(c)
+            else: rows.append([c])
+        return [c for r in rows for c in sorted(r,key=lambda c:c['cx'])],rows
+
     clusters=sorted(_merge(boxes,gap),key=ink,reverse=True)[:len(flat)]   # лишнее затрётся белым
-    cl=[]
-    for g in clusters:
-        xs0=min(boxes[k][0] for k in g); ys0=min(boxes[k][1] for k in g)
-        xs1=max(boxes[k][2] for k in g); ys1=max(boxes[k][3] for k in g)
-        cl.append({'ids':set(g),'box':(xs0,ys0,xs1,ys1),'cy':(ys0+ys1)/2,'cx':(xs0+xs1)/2,
-                   'h':ys1-ys0,'w':xs1-xs0})
-    cl=[c for c in cl if c['w']>=18 and c['h']>=18]
-    cl.sort(key=lambda c:c['cy'])
-    rows=[[cl[0]]]
-    for c in cl[1:]:
-        ref=rows[-1][0]
-        if abs(c['cy']-ref['cy'])<=row_tol*max(ref['h'],c['h'],1)*2: rows[-1].append(c)
-        else: rows.append([c])
-    ordered=[c for r in rows for c in sorted(r,key=lambda c:c['cx'])]
+    ordered,rows=order(clusters)
+    # Два рисунка, нарисованные вплотную (замок и дракон над ним), сливаются в
+    # один кластер, и рамок выходит меньше, чем имён. Тогда берём компоненты
+    # как есть: они мельче, зато их хватает на все имена.
+    if len(ordered)!=len(flat) and len(boxes)>=len(flat):
+        alt=sorted(([k] for k in boxes),key=ink,reverse=True)[:len(flat)]
+        o2,r2=order(alt)
+        if len(o2)==len(flat):
+            ordered,rows=o2,r2
+            if verbose: print(f'{os.path.basename(path)}: boxes overlap - using raw components')
     if verbose: print(f'{os.path.basename(path)}: {len(ordered)} objects found, {len(flat)} names given')
     if len(ordered)!=len(flat):
         raise RuntimeError(f'{path}: found {len(ordered)} objects for {len(flat)} names '
