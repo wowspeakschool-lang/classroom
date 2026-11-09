@@ -52,6 +52,7 @@ img{-webkit-user-drag:none;user-drag:none}
 .btn.blue{background:linear-gradient(180deg,#7cc8ff,var(--blue-d));box-shadow:0 calc(var(--u)*.5) 0 #1d6fb8}
 .btn.sun{background:linear-gradient(180deg,#ffe27a,#f2a81d);color:var(--ink);box-shadow:0 calc(var(--u)*.5) 0 #c98410}
 .btn:active{transform:translate(-50%,calc(-50% + 3px));box-shadow:none}
+.btn.big.nb{font-size:calc(var(--u)*2.3);padding:calc(var(--u)*1.55) calc(var(--u)*2)}
 .btn.big{font-size:calc(var(--u)*3);padding:calc(var(--u)*1.3) calc(var(--u)*3.4);min-width:calc(var(--u)*27)}
 .btn.ready{animation:breath 1.3s ease-in-out infinite}
 .say{position:absolute;transform:translate(-50%,-50%);border:none;background:var(--blue);color:#fff;border-radius:50%;width:calc(var(--u)*5.6);height:calc(var(--u)*5.6);font-size:calc(var(--u)*2.6);cursor:pointer;box-shadow:0 calc(var(--u)*.35) 0 var(--blue-d);z-index:22}
@@ -392,10 +393,11 @@ function home() {
   // заголовок и кнопка урока (Анна, 09.11.2026): урок бесплатный, кнопка ведёт на страницу урока
   const head = el('div', 'headline', 'Дарим бесплатный урок английского от WowSpeak и SPLAT Kids,<br>набор игр и ещё подарки 🎁');
   btn('🎁 Записаться на бесплатный урок', 50, 92.5, 'sun lessonbtn ready', lessonPage);
-  btn('🎮 Играть', 21, 74, 'big', map);
-  btn('🏆 Конкурс', 79, 74, 'big blue', contest);
-  const s1 = el('div', 'sub', 'Помоги пингвинёнку дойти до замка'); s1.style.left = '21%'; s1.style.top = '82%';
-  const s2 = el('div', 'sub', 'Нарисуй рисунок и расскажи по-английски —<br>приз ждёт тебя 🎁'); s2.style.left = '79%'; s2.style.top = '82%';
+  // четыре входа: слева игры, справа конкурс, «Тетрадка пингвинёнка» — печатные материалы (Анна, 09.11.2026)
+  const S = (t, x, y) => { const e = el('div', 'sub', t); e.style.left = x + '%'; e.style.top = y + '%'; };
+  btn('🎮 Играть', 19, 52, 'big', map);                 S('Помоги пингвинёнку дойти до замка', 19, 59);
+  btn('📒 Тетрадка пингвинёнка', 19, 72, 'big nb', notebook); S('Распечатай и играй', 19, 79);
+  btn('🏆 Конкурс', 81, 62, 'big blue', contest);       S('Нарисуй рисунок и расскажи по-английски —<br>приз ждёт тебя 🎁', 81, 69);
 }
 
 /* карта «7 льдинок до замка»: x, y, ширина льдинки в % (дальше — меньше) */
@@ -937,6 +939,25 @@ function lessonPage() {
     <p class="pg-small">Нажмите — и послушайте, как они звучат.</p>
     <div class="pg-words">${W5.map(w => `<button data-w="${w}"><img src="${U(PIC[w])}" alt="">🔊</button>`).join('')}</div>
     <div class="pg-foot"><button class="pg-cta" data-dev>🎁 Записаться на бесплатный урок</button><p class="pg-small" style="margin-top:10px">Урок проходит онлайн, нужен компьютер или планшет со звуком и камерой.</p></div>`);
+}
+
+/* «Тетрадка пингвинёнка» — материалы для печати (Анна, 09.11.2026): дневник привычки, памятка,
+   лабиринты, найди отличия, бинго-лото. Пока материалов нет — карточки «в разработке» */
+const NOTEBOOK = [
+  ['📅', 'Дневник привычки на 7 дней', 'Утро и вечер — клеточки для наклеек, лист наклеек в комплекте', ''],
+  ['🌀', 'Лабиринты', 'Приведи пингвинёнка к щётке, к пасте и к замку', ''],
+  ['🔍', 'Найди отличия', 'Две картинки с пингвинёнком — найди 5 отличий', ''],
+  ['🎲', 'Бинго-лото', 'Мама называет слово по-английски — малыш закрывает картинку', ''],
+  ['💡', 'Памятка для родителей', 'Как чистить зубы без уговоров', ''],
+];
+function notebook() {
+  openPage(`
+    <div class="pg-hero"><img src="${U('ph_stand')}" alt="">
+      <div><div class="kick">Тетрадка пингвинёнка</div>
+        <h1>Распечатай и играй</h1>
+        <p class="lead">Задания с пингвинёнком на бумаге: играем вместе с ребёнком, без телефона. Всё на листах А4.</p></div></div>
+    <h2>Что внутри</h2>
+    <div class="pg-tpl">${NOTEBOOK.map(([i, t, d, f]) => f ? `<a href="${f}" download><span>${i}</span>${t}<small>${d}</small></a>` : `<button data-dev><span>${i}</span>${t}<small>${d}</small></button>`).join('')}</div>`);
 }
 
 /* конкурс рисунков (Анна, 09.11.2026): только рисунки, без видео; шаблоны; загрузка рисунка в базу */
