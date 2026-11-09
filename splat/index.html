@@ -87,6 +87,8 @@ img{-webkit-user-drag:none;user-drag:none}
 .stars{display:flex;gap:calc(var(--u)*.25)}
 .stars i{font-style:normal;font-size:calc(var(--u)*1.7);filter:grayscale(1);opacity:.5}
 .stars i.on{filter:none;opacity:1}
+.headline{position:absolute;left:50%;top:calc(var(--u)*6.6);transform:translateX(-50%);z-index:24;width:max-content;max-width:64%;text-align:center;background:rgba(255,255,255,.92);border-radius:calc(var(--u)*1.6);padding:calc(var(--u)*.6) calc(var(--u)*1.6);font-family:var(--disp);font-weight:700;font-size:max(calc(var(--u)*1.75),12px);line-height:1.25;color:var(--ink);box-shadow:0 calc(var(--u)*.4) calc(var(--u)*1.2) rgba(45,58,92,.18)}
+.btn.lessonbtn{font-size:max(calc(var(--u)*1.9),12px);padding:calc(var(--u)*.8) calc(var(--u)*2.2);box-shadow:0 calc(var(--u)*.4) 0 #c98410,0 0 0 calc(var(--u)*.35) rgba(255,255,255,.85)}
 .sub{position:absolute;transform:translate(-50%,0);z-index:24;width:max-content;max-width:40%;text-align:center;background:rgba(255,255,255,.9);border-radius:999px;padding:calc(var(--u)*.35) calc(var(--u)*1.2);font-family:var(--disp);font-weight:600;font-size:calc(var(--u)*1.3);box-shadow:0 calc(var(--u)*.2) calc(var(--u)*.6) rgba(45,58,92,.15)}
 .toast{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);z-index:70;background:#24345e;color:#fff;border-radius:999px;padding:calc(var(--u)*.6) calc(var(--u)*1.6);font-weight:800;font-size:calc(var(--u)*1.4);animation:pop .4s both}
 
@@ -169,10 +171,61 @@ img{-webkit-user-drag:none;user-drag:none}
 
 /* телефон вертикально — просим повернуть */
 #rotate{display:none;position:fixed;inset:0;z-index:100;background:#2a5fa0;color:#fff;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;font-family:var(--disp);font-weight:600;font-size:22px}
+#rotate .rot-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.3)}
+#rotate .rot-links button{background:#ffd23f;color:var(--ink);margin-top:0}
 #rotate .ph{font-size:64px;animation:rot 2s ease-in-out infinite}
 #rotate button{border:none;background:#fff;color:#2a5fa0;border-radius:999px;padding:10px 20px;font-family:var(--disp);font-weight:600;font-size:16px;margin-top:12px}
 @keyframes rot{0%,30%{rotate:0deg}60%,100%{rotate:-90deg}}
 @media (orientation:portrait) and (max-width:820px),(orientation:portrait) and (pointer:coarse){body:not(.anyway) #rotate{display:flex}}
+
+/* ---------- страницы для родителей (урок, конкурс): обычная прокрутка, читаются и вертикально (Анна, 09.11.2026) ---------- */
+#page{display:none;position:fixed;inset:0;z-index:90;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;background:linear-gradient(180deg,#dff1ff 0,#f4faff 340px,#fff 100%);color:var(--ink);font-family:var(--text);user-select:text;-webkit-user-select:text}
+body.paged #page{display:block}
+body.paged #rotate{display:none!important}
+.pg{max-width:880px;margin:0 auto;padding:16px 16px 48px}
+.pg-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
+.pg-top .logo .sk b{font-size:20px}.pg-top .logo .sk i{font-size:9px}.pg-top .logo .ws{font-size:14px;padding:5px 10px}.pg-top .logo .x{font-size:16px;color:var(--ink);text-shadow:none}.pg-top .logo .sk{padding:4px 8px}
+.pg-back{border:none;background:#fff;border-radius:999px;padding:9px 16px;font-family:var(--disp);font-weight:600;font-size:15px;color:var(--ink);box-shadow:0 2px 0 rgba(0,0,0,.08);cursor:pointer}
+.pg-hero{display:flex;gap:18px;align-items:center;background:#fff;border-radius:28px;padding:22px;box-shadow:0 10px 30px rgba(45,58,92,.1)}
+.pg-hero img{width:150px;flex:0 0 auto}
+.pg-hero .kick{font-family:var(--disp);font-weight:600;color:var(--blue-d);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.pg h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,5vw,38px);line-height:1.1;margin:4px 0 8px}
+.pg h2{font-family:var(--disp);font-weight:700;font-size:clamp(21px,3.6vw,27px);margin:30px 0 12px}
+.pg p,.pg li{font-weight:700;font-size:16px;line-height:1.5}
+.pg .lead{font-size:17px;color:#45557a}
+.pg-cta{display:inline-block;border:none;border-radius:999px;padding:15px 28px;font-family:var(--disp);font-weight:700;font-size:19px;color:var(--ink);background:linear-gradient(180deg,#ffe27a,#f2a81d);box-shadow:0 5px 0 #c98410;cursor:pointer;margin-top:10px}
+.pg-cta:active{transform:translateY(3px);box-shadow:0 2px 0 #c98410}
+.pg-cta.blue{color:#fff;background:linear-gradient(180deg,#7cc8ff,var(--blue-d));box-shadow:0 5px 0 #1d6fb8}
+.pg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.pg-grid.two{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.pg-card{background:#fff;border-radius:22px;padding:18px;box-shadow:0 6px 20px rgba(45,58,92,.08)}
+.pg-card .n{font-family:var(--disp);font-weight:700;font-size:30px;color:var(--mint-d)}
+.pg-card h3{font-family:var(--disp);font-weight:700;font-size:19px;margin:4px 0 6px}
+.pg-card p{font-size:15px;color:#45557a}
+.pg-card.tint{background:#eaf6f3;box-shadow:none}
+.pg-card.tint2{background:#eef6ff;box-shadow:none}
+.pg-card ul{padding-left:20px}.pg-card li{font-size:15px;margin:4px 0}
+.pg-words{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.pg-words button{border:none;background:#fff;border-radius:16px;padding:8px 10px;display:flex;flex-direction:column;align-items:center;gap:2px;box-shadow:0 3px 10px rgba(45,58,92,.08);cursor:pointer;font-family:var(--disp);font-weight:600;font-size:13px;color:var(--ink)}
+.pg-words img{height:64px;width:64px;object-fit:contain}
+.pg-ex{width:100%;max-width:520px;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.12);rotate:-1deg;display:block;margin:6px auto 0}
+.pg-tpl{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.pg-tpl button{border:2px dashed #9cc7ea;background:#fff;border-radius:18px;padding:14px 10px;cursor:pointer;font-family:var(--disp);font-weight:600;font-size:15px;color:var(--ink);text-align:center}
+.pg-tpl button span{display:block;font-size:30px;margin-bottom:4px}
+.pg-tpl button small{display:block;font-family:var(--text);font-weight:700;font-size:12px;color:#7a86a3;margin-top:3px}
+.pg-form{background:#fff;border:2px solid #e3262f22;border-radius:24px;padding:20px;box-shadow:0 6px 20px rgba(45,58,92,.08)}
+.pg-form label{display:block;font-weight:800;font-size:14px;margin:12px 0 5px}
+.pg-form input[type=text],.pg-form input[type=number],.pg-form textarea{width:100%;border:2px solid #d6e3f2;border-radius:12px;padding:11px 12px;font:700 16px var(--text);color:var(--ink);background:#fbfdff}
+.pg-form input:focus,.pg-form textarea:focus{outline:none;border-color:var(--blue)}
+.pg-form .file{display:flex;align-items:center;gap:12px;border:2px dashed #9cc7ea;border-radius:14px;padding:14px;cursor:pointer;background:#f6fbff}
+.pg-form .file img{width:64px;height:64px;object-fit:cover;border-radius:10px;display:none}
+.pg-form .consent{display:flex;gap:10px;align-items:flex-start;font-weight:700;font-size:13px;line-height:1.4;color:#45557a;margin-top:14px}
+.pg-form .consent input{width:22px;height:22px;flex:0 0 auto;margin-top:1px}
+.pg-form .msg{margin-top:12px;font-weight:800;font-size:15px}
+.pg-form .msg.ok{color:var(--mint-d)}.pg-form .msg.err{color:var(--red)}
+.pg-small{font-size:13px!important;color:#7a86a3}
+.pg-foot{margin-top:36px;text-align:center}
+@media (max-width:560px){.pg-hero{flex-direction:column;text-align:center}.pg-hero img{width:120px}}
 </style>
 </head>
 <body>
@@ -181,7 +234,9 @@ img{-webkit-user-drag:none;user-drag:none}
   <img class="bg" id="bg" alt="">
   <div id="scr"></div>
 </div>
-<div id="rotate"><div class="ph">📱</div><div>Поверните телефон —<br>играть удобнее, когда экран лежит горизонтально</div><button onclick="document.body.classList.add('anyway')">Продолжить так</button></div>
+<div id="page"></div>
+<div id="rotate"><div class="ph">📱</div><div>Поверните телефон —<br>играть удобнее, когда экран лежит горизонтально</div><button onclick="document.body.classList.add('anyway')">Продолжить так</button>
+  <div class="rot-links"><button onclick="lessonPage()">🎁 Бесплатный урок</button><button onclick="contest()">🏆 Конкурс</button></div></div>
 
 <script>
 /* ---------- картинки и звук ---------- */
@@ -334,12 +389,13 @@ function home() {
   const r = el('div', '', null, top); r.style.cssText = 'display:flex;gap:calc(var(--u)*1);align-items:center';
   el('div', 'pill', starsHtml(), r).title = 'Звёзды за 7 дней';
   el('button', 'tb', '📤 Поделиться', r).onclick = share;
-  // записи пока нет — всплывающее окно (решение Анны 22.10.2026)
-  el('button', 'tb lesson', 'Записаться на урок с преподавателем', r).onclick = () => modal('Урок с преподавателем', 'Скоро здесь можно будет записаться на урок с преподавателем WowSpeak 💙');
-  btn('🎮 Играть', 21, 78, 'big', map);
-  btn('🏆 Конкурс', 79, 78, 'big blue', contest);
-  const s1 = el('div', 'sub', 'Помоги пингвинёнку дойти до замка'); s1.style.left = '21%'; s1.style.top = '87%';
-  const s2 = el('div', 'sub', 'Нарисуй рисунок и расскажи по-английски —<br>приз ждёт тебя 🎁'); s2.style.left = '79%'; s2.style.top = '87%';
+  // заголовок и кнопка урока (Анна, 09.11.2026): урок бесплатный, кнопка ведёт на страницу урока
+  const head = el('div', 'headline', 'Дарим бесплатный урок английского от WowSpeak и SPLAT Kids,<br>набор игр и ещё подарки 🎁');
+  btn('🎁 Записаться на бесплатный урок', 50, 92.5, 'sun lessonbtn ready', lessonPage);
+  btn('🎮 Играть', 21, 74, 'big', map);
+  btn('🏆 Конкурс', 79, 74, 'big blue', contest);
+  const s1 = el('div', 'sub', 'Помоги пингвинёнку дойти до замка'); s1.style.left = '21%'; s1.style.top = '82%';
+  const s2 = el('div', 'sub', 'Нарисуй рисунок и расскажи по-английски —<br>приз ждёт тебя 🎁'); s2.style.left = '79%'; s2.style.top = '82%';
 }
 
 /* карта «7 льдинок до замка»: x, y, ширина льдинки в % (дальше — меньше) */
@@ -837,33 +893,136 @@ function finale() {
   }, 3200);
 }
 
-/* ---------- «Своими руками» — конкурс рисунков (тестовая версия, решение Анны 22.10.2026) ---------- */
-function contest() {
-  clear(); setBg('snow_meadow');
-  const top = el('div', 'top'); el('button', 'tb', '← Домой', top).onclick = home; logo(top);
-  const c = el('div', 'contest');
-  c.innerHTML = `
-    <div class="txt">
-      <h1><small>WOWSPEAK × SPLAT KIDS</small>Конкурс рисунков</h1>
-      <div class="task">Нарисуй слова, которые ты выучил с WowSpeak и Splat Kids</div>
-      <ol>
-        <li><b>1</b><span>Ребёнок рисует слова, которые запомнил: зубик, щётку, пасту, стаканчик, пингвинёнка.</span></li>
-        <li><b>2</b><span>На рисунке <em>обязательно</em> щётка или паста Splat Kids.</span></li>
-        <li><b>3</b><span>Снимите короткое видео: ребёнок показывает пальчиком на рисунок и называет вещи по-английски — <em>обязательно</em>.</span></li>
-        <li><b>4</b><span>Выложите рисунок и видео с отметкой WowSpeak и Splat Kids.</span></li>
-      </ol>
-      <div class="soon">Где выкладывать, сроки и призы — скоро здесь появятся.</div>
+/* ---------- страницы для родителей: открываются поверх сцены обычной прокручиваемой страницей ---------- */
+const SB_URL = 'https://vtcxghsqymwkyiogpndf.supabase.co', SB_KEY = 'sb_publishable_nZIl9kzPNhkd9Gbsm7aAgA_cAeY1s4x';   // публичный ключ, только для отправки рисунков
+const pageEl = document.getElementById('page');
+const devModal = () => pageModal('В разработке', 'Этот раздел скоро появится 💙');
+function openPage(html) {
+  clear(); document.body.classList.add('paged'); pageEl.scrollTop = 0;
+  pageEl.innerHTML = `<div class="pg"><div class="pg-top"><button class="pg-back">← Назад</button><div class="logo"><span class="sk"><b>SPLAT</b><i>KIDS</i></span><span class="x">×</span><span class="ws">WowSpeak</span></div></div>${html}</div>`;
+  pageEl.querySelector('.pg-back').onclick = closePage;
+  pageEl.querySelectorAll('[data-dev]').forEach(b => b.onclick = devModal);
+  pageEl.querySelectorAll('[data-w]').forEach(b => b.onclick = () => { ac(); loadWords(); say(b.dataset.w); });
+}
+function closePage() { document.body.classList.remove('paged'); pageEl.innerHTML = ''; home(); }
+function pageModal(title, text) {
+  const d = document.createElement('div'); d.className = 'dim'; d.style.position = 'fixed'; d.style.zIndex = 120; pageEl.appendChild(d);
+  d.innerHTML = `<div class="panel" style="min-width:0;max-width:420px;margin:16px;padding:22px"><h2 style="font-size:24px">${title}</h2><p style="font-size:16px">${text}</p><button class="btn pb" style="font-size:18px;padding:10px 26px">Хорошо</button></div>`;
+  d.onclick = e => { if (e.target === d || e.target.tagName === 'BUTTON') d.remove(); };
+}
+
+/* страница бесплатного урока (мини-лендинг, Анна, 09.11.2026). Запись пока никуда не ведёт — «в разработке» */
+function lessonPage() {
+  openPage(`
+    <div class="pg-hero"><img src="${U('ph_stand')}" alt="">
+      <div><div class="kick">Бесплатный урок · онлайн · 20 минут</div>
+        <h1>Пингвинёнок идёт домой</h1>
+        <p class="lead">Первый урок английского для детей 4–6 лет — в виде сказки-квеста с пингвинёнком SPLAT Kids. Можно с нуля.</p>
+        <button class="pg-cta" data-dev>🎁 Записаться на бесплатный урок</button></div></div>
+    <h2>Как проходит урок</h2>
+    <div class="pg-grid two">
+      <div class="pg-card"><div class="n">1</div><h3>Сказка вместо зубрёжки</h3><p>Микробы не пускают пингвинёнка домой, в Зубной замок. Ребёнок помогает ему: прыгает по льдинкам, рыбачит, открывает сундуки.</p></div>
+      <div class="pg-card"><div class="n">2</div><h3>4 первых слова</h3><p>tooth, toothbrush, toothpaste, cup — каждое слово ребёнок находит сам, повторяет, показывает жестом и закрепляет в мини-играх.</p></div>
+      <div class="pg-card"><div class="n">3</div><h3>Говорит сам</h3><p>Педагог ведёт урок на английском с подсказками по-русски. Ребёнок отвечает словами и жестами — без стеснения и ошибок «на оценку».</p></div>
+      <div class="pg-card"><div class="n">4</div><h3>Сертификат и привычка</h3><p>В конце — сертификат «Защитник Зубного замка», а дома — 7 дней игр с пингвинёнком: чистим зубки и повторяем слова.</p></div>
     </div>
-    <div class="pics">
-      <div class="ex" id="ex"><span class="lab">Пример рисунка</span><img id="exImg" alt=""></div>
-      <div class="words">${W5.map(w => `<button data-w="${w}"><img src="${U(PIC[w])}" alt=""><span>🔊</span></button>`).join('')}</div>
-    </div>`;
-  const pg = sp('p_wave', 92.5, 72, 34, 'bob'); pg.style.zIndex = 6;
-  c.querySelectorAll('.words button').forEach(b => b.onclick = () => { say(b.dataset.w); re(b, 'hop'); });
-  // пример рисунка появится, когда будет картинка media/site/contest_example.webp; до тех пор блока нет
-  const ex = c.querySelector('#ex'), img = c.querySelector('#exImg');
-  img.onerror = () => ex.remove();
-  if (U('contest_example')) img.src = U('contest_example'); else ex.remove();
+    <h2>Что вы увидите после урока</h2>
+    <div class="pg-card tint"><ul>
+      <li>как ребёнку заходит английский, когда он подан через игру;</li>
+      <li>как он занимается с преподавателем онлайн — сколько держит внимание, отвечает ли сам;</li>
+      <li>какие слова уже запомнил — преподаватель расскажет, что получилось и что дальше.</li></ul></div>
+    <h2>Кто ведёт урок</h2>
+    <div class="pg-card tint2"><p>Преподаватели <b>WowSpeak</b> — онлайн-школы английского для детей 4–17 лет. Учим с 2012 года, у нас занимались больше 10 000 детей. Живые уроки через игру и общение.</p></div>
+    <h2>Слова урока</h2>
+    <p class="pg-small">Нажмите — и послушайте, как они звучат.</p>
+    <div class="pg-words">${W5.map(w => `<button data-w="${w}"><img src="${U(PIC[w])}" alt="">🔊</button>`).join('')}</div>
+    <div class="pg-foot"><button class="pg-cta" data-dev>🎁 Записаться на бесплатный урок</button><p class="pg-small" style="margin-top:10px">Урок проходит онлайн, нужен компьютер или планшет со звуком и камерой.</p></div>`);
+}
+
+/* конкурс рисунков (Анна, 09.11.2026): только рисунки, без видео; шаблоны; загрузка рисунка в базу */
+const HASHTAG = '#ПингвинёнокSPLAT';
+function contest() {
+  openPage(`
+    <div class="pg-hero"><img src="${U('p_wave')}" alt="">
+      <div><div class="kick">Конкурс рисунков · WowSpeak × SPLAT Kids</div>
+        <h1>Нарисуй слова, которые ты выучил с WowSpeak и SPLAT Kids</h1>
+        <p class="lead">Зубик, щётка, паста, стаканчик, пингвинёнок — что запомнил. На рисунке обязательно щётка или паста SPLAT Kids.</p></div></div>
+    <h2>Как участвовать</h2>
+    <div class="pg-grid">
+      <div class="pg-card"><div class="n">1</div><h3>Нарисуйте</h3><p>Ребёнок рисует слова с урока. Совсем маленьким — шаблоны ниже: раскрасить, обвести, соединить точки.</p></div>
+      <div class="pg-card"><div class="n">2</div><h3>Отправьте фото</h3><p>Выложите в соцсети с хештегом <b>${HASHTAG}</b> и отметьте SPLAT Kids и WowSpeak — или загрузите через форму ниже.</p></div>
+      <div class="pg-card"><div class="n">3</div><h3>Получите ответ</h3><p>Каждый участник получит ответ от пингвинёнка. Что ещё — скоро расскажем.</p></div>
+    </div>
+    <h2>Слова для рисунка</h2>
+    <div class="pg-words">${W5.map(w => `<button data-w="${w}"><img src="${U(PIC[w])}" alt="">🔊</button>`).join('')}</div>
+    <h2>Пример рисунка</h2>
+    <img class="pg-ex" src="${U('contest_example')}" alt="Пример детского рисунка">
+    <h2>Шаблоны для малышей</h2>
+    <p class="pg-small">Распечатайте, и ребёнок раскрасит или дорисует — это тоже работа на конкурс.</p>
+    <div class="pg-tpl">
+      <button data-dev><span>🖍</span>Раскраска<small>пингвинёнок чистит зубки</small></button>
+      <button data-dev><span>✏️</span>Обведи по пунктиру<small>щётка, зубик, стаканчик</small></button>
+      <button data-dev><span>🔢</span>Соедини точки<small>от 1 до 10</small></button>
+      <button data-dev><span>🪞</span>Дорисуй половинку<small>зубик и стаканчик</small></button>
+      <button data-dev><span>🐧</span>Дай пингвинёнку то, что нужно<small>дорисуй щётку и пасту</small></button>
+    </div>
+    <div class="pg-grid" style="margin-top:26px">
+      <div class="pg-card tint"><h3>Призы</h3><p>[приз] — скоро расскажем.</p></div>
+      <div class="pg-card tint2"><h3>Сроки</h3><ul><li>Приём работ: [дата] — [дата]</li><li>Итоги: [дата]</li></ul><p class="pg-small">Оцениваем идею и старание, а не технику рисунка. Один ребёнок — одна работа.</p>
+        <button class="pg-cta blue" style="font-size:16px;padding:11px 20px" data-dev>Полные правила</button></div>
+    </div>
+    <h2>Загрузить рисунок</h2>
+    <form class="pg-form" id="upl" novalidate>
+      <p class="pg-small" style="margin-top:0">Для тех, у кого закрытый аккаунт или нет соцсетей.</p>
+      <label>Фото рисунка</label>
+      <label class="file" style="margin:0"><img id="uPrev" alt=""><span id="uName">📷 Выбрать фото</span><input type="file" id="uFile" accept="image/*" hidden></label>
+      <label for="uChild">Имя ребёнка</label><input type="text" id="uChild" maxlength="80" autocomplete="off">
+      <label for="uAge">Возраст</label><input type="number" id="uAge" min="1" max="17" inputmode="numeric">
+      <label for="uContact">Ваш телефон или ник в Telegram — чтобы мы могли ответить</label><input type="text" id="uContact" maxlength="120">
+      <label class="consent"><input type="checkbox" id="uConsent"><span>Я родитель (законный представитель) ребёнка и даю согласие на обработку персональных данных — имени и возраста ребёнка, моего контакта и рисунка — для участия в конкурсе.</span></label>
+      <button class="pg-cta" type="submit" id="uBtn" style="margin-top:16px">📤 Отправить рисунок</button>
+      <div class="msg" id="uMsg"></div>
+    </form>`);
+  const $ = id => pageEl.querySelector('#' + id);
+  let file = null;
+  $('uFile').onchange = e => {
+    file = e.target.files[0] || null; if (!file) return;
+    $('uName').textContent = '✅ ' + file.name; const im = $('uPrev'); im.style.display = 'block'; im.src = URL.createObjectURL(file);
+  };
+  $('upl').onsubmit = async e => {
+    e.preventDefault();
+    const msg = $('uMsg'), b = $('uBtn'), err = t => { msg.className = 'msg err'; msg.textContent = t; };
+    const name = $('uChild').value.trim(), age = parseInt($('uAge').value, 10), contact = $('uContact').value.trim();
+    if (!file) return err('Выберите фото рисунка.');
+    if (!/^image\//.test(file.type) && !/\.(heic|heif|jpe?g|png|webp)$/i.test(file.name)) return err('Нужна картинка: фото рисунка.');
+    if (!name) return err('Напишите имя ребёнка.');
+    if (!contact || contact.length < 3) return err('Оставьте телефон или ник, чтобы мы могли ответить.');
+    if (!$('uConsent').checked) return err('Нужно согласие на обработку данных.');
+    b.disabled = true; b.textContent = 'Отправляем…'; msg.className = 'msg'; msg.textContent = '';
+    try {
+      const blob = await shrink(file);
+      const ext = blob.type === 'image/jpeg' ? 'jpg' : (file.name.split('.').pop() || 'jpg').toLowerCase();
+      const path = `entries/${today()}_${Math.random().toString(36).slice(2, 10)}.${ext}`;
+      const up = await fetch(`${SB_URL}/storage/v1/object/splat-contest/${path}`, { method: 'POST', headers: { apikey: SB_KEY, 'Content-Type': blob.type || 'image/jpeg' }, body: blob });
+      if (!up.ok) throw new Error('upload ' + up.status);
+      const row = await fetch(`${SB_URL}/rest/v1/splat_contest_entries`, { method: 'POST', headers: { apikey: SB_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+        body: JSON.stringify({ child_name: name, child_age: age >= 1 && age <= 17 ? age : null, parent_contact: contact, file_path: path, consent: true }) });
+      if (!row.ok) throw new Error('row ' + row.status);
+      $('upl').innerHTML = '<h3 style="font-family:var(--disp);font-size:22px">Спасибо! Рисунок у нас 🎉</h3><p>Пингвинёнок уже бежит его смотреть. Мы напишем вам по оставленному контакту.</p>';
+    } catch (x) {
+      b.disabled = false; b.textContent = '📤 Отправить рисунок';
+      err('Не получилось отправить. Проверьте интернет и попробуйте ещё раз.');
+    }
+  };
+}
+// большое фото с телефона уменьшаем до 2000 px (быстрее грузится); если браузер не умеет его открыть (HEIC) — отправляем как есть
+async function shrink(f) {
+  try {
+    const bmp = await createImageBitmap(f), k = Math.min(1, 2000 / Math.max(bmp.width, bmp.height));
+    const c = document.createElement('canvas'); c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+    c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+    return await new Promise((ok, no) => c.toBlob(b => b ? ok(b) : no(), 'image/jpeg', .85));
+  } catch (e) { return f; }
 }
 
 /* картинки — заранее, чтобы в играх ничего не мигало */
