@@ -338,10 +338,10 @@ def penguin_pairs():
 
 
 def hidden():
-    """Найди спрятанные предметы: сцена Анны (промпт 33/35, надпись на щётке поправлена вручную),
-    внизу — рамочки с теми же вещами, вырезанными из этой же картинки (ребёнок ищет ровно то, что нарисовано)."""
-    sc = Image.open(os.path.join(ROOT, 'media/print/hidden_scene.webp')).convert('RGB')
-    crops = [(95, 878, 205, 968), (528, 738, 760, 832), (405, 432, 505, 505), (1255, 310, 1428, 560), (742, 462, 838, 562), (1095, 885, 1225, 940)]
+    """Найди спрятанные предметы (Анна, 09.11.2026): сцена — промпт 37, целые предметы для рамочек — промпт 38
+    (тот же стиль, вырезаны tools/cut.py в media/print/hidden). На картинке предметы спрятаны, в рамочках — целые."""
+    sc = Image.open(os.path.join(ROOT, 'media/print/hidden_scene_v3.webp')).convert('RGB')
+    names = ['h_tooth', 'h_tube', 'h_cup', 'h_brush', 'h_penguin', 'h_fish']
     p, d = page('Найди спрятанные предметы', 'Найди на картинке всё, что нарисовано в рамочках внизу.\nНашёл — обведи и поставь галочку!')
     top = M + 380
     k = (W - 2 * M) / sc.width
@@ -350,10 +350,11 @@ def hidden():
     p.paste(s2, (M, top), mask)
     y0 = top + s2.height + 40
     cw, chh = (W - 2 * M) // 3, (H - M - 110 - y0) // 2
-    for i, c in enumerate(crops):
+    for i, n in enumerate(names):
         x0, yy = M + (i % 3) * cw, y0 + (i // 3) * chh
         d.rounded_rectangle((x0 + 12, yy + 10, x0 + cw - 12, yy + chh - 10), 30, outline=(124, 92, 170), width=6, fill='white')
-        put(p, sc.crop(c).convert('RGBA'), (x0 + 40, yy + 30, x0 + cw - 120, yy + chh - 30))
+        it = Image.open(os.path.join(ROOT, 'media/print/hidden', n + '.webp')).convert('RGBA')
+        put(p, it, (x0 + 40, yy + 30, x0 + cw - 120, yy + chh - 30))
         cx, cy = x0 + cw - 70, yy + chh // 2
         d.rounded_rectangle((cx - 26, cy - 26, cx + 26, cy + 26), 8, outline=(124, 92, 170), width=5)   # клеточка для галочки
     return [p]
