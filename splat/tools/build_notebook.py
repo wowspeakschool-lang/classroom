@@ -186,30 +186,26 @@ def mazes():
 
 # ---------- 3. найди отличия ----------
 def scene(variant):
-    """Пингвинёнок на снегу с вещами; variant=1 — с пятью отличиями."""
-    bg = Image.open(os.path.join(ROOT, 'media/lesson/snow_meadow.webp')).convert('RGBA').resize((1400, 788))
-    def at(name, x, y, h, angle=0, flip=False, tint=None):
+    """Ванная в Зубном замке (фон Анны, промпт 32) и наши вещи в масштабе; variant=1 — пять отличий.
+    Вещи ставим по нижнему краю: на раковину, на полки, на пол — так, будто они там стоят."""
+    bg = Image.open(os.path.join(ROOT, 'media/site/bathroom.webp')).convert('RGBA')
+    def at(name, x, bottom, h, flip=False, tint=None):
         im = img(name)
-        if tint:
+        if tint is not None:
             r, g, b, a = im.split()
-            rgb = Image.merge('RGB', (r, g, b)).convert('HSV')
-            hh, s, v = rgb.split()
-            hh = hh.point(lambda q: (q + tint) % 256)
-            im = Image.merge('HSV', (hh, s, v)).convert('RGB'); im.putalpha(a)
+            hh, s_, v_ = Image.merge('RGB', (r, g, b)).convert('HSV').split()
+            im = Image.merge('HSV', (hh.point(lambda q: (q + tint) % 256), s_, v_)).convert('RGB'); im.putalpha(a)
         if flip: im = ImageOps.mirror(im)
         k = h / im.height
         im = im.resize((int(im.width * k), int(h)), Image.LANCZOS)
-        if angle: im = im.rotate(angle, expand=True, resample=Image.BICUBIC)
-        bg.alpha_composite(im, (int(x - im.width / 2), int(y - im.height / 2)))
+        bg.alpha_composite(im, (int(x - im.width / 2), int(bottom - im.height)))
     v = variant
-    at('p_happy', 700, 470, 470)
-    at('brush_paste', 300, 560, 200, angle=0 if not v else 0, flip=bool(v))            # 1: щётка смотрит в другую сторону
-    at('tube', 1090, 560, 300)
-    at('cup', 1260, 640, 150, tint=None if not v else 120)                              # 2: стаканчик другого цвета
-    if not v: at('snowball', 160, 690, 110)                                             # 3: снежок пропал
-    at('magic_tooth', 420, 270 if not v else 230, 120 if not v else 150)                # 4: зубик больше и выше
-    at('gift', 1180, 300, 160)
-    if v: at('fish', 960, 720, 80)                                                      # 5: появилась рыбка
+    at('tube', 250, 482, 120) if not v else None                        # 1: паста на верхней полке пропала
+    at('magic_tooth', 390 if not v else 300, 604, 70)                    # 2: зубик на нижней полке переехал
+    at('gift', 220 if not v else 410, 604, 85)
+    at('cup', 735, 492, 80, tint=None if not v else 150)                 # 3: стаканчик другого цвета (жёлтый, не розовый)
+    if v: at('snowball', 1080, 580, 60)                                  # 4: на табурете появился снежок
+    at('ph_stand', 560, 850, 340, flip=bool(v))                          # 5: пингвинёнок повернулся
     return bg.convert('RGB')
 
 
@@ -313,8 +309,8 @@ def memo():
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    # бинго убрано, «найди отличия» ждёт новую картинку-фон (Анна, 09.11.2026)
-    parts = [('dnevnik', diary()), ('labirinty', mazes()), ('pamyatka', memo())]
+    # бинго убрано (Анна, 09.11.2026)
+    parts = [('dnevnik', diary()), ('labirinty', mazes()), ('otlichiya', differences()), ('pamyatka', memo())]
     allp = []
     for name, pages in parts:
         pages[0].save(os.path.join(OUT, f'tetradka_{name}.pdf'), resolution=200, save_all=True, append_images=pages[1:])
