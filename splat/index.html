@@ -397,7 +397,7 @@ function home() {
   el('div', 'pill', starsHtml(), r).title = 'Звёзды за 7 дней';
   el('button', 'tb', '📤 Поделиться', r).onclick = share;
   // заголовок и кнопка урока (Анна, 09.11.2026): урок бесплатный, кнопка ведёт на страницу урока
-  const head = el('div', 'headline', 'Дарим бесплатный урок английского от WowSpeak и SPLAT Kids,<br>набор игр и ещё подарки 🎁');
+  const head = el('div', 'headline', 'Дарим бесплатный урок английского от WowSpeak и SPLAT Kids<br>и целую неделю весёлых заданий 🎁');
   btn('🎁 Записаться на бесплатный урок', 50, 92.5, 'sun lessonbtn ready', lessonPage);
   // четыре входа: слева игры, справа конкурс, «Тетрадка пингвинёнка» — печатные материалы (Анна, 09.11.2026)
   const S = (t, x, y) => { const e = el('div', 'sub', t); e.style.left = x + '%'; e.style.top = y + '%'; };
