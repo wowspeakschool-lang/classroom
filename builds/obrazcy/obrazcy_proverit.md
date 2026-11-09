@@ -10,10 +10,10 @@
 - рассказ о себе исключением не считается: «I can run! I can jump! I can swim!» → «I can run!»;
 - задания **«прочитай вслух»** и **«повтори»** не трогали: там образец — эталон чтения.
 
-Всего блоков `speaking` с образцом — 501. Изменено **256**, оставлено как было **193**,
+Всего блоков `speaking` с образцом — 501. Изменено **255**, оставлено как было **194**,
 «прочитай вслух» — 23, без текста образца (записаны голосом Анны) — 29.
 
-🟥 **Нужно нажать «Озвучить пачкой»** («Контент» → «Медиа»): у всех 256 изменённых
+🟥 **Нужно нажать «Озвучить пачкой»** («Контент» → «Медиа»): у всех 255 изменённых
 образцов старая запись снята, новый текст озвучится сам.
 
 ---
@@ -208,14 +208,14 @@
 | урок | блок | задание | было | стало |
 |---|---|---|---|---|
 | Homework 2 | 9 | Посмотри на картинку и назови части тела 🎤 | Look at the monster. It has got three eyes. It has got two orange ears. It has got one green nose. It has got two yellow hands. It has got two pink legs. | Look at the monster. It has got three eyes. |
-| Homework 3 | 7 | Расскажи про свою семью 🎤 | This is my family. This is my grandpa and this is my grandma. This is my dad and this is my mum. This is my brother and this is my sister. | This is my family. |
+| Homework 3 | 7 | Расскажи про свою семью 🎤 | This is my family. This is my grandpa and this is my grandma. This is my dad and this is my mum. This is my brother and this is my sister. | This is my family. This is my grandpa and this is my grandma. |
 | Homework 3 | 8 | Расскажи про себя 🎤 | Hello! I have got two eyes. I have got one nose. I have got two ears. I have got two arms and two legs. | Hello! I have got two eyes. |
 
 ## Super Minds 1 — 36 образцов
 
 | урок | блок | задание | было | стало |
 |---|---|---|---|---|
-| Homework 1 | 8 | Какие игрушки ты хочешь? 🎤 | I want a ball. I want a car. I want a kite. | I want a ball. |
+| Homework 1 | 8 | Какие игрушки ты хочешь? 🎤 | I want a ball. I want a car. I want a kite. | A ball and a kite. |
 | Homework 1 | 9 | Какие комнаты есть в твоём доме? 🎤 | A kitchen, a bathroom, a living room, two bedrooms, a hall. | A kitchen. |
 | Homework 1 | 9 | Мой монстр 🎤 | 2 legs, 4 arms, 10 fingers. | 2 legs. |
 | Homework 1 | 10 | Календарь с животными 🎤 | Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. | Monday. |
@@ -252,7 +252,7 @@
 | Final Test | 7 | SPEAKING 🎤 Часть 2 · Расскажи вслух и запиши ответ | I can see a boat. There are two elephants. The crocodile is in the water. The monkey is on the tree. | I can see a boat. There are two elephants. The crocodile is in the water. |
 | Final Test | 8 | SPEAKING 🎤 Часть 3 · Расскажи вслух и запиши ответ | It's a robot. It's white and red. I've got a robot. I like robots. My name is Anna. I'm eight. Yes, I can swim. | It's a robot. I've got a robot. I like robots. My name is Anna. I'm eight. Yes, I can swim. |
 
-## Super Minds 2 — 42 образцов
+## Super Minds 2 — 41 образцов
 
 | урок | блок | задание | было | стало |
 |---|---|---|---|---|
@@ -260,7 +260,6 @@
 | Homework 1 | 10 | Оглянись вокруг 🎤 | I can see a window. I can see a chair. I can see a board. | I can see a window. |
 | Homework 1 | 12 | Что вы покупаете? 🎤 | In my basket there is some bread, some cheese and some milk. There are two tomatoes and some greens. There is a green pepper, too! | In my basket there is some bread, some cheese and some milk. |
 | Homework 1 | 12 | Последнее задание на сегодня 🎤 | This is my transport. It is a bus. It is big and red. I like my bus! | This is my transport. It is a bus. I like my bus! |
-| Homework 1 | 12 | Теперь твоя очередь! 🎤 | My favourite sport is football. I like it because I play it with my friends. I run and I jump. | My favourite sport is football. I like it because I play it with my friends. |
 | Homework 1 | 13 | Расскажи о своей комнате 🎤 | In my room there is a blue bed. There is a brown table and a green armchair. My rug is red and my lamp is yellow. | In my room there is a blue bed. My rug is red and my lamp is yellow. |
 | Homework 1 | 13 | Опиши своё лицо 🎤 | I have got blue eyes. I have got brown hair. He has got a big nose and small ears. | I have got blue eyes. He has got a big nose and small ears. |
 | Unit 1 Test | 7 | SPEAKING 🎤 Расскажи вслух и запиши ответ | Claire gets up at six o'clock. Kate goes to school at nine o'clock. Claire goes to bed at nine o'clock. | Claire gets up at six o'clock. |
@@ -278,7 +277,7 @@
 | Homework 4 | 7 | Расскажи историю про Громика 🎤 | He gets up at seven o'clock. He brushes his teeth at eight o'clock. He goes to school at three o'clock. He has dinner at six o'clock. | He gets up at seven o'clock. |
 | Homework 4 | 8 | А теперь мы с тобой отправляемся в театральный кружок! 🎭 | A day at the beach! The bus isn't moving. Let's ask the driver. There are lots of sheep on the road. No problem, I can help. We'd like to go to the beach. | A day at the beach! The bus isn't moving. Let's ask the driver. There are lots of sheep on the road. No problem, I can help. |
 | Homework 4 | 8 | Расскажи историю сам 🎤 | Flash wants to join the football team. He doesn't like playing table tennis. Flash and Misty start a new team. Misty scores a goal. The yellow team wins. | Flash wants to join the football team. He doesn't like playing table tennis. |
-| Homework 4 | 9 | Расскажи историю сам 🎤 | Flash has got two apples for everyone. Thunder has got a bad apple. Misty has got an idea. They go to the market. There is a box with good apples and there is a box with bad apples. Flash buys eight apples. There are four bad apples! Well done, children! | Flash has got two apples for everyone. They go to the market. There is a box with good apples and there is a box with bad apples. Flash buys eight apples. |
+| Homework 4 | 9 | Расскажи историю сам 🎤 | Flash has got two apples for everyone. Thunder has got a bad apple. Misty has got an idea. They go to the market. There is a box with good apples and there is a box with bad apples. Flash buys eight apples. There are four bad apples! Well done, children! | Flash has got two apples for everyone. They go to the market. There is a box with good apples and there is a box with bad apples. Flash buys eight apples. There are four bad apples! |
 | Homework 4 | 9 | Перескажи историю 🎤 | The Super Friends are on a hill. There is a tree on the train track. Flash runs down the hill. She writes 'Stop'. The driver stops the train. He says 'Thanks'. | The Super Friends are on a hill. There is a tree on the train track. Flash runs down the hill. She writes 'Stop'. He says 'Thanks'. |
 | Homework 5 | 7 | Теперь твоя очередь рассказывать 🎤 | I'd like to go camping with my family. I'd like to swim in the lake and go fishing. I'd like to take riding lessons too. | I'd like to go camping with my family. |
 | Homework 5 | 8 | Последнее задание! 🎤 | They are doing athletics. He is playing baseball. They are playing volleyball. They are playing hockey. He is playing badminton. | They are doing athletics. He is playing baseball. |

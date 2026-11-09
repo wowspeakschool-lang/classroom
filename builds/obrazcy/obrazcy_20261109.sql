@@ -1,8 +1,9 @@
 -- Образец ответа не должен выдавать ответ (решение Анны 09.11.2026, «45 верно», «46 б»).
 --
--- 256 блоков `speaking`: образец сведён по грамматической конструкции — одинаковые
--- предложения к одному, разные остаются. Запись (`sample`) снята, новый текст
--- лежит в `sample_tts.text` и озвучивается кнопкой «Озвучить пачкой».
+-- 255 блоков `speaking`: образец сведён по грамматической конструкции — одинаковые
+-- предложения к одному, разные остаются (сочинение «X and Y» — своя конструкция).
+-- Запись (`sample`) снята, новый текст лежит в `sample_tts.text` и озвучивается
+-- кнопкой «Озвучить пачкой».
 --
 -- Копия всех 501 блока с образцом — classroom_backup_obrazcy_20261109.
 -- План и классификатор — builds/obrazcy/plan.py, builds/obrazcy/plan.json.
@@ -17,7 +18,6 @@ begin
     ('04e113d2-7f4f-496c-8b10-81ce05786dd6','I like cake. My favourite room is my bedroom.'),
     ('06310254-ce02-4ed7-a70f-f8bf386549ab','It''s S.'),
     ('0742eba4-4618-4f81-9b42-8e52115e354e','red.'),
-    ('08e85a69-f73f-41dd-9961-035db594128c','My favourite sport is football. I like it because I play it with my friends.'),
     ('09b17336-d87e-4f70-b678-41c012810991','I can ride a triplet. I can''t fly.'),
     ('0b72a489-093a-4491-b11b-9accdcd5d743','I have a bedroom.'),
     ('0b96da6b-ed6f-41c3-a85c-f5be5fe2a0dc','In my basket there is some bread, some cheese and some milk.'),
@@ -129,9 +129,9 @@ begin
     ('741893fe-e7d2-4980-81da-7b0b0da7be69','I get up at seven o''clock.'),
     ('744ff163-1c43-43a5-acfb-2893680f0526','I need air.'),
     ('75063cd8-f63d-4bef-922d-908090265007','I like pizza!'),
-    ('770a2e1e-950f-4629-b3b1-99a7cefa7d30','This is my family.'),
+    ('770a2e1e-950f-4629-b3b1-99a7cefa7d30','This is my family. This is my grandpa and this is my grandma.'),
     ('7981853c-0cb9-45d0-acf3-c3f40d97e0c1','Dragon is seasick.'),
-    ('79a23160-2493-42f5-94ab-314bd78f0fae','I want a ball.'),
+    ('79a23160-2493-42f5-94ab-314bd78f0fae','A ball and a kite.'),
     ('79ba003f-f408-4f42-8fb7-41361a71b442','It''s my uniform.'),
     ('7caad065-2852-4b05-a7e9-5c56ba108299','It''s a pink square.'),
     ('7d947b4e-7221-47a7-a610-d60305f97f17','I''m going to do sport.'),
@@ -266,7 +266,7 @@ begin
     ('fbfc73f9-e0bb-44c6-9d29-548481cf4507','I have a house.'),
     ('fce7c8bf-ad0d-47c8-9e79-21cbcbbfe7b9','The subway is fast.'),
     ('fdcd8f7f-c8bb-4033-84c2-077c266dac68','I like to visit granny.'),
-    ('fe0e7473-7ed2-4103-a720-2fcd0226ec8d','Flash has got two apples for everyone. They go to the market. There is a box with good apples and there is a box with bad apples. Flash buys eight apples.'),
+    ('fe0e7473-7ed2-4103-a720-2fcd0226ec8d','Flash has got two apples for everyone. They go to the market. There is a box with good apples and there is a box with bad apples. Flash buys eight apples. There are four bad apples!'),
     ('fe1d05e3-3a63-4204-a1a1-9c5cb039138a','When do you go to school? She gets up at seven o''clock.')
   ) as t(bid, novyy) loop
     update classroom_blocks

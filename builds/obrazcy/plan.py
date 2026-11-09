@@ -27,6 +27,28 @@ IMPER = {"look","take","give","go","stand","sit","pass","open","close","see","th
          "read","write","count","colour","color","choose","help","drop","eat","drink",
          "wash","brush","stuff","don't","let's"}
 
+# Образцы, которые Анна поправила вручную (09.11.2026). Правило по
+# конструкции тут даёт не то: в задании «какие игрушки ты хочешь» ответ —
+# перечисление, и образец должен называть часть предметов, а не одну
+# полную фразу «I want a ball.».
+RUCHNYE = {
+    # SM1 ДЗ 1 блок 8, «Какие игрушки ты хочешь? 🎤»
+    "79a23160-2493-42f5-94ab-314bd78f0fae": "A ball and a kite.",
+}
+
+
+def sochin(w):
+    """Сочинение: «This is my grandpa and this is my grandma.» — два
+    самостоятельных высказывания через and. Это отдельная конструкция
+    (решение Анны 09.11.2026), поэтому простое предложение её не вытесняет.
+    Однородные члены («a jacket, a T-shirt and a skirt») сочинением не
+    считаются: подлежащее в предложении одно."""
+    if "and" not in w:
+        return ""
+    podl = sum(1 for x in w if x in SUBJ or x in CONTR_BE or x in CONTR_HAVE)
+    return "|сочин" if podl >= 2 else ""
+
+
 def sig(sentence):
     """Грамматический скелет: кто — какой глагол — отрицание — вопрос."""
     s = sentence.strip().lower()
@@ -61,7 +83,7 @@ def sig(sentence):
         #   без местоимения «My name is Dragon.», «The sun is hot.»
         # Первое слово повеления само по себе и есть признак конструкции,
         # поэтому все повеления идут в одну корзину.
-        hvost = "%s|%s" % ("neg" if neg else "+", "?" if vopros else ".")
+        hvost = "%s|%s%s" % ("neg" if neg else "+", "?" if vopros else ".", sochin(w))
         if w[0] in IMPER:
             return "импер|" + hvost
         if verb is not None:
@@ -70,7 +92,8 @@ def sig(sentence):
     if verb is None:
         # есть ли вообще сказуемое: слово не из служебных после подлежащего
         verb = "глагол" if len(w) > 1 else "нет"
-    return "%s|%s|%s|%s" % (subj, verb, "neg" if neg else "+", "?" if vopros else ".")
+    return "%s|%s|%s|%s%s" % (subj, verb, "neg" if neg else "+",
+                              "?" if vopros else ".", sochin(w))
 
 # Заголовки, у которых образец — заведомо список слов («Слова на T»,
 # «Слова со звуком [г]»): такое задание и есть перечисление, от него по
@@ -114,6 +137,8 @@ if __name__ == "__main__":
         if CHTENIE.search((r["zag"] or "") + " " + (r["txt"] or "")):
             chtenie.append(r); continue   # «прочитай вслух» — образец это эталон чтения
         new, n_old, n_new, per = shorten(t, r["zag"] or "")
+        if r["id"] in RUCHNYE:
+            new = RUCHNYE[r["id"]]
         plan.append(dict(r, novyy=new, bylo_predlozheniy=n_old, stalo=n_new, perechislenie=per,
                          menyaem=(new != t)))
     json.dump(plan, io.open("builds/obrazcy/plan.json","w",encoding="utf-8"), ensure_ascii=False, indent=1)

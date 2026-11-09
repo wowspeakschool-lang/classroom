@@ -41,9 +41,9 @@
   "txt": " Сначала послушай моё аудио ▶ Потом нажми на микрофон и расскажи про людей на картинке так же, как я. ",
   "obr": "This is my family. This is my grandpa and this is my grandma. This is my dad and this is my mum. This is my brother and this is my sister.",
   "sintez": true,
-  "novyy": "This is my family.",
+  "novyy": "This is my family. This is my grandpa and this is my grandma.",
   "bylo_predlozheniy": 4,
-  "stalo": 1,
+  "stalo": 2,
   "perechislenie": false,
   "menyaem": true
  },
@@ -105,7 +105,7 @@
   "txt": " Расскажи, какие игрушки ты хочешь в свою коробку. Нажми на микрофон и говори так: I want a ball. ",
   "obr": "I want a ball. I want a car. I want a kite.",
   "sintez": true,
-  "novyy": "I want a ball.",
+  "novyy": "A ball and a kite.",
   "bylo_predlozheniy": 3,
   "stalo": 1,
   "perechislenie": false,
@@ -1001,11 +1001,11 @@
   "txt": " Расскажи о своём любимом виде спорта. Если хочешь, можешь ответить на эти вопросы: What is your favourite sport? Why do you like this sport? What do you do in this sport? (Do you jump, run, swim?) ",
   "obr": "My favourite sport is football. I like it because I play it with my friends. I run and I jump.",
   "sintez": true,
-  "novyy": "My favourite sport is football. I like it because I play it with my friends.",
+  "novyy": "My favourite sport is football. I like it because I play it with my friends. I run and I jump.",
   "bylo_predlozheniy": 3,
-  "stalo": 2,
+  "stalo": 3,
   "perechislenie": false,
-  "menyaem": true
+  "menyaem": false
  },
  {
   "slug": "sm2",
@@ -1369,9 +1369,9 @@
   "txt": " Посмотри на кадры истории выше и расскажи её своими словами — что случилось у ребят с яблоками и как Misty придумала всё исправить. Скажи хотя бы четыре предложения. Используй There is / There are и some / any : расскаж",
   "obr": "Flash has got two apples for everyone. Thunder has got a bad apple. Misty has got an idea. They go to the market. There is a box with good apples and there is a box with bad apples. Flash buys eight apples. There are four bad apples! Well done, children!",
   "sintez": true,
-  "novyy": "Flash has got two apples for everyone. They go to the market. There is a box with good apples and there is a box with bad apples. Flash buys eight apples.",
+  "novyy": "Flash has got two apples for everyone. They go to the market. There is a box with good apples and there is a box with bad apples. Flash buys eight apples. There are four bad apples!",
   "bylo_predlozheniy": 8,
-  "stalo": 4,
+  "stalo": 5,
   "perechislenie": false,
   "menyaem": true
  },
