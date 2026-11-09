@@ -6,7 +6,7 @@ from make_theme import run
 S={
  'rot':32,
  'useful_kind':'pitch','theme':"Something I'm good at",'icons':'goodat',
- 'video':None,
+ 'video':'https://youtu.be/YNfTM0Eulbk',
  'emoji':['🏅','🎨','🏊',['🏅','🎨','🏊','⚽','🎹','🧮']],
  'bg':'D4F5E6','g1':'FFE4F0','g2':'D4ECFF','g3':'FFF7D4',
  'vocab_title':'🏅 New words! 🎨',

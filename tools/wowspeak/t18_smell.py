@@ -6,7 +6,7 @@ from make_theme import run
 S={
  'rot':31,
  'useful_kind':'ranking','theme':'My favourite smell','icons':'smell',
- 'video':None,
+ 'video':'https://youtu.be/RjD60gcYThw',
  'emoji':['👃','🕯️','☕',['👃','🌧️','🎃','🍂','☕','🕯️']],
  'bg':'FFE6D0','g1':'D4F5E6','g2':'EDE4FA','g3':'FFF7D4',
  'vocab_title':'👃 New words! 🕯️',
