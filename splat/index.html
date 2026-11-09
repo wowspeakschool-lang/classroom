@@ -230,6 +230,15 @@ body.paged #rotate{display:none!important}
 .pg-form .consent input{width:22px;height:22px;flex:0 0 auto;margin-top:1px}
 .pg-form .msg{margin-top:12px;font-weight:800;font-size:15px}
 .pg-form .msg.ok{color:var(--mint-d)}.pg-form .msg.err{color:var(--red)}
+.pg-sheet{position:fixed;inset:0;z-index:110;background:rgba(20,40,80,.5);display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:24px 12px}
+.pg-sheet>div{position:relative;background:#fff;border-radius:26px;max-width:560px;width:100%;padding:22px 20px;box-shadow:0 20px 50px rgba(0,0,0,.3);animation:pop .35s both;margin:auto 0}
+.pg-sheet h2{margin:0 36px 12px 0}
+.pg-sheet .pg-x{position:absolute;right:12px;top:10px;border:none;background:#eef4fb;border-radius:50%;width:38px;height:38px;font-size:20px;cursor:pointer;color:var(--ink)}
+.pg-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.pg-row .pg-cta{margin-top:0;font-size:15px;padding:10px 18px;text-decoration:none}
+.pg-strip{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+@media (max-width:560px){.pg-strip{grid-template-columns:1fr}}
+.pg-strip .pg-card{padding:14px 16px}.pg-strip h3{font-size:17px;margin:0 0 4px}.pg-strip p,.pg-strip li{font-size:14px}
 .pg-small{font-size:13px!important;color:#7a86a3}
 .pg-foot{margin-top:36px;text-align:center}
 @media (max-width:560px){.pg-hero{flex-direction:column;text-align:center}.pg-hero img{width:120px}}
@@ -909,7 +918,7 @@ function openPage(html) {
   clear(); document.body.classList.add('paged'); pageEl.scrollTop = 0;
   pageEl.innerHTML = `<div class="pg"><div class="pg-top"><button class="pg-back">← Назад</button><div class="logo"><span class="sk"><b>SPLAT</b><i>KIDS</i></span><span class="x">×</span><span class="ws">WowSpeak</span></div></div>${html}</div>`;
   pageEl.querySelector('.pg-back').onclick = closePage;
-  pageEl.querySelectorAll('[data-dev]').forEach(b => b.onclick = devModal);
+  pageEl.querySelectorAll('[data-dev]').forEach(b => b.onclick = e => { e.preventDefault(); devModal(); });
   pageEl.querySelectorAll('[data-w]').forEach(b => b.onclick = () => { ac(); loadWords(); say(b.dataset.w); });
 }
 function closePage() { document.body.classList.remove('paged'); pageEl.innerHTML = ''; home(); }
@@ -970,6 +979,7 @@ function notebook() {
 /* конкурс рисунков (Анна, 09.11.2026): только рисунки, без видео; шаблоны; загрузка рисунка в базу */
 const HASHTAG = '#МойПингвинёнокSPLAT';   // выбор Анны (09.11.2026)
 function contest() {
+  // страница короткая: пример и форма — во всплывающих окнах, чтобы до загрузки не листать (Анна, 09.11.2026)
   openPage(`
     <div class="pg-hero"><img src="${U('p_wave')}" alt="">
       <div><div class="kick">Конкурс рисунков · WowSpeak × SPLAT Kids</div>
@@ -978,20 +988,35 @@ function contest() {
     <h2>Как участвовать</h2>
     <div class="pg-grid">
       <div class="pg-card"><div class="n">1</div><h3>Нарисуйте</h3><p>Нарисуйте сами или скачайте готовые шаблоны: раскраску и задания для самых маленьких.</p>
-        <a class="pg-cta blue" style="font-size:15px;padding:10px 18px;text-decoration:none" href="print/shablony_konkurs.pdf" download>⬇ Скачать шаблоны</a></div>
-      <div class="pg-card"><div class="n">2</div><h3>Отправьте фото</h3><p>Выложите в соцсети с хештегом <b>${HASHTAG}</b> и отметьте SPLAT Kids и WowSpeak — или загрузите через форму ниже.</p></div>
+        <div class="pg-row"><button class="pg-cta blue" id="cEx">👀 Посмотреть пример</button><a class="pg-cta blue" href="print/shablony_konkurs.pdf" download>⬇ Скачать шаблоны</a></div></div>
+      <div class="pg-card"><div class="n">2</div><h3>Отправьте фото</h3><p>Выложите в соцсети с хештегом <b>${HASHTAG}</b> и отметьте SPLAT Kids и WowSpeak — или загрузите рисунок прямо здесь.</p>
+        <button class="pg-cta" id="cUp" style="font-size:18px">📤 Загрузить рисунок</button></div>
     </div>
-    <h2>Слова для рисунка</h2>
-    <div class="pg-words">${W5.map(w => `<button data-w="${w}"><img src="${U(PIC[w])}" alt="">🔊</button>`).join('')}</div>
-    <h2>Пример рисунка</h2>
-    <img class="pg-ex" src="${U('contest_example')}" alt="Пример детского рисунка">
-    <div class="pg-grid" style="margin-top:26px">
+    <div class="pg-strip">
       <div class="pg-card tint"><h3>Призы</h3><p>[приз] — скоро расскажем.</p></div>
-      <div class="pg-card tint2"><h3>Сроки</h3><ul><li>Приём работ: [дата] — [дата]</li><li>Итоги: [дата]</li></ul><p class="pg-small">Оцениваем идею и старание, а не технику рисунка. Один ребёнок — одна работа.</p>
-        <button class="pg-cta blue" style="font-size:16px;padding:11px 20px" data-dev>Полные правила</button></div>
+      <div class="pg-card tint2"><h3>Сроки</h3><ul style="padding-left:18px"><li>Приём работ: [дата] — [дата]</li><li>Итоги: [дата]</li></ul></div>
     </div>
-    <h2>Загрузить рисунок</h2>
-    <form class="pg-form" id="upl" novalidate>
+    <p class="pg-small" style="margin-top:12px">Оцениваем идею и старание, а не технику рисунка. Один ребёнок — одна работа. <a href="#" data-dev style="color:var(--blue-d)">Полные правила</a></p>`);
+  pageEl.querySelector('#cEx').onclick = contestExample;
+  pageEl.querySelector('#cUp').onclick = contestUpload;
+}
+function sheet(html) {
+  const d = document.createElement('div'); d.className = 'pg-sheet'; pageEl.appendChild(d);
+  d.innerHTML = `<div><button class="pg-x" aria-label="Закрыть">✕</button>${html}</div>`;
+  d.onclick = e => { if (e.target === d || e.target.classList.contains('pg-x')) d.remove(); };
+  d.querySelectorAll('[data-w]').forEach(b => b.onclick = () => { ac(); loadWords(); say(b.dataset.w); });
+  return d;
+}
+function contestExample() {
+  sheet(`<h2>Пример рисунка</h2>
+    <img class="pg-ex" src="${U('contest_example')}" alt="Пример детского рисунка" style="rotate:0deg">
+    <h3 style="font-family:var(--disp);margin:16px 0 4px">Что можно нарисовать</h3>
+    <p class="pg-small">Нажмите — и послушайте, как звучит слово.</p>
+    <div class="pg-words">${W5.map(w => `<button data-w="${w}"><img src="${U(PIC[w])}" alt="">🔊</button>`).join('')}</div>`);
+}
+function contestUpload() {
+  const d = sheet(`<h2>Загрузить рисунок</h2>
+    <form class="pg-form" id="upl" novalidate style="border:none;box-shadow:none;padding:0">
       <p class="pg-small" style="margin-top:0">Для тех, у кого закрытый аккаунт или нет соцсетей.</p>
       <label>Фото рисунка</label>
       <label class="file" style="margin:0"><img id="uPrev" alt=""><span id="uName">📷 Выбрать фото</span><input type="file" id="uFile" accept="image/*" hidden></label>
@@ -1002,7 +1027,7 @@ function contest() {
       <button class="pg-cta" type="submit" id="uBtn" style="margin-top:16px">📤 Отправить рисунок</button>
       <div class="msg" id="uMsg"></div>
     </form>`);
-  const $ = id => pageEl.querySelector('#' + id);
+  const $ = id => d.querySelector('#' + id);
   let file = null;
   $('uFile').onchange = e => {
     file = e.target.files[0] || null; if (!file) return;
