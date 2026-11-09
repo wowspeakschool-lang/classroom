@@ -78,6 +78,16 @@ USEFUL_BY_FORMAT={
               ('Finish','One thing I would tell you is…')],
 }
 
+# Windows не создаёт файл, в имени которого есть ? * : " < > | / \\ , а его
+# встроенный распаковщик такой файл из архива молча пропускает - методист
+# видит пустую папку. Так пропала тема «Can boys and girls be best friends?»:
+# четыре деки лежали в архиве и не извлекались. Название темы на слайдах
+# остаётся полным, чистим только имя файла.
+WIN_BAD = '?*:"<>|/\\'
+def safe_name(t):
+    for ch in WIN_BAD: t=t.replace(ch,'')
+    return ' '.join(t.split()).strip(' .')
+
 def plan(rot):
     """Какие механики достаются теме №rot. Шаги подобраны так, чтобы ни один
     вариант не вернулся раньше, чем через три темы."""
@@ -284,5 +294,5 @@ def run(s,outdir):
         cfg.update(stage)
         cfg['notes']=notes(s.get('video'),s5,s6,s9,red,games,pl['mood'],pl['lead'],pl['video'],
                            s.get('prop_note') if cfg.get('prop') else None)
-        build(cfg,f"{outdir}/Speaking Clubs {grp} {s['theme']}.pptx")
+        build(cfg,f"{outdir}/{safe_name(f'Speaking Clubs {grp} ' + s['theme'])}.pptx")
     print('ALL DONE ->',outdir)
