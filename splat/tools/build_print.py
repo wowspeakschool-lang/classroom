@@ -1,4 +1,4 @@
-"""Шаблоны для конкурса рисунков (А4, для печати) — пять вариантов задания.
+"""Шаблоны для конкурса рисунков (А4, для печати) — четыре варианта задания («соедини точки» убран, Анна 09.11.2026).
 
 python3 splat/tools/build_print.py
 Исходники — контурные картинки Анны (GPT, 09.11.2026) в media/print:
@@ -166,7 +166,7 @@ def left_half(it, keep_text=False):
 
 def v4(its):
     tooth, tube, peng, brush = its
-    p, d = page(4, 'Дорисуй половинку', 'Дорисуй вторую половинку зубика и тюбика пасты.')
+    p, d = page(3, 'Дорисуй половинку', 'Дорисуй вторую половинку зубика и тюбика пасты.')
     for it, box, kt in [(tooth, (M, TOP + 40, W // 2 - 30, BOTTOM - 40), False), (tube, (W // 2 + 30, TOP + 40, W - M, BOTTOM - 40), True)]:
         im, axis = left_half(it, kt)
         ox, oy, k = place(it, box)
@@ -180,7 +180,7 @@ def v4(its):
 # ---------- вариант 5. дай пингвинёнку то, что нужно ----------
 def v5(its):
     tooth, tube, peng, brush = its
-    p, d = page(5, 'Дай пингвинёнку то, что нужно', 'Нарисуй в лапках у пингвинёнка щётку и пасту SPLAT Kids.')
+    p, d = page(4, 'Дай пингвинёнку то, что нужно', 'Нарисуй в лапках у пингвинёнка щётку и пасту SPLAT Kids.')
     paste_fit(p, peng, (M + 80, TOP + 40, W - M - 80, BOTTOM - 40))
     return p
 
@@ -188,7 +188,7 @@ def v5(its):
 def main():
     os.makedirs(OUT, exist_ok=True)
     its = items(Image.open(os.path.join(SRC, 'outlines_v2.png')), 4)
-    pages = [('raskraska', v1(its)), ('obvedi', v2(its)), ('soedini_tochki', v3(its)), ('dorisuy_polovinku', v4(its)), ('day_pingvinyonku', v5(its))]
+    pages = [('raskraska', v1(its)), ('obvedi', v2(its)), ('dorisuy_polovinku', v4(its)), ('day_pingvinyonku', v5(its))]
     for name, pg in pages:
         pg.save(os.path.join(OUT, name + '.pdf'), resolution=200)
         pg.resize((W // 4, H // 4), Image.LANCZOS).save(os.path.join(OUT, name + '.png'))
