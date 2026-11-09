@@ -256,6 +256,19 @@ def differences(scene, title='Найди 5 отличий'):
     return [p]
 
 
+def diff_pair(name):
+    """«Найди 5 отличий» из готовой пары, сгенерированной целиком (промпты 41–43, Анна 09.11.2026):
+    две картинки одна под другой — кладём как есть."""
+    p, d = page('Найди 5 отличий', 'Сравни две картинки и обведи, чем они отличаются.\nНазови по-английски всё, что видишь!')
+    im = Image.open(os.path.join(ROOT, 'media/print', name + '.webp')).convert('RGB')
+    top, bot = M + 380, H - M - 110
+    k = min((W - 2 * M) / im.width, (bot - top) / im.height)
+    im = im.resize((int(im.width * k), int(im.height * k)), Image.LANCZOS)
+    mask = Image.new('L', im.size, 0); ImageDraw.Draw(mask).rounded_rectangle((0, 0, im.width, im.height), 30, fill=255)
+    p.paste(im, ((W - im.width) // 2, top), mask)
+    return [p]
+
+
 # ---------- новые задания (Анна, 09.11.2026) ----------
 def ring_dot(d, x, y, r=14):
     d.ellipse((x - r, y - r, x + r, y + r), fill='white', outline=INK, width=5)
@@ -448,7 +461,7 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     # бинго убрано (Анна, 09.11.2026)
     parts = [('dnevnik', diary()), ('labirinty', mazes()),
-             ('otlichiya', differences(scene_bath) + differences(scene_fishing) + differences(scene_gate)),
+             ('otlichiya', diff_pair('diff_bedroom') + differences(scene_fishing) + differences(scene_bath)),   # рыбалку и ванную заменим готовыми парами (промпты 42, 43)
              ('ten', shadows()), ('lishnee', odd_one()), ('ryad', pattern()), ('para', penguin_pairs()), ('spryatannoe', hidden()), ('pamyatka', memo())]
     allp = []
     for name, pages in parts:
