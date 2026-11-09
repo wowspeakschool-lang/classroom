@@ -269,11 +269,14 @@ def shadows():
     rh = (bot - top) // 5
     for i, n in enumerate(names):
         y0 = top + i * rh
-        put(p, n, (M + 60, y0 + 25, M + 460, y0 + rh - 25))
+        sq = rh - 60
+        wd = sq * (1.7 if n == 'brush_paste' else 1)   # щётка длинная — ей шире рамка, чтобы не выглядела крошечной
+        put(p, n, (M + 260 - wd / 2, y0 + 30, M + 260 + wd / 2, y0 + rh - 30))
         ring_dot(d, M + 540, y0 + rh // 2)
         sh = img(names[order[i]]); a = sh.split()[3]
         sil = Image.new('RGBA', sh.size, (120, 132, 160, 255)); sil.putalpha(a)
-        put(p, sil, (W - M - 460, y0 + 25, W - M - 60, y0 + rh - 25))
+        wd = sq * (1.7 if names[order[i]] == 'brush_paste' else 1)
+        put(p, sil, (W - M - 260 - wd / 2, y0 + 30, W - M - 260 + wd / 2, y0 + rh - 30))
         ring_dot(d, W - M - 540, y0 + rh // 2)
     return [p]
 
@@ -294,11 +297,11 @@ def odd_one():
 
 
 def pattern():
-    p, d = page('Продолжи ряд', 'Посмотри, что за чем идёт, и дорисуй в пустых клеточках.')
-    rows = [['magic_tooth', 'brush', 'magic_tooth', 'brush', None, None],
+    p, d = page('Продолжи ряд', 'Посмотри, что за чем идёт, и дорисуй в пустой клеточке.')
+    rows = [['magic_tooth', 'brush', 'magic_tooth', 'brush', 'magic_tooth', None],
             ['cup', 'cup', 'tube', 'cup', 'cup', None],
-            ['p_happy', 'fish', 'p_happy', 'fish', None, None],
-            ['tube', 'magic_tooth', 'magic_tooth', 'tube', None, None]]
+            ['p_happy', 'fish', 'p_happy', 'fish', 'p_happy', None],
+            ['tube', 'magic_tooth', 'magic_tooth', 'tube', 'magic_tooth', None]]
     top, bot = M + 420, H - M - 120
     rh = (bot - top) // 4
     cw = (W - 2 * M) // 6
@@ -323,17 +326,15 @@ def pattern():
 
 def penguin_pairs():
     p, d = page('Найди пару', 'Найди одинаковых пингвинят и соедини их линией.')
-    poses = ['p_happy', 'p_wave', 'ph_brush', 'ph_jump', 'p_point']
+    poses = ['p_happy', 'p_wave', 'ph_brush', 'ph_jump', 'p_sad', 'pb_fish']   # 6 пар — 12 пингвинят ровной сеткой (Анна, 09.11.2026)
     items = poses * 2
-    rnd = random.Random(8); rnd.shuffle(items)
-    # 10 мест вразнобой: сетка 3×4 без двух клеток, с лёгким сдвигом
-    cells = [(c, r) for r in range(4) for c in range(3)]
-    rnd.shuffle(cells); cells = cells[:10]
+    random.Random(8).shuffle(items)
     top, bot = M + 400, H - M - 120
     cw, ch = (W - 2 * M) // 3, (bot - top) // 4
-    for n, (c, r) in zip(items, cells):
-        x0 = M + c * cw + rnd.randint(-30, 30); y0 = top + r * ch + rnd.randint(-20, 20)
-        put(p, n, (x0 + 60, y0 + 30, x0 + cw - 60, y0 + ch - 30))
+    for k, n in enumerate(items):
+        c, r = k % 3, k // 3
+        x0, y0 = M + c * cw, top + r * ch
+        put(p, n, (x0 + 70, y0 + 25, x0 + cw - 70, y0 + ch - 25))
     return [p]
 
 
