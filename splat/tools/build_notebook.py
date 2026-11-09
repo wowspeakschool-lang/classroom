@@ -313,7 +313,8 @@ def memo():
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    parts = [('dnevnik', diary()), ('labirinty', mazes()), ('otlichiya', differences()), ('bingo', bingo()), ('pamyatka', memo())]
+    # бинго убрано, «найди отличия» ждёт новую картинку-фон (Анна, 09.11.2026)
+    parts = [('dnevnik', diary()), ('labirinty', mazes()), ('pamyatka', memo())]
     allp = []
     for name, pages in parts:
         pages[0].save(os.path.join(OUT, f'tetradka_{name}.pdf'), resolution=200, save_all=True, append_images=pages[1:])
