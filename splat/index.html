@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>7 дней с пингвинёнком — Splat Kids × WowSpeak</title>
+<title>7 дней с пингвинёнком — SPLAT Kids × WowSpeak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
-/* Мини-сайт Splat Kids × WowSpeak: главная, «7 льдинок до замка» (7 игр), конкурс «Своими руками».
+/* Мини-сайт SPLAT Kids × WowSpeak: главная, «7 льдинок до замка» (7 игр), конкурс «Своими руками».
    Как и урок, всё живёт на сцене 16:9, вписанной в окно: координаты — в % сцены, размеры — от её ширины
    (--u = 1% ширины), поэтому одинаково выглядит на телефоне (горизонтально), планшете и компьютере. */
 :root{--blue:#4fb3ff;--blue-d:#2a86d6;--mint:#33c7b0;--mint-d:#1f9e8b;--sun:#ffd23f;--red:#e3262f;
@@ -210,6 +210,12 @@ body.paged #rotate{display:none!important}
 .pg-words button{border:none;background:#fff;border-radius:16px;padding:8px 10px;display:flex;flex-direction:column;align-items:center;gap:2px;box-shadow:0 3px 10px rgba(45,58,92,.08);cursor:pointer;font-family:var(--disp);font-weight:600;font-size:13px;color:var(--ink)}
 .pg-words img{height:64px;width:64px;object-fit:contain}
 .pg-ex{width:100%;max-width:520px;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.12);rotate:-1deg;display:block;margin:6px auto 0}
+.pg-list{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:0}
+.pg-list li{display:flex;gap:12px;align-items:flex-start;background:#fff;border-radius:18px;padding:14px 16px;box-shadow:0 4px 14px rgba(45,58,92,.07)}
+.pg-list li span{font-size:28px;line-height:1}
+.pg-list li b{display:block;font-family:var(--disp);font-size:17px}
+.pg-list li small{display:block;font-weight:700;font-size:13px;color:#7a86a3;margin-top:2px}
+.pg-dl{display:block;width:fit-content;margin:18px auto 0;text-decoration:none;font-size:22px;padding:17px 34px}
 .pg-tpl{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
 .pg-tpl a{text-decoration:none}.pg-tpl button,.pg-tpl a{border:2px dashed #9cc7ea;background:#fff;border-radius:18px;padding:14px 10px;cursor:pointer;font-family:var(--disp);font-weight:600;font-size:15px;color:var(--ink);text-align:center}
 .pg-tpl a span,.pg-tpl button span{display:block;font-size:30px;margin-bottom:4px}
@@ -956,8 +962,9 @@ function notebook() {
         <h1>Распечатай и играй</h1>
         <p class="lead">Задания с пингвинёнком на бумаге: играем вместе с ребёнком, без телефона. Всё на листах А4.</p></div></div>
     <h2>Что внутри</h2>
-    <div class="pg-tpl">${NOTEBOOK.map(([i, t, d, f]) => f ? `<a href="${f}" download><span>${i}</span>${t}<small>${d}</small></a>` : `<button data-dev><span>${i}</span>${t}<small>${d}</small></button>`).join('')}</div>
-    <p style="text-align:center;margin-top:14px"><a class="pg-cta blue" style="font-size:16px;padding:11px 20px;text-decoration:none" href="print/tetradka_pingvinyonka.pdf" download>⬇ Вся тетрадка одним файлом</a></p>
+    <ul class="pg-list">${NOTEBOOK.map(([i, t, d]) => `<li><span>${i}</span><div><b>${t}</b><small>${d}</small></div></li>`).join('')}</ul>
+    <a class="pg-cta pg-dl" href="print/tetradka_pingvinyonka.pdf" download>⬇ Скачать тетрадку</a>
+    <p class="pg-small" style="text-align:center;margin-top:8px">Один файл PDF, ${NOTEBOOK.length} задания на листах А4</p>
     <h2>Слова из тетрадки</h2>
     <p class="pg-small">Нажмите — и послушайте, как они звучат.</p>
     <div class="pg-words">${W5.map(w => `<button data-w="${w}"><img src="${U(PIC[w])}" alt="">🔊</button>`).join('')}</div>`);
@@ -970,26 +977,25 @@ function contest() {
     <div class="pg-hero"><img src="${U('p_wave')}" alt="">
       <div><div class="kick">Конкурс рисунков · WowSpeak × SPLAT Kids</div>
         <h1>Нарисуй слова, которые ты выучил с WowSpeak и SPLAT Kids</h1>
-        <p class="lead">Зубик, щётка, паста, стаканчик, пингвинёнок — что запомнил. На рисунке обязательно щётка или паста SPLAT Kids.</p></div></div>
+        <p class="lead">Главный герой рисунка — щётка или паста SPLAT Kids, её нарисуй обязательно. А рядом — другие английские слова, которые ты запомнил на уроке.</p></div></div>
     <h2>Как участвовать</h2>
     <div class="pg-grid">
-      <div class="pg-card"><div class="n">1</div><h3>Нарисуйте</h3><p>Ребёнок рисует слова с урока. Совсем маленьким — шаблоны ниже: раскрасить, обвести, дорисовать.</p></div>
+      <div class="pg-card"><div class="n">1</div><h3>Нарисуйте</h3><p>Нарисуйте сами или скачайте готовые шаблоны: раскраску и задания для самых маленьких.</p>
+        <a class="pg-cta blue" style="font-size:15px;padding:10px 18px;text-decoration:none" href="print/shablony_konkurs.pdf" download>⬇ Скачать шаблоны</a></div>
       <div class="pg-card"><div class="n">2</div><h3>Отправьте фото</h3><p>Выложите в соцсети с хештегом <b>${HASHTAG}</b> и отметьте SPLAT Kids и WowSpeak — или загрузите через форму ниже.</p></div>
-      <div class="pg-card"><div class="n">3</div><h3>Получите ответ</h3><p>Каждый участник получит ответ от пингвинёнка. Что ещё — скоро расскажем.</p></div>
     </div>
     <h2>Слова для рисунка</h2>
     <div class="pg-words">${W5.map(w => `<button data-w="${w}"><img src="${U(PIC[w])}" alt="">🔊</button>`).join('')}</div>
     <h2>Пример рисунка</h2>
     <img class="pg-ex" src="${U('contest_example')}" alt="Пример детского рисунка">
-    <h2>Шаблоны для малышей</h2>
+    <h2>Готовые шаблоны</h2>
     <p class="pg-small">Распечатайте, и ребёнок раскрасит или дорисует — это тоже работа на конкурс.</p>
-    <div class="pg-tpl">
-      <a href="print/raskraska.pdf" download><span>🖍</span>Раскраска<small>пингвинёнок чистит зубки</small></a>
-      <a href="print/obvedi.pdf" download><span>✏️</span>Обведи по пунктиру<small>щётка, зубик, стаканчик</small></a>
-      <a href="print/dorisuy_polovinku.pdf" download><span>🪞</span>Дорисуй половинку<small>зубик и тюбик пасты</small></a>
-      <a href="print/day_pingvinyonku.pdf" download><span>🐧</span>Дай пингвинёнку то, что нужно<small>дорисуй щётку и пасту</small></a>
-    </div>
-    <p style="text-align:center;margin-top:12px"><a class="pg-cta blue" style="font-size:16px;padding:11px 20px;text-decoration:none" href="print/shablony_konkurs.pdf" download>⬇ Все шаблоны одним файлом</a></p>
+    <ul class="pg-list">
+      <li><span>🖍</span><div><b>Раскраска</b><small>пингвинёнок чистит зубки щёткой и пастой SPLAT Kids</small></div></li>
+      <li><span>✏️</span><div><b>Обведи по пунктиру</b><small>щётка, паста, зубик и стаканчик</small></div></li>
+      <li><span>🐧</span><div><b>Дай пингвинёнку то, что нужно</b><small>дорисуй в лапках щётку и пасту</small></div></li>
+    </ul>
+    <a class="pg-cta pg-dl" href="print/shablony_konkurs.pdf" download>⬇ Скачать шаблоны</a>
     <div class="pg-grid" style="margin-top:26px">
       <div class="pg-card tint"><h3>Призы</h3><p>[приз] — скоро расскажем.</p></div>
       <div class="pg-card tint2"><h3>Сроки</h3><ul><li>Приём работ: [дата] — [дата]</li><li>Итоги: [дата]</li></ul><p class="pg-small">Оцениваем идею и старание, а не технику рисунка. Один ребёнок — одна работа.</p>
