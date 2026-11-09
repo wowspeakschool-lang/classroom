@@ -18,6 +18,14 @@ NEG = {"not","n't","don't","doesn't","didn't","can't","isn't","aren't","won't","
        "haven't","hasn't","no","cannot","wasn't","weren't"}
 CONTR_BE = {"it's","he's","she's","that's","what's","there's","i'm","you're","we're","they're","who's"}
 CONTR_HAVE = {"i've","you've","we've","they've"}
+# Глаголы, которыми в этих курсах начинается повеление. Нужны затем, чтобы
+# «Take the scissors.», «Glue!» и «Attach the fins!» попали в одну корзину:
+# это одна конструкция, и от неё остаётся одно предложение.
+IMPER = {"look","take","give","go","stand","sit","pass","open","close","see","thank",
+         "watch","come","mix","glue","start","walk","recycle","be","listen","raise",
+         "tie","excuse","attach","check","follow","draw","put","find","say","show",
+         "read","write","count","colour","color","choose","help","drop","eat","drink",
+         "wash","brush","stuff","don't","let's"}
 
 def sig(sentence):
     """Грамматический скелет: кто — какой глагол — отрицание — вопрос."""
@@ -47,11 +55,27 @@ def sig(sentence):
             elif x in ("have","has","had","haven't","hasn't"):
                 verb = "have" if (i + 1 < len(w) and w[i+1] == "got") else "глагол"
     if subj is None:
-        subj = "имя" if w[0] not in SUBJ else w[0]
+        # Подлежащего-местоимения нет. Три случая:
+        #   повеление      «Take the scissors.», «Glue!», «Don't sit down.»
+        #   называние      «Granny.», «Teddy.», «Yummy!», «Flash buys apples.»
+        #   без местоимения «My name is Dragon.», «The sun is hot.»
+        # Первое слово повеления само по себе и есть признак конструкции,
+        # поэтому все повеления идут в одну корзину.
+        hvost = "%s|%s" % ("neg" if neg else "+", "?" if vopros else ".")
+        if w[0] in IMPER:
+            return "импер|" + hvost
+        if verb is not None:
+            return "безлич|%s|%s" % (verb, hvost)
+        return "назв|" + hvost
     if verb is None:
         # есть ли вообще сказуемое: слово не из служебных после подлежащего
         verb = "глагол" if len(w) > 1 else "нет"
     return "%s|%s|%s|%s" % (subj, verb, "neg" if neg else "+", "?" if vopros else ".")
+
+# Заголовки, у которых образец — заведомо список слов («Слова на T»,
+# «Слова со звуком [г]»): такое задание и есть перечисление, от него по
+# решению Анны остаётся одно слово.
+SPISOK_SLOV = re.compile(r"\bслов[ао]?\b.*\b(на|со звуком|с звуком)\b", re.I)
 
 def split_sentences(text):
     parts = [p.strip() for p in re.split(r"(?<=[.!?])\s+", text.strip()) if p.strip()]
@@ -62,8 +86,10 @@ def split_sentences(text):
             return [c + "." for c in chunks], True
     return parts, False
 
-def shorten(text):
+def shorten(text, zag=""):
     sents, perechislenie = split_sentences(text)
+    if len(sents) > 1 and SPISOK_SLOV.search(zag or ""):
+        perechislenie = True
     if perechislenie:
         # «Teddy bear, lego, robot» — решение Анны: оставляем одно слово/фразу
         return sents[0], len(sents), 1, True
@@ -87,7 +113,7 @@ if __name__ == "__main__":
             bez_teksta.append(r); continue
         if CHTENIE.search((r["zag"] or "") + " " + (r["txt"] or "")):
             chtenie.append(r); continue   # «прочитай вслух» — образец это эталон чтения
-        new, n_old, n_new, per = shorten(t)
+        new, n_old, n_new, per = shorten(t, r["zag"] or "")
         plan.append(dict(r, novyy=new, bylo_predlozheniy=n_old, stalo=n_new, perechislenie=per,
                          menyaem=(new != t)))
     json.dump(plan, io.open("builds/obrazcy/plan.json","w",encoding="utf-8"), ensure_ascii=False, indent=1)

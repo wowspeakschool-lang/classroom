@@ -2060,7 +2060,7 @@
   "novyy": "Cat!",
   "bylo_predlozheniy": 5,
   "stalo": 1,
-  "perechislenie": false,
+  "perechislenie": true,
   "menyaem": true
  },
  {
@@ -3020,7 +3020,7 @@
   "novyy": "Pen.",
   "bylo_predlozheniy": 3,
   "stalo": 1,
-  "perechislenie": false,
+  "perechislenie": true,
   "menyaem": true
  },
  {
@@ -3292,7 +3292,7 @@
   "novyy": "Unicorn.",
   "bylo_predlozheniy": 2,
   "stalo": 1,
-  "perechislenie": false,
+  "perechislenie": true,
   "menyaem": true
  },
  {
@@ -4188,7 +4188,7 @@
   "novyy": "Table.",
   "bylo_predlozheniy": 3,
   "stalo": 1,
-  "perechislenie": false,
+  "perechislenie": true,
   "menyaem": true
  },
  {
@@ -4937,11 +4937,11 @@
   "txt": " Нажми на микрофон и позови бабушку, как в заклинании. ",
   "obr": "Hey, hey! Come here!",
   "sintez": true,
-  "novyy": "Hey, hey!",
+  "novyy": "Hey, hey! Come here!",
   "bylo_predlozheniy": 2,
-  "stalo": 1,
+  "stalo": 2,
   "perechislenie": false,
-  "menyaem": true
+  "menyaem": false
  },
  {
   "slug": "wow-dragon-2",
@@ -4956,7 +4956,7 @@
   "novyy": "Happy.",
   "bylo_predlozheniy": 4,
   "stalo": 1,
-  "perechislenie": false,
+  "perechislenie": true,
   "menyaem": true
  },
  {
@@ -5209,10 +5209,10 @@
   "txt": " Нажми на микрофон и назови слова, которые начинаются на звук [г]. ",
   "obr": "Granny. Grandpa. Green. Glue stick.",
   "sintez": true,
-  "novyy": "Granny. Glue stick.",
+  "novyy": "Granny.",
   "bylo_predlozheniy": 4,
-  "stalo": 2,
-  "perechislenie": false,
+  "stalo": 1,
+  "perechislenie": true,
   "menyaem": true
  },
  {
@@ -5273,9 +5273,9 @@
   "txt": " Нажми на микрофон и скажи, что болит у бабушки и что ей дать. ",
   "obr": "Her legs hurt. Give her the pills. Give her the magic tea.",
   "sintez": true,
-  "novyy": "Her legs hurt.",
+  "novyy": "Her legs hurt. Give her the pills.",
   "bylo_predlozheniy": 3,
-  "stalo": 1,
+  "stalo": 2,
   "perechislenie": false,
   "menyaem": true
  },
@@ -5497,10 +5497,10 @@
   "txt": " Нажми на микрофон и назови слова на звук [т]. ",
   "obr": "Teddy. T-Rex. Table. Tea.",
   "sintez": true,
-  "novyy": "Teddy. T-Rex.",
+  "novyy": "Teddy.",
   "bylo_predlozheniy": 4,
-  "stalo": 2,
-  "perechislenie": false,
+  "stalo": 1,
+  "perechislenie": true,
   "menyaem": true
  },
  {
@@ -6537,9 +6537,9 @@
   "txt": " Нарисуй на бумаге свою ракету из поделки. Нажми на микрофон и расскажи, как ты её делал. ",
   "obr": "Take the scissors. Glue! Attach the fins!",
   "sintez": true,
-  "novyy": "Take the scissors. Glue!",
+  "novyy": "Take the scissors.",
   "bylo_predlozheniy": 3,
-  "stalo": 2,
+  "stalo": 1,
   "perechislenie": false,
   "menyaem": true
  },
@@ -6777,11 +6777,11 @@
   "txt": " Нарисуй на бумаге свой космический обед. Нажми на микрофон и расскажи, что в нём. ",
   "obr": "Space soup and space juice. Yummy!",
   "sintez": true,
-  "novyy": "Space soup and space juice. Yummy!",
+  "novyy": "Space soup and space juice.",
   "bylo_predlozheniy": 2,
-  "stalo": 2,
+  "stalo": 1,
   "perechislenie": false,
-  "menyaem": false
+  "menyaem": true
  },
  {
   "slug": "wow-dragon-2",
