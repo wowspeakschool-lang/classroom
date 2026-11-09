@@ -337,6 +337,28 @@ def penguin_pairs():
     return [p]
 
 
+def hidden():
+    """Найди спрятанные предметы: сцена Анны (промпт 33/35, надпись на щётке поправлена вручную),
+    внизу — рамочки с теми же вещами, вырезанными из этой же картинки (ребёнок ищет ровно то, что нарисовано)."""
+    sc = Image.open(os.path.join(ROOT, 'media/print/hidden_scene.webp')).convert('RGB')
+    crops = [(95, 878, 205, 968), (528, 738, 760, 832), (405, 432, 505, 505), (1255, 310, 1428, 560), (742, 462, 838, 562), (1095, 885, 1225, 940)]
+    p, d = page('Найди спрятанные предметы', 'Найди на картинке всё, что нарисовано в рамочках внизу.\nНашёл — обведи и поставь галочку!')
+    top = M + 380
+    k = (W - 2 * M) / sc.width
+    s2 = sc.resize((W - 2 * M, int(sc.height * k)), Image.LANCZOS)
+    mask = Image.new('L', s2.size, 0); ImageDraw.Draw(mask).rounded_rectangle((0, 0, s2.width, s2.height), 36, fill=255)
+    p.paste(s2, (M, top), mask)
+    y0 = top + s2.height + 40
+    cw, chh = (W - 2 * M) // 3, (H - M - 110 - y0) // 2
+    for i, c in enumerate(crops):
+        x0, yy = M + (i % 3) * cw, y0 + (i // 3) * chh
+        d.rounded_rectangle((x0 + 12, yy + 10, x0 + cw - 12, yy + chh - 10), 30, outline=(124, 92, 170), width=6, fill='white')
+        put(p, sc.crop(c).convert('RGBA'), (x0 + 40, yy + 30, x0 + cw - 120, yy + chh - 30))
+        cx, cy = x0 + cw - 70, yy + chh // 2
+        d.rounded_rectangle((cx - 26, cy - 26, cx + 26, cy + 26), 8, outline=(124, 92, 170), width=5)   # клеточка для галочки
+    return [p]
+
+
 # ---------- 4. бинго-лото ----------
 BINGO = [('tooth', 'magic_tooth'), ('toothbrush', 'brush'), ('toothpaste', 'tube'), ('cup', 'cup'), ('penguin', 'p_happy'),
          ('fish', 'fish'), ('boot', 'boot'), ('gift', 'gift'), ('backpack', 'backpack')]
@@ -425,7 +447,7 @@ def main():
     # бинго убрано (Анна, 09.11.2026)
     parts = [('dnevnik', diary()), ('labirinty', mazes()),
              ('otlichiya', differences(scene_bath) + differences(scene_fishing) + differences(scene_gate)),
-             ('ten', shadows()), ('lishnee', odd_one()), ('ryad', pattern()), ('para', penguin_pairs()), ('pamyatka', memo())]
+             ('ten', shadows()), ('lishnee', odd_one()), ('ryad', pattern()), ('para', penguin_pairs()), ('spryatannoe', hidden()), ('pamyatka', memo())]
     allp = []
     for name, pages in parts:
         pages[0].save(os.path.join(OUT, f'tetradka_{name}.pdf'), resolution=200, save_all=True, append_images=pages[1:])
