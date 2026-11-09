@@ -64,6 +64,9 @@ def split_sentences(text):
 
 def shorten(text):
     sents, perechislenie = split_sentences(text)
+    if perechislenie:
+        # «Teddy bear, lego, robot» — решение Анны: оставляем одно слово/фразу
+        return sents[0], len(sents), 1, True
     seen, keep = set(), []
     for s in sents:
         k = sig(s)
