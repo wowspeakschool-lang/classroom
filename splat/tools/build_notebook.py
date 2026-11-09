@@ -187,11 +187,9 @@ def mazes():
 
 
 # ---------- 3. найди отличия ----------
-def scene(variant):
-    """Ванная в Зубном замке (фон Анны, промпт 32) и наши вещи в масштабе; variant=1 — пять отличий.
-    Вещи ставим по нижнему краю: на раковину, на полки, на пол — так, будто они там стоят."""
-    bg = Image.open(os.path.join(ROOT, 'media/site/bathroom.webp')).convert('RGBA')
-    def at(name, x, bottom, h, flip=False, tint=None):
+def placer(bg):
+    """at(name, x, низ, высота): ставит вещь по нижнему краю — будто она стоит на поверхности."""
+    def at(name, x, bottom, h, flip=False, tint=None, cx=False):
         im = img(name)
         if tint is not None:
             r, g, b, a = im.split()
@@ -200,19 +198,51 @@ def scene(variant):
         if flip: im = ImageOps.mirror(im)
         k = h / im.height
         im = im.resize((int(im.width * k), int(h)), Image.LANCZOS)
-        bg.alpha_composite(im, (int(x - im.width / 2), int(bottom - im.height)))
-    v = variant
-    at('tube', 250, 482, 120) if not v else None                        # 1: паста на верхней полке пропала
+        y = int(bottom - im.height / 2) if cx else int(bottom - im.height)   # cx: bottom — это центр по высоте
+        bg.alpha_composite(im, (int(x - im.width / 2), y))
+    return at
+
+
+def scene_bath(v):
+    """Ванная в Зубном замке (промпт 32)."""
+    bg = Image.open(os.path.join(ROOT, 'media/site/bathroom.webp')).convert('RGBA'); at = placer(bg)
+    if not v: at('tube', 250, 482, 120)                                  # 1: паста на верхней полке пропала
     at('magic_tooth', 390 if not v else 300, 604, 70)                    # 2: зубик на нижней полке переехал
     at('gift', 220 if not v else 410, 604, 85)
-    at('cup', 735, 492, 80, tint=None if not v else 150)                 # 3: стаканчик другого цвета (жёлтый, не розовый)
-    if v: at('snowball', 1080, 580, 60)                                  # 4: на табурете появился снежок
+    at('cup', 735, 492, 80, tint=None if not v else 150)                 # 3: стаканчик жёлтый
+    if v: at('snowball', 1080, 580, 60)                                  # 4: на табурете снежок
     at('ph_stand', 560, 850, 340, flip=bool(v))                          # 5: пингвинёнок повернулся
     return bg.convert('RGB')
 
 
-def differences():
-    p, d = page('Найди 5 отличий', 'Сравни две картинки и обведи, чем они отличаются.\nНазови по-английски всё, что видишь!')
+def scene_fishing(v):
+    """Рыбалка на льду (фон урока). Удочка как на слайде 14: крючок над лункой (61 %, 73 %)."""
+    bg = Image.open(os.path.join(ROOT, 'media/lesson/ice_fishing.webp')).convert('RGBA'); at = placer(bg)
+    at('backpack', 200, 760, 190, tint=None if not v else 40)            # 2: рюкзак другого цвета
+    for k, (x, y) in enumerate([(330, 860), (440, 885), (250, 900)]):    # 3: рыбок на льду больше
+        if k < 2 or v: at('fish', x, y, 55)
+    if v: at('cup', 1390, 760, 85)                                       # 4: у лунки стаканчик
+    if v: at('magic_tooth', 1500, 560, 70)                               # 5: на сугробе зубик
+    pen = img('pb_fishing'); k = 0.6 * 941 / pen.height
+    pen = pen.resize((int(pen.width * k), int(pen.height * k)), Image.LANCZOS)
+    bg.alpha_composite(pen, (int(0.45 * 1672 - pen.width / 2), int(0.525 * 941 - pen.height / 2)))
+    at('fish' if not v else 'tube', 1020, 687, 95 if not v else 110, cx=True)   # 1: на крючке паста вместо рыбки
+    return bg.convert('RGB')
+
+
+def scene_gate(v):
+    """У ворот Зубного замка вечером (финал дня 7)."""
+    bg = Image.open(os.path.join(ROOT, 'media/site/castle_night.webp')).convert('RGBA'); at = placer(bg)
+    if v: at('magic_tooth', 290, 665, 60)                                # 2: на ёлке висит зубик
+    at('gift', 1230, 810, 180, tint=None if not v else 60)              # 3: подарок другого цвета
+    if v: at('cup', 1450, 860, 105)                                       # 4: в сугробе стаканчик
+    if v: at('tube', 1020, 730, 135)                                     # 5: у ворот паста SPLAT Kids
+    at('pb_stand' if v else 'p_happy', 560, 820, 340)                    # 1: в лапке щётка / нет
+    return bg.convert('RGB')
+
+
+def differences(scene, title='Найди 5 отличий'):
+    p, d = page(title, 'Сравни две картинки и обведи, чем они отличаются.\nНазови по-английски всё, что видишь!')
     top = M + 400
     hh = (H - M - 120 - top - 40) // 2
     for i in range(2):
@@ -223,6 +253,87 @@ def differences():
         x, y = int(box[0] + (box[2] - box[0] - sc.width) / 2), int(box[1] + (box[3] - box[1] - sc.height) / 2)
         mask = Image.new('L', sc.size, 0); ImageDraw.Draw(mask).rounded_rectangle((0, 0, sc.width, sc.height), 36, fill=255)
         p.paste(sc, (x, y), mask)
+    return [p]
+
+
+# ---------- новые задания (Анна, 09.11.2026) ----------
+def ring_dot(d, x, y, r=14):
+    d.ellipse((x - r, y - r, x + r, y + r), fill='white', outline=INK, width=5)
+
+
+def shadows():
+    p, d = page('Найди тень', 'Соедини каждую картинку с её тенью.')
+    names = ['magic_tooth', 'brush_paste', 'tube', 'cup', 'p_wave']
+    order = [3, 0, 4, 1, 2]
+    top, bot = M + 420, H - M - 120
+    rh = (bot - top) // 5
+    for i, n in enumerate(names):
+        y0 = top + i * rh
+        put(p, n, (M + 60, y0 + 25, M + 460, y0 + rh - 25))
+        ring_dot(d, M + 540, y0 + rh // 2)
+        sh = img(names[order[i]]); a = sh.split()[3]
+        sil = Image.new('RGBA', sh.size, (120, 132, 160, 255)); sil.putalpha(a)
+        put(p, sil, (W - M - 460, y0 + 25, W - M - 60, y0 + rh - 25))
+        ring_dot(d, W - M - 540, y0 + rh // 2)
+    return [p]
+
+
+def odd_one():
+    p, d = page('Что лишнее?', 'В каждом ряду одна картинка лишняя. Обведи её\nи расскажи, почему она лишняя.')
+    rows = [['brush_paste', 'tube', 'cup', 'fish'], ['p_happy', 'boot', 'p_wave', 'ph_jump'],
+            ['magic_tooth', 'brush', 'cake', 'tube'], ['snowball', 'icicle', 'tube', 'ice_cube']]
+    top, bot = M + 420, H - M - 120
+    rh = (bot - top) // 4
+    cw = (W - 2 * M) // 4
+    for r, row in enumerate(rows):
+        y0 = top + r * rh
+        d.rounded_rectangle((M, y0 + 14, W - M, y0 + rh - 14), 40, fill=[SKY, (244, 250, 255)][r % 2])
+        for c, n in enumerate(row):
+            put(p, n, (M + c * cw + 40, y0 + 50, M + (c + 1) * cw - 40, y0 + rh - 50))
+    return [p]
+
+
+def pattern():
+    p, d = page('Продолжи ряд', 'Посмотри, что за чем идёт, и дорисуй в пустых клеточках.')
+    rows = [['magic_tooth', 'brush', 'magic_tooth', 'brush', None, None],
+            ['cup', 'cup', 'tube', 'cup', 'cup', None],
+            ['p_happy', 'fish', 'p_happy', 'fish', None, None],
+            ['tube', 'magic_tooth', 'magic_tooth', 'tube', None, None]]
+    top, bot = M + 420, H - M - 120
+    rh = (bot - top) // 4
+    cw = (W - 2 * M) // 6
+    for r, row in enumerate(rows):
+        y0 = top + r * rh
+        for c, n in enumerate(row):
+            x0 = M + c * cw
+            box = (x0 + 12, y0 + rh // 2 - cw // 2 + 12, x0 + cw - 12, y0 + rh // 2 + cw // 2 - 12)
+            if n:
+                d.rounded_rectangle(box, 26, fill=SKY)
+                put(p, n, (box[0] + 18, box[1] + 18, box[2] - 18, box[3] - 18), angle=-90 if n == 'brush' else 0)
+            else:
+                for k in range(0, 4):   # пунктирная клеточка
+                    pass
+                x_0, y_0, x_1, y_1 = box
+                for t in range(int(x_0) + 10, int(x_1) - 10, 26):
+                    d.line((t, y_0, t + 13, y_0), fill=(150, 170, 200), width=5); d.line((t, y_1, t + 13, y_1), fill=(150, 170, 200), width=5)
+                for t in range(int(y_0) + 10, int(y_1) - 10, 26):
+                    d.line((x_0, t, x_0, t + 13), fill=(150, 170, 200), width=5); d.line((x_1, t, x_1, t + 13), fill=(150, 170, 200), width=5)
+    return [p]
+
+
+def penguin_pairs():
+    p, d = page('Найди пару', 'Найди одинаковых пингвинят и соедини их линией.')
+    poses = ['p_happy', 'p_wave', 'ph_brush', 'ph_jump', 'p_point']
+    items = poses * 2
+    rnd = random.Random(8); rnd.shuffle(items)
+    # 10 мест вразнобой: сетка 3×4 без двух клеток, с лёгким сдвигом
+    cells = [(c, r) for r in range(4) for c in range(3)]
+    rnd.shuffle(cells); cells = cells[:10]
+    top, bot = M + 400, H - M - 120
+    cw, ch = (W - 2 * M) // 3, (bot - top) // 4
+    for n, (c, r) in zip(items, cells):
+        x0 = M + c * cw + rnd.randint(-30, 30); y0 = top + r * ch + rnd.randint(-20, 20)
+        put(p, n, (x0 + 60, y0 + 30, x0 + cw - 60, y0 + ch - 30))
     return [p]
 
 
@@ -312,7 +423,9 @@ def memo():
 def main():
     os.makedirs(OUT, exist_ok=True)
     # бинго убрано (Анна, 09.11.2026)
-    parts = [('dnevnik', diary()), ('labirinty', mazes()), ('otlichiya', differences()), ('pamyatka', memo())]
+    parts = [('dnevnik', diary()), ('labirinty', mazes()),
+             ('otlichiya', differences(scene_bath) + differences(scene_fishing) + differences(scene_gate)),
+             ('ten', shadows()), ('lishnee', odd_one()), ('ryad', pattern()), ('para', penguin_pairs()), ('pamyatka', memo())]
     allp = []
     for name, pages in parts:
         pages[0].save(os.path.join(OUT, f'tetradka_{name}.pdf'), resolution=200, save_all=True, append_images=pages[1:])
