@@ -54,7 +54,45 @@ def card(s,x,y,w,h,fill=WHITE,rad=0.1,sh=True):
     r.fill.solid(); r.fill.fore_color.rgb=C(fill); r.line.fill.background(); r.shadow.inherit=False
     if sh: shadow(r)
     return r
-def text(s,x,y,w,h,runs,align=PP_ALIGN.LEFT,anchor=MSO_ANCHOR.TOP,sa=6,ls=1.0):
+_FIT_FONT=None
+def _fitfont(sz):
+    """Метрики для подгонки размера. Берём реальный шрифт: без измерения текст
+    в PowerPoint переносится иначе, чем в предпросмотре, и вылезает за рамку."""
+    global _FIT_FONT
+    from PIL import ImageFont
+    if _FIT_FONT is None:
+        for cand in ('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
+                     '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'):
+            if os.path.exists(cand): _FIT_FONT=cand; break
+    return ImageFont.truetype(_FIT_FONT,int(round(sz*4))) if _FIT_FONT else None
+
+def _needed_height(runs,w_pt,scale=1.0,ls=1.0,sa=6):
+    """Сколько пунктов по высоте займёт текст при переносе по словам."""
+    total=0.0
+    for para in runs:
+        sz=max([r[1] for r in para] or [12])*scale
+        f=_fitfont(sz)
+        txt=''.join(r[0] for r in para)
+        if f is None: lines=max(1,int(len(txt)*sz*0.5/max(w_pt,1))+1)
+        else:
+            lines=0; line=''
+            for word in txt.split(' '):
+                t=(line+' '+word).strip()
+                if f.getlength(t)/4.0<=w_pt-8 or not line: line=t
+                else: lines+=1; line=word
+            lines+=1
+        total+=lines*sz*1.28*max(ls,1.0)+sa
+    return total
+
+def text(s,x,y,w,h,runs,align=PP_ALIGN.LEFT,anchor=MSO_ANCHOR.TOP,sa=6,ls=1.0,fit=True):
+    # если текст не помещается, уменьшаем кегль, а не выпускаем его за рамку
+    scale=1.0
+    if fit and runs and h*72>14 and w*72>40:
+        for k in (1.0,0.94,0.88,0.82,0.76,0.7,0.64,0.58):
+            if _needed_height(runs,w*72,k,ls,sa)<=h*72+1: scale=k; break
+        else: scale=0.58
+        if scale<1.0:
+            runs=[[(t,max(9.0,round(sz*scale,1)),*rest) for (t,sz,*rest) in para] for para in runs]
     tb=s.shapes.add_textbox(Inches(x),Inches(y),Inches(w),Inches(h)); tf=tb.text_frame
     tf.word_wrap=True; tf.vertical_anchor=anchor
     for m in ('left','right','top','bottom'): setattr(tf,f'margin_{m}',Pt(2))
@@ -101,6 +139,113 @@ GAME_NOTE=('Игры встроены в презентацию. Работаю�
            'Клик мимо кнопки НЕ листает слайд — дальше переходи стрелкой →. '
            'Подписи под картинками в играх убраны специально: иначе задание проверяет чтение, а не знание слова. '
            'Экраны «Correct / Try again» лежат в конце файла — листая урок стрелками, ты их не увидишь.')
+
+# --------------------------------------------------------------- props
+# Слайд-реквизит: то, на что ссылается задание. Если проект говорит «веди по
+# карте» или «спроси цену», карта и цены должны быть НА ЭКРАНЕ, иначе ученику
+# нечем пользоваться и задание рассыпается.
+def prop_slide(prs,cfg):
+    pr=cfg.get('prop')
+    if not pr: return None
+    kind=pr.get('kind'); vocab=cfg.get('vocab') or []
+    pics=dict(pr.get('pics') or {})
+    pics.update({w:p for w,p in vocab if isinstance(p,str) and os.path.exists(p)})
+    s=new_slide(prs,PASTELS[pr.get('bg','mint')])
+    blob(s,0.4,0.5,3.0,BLOB[1]); blob(s,13.0,7.1,3.0,BLOB[0])
+    band(s,pr.get('title','🗺️ Look at this!'),size=30)
+
+    if kind=='route':
+        # лента шагов с пустыми местами плюс полоска картинок словаря внизу
+        steps=pr.get('steps',['Start','Stop 1','Stop 2','Stop 3','Destination'])
+        n=len(steps); cw=1.95; gap=(12.1-n*cw)/(n-1)
+        card(s,0.9,2.85,11.5,0.12,fill='C9BFE4',rad=0.02,sh=False)
+        for i,st in enumerate(steps):
+            x=0.6+i*(cw+gap)
+            card(s,x,2.1,cw,1.6,fill=WHITE,rad=0.5)
+            text(s,x,2.1,cw,0.8,[[(str(i+1),26,HOTPINK,True,TF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+            text(s,x+0.05,2.85,cw-0.1,0.7,[[(st,14,INK,True,BF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+            text(s,x,3.75,cw,0.5,[[('______',16,'9A8FB5',False,BF)]],align=PP_ALIGN.CENTER)
+        words=pr.get('strip') or [w for w,_ in vocab][:6]
+        bx=(SLIDE_W-(6*1.85+5*0.18))/2
+        for i,w in enumerate(words[:6]):
+            x=bx+i*(1.85+0.18); card(s,x,4.75,1.85,1.65,fill=WHITE,rad=0.12)
+            img=pics.get(w)
+            if img: fit(s,img,x+0.25,4.85,1.35,1.0)
+            text(s,x,5.9,1.85,0.4,[[(w,12,HOTPINK,True,TF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+        text(s,0.6,6.8,10.6,0.5,[[(pr.get('hint','Fill in the steps out loud - use the words below.'),15,'5A4A7A',True,BF)]],align=PP_ALIGN.CENTER)
+
+    elif kind=='image':
+        # готовая иллюстрация-реквизит (карта города, лента времени, рамки).
+        # Подписи идут НАД картинкой, а не поверх неё: текст на картинке
+        # перекрывает рисунок и выглядит как ошибка вёрстки.
+        chips=pr.get('chips') or []
+        caps=pr.get('captions') or []
+        top=2.32 if caps else 1.38
+        ih=(4.05 if chips else 4.5) if caps else (4.55 if chips else 5.15)
+        src=pr['src']; pic=None
+        if os.path.exists(src): pic=fit(s,src,0.7,top,11.93,ih)
+        if pic is not None and caps:
+            px,py=pic.left/914400.0,pic.top/914400.0
+            pw=pic.width/914400.0
+            for (txt,fx,_fy) in caps:
+                w=min(4.0,max(2.4,pw*0.4))
+                x=min(max(0.6,px+pw*fx-w/2),SLIDE_W-0.6-w)
+                card(s,x,py-0.72,w,0.62,fill=WHITE,rad=0.3)
+                text(s,x,py-0.72,w,0.62,[[(txt,16,HOTPINK,True,TF)]],
+                     align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+        if chips:
+            n=len(chips); cw=min(1.85,(11.9-(n-1)*0.16)/n); gx=(SLIDE_W-(n*cw+(n-1)*0.16))/2
+            for i,(label,word) in enumerate(chips):
+                x=gx+i*(cw+0.16); card(s,x,6.1,cw,0.72,fill=WHITE,rad=0.3)
+                text(s,x+0.04,6.1,cw-0.08,0.72,[[(label,13,HOTPINK,True,TF)]],
+                     align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+        text(s,0.6,6.92,10.6,0.45,[[(pr.get('hint',''),14,'5A4A7A',True,BF)]],align=PP_ALIGN.CENTER)
+
+    elif kind in ('menu','pricelist'):
+        rows=pr['rows']                            # [(слово, цена/размер)]
+        card(s,1.5,1.6,10.33,4.9,fill=WHITE,rad=0.1)
+        for i,(word,price) in enumerate(rows[:6]):
+            r=i//2; c=i%2
+            x=1.9+c*5.1; y=1.95+r*1.5
+            img=pics.get(word)
+            if img: fit(s,img,x,y,1.15,1.15)
+            text(s,x+1.3,y+0.1,2.4,0.55,[[(word,17,HOTPINK,True,TF)]],align=PP_ALIGN.LEFT,anchor=MSO_ANCHOR.MIDDLE)
+            text(s,x+1.3,y+0.62,2.4,0.5,[[(price,16,TEAL,True,BF)]],align=PP_ALIGN.LEFT,anchor=MSO_ANCHOR.MIDDLE)
+        text(s,0.6,6.8,10.6,0.5,[[(pr.get('hint','Order from this list - and ask how much it is.'),15,'5A4A7A',True,BF)]],align=PP_ALIGN.CENTER)
+
+    elif kind=='scale':
+        # бланк опроса: шесть строк и пять колонок под ответы. Опрос без бланка
+        # превращается в «кто что крикнул», с бланком класс докладывает цифрами.
+        rows=pr.get('rows') or [w for w,_ in vocab][:6]
+        card(s,0.7,1.5,11.93,5.0,fill=WHITE,rad=0.08)
+        heads=pr.get('heads') or ['1','2','3','4','5']
+        x0=5.0; cw=1.42
+        text(s,1.0,1.65,3.8,0.5,[[(pr.get('left_title','Quality'),15,'9A8FB5',True,BF)]],anchor=MSO_ANCHOR.MIDDLE)
+        for k,h in enumerate(heads):
+            text(s,x0+k*cw,1.65,cw,0.5,[[(h,15,'9A8FB5',True,BF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+        for i,w in enumerate(rows[:6]):
+            y=2.25+i*0.72
+            card(s,1.0,y,3.8,0.62,fill=PASTELS[pr.get('row_bg','lavender')],rad=0.3,sh=False)
+            text(s,1.1,y,3.6,0.62,[[(w,16,HOTPINK,True,TF)]],anchor=MSO_ANCHOR.MIDDLE)
+            for k in range(len(heads)):
+                card(s,x0+k*cw+0.12,y,cw-0.24,0.62,fill='F2F0F7',rad=0.2,sh=False)
+        text(s,0.6,6.72,12.13,0.5,[[(pr.get('hint','Ask five people, tick a box for every answer - then report the numbers.'),15,'5A4A7A',True,BF)]],align=PP_ALIGN.CENTER)
+
+    elif kind=='wall':
+        # стена картинок без подписей: ученик выбирает номер и описывает.
+        # Подписи здесь были бы ответом - он должен назвать это сам.
+        words=pr.get('words') or [w for w,_ in vocab][:6]
+        cols=3; cw=3.75; gap=0.3; gx=(SLIDE_W-(cols*cw+(cols-1)*gap))/2
+        for i,w in enumerate(words[:6]):
+            r=i//cols; c=i%cols; x=gx+c*(cw+gap); y=1.55+r*2.52
+            card(s,x,y,cw,2.4,fill=WHITE,rad=0.12)
+            img=pics.get(w)
+            if img: fit(s,img,x+0.45,y+0.12,cw-0.9,2.16)
+            n=card(s,x+0.1,y+0.1,0.55,0.55,fill=GOLD,rad=0.5)
+            text_in_shape(n,str(i+1),16,DARK,True,TF)
+        text(s,0.6,6.72,12.13,0.5,[[(pr.get('hint','Pick a number and tell us what you can see.'),15,'5A4A7A',True,BF)]],align=PP_ALIGN.CENTER)
+    logo(s)
+    return s
 
 def build(cfg,out):
     """Render one deck. cfg schema: see HANDOFF.md §6."""
@@ -190,9 +335,9 @@ def build(cfg,out):
     else:
         s=ns(PASTELS['peach'])
         blob(s,0.4,0.5,3.0,BLOB[3]); blob(s,13.0,7.1,3.0,BLOB[5])
-        band(s,'💬 Useful language for discussion 🗣️',size=28)
+        band(s,cfg.get('useful_title','💬 Useful language for discussion 🗣️'),size=28)
         gx=1.4; gy=1.95; cw=5.15; ch=2.15; gapx=0.55; gapy=0.35
-        for i,(hd,ph) in enumerate(USEFUL):
+        for i,(hd,ph) in enumerate(cfg.get('useful') or USEFUL):
             r=i//2; c=i%2; x=gx+c*(cw+gapx); y=gy+r*(ch+gapy)
             card(s,x,y,cw,ch,fill=WHITE,rad=0.1)
             text(s,x+0.25,y+0.2,cw-0.5,0.6,[[(hd,18,HOTPINK,True,TF)]],align=PP_ALIGN.LEFT,anchor=MSO_ANCHOR.MIDDLE)
@@ -229,6 +374,9 @@ def build(cfg,out):
         runs.append([(e+'  ',14.5,'F2ECFF',False,BF),(q,14.5,'F2ECFF',False,BF)])
     text(s,2.3,5.5,8.73,1.5,runs,align=PP_ALIGN.LEFT,sa=6,ls=1.03)
     logo(s,dark=True)
+
+    # слайд-реквизит: то, на что ссылается финальное задание
+    s_prop=prop_slide(prs,cfg)
 
     # MAIN SPEAKING
     if lvl=='beg':
@@ -275,6 +423,7 @@ def build(cfg,out):
     nums=[pos(sl) for sl in game_slides]
     games_txt=(f'{min(nums)}-{max(nums)}' if len(nums)>1 else (str(nums[0]) if nums else '-'))
     render_notes(s_notes,cfg,{'GAMES':games_txt,'VIDEO':str(pos(s_video)),'SPEAKING':str(pos(s_speak)),
+                              'PROP':(str(pos(s_prop)) if s_prop is not None else '-'),
                               'SERVICE':(f'{len(prs.slides._sldIdLst)-len(helpers)+1}-{len(prs.slides._sldIdLst)}' if helpers else '-')})
     prs.save(out)
     print('saved',os.path.basename(out),'|',len(prs.slides._sldIdLst),'slides |',

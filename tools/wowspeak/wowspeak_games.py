@@ -369,6 +369,286 @@ def g_board(prs,bg,questions,helpers=None,title='🎲 Choose a number!',back='�
     return helpers
 
 # --------------------------------------------------- builder entry point
+# -------------------------------------------------- общие части игр
+def _tmpdir():
+    """Куда класть сгенерированные картинки (тени, увеличенные куски)."""
+    import tempfile
+    d=os.path.join(tempfile.gettempdir(),'wowspeak_media'); os.makedirs(d,exist_ok=True); return d
+
+def _ink_box(a):
+    """Рамка вокруг нарисованного: всё, что не белое."""
+    import numpy as np
+    m=(np.abs(a-255).sum(axis=2)>40)
+    if not m.any(): return None
+    ys,xs=np.where(m)
+    return int(xs.min()),int(ys.min()),int(xs.max())+1,int(ys.max())+1
+
+def fit_size(txt,base=24,wide=14,floor=12):
+    """Кегль для текста ВНУТРИ кнопки: длинная фраза иначе вылезает за край.
+    Функциональные темы держат на карточке целую реплику, а не слово."""
+    n=len(str(txt))
+    if n<=wide: return base
+    return max(floor,round(base*wide/n,1))
+
+def _feedback(prs,q,nxt,last=False,helpers=None):
+    """Два служебных экрана к одному вопросу: Correct и Try again.
+    На каждом - настоящая кнопка (правило 7), слайд целиком тоже кликается."""
+    helpers=[] if helpers is None else helpers
+    ok=B.new_slide(prs,GREEN); bad=B.new_slide(prs,AMBER)
+    helpers+=[ok,bad]
+    link_whole_slide(ok,nxt,GREEN)
+    B.text(ok,1.0,1.95,11.3,1.4,[[('YES! Correct! 🎉',54,B.GOLD,True,B.TF)]],
+           align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+    btn(ok,4.2,3.95,4.93,1.05,'See the result  →' if last else 'Next one  →',
+        fill=B.GOLD,size=24,col='1B6B3F',rad=0.4,target=nxt)
+    link_whole_slide(bad,q,AMBER)
+    B.text(bad,1.0,1.95,11.3,1.4,[[('Try again! 🤔',54,B.WHITE,True,B.TF)]],
+           align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+    btn(bad,4.2,3.95,4.93,1.05,'↩  Back to the question',fill=B.WHITE,size=22,
+        col='A35C0E',rad=0.4,target=q)
+    return ok,bad
+
+def _win(prs,bg,final='🏆 Well done!'):
+    s=B.new_slide(prs,bg)
+    B.blob(s,0.4,0.6,3.2,B.BLOB[2]); B.blob(s,12.8,7.0,3.6,B.BLOB[1])
+    c=B.card(s,2.6,2.3,8.13,2.4,fill=B.WHITE,rad=0.25)
+    card_text(c,final,size=30,col=B.HOTPINK)
+    B.text(s,1.5,5.1,10.3,0.8,[[('⭐ 🎉 ⭐ 🎉 ⭐',40,B.INK,False,B.BF)]],align=PP_ALIGN.CENTER)
+    B.logo(s)
+    return s
+
+# ------------------------------------------------- картинка -> другой вид
+def silhouette(path,col='4A3B6E'):
+    """Тень предмета: цвет убираем, форму и внутренние грани оставляем.
+    Плоская заливка превращала карту, чемодан и снеки в три одинаковых пятна -
+    задание становилось угадайкой. Яркость пикселя переходит в оттенок одного
+    цвета: сгибы и колёса видно, а цвет не подсказывает."""
+    from PIL import Image, ImageDraw
+    import numpy as np
+    im=Image.open(path).convert('RGB'); a=np.asarray(im).astype(float)
+    ink=(np.abs(a-255).sum(axis=2)>40)
+    flat=Image.fromarray(np.where(ink,0,255).astype('uint8'),'L').copy()
+    # .copy() обязателен: у картинки на буфере floodfill молча ничего не делает
+    for xy in ((0,0),(im.width-1,0),(0,im.height-1),(im.width-1,im.height-1)):
+        ImageDraw.floodfill(flat,xy,128)
+    body=(np.asarray(flat)!=128)                  # объект вместе с дырками внутри
+    base=np.array([int(col[i:i+2],16) for i in (0,2,4)],dtype=float)
+    k=(0.55+0.45*(a.mean(axis=2)/255.0))[...,None]
+    out=np.full(a.shape,255.0)
+    out[body]=np.clip(base*k[body],0,255)
+    o=os.path.join(_tmpdir(),'sil_%x.png'%abs(hash(path)))
+    Image.fromarray(out.astype('uint8')).save(o); return o
+
+def zoom(path,frac=0.45,bias=0.45):
+    """Кусок рисунка крупно - "слишком близко, что это?".
+
+    Окно выбирается по содержимому, а не по центру: центр предмета часто пуст
+    (у смартфона там чистый экран, у монитора - стык подставки), и в игре
+    появлялся белый прямоугольник. Считаем плотность краски, плотность контуров
+    (у морды кота их больше, чем у живота) и сдвигаем вверх - у персонажа
+    опознаётся лицо, а не ботинки. Предмет, нарисованный одним контуром,
+    показываем почти целиком: узнаваем силуэт, а не выдуманная деталь."""
+    from PIL import Image
+    import numpy as np
+    im=Image.open(path).convert('RGB'); a=np.asarray(im).astype(float)
+    bb=_ink_box(a.astype(int))
+    if bb is None: return path
+    x0,y0,x1,y1=bb
+    ink=(np.abs(a-255).sum(axis=2)>40)
+    m=a.mean(axis=2)
+    grad=np.abs(np.diff(m,axis=0,prepend=m[:1]))+np.abs(np.diff(m,axis=1,prepend=m[:,:1]))
+    fr=0.9 if float(ink[y0:y1,x0:x1].mean())<0.25 else frac
+    w=max(24,int((x1-x0)*fr)); h=max(24,int((y1-y0)*fr))
+    span=max(1,(y1-y0)-h); best=None
+    for ty in np.linspace(y0,max(y0,y1-h),9):
+        for tx in np.linspace(x0,max(x0,x1-w),9):
+            tx=int(tx); ty=int(ty)
+            win=ink[ty:ty+h,tx:tx+w]
+            if win.size==0: continue
+            score=(grad[ty:ty+h,tx:tx+w].mean()*(win.mean()**0.5)
+                   *(1.0-bias*((ty-y0)/span)))
+            if best is None or score>best[0]: best=(score,tx,ty)
+    if best is None: return path
+    _,tx,ty=best
+    cut=im.crop((tx,ty,min(im.width,tx+w),min(im.height,ty+h)))
+    o=os.path.join(_tmpdir(),'zoom_%x.png'%abs(hash(path)))
+    cut.resize((cut.width*3,cut.height*3),Image.LANCZOS).save(o)
+    return o
+
+# --------------------------------------------------------- картинка -> слово
+def g_pic2word(prs,bg,items,helpers=None,style='plain',nopt=4,
+               title=None,final='🏆 You named them all!'):
+    """Картинка одна, выбираем из четырёх СЛОВ - зеркало квиза.
+    style: plain - как есть; silhouette - только тень; zoom - кусок крупно.
+    Подписей под картинкой нет: иначе задание проверяет чтение."""
+    helpers=[] if helpers is None else helpers
+    titles={'plain':'🔎 Look and say!','silhouette':'🌑 Shadow game!','zoom':'🔍 Too close!'}
+    subs={'plain':'What is it? Choose the word.',
+          'silhouette':'Only the shadow is left. What is it?',
+          'zoom':'Way too close. What are we looking at?'}
+    n=len(items); nopt=max(2,min(nopt,n))
+    qs=[B.new_slide(prs,bg) for _ in range(n)]
+    fin=_win(prs,bg,final)
+    for k,(word,media) in enumerate(items):
+        s=qs[k]; nxt=qs[k+1] if k+1<n else fin
+        ok,bad=_feedback(prs,s,nxt,last=(k+1==n),helpers=helpers)
+        _head(s,title or titles[style],bg,counter=f'{k+1}/{n}')
+        B.text(s,0.9,1.5,11.5,0.6,[[(subs[style],20,'5A4A7A',True,B.TF)]],align=PP_ALIGN.CENTER)
+        shown=media
+        if isinstance(media,str) and media.lower().endswith(PICS) and os.path.exists(media):
+            if style=='silhouette': shown=silhouette(media)
+            elif style=='zoom': shown=zoom(media)
+        c=B.card(s,4.55,2.15,4.23,2.9,fill=B.WHITE,rad=0.2)
+        media_on(s,c,shown,size=90,panel=False)
+        pos=(k*3)%nopt
+        order=[None]*nopt; order[pos]=k
+        others=[(k+1+j)%n for j in range(n-1)][:nopt-1]
+        for slot in range(nopt):
+            if order[slot] is None: order[slot]=others.pop(0)
+        cw=min(2.75,(11.6-(nopt-1)*0.35)/nopt); gx=(B.SLIDE_W-(nopt*cw+(nopt-1)*0.35))/2
+        for slot,idx in enumerate(order):
+            x=gx+slot*(cw+0.35)
+            c2=btn(s,x,5.3,cw,1.1,fill=pal(bg,slot),target=ok if idx==k else bad)
+            card_text(c2,items[idx][0],size=fit_size(items[idx][0],22,13),col=B.INK)
+        no_click_advance(s)
+    return helpers
+
+# ------------------------------------------------------------ открой карточку
+def g_flip(prs,bg,items,helpers=None,title='🃏 Flip a card!',
+           prompt='Say a sentence with this word! 🗣️',back='⬅️ Back to the cards'):
+    """Доска из рубашек: номер открывает карточку, по ней строят предложение.
+    Отвечает не один ученик, а тот, чей номер выпал."""
+    helpers=[] if helpers is None else helpers
+    board=B.new_slide(prs,bg); _head(board,title,bg)
+    B.text(board,0.9,1.5,11.5,0.5,[[(prompt,18,'5A4A7A',True,B.TF)]],align=PP_ALIGN.CENTER)
+    n=len(items); cols=3 if n>4 else n; rows=-(-n//cols)
+    cw=min(3.3,(11.4-(cols-1)*0.4)/cols); ch=min(2.1,(4.3-(rows-1)*0.35)/rows)
+    gx=(B.SLIDE_W-(cols*cw+(cols-1)*0.4))/2; gy=2.2
+    for i,(word,media) in enumerate(items):
+        face=B.new_slide(prs,bg); helpers.append(face)
+        _head(face,title,bg,counter=f'{i+1}/{n}')
+        c=B.card(face,4.55,1.95,4.23,3.0,fill=B.WHITE,rad=0.2)
+        media_on(face,c,media,size=90,panel=False)
+        B.text(face,1.0,5.15,11.3,0.6,[[(word,30,B.HOTPINK,True,B.TF)]],align=PP_ALIGN.CENTER)
+        B.text(face,1.0,5.8,11.3,0.5,[[(prompt,17,'5A4A7A',True,B.BF)]],align=PP_ALIGN.CENTER)
+        btn(face,9.6,6.45,3.2,0.75,back,fill=B.WHITE,size=16,col=B.INK,rad=0.4,target=board)
+        no_click_advance(face,arrow=False)
+        r=i//cols; c2=i%cols
+        sh=btn(board,gx+c2*(cw+0.4),gy+r*(ch+0.35),cw,ch,fill=pal(bg,i),target=face)
+        card_text(sh,str(i+1),size=40,col=B.INK)
+    no_click_advance(board)
+    return helpers
+
+# ------------------------------------------------------------- лишнее слово
+def g_odd(prs,bg,rounds,helpers=None,title='🚫 Odd one out!',
+          ask='Which one does NOT belong?',final='🏆 Sharp eyes!'):
+    """rounds = [([четыре слова], индекс лишнего)]. Ответ проверяемый, а
+    объяснять, почему лишнее, они будут словами - ради этого игра и нужна."""
+    helpers=[] if helpers is None else helpers
+    n=len(rounds)
+    qs=[B.new_slide(prs,bg) for _ in range(n)]
+    fin=_win(prs,bg,final)
+    for k,(words,odd) in enumerate(rounds):
+        s=qs[k]; nxt=qs[k+1] if k+1<n else fin
+        ok,bad=_feedback(prs,s,nxt,last=(k+1==n),helpers=helpers)
+        _head(s,title,bg,counter=f'{k+1}/{n}')
+        B.text(s,0.9,1.5,11.5,0.6,[[(ask,20,'5A4A7A',True,B.TF)]],align=PP_ALIGN.CENTER)
+        m=len(words); cw=min(2.75,(11.6-(m-1)*0.35)/m); gx=(B.SLIDE_W-(m*cw+(m-1)*0.35))/2
+        for i,w in enumerate(words):
+            c=btn(s,gx+i*(cw+0.35),2.9,cw,2.1,fill=pal(bg,i),target=ok if i==odd else bad)
+            card_text(c,w,size=fit_size(w,22,13),col=B.INK)
+        B.text(s,0.9,5.5,11.5,0.5,[[('…and say why! 🗣️',18,B.HOTPINK,True,B.TF)]],align=PP_ALIGN.CENTER)
+        no_click_advance(s)
+    return helpers
+
+# -------------------------------------------------------------------- табу
+def g_taboo(prs,bg,cards,helpers=None,title='🤐 Taboo!',back='⬅️ Back to the words'):
+    """cards = [(слово, [три запрещённых])]. Объясняешь слово, не называя их:
+    приходится говорить своими словами, а не зачитывать определение."""
+    helpers=[] if helpers is None else helpers
+    board=B.new_slide(prs,bg); _head(board,title,bg)
+    B.text(board,0.9,1.5,11.5,0.5,
+           [[('Explain the word - but never say the three red ones.',18,'5A4A7A',True,B.TF)]],
+           align=PP_ALIGN.CENTER)
+    n=len(cards); cols=3 if n>4 else n; rows=-(-n//cols)
+    cw=min(3.3,(11.4-(cols-1)*0.4)/cols); ch=min(2.1,(4.3-(rows-1)*0.35)/rows)
+    gx=(B.SLIDE_W-(cols*cw+(cols-1)*0.4))/2; gy=2.2
+    for i,(word,ban) in enumerate(cards):
+        face=B.new_slide(prs,bg); helpers.append(face)
+        _head(face,title,bg,counter=f'{i+1}/{n}')
+        c=B.card(face,2.9,1.9,7.53,1.25,fill=B.WHITE,rad=0.2)
+        card_text(c,word,size=fit_size(word,34,16),col=B.HOTPINK)
+        B.text(face,2.9,3.3,7.53,0.5,[[('Do NOT say:',18,'5A4A7A',True,B.TF)]],align=PP_ALIGN.CENTER)
+        for j,b in enumerate(ban[:3]):
+            x=2.9+j*2.6
+            cb=B.card(face,x,3.9,2.33,0.95,fill='FFD6D6',rad=0.3)
+            card_text(cb,b,size=fit_size(b,18,11),col=B.RED)
+        btn(face,9.6,6.45,3.2,0.75,back,fill=B.WHITE,size=16,col=B.INK,rad=0.4,target=board)
+        no_click_advance(face,arrow=False)
+        r=i//cols; c2=i%cols
+        sh=btn(board,gx+c2*(cw+0.4),gy+r*(ch+0.35),cw,ch,fill=pal(bg,i),target=face)
+        card_text(sh,str(i+1),size=40,col=B.INK)
+    no_click_advance(board)
+    return helpers
+
+# ------------------------------------------------------------ правда / ложь
+def g_truefalse(prs,bg,items,helpers=None,title='✅ True or False?',
+                template='This is a {w}.',final='🏆 Nobody tricked you!'):
+    """Картинка плюс утверждение. Верно - TRUE, слово подменили - FALSE.
+    Самая быстрая игра пула: решение одно, думать надо про слово."""
+    helpers=[] if helpers is None else helpers
+    n=len(items)
+    qs=[B.new_slide(prs,bg) for _ in range(n)]
+    fin=_win(prs,bg,final)
+    for k,(word,media) in enumerate(items):
+        s=qs[k]; nxt=qs[k+1] if k+1<n else fin
+        ok,bad=_feedback(prs,s,nxt,last=(k+1==n),helpers=helpers)
+        truth=(k%2==0)                                   # через одну - ложь
+        said=word if truth else items[(k+2)%n][0]
+        _head(s,title,bg,counter=f'{k+1}/{n}')
+        B.text(s,0.9,1.5,11.5,0.6,[[('"'+template.format(w=said)+'"',22,'5A4A7A',True,B.TF)]],
+               align=PP_ALIGN.CENTER)
+        c=B.card(s,4.55,2.15,4.23,2.9,fill=B.WHITE,rad=0.2)
+        media_on(s,c,media,size=90,panel=False)
+        btn(s,2.85,5.35,3.4,1.1,'TRUE  ✅',fill=pal(bg,4),size=26,col=B.INK,
+            target=ok if truth else bad)
+        btn(s,7.1,5.35,3.4,1.1,'FALSE  ❌',fill=pal(bg,0),size=26,col=B.INK,
+            target=bad if truth else ok)
+        no_click_advance(s)
+    return helpers
+
+# -------------------------------------------------- две правды и одна ложь
+def g_twotruths(prs,bg,words,helpers=None,title='🎭 Two truths and a lie',
+                back='⬅️ Back to the words',unit='word'):
+    """Слово открывается по номеру: три предложения с ним, одно враньё, класс
+    ищет какое. Говорит не один ученик, а все - и говорят предложениями."""
+    helpers=[] if helpers is None else helpers
+    board=B.new_slide(prs,bg); _head(board,title,bg)
+    B.text(board,0.9,1.5,11.5,0.5,
+           [[(f'Pick a {unit}. Three sentences with it - one of them is a lie.',18,'5A4A7A',True,B.TF)]],
+           align=PP_ALIGN.CENTER)
+    n=len(words); cols=3 if n>4 else n; rows=-(-n//cols)
+    cw=min(3.3,(11.4-(cols-1)*0.4)/cols); ch=min(2.1,(4.3-(rows-1)*0.35)/rows)
+    gx=(B.SLIDE_W-(cols*cw+(cols-1)*0.4))/2; gy=2.2
+    steps=[f'Say THREE sentences with this {unit} - two true, one false.',
+           'The class asks you one question about each sentence.',
+           'Then they vote: which one was the lie?']
+    for i,w in enumerate(words):
+        face=B.new_slide(prs,bg); helpers.append(face)
+        _head(face,title,bg,counter=f'{i+1}/{n}')
+        c=B.card(face,2.9,1.9,7.53,1.25,fill=B.WHITE,rad=0.2)
+        card_text(c,w,size=fit_size(w,32,16),col=B.HOTPINK)
+        runs=[[(f'{j+1}. ',17,B.HOTPINK,True,B.BF),(t,17,B.INK,False,B.BF)] for j,t in enumerate(steps)]
+        B.card(face,2.9,3.35,7.53,2.4,fill=B.WHITE,rad=0.08)
+        B.text(face,3.2,3.55,6.93,2.0,runs,align=PP_ALIGN.LEFT,sa=10,ls=1.05)
+        btn(face,9.6,6.45,3.2,0.75,back,fill=B.WHITE,size=16,col=B.INK,rad=0.4,target=board)
+        no_click_advance(face,arrow=False)
+        r=i//cols; c2=i%cols
+        sh=btn(board,gx+c2*(cw+0.4),gy+r*(ch+0.35),cw,ch,fill=pal(bg,i),target=face)
+        card_text(sh,str(i+1),size=40,col=B.INK)
+    no_click_advance(board)
+    return helpers
+
 def play(prs,spec,cfg):
     """cfg['games'] = [{'type':'quiz'}, {'type':'missing'}, ...] -> slides."""
     t=spec.get('type','quiz'); bg=spec.get('bg') or B.PASTELS['yellow']
@@ -386,4 +666,17 @@ def play(prs,spec,cfg):
         return g_reveal(prs,bg,spec.get('lines') or [w for w,_ in items],**kw('title','subtitle'))
     if t=='board':
         return g_board(prs,bg,spec.get('questions',[]),**kw('title','back'))
+    if t in ('pic2word','silhouette','zoom'):
+        st=spec.get('style') or ('plain' if t=='pic2word' else t)
+        return g_pic2word(prs,bg,items,style=st,**kw('title','nopt','final'))
+    if t=='flip':
+        return g_flip(prs,bg,items,**kw('title','prompt','back'))
+    if t=='odd':
+        return g_odd(prs,bg,spec.get('rounds',[]),**kw('title','ask','final'))
+    if t=='taboo':
+        return g_taboo(prs,bg,spec.get('cards',[]),**kw('title','back'))
+    if t=='truefalse':
+        return g_truefalse(prs,bg,items,**kw('title','final','template'))
+    if t=='twotruths':
+        return g_twotruths(prs,bg,spec.get('words') or [w for w,_ in items],**kw('title','back','unit'))
     raise ValueError(f'unknown game type: {t}')
