@@ -210,9 +210,9 @@ body.paged #rotate{display:none!important}
 .pg-words img{height:64px;width:64px;object-fit:contain}
 .pg-ex{width:100%;max-width:520px;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.12);rotate:-1deg;display:block;margin:6px auto 0}
 .pg-tpl{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.pg-tpl button{border:2px dashed #9cc7ea;background:#fff;border-radius:18px;padding:14px 10px;cursor:pointer;font-family:var(--disp);font-weight:600;font-size:15px;color:var(--ink);text-align:center}
-.pg-tpl button span{display:block;font-size:30px;margin-bottom:4px}
-.pg-tpl button small{display:block;font-family:var(--text);font-weight:700;font-size:12px;color:#7a86a3;margin-top:3px}
+.pg-tpl a{text-decoration:none}.pg-tpl button,.pg-tpl a{border:2px dashed #9cc7ea;background:#fff;border-radius:18px;padding:14px 10px;cursor:pointer;font-family:var(--disp);font-weight:600;font-size:15px;color:var(--ink);text-align:center}
+.pg-tpl a span,.pg-tpl button span{display:block;font-size:30px;margin-bottom:4px}
+.pg-tpl a small,.pg-tpl button small{display:block;font-family:var(--text);font-weight:700;font-size:12px;color:#7a86a3;margin-top:3px}
 .pg-form{background:#fff;border:2px solid #e3262f22;border-radius:24px;padding:20px;box-shadow:0 6px 20px rgba(45,58,92,.08)}
 .pg-form label{display:block;font-weight:800;font-size:14px;margin:12px 0 5px}
 .pg-form input[type=text],.pg-form input[type=number],.pg-form textarea{width:100%;border:2px solid #d6e3f2;border-radius:12px;padding:11px 12px;font:700 16px var(--text);color:var(--ink);background:#fbfdff}
@@ -960,12 +960,13 @@ function contest() {
     <h2>Шаблоны для малышей</h2>
     <p class="pg-small">Распечатайте, и ребёнок раскрасит или дорисует — это тоже работа на конкурс.</p>
     <div class="pg-tpl">
-      <button data-dev><span>🖍</span>Раскраска<small>пингвинёнок чистит зубки</small></button>
-      <button data-dev><span>✏️</span>Обведи по пунктиру<small>щётка, зубик, стаканчик</small></button>
-      <button data-dev><span>🔢</span>Соедини точки<small>от 1 до 10</small></button>
-      <button data-dev><span>🪞</span>Дорисуй половинку<small>зубик и стаканчик</small></button>
-      <button data-dev><span>🐧</span>Дай пингвинёнку то, что нужно<small>дорисуй щётку и пасту</small></button>
+      <a href="print/raskraska.pdf" download><span>🖍</span>Раскраска<small>пингвинёнок чистит зубки</small></a>
+      <a href="print/obvedi.pdf" download><span>✏️</span>Обведи по пунктиру<small>щётка, зубик, стаканчик</small></a>
+      <a href="print/soedini_tochki.pdf" download><span>🔢</span>Соедини точки<small>зубик и тюбик пасты</small></a>
+      <a href="print/dorisuy_polovinku.pdf" download><span>🪞</span>Дорисуй половинку<small>зубик и тюбик пасты</small></a>
+      <a href="print/day_pingvinyonku.pdf" download><span>🐧</span>Дай пингвинёнку то, что нужно<small>дорисуй щётку и пасту</small></a>
     </div>
+    <p style="text-align:center;margin-top:12px"><a class="pg-cta blue" style="font-size:16px;padding:11px 20px;text-decoration:none" href="print/shablony_konkurs.pdf" download>⬇ Все пять шаблонов одним файлом</a></p>
     <div class="pg-grid" style="margin-top:26px">
       <div class="pg-card tint"><h3>Призы</h3><p>[приз] — скоро расскажем.</p></div>
       <div class="pg-card tint2"><h3>Сроки</h3><ul><li>Приём работ: [дата] — [дата]</li><li>Итоги: [дата]</li></ul><p class="pg-small">Оцениваем идею и старание, а не технику рисунка. Один ребёнок — одна работа.</p>
