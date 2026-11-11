@@ -12,6 +12,7 @@ python3 splat/tools/build_print.py
 import math, os
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
+from splat_logo import draw_logo
 from scipy import ndimage as ndi
 from skimage.measure import find_contours
 
@@ -57,12 +58,7 @@ def page(n, title, task):
     p = Image.new('RGB', (W, H), 'white')
     d = ImageDraw.Draw(p)
     # логотипы
-    d.rounded_rectangle((M, M, M + 210, M + 92), 14, fill=RED)
-    d.text((M + 105, M + 38), 'SPLAT', font=font('Fredoka', 54), fill='white', anchor='mm')
-    d.text((M + 105, M + 76), 'K I D S', font=font('Fredoka', 22), fill='white', anchor='mm')
-    d.text((M + 240, M + 46), '×', font=font('Nunito', 44, 'Black'), fill=INK, anchor='mm')
-    d.rounded_rectangle((M + 275, M + 14, M + 520, M + 80), 14, outline=INK, width=4)
-    d.text((M + 397, M + 47), 'WowSpeak', font=font('Fredoka', 40), fill=INK, anchor='mm')
+    draw_logo(d, M, M, 92)   # общий логотип — tools/splat_logo.py
     d.text((W - M, M + 46), 'Конкурс рисунков', font=font('Nunito', 34, 'ExtraBold'), fill=BLUE, anchor='rm')
     # как участвовать — маленькой строкой
     d.rounded_rectangle((M, M + 125, W - M, M + 185), 30, fill=(238, 246, 255))

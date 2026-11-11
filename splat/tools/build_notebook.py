@@ -8,6 +8,7 @@ python3 splat/tools/build_notebook.py
 import os, random
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageOps
+from splat_logo import draw_logo
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 FONTS = os.path.join(ROOT, 'tools', 'fonts')
@@ -57,12 +58,7 @@ def put(p, name_or_img, box, angle=0, flip=False):
 def page(title, sub=None):
     p = Image.new('RGB', (W, H), 'white')
     d = ImageDraw.Draw(p)
-    d.rounded_rectangle((M, M, M + 210, M + 92), 14, fill=RED)
-    d.text((M + 105, M + 38), 'SPLAT', font=font('Fredoka', 54), fill='white', anchor='mm')
-    d.text((M + 105, M + 76), 'K I D S', font=font('Fredoka', 22), fill='white', anchor='mm')
-    d.text((M + 240, M + 46), '×', font=font('Nunito', 44, 'Black'), fill=INK, anchor='mm')
-    d.rounded_rectangle((M + 275, M + 14, M + 520, M + 80), 14, outline=INK, width=4)
-    d.text((M + 397, M + 47), 'WowSpeak', font=font('Fredoka', 40), fill=INK, anchor='mm')
+    draw_logo(d, M, M, 92)   # общий логотип — tools/splat_logo.py
     d.text((W - M, M + 46), 'Тетрадка пингвинёнка', font=font('Nunito', 34, 'ExtraBold'), fill=BLUE, anchor='rm')
     size = 76
     while d.textlength(title, font=font('Nunito', size, 'Black')) > W - 2 * M and size > 40:
