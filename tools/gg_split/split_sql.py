@@ -27,3 +27,5 @@ rows = [{'d': d, 'k': k, 't': t, 'w': w} for d, bl in DECKS.items() for k, (t, w
 print(json.dumps(rows, ensure_ascii=False))
 # Применено 11.11.2026: 18 колод → 51 (GG1 Unit 2,3,4,6,7,8; GG2 Unit 1–4; GG3 Unit 1–8), GG2 Unit 5 — отдельно (3 колоды).
 # Ждут PDF меньше 10 МБ: GG2 Unit 6–8 (часть 3), весь GG4.
+# 11.11.2026, Анна: «надо под колоды, как в Prepare» — юнит стал папкой (Go Getter N / Unit K: …, "order" = 100 − K),
+# колоды внутри — по названию блока («Clothes», «Adjectives»). Снимок до этого: word_decks_backup_20261111_gg2.
