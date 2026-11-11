@@ -1911,6 +1911,26 @@ bag.»). Это касается и одиночных слов, и фраз. У
 остались на месте. Копия — `classroom_backup_wd_tochki_20261111`, функция обхода —
 `classroom__tts_dot(payload)` (оставлена в базе, пригодится для других курсов).
 
+**Произношение можно проверить, не трогая сервер: Piper ставится в контейнер.**
+Сервер озвучки — это Piper с голосами из HuggingFace (`tts/install.sh`), а
+`huggingface.co` в разрешённых доменах. Значит пробу слышно до того, как Анна
+нажмёт «Озвучить пачкой»:
+
+```bash
+python3.13 -m venv venv && ./venv/bin/pip install -q piper-tts
+BASE=https://huggingface.co/rhasspy/piper-voices/resolve/main/en
+curl -fsSL $BASE/en_US/amy/medium/en_US-amy-medium.onnx      -o en_US-amy-medium.onnx
+curl -fsSL $BASE/en_US/amy/medium/en_US-amy-medium.onnx.json -o en_US-amy-medium.onnx.json
+echo "back pack." | ./venv/bin/piper -m en_US-amy-medium.onnx -f проба.wav
+ffmpeg -y -i проба.wav -codec:a libmp3lame -q:a 4 проба.mp3
+```
+
+Голоса те же, что на сервере: `en_US-amy`, `en_US-ryan`, `en_GB-alba`, `en_GB-alan`
+(файлы `<голос>-medium.onnx`). Модель весит 63 МБ, качается за полминуты.
+**Прежде чем менять написание слова в разметке по всему курсу — синтезировать пробу
+и прислать Анне mp3 «как сейчас» и «вариант»**: на слух это решается за минуту, а
+переозвучка курса стоит ей одного нажатия и ожидания.
+
 **Слова, которые синтез произносит неверно, переписываем в разметке по звучанию.**
 Подменяем **только в `*_tts`**; написанное слово в тексте задания, в карточке и в
 ключе остаётся правильным. Накопленный словарь (11.11.2026):
