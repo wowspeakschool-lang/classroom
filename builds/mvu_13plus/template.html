@@ -138,7 +138,7 @@ h2{font-weight:800;font-size:3.6vh;margin:.2em 0 .5em;color:var(--gold2)}
   <div id="parts"></div>
   <div id="screens"></div>
   <div id="tray"></div><div id="notes"></div>
-  <div id="nav"><button class="btn ghost" id="backBtn">←</button><button class="btn" id="nextBtn">Next ➜</button></div>
+  <div id="nav"><button class="btn ghost" id="restartBtn" title="Начать урок заново">↻</button><button class="btn ghost" id="backBtn">←</button><button class="btn" id="nextBtn">Next ➜</button></div>
   <div class="toast" id="toast"></div>
   <canvas id="fx"></canvas>
 </div></div>
@@ -206,6 +206,7 @@ function cardStep(s, label) {
 }
 function next() { const s = SCREENS[cur]; if (s.cards && (s.ci || 0) < s.cards.length - 1) { s.ci = (s.ci || 0) + 1; return show(cur, false); } if (s.onNext) return s.onNext(); if (s.next != null) return show(s.next); if (cur < SCREENS.length - 1) show(cur + 1); }
 $('#nextBtn').onclick = () => next();
+$('#restartBtn').onclick = () => { if (!confirm('Начать урок заново? Пройденные предметы, обрывки записки и баллы чек-листа будут сброшены.')) return; try { localStorage.removeItem('mvu13'); } catch (e) {} location.reload(); };
 $('#backBtn').onclick = () => { if (history.length) show(history.pop(), false); };
 document.addEventListener('keydown', e => { if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') $('#backBtn').click(); });
 $('#hintBtn').onclick = () => { S.hint = !S.hint; $('#hintBtn').style.background = S.hint ? 'var(--gold)' : ''; show(cur, false); };
