@@ -71,18 +71,26 @@ has, is), диагностика на входе, итоговый тест.
 Порядок (правка Анны 11.11.2026): **сначала все буквы, потом сам алфавит,
 потом «волшебная e», потом буквосочетания.**
 
+Правка Анны 11.11.2026: ck, ff, ll, ss убираем; сочетания — sh ch th на один
+урок, oo ee (+ одно частое) на другой.
+
 | № | звуки | слова-примеры | трудные слова | Genki, стр. |
 |---|---|---|---|---|
 | 1 | s a t p i | sat, tap, pit, tip | I | 3–8 |
 | 2 | n m d o g | man, dog, sand, pond | the, a | 9–17 |
-| 3 | c k ck e u r | cat, kick, pen, sun, red | said, are, you | 18–27 |
-| 4 | h b f l j · ff ll ss | hat, bus, fun, bell, jump | is, he, she, to | 28–37 |
+| 3 | c k e u r | cat, kid, pen, sun, red | said, are, you | 18–27 |
+| 4 | h b f l j | hat, bus, fun, leg, jump | is, he, she, to | 28–37 |
 | 5 | v w x y z qu | van, wet, box, yes, zip, quiz | was, my, go, no | 38–49 |
-| 6 | **алфавит**: имена букв и их порядок, гласные a e i o u, «у буквы есть звук и имя» | spelling своего имени, аббревиатуры (TV, PE, DJ) | | — |
+| 6 | **алфавит**: имена букв и их порядок, гласные a e i o u, «у буквы есть звук и имя» | spelling своего имени, TV, PE, DJ | | — |
 | 7 | **«волшебная e» — одно правило на все гласные** | tap→tape, pin→pine, hop→hope, cub→cube | have, one | 85, 88, 90, 92 |
-| 8 | sh · ch | ship, fish, chip, much | do, some, come | 50–53 |
-| 9 | th (глухой и звонкий) · ng · nk | thin, this, ring, pink | your, who | 54–57 |
+| 8 | sh · ch · th (глухой и звонкий) | ship, fish, chip, much, thin, this | do, some, come | 50–55 |
+| 9 | ee · oo (moon / book) · ar (предложение) | see, tree, food, moon, book, look, car, park | your, who | 60–61, 66–68 |
 | 10 | повторение: сочетания согласных (st sp tr bl nd), -s; итоговый текст и тест | stop, swim, frogs | | — |
+
+Третьим к ee и oo предлагается **ar**: один устойчивый звук без вариантов,
+очень частый (car, park, star, start, dark, art, farm, card), в словах легко
+рисуется. Запасные варианты: **ng** (sing, long, и окончание -ing, которое
+в Go Getter на каждой странице) или **ay** (day, play, say, way).
 
 Урок 6 — мост к уроку 7: ученик разводит «звук буквы» (/æ/) и «имя буквы»
 (эй), отдельно выделяем пять гласных и их имена. На уроке 7 правило
