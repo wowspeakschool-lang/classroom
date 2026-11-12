@@ -510,6 +510,76 @@ Super Minds Starter — 3 (остальные 175 — Wow Dragon, они в св
 
 ---
 
+## Образцы: вторая половина — 12.11.2026
+
+Проход 09.11 смотрел только поле «Образец». Оказалось, что в 67 заданиях пример
+написан **в теле задания** курсивом — их тот проход не задел, и в них осталось
+ровно то, из-за чего правило и появилось: по четыре предложения одной
+конструкции, а кое-где прямой ответ на картинку. По Вашему решению 12.11
+(«тесты не трогаем, остальное делаем») пройдены все домашки семи курсов.
+Тесты оставлены как есть.
+
+**Обрезано 27 примеров** (GG1 — 21, SM3 — 3, Holidays — 2, SM2 — 1). Что
+заметнее всего:
+
+| курс | урок | блок | было | стало |
+|---|---|---|---|---|
+| GG1 | ю1 ДЗ 5 | 8 | My mum is at home. My dad is at school. My brother is in the park. My friends are on holiday. | My mum is at home. My friends are in the park. |
+| GG1 | ю1 ДЗ 3 | 10 | I'm Polish. I'm not British. My granny is Spanish, she isn't French. My cousins are Italian. | I'm Polish. I'm not British. My cousins are Italian. |
+| GG1 | ю6 ДЗ 5 | 9 | In January I go skiing. In March it's my birthday. In July I'm on holiday… | In January I go skiing. |
+| GG1 | ю8 ДЗ 4 | 10 | Today it's warm and sunny… (пять предложений) | Today it's warm and sunny. My favourite season is summer. I love it! |
+| SM3 | ю0 ДЗ 1 | 7 | My bedroom is upstairs. The kitchen is downstairs. We haven't got a cellar. | My bedroom is upstairs. We haven't got a cellar. |
+
+🟥 **Два примера были прямым ответом на картинку — проверьте, что замена подходит:**
+
+- **GG1 ю0 ДЗ 2 блок 7** «Опиши картинку»: было «The lemons are yellow», а на
+  картинке как раз лимонное дерево. Стало «The bananas are yellow» — бананов
+  на картинке нет.
+- **Halloween 7–9 advanced блок 8** «Расскажи про комнату»: было «There is a
+  ghost on the bed. There are three pumpkins under the bed. The broom is under
+  the table» — все три предложения слово в слово описывали картинку. Стало
+  «There is a cat on the chair. There are two books on the table» — ни кота, ни
+  книг в комнате нет, показана только конструкция.
+
+**Добавлено 27 образцов** там, где не было ничего. В SM0 и SM1 — записью
+(поле «Образец», озвучится кнопкой), в остальных курсах — текстом в теле, как
+у соседних заданий.
+
+| курс | урок | блок | задание | образец |
+|---|---|---|---|---|
+| SM0 | ю0 ДЗ 2 | 8 | Назови цвета рисунка | Red and blue. |
+| SM0 | ю0 ДЗ 3 | 9, 10, 11 | Сколько предметов | Three cars. · Four cats. · Two dogs. |
+| SM0 | ю1 ДЗ 1 | 9 | Назови 3 части тела | My nose. |
+| SM0 | ю1 ДЗ 4 | 9 | Поспрашивай про монстрика | How many legs? |
+| SM0 | ю2 ДЗ 1 · ДЗ 2 | 9 · 10 | Назови людей / всю семью | Mum and dad. |
+| SM0 | ю3 ДЗ 1 · ДЗ 2 | 10 · 9 | Назови профессии | A doctor. |
+| SM0 | ю4 ДЗ 1 · ДЗ 2 | 8 · 6 | Назови хобби | Swimming. |
+| SM1 | ю0 ДЗ 1 | 8 · 9 | Спроси имя · Ответь на вопрос | What's your name? · I'm Anna. |
+| SM1 | ю0 ДЗ 2 | 11 | Ответь на вопрос | I'm seven. |
+| SM1 | ю9 ДЗ 7 | 8 | Где что? | The cat is under the table. The books are on the chair. |
+| SM2 | ю0 ДЗ 3 | 7 | Назови числа | thirty-five, twelve… (этих чисел на картинке нет) |
+| SM3 | ю2 ДЗ 2 | 7 | Что есть, чего нет | There is a table. There aren't any chairs. |
+| SM3 | ю2 ДЗ 4 | 5 | История от лица Бена | I'm in the castle. I feel scared. |
+| GG1 | ю3 ДЗ 4 · ДЗ 5 | 9 · 9 | Challenge · Мой дом | Can I see your room? — Yes, of course. · There are five rooms in my house… |
+| GG1 | ю4 ДЗ 3 · ДЗ 4 · ДЗ 6 | 11 · 10 · 9 | Ответь на вопросы · Что ты скажешь · Мой герой | Yes, I have… · Oh no! I'm sorry, Mum. · My favourite character is Masha… |
+| GG1 | ю7 ДЗ 7 | 11 | Ответь на вопросы | Yes, I do. My cat eats fish. No, they don't. |
+
+🟥 Послушайте образцы SM0 и SM1 после «Озвучить пачкой» — не подсказывают ли
+они ответ.
+
+**Что осталось как было и почему.** Девять примеров уже были по правилу (одно
+предложение на конструкцию) — не трогал. Ещё в трёх заданиях образец лежит
+рядом: «аудио выше» (GG1 ю2 ДЗ 6), рассказ Джона (SM3 ю2 ДЗ 7), реплики,
+выделенные жёлтым (GG2 ю2 ДЗ 4). Задания «прочитай вслух» (30) без образца
+по решению от 09.11: там образец — эталон чтения. В SM0 ю1 ДЗ 5 (блоки 8–10)
+запись — это сам вопрос («сколько частей в костюме»), а не образец; образец
+там не нужен.
+
+Копии блоков — `classroom_backup_obrazcy_v_tele_20261112`,
+`classroom_backup_obrazcy_net_20261112`, `classroom_backup_obrazcy_sm1_vopros_20261112`.
+
+---
+
 ## Озвучка — одна кнопка на все курсы
 
 Делается в «Контент» → «Медиа» → «Озвучить пачкой». Кнопка находит размеченные
