@@ -17,6 +17,7 @@ OUT = os.path.normpath(OUT)
 SCENES = {1: 'room1_living', 2: 'room2_study', 3: 'room3_lab', 4: 'door_open',
           12: 'street', 21: 'crime_scene', 9: 'schoolbag_open', 10: 'fridge_open'}
 SHEETS = {
+    23: ['cl_tshirt', 'cl_jacket', 'fu_bed', 'fu_drawers', 'fu_fridge', 'fu_cooker', 'an_tiger'],
     5: ['family_photo', 'schoolbag', 'passport', 'fruit_bowl', 'football', 'bus',
         'cinema_tickets', 'umbrella', 'cat'],
     6: ['wardrobe', 'suitcase', 'map', 'first_aid_kit', 'novel', 'wanted_poster',
