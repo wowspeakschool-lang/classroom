@@ -200,14 +200,14 @@ function show(i, push = true) {
 }
 function cardStep(s, label) {
   s.ci = s.ci || 0; const many = s.cards.length > 1;
-  const c = el('div', { cls: 'card', style: 'position:relative;z-index:2;cursor:pointer;min-width:40vw' }, el('div', { cls: 'lbl' }, label + (many ? ` · ${s.ci + 1} / ${s.cards.length}` : '')), el('div', { cls: 'qq' }, s.cards[s.ci]), many && s.ci < s.cards.length - 1 ? el('div', { style: 'margin-top:1.4vh;font-size:1.7vh;color:#bfb39e' }, 'tap for the next question ➜') : null);
+  const c = el('div', { cls: 'card', style: 'position:relative;z-index:2;cursor:pointer;min-width:40vw' }, el('div', { cls: 'lbl' }, label + (many ? ` · ${s.ci + 1} / ${s.cards.length}` : '')), el('div', { cls: 'qq' }, s.cards[s.ci]), null);
   c.onclick = () => next();
   return c;
 }
 function next() { const s = SCREENS[cur]; if (s.cards && (s.ci || 0) < s.cards.length - 1) { s.ci = (s.ci || 0) + 1; return show(cur, false); } if (s.onNext) return s.onNext(); if (s.next != null) return show(s.next); if (cur < SCREENS.length - 1) show(cur + 1); }
 $('#nextBtn').onclick = () => next();
 $('#restartBtn').onclick = () => { if (!confirm('Начать урок заново? Пройденные предметы, обрывки записки и баллы чек-листа будут сброшены.')) return; try { localStorage.removeItem('mvu13'); } catch (e) {} location.reload(); };
-$('#backBtn').onclick = () => { if (history.length) show(history.pop(), false); };
+$('#backBtn').onclick = () => { const s = SCREENS[cur]; if (s.cards && s.ci > 0) { s.ci--; return show(cur, false); } if (s.step && s.step.i > 0) { s.step.i--; return show(cur, false); } if (history.length) show(history.pop(), false); };
 document.addEventListener('keydown', e => { if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') $('#backBtn').click(); });
 $('#hintBtn').onclick = () => { S.hint = !S.hint; $('#hintBtn').style.background = S.hint ? 'var(--gold)' : ''; show(cur, false); };
 $('#finBtn').onclick = () => show(SCREEN_ID.lock);
@@ -216,7 +216,7 @@ const SCREEN_ID = {};
 /* ───────── общие куски ───────── */
 function taskShell(node, o, t, counter) {
   const sh = el('div', { cls: 'task' },
-    el('div', { cls: 'head' }, el('img', { src: img(o.img), crossorigin: 'anonymous' }), el('div', { cls: 'ttl' }, t.title), el('div', { cls: 'cnt' }, counter || '')),
+    el('div', { cls: 'head' }, el('img', { src: img(o.img), crossorigin: 'anonymous' }), el('div', { cls: 'ttl' }, t.en || t.title), el('div', { cls: 'cnt' }, counter || '')),
   );
   const body = el('div', { cls: 'body' }); sh.append(body);
   node.append(el('img', { cls: 'bg', src: img(D.parts[o.part - 1].room) }), el('div', { cls: 'shade' }), sh);
@@ -312,7 +312,7 @@ function renderTask(node, o, t, step, done) {
     let ws = shuffle(words.map((w, j) => ({ w, j }))); if (ws.map(x => x.w).join(' ') === words.join(' ')) ws = ws.reverse();
     if (S.hint) { picked = [words[0]]; line.append(el('span', { cls: 'chip ok' }, words[0])); ws = ws.filter(x => x.j !== 0); }
     ws.forEach(x => { const c = el('button', { cls: 'chip' }, x.w); c.onclick = () => { if (c.parentNode !== pool) return; line.append(c); picked.push(x.w); if (picked.length === words.length) check(); }; pool.append(c); });
-    side.append(el('div', { cls: 'q', style: 'font-size:2.2vh;color:#bfb39e' }, 'Tap the words in the right order'), line, pool, fix);
+    side.append(line, pool, fix);
     SCREENS[cur].onNext = () => { if (i < items.length - 1) { step.i = i + 1; show(cur, false); } else done(); };
   } else if (k === 'sort') {
     const body = taskShell(node, o, t, '');
@@ -454,13 +454,13 @@ function buildScreens() {
     const ds = codeDigits(); const lb = el('div', { cls: 'lockbox' }, ds.map(() => el('span', {}, '•')));
     const go = el('button', { cls: 'btn' }, 'Enter the code ➜');
     go.onclick = () => { go.disabled = true; [...lb.children].forEach((s, i) => setTimeout(() => { s.textContent = ds[i]; s.classList.add('in'); }, 350 * i)); setTimeout(() => show(SCREEN_ID.win), 350 * ds.length + 900); };
-    n.append(el('div', { cls: 'box' }, el('h2', {}, '🔐 Read your code in English!'), el('div', { cls: 'ru' }, 'Прочитай цифры кода вслух по-английски.'), lb, go));
+    n.append(el('div', { cls: 'box' }, el('h2', {}, '🔐 Read your code in English!'), lb, go));
   } });
   SCREEN_ID.lock = lock.idx;
   const win = addScreen({ id: 'win', title: 'Финал', noNext: true, final: true, render(n) {
     n.append(el('img', { cls: 'bg', src: img('door_open') }), el('div', { cls: 'shade', style: 'background:radial-gradient(ellipse at center,rgba(0,0,0,0),rgba(0,0,0,.55))' }));
     const opened = Object.keys(S.done).length;
-    n.append(el('div', { cls: 'box' }, el('h1', {}, '🎉 You escaped!'), el('div', { cls: 'ru' }, (S.student.name ? S.student.name + ', ' : '') + 'дверь открыта!', el('br'), `Тайников открыто: ${opened}. Код: ${codeDigits().join(' ')}`), el('div', { cls: 'en' }, 'Well done! See you at WowSpeak School!')));
+    n.append(el('div', { cls: 'box' }, el('h1', {}, '🎉 You escaped!'), el('div', { cls: 'ru' }, `The door is open! Your code: ${codeDigits().join(' ')}`), el('div', { cls: 'en' }, 'Well done! See you at WowSpeak School!')));
     confetti();
   } });
   SCREEN_ID.win = win.idx;
