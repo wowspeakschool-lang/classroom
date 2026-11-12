@@ -49,3 +49,9 @@
     - сортировка «на море»: 4 картинки — shorts, a T-shirt / a jacket, a scarf; в плане — ученик называет каждую вещь словами; футболку и куртку нарисовать;
     - need/want: «It's sunny today. Tom ___ to go to the beach!» — варианты по образцу goes / go / gos (wants / want / wantes) — уточнить у Анны (пункт 27);
     - сравнения: картинки животных мелкие — крупно (замечание 20); второй вопрос — на длинное прилагательное: «A tiger is ___ than a cat» — more dangerous / dangerouser / most dangerous; тигра нарисовать.
+27. (12.11) По документу, часть 2:
+    - шкаф: одежду не проверяем (была в части 1) — сортировка картинками, не словами: Bedroom (a bed, a chest of drawers) / Kitchen (a fridge, a cooker); ученик раскладывает и называет. Картинки нарисовать;
+    - книга: «This book ___ by a 15-year-old girl in 2010.» — нужен маркер времени;
+    - музей: второй вопрос (guard) убрать; первый — с двумя пропусками: «The thief ___ the painting when the alarm ___.» — was taking … rang / took … was ringing / was taking … was ringing;
+    - кошелёк: Present Perfect уже был (книга) — вместо «I've just ___» полный пропуск с маркером for: «I ___ any new clothes for two years.» — haven't bought / didn't buy / don't buy;
+    - ноутбук: по одному предложению на reported speech и relative clauses, оба с ошибкой — «найди и исправь»: нажать на неверное слово + сказать правильно вслух.
