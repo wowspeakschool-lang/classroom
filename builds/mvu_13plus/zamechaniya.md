@@ -65,3 +65,7 @@
     - смартфон: аудирование убрать — три варианта в Past Perfect не проверяли Past Perfect; вместо него обычные задания на грамматику;
     - аптечка, «You ___ stay in bed»: не хватает контекста, почему не don't have to.
     Сверка с чек-листом — в чате 13.11 (пункт 31).
+31. (13.11) Решения Анны по сверке с чек-листом:
+    - PS vs PC (часть 2): одно предложение с двумя пропусками — у чемодана: «Mia usually ___ to the beach on holiday, but today she ___ a castle.» — goes … is visiting / is going … visits / goes … visits;
+    - Body parts (часть 2) отдельно не проверяем — **одинаковые темы в разных частях/блоках получают балл сами**: проверили (или учитель поставил) в одном месте — тот же балл встаёт во все места с тем же названием темы. Только при полном совпадении названия: Present Simple ≠ Present Simple vs Present Continuous. Совпадают: Clothes (ч1, ч2), Body parts (ч1, ч2), Past Continuous (ч2 ×2), Crime and criminals (ч2, ч3), Reporting verbs (ч3 ×2). Свой балл менеджера в конкретном месте важнее перенесённого;
+    - Abstract nouns, Online films and media, Global issues — по вопросу: у свитка «The people in the scroll fought for ___ .» — freedom / free / freely; у щита «This advert asks us to stop ___ — the air in our city is dirty.» — pollution / poverty / honesty и «You can ___ the new series online — no need to download it.» — stream / print / post. Пустая сортировка у щита убирается, вопросы — в одно задание с артиклями.
