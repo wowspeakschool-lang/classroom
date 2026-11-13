@@ -99,6 +99,32 @@
    формата, ответы совпадают с заданиями, ни слова про Zoom и чат; PDF = PPTX.
 Что нашлось — исправить и проверить заново, в постскриптуме — что проверено.
 
+## Лексика к темам декабря (утверждено Анной 13.11.2026)
+Лексика подбирается под грамматику: это могут быть глаголы, прилагательные, слова
+времени, а не только предметы. Тема может повторять прошлую, но **не две одинаковые
+подряд в одной группе**. Не больше 6 слов на урок (если в списке больше — берём 6).
+
+| дата | группа | грамматика | лексика |
+|---|---|---|---|
+| 03.12 | 7–9 | A / an | еда: apple, egg, orange, banana, pear, sandwich |
+| 07.12 | 7–9 | There is / There are: вопросы | зимний парк (Is there a snowman? Are there any skaters?) |
+| 10.12 | 7–9 | Present Simple: -s/-es | глаголы по трём звукам: sleeps, eats / plays, swims / watches, washes (dances — седьмое, не берём) |
+| 14.12 | 7–9 | opposite, between | город и магазины |
+| 17.12 | 7–9 | Have to: вопросы | утро и школа (get up early, wear a uniform) |
+| 21.12 | 7–9 | Ordinal numbers + даты | месяцы, дни рождения, праздники |
+| 24.12 | 7–9 | Comparatives -y / the most | прилагательные про животных (funny, lazy, heavy, the most beautiful) |
+| 28.12 | 7–9 | Imperative + Let's | игры на улице зимой (Let's make a snowman! Don't throw snow!) |
+| 31.12 | 7–9 | Would like | праздничный стол (Would you like some cake? — I'd like juice) |
+| 01.12 | 10+ | Plurals | предметы дома: boxes, dishes, knives, shelves, potatoes, babies |
+| 04.12 | 10+ | Prepositions of place | город и адреса (at school, at 20 Oxford Street, opposite the bank) |
+| 08.12 | 10+ | Prepositions of time | время суток, даты, праздники (at night, on Monday, in December, at Christmas) |
+| 11.12 | 10+ | Present Simple | привычки и расписания (I usually…, The train leaves at 7) |
+| 15.12 | 10+ | Present Continuous | улица перед праздником — что происходит сейчас |
+| 18.12 | 10+ | Present Simple vs Continuous | обычно и на каникулах |
+| 22.12 | 10+ | Comparatives | животные-рекордсмены (bigger, better, the fastest) |
+| 25.12 | 10+ | Can: просьбы и разрешение | в кафе и в гостях |
+| 29.12 | 10+ | Countable / Uncountable | путешествия (luggage, information, advice, money) |
+
 ## Картинки
 Промпты — текстом в чате, лист-сетка, стиль semi-cartoon. Картинки Анна кладёт
 на Диск: «Вебинары» → «Декабрь» → «ДД.ММ Тема», пишет «картинки по ДД.ММ готовы».
