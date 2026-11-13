@@ -155,13 +155,13 @@ drill('Выбери!  👆', 'Какое слово пропущено?', "I've 
 drill('Раскрой скобки  ✍️', 'Выбери нужное слово в скобках.', 'This is (a / an) pear.', 'pear',
       answer='This is a pear.', hint='Напиши в чат: a или an?')
 drill('Найди ошибку  🔎', 'В каком слове ошибка?', "I've got an banana.", 'banana', ["I've", 'an', 'banana'], 1)
-drill('Один или много?  🍎🍎🍎', 'Что нужно поставить?', "I've got ___ apples.", 'apple', ['an', 'a', '—'], 2, imgs=3)
+drill('Один или много?  🍎🍎🍎', 'Что нужно поставить?', "I like ___ apples.", 'apple', ['an', 'a', '—'], 2, imgs=3)
 drill('Вопрос  ❓', 'Какое слово пропущено?', 'Have you got ___ egg?', 'egg', ['a', 'an', '—'], 1)
 drill('Отрицание  ✋', 'Какое слово пропущено?', "I haven't got ___ sandwich.", 'sandwich', ['an', '—', 'a'], 2)
 drill('Что на картинке?  🖼️', 'Выбери правильное предложение.', 'What is it?', 'banana',
       ["It's an banana.", "It's banana.", "It's a banana."], 2, wide=True)
 drill('Ошибка в вопросе  🔎', 'Как спросить правильно?', 'Have you got a apple?', 'apple',
-      ['Have you got an apple?', 'Have you got apple?', 'Have you got a apples?'], 0, wide=True)
+      ['Have you got an apple?', 'Have you got apple?', 'Have you got an apples?'], 0, wide=True)
 
 # 19–21 · ⭐ If time
 STAR = '⭐ A / an'
@@ -258,7 +258,7 @@ for k, (t, ok, bad) in enumerate(ex1):
 
 ex2 = [("I've got a apple.", "I've got an apple."), ('This is an sandwich.', 'This is a sandwich.'),
        ('Have you got a egg?', 'Have you got an egg?'), ("It's an pear.", "It's a pear."),
-       ("I've got an bananas.", "I've got bananas.")]
+       ("I like an bananas.", "I like bananas.")]
 s = d2.slide()
 header(s, 'Упражнение 2  📝', pill=PILL, sub='Найди ошибку и напиши предложение правильно.')
 for k, (t, _) in enumerate(ex2):
