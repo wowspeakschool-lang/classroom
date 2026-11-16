@@ -38,16 +38,6 @@ for k, e in enumerate(['👋', '🍎', '🥪', '🎉']):
     text(s, 4.35 + k * 1.2, 3.25, 1.0, 1.0, e, size=30, fill=WHITE, bold=False)
 text(s, 4.1, 4.65, 5.1, 0.6, 'Your teacher:  ______________', size=17, color=WHITE, bold=False, fill='3A2D5C')
 
-# 2 · Тема урока
-s = d.slide()
-header(s, 'Today we will learn  🎯')
-c1 = text(s, 1.6, 1.8, 10.1, 1.6, [[('🍎  Food words', TEAL2, 30)], [('apple · egg · orange · banana · pear · sandwich', '555555', 20)]],
-          fill=WHITE, line=TEAL, lw=2.5)
-c2 = text(s, 1.6, 3.7, 10.1, 1.6, [[('🤔  a or an?', PINK, 30)], [('a banana  ·  an apple', '555555', 22)]],
-          fill=WHITE, line=PINK, lw=2.5)
-click(s, ('appear', c1))
-click(s, ('appear', c2))
-
 # 3 · Warm-up: odd one out — ряды по одному
 s = d.slide()
 header(s, 'Odd one out!  🤔', sub='Which word is different?')
@@ -70,6 +60,16 @@ pic(s, P('sandwich'), 4.4, 2.3, 4.5, 3.3)
 cover = text(s, 3.9, 2.0, 5.5, 3.9, [[('🍱', INK, 80)], [('?', PINK, 60)]], fill='FFE9F4', line=PINK, lw=3)
 click(s, ('hide', cover))
 chat(s, 'Type your guess!')
+
+# 4б · Тема урока — после lead-in (решение Анны 16.11)
+s = d.slide()
+header(s, 'Today we will learn  🎯')
+c1 = text(s, 1.6, 1.8, 10.1, 1.6, [[('🍎  Food words', TEAL2, 30)], [('apple · egg · orange · banana · pear · sandwich', '555555', 20)]],
+          fill=WHITE, line=TEAL, lw=2.5)
+c2 = text(s, 1.6, 3.7, 10.1, 1.6, [[('🤔  a or an?', PINK, 30)], [('a banana  ·  an apple', '555555', 22)]],
+          fill=WHITE, line=PINK, lw=2.5)
+click(s, ('appear', c1))
+click(s, ('appear', c2))
 
 # 5 · Лексика: по одному по клику
 s = d.slide()

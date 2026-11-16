@@ -190,11 +190,14 @@ def write_timing(s):
         return n[0]
     pars = []
     builds = []
+    grp = {}
     for cl in s._clicks:
         effs = []
         for k, e in enumerate(cl):
             kind, sh = e[0], e[1]
             spid = _id(sh)
+            g = grp.get(spid, -1) + 1   # у каждой анимации фигуры — своя группа
+            grp[spid] = g
             node = 'clickEffect' if k == 0 else 'withEffect'
             c = nid()
             if kind == 'appear':
@@ -214,17 +217,17 @@ def write_timing(s):
                         f'<p:tgtEl><p:spTgt spid="{spid}"/></p:tgtEl></p:cBhvr></p:animEffect>' +
                         _set(nid(), spid, 'hidden', str(ms - 1)))
                 head = f'presetID="22" presetClass="exit" presetSubtype="2"'
-            effs.append(f'<p:par><p:cTn id="{c}" {head} fill="hold" grpId="0" nodeType="{node}">'
+            effs.append(f'<p:par><p:cTn id="{c}" {head} fill="hold" grpId="{g}" nodeType="{node}">'
                         f'<p:stCondLst><p:cond delay="0"/></p:stCondLst><p:childTnLst>{body}'
                         f'</p:childTnLst></p:cTn></p:par>')
             if sh.has_text_frame if hasattr(sh, 'has_text_frame') else False:
-                builds.append(spid)
+                builds.append((spid, g))
         a, b = nid(), nid()
         pars.append(f'<p:par><p:cTn id="{a}" fill="hold"><p:stCondLst><p:cond delay="indefinite"/>'
                     f'</p:stCondLst><p:childTnLst><p:par><p:cTn id="{b}" fill="hold"><p:stCondLst>'
                     f'<p:cond delay="0"/></p:stCondLst><p:childTnLst>{"".join(effs)}</p:childTnLst>'
                     f'</p:cTn></p:par></p:childTnLst></p:cTn></p:par>')
-    bld = ''.join(f'<p:bldP spid="{x}" grpId="0" animBg="1"/>' for x in dict.fromkeys(builds))
+    bld = ''.join(f'<p:bldP spid="{x}" grpId="{g}" animBg="1"/>' for x, g in dict.fromkeys(builds))
     xml = (f'<p:timing xmlns:p="{NS["p"]}"><p:tnLst><p:par><p:cTn id="1" dur="indefinite" restart="never" '
            f'nodeType="tmRoot"><p:childTnLst><p:seq concurrent="1" nextAc="seek"><p:cTn id="2" '
            f'dur="indefinite" nodeType="mainSeq"><p:childTnLst>{"".join(pars)}</p:childTnLst></p:cTn>'
