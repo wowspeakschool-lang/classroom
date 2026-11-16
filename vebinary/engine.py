@@ -362,7 +362,7 @@ class Lesson:
         S('Правило'); self.rule(); self.end()
         S('Проверка понимания'); self.ccq(); self.end()
         S('Controlled practice')
-        for dr in self.sp['drills']:
+        for dr in drill_order(self.sp):
             self.drill(dr)
         self.end()
         S('⭐ If time')
@@ -545,6 +545,19 @@ def build_all(sp, outdir):
     return les, selfp, L, n
 
 
+def drill_order(sp):
+    """Порядок форматов дриллинга меняется от темы к теме (PRAVILA: «Разнообразие»):
+    середина (2–7) сдвигается на (день % 6), первое и последнее задание на месте."""
+    d = sp['drills']; r = int(sp['date'][:2]) % 6; mid = d[1:7]
+    rest = mid[r:] + mid[:r]
+    out = [d[0]]
+    while rest:   # одинаковое задание не ставим два раза подряд, если есть другое
+        j = next((k for k, x in enumerate(rest) if x['title'] != out[-1]['title']
+                  and not (len(rest) == 1 and x['title'] == d[7]['title'])), 0)
+        out.append(rest.pop(j))
+    return out + [d[7]]
+
+
 def fill_plan(sp):
     """План по умолчанию из описания темы; sp['plan'] дополняет и переопределяет."""
     P = sp.setdefault('plan', {})
@@ -568,7 +581,7 @@ def fill_plan(sp):
             'Freer practice 1': 'Сказать о себе с новой грамматикой.',
             'Freer practice 2': 'Ещё одно своё высказывание, другой формат.',
             'Feedback': 'Подвести итог, получить оценку, выдать самостоятельную.'}
-    drills = ' · '.join(f'{12 + k}' if False else plain(d['title']) for k, d in enumerate(sp['drills']))
+    drills = ' · '.join(plain(d['title']) for d in drill_order(sp))
     task = {'Блок школы': 'Приветствие, рассказ о школе WOW Speak.',
             'Warm-up': f'{sp["warmup"]["title"]}. Пункты по одному: пункт → клик ответ → клик следующий.',
             'Lead-in': f'{sp["leadin"]["title"]}: {plain(sp["leadin"].get("q", ""))}',
