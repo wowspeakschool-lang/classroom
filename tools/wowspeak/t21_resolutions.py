@@ -46,7 +46,7 @@ S={
            '___ will help me.','I will be happy if ___ .'],
  'bye':'📝 See you next time! 💜',
  'adv1012':[('promise','when you say you will really do something'),
-            ('keep','to go on doing what you promised, week after week'),
+            ('keep','to go on doing what you promised, week by week'),
             ('give up','to stop and not try again'),
             ('start','to do the first day of something new'),
             ('habit','something you do so often that you stop thinking about it'),

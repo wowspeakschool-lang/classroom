@@ -27,7 +27,12 @@ HARD_FOR_A1=['rather than','in spite of','despite','nevertheless','whereas']
 # Грамматика выше A1: Present Perfect во всех видах, used to, перфектные модальные.
 HARD_RE=[(r"\b(have|has|'ve|'s)\s+(been|seen|done|had|got|made|gone|taken|given|"
           r"found|bought|eaten|written|read|met|told|heard|lost|won|kept|left|"
-          r"brought|thought|spent|slept|driven|flown|broken|chosen|forgotten)\b",'Present Perfect'),
+          r"brought|thought|spent|slept|driven|flown|broken|chosen|forgotten|"
+          r"fallen|come|become|run|begun|swum|worn|ridden|grown|known|spoken|"
+          r"drunk|stood|sat|put|sent|paid|held)\b",'Present Perfect'),
+         # правильные причастия список не ловил: «has rented», «has invented»
+         # проходили мимо, а это ровно тот же Present Perfect
+         (r"\b(have|has)\s+(ever\s+|never\s+|just\s+|already\s+)?\w+ed\b",'Present Perfect'),
          (r'\bused to\b','used to'),
          (r"\b(would|could|should|must)\s+have\b",'перфектный модальный')]
 BAD_TYPO=[' teh ',' adn ',' recieve ',' seperate ',' alot ',' thier ']
