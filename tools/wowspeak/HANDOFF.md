@@ -16,7 +16,11 @@ on the first line marked 🟥**.
 | `wowspeak_builder.py` | the deck builder. `build(cfg, out_path)` |
 | `wowspeak_games.py` | the in-deck games. **Required** — without it nothing builds |
 | `wowspeak_cropping.py` | icon sheets: `gen_sheet` → `whiten` → `crop_grid_auto` → `preview` |
+| `wowspeak_lint.py` | **вычитка спека, ДО сборки**: `python3 wowspeak_lint.py t*.py` |
+| `wowspeak_audit.py` | вычитка готовой деки: написание, уровень, вёрстка, мёртвые кнопки |
+| `check_text_fit.py` | текст против рамки по метрикам шрифта |
 | `wowspeak_qa.py` | QA: `python3 wowspeak_qa.py final/*.pptx` |
+| `audit_selftest.py`, `lint_selftest.py` | проверки самих проверок — 9 и 10 подложенных дефектов |
 | `run_example.py` | a full worked example: one theme × 4 versions. Copy it for a new theme |
 | `WORD_BANK.md` | every word used so far. Scan before picking new vocabulary |
 | `REGLAMENT_ADDENDUM.md` | the rules that changed, including the 10 game rules |
@@ -138,6 +142,13 @@ notes          [{label,text,[url],[tail],[red]} ...]   {GAMES}/{VIDEO}/{SPEAKING
 ```
 
 ## 6. QA checklist (every build)
+- `python3 wowspeak_lint.py t*.py` — **первым, до сборки.** Смотрит не файл, а замысел:
+  есть ли у реквизита решение (у расписания хотя бы один общий свободный день, на бюджет
+  хватает не на всё и не ни на что), согласуется ли шаблон True/False со словом
+  («This is a save» не бывает), нет ли повтора темы и не записана ли тема в `WORD_BANK.md`.
+  Эти три рода ошибок проходят через все остальные проверки насквозь: в файле всё красиво,
+  неправильно оно по смыслу.
+- `python3 wowspeak_audit.py final/*.pptx` и `python3 check_text_fit.py final/*.pptx`.
 - `python3 wowspeak_qa.py final/*.pptx` — double round-trip, links, dead picture-on-button,
   card-colour-equals-background, feedback screens at the end, no_click_advance on quiz/board.
 - Visual: `apt-get install -y libreoffice-impress` (it is often missing), then
@@ -145,6 +156,9 @@ notes          [{label,text,[url],[tail],[red]} ...]   {GAMES}/{VIDEO}/{SPEAKING
   New Words slide, a quiz round and the main-speaking slide.
 - **Animations never play in a PDF.** The games themselves are checked in real PowerPoint,
   in slideshow mode (F5) — that part is Anna's side.
+- **Каждую новую иконку открывать по одной, в полный размер.** Просмотр листа целиком не
+  работает: у снеговика на листе был один глаз, Аня увидела за секунду, вычитка рисунков
+  не проверяет вообще. Это единственное место, где замена проверке — только глаза.
 
 ## 7. Accumulated rules / preferences (don't relearn)
 - Requests and questions to Anna: **first line, marked 🟥**, messages short.
