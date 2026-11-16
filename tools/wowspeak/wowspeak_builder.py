@@ -157,22 +157,56 @@ def prop_slide(prs,cfg):
     if kind=='route':
         # лента шагов с пустыми местами плюс полоска картинок словаря внизу
         steps=pr.get('steps',['Start','Stop 1','Stop 2','Stop 3','Destination'])
-        n=len(steps); cw=1.95; gap=(12.1-n*cw)/(n-1)
-        card(s,0.9,2.85,11.5,0.12,fill='C9BFE4',rad=0.02,sh=False)
+        # ширина шага считается от их числа: пять остановок маршрута и двенадцать
+        # месяцев года должны уместиться в одну и ту же ленту
+        n=len(steps); cw=min(1.95,(12.1-(n-1)*0.18)/n); gap=(12.1-n*cw)/max(1,n-1)
+        # strip: [] - явный отказ от полоски словаря (на ленте года она лишняя)
+        words=[] if pr.get('strip')==[] else (pr.get('strip') or [w for w,_ in vocab][:6])
+        # на двенадцати месяцах номер шага дублирует подпись и только мешает
+        nums=pr.get('numbers', n<=8)
+        ch=1.6 if words else 2.4; top=2.1 if words else 2.9
+        card(s,0.9,top+(0.75 if nums else ch/2-0.06),11.5,0.12,fill='C9BFE4',rad=0.02,sh=False)
         for i,st in enumerate(steps):
             x=0.6+i*(cw+gap)
-            card(s,x,2.1,cw,1.6,fill=WHITE,rad=0.5)
-            text(s,x,2.1,cw,0.8,[[(str(i+1),26,HOTPINK,True,TF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
-            text(s,x+0.05,2.85,cw-0.1,0.7,[[(st,14,INK,True,BF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
-            text(s,x,3.75,cw,0.5,[[('______',16,'9A8FB5',False,BF)]],align=PP_ALIGN.CENTER)
-        words=pr.get('strip') or [w for w,_ in vocab][:6]
+            card(s,x,top,cw,ch,fill=WHITE,rad=0.5)
+            if nums:
+                text(s,x,top,cw,0.8,[[(str(i+1),26,HOTPINK,True,TF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+            text(s,x+0.03,top+(0.75 if nums else 0.45),cw-0.06,0.7,
+                 [[(st,14 if n<=6 else 12,INK,True,BF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+            text(s,x+0.03,top+ch-0.85,cw-0.06,0.6,[[('______',16 if n<=6 else 11,'9A8FB5',False,BF)]],
+                 align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
         bx=(SLIDE_W-(6*1.85+5*0.18))/2
         for i,w in enumerate(words[:6]):
             x=bx+i*(1.85+0.18); card(s,x,4.75,1.85,1.65,fill=WHITE,rad=0.12)
             img=pics.get(w)
             if img: fit(s,img,x+0.25,4.85,1.35,1.0)
             text(s,x,5.9,1.85,0.4,[[(w,12,HOTPINK,True,TF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
-        text(s,0.6,6.8,10.6,0.5,[[(pr.get('hint','Fill in the steps out loud - use the words below.'),15,'5A4A7A',True,BF)]],align=PP_ALIGN.CENTER)
+        text(s,0.6,6.8,12.13,0.5,[[(pr.get('hint','Fill in the steps out loud - use the words below.' if words
+             else 'Say one sentence about every step - then pick your best one.'),15,'5A4A7A',True,BF)]],align=PP_ALIGN.CENTER)
+
+    elif kind=='week':
+        # расписание на неделю: у каждого свои занятые дни. Без такой сетки
+        # «договоритесь о встрече» заканчивается за десять секунд - спорить не о
+        # чем, пока не видно, кто когда занят.
+        people=pr.get('people') or ['A','B','C','D']
+        days=pr.get('days') or ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+        busy=pr.get('busy') or {}
+        card(s,0.7,1.5,11.93,4.9,fill=WHITE,rad=0.08)
+        x0=3.0; cw=(11.9-(x0-0.7)-0.3)/len(days)
+        for k,d in enumerate(days):
+            text(s,x0+k*cw,1.62,cw,0.5,[[(d,14,'9A8FB5',True,BF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+        rh=min(0.95,3.8/max(1,len(people)))
+        for i,who in enumerate(people[:5]):
+            y=2.2+i*rh
+            card(s,1.0,y,1.9,rh-0.12,fill=PASTELS[pr.get('row_bg','lavender')],rad=0.3,sh=False)
+            text(s,1.05,y,1.8,rh-0.12,[[(who,15,HOTPINK,True,TF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+            for k,d in enumerate(days):
+                taken=d in (busy.get(who) or [])
+                card(s,x0+k*cw+0.08,y,cw-0.16,rh-0.12,fill='E2D6F2' if taken else 'F4F2F8',rad=0.18,sh=False)
+                if taken:
+                    text(s,x0+k*cw+0.08,y,cw-0.16,rh-0.12,[[('✖',15,'7C6BA0',True,BF)]],
+                         align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+        text(s,0.6,6.62,12.13,0.5,[[(pr.get('hint','Crosses are busy days. Find a day that works for everyone - then agree where to go.'),15,'5A4A7A',True,BF)]],align=PP_ALIGN.CENTER)
 
     elif kind=='image':
         # готовая иллюстрация-реквизит (карта города, лента времени, рамки).
