@@ -182,7 +182,14 @@ def crop_grid_auto(path,names,outdir,f=3,thr=26,min_area=90,gap=None,pad=10,row_
     for c,name in zip(ordered,flat):
         x0,y0,x1,y1=c['box']
         X0=max(0,x0*f-pad); Y0=max(0,y0*f-pad); X1=min(W,x1*f+pad); Y1=min(H,y1*f+pad)
-        foreign=(lab>0)&(~np.isin(lab,list(c['ids'])))
+        # Чужое - только то, что лежит ВНЕ рамки этого рисунка. Компонент,
+        # целиком попавший внутрь неё, принадлежит рисунку, даже если кластер
+        # его не забрал: у фотографии в белой рамке содержимое - отдельный
+        # компонент, и закраска превращала иконку в пустой прямоугольник.
+        inside=set(c['ids'])
+        for k,(bx0,by0,bx1,by1) in boxes.items():
+            if bx0>=x0 and by0>=y0 and bx1<=x1 and by1<=y1: inside.add(k)
+        foreign=(lab>0)&(~np.isin(lab,list(inside)))
         fo=foreign.copy()                                   # dilate by one block
         fo[1:,:]|=foreign[:-1,:]; fo[:-1,:]|=foreign[1:,:]
         fo[:,1:]|=foreign[:,:-1]; fo[:,:-1]|=foreign[:,1:]
