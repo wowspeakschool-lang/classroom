@@ -59,3 +59,19 @@ The theme is about **smells**, which keeps it clear of "Autumn vibes" (weather/c
 Approved set — Beginners: rain · pumpkin · wood · leaves · coffee · candle (13+: cinnamon
 instead of wood). Advanced: smell · scent · damp · earthy · fresh · comforting
 (13+: scent · aroma · damp · earthy · linger · evoke).
+
+## Декабрь — иконки на месте
+
+`icons/<тема>/<1012|13>/<слово>.png`, по шесть на группу.
+Темы: year2026 · resolutions · winter · movies · fakenews · money · pressure ·
+icerink · plans · gifts · christmas · newyear · myths · rolemodel.
+
+Крупные сцены (1280 px) лежат там же, под именем слова: `family.png`,
+`happy ending.png`, `ice rink.png`, `thank you.png`, `party.png`,
+`Christmas dinner.png`, `Christmas market.png`, `concert.png`, `love story.png`,
+`school trip.png`, `football match.png`, `new friend.png`, `family dinner.png`.
+Это не предметные иконки, а сцены на весь слайд — в играх «что пропало»
+и «найди пару» их не ставить.
+
+**`christmas/1012/snowman.png` — временный:** у снеговика один глаз.
+Анна перегенерирует, файл заменить по имени.
