@@ -177,6 +177,30 @@
   таймер сначала проверяются по F5 в пробном 03.12.
 
 ## Форматы заданий — журнал (чтобы не повторяться)
-| дата | группа | warm-up | лексика-игра | controlled | if time | freer |
-|---|---|---|---|---|---|---|
-| 03.12 | 7–9 | кто лишний | что исчезло | выбери · раскрой скобки · найди ошибку · один/много · вопрос · отрицание · картинка-форма · ошибка в вопросе | прилагательное меняет артикль (an orange → a big orange) · найди лишнее · собери предложение | «мой ланчбокс» по образцу |
+| дата | группа | warm-up | lead-in | лексика-игра | controlled | if time | freer |
+|---|---|---|---|---|---|---|---|
+| 03.12 | 7–9 | odd | guess | missing | выбери · раскрой скобки · найди ошибку · один/много · вопрос · отрицание · картинка-форма · ошибка в вопросе | прилагательное меняет артикль (an orange → a big orange) · найди лишнее · собери предложение | «мой ланчбокс» по образцу |
+| 07.12 | 7–9 | scramble | question | peek | Choose · Choose · Choose the right answer · Find the mistake · Make a question · Choose · Choose the right answer · Correct the question | Choose · Make a question · Choose the right answer | Ask about the park / Write about your street |
+| 10.12 | 7–9 | emoji | poll | letters | Choose · Choose · Choose · Find the mistake · Write the verb · Choose the right answer · Choose · Correct the sentence | Choose the sound · Choose the sound · Choose the right sentence | Write about your friend / Write about a pet |
+| 14.12 | 7–9 | quiz | guess | missing | Look and choose · Look and choose · Look and write · Find the mistake · Look and choose · Choose · Look and choose · Correct the sentence | Put the words in order · Look and choose · Look and choose | Describe the street / Write about your town |
+| 17.12 | 7–9 | odd | question | peek | Choose · Choose · Choose the right answer · Find the mistake · Make a question · Choose the right answer · Choose · Correct the question | Choose · Make a question · Choose the right sentence | Ask your teacher / Write about you |
+| 21.12 | 7–9 | scramble | poll | letters | Choose · Choose · Write the word · Find the mistake · Choose the right answer · Choose · Choose · Correct the sentence | Choose · Write the word · Choose the right answer | Write about your birthday / Answer the question |
+| 24.12 | 7–9 | emoji | guess | missing | Choose · Choose · Write the word · Find the mistake · Choose the right answer · Choose · Choose · Correct the sentence | Write the word · Choose · Choose the right sentence | Compare the animals / Write about your family |
+| 28.12 | 7–9 | quiz | question | peek | Choose · Choose · Find the mistake · Choose the right answer · Make a sentence with Let's · Choose · Choose · Correct the sentence | Make it negative · Choose · Choose the right sentence | Give advice / Write a rule |
+| 31.12 | 7–9 | odd | poll | letters | Choose · Choose · Choose the right answer · Find the mistake · Ask with I'd like · Choose · Choose the polite answer · Correct the sentence | Choose · Make a question · Choose the right sentence | Be a good host / Ask for food |
+| 01.12 | 10+ | scramble | question | letters | Choose · Write the plural · Find the mistake · Choose · Choose the right answer · Choose · Write the plural · Correct the sentence | Choose · Choose · Choose the right sentence | Write 2–3 sentences / Finish the sentence |
+| 04.12 | 10+ | quiz | poll | missing | Choose · Choose · Write the missing word · Find the mistake · Choose the right answer · Choose · Choose · Correct the sentence | Choose · Choose the right answer · Put the words in order | Write 2–3 sentences / Answer the question |
+| 08.12 | 10+ | emoji | guess | peek | Choose · Choose · Write the missing word · Find the mistake · Choose the right answer · Choose · Choose · Correct the sentence | Choose · Choose · Choose the right sentence | Write 2–3 sentences / Answer the question |
+| 11.12 | 10+ | odd | question | letters | Choose · Choose · Put the words in order · Find the mistake · Choose the right answer · Choose · Choose · Correct the sentence | Choose · Choose · Choose the right answer | Write 2–3 sentences / Ask the teacher |
+| 15.12 | 10+ | scramble | guess | missing | Choose · Choose · Write the -ing form · Find the mistake · Choose the right answer · Choose · Choose · Correct the question | Choose · Write the -ing form · Choose the right sentence | Describe the picture / Write about now |
+| 18.12 | 10+ | quiz | poll | peek | Choose · Choose · Choose · Find the mistake · Choose the right answer · Write the verb · Write the verb · Correct the sentence | Choose · Choose · Choose the right sentence | Write 2–3 sentences / Finish the sentence |
+| 22.12 | 10+ | emoji | question | letters | Choose · Choose · Write the comparative · Find the mistake · Choose the right answer · Choose · Choose · Correct the sentence | Choose · Choose · Put the words in order | Compare the animals / Write about your family |
+| 25.12 | 10+ | odd | guess | missing | Choose · Choose · Put the words in order · Find the mistake · Choose the right answer · Choose · Choose the polite answer · Correct the question | Choose · Choose the most polite · Make a request | Write 2–3 requests / Ask for permission |
+| 29.12 | 10+ | scramble | poll | peek | Choose · Choose · Find the mistake · Choose · Choose the right answer · Write How much or How many · Choose · Correct the sentence | Choose · Choose · Choose the right sentence | Write 2–3 sentences / Give advice |
+
+## Сборка (16.11.2026)
+Все темы, кроме 03.12, собираются одним сборщиком: `engine.py` (структура, анимации,
+план, самостоятельная) + описание темы в `specs_7_9.py` / `specs_10plus.py`.
+`python3 run.py 7-9` или `python3 run.py 10plus [даты]` → `vyhod/<группа>/<дата>/`.
+Картинки — `kartinki/7-9`, `kartinki/10plus`, `kartinki/scenes` (улица для 14.12 собрана скриптом).
+`vyhod/` в git не кладём: архивы пересобираются из исходников.
