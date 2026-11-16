@@ -40,7 +40,7 @@ text(s, 4.1, 4.65, 5.1, 0.6, 'Your teacher:  ______________', size=17, color=WHI
 
 # 3 · Warm-up: odd one out — ряды по одному
 s = d.slide()
-header(s, 'Odd one out!  🤔', sub='Which word is different?')
+header(s, 'Find the odd one out')
 rows = [(['red', 'blue', 'cat', 'green'], 2), (['one', 'dog', 'two', 'five'], 1), (['pen', 'book', 'ruler', 'sun'], 3)]
 for r, (ws, ok) in enumerate(rows):
     y = 2.05 + r * 1.35
@@ -54,16 +54,16 @@ chat(s, 'Type the letter: A, B, C or D')
 
 # 4 · Lead-in
 s = d.slide()
-header(s, "What's in my lunchbox?  🍱", sub='Guess!')
+header(s, 'Guess')
 text(s, 3.9, 2.0, 5.5, 3.9, '', fill=WHITE, line=PINK, lw=3)
 pic(s, P('sandwich'), 4.4, 2.3, 4.5, 3.3)
-cover = text(s, 3.9, 2.0, 5.5, 3.9, [[('🍱', INK, 80)], [('?', PINK, 60)]], fill='FFE9F4', line=PINK, lw=3)
+cover = text(s, 3.9, 2.0, 5.5, 3.9, [[("What's in my lunchbox?", INK, 28)], [('🍱', INK, 70)], [('?', PINK, 54)]], fill='FFE9F4', line=PINK, lw=3)
 click(s, ('hide', cover))
 chat(s, 'Type your guess!')
 
 # 4б · Тема урока — после lead-in (решение Анны 16.11)
 s = d.slide()
-header(s, 'Today we will learn  🎯')
+header(s, 'Today we will learn')
 c1 = text(s, 1.6, 1.8, 10.1, 1.6, [[('🍎  Food words', TEAL2, 30)], [('apple · egg · orange · banana · pear · sandwich', '555555', 20)]],
           fill=WHITE, line=TEAL, lw=2.5)
 c2 = text(s, 1.6, 3.7, 10.1, 1.6, [[('🤔  a or an?', PINK, 30)], [('a banana  ·  an apple', '555555', 22)]],
@@ -73,7 +73,7 @@ click(s, ('appear', c2))
 
 # 5 · Лексика: по одному по клику
 s = d.slide()
-header(s, 'Food  🍎', pill=PILL)
+header(s, 'Look and repeat', pill=PILL)
 for k, w_ in enumerate(FOOD):
     x = 1.2 + (k % 3) * 3.75; y = 1.55 + (k // 3) * 2.55
     card = text(s, x, y, 3.3, 2.35, '', fill=WHITE, line=TEAL)
@@ -84,7 +84,7 @@ for k, w_ in enumerate(FOOD):
 
 # 6 · Remember
 s = d.slide()
-header(s, 'Remember!  👀', pill=PILL, sub='Look carefully!')
+header(s, 'Remember the pictures', pill=PILL)
 for k, w_ in enumerate(FOOD):
     x = 1.2 + (k % 3) * 3.75; y = 1.95 + (k // 3) * 2.15
     text(s, x, y, 3.3, 2.0, '', fill=WHITE, line=TEAL)
@@ -95,12 +95,12 @@ click(s, timer(s, 6.4, 15))
 
 def missing(order, gone, round_no):
     s = d.slide()
-    header(s, "What's missing?  🔍", pill=PILL, sub=f'Round {round_no}')
+    header(s, 'Write the missing word', pill=PILL)
     for k, w_ in enumerate(order):
         x = 1.2 + (k % 3) * 3.75; y = 1.95 + (k // 3) * 2.15
         if w_ == gone:
             text(s, x + 0.03, y + 0.03, 3.24, 1.94, w_, size=34, color=GREEN, fill=GREENBG, line=GREEN, lw=2)
-            cv = text(s, x, y, 3.3, 2.0, '?', size=60, color=PINK, fill='FFE9F4', line=PINK, lw=3)
+            cv = text(s, x, y, 3.3, 2.0, [[("What's missing?", INK, 18)], [('?', PINK, 54)]], fill='FFE9F4', line=PINK, lw=3)
             click(s, ('hide', cv))
         else:
             text(s, x, y, 3.3, 2.0, '', fill=WHITE, line=TEAL)
@@ -113,7 +113,7 @@ missing(['orange', 'sandwich', 'apple', 'egg', 'banana', 'pear'], 'egg', 2)
 
 # 9 · Guided discovery: читаем, a / an и первая буква выделены
 s = d.slide()
-header(s, 'Look and read  👀', pill=PILL)
+header(s, 'Look and read', pill=PILL)
 order = ['banana', 'apple', 'pear', 'egg', 'sandwich', 'orange']
 for k, w_ in enumerate(order):
     col, row = k % 2, k // 2
@@ -132,7 +132,7 @@ click(s, ('appear', q))
 
 # 10 · Правило (по-русски)
 s = d.slide()
-header(s, 'The rule  📐', pill=PILL)
+header(s, 'The rule', pill=PILL)
 rules = [
     (TEAL, 'E6F9FC', [[('a', TEAL2, 30), ('  — перед согласным звуком', INK, 22)],
                       [('a banana  ·  a pear  ·  a sandwich', '555555', 20)]]),
@@ -147,7 +147,7 @@ for k, (ln, bg, runs) in enumerate(rules):
 
 # 11 · Проверка понимания — по одному
 s = d.slide()
-header(s, 'Check  ✅', pill=PILL, sub='Yes or no?')
+header(s, 'Answer yes or no', pill=PILL)
 qs = [([('Is ', INK), ('o', PINK), (' in orange a vowel?', INK)], 0),
       ([('Can we say ', INK), ('an', PINK), (' apples?', INK)], 1)]
 for r, (q, ok) in enumerate(qs):
@@ -162,9 +162,9 @@ chat(s, 'Type A or B')
 
 
 # 12–19 · Controlled practice: одно предложение на слайд
-def drill(title, sub, sentence, img, opts=None, ok=None, answer=None, hint='Type A, B or C', imgs=1, wide=False):
+def drill(title, sentence, img, opts=None, ok=None, answer=None, hint='Type A, B or C', imgs=1, wide=False):
     s = d.slide()
-    header(s, title, pill=PILL, sub=sub)
+    header(s, title, pill=PILL)
     if imgs == 1:
         pic(s, P(img), 0.9, 1.9, 3.5, 2.3)
     else:
@@ -188,22 +188,22 @@ def drill(title, sub, sentence, img, opts=None, ok=None, answer=None, hint='Type
     chat(s, hint)
 
 
-drill('Choose!  👆', 'Fill the gap.', "I've got ___ orange.", 'orange', ['a', 'an', '—'], 1)
-drill('a or an?  ✍️', 'Choose the right word.', 'This is (a / an) pear.', 'pear',
+drill('Choose', "I've got ___ orange.", 'orange', ['a', 'an', '—'], 1)
+drill('Choose a or an', 'This is (a / an) pear.', 'pear',
       answer='This is a pear.', hint='Type a or an')
-drill('Find the mistake  🔎', 'Which word is wrong?', "I've got an banana.", 'banana', ["I've", 'an', 'banana'], 1)
-drill('One or many?  🍎🍎🍎', 'Fill the gap.', 'I like ___ apples.', 'apple', ['an', 'a', '—'], 2, imgs=3)
-drill('Question  ❓', 'Fill the gap.', 'Have you got ___ egg?', 'egg', ['a', 'an', '—'], 1)
-drill('No!  ✋', 'Fill the gap.', "I haven't got ___ sandwich.", 'sandwich', ['an', '—', 'a'], 2)
-drill('What is it?  🖼️', 'Choose the right sentence.', 'What is it?', 'banana',
+drill('Find the mistake', "I've got an banana.", 'banana', ["I've", 'an', 'banana'], 1)
+drill('Choose', 'I like ___ apples.', 'apple', ['an', 'a', '—'], 2, imgs=3)
+drill('Choose', 'Have you got ___ egg?', 'egg', ['a', 'an', '—'], 1)
+drill('Choose', "I haven't got ___ sandwich.", 'sandwich', ['an', '—', 'a'], 2)
+drill('Choose the right answer', 'What is it?', 'banana',
       ["It's an banana.", "It's banana.", "It's a banana."], 2, wide=True)
-drill('Ask correctly  🔎', 'Which question is right?', 'Have you got a apple?', 'apple',
+drill('Correct the question', 'Have you got a apple?', 'apple',
       ['Have you got an apple?', 'Have you got apple?', 'Have you got an apples?'], 0, wide=True)
 
 # 20–22 · ⭐ If time
 STAR = '⭐ A / an'
 s = d.slide()
-header(s, 'A big orange  ⭐', pill=STAR, sub='Look at the next word!')
+header(s, 'Choose', pill=STAR)
 pic(s, P('orange'), 0.9, 1.9, 3.5, 2.4)
 text(s, 4.7, 1.95, 7.9, 0.9, 'an orange', size=30, color=INK, fill=WHITE, line=TEAL)
 text(s, 4.7, 3.0, 7.9, 1.1, '___ big orange', size=34, color=INK, fill=WHITE, line=PINK, lw=2.5)
@@ -212,16 +212,17 @@ click(s, ('hide', [c for c in covs if c][0]))
 chat(s, 'Type A or B')
 
 s = d.slide()
-header(s, 'Odd one out  ⭐', pill=STAR, sub='Which word needs an?')
+header(s, 'Choose', pill=STAR)
+text(s, 3.2, 1.45, 6.9, 0.75, [('Which word needs ', INK), ('an', PINK), ('?', INK)], size=26, fill=WHITE, line=PINK, lw=2.5)
 ws = ['banana', 'egg', 'pear', 'sandwich']
 for k, w_ in enumerate(ws):
-    pic(s, P(w_), 0.85 + k * 3.0 + 0.2, 1.95, 2.3, 2.2)
+    pic(s, P(w_), 0.85 + k * 3.0 + 0.2, 2.35, 2.3, 1.9)
 covs = [option(s, 0.85 + k * 3.0, 4.4, 2.7, 1.0, 'ABCD'[k], w_, k == 1, size=24) for k, w_ in enumerate(ws)]
 click(s, ('hide', [c for c in covs if c][0]))
 chat(s, 'Type A, B, C or D')
 
 s = d.slide()
-header(s, 'Make a sentence  ⭐', pill=STAR, sub='Put the words in order.')
+header(s, 'Put the words in order', pill=STAR)
 for k, w_ in enumerate(['apple', 'got', "I've", 'an']):
     text(s, 1.5 + k * 2.65, 2.1, 2.35, 1.0, w_, size=28, color=INK, fill=WHITE, line=TEAL)
 text(s, 2.43, 3.78, 8.44, 1.14, "I've got an apple.", size=32, color=GREEN, fill=GREENBG, line=GREEN, lw=3)
@@ -231,20 +232,20 @@ chat(s, 'Type the sentence!')
 
 # 23 · Freer practice
 s = d.slide()
-header(s, 'My lunchbox  🍱', pill=PILL, sub="What's in your lunchbox? Write 2–3 sentences.")
+header(s, 'Write 2–3 sentences', pill=PILL)
 cap = ['an apple', 'an egg', 'an orange', 'a banana', 'a pear', 'a sandwich']
 for k, w_ in enumerate(FOOD):
     x = 0.6 + k * 2.05
     text(s, x, 1.95, 1.9, 2.1, '', fill=WHITE, line=TEAL)
     pic(s, P(w_), x + 0.15, 2.02, 1.6, 1.45)
     text(s, x, 3.5, 1.9, 0.5, cap[k], size=17, color=PINK if cap[k].startswith('an') else TEAL2)
-text(s, 1.6, 4.4, 10.1, 1.5, [[('Example:', HEAD, 18)], [("I've got an apple, a pear and a sandwich.", INK, 24)]],
+text(s, 1.6, 4.4, 10.1, 1.5, [[("What's in your lunchbox?", PINK, 24)], [('Example: ', HEAD, 20), ("I've got an apple, a pear and a sandwich.", INK, 22)]],
      fill='FFF3E6', line=ORANGE, lw=2.5)
 chat(s, 'Type your sentences!')
 
 # 24 · I CAN
 s = d.slide(PASTELS[1])
-header(s, 'I CAN …  🌟')
+header(s, 'I can …')
 for k, t in enumerate(['I can say: a banana, a pear, a sandwich.',
                        'I can say: an apple, an egg, an orange.',
                        "I can say: I've got an apple!"]):
