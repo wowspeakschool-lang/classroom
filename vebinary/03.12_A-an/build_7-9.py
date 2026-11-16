@@ -189,7 +189,7 @@ def drill(title, sentence, img, opts=None, ok=None, answer=None, hint='Type A, B
 
 
 drill('Choose', "I've got ___ orange.", 'orange', ['a', 'an', '—'], 1)
-drill('Choose a or an', 'This is (a / an) pear.', 'pear',
+drill(hl('Choose [a] or [an]'), 'This is (a / an) pear.', 'pear',
       answer='This is a pear.', hint='Type a or an')
 drill('Find the mistake', "I've got an banana.", 'banana', ["I've", 'an', 'banana'], 1)
 drill('Choose', 'I like ___ apples.', 'apple', ['an', 'a', '—'], 2, imgs=3)
@@ -271,8 +271,8 @@ d2 = Deck()
 
 def task_head(s, title, en, ru):
     header(s, title, pill=PILL)
-    text(s, 1.0, 1.35, 11.3, 0.45, en, size=18, color=INK)
-    text(s, 1.0, 1.75, 11.3, 0.4, ru, size=15, color='555555', bold=False, italic=True)
+    text(s, 1.0, 1.35, 11.3, 0.45, hl(en, INK) if en else '', size=18, color=INK)
+    text(s, 1.0, 1.75, 11.3, 0.4, hl(ru, '555555') if ru else '', size=15, color='555555', italic=True)
 
 
 s = d2.slide(DARK)
@@ -300,7 +300,7 @@ for k, (ln, bg, runs) in enumerate(rules):
 # Упр. 1 — картинка + впиши a / an
 ex1 = ['egg', 'pear', 'orange', 'sandwich', 'apple', 'banana']
 s = d2.slide()
-task_head(s, 'Exercise 1  ✍️', 'Look and write a or an.', 'Посмотри на картинку и впиши a или an.')
+task_head(s, 'Exercise 1  ✍️', 'Look and write [a] or [an].', 'Посмотри на картинку и впиши [a] или [an].')
 for k, w_ in enumerate(ex1):
     x = 0.7 + (k % 3) * 4.0; y = 2.35 + (k // 3) * 2.1
     text(s, x, y, 3.85, 1.95, '', fill=WHITE, line='E3DCF2')

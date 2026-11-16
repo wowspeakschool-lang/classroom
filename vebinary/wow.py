@@ -111,6 +111,22 @@ def transparent(path):
     return out
 
 
+def hl(t, base='3D2B5A', size=None):
+    """Разметка [a] / [an] → цветные runs: целевая форма выделена в инструкции."""
+    import re
+    out = []
+    for part in re.split(r'(\[[^\]]+\])', t):
+        if not part:
+            continue
+        if part.startswith('['):
+            w = part[1:-1]
+            c = 'E91E8C' if w.lower().startswith('an') else '0097A7'
+            out.append((w, c) if size is None else (w, c, size))
+        else:
+            out.append((part, base) if size is None else (part, base, size))
+    return out
+
+
 def pic(s, path, x, y, w=None, h=None):
     from PIL import Image
     path = transparent(path)
