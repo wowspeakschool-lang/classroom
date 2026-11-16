@@ -1,12 +1,12 @@
 # Общий список картинок на декабрь: листы по группам, промпты и таблицы «предмет → урок».
 C = 'an animated film character, a child '
-T = 'an animated film character, a teenage '
+T = 'a teenage '
 TEEN = [
  ('01.12 Plurals', ['a closed cardboard box','one round dinner dish (plate)','a kitchen knife lying flat','one empty wooden wall shelf','one potato','a smiling baby sitting']),
  ('04.12 Prepositions of place', ['a school building front with a blank sign','a bank building front with columns and a blank sign','a cinema building front with a blank sign','a train station building front with a blank sign','a hospital building front with a red cross','a post office building front with a postbox and a blank sign']),
  ('08.12 Prepositions of time', ['a small house at sunrise (morning)','a small house under a bright midday sun (afternoon)','a small house at sunset (evening)','a small house under a moon and stars (night)','a decorated Christmas tree with presents','a snowy winter street with falling snowflakes']),
  ('11.12 Present Simple', ['a passenger train','a city bus','a round alarm clock with a blank face','%sgirl having breakfast at a table'%T,'%sboy lifting light weights at the gym'%T,'%sgirl walking a dog'%T]),
- ('15.12 Present Continuous', ['%sboy decorating a Christmas tree'%T,'%sgirl hanging fairy lights'%T,'an animated film character, a woman carrying shopping bags with presents','%sgirl wrapping a present'%T,'an animated film character, a man selling hot drinks at a small street stall','two animated film characters, teenagers singing carols holding blank songbooks']),
+ ('15.12 Present Continuous', ['%sboy decorating a Christmas tree'%T,'%sgirl hanging fairy lights'%T,'a woman carrying shopping bags with presents','%sgirl wrapping a present'%T,'a man selling hot drinks at a small street stall','two teenagers singing carols holding blank songbooks']),
  ('18.12 Present Simple vs Continuous', ['%sboy sleeping in bed late in the morning'%T,'%sgirl switching off an alarm clock early in the morning'%T,'%sboy playing a video game with a controller'%T,'%sgirl skiing down a snowy slope'%T,'%sboy hugging his grandparents at their door'%T,'%sgirl watching a film on a sofa with popcorn'%T]),
  ('22.12 Comparatives', ['a running cheetah','a blue whale','a tall giraffe','a tortoise','a big elephant','a tiny mouse']),
  ('25.12 Can: requests', ['a mug of hot chocolate with whipped cream','a glass of water','a slice of pizza on a plate','a closed restaurant menu with a blank cover','a wooden chair','a smartphone with a dark blank screen and a charging cable']),
@@ -27,7 +27,7 @@ WORDS = {  # короткое название предмета для табл�
 HEAD = ('plain flat pure white background, wide empty white gaps between the items, '
         'every item complete and not touching any other item or the edge.')
 STY = {'kids': 'Style: semi-cartoon illustration, soft shading, clean outlines, bright friendly colours, the same style for every item.',
-       'teen': 'Style: semi-cartoon illustration, soft shading, clean outlines, natural proportions, people are teenagers and adults (not little children), bright friendly colours, the same style for every item.'}
+       'teen': 'Style: semi-realistic 3D render, natural proportions, detailed fabric and hair, soft cinematic lighting, restrained natural colours, people are teenagers and adults (not little children, not cartoon characters), the same style for every item.'}
 NUM = {8: 'eight', 9: 'nine'}
 
 def sheets(topics, per, cols, key, label):
@@ -48,7 +48,7 @@ SCENES = [
   'A wide winter park scene, landscape format. In the scene there is exactly: one snowman with a carrot nose on the left; two children ice skating on a small frozen pond in the middle; one empty bench covered with snow on the right; three small birds on a snowy tree branch; a few fir trees in the background. There is no dog, no sledge, no people on the bench and no shops. Plain light winter sky. Style: semi-cartoon illustration, soft shading, clean outlines, bright friendly colours. No text, no letters, no labels, no numbers.',
   'зимний парк для вопросов Is there…? / Are there any…? (есть: snowman, 2 skaters, bench, 3 birds, trees; нет: dog, sledge, people on the bench)'),
  ('10+ · сцена · 15.12 Present Continuous',
-  'A wide city street scene just before Christmas, landscape format, seen from the side. In the scene: a teenage boy is hanging fairy lights over a shop window; a woman is carrying shopping bags; two teenagers are singing carols; a man is selling hot drinks at a small stall; a teenage girl is taking a photo of a big Christmas tree; light snow is falling. All shop signs are blank. Style: semi-cartoon illustration, soft shading, clean outlines, natural proportions, bright friendly colours. No text, no letters, no labels, no numbers.',
+  'A wide city street scene just before Christmas, landscape format, seen from the side. In the scene: a teenage boy is hanging fairy lights over a shop window; a woman is carrying shopping bags; two teenagers are singing carols; a man is selling hot drinks at a small stall; a teenage girl is taking a photo of a big Christmas tree; light snow is falling. All shop signs are blank. Style: semi-realistic 3D render, natural proportions, detailed fabric and hair, soft cinematic lighting, restrained natural colours. No text, no letters, no labels, no numbers.',
   'улица перед праздником: What is he doing? — He is hanging lights… (5 действий)'),
 ]
 

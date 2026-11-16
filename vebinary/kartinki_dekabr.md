@@ -6,7 +6,7 @@
 ## 10+ · лист 1
 
 ```
-A 3×3 grid of nine separate illustrations on a plain flat pure white background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. Row 1, left to right: a closed cardboard box; one round dinner dish (plate); a kitchen knife lying flat. Row 2, left to right: one empty wooden wall shelf; one potato; a smiling baby sitting. Row 3, left to right: a school building front with a blank sign; a bank building front with columns and a blank sign; a cinema building front with a blank sign. Style: semi-cartoon illustration, soft shading, clean outlines, natural proportions, people are teenagers and adults (not little children), bright friendly colours, the same style for every item. No text, no letters, no labels, no numbers.
+A 3×3 grid of nine separate illustrations on a plain flat pure white background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. Row 1, left to right: a closed cardboard box; one round dinner dish (plate); a kitchen knife lying flat. Row 2, left to right: one empty wooden wall shelf; one potato; a smiling baby sitting. Row 3, left to right: a school building front with a blank sign; a bank building front with columns and a blank sign; a cinema building front with a blank sign. Style: semi-realistic 3D render, natural proportions, detailed fabric and hair, soft cinematic lighting, restrained natural colours, people are teenagers and adults (not little children, not cartoon characters), the same style for every item. No text, no letters, no labels, no numbers.
 ```
 
 | № | предмет | урок |
@@ -24,7 +24,7 @@ A 3×3 grid of nine separate illustrations on a plain flat pure white background
 ## 10+ · лист 2
 
 ```
-A 3×3 grid of nine separate illustrations on a plain flat pure white background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. Row 1, left to right: a train station building front with a blank sign; a hospital building front with a red cross; a post office building front with a postbox and a blank sign. Row 2, left to right: a small house at sunrise (morning); a small house under a bright midday sun (afternoon); a small house at sunset (evening). Row 3, left to right: a small house under a moon and stars (night); a decorated Christmas tree with presents; a snowy winter street with falling snowflakes. Style: semi-cartoon illustration, soft shading, clean outlines, natural proportions, people are teenagers and adults (not little children), bright friendly colours, the same style for every item. No text, no letters, no labels, no numbers.
+A 3×3 grid of nine separate illustrations on a plain flat pure white background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. Row 1, left to right: a train station building front with a blank sign; a hospital building front with a red cross; a post office building front with a postbox and a blank sign. Row 2, left to right: a small house at sunrise (morning); a small house under a bright midday sun (afternoon); a small house at sunset (evening). Row 3, left to right: a small house under a moon and stars (night); a decorated Christmas tree with presents; a snowy winter street with falling snowflakes. Style: semi-realistic 3D render, natural proportions, detailed fabric and hair, soft cinematic lighting, restrained natural colours, people are teenagers and adults (not little children, not cartoon characters), the same style for every item. No text, no letters, no labels, no numbers.
 ```
 
 | № | предмет | урок |
@@ -42,7 +42,7 @@ A 3×3 grid of nine separate illustrations on a plain flat pure white background
 ## 10+ · лист 3
 
 ```
-A 3×3 grid of nine separate illustrations on a plain flat pure white background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. Row 1, left to right: a passenger train; a city bus; a round alarm clock with a blank face. Row 2, left to right: an animated film character, a teenage girl having breakfast at a table; an animated film character, a teenage boy lifting light weights at the gym; an animated film character, a teenage girl walking a dog. Row 3, left to right: an animated film character, a teenage boy decorating a Christmas tree; an animated film character, a teenage girl hanging fairy lights; an animated film character, a woman carrying shopping bags with presents. Style: semi-cartoon illustration, soft shading, clean outlines, natural proportions, people are teenagers and adults (not little children), bright friendly colours, the same style for every item. No text, no letters, no labels, no numbers.
+A 3×3 grid of nine separate illustrations on a plain flat pure white background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. Row 1, left to right: a passenger train; a city bus; a round alarm clock with a blank face. Row 2, left to right: a teenage girl having breakfast at a table; a teenage boy lifting light weights at the gym; a teenage girl walking a dog. Row 3, left to right: a teenage boy decorating a Christmas tree; a teenage girl hanging fairy lights; a woman carrying shopping bags with presents. Style: semi-realistic 3D render, natural proportions, detailed fabric and hair, soft cinematic lighting, restrained natural colours, people are teenagers and adults (not little children, not cartoon characters), the same style for every item. No text, no letters, no labels, no numbers.
 ```
 
 | № | предмет | урок |
@@ -60,14 +60,14 @@ A 3×3 grid of nine separate illustrations on a plain flat pure white background
 ## 10+ · лист 4
 
 ```
-A 3×3 grid of nine separate illustrations on a plain flat pure white background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. Row 1, left to right: an animated film character, a teenage girl wrapping a present; an animated film character, a man selling hot drinks at a small street stall; two animated film characters, teenagers singing carols holding blank songbooks. Row 2, left to right: an animated film character, a teenage boy sleeping in bed late in the morning; an animated film character, a teenage girl switching off an alarm clock early in the morning; an animated film character, a teenage boy playing a video game with a controller. Row 3, left to right: an animated film character, a teenage girl skiing down a snowy slope; an animated film character, a teenage boy hugging his grandparents at their door; an animated film character, a teenage girl watching a film on a sofa with popcorn. Style: semi-cartoon illustration, soft shading, clean outlines, natural proportions, people are teenagers and adults (not little children), bright friendly colours, the same style for every item. No text, no letters, no labels, no numbers.
+A 3×3 grid of nine separate illustrations on a plain flat pure white background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. Row 1, left to right: a teenage girl wrapping a present; a man selling hot drinks at a small street stall; two teenagers singing carols holding blank songbooks. Row 2, left to right: a teenage boy sleeping in bed late in the morning; a teenage girl switching off an alarm clock early in the morning; a teenage boy playing a video game with a controller. Row 3, left to right: a teenage girl skiing down a snowy slope; a teenage boy hugging his grandparents at their door; a teenage girl watching a film on a sofa with popcorn. Style: semi-realistic 3D render, natural proportions, detailed fabric and hair, soft cinematic lighting, restrained natural colours, people are teenagers and adults (not little children, not cartoon characters), the same style for every item. No text, no letters, no labels, no numbers.
 ```
 
 | № | предмет | урок |
 |---|---|---|
 | 1 | a teenage girl wrapping a present | 15.12 Present Continuous |
 | 2 | a man selling hot drinks at a small street stall | 15.12 Present Continuous |
-| 3 | teenagers singing carols holding blank songbooks | 15.12 Present Continuous |
+| 3 | two teenagers singing carols holding blank songbooks | 15.12 Present Continuous |
 | 4 | a teenage boy sleeping in bed late in the morning | 18.12 Present Simple vs Continuous |
 | 5 | a teenage girl switching off an alarm clock early in the morning | 18.12 Present Simple vs Continuous |
 | 6 | a teenage boy playing a video game with a controller | 18.12 Present Simple vs Continuous |
@@ -78,7 +78,7 @@ A 3×3 grid of nine separate illustrations on a plain flat pure white background
 ## 10+ · лист 5
 
 ```
-A 3×3 grid of nine separate illustrations on a plain flat pure white background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. Row 1, left to right: a running cheetah; a blue whale; a tall giraffe. Row 2, left to right: a tortoise; a big elephant; a tiny mouse. Row 3, left to right: a mug of hot chocolate with whipped cream; a glass of water; a slice of pizza on a plate. Style: semi-cartoon illustration, soft shading, clean outlines, natural proportions, people are teenagers and adults (not little children), bright friendly colours, the same style for every item. No text, no letters, no labels, no numbers.
+A 3×3 grid of nine separate illustrations on a plain flat pure white background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. Row 1, left to right: a running cheetah; a blue whale; a tall giraffe. Row 2, left to right: a tortoise; a big elephant; a tiny mouse. Row 3, left to right: a mug of hot chocolate with whipped cream; a glass of water; a slice of pizza on a plate. Style: semi-realistic 3D render, natural proportions, detailed fabric and hair, soft cinematic lighting, restrained natural colours, people are teenagers and adults (not little children, not cartoon characters), the same style for every item. No text, no letters, no labels, no numbers.
 ```
 
 | № | предмет | урок |
@@ -96,7 +96,7 @@ A 3×3 grid of nine separate illustrations on a plain flat pure white background
 ## 10+ · лист 6
 
 ```
-A 3×3 grid of nine separate illustrations on a plain flat pure white background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. Row 1, left to right: a closed restaurant menu with a blank cover; a wooden chair; a smartphone with a dark blank screen and a charging cable. Row 2, left to right: two suitcases and a travel bag (luggage); a pile of coins and plain banknotes without numbers; a closed passport with a blank cover. Row 3, left to right: a blank travel ticket; a folded paper map; a backpack. Style: semi-cartoon illustration, soft shading, clean outlines, natural proportions, people are teenagers and adults (not little children), bright friendly colours, the same style for every item. No text, no letters, no labels, no numbers.
+A 3×3 grid of nine separate illustrations on a plain flat pure white background, wide empty white gaps between the items, every item complete and not touching any other item or the edge. Row 1, left to right: a closed restaurant menu with a blank cover; a wooden chair; a smartphone with a dark blank screen and a charging cable. Row 2, left to right: two suitcases and a travel bag (luggage); a pile of coins and plain banknotes without numbers; a closed passport with a blank cover. Row 3, left to right: a blank travel ticket; a folded paper map; a backpack. Style: semi-realistic 3D render, natural proportions, detailed fabric and hair, soft cinematic lighting, restrained natural colours, people are teenagers and adults (not little children, not cartoon characters), the same style for every item. No text, no letters, no labels, no numbers.
 ```
 
 | № | предмет | урок |
@@ -224,7 +224,7 @@ A wide winter park scene, landscape format. In the scene there is exactly: one s
 ## 10+ · сцена · 15.12 Present Continuous
 
 ```
-A wide city street scene just before Christmas, landscape format, seen from the side. In the scene: a teenage boy is hanging fairy lights over a shop window; a woman is carrying shopping bags; two teenagers are singing carols; a man is selling hot drinks at a small stall; a teenage girl is taking a photo of a big Christmas tree; light snow is falling. All shop signs are blank. Style: semi-cartoon illustration, soft shading, clean outlines, natural proportions, bright friendly colours. No text, no letters, no labels, no numbers.
+A wide city street scene just before Christmas, landscape format, seen from the side. In the scene: a teenage boy is hanging fairy lights over a shop window; a woman is carrying shopping bags; two teenagers are singing carols; a man is selling hot drinks at a small stall; a teenage girl is taking a photo of a big Christmas tree; light snow is falling. All shop signs are blank. Style: semi-realistic 3D render, natural proportions, detailed fabric and hair, soft cinematic lighting, restrained natural colours. No text, no letters, no labels, no numbers.
 ```
 
 Зачем: улица перед праздником: What is he doing? — He is hanging lights… (5 действий)
