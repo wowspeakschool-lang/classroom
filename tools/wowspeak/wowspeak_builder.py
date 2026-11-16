@@ -309,7 +309,7 @@ def build(cfg,out):
     # S3 mood
     s=ns(PASTELS['blue'])
     blob(s,0.4,7.1,3.0,BLOB[4]); blob(s,13.0,0.4,2.8,BLOB[2])
-    band(s,'😊 How are you today? 😊',size=34)
+    band(s,cfg.get('mood_band','😊 How are you today? 😊'),size=34)
     text(s,1.0,1.65,11.3,0.5,[[(cfg['mood_q'],18,'7A5C9E',True,TF)]],align=PP_ALIGN.CENTER)
     moods=cfg['moods']
     n=5; gap=0.35; cw=(11.6-(n-1)*gap)/n; gx=(SLIDE_W-(n*cw+(n-1)*gap))/2; gy=2.5; ch=2.3
@@ -322,9 +322,9 @@ def build(cfg,out):
     # S4 LEAD-IN
     s=ns(PASTELS['yellow'])
     blob(s,0.3,0.4,2.8,BLOB[0]); blob(s,13.1,7.2,3.2,BLOB[3])
-    band(s,'💬 Lead-in – let’s talk! '+EM[0],size=30)
+    band(s,cfg.get('lead_band','💬 Lead-in – let’s talk! ')+EM[0],size=30)
     card(s,1.2,1.75,10.93,4.95,fill=WHITE,rad=0.06)
-    runs=[[('🗨️ ',18,TEAL,True,BF),('Discuss with your teacher:',19,TEAL,True,TF)]]
+    runs=[[('🗨️ ',18,TEAL,True,BF),(cfg.get('lead_hint','Discuss with your teacher:'),19,TEAL,True,TF)]]
     for q,e in cfg['lead_in']:
         runs.append([(e+'  ',15.5,INK,False,BF),(q,15.5,INK,False,BF)])
     text(s,1.6,2.05,10.1,4.4,runs,align=PP_ALIGN.LEFT,sa=8,ls=1.05)
@@ -403,7 +403,7 @@ def build(cfg,out):
         b=card(s,4.4,4.6,4.53,0.75,fill=GOLD,rad=0.5)
         text_in_shape(b,'▶️  Open the video',18,DARK,True,TF)
         b.click_action.hyperlink.address=url
-    runs=[[('💬 After watching, discuss:',16,GOLD,True,TF)]]
+    runs=[[(cfg.get('video_hint','💬 After watching, discuss:'),16,GOLD,True,TF)]]
     for q,e in cfg['video_qs']:
         runs.append([(e+'  ',14.5,'F2ECFF',False,BF),(q,14.5,'F2ECFF',False,BF)])
     text(s,2.3,5.5,8.73,1.5,runs,align=PP_ALIGN.LEFT,sa=6,ls=1.03)
