@@ -487,3 +487,56 @@ FAMILY = [  # семейное дерево задания family_photo: (кар
     ('fam_uncle', 'Bob', 'uncle'), ('fam_father', 'Mark', 'father'), ('fam_mother', 'Kate', 'mother'),
     ('fam_aunt', 'Lily', 'aunt'), ('fam_boy', 'Tom', 'Tom, 14'), ('fam_girl', 'Emma', 'Emma, 10'),
 ]
+
+
+# короткая инструкция на английском — на экране; русский title — для учителя (в план)
+EN = {
+"family_photo#0": "Look and choose.",
+"schoolbag#0": "Look and choose.",
+"passport#0": "Look at the flag and choose.",
+"fruit_bowl#0": "Look. True or false?",
+"football#0": "Look and choose one word.",
+"football#1": "Look and choose.",
+"bus#0": "Look and choose.",
+"cinema_tickets#0": "Put the words in order.",
+"cinema_tickets#1": "Choose the right answer.",
+"umbrella#0": "Look and choose.",
+"umbrella#1": "What do you take? Sort.",
+"umbrella#2": "Choose the right word.",
+"cat#0": "Look and choose.",
+"cat#1": "Listen and choose.",
+"wardrobe#0": "Sort the words.",
+"wardrobe#1": "Choose the right word.",
+"suitcase#0": "Look. How did Mia feel?",
+"suitcase#1": "Right or wrong? Correct the mistakes.",
+"map#0": "Match the words and the pictures.",
+"map#1": "Choose the right answer.",
+"first_aid_kit#0": "Choose the right answer.",
+"novel#0": "Choose the right answer.",
+"wanted_poster#0": "Listen and find the thief.",
+"wanted_poster#1": "Choose the right answer.",
+"wallet#0": "Choose the right answer.",
+"laptop#0": "Choose the right word.",
+"laptop#1": "Right or wrong? Correct the mistakes.",
+"binoculars#0": "Match the words and the pictures.",
+"binoculars#1": "Choose the right word.",
+"trophy#0": "Choose the best answer.",
+"stethoscope#0": "Choose the best answer.",
+"microphone#0": "Match the words and the definitions.",
+"smartphone#0": "Listen and choose.",
+"smartphone#1": "Choose the right answer.",
+"graduation_cap#0": "Choose the right answer.",
+"seismograph#0": "Match the words and the pictures.",
+"seismograph#1": "Choose the right answer.",
+"magnifying_glass#0": "Look and choose.",
+"scroll#0": "Sort the words.",
+"scroll#1": "Choose the right answer.",
+"time_capsule#0": "Look and choose.",
+"billboard#0": "Sort the words.",
+"billboard#1": "Match the halves.",
+"billboard#2": "Choose a, an, the or — ."
+}
+for _P in (P1, P2, P3):
+    for _o in _P:
+        for _i, _t in enumerate(_o['tasks']):
+            _t['en'] = EN[f"{_o['id']}#{_i}"]

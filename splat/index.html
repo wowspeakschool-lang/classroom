@@ -34,12 +34,13 @@ img{-webkit-user-drag:none;user-drag:none}
 
 /* верх */
 .top{position:absolute;left:0;right:0;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;gap:calc(var(--u)*1);padding:calc(var(--u)*1) calc(var(--u)*1.4)}
-.logo{display:flex;align-items:center;gap:calc(var(--u)*.6);font-family:var(--disp);font-weight:700}
-.logo .sk{background:var(--red);color:#fff;border-radius:calc(var(--u)*.5);padding:calc(var(--u)*.35) calc(var(--u)*.7);line-height:.9;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.2)}
-.logo .sk b{display:block;font-size:calc(var(--u)*1.6);letter-spacing:.04em}
-.logo .sk i{display:block;font-style:normal;font-size:calc(var(--u)*.75);letter-spacing:.3em}
-.logo .x{color:#fff;font-size:calc(var(--u)*1.3);text-shadow:0 1px 3px rgba(0,0,0,.4)}
-.logo .ws{background:#fff;border-radius:calc(var(--u)*.6);padding:calc(var(--u)*.4) calc(var(--u)*.8);font-size:calc(var(--u)*1.1)}
+/* общий логотип (вариант 1, Анна 11.11.2026): плашки SPLAT KIDS и WowSpeak одной высоты --lh — как в PDF */
+.logo{--lh:calc(var(--u)*3.4);display:flex;align-items:center;gap:calc(var(--lh)*.16);font-family:'Fredoka',sans-serif;font-weight:700;line-height:1}
+.logo .sk{box-sizing:border-box;height:var(--lh);width:calc(var(--lh)*2.28);background:#e3262f;color:#fff;border-radius:calc(var(--lh)*.15);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;box-shadow:none}
+.logo .sk b{display:block;font-size:calc(var(--lh)*.56);letter-spacing:0;line-height:.95}
+.logo .sk i{display:block;font-style:normal;font-size:calc(var(--lh)*.22);letter-spacing:.3em;margin-top:calc(var(--lh)*.04);padding-left:.3em}
+.logo .x{color:#2d3a5c;font-family:'Nunito',sans-serif;font-weight:900;font-size:calc(var(--lh)*.5);text-shadow:none}
+.logo .ws{box-sizing:border-box;height:var(--lh);display:flex;align-items:center;padding:0 calc(var(--lh)*.3);background:#fff;color:#2d3a5c;border:calc(var(--lh)*.045) solid #2d3a5c;border-radius:calc(var(--lh)*.15);font-size:calc(var(--lh)*.44);font-weight:700}
 .tb{border:none;background:#fff;border-radius:999px;font-family:var(--disp);font-weight:600;font-size:calc(var(--u)*1.25);padding:calc(var(--u)*.6) calc(var(--u)*1.2);cursor:pointer;color:var(--ink);box-shadow:0 calc(var(--u)*.25) 0 rgba(0,0,0,.15);white-space:nowrap}
 .tb.lesson{background:linear-gradient(180deg,#ffe27a,#f2a81d);box-shadow:0 calc(var(--u)*.3) 0 #c98410}
 .tb:active{transform:translateY(2px);box-shadow:none}
@@ -185,7 +186,7 @@ body.paged #page{display:block}
 body.paged #rotate{display:none!important}
 .pg{max-width:880px;margin:0 auto;padding:16px 16px 48px}
 .pg-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
-.pg-top .logo .sk b{font-size:20px}.pg-top .logo .sk i{font-size:9px}.pg-top .logo .ws{font-size:14px;padding:5px 10px}.pg-top .logo .x{font-size:16px;color:var(--ink);text-shadow:none}.pg-top .logo .sk{padding:4px 8px}
+.pg-top .logo{--lh:40px}
 .pg-back{border:none;background:#fff;border-radius:999px;padding:9px 16px;font-family:var(--disp);font-weight:600;font-size:15px;color:var(--ink);box-shadow:0 2px 0 rgba(0,0,0,.08);cursor:pointer}
 .pg-hero{display:flex;gap:18px;align-items:center;background:#fff;border-radius:28px;padding:22px;box-shadow:0 10px 30px rgba(45,58,92,.1)}
 .pg-hero img{width:150px;flex:0 0 auto}
