@@ -220,6 +220,7 @@ def _head(slide,title,bg,counter=None,dark=False):
 
 # ------------------------------------------------------------ THE GAMES
 def g_quiz_series(prs,bg,items,helpers=None,title=None,mode='picture',nopt=4,
+                  unit='word',
                   final='🏆 Well done! You know all the words!'):
     """A round for EVERY word (rule 3).
     items : [(word, media)] for mode='picture' (media = icon path or emoji)
@@ -236,7 +237,9 @@ def g_quiz_series(prs,bg,items,helpers=None,title=None,mode='picture',nopt=4,
     for k,(word,extra) in enumerate(items):
         s=qs[k]; ok,bad=outs[k]
         nxt=qs[k+1] if k+1<n else fin
-        q=f'Which one is "{word}"?' if mode=='picture' else f'Which word means: "{extra}"?'
+        # у функциональных тем «слова» - это целые фразы: «Which word means»
+        # над списком реплик читается как ошибка
+        q=f'Which one is "{word}"?' if mode=='picture' else f'Which {unit} means: "{extra}"?'
         _head(s,title or ('🎯 Point & Race!' if mode=='picture' else '🎯 Word hunt!'),bg,counter=f'{k+1}/{n}')
         B.text(s,0.9,1.62,11.5,0.7,[[(q,22,'5A4A7A',True,B.TF)]],align=PP_ALIGN.CENTER)
         pos=(k*3)%nopt                                  # rule 4
@@ -657,7 +660,7 @@ def play(prs,spec,cfg):
     mode=spec.get('mode') or ('word' if lvl=='adv' else 'picture')
     def kw(*names): return {k:v for k,v in spec.items() if k in names}
     if t=='quiz':
-        return g_quiz_series(prs,bg,items,mode=mode,**kw('title','nopt','final'))
+        return g_quiz_series(prs,bg,items,mode=mode,**kw('title','nopt','final','unit'))
     if t=='missing':
         if mode=='word':
             emo=spec.get('emoji',{}); items=[(w,emo.get(w,'💬')) for w,_ in items]

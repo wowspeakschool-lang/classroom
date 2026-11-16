@@ -219,6 +219,9 @@ def game_specs(names,s,vocab,board):
         bg=[s.get('g1','D4ECFF'),s.get('g2','FFE6D0'),s.get('g3','D4F5E6')][i%3]
         if t in ('quiz','pic2word','silhouette','zoom','missing','truefalse'):
             spec={'type':t,'bg':bg}
+            # board есть только у Advanced - только там словарь состоит из фраз
+            if t=='quiz' and s.get('adv_unit') and board is not None:
+                spec['unit']=s['adv_unit']; spec['title']='🎯 '+s['adv_unit'].capitalize()+' hunt!'
             if t=='truefalse' and s.get('tf_template'): spec['template']=s['tf_template']
             out.append(spec)
         elif t=='flip':
