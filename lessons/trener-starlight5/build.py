@@ -2,7 +2,7 @@ import json,glob,os,sys
 D=os.path.dirname(os.path.abspath(__file__))
 mods=[]
 import hashlib
-ONLY=os.environ.get('MODULES','m0,m1,m2').split(',')
+ONLY=os.environ.get('MODULES','m0,m1,m2,m3,m4,m5,m6').split(',')
 for f in sorted(glob.glob(D+"/data/m*.json")):
     if os.path.basename(f)[:-5] not in ONLY: continue
     m=json.load(open(f))
