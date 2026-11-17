@@ -1,0 +1,1271 @@
+{
+ "module": "Module 1 · People around the world",
+ "sections": [
+  {
+   "section": "1 · Начало модуля: Countries & Nationalities",
+   "page": 7,
+   "words": [
+    {
+     "en": "Poland",
+     "ru": "Польша",
+     "src": "vocab"
+    },
+    {
+     "en": "Polish",
+     "ru": "польский; поляк",
+     "src": "vocab"
+    },
+    {
+     "en": "England",
+     "ru": "Англия",
+     "src": "vocab"
+    },
+    {
+     "en": "English",
+     "ru": "английский; англичанин",
+     "src": "vocab"
+    },
+    {
+     "en": "Italy",
+     "ru": "Италия",
+     "src": "vocab"
+    },
+    {
+     "en": "Italian",
+     "ru": "итальянский; итальянец",
+     "src": "vocab"
+    },
+    {
+     "en": "Peru",
+     "ru": "Перу",
+     "src": "vocab"
+    },
+    {
+     "en": "Peruvian",
+     "ru": "перуанский; перуанец",
+     "src": "vocab"
+    },
+    {
+     "en": "Russia",
+     "ru": "Россия",
+     "src": "vocab"
+    },
+    {
+     "en": "Russian",
+     "ru": "русский; россиянин",
+     "src": "vocab"
+    },
+    {
+     "en": "Argentina",
+     "ru": "Аргентина",
+     "src": "vocab"
+    },
+    {
+     "en": "Argentinian",
+     "ru": "аргентинский; аргентинец",
+     "src": "vocab"
+    },
+    {
+     "en": "Mexico",
+     "ru": "Мексика",
+     "src": "vocab"
+    },
+    {
+     "en": "Mexican",
+     "ru": "мексиканский; мексиканец",
+     "src": "vocab"
+    },
+    {
+     "en": "the USA",
+     "ru": "США",
+     "src": "vocab"
+    },
+    {
+     "en": "American",
+     "ru": "американский; американец",
+     "src": "vocab"
+    },
+    {
+     "en": "Ireland",
+     "ru": "Ирландия",
+     "src": "vocab"
+    },
+    {
+     "en": "Irish",
+     "ru": "ирландский; ирландец",
+     "src": "vocab"
+    },
+    {
+     "en": "Brazil",
+     "ru": "Бразилия",
+     "src": "vocab"
+    },
+    {
+     "en": "Brazilian",
+     "ru": "бразильский; бразилец",
+     "src": "vocab"
+    },
+    {
+     "en": "Chile",
+     "ru": "Чили",
+     "src": "vocab"
+    },
+    {
+     "en": "Chilean",
+     "ru": "чилийский; чилиец",
+     "src": "vocab"
+    },
+    {
+     "en": "Spain",
+     "ru": "Испания",
+     "src": "vocab"
+    },
+    {
+     "en": "Spanish",
+     "ru": "испанский; испанец",
+     "src": "vocab"
+    },
+    {
+     "en": "Germany",
+     "ru": "Германия",
+     "src": "vocab"
+    },
+    {
+     "en": "German",
+     "ru": "немецкий; немец",
+     "src": "vocab"
+    },
+    {
+     "en": "France",
+     "ru": "Франция",
+     "src": "vocab"
+    },
+    {
+     "en": "French",
+     "ru": "французский; француз",
+     "src": "vocab"
+    },
+    {
+     "en": "Portugal",
+     "ru": "Португалия",
+     "src": "vocab"
+    },
+    {
+     "en": "Portuguese",
+     "ru": "португальский; португалец",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "1a Sports & Hobbies",
+   "page": 8,
+   "words": [
+    {
+     "en": "horse-riding",
+     "ru": "верховая езда",
+     "src": "vocab"
+    },
+    {
+     "en": "volleyball",
+     "ru": "волейбол",
+     "src": "vocab"
+    },
+    {
+     "en": "photography",
+     "ru": "фотография (увлечение)",
+     "src": "vocab"
+    },
+    {
+     "en": "playing music",
+     "ru": "игра на музыкальных инструментах",
+     "src": "vocab"
+    },
+    {
+     "en": "woodwork",
+     "ru": "работа по дереву",
+     "src": "vocab"
+    },
+    {
+     "en": "reading",
+     "ru": "чтение",
+     "src": "vocab"
+    },
+    {
+     "en": "cycling",
+     "ru": "езда на велосипеде",
+     "src": "vocab"
+    },
+    {
+     "en": "painting",
+     "ru": "рисование красками",
+     "src": "vocab"
+    },
+    {
+     "en": "playing computer games",
+     "ru": "компьютерные игры",
+     "src": "vocab"
+    },
+    {
+     "en": "writing",
+     "ru": "сочинительство, письмо",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "1b Jobs",
+   "page": 10,
+   "words": [
+    {
+     "en": "vet",
+     "ru": "ветеринар",
+     "src": "vocab"
+    },
+    {
+     "en": "astronaut",
+     "ru": "космонавт",
+     "src": "vocab"
+    },
+    {
+     "en": "waiter",
+     "ru": "официант",
+     "src": "vocab"
+    },
+    {
+     "en": "electrician",
+     "ru": "электрик",
+     "src": "vocab"
+    },
+    {
+     "en": "artist",
+     "ru": "художник",
+     "src": "vocab"
+    },
+    {
+     "en": "fire fighter",
+     "ru": "пожарный",
+     "src": "vocab"
+    },
+    {
+     "en": "nurse",
+     "ru": "медсестра",
+     "src": "vocab"
+    },
+    {
+     "en": "architect",
+     "ru": "архитектор",
+     "src": "vocab"
+    },
+    {
+     "en": "pilot",
+     "ru": "пилот, лётчик",
+     "src": "vocab"
+    },
+    {
+     "en": "actress",
+     "ru": "актриса",
+     "src": "vocab"
+    },
+    {
+     "en": "author",
+     "ru": "писатель, автор",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "1b Jobs",
+   "page": 11,
+   "words": [
+    {
+     "en": "new",
+     "ru": "новый",
+     "src": "check"
+    },
+    {
+     "en": "here",
+     "ru": "здесь",
+     "src": "check"
+    },
+    {
+     "en": "what",
+     "ru": "что; какой",
+     "src": "check"
+    },
+    {
+     "en": "subject",
+     "ru": "школьный предмет",
+     "src": "check"
+    },
+    {
+     "en": "literature",
+     "ru": "литература",
+     "src": "check"
+    },
+    {
+     "en": "author",
+     "ru": "писатель, автор",
+     "src": "check"
+    },
+    {
+     "en": "story",
+     "ru": "рассказ, история",
+     "src": "check"
+    },
+    {
+     "en": "full of magic",
+     "ru": "полный волшебства",
+     "src": "check"
+    },
+    {
+     "en": "journey",
+     "ru": "путешествие",
+     "src": "check"
+    },
+    {
+     "en": "dream",
+     "ru": "мечта",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "1c Culture Corner",
+   "page": 12,
+   "words": [
+    {
+     "en": "Monday",
+     "ru": "понедельник",
+     "src": "vocab"
+    },
+    {
+     "en": "Tuesday",
+     "ru": "вторник",
+     "src": "vocab"
+    },
+    {
+     "en": "Wednesday",
+     "ru": "среда",
+     "src": "vocab"
+    },
+    {
+     "en": "Thursday",
+     "ru": "четверг",
+     "src": "vocab"
+    },
+    {
+     "en": "Friday",
+     "ru": "пятница",
+     "src": "vocab"
+    },
+    {
+     "en": "Saturday",
+     "ru": "суббота",
+     "src": "vocab"
+    },
+    {
+     "en": "Sunday",
+     "ru": "воскресенье",
+     "src": "vocab"
+    },
+    {
+     "en": "January",
+     "ru": "январь",
+     "src": "vocab"
+    },
+    {
+     "en": "February",
+     "ru": "февраль",
+     "src": "vocab"
+    },
+    {
+     "en": "March",
+     "ru": "март",
+     "src": "vocab"
+    },
+    {
+     "en": "April",
+     "ru": "апрель",
+     "src": "vocab"
+    },
+    {
+     "en": "May",
+     "ru": "май",
+     "src": "vocab"
+    },
+    {
+     "en": "June",
+     "ru": "июнь",
+     "src": "vocab"
+    },
+    {
+     "en": "July",
+     "ru": "июль",
+     "src": "vocab"
+    },
+    {
+     "en": "August",
+     "ru": "август",
+     "src": "vocab"
+    },
+    {
+     "en": "September",
+     "ru": "сентябрь",
+     "src": "vocab"
+    },
+    {
+     "en": "October",
+     "ru": "октябрь",
+     "src": "vocab"
+    },
+    {
+     "en": "November",
+     "ru": "ноябрь",
+     "src": "vocab"
+    },
+    {
+     "en": "December",
+     "ru": "декабрь",
+     "src": "vocab"
+    },
+    {
+     "en": "symbol",
+     "ru": "символ",
+     "src": "check"
+    },
+    {
+     "en": "cross",
+     "ru": "крест",
+     "src": "check"
+    },
+    {
+     "en": "each",
+     "ru": "каждый",
+     "src": "check"
+    },
+    {
+     "en": "nation",
+     "ru": "нация, народ",
+     "src": "check"
+    },
+    {
+     "en": "except for",
+     "ru": "кроме, за исключением",
+     "src": "check"
+    },
+    {
+     "en": "every",
+     "ru": "каждый",
+     "src": "check"
+    },
+    {
+     "en": "government building",
+     "ru": "правительственное здание",
+     "src": "check"
+    },
+    {
+     "en": "certain",
+     "ru": "определённый",
+     "src": "check"
+    },
+    {
+     "en": "special",
+     "ru": "особый, специальный",
+     "src": "check"
+    },
+    {
+     "en": "holiday",
+     "ru": "праздник",
+     "src": "check"
+    },
+    {
+     "en": "Commonwealth",
+     "ru": "Содружество (наций)",
+     "src": "check"
+    },
+    {
+     "en": "on display",
+     "ru": "выставлен, вывешен",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "1d Everyday English",
+   "page": 13,
+   "words": [
+    {
+     "en": "Excuse me.",
+     "ru": "Извините.",
+     "src": "phrase"
+    },
+    {
+     "en": "Nice to meet you.",
+     "ru": "Приятно познакомиться.",
+     "src": "phrase"
+    },
+    {
+     "en": "Nice to meet you, too.",
+     "ru": "Мне тоже приятно познакомиться.",
+     "src": "phrase"
+    },
+    {
+     "en": "How are you?",
+     "ru": "Как дела?",
+     "src": "phrase"
+    },
+    {
+     "en": "Not bad.",
+     "ru": "Неплохо.",
+     "src": "phrase"
+    },
+    {
+     "en": "And you?",
+     "ru": "А у тебя?",
+     "src": "phrase"
+    },
+    {
+     "en": "I'm OK.",
+     "ru": "Нормально.",
+     "src": "phrase"
+    },
+    {
+     "en": "This is …",
+     "ru": "Это … (знакомьтесь)",
+     "src": "phrase"
+    },
+    {
+     "en": "Pleased to meet you.",
+     "ru": "Рад(а) познакомиться.",
+     "src": "phrase"
+    },
+    {
+     "en": "Bye.",
+     "ru": "Пока.",
+     "src": "phrase"
+    },
+    {
+     "en": "See you later.",
+     "ru": "Увидимся позже.",
+     "src": "phrase"
+    },
+    {
+     "en": "See you.",
+     "ru": "Увидимся.",
+     "src": "phrase"
+    },
+    {
+     "en": "Good morning.",
+     "ru": "Доброе утро.",
+     "src": "phrase"
+    },
+    {
+     "en": "How's it going?",
+     "ru": "Как жизнь?",
+     "src": "phrase"
+    },
+    {
+     "en": "I'm fine, thanks.",
+     "ru": "Хорошо, спасибо.",
+     "src": "phrase"
+    },
+    {
+     "en": "So-so.",
+     "ru": "Так себе.",
+     "src": "phrase"
+    },
+    {
+     "en": "Goodbye.",
+     "ru": "До свидания.",
+     "src": "phrase"
+    },
+    {
+     "en": "Have a nice evening.",
+     "ru": "Хорошего вечера.",
+     "src": "phrase"
+    },
+    {
+     "en": "You too.",
+     "ru": "И тебе тоже.",
+     "src": "phrase"
+    },
+    {
+     "en": "Hi!",
+     "ru": "Привет!",
+     "src": "phrase"
+    },
+    {
+     "en": "How's everything?",
+     "ru": "Как всё?",
+     "src": "phrase"
+    },
+    {
+     "en": "Hello! I'm …",
+     "ru": "Здравствуй! Я …",
+     "src": "phrase"
+    },
+    {
+     "en": "Great.",
+     "ru": "Отлично.",
+     "src": "phrase"
+    },
+    {
+     "en": "Hi! I'm …",
+     "ru": "Привет! Я …",
+     "src": "phrase"
+    },
+    {
+     "en": "Oh, hi. I'm …",
+     "ru": "О, привет. Я …",
+     "src": "phrase"
+    },
+    {
+     "en": "See you tomorrow.",
+     "ru": "До завтра.",
+     "src": "phrase"
+    },
+    {
+     "en": "Take care.",
+     "ru": "Береги себя.",
+     "src": "phrase"
+    }
+   ]
+  },
+  {
+   "section": "1e Appearance",
+   "page": 14,
+   "words": [
+    {
+     "en": "hair",
+     "ru": "волосы",
+     "src": "vocab"
+    },
+    {
+     "en": "fair",
+     "ru": "светлый (о волосах)",
+     "src": "vocab"
+    },
+    {
+     "en": "grey",
+     "ru": "седой",
+     "src": "vocab"
+    },
+    {
+     "en": "brown",
+     "ru": "каштановый",
+     "src": "vocab"
+    },
+    {
+     "en": "dark",
+     "ru": "тёмный",
+     "src": "vocab"
+    },
+    {
+     "en": "short",
+     "ru": "короткий",
+     "src": "vocab"
+    },
+    {
+     "en": "straight",
+     "ru": "прямой",
+     "src": "vocab"
+    },
+    {
+     "en": "long",
+     "ru": "длинный",
+     "src": "vocab"
+    },
+    {
+     "en": "wavy",
+     "ru": "волнистый",
+     "src": "vocab"
+    },
+    {
+     "en": "curly",
+     "ru": "кудрявый",
+     "src": "vocab"
+    },
+    {
+     "en": "head",
+     "ru": "голова",
+     "src": "vocab"
+    },
+    {
+     "en": "face",
+     "ru": "лицо",
+     "src": "vocab"
+    },
+    {
+     "en": "ear",
+     "ru": "ухо",
+     "src": "vocab"
+    },
+    {
+     "en": "eye",
+     "ru": "глаз",
+     "src": "vocab"
+    },
+    {
+     "en": "nose",
+     "ru": "нос",
+     "src": "vocab"
+    },
+    {
+     "en": "cheek",
+     "ru": "щека",
+     "src": "vocab"
+    },
+    {
+     "en": "moustache",
+     "ru": "усы",
+     "src": "vocab"
+    },
+    {
+     "en": "teeth",
+     "ru": "зубы",
+     "src": "vocab"
+    },
+    {
+     "en": "mouth",
+     "ru": "рот",
+     "src": "vocab"
+    },
+    {
+     "en": "beard",
+     "ru": "борода",
+     "src": "vocab"
+    },
+    {
+     "en": "neck",
+     "ru": "шея",
+     "src": "vocab"
+    },
+    {
+     "en": "chin",
+     "ru": "подбородок",
+     "src": "vocab"
+    },
+    {
+     "en": "tongue",
+     "ru": "язык (орган)",
+     "src": "vocab"
+    },
+    {
+     "en": "lips",
+     "ru": "губы",
+     "src": "vocab"
+    },
+    {
+     "en": "thin",
+     "ru": "тонкий (о губах); худой",
+     "src": "vocab"
+    },
+    {
+     "en": "full",
+     "ru": "пухлый (о губах)",
+     "src": "vocab"
+    },
+    {
+     "en": "body",
+     "ru": "тело",
+     "src": "vocab"
+    },
+    {
+     "en": "hand",
+     "ru": "кисть руки",
+     "src": "vocab"
+    },
+    {
+     "en": "arm",
+     "ru": "рука",
+     "src": "vocab"
+    },
+    {
+     "en": "leg",
+     "ru": "нога",
+     "src": "vocab"
+    },
+    {
+     "en": "feet",
+     "ru": "ступни, ноги",
+     "src": "vocab"
+    },
+    {
+     "en": "height",
+     "ru": "рост",
+     "src": "vocab"
+    },
+    {
+     "en": "of medium height",
+     "ru": "среднего роста",
+     "src": "vocab"
+    },
+    {
+     "en": "tall",
+     "ru": "высокий",
+     "src": "vocab"
+    },
+    {
+     "en": "weight",
+     "ru": "вес",
+     "src": "vocab"
+    },
+    {
+     "en": "slim",
+     "ru": "стройный",
+     "src": "vocab"
+    },
+    {
+     "en": "plump",
+     "ru": "полный, пухлый",
+     "src": "vocab"
+    },
+    {
+     "en": "well-built",
+     "ru": "крепкого телосложения",
+     "src": "vocab"
+    },
+    {
+     "en": "fat",
+     "ru": "толстый",
+     "src": "vocab"
+    },
+    {
+     "en": "age",
+     "ru": "возраст",
+     "src": "vocab"
+    },
+    {
+     "en": "young",
+     "ru": "молодой",
+     "src": "vocab"
+    },
+    {
+     "en": "in his early/late twenties",
+     "ru": "ему чуть за двадцать / под тридцать",
+     "src": "vocab"
+    },
+    {
+     "en": "middle-aged",
+     "ru": "средних лет",
+     "src": "vocab"
+    },
+    {
+     "en": "old",
+     "ru": "пожилой, старый",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "1f Games & Leisure",
+   "page": 16,
+   "words": [
+    {
+     "en": "martial arts",
+     "ru": "боевые искусства",
+     "src": "vocab"
+    },
+    {
+     "en": "pole vault",
+     "ru": "прыжки с шестом",
+     "src": "vocab"
+    },
+    {
+     "en": "tennis",
+     "ru": "теннис",
+     "src": "vocab"
+    },
+    {
+     "en": "football",
+     "ru": "футбол",
+     "src": "vocab"
+    },
+    {
+     "en": "surfing",
+     "ru": "сёрфинг",
+     "src": "vocab"
+    },
+    {
+     "en": "cycling",
+     "ru": "велоспорт",
+     "src": "vocab"
+    },
+    {
+     "en": "cricket",
+     "ru": "крикет",
+     "src": "vocab"
+    },
+    {
+     "en": "golf",
+     "ru": "гольф",
+     "src": "vocab"
+    },
+    {
+     "en": "hockey",
+     "ru": "хоккей",
+     "src": "vocab"
+    },
+    {
+     "en": "swimming",
+     "ru": "плавание",
+     "src": "vocab"
+    },
+    {
+     "en": "canoeing",
+     "ru": "гребля на каноэ",
+     "src": "vocab"
+    },
+    {
+     "en": "basketball",
+     "ru": "баскетбол",
+     "src": "vocab"
+    },
+    {
+     "en": "fast",
+     "ru": "быстрый",
+     "src": "check"
+    },
+    {
+     "en": "athlete",
+     "ru": "спортсмен",
+     "src": "check"
+    },
+    {
+     "en": "pole vaulter",
+     "ru": "прыгун с шестом",
+     "src": "check"
+    },
+    {
+     "en": "Olympic gold medal",
+     "ru": "олимпийская золотая медаль",
+     "src": "check"
+    },
+    {
+     "en": "winner",
+     "ru": "победитель",
+     "src": "check"
+    },
+    {
+     "en": "award",
+     "ru": "награда",
+     "src": "check"
+    },
+    {
+     "en": "female",
+     "ru": "женский; женщина",
+     "src": "check"
+    },
+    {
+     "en": "world record",
+     "ru": "мировой рекорд",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "1g Skills",
+   "page": 18,
+   "words": [
+    {
+     "en": "dance",
+     "ru": "танцевать",
+     "src": "vocab"
+    },
+    {
+     "en": "play the guitar",
+     "ru": "играть на гитаре",
+     "src": "vocab"
+    },
+    {
+     "en": "sing",
+     "ru": "петь",
+     "src": "vocab"
+    },
+    {
+     "en": "cook",
+     "ru": "готовить (еду)",
+     "src": "vocab"
+    },
+    {
+     "en": "dive",
+     "ru": "нырять",
+     "src": "vocab"
+    },
+    {
+     "en": "swim",
+     "ru": "плавать",
+     "src": "vocab"
+    },
+    {
+     "en": "ride a bike",
+     "ru": "кататься на велосипеде",
+     "src": "vocab"
+    },
+    {
+     "en": "drive a car",
+     "ru": "водить машину",
+     "src": "vocab"
+    },
+    {
+     "en": "run fast",
+     "ru": "быстро бегать",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "Language Review 1",
+   "page": 21,
+   "words": [
+    {
+     "en": "favourite",
+     "ru": "любимый",
+     "src": "vocab"
+    },
+    {
+     "en": "riding",
+     "ru": "езда верхом (horse riding)",
+     "src": "vocab"
+    },
+    {
+     "en": "tribe",
+     "ru": "племя",
+     "src": "vocab"
+    },
+    {
+     "en": "fighter",
+     "ru": "пожарный (fire fighter)",
+     "src": "vocab"
+    },
+    {
+     "en": "good at",
+     "ru": "хорошо умеющий что-то",
+     "src": "vocab"
+    },
+    {
+     "en": "crosses",
+     "ru": "кресты",
+     "src": "vocab"
+    },
+    {
+     "en": "landmark",
+     "ru": "достопримечательность",
+     "src": "vocab"
+    },
+    {
+     "en": "wavy",
+     "ru": "волнистый",
+     "src": "vocab"
+    },
+    {
+     "en": "dream",
+     "ru": "мечта",
+     "src": "vocab"
+    },
+    {
+     "en": "capital",
+     "ru": "столица",
+     "src": "vocab"
+    },
+    {
+     "en": "middle-aged",
+     "ru": "средних лет",
+     "src": "vocab"
+    },
+    {
+     "en": "fair",
+     "ru": "светлый (о волосах)",
+     "src": "vocab"
+    },
+    {
+     "en": "straight",
+     "ru": "прямой",
+     "src": "vocab"
+    },
+    {
+     "en": "curly",
+     "ru": "кудрявый",
+     "src": "vocab"
+    },
+    {
+     "en": "long",
+     "ru": "длинный",
+     "src": "vocab"
+    },
+    {
+     "en": "fat",
+     "ru": "толстый",
+     "src": "vocab"
+    },
+    {
+     "en": "plump",
+     "ru": "полный",
+     "src": "vocab"
+    },
+    {
+     "en": "thin",
+     "ru": "худой",
+     "src": "vocab"
+    },
+    {
+     "en": "tall",
+     "ru": "высокий",
+     "src": "vocab"
+    },
+    {
+     "en": "short",
+     "ru": "невысокий; короткий",
+     "src": "vocab"
+    },
+    {
+     "en": "old",
+     "ru": "пожилой",
+     "src": "vocab"
+    },
+    {
+     "en": "of medium height",
+     "ru": "среднего роста",
+     "src": "vocab"
+    },
+    {
+     "en": "young",
+     "ru": "молодой",
+     "src": "vocab"
+    },
+    {
+     "en": "slim",
+     "ru": "стройный",
+     "src": "vocab"
+    },
+    {
+     "en": "famous for",
+     "ru": "знаменитый чем-то",
+     "src": "vocab"
+    },
+    {
+     "en": "dark skin",
+     "ru": "тёмная кожа",
+     "src": "vocab"
+    },
+    {
+     "en": "famous landmark",
+     "ru": "знаменитая достопримечательность",
+     "src": "vocab"
+    },
+    {
+     "en": "have a dream",
+     "ru": "мечтать, иметь мечту",
+     "src": "vocab"
+    },
+    {
+     "en": "short curly hair",
+     "ru": "короткие кудрявые волосы",
+     "src": "vocab"
+    },
+    {
+     "en": "long legs",
+     "ru": "длинные ноги",
+     "src": "vocab"
+    },
+    {
+     "en": "wealth and beauty",
+     "ru": "богатство и красота",
+     "src": "vocab"
+    },
+    {
+     "en": "heavy earrings",
+     "ru": "тяжёлые серьги",
+     "src": "vocab"
+    },
+    {
+     "en": "school subject",
+     "ru": "школьный предмет",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "Russia 1 · Gorodky",
+   "page": 24,
+   "words": [
+    {
+     "en": "ancient",
+     "ru": "древний",
+     "src": "check"
+    },
+    {
+     "en": "form",
+     "ru": "вид, разновидность",
+     "src": "check"
+    },
+    {
+     "en": "basic idea",
+     "ru": "основная идея",
+     "src": "check"
+    },
+    {
+     "en": "flat surface",
+     "ru": "ровная поверхность",
+     "src": "check"
+    },
+    {
+     "en": "grass lawn",
+     "ru": "травяная лужайка",
+     "src": "check"
+    },
+    {
+     "en": "town square",
+     "ru": "городская площадь",
+     "src": "check"
+    },
+    {
+     "en": "equipment",
+     "ru": "инвентарь, снаряжение",
+     "src": "check"
+    },
+    {
+     "en": "bat",
+     "ru": "бита",
+     "src": "check"
+    },
+    {
+     "en": "wooden pin",
+     "ru": "деревянная фигура (городок)",
+     "src": "check"
+    },
+    {
+     "en": "rule",
+     "ru": "правило",
+     "src": "check"
+    },
+    {
+     "en": "objective",
+     "ru": "цель",
+     "src": "check"
+    },
+    {
+     "en": "knock",
+     "ru": "сбивать",
+     "src": "check"
+    },
+    {
+     "en": "throw",
+     "ru": "бросок",
+     "src": "check"
+    },
+    {
+     "en": "winner",
+     "ru": "победитель",
+     "src": "check"
+    },
+    {
+     "en": "standing",
+     "ru": "стоящий",
+     "src": "check"
+    }
+   ]
+  }
+ ]
+}

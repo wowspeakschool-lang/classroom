@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тренажёр слов Starlight 5</title>
+<style>
+:root{
+  --bg:#f6f4ef; --card:#ffffff; --ink:#1f2430; --muted:#6b7280; --line:#e5e1d8;
+  --accent:#3b5bdb; --accent-soft:#e7ecff; --ok:#2f9e44; --ok-soft:#e6f6ea; --bad:#e03131; --bad-soft:#fdecec;
+  --gold:#f08c00;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171c; --card:#1f232b; --ink:#eef0f4; --muted:#9aa3b2; --line:#2e333d;
+    --accent:#7c94ff; --accent-soft:#252c47; --ok:#51cf66; --ok-soft:#1e3326; --bad:#ff6b6b; --bad-soft:#3a2224;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15171c; --card:#1f232b; --ink:#eef0f4; --muted:#9aa3b2; --line:#2e333d;
+  --accent:#7c94ff; --accent-soft:#252c47; --ok:#51cf66; --ok-soft:#1e3326; --bad:#ff6b6b; --bad-soft:#3a2224;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:4px 0 2px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:16px}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:10px 14px}
+button:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button.ghost{background:transparent;border-color:transparent;color:var(--muted);padding:6px 8px}
+.top{display:flex;align-items:center;gap:8px;justify-content:space-between;margin-bottom:12px}
+.mod{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden}
+.mod>summary{list-style:none;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer;font-weight:600}
+.mod>summary::-webkit-details-marker{display:none}
+.sec{display:flex;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid var(--line)}
+.sec .name{flex:1;min-width:0}
+.sec .name small{display:block;color:var(--muted);font-weight:400;font-size:13px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-top:6px}
+.bar>i{display:block;height:100%;background:var(--ok)}
+.pill{font-size:13px;color:var(--muted);white-space:nowrap}
+.stage{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;min-height:340px;display:flex;flex-direction:column}
+.progress{display:flex;gap:4px;margin-bottom:14px}
+.progress i{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.progress i.done{background:var(--ok)} .progress i.miss{background:var(--bad)} .progress i.cur{background:var(--accent)}
+.task{color:var(--muted);font-size:14px;margin-bottom:6px}
+.word{font-size:34px;font-weight:700;text-align:center;margin:18px 0 6px;word-break:break-word}
+.word.ru{font-size:28px}
+.hint{text-align:center;color:var(--muted);min-height:24px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}
+@media (max-width:480px){.opts{grid-template-columns:1fr}}
+.opts button{padding:14px;text-align:left;font-size:18px}
+.opts button.ok{background:var(--ok-soft);border-color:var(--ok)}
+.opts button.bad{background:var(--bad-soft);border-color:var(--bad)}
+.say{display:block;margin:0 auto;font-size:28px;border-radius:50%;width:64px;height:64px;padding:0}
+.flip{flex:1;display:flex;flex-direction:column;justify-content:center;cursor:pointer;user-select:none}
+.row{display:flex;gap:10px;margin-top:auto}
+.row>button{flex:1;padding:14px}
+input.type{font:inherit;font-size:24px;width:100%;padding:12px 14px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);text-align:center}
+input.type.ok{border-color:var(--ok)} input.type.bad{border-color:var(--bad)}
+.letters{text-align:center;font-family:ui-monospace,monospace;letter-spacing:4px;color:var(--muted);margin:8px 0}
+.fb{text-align:center;min-height:28px;margin:10px 0;font-weight:600}
+.fb.ok{color:var(--ok)} .fb.bad{color:var(--bad)}
+.result{text-align:center}
+.result .big{font-size:48px;margin:10px 0}
+.list{margin-top:14px;text-align:left}
+.list div{padding:6px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+@media (max-width:480px){.modes{grid-template-columns:1fr}}
+.modes button{text-align:left;padding:14px}
+.modes button small{display:block;color:var(--muted);font-size:13px}
+.vocab{margin-top:10px;font-size:15px}
+.vocab div{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--line)}
+.vocab span:last-child{color:var(--muted);text-align:right}
+.star{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+const DATA = [{"module": "Starter unit", "sections": [{"section": "Asking about names & addresses", "words": [{"en": "What's your name?", "ru": "Как тебя зовут?"}, {"en": "And your surname?", "ru": "А твоя фамилия?"}, {"en": "How do you spell it?", "ru": "Как это пишется (по буквам)?"}, {"en": "What's your address?", "ru": "Какой у тебя адрес?"}, {"en": "And your telephone number?", "ru": "А твой номер телефона?"}]}, {"section": "Cardinal numbers", "words": [{"en": "one", "ru": "один"}, {"en": "two", "ru": "два"}, {"en": "three", "ru": "три"}, {"en": "four", "ru": "четыре"}, {"en": "five", "ru": "пять"}, {"en": "six", "ru": "шесть"}, {"en": "seven", "ru": "семь"}, {"en": "eight", "ru": "восемь"}, {"en": "nine", "ru": "девять"}, {"en": "ten", "ru": "десять"}, {"en": "eleven", "ru": "одиннадцать"}, {"en": "twelve", "ru": "двенадцать"}, {"en": "thirteen", "ru": "тринадцать"}, {"en": "fourteen", "ru": "четырнадцать"}, {"en": "fifteen", "ru": "пятнадцать"}, {"en": "sixteen", "ru": "шестнадцать"}, {"en": "seventeen", "ru": "семнадцать"}, {"en": "eighteen", "ru": "восемнадцать"}, {"en": "nineteen", "ru": "девятнадцать"}, {"en": "twenty", "ru": "двадцать"}, {"en": "twenty-one", "ru": "двадцать один"}, {"en": "thirty", "ru": "тридцать"}, {"en": "forty", "ru": "сорок"}, {"en": "fifty", "ru": "пятьдесят"}, {"en": "sixty", "ru": "шестьдесят"}, {"en": "seventy", "ru": "семьдесят"}, {"en": "eighty", "ru": "восемьдесят"}, {"en": "ninety", "ru": "девяносто"}, {"en": "a/one hundred", "ru": "сто"}]}, {"section": "Ordinal numbers", "words": [{"en": "first", "ru": "первый"}, {"en": "second", "ru": "второй"}, {"en": "third", "ru": "третий"}, {"en": "fourth", "ru": "четвёртый"}, {"en": "fifth", "ru": "пятый"}, {"en": "sixth", "ru": "шестой"}, {"en": "seventh", "ru": "седьмой"}, {"en": "eighth", "ru": "восьмой"}, {"en": "ninth", "ru": "девятый"}, {"en": "tenth", "ru": "десятый"}, {"en": "eleventh", "ru": "одиннадцатый"}, {"en": "twelfth", "ru": "двенадцатый"}]}, {"section": "School Subjects", "words": [{"en": "Maths", "ru": "математика"}, {"en": "History", "ru": "история"}, {"en": "English", "ru": "английский язык"}, {"en": "Art", "ru": "рисование, ИЗО"}, {"en": "Geography", "ru": "география"}, {"en": "Music", "ru": "музыка"}, {"en": "Science", "ru": "естествознание"}, {"en": "ICT", "ru": "информатика"}, {"en": "PE", "ru": "физкультура"}]}, {"section": "School things", "words": [{"en": "atlas", "ru": "атлас"}, {"en": "notebook", "ru": "тетрадь"}, {"en": "folder", "ru": "папка"}, {"en": "briefcase", "ru": "портфель (для бумаг)"}, {"en": "eraser", "ru": "ластик"}, {"en": "book", "ru": "книга"}, {"en": "schoolbag", "ru": "школьная сумка, рюкзак"}, {"en": "ruler", "ru": "линейка"}, {"en": "pencil case", "ru": "пенал"}]}, {"section": "Colours", "words": [{"en": "red", "ru": "красный"}, {"en": "blue", "ru": "синий"}, {"en": "green", "ru": "зелёный"}, {"en": "yellow", "ru": "жёлтый"}, {"en": "orange", "ru": "оранжевый"}, {"en": "brown", "ru": "коричневый"}, {"en": "black", "ru": "чёрный"}, {"en": "white", "ru": "белый"}, {"en": "grey", "ru": "серый"}, {"en": "pink", "ru": "розовый"}, {"en": "purple", "ru": "фиолетовый"}, {"en": "What's this?", "ru": "Что это?"}, {"en": "What colour is it?", "ru": "Какого это цвета?"}, {"en": "How old are you?", "ru": "Сколько тебе лет?"}, {"en": "What's your favourite colour?", "ru": "Какой твой любимый цвет?"}]}]}, {"module": "Module 1 · People around the world", "sections": [{"section": "1 · Начало модуля: Countries & Nationalities", "words": [{"en": "Poland", "ru": "Польша"}, {"en": "Polish", "ru": "польский; поляк"}, {"en": "England", "ru": "Англия"}, {"en": "English", "ru": "английский; англичанин"}, {"en": "Italy", "ru": "Италия"}, {"en": "Italian", "ru": "итальянский; итальянец"}, {"en": "Peru", "ru": "Перу"}, {"en": "Peruvian", "ru": "перуанский; перуанец"}, {"en": "Russia", "ru": "Россия"}, {"en": "Russian", "ru": "русский; россиянин"}, {"en": "Argentina", "ru": "Аргентина"}, {"en": "Argentinian", "ru": "аргентинский; аргентинец"}, {"en": "Mexico", "ru": "Мексика"}, {"en": "Mexican", "ru": "мексиканский; мексиканец"}, {"en": "the USA", "ru": "США"}, {"en": "American", "ru": "американский; американец"}, {"en": "Ireland", "ru": "Ирландия"}, {"en": "Irish", "ru": "ирландский; ирландец"}, {"en": "Brazil", "ru": "Бразилия"}, {"en": "Brazilian", "ru": "бразильский; бразилец"}, {"en": "Chile", "ru": "Чили"}, {"en": "Chilean", "ru": "чилийский; чилиец"}, {"en": "Spain", "ru": "Испания"}, {"en": "Spanish", "ru": "испанский; испанец"}, {"en": "Germany", "ru": "Германия"}, {"en": "German", "ru": "немецкий; немец"}, {"en": "France", "ru": "Франция"}, {"en": "French", "ru": "французский; француз"}, {"en": "Portugal", "ru": "Португалия"}, {"en": "Portuguese", "ru": "португальский; португалец"}]}, {"section": "1a Sports & Hobbies", "words": [{"en": "horse-riding", "ru": "верховая езда"}, {"en": "volleyball", "ru": "волейбол"}, {"en": "photography", "ru": "фотография (увлечение)"}, {"en": "playing music", "ru": "игра на музыкальных инструментах"}, {"en": "woodwork", "ru": "работа по дереву"}, {"en": "reading", "ru": "чтение"}, {"en": "cycling", "ru": "езда на велосипеде"}, {"en": "painting", "ru": "рисование красками"}, {"en": "playing computer games", "ru": "компьютерные игры"}, {"en": "writing", "ru": "сочинительство, письмо"}]}, {"section": "1b Jobs", "words": [{"en": "vet", "ru": "ветеринар"}, {"en": "astronaut", "ru": "космонавт"}, {"en": "waiter", "ru": "официант"}, {"en": "electrician", "ru": "электрик"}, {"en": "artist", "ru": "художник"}, {"en": "fire fighter", "ru": "пожарный"}, {"en": "nurse", "ru": "медсестра"}, {"en": "architect", "ru": "архитектор"}, {"en": "pilot", "ru": "пилот, лётчик"}, {"en": "actress", "ru": "актриса"}, {"en": "author", "ru": "писатель, автор"}, {"en": "new", "ru": "новый"}, {"en": "here", "ru": "здесь"}, {"en": "what", "ru": "что; какой"}, {"en": "subject", "ru": "школьный предмет"}, {"en": "literature", "ru": "литература"}, {"en": "story", "ru": "рассказ, история"}, {"en": "full of magic", "ru": "полный волшебства"}, {"en": "journey", "ru": "путешествие"}, {"en": "dream", "ru": "мечта"}]}, {"section": "1c Culture Corner", "words": [{"en": "Monday", "ru": "понедельник"}, {"en": "Tuesday", "ru": "вторник"}, {"en": "Wednesday", "ru": "среда"}, {"en": "Thursday", "ru": "четверг"}, {"en": "Friday", "ru": "пятница"}, {"en": "Saturday", "ru": "суббота"}, {"en": "Sunday", "ru": "воскресенье"}, {"en": "January", "ru": "январь"}, {"en": "February", "ru": "февраль"}, {"en": "March", "ru": "март"}, {"en": "April", "ru": "апрель"}, {"en": "May", "ru": "май"}, {"en": "June", "ru": "июнь"}, {"en": "July", "ru": "июль"}, {"en": "August", "ru": "август"}, {"en": "September", "ru": "сентябрь"}, {"en": "October", "ru": "октябрь"}, {"en": "November", "ru": "ноябрь"}, {"en": "December", "ru": "декабрь"}, {"en": "symbol", "ru": "символ"}, {"en": "cross", "ru": "крест"}, {"en": "each", "ru": "каждый"}, {"en": "nation", "ru": "нация, народ"}, {"en": "except for", "ru": "кроме, за исключением"}, {"en": "every", "ru": "каждый"}, {"en": "government building", "ru": "правительственное здание"}, {"en": "certain", "ru": "определённый"}, {"en": "special", "ru": "особый, специальный"}, {"en": "holiday", "ru": "праздник"}, {"en": "Commonwealth", "ru": "Содружество (наций)"}, {"en": "on display", "ru": "выставлен, вывешен"}]}, {"section": "1d Everyday English", "words": [{"en": "Excuse me.", "ru": "Извините."}, {"en": "Nice to meet you.", "ru": "Приятно познакомиться."}, {"en": "Nice to meet you, too.", "ru": "Мне тоже приятно познакомиться."}, {"en": "How are you?", "ru": "Как дела?"}, {"en": "Not bad.", "ru": "Неплохо."}, {"en": "And you?", "ru": "А у тебя?"}, {"en": "I'm OK.", "ru": "Нормально."}, {"en": "This is …", "ru": "Это … (знакомьтесь)"}, {"en": "Pleased to meet you.", "ru": "Рад(а) познакомиться."}, {"en": "Bye.", "ru": "Пока."}, {"en": "See you later.", "ru": "Увидимся позже."}, {"en": "See you.", "ru": "Увидимся."}, {"en": "Good morning.", "ru": "Доброе утро."}, {"en": "How's it going?", "ru": "Как жизнь?"}, {"en": "I'm fine, thanks.", "ru": "Хорошо, спасибо."}, {"en": "So-so.", "ru": "Так себе."}, {"en": "Goodbye.", "ru": "До свидания."}, {"en": "Have a nice evening.", "ru": "Хорошего вечера."}, {"en": "You too.", "ru": "И тебе тоже."}, {"en": "Hi!", "ru": "Привет!"}, {"en": "How's everything?", "ru": "Как всё?"}, {"en": "Hello! I'm …", "ru": "Здравствуй! Я …"}, {"en": "Great.", "ru": "Отлично."}, {"en": "Hi! I'm …", "ru": "Привет! Я …"}, {"en": "Oh, hi. I'm …", "ru": "О, привет. Я …"}, {"en": "See you tomorrow.", "ru": "До завтра."}, {"en": "Take care.", "ru": "Береги себя."}]}, {"section": "1e Appearance", "words": [{"en": "hair", "ru": "волосы"}, {"en": "fair", "ru": "светлый (о волосах)"}, {"en": "grey", "ru": "седой"}, {"en": "brown", "ru": "каштановый"}, {"en": "dark", "ru": "тёмный"}, {"en": "short", "ru": "короткий"}, {"en": "straight", "ru": "прямой"}, {"en": "long", "ru": "длинный"}, {"en": "wavy", "ru": "волнистый"}, {"en": "curly", "ru": "кудрявый"}, {"en": "head", "ru": "голова"}, {"en": "face", "ru": "лицо"}, {"en": "ear", "ru": "ухо"}, {"en": "eye", "ru": "глаз"}, {"en": "nose", "ru": "нос"}, {"en": "cheek", "ru": "щека"}, {"en": "moustache", "ru": "усы"}, {"en": "teeth", "ru": "зубы"}, {"en": "mouth", "ru": "рот"}, {"en": "beard", "ru": "борода"}, {"en": "neck", "ru": "шея"}, {"en": "chin", "ru": "подбородок"}, {"en": "tongue", "ru": "язык (орган)"}, {"en": "lips", "ru": "губы"}, {"en": "thin", "ru": "тонкий (о губах); худой"}, {"en": "full", "ru": "пухлый (о губах)"}, {"en": "body", "ru": "тело"}, {"en": "hand", "ru": "кисть руки"}, {"en": "arm", "ru": "рука"}, {"en": "leg", "ru": "нога"}, {"en": "feet", "ru": "ступни, ноги"}, {"en": "height", "ru": "рост"}, {"en": "of medium height", "ru": "среднего роста"}, {"en": "tall", "ru": "высокий"}, {"en": "weight", "ru": "вес"}, {"en": "slim", "ru": "стройный"}, {"en": "plump", "ru": "полный, пухлый"}, {"en": "well-built", "ru": "крепкого телосложения"}, {"en": "fat", "ru": "толстый"}, {"en": "age", "ru": "возраст"}, {"en": "young", "ru": "молодой"}, {"en": "in his early/late twenties", "ru": "ему чуть за двадцать / под тридцать"}, {"en": "middle-aged", "ru": "средних лет"}, {"en": "old", "ru": "пожилой, старый"}]}, {"section": "1f Games & Leisure", "words": [{"en": "martial arts", "ru": "боевые искусства"}, {"en": "pole vault", "ru": "прыжки с шестом"}, {"en": "tennis", "ru": "теннис"}, {"en": "football", "ru": "футбол"}, {"en": "surfing", "ru": "сёрфинг"}, {"en": "cycling", "ru": "велоспорт"}, {"en": "cricket", "ru": "крикет"}, {"en": "golf", "ru": "гольф"}, {"en": "hockey", "ru": "хоккей"}, {"en": "swimming", "ru": "плавание"}, {"en": "canoeing", "ru": "гребля на каноэ"}, {"en": "basketball", "ru": "баскетбол"}, {"en": "fast", "ru": "быстрый"}, {"en": "athlete", "ru": "спортсмен"}, {"en": "pole vaulter", "ru": "прыгун с шестом"}, {"en": "Olympic gold medal", "ru": "олимпийская золотая медаль"}, {"en": "winner", "ru": "победитель"}, {"en": "award", "ru": "награда"}, {"en": "female", "ru": "женский; женщина"}, {"en": "world record", "ru": "мировой рекорд"}]}, {"section": "1g Skills", "words": [{"en": "dance", "ru": "танцевать"}, {"en": "play the guitar", "ru": "играть на гитаре"}, {"en": "sing", "ru": "петь"}, {"en": "cook", "ru": "готовить (еду)"}, {"en": "dive", "ru": "нырять"}, {"en": "swim", "ru": "плавать"}, {"en": "ride a bike", "ru": "кататься на велосипеде"}, {"en": "drive a car", "ru": "водить машину"}, {"en": "run fast", "ru": "быстро бегать"}]}, {"section": "Language Review 1", "words": [{"en": "favourite", "ru": "любимый"}, {"en": "riding", "ru": "езда верхом (horse riding)"}, {"en": "tribe", "ru": "племя"}, {"en": "fighter", "ru": "пожарный (fire fighter)"}, {"en": "good at", "ru": "хорошо умеющий что-то"}, {"en": "crosses", "ru": "кресты"}, {"en": "landmark", "ru": "достопримечательность"}, {"en": "wavy", "ru": "волнистый"}, {"en": "dream", "ru": "мечта"}, {"en": "capital", "ru": "столица"}, {"en": "middle-aged", "ru": "средних лет"}, {"en": "fair", "ru": "светлый (о волосах)"}, {"en": "straight", "ru": "прямой"}, {"en": "curly", "ru": "кудрявый"}, {"en": "long", "ru": "длинный"}, {"en": "fat", "ru": "толстый"}, {"en": "plump", "ru": "полный"}, {"en": "thin", "ru": "худой"}, {"en": "tall", "ru": "высокий"}, {"en": "short", "ru": "невысокий; короткий"}, {"en": "old", "ru": "пожилой"}, {"en": "of medium height", "ru": "среднего роста"}, {"en": "young", "ru": "молодой"}, {"en": "slim", "ru": "стройный"}, {"en": "famous for", "ru": "знаменитый чем-то"}, {"en": "dark skin", "ru": "тёмная кожа"}, {"en": "famous landmark", "ru": "знаменитая достопримечательность"}, {"en": "have a dream", "ru": "мечтать, иметь мечту"}, {"en": "short curly hair", "ru": "короткие кудрявые волосы"}, {"en": "long legs", "ru": "длинные ноги"}, {"en": "wealth and beauty", "ru": "богатство и красота"}, {"en": "heavy earrings", "ru": "тяжёлые серьги"}, {"en": "school subject", "ru": "школьный предмет"}]}, {"section": "Russia 1 · Gorodky", "words": [{"en": "ancient", "ru": "древний"}, {"en": "form", "ru": "вид, разновидность"}, {"en": "basic idea", "ru": "основная идея"}, {"en": "flat surface", "ru": "ровная поверхность"}, {"en": "grass lawn", "ru": "травяная лужайка"}, {"en": "town square", "ru": "городская площадь"}, {"en": "equipment", "ru": "инвентарь, снаряжение"}, {"en": "bat", "ru": "бита"}, {"en": "wooden pin", "ru": "деревянная фигура (городок)"}, {"en": "rule", "ru": "правило"}, {"en": "objective", "ru": "цель"}, {"en": "knock", "ru": "сбивать"}, {"en": "throw", "ru": "бросок"}, {"en": "winner", "ru": "победитель"}, {"en": "standing", "ru": "стоящий"}]}]}];
+const AUDIO = {"what's your name?": "37bef746dd42.mp3", "and your surname?": "0a15ebe9dd07.mp3", "how do you spell it?": "616b67c0afd7.mp3", "what's your address?": "a347ae975138.mp3", "and your telephone number?": "ceb2f4e68dad.mp3", "one": "f97c5d29941b.mp3", "two": "b8a9f715dbb6.mp3", "three": "35d6d33467aa.mp3", "four": "8cbad96aced4.mp3", "five": "30056e1cab7a.mp3", "six": "f52b5e449a23.mp3", "seven": "bb3aec0fdcdb.mp3", "eight": "24d27c169c2c.mp3", "nine": "c785e1ed2950.mp3", "ten": "b1b9a972ccd8.mp3", "eleven": "9c8454ddf7aa.mp3", "twelve": "15f6f8dc0365.mp3", "thirteen": "422ecc084f24.mp3", "fourteen": "279e962ea623.mp3", "fifteen": "92a2132e0190.mp3", "sixteen": "bd2c775d9eaf.mp3", "seventeen": "2e457d2f9f38.mp3", "eighteen": "2cbdaf9ce47a.mp3", "nineteen": "1d56cec552bf.mp3", "twenty": "ab389edaabf8.mp3", "twenty-one": "8602aa6a4cae.mp3", "thirty": "1a3161e2ddd0.mp3", "forty": "2b54fd1b5553.mp3", "fifty": "97a9bccc3dd6.mp3", "sixty": "cd0dd38642b5.mp3", "seventy": "5456a19d6c11.mp3", "eighty": "b82bb8f7ebdd.mp3", "ninety": "2a08e96cadfb.mp3", "a/one hundred": "01d6a717daa1.mp3", "first": "8b04d5e3775d.mp3", "second": "a9f0e61a137d.mp3", "third": "dd5c8bf51558.mp3", "fourth": "c0759f241649.mp3", "fifth": "0883a6520e6e.mp3", "sixth": "93c38fcf0d20.mp3", "seventh": "5098d245aa91.mp3", "eighth": "a76a3a8b8cba.mp3", "ninth": "ed971f9f1ea9.mp3", "tenth": "4758950de9a0.mp3", "eleventh": "ff983aca9bcd.mp3", "twelfth": "0e1ac824433f.mp3", "maths": "d939e7a6b17e.mp3", "history": "3cd15f8f2940.mp3", "english": "ba0a6ddd94c7.mp3", "art": "2c5f64ab07cc.mp3", "geography": "996dfb007ba9.mp3", "music": "18d676991926.mp3", "science": "fb5c7f9bb4b3.mp3", "ict": "a7304e71e071.mp3", "pe": "dd07de856139.mp3", "atlas": "5c59736b84cb.mp3", "notebook": "fb5d1b4a2312.mp3", "folder": "851148b4fd8f.mp3", "briefcase": "ec8eb7073b6c.mp3", "eraser": "91e9b37f5877.mp3", "book": "821f03288846.mp3", "schoolbag": "1d099fe8cd91.mp3", "ruler": "5d87d3b06581.mp3", "pencil case": "24f7f67a6123.mp3", "red": "bda9643ac660.mp3", "blue": "48d6215903df.mp3", "green": "9f27410725ab.mp3", "yellow": "d487dd0b55df.mp3", "orange": "fe01d67a002d.mp3", "brown": "6ff47afa5dc7.mp3", "black": "1ffd9e753c80.mp3", "white": "d508fe45ceca.mp3", "grey": "ca50000a180a.mp3", "pink": "4a0b0dcedd48.mp3", "purple": "bb7aedfa6100.mp3", "what's this?": "5ff900f4cee6.mp3", "what colour is it?": "83126c8e86d8.mp3", "how old are you?": "a21abfc2c5cc.mp3", "what's your favourite colour?": "6f1c4a0f78f2.mp3", "poland": "6f08c5ddcdd0.mp3", "polish": "60ee0bc62638.mp3", "england": "f48861ca24e2.mp3", "italy": "bab4ac375ada.mp3", "italian": "2267860f043b.mp3", "peru": "32e8419a7ecb.mp3", "peruvian": "4d28ccdb6425.mp3", "russia": "1c625cc86f82.mp3", "russian": "11eb6dd2f9dc.mp3", "argentina": "2a52adc7b1da.mp3", "argentinian": "50c6d06baa23.mp3", "mexico": "4edfc924721a.mp3", "mexican": "0195dffd2c99.mp3", "the usa": "516b0a937b3f.mp3", "american": "7c994c3fb728.mp3", "ireland": "a66f852274a4.mp3", "irish": "25c01ee98de2.mp3", "brazil": "6e5fa4d9c48c.mp3", "brazilian": "cd94ad93bf19.mp3", "chile": "fd317045cbdc.mp3", "chilean": "a50369c8ed9b.mp3", "spain": "1747d4b2dd4b.mp3", "spanish": "4757b7df2140.mp3", "germany": "28ef36b35ae8.mp3", "german": "a6d414ac4f29.mp3", "france": "e165d4f2174b.mp3", "french": "64e12ab6aa0d.mp3", "portugal": "ae0eea6eb6d6.mp3", "portuguese": "f380785d1349.mp3", "horse-riding": "f1e1b7f58914.mp3", "volleyball": "91111fb1f8b0.mp3", "photography": "1b2072547afb.mp3", "playing music": "275d4128be9c.mp3", "woodwork": "c7317c445389.mp3", "reading": "eceadc1d40ce.mp3", "cycling": "190e678e13b4.mp3", "painting": "6a7c1b1d588c.mp3", "playing computer games": "5ef69afa5119.mp3", "writing": "1cea5345d284.mp3", "vet": "2fe585b23299.mp3", "astronaut": "901d32488aa7.mp3", "waiter": "f64cff138020.mp3", "electrician": "f122aeec44e4.mp3", "artist": "0441f9e2d94c.mp3", "fire fighter": "9c00d42793a4.mp3", "nurse": "0701aa317da5.mp3", "architect": "618f65b39a51.mp3", "pilot": "a3452f94738c.mp3", "actress": "d109f71f89b9.mp3", "author": "02bd92faa38a.mp3", "new": "22af645d1859.mp3", "here": "6c92285fa6d3.mp3", "what": "4a2028eceac5.mp3", "subject": "b5e3374e43f6.mp3", "literature": "7c5bd03b4517.mp3", "story": "bec670e5a554.mp3", "full of magic": "6ea1da2da608.mp3", "journey": "98dc0157e90a.mp3", "dream": "8812662dcf3e.mp3", "monday": "944ba223a5c1.mp3", "tuesday": "1a31a6f65cc9.mp3", "wednesday": "aae446086f8e.mp3", "thursday": "c395246f710b.mp3", "friday": "f6f7fec07f37.mp3", "saturday": "6036c3d913f4.mp3", "sunday": "787c74a2e618.mp3", "january": "467b6140fe3b.mp3", "february": "8eb8e307a6d6.mp3", "march": "4061838f4395.mp3", "april": "37d153a06c79.mp3", "may": "9a4b6f884971.mp3", "june": "11501255f177.mp3", "july": "3785a4f12840.mp3", "august": "61a590f1b9b5.mp3", "september": "110cea74cf52.mp3", "october": "e60a95f3f443.mp3", "november": "4d04cedd6d05.mp3", "december": "f962bed56166.mp3", "symbol": "97bff26855a8.mp3", "cross": "22aadb26447d.mp3", "each": "933dd8674c56.mp3", "nation": "78b6367af86e.mp3", "except for": "fb9a9ed97eef.mp3", "every": "83ab982dd084.mp3", "government building": "e2655180fc8d.mp3", "certain": "efe6b2c2589e.mp3", "special": "0bd6506986ec.mp3", "holiday": "79d8e340812f.mp3", "commonwealth": "ac131390178e.mp3", "on display": "7e80f47f2a3e.mp3", "excuse me.": "7d9d41611169.mp3", "nice to meet you.": "149e3482727d.mp3", "nice to meet you, too.": "a8f296c1c52d.mp3", "how are you?": "35179a54ea58.mp3", "not bad.": "d1d3d47c3409.mp3", "and you?": "785f11bb3d38.mp3", "i'm ok.": "a1d5c776c545.mp3", "this is …": "728fb3a71263.mp3", "pleased to meet you.": "ccadc0f779eb.mp3", "bye.": "803dc11589ab.mp3", "see you later.": "cf3aed8c4842.mp3", "see you.": "957269fe6371.mp3", "good morning.": "5f55bae69dd6.mp3", "how's it going?": "bbe7ad8bed5a.mp3", "i'm fine, thanks.": "216faef75a13.mp3", "so-so.": "4caf90be772e.mp3", "goodbye.": "c4a6f4d5f3b1.mp3", "have a nice evening.": "cd25cfa747f9.mp3", "you too.": "ebe81fd003f6.mp3", "hi!": "aff97160474a.mp3", "how's everything?": "fb69f7d80f50.mp3", "hello! i'm …": "86937eb4d012.mp3", "great.": "15461b2fd9c8.mp3", "hi! i'm …": "755f17e359f5.mp3", "oh, hi. i'm …": "d18dfbfad78f.mp3", "see you tomorrow.": "df60a5bedcc5.mp3", "take care.": "42224ccd5782.mp3", "hair": "2c5ca38849d1.mp3", "fair": "f4121a5aa2e2.mp3", "dark": "a82fd95db10f.mp3", "short": "4f09daa9d95b.mp3", "straight": "3a7ec495eedb.mp3", "long": "0f5264038205.mp3", "wavy": "d6aed2e2d1b7.mp3", "curly": "d8000efdcdd3.mp3", "head": "96e89a298e0a.mp3", "face": "d5ca322453f2.mp3", "ear": "d8ff99616fc9.mp3", "eye": "f19bd0844e53.mp3", "nose": "41d1de28e96d.mp3", "cheek": "af238f7fa55b.mp3", "moustache": "5e1aecf150c3.mp3", "teeth": "1e5c15180cbd.mp3", "mouth": "cb5786412bec.mp3", "beard": "d8355948568f.mp3", "neck": "45fe7e5529d2.mp3", "chin": "87fa4eaaf369.mp3", "tongue": "cc99541ff106.mp3", "lips": "f6e924595f10.mp3", "thin": "36ea88c42525.mp3", "full": "e9dc924f238f.mp3", "body": "841a2d689ad8.mp3", "hand": "573ce5969e98.mp3", "arm": "f926b3e222d7.mp3", "leg": "4e1df3d25669.mp3", "feet": "e03f9063484f.mp3", "height": "b435e227d5dd.mp3", "of medium height": "27e6310d6fed.mp3", "tall": "6ce1a133fa63.mp3", "weight": "7edabf994b76.mp3", "slim": "c6646e2ff255.mp3", "plump": "db12706ed613.mp3", "well-built": "4a45df83164e.mp3", "fat": "0d8dc086e16e.mp3", "age": "7d637d275668.mp3", "young": "f6182f0359f7.mp3", "in his early/late twenties": "ca30c8d7eba5.mp3", "middle-aged": "cb5035014be6.mp3", "old": "149603e6c035.mp3", "martial arts": "58316f4550a0.mp3", "pole vault": "a8967628bb48.mp3", "tennis": "1fbfb23351e3.mp3", "football": "37b4e2d82900.mp3", "surfing": "b94f90bac6b3.mp3", "cricket": "247184f5fcf8.mp3", "golf": "c6cf642b8f1c.mp3", "hockey": "df0349ce110b.mp3", "swimming": "f853b10af73a.mp3", "canoeing": "3f02ea2dd38e.mp3", "basketball": "d0199f51d272.mp3", "fast": "31d4541b8e92.mp3", "athlete": "610d8f7b72ab.mp3", "pole vaulter": "410972d974f4.mp3", "olympic gold medal": "850cdc9ef8c9.mp3", "winner": "978f6f608df5.mp3", "award": "9550485869d1.mp3", "female": "273b9ae535de.mp3", "world record": "958eb2dbbaaa.mp3", "dance": "3355d92c04a3.mp3", "play the guitar": "c003c39dc46c.mp3", "sing": "db853ec3ecf7.mp3", "cook": "e3e90fd6d2a7.mp3", "dive": "b9f5bcd98fe1.mp3", "swim": "539125fdf85b.mp3", "ride a bike": "8247125ab12a.mp3", "drive a car": "caf619851368.mp3", "run fast": "7a58d747772c.mp3", "favourite": "914b0d3f5a30.mp3", "riding": "1dd0bfb9b6de.mp3", "tribe": "862ad4cbad0b.mp3", "fighter": "d652ff463097.mp3", "good at": "142b5e37327e.mp3", "crosses": "21b3114d2a08.mp3", "landmark": "cfe0c066bd91.mp3", "capital": "27f08504c8e2.mp3", "famous for": "64b804948e07.mp3", "dark skin": "cf36f0e4753f.mp3", "famous landmark": "b610bd4d4e0a.mp3", "have a dream": "e614feefdbbf.mp3", "short curly hair": "5f7485e565e5.mp3", "long legs": "0d2c59af01b0.mp3", "wealth and beauty": "4bab347c3346.mp3", "heavy earrings": "829c43ef44b9.mp3", "school subject": "83efb9ceb420.mp3", "ancient": "432c5afdb3d9.mp3", "form": "3fcdb73d36d5.mp3", "basic idea": "b1985ec1a12a.mp3", "flat surface": "5efab56174b3.mp3", "grass lawn": "ffc231b52b87.mp3", "town square": "4d10acd144e5.mp3", "equipment": "d334616758f1.mp3", "bat": "5f3f4681121b.mp3", "wooden pin": "d5ea842f71c5.mp3", "rule": "981c1e7b3795.mp3", "objective": "205360f460f4.mp3", "knock": "4be17d184b54.mp3", "throw": "959b7175f884.mp3", "standing": "eeeaea9366c4.mp3"};
+
+/* ---------- хранение прогресса ---------- */
+const KEY = 'starlight5_trener_v1';
+let store = {};
+try { store = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { store = {}; }
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e){} }
+// уровень слова 0..5 (ящики Лейтнера); 5 — выучено
+function wid(w){ return w.en.toLowerCase() + '|' + w.ru; }
+function lvl(w){ return (store[wid(w)] || {l:0}).l; }
+function setLvl(w, ok){
+  const s = store[wid(w)] || {l:0, seen:0};
+  s.seen = (s.seen||0) + 1;
+  s.l = ok ? Math.min(5, s.l + 1) : Math.max(0, s.l - 2);
+  s.t = Date.now();
+  store[wid(w)] = s; save();
+}
+
+/* ---------- озвучка ---------- */
+let voice = null;
+function pickVoice(){
+  const vs = speechSynthesis.getVoices();
+  voice = vs.find(v=>/en-GB/i.test(v.lang)) || vs.find(v=>/^en/i.test(v.lang)) || null;
+}
+if ('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+let player = null;
+function sayTTS(text){
+  if (!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text.replace(/[()…\/]/g,' '));
+  u.lang = 'en-GB'; if (voice) u.voice = voice; u.rate = 0.85;
+  speechSynthesis.speak(u);
+}
+function say(text){
+  const f = AUDIO[String(text).trim().toLowerCase()];
+  if (!f) return sayTTS(text);
+  try { if (player) player.pause(); } catch(e){}
+  player = new Audio('audio/' + f);
+  player.play().catch(()=>sayTTS(text));
+}
+/* ---------- утилиты ---------- */
+const $ = s => document.querySelector(s);
+const app = $('#app');
+function esc(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function norm(s){ return s.toLowerCase().replace(/[’']/g,"'").replace(/[.!?,]/g,'').replace(/\s+/g,' ').trim(); }
+function allWords(){ return DATA.flatMap(m=>m.sections.flatMap(s=>s.words)); }
+function pct(words){ if(!words.length) return 0; return Math.round(words.reduce((a,w)=>a+lvl(w),0)/(words.length*5)*100); }
+
+/* ---------- главный экран ---------- */
+function home(){
+  try{ if(player) player.pause(); }catch(e){}
+  const all = allWords();
+  const learned = all.filter(w=>lvl(w)>=5).length;
+  const weak = all.filter(w=>{const s=store[wid(w)]; return s && s.l<3;});
+  let h = `<h1>Тренажёр слов · Starlight 5</h1>
+  <div class="sub">Выучено ${learned} из ${all.length} слов. Выбери раздел и тренируйся каждый день по 10 минут.</div>`;
+  if (weak.length) h += `<button class="primary" style="width:100%;margin-bottom:14px" onclick="startWeak()">🔁 Повторить трудные слова (${weak.length})</button>`;
+  DATA.forEach((m,mi)=>{
+    const mw = m.sections.flatMap(s=>s.words);
+    h += `<details class="mod"${mi===openMod?' open':''} ontoggle="if(this.open)openMod=${mi}"><summary><span>${esc(m.module)}</span><span class="pill">${pct(mw)}%</span></summary>`;
+    m.sections.forEach((s,si)=>{
+      const p = pct(s.words);
+      h += `<div class="sec"><div class="name">${esc(s.section)}<small>${s.words.length} слов${p>=100?' · <span class="star">★ выучено</span>':''}</small><div class="bar"><i style="width:${p}%"></i></div></div>
+      <button onclick="menu(${mi},${si})">Учить</button></div>`;
+    });
+    h += `<div class="sec"><div class="name"><b>Весь модуль</b><small>${mw.length} слов</small></div><button onclick="menu(${mi},-1)">Учить</button></div></details>`;
+  });
+  h += `<div style="text-align:center;margin-top:18px"><button class="ghost" onclick="resetAll()">Сбросить прогресс</button></div>`;
+  app.innerHTML = h;
+}
+let openMod = 0;
+function resetAll(){ if(confirm('Стереть весь прогресс?')){ store={}; save(); home(); } }
+
+/* ---------- выбор режима ---------- */
+let cur = null; // {title, words}
+function menu(mi, si){
+  const m = DATA[mi];
+  const words = si<0 ? m.sections.flatMap(s=>s.words) : m.sections[si].words;
+  cur = {title: si<0 ? m.module : m.sections[si].section, words, back:()=>menu(mi,si)};
+  let h = `<div class="top"><button class="ghost" onclick="home()">← Разделы</button><span class="pill">${pct(words)}% выучено</span></div>
+  <h1>${esc(cur.title)}</h1>
+  <div class="sub">Иди по шагам сверху вниз — от лёгкого к трудному.</div>
+  <div class="modes">
+    <button onclick="run('cards')">1. 🃏 Карточки<small>посмотри, послушай, переверни</small></button>
+    <button onclick="run('en2ru')">2. 🇬🇧→🇷🇺 Выбери перевод<small>видишь слово — выбери значение</small></button>
+    <button onclick="run('listen')">3. 🔊 Послушай и выбери<small>слышишь слово — выбери его</small></button>
+    <button onclick="run('ru2en')">4. 🇷🇺→🇬🇧 Найди слово<small>видишь перевод — выбери английское</small></button>
+    <button onclick="run('spell')">5. ✍️ Напиши слово<small>по переводу и звуку</small></button>
+    <button onclick="run('mix')">⭐ Смешанная тренировка<small>все задания вперемешку, трудные чаще</small></button>
+  </div>
+  <details><summary class="pill" style="cursor:pointer">Список слов (${words.length})</summary><div class="vocab">${
+    words.map(w=>`<div><span>${esc(w.en)} <button class="ghost" onclick="say('${esc(w.en).replace(/'/g,"\\'")}')">🔊</button></span><span>${esc(w.ru)}</span></div>`).join('')}</div></details>`;
+  app.innerHTML = h;
+}
+function startWeak(){
+  const weak = allWords().filter(w=>{const s=store[wid(w)]; return s && s.l<3;});
+  cur = {title:'Трудные слова', words:weak, back:home};
+  run('mix');
+}
+
+/* ---------- сессия ---------- */
+let S = null;
+function pickRound(words, n){
+  // слабые слова — первыми, потом остальные
+  const sorted = shuffle(words).sort((a,b)=>lvl(a)-lvl(b));
+  return shuffle(sorted.slice(0, Math.min(n, sorted.length)));
+}
+function run(mode){
+  const n = mode==='cards' ? cur.words.length : 12;
+  const items = (mode==='cards' ? cur.words.slice() : pickRound(cur.words, n)).map(w=>{
+    let md = mode==='mix' ? randMode(w) : mode;
+    if (md==='spell' && !spellable(w)) md = 'ru2en';
+    return {w, mode: md};
+  });
+  S = {mode, items, i:0, res:[], wrong:[]};
+  step();
+}
+function spellable(w){ const e=w.en.replace(/\(.*?\)/g,''); return !/[\/…]|\.\.\./.test(e) && e.trim().split(/\s+/).length<=4; }
+function randMode(w){
+  const l = lvl(w);
+  const pool = l<=1 ? ['en2ru','listen'] : l<=3 ? ['en2ru','listen','ru2en','spell'] : ['ru2en','spell','spell'];
+  return pool[Math.floor(Math.random()*pool.length)];
+}
+function bar(){
+  return `<div class="progress">${S.items.map((_,k)=>`<i class="${k<S.i?(S.res[k]?'done':'miss'):k===S.i?'cur':''}"></i>`).join('')}</div>`;
+}
+function head(){
+  return `<div class="top"><button class="ghost" onclick="cur.back()">← Выйти</button><span class="pill">${S.i+1} / ${S.items.length}</span></div>`;
+}
+function step(){
+  if (S.i >= S.items.length) return finish();
+  const {w, mode} = S.items[S.i];
+  ({cards, en2ru, ru2en, listen, spell})[mode](w);
+}
+function next(ok){
+  S.res[S.i] = ok; if(!ok) S.wrong.push(S.items[S.i].w);
+  S.i++; step();
+}
+function distractors(w, field){
+  const same = cur.words.filter(x=>x[field]!==w[field]);
+  const pool = same.length>=3 ? same : allWords().filter(x=>x[field]!==w[field]);
+  const uniq = []; const seen = new Set([w[field]]);
+  for (const x of shuffle(pool)){ if(!seen.has(x[field])){ seen.add(x[field]); uniq.push(x); } if(uniq.length===3) break; }
+  return uniq;
+}
+function choice(w, task, showHtml, field, autoSay){
+  const opts = shuffle([w, ...distractors(w, field)]);
+  app.innerHTML = head() + `<div class="stage">${bar()}<div class="task">${task}</div>${showHtml}
+    <div class="fb" id="fb"></div>
+    <div class="opts">${opts.map((o,k)=>`<button data-k="${k}">${esc(o[field])}</button>`).join('')}</div></div>`;
+  if (autoSay) setTimeout(()=>say(w.en), 250);
+  let done = false;
+  app.querySelectorAll('.opts button').forEach(b=>b.onclick=()=>{
+    if (done) return; done = true;
+    const o = opts[+b.dataset.k]; const ok = o===w;
+    b.classList.add(ok?'ok':'bad');
+    if(!ok) app.querySelectorAll('.opts button').forEach(x=>{ if(opts[+x.dataset.k]===w) x.classList.add('ok'); });
+    setLvl(w, ok);
+    const fb = $('#fb'); fb.className = 'fb ' + (ok?'ok':'bad');
+    fb.textContent = ok ? 'Верно! 👍' : `${w.en} — ${w.ru}`;
+    say(w.en);
+    setTimeout(()=>next(ok), ok ? 900 : 2200);
+  });
+}
+function en2ru(w){ choice(w, 'Выбери перевод', `<div class="word">${esc(w.en)}</div><button class="say ghost" onclick="say('${esc(w.en).replace(/'/g,"\\'")}')">🔊</button>`, 'ru', true); }
+function ru2en(w){ choice(w, 'Выбери английское слово', `<div class="word ru">${esc(w.ru)}</div>`, 'en', false); }
+function listen(w){ choice(w, 'Послушай и выбери слово', `<button class="say primary" onclick="say('${esc(w.en).replace(/'/g,"\\'")}')">🔊</button><div class="hint">нажми, чтобы послушать ещё раз</div>`, 'en', true); }
+
+function cards(w){
+  let back = false;
+  app.innerHTML = head() + `<div class="stage">${bar()}<div class="task">Посмотри на слово, послушай и нажми на карточку — увидишь перевод</div>
+    <div class="flip" id="flip"><div class="word">${esc(w.en)}</div><div class="hint" id="tr">👆 нажми, чтобы перевернуть</div></div>
+    <div class="row"><button onclick="setLvl(S.items[S.i].w,false);next(false)">😕 Не помню</button><button class="primary" onclick="setLvl(S.items[S.i].w,true);next(true)">😊 Знаю</button></div></div>`;
+  say(w.en);
+  $('#flip').onclick = ()=>{ back=!back; $('#tr').innerHTML = back ? `<span style="font-size:24px;color:var(--ink)">${esc(w.ru)}</span>` : '👆 нажми, чтобы перевернуть'; say(w.en); };
+}
+
+function spell(w){
+  const target = w.en.replace(/\s*\(.*?\)\s*/g,' ').trim();
+  const mask = target.split('').map((c,k)=>/[a-z]/i.test(c) ? (k===0?c:'_') : c).join('');
+  app.innerHTML = head() + `<div class="stage">${bar()}<div class="task">Напиши по-английски</div>
+    <div class="word ru">${esc(w.ru)}</div>
+    <button class="say ghost" onclick="say('${esc(w.en).replace(/'/g,"\\'")}')">🔊</button>
+    <div class="letters">${esc(mask)}</div>
+    <input class="type" id="inp" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="пиши здесь">
+    <div class="fb" id="fb"></div>
+    <div class="row"><button onclick="hint()">💡 Подсказка</button><button class="primary" id="chk">Проверить</button></div></div>`;
+  const inp = $('#inp'); inp.focus();
+  let hints = 0, done = false;
+  window.hint = ()=>{ hints++; const pre = target.slice(0, Math.min(target.length, hints+1)); inp.value = pre; inp.focus(); };
+  const check = ()=>{
+    if (done){ next(S._ok); return; }
+    const ok = norm(inp.value)===norm(target);
+    done = true; S._ok = ok && hints===0;
+    inp.classList.add(ok?'ok':'bad'); inp.readOnly = true;
+    setLvl(w, S._ok);
+    const fb = $('#fb'); fb.className = 'fb ' + (ok?'ok':'bad');
+    fb.textContent = ok ? (hints? 'Верно, но с подсказкой 🙂' : 'Отлично! 🎉') : `Правильно: ${target}`;
+    say(w.en);
+    $('#chk').textContent = 'Дальше →';
+    if (ok) setTimeout(()=>{ if(S.items[S.i] && S.items[S.i].w===w) next(S._ok); }, 1200);
+  };
+  $('#chk').onclick = check;
+  inp.onkeydown = e=>{ if(e.key==='Enter') check(); };
+}
+
+function finish(){
+  const ok = S.res.filter(Boolean).length, all = S.res.length;
+  const p = all ? Math.round(ok/all*100) : 0;
+  const emoji = p>=90?'🏆':p>=70?'🌟':p>=50?'💪':'📚';
+  const wrong = [...new Map(S.wrong.map(w=>[wid(w),w])).values()];
+  app.innerHTML = head().replace(/<span class="pill">.*?<\/span>/,'') + `<div class="stage result">
+    <div class="big">${emoji}</div><h1>${ok} из ${all}</h1>
+    <div class="sub">${p>=90?'Супер! Можно переходить к следующему шагу.':p>=70?'Хорошо! Повтори ещё раз — будет идеально.':'Давай ещё раз — слова запомнятся с повторением.'}</div>
+    ${wrong.length?`<div class="list"><b>Повтори эти слова:</b>${wrong.map(w=>`<div><span>${esc(w.en)}</span><span>${esc(w.ru)}</span></div>`).join('')}</div>`:''}
+    <div class="row" style="margin-top:18px"></div></div>`;
+  const row = app.querySelector('.row');
+  row.innerHTML = (wrong.length?`<button id="rw">🔁 Ошибки ещё раз</button>`:'') + `<button id="ag">Ещё раз</button><button class="primary" id="bk">К заданиям</button>`;
+  if (wrong.length) $('#rw').onclick = ()=>{ const keep=cur; cur={title:keep.title,words:wrong,back:keep.back}; run(S.mode==='cards'?'en2ru':S.mode); };
+  $('#ag').onclick = ()=>run(S.mode);
+  $('#bk').onclick = ()=>cur.back();
+}
+
+home();
+</script>
+</body>
+</html>

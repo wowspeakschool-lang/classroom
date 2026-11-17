@@ -1,0 +1,1228 @@
+{
+ "module": "Module 2 · East, West, Home's Best",
+ "sections": [
+  {
+   "section": "2 · Начало модуля: Rooms in a house",
+   "page": 25,
+   "words": [
+    {
+     "en": "kitchen",
+     "ru": "кухня",
+     "src": "vocab"
+    },
+    {
+     "en": "dining room",
+     "ru": "столовая",
+     "src": "vocab"
+    },
+    {
+     "en": "bedroom",
+     "ru": "спальня",
+     "src": "vocab"
+    },
+    {
+     "en": "utility room",
+     "ru": "подсобное помещение (прачечная)",
+     "src": "vocab"
+    },
+    {
+     "en": "bathroom",
+     "ru": "ванная комната",
+     "src": "vocab"
+    },
+    {
+     "en": "bath",
+     "ru": "ванна",
+     "src": "vocab"
+    },
+    {
+     "en": "washbasin",
+     "ru": "раковина (умывальник)",
+     "src": "vocab"
+    },
+    {
+     "en": "towel",
+     "ru": "полотенце",
+     "src": "vocab"
+    },
+    {
+     "en": "living room",
+     "ru": "гостиная",
+     "src": "vocab"
+    },
+    {
+     "en": "sofa",
+     "ru": "диван",
+     "src": "vocab"
+    },
+    {
+     "en": "cushions",
+     "ru": "диванные подушки",
+     "src": "vocab"
+    },
+    {
+     "en": "armchair",
+     "ru": "кресло",
+     "src": "vocab"
+    },
+    {
+     "en": "carpet",
+     "ru": "ковёр",
+     "src": "vocab"
+    },
+    {
+     "en": "pillow",
+     "ru": "подушка",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "2a The Nautilus House",
+   "page": 26,
+   "words": [
+    {
+     "en": "bookcase",
+     "ru": "книжный шкаф",
+     "src": "vocab"
+    },
+    {
+     "en": "desk",
+     "ru": "письменный стол",
+     "src": "vocab"
+    },
+    {
+     "en": "wardrobe",
+     "ru": "платяной шкаф",
+     "src": "vocab"
+    },
+    {
+     "en": "bed",
+     "ru": "кровать",
+     "src": "vocab"
+    },
+    {
+     "en": "door",
+     "ru": "дверь",
+     "src": "vocab"
+    },
+    {
+     "en": "sink",
+     "ru": "раковина (кухонная)",
+     "src": "vocab"
+    },
+    {
+     "en": "window",
+     "ru": "окно",
+     "src": "vocab"
+    },
+    {
+     "en": "cupboard",
+     "ru": "шкаф (кухонный), буфет",
+     "src": "vocab"
+    },
+    {
+     "en": "mirror",
+     "ru": "зеркало",
+     "src": "vocab"
+    },
+    {
+     "en": "table",
+     "ru": "стол",
+     "src": "vocab"
+    },
+    {
+     "en": "chair",
+     "ru": "стул",
+     "src": "vocab"
+    },
+    {
+     "en": "stairs",
+     "ru": "лестница",
+     "src": "vocab"
+    },
+    {
+     "en": "sofa",
+     "ru": "диван",
+     "src": "vocab"
+    },
+    {
+     "en": "garden",
+     "ru": "сад",
+     "src": "vocab"
+    },
+    {
+     "en": "floor",
+     "ru": "пол",
+     "src": "vocab"
+    },
+    {
+     "en": "shape",
+     "ru": "форма",
+     "src": "check"
+    },
+    {
+     "en": "seashell",
+     "ru": "морская раковина",
+     "src": "check"
+    },
+    {
+     "en": "young couple",
+     "ru": "молодая пара",
+     "src": "check"
+    },
+    {
+     "en": "spiral staircase",
+     "ru": "винтовая лестница",
+     "src": "check"
+    },
+    {
+     "en": "huge",
+     "ru": "огромный",
+     "src": "check"
+    },
+    {
+     "en": "plant",
+     "ru": "растение",
+     "src": "check"
+    },
+    {
+     "en": "every",
+     "ru": "каждый",
+     "src": "check"
+    },
+    {
+     "en": "room",
+     "ru": "комната",
+     "src": "check"
+    },
+    {
+     "en": "everywhere",
+     "ru": "повсюду",
+     "src": "check"
+    },
+    {
+     "en": "bright",
+     "ru": "яркий",
+     "src": "check"
+    },
+    {
+     "en": "grass carpet",
+     "ru": "травяной ковёр",
+     "src": "check"
+    },
+    {
+     "en": "stream",
+     "ru": "ручей",
+     "src": "check"
+    },
+    {
+     "en": "trees",
+     "ru": "деревья",
+     "src": "check"
+    },
+    {
+     "en": "earthquake-proof",
+     "ru": "сейсмоустойчивый",
+     "src": "check"
+    },
+    {
+     "en": "friendly to the environment",
+     "ru": "безопасный для окружающей среды",
+     "src": "check"
+    },
+    {
+     "en": "view",
+     "ru": "вид",
+     "src": "check"
+    },
+    {
+     "en": "mountain",
+     "ru": "гора",
+     "src": "check"
+    },
+    {
+     "en": "like",
+     "ru": "как, похожий на",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "2b In my house",
+   "page": 28,
+   "words": [
+    {
+     "en": "fridge",
+     "ru": "холодильник",
+     "src": "vocab"
+    },
+    {
+     "en": "dishwasher",
+     "ru": "посудомоечная машина",
+     "src": "vocab"
+    },
+    {
+     "en": "washing machine",
+     "ru": "стиральная машина",
+     "src": "vocab"
+    },
+    {
+     "en": "iron",
+     "ru": "утюг",
+     "src": "vocab"
+    },
+    {
+     "en": "toaster",
+     "ru": "тостер",
+     "src": "vocab"
+    },
+    {
+     "en": "cooker",
+     "ru": "плита",
+     "src": "vocab"
+    },
+    {
+     "en": "vacuum cleaner",
+     "ru": "пылесос",
+     "src": "vocab"
+    },
+    {
+     "en": "space station",
+     "ru": "космическая станция",
+     "src": "check"
+    },
+    {
+     "en": "neighbourhood",
+     "ru": "район, окрестности",
+     "src": "check"
+    },
+    {
+     "en": "chore",
+     "ru": "домашняя обязанность",
+     "src": "check"
+    },
+    {
+     "en": "floating dust",
+     "ru": "летающая пыль",
+     "src": "check"
+    },
+    {
+     "en": "pipe",
+     "ru": "труба, шланг",
+     "src": "check"
+    },
+    {
+     "en": "catch",
+     "ru": "ловить",
+     "src": "check"
+    },
+    {
+     "en": "mealtime",
+     "ru": "время еды",
+     "src": "check"
+    },
+    {
+     "en": "tin",
+     "ru": "консервная банка",
+     "src": "check"
+    },
+    {
+     "en": "packet",
+     "ru": "пакет, пачка",
+     "src": "check"
+    },
+    {
+     "en": "wet",
+     "ru": "мокрый, влажный",
+     "src": "check"
+    },
+    {
+     "en": "wash",
+     "ru": "стирать, мыть",
+     "src": "check"
+    },
+    {
+     "en": "disposable clothes",
+     "ru": "одноразовая одежда",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "2b In my house",
+   "page": 29,
+   "words": [
+    {
+     "en": "on",
+     "ru": "на",
+     "src": "vocab"
+    },
+    {
+     "en": "in",
+     "ru": "в",
+     "src": "vocab"
+    },
+    {
+     "en": "under",
+     "ru": "под",
+     "src": "vocab"
+    },
+    {
+     "en": "behind",
+     "ru": "за, позади",
+     "src": "vocab"
+    },
+    {
+     "en": "next to",
+     "ru": "рядом с",
+     "src": "vocab"
+    },
+    {
+     "en": "in front of",
+     "ru": "перед",
+     "src": "vocab"
+    },
+    {
+     "en": "between",
+     "ru": "между",
+     "src": "vocab"
+    },
+    {
+     "en": "opposite",
+     "ru": "напротив",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "2c Culture Corner",
+   "page": 30,
+   "words": [
+    {
+     "en": "statue",
+     "ru": "статуя",
+     "src": "check"
+    },
+    {
+     "en": "symbol of independence",
+     "ru": "символ независимости",
+     "src": "check"
+    },
+    {
+     "en": "ride",
+     "ru": "поездка, прогулка",
+     "src": "check"
+    },
+    {
+     "en": "chance",
+     "ru": "шанс, возможность",
+     "src": "check"
+    },
+    {
+     "en": "boat",
+     "ru": "лодка",
+     "src": "check"
+    },
+    {
+     "en": "get wet",
+     "ru": "промокнуть",
+     "src": "check"
+    },
+    {
+     "en": "forget",
+     "ru": "забывать",
+     "src": "check"
+    },
+    {
+     "en": "horse-and-carriage",
+     "ru": "конный экипаж",
+     "src": "check"
+    },
+    {
+     "en": "path",
+     "ru": "дорожка, тропа",
+     "src": "check"
+    },
+    {
+     "en": "huge",
+     "ru": "огромный",
+     "src": "check"
+    },
+    {
+     "en": "lake",
+     "ru": "озеро",
+     "src": "check"
+    },
+    {
+     "en": "zoo",
+     "ru": "зоопарк",
+     "src": "check"
+    },
+    {
+     "en": "skating rink",
+     "ru": "каток",
+     "src": "check"
+    },
+    {
+     "en": "skyscraper",
+     "ru": "небоскрёб",
+     "src": "check"
+    },
+    {
+     "en": "flight",
+     "ru": "полёт",
+     "src": "check"
+    },
+    {
+     "en": "fantastic views",
+     "ru": "потрясающие виды",
+     "src": "vocab"
+    },
+    {
+     "en": "take photographs",
+     "ru": "фотографировать",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "2d Everyday English",
+   "page": 31,
+   "words": [
+    {
+     "en": "What's it like?",
+     "ru": "Какой он (она)?",
+     "src": "phrase"
+    },
+    {
+     "en": "It's really big.",
+     "ru": "Он очень большой.",
+     "src": "phrase"
+    },
+    {
+     "en": "What floor is it on?",
+     "ru": "На каком это этаже?",
+     "src": "phrase"
+    },
+    {
+     "en": "It's very cosy.",
+     "ru": "Там очень уютно.",
+     "src": "phrase"
+    },
+    {
+     "en": "It's got a great view …",
+     "ru": "Из него прекрасный вид …",
+     "src": "phrase"
+    },
+    {
+     "en": "Is it far from …?",
+     "ru": "Это далеко от …?",
+     "src": "phrase"
+    },
+    {
+     "en": "How many rooms has it got?",
+     "ru": "Сколько в нём комнат?",
+     "src": "phrase"
+    },
+    {
+     "en": "Sounds great!",
+     "ru": "Звучит здорово!",
+     "src": "phrase"
+    },
+    {
+     "en": "What's your address, please?",
+     "ru": "Какой у тебя адрес?",
+     "src": "phrase"
+    },
+    {
+     "en": "Can you spell it, please?",
+     "ru": "Можешь сказать по буквам?",
+     "src": "phrase"
+    },
+    {
+     "en": "You're so lucky!",
+     "ru": "Тебе так повезло!",
+     "src": "phrase"
+    },
+    {
+     "en": "flat",
+     "ru": "квартира",
+     "src": "vocab"
+    },
+    {
+     "en": "balcony",
+     "ru": "балкон",
+     "src": "vocab"
+    },
+    {
+     "en": "cosy",
+     "ru": "уютный",
+     "src": "vocab"
+    },
+    {
+     "en": "area",
+     "ru": "район",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "2e Special places",
+   "page": 32,
+   "words": [
+    {
+     "en": "desert",
+     "ru": "пустыня",
+     "src": "vocab"
+    },
+    {
+     "en": "mountain",
+     "ru": "гора",
+     "src": "vocab"
+    },
+    {
+     "en": "forest",
+     "ru": "лес",
+     "src": "vocab"
+    },
+    {
+     "en": "island",
+     "ru": "остров",
+     "src": "vocab"
+    },
+    {
+     "en": "river",
+     "ru": "река",
+     "src": "vocab"
+    },
+    {
+     "en": "cliff",
+     "ru": "утёс, скала",
+     "src": "vocab"
+    },
+    {
+     "en": "lake",
+     "ru": "озеро",
+     "src": "vocab"
+    },
+    {
+     "en": "sea",
+     "ru": "море",
+     "src": "vocab"
+    },
+    {
+     "en": "beach",
+     "ru": "пляж",
+     "src": "vocab"
+    },
+    {
+     "en": "waterfall",
+     "ru": "водопад",
+     "src": "vocab"
+    },
+    {
+     "en": "floating islands",
+     "ru": "плавучие острова",
+     "src": "check"
+    },
+    {
+     "en": "place",
+     "ru": "место",
+     "src": "check"
+    },
+    {
+     "en": "home to",
+     "ru": "дом для",
+     "src": "check"
+    },
+    {
+     "en": "surface",
+     "ru": "поверхность",
+     "src": "check"
+    },
+    {
+     "en": "soft",
+     "ru": "мягкий",
+     "src": "check"
+    },
+    {
+     "en": "wet",
+     "ru": "влажный, мокрый",
+     "src": "check"
+    },
+    {
+     "en": "totora reeds",
+     "ru": "тростник тотора",
+     "src": "check"
+    },
+    {
+     "en": "reed huts",
+     "ru": "тростниковые хижины",
+     "src": "check"
+    },
+    {
+     "en": "heating",
+     "ru": "отопление",
+     "src": "check"
+    },
+    {
+     "en": "simple",
+     "ru": "простой",
+     "src": "check"
+    },
+    {
+     "en": "fishermen",
+     "ru": "рыбаки",
+     "src": "check"
+    },
+    {
+     "en": "reed boats",
+     "ru": "тростниковые лодки",
+     "src": "check"
+    },
+    {
+     "en": "school",
+     "ru": "школа",
+     "src": "check"
+    },
+    {
+     "en": "hospital",
+     "ru": "больница",
+     "src": "check"
+    },
+    {
+     "en": "nearby",
+     "ru": "поблизости",
+     "src": "check"
+    },
+    {
+     "en": "popular with tourists",
+     "ru": "популярный у туристов",
+     "src": "check"
+    },
+    {
+     "en": "experience a unique way of life",
+     "ru": "познакомиться с необычным образом жизни",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "2e Special places",
+   "page": 33,
+   "words": [
+    {
+     "en": "welcome",
+     "ru": "желанный (гость)",
+     "src": "vocab"
+    },
+    {
+     "en": "different",
+     "ru": "разный, другой",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "2f Going around",
+   "page": 34,
+   "words": [
+    {
+     "en": "baker's",
+     "ru": "булочная",
+     "src": "vocab"
+    },
+    {
+     "en": "butcher's",
+     "ru": "мясной магазин",
+     "src": "vocab"
+    },
+    {
+     "en": "supermarket",
+     "ru": "супермаркет",
+     "src": "vocab"
+    },
+    {
+     "en": "florist's",
+     "ru": "цветочный магазин",
+     "src": "vocab"
+    },
+    {
+     "en": "chemist's",
+     "ru": "аптека",
+     "src": "vocab"
+    },
+    {
+     "en": "bookshop",
+     "ru": "книжный магазин",
+     "src": "vocab"
+    },
+    {
+     "en": "pet shop",
+     "ru": "зоомагазин",
+     "src": "vocab"
+    },
+    {
+     "en": "clothes shop",
+     "ru": "магазин одежды",
+     "src": "vocab"
+    },
+    {
+     "en": "bread",
+     "ru": "хлеб",
+     "src": "vocab"
+    },
+    {
+     "en": "meat",
+     "ru": "мясо",
+     "src": "vocab"
+    },
+    {
+     "en": "medicine",
+     "ru": "лекарство",
+     "src": "vocab"
+    },
+    {
+     "en": "flowers",
+     "ru": "цветы",
+     "src": "vocab"
+    },
+    {
+     "en": "dog",
+     "ru": "собака",
+     "src": "vocab"
+    },
+    {
+     "en": "pasta",
+     "ru": "макароны",
+     "src": "vocab"
+    },
+    {
+     "en": "jacket",
+     "ru": "куртка",
+     "src": "vocab"
+    },
+    {
+     "en": "dictionary",
+     "ru": "словарь",
+     "src": "vocab"
+    },
+    {
+     "en": "address",
+     "ru": "адрес",
+     "src": "check"
+    },
+    {
+     "en": "underground",
+     "ru": "метро",
+     "src": "check"
+    },
+    {
+     "en": "station",
+     "ru": "станция",
+     "src": "check"
+    },
+    {
+     "en": "turn left",
+     "ru": "повернуть налево",
+     "src": "check"
+    },
+    {
+     "en": "turn right",
+     "ru": "повернуть направо",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "2f Going around",
+   "page": 35,
+   "words": [
+    {
+     "en": "up",
+     "ru": "вверх",
+     "src": "vocab"
+    },
+    {
+     "en": "down",
+     "ru": "вниз",
+     "src": "vocab"
+    },
+    {
+     "en": "along",
+     "ru": "вдоль",
+     "src": "vocab"
+    },
+    {
+     "en": "across",
+     "ru": "через, поперёк",
+     "src": "vocab"
+    },
+    {
+     "en": "into",
+     "ru": "в, внутрь",
+     "src": "vocab"
+    },
+    {
+     "en": "out of",
+     "ru": "из",
+     "src": "vocab"
+    },
+    {
+     "en": "over",
+     "ru": "над, через",
+     "src": "vocab"
+    },
+    {
+     "en": "under",
+     "ru": "под",
+     "src": "vocab"
+    },
+    {
+     "en": "through",
+     "ru": "сквозь, через",
+     "src": "vocab"
+    },
+    {
+     "en": "past",
+     "ru": "мимо",
+     "src": "vocab"
+    },
+    {
+     "en": "go on foot",
+     "ru": "идти пешком",
+     "src": "vocab"
+    },
+    {
+     "en": "traffic lights",
+     "ru": "светофор",
+     "src": "vocab"
+    },
+    {
+     "en": "bridge",
+     "ru": "мост",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "2g Skills",
+   "page": 36,
+   "words": [
+    {
+     "en": "pet shop",
+     "ru": "зоомагазин",
+     "src": "vocab"
+    },
+    {
+     "en": "supermarket",
+     "ru": "супермаркет",
+     "src": "vocab"
+    },
+    {
+     "en": "post office",
+     "ru": "почта",
+     "src": "vocab"
+    },
+    {
+     "en": "gym",
+     "ru": "спортзал",
+     "src": "vocab"
+    },
+    {
+     "en": "bookshop",
+     "ru": "книжный магазин",
+     "src": "vocab"
+    },
+    {
+     "en": "fast food restaurant",
+     "ru": "ресторан быстрого питания",
+     "src": "vocab"
+    },
+    {
+     "en": "school",
+     "ru": "школа",
+     "src": "vocab"
+    },
+    {
+     "en": "library",
+     "ru": "библиотека",
+     "src": "vocab"
+    },
+    {
+     "en": "internet café",
+     "ru": "интернет-кафе",
+     "src": "vocab"
+    },
+    {
+     "en": "cinema",
+     "ru": "кинотеатр",
+     "src": "vocab"
+    },
+    {
+     "en": "clothes shop",
+     "ru": "магазин одежды",
+     "src": "vocab"
+    },
+    {
+     "en": "butcher's",
+     "ru": "мясной магазин",
+     "src": "vocab"
+    },
+    {
+     "en": "baker's",
+     "ru": "булочная",
+     "src": "vocab"
+    },
+    {
+     "en": "restaurant",
+     "ru": "ресторан",
+     "src": "vocab"
+    },
+    {
+     "en": "park",
+     "ru": "парк",
+     "src": "vocab"
+    },
+    {
+     "en": "café",
+     "ru": "кафе",
+     "src": "vocab"
+    },
+    {
+     "en": "chemist's",
+     "ru": "аптека",
+     "src": "vocab"
+    },
+    {
+     "en": "watch a film",
+     "ru": "смотреть фильм",
+     "src": "vocab"
+    },
+    {
+     "en": "borrow books",
+     "ru": "брать книги",
+     "src": "vocab"
+    },
+    {
+     "en": "eat burgers",
+     "ru": "есть бургеры",
+     "src": "vocab"
+    },
+    {
+     "en": "have lunch",
+     "ru": "обедать",
+     "src": "vocab"
+    },
+    {
+     "en": "buy stamps",
+     "ru": "покупать марки",
+     "src": "vocab"
+    },
+    {
+     "en": "swim",
+     "ru": "плавать",
+     "src": "vocab"
+    },
+    {
+     "en": "Excuse me, can you tell me where the … is, please?",
+     "ru": "Извините, не подскажете, где …?",
+     "src": "phrase"
+    },
+    {
+     "en": "Go down … and turn left/right into …",
+     "ru": "Идите по … и поверните налево/направо на …",
+     "src": "phrase"
+    },
+    {
+     "en": "Go straight on.",
+     "ru": "Идите прямо.",
+     "src": "phrase"
+    },
+    {
+     "en": "The … is on your left/right.",
+     "ru": "… будет слева/справа от вас.",
+     "src": "phrase"
+    },
+    {
+     "en": "Walk past the …",
+     "ru": "Пройдите мимо …",
+     "src": "phrase"
+    },
+    {
+     "en": "Cross … Street.",
+     "ru": "Перейдите улицу …",
+     "src": "phrase"
+    },
+    {
+     "en": "Thanks!",
+     "ru": "Спасибо!",
+     "src": "phrase"
+    },
+    {
+     "en": "You're welcome.",
+     "ru": "Пожалуйста. / Не за что.",
+     "src": "phrase"
+    }
+   ]
+  },
+  {
+   "section": "2i Curricular: Art & Design",
+   "page": 38,
+   "words": [
+    {
+     "en": "steel",
+     "ru": "сталь",
+     "src": "vocab"
+    },
+    {
+     "en": "wood",
+     "ru": "дерево (материал)",
+     "src": "check"
+    },
+    {
+     "en": "glass",
+     "ru": "стекло",
+     "src": "check"
+    },
+    {
+     "en": "brick",
+     "ru": "кирпич",
+     "src": "check"
+    },
+    {
+     "en": "steel tower",
+     "ru": "стальная башня",
+     "src": "check"
+    },
+    {
+     "en": "stand out",
+     "ru": "выделяться",
+     "src": "check"
+    },
+    {
+     "en": "skyline",
+     "ru": "силуэт города на фоне неба",
+     "src": "check"
+    },
+    {
+     "en": "tonne",
+     "ru": "тонна",
+     "src": "check"
+    },
+    {
+     "en": "top",
+     "ru": "верх, вершина",
+     "src": "check"
+    },
+    {
+     "en": "sight",
+     "ru": "достопримечательность",
+     "src": "check"
+    },
+    {
+     "en": "cool",
+     "ru": "классный",
+     "src": "check"
+    },
+    {
+     "en": "spaceship",
+     "ru": "космический корабль",
+     "src": "check"
+    },
+    {
+     "en": "second",
+     "ru": "секунда",
+     "src": "check"
+    },
+    {
+     "en": "great view",
+     "ru": "прекрасный вид",
+     "src": "check"
+    },
+    {
+     "en": "hundreds of flats",
+     "ru": "сотни квартир",
+     "src": "check"
+    },
+    {
+     "en": "glass cube",
+     "ru": "стеклянный куб",
+     "src": "check"
+    },
+    {
+     "en": "slide out",
+     "ru": "выдвигаться",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "Russia 2 · Sky-high Luxury",
+   "page": 42,
+   "words": [
+    {
+     "en": "sky-high",
+     "ru": "заоблачный, очень высокий",
+     "src": "check"
+    },
+    {
+     "en": "luxury",
+     "ru": "роскошь",
+     "src": "check"
+    },
+    {
+     "en": "the wow factor",
+     "ru": "эффект «вау»",
+     "src": "check"
+    },
+    {
+     "en": "storey",
+     "ru": "этаж",
+     "src": "check"
+    },
+    {
+     "en": "skyscraper",
+     "ru": "небоскрёб",
+     "src": "check"
+    },
+    {
+     "en": "VIP",
+     "ru": "важная персона (VIP)",
+     "src": "check"
+    },
+    {
+     "en": "famous",
+     "ru": "знаменитый",
+     "src": "check"
+    },
+    {
+     "en": "breathtaking views",
+     "ru": "захватывающие виды",
+     "src": "check"
+    },
+    {
+     "en": "fitness centre",
+     "ru": "фитнес-центр",
+     "src": "check"
+    },
+    {
+     "en": "residents",
+     "ru": "жители",
+     "src": "check"
+    },
+    {
+     "en": "bowling alley",
+     "ru": "боулинг",
+     "src": "check"
+    },
+    {
+     "en": "medical centre",
+     "ru": "медицинский центр",
+     "src": "check"
+    }
+   ]
+  }
+ ]
+}
