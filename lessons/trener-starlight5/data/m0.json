@@ -1,0 +1,436 @@
+{
+ "module": "Starter unit",
+ "sections": [
+  {
+   "section": "Asking about names & addresses",
+   "page": 5,
+   "words": [
+    {
+     "en": "What's your name?",
+     "ru": "Как тебя зовут?",
+     "src": "phrase"
+    },
+    {
+     "en": "And your surname?",
+     "ru": "А твоя фамилия?",
+     "src": "phrase"
+    },
+    {
+     "en": "How do you spell it?",
+     "ru": "Как это пишется (по буквам)?",
+     "src": "phrase"
+    },
+    {
+     "en": "What's your address?",
+     "ru": "Какой у тебя адрес?",
+     "src": "phrase"
+    },
+    {
+     "en": "And your telephone number?",
+     "ru": "А твой номер телефона?",
+     "src": "phrase"
+    }
+   ]
+  },
+  {
+   "section": "Cardinal numbers",
+   "page": 5,
+   "words": [
+    {
+     "en": "one",
+     "ru": "один",
+     "src": "vocab"
+    },
+    {
+     "en": "two",
+     "ru": "два",
+     "src": "vocab"
+    },
+    {
+     "en": "three",
+     "ru": "три",
+     "src": "vocab"
+    },
+    {
+     "en": "four",
+     "ru": "четыре",
+     "src": "vocab"
+    },
+    {
+     "en": "five",
+     "ru": "пять",
+     "src": "vocab"
+    },
+    {
+     "en": "six",
+     "ru": "шесть",
+     "src": "vocab"
+    },
+    {
+     "en": "seven",
+     "ru": "семь",
+     "src": "vocab"
+    },
+    {
+     "en": "eight",
+     "ru": "восемь",
+     "src": "vocab"
+    },
+    {
+     "en": "nine",
+     "ru": "девять",
+     "src": "vocab"
+    },
+    {
+     "en": "ten",
+     "ru": "десять",
+     "src": "vocab"
+    },
+    {
+     "en": "eleven",
+     "ru": "одиннадцать",
+     "src": "vocab"
+    },
+    {
+     "en": "twelve",
+     "ru": "двенадцать",
+     "src": "vocab"
+    },
+    {
+     "en": "thirteen",
+     "ru": "тринадцать",
+     "src": "vocab"
+    },
+    {
+     "en": "fourteen",
+     "ru": "четырнадцать",
+     "src": "vocab"
+    },
+    {
+     "en": "fifteen",
+     "ru": "пятнадцать",
+     "src": "vocab"
+    },
+    {
+     "en": "sixteen",
+     "ru": "шестнадцать",
+     "src": "vocab"
+    },
+    {
+     "en": "seventeen",
+     "ru": "семнадцать",
+     "src": "vocab"
+    },
+    {
+     "en": "eighteen",
+     "ru": "восемнадцать",
+     "src": "vocab"
+    },
+    {
+     "en": "nineteen",
+     "ru": "девятнадцать",
+     "src": "vocab"
+    },
+    {
+     "en": "twenty",
+     "ru": "двадцать",
+     "src": "vocab"
+    },
+    {
+     "en": "twenty-one",
+     "ru": "двадцать один",
+     "src": "vocab"
+    },
+    {
+     "en": "thirty",
+     "ru": "тридцать",
+     "src": "vocab"
+    },
+    {
+     "en": "forty",
+     "ru": "сорок",
+     "src": "vocab"
+    },
+    {
+     "en": "fifty",
+     "ru": "пятьдесят",
+     "src": "vocab"
+    },
+    {
+     "en": "sixty",
+     "ru": "шестьдесят",
+     "src": "vocab"
+    },
+    {
+     "en": "seventy",
+     "ru": "семьдесят",
+     "src": "vocab"
+    },
+    {
+     "en": "eighty",
+     "ru": "восемьдесят",
+     "src": "vocab"
+    },
+    {
+     "en": "ninety",
+     "ru": "девяносто",
+     "src": "vocab"
+    },
+    {
+     "en": "a/one hundred",
+     "ru": "сто",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "Ordinal numbers",
+   "page": 5,
+   "words": [
+    {
+     "en": "first",
+     "ru": "первый",
+     "src": "vocab"
+    },
+    {
+     "en": "second",
+     "ru": "второй",
+     "src": "vocab"
+    },
+    {
+     "en": "third",
+     "ru": "третий",
+     "src": "vocab"
+    },
+    {
+     "en": "fourth",
+     "ru": "четвёртый",
+     "src": "vocab"
+    },
+    {
+     "en": "fifth",
+     "ru": "пятый",
+     "src": "vocab"
+    },
+    {
+     "en": "sixth",
+     "ru": "шестой",
+     "src": "vocab"
+    },
+    {
+     "en": "seventh",
+     "ru": "седьмой",
+     "src": "vocab"
+    },
+    {
+     "en": "eighth",
+     "ru": "восьмой",
+     "src": "vocab"
+    },
+    {
+     "en": "ninth",
+     "ru": "девятый",
+     "src": "vocab"
+    },
+    {
+     "en": "tenth",
+     "ru": "десятый",
+     "src": "vocab"
+    },
+    {
+     "en": "eleventh",
+     "ru": "одиннадцатый",
+     "src": "vocab"
+    },
+    {
+     "en": "twelfth",
+     "ru": "двенадцатый",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "School Subjects",
+   "page": 6,
+   "words": [
+    {
+     "en": "Maths",
+     "ru": "математика",
+     "src": "vocab"
+    },
+    {
+     "en": "History",
+     "ru": "история",
+     "src": "vocab"
+    },
+    {
+     "en": "English",
+     "ru": "английский язык",
+     "src": "vocab"
+    },
+    {
+     "en": "Art",
+     "ru": "рисование, ИЗО",
+     "src": "vocab"
+    },
+    {
+     "en": "Geography",
+     "ru": "география",
+     "src": "vocab"
+    },
+    {
+     "en": "Music",
+     "ru": "музыка",
+     "src": "vocab"
+    },
+    {
+     "en": "Science",
+     "ru": "естествознание",
+     "src": "vocab"
+    },
+    {
+     "en": "ICT",
+     "ru": "информатика",
+     "src": "vocab"
+    },
+    {
+     "en": "PE",
+     "ru": "физкультура",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "School things",
+   "page": 6,
+   "words": [
+    {
+     "en": "atlas",
+     "ru": "атлас",
+     "src": "vocab"
+    },
+    {
+     "en": "notebook",
+     "ru": "тетрадь",
+     "src": "vocab"
+    },
+    {
+     "en": "folder",
+     "ru": "папка",
+     "src": "vocab"
+    },
+    {
+     "en": "briefcase",
+     "ru": "портфель (для бумаг)",
+     "src": "vocab"
+    },
+    {
+     "en": "eraser",
+     "ru": "ластик",
+     "src": "vocab"
+    },
+    {
+     "en": "book",
+     "ru": "книга",
+     "src": "vocab"
+    },
+    {
+     "en": "schoolbag",
+     "ru": "школьная сумка, рюкзак",
+     "src": "vocab"
+    },
+    {
+     "en": "ruler",
+     "ru": "линейка",
+     "src": "vocab"
+    },
+    {
+     "en": "pencil case",
+     "ru": "пенал",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "Colours",
+   "page": 6,
+   "words": [
+    {
+     "en": "red",
+     "ru": "красный",
+     "src": "vocab"
+    },
+    {
+     "en": "blue",
+     "ru": "синий",
+     "src": "vocab"
+    },
+    {
+     "en": "green",
+     "ru": "зелёный",
+     "src": "vocab"
+    },
+    {
+     "en": "yellow",
+     "ru": "жёлтый",
+     "src": "vocab"
+    },
+    {
+     "en": "orange",
+     "ru": "оранжевый",
+     "src": "vocab"
+    },
+    {
+     "en": "brown",
+     "ru": "коричневый",
+     "src": "vocab"
+    },
+    {
+     "en": "black",
+     "ru": "чёрный",
+     "src": "vocab"
+    },
+    {
+     "en": "white",
+     "ru": "белый",
+     "src": "vocab"
+    },
+    {
+     "en": "grey",
+     "ru": "серый",
+     "src": "vocab"
+    },
+    {
+     "en": "pink",
+     "ru": "розовый",
+     "src": "vocab"
+    },
+    {
+     "en": "purple",
+     "ru": "фиолетовый",
+     "src": "vocab"
+    },
+    {
+     "en": "What's this?",
+     "ru": "Что это?",
+     "src": "phrase"
+    },
+    {
+     "en": "What colour is it?",
+     "ru": "Какого это цвета?",
+     "src": "phrase"
+    },
+    {
+     "en": "How old are you?",
+     "ru": "Сколько тебе лет?",
+     "src": "phrase"
+    },
+    {
+     "en": "What's your favourite colour?",
+     "ru": "Какой твой любимый цвет?",
+     "src": "phrase"
+    }
+   ]
+  }
+ ]
+}

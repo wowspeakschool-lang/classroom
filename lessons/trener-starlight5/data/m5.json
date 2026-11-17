@@ -1,0 +1,1224 @@
+{
+ "module": "Module 5",
+ "sections": [
+  {
+   "section": "5a Long Ago",
+   "page": 80,
+   "words": [
+    {
+     "en": "theatre",
+     "ru": "театр",
+     "src": "vocab"
+    },
+    {
+     "en": "post office",
+     "ru": "почта",
+     "src": "vocab"
+    },
+    {
+     "en": "café",
+     "ru": "кафе",
+     "src": "vocab"
+    },
+    {
+     "en": "restaurant",
+     "ru": "ресторан",
+     "src": "vocab"
+    },
+    {
+     "en": "department store",
+     "ru": "универмаг",
+     "src": "vocab"
+    },
+    {
+     "en": "baker's",
+     "ru": "булочная",
+     "src": "vocab"
+    },
+    {
+     "en": "car park",
+     "ru": "автостоянка",
+     "src": "vocab"
+    },
+    {
+     "en": "hotel",
+     "ru": "гостиница",
+     "src": "vocab"
+    },
+    {
+     "en": "bookshop",
+     "ru": "книжный магазин",
+     "src": "vocab"
+    },
+    {
+     "en": "museum",
+     "ru": "музей",
+     "src": "vocab"
+    },
+    {
+     "en": "hospital",
+     "ru": "больница",
+     "src": "vocab"
+    },
+    {
+     "en": "block of flats",
+     "ru": "многоквартирный дом",
+     "src": "vocab"
+    },
+    {
+     "en": "clothes shop",
+     "ru": "магазин одежды",
+     "src": "vocab"
+    },
+    {
+     "en": "grocer's",
+     "ru": "продуктовый магазин",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "5a Long Ago",
+   "page": 81,
+   "words": [
+    {
+     "en": "ancient city",
+     "ru": "древний город",
+     "src": "check"
+    },
+    {
+     "en": "volcano",
+     "ru": "вулкан",
+     "src": "check"
+    },
+    {
+     "en": "busy",
+     "ru": "оживлённый",
+     "src": "check"
+    },
+    {
+     "en": "narrow street",
+     "ru": "узкая улица",
+     "src": "check"
+    },
+    {
+     "en": "full of",
+     "ru": "полный (чего-л.)",
+     "src": "check"
+    },
+    {
+     "en": "forum",
+     "ru": "форум (площадь в римском городе)",
+     "src": "check"
+    },
+    {
+     "en": "temple",
+     "ru": "храм",
+     "src": "check"
+    },
+    {
+     "en": "public baths",
+     "ru": "общественные бани",
+     "src": "check"
+    },
+    {
+     "en": "running water",
+     "ru": "водопровод",
+     "src": "check"
+    },
+    {
+     "en": "eruption",
+     "ru": "извержение",
+     "src": "check"
+    },
+    {
+     "en": "destroy",
+     "ru": "разрушать",
+     "src": "check"
+    },
+    {
+     "en": "bury",
+     "ru": "хоронить, засыпать",
+     "src": "check"
+    },
+    {
+     "en": "ash",
+     "ru": "пепел",
+     "src": "check"
+    },
+    {
+     "en": "ancient",
+     "ru": "древний",
+     "src": "vocab"
+    },
+    {
+     "en": "modern",
+     "ru": "современный",
+     "src": "vocab"
+    },
+    {
+     "en": "narrow",
+     "ru": "узкий",
+     "src": "vocab"
+    },
+    {
+     "en": "wide",
+     "ru": "широкий",
+     "src": "vocab"
+    },
+    {
+     "en": "full",
+     "ru": "полный",
+     "src": "vocab"
+    },
+    {
+     "en": "empty",
+     "ru": "пустой",
+     "src": "vocab"
+    },
+    {
+     "en": "large",
+     "ru": "большой",
+     "src": "vocab"
+    },
+    {
+     "en": "small",
+     "ru": "маленький",
+     "src": "vocab"
+    },
+    {
+     "en": "public",
+     "ru": "общественный",
+     "src": "vocab"
+    },
+    {
+     "en": "private",
+     "ru": "частный",
+     "src": "vocab"
+    },
+    {
+     "en": "lucky",
+     "ru": "удачливый, счастливый",
+     "src": "vocab"
+    },
+    {
+     "en": "unlucky",
+     "ru": "неудачливый, несчастливый",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "5b Ancient Civilisations",
+   "page": 82,
+   "words": [
+    {
+     "en": "ruled",
+     "ru": "правили",
+     "src": "vocab"
+    },
+    {
+     "en": "played board games",
+     "ru": "играли в настольные игры",
+     "src": "vocab"
+    },
+    {
+     "en": "played music",
+     "ru": "играли музыку",
+     "src": "vocab"
+    },
+    {
+     "en": "fished",
+     "ru": "ловили рыбу",
+     "src": "vocab"
+    },
+    {
+     "en": "worked as farmers/artists",
+     "ru": "работали фермерами/художниками",
+     "src": "vocab"
+    },
+    {
+     "en": "had boats and transported goods",
+     "ru": "имели лодки и перевозили товары",
+     "src": "vocab"
+    },
+    {
+     "en": "could build pyramids",
+     "ru": "умели строить пирамиды",
+     "src": "vocab"
+    },
+    {
+     "en": "lived in houses made of mud bricks",
+     "ru": "жили в домах из глиняных кирпичей",
+     "src": "vocab"
+    },
+    {
+     "en": "hunted",
+     "ru": "охотились",
+     "src": "vocab"
+    },
+    {
+     "en": "attended school",
+     "ru": "ходили в школу",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "5c Culture Corner",
+   "page": 84,
+   "words": [
+    {
+     "en": "crazy about",
+     "ru": "без ума от",
+     "src": "check"
+    },
+    {
+     "en": "band",
+     "ru": "музыкальная группа",
+     "src": "check"
+    },
+    {
+     "en": "radio station",
+     "ru": "радиостанция",
+     "src": "check"
+    },
+    {
+     "en": "latest fashion",
+     "ru": "последняя мода",
+     "src": "check"
+    },
+    {
+     "en": "dance hall",
+     "ru": "танцевальный зал",
+     "src": "check"
+    },
+    {
+     "en": "fad",
+     "ru": "модное увлечение",
+     "src": "check"
+    },
+    {
+     "en": "shocked",
+     "ru": "потрясённый",
+     "src": "check"
+    },
+    {
+     "en": "fashionable",
+     "ru": "модный",
+     "src": "check"
+    },
+    {
+     "en": "floral print",
+     "ru": "цветочный узор",
+     "src": "check"
+    },
+    {
+     "en": "hippy style",
+     "ru": "стиль хиппи",
+     "src": "check"
+    },
+    {
+     "en": "popular",
+     "ru": "популярный",
+     "src": "check"
+    },
+    {
+     "en": "big hit",
+     "ru": "большой успех, хит",
+     "src": "check"
+    },
+    {
+     "en": "craze",
+     "ru": "повальное увлечение",
+     "src": "check"
+    },
+    {
+     "en": "moon",
+     "ru": "луна",
+     "src": "check"
+    },
+    {
+     "en": "enthusiastic about",
+     "ru": "увлечённый",
+     "src": "vocab"
+    },
+    {
+     "en": "very surprised",
+     "ru": "очень удивлённый",
+     "src": "vocab"
+    },
+    {
+     "en": "fashion",
+     "ru": "мода",
+     "src": "vocab"
+    },
+    {
+     "en": "most recent",
+     "ru": "самый новый",
+     "src": "vocab"
+    },
+    {
+     "en": "successes",
+     "ru": "успехи",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "5d Everyday English",
+   "page": 85,
+   "words": [
+    {
+     "en": "played outside all day",
+     "ru": "играл на улице весь день",
+     "src": "vocab"
+    },
+    {
+     "en": "delivered newspapers",
+     "ru": "разносил газеты",
+     "src": "vocab"
+    },
+    {
+     "en": "walked the dog",
+     "ru": "выгуливал собаку",
+     "src": "vocab"
+    },
+    {
+     "en": "had fancy dress parties",
+     "ru": "устраивал костюмированные вечеринки",
+     "src": "vocab"
+    },
+    {
+     "en": "helped my parents with chores",
+     "ru": "помогал родителям по дому",
+     "src": "vocab"
+    },
+    {
+     "en": "It looks great.",
+     "ru": "Выглядит здорово.",
+     "src": "phrase"
+    },
+    {
+     "en": "What was it like?",
+     "ru": "Как там было?",
+     "src": "phrase"
+    },
+    {
+     "en": "It was a lot of fun.",
+     "ru": "Было очень весело.",
+     "src": "phrase"
+    },
+    {
+     "en": "It sounds like a great place to grow up.",
+     "ru": "Похоже, это прекрасное место, чтобы расти.",
+     "src": "phrase"
+    },
+    {
+     "en": "Do you miss it?",
+     "ru": "Ты скучаешь по этому?",
+     "src": "phrase"
+    }
+   ]
+  },
+  {
+   "section": "5e Lost Cities",
+   "page": 86,
+   "words": [
+    {
+     "en": "date back",
+     "ru": "восходить (к какому-то времени)",
+     "src": "vocab"
+    },
+    {
+     "en": "emperor",
+     "ru": "император",
+     "src": "vocab"
+    },
+    {
+     "en": "earthquake",
+     "ru": "землетрясение",
+     "src": "vocab"
+    },
+    {
+     "en": "destroy",
+     "ru": "разрушать",
+     "src": "vocab"
+    },
+    {
+     "en": "astronomer",
+     "ru": "астроном",
+     "src": "vocab"
+    },
+    {
+     "en": "construct",
+     "ru": "строить, сооружать",
+     "src": "vocab"
+    },
+    {
+     "en": "terraced",
+     "ru": "террасный, уступами",
+     "src": "vocab"
+    },
+    {
+     "en": "grow",
+     "ru": "выращивать",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "5e Lost Cities",
+   "page": 87,
+   "words": [
+    {
+     "en": "baths",
+     "ru": "бани",
+     "src": "vocab"
+    },
+    {
+     "en": "fountain",
+     "ru": "фонтан",
+     "src": "vocab"
+    },
+    {
+     "en": "storage rooms",
+     "ru": "кладовые",
+     "src": "vocab"
+    },
+    {
+     "en": "palace",
+     "ru": "дворец",
+     "src": "vocab"
+    },
+    {
+     "en": "park",
+     "ru": "парк",
+     "src": "vocab"
+    },
+    {
+     "en": "temple",
+     "ru": "храм",
+     "src": "vocab"
+    },
+    {
+     "en": "tower",
+     "ru": "башня",
+     "src": "vocab"
+    },
+    {
+     "en": "wall",
+     "ru": "стена",
+     "src": "vocab"
+    },
+    {
+     "en": "bridge",
+     "ru": "мост",
+     "src": "vocab"
+    },
+    {
+     "en": "pyramid",
+     "ru": "пирамида",
+     "src": "vocab"
+    },
+    {
+     "en": "houses",
+     "ru": "дома",
+     "src": "vocab"
+    },
+    {
+     "en": "thick",
+     "ru": "толстый",
+     "src": "vocab"
+    },
+    {
+     "en": "thin",
+     "ru": "тонкий",
+     "src": "vocab"
+    },
+    {
+     "en": "strong",
+     "ru": "прочный",
+     "src": "vocab"
+    },
+    {
+     "en": "weak",
+     "ru": "непрочный, слабый",
+     "src": "vocab"
+    },
+    {
+     "en": "beautiful",
+     "ru": "красивый",
+     "src": "vocab"
+    },
+    {
+     "en": "ugly",
+     "ru": "уродливый",
+     "src": "vocab"
+    },
+    {
+     "en": "tall",
+     "ru": "высокий",
+     "src": "vocab"
+    },
+    {
+     "en": "huge",
+     "ru": "огромный",
+     "src": "vocab"
+    },
+    {
+     "en": "small",
+     "ru": "маленький",
+     "src": "vocab"
+    },
+    {
+     "en": "ancient",
+     "ru": "древний",
+     "src": "vocab"
+    },
+    {
+     "en": "modern",
+     "ru": "современный",
+     "src": "vocab"
+    },
+    {
+     "en": "terraced fields",
+     "ru": "террасные поля",
+     "src": "vocab"
+    },
+    {
+     "en": "stone walls",
+     "ru": "каменные стены",
+     "src": "vocab"
+    },
+    {
+     "en": "ancient site",
+     "ru": "древнее поселение",
+     "src": "vocab"
+    },
+    {
+     "en": "running water",
+     "ru": "водопровод",
+     "src": "vocab"
+    },
+    {
+     "en": "stone buildings",
+     "ru": "каменные здания",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "5f Legendary Figures",
+   "page": 88,
+   "words": [
+    {
+     "en": "fascinating figures",
+     "ru": "увлекательные персонажи",
+     "src": "check"
+    },
+    {
+     "en": "mythology",
+     "ru": "мифология",
+     "src": "check"
+    },
+    {
+     "en": "wizard",
+     "ru": "волшебник",
+     "src": "check"
+    },
+    {
+     "en": "advisor",
+     "ru": "советник",
+     "src": "check"
+    },
+    {
+     "en": "cloak",
+     "ru": "плащ",
+     "src": "check"
+    },
+    {
+     "en": "magical powers",
+     "ru": "волшебная сила",
+     "src": "check"
+    },
+    {
+     "en": "ancient myths",
+     "ru": "древние мифы",
+     "src": "check"
+    },
+    {
+     "en": "turn into",
+     "ru": "превращаться в",
+     "src": "check"
+    },
+    {
+     "en": "fight battles",
+     "ru": "вести сражения",
+     "src": "check"
+    },
+    {
+     "en": "foreign enemies",
+     "ru": "иноземные враги",
+     "src": "check"
+    },
+    {
+     "en": "intelligence",
+     "ru": "ум",
+     "src": "check"
+    },
+    {
+     "en": "had a vision",
+     "ru": "было видение",
+     "src": "check"
+    },
+    {
+     "en": "guardian",
+     "ru": "опекун",
+     "src": "check"
+    },
+    {
+     "en": "noblemen",
+     "ru": "знать, дворяне",
+     "src": "check"
+    },
+    {
+     "en": "stuck",
+     "ru": "воткнул",
+     "src": "check"
+    },
+    {
+     "en": "free",
+     "ru": "освободить",
+     "src": "check"
+    },
+    {
+     "en": "sword",
+     "ru": "меч",
+     "src": "check"
+    },
+    {
+     "en": "local tournament",
+     "ru": "местный турнир",
+     "src": "check"
+    },
+    {
+     "en": "medieval stories",
+     "ru": "средневековые истории",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "5f Legendary Figures",
+   "page": 89,
+   "words": [
+    {
+     "en": "put an end to",
+     "ru": "положить конец",
+     "src": "vocab"
+    },
+    {
+     "en": "choose",
+     "ru": "выбирать",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "5g Skills",
+   "page": 90,
+   "words": [
+    {
+     "en": "fantasy",
+     "ru": "фэнтези",
+     "src": "vocab"
+    },
+    {
+     "en": "action",
+     "ru": "боевик",
+     "src": "vocab"
+    },
+    {
+     "en": "thriller",
+     "ru": "триллер",
+     "src": "vocab"
+    },
+    {
+     "en": "adventure",
+     "ru": "приключенческий фильм",
+     "src": "vocab"
+    },
+    {
+     "en": "science fiction",
+     "ru": "научная фантастика",
+     "src": "vocab"
+    },
+    {
+     "en": "romance",
+     "ru": "мелодрама",
+     "src": "vocab"
+    },
+    {
+     "en": "animated",
+     "ru": "мультфильм",
+     "src": "vocab"
+    },
+    {
+     "en": "comedy",
+     "ru": "комедия",
+     "src": "vocab"
+    },
+    {
+     "en": "superhero",
+     "ru": "фильм о супергероях",
+     "src": "vocab"
+    },
+    {
+     "en": "musical",
+     "ru": "мюзикл",
+     "src": "vocab"
+    },
+    {
+     "en": "horror",
+     "ru": "фильм ужасов",
+     "src": "vocab"
+    },
+    {
+     "en": "western",
+     "ru": "вестерн",
+     "src": "vocab"
+    },
+    {
+     "en": "boring",
+     "ru": "скучный",
+     "src": "vocab"
+    },
+    {
+     "en": "interesting",
+     "ru": "интересный",
+     "src": "vocab"
+    },
+    {
+     "en": "sad",
+     "ru": "грустный",
+     "src": "vocab"
+    },
+    {
+     "en": "depressing",
+     "ru": "гнетущий",
+     "src": "vocab"
+    },
+    {
+     "en": "funny",
+     "ru": "смешной",
+     "src": "vocab"
+    },
+    {
+     "en": "exciting",
+     "ru": "захватывающий",
+     "src": "vocab"
+    },
+    {
+     "en": "amazing",
+     "ru": "потрясающий",
+     "src": "vocab"
+    },
+    {
+     "en": "frightening",
+     "ru": "пугающий",
+     "src": "vocab"
+    },
+    {
+     "en": "scary",
+     "ru": "страшный",
+     "src": "vocab"
+    },
+    {
+     "en": "What was ... like?",
+     "ru": "Каким был …?",
+     "src": "phrase"
+    },
+    {
+     "en": "It was great.",
+     "ru": "Было здорово.",
+     "src": "phrase"
+    },
+    {
+     "en": "I loved it.",
+     "ru": "Мне очень понравилось.",
+     "src": "phrase"
+    },
+    {
+     "en": "I quite liked it.",
+     "ru": "Мне довольно понравилось.",
+     "src": "phrase"
+    },
+    {
+     "en": "It wasn't very good.",
+     "ru": "Было не очень.",
+     "src": "phrase"
+    },
+    {
+     "en": "It was boring.",
+     "ru": "Было скучно.",
+     "src": "phrase"
+    },
+    {
+     "en": "I didn't like it.",
+     "ru": "Мне не понравилось.",
+     "src": "phrase"
+    }
+   ]
+  },
+  {
+   "section": "5h Writing",
+   "page": 91,
+   "words": [
+    {
+     "en": "amusing",
+     "ru": "забавный",
+     "src": "vocab"
+    },
+    {
+     "en": "dull",
+     "ru": "скучный",
+     "src": "vocab"
+    },
+    {
+     "en": "depressing",
+     "ru": "гнетущий",
+     "src": "vocab"
+    },
+    {
+     "en": "scary",
+     "ru": "страшный",
+     "src": "vocab"
+    },
+    {
+     "en": "great",
+     "ru": "отличный",
+     "src": "vocab"
+    },
+    {
+     "en": "thrilling",
+     "ru": "захватывающий",
+     "src": "vocab"
+    },
+    {
+     "en": "terrible",
+     "ru": "ужасный",
+     "src": "vocab"
+    },
+    {
+     "en": "awful",
+     "ru": "ужасный",
+     "src": "vocab"
+    },
+    {
+     "en": "special effects",
+     "ru": "спецэффекты",
+     "src": "vocab"
+    },
+    {
+     "en": "plot",
+     "ru": "сюжет",
+     "src": "vocab"
+    },
+    {
+     "en": "acting",
+     "ru": "актёрская игра",
+     "src": "vocab"
+    },
+    {
+     "en": "You'll love it.",
+     "ru": "Тебе понравится.",
+     "src": "phrase"
+    },
+    {
+     "en": "It's a bore to watch.",
+     "ru": "Это скучно смотреть.",
+     "src": "phrase"
+    },
+    {
+     "en": "You should see it.",
+     "ru": "Тебе стоит его посмотреть.",
+     "src": "phrase"
+    },
+    {
+     "en": "a must-see",
+     "ru": "то, что обязательно нужно посмотреть",
+     "src": "phrase"
+    },
+    {
+     "en": "Don't miss it.",
+     "ru": "Не пропусти.",
+     "src": "phrase"
+    }
+   ]
+  },
+  {
+   "section": "5i Curricular: History",
+   "page": 92,
+   "words": [
+    {
+     "en": "arrive",
+     "ru": "прибывать",
+     "src": "check"
+    },
+    {
+     "en": "continent",
+     "ru": "континент",
+     "src": "check"
+    },
+    {
+     "en": "native tribe",
+     "ru": "коренное племя",
+     "src": "check"
+    },
+    {
+     "en": "respect",
+     "ru": "уважать",
+     "src": "check"
+    },
+    {
+     "en": "wooden",
+     "ru": "деревянный",
+     "src": "check"
+    },
+    {
+     "en": "canoe",
+     "ru": "каноэ",
+     "src": "check"
+    },
+    {
+     "en": "hunting",
+     "ru": "охота",
+     "src": "check"
+    },
+    {
+     "en": "trading",
+     "ru": "торговля",
+     "src": "check"
+    },
+    {
+     "en": "animal skin",
+     "ru": "шкура животного",
+     "src": "check"
+    },
+    {
+     "en": "sled",
+     "ru": "сани",
+     "src": "check"
+    },
+    {
+     "en": "look after",
+     "ru": "присматривать, заботиться",
+     "src": "check"
+    },
+    {
+     "en": "protect",
+     "ru": "защищать",
+     "src": "check"
+    },
+    {
+     "en": "buffalo",
+     "ru": "бизон",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "Language Review 5",
+   "page": 93,
+   "words": [
+    {
+     "en": "amphitheatre",
+     "ru": "амфитеатр",
+     "src": "vocab"
+    },
+    {
+     "en": "marketplace",
+     "ru": "рыночная площадь",
+     "src": "vocab"
+    },
+    {
+     "en": "temple",
+     "ru": "храм",
+     "src": "vocab"
+    },
+    {
+     "en": "eruption",
+     "ru": "извержение",
+     "src": "vocab"
+    },
+    {
+     "en": "baker's",
+     "ru": "булочная",
+     "src": "vocab"
+    },
+    {
+     "en": "aquarium",
+     "ru": "аквариум",
+     "src": "vocab"
+    },
+    {
+     "en": "bridge",
+     "ru": "мост",
+     "src": "vocab"
+    },
+    {
+     "en": "forum",
+     "ru": "форум",
+     "src": "vocab"
+    },
+    {
+     "en": "native tribes",
+     "ru": "коренные племена",
+     "src": "vocab"
+    },
+    {
+     "en": "animal skin",
+     "ru": "шкура животного",
+     "src": "vocab"
+    },
+    {
+     "en": "opera house",
+     "ru": "оперный театр",
+     "src": "vocab"
+    },
+    {
+     "en": "hunt for animals",
+     "ru": "охотиться на животных",
+     "src": "vocab"
+    },
+    {
+     "en": "running water",
+     "ru": "водопровод",
+     "src": "vocab"
+    },
+    {
+     "en": "attend school",
+     "ru": "ходить в школу",
+     "src": "vocab"
+    },
+    {
+     "en": "transport goods",
+     "ru": "перевозить товары",
+     "src": "vocab"
+    },
+    {
+     "en": "deliver newspapers",
+     "ru": "разносить газеты",
+     "src": "vocab"
+    },
+    {
+     "en": "help with chores",
+     "ru": "помогать по дому",
+     "src": "vocab"
+    },
+    {
+     "en": "special effects",
+     "ru": "спецэффекты",
+     "src": "vocab"
+    },
+    {
+     "en": "powerful empire",
+     "ru": "могущественная империя",
+     "src": "vocab"
+    },
+    {
+     "en": "dates back to",
+     "ru": "восходит к",
+     "src": "vocab"
+    },
+    {
+     "en": "respect the environment",
+     "ru": "уважать окружающую среду",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "Russia 5 · Catherine the Great",
+   "page": 96,
+   "words": [
+    {
+     "en": "army officer",
+     "ru": "армейский офицер",
+     "src": "check"
+    },
+    {
+     "en": "governor",
+     "ru": "губернатор",
+     "src": "check"
+    },
+    {
+     "en": "wealthy",
+     "ru": "богатый",
+     "src": "check"
+    },
+    {
+     "en": "private teacher",
+     "ru": "частный учитель",
+     "src": "check"
+    },
+    {
+     "en": "nanny",
+     "ru": "няня",
+     "src": "check"
+    },
+    {
+     "en": "marry",
+     "ru": "выйти замуж, жениться",
+     "src": "check"
+    },
+    {
+     "en": "empress",
+     "ru": "императрица",
+     "src": "check"
+    },
+    {
+     "en": "sole",
+     "ru": "единственный",
+     "src": "check"
+    },
+    {
+     "en": "ruler",
+     "ru": "правитель",
+     "src": "check"
+    },
+    {
+     "en": "reign",
+     "ru": "правление",
+     "src": "check"
+    },
+    {
+     "en": "power",
+     "ru": "держава",
+     "src": "check"
+    },
+    {
+     "en": "develop",
+     "ru": "развивать",
+     "src": "check"
+    },
+    {
+     "en": "direction",
+     "ru": "руководство",
+     "src": "check"
+    },
+    {
+     "en": "improve",
+     "ru": "улучшать",
+     "src": "check"
+    },
+    {
+     "en": "stroke",
+     "ru": "инсульт",
+     "src": "check"
+    }
+   ]
+  }
+ ]
+}

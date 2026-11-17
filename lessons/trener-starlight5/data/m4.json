@@ -1,0 +1,1182 @@
+{
+ "module": "Module 4",
+ "sections": [
+  {
+   "section": "4a On the go",
+   "page": 62,
+   "words": [
+    {
+     "en": "sightseeing",
+     "ru": "осмотр достопримечательностей",
+     "src": "vocab"
+    },
+    {
+     "en": "tour bus",
+     "ru": "экскурсионный автобус",
+     "src": "vocab"
+    },
+    {
+     "en": "shopping for souvenirs",
+     "ru": "покупка сувениров",
+     "src": "vocab"
+    },
+    {
+     "en": "swimming",
+     "ru": "плавание",
+     "src": "vocab"
+    },
+    {
+     "en": "sunbathing",
+     "ru": "загорание",
+     "src": "vocab"
+    },
+    {
+     "en": "eating local dishes",
+     "ru": "пробовать местные блюда",
+     "src": "vocab"
+    },
+    {
+     "en": "hiking",
+     "ru": "пеший туризм, поход",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "4a On the go",
+   "page": 63,
+   "words": [
+    {
+     "en": "guide",
+     "ru": "гид, экскурсовод",
+     "src": "check"
+    },
+    {
+     "en": "route",
+     "ru": "маршрут",
+     "src": "check"
+    },
+    {
+     "en": "coach",
+     "ru": "туристический автобус",
+     "src": "check"
+    },
+    {
+     "en": "snow-capped",
+     "ru": "покрытый снегом (о вершине)",
+     "src": "check"
+    },
+    {
+     "en": "mountain",
+     "ru": "гора",
+     "src": "check"
+    },
+    {
+     "en": "volcano",
+     "ru": "вулкан",
+     "src": "check"
+    },
+    {
+     "en": "can't wait",
+     "ru": "не терпится",
+     "src": "check"
+    },
+    {
+     "en": "tour",
+     "ru": "экскурсия, тур",
+     "src": "check"
+    },
+    {
+     "en": "sights",
+     "ru": "достопримечательности",
+     "src": "check"
+    },
+    {
+     "en": "fort",
+     "ru": "форт, крепость",
+     "src": "check"
+    },
+    {
+     "en": "it's a pity",
+     "ru": "жаль",
+     "src": "check"
+    },
+    {
+     "en": "flea market",
+     "ru": "блошиный рынок",
+     "src": "check"
+    },
+    {
+     "en": "crafts",
+     "ru": "изделия ремесленников",
+     "src": "check"
+    },
+    {
+     "en": "snack",
+     "ru": "перекус, закуска",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "4b Shopping time",
+   "page": 64,
+   "words": [
+    {
+     "en": "flat shoes",
+     "ru": "туфли без каблука",
+     "src": "vocab"
+    },
+    {
+     "en": "high heels",
+     "ru": "туфли на высоком каблуке",
+     "src": "vocab"
+    },
+    {
+     "en": "leggings",
+     "ru": "леггинсы",
+     "src": "vocab"
+    },
+    {
+     "en": "socks",
+     "ru": "носки",
+     "src": "vocab"
+    },
+    {
+     "en": "sandals",
+     "ru": "сандалии",
+     "src": "vocab"
+    },
+    {
+     "en": "boots",
+     "ru": "сапоги, ботинки",
+     "src": "vocab"
+    },
+    {
+     "en": "trainers",
+     "ru": "кроссовки",
+     "src": "vocab"
+    },
+    {
+     "en": "trousers",
+     "ru": "брюки",
+     "src": "vocab"
+    },
+    {
+     "en": "skirt",
+     "ru": "юбка",
+     "src": "vocab"
+    },
+    {
+     "en": "top",
+     "ru": "топ, кофточка",
+     "src": "vocab"
+    },
+    {
+     "en": "coat",
+     "ru": "пальто",
+     "src": "vocab"
+    },
+    {
+     "en": "dress",
+     "ru": "платье",
+     "src": "vocab"
+    },
+    {
+     "en": "gloves",
+     "ru": "перчатки",
+     "src": "vocab"
+    },
+    {
+     "en": "hat",
+     "ru": "шляпа",
+     "src": "vocab"
+    },
+    {
+     "en": "sunglasses",
+     "ru": "солнцезащитные очки",
+     "src": "vocab"
+    },
+    {
+     "en": "scarves",
+     "ru": "шарфы",
+     "src": "vocab"
+    },
+    {
+     "en": "cap",
+     "ru": "кепка",
+     "src": "vocab"
+    },
+    {
+     "en": "bag",
+     "ru": "сумка",
+     "src": "vocab"
+    },
+    {
+     "en": "sweatshirt",
+     "ru": "толстовка, свитшот",
+     "src": "vocab"
+    },
+    {
+     "en": "shirt",
+     "ru": "рубашка",
+     "src": "vocab"
+    },
+    {
+     "en": "tie",
+     "ru": "галстук",
+     "src": "vocab"
+    },
+    {
+     "en": "T-shirt",
+     "ru": "футболка",
+     "src": "vocab"
+    },
+    {
+     "en": "shorts",
+     "ru": "шорты",
+     "src": "vocab"
+    },
+    {
+     "en": "look for",
+     "ru": "искать",
+     "src": "check"
+    },
+    {
+     "en": "present",
+     "ru": "подарок",
+     "src": "check"
+    },
+    {
+     "en": "success",
+     "ru": "успех",
+     "src": "check"
+    },
+    {
+     "en": "together",
+     "ru": "вместе",
+     "src": "check"
+    },
+    {
+     "en": "expensive",
+     "ru": "дорогой",
+     "src": "check"
+    },
+    {
+     "en": "guess",
+     "ru": "полагать, догадываться",
+     "src": "check"
+    },
+    {
+     "en": "gorgeous",
+     "ru": "великолепный",
+     "src": "check"
+    },
+    {
+     "en": "half-price",
+     "ru": "за полцены",
+     "src": "check"
+    },
+    {
+     "en": "match",
+     "ru": "подходить (по цвету)",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "4c Culture Corner",
+   "page": 66,
+   "words": [
+    {
+     "en": "skyscraper",
+     "ru": "небоскрёб",
+     "src": "check"
+    },
+    {
+     "en": "appear",
+     "ru": "появляться",
+     "src": "check"
+    },
+    {
+     "en": "shopping mall",
+     "ru": "торговый центр",
+     "src": "check"
+    },
+    {
+     "en": "biggest",
+     "ru": "самый большой",
+     "src": "check"
+    },
+    {
+     "en": "accessories",
+     "ru": "аксессуары",
+     "src": "check"
+    },
+    {
+     "en": "electronics",
+     "ru": "электроника",
+     "src": "check"
+    },
+    {
+     "en": "toys",
+     "ru": "игрушки",
+     "src": "check"
+    },
+    {
+     "en": "travel",
+     "ru": "путешествия",
+     "src": "check"
+    },
+    {
+     "en": "get tired of",
+     "ru": "устать от",
+     "src": "check"
+    },
+    {
+     "en": "food court",
+     "ru": "фуд-корт, зона ресторанов",
+     "src": "check"
+    },
+    {
+     "en": "serve",
+     "ru": "подавать (еду)",
+     "src": "check"
+    },
+    {
+     "en": "variety of dishes",
+     "ru": "разнообразие блюд",
+     "src": "check"
+    },
+    {
+     "en": "snack",
+     "ru": "закуска, перекус",
+     "src": "check"
+    },
+    {
+     "en": "dinosaur museum",
+     "ru": "музей динозавров",
+     "src": "check"
+    },
+    {
+     "en": "indoor",
+     "ru": "крытый, в помещении",
+     "src": "check"
+    },
+    {
+     "en": "roller coaster",
+     "ru": "американские горки",
+     "src": "check"
+    },
+    {
+     "en": "aquarium",
+     "ru": "аквариум, океанариум",
+     "src": "check"
+    },
+    {
+     "en": "sea creature",
+     "ru": "морское животное",
+     "src": "check"
+    },
+    {
+     "en": "shark",
+     "ru": "акула",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "4d Everyday English",
+   "page": 67,
+   "words": [
+    {
+     "en": "slice of pizza",
+     "ru": "кусок пиццы",
+     "src": "vocab"
+    },
+    {
+     "en": "chips",
+     "ru": "картофель фри",
+     "src": "vocab"
+    },
+    {
+     "en": "hot dog",
+     "ru": "хот-дог",
+     "src": "vocab"
+    },
+    {
+     "en": "soft drinks",
+     "ru": "безалкогольные напитки",
+     "src": "vocab"
+    },
+    {
+     "en": "cola",
+     "ru": "кола",
+     "src": "vocab"
+    },
+    {
+     "en": "lemonade",
+     "ru": "лимонад",
+     "src": "vocab"
+    },
+    {
+     "en": "ice cream cornet",
+     "ru": "мороженое в рожке",
+     "src": "vocab"
+    },
+    {
+     "en": "coffee",
+     "ru": "кофе",
+     "src": "vocab"
+    },
+    {
+     "en": "Next please.",
+     "ru": "Следующий, пожалуйста.",
+     "src": "phrase"
+    },
+    {
+     "en": "What can I get you?",
+     "ru": "Что вам предложить?",
+     "src": "phrase"
+    },
+    {
+     "en": "I'd like a hot dog, please.",
+     "ru": "Мне хот-дог, пожалуйста.",
+     "src": "phrase"
+    },
+    {
+     "en": "Anything else?",
+     "ru": "Что-нибудь ещё?",
+     "src": "phrase"
+    },
+    {
+     "en": "Can I have a cola, please?",
+     "ru": "Можно мне колу, пожалуйста?",
+     "src": "phrase"
+    },
+    {
+     "en": "That's £5.15, please.",
+     "ru": "С вас 5 фунтов 15 пенсов.",
+     "src": "phrase"
+    },
+    {
+     "en": "Here you are.",
+     "ru": "Вот, пожалуйста.",
+     "src": "phrase"
+    },
+    {
+     "en": "Here's your change.",
+     "ru": "Вот ваша сдача.",
+     "src": "phrase"
+    }
+   ]
+  },
+  {
+   "section": "4e Marvellous markets",
+   "page": 68,
+   "words": [
+    {
+     "en": "jewellery",
+     "ru": "ювелирные украшения",
+     "src": "vocab"
+    },
+    {
+     "en": "antiques",
+     "ru": "антиквариат",
+     "src": "vocab"
+    },
+    {
+     "en": "clothes",
+     "ru": "одежда",
+     "src": "vocab"
+    },
+    {
+     "en": "animals",
+     "ru": "животные",
+     "src": "vocab"
+    },
+    {
+     "en": "stables",
+     "ru": "конюшни",
+     "src": "check"
+    },
+    {
+     "en": "stalls",
+     "ru": "прилавки, ларьки",
+     "src": "check"
+    },
+    {
+     "en": "second-hand",
+     "ru": "подержанный",
+     "src": "check"
+    },
+    {
+     "en": "at bargain prices",
+     "ru": "по бросовым ценам",
+     "src": "check"
+    },
+    {
+     "en": "food courts",
+     "ru": "фуд-корты",
+     "src": "check"
+    },
+    {
+     "en": "barges",
+     "ru": "баржи",
+     "src": "check"
+    },
+    {
+     "en": "follow",
+     "ru": "следовать",
+     "src": "check"
+    },
+    {
+     "en": "map",
+     "ru": "карта",
+     "src": "check"
+    },
+    {
+     "en": "get lost",
+     "ru": "заблудиться",
+     "src": "check"
+    },
+    {
+     "en": "delicacy",
+     "ru": "деликатес",
+     "src": "check"
+    },
+    {
+     "en": "fried insects",
+     "ru": "жареные насекомые",
+     "src": "check"
+    },
+    {
+     "en": "delicious",
+     "ru": "очень вкусный",
+     "src": "check"
+    },
+    {
+     "en": "pineapple juice",
+     "ru": "ананасовый сок",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "4e Marvellous markets",
+   "page": 69,
+   "words": [
+    {
+     "en": "flowers",
+     "ru": "цветы",
+     "src": "vocab"
+    },
+    {
+     "en": "fruit & vegetables",
+     "ru": "фрукты и овощи",
+     "src": "vocab"
+    },
+    {
+     "en": "meat & fish",
+     "ru": "мясо и рыба",
+     "src": "vocab"
+    },
+    {
+     "en": "pottery",
+     "ru": "глиняная посуда",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "4f Food & drinks",
+   "page": 70,
+   "words": [
+    {
+     "en": "dairy products",
+     "ru": "молочные продукты",
+     "src": "vocab"
+    },
+    {
+     "en": "yoghurt",
+     "ru": "йогурт",
+     "src": "vocab"
+    },
+    {
+     "en": "cheese",
+     "ru": "сыр",
+     "src": "vocab"
+    },
+    {
+     "en": "butter",
+     "ru": "сливочное масло",
+     "src": "vocab"
+    },
+    {
+     "en": "milk",
+     "ru": "молоко",
+     "src": "vocab"
+    },
+    {
+     "en": "meat & fish",
+     "ru": "мясо и рыба",
+     "src": "vocab"
+    },
+    {
+     "en": "chicken",
+     "ru": "курица",
+     "src": "vocab"
+    },
+    {
+     "en": "salmon",
+     "ru": "лосось",
+     "src": "vocab"
+    },
+    {
+     "en": "beef",
+     "ru": "говядина",
+     "src": "vocab"
+    },
+    {
+     "en": "fruit",
+     "ru": "фрукты",
+     "src": "vocab"
+    },
+    {
+     "en": "watermelon",
+     "ru": "арбуз",
+     "src": "vocab"
+    },
+    {
+     "en": "apples",
+     "ru": "яблоки",
+     "src": "vocab"
+    },
+    {
+     "en": "tomatoes",
+     "ru": "помидоры",
+     "src": "vocab"
+    },
+    {
+     "en": "cherries",
+     "ru": "вишни, черешня",
+     "src": "vocab"
+    },
+    {
+     "en": "grapes",
+     "ru": "виноград",
+     "src": "vocab"
+    },
+    {
+     "en": "oranges",
+     "ru": "апельсины",
+     "src": "vocab"
+    },
+    {
+     "en": "bananas",
+     "ru": "бананы",
+     "src": "vocab"
+    },
+    {
+     "en": "vegetables",
+     "ru": "овощи",
+     "src": "vocab"
+    },
+    {
+     "en": "onions",
+     "ru": "лук",
+     "src": "vocab"
+    },
+    {
+     "en": "peppers",
+     "ru": "перцы",
+     "src": "vocab"
+    },
+    {
+     "en": "eggplant",
+     "ru": "баклажан",
+     "src": "vocab"
+    },
+    {
+     "en": "cauliflower",
+     "ru": "цветная капуста",
+     "src": "vocab"
+    },
+    {
+     "en": "lettuce",
+     "ru": "салат-латук",
+     "src": "vocab"
+    },
+    {
+     "en": "carrots",
+     "ru": "морковь",
+     "src": "vocab"
+    },
+    {
+     "en": "beans",
+     "ru": "бобы, фасоль",
+     "src": "vocab"
+    },
+    {
+     "en": "cabbage",
+     "ru": "капуста",
+     "src": "vocab"
+    },
+    {
+     "en": "drinks",
+     "ru": "напитки",
+     "src": "vocab"
+    },
+    {
+     "en": "tea",
+     "ru": "чай",
+     "src": "vocab"
+    },
+    {
+     "en": "coffee",
+     "ru": "кофе",
+     "src": "vocab"
+    },
+    {
+     "en": "orange juice",
+     "ru": "апельсиновый сок",
+     "src": "vocab"
+    },
+    {
+     "en": "water",
+     "ru": "вода",
+     "src": "vocab"
+    },
+    {
+     "en": "eggs",
+     "ru": "яйца",
+     "src": "vocab"
+    },
+    {
+     "en": "sugar",
+     "ru": "сахар",
+     "src": "vocab"
+    },
+    {
+     "en": "cereal",
+     "ru": "хлопья (на завтрак)",
+     "src": "vocab"
+    },
+    {
+     "en": "pasta",
+     "ru": "макароны",
+     "src": "vocab"
+    },
+    {
+     "en": "bread",
+     "ru": "хлеб",
+     "src": "vocab"
+    },
+    {
+     "en": "rice",
+     "ru": "рис",
+     "src": "vocab"
+    },
+    {
+     "en": "traditional",
+     "ru": "традиционный",
+     "src": "check"
+    },
+    {
+     "en": "includes",
+     "ru": "включает",
+     "src": "check"
+    },
+    {
+     "en": "steamed",
+     "ru": "приготовленный на пару",
+     "src": "check"
+    },
+    {
+     "en": "good manners",
+     "ru": "хорошие манеры",
+     "src": "check"
+    },
+    {
+     "en": "important",
+     "ru": "важный",
+     "src": "check"
+    },
+    {
+     "en": "fried",
+     "ru": "жареный",
+     "src": "check"
+    },
+    {
+     "en": "toast",
+     "ru": "тост",
+     "src": "check"
+    },
+    {
+     "en": "breakfast spread",
+     "ru": "накрытый стол к завтраку",
+     "src": "check"
+    },
+    {
+     "en": "scrambled eggs",
+     "ru": "яичница-болтунья",
+     "src": "check"
+    },
+    {
+     "en": "sliced",
+     "ru": "нарезанный ломтиками",
+     "src": "check"
+    },
+    {
+     "en": "available",
+     "ru": "доступный, имеющийся",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "4g Skills",
+   "page": 72,
+   "words": [
+    {
+     "en": "play music in the streets",
+     "ru": "играть музыку на улицах",
+     "src": "vocab"
+    },
+    {
+     "en": "dance in the streets",
+     "ru": "танцевать на улицах",
+     "src": "vocab"
+    },
+    {
+     "en": "watch a parade",
+     "ru": "смотреть парад",
+     "src": "vocab"
+    },
+    {
+     "en": "watch a fireworks display",
+     "ru": "смотреть фейерверк",
+     "src": "vocab"
+    },
+    {
+     "en": "crown the queen",
+     "ru": "короновать королеву",
+     "src": "vocab"
+    },
+    {
+     "en": "paint their faces",
+     "ru": "раскрашивать лица",
+     "src": "vocab"
+    },
+    {
+     "en": "Let's ...",
+     "ru": "Давай ...",
+     "src": "phrase"
+    },
+    {
+     "en": "Shall we ...?",
+     "ru": "Может, мы ...?",
+     "src": "phrase"
+    },
+    {
+     "en": "Do you feel like ...?",
+     "ru": "Тебе хочется ...?",
+     "src": "phrase"
+    },
+    {
+     "en": "That sounds good.",
+     "ru": "Звучит здорово.",
+     "src": "phrase"
+    },
+    {
+     "en": "Great idea!",
+     "ru": "Отличная идея!",
+     "src": "phrase"
+    },
+    {
+     "en": "Sure, why not!",
+     "ru": "Конечно, почему бы и нет!",
+     "src": "phrase"
+    },
+    {
+     "en": "I'd rather not. Let's ... instead.",
+     "ru": "Лучше не надо. Давай лучше ...",
+     "src": "phrase"
+    }
+   ]
+  },
+  {
+   "section": "4i Curricular: Geography",
+   "page": 74,
+   "words": [
+    {
+     "en": "climate",
+     "ru": "климат",
+     "src": "vocab"
+    },
+    {
+     "en": "low temperature",
+     "ru": "низкая температура",
+     "src": "check"
+    },
+    {
+     "en": "characterise",
+     "ru": "характеризовать",
+     "src": "check"
+    },
+    {
+     "en": "exist",
+     "ru": "существовать",
+     "src": "check"
+    },
+    {
+     "en": "last",
+     "ru": "длиться",
+     "src": "check"
+    },
+    {
+     "en": "reach",
+     "ru": "достигать",
+     "src": "check"
+    },
+    {
+     "en": "shine",
+     "ru": "светить",
+     "src": "check"
+    },
+    {
+     "en": "midnight sun",
+     "ru": "полуночное солнце",
+     "src": "check"
+    },
+    {
+     "en": "dark",
+     "ru": "тёмный",
+     "src": "check"
+    },
+    {
+     "en": "drop",
+     "ru": "падать, понижаться",
+     "src": "check"
+    },
+    {
+     "en": "survive",
+     "ru": "выживать",
+     "src": "check"
+    },
+    {
+     "en": "dry",
+     "ru": "сухой",
+     "src": "check"
+    },
+    {
+     "en": "below freezing",
+     "ru": "ниже нуля",
+     "src": "check"
+    },
+    {
+     "en": "hold in",
+     "ru": "удерживать (воду)",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "Language Review 4",
+   "page": 75,
+   "words": [
+    {
+     "en": "freezing cold",
+     "ru": "очень холодно, мороз",
+     "src": "vocab"
+    },
+    {
+     "en": "snowing",
+     "ru": "идёт снег",
+     "src": "vocab"
+    },
+    {
+     "en": "sunny",
+     "ru": "солнечно",
+     "src": "vocab"
+    },
+    {
+     "en": "windy",
+     "ru": "ветрено",
+     "src": "vocab"
+    },
+    {
+     "en": "raining",
+     "ru": "идёт дождь",
+     "src": "vocab"
+    },
+    {
+     "en": "foggy",
+     "ru": "туманно",
+     "src": "vocab"
+    },
+    {
+     "en": "chilly",
+     "ru": "прохладно",
+     "src": "vocab"
+    },
+    {
+     "en": "warm",
+     "ru": "тёплый",
+     "src": "vocab"
+    },
+    {
+     "en": "jeans",
+     "ru": "джинсы",
+     "src": "vocab"
+    },
+    {
+     "en": "beach",
+     "ru": "пляж",
+     "src": "vocab"
+    },
+    {
+     "en": "traditional costumes",
+     "ru": "национальные костюмы",
+     "src": "vocab"
+    },
+    {
+     "en": "amusement park",
+     "ru": "парк развлечений",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "Russia 4 · National dishes",
+   "page": 78,
+   "words": [
+    {
+     "en": "beetroot",
+     "ru": "свёкла",
+     "src": "vocab"
+    },
+    {
+     "en": "onions",
+     "ru": "лук",
+     "src": "vocab"
+    },
+    {
+     "en": "carrots",
+     "ru": "морковь",
+     "src": "vocab"
+    },
+    {
+     "en": "beef",
+     "ru": "говядина",
+     "src": "vocab"
+    },
+    {
+     "en": "garlic",
+     "ru": "чеснок",
+     "src": "vocab"
+    },
+    {
+     "en": "celery",
+     "ru": "сельдерей",
+     "src": "vocab"
+    },
+    {
+     "en": "parsnip",
+     "ru": "пастернак",
+     "src": "vocab"
+    },
+    {
+     "en": "cabbage",
+     "ru": "капуста",
+     "src": "vocab"
+    },
+    {
+     "en": "potatoes",
+     "ru": "картофель",
+     "src": "vocab"
+    },
+    {
+     "en": "tomato juice",
+     "ru": "томатный сок",
+     "src": "vocab"
+    },
+    {
+     "en": "national dish",
+     "ru": "национальное блюдо",
+     "src": "check"
+    },
+    {
+     "en": "delicious",
+     "ru": "очень вкусный",
+     "src": "check"
+    },
+    {
+     "en": "depend on",
+     "ru": "зависеть от",
+     "src": "check"
+    },
+    {
+     "en": "season",
+     "ru": "время года",
+     "src": "check"
+    },
+    {
+     "en": "contain",
+     "ru": "содержать",
+     "src": "check"
+    },
+    {
+     "en": "sour cream",
+     "ru": "сметана",
+     "src": "check"
+    },
+    {
+     "en": "boil",
+     "ru": "варить",
+     "src": "check"
+    },
+    {
+     "en": "tender",
+     "ru": "мягкий (о мясе)",
+     "src": "check"
+    },
+    {
+     "en": "remove",
+     "ru": "вынимать",
+     "src": "check"
+    },
+    {
+     "en": "pot",
+     "ru": "кастрюля",
+     "src": "check"
+    },
+    {
+     "en": "peel",
+     "ru": "чистить (от кожуры)",
+     "src": "check"
+    },
+    {
+     "en": "chop",
+     "ru": "нарезать",
+     "src": "check"
+    },
+    {
+     "en": "broth",
+     "ru": "бульон",
+     "src": "check"
+    },
+    {
+     "en": "flake",
+     "ru": "разделять на волокна",
+     "src": "check"
+    },
+    {
+     "en": "simmer",
+     "ru": "тушить на медленном огне",
+     "src": "check"
+    }
+   ]
+  }
+ ]
+}
