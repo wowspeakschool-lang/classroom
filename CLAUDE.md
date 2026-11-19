@@ -1214,6 +1214,29 @@ where c.slug like 'gg%' and b.type not in ('text','video','embed')
     or b.payload->>'title' ~* '^(супер|отлично|молодец|класс)|ты справишься|у тебя получится');
 ```
 
+### Приветствия и прощания Go Getter — свои, подростковые (19.11.2026)
+
+Анна: «Вверху приветствие и прощание вообще картинки для 10–12 лет. Ты считаешь
+подходящие?» — нет: в приветствиях стояли общие картинки `media/shared/hello_*`
+и `well_done_*`, те же, что у пятилеток в Wow Dragon.
+
+Сделан отдельный набор **`media/shared/gg/`**: шесть приветствий
+(`hello_teen_wave`, `hello_girl_wave`, `hello_highfive`, `hello_laptop`,
+`hello_backpack`, `hello_books`) и шесть прощаний (`bye_trophy`, `bye_medal`,
+`bye_thumb`, `bye_popper`, `bye_certificate`, `bye_star`) — полуреалистичный 3D,
+подростки и вещи, без малышей. 19.11 проставлены во всех **275** блоках
+GG1 (60 + 70), GG2 (59 + 66) и GG3 (10 + 10), картинки чередуются по кругу,
+копия — `classroom_backup_gg_privet_20261119`.
+
+**Новые домашки Go Getter берут картинки только из `media/shared/gg/`.**
+Общие `media/shared/hello_*` остаются у SM0–SM3 и Halloween.
+
+При генерации людей для Go Getter в промпт добавлять «realistic teenage
+proportions, natural small eyes, not a cartoon, no exaggerated features»:
+без этого FLUX рисует круглоглазого малыша. Предметы просить с «Nobody in the
+frame, no people, no hands» — иначе в кадр лезет чья-то голова (так вышли
+четыре брака из двенадцати в первой партии).
+
 ## Wow Dragon: инструкция в каждом задании и дракон в приветствии
 
 Решение Анны от 04.11.2026 («Просто повторяем одежду, инструкции… у нас нет»,
