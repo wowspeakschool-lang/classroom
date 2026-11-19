@@ -21,7 +21,7 @@
 (хвост /ks/ против контрольного `makes`), и дописать выбранное в словарь и в
 `tools/speechkit/podmeny.json`.
 
-## Файлы
+## Файлы (пять)
 
 Ссылки в блоках **пока не переставлены**: все четыре теста опубликованы, и
 ссылка на ещё не существующий файл означает тишину у детей. Перестановку сделаю
@@ -33,13 +33,13 @@
 | SM3 Unit 9 Test, блок 7 | `sm3/sm3_u9_test_b7_v4.mp3` | `sm3_u9_test_b7_v5.mp3` | pizza |
 | SM3 Unit 8 Test, блок 7 | `sm3/sm3_u8_test_b7_v2.mp3` | `sm3_u8_test_b7_v3.mp3` | pizza (то же слово, запись старая) |
 | GG3 Unit 3 Test, блок 8 | `gg2 + gg3/gg3_u3_test_b8_v2.mp3` | `gg3_u3_test_b8_v3.mp3` | pizza (там это ещё и верный вариант ответа) |
+| GG1 Final Test, блок 8 | `gg1/gg1_final_b7.mp3` | `gg1_final_b7_v2.mp3` | Rex (решение Анны 19.11) |
 
-Пятый файл — **по желанию Анны**: в GG1 Final Test, блок 8
-(`gg1/gg1_final_b7.mp3`) та же собака по имени Rex, два раза. От ключей это имя
-не зависит (ответы: eleven · long curly hair · swim · half past seven ·
-under the bed · listening to music), поэтому переделываем, только если Анна
-скажет. Новое имя тогда — `gg1_final_b7_v2.mp3`, текст — в
-`docs/ozvuchka_speechkit.md`, раздел «GG1 · Final Test · блок 9».
+Пятый файл Анна подтвердила 19.11 («134 да»): в GG1 Final Test, блок 8
+(`gg1/gg1_final_b7.mp3`) та же собака по имени Rex, два раза. От ключей имя не
+зависит (ответы: eleven · long curly hair · swim · half past seven ·
+under the bed · listening to music), но звучит так же плохо. Новое имя —
+`gg1_final_b7_v2.mp3`, папка `classroom-media/gg1/`, текст ниже.
 
 Папки в бакете прежние: SM3 — `classroom-media/sm3/`, GG3 — `classroom-media/gg2 + gg3/`.
 
@@ -73,6 +73,15 @@ This is a story about Tessa and her brother Felix. Last summer Tessa went to Egy
 ```
 Last summer three friends went on holiday. Daniel went to Italy with his family, Nora went to Spain and Tom went to Scotland. In Italy, Daniel went snorkelling with his father on the first day. His sister didn't go snorkelling — she stayed at the hotel with their mother. In the afternoon it rained, so the family stayed inside and played cards. They didn't go hiking and they didn't go to the beach. On the second day they went on a guided tour of a museum. Daniel's father was excited, but Daniel got bored after an hour. In the evening they ate in a restaurant. Daniel's mother had fish, his sister had soup, and Daniel had pizza. At the airport on the last day Daniel was sad, but his sister was happy, because she doesn't like hot weather.
 ```
+
+## GG1 · Final Test · блок 8 → `gg1_final_b7_v2.mp3`
+
+```
+This is the Brown family. They live in a small house in London. Jack is eleven years old. He has got short dark hair and green eyes. He can swim very well, but he can't ride a bike. His sister Emma is nine. She has got long curly hair. Emma can ride a horse. Jack always gets up at half past seven. He has breakfast with his family and then he goes to school. In Jack's bedroom there is a big desk next to the window. His guitar is under the bed. On Saturday Jack plays football with his friends. Emma doesn't like football. She likes listening to music. They have got a dog. His name is Rex. Rex is big and very friendly.
+```
+
+Ключи блока 9: eleven · long curly hair · swim · half past seven · under the bed ·
+listening to music. `guitar` не подменять — проверено 05.11.2026 по спектру.
 
 ---
 
