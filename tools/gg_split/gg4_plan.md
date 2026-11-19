@@ -17,3 +17,7 @@
 
 \* Блока с причёсками (curly hair … moustache) в присланных страницах не было — название «Appearance» моё.
 Не в тренажёре: Starter (Free-time activities, Adjectives, Weather) — добавлять только по согласию Анны.
+
+## Starter Unit (добавлено 19.11.2026, Анна: «добавить»)
+Папка «Starter Unit» ("order" 100, первой): Free-time activities 10 · Adjectives 12 · Weather 8.
+Слова новые, переводы мои, картинок пока нет.
