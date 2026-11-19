@@ -1,0 +1,804 @@
+{
+ "module": "Module 6",
+ "sections": [
+  {
+   "section": "6a Amazing Adventures",
+   "page": 98,
+   "words": [
+    {
+     "en": "climb a volcano",
+     "ru": "взобраться на вулкан",
+     "src": "vocab"
+    },
+    {
+     "en": "ride a camel",
+     "ru": "прокатиться на верблюде",
+     "src": "vocab"
+    },
+    {
+     "en": "go bungee jumping",
+     "ru": "прыгнуть с тарзанки (банджи-джампинг)",
+     "src": "vocab"
+    },
+    {
+     "en": "dive with sharks",
+     "ru": "нырять с акулами",
+     "src": "vocab"
+    },
+    {
+     "en": "ski down a mountain",
+     "ru": "спуститься с горы на лыжах",
+     "src": "vocab"
+    },
+    {
+     "en": "jump out of a plane",
+     "ru": "прыгнуть с самолёта",
+     "src": "vocab"
+    },
+    {
+     "en": "swim with dolphins",
+     "ru": "плавать с дельфинами",
+     "src": "vocab"
+    },
+    {
+     "en": "try ice climbing",
+     "ru": "попробовать ледолазание",
+     "src": "vocab"
+    },
+    {
+     "en": "ferry ride",
+     "ru": "поездка на пароме",
+     "src": "check"
+    },
+    {
+     "en": "skyline",
+     "ru": "силуэт города (на фоне неба)",
+     "src": "check"
+    },
+    {
+     "en": "make a dream come true",
+     "ru": "осуществить мечту",
+     "src": "check"
+    },
+    {
+     "en": "clear",
+     "ru": "прозрачный, чистый",
+     "src": "check"
+    },
+    {
+     "en": "highlight",
+     "ru": "самый яркий момент",
+     "src": "check"
+    },
+    {
+     "en": "explore",
+     "ru": "исследовать",
+     "src": "check"
+    },
+    {
+     "en": "desert",
+     "ru": "пустыня",
+     "src": "check"
+    },
+    {
+     "en": "river cruise",
+     "ru": "речной круиз",
+     "src": "check"
+    },
+    {
+     "en": "source",
+     "ru": "исток (реки)",
+     "src": "check"
+    },
+    {
+     "en": "climate",
+     "ru": "климат",
+     "src": "check"
+    },
+    {
+     "en": "coastline",
+     "ru": "побережье, береговая линия",
+     "src": "check"
+    },
+    {
+     "en": "ancient ruins",
+     "ru": "древние руины",
+     "src": "check"
+    },
+    {
+     "en": "active volcano",
+     "ru": "действующий вулкан",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "6b Travel Experiences",
+   "page": 100,
+   "words": [
+    {
+     "en": "tram",
+     "ru": "трамвай",
+     "src": "vocab"
+    },
+    {
+     "en": "boat",
+     "ru": "лодка",
+     "src": "vocab"
+    },
+    {
+     "en": "bus",
+     "ru": "автобус",
+     "src": "vocab"
+    },
+    {
+     "en": "car",
+     "ru": "машина",
+     "src": "vocab"
+    },
+    {
+     "en": "cable car",
+     "ru": "канатная дорога",
+     "src": "vocab"
+    },
+    {
+     "en": "coach",
+     "ru": "междугородний автобус",
+     "src": "vocab"
+    },
+    {
+     "en": "lorry",
+     "ru": "грузовик",
+     "src": "vocab"
+    },
+    {
+     "en": "helicopter",
+     "ru": "вертолёт",
+     "src": "vocab"
+    },
+    {
+     "en": "raft",
+     "ru": "плот",
+     "src": "vocab"
+    },
+    {
+     "en": "van",
+     "ru": "фургон",
+     "src": "vocab"
+    },
+    {
+     "en": "scooter",
+     "ru": "скутер, мопед",
+     "src": "vocab"
+    },
+    {
+     "en": "gondola",
+     "ru": "гондола",
+     "src": "vocab"
+    },
+    {
+     "en": "ship",
+     "ru": "корабль",
+     "src": "vocab"
+    },
+    {
+     "en": "taxi",
+     "ru": "такси",
+     "src": "vocab"
+    },
+    {
+     "en": "ferry",
+     "ru": "паром",
+     "src": "vocab"
+    },
+    {
+     "en": "train",
+     "ru": "поезд",
+     "src": "vocab"
+    },
+    {
+     "en": "bike",
+     "ru": "велосипед",
+     "src": "vocab"
+    },
+    {
+     "en": "canoe",
+     "ru": "каноэ",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "6b Travel Experiences",
+   "page": 101,
+   "words": [
+    {
+     "en": "weird",
+     "ru": "странный",
+     "src": "check"
+    },
+    {
+     "en": "on board",
+     "ru": "на борту",
+     "src": "check"
+    },
+    {
+     "en": "elderly",
+     "ru": "пожилой",
+     "src": "check"
+    },
+    {
+     "en": "old-fashioned",
+     "ru": "старомодный",
+     "src": "check"
+    },
+    {
+     "en": "get off the bus",
+     "ru": "выйти из автобуса",
+     "src": "check"
+    },
+    {
+     "en": "ghost",
+     "ru": "привидение",
+     "src": "check"
+    },
+    {
+     "en": "wear my hair in a bun",
+     "ru": "собирать волосы в пучок",
+     "src": "check"
+    },
+    {
+     "en": "bouquet",
+     "ru": "букет",
+     "src": "check"
+    },
+    {
+     "en": "lost in thought",
+     "ru": "погружённый в мысли",
+     "src": "check"
+    },
+    {
+     "en": "puzzled look",
+     "ru": "озадаченный взгляд",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "6c Culture Corner",
+   "page": 102,
+   "words": [
+    {
+     "en": "charity",
+     "ru": "благотворительная организация",
+     "src": "check"
+    },
+    {
+     "en": "aid programme",
+     "ru": "программа помощи",
+     "src": "check"
+    },
+    {
+     "en": "volunteer",
+     "ru": "волонтёр",
+     "src": "check"
+    },
+    {
+     "en": "experience",
+     "ru": "опыт",
+     "src": "check"
+    },
+    {
+     "en": "field",
+     "ru": "область, сфера",
+     "src": "check"
+    },
+    {
+     "en": "participate",
+     "ru": "участвовать",
+     "src": "check"
+    },
+    {
+     "en": "allow",
+     "ru": "позволять",
+     "src": "check"
+    },
+    {
+     "en": "host community",
+     "ru": "принимающее сообщество",
+     "src": "check"
+    },
+    {
+     "en": "hand in hand",
+     "ru": "рука об руку",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "6d Everyday English",
+   "page": 103,
+   "words": [
+    {
+     "en": "run in a race",
+     "ru": "участвовать в забеге",
+     "src": "vocab"
+    },
+    {
+     "en": "work with children in schools",
+     "ru": "работать с детьми в школах",
+     "src": "vocab"
+    },
+    {
+     "en": "help look after animals",
+     "ru": "помогать ухаживать за животными",
+     "src": "vocab"
+    },
+    {
+     "en": "donate/collect old clothes",
+     "ru": "жертвовать/собирать старую одежду",
+     "src": "vocab"
+    },
+    {
+     "en": "attend/organise a fundraising event",
+     "ru": "посетить/организовать благотворительное мероприятие",
+     "src": "vocab"
+    },
+    {
+     "en": "care for old/disabled people",
+     "ru": "заботиться о пожилых/людях с инвалидностью",
+     "src": "vocab"
+    },
+    {
+     "en": "buy/sell raffle tickets",
+     "ru": "покупать/продавать лотерейные билеты",
+     "src": "vocab"
+    },
+    {
+     "en": "donate/collect money",
+     "ru": "жертвовать/собирать деньги",
+     "src": "vocab"
+    },
+    {
+     "en": "I'm interested in volunteering.",
+     "ru": "Я хотел бы стать волонтёром.",
+     "src": "phrase"
+    },
+    {
+     "en": "When are you available?",
+     "ru": "Когда вы свободны?",
+     "src": "phrase"
+    },
+    {
+     "en": "I'm free on Monday mornings.",
+     "ru": "Я свободен по понедельникам утром.",
+     "src": "phrase"
+    },
+    {
+     "en": "We could use someone to walk the dogs.",
+     "ru": "Нам бы пригодился кто-нибудь, кто будет выгуливать собак.",
+     "src": "phrase"
+    },
+    {
+     "en": "You can start on Saturday if you like.",
+     "ru": "Можете начать в субботу, если хотите.",
+     "src": "phrase"
+    },
+    {
+     "en": "When are you free?",
+     "ru": "Когда вы свободны?",
+     "src": "phrase"
+    },
+    {
+     "en": "I can make it on Saturday afternoons.",
+     "ru": "Я могу по субботам после обеда.",
+     "src": "phrase"
+    },
+    {
+     "en": "How does that sound to you?",
+     "ru": "Как вам такое?",
+     "src": "phrase"
+    },
+    {
+     "en": "Is Saturday OK with you?",
+     "ru": "Вам подходит суббота?",
+     "src": "phrase"
+    },
+    {
+     "en": "I'll see you there.",
+     "ru": "Увидимся там.",
+     "src": "phrase"
+    }
+   ]
+  },
+  {
+   "section": "6e Technology",
+   "page": 104,
+   "words": [
+    {
+     "en": "text friends",
+     "ru": "писать друзьям SMS",
+     "src": "vocab"
+    },
+    {
+     "en": "instant message someone",
+     "ru": "писать кому-то в мессенджер",
+     "src": "vocab"
+    },
+    {
+     "en": "send an email",
+     "ru": "отправить электронное письмо",
+     "src": "vocab"
+    },
+    {
+     "en": "share photos",
+     "ru": "делиться фотографиями",
+     "src": "vocab"
+    },
+    {
+     "en": "write a blog",
+     "ru": "вести блог",
+     "src": "vocab"
+    },
+    {
+     "en": "chat online",
+     "ru": "общаться в чате",
+     "src": "vocab"
+    },
+    {
+     "en": "play video games",
+     "ru": "играть в видеоигры",
+     "src": "vocab"
+    },
+    {
+     "en": "look up maps",
+     "ru": "искать карты",
+     "src": "vocab"
+    },
+    {
+     "en": "listen to music",
+     "ru": "слушать музыку",
+     "src": "vocab"
+    },
+    {
+     "en": "download music/films",
+     "ru": "скачивать музыку/фильмы",
+     "src": "vocab"
+    },
+    {
+     "en": "browse web pages",
+     "ru": "просматривать веб-страницы",
+     "src": "vocab"
+    },
+    {
+     "en": "use a social networking site",
+     "ru": "пользоваться социальной сетью",
+     "src": "vocab"
+    },
+    {
+     "en": "use a search engine",
+     "ru": "пользоваться поисковой системой",
+     "src": "vocab"
+    },
+    {
+     "en": "smartphone",
+     "ru": "смартфон",
+     "src": "vocab"
+    },
+    {
+     "en": "MP3 player",
+     "ru": "MP3-плеер",
+     "src": "vocab"
+    },
+    {
+     "en": "tablet computer",
+     "ru": "планшет",
+     "src": "vocab"
+    },
+    {
+     "en": "laptop",
+     "ru": "ноутбук",
+     "src": "vocab"
+    },
+    {
+     "en": "GPS receiver",
+     "ru": "GPS-навигатор",
+     "src": "vocab"
+    },
+    {
+     "en": "video games console",
+     "ru": "игровая приставка",
+     "src": "vocab"
+    },
+    {
+     "en": "gadget",
+     "ru": "гаджет, устройство",
+     "src": "check"
+    },
+    {
+     "en": "awkward",
+     "ru": "неловкий",
+     "src": "check"
+    },
+    {
+     "en": "mode",
+     "ru": "режим",
+     "src": "check"
+    },
+    {
+     "en": "spot",
+     "ru": "место",
+     "src": "check"
+    },
+    {
+     "en": "puzzled",
+     "ru": "озадаченный",
+     "src": "check"
+    },
+    {
+     "en": "can't wait",
+     "ru": "не терпится",
+     "src": "check"
+    },
+    {
+     "en": "application",
+     "ru": "приложение",
+     "src": "check"
+    },
+    {
+     "en": "smack-bang",
+     "ru": "прямо, со всего маху",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "6f Cultural Habits",
+   "page": 106,
+   "words": [
+    {
+     "en": "blow your nose in public",
+     "ru": "сморкаться на людях",
+     "src": "vocab"
+    },
+    {
+     "en": "kiss sb you meet on the cheek",
+     "ru": "целовать при встрече в щёку",
+     "src": "vocab"
+    },
+    {
+     "en": "burp after a meal",
+     "ru": "рыгать после еды",
+     "src": "vocab"
+    },
+    {
+     "en": "smile at people",
+     "ru": "улыбаться людям",
+     "src": "vocab"
+    },
+    {
+     "en": "etiquette",
+     "ru": "этикет",
+     "src": "check"
+    },
+    {
+     "en": "polite",
+     "ru": "вежливый",
+     "src": "check"
+    },
+    {
+     "en": "rude",
+     "ru": "грубый, невежливый",
+     "src": "check"
+    },
+    {
+     "en": "globe",
+     "ru": "земной шар",
+     "src": "check"
+    },
+    {
+     "en": "ground",
+     "ru": "земля",
+     "src": "check"
+    },
+    {
+     "en": "respect",
+     "ru": "уважение",
+     "src": "check"
+    },
+    {
+     "en": "make eye contact",
+     "ru": "смотреть в глаза",
+     "src": "check"
+    },
+    {
+     "en": "avoid",
+     "ru": "избегать",
+     "src": "check"
+    },
+    {
+     "en": "shake hands",
+     "ru": "пожимать руки",
+     "src": "check"
+    },
+    {
+     "en": "strength",
+     "ru": "сила",
+     "src": "check"
+    },
+    {
+     "en": "firm handshake",
+     "ru": "крепкое рукопожатие",
+     "src": "check"
+    },
+    {
+     "en": "thoughtful",
+     "ru": "заботливый, внимательный",
+     "src": "check"
+    },
+    {
+     "en": "advice",
+     "ru": "совет",
+     "src": "check"
+    },
+    {
+     "en": "jealousy",
+     "ru": "ревность, зависть",
+     "src": "check"
+    },
+    {
+     "en": "secrecy",
+     "ru": "скрытность, тайна",
+     "src": "check"
+    },
+    {
+     "en": "disrespectful",
+     "ru": "неуважительный",
+     "src": "check"
+    },
+    {
+     "en": "sole",
+     "ru": "подошва, ступня",
+     "src": "check"
+    },
+    {
+     "en": "host",
+     "ru": "хозяин (принимающий гостей)",
+     "src": "check"
+    },
+    {
+     "en": "index finger",
+     "ru": "указательный палец",
+     "src": "check"
+    },
+    {
+     "en": "purse your lips",
+     "ru": "поджать губы",
+     "src": "check"
+    },
+    {
+     "en": "nod your head",
+     "ru": "кивать головой",
+     "src": "check"
+    },
+    {
+     "en": "side to side",
+     "ru": "из стороны в сторону",
+     "src": "check"
+    },
+    {
+     "en": "confused",
+     "ru": "сбитый с толку",
+     "src": "check"
+    },
+    {
+     "en": "appreciate",
+     "ru": "ценить",
+     "src": "check"
+    },
+    {
+     "en": "obliged",
+     "ru": "обязанный",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "6f Cultural Habits",
+   "page": 107,
+   "words": [
+    {
+     "en": "take off your shoes before going into sb's house",
+     "ru": "снимать обувь, входя в чужой дом",
+     "src": "vocab"
+    },
+    {
+     "en": "shake hands with sb you meet",
+     "ru": "пожимать руку при встрече",
+     "src": "vocab"
+    },
+    {
+     "en": "point at people",
+     "ru": "показывать пальцем на людей",
+     "src": "vocab"
+    },
+    {
+     "en": "eat everything on your plate",
+     "ru": "съедать всё с тарелки",
+     "src": "vocab"
+    },
+    {
+     "en": "give flowers to the host",
+     "ru": "дарить цветы хозяину",
+     "src": "vocab"
+    },
+    {
+     "en": "show the soles of your feet",
+     "ru": "показывать подошвы ног",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "6g Skills",
+   "page": 108,
+   "words": [
+    {
+     "en": "cut your finger",
+     "ru": "порезать палец",
+     "src": "vocab"
+    },
+    {
+     "en": "have a fever",
+     "ru": "температурить",
+     "src": "vocab"
+    },
+    {
+     "en": "sprain your wrist",
+     "ru": "растянуть запястье",
+     "src": "vocab"
+    },
+    {
+     "en": "have a toothache",
+     "ru": "болит зуб",
+     "src": "vocab"
+    },
+    {
+     "en": "twist your ankle",
+     "ru": "подвернуть лодыжку",
+     "src": "vocab"
+    },
+    {
+     "en": "have a cold/the flu",
+     "ru": "простудиться/болеть гриппом",
+     "src": "vocab"
+    },
+    {
+     "en": "have a headache",
+     "ru": "болит голова",
+     "src": "vocab"
+    },
+    {
+     "en": "have a nosebleed",
+     "ru": "идёт кровь из носа",
+     "src": "vocab"
+    },
+    {
+     "en": "have a sore throat",
+     "ru": "болит горло",
+     "src": "vocab"
+    },
+    {
+     "en": "have a stomach ache",
+     "ru": "болит живот",
+     "src": "vocab"
+    },
+    {
+     "en": "get sunburn",
+     "ru": "обгореть на солнце",
+     "src": "vocab"
+    }
+   ]
+  }
+ ]
+}

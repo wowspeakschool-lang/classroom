@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тренажёр слов Starlight 5</title>
+<style>
+:root{
+  --bg:#f6f4ef; --card:#ffffff; --ink:#1f2430; --muted:#6b7280; --line:#e5e1d8;
+  --accent:#3b5bdb; --accent-soft:#e7ecff; --ok:#2f9e44; --ok-soft:#e6f6ea; --bad:#e03131; --bad-soft:#fdecec;
+  --gold:#f08c00;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171c; --card:#1f232b; --ink:#eef0f4; --muted:#9aa3b2; --line:#2e333d;
+    --accent:#7c94ff; --accent-soft:#252c47; --ok:#51cf66; --ok-soft:#1e3326; --bad:#ff6b6b; --bad-soft:#3a2224;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15171c; --card:#1f232b; --ink:#eef0f4; --muted:#9aa3b2; --line:#2e333d;
+  --accent:#7c94ff; --accent-soft:#252c47; --ok:#51cf66; --ok-soft:#1e3326; --bad:#ff6b6b; --bad-soft:#3a2224;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:4px 0 2px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:16px}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:10px 14px}
+button:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button.ghost{background:transparent;border-color:transparent;color:var(--muted);padding:6px 8px}
+.top{display:flex;align-items:center;gap:8px;justify-content:space-between;margin-bottom:12px}
+.mod{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden}
+.mod>summary{list-style:none;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer;font-weight:600}
+.mod>summary::-webkit-details-marker{display:none}
+.sec{display:flex;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid var(--line)}
+.sec .name{flex:1;min-width:0}
+.sec .name small{display:block;color:var(--muted);font-weight:400;font-size:13px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-top:6px}
+.bar>i{display:block;height:100%;background:var(--ok)}
+.pill{font-size:13px;color:var(--muted);white-space:nowrap}
+.stage{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;min-height:340px;display:flex;flex-direction:column}
+.progress{display:flex;gap:4px;margin-bottom:14px}
+.progress i{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.progress i.done{background:var(--ok)} .progress i.miss{background:var(--bad)} .progress i.cur{background:var(--accent)}
+.task{color:var(--muted);font-size:14px;margin-bottom:6px}
+.word{font-size:34px;font-weight:700;text-align:center;margin:18px 0 6px;word-break:break-word}
+.word.ru{font-size:28px}
+.hint{text-align:center;color:var(--muted);min-height:24px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}
+@media (max-width:480px){.opts{grid-template-columns:1fr}}
+.opts button{padding:14px;text-align:left;font-size:18px}
+.opts button.ok{background:var(--ok-soft);border-color:var(--ok)}
+.opts button.bad{background:var(--bad-soft);border-color:var(--bad)}
+.say{display:block;margin:0 auto;font-size:28px;border-radius:50%;width:64px;height:64px;padding:0}
+.flip{flex:1;display:flex;flex-direction:column;justify-content:center;cursor:pointer;user-select:none}
+.row{display:flex;gap:10px;margin-top:auto}
+.row>button{flex:1;padding:14px}
+input.type{font:inherit;font-size:24px;width:100%;padding:12px 14px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);text-align:center}
+input.type.ok{border-color:var(--ok)} input.type.bad{border-color:var(--bad)}
+.letters{text-align:center;font-family:ui-monospace,monospace;letter-spacing:4px;color:var(--muted);margin:8px 0}
+.fb{text-align:center;min-height:28px;margin:10px 0;font-weight:600}
+.fb.ok{color:var(--ok)} .fb.bad{color:var(--bad)}
+.result{text-align:center}
+.result .big{font-size:48px;margin:10px 0}
+.list{margin-top:14px;text-align:left}
+.list div{padding:6px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+@media (max-width:480px){.modes{grid-template-columns:1fr}}
+.modes button{text-align:left;padding:14px}
+.modes button small{display:block;color:var(--muted);font-size:13px}
+.vocab{margin-top:10px;font-size:15px}
+.vocab div{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--line)}
+.vocab span:last-child{color:var(--muted);text-align:right}
+.star{color:var(--gold)}
+.slots{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:14px 0 4px}
+.slot{width:34px;height:42px;border-bottom:3px solid var(--line);font-size:26px;font-weight:700;text-align:center;line-height:42px}
+.gap{width:18px}
+.tiles{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:8px 0 14px}
+.tile{width:46px;height:50px;font-size:24px;font-weight:700;padding:0}
+.tile:disabled{opacity:.25}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pairs>div{display:flex;flex-direction:column;gap:8px}
+.pairs button{text-align:left;font-size:16px;padding:12px}
+.pairs button.sel{border-color:var(--accent);background:var(--accent-soft)}
+.pairs button.ok{background:var(--ok-soft);border-color:var(--ok);opacity:.7}
+.pairs button.bad{background:var(--bad-soft);border-color:var(--bad)}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+const DATA = /*DATA*/[];
+const AUDIO = /*AUDIO*/{};
+
+/* ---------- хранение прогресса ---------- */
+const KEY = 'starlight5_trener_v1';
+let store = {};
+try { store = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { store = {}; }
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e){} }
+// уровень слова 0..5 (ящики Лейтнера); 5 — выучено
+function wid(w){ return w.en.toLowerCase() + '|' + w.ru; }
+function lvl(w){ return (store[wid(w)] || {l:0}).l; }
+function setLvl(w, ok){
+  const s = store[wid(w)] || {l:0, seen:0};
+  s.seen = (s.seen||0) + 1;
+  s.l = ok ? Math.min(5, s.l + 1) : Math.max(0, s.l - 2);
+  s.t = Date.now();
+  store[wid(w)] = s; save();
+}
+
+/* ---------- озвучка ---------- */
+let voice = null;
+function pickVoice(){
+  const vs = speechSynthesis.getVoices();
+  voice = vs.find(v=>/en-GB/i.test(v.lang)) || vs.find(v=>/^en/i.test(v.lang)) || null;
+}
+if ('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+let player = null;
+function sayTTS(text){
+  if (!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text.replace(/[()…\/]/g,' '));
+  u.lang = 'en-GB'; if (voice) u.voice = voice; u.rate = 0.85;
+  speechSynthesis.speak(u);
+}
+function say(text){
+  const f = AUDIO[String(text).trim().toLowerCase()];
+  if (!f) return sayTTS(text);
+  try { if (player) player.pause(); } catch(e){}
+  player = new Audio('audio/' + f);
+  player.play().catch(()=>sayTTS(text));
+}
+/* ---------- утилиты ---------- */
+const $ = s => document.querySelector(s);
+const app = $('#app');
+function esc(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function norm(s){ return s.toLowerCase().replace(/[’']/g,"'").replace(/[.!?,]/g,'').replace(/\s+/g,' ').trim(); }
+function allWords(){ return DATA.flatMap(m=>m.sections.flatMap(s=>s.words)); }
+function pct(words){ if(!words.length) return 0; return Math.round(words.reduce((a,w)=>a+lvl(w),0)/(words.length*5)*100); }
+
+/* ---------- главный экран ---------- */
+function home(){
+  try{ if(player) player.pause(); }catch(e){}
+  const all = allWords();
+  const learned = all.filter(w=>lvl(w)>=5).length;
+  const weak = all.filter(w=>{const s=store[wid(w)]; return s && s.l<3;});
+  let h = `<h1>Тренажёр слов · Starlight 5</h1>
+  <div class="sub">Выучено ${learned} из ${all.length} слов. Выбери раздел и тренируйся каждый день по 10 минут.</div>`;
+  if (weak.length) h += `<button class="primary" style="width:100%;margin-bottom:14px" onclick="startWeak()">🔁 Повторить трудные слова (${weak.length})</button>`;
+  DATA.forEach((m,mi)=>{
+    const mw = m.sections.flatMap(s=>s.words);
+    h += `<details class="mod"${mi===openMod?' open':''} ontoggle="if(this.open)openMod=${mi}"><summary><span>${esc(m.module)}</span><span class="pill">${pct(mw)}%</span></summary>`;
+    m.sections.forEach((s,si)=>{
+      const p = pct(s.words);
+      h += `<div class="sec"><div class="name">${esc(s.section)}<small>${s.words.length} слов${p>=100?' · <span class="star">★ выучено</span>':''}</small><div class="bar"><i style="width:${p}%"></i></div></div>
+      <button onclick="menu(${mi},${si})">Учить</button></div>`;
+    });
+    h += `<div class="sec"><div class="name"><b>Весь модуль</b><small>${mw.length} слов</small></div><button onclick="menu(${mi},-1)">Учить</button></div></details>`;
+  });
+  h += `<div style="text-align:center;margin-top:18px"><button class="ghost" onclick="resetAll()">Сбросить прогресс</button></div>`;
+  app.innerHTML = h;
+}
+let openMod = 0;
+function resetAll(){ if(confirm('Стереть весь прогресс?')){ store={}; save(); home(); } }
+
+/* ---------- выбор режима ---------- */
+let cur = null; // {title, words}
+function menu(mi, si){
+  const m = DATA[mi];
+  const words = si<0 ? m.sections.flatMap(s=>s.words) : m.sections[si].words;
+  cur = {title: si<0 ? m.module : m.sections[si].section, words, back:()=>menu(mi,si)};
+  let h = `<div class="top"><button class="ghost" onclick="home()">← Разделы</button><span class="pill">${pct(words)}% выучено</span></div>
+  <h1>${esc(cur.title)}</h1>
+  <div class="sub">Иди по шагам сверху вниз — от лёгкого к трудному.</div>
+  <button class="primary" style="width:100%;text-align:left;padding:14px" onclick="run('learn')">🚀 Учить порциями<small style="display:block;opacity:.85;font-size:13px">6 новых слов проходят все шаги подряд, пока не запомнятся — лучший способ начать</small></button>
+  <div class="modes">
+    <button onclick="run('cards')">1. 🃏 Карточки<small>посмотри, послушай, переверни</small></button>
+    <button onclick="run('en2ru')">2. 🇬🇧→🇷🇺 Выбери перевод<small>видишь слово — выбери значение</small></button>
+    <button onclick="run('listen')">3. 🔊 Послушай и выбери<small>слышишь слово — выбери его</small></button>
+    <button onclick="run('ru2en')">4. 🇷🇺→🇬🇧 Найди слово<small>видишь перевод — выбери английское</small></button>
+    <button onclick="run('pairs')">5. 🧩 Найди пары<small>соедини слова с переводами</small></button>
+    <button onclick="run('scramble')">6. 🔤 Собери слово<small>расставь буквы по порядку</small></button>
+    <button onclick="run('spell')">7. ✍️ Напиши слово<small>по переводу и звуку</small></button>
+    <button onclick="run('dict')">8. 🎧 Диктант<small>только слушаешь и пишешь</small></button>
+    <button onclick="run('mix')">⭐ Смешанная тренировка<small>все задания вперемешку, трудные чаще</small></button>
+  </div>
+  <details><summary class="pill" style="cursor:pointer">Список слов (${words.length})</summary><div class="vocab">${
+    words.map(w=>`<div><span>${esc(w.en)} <button class="ghost" onclick="say('${esc(w.en).replace(/'/g,"\\'")}')">🔊</button></span><span>${esc(w.ru)}</span></div>`).join('')}</div></details>`;
+  app.innerHTML = h;
+}
+function startWeak(){
+  const weak = allWords().filter(w=>{const s=store[wid(w)]; return s && s.l<3;});
+  cur = {title:'Трудные слова', words:weak, back:home};
+  run('mix');
+}
+
+/* ---------- сессия ---------- */
+let S = null;
+function pickRound(words, n){
+  // слабые слова — первыми, потом остальные
+  const sorted = shuffle(words).sort((a,b)=>lvl(a)-lvl(b));
+  return shuffle(sorted.slice(0, Math.min(n, sorted.length)));
+}
+function fix(w, md){
+  if ((md==='spell'||md==='scramble'||md==='dict') && !spellable(w)) return md==='dict' ? 'listen' : 'ru2en';
+  return md;
+}
+function run(mode){
+  let items;
+  if (mode==='learn'){
+    const fresh = cur.words.filter(w=>lvl(w)<5);
+    const portion = (fresh.length ? shuffle(fresh).sort((a,b)=>lvl(a)-lvl(b)) : shuffle(cur.words)).slice(0,6);
+    items = [];
+    for (const md of ['cards','en2ru','listen','ru2en','scramble','spell'])
+      for (const w of shuffle(portion)) items.push({w, mode: fix(w, md)});
+  } else if (mode==='pairs'){
+    const ws = pickRound(cur.words, 18), groups = [];
+    for (let k=0; k<ws.length; k+=6) if (ws.slice(k,k+6).length>=3) groups.push(ws.slice(k,k+6));
+    if (!groups.length) groups.push(ws);
+    items = groups.map(g=>({w:g[0], ws:g, mode:'pairs'}));
+  } else {
+    const n = mode==='cards' ? cur.words.length : 12;
+    items = (mode==='cards' ? cur.words.slice() : pickRound(cur.words, n)).map(w=>({w, mode: fix(w, mode==='mix' ? randMode(w) : mode)}));
+  }
+  S = {mode, items, i:0, res:[], wrong:[]};
+  step();
+}
+function spellable(w){ const e=w.en.replace(/\(.*?\)/g,''); return !/[\/…]|\.\.\./.test(e) && e.trim().split(/\s+/).length<=4; }
+function randMode(w){
+  const l = lvl(w);
+  const pool = l<=1 ? ['en2ru','listen','en2ru'] : l<=3 ? ['listen','ru2en','scramble','spell'] : ['ru2en','spell','dict'];
+  return pool[Math.floor(Math.random()*pool.length)];
+}
+function bar(){
+  return `<div class="progress">${S.items.map((_,k)=>`<i class="${k<S.i?(S.res[k]?'done':'miss'):k===S.i?'cur':''}"></i>`).join('')}</div>`;
+}
+function head(){
+  return `<div class="top"><button class="ghost" onclick="cur.back()">← Выйти</button><span class="pill">${S.i+1} / ${S.items.length}</span></div>`;
+}
+function step(){
+  if (S.i >= S.items.length) return finish();
+  const {w, mode} = S.items[S.i];
+  const it = S.items[S.i];
+  if (mode==='pairs') return pairs(it.ws);
+  if (mode==='dict') return spell(w, true);
+  ({cards, en2ru, ru2en, listen, spell, scramble})[mode](w);
+}
+function next(ok){
+  const it = S.items[S.i];
+  S.res[S.i] = ok; if(!ok && it.mode!=='pairs') S.wrong.push(it.w);
+  // в режиме «порциями» ошибка — слово вернётся в конце, пока не ответит верно
+  if (!ok && S.mode==='learn' && it.mode!=='cards' && (it.rep||0)<2) S.items.push({...it, rep:(it.rep||0)+1});
+  S.i++; step();
+}
+function distractors(w, field){
+  const same = cur.words.filter(x=>x[field]!==w[field]);
+  const pool = same.length>=3 ? same : allWords().filter(x=>x[field]!==w[field]);
+  const uniq = []; const seen = new Set([w[field]]);
+  for (const x of shuffle(pool)){ if(!seen.has(x[field])){ seen.add(x[field]); uniq.push(x); } if(uniq.length===3) break; }
+  return uniq;
+}
+function choice(w, task, showHtml, field, autoSay){
+  const opts = shuffle([w, ...distractors(w, field)]);
+  app.innerHTML = head() + `<div class="stage">${bar()}<div class="task">${task}</div>${showHtml}
+    <div class="fb" id="fb"></div>
+    <div class="opts">${opts.map((o,k)=>`<button data-k="${k}">${esc(o[field])}</button>`).join('')}</div></div>`;
+  if (autoSay) setTimeout(()=>say(w.en), 250);
+  let done = false;
+  app.querySelectorAll('.opts button').forEach(b=>b.onclick=()=>{
+    if (done) return; done = true;
+    const o = opts[+b.dataset.k]; const ok = o===w;
+    b.classList.add(ok?'ok':'bad');
+    if(!ok) app.querySelectorAll('.opts button').forEach(x=>{ if(opts[+x.dataset.k]===w) x.classList.add('ok'); });
+    setLvl(w, ok);
+    const fb = $('#fb'); fb.className = 'fb ' + (ok?'ok':'bad');
+    fb.textContent = ok ? 'Верно! 👍' : `${w.en} — ${w.ru}`;
+    say(w.en);
+    setTimeout(()=>next(ok), ok ? 900 : 2200);
+  });
+}
+function en2ru(w){ choice(w, 'Выбери перевод', `<div class="word">${esc(w.en)}</div><button class="say ghost" onclick="say('${esc(w.en).replace(/'/g,"\\'")}')">🔊</button>`, 'ru', true); }
+function ru2en(w){ choice(w, 'Выбери английское слово', `<div class="word ru">${esc(w.ru)}</div>`, 'en', false); }
+function listen(w){ choice(w, 'Послушай и выбери слово', `<button class="say primary" onclick="say('${esc(w.en).replace(/'/g,"\\'")}')">🔊</button><div class="hint">нажми, чтобы послушать ещё раз</div>`, 'en', true); }
+
+function cards(w){
+  let back = false;
+  app.innerHTML = head() + `<div class="stage">${bar()}<div class="task">Посмотри на слово, послушай и нажми на карточку — увидишь перевод</div>
+    <div class="flip" id="flip"><div class="word">${esc(w.en)}</div><div class="hint" id="tr">👆 нажми, чтобы перевернуть</div></div>
+    <div class="row"><button onclick="setLvl(S.items[S.i].w,false);next(false)">😕 Не помню</button><button class="primary" onclick="setLvl(S.items[S.i].w,true);next(true)">😊 Знаю</button></div></div>`;
+  say(w.en);
+  $('#flip').onclick = ()=>{ back=!back; $('#tr').innerHTML = back ? `<span style="font-size:24px;color:var(--ink)">${esc(w.ru)}</span>` : '👆 нажми, чтобы перевернуть'; say(w.en); };
+}
+
+function tgt(w){ return w.en.replace(/\s*\(.*?\)\s*/g,' ').replace(/\s+/g,' ').trim(); }
+function spell(w, dict){
+  const target = tgt(w);
+  const mask = target.split('').map((c,k)=>/[a-z]/i.test(c) ? (k===0?c:'_') : c).join('');
+  app.innerHTML = head() + `<div class="stage">${bar()}<div class="task">${dict?'Послушай и напиши, что услышал(а)':'Напиши по-английски'}</div>
+    ${dict?'':`<div class="word ru">${esc(w.ru)}</div>`}
+    <button class="say ${dict?'primary':'ghost'}" onclick="say('${esc(w.en).replace(/'/g,"\\'")}')">🔊</button>
+    <div class="letters">${esc(mask)}</div>
+    <input class="type" id="inp" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="пиши здесь">
+    <div class="fb" id="fb"></div>
+    <div class="row"><button onclick="hint()">💡 Подсказка</button><button class="primary" id="chk">Проверить</button></div></div>`;
+  const inp = $('#inp'); inp.focus();
+  if (dict) setTimeout(()=>say(w.en), 250);
+  let hints = 0, done = false;
+  window.hint = ()=>{ hints++; const pre = target.slice(0, Math.min(target.length, hints+1)); inp.value = pre; inp.focus(); };
+  const check = ()=>{
+    if (done){ next(S._ok); return; }
+    const ok = norm(inp.value)===norm(target);
+    done = true; S._ok = ok && hints===0;
+    inp.classList.add(ok?'ok':'bad'); inp.readOnly = true;
+    setLvl(w, S._ok);
+    const fb = $('#fb'); fb.className = 'fb ' + (ok?'ok':'bad');
+    fb.textContent = ok ? (hints? 'Верно, но с подсказкой 🙂' : 'Отлично! 🎉') + (dict?` — ${w.ru}`:'') : `Правильно: ${target}${dict?' — '+w.ru:''}`;
+    say(w.en);
+    $('#chk').textContent = 'Дальше →';
+    if (ok) setTimeout(()=>{ if(S.items[S.i] && S.items[S.i].w===w) next(S._ok); }, 1200);
+  };
+  $('#chk').onclick = check;
+  inp.onkeydown = e=>{ if(e.key==='Enter') check(); };
+}
+
+function scramble(w){
+  const t = tgt(w);
+  const letters = t.split('').filter(c=>c!==' ');
+  let tiles = shuffle(letters.map((c,k)=>({c,k})));
+  if (letters.length>1 && tiles.every((x,i)=>x.c===letters[i])) tiles = tiles.reverse();
+  let picked = [], done = false;
+  app.innerHTML = head() + `<div class="stage">${bar()}<div class="task">Собери слово из букв</div>
+    <div class="word ru">${esc(w.ru)}</div>
+    <button class="say ghost" onclick="say('${esc(w.en).replace(/'/g,"\\'")}')">🔊</button>
+    <div class="slots" id="slots"></div>
+    <div class="fb" id="fb"></div>
+    <div class="tiles" id="tiles"></div>
+    <div class="row"><button id="undo">⌫ Стереть</button></div></div>`;
+  const draw = ()=>{
+    let k = 0;
+    $('#slots').innerHTML = t.split('').map(c=>c===' ' ? '<span class="gap"></span>' : `<span class="slot">${picked[k]!==undefined ? esc(tiles[picked[k++]].c) : (k++,'')}</span>`).join('');
+    $('#tiles').innerHTML = tiles.map((x,i)=>`<button class="tile" data-i="${i}" ${picked.includes(i)?'disabled':''}>${esc(x.c)}</button>`).join('');
+    app.querySelectorAll('.tile').forEach(b=>b.onclick=()=>{ if(done) return; picked.push(+b.dataset.i); draw(); if(picked.length===letters.length) check(); });
+  };
+  const check = ()=>{
+    const got = picked.map(i=>tiles[i].c).join('').toLowerCase();
+    const ok = got===letters.join('').toLowerCase();
+    done = true; setLvl(w, ok);
+    const fb = $('#fb'); fb.className = 'fb ' + (ok?'ok':'bad');
+    fb.textContent = ok ? 'Отлично! 🎉' : `Правильно: ${t}`;
+    say(w.en);
+    if (ok) setTimeout(()=>next(true), 1100);
+    else { $('#undo').textContent = 'Дальше →'; $('#undo').onclick = ()=>next(false); }
+  };
+  $('#undo').onclick = ()=>{ if(!done){ picked.pop(); draw(); } };
+  draw();
+}
+
+function pairs(ws){
+  const left = shuffle(ws), right = shuffle(ws);
+  let sel = null, matched = new Set(), mistakes = new Set();
+  app.innerHTML = head() + `<div class="stage">${bar()}<div class="task">Найди пары: нажми на английское слово, потом на перевод</div>
+    <div class="pairs"><div id="L">${left.map((w,i)=>`<button data-i="${i}">${esc(w.en)}</button>`).join('')}</div>
+    <div id="R">${right.map((w,i)=>`<button data-i="${i}">${esc(w.ru)}</button>`).join('')}</div></div>
+    <div class="fb" id="fb"></div></div>`;
+  const L = [...$('#L').children], R = [...$('#R').children];
+  L.forEach(b=>b.onclick=()=>{ if(b.disabled) return; L.forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); sel = left[+b.dataset.i]; say(sel.en); });
+  R.forEach(b=>b.onclick=()=>{
+    if (!sel || b.disabled) return;
+    const w = right[+b.dataset.i];
+    const lb = L.find(x=>left[+x.dataset.i]===sel);
+    if (w===sel){
+      matched.add(w); lb.disabled = b.disabled = true; lb.classList.remove('sel'); lb.classList.add('ok'); b.classList.add('ok');
+      setLvl(w, !mistakes.has(w)); sel = null;
+      if (matched.size===ws.length){
+        const ok = mistakes.size===0;
+        const fb = $('#fb'); fb.className='fb '+(ok?'ok':'bad'); fb.textContent = ok ? 'Все пары верно! 🎉' : `Готово! Ошибок: ${mistakes.size}`;
+        mistakes.forEach(m=>S.wrong.push(m));
+        setTimeout(()=>next(ok), 1300);
+      }
+    } else {
+      mistakes.add(sel); b.classList.add('bad'); setTimeout(()=>b.classList.remove('bad'), 600);
+    }
+  });
+}
+
+function finish(){
+  const ok = S.res.filter(Boolean).length, all = S.res.length;
+  const p = all ? Math.round(ok/all*100) : 0;
+  const emoji = p>=90?'🏆':p>=70?'🌟':p>=50?'💪':'📚';
+  const wrong = [...new Map(S.wrong.map(w=>[wid(w),w])).values()];
+  app.innerHTML = head().replace(/<span class="pill">.*?<\/span>/,'') + `<div class="stage result">
+    <div class="big">${emoji}</div><h1>${ok} из ${all}</h1>
+    <div class="sub">${p>=90?'Супер! Можно переходить к следующему шагу.':p>=70?'Хорошо! Повтори ещё раз — будет идеально.':'Давай ещё раз — слова запомнятся с повторением.'}</div>
+    ${wrong.length?`<div class="list"><b>Повтори эти слова:</b>${wrong.map(w=>`<div><span>${esc(w.en)}</span><span>${esc(w.ru)}</span></div>`).join('')}</div>`:''}
+    <div class="row" style="margin-top:18px"></div></div>`;
+  const row = app.querySelector('.row');
+  row.innerHTML = (wrong.length?`<button id="rw">🔁 Ошибки ещё раз</button>`:'') + `<button id="ag">Ещё раз</button><button class="primary" id="bk">К заданиям</button>`;
+  if (wrong.length) $('#rw').onclick = ()=>{ const keep=cur; cur={title:keep.title,words:wrong,back:keep.back}; run(['cards','pairs','learn'].includes(S.mode)?'mix':S.mode); };
+  $('#ag').onclick = ()=>run(S.mode);
+  $('#bk').onclick = ()=>cur.back();
+}
+
+home();
+</script>
+</body>
+</html>

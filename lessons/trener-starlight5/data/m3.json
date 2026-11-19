@@ -1,0 +1,1196 @@
+{
+ "module": "Module 3 · Day after day",
+ "sections": [
+  {
+   "section": "3 · Начало модуля: Free-time Activities",
+   "page": 43,
+   "words": [
+    {
+     "en": "playing board games",
+     "ru": "играть в настольные игры",
+     "src": "vocab"
+    },
+    {
+     "en": "watching DVDs",
+     "ru": "смотреть DVD",
+     "src": "vocab"
+    },
+    {
+     "en": "sending text messages",
+     "ru": "отправлять SMS",
+     "src": "vocab"
+    },
+    {
+     "en": "snowboarding",
+     "ru": "катание на сноуборде",
+     "src": "vocab"
+    },
+    {
+     "en": "going to the library",
+     "ru": "ходить в библиотеку",
+     "src": "vocab"
+    },
+    {
+     "en": "listening to music",
+     "ru": "слушать музыку",
+     "src": "vocab"
+    },
+    {
+     "en": "rollerblading",
+     "ru": "катание на роликах",
+     "src": "vocab"
+    },
+    {
+     "en": "surfing the Net",
+     "ru": "сидеть в интернете",
+     "src": "vocab"
+    },
+    {
+     "en": "going to the pool",
+     "ru": "ходить в бассейн",
+     "src": "vocab"
+    },
+    {
+     "en": "hanging out with friends",
+     "ru": "гулять с друзьями",
+     "src": "vocab"
+    },
+    {
+     "en": "reading books",
+     "ru": "читать книги",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "3a Daily routines",
+   "page": 44,
+   "words": [
+    {
+     "en": "get up",
+     "ru": "вставать",
+     "src": "vocab"
+    },
+    {
+     "en": "have a shower",
+     "ru": "принимать душ",
+     "src": "vocab"
+    },
+    {
+     "en": "have breakfast",
+     "ru": "завтракать",
+     "src": "vocab"
+    },
+    {
+     "en": "walk to school",
+     "ru": "идти в школу пешком",
+     "src": "vocab"
+    },
+    {
+     "en": "have lessons",
+     "ru": "заниматься на уроках",
+     "src": "vocab"
+    },
+    {
+     "en": "do sport",
+     "ru": "заниматься спортом",
+     "src": "vocab"
+    },
+    {
+     "en": "have dinner",
+     "ru": "ужинать",
+     "src": "vocab"
+    },
+    {
+     "en": "do my homework",
+     "ru": "делать домашнее задание",
+     "src": "vocab"
+    },
+    {
+     "en": "walk the dog",
+     "ru": "выгуливать собаку",
+     "src": "vocab"
+    },
+    {
+     "en": "watch a DVD",
+     "ru": "смотреть фильм на DVD",
+     "src": "vocab"
+    },
+    {
+     "en": "brush my teeth",
+     "ru": "чистить зубы",
+     "src": "vocab"
+    },
+    {
+     "en": "go to bed",
+     "ru": "ложиться спать",
+     "src": "vocab"
+    },
+    {
+     "en": "in the morning",
+     "ru": "утром",
+     "src": "vocab"
+    },
+    {
+     "en": "in the afternoon",
+     "ru": "днём",
+     "src": "vocab"
+    },
+    {
+     "en": "in the evening",
+     "ru": "вечером",
+     "src": "vocab"
+    },
+    {
+     "en": "milk",
+     "ru": "доить",
+     "src": "check"
+    },
+    {
+     "en": "cow",
+     "ru": "корова",
+     "src": "check"
+    },
+    {
+     "en": "goat",
+     "ru": "коза",
+     "src": "check"
+    },
+    {
+     "en": "snake farm",
+     "ru": "змеиная ферма",
+     "src": "check"
+    },
+    {
+     "en": "dangerous",
+     "ru": "опасный",
+     "src": "check"
+    },
+    {
+     "en": "bite",
+     "ru": "кусать",
+     "src": "check"
+    },
+    {
+     "en": "hand",
+     "ru": "кисть руки",
+     "src": "check"
+    },
+    {
+     "en": "arm",
+     "ru": "рука",
+     "src": "check"
+    },
+    {
+     "en": "early",
+     "ru": "рано",
+     "src": "check"
+    },
+    {
+     "en": "catch",
+     "ru": "ловить",
+     "src": "check"
+    },
+    {
+     "en": "type",
+     "ru": "вид, тип",
+     "src": "check"
+    },
+    {
+     "en": "poisonous",
+     "ru": "ядовитый",
+     "src": "check"
+    },
+    {
+     "en": "enclosure",
+     "ru": "вольер",
+     "src": "check"
+    },
+    {
+     "en": "laboratory",
+     "ru": "лаборатория",
+     "src": "check"
+    },
+    {
+     "en": "venom",
+     "ru": "яд (змеиный)",
+     "src": "check"
+    },
+    {
+     "en": "teeth",
+     "ru": "зубы",
+     "src": "check"
+    },
+    {
+     "en": "team",
+     "ru": "команда",
+     "src": "check"
+    },
+    {
+     "en": "make",
+     "ru": "делать, изготавливать",
+     "src": "check"
+    },
+    {
+     "en": "medicine",
+     "ru": "лекарство",
+     "src": "check"
+    },
+    {
+     "en": "antivenin",
+     "ru": "противоядие",
+     "src": "check"
+    },
+    {
+     "en": "die",
+     "ru": "умирать",
+     "src": "check"
+    },
+    {
+     "en": "puppy",
+     "ru": "щенок",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "3b Work days",
+   "page": 46,
+   "words": [
+    {
+     "en": "office work",
+     "ru": "работа в офисе",
+     "src": "check"
+    },
+    {
+     "en": "outdoors",
+     "ru": "на улице, на открытом воздухе",
+     "src": "check"
+    },
+    {
+     "en": "wildlife photographer",
+     "ru": "фотограф дикой природы",
+     "src": "check"
+    },
+    {
+     "en": "dawn",
+     "ru": "рассвет",
+     "src": "check"
+    },
+    {
+     "en": "get ready",
+     "ru": "собираться",
+     "src": "check"
+    },
+    {
+     "en": "work shifts",
+     "ru": "работать посменно",
+     "src": "check"
+    },
+    {
+     "en": "hide",
+     "ru": "прятаться",
+     "src": "check"
+    },
+    {
+     "en": "jungle",
+     "ru": "джунгли",
+     "src": "check"
+    },
+    {
+     "en": "keep still",
+     "ru": "не двигаться",
+     "src": "check"
+    },
+    {
+     "en": "wait for a chance",
+     "ru": "ждать удобного случая",
+     "src": "check"
+    },
+    {
+     "en": "return",
+     "ru": "возвращаться",
+     "src": "check"
+    },
+    {
+     "en": "share",
+     "ru": "делиться",
+     "src": "check"
+    },
+    {
+     "en": "beauty of nature",
+     "ru": "красота природы",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "3c Culture Corner",
+   "page": 48,
+   "words": [
+    {
+     "en": "interesting",
+     "ru": "интересный",
+     "src": "check"
+    },
+    {
+     "en": "make friends",
+     "ru": "заводить друзей",
+     "src": "check"
+    },
+    {
+     "en": "last a lifetime",
+     "ru": "длиться всю жизнь",
+     "src": "check"
+    },
+    {
+     "en": "attend",
+     "ru": "посещать",
+     "src": "check"
+    },
+    {
+     "en": "GCSEs",
+     "ru": "экзамены GCSE (выпускные экзамены в Англии)",
+     "src": "check"
+    },
+    {
+     "en": "qualifications",
+     "ru": "квалификация, документ об образовании",
+     "src": "check"
+    },
+    {
+     "en": "further studies",
+     "ru": "дальнейшая учёба",
+     "src": "check"
+    },
+    {
+     "en": "school uniform",
+     "ru": "школьная форма",
+     "src": "check"
+    },
+    {
+     "en": "catch up with",
+     "ru": "встретиться, пообщаться (с друзьями)",
+     "src": "check"
+    },
+    {
+     "en": "after school activities",
+     "ru": "внеклассные занятия",
+     "src": "check"
+    },
+    {
+     "en": "compete with",
+     "ru": "соревноваться с",
+     "src": "check"
+    },
+    {
+     "en": "choir",
+     "ru": "хор",
+     "src": "check"
+    },
+    {
+     "en": "instrument",
+     "ru": "музыкальный инструмент",
+     "src": "check"
+    },
+    {
+     "en": "orchestra",
+     "ru": "оркестр",
+     "src": "check"
+    },
+    {
+     "en": "musical events",
+     "ru": "музыкальные мероприятия",
+     "src": "check"
+    },
+    {
+     "en": "complete",
+     "ru": "дополнять, делать полным",
+     "src": "check"
+    },
+    {
+     "en": "experience",
+     "ru": "опыт, впечатления",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "3d Everyday English",
+   "page": 49,
+   "words": [
+    {
+     "en": "six o'clock",
+     "ru": "шесть часов",
+     "src": "phrase"
+    },
+    {
+     "en": "half past six",
+     "ru": "половина седьмого",
+     "src": "phrase"
+    },
+    {
+     "en": "(a) quarter to six",
+     "ru": "без четверти шесть",
+     "src": "phrase"
+    },
+    {
+     "en": "(a) quarter past six",
+     "ru": "четверть седьмого",
+     "src": "phrase"
+    },
+    {
+     "en": "twenty to six",
+     "ru": "без двадцати шесть",
+     "src": "phrase"
+    },
+    {
+     "en": "twenty past six",
+     "ru": "двадцать минут седьмого",
+     "src": "phrase"
+    },
+    {
+     "en": "Excuse me. Have you got the time, please?",
+     "ru": "Извините, не подскажете, который час?",
+     "src": "phrase"
+    },
+    {
+     "en": "Excuse me, please. What time is it?",
+     "ru": "Извините, который час?",
+     "src": "phrase"
+    },
+    {
+     "en": "Do you want to ...?",
+     "ru": "Хочешь ...?",
+     "src": "phrase"
+    },
+    {
+     "en": "That sounds good.",
+     "ru": "Звучит здорово.",
+     "src": "phrase"
+    },
+    {
+     "en": "What time do you want to meet?",
+     "ru": "Во сколько ты хочешь встретиться?",
+     "src": "phrase"
+    },
+    {
+     "en": "What time is it now?",
+     "ru": "Который сейчас час?",
+     "src": "phrase"
+    },
+    {
+     "en": "Is 6:30 OK for you?",
+     "ru": "Тебе удобно в 6:30?",
+     "src": "phrase"
+    },
+    {
+     "en": "Not really.",
+     "ru": "Не совсем.",
+     "src": "phrase"
+    },
+    {
+     "en": "Let's meet at 7:30.",
+     "ru": "Давай встретимся в 7:30.",
+     "src": "phrase"
+    },
+    {
+     "en": "Don't be late.",
+     "ru": "Не опаздывай.",
+     "src": "phrase"
+    },
+    {
+     "en": "OK, see you there.",
+     "ru": "Хорошо, увидимся там.",
+     "src": "phrase"
+    }
+   ]
+  },
+  {
+   "section": "3e True Friends",
+   "page": 50,
+   "words": [
+    {
+     "en": "iguana",
+     "ru": "игуана",
+     "src": "vocab"
+    },
+    {
+     "en": "bear",
+     "ru": "медведь",
+     "src": "vocab"
+    },
+    {
+     "en": "giraffe",
+     "ru": "жираф",
+     "src": "vocab"
+    },
+    {
+     "en": "cat",
+     "ru": "кошка",
+     "src": "vocab"
+    },
+    {
+     "en": "monkey",
+     "ru": "обезьяна",
+     "src": "vocab"
+    },
+    {
+     "en": "parrot",
+     "ru": "попугай",
+     "src": "vocab"
+    },
+    {
+     "en": "elephant",
+     "ru": "слон",
+     "src": "vocab"
+    },
+    {
+     "en": "horse",
+     "ru": "лошадь",
+     "src": "vocab"
+    },
+    {
+     "en": "ant",
+     "ru": "муравей",
+     "src": "vocab"
+    },
+    {
+     "en": "hamster",
+     "ru": "хомяк",
+     "src": "vocab"
+    },
+    {
+     "en": "goldfish",
+     "ru": "золотая рыбка",
+     "src": "vocab"
+    },
+    {
+     "en": "eagle",
+     "ru": "орёл",
+     "src": "vocab"
+    },
+    {
+     "en": "snake",
+     "ru": "змея",
+     "src": "vocab"
+    },
+    {
+     "en": "duck",
+     "ru": "утка",
+     "src": "vocab"
+    },
+    {
+     "en": "dolphin",
+     "ru": "дельфин",
+     "src": "vocab"
+    },
+    {
+     "en": "stare",
+     "ru": "пристально смотреть",
+     "src": "check"
+    },
+    {
+     "en": "normal",
+     "ru": "обычный",
+     "src": "check"
+    },
+    {
+     "en": "leaves",
+     "ru": "листья",
+     "src": "check"
+    },
+    {
+     "en": "twigs",
+     "ru": "веточки",
+     "src": "check"
+    },
+    {
+     "en": "slice",
+     "ru": "ломтик",
+     "src": "check"
+    },
+    {
+     "en": "playful",
+     "ru": "игривый",
+     "src": "check"
+    },
+    {
+     "en": "personality",
+     "ru": "характер",
+     "src": "check"
+    },
+    {
+     "en": "leader",
+     "ru": "вожак, лидер",
+     "src": "check"
+    },
+    {
+     "en": "treat",
+     "ru": "угощение",
+     "src": "check"
+    },
+    {
+     "en": "guests",
+     "ru": "гости",
+     "src": "check"
+    },
+    {
+     "en": "hug",
+     "ru": "объятие",
+     "src": "check"
+    },
+    {
+     "en": "typical",
+     "ru": "типичный",
+     "src": "check"
+    },
+    {
+     "en": "conservation project",
+     "ru": "природоохранный проект",
+     "src": "check"
+    },
+    {
+     "en": "rare",
+     "ru": "редкий",
+     "src": "check"
+    },
+    {
+     "en": "in the wild",
+     "ru": "в дикой природе",
+     "src": "check"
+    },
+    {
+     "en": "acre",
+     "ru": "акр",
+     "src": "check"
+    },
+    {
+     "en": "estate",
+     "ru": "поместье",
+     "src": "check"
+    },
+    {
+     "en": "exotic",
+     "ru": "экзотический",
+     "src": "check"
+    },
+    {
+     "en": "owner",
+     "ru": "владелец",
+     "src": "check"
+    },
+    {
+     "en": "staff",
+     "ru": "персонал",
+     "src": "check"
+    },
+    {
+     "en": "do their best",
+     "ru": "делать всё возможное",
+     "src": "check"
+    },
+    {
+     "en": "feel welcome",
+     "ru": "чувствовать себя желанным гостем",
+     "src": "check"
+    },
+    {
+     "en": "gentle",
+     "ru": "добрый, ласковый",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "3f An amazing school",
+   "page": 52,
+   "words": [
+    {
+     "en": "switch off your MP3 player",
+     "ru": "выключать MP3-плеер",
+     "src": "vocab"
+    },
+    {
+     "en": "be on time",
+     "ru": "приходить вовремя",
+     "src": "vocab"
+    },
+    {
+     "en": "wear a school uniform",
+     "ru": "носить школьную форму",
+     "src": "vocab"
+    },
+    {
+     "en": "bring a packed lunch",
+     "ru": "приносить обед с собой",
+     "src": "vocab"
+    },
+    {
+     "en": "take part in sports",
+     "ru": "заниматься спортом, участвовать в соревнованиях",
+     "src": "vocab"
+    },
+    {
+     "en": "juggle",
+     "ru": "жонглировать",
+     "src": "check"
+    },
+    {
+     "en": "trapeze",
+     "ru": "трапеция",
+     "src": "check"
+    },
+    {
+     "en": "exist",
+     "ru": "существовать",
+     "src": "check"
+    },
+    {
+     "en": "circus skills",
+     "ru": "цирковое мастерство",
+     "src": "check"
+    },
+    {
+     "en": "acrobatics",
+     "ru": "акробатика",
+     "src": "check"
+    },
+    {
+     "en": "tightrope walking",
+     "ru": "хождение по канату",
+     "src": "check"
+    },
+    {
+     "en": "performance",
+     "ru": "выступление",
+     "src": "check"
+    },
+    {
+     "en": "course",
+     "ru": "курс (обучения)",
+     "src": "check"
+    },
+    {
+     "en": "performer",
+     "ru": "артист",
+     "src": "check"
+    },
+    {
+     "en": "unique experience",
+     "ru": "уникальный опыт",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "3g Skills",
+   "page": 54,
+   "words": [
+    {
+     "en": "father (dad)",
+     "ru": "отец (папа)",
+     "src": "vocab"
+    },
+    {
+     "en": "mother (mum)",
+     "ru": "мать (мама)",
+     "src": "vocab"
+    },
+    {
+     "en": "son",
+     "ru": "сын",
+     "src": "vocab"
+    },
+    {
+     "en": "daughter",
+     "ru": "дочь",
+     "src": "vocab"
+    },
+    {
+     "en": "brother",
+     "ru": "брат",
+     "src": "vocab"
+    },
+    {
+     "en": "sister",
+     "ru": "сестра",
+     "src": "vocab"
+    },
+    {
+     "en": "husband",
+     "ru": "муж",
+     "src": "vocab"
+    },
+    {
+     "en": "wife",
+     "ru": "жена",
+     "src": "vocab"
+    },
+    {
+     "en": "uncle",
+     "ru": "дядя",
+     "src": "vocab"
+    },
+    {
+     "en": "aunt",
+     "ru": "тётя",
+     "src": "vocab"
+    },
+    {
+     "en": "cousin",
+     "ru": "двоюродный брат, двоюродная сестра",
+     "src": "vocab"
+    },
+    {
+     "en": "grandson",
+     "ru": "внук",
+     "src": "vocab"
+    },
+    {
+     "en": "granddaughter",
+     "ru": "внучка",
+     "src": "vocab"
+    },
+    {
+     "en": "grandfather/grandad",
+     "ru": "дедушка",
+     "src": "vocab"
+    },
+    {
+     "en": "grandmother/grandma",
+     "ru": "бабушка",
+     "src": "vocab"
+    },
+    {
+     "en": "nephew",
+     "ru": "племянник",
+     "src": "vocab"
+    },
+    {
+     "en": "niece",
+     "ru": "племянница",
+     "src": "vocab"
+    },
+    {
+     "en": "married",
+     "ru": "женатый, замужем",
+     "src": "vocab"
+    },
+    {
+     "en": "twins",
+     "ru": "близнецы",
+     "src": "vocab"
+    },
+    {
+     "en": "single",
+     "ru": "холостой, не замужем",
+     "src": "vocab"
+    },
+    {
+     "en": "only child",
+     "ru": "единственный ребёнок",
+     "src": "vocab"
+    },
+    {
+     "en": "divorced",
+     "ru": "разведённый",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "3i Curricular: Science",
+   "page": 56,
+   "words": [
+    {
+     "en": "alligator",
+     "ru": "аллигатор",
+     "src": "vocab"
+    },
+    {
+     "en": "snake",
+     "ru": "змея",
+     "src": "vocab"
+    },
+    {
+     "en": "lizard",
+     "ru": "ящерица",
+     "src": "vocab"
+    },
+    {
+     "en": "iguana",
+     "ru": "игуана",
+     "src": "vocab"
+    },
+    {
+     "en": "turtle",
+     "ru": "черепаха (морская)",
+     "src": "vocab"
+    },
+    {
+     "en": "Komodo dragon",
+     "ru": "комодский варан",
+     "src": "vocab"
+    },
+    {
+     "en": "reptile",
+     "ru": "рептилия",
+     "src": "check"
+    },
+    {
+     "en": "poisonous",
+     "ru": "ядовитый",
+     "src": "check"
+    },
+    {
+     "en": "exist",
+     "ru": "существовать",
+     "src": "check"
+    },
+    {
+     "en": "tortoise",
+     "ru": "черепаха (сухопутная)",
+     "src": "check"
+    },
+    {
+     "en": "cold",
+     "ru": "холодный",
+     "src": "check"
+    },
+    {
+     "en": "dry",
+     "ru": "сухой",
+     "src": "check"
+    },
+    {
+     "en": "hot",
+     "ru": "жаркий",
+     "src": "check"
+    },
+    {
+     "en": "backbone",
+     "ru": "позвоночник",
+     "src": "check"
+    },
+    {
+     "en": "warm blood",
+     "ru": "тёплая кровь",
+     "src": "check"
+    },
+    {
+     "en": "meat",
+     "ru": "мясо",
+     "src": "check"
+    },
+    {
+     "en": "vegetables",
+     "ru": "овощи",
+     "src": "check"
+    }
+   ]
+  },
+  {
+   "section": "Language Review 3",
+   "page": 57,
+   "words": [
+    {
+     "en": "send text messages",
+     "ru": "отправлять SMS",
+     "src": "vocab"
+    },
+    {
+     "en": "do my homework",
+     "ru": "делать домашнее задание",
+     "src": "vocab"
+    },
+    {
+     "en": "catch the bus",
+     "ru": "успеть на автобус",
+     "src": "vocab"
+    },
+    {
+     "en": "have a shower",
+     "ru": "принимать душ",
+     "src": "vocab"
+    },
+    {
+     "en": "start work",
+     "ru": "начинать работу",
+     "src": "vocab"
+    },
+    {
+     "en": "walk the dog",
+     "ru": "выгуливать собаку",
+     "src": "vocab"
+    },
+    {
+     "en": "go to bed",
+     "ru": "ложиться спать",
+     "src": "vocab"
+    },
+    {
+     "en": "hang out with friends",
+     "ru": "гулять с друзьями",
+     "src": "vocab"
+    },
+    {
+     "en": "surf the Internet",
+     "ru": "сидеть в интернете",
+     "src": "vocab"
+    },
+    {
+     "en": "play a musical instrument",
+     "ru": "играть на музыкальном инструменте",
+     "src": "vocab"
+    },
+    {
+     "en": "work outdoors",
+     "ru": "работать на улице",
+     "src": "vocab"
+    },
+    {
+     "en": "daily routine",
+     "ru": "распорядок дня",
+     "src": "vocab"
+    },
+    {
+     "en": "poisonous snake",
+     "ru": "ядовитая змея",
+     "src": "vocab"
+    },
+    {
+     "en": "brush my teeth",
+     "ru": "чистить зубы",
+     "src": "vocab"
+    },
+    {
+     "en": "office work",
+     "ru": "работа в офисе",
+     "src": "vocab"
+    },
+    {
+     "en": "take medicine",
+     "ru": "принимать лекарство",
+     "src": "vocab"
+    },
+    {
+     "en": "feel welcome",
+     "ru": "чувствовать себя желанным гостем",
+     "src": "vocab"
+    },
+    {
+     "en": "conservation project",
+     "ru": "природоохранный проект",
+     "src": "vocab"
+    },
+    {
+     "en": "do my best",
+     "ru": "делать всё возможное",
+     "src": "vocab"
+    },
+    {
+     "en": "work long hours",
+     "ru": "работать допоздна",
+     "src": "vocab"
+    }
+   ]
+  },
+  {
+   "section": "Russia 3 · Russia's Favourite Animal",
+   "page": 60,
+   "words": [
+    {
+     "en": "common",
+     "ru": "обыкновенный",
+     "src": "check"
+    },
+    {
+     "en": "special place",
+     "ru": "особое место",
+     "src": "check"
+    },
+    {
+     "en": "in the hearts of",
+     "ru": "в сердцах",
+     "src": "check"
+    },
+    {
+     "en": "mountains",
+     "ru": "горы",
+     "src": "check"
+    },
+    {
+     "en": "forests",
+     "ru": "леса",
+     "src": "check"
+    },
+    {
+     "en": "fur",
+     "ru": "мех",
+     "src": "check"
+    },
+    {
+     "en": "paws",
+     "ru": "лапы",
+     "src": "check"
+    },
+    {
+     "en": "claws",
+     "ru": "когти",
+     "src": "check"
+    },
+    {
+     "en": "grow",
+     "ru": "вырастать",
+     "src": "check"
+    },
+    {
+     "en": "berries",
+     "ru": "ягоды",
+     "src": "check"
+    },
+    {
+     "en": "nuts",
+     "ru": "орехи",
+     "src": "check"
+    },
+    {
+     "en": "roots",
+     "ru": "корни",
+     "src": "check"
+    },
+    {
+     "en": "grasses",
+     "ru": "травы",
+     "src": "check"
+    },
+    {
+     "en": "insects",
+     "ru": "насекомые",
+     "src": "check"
+    },
+    {
+     "en": "fish",
+     "ru": "рыба",
+     "src": "check"
+    },
+    {
+     "en": "fairytales",
+     "ru": "сказки",
+     "src": "check"
+    },
+    {
+     "en": "cartoons",
+     "ru": "мультфильмы",
+     "src": "check"
+    },
+    {
+     "en": "national symbol",
+     "ru": "национальный символ",
+     "src": "check"
+    }
+   ]
+  }
+ ]
+}
