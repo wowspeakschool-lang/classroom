@@ -71,3 +71,7 @@
     - Abstract nouns, Online films and media, Global issues — по вопросу: у свитка «The people in the scroll fought for ___ .» — freedom / free / freely; у щита «This advert asks us to stop ___ — the air in our city is dirty.» — pollution / poverty / honesty и «You can ___ the new series online — no need to download it.» — stream / print / post. Пустая сортировка у щита убирается, вопросы — в одно задание с артиклями.
 
 32. (16.11) Анна: смартфон — 4 вопроса на грамматику вместо аудирования (Past Perfect «had already left», suggested + -ing, told, causative) — ок; аптечка «You've got a high temperature. You ___ stay in bed today — don't go out!» (must) — ок.
+
+## 19.11
+
+33. Задача на потом (после того как урок доделаем): **переделать чек-лист**. Как именно — Анна объяснит позже. До её объяснения ничего не трогать.
