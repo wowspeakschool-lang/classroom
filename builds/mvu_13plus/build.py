@@ -10,7 +10,7 @@ import data
 
 OUT = os.path.join(REPO, 'lessons', 'mvu_13plus'); os.makedirs(OUT + '/plans', exist_ok=True)
 SITE = 'https://classroom.wowteach.ru/lessons/mvu_13plus/plans/'
-AUDIO = 'https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/classroom-media/mvu_13plus/'
+AUDIO = 'https://api.wowteach.ru/storage/v1/object/public/classroom-media/mvu_13plus/'  # свой домен: supabase.co у части учеников не открывается
 e = html.escape
 
 # ── проверка данных ─────────────────────────────────────────────────────────────────────
@@ -24,6 +24,7 @@ for P in data.PARTS:
         for t in o['tasks']:
             for k in ('image',):
                 if t.get(k): used.add(t[k])
+            for q in t.get('qs', []): topics_used.update(q[1])
             for it in t.get('items', []):
                 topics_used.update(it.get('t', []))
                 for k in ('img',):
@@ -35,10 +36,12 @@ for P in data.PARTS:
             if t['kind'] == 'match':
                 rights = [it.get('img') or it.get('d') for it in t['items']]
                 if len(set(rights)) != len(rights): problems.append(('match: правые не уникальны', t['title']))
-used |= {'door_open', 'suspect_1', 'suspect_2', 'suspect_3', 'suspect_4'} | {f[0] for f in data.FAMILY}
+used |= {'door_open'}
 missing = sorted(u for u in used if u not in media)
 all_topics = {data.tid(p['part'], bi, ti) for p in data.CHECKLIST for bi, (_, ts) in enumerate(p['blocks'], 1) for ti in range(1, len(ts) + 1)}
-uncovered = sorted(all_topics - topics_used)
+names_all = data.topic_names()
+covered_names = {names_all[t] for t in topics_used}
+uncovered = sorted(t for t in all_topics - topics_used if names_all[t] not in covered_names)  # одинаковые темы получают балл друг от друга
 if missing: print('!! нет картинок:', missing)
 if uncovered:
     names = {data.tid(p['part'], bi, ti): t for p in data.CHECKLIST for bi, (_, ts) in enumerate(p['blocks'], 1) for ti, t in enumerate(ts, 1)}
@@ -54,11 +57,20 @@ def ans(it):
     if 'a' in it: return it['a']
     if 's' in it: return it['s']
     if it.get('suspect'): return 'suspect №1 (curly dark hair, beard, glasses, leather jacket)'
+    if 'bad' in it: w = it['s'].split(' '); return f'ошибка «{w[it["bad"]]}» → {it["fix"]}: ' + ' '.join(it['fix'] if i == it['bad'] else x for i, x in enumerate(w))
     if 'w' in it: return it['w']
     return ''
 
-KIND_RU = {'choice': 'выбор ответа', 'family': 'семейное дерево, выбор ответа', 'tf': 'верно / неверно', 'hotspot': 'стрелка на картинке, выбрать слово',
-           'order': 'собрать предложение', 'sort': 'разложить по группам', 'match': 'соединить пары', 'listen': 'голосовое сообщение + вопросы'}
+KIND_RU = {'choice': 'выбор ответа', 'tf': 'верно / неверно', 'hotspot': 'стрелка на картинке, выбрать слово',
+           'order': 'собрать предложение', 'sort': 'разложить по группам', 'match': 'соединить пары', 'listen': 'голосовое сообщение + вопросы',
+           'oral': 'устные вопросы по картинке', 'fix': 'найти ошибку'}
+HOW = {'choice': 'Пункты по одному: следующий — Next, предыдущий — ←.', 'hotspot': 'Пункты по одному: следующий — Next, предыдущий — ←.',
+       'fix': 'Ученик нажимает на неверное слово и говорит предложение правильно вслух. Пункты по одному.',
+       'order': 'Слова можно нажимать или перетаскивать; нажатие на слово в строке возвращает его назад. Верно/неверно видно только после кнопки «Check».',
+       'sort': 'Картинки можно нажимать (потом нажать на группу) или перетаскивать; переложить можно до кнопки «Check». После разложения ученик называет каждую вещь вслух.',
+       'match': 'Пары соединяются нажатием (левое → правое) или перетаскиванием; нажатие на левое снимает пару. Верно/неверно — только после «Check».',
+       'listen': 'Слева запись, справа сразу все вопросы — ученик читает их до прослушивания и слушает один раз (можно ещё раз, если просит).',
+       'oral': 'На экране картинка и вопросы, вариантов нет. Спросите, ученик отвечает устно — оцените 0/1/2 в чек-листе ✅ («Сейчас на экране»).'}
 rows = []
 def row(step, do, tl, exp):
     rows.append(f'<tr><td class="st">{step}</td><td>{do}</td><td class="tl">{tl}</td><td class="sa">{exp}</td></tr>')
@@ -72,8 +84,8 @@ for P in data.PARTS:
         row(f'Переход в Part {P["n"]}', 'Только если в предыдущей части каждый блок ≥ 9 из 12 (или вы хотите проверить ещё пару заданий). Нажмите «Keep looking». На экране только название комнаты — расскажите сами: ' + e(P['intro']) + ' Не говорите «нам нужно ещё цифр» — просто нашлась новая комната.', e(P['intro_en']), '—')
     for o in P['objects']:
         name = o['name'].split(' — ')[0]
-        row(f'🔎 {e(o["id"].replace("_", " "))}', f'Ученик выбирает предмет, вы нажимаете. <b>Назвать предмет</b> — оцените в чек-листе ✅, панель «Сейчас на экране» (✓ / ~ / ✗).'
-            + (' В Part 2 — с двумя прилагательными, в Part 3 — объяснить, что это и зачем.' if P['n'] > 1 else ''), e(o['ask']), e(o['name']))
+        row(f'🔎 {e(o["id"].replace("_", " "))}', 'Ученик выбирает предмет, вы нажимаете. <b>Назвать предмет</b>. Не знает по-английски — пусть назовёт по-русски, предмет всё равно открывается.'
+            + (' Оцените в чек-листе ✅, панель «Сейчас на экране» (✓ / ~ / ✗).' if o['name_t'] else ' Без балла.'), e(o['ask']), e(o['name']))
         for t in o['tasks']:
             exp = '<br>'.join(e(ans(it)) for it in t.get('items', []) if ans(it))
             if t['kind'] == 'sort':
@@ -82,7 +94,9 @@ for P in data.PARTS:
                 exp = '<br>'.join(f'{e(it["w"])} — {e(it.get("d") or it.get("img", "").replace("_", " "))}' for it in t['items'])
             if t['kind'] == 'hotspot':
                 exp = ', '.join(it['a'] for it in t['items'])
-            do = f'<b>{KIND_RU[t["kind"]]}</b>. Скажите своими словами: «{e(t["title"])}». На экране только «{e(t["en"])}». Ученик отвечает — вы нажимаете. Пункты по одному: следующий — Next, предыдущий — ←.'
+            if t['kind'] == 'oral':
+                exp = '<br>'.join(f'{e(q)} — {e(x)}' for q, _, x in t['qs'])
+            do = f'<b>{KIND_RU[t["kind"]]}</b>. Скажите своими словами: «{e(t["title"])}». На экране только «{e(t["en"])}». ' + HOW[t['kind']]
             if t['kind'] == 'listen':
                 do += f'<br><i>Текст записи (ученику не показываем):</i> {e(t["text"])}'
             tl = e(t['en'])
@@ -105,6 +119,16 @@ PLAN_INNER = (
 PLAN_STYLE = ('table.plan td.st{font-weight:700;white-space:nowrap}table.plan td.tl{color:#7a3d10;font-style:italic;width:24%}'
               'table.plan td.sa{color:#1f5fa8;width:22%}table.plan tr.part td{background:#2b2240;color:#ffd889;font-weight:700}')
 
+# ── новые комнаты с вырезками (вариант «а», 12.11): предмет вырезан из самой комнаты и лежит поверх ──
+RJ = os.path.join(REPO, 'media', 'mvu_13plus', 'rooms', 'rooms.json')
+if os.path.exists(RJ):
+    cuts = json.load(open(RJ))
+    for P in data.PARTS:
+        ids = [o['id'] for o in P['objects']]
+        if all(i in cuts for i in ids):
+            P['room'] = cuts[ids[0]]['room']; used.add(P['room'])
+            for o in P['objects']:
+                o['cut'] = cuts[o['id']]; used.add('rooms/' + o['cut']['room'] + '_' + o['id'])
 # ── данные для страницы ─────────────────────────────────────────────────────────────────
 preload = set(used)
 D = dict(media=data.M, audio=AUDIO, family=data.FAMILY,
