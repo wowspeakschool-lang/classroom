@@ -130,5 +130,13 @@
  [
   "\\bbananas(?=[.!?]?$)",
   "ba+nanas"
+ ],
+ [
+  "\\bRex\\b",
+  "Recks"
+ ],
+ [
+  "\\bfoggy(?=[.!?]?$)",
+  "fo+ggy"
  ]
 ]
