@@ -713,7 +713,7 @@ const MW = {
     const W = Math.min(1100, screen.availWidth - 80), H = Math.min(900, screen.availHeight - 80);
     const w = window.open('', 'wowspeak_mvu13', `popup=yes,width=${W},height=${H},left=${screen.availWidth - W - 20},top=30,resizable=yes,scrollbars=yes`);
     if (!w) { alert('Разрешите всплывающие окна, чтобы открыть чек-лист и план.'); return; }
-    this.w = w; w.APP = { S, D, topicScore, oralMark, setOverride: (t, v) => { if (v === null) delete S.override[t]; else S.override[t] = v; save(); MW.refresh(); }, screen: () => SCREENS[cur], save, reset: () => { localStorage.removeItem('mvu13'); location.reload(); }, report };
+    this.w = w; w.APP = { S, D, topicScore, where, goObj: id => { show(SCREEN_ID['name_' + id]); w.focus(); }, oralMark, setOverride: (t, v) => { if (v === null) delete S.override[t]; else S.override[t] = v; save(); MW.refresh(); }, screen: () => SCREENS[cur], save, reset: () => { localStorage.removeItem('mvu13'); location.reload(); }, report };
     w.document.open(); w.document.write(D.mw_html); w.document.close();
     setTimeout(() => { this.refresh(); if (go && w.goReport) w.goReport(); }, 150);
   },
@@ -753,6 +753,22 @@ function report() {
   ];
   if ((S.comment || '').trim()) lines.push(`Комментарий преподавателя: ${S.comment.trim()}`);
   return lines.join('\n');
+}
+
+// какой предмет проверяет тему (для чек-листа менеджера): по общему названию темы, во всех частях
+let WHERE = null;
+function where(id) {
+  if (!WHERE) {
+    WHERE = {};
+    SCREENS.forEach(s => {
+      if (!s.obj) return;
+      const ts = [];
+      if (s.task) (s.task.items || []).forEach(i => { (i.t || []).forEach(x => ts.push(x)); (i.gaps || []).forEach(g => g.forEach(x => ts.push(x))); });
+      (s.oral || []).forEach(o => (o.topics || []).forEach(x => ts.push(x)));
+      ts.forEach(x => { const c = CANON(TNAME[x]); const L = WHERE[c] = WHERE[c] || []; if (!L.some(e => e.id === s.obj.id)) L.push({ id: s.obj.id, part: s.part, name: s.obj.name.split(' (')[0].replace(/^(a|an) /, '') }); });
+    });
+  }
+  return WHERE[CANON(TNAME[id])] || [];
 }
 
 /* ───────── загрузка ───────── */

@@ -24,6 +24,7 @@ tr.unset.past td:first-child{box-shadow:inset 4px 0 #f2b544}
 .sum{font-weight:700}.pass{color:#1f7a3a}.fail{color:#b03030}
 .auto{font-size:11px;color:#8a7a66;margin-left:4px}
 .mk button.f2{background:#c9efd5;border-color:#3fbf6a}.mk button.f1{background:#fde7b8;border-color:#f2b544}.mk button.f0{background:#f7c9c9;border-color:#e25555}
+span.objs{float:right}button.obj{margin-left:6px;border:1px solid #e0d3bd;background:#fbf6ec;color:#8a6a46;border-radius:10px;padding:1px 8px;font-size:12px;cursor:pointer}button.obj:hover{background:#f2b544;color:#2a1a10;border-color:#f2b544}
 #cm{height:70px;font-family:inherit;font-size:14px}
 h2{margin:14px 0 4px;color:#6e3510;font-size:17px}
 .legend{background:#fffaf0;border-left:4px solid #f2b544;padding:8px 12px;margin:8px 0;font-size:13px}
@@ -46,6 +47,7 @@ textarea{width:100%;height:220px;font-family:Consolas,monospace;font-size:13px}
   <div class="now" id="now"></div>
   <div class="legend"><b>0 · 1 · 2.</b> 2 — сам, верно, полной фразой (в задании с нажатием — всё верно); 1 — после подсказки, исправил себя, ответил словом вместо фразы (в задании — не меньше половины); 0 — не смог и с подсказкой, по-русски, не понял (в задании — меньше половины).
   Балл по нажатиям ученика и ваши устные отметки («Сейчас на экране») сразу видны в таблице: <b>бледная</b> кнопка — посчитанный балл, рядом — откуда он («из задания», «устно», «из другой части»). Нажатие на 0/1/2 в таблице ставит ваш балл (<b>яркая</b> кнопка) вместо посчитанного; повторное нажатие — снять.
+  Справа от темы — предмет, который её проверяет: нажмите, и урок откроет этот предмет.
   Часть пройдена, если в каждом блоке ≥ 9 из 12 — это подсказка, решение за вами.</div>
   <div id="tables"></div>
   <h2 id="repH">Отчёт</h2>
@@ -79,7 +81,7 @@ function render(){
   D.checklist.forEach((P,pi)=>{const h2=document.createElement('h2');h2.textContent=P.title;box.append(h2);
     P.blocks.forEach((b,bi)=>{const t=document.createElement('table');const th=document.createElement('tr');th.innerHTML='<th>'+b[0]+'</th><th>балл</th>';t.append(th);let sum=0,filled=0;
       b[1].forEach((name,ti)=>{const id='p'+(pi+1)+'b'+(bi+1)+'t'+(ti+1);const sc=A.topicScore(id);if(sc.v!==null){sum+=sc.v;filled++}
-        const tr=document.createElement('tr');if(curT.has(id))tr.className='cur';const td=document.createElement('td');td.textContent=name;const td2=document.createElement('td');td2.className='sc';
+        const tr=document.createElement('tr');if(curT.has(id))tr.className='cur';const td=document.createElement('td');td.textContent=name;const ob=document.createElement('span');ob.className='objs';td.append(ob);A.where(id).slice().sort((x,y)=>(x.part!==pi+1)-(y.part!==pi+1)).forEach(o=>{const c=document.createElement('button');c.className='obj';c.title='Открыть этот предмет в уроке';c.textContent='🔎 '+(o.part!==pi+1?'Part '+o.part+' · ':'')+o.name;c.onclick=()=>A.goObj(o.id);ob.append(c)});const td2=document.createElement('td');td2.className='sc';
         td2.append(mk(S.override[id]!==undefined?S.override[id]:null,v=>A.setOverride(id,v),sc.src==='auto'?sc.v:null));{const a=document.createElement('span');a.className='auto';a.textContent=sc.src==='manual'?'поставлено в таблице':sc.src==='auto'?sc.from.join(' + '):'';td2.append(a)}
         tr.append(td,td2);t.append(tr)});
       const n=b[1].length,part=filled&&filled<n;const tf=document.createElement('tr');tf.innerHTML='<td class="sum">Сумма блока</td><td class="sum '+(filled&&!part?(sum>=9?'pass':'fail'):'')+'">'+(filled?sum+' из 12 '+(sum>=9?'✔':'')+(part?' <span class="auto">(оценено '+filled+' тем из '+n+')</span>':''):'—')+'</td>';t.append(tf);box.append(t)})});
