@@ -79,48 +79,38 @@ HOW = {'choice': 'Ученик выбирает ответ → Next.', 'hotspot'
 rows = []
 def row(step, do, tl, exp):
     rows.append(f'<tr><td class="st">{step}</td><td>{do}</td><td class="tl">{tl}</td><td class="sa">{exp}</td></tr>')
-row('Старт', 'Откройте ✅ чек-лист и 📋 план. Впишите имя, пол, возраст. Покажите экран урока.', '—', '—')
 row('1. Welcome', 'Скажите: это игра, не тест, ошибаться можно → Next.', 'Hi! Welcome to WowSpeak School! This is not a test — it’s a game. Let’s have fun! Are you ready?', 'Yes! / I’m ready.')
 row('2. Get to know you', 'Задайте три вопроса, после каждого → Next. Без баллов.', 'What’s your name? How old are you? What do you like doing in your free time?', 'My name is… I’m 14. I like playing football / drawing…')
 row('3. Briefing', 'Скажите: дверь заперта, код — в кусочках записки, ищем их → Next.', 'You are locked in the escape room! Find the pieces of the secret note to open the door. Choose a glowing object and say what it is in English.', '—')
 for P in data.PARTS:
-    rows.append(f'<tr class="part"><td colspan="4">PART {P["n"]} · {e(P["room_name"])} · {len(P["objects"])} предметов → записка с {P["digits"]} цифрами</td></tr>')
+    objs = ', '.join(e(o['name'].split(' (')[0]) for o in P['objects'])
     if P['n'] > 1:
-        row(f'Переход в Part {P["n"]}', 'Скажите: ' + e(P['intro']) + ' → Next.', e(P['intro_en']), '—')
-    for o in P['objects']:
-        name = o['name'].split(' — ')[0]
-        row(f'🔎 {e(o["id"].replace("_", " "))}', 'Ученик выбирает предмет → нажмите на него. Спросите, что это'
-            + (' → оцените в чек-листе → Next.' if o['name_t'] else ' → Next.'), e(o['ask']), e(o['name']))
-        for t in o['tasks']:
-            exp = '<br>'.join(e(ans(it)) for it in t.get('items', []) if ans(it))
-            if t['kind'] == 'sort':
-                exp = '<br>'.join(f'<b>{e(g)}:</b> ' + ', '.join(e(it['w']) for it in t['items'] if it['g'] == gi) for gi, g in enumerate(t['groups']))
-            if t['kind'] == 'match':
-                exp = '<br>'.join(f'{e(it["w"])} — {e(it["d"])}' for it in t['items']) if t.get('halves') else ', '.join(e(it['w']) for it in t['items']) + ' (к каждому слову — своя картинка)'
-            if t['kind'] == 'hotspot':
-                exp = ', '.join(it['a'] for it in t['items'])
-            if t['kind'] == 'oral':
-                exp = '<br>'.join(f'{e(q)} — {e(x)}' for q, _, x in t['qs'])
-            do = f'{e(t["title"])}. ' + HOW[t['kind']]
-            if t['kind'] == 'listen':
-                do += f'<br><i>Текст записи (ученику не показываем):</i> {e(t["text"])}'
-            tl = e(t['en'])
-            row('', do, tl, exp)
-        for q, _ in o['you']:
-            row('', '<b>And you?</b> Задайте вопрос → оцените 0/1/2 в чек-листе → Next.', e(q), 'Полный ответ по теме, без подсказки = 2')
+        row(f'Переход в Part {P["n"]}', 'Нажмите «Keep looking». Скажите: ' + e(P['intro']), e(P['intro_en']), '—')
+    row(f'{e(P["room_name"])}', f'Ученик выбирает светящийся предмет → нажмите на него → выполняйте задания по экрану → Next. Предметы: {objs}.',
+        'What’s this? / And you?', 'ответы — в чек-листе, «Сейчас на экране»')
     row(f'📜 Записка Part {P["n"]}', 'Нажмите «Put the note together» → ученик читает цифры.', 'Look! The pieces make a note. What’s the code?', ' '.join(['X'] * P['digits']))
     if P['n'] < 3:
-        row(f'Чекпойнт Part {P["n"]}', 'В чек-листе все блоки части ≥ 9 из 12 → «Keep looking». Иначе → «Open the lock».', 'Great job! Let’s keep looking! / Great job! Shall we open the lock?', '—')
+        row(f'Чекпойнт Part {P["n"]}', 'Все блоки части ≥ 9 из 12 → «Keep looking». Иначе → «Open the lock».', 'Great job! Let’s keep looking! / Great job! Shall we open the lock?', '—')
 row('🔐 Замок', 'Ученик читает код по-английски → «Enter the code».', 'Read the code in English, please!', 'four, seven, two, nine…')
 row('🎉 Финал', 'Нажмите «📝 Отчёт» → «Скопировать отчёт».', 'Well done! You escaped! How did you like the game?', '—')
+MUST = [
+    'Откройте <b>✅ чек-лист</b> и <b>📋 план</b> — это отдельные окна, они только у вас. Ученику показывайте экран урока.',
+    'В чек-листе впишите <b>имя, пол и возраст</b> — они попадут в отчёт.',
+    '<b>Задания с вариантами ответов</b> (выбор, соедини, разложи, найди ошибку) ставят балл в чек-лист <b>сами</b>.',
+    '<b>Устные ответы</b> (назвать предмет, «And you?», вопросы по картинке) оцениваете <b>вы</b>: 0 / 1 / 2 в рамке «Сейчас на экране» вверху чек-листа. Там же подсказан ожидаемый ответ.',
+    '<b>Нужна конкретная тема?</b> Над каждой частью чек-листа — предметы: нажмите на предмет, и подсветятся темы, которые он проверяет. Метка 🔎 у темы открывает этот предмет в уроке.',
+    'Балл можно поставить и <b>прямо в таблице</b> — он заменит посчитанный.',
+    '<b>Дальше или к замку?</b> Все блоки части ≥ 9 из 12 → «Keep looking», иначе → «Open the lock». Решение за вами. <b>🚪</b> вверху — сразу к замку.',
+    'Кусочек записки даётся, даже если ученик ошибся. Урок — 40 минут, всегда с Part 1.',
+]
 PLAN_INNER = (
     '<h1 style="color:#6e3510;margin:4px 0 10px">🗝 План урока: Escape Room 13+ (вводный урок)</h1>'
     f'<p class="dl"><a href="{SITE}mvu_13plus_plan.docx" download>⬇ Скачать план (Word)</a><a class="pdf" href="{SITE}mvu_13plus_plan.pdf" download>⬇ Скачать план (PDF)</a></p>'
-    '<div class="legend"><b>40 мин.</b> Всегда с Part 1. Предмет: назвать → задание → And you? → кусочек записки. '
-    '<b>✅</b> чек-лист · <b>📋</b> план · <b>🚪</b> сразу к замку. Кусочек записки даётся, даже если ученик ошибся.</div>'
+    '<div class="must"><h2>⚠️ Прочитайте до урока</h2><ol>' + ''.join(f'<li>{x}</li>' for x in MUST) + '</ol></div>'
     '<table class="plan"><tr><th>Шаг</th><th>Что делать</th><th>Teacher’s language</th><th>Ожидаемые ответы</th></tr>' + ''.join(rows) + '</table>'
 )
-PLAN_STYLE = ('table.plan td.st{font-weight:700;white-space:nowrap}table.plan td.tl{color:#7a3d10;font-style:italic;width:24%}'
+PLAN_STYLE = ('.must{background:#fff3cf;border:2px solid #e8631a;border-radius:12px;padding:8px 16px 4px;margin:10px 0 14px}.must h2{margin:4px 0 6px;color:#b03030;font-size:17px}.must li{margin:4px 0}'
+              'table.plan td.st{font-weight:700;white-space:nowrap}table.plan td.tl{color:#7a3d10;font-style:italic;width:24%}'
               'table.plan td.sa{color:#1f5fa8;width:22%}table.plan tr.part td{background:#2b2240;color:#ffd889;font-weight:700}')
 
 # ── новые комнаты с вырезками (вариант «а», 12.11): предмет вырезан из самой комнаты и лежит поверх ──
