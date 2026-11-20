@@ -136,11 +136,16 @@ if os.path.exists(RJ):
             P['room'] = cuts[ids[0]]['room']; used.add(P['room'])
             for o in P['objects']:
                 o['cut'] = cuts[o['id']]; used.add('rooms/' + o['cut']['room'] + '_' + o['id'])
+# то, что в комнате стоит ПЕРЕД предметом, кладём поверх без свечения (лампа перед шкафом, замечание 63)
+FRONT = {'room2_v2': [dict(file='rooms/room2_v2_front_lamp', x=0.0, y=37.891, w=10.938, h=24.707)]}
+for P in data.PARTS:
+    P['front'] = FRONT.get(P['room'], [])
+    for f in P['front']: used.add(f['file'])
 # ── данные для страницы ─────────────────────────────────────────────────────────────────
 preload = set(used)
 D = dict(media=data.M, audio=AUDIO, family=data.FAMILY,
          checklist=[dict(title=p['title'], blocks=[[b, ts] for b, ts in p['blocks']]) for p in data.CHECKLIST],
-         parts=[dict(room=P['room'], room_name=P['room_name'], intro=P['intro'] if P['n'] > 1 else '', intro_en=P['intro_en'], objects=P['objects']) for P in data.PARTS],
+         parts=[dict(room=P['room'], room_name=P['room_name'], intro=P['intro'] if P['n'] > 1 else '', intro_en=P['intro_en'], objects=P['objects'], front=P.get('front', [])) for P in data.PARTS],
          topic_ru=data.TOPIC_RU, alias=data.ALIAS, preload=sorted(preload))
 mw = open(os.path.join(HERE, 'manager.html')).read()
 D['plan_html'] = ('<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><title>План урока — Escape Room 13+</title><style>'

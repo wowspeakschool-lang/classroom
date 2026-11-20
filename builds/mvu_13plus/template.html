@@ -44,6 +44,7 @@ h2{font-weight:800;font-size:3.6vh;margin:.2em 0 .5em;color:var(--gold2)}
 .room .obj:hover{transform:translate(-50%,-100%) scale(1.08)}
 .room .obj.done{cursor:default;opacity:.55}
 .room .obj.cut{transform:none}
+.room img.front{position:absolute;z-index:4;pointer-events:none;object-fit:fill}
 .room .obj.cut img{width:100%;height:100%;object-fit:fill;filter:none}
 .room .obj.cut.live img{animation:glow2 2.2s ease-in-out infinite}
 .room .obj.cut:hover{transform:scale(1.06)}
@@ -629,6 +630,7 @@ function buildScreens() {
         if (!S.done[o.id]) d.onclick = () => show(SCREEN_ID['name_' + o.id]);
         n.append(d);
       });
+      (P.front || []).forEach(f => n.append(el('img', { cls: 'front', src: img(f.file), style: `left:${f.x}%;top:${f.y}%;width:${f.w}%;height:${f.h}%` })));
       n.append(el('div', { cls: 'roomTip' }, left ? `🔎 Click on the glowing objects — ${left} left` : '📜 All pieces found!'));
       if (!left) { const b = el('button', { cls: 'btn', style: 'position:absolute;z-index:6;left:50%;bottom:3vh;transform:translateX(-50%)' }, 'Put the note together ➜'); b.onclick = () => show(SCREEN_ID['note' + part]); n.append(b); }
     } });
