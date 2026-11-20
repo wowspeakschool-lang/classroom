@@ -20,36 +20,13 @@
    разделы в `builds/Вычитка — что нужно от вас.docx`.
 
 🔴 **151.** **Посмотреть пилотный юнит Go Getter 3** — семь домашек по рабочей
-   тетради, все черновики:
-   ДЗ 1 https://app.wowteach.ru/?run=06f8a6a1-36a3-4fa6-8de4-adbd241b1ca4&preview=1
-   ДЗ 2 https://app.wowteach.ru/?run=d63bfb12-971c-47ac-8415-4fc3a94dbad0&preview=1
-   ДЗ 3 https://app.wowteach.ru/?run=a3dc0e69-a773-4065-92f3-89c0c5984401&preview=1
-   ДЗ 4 https://app.wowteach.ru/?run=69c8517e-316a-4c19-9f29-995984aa5662&preview=1
-   ДЗ 5 https://app.wowteach.ru/?run=dc683aef-35a8-435f-8410-0b2d3edf6fef&preview=1
-   ДЗ 6 https://app.wowteach.ru/?run=c824b8c8-1298-41bd-89bc-07809306bb8e&preview=1
-   ДЗ 7 https://app.wowteach.ru/?run=7bd716fa-1c1c-4055-bf34-a7bfa1317e87&preview=1
+   тетради, все черновики (в «Контент» → «Библиотека» → Go Getter 3 → Unit 1).
 
-🔴 **175.** **Нажать «Озвучить пачкой»** («Контент» → «Медиа») по **SM2, юнит 5,
-   ДЗ 1** — два места с `lamp` переведены на американский голос и ждут звука.
-   https://app.wowteach.ru/?run=7a60cb85-9509-4982-9db5-c9b4f7a1d98e&preview=1
-
-🔴 **176.** **Нажать «Озвучить пачкой»** («Контент» → «Медиа») по девяти
-   опубликованным урокам GG1 — в них появилось «послушай слово и соедини
-   с картинкой», и до озвучки задание молчит:
-   ю0 ДЗ 2 https://app.wowteach.ru/?run=a1647404-6ecf-4151-94ee-c2891aeea64a&preview=1
-   ю0 ДЗ 3 https://app.wowteach.ru/?run=d18a2af5-1b71-4095-b44c-8bb00e5dc575&preview=1
-   ю1 ДЗ 1 https://app.wowteach.ru/?run=edcb6354-bd71-4b69-9ed2-f3b7ad23906f&preview=1
-   ю2 ДЗ 1 https://app.wowteach.ru/?run=2e158d9d-d5f6-46b7-a30a-513b249e0416&preview=1
-   ю2 ДЗ 2 https://app.wowteach.ru/?run=07801dea-7cf2-46df-acdb-92ba854b2e45&preview=1
-   ю2 ДЗ 5 https://app.wowteach.ru/?run=2a7cb126-65b8-4bb8-8570-58bfdcd10d5d&preview=1
-   ю3 ДЗ 1 https://app.wowteach.ru/?run=401e0481-e1e1-4781-857d-360d26b39835&preview=1
-   ю3 ДЗ 2 https://app.wowteach.ru/?run=4696d7b5-bd71-4a31-a37b-418951083519&preview=1
-   ю4 ДЗ 1 https://app.wowteach.ru/?run=11bfee5d-28bd-42b8-841d-139834270d2f&preview=1
-
-🔴 **179.** **GG1 юнит 4 ДЗ 1** — там осталось третье такое же задание
-   (блок 7, «соедини слова с картинками» на те же части лица, что и блок 5).
-   Удалить его? Блоки 5 и 6 уже разведены: глазами и на слух.
-   https://app.wowteach.ru/?run=11bfee5d-28bd-42b8-841d-139834270d2f&preview=1
+🔴 **185.** **Разрешить тег `video` в заданиях** — это правка платформы на две
+   строки (`src/public/homework/lessonHtml.ts`), ТЗ —
+   `docs/tz_platforma_video_v_zadanii.md`. После неё я вложу видео прямо в
+   52 задания, которые на него ссылаются («посмотри видео ещё раз»):
+   GG2 — 20, SM2 — 12, SM1 — 9, SM3 — 6, GG1 — 5.
 
 **Что за мной**
 
