@@ -217,7 +217,28 @@ do $$
 declare u uuid; r record; i int;
 begin
   foreach u in array array[
-    
+    '07801dea-7cf2-46df-acdb-92ba854b2e45'::uuid,
+    '0f2fffe5-f844-4bda-b577-110e7d799377'::uuid,
+    '11bfee5d-28bd-42b8-841d-139834270d2f'::uuid,
+    '15ae59c0-b018-4e4c-8685-ce18b6181bd9'::uuid,
+    '1baf57ca-7450-4ccb-9fe1-a0aa06606053'::uuid,
+    '32093f96-7fab-477a-a8a9-6b6319003c0d'::uuid,
+    '3f573a3d-ab85-46d5-9e9d-af23fd256710'::uuid,
+    '401e0481-e1e1-4781-857d-360d26b39835'::uuid,
+    '4f5df1cd-3ad3-44c7-bdc4-8401eb408b95'::uuid,
+    '5b3f820d-d481-493e-9dc3-8ee02558ce8c'::uuid,
+    '5c2ad1f4-ab13-4c5f-872e-e4f44833d7cf'::uuid,
+    '64690c6b-15d7-46a0-9a88-67cd72bb355a'::uuid,
+    '7693a293-54d5-4063-8645-b63c54bfee88'::uuid,
+    '81171962-50f9-473f-b972-58d93394050b'::uuid,
+    '83a61761-f3b4-42d7-902c-6c01e8529399'::uuid,
+    'c27acc36-7f22-4823-a676-2216fc232d60'::uuid,
+    'e238c4d8-f28b-48e3-9b77-6e30690d9048'::uuid,
+    'e77fdfd1-a054-4f02-aabd-71ef113f25b1'::uuid,
+    'ee2fe206-c704-4a9e-9b46-ebb870b00d9c'::uuid,
+    'f06dbd79-1825-48aa-9d7e-579549288df5'::uuid,
+    'f55459b1-020b-4b53-ad93-82faab735c72'::uuid,
+    'fed6704a-de12-49a2-8797-63d8234ad561'::uuid
   ] loop
     update classroom_blocks set sort_order = -1 - sort_order where lesson_id = u;
     i := 0;
