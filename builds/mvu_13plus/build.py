@@ -84,7 +84,7 @@ def row(step, do, tl, exp):
 row('Старт', 'Вверху урока две кнопки: ✅ — чек-лист, 📋 — этот план. Каждая открывает своё окно. В чек-листе впишите имя ученика по-русски, пол и возраст — они попадут в отчёт. Демонстрируйте экран урока, оба окна держите на втором мониторе или рядом.', '—', '—')
 row('1. Welcome', 'На экране только «Welcome to WowSpeak School!». Скажите сами (по-русски или по-английски): это не тест — мы просто познакомимся и посмотрим, что ты уже умеешь; отвечай как получается, ошибаться можно и нужно.', 'Hi! Welcome to WowSpeak School! This is not a test — it’s a game. Let’s have fun! Are you ready?', 'Yes! / I’m ready.')
 row('2. Get to know you', 'Три вопроса по одной карточке: следующий — Next (или нажатие на карточку), предыдущий — ←. Баллов нет — смотрим, как ученик держится, и решаем, нужен ли облегчённый режим 💡.', 'What’s your name? How old are you? What do you like doing in your free time?', 'My name is… I’m 14. I like playing football / drawing…')
-row('3. Briefing', 'На экране только название. Расскажите историю сами: дверь закрыта на кодовый замок, в комнате спрятаны кусочки старой записки с кодом; нажимай на предметы, называй их по-английски и выполняй задания — за каждое получишь кусочек записки. Сколько цифр в коде — не говорите.', 'You are locked in the escape room! Find the pieces of the secret note to open the door. Click on the glowing objects.', '—')
+row('3. Briefing', 'На экране только название. Расскажите историю сами: дверь закрыта на кодовый замок, в комнате спрятаны кусочки старой записки с кодом; нажимай на предметы, называй их по-английски и выполняй задания — за каждое получишь кусочек записки. Сколько цифр в коде — не говорите.', 'You are locked in the escape room! Find the pieces of the secret note to open the door. Choose a glowing object and say what it is in English.', '—')
 for P in data.PARTS:
     rows.append(f'<tr class="part"><td colspan="4">PART {P["n"]} · {e(P["room_name"])} · {len(P["objects"])} предметов → записка с {P["digits"]} цифрами</td></tr>')
     if P['n'] > 1:
@@ -98,7 +98,7 @@ for P in data.PARTS:
             if t['kind'] == 'sort':
                 exp = '<br>'.join(f'<b>{e(g)}:</b> ' + ', '.join(e(it['w']) for it in t['items'] if it['g'] == gi) for gi, g in enumerate(t['groups']))
             if t['kind'] == 'match':
-                exp = '<br>'.join(f'{e(it["w"])} — {e(it.get("d") or it.get("img", "").replace("_", " "))}' for it in t['items'])
+                exp = '<br>'.join(f'{e(it["w"])} — {e(it["d"])}' for it in t['items']) if t.get('halves') else ', '.join(e(it['w']) for it in t['items']) + ' (к каждому слову — своя картинка)'
             if t['kind'] == 'hotspot':
                 exp = ', '.join(it['a'] for it in t['items'])
             if t['kind'] == 'oral':
@@ -112,7 +112,7 @@ for P in data.PARTS:
             row('', '<b>And you?</b> Устные вопросы о самом ученике — по одному на карточке, следующий по нажатию или Next — оцените 0/1/2 в чек-листе ✅, панель «Сейчас на экране». После Next ученик получает обрывок записки и возвращается в комнату.', e(q), 'Полный ответ по теме, без подсказки = 2')
     row(f'📜 Записка Part {P["n"]}', 'Когда все предметы открыты — «Put the note together»: кусочки слетаются, видны цифры.', 'Look! The pieces make a note. What’s the code?', ' '.join(['X'] * P['digits']))
     if P['n'] < 3:
-        row(f'Чекпойнт Part {P["n"]}', 'Посмотрите суммы блоков в чек-листе. ≥ 9 из 12 в каждом блоке → «Keep looking» (следующая часть). Иначе → «Open the lock» (финал).', 'Great job! Shall we open the lock?', '—')
+        row(f'Чекпойнт Part {P["n"]}', 'Посмотрите суммы блоков в чек-листе. ≥ 9 из 12 в каждом блоке → «Keep looking» (следующая часть). Иначе → «Open the lock» (финал).', 'Great job! Let’s keep looking! / Great job! Shall we open the lock?', '—')
 row('🔐 Замок', 'Попросите ученика прочитать код вслух по-английски (на экране — только «Read your code in English!»), вы нажимаете «Enter the code». Кнопка 🚪 вверху ведёт сюда в любой момент.', 'Read the code in English, please!', 'four, seven, two, nine…')
 row('🎉 Финал', 'Дверь открыта. Нажмите «📝 Отчёт» внизу слева: откроется чек-лист сразу на отчёте. Допишите комментарий, если нужно, нажмите «Скопировать отчёт» и переходите к предзакрытию.', 'Well done! You escaped! How did you like the game?', '—')
 PLAN_INNER = (

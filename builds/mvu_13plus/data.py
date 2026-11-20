@@ -37,11 +37,11 @@ NEW = {
     6: [('PR 6 Unit 1-4', ['Education', 'Phrasal verbs for relationships', 'Natural disasters', 'Question forms (complex)', 'Past tense review', 'Making comparisons (too, so, such)']),
         ('PR 6 Unit 5-9', ['Food and drink phrasal verbs', 'Fiction', 'Money', 'Relative clauses', 'Modals of ability and possibility', 'Future: plans, intentions, predictions']),
         ('PR 6 Unit 10-15', ['Personality adjectives', 'Accidents and emergencies', 'Reporting verbs', 'Passive: complex forms', 'Reported questions and requests', 'Causative (have / get something done)']),
-        ('PR 6 Unit 16-20', ['Climate change', 'Art', 'Crime and criminals', '2nd Conditional and I wish', 'Modals of deduction in the past', '3d conditional and wish + past perfect'])],
+        ('PR 6 Unit 16-20', ['Climate change', 'Art', 'Crime and criminals', '2nd Conditional and I wish', 'Modals of deduction in the past', '3rd conditional and wish + past perfect'])],
     7: [('PR 7 Unit 1-4', ['Online, films and media', 'Abstract nouns', 'Stress and health', 'Simple, continuous or perfect', 'Present Perfect Simple and Continuous', 'Modals of necessity and obligation']),
         ('PR 7 Unit 5-9', ['History', 'Expressing emotions', 'Community', 'Present and past habits', 'Narrative tenses', 'Future Continuous and perfect']),
         ('PR 7 Unit 10-15', ['Phrasal verbs: relationships', 'Leadership and achievement', 'Global issues', 'Modals in the past', 'Passive and causative', 'Reported speech']),
-        ('PR 7 Unit 16-20', ['Advertising', 'The world of work', 'Idioms', '3d and mixed Conditionals', 'Uses of verb + -ing', 'Determiners'])],
+        ('PR 7 Unit 16-20', ['Advertising', 'The world of work', 'Idioms', '3rd and mixed Conditionals', 'Uses of verb + -ing', 'Determiners'])],
 }
 
 CHECKLIST = [
@@ -86,7 +86,7 @@ M = 'https://classroom.wowteach.ru/media/mvu_13plus/'
 # Задание: kind, title (по-русски — для учителя, в план), en (короткая инструкция на экране), items.
 # Состав — по правке Анны 13.11.2026 («Урок 13+ после сокращения — правка Анны 13.11.docx») и решениям 13–19.11.
 
-WHAT = "What's this?"
+WHAT = 'What’s this?'
 WHATP = "What are these?"
 
 P1 = [
@@ -193,7 +193,7 @@ P2 = [
          you=[('Describe your home. What is the furniture in your room made of?', T(2, 'Homes', 'Materials and describing objects'))]),
     dict(id='suitcase', img='suitcase', x=48.5, y=98, h=14, wall=0, name='a suitcase', ask=WHAT,
          name_t=T(2, 'Holidays'),
-         tasks=[dict(kind='choice', title='Это чемодан Mia — она вернулась из отпуска. Выбери верный вариант', en='Choose the right answer.', items=[
+         tasks=[dict(kind='choice', title='Это чемодан Mia — она поехала отдыхать. Выбери верный вариант', en='Choose the right answer.', items=[
              dict(q='Mia ___ happy on her first day at the camp — she ___ any friends there.', o=['wasn’t … didn’t have', 'wasn’t … didn’t had', 'weren’t … didn’t have'],
                   gaps=[T(2, 'Past Simple of be (was / were)'), T(2, 'Past Simple: negatives and questions')]),
              dict(q='Mia usually ___ to the beach on holiday, but today she ___ a castle.', o=['goes … is visiting', 'is going … visits', 'goes … visits'], t=T(2, 'Present Simple vs Present Continuous')),
@@ -202,7 +202,7 @@ P2 = [
     dict(id='map', img='map', x=32.2, y=27.8, h=13, wall=1, name='a map', ask=WHAT,
          name_t=T(2, 'Geographical features and animals'),
          tasks=[
-             dict(kind='match', title='Что есть на карте? Соедини слова с картинками', en='Match the words and the pictures.', items=[
+             dict(kind='match', title='Путешествие по карте: что можно увидеть в пути? Соедини слова с картинками', en='Match the words and the pictures.', items=[
                  dict(w='a river', img='geo_river', t=T(2, 'Geographical features and animals')),
                  dict(w='go camping', img='tr_camping', t=T(2, 'School and trips')),
                  dict(w='a museum', img='city_museum', t=T(2, 'Places in a city')),
@@ -236,12 +236,12 @@ P2 = [
          tasks=[dict(kind='choice', title='Что было в музее той ночью? Выбери верный вариант', en='Choose the right answer.', items=[
              dict(q='The thief ___ the painting when the alarm ___ .', o=['was taking … rang', 'took … was ringing', 'was taking … was ringing'],
                   t=T(2, 'Past Continuous vs Past Simple', 'Past Simple vs Past Continuous', 'Past Continuous')),
-             dict(q='Tom ___ be the thief — he was at school all day!', o=['can’t', 'mustn’t', 'doesn’t have to'], t=T(2, 'Modals of probability')),
+             dict(q='Tom ___ be the thief — he was at home with his family all night!', o=['can’t', 'mustn’t', 'doesn’t have to'], t=T(2, 'Modals of probability')),
          ])],
          you=[('Describe someone in your family. What does he or she look like?', T(2, 'Describing people'))]),
     dict(id='wallet', img='wallet', x=22.5, y=60.5, h=5, wall=0, name='a wallet', ask=WHAT,
          name_t=T(2, 'Money and shopping', 'Buying and selling'),
-         tasks=[dict(kind='choice', title='Покупки. Выбери верный вариант', en='Choose the right answer.', items=[
+         tasks=[dict(kind='choice', title='Покупки и праздник. Выбери верный вариант', en='Choose the right answer.', items=[
              dict(q='I ___ any new clothes for two years.', o=['haven’t bought', 'didn’t buy', 'don’t buy'], t=T(2, 'Present Perfect vs Past Simple', 'Present Perfect vs Past Simple (for / since)')),
              dict(q='I ___ my friends at the shopping centre at 5 tomorrow — it’s all arranged.', o=['am meeting', 'meet', 'met'], t=T(2, 'Be going to vs Present Continuous for future')),
              dict(q='To make the cake, ___ the flour, sugar and eggs together, then put it in the oven.', o=['mix', 'fry', 'boil'], t=T(2, 'Cooking and ingredients')),
@@ -251,7 +251,7 @@ P2 = [
          name_t=T(2, 'Computer phrases', 'Technology and the internet'),
          tasks=[dict(kind='fix', title='Переписка в чате: в каждом предложении ошибка. Ученик нажимает на неверное слово и говорит правильно вслух',
                      en='Find the mistake and correct it.', items=[
-             dict(s='Tom said that he is tired.', bad=4, fix='was', t=T(2, 'Reported speech')),
+             dict(s='Tom said that he will come, but he didn’t.', bad=4, fix='would', t=T(2, 'Reported speech')),
              dict(s='The boy which lives next door is my friend.', bad=2, fix='who', t=T(2, 'Relative pronouns who / which / that', 'Relative clauses')),
              dict(s='I’m really good at make videos.', bad=4, fix='making', t=T(2, 'Gerunds and infinitives')),
          ])],
@@ -267,7 +267,7 @@ P2 = [
              dict(kind='choice', title='Что можно делать с биноклем? Выбери верный вариант', en='Choose the right word.', items=[
                  dict(q='___ at that bird! It’s huge!', o=['Look', 'See', 'Watch'], t=T(2, 'Collocations with look, see, watch')),
                  dict(q='If I had better binoculars, I ___ see the birds on that island.', o=['would', 'will', 'am'], t=T(2, '2nd Conditional')),
-                 dict(q='Tom drives ___ than his brother. In fact, he drives ___ in our family.', o=['more carefully … the most carefully', 'more carefully … the most careful', 'more careful … the most carefully'],
+                 dict(q='My dad drives ___ than my uncle. In fact, he drives ___ in our family.', o=['more carefully … the most carefully', 'more carefully … the most careful', 'more careful … the most carefully'],
                       t=T(2, 'Comparative and superlative adverbs')),
              ]),
              dict(kind='oral', title='Сафари-парк в бинокль. Спросите ученика, каких животных он видит; ответов на экране нет', image='safari',
@@ -302,7 +302,7 @@ P3 = [
                  dict(w='a sculpture', img='radio_sculpture', t=T(3, 'Art')),
                  dict(w='furious', img='radio_furious', t=T(3, 'Expressing emotions')),
              ]),
-             dict(kind='choice', title='Новость в эфире школьного радио. Выбери верный вариант', en='Choose the right answer.', items=[
+             dict(kind='choice', title='Кулинарное шоу в эфире школьного радио. Выбери верный вариант', en='Choose the right answer.', items=[
                  dict(q='The milk has ___ off — it’s ___ bad that I can’t drink it.', o=['gone … so', 'gone … such', 'got … so'],
                       gaps=[T(3, 'Food and drink phrasal verbs'), T(3, 'Making comparisons (too, so, such)')]),
              ])],
@@ -344,7 +344,7 @@ P3 = [
              dict(q='The broken glass is inside the room. The thief ___ through the window.', o=['must have come', 'can’t have come', 'must come'], t=T(3, 'Modals of deduction in the past')),
              dict(q='“Where were you last night?” → The detective asked me where I ___ the night before.', o=['had been', 'have been', 'was being'], t=T(3, 'Reported questions', 'Reported questions and requests', 'Reported speech')),
              dict(q='“I didn’t take the money!” → The suspect ___ taking the money.', o=['denied', 'admitted', 'suggested'], t=T(3, 'Reporting verbs', 'Reported speech and reporting verbs')),
-             dict(q='If the window had been locked, the thief ___ in.', o=['wouldn’t have got', 'won’t get', 'didn’t get'], t=T(3, '3d conditional and wish + past perfect')),
+             dict(q='If the window had been locked, the thief ___ in.', o=['wouldn’t have got', 'won’t get', 'didn’t get'], t=T(3, '3rd conditional and wish + past perfect')),
              dict(q='The owner always tells the truth. She is very ___ .', o=['honest', 'selfish', 'lazy'], t=T(3, 'Personality adjectives')),
              dict(q='A person who breaks into a house and steals things is a ___ .', o=['burglar', 'witness', 'judge'], t=T(3, 'Crime and criminals')),
          ])],
@@ -362,7 +362,7 @@ P3 = [
          tasks=[dict(kind='choice', title='Загляни в будущее и выбери верный вариант', en='Look and choose.', items=[
              dict(img='fut_travel', q='This time next week Mia ___ to London.', o=['will be flying', 'will have flown', 'flies'], t=T(3, 'Future Continuous and perfect', 'Future forms and Future Continuous')),
              dict(img='fut_graduation', q='By the end of the year they ___ from university.', o=['will have graduated', 'will be graduate', 'graduated'], t=T(3, 'Future Continuous and perfect')),
-             dict(q='Our village is very ___ now, but I’m sure it ___ much bigger in 30 years.', o=['remote … will be', 'remote … is being', 'industrial … will be'],
+             dict(q='Our village is very ___ now, but I’m sure it ___ much bigger in 30 years.', o=['remote … will be', 'remote … is being', 'crowded … will be'],
                   gaps=[T(3, 'Community'), T(3, 'Future: plans, intentions, predictions')]),
          ])],
          you=[]),
@@ -381,7 +381,7 @@ P3 = [
                  dict(q='This advert asks us to stop ___ — the air in our city is dirty.', o=['pollution', 'poverty', 'honesty'], t=T(3, 'Global issues', 'Climate change')),
                  dict(q='You can ___ the new series online — no need to download it.', o=['stream', 'print', 'post'], t=T(3, 'Online, films and media', 'Film')),
              ])],
-         you=[('Have you ever bought something because of an advert? If you hadn’t seen it, would you have bought it?', T(3, '3d and mixed Conditionals'))]),
+         you=[('Have you ever bought something because of an advert? If you hadn’t seen it, would you have bought it?', T(3, '3rd and mixed Conditionals'))]),
 ]
 
 PARTS = [
@@ -411,7 +411,7 @@ def topic_names():
 
 # ── отчёт по шаблону Анны (19.11): лексика — по-русски, грамматика — как в чек-листе ──
 TOPIC_RU = {
-    'Families': 'семья', 'Countries': 'страны', 'School objects': 'школьные предметы', 'Sports': 'спорт',
+    'Families': 'семья', 'Countries': 'страны', 'School objects': 'школьные принадлежности', 'Sports': 'спорт',
     'Body parts': 'части тела', 'Food and drinks': 'еда и напитки', 'Jobs': 'профессии', 'Transport': 'транспорт',
     'Entertainment': 'развлечения', 'Weather': 'погода', 'Pets and farm animals': 'домашние животные и животные на ферме',
     'Clothes': 'одежда', 'Holidays': 'отдых и каникулы', 'Emotions': 'эмоции', 'Household and furniture': 'дом и мебель',
@@ -446,10 +446,10 @@ TOPIC_RU.update({
     'Places in a city': 'места в городе', 'Films': 'кино', 'Body parts and health': 'части тела и здоровье',
     'Books and reading': 'книги и чтение', 'Cooking and ingredients': 'готовка и продукты', 'Clothes': 'одежда', 'Sports': 'спорт',
     'City problems': 'проблемы города', 'Body, health and illnesses': 'тело, здоровье и болезни', 'Jobs': 'профессии',
-    'Arts and entertainment': 'искусство и развлечения', 'Shopping': 'покупки', 'Technology': 'техника', 'Nature and wildlife': 'природа и дикие животные',
-    'Cooking verbs': 'глаголы готовки', 'Film': 'кино', 'Food and drink phrasal verbs': 'фразовые глаголы о еде', 'Fiction': 'художественная литература',
+    'Arts and entertainment': 'искусство и развлечения', 'Shopping': 'шопинг', 'Technology': 'техника', 'Nature and wildlife': 'природа и дикие животные',
+    'Cooking verbs': 'глаголы готовки', 'Film': 'кино и сериалы', 'Food and drink phrasal verbs': 'фразовые глаголы о еде', 'Fiction': 'художественная литература',
     'Money': 'деньги', 'Accidents and emergencies': 'несчастные случаи', 'Climate change': 'изменение климата', 'Art': 'искусство',
-    'Stress and health': 'стресс и здоровье', 'Expressing emotions': 'эмоции', 'Community': 'место, где живёшь',
+    'Stress and health': 'стресс и здоровье', 'Expressing emotions': 'выражение эмоций', 'Community': 'место, где живёшь',
     'Phrasal verbs: relationships': 'фразовые глаголы об отношениях', 'Leadership and achievement': 'лидерство и достижения',
     'The world of work': 'мир работы',
 })

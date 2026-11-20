@@ -61,7 +61,7 @@ const st=A.S.student; $('#nm').value=st.name; $('#gd').value=st.gender; $('#ag')
 $('#cm').value=A.S.comment||'';$('#cm').oninput=e=>{A.S.comment=e.target.value;A.save();$('#rep').value=A.report()};
 window.goReport=()=>{$('#repH').scrollIntoView({behavior:'smooth'});$('#cm').focus()};
 $('#nm').oninput=e=>{st.name=e.target.value;A.save();render()}; $('#gd').onchange=e=>{st.gender=e.target.value;A.save();render()}; $('#ag').oninput=e=>{st.age=e.target.value;A.save();render()};
-$('#cp').onclick=()=>{navigator.clipboard.writeText($('#rep').value).then(()=>{$('#cp').textContent='✔ Скопировано';setTimeout(()=>$('#cp').textContent='📋 Скопировать отчёт',1500)})};
+$('#cp').onclick=()=>{const ok=()=>{$('#cp').textContent='✔ Скопировано';setTimeout(()=>$('#cp').textContent='📋 Скопировать отчёт',1500)};const old=()=>{const r=$('#rep');r.focus();r.select();try{document.execCommand('copy');ok()}catch(e){alert('Не получилось скопировать — выделите текст отчёта и нажмите Ctrl+C')}};if(navigator.clipboard)navigator.clipboard.writeText($('#rep').value).then(ok,old);else old()};
 $('#rs').onclick=()=>{if(confirm('Сбросить все баллы и начать с новым учеником?'))A.reset()};
 function mk(cur,fn,faint){const d=document.createElement('span');d.className='mk';[2,1,0].forEach(v=>{const b=document.createElement('button');b.textContent=v===2?'✓ 2':v===1?'~ 1':'✗ 0';if(cur===v)b.className='on'+v;else if(faint===v)b.className='f'+v;b.onclick=()=>fn(cur===v?null:v);d.append(b)});return d}
 function screenTopics(s){const t=new Set();if(s.task)(s.task.items||[]).forEach(i=>(i.t||[]).forEach(x=>t.add(x)));(s.oral||[]).forEach(o=>o.topics.forEach(x=>t.add(x)));return t}
@@ -82,8 +82,10 @@ function render(){
         const tr=document.createElement('tr');if(curT.has(id))tr.className='cur';const td=document.createElement('td');td.textContent=name;const td2=document.createElement('td');td2.className='sc';
         td2.append(mk(S.override[id]!==undefined?S.override[id]:null,v=>A.setOverride(id,v),sc.src==='auto'?sc.v:null));{const a=document.createElement('span');a.className='auto';a.textContent=sc.src==='manual'?'поставлено в таблице':sc.src==='auto'?sc.from.join(' + '):'';td2.append(a)}
         tr.append(td,td2);t.append(tr)});
-      const tf=document.createElement('tr');tf.innerHTML='<td class="sum">Сумма блока</td><td class="sum '+(filled?(sum>=9?'pass':'fail'):'')+'">'+(filled?sum+' из 12 '+(sum>=9?'✔':''):'—')+'</td>';t.append(tf);box.append(t)})});
+      const n=b[1].length,part=filled&&filled<n;const tf=document.createElement('tr');tf.innerHTML='<td class="sum">Сумма блока</td><td class="sum '+(filled&&!part?(sum>=9?'pass':'fail'):'')+'">'+(filled?sum+' из 12 '+(sum>=9?'✔':'')+(part?' <span class="auto">(оценено '+filled+' тем из '+n+')</span>':''):'—')+'</td>';t.append(tf);box.append(t)})});
   $('#rep').value=A.report();
+  // новый экран — таблица сама прокручивается к его темам (в частях 2–3 по 12 таблиц)
+  const sid=s?s.id:'';if(sid!==window._lastSid){window._lastSid=sid;const r=box.querySelector('tr.cur');const busy=document.activeElement&&document.activeElement.id==="cm";if(r&&!busy)r.scrollIntoView({block:'center',behavior:'smooth'})}
 }
 window.render=render;render();
 </script></body></html>

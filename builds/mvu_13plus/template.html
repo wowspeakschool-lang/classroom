@@ -631,7 +631,7 @@ function buildScreens() {
         n.append(d);
       });
       (P.front || []).forEach(f => n.append(el('img', { cls: 'front', src: img(f.file), style: `left:${f.x}%;top:${f.y}%;width:${f.w}%;height:${f.h}%` })));
-      n.append(el('div', { cls: 'roomTip' }, left ? `🔎 Click on the glowing objects — ${left} left` : '📜 All pieces found!'));
+      n.append(el('div', { cls: 'roomTip' }, left ? `🔎 Choose a glowing object — ${left} left` : '📜 All pieces found!'));
       if (!left) { const b = el('button', { cls: 'btn', style: 'position:absolute;z-index:6;left:50%;bottom:3vh;transform:translateX(-50%)' }, 'Put the note together ➜'); b.onclick = () => show(SCREEN_ID['note' + part]); n.append(b); }
     } });
     SCREEN_ID['room' + part] = roomScreen.idx;
@@ -639,20 +639,20 @@ function buildScreens() {
     P.objects.forEach(o => {
       o.part = part;
       const seq = [];
-      seq.push(addScreen({ id: 'name_' + o.id, part, obj: o, title: `${o.id} — назвать`, oral: [{ key: 'name_' + o.id, label: `Назвал предмет: ${o.name}`, topics: o.name_t, expect: o.name }], render(n) {
+      seq.push(addScreen({ id: 'name_' + o.id, part, obj: o, title: `${o.name.split(' (')[0]} — назвать`, oral: [{ key: 'name_' + o.id, label: `Назвал предмет: ${o.name}`, topics: o.name_t, expect: o.name }], render(n) {
         n.append(el('img', { cls: 'bg', src: img(P.room) }), el('div', { cls: 'shade' }));
         const ans = el('div', { cls: 'answer' }, S.hint ? o.name.split(' — ')[0] : '');
         const b = el('button', { cls: 'btn ghost' }, 'Show the word');
         b.onclick = () => ans.textContent = o.name.split(' — ')[0];
         n.append(el('div', { cls: 'box' }, el('img', { cls: 'big', src: img(o.img) }), el('div', { cls: 'ask' }, o.ask), ans, b));
       } }));
-      o.tasks.forEach((t, ti) => seq.push(addScreen({ id: `t_${o.id}_${ti}`, part, obj: o, task: t, title: `${o.id} — ${t.title}`, step: {},
+      o.tasks.forEach((t, ti) => seq.push(addScreen({ id: `t_${o.id}_${ti}`, part, obj: o, task: t, title: `${o.name.split(' (')[0]} — ${t.title}`, step: {},
         oral: t.kind === 'oral' ? t.qs.map(([q, tp, ex], k) => ({ key: `oral_${o.id}_${k}`, label: q, topics: tp, expect: ex }))
           : (t.items || []).some(it => it.then) ? t.items.map((it, k) => it.then ? { key: `then_${o.id}_${ti}_${k}`, label: 'Устный ответ: ' + it.then.replace(/^Now answer the question: /, ''), topics: it.t, expect: it.then_exp } : null).filter(Boolean) : undefined, render(n) {
         const self = SCREENS[cur]; self.step = self.step || {};
         renderTask(n, o, t, self.step, () => self.finish ? self.finish() : show(self.idx + 1));
       } })));
-      o.you.forEach(([q, topics], qi) => { const qs = q.match(/[^?]+\?/g) || [q]; seq.push(addScreen({ id: `you_${o.id}_${qi}`, part, obj: o, title: `${o.id} — And you?`, cards: qs.map(x => x.trim()), oral: qs.map((x, k) => ({ key: `you_${o.id}_${qi}_${k}`, label: 'And you? ' + x.trim(), topics })), render(n) {
+      o.you.forEach(([q, topics], qi) => { const qs = q.match(/[^?]+\?/g) || [q]; seq.push(addScreen({ id: `you_${o.id}_${qi}`, part, obj: o, title: `${o.name.split(' (')[0]} — And you?`, cards: qs.map(x => x.trim()), oral: qs.map((x, k) => ({ key: `you_${o.id}_${qi}_${k}`, label: 'And you? ' + x.trim(), topics })), render(n) {
         n.append(el('img', { cls: 'bg', src: img(P.room) }), el('div', { cls: 'shade' }), cardStep(SCREENS[cur], '💬 AND YOU?'));
       } })); });
       const last = seq[seq.length - 1];
@@ -734,7 +734,7 @@ function report() {
   const by = { 2: [], 1: [], 0: [] }, seen = new Set();
   const blocks = [];
   D.checklist.forEach((P, pi) => P.blocks.forEach((b, bi) => {
-    const sc = b[1].map((n, ti) => { const v = topicScore(`p${pi + 1}b${bi + 1}t${ti + 1}`).v; if (v !== null && !seen.has(n)) { seen.add(n); by[v].push(name(n)); } return v; });
+    const sc = b[1].map((n, ti) => { const v = topicScore(`p${pi + 1}b${bi + 1}t${ti + 1}`).v; const c = CANON(n), r = name(c); if (v !== null && !seen.has(c) && !seen.has(r)) { seen.add(c); seen.add(r); by[v].push(r); } return v; });
     blocks.push({ name: b[0], sum: sc.reduce((x, y) => x + (y || 0), 0), filled: sc.filter(x => x !== null).length });
   }));
   // программа: блоки «PR N Unit a-b» по порядку программ; рекомендуем первый, где меньше 9 из 12
@@ -743,8 +743,12 @@ function report() {
   const first = ordered.find(b => b.sum < 9);
   const pretty = b => { const m = b.name.match(/PR\s*(\d+)\s*Unit\s*(\d+)\s*[-–]\s*(\d+)/i); return m ? `Prepare ${m[1]}, Units ${m[2]}–${m[3]}` : b.name; };
   const list = a => a.length ? a.join(', ') : '—';
+  const st = S.student || {}, f = st.gender === 'f';
+  const age = String(st.age || '').trim(), yrs = n => { n = +n; const d = n % 10, h = n % 100; return d === 1 && h !== 11 ? 'год' : d >= 2 && d <= 4 && (h < 12 || h > 14) ? 'года' : 'лет'; };
+  const who = [(st.name || '').trim(), age ? (/^\d+$/.test(age) ? `${age} ${yrs(age)}` : age) : ''].filter(Boolean).join(', ');
   const lines = [
-    `Уверенно знает темы: ${list(by[2])}. Знаком с темами: ${list(by[1])}. Пока не знает: ${list(by[0])}.`,
+    ...(who ? [`${f ? 'Ученица' : 'Ученик'}: ${who}.`] : []),
+    `Уверенно знает темы: ${list(by[2])}. ${f ? 'Знакома' : 'Знаком'} с темами: ${list(by[1])}. Пока не знает: ${list(by[0])}.`,
     `Рекомендованная программа: ${first ? pretty(first) : 'выше Prepare 7 — все блоки пройдены'}.`,
   ];
   if ((S.comment || '').trim()) lines.push(`Комментарий преподавателя: ${S.comment.trim()}`);
