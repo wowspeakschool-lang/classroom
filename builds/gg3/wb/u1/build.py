@@ -58,11 +58,10 @@ hw1 = [
         {'left': 'Mum cooks', 'right': 'lunch at the weekend.'},
     ]}),
     ('sort', {'title': 'Распредели глаголы: что с чем делают', 'groups': [
-        {'name': 'the dishwasher'}, {'name': 'my room'}, {'name': 'my clothes'}, {'name': 'the table'}],
-        'items': [{'text': 'load', 'group': 0}, {'text': 'empty', 'group': 0},
-                  {'text': 'vacuum', 'group': 1}, {'text': 'tidy', 'group': 1},
-                  {'text': 'iron', 'group': 2}, {'text': 'put away', 'group': 2},
-                  {'text': 'set', 'group': 3}, {'text': 'clear', 'group': 3}]}),
+        {'name': 'the dishwasher', 'items': [{'text': 'load'}, {'text': 'empty'}]},
+        {'name': 'my room', 'items': [{'text': 'vacuum'}, {'text': 'tidy'}]},
+        {'name': 'my clothes', 'items': [{'text': 'iron'}, {'text': 'put away'}]},
+        {'name': 'the table', 'items': [{'text': 'set'}, {'text': 'clear'}]}]}),
     ('gaps', {'title': 'Прочитай блог Кэти и перетащи слова в пропуски', 'mode': 'drag', 'text':
         "Hi! Today I want to tell you about my new friend, Charlie.\n"
         "Charlie helps his parents every day. He makes his bed after he gets up. "
