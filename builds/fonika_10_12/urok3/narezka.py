@@ -32,14 +32,28 @@ def save(im, box, name, maxs=720):
     bg = Image.new('RGB', (w + 2 * pad, h + 2 * pad), 'white'); bg.paste(c, (pad, pad))
     if max(bg.size) > maxs: bg.thumbnail((maxs, maxs), Image.LANCZOS)
     bg.save(f'{OUT}/{name}.webp', quality=85); print(name, bg.size)
-SHEETS = {'1.webp': ['pen', 'egg', 'umbrella', 'cup', 'kit', 'red_paint'],
+if len(sys.argv) > 3: SHEETS = {}
+else: SHEETS = {'1.webp': ['pen', 'egg', 'umbrella', 'cup', 'kit', 'red_paint'],
           '2.webp': ['sun', 'map', 'mat', 'pot', 'pan'],
           '4.webp': ['cat', 'rat', 'dog', 'pig']}
 for f, names in SHEETS.items():
     im, bx = items(f'{SRC}/{f}')
     if len(bx) != len(names): print('!!', f, len(bx), bx); continue
     for b, n in zip(bx, names): save(im, b, n)
-for f, n in (('3.webp', 'run'), ('5.webp', 'kid')):
+for f, n in ((() if len(sys.argv) > 3 else (('3.webp', 'run'), ('5.webp', 'kid')))):
     im, bx = items(f'{SRC}/{f}', gap=80)
     x0 = min(b[0] for b in bx); y0 = min(b[1] for b in bx); x1 = max(b[2] for b in bx); y1 = max(b[3] for b in bx)
     save(im, (x0, y0, x1, y1), n, maxs=900)
+
+# --- вторая партия (20.11): листы героев и сцены ---
+if len(sys.argv) > 3 and sys.argv[3] == 'geroi':
+    for f, who in (('9.webp', 'sam'), ('8.webp', 'dan')):
+        im, bx = items(f'{SRC}/{f}', gap=40)
+        cols = {}
+        for b in bx: cols.setdefault(b[0] // 300, []).append(b)
+        groups = sorted(cols.values(), key=lambda g: min(b[0] for b in g))
+        print(who, len(bx), 'частей', len(groups), 'поз')
+        for g, pose in zip(groups, ['stand', 'wave', 'surprised', 'phone']):
+            save(im, (min(b[0] for b in g), min(b[1] for b in g), max(b[2] for b in g), max(b[3] for b in g)), f'{who}_{pose}', maxs=900)
+    for f, n in (('6.webp', 'scene_phone'), ('7.webp', 'scene_cup')):
+        im = Image.open(f'{SRC}/{f}').convert('RGB'); im.thumbnail((1400, 1400), Image.LANCZOS); im.save(f'{OUT}/{n}.webp', quality=82); print(n, im.size)

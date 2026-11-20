@@ -242,7 +242,7 @@ add({ t: 'Word building', min: 2, html: () => `<span class="tag">Word building</
 add({ t: 'Tricky words', min: 2, html: () => `<span class="tag">Tricky words</span><h1>Слова-исключения</h1><p class="sub">Эти слова читаются не по правилам — запоминаем их целиком. Нажми, чтобы услышать.</p>
  <div class="row">${['said', 'are', 'you'].map(w => `<button class="card word" style="min-width:150px;color:var(--purple)" onclick="say('${w}')">${w}</button>`).join('')}</div>
  <p class="sub" style="margin-top:18px">Найди их во фразе и прочитай всю фразу:</p>
- <div class="story" style="text-align:center">“<b>You</b> <b>are</b> a cat!” <b>said</b> Sam.</div>` });
+ <div class="row" style="gap:14px"><div style="width:150px">${pic('sam_surprised','pic" style="max-width:150px;aspect-ratio:auto')}</div><div class="story" style="text-align:center;flex:1;min-width:240px">“<b>You</b> <b>are</b> a cat!” <b>said</b> Sam.</div></div>` });
 
 add({ t: 'Dictation', min: 3, html: () => `<span class="tag">Dictation</span><h1>Диктант</h1><p class="sub">Послушай слово и напиши его в тетради. Потом нажми «Показать» и сверь.</p>
  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">${['pen', 'cup', 'rat', 'kit'].map((w, k) => `<div class="card"><div style="font-weight:700;color:var(--mut)">слово ${k + 1}</div><button class="btn ghost" onclick="say('${w}')">▶ слушать</button><div class="dw" style="min-height:220px;margin-top:8px"></div><button class="btn" onclick="this.previousElementSibling.innerHTML=pic('${w}')+'<div class=&quot;word&quot;>${w}</div>'">Показать</button></div>`).join('')}</div>` });
@@ -269,6 +269,7 @@ add({ t: 'Code chant', min: 1, html: () => `<span class="tag">Code chant</span><
 
 add({ t: 'Mission complete', min: 1, html: () => `<span class="tag" style="background:var(--green)">Mission complete</span><h1>Миссия 3 выполнена!</h1>
  <div class="row" style="gap:16px;margin-top:10px">
+  <div style="display:flex;gap:4px;align-items:flex-end">${pic('sam_wave','pic" style="max-width:120px;aspect-ratio:auto')}${pic('dan_wave','pic" style="max-width:130px;aspect-ratio:auto')}</div>
   <div class="card" style="width:260px"><div style="color:var(--mut)">Теперь ты читаешь</div><div class="big" style="color:var(--blue)">70+</div><div style="color:var(--mut)">слов</div></div>
   <div class="card" style="width:300px;text-align:left"><b>Сегодня ты:</b><br>• открыл 5 символов: c k e u r<br>• прочитал слова cat, sun, red, cup…<br>• написал диктант<br>• расшифровал сообщение Агента X</div>
  </div>
