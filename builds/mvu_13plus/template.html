@@ -191,7 +191,7 @@ h2{font-weight:800;font-size:3.6vh;margin:.2em 0 .5em;color:var(--gold2)}
 <body>
 <div id="loader"><div>Loading…</div><div class="b"><i id="lbar"></i></div></div>
 <div id="app"><div id="stage">
-  <div id="topbar"><button class="tb plan" id="checkBtn" title="Чек-лист (для менеджера)">✅</button><button class="tb plan" id="planBtn" title="План урока (для менеджера)">📋</button><button class="tb" id="hintBtn" title="Подсказка">💡</button><button class="tb" id="finBtn" title="Открыть замок и закончить">🚪</button></div>
+  <div id="topbar"><button class="tb plan" id="checkBtn" title="Чек-лист (для менеджера)">✅</button><button class="tb plan" id="planBtn" title="План урока (для менеджера)">📋</button><button class="tb" id="finBtn" title="Открыть замок и закончить">🚪</button></div>
   <div id="parts"></div>
   <div id="screens"></div>
   <div id="env"></div>
@@ -223,7 +223,7 @@ const S = {
   comment: '',
 };
 function save() { try { localStorage.setItem('mvu13', JSON.stringify(S)); } catch (e) {} }
-function load() { try { const s = JSON.parse(localStorage.getItem('mvu13')); if (s && s.digits) Object.assign(S, s); } catch (e) {} }
+function load() { try { const s = JSON.parse(localStorage.getItem('mvu13')); if (s && s.digits) Object.assign(S, s); } catch (e) {} S.hint = false; }
 
 /* ───────── оценка ───────── */
 function autoMark(topics, ok) { (Array.isArray(topics) ? topics : [topics]).forEach(t => { const a = S.auto[t] || (S.auto[t] = { ok: 0, n: 0 }); a.n++; if (ok) a.ok++; }); save(); MW.refresh(); }
@@ -275,7 +275,7 @@ $('#nextBtn').onclick = () => next();
 $('#restartBtn').onclick = () => { if (!confirm('Начать урок заново? Пройденные предметы, обрывки записки и баллы чек-листа будут сброшены.')) return; try { localStorage.removeItem('mvu13'); } catch (e) {} location.reload(); };
 $('#backBtn').onclick = () => { if (TOAST.then) return closeToast(); const s = SCREENS[cur]; if (s.cards && s.ci > 0) { s.ci--; return show(cur, false); } if (s.step && s.step.i > 0) { s.step.i--; return show(cur, false); } if (history.length) show(history.pop(), false); };
 document.addEventListener('keydown', e => { if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') $('#backBtn').click(); });
-$('#hintBtn').onclick = () => { S.hint = !S.hint; $('#hintBtn').style.background = S.hint ? 'var(--gold)' : ''; show(cur, false); };
+S.hint = false;   // кнопку «Подсказка» убрали (замечание 67)
 $('#finBtn').onclick = () => show(SCREEN_ID.lock);
 const SCREEN_ID = {};
 
