@@ -229,7 +229,8 @@ function autoMark(topics, ok) { (Array.isArray(topics) ? topics : [topics]).forE
 function oralMark(key, topics, v) { S.oral[key] = { topics, v }; save(); MW.refresh(); }
 // одинаковые по названию темы в разных частях/блоках получают балл друг от друга (решение Анны 13.11)
 const TNAME = {}, SAME = {};
-D.checklist.forEach((P, pi) => P.blocks.forEach((b, bi) => b[1].forEach((n, ti) => { const id = `p${pi + 1}b${bi + 1}t${ti + 1}`; TNAME[id] = n; (SAME[n] = SAME[n] || []).push(id); })));
+const CANON = n => (D.alias && D.alias[n]) || n;   // разные названия одной темы в разных учебниках (сверка 20.11)
+D.checklist.forEach((P, pi) => P.blocks.forEach((b, bi) => b[1].forEach((n, ti) => { const id = `p${pi + 1}b${bi + 1}t${ti + 1}`; TNAME[id] = CANON(n); (SAME[CANON(n)] = SAME[CANON(n)] || []).push(id); })));
 // src: manual — учитель поставил в таблице; auto — посчитано; from — откуда (задание / устно / таблица в другой части)
 function topicScore(t) {
   if (t in S.override) return { v: S.override[t], src: 'manual', from: [] };
@@ -325,7 +326,10 @@ function choiceItem(side, it, topics, prefix) {
       [...opts.children].forEach(x => x.disabled = true);
       const ok = i === 0; b.classList.add(ok ? 'ok' : 'bad');
       if (!ok) [...opts.children].find(x => x.textContent === it.o[0]).classList.add('show');
-      autoMark(topics, ok);
+      if (it.gaps) {   // два пропуска — каждый засчитывается своей теме
+        const got = it.o[i].split(' … '), want = it.o[0].split(' … ');
+        it.gaps.forEach((g, k) => autoMark(g, got[k] === want[k]));
+      } else autoMark(topics, ok);
       if (it.then) side.append(el('div', { cls: 'then' }, '💬 ' + it.then, S.hint ? el('div', { cls: 'answer' }, it.then_exp) : null));
     };
     opts.append(b);

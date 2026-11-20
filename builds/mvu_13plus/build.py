@@ -27,6 +27,11 @@ for P in data.PARTS:
             for q in t.get('qs', []): topics_used.update(q[1])
             for it in t.get('items', []):
                 topics_used.update(it.get('t', []))
+                for g in it.get('gaps', []): topics_used.update(g)
+                if it.get('gaps'):   # два пропуска — каждый неверный вариант неверен ровно в одном пропуске
+                    parts = [x.split(' … ') for x in it['o']]
+                    if any(len(p) != 2 for p in parts): problems.append(('gaps: вариант не из двух частей', it['q']))
+                    elif any(sum(a != b for a, b in zip(p, parts[0])) != 1 for p in parts[1:]): problems.append(('gaps: неверный вариант должен отличаться ровно одним пропуском', it['q']))
                 for k in ('img',):
                     if it.get(k): used.add(it[k])
                 for x in it.get('img2', []): used.add(x)
@@ -40,8 +45,9 @@ used |= {'door_open'}
 missing = sorted(u for u in used if u not in media)
 all_topics = {data.tid(p['part'], bi, ti) for p in data.CHECKLIST for bi, (_, ts) in enumerate(p['blocks'], 1) for ti in range(1, len(ts) + 1)}
 names_all = data.topic_names()
-covered_names = {names_all[t] for t in topics_used}
-uncovered = sorted(t for t in all_topics - topics_used if names_all[t] not in covered_names)  # одинаковые темы получают балл друг от друга
+canon = lambda n: data.ALIAS.get(n, n)
+covered_names = {canon(names_all[t]) for t in topics_used}
+uncovered = sorted(t for t in all_topics - topics_used if canon(names_all[t]) not in covered_names)  # одинаковые темы получают балл друг от друга
 if missing: print('!! нет картинок:', missing)
 if uncovered:
     names = {data.tid(p['part'], bi, ti): t for p in data.CHECKLIST for bi, (_, ts) in enumerate(p['blocks'], 1) for ti, t in enumerate(ts, 1)}
@@ -52,6 +58,7 @@ if missing or uncovered or problems:
 
 # ── план урока ──────────────────────────────────────────────────────────────────────────
 def ans(it):
+    if 'o' in it and it.get('gaps'): return it['o'][0] + ' (каждый пропуск — свой балл)'
     if 'o' in it: return it['o'][0] + (f' → потом устно отвечает на вопрос: {it["then_exp"]} (оцените в «Сейчас на экране»)' if it.get('then') else '')
     if 'a' in it and isinstance(it['a'], bool): return 'True' if it['a'] else f'False → {it["fix"]}'
     if 'a' in it: return it['a']
@@ -134,7 +141,7 @@ preload = set(used)
 D = dict(media=data.M, audio=AUDIO, family=data.FAMILY,
          checklist=[dict(title=p['title'], blocks=[[b, ts] for b, ts in p['blocks']]) for p in data.CHECKLIST],
          parts=[dict(room=P['room'], room_name=P['room_name'], intro=P['intro'] if P['n'] > 1 else '', intro_en=P['intro_en'], objects=P['objects']) for P in data.PARTS],
-         topic_ru=data.TOPIC_RU, preload=sorted(preload))
+         topic_ru=data.TOPIC_RU, alias=data.ALIAS, preload=sorted(preload))
 mw = open(os.path.join(HERE, 'manager.html')).read()
 D['plan_html'] = ('<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><title>План урока — Escape Room 13+</title><style>'
     "body{font-family:'Segoe UI',Arial,sans-serif;background:#f6efe2;color:#2a1a10;padding:18px 22px;max-width:1200px;margin:0 auto;font-size:14px}"

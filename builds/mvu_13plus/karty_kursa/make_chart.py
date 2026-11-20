@@ -15,32 +15,8 @@ SRC = os.path.join(HERE, 'ishodnik', 'Assessment chart and link to Vznaniya_13-1
 OUT = os.path.join(HERE, 'Assessment chart 13+ — новая разбивка (проект).docx')
 
 # (название блока, [3 лексики + 3 грамматики]) — по картам курса, karty_kursa/prepareN.md
-NEW = {
-    2: [('PR 2 Unit 0-4', ['Sports', 'Daily routines and food', 'Emotions', 'Present Simple vs Present Continuous', 'Like / love / hate + -ing', 'Past Simple of be (was / were)']),
-        ('PR 2 Unit 5-9', ['Jobs and work', 'Holidays', 'Clothes and materials', 'Past Simple: regular and irregular verbs', 'Past Simple: negatives and questions', 'Someone, anyone, everyone']),
-        ('PR 2 Unit 10-15', ['Buying and selling', 'Technology and the internet', 'Health and illness', 'Some, any, a lot of, a few', 'Comparatives and superlatives', 'Should / shouldn’t']),
-        ('PR 2 Unit 16-20', ['Animals', 'Television and entertainment', 'School and trips', 'Past Simple vs Past Continuous', 'Going to', 'Have to / don’t have to'])],
-    3: [('PR 3 Unit 1-4', ['Personality adjectives', 'Geographical features and animals', 'Homes', 'Present Simple vs Present Continuous', 'Past Simple', 'Past Continuous vs Past Simple']),
-        ('PR 3 Unit 5-9', ['School subjects', 'Materials and describing objects', 'Household appliances', 'Comparative and superlative adverbs', 'Future with will, may, might', 'Must / have to / don’t have to']),
-        ('PR 3 Unit 10-15', ['Relationships and the internet', 'Places in a city', 'Films', 'Gerunds and infinitives', 'Relative pronouns who / which / that', 'Present Perfect (ever, never, just, yet, already, for, since)']),
-        ('PR 3 Unit 16-20', ['Body parts and health', 'Books and reading', 'Cooking and ingredients', 'Present Perfect vs Past Simple', '1st Conditional', 'Present Simple and Past Simple Passive'])],
-    4: [('PR 4 Unit 1-4', ['Describing people', 'Clothes', 'Sports', 'Present Simple vs Present Continuous', 'Comparatives and superlatives (not as … as)', 'Past Continuous']),
-        ('PR 4 Unit 5-9', ['Crime and criminals', 'City problems', 'Money and shopping', 'Past Simple vs Past Continuous', 'Have to / must / should', 'Be going to vs Present Continuous for future']),
-        ('PR 4 Unit 10-15', ['Food and drink adjectives', 'Body, health and illnesses', 'Computer phrases', 'Present Perfect vs Past Simple (for / since)', 'Modals of probability', 'Relative clauses']),
-        ('PR 4 Unit 16-20', ['Jobs', 'Arts and entertainment', 'Collocations with look, see, watch', 'Zero and 1st Conditional', '2nd Conditional', 'Reported speech'])],
-    5: [('PR 5 Unit 1-4', ['Shopping', 'Personality adjectives', 'Sport phrases', 'Determiners', 'Ing forms', 'Past Simple and used to']),
-        ('PR 5 Unit 5-9', ['Health verbs', 'Music', 'Technology', 'Modals of obligation and advice', 'Present Perfect vs Past Simple', 'Future forms and Future Continuous']),
-        ('PR 5 Unit 10-15', ['Nature and wildlife', 'Social media', 'Cooking verbs', '2nd Conditional', 'Past Perfect', 'Passive (incl. modal passives)']),
-        ('PR 5 Unit 16-20', ['Film', 'Verbs of communication', 'Hopes and dreams', 'Reported speech and reporting verbs', 'Reported questions', 'Causative have'])],
-    6: [('PR 6 Unit 1-4', ['Education', 'Phrasal verbs for relationships', 'Natural disasters', 'Question forms (complex)', 'Past tense review', 'Making comparisons (too, so, such)']),
-        ('PR 6 Unit 5-9', ['Food and drink phrasal verbs', 'Fiction', 'Money', 'Relative clauses', 'Modals of ability and possibility', 'Future: plans, intentions, predictions']),
-        ('PR 6 Unit 10-15', ['Personality adjectives', 'Accidents and emergencies', 'Reporting verbs', 'Passive: complex forms', 'Reported questions and requests', 'Causative (have / get something done)']),
-        ('PR 6 Unit 16-20', ['Climate change', 'Art', 'Crime and criminals', '2nd Conditional and I wish', 'Modals of deduction in the past', '3d conditional and wish + past perfect'])],
-    7: [('PR 7 Unit 1-4', ['Online, films and media', 'Abstract nouns', 'Stress and health', 'Simple, continuous or perfect', 'Present Perfect Simple and Continuous', 'Modals of necessity and obligation']),
-        ('PR 7 Unit 5-9', ['History', 'Expressing emotions', 'Community', 'Present and past habits', 'Narrative tenses', 'Future Continuous and perfect']),
-        ('PR 7 Unit 10-15', ['Phrasal verbs: relationships', 'Leadership and achievement', 'Global issues', 'Modals in the past', 'Passive and causative', 'Reported speech']),
-        ('PR 7 Unit 16-20', ['Advertising', 'The world of work', 'Idioms', '3d and mixed Conditionals', 'Uses of verb + -ing', 'Determiners'])],
-}
+sys.path.insert(0, os.path.join(HERE, '..'))
+from data import NEW  # один список тем на урок и на docx
 TABLES = {1: (2, 3, 4), 2: (5, 6, 7)}   # таблица документа → какие Prepare в её трёх колонках
 COLS = (0, 5, 10)                        # колонка с названием темы у каждого Prepare
 

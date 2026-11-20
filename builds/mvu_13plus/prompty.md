@@ -157,3 +157,17 @@ Wide landscape scene, 3:2. semi-realistic 3D render, natural proportions, detail
 ```
 A sheet of 7 separate pictures: 4 in the top row and 3 in the bottom row. semi-realistic 3D render, natural proportions, detailed textures, detailed fabric and hair, soft cinematic lighting, restrained natural colours, for a teenage audience. Row 1, left to right: a plain white T-shirt laid flat; a light blue denim jacket laid flat; a single bed with a pillow and a blanket; a wooden chest of drawers. Row 2, left to right: a tall white fridge with closed doors; a kitchen cooker with an oven; a tiger standing, whole body visible from head to tail. plain flat pure white background, no shadow on the background, wide empty white gaps between the items, every item complete and not touching any other item or the edge, no text, no letters, no labels, no numbers.
 ```
+
+## 20.11 — новые картинки для вопросов частей 2–3 (новая разбивка чек-листа)
+
+Лист из 6 → `city_museum`, `city_traffic_jam`, `radio_chop` (ряд 1), `radio_wildlife`, `radio_sculpture`, `radio_furious` (ряд 2).
+
+```
+A sheet of 6 separate pictures in 2 rows of 3, animated film style. semi-realistic 3D render, natural proportions, detailed textures, detailed fabric and hair, soft cinematic lighting, restrained natural colours, for a teenage audience. Row 1, left to right: a grand city museum building with stone columns and wide steps, no writing on the building; a long traffic jam of cars and a red bus on a busy city street; two hands chopping fresh carrots and peppers with a kitchen knife on a wooden chopping board. Row 2, left to right: wildlife in a green forest, a deer, a fox and an owl among the trees; a white marble sculpture of a standing human figure on a stone plinth; an animated film character, a teenage boy with a furious angry face, frowning, red cheeks, clenched fists, head and shoulders. plain flat pure white background, no shadow on the background, wide empty white gaps between the pictures, every picture complete and not touching any other picture or the edge, no text, no letters, no labels, no numbers.
+```
+
+Отдельно, сцена → `safari`:
+
+```
+Wide landscape scene, 3:2. semi-realistic 3D render, natural proportions, detailed textures, soft cinematic lighting, restrained natural colours, for a teenage audience. A sunny safari park seen from a distance: an elephant, a giraffe, a zebra and a lion, each one clearly visible, well spaced and not overlapping, on golden grass with a few acacia trees under a blue sky. no people, no text, no letters, no numbers, no signs.
+```
