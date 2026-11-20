@@ -23,6 +23,8 @@ tr.cur td{background:#fff3cf}
 tr.unset.past td:first-child{box-shadow:inset 4px 0 #f2b544}
 .sum{font-weight:700}.pass{color:#1f7a3a}.fail{color:#b03030}
 .auto{font-size:11px;color:#8a7a66;margin-left:4px}
+.mk button.f2{background:#c9efd5;border-color:#3fbf6a}.mk button.f1{background:#fde7b8;border-color:#f2b544}.mk button.f0{background:#f7c9c9;border-color:#e25555}
+#cm{height:70px;font-family:inherit;font-size:14px}
 h2{margin:14px 0 4px;color:#6e3510;font-size:17px}
 .legend{background:#fffaf0;border-left:4px solid #f2b544;padding:8px 12px;margin:8px 0;font-size:13px}
 textarea{width:100%;height:220px;font-family:Consolas,monospace;font-size:13px}
@@ -43,10 +45,11 @@ textarea{width:100%;height:220px;font-family:Consolas,monospace;font-size:13px}
 <div id="check">
   <div class="now" id="now"></div>
   <div class="legend"><b>0 · 1 · 2.</b> 2 — сам, верно, полной фразой (в задании с нажатием — всё верно); 1 — после подсказки, исправил себя, ответил словом вместо фразы (в задании — не меньше половины); 0 — не смог и с подсказкой, по-русски, не понял (в задании — меньше половины).
-  Балл по нажатиям ученика ставится сам (серым — «авто»), устные ответы оцениваете вы. Нажатие на 0/1/2 в таблице заменяет авто-балл; повторное нажатие — снять.
+  Балл по нажатиям ученика и ваши устные отметки («Сейчас на экране») сразу видны в таблице: <b>бледная</b> кнопка — посчитанный балл, рядом — откуда он («из задания», «устно», «из другой части»). Нажатие на 0/1/2 в таблице ставит ваш балл (<b>яркая</b> кнопка) вместо посчитанного; повторное нажатие — снять.
   Часть пройдена, если в каждом блоке ≥ 9 из 12 — это подсказка, решение за вами.</div>
   <div id="tables"></div>
-  <h2>Отчёт</h2>
+  <h2 id="repH">Отчёт</h2>
+  <label><b>Комментарий преподавателя</b> (попадёт в отчёт)<textarea id="cm" placeholder="Например: стеснялся говорить, но всё понимал; хорошо читает."></textarea></label>
   <textarea id="rep" readonly></textarea>
   <div class="act"><button id="cp">📋 Скопировать отчёт</button><button class="gray" id="rs">Новый ученик (сбросить всё)</button></div>
 </div>
@@ -55,10 +58,12 @@ textarea{width:100%;height:220px;font-family:Consolas,monospace;font-size:13px}
 const A = window.APP;
 function $(s){return document.querySelector(s)}
 const st=A.S.student; $('#nm').value=st.name; $('#gd').value=st.gender; $('#ag').value=st.age;
+$('#cm').value=A.S.comment||'';$('#cm').oninput=e=>{A.S.comment=e.target.value;A.save();$('#rep').value=A.report()};
+window.goReport=()=>{$('#repH').scrollIntoView({behavior:'smooth'});$('#cm').focus()};
 $('#nm').oninput=e=>{st.name=e.target.value;A.save();render()}; $('#gd').onchange=e=>{st.gender=e.target.value;A.save();render()}; $('#ag').oninput=e=>{st.age=e.target.value;A.save();render()};
 $('#cp').onclick=()=>{navigator.clipboard.writeText($('#rep').value).then(()=>{$('#cp').textContent='✔ Скопировано';setTimeout(()=>$('#cp').textContent='📋 Скопировать отчёт',1500)})};
 $('#rs').onclick=()=>{if(confirm('Сбросить все баллы и начать с новым учеником?'))A.reset()};
-function mk(cur,fn){const d=document.createElement('span');d.className='mk';[2,1,0].forEach(v=>{const b=document.createElement('button');b.textContent=v===2?'✓ 2':v===1?'~ 1':'✗ 0';if(cur===v)b.className='on'+v;b.onclick=()=>fn(cur===v?null:v);d.append(b)});return d}
+function mk(cur,fn,faint){const d=document.createElement('span');d.className='mk';[2,1,0].forEach(v=>{const b=document.createElement('button');b.textContent=v===2?'✓ 2':v===1?'~ 1':'✗ 0';if(cur===v)b.className='on'+v;else if(faint===v)b.className='f'+v;b.onclick=()=>fn(cur===v?null:v);d.append(b)});return d}
 function screenTopics(s){const t=new Set();if(s.task)(s.task.items||[]).forEach(i=>(i.t||[]).forEach(x=>t.add(x)));(s.oral||[]).forEach(o=>o.topics.forEach(x=>t.add(x)));return t}
 function render(){
   const S=A.S,D=A.D,s=A.screen();
@@ -75,7 +80,7 @@ function render(){
     P.blocks.forEach((b,bi)=>{const t=document.createElement('table');const th=document.createElement('tr');th.innerHTML='<th>'+b[0]+'</th><th>балл</th>';t.append(th);let sum=0,filled=0;
       b[1].forEach((name,ti)=>{const id='p'+(pi+1)+'b'+(bi+1)+'t'+(ti+1);const sc=A.topicScore(id);if(sc.v!==null){sum+=sc.v;filled++}
         const tr=document.createElement('tr');if(curT.has(id))tr.className='cur';const td=document.createElement('td');td.textContent=name;const td2=document.createElement('td');td2.className='sc';
-        td2.append(mk(S.override[id]!==undefined?S.override[id]:null,v=>A.setOverride(id,v)));if(sc.src==='auto'){const a=document.createElement('span');a.className='auto';a.textContent='авто: '+sc.v;td2.append(a)}
+        td2.append(mk(S.override[id]!==undefined?S.override[id]:null,v=>A.setOverride(id,v),sc.src==='auto'?sc.v:null));{const a=document.createElement('span');a.className='auto';a.textContent=sc.src==='manual'?'поставлено в таблице':sc.src==='auto'?sc.from.join(' + '):'';td2.append(a)}
         tr.append(td,td2);t.append(tr)});
       const tf=document.createElement('tr');tf.innerHTML='<td class="sum">Сумма блока</td><td class="sum '+(filled?(sum>=9?'pass':'fail'):'')+'">'+(filled?sum+' из 12 '+(sum>=9?'✔':''):'—')+'</td>';t.append(tf);box.append(t)})});
   $('#rep').value=A.report();

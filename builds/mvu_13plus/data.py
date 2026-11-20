@@ -113,7 +113,8 @@ P1 = [
                       dict(x=48, y=6, a='head', t=T(1, 'Body parts')),
                   ]),
              dict(kind='choice', title='Том очень любит спорт. Посмотри на картинку и выбери верный вариант', en='Look and choose.', items=[
-                 dict(img='sport_bike', q='___ Tom ride a bike to school? — Yes, he does.', o=['Does', 'Do', 'Is'], t=T(1, 'Present Simple')),
+                 dict(img='sport_bike', q='___ Tom ride a bike to school?', o=['Does', 'Do', 'Is'], t=T(1, 'Present Simple'),
+                      then='Now answer the question: Does Tom ride a bike to school?', then_exp='Yes, he does.'),
                  dict(img='sport_tennis', q='Tom can play tennis, but he ___ play basketball.', o=['can’t', 'can', 'don’t can'], t=T(1, 'Can/Can’t')),
              ])],
          you=[]),
@@ -153,19 +154,10 @@ P1 = [
          name_t=T(1, 'Pets and farm animals'),
          tasks=[
              dict(kind='choice', title='Это кошка Тома. Посмотри на животных и выбери верный вариант', en='Look and choose.', items=[
-                 dict(img2=['an_horse', 'an_cat'], q='A horse is ___ than a cat.', o=['bigger', 'big', 'biggest'], t=T(1, 'Comparatives')),
-                 dict(img2=['an_tiger', 'an_cat'], q='A tiger is ___ than a cat.', o=['more dangerous', 'dangerouser', 'most dangerous'], t=T(1, 'Comparatives')),
-                 dict(img2=['an_cow', 'an_pig', 'an_chicken'], q='Which animal gives us milk?', o=['a cow', 'a pig', 'a chicken'], t=T(1, 'Pets and farm animals')),
-             ]),
-             dict(kind='listen', title='Голосовое сообщение про ферму. Послушай и ответь на вопросы', en='Listen and choose.', audio='p1_voicemail_v2',
-                  text=('Yesterday Tom went to his grandparents’ farm. In the morning he fed the chickens and the sheep. '
-                        'Then he rode a horse! He didn’t see the pigs, because they were asleep. '
-                        'In the evening they had a big dinner and watched a film. It was a great day!'),
-                  items=[
-                      dict(q='What did Tom ride?', o=['a horse', 'a bike', 'a bus'], t=T(1, 'Past Simple')),
-                      dict(q='Did he see the pigs?', o=['No, he didn’t.', 'Yes, he did.', 'No, he don’t.'], t=T(1, 'Past Simple')),
-                      dict(q='What did they do in the evening?', o=['They watched a film.', 'They played football.', 'They went to bed.'], t=T(1, 'Past Simple')),
-                  ])],
+                 dict(img2=['an_horse', 'an_cat'], scale=[1, .38], q='A horse is ___ than a cat.', o=['bigger', 'big', 'biggest'], t=T(1, 'Comparatives')),
+                 dict(img2=['an_tiger', 'an_cat'], scale=[1, .45], q='A tiger is ___ than a cat.', o=['more dangerous', 'dangerouser', 'most dangerous'], t=T(1, 'Comparatives')),
+                 dict(img2=['an_cow', 'an_pig', 'an_chicken'], scale=[1, .62, .38], q='Which animal gives us milk?', o=['a cow', 'a pig', 'a chicken'], t=T(1, 'Pets and farm animals')),
+             ])],
          you=[('What did you do last weekend?', T(1, 'Past Simple'))]),
 ]
 
@@ -377,3 +369,20 @@ FAMILY = [  # портреты семьи для схемы family_tree: (кар
 # одинаковые темы в разных частях/блоках получают балл друг от друга (решение Анны 13.11)
 def topic_names():
     return {tid(p['part'], bi, ti): t for p in CHECKLIST for bi, (_, ts) in enumerate(p['blocks'], 1) for ti, t in enumerate(ts, 1)}
+
+# ── отчёт по шаблону Анны (19.11): лексика — по-русски, грамматика — как в чек-листе ──
+TOPIC_RU = {
+    'Families': 'семья', 'Countries': 'страны', 'School objects': 'школьные предметы', 'Sports': 'спорт',
+    'Body parts': 'части тела', 'Food and drinks': 'еда и напитки', 'Jobs': 'профессии', 'Transport': 'транспорт',
+    'Entertainment': 'развлечения', 'Weather': 'погода', 'Pets and farm animals': 'домашние животные и животные на ферме',
+    'Clothes': 'одежда', 'Holidays': 'отдых и каникулы', 'Emotions': 'эмоции', 'Household and furniture': 'дом и мебель',
+    'Ways of travelling': 'способы путешествовать', 'Adjectives to describe objects': 'прилагательные для описания предметов',
+    'Describing people': 'описание внешности', 'Crime and criminals': 'преступления', 'Money and shopping': 'деньги и покупки',
+    'Health and Illnesses': 'здоровье и болезни', 'Geographical features': 'география: реки, горы, острова',
+    'Travelling activities': 'занятия в путешествии', 'Relationships': 'отношения', 'Free time activities: books and films': 'книги и фильмы',
+    'Food and drink adjectives': 'вкус еды', 'Computer phrases': 'компьютер и интернет', 'Sport phrases': 'спортивные выражения',
+    'Health verbs': 'глаголы о здоровье', 'Music': 'музыка', 'Education': 'образование', 'Phrasal verbs for relationships': 'фразовые глаголы об отношениях',
+    'Natural disasters': 'стихийные бедствия', 'Online, films and media': 'интернет, кино и медиа', 'Abstract nouns': 'абстрактные существительные',
+    'History': 'история', 'Social media': 'соцсети', 'Verbs of communication': 'глаголы общения', 'Hopes and dreams': 'мечты и планы',
+    'Personal qualities': 'черты характера', 'Idioms': 'идиомы', 'Advertising': 'реклама', 'Global issues': 'глобальные проблемы',
+}

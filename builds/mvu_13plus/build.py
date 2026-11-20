@@ -52,7 +52,7 @@ if missing or uncovered or problems:
 
 # ── план урока ──────────────────────────────────────────────────────────────────────────
 def ans(it):
-    if 'o' in it: return it['o'][0]
+    if 'o' in it: return it['o'][0] + (f' → потом устно отвечает на вопрос: {it["then_exp"]} (оцените в «Сейчас на экране»)' if it.get('then') else '')
     if 'a' in it and isinstance(it['a'], bool): return 'True' if it['a'] else f'False → {it["fix"]}'
     if 'a' in it: return it['a']
     if 's' in it: return it['s']
@@ -70,7 +70,7 @@ HOW = {'choice': 'Пункты по одному: следующий — Next, �
        'sort': 'Картинки можно нажимать (потом нажать на группу) или перетаскивать; переложить можно до кнопки «Check». После разложения ученик называет каждую вещь вслух.',
        'match': 'Пары соединяются нажатием (левое → правое) или перетаскиванием; нажатие на левое снимает пару. Верно/неверно — только после «Check».',
        'listen': 'Слева запись, справа сразу все вопросы — ученик читает их до прослушивания и слушает один раз (можно ещё раз, если просит).',
-       'oral': 'На экране картинка и вопросы, вариантов нет. Спросите, ученик отвечает устно — оцените 0/1/2 в чек-листе ✅ («Сейчас на экране»).'}
+       'oral': 'На экране картинка и один вопрос, вариантов нет; следующий вопрос — по Next. Спросите, ученик отвечает устно — оцените 0/1/2 в чек-листе ✅ («Сейчас на экране»).'}
 rows = []
 def row(step, do, tl, exp):
     rows.append(f'<tr><td class="st">{step}</td><td>{do}</td><td class="tl">{tl}</td><td class="sa">{exp}</td></tr>')
@@ -107,7 +107,7 @@ for P in data.PARTS:
     if P['n'] < 3:
         row(f'Чекпойнт Part {P["n"]}', 'Посмотрите суммы блоков в чек-листе. ≥ 9 из 12 в каждом блоке → «Keep looking» (следующая часть). Иначе → «Open the lock» (финал).', 'Great job! Shall we open the lock?', '—')
 row('🔐 Замок', 'Попросите ученика прочитать код вслух по-английски (на экране — только «Read your code in English!»), вы нажимаете «Enter the code». Кнопка 🚪 вверху ведёт сюда в любой момент.', 'Read the code in English, please!', 'four, seven, two, nine…')
-row('🎉 Финал', 'Дверь открыта. Скопируйте отчёт (чек-лист ✅ → «Скопировать отчёт») и переходите к предзакрытию.', 'Well done! You escaped! How did you like the game?', '—')
+row('🎉 Финал', 'Дверь открыта. Нажмите «📝 Отчёт» внизу слева: откроется чек-лист сразу на отчёте. Допишите комментарий, если нужно, нажмите «Скопировать отчёт» и переходите к предзакрытию.', 'Well done! You escaped! How did you like the game?', '—')
 PLAN_INNER = (
     '<h1 style="color:#6e3510;margin:4px 0 10px">🗝 План урока: Escape Room 13+ (вводный урок)</h1>'
     f'<p class="dl"><a href="{SITE}mvu_13plus_plan.docx" download>⬇ Скачать план (Word)</a><a class="pdf" href="{SITE}mvu_13plus_plan.pdf" download>⬇ Скачать план (PDF)</a></p>'
@@ -134,7 +134,7 @@ preload = set(used)
 D = dict(media=data.M, audio=AUDIO, family=data.FAMILY,
          checklist=[dict(title=p['title'], blocks=[[b, ts] for b, ts in p['blocks']]) for p in data.CHECKLIST],
          parts=[dict(room=P['room'], room_name=P['room_name'], intro=P['intro'] if P['n'] > 1 else '', intro_en=P['intro_en'], objects=P['objects']) for P in data.PARTS],
-         preload=sorted(preload))
+         topic_ru=data.TOPIC_RU, preload=sorted(preload))
 mw = open(os.path.join(HERE, 'manager.html')).read()
 D['plan_html'] = ('<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><title>План урока — Escape Room 13+</title><style>'
     "body{font-family:'Segoe UI',Arial,sans-serif;background:#f6efe2;color:#2a1a10;padding:18px 22px;max-width:1200px;margin:0 auto;font-size:14px}"

@@ -53,21 +53,23 @@ h2{font-weight:800;font-size:3.6vh;margin:.2em 0 .5em;color:var(--gold2)}
 .room .obj .shd{position:absolute;left:8%;right:8%;bottom:-5%;height:14%;background:radial-gradient(ellipse at center,rgba(0,0,0,.6),rgba(0,0,0,0) 70%);z-index:-1;pointer-events:none}
 .room .obj .tick{position:absolute;right:-.6vw;top:-.6vh;background:var(--ok);color:#fff;border-radius:50%;width:3.2vh;height:3.2vh;font-size:2vh;display:none;align-items:center;justify-content:center;font-weight:800}
 .room .obj.done .tick{display:flex}
+.room .obj.cut .tick{right:auto;transform:translate(-50%,-50%)}
 @keyframes glow{0%,100%{filter:drop-shadow(0 0 0 rgba(255,216,137,0)) drop-shadow(0 6px 8px rgba(0,0,0,.6))}50%{filter:drop-shadow(0 0 1.4vh rgba(255,216,137,.95)) drop-shadow(0 6px 8px rgba(0,0,0,.6))}}
 .roomTitle{pointer-events:none;position:absolute;left:50%;top:7vh;transform:translateX(-50%);z-index:4;background:var(--panel);border-radius:14px;padding:.8vh 1.6vw;font-weight:800;font-size:2.4vh;color:var(--gold2);white-space:nowrap}
 .roomTip{pointer-events:none;position:absolute;left:50%;top:13vh;transform:translateX(-50%);z-index:4;background:var(--panel);border-radius:14px;padding:.8vh 1.6vw;font-size:2vh;white-space:nowrap}
-/* лоток с обрывками */
-#tray{pointer-events:none;position:absolute;left:1.2vw;top:1.2vh;z-index:15;display:none;align-items:flex-start;gap:.3vw;max-width:34%;flex-wrap:wrap}
-#tray canvas{width:5.2vh;height:auto;filter:drop-shadow(0 3px 4px rgba(0,0,0,.7));transition:transform .4s}
-#notes{pointer-events:none;position:absolute;left:1.2vw;top:9vh;z-index:15;display:none;gap:.6vw}
-#notes .n{background:#f3e3bf;color:#3a2410;border-radius:6px;padding:.4vh .8vw;font-family:Caveat,cursive;font-size:3.2vh;box-shadow:0 3px 6px rgba(0,0,0,.6)}
+/* конверт с кусками записки (45) */
+#env{pointer-events:none;position:absolute;left:1.4vw;top:1.6vh;z-index:15;display:none;align-items:center;gap:.8vw;filter:drop-shadow(0 6px 10px rgba(0,0,0,.6))}
+#env svg{width:10vh;height:7.2vh;display:block;transition:transform .25s}
+#env.pulse svg{transform:scale(1.18)}
+#env .cnt{background:rgba(20,16,30,.85);border:1px solid rgba(242,181,68,.6);color:var(--gold2);font-weight:800;font-size:2.4vh;border-radius:12px;padding:.6vh 1vw;white-space:nowrap}
+.fly{position:absolute;z-index:44;pointer-events:none;transition:left .8s cubic-bezier(.5,0,.6,1),top .8s cubic-bezier(.5,0,.6,1),width .8s,opacity .8s;filter:drop-shadow(0 4px 8px rgba(0,0,0,.6))}
 /* задание */
 .task{position:relative;z-index:2;width:92%;height:82%;overflow:hidden;background:var(--panel);border:1px solid rgba(242,181,68,.4);border-radius:22px;padding:2vh 2vw;display:flex;flex-direction:column}
 .task .head{display:flex;align-items:center;gap:1vw;margin-bottom:1vh}
 .task .head img{height:6vh}
 .task .head .ttl{font-size:2.5vh;font-weight:800;color:var(--gold2);text-align:left}
 .task .head .cnt{margin-left:auto;font-size:1.9vh;color:#bfb39e;white-space:nowrap}
-.task .body{flex:1;display:flex;gap:2vw;align-items:center;justify-content:center;min-height:0}
+.task .body{flex:1;display:flex;gap:2vw;align-items:safe center;justify-content:safe center;min-height:0}
 .task .pic{flex:0 1 50%;min-width:0;max-width:50%;max-height:100%;display:flex;align-items:center;justify-content:center}
 .task .pic img{max-width:100%;max-height:58vh;border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.6)}
 .task .side{flex:1;display:flex;flex-direction:column;align-items:center;gap:1.6vh;min-width:0}
@@ -121,7 +123,32 @@ h2{font-weight:800;font-size:3.6vh;margin:.2em 0 .5em;color:var(--gold2)}
 .mi{background:#f7efe0;color:var(--ink);border:3px solid transparent;border-radius:12px;padding:.9vh 1vw;font-size:2.2vh;font-weight:700;text-align:left}
 .mi img{height:17vh;display:block;border-radius:8px}
 .mi.pic{padding:.4vh}
-.mi.sel{border-color:var(--gold)}.mi.ok{background:#bfeccb;opacity:.75}.mi.bad{background:#ffc9c9}
+.mi.sel{border-color:var(--gold)}.mi.ok{background:#bfeccb}.mi.bad{background:#ffc9c9}
+/* значки после Check (замечание 51) */
+.chip,.mi,.slot{position:relative}
+.chip.ok::after,.mi.ok::after,.slot.ok::after,.chip.bad::after,.mi.bad::after,.slot.bad::after{position:absolute;top:-1.1vh;right:-1.1vh;width:3vh;height:3vh;border-radius:50%;color:#fff;font-size:1.9vh;display:flex;align-items:center;justify-content:center;font-weight:800;box-shadow:0 2px 5px rgba(0,0,0,.45);z-index:2}
+.chip.ok::after,.mi.ok::after,.slot.ok::after{content:'✓';background:var(--ok)}
+.chip.bad::after,.mi.bad::after,.slot.bad::after{content:'✗';background:var(--bad)}
+/* слово → поле под картинкой (замечание 47) */
+.mpool{min-height:6vh;width:100%}
+.mcards{display:flex;flex-wrap:nowrap;gap:1.4vh 1.4vw;justify-content:center;width:100%}
+.mcard{display:flex;flex-direction:column;align-items:center;gap:.8vh;background:rgba(255,255,255,.07);border:2px solid rgba(242,181,68,.35);border-radius:16px;padding:1vh;cursor:pointer}
+.mcard{flex:0 1 22%;min-width:0}
+.mcard img{height:17vh;max-width:100%;object-fit:contain;display:block;border-radius:10px}
+.slot{width:100%;min-width:0;min-height:5.2vh;border:2px dashed rgba(242,181,68,.7);border-radius:30px;display:flex;align-items:center;justify-content:center;padding:.2vh .4vw}
+.slot.ok{border:2px solid var(--ok);background:rgba(63,191,106,.18)}.slot.bad{border:2px solid var(--bad);background:rgba(226,85,85,.18)}
+.slot .chip{border-radius:30px}
+.mright{font-size:1.9vh;color:#9ff0b6;min-height:2.4vh;font-weight:700}
+/* стрелки в парах «текст — текст» (замечание 53) */
+.match.txt{position:relative;gap:11vw}
+.match.txt .col{flex:0 1 36%}
+.match.txt svg.arr{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+/* животные в реальном размере (42–43) */
+.zoo{display:flex;align-items:flex-end;justify-content:center;gap:2.4vh;width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(242,181,68,.3);border-radius:16px;padding:2vh 1.6vh 1.6vh;border-bottom:4px solid rgba(242,181,68,.45)}
+.task .pic .zoo img{width:auto;max-width:none;max-height:none;box-shadow:none;border-radius:0;display:block}
+/* второй шаг вопроса: ответить устно (40) */
+.then{margin-top:1.4vh;padding:1.2vh 1.6vw;border:2px solid var(--gold);border-radius:16px;background:rgba(242,181,68,.12);font-size:2.6vh;font-weight:700;text-align:center}
+.then .answer{font-size:2.4vh;min-height:0;margin-top:.6vh}
 .mi .tag{display:inline-block;background:var(--ok);color:#fff;border-radius:6px;padding:0 .4vw;font-size:1.6vh;margin-top:.3vh}
 .ord .line{min-height:7vh;border-bottom:3px solid rgba(242,181,68,.7);display:flex;flex-wrap:wrap;gap:.6vw;justify-content:center;align-items:center;padding:.6vh;width:90%}
 .hot{position:relative;height:60vh}
@@ -153,7 +180,8 @@ h2{font-weight:800;font-size:3.6vh;margin:.2em 0 .5em;color:var(--gold2)}
 .lockbox span.in{transform:scale(1.15)}
 #fx{position:absolute;inset:0;pointer-events:none;z-index:30}
 .toast{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:40;background:#1d1830;cursor:pointer;border:2px solid var(--gold);border-radius:20px;padding:2vh 2.4vw;text-align:center;font-size:2.6vh;font-weight:700;display:none}
-.toast canvas{width:34vh;display:block;margin:1.5vh auto}
+.toast canvas{max-width:30vh;max-height:24vh;display:block;margin:2.4vh auto 2.6vh}
+.toast .btn{display:block;margin:0 auto}
 .tbg{position:absolute;inset:0;z-index:39;background:rgba(8,6,14,.82);display:none}
 #loader{position:fixed;inset:0;z-index:999;background:#0d0b12;color:var(--gold2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2vh;font-weight:800;font-size:3vh}
 #loader .b{width:40vw;height:1.2vh;background:#2a2238;border-radius:1vh;overflow:hidden}#loader .b i{display:block;height:100%;width:0;background:var(--gold)}
@@ -165,7 +193,7 @@ h2{font-weight:800;font-size:3.6vh;margin:.2em 0 .5em;color:var(--gold2)}
   <div id="topbar"><button class="tb plan" id="checkBtn" title="Чек-лист (для менеджера)">✅</button><button class="tb plan" id="planBtn" title="План урока (для менеджера)">📋</button><button class="tb" id="hintBtn" title="Подсказка">💡</button><button class="tb" id="finBtn" title="Открыть замок и закончить">🚪</button></div>
   <div id="parts"></div>
   <div id="screens"></div>
-  <div id="tray"></div><div id="notes"></div>
+  <div id="env"></div>
   <div id="nav"><button class="btn ghost" id="restartBtn" title="Начать урок заново">↻</button><button class="btn ghost" id="backBtn">←</button><button class="btn" id="nextBtn">Next ➜</button></div>
   <div class="tbg" id="tbg"></div><div class="toast" id="toast"></div>
   <canvas id="fx"></canvas>
@@ -191,6 +219,7 @@ const S = {
   digits: { 1: [...Array(4)].map(() => rnd(10)), 2: [...Array(2)].map(() => rnd(10)), 3: [...Array(2)].map(() => rnd(10)) },
   assembled: { 1: false, 2: false, 3: false },
   hint: false,
+  comment: '',
 };
 function save() { try { localStorage.setItem('mvu13', JSON.stringify(S)); } catch (e) {} }
 function load() { try { const s = JSON.parse(localStorage.getItem('mvu13')); if (s && s.digits) Object.assign(S, s); } catch (e) {} }
@@ -201,16 +230,17 @@ function oralMark(key, topics, v) { S.oral[key] = { topics, v }; save(); MW.refr
 // одинаковые по названию темы в разных частях/блоках получают балл друг от друга (решение Анны 13.11)
 const TNAME = {}, SAME = {};
 D.checklist.forEach((P, pi) => P.blocks.forEach((b, bi) => b[1].forEach((n, ti) => { const id = `p${pi + 1}b${bi + 1}t${ti + 1}`; TNAME[id] = n; (SAME[n] = SAME[n] || []).push(id); })));
+// src: manual — учитель поставил в таблице; auto — посчитано; from — откуда (задание / устно / таблица в другой части)
 function topicScore(t) {
-  if (t in S.override) return { v: S.override[t], src: 'manual' };
-  const vals = [];
+  if (t in S.override) return { v: S.override[t], src: 'manual', from: [] };
+  const vals = [], from = new Set();
   (SAME[TNAME[t]] || [t]).forEach(id => {
-    if (id !== t && id in S.override) { vals.push(S.override[id]); return; }
-    const a = S.auto[id]; if (a && a.n) vals.push(a.ok === a.n ? 2 : a.ok * 2 >= a.n ? 1 : 0);
-    for (const k in S.oral) if (S.oral[k].topics.includes(id)) vals.push(S.oral[k].v);
+    if (id !== t && id in S.override) { vals.push(S.override[id]); from.add('из другой части'); return; }
+    const a = S.auto[id]; if (a && a.n) { vals.push(a.ok === a.n ? 2 : a.ok * 2 >= a.n ? 1 : 0); from.add(id === t ? 'из задания' : 'из другой части'); }
+    for (const k in S.oral) if (S.oral[k].topics.includes(id)) { vals.push(S.oral[k].v); from.add(id === t ? 'устно' : 'из другой части'); }
   });
-  if (!vals.length) return { v: null, src: '' };
-  return { v: Math.round(vals.reduce((x, y) => x + y, 0) / vals.length), src: 'auto' };
+  if (!vals.length) return { v: null, src: '', from: [] };
+  return { v: Math.round(vals.reduce((x, y) => x + y, 0) / vals.length), src: 'auto', from: [...from] };
 }
 
 /* ───────── экраны ───────── */
@@ -222,15 +252,15 @@ function show(i, push = true) {
   cur = i; const s = SCREENS[i];
   const box = $('#screens'); box.innerHTML = '';
   const node = el('div', { cls: 'screen on ' + (s.cls || '') });
+  window.onresize = null;
   box.append(node); s.render(node);
   $('#parts').style.display = (s.part || s.final) ? 'flex' : 'none';
   [...$('#parts').children].forEach((b, k) => b.classList.toggle('cur', k + 1 === s.part));
   const showTray = s.part && !s.final && (s.cls === 'room' || /^(note|check|intro)/.test(s.id));
-  $('#tray').style.display = showTray ? 'flex' : 'none';
-  $('#notes').style.display = showTray ? 'flex' : 'none';
+  $('#env').style.display = showTray ? 'flex' : 'none';
   $('#nextBtn').style.display = s.noNext ? 'none' : '';
   $('#nextBtn').disabled = false;
-  renderTray(); MW.refresh();
+  renderEnv(); MW.refresh();
 }
 function cardStep(s, label) {
   s.ci = s.ci || 0; const many = s.cards.length > 1;
@@ -266,6 +296,23 @@ function flagSvg(c) {
   }[c];
   return el('div', { cls: 'flag', html: `<svg viewBox="0 0 3 2" width="100%" height="100%" preserveAspectRatio="none">${f}</svg>` });
 }
+// животные рядом в реальном соотношении размеров (42–43): высота = доля от самого крупного, общий «пол»
+function zoo(names, scale) {
+  const z = el('div', { cls: 'zoo' });
+  const ims = names.map((x, i) => { const im = el('img', { src: img(x) }); im.dataset.s = (scale && scale[i]) || 1; z.append(im); return im; });
+  const fit = () => {
+    if (!z.isConnected) return;
+    let H = z.clientHeight ? Math.min(window.innerHeight * .34, z.clientHeight) : window.innerHeight * .34;
+    for (let k = 0; k < 6; k++) {
+      ims.forEach(im => im.style.height = (H * im.dataset.s) + 'px');
+      const pad = 40, need = ims.reduce((a, im) => a + (im.naturalWidth / im.naturalHeight || 1) * H * im.dataset.s, 0) + (ims.length - 1) * window.innerHeight * .024 + pad;
+      const avail = z.parentNode.clientWidth; if (need <= avail) break; H *= avail / need;
+    }
+  };
+  ims.forEach(im => im.complete ? 0 : im.addEventListener('load', fit));
+  setTimeout(fit, 0); window.addEventListener('resize', fit);
+  return z;
+}
 function choiceItem(side, it, topics, prefix) {
   side.innerHTML = '';
   side.append(el('div', { cls: 'q' }, (prefix || '') + it.q));
@@ -279,6 +326,7 @@ function choiceItem(side, it, topics, prefix) {
       const ok = i === 0; b.classList.add(ok ? 'ok' : 'bad');
       if (!ok) [...opts.children].find(x => x.textContent === it.o[0]).classList.add('show');
       autoMark(topics, ok);
+      if (it.then) side.append(el('div', { cls: 'then' }, '💬 ' + it.then, S.hint ? el('div', { cls: 'answer' }, it.then_exp) : null));
     };
     opts.append(b);
   });
@@ -298,7 +346,7 @@ function renderTask(node, o, t, step, done) {
     if (t.image) pic.append(el('img', { src: img(t.image) }));
     if (t.image === 'family_tree') pic.classList.add('wide');
     if (it.img) pic.append(el('img', { src: img(it.img) }));
-    if (it.img2) { pic.classList.add('wide'); pic.append(el('div', { cls: 'imgs2' }, it.img2.map(x => el('div', { cls: 'ic' }, el('img', { src: img(x) }))))); }
+    if (it.img2) { pic.classList.add('wide'); pic.append(zoo(it.img2, it.scale)); }
     if (it.flag) pic.append(flagSvg(it.flag));
     if (pic.children.length) body.append(pic);
     body.append(side);
@@ -313,12 +361,13 @@ function renderTask(node, o, t, step, done) {
     body.append(pic, side);
     self.onNext = done;
   } else if (k === 'oral') {
-    const body = taskShell(node, o, t, '');
+    const i = step.i || 0; const [q, , exp] = t.qs[i];
+    const body = taskShell(node, o, t, t.qs.length > 1 ? `${i + 1} / ${t.qs.length}` : '');
     if (t.image) body.append(el('div', { cls: 'pic' }, el('img', { src: img(t.image) })));
     const side = el('div', { cls: 'side' });
-    t.qs.forEach(([q, , exp]) => side.append(el('div', { cls: 'card oralq' }, el('div', { cls: 'qq' }, q), S.hint ? el('div', { cls: 'answer' }, exp) : null)));
+    side.append(el('div', { cls: 'card oralq' }, el('div', { cls: 'qq' }, q), S.hint ? el('div', { cls: 'answer' }, exp) : null));
     body.append(side);
-    self.onNext = done;
+    self.onNext = () => { if (i < t.qs.length - 1) { step.i = i + 1; show(cur, false); } else done(); };
   } else if (k === 'fix') {
     const i = step.i || 0; const it = items[i];
     const body = taskShell(node, o, t, items.length > 1 ? `${i + 1} / ${items.length}` : '');
@@ -376,27 +425,72 @@ function renderTask(node, o, t, step, done) {
     self.onNext = done;
   } else if (k === 'match') {
     const body = taskShell(node, o, t, '');
-    const wrap = el('div', { cls: 'match' }); body.append(el('div', { cls: 'side' }, wrap));
-    const L = el('div', { cls: 'col' }); const R = el('div', { cls: 'col' + (t.defs || t.halves ? '' : ' imgs') });
-    const checked = { v: false }; const pair = {}; // left j → right j
+    const side = el('div', { cls: 'side' }); body.append(side);
+    const checked = { v: false };
+    if (!(t.defs || t.halves)) {
+      // слово → поле под картинкой (замечание 47)
+      const pool = el('div', { cls: 'chips mpool' }); const cards = el('div', { cls: 'mcards' });
+      let sel = null;
+      const slots = shuffle(t.items.map((_, j) => j)).map(j => {
+        const slot = el('div', { cls: 'slot' }); slot.dataset.j = j; const right = el('div', { cls: 'mright' });
+        const c = el('div', { cls: 'mcard' }, el('img', { src: img(t.items[j].img) }), slot, right); c.sl = slot; c.rt = right;
+        c.onclick = () => { if (checked.v || !sel) return; put(sel, c); };
+        cards.append(c); return c;
+      });
+      const put = (w, c) => { const old = c.sl.firstChild; if (old && old !== w) pool.append(old); c.sl.append(w); w.classList.remove('sel'); sel = null; };
+      const words = shuffle(t.items.map((_, j) => j)).map(j => {
+        const w = el('button', { cls: 'chip' }, t.items[j].w); w.dataset.j = j;
+        w.onclick = e => { e.stopPropagation(); if (checked.v) return; if (w.parentNode !== pool) { pool.append(w); return; } if (sel) sel.classList.remove('sel'); sel = w === sel ? null : w; if (sel) w.classList.add('sel'); };
+        pool.append(w); return w;
+      });
+      dragify(words, [pool, ...slots], checked, (w, z) => { if (z === pool) { pool.append(w); w.classList.remove('sel'); if (sel === w) sel = null; } else put(w, z); });
+      const chk = checkBtn(() => {
+        if (pool.children.length) return false;
+        checked.v = true;
+        slots.forEach(c => { const w = c.sl.firstChild; const ok = w.dataset.j === c.sl.dataset.j; c.sl.classList.add(ok ? 'ok' : 'bad'); autoMark(t.items[w.dataset.j].t, ok); if (!ok) c.rt.textContent = '✔ ' + t.items[c.sl.dataset.j].w; });
+      });
+      side.append(el('div', { cls: 'q', style: 'font-size:2.2vh;color:#bfb39e' }, 'Drag or tap a word, then tap the picture.'), pool, cards, chk);
+      self.onNext = done;
+      return;
+    }
+    // текст — текст: стрелки (замечание 53)
+    const wrap = el('div', { cls: 'match txt' }); side.append(wrap);
+    const L = el('div', { cls: 'col' }); const R = el('div', { cls: 'col' });
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('class', 'arr');
+    const pair = {}; // left j → right j
     const COLORS = ['#f2b544', '#6aa8ff', '#c084fc', '#4fd1c5', '#ff8fab', '#a3e635'];
-    let sel = null;
+    let sel = null, result = null;
     const lefts = shuffle(t.items.map((_, j) => j)).map(j => { const b = el('button', { cls: 'mi' }, t.items[j].w); b.dataset.j = j; L.append(b); return b; });
-    const rights = shuffle(t.items.map((_, j) => j)).map(j => { const it = t.items[j]; const b = el('button', { cls: 'mi' + (it.img ? ' pic' : '') }, it.img ? el('img', { src: img(it.img) }) : it.d); b.dataset.j = j; R.append(b); return b; });
-    const paint = () => { const used = Object.keys(pair); lefts.forEach(b => { const n = used.indexOf(b.dataset.j); b.style.borderColor = n >= 0 ? COLORS[n % COLORS.length] : ''; b.classList.toggle('sel', b === sel); }); rights.forEach(b => { const lj = Object.keys(pair).find(x => pair[x] == b.dataset.j); const n = lj != null ? used.indexOf(lj) : -1; b.style.borderColor = n >= 0 ? COLORS[n % COLORS.length] : ''; }); };
+    const rights = shuffle(t.items.map((_, j) => j)).map(j => { const b = el('button', { cls: 'mi' }, t.items[j].d); b.dataset.j = j; R.append(b); return b; });
+    const colorOf = lj => COLORS[Object.keys(pair).indexOf(String(lj)) % COLORS.length];
+    const line = (lb, rb, col, dash, w) => {
+      const W = wrap.getBoundingClientRect(), a = lb.getBoundingClientRect(), b = rb.getBoundingClientRect();
+      const x1 = a.right - W.left + 2, y1 = a.top + a.height / 2 - W.top, x2 = b.left - W.left - 4, y2 = b.top + b.height / 2 - W.top;
+      const id = 'ah' + col.replace('#', '');
+      if (!svg.querySelector('#' + id)) svg.insertAdjacentHTML('afterbegin', `<defs><marker id="${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="${col}"/></marker></defs>`);
+      svg.insertAdjacentHTML('beforeend', `<circle cx="${x1}" cy="${y1}" r="5" fill="${col}"/><line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="${w || 4}" stroke-linecap="round" ${dash ? 'stroke-dasharray="9 7"' : ''} marker-end="url(#${id})"/>`);
+    };
+    const paint = () => {
+      svg.innerHTML = '';
+      lefts.forEach(b => { b.style.borderColor = pair[b.dataset.j] != null ? colorOf(b.dataset.j) : ''; b.classList.toggle('sel', b === sel); });
+      rights.forEach(b => { const lj = Object.keys(pair).find(x => pair[x] == b.dataset.j); b.style.borderColor = lj != null ? colorOf(lj) : ''; });
+      if (!result) Object.keys(pair).forEach(lj => line(lefts.find(b => b.dataset.j == lj), rights.find(b => b.dataset.j == pair[lj]), colorOf(lj)));
+      else result.forEach(([lb, rb, ok, good]) => { line(lb, rb, ok ? '#3fbf6a' : '#e25555', !ok); if (!ok) line(lb, good, '#3fbf6a', true, 2.5); });
+    };
     const link = (lb, rb) => { Object.keys(pair).forEach(x => { if (pair[x] == rb.dataset.j) delete pair[x]; }); pair[lb.dataset.j] = rb.dataset.j; sel = null; paint(); };
-    lefts.forEach(b => b.onclick = () => { if (checked.v) return; if (pair[b.dataset.j] != null) { delete pair[b.dataset.j]; sel = null; paint(); return; } sel = b; paint(); });
+    lefts.forEach(b => b.onclick = () => { if (checked.v) return; if (pair[b.dataset.j] != null) { delete pair[b.dataset.j]; sel = null; paint(); return; } sel = b === sel ? null : b; paint(); });
     rights.forEach(b => b.onclick = () => { if (checked.v || !sel) return; link(sel, b); });
     dragify(lefts, rights, checked, (lb, rb) => link(lb, rb));
     const chk = checkBtn(() => {
       if (Object.keys(pair).length < t.items.length) return false;
       checked.v = true;
-      let n = 0;
-      lefts.forEach(b => { const ok = pair[b.dataset.j] == b.dataset.j; b.classList.add(ok ? 'ok' : 'bad'); autoMark(t.items[b.dataset.j].t, ok); const rb = rights.find(r => r.dataset.j == pair[b.dataset.j]); rb.classList.add(ok ? 'ok' : 'bad');
-        if (!ok) { n++; const good = rights.find(r => r.dataset.j == b.dataset.j); b.append(el('span', { cls: 'tag' }, ' ✔ ' + n)); good.style.position = 'relative'; good.append(el('span', { cls: 'tag', style: 'position:absolute;right:.3vw;top:.3vh' }, n)); } });
+      result = lefts.map(b => { const ok = pair[b.dataset.j] == b.dataset.j; b.classList.add(ok ? 'ok' : 'bad'); autoMark(t.items[b.dataset.j].t, ok); return [b, rights.find(r => r.dataset.j == pair[b.dataset.j]), ok, rights.find(r => r.dataset.j == b.dataset.j)]; });
+      lefts.concat(rights).forEach(b => b.style.borderColor = '');
+      paint();
     });
-    wrap.append(L, R);
-    body.querySelector('.side').append(chk);
+    wrap.append(L, R, svg);
+    side.append(chk);
+    window.onresize = paint; setTimeout(paint, 0);
     self.onNext = done;
   }
 }
@@ -468,22 +562,47 @@ function makeNote(part) {
   pieces.forEach((p, k) => p.getContext('2d').putImageData(imgs[k], 0, 0));
   NOTE[part] = { full: c, pieces, rot: pieces.map(() => (Math.random() - .5) * 60) };
 }
-function pieceThumb(part, k) { const p = NOTE[part].pieces[k]; const c = document.createElement('canvas'); c.width = 600; c.height = 400; c.getContext('2d').drawImage(p, 0, 0); c.style.transform = `rotate(${NOTE[part].rot[k]}deg)`; return c; }
-function renderTray() {
-  const tray = $('#tray'); tray.innerHTML = ''; const notes = $('#notes'); notes.innerHTML = '';
-  for (let p = 1; p <= 3; p++) {
-    if (S.assembled[p]) notes.append(el('div', { cls: 'n' }, S.digits[p].join(' ')));
-    else for (let k = 0; k < S.scraps[p]; k++) { const c = pieceThumb(p, k); c.style.width = '7vh'; tray.append(c); }
-  }
+// кусок записки, обрезанный по краям (41): в окне виден целиком
+function pieceCrop(part, k) {
+  const p = NOTE[part].pieces[k];
+  if (!p.box) { const d = p.getContext('2d').getImageData(0, 0, p.width, p.height).data; let x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1; for (let y = 0; y < p.height; y += 2) for (let x = 0; x < p.width; x += 2) if (d[(y * p.width + x) * 4 + 3] > 10) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; } p.box = [Math.max(0, x0 - 4), Math.max(0, y0 - 4), Math.min(p.width, x1 + 6), Math.min(p.height, y1 + 6)]; }
+  const [x0, y0, x1, y1] = p.box; const c = document.createElement('canvas'); c.width = x1 - x0; c.height = y1 - y0; c.getContext('2d').drawImage(p, -x0, -y0); return c;
 }
+const ENV = { lag: 0 };
+function envSvg(full) {
+  return `<svg viewBox="0 0 104 74"><rect x="2" y="8" width="100" height="64" rx="6" fill="#e9d3a4" stroke="#8a5a2b" stroke-width="3"/>${full ? '<rect x="14" y="0" width="76" height="40" rx="3" fill="#f6ead0" stroke="#b08850" stroke-width="2" transform="rotate(-4 52 20)"/>' : ''}<path d="M2 14 L52 46 L102 14" fill="none" stroke="#8a5a2b" stroke-width="3"/><path d="M2 70 L40 40 M102 70 L64 40" fill="none" stroke="#b08850" stroke-width="2"/><circle cx="52" cy="46" r="9" fill="#b3261e" stroke="#7a1712" stroke-width="2"/></svg>`;
+}
+function renderEnv() {
+  const s = SCREENS[cur]; const env = $('#env'); if (!s || !s.part) { env.innerHTML = ''; return; }
+  const n = D.parts[s.part - 1].objects.length, k = Math.max(0, S.scraps[s.part] - ENV.lag);
+  env.innerHTML = envSvg(k >= n) + `<div class="cnt">📜 ${k} / ${n}</div>`;
+}
+function renderTray() { renderEnv(); }
 const TOAST = { then: null };
 function giveScrap(part, then) {
   const k = S.scraps[part]; S.scraps[part]++; save();
   const t = $('#toast'); t.innerHTML = '';
-  t.append(el('div', {}, '📜 You found a piece of the note!'), pieceThumb(part, k), el('button', { cls: 'btn' }, 'Continue ➜'));
-  t.style.display = 'block'; $('#tbg').style.display = 'block'; TOAST.then = then;
+  const pc = pieceCrop(part, k); pc.style.transform = `rotate(${Math.max(-10, Math.min(10, NOTE[part].rot[k] / 3))}deg)`;
+  t.append(el('div', {}, '📜 You found a piece of the note!'), pc, el('button', { cls: 'btn' }, 'Continue ➜'));
+  t.style.display = 'block'; $('#tbg').style.display = 'block'; TOAST.then = then; TOAST.part = part; TOAST.k = k;
 }
-function closeToast() { $('#toast').style.display = 'none'; $('#tbg').style.display = 'none'; const f = TOAST.then; TOAST.then = null; renderTray(); if (f) f(); }
+function closeToast() {
+  const st = $('#stage').getBoundingClientRect(); const tc = $('#toast canvas'); const from = tc && tc.getBoundingClientRect();
+  $('#toast').style.display = 'none'; $('#tbg').style.display = 'none'; const f = TOAST.then; TOAST.then = null;
+  if (from && from.width) ENV.lag = 1;
+  if (f) f(); else renderEnv();
+  if (!from || !from.width) return;
+  // кусок улетает в конверт
+  const env = $('#env'); const to = env.style.display !== 'none' && env.querySelector('svg') ? env.querySelector('svg').getBoundingClientRect() : null;
+  const fly = pieceCrop(TOAST.part, TOAST.k); fly.className = 'fly';
+  Object.assign(fly.style, { left: (from.left - st.left) + 'px', top: (from.top - st.top) + 'px', width: from.width + 'px' });
+  $('#stage').append(fly);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (to) Object.assign(fly.style, { left: (to.left - st.left + to.width * .25) + 'px', top: (to.top - st.top + to.height * .2) + 'px', width: (to.width * .5) + 'px', opacity: '.2' });
+    else fly.style.opacity = '0';
+  }));
+  setTimeout(() => { fly.remove(); ENV.lag = 0; renderEnv(); env.classList.add('pulse'); setTimeout(() => env.classList.remove('pulse'), 300); }, 850);
+}
 $('#toast').onclick = () => closeToast(); $('#tbg').onclick = () => closeToast();
 
 /* ───────── построение экранов ───────── */
@@ -501,7 +620,7 @@ function buildScreens() {
       const left = P.objects.filter(o => !S.done[o.id]).length;
       P.objects.forEach(o => {
         const d = o.cut
-          ? el('div', { cls: 'obj cut' + (S.done[o.id] ? ' done' : ' live'), style: `left:${o.cut.x}%;top:${o.cut.y}%;width:${o.cut.w}%;height:${o.cut.h}%` }, el('img', { src: img('rooms/' + o.cut.room + '_' + o.id) }), el('div', { cls: 'tick' }, '✓'))
+          ? el('div', { cls: 'obj cut' + (S.done[o.id] ? ' done' : ' live'), style: `left:${o.cut.x}%;top:${o.cut.y}%;width:${o.cut.w}%;height:${o.cut.h}%` }, el('img', { src: img('rooms/' + o.cut.room + '_' + o.id) }), el('div', { cls: 'tick', style: o.cut.tx != null ? `left:${o.cut.tx}%;top:${o.cut.ty}%` : 'left:90%;top:10%' }, '✓'))
           : el('div', { cls: 'obj' + (S.done[o.id] ? ' done' : ' live'), style: `left:${o.x}%;top:${o.y}%;height:${o.h}%` }, o.wall ? null : el('div', { cls: 'shd' }), el('img', { src: img(o.img) }), el('div', { cls: 'tick' }, '✓'));
         if (!S.done[o.id]) d.onclick = () => show(SCREEN_ID['name_' + o.id]);
         n.append(d);
@@ -522,7 +641,8 @@ function buildScreens() {
         n.append(el('div', { cls: 'box' }, el('img', { cls: 'big', src: img(o.img) }), el('div', { cls: 'ask' }, o.ask), ans, b));
       } }));
       o.tasks.forEach((t, ti) => seq.push(addScreen({ id: `t_${o.id}_${ti}`, part, obj: o, task: t, title: `${o.id} — ${t.title}`, step: {},
-        oral: t.kind === 'oral' ? t.qs.map(([q, tp, ex], k) => ({ key: `oral_${o.id}_${k}`, label: q, topics: tp, expect: ex })) : undefined, render(n) {
+        oral: t.kind === 'oral' ? t.qs.map(([q, tp, ex], k) => ({ key: `oral_${o.id}_${k}`, label: q, topics: tp, expect: ex }))
+          : (t.items || []).some(it => it.then) ? t.items.map((it, k) => it.then ? { key: `then_${o.id}_${ti}_${k}`, label: 'Устный ответ: ' + it.then.replace(/^Now answer the question: /, ''), topics: it.t, expect: it.then_exp } : null).filter(Boolean) : undefined, render(n) {
         const self = SCREENS[cur]; self.step = self.step || {};
         renderTask(n, o, t, self.step, () => self.finish ? self.finish() : show(self.idx + 1));
       } })));
@@ -568,7 +688,9 @@ function buildScreens() {
     let np = 1; for (let p = 1; p <= 3; p++) if (S.assembled[p]) np = p + 1;
     const cont = np <= 3 ? el('button', { cls: 'btn ghost', style: 'margin-top:2vh' }, `➜ Continue: Part ${np}`) : null;
     if (cont) cont.onclick = () => show(SCREEN_ID['intro' + np] != null ? SCREEN_ID['intro' + np] : SCREEN_ID['room' + np]);
-    n.append(el('div', { cls: 'box' }, el('h1', {}, '🎉 You escaped!'), el('div', { cls: 'ru' }, `The door is open! Your code: ${codeDigits().join(' ')}`), el('div', { cls: 'en' }, 'Well done! See you at WowSpeak School!'), cont));
+    const rep = el('button', { cls: 'tb plan', style: 'position:absolute;z-index:6;left:1.2vw;bottom:1.6vh;font-size:2vh', title: 'Для менеджера' }, '📝 Отчёт');
+    rep.onclick = () => MW.open('report');
+    n.append(el('div', { cls: 'box' }, el('h1', {}, '🎉 You escaped!'), el('div', { cls: 'ru' }, `The door is open! Your code: ${codeDigits().join(' ')}`), el('div', { cls: 'en' }, 'Well done! See you at WowSpeak School!'), cont), rep);
     confetti();
   } });
   SCREEN_ID.win = win.idx;
@@ -581,13 +703,13 @@ function confetti() { const c = $('#fx'); const g = c.getContext('2d'); c.width 
 /* ───────── окно менеджера ───────── */
 const MW = {
   w: null,
-  open() {
+  open(go) {
     const W = Math.min(1100, screen.availWidth - 80), H = Math.min(900, screen.availHeight - 80);
     const w = window.open('', 'wowspeak_mvu13', `popup=yes,width=${W},height=${H},left=${screen.availWidth - W - 20},top=30,resizable=yes,scrollbars=yes`);
     if (!w) { alert('Разрешите всплывающие окна, чтобы открыть чек-лист и план.'); return; }
     this.w = w; w.APP = { S, D, topicScore, oralMark, setOverride: (t, v) => { if (v === null) delete S.override[t]; else S.override[t] = v; save(); MW.refresh(); }, screen: () => SCREENS[cur], save, reset: () => { localStorage.removeItem('mvu13'); location.reload(); }, report };
     w.document.open(); w.document.write(D.mw_html); w.document.close();
-    setTimeout(() => this.refresh(), 100);
+    setTimeout(() => { this.refresh(); if (go && w.goReport) w.goReport(); }, 150);
   },
   refresh() { if (this.w && !this.w.closed && this.w.render) this.w.render(); },
 };
@@ -599,25 +721,27 @@ $('#planBtn').onclick = () => {
   w.document.open(); w.document.write(D.plan_html); w.document.close();
 };
 
+// отчёт по шаблону Анны (19.11): знает / знаком / пока не знает + рекомендованная программа
 function report() {
-  const st = S.student, f = st.gender === 'f';
-  const v = (m, w) => f ? w : m;
-  const lines = [];
-  lines.push(`${v('Ученик', 'Ученица')}: ${st.name || '—'}${st.age ? ', ' + st.age + ' лет' : ''}`);
-  lines.push(`Вводный урок 13+ (escape room), ${new Date().toLocaleDateString('ru-RU')}`);
-  let level = null;
-  D.checklist.forEach((P, pi) => {
-    const blocks = P.blocks.map((b, bi) => { const sc = b[1].map((t, ti) => topicScore(`p${pi + 1}b${bi + 1}t${ti + 1}`).v); return { name: b[0], sc, sum: sc.reduce((x, y) => x + (y || 0), 0), filled: sc.filter(x => x !== null).length }; });
-    if (!blocks.some(b => b.filled)) return;
-    lines.push('');
-    lines.push(P.title);
-    blocks.forEach(b => { if (b.filled) lines.push(`  ${b.name}: ${b.sum} из 12${b.sum >= 9 ? ' ✔' : ''}`); });
-    const pass = blocks.every(b => b.sum >= 9);
-    lines.push(`  Итог части: ${pass ? v('прошёл', 'прошла') : v('не прошёл', 'не прошла')} (порог — 9 из 12 в каждом блоке)`);
-    if (pass) level = P.title;
-  });
-  lines.push('');
-  lines.push(`Рекомендованный уровень: ${level ? level.replace(/^ЧАСТЬ \d+\. /, '') + ' (часть пройдена полностью)' : 'ниже A1.2 — начать с базового курса'}`);
+  const RU = D.topic_ru || {};
+  const name = n => RU[n] || n;
+  const by = { 2: [], 1: [], 0: [] }, seen = new Set();
+  const blocks = [];
+  D.checklist.forEach((P, pi) => P.blocks.forEach((b, bi) => {
+    const sc = b[1].map((n, ti) => { const v = topicScore(`p${pi + 1}b${bi + 1}t${ti + 1}`).v; if (v !== null && !seen.has(n)) { seen.add(n); by[v].push(name(n)); } return v; });
+    blocks.push({ name: b[0], sum: sc.reduce((x, y) => x + (y || 0), 0), filled: sc.filter(x => x !== null).length });
+  }));
+  // программа: блоки «PR N Unit a-b» по порядку программ; рекомендуем первый, где меньше 9 из 12
+  const key = b => { const m = b.name.match(/PR\s*(\d+)\s*Unit\s*(\d+)/i); return m ? [+m[1], +m[2]] : [99, 0]; };
+  const ordered = blocks.slice().sort((x, y) => { const a = key(x), c = key(y); return a[0] - c[0] || a[1] - c[1]; });
+  const first = ordered.find(b => b.sum < 9);
+  const pretty = b => { const m = b.name.match(/PR\s*(\d+)\s*Unit\s*(\d+)\s*[-–]\s*(\d+)/i); return m ? `PR ${m[1]}, Units ${m[2]}–${m[3]}` : b.name; };
+  const list = a => a.length ? a.join(', ') : '—';
+  const lines = [
+    `Уверенно знает темы: ${list(by[2])}. Знаком с темами: ${list(by[1])}. Пока не знает: ${list(by[0])}.`,
+    `Рекомендованная программа: ${first ? pretty(first) : 'выше PR 7 — все блоки пройдены'}.`,
+  ];
+  if ((S.comment || '').trim()) lines.push(`Комментарий преподавателя: ${S.comment.trim()}`);
   return lines.join('\n');
 }
 
