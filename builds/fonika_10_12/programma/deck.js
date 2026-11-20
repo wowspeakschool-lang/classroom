@@ -104,7 +104,7 @@ s.addText('Как устроен урок', { placeholder: 'title' });
 s.addText('Один скелет на уроки 2–10; задания и игры внутри меняются. В режиме 40 минут добавляются экраны из правого столбца.', { placeholder: 'body' });
 const ST = [
  ['Mission briefing', 'Сообщение символами, часть ключа — «?»', '1', ''],
- ['Code review', 'Символ → буква → звук; слова-исключения прошлых уроков', '2', '+3 слова на время, личный рекорд'],
+ ['Code review', 'Символы; слова-исключения; скороговорка прошлого урока (строки 3–4)', '2', '+3 слова на время, личный рекорд'],
  ['HW check', '1–2 слова, где были ошибки в ДЗ', '1', ''],
  ['New code', '«This is c. Sound /k/.» + слово-якорь с картинкой', '4', ''],
  ['Hear it', 'Устно: первый звук, деление слова на звуки', '2', ''],
@@ -113,7 +113,8 @@ const ST = [
  ['Word building', 'Собрать слово из букв-магнитов', '2', ''],
  ['Tricky words', 'Слова-исключения урока целиком', '2', ''],
  ['Dictation', '4 слова на слух — в тетради', '3', '+2 фраза на слух'],
- ['Decode the message', 'Фразы → сообщение символами → чтение → 2 вопроса', '5', ''],
+ ['Decode the message', 'Фразы → сообщение символами → чтение → 2 вопроса', '4', ''],
+ ['Code chant', 'Скороговорка урока, строки 1–2 — медленно, потом быстрее', '1', ''],
  ['Mission complete', 'Счётчик слов, что умею, ДЗ, монетки', '1', ''],
 ];
 const bd2 = [{ type: 'none' }, { type: 'none' }, { pt: 0.75, color: 'CFE6F4' }, { type: 'none' }];
@@ -124,7 +125,7 @@ ST.forEach(([a, b, c, d], i) => t2.push([
   { text: c, options: { bold: true, fontSize: 12, align: 'center', color: C.accent1, border: bd2 } },
   { text: d, options: { fontSize: 10.5, color: C.accent2, fill: { color: d ? 'EDE6FF' : C.background1 }, border: bd2 } }]));
 t2.push([{ text: 'Итого', options: { bold: true, fontSize: 12 } }, { text: '' }, { text: '30', options: { bold: true, align: 'center', fontSize: 12, color: C.accent1 } }, { text: '+10', options: { bold: true, fontSize: 12, color: C.accent2 } }]);
-s.addTable(t2, { x: 0.5, y: 1.4, w: 8.6, colW: [2.2, 3.85, 0.55, 2.0], rowH: 0.39, valign: 'middle', margin: [0.02, 0.08, 0.02, 0.08], fontFace: 'Calibri', objectName: 'skeleton' });
+s.addTable(t2, { x: 0.5, y: 1.4, w: 8.6, colW: [2.2, 3.85, 0.55, 2.0], rowH: 0.365, valign: 'middle', margin: [0.02, 0.08, 0.02, 0.08], fontFace: 'Calibri', objectName: 'skeleton' });
 const side = [
  ['⭐ If time · 2–3 игры', 'Скоростной дешифратор · Взломщик (слово символами на время) · Поймай звук · Сортировка на слух · Буквы-магниты · Найди слово в сетке. В каждом уроке минимум две интересные игры.', C.accent3, 'FDF0DD'],
  ['Урок 1 — другой', 'Повторять ещё нечего: брифинг длиннее (кто такой Агент X, что такое шифр и ключ), сообщение совсем короткое.', C.accent1, 'DFF3FC'],
