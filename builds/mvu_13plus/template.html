@@ -735,11 +735,11 @@ function report() {
   const key = b => { const m = b.name.match(/PR\s*(\d+)\s*Unit\s*(\d+)/i); return m ? [+m[1], +m[2]] : [99, 0]; };
   const ordered = blocks.slice().sort((x, y) => { const a = key(x), c = key(y); return a[0] - c[0] || a[1] - c[1]; });
   const first = ordered.find(b => b.sum < 9);
-  const pretty = b => { const m = b.name.match(/PR\s*(\d+)\s*Unit\s*(\d+)\s*[-–]\s*(\d+)/i); return m ? `PR ${m[1]}, Units ${m[2]}–${m[3]}` : b.name; };
+  const pretty = b => { const m = b.name.match(/PR\s*(\d+)\s*Unit\s*(\d+)\s*[-–]\s*(\d+)/i); return m ? `Prepare ${m[1]}, Units ${m[2]}–${m[3]}` : b.name; };
   const list = a => a.length ? a.join(', ') : '—';
   const lines = [
     `Уверенно знает темы: ${list(by[2])}. Знаком с темами: ${list(by[1])}. Пока не знает: ${list(by[0])}.`,
-    `Рекомендованная программа: ${first ? pretty(first) : 'выше PR 7 — все блоки пройдены'}.`,
+    `Рекомендованная программа: ${first ? pretty(first) : 'выше Prepare 7 — все блоки пройдены'}.`,
   ];
   if ((S.comment || '').trim()) lines.push(`Комментарий преподавателя: ${S.comment.trim()}`);
   return lines.join('\n');
