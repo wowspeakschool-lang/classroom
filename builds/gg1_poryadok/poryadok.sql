@@ -1,0 +1,23 @@
+-- Go Getter 1: порядок заданий по лесенке сложности (решение Анны 20.11.2026)
+create table if not exists classroom_backup_gg1_poryadok_20261120 as
+select b.* from classroom_blocks b
+ join classroom_lessons l on l.id = b.lesson_id
+ join classroom_units u on u.id = l.unit_id
+ join classroom_courses c on c.id = u.course_id
+ where c.slug = 'gg1' and l.kind = 'homework';
+
+do $$
+declare plan jsonb := $plan$[{"lesson_id": "a1647404-6ecf-4151-94ee-c2891aeea64a", "stalo": [1, 2, 3, 4, 5, 6, 7, 9, 11, 10, 8, 12]}, {"lesson_id": "d18a2af5-1b71-4095-b44c-8bb00e5dc575", "stalo": [1, 2, 3, 4, 5, 6, 16, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17]}, {"lesson_id": "edcb6354-bd71-4b69-9ed2-f3b7ad23906f", "stalo": [1, 2, 3, 4, 5, 6, 7, 8, 13, 9, 12, 10, 11, 14]}, {"lesson_id": "b2b768b8-11b5-460b-b46e-97e3462b2c16", "stalo": [1, 2, 3, 4, 7, 8, 5, 6, 9, 10, 11]}, {"lesson_id": "2e158d9d-d5f6-46b7-a30a-513b249e0416", "stalo": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 11, 12, 15, 13, 16]}, {"lesson_id": "07801dea-7cf2-46df-acdb-92ba854b2e45", "stalo": [1, 2, 3, 4, 5, 12, 13, 6, 7, 8, 9, 10, 14, 11, 15]}, {"lesson_id": "b263b49d-4d91-4c71-9e5d-d604262b08c9", "stalo": [1, 2, 3, 4, 6, 7, 5, 8, 9, 10]}, {"lesson_id": "401e0481-e1e1-4781-857d-360d26b39835", "stalo": [1, 2, 3, 4, 16, 7, 5, 6, 8, 11, 9, 10, 12, 13, 18, 14, 15, 19, 17, 20]}, {"lesson_id": "4696d7b5-bd71-4a31-a37b-418951083519", "stalo": [1, 2, 3, 4, 5, 7, 8, 9, 10, 6, 11, 12, 13]}, {"lesson_id": "31b0a133-0bc6-4893-acd7-6f12b280dbcd", "stalo": [1, 2, 3, 4, 5, 10, 7, 6, 8, 9, 11, 12, 13]}, {"lesson_id": "28e12461-791f-4477-be65-d746bae07d95", "stalo": [1, 2, 3, 4, 6, 5, 7, 8, 9, 10]}, {"lesson_id": "1baf57ca-7450-4ccb-9fe1-a0aa06606053", "stalo": [1, 2, 3, 5, 4, 6, 7, 8, 9, 10]}, {"lesson_id": "f3fe8b5e-e96f-40c5-a745-9e28669044a3", "stalo": [1, 2, 3, 4, 6, 5, 7, 8, 9]}, {"lesson_id": "43eec522-6790-489e-90be-8dc6c5b77f1f", "stalo": [1, 7, 8, 3, 2, 4, 5, 6, 9, 10]}, {"lesson_id": "11bfee5d-28bd-42b8-841d-139834270d2f", "stalo": [1, 2, 3, 4, 6, 5, 11, 16, 17, 7, 12, 9, 8, 13, 14, 10, 15, 18]}, {"lesson_id": "9b2e4d99-39e5-4f9a-b6eb-6c2f6f8cb419", "stalo": [1, 2, 5, 3, 4, 6, 7, 8, 9, 14, 11, 15, 10, 12, 13, 16]}, {"lesson_id": "5b28d2f9-c349-4a66-a6e1-2ee0799b25e6", "stalo": [1, 2, 3, 4, 5, 6, 9, 7, 8, 10, 11, 12]}, {"lesson_id": "009cc0e9-ddfd-4e2f-a813-c23adc235279", "stalo": [1, 2, 8, 9, 3, 4, 5, 6, 7, 10, 11]}, {"lesson_id": "81171962-50f9-473f-b972-58d93394050b", "stalo": [1, 2, 3, 4, 6, 5, 8, 7, 9, 10, 11]}, {"lesson_id": "7923975f-d05a-4a7b-aedb-148760ed4f42", "stalo": [1, 2, 3, 4, 7, 5, 6, 8, 9, 10]}, {"lesson_id": "f55459b1-020b-4b53-ad93-82faab735c72", "stalo": [1, 2, 3, 6, 4, 5, 8, 12, 7, 9, 10, 13, 11, 14]}, {"lesson_id": "29e2b9f2-799c-4fc9-a7ab-41ff264b8a11", "stalo": [1, 2, 3, 7, 4, 5, 6, 8, 9, 10]}, {"lesson_id": "451c4370-b0e8-4752-9254-46d9c88689bd", "stalo": [1, 2, 3, 5, 4, 6, 7, 8, 9, 10]}, {"lesson_id": "9c8b6d4f-0f85-423d-9c78-ba3ca8db9d3f", "stalo": [1, 2, 3, 4, 8, 5, 7, 6, 9, 10]}, {"lesson_id": "a293405b-4147-4df9-9fe1-3e085ff5a9bc", "stalo": [1, 2, 6, 3, 8, 4, 7, 5, 9]}, {"lesson_id": "fed6704a-de12-49a2-8797-63d8234ad561", "stalo": [1, 2, 3, 4, 5, 6, 7, 11, 12, 8, 9, 13, 10, 14]}, {"lesson_id": "5ca65a4e-cdb3-41a5-948b-10e63200781f", "stalo": [1, 2, 3, 4, 10, 6, 7, 11, 5, 8, 9, 12]}, {"lesson_id": "b00476f8-4d09-4e58-9b44-057c95d49ac0", "stalo": [1, 2, 3, 4, 5, 6, 7, 8, 10, 9, 11, 12]}, {"lesson_id": "64690c6b-15d7-46a0-9a88-67cd72bb355a", "stalo": [1, 2, 4, 5, 3, 6, 7, 8, 9, 10]}, {"lesson_id": "2813cf81-2328-4c68-b1e3-f592006f48db", "stalo": [1, 2, 3, 4, 6, 5, 7, 8, 9, 10]}, {"lesson_id": "c844f0ab-00a9-4175-b9ff-b71a45fc4cc0", "stalo": [1, 10, 4, 2, 11, 12, 3, 5, 6, 7, 9, 8, 13]}, {"lesson_id": "93ce371e-4b95-41e6-83bd-096fdc9dd66c", "stalo": [1, 2, 3, 4, 5, 7, 8, 9, 10, 6, 11, 12, 13, 14]}, {"lesson_id": "f7080316-fe1c-4164-ae8b-2a578b59eb56", "stalo": [1, 2, 3, 4, 5, 9, 6, 7, 8, 10, 11, 12, 13]}, {"lesson_id": "83a61761-f3b4-42d7-902c-6c01e8529399", "stalo": [1, 2, 3, 4, 5, 7, 6, 8, 9, 10]}, {"lesson_id": "7e690d0b-b8bc-4ec4-bdef-3e0cd3a96c85", "stalo": [1, 2, 3, 4, 5, 6, 9, 8, 7, 10, 11, 12, 13]}]$plan$::jsonb;
+        r jsonb; v_lesson uuid; i int; staryj int;
+begin
+  for r in select * from jsonb_array_elements(plan) loop
+    v_lesson := (r->>'lesson_id')::uuid;
+    update classroom_blocks set sort_order = -1 - sort_order where lesson_id = v_lesson;
+    i := 0;
+    for staryj in select (x #>> '{}')::int from jsonb_array_elements(r->'stalo') x loop
+      update classroom_blocks set sort_order = i
+       where lesson_id = v_lesson and sort_order = -1 - (staryj - 1);
+      i := i + 1;
+    end loop;
+  end loop;
+end $$;
