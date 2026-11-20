@@ -1,4 +1,4 @@
-# Урок 13+: как закрыть 31 тему — предложение, версия 2 (20.11.2026)
+# Урок 13+: как закрыть 31 тему — предложение, версия 3 (20.11.2026)
 
 Как просила Анна: темы объединены, где можно; предложения с двумя пропусками; одно «соедини» с картинками на разные темы; если тема проверялась и заданием, и устным вопросом — устный оставлен, задание отдано новой теме.
 
@@ -39,18 +39,18 @@
 |---|---|---|---|---|
 | 16 | Кубок | «___ is my favourite sport» (Swimming) — sport phrases уже проверяет «join our tennis club» | **Everyone in the team listens to her — she’s a natural ___ .** leader / leadership / leading | Leadership and achievement (PR 7 U10–15) |
 | 17 | Стетоскоп | «You ___ go to bed earlier» (should — уже в устном «What should people do to stay healthy?») | **I’ve been so stressed that I’ve ___ my appetite.** lost / missed / dropped | Stress and health (PR 7 U1–4) |
-| 18 | Микрофон, «соедини» (новое) | (было только устное) | **chop · wildlife · a sculpture · furious** — четыре картинки | Cooking verbs · Nature and wildlife (PR 5 U10–15) · Art (PR 6 U16–20) · Expressing emotions (PR 7 U5–9) |
+| 18 | Микрофон, «соедини» (новое) | (было только устное) | Микрофон школьной радиостудии. Заголовок: **«Это студия школьного радио. О чём сегодняшние передачи? Соедини слова с картинками.»** **chop** (кулинарное шоу) · **wildlife** (передача о природе) · **a sculpture** (передача об искусстве) · **furious** (ток-шоу о чувствах) — четыре картинки | Cooking verbs · Nature and wildlife (PR 5 U10–15) · Art (PR 6 U16–20) · Expressing emotions (PR 7 U5–9) |
 | 19 | Микрофон (новое) | — | **The milk has ___ off — it’s ___ bad that I can’t drink it.** gone … so / gone … such / got … so | 1-й: Food and drink phrasal verbs (PR 6 U5–9) · 2-й: Making comparisons: too, so, such (PR 6 U1–4) |
 | 20 | Выпускная шапка (новое) | — | **I ___ for this exam for three weeks, and I ___ almost all the units now.** have been studying … have revised / have been studying … am revising / study … have revised | 1-й: Present Perfect Simple and Continuous · 2-й: Simple, continuous or perfect (PR 7 U1–4) |
 | 21 | Капсула времени (новое) | — | **Our village is very ___ now, but I’m sure it ___ much bigger in 30 years.** remote … will be / remote … is being / industrial … will be | 1-й: Community (PR 7 U5–9) · 2-й: Future: plans, intentions, predictions (PR 6 U5–9) |
 | 22 | Свиток | «my grandfather ___ tell me stories» (would — уже в устном «What did your grandparents use to do?») | **The story in the scroll has a ___ plot — I knew the ending from the first page.** predictable / unpredictable / predicting | Fiction (PR 6 U5–9) |
 | 23 | Щит, «соедини половинки» | 4-я пара про mixed conditional (уже в устном вопросе) | **Working from home gives many people / a better work–life balance.** | The world of work (PR 7 U16–20) |
 
-## Что остаётся спорным — решать Анне
+## Решено 20.11
 
-- **12 тем проверяются только на уровне части 1.** Они получают балл от темы с тем же названием в части 1 (правило 13.11), то есть уровнем A1: Sports, Jobs, Clothes, Comparatives, Entertainment и т. п. в блоках Prepare 2–4. Ученик, который в части 1 назвал «a bus», получает балл и за Jobs в Prepare 4, Unit 18 (B1). Можно оставить так, а можно поставить в часть 2 свои вопросы на эти темы — ещё 5–6 штук.
-- **Темы, проверяемые только устно** (5 шт.: распорядок дня, like + -ing, дом, школьные предметы, животные), зависят от того, задаст ли учитель вопрос и отметит ли ответ.
-- **«Соедини» у микрофона** по смыслу с микрофоном не связано — просто удобное место без задания. Можно назвать задание «Плакаты фестиваля».
+- **12 тем частей 2–3 с баллом из части 1** (Sports, Jobs, Clothes, Comparatives, Entertainment и т. п.) — оставляем как есть.
+- **5 тем только устно** (распорядок дня, like + -ing, дом, школьные предметы, животные) — оставляем: менеджер отмечает чек-лист сам.
+- **Микрофон остаётся**, комнату не трогаем: он становится микрофоном школьной радиостудии, «соедини» — «о чём сегодняшние передачи» (№ 18). Устный вопрос про музыку остаётся.
 
 ## Новые картинки (7)
 
