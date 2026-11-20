@@ -1,0 +1,47 @@
+[
+ {
+  "slug": "gg2",
+  "unit": 5,
+  "urok": "Homework 3",
+  "lesson_id": "b9b33ec6-6316-4a47-af4f-ca091527a341",
+  "block_id": "d8ff26de-b031-48d5-943d-498a15d5f8fb",
+  "blok": 2,
+  "tekst": "Как говорить о времени в прошлом. Посмотри на табличку — она поможет тебе в следующем задании. LOOK! yesterday / last night, week, month, year / last Monday, May / in 2014",
+  "sled_block_id": "e83bb756-915e-4344-8cbf-86b902a83651",
+  "sled_tip": "quiz",
+  "reshenie": "v_material",
+  "novyj_zagolovok": null,
+  "material_html": "<p><b>LOOK!</b><br>yesterday<br><b>last</b> night / week / month / year<br><b>last</b> Monday / May<br><b>in</b> 2014</p>",
+  "zametka": "спорное: табличка перечисляет ровно те слова-подсказки, из которых ребёнок выбирает в квизе — решить Анне, оставлять ли её перед глазами"
+ },
+ {
+  "slug": "gg2",
+  "unit": 8,
+  "urok": "Homework 3",
+  "lesson_id": "3be806f6-8407-4b49-bf62-c7e4f451475c",
+  "block_id": "dcec3960-a59b-429b-b2da-1d4a398ede9e",
+  "blok": 2,
+  "tekst": "Сначала вспомним прошлое 🕰 Когда мы говорим о том, что уже случилось, глагол меняется: play → played, go → went, have → had, eat → ate, meet → met, get → got, be → was / were",
+  "sled_block_id": "dc5476cb-b2bc-4d53-9742-ee990aef9f30",
+  "sled_tip": "quiz",
+  "reshenie": "v_material",
+  "novyj_zagolovok": null,
+  "material_html": "<p>Когда мы говорим о том, что уже случилось, глагол меняется:</p><p><b>play → played</b>, <b>go → went</b>, <b>have → had</b>, <b>eat → ate</b>, <b>meet → met</b>, <b>get → got</b>, <b>be → was / were</b></p>",
+  "zametka": "спорное: это таблица форм, а квиз просит выбрать форму глагола — часть ответов может оказаться в табличке; решить Анне"
+ },
+ {
+  "slug": "sm1",
+  "unit": 0,
+  "urok": "Homework 2",
+  "lesson_id": "9ad9086c-a2c7-4af7-8a01-92119918e456",
+  "block_id": "981a80cc-51f7-49ec-9994-2d469c6a88ec",
+  "blok": 3,
+  "tekst": "Запомни, как спросить и ответить про возраст: How old are you? — Сколько тебе лет? I'm seven. — Мне семь лет.",
+  "sled_block_id": "6ef4eb32-5bd9-4450-a7a7-c8128f07bb64",
+  "sled_tip": "quiz",
+  "reshenie": "v_material",
+  "novyj_zagolovok": null,
+  "material_html": "<p><b>How old are you?</b> <i>Сколько тебе лет?</i><br><b>I'm seven.</b> <i>Мне семь лет.</i></p>",
+  "zametka": "спорное: следующему заданию (послушай и выбери число) правило не нужно — оно работает в блоках 11–12 («Спроси, сколько лет Мисти», «Ответь на вопрос»); может быть, material надо дать им, а не блоку 4"
+ }
+]
