@@ -220,7 +220,7 @@ const S = {
   digits: { 1: [...Array(4)].map(() => rnd(10)), 2: [...Array(2)].map(() => rnd(10)), 3: [...Array(2)].map(() => rnd(10)) },
   assembled: { 1: false, 2: false, 3: false },
   hint: false,
-  comment: '',
+  comment: '', repEdit: null,
 };
 function save() { try { localStorage.setItem('mvu13', JSON.stringify(S)); } catch (e) {} }
 function load() { try { const s = JSON.parse(localStorage.getItem('mvu13')); if (s && s.digits) Object.assign(S, s); } catch (e) {} S.hint = false; }

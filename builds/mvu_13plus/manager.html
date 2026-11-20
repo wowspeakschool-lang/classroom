@@ -55,17 +55,19 @@ textarea{width:100%;height:220px;font-family:Consolas,monospace;font-size:13px}
   Над каждой частью — предметы: нажмите, и подсветятся темы, которые предмет проверяет (нажмите ещё раз — снять). Метка 🔎 у темы открывает этот предмет в уроке.
   Часть пройдена, если в каждом блоке ≥ 9 из 12 — это подсказка, решение за вами.</div>
   <div id="tables"></div>
-  <h2 id="repH">Отчёт</h2>
+  <h2 id="repH">Отчёт</h2><div class="legend">Отчёт собирается сам. Его можно править прямо здесь — удалить лишнее, дописать своё. После правки он больше не обновляется сам; «↺ Собрать отчёт заново» вернёт автоматический.</div>
   <label><b>Комментарий преподавателя</b> (попадёт в отчёт)<textarea id="cm" placeholder="Например: стеснялся говорить, но всё понимал; хорошо читает."></textarea></label>
-  <textarea id="rep" readonly></textarea>
-  <div class="act"><button id="cp">📋 Скопировать отчёт</button><button class="gray" id="rs">Новый ученик (сбросить всё)</button></div>
+  <textarea id="rep"></textarea>
+  <div class="act"><button id="cp">📋 Скопировать отчёт</button><button class="gray" id="rb">↺ Собрать отчёт заново</button><button class="gray" id="rs">Новый ученик (сбросить всё)</button></div>
 </div>
 </main>
 <script>
 const A = window.APP;
 function $(s){return document.querySelector(s)}
 const st=A.S.student; $('#nm').value=st.name; $('#gd').value=st.gender; $('#ag').value=st.age;
-$('#cm').value=A.S.comment||'';$('#cm').oninput=e=>{A.S.comment=e.target.value;A.save();$('#rep').value=A.report()};
+$('#cm').value=A.S.comment||'';$('#cm').oninput=e=>{A.S.comment=e.target.value;A.save();if(A.S.repEdit==null)$('#rep').value=A.report()};
+$('#rep').oninput=e=>{A.S.repEdit=e.target.value;A.save()};
+$('#rb').onclick=()=>{if(A.S.repEdit==null||confirm('Ваши правки в отчёте пропадут. Собрать заново?')){A.S.repEdit=null;A.save();$('#rep').value=A.report()}};
 window.goReport=()=>{$('#repH').scrollIntoView({behavior:'smooth'});$('#cm').focus()};
 $('#nm').oninput=e=>{st.name=e.target.value;A.save();render()}; $('#gd').onchange=e=>{st.gender=e.target.value;A.save();render()}; $('#ag').oninput=e=>{st.age=e.target.value;A.save();render()};
 $('#cp').onclick=()=>{const ok=()=>{$('#cp').textContent='✔ Скопировано';setTimeout(()=>$('#cp').textContent='📋 Скопировать отчёт',1500)};const old=()=>{const r=$('#rep');r.focus();r.select();try{document.execCommand('copy');ok()}catch(e){alert('Не получилось скопировать — выделите текст отчёта и нажмите Ctrl+C')}};if(navigator.clipboard)navigator.clipboard.writeText($('#rep').value).then(ok,old);else old()};
@@ -90,7 +92,7 @@ function render(){
         td2.append(mk(S.override[id]!==undefined?S.override[id]:null,v=>A.setOverride(id,v),sc.src==='auto'?sc.v:null));{const a=document.createElement('span');a.className='auto';a.textContent=sc.src==='auto'?sc.from.join(' + '):'';td2.append(a)}
         tr.append(td,td2);t.append(tr)});
       const n=b[1].length,part=filled&&filled<n;const tf=document.createElement('tr');tf.innerHTML='<td class="sum">Сумма блока</td><td class="sum '+(filled&&!part?(sum>=9?'pass':'fail'):'')+'">'+(filled?sum+' из 12 '+(sum>=9?'✔':'')+(part?' <span class="auto">(оценено '+filled+' тем из '+n+')</span>':''):'—')+'</td>';t.append(tf);box.append(t)})});
-  $('#rep').value=A.report();
+  if(A.S.repEdit==null)$('#rep').value=A.report();else if(document.activeElement!==$('#rep'))$('#rep').value=A.S.repEdit;
   if(window._hlJump){window._hlJump=false;const r=box.querySelector('tr.hl');if(r)r.scrollIntoView({block:'center',behavior:'smooth'})}
   // новый экран — таблица сама прокручивается к его темам (в частях 2–3 по 12 таблиц)
   const sid=s?s.id:'';if(sid!==window._lastSid){window._lastSid=sid;const r=box.querySelector('tr.cur');const busy=document.activeElement&&document.activeElement.id==="cm";if(r&&!busy)r.scrollIntoView({block:'center',behavior:'smooth'})}

@@ -79,37 +79,42 @@ HOW = {'choice': 'Ученик выбирает ответ → Next.', 'hotspot'
 rows = []
 def row(step, do, tl, exp):
     rows.append(f'<tr><td class="st">{step}</td><td>{do}</td><td class="tl">{tl}</td><td class="sa">{exp}</td></tr>')
-row('1. Welcome', 'Скажите: это игра, не тест, ошибаться можно → Next.', 'Hi! Welcome to WowSpeak School! This is not a test — it’s a game. Let’s have fun! Are you ready?', 'Yes! / I’m ready.')
-row('2. Get to know you', 'Задайте три вопроса, после каждого → Next. Без баллов.', 'What’s your name? How old are you? What do you like doing in your free time?', 'My name is… I’m 14. I like playing football / drawing…')
-row('3. Briefing', 'Скажите: дверь заперта, код — в кусочках записки, ищем их → Next.', 'You are locked in the escape room! Find the pieces of the secret note to open the door. Choose a glowing object and say what it is in English.', '—')
+row('1. Welcome', 'Поздоровайтесь и скажите, что это не тест, а игра: ошибаться можно, отвечать можно как получается.',
+    'Hi! Welcome to WowSpeak School! This is not a test — it’s a game. Let’s have fun! Are you ready?<br><span class="ru">Привет! Это не тест, а игра — ошибаться можно. Готов?</span>', 'Yes! / I’m ready.')
+row('2. Get to know you', 'Задайте три вопроса с карточек, следующая карточка открывается кнопкой Next. Баллов здесь нет: вы знакомитесь и смотрите, как ученик держится.',
+    'What’s your name? How old are you? What do you like doing in your free time?<br><span class="ru">Как тебя зовут? Сколько тебе лет? Что ты любишь делать в свободное время?</span>', 'My name is… I’m 14. I like playing football…')
+row('3. История', 'Расскажите историю квеста. На экране только название — рассказываете вы. Если ученик плохо понимает английский, расскажите по-русски. Сколько цифр в коде, не говорите.',
+    'You are locked in the WowSpeak Escape Room! The door has a code lock. The code is on a secret note, and the note is in pieces. Find the pieces — choose a glowing object and say what it is in English.'
+    '<br><span class="ru">' + e(data.PARTS[0]['intro']) + '</span>', '—')
 for P in data.PARTS:
-    objs = ', '.join(e(o['name'].split(' (')[0]) for o in P['objects'])
+    rows.append(f'<tr class="part"><td colspan="4">PART {P["n"]} · {e(P["room_name"])}</td></tr>')
     if P['n'] > 1:
-        row(f'Переход в Part {P["n"]}', 'Нажмите «Keep looking». Скажите: ' + e(P['intro']), e(P['intro_en']), '—')
-    row(f'{e(P["room_name"])}', f'Ученик выбирает светящийся предмет → нажмите на него → выполняйте задания по экрану → Next. Предметы: {objs}.',
-        'What’s this? / And you?', 'ответы — в чек-листе, «Сейчас на экране»')
-    row(f'📜 Записка Part {P["n"]}', 'Нажмите «Put the note together» → ученик читает цифры.', 'Look! The pieces make a note. What’s the code?', ' '.join(['X'] * P['digits']))
+        row('История', 'Нажмите «Keep looking» и расскажите продолжение. Не говорите «нам нужно ещё цифр» — просто нашлась новая комната.',
+            e(P['intro_en']) + '<br><span class="ru">' + e(P['intro']) + '</span>', '—')
+    row('Предметы', 'Ученик выбирает светящийся предмет, вы нажимаете на него. Дальше идите по экранам кнопкой Next: ученик называет предмет, выполняет задания и отвечает на вопросы о себе. '
+        'Когда открыты все предметы, нажмите «Put the note together» — кусочки сложатся, и ученик прочитает цифры.',
+        'What’s this? / And you?<br><span class="ru">Что это? А ты?</span>', 'Ожидаемые ответы — в чек-листе, в рамке «Сейчас на экране».')
     if P['n'] < 3:
-        row(f'Чекпойнт Part {P["n"]}', 'Все блоки части ≥ 9 из 12 → «Keep looking». Иначе → «Open the lock».', 'Great job! Let’s keep looking! / Great job! Shall we open the lock?', '—')
-row('🔐 Замок', 'Ученик читает код по-английски → «Enter the code».', 'Read the code in English, please!', 'four, seven, two, nine…')
-row('🎉 Финал', 'Нажмите «📝 Отчёт» → «Скопировать отчёт».', 'Well done! You escaped! How did you like the game?', '—')
+        row('Дальше или к замку', 'Посмотрите в чек-листе суммы блоков этой части. Если везде 9 из 12 или больше, ведите дальше — «Keep looking». Если нет, к замку — «Open the lock». Решение за вами.',
+            'Great job! Let’s keep looking! / Great job! Shall we open the lock?<br><span class="ru">Отлично! Ищем дальше? / Откроем замок?</span>', '—')
+row('🔐 Замок', 'Ученик читает код по-английски, вы нажимаете «Enter the code».', 'Read the code in English, please!<br><span class="ru">Прочитай код по-английски.</span>', 'four, seven, two, nine…')
+row('🎉 Финал', 'Дверь открыта. Нажмите «📝 Отчёт» внизу слева и поработайте с отчётом (см. рамку вверху).', 'Well done! You escaped! How did you like the game?<br><span class="ru">Ура, ты выбрался! Понравилась игра?</span>', '—')
 MUST = [
-    'Откройте <b>✅ чек-лист</b> и <b>📋 план</b> — это отдельные окна, они только у вас. Ученику показывайте экран урока.',
-    'В чек-листе впишите <b>имя, пол и возраст</b> — они попадут в отчёт.',
-    '<b>Задания с вариантами ответов</b> (выбор, соедини, разложи, найди ошибку) ставят балл в чек-лист <b>сами</b>.',
-    '<b>Устные ответы</b> (назвать предмет, «And you?», вопросы по картинке) оцениваете <b>вы</b>: 0 / 1 / 2 в рамке «Сейчас на экране» вверху чек-листа. Там же подсказан ожидаемый ответ.',
-    '<b>Нужна конкретная тема?</b> Над каждой частью чек-листа — предметы: нажмите на предмет, и подсветятся темы, которые он проверяет. Метка 🔎 у темы открывает этот предмет в уроке.',
-    'Балл можно поставить и <b>прямо в таблице</b> — он заменит посчитанный.',
-    '<b>Дальше или к замку?</b> Все блоки части ≥ 9 из 12 → «Keep looking», иначе → «Open the lock». Решение за вами. <b>🚪</b> вверху — сразу к замку.',
-    'Кусочек записки даётся, даже если ученик ошибся. Урок — 40 минут, всегда с Part 1.',
+    ('Окна', 'Вверху урока две кнопки: ✅ открывает чек-лист, 📋 — этот план. Оба открываются отдельными окнами: держите их у себя, а ученику показывайте только экран урока. В чек-листе сразу впишите имя ученика, пол и возраст — они попадут в отчёт.'),
+    ('Как идёт урок', 'Ученик выбирает светящийся предмет в комнате, вы нажимаете на него и идёте по экранам кнопкой Next: ученик называет предмет, выполняет задания и отвечает на вопросы о себе. За каждый предмет он получает кусочек записки с кодом — даже если ошибся. Урок всегда начинается с Part 1 и длится 40 минут.'),
+    ('Баллы', 'Задания с вариантами ответов (выбрать, соединить, разложить, найти ошибку) ставят балл в чек-лист сами. Устные ответы — назвать предмет, вопросы о себе, вопросы по картинке — оцениваете вы: вверху чек-листа есть рамка «Сейчас на экране», в ней вопрос, ожидаемый ответ и кнопки 0 / 1 / 2. Любой балл можно поменять прямо в таблице — ваш заменит посчитанный.'),
+    ('Предметы в чек-листе', 'Над каждой частью чек-листа — картинки предметов этой части. Нажмите на предмет — подсветятся темы, которые он проверяет. Это удобно, когда времени мало и нужно проверить конкретную тему: рядом с каждой темой стоит метка 🔎 с предметом, нажатие на неё сразу открывает этот предмет в уроке.'),
+    ('Дальше или к замку', 'После каждой части посмотрите суммы блоков в чек-листе: если везде 9 из 12 или больше, ведите ученика в следующую комнату, если нет — к замку. Решение за вами. Если время кончается, кнопка 🚪 вверху ведёт сразу к замку.'),
+    ('Отчёт', 'В конце нажмите «📝 Отчёт» — чек-лист откроется на готовом отчёте: какие темы ученик знает уверенно, с какими знаком, каких пока не знает, и какая программа ему рекомендуется. Отчёт можно править прямо в окне: удалить лишнее, дописать своё, добавить комментарий. Потом нажмите «Скопировать отчёт».'),
+    ('Если ученик не понимает английский', 'Историю и инструкции можно говорить по-русски — русский вариант стоит в колонке «Teacher’s language» под английским.'),
 ]
 PLAN_INNER = (
     '<h1 style="color:#6e3510;margin:4px 0 10px">🗝 План урока: Escape Room 13+ (вводный урок)</h1>'
     f'<p class="dl"><a href="{SITE}mvu_13plus_plan.docx" download>⬇ Скачать план (Word)</a><a class="pdf" href="{SITE}mvu_13plus_plan.pdf" download>⬇ Скачать план (PDF)</a></p>'
-    '<div class="must"><h2>⚠️ Прочитайте до урока</h2><ol>' + ''.join(f'<li>{x}</li>' for x in MUST) + '</ol></div>'
+    '<div class="must"><h2>❗ Как работать с уроком — прочитайте обязательно</h2>' + ''.join(f'<p><b>{h}.</b> {x}</p>' for h, x in MUST) + '</div>'
     '<table class="plan"><tr><th>Шаг</th><th>Что делать</th><th>Teacher’s language</th><th>Ожидаемые ответы</th></tr>' + ''.join(rows) + '</table>'
 )
-PLAN_STYLE = ('.must{background:#fff3cf;border:2px solid #e8631a;border-radius:12px;padding:8px 16px 4px;margin:10px 0 14px}.must h2{margin:4px 0 6px;color:#b03030;font-size:17px}.must li{margin:4px 0}'
+PLAN_STYLE = ('.must{background:#fff0ee;border:3px solid #d32f2f;border-radius:12px;padding:8px 18px 6px;margin:10px 0 16px}.must h2{margin:4px 0 8px;color:#c62828;font-size:18px}.must p{margin:6px 0;line-height:1.45}.ru{color:#555;font-style:normal}'
               'table.plan td.st{font-weight:700;white-space:nowrap}table.plan td.tl{color:#7a3d10;font-style:italic;width:24%}'
               'table.plan td.sa{color:#1f5fa8;width:22%}table.plan tr.part td{background:#2b2240;color:#ffd889;font-weight:700}')
 
