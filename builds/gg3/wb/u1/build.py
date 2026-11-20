@@ -39,7 +39,7 @@ hw1 = [
                     'cards': [{'text': w, 'translation': p, 'audio': '', 'audio_tts': tts(w)} for w, p in SLOVA]}),
     ('quiz', {'title': 'Посмотри на картинку и выбери правильный вариант', 'questions': [
         {'q': '', 'image': MEDIA + 'gg3/u1/chore_dishwasher.webp', 'type': 'single', 'correct': [1],
-         'options': [{'text': 'wash the dishes'}, {'text': 'empty the dishwasher'}, {'text': 'load the dishwasher'}]},
+         'options': [{'text': 'wash the dishes'}, {'text': 'empty the dishwasher'}, {'text': 'water the plants'}]},
         {'q': '', 'image': MEDIA + 'gg3/u1/chore_vacuum.webp', 'type': 'single', 'correct': [2],
          'options': [{'text': 'make the bed'}, {'text': 'take out the rubbish'}, {'text': 'vacuum the living room'}]},
         {'q': '', 'image': MEDIA + 'gg3/u1/chore_feed_pet.webp', 'type': 'single', 'correct': [0],
