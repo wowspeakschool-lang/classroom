@@ -46,3 +46,4 @@ def para(a_put, a_vys, b_put, b_vys, imena):
 para(os.path.join(SRC, '3.webp'), 520, os.path.join(SRC, '3.webp'), 250, ('adj_big', 'adj_small'))
 para(os.path.join(SRC, '5.webp'), 520, os.path.join(SRC, '7.webp'), 250, ('adj_long', 'adj_short'))
 para(os.path.join(SRC, '4.webp'), 300, os.path.join(SRC, '6.webp'), 300, ('adj_new', 'adj_old'))
+para(os.path.join(SRC, '8.webp'), 330, os.path.join(SRC, '9.webp'), 330, ('adj_cool', 'adj_boring'))
