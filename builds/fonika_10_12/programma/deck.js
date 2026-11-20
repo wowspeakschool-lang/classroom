@@ -95,7 +95,7 @@ bands.forEach(([a, b, c, col, txt], i) => {
   s.addText([{ text: c, options: { bold: true, fontSize: 13, color: col, breakLine: true } }, { text: txt, options: { fontSize: 12.5, color: C.text1 } }], { x: 3.0, y, w: 9.6, h: 0.98, valign: 'middle', isTextBox: true, margin: 0 });
 });
 s.addText([{ text: 'Итог: ', options: { bold: true } }, { text: '26 букв + алфавит + Magic e + 6 сочетаний · к L10 ученик читает короткий текст (≈ 140 слов). ' },
-  { text: 'Не берём ', options: { bold: true } }, { text: '(встретятся в Go Getter): ck ff ll ss · ai/ay · ea · oa/ow · igh/y · or · ur/er/ir · ow/ou · oi/oy · ear air ure · ph wh wr.' }],
+  { text: 'Не берём ', options: { bold: true } }, { text: '(пойдут в Go Getter 1, по одному в урок): ck ff ll ss · ai/ay · ea · oa/ow · igh/y · or · ur/er/ir · ow/ou · oi/oy · ear air ure · ph wh wr.' }],
   { x: 0.5, y: 6.0, w: 12.3, h: 0.8, fontSize: 12.5, color: C.text1, isTextBox: true, margin: 0 });
 
 // ---------- 5. Как устроен урок ----------
@@ -163,12 +163,12 @@ s.addText('Символы — эскиз по мотивам старинног�
 pres.addSection({ title: 'Вокруг курса' });
 s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: 'Вокруг курса' });
 s.addText('До и после курса', { placeholder: 'title' });
-s.addText('Входная проверка · итоговый тест · мотивация · что дальше', { placeholder: 'body' });
+s.addText('Кто идёт на курс · итоговый тест · мотивация · что дальше', { placeholder: 'body' });
 const box = [
- ['Входная проверка', '5–10 минут, интерактивным экраном: звуки 10 букв · 6 коротких слов · 4 выдуманных слова (dut, pim) · ship, this, cake, home · said, the, you. По результату — начинать с L1 или с L6–L7; кто читает всё — сразу в Go Getter. Где проводить — решаем.', C.accent1, 'DFF3FC'],
+ ['Кто идёт на курс', 'Уровень определяют на вводном уроке. На курс идут все, кто не знает букв или не умеет читать, и начинают с L1 — отдельной входной проверки нет.', C.accent1, 'DFF3FC'],
  ['Итоговый тест · L10', 'Чтение слов и выдуманных слов, сочетания и Magic e, диктант 5 слов, чтение короткого текста с вопросами. Сертификат дешифровщика.', C.accent4, 'FCE3DE'],
  ['Мотивация', 'Счётчик слов в конце урока («теперь ты читаешь 140 слов») · личный рекорд скорости · ранг агента · монетки платформы.', C.accent3, 'FDF0DD'],
- ['Дальше', 'Обычная группа Go Getter. Другие написания долгих гласных (ai, oa, igh…) ученик встречает там.', C.accent5, 'E6F5DA'],
+ ['Дальше — Go Getter 1', 'Фоника продолжается в GG1 по Genki Phonics: всё, кроме букв алфавита, — по одному сочетанию в урок (ai, oa, igh, or…), прочитать и повторить. Так закрываются и отдельные пробелы.', C.accent5, 'E6F5DA'],
 ];
 box.forEach(([a, b, col, tint], i) => {
   const x = 0.5 + (i % 2) * 6.25, y = 1.55 + Math.floor(i / 2) * 2.35;
