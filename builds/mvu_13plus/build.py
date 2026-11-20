@@ -137,7 +137,8 @@ if os.path.exists(RJ):
             for o in P['objects']:
                 o['cut'] = cuts[o['id']]; used.add('rooms/' + o['cut']['room'] + '_' + o['id'])
 # то, что в комнате стоит ПЕРЕД предметом, кладём поверх без свечения (лампа перед шкафом, замечание 63)
-FRONT = {'room2_v2': [dict(file='rooms/room2_v2_front_lamp', x=0.0, y=37.891, w=10.938, h=24.707)]}
+FRONT = {'room2_v2': [dict(file='rooms/room2_v2_front_desk', x=0.0, y=48.828, w=23.438, h=9.766),   # стол под шкафом: свечение шкафа только сверху и справа (65)
+                      dict(file='rooms/room2_v2_front_lamp', x=0.0, y=37.891, w=10.938, h=24.707)]}
 for P in data.PARTS:
     P['front'] = FRONT.get(P['room'], [])
     for f in P['front']: used.add(f['file'])
