@@ -222,7 +222,10 @@ const S = {
   hint: false,
   comment: '', repEdit: null,
 };
-function save() { try { localStorage.setItem('mvu13', JSON.stringify(S)); } catch (e) {} }
+function save() { if (RESETTING) return; try { localStorage.setItem('mvu13', JSON.stringify(S)); } catch (e) {} }
+// полный сброс: старое окно чек-листа закрываем, иначе оно держит прежние баллы и записывает их обратно (замечание 70)
+let RESETTING = false;
+function hardReset() { RESETTING = true; try { localStorage.removeItem('mvu13'); } catch (e) {} try { if (MW.w && !MW.w.closed) MW.w.close(); } catch (e) {} location.reload(); }
 function load() { try { const s = JSON.parse(localStorage.getItem('mvu13')); if (s && s.digits) Object.assign(S, s); } catch (e) {} S.hint = false; }
 
 /* ───────── оценка ───────── */
@@ -272,7 +275,7 @@ function cardStep(s, label) {
 }
 function next() { if (TOAST.then) return closeToast(); const s = SCREENS[cur]; if (s.cards && (s.ci || 0) < s.cards.length - 1) { s.ci = (s.ci || 0) + 1; return show(cur, false); } if (s.onNext) return s.onNext(); if (s.next != null) return show(s.next); if (cur < SCREENS.length - 1) show(cur + 1); }
 $('#nextBtn').onclick = () => next();
-$('#restartBtn').onclick = () => { if (!confirm('Начать урок заново? Пройденные предметы, обрывки записки и баллы чек-листа будут сброшены.')) return; try { localStorage.removeItem('mvu13'); } catch (e) {} location.reload(); };
+$('#restartBtn').onclick = () => { if (!confirm('Начать урок заново? Пройденные предметы, обрывки записки и баллы чек-листа будут сброшены. Окно чек-листа закроется — откройте его снова кнопкой ✅.')) return; hardReset(); };
 $('#backBtn').onclick = () => { if (TOAST.then) return closeToast(); const s = SCREENS[cur]; if (s.cards && s.ci > 0) { s.ci--; return show(cur, false); } if (s.step && s.step.i > 0) { s.step.i--; return show(cur, false); } if (history.length) show(history.pop(), false); };
 document.addEventListener('keydown', e => { if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') $('#backBtn').click(); });
 S.hint = false;   // кнопку «Подсказка» убрали (замечание 67)
@@ -713,7 +716,7 @@ const MW = {
     const W = Math.min(1100, screen.availWidth - 80), H = Math.min(900, screen.availHeight - 80);
     const w = window.open('', 'wowspeak_mvu13', `popup=yes,width=${W},height=${H},left=${screen.availWidth - W - 20},top=30,resizable=yes,scrollbars=yes`);
     if (!w) { alert('Разрешите всплывающие окна, чтобы открыть чек-лист и план.'); return; }
-    this.w = w; w.APP = { S, D, topicScore, where, img, goObj: id => { show(SCREEN_ID['name_' + id]); w.focus(); }, oralMark, setOverride: (t, v) => { if (v === null) delete S.override[t]; else S.override[t] = v; save(); MW.refresh(); }, screen: () => SCREENS[cur], save, reset: () => { localStorage.removeItem('mvu13'); location.reload(); }, report };
+    this.w = w; w.APP = { S, D, topicScore, where, img, goObj: id => { show(SCREEN_ID['name_' + id]); w.focus(); }, oralMark, setOverride: (t, v) => { if (v === null) delete S.override[t]; else S.override[t] = v; save(); MW.refresh(); }, screen: () => SCREENS[cur], save, reset: hardReset, report };
     w.document.open(); w.document.write(D.mw_html); w.document.close();
     setTimeout(() => { this.refresh(); if (go && w.goReport) w.goReport(); }, 150);
   },
