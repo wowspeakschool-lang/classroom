@@ -47,6 +47,23 @@ Classroom, заявки больше не разбираются (ежеднев
 - `unit_change_requests.handled_by_user_id` — кто разобрал;
 - `classroom_feedback` адресата не имеет: заявки преподавателей общие.
 
+## Что показывать Алёне (её уточнение 23.11.2026)
+
+«Когда я пишу „свяжусь лично“, я просто пишу в личное сообщение
+преподавателю, здесь ничего страшного. Нужно обращать внимание только на те,
+которые в разделе QA — кейсы — ждут меня. В CPD — запросы. Только открытые».
+
+Отсюда фильтр ежедневного разбора:
+
+- **«Кейсы» — только те, где ход за ней**: `status <> 'closed'` и
+  `turn_user_id` — один из двух её id. Кейс, где она в ответственных, но ход
+  за кем-то другим, в разбор не идёт.
+- **CPD → «Запросы» — только открытые**: `teacher_questions.status = 'pending'`
+  с `assignee_user_id` на неё и `unit_change_requests.status = 'pending'`.
+- **`will_contact` не показываем вовсе** — это не «висит», а «ответила в личку».
+- Заявки по домашкам (`classroom_feedback`) — одной строкой-счётчиком, пока
+  Анна не решит, нужны ли они в разборе пунктами.
+
 ## Ежедневный разбор — порядок
 
 1. Собрать открытое по трём таблицам (запросы ниже).
@@ -79,7 +96,7 @@ select q.id, q.created_at, t.name as prepodavatel, mt.title as tema,
 from teacher_questions q
 left join teachers t on t.id = q.teacher_id
 left join methodist_topics mt on mt.id = q.topic_id
-where q.status in ('pending','will_contact')
+where q.status = 'pending'
   and q.assignee_user_id in ('386dc935-749f-4345-b68a-96abaaf6b09d',
                              'e3ccab83-ede3-4beb-9d3d-1e9bcc1f9778')
 order by q.created_at;
@@ -91,17 +108,13 @@ from unit_change_requests r
 left join teachers t on t.id = r.teacher_id
 where r.status = 'pending' order by r.created_at;
 
--- 3. Кейсы, где ход за Алёной (или она в ответственных)
+-- 3. Кейсы, где ход за Алёной
 select c.id, c.created_at, c.student_name, c.category, c.status, c.body,
        c.last_activity_at, c.review_at
 from client_cases c
 where c.status <> 'closed'
-  and ('386dc935-749f-4345-b68a-96abaaf6b09d' = any(
-         array_remove(array[c.assignee_user_id, c.turn_user_id], null))
-    or '386dc935-749f-4345-b68a-96abaaf6b09d' = any(coalesce(c.assignee_user_ids, '{}'))
-    or 'e3ccab83-ede3-4beb-9d3d-1e9bcc1f9778' = any(
-         array_remove(array[c.assignee_user_id, c.turn_user_id], null))
-    or 'e3ccab83-ede3-4beb-9d3d-1e9bcc1f9778' = any(coalesce(c.assignee_user_ids, '{}')))
+  and c.turn_user_id in ('386dc935-749f-4345-b68a-96abaaf6b09d',
+                         'e3ccab83-ede3-4beb-9d3d-1e9bcc1f9778')
 order by c.last_activity_at nulls first;
 
 -- 4. Заявки преподавателей по домашкам (общие, без адресата)
