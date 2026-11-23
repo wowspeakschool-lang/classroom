@@ -347,7 +347,7 @@ class Lesson:
         text(s, 2.9, 1.75, 7.5, 1.2, [[('How was the lesson?', HEAD, 20)], [('⭐  ⭐⭐  ⭐⭐⭐  ⭐⭐⭐⭐  ⭐⭐⭐⭐⭐', GOLD, 20)]], fill='F7F3FF')
         text(s, 2.9, 3.1, 7.5, 1.2, [[('Rate your teacher!', ORANGE, 20)], [('😊   😁   🤩   🥳   💯', INK, 26)]], fill='FFF5EE')
         text(s, 2.9, 4.45, 7.5, 0.75, 'What did you like?', size=20, color=GREEN, fill=GREENBG)
-        text(s, 2.9, 5.4, 7.5, 0.75, 'Homework: self-study  📝', size=20, color=WHITE, fill=PINK)
+        text(s, 2.9, 5.4, 7.5, 0.75, 'Homework  📝', size=20, color=WHITE, fill=PINK)
         chat(s, 'Type your stars!')
 
     def build(self, path):
@@ -390,7 +390,7 @@ def selfstudy(sp, path):
         return s
 
     s = d.slide(DARK)
-    text(s, 1, 1.4, 11.3, 0.6, 'Self-study', size=24, color=GOLD)
+    text(s, 1, 1.4, 11.3, 0.6, 'Homework', size=24, color=GOLD)
     text(s, 1, 2.2, 11.3, 1.0, st['title'], size=40, color=WHITE)
     text(s, 1, 3.3, 11.3, 0.6, st['sub'], size=24, color=TEAL)
     text(s, 1, 5.6, 11.3, 0.5, 'WOW Speak', size=18, color=PINK)
@@ -535,12 +535,14 @@ def plan(L, path):
 def build_all(sp, outdir):
     fill_plan(sp)
     os.makedirs(outdir, exist_ok=True)
-    base = f'WOW_Speak_{sp["slug"]}_{sp["group"].replace("–", "-").replace("+", "plus")}'
+    # Имена файлов (решение Анны 23.11.2026): сначала тема, потом что это за файл.
+    base = re.sub(r'[:?…/\\*"<>|]', '', sp.get('file_topic', sp['topic'])).strip()
+    base = re.sub(r'\s+', ' ', base) + f' {sp["group"].replace("–", "-")}'
     L = Lesson(sp)
-    les = os.path.join(outdir, base + '_LESSON.pptx')
+    les = os.path.join(outdir, base + ' - Presentation.pptx')
     L.build(les)
-    plan(L, os.path.join(outdir, base + '_PLAN.docx'))
-    selfp = os.path.join(outdir, base + '_SELFSTUDY.pptx')
+    plan(L, os.path.join(outdir, base + ' - Lesson plan.docx'))
+    selfp = os.path.join(outdir, base + ' - Homework.pptx')
     n = selfstudy(sp, selfp)
     return les, selfp, L, n
 
@@ -580,7 +582,7 @@ def fill_plan(sp):
             '⭐ If time': 'Шаг сложнее — только если группа отвечает легко.',
             'Freer practice 1': 'Сказать о себе с новой грамматикой.',
             'Freer practice 2': 'Ещё одно своё высказывание, другой формат.',
-            'Feedback': 'Подвести итог, получить оценку, выдать самостоятельную.'}
+            'Feedback': 'Подвести итог, получить оценку, выдать домашнее задание.'}
     drills = ' · '.join(plain(d['title']) for d in drill_order(sp))
     task = {'Блок школы': 'Приветствие, рассказ о школе WOW Speak.',
             'Warm-up': f'{sp["warmup"]["title"]}. Пункты по одному: пункт → клик ответ → клик следующий.',
@@ -597,7 +599,7 @@ def fill_plan(sp):
             '⭐ If time': ' · '.join(plain(d['title']) for d in sp['iftime']) + '. Без таймера, один клик — ответ.',
             'Freer practice 1': plain(sp['freer'][0]['q']) + ' Образец на слайде.',
             'Freer practice 2': plain(sp['freer'][1]['q']) + ' Образец на слайде.',
-            'Feedback': 'I can · Well done: звёзды, оценка учителя, самостоятельная.'}
+            'Feedback': 'I can · Well done: звёзды, оценка учителя, домашнее задание.'}
     if young:
         say = {'Блок школы': ['Hello! Welcome to WOW Speak!', 'Напишите в чат, как вас зовут.'],
                'Warm-up': ["Let's warm up!", 'Пишите ответ в чат.'],
@@ -622,7 +624,7 @@ def fill_plan(sp):
            '⭐ If time': 'Делаем, только если на дриллинге отвечали легко; иначе — сразу к freer practice.',
            'Freer practice 1': 'Читаем вслух 4–5 ответов, хвалим; ошибку исправляем мягко, повтором верной формы.',
            'Freer practice 2': 'Читаем вслух 3–4 ответа.',
-           'Feedback': 'После урока — разослать самостоятельную (PPTX / PDF).'}
+           'Feedback': 'После урока — разослать домашнее задание (PPTX / PDF).'}
     for k, dflt in (('goal', goal), ('task', task), ('say', say), ('com', com)):
         cur = P.setdefault(k, {})
         for kk, v in dflt.items():
