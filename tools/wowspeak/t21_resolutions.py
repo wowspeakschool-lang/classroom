@@ -72,7 +72,7 @@ S={
               'Who could remind you?','Is a small promise better than a big one?'],
  'board13':['What was your last resolution?','How long did it last?',
             'What is your usual excuse?','Which habit would change your week most?',
-            'Is January a stupid time to start?','What makes a promise realistic?'],
+            'Is January the wrong time to start?','What makes a promise realistic?'],
  's9_beg':'Beginners называют своё обещание по рамкам: что, когда, кто поможет. После каждого — два вопроса.',
  's9_adv1012':'MAIN SPEAKING (дебаты): работают ли обещания. Третий ход — переписать чужое обещание в выполнимое.',
  's9_adv13':'MAIN SPEAKING (дебаты): обещания как самообман. Требуй habit, keep it up, realistic, excuse.',
