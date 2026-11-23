@@ -1,0 +1,81 @@
+<title>Голоса адвент-календаря</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap">
+<style>
+/* Лента слов: слово слева, варианты-кнопки справа; внизу липкая панель с номерами */
+:root{--bg:#F3F5FB;--card:#FFFFFF;--fg:#1C2456;--muted:#5A6386;--line:#D9DEEE;--accent:#C8364D;--pick:#1F8F62;--pick-soft:#E3F6EC;
+--f:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121630;--card:#1C2246;--fg:#EEF1FF;--muted:#A6AED3;--line:#2E366A;--accent:#FF6B81;--pick:#4CD49A;--pick-soft:#173D33;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121630;--card:#1C2246;--fg:#EEF1FF;--muted:#A6AED3;--line:#2E366A;--accent:#FF6B81;--pick:#4CD49A;--pick-soft:#173D33;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f);font-size:15px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 140px}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1{font-size:1.7rem;font-weight:800;margin:0;text-wrap:balance}
+.lead{color:var(--muted);margin:0;max-width:70ch;line-height:1.5}
+.voices{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.voices span{color:var(--muted);font-size:.9rem}
+.vb{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:999px;padding:6px 12px;cursor:pointer}
+.vb:hover{border-color:var(--accent)}
+.row{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;grid-template-columns:190px 1fr;gap:12px;align-items:center}
+.row.done{border-color:var(--pick)}
+.w b{display:block;font-size:1.15rem}
+.w small{color:var(--muted)}
+.opts{display:flex;flex-wrap:wrap;gap:8px;min-width:0}
+.o{display:flex;align-items:center;gap:6px;border:2px solid var(--line);border-radius:12px;padding:5px 8px 5px 5px;background:var(--bg);cursor:pointer;font:inherit;color:var(--fg)}
+.o .pl{width:34px;height:34px;border-radius:50%;border:0;background:var(--accent);color:#fff;font-size:14px;cursor:pointer;flex:none}
+.o .num{font-weight:800;font-variant-numeric:tabular-nums;min-width:2.2em;text-align:left}
+.o.on{border-color:var(--pick);background:var(--pick-soft)}
+.o.on .num::after{content:" ✓";color:var(--pick)}
+.o:focus-visible,.pl:focus-visible,.vb:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px 14px;color:var(--muted);font-size:.88rem}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));box-shadow:0 -6px 20px rgba(0,0,0,.08)}
+.bar .in{max-width:1100px;margin:0 auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#list{flex:1;min-width:0;font-family:ui-monospace,Menlo,monospace;font-size:.95rem;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px;color:var(--fg);word-break:break-word}
+#copy{font:inherit;font-weight:800;border:0;border-radius:10px;padding:10px 16px;background:var(--pick);color:#fff;cursor:pointer}
+#cnt{color:var(--muted);font-size:.9rem}
+@media (max-width:620px){.row{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+<h1>Голоса для адвент-календаря</h1>
+<p class="lead">У каждого слова семь вариантов записи. Нажмите ▶, чтобы послушать, и нажмите на номер, чтобы выбрать вариант. Можно отметить один вариант или несколько; повторное нажатие снимает отметку. Внизу собирается список номеров: скопируйте его и пришлите в чат.</p>
+<div class="voices"><span>Выбрать один голос сразу для всех слов:</span><span id="vbtns"></span></div>
+<div class="legend" id="legend"></div>
+<div id="rows" style="display:flex;flex-direction:column;gap:10px"></div>
+</div>
+<div class="bar"><div class="in"><span id="cnt">Выбрано: 0 из 38</span><div id="list">Пока ничего не выбрано</div><button id="copy" type="button">Скопировать</button></div></div>
+<script>
+var W=/*DATA*/[];
+var sel={};try{sel=JSON.parse(localStorage.getItem('advent-golosa')||'{}')}catch(e){}
+var au=new Audio();
+function save(){try{localStorage.setItem('advent-golosa',JSON.stringify(sel))}catch(e){}}
+function render(){
+ var rows=document.getElementById('rows');rows.innerHTML='';var nums=[],done=0;
+ W.forEach(function(w,i){
+  var r=document.createElement('div');r.className='row';
+  r.innerHTML='<div class="w"><b>'+w.w+'</b><small>'+w.t+'</small></div><div class="opts"></div>';
+  var box=r.querySelector('.opts'),any=false;
+  w.v.forEach(function(v,j){
+   var on=!!sel[v.n];if(on){any=true;nums.push(v.n)}
+   var o=document.createElement('div');o.className='o'+(on?' on':'');o.tabIndex=0;o.title='Голос '+(j+1)+': '+v.l;
+   o.innerHTML='<button class="pl" type="button" aria-label="Послушать">▶</button><span class="num">'+v.n+'</span>';
+   o.querySelector('.pl').onclick=function(e){e.stopPropagation();au.pause();au.src=v.a;au.play()};
+   o.onclick=function(){if(sel[v.n])delete sel[v.n];else sel[v.n]=1;save();render()};
+   o.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();o.onclick()}};
+   box.appendChild(o)});
+  if(any){r.classList.add('done');done++}
+  rows.appendChild(r)});
+ nums.sort(function(a,b){return a-b});
+ document.getElementById('list').textContent=nums.length?nums.join(', '):'Пока ничего не выбрано';
+ document.getElementById('cnt').textContent='Слов с выбором: '+done+' из '+W.length;
+}
+var legend=document.getElementById('legend'),vb=document.getElementById('vbtns');
+W[0].v.forEach(function(v,j){
+ legend.insertAdjacentHTML('beforeend','<div><b>Голос '+(j+1)+'</b> — '+v.l+'</div>');
+ var b=document.createElement('button');b.className='vb';b.type='button';b.textContent='Голос '+(j+1);
+ b.onclick=function(){sel={};W.forEach(function(w){sel[w.v[j].n]=1});save();render()};vb.appendChild(b)});
+var c=document.createElement('button');c.className='vb';c.type='button';c.textContent='Снять всё';c.onclick=function(){sel={};save();render()};vb.appendChild(c);
+document.getElementById('copy').onclick=function(){var t=document.getElementById('list').textContent,b=this;
+ function ok(){b.textContent='Скопировано';setTimeout(function(){b.textContent='Скопировать'},1500)}
+ function sel2(){var r=document.createRange();r.selectNodeContents(document.getElementById('list'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Выделено — нажмите Ctrl+C'}
+ try{navigator.clipboard.writeText(t).then(ok,sel2)}catch(e){sel2()}};
+render();
+</script>
