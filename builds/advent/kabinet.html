@@ -341,10 +341,10 @@ var F={
  reindeer:{w:'reindeer',t:'олень',g:'m',sz:10,cols:{'':'reindeer'}},
  sweet:{w:'sweet',t:'конфета',g:'f',sz:10,cols:{pink:'sweet',blue:'v/sweet_blue',green:'v/sweet_green',purple:'v/sweet_purple'}},
  mitten:{w:'mitten',t:'варежка',g:'f',sz:9,cols:{blue:'mitten',red:'v/mitten_red',green:'v/mitten_green',pink:'v/mitten_pink'}},
- angel:{w:'angel',t:'ангел',g:'m',sz:14,top:1,cols:{'':'angel'}},
+ angel:{w:'angel',t:'ангел',g:'m',sz:11,top:1,cols:{'':'angel'}},
  cracker:{w:'cracker',t:'хлопушка',g:'f',sz:11,cols:{'':'cracker'}},
  clock:{w:'clock',t:'часы',g:'p',sz:9,cols:{'':'clock'}},
- top_star:{w:'tree topper',t:'звезда на макушку',g:'f',sz:16,top:1,cols:{gold:'top_star',silver:'v/top_star_silver'}}
+ top_star:{w:'tree topper',t:'звезда на макушку',g:'f',sz:12,top:1,cols:{gold:'top_star',silver:'v/top_star_silver'}}
 };
 var TREES={pine:['Christmas tree','ёлка'],snowy:['snowy tree','заснеженная ёлка'],gold:['golden tree','золотая ёлка']};
 /* цвет: английское слово, основа прилагательного, тип окончаний, кружок */
@@ -680,14 +680,14 @@ function placeAt(f,c,x,y){
   S.placed.push(pl);sel=pl.id;save();renderTree();say(en(f,c));
 }
 /* верхушка встаёт на кончик ёлки — считаем по тому, где на самом деле нарисована ёлка */
-function placeToppers(){
+function placeToppers(keepSel){
   var area=$('area');if(!area)return;var img=area.querySelector('.tree img');if(!img||!img.naturalWidth)return;
   var A=area.getBoundingClientRect(),B=img.getBoundingClientRect(),sc=Math.min(B.width/img.naturalWidth,B.height/img.naturalHeight),h=img.naturalHeight*sc;
   var tipY=(B.top-A.top)+(B.height-h)/2+0.019*h,cx=(B.left-A.left)+B.width/2;
   $$('.placed.ptop',area).forEach(function(el){var pl=S.placed.filter(function(p){return p.id==el.dataset.id;})[0];if(!pl||!pl.auto)return;
-    var w=A.width*F[pl.f].sz*pl.s/100,k=pl.f==='angel'?0.36:0.3;pl.x=cx/A.width*100;pl.y=(tipY-w*k)/A.height*100;
+    var w=A.width*F[pl.f].sz*pl.s/100,k=pl.f==='angel'?0.36:0.3;pl.x=cx/A.width*100;pl.y=Math.max(tipY-w*k,w/2+6)/A.height*100;
     el.style.left=pl.x+'%';el.style.top=pl.y+'%';});
-  drawSel();
+  if(!keepSel)drawSel();
 }
 window.addEventListener('resize',function(){if($('area'))placeToppers();if(S.tab==='cal'&&S.page==='advent'&&!ALLteacher())renderCal();});
 function ALLteacher(){return viewMode(ALL.cur);}
@@ -735,10 +735,10 @@ function handle(hd,el,pl){
     function mv(ev){
       if(k==='ro'){pl.r=Math.round(Math.atan2(ev.clientX-cx,-(ev.clientY-cy))*180/Math.PI);}
       else{var p=loc(ev.clientX,ev.clientY);
-        if(k==='sc')pl.s=cl(s0*Math.hypot(p[0],p[1])/d0,.4,3);if(k==='sc'&&F[pl.f].wide)pl.s=cl(pl.s,.4,1.3);
+        if(k==='sc')pl.s=cl(s0*Math.hypot(p[0],p[1])/d0,.3,3);if(k==='sc'&&F[pl.f].wide)pl.s=cl(pl.s,.4,1.3);
         if(k==='sx')pl.sx=cl(sx0*Math.abs(p[0])/(Math.abs(st[0])||1),.85,1.2);
         if(k==='sy')pl.sy=cl(sy0*Math.abs(p[1])/(Math.abs(st[1])||1),.85,1.25);}
-      styleEl(el,pl);if(F[pl.f].top)placeToppers();
+      styleEl(el,pl);if(F[pl.f].top)placeToppers(true);
     }
     function up(){hd.removeEventListener('pointermove',mv);hd.removeEventListener('pointerup',up);hd.removeEventListener('pointercancel',up);save();drawSel();}
     hd.addEventListener('pointermove',mv);hd.addEventListener('pointerup',up);hd.addEventListener('pointercancel',up);
