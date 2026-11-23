@@ -7,9 +7,9 @@
    Стиль кабинета: кремово-персиковый фон, белые карточки ~26px, фиолетовый и розовый, жёлтые монеты.
    Один светлый вид намеренно — так выглядит настоящий кабинет. */
 :root{
-  --bg:#FFF4EC; --bg2:#FFE9DA; --card:#FFFFFF; --ink:#2B2140; --muted:#6B6280; --line:#F0E2D6;
+  --bg:#FFF4EC; --card:#FFFFFF; --ink:#2B2140; --muted:#6B6280; --line:#F0E2D6;
   --violet:#6A4DF4; --violet-soft:#EEE9FF; --pink:#F7628C; --pink-soft:#FFE6EE;
-  --coin:#FFC83D; --coin-ink:#6E4A00; --green:#1F8F62; --green-soft:#E3F6EC; --night:#1C2456;
+  --coin:#FFC83D; --coin-ink:#6E4A00; --green:#1F8F62; --green-soft:#E3F6EC; --red:#C8364D; --night:#1C2456;
   --ff-head:"Montserrat","Segoe UI",Arial,sans-serif; --ff-body:"Nunito","Segoe UI",Arial,sans-serif;
   --r:26px; color-scheme:light;
 }
@@ -19,7 +19,6 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff-body);f
 h1,h2,h3{font-family:var(--ff-head);margin:0;line-height:1.15;text-wrap:balance}
 button{font:inherit;color:inherit}
 .app{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100%}
-/* меню */
 .side{background:var(--card);border-right:1px solid var(--line);padding:22px 14px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh;padding-left:max(14px,env(safe-area-inset-left,0px))}
 .logo{font-family:var(--ff-head);font-weight:900;font-size:24px;color:var(--violet);padding:0 10px 14px}
 .logo span{color:var(--pink)}
@@ -31,36 +30,36 @@ button{font:inherit;color:inherit}
 .nav.xmas{color:#fff;background:linear-gradient(135deg,#2F3C8F,#1C2456);margin-top:6px;animation:glow 1.8s ease-in-out infinite}
 .nav.xmas.on{outline:3px solid var(--coin)}
 .dot{position:absolute;right:10px;top:50%;transform:translateY(-50%);min-width:22px;height:22px;border-radius:11px;background:var(--pink);color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center;padding:0 6px;animation:pulse 1.4s ease-in-out infinite}
-@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(255,200,61,.0),0 6px 16px -8px #1C2456}50%{box-shadow:0 0 0 6px rgba(255,200,61,.35),0 6px 22px -6px #1C2456}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(255,200,61,0)}50%{box-shadow:0 0 0 6px rgba(255,200,61,.38)}}
 @keyframes pulse{50%{transform:translateY(-50%) scale(1.18)}}
 .side .grow{flex:1}
 .me{display:flex;align-items:center;gap:10px;padding:10px;border-radius:16px;background:var(--bg)}
 .ava{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;font-family:var(--ff-head);font-weight:900;display:grid;place-items:center;flex:none}
 .me b{font-family:var(--ff-head);display:block;font-size:14px}
 .me small{color:var(--muted)}
-/* верх */
 .main{min-width:0;display:flex;flex-direction:column}
 .top{display:flex;align-items:center;gap:12px;padding:16px 26px;padding-right:max(26px,env(safe-area-inset-right,0px));position:sticky;top:0;z-index:5;background:var(--bg)}
 .top h1{font-size:24px;font-weight:900;flex:1;min-width:0}
-.coins{font-family:var(--ff-head);font-weight:900;background:var(--coin);color:var(--coin-ink);padding:8px 14px;border-radius:999px;font-variant-numeric:tabular-nums;transition:transform .2s;white-space:nowrap}
+.coins{font-family:var(--ff-head);font-weight:900;background:var(--coin);color:var(--coin-ink);padding:8px 14px;border-radius:999px;font-variant-numeric:tabular-nums;transition:transform .2s;white-space:nowrap;border:0;cursor:pointer}
+.coins:hover{filter:brightness(1.05)}
+.coins:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .coins.bump{transform:scale(1.2)}
 .streak{font-family:var(--ff-head);font-weight:800;background:var(--card);border:1px solid var(--line);padding:8px 12px;border-radius:999px;white-space:nowrap}
-.page{padding:4px 26px 110px;padding-right:max(26px,env(safe-area-inset-right,0px));flex:1}
-/* главная */
+.page{padding:4px 26px 120px;padding-right:max(26px,env(safe-area-inset-right,0px));flex:1}
 .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
 .card{background:var(--card);border-radius:var(--r);padding:20px;border:1px solid var(--line);display:flex;flex-direction:column;gap:10px;min-width:0}
 .card h3{font-size:17px}
 .sub{color:var(--muted);font-size:14px}
 .pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--ff-head);font-weight:800;font-size:12px;padding:5px 11px;border-radius:999px;align-self:flex-start}
-.p-coin{background:var(--coin);color:var(--coin-ink)}.p-violet{background:var(--violet-soft);color:var(--violet)}.p-pink{background:var(--pink-soft);color:#C93D66}.p-green{background:var(--green-soft);color:var(--green)}
+.p-coin{background:var(--coin);color:var(--coin-ink)}.p-violet{background:var(--violet-soft);color:var(--violet)}.p-pink{background:var(--pink-soft);color:#B8325C}.p-green{background:var(--green-soft);color:var(--green)}
 .btn{font-family:var(--ff-head);font-weight:800;border:0;border-radius:14px;padding:11px 18px;cursor:pointer;background:var(--violet);color:#fff;font-size:14px;align-self:flex-start}
-.btn.pink{background:var(--pink)}.btn.ghost{background:var(--violet-soft);color:var(--violet)}.btn.light{background:#fff;color:var(--night)}
+.btn.pink{background:var(--pink)}.btn.ghost{background:var(--violet-soft);color:var(--violet)}.btn.sm{padding:8px 12px;font-size:13px}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .hero{border-radius:30px;padding:26px;color:#fff;position:relative;overflow:hidden;min-height:200px;display:flex;flex-direction:column;justify-content:center;gap:10px;cursor:pointer;margin-bottom:16px;background:linear-gradient(90deg,rgba(20,26,70,.92) 0%,rgba(20,26,70,.7) 45%,rgba(20,26,70,0) 75%),url(img/bg_night.webp) center 70%/cover no-repeat,var(--night);animation:heroGlow 2.2s ease-in-out infinite}
 @keyframes heroGlow{0%,100%{box-shadow:0 0 0 0 rgba(255,200,61,0)}50%{box-shadow:0 0 0 7px rgba(255,200,61,.45)}}
 .hero h2{font-size:clamp(22px,3vw,30px);font-weight:900;max-width:60%}
-.hero p{max-width:55%;color:#E4E8FF}
+.hero p{max-width:55%;color:#E4E8FF;margin:0}
 .hero .tr{position:absolute;right:4%;bottom:-4%;height:118%;max-width:40%;object-fit:contain;filter:drop-shadow(0 10px 20px rgba(0,0,0,.4))}
 .hero .new{background:var(--pink);font-family:var(--ff-head);font-weight:800;font-size:13px;padding:5px 12px;border-radius:999px;align-self:flex-start;animation:bounce 1.2s ease-in-out infinite}
 @keyframes bounce{50%{transform:translateY(-3px) scale(1.05)}}
@@ -69,90 +68,134 @@ button{font:inherit;color:inherit}
 .hw .em{font-size:26px}
 .hw b{font-family:var(--ff-head);font-size:14px;display:block}
 .wheel{width:92px;height:92px;border-radius:50%;background:conic-gradient(var(--pink) 0 60deg,var(--coin) 0 120deg,var(--violet) 0 180deg,#3E9BEA 0 240deg,var(--green) 0 300deg,#FF8A3D 0);border:6px solid #fff;box-shadow:0 0 0 2px var(--line);align-self:center}
-/* адвент */
-.adv-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.bigcoin{font-family:var(--ff-head);font-weight:900;font-size:34px;color:var(--coin-ink);font-variant-numeric:tabular-nums}
+.adv-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
 .adv-tabs button{font-family:var(--ff-head);font-weight:800;font-size:15px;border:1px solid var(--line);background:var(--card);padding:10px 16px;border-radius:999px;cursor:pointer}
 .adv-tabs button.on{background:var(--violet);border-color:var(--violet);color:#fff}
-.adv-tabs .msg{color:var(--muted);font-weight:700;margin-left:auto}
-.scene{position:relative;border-radius:26px;overflow:hidden;background:var(--night) url(img/bg_night.webp) center bottom/cover no-repeat;aspect-ratio:16/10;max-height:calc(100vh - 190px);margin-inline:auto;max-width:100%}
+.today{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:10px 14px;margin-bottom:12px}
+.today .date{font-family:var(--ff-head);font-weight:900;font-size:16px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-left:auto}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.lg{width:18px;height:18px;border-radius:6px;display:inline-block}
+.scene{position:relative;border-radius:26px;overflow:hidden;background:var(--night) url(img/bg_night.webp) center bottom/cover no-repeat;aspect-ratio:16/9;max-height:calc(100vh - 230px);margin-inline:auto;max-width:100%}
 .snowfall{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(2px 2px at 20% 30%,#fff9,transparent),radial-gradient(2px 2px at 70% 20%,#fff9,transparent),radial-gradient(3px 3px at 40% 70%,#fff7,transparent),radial-gradient(2px 2px at 85% 60%,#fff9,transparent);background-size:240px 240px;animation:snow 16s linear infinite}
 @keyframes snow{to{background-position:0 240px,0 240px,0 240px,0 240px}}
-.door{position:absolute;width:8.5%;aspect-ratio:1;transform:translate(-50%,-50%);border:0;background:none;padding:0;cursor:pointer;transition:transform .15s}
+.door{position:absolute;width:7%;aspect-ratio:1;transform:translate(-50%,-50%);border:0;background:none;padding:0;cursor:pointer;transition:transform .15s}
 .door:hover{transform:translate(-50%,-50%) scale(1.12) rotate(-3deg)}
 .door:focus-visible{outline:3px solid var(--coin);outline-offset:3px;border-radius:14px}
 .door img{filter:drop-shadow(0 6px 8px rgba(0,0,0,.35))}
+.door .num{position:absolute;left:-6%;top:-8%;min-width:30%;aspect-ratio:1;border-radius:50%;background:#fff;color:var(--night);font-family:var(--ff-head);font-weight:900;font-size:clamp(10px,1.1vw,14px);display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.35);padding:2px}
+.door.today .num{background:var(--pink);color:#fff}
+.door.today{animation:todayGlow 1.4s ease-in-out infinite}
+@keyframes todayGlow{50%{transform:translate(-50%,-50%) scale(1.12)}}
+.door.today::before{content:"";position:absolute;inset:-14%;border-radius:50%;background:radial-gradient(circle,rgba(255,220,120,.55),transparent 65%)}
+.door.missed img{filter:grayscale(.9) brightness(.75) drop-shadow(0 6px 8px rgba(0,0,0,.35))}
+.door .coinb{position:absolute;right:-8%;bottom:-6%;background:var(--coin);color:var(--coin-ink);font-family:var(--ff-head);font-weight:900;font-size:clamp(9px,1vw,12px);border-radius:999px;padding:2px 6px;box-shadow:0 2px 6px rgba(0,0,0,.35);white-space:nowrap}
+.door.future img{filter:grayscale(1) brightness(1.6) opacity(.38)}
+.door.future .num{background:#ffffffaa}
+.door .lock{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(14px,1.8vw,22px)}
 .door.shake{animation:shake .5s}
 @keyframes shake{25%{transform:translate(-50%,-50%) rotate(-12deg)}75%{transform:translate(-50%,-50%) rotate(12deg)}}
 .dopen{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:#ffffff22;box-shadow:inset 0 0 0 2px #ffffff77;padding:16%}
 img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;-webkit-user-drag:none}
-.treebox{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);gap:16px;align-items:start}
-.treearea{position:relative;border-radius:26px;background:var(--night) url(img/bg_night.webp) center bottom/cover no-repeat;height:calc(100vh - 190px);min-height:440px;overflow:hidden;touch-action:none}
+.treebox{display:grid;grid-template-columns:minmax(290px,1fr) minmax(0,1.35fr);gap:16px;align-items:start}
+.treearea{position:relative;border-radius:26px;background:var(--night) url(img/bg_night.webp) center bottom/cover no-repeat;height:calc(100vh - 190px);min-height:460px;overflow:hidden;touch-action:none}
 .treearea .tree{position:absolute;left:10%;right:10%;top:7%;bottom:3%}
 .placed{position:absolute;width:13%;aspect-ratio:1;transform:translate(-50%,-50%);touch-action:none;cursor:grab;user-select:none}
-.placed.wide{width:28%;aspect-ratio:4/1}
-.placed.top{width:17%}
+.placed.wide{width:30%;aspect-ratio:4/1}
+.placed.top{width:18%}
 .placed img{filter:drop-shadow(0 4px 5px rgba(0,0,0,.4))}
 .placed.dragging{cursor:grabbing;z-index:5}
 .placed.sel{outline:3px dashed #fff;outline-offset:3px;border-radius:12px}
 .tool{position:absolute;z-index:6;display:flex;gap:6px;transform:translate(-50%,0)}
 .tool button{border:0;border-radius:12px;background:#fff;padding:7px 10px;font-family:var(--ff-head);font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 6px 16px -6px rgba(0,0,0,.5);white-space:nowrap}
-.chest{background:var(--card);border-radius:26px;border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.chest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px;max-height:44vh;overflow:auto;padding:2px}
-.slot{position:relative;background:var(--bg);border-radius:18px;aspect-ratio:1;border:1px solid var(--line);display:grid;place-items:center;cursor:grab;touch-action:none;user-select:none;padding:10px}
+.chest{background:var(--card);border-radius:26px;border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0;position:relative}
+.chest-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.chest-head h3{flex:1}
+.chest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px;padding:2px}
+.slot{position:relative;background:var(--bg);border-radius:18px;aspect-ratio:1;border:2px solid var(--line);display:grid;place-items:center;cursor:grab;touch-action:none;user-select:none;padding:10px 10px 16px}
 .slot .cnt{position:absolute;right:5px;top:5px;background:var(--violet);color:#fff;font-family:var(--ff-head);font-weight:800;font-size:11px;border-radius:999px;padding:1px 7px}
-.slot.empty{opacity:.35}
+.slot .nm{position:absolute;left:0;right:0;bottom:3px;text-align:center;font-size:10px;font-weight:800;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 4px}
+.slot.none .pic{filter:grayscale(1);opacity:.4}
+.slot.none .cnt{background:var(--coin);color:var(--coin-ink)}
+.slot.locked{cursor:pointer;background:#F3EEF8}
+.slot.locked .pic{filter:grayscale(1) brightness(.2);opacity:.25}
+.slot.locked::after{content:"🔒";position:absolute;font-size:18px}
+.slot.open{border-color:var(--violet)}
 .slot:focus-visible{outline:3px solid var(--violet)}
+.pop{position:absolute;z-index:20;background:#fff;border-radius:20px;box-shadow:0 16px 40px -12px rgba(40,20,90,.45);border:1px solid var(--line);padding:12px;width:min(340px,calc(100% - 8px));left:4px}
+.pop::after{content:"";position:absolute;bottom:-8px;width:16px;height:16px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg);left:var(--ax,40px)}
+.pop.below::after{bottom:auto;top:-8px;transform:rotate(225deg)}
+.pop h4{margin:0 0 8px;font-family:var(--ff-head);font-size:14px}
+.sw{display:flex;gap:8px;flex-wrap:wrap}
+.swi{position:relative;width:58px;height:58px;border-radius:14px;border:2px solid var(--line);background:var(--bg);padding:6px;cursor:pointer;touch-action:none}
+.swi.own{border-color:var(--green);background:#F2FBF6;box-shadow:0 0 0 3px #1F8F6222}
+.swi.not .pic{filter:grayscale(1);opacity:.35}
+.swi.lockd .pic{filter:grayscale(1) brightness(.2);opacity:.25}
+.swi.lockd::after{content:"🔒";position:absolute;inset:0;display:grid;place-items:center;font-size:16px}
+.swi.cur{outline:3px solid var(--violet);outline-offset:1px}
+.swi .c{position:absolute;right:-6px;top:-6px;background:var(--green);color:#fff;font-size:10px;font-weight:900;border-radius:999px;padding:1px 6px}
+.swi.not .c{background:var(--coin);color:var(--coin-ink)}
+.act{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.act b{font-family:var(--ff-head)}
+.act .t{color:var(--muted);font-size:13px;flex:1;min-width:100px}
+.mini-say{border:0;background:var(--violet-soft);color:var(--violet);border-radius:50%;width:32px;height:32px;cursor:pointer;flex:none}
 .dragghost{position:fixed;z-index:100;pointer-events:none;width:80px;height:80px;transform:translate(-50%,-50%)}
 .dragghost img{filter:drop-shadow(0 10px 12px rgba(0,0,0,.35))}
 .trees{display:flex;gap:8px;flex-wrap:wrap}
-.trees button{border:2px solid var(--line);background:var(--bg);border-radius:14px;padding:4px;cursor:pointer;width:64px;height:78px}
+.trees button{border:2px solid var(--line);background:var(--bg);border-radius:14px;padding:4px;cursor:pointer;width:60px;height:74px;position:relative}
 .trees button.on{border-color:var(--violet)}
-.trees button:disabled{opacity:.3;cursor:not-allowed}
+.trees button:disabled{cursor:not-allowed}
+.trees button:disabled .pic{filter:grayscale(1);opacity:.3}
+.trees .lk{position:absolute;inset:0;display:grid;place-items:center}
 .hint{font-size:13px;color:var(--muted)}
-.shop{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
-.sh{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
-.sh .pc{width:84px;height:84px;cursor:pointer}
-.sh .w{font-family:var(--ff-head);font-weight:800}
-.sh .tr{font-size:13px;color:var(--muted)}
-.sh.locked .pc{filter:grayscale(1) brightness(.35);opacity:.6}
-.sh .btn{align-self:center}
 .modal{position:fixed;inset:0;z-index:60;background:rgba(28,36,86,.62);display:grid;place-items:center;padding:16px}
-.mcard{background:var(--card);border-radius:30px;padding:24px;max-width:380px;width:100%;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;animation:pop .4s cubic-bezier(.2,1.5,.4,1)}
+.mcard{background:var(--card);border-radius:30px;padding:24px;max-width:400px;width:100%;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;animation:pop .4s cubic-bezier(.2,1.5,.4,1);max-height:calc(100vh - 32px);overflow:auto}
 @keyframes pop{from{transform:scale(.5) rotate(-6deg);opacity:0}}
 .mcard .eb{font-family:var(--ff-head);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--pink)}
-.mcard .art{width:190px;height:190px}
+.mcard .art{width:180px;height:180px}
 .mcard .word{font-family:var(--ff-head);font-weight:900;font-size:30px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
 .say{border:0;background:var(--violet-soft);color:var(--violet);border-radius:50%;width:48px;height:48px;font-size:22px;cursor:pointer;flex:none}
 .mcard .trn{color:var(--muted);font-size:19px}
 .mcard .btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .mcard .btns .btn{align-self:auto}
-.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;z-index:80;max-width:90vw;text-align:center}
-.demo{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:40;background:#fff;border:1px dashed var(--violet);border-radius:16px;padding:8px 12px;font-size:13px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;box-shadow:0 8px 24px -14px rgba(60,30,120,.5);max-width:calc(100vw - 28px)}
-.demo b{font-family:var(--ff-head);color:var(--violet)}
-.demo label{display:flex;gap:6px;align-items:center;cursor:pointer}
-.demo button{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:4px 10px;font-weight:700;cursor:pointer}
-.demo select{font:inherit;font-weight:700;border-radius:8px;border:1px solid var(--line);padding:2px 4px}
-.list{display:grid;gap:10px}
-.empty-page{display:grid;place-items:center;text-align:center;gap:10px;padding:40px 10px;color:var(--muted)}
-/* телефон: меню снизу */
+.mcard.wide{max-width:520px;text-align:left;align-items:stretch}
+.ledger{display:flex;flex-direction:column;gap:2px;max-height:46vh;overflow:auto}
+.lrow{display:flex;align-items:center;gap:10px;padding:8px 6px;border-bottom:1px solid var(--line)}
+.lrow .ic{font-size:20px;width:28px;text-align:center}
+.lrow .w{flex:1;min-width:0}
+.lrow .w small{display:block;color:var(--muted)}
+.lrow .a{font-family:var(--ff-head);font-weight:900;font-variant-numeric:tabular-nums}
+.lrow .a.plus{color:var(--green)}.lrow .a.minus{color:var(--red)}
+.ctiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ct{background:var(--bg);border-radius:16px;padding:10px;text-align:center}
+.ct b{display:block;font-family:var(--ff-head);font-size:22px;font-variant-numeric:tabular-nums}
+.ct small{color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;z-index:80;max-width:90vw;text-align:center}
+.demo{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:40;background:#fff;border:2px dashed var(--violet);border-radius:18px;padding:8px;font-size:13px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;box-shadow:0 8px 24px -14px rgba(60,30,120,.5);max-width:calc(100vw - 28px)}
+.demo b{font-family:var(--ff-head);color:var(--violet);padding:0 4px}
+.demo .seg{border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:6px 10px;font-weight:800;cursor:pointer;font-family:var(--ff-head);font-size:12px}
+.demo .seg.on{background:var(--violet);color:#fff;border-color:var(--violet)}
+.demo .x{border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 8px;font-weight:700;cursor:pointer}
 .bnav{display:none}
-@media (max-width:820px){
+@media (max-width:860px){
   .app{grid-template-columns:1fr}
   .side{display:none}
   .top{padding:12px 16px}
-  .top h1{font-size:20px}
-  .page{padding:4px 16px 150px}
+  .top h1{font-size:19px}
+  .page{padding:4px 16px 190px}
   .bnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);border-top:1px solid var(--line);padding:6px max(8px,env(safe-area-inset-left,0px)) calc(6px + env(safe-area-inset-bottom,0px));justify-content:space-around}
   .bnav .nav{flex-direction:column;gap:2px;font-size:11px;padding:6px 8px;width:auto;text-align:center}
   .bnav .nav .ic{font-size:22px}
   .bnav .dot{right:2px;top:6px;transform:none;animation:none}
-  .demo{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+  .demo{bottom:calc(74px + env(safe-area-inset-bottom,0px));left:max(8px,env(safe-area-inset-left,0px));right:max(8px,env(safe-area-inset-right,0px))}
   .hero h2,.hero p{max-width:62%}
   .treebox{grid-template-columns:1fr}
-  .treearea{height:62vh}
+  .treearea{height:60vh;order:-1}
   .scene{aspect-ratio:3/4;max-height:none}
   .door{width:13%}
   .streak{display:none}
+  .legend{margin-left:0}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -160,7 +203,7 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
 <div class="app">
   <aside class="side" id="side"></aside>
   <div class="main">
-    <div class="top"><h1 id="ttl">Привет, Маша! 👋</h1><span class="streak">🔥 5 дней подряд</span><span class="coins" id="coins">🪙 52</span></div>
+    <div class="top"><h1 id="ttl">Привет, Маша! 👋</h1><span class="streak">🔥 5 дней подряд</span><button type="button" class="coins" id="coins" title="Мои монетки">🪙 0</button></div>
     <div class="page" id="page"></div>
   </div>
 </div>
@@ -170,46 +213,36 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
 <script>
 (function(){
 "use strict";
-/* ───────── картинки ───────── */
-var HAVE=['red_ball','blue_ball','green_ball','gold_ball','purple_ball','bell','star','candy_cane','snowflake','gingerbread','bow','pine_cone','garland','fairy_lights','tinsel','tree_pine','tree_gold','tree_snowy','heart','stocking','present','snowman','reindeer','mitten','top_star','gift1','gift2','gift3','gift4','gift5','gift6'];
+var HAVE=['red_ball','blue_ball','green_ball','gold_ball','purple_ball','silver_ball','bell','star','candy_cane','snowflake','gingerbread','bow','pine_cone','garland','fairy_lights','tinsel','tree_pine','tree_gold','tree_snowy','heart','stocking','present','snowman','reindeer','mitten','top_star','icicle','sweet','angel','cracker','clock','gift1','gift2','gift3','gift4','gift5','gift6'];
 var IMG={};HAVE.forEach(function(k){IMG[k]='img/'+k+'.webp';});
 function pic(k){return '<img class="pic" src="'+IMG[k]+'" alt="" draggable="false">';}
-/* заглушки для шести слов, картинки к которым ещё генерируются */
-function svg(b){return '<svg viewBox="0 0 100 100" class="pic" style="width:100%;height:100%">'+b+'</svg>';}
-var DRAW={
- silver_ball:function(){return svg('<rect x="42" y="6" width="16" height="12" rx="3" fill="#C9A24A"/><circle cx="50" cy="58" r="38" fill="#C9CED8"/><path d="M16 52q34 14 68 0" stroke="#fff" stroke-width="6" fill="none"/><circle cx="36" cy="44" r="9" fill="#fff" opacity=".5"/>');},
- icicle:function(){return svg('<path d="M30 10h40L54 92z" fill="#CFEFFF" stroke="#8CCBEA" stroke-width="3"/><path d="M40 16l10 50" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".8"/>');},
- sweet:function(){return svg('<path d="M26 50L6 34v32zM74 50l20-16v32z" fill="#F7628C"/><ellipse cx="50" cy="50" rx="26" ry="20" fill="#FF8FB0"/><path d="M34 40q16 20 32 0" stroke="#fff" stroke-width="5" fill="none"/>');},
- angel:function(){return svg('<ellipse cx="50" cy="12" rx="14" ry="5" fill="none" stroke="#FFD43B" stroke-width="4"/><path d="M50 40C30 20 8 32 14 58c14-2 26-8 36-18zM50 40c20-20 42-8 36 18-14-2-26-8-36-18z" fill="#E6F2FF" stroke="#B9D4F2" stroke-width="2"/><circle cx="50" cy="30" r="11" fill="#F6D2B5"/><path d="M36 90l14-50 14 50z" fill="#fff" stroke="#DDE" stroke-width="2"/>');},
- cracker:function(){return svg('<rect x="28" y="38" width="44" height="24" rx="6" fill="#1F8F62"/><path d="M28 40L8 30v40l20-10zM72 40l20-10v40L72 60z" fill="#E23B4E"/><path d="M40 38v24M60 38v24" stroke="#FFC83D" stroke-width="4"/>');},
- clock:function(){return svg('<circle cx="50" cy="52" r="38" fill="#FFD43B" stroke="#C99A1D" stroke-width="4"/><circle cx="50" cy="52" r="30" fill="#fff"/><path d="M50 52V28M50 52h14" stroke="#2B2140" stroke-width="5" stroke-linecap="round"/><circle cx="50" cy="12" r="5" fill="#C99A1D"/>');}
-};
-/* ───────── 31 окошко в порядке выпадения ───────── */
+
+/* 31 окошко: что выпадает по порядку открытия */
 var ITEMS=[
  {k:'tree_pine',w:'Christmas tree',t:'ёлка',tree:'pine'},
- {k:'red_ball',w:'red ball',t:'красный шар',p:1},
+ {k:'red_ball',w:'red ball',t:'красный шар',p:1,f:'ball'},
  {k:'star',w:'star',t:'звезда',p:2},
  {k:'bell',w:'bell',t:'колокольчик',p:1},
  {k:'garland',w:'garland',t:'гирлянда',p:2,wide:1},
  {k:'candy_cane',w:'candy cane',t:'леденец-тросточка',p:2},
  {k:'snowflake',w:'snowflake',t:'снежинка',p:2},
- {k:'blue_ball',w:'blue ball',t:'синий шар',p:1},
+ {k:'blue_ball',w:'blue ball',t:'синий шар',p:1,f:'ball'},
  {k:'gingerbread',w:'gingerbread man',t:'пряничный человечек',p:2},
  {k:'bow',w:'bow',t:'бантик',p:1},
  {k:'fairy_lights',w:'fairy lights',t:'гирлянда-огоньки',p:2,wide:1},
  {k:'pine_cone',w:'pine cone',t:'шишка',p:1},
- {k:'green_ball',w:'green ball',t:'зелёный шар',p:1},
+ {k:'green_ball',w:'green ball',t:'зелёный шар',p:1,f:'ball'},
  {k:'stocking',w:'stocking',t:'новогодний носок',p:2},
  {k:'present',w:'present',t:'подарок',p:2},
  {k:'tree_snowy',w:'snowy tree',t:'заснеженная ёлка',tree:'snowy'},
- {k:'gold_ball',w:'gold ball',t:'золотой шар',p:1},
+ {k:'gold_ball',w:'gold ball',t:'золотой шар',p:1,f:'ball'},
  {k:'tinsel',w:'tinsel',t:'мишура',p:2,wide:1},
  {k:'heart',w:'heart',t:'сердечко',p:1},
  {k:'snowman',w:'snowman',t:'снеговик',p:2},
- {k:'silver_ball',w:'silver ball',t:'серебряный шар',p:1},
+ {k:'silver_ball',w:'silver ball',t:'серебряный шар',p:1,f:'ball'},
  {k:'icicle',w:'icicle',t:'сосулька',p:1},
  {k:'reindeer',w:'reindeer',t:'олень',p:2},
- {k:'purple_ball',w:'purple ball',t:'фиолетовый шар',p:1},
+ {k:'purple_ball',w:'purple ball',t:'фиолетовый шар',p:1,f:'ball'},
  {k:'sweet',w:'sweet',t:'конфета',p:1},
  {k:'mitten',w:'mitten',t:'варежка',p:2},
  {k:'angel',w:'angel',t:'ангел',p:2},
@@ -220,29 +253,69 @@ var ITEMS=[
 ];
 var N=ITEMS.length;
 function byK(k){for(var i=0;i<N;i++)if(ITEMS[i].k===k)return ITEMS[i];return null;}
-function art(it){return IMG[it.k]?pic(it.k):DRAW[it.k]();}
-function treeArt(t){return pic('tree_'+t);}
+function art(it){return pic(it.k);}
+/* ячейки сундука: все шары — одна ячейка с выбором цвета, остальное — по одному */
+var BALLS=['red_ball','blue_ball','green_ball','gold_ball','purple_ball','silver_ball'];
+var CELLS=[{id:'ball',name:'Шары',items:BALLS}];
+ITEMS.forEach(function(it){if(!it.tree&&!it.f)CELLS.push({id:it.k,name:it.w,items:[it.k]});});
 
-/* ───────── состояние ───────── */
-var KEY='wow-cabinet-advent-v1',S;
-function fresh(){return {coins:60,opened:{},chest:{},placed:[],tree:'pine',page:'home',tab:'cal',demoAll:true,day:7,seen:false};}
-function load(){try{var r=localStorage.getItem(KEY);if(r){S=JSON.parse(r);return;}}catch(e){}S=fresh();}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+/* два варианта показа */
+function baseLog(){return [
+  {d:'1 ноя',ic:'💼',t:'Было на начало месяца',a:31,start:1},
+  {d:'4 ноя',ic:'📖',t:'Урок',s:'Super Minds 2',a:5},
+  {d:'5 ноя',ic:'📚',t:'Домашка сдана',s:'Unit 2 · Homework 6',a:3},
+  {d:'11 ноя',ic:'📖',t:'Урок',s:'Super Minds 2',a:5},
+  {d:'12 ноя',ic:'🎡',t:'Колесо удачи',s:'выпало: наклейки',a:-30},
+  {d:'18 ноя',ic:'📖',t:'Урок',s:'Super Minds 2',a:5},
+  {d:'19 ноя',ic:'⭐',t:'Активность на уроке',a:2},
+  {d:'25 ноя',ic:'📖',t:'Урок',s:'Super Minds 2',a:5},
+  {d:'26 ноя',ic:'📚',t:'Домашка сдана',s:'Unit 3 · Homework 1',a:3}
+];}
+function freshTest(){return {mode:'test',day:1,opened:{},chest:{},placed:[],tree:'pine',page:'home',tab:'cal',log:baseLog().concat([{d:'30 ноя',ic:'🎁',t:'Подарок к адвенту',a:31}])};}
+function freshMiss(){
+  var s={mode:'miss',day:20,opened:{},chest:{},placed:[],tree:'snowy',page:'home',tab:'cal',log:baseLog()};
+  var missed=[7,8,14,18,19],n=0;
+  for(var d=1;d<20;d++){if(missed.indexOf(d)>=0)continue;var it=ITEMS[n++];s.opened[d]={k:it.k};if(!it.tree)s.chest[it.k]=(s.chest[it.k]||0)+1;}
+  s.chest.red_ball+=2;s.chest.bell+=1;
+  s.log=s.log.concat([
+    {d:'2 дек',ic:'📖',t:'Урок',s:'Super Minds 2',a:5},
+    {d:'3 дек',ic:'🎄',t:'Украшение: red ball',s:'адвент-календарь',a:-1},
+    {d:'3 дек',ic:'🎄',t:'Украшение: red ball',s:'адвент-календарь',a:-1},
+    {d:'5 дек',ic:'🎄',t:'Украшение: bell',s:'адвент-календарь',a:-1},
+    {d:'9 дек',ic:'📖',t:'Урок',s:'Super Minds 2',a:5},
+    {d:'10 дек',ic:'📚',t:'Домашка сдана',s:'Unit 3 · Homework 4',a:3},
+    {d:'16 дек',ic:'📖',t:'Урок',s:'Super Minds 2',a:5},
+    {d:'17 дек',ic:'🎡',t:'Колесо удачи',s:'выпало: 10 монеток',a:-30},
+    {d:'17 дек',ic:'🎡',t:'Выигрыш на колесе',a:10}
+  ]);
+  var put=[['red_ball',38,52],['red_ball',62,66],['star',55,36],['bell',44,74],['garland',50,47],['candy_cane',30,70],['blue_ball',70,52],['snowflake',48,60],['gingerbread',58,80]];
+  put.forEach(function(p,i){if((s.chest[p[0]]||0)>0){s.chest[p[0]]--;s.placed.push({id:i+1,k:p[0],x:p[1],y:p[2]});}});
+  return s;
+}
+var KEY='wow-cabinet-advent-v2',ALL,S;
+function load(){try{var r=localStorage.getItem(KEY);if(r)ALL=JSON.parse(r);}catch(e){}
+  if(!ALL||!ALL.test||!ALL.miss)ALL={cur:'miss',test:freshTest(),miss:freshMiss()};S=ALL[ALL.cur];}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(ALL));}catch(e){}}
 load();
+
 var $=function(id){return document.getElementById(id);};
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function coins(){return S.log.reduce(function(a,r){return a+r.a;},0);}
 function nOpened(){return Object.keys(S.opened).length;}
-function canFree(){return S.demoAll?nOpened()<N:!S.opened[S.day];}
-function missed(){var m=[];for(var d=1;d<S.day;d++)if(!S.opened[d])m.push(d);return m;}
+function isTest(){return S.mode==='test';}
+function addLog(ic,t,a,s){S.log.push({d:isTest()?'сегодня':S.day+' дек',ic:ic,t:t,a:a,s:s||'адвент-календарь'});}
+function unlocked(k){for(var d in S.opened)if(S.opened[d].k===k)return true;return false;}
+function freeToday(){return isTest()?nOpened()<N:!S.opened[S.day];}
+function missedDays(){var m=[];if(isTest())return m;for(var d=1;d<S.day;d++)if(!S.opened[d])m.push(d);return m;}
 function say(w){try{var u=new SpeechSynthesisUtterance(w);u.lang='en-GB';u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
 var tt;function toast(m){var el=document.querySelector('.toast');if(!el){el=document.createElement('div');el.className='toast';document.body.appendChild(el);}el.textContent=m;el.hidden=false;clearTimeout(tt);tt=setTimeout(function(){el.hidden=true;},2300);}
 function word(it){say(it.w);toast(it.w+' — '+it.t);}
-function setCoins(n){S.coins=n;var c=$('coins');c.textContent='🪙 '+n;c.classList.add('bump');setTimeout(function(){c.classList.remove('bump');},220);}
+function showCoins(bump){var c=$('coins');c.textContent='🪙 '+coins();if(bump){c.classList.add('bump');setTimeout(function(){c.classList.remove('bump');},220);}}
+function spend(n,ic,t){if(coins()<n){toast('Нужно '+n+' 🪙, а у тебя '+coins()+'. Монетки дают за уроки и домашку 🙂');return false;}addLog(ic,t,-n);save();showCoins(true);return true;}
 
-/* ───────── меню ───────── */
 var MENU=[['home','🏠','Главная'],['hw','📚','Домашка'],['trainer','🎮','Тренажёр'],['sched','📅','Расписание'],['shopw','🎡','Колесо и призы'],['advent','🎄','Адвент']];
 function navHtml(compact){
-  return MENU.map(function(m){var x=m[0]==='advent';var badge=x&&canFree()?'<span class="dot">1</span>':'';
+  return MENU.map(function(m){var x=m[0]==='advent';var badge=x&&freeToday()?'<span class="dot">1</span>':'';
     if(compact&&m[0]==='shopw')return '';
     return '<button type="button" class="nav'+(x?' xmas':'')+(S.page===m[0]?' on':'')+'" data-p="'+m[0]+'"><span class="ic">'+m[1]+'</span><span>'+(compact&&x?'Ёлка':m[2])+'</span>'+badge+'</button>';}).join('');
 }
@@ -251,136 +324,190 @@ function renderNav(){
   $('bnav').innerHTML=navHtml(true);
   [].forEach.call(document.querySelectorAll('.nav'),function(b){b.onclick=function(){go(b.dataset.p);};});
 }
-function go(p){S.page=p;if(p==='advent'&&!S.tab)S.tab='cal';save();render();window.scrollTo(0,0);}
+function go(p){S.page=p;save();render();window.scrollTo(0,0);}
+function modal(html){var m=document.createElement('div');m.className='modal';m.innerHTML=html;document.body.appendChild(m);
+  m.onclick=function(e){if(e.target===m||e.target.hasAttribute('data-close'))m.remove();};return m;}
 
-/* ───────── страницы кабинета ───────── */
+/* монетки: остаток, заработано, потрачено, история */
+function coinsModal(){
+  var earned=0,spent=0;S.log.forEach(function(r){if(r.a>0&&!r.start)earned+=r.a;if(r.a<0)spent-=r.a;});
+  var rows=S.log.slice().reverse().map(function(r){return '<div class="lrow"><span class="ic">'+r.ic+'</span><div class="w"><b>'+esc(r.t)+'</b><small>'+esc(r.d)+(r.s?' · '+esc(r.s):'')+'</small></div><span class="a '+(r.a>0?'plus':'minus')+'">'+(r.a>0?'+':'−')+Math.abs(r.a)+'</span></div>';}).join('');
+  modal('<div class="mcard wide"><h3>🪙 Мои монетки</h3><div class="ctiles"><div class="ct"><b>'+coins()+'</b><small>сейчас</small></div><div class="ct"><b style="color:var(--green)">+'+earned+'</b><small>заработала</small></div><div class="ct"><b style="color:var(--red)">−'+spent+'</b><small>потратила</small></div></div>'+
+   '<p class="hint" style="margin:0">Монетки дают за уроки, сданную домашку и активность на уроке. Тратить можно на колесо удачи, сундучок-сюрприз и украшения для ёлки.</p>'+
+   '<div class="ledger">'+rows+'</div><div class="btns" style="justify-content:flex-end"><button type="button" class="btn" data-close>Закрыть</button></div></div>');
+}
+
 function renderHome(){
-  var today=canFree()?'<span class="new">✨ Новое окошко ждёт тебя!</span>':'<span class="pill p-green">Сегодняшнее окошко открыто ✓</span>';
+  var today=freeToday()?'<span class="new">✨ Новое окошко ждёт тебя!</span>':'<span class="pill p-green">Сегодняшнее окошко открыто ✓</span>';
+  var miss=missedDays().length?'<span class="pill p-coin">🎁 Пропущено окошек: '+missedDays().length+'</span>':'';
   $('page').innerHTML=
    '<div class="hero" id="hero" role="button" tabindex="0"><img class="tr" src="'+IMG['tree_'+S.tree]+'" alt="">'+
-   '<h2>🎄 Адвент-календарь</h2><p>Каждый день — новое украшение и новое английское слово. Укрась свою ёлку к Новому году!</p>'+today+'</div>'+
+   '<h2>🎄 Адвент-календарь</h2><p>Каждый день — новое украшение и новое английское слово. Укрась свою ёлку к Новому году!</p>'+today+miss+'</div>'+
    '<div class="grid">'+
    '<div class="card"><h3>📚 Домашка</h3>'+
-     '<div class="hw"><span class="em">📝</span><div><b>Unit 3 · Homework 4</b><span class="sub">My house</span></div></div><span class="pill p-pink">🔥 Сделать сегодня</span>'+
-     '<div class="hw"><span class="em">🎮</span><div><b>Тренажёр: Rooms</b><span class="sub">8 слов</span></div></div><span class="pill p-violet">⏰ К пятнице, 5 дек</span>'+
-     '<button type="button" class="btn" data-p="hw">Открыть</button></div>'+
-   '<div class="card"><h3>📅 Следующий урок</h3><div class="sub">Среда, 3 декабря · 17:00</div><div class="sub">Super Minds 2 · Анна Сергеевна</div><span class="pill p-violet">Через 2 дня</span><button type="button" class="btn ghost" data-p="sched">Расписание</button></div>'+
+     '<div class="hw"><span class="em">📝</span><div><b>Unit 3 · Homework 5</b><span class="sub">My town</span></div></div><span class="pill p-pink">🔥 Сделать сегодня</span>'+
+     '<div class="hw"><span class="em">🎮</span><div><b>Тренажёр: Places</b><span class="sub">8 слов</span></div></div><span class="pill p-violet">⏰ К пятнице</span>'+
+     '<button type="button" class="btn" data-go="hw">Открыть</button></div>'+
+   '<div class="card"><h3>🪙 Мои монетки</h3><div class="bigcoin">'+coins()+'</div><div class="sub">За уроки, домашку и активность</div><button type="button" class="btn ghost" id="coinCard">Откуда пришли и куда ушли</button></div>'+
+   '<div class="card"><h3>📅 Следующий урок</h3><div class="sub">Среда · 17:00</div><div class="sub">Super Minds 2 · Анна Сергеевна</div><span class="pill p-violet">Через 2 дня</span><button type="button" class="btn ghost" data-go="sched">Расписание</button></div>'+
    '<div class="card"><h3>🎡 Колесо удачи</h3><div class="wheel" aria-hidden="true"></div><div class="sub">Крути колесо и выигрывай призы</div><span class="pill p-coin">🪙 30</span></div>'+
-   '<div class="card"><h3>🏆 Мои успехи</h3><div class="sub">Сделано домашек в ноябре: 9 из 10</div><div class="sub">Новых слов: 64</div><span class="pill p-green">Отлично!</span></div>'+
    '</div>';
   var h=$('hero');h.onclick=function(){go('advent');};h.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go('advent');}};
-  [].forEach.call(document.querySelectorAll('[data-p]'),function(b){if(b.classList.contains('btn'))b.onclick=function(){go(b.dataset.p);};});
+  $('coinCard').onclick=coinsModal;
+  [].forEach.call(document.querySelectorAll('[data-go]'),function(b){b.onclick=function(){go(b.dataset.go);};});
 }
 function renderStub(p){
-  var t={hw:['📚','Домашка','Unit 3 · Homework 4 — сделать сегодня','Тренажёр: Rooms — к пятнице'],trainer:['🎮','Тренажёр','Колоды твоего учебника','Rooms · Toys · Food'],sched:['📅','Расписание','Ср, 3 дек · 17:00 — Super Minds 2','Пт, 5 дек · 17:00 — Super Minds 2'],shopw:['🎡','Колесо и призы','Колесо удачи — 🪙 30','Сундучок-сюрприз — 🪙 70']}[p];
-  $('page').innerHTML='<div class="list"><div class="card"><h3>'+t[0]+' '+t[1]+'</h3><div class="hw"><span class="em">'+t[0]+'</span><div><b>'+t[2]+'</b></div></div><div class="hw"><span class="em">'+t[0]+'</span><div><b>'+t[3]+'</b></div></div><p class="sub">Это часть кабинета, она уже есть. В показе — для вида.</p></div>'+
-   '<div class="hero" id="hero" role="button" tabindex="0" style="min-height:120px"><img class="tr" src="'+IMG['tree_'+S.tree]+'" alt=""><h2>🎄 Загляни в адвент-календарь</h2>'+(canFree()?'<span class="new">✨ Новое окошко!</span>':'')+'</div></div>';
-  var h=$('hero');h.onclick=function(){go('advent');};
+  var t={hw:['📚','Домашка','Unit 3 · Homework 5 — сделать сегодня','Тренажёр: Places — к пятнице'],trainer:['🎮','Тренажёр','Колоды твоего учебника','Rooms · Toys · Places'],sched:['📅','Расписание','Среда · 17:00 — Super Minds 2','Пятница · 17:00 — Super Minds 2'],shopw:['🎡','Колесо и призы','Колесо удачи — 🪙 30','Сундучок-сюрприз — 🪙 70']}[p];
+  $('page').innerHTML='<div class="card"><h3>'+t[0]+' '+t[1]+'</h3><div class="hw"><span class="em">'+t[0]+'</span><div><b>'+t[2]+'</b></div></div><div class="hw"><span class="em">'+t[0]+'</span><div><b>'+t[3]+'</b></div></div><p class="sub">Этот раздел в кабинете уже есть — здесь он для вида.</p></div>';
 }
 
-/* ───────── адвент ───────── */
+/* адвент */
 function renderAdvent(){
-  var msg;
-  if(nOpened()>=N)msg='Все 31 окошко открыто! С Новым годом! 🎉';
-  else if(S.demoAll)msg='Открыто '+nOpened()+' из 31 · в показе можно открывать все';
-  else if(!S.opened[S.day])msg='Сегодня, '+S.day+' декабря: 1 окошко бесплатно'+(missed().length?' · пропущено '+missed().length+' — по 🪙 5':'');
-  else msg=missed().length?'Пропущено дней: '+missed().length+' — каждое за 🪙 5':'Новое окошко — завтра ⭐';
-  $('page').innerHTML='<div class="adv-tabs">'+
-    ['cal:🗓 Календарь','tree:🎄 Моя ёлка','shop:🛍 Магазин украшений'].map(function(x){x=x.split(':');return '<button type="button" data-t="'+x[0]+'" class="'+(S.tab===x[0]?'on':'')+'">'+x[1]+'</button>';}).join('')+
-    '<span class="msg">'+msg+'</span></div><div id="adv"></div>';
+  var m=missedDays(),bar;
+  if(isTest())bar='<span class="date">🧪 Тестовый вариант</span><span class="hint">Можно открыть все 31 окошко подряд. Открыто: '+nOpened()+' из 31</span>';
+  else bar='<span class="date">📅 Сегодня '+S.day+' декабря</span>'+(S.opened[S.day]?'<span class="pill p-green">Сегодняшнее окошко открыто ✓</span>':'<span class="pill p-pink">Сегодняшнее окошко — бесплатно</span>')+(m.length?'<span class="pill p-coin">Пропущено: '+m.length+' · по 🪙 5</span>':'')+
+    '<span class="legend"><span><i class="lg" style="background:var(--pink)"></i>сегодня</span><span><i class="lg" style="background:#9AA0B8"></i>пропущено — можно открыть за 🪙 5</span><span><i class="lg" style="background:#E6E9F5"></i>ещё рано 🔒</span></span>';
+  $('page').innerHTML='<div class="adv-tabs">'+['cal:🗓 Календарь','tree:🎄 Моя ёлка и сундук'].map(function(x){x=x.split(':');return '<button type="button" data-t="'+x[0]+'" class="'+(S.tab===x[0]?'on':'')+'">'+x[1]+'</button>';}).join('')+'</div>'+
+    '<div class="today">'+bar+'</div><div id="adv"></div>';
   [].forEach.call(document.querySelectorAll('.adv-tabs button'),function(b){b.onclick=function(){S.tab=b.dataset.t;save();render();};});
-  if(S.tab==='tree')renderTree();else if(S.tab==='shop')renderShop();else renderCal();
+  if(S.tab==='tree')renderTree();else renderCal();
 }
-var POS=(function(){var rows=[7,6,7,6,5],ys=[14,31,48,65,84],o=[],j=[0,3,-2,4,-3,2,-1];
+var SPOT=(function(){var rows=[7,6,7,6,5],ys=[13,31,49,67,86],o=[],j=[0,1,-1,1,-1,1,0];
   rows.forEach(function(n,ri){for(var c=0;c<n;c++){var last=ri===rows.length-1;var x=last?(c+0.5)/n*80+10:(c+0.5)/n*100*(n<7?0.86:0.94)+(n<7?7:3);o.push([x,last?ys[ri]:ys[ri]+j[(c+ri)%7]]);}});return o;})();
+var ORDER=[12,3,27,19,8,30,1,15,23,6,10,25,17,2,29,21,5,14,9,26,11,31,4,18,24,7,20,13,28,16,22]; // какой день на каком месте — вразброс
 function renderCal(){
-  var used={};Object.keys(S.opened).forEach(function(d){used[S.opened[d].door]=S.opened[d].k;});
-  var h='<div class="scene" id="scene"><div class="snowfall"></div>';
-  for(var i=0;i<N;i++){var p=POS[i],k=used[i];
-    h+='<button type="button" class="door" data-i="'+i+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-label="'+(k?esc(byK(k).w):'Закрытое окошко')+'">'+(k?'<span class="dopen">'+art(byK(k))+'</span>':pic('gift'+(i%6+1)))+'</button>';}
+  var h='<div class="scene"><div class="snowfall"></div>';
+  ORDER.forEach(function(d,i){var p=SPOT[i],o=S.opened[d],st;
+    if(o)st='open';else if(isTest())st='avail';else if(d===S.day)st='today';else if(d<S.day)st='missed';else st='future';
+    var inner=o?'<span class="dopen">'+art(byK(o.k))+'</span>':pic('gift'+(d%6+1));
+    if(st==='missed')inner+='<span class="coinb">🪙 5</span>';
+    if(st==='future')inner+='<span class="lock">🔒</span>';
+    var lab=o?byK(o.k).w:st==='today'?'Сегодня, '+d+' декабря':st==='missed'?d+' декабря — пропущено, открыть за 5 монеток':st==='future'?d+' декабря — ещё рано':d+' декабря';
+    h+='<button type="button" class="door '+st+'" data-d="'+d+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-label="'+esc(lab)+'">'+inner+'<span class="num">'+d+'</span></button>';});
   $('adv').innerHTML=h+'</div>';
-  [].forEach.call(document.querySelectorAll('.door'),function(b){b.onclick=function(){var i=+b.dataset.i;if(used[i]){word(byK(used[i]));return;}tryOpen(i,b);};});
+  [].forEach.call(document.querySelectorAll('.door'),function(b){b.onclick=function(){doorClick(+b.dataset.d,b);};});
 }
-function tryOpen(i,b){
-  if(nOpened()>=N)return;
-  if(S.demoAll)return doOpen(i,nOpened()+1,b);
-  if(!S.opened[S.day])return doOpen(i,S.day,b);
-  var m=missed();if(!m.length){b.classList.add('shake');setTimeout(function(){b.classList.remove('shake');},500);toast('Новое окошко откроется завтра ⭐');return;}
-  ask('Открыть пропущенный '+m[0]+' декабря за 🪙 5?',function(){if(S.coins<5){toast('Нужно 5 монеток, у тебя '+S.coins);return;}setCoins(S.coins-5);doOpen(i,m[0],b);});
+function shake(b){b.classList.add('shake');setTimeout(function(){b.classList.remove('shake');},500);}
+function doorClick(d,b){
+  var o=S.opened[d];if(o){word(byK(o.k));return;}
+  if(isTest()||d===S.day)return openDay(d,b);
+  if(d>S.day){shake(b);toast('Это окошко откроется '+d+' декабря ⭐');return;}
+  var m=modal('<div class="mcard"><div class="art" style="width:120px;height:120px;filter:grayscale(.8)">'+pic('gift'+(d%6+1))+'</div><h3>'+d+' декабря — этот день уже прошёл</h3>'+
+    '<p class="hint" style="margin:0">Ты в этот день не заходила, и окошко осталось закрытым. Его можно открыть сейчас за 5 монеток. Сегодняшнее окошко всегда бесплатное.</p>'+
+    '<p style="margin:0"><b>У тебя: 🪙 '+coins()+'</b></p><div class="btns"><button type="button" class="btn pink" id="buyDay"'+(coins()<5?' disabled':'')+'>Открыть за 🪙 5</button><button type="button" class="btn ghost" data-close>Не сейчас</button></div>'+
+    (coins()<5?'<p class="hint" style="margin:0">Не хватает монеток — их дают за уроки и домашку.</p>':'')+'</div>');
+  var bb=m.querySelector('#buyDay');if(bb)bb.onclick=function(){m.remove();if(spend(5,'🎁','Пропущенное окошко: '+d+' декабря'))openDay(d,b);};
 }
-function doOpen(i,d,b){
-  var it=ITEMS[nOpened()];   // что внутри — по порядку месяца, а не по выбранному подарку
-  b.classList.add('shake');
+function openDay(d,b){
+  var it=ITEMS[nOpened()];   // что внутри — по порядку месяца: первой всегда ёлка, последней — звезда
+  shake(b);
   setTimeout(function(){
-    S.opened[d]={k:it.k,door:i};
+    S.opened[d]={k:it.k};
     if(it.tree)S.tree=it.tree;else S.chest[it.k]=(S.chest[it.k]||0)+1;
     save();renderNav();renderAdvent();
-    var tree=!!it.tree;
-    card(it,tree?'Поставить ёлку 🎄':'Положить в сундук 🧰',tree?'Ёлка поменялась — посмотри!':it.top?'Повесь её на самый верх!':'Повесь на ёлку!',function(){if(tree||it.top){S.tab='tree';save();render();}});
+    var m=modal('<div class="mcard" role="dialog"><div class="eb">'+(it.tree?'Новая ёлка!':it.top?'Последнее окошко! С Новым годом!':'Новое украшение!')+'</div><div class="art">'+art(it)+'</div>'+
+      '<div class="word">'+esc(it.w)+'<button type="button" class="say" aria-label="Послушать">🔊</button></div><div class="trn">'+esc(it.t)+'</div>'+
+      '<div class="hint">'+(it.tree?'Ёлка поменялась — посмотри!':it.top?'Повесь её на самую макушку!':'Украшение уже в сундуке 🧰'+(it.p?' Ещё такие — по 🪙 '+it.p:''))+'</div>'+
+      '<div class="btns"><button type="button" class="btn pink" id="toTree">К ёлке 🎄</button><button type="button" class="btn ghost" data-close>Ещё окошки</button></div></div>');
+    say(it.w);m.querySelector('.say').onclick=function(){say(it.w);};
+    m.querySelector('#toTree').onclick=function(){m.remove();S.tab='tree';save();render();};
   },350);
-}
-function card(it,btn,sub,after){
-  var m=document.createElement('div');m.className='modal';
-  m.innerHTML='<div class="mcard" role="dialog" aria-label="'+esc(it.w)+'"><div class="eb">'+(it.tree?'Новая ёлка!':it.top?'Последнее окошко!':'Новое украшение!')+'</div><div class="art">'+(it.tree?treeArt(it.tree):art(it))+'</div>'+
-   '<div class="word">'+esc(it.w)+'<button type="button" class="say" aria-label="Послушать">🔊</button></div><div class="trn">'+esc(it.t)+'</div><div class="hint">'+sub+'</div>'+
-   '<div class="btns"><button type="button" class="btn pink" id="mOk">'+btn+'</button>'+(it.tree?'':'<button type="button" class="btn ghost" id="mTree">К ёлке</button>')+'</div></div>';
-  document.body.appendChild(m);say(it.w);
-  m.querySelector('.say').onclick=function(){say(it.w);};
-  var close=function(){m.remove();if(after)after();};
-  m.querySelector('#mOk').onclick=close;
-  var t=m.querySelector('#mTree');if(t)t.onclick=function(){m.remove();S.tab='tree';save();render();};
-  m.onclick=function(e){if(e.target===m)close();};
-  m.querySelector('#mOk').focus();
-}
-function ask(text,yes){
-  var m=document.createElement('div');m.className='modal';
-  m.innerHTML='<div class="mcard"><h3>'+text+'</h3><div class="btns"><button type="button" class="btn" id="cY">Да</button><button type="button" class="btn ghost" id="cN">Нет</button></div></div>';
-  document.body.appendChild(m);m.querySelector('#cY').onclick=function(){m.remove();yes();};m.querySelector('#cN').onclick=function(){m.remove();};m.querySelector('#cY').focus();
 }
 
 /* ёлка и сундук */
-var sel=null;
+var openCell=null,curPick={};
+function cellOf(id){return CELLS.filter(function(x){return x.id===id;})[0];}
 function renderTree(){
   var has={pine:true};Object.keys(S.opened).forEach(function(d){var it=byK(S.opened[d].k);if(it.tree)has[it.tree]=true;});
-  var inChest=ITEMS.filter(function(it){return !it.tree&&S.chest[it.k]!==undefined;});
-  var h='<div class="treebox"><div class="treearea" id="area"><div class="snowfall"></div><div class="tree">'+treeArt(S.tree)+'</div></div><div class="chest">'+
-   '<h3>🧰 Мой сундук</h3><p class="hint">Перетащи украшение на ёлку. Нажми — услышишь слово. Чтобы снять игрушку с ёлки, перетащи её сюда или нажми на неё → «В сундук».</p><div class="chest-grid" id="chest">';
-  if(!inChest.length)h+='<p class="hint">Пока пусто — открой окошко в календаре 🎁</p>';
-  inChest.forEach(function(it){var c=S.chest[it.k]||0;h+='<div class="slot'+(c?'':' empty')+'" data-k="'+it.k+'" tabindex="0" title="'+esc(it.w)+'">'+art(it)+'<span class="cnt">'+c+'</span></div>';});
-  h+='</div><h3>Моя ёлка</h3><div class="trees">'+['pine','snowy','gold'].map(function(t){return '<button type="button" data-tree="'+t+'" class="'+(S.tree===t?'on':'')+'" '+(has[t]?'':'disabled title="Выпадет в календаре"')+'>'+treeArt(t)+'</button>';}).join('')+'</div>'+
-   '<div class="btns" style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn ghost" id="allBack">Снять всё в сундук</button><button type="button" class="btn ghost" data-go="shop">🛍 Докупить украшения</button></div></div></div>';
+  var h='<div class="treebox"><div class="chest" id="chestBox"><div class="chest-head"><h3>🧰 Мой сундук</h3><span class="pill p-coin">🪙 '+coins()+'</span></div>'+
+   '<p class="hint" style="margin:0">Наведи на украшение — увидишь все цвета. Яркие — твои, их можно тянуть на ёлку. Серые — ещё не купленные. С замком — откроются в календаре.</p><div class="chest-grid" id="chest">';
+  CELLS.forEach(function(c){
+    var own=0,ever=0,unl=false;c.items.forEach(function(k){own+=S.chest[k]||0;ever+=(S.chest[k]||0)+onTree(k);if(unlocked(k))unl=true;});
+    var rep=pickOf(c)||c.items.filter(unlocked)[0]||c.items[0];
+    var st=ever>0?'own':unl?'none':'locked';
+    var nm=c.items.length>1?c.name:(st==='locked'?'???':c.name);
+    h+='<div class="slot '+st+(openCell===c.id?' open':'')+'" data-c="'+c.id+'" tabindex="0" aria-label="'+esc(nm)+'">'+art(byK(rep))+
+      (st==='own'?'<span class="cnt">'+(own||'🎄')+'</span>':st==='none'?'<span class="cnt">🪙</span>':'')+'<span class="nm">'+esc(nm)+'</span></div>';});
+  h+='</div><h3>Моя ёлка</h3><div class="trees">'+['pine','snowy','gold'].map(function(t){return '<button type="button" data-tree="'+t+'" class="'+(S.tree===t?'on':'')+'" '+(has[t]?'':'disabled title="Выпадет в календаре"')+' aria-label="Ёлка">'+pic('tree_'+t)+(has[t]?'':'<span class="lk">🔒</span>')+'</button>';}).join('')+'</div>'+
+   '<div><button type="button" class="btn ghost sm" id="allBack">Снять всё в сундук</button></div></div>'+
+   '<div class="treearea" id="area"><div class="snowfall"></div><div class="tree">'+pic('tree_'+S.tree)+'</div></div></div>';
   $('adv').innerHTML=h;
   var area=$('area');
   S.placed.forEach(function(pl){addPlaced(area,pl);});
-  area.addEventListener('pointerdown',function(e){if(e.target===area||e.target.closest('.tree')){sel=null;clearTool();}});
-  [].forEach.call(document.querySelectorAll('.trees button'),function(b){b.onclick=function(){S.tree=b.dataset.tree;save();renderTree();renderNav();};});
-  $('allBack').onclick=function(){if(!S.placed.length){toast('На ёлке пока ничего нет');return;}ask('Снять все украшения с ёлки в сундук?',function(){S.placed.forEach(function(p){S.chest[p.k]=(S.chest[p.k]||0)+1;});S.placed=[];save();renderTree();});};
-  document.querySelector('[data-go=shop]').onclick=function(){S.tab='shop';save();render();};
-  [].forEach.call(document.querySelectorAll('.slot'),function(sl){var it=byK(sl.dataset.k);
-    drag(sl,{ok:function(){if((S.chest[it.k]||0)>0)return true;toast('Закончились — докупи в магазине 🛍');return false;},ghost:art(it),tap:function(){word(it);},
-      drop:function(x,y){var r=area.getBoundingClientRect();if(x<r.left||x>r.right||y<r.top||y>r.bottom)return;
-        var pl={id:Date.now(),k:it.k,x:cl((x-r.left)/r.width*100),y:cl((y-r.top)/r.height*100)};
-        if(it.top){S.placed=S.placed.filter(function(p){if(byK(p.k).top){S.chest[p.k]=(S.chest[p.k]||0)+1;return false;}return true;});pl.x=50;pl.y=9;}
-        S.chest[it.k]--;S.placed.push(pl);save();renderTree();say(it.w);}});
-    sl.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();word(it);}};
+  area.addEventListener('pointerdown',function(e){if(e.target===area||e.target.closest('.tree'))clearTool();});
+  [].forEach.call(document.querySelectorAll('.trees button'),function(b){b.onclick=function(){S.tree=b.dataset.tree;save();renderTree();};});
+  $('allBack').onclick=function(){if(!S.placed.length){toast('На ёлке пока ничего нет');return;}
+    var m=modal('<div class="mcard"><h3>Снять все украшения с ёлки?</h3><p class="hint" style="margin:0">Они вернутся в сундук, ничего не пропадёт.</p><div class="btns"><button type="button" class="btn" id="y">Снять</button><button type="button" class="btn ghost" data-close>Нет</button></div></div>');
+    m.querySelector('#y').onclick=function(){m.remove();S.placed.forEach(function(p){S.chest[p.k]=(S.chest[p.k]||0)+1;});S.placed=[];save();renderTree();};};
+  var hover=window.matchMedia('(hover:hover)').matches;
+  [].forEach.call(document.querySelectorAll('.slot'),function(sl){
+    var c=cellOf(sl.dataset.c);
+    if(hover)sl.addEventListener('mouseenter',function(){if(openCell!==c.id)openPop(c,sl);});
+    drag(sl,{ok:function(){if(pickOf(c))return true;openPop(c,sl,true);return false;},ghost:function(){return art(byK(pickOf(c)));},
+      tap:function(){openPop(c,sl,true);var k=pickOf(c)||c.items.filter(unlocked)[0];if(k)word(byK(k));else toast('Это украшение ещё не выпало — открывай окошки 🎁');},
+      drop:function(x,y){placeAt(pickOf(c),x,y);}});
+    sl.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openPop(c,sl,true);}};
   });
+  if(openCell){var sl=document.querySelector('.slot[data-c="'+openCell+'"]');if(sl)openPop(cellOf(openCell),sl,true);}
 }
+function onTree(k){return S.placed.filter(function(p){return p.k===k;}).length;}
+function pickOf(c){var k=curPick[c.id];if(k&&(S.chest[k]||0)>0)return k;for(var i=0;i<c.items.length;i++)if((S.chest[c.items[i]]||0)>0)return c.items[i];return null;}
+function placeAt(k,x,y){
+  if(!k)return;var it=byK(k),area=$('area'),r=area.getBoundingClientRect();
+  if(x<r.left||x>r.right||y<r.top||y>r.bottom)return;
+  var pl={id:Date.now(),k:k,x:cl((x-r.left)/r.width*100),y:cl((y-r.top)/r.height*100)};
+  if(it.top){S.placed=S.placed.filter(function(p){if(byK(p.k).top){S.chest[p.k]=(S.chest[p.k]||0)+1;return false;}return true;});pl.x=50;pl.y=9;}
+  S.chest[k]--;S.placed.push(pl);save();renderTree();say(it.w);
+}
+/* окошко над ячейкой: все цвета; свои — яркие, некупленные — серые, невыпавшие — с замком */
+function openPop(c,sl,sticky){
+  var old=document.querySelector('.pop');if(old)old.remove();openCell=c.id;
+  [].forEach.call(document.querySelectorAll('.slot.open'),function(e){e.classList.remove('open');});sl.classList.add('open');
+  var box=$('chestBox'),pop=document.createElement('div');pop.className='pop';
+  if(!curPick[c.id]||c.items.indexOf(curPick[c.id])<0)curPick[c.id]=pickOf(c)||c.items.filter(unlocked)[0]||c.items[0];
+  function sws(){return c.items.map(function(k){var n=S.chest[k]||0,ot=onTree(k),u=unlocked(k),cls=n+ot>0?'own':u?'not':'lockd';
+    return '<div class="swi '+cls+(k===curPick[c.id]?' cur':'')+'" data-k="'+k+'" title="'+esc(u?byK(k).w:'ещё не выпало')+'">'+art(byK(k))+(n>0?'<span class="c">'+n+'</span>':ot>0?'<span class="c">🎄</span>':u?'<span class="c">🪙'+byK(k).p+'</span>':'')+'</div>';}).join('');}
+  pop.innerHTML='<h4>'+esc(c.items.length>1?c.name+' — все цвета':(unlocked(c.items[0])?byK(c.items[0]).w:'Пока секрет 🤫'))+'</h4><div class="sw" id="sw">'+sws()+'</div><div class="act" id="act"></div>';
+  box.appendChild(pop);
+  var bR=box.getBoundingClientRect(),sR=sl.getBoundingClientRect();
+  var top=sR.top-bR.top-pop.offsetHeight-12,below=false;if(top<4){top=sR.bottom-bR.top+12;below=true;}
+  pop.style.top=top+'px';if(below)pop.classList.add('below');
+  var left=Math.max(4,Math.min(sR.left-bR.left-10,bR.width-pop.offsetWidth-4));pop.style.left=left+'px';
+  pop.style.setProperty('--ax',(sR.left-bR.left-left+sR.width/2-8)+'px');
+  function act(){var k=curPick[c.id],it=byK(k),n=S.chest[k]||0,u=unlocked(k),a=pop.querySelector('#act');
+    if(!u){a.innerHTML='<span class="t">🔒 Это украшение ещё не выпало. Открывай окошки в календаре — оно там есть!</span>';return;}
+    a.innerHTML='<button type="button" class="mini-say" aria-label="Послушать">🔊</button><div class="t"><b>'+esc(it.w)+'</b> — '+esc(it.t)+'<br>в сундуке: '+n+(onTree(k)?' · на ёлке: '+onTree(k):'')+(n?' · тяни на ёлку':'')+'</div>'+(it.p?'<button type="button" class="btn sm" id="buy">'+(n?'Ещё одну':'Купить')+' · 🪙 '+it.p+'</button>':'');
+    a.querySelector('.mini-say').onclick=function(){say(it.w);};
+    var b=a.querySelector('#buy');if(b)b.onclick=function(){if(!spend(it.p,'🎄','Украшение: '+it.w))return;S.chest[k]=(S.chest[k]||0)+1;save();say(it.w);toast(it.w+' — в сундуке 🧰 (−'+it.p+' 🪙)');renderTree();};
+  }
+  act();
+  [].forEach.call(pop.querySelectorAll('.swi'),function(s){var k=s.dataset.k;
+    drag(s,{ok:function(){return (S.chest[k]||0)>0;},ghost:function(){return art(byK(k));},
+      tap:function(){curPick[c.id]=k;[].forEach.call(pop.querySelectorAll('.swi'),function(e){e.classList.toggle('cur',e===s);});act();if(unlocked(k))say(byK(k).w);},
+      drop:function(x,y){curPick[c.id]=k;placeAt(k,x,y);}});});
+  if(!sticky&&window.matchMedia('(hover:hover)').matches){
+    var leave=function(e){var to=e.relatedTarget;if(to&&(pop.contains(to)||sl.contains(to)))return;closePop();};
+    pop.addEventListener('mouseleave',leave);sl.addEventListener('mouseleave',leave,{once:true});}
+}
+function closePop(){var p=document.querySelector('.pop');if(p)p.remove();openCell=null;[].forEach.call(document.querySelectorAll('.slot.open'),function(e){e.classList.remove('open');});}
+document.addEventListener('pointerdown',function(e){if(!e.target.closest('.pop')&&!e.target.closest('.slot')&&!e.target.closest('.modal'))closePop();});
 function cl(v){return Math.max(4,Math.min(96,v));}
 function clearTool(){var t=document.querySelector('.tool');if(t)t.remove();[].forEach.call(document.querySelectorAll('.placed.sel'),function(e){e.classList.remove('sel');});}
-function toChest(pl){S.placed=S.placed.filter(function(p){return p.id!==pl.id;});S.chest[pl.k]=(S.chest[pl.k]||0)+1;save();sel=null;renderTree();toast(byK(pl.k).w+' — в сундуке 🧰');}
+function toChest(pl){S.placed=S.placed.filter(function(p){return p.id!==pl.id;});S.chest[pl.k]=(S.chest[pl.k]||0)+1;save();renderTree();toast(byK(pl.k).w+' — в сундуке 🧰');}
 function addPlaced(area,pl){
   var it=byK(pl.k),el=document.createElement('div');
   el.className='placed'+(it.wide?' wide':'')+(it.top?' top':'');el.style.left=pl.x+'%';el.style.top=pl.y+'%';el.innerHTML=art(it);el.setAttribute('aria-label',it.w);
   area.appendChild(el);
   drag(el,{ok:function(){clearTool();return true;},move:true,
-    tap:function(){word(it);clearTool();el.classList.add('sel');sel=pl.id;
-      var t=document.createElement('div');t.className='tool';t.style.left=pl.x+'%';t.style.top='calc('+pl.y+'% + 34px)';
+    tap:function(){word(it);clearTool();el.classList.add('sel');
+      var t=document.createElement('div');t.className='tool';t.style.left=pl.x+'%';t.style.top='calc('+pl.y+'% + 38px)';
       t.innerHTML='<button type="button">🔊 '+esc(it.w)+'</button><button type="button">↩ В сундук</button>';
       area.appendChild(t);var bs=t.querySelectorAll('button');bs[0].onclick=function(){say(it.w);};bs[1].onclick=function(){toChest(pl);};},
     drop:function(x,y){var r=area.getBoundingClientRect();
       if(x<r.left||x>r.right||y<r.top||y>r.bottom){toChest(pl);return;}
       pl.x=cl((x-r.left)/r.width*100);pl.y=cl((y-r.top)/r.height*100);if(it.top){pl.x=50;pl.y=9;}save();renderTree();}});
 }
+/* перетаскивание пальцем и мышью: Pointer Events, призрак у курсора */
 function drag(el,o){
   el.addEventListener('pointerdown',function(e){
     if(e.button>0)return;e.stopPropagation();var sx=e.clientX,sy=e.clientY,moved=false,g=null,dead=false;
@@ -388,7 +515,7 @@ function drag(el,o){
     function mv(ev){
       if(dead)return;if(!moved&&Math.hypot(ev.clientX-sx,ev.clientY-sy)<6)return;
       if(!moved){if(!o.ok()){dead=true;return;}moved=true;
-        if(o.move)el.classList.add('dragging');else{g=document.createElement('div');g.className='dragghost';g.innerHTML=o.ghost;document.body.appendChild(g);}}
+        if(o.move)el.classList.add('dragging');else{g=document.createElement('div');g.className='dragghost';g.innerHTML=o.ghost();document.body.appendChild(g);closePop();}}
       if(o.move){var r=el.parentNode.getBoundingClientRect();el.style.left=((ev.clientX-r.left)/r.width*100)+'%';el.style.top=((ev.clientY-r.top)/r.height*100)+'%';}
       else{g.style.left=ev.clientX+'px';g.style.top=ev.clientY+'px';}
     }
@@ -399,41 +526,21 @@ function drag(el,o){
   });
 }
 
-/* магазин */
-function renderShop(){
-  var got={};Object.keys(S.opened).forEach(function(d){got[S.opened[d].k]=true;});
-  var h='<p class="hint" style="margin-bottom:12px">Купить можно только те украшения, которые уже выпали в календаре. Нажми на картинку — услышишь слово.</p><div class="shop">';
-  ITEMS.forEach(function(it){if(it.tree||it.top)return;var ok=got[it.k];
-    h+='<div class="sh'+(ok?'':' locked')+'"><div class="pc" data-k="'+it.k+'">'+art(it)+'</div>'+
-     (ok?'<div class="w">'+esc(it.w)+'</div><div class="tr">'+esc(it.t)+' · в сундуке: '+(S.chest[it.k]||0)+'</div><button type="button" class="btn" data-buy="'+it.k+'">Купить · 🪙 '+it.p+'</button>'
-        :'<div class="w">???</div><div class="tr">🔒 откроется в календаре</div>')+'</div>';});
-  $('adv').innerHTML=h+'</div>';
-  [].forEach.call(document.querySelectorAll('.sh .pc'),function(p){p.onclick=function(){if(got[p.dataset.k])word(byK(p.dataset.k));else toast('Сначала открой его в календаре 🎁');};});
-  [].forEach.call(document.querySelectorAll('[data-buy]'),function(b){b.onclick=function(){var it=byK(b.dataset.buy);
-    if(S.coins<it.p){toast('Нужно '+it.p+' 🪙, у тебя '+S.coins);return;}
-    setCoins(S.coins-it.p);S.chest[it.k]=(S.chest[it.k]||0)+1;save();say(it.w);toast(it.w+' — в сундуке 🧰');renderShop();};});
-}
-
-/* ───────── панель показа ───────── */
+/* переключатель вариантов показа */
 function renderDemo(){
-  var days='';for(var d=1;d<=31;d++)days+='<option value="'+d+'"'+(S.day===d?' selected':'')+'>'+d+'</option>';
-  $('demo').innerHTML='<b>Показ</b><label><input type="checkbox" id="dAll" '+(S.demoAll?'checked':'')+'> открывать все окошки</label>'+
-   (S.demoAll?'':'<label>сегодня <select id="dDay">'+days+'</select> дек</label>')+
-   '<button type="button" id="dCoins">+50 🪙</button><button type="button" id="dReset">Сначала</button>';
-  $('dAll').onchange=function(){S.demoAll=this.checked;save();render();};
-  var dd=$('dDay');if(dd)dd.onchange=function(){S.day=+dd.value;save();render();};
-  $('dCoins').onclick=function(){setCoins(S.coins+50);save();};
-  $('dReset').onclick=function(){ask('Начать показ сначала? Ёлка и окошки очистятся.',function(){var demo=S.demoAll;S=fresh();S.demoAll=demo;S.page='home';save();render();});};
+  $('demo').innerHTML='<b>Показ:</b><button type="button" class="seg'+(ALL.cur==='test'?' on':'')+'" data-m="test">1 · Тест: всё открыто</button><button type="button" class="seg'+(ALL.cur==='miss'?' on':'')+'" data-m="miss">2 · 20 декабря, есть пропуски</button><button type="button" class="x" id="dReset" title="Начать этот вариант сначала">↺ сначала</button>';
+  [].forEach.call(document.querySelectorAll('.demo .seg'),function(b){b.onclick=function(){var page=S.page,tab=S.tab;ALL.cur=b.dataset.m;S=ALL[ALL.cur];S.page=page;S.tab=tab;save();render();};});
+  $('dReset').onclick=function(){var m=modal('<div class="mcard"><h3>Начать вариант «'+(ALL.cur==='test'?'Тест':'20 декабря')+'» сначала?</h3><div class="btns"><button type="button" class="btn" id="y">Да</button><button type="button" class="btn ghost" data-close>Нет</button></div></div>');
+    m.querySelector('#y').onclick=function(){m.remove();var page=S.page,tab=S.tab;ALL[ALL.cur]=ALL.cur==='test'?freshTest():freshMiss();S=ALL[ALL.cur];S.page=page;S.tab=tab;save();render();};};
 }
 
 function render(){
-  renderNav();renderDemo();$('coins').textContent='🪙 '+S.coins;
+  closePop();renderNav();renderDemo();showCoins(false);
   $('ttl').textContent=S.page==='advent'?'🎄 Мой адвент-календарь':S.page==='home'?'Привет, Маша! 👋':{hw:'Домашка',trainer:'Тренажёр',sched:'Расписание',shopw:'Колесо и призы'}[S.page];
-  sel=null;
   if(S.page==='home')renderHome();else if(S.page==='advent')renderAdvent();else renderStub(S.page);
 }
-/* картинки — заранее, чтобы календарь и ёлка открывались без пауз */
-HAVE.forEach(function(k){var i=new Image();i.src=IMG[k];});
+$('coins').onclick=coinsModal;
+HAVE.forEach(function(k){var i=new Image();i.src=IMG[k];});   // картинки заранее — без пауз
 render();
 })();
 </script>
