@@ -98,11 +98,11 @@ ul.check b{color:var(--ink)}
 .tabs button{font-family:var(--ff-head);font-weight:800;font-size:14px;border:1px solid var(--line);background:var(--card);padding:8px 14px;border-radius:999px;cursor:pointer;color:var(--ink)}
 .tabs button.on{background:var(--violet);border-color:var(--violet);color:#fff}
 
-.scene{position:relative;border-radius:22px;overflow:hidden;background:radial-gradient(120% 80% at 50% 0%,var(--night2),var(--night));aspect-ratio:16/10;max-width:100%;min-height:300px}
+.scene{position:relative;border-radius:22px;overflow:hidden;background:var(--night) url(img/bg_night.webp) center bottom/cover no-repeat;aspect-ratio:16/10;max-width:100%;min-height:300px}
 .scene .snowfall{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(2px 2px at 20% 30%,#fff8,transparent),radial-gradient(2px 2px at 70% 20%,#fff8,transparent),radial-gradient(3px 3px at 40% 70%,#fff6,transparent),radial-gradient(2px 2px at 85% 60%,#fff8,transparent),radial-gradient(2px 2px at 10% 80%,#fff7,transparent);background-size:220px 220px;animation:snow 14s linear infinite}
 @keyframes snow{to{background-position:0 220px,0 220px,0 220px,0 220px,0 220px}}
 .scene .ground{position:absolute;left:0;right:0;bottom:0;height:18%;background:linear-gradient(#F4F7FF,#DCE4FA);border-top-left-radius:50% 30%;border-top-right-radius:50% 30%}
-.door{position:absolute;width:11%;aspect-ratio:1;transform:translate(-50%,-50%);border:0;background:none;padding:0;cursor:pointer;transition:transform .15s}
+.door{position:absolute;width:8.5%;aspect-ratio:1;transform:translate(-50%,-50%);border:0;background:none;padding:0;cursor:pointer;transition:transform .15s}
 .door:hover{transform:translate(-50%,-50%) scale(1.08)}
 .door:focus-visible{outline:3px solid var(--coin);outline-offset:3px;border-radius:14px}
 .door svg{width:100%;height:100%;filter:drop-shadow(0 6px 8px rgba(0,0,0,.35))}
@@ -174,10 +174,10 @@ img[draggable]{width:100%;height:100%;object-fit:contain;pointer-events:none;dis
 <section class="sl" id="idea">
   <div class="eyebrow">Декабрь 2026 · кабинет ученика</div>
   <h1>Адвент-календарь: каждый день новое украшение и новое слово</h1>
-  <p class="lead">С 1 декабря в кабинете ученика появляется ёлочка. Каждый день ребёнок открывает одно окошко, получает украшение с английским словом, произношением и переводом и вешает его на свою ёлку. Монетки можно тратить на дополнительные игрушки.</p>
+  <p class="lead">С 1 по 31 декабря, до самого Нового года, в кабинете ученика появляется ёлочка. Каждый день ребёнок открывает одно окошко, получает украшение с английским словом, произношением и переводом и вешает его на свою ёлку. Монетки можно тратить на дополнительные игрушки.</p>
   <div class="grid g3" style="margin-top:22px">
     <div class="card"><h3>Возвращаются каждый день</h3><p>Новое окошко раз в сутки — повод зайти в кабинет, где ждут домашка и тренажёр.</p></div>
-    <div class="card"><h3>Учат слова, играя</h3><p>25 праздничных слов: каждое со звуком и переводом. Слово звучит при каждом касании игрушки.</p></div>
+    <div class="card"><h3>Учат слова, играя</h3><p>31 новогоднее слово: каждое со звуком и переводом. Слово звучит при каждом касании игрушки.</p></div>
     <div class="card"><h3>У монеток новое применение</h3><p>Игрушки по 1–2 монетки: дёшево, но приятно. Монетки снова хочется зарабатывать.</p></div>
   </div>
 </section>
@@ -212,7 +212,7 @@ img[draggable]{width:100%;height:100%;object-fit:contain;pointer-events:none;dis
   <div class="eyebrow">Механика</div>
   <h2>Как это устроено</h2>
   <div class="steps" style="margin-top:18px">
-    <div class="card"><h3>Окошки — любые</h3><p>В календаре россыпь значков. Ребёнок выбирает любой: что внутри, решает сервер, поэтому сюжет месяца не ломается. 1-го декабря выпадает ёлка, 25-го — звезда на макушку.</p></div>
+    <div class="card"><h3>Окошки — любые</h3><p>В календаре россыпь значков. Ребёнок выбирает любой: что внутри, решает сервер, поэтому сюжет месяца не ломается. 1 декабря выпадает ёлка, 31-го — звезда на макушку.</p></div>
     <div class="card"><h3>Одно окошко в день бесплатно</h3><p>Сегодняшнее окошко бесплатно. Пропустил день — открыть пропущенное можно потом за 5 монеток. Будущие окошки закрыты до своего дня.</p></div>
     <div class="card"><h3>Карточка слова</h3><p>Из окошка выпадает украшение: картинка, слово по-английски, 🔊 произношение и перевод. Украшение ложится в сундук.</p></div>
     <div class="card"><h3>Сундук и ёлка</h3><p>Из сундука игрушку перетаскивают на ёлку. На ёлке её можно передвинуть или вернуть в сундук. Нажал на игрушку — где угодно — слово звучит снова.</p></div>
@@ -223,7 +223,7 @@ img[draggable]{width:100%;height:100%;object-fit:contain;pointer-events:none;dis
 
 <section class="sl" id="words">
   <div class="eyebrow">Содержание</div>
-  <h2>25 окошек — 25 слов</h2>
+  <h2>31 окошко — 31 слово</h2>
   <p class="lead">Порядок выпадения. Слова — из тем курсов (цвета, формы, зима, праздник), уровень 7–9 лет.</p>
   <div class="tbox" style="margin-top:16px"><table class="t" id="wordsTable">
     <thead><tr><th>№</th><th></th><th>Слово</th><th>Перевод</th><th>Докупить</th></tr></thead><tbody></tbody>
@@ -302,8 +302,8 @@ img[draggable]{width:100%;height:100%;object-fit:contain;pointer-events:none;dis
     <thead><tr><th>Задача</th><th>Кто</th><th>Срок</th></tr></thead>
     <tbody>
       <tr><td>Решение руководства, список слов и цены</td><td>руководство, Анна</td><td class="n">24.11</td></tr>
-      <tr><td>Картинки: 25 украшений и 3 ёлки, без фона</td><td>Анна по готовым промптам</td><td class="n">25–26.11</td></tr>
-      <tr><td>Озвучка 25 слов</td><td>мы</td><td class="n">26.11</td></tr>
+      <tr><td>Картинки: 27 украшений, 3 ёлки, звезда, окошки, фон — без фона</td><td>Анна по готовым промптам</td><td class="n">готово 23.11, осталось 6 украшений</td></tr>
+      <tr><td>Озвучка 31 слова</td><td>мы</td><td class="n">26.11</td></tr>
       <tr><td>База: окошки, сундук, ёлка, покупки, проверка дня</td><td>мы</td><td class="n">25–27.11</td></tr>
       <tr><td>Страница календаря: окошки, сундук, ёлка, магазин</td><td>мы</td><td class="n">26–28.11</td></tr>
       <tr><td>Кнопка 🎄 в кабинете ученика</td><td>разработчик кабинета</td><td class="n">≈ полдня, до 29.11</td></tr>
@@ -338,8 +338,13 @@ function mitten(){return '<svg viewBox="0 0 100 100"><path d="M34 84V40c0-18 10-
 function garland(){var s='<svg viewBox="0 0 300 100"><path d="M8 20 Q150 110 292 20" stroke="#3F6B2E" stroke-width="5" fill="none"/>';var cs=['#FF5A6E','#FFC83D','#5CC8FF','#8EE06A','#C78BFF'];for(var i=1;i<10;i++){var t=i/10,x=8+284*t,y=20+2*(1-t)*t*90;s+='<circle cx="'+x.toFixed(1)+'" cy="'+(y+8).toFixed(1)+'" r="9" fill="'+cs[i%5]+'"/>';}return s+'</svg>';}
 function lights(){var s='<svg viewBox="0 0 300 100"><path d="M8 20 Q150 100 292 20" stroke="#2B2140" stroke-width="3" fill="none"/>';var cs=['#FFE066','#FF8FA3','#8FD3FF','#B9F18B'];for(var i=1;i<12;i++){var t=i/12,x=8+284*t,y=20+2*(1-t)*t*80;s+='<ellipse cx="'+x.toFixed(1)+'" cy="'+(y+10).toFixed(1)+'" rx="6" ry="9" fill="'+cs[i%4]+'"/><circle cx="'+x.toFixed(1)+'" cy="'+(y+10).toFixed(1)+'" r="14" fill="'+cs[i%4]+'" opacity=".25"/>';}return s+'</svg>';}
 function tinsel(){var s='<svg viewBox="0 0 300 100"><g stroke="#E6C04A" stroke-width="3">';for(var i=0;i<60;i++){var t=i/60,x=8+284*t,y=20+2*(1-t)*t*90;s+='<path d="M'+x.toFixed(1)+' '+(y-8).toFixed(1)+' l'+(i%2?6:-6)+' 18"/>';}return s+'</g></svg>';}
+function icicle(){return '<svg viewBox="0 0 100 100"><path d="M30 10h40L54 92z" fill="#CFEFFF" stroke="#8CCBEA" stroke-width="3"/><path d="M40 16l10 50" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".8"/></svg>';}
+function sweet(){return '<svg viewBox="0 0 100 100"><path d="M26 50L6 34v32zM74 50l20-16v32z" fill="#F7628C"/><ellipse cx="50" cy="50" rx="26" ry="20" fill="#FF8FB0"/><path d="M34 40q16 20 32 0" stroke="#fff" stroke-width="5" fill="none"/></svg>';}
+function angel(){return '<svg viewBox="0 0 100 100"><ellipse cx="50" cy="12" rx="14" ry="5" fill="none" stroke="#FFD43B" stroke-width="4"/><path d="M50 40C30 20 8 32 14 58c14-2 26-8 36-18zM50 40c20-20 42-8 36 18-14-2-26-8-36-18z" fill="#E6F2FF" stroke="#B9D4F2" stroke-width="2"/><circle cx="50" cy="30" r="11" fill="#F6D2B5"/><path d="M36 90l14-50 14 50z" fill="#fff" stroke="#DDE" stroke-width="2"/></svg>';}
+function cracker(){return '<svg viewBox="0 0 100 100"><rect x="28" y="38" width="44" height="24" rx="6" fill="#1F8F62"/><path d="M28 40L8 30v40l20-10zM72 40l20-10v40L72 60z" fill="#E23B4E"/><path d="M40 38v24M60 38v24" stroke="#FFC83D" stroke-width="4"/></svg>';}
+function clock(){return '<svg viewBox="0 0 100 100"><circle cx="50" cy="52" r="38" fill="#FFD43B" stroke="#C99A1D" stroke-width="4"/><circle cx="50" cy="52" r="30" fill="#fff"/><path d="M50 52V28M50 52l14 0" stroke="#2B2140" stroke-width="5" stroke-linecap="round"/><circle cx="50" cy="12" r="5" fill="#C99A1D"/></svg>';}
 function topstar(){return '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFE27A" opacity=".35"/><path d="M50 4l13 30 32 2-25 20 9 32-29-18-29 18 9-32L5 36l32-2z" fill="#FFD43B" stroke="#C99A1D" stroke-width="3" stroke-linejoin="round"/></svg>';}
-var IMG={};['red_ball','blue_ball','green_ball','gold_ball','purple_ball','bell','star','candy_cane','snowflake','gingerbread','bow','pine_cone','garland','fairy_lights','tinsel','tree_pine','tree_gold'].forEach(function(k){IMG[k]='img/'+k+'.webp';});
+var IMG={};['red_ball','blue_ball','green_ball','gold_ball','purple_ball','bell','star','candy_cane','snowflake','gingerbread','bow','pine_cone','garland','fairy_lights','tinsel','tree_pine','tree_gold','tree_snowy','heart','stocking','present','snowman','reindeer','mitten','top_star','gift1','gift2','gift3','gift4','gift5','gift6'].forEach(function(k){IMG[k]='img/'+k+'.webp';});
 function pic(k){return '<img src="'+IMG[k]+'" alt="" draggable="false">';}
 function tree(kind){
   if(IMG['tree_'+kind])return pic('tree_'+kind);
@@ -347,12 +352,11 @@ function tree(kind){
   var snow=kind==='snowy'?'<g fill="#fff" opacity=".95"><path d="M50 8 l14 22 q-14 6 -28 0z"/><path d="M36 44 q14 8 28 0 l10 12 q-24 8 -48 0z"/><path d="M28 72 q22 10 44 0 l12 14 q-34 10 -68 0z"/></g>':'';
   return '<svg viewBox="0 0 100 120"><rect x="43" y="98" width="14" height="16" rx="2" fill="#7A4A22"/><path d="M50 4 L82 46 H66 L90 76 H70 L96 102 H4 L30 76 H10 L34 46 H18 Z" fill="'+c1+'" stroke="'+c2+'" stroke-width="2.5" stroke-linejoin="round"/>'+snow+'</svg>';
 }
-function door(i){var cs=['#F7628C','#6A4DF4','#FFC83D','#3E9BEA','#1F8F62'];var c=cs[i%5],r=cs[(i+2)%5];
-  return '<svg viewBox="0 0 100 100"><rect x="10" y="30" width="80" height="62" rx="10" fill="'+c+'"/><rect x="6" y="22" width="88" height="16" rx="6" fill="'+c+'" stroke="#0002" stroke-width="2"/><rect x="44" y="22" width="12" height="70" fill="'+r+'"/><path d="M50 22 C36 4 22 18 50 22 C78 18 64 4 50 22Z" fill="'+r+'"/></svg>';}
+function door(i){return pic('gift'+(i%6+1));}
 function doorOpen(it){return '<span class="dopen">'+art(it)+'</span>';}
 function inner(svg){return svg.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');}
 
-/* ───────── каталог: 25 окошек в порядке выпадения ───────── */
+/* ───────── каталог: 31 окошко в порядке выпадения ───────── */
 var ITEMS=[
  {k:'tree_pine',w:'Christmas tree',t:'ёлка',kind:'tree',tree:'pine'},
  {k:'red_ball',w:'red ball',t:'красный шар',p:1,draw:function(){return ball('#E23B4E','#FFC83D');}},
@@ -367,17 +371,23 @@ var ITEMS=[
  {k:'fairy_lights',w:'fairy lights',t:'гирлянда-огоньки',p:2,wide:true,draw:lights},
  {k:'pine_cone',w:'pine cone',t:'шишка',p:1,draw:cone},
  {k:'green_ball',w:'green ball',t:'зелёный шар',p:1,draw:function(){return ball('#46B85A','#FFC83D');}},
- {k:'stocking',w:'stocking',t:'рождественский носок',p:2,draw:stocking},
+ {k:'stocking',w:'stocking',t:'новогодний носок',p:2,draw:stocking},
  {k:'present',w:'present',t:'подарок',p:2,draw:present},
  {k:'tree_snowy',w:'snowy tree',t:'заснеженная ёлка',kind:'tree',tree:'snowy'},
  {k:'gold_ball',w:'gold ball',t:'золотой шар',p:1,draw:function(){return ball('#E8B930','#fff');}},
  {k:'tinsel',w:'tinsel',t:'мишура',p:2,wide:true,draw:tinsel},
  {k:'heart',w:'heart',t:'сердечко',p:1,draw:heart},
  {k:'snowman',w:'snowman',t:'снеговик',p:2,draw:snowman},
+ {k:'silver_ball',w:'silver ball',t:'серебряный шар',p:1,draw:function(){return ball('#C9CED8','#fff');}},
+ {k:'icicle',w:'icicle',t:'сосулька',p:1,draw:icicle},
  {k:'reindeer',w:'reindeer',t:'олень',p:2,draw:deer},
  {k:'purple_ball',w:'purple ball',t:'фиолетовый шар',p:1,draw:function(){return ball('#8A5CF6','#F7628C');}},
+ {k:'sweet',w:'sweet',t:'конфета',p:1,draw:sweet},
  {k:'mitten',w:'mitten',t:'варежка',p:2,draw:mitten},
+ {k:'angel',w:'angel',t:'ангел',p:2,draw:angel},
  {k:'tree_gold',w:'golden tree',t:'золотая ёлка',kind:'tree',tree:'gold'},
+ {k:'cracker',w:'cracker',t:'хлопушка',p:2,draw:cracker},
+ {k:'clock',w:'clock',t:'часы',p:2,draw:clock},
  {k:'top_star',w:'tree topper',t:'звезда на макушку',top:true,draw:topstar}
 ];
 var DAYS=ITEMS.length;
@@ -385,7 +395,7 @@ function art(it){if(IMG[it.k])return pic(it.k);return it.kind==='tree'?tree(it.t
 function byK(k){for(var i=0;i<ITEMS.length;i++)if(ITEMS[i].k===k)return ITEMS[i];return null;}
 
 /* ───────── состояние (в макете — в браузере; в настоящей версии — на сервере) ───────── */
-var KEY='advent-demo-v1', S;
+var KEY='advent-demo-v2', S;
 function fresh(){
   var s={day:7,coins:52,opened:{},chest:{},placed:[],tree:'pine',view:'home',tab:'cal'};
   // показ: открыты дни 1–5, 6-й пропущен, 7-й (сегодня) ещё не открыт
@@ -433,16 +443,16 @@ function homeHtml(){
 }
 
 /* позиции значков: россыпь по сцене, без цифр */
-var POS=[[12,22],[27,15],[44,24],[61,13],[78,22],[90,14],[8,44],[22,38],[37,47],[53,38],[68,46],[84,40],[15,63],[30,59],[46,66],[60,59],[75,66],[91,60],[24,80],[40,84],[55,79],[70,84],[86,80],[50,10],[7,82]];
+var POS=(function(){var rows=[7,6,7,6,5],ys=[14,31,48,65,82],o=[],j=[0,3,-2,4,-3,2,-1];rows.forEach(function(n,ri){for(var c=0;c<n;c++){var last=ri===rows.length-1;var x=last?(c+0.5)/n*80+10:(c+0.5)/n*100*(n<7?0.86:0.94)+(n<7?7:3);o.push([x,last?86:ys[ri]+j[(c+ri)%7]]);}});return o;})();
 function renderCal(){
   var doorUsed={};Object.keys(S.opened).forEach(function(d){doorUsed[S.opened[d].door]=S.opened[d].k;});
-  var h='<div class="scene"><div class="snowfall"></div><div class="ground"></div>';
+  var h='<div class="scene"><div class="snowfall"></div>';
   for(var i=0;i<DAYS;i++){var p=POS[i];var k=doorUsed[i];
     h+='<button type="button" class="door'+(k?' open':'')+'" data-i="'+i+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-label="'+(k?esc(byK(k).w):'Окошко')+'">'+(k?doorOpen(byK(k)):door(i))+'</button>';}
   h+='</div><div class="cal-bar" id="calBar"></div>';
   $('advBody').innerHTML=h;
   var m=missed(), n=openedCount(), bar;
-  if(n>=DAYS) bar='<span class="msg">Все 25 окошек открыты! С Рождеством и Новым годом! 🎉</span>';
+  if(n>=DAYS) bar='<span class="msg">Все 31 окошко открыто! С Новым годом! 🎉</span>';
   else if(freeToday()) bar='<span class="pill p-green">Сегодня: 1 окошко бесплатно</span>'+(m.length?'<span class="msg">Пропущено дней: '+m.length+' — открываются за 🪙 5</span>':'')+'<span class="msg">Нажми на любой подарок</span>';
   else if(m.length) bar='<span class="msg">Сегодняшнее окошко открыто. Пропущенных дней: '+m.length+' — каждое за 🪙 5</span>';
   else bar='<span class="msg">Сегодняшнее окошко открыто. Новое — завтра! ⭐</span>';
