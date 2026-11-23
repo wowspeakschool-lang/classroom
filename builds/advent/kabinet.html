@@ -164,6 +164,9 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
 .swi .c{position:absolute;right:-6px;top:-6px;background:var(--green);color:#fff;font-size:10px;font-weight:900;border-radius:999px;padding:1px 6px}
 .swi.not .c{background:var(--coin);color:var(--coin-ink)}
 .swi .cd{position:absolute;left:-4px;bottom:-4px;width:16px;height:16px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #0002}
+.gsz{display:flex;gap:6px;flex-wrap:wrap}
+.gsz button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:5px 11px;font-weight:800;font-size:12px;cursor:pointer;font-family:inherit}
+.gsz button.on{background:var(--violet);border-color:var(--violet);color:#fff}
 .act{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .act .t{color:var(--ink);font-size:13px;flex:1;min-width:120px}
 .mini-say{border:0;background:#fff;color:var(--violet);border-radius:50%;width:32px;height:32px;cursor:pointer;flex:none}
@@ -500,7 +503,7 @@ function openDay(d,b){
     S.opened[d]=idx;var newCol=give(S,it);if(it.f)S.pick[it.f]=it.c;
     save();renderNav();renderAdvent();
     var eb=it.tree?'Новая ёлка!':it.f==='top_star'?'Последнее окошко! С Новым годом!':newCol?'Новый цвет — в подарок!':'Новое украшение!';
-    var hint=it.tree?'Ёлка поменялась — посмотри!':F[it.f].top?'Это украшение для макушки ёлки.':newCol?'Теперь в сундуке есть '+esc(ru(it.f,it.c))+'.':'Оно уже в сундуке 🧰 — вешай на ёлку сколько хочешь.';
+    var hint=it.tree?'Ёлка поменялась — посмотри!':F[it.f].top?'Это украшение для макушки ёлки — поставь его наверх.':newCol?'Теперь в сундуке есть '+esc(ru(it.f,it.c))+'.':'Оно уже в сундуке 🧰 — вешай на ёлку сколько хочешь.';
     var m=modal('<div class="mcard" role="dialog"><div class="eb">'+eb+'</div><div class="art">'+pic(dayImg(it))+'</div>'+
       '<div class="word">'+esc(dayEn(it))+'<button type="button" class="say" aria-label="Послушать">🔊</button></div><div class="trn">'+esc(dayRu(it))+'</div>'+
       '<div class="hint">'+hint+'</div><div class="btns"><button type="button" class="btn pink" id="toTree">К ёлке 🎄</button><button type="button" class="btn ghost" data-close>Ещё окошки</button></div></div>');
@@ -548,8 +551,9 @@ function openPanel(f,silent){
   var cur=S.pick[f]!==undefined?S.pick[f]:pickOf(f),cs=colsOf(f);
   var sw=cs.map(function(c){var o=owns(f,c);return '<div class="swi '+(o?'own':'not')+(c===cur?' cur':'')+'" data-c="'+c+'" tabindex="0" role="button" title="'+esc(en(f,c))+'">'+pic(src(f,c))+
       (c?'<i class="cd" style="background:'+CW[c][3]+'"></i>':'')+'<span class="c">'+(o?'✓':'🪙1')+'</span></div>';}).join('');
-  box.innerHTML='<div class="panel"><div class="panel-h"><b>'+esc(F[f].w)+' — '+esc(F[f].t)+(cs.length>1?' · цвета':'')+'</b><button type="button" class="x" aria-label="Закрыть">×</button></div><div class="sw">'+sw+'</div><div class="act" id="act"></div></div>';
+  box.innerHTML='<div class="panel"><div class="panel-h"><b>'+esc(F[f].w)+' — '+esc(F[f].t)+(cs.length>1?' · цвета':'')+'</b><button type="button" class="x" aria-label="Закрыть">×</button></div><div class="sw">'+sw+'</div>'+(F[f].wide?'<div class="gsz">'+GS.map(function(g,i){return '<button type="button" data-g="'+i+'" class="'+(((S.gsize||{})[f]||0)===i?'on':'')+'">'+g[0]+'</button>';}).join('')+'</div>':'')+'<div class="act" id="act"></div></div>';
   box.querySelector('.x').onclick=closePanel;
+  $$('.gsz button',box).forEach(function(b){b.onclick=function(){S.gsize=S.gsize||{};S.gsize[f]=+b.dataset.g;save();$$('.gsz button',box).forEach(function(x){x.classList.toggle('on',x===b);});};});
   function act(){var c=S.pick[f]!==undefined?S.pick[f]:cur,a=$('act'),o=owns(f,c);
     a.innerHTML='<button type="button" class="mini-say" aria-label="Послушать">🔊</button><div class="t"><b>'+esc(en(f,c))+'</b> — '+esc(ru(f,c))+'<br>'+(o?(cs.length>1?'этот цвет твой · ':'')+'тяни на ёлку сколько хочешь':'этого цвета пока нет')+'</div>'+
       (o?'':'<button type="button" class="btn sm" id="buy">Купить цвет · 🪙 1</button>');
@@ -571,11 +575,14 @@ function buyColour(f,c,then){
     '<div class="btns"><button type="button" class="btn pink" id="yb"'+(coins()<1?' disabled':'')+'>Купить за 🪙 1</button><button type="button" class="btn ghost" data-close>Не сейчас</button></div></div>');
   m.querySelector('#yb').onclick=function(){m.remove();if(!spend(1,'🎨','Новый цвет: '+ru(f,c)))return;S.own[f][c]=1;S.pick[f]=c;save();say(en(f,c));toast(en(f,c)+' — твой! (−1 🪙)');then();};
 }
+/* гирлянды: три размера — длинная, средняя, короткая. Уменьшаем целиком, без сплющивания (23.11.2026, Анна) */
+var GS=[['длинная',1],['средняя',.7],['короткая',.5]];
 function cl(v,a,b){return Math.max(a,Math.min(b,v));}
 function placeAt(f,c,x,y){
   if(!f||c===null)return;var area=$('area');if(!area)return;var r=area.getBoundingClientRect();
   if(x<r.left||x>r.right||y<r.top||y>r.bottom)return;
-  var pl={id:Date.now(),f:f,c:c,x:cl((x-r.left)/r.width*100,3,97),y:cl((y-r.top)/r.height*100,3,97),s:1,r:0,sx:1,sy:1};
+  var gs=F[f].wide?GS[S.gsize&&S.gsize[f]||0][1]:1;
+  var pl={id:Date.now(),f:f,c:c,x:cl((x-r.left)/r.width*100,3,97),y:cl((y-r.top)/r.height*100,3,97),s:gs,r:0,sx:1,sy:1,auto:F[f].top?1:0};
   if(F[f].top)S.placed=S.placed.filter(function(p){return !F[p.f].top;});
   S.placed.push(pl);sel=pl.id;save();renderTree();say(en(f,c));
 }
@@ -584,7 +591,7 @@ function placeToppers(){
   var area=$('area');if(!area)return;var img=area.querySelector('.tree img');if(!img||!img.naturalWidth)return;
   var A=area.getBoundingClientRect(),B=img.getBoundingClientRect(),sc=Math.min(B.width/img.naturalWidth,B.height/img.naturalHeight),h=img.naturalHeight*sc;
   var tipY=(B.top-A.top)+(B.height-h)/2+0.019*h,cx=(B.left-A.left)+B.width/2;
-  $$('.placed.ptop',area).forEach(function(el){var pl=S.placed.filter(function(p){return p.id==el.dataset.id;})[0];if(!pl)return;
+  $$('.placed.ptop',area).forEach(function(el){var pl=S.placed.filter(function(p){return p.id==el.dataset.id;})[0];if(!pl||!pl.auto)return;
     var w=A.width*F[pl.f].sz*pl.s/100,k=pl.f==='angel'?0.36:0.3;pl.x=cx/A.width*100;pl.y=(tipY-w*k)/A.height*100;
     el.style.left=pl.x+'%';el.style.top=pl.y+'%';});
   drawSel();
@@ -597,12 +604,11 @@ function addPlaced(area,pl){
   var fm=F[pl.f],el=document.createElement('div');
   el.className='placed'+(fm.wide?' pwide':'')+(fm.top?' ptop':'');el.dataset.id=pl.id;el.innerHTML=pic(src(pl.f,pl.c));el.setAttribute('aria-label',en(pl.f,pl.c));
   styleEl(el,pl);area.appendChild(el);
-  drag(el,{ok:function(){return true;},move:!fm.top,
+  drag(el,{ok:function(){return true;},move:true,
     tap:function(){sel=pl.id;drawSel();say(en(pl.f,pl.c));},
     drop:function(x,y){var r=area.getBoundingClientRect();
       if(x<r.left||x>r.right||y<r.top||y>r.bottom){removePl(pl);return;}
-      if(fm.top){placeToppers();return;}
-      pl.x=cl((x-r.left)/r.width*100,2,98);pl.y=cl((y-r.top)/r.height*100,2,98);sel=pl.id;save();styleEl(el,pl);drawSel();}});
+      pl.x=cl((x-r.left)/r.width*100,2,98);pl.y=cl((y-r.top)/r.height*100,2,98);pl.auto=0;sel=pl.id;save();styleEl(el,pl);drawSel();}});
 }
 function removePl(pl){S.placed=S.placed.filter(function(p){return p.id!==pl.id;});if(sel===pl.id)sel=null;save();renderTree();toast(en(pl.f,pl.c)+' — снято с ёлки');}
 /* рамка выбранного украшения: уголок — размер, кружок сверху — поворот, у гирлянд розовые — длина и толщина */
@@ -615,12 +621,14 @@ function drawSel(){
   $$('.hd',el).forEach(function(hd){handle(hd,el,pl);});
   var t=document.createElement('div');t.className='tool';
   var cs=colsOf(pl.f),dots=cs.length>1?cs.map(function(c){return '<button type="button" class="dt'+(c===pl.c?' cur':'')+(owns(pl.f,c)?'':' no')+'" data-c="'+c+'" style="background:'+CW[c][3]+'" title="'+esc(en(pl.f,c))+(owns(pl.f,c)?'':' · 🪙 1')+'" aria-label="'+esc(ru(pl.f,c))+'"></button>';}).join(''):'';
-  t.innerHTML='<button type="button" data-a="say">🔊 '+esc(en(pl.f,pl.c))+'</button>'+dots+'<button type="button" data-a="rm">↩ Убрать</button><span class="hint2">'+(fm.top?'Верхушка всегда на макушке. ':'')+'⤡ размер · ↻ поворот'+(fm.wide?' · ↔ длина · ↕ толщина':'')+'</span>';
+  var gz=fm.wide?'<span class="gsz">'+GS.map(function(g,i){return '<button type="button" data-g="'+i+'" class="'+(Math.abs(pl.s-g[1])<.01?'on':'')+'">'+g[0]+'</button>';}).join('')+'</span>':'';
+  t.innerHTML='<button type="button" data-a="say">🔊 '+esc(en(pl.f,pl.c))+'</button>'+dots+gz+'<button type="button" data-a="rm">↩ Убрать</button><span class="hint2">'+(fm.top?'Верхушку можно двигать. ':'')+'⤡ размер · ↻ поворот'+(fm.wide?' · ↔ длина · ↕ толщина':'')+'</span>';
   area.appendChild(t);
   var A=area.getBoundingClientRect(),E=el.getBoundingClientRect(),top=E.bottom-A.top+22;if(top>A.height-90)top=E.top-A.top-100;
   t.style.left=cl((E.left+E.width/2-A.left)/A.width*100,22,78)+'%';t.style.top=Math.max(6,top)+'px';
   t.querySelector('[data-a="say"]').onclick=function(){say(en(pl.f,pl.c));};
   t.querySelector('[data-a="rm"]').onclick=function(){removePl(pl);};
+  $$('.gsz button',t).forEach(function(b){b.onclick=function(){pl.s=GS[+b.dataset.g][1];pl.sx=1;pl.sy=1;save();styleEl(el,pl);drawSel();};});
   $$('.dt',t).forEach(function(b){b.onclick=function(){var c=b.dataset.c;
     function apply(){pl.c=c;S.pick[pl.f]=c;save();renderTree();say(en(pl.f,c));}
     if(owns(pl.f,c))apply();else buyColour(pl.f,c,apply);};});
@@ -634,9 +642,9 @@ function handle(hd,el,pl){
     function mv(ev){
       if(k==='ro'){pl.r=Math.round(Math.atan2(ev.clientX-cx,-(ev.clientY-cy))*180/Math.PI);}
       else{var p=loc(ev.clientX,ev.clientY);
-        if(k==='sc')pl.s=cl(s0*Math.hypot(p[0],p[1])/d0,.4,3);
-        if(k==='sx')pl.sx=cl(sx0*Math.abs(p[0])/(Math.abs(st[0])||1),.3,2.5);
-        if(k==='sy')pl.sy=cl(sy0*Math.abs(p[1])/(Math.abs(st[1])||1),.4,3);}
+        if(k==='sc')pl.s=cl(s0*Math.hypot(p[0],p[1])/d0,.4,3);if(k==='sc'&&F[pl.f].wide)pl.s=cl(pl.s,.4,1.3);
+        if(k==='sx')pl.sx=cl(sx0*Math.abs(p[0])/(Math.abs(st[0])||1),.85,1.2);
+        if(k==='sy')pl.sy=cl(sy0*Math.abs(p[1])/(Math.abs(st[1])||1),.85,1.25);}
       styleEl(el,pl);if(F[pl.f].top)placeToppers();
     }
     function up(){hd.removeEventListener('pointermove',mv);hd.removeEventListener('pointerup',up);hd.removeEventListener('pointercancel',up);save();drawSel();}
