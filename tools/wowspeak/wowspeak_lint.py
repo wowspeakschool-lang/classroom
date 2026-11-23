@@ -173,6 +173,43 @@ def check_word_form(S, bad):
                 if re.search(r'___\s*together', t):
                     bad(f'«{w}» в рамке «{t}» даёт together дважды'); return
 
+# ------------------------------------ 2в. целевое слово до слайда со словами
+# Аня, 23.11.2026: «иногда в презах слова из целевой лексики попадаются до её
+# презентации, это не есть очень хорошо». До слайда слов идут только разминка
+# и лид-ин - значит там целевых слов быть не должно. Проверка нашла 109 таких
+# мест в 23 темах, в четырнадцати лид-ин раздавал по три слова и больше.
+# Слово из названия темы не считается: оно и так на титуле.
+
+def _targets(S, keys):
+    out = set()
+    for k in keys:
+        for w in S.get(k) or []:
+            out.add((w[0] if isinstance(w, tuple) else w).lower())
+    return out
+
+def check_before_vocab(S, bad):
+    title = S['theme'].lower()
+    for adv, keys, moodk, moodsk, leadk in (
+            (False, ('w1012','w13'),     'mood_beg', 'moods_beg', 'lead'),
+            (True,  ('adv1012','adv13'), 'mood_adv', 'moods_adv', 'lead_adv')):
+        texts = [S.get(moodk) or '']
+        texts += [l for _, l in S.get(moodsk) or []]
+        texts += [t for t, _ in S.get(leadk) or []]
+        leaked = []
+        for w in sorted(_targets(S, keys)):
+            if len(w) < 3 or w in title: continue
+            for t in texts:
+                if re.search(r'\b' + re.escape(w) + r'\b', t, re.I):
+                    leaked.append((w, t)); break
+        if not leaked: continue
+        lvl = 'Advanced' if adv else 'Beginners'
+        if len(leaked) >= 3:
+            bad(f'{lvl}: лид-ин раздаёт словарь - {len(leaked)} целевых слова до слайда слов '
+                f'({", ".join(w for w, _ in leaked[:4])})')
+        else:
+            for w, t in leaked:
+                bad(f'{lvl}: «{w}» встречается до слайда слов - «{t}»')
+
 # ----------------------------------------------------------- 3. повтор темы
 def words_of(S):
     out = set()
@@ -226,6 +263,7 @@ def main(paths):
             if isinstance(pr,dict) and pr.get('kind'): check_prop(pr,key,bad)
         check_template(S,bad)
         check_word_form(S,bad)
+        check_before_vocab(S,bad)
         if found:
             print(f'=== {name}')
             for f in found: print('  '+f)

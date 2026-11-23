@@ -59,6 +59,20 @@ case('рамки под -ing, а слова инфинитивом', lambda: run
     'w1012':['swim','draw','cook','bake'],'w13':[],'frames':[],
     'it1012':[('I am good at ___ .','x'),('I enjoy ___ .','x')],'lead':[]}))
 
+def run_pre(S):
+    out=[]; L.check_before_vocab(S,out.append); return out
+BASE={'theme':'Winter Survival Hacks','w1012':['hat','gloves'],'w13':[],
+      'adv1012':[],'adv13':[],'mood_beg':'ok','moods_beg':[],
+      'mood_adv':'ok','moods_adv':[],'lead':[],'lead_adv':[]}
+# 14-15: ровно то, на что указала Аня - слово из целевой лексики до слайда слов
+case('целевое слово в лид-ине', lambda: run_pre(dict(BASE,
+    lead=[('What do you wear on your head? A hat.','x')])))
+case('лид-ин раздаёт весь словарь', lambda: run_pre(dict(BASE,
+    w1012=['hat','gloves','blanket','hot tea'],
+    lead=[('a hat','x'),('gloves','x'),('a blanket','x')])))
+case('целевое слово в подписи разминки', lambda: run_pre(dict(BASE,
+    adv1012=[('freezing','x')], moods_adv=[('🥶','Freezing')])))
+
 print('эталон: безупречный реквизит и шаблон')
 clean = run_prop({'kind':'week','people':['A','B','C'],
                   'busy':{'A':['Mon','Wed','Fri'],'B':['Tue','Wed','Sat'],
@@ -71,7 +85,9 @@ clean = run_prop({'kind':'week','people':['A','B','C'],
                   'it1012':[('After school we ___ .','x')],'lead':[]}) \
       + run_form({'w1012':['swimming','drawing','baking','cooking','singing','editing videos'],
                   'w13':[],'frames':['I am good at ___ .'],
-                  'it1012':[('I practise ___ times a week.','x')],'lead':[]})
+                  'it1012':[('I practise ___ times a week.','x')],'lead':[]}) \
+      + run_pre(dict(BASE, lead=[('What do you wear when it is cold?','x')],
+                     moods_beg=[('🙂','Fine')]))
 print('  на исправном:', '; '.join(clean) if clean else 'замечаний нет')
 
 caught=0
