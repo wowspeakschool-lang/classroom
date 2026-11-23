@@ -45,13 +45,33 @@ case('артикль перед фразой', lambda: run_tpl({'tf_template':'T
 # 10. шаблон без подстановки
 case('шаблон без {w}', lambda: run_tpl({'tf_template':'This is a word.','w1012':['hat'],'w13':[]}))
 
+def run_form(S):
+    out=[]; L.check_word_form(S,out.append); return out
+# 11-13: ровно та ошибка, которую Аня увидела на слайде слов «Can boys and girls…»
+case('герундий против рамки под инфинитив', lambda: run_form({
+    'w1012':['friends talking','playing football','doing homework','laughing','sharing lunch'],
+    'w13':[],'frames':['We ___ .','We also ___ .'],
+    'it1012':[('After school we ___ .','x'),('Boys and girls can both ___ .','x')],'lead':[]}))
+case('together в слове и в рамке', lambda: run_form({
+    'w1012':['talk together','play football','do homework','laugh','share lunch','walk home'],
+    'w13':[],'frames':['We ___ together.'],'it1012':[],'lead':[]}))
+case('рамки под -ing, а слова инфинитивом', lambda: run_form({
+    'w1012':['swim','draw','cook','bake'],'w13':[],'frames':[],
+    'it1012':[('I am good at ___ .','x'),('I enjoy ___ .','x')],'lead':[]}))
+
 print('эталон: безупречный реквизит и шаблон')
 clean = run_prop({'kind':'week','people':['A','B','C'],
                   'busy':{'A':['Mon','Wed','Fri'],'B':['Tue','Wed','Sat'],
                           'C':['Mon','Fri','Sun']}}) \
       + run_prop({'kind':'pricelist','title':'💰 You have 1 000 ₽',
                   'rows':[('a','400 ₽'),('b','900 ₽'),('c','1 200 ₽')]}) \
-      + run_tpl({'tf_template':'This is a {w}.','w1012':['hat','dog'],'w13':['ticket']})
+      + run_tpl({'tf_template':'This is a {w}.','w1012':['hat','dog'],'w13':['ticket']}) \
+      + run_form({'w1012':['talk','play football','do homework','laugh','share lunch','walk home'],
+                  'w13':[],'frames':['We ___ together.','We also ___ .'],
+                  'it1012':[('After school we ___ .','x')],'lead':[]}) \
+      + run_form({'w1012':['swimming','drawing','baking','cooking','singing','editing videos'],
+                  'w13':[],'frames':['I am good at ___ .'],
+                  'it1012':[('I practise ___ times a week.','x')],'lead':[]})
 print('  на исправном:', '; '.join(clean) if clean else 'замечаний нет')
 
 caught=0

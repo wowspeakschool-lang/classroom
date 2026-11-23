@@ -15,7 +15,7 @@ S={
  'moods_adv':[('⚡','Switched on'),('🌤️','Calm'),('💬','Chatty'),('🌀','Scattered'),('😴','Tired')],
  'lead':[('My best friend is ___ .','🧑‍🤝‍🧑'),
          ('We always ___ together.','🤝'),
-         ('Boys and girls both like ___ .','⚽'),
+         ('Boys and girls both like to ___ .','⚽'),
          ('In my class we sit ___ .','🪑'),
          ('I never play with ___ .','🚫'),
          ('A friend is somebody who ___ .','💛')],
@@ -28,10 +28,16 @@ S={
  'vq':[('How many reasons do they give for YES?','🔢'),
        ('How many reasons do they give for NO?','🔢'),
        ('Which reason is the strongest one? Why?','💪')],
- 'w1012':['friends talking','playing football together','doing homework together',
-          'laughing together','sharing lunch','walking home'],
- 'w13':['friends talking','sports team','studying together',
-        'laughing together','sharing food','gaming together'],
+ # Аня, 23.11.2026: «фразы с инговым окончанием, но как будто бы они не должны
+ # быть с инговым. И в speaking project и в других заданиях чаще нужны инфинитивы».
+ # Так и есть: из восьми мест, куда ученик вставляет слово, -ing подходил ровно
+ # одному. «We playing football together» - не предложение.
+ # «together» в самих словах не пишем: рамка «We ___ together» тогда даёт его
+ # дважды. Слово - голый инфинитив, рамка добавляет всё остальное.
+ 'w1012':['talk','play football','do homework',
+          'laugh','share lunch','walk home'],
+ 'w13':['talk','play sport','study',
+        'laugh','share food','play games'],
  'flip_prompt':'Say a sentence about this picture! 🗣️',
  'odd_rounds':[(['same','volcano','different','normal'],1),
                (['tease','gossip','saxophone','join in'],2),
@@ -39,11 +45,11 @@ S={
                (['best friends','classmates','teammates','toothbrush'],3)],
  'mini_title':'✍️ Finish the sentence!','mini_frame':'Finish every line with the new words.',
  'it1012':[('My friend and I ___ together.','🤝'),('We laugh when ___ .','😂'),
-           ('We help each other with ___ .','📚'),('After school we ___ .','🏠'),
-           ('Boys and girls can both ___ .','⚽'),('A good friend never ___ .','🚫')],
+           ('We help each other to ___ .','📚'),('After school we ___ .','🏠'),
+           ('Boys and girls can both ___ .','⚽'),('Good friends never ___ .','🚫')],
  'it13':[('My friend and I ___ together.','🤝'),('We laugh when ___ .','😂'),
          ('We study together when ___ .','📚'),('After school we ___ .','🎮'),
-         ('Boys and girls can both ___ .','🏅'),('A good friend never ___ .','🚫')],
+         ('Boys and girls can both ___ .','🏅'),('Good friends never ___ .','🚫')],
  'speak_title':'🗣️ We do this together! 🧑‍🤝‍🧑','frame_hint':'Pick two pictures from the new words and tell us about your friend.',
  'frames':['My friend is a boy / a girl.','We ___ together.','We also ___ .',
            'People sometimes say ___ .','But for us it is ___ .'],

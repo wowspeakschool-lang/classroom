@@ -109,6 +109,70 @@ def check_template(S, bad):
                 f'возьми «The word is: {{w}}.»')
             return
 
+# --------------------------------------------- 2б. форма слова против рамки
+# Аня, 23.11.2026, глядя на слайд слов: «фразы с инговым окончанием, но как
+# будто бы они не должны быть с инговым. И в speaking project и в других
+# заданиях чаще нужны инфинитивы». В «Can boys and girls be best friends?»
+# все шесть слов были герундием, а из восьми мест, куда ученик их вставляет,
+# -ing подходил ровно одному: «We playing football together» - не предложение.
+
+# что стоит прямо перед пропуском и требует голого инфинитива
+BARE = set('we they i you can could must will both never also always please let'.split())
+# что требует -ing. Только сильные признаки: «about» и «like» одинаково берут
+# и существительное («It is about family», «I like football»), на них проверка
+# ругалась на «Holiday Movies» и «Saver or Spender» зря.
+GERUND = set('at enjoy practise finish keep stop worth'.split())
+# основы, по которым слово на -ing опознаётся как глагольное, а не как
+# существительное: stocking, king, bowling, happy ending трогать нельзя
+VERB_STEMS = set("""talk play do laugh share walk study game sing swim cook bake draw
+edit read write run help work watch eat sleep learn teach practise skate dance
+ride drive climb paint build shop travel""".split())
+
+def _is_gerund(word):
+    first = word.split()[0].lower()
+    if not first.endswith('ing') or len(first) < 5: return False
+    stem = first[:-3]
+    return stem in VERB_STEMS or stem.rstrip(stem[-1]) in VERB_STEMS or stem+'e' in VERB_STEMS
+
+def _slots(S):
+    out = []
+    for fr in S.get('frames') or []: out.append(('финал', fr))
+    for k in ('it1012','it13'):
+        for t,_ in S.get(k) or []: out.append(('мини', t))
+    for t,_ in S.get('lead') or []: out.append(('лид-ин', t))
+    return [(w,t) for w,t in out if '___' in t]
+
+def check_word_form(S, bad):
+    words = list(S.get('w1012') or []) + list(S.get('w13') or [])
+    if not words: return
+    slots = _slots(S)
+    if not slots: return
+    bare = ger = 0
+    for _,t in slots:
+        before = t.split('___')[0].strip().split()
+        key = before[-1].lower().strip('.,') if before else ''
+        if key in BARE: bare += 1
+        elif key in GERUND: ger += 1
+    gerunds = [w for w in words if _is_gerund(w)]
+    plain   = [w for w in words if not _is_gerund(w)]
+    if bare >= 2 and len(gerunds) > len(words)//2:
+        ex = next((t for _,t in slots
+                   if (t.split('___')[0].strip().split() or [''])[-1].lower() in BARE), '')
+        bad(f'слова на -ing ({", ".join(gerunds[:3])}…), а рамок под инфинитив {bare}: '
+            f'«{ex.replace("___", gerunds[0])}» не читается')
+    # обратный случай: рамки просят герундий, а слова даны инфинитивом. Ругаемся
+    # только если слова - действительно глаголы: существительное после «good at»
+    # стоит законно («good at maths»).
+    verbs = [w for w in plain if w.split()[0].lower() in VERB_STEMS]
+    if ger >= 2 and bare == 0 and len(verbs) == len(words) and len(words) >= 4:
+        bad(f'рамки требуют -ing ({ger} шт.), а слова даны инфинитивом - проверь форму')
+    # слово уже содержит «together», а рамка добавляет его второй раз
+    for w in words:
+        if 'together' in w.lower():
+            for _,t in slots:
+                if re.search(r'___\s*together', t):
+                    bad(f'«{w}» в рамке «{t}» даёт together дважды'); return
+
 # ----------------------------------------------------------- 3. повтор темы
 def words_of(S):
     out = set()
@@ -161,6 +225,7 @@ def main(paths):
             pr = S[key]
             if isinstance(pr,dict) and pr.get('kind'): check_prop(pr,key,bad)
         check_template(S,bad)
+        check_word_form(S,bad)
         if found:
             print(f'=== {name}')
             for f in found: print('  '+f)
