@@ -17,6 +17,7 @@ on the first line marked 🟥**.
 | `wowspeak_games.py` | the in-deck games. **Required** — without it nothing builds |
 | `wowspeak_cropping.py` | icon sheets: `gen_sheet` → `whiten` → `crop_grid_auto` → `preview` |
 | `wowspeak_lint.py` | **вычитка спека, ДО сборки**: `python3 wowspeak_lint.py t*.py` |
+| `rotation_check.py` | насколько часто у тем совпадают наборы заданий: `python3 rotation_check.py` |
 | `wowspeak_audit.py` | вычитка готовой деки: написание, уровень, вёрстка, мёртвые кнопки |
 | `check_text_fit.py` | текст против рамки по метрикам шрифта |
 | `wowspeak_qa.py` | QA: `python3 wowspeak_qa.py final/*.pptx` |
@@ -156,6 +157,10 @@ notes          [{label,text,[url],[tail],[red]} ...]   {GAMES}/{VIDEO}/{SPEAKING
   New Words slide, a quiz round and the main-speaking slide.
 - **Animations never play in a PDF.** The games themselves are checked in real PowerPoint,
   in slideshow mode (F5) — that part is Anna's side.
+- `python3 rotation_check.py` — после любой правки пулов игр, разминок, лид-инов и мини.
+  Меряет, через сколько тем возвращается один и тот же НАБОР заданий. Старая формула
+  брала лид-ин, видео и мини по одному модулю 5, и тройка возвращалась ровно каждые пять
+  тем — в декабре это темы 1, 6 и 11. Заметила Аня, не проверка.
 - **Каждую новую иконку открывать по одной, в полный размер.** Просмотр листа целиком не
   работает: у снеговика на листе был один глаз, Аня увидела за секунду, вычитка рисунков
   не проверяет вообще. Это единственное место, где замена проверке — только глаза.

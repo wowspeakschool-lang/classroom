@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Сборка 4 дек одной темы из компактного спека. run(spec, outdir)."""
-import os, sys
+import itertools, os, sys
 sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 from wowspeak_builder import build
 HERE=os.path.dirname(os.path.abspath(__file__))
@@ -100,18 +100,101 @@ def safe_name(t):
     for ch in WIN_BAD: t=t.replace(ch,'')
     return ' '.join(t.split()).strip(' .')
 
-def plan(rot):
-    """Какие механики достаются теме №rot. Шаги подобраны так, чтобы ни один
-    вариант не вернулся раньше, чем через три темы."""
-    rec=BEG_REC[(rot*3)%5]; spk=BEG_SPK[rot%2]
-    arec=ADV_REC[rot%2]; aspk=ADV_SPK[(rot*2)%3]
-    third=None
+# Темы до этого номера считаются по старой формуле - они уже отданы Ане, и
+# пересборка не должна их менять. Всё новое идёт по расписанию ниже.
+LEGACY_UNTIL=33
+
+def _third(arec,aspk,rot):
     for j in range(len(ADV_3)):
         c=ADV_3[(rot*3+j)%len(ADV_3)]
-        if c not in (arec,aspk): third=c; break
-    return {'beg':(rec,spk),'adv':(arec,aspk,third),
+        if c not in (arec,aspk): return c
+    return None
+
+def _plan_legacy(rot):
+    rec=BEG_REC[(rot*3)%5]; spk=BEG_SPK[rot%2]
+    arec=ADV_REC[rot%2]; aspk=ADV_SPK[(rot*2)%3]
+    return {'beg':(rec,spk),'adv':(arec,aspk,_third(arec,aspk,rot)),
             'mood':MOODS[rot%4],'lead':LEADS[(rot*2+2)%5],
             'video':VIDEOS[(rot*3+1)%5],'mini':MINIS[(rot*4+1)%5]}
+
+# --------------------------------------------------------------- расписание
+# Аня, 23.11.2026: «если делать чередования, то по-разному, чтобы меньше было
+# през где задания идут одинаково. Например, игра 1, лидин 1, мини-задание 1,
+# вопросы к видео 1, и потом в третьей презе те же самые, а хотелось бы игра 3,
+# лидин 1».
+#
+# Старая формула брала лид-ин, видео и мини по одному модулю 5 и линейно от
+# номера темы - значит вся тройка возвращалась РОВНО каждые пять тем. В декабре
+# это темы 1, 6 и 11: у них совпадали и лид-ин, и мини, и вопросы к видео.
+# Поэтому теперь не формула, а подбор: на каждую тему перебираются все наборы,
+# берётся тот, где варианты не использовались дольше всего, и набор целиком
+# отвергается, если он уже был или слишком похож на соседний.
+_SCHED={}
+
+def _pick(pools, hist, prev, seen, recent, max_same, veto=None):
+    """Лучший набор: давно не использованные варианты, не повторять целиком,
+    с предыдущей темой совпадать не больше чем в max_same местах. veto -
+    дополнительный запрет: им отсекается повтор ТРОЙКИ лид-ин + видео + мини,
+    даже если разминка другая. Именно этот повтор Аня и заметила."""
+    best=None
+    for combo in itertools.product(*pools):
+        if combo in seen: continue
+        if combo in recent: continue
+        if veto and veto(combo): continue
+        # сравниваем не с одной предыдущей темой, а с несколькими: если
+        # смотреть только на соседа, наборы расходятся попарно и всё равно
+        # возвращаются одной и той же фазой через пять тем
+        if any(sum(a==b for a,b in zip(combo,q))>max_same for q in prev): continue
+        # чем дольше вариант не встречался, тем лучше; при равенстве - порядок
+        # перебора, он детерминированный, значит и расписание воспроизводимо
+        score=sum(hist[i].get(v,-99) for i,v in enumerate(combo))
+        if best is None or score<best[0]: best=(score,combo)
+    return best[1] if best else None
+
+def _build_schedule(upto):
+    gp=[BEG_REC,BEG_SPK,ADV_REC,ADV_SPK,ADV_3]    # игры, третья Advanced тоже
+    sp=[MOODS,LEADS,VIDEOS,MINIS]                 # разминка, лид-ин, видео, мини
+    ghist=[{} for _ in gp]; shist=[{} for _ in sp]
+    gseen=set(); sseen=set()
+    gq=[]; sq=[]; tq=[]            # последние наборы игр, сцены и троек
+    bq=[]; aq=[]                   # пары игр Beginners и тройки Advanced
+    for rot in range(LEGACY_UNTIL+1, upto+1):
+        trio=lambda c: (c[1],c[2],c[3]) in tq      # лид-ин, видео, мини
+        # третья игра Advanced не должна совпасть с первыми двумя; и запрещаем
+        # прямо то, что потом меряет rotation_check - возврат пары игр
+        # Beginners и тройки Advanced. Ограничения по отдельным позициям
+        # этого не дают: позиции расходятся, а пара возвращается.
+        def veto_g(c, strict=True):
+            if c[4] in (c[2],c[3]): return True
+            if not strict: return False
+            return (c[0],c[1]) in bq or (c[2],c[3],c[4]) in aq
+        g=(_pick(gp,ghist,gq[-3:],set(),set(),1,veto_g)
+           or _pick(gp,ghist,gq[-1:],set(),set(),2,veto_g)
+           or _pick(gp,ghist,gq[-1:],set(),set(),3,veto_g)
+           or _pick(gp,ghist,[],set(),set(),4,lambda c: veto_g(c,False)))
+        s=(_pick(sp,shist,sq[-4:],sseen,set(sq),1,trio)
+           or _pick(sp,shist,sq[-2:],sseen,set(sq),1,trio)
+           or _pick(sp,shist,sq[-1:],sseen,set(),2,trio)
+           or _pick(sp,shist,sq[-1:],sseen,set(),3))
+        for i,v in enumerate(g): ghist[i][v]=rot
+        for i,v in enumerate(s): shist[i][v]=rot
+        gseen.add(g); sseen.add(s)
+        gq.append(g); sq.append(s); tq.append((s[1],s[2],s[3]))
+        bq.append((g[0],g[1])); aq.append((g[2],g[3],g[4]))
+        if len(bq)>8: bq.pop(0)
+        if len(aq)>6: aq.pop(0)
+        if len(gq)>12: gq.pop(0)
+        if len(sq)>10: sq.pop(0)
+        if len(tq)>12: tq.pop(0)
+        rec,spk,arec,aspk,third=g; mood,lead,video,mini=s
+        _SCHED[rot]={'beg':(rec,spk),'adv':(arec,aspk,third),
+                     'mood':mood,'lead':lead,'video':video,'mini':mini}
+
+def plan(rot):
+    """Какие механики достаются теме №rot."""
+    if rot<=LEGACY_UNTIL: return _plan_legacy(rot)
+    if rot not in _SCHED: _build_schedule(max(rot, LEGACY_UNTIL+60))
+    return _SCHED[rot]
 
 STOP=set('a an the to of and or in on at for with without you your it is are be'
          ' that this something someone very not do does so than then when who'
