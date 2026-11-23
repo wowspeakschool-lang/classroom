@@ -97,15 +97,16 @@ button{font:inherit;color:inherit}
 /* картинка целиком внутри кружка: квадрат 56% по центру, object-fit:contain — ничего не обрезается (23.11.2026, Анна: «значки обрезаны») */
 .door .disc .pic{position:absolute;left:22%;top:22%;width:56%;height:56%;filter:drop-shadow(0 4px 5px rgba(0,0,0,.35))}
 .door.d-open .disc{background:radial-gradient(circle at 50% 40%,#ffffff40,#ffffff14 70%);box-shadow:inset 0 0 0 2px #ffffffaa,0 0 14px #ffd97855}
+.door .disc .pic.pw{left:7%;width:86%}
 .door.d-avail .disc .pic,.door.d-today .disc .pic,.door.d-missed .disc .pic,.door.d-future .disc .pic{left:16%;top:16%;width:68%;height:68%}
 .door .num{position:absolute;left:-4%;top:-6%;min-width:34%;aspect-ratio:1;border-radius:50%;background:#fff;color:var(--night);font-family:var(--ff-head);font-weight:900;font-size:clamp(10px,1.1vw,15px);display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.35);padding:2px;z-index:2}
 .door.d-today .num{background:var(--pink);color:#fff}
 .door.d-today{animation:todayGlow 1.4s ease-in-out infinite}
 @keyframes todayGlow{50%{transform:translate(-50%,-50%) scale(1.12)}}
 .door.d-today::before{content:"";position:absolute;inset:-16%;border-radius:50%;background:radial-gradient(circle,rgba(255,220,120,.6),transparent 65%)}
-.door.d-missed .disc{background:#00000044;box-shadow:inset 0 0 0 3px #FFC83D}
-.door.d-missed .disc .pic{filter:grayscale(.75) brightness(.8)}
-.door.d-missed .num{background:#FFC83D;color:#6E4A00}
+.door.d-missed .disc{background:#ffffff14;box-shadow:inset 0 0 0 2px #ffffffaa}
+
+
 .door .miss{position:absolute;left:50%;bottom:-17%;transform:translateX(-50%);background:var(--coin);color:var(--coin-ink);font-family:var(--ff-head);font-weight:900;font-size:clamp(8px,.85vw,11px);border-radius:999px;padding:2px 7px;box-shadow:0 2px 6px rgba(0,0,0,.35);white-space:nowrap;z-index:2}
 .door.d-future .disc .pic{filter:grayscale(1) brightness(1.5) opacity(.38)}
 .door.d-future .num{background:#ffffffaa}
@@ -235,10 +236,9 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
   .adv-tabs{top:54px;flex-wrap:nowrap}
   .adv-tabs button{font-size:13px;padding:8px 11px;white-space:nowrap}
   .treebox{grid-template-columns:1fr}
-  .treearea{height:62vh;order:-1}
+  .treearea{height:calc(100svh - 330px);min-height:360px;order:-1}
   .scene{aspect-ratio:3/5;max-width:100%}
   .plaque{flex-direction:column;align-items:flex-start;gap:4px}
-  .door .miss .mt{display:none}
   .streak{display:none}
   .legend{margin-left:0}
   .poster{grid-template-columns:1fr}
@@ -266,11 +266,13 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
 "use strict";
 /* ---------- звук: свои записи (голоса выбрала Анна 23.11.2026); голос браузера — только если файла нет ----------
    «red ball» играется двумя файлами подряд: red, потом ball */
+var PHRASES={"red ball": "audio/p_red_ball.mp3", "blue ball": "audio/p_blue_ball.mp3", "green ball": "audio/p_green_ball.mp3", "gold ball": "audio/p_gold_ball.mp3", "purple ball": "audio/p_purple_ball.mp3", "silver ball": "audio/p_silver_ball.mp3", "gold star": "audio/p_gold_star.mp3", "silver star": "audio/p_silver_star.mp3", "red star": "audio/p_red_star.mp3", "blue star": "audio/p_blue_star.mp3", "gold bell": "audio/p_gold_bell.mp3", "silver bell": "audio/p_silver_bell.mp3", "red bell": "audio/p_red_bell.mp3", "red candy cane": "audio/p_red_candy_cane.mp3", "green candy cane": "audio/p_green_candy_cane.mp3", "blue candy cane": "audio/p_blue_candy_cane.mp3", "white snowflake": "audio/p_white_snowflake.mp3", "blue snowflake": "audio/p_blue_snowflake.mp3", "gold snowflake": "audio/p_gold_snowflake.mp3", "pink snowflake": "audio/p_pink_snowflake.mp3", "red bow": "audio/p_red_bow.mp3", "blue bow": "audio/p_blue_bow.mp3", "green bow": "audio/p_green_bow.mp3", "purple bow": "audio/p_purple_bow.mp3", "red stocking": "audio/p_red_stocking.mp3", "green stocking": "audio/p_green_stocking.mp3", "blue stocking": "audio/p_blue_stocking.mp3", "red present": "audio/p_red_present.mp3", "pink present": "audio/p_pink_present.mp3", "purple present": "audio/p_purple_present.mp3", "yellow present": "audio/p_yellow_present.mp3", "blue present": "audio/p_blue_present.mp3", "green present": "audio/p_green_present.mp3", "gold tinsel": "audio/p_gold_tinsel.mp3", "silver tinsel": "audio/p_silver_tinsel.mp3", "red tinsel": "audio/p_red_tinsel.mp3", "green tinsel": "audio/p_green_tinsel.mp3", "blue tinsel": "audio/p_blue_tinsel.mp3", "pink heart": "audio/p_pink_heart.mp3", "red heart": "audio/p_red_heart.mp3", "purple heart": "audio/p_purple_heart.mp3", "pink sweet": "audio/p_pink_sweet.mp3", "blue sweet": "audio/p_blue_sweet.mp3", "green sweet": "audio/p_green_sweet.mp3", "purple sweet": "audio/p_purple_sweet.mp3", "blue mitten": "audio/p_blue_mitten.mp3", "red mitten": "audio/p_red_mitten.mp3", "green mitten": "audio/p_green_mitten.mp3", "pink mitten": "audio/p_pink_mitten.mp3", "gold tree topper": "audio/p_gold_top_star.mp3", "silver tree topper": "audio/p_silver_top_star.mp3"};
+/* сочетание «цвет + украшение» — одной записью, без точки посередине (23.11.2026, Анна) */
 var AUDIO={"Christmas tree": "audio/christmas_tree.mp3", "ball": "audio/ball.mp3", "star": "audio/star.mp3", "bell": "audio/bell.mp3", "garland": "audio/garland.mp3", "candy cane": "audio/candy_cane.mp3", "snowflake": "audio/snowflake.mp3", "gingerbread man": "audio/gingerbread_man.mp3", "bow": "audio/bow.mp3", "fairy lights": "audio/fairy_lights.mp3", "pine cone": "audio/pine_cone.mp3", "stocking": "audio/stocking.mp3", "present": "audio/present.mp3", "snowy tree": "audio/snowy_tree.mp3", "tinsel": "audio/tinsel.mp3", "heart": "audio/heart.mp3", "snowman": "audio/snowman.mp3", "icicle": "audio/icicle.mp3", "reindeer": "audio/reindeer.mp3", "sweet": "audio/sweet.mp3", "mitten": "audio/mitten.mp3", "angel": "audio/angel.mp3", "golden tree": "audio/golden_tree.mp3", "cracker": "audio/cracker.mp3", "clock": "audio/clock.mp3", "tree topper": "audio/tree_topper.mp3", "red": "audio/red.mp3", "blue": "audio/blue.mp3", "green": "audio/green.mp3", "gold": "audio/gold.mp3", "silver": "audio/silver.mp3", "purple": "audio/purple.mp3", "pink": "audio/pink.mp3", "white": "audio/white.mp3", "yellow": "audio/yellow.mp3", "orange": "audio/orange.mp3", "Merry Christmas!": "audio/merry_christmas.mp3", "Happy New Year!": "audio/happy_new_year.mp3"};
 var player=new Audio(),queue=[];
 function playNext(){var u=queue.shift();if(!u)return;try{player.src=u;player.currentTime=0;var p=player.play();if(p&&p.catch)p.catch(function(){});}catch(e){}}
 player.addEventListener('ended',playNext);
-function parts(w){if(AUDIO[w])return [AUDIO[w]];var i=w.indexOf(' ');if(i>0){var a=w.slice(0,i),b=w.slice(i+1);if(AUDIO[a]&&AUDIO[b])return [AUDIO[a],AUDIO[b]];}return null;}
+function parts(w){if(PHRASES[w])return [PHRASES[w]];if(AUDIO[w])return [AUDIO[w]];var i=w.indexOf(' ');if(i>0){var a=w.slice(0,i),b=w.slice(i+1);if(AUDIO[a]&&AUDIO[b])return [AUDIO[a],AUDIO[b]];}return null;}
 function say(){var list=[],miss=null;
   [].slice.call(arguments).forEach(function(w){var p=parts(w);if(p)list=list.concat(p);else miss=miss||w;});
   try{player.pause();}catch(e){}
@@ -400,20 +402,20 @@ function modal(html){var m=document.createElement('div');m.className='modal';m.i
   m.onclick=function(e){if(e.target===m||e.target.hasAttribute('data-close'))m.remove();};return m;}
 function plaque(){
   if(isTest())return '<div class="plaque"><span class="vn">Вариант 1 · Тест</span><span class="vt">Все 31 окошко открываются подряд, без дат — чтобы посмотреть, что внутри каждого.</span></div>';
-  return '<div class="plaque"><span class="vn">Вариант 2 · 20 декабря</span><span class="vt">Сегодня 20 декабря. Ученица не заходила 7, 8, 14, 18 и 19 декабря — эти окошки с жёлтой рамкой, их можно открыть за 🪙 5. Сегодняшнее — бесплатно, 21–31 ещё закрыты.</span></div>';
+  return '<div class="plaque"><span class="vn">Вариант 2 · 20 декабря</span><span class="vt">Сегодня 20 декабря. Окошки 7, 8, 14, 18 и 19 декабря ученица ещё не открыла — у них монетка 🪙 5, их можно открыть за монетки. Сегодняшнее — бесплатно, 21–31 ещё закрыты.</span></div>';
 }
 
 function coinsModal(){
   var earned=0,spent=0;S.log.forEach(function(r){if(r.a>0&&!r.start)earned+=r.a;if(r.a<0)spent-=r.a;});
   var rows=S.log.slice().reverse().map(function(r){return '<div class="lrow"><span class="ic">'+r.ic+'</span><div class="w"><b>'+esc(r.t)+'</b><small>'+esc(r.d)+(r.s?' · '+esc(r.s):'')+'</small></div><span class="a '+(r.a>0?'plus':'minus')+'">'+(r.a>0?'+':'−')+Math.abs(r.a)+'</span></div>';}).join('');
   modal('<div class="mcard wide"><h3>🪙 Мои монетки</h3><div class="ctiles"><div class="ct"><b>'+coins()+'</b><small>сейчас</small></div><div class="ct"><b style="color:var(--green)">+'+earned+'</b><small>заработала</small></div><div class="ct"><b style="color:var(--red)">−'+spent+'</b><small>потратила</small></div></div>'+
-   '<p class="hint" style="margin:0">Монетки дают за уроки, сданную домашку и активность на уроке. Тратить можно на колесо удачи, сундучок-сюрприз, пропущенные окошки (🪙 5) и новые цвета украшений (🪙 1).</p>'+
+   '<p class="hint" style="margin:0">Монетки дают за уроки, сданную домашку и активность на уроке. Тратить можно на колесо удачи, сундучок-сюрприз, окошки прошлых дней (🪙 5) и новые цвета украшений (🪙 1).</p>'+
    '<div class="ledger">'+rows+'</div><div class="btns" style="justify-content:flex-end"><button type="button" class="btn" data-close>Закрыть</button></div></div>');
 }
 
 function renderHome(){
   var today=freeToday()?'<span class="new">✨ Новое окошко ждёт тебя!</span>':'<span class="pill p-green">Сегодняшнее окошко открыто ✓</span>';
-  var miss=missedDays().length?'<span class="pill p-coin">🎁 Пропущено окошек: '+missedDays().length+'</span>':'';
+  var miss='';
   $('page').innerHTML=plaque()+
    '<div class="hero" id="hero" role="button" tabindex="0"><img class="tr" src="img/tree_'+S.tree+'.webp" alt="">'+
    '<h2>🎄 Адвент-календарь</h2><p>Каждый день — новое украшение и новое английское слово. Укрась свою ёлку к Новому году!</p>'+today+miss+'</div>'+
@@ -459,9 +461,9 @@ function calHtml(st,poster){
     (prog>1?'<path class="done" d="'+roadPath(L.pts.slice(0,prog),H)+'" stroke-width="'+(H>100?.9:.6)+'" stroke-dasharray="'+(H>100?'1.6 1.6':'1.1 1.1')+'"/>':'')+'</svg>';
   for(var d=1;d<=N;d++){var p=L.pts[d-1],o=st?st.opened[d]:undefined,stt,inner,lab;
     if(!st)stt='d-avail';else if(o!==undefined)stt='d-open';else if(isTest())stt='d-avail';else if(d===S.day)stt='d-today';else if(d<S.day)stt='d-missed';else stt='d-future';
-    if(stt==='d-open'){var it=DAYS[o];inner=pic(dayImg(it));lab=dayEn(it);}else{inner=pic(gift(d));lab=d+' декабря';}
+    if(stt==='d-open'){var it=DAYS[o];inner=pic(dayImg(it));if(it.f&&F[it.f].wide)inner=inner.replace('class="pic"','class="pic pw"');lab=dayEn(it);}else{inner=pic(gift(d));lab=d+' декабря';}
     var extra='';
-    if(stt==='d-missed'){extra='<span class="miss"><span class="mt">пропущено · </span>🪙 5</span>';lab=d+' декабря — пропущено. Открыть за 5 монеток';}
+    if(stt==='d-missed'){extra='<span class="miss">🪙 5</span>';lab=d+' декабря — открыть за 5 монеток';}
     if(stt==='d-future'){extra='<span class="lock">🔒</span>';lab=d+' декабря — ещё рано';}
     if(stt==='d-today')lab='Сегодня, '+d+' декабря — бесплатно';
     h+='<button type="button" class="door '+stt+'" data-d="'+d+'" style="left:'+p[0]+'%;top:'+p[1]+'%;--dw:'+(poster?'8.4%':L.dw)+'" title="'+esc(lab)+'" aria-label="'+esc(lab)+'"><span class="disc">'+inner+'</span>'+extra+'<span class="num">'+d+'</span></button>';}
@@ -470,8 +472,8 @@ function calHtml(st,poster){
 function renderAdvent(){
   var m=missedDays(),bar;
   if(isTest())bar='<span class="date">🧪 Тест</span><span class="hint">Открыто: '+nOpened()+' из 31</span>';
-  else bar='<span class="date">📅 Сегодня '+S.day+' декабря</span>'+((S.day in S.opened)?'<span class="pill p-green">Сегодняшнее окошко открыто ✓</span>':'<span class="pill p-pink">Сегодняшнее окошко — бесплатно</span>')+(m.length?'<span class="pill p-coin">Пропущено: '+m.length+' · по 🪙 5</span>':'')+
-    '<span class="legend"><span><i class="lg" style="background:var(--pink)"></i>сегодня</span><span><i class="lg" style="background:#FFC83D"></i>пропущено — 🪙 5</span><span><i class="lg" style="background:#E6E9F5"></i>ещё рано 🔒</span></span>';
+  else bar='<span class="date">📅 Сегодня '+S.day+' декабря</span>'+((S.day in S.opened)?'<span class="pill p-green">Сегодняшнее окошко открыто ✓</span>':'<span class="pill p-pink">Сегодняшнее окошко — бесплатно</span>')+
+    '<span class="legend"><span><i class="lg" style="background:var(--pink)"></i>сегодня</span><span>🪙 5 — окошко прошлого дня</span><span><i class="lg" style="background:#E6E9F5"></i>ещё рано 🔒</span></span>';
   $('page').innerHTML='<div class="adv-tabs">'+[['cal','🗓 Календарь'],['tree','🎄 Моя ёлка и сундук']].map(function(x){return '<button type="button" data-t="'+x[0]+'" class="'+(S.tab===x[0]?'on':'')+'">'+x[1]+'</button>';}).join('')+'</div>'+
     plaque()+(S.tab==='tree'?'':'<div class="advbar">'+bar+'</div>')+'<div id="adv"></div>';
   $$('.adv-tabs button').forEach(function(b){b.onclick=function(){S.tab=b.dataset.t;sel=null;save();render();};});
@@ -486,11 +488,11 @@ function doorClick(d,b){
   var o=S.opened[d];if(o!==undefined){var it=DAYS[o];sayToast(dayEn(it),dayRu(it));return;}
   if(isTest()||d===S.day)return openDay(d,b);
   if(d>S.day){shake(b);toast('Это окошко откроется '+d+' декабря ⭐');return;}
-  var m=modal('<div class="mcard"><div class="art" style="width:120px;height:120px;filter:grayscale(.6)">'+pic(gift(d))+'</div><h3>'+d+' декабря — этот день уже прошёл</h3>'+
-    '<p class="hint" style="margin:0">В этот день окошко осталось закрытым. Его можно открыть сейчас за 5 монеток. Сегодняшнее окошко всегда бесплатное.</p>'+
+  var m=modal('<div class="mcard"><div class="art" style="width:120px;height:120px;filter:grayscale(.6)">'+pic(gift(d))+'</div><h3>Окошко '+d+' декабря</h3>'+
+    '<p class="hint" style="margin:0">Это окошко можно открыть за 5 монеток. Сегодняшнее окошко всегда бесплатное.</p>'+
     '<p style="margin:0"><b>У тебя: 🪙 '+coins()+'</b></p><div class="btns"><button type="button" class="btn pink" id="buyDay"'+(coins()<5?' disabled':'')+'>Открыть за 🪙 5</button><button type="button" class="btn ghost" data-close>Не сейчас</button></div>'+
     (coins()<5?'<p class="hint" style="margin:0">Не хватает монеток — их дают за уроки и домашку.</p>':'')+'</div>');
-  var bb=m.querySelector('#buyDay');if(bb)bb.onclick=function(){m.remove();if(spend(5,'🎁','Пропущенное окошко: '+d+' декабря'))openDay(d,b);};
+  var bb=m.querySelector('#buyDay');if(bb)bb.onclick=function(){m.remove();if(spend(5,'🎁','Окошко '+d+' декабря'))openDay(d,b);};
 }
 function openDay(d,b){
   var idx=nOpened(),it=DAYS[idx];shake(b);
@@ -665,14 +667,14 @@ function drag(el,o){
 var SCRIPT='Ребята, у меня для вас новогодняя новость! С 1 декабря в вашем личном кабинете появится адвент-календарь — 31 окошко, по одному на каждый день до Нового года.\n\n'+
  'Каждый день открывайте одно окошко. Внутри — украшение для ёлки и новое английское слово. Слово можно послушать и повторить вслух.\n\n'+
  'Украшения складываются в сундук, а оттуда вы сами вешаете их на свою ёлку — куда захотите. Их можно увеличить, уменьшить, повернуть и даже поменять цвет.\n\n'+
- 'Пропустили день — не страшно: окошко можно открыть позже за 5 монеток. А новый цвет украшения стоит всего 1 монетку.\n\n'+
+ 'Не успели открыть окошко в свой день — его можно открыть позже за 5 монеток. А новый цвет украшения стоит всего 1 монетку.\n\n'+
  'К 31 декабря у каждого будет своя нарядная ёлка. Покажете мне её на уроке — посмотрим, сколько новых слов вы соберёте!';
 function renderTeacher(){
   $('tview').innerHTML='<div class="poster" id="poster"><div><span class="badge">с 1 по 31 декабря</span><h2>🎄 Адвент-календарь</h2><p class="lead">Новое окошко каждый день — прямо в твоём личном кабинете</p>'+calHtml(null,true)+
    '<ul><li><i>🎁</i><span>Каждый день — одно окошко: украшение для ёлки и новое английское слово</span></li>'+
    '<li><i>🔊</i><span>Слово можно послушать и повторить</span></li>'+
    '<li><i>🎄</i><span>Украшения вешаешь на свою ёлку сам: больше, меньше, другой цвет</span></li>'+
-   '<li><i>🪙</i><span>Пропустил день — открой окошко за 5 монеток. Новый цвет — 1 монетка</span></li></ul></div>'+
+   '<li><i>🪙</i><span>Окошко прошлого дня — за 5 монеток. Новый цвет — 1 монетка</span></li></ul></div>'+
    '<div class="tr">'+pic('img/tree_pine.webp')+'<span>Твоя ёлка ждёт украшений ✨</span></div></div>'+
    '<div class="script"><h3>Что рассказать детям</h3><p class="hint" style="margin:0">Сделайте скриншот синей карточки выше и покажите её на уроке, а это — прочитайте или перескажите своими словами.</p>'+
    '<textarea id="scr" aria-label="Текст для детей">'+esc(SCRIPT)+'</textarea><div><button type="button" class="btn" id="cp">Скопировать текст</button></div></div>';
@@ -684,8 +686,8 @@ function renderTeacher(){
 /* ---------- переключатель вариантов ---------- */
 function renderDemo(){
   var c=ALL.cur;
-  $('demo').innerHTML='<b>Показ:</b><button type="button" class="seg'+(c==='test'?' on':'')+'" data-m="test">1 · Тест</button><button type="button" class="seg'+(c==='miss'?' on':'')+'" data-m="miss">2 · 20 декабря<span class="lng">, пропуски</span></button><button type="button" class="seg'+(c==='teacher'?' on':'')+'" data-m="teacher">3 · <span class="lng">Карточка </span>для учителя</button>'+(c==='teacher'?'':'<button type="button" class="x" id="dReset" title="Начать этот вариант сначала">↺<span class="lng"> сначала</span></button>');
-  $$('.demo .seg').forEach(function(b){b.onclick=function(){var page=S.page,tab=S.tab;ALL.cur=b.dataset.m;sel=null;openFam=null;
+  $('demo').innerHTML='<b>Показ:</b><button type="button" class="seg'+(c==='test'?' on':'')+'" data-m="test">1 · Тест</button><button type="button" class="seg'+(c==='miss'?' on':'')+'" data-m="miss">2 · 20 декабря</button><button type="button" class="seg'+(c==='teacher'?' on':'')+'" data-m="teacher">3 · <span class="lng">Карточка </span>для учителя</button>'+(c==='teacher'?'':'<button type="button" class="x" id="dReset" title="Начать этот вариант сначала">↺<span class="lng"> сначала</span></button>');
+  $$('.demo .seg').forEach(function(b){b.onclick=function(){var page=S.page,tab=S.tab;ALL.cur=b.dataset.m;sel=null;openFam=null;var tEl=document.querySelector('.toast');if(tEl)tEl.hidden=true;
     if(ALL.cur!=='teacher'){S=ALL[ALL.cur];S.page=page;S.tab=tab;}save();render();window.scrollTo(0,0);};});
   var r=$('dReset');if(r)r.onclick=function(){var m=modal('<div class="mcard"><h3>Начать вариант «'+(c==='test'?'Тест':'20 декабря')+'» сначала?</h3><div class="btns"><button type="button" class="btn" id="y">Да</button><button type="button" class="btn ghost" data-close>Нет</button></div></div>');
     m.querySelector('#y').onclick=function(){m.remove();var page=S.page,tab=S.tab;ALL[c]=c==='test'?freshTest():freshMiss();S=ALL[c];S.page=page;S.tab=tab;sel=null;openFam=null;save();render();};};
