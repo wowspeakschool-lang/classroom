@@ -1,0 +1,152 @@
+# Запросы к Алёне Губенко — ежедневный разбор (отдельный чат)
+
+Решение Анны 23.11.2026: **контроль качества уезжает из чата «Classroom» в
+отдельный чат** и расширяется. Этот файл — инструкция тому чату; здесь, в
+Classroom, заявки больше не разбираются (ежедневная задача выключена
+23.11.2026).
+
+## Что главное
+
+Чат **не отвечает за Алёну и ничего не меняет на платформе**. Он каждый день
+приносит в чат разбор: что открыто, что ждёт её шага, вся нужная информация
+собрана заранее (про ученика, преподавателя, историю), и **черновик ответа**
+или список вопросов, которые надо кому-то задать. Отправляет ответы и меняет
+статусы только человек.
+
+## Где смотреть (три раздела платформы + сама Анна)
+
+| раздел на app.wowteach.ru | таблица | что считать открытым |
+|---|---|---|
+| «Контент» → «Контроль качества» | `classroom_feedback` | `status = 'open'` |
+| **CPD → «Запросы»** | `teacher_questions` (вопрос методисту) и `unit_change_requests` (смена юнита от трекера) | `status = 'pending'`; у вопросов ещё `will_contact` — обещано связаться, но ответа в базе нет |
+| **«Школа» → «Кейсы»** | `client_cases` (+ `client_case_comments`) | `status <> 'closed'` (бывают `open`, `in_progress`, `under_control`) |
+| что Анна присылает в чат сама | — | — |
+
+Раздел «Запросы» — это **две разные вещи в одном списке** (так и в коде
+платформы, `src/features/requests/model.ts`): автоматический запрос на смену
+юнита от трекера прогресса и written вопрос преподавателя методисту с темой и
+ответственным.
+
+## Кто такая «Алёна Губенко» в базе
+
+В `users` два её аккаунта, и запросы могут висеть на любом:
+
+- `386dc935-749f-4345-b68a-96abaaf6b09d` — **Губенко Алёна**, активный,
+  роли `methodist, teacher, buddy`;
+- `e3ccab83-ede3-4beb-9d3d-1e9bcc1f9778` — **Алена Губенко (объединён)**,
+  неактивный, роли `methodist, buddy` (старые записи ссылаются на него).
+
+Смотреть всегда **оба id**. Поля адресации:
+
+- `teacher_questions.assignee_user_id` — на кого назначен вопрос,
+  `answered_by_user_id` — кто ответил;
+- `client_cases.assignee_user_id`, массив `assignee_user_ids`, `turn_user_id`
+  («ход за кем-то» — самый важный признак, что ждут именно её шага);
+- `unit_change_requests.handled_by_user_id` — кто разобрал;
+- `classroom_feedback` адресата не имеет: заявки преподавателей общие.
+
+## Ежедневный разбор — порядок
+
+1. Собрать открытое по трём таблицам (запросы ниже).
+2. По каждому пункту **собрать контекст заранее**, чтобы Анна и Алёна ничего
+   не искали:
+   - **ученик** (`students`): имя, возраст, программа и юнит, группа и формат,
+     преподаватель (`student_teacher_assignment`, `teachers`), давно ли учится,
+     посещаемость и пропуски (`mk_lesson_students`, `retention_*`), последние
+     отчёты и оценки (`teacher_reports`, `monthly_summaries`, `assessments`),
+     прошлые кейсы и запросы по нему;
+   - **преподаватель** (`teachers`): грейд, стаж, какие ещё кейсы и вопросы
+     были, что ему отвечали раньше;
+   - **урок или задание**, если вопрос про контент: курс, юнит, номер блока
+     как в редакторе (`sort_order + 1`), ссылка
+     `https://app.wowteach.ru/?run=<lesson_id>&preview=1`.
+3. Написать в чат по каждому пункту: **ситуация → собранные факты →
+   предлагаемый ответ (черновиком, готовым к копированию) → или вопросы,
+   которые надо задать, и кому**.
+4. Ничего не отправлять и не закрывать самому. Анна отвечает по номерам,
+   правит формулировки — после этого отвечает человек.
+5. В конце ответа, как везде: нумерованные «Что ждём от вас» и «Что за мной»
+   и строка про фоновые работы.
+
+## Запросы, с которых начинать день
+
+```sql
+-- 1. Вопросы методисту, которые ждут Алёну
+select q.id, q.created_at, t.name as prepodavatel, mt.title as tema,
+       q.student_or_group_name, q.question, q.status, q.lesson_link
+from teacher_questions q
+left join teachers t on t.id = q.teacher_id
+left join methodist_topics mt on mt.id = q.topic_id
+where q.status in ('pending','will_contact')
+  and q.assignee_user_id in ('386dc935-749f-4345-b68a-96abaaf6b09d',
+                             'e3ccab83-ede3-4beb-9d3d-1e9bcc1f9778')
+order by q.created_at;
+
+-- 2. Запросы на смену юнита, которые никто не разобрал
+select r.id, r.created_at, r.student_name_text, t.name as prepodavatel,
+       r.current_textbook, r.current_unit, r.new_textbook, r.new_unit, r.reason
+from unit_change_requests r
+left join teachers t on t.id = r.teacher_id
+where r.status = 'pending' order by r.created_at;
+
+-- 3. Кейсы, где ход за Алёной (или она в ответственных)
+select c.id, c.created_at, c.student_name, c.category, c.status, c.body,
+       c.last_activity_at, c.review_at
+from client_cases c
+where c.status <> 'closed'
+  and ('386dc935-749f-4345-b68a-96abaaf6b09d' = any(
+         array_remove(array[c.assignee_user_id, c.turn_user_id], null))
+    or '386dc935-749f-4345-b68a-96abaaf6b09d' = any(coalesce(c.assignee_user_ids, '{}'))
+    or 'e3ccab83-ede3-4beb-9d3d-1e9bcc1f9778' = any(
+         array_remove(array[c.assignee_user_id, c.turn_user_id], null))
+    or 'e3ccab83-ede3-4beb-9d3d-1e9bcc1f9778' = any(coalesce(c.assignee_user_ids, '{}')))
+order by c.last_activity_at nulls first;
+
+-- 4. Заявки преподавателей по домашкам (общие, без адресата)
+select f.id, f.created_at, c.slug, l.title, b.sort_order + 1 as blok, f.body, f.context
+from classroom_feedback f
+join classroom_lessons l on l.id = f.lesson_id
+join classroom_units u on u.id = l.unit_id
+join classroom_courses c on c.id = u.course_id
+left join classroom_blocks b on b.id = f.block_id
+where f.status = 'open' order by f.created_at;
+```
+
+## Первая задача чата — научиться отвечать как Алёна
+
+До первого ежедневного разбора: прочитать **всё, что она уже отвечала**, и
+выписать её манеру и типовые решения в `docs/stil_otvetov_aleny.md`
+(в этом же репозитории):
+
+- 75 вопросов методисту, где она стоит в `answered_by_user_id`: вопрос →
+  её `methodist_answer`; что отвечает коротко, что подробно, где зовёт
+  преподавателя на разговор, где предлагает смену юнита или учебника;
+- 23 её комментария в кейсах (`client_case_comments`) и закрытые кейсы с её
+  участием: `resolution`, `outcome` — чем обычно кончается кейс по категориям;
+- 34 вопроса со статусом `will_contact` — что в школе значит «свяжусь лично»
+  и когда так отвечают.
+
+Дальше этот файл пополняется: каждая правка Анны к черновику — строка «было →
+стало» с причиной.
+
+## Чего чат не делает
+
+- не пишет на платформу: не меняет `status`, не заполняет `methodist_answer`,
+  `resolution`, не закрывает кейсы и заявки;
+- не пишет преподавателям и родителям;
+- не трогает контент курсов (это чат «Classroom» и соседние);
+- не придумывает факты про ученика: чего нет в базе — так и пишет
+  «в базе нет, надо спросить у <кого>».
+
+## Доступы для нового чата
+
+1. **Supabase** — проект `vtcxghsqymwkyiogpndf` (коннектор Supabase в
+   настройках Claude: «Connectors» → Supabase → этот проект). Без него чат не
+   видит ни запросов, ни кейсов.
+2. **Репозиторий `wowspeakschool-lang/classroom`** — ради этого файла и
+   `docs/stil_otvetov_aleny.md`, где копится обученная манера ответов.
+3. По желанию — приватный `wowspeakschool-lang/wowspeak-platform`
+   (только чтение): там видно, как разделы устроены и какие статусы бывают.
+
+Расписание чат заводит себе сам (ежедневно утром по Москве). В Classroom
+ежедневная задача «Контроль качества» выключена 23.11.2026.
