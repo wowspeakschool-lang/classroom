@@ -36,9 +36,23 @@ h2{font-family:var(--fh);font-weight:900;font-size:22px;margin:0}
 .coll .jar{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff7,transparent 40%),var(--green);display:grid;place-items:center;font-size:15px}
 .coll span{font-family:var(--fh);font-weight:800;font-size:14px}
 .coins{font-family:var(--fh);font-weight:900;background:linear-gradient(180deg,#FFE07A,#F5B82E);color:#6E4A00;border-radius:999px;padding:7px 14px;box-shadow:0 3px 0 #B9861A}
-.tabs{display:flex;gap:6px}
-.tabs b{font-family:var(--fh);font-size:13px;color:#F5DCC4;padding:7px 14px;border-radius:999px;background:rgba(0,0,0,.2)}
-.tabs b.on{background:#FFF4DC;color:#7A4425}
+.tip{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%);width:230px;background:#FFF8EC;color:var(--ink);border-radius:16px;padding:12px 14px;box-shadow:0 12px 30px rgba(0,0,0,.35);font-size:13px;line-height:1.4;z-index:20;display:none;text-align:left}
+.tip::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border:8px solid transparent;border-top-color:#FFF8EC}
+.tip b{font-family:var(--fh);display:block;font-size:14px;margin-bottom:3px}
+.tip .more{margin-top:8px;font-family:var(--fh);font-weight:800;font-size:12px;border:0;border-radius:10px;padding:7px 12px;color:#fff;cursor:pointer}
+.toy.m:hover .tip,.toy.m.open .tip,.toy.m:focus-within .tip{display:block}
+.toy.m{cursor:pointer}
+.modal{position:fixed;inset:0;background:rgba(20,15,40,.55);display:grid;place-items:center;z-index:50;padding:16px}
+.mc{background:#FFF8EC;color:var(--ink);border-radius:26px;max-width:440px;width:100%;padding:22px;display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 32px);overflow:auto}
+.mc h3{font-family:var(--fh);margin:0;font-size:20px}
+.mc ol{margin:0;padding-left:20px;line-height:1.55}
+.mc .lnk{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#F2EEFF;border-radius:10px;padding:8px 10px;color:var(--violet);word-break:break-all}
+.mc .row2{display:flex;gap:8px;flex-wrap:wrap}
+.mc button{font-family:var(--fh);font-weight:800;border:0;border-radius:14px;padding:11px 16px;color:#fff;cursor:pointer;font-size:14px}
+.mc .x{background:#E9E2D6;color:var(--ink)}
+.tabs{display:none}
+
+
 /* окно со снегом */
 .win{position:absolute;right:34px;top:46px;width:66px;height:84px;border-radius:45px 45px 8px 8px;border:6px solid #8C5530;background:linear-gradient(180deg,#1B2A6B,#4058A8);overflow:hidden;opacity:.9}
 .win::after{content:"";position:absolute;inset:0;background:radial-gradient(2px 2px at 20% 30%,#fff,transparent),radial-gradient(2px 2px at 60% 20%,#fff,transparent),radial-gradient(2px 2px at 80% 60%,#fff,transparent),radial-gradient(2px 2px at 40% 70%,#fff,transparent),radial-gradient(2px 2px at 30% 50%,#fff,transparent);animation:sn 4s linear infinite}
@@ -133,13 +147,13 @@ h2{font-family:var(--fh);font-weight:900;font-size:22px;margin:0}
 
 <div class="wrap">
 <div><h1>🧝 Мастерская эльфов — полки</h1>
-<p class="lead">Вариант «Полки мастерской», сделанный красивее: тёплая деревянная комната, гирлянда под потолком, вывеска, окно со снегом. Игрушки стоят прямо на полках, без карточек. Свои — цветные с зелёной точкой ✓, ещё не найденные — тёмным силуэтом. У особых игрушек свои полки: редкие на голубом стекле, эпические на фиолетовом бархате, легендарные в золотой витрине с подсветкой. Наведите на игрушку — появится название. Новых игрушек пока нет картинок, на их месте коробки-сюрпризы.</p></div>
+<p class="lead">Вариант «Полки мастерской», сделанный красивее: тёплая деревянная комната, гирлянда под потолком, вывеска, окно со снегом. Игрушки стоят прямо на полках, без карточек. Свои — цветные с зелёной точкой ✓, ещё не найденные — тёмным силуэтом. У особых игрушек свои полки: редкие на голубом стекле, эпические на фиолетовом бархате, легендарные в золотой витрине с подсветкой. Вкладок «Друзья» и «Задания» больше нет: наведите на закрытую коробку (на телефоне — нажмите), и появится коротко, что сделать, и кнопка «Подробнее об условиях». У новых игрушек пока нет картинок, на их месте коробки-сюрпризы.</p></div>
 
 <div class="room" id="room">
  <div class="lights" id="lights"></div>
  <div class="win"><i></i><i></i></div><div class="win" style="right:auto;left:34px"><i></i><i></i></div>
  <div class="sign"><div class="ropes"><i></i><i></i></div><div class="board"><b>Мастерская эльфов</b><small>Elf's Workshop</small></div></div>
- <div class="top"><div class="coll"><span class="jar">🎄</span><span>Собрано 15 из 44</span></div><div class="tabs"><b class="on">🎄 Игрушки</b><b>👫 Друзья</b><b>⭐ Задания</b></div><span class="coins">🪙 25</span></div>
+ <div class="top"><div class="coll"><span class="jar">🎄</span><span>Собрано 15 из 44</span></div><span class="coins">🪙 25</span></div>
  
  <div class="shelves" id="shelves"></div>
 </div>
@@ -165,7 +179,16 @@ var IMG=['tree_pine','red_ball','star','bell','ic_garland','candy_cane','snowfla
 var NM=['Christmas tree','ball','star','bell','garland','candy cane','snowflake','gingerbread man','bow','fairy lights','pine cone','stocking','present','snowy tree','tinsel','heart','snowman','icicle','reindeer','sweet','mitten','angel','golden tree','cracker','clock','tree topper'];
 var OWN=13;
 function toy(i){var o=i<OWN;return '<div class="toy '+(o?'':'no')+'"><img src="img/'+IMG[i]+'.webp" alt="">'+(o?'<span class="ok">✓</span>':'')+'<span class="nm">'+(o?NM[i]:'пока секрет')+'</span></div>';}
-function myst(c,own,emo){return '<div class="toy">'+(own?'<span class="emo">'+emo+'</span><span class="ok">✓</span>':'<div class="myst '+c+'"><span>?</span></div>')+'<span class="nm">'+(own?'snow globe':'сюрприз')+'</span></div>';}
+var TIP={r:['🔵 Редкая игрушка','Открывай окошки календаря: каждые 5 открытых окошек — новая редкая игрушка. До следующей — 2 окошка.','#2E6FD6'],
+ e:['🟣 Эпическая игрушка','Позови друга в адвент. Когда он откроет своё первое окошко, эта игрушка откроется у тебя.','#7A2FD0'],
+ l:['🟡 Легендарная игрушка','Выложи свою ёлку в соцсети и отметь нашу школу. Можно 3 раза — 3 легендарные игрушки.','#E39A10']};
+var MORE={r:['🔵 Редкие игрушки — за шкалу подарков','<p style="margin:0">Каждое открытое окошко двигает шкалу подарков. На 5, 10, 15, 20 и 25 открытых окошках открывается редкая игрушка-сюрприз, а между ними — монетки.</p><p style="margin:0"><b>Сейчас:</b> открыто 13 окошек, до следующей редкой игрушки — 2.</p>','<button style="background:#2E6FD6" data-close>К календарю</button>'],
+ e:['🟣 Эпические игрушки — за друзей','<ol><li>Нажми «Позвать друга» и отправь ему ссылку.</li><li>Друг заходит по ссылке и открывает своё первое окошко.</li><li>У тебя открывается эпическая игрушка-сюрприз.</li></ol><p style="margin:0">Всего 10 эпических игрушек — по одной за каждого друга. Позвано: 1 из 10.</p><div class="lnk">app.wowteach.ru/advent?friend=masha-p</div>','<button style="background:#7A2FD0">📨 Позвать друга</button>'],
+ l:['🟡 Легендарные игрушки — за соцсети','<ol><li>Нажми «📸 Сохранить мою ёлку» на вкладке ёлки.</li><li>Выложи картинку в пост или сторис и отметь нашу школу.</li><li>Сделай скриншот поста и прикрепи его здесь.</li><li>Мы проверим — и откроется легендарная игрушка.</li></ol><p style="margin:0">Можно 3 раза. Прикреплено: 0 из 3.</p>','<button style="background:#E39A10">📎 Прикрепить скриншот</button>']};
+function more(c){var m=document.createElement('div');m.className='modal';m.innerHTML='<div class="mc"><h3>'+MORE[c][0]+'</h3>'+MORE[c][1]+'<div class="row2">'+MORE[c][2]+'<button class="x" data-close>Закрыть</button></div></div>';
+ m.onclick=function(e){if(e.target===m||e.target.hasAttribute('data-close'))m.remove();};document.body.appendChild(m);}
+document.addEventListener('click',function(e){var b=e.target.closest('.more');if(b){more(b.dataset.c);return;}var t=e.target.closest('.toy.m');document.querySelectorAll('.toy.m.open').forEach(function(x){if(x!==t)x.classList.remove('open');});if(t)t.classList.toggle('open');});
+function myst(c,own,emo){return '<div class="toy'+(own?'':' m')+'" tabindex="0">'+(own?'':'<div class="tip"><b>'+TIP[c][0]+'</b>'+TIP[c][1]+'<br><button class="more" type="button" data-c="'+c+'" style="background:'+TIP[c][2]+'">Подробнее об условиях</button></div>')+''+(own?'<span class="emo">'+emo+'</span><span class="ok">✓</span>':'<div class="myst '+c+'"><span>?</span></div>')+'<span class="nm">'+(own?'snow globe':'сюрприз')+'</span></div>';}
 function row(h){return '<div class="row">'+h+'<i class="br" style="left:8%"></i><i class="br" style="right:8%"></i></div>';}
 var a=[],b=[];for(var i=0;i<13;i++)a.push(toy(i));for(i=13;i<26;i++)b.push(toy(i));
 var r=[myst('r',1,'🔮')];for(i=0;i<4;i++)r.push(myst('r'));
@@ -176,7 +199,7 @@ document.getElementById('shelves').innerHTML=
  '<div class="sh">'+row(b.join(''))+'</div>'+
  '<div class="sh rare"><span class="plate">🔵 Редкие — за шкалу подарков <small>1 из 5</small></span>'+row(r.join(''))+'</div>'+
  '<div class="sh epic"><span class="plate">🟣 Эпические — за друзей <small>1 из 10</small></span>'+row(e.join(''))+'</div>'+
- '<div class="sh leg"><span class="plate">🟡 Легендарные — за соцсети <small>0 из 3</small></span><div class="case">'+row(l.join(''))+'</div><p class="hint">Выложи свою ёлку и отметь школу — откроется легендарная игрушка</p></div>';
+ '<div class="sh leg"><span class="plate">🟡 Легендарные — за соцсети <small>0 из 3</small></span><div class="case">'+row(l.join(''))+'</div></div>';
 // гирлянда под потолком
 var COL=['#FF5A5A','#FFD23F','#4CD97B','#4C9BFF','#C26BFF','#FF8AD8'],L='';
 for(i=0;i<18;i++){var x=3+i*5.5,y=12+Math.sin(i/17*Math.PI)*14;L+='<span class="bulb" style="left:'+x+'%;top:'+y+'px;background:'+COL[i%6]+';color:'+COL[i%6]+';animation-delay:'+(i%5*.4)+'s"></span>';}
