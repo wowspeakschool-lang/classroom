@@ -151,7 +151,8 @@ h2{font-family:var(--fh);font-weight:900;font-size:22px;margin:0}
 .tier .spk{position:absolute;font-size:16px;animation:twk 1.8s ease-in-out infinite;color:#fff;text-shadow:0 0 8px currentColor;z-index:2}
 @media (max-width:720px){.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* гирлянда-огоньки на ёлке светится: лампочки мерцают по очереди; 31 декабря — вся ёлка в огнях (Анна, 24.11) */
-.fl{position:absolute;transform:translate(-50%,-50%);z-index:2}
+.fl{position:absolute;transform:translate(-50%,-50%);z-index:1}
+.treep .tree img.on{z-index:3}
 .fl img{width:100%;display:block;filter:drop-shadow(0 3px 3px rgba(0,0,0,.4))}
 .fl i{position:absolute;width:9%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,#fff 0 12%,var(--c) 30%,transparent 70%);mix-blend-mode:screen;animation:bulb 1.7s ease-in-out infinite;pointer-events:none}
 @keyframes bulb{0%,100%{opacity:.25;transform:translate(-50%,-50%) scale(.7)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}}
