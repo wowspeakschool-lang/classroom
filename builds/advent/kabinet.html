@@ -1303,10 +1303,10 @@ var mus=new Audio('audio/music_jingle.mp3');mus.loop=true;mus.volume=.18;var mus
 function mPlaying(){return musPausedByForest?!fmus.paused:!mus.paused;}
 function mUI(){var on=mPlaying();$('mBtn').textContent=on?'⏸':'🎵';$('mBtn').title=on?'Выключить музыку':'Включить музыку';}
 function mStart(){if(!mus.paused||musOff)return;mus.play().then(mUI).catch(function(){});}
-/* в лесу вместо Jingle Bells играет «шкатулка в лесу» (O Tannenbaum). 24.11 Анна выбрала «216 б» — обе вместе,
+/* в лесу вместо Jingle Bells играет песня, которую прислала Анна 24.11 («Волшебная новогодняя музыка без слов», Bruni AFX; до неё была «шкатулка в лесу»). 24.11 Анна выбрала «216 б» — обе вместе,
    но, послушав, сказала: «когда открываешь лес, сразу 2 песни звучат» — поэтому переход: одна плавно затихает, другая вступает.
    Тот же ползунок и та же кнопка; сам лес внутри рамки звук не включает. */
-var fmus=new Audio('audio/les_B_shkatulka.mp3');fmus.loop=true;var FK=1.1,mVolV=.18;fmus.volume=0;
+var fmus=new Audio('audio/les_music.mp3');fmus.loop=true;var FK=1.4,mVolV=.18;fmus.volume=0;
 var musPausedByForest=false;
 function fade(a,to,ms,done){clearInterval(a.__f);var from=a.volume,st=Date.now();a.__f=setInterval(function(){var k=Math.min(1,(Date.now()-st)/ms);a.volume=Math.max(0,Math.min(1,from+(to-from)*k));if(k>=1){clearInterval(a.__f);if(done)done();}},40);}
 function fSync(){var inF=S.page==='advent'&&S.tab==='forest';

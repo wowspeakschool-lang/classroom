@@ -183,8 +183,8 @@ function goTree(){try{parent.postMessage({advent:'tree'},'*');}catch(e){}}
 document.getElementById('toTree').onclick=goTree;
 if(/[?&]nye=1/.test(location.search))document.body.classList.add('nye');
 if(window.parent!==window)document.getElementById('callAn').hidden=true;
-/* звук леса (Анна, 24.11): шкатулка в лесу, тихо, по кругу; в кабинете его включает сам кабинет */
-if(window.parent===window){var fm=new Audio('audio/les_B_shkatulka.mp3');fm.loop=true;fm.volume=.2;
+/* звук леса (Анна, 24.11): песня, которую она прислала (Bruni AFX), тихо, по кругу; в кабинете его включает сам кабинет */
+if(window.parent===window){var fm=new Audio('audio/les_music.mp3');fm.loop=true;fm.volume=.28;
   var fb=document.createElement('button');fb.type='button';fb.className='back';fb.id='fMus';fb.textContent='🎵';fb.title='Музыка леса';
   document.getElementById('toTree').after(fb);var off=false;
   function fUI(){fb.textContent=fm.paused?'🎵':'⏸';}
