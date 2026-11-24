@@ -347,13 +347,15 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
 .spk{position:absolute;color:#fff;font-size:11px;pointer-events:none;animation:wtwk 1.8s ease-in-out infinite;text-shadow:0 0 6px currentColor;font-style:normal}
 .t-l .spk{color:#FFE9A0}.t-e .spk{color:#F0D6FF}
 @keyframes wtwk{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.15)}}
-.wtip{position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);width:210px;background:#FFF8EC;color:var(--ink);border-radius:16px;padding:11px 13px;box-shadow:0 12px 30px rgba(0,0,0,.35);font-size:13px;line-height:1.4;z-index:40;text-align:left;visibility:hidden;opacity:0;transition:opacity .15s,visibility 0s .4s;cursor:default}
-.wtip::before{content:"";position:absolute;left:-10px;right:-10px;top:100%;height:18px}
+.wtip{position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);width:210px;background:#FFF8EC;color:var(--ink);border-radius:16px;padding:11px 13px;box-shadow:0 12px 30px rgba(0,0,0,.35);font-size:13px;line-height:1.4;z-index:40;text-align:left;visibility:hidden;opacity:0;transition:opacity .12s,visibility 0s .12s;pointer-events:none}
+.wt.down .wtip{bottom:auto;top:calc(100% + 6px)}.wt.down .wtip::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:#FFF8EC}
+.wtip .hint2{display:block;margin-top:6px;font-weight:800;font-size:12px;color:#9C5E36}
 .wtip::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border:8px solid transparent;border-top-color:#FFF8EC}
 .wtip b{font-family:var(--ff-head);display:block;font-size:14px;margin-bottom:3px}
 .wtip .more{margin-top:8px;font-family:var(--ff-head);font-weight:800;font-size:12px;border:0;border-radius:10px;padding:7px 11px;color:#fff;cursor:pointer}
-.wt.m:hover .wtip,.wt.m.open .wtip,.wt.m:focus-within .wtip{visibility:visible;opacity:1;transition-delay:0s}
-.wt.m:hover,.wt.m.open,.wt.m:focus-within{z-index:30}
+.wt.m{pointer-events:none}.wt.m .bx{pointer-events:auto}
+.wt.m:hover .wtip,.wt.m:focus-visible .wtip{visibility:visible;opacity:1;transition:opacity .15s .3s,visibility 0s .3s}
+.wt.m:hover,.wt.m:focus-visible{z-index:30}
 .wt.edge-l .wtip{left:0;transform:none}.wt.edge-l .wtip::after{left:28px}
 .wt.edge-r .wtip{left:auto;right:0;transform:none}.wt.edge-r .wtip::after{left:auto;right:20px}
 .wtrees{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:8px 12px;background:rgba(0,0,0,.22);flex:none}
@@ -418,6 +420,27 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
 @keyframes conf{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
 .fx .flash{position:absolute;width:260px;height:260px;border-radius:50%;transform:translate(-50%,-50%) scale(.2);background:radial-gradient(circle,#fffbe0,rgba(255,220,120,.6) 35%,transparent 70%);animation:flash .7s ease-out forwards}
 @keyframes flash{to{transform:translate(-50%,-50%) scale(2.4);opacity:0}}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.mcard.combo{max-width:min(760px,calc(100vw - 32px));background:radial-gradient(circle at 50% 20%,#3a2a7a,#1C2456);color:#fff}
+.combo .cv{align-self:flex-end;font-size:11px;color:#C9CFF0;display:flex;gap:4px;align-items:center}
+.combo .cv button{font:inherit;font-weight:800;border:0;border-radius:999px;padding:3px 9px;background:rgba(255,255,255,.14);color:#fff;cursor:pointer}.combo .cv button.on{background:#FFD45A;color:#4A2E00}
+.combo .cards{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;width:100%}
+.combo .cc{position:relative;overflow:hidden;isolation:isolate;flex:1 1 180px;max-width:220px;border-radius:20px;padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;animation:pop .45s cubic-bezier(.2,1.5,.4,1) backwards}
+.combo .cc:nth-child(2){animation-delay:.15s}.combo .cc:nth-child(3){animation-delay:.3s}.combo .cc:nth-child(4){animation-delay:.45s}
+.combo .cc .ray{position:absolute;left:50%;top:40%;width:280px;height:280px;transform:translate(-50%,-50%);border-radius:50%;z-index:-1;background:repeating-conic-gradient(rgba(255,255,255,.16) 0 10deg,transparent 10deg 22deg);-webkit-mask:radial-gradient(circle,#000 20%,transparent 65%);mask:radial-gradient(circle,#000 20%,transparent 65%);animation:spin 10s linear infinite}
+.combo .cc .tag{font-family:var(--ff-head);font-weight:900;font-size:10px;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:3px 9px;background:rgba(255,255,255,.85);color:#1C2456}
+.combo .ci{width:110px;height:110px;object-fit:contain;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))}.combo .ci.emo{display:grid;place-items:center;font-size:70px}
+.combo .cc b{font-family:var(--ff-head);font-size:16px}.combo .cc small{font-size:12px;opacity:.85}
+.combo .csay{border:0;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;padding:3px 10px;cursor:pointer;font-size:14px}
+.combo .k-w{background:linear-gradient(180deg,#2E7D5B,#1B4F3A)}.combo .k-g{background:linear-gradient(180deg,#C8364D,#7E1B2E)}.combo .k-c{background:linear-gradient(180deg,#C9921E,#7A5200)}
+.combo .k-r{background:linear-gradient(180deg,#2E6FD6,#173D85)}.combo .k-e{background:linear-gradient(180deg,#8E3FD6,#4A1A85)}.combo .k-l{background:linear-gradient(180deg,#E39A10,#8A5A00)}
+.combo .cbig img{width:150px;filter:drop-shadow(0 8px 8px rgba(0,0,0,.35))}
+.combo .chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.combo .chip{display:flex;align-items:center;gap:10px;border-radius:16px;padding:7px 14px 7px 7px;text-align:left;animation:pop .45s cubic-bezier(.2,1.5,.4,1) .2s backwards}
+.combo .chip img{width:52px;height:52px;object-fit:contain}.combo .chip .ce{font-size:36px;width:52px;text-align:center}
+.combo .chip b{display:block;font-family:var(--ff-head);font-size:14px}.combo .chip small{font-size:11px;opacity:.85}
+.combo .promo{font-family:var(--ff-head);font-weight:900;background:#fff;color:#C8364D;border-radius:8px;padding:2px 8px;margin-top:2px;display:inline-block}
+@media (max-width:600px){.combo .cc{flex-basis:100%;max-width:none;flex-direction:row;text-align:left;gap:10px}.combo .ci{width:64px;height:64px}.combo .ci.emo{font-size:44px}}
 .mcard.rev{background:radial-gradient(circle at 50% 30%,#3a2a7a,#1C2456);color:#fff;overflow:hidden;position:relative;isolation:isolate}
 .mcard.rev .eb{color:#FFE9A0}.mcard.rev .trn,.mcard.rev .hint{color:#D8DCFF}
 .mcard.rev .art{position:relative}
@@ -803,10 +826,8 @@ function openDay(d,b){
     save();renderNav();renderAdvent();showCoins(bonus);
     var eb=it.tree?'Новая ёлка!':d===N||nOpened()===N?'Последнее окошко! С Новым годом!':ev.newCol?'Новый цвет — в подарок!':'Новое украшение!';
     var hint=it.tree?'Ёлка поменялась — посмотри!':F[it.f].top?'Это украшение для макушки ёлки — поставь его наверх.':F[it.f].wide?'Сразу три куска: маленький, средний и большой — все на полке мастерской.':'Оно уже на полке мастерской 🧝 — тяни его на ёлку.';
-    var q=[function(){return wordModal(it,{eb:eb,hint:hint,fin:nOpened()===N});}];
-    if(ev.gift)q.push(function(){return giftModal(ev.gift);});
-    ev.rew.forEach(function(rw){q.push(function(){return rewardModal(rw);});});
-    chain(q);
+    if(ev.gift||ev.rew.length){comboModal(it,ev,{eb:eb,hint:hint,fin:nOpened()===N});return;}
+    wordModal(it,{eb:eb,hint:hint,fin:nOpened()===N});
   },350);
 }
 function giftModal(g){sfx('gift');
@@ -819,6 +840,28 @@ function rewardModal(rw){
   sfx('coin');var m2=modal('<div class="mcard rev '+(rw.cert?'l':'g')+'"><span class="rib">Шкала подарков</span><div class="art" style="display:grid;place-items:center;font-size:90px">'+(rw.cert?'🎓':'🪙')+'</div><h3 style="color:#fff">'+rw.n+' открытых окошек!</h3>'+
     (rw.cert?'<div class="trn">Грамота «Знаток новогодних слов» — все 31 слово твои!</div>':'')+'<div class="word" style="color:#FFE9A0">+🪙 '+rw.a+'</div><div class="btns"><button type="button" class="btn pink" data-close>Забрать</button></div></div>');
   confetti(window.innerWidth/2,window.innerHeight/2,rw.cert?'l':'g');return m2;}
+/* всё, что выпало в одном окошке, — одним окном, карточками рядом (Анна 24.11.2026, «207 вариант 1») */
+var COMBO_V='1';
+function comboModal(it,ev,o){
+  var items=[{k:'w',tag:'Окошко',img:dayImg(it),t:dayEn(it),s:dayRu(it),say:dayEn(it)}];
+  if(ev.gift)items.push({k:'g',tag:'Подарок от школы',img:'img/gift3.webp',t:ev.gift.ic+' '+ev.gift.t,s:ev.gift.s,promo:ev.gift.promo});
+  ev.rew.forEach(function(rw){if(rw.f){var c=rar(rw.f);items.push({k:c,tag:'Шкала: '+rw.n+' окошек · '+{r:'редкая',e:'эпическая',l:'легендарная'}[c],img:src(rw.f,''),t:F[rw.f].w,s:F[rw.f].t,say:F[rw.f].w});}
+    else items.push({k:'c',tag:'Шкала: '+rw.n+' окошек',emo:rw.cert?'🎓':'🪙',t:'+🪙 '+rw.a,s:rw.cert?'Грамота «Знаток новогодних слов»':'монетки в копилку'});});
+  var m=modal('<div class="mcard combo"></div>');var box=m.querySelector('.combo');
+  function draw(){
+    var sw='';
+    var h=sw+'<div class="eb" style="color:#FFE9A0">'+(o.eb||'')+'</div>';
+    if(COMBO_V==='1'){h+='<div class="cards">'+items.map(function(x){return '<div class="cc k-'+x.k+'"><span class="ray"></span><span class="tag">'+esc(x.tag)+'</span>'+(x.emo?'<div class="ci emo">'+x.emo+'</div>':'<img class="ci" src="'+x.img+'" alt="">')+'<b>'+esc(x.t)+'</b><small>'+esc(x.s)+'</small>'+(x.say?'<button type="button" class="csay" data-w="'+esc(x.say)+'">🔊</button>':'')+(x.promo?'<span class="promo">'+x.promo+'</span>':'')+'</div>';}).join('')+'</div>';}
+    else{var a=items[0];h+='<div class="cbig"><img src="'+a.img+'" alt=""><div class="word" style="color:#fff">'+esc(a.t)+' <button type="button" class="csay" data-w="'+esc(a.say)+'">🔊</button></div><div class="trn">'+esc(a.s)+'</div></div><div class="hint">А ещё сегодня:</div><div class="chips">'+
+      items.slice(1).map(function(x){return '<div class="chip k-'+x.k+'">'+(x.emo?'<span class="ce">'+x.emo+'</span>':'<img src="'+x.img+'" alt="">')+'<span><b>'+esc(x.t)+'</b><small>'+esc(x.tag)+'</small>'+(x.promo?'<span class="promo">'+x.promo+'</span>':'')+'</span></div>';}).join('')+'</div>';}
+    h+='<div class="hint">'+(ev.gift?'Подарок от школы лежит в блоке «Мои подарки» под календарём. ':'')+'Игрушки уже на полке мастерской.</div><div class="btns"><button type="button" class="btn pink" id="toTree">Ура! К ёлке 🎄</button><button type="button" class="btn ghost" data-close>Закрыть</button></div>';
+    box.innerHTML=h;
+    box.querySelectorAll('.cv button').forEach(function(b){b.onclick=function(){COMBO_V=b.dataset.v;draw();};});
+    box.querySelectorAll('.csay').forEach(function(b){b.onclick=function(){say(b.dataset.w);};});
+    box.querySelector('#toTree').onclick=function(){m.remove();S.page='advent';S.tab='tree';save();render();};}
+  draw();sfx(ev.gift?'gift':'rare');if(o.fin)say(dayEn(it),'Merry Christmas!');else say(dayEn(it));
+  setTimeout(function(){confetti(window.innerWidth/2,window.innerHeight/2,'g');},300);
+  if(S.page==='advent'&&S.tab==='tree')renderTree();return m;}
 /* карточка слова: послушать, повторить за голосом и послушать себя рядом с образцом */
 function wordModal(it,o){
   var m=modal('<div class="mcard" role="dialog">'+(o.eb?'<div class="eb">'+o.eb+'</div>':'')+'<div class="art">'+pic(dayImg(it))+'</div>'+
@@ -870,7 +913,7 @@ function spk(c){if(c!=='e'&&c!=='l')return '';var s='',P=[[6,16],[80,8],[86,62],
 function shelfToy(f){
   var c=rar(f),hf=hasFam(f);
   if(hf){var col=pickOf(f);return '<div class="wt slot'+(c!=='c'?' t-'+c:'')+(openFam===f?' s-open':'')+'" data-f="'+f+'" tabindex="0" role="button" title="'+esc(en(f,col))+'" aria-label="'+esc(en(f,col))+'">'+spk(c)+pic(src(f,col))+'<span class="ok">'+placedOf(f)+'/'+cntOf(f)+'</span></div>';}
-  return '<div class="wt m'+(c!=='c'?' t-'+c:'')+'" tabindex="0" data-lock="'+c+'">'+spk(c)+'<div class="wtip"><b>'+TIPS[c][0]+'</b>'+TIPS[c][1]+'<br><button class="more" type="button" data-c="'+c+'" style="background:'+TIPS[c][2]+'">Подробнее об условиях</button></div>'+pic('img/box_'+{c:'common',r:'rare',e:'epic',l:'legend'}[c]+'.webp').replace('class="pic"','class="pic bx"')+'</div>';
+  return '<div class="wt m'+(c!=='c'?' t-'+c:'')+'" tabindex="0" data-lock="'+c+'">'+spk(c)+'<div class="wtip"><b>'+TIPS[c][0]+'</b>'+TIPS[c][1]+'<span class="hint2">👆 Нажми на коробку — подробнее</span></div>'+pic('img/box_'+{c:'common',r:'rare',e:'epic',l:'legend'}[c]+'.webp').replace('class="pic"','class="pic bx"')+'</div>';
 }
 function shelf(cls,title,list,inCase){var own=list.filter(hasFam).length;
   var row='<div class="wrow">'+list.map(shelfToy).join('')+'</div>';
@@ -905,7 +948,9 @@ function renderTree(){
       tap:function(){openPanel(f);say(en(f,pickOf(f)));},drop:function(x,y){placeAt(f,pickOf(f),x,y);}});
     sl.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openPanel(f);}};});
   $$('.wt.m').forEach(function(t){var r=t.getBoundingClientRect(),R=$('room').getBoundingClientRect();if(r.left-R.left<110)t.classList.add('edge-l');else if(R.right-r.right<110)t.classList.add('edge-r');
-    t.onclick=function(e){if(e.target.closest('.more'))return;$$('.wt.m.open').forEach(function(x){if(x!==t)x.classList.remove('open');});t.classList.toggle('open');};});
+    t.onclick=function(){moreModal(t.dataset.lock);};
+    /* у верхнего края полок подсказка открывается вниз, иначе её обрезает */
+    t.addEventListener('pointerenter',function(){var sc=t.parentNode;while(sc&&sc!==document.body&&getComputedStyle(sc).overflowY==='visible')sc=sc.parentNode;var top=sc&&sc.getBoundingClientRect?sc.getBoundingClientRect().top:0;t.classList.toggle('down',t.getBoundingClientRect().top-top<120);},true);t.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();moreModal(t.dataset.lock);}};});
   $$('.wt .more').forEach(function(b){b.onclick=function(e){e.stopPropagation();moreModal(b.dataset.c);};});
   if(openFam)openPanel(openFam,true);
   drawSel();
