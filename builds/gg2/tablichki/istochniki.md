@@ -90,7 +90,50 @@ there was / there were: Was there a pizza in the fridge? — Yes, there was. /
 No, there wasn't. Were there (any) muffins in the fridge? — Yes, there were. /
 No, there weren't.
 
-### 6.2, 6.3, 7.2, 7.3, 8.2, 8.3 — ЖДЁМ РАЗВОРОТЫ
+### 6.2 Past Simple affirmative: regular verbs
+I / You / He-She-It / We / You / They **played** football.
+LOOK!: cook — cooked · tidy — tidied · arrive — arrived · stop — stopped.
+LOOK!: Her babysitter was ill! Two days **ago**.
+Время: an hour / a week / a month / a year / two-three minutes / two-three days + **ago**.
+
+### 6.3 Past Simple affirmative: irregular verbs
+I / You / He-She-It / We / You / They **drank** a coke.
+Глаголы списка: come — came, drink — drank, eat — ate, feel — felt, go — went,
+have — had, make — made, meet — met, take — took.
+
+### 7.2 Past Simple negative
+Regular: I / You / He-She-It / We / They **didn't stay** at home.
+Irregular: I / You / He-She-It / We / They **didn't sleep** well.
+didn't = did not.
+Vocabulary Travel equipment: backpack, camera, rucksack, sleeping bag, suitcase,
+sunglasses, tent, torch.
+
+### 7.3 Past Simple questions and short answers
+Did I / you / we / they have a good time? — Yes, I did. / No, I didn't.
+Did he / she / it have a good time? — Yes, he-she-it did. / No, he-she-it didn't.
+Where did you go? — I went to Rome. · What did you eat? — I ate spaghetti.
+
+### 8.2 be going to
+\+ I'm going to play · You're going to play · He's-She's-It's going to play ·
+We're / You're / They're going to play.
+− I'm not going to play · You aren't going to play · He-She-It isn't going to play ·
+We / You / They aren't going to play.
+? Am I going to play? — Yes, I am. / No, I'm not. · Are you going to play? —
+Yes, you are. / No, you aren't. · Is he-she-it going to play? — Yes, he-she-it is. /
+No, he-she-it isn't. · Are we / you / they going to play? — Yes, they are. /
+No, they aren't.
+
+### 8.3 Revision of questions
+You are excited → **Are you excited?** · You are wearing my clothes →
+**Are you wearing my clothes?** · You were a good student →
+**Were you a good student?** · You've got a girlfriend →
+**Have you got a girlfriend?** · You can rap → **Can you rap?** ·
+You want tickets → **Do you want tickets?** · She sings → **Does she sing?** ·
+You went to Paris → **Did you go to Paris?**
+Where do you buy your clothes? · What did you have for breakfast?
+Vocabulary Types of music: classical, jazz, pop, rap, reggae, rock.
+
+**Все развороты получены 24.11.2026 — грамматика 1.2–8.3, communication 1.4–8.4.**
 
 ## Communication (к ДЗ 4)
 
