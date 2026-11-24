@@ -16,6 +16,25 @@
 большом расстоянии друг от друга, без пересечений и лишних декоративных элементов, чтобы каждый
 объект можно было легко вырезать отдельно.
 
+**Фона нет — обязательный блок в КАЖДОМ промпте, и на лист, и на одну иконку.**
+Аня, 24.11.2026: «попроси сразу делать без фона». Без этих строк генератор подкладывает
+столешницу, цветную подложку или кладёт под предмет косую тень, и она въезжает в вырезанную
+иконку серой грязью — именно так получились `sale` и `tomorrow` с первого раза.
+
+> Plain flat pure white background. No background scenery, no floor, no table surface, no
+> backdrop, no coloured panel behind the objects. NO drop shadow and no shadow cast onto the
+> background — each object is cut out cleanly on white. A faint contact shadow directly
+> underneath an object is allowed, nothing more.
+
+«Без фона» здесь означает «вырезано на белом», а НЕ альфа-канал: просить `transparent
+background` по-прежнему нельзя, см. раздел ниже. На белых плитках деки разницы не видно,
+а белые части предметов прозрачность съедает.
+
+**Один и тот же блок Style на лист и на отдельную иконку.** Выше в этом файле стиль описан
+по-русски коротко, ниже в промптах листа — развёрнуто по-английски. Брать надо развёрнутый:
+на коротком генератор уходит в свою сторону, и одиночная картинка выпадает из набора. Так
+`tomorrow` вышел глянцевым 3D-календарём среди плоских рисованных зданий.
+
 **Визуально (для 13+).** Polished educational illustration, semi-realistic vector-like style,
 clean outlines, soft 3D shading, crisp edges, isolated objects, white background, teen-friendly,
 textbook/workbook aesthetic.
@@ -56,20 +75,28 @@ with a sun hat and a beach ball on top». Абстрактные слова сл
 > Six separate 3D-rendered objects on one plain white sheet, laid out in two rows of three, far
 > apart from each other. Each is one compact object. The drawings must never touch, overlap or be
 > connected — leave empty white space at least the width of a whole drawing between neighbours.
-> No frames, no boxes, no borders, no dividing lines, no panels, no background scenery.
+> No frames, no boxes, no borders, no dividing lines, no panels, no background scenery, no
+> floor, no table surface, no backdrop. NO drop shadow cast onto the background — each object
+> is cut out cleanly on white.
 > ABSOLUTELY NO text, letters, captions or labels anywhere.
 > The six objects are: 1) …; 2) …; 3) …; 4) …; 5) …; 6) … .
-> Style: cute glossy 3D character-art render, the look of a modern animated film for children —
-> soft rounded friendly shapes, smooth shiny surfaces, bright saturated candy colours, even soft
-> studio lighting, gentle contact shadows, cheerful and warm, cut out on pure white.
-> Polished and appealing, never flat vector, never a 2D outline cartoon.
+> Style: friendly 2D educational cartoon illustration for children aged 10-12 — clean confident
+> dark outlines around every shape, bright but not acid colours, simple readable forms, flat
+> colour with light soft shading inside the outline, a small soft contact shadow under the
+> object. Modern and tidy, never babyish. NOT a 3D render, NOT glossy plastic, NOT photographic.
+
+(Декабрьские листы 10-12 сделаны именно так — плоский рисунок с контуром. Раньше здесь стоял
+«cute glossy 3D character-art render»: он противоречил тому, что реально лежит в `icons/`,
+и новые иконки из-за него выпадали из набора.)
 
 ## 2. Лист иконок для 13+ (старшие)
 
 > Six separate 3D-rendered objects on one plain white sheet, laid out in two rows of three, far
 > apart from each other. Each is one compact object. The drawings must never touch, overlap or be
 > connected — leave empty white space at least the width of a whole drawing between neighbours.
-> No frames, no boxes, no borders, no dividing lines, no panels, no background scenery.
+> No frames, no boxes, no borders, no dividing lines, no panels, no background scenery, no
+> floor, no table surface, no backdrop. NO drop shadow cast onto the background — each object
+> is cut out cleanly on white.
 > ABSOLUTELY NO text, letters, captions or labels anywhere.
 > The six objects are: 1) …; 2) …; 3) …; 4) …; 5) …; 6) … .
 > Style: polished stylised 3D render for teenagers — real object proportions and believable
@@ -95,8 +122,10 @@ with a sun hat and a beach ball on top». Абстрактные слова сл
 
 - **«grid», «cells», «panels»** — модель понимает буквально и рисует разделительные линии;
   все картинки склеиваются в один объект, и нарезать лист становится нечем.
-- **«transparent background»** — прозрачность съедает белые части предметов, а нарезка и белые
-  плитки в деке рассчитаны на белый фон.
+- **«transparent background»** — прозрачность съедает белые части предметов (снеговик, белые
+  носки, билет, открытка остаются дырой), а нарезка и белые плитки в деке рассчитаны на белый
+  фон. Выгоды нет: на белой плитке прозрачный и белый фон выглядят одинаково. «Без фона»
+  добиваемся формулировками выше, а не альфа-каналом.
 - Приглушённые «взрослые» слова про цвет (muted, earthy, sophisticated palette) — от них
   получается бежево-серая гамма, которая не подходит ни одному возрасту.
 
