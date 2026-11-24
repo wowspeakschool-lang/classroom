@@ -400,6 +400,11 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
 .gb .gift img{width:38px;height:38px;object-fit:contain}
 .gb .gift.got{background:#ffffff1c;border-radius:12px}
 .gb .gift.got::after{content:"✓";position:absolute;right:-6px;top:-6px;width:17px;height:17px;border-radius:50%;background:#22B573;font-size:10px;font-weight:900;display:grid;place-items:center}
+.gb .gift.ready{border:0;padding:0;background:radial-gradient(circle,rgba(255,224,120,.9),rgba(255,200,80,0) 70%);border-radius:50%;cursor:pointer;animation:gready 1s ease-in-out infinite;z-index:3}
+.gb .gift.ready .tap{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:2px;font-family:var(--ff-head);font-weight:900;font-size:10px;background:#FFD45A;color:#4A2E00;border-radius:999px;padding:1px 7px;white-space:nowrap}
+@keyframes gready{0%,100%{transform:scale(1) rotate(0);box-shadow:0 0 10px 4px rgba(255,212,90,.55)}25%{transform:scale(1.15) rotate(-8deg)}50%{transform:scale(1.2) rotate(8deg);box-shadow:0 0 24px 10px rgba(255,212,90,.8)}75%{transform:scale(1.15) rotate(-4deg)}}
+.gb.lit .l{animation:litup 1.2s ease-out 2!important}
+@keyframes litup{0%{transform:scale(1)}40%{transform:scale(2.2);filter:brightness(2)}100%{transform:scale(1)}}
 .gb .gift.next{animation:gshake 1.6s ease-in-out infinite}
 @keyframes gshake{0%,70%,100%{transform:rotate(0)}75%{transform:rotate(-10deg)}80%{transform:rotate(10deg)}85%{transform:rotate(-8deg)}90%{transform:rotate(6deg)}}
 .wire.all .gb .l{background:var(--c);animation:gchase 1.4s linear infinite;animation-delay:calc(var(--i) * 0.07s)}
@@ -425,6 +430,8 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
 .combo .cv{align-self:flex-end;font-size:11px;color:#C9CFF0;display:flex;gap:4px;align-items:center}
 .combo .cv button{font:inherit;font-weight:800;border:0;border-radius:999px;padding:3px 9px;background:rgba(255,255,255,.14);color:#fff;cursor:pointer}.combo .cv button.on{background:#FFD45A;color:#4A2E00}
 .combo .cards{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;width:100%}
+.combo .cc{transition:opacity .4s,transform .4s,box-shadow .4s;opacity:.35;transform:scale(.94)}
+.combo .cc.lit{opacity:1;transform:scale(1);box-shadow:0 0 0 3px rgba(255,255,255,.7),0 0 28px rgba(255,230,150,.6)}
 .combo .cc{position:relative;overflow:hidden;isolation:isolate;flex:1 1 180px;max-width:220px;border-radius:20px;padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;animation:pop .45s cubic-bezier(.2,1.5,.4,1) backwards}
 .combo .cc:nth-child(2){animation-delay:.15s}.combo .cc:nth-child(3){animation-delay:.3s}.combo .cc:nth-child(4){animation-delay:.45s}
 .combo .cc .ray{position:absolute;left:50%;top:40%;width:280px;height:280px;transform:translate(-50%,-50%);border-radius:50%;z-index:-1;background:repeating-conic-gradient(rgba(255,255,255,.16) 0 10deg,transparent 10deg 22deg);-webkit-mask:radial-gradient(circle,#000 20%,transparent 65%);mask:radial-gradient(circle,#000 20%,transparent 65%);animation:spin 10s linear infinite}
@@ -602,11 +609,19 @@ function giveSpec(s,f){s.own[f]={'':1};s.cnt[f]=1;}
 function applyOpen(s,d,quiet){var idx=Object.keys(s.opened).length,it=DAYS[idx];s.opened[d]=idx;var newCol=give(s,it);if(it.f)s.pick[it.f]=it.c;
   var ev={it:it,newCol:newCol,gift:null,rew:[]};
   if(GIFTS[d]&&s.gifts.indexOf(d)<0){s.gifts.push(d);ev.gift=GIFTS[d];}
-  var n=idx+1,m=MILE[n];if(m&&!s.rew[n]){s.rew[n]=1;var r={n:n,a:m.a||0,cert:!!m.cert};
+  var n=idx+1,m=MILE[n];if(m&&!s.rew[n]){
+    if(!quiet){s.pend=s.pend||[];if(s.pend.indexOf(n)<0)s.pend.push(n);ev.pend=n;return ev;}
+    s.rew[n]=1;var r={n:n,a:m.a||0,cert:!!m.cert};
     if(m.a)s.log.push({d:s.mode==='test'?'сегодня':(s.day>31?'янв':s.day+' дек'),ic:'✨',t:'Шкала подарков: '+n+' окошек',a:m.a,s:'адвент-календарь'});
     if(m.r){var f=SPEC.r.filter(function(x){return !s.own[x];})[0];if(f){giveSpec(s,f);r.f=f;}}
     ev.rew.push(r);}
   return ev;}
+/* забрать награду шкалы, ждущую на гирлянде */
+function claimRew(n){var s=S,m=MILE[n];if(!m||s.rew[n])return null;s.pend=(s.pend||[]).filter(function(x){return x!==n;});
+  s.rew[n]=1;var r={n:n,a:m.a||0,cert:!!m.cert};
+  if(m.a)s.log.push({d:s.mode==='test'?'сегодня':(s.day>31?'янв':s.day+' дек'),ic:'✨',t:'Шкала подарков: '+n+' окошек',a:m.a,s:'адвент-календарь'});
+  if(m.r){var f=SPEC.r.filter(function(x){return !s.own[x];})[0];if(f){giveSpec(s,f);r.f=f;}}
+  save();return r;}
 function freshTest(){var s=blank('test');s.log.push({d:'30 ноя',ic:'🎁',t:'Подарок к адвенту',a:31});return s;}
 function freshMiss(){
   var s=blank('miss');s.day=20;var missed=[7,8,14,18,19];
@@ -779,7 +794,8 @@ function scaleHtml(){
   var n=nOpened(),nx=nextMilestone(),COL=['#FF5A5A','#FFD23F','#4CD97B','#4C9BFF','#C26BFF','#FF8AD8'];
   var W='<svg viewBox="0 0 100 56" preserveAspectRatio="none"><path d="M0 6 Q12.5 30 25 6 Q37.5 30 50 6 Q62.5 30 75 6 Q87.5 30 100 6" stroke="#0E1433" stroke-width=".6" fill="none"/></svg>';
   for(var k=1;k<=31;k++){var x=1.6+(k-1)*(96.8/30),y=4+Math.sin(((x)%25)/25*Math.PI)*16,m=MILE[k],g='';
-    if(m){if(k<=n){g='<span class="gift got" title="Получено">'+(m.cert?'🎓':m.r?pic('img/n/'+(SPEC.r[[5,10,15,20,25].indexOf(k)]||'snow_globe')+'.webp'):'🪙'+m.a)+'</span>';}
+    if(m&&(S.pend||[]).indexOf(k)>=0){g='<button type="button" class="gift ready" data-k="'+k+'" aria-label="Забрать подарок">'+pic('img/box_common.webp')+'<span class="tap">Нажми!</span></button>';}
+    else if(m){if(k<=n){g='<span class="gift got" title="Получено">'+(m.cert?'🎓':m.r?pic('img/n/'+(SPEC.r[[5,10,15,20,25].indexOf(k)]||'snow_globe')+'.webp'):'🪙'+m.a)+'</span>';}
       else g='<span class="gift'+(k===nx&&k-n<=2?' next':'')+'">'+pic('img/box_common.webp')+'</span>';}
     W+='<div class="gb'+(k<=n?' on':'')+(k===n+1?' today':'')+'" style="left:'+x+'%;--y:'+y+'px;--c:'+COL[k%6]+';--i:'+k+'"><span class="l"></span><span class="d">'+k+'</span>'+g+'</div>';}
   var sub=nx?'Открыто '+n+' из 31 · до следующего подарка — '+(nx-n)+' '+(nx-n===1?'окошко':nx-n<5?'окошка':'окошек'):'Все подарки шкалы получены 🎉';
@@ -826,8 +842,8 @@ function openDay(d,b){
     save();renderNav();renderAdvent();showCoins(bonus);
     var eb=it.tree?'Новая ёлка!':d===N||nOpened()===N?'Последнее окошко! С Новым годом!':ev.newCol?'Новый цвет — в подарок!':'Новое украшение!';
     var hint=it.tree?'Ёлка поменялась — посмотри!':F[it.f].top?'Это украшение для макушки ёлки — поставь его наверх.':F[it.f].wide?'Сразу три куска: маленький, средний и большой — все на полке мастерской.':'Оно уже на полке мастерской 🧝 — тяни его на ёлку.';
-    if(ev.gift||ev.rew.length){comboModal(it,ev,{eb:eb,hint:hint,fin:nOpened()===N});return;}
-    wordModal(it,{eb:eb,hint:hint,fin:nOpened()===N});
+    var m=ev.gift?comboModal(it,ev,{eb:eb,hint:hint,fin:nOpened()===N}):wordModal(it,{eb:eb,hint:hint,fin:nOpened()===N});
+    if(ev.pend&&m){var orig=m.remove.bind(m);m.remove=function(){orig();setTimeout(function(){showPend(ev.pend);},250);};}
   },350);
 }
 function giftModal(g){sfx('gift');
@@ -842,10 +858,16 @@ function rewardModal(rw){
   confetti(window.innerWidth/2,window.innerHeight/2,rw.cert?'l':'g');return m2;}
 /* всё, что выпало в одном окошке, — одним окном, карточками рядом (Анна 24.11.2026, «207 вариант 1») */
 var COMBO_V='1';
+function showPend(k){if(S.page!=='advent'||S.tab!=='cal')return;var gb=document.querySelectorAll('.gb')[k-1];if(!gb)return;
+  gb.scrollIntoView({behavior:'smooth',block:'center'});gb.classList.add('lit');sfx('rare');
+  var r=gb.getBoundingClientRect();setTimeout(function(){var r2=gb.getBoundingClientRect();confetti(r2.left+r2.width/2,r2.top+20,'l');},500);
+  toast('✨ '+k+' окошек открыто — на гирлянде тебя ждёт подарок! Нажми на него');}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.gb .gift.ready');if(!b)return;var k=+b.dataset.k,r=claimRew(k);if(!r)return;
+  renderAdvent();showCoins(!!r.a);rewardModal(r);});
 function comboModal(it,ev,o){
   var items=[{k:'w',tag:'Окошко',img:dayImg(it),t:dayEn(it),s:dayRu(it),say:dayEn(it)}];
   if(ev.gift)items.push({k:'g',tag:'Подарок от школы',img:'img/gift3.webp',t:ev.gift.ic+' '+ev.gift.t,s:ev.gift.s,promo:ev.gift.promo});
-  ev.rew.forEach(function(rw){if(rw.f){var c=rar(rw.f);items.push({k:c,tag:'Шкала: '+rw.n+' окошек · '+{r:'редкая',e:'эпическая',l:'легендарная'}[c],img:src(rw.f,''),t:F[rw.f].w,s:F[rw.f].t,say:F[rw.f].w});}
+  (ev.rew||[]).forEach(function(rw){if(rw.f){var c=rar(rw.f);items.push({k:c,tag:'Шкала: '+rw.n+' окошек · '+{r:'редкая',e:'эпическая',l:'легендарная'}[c],img:src(rw.f,''),t:F[rw.f].w,s:F[rw.f].t,say:F[rw.f].w});}
     else items.push({k:'c',tag:'Шкала: '+rw.n+' окошек',emo:rw.cert?'🎓':'🪙',t:'+🪙 '+rw.a,s:rw.cert?'Грамота «Знаток новогодних слов»':'монетки в копилку'});});
   var m=modal('<div class="mcard combo"></div>');var box=m.querySelector('.combo');
   function draw(){
@@ -859,8 +881,13 @@ function comboModal(it,ev,o){
     box.querySelectorAll('.cv button').forEach(function(b){b.onclick=function(){COMBO_V=b.dataset.v;draw();};});
     box.querySelectorAll('.csay').forEach(function(b){b.onclick=function(){say(b.dataset.w);};});
     box.querySelector('#toTree').onclick=function(){m.remove();S.page='advent';S.tab='tree';save();render();};}
-  draw();sfx(ev.gift?'gift':'rare');if(o.fin)say(dayEn(it),'Merry Christmas!');else say(dayEn(it));
-  setTimeout(function(){confetti(window.innerWidth/2,window.innerHeight/2,'g');},300);
+  draw();
+  /* по очереди: карточка загорается -> через миг звучит её слово -> следующая */
+  var cards=box.querySelectorAll('.cc'),step=0;
+  function lightNext(){var c=cards[step];if(!c||!document.body.contains(m))return;c.classList.add('lit');var x=items[step];step++;
+    if(x.k==='g'){sfx('gift');var r=c.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/2,'g');setTimeout(lightNext,1600);}
+    else{setTimeout(function(){if(!document.body.contains(m))return;if(step===1&&o.fin)say(x.say,'Merry Christmas!');else if(x.say)say(x.say);setTimeout(lightNext,1600);},900);}}
+  setTimeout(lightNext,250);
   if(S.page==='advent'&&S.tab==='tree')renderTree();return m;}
 /* карточка слова: послушать, повторить за голосом и послушать себя рядом с образцом */
 function wordModal(it,o){
@@ -871,7 +898,7 @@ function wordModal(it,o){
     (o.hint?'<div class="hint">'+o.hint+'</div>':'')+
     '<div class="btns"><button type="button" class="btn pink" id="toTree">К ёлке 🎄</button><button type="button" class="btn ghost" data-close>'+(o.eb?'Дальше':'Закрыть')+'</button></div></div>');
   function sayIt(){if(o.fin)say(dayEn(it),'Merry Christmas!');else say(dayEn(it));}
-  if(o.eb)sayIt();m.querySelector('.say').onclick=sayIt;
+  if(o.eb)setTimeout(function(){if(document.body.contains(m))sayIt();},900);m.querySelector('.say').onclick=sayIt;
   m.querySelector('#toTree').onclick=function(){S.page='advent';S.tab='tree';save();render();m.remove();};
   repeatAfterMe(m,dayEn(it));return m;
 }
