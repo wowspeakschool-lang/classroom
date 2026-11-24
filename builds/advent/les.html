@@ -50,6 +50,10 @@ body{background:#0B1236;color:#fff;font-family:var(--fb);margin:0;overflow:hidde
 /* max-width:none — обёртка страницы задаёт img{max-width:100%}, а у .anim ширина 0: без этого зверьки сжимались в ноль */
 .anim img{max-width:none;position:absolute;bottom:0;left:0;transform:translateX(-50%);display:block;filter:drop-shadow(0 6px 4px rgba(0,0,0,.25))}
 #moon{position:absolute;right:9%;top:5%;width:min(120px,14vw);z-index:1;pointer-events:none}
+.nye .t .art img.o{filter:brightness(1.15) drop-shadow(0 0 6px rgba(255,233,160,.9))}
+.nye .t .art img.o[src*="top_star"]{filter:brightness(1.3) drop-shadow(0 0 12px #FFE58A) drop-shadow(0 0 28px #FFC23D)}
+.nye .t .art::after{content:"";position:absolute;inset:-6% -14% 0;background:radial-gradient(ellipse at 50% 55%,rgba(255,220,120,.28),transparent 62%);pointer-events:none;z-index:-1}
+.nye .prop.lamp::after{opacity:1!important}
 canvas.snow{position:absolute;inset:0;pointer-events:none;z-index:10}
 .nav{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:46px;height:46px;border-radius:50%;border:0;background:rgba(10,16,52,.6);color:#fff;font-size:20px;cursor:pointer;backdrop-filter:blur(4px)}
 .nav.l{left:max(12px,env(safe-area-inset-left,0px))}.nav.r{right:max(12px,env(safe-area-inset-right,0px))}
@@ -70,7 +74,7 @@ canvas.snow{position:absolute;inset:0;pointer-events:none;z-index:10}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 
-<div class="hdr"><button class="back" type="button">← К моей ёлке</button><h1>Лес ёлок WowSpeak</h1><span class="cnt">🎄 <span id="n"></span> ёлок в лесу</span>
+<div class="hdr"><button class="back" type="button" id="toTree">← К моей ёлке</button><h1>Лес ёлок WowSpeak</h1><span class="cnt">🎄 <span id="n"></span> ёлок в лесу</span>
 <span class="find"><input id="q" placeholder="Найти ёлку друга" aria-label="Найти ёлку по имени"></span><button class="back" type="button" id="callAn" title="Только для показа">🐾 Позвать зверька</button><button class="mine" type="button" id="toMe">⭐ Моя ёлка</button></div>
 <div class="scene" id="scene">
  <img id="moon" src="img/moon.webp" alt="">
@@ -107,7 +111,7 @@ function build(){
  kids.forEach(function(kid,j){h+=tree(kid,start+gap*(j+.5)+(rnd()-.5)*gap*.15,sz);
   /* между ёлками иногда снеговик, санки, фонарь — чтобы аллея не была однообразной */
   if(j%5===2){var pr=PROPS[pk++%PROPS.length],pw={snowman:.42,sledge:.5,lamp:.22,drift3:.45,drift1:.55}[pr]*sz;
-   h+='<div class="prop'+(pr==='lamp'?' lamp':'')+'" style="left:'+(start+gap*(j+1)).toFixed(0)+'px;width:'+pw.toFixed(0)+'px'+(pr==='lamp'?';bottom:12%':'')+'"><img src="img/'+pr+'.webp" alt=""></div>';}});
+   h+='<div class="prop'+(pr==='lamp'?' lamp':'')+'" style="left:'+(start+gap*(j+1)).toFixed(0)+'px;width:'+pw.toFixed(0)+'px'+(pr==='lamp'?';bottom:12%':'')+'"><img src="img/les/'+(pr==='snowman'?'snowman_prop':pr)+'.webp" alt=""></div>';}});
  world.innerHTML=h;document.getElementById('n').textContent=kids.length;
  var dd='';world.querySelectorAll('.t').forEach(function(t){dd+='<i style="left:'+(parseFloat(t.style.left)/W*100)+'%"></i>';});
  document.getElementById('dots').innerHTML=dd;
@@ -129,7 +133,7 @@ var starred={};
 document.getElementById('world').addEventListener('click',function(e){if(moved){moved=false;return;}var t=e.target.closest('.t');if(!t)return;var nm=t.dataset.n,me=t.classList.contains('me');
  var m=document.createElement('div');m.className='modal';
  m.innerHTML='<div class="mc">'+t.querySelector('.art').outerHTML.replace(/<img class="drift"[^>]*>/,'')+'<h3>'+(me?'Твоя ёлка':'Ёлка: '+nm)+'</h3><p>'+(me?'Её видят все в лесу.':'Ёлка из леса WowSpeak')+'</p><div class="row2">'+(me?'<button class="go" type="button">🎄 Продолжить украшать</button>':'')+'<button class="x" type="button">Закрыть</button></div></div>';
- m.onclick=function(ev){if(ev.target===m||ev.target.classList.contains('x'))m.remove();if(ev.target.classList.contains('go')){ev.target.textContent='→ открывается твоя ёлка…';}};
+ m.onclick=function(ev){if(ev.target===m||ev.target.classList.contains('x'))m.remove();if(ev.target.classList.contains('go')){goTree();}};
  document.body.appendChild(m);});
 // снег в три слоя: дальний мелкий и медленный, средний, ближний крупный и размытый
 var cv=document.getElementById('snow'),cx=cv.getContext('2d'),fl=[],scene=document.getElementById('scene');
@@ -174,6 +178,11 @@ function peek(){var vw=sc.clientWidth,s=sc.scrollLeft,ts=[].slice.call(document.
  img.animate([{transform:'translateX('+hid+'px) scaleX('+side+')'},{transform:'translateX('+out+'px) scaleX('+side+')',offset:.18},{transform:'translateX('+out+'px) rotate('+(side*4)+'deg) scaleX('+side+')',offset:.5},{transform:'translateX('+out+'px) scaleX('+side+')',offset:.82},{transform:'translateX('+hid+'px) scaleX('+side+')'}],{duration:4600,easing:'ease-in-out'}).onfinish=function(){el.remove();};}
 function life(){try{run();}catch(e){}setTimeout(life,12000+Math.random()*8000);}
 setTimeout(life,1500);document.getElementById('callAn').onclick=function(){run();};
+/* внутри кабинета: «к моей ёлке» переключает вкладку кабинета; ?nye=1 — 31 декабря и январь, лес в огнях */
+function goTree(){try{parent.postMessage({advent:'tree'},'*');}catch(e){}}
+document.getElementById('toTree').onclick=goTree;
+if(/[?&]nye=1/.test(location.search))document.body.classList.add('nye');
+if(window.parent!==window)document.getElementById('callAn').hidden=true;
 function init(){size();build();}
 window.addEventListener('resize',function(){var s=sc.scrollLeft/W;init();sc.scrollLeft=s*W;});
 init();
