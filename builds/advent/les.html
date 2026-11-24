@@ -2,9 +2,10 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Nunito:wght@600;700;800&family=Pacifico&display=swap">
 <style>
-/* Лес ёлок — панорама, которая листается вбок: небо и горы двигаются медленнее (глубина),
-   ёлки детей стоят на трёх снежных холмах — дальнем, среднем и ближнем. Вначале — главная ёлка школы.
-   Внизу мини-карта всего леса с отметкой «ты». Сколько бы ни было ёлок, лес просто становится длиннее. */
+/* Лес ёлок — одна аллея ёлок на снежной поляне, которая листается вбок.
+   Фон — бесшовная картинка, повторяется сколько нужно; ёлки у всех разные.
+   Снег в три слоя (дальний мелкий, ближний крупный размытый); у основания ёлок сугробы.
+   Сейчас фон временный — из картинки календаря; красивый фон и выглядывающих зверьков дорисуем по картинкам Анны. */
 :root{--gold:#FFD45A;--fh:'Montserrat',system-ui,sans-serif;--fb:'Nunito',system-ui,sans-serif;--fs:'Pacifico',cursive;color-scheme:dark}
 html,body{height:100%}
 body{background:#0B1236;color:#fff;font-family:var(--fb);margin:0;overflow:hidden}
@@ -15,62 +16,46 @@ body{background:#0B1236;color:#fff;font-family:var(--fb);margin:0;overflow:hidde
 .find input{font-family:var(--fb);font-weight:700;border:0;border-radius:999px;padding:8px 14px;width:170px;background:rgba(255,255,255,.14);color:#fff}
 .find input::placeholder{color:#C9CFF0}
 .mine{font-family:var(--fh);font-weight:800;font-size:13px;border:0;border-radius:999px;padding:8px 14px;background:var(--gold);color:#4A2E00;cursor:pointer;white-space:nowrap}
-.scene{position:relative;height:calc(100vh - 64px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:520px;overflow:hidden;
- background:linear-gradient(180deg,#0B1236 0%,#18266A 40%,#2E4396 62%,#5A6FBF 72%)}
-.layer{position:absolute;inset:0;pointer-events:none;will-change:transform}
-.moon{position:absolute;right:12%;top:7%;width:74px;height:74px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#FFFBE8,#F3E6B0 60%,#E6D08A);box-shadow:0 0 70px rgba(255,240,180,.55)}
-.aurora{position:absolute;left:-10%;right:-10%;top:4%;height:34%;background:radial-gradient(ellipse at 30% 60%,rgba(80,255,190,.16),transparent 55%),radial-gradient(ellipse at 70% 40%,rgba(140,120,255,.18),transparent 55%);filter:blur(10px);animation:au 12s ease-in-out infinite alternate}
-@keyframes au{to{transform:translateX(6%) skewX(-6deg)}}
-.stars{position:absolute;inset:0 0 45% 0;background-image:radial-gradient(1.5px 1.5px at 8% 20%,#fff,transparent),radial-gradient(1.5px 1.5px at 22% 8%,#fff,transparent),radial-gradient(1px 1px at 37% 25%,#fff,transparent),radial-gradient(1.5px 1.5px at 51% 12%,#fff,transparent),radial-gradient(1px 1px at 63% 30%,#fff,transparent),radial-gradient(1px 1px at 79% 34%,#fff,transparent),radial-gradient(1.5px 1.5px at 93% 18%,#fff,transparent),radial-gradient(1px 1px at 15% 38%,#fff,transparent),radial-gradient(1px 1px at 45% 40%,#fff,transparent);background-size:600px 100%;animation:tw 5s ease-in-out infinite}
-@keyframes tw{50%{opacity:.55}}
-.mtn{position:absolute;left:0;bottom:22%;height:40%;width:300%}
+.scene{position:relative;height:calc(100vh - 64px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:480px;overflow:hidden;background:#0B1236}
 .scroller{position:absolute;inset:0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;cursor:grab;touch-action:pan-x}
 .scroller::-webkit-scrollbar{display:none}
 .scroller.drag{cursor:grabbing}
-.world{position:relative;height:100%}
-.world svg.hill{position:absolute;left:0;top:0;height:100%;pointer-events:none}
-.t{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;cursor:pointer}
-.t .art{position:relative;transition:transform .2s;transform-origin:50% 100%}
-.t:hover .art{transform:scale(1.06)}
-.t .art>img.tr{display:block;width:100%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.3))}
+.world{position:relative;height:100%;background:url(img/les_tile.webp) left bottom/auto 100% repeat-x}
+.t{position:absolute;bottom:13%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;cursor:pointer;z-index:3}
+.t .art{position:relative;transition:transform .25s;transform-origin:50% 100%}
+.t:hover .art{transform:scale(1.05)}
+.t .art>img.tr{display:block;width:100%;filter:drop-shadow(0 10px 10px rgba(0,0,0,.35))}
 .t .art img.o{position:absolute;transform:translate(-50%,-50%)}
-.t .lab{position:absolute;top:100%;margin-top:4px;display:flex;flex-direction:column;align-items:center;gap:1px}
-.t .nm{font-family:var(--fh);font-weight:800;white-space:nowrap;background:rgba(10,16,52,.62);border-radius:999px;padding:1px 8px;color:#fff}
-.t .st{font-size:10px;font-weight:800;color:var(--gold);background:rgba(10,16,52,.5);border-radius:999px;padding:0 6px}
+.drift{position:absolute;left:50%;bottom:-6%;width:150%;height:22%;transform:translateX(-50%);background:radial-gradient(ellipse at 50% 70%,#FFFFFF 0 38%,#E3EBFF 52%,transparent 70%);pointer-events:none;z-index:2;filter:drop-shadow(0 -2px 3px rgba(150,170,230,.5))}
+.t .lab{position:absolute;top:calc(100% + 6px);display:flex;flex-direction:column;align-items:center;gap:2px;z-index:3}
+.t .nm{font-family:var(--fh);font-weight:800;font-size:13px;white-space:nowrap;background:rgba(10,16,52,.65);border-radius:999px;padding:2px 10px;color:#fff}
+.t .st{font-size:11px;font-weight:800;color:var(--gold);background:rgba(10,16,52,.5);border-radius:999px;padding:0 7px}
 .t .st:empty{display:none}
-.l0 .art{filter:saturate(.75) brightness(.82)} .l0 .nm{font-size:9px}
-.l1 .art{filter:saturate(.9) brightness(.92)} .l1 .nm{font-size:10px}
-.l2 .nm{font-size:12px}
-.t.me .art::before{content:"";position:absolute;inset:-18% -30% -6%;background:radial-gradient(ellipse,rgba(255,212,90,.6),transparent 65%);animation:mg 1.8s ease-in-out infinite;z-index:-1}
+.t.me .art::before{content:"";position:absolute;inset:-14% -26% -4%;background:radial-gradient(ellipse,rgba(255,212,90,.55),transparent 65%);animation:mg 1.8s ease-in-out infinite;z-index:-1}
 @keyframes mg{50%{opacity:.45}}
 .t.me .nm{background:var(--gold);color:#4A2E00}
-.t.me .you{position:absolute;bottom:102%;font-family:var(--fh);font-weight:900;font-size:11px;background:#fff;color:#4A2E00;border-radius:999px;padding:2px 9px;white-space:nowrap;box-shadow:0 3px 8px rgba(0,0,0,.3)}
+.t.me .you{position:absolute;bottom:101%;font-family:var(--fh);font-weight:900;font-size:12px;background:#fff;color:#4A2E00;border-radius:999px;padding:3px 10px;white-space:nowrap;box-shadow:0 3px 8px rgba(0,0,0,.3)}
 .t.hl .art{animation:hl .55s ease-in-out 4}
-@keyframes hl{50%{transform:translateY(-14px) scale(1.08)}}
-.main{position:absolute;transform:translate(-50%,-100%);pointer-events:none}
+@keyframes hl{50%{transform:translateY(-14px) scale(1.06)}}
+.main{position:absolute;bottom:12%;transform:translateX(-50%);pointer-events:none;z-index:2}
 .main img{width:100%;display:block;filter:drop-shadow(0 0 30px rgba(255,212,90,.45))}
-.sign{position:absolute;transform:translate(-50%,-100%);pointer-events:none}
+.sign{position:absolute;bottom:10%;transform:translateX(-50%);pointer-events:none;z-index:4}
 .sign .b{background:linear-gradient(180deg,#D69A62,#A9683A);border:3px solid #7A4425;border-radius:12px;padding:6px 14px;font-family:var(--fs);font-size:20px;color:#FFF4DC;text-shadow:0 2px 0 #7A4425;white-space:nowrap;box-shadow:0 5px 0 #6A3A1F}
-.sign .p{width:8px;height:60px;background:#6A3A1F;margin:0 auto}
-.lamp{position:absolute;transform:translate(-50%,-100%);width:12px;pointer-events:none}
-.lamp i{display:block;width:12px;height:12px;border-radius:50%;background:#FFE9A0;box-shadow:0 0 16px 6px rgba(255,220,130,.55),0 0 60px 20px rgba(255,200,100,.18)}
-.lamp b{display:block;width:4px;height:70px;background:#2A2F4A;margin:0 auto}
+.sign .p{width:8px;height:50px;background:#6A3A1F;margin:0 auto}
 canvas.snow{position:absolute;inset:0;pointer-events:none;z-index:10}
 .nav{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:46px;height:46px;border-radius:50%;border:0;background:rgba(10,16,52,.6);color:#fff;font-size:20px;cursor:pointer;backdrop-filter:blur(4px)}
 .nav.l{left:max(12px,env(safe-area-inset-left,0px))}.nav.r{right:max(12px,env(safe-area-inset-right,0px))}
-.mini{position:absolute;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:20;width:min(560px,calc(100% - 40px));height:34px;border-radius:12px;background:rgba(10,16,52,.7);backdrop-filter:blur(4px);cursor:pointer;overflow:hidden}
-.mini .dots{position:absolute;inset:0}
+.mini{position:absolute;left:50%;bottom:calc(12px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:20;width:min(560px,calc(100% - 40px));height:30px;border-radius:12px;background:rgba(10,16,52,.7);backdrop-filter:blur(4px);cursor:pointer;overflow:hidden}
 .mini .dots i{position:absolute;bottom:6px;width:3px;height:8px;border-radius:2px;background:#5BB26A}
 .mini .win{position:absolute;top:3px;bottom:3px;border:2px solid #fff;border-radius:8px;background:rgba(255,255,255,.1)}
-.mini .me{position:absolute;top:2px;font-size:12px;transform:translateX(-50%)}
-.mini .lab{position:absolute;left:10px;top:3px;font-size:10px;font-weight:800;color:#C9CFF0}
+.mini .me{position:absolute;top:1px;font-size:12px;transform:translateX(-50%)}
 .modal{position:fixed;inset:0;background:rgba(5,8,30,.65);display:grid;place-items:center;z-index:50;padding:16px}
 .mc{background:linear-gradient(180deg,#1B2A72,#0E1640);border-radius:28px;max-width:420px;width:100%;padding:22px;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;box-shadow:0 20px 50px rgba(0,0,0,.5)}
 .mc .art{position:relative;width:220px}.mc .art img.tr{width:100%;display:block}.mc .art img.o{position:absolute;transform:translate(-50%,-50%)}
 .mc h3{font-family:var(--fh);margin:0;font-size:20px}.mc p{margin:0;color:#D8DCFF;font-size:14px}
 .mc .row2{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .mc button{font-family:var(--fh);font-weight:800;border:0;border-radius:14px;padding:11px 16px;cursor:pointer;font-size:14px}
-.mc .star{background:var(--gold);color:#4A2E00}.mc .star.done{background:#3B4C9E;color:#fff}.mc .x{background:rgba(255,255,255,.14);color:#fff}
+.mc .star{background:var(--gold);color:#4A2E00}.mc .star.done{background:#3B4C9E;color:#fff}.mc .go{background:var(--gold);color:#4A2E00}.mc .x{background:rgba(255,255,255,.14);color:#fff}
 .hint{position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:20;font-size:12px;font-weight:800;background:rgba(10,16,52,.6);border-radius:999px;padding:5px 12px;white-space:nowrap;animation:fade 6s forwards}
 @keyframes fade{0%,70%{opacity:1}100%{opacity:0}}
 @media (max-width:720px){.find,.cnt{display:none}.nav{display:none}}
@@ -80,17 +65,15 @@ canvas.snow{position:absolute;inset:0;pointer-events:none;z-index:10}
 <div class="hdr"><button class="back" type="button">← К моей ёлке</button><h1>Лес ёлок WowSpeak</h1><span class="cnt">🎄 <span id="n"></span> ёлок в лесу</span>
 <span class="find"><input id="q" placeholder="Найти ёлку друга" aria-label="Найти ёлку по имени"></span><button class="mine" type="button" id="toMe">⭐ Моя ёлка</button></div>
 <div class="scene" id="scene">
- <div class="layer" id="sky"><div class="aurora"></div><div class="stars"></div><div class="moon"></div></div>
- <div class="layer" id="mtnL"><svg class="mtn" id="mtn" viewBox="0 0 3000 400" preserveAspectRatio="none"></svg></div>
  <div class="scroller" id="sc"><div class="world" id="world"></div></div>
  <canvas class="snow" id="snow"></canvas>
  <button class="nav l" type="button" id="pl" aria-label="Влево">‹</button><button class="nav r" type="button" id="pr" aria-label="Вправо">›</button>
- <div class="mini" id="mini"><span class="lab">весь лес</span><div class="dots" id="dots"></div><div class="win" id="win"></div><span class="me" id="mmMe">⭐</span></div>
+ <div class="mini" id="mini"><div class="dots" id="dots"></div><div class="win" id="win"></div><span class="me" id="mmMe">⭐</span></div>
  <div class="hint">Листай лес — тяни мышкой или пальцем ↔</div>
 </div>
 
 <script>
-var COUNT=100;   // в превью 100 ёлок; лес растёт в длину сам
+var COUNT=100;
 var FN=['Маша','Тимур','Алиса','Саша','Ева','Лев','Даша','Миша','Соня','Артём','Вера','Глеб','Аня','Илья','Катя','Рома','Лиза','Егор','Полина','Ваня','Мила','Дима','Таня','Костя','Ника','Федя','Оля','Петя','Зоя','Стёпа','Ира','Яна','Гоша','Лена','Боря','Уля','Стас','Варя','Марк','Кира'];
 var LN='АБВГДЕЖЗИКЛМНОПРСТУФХЧШЯ';
 var TR=['tree_pine','tree_snowy','tree_gold'],OR=['red_ball','blue_ball','gold_ball','purple_ball','green_ball','silver_ball','star','bell','candy_cane','snowflake','bow','heart','stocking','gingerbread','pine_cone','snowman'];
@@ -98,47 +81,26 @@ var seed=11;function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/21474836
 var SP=[[50,30],[38,45],[62,45],[30,62],[50,58],[70,62],[25,78],[45,75],[60,80],[75,78]];
 var kids=[];for(var i=0;i<COUNT;i++)kids.push({nm:FN[i%FN.length]+' '+LN[(i*7)%LN.length]+'.',open:Math.floor(rnd()*20)+1,stars:Math.floor(rnd()*10)});
 kids[37]={nm:'Маша П.',open:15,stars:12,me:1};
-kids.sort(function(a,b){return b.open-a.open;});   // ближе к зрителю те, кто открыл больше окошек
 var H,W,sc=document.getElementById('sc');
-var LANES=[{k:.55,amp:.02,per:420,ph:1.3,size:.12,gap:1.05},{k:.71,amp:.025,per:520,ph:.4,size:.16,gap:1.15},{k:.86,amp:.02,per:650,ph:2.1,size:.21,gap:1.3}];
-function groundY(l,x){var L=LANES[l];return H*L.k+Math.sin(x/L.per+L.ph)*H*L.amp;}
-function tree(kid,li,x,y,sz){var me=kid.me,tr=me?'tree_pine':TR[rnd()<.6?0:(rnd()<.6?1:2)],n=me?7:Math.min(8,Math.max(1,Math.round(kid.open/2.5))),o='';
+function tree(kid,x,sz){var me=kid.me,tr=me?'tree_pine':TR[rnd()<.6?0:(rnd()<.6?1:2)],n=me?7:Math.min(8,Math.max(1,Math.round(kid.open/2.5))),o='';
  var sp=SP.slice().sort(function(){return rnd()-.5;});
  for(var k=0;k<n;k++){var s=sp[k];o+='<img class="o" src="img/'+OR[Math.floor(rnd()*OR.length)]+'.webp" style="left:'+s[0]+'%;top:'+s[1]+'%;width:'+(13+rnd()*5)+'%" alt="">';}
  if(me||kid.open>=3)o+='<img class="o" src="img/top_star.webp" style="left:50%;top:6%;width:20%" alt="">';
- return '<div class="t l'+li+(me?' me':'')+'" data-n="'+kid.nm+'" style="left:'+x.toFixed(0)+'px;top:'+y.toFixed(0)+'px;width:'+sz.toFixed(0)+'px;z-index:'+(li*10+2)+'">'+(me?'<span class="you">Это ты!</span>':'')+'<div class="art"><img class="tr" src="img/'+tr+'.webp" alt="">'+o+'</div><div class="lab"><span class="nm">'+kid.nm+'</span><span class="st">'+(kid.stars?'⭐ '+kid.stars:'')+'</span></div></div>';}
+ var w=sz*(.86+rnd()*.28);
+ return '<div class="t'+(me?' me':'')+'" data-n="'+kid.nm+'" style="left:'+x.toFixed(0)+'px;width:'+w.toFixed(0)+'px">'+(me?'<span class="you">Это ты!</span>':'')+'<div class="art"><img class="tr" src="img/'+tr+'.webp" alt=""><span class="drift"></span>'+o+'</div><div class="lab"><span class="nm">'+kid.nm+'</span></div></div>';}
 function build(){
  seed=11;var world=document.getElementById('world');H=sc.clientHeight;
- var n=kids.length,front=Math.round(n*.26),mid=Math.round(n*.34),start=Math.max(520,H*.95);
- var others=kids.filter(function(k){return !k.me;}),meK=kids.filter(function(k){return k.me;})[0];
- var lanesKids=[others.slice(front+mid-1),others.slice(front,front+mid-1),others.slice(0,front)];
- /* свою ёлку ребёнок всегда видит в ближнем ряду — её не закрывают чужие */
- lanesKids[2].splice(Math.floor(lanesKids[2].length/2),0,meK);
- var spacing=LANES.map(function(L){return H*L.size*L.gap;});
- W=Math.max(sc.clientWidth+10,start+Math.max.apply(null,lanesKids.map(function(a,i){return a.length*spacing[i];}))+200);
- world.style.width=W+'px';
- var h='';
- LANES.forEach(function(L,li){var d='M0 '+H;for(var x=0;x<=W;x+=20)d+=' L'+x+' '+groundY(li,x).toFixed(1);d+=' L'+W+' '+H+' Z';
-  var c=['#B9C8EE','#D4DEF7','#EEF3FF'][li];
-  h+='<svg class="hill" viewBox="0 0 '+W+' '+H+'" style="width:'+W+'px" preserveAspectRatio="none"><defs><linearGradient id="g'+li+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".25" stop-color="'+c+'"/></linearGradient></defs><path d="'+d+'" fill="url(#g'+li+')"/></svg>';
-  var arr=lanesKids[li],sz=H*L.size;
-  arr.forEach(function(kid,j){var x=start+spacing[li]*(j+(li===1?1:.5))+(rnd()-.5)*spacing[li]*.25,y=groundY(li,x)+sz*.04;h+=tree(kid,li,x,y,sz);});
-  if(li===2)for(var x2=start+200;x2<W;x2+=900)h+='<div class="lamp" style="left:'+x2+'px;top:'+(groundY(2,x2)+4)+'px;z-index:25"><i></i><b></b></div>';
-  if(li===1){var mx=start*.42;h+='<div class="main" style="left:'+mx+'px;top:'+(groundY(1,mx)+8)+'px;width:'+(H*.42)+'px;z-index:15"><img src="img/tree_pine.webp" alt=""><img src="img/top_star.webp" alt="" style="position:absolute;left:50%;top:-2%;width:22%;transform:translateX(-50%)"></div>';
-   var sx=start*.8;h+='<div class="sign" style="left:'+sx+'px;top:'+(groundY(2,sx)+4)+'px;z-index:26"><div class="b">Лес WowSpeak</div><div class="p"></div></div>';}
- });
- world.innerHTML=h;
- document.getElementById('n').textContent=n;
+ var sz=Math.min(H*.36,260),gap=sz*1.15,start=Math.max(sc.clientWidth*.55,sz*2.4);
+ W=start+kids.length*gap+sz;world.style.width=W+'px';
+ var h='<div class="main" style="left:'+(start*.4)+'px;width:'+(sz*1.9)+'px"><img src="img/tree_pine.webp" alt=""><img src="img/top_star.webp" alt="" style="position:absolute;left:50%;top:-2%;width:22%;transform:translateX(-50%)"></div>'+
+   '<div class="sign" style="left:'+(start*.82)+'px"><div class="b">Лес WowSpeak</div><div class="p"></div></div>';
+ kids.forEach(function(kid,j){h+=tree(kid,start+gap*(j+.5)+(rnd()-.5)*gap*.15,sz);});
+ world.innerHTML=h;document.getElementById('n').textContent=kids.length;
  var dd='';world.querySelectorAll('.t').forEach(function(t){dd+='<i style="left:'+(parseFloat(t.style.left)/W*100)+'%"></i>';});
  document.getElementById('dots').innerHTML=dd;
  var me=world.querySelector('.t.me');document.getElementById('mmMe').style.left=(parseFloat(me.style.left)/W*100)+'%';
- sync();
-}
-(function(){var d='M0 400';for(var x=0;x<=3000;x+=60){d+=' L'+x+' '+(180+Math.sin(x/170)*70+Math.sin(x/53)*25).toFixed(0);}d+=' L3000 400Z';
- var d2='M0 400';for(var x2=0;x2<=3000;x2+=60){d2+=' L'+x2+' '+(250+Math.sin(x2/130+2)*50+Math.sin(x2/41)*18).toFixed(0);}d2+=' L3000 400Z';
- document.getElementById('mtn').innerHTML='<path d="'+d+'" fill="#3B4E9E" opacity=".75"/><path d="'+d2+'" fill="#4D63B5" opacity=".8"/>';})();
-function sync(){var s=sc.scrollLeft,v=sc.clientWidth;document.getElementById('sky').style.transform='translateX('+(-s*.04)+'px)';document.getElementById('mtnL').style.transform='translateX('+(-s*.18)+'px)';
- var w=document.getElementById('win');w.style.left=(s/W*100)+'%';w.style.width=(v/W*100)+'%';}
+ sync();}
+function sync(){var s=sc.scrollLeft,v=sc.clientWidth,w=document.getElementById('win');w.style.left=(s/W*100)+'%';w.style.width=(v/W*100)+'%';}
 sc.addEventListener('scroll',sync,{passive:true});
 sc.addEventListener('wheel',function(e){if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){sc.scrollLeft+=e.deltaY;e.preventDefault();}},{passive:false});
 var dr=null,moved=false;sc.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse')return;dr={x:e.clientX,s:sc.scrollLeft};moved=false;});
@@ -153,14 +115,18 @@ document.getElementById('q').oninput=function(){var v=this.value.trim().toLowerC
 var starred={};
 document.getElementById('world').addEventListener('click',function(e){if(moved){moved=false;return;}var t=e.target.closest('.t');if(!t)return;var nm=t.dataset.n,me=t.classList.contains('me');
  var m=document.createElement('div');m.className='modal';
- m.innerHTML='<div class="mc">'+t.querySelector('.art').outerHTML+'<h3>'+(me?'Твоя ёлка':'Ёлка: '+nm)+'</h3><p>'+(me?'Её видят все в лесу. Тебе поставили 12 ⭐':'Нравится? Поставь звёздочку!')+'</p><div class="row2">'+(me?'':'<button class="star'+(starred[nm]?' done':'')+'" type="button">'+(starred[nm]?'⭐ Ты уже поставил':'⭐ Поставить звёздочку')+'</button>')+'<button class="x" type="button">Закрыть</button></div></div>';
- m.onclick=function(ev){if(ev.target===m||ev.target.classList.contains('x'))m.remove();var s=ev.target.closest('.star');if(s&&!starred[nm]){starred[nm]=1;s.classList.add('done');s.textContent='⭐ Спасибо!';var st=t.querySelector('.st');var v=parseInt((st.textContent||'0').replace(/\D/g,''))||0;st.textContent='⭐ '+(v+1);}};
+ m.innerHTML='<div class="mc">'+t.querySelector('.art').outerHTML.replace('<span class="drift"></span>','')+'<h3>'+(me?'Твоя ёлка':'Ёлка: '+nm)+'</h3><p>'+(me?'Её видят все в лесу.':'Ёлка из леса WowSpeak')+'</p><div class="row2">'+(me?'<button class="go" type="button">🎄 Продолжить украшать</button>':'')+'<button class="x" type="button">Закрыть</button></div></div>';
+ m.onclick=function(ev){if(ev.target===m||ev.target.classList.contains('x'))m.remove();if(ev.target.classList.contains('go')){ev.target.textContent='→ открывается твоя ёлка…';}};
  document.body.appendChild(m);});
+// снег в три слоя: дальний мелкий и медленный, средний, ближний крупный и размытый
 var cv=document.getElementById('snow'),cx=cv.getContext('2d'),fl=[],scene=document.getElementById('scene');
 function size(){cv.width=scene.clientWidth;cv.height=scene.clientHeight;}
-for(var i=0;i<160;i++)fl.push({x:Math.random(),y:Math.random(),r:.8+Math.random()*2.4,s:.25+Math.random()*.7,d:Math.random()*6});
-(function loop(t){cx.clearRect(0,0,cv.width,cv.height);cx.fillStyle='rgba(255,255,255,.85)';
- fl.forEach(function(p){p.y+=p.s/Math.max(cv.height,1)*1.5;if(p.y>1)p.y=0;var x=((p.x+Math.sin(t/1600+p.d)*.01)*cv.width-sc.scrollLeft*p.r*.06)%cv.width;if(x<0)x+=cv.width;cx.beginPath();cx.arc(x,p.y*cv.height,p.r,0,7);cx.fill();});
+for(var i=0;i<220;i++){var z=i<130?0:(i<200?1:2);fl.push({x:Math.random(),y:Math.random(),z:z,r:[.8,1.8,4.5][z]*(.7+Math.random()*.6),s:[.15,.35,.8][z]*(.7+Math.random()*.6),d:Math.random()*6,a:[.6,.85,.45][z]});}
+(function loop(t){cx.clearRect(0,0,cv.width,cv.height);
+ fl.forEach(function(p){p.y+=p.s/Math.max(cv.height,1)*1.4;if(p.y>1.02){p.y=-.02;p.x=Math.random();}
+  var x=((p.x+Math.sin(t/2200+p.d)*.015)*cv.width-sc.scrollLeft*[.05,.2,.6][p.z])%cv.width;if(x<0)x+=cv.width;
+  if(p.z===2){var g=cx.createRadialGradient(x,p.y*cv.height,0,x,p.y*cv.height,p.r);g.addColorStop(0,'rgba(255,255,255,'+p.a+')');g.addColorStop(1,'rgba(255,255,255,0)');cx.fillStyle=g;}else cx.fillStyle='rgba(255,255,255,'+p.a+')';
+  cx.beginPath();cx.arc(x,p.y*cv.height,p.r,0,7);cx.fill();});
  requestAnimationFrame(loop);})(0);
 function init(){size();build();}
 window.addEventListener('resize',function(){var s=sc.scrollLeft/W;init();sc.scrollLeft=s*W;});
