@@ -800,7 +800,7 @@ function renderAdvent(){
   if(S.tab==='tree')renderTree();else if(S.tab==='forest')renderForest();else renderCal();
 }
 /* лес ёлок — делается отдельно; здесь заглушка */
-function renderForest(){$('adv').innerHTML='<iframe class="lesf" src="les_page.html'+(nyeOn()?'?nye=1':'')+'" title="Лес ёлок"></iframe>';}
+function renderForest(){$('adv').innerHTML='<iframe class="lesf" src="les_page.html?in=cab'+(nyeOn()?'&nye=1':'')+'" title="Лес ёлок"></iframe>';}
 /* лес просит вернуться к ёлке — переключаем вкладку */
 window.addEventListener('message',function(e){if(e.data&&e.data.advent==='tree'){S.page='advent';S.tab='tree';save();render();}});
 /* шкала «Гирлянда дней»: 31 лампочка, открытые мерцают; будущие подарки — одинаковые закрытые коробки */

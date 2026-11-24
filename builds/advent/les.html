@@ -182,9 +182,12 @@ setTimeout(life,1500);document.getElementById('callAn').onclick=function(){run()
 function goTree(){try{parent.postMessage({advent:'tree'},'*');}catch(e){}}
 document.getElementById('toTree').onclick=goTree;
 if(/[?&]nye=1/.test(location.search))document.body.classList.add('nye');
-if(window.parent!==window)document.getElementById('callAn').hidden=true;
+/* страница артефакта сама лежит в рамке claude.ai, поэтому «внутри кабинета» узнаём по метке ?in=cab, а не по window.parent
+   (24.11 Анна: «лес отдельно открываешь — музыка не звучит») */
+var IN_CAB=/[?&]in=cab/.test(location.search);
+if(IN_CAB)document.getElementById('callAn').hidden=true;
 /* звук леса (Анна, 24.11): песня, которую она прислала (Bruni AFX), тихо, по кругу; в кабинете его включает сам кабинет */
-if(window.parent===window){var fm=new Audio('audio/les_music.mp3');fm.loop=true;fm.volume=.28;
+if(!IN_CAB){var fm=new Audio('audio/les_music.mp3');fm.loop=true;fm.volume=.28;
   var fb=document.createElement('button');fb.type='button';fb.className='back';fb.id='fMus';fb.textContent='🎵';fb.title='Музыка леса';
   document.getElementById('toTree').after(fb);var off=false;
   function fUI(){fb.textContent=fm.paused?'🎵':'⏸';}
