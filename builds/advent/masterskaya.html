@@ -258,7 +258,7 @@ h2{font-family:var(--fh);font-weight:900;font-size:22px;margin:0}
 <tr><td>25</td><td>🔵 редкая игрушка-сюрприз</td></tr><tr><td>28</td><td>🪙 10</td></tr><tr><td>31</td><td>🎓 грамота со всеми словами + 🌟 золотая звезда на ёлку + 🪙 15</td></tr>
 </tbody></table></section>
 </div>
-<div class="music"><button type="button" id="mBtn" aria-label="Включить музыку">🎵</button><span id="mLab">Музыка выкл.</span><input type="range" id="mVol" min="0" max="100" value="35" aria-label="Громкость музыки"></div>
+<div class="music"><button type="button" id="mBtn" aria-label="Включить музыку">🎵</button><span id="mLab">Музыка выкл.</span><input type="range" id="mVol" min="0" max="100" value="18" aria-label="Громкость музыки"></div>
 
 <script>
 var IMG=['tree_pine','red_ball','star','bell','ic_garland','candy_cane','snowflake','gingerbread','bow','ic_fairy_lights','pine_cone','stocking','gift6','tree_snowy','ic_tinsel','heart','snowman','icicle','reindeer','sweet','mitten','angel','tree_gold','cracker','clock','top_star'];
@@ -299,9 +299,14 @@ for(var d=1;d<=31;d++){var x=1.6+(d-1)*(96.8/30),ph=((x)%25)/25,y=4+Math.sin(ph*
  var gift=!g?'':(d<=OPEN?'<span class="gift '+g[0]+' done">'+(g[0]==='r'?'🔮':g[1])+'</span>':'<span class="gift wait '+cls+'"><img src="img/box_common.webp" alt=""></span>');
  W+='<div class="gb'+(on?' on':'')+(d===OPEN+1?' today':'')+'" style="left:'+x+'%;--y:'+y+'px;--c:'+COL[d%6]+';--i:'+d+'"><span class="l"></span><span class="d">'+d+'</span>'+gift+'</div>';}
 document.getElementById('wire').innerHTML=W;
-var mus=new Audio('audio/music_jingle.mp3');mus.loop=true;mus.volume=.35;
+var mus=new Audio('audio/music_jingle.mp3');mus.loop=true;mus.volume=.18;
+/* музыка включается сама и тихо (Анна 24.11). Браузер не даёт играть звук до первого касания страницы —
+   поэтому пробуем сразу, а если не вышло, включаем при первом нажатии в любом месте */
+function mOn(){document.getElementById('mBtn').textContent='⏸';document.getElementById('mLab').textContent='Jingle Bells';}
+function mStart(){if(!mus.paused||mus.dataset_off)return;mus.play().then(mOn).catch(function(){});}
+mStart();['pointerdown','keydown','touchstart'].forEach(function(ev){document.addEventListener(ev,function h(e){if(e.target.closest&&e.target.closest('.music'))return;mStart();},{once:true,capture:true});});
 document.getElementById('mVol').oninput=function(){mus.volume=this.value/100;};
-document.getElementById('mBtn').onclick=function(){if(mus.paused){mus.play();this.textContent='⏸';document.getElementById('mLab').textContent='Jingle Bells';}else{mus.pause();this.textContent='🎵';document.getElementById('mLab').textContent='Музыка выкл.';}};
+document.getElementById('mBtn').onclick=function(){if(mus.paused){mus.dataset_off=false;mus.play();this.textContent='⏸';document.getElementById('mLab').textContent='Jingle Bells';}else{mus.dataset_off=true;mus.pause();this.textContent='🎵';document.getElementById('mLab').textContent='Музыка выкл.';}};
 document.querySelectorAll('.mode b').forEach(function(b){b.onclick=function(){document.querySelectorAll('.mode b').forEach(function(x){x.classList.toggle('on',x===b);});document.querySelector('.treep').classList.toggle('nye',b.dataset.m==='nye');};});
 document.getElementById('b31').onclick=function(){var w=document.getElementById('wireBox');w.classList.toggle('all');this.textContent=w.classList.contains('all')?'↩ Вернуть как сегодня':'✨ Показать, как гирлянда загорится 31 декабря';};
 
