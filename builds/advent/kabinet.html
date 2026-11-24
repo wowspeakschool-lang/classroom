@@ -428,6 +428,7 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
 .gcard b{font-family:var(--ff-head);font-size:14px;display:block}
 .gcard small{color:var(--muted);font-size:12px;display:block}
 .gcard .btn{margin-left:auto;flex:none}
+.mcard.bingom{max-width:min(880px,96vw);width:880px}.bingof{width:100%;height:min(70vh,760px);border:0;border-radius:14px;background:#EEF1F8}
 .gcard.lock{opacity:.55}
 .promo{font-family:ui-monospace,Menlo,monospace;background:#FFF3CC;border:2px dashed #E7B22E;border-radius:10px;padding:6px 10px;font-weight:800;color:#6E4A00;letter-spacing:.08em}
 /* эффекты */
@@ -573,7 +574,7 @@ var SPEC={r:['snow_globe','nutcracker','lantern','polar_bear','rocking_horse'],
 [['snow_globe','snow globe','снежный шар','m','r'],['nutcracker','nutcracker','Щелкунчик','m','r'],['lantern','lantern','фонарик','m','r'],['polar_bear','polar bear','белый медведь','m','r'],['rocking_horse','rocking horse','лошадка-качалка','f','r'],
  ['teddy_bear','teddy bear','плюшевый мишка','m','e'],['penguin','penguin','пингвин','m','e'],['owl','owl','сова','f','e'],['fox','fox','лиса','f','e'],['toy_train','toy train','игрушечный паровозик','m','e'],['drum','drum','барабан','m','e'],['ice_skates','ice skates','коньки','p','e'],['gingerbread_house','gingerbread house','пряничный домик','m','e'],['carousel','carousel','карусель','f','e'],['hot_chocolate','hot chocolate','горячий шоколад','m','e'],
  ['golden_unicorn','golden unicorn','золотой единорог','m','l'],['santa_sleigh',"Santa's sleigh",'сани Санты','p','l'],['ice_palace','ice palace','ледяной дворец','m','l']].forEach(function(x){
-  F[x[0]]={w:x[1],t:x[2],g:x[3],sz:x[0]==='santa_sleigh'?16:12,rar:x[4],cols:{'':'n/'+x[0]}};AUDIO[x[1]]='audio/w_'+x[0]+'.mp3';});
+  F[x[0]]={w:x[1],t:x[2],g:x[3],sz:x[0]==='santa_sleigh'?16:12,rar:x[4],cols:{'':'n/'+x[0]}};if(!AUDIO[x[1]])AUDIO[x[1]]='audio/w_'+x[0]+'.mp3';}); /* голоса, выбранные Анной 24.11, уже лежат в AUDIO — не подменять */
 
 /* 31 окошко: что выпадает по порядку открытия. Звезда-верхушка — третьей, гирлянда — шестой,
    чтобы главное было у всех (Анна, 24.11.2026). Последнее — ангел. */
@@ -826,7 +827,7 @@ function giftsHtml(){
 function renderCal(){
   $('adv').innerHTML=scaleHtml()+calHtml(S,false)+giftsHtml();
   $$('#adv .door').forEach(function(b){b.onclick=function(){doorClick(+b.dataset.d,b);};});
-  $$('#adv .gcard [data-g]').forEach(function(b){b.onclick=function(){var g=GIFTS[b.dataset.g];toast(g.btn==='Скачать'?'В макете файла нет — на платформе здесь скачается '+g.t.toLowerCase():'В макете записи нет — на платформе здесь откроется запись');};});
+  $$('#adv .gcard [data-g]').forEach(function(b){b.onclick=function(){var g=GIFTS[b.dataset.g];if(g.id==='bingo'){openBingo();return;}toast(g.btn==='Скачать'?'В макете файла нет — на платформе здесь скачается '+g.t.toLowerCase():'В макете записи нет — на платформе здесь откроется запись');};});
 }
 function shake(b){b.classList.add('shake');setTimeout(function(){b.classList.remove('shake');},500);}
 function doorClick(d,b){
@@ -860,6 +861,17 @@ function openDay(d,b){
     if(ev.pend&&m){var orig=m.remove.bind(m);m.remove=function(){orig();setTimeout(function(){showPend(ev.pend);},250);};}
   },350);
 }
+/* Christmas Bingo (Анна, 24.11.2026): только слова, которые ребёнок уже открыл, — окошки календаря и особые игрушки.
+   Меньше 8 слов — карточку 3×3 не собрать: просим открыть ещё окошки (прошлые — за монетки). */
+function bingoWords(){var out=[],seen={};
+  Object.keys(S.opened).sort(function(a,b){return a-b;}).forEach(function(d){var it=DAYS[S.opened[d]];if(!it)return;var w=dayEn(it);if(seen[w])return;seen[w]=1;out.push({w:w,ru:dayRu(it),img:doorImg(it)});});
+  Object.keys(S.own||{}).forEach(function(f){if(F[f]&&F[f].rar&&!seen[F[f].w]){seen[F[f].w]=1;out.push({w:F[f].w,ru:F[f].t,img:src(f,'')});}});
+  return out;}
+function openBingo(){var ws=bingoWords();
+  if(ws.length<8){var k=8-ws.length;modal('<div class="mcard"><h3>🎲 Christmas Bingo</h3><p class="hint" style="margin:0">Bingo собирается из твоих слов. Сейчас их '+ws.length+', а для карточки нужно 8. Открой ещё '+k+' '+(k===1?'окошко':k<5?'окошка':'окошек')+' — и игра готова!</p><div class="btns"><button type="button" class="btn pink" data-close>Хорошо</button></div></div>');return;}
+  var d=btoa(unescape(encodeURIComponent(JSON.stringify({name:'Маша',words:ws}))));
+  modal('<div class="mcard wide bingom"><h3>🎲 Christmas Bingo из твоих слов</h3><iframe class="bingof" src="bingo.html#d='+encodeURIComponent(d)+'" title="Christmas Bingo"></iframe>'+
+    '<p class="hint" style="margin:0">В макете — страница для печати. На платформе здесь скачается PDF: две страницы карточек и лист ведущего.</p><div class="btns"><button type="button" class="btn ghost" data-close>Закрыть</button></div></div>');}
 function giftModal(g){sfx('gift');
   var m=modal('<div class="mcard rev g"><span class="rib">Подарок от школы</span><div class="art">'+pic('img/gift3.webp').replace('class="pic"','class="pic giftbox"')+'</div><h3 style="color:#fff">'+g.ic+' '+esc(g.t)+'</h3><div class="trn">'+esc(g.s)+'</div>'+
     (g.promo?'<div class="promo">'+g.promo+'</div><div class="hint">Покажи промокод маме или папе — он действует на первый месяц подписки WowSpace.</div>':'<div class="hint">Подарок лежит в блоке «Мои подарки» под календарём.</div>')+
