@@ -14,7 +14,7 @@ S={
  'mood_adv':'One word about today — then tell us why that word.',
  'moods_beg':[('⚡','Energetic'),('🌤️','Calm'),('💬','Chatty'),('🌀','Confused'),('😴','Sleepy')],
  'moods_adv':[('⚡','Switched on'),('🌤️','Calm'),('💬','Chatty'),('🌀','Scattered'),('😴','Sleepy')],
- 'lead':[('fresh bread','🍞'),('rain on the road','🌧️'),('a birthday cake','🎂'),
+ 'lead':[('fresh bread','🍞'),('the road after a storm','🌧️'),('a birthday cake','🎂'),
          ('the sea','🌊'),('your grandmother’s kitchen','🍲'),('a new book','📖')],
  'lead_adv':[('a smell that takes you back to being six','🧒'),
              ('the smell of a holiday morning','🏖️'),
