@@ -642,7 +642,7 @@ function baseLog(){return [
 function blank(mode){return {mode:mode,day:1,opened:{},own:{},cnt:{},wsz:{},pick:{},placed:[],tree:'pine',page:'home',tab:'cal',log:baseLog(),gifts:[],rew:{},friends:0,posts:0};}
 /* игрушка из окошка: один экземпляр; гирлянды — тремя кусками (маленький, средний, большой) */
 function give(s,it){if(it.tree){s.tree=it.tree;return false;}var had=!!s.own[it.f];s.own[it.f]=s.own[it.f]||{};var nc=!s.own[it.f][it.c];s.own[it.f][it.c]=1;
-  s.cnt[it.f]=(s.cnt[it.f]||0)+(F[it.f].wide?3:1);if(F[it.f].wide)s.wsz[it.f]=(s.wsz[it.f]||[]).concat([.5,.7,1]);return had&&nc;}
+  s.cnt[it.f]=(s.cnt[it.f]||0)+(F[it.f].wide?3:1);if(F[it.f].wide)s.wsz[it.f]=(s.wsz[it.f]||[]).concat([.36,.7,1]); /* маленький кусок короче (Анна 24.11, ответ на вопрос 2) */return had&&nc;}
 function giveSpec(s,f){s.own[f]={'':1};s.cnt[f]=1;}
 /* открыть окошко d: игрушка по порядку, подарок по дате, награды шкалы. Возвращает, что выпало */
 function applyOpen(s,d,quiet){var idx=Object.keys(s.opened).length,it=DAYS[idx];s.opened[d]=idx;var newCol=give(s,it);if(it.f)s.pick[it.f]=it.c;
@@ -980,7 +980,7 @@ function repeatAfterMe(m,word){
    Гирлянда, огоньки и мишура выпадают тремя кусками: маленький, средний, большой.
    Особые игрушки: редкие — за шкалу подарков, эпические — за друзей, легендарные — за пост в соцсетях. */
 var openFam=null,sel=null;
-var FREE_SZ=[.5,.7,1];
+var FREE_SZ=[.36,.7,1];
 function placedOf(f){return S.placed.filter(function(p){return p.f===f;}).length;}
 function cntOf(f){return (S.cnt&&S.cnt[f])||0;}
 function freeOf(f){return cntOf(f)-placedOf(f);}
