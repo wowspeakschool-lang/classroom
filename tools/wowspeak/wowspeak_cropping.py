@@ -69,6 +69,50 @@ def whiten(path,out=None,thr=238):
     m=(a.min(axis=2)>=thr); a=a.copy(); a[m]=255
     im2=Image.fromarray(a); im2.save(out or path); return out or path
 
+# ------------------------------------------------------------- вырезать фон
+def cut_bg(path, out=None, thr=248, feather=True):
+    """Сделать фон прозрачным — заливкой ОТ КРАЯ, а не «всё белое вон».
+
+    Аня, 24.11.2026: «нужно без фона, всё равно на белом фоне рисует». Просить
+    прозрачность у генератора нельзя: он убирает всё белое подряд, и снеговик,
+    белые носки или билет остаются дырой. Поэтому заливаем от границы кадра:
+    белое снаружи предмета уходит, белое внутри контура остаётся на месте.
+    """
+    im = Image.open(path).convert('RGBA')
+    a = np.asarray(im).astype(np.int16)
+    h, w = a.shape[:2]
+    light = (a[:, :, 0] >= thr) & (a[:, :, 1] >= thr) & (a[:, :, 2] >= thr)
+    # обход в ширину от всех пикселей границы
+    out_mask = np.zeros((h, w), bool)
+    from collections import deque
+    q = deque()
+    for x in range(w):
+        for y in (0, h - 1):
+            if light[y, x] and not out_mask[y, x]: out_mask[y, x] = True; q.append((y, x))
+    for y in range(h):
+        for x in (0, w - 1):
+            if light[y, x] and not out_mask[y, x]: out_mask[y, x] = True; q.append((y, x))
+    while q:
+        y, x = q.popleft()
+        for dy, dx in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+            ny, nx = y + dy, x + dx
+            if 0 <= ny < h and 0 <= nx < w and light[ny, nx] and not out_mask[ny, nx]:
+                out_mask[ny, nx] = True; q.append((ny, nx))
+    rgba = np.asarray(im).copy()
+    rgba[:, :, 3] = np.where(out_mask, 0, 255)
+    if feather:
+        # полупрозрачная кромка в один пиксель, иначе край выглядит рваным
+        edge = out_mask.copy()
+        inner = ~out_mask
+        nb = np.zeros((h, w), bool)
+        nb[1:, :] |= out_mask[:-1, :]; nb[:-1, :] |= out_mask[1:, :]
+        nb[:, 1:] |= out_mask[:, :-1]; nb[:, :-1] |= out_mask[:, 1:]
+        rim = inner & nb
+        rgba[:, :, 3] = np.where(rim, 140, rgba[:, :, 3])
+    res = Image.fromarray(rgba, 'RGBA')
+    res.save(out or path)
+    return out or path
+
 # ------------------------------------------------------- object-aware crop
 def _label(mask):
     """8-connected components, iterative flood fill (no scipy needed)."""
