@@ -2,7 +2,7 @@
 <title>Адвент в кабинете ученика</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Nunito:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Nunito:wght@500;600;700;800&family=Pacifico&display=swap">
 <style>
 /* Кабинет ученика на весь экран: слева меню, справа содержимое; на телефоне меню снизу.
    Стиль кабинета: кремово-персиковый фон, белые карточки ~26px, фиолетовый и розовый, жёлтые монеты.
@@ -288,12 +288,246 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
   .demo{padding:6px;gap:4px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ====== v9 (24.11.2026): мастерская эльфов, шкала-гирлянда, подарки, эффекты, музыка ====== */
+.music{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 10px 3px 3px}
+.music button{width:34px;height:34px;border-radius:50%;border:0;background:linear-gradient(160deg,#FF6B6B,#C8364D);color:#fff;font-size:15px;cursor:pointer}
+.music input{width:84px;accent-color:#C8364D}
+/* мастерская + ёлка */
+.wsduo{display:grid;grid-template-columns:minmax(300px,.95fr) minmax(0,1.25fr);gap:16px;align-items:start}
+.room{--wall1:#5B3420;--wall2:#4A2A19;--shelf1:#C98B55;--shelf2:#8C5530;--brass:#E9C46A;--brass-d:#9A7425;
+ position:relative;border-radius:30px;overflow:hidden;color:#fff;display:flex;flex-direction:column;height:calc(100vh - 250px);min-height:560px;
+ background:repeating-linear-gradient(90deg,var(--wall1) 0 86px,var(--wall2) 86px 90px);box-shadow:0 18px 40px rgba(60,30,10,.25)}
+.room::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,200,120,.28),transparent 60%);pointer-events:none}
+.wlights{position:relative;height:40px;flex:none}
+.wlights svg{position:absolute;inset:0;width:100%;height:100%}
+.wbulb{position:absolute;top:0;width:11px;height:16px;border-radius:50% 50% 45% 45%;transform:translateX(-50%);animation:wtw 2.4s ease-in-out infinite}
+@keyframes wtw{0%,100%{opacity:1;filter:drop-shadow(0 0 6px currentColor)}50%{opacity:.55;filter:none}}
+.wt.lifted .pic{transform:scale(1.25);opacity:.45}
+.treearea.dropzone{outline:4px dashed #FFD45A;outline-offset:-6px}
+@media (max-width:860px){
+  /* 24.11 Анна с телефона: «полка выглядит неудобно». Вкладка без прокрутки страницы: ёлка сверху, под ней окно мастерской
+     со своей прокруткой полок; вывеска, гирлянда-украшение и счётчики на телефоне убраны — места мало */
+  .wsduo .room{height:calc(100svh - 240px - 36svh);min-height:170px!important;max-height:none;display:flex;flex-direction:column;overflow:hidden}
+  .room .wsign,.room .wlights,.room .wtop{display:none}
+  .room .shelves{overflow-y:auto!important;overscroll-behavior:contain;flex:1;min-height:0;gap:24px;padding:10px 8px 18px}
+  .room .wtrees{flex-wrap:nowrap;gap:5px;padding:5px 8px}
+  .room .wtrees>span:first-child{display:none}
+  .room .wtrees button[data-tree]{width:34px;height:40px;padding:2px}
+  .room .wtrees .tb{flex-basis:auto;margin-left:auto;gap:5px}
+  .room .wtrees .tb .btn{padding:6px 9px;font-size:11px;white-space:nowrap}
+  #panelBox{padding:0 8px}#panelBox .panel{padding:6px 10px;gap:4px;margin:6px 0 2px}
+  .treebox{gap:8px}
+}
+.wsign{position:relative;margin:-8px auto 4px;width:max-content;max-width:90%;text-align:center;flex:none}
+.wsign .board{background:linear-gradient(180deg,#D69A62,#A9683A);border:3px solid #7A4425;border-radius:14px;padding:5px 20px 7px;box-shadow:0 5px 0 #6A3A1F,0 10px 18px rgba(0,0,0,.35)}
+.wsign b{font-family:'Pacifico',cursive;font-weight:400;font-size:24px;color:#FFF4DC;text-shadow:0 2px 0 #7A4425}
+.wsign small{display:block;font-family:var(--ff-head);font-weight:800;font-size:11px;color:#FFE9C7;letter-spacing:.05em}
+.wwin{position:absolute;top:36px;width:44px;height:58px;border-radius:22px 22px 6px 6px;border:5px solid #8C5530;background:linear-gradient(180deg,#1B2A6B,#4058A8);overflow:hidden;opacity:.9}
+.wwin i{position:absolute;left:50%;top:0;bottom:0;width:4px;background:#8C5530;transform:translateX(-50%)}
+.wwin i+i{left:0;right:0;top:50%;bottom:auto;height:4px;width:auto;transform:none}
+.wtop{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:4px 14px 8px;flex-wrap:wrap;position:relative;flex:none}
+.wcoll{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.25);border-radius:999px;padding:5px 12px 5px 6px;font-family:var(--ff-head);font-weight:800;font-size:13px}
+.wcoins{font-family:var(--ff-head);font-weight:900;background:linear-gradient(180deg,#FFE07A,#F5B82E);color:#6E4A00;border-radius:999px;padding:5px 12px;box-shadow:0 3px 0 #B9861A;font-size:14px}
+#panelBox{padding:0 12px;position:relative;z-index:6;flex:none}
+#panelBox .panel{color:var(--ink);margin-bottom:6px}
+.treearea.armed{outline:4px solid #FFD45A;outline-offset:-4px}
+.treearea.armed::after{content:attr(data-arm);position:absolute;left:50%;top:10px;transform:translateX(-50%);z-index:9;background:#FFD45A;color:#3A2600;font:800 13px var(--ff-head);border-radius:999px;padding:6px 12px;white-space:nowrap;pointer-events:none;animation:armp 1s ease-in-out infinite}
+@keyframes armp{50%{transform:translateX(-50%) scale(1.06)}}
+@media (hover:none){.wt,.wt *,.slot,.swi,.swi *{touch-action:pan-y}}
+.shelves{overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:30px;padding:6px 12px 34px;position:relative}
+.wplate{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(180deg,var(--brass),#C99A3A);color:#4A3208;font-family:var(--ff-head);font-weight:900;font-size:12px;border-radius:8px;padding:4px 10px;box-shadow:0 2px 0 var(--brass-d),inset 0 1px 0 #fff8;margin:0 0 6px 4px}
+.wplate small{font-family:var(--ff-body);font-weight:800;opacity:.8}
+.wrow{position:relative;display:flex;flex-wrap:wrap;gap:6px 2px;align-items:flex-end;padding:6px 8px 0;min-height:66px}
+.wrow::after{content:"";position:absolute;left:0;right:0;bottom:-15px;height:16px;background:linear-gradient(180deg,var(--shelf1),var(--shelf2));border-radius:4px;box-shadow:0 8px 12px rgba(0,0,0,.35),inset 0 2px 0 #E6B27F}
+.sh.rare .wrow{background:linear-gradient(180deg,transparent,rgba(76,155,255,.18));border-radius:14px 14px 0 0}
+.sh.rare .wrow::after{background:linear-gradient(180deg,#9CC8FF,#3F7BD0);box-shadow:0 0 18px #4C9BFF88,inset 0 2px 0 #E4F0FF}
+.sh.epic .wrow{background:radial-gradient(ellipse at 50% 100%,rgba(178,107,255,.35),transparent 70%);border-radius:14px 14px 0 0}
+.sh.epic .wrow::after{background:linear-gradient(180deg,#8E3FD6,#5A1E99);box-shadow:0 0 20px #B26BFF88,inset 0 2px 0 #D9B5FF}
+.sh.leg .case{position:relative;border:3px solid #E9C46A;border-radius:18px 18px 6px 6px;background:linear-gradient(180deg,rgba(255,230,160,.18),rgba(255,194,61,.08));box-shadow:0 0 30px rgba(255,194,61,.35);padding-top:4px}
+.sh.leg .wrow::after{background:linear-gradient(180deg,#FFD36B,#C9921E);box-shadow:0 0 24px #FFC23Daa,inset 0 2px 0 #FFF2C8}
+.wt{position:relative;width:58px;height:64px;display:flex;align-items:flex-end;justify-content:center;z-index:1;border:0;background:none;padding:0;cursor:grab;touch-action:none;user-select:none}
+.wt .pic{position:static;max-width:54px;max-height:60px;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 6px 4px rgba(0,0,0,.45));transition:transform .2s}
+.wt:hover .pic{transform:translateY(-3px) scale(1.06)}
+.wt .ok{position:absolute;right:0;top:0;min-width:18px;height:18px;border-radius:9px;background:#22B573;font-size:10px;font-weight:900;display:grid;place-items:center;padding:0 4px;box-shadow:0 0 0 2px #fff6;color:#fff;font-family:var(--ff-head)}
+.wt.s-open .pic{filter:drop-shadow(0 0 8px #FFE9A0) drop-shadow(0 6px 4px rgba(0,0,0,.45))}
+.wt.m{cursor:pointer}
+.wt .bx{animation:wbob 2.6s ease-in-out infinite}
+.wt:nth-child(2n) .bx{animation-delay:.7s}.wt:nth-child(3n) .bx{animation-delay:1.3s}
+@keyframes wbob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-4px) rotate(2deg)}}
+.wt.t-r::before,.wt.t-e::before,.wt.t-l::before{content:"";position:absolute;left:50%;top:55%;width:150%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+ -webkit-mask:radial-gradient(circle,#000 25%,transparent 68%);mask:radial-gradient(circle,#000 25%,transparent 68%);animation:wspin 9s linear infinite;z-index:-1}
+.wt.t-r::before{background:repeating-conic-gradient(#4C9BFF55 0 10deg,transparent 10deg 30deg)}
+.wt.t-e::before{background:repeating-conic-gradient(#C27BFF88 0 12deg,transparent 12deg 24deg);animation-duration:6s}
+.wt.t-l::before{background:repeating-conic-gradient(#FFD45Acc 0 10deg,#FF9F1C33 10deg 20deg);animation-duration:4s;width:175%}
+@keyframes wspin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.wt.t-r .pic{filter:drop-shadow(0 0 6px #4C9BFF) drop-shadow(0 6px 4px rgba(0,0,0,.4))}
+.wt.t-e .pic{filter:drop-shadow(0 0 8px #C27BFF) drop-shadow(0 6px 4px rgba(0,0,0,.4))}
+.wt.t-l .pic{filter:drop-shadow(0 0 10px #FFD45A) drop-shadow(0 0 18px #FF9F1C) drop-shadow(0 6px 4px rgba(0,0,0,.4))}
+.spk{position:absolute;color:#fff;font-size:11px;pointer-events:none;animation:wtwk 1.8s ease-in-out infinite;text-shadow:0 0 6px currentColor;font-style:normal}
+.t-l .spk{color:#FFE9A0}.t-e .spk{color:#F0D6FF}
+@keyframes wtwk{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.15)}}
+.wtip{position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);width:210px;background:#FFF8EC;color:var(--ink);border-radius:16px;padding:11px 13px;box-shadow:0 12px 30px rgba(0,0,0,.35);font-size:13px;line-height:1.4;z-index:40;text-align:left;visibility:hidden;opacity:0;transition:opacity .12s,visibility 0s .12s;pointer-events:none}
+.wt.down .wtip{bottom:auto;top:calc(100% + 6px)}.wt.down .wtip::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:#FFF8EC}
+.wtip .hint2{display:block;margin-top:6px;font-weight:800;font-size:12px;color:#9C5E36}
+.wtip::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border:8px solid transparent;border-top-color:#FFF8EC}
+.wtip b{font-family:var(--ff-head);display:block;font-size:14px;margin-bottom:3px}
+.wtip .more{margin-top:8px;font-family:var(--ff-head);font-weight:800;font-size:12px;border:0;border-radius:10px;padding:7px 11px;color:#fff;cursor:pointer}
+.wt.m{pointer-events:none}.wt.m .bx{pointer-events:auto}
+.wt.m:hover .wtip,.wt.m:focus-visible .wtip{visibility:visible;opacity:1;transition:opacity .15s .3s,visibility 0s .3s}
+.wt.m:hover,.wt.m:focus-visible{z-index:30}
+.wt.edge-l .wtip{left:0;transform:none}.wt.edge-l .wtip::after{left:28px}
+.wt.edge-r .wtip{left:auto;right:0;transform:none}.wt.edge-r .wtip::after{left:auto;right:20px}
+.wtrees{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:8px 12px;background:rgba(0,0,0,.22);flex:none}
+.wtrees span{font-family:var(--ff-head);font-weight:800;font-size:12px;margin-right:4px}
+.wtrees button[data-tree]{border:2px solid #ffffff44;background:#ffffff14;border-radius:12px;padding:3px;cursor:pointer;width:44px;height:54px;position:relative}
+.wtrees button[data-tree].on{border-color:#FFD45A}
+.wtrees button[data-tree]:disabled{cursor:not-allowed}.wtrees button[data-tree]:disabled .pic{filter:grayscale(1);opacity:.3}
+.wtrees .lk{position:absolute;inset:0;display:grid;place-items:center;font-size:13px}
+.wtrees .tb{flex-basis:100%;display:flex;gap:6px}
+.wtrees .tb .btn{padding:7px 10px;font-size:12px}
+.treearea{height:calc(100vh - 250px)}
+/* гирлянды позади остальных игрушек (Анна, 24.11) */
+.placed{z-index:3}.placed.pwide{z-index:1}.placed.sel{z-index:7}.placed.dragging{z-index:8}
+/* огоньки мерцают; 31 декабря ёлка в огнях и горит звезда */
+.placed .fl i{position:absolute;width:9%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,#fff 0 12%,var(--c) 30%,transparent 70%);mix-blend-mode:screen;animation:fbulb 1.7s ease-in-out infinite;pointer-events:none}
+@keyframes fbulb{0%,100%{opacity:.25;transform:translate(-50%,-50%) scale(.7)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}}
+.treearea.nye .placed .fl i{animation-duration:.6s;width:12%}
+.treearea.nye::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(255,220,120,.32),transparent 62%);pointer-events:none;z-index:0}
+@keyframes nyeg{50%{opacity:.4}}
+.treearea.nye .placed .pic{filter:brightness(1.15) drop-shadow(0 0 7px rgba(255,233,160,.85)) drop-shadow(0 4px 4px rgba(0,0,0,.35))}
+@keyframes nyepop{50%{filter:brightness(1.3) drop-shadow(0 0 8px #FFE9A0)}}
+.treearea.nye .placed.ptop .pic{filter:brightness(1.25) drop-shadow(0 0 12px #FFE58A) drop-shadow(0 0 30px #FFC23D)}
+@keyframes nyestar{0%,100%{filter:brightness(1.1) drop-shadow(0 0 10px #FFE58A) drop-shadow(0 0 24px #FFC23D)}50%{filter:brightness(1.6) drop-shadow(0 0 18px #FFF2B8) drop-shadow(0 0 44px #FFC23D)}}
+.placed.rr-r::before,.placed.rr-e::before,.placed.rr-l::before{content:"";position:absolute;left:50%;top:55%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;z-index:-1}
+.placed.rr-r::before{width:170%;background:radial-gradient(circle,rgba(140,195,255,.95) 0 22%,rgba(76,155,255,.45) 40%,rgba(76,155,255,0) 66%)}
+.placed.rr-e::before{width:190%;background:radial-gradient(circle,rgba(225,175,255,.95) 0 22%,rgba(178,107,255,.5) 42%,rgba(178,107,255,0) 66%);animation:epul 2.4s ease-in-out infinite}
+@keyframes epul{50%{transform:translate(-50%,-50%) scale(1.12)}}
+.placed.rr-l::before{width:260%;background:radial-gradient(circle,rgba(255,236,160,.9) 0 16%,transparent 40%),repeating-conic-gradient(rgba(255,212,90,.85) 0 9deg,rgba(255,159,28,0) 9deg 20deg);-webkit-mask:radial-gradient(circle,#000 18%,transparent 62%);mask:radial-gradient(circle,#000 18%,transparent 62%);animation:lrays 8s linear infinite}
+@keyframes lrays{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.placed.rr-l .pic{filter:drop-shadow(0 0 8px #FFD45A) drop-shadow(0 4px 4px rgba(0,0,0,.35))}
+.placed.rr-e .pic{filter:drop-shadow(0 0 6px #C27BFF) drop-shadow(0 4px 4px rgba(0,0,0,.35))}
+.placed .spk2{position:absolute;color:#fff;font-size:16px;pointer-events:none;animation:twk2 2s ease-in-out infinite;text-shadow:0 0 6px currentColor;z-index:2}
+.placed.rr-e .spk2{color:#F0D6FF}.placed.rr-l .spk2{color:#FFF2B8;font-size:13px}
+@keyframes twk2{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.15)}}
+.nyesw{position:absolute;right:12px;top:12px;z-index:9;display:flex;gap:4px;background:rgba(0,0,0,.25);border-radius:999px;padding:3px}
+.nyesw button{border:0;border-radius:999px;padding:5px 10px;font-family:var(--ff-head);font-weight:800;font-size:11px;background:transparent;color:#fff;cursor:pointer}
+.nyesw button.on{background:#FFD45A;color:#4A2E00}
+/* шкала-гирлянда дней */
+.gscale{background:linear-gradient(180deg,#1E2A66,#2C1F5C);border-radius:24px;padding:14px 16px 10px;color:#fff;margin-bottom:12px}
+.gscale h3{font-size:15px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.gscale h3 small{font-family:var(--ff-body);font-weight:700;color:#D8DCFF;font-size:13px}
+.wire{position:relative;height:118px;overflow-x:auto;overflow-y:hidden}
+.wire .in{position:relative;min-width:760px;height:100%}
+.wire svg{position:absolute;left:0;top:0;width:100%;height:56px}
+.gb{position:absolute;top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
+.gb .l{width:12px;height:18px;border-radius:50% 50% 45% 45%;background:#4A4F78;margin-top:var(--y);position:relative}
+.gb .l::before{content:"";position:absolute;left:3px;top:-5px;width:6px;height:6px;border-radius:2px;background:#20263F}
+.gb.on .l{background:var(--c);animation:gglow 2.2s ease-in-out infinite;animation-delay:calc(var(--i) * -0.17s)}
+@keyframes gglow{0%,100%{box-shadow:0 0 6px var(--c),0 0 12px var(--c)}50%{box-shadow:0 0 14px var(--c),0 0 30px var(--c);filter:brightness(1.25)}}
+.gb.today .l{outline:2px dashed #fff8;outline-offset:3px}
+.gb .d{font-size:10px;font-weight:800;color:#AEB4E6;margin-top:3px}.gb.on .d{color:#fff}
+.gb .gift{margin-top:5px;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:18px;position:relative;font-family:var(--ff-head);font-weight:900}
+.gb .gift img{width:38px;height:38px;object-fit:contain}
+.gb .gift.got{background:#ffffff1c;border-radius:12px}
+.gb .gift.got::after{content:"✓";position:absolute;right:-6px;top:-6px;width:17px;height:17px;border-radius:50%;background:#22B573;font-size:10px;font-weight:900;display:grid;place-items:center}
+.gb .gift.ready{border:0;padding:0;background:radial-gradient(circle,rgba(255,224,120,.9),rgba(255,200,80,0) 70%);border-radius:50%;cursor:pointer;animation:gready 1s ease-in-out infinite;z-index:3}
+.gb .gift.ready .tap{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:2px;font-family:var(--ff-head);font-weight:900;font-size:10px;background:#FFD45A;color:#4A2E00;border-radius:999px;padding:1px 7px;white-space:nowrap}
+@keyframes gready{0%,100%{transform:scale(1) rotate(0);box-shadow:0 0 10px 4px rgba(255,212,90,.55)}25%{transform:scale(1.15) rotate(-8deg)}50%{transform:scale(1.2) rotate(8deg);box-shadow:0 0 24px 10px rgba(255,212,90,.8)}75%{transform:scale(1.15) rotate(-4deg)}}
+.gb.lit .l{animation:litup 1.2s ease-out 2!important}
+@keyframes litup{0%{transform:scale(1)}40%{transform:scale(2.2);filter:brightness(2)}100%{transform:scale(1)}}
+.gb .gift.next{animation:gshake 1.6s ease-in-out infinite}
+@keyframes gshake{0%,70%,100%{transform:rotate(0)}75%{transform:rotate(-10deg)}80%{transform:rotate(10deg)}85%{transform:rotate(-8deg)}90%{transform:rotate(6deg)}}
+.wire.all .gb .l{background:var(--c);animation:gchase 1.4s linear infinite;animation-delay:calc(var(--i) * 0.07s)}
+@keyframes gchase{0%,100%{box-shadow:0 0 4px var(--c);filter:brightness(.8)}20%{box-shadow:0 0 18px var(--c),0 0 40px var(--c);filter:brightness(1.6)}}
+/* мои подарки */
+.mygifts{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:16px;margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.mygifts .gl{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.gcard{display:flex;gap:10px;align-items:center;background:var(--bg);border-radius:18px;padding:10px 12px}
+.gcard .gi{font-size:30px;flex:none}
+.gcard b{font-family:var(--ff-head);font-size:14px;display:block}
+.gcard small{color:var(--muted);font-size:12px;display:block}
+.gcard .btn{margin-left:auto;flex:none}
+.mcard.bingom{max-width:min(880px,96vw);width:880px}.bingof{width:100%;height:min(70vh,760px);border:0;border-radius:14px;background:#EEF1F8}
+.gcard.lock{opacity:.55}
+.promo{font-family:ui-monospace,Menlo,monospace;background:#FFF3CC;border:2px dashed #E7B22E;border-radius:10px;padding:6px 10px;font-weight:800;color:#6E4A00;letter-spacing:.08em}
+/* эффекты */
+.fx{position:fixed;inset:0;pointer-events:none;z-index:70;overflow:hidden}
+.fx i{position:absolute;width:10px;height:14px;border-radius:2px;animation:conf var(--t,1.4s) cubic-bezier(.2,.7,.4,1) forwards}
+@keyframes conf{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
+.fx .flash{position:absolute;width:260px;height:260px;border-radius:50%;transform:translate(-50%,-50%) scale(.2);background:radial-gradient(circle,#fffbe0,rgba(255,220,120,.6) 35%,transparent 70%);animation:flash .7s ease-out forwards}
+@keyframes flash{to{transform:translate(-50%,-50%) scale(2.4);opacity:0}}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.mcard.combo{max-width:min(760px,calc(100vw - 32px));background:radial-gradient(circle at 50% 20%,#3a2a7a,#1C2456);color:#fff}
+.combo .cv{align-self:flex-end;font-size:11px;color:#C9CFF0;display:flex;gap:4px;align-items:center}
+.combo .cv button{font:inherit;font-weight:800;border:0;border-radius:999px;padding:3px 9px;background:rgba(255,255,255,.14);color:#fff;cursor:pointer}.combo .cv button.on{background:#FFD45A;color:#4A2E00}
+.combo .cards{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;width:100%}
+.combo .cc{transition:opacity .4s,transform .4s,box-shadow .4s;opacity:.35;transform:scale(.94)}
+.combo .cc.lit{opacity:1;transform:scale(1);box-shadow:0 0 0 3px rgba(255,255,255,.7),0 0 28px rgba(255,230,150,.6)}
+.combo .cc{position:relative;overflow:hidden;isolation:isolate;flex:1 1 180px;max-width:220px;border-radius:20px;padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;animation:pop .45s cubic-bezier(.2,1.5,.4,1) backwards}
+.combo .cc:nth-child(2){animation-delay:.15s}.combo .cc:nth-child(3){animation-delay:.3s}.combo .cc:nth-child(4){animation-delay:.45s}
+.combo .cc .ray{position:absolute;left:50%;top:40%;width:280px;height:280px;transform:translate(-50%,-50%);border-radius:50%;z-index:-1;background:repeating-conic-gradient(rgba(255,255,255,.16) 0 10deg,transparent 10deg 22deg);-webkit-mask:radial-gradient(circle,#000 20%,transparent 65%);mask:radial-gradient(circle,#000 20%,transparent 65%);animation:spin 10s linear infinite}
+.combo .cc .tag{font-family:var(--ff-head);font-weight:900;font-size:10px;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:3px 9px;background:rgba(255,255,255,.85);color:#1C2456}
+.combo .ci{width:110px;height:110px;object-fit:contain;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))}.combo .ci.emo{display:grid;place-items:center;font-size:70px}
+.combo .cc b{font-family:var(--ff-head);font-size:16px}.combo .cc small{font-size:12px;opacity:.85}
+.combo .csay{border:0;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;padding:3px 10px;cursor:pointer;font-size:14px}
+.combo .k-w{background:linear-gradient(180deg,#2E7D5B,#1B4F3A)}.combo .k-g{background:linear-gradient(180deg,#C8364D,#7E1B2E)}.combo .k-c{background:linear-gradient(180deg,#C9921E,#7A5200)}
+.combo .k-r{background:linear-gradient(180deg,#2E6FD6,#173D85)}.combo .k-e{background:linear-gradient(180deg,#8E3FD6,#4A1A85)}.combo .k-l{background:linear-gradient(180deg,#E39A10,#8A5A00)}
+.combo .cbig img{width:150px;filter:drop-shadow(0 8px 8px rgba(0,0,0,.35))}
+.combo .chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.combo .chip{display:flex;align-items:center;gap:10px;border-radius:16px;padding:7px 14px 7px 7px;text-align:left;animation:pop .45s cubic-bezier(.2,1.5,.4,1) .2s backwards}
+.combo .chip img{width:52px;height:52px;object-fit:contain}.combo .chip .ce{font-size:36px;width:52px;text-align:center}
+.combo .chip b{display:block;font-family:var(--ff-head);font-size:14px}.combo .chip small{font-size:11px;opacity:.85}
+.combo .promo{font-family:var(--ff-head);font-weight:900;background:#fff;color:#C8364D;border-radius:8px;padding:2px 8px;margin-top:2px;display:inline-block}
+@media (max-width:600px){.combo .cc{flex-basis:100%;max-width:none;flex-direction:row;text-align:left;gap:10px}.combo .ci{width:64px;height:64px}.combo .ci.emo{font-size:44px}}
+.mcard.rev{background:radial-gradient(circle at 50% 30%,#3a2a7a,#1C2456);color:#fff;overflow:hidden;position:relative;isolation:isolate}
+.mcard.rev .eb{color:#FFE9A0}.mcard.rev .trn,.mcard.rev .hint{color:#D8DCFF}
+.mcard.rev .art{position:relative}
+.mcard.rev .art::before{content:"";position:absolute;inset:-45%;border-radius:50%;z-index:-1;-webkit-mask:radial-gradient(circle,#000 20%,transparent 66%);mask:radial-gradient(circle,#000 20%,transparent 66%);animation:revspin 7s linear infinite}
+@keyframes revspin{to{transform:rotate(360deg)}}
+.mcard.rev.r .art::before{background:repeating-conic-gradient(#4C9BFF88 0 10deg,transparent 10deg 30deg)}
+.mcard.rev.e .art::before{background:repeating-conic-gradient(#C27BFFaa 0 12deg,transparent 12deg 24deg)}
+.mcard.rev.l .art::before{background:repeating-conic-gradient(#FFD45A 0 10deg,#FF9F1C55 10deg 20deg)}
+.mcard.rev.g .art::before{background:repeating-conic-gradient(#FFD45Aaa 0 10deg,#F7628C55 10deg 20deg)}
+.mcard.rev .rib{font-family:var(--ff-head);font-weight:900;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:999px}
+.rev.r .rib{background:#4C9BFF}.rev.e .rib{background:linear-gradient(90deg,#B26BFF,#E07BFF)}.rev.l .rib{background:linear-gradient(90deg,#FFD45A,#FF9F1C);color:#4A2E00}.rev.g .rib{background:var(--pink)}
+.giftbox{width:150px;height:150px;animation:gbx .9s ease-in-out 2}
+@keyframes gbx{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg) scale(1.05)}40%{transform:rotate(10deg)}60%{transform:rotate(-8deg) scale(1.08)}80%{transform:rotate(6deg)}}
+/* как заработать монетки */
+.earn{display:grid;gap:6px}
+.earn div{display:flex;gap:10px;align-items:center;background:var(--bg);border-radius:14px;padding:8px 12px;font-size:14px}
+.earn div b{margin-left:auto;font-family:var(--ff-head);color:var(--coin-ink);background:var(--coin);border-radius:999px;padding:2px 10px;font-size:12px;white-space:nowrap}
+.earn div small{color:var(--muted)}
+/* гость по ссылке */
+.reg{max-width:520px;margin:10px auto;background:var(--card);border-radius:30px;padding:26px;border:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.reg h2{font-size:24px}
+.reg label{font-family:var(--ff-head);font-weight:800;font-size:13px;display:flex;flex-direction:column;gap:4px}
+.reg input{font:inherit;border:2px solid var(--line);border-radius:14px;padding:10px 12px}
+.reg input:focus{outline:none;border-color:var(--violet)}
+.lesf{display:block;width:100%;height:calc(100vh - 230px);min-height:480px;border:0;border-radius:26px;box-shadow:0 18px 40px rgba(20,20,60,.25)}
+.forest{background:linear-gradient(180deg,#14285E,#2C4C9C 60%,#DDE7FF);border-radius:26px;min-height:420px;display:grid;place-items:center;color:#fff;text-align:center;padding:24px}
+.forest b{font-family:var(--ff-head);font-size:22px;display:block;margin-bottom:6px}
+@media (max-width:860px){
+  .wsduo{grid-template-columns:1fr}
+  .room{height:auto;min-height:0;max-height:none}
+  .shelves{overflow:visible}
+  .treearea{order:-1;height:36svh;min-height:230px}
+  .treearea.armed{outline:4px solid #FFD45A;outline-offset:-4px}
+  .treearea.armed::after{content:attr(data-arm);position:absolute;left:50%;top:10px;transform:translateX(-50%);z-index:9;background:#FFD45A;color:#3A2600;font:800 13px var(--ff-head);border-radius:999px;padding:6px 12px;white-space:nowrap;pointer-events:none;animation:armp 1s ease-in-out infinite}
+  @keyframes armp{50%{transform:translateX(-50%) scale(1.06)}}
+
+  .music input{display:none}
+  .wwin{display:none}
+  .adv-tabs{overflow-x:auto;scrollbar-width:none}
+  .adv-tabs button{font-size:12px;padding:8px 10px;flex:none}
+  .music{padding:2px}
+}
 </style>
 
 <div class="app" id="app">
   <aside class="side" id="side"></aside>
   <div class="main">
-    <div class="top"><h1 id="ttl">Привет, Маша! 👋</h1><span class="streak">🔥 5 дней подряд</span><button type="button" class="coins" id="coins" title="Мои монетки">🪙 0</button></div>
+    <div class="top"><h1 id="ttl">Привет, Маша! 👋</h1><span class="streak">🔥 5 дней подряд</span><span class="music" id="music"><button type="button" id="mBtn" aria-label="Музыка">🎵</button><input type="range" id="mVol" min="0" max="100" value="18" aria-label="Громкость музыки"></span><button type="button" class="coins" id="coins" title="Мои монетки">🪙 0</button></div>
     <div class="page" id="page"></div>
   </div>
 </div>
@@ -308,7 +542,7 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
    «red ball» играется двумя файлами подряд: red, потом ball */
 var PHRASES={"red ball": "audio/p_red_ball.mp3", "blue ball": "audio/p_blue_ball.mp3", "green ball": "audio/p_green_ball.mp3", "gold ball": "audio/p_gold_ball.mp3", "purple ball": "audio/p_purple_ball.mp3", "silver ball": "audio/p_silver_ball.mp3", "gold star": "audio/p_gold_star.mp3", "silver star": "audio/p_silver_star.mp3", "red star": "audio/p_red_star.mp3", "blue star": "audio/p_blue_star.mp3", "gold bell": "audio/p_gold_bell.mp3", "silver bell": "audio/p_silver_bell.mp3", "red bell": "audio/p_red_bell.mp3", "red candy cane": "audio/p_red_candy_cane.mp3", "green candy cane": "audio/p_green_candy_cane.mp3", "blue candy cane": "audio/p_blue_candy_cane.mp3", "white snowflake": "audio/p_white_snowflake.mp3", "blue snowflake": "audio/p_blue_snowflake.mp3", "gold snowflake": "audio/p_gold_snowflake.mp3", "pink snowflake": "audio/p_pink_snowflake.mp3", "red bow": "audio/p_red_bow.mp3", "blue bow": "audio/p_blue_bow.mp3", "green bow": "audio/p_green_bow.mp3", "purple bow": "audio/p_purple_bow.mp3", "red stocking": "audio/p_red_stocking.mp3", "green stocking": "audio/p_green_stocking.mp3", "blue stocking": "audio/p_blue_stocking.mp3", "red present": "audio/p_red_present.mp3", "pink present": "audio/p_pink_present.mp3", "purple present": "audio/p_purple_present.mp3", "yellow present": "audio/p_yellow_present.mp3", "blue present": "audio/p_blue_present.mp3", "green present": "audio/p_green_present.mp3", "gold tinsel": "audio/p_gold_tinsel.mp3", "silver tinsel": "audio/p_silver_tinsel.mp3", "red tinsel": "audio/p_red_tinsel.mp3", "green tinsel": "audio/p_green_tinsel.mp3", "blue tinsel": "audio/p_blue_tinsel.mp3", "pink heart": "audio/p_pink_heart.mp3", "red heart": "audio/p_red_heart.mp3", "purple heart": "audio/p_purple_heart.mp3", "pink sweet": "audio/p_pink_sweet.mp3", "blue sweet": "audio/p_blue_sweet.mp3", "green sweet": "audio/p_green_sweet.mp3", "purple sweet": "audio/p_purple_sweet.mp3", "blue mitten": "audio/p_blue_mitten.mp3", "red mitten": "audio/p_red_mitten.mp3", "green mitten": "audio/p_green_mitten.mp3", "pink mitten": "audio/p_pink_mitten.mp3", "gold tree topper": "audio/p_gold_top_star.mp3", "silver tree topper": "audio/p_silver_top_star.mp3"};
 /* сочетание «цвет + украшение» — одной записью, без точки посередине (23.11.2026, Анна) */
-var AUDIO={"Christmas tree": "audio/christmas_tree.mp3", "ball": "audio/ball.mp3", "star": "audio/star.mp3", "bell": "audio/bell.mp3", "garland": "audio/garland.mp3", "candy cane": "audio/candy_cane.mp3", "snowflake": "audio/snowflake.mp3", "gingerbread man": "audio/gingerbread_man.mp3", "bow": "audio/bow.mp3", "fairy lights": "audio/fairy_lights.mp3", "pine cone": "audio/pine_cone.mp3", "stocking": "audio/stocking.mp3", "present": "audio/present.mp3", "snowy tree": "audio/snowy_tree.mp3", "tinsel": "audio/tinsel.mp3", "heart": "audio/heart.mp3", "snowman": "audio/snowman.mp3", "icicle": "audio/icicle.mp3", "reindeer": "audio/reindeer.mp3", "sweet": "audio/sweet.mp3", "mitten": "audio/mitten.mp3", "angel": "audio/angel.mp3", "golden tree": "audio/golden_tree.mp3", "cracker": "audio/cracker.mp3", "clock": "audio/clock.mp3", "tree topper": "audio/tree_topper.mp3", "red": "audio/red.mp3", "blue": "audio/blue.mp3", "green": "audio/green.mp3", "gold": "audio/gold.mp3", "silver": "audio/silver.mp3", "purple": "audio/purple.mp3", "pink": "audio/pink.mp3", "white": "audio/white.mp3", "yellow": "audio/yellow.mp3", "orange": "audio/orange.mp3", "Merry Christmas!": "audio/merry_christmas.mp3", "Happy New Year!": "audio/happy_new_year.mp3"};
+var AUDIO={"Christmas tree": "audio/christmas_tree.mp3", "ball": "audio/ball.mp3", "star": "audio/star.mp3", "bell": "audio/bell.mp3", "garland": "audio/garland.mp3", "candy cane": "audio/candy_cane.mp3", "snowflake": "audio/snowflake.mp3", "gingerbread man": "audio/gingerbread_man.mp3", "bow": "audio/bow.mp3", "fairy lights": "audio/fairy_lights.mp3", "pine cone": "audio/pine_cone.mp3", "stocking": "audio/stocking.mp3", "present": "audio/present.mp3", "snowy tree": "audio/snowy_tree.mp3", "tinsel": "audio/tinsel.mp3", "heart": "audio/heart.mp3", "snowman": "audio/snowman.mp3", "icicle": "audio/icicle.mp3", "reindeer": "audio/reindeer.mp3", "sweet": "audio/sweet.mp3", "mitten": "audio/mitten.mp3", "angel": "audio/angel.mp3", "golden tree": "audio/golden_tree.mp3", "cracker": "audio/cracker.mp3", "clock": "audio/clock.mp3", "tree topper": "audio/tree_topper.mp3", "red": "audio/red.mp3", "blue": "audio/blue.mp3", "green": "audio/green.mp3", "gold": "audio/gold.mp3", "silver": "audio/silver.mp3", "purple": "audio/purple.mp3", "pink": "audio/pink.mp3", "white": "audio/white.mp3", "yellow": "audio/yellow.mp3", "orange": "audio/orange.mp3", "Merry Christmas!": "audio/merry_christmas.mp3", "Happy New Year!": "audio/happy_new_year.mp3", "snow globe": "audio/snow_globe.mp3", "nutcracker": "audio/nutcracker.mp3", "lantern": "audio/lantern.mp3", "polar bear": "audio/polar_bear.mp3", "rocking horse": "audio/rocking_horse.mp3", "teddy bear": "audio/teddy_bear.mp3", "penguin": "audio/penguin.mp3", "owl": "audio/owl.mp3", "fox": "audio/fox.mp3", "toy train": "audio/toy_train.mp3", "drum": "audio/drum.mp3", "ice skates": "audio/ice_skates.mp3", "gingerbread house": "audio/gingerbread_house.mp3", "carousel": "audio/carousel.mp3", "hot chocolate": "audio/hot_chocolate.mp3", "golden unicorn": "audio/golden_unicorn.mp3", "Santa's sleigh": "audio/santa_s_sleigh.mp3", "ice palace": "audio/ice_palace.mp3"};
 var player=new Audio(),queue=[];
 function playNext(){var u=queue.shift();if(!u)return;try{player.src=u;player.currentTime=0;var p=player.play();if(p&&p.catch)p.catch(function(){});}catch(e){}}
 player.addEventListener('ended',playNext);
@@ -357,71 +591,114 @@ function src(f,c){return 'img/'+F[f].cols[c]+'.webp';}
 function pic(s){return '<img class="pic" src="'+s+'" alt="" draggable="false">';}
 function colsOf(f){return Object.keys(F[f].cols);}
 
-/* 31 окошко: что выпадает по порядку открытия. Шар второго цвета, третьего… — это бесплатный новый цвет */
-var DAYS=[{tree:'pine'},{f:'ball',c:'red'},{f:'star',c:'gold'},{f:'bell',c:'gold'},{f:'garland',c:''},{f:'candy_cane',c:'red'},{f:'snowflake',c:'white'},
+/* особые игрушки: без цветов, свечение редкости — стилями (24.11.2026) */
+var SPEC={r:['snow_globe','nutcracker','lantern','polar_bear','rocking_horse'],
+  e:['teddy_bear','penguin','owl','fox','toy_train','drum','ice_skates','gingerbread_house','carousel','hot_chocolate'],
+  l:['golden_unicorn','santa_sleigh','ice_palace']};
+[['snow_globe','snow globe','снежный шар','m','r'],['nutcracker','nutcracker','Щелкунчик','m','r'],['lantern','lantern','фонарик','m','r'],['polar_bear','polar bear','белый медведь','m','r'],['rocking_horse','rocking horse','лошадка-качалка','f','r'],
+ ['teddy_bear','teddy bear','плюшевый мишка','m','e'],['penguin','penguin','пингвин','m','e'],['owl','owl','сова','f','e'],['fox','fox','лиса','f','e'],['toy_train','toy train','игрушечный паровозик','m','e'],['drum','drum','барабан','m','e'],['ice_skates','ice skates','коньки','p','e'],['gingerbread_house','gingerbread house','пряничный домик','m','e'],['carousel','carousel','карусель','f','e'],['hot_chocolate','hot chocolate','горячий шоколад','m','e'],
+ ['golden_unicorn','golden unicorn','золотой единорог','m','l'],['santa_sleigh',"Santa's sleigh",'сани Санты','p','l'],['ice_palace','ice palace','ледяной дворец','m','l']].forEach(function(x){
+  F[x[0]]={w:x[1],t:x[2],g:x[3],sz:x[0]==='santa_sleigh'?16:12,rar:x[4],cols:{'':'n/'+x[0]}};if(!AUDIO[x[1]])AUDIO[x[1]]='audio/w_'+x[0]+'.mp3';}); /* голоса, выбранные Анной 24.11, уже лежат в AUDIO — не подменять */
+
+/* 31 окошко: что выпадает по порядку открытия. Звезда-верхушка — третьей, гирлянда — шестой,
+   чтобы главное было у всех (Анна, 24.11.2026). Последнее — ангел. */
+var DAYS=[{tree:'pine'},{f:'ball',c:'red'},{f:'top_star',c:'gold'},{f:'star',c:'gold'},{f:'bell',c:'gold'},{f:'garland',c:''},{f:'candy_cane',c:'red'},{f:'snowflake',c:'white'},
  {f:'ball',c:'blue'},{f:'gingerbread',c:''},{f:'bow',c:'red'},{f:'fairy_lights',c:''},{f:'pine_cone',c:''},{f:'ball',c:'green'},{f:'stocking',c:'red'},
  {f:'present',c:'red'},{tree:'snowy'},{f:'ball',c:'gold'},{f:'tinsel',c:'gold'},{f:'heart',c:'pink'},{f:'snowman',c:''},{f:'ball',c:'silver'},{f:'icicle',c:''},
- {f:'reindeer',c:''},{f:'ball',c:'purple'},{f:'sweet',c:'pink'},{f:'mitten',c:'blue'},{f:'angel',c:''},{tree:'gold'},{f:'cracker',c:''},{f:'clock',c:''},{f:'top_star',c:'gold'}];
+ {f:'reindeer',c:''},{f:'ball',c:'purple'},{f:'sweet',c:'pink'},{f:'mitten',c:'blue'},{tree:'gold'},{f:'cracker',c:''},{f:'clock',c:''},{f:'angel',c:''}];
 var N=DAYS.length;
 var ORDERF=[];DAYS.forEach(function(d){if(d.f&&ORDERF.indexOf(d.f)<0)ORDERF.push(d.f);});
 function dayImg(it){return it.tree?'img/tree_'+it.tree+'.webp':src(it.f,it.c);}
 function dayEn(it){return it.tree?TREES[it.tree][0]:en(it.f,it.c);}
 function dayRu(it){return it.tree?TREES[it.tree][1]:ru(it.f,it.c);}
-/* в кружке календаря у гирлянд — свой значок: кусок с крючком и 3–5 бусинами (23.11.2026, Анна: «гирлянда в кружке — тонкая полоска») */
+/* в кружке календаря у гирлянд — свой значок: кусок с крючком и 3–5 бусинами (23.11.2026) */
 function doorImg(it){if(it.f&&F[it.f].wide)return 'img/ic_'+F[it.f].cols[it.c].split('/').pop()+'.webp';return dayImg(it);}
 function gift(d){return 'img/gift'+(d%6+1)+'.webp';}
+
+/* шкала подарков по числу открытых окошек */
+var MILE={3:{a:3},5:{r:1},7:{a:5},10:{r:1},12:{a:5},15:{r:1},18:{a:7},20:{r:1},23:{a:7},25:{r:1},28:{a:10},31:{a:15,cert:1}};
+function nextMilestone(n){n=n===undefined?nOpened():n;for(var k=n+1;k<=31;k++)if(MILE[k])return k;return 0;}
+/* настоящие подарки — в окошках по датам */
+var GIFTS={5:{id:'recipe',ic:'🍪',t:'Рецепт имбирного печенья',s:'на английском, с картинками',btn:'Скачать'},
+ 10:{id:'club',ic:'🗣',t:'Занятие разговорного клуба WowSpace',s:'одно занятие в подарок',btn:'Записаться'},
+ 15:{id:'mk',ic:'🎨',t:'Мастер-класс WowSpace',s:'один мастер-класс в подарок',btn:'Записаться'},
+ 22:{id:'bingo',ic:'🎲',t:'Christmas Bingo',s:'семейная игра из твоих слов',btn:'Скачать'},
+ 28:{id:'sale',ic:'🏷',t:'−50 % на подписку WowSpace',s:'промокод на первый месяц',promo:'XMAS50'}};
 
 /* ---------- варианты показа ---------- */
 function baseLog(){return [
   {d:'1 ноя',ic:'💼',t:'Было на начало месяца',a:31,start:1},
-  {d:'4 ноя',ic:'📖',t:'Урок',s:'Super Minds 2',a:5},
+  {d:'4 ноя',ic:'📖',t:'Урок',s:'Super Minds 2',a:10},
   {d:'5 ноя',ic:'📚',t:'Домашка сдана',s:'Unit 2 · Homework 6',a:3},
-  {d:'11 ноя',ic:'📖',t:'Урок',s:'Super Minds 2',a:5},
+  {d:'11 ноя',ic:'📖',t:'Урок',s:'Super Minds 2',a:10},
   {d:'12 ноя',ic:'🎡',t:'Колесо удачи',s:'выпало: наклейки',a:-30},
-  {d:'18 ноя',ic:'📖',t:'Урок',s:'Super Minds 2',a:5},
+  {d:'18 ноя',ic:'📖',t:'Урок',s:'Super Minds 2',a:10},
   {d:'19 ноя',ic:'⭐',t:'Активность на уроке',a:2},
-  {d:'25 ноя',ic:'📖',t:'Урок',s:'Super Minds 2',a:5},
+  {d:'25 ноя',ic:'📖',t:'Урок',s:'Super Minds 2',a:10},
   {d:'26 ноя',ic:'📚',t:'Домашка сдана',s:'Unit 3 · Homework 1',a:3}
 ];}
-function blank(mode){return {mode:mode,day:1,opened:{},own:{},pick:{},placed:[],tree:'pine',page:'home',tab:'cal',log:baseLog()};}
-function give(s,it){if(it.tree){s.tree=it.tree;return false;}var had=!!s.own[it.f];s.own[it.f]=s.own[it.f]||{};var nc=!s.own[it.f][it.c];s.own[it.f][it.c]=1;return had&&nc;}
+function blank(mode){return {mode:mode,day:1,opened:{},own:{},cnt:{},wsz:{},pick:{},placed:[],tree:'pine',page:'home',tab:'cal',log:baseLog(),gifts:[],rew:{},friends:0,posts:0};}
+/* игрушка из окошка: один экземпляр; гирлянды — тремя кусками (маленький, средний, большой) */
+function give(s,it){if(it.tree){s.tree=it.tree;return false;}var had=!!s.own[it.f];s.own[it.f]=s.own[it.f]||{};var nc=!s.own[it.f][it.c];s.own[it.f][it.c]=1;
+  s.cnt[it.f]=(s.cnt[it.f]||0)+(F[it.f].wide?3:1);if(F[it.f].wide)s.wsz[it.f]=(s.wsz[it.f]||[]).concat([.5,.7,1]);return had&&nc;}
+function giveSpec(s,f){s.own[f]={'':1};s.cnt[f]=1;}
+/* открыть окошко d: игрушка по порядку, подарок по дате, награды шкалы. Возвращает, что выпало */
+function applyOpen(s,d,quiet){var idx=Object.keys(s.opened).length,it=DAYS[idx];s.opened[d]=idx;var newCol=give(s,it);if(it.f)s.pick[it.f]=it.c;
+  var ev={it:it,newCol:newCol,gift:null,rew:[]};
+  if(GIFTS[d]&&s.gifts.indexOf(d)<0){s.gifts.push(d);ev.gift=GIFTS[d];}
+  var n=idx+1,m=MILE[n];if(m&&!s.rew[n]){
+    if(!quiet){s.pend=s.pend||[];if(s.pend.indexOf(n)<0)s.pend.push(n);ev.pend=n;return ev;}
+    s.rew[n]=1;var r={n:n,a:m.a||0,cert:!!m.cert};
+    if(m.a)s.log.push({d:s.mode==='test'?'сегодня':(s.day>31?'янв':s.day+' дек'),ic:'✨',t:'Шкала подарков: '+n+' окошек',a:m.a,s:'адвент-календарь'});
+    if(m.r){var f=SPEC.r.filter(function(x){return !s.own[x];})[0];if(f){giveSpec(s,f);r.f=f;}}
+    ev.rew.push(r);}
+  return ev;}
+/* забрать награду шкалы, ждущую на гирлянде */
+function claimRew(n){var s=S,m=MILE[n];if(!m||s.rew[n])return null;s.pend=(s.pend||[]).filter(function(x){return x!==n;});
+  s.rew[n]=1;var r={n:n,a:m.a||0,cert:!!m.cert};
+  if(m.a)s.log.push({d:s.mode==='test'?'сегодня':(s.day>31?'янв':s.day+' дек'),ic:'✨',t:'Шкала подарков: '+n+' окошек',a:m.a,s:'адвент-календарь'});
+  if(m.r){var f=SPEC.r.filter(function(x){return !s.own[x];})[0];if(f){giveSpec(s,f);r.f=f;}}
+  save();return r;}
 function freshTest(){var s=blank('test');s.log.push({d:'30 ноя',ic:'🎁',t:'Подарок к адвенту',a:31});return s;}
 function freshMiss(){
-  var s=blank('miss');s.day=20;var missed=[7,8,14,18,19],n=0;
-  for(var d=1;d<20;d++){if(missed.indexOf(d)>=0)continue;s.opened[d]=n;give(s,DAYS[n]);n++;}
-  s.tree='pine';s.own.bell.silver=1;s.own.star.red=1;
+  var s=blank('miss');s.day=20;var missed=[7,8,14,18,19];
+  for(var d=1;d<20;d++){if(missed.indexOf(d)>=0)continue;applyOpen(s,d,true);}
+  s.tree='pine';s.own.bell.silver=1;s.own.star.red=1;s.friends=1;giveSpec(s,'teddy_bear');
   s.log=s.log.concat([
-    {d:'2 дек',ic:'📖',t:'Урок',s:'Super Minds 2',a:5},
+    {d:'2 дек',ic:'📖',t:'Урок',s:'Super Minds 2',a:10},
     {d:'3 дек',ic:'🎨',t:'Новый цвет: серебряный колокольчик',s:'адвент-календарь',a:-1},
     {d:'5 дек',ic:'🎨',t:'Новый цвет: красная звезда',s:'адвент-календарь',a:-1},
-    {d:'9 дек',ic:'📖',t:'Урок',s:'Super Minds 2',a:5},
+    {d:'9 дек',ic:'📖',t:'Урок',s:'Super Minds 2',a:10},
     {d:'10 дек',ic:'📚',t:'Домашка сдана',s:'Unit 3 · Homework 4',a:3},
-    {d:'16 дек',ic:'📖',t:'Урок',s:'Super Minds 2',a:5},
+    {d:'16 дек',ic:'📖',t:'Урок',s:'Super Minds 2',a:10},
     {d:'17 дек',ic:'🎡',t:'Колесо удачи',s:'выпало: 10 монеток',a:-30},
     {d:'17 дек',ic:'🎡',t:'Выигрыш на колесе',a:10}]);
-  [['garland','',50,44,1,-4,1,1],['ball','red',38,52],['ball','blue',63,63],['star','red',55,34],['bell','silver',43,73],['candy_cane','red',30,68],
-   ['ball','green',70,51],['snowflake','white',48,60],['gingerbread','',58,79],['bow','red',47,27,.9,10]].forEach(function(p,i){
-    s.placed.push({id:i+1,f:p[0],c:p[1],x:p[2],y:p[3],s:p[4]||1,r:p[5]||0,sx:p[6]||1,sy:p[7]||1});});
+  [['garland','',50,44,1],['fairy_lights','',50,62,.7],['ball','red',38,52],['ball','blue',63,63],['star','red',55,34],['bell','silver',43,73],['candy_cane','red',30,68],
+   ['ball','green',70,51],['snowflake','white',48,60],['gingerbread','',58,79],['bow','red',47,27,.9,10],['snow_globe','',30,86],['teddy_bear','',70,86]].forEach(function(p,i){
+    s.placed.push({id:i+1,f:p[0],c:p[1],x:p[2],y:p[3],s:p[4]||1,r:p[5]||0,sx:1,sy:1});});
+  s.placed.push({id:50,f:'top_star',c:'gold',x:50,y:12,s:1,r:0,sx:1,sy:1,auto:1});
   return s;
 }
-/* вариант «пришла поздно»: первый вход 15 декабря — монетки на все платные прошлые окошки (23.11.2026, Анна) */
+/* «Новичок»: ученица впервые зашла 15 декабря — монетки на все прошлые платные окошки */
 function freshLate(){var s=blank('late');s.day=15;s.welcomed=false;return s;}
-/* вариант «январь»: календарь закончился, ёлка и сундук остаются */
+/* «Гость по ссылке»: ещё не ученик — регистрация, 🪙 20 сразу. Зашла 2 декабря */
+function freshGuest(){var s=blank('guest');s.day=2;s.log=[];s.reg=false;return s;}
+/* «Январь»: календарь закончился, ёлка и мастерская остаются, ёлка в огнях */
 function freshAfter(){
-  var s=blank('after');s.day=N+1;for(var d=1;d<=N;d++){s.opened[d]=d-1;give(s,DAYS[d-1]);}
+  var s=blank('after');s.day=N+1;for(var d=1;d<=N;d++)applyOpen(s,d,true);
+  s.friends=3;['teddy_bear','penguin','owl'].forEach(function(f){giveSpec(s,f);});s.posts=1;giveSpec(s,'golden_unicorn');
   s.tree='gold';s.page='advent';s.tab='tree';
-  s.log=s.log.concat([{d:'31 дек',ic:'🎉',t:'Новогодний подарок: последнее окошко',s:'адвент-календарь',a:20}]);
-  [['fairy_lights','',50,40,.7],['garland','',50,58,1],['tinsel','gold',50,75,1.2],['ball','red',38,47],['ball','blue',62,50],['ball','gold',44,66],['ball','purple',58,68],
+  [['fairy_lights','',50,40,.7],['garland','',50,58,1],['tinsel','gold',50,75,1],['ball','red',38,47],['ball','blue',62,50],['ball','gold',44,66],['ball','purple',58,68],
    ['star','gold',52,30],['bell','gold',34,62],['candy_cane','red',67,62],['snowflake','white',41,35],['heart','pink',60,36],['bow','red',48,49],
-   ['present','red',30,90],['present','blue',44,92],['present','green',70,90],['snowman','',84,86],['reindeer','',16,86]].forEach(function(p,i){
+   ['present','red',30,90],['snowman','',84,86],['reindeer','',16,86],['golden_unicorn','',70,88],['penguin','',57,88],['snow_globe','',42,86]].forEach(function(p,i){
     s.placed.push({id:i+1,f:p[0],c:p[1],x:p[2],y:p[3],s:p[4]||1,r:0,sx:1,sy:1});});
   s.placed.push({id:99,f:'top_star',c:'gold',x:50,y:12,s:1,r:0,sx:1,sy:1,auto:1});
   return s;}
-var FRESH={test:freshTest,miss:freshMiss,late:freshLate,after:freshAfter};
-var MODES=[['test','1 · Тест','Тест: все окошки подряд'],['miss','2 · 20 декабря','20 декабря: есть неоткрытые окошки'],['late','3 · Новичок','Пришла 15 декабря'],['after','4 · Январь','Январь: календарь закончился'],
-  ['teacher','5 · Карточка','Карточка для учителя'],['tview','6 · Учитель','Глазами учителя'],['q','7 · Вопросы','Вопросы к решению']];
+var FRESH={test:freshTest,miss:freshMiss,late:freshLate,guest:freshGuest,after:freshAfter};
+var MODES=[['test','1 · Тест','Тест: все окошки подряд'],['miss','2 · 20 декабря','20 декабря: есть неоткрытые окошки'],['late','3 · Новичок','Ученица пришла 15 декабря'],['guest','4 · Гость','Гость по ссылке друга'],['after','5 · Январь','Январь: календарь закончился'],
+  ['teacher','6 · Карточка','Карточка для учителя'],['tview','7 · Учитель','Глазами учителя'],['q','8 · Вопросы','Вопросы к решению']];
 function viewMode(c){return c==='teacher'||c==='tview'||c==='q';}
-var KEY='wow-cabinet-advent-v4',ALL,S;
+var KEY='wow-cabinet-advent-v9',ALL,S;
 function load(){try{var r=localStorage.getItem(KEY);if(r)ALL=JSON.parse(r);}catch(e){}
   if(!ALL)ALL={cur:'miss'};Object.keys(FRESH).forEach(function(k){if(!ALL[k])ALL[k]=FRESH[k]();});
   S=ALL[viewMode(ALL.cur)?'miss':ALL.cur];}
@@ -454,8 +731,9 @@ function navHtml(compact){
     if(compact&&m[0]==='shopw')return '';
     return '<button type="button" class="nav'+(x?' xmas':'')+(S.page===m[0]?' on':'')+'" data-p="'+m[0]+'"><span class="ic">'+m[1]+'</span><span>'+(compact&&x?'Ёлка':m[2])+'</span>'+badge+'</button>';}).join('');
 }
+function meName(){return S.mode==='guest'?(S.name||'Гость'):'Маша';}
 function renderNav(){
-  $('side').innerHTML='<div class="logo">Wow<span>Speak</span></div>'+navHtml(false)+'<div class="grow"></div><div class="me"><div class="ava">М</div><div><b>Маша</b><small>Super Minds 2 · 8 лет</small></div></div>';
+  $('side').innerHTML='<div class="logo">Wow<span>Speak</span></div>'+navHtml(false)+'<div class="grow"></div><div class="me"><div class="ava">'+esc(meName()[0])+'</div><div><b>'+esc(meName())+'</b><small>'+(S.mode==='guest'?'гость · по ссылке друга':'Super Minds 2 · 8 лет')+'</small></div></div>';
   $('bnav').innerHTML=navHtml(true);
   $$('.nav').forEach(function(b){b.onclick=function(){go(b.dataset.p);};});
 }
@@ -463,17 +741,18 @@ function go(p){S.page=p;save();render();window.scrollTo(0,0);}
 function modal(html){var m=document.createElement('div');m.className='modal';m.innerHTML=html;document.body.appendChild(m);
   m.onclick=function(e){if(e.target===m||e.target.hasAttribute('data-close'))m.remove();};return m;}
 function plaque(){
-  if(isTest())return '<div class="plaque"><span class="vn">Вариант 1 · Тест</span><span class="vt">Все 31 окошко открываются подряд, без дат — чтобы посмотреть, что внутри каждого.</span></div>';
+  if(isTest())return '<div class="plaque"><span class="vn">Вариант 1 · Тест</span><span class="vt">Все 31 окошко открываются подряд, без дат — чтобы посмотреть, что внутри каждого: игрушки, подарки школы (5, 10, 15, 22, 28) и награды шкалы.</span><button type="button" class="btn sm" id="demoSpec" style="margin-left:auto">✨ Повесить редкую, эпическую и легендарную</button></div>';
   if(S.mode==='late')return '<div class="plaque"><span class="vn">Вариант 3 · Новичок</span><span class="vt">Ученица впервые зашла 15 декабря. При первом входе ей выпадают монетки — ровно на все ранние окошки: 13 × 5 = 🪙 65. Вчерашнее (14) и сегодняшнее (15) — бесплатно.</span></div>';
-  if(S.mode==='after')return '<div class="plaque"><span class="vn">Вариант 4 · Январь</span><span class="vt">Календарь закончился. Все 31 окошко открыты, ёлка и сундук остаются: можно наряжать, слушать слова и сохранить ёлку картинкой. За окошко 31 декабря было +🪙 20.</span></div>';
-  return '<div class="plaque"><span class="vn">Вариант 2 · 20 декабря</span><span class="vt">Сегодня 20 декабря. Сегодняшнее и вчерашнее (19) окошко — бесплатные. Окошки 7, 8, 14 и 18 декабря ещё закрыты — их можно открыть за 🪙 5. 21–31 ещё рано.</span></div>';
+  if(S.mode==='guest')return '<div class="plaque"><span class="vn">Вариант 4 · Гость по ссылке</span><span class="vt">Ещё не ученик школы: пришёл по ссылке друга 2 декабря. После регистрации заявка уходит в школу, а ему сразу 🪙 20. Другу, который позвал, — эпическая игрушка, когда гость откроет первое окошко.</span></div>';
+  if(S.mode==='after')return '<div class="plaque"><span class="vn">Вариант 5 · Январь</span><span class="vt">Календарь закончился: все 31 окошко открыты, гирлянда дней горит целиком, ёлка в огнях и звезда на верхушке светится. Мастерская и ёлка остаются.</span></div>';
+  return '<div class="plaque"><span class="vn">Вариант 2 · 20 декабря</span><span class="vt">Сегодня 20 декабря. Сегодняшнее и вчерашнее (19) окошко — бесплатные, окошки 7, 8, 14 и 18 — за 🪙 5. Открыто 14 окошек: на гирлянде следующий подарок через 1. Друг уже пришёл — у Маши эпический мишка.</span></div>';
 }
-
+function earnHtml(){return '<div class="earn">'+[['📖','Урок','≈ 🪙 10'],['🎓','Вводный урок <small>(для новых учеников)</small>','🪙 30'],['🎫','Покупка абонемента','🪙 100'],['🎙','«Повтори за мной» в адвенте','🪙 1 в день'],['✨','Шкала подарков: открывай окошки','🪙 3–15'],['👫','Друг пришёл по твоей ссылке','эпическая игрушка'],['📸','Пост с ёлкой и отметкой школы','легендарная игрушка']].map(function(x){return '<div><span>'+x[0]+'</span><span>'+x[1]+'</span><b>'+x[2]+'</b></div>';}).join('')+'</div>';}
 function coinsModal(){
   var earned=0,spent=0;S.log.forEach(function(r){if(r.a>0&&!r.start)earned+=r.a;if(r.a<0)spent-=r.a;});
   var rows=S.log.slice().reverse().map(function(r){return '<div class="lrow"><span class="ic">'+r.ic+'</span><div class="w"><b>'+esc(r.t)+'</b><small>'+esc(r.d)+(r.s?' · '+esc(r.s):'')+'</small></div><span class="a '+(r.a>0?'plus':'minus')+'">'+(r.a>0?'+':'−')+Math.abs(r.a)+'</span></div>';}).join('');
   modal('<div class="mcard wide"><h3>🪙 Мои монетки</h3><div class="ctiles"><div class="ct"><b>'+coins()+'</b><small>сейчас</small></div><div class="ct"><b style="color:var(--green)">+'+earned+'</b><small>заработала</small></div><div class="ct"><b style="color:var(--red)">−'+spent+'</b><small>потратила</small></div></div>'+
-   '<p class="hint" style="margin:0">Монетки дают за уроки, сданную домашку и активность на уроке. Тратить можно на колесо удачи, сундучок-сюрприз, окошки ранних дней (🪙 5; вчерашнее и сегодняшнее — бесплатно) и новые цвета украшений (🪙 1).</p>'+
+   '<h4 style="margin:4px 0 0;font-family:var(--ff-head)">Как заработать монетки</h4>'+earnHtml()+'<p class="hint" style="margin:0">Тратить: окошко раньше вчерашнего — 🪙 5, новый цвет игрушки — 🪙 1, ещё одна такая же игрушка — 🪙 3, колесо удачи и сундучок-сюрприз.</p>'+
    '<div class="ledger">'+rows+'</div><div class="btns" style="justify-content:flex-end"><button type="button" class="btn" data-close>Закрыть</button></div></div>');
 }
 
@@ -488,7 +767,7 @@ function renderHome(){
      '<div class="hw"><span class="em">📝</span><div><b>Unit 3 · Homework 5</b><span class="sub">My town</span></div></div><span class="pill p-pink">🔥 Сделать сегодня</span>'+
      '<div class="hw"><span class="em">🎮</span><div><b>Тренажёр: Places</b><span class="sub">8 слов</span></div></div><span class="pill p-violet">⏰ К пятнице</span>'+
      '<button type="button" class="btn" data-go="hw">Открыть</button></div>'+
-   '<div class="card"><h3>🪙 Мои монетки</h3><div class="bigcoin">'+coins()+'</div><div class="sub">За уроки, домашку и активность</div><button type="button" class="btn ghost" id="coinCard">Откуда пришли и куда ушли</button></div>'+
+   '<div class="card"><h3>🪙 Мои монетки</h3><div class="bigcoin">'+coins()+'</div><div class="sub">За уроки, домашку и активность</div><button type="button" class="btn ghost" id="coinCard">Откуда пришли и куда ушли</button></div>'+(S.mode==='guest'?'<div class="card" style="grid-column:1/-1"><h3>Как заработать монетки</h3>'+earnHtml()+'</div>':'')+
    '<div class="card"><h3>📅 Следующий урок</h3><div class="sub">Среда · 17:00</div><div class="sub">Super Minds 2 · Анна Сергеевна</div><span class="pill p-violet">Через 2 дня</span><button type="button" class="btn ghost" data-go="sched">Расписание</button></div>'+
    '<div class="card"><h3>🎡 Колесо удачи</h3><div class="wheel" aria-hidden="true"></div><div class="sub">Крути колесо и выигрывай призы</div><span class="pill p-coin">🪙 30</span></div>'+
    '</div>';
@@ -535,146 +814,313 @@ function calHtml(st,poster){
   return h+'</div>';
 }
 function renderAdvent(){
-  var m=missedDays(),bar;
+  var bar;
   if(isTest())bar='<span class="date">🧪 Тест</span><span class="hint">Открыто: '+nOpened()+' из 31</span>';
-  else if(over())bar='<span class="date">🎄 Календарь закончился</span><span class="pill p-green">Ёлка и сундук остаются с тобой — наряжай и слушай слова</span>';
+  else if(over())bar='<span class="date">🎄 Календарь закончился</span><span class="pill p-green">Ёлка и мастерская остаются с тобой — наряжай и слушай слова</span>';
   else bar='<span class="date">📅 Сегодня '+S.day+' декабря</span>'+((S.day in S.opened)?'<span class="pill p-green">Сегодняшнее окошко открыто ✓</span>':'<span class="pill p-pink">Сегодняшнее окошко — бесплатно</span>')+(S.day>1&&!((S.day-1) in S.opened)?'<span class="pill p-pink">Вчерашнее — тоже бесплатно</span>':'')+
     '<span class="legend"><span><i class="lg" style="background:var(--pink)"></i>сегодня и вчера — бесплатно</span><span>🪙 5 — окошко раньше</span><span><i class="lg" style="background:#E6E9F5"></i>ещё рано 🔒</span></span>';
-  $('page').innerHTML='<div class="adv-tabs">'+[['cal','🗓 Календарь'],['tree','🎄 Моя ёлка и сундук']].map(function(x){return '<button type="button" data-t="'+x[0]+'" class="'+(S.tab===x[0]?'on':'')+'">'+x[1]+'</button>';}).join('')+'</div>'+
-    plaque()+(S.tab==='tree'?'':'<div class="advbar">'+bar+'</div>')+'<div id="adv"></div>';
+  $('page').innerHTML='<div class="adv-tabs">'+[['cal','🗓 Календарь'],['tree','🎄 Мастерская и ёлка'],['forest','🌲 Лес']].map(function(x){return '<button type="button" data-t="'+x[0]+'" class="'+(S.tab===x[0]?'on':'')+'">'+x[1]+'</button>';}).join('')+'</div>'+
+    plaque()+(S.tab==='cal'?'<div class="advbar">'+bar+'</div>':'')+'<div id="adv"></div>';
   $$('.adv-tabs button').forEach(function(b){b.onclick=function(){S.tab=b.dataset.t;sel=null;save();render();};});
-  if(S.tab==='tree')renderTree();else renderCal();
+  if(S.tab==='tree')renderTree();else if(S.tab==='forest')renderForest();else renderCal();
+}
+/* лес ёлок — делается отдельно; здесь заглушка */
+function renderForest(){$('adv').innerHTML='<iframe class="lesf" src="les_page.html?in=cab'+(nyeOn()?'&nye=1':'')+'" title="Лес ёлок"></iframe>';}
+/* лес просит вернуться к ёлке — переключаем вкладку */
+window.addEventListener('message',function(e){if(e.data&&e.data.advent==='tree'){S.page='advent';S.tab='tree';save();render();}});
+/* шкала «Гирлянда дней»: 31 лампочка, открытые мерцают; будущие подарки — одинаковые закрытые коробки */
+function scaleHtml(){
+  var n=nOpened(),nx=nextMilestone(),COL=['#FF5A5A','#FFD23F','#4CD97B','#4C9BFF','#C26BFF','#FF8AD8'];
+  var W='<svg viewBox="0 0 100 56" preserveAspectRatio="none"><path d="M0 6 Q12.5 30 25 6 Q37.5 30 50 6 Q62.5 30 75 6 Q87.5 30 100 6" stroke="#0E1433" stroke-width=".6" fill="none"/></svg>';
+  for(var k=1;k<=31;k++){var x=1.6+(k-1)*(96.8/30),y=4+Math.sin(((x)%25)/25*Math.PI)*16,m=MILE[k],g='';
+    if(m&&(S.pend||[]).indexOf(k)>=0){g='<button type="button" class="gift ready" data-k="'+k+'" aria-label="Забрать подарок">'+pic('img/box_common.webp')+'<span class="tap">Нажми!</span></button>';}
+    else if(m){if(k<=n){g='<span class="gift got" title="Получено">'+(m.cert?'🎓':m.r?pic('img/n/'+(SPEC.r[[5,10,15,20,25].indexOf(k)]||'snow_globe')+'.webp'):'🪙'+m.a)+'</span>';}
+      else g='<span class="gift'+(k===nx&&k-n<=2?' next':'')+'">'+pic('img/box_common.webp')+'</span>';}
+    W+='<div class="gb'+(k<=n?' on':'')+(k===n+1?' today':'')+'" style="left:'+x+'%;--y:'+y+'px;--c:'+COL[k%6]+';--i:'+k+'"><span class="l"></span><span class="d">'+k+'</span>'+g+'</div>';}
+  var sub=nx?'Открыто '+n+' из 31 · до следующего подарка — '+(nx-n)+' '+(nx-n===1?'окошко':nx-n<5?'окошка':'окошек'):'Все подарки шкалы получены 🎉';
+  return '<div class="gscale"><h3>✨ Гирлянда подарков <small>'+sub+'</small></h3><div class="wire'+(over()?' all':'')+'"><div class="in">'+W+'</div></div></div>';
+}
+/* мои подарки: настоящие подарки из окошков */
+function giftsHtml(){
+  var got=S.gifts||[],h='';
+  Object.keys(GIFTS).forEach(function(d){var g=GIFTS[d],has=got.indexOf(+d)>=0;
+    h+='<div class="gcard'+(has?'':' lock')+'"><span class="gi">'+(has?g.ic:'🎁')+'</span><div><b>'+(has?g.t:'Секретный подарок')+'</b><small>'+(has?g.s:'спрятан в одном из окошек')+'</small>'+(has&&g.promo?'<span class="promo">'+g.promo+'</span>':'')+'</div>'+
+      (has&&g.btn?'<button type="button" class="btn sm" data-g="'+d+'">'+g.btn+'</button>':'')+'</div>';});
+  return '<div class="mygifts"><h3>🎁 Мои подарки</h3><p class="hint" style="margin:0">Иногда в окошке вместе с игрушкой лежит настоящий подарок от школы. Всего их 5.</p><div class="gl">'+h+'</div></div>';
 }
 function renderCal(){
-  $('adv').innerHTML=calHtml(S,false);
+  $('adv').innerHTML=scaleHtml()+calHtml(S,false)+giftsHtml();
   $$('#adv .door').forEach(function(b){b.onclick=function(){doorClick(+b.dataset.d,b);};});
+  $$('#adv .gcard [data-g]').forEach(function(b){b.onclick=function(){var g=GIFTS[b.dataset.g];if(g.id==='bingo'){openBingo();return;}if(g.id==='recipe'){openRecipe();return;}toast(g.btn==='Скачать'?'В макете файла нет — на платформе здесь скачается '+g.t.toLowerCase():'В макете записи нет — на платформе здесь откроется запись');};});
 }
 function shake(b){b.classList.add('shake');setTimeout(function(){b.classList.remove('shake');},500);}
 function doorClick(d,b){
   var o=S.opened[d];if(o!==undefined){wordModal(DAYS[o],{});return;}
   if(isTest()||freeDay(d))return openDay(d,b);
   if(d>S.day){shake(b);toast('Это окошко откроется '+d+' декабря ⭐');return;}
-  var m=modal('<div class="mcard"><div class="art" style="width:120px;height:120px;filter:grayscale(.6)">'+pic(gift(d))+'</div><h3>Окошко '+d+' декабря</h3>'+
+  var m=modal('<div class="mcard"><div class="art" style="width:120px;height:120px">'+pic(gift(d))+'</div><h3>Окошко '+d+' декабря</h3>'+
     '<p class="hint" style="margin:0">Это окошко можно открыть за 5 монеток. Сегодняшнее и вчерашнее окошко — всегда бесплатные.</p>'+
     '<p style="margin:0"><b>У тебя: 🪙 '+coins()+'</b></p><div class="btns"><button type="button" class="btn pink" id="buyDay"'+(coins()<5?' disabled':'')+'>Открыть за 🪙 5</button><button type="button" class="btn ghost" data-close>Не сейчас</button></div>'+
     (coins()<5?'<p class="hint" style="margin:0">Не хватает монеток — их дают за уроки и домашку.</p>':'')+'</div>');
   var bb=m.querySelector('#buyDay');if(bb)bb.onclick=function(){m.remove();if(spend(5,'🎁','Окошко '+d+' декабря'))openDay(d,b);};
 }
+/* звуки и конфетти */
+var SFX={};function sfx(n){try{var a=SFX[n]||(SFX[n]=new Audio('audio/s_'+n+'.mp3'));a.currentTime=0;a.volume=.8;a.play().catch(function(){});}catch(e){}}
+function confetti(x,y,kind){var fx=document.createElement('div');fx.className='fx';
+  var C={c:['#F7628C','#FFC83D','#6A4DF4','#22B573','#4CC3FF'],r:['#4C9BFF','#9CC8FF','#ffffff','#2E6FD6'],e:['#B26BFF','#E07BFF','#F0D6FF','#7A2FD0'],l:['#FFD45A','#FF9F1C','#FFF2B8','#E39A10'],g:['#F7628C','#FFD45A','#ffffff','#22B573']}[kind||'c'];
+  var h='<span class="flash" style="left:'+x+'px;top:'+y+'px"></span>';
+  for(var i=0;i<46;i++){var a=Math.random()*Math.PI*2,r=120+Math.random()*260;h+='<i style="left:'+x+'px;top:'+y+'px;background:'+C[i%C.length]+';--dx:'+Math.cos(a)*r+'px;--dy:'+(Math.sin(a)*r+160)+'px;--rot:'+(Math.random()*720-360)+'deg;--t:'+(1+Math.random()*.8)+'s"></i>';}
+  fx.innerHTML=h;document.body.appendChild(fx);setTimeout(function(){fx.remove();},2000);}
+/* показать окна по очереди: следующее — когда закрыли предыдущее */
+function chain(fns){var i=0;function next(){var f=fns[i++];if(!f)return;var m=f();if(!m){next();return;}var orig=m.remove.bind(m);m.remove=function(){orig();setTimeout(next,180);};}next();}
 function openDay(d,b){
-  var idx=nOpened(),it=DAYS[idx];shake(b);preload(dayEn(it));
+  var it=DAYS[nOpened()];shake(b);preload(dayEn(it));sfx('open');
+  var r=b.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/2,'c');
   setTimeout(function(){
-    S.opened[d]=idx;var newCol=give(S,it);if(it.f)S.pick[it.f]=it.c;
-    var bonus=d===N;if(bonus)addLog('🎉','Новогодний подарок: последнее окошко',20);
+    var ev=applyOpen(S,d);var bonus=ev.rew.some(function(x){return x.a;})||false;
     save();renderNav();renderAdvent();showCoins(bonus);
-    var eb=it.tree?'Новая ёлка!':d===N?'Последнее окошко! С Новым годом!':newCol?'Новый цвет — в подарок!':'Новое украшение!';
-    var hint=it.tree?'Ёлка поменялась — посмотри!':F[it.f].top?'Это украшение для макушки ёлки — поставь его наверх.':newCol?'Теперь в сундуке есть '+esc(ru(it.f,it.c))+'.':'Оно уже в сундуке 🧰 — вешай на ёлку сколько хочешь.';
-    wordModal(it,{eb:eb,hint:hint,bonus:bonus,fin:d===N});
+    var eb=it.tree?'Новая ёлка!':d===N||nOpened()===N?'Последнее окошко! С Новым годом!':ev.newCol?'Новый цвет — в подарок!':'Новое украшение!';
+    var hint=it.tree?'Ёлка поменялась — посмотри!':F[it.f].top?'Это украшение для макушки ёлки — поставь его наверх.':F[it.f].wide?'Сразу три куска: маленький, средний и большой — все на полке мастерской.':'Оно уже на полке мастерской 🧝 — тяни его на ёлку.';
+    var m=ev.gift?comboModal(it,ev,{eb:eb,hint:hint,fin:nOpened()===N}):wordModal(it,{eb:eb,hint:hint,fin:nOpened()===N});
+    if(ev.pend&&m){var orig=m.remove.bind(m);m.remove=function(){orig();setTimeout(function(){showPend(ev.pend);},250);};}
   },350);
 }
+/* Christmas Bingo (Анна, 24.11.2026): только слова, которые ребёнок уже открыл, — окошки календаря и особые игрушки.
+   Меньше 8 слов — карточку 3×3 не собрать: просим открыть ещё окошки (прошлые — за монетки). */
+function bingoWords(){var out=[],seen={};
+  Object.keys(S.opened).sort(function(a,b){return a-b;}).forEach(function(d){var it=DAYS[S.opened[d]];if(!it)return;var w=dayEn(it);if(seen[w])return;seen[w]=1;out.push({w:w,ru:dayRu(it),img:doorImg(it)});});
+  Object.keys(S.own||{}).forEach(function(f){if(F[f]&&F[f].rar&&!seen[F[f].w]){seen[F[f].w]=1;out.push({w:F[f].w,ru:F[f].t,img:src(f,'')});}});
+  return out;}
+/* рецепт имбирного печенья (5-е окошко): страница с переводом по наведению/нажатию, печать — без перевода (Анна, 24.11) */
+function openRecipe(){modal('<div class="mcard wide bingom"><h3>🍪 Рецепт имбирного печенья</h3><iframe class="bingof" src="recept.html" title="Рецепт имбирного печенья"></iframe>'+
+  '<p class="hint" style="margin:0">В макете — страница рецепта. На платформе здесь откроется эта же страница, и её можно распечатать или скачать PDF.</p><div class="btns"><button type="button" class="btn ghost" data-close>Закрыть</button></div></div>');}
+function openBingo(){var ws=bingoWords();
+  if(ws.length<8){var k=8-ws.length;modal('<div class="mcard"><h3>🎲 Christmas Bingo</h3><p class="hint" style="margin:0">Bingo собирается из твоих слов. Сейчас их '+ws.length+', а для карточки нужно 8. Открой ещё '+k+' '+(k===1?'окошко':k<5?'окошка':'окошек')+' — и игра готова!</p><div class="btns"><button type="button" class="btn pink" data-close>Хорошо</button></div></div>');return;}
+  var d=btoa(unescape(encodeURIComponent(JSON.stringify({name:'Маша',words:ws}))));
+  modal('<div class="mcard wide bingom"><h3>🎲 Christmas Bingo из твоих слов</h3><iframe class="bingof" src="bingo.html#d='+encodeURIComponent(d)+'" title="Christmas Bingo"></iframe>'+
+    '<p class="hint" style="margin:0">В макете — страница для печати. На платформе здесь скачается PDF: две страницы карточек и лист ведущего.</p><div class="btns"><button type="button" class="btn ghost" data-close>Закрыть</button></div></div>');}
+function giftModal(g){sfx('gift');
+  var m=modal('<div class="mcard rev g"><span class="rib">Подарок от школы</span><div class="art">'+pic('img/gift3.webp').replace('class="pic"','class="pic giftbox"')+'</div><h3 style="color:#fff">'+g.ic+' '+esc(g.t)+'</h3><div class="trn">'+esc(g.s)+'</div>'+
+    (g.promo?'<div class="promo">'+g.promo+'</div><div class="hint">Покажи промокод маме или папе — он действует на первый месяц подписки WowSpace.</div>':'<div class="hint">Подарок лежит в блоке «Мои подарки» под календарём.</div>')+
+    '<div class="btns"><button type="button" class="btn pink" data-close>Ура!</button></div></div>');
+  setTimeout(function(){confetti(window.innerWidth/2,window.innerHeight/2,'g');},900);return m;}
+function rewardModal(rw){
+  if(rw.f){S.page==='advent'&&S.tab==='tree'&&renderTree();var m=revealSpec(rw.f);m.querySelector('.hint').textContent='Шкала подарков: '+rw.n+' открытых окошек! Игрушка уже на полке мастерской.';return m;}
+  sfx('coin');var m2=modal('<div class="mcard rev '+(rw.cert?'l':'g')+'"><span class="rib">Шкала подарков</span><div class="art" style="display:grid;place-items:center;font-size:90px">'+(rw.cert?'🎓':'🪙')+'</div><h3 style="color:#fff">'+rw.n+' открытых окошек!</h3>'+
+    (rw.cert?'<div class="trn">Грамота «Знаток новогодних слов» — все 31 слово твои!</div>':'')+'<div class="word" style="color:#FFE9A0">+🪙 '+rw.a+'</div><div class="btns"><button type="button" class="btn pink" data-close>Забрать</button></div></div>');
+  confetti(window.innerWidth/2,window.innerHeight/2,rw.cert?'l':'g');return m2;}
+/* всё, что выпало в одном окошке, — одним окном, карточками рядом (Анна 24.11.2026, «207 вариант 1») */
+var COMBO_V='1';
+function showPend(k){if(S.page!=='advent'||S.tab!=='cal')return;var gb=document.querySelectorAll('.gb')[k-1];if(!gb)return;
+  gb.scrollIntoView({behavior:'smooth',block:'center'});gb.classList.add('lit');sfx('rare');
+  var r=gb.getBoundingClientRect();setTimeout(function(){var r2=gb.getBoundingClientRect();confetti(r2.left+r2.width/2,r2.top+20,'l');},500);
+  toast('✨ '+k+' окошек открыто — на гирлянде тебя ждёт подарок! Нажми на него');}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.gb .gift.ready');if(!b)return;var k=+b.dataset.k,r=claimRew(k);if(!r)return;
+  renderAdvent();showCoins(!!r.a);rewardModal(r);});
+function comboModal(it,ev,o){
+  var items=[{k:'w',tag:'Окошко',img:dayImg(it),t:dayEn(it),s:dayRu(it),say:dayEn(it)}];
+  if(ev.gift)items.push({k:'g',tag:'Подарок от школы',img:'img/gift3.webp',t:ev.gift.ic+' '+ev.gift.t,s:ev.gift.s,promo:ev.gift.promo});
+  (ev.rew||[]).forEach(function(rw){if(rw.f){var c=rar(rw.f);items.push({k:c,tag:'Шкала: '+rw.n+' окошек · '+{r:'редкая',e:'эпическая',l:'легендарная'}[c],img:src(rw.f,''),t:F[rw.f].w,s:F[rw.f].t,say:F[rw.f].w});}
+    else items.push({k:'c',tag:'Шкала: '+rw.n+' окошек',emo:rw.cert?'🎓':'🪙',t:'+🪙 '+rw.a,s:rw.cert?'Грамота «Знаток новогодних слов»':'монетки в копилку'});});
+  var m=modal('<div class="mcard combo"></div>');var box=m.querySelector('.combo');
+  function draw(){
+    var sw='';
+    var h=sw+'<div class="eb" style="color:#FFE9A0">'+(o.eb||'')+'</div>';
+    if(COMBO_V==='1'){h+='<div class="cards">'+items.map(function(x){return '<div class="cc k-'+x.k+'"><span class="ray"></span><span class="tag">'+esc(x.tag)+'</span>'+(x.emo?'<div class="ci emo">'+x.emo+'</div>':'<img class="ci" src="'+x.img+'" alt="">')+'<b>'+esc(x.t)+'</b><small>'+esc(x.s)+'</small>'+(x.say?'<button type="button" class="csay" data-w="'+esc(x.say)+'">🔊</button>':'')+(x.promo?'<span class="promo">'+x.promo+'</span>':'')+'</div>';}).join('')+'</div>';}
+    else{var a=items[0];h+='<div class="cbig"><img src="'+a.img+'" alt=""><div class="word" style="color:#fff">'+esc(a.t)+' <button type="button" class="csay" data-w="'+esc(a.say)+'">🔊</button></div><div class="trn">'+esc(a.s)+'</div></div><div class="hint">А ещё сегодня:</div><div class="chips">'+
+      items.slice(1).map(function(x){return '<div class="chip k-'+x.k+'">'+(x.emo?'<span class="ce">'+x.emo+'</span>':'<img src="'+x.img+'" alt="">')+'<span><b>'+esc(x.t)+'</b><small>'+esc(x.tag)+'</small>'+(x.promo?'<span class="promo">'+x.promo+'</span>':'')+'</span></div>';}).join('')+'</div>';}
+    h+='<div class="hint">'+(ev.gift?'Подарок от школы лежит в блоке «Мои подарки» под календарём. ':'')+'Игрушки уже на полке мастерской.</div><div class="btns"><button type="button" class="btn pink" id="toTree">Ура! К ёлке 🎄</button><button type="button" class="btn ghost" data-close>Закрыть</button></div>';
+    box.innerHTML=h;
+    box.querySelectorAll('.cv button').forEach(function(b){b.onclick=function(){COMBO_V=b.dataset.v;draw();};});
+    box.querySelectorAll('.csay').forEach(function(b){b.onclick=function(){say(b.dataset.w);};});
+    box.querySelector('#toTree').onclick=function(){m.remove();S.page='advent';S.tab='tree';save();render();};}
+  draw();
+  /* по очереди: карточка загорается -> через миг звучит её слово -> следующая */
+  var cards=box.querySelectorAll('.cc'),step=0;
+  function lightNext(){var c=cards[step];if(!c||!document.body.contains(m))return;c.classList.add('lit');var x=items[step];step++;
+    if(x.k==='g'){sfx('gift');var r=c.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/2,'g');setTimeout(lightNext,1600);}
+    else{setTimeout(function(){if(!document.body.contains(m))return;if(step===1&&o.fin)say(x.say,'Merry Christmas!');else if(x.say)say(x.say);setTimeout(lightNext,1600);},900);}}
+  setTimeout(lightNext,250);
+  if(S.page==='advent'&&S.tab==='tree')renderTree();return m;}
 /* карточка слова: послушать, повторить за голосом и послушать себя рядом с образцом */
 function wordModal(it,o){
   var m=modal('<div class="mcard" role="dialog">'+(o.eb?'<div class="eb">'+o.eb+'</div>':'')+'<div class="art">'+pic(dayImg(it))+'</div>'+
     '<div class="word">'+esc(dayEn(it))+'<button type="button" class="say" aria-label="Послушать">🔊</button></div><div class="trn">'+esc(dayRu(it))+'</div>'+
-    (o.bonus?'<div class="bonus">🎉 +🪙 20 — новогодний подарок за последнее окошко!</div>':'')+
     '<div class="rep"><button type="button" class="btn sm rec" id="recB">🎙 Повтори за мной</button><span class="rt" id="recT"></span>'+
-    '<button type="button" class="btn ghost sm" id="cmpB" hidden>▶ Образец и я</button></div><div class="hint" id="recN" hidden></div>'+
+    '<button type="button" class="btn ghost sm" id="cmpB" hidden>▶ Образец и я</button></div><div class="hint" id="recN">'+(S.repDay===S.day?'':'Повтори слово — получишь 🪙 1 (раз в день)')+'</div>'+
     (o.hint?'<div class="hint">'+o.hint+'</div>':'')+
-    '<div class="btns"><button type="button" class="btn pink" id="toTree">К ёлке 🎄</button><button type="button" class="btn ghost" data-close>'+(o.eb?'Ещё окошки':'Закрыть')+'</button></div></div>');
+    '<div class="btns"><button type="button" class="btn pink" id="toTree">К ёлке 🎄</button><button type="button" class="btn ghost" data-close>'+(o.eb?'Дальше':'Закрыть')+'</button></div></div>');
   function sayIt(){if(o.fin)say(dayEn(it),'Merry Christmas!');else say(dayEn(it));}
-  if(o.eb)sayIt();m.querySelector('.say').onclick=sayIt;
-  m.querySelector('#toTree').onclick=function(){m.remove();S.page='advent';S.tab='tree';save();render();};
-  repeatAfterMe(m,dayEn(it));
+  if(o.eb)setTimeout(function(){if(document.body.contains(m))sayIt();},900);m.querySelector('.say').onclick=sayIt;
+  m.querySelector('#toTree').onclick=function(){S.page='advent';S.tab='tree';save();render();m.remove();};
+  repeatAfterMe(m,dayEn(it));return m;
 }
-/* «Повтори за мной»: настоящая запись голоса там, где браузер даёт микрофон.
-   В опубликованном макете (claude.ai) микрофон странице не выдаётся — тогда показываем, как это будет выглядеть,
-   и честно пишем, что запись включится на платформе (23.11.2026). */
+/* «Повтори за мной»: запись голоса там, где браузер даёт микрофон; 🪙 1 раз в день (Анна, 24.11.2026) */
+function repCoin(m){if(S.repDay===S.day)return;S.repDay=S.day;addLog('🎙','Повтори за мной',1);save();showCoins(true);sfx('coin');toast('+🪙 1 за «Повтори за мной»!');var n=m.querySelector('#recN');if(n&&n.textContent.indexOf('🪙 1')>=0)n.textContent='';}
 function repeatAfterMe(m,word){
   var recB=m.querySelector('#recB'),recT=m.querySelector('#recT'),cmpB=m.querySelector('#cmpB'),recN=m.querySelector('#recN'),mine=null,busy=false;
   function count(sec,done){var n=sec;recT.textContent='● '+n;recT.className='rt on';var iv=setInterval(function(){n--;if(n<=0){clearInterval(iv);recT.className='rt';recT.textContent='';done();}else recT.textContent='● '+n;},1000);}
-  function demo(){busy=true;recB.textContent='🎙 Говори…';count(3,function(){busy=false;recB.textContent='🎙 Ещё раз';cmpB.hidden=false;
+  function demo(){busy=true;recB.textContent='🎙 Говори…';count(3,function(){busy=false;recB.textContent='🎙 Ещё раз';cmpB.hidden=false;repCoin(m);
     recN.hidden=false;recN.textContent='В этом макете микрофон не подключён — на платформе здесь будет твоя запись: «Образец и я» включит голос, а потом тебя.';});}
   recB.onclick=function(){if(busy)return;say(word);
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||typeof MediaRecorder==='undefined'){demo();return;}
     navigator.mediaDevices.getUserMedia({audio:true}).then(function(st){busy=true;var ch=[],r=new MediaRecorder(st);
       r.ondataavailable=function(e){ch.push(e.data);};
-      r.onstop=function(){st.getTracks().forEach(function(x){x.stop();});mine=URL.createObjectURL(new Blob(ch,{type:r.mimeType||'audio/webm'}));busy=false;recB.textContent='🎙 Ещё раз';cmpB.hidden=false;recN.hidden=true;};
+      r.onstop=function(){st.getTracks().forEach(function(x){x.stop();});mine=URL.createObjectURL(new Blob(ch,{type:r.mimeType||'audio/webm'}));busy=false;recB.textContent='🎙 Ещё раз';cmpB.hidden=false;recN.hidden=true;repCoin(m);};
       setTimeout(function(){recB.textContent='🎙 Говори…';r.start();count(3,function(){try{r.stop();}catch(e){}});},900);
     }).catch(function(){demo();});};
   cmpB.onclick=function(){say(word);if(!mine){toast('В макете своей записи нет — на платформе здесь прозвучит твой голос');return;}
     setTimeout(function(){var a=new Audio(mine);a.play().catch(function(){});},1400);};
 }
 
-/* ---------- ёлка и сундук ---------- */
+/* ---------- мастерская эльфов и ёлка (24.11.2026, решения Анны) ----------
+   Игрушка выпадает в одном экземпляре. Ещё один такой же — 🪙 3, новый цвет — 🪙 1.
+   Гирлянда, огоньки и мишура выпадают тремя кусками: маленький, средний, большой.
+   Особые игрушки: редкие — за шкалу подарков, эпические — за друзей, легендарные — за пост в соцсетях. */
 var openFam=null,sel=null;
-function renderTree(){
+var FREE_SZ=[.5,.7,1];
+function placedOf(f){return S.placed.filter(function(p){return p.f===f;}).length;}
+function cntOf(f){return (S.cnt&&S.cnt[f])||0;}
+function freeOf(f){return cntOf(f)-placedOf(f);}
+function sizesLeft(f){var all=(S.wsz&&S.wsz[f]||[]).slice();S.placed.forEach(function(p){if(p.f!==f)return;var i=all.indexOf(p.s);if(i<0){var best=0;all.forEach(function(v,k){if(Math.abs(v-p.s)<Math.abs(all[best]-p.s))best=k;});i=best;}if(all.length)all.splice(i,1);});return all;}
+function rar(f){return F[f].rar||'c';}
+var RARN={c:'Обычные',r:'Редкие',e:'Эпические',l:'Легендарные'};
+var TIPS={c:['🎁 Обычная игрушка','Выпадет в одном из окошек календаря. Открывай окошко каждый день!','#9C5E36'],
+ r:['🔵 Редкая игрушка','Открывай окошки: на 5, 10, 15, 20 и 25 открытых окошках шкала подарков дарит редкую игрушку.','#2E6FD6'],
+ e:['🟣 Эпическая игрушка','Позови друга в адвент. Когда он откроет своё первое окошко, игрушка откроется у тебя.','#7A2FD0'],
+ l:['🟡 Легендарная игрушка','Выложи свою ёлку в соцсети и отметь нашу школу. Можно 3 раза — 3 легендарные игрушки.','#E39A10']};
+function spk(c){if(c!=='e'&&c!=='l')return '';var s='',P=[[6,16],[80,8],[86,62],[10,70]];for(var k=0;k<(c==='l'?4:2);k++)s+='<i class="spk" style="left:'+P[k][0]+'%;top:'+P[k][1]+'%;animation-delay:'+(k*.45)+'s">✦</i>';return s;}
+function shelfToy(f){
+  var c=rar(f),hf=hasFam(f);
+  if(hf){var col=pickOf(f);return '<div class="wt slot'+(c!=='c'?' t-'+c:'')+(openFam===f?' s-open':'')+'" data-f="'+f+'" tabindex="0" role="button" title="'+esc(en(f,col))+'" aria-label="'+esc(en(f,col))+'">'+spk(c)+pic(src(f,col))+'<span class="ok">'+placedOf(f)+'/'+cntOf(f)+'</span></div>';}
+  return '<div class="wt m'+(c!=='c'?' t-'+c:'')+'" tabindex="0" data-lock="'+c+'">'+spk(c)+'<div class="wtip"><b>'+TIPS[c][0]+'</b>'+TIPS[c][1]+'<span class="hint2">👆 Нажми на коробку — подробнее</span></div>'+pic('img/box_'+{c:'common',r:'rare',e:'epic',l:'legend'}[c]+'.webp').replace('class="pic"','class="pic bx"')+'</div>';
+}
+function shelf(cls,title,list,inCase){var own=list.filter(hasFam).length;
+  var row='<div class="wrow">'+list.map(shelfToy).join('')+'</div>';
+  return '<div class="sh '+cls+'"><span class="wplate">'+title+' <small>'+own+' из '+list.length+'</small></span>'+(inCase?'<div class="case">'+row+'</div>':row)+'</div>';}
+/* 24.11 Анна: после перетаскивания полки прыгали наверх — запоминаем прокрутку полок и страницы */
+function renderTree(){var _sh=document.querySelector('.shelves'),_st=_sh?_sh.scrollTop:0,_wy=window.scrollY;renderTree0();fitRoom();var _n=document.querySelector('.shelves');if(_n)_n.scrollTop=_st;window.scrollTo(0,_wy);}
+/* телефон и планшет: мастерская заканчивается ровно над нижним меню — на любом экране (iPhone SE, большие телефоны) */
+function fitRoom(){var room=$('room'),bn=document.querySelector('.bnav');if(!room)return;
+  if(!bn||getComputedStyle(bn).display==='none'){room.style.height='';return;}
+  var top=room.getBoundingClientRect().top+window.scrollY,bot=bn.getBoundingClientRect().top+window.scrollY-(window.scrollY);
+  room.style.height=Math.max(170,Math.round(bn.getBoundingClientRect().top-(top-window.scrollY)-10))+'px';}
+window.addEventListener('resize',function(){if($('room'))fitRoom();});
+function renderTree0(){
   var has={pine:true};for(var d in S.opened){var it=DAYS[S.opened[d]];if(it.tree)has[it.tree]=true;}
-  var h='<div class="treebox"><div class="chest" id="chestBox"><div class="chest-head"><h3>🧰 Мой сундук</h3><span class="pill p-coin">🪙 '+coins()+'</span></div>'+
-   '<p class="hint" style="margin:0">Нажми на украшение — откроются его цвета. Каждое украшение вешай сколько угодно раз: тяни его на ёлку. Новый цвет — 🪙 1.</p>'+
-   '<div id="panelBox"></div><div class="chest-grid" id="chest">';
-  ORDERF.forEach(function(f){var hf=hasFam(f),c=hf?pickOf(f):colsOf(f)[0],nOwn=hf?colsOf(f).filter(function(k){return owns(f,k);}).length:0,nAll=colsOf(f).length;
-    var nm=hf?F[f].w:'???';
-    h+='<div class="slot '+(hf?'s-own':'s-locked')+(openFam===f?' s-open':'')+'" data-f="'+f+'" tabindex="0" role="button" aria-label="'+esc(hf?en(f,c):'Пока секрет')+'">'+pic(src(f,c))+
-      (hf&&nAll>1?'<span class="cnt">'+nOwn+'/'+nAll+'</span>':'')+'<span class="nm">'+esc(nm)+'</span></div>';});
-  h+='</div><h3>Моя ёлка</h3><div class="trees">'+['pine','snowy','gold'].map(function(t){return '<button type="button" data-tree="'+t+'" class="'+(S.tree===t?'on':'')+'" '+(has[t]?'':'disabled title="Выпадет в календаре"')+' aria-label="'+TREES[t][1]+'">'+pic('img/tree_'+t+'.webp')+(has[t]?'':'<span class="lk">🔒</span>')+'</button>';}).join('')+'</div>'+
-   '<div class="tbtns"><button type="button" class="btn sm" id="snapB">📸 Сохранить мою ёлку</button><button type="button" class="btn ghost sm" id="allBack">Убрать всё с ёлки</button></div></div>'+
-   '<div class="treearea" id="area"><div class="snowfall"></div><div class="tree">'+pic('img/tree_'+S.tree+'.webp')+'</div></div></div>';
+  var common=ORDERF,all=common.concat(SPEC.r,SPEC.e,SPEC.l),got=all.filter(hasFam).length;
+  var COLL=['#FF5A5A','#FFD23F','#4CD97B','#4C9BFF','#C26BFF','#FF8AD8'],L='';
+  for(var i=0;i<14;i++)L+='<span class="wbulb" style="left:'+(4+i*7)+'%;top:'+(10+Math.sin(i/13*Math.PI)*12)+'px;background:'+COLL[i%6]+';color:'+COLL[i%6]+';animation-delay:'+(i%5*.4)+'s"></span>';
+  var h='<div class="wsduo"><div class="room" id="room"><div class="wlights"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><path d="M0 6 Q50 34 100 6" stroke="#2b3a2a" stroke-width=".5" fill="none"/></svg>'+L+'</div>'+
+   '<div class="wwin" style="left:20px"><i></i><i></i></div><div class="wwin" style="right:20px"><i></i><i></i></div>'+
+   '<div class="wsign"><div class="board"><b>Мастерская эльфов</b><small>Elf\'s Workshop</small></div></div>'+
+   '<div class="wtop"><span class="wcoll">🎄 Собрано '+got+' из '+all.length+'</span><span class="wcoins">🪙 '+coins()+'</span></div>'+
+   '<div id="panelBox"></div><div class="shelves" id="shelves">'+
+   shelf('','Обычные',common)+shelf('rare','🔵 Редкие — за шкалу подарков',SPEC.r)+shelf('epic','🟣 Эпические — за друзей',SPEC.e)+shelf('leg','🟡 Легендарные — за соцсети',SPEC.l,true)+'</div>'+
+   '<div class="wtrees"><span>Моя ёлка:</span>'+['pine','snowy','gold'].map(function(t){return '<button type="button" data-tree="'+t+'" class="'+(S.tree===t?'on':'')+'" '+(has[t]?'':'disabled title="Выпадет в календаре"')+' aria-label="'+TREES[t][1]+'">'+pic('img/tree_'+t+'.webp')+(has[t]?'':'<span class="lk">🔒</span>')+'</button>';}).join('')+
+   '<span class="tb"><button type="button" class="btn sm" id="snapB">📸 Сохранить ёлку</button><button type="button" class="btn ghost sm" id="allBack">Снять всё</button></span></div></div>'+
+   '<div class="treearea'+(nyeOn()?' nye':'')+'" id="area"><div class="snowfall"></div><div class="nyesw"><button type="button" data-n="0" class="'+(nyeOn()?'':'on')+'">Сейчас</button><button type="button" data-n="1" class="'+(nyeOn()?'on':'')+'">31 декабря ✨</button></div><div class="tree">'+pic('img/tree_'+S.tree+'.webp')+'</div></div></div>';
   $('adv').innerHTML=h;
   var area=$('area');
   S.placed.forEach(function(pl){addPlaced(area,pl);});
   area.querySelector('.tree img').addEventListener('load',placeToppers);placeToppers();
   area.addEventListener('pointerdown',function(e){if(e.target===area||e.target.closest('.tree')){sel=null;drawSel();}});
-  $$('.trees button').forEach(function(b){b.onclick=function(){S.tree=b.dataset.tree;save();renderTree();};});
+  $$('.nyesw button').forEach(function(b){b.onclick=function(e){e.stopPropagation();S.nye=b.dataset.n==='1';save();renderTree();};b.onpointerdown=function(e){e.stopPropagation();};});
+  $$('.wtrees button[data-tree]').forEach(function(b){b.onclick=function(){S.tree=b.dataset.tree;save();renderTree();};});
   $('snapB').onclick=snapTree;
   $('allBack').onclick=function(){if(!S.placed.length){toast('На ёлке пока ничего нет');return;}
-    var m=modal('<div class="mcard"><h3>Убрать все украшения с ёлки?</h3><p class="hint" style="margin:0">В сундуке они останутся — повесишь заново, когда захочешь.</p><div class="btns"><button type="button" class="btn" id="y">Убрать</button><button type="button" class="btn ghost" data-close>Нет</button></div></div>');
+    var m=modal('<div class="mcard"><h3>Снять все украшения с ёлки?</h3><p class="hint" style="margin:0">Они вернутся на полки мастерской — повесишь заново, когда захочешь.</p><div class="btns"><button type="button" class="btn" id="y">Снять</button><button type="button" class="btn ghost" data-close>Нет</button></div></div>');
     m.querySelector('#y').onclick=function(){m.remove();S.placed=[];sel=null;save();renderTree();};};
-  $$('.slot').forEach(function(sl){var f=sl.dataset.f;
-    drag(sl,{ok:function(){if(hasFam(f))return true;openPanel(f);return false;},ghost:function(){return pic(src(f,pickOf(f)));},
-      tap:function(){openPanel(f);if(hasFam(f))say(en(f,pickOf(f)));},drop:function(x,y){placeAt(f,pickOf(f),x,y);}});
+  $$('.wt.slot').forEach(function(sl){var f=sl.dataset.f;
+    drag(sl,{ok:function(){if(freeOf(f)>0)return true;openPanel(f);toast('Все '+F[f].w+' уже на ёлке. Ещё одна — 🪙 3');return false;},ghost:function(){return pic(src(f,pickOf(f)));},
+      tap:function(){openPanel(f);say(en(f,pickOf(f)));},drop:function(x,y){placeAt(f,pickOf(f),x,y);},armOnly:1,arm:function(){openPanel(f,true);say(en(f,pickOf(f)));armToy(f,pickOf(f));}});
     sl.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openPanel(f);}};});
+  $$('.wt.m').forEach(function(t){var r=t.getBoundingClientRect(),R=$('room').getBoundingClientRect();if(r.left-R.left<110)t.classList.add('edge-l');else if(R.right-r.right<110)t.classList.add('edge-r');
+    t.onclick=function(){moreModal(t.dataset.lock);};
+    /* у верхнего края полок подсказка открывается вниз, иначе её обрезает */
+    t.addEventListener('pointerenter',function(){var sc=t.parentNode;while(sc&&sc!==document.body&&getComputedStyle(sc).overflowY==='visible')sc=sc.parentNode;var top=sc&&sc.getBoundingClientRect?sc.getBoundingClientRect().top:0;t.classList.toggle('down',t.getBoundingClientRect().top-top<120);},true);t.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();moreModal(t.dataset.lock);}};});
+  $$('.wt .more').forEach(function(b){b.onclick=function(e){e.stopPropagation();moreModal(b.dataset.c);};});
   if(openFam)openPanel(openFam,true);
   drawSel();
 }
-/* полоска цветов над сундуком — открывается по нажатию, закрывается крестиком */
+document.addEventListener('click',function(e){if(!e.target.closest||!e.target.closest('#demoSpec'))return;
+  [['polar_bear',30,58],['owl',70,58],['golden_unicorn',50,80]].forEach(function(x,i){giveSpec(S,x[0]);S.placed.push({id:Date.now()+i,f:x[0],c:'',x:x[1],y:x[2],s:1,r:0,sx:1,sy:1});});
+  save();S.page='advent';S.tab='tree';render();toast('На ёлке: редкая (белый медведь), эпическая (сова), легендарная (единорог)');});
+function nyeOn(){return over()||!!S.nye;}
+/* «Подробнее об условиях» — что сделать, чтобы открыть игрушку */
+function moreModal(c){
+  var nx=nextMilestone(),own=SPEC[c]?SPEC[c].filter(hasFam).length:0;
+  var body={c:'<p style="margin:0">Каждый день в календаре открывается одно окошко, а в нём — игрушка и новое английское слово. Сегодняшнее и вчерашнее окошко — бесплатно, более ранние — за 🪙 5.</p><p style="margin:0">Какая игрушка в каком окошке — секрет, пока не откроешь.</p>',
+    r:'<p style="margin:0">Каждое открытое окошко зажигает лампочку на гирлянде дней. На 5, 10, 15, 20 и 25 открытых окошках — редкая игрушка-сюрприз, между ними — монетки.</p><p style="margin:0"><b>Сейчас:</b> открыто '+nOpened()+' окошек'+(nx?', до следующего подарка — '+(nx-nOpened()):'')+'. Собрано редких: '+own+' из 5.</p>',
+    e:'<ol style="margin:0;padding-left:20px;text-align:left"><li>Нажми «Позвать друга» и отправь ссылку.</li><li>Друг заходит по ссылке, регистрируется и открывает своё первое окошко.</li><li>У тебя открывается эпическая игрушка-сюрприз.</li></ol><p style="margin:0">По одной за каждого друга, всего 10. Друзей пришло: '+(S.friends||0)+' из 10.</p><div class="promo" style="font-size:12px;letter-spacing:0">app.wowteach.ru/advent?friend='+esc((S.name||'masha').toLowerCase())+'</div>',
+    l:'<ol style="margin:0;padding-left:20px;text-align:left"><li>Нажми «📸 Сохранить ёлку» под мастерской.</li><li>Выложи картинку в пост или сторис и отметь нашу школу.</li><li>Сделай скриншот и прикрепи его здесь.</li><li>Мы проверим — и откроется легендарная игрушка.</li></ol><p style="margin:0">Можно 3 раза. Прикреплено: '+(S.posts||0)+' из 3.</p>'}[c];
+  var btn={c:'<button type="button" class="btn" data-close id="mGo">К календарю</button>',r:'<button type="button" class="btn" data-close id="mGo">К календарю</button>',
+    e:'<button type="button" class="btn" id="mFr">📨 Позвать друга</button><button type="button" class="btn ghost sm" id="mDemoE">👀 В макете: друг открыл окошко</button>',
+    l:'<button type="button" class="btn" id="mSh" style="background:#E39A10">📎 Прикрепить скриншот</button><button type="button" class="btn ghost sm" id="mDemoL" hidden>👀 В макете: проверка пройдена</button>'}[c];
+  var m=modal('<div class="mcard wide"><h3>'+TIPS[c][0].replace('игрушка','игрушки')+'</h3>'+body+'<div class="btns">'+btn+'<button type="button" class="btn ghost" data-close>Закрыть</button></div></div>');
+  var go=m.querySelector('#mGo');if(go)go.onclick=function(){m.remove();S.tab='cal';save();render();};
+  var fr=m.querySelector('#mFr');if(fr)fr.onclick=function(){var t='Привет! Давай вместе вести новогодний адвент-календарь в WowSpeak: app.wowteach.ru/advent?friend='+(S.name||'masha').toLowerCase();try{navigator.clipboard.writeText(t).then(function(){toast('Ссылка скопирована — отправь её другу');},function(){toast('Ссылка: app.wowteach.ru/advent');});}catch(e){toast('Ссылка: app.wowteach.ru/advent');}};
+  var de=m.querySelector('#mDemoE');if(de)de.onclick=function(){if((S.friends||0)>=10){toast('Все 10 эпических уже собраны');return;}m.remove();S.friends=(S.friends||0)+1;var f=grant('e');save();if(f)revealSpec(f);};
+  var sh=m.querySelector('#mSh');if(sh)sh.onclick=function(){if((S.posts||0)>=3){toast('Все 3 легендарные уже собраны');return;}sh.textContent='⏳ Скриншот на проверке';sh.disabled=true;m.querySelector('#mDemoL').hidden=false;};
+  var dl=m.querySelector('#mDemoL');if(dl)dl.onclick=function(){m.remove();S.posts=(S.posts||0)+1;var f=grant('l');save();if(f)revealSpec(f);};
+}
+function grant(k){var f=SPEC[k].filter(function(x){return !hasFam(x);})[0];if(!f)return null;giveSpec(S,f);return f;}
+/* открытие особой игрушки: лучи цвета редкости, искры, звук */
+function revealSpec(f){var c=rar(f);sfx('rare');
+  var m=modal('<div class="mcard rev '+c+'"><span class="rib">'+{r:'Редкая',e:'Эпическая',l:'Легендарная'}[c]+'</span><div class="art">'+pic(src(f,''))+'</div><div class="word">'+esc(F[f].w)+'<button type="button" class="say" aria-label="Послушать">🔊</button></div><div class="trn">'+esc(F[f].t)+'</div><div class="hint">Она уже на полке мастерской — тяни её на ёлку!</div><div class="btns"><button type="button" class="btn pink" id="toTree">К ёлке 🎄</button><button type="button" class="btn ghost" data-close>Ура!</button></div></div>');
+  confetti(window.innerWidth/2,window.innerHeight/2,c);setTimeout(function(){say(F[f].w);},700);m.querySelector('.say').onclick=function(){say(F[f].w);};
+  m.querySelector('#toTree').onclick=function(){m.remove();S.page='advent';S.tab='tree';save();render();};
+  if(S.page==='advent'&&S.tab==='tree')renderTree();return m;}
+/* панель игрушки: цвета, сколько штук, купить ещё одну */
 function openPanel(f,silent){
-  openFam=f;$$('.slot').forEach(function(s){s.classList.toggle('s-open',s.dataset.f===f);});
+  openFam=f;$$('.wt.slot').forEach(function(s){s.classList.toggle('s-open',s.dataset.f===f);});
   var box=$('panelBox');if(!box)return;
-  if(!hasFam(f)){box.innerHTML='<div class="panel"><div class="panel-h"><b>🔒 Пока секрет</b><button type="button" class="x" aria-label="Закрыть">×</button></div><span class="hint">Это украшение ещё не выпало. Открывай окошки в календаре — оно там есть!</span></div>';
-    box.querySelector('.x').onclick=closePanel;return;}
-  var cur=S.pick[f]!==undefined?S.pick[f]:pickOf(f),cs=colsOf(f);
-  var sw=cs.map(function(c){var o=owns(f,c);return '<div class="swi '+(o?'own':'not')+(c===cur?' cur':'')+'" data-c="'+c+'" tabindex="0" role="button" title="'+esc(en(f,c))+'">'+pic(src(f,c))+
-      (c?'<i class="cd" style="background:'+CW[c][3]+'"></i>':'')+'<span class="c">'+(o?'✓':'🪙1')+'</span></div>';}).join('');
-  box.innerHTML='<div class="panel"><div class="panel-h"><b>'+esc(F[f].w)+' — '+esc(F[f].t)+(cs.length>1?' · цвета':'')+'</b><button type="button" class="x" aria-label="Закрыть">×</button></div><div class="sw">'+sw+'</div>'+(F[f].wide?'<div class="gsz">'+GS.map(function(g,i){return '<button type="button" data-g="'+i+'" class="'+(((S.gsize||{})[f]||0)===i?'on':'')+'">'+g[0]+'</button>';}).join('')+'</div>':'')+'<div class="act" id="act"></div></div>';
+  var cur=S.pick[f]!==undefined?S.pick[f]:pickOf(f),cs=colsOf(f),spec=rar(f)!=='c';
+  var sw=cs.length>1?cs.map(function(c){var o=owns(f,c);return '<div class="swi '+(o?'own':'not')+(c===cur?' cur':'')+'" data-c="'+c+'" tabindex="0" role="button" title="'+esc(en(f,c))+'">'+pic(src(f,c))+
+      (c?'<i class="cd" style="background:'+CW[c][3]+'"></i>':'')+'<span class="c">'+(o?'✓':'🪙1')+'</span></div>';}).join(''):'';
+  var wide=F[f].wide?'<span class="hint" style="font-size:12px">Куски: '+(S.wsz[f]||[]).map(function(v){return v<.6?'маленький':v<.9?'средний':'большой';}).join(', ')+'</span>':'';
+  box.innerHTML='<div class="panel"><div class="panel-h"><b>'+esc(F[f].w)+' — '+esc(F[f].t)+'</b><button type="button" class="x" aria-label="Закрыть">×</button></div>'+(sw?'<div class="sw">'+sw+'</div>':'')+wide+'<div class="act" id="act"></div></div>';
   box.querySelector('.x').onclick=closePanel;
-  $$('.gsz button',box).forEach(function(b){b.onclick=function(){S.gsize=S.gsize||{};S.gsize[f]=+b.dataset.g;save();$$('.gsz button',box).forEach(function(x){x.classList.toggle('on',x===b);});};});
   function act(){var c=S.pick[f]!==undefined?S.pick[f]:cur,a=$('act'),o=owns(f,c);
-    a.innerHTML='<button type="button" class="mini-say" aria-label="Послушать">🔊</button><div class="t"><b>'+esc(en(f,c))+'</b> — '+esc(ru(f,c))+'<br>'+(o?(cs.length>1?'этот цвет твой · ':'')+'тяни на ёлку сколько хочешь':'этого цвета пока нет')+'</div>'+
-      (o?'':'<button type="button" class="btn sm" id="buy">Купить цвет · 🪙 1</button>');
+    a.innerHTML='<button type="button" class="mini-say" aria-label="Послушать">🔊</button><div class="t"><b>'+esc(en(f,c))+'</b> — '+esc(ru(f,c))+'<br>У тебя '+cntOf(f)+' шт., на ёлке '+placedOf(f)+(o?'':' · этого цвета пока нет')+'</div>'+
+      (o?'':'<button type="button" class="btn sm" id="buy">Цвет · 🪙 1</button>')+(spec?'':'<button type="button" class="btn sm pink" id="more1">Ещё одна · 🪙 3</button>');
     a.querySelector('.mini-say').onclick=function(){say(en(f,c));};
-    var b=a.querySelector('#buy');if(b)b.onclick=function(){buyColour(f,c,function(){renderTree();});};}
+    var b=a.querySelector('#buy');if(b)b.onclick=function(){buyColour(f,c,function(){renderTree();});};
+    var m1=a.querySelector('#more1');if(m1)m1.onclick=function(){buyCopy(f);};}
   act();
   $$('.swi',box).forEach(function(s){var c=s.dataset.c;
-    drag(s,{ok:function(){return owns(f,c);},ghost:function(){return pic(src(f,c));},
+    drag(s,{ok:function(){if(!owns(f,c))return false;if(freeOf(f)>0)return true;toast('Все '+F[f].w+' уже на ёлке. Ещё одна — 🪙 3');return false;},ghost:function(){return pic(src(f,c));},
       tap:function(){S.pick[f]=c;save();$$('.swi',box).forEach(function(e){e.classList.toggle('cur',e===s);});act();say(en(f,c));
-        var sl=document.querySelector('.slot[data-f="'+f+'"] .pic');if(sl&&owns(f,c))sl.src=src(f,c);},
-      drop:function(x,y){S.pick[f]=c;placeAt(f,c,x,y);}});
-    s.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();s.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true}));}};});
+        var sl=document.querySelector('.wt.slot[data-f="'+f+'"] .pic');if(sl&&owns(f,c))sl.src=src(f,c);},
+      drop:function(x,y){S.pick[f]=c;placeAt(f,c,x,y);},arm:function(){armToy(f,c);}});});
   if(!silent)box.scrollIntoView({block:'nearest'});
 }
-function closePanel(){openFam=null;var b=$('panelBox');if(b)b.innerHTML='';$$('.slot').forEach(function(s){s.classList.remove('s-open');});}
+var armed=null,noClick=0;
+/* после касания полки панель цветов сдвигает полки, и «щелчок» браузера попадает в соседнюю коробку — его гасим */
+document.addEventListener('click',function(e){if(Date.now()-noClick<500){e.stopPropagation();e.preventDefault();}},true);
+function armToy(f,c){if(c===null||c===undefined)return;armed={f:f,c:c};var a=$('area');if(a){a.classList.add('armed');a.setAttribute('data-arm','Нажми на ёлку — повешу '+F[f].w);}}
+function disarm(){armed=null;var a=$('area');if(a){a.classList.remove('armed');a.removeAttribute('data-arm');}}
+document.addEventListener('pointerup',function(e){if(!armed||e.pointerType!=='touch')return;var a=$('area');if(!a||!a.contains(e.target))return;
+  if(e.target.closest('.placed,.tool,.frame,.hd,.nyesw,button'))return;var x=armed;disarm();noClick=Date.now();placeAt(x.f,x.c,e.clientX,e.clientY);});
+function closePanel(){disarm();openFam=null;var b=$('panelBox');if(b)b.innerHTML='';$$('.wt.slot').forEach(function(s){s.classList.remove('s-open');});}
 function buyColour(f,c,then){
   var m=modal('<div class="mcard"><div class="art" style="width:130px;height:130px">'+pic(src(f,c))+'</div><h3>'+esc(en(f,c))+'</h3><div class="trn">'+esc(ru(f,c))+'</div>'+
-    '<p class="hint" style="margin:0">Новый цвет останется у тебя насовсем — вешай его сколько хочешь.</p><p style="margin:0"><b>У тебя: 🪙 '+coins()+'</b></p>'+
+    '<p class="hint" style="margin:0">Новый цвет останется у тебя насовсем: любую такую игрушку можно перекрасить в него.</p><p style="margin:0"><b>У тебя: 🪙 '+coins()+'</b></p>'+
     '<div class="btns"><button type="button" class="btn pink" id="yb"'+(coins()<1?' disabled':'')+'>Купить за 🪙 1</button><button type="button" class="btn ghost" data-close>Не сейчас</button></div></div>');
-  m.querySelector('#yb').onclick=function(){m.remove();if(!spend(1,'🎨','Новый цвет: '+ru(f,c)))return;S.own[f][c]=1;S.pick[f]=c;save();say(en(f,c));toast(en(f,c)+' — твой! (−1 🪙)');then();};
+  m.querySelector('#yb').onclick=function(){m.remove();if(!spend(1,'🎨','Новый цвет: '+ru(f,c)))return;S.own[f][c]=1;S.pick[f]=c;save();sfx('coin');say(en(f,c));toast(en(f,c)+' — твой! (−1 🪙)');then();};
 }
-/* гирлянды: три размера — длинная, средняя, короткая. Уменьшаем целиком, без сплющивания (23.11.2026, Анна) */
-var GS=[['длинная',1],['средняя',.7],['короткая',.5]];
+function buyCopy(f){var c=pickOf(f);
+  var m=modal('<div class="mcard"><div class="art" style="width:130px;height:130px">'+pic(src(f,c))+'</div><h3>Ещё один '+esc(F[f].w)+'</h3>'+
+    '<p class="hint" style="margin:0">У тебя '+cntOf(f)+' шт. Ещё одна такая игрушка — 🪙 3. Цвет выберешь из тех, что уже есть.</p><p style="margin:0"><b>У тебя: 🪙 '+coins()+'</b></p>'+
+    '<div class="btns"><button type="button" class="btn pink" id="yb"'+(coins()<3?' disabled':'')+'>Купить за 🪙 3</button><button type="button" class="btn ghost" data-close>Не сейчас</button></div></div>');
+  m.querySelector('#yb').onclick=function(){m.remove();if(!spend(3,'🎄','Ещё одна игрушка: '+F[f].t))return;S.cnt[f]=cntOf(f)+1;if(F[f].wide)S.wsz[f]=(S.wsz[f]||[]).concat([1]);save();sfx('coin');toast(F[f].w+' — ещё одна! (−3 🪙)');renderTree();};
+}
 function cl(v,a,b){return Math.max(a,Math.min(b,v));}
 function placeAt(f,c,x,y){
   if(!f||c===null)return;var area=$('area');if(!area)return;var r=area.getBoundingClientRect();
   if(x<r.left||x>r.right||y<r.top||y>r.bottom)return;
-  var gs=F[f].wide?GS[S.gsize&&S.gsize[f]||0][1]:1;
+  if(freeOf(f)<=0){toast('Все '+F[f].w+' уже на ёлке. Ещё одна — 🪙 3');openPanel(f);return;}
+  var gs=1;if(F[f].wide){var left=sizesLeft(f);gs=left.length?Math.max.apply(null,left):1;}
   var pl={id:Date.now(),f:f,c:c,x:cl((x-r.left)/r.width*100,3,97),y:cl((y-r.top)/r.height*100,3,97),s:gs,r:0,sx:1,sy:1,auto:F[f].top?1:0};
   if(F[f].top)S.placed=S.placed.filter(function(p){return !F[p.f].top;});
   S.placed.push(pl);sel=pl.id;save();renderTree();say(en(f,c));
@@ -693,9 +1139,11 @@ window.addEventListener('resize',function(){if($('area'))placeToppers();if(S.tab
 function ALLteacher(){return viewMode(ALL.cur);}
 function styleEl(el,pl){var fm=F[pl.f],w=fm.sz*pl.s*(fm.wide?pl.sx:1);
   el.style.left=pl.x+'%';el.style.top=pl.y+'%';el.style.width=w+'%';el.style.aspectRatio=fm.wide?String(fm.wide*pl.sx/pl.sy):'1';el.style.setProperty('--r',pl.r+'deg');}
+/* лампочки поверх картинки огоньков: мерцают по очереди (положения взяты по самой картинке) */
+var FL=[[10,46,'#FFE14A'],[20.5,60,'#FF5CB8'],[33,68,'#4CC3FF'],[44.8,73,'#7DFF5A'],[55.3,73,'#FFE14A'],[67.2,69,'#FF5CB8'],[79.2,60,'#4CC3FF'],[89.6,47,'#7DFF5A']];
 function addPlaced(area,pl){
-  var fm=F[pl.f],el=document.createElement('div');
-  el.className='placed'+(fm.wide?' pwide':'')+(fm.top?' ptop':'');el.dataset.id=pl.id;el.innerHTML=pic(src(pl.f,pl.c));el.setAttribute('aria-label',en(pl.f,pl.c));
+  var fm=F[pl.f],el=document.createElement('div');if(!fm)return;
+  var _rr=rar(pl.f);el.className='placed'+(fm.wide?' pwide':'')+(fm.top?' ptop':'')+(_rr!=='c'?' rr-'+_rr:'');el.dataset.id=pl.id;el.innerHTML=(_rr==='e'||_rr==='l'?[[6,18],[86,10],[90,70],[4,74]].slice(0,_rr==='l'?4:2).map(function(q,k){return '<i class="spk2" style="left:'+q[0]+'%;top:'+q[1]+'%;animation-delay:'+(k*.5)+'s">✦</i>';}).join(''):'')+pic(src(pl.f,pl.c))+(pl.f==='fairy_lights'?'<span class="fl">'+FL.map(function(b,k){return '<i style="left:'+b[0]+'%;top:'+b[1]+'%;--c:'+b[2]+';animation-delay:'+(k*.21)+'s"></i>';}).join('')+'</span>':'');el.setAttribute('aria-label',en(pl.f,pl.c));
   styleEl(el,pl);area.appendChild(el);
   drag(el,{ok:function(){return true;},move:true,
     tap:function(){sel=pl.id;drawSel();say(en(pl.f,pl.c));},
@@ -703,8 +1151,8 @@ function addPlaced(area,pl){
       if(x<r.left||x>r.right||y<r.top||y>r.bottom){removePl(pl);return;}
       pl.x=cl((x-r.left)/r.width*100,2,98);pl.y=cl((y-r.top)/r.height*100,2,98);pl.auto=0;sel=pl.id;save();styleEl(el,pl);drawSel();}});
 }
-function removePl(pl){S.placed=S.placed.filter(function(p){return p.id!==pl.id;});if(sel===pl.id)sel=null;save();renderTree();toast(en(pl.f,pl.c)+' — снято с ёлки');}
-/* рамка выбранного украшения: уголок — размер, кружок сверху — поворот, у гирлянд розовые — длина и толщина */
+function removePl(pl){S.placed=S.placed.filter(function(p){return p.id!==pl.id;});if(sel===pl.id)sel=null;save();renderTree();toast(en(pl.f,pl.c)+' — вернулась на полку');}
+/* рамка выбранного украшения: уголок — размер, кружок сверху — поворот, у гирлянд розовые — немного длину и толщину */
 function drawSel(){
   var area=$('area');if(!area)return;$$('.frame,.hd,.tool',area).forEach(function(e){e.remove();});$$('.placed.sel',area).forEach(function(e){e.classList.remove('sel');});
   if(sel===null)return;var pl=S.placed.filter(function(p){return p.id===sel;})[0];if(!pl){sel=null;return;}
@@ -714,21 +1162,19 @@ function drawSel(){
   $$('.hd',el).forEach(function(hd){handle(hd,el,pl);});
   var t=document.createElement('div');t.className='tool';
   var cs=colsOf(pl.f),dots=cs.length>1?cs.map(function(c){return '<button type="button" class="dt'+(c===pl.c?' cur':'')+(owns(pl.f,c)?'':' no')+'" data-c="'+c+'" style="background:'+CW[c][3]+'" title="'+esc(en(pl.f,c))+(owns(pl.f,c)?'':' · 🪙 1')+'" aria-label="'+esc(ru(pl.f,c))+'"></button>';}).join(''):'';
-  var gz=fm.wide?'<span class="gsz">'+GS.map(function(g,i){return '<button type="button" data-g="'+i+'" class="'+(Math.abs(pl.s-g[1])<.01?'on':'')+'">'+g[0]+'</button>';}).join('')+'</span>':'';
-  t.innerHTML='<button type="button" data-a="say">🔊 '+esc(en(pl.f,pl.c))+'</button>'+dots+gz+'<button type="button" data-a="rm">↩ Убрать</button><span class="hint2">'+(fm.top?'Верхушку можно двигать. ':'')+'⤡ размер · ↻ поворот'+(fm.wide?' · ↔ длина · ↕ толщина':'')+'</span>';
+  t.innerHTML='<button type="button" data-a="say">🔊 '+esc(en(pl.f,pl.c))+'</button>'+dots+'<button type="button" data-a="rm">↩ На полку</button><span class="hint2">'+(fm.top?'Верхушку можно двигать. ':'')+'⤡ размер · ↻ поворот'+(fm.wide?' · ↔ длина · ↕ толщина':'')+'</span>';
   area.appendChild(t);
   var A=area.getBoundingClientRect(),E=el.getBoundingClientRect(),top=E.bottom-A.top+22;if(top>A.height-90)top=E.top-A.top-100;
   t.style.left=cl((E.left+E.width/2-A.left)/A.width*100,22,78)+'%';t.style.top=Math.max(6,top)+'px';
   t.querySelector('[data-a="say"]').onclick=function(){say(en(pl.f,pl.c));};
   t.querySelector('[data-a="rm"]').onclick=function(){removePl(pl);};
-  $$('.gsz button',t).forEach(function(b){b.onclick=function(){pl.s=GS[+b.dataset.g][1];pl.sx=1;pl.sy=1;save();styleEl(el,pl);drawSel();};});
   $$('.dt',t).forEach(function(b){b.onclick=function(){var c=b.dataset.c;
     function apply(){pl.c=c;S.pick[pl.f]=c;save();renderTree();say(en(pl.f,c));}
     if(owns(pl.f,c))apply();else buyColour(pl.f,c,apply);};});
 }
 function handle(hd,el,pl){
-  hd.addEventListener('pointerdown',function(e){e.stopPropagation();e.preventDefault();var area=$('area'),A=area.getBoundingClientRect();
-    var E=el.getBoundingClientRect(),cx=E.left+E.width/2,cy=E.top+E.height/2,k=hd.dataset.h,s0=pl.s,sx0=pl.sx,sy0=pl.sy,r0=pl.r;
+  hd.addEventListener('pointerdown',function(e){e.stopPropagation();e.preventDefault();
+    var E=el.getBoundingClientRect(),cx=E.left+E.width/2,cy=E.top+E.height/2,k=hd.dataset.h,s0=pl.s,sx0=pl.sx,sy0=pl.sy;
     function loc(x,y){var a=-pl.r*Math.PI/180,dx=x-cx,dy=y-cy;return [dx*Math.cos(a)-dy*Math.sin(a),dx*Math.sin(a)+dy*Math.cos(a)];}
     var st=loc(e.clientX,e.clientY),d0=Math.hypot(st[0],st[1])||1;
     try{hd.setPointerCapture(e.pointerId);}catch(_){}
@@ -747,7 +1193,26 @@ function handle(hd,el,pl){
 /* перетаскивание пальцем и мышью: Pointer Events, призрак у курсора */
 function drag(el,o){
   el.addEventListener('pointerdown',function(e){
-    if(e.button>0)return;if(e.target.closest('.hd'))return;e.stopPropagation();var sx=e.clientX,sy=e.clientY,moved=false,g=null,dead=false;
+    if(e.button>0)return;if(e.target.closest('.hd'))return;
+    /* телефон и планшет (24.11, проверка «193»): полка ниже ёлки, тащить пальцем через прокрутку неудобно.
+       Касание игрушки на полке = «взять в руку», потом касание ёлки = повесить. Палец, который двигается, — это прокрутка. */
+    if(e.pointerType==='touch'&&o.arm){
+      /* 24.11 Анна с телефона: «не перетаскивается». Нажал и подержал (~0,25 с) — игрушка поднимается, её можно тащить на ёлку;
+         просто нажал — «взял в руку», потом нажми на ёлку; повёл пальцем сразу — это прокрутка полок. */
+      var tx=e.clientX,ty=e.clientY,lx=tx,ly=ty,gone=false,drg=false,tg=null;
+      var tim=setTimeout(function(){if(gone)return;if(!o.ok()){gone=true;return;}drg=true;try{navigator.vibrate&&navigator.vibrate(12);}catch(_){}
+        el.classList.add('lifted');tg=document.createElement('div');tg.className='dragghost';tg.innerHTML=o.ghost();tg.style.left=lx+'px';tg.style.top=(ly-40)+'px';document.body.appendChild(tg);
+        var a=$('area');if(a)a.classList.add('dropzone');},230);
+      var block=function(ev){if(drg&&ev.cancelable)ev.preventDefault();};
+      var tm=function(ev){lx=ev.clientX;ly=ev.clientY;if(drg){if(tg){tg.style.left=lx+'px';tg.style.top=(ly-40)+'px';}return;}if(Math.hypot(lx-tx,ly-ty)>10){gone=true;clearTimeout(tim);}};
+      var clean=function(){clearTimeout(tim);el.removeEventListener('pointermove',tm);el.removeEventListener('pointerup',tu);el.removeEventListener('pointercancel',tc);el.removeEventListener('touchmove',block);
+        if(tg)tg.remove();el.classList.remove('lifted');var a=$('area');if(a)a.classList.remove('dropzone');};
+      var tu=function(){var was=drg;clean();noClick=Date.now();
+        if(was){disarm();o.drop(lx,ly-40);return;}
+        if(gone)return;if(o.ok()){if(o.armOnly)o.arm();else{o.tap();o.arm();}}else o.tap();};
+      var tc=function(){clean();};
+      el.addEventListener('pointermove',tm);el.addEventListener('pointerup',tu);el.addEventListener('pointercancel',tc);el.addEventListener('touchmove',block,{passive:false});return;}
+    e.stopPropagation();var sx=e.clientX,sy=e.clientY,moved=false,g=null,dead=false;
     try{el.setPointerCapture(e.pointerId);}catch(_){}
     function mv(ev){
       if(dead)return;if(!moved&&Math.hypot(ev.clientX-sx,ev.clientY-sy)<6)return;
@@ -766,16 +1231,17 @@ function drag(el,o){
 
 /* ---------- вариант 3: карточка для учителя ---------- */
 var SCRIPT='Ребята, у меня для вас новогодняя новость! С 1 декабря в вашем личном кабинете появится адвент-календарь — 31 окошко, по одному на каждый день до Нового года.\n\n'+
- 'Каждый день открывайте одно окошко. Внутри — украшение для ёлки и новое английское слово. Слово можно послушать и повторить вслух.\n\n'+
- 'Украшения складываются в сундук, а оттуда вы сами вешаете их на свою ёлку — куда захотите. Их можно увеличить, уменьшить, повернуть и даже поменять цвет.\n\n'+
- 'Не успели открыть окошко — не страшно: вчерашнее окошко тоже бесплатное, а более ранние можно открыть за 5 монеток. Каждое слово можно повторить за голосом и послушать себя. А новый цвет украшения стоит всего 1 монетку.\n\n'+
- 'К 31 декабря у каждого будет своя нарядная ёлка. Покажете мне её на уроке — посмотрим, сколько новых слов вы соберёте!';
+ 'Каждый день открывайте одно окошко. Внутри — украшение для ёлки и новое английское слово. Слово можно послушать и повторить за голосом — за это ещё и монетка.\n\n'+
+ 'Украшения попадают в Мастерскую эльфов, а оттуда вы сами вешаете их на свою ёлку. Их можно увеличить, повернуть и перекрасить. Иногда в окошке лежит настоящий подарок от школы!\n\n'+
+ 'Чем больше окошек откроете, тем ярче горит гирлянда подарков: на ней спрятаны монетки и редкие игрушки. Позовёте друга — получите эпическую игрушку, выложите ёлку в соцсети — легендарную.\n\n'+
+ 'Вчерашнее окошко тоже бесплатное, а более ранние можно открыть за 5 монеток. К 31 декабря у каждого будет своя нарядная ёлка — покажете мне её на уроке!';
 function renderTeacher(){
   $('tview').innerHTML='<div class="poster" id="poster"><div><span class="badge">с 1 по 31 декабря</span><h2>🎄 Адвент-календарь</h2><p class="lead">Новое окошко каждый день — прямо в твоём личном кабинете</p>'+calHtml(null,true)+
    '<ul><li><i>🎁</i><span>Каждый день — одно окошко: украшение для ёлки и новое английское слово</span></li>'+
    '<li><i>🔊</i><span>Слово можно послушать и повторить</span></li>'+
    '<li><i>🎄</i><span>Украшения вешаешь на свою ёлку сам: больше, меньше, другой цвет</span></li>'+
-   '<li><i>🪙</i><span>Вчерашнее и сегодняшнее окошко — бесплатно, более ранние — за 5 монеток. Новый цвет — 1 монетка</span></li></ul></div>'+
+   '<li><i>✨</i><span>Гирлянда подарков: монетки, редкие игрушки и подарки от школы</span></li>'+
+   '<li><i>👫</i><span>Позови друга — эпическая игрушка, пост с ёлкой — легендарная</span></li></ul></div>'+
    '<div class="tr">'+pic('img/tree_pine.webp')+'<span>Твоя ёлка ждёт украшений ✨</span></div></div>'+
    '<div class="script"><h3>Что рассказать детям</h3><p class="hint" style="margin:0">Сделайте скриншот синей карточки выше и покажите её на уроке, а это — прочитайте или перескажите своими словами.</p>'+
    '<textarea id="scr" aria-label="Текст для детей">'+esc(SCRIPT)+'</textarea><div><button type="button" class="btn" id="cp">Скопировать текст</button></div></div>';
@@ -855,14 +1321,11 @@ function renderTeachView(){
 
 /* ---------- вариант 7: вопросы к решению ---------- */
 var QS=[
- ['Сообщать ли родителям 1 декабря, что в кабинете появился календарь?',['Да — одним сообщением в бот или на почту','Нет — дети узнают от учителя на уроке','Да, но только тем, кто давно не заходил в кабинет']],
  ['По какому времени наступает новый день и открывается окошко?',['По Москве — для всех одинаково','По времени ученика — окошко открывается в его полночь']],
- ['Кто договаривается с командой кабинета о кнопке 🎄 и сроках?',['Анна','Руководитель направления','Другой человек — назначить']],
- ['Сколько монеток стоит окошко раньше вчерашнего дня?',['5 монеток, как сейчас','2–3 монетки — дешевле','Бесплатно, но только 3 окошка в день']],
- ['Короткую гирлянду сделать ещё короче?',['Да — добавить четвёртый размер «совсем короткая»','Нет — трёх размеров хватает']],
+ ['Короткую гирлянду сделать ещё короче?',['Да — маленький кусок короче, чем сейчас','Нет — трёх кусков хватает']],
  ['Версии для других возрастов (4–6, 10–12, 13+)',['Позже, после запуска для 7–9','В этом году только 7–9']]];
 function renderQ(){
-  $('tview').innerHTML='<div class="plaque"><span class="vn">7 · Вопросы к решению</span><span class="vt">Что нужно решить до запуска. По каждому — вопрос и варианты.</span></div>'+
+  $('tview').innerHTML='<div class="plaque"><span class="vn">7 · Вопросы к решению</span><span class="vt">Что осталось решить до запуска. Решено и уйдёт в ТЗ: родителям сообщений не нужно, кнопку 🎄 команда кабинета добавит по желанию, окошко раньше вчерашнего — 🪙 5.</span></div>'+
    '<div class="qlist">'+QS.map(function(q,i){return '<div class="qcard"><span class="qn">'+(i+1)+'</span><div><b>'+q[0]+'</b><ul>'+q[1].map(function(o){return '<li>'+o+'</li>';}).join('')+'</ul></div></div>';}).join('')+'</div>';
 }
 
@@ -874,11 +1337,11 @@ function renderDemo(){
     (viewMode(c)?'':'<button type="button" class="x" id="dReset" title="Начать этот вариант сначала">↺<span class="lng"> сначала</span></button>');
   function pickMode(v){var page=S.page,tab=S.tab;ALL.cur=v;sel=null;openFam=null;var tEl=document.querySelector('.toast');if(tEl)tEl.hidden=true;
     $$('.modal').forEach(function(x){x.remove();});
-    if(!viewMode(v)){S=ALL[v];if(v!=='late'&&v!=='after'){S.page=page;S.tab=tab;}}save();render();window.scrollTo(0,0);}
+    if(!viewMode(v)){S=ALL[v];if(v!=='late'&&v!=='after'&&v!=='guest'){S.page=page;S.tab=tab;}}save();render();window.scrollTo(0,0);}
   $$('.demo .seg').forEach(function(b){b.onclick=function(){pickMode(b.dataset.m);};});
   $('dSel').onchange=function(){pickMode(this.value);};
   var r=$('dReset');if(r)r.onclick=function(){var nm=MODES.filter(function(x){return x[0]===c;})[0][2];var m=modal('<div class="mcard"><h3>Начать вариант «'+esc(nm)+'» сначала?</h3><div class="btns"><button type="button" class="btn" id="y">Да</button><button type="button" class="btn ghost" data-close>Нет</button></div></div>');
-    m.querySelector('#y').onclick=function(){m.remove();var page=S.page,tab=S.tab;ALL[c]=FRESH[c]();S=ALL[c];if(c!=='late'&&c!=='after'){S.page=page;S.tab=tab;}sel=null;openFam=null;save();render();};};
+    m.querySelector('#y').onclick=function(){m.remove();var page=S.page,tab=S.tab;ALL[c]=FRESH[c]();S=ALL[c];if(c!=='late'&&c!=='after'&&c!=='guest'){S.page=page;S.tab=tab;}sel=null;openFam=null;save();render();};};
 }
 function render(){
   renderDemo();var t=ALLteacher();$('app').hidden=t;$('bnav').hidden=t;$('tview').hidden=!t;
@@ -886,9 +1349,18 @@ function render(){
   renderNav();showCoins(false);
   $('ttl').textContent=S.page==='advent'?'🎄 Мой адвент-календарь':S.page==='home'?'Привет, Маша! 👋':{hw:'Домашка',trainer:'Тренажёр',sched:'Расписание',shopw:'Колесо и призы'}[S.page];
   var wc=S.mode==='late'&&!S.welcomed?credit():0;
+  if(S.mode==='guest'&&!S.reg){renderReg();return;}
+  $('ttl').textContent=S.page==='advent'?'🎄 Мой адвент-календарь':S.page==='home'?'Привет, '+meName()+'! 👋':$('ttl').textContent;
   if(S.page==='home')renderHome();else if(S.page==='advent')renderAdvent();else renderStub(S.page);
   if(wc)welcome(wc);
 }
+/* гость по ссылке друга: регистрация → заявка в школу, 🪙 20 сразу (Анна, 24.11.2026) */
+function renderReg(){$('ttl').textContent='🎄 Адвент-календарь WowSpeak';
+  $('page').innerHTML=plaque()+'<form class="reg" id="regF"><span class="pill p-pink">🎁 Маша П. зовёт тебя!</span><h2>Новогодний адвент-календарь</h2><p class="sub" style="margin:0">31 окошко до Нового года: в каждом — украшение для твоей ёлки и новое английское слово. Зарегистрируйся — и сразу получишь 🪙 20.</p>'+
+   '<label>Имя ребёнка<input id="rName" required autocomplete="given-name" placeholder="Например, Алёна"></label><label>Телефон родителя<input id="rPhone" type="tel" required autocomplete="tel" placeholder="+7 900 000-00-00"></label>'+
+   '<button class="btn pink" type="submit">Начать и получить 🪙 20</button><p class="hint" style="margin:0">В макете ничего не отправляется. На платформе заявка уйдёт в школу, и с вами свяжутся.</p>'+
+   '<h3 style="margin-top:6px">Как заработать монетки</h3>'+earnHtml()+'</form>';
+  $('regF').onsubmit=function(e){e.preventDefault();S.reg=true;S.name=($('rName').value||'Гость').trim();S.log.push({d:'2 дек',ic:'🎁',t:'Подарок за регистрацию',a:20,s:'адвент-календарь'});S.page='advent';S.tab='cal';save();sfx('coin');render();toast('🪙 20 — твои! Открывай первое окошко');};}
 /* новичок: монетки ровно на все платные прошлые окошки, без грустного */
 function credit(){S.welcomed=true;var n=missedDays().length*5;if(n)addLog('🎁','Подарок: ты с нами!',n);save();showCoins(true);return n;}
 function welcome(n){
@@ -896,11 +1368,32 @@ function welcome(n){
     '<p class="hint" style="margin:0">Открой окошки, которые ждали тебя: за каждое — 5 монеток. Вчерашнее и сегодняшнее — бесплатно.</p><div class="btns"><button type="button" class="btn pink" id="goCal">К календарю 🎄</button></div></div>');
   m.querySelector('#goCal').onclick=function(){m.remove();S.page='advent';S.tab='cal';save();render();};}
 $('coins').onclick=coinsModal;
+/* фоновая музыка (своя аранжировка Jingle Bells): играет тихо и сама — браузер даёт звук после первого касания,
+   поэтому пробуем сразу и при первом нажатии в любом месте. Выключается только музыка, слова звучат всегда (Анна, 24.11) */
+var mus=new Audio('audio/music_jingle.mp3');mus.loop=true;mus.volume=.18;var musOff=false;
+function mPlaying(){return musPausedByForest?!fmus.paused:!mus.paused;}
+function mUI(){var on=mPlaying();$('mBtn').textContent=on?'⏸':'🎵';$('mBtn').title=on?'Выключить музыку':'Включить музыку';}
+function mStart(){if(!mus.paused||musOff)return;mus.play().then(mUI).catch(function(){});}
+/* в лесу вместо Jingle Bells играет песня, которую прислала Анна 24.11 («Волшебная новогодняя музыка без слов», Bruni AFX; до неё была «шкатулка в лесу»). 24.11 Анна выбрала «216 б» — обе вместе,
+   но, послушав, сказала: «когда открываешь лес, сразу 2 песни звучат» — поэтому переход: одна плавно затихает, другая вступает.
+   Тот же ползунок и та же кнопка; сам лес внутри рамки звук не включает. */
+var fmus=new Audio('audio/les_music.mp3');fmus.loop=true;var FK=1.4,mVolV=.18;fmus.volume=0;
+var musPausedByForest=false;
+function fade(a,to,ms,done){clearInterval(a.__f);var from=a.volume,st=Date.now();a.__f=setInterval(function(){var k=Math.min(1,(Date.now()-st)/ms);a.volume=Math.max(0,Math.min(1,from+(to-from)*k));if(k>=1){clearInterval(a.__f);if(done)done();}},40);}
+function fSync(){var inF=S.page==='advent'&&S.tab==='forest';
+  if(musOff){if(!fmus.paused)fmus.pause();return;}
+  if(inF&&!musPausedByForest&&!mus.paused){musPausedByForest=true;fade(mus,0,700,function(){mus.pause();});fmus.volume=0;fmus.play().catch(function(){});fade(fmus,Math.min(1,mVolV*FK),1200);}
+  else if(!inF&&musPausedByForest){musPausedByForest=false;fade(fmus,0,700,function(){fmus.pause();});mus.volume=0;mus.play().then(mUI).catch(function(){});fade(mus,mVolV,1200);}}
+setInterval(fSync,400);
+$('mVol').oninput=function(){mVolV=this.value/100;if(musPausedByForest){clearInterval(fmus.__f);fmus.volume=Math.min(1,mVolV*FK);}else{clearInterval(mus.__f);mus.volume=mVolV;}};
+$('mBtn').onclick=function(){if(!mPlaying()){musOff=false;var a=musPausedByForest?fmus:mus;a.volume=musPausedByForest?Math.min(1,mVolV*FK):mVolV;a.play().then(mUI).catch(function(){});}else{musOff=true;mus.pause();fmus.pause();mUI();}};
+mStart();['pointerdown','keydown','touchstart'].forEach(function(ev){document.addEventListener(ev,function(e){if(e.target.closest&&e.target.closest('#music'))return;mStart();},{once:true,capture:true});});
 /* картинки заранее — без пауз */
 Object.keys(F).forEach(function(f){colsOf(f).forEach(function(c){var i=new Image();i.src=src(f,c);});});
+['common','rare','epic','legend'].forEach(function(b){var i=new Image();i.src='img/box_'+b+'.webp';});
 /* записи не грузим заранее все — только слово открытого окошка (23.11.2026, Анна) */
 function preload(w){var pr=parts(w);if(pr)pr.forEach(function(u){var a=new Audio();a.preload='auto';a.src=u;});}
-window.__adv={F:F,DAYS:DAYS,get S(){return S;},placeAt:placeAt,renderTree:renderTree,go:go,colsOf:colsOf,src:src};
+window.__adv={F:F,DAYS:DAYS,get S(){return S;},placeAt:placeAt,renderTree:renderTree,go:go,colsOf:colsOf,src:src,SPEC:SPEC};
 render();
 })();
 </script>
