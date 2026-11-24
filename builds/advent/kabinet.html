@@ -945,7 +945,9 @@ function shelfToy(f){
 function shelf(cls,title,list,inCase){var own=list.filter(hasFam).length;
   var row='<div class="wrow">'+list.map(shelfToy).join('')+'</div>';
   return '<div class="sh '+cls+'"><span class="wplate">'+title+' <small>'+own+' из '+list.length+'</small></span>'+(inCase?'<div class="case">'+row+'</div>':row)+'</div>';}
-function renderTree(){
+/* 24.11 Анна: после перетаскивания полки прыгали наверх — запоминаем прокрутку полок и страницы */
+function renderTree(){var _sh=document.querySelector('.shelves'),_st=_sh?_sh.scrollTop:0,_wy=window.scrollY;renderTree0();var _n=document.querySelector('.shelves');if(_n)_n.scrollTop=_st;window.scrollTo(0,_wy);}
+function renderTree0(){
   var has={pine:true};for(var d in S.opened){var it=DAYS[S.opened[d]];if(it.tree)has[it.tree]=true;}
   var common=ORDERF,all=common.concat(SPEC.r,SPEC.e,SPEC.l),got=all.filter(hasFam).length;
   var COLL=['#FF5A5A','#FFD23F','#4CD97B','#4C9BFF','#C26BFF','#FF8AD8'],L='';
