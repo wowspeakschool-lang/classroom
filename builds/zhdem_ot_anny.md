@@ -22,49 +22,26 @@
 🔴 **151.** **Посмотреть пилотный юнит Go Getter 3** — семь домашек по рабочей
    тетради (в «Контент» → «Библиотека» → Go Getter 3 → Unit 1).
 
-🔴 **220.** **Посмотреть 27 залитых табличек.** Если где-то место неудачное —
-   скажите номер урока, переставлю.
-   • юнит 1 ДЗ 2, блок 2 — Present Simple — то, что бывает обычно — https://app.wowteach.ru/?run=829ba270-7377-43f0-b5ad-093441ba6b07&preview=1
-   • юнит 1 ДЗ 3, блок 2 — Present Simple — отрицание и вопрос — https://app.wowteach.ru/?run=ed03a12f-2fd8-4e50-96a6-e889f97107e5&preview=1
-   • юнит 1 ДЗ 4, блок 2 — Как спросить про человека — https://app.wowteach.ru/?run=851d9b90-f06b-46e5-8fd5-96cec97d6d69&preview=1
-   • юнит 1 ДЗ 6, блок 7 — at, in или on — https://app.wowteach.ru/?run=17a7a056-ec35-467b-8b6d-031c50fe937a&preview=1
-   • юнит 2 ДЗ 2, блок 5 — Исчисляемое и неисчисляемое, some / any — https://app.wowteach.ru/?run=0c683af2-bcf7-4b35-9a5a-ca9b82ed81d6&preview=1
-   • юнит 2 ДЗ 3, блок 2 — How much / How many / a lot of — https://app.wowteach.ru/?run=d8fbeb71-a2ef-4bfd-a0d9-eb73dae5d5e0&preview=1
-   • юнит 2 ДЗ 4, блок 7 — Как заказать еду в кафе — https://app.wowteach.ru/?run=edb04172-9975-4411-bda8-74f5592a7a13&preview=1
-   • юнит 3 ДЗ 2, блок 6 — Present Continuous — сейчас — https://app.wowteach.ru/?run=e98283ea-253d-49a4-a9e2-abff23cffe04&preview=1
-   • юнит 3 ДЗ 3, блок 4 — Present Continuous — вопрос и ответ — https://app.wowteach.ru/?run=118e1ff0-aff7-4b88-bdb3-e16a2f10d1eb&preview=1
-   • юнит 3 ДЗ 4, блок 8 — Разговор по телефону — https://app.wowteach.ru/?run=9c298871-50b1-4392-b74a-e436e93e54a9&preview=1
-   • юнит 4 ДЗ 2, блок 10 — Сравнительная степень — https://app.wowteach.ru/?run=fc4092e5-0444-469a-8841-6630676c8358&preview=1
-   • юнит 4 ДЗ 3, блок 2 — Короткие и длинные прилагательные — https://app.wowteach.ru/?run=b34421bf-19d0-4098-989f-1c4dc259a384&preview=1
-   • юнит 4 ДЗ 5, блок 2 — Как сказать своё мнение — https://app.wowteach.ru/?run=321da4d6-a5a9-47ca-9287-6f347c511ab9&preview=1
-   • юнит 4 ДЗ 6, блок 2 — Превосходная степень — https://app.wowteach.ru/?run=4cf4c755-dd7e-4892-b62b-a7bbbae90542&preview=1
-   • юнит 5 ДЗ 2, блок 2 — was и were — https://app.wowteach.ru/?run=b95d2f8a-8df2-4ecb-b953-837451fe373f&preview=1
-   • юнит 5 ДЗ 3, блок 2 — Вопросы с was / were и слова о прошлом — https://app.wowteach.ru/?run=b9b33ec6-6316-4a47-af4f-ca091527a341&preview=1
-   • юнит 5 ДЗ 5, блок 2 — Как спросить и объяснить дорогу — https://app.wowteach.ru/?run=4d6948c6-3f5a-4beb-af6b-c10685b6d0bc&preview=1
-   • юнит 6 ДЗ 2, блок 2 — Past Simple — правильные глаголы — https://app.wowteach.ru/?run=2c2e193f-d67c-467f-88da-c30a5cf592cb&preview=1
-   • юнит 6 ДЗ 3, блок 2 — Слова-подсказки прошедшего времени — https://app.wowteach.ru/?run=26a3279b-c0ce-4f8d-b85c-b8d6808fb54f&preview=1
-   • юнит 6 ДЗ 4, блок 2 — Неправильные глаголы — https://app.wowteach.ru/?run=d0dc3c41-586d-4268-ada5-bca1a5aa2138&preview=1
-   • юнит 6 ДЗ 5, блок 2 — Как попросить разрешения — https://app.wowteach.ru/?run=d7074b31-2c22-41b2-bf17-5bc1f9ed3493&preview=1
-   • юнит 7 ДЗ 2, блок 2 — Past Simple — отрицание — https://app.wowteach.ru/?run=ab2ef460-665d-4df0-bb5e-c29920d7bd05&preview=1
-   • юнит 7 ДЗ 4, блок 2 — Past Simple — вопрос и ответ — https://app.wowteach.ru/?run=35386895-5aea-4926-885c-ca4e81c01af5&preview=1
-   • юнит 7 ДЗ 5, блок 2 — Как купить билет — https://app.wowteach.ru/?run=72022c46-2535-4739-96c8-114e0acecf6d&preview=1
-   • юнит 8 ДЗ 2, блок 2 — be going to — https://app.wowteach.ru/?run=f3ac64e3-a8e2-4a7b-aa0b-f14ce70636e7&preview=1
-   • юнит 8 ДЗ 3, блок 2 — Вопрос в любом времени — https://app.wowteach.ru/?run=3be806f6-8407-4b49-bf62-c7e4f451475c&preview=1
-   • юнит 8 ДЗ 5, блок 2 — Как договориться о встрече — https://app.wowteach.ru/?run=7140c13d-627c-4ab1-bf67-5dfe7d9f302a&preview=1
+🔴 **222.** **Разрешить проход «дубль глазами → одно задание на слух» по
+   опубликованным курсам.** Нашлось 27 уроков: SM1 — 10, SM2 — 12, SM3 — 4,
+   Halloween — 1 (в SM0 и обоих Wow Dragon таких нет: там звук и так везде).
+   Переделанный блок молчит до «Озвучить пачкой», поэтому предлагаю курс за
+   курсом: правлю SM1 — вы озвучиваете, дальше SM2 и так далее.
+
+🔴 **223.** **Решить по трём блокам SM3, где аудио стоит видео-блоком** —
+   юнит 3 ДЗ 3 блок 2, юнит 4 ДЗ 3 блок 2, юнит 9 ДЗ 2 блок 6. Уроки
+   опубликованы; в GG2 такие четыре я уже исправил. Чиним так же?
 
 **Что за мной**
 
 🔴 **44.** После каждой «Озвучить пачкой» сверять правки того же дня и прогонять
    `classroom__zvuk_iz_zhivogo`.
 
-🔴 **180.** Пройти тем же проходом (дубль «глазами» → одно задание на слух)
-   остальные курсы: SM0–SM3, Wow Dragon, Holidays. В Go Getter сделано.
+🔴 **180.** Проход «дубль глазами → одно задание на слух» по остальным курсам:
+   разбор сделан (27 уроков, см. пункт 222), жду «да» и правлю по курсу за раз.
 
 🔴 **196.** Таблички с правилами по SM1–SM3 — собрать, показать превью пачкой,
    по курсу за раз. **Ждёт команды Анны.**
-
-🔴 **204.** Три блока SM3, где **аудио стоит видео-блоком** (юнит 3 ДЗ 3 б2,
-   юнит 4 ДЗ 3 б2, юнит 9 ДЗ 2 б6) — уроки опубликованы, спрошу перед правкой.
 
 ## Чат «Запросы Алёны» (разбор запросов методисту)
 
