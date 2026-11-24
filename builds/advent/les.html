@@ -70,7 +70,7 @@ canvas.snow{position:absolute;inset:0;pointer-events:none;z-index:10}
 </style>
 
 <div class="hdr"><button class="back" type="button">← К моей ёлке</button><h1>Лес ёлок WowSpeak</h1><span class="cnt">🎄 <span id="n"></span> ёлок в лесу</span>
-<span class="find"><input id="q" placeholder="Найти ёлку друга" aria-label="Найти ёлку по имени"></span><button class="mine" type="button" id="toMe">⭐ Моя ёлка</button></div>
+<span class="find"><input id="q" placeholder="Найти ёлку друга" aria-label="Найти ёлку по имени"></span><button class="back" type="button" id="callAn" title="Только для показа">🐾 Позвать зверька</button><button class="mine" type="button" id="toMe">⭐ Моя ёлка</button></div>
 <div class="scene" id="scene">
  <img id="moon" src="img/moon.webp" alt="">
  <div class="scroller" id="sc"><div class="world" id="world"></div></div>
@@ -165,8 +165,8 @@ function peek(){var vw=sc.clientWidth,s=sc.scrollLeft,ts=[].slice.call(document.
  el.innerHTML='<img src="img/an/peek_'+n+'.webp" alt="" style="height:'+h+'px;width:auto;transform:translateX(0) scaleX('+side+');transform-origin:0 100%;left:0">';world.appendChild(el);
  var img=el.firstChild,out=side*tw*.32,hid=-side*h*.15;
  img.animate([{transform:'translateX('+hid+'px) scaleX('+side+')'},{transform:'translateX('+out+'px) scaleX('+side+')',offset:.18},{transform:'translateX('+out+'px) rotate('+(side*4)+'deg) scaleX('+side+')',offset:.5},{transform:'translateX('+out+'px) scaleX('+side+')',offset:.82},{transform:'translateX('+hid+'px) scaleX('+side+')'}],{duration:4600,easing:'ease-in-out'}).onfinish=function(){el.remove();};}
-function life(){if(!document.hidden){Math.random()<.6?run():peek();}setTimeout(life,3000+Math.random()*2000);}
-setTimeout(life,300);
+function life(){try{Math.random()<.6?run():peek();}catch(e){}setTimeout(life,3000+Math.random()*2000);}
+setTimeout(life,300);document.getElementById('callAn').onclick=function(){run();setTimeout(peek,600);};
 function init(){size();build();}
 window.addEventListener('resize',function(){var s=sc.scrollLeft/W;init();sc.scrollLeft=s*W;});
 init();
