@@ -149,14 +149,20 @@ var KEYS=Object.keys(AN),world=document.getElementById('world');
 function mk(n,z){var a=AN[n],el=document.createElement('div');el.className='anim';el.style.zIndex=z;
  var k=H*a.h/a.s[1];el.innerHTML='<img src="img/an/'+n+'_sit.webp" alt="" style="width:'+(a.s[0]*k)+'px">';world.appendChild(el);return {el:el,img:el.firstChild,k:k,a:a,n:n};}
 function frame(o,j){var f=j?o.a.j:o.a.s;o.img.src='img/an/'+o.n+(j?'_jump':'_sit')+'.webp';o.img.style.width=(f[0]*o.k)+'px';}
-function run(){var n=KEYS[Math.floor(Math.random()*KEYS.length)],front=Math.random()<.45,o=mk(n,front?6:1),dir=Math.random()<.5?1:-1;
- var vw=sc.clientWidth,x0=sc.scrollLeft+(dir>0?-120:vw+120),x1=sc.scrollLeft+(dir>0?vw+120:-120),gy=H*(front?.905:.86);
- var size=H*o.a.h,L=size*o.a.hop,speed=vw*o.a.sp/6,dist=Math.abs(x1-x0),t0=null;
+/* 24.11 Анна: двух одинаковых зверьков сразу не бывает; зверёк бежит до конца леса —
+   если листать за ним, он всё ещё бежит. Пропадает, только когда ушёл далеко за экран или упёрся в край леса. */
+var ACTIVE={};
+function run(){var free=KEYS.filter(function(k){return !ACTIVE[k];});if(!free.length)return;
+ var n=free[Math.floor(Math.random()*free.length)],front=Math.random()<.45,o=mk(n,front?6:1),dir=Math.random()<.5?1:-1;ACTIVE[n]=1;
+ var vw=sc.clientWidth,x0=sc.scrollLeft+(dir>0?-120:vw+120),gy=H*(front?.905:.86);
+ var size=H*o.a.h,L=size*o.a.hop,speed=vw*o.a.sp/6,t0=null;
  o.img.style.transform='translateX(-50%) scaleX('+dir+')';var last=-1;
- function step(ts){if(t0===null)t0=ts;var d=(ts-t0)/1000*speed;if(d>=dist){o.el.remove();return;}
+ function end(){o.el.remove();delete ACTIVE[n];}
+ function step(ts){if(t0===null)t0=ts;var d=(ts-t0)/1000*speed,x=x0+dir*d,s=sc.scrollLeft,v=sc.clientWidth;
+  if(x<-150||x>W+150||x<s-v||x>s+2*v){end();return;}
   var p=(d%L)/L,air=p<.72,y=air?-Math.sin(Math.PI*p/.72)*H*o.a.hh:0;
   if(air!==last){frame(o,air);last=air;}
-  o.el.style.left=(x0+dir*d)+'px';o.el.style.top=(gy+y)+'px';requestAnimationFrame(step);}
+  o.el.style.left=x+'px';o.el.style.top=(gy+y)+'px';requestAnimationFrame(step);}
  requestAnimationFrame(step);}
 function peek(){var vw=sc.clientWidth,s=sc.scrollLeft,ts=[].slice.call(document.querySelectorAll('.t')).filter(function(t){var x=parseFloat(t.style.left);return x>s+120&&x<s+vw-120;});
  if(!ts.length)return;var tr=ts[Math.floor(Math.random()*ts.length)],tw=tr.offsetWidth,th=tr.querySelector('.art').offsetHeight;
