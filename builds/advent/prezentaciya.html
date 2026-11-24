@@ -1,0 +1,587 @@
+<title>Адвент-календарь WowSpeak</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Nunito:wght@500;600;700&display=swap">
+<style>
+/* Макет: страница-презентация для руководства; в центре — живой макет кабинета ученика
+   в его стиле (кремово-персиковый фон, белые карточки ~26px, фиолетовый и розовый, жёлтые монеты).
+   Один светлый вид намеренно: это копия кабинета, а он светлый. */
+:root{
+  --bg:#FFF4EC; --bg2:#FFE9DA; --card:#FFFFFF; --ink:#2B2140; --muted:#6B6280; --line:#F0E2D6;
+  --violet:#6A4DF4; --violet-soft:#EEE9FF; --pink:#F7628C; --pink-soft:#FFE6EE;
+  --coin:#FFC83D; --coin-ink:#7A5200; --green:#1F8F62; --green-soft:#E3F6EC; --red:#D9445B;
+  --night:#20264A; --night2:#33407A; --snow:#F4F7FF;
+  --ff-head:"Montserrat", "Segoe UI", Arial, sans-serif;
+  --ff-body:"Nunito", "Segoe UI", Arial, sans-serif;
+  --r:26px; color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:var(--ff-body);font-size:16px;line-height:1.5;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--ff-head);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,4.4vw,46px);font-weight:900;letter-spacing:-.01em}
+h2{font-size:clamp(22px,3vw,30px);font-weight:800}
+h3{font-size:18px;font-weight:800}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto}
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--bg)}
+nav.top .wrap{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+nav.top b{font-family:var(--ff-head);font-weight:900;margin-right:8px;color:var(--violet)}
+nav.top a{font-family:var(--ff-head);font-size:13px;font-weight:700;color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
+nav.top a:hover,nav.top a:focus-visible{border-color:var(--violet);color:var(--violet);outline:none}
+section.sl{padding-block:44px;border-bottom:1px solid var(--line);scroll-margin-top:64px}
+.eyebrow{font-family:var(--ff-head);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--pink)}
+.lead{font-size:19px;color:var(--muted);max-width:62ch;margin-top:12px}
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--card);border-radius:var(--r);padding:20px;border:1px solid var(--line);min-width:0}
+.card p{color:var(--muted)}
+.card h3{margin-bottom:6px}
+.big{font-family:var(--ff-head);font-weight:900;font-size:34px;color:var(--violet);font-variant-numeric:tabular-nums}
+.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--ff-head);font-weight:800;font-size:13px;padding:4px 10px;border-radius:999px}
+.p-coin{background:var(--coin);color:var(--coin-ink)}
+.p-violet{background:var(--violet-soft);color:var(--violet)}
+.p-pink{background:var(--pink-soft);color:var(--pink)}
+.p-green{background:var(--green-soft);color:var(--green)}
+table.t{width:100%;border-collapse:collapse;font-size:15px}
+table.t th{font-family:var(--ff-head);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}
+table.t td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+table.t td.n{font-variant-numeric:tabular-nums;font-weight:700}
+.tbox{overflow-x:auto;background:var(--card);border-radius:var(--r);border:1px solid var(--line);padding:6px 8px}
+.mini{width:34px;height:34px;display:inline-block;vertical-align:middle}
+ul.check{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+ul.check li{padding-left:28px;position:relative;color:var(--muted)}
+ul.check li::before{content:"✓";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:var(--green-soft);color:var(--green);font-weight:900;font-size:12px;display:grid;place-items:center}
+ul.check b{color:var(--ink)}
+.steps{counter-reset:s;display:grid;gap:12px}
+.steps .card{position:relative;padding-left:64px}
+.steps .card::before{counter-increment:s;content:counter(s);position:absolute;left:18px;top:18px;width:32px;height:32px;border-radius:50%;background:var(--violet);color:#fff;font-family:var(--ff-head);font-weight:900;display:grid;place-items:center}
+
+/* ── макет кабинета ── */
+.demo-note{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:18px 0 12px;color:var(--muted);font-size:14px}
+.demo-note select,.demo-note button{font:inherit;font-weight:700;border-radius:12px;border:1px solid var(--line);background:var(--card);padding:6px 10px;color:var(--ink);cursor:pointer}
+.frame{background:var(--bg2);border-radius:32px;padding:14px;border:1px solid var(--line);box-shadow:0 20px 50px -30px rgba(80,40,120,.35)}
+.cab{background:var(--bg);border-radius:24px;overflow:hidden;min-height:620px;display:flex;flex-direction:column}
+.cab-top{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.logo{font-family:var(--ff-head);font-weight:900;font-size:20px;color:var(--violet)}
+.logo span{color:var(--pink)}
+.cab-nav{display:flex;gap:4px;flex-wrap:wrap;flex:1}
+.cab-nav button{font-family:var(--ff-head);font-weight:700;font-size:13px;border:0;background:transparent;color:var(--muted);padding:6px 10px;border-radius:999px;cursor:pointer}
+.cab-nav button.on{background:var(--violet-soft);color:var(--violet)}
+.coins{font-family:var(--ff-head);font-weight:900;background:var(--coin);color:var(--coin-ink);padding:6px 12px;border-radius:999px;font-variant-numeric:tabular-nums;transition:transform .2s}
+.coins.bump{transform:scale(1.18)}
+.who{display:flex;align-items:center;gap:8px;font-family:var(--ff-head);font-weight:700;font-size:13px}
+.ava{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;display:grid;place-items:center;font-weight:900}
+.cab-body{padding:18px;flex:1}
+.home{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.hc{background:var(--card);border-radius:var(--r);padding:18px;border:1px solid var(--line);display:flex;flex-direction:column;gap:8px;min-width:0}
+.hc h3{font-size:16px}
+.hc .sub{color:var(--muted);font-size:14px}
+.hc.adv{background:linear-gradient(160deg,#2E3A7A,#20264A);color:#fff;border:0;cursor:pointer;position:relative;overflow:hidden}
+.hc.adv .sub{color:#D9DEFF}
+.hc.adv:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+.hc.adv .tree-ico{position:absolute;right:10px;bottom:-6px;width:110px;height:120px}
+.new{align-self:flex-start;background:var(--pink);color:#fff;font-family:var(--ff-head);font-weight:800;font-size:12px;padding:3px 10px;border-radius:999px;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.07)}}
+.fab{position:relative}
+.btn{font-family:var(--ff-head);font-weight:800;border:0;border-radius:14px;padding:10px 16px;cursor:pointer;background:var(--violet);color:#fff;font-size:14px}
+.btn.pink{background:var(--pink)}
+.btn.ghost{background:var(--violet-soft);color:var(--violet)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+
+.adv-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.adv-head .back{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 10px;font-weight:800;cursor:pointer;font-family:var(--ff-head)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs button{font-family:var(--ff-head);font-weight:800;font-size:14px;border:1px solid var(--line);background:var(--card);padding:8px 14px;border-radius:999px;cursor:pointer;color:var(--ink)}
+.tabs button.on{background:var(--violet);border-color:var(--violet);color:#fff}
+
+.scene{position:relative;border-radius:22px;overflow:hidden;background:var(--night) url(img/bg_night.webp) center bottom/cover no-repeat;aspect-ratio:16/10;max-width:100%;min-height:300px}
+.scene .snowfall{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(2px 2px at 20% 30%,#fff8,transparent),radial-gradient(2px 2px at 70% 20%,#fff8,transparent),radial-gradient(3px 3px at 40% 70%,#fff6,transparent),radial-gradient(2px 2px at 85% 60%,#fff8,transparent),radial-gradient(2px 2px at 10% 80%,#fff7,transparent);background-size:220px 220px;animation:snow 14s linear infinite}
+@keyframes snow{to{background-position:0 220px,0 220px,0 220px,0 220px,0 220px}}
+.scene .ground{position:absolute;left:0;right:0;bottom:0;height:18%;background:linear-gradient(#F4F7FF,#DCE4FA);border-top-left-radius:50% 30%;border-top-right-radius:50% 30%}
+.door{position:absolute;width:8.5%;aspect-ratio:1;transform:translate(-50%,-50%);border:0;background:none;padding:0;cursor:pointer;transition:transform .15s}
+.door:hover{transform:translate(-50%,-50%) scale(1.08)}
+.door:focus-visible{outline:3px solid var(--coin);outline-offset:3px;border-radius:14px}
+.door svg{width:100%;height:100%;filter:drop-shadow(0 6px 8px rgba(0,0,0,.35))}
+.door.open{cursor:pointer}
+.door.open::after{content:"";position:absolute;inset:-6%;border-radius:50%;box-shadow:0 0 0 3px rgba(255,255,255,.35)}
+.cal-bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.cal-bar .msg{color:var(--muted);font-weight:700}
+
+.treebox{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:14px}
+@media (max-width:760px){.treebox{grid-template-columns:1fr}}
+.treearea{position:relative;border-radius:22px;background:radial-gradient(100% 70% at 50% 10%,#3A4790,#1E2448);aspect-ratio:4/5;max-height:600px;overflow:hidden;touch-action:none;max-width:100%}
+.treearea .treesvg{position:absolute;left:8%;right:8%;bottom:3%;top:4%}
+.treearea .treesvg svg{width:100%;height:100%}
+.placed{position:absolute;width:12%;aspect-ratio:1;transform:translate(-50%,-50%);touch-action:none;cursor:grab;user-select:none}
+.placed.wide{width:30%;aspect-ratio:3/1}
+.placed svg{width:100%;height:100%;pointer-events:none;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}
+.placed.dragging{cursor:grabbing;z-index:5}
+.chest{background:var(--card);border-radius:22px;border:1px solid var(--line);padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.chest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:8px}
+.slot{position:relative;background:var(--bg);border-radius:16px;aspect-ratio:1;border:1px solid var(--line);display:grid;place-items:center;cursor:grab;touch-action:none;user-select:none;padding:8px}
+.slot svg{width:80%;height:80%;pointer-events:none}
+.slot .cnt{position:absolute;right:4px;top:4px;background:var(--violet);color:#fff;font-family:var(--ff-head);font-weight:800;font-size:11px;border-radius:999px;padding:1px 7px}
+.slot.empty{opacity:.35;cursor:default}
+.slot:focus-visible{outline:3px solid var(--violet)}
+.ghost-drag{position:fixed;z-index:100;pointer-events:none;width:72px;height:72px;transform:translate(-50%,-50%)}
+.ghost-drag svg{width:100%;height:100%;filter:drop-shadow(0 8px 10px rgba(0,0,0,.3))}
+.trees-pick{display:flex;gap:8px;flex-wrap:wrap}
+.trees-pick button{border:2px solid var(--line);background:var(--bg);border-radius:14px;padding:4px;cursor:pointer;width:62px;height:72px}
+.trees-pick button.on{border-color:var(--violet)}
+.trees-pick button svg{width:100%;height:100%}
+.trees-pick button:disabled{opacity:.3;cursor:not-allowed}
+.hint{font-size:13px;color:var(--muted)}
+
+.shop{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.sh{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;min-width:0}
+.sh svg{width:70px;height:70px}
+.sh .w{font-family:var(--ff-head);font-weight:800}
+.sh .tr{font-size:13px;color:var(--muted)}
+.sh.locked{opacity:.55}
+.sh.locked svg{filter:grayscale(1) brightness(.4)}
+.sh .lock{font-size:12px;color:var(--muted)}
+
+.modal{position:fixed;inset:0;z-index:60;background:rgba(32,38,74,.6);display:grid;place-items:center;padding:16px}
+.mcard{background:var(--card);border-radius:28px;padding:22px;max-width:360px;width:100%;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.6);opacity:0}}
+.mcard .art{width:170px;height:170px}
+.mcard .art svg{width:100%;height:100%}
+.mcard .word{font-family:var(--ff-head);font-weight:900;font-size:28px;display:flex;align-items:center;gap:10px}
+.say{border:0;background:var(--violet-soft);color:var(--violet);border-radius:50%;width:46px;height:46px;font-size:22px;cursor:pointer}
+.mcard .trn{color:var(--muted);font-size:18px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px;font-weight:700;z-index:80;max-width:90vw;text-align:center}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.prompt{font-family:ui-monospace,Menlo,monospace;font-size:13px;white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px;color:var(--ink);overflow-wrap:anywhere}
+footer{padding-block:30px;color:var(--muted);font-size:14px}
+img[draggable]{width:100%;height:100%;object-fit:contain;pointer-events:none;display:block}
+.slot img[draggable]{width:80%;height:80%}
+.sh img[draggable]{width:70px;height:70px}
+.dopen{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:#ffffff22;box-shadow:inset 0 0 0 2px #ffffff66;padding:16%}
+.placed img[draggable]{filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}
+</style>
+
+<nav class="top"><div class="wrap">
+  <b>🎄 Адвент-календарь</b>
+  <a href="#idea">Идея</a><a href="#demo">Как это видит ребёнок</a><a href="#how">Механика</a><a href="#words">Слова по дням</a><a href="#coins">Монетки</a><a href="#who">Кто увидит</a><a href="#risks">Что продумано</a><a href="#plan">Сроки</a>
+</div></nav>
+
+<div class="wrap">
+
+<section class="sl" id="idea">
+  <div class="eyebrow">Декабрь 2026 · кабинет ученика</div>
+  <h1>Адвент-календарь: каждый день новое украшение и новое слово</h1>
+  <p class="lead">С 1 по 31 декабря, до самого Нового года, в кабинете ученика появляется ёлочка. Каждый день ребёнок открывает одно окошко, получает украшение с английским словом, произношением и переводом и вешает его на свою ёлку. Монетки можно тратить на дополнительные игрушки.</p>
+  <div class="grid g3" style="margin-top:22px">
+    <div class="card"><h3>Возвращаются каждый день</h3><p>Новое окошко раз в сутки — повод зайти в кабинет, где ждут домашка и тренажёр.</p></div>
+    <div class="card"><h3>Учат слова, играя</h3><p>31 новогоднее слово: каждое со звуком и переводом. Слово звучит при каждом касании игрушки.</p></div>
+    <div class="card"><h3>У монеток новое применение</h3><p>Игрушки по 1–2 монетки: дёшево, но приятно. Монетки снова хочется зарабатывать.</p></div>
+  </div>
+</section>
+
+<section class="sl" id="demo">
+  <div class="eyebrow">Живой макет</div>
+  <h2>Как это видит ребёнок</h2>
+  <p class="lead">Это примерный вид кабинета, не настоящий. Всё нажимается: откройте окошко, перетащите игрушку на ёлку, купите ещё одну. Картинки здесь нарисованы для примера — в настоящей версии будут 3D-картинки, как в Super Minds.</p>
+  <div class="demo-note">
+    <label for="dDay">Для показа: сегодня</label>
+    <select id="dDay"></select><span>декабря</span>
+    <button type="button" id="dReset">Начать заново</button>
+    <span>· сохраняется в этом браузере</span>
+  </div>
+  <div class="frame"><div class="cab" id="cab">
+    <div class="cab-top">
+      <div class="logo">Wow<span>Speak</span></div>
+      <div class="cab-nav" id="cabNav">
+        <button type="button" class="on" data-v="home">🏠 Главная</button>
+        <button type="button" data-v="home">📚 Домашка</button>
+        <button type="button" data-v="home">📅 Расписание</button>
+        <button type="button" data-v="advent">🎄 Ёлка</button>
+      </div>
+      <div class="coins" id="coins">🪙 52</div>
+      <div class="who"><div class="ava">М</div><span>Маша, 8 лет</span></div>
+    </div>
+    <div class="cab-body" id="cabBody"></div>
+  </div></div>
+</section>
+
+<section class="sl" id="how">
+  <div class="eyebrow">Механика</div>
+  <h2>Как это устроено</h2>
+  <div class="steps" style="margin-top:18px">
+    <div class="card"><h3>Окошки — любые</h3><p>В календаре россыпь значков. Ребёнок выбирает любой: что внутри, решает сервер, поэтому сюжет месяца не ломается. 1 декабря выпадает ёлка, 31-го — звезда на макушку.</p></div>
+    <div class="card"><h3>Одно окошко в день бесплатно</h3><p>Сегодняшнее окошко бесплатно. Пропустил день — открыть пропущенное можно потом за 5 монеток. Будущие окошки закрыты до своего дня.</p></div>
+    <div class="card"><h3>Карточка слова</h3><p>Из окошка выпадает украшение: картинка, слово по-английски, 🔊 произношение и перевод. Украшение ложится в сундук.</p></div>
+    <div class="card"><h3>Сундук и ёлка</h3><p>Из сундука игрушку перетаскивают на ёлку. На ёлке её можно передвинуть или вернуть в сундук. Нажал на игрушку — где угодно — слово звучит снова.</p></div>
+    <div class="card"><h3>Магазин</h3><p>Игрушку, которая уже выпала, можно докупить: 1–2 монетки. Пока не выпала — в магазине силуэт с замком. Новые ёлки (заснеженная, золотая) выпадают в календаре и меняются одной кнопкой.</p></div>
+    <div class="card"><h3>Всё сохраняется</h3><p>Ёлка, сундук и открытые окошки хранятся на сервере, а не в браузере: зашёл с телефона или с компьютера — ёлка та же.</p></div>
+  </div>
+</section>
+
+<section class="sl" id="words">
+  <div class="eyebrow">Содержание</div>
+  <h2>31 окошко — 31 слово</h2>
+  <p class="lead">Порядок выпадения. Слова — из тем курсов (цвета, формы, зима, праздник), уровень 7–9 лет.</p>
+  <div class="tbox" style="margin-top:16px"><table class="t" id="wordsTable">
+    <thead><tr><th>№</th><th></th><th>Слово</th><th>Перевод</th><th>Докупить</th></tr></thead><tbody></tbody>
+  </table></div>
+</section>
+
+<section class="sl" id="coins">
+  <div class="eyebrow">Экономика</div>
+  <h2>Монетки: дёшево, чтобы хотелось покупать</h2>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card"><div class="big">52</div><p>монетки обычно на счету у ребёнка (медиана); у самых активных — около 150</p></div>
+    <div class="card"><div class="big">≈ 40</div><p>монеток в месяц зарабатывает ребёнок</p></div>
+    <div class="card"><div class="big">30 / 70 / 100</div><p>сейчас стоят колесо, сундучок-сюрприз и тема оформления</p></div>
+  </div>
+  <div class="tbox" style="margin-top:16px"><table class="t">
+    <thead><tr><th>Что</th><th>Цена</th></tr></thead>
+    <tbody>
+      <tr><td>Сегодняшнее окошко</td><td><span class="pill p-green">бесплатно</span></td></tr>
+      <tr><td>Простая игрушка: шар, колокольчик, бантик, шишка, сердечко</td><td><span class="pill p-coin">🪙 1</span></td></tr>
+      <tr><td>Красивее: звёздочка, candy cane, снежинка, пряник, носок, подарок, снеговик, олень, варежка</td><td><span class="pill p-coin">🪙 2</span></td></tr>
+      <tr><td>Кусочек гирлянды или мишуры (вешается отрезком)</td><td><span class="pill p-coin">🪙 2</span></td></tr>
+      <tr><td>Пропущенное окошко</td><td><span class="pill p-coin">🪙 5</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="hint" style="margin-top:10px">Списание идёт той же записью, что колесо и сундучок, — в кабинете отражается как обычная трата. Цифры — по базе за последние 60 дней.</p>
+</section>
+
+<section class="sl" id="who">
+  <div class="eyebrow">Аудитория</div>
+  <h2>Кто увидит календарь</h2>
+  <p class="lead">621 активный ученик (начисления монеток за последние 60 дней). Возраст на 1 декабря — по дате рождения, она есть у 611; у остальных — по программе.</p>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card"><span class="pill p-pink">4–6 лет · Wow Dragon</span><div class="big">111</div><p>ещё не читают: на карточке крупно картинка и звук</p></div>
+    <div class="card"><span class="pill p-violet">7–9 лет · Super Minds</span><div class="big">218</div><p>эта версия: слово, звук, перевод</p></div>
+    <div class="card"><span class="pill p-violet">10–12 лет · Go Getter</span><div class="big">205</div><p>то же, можно добавить короткую фразу</p></div>
+    <div class="card"><span class="pill p-green">13+ · Prepare, English File, Spotlight</span><div class="big">82</div><p>подросткам может показаться детским — решить, показывать ли</p></div>
+  </div>
+  <p class="hint" style="margin-top:10px">Ещё 5 учеников без даты рождения и без понятной программы — им по умолчанию версия 7–9. Если решим делать одну версию на всех, подойдёт эта: картинки и звук понятны и малышам, и подросткам.</p>
+</section>
+
+<section class="sl" id="risks">
+  <div class="eyebrow">Мелочи</div>
+  <h2>Что продумано заранее</h2>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card"><h3>Ёлка не теряется</h3><ul class="check">
+      <li><b>Каждое действие сохраняется сразу</b> на сервере: повесил, передвинул, убрал.</li>
+      <li><b>Убрать игрушку</b> — перетащить обратно в сундук, она не пропадает. Удалить насовсем нельзя.</li>
+      <li><b>«Убрать всё в сундук»</b> — одна кнопка с подтверждением, если хочется начать украшать заново.</li>
+      <li><b>Положение игрушек в процентах</b> — ёлка выглядит одинаково на телефоне и на компьютере.</li>
+    </ul></div>
+    <div class="card"><h3>Окошки и монетки честные</h3><ul class="check">
+      <li><b>День считает сервер</b> по московскому времени — перевод часов на телефоне ничего не даст.</li>
+      <li><b>Монетки списываются на сервере</b>, двойное нажатие не спишет дважды; не хватает — кнопка не нажимается и пишет, сколько нужно.</li>
+      <li><b>Две вкладки сразу</b> — сохранится последнее действие, ничего не задвоится.</li>
+      <li><b>Пропущенные дни</b> — за 5 монеток, бесплатное сегодняшнее окошко тратится первым.</li>
+    </ul></div>
+    <div class="card"><h3>Картинки и звук</h3><ul class="check">
+      <li><b>Картинки без фона</b>, лёгкие (webp, до 40 КБ), грузятся заранее при входе на страницу.</li>
+      <li><b>Звук — записи, а не голос браузера</b>: одинаковый на всех телефонах.</li>
+      <li><b>Медленная сеть</b> — игрушка сразу на ёлке, сохранение догоняет; не сохранилось — повтор и подсказка.</li>
+      <li><b>Перетаскивание пальцем</b> на телефоне и планшете, как в «Разложи по корзинам» в домашках.</li>
+    </ul></div>
+    <div class="card"><h3>После декабря и вокруг</h3><ul class="check">
+      <li><b>В январе</b> ёлка остаётся на память, окошки закрыты; кнопку убираем в середине января.</li>
+      <li><b>Братья и сёстры</b> — у каждого своя ёлка: всё привязано к ученику, а не к родителю.</li>
+      <li><b>Преподаватели рассказывают</b> на уроке 1–3 декабря, текст для них подготовим.</li>
+      <li><b>Не мешает урокам:</b> календарь — отдельная страница, кабинет просто показывает кнопку.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="sl" id="plan">
+  <div class="eyebrow">Сроки</div>
+  <h2>Что нужно, чтобы запуститься 1 декабря</h2>
+  <div class="tbox" style="margin-top:16px"><table class="t">
+    <thead><tr><th>Задача</th><th>Кто</th><th>Срок</th></tr></thead>
+    <tbody>
+      <tr><td>Решение руководства, список слов и цены</td><td>руководство, Анна</td><td class="n">24.11</td></tr>
+      <tr><td>Картинки: 27 украшений, 3 ёлки, звезда, окошки, фон — без фона</td><td>Анна по готовым промптам</td><td class="n">готово 23.11, осталось 6 украшений</td></tr>
+      <tr><td>Озвучка 31 слова</td><td>мы</td><td class="n">26.11</td></tr>
+      <tr><td>База: окошки, сундук, ёлка, покупки, проверка дня</td><td>мы</td><td class="n">25–27.11</td></tr>
+      <tr><td>Страница календаря: окошки, сундук, ёлка, магазин</td><td>мы</td><td class="n">26–28.11</td></tr>
+      <tr><td>Кнопка 🎄 в кабинете ученика</td><td>разработчик кабинета</td><td class="n">≈ полдня, до 29.11</td></tr>
+      <tr><td>Проверка на телефоне и компьютере, текст для преподавателей</td><td>мы, Анна</td><td class="n">29–30.11</td></tr>
+      <tr><td>Запуск</td><td></td><td class="n">1.12</td></tr>
+    </tbody>
+  </table></div>
+  <p class="hint" style="margin-top:10px">Если сроки поджимают: 1 декабря запускаем календарь, сундук и ёлку, магазин добавляем к 5 декабря — в первую неделю дети и так собирают украшения из окошек.</p>
+</section>
+
+<footer>Макет для обсуждения, 23.11.2026. Цифры по ученикам и монеткам — из базы платформы.</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ───────── картинки-заглушки (SVG); в настоящей версии — 3D webp без фона ───────── */
+function ball(c,c2){return '<svg viewBox="0 0 100 100"><rect x="42" y="6" width="16" height="12" rx="3" fill="#C9A24A"/><path d="M50 6 q0 -6 6 -4" stroke="#8A6A20" stroke-width="3" fill="none"/><circle cx="50" cy="58" r="38" fill="'+c+'"/><path d="M16 52 q34 14 68 0" stroke="'+c2+'" stroke-width="7" fill="none" opacity=".75"/><circle cx="36" cy="44" r="9" fill="#fff" opacity=".45"/></svg>';}
+function star(c){return '<svg viewBox="0 0 100 100"><path d="M50 6l12 28 30 2-23 19 8 30-27-16-27 16 8-30L8 36l30-2z" fill="'+c+'" stroke="#B9831E" stroke-width="3" stroke-linejoin="round"/><circle cx="40" cy="36" r="6" fill="#fff" opacity=".5"/></svg>';}
+function bell(){return '<svg viewBox="0 0 100 100"><path d="M50 12c-18 0-26 16-26 34v18l-8 10h68l-8-10V46c0-18-8-34-26-34z" fill="#F2B632" stroke="#B9831E" stroke-width="3"/><circle cx="50" cy="80" r="8" fill="#B9831E"/><path d="M36 26 q-6 10 -6 22" stroke="#fff" stroke-width="5" opacity=".5" fill="none" stroke-linecap="round"/><path d="M40 10 q10-8 20 0" stroke="#D9445B" stroke-width="6" fill="none"/></svg>';}
+function cane(){return '<svg viewBox="0 0 100 100"><path d="M60 92V36a14 14 0 0 0-28 0" stroke="#fff" stroke-width="14" fill="none" stroke-linecap="round"/><path d="M60 92V36a14 14 0 0 0-28 0" stroke="#E23B4E" stroke-width="14" fill="none" stroke-linecap="round" stroke-dasharray="8 9"/></svg>';}
+function flake(){var s='<svg viewBox="0 0 100 100"><g stroke="#BFE3FF" stroke-width="6" stroke-linecap="round" fill="none">';for(var i=0;i<6;i++){s+='<g transform="rotate('+(i*60)+' 50 50)"><path d="M50 50V10"/><path d="M50 24l-9-9M50 24l9-9"/></g>';}return s+'</g><circle cx="50" cy="50" r="7" fill="#fff"/></svg>';}
+function ginger(){return '<svg viewBox="0 0 100 100"><g fill="#C97B3C" stroke="#8C4F1F" stroke-width="2"><circle cx="50" cy="24" r="15"/><rect x="34" y="36" width="32" height="34" rx="12"/><rect x="14" y="40" width="26" height="12" rx="6"/><rect x="60" y="40" width="26" height="12" rx="6"/><rect x="34" y="62" width="12" height="28" rx="6"/><rect x="54" y="62" width="12" height="28" rx="6"/></g><g fill="#fff"><circle cx="44" cy="22" r="2.6"/><circle cx="56" cy="22" r="2.6"/><circle cx="50" cy="46" r="3"/><circle cx="50" cy="57" r="3"/></g><path d="M43 29 q7 5 14 0" stroke="#fff" stroke-width="2.5" fill="none"/></svg>';}
+function bow(){return '<svg viewBox="0 0 100 100"><g fill="#E23B4E" stroke="#A3192C" stroke-width="2.5"><path d="M50 50 L14 26 Q6 50 14 72 Z"/><path d="M50 50 L86 26 Q94 50 86 72 Z"/><path d="M46 52 L30 92 L40 88 L46 96 L50 56Z"/><path d="M54 52 L70 92 L60 88 L54 96 L50 56Z"/></g><circle cx="50" cy="50" r="10" fill="#C42438"/></svg>';}
+function cone(){return '<svg viewBox="0 0 100 100"><path d="M50 12 C76 30 78 62 50 92 C22 62 24 30 50 12Z" fill="#9A6235" stroke="#5E3A1C" stroke-width="3"/><g stroke="#5E3A1C" stroke-width="3" fill="none"><path d="M34 40 q16 8 32 0"/><path d="M30 56 q20 9 40 0"/><path d="M34 72 q16 8 32 0"/></g><path d="M50 12 v-6" stroke="#3E7A3A" stroke-width="5"/></svg>';}
+function heart(){return '<svg viewBox="0 0 100 100"><path d="M50 88 C10 60 8 34 26 24 C38 18 48 26 50 34 C52 26 62 18 74 24 C92 34 90 60 50 88Z" fill="#F7628C" stroke="#C93D66" stroke-width="3"/><circle cx="34" cy="38" r="7" fill="#fff" opacity=".45"/></svg>';}
+function stocking(){return '<svg viewBox="0 0 100 100"><path d="M34 10h34v46c0 18-10 32-30 32-12 0-20-8-20-16 0-10 10-14 16-16z" fill="#E23B4E" stroke="#A3192C" stroke-width="3"/><rect x="30" y="8" width="42" height="16" rx="6" fill="#fff" stroke="#DDD" stroke-width="2"/></svg>';}
+function present(){return '<svg viewBox="0 0 100 100"><rect x="14" y="36" width="72" height="56" rx="6" fill="#6A4DF4"/><rect x="10" y="26" width="80" height="16" rx="5" fill="#8B74FF"/><rect x="44" y="26" width="12" height="66" fill="#FFC83D"/><path d="M50 26 C34 4 22 22 50 26 C78 22 66 4 50 26Z" fill="#FFC83D" stroke="#C99A1D" stroke-width="2"/></svg>';}
+function snowman(){return '<svg viewBox="0 0 100 100"><circle cx="50" cy="70" r="24" fill="#fff" stroke="#C9D6F0" stroke-width="3"/><circle cx="50" cy="34" r="17" fill="#fff" stroke="#C9D6F0" stroke-width="3"/><rect x="36" y="10" width="28" height="10" rx="3" fill="#2B2140"/><rect x="40" y="2" width="20" height="12" rx="3" fill="#2B2140"/><path d="M50 36 l14 4 -14 2z" fill="#F08A24"/><circle cx="44" cy="30" r="2.5" fill="#2B2140"/><circle cx="56" cy="30" r="2.5" fill="#2B2140"/><path d="M34 48 q16 8 32 0" stroke="#E23B4E" stroke-width="6" fill="none"/></svg>';}
+function deer(){return '<svg viewBox="0 0 100 100"><g stroke="#7A4A22" stroke-width="5" stroke-linecap="round" fill="none"><path d="M36 30 L26 10 M30 20 L18 18 M64 30 L74 10 M70 20 L82 18"/></g><ellipse cx="50" cy="52" rx="20" ry="24" fill="#B07240"/><ellipse cx="30" cy="38" rx="8" ry="5" fill="#B07240"/><ellipse cx="70" cy="38" rx="8" ry="5" fill="#B07240"/><ellipse cx="50" cy="66" rx="12" ry="9" fill="#E8C49A"/><circle cx="50" cy="62" r="7" fill="#E23B4E"/><circle cx="42" cy="46" r="3" fill="#2B2140"/><circle cx="58" cy="46" r="3" fill="#2B2140"/></svg>';}
+function mitten(){return '<svg viewBox="0 0 100 100"><path d="M34 84V40c0-18 10-28 22-28s18 10 18 22v14l8-8c6-6 14 2 8 8L72 70v14z" fill="#3E9BEA" stroke="#1F6DB0" stroke-width="3"/><rect x="30" y="76" width="46" height="16" rx="6" fill="#fff" stroke="#DDE" stroke-width="2"/><circle cx="52" cy="44" r="5" fill="#fff"/></svg>';}
+function garland(){var s='<svg viewBox="0 0 300 100"><path d="M8 20 Q150 110 292 20" stroke="#3F6B2E" stroke-width="5" fill="none"/>';var cs=['#FF5A6E','#FFC83D','#5CC8FF','#8EE06A','#C78BFF'];for(var i=1;i<10;i++){var t=i/10,x=8+284*t,y=20+2*(1-t)*t*90;s+='<circle cx="'+x.toFixed(1)+'" cy="'+(y+8).toFixed(1)+'" r="9" fill="'+cs[i%5]+'"/>';}return s+'</svg>';}
+function lights(){var s='<svg viewBox="0 0 300 100"><path d="M8 20 Q150 100 292 20" stroke="#2B2140" stroke-width="3" fill="none"/>';var cs=['#FFE066','#FF8FA3','#8FD3FF','#B9F18B'];for(var i=1;i<12;i++){var t=i/12,x=8+284*t,y=20+2*(1-t)*t*80;s+='<ellipse cx="'+x.toFixed(1)+'" cy="'+(y+10).toFixed(1)+'" rx="6" ry="9" fill="'+cs[i%4]+'"/><circle cx="'+x.toFixed(1)+'" cy="'+(y+10).toFixed(1)+'" r="14" fill="'+cs[i%4]+'" opacity=".25"/>';}return s+'</svg>';}
+function tinsel(){var s='<svg viewBox="0 0 300 100"><g stroke="#E6C04A" stroke-width="3">';for(var i=0;i<60;i++){var t=i/60,x=8+284*t,y=20+2*(1-t)*t*90;s+='<path d="M'+x.toFixed(1)+' '+(y-8).toFixed(1)+' l'+(i%2?6:-6)+' 18"/>';}return s+'</g></svg>';}
+function icicle(){return '<svg viewBox="0 0 100 100"><path d="M30 10h40L54 92z" fill="#CFEFFF" stroke="#8CCBEA" stroke-width="3"/><path d="M40 16l10 50" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".8"/></svg>';}
+function sweet(){return '<svg viewBox="0 0 100 100"><path d="M26 50L6 34v32zM74 50l20-16v32z" fill="#F7628C"/><ellipse cx="50" cy="50" rx="26" ry="20" fill="#FF8FB0"/><path d="M34 40q16 20 32 0" stroke="#fff" stroke-width="5" fill="none"/></svg>';}
+function angel(){return '<svg viewBox="0 0 100 100"><ellipse cx="50" cy="12" rx="14" ry="5" fill="none" stroke="#FFD43B" stroke-width="4"/><path d="M50 40C30 20 8 32 14 58c14-2 26-8 36-18zM50 40c20-20 42-8 36 18-14-2-26-8-36-18z" fill="#E6F2FF" stroke="#B9D4F2" stroke-width="2"/><circle cx="50" cy="30" r="11" fill="#F6D2B5"/><path d="M36 90l14-50 14 50z" fill="#fff" stroke="#DDE" stroke-width="2"/></svg>';}
+function cracker(){return '<svg viewBox="0 0 100 100"><rect x="28" y="38" width="44" height="24" rx="6" fill="#1F8F62"/><path d="M28 40L8 30v40l20-10zM72 40l20-10v40L72 60z" fill="#E23B4E"/><path d="M40 38v24M60 38v24" stroke="#FFC83D" stroke-width="4"/></svg>';}
+function clock(){return '<svg viewBox="0 0 100 100"><circle cx="50" cy="52" r="38" fill="#FFD43B" stroke="#C99A1D" stroke-width="4"/><circle cx="50" cy="52" r="30" fill="#fff"/><path d="M50 52V28M50 52l14 0" stroke="#2B2140" stroke-width="5" stroke-linecap="round"/><circle cx="50" cy="12" r="5" fill="#C99A1D"/></svg>';}
+function topstar(){return '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFE27A" opacity=".35"/><path d="M50 4l13 30 32 2-25 20 9 32-29-18-29 18 9-32L5 36l32-2z" fill="#FFD43B" stroke="#C99A1D" stroke-width="3" stroke-linejoin="round"/></svg>';}
+var IMG={};['red_ball','blue_ball','green_ball','gold_ball','purple_ball','bell','star','candy_cane','snowflake','gingerbread','bow','pine_cone','garland','fairy_lights','tinsel','tree_pine','tree_gold','tree_snowy','heart','stocking','present','snowman','reindeer','mitten','top_star','silver_ball','icicle','sweet','angel','cracker','clock','gift1','gift2','gift3','gift4','gift5','gift6'].forEach(function(k){IMG[k]='img/'+k+'.webp';});
+function pic(k){return '<img src="'+IMG[k]+'" alt="" draggable="false">';}
+function tree(kind){
+  if(IMG['tree_'+kind])return pic('tree_'+kind);
+  var c1={pine:'#2F9E5B',snowy:'#2C8C67',gold:'#E0B43A'}[kind], c2={pine:'#23804A',snowy:'#226F52',gold:'#C49622'}[kind];
+  var snow=kind==='snowy'?'<g fill="#fff" opacity=".95"><path d="M50 8 l14 22 q-14 6 -28 0z"/><path d="M36 44 q14 8 28 0 l10 12 q-24 8 -48 0z"/><path d="M28 72 q22 10 44 0 l12 14 q-34 10 -68 0z"/></g>':'';
+  return '<svg viewBox="0 0 100 120"><rect x="43" y="98" width="14" height="16" rx="2" fill="#7A4A22"/><path d="M50 4 L82 46 H66 L90 76 H70 L96 102 H4 L30 76 H10 L34 46 H18 Z" fill="'+c1+'" stroke="'+c2+'" stroke-width="2.5" stroke-linejoin="round"/>'+snow+'</svg>';
+}
+function door(i){return pic('gift'+(i%6+1));}
+function doorOpen(it){return '<span class="dopen">'+art(it)+'</span>';}
+function inner(svg){return svg.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');}
+
+/* ───────── каталог: 31 окошко в порядке выпадения ───────── */
+var ITEMS=[
+ {k:'tree_pine',w:'Christmas tree',t:'ёлка',kind:'tree',tree:'pine'},
+ {k:'red_ball',w:'red ball',t:'красный шар',p:1,draw:function(){return ball('#E23B4E','#FFC83D');}},
+ {k:'star',w:'star',t:'звезда',p:2,draw:function(){return star('#FFD43B');}},
+ {k:'bell',w:'bell',t:'колокольчик',p:1,draw:bell},
+ {k:'garland',w:'garland',t:'гирлянда',p:2,wide:true,draw:garland},
+ {k:'candy_cane',w:'candy cane',t:'леденец-тросточка',p:2,draw:cane},
+ {k:'snowflake',w:'snowflake',t:'снежинка',p:2,draw:flake},
+ {k:'blue_ball',w:'blue ball',t:'синий шар',p:1,draw:function(){return ball('#3E9BEA','#fff');}},
+ {k:'gingerbread',w:'gingerbread man',t:'пряничный человечек',p:2,draw:ginger},
+ {k:'bow',w:'bow',t:'бантик',p:1,draw:bow},
+ {k:'fairy_lights',w:'fairy lights',t:'гирлянда-огоньки',p:2,wide:true,draw:lights},
+ {k:'pine_cone',w:'pine cone',t:'шишка',p:1,draw:cone},
+ {k:'green_ball',w:'green ball',t:'зелёный шар',p:1,draw:function(){return ball('#46B85A','#FFC83D');}},
+ {k:'stocking',w:'stocking',t:'новогодний носок',p:2,draw:stocking},
+ {k:'present',w:'present',t:'подарок',p:2,draw:present},
+ {k:'tree_snowy',w:'snowy tree',t:'заснеженная ёлка',kind:'tree',tree:'snowy'},
+ {k:'gold_ball',w:'gold ball',t:'золотой шар',p:1,draw:function(){return ball('#E8B930','#fff');}},
+ {k:'tinsel',w:'tinsel',t:'мишура',p:2,wide:true,draw:tinsel},
+ {k:'heart',w:'heart',t:'сердечко',p:1,draw:heart},
+ {k:'snowman',w:'snowman',t:'снеговик',p:2,draw:snowman},
+ {k:'silver_ball',w:'silver ball',t:'серебряный шар',p:1,draw:function(){return ball('#C9CED8','#fff');}},
+ {k:'icicle',w:'icicle',t:'сосулька',p:1,draw:icicle},
+ {k:'reindeer',w:'reindeer',t:'олень',p:2,draw:deer},
+ {k:'purple_ball',w:'purple ball',t:'фиолетовый шар',p:1,draw:function(){return ball('#8A5CF6','#F7628C');}},
+ {k:'sweet',w:'sweet',t:'конфета',p:1,draw:sweet},
+ {k:'mitten',w:'mitten',t:'варежка',p:2,draw:mitten},
+ {k:'angel',w:'angel',t:'ангел',p:2,draw:angel},
+ {k:'tree_gold',w:'golden tree',t:'золотая ёлка',kind:'tree',tree:'gold'},
+ {k:'cracker',w:'cracker',t:'хлопушка',p:2,draw:cracker},
+ {k:'clock',w:'clock',t:'часы',p:2,draw:clock},
+ {k:'top_star',w:'tree topper',t:'звезда на макушку',top:true,draw:topstar}
+];
+var DAYS=ITEMS.length;
+function art(it){if(IMG[it.k])return pic(it.k);return it.kind==='tree'?tree(it.tree):it.draw();}
+function byK(k){for(var i=0;i<ITEMS.length;i++)if(ITEMS[i].k===k)return ITEMS[i];return null;}
+
+/* ───────── состояние (в макете — в браузере; в настоящей версии — на сервере) ───────── */
+var KEY='advent-demo-v2', S;
+function fresh(){
+  var s={day:7,coins:52,opened:{},chest:{},placed:[],tree:'pine',view:'home',tab:'cal'};
+  // показ: открыты дни 1–5, 6-й пропущен, 7-й (сегодня) ещё не открыт
+  for(var d=1;d<=5;d++){var it=ITEMS[d-1];s.opened[d]={k:it.k,door:[3,11,17,8,21][d-1]};if(it.kind!=='tree')s.chest[it.k]=1;}
+  s.placed=[{id:1,k:'red_ball',x:40,y:58},{id:2,k:'star',x:58,y:40}];s.chest.red_ball=0;s.chest.star=0;
+  return s;
+}
+function load(){try{var r=localStorage.getItem(KEY);if(r){S=JSON.parse(r);return;}}catch(e){} S=fresh();}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+load();
+
+var $=function(id){return document.getElementById(id);};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function openedCount(){return Object.keys(S.opened).length;}
+function freeToday(){return !S.opened[S.day];}
+function missed(){var m=[];for(var d=1;d<S.day;d++)if(!S.opened[d])m.push(d);return m;}
+
+/* звук: в макете — голос браузера; в настоящей версии — записи */
+function say(w){try{var u=new SpeechSynthesisUtterance(w);u.lang='en-GB';u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+var tt;function toast(m){var el=document.querySelector('.toast');if(!el){el=document.createElement('div');el.className='toast';document.body.appendChild(el);}el.textContent=m;el.hidden=false;clearTimeout(tt);tt=setTimeout(function(){el.hidden=true;},2200);}
+function setCoins(n){S.coins=n;var c=$('coins');c.textContent='🪙 '+n;c.classList.add('bump');setTimeout(function(){c.classList.remove('bump');},220);}
+
+/* ───────── рендер ───────── */
+function render(){
+  $('coins').textContent='🪙 '+S.coins;
+  [].forEach.call(document.querySelectorAll('#cabNav button'),function(b,i){b.classList.toggle('on',(S.view==='advent')===(b.dataset.v==='advent')&&(S.view==='advent'||i===0));});
+  var body=$('cabBody');
+  if(S.view==='home'){body.innerHTML=homeHtml();var a=$('advCard');a.onclick=a.onkeydown=function(e){if(e.type==='keydown'&&e.key!=='Enter'&&e.key!==' ')return;e.preventDefault();S.view='advent';S.tab='cal';save();render();};return;}
+  body.innerHTML='<div class="adv-head"><button type="button" class="back" id="back">← Кабинет</button><div class="tabs">'+
+    tab('cal','🗓 Календарь')+tab('tree','🎄 Моя ёлка')+tab('shop','🛍 Магазин')+'</div></div><div id="advBody"></div>';
+  $('back').onclick=function(){S.view='home';save();render();};
+  [].forEach.call(body.querySelectorAll('.tabs button'),function(b){b.onclick=function(){S.tab=b.dataset.t;save();render();};});
+  if(S.tab==='cal')renderCal();else if(S.tab==='tree')renderTree();else renderShop();
+}
+function tab(t,l){return '<button type="button" data-t="'+t+'" class="'+(S.tab===t?'on':'')+'">'+l+'</button>';}
+function homeHtml(){
+  var newBadge=freeToday()?'<span class="new">Новое окошко!</span>':'<span class="pill p-green">Сегодня открыто ✓</span>';
+  return '<div class="home">'+
+   '<div class="hc adv" id="advCard" role="button" tabindex="0"><h3>🎄 Адвент-календарь</h3><div class="sub">Открой окошко и укрась ёлку</div>'+newBadge+
+   '<div class="tree-ico">'+tree(S.tree)+'</div></div>'+
+   '<div class="hc"><h3>📚 Домашка</h3><div class="sub">Unit 3 · Homework 4</div><span class="pill p-pink">🔥 Сделать сегодня</span></div>'+
+   '<div class="hc"><h3>🎡 Колесо удачи</h3><div class="sub">Крути колесо и выигрывай призы</div><span class="pill p-coin">🪙 30</span></div>'+
+   '<div class="hc"><h3>📅 Следующий урок</h3><div class="sub">Среда, 17:00 · Super Minds 2</div><span class="pill p-violet">⏰ Через 2 дня</span></div>'+
+  '</div>';
+}
+
+/* позиции значков: россыпь по сцене, без цифр */
+var POS=(function(){var rows=[7,6,7,6,5],ys=[14,31,48,65,82],o=[],j=[0,3,-2,4,-3,2,-1];rows.forEach(function(n,ri){for(var c=0;c<n;c++){var last=ri===rows.length-1;var x=last?(c+0.5)/n*80+10:(c+0.5)/n*100*(n<7?0.86:0.94)+(n<7?7:3);o.push([x,last?86:ys[ri]+j[(c+ri)%7]]);}});return o;})();
+function renderCal(){
+  var doorUsed={};Object.keys(S.opened).forEach(function(d){doorUsed[S.opened[d].door]=S.opened[d].k;});
+  var h='<div class="scene"><div class="snowfall"></div>';
+  for(var i=0;i<DAYS;i++){var p=POS[i];var k=doorUsed[i];
+    h+='<button type="button" class="door'+(k?' open':'')+'" data-i="'+i+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-label="'+(k?esc(byK(k).w):'Окошко')+'">'+(k?doorOpen(byK(k)):door(i))+'</button>';}
+  h+='</div><div class="cal-bar" id="calBar"></div>';
+  $('advBody').innerHTML=h;
+  var m=missed(), n=openedCount(), bar;
+  if(n>=DAYS) bar='<span class="msg">Все 31 окошко открыто! С Новым годом! 🎉</span>';
+  else if(freeToday()) bar='<span class="pill p-green">Сегодня: 1 окошко бесплатно</span>'+(m.length?'<span class="msg">Пропущено дней: '+m.length+' — открываются за 🪙 5</span>':'')+'<span class="msg">Нажми на любой подарок</span>';
+  else if(m.length) bar='<span class="msg">Сегодняшнее окошко открыто. Пропущенных дней: '+m.length+' — каждое за 🪙 5</span>';
+  else bar='<span class="msg">Сегодняшнее окошко открыто. Новое — завтра! ⭐</span>';
+  $('calBar').innerHTML=bar;
+  [].forEach.call(document.querySelectorAll('.door'),function(b){b.onclick=function(){
+    var i=+b.dataset.i;var k=doorUsed[i];
+    if(k){var it=byK(k);say(it.w);toast(it.w+' — '+it.t);return;}
+    tryOpen(i);
+  };});
+}
+function tryOpen(i){
+  if(openedCount()>=DAYS)return;
+  var d,cost=0;
+  if(freeToday())d=S.day;
+  else{var m=missed();if(!m.length){toast('Новое окошко откроется завтра ⭐');return;}d=m[0];cost=5;}
+  if(cost){confirmBox('Открыть пропущенный '+d+' декабря за 🪙 5?',function(){if(S.coins<5){toast('Нужно 5 монеток, у тебя '+S.coins);return;}setCoins(S.coins-5);doOpen(i,d);});return;}
+  doOpen(i,d);
+}
+function doOpen(i,d){
+  var it=ITEMS[openedCount()];   // что внутри — по порядку месяца, а не по значку
+  S.opened[d]={k:it.k,door:i};
+  if(it.kind==='tree'){S.tree=it.tree;} else S.chest[it.k]=(S.chest[it.k]||0)+1;
+  save();renderCal();wordCard(it,it.kind==='tree'?'Поставить ёлку':'В сундук');
+}
+function wordCard(it,btn){
+  var m=document.createElement('div');m.className='modal';
+  m.innerHTML='<div class="mcard" role="dialog" aria-label="'+esc(it.w)+'"><div class="eyebrow">Новое украшение!</div><div class="art">'+art(it)+'</div>'+
+   '<div class="word">'+esc(it.w)+'<button type="button" class="say" aria-label="Послушать">🔊</button></div><div class="trn">'+esc(it.t)+'</div>'+
+   '<button type="button" class="btn pink" id="mOk">'+btn+'</button></div>';
+  document.body.appendChild(m);say(it.w);
+  m.querySelector('.say').onclick=function(){say(it.w);};
+  var close=function(){m.remove();};
+  m.querySelector('#mOk').onclick=close;m.onclick=function(e){if(e.target===m)close();};
+  m.querySelector('#mOk').focus();
+}
+function confirmBox(text,yes){
+  var m=document.createElement('div');m.className='modal';
+  m.innerHTML='<div class="mcard"><h3>'+text+'</h3><div style="display:flex;gap:8px"><button type="button" class="btn" id="cY">Да</button><button type="button" class="btn ghost" id="cN">Нет</button></div></div>';
+  document.body.appendChild(m);
+  m.querySelector('#cY').onclick=function(){m.remove();yes();};m.querySelector('#cN').onclick=function(){m.remove();};
+}
+
+/* ───────── ёлка и сундук ───────── */
+function renderTree(){
+  var trees=['pine','snowy','gold'], has={pine:true};Object.keys(S.opened).forEach(function(d){var it=byK(S.opened[d].k);if(it.kind==='tree')has[it.tree]=true;});
+  var chestKeys=ITEMS.filter(function(it){return it.kind!=='tree'&&S.chest[it.k]!==undefined;});
+  var h='<div class="treebox"><div class="treearea" id="treeArea"><div class="treesvg">'+tree(S.tree)+'</div></div>'+
+   '<div class="chest"><h3>🧰 Мой сундук</h3><p class="hint">Перетащи украшение на ёлку. Нажми — услышишь слово.</p><div class="chest-grid" id="chestGrid">';
+  if(!chestKeys.length)h+='<p class="hint">Пока пусто — открой окошко в календаре.</p>';
+  chestKeys.forEach(function(it){var c=S.chest[it.k]||0;h+='<div class="slot'+(c?'':' empty')+'" data-k="'+it.k+'" tabindex="0" aria-label="'+esc(it.w)+', '+c+' шт.">'+art(it)+'<span class="cnt">'+c+'</span></div>';});
+  h+='</div><h3>Ёлка</h3><div class="trees-pick">';
+  trees.forEach(function(t){h+='<button type="button" data-tree="'+t+'" class="'+(S.tree===t?'on':'')+'" '+(has[t]?'':'disabled title="Выпадет в календаре"')+'>'+tree(t)+'</button>';});
+  h+='</div><button type="button" class="btn ghost" id="allBack">Убрать всё в сундук</button></div></div>';
+  $('advBody').innerHTML=h;
+  var area=$('treeArea');
+  S.placed.forEach(function(pl){addPlaced(area,pl);});
+  [].forEach.call(document.querySelectorAll('.trees-pick button'),function(b){b.onclick=function(){S.tree=b.dataset.tree;save();renderTree();};});
+  $('allBack').onclick=function(){if(!S.placed.length)return;confirmBox('Убрать все украшения с ёлки обратно в сундук?',function(){S.placed.forEach(function(p){S.chest[p.k]=(S.chest[p.k]||0)+1;});S.placed=[];save();renderTree();});};
+  [].forEach.call(document.querySelectorAll('.slot'),function(sl){
+    var it=byK(sl.dataset.k);
+    dragify(sl,{
+      start:function(){return (S.chest[it.k]||0)>0;},
+      ghost:art(it),
+      tap:function(){say(it.w);toast(it.w+' — '+it.t);},
+      drop:function(x,y){var r=area.getBoundingClientRect();if(x<r.left||x>r.right||y<r.top||y>r.bottom)return;
+        var pl={id:Date.now(),k:it.k,x:clamp((x-r.left)/r.width*100),y:clamp((y-r.top)/r.height*100)};
+        if(it.top){S.placed=S.placed.filter(function(p){if(byK(p.k).top){S.chest[p.k]=(S.chest[p.k]||0)+1;return false;}return true;});pl.x=50;pl.y=8;}
+        S.chest[it.k]--;S.placed.push(pl);save();renderTree();say(it.w);}
+    });
+    sl.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();say(it.w);toast(it.w+' — '+it.t);}};
+  });
+}
+function clamp(v){return Math.max(4,Math.min(96,v));}
+function addPlaced(area,pl){
+  var it=byK(pl.k);var el=document.createElement('div');
+  el.className='placed'+(it.wide?' wide':'');el.style.left=pl.x+'%';el.style.top=pl.y+'%';el.innerHTML=art(it);el.setAttribute('aria-label',it.w);
+  area.appendChild(el);
+  var chest=$('chestGrid');
+  dragify(el,{
+    start:function(){return true;},move:true,
+    tap:function(){say(it.w);toast(it.w+' — '+it.t);},
+    drop:function(x,y){var r=area.getBoundingClientRect();
+      if(x<r.left||x>r.right||y<r.top||y>r.bottom){ // за ёлку — обратно в сундук
+        S.placed=S.placed.filter(function(p){return p.id!==pl.id;});S.chest[pl.k]=(S.chest[pl.k]||0)+1;save();renderTree();toast(it.w+' — в сундуке');return;}
+      pl.x=clamp((x-r.left)/r.width*100);pl.y=clamp((y-r.top)/r.height*100);if(it.top){pl.x=50;pl.y=8;}save();renderTree();}
+  });
+}
+/* перетаскивание пальцем и мышью: Pointer Events, призрак у курсора */
+function dragify(el,o){
+  el.addEventListener('pointerdown',function(e){
+    if(e.button>0)return;var sx=e.clientX,sy=e.clientY,moved=false,g=null;
+    try{el.setPointerCapture(e.pointerId);}catch(_){}
+    function mv(ev){
+      if(!moved&&Math.hypot(ev.clientX-sx,ev.clientY-sy)<6)return;
+      if(!moved){if(!o.start())return;moved=true;
+        if(o.move){el.classList.add('dragging');}else{g=document.createElement('div');g.className='ghost-drag';g.innerHTML=o.ghost;document.body.appendChild(g);}}
+      if(o.move){var r=el.parentNode.getBoundingClientRect();el.style.left=((ev.clientX-r.left)/r.width*100)+'%';el.style.top=((ev.clientY-r.top)/r.height*100)+'%';}
+      else{g.style.left=ev.clientX+'px';g.style.top=ev.clientY+'px';}
+    }
+    function up(ev){el.removeEventListener('pointermove',mv);el.removeEventListener('pointerup',up);el.removeEventListener('pointercancel',up);
+      if(g)g.remove();el.classList.remove('dragging');
+      if(!moved){o.tap();return;}o.drop(ev.clientX,ev.clientY);}
+    el.addEventListener('pointermove',mv);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);
+  });
+}
+
+/* ───────── магазин ───────── */
+function renderShop(){
+  var got={};Object.keys(S.opened).forEach(function(d){got[S.opened[d].k]=true;});
+  var h='<p class="hint" style="margin-bottom:10px">Докупить можно только то, что уже выпало в календаре. Нажми на картинку — услышишь слово.</p><div class="shop">';
+  ITEMS.forEach(function(it){if(it.kind==='tree'||it.top)return;var ok=got[it.k];
+    h+='<div class="sh'+(ok?'':' locked')+'"><div class="pic" data-k="'+it.k+'">'+art(it)+'</div>'+
+      (ok?'<div class="w">'+esc(it.w)+'</div><div class="tr">'+esc(it.t)+'</div><button type="button" class="btn" data-buy="'+it.k+'">Купить · 🪙 '+it.p+'</button>':'<div class="w">???</div><div class="lock">🔒 откроется в календаре</div>')+'</div>';});
+  $('advBody').innerHTML=h+'</div>';
+  [].forEach.call(document.querySelectorAll('.sh .pic'),function(p){p.onclick=function(){if(!got[p.dataset.k])return;var it=byK(p.dataset.k);say(it.w);toast(it.w+' — '+it.t);};});
+  [].forEach.call(document.querySelectorAll('[data-buy]'),function(b){b.onclick=function(){var it=byK(b.dataset.buy);
+    if(S.coins<it.p){toast('Нужно '+it.p+' 🪙, у тебя '+S.coins);return;}
+    setCoins(S.coins-it.p);S.chest[it.k]=(S.chest[it.k]||0)+1;save();toast(it.w+' — в сундуке! 🧰');};});
+}
+
+/* ───────── таблица слов, переключатель дня ───────── */
+(function(){var tb=document.querySelector('#wordsTable tbody'),h='';
+  ITEMS.forEach(function(it,i){h+='<tr><td class="n">'+(i+1)+'</td><td><span class="mini">'+art(it)+'</span></td><td><b>'+esc(it.w)+'</b></td><td>'+esc(it.t)+'</td><td>'+(it.kind==='tree'?'<span class="pill p-violet">новая ёлка</span>':it.top?'<span class="pill p-pink">финал</span>':'<span class="pill p-coin">🪙 '+it.p+'</span>')+'</td></tr>';});
+  tb.innerHTML=h;
+  var sel=$('dDay');for(var d=1;d<=DAYS;d++){var o=document.createElement('option');o.value=d;o.textContent=d;sel.appendChild(o);}
+  sel.value=S.day;sel.onchange=function(){S.day=+sel.value;save();render();};
+  $('dReset').onclick=function(){S=fresh();save();sel.value=S.day;render();};
+  [].forEach.call(document.querySelectorAll('#cabNav button'),function(b){b.onclick=function(){S.view=b.dataset.v;if(S.view==='advent')S.tab='tree';save();render();};});
+})();
+render();
+})();
+</script>

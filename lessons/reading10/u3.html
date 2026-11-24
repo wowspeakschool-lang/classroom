@@ -110,7 +110,7 @@ const SND = 'https://vtcxghsqymwkyiogpndf.supabase.co/storage/v1/object/public/c
 const IMG = '../../media/reading10/u3/';
 const CIP = '../../media/reading10/cipher/';
 const OLD = 'satpinmdog'.split(''), NEW = 'ckeur'.split(''), ALPHA = 'abcdefghijklmnopqrstuvwxyz'.split('');
-const ANCHOR = { c: ['cat', 'cat', 'k'], k: ['kid', 'kid', 'k'], e: ['egg', 'egg', 'e'], u: ['umbrella', 'umbrella', 'ʌ'], r: ['red', 'red_paint', 'r'] };
+const ANCHOR = { c: ['cat', 'cat', 'k'], k: ['kid', 'kid', 'k'], e: ['egg', 'egg', 'e'], u: ['umbrella', 'umbrella', 'ʌ'], r: ['rocket', null, 'r'] };
 const PIC = { red: 'red_paint' };
 let mode = 40, extra = false, i = 0, opened = new Set(OLD);
 try { mode = +(localStorage.getItem('rc10_mode') || 40); } catch (e) {}
@@ -169,7 +169,7 @@ NEW.forEach((l, n) => add({ t: 'New code · ' + l, newl: l, html: () => `${lab(`
  <div class="row newcode" id="nc" style="gap:34px;cursor:pointer">
   <div class="tile" style="width:240px;padding:22px"><div class="sym" id="sym">${glyph(l, 150)}</div><div class="big reveal" style="margin-top:10px">${l}</div></div>
   <div class="reveal" style="text-align:center"><div style="font-size:22px;font-weight:700;margin-bottom:8px">This is <b>${l}</b>. Sound <b>/${ANCHOR[l][2]}/</b>.</div>
-   ${pic(ANCHOR[l][1], 'max-width:240px')}<div class="word" style="margin-top:6px"><span style="color:var(--pink)">${ANCHOR[l][0][0]}</span>${ANCHOR[l][0].slice(1)}</div>
+   ${ANCHOR[l][1] ? pic(ANCHOR[l][1], 'max-width:240px') : glyph(l, 200)}<div class="word" style="margin-top:6px"><span style="color:var(--pink)">${ANCHOR[l][0][0]}</span>${ANCHOR[l][0].slice(1)}</div>
    <button class="btn soft" style="margin-top:10px" onclick="event.stopPropagation();sound('${l}')">🔊 /${ANCHOR[l][2]}/</button></div>
  </div>`, after: () => { const nc = document.getElementById('nc'); nc.onclick = () => { if (nc.classList.contains('open')) return; nc.classList.add('open'); document.getElementById('sym').classList.add('unlock'); sound(l); opened.add(l); renderKey([l]); }; } }));
 // 11

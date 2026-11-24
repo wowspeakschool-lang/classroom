@@ -86,7 +86,11 @@
 - **Дизайн как в личном кабинете ученика:** тёплый градиентный фон, белые
   карточки со скруглением и тенью, фиолетовый / розовый / зелёный, шрифты
   Montserrat и Golos (лежат в `media/reading10/fonts/`).
-- **Шифр — картинки-смайлики**, по одной на букву, для всего алфавита сразу:
-  `media/reading10/cipher/<буква>.svg` (Twemoji, CC BY 4.0). a 🚀 b 🔑 c 🐙 d ⚡
-  e 🍕 f 🎧 g 🌵 h 💎 i 🔥 j 🎯 k 🛸 l 🍩 m 🌙 n 🎲 o 🐢 p 🍄 q 🧲 r 🦊 s ⭐ t 🎸
-  u 🌀 v 🍉 w 👾 x 🧩 y 🎈 z 🪐. Сочетания — склейка двух смайликов.
+- **Шифр — картинки-смайлики, и каждая начинается со звука своей буквы**
+  (уточнение Анны 23.11.2026; исключение — **x = fox**, звук в конце):
+  `media/reading10/cipher/<буква>.svg` (Twemoji, CC BY 4.0), список — `cipher/slova.txt`.
+  a apple · b banana · c cat · d dog · e egg · f fish · g guitar · h hat ·
+  i insect · j jeans · k kid · l lemon · m moon · n nut · o octopus · p pizza ·
+  q question · r rocket · s star · t tiger · u umbrella · v volcano · w watch ·
+  x fox · y yo-yo · z zebra. Значок = слово-якорь буквы на экране «New code».
+  Сочетания — склейка двух значков.

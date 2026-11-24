@@ -12,9 +12,9 @@ HW = []
 HW.append(('text', {'html': f'<p><img src="{img("sam_phone")}" alt="" style="height:auto;max-width:160px;float:right;margin:0 0 8px 12px">'
   '<b>Агент, ключ пополнился!</b></p><p>Сегодня ты открыл пять новых символов: <b>c k e u r</b>. '
   'Потренируйся, пока не пришло новое сообщение от Агента X.</p>'}))
-ANCH = [('c', 'cat', 'кошка · звук /k/'), ('k', 'kid', 'малыш · звук /k/'), ('e', 'egg', 'яйцо · звук /e/'), ('u', 'umbrella', 'зонт · звук /ʌ/'), ('r', 'red_paint', 'красный · звук /r/')]
+ANCH = [('c', 'cat', 'кошка (cat) · звук /k/'), ('k', 'kid', 'малыш (kid) · звук /k/'), ('e', 'egg', 'яйцо (egg) · звук /e/'), ('u', 'umbrella', 'зонт (umbrella) · звук /ʌ/'), ('r', None, 'ракета (rocket) · звук /r/')]
 HW.append(('flashcards', {'title': 'Новые буквы. Нажми на карточку — услышишь звук буквы.',
-  'cards': [{'text': l, 'image': img(p), 'audio': Z + l + '.mp3', 'translation': t} for l, p, t in ANCH]}))
+  'cards': [{'text': l, 'image': img(p) if p else 'https://classroom.wowteach.ru/media/reading10/cipher/' + l + '.svg', 'audio': Z + l + '.mp3', 'translation': t} for l, p, t in ANCH]}))
 QZ = [('e', ['e', 'a', 'i']), ('u', ['o', 'u', 'a']), ('r', ['n', 'm', 'r']), ('c', ['c', 'd', 'g']), ('k', ['t', 'k', 'p'])]
 HW.append(('quiz', {'title': 'Послушай звук и выбери букву.',
   'questions': [{'q': '', 'type': 'single', 'audio': Z + s + '.mp3', 'correct': [o.index(s)], 'options': [{'text': x} for x in o]} for s, o in QZ]}))
