@@ -315,6 +315,10 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
 .wcoins{font-family:var(--ff-head);font-weight:900;background:linear-gradient(180deg,#FFE07A,#F5B82E);color:#6E4A00;border-radius:999px;padding:5px 12px;box-shadow:0 3px 0 #B9861A;font-size:14px}
 #panelBox{padding:0 12px;position:relative;z-index:6;flex:none}
 #panelBox .panel{color:var(--ink);margin-bottom:6px}
+.treearea.armed{outline:4px solid #FFD45A;outline-offset:-4px}
+.treearea.armed::after{content:attr(data-arm);position:absolute;left:50%;top:10px;transform:translateX(-50%);z-index:9;background:#FFD45A;color:#3A2600;font:800 13px var(--ff-head);border-radius:999px;padding:6px 12px;white-space:nowrap;pointer-events:none;animation:armp 1s ease-in-out infinite}
+@keyframes armp{50%{transform:translateX(-50%) scale(1.06)}}
+@media (hover:none){.wt,.wt *,.slot,.swi,.swi *{touch-action:pan-y}}
 .shelves{overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:30px;padding:6px 12px 34px;position:relative}
 .wplate{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(180deg,var(--brass),#C99A3A);color:#4A3208;font-family:var(--ff-head);font-weight:900;font-size:12px;border-radius:8px;padding:4px 10px;box-shadow:0 2px 0 var(--brass-d),inset 0 1px 0 #fff8;margin:0 0 6px 4px}
 .wplate small{font-family:var(--ff-body);font-weight:800;opacity:.8}
@@ -491,7 +495,11 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
   .wsduo{grid-template-columns:1fr}
   .room{height:auto;min-height:0;max-height:none}
   .shelves{overflow:visible}
-  .treearea{order:-1;height:calc(100svh - 300px);min-height:380px}
+  .treearea{order:-1;height:40svh;min-height:260px;position:sticky;top:104px;z-index:6;box-shadow:0 10px 22px rgba(20,20,60,.25)}
+  .treearea.armed{outline:4px solid #FFD45A;outline-offset:-4px}
+  .treearea.armed::after{content:attr(data-arm);position:absolute;left:50%;top:10px;transform:translateX(-50%);z-index:9;background:#FFD45A;color:#3A2600;font:800 13px var(--ff-head);border-radius:999px;padding:6px 12px;white-space:nowrap;pointer-events:none;animation:armp 1s ease-in-out infinite}
+  @keyframes armp{50%{transform:translateX(-50%) scale(1.06)}}
+
   .music input{display:none}
   .wwin{display:none}
   .adv-tabs{overflow-x:auto;scrollbar-width:none}
@@ -1003,7 +1011,7 @@ function renderTree0(){
     m.querySelector('#y').onclick=function(){m.remove();S.placed=[];sel=null;save();renderTree();};};
   $$('.wt.slot').forEach(function(sl){var f=sl.dataset.f;
     drag(sl,{ok:function(){if(freeOf(f)>0)return true;openPanel(f);toast('Все '+F[f].w+' уже на ёлке. Ещё одна — 🪙 3');return false;},ghost:function(){return pic(src(f,pickOf(f)));},
-      tap:function(){openPanel(f);say(en(f,pickOf(f)));},drop:function(x,y){placeAt(f,pickOf(f),x,y);}});
+      tap:function(){openPanel(f);say(en(f,pickOf(f)));},drop:function(x,y){placeAt(f,pickOf(f),x,y);},armOnly:1,arm:function(){openPanel(f,true);say(en(f,pickOf(f)));armToy(f,pickOf(f));}});
     sl.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openPanel(f);}};});
   $$('.wt.m').forEach(function(t){var r=t.getBoundingClientRect(),R=$('room').getBoundingClientRect();if(r.left-R.left<110)t.classList.add('edge-l');else if(R.right-r.right<110)t.classList.add('edge-r');
     t.onclick=function(){moreModal(t.dataset.lock);};
@@ -1062,10 +1070,17 @@ function openPanel(f,silent){
     drag(s,{ok:function(){if(!owns(f,c))return false;if(freeOf(f)>0)return true;toast('Все '+F[f].w+' уже на ёлке. Ещё одна — 🪙 3');return false;},ghost:function(){return pic(src(f,c));},
       tap:function(){S.pick[f]=c;save();$$('.swi',box).forEach(function(e){e.classList.toggle('cur',e===s);});act();say(en(f,c));
         var sl=document.querySelector('.wt.slot[data-f="'+f+'"] .pic');if(sl&&owns(f,c))sl.src=src(f,c);},
-      drop:function(x,y){S.pick[f]=c;placeAt(f,c,x,y);}});});
+      drop:function(x,y){S.pick[f]=c;placeAt(f,c,x,y);},arm:function(){armToy(f,c);}});});
   if(!silent)box.scrollIntoView({block:'nearest'});
 }
-function closePanel(){openFam=null;var b=$('panelBox');if(b)b.innerHTML='';$$('.wt.slot').forEach(function(s){s.classList.remove('s-open');});}
+var armed=null,noClick=0;
+/* после касания полки панель цветов сдвигает полки, и «щелчок» браузера попадает в соседнюю коробку — его гасим */
+document.addEventListener('click',function(e){if(Date.now()-noClick<500){e.stopPropagation();e.preventDefault();}},true);
+function armToy(f,c){if(c===null||c===undefined)return;armed={f:f,c:c};var a=$('area');if(a){a.classList.add('armed');a.setAttribute('data-arm','Нажми на ёлку — повешу '+F[f].w);}}
+function disarm(){armed=null;var a=$('area');if(a){a.classList.remove('armed');a.removeAttribute('data-arm');}}
+document.addEventListener('pointerup',function(e){if(!armed||e.pointerType!=='touch')return;var a=$('area');if(!a||!a.contains(e.target))return;
+  if(e.target.closest('.placed,.tool,.frame,.hd,.nyesw,button'))return;var x=armed;disarm();noClick=Date.now();placeAt(x.f,x.c,e.clientX,e.clientY);});
+function closePanel(){disarm();openFam=null;var b=$('panelBox');if(b)b.innerHTML='';$$('.wt.slot').forEach(function(s){s.classList.remove('s-open');});}
 function buyColour(f,c,then){
   var m=modal('<div class="mcard"><div class="art" style="width:130px;height:130px">'+pic(src(f,c))+'</div><h3>'+esc(en(f,c))+'</h3><div class="trn">'+esc(ru(f,c))+'</div>'+
     '<p class="hint" style="margin:0">Новый цвет останется у тебя насовсем: любую такую игрушку можно перекрасить в него.</p><p style="margin:0"><b>У тебя: 🪙 '+coins()+'</b></p>'+
@@ -1156,7 +1171,15 @@ function handle(hd,el,pl){
 /* перетаскивание пальцем и мышью: Pointer Events, призрак у курсора */
 function drag(el,o){
   el.addEventListener('pointerdown',function(e){
-    if(e.button>0)return;if(e.target.closest('.hd'))return;e.stopPropagation();var sx=e.clientX,sy=e.clientY,moved=false,g=null,dead=false;
+    if(e.button>0)return;if(e.target.closest('.hd'))return;
+    /* телефон и планшет (24.11, проверка «193»): полка ниже ёлки, тащить пальцем через прокрутку неудобно.
+       Касание игрушки на полке = «взять в руку», потом касание ёлки = повесить. Палец, который двигается, — это прокрутка. */
+    if(e.pointerType==='touch'&&o.arm){var tx=e.clientX,ty=e.clientY,gone=false;
+      var tm=function(ev){if(Math.hypot(ev.clientX-tx,ev.clientY-ty)>10)gone=true;};
+      var tu=function(){el.removeEventListener('pointermove',tm);el.removeEventListener('pointerup',tu);el.removeEventListener('pointercancel',tc);if(gone)return;noClick=Date.now();if(o.ok()){if(o.armOnly)o.arm();else{o.tap();o.arm();}}else o.tap();};
+      var tc=function(){el.removeEventListener('pointermove',tm);el.removeEventListener('pointerup',tu);el.removeEventListener('pointercancel',tc);};
+      el.addEventListener('pointermove',tm);el.addEventListener('pointerup',tu);el.addEventListener('pointercancel',tc);return;}
+    e.stopPropagation();var sx=e.clientX,sy=e.clientY,moved=false,g=null,dead=false;
     try{el.setPointerCapture(e.pointerId);}catch(_){}
     function mv(ev){
       if(dead)return;if(!moved&&Math.hypot(ev.clientX-sx,ev.clientY-sy)<6)return;
