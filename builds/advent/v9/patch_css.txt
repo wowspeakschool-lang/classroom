@@ -1,0 +1,167 @@
+
+/* ====== v9 (24.11.2026): мастерская эльфов, шкала-гирлянда, подарки, эффекты, музыка ====== */
+.music{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 10px 3px 3px}
+.music button{width:34px;height:34px;border-radius:50%;border:0;background:linear-gradient(160deg,#FF6B6B,#C8364D);color:#fff;font-size:15px;cursor:pointer}
+.music input{width:84px;accent-color:#C8364D}
+/* мастерская + ёлка */
+.wsduo{display:grid;grid-template-columns:minmax(300px,.95fr) minmax(0,1.25fr);gap:16px;align-items:start}
+.room{--wall1:#5B3420;--wall2:#4A2A19;--shelf1:#C98B55;--shelf2:#8C5530;--brass:#E9C46A;--brass-d:#9A7425;
+ position:relative;border-radius:30px;overflow:hidden;color:#fff;display:flex;flex-direction:column;height:calc(100vh - 250px);min-height:560px;
+ background:repeating-linear-gradient(90deg,var(--wall1) 0 86px,var(--wall2) 86px 90px);box-shadow:0 18px 40px rgba(60,30,10,.25)}
+.room::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,200,120,.28),transparent 60%);pointer-events:none}
+.wlights{position:relative;height:40px;flex:none}
+.wlights svg{position:absolute;inset:0;width:100%;height:100%}
+.wbulb{position:absolute;top:0;width:11px;height:16px;border-radius:50% 50% 45% 45%;transform:translateX(-50%);animation:wtw 2.4s ease-in-out infinite}
+@keyframes wtw{0%,100%{opacity:1;filter:drop-shadow(0 0 6px currentColor)}50%{opacity:.55;filter:none}}
+.wsign{position:relative;margin:-8px auto 4px;width:max-content;max-width:90%;text-align:center;flex:none}
+.wsign .board{background:linear-gradient(180deg,#D69A62,#A9683A);border:3px solid #7A4425;border-radius:14px;padding:5px 20px 7px;box-shadow:0 5px 0 #6A3A1F,0 10px 18px rgba(0,0,0,.35)}
+.wsign b{font-family:'Pacifico',cursive;font-weight:400;font-size:24px;color:#FFF4DC;text-shadow:0 2px 0 #7A4425}
+.wsign small{display:block;font-family:var(--ff-head);font-weight:800;font-size:11px;color:#FFE9C7;letter-spacing:.05em}
+.wwin{position:absolute;top:36px;width:44px;height:58px;border-radius:22px 22px 6px 6px;border:5px solid #8C5530;background:linear-gradient(180deg,#1B2A6B,#4058A8);overflow:hidden;opacity:.9}
+.wwin i{position:absolute;left:50%;top:0;bottom:0;width:4px;background:#8C5530;transform:translateX(-50%)}
+.wwin i+i{left:0;right:0;top:50%;bottom:auto;height:4px;width:auto;transform:none}
+.wtop{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:4px 14px 8px;flex-wrap:wrap;position:relative;flex:none}
+.wcoll{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.25);border-radius:999px;padding:5px 12px 5px 6px;font-family:var(--ff-head);font-weight:800;font-size:13px}
+.wcoins{font-family:var(--ff-head);font-weight:900;background:linear-gradient(180deg,#FFE07A,#F5B82E);color:#6E4A00;border-radius:999px;padding:5px 12px;box-shadow:0 3px 0 #B9861A;font-size:14px}
+#panelBox{padding:0 12px;position:relative;z-index:6;flex:none}
+#panelBox .panel{color:var(--ink);margin-bottom:6px}
+.shelves{overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:30px;padding:6px 12px 34px;position:relative}
+.wplate{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(180deg,var(--brass),#C99A3A);color:#4A3208;font-family:var(--ff-head);font-weight:900;font-size:12px;border-radius:8px;padding:4px 10px;box-shadow:0 2px 0 var(--brass-d),inset 0 1px 0 #fff8;margin:0 0 6px 4px}
+.wplate small{font-family:var(--ff-body);font-weight:800;opacity:.8}
+.wrow{position:relative;display:flex;flex-wrap:wrap;gap:6px 2px;align-items:flex-end;padding:6px 8px 0;min-height:66px}
+.wrow::after{content:"";position:absolute;left:0;right:0;bottom:-15px;height:16px;background:linear-gradient(180deg,var(--shelf1),var(--shelf2));border-radius:4px;box-shadow:0 8px 12px rgba(0,0,0,.35),inset 0 2px 0 #E6B27F}
+.sh.rare .wrow{background:linear-gradient(180deg,transparent,rgba(76,155,255,.18));border-radius:14px 14px 0 0}
+.sh.rare .wrow::after{background:linear-gradient(180deg,#9CC8FF,#3F7BD0);box-shadow:0 0 18px #4C9BFF88,inset 0 2px 0 #E4F0FF}
+.sh.epic .wrow{background:radial-gradient(ellipse at 50% 100%,rgba(178,107,255,.35),transparent 70%);border-radius:14px 14px 0 0}
+.sh.epic .wrow::after{background:linear-gradient(180deg,#8E3FD6,#5A1E99);box-shadow:0 0 20px #B26BFF88,inset 0 2px 0 #D9B5FF}
+.sh.leg .case{position:relative;border:3px solid #E9C46A;border-radius:18px 18px 6px 6px;background:linear-gradient(180deg,rgba(255,230,160,.18),rgba(255,194,61,.08));box-shadow:0 0 30px rgba(255,194,61,.35);padding-top:4px}
+.sh.leg .wrow::after{background:linear-gradient(180deg,#FFD36B,#C9921E);box-shadow:0 0 24px #FFC23Daa,inset 0 2px 0 #FFF2C8}
+.wt{position:relative;width:58px;height:64px;display:flex;align-items:flex-end;justify-content:center;z-index:1;border:0;background:none;padding:0;cursor:grab;touch-action:none;user-select:none}
+.wt .pic{position:static;max-width:54px;max-height:60px;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 6px 4px rgba(0,0,0,.45));transition:transform .2s}
+.wt:hover .pic{transform:translateY(-3px) scale(1.06)}
+.wt .ok{position:absolute;right:0;top:0;min-width:18px;height:18px;border-radius:9px;background:#22B573;font-size:10px;font-weight:900;display:grid;place-items:center;padding:0 4px;box-shadow:0 0 0 2px #fff6;color:#fff;font-family:var(--ff-head)}
+.wt.s-open .pic{filter:drop-shadow(0 0 8px #FFE9A0) drop-shadow(0 6px 4px rgba(0,0,0,.45))}
+.wt.m{cursor:pointer}
+.wt .bx{animation:wbob 2.6s ease-in-out infinite}
+.wt:nth-child(2n) .bx{animation-delay:.7s}.wt:nth-child(3n) .bx{animation-delay:1.3s}
+@keyframes wbob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-4px) rotate(2deg)}}
+.wt.t-r::before,.wt.t-e::before,.wt.t-l::before{content:"";position:absolute;left:50%;top:55%;width:150%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+ -webkit-mask:radial-gradient(circle,#000 25%,transparent 68%);mask:radial-gradient(circle,#000 25%,transparent 68%);animation:wspin 9s linear infinite;z-index:-1}
+.wt.t-r::before{background:repeating-conic-gradient(#4C9BFF55 0 10deg,transparent 10deg 30deg)}
+.wt.t-e::before{background:repeating-conic-gradient(#C27BFF88 0 12deg,transparent 12deg 24deg);animation-duration:6s}
+.wt.t-l::before{background:repeating-conic-gradient(#FFD45Acc 0 10deg,#FF9F1C33 10deg 20deg);animation-duration:4s;width:175%}
+@keyframes wspin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.wt.t-r .pic{filter:drop-shadow(0 0 6px #4C9BFF) drop-shadow(0 6px 4px rgba(0,0,0,.4))}
+.wt.t-e .pic{filter:drop-shadow(0 0 8px #C27BFF) drop-shadow(0 6px 4px rgba(0,0,0,.4))}
+.wt.t-l .pic{filter:drop-shadow(0 0 10px #FFD45A) drop-shadow(0 0 18px #FF9F1C) drop-shadow(0 6px 4px rgba(0,0,0,.4))}
+.spk{position:absolute;color:#fff;font-size:11px;pointer-events:none;animation:wtwk 1.8s ease-in-out infinite;text-shadow:0 0 6px currentColor;font-style:normal}
+.t-l .spk{color:#FFE9A0}.t-e .spk{color:#F0D6FF}
+@keyframes wtwk{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.15)}}
+.wtip{position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);width:210px;background:#FFF8EC;color:var(--ink);border-radius:16px;padding:11px 13px;box-shadow:0 12px 30px rgba(0,0,0,.35);font-size:13px;line-height:1.4;z-index:40;text-align:left;visibility:hidden;opacity:0;transition:opacity .15s,visibility 0s .4s;cursor:default}
+.wtip::before{content:"";position:absolute;left:-10px;right:-10px;top:100%;height:18px}
+.wtip::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border:8px solid transparent;border-top-color:#FFF8EC}
+.wtip b{font-family:var(--ff-head);display:block;font-size:14px;margin-bottom:3px}
+.wtip .more{margin-top:8px;font-family:var(--ff-head);font-weight:800;font-size:12px;border:0;border-radius:10px;padding:7px 11px;color:#fff;cursor:pointer}
+.wt.m:hover .wtip,.wt.m.open .wtip,.wt.m:focus-within .wtip{visibility:visible;opacity:1;transition-delay:0s}
+.wt.m:hover,.wt.m.open,.wt.m:focus-within{z-index:30}
+.wt.edge-l .wtip{left:0;transform:none}.wt.edge-l .wtip::after{left:28px}
+.wt.edge-r .wtip{left:auto;right:0;transform:none}.wt.edge-r .wtip::after{left:auto;right:20px}
+.wtrees{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:8px 12px;background:rgba(0,0,0,.22);flex:none}
+.wtrees span{font-family:var(--ff-head);font-weight:800;font-size:12px;margin-right:4px}
+.wtrees button[data-tree]{border:2px solid #ffffff44;background:#ffffff14;border-radius:12px;padding:3px;cursor:pointer;width:44px;height:54px;position:relative}
+.wtrees button[data-tree].on{border-color:#FFD45A}
+.wtrees button[data-tree]:disabled{cursor:not-allowed}.wtrees button[data-tree]:disabled .pic{filter:grayscale(1);opacity:.3}
+.wtrees .lk{position:absolute;inset:0;display:grid;place-items:center;font-size:13px}
+.wtrees .tb{flex-basis:100%;display:flex;gap:6px}
+.wtrees .tb .btn{padding:7px 10px;font-size:12px}
+.treearea{height:calc(100vh - 250px)}
+/* гирлянды позади остальных игрушек (Анна, 24.11) */
+.placed{z-index:3}.placed.pwide{z-index:1}.placed.sel{z-index:7}.placed.dragging{z-index:8}
+/* огоньки мерцают; 31 декабря ёлка в огнях и горит звезда */
+.placed .fl i{position:absolute;width:9%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,#fff 0 12%,var(--c) 30%,transparent 70%);mix-blend-mode:screen;animation:fbulb 1.7s ease-in-out infinite;pointer-events:none}
+@keyframes fbulb{0%,100%{opacity:.25;transform:translate(-50%,-50%) scale(.7)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}}
+.treearea.nye .placed .fl i{animation-duration:.6s;width:12%}
+.treearea.nye::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(255,220,120,.32),transparent 62%);animation:nyeg 1.2s ease-in-out infinite;pointer-events:none;z-index:0}
+@keyframes nyeg{50%{opacity:.4}}
+.treearea.nye .placed .pic{animation:nyepop 1.2s ease-in-out infinite}
+@keyframes nyepop{50%{filter:brightness(1.3) drop-shadow(0 0 8px #FFE9A0)}}
+.treearea.nye .placed.ptop .pic{animation:nyestar 1.4s ease-in-out infinite}
+@keyframes nyestar{0%,100%{filter:brightness(1.1) drop-shadow(0 0 10px #FFE58A) drop-shadow(0 0 24px #FFC23D)}50%{filter:brightness(1.6) drop-shadow(0 0 18px #FFF2B8) drop-shadow(0 0 44px #FFC23D)}}
+.nyesw{position:absolute;right:12px;top:12px;z-index:9;display:flex;gap:4px;background:rgba(0,0,0,.25);border-radius:999px;padding:3px}
+.nyesw button{border:0;border-radius:999px;padding:5px 10px;font-family:var(--ff-head);font-weight:800;font-size:11px;background:transparent;color:#fff;cursor:pointer}
+.nyesw button.on{background:#FFD45A;color:#4A2E00}
+/* шкала-гирлянда дней */
+.gscale{background:linear-gradient(180deg,#1E2A66,#2C1F5C);border-radius:24px;padding:14px 16px 10px;color:#fff;margin-bottom:12px}
+.gscale h3{font-size:15px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.gscale h3 small{font-family:var(--ff-body);font-weight:700;color:#D8DCFF;font-size:13px}
+.wire{position:relative;height:118px;overflow-x:auto;overflow-y:hidden}
+.wire .in{position:relative;min-width:760px;height:100%}
+.wire svg{position:absolute;left:0;top:0;width:100%;height:56px}
+.gb{position:absolute;top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
+.gb .l{width:12px;height:18px;border-radius:50% 50% 45% 45%;background:#4A4F78;margin-top:var(--y);position:relative}
+.gb .l::before{content:"";position:absolute;left:3px;top:-5px;width:6px;height:6px;border-radius:2px;background:#20263F}
+.gb.on .l{background:var(--c);animation:gglow 2.2s ease-in-out infinite;animation-delay:calc(var(--i) * -0.17s)}
+@keyframes gglow{0%,100%{box-shadow:0 0 6px var(--c),0 0 12px var(--c)}50%{box-shadow:0 0 14px var(--c),0 0 30px var(--c);filter:brightness(1.25)}}
+.gb.today .l{outline:2px dashed #fff8;outline-offset:3px}
+.gb .d{font-size:10px;font-weight:800;color:#AEB4E6;margin-top:3px}.gb.on .d{color:#fff}
+.gb .gift{margin-top:5px;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:18px;position:relative;font-family:var(--ff-head);font-weight:900}
+.gb .gift img{width:38px;height:38px;object-fit:contain}
+.gb .gift.got{background:#ffffff1c;border-radius:12px}
+.gb .gift.got::after{content:"✓";position:absolute;right:-6px;top:-6px;width:17px;height:17px;border-radius:50%;background:#22B573;font-size:10px;font-weight:900;display:grid;place-items:center}
+.gb .gift.next{animation:gshake 1.6s ease-in-out infinite}
+@keyframes gshake{0%,70%,100%{transform:rotate(0)}75%{transform:rotate(-10deg)}80%{transform:rotate(10deg)}85%{transform:rotate(-8deg)}90%{transform:rotate(6deg)}}
+.wire.all .gb .l{background:var(--c);animation:gchase 1.4s linear infinite;animation-delay:calc(var(--i) * 0.07s)}
+@keyframes gchase{0%,100%{box-shadow:0 0 4px var(--c);filter:brightness(.8)}20%{box-shadow:0 0 18px var(--c),0 0 40px var(--c);filter:brightness(1.6)}}
+/* мои подарки */
+.mygifts{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:16px;margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.mygifts .gl{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.gcard{display:flex;gap:10px;align-items:center;background:var(--bg);border-radius:18px;padding:10px 12px}
+.gcard .gi{font-size:30px;flex:none}
+.gcard b{font-family:var(--ff-head);font-size:14px;display:block}
+.gcard small{color:var(--muted);font-size:12px;display:block}
+.gcard .btn{margin-left:auto;flex:none}
+.gcard.lock{opacity:.55}
+.promo{font-family:ui-monospace,Menlo,monospace;background:#FFF3CC;border:2px dashed #E7B22E;border-radius:10px;padding:6px 10px;font-weight:800;color:#6E4A00;letter-spacing:.08em}
+/* эффекты */
+.fx{position:fixed;inset:0;pointer-events:none;z-index:70;overflow:hidden}
+.fx i{position:absolute;width:10px;height:14px;border-radius:2px;animation:conf var(--t,1.4s) cubic-bezier(.2,.7,.4,1) forwards}
+@keyframes conf{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
+.fx .flash{position:absolute;width:260px;height:260px;border-radius:50%;transform:translate(-50%,-50%) scale(.2);background:radial-gradient(circle,#fffbe0,rgba(255,220,120,.6) 35%,transparent 70%);animation:flash .7s ease-out forwards}
+@keyframes flash{to{transform:translate(-50%,-50%) scale(2.4);opacity:0}}
+.mcard.rev{background:radial-gradient(circle at 50% 30%,#3a2a7a,#1C2456);color:#fff;overflow:hidden;position:relative;isolation:isolate}
+.mcard.rev .eb{color:#FFE9A0}.mcard.rev .trn,.mcard.rev .hint{color:#D8DCFF}
+.mcard.rev .art{position:relative}
+.mcard.rev .art::before{content:"";position:absolute;inset:-45%;border-radius:50%;z-index:-1;-webkit-mask:radial-gradient(circle,#000 20%,transparent 66%);mask:radial-gradient(circle,#000 20%,transparent 66%);animation:revspin 7s linear infinite}
+@keyframes revspin{to{transform:rotate(360deg)}}
+.mcard.rev.r .art::before{background:repeating-conic-gradient(#4C9BFF88 0 10deg,transparent 10deg 30deg)}
+.mcard.rev.e .art::before{background:repeating-conic-gradient(#C27BFFaa 0 12deg,transparent 12deg 24deg)}
+.mcard.rev.l .art::before{background:repeating-conic-gradient(#FFD45A 0 10deg,#FF9F1C55 10deg 20deg)}
+.mcard.rev.g .art::before{background:repeating-conic-gradient(#FFD45Aaa 0 10deg,#F7628C55 10deg 20deg)}
+.mcard.rev .rib{font-family:var(--ff-head);font-weight:900;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:999px}
+.rev.r .rib{background:#4C9BFF}.rev.e .rib{background:linear-gradient(90deg,#B26BFF,#E07BFF)}.rev.l .rib{background:linear-gradient(90deg,#FFD45A,#FF9F1C);color:#4A2E00}.rev.g .rib{background:var(--pink)}
+.giftbox{width:150px;height:150px;animation:gbx .9s ease-in-out 2}
+@keyframes gbx{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg) scale(1.05)}40%{transform:rotate(10deg)}60%{transform:rotate(-8deg) scale(1.08)}80%{transform:rotate(6deg)}}
+/* как заработать монетки */
+.earn{display:grid;gap:6px}
+.earn div{display:flex;gap:10px;align-items:center;background:var(--bg);border-radius:14px;padding:8px 12px;font-size:14px}
+.earn div b{margin-left:auto;font-family:var(--ff-head);color:var(--coin-ink);background:var(--coin);border-radius:999px;padding:2px 10px;font-size:12px;white-space:nowrap}
+.earn div small{color:var(--muted)}
+/* гость по ссылке */
+.reg{max-width:520px;margin:10px auto;background:var(--card);border-radius:30px;padding:26px;border:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.reg h2{font-size:24px}
+.reg label{font-family:var(--ff-head);font-weight:800;font-size:13px;display:flex;flex-direction:column;gap:4px}
+.reg input{font:inherit;border:2px solid var(--line);border-radius:14px;padding:10px 12px}
+.reg input:focus{outline:none;border-color:var(--violet)}
+.forest{background:linear-gradient(180deg,#14285E,#2C4C9C 60%,#DDE7FF);border-radius:26px;min-height:420px;display:grid;place-items:center;color:#fff;text-align:center;padding:24px}
+.forest b{font-family:var(--ff-head);font-size:22px;display:block;margin-bottom:6px}
+@media (max-width:860px){
+  .wsduo{grid-template-columns:1fr}
+  .room{height:auto;min-height:0;max-height:none}
+  .shelves{overflow:visible}
+  .treearea{order:-1}
+  .music input{display:none}
+  .wwin{display:none}
+  .adv-tabs{overflow-x:auto;scrollbar-width:none}
+  .adv-tabs button{font-size:12px;padding:8px 10px;flex:none}
+  .music{padding:2px}
+}
