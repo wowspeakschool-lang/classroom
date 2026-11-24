@@ -303,6 +303,22 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
 .wlights svg{position:absolute;inset:0;width:100%;height:100%}
 .wbulb{position:absolute;top:0;width:11px;height:16px;border-radius:50% 50% 45% 45%;transform:translateX(-50%);animation:wtw 2.4s ease-in-out infinite}
 @keyframes wtw{0%,100%{opacity:1;filter:drop-shadow(0 0 6px currentColor)}50%{opacity:.55;filter:none}}
+.wt.lifted .pic{transform:scale(1.25);opacity:.45}
+.treearea.dropzone{outline:4px dashed #FFD45A;outline-offset:-6px}
+@media (max-width:860px){
+  /* 24.11 Анна с телефона: «полка выглядит неудобно». Вкладка без прокрутки страницы: ёлка сверху, под ней окно мастерской
+     со своей прокруткой полок; вывеска, гирлянда-украшение и счётчики на телефоне убраны — места мало */
+  .wsduo .room{height:calc(100svh - 240px - 36svh);min-height:170px!important;max-height:none;display:flex;flex-direction:column;overflow:hidden}
+  .room .wsign,.room .wlights,.room .wtop{display:none}
+  .room .shelves{overflow-y:auto!important;overscroll-behavior:contain;flex:1;min-height:0;gap:24px;padding:10px 8px 18px}
+  .room .wtrees{flex-wrap:nowrap;gap:5px;padding:5px 8px}
+  .room .wtrees>span:first-child{display:none}
+  .room .wtrees button[data-tree]{width:34px;height:40px;padding:2px}
+  .room .wtrees .tb{flex-basis:auto;margin-left:auto;gap:5px}
+  .room .wtrees .tb .btn{padding:6px 9px;font-size:11px;white-space:nowrap}
+  #panelBox{padding:0 8px}#panelBox .panel{padding:6px 10px;gap:4px;margin:6px 0 2px}
+  .treebox{gap:8px}
+}
 .wsign{position:relative;margin:-8px auto 4px;width:max-content;max-width:90%;text-align:center;flex:none}
 .wsign .board{background:linear-gradient(180deg,#D69A62,#A9683A);border:3px solid #7A4425;border-radius:14px;padding:5px 20px 7px;box-shadow:0 5px 0 #6A3A1F,0 10px 18px rgba(0,0,0,.35)}
 .wsign b{font-family:'Pacifico',cursive;font-weight:400;font-size:24px;color:#FFF4DC;text-shadow:0 2px 0 #7A4425}
@@ -495,7 +511,7 @@ img.pic{width:100%;height:100%;object-fit:contain;display:block;pointer-events:n
   .wsduo{grid-template-columns:1fr}
   .room{height:auto;min-height:0;max-height:none}
   .shelves{overflow:visible}
-  .treearea{order:-1;height:40svh;min-height:260px;position:sticky;top:104px;z-index:6;box-shadow:0 10px 22px rgba(20,20,60,.25)}
+  .treearea{order:-1;height:36svh;min-height:230px}
   .treearea.armed{outline:4px solid #FFD45A;outline-offset:-4px}
   .treearea.armed::after{content:attr(data-arm);position:absolute;left:50%;top:10px;transform:translateX(-50%);z-index:9;background:#FFD45A;color:#3A2600;font:800 13px var(--ff-head);border-radius:999px;padding:6px 12px;white-space:nowrap;pointer-events:none;animation:armp 1s ease-in-out infinite}
   @keyframes armp{50%{transform:translateX(-50%) scale(1.06)}}
@@ -983,7 +999,13 @@ function shelf(cls,title,list,inCase){var own=list.filter(hasFam).length;
   var row='<div class="wrow">'+list.map(shelfToy).join('')+'</div>';
   return '<div class="sh '+cls+'"><span class="wplate">'+title+' <small>'+own+' из '+list.length+'</small></span>'+(inCase?'<div class="case">'+row+'</div>':row)+'</div>';}
 /* 24.11 Анна: после перетаскивания полки прыгали наверх — запоминаем прокрутку полок и страницы */
-function renderTree(){var _sh=document.querySelector('.shelves'),_st=_sh?_sh.scrollTop:0,_wy=window.scrollY;renderTree0();var _n=document.querySelector('.shelves');if(_n)_n.scrollTop=_st;window.scrollTo(0,_wy);}
+function renderTree(){var _sh=document.querySelector('.shelves'),_st=_sh?_sh.scrollTop:0,_wy=window.scrollY;renderTree0();fitRoom();var _n=document.querySelector('.shelves');if(_n)_n.scrollTop=_st;window.scrollTo(0,_wy);}
+/* телефон и планшет: мастерская заканчивается ровно над нижним меню — на любом экране (iPhone SE, большие телефоны) */
+function fitRoom(){var room=$('room'),bn=document.querySelector('.bnav');if(!room)return;
+  if(!bn||getComputedStyle(bn).display==='none'){room.style.height='';return;}
+  var top=room.getBoundingClientRect().top+window.scrollY,bot=bn.getBoundingClientRect().top+window.scrollY-(window.scrollY);
+  room.style.height=Math.max(170,Math.round(bn.getBoundingClientRect().top-(top-window.scrollY)-10))+'px';}
+window.addEventListener('resize',function(){if($('room'))fitRoom();});
 function renderTree0(){
   var has={pine:true};for(var d in S.opened){var it=DAYS[S.opened[d]];if(it.tree)has[it.tree]=true;}
   var common=ORDERF,all=common.concat(SPEC.r,SPEC.e,SPEC.l),got=all.filter(hasFam).length;
@@ -1174,11 +1196,22 @@ function drag(el,o){
     if(e.button>0)return;if(e.target.closest('.hd'))return;
     /* телефон и планшет (24.11, проверка «193»): полка ниже ёлки, тащить пальцем через прокрутку неудобно.
        Касание игрушки на полке = «взять в руку», потом касание ёлки = повесить. Палец, который двигается, — это прокрутка. */
-    if(e.pointerType==='touch'&&o.arm){var tx=e.clientX,ty=e.clientY,gone=false;
-      var tm=function(ev){if(Math.hypot(ev.clientX-tx,ev.clientY-ty)>10)gone=true;};
-      var tu=function(){el.removeEventListener('pointermove',tm);el.removeEventListener('pointerup',tu);el.removeEventListener('pointercancel',tc);if(gone)return;noClick=Date.now();if(o.ok()){if(o.armOnly)o.arm();else{o.tap();o.arm();}}else o.tap();};
-      var tc=function(){el.removeEventListener('pointermove',tm);el.removeEventListener('pointerup',tu);el.removeEventListener('pointercancel',tc);};
-      el.addEventListener('pointermove',tm);el.addEventListener('pointerup',tu);el.addEventListener('pointercancel',tc);return;}
+    if(e.pointerType==='touch'&&o.arm){
+      /* 24.11 Анна с телефона: «не перетаскивается». Нажал и подержал (~0,25 с) — игрушка поднимается, её можно тащить на ёлку;
+         просто нажал — «взял в руку», потом нажми на ёлку; повёл пальцем сразу — это прокрутка полок. */
+      var tx=e.clientX,ty=e.clientY,lx=tx,ly=ty,gone=false,drg=false,tg=null;
+      var tim=setTimeout(function(){if(gone)return;if(!o.ok()){gone=true;return;}drg=true;try{navigator.vibrate&&navigator.vibrate(12);}catch(_){}
+        el.classList.add('lifted');tg=document.createElement('div');tg.className='dragghost';tg.innerHTML=o.ghost();tg.style.left=lx+'px';tg.style.top=(ly-40)+'px';document.body.appendChild(tg);
+        var a=$('area');if(a)a.classList.add('dropzone');},230);
+      var block=function(ev){if(drg&&ev.cancelable)ev.preventDefault();};
+      var tm=function(ev){lx=ev.clientX;ly=ev.clientY;if(drg){if(tg){tg.style.left=lx+'px';tg.style.top=(ly-40)+'px';}return;}if(Math.hypot(lx-tx,ly-ty)>10){gone=true;clearTimeout(tim);}};
+      var clean=function(){clearTimeout(tim);el.removeEventListener('pointermove',tm);el.removeEventListener('pointerup',tu);el.removeEventListener('pointercancel',tc);el.removeEventListener('touchmove',block);
+        if(tg)tg.remove();el.classList.remove('lifted');var a=$('area');if(a)a.classList.remove('dropzone');};
+      var tu=function(){var was=drg;clean();noClick=Date.now();
+        if(was){disarm();o.drop(lx,ly-40);return;}
+        if(gone)return;if(o.ok()){if(o.armOnly)o.arm();else{o.tap();o.arm();}}else o.tap();};
+      var tc=function(){clean();};
+      el.addEventListener('pointermove',tm);el.addEventListener('pointerup',tu);el.addEventListener('pointercancel',tc);el.addEventListener('touchmove',block,{passive:false});return;}
     e.stopPropagation();var sx=e.clientX,sy=e.clientY,moved=false,g=null,dead=false;
     try{el.setPointerCapture(e.pointerId);}catch(_){}
     function mv(ev){
