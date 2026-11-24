@@ -42,6 +42,8 @@ body{background:#0B1236;color:#fff;font-family:var(--fb);margin:0;overflow:hidde
 .sign{position:absolute;bottom:10%;transform:translateX(-50%);pointer-events:none;z-index:4}
 .sign .b{background:linear-gradient(180deg,#D69A62,#A9683A);border:3px solid #7A4425;border-radius:12px;padding:6px 14px;font-family:var(--fs);font-size:20px;color:#FFF4DC;text-shadow:0 2px 0 #7A4425;white-space:nowrap;box-shadow:0 5px 0 #6A3A1F}
 .sign .p{width:8px;height:50px;background:#6A3A1F;margin:0 auto}
+.anim{position:absolute;pointer-events:none;width:0;height:0}
+.anim img{position:absolute;bottom:0;left:0;transform:translateX(-50%);display:block;filter:drop-shadow(0 6px 4px rgba(0,0,0,.25))}
 canvas.snow{position:absolute;inset:0;pointer-events:none;z-index:10}
 .nav{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:46px;height:46px;border-radius:50%;border:0;background:rgba(10,16,52,.6);color:#fff;font-size:20px;cursor:pointer;backdrop-filter:blur(4px)}
 .nav.l{left:max(12px,env(safe-area-inset-left,0px))}.nav.r{right:max(12px,env(safe-area-inset-right,0px))}
@@ -128,6 +130,29 @@ for(var i=0;i<220;i++){var z=i<130?0:(i<200?1:2);fl.push({x:Math.random(),y:Math
   if(p.z===2){var g=cx.createRadialGradient(x,p.y*cv.height,0,x,p.y*cv.height,p.r);g.addColorStop(0,'rgba(255,255,255,'+p.a+')');g.addColorStop(1,'rgba(255,255,255,0)');cx.fillStyle=g;}else cx.fillStyle='rgba(255,255,255,'+p.a+')';
   cx.beginPath();cx.arc(x,p.y*cv.height,p.r,0,7);cx.fill();});
  requestAnimationFrame(loop);})(0);
+/* Зверьки: две позы (сидит / в прыжке) — прыжок по дуге собираем сами.
+   Иногда кто-то пробегает по лесу (то за ёлками, то перед ними), иногда выглядывает из-за ёлки. */
+var AN={bunny:{s:[252,308],j:[420,308],h:.12,hop:1.6,hh:.12,sp:.55},fox:{s:[287,236],j:[420,236],h:.12,hop:1.5,hh:.035,sp:.75},
+ deer:{s:[253,338],j:[420,337],h:.17,hop:1.8,hh:.09,sp:.8},squirrel:{s:[227,419],j:[405,420],h:.12,hop:1.3,hh:.10,sp:.6}};
+var KEYS=Object.keys(AN),world=document.getElementById('world');
+function mk(n,z){var a=AN[n],el=document.createElement('div');el.className='anim';el.style.zIndex=z;
+ var k=H*a.h/a.s[1];el.innerHTML='<img src="img/an/'+n+'_sit.webp" alt="" style="width:'+(a.s[0]*k)+'px">';world.appendChild(el);return {el:el,img:el.firstChild,k:k,a:a,n:n};}
+function frame(o,j){var f=j?o.a.j:o.a.s;o.img.src='img/an/'+o.n+(j?'_jump':'_sit')+'.webp';o.img.style.width=(f[0]*o.k)+'px';}
+function run(){var n=KEYS[Math.floor(Math.random()*KEYS.length)],front=Math.random()<.45,o=mk(n,front?6:1),dir=Math.random()<.5?1:-1;
+ var vw=sc.clientWidth,x0=sc.scrollLeft+(dir>0?-120:vw+120),x1=sc.scrollLeft+(dir>0?vw+120:-120),gy=H*(front?.905:.86);
+ var size=H*o.a.h,L=size*o.a.hop,speed=vw*o.a.sp/6,dist=Math.abs(x1-x0),t0=null;
+ o.img.style.transform='translateX(-50%) scaleX('+dir+')';var last=-1;
+ function step(ts){if(t0===null)t0=ts;var d=(ts-t0)/1000*speed;if(d>=dist){o.el.remove();return;}
+  var p=(d%L)/L,air=p<.72,y=air?-Math.sin(Math.PI*p/.72)*H*o.a.hh:0;
+  if(air!==last){frame(o,air);last=air;}
+  o.el.style.left=(x0+dir*d)+'px';o.el.style.top=(gy+y)+'px';requestAnimationFrame(step);}
+ requestAnimationFrame(step);}
+function peek(){var vw=sc.clientWidth,s=sc.scrollLeft,ts=[].slice.call(document.querySelectorAll('.t')).filter(function(t){var x=parseFloat(t.style.left);return x>s+80&&x<s+vw-80;});
+ if(!ts.length)return;var tr=ts[Math.floor(Math.random()*ts.length)],tw=tr.offsetWidth,n=['bunny','squirrel','fox'][Math.floor(Math.random()*3)],o=mk(n,2),side=Math.random()<.5?-1:1;
+ var x=parseFloat(tr.style.left),gy=H*.875;o.el.style.left=x+'px';o.el.style.top=gy+'px';o.img.style.transform='translateX(-50%) scaleX('+side+')';
+ o.el.animate([{transform:'translateX(0)'},{transform:'translateX('+(side*tw*.42)+'px)',offset:.2},{transform:'translateX('+(side*tw*.42)+'px)',offset:.8},{transform:'translateX(0)'}],{duration:4200,easing:'ease-in-out'}).onfinish=function(){o.el.remove();};}
+function life(){if(!document.hidden){Math.random()<.6?run():peek();}setTimeout(life,4000+Math.random()*4000);}
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setTimeout(life,1500);
 function init(){size();build();}
 window.addEventListener('resize',function(){var s=sc.scrollLeft/W;init();sc.scrollLeft=s*W;});
 init();
