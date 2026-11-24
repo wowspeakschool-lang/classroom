@@ -117,6 +117,15 @@ t = R(t, "<style>", """<style>
 .app{grid-template-columns:minmax(0,1fr)!important}
 @media (max-width:860px){.demo{bottom:max(8px,env(safe-area-inset-bottom,0px))!important}.page{padding-bottom:90px!important}}
 """)
+# заставка: браузер не даёт звук до первого нажатия, поэтому в отдельном файле — кнопка входа.
+# На платформе не нужна: ребёнок попадает в адвент нажатием на пункт меню, и музыка играет сразу.
+t = t.replace('<div class="demo" id="demo"></div>', """<div class="demo" id="demo"></div>
+<div id="splash" style="position:fixed;inset:0;z-index:999;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 30%,#3A4FA0,#16204A 70%);color:#fff;text-align:center;padding:24px">
+<div><div style="font:400 clamp(34px,7vw,56px)/1.1 Pacifico,cursive;margin-bottom:10px">Адвент-календарь WowSpeak</div>
+<p style="margin:0 0 22px;color:#D9DFF5;font:600 17px Nunito,sans-serif">31 окошко до Нового года · ёлка · сказочный лес</p>
+<button type="button" id="splashGo" style="font:800 18px Montserrat,sans-serif;border:0;border-radius:16px;padding:15px 26px;background:#FFD45A;color:#3A2600;cursor:pointer">🎄 Открыть адвент-календарь</button></div></div>
+<script>/* только для отдельного файла: первое нажатие включает музыку */document.getElementById('splashGo').onclick=function(){document.getElementById('splash').remove();};</script>""", 1)
+assert 'splashGo' in t
 consts = '<script>window.__A=' + json.dumps(assets) + ';</script>' + BOOT + \
     '<script>var FOREST_HTML=' + js_str(les) + ';var RECEPT_HTML=' + js_str(rec) + ';var BINGO_HTML=' + js_str(bng) + ';</script>'
 t = t.replace('<meta charset="utf-8">', '<meta charset="utf-8">' + consts, 1)
