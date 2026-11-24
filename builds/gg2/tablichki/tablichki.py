@@ -52,7 +52,7 @@ C['u1_hw2'] = ('Юнит 1 · ДЗ 2 — новый блок 2', card(BLUE,
    ['He / She / It', '<b>listen<u>s</u></b>', '<b>He listens to music.</b> <span style="color:#6B7280">Он слушает музыку.</span>']]) +
  p('<b>Как добавляется -s у he / she / it</b>', '10px 0 4px') +
  pairs([('love → love<u>s</u> · eat → eat<u>s</u> · play → play<u>s</u>', 'обычно просто -s'),
-        ('do → do<u>es</u> · go → go<u>es</u> · wash → wash<u>es</u>', 'после o, s, sh, ch — <b>-es</b>'),
+        ('do → do<u>es</u> · go → go<u>es</u> · wash → wash<u>es</u>', 'после o, s, sh, ch, x — <b>-es</b>'),
         ('stud<u>y</u> → stud<u>ies</u> · fly → fl<u>ies</u>', 'после согласной <b>y → ies</b>')], BLUE) +
  p('<b>Как часто?</b> always → usually → often → sometimes → never', '10px 0 4px') +
  pairs([('I <u>never</u> listen to music.', 'перед обычным глаголом'),
@@ -145,7 +145,7 @@ C['u3_hw2'] = ('Юнит 3 · ДЗ 2 — вместо текста «Прави�
 
 C['u3_hw3'] = ('Юнит 3 · ДЗ 3 — вместо текста «Вопросы и краткие ответы» (блок 4)', card(GREEN,
  'Unit 3 · Present Continuous — вопрос и краткий ответ',
- pod('В вопросе <b>am / is / are</b> уходит вперёд, перед того, кто действует.') +
+ pod('В вопросе <b>am / is / are</b> выходит вперёд — перед тем, кто действует.') +
  grid(GREEN, ['Вопрос', 'Да', 'Нет'], [
    ['<b>Am I</b> coming?', 'Yes, I am.', "No, I'm not."],
    ['<b>Is he / she / it</b> coming?', 'Yes, he is.', "No, he isn't."],
@@ -171,7 +171,7 @@ C['u4_hw2'] = ('Юнит 4 · ДЗ 2 — вместо текста с прави
  pod('Чтобы сказать «выше», «интереснее», к прилагательному добавляют <b>-er</b> или ставят перед ним <b>more</b>.') +
  grid(BLUE, ['Какое слово', 'Как меняется', 'Пример'], [
    ['короткое', '+ <b>-er</b>', 'cold → cold<b>er</b> · nice → nic<b>er</b>'],
-   ['короткое на согласную', 'согласная удваивается', 'big → bi<b>gger</b>'],
+   ['короткое: гласная + согласная', 'согласная удваивается', 'big → bi<b>gger</b>'],
    ['короткое на -y', '<b>y → ier</b>', 'easy → eas<b>ier</b>'],
    ['длинное', '<b>more</b> + слово', 'exciting → <b>more</b> exciting'],
    ['особые', 'надо запомнить', 'good → <b>better</b> · bad → <b>worse</b>']]) +
@@ -185,7 +185,7 @@ C['u4_hw3'] = ('Юнит 4 · ДЗ 3 — новый блок 2', card(GREEN,
  grid(GREEN, ['Группа', 'Правило', 'Примеры'], [
    ['короткие', '+ <b>-er</b>', 'cheap → cheaper · high → higher · low → lower'],
    ['на -y', '<b>-ier</b>', 'easy → easier · funny → funnier'],
-   ['длинные (2+ слога)', '<b>more</b> +', 'boring → more boring · dangerous → more dangerous'],
+   ['длинные (2 слога и больше, кроме слов на -y)', '<b>more</b> +', 'boring → more boring · dangerous → more dangerous'],
    ['особые', 'запомнить', 'good → better · bad → worse']]) +
  note(GREEN, 'Слова урока: boring, cheap, dangerous, difficult, easy, exciting, expensive, high, low, safe.')))
 
@@ -240,7 +240,7 @@ C['u5_hw3'] = ('Юнит 5 · ДЗ 3 — вместо текста «Как го
  p('<b>Когда это было</b>', '10px 0 4px') +
  pairs([('yesterday', 'вчера'),
         ('last night / last week / last month / last year', 'вчера вечером, на прошлой неделе, в прошлом месяце, в прошлом году'),
-        ('last Monday / last May', 'в прошлый понедельник, в мае'),
+        ('last Monday / last May', 'в прошлый понедельник, в прошлом мае'),
         ('in 2014', 'в 2014 году')], GREEN) +
  note(GREEN, 'С вопросительным словом: <b>Where were</b> you last night? · <b>When was</b> Rocco at the park?')))
 
@@ -272,14 +272,13 @@ C['u6_hw2'] = ('Юнит 6 · ДЗ 2 — новый блок 2', card(BLUE,
         ('tid<u>y</u> → tid<u>ied</u>', 'после согласной <b>y → ied</b>'),
         ('sto<u>p</u> → sto<u>pped</u>', 'короткое слово — согласная удваивается')], BLUE)))
 
-C['u6_hw3'] = ('Юнит 6 · ДЗ 3 — вместо текста «Маркеры прошедшего времени» (блок 3)', card(GREEN,
+C['u6_hw3'] = ('Юнит 6 · ДЗ 3 — вместо текста «Маркеры прошедшего времени» (блок 2)', card(GREEN,
  'Unit 6 · Слова-подсказки прошедшего времени',
  pod('Эти слова сразу говорят: действие уже закончилось.') +
  grid(GREEN, ['Сколько времени прошло', 'Пример'], [
-   ['<b>ago</b> — «назад»', 'two days <b>ago</b> · an hour <b>ago</b> · a week <b>ago</b>'],
-   ['', 'a month <b>ago</b> · a year <b>ago</b> · ten minutes <b>ago</b>'],
+   ['<b>ago</b> — «назад»', 'two days <b>ago</b> · an hour <b>ago</b> · a week <b>ago</b> · a month <b>ago</b> · ten minutes <b>ago</b>'],
    ['<b>last</b> — «прошлый»', '<b>last</b> night · <b>last</b> week · <b>last</b> Monday'],
-   ['просто время', '<b>yesterday</b> · <b>in 2014</b>']]) +
+   ['когда именно', '<b>yesterday</b> · <b>in 2014</b>']]) +
  pairs([('Her babysitter was ill two days <b>ago</b>.', 'Её няня болела два дня назад.')], GREEN) +
  note(GREEN, '<b>ago</b> ставится <u>после</u> промежутка времени: <i>a week ago</i>, а не <i>ago a week</i>.')))
 
@@ -332,6 +331,18 @@ C['u7_hw5'] = ('Юнит 7 · ДЗ 5 — новый блок 2', card(ORANGE,
         ('At <i>seven thirty</i>. / At <i>eight</i>.', 'В половине восьмого. / В восемь.')], ORANGE) +
  note(ORANGE, 'Цена вслух: <b>£10.50</b> — ten pounds fifty · <b>£7.25</b> — seven pounds '
                'twenty-five · <b>£0.50</b> — fifty pence.')))
+
+C['u7_hw4'] = ('Юнит 7 · ДЗ 4 — новый блок 2', card(GREEN,
+ 'Unit 7 · Past Simple — вопрос и краткий ответ',
+ pod('В вопросе о прошлом вперёд выходит <b>did</b>, а глагол стоит в начальной форме.') +
+ grid(GREEN, ['Вопрос', 'Да', 'Нет'], [
+   ['<b>Did</b> I / you / we / they have a good time?', 'Yes, I did.', "No, I didn't."],
+   ['<b>Did</b> he / she / it have a good time?', 'Yes, he did.', "No, he didn't."]]) +
+ p('<b>С вопросительным словом</b>', '10px 0 4px') +
+ pairs([('<b>Where did</b> you go? — I went to Rome.', 'Куда ты ездил? — Я ездил в Рим.'),
+        ('<b>What did</b> you eat? — I ate spaghetti.', 'Что ты ел? — Я ел спагетти.')], GREEN) +
+ warn("После did глагол без -ed и без второй формы: <b>Did you went?</b> ✗ → <b>Did you go?</b> ✓")))
+
 
 # ─────────── Юнит 8 ───────────
 C['u8_hw2'] = ('Юнит 8 · ДЗ 2 — новый блок 2', card(BLUE,
