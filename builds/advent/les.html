@@ -102,7 +102,7 @@ function build(){
  W=start+kids.length*gap+sz;world.style.width=W+'px';
  var h='<div class="main" style="left:'+(start*.4)+'px;width:'+(sz*1.5)+'px"><img src="img/tree_pine.webp" alt=""><img src="img/top_star.webp" alt="" style="position:absolute;left:50%;top:-8%;width:22%;transform:translateX(-50%)"></div>'+
    '<div class="sign" style="left:'+(start*.82)+'px"><div class="b">Лес WowSpeak</div><div class="p"></div></div>';
- var PROPS=['snowman','drift1','sledge','lamp','drift3','snowman','lamp','drift1','sledge'],pk=0;
+ var PROPS=['snowman','sledge','lamp','snowman','lamp','sledge'],pk=0;
  kids.forEach(function(kid,j){h+=tree(kid,start+gap*(j+.5)+(rnd()-.5)*gap*.15,sz);
   /* между ёлками иногда снеговик, санки, фонарь — чтобы аллея не была однообразной */
   if(j%5===2){var pr=PROPS[pk++%PROPS.length],pw={snowman:.42,sledge:.5,lamp:.22,drift3:.45,drift1:.55}[pr]*sz;
