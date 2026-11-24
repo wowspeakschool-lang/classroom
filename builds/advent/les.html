@@ -183,6 +183,14 @@ function goTree(){try{parent.postMessage({advent:'tree'},'*');}catch(e){}}
 document.getElementById('toTree').onclick=goTree;
 if(/[?&]nye=1/.test(location.search))document.body.classList.add('nye');
 if(window.parent!==window)document.getElementById('callAn').hidden=true;
+/* звук леса (Анна, 24.11): шкатулка в лесу, тихо, по кругу; в кабинете его включает сам кабинет */
+if(window.parent===window){var fm=new Audio('audio/les_B_shkatulka.mp3');fm.loop=true;fm.volume=.2;
+  var fb=document.createElement('button');fb.type='button';fb.className='back';fb.id='fMus';fb.textContent='🎵';fb.title='Музыка леса';
+  document.getElementById('toTree').after(fb);var off=false;
+  function fUI(){fb.textContent=fm.paused?'🎵':'⏸';}
+  fb.onclick=function(e){e.stopPropagation();if(fm.paused){off=false;fm.play().then(fUI).catch(function(){});}else{off=true;fm.pause();fUI();}};
+  fm.play().then(fUI).catch(function(){});
+  ['pointerdown','keydown','touchstart'].forEach(function(ev){document.addEventListener(ev,function(e){if(e.target===fb||off||!fm.paused)return;fm.play().then(fUI).catch(function(){});},{once:true,capture:true});});}
 function init(){size();build();}
 window.addEventListener('resize',function(){var s=sc.scrollLeft/W;init();sc.scrollLeft=s*W;});
 init();
