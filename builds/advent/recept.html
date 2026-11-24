@@ -67,7 +67,7 @@ h2{font:900 22px Montserrat,sans-serif;color:var(--green);margin:26px 0 10px;dis
     <div>
       <h1>Gingerbread Men</h1>
       <p style="margin:0"><span class="s" data-ru="Испеки своих пряничных человечков к Рождеству!">Bake your own gingerbread men for Christmas!</span></p>
-      <div class="chips"><span class="chip"><span class="s" data-ru="примерно 20 печенек">🍪 about 20 cookies</span></span><span class="chip"><span class="s" data-ru="1 час">⏰ 1 hour</span></span><span class="chip"><span class="s" data-ru="вместе со взрослым">🧑‍🍳 with a grown-up</span></span></div>
+      <div class="chips"><span class="chip"><span class="s" data-ru="примерно 20 печенек">🍪 about 20 cookies</span></span><span class="chip"><span class="s" data-ru="примерно полтора часа">⏰ about 1.5 hours</span></span><span class="chip"><span class="s" data-ru="вместе со взрослым">🧑‍🍳 with a grown-up</span></span></div>
       <p class="hint" id="hint"></p>
     </div>
     <img src="recept/cover.webp" alt="Тарелка с пряничными человечками и стакан молока">
@@ -75,7 +75,7 @@ h2{font:900 22px Montserrat,sans-serif;color:var(--green);margin:26px 0 10px;dis
 
   <h2>🧺 <span class="s" data-ru="Что понадобится">You need</span></h2>
   <div class="ing" id="ing"></div>
-  <div class="icing"><b>✨</b> <span class="s" data-ru="Для глазури: 100 г сахарной пудры и 1 столовая ложка лимонного сока.">For the icing: 100 g icing sugar and 1 tablespoon of lemon juice.</span></div>
+  <div class="icing"><b>✨</b> <span class="s" data-ru="Для глазури: 100 г сахарной пудры и 1–2 чайные ложки лимонного сока. Добавляй сок понемногу — глазурь должна быть густой.">For the icing: 100 g icing sugar and 1–2 teaspoons of lemon juice. Add the juice slowly — the icing must be thick.</span></div>
 
   <h2>👩‍🍳 <span class="s" data-ru="Как готовить">How to make them</span></h2>
   <div class="steps" id="steps"></div>
@@ -84,14 +84,14 @@ h2{font:900 22px Montserrat,sans-serif;color:var(--green);margin:26px 0 10px;dis
 </main>
 <script>
 (function(){
-var ING=[['flour','350 g flour','350 г муки'],['butter','100 g butter','100 г сливочного масла'],['brown_sugar','150 g brown sugar','150 г коричневого сахара'],['honey','4 tablespoons honey','4 столовые ложки мёда'],
+var ING=[['flour','350 g flour','350 г муки'],['butter','125 g butter','125 г сливочного масла'],['brown_sugar','150 g brown sugar','150 г коричневого сахара'],['honey','4 tablespoons honey','4 столовые ложки мёда'],
  ['egg','1 egg','1 яйцо'],['ginger','2 teaspoons ground ginger','2 чайные ложки молотого имбиря'],['cinnamon','1 teaspoon cinnamon','1 чайная ложка корицы'],['baking_soda','1 teaspoon baking soda','1 чайная ложка соды']];
-var ST=[['s_melt',[['Melt the butter, honey and sugar in a small pan.','Растопи масло, мёд и сахар в маленькой кастрюльке.'],['Let it cool a little.','Дай немного остыть.']],1],
+var ST=[['s_melt',[['Melt the butter, honey and sugar in a small pan.','Растопи масло, мёд и сахар в маленькой кастрюльке.'],['Let it cool for 10 minutes.','Дай остыть 10 минут.']],1],
  ['s_mix',[['Mix the flour, ginger, cinnamon and baking soda in a big bowl.','Смешай муку, имбирь, корицу и соду в большой миске.'],['Add the warm butter mix and the egg.','Добавь тёплую смесь с маслом и яйцо.'],['Stir to make a soft dough.','Перемешай — получится мягкое тесто.']]],
- ['s_roll',[['Roll out the dough on a little flour.','Раскатай тесто, подсыпав немного муки.'],['Make it thin — about 5 mm.','Сделай его тонким — примерно 5 мм.'],['Is it sticky? Put it in the fridge for 15 minutes.','Тесто липнет? Убери его в холодильник на 15 минут.']]],
+ ['s_roll',[['Put the dough in the fridge for 30 minutes.','Убери тесто в холодильник на 30 минут.'],['Then roll it out on a little flour.','Потом раскатай его, подсыпав немного муки.'],['Make it thin — about 5 mm.','Сделай его тонким — примерно 5 мм.']]],
  ['s_cut',[['Cut out gingerbread men with a cookie cutter.','Вырежи пряничных человечков формочкой.']]],
- ['s_tray',[['Put them on a baking tray.','Выложи их на противень.'],['Bake at 180 °C for 8–10 minutes.','Выпекай при 180 °C 8–10 минут.']],1],
- ['s_decorate',[['When they are cool, decorate them with icing.','Когда печенье остынет, укрась его глазурью.'],['Draw a smile and buttons!','Нарисуй улыбку и пуговки!']]]];
+ ['s_tray',[['Put them on a baking tray with baking paper.','Выложи их на противень с бумагой для выпечки.'],['Bake at 180 °C for 10–12 minutes, until the edges are golden.','Выпекай при 180 °C 10–12 минут, пока края не станут золотистыми.']],1],
+ ['s_decorate',[['Let them cool — hot cookies are soft.','Дай печенью остыть — горячее оно мягкое.'],['Then decorate them with icing.','Потом укрась его глазурью.'],['Draw a smile and buttons!','Нарисуй улыбку и пуговки!']]]];
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function S(en,ru){return '<span class="s" data-ru="'+esc(ru)+'">'+esc(en)+'</span>';}
 document.getElementById('ing').innerHTML=ING.map(function(x){return '<div class="it"><img src="recept/'+x[0]+'.webp" alt="">'+S(x[1],x[2])+'</div>';}).join('');
