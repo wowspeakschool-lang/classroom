@@ -150,6 +150,19 @@ h2{font-family:var(--fh);font-weight:900;font-size:22px;margin:0}
 .tier.l .big img{filter:drop-shadow(0 0 14px #FFD45A)}.tier.e .big img{filter:drop-shadow(0 0 12px #C27BFF)}.tier.r .big img{filter:drop-shadow(0 0 10px #4C9BFF)}
 .tier .spk{position:absolute;font-size:16px;animation:twk 1.8s ease-in-out infinite;color:#fff;text-shadow:0 0 8px currentColor;z-index:2}
 @media (max-width:720px){.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* гирлянда-огоньки на ёлке светится: лампочки мерцают по очереди; 31 декабря — вся ёлка в огнях (Анна, 24.11) */
+.fl{position:absolute;transform:translate(-50%,-50%);z-index:2}
+.fl img{width:100%;display:block;filter:drop-shadow(0 3px 3px rgba(0,0,0,.4))}
+.fl i{position:absolute;width:9%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,#fff 0 12%,var(--c) 30%,transparent 70%);mix-blend-mode:screen;animation:bulb 1.7s ease-in-out infinite;pointer-events:none}
+@keyframes bulb{0%,100%{opacity:.25;transform:translate(-50%,-50%) scale(.7)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}}
+.treep.nye .fl i{animation-duration:.6s;width:12%}
+.treep.nye .tree::after{content:"";position:absolute;inset:-6% -14%;background:radial-gradient(ellipse at 50% 55%,rgba(255,220,120,.35),transparent 65%);animation:nyeg 1.2s ease-in-out infinite;pointer-events:none}
+@keyframes nyeg{50%{opacity:.4}}
+.treep.nye .tree img.on{animation:pop 1.2s ease-in-out infinite}
+@keyframes pop{50%{filter:brightness(1.3) drop-shadow(0 0 8px #FFE9A0)}}
+.mode{display:inline-flex;gap:4px;margin-left:10px;vertical-align:middle}
+.mode b{font-family:var(--fb);font-weight:800;font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.15);cursor:pointer}
+.mode b.on{background:#FFD45A;color:#4A2E00}
 /* ===== шкалы ===== */
 .var{display:flex;flex-direction:column;gap:10px}
 .vhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
@@ -228,7 +241,7 @@ h2{font-family:var(--fh);font-weight:900;font-size:22px;margin:0}
 
 
 
-<div class="treep"><div class="tt">🎄 Моя ёлка <small>перетащи игрушку с полки</small></div><div class="tree"><img src="img/tree_pine.webp" alt=""><img class="on" src="img/red_ball.webp" style="left:38%;top:42%;width:11%"><img class="on" src="img/star.webp" style="left:57%;top:30%;width:10%"><img class="on" src="img/bell.webp" style="left:45%;top:58%;width:10%"><img class="on" src="img/candy_cane.webp" style="left:62%;top:55%;width:7%"><img class="on" src="img/snowflake.webp" style="left:30%;top:66%;width:10%"><img class="on" src="img/gift6.webp" style="left:60%;top:84%;width:14%"><img class="on" src="img/ic_garland.webp" style="left:47%;top:46%;width:30%;opacity:0"></div></div></div></section>
+<div class="treep"><div class="tt">🎄 Моя ёлка <small>перетащи игрушку с полки</small><span class="mode"><b class="on" data-m="now">Сейчас</b><b data-m="nye">31 декабря ✨</b></span></div><div class="tree"><img src="img/tree_pine.webp" alt=""><img class="on" src="img/red_ball.webp" style="left:38%;top:42%;width:11%"><img class="on" src="img/star.webp" style="left:57%;top:30%;width:10%"><img class="on" src="img/bell.webp" style="left:45%;top:58%;width:10%"><img class="on" src="img/candy_cane.webp" style="left:62%;top:55%;width:7%"><img class="on" src="img/snowflake.webp" style="left:30%;top:66%;width:10%"><img class="on" src="img/gift6.webp" style="left:60%;top:84%;width:14%"><div class="fl" style="left:50%;top:50%;width:56%"><img src="img/fairy_lights.webp" alt=""><i style="left:10%;top:46%;--c:#FFE14A;animation-delay:0.00s"></i><i style="left:20.5%;top:60%;--c:#FF5CB8;animation-delay:0.21s"></i><i style="left:33%;top:68%;--c:#4CC3FF;animation-delay:0.42s"></i><i style="left:44.8%;top:73%;--c:#7DFF5A;animation-delay:0.63s"></i><i style="left:55.3%;top:73%;--c:#FFE14A;animation-delay:0.84s"></i><i style="left:67.2%;top:69%;--c:#FF5CB8;animation-delay:1.05s"></i><i style="left:79.2%;top:60%;--c:#4CC3FF;animation-delay:1.26s"></i><i style="left:89.6%;top:47%;--c:#7DFF5A;animation-delay:1.47s"></i></div><div class="fl" style="left:50%;top:70%;width:74%"><img src="img/fairy_lights.webp" alt=""><i style="left:10%;top:46%;--c:#FFE14A;animation-delay:0.00s"></i><i style="left:20.5%;top:60%;--c:#FF5CB8;animation-delay:0.21s"></i><i style="left:33%;top:68%;--c:#4CC3FF;animation-delay:0.42s"></i><i style="left:44.8%;top:73%;--c:#7DFF5A;animation-delay:0.63s"></i><i style="left:55.3%;top:73%;--c:#FFE14A;animation-delay:0.84s"></i><i style="left:67.2%;top:69%;--c:#FF5CB8;animation-delay:1.05s"></i><i style="left:79.2%;top:60%;--c:#4CC3FF;animation-delay:1.26s"></i><i style="left:89.6%;top:47%;--c:#7DFF5A;animation-delay:1.47s"></i></div></div></div></div></section>
 
 <section class="var"><div class="vhead"><span class="n">Что на шкале</span><h2>Подарки по дням</h2><p>Каждые 2–4 окошка что-то есть, редкая игрушка — раз в пять окошек.</p></div>
 <table class="tbl"><thead><tr><th>открыто окошек</th><th>что получает</th></tr></thead><tbody>
@@ -278,6 +291,7 @@ for(var d=1;d<=31;d++){var x=1.6+(d-1)*(96.8/30),ph=((x)%25)/25,y=4+Math.sin(ph*
  var gift=!g?'':(d<=OPEN?'<span class="gift '+g[0]+' done">'+(g[0]==='r'?'🔮':g[1])+'</span>':'<span class="gift wait '+cls+'"><img src="img/box_common.webp" alt=""></span>');
  W+='<div class="gb'+(on?' on':'')+(d===OPEN+1?' today':'')+'" style="left:'+x+'%;--y:'+y+'px;--c:'+COL[d%6]+';--i:'+d+'"><span class="l"></span><span class="d">'+d+'</span>'+gift+'</div>';}
 document.getElementById('wire').innerHTML=W;
+document.querySelectorAll('.mode b').forEach(function(b){b.onclick=function(){document.querySelectorAll('.mode b').forEach(function(x){x.classList.toggle('on',x===b);});document.querySelector('.treep').classList.toggle('nye',b.dataset.m==='nye');};});
 document.getElementById('b31').onclick=function(){var w=document.getElementById('wireBox');w.classList.toggle('all');this.textContent=w.classList.contains('all')?'↩ Вернуть как сегодня':'✨ Показать, как гирлянда загорится 31 декабря';};
 
 </script>
