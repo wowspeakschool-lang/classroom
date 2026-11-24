@@ -1,0 +1,238 @@
+<title>Адвент-календарь WowSpeak</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Nunito:wght@500;600;700;800&family=Pacifico&display=swap">
+<style>
+/* Страница события для команды: тёмно-синяя зимняя ночь шапкой, дальше спокойные светлые разделы.
+   Порядок — как ребёнок проходит декабрь: окошко → мастерская → шкала → подарки → друзья → лес. */
+:root{
+  --bg:#F4F6FB;--card:#FFFFFF;--ink:#1D2340;--mute:#59617E;--line:#E1E6F2;
+  --night:#16204A;--night2:#24346E;--gold:#E8B53A;--red:#D7263D;--green:#1E8A4D;
+  --r:#2E6FD6;--e:#7A2FD0;--l:#C98410;
+  --fd:'Montserrat',system-ui,sans-serif;--fb:'Nunito',system-ui,sans-serif;--fs:'Pacifico',cursive;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1430;--card:#18204A;--ink:#EEF1FB;--mute:#B3BCDA;--line:#2A3466;--r:#7FB0FF;--e:#C89BFF;--l:#F3C25C;--green:#5BD08D;--red:#FF6B7E;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1430;--card:#18204A;--ink:#EEF1FB;--mute:#B3BCDA;--line:#2A3466;--r:#7FB0FF;--e:#C89BFF;--l:#F3C25C;--green:#5BD08D;--red:#FF6B7E;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--fb)}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.hero{background:radial-gradient(ellipse at 80% 0%,#3A4FA0 0%,transparent 55%),linear-gradient(180deg,var(--night),var(--night2));color:#fff;margin-top:calc(-1 * env(safe-area-inset-top,0px));padding-top:calc(env(safe-area-inset-top,0px) + 2.6rem);padding-bottom:2.6rem;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:center}
+.hero .eb{font:800 12px var(--fd);letter-spacing:.14em;text-transform:uppercase;color:#FFD87A}
+.hero h1{font-family:var(--fs);font-weight:400;font-size:clamp(38px,6vw,60px);line-height:1.1;margin:.2em 0 .25em;text-wrap:balance}
+.hero p{margin:0;color:#D9DFF5;max-width:52ch}
+.hero .tree{display:flex;justify-content:center;position:relative}
+.hero .tree img{width:min(300px,80%);filter:drop-shadow(0 18px 30px rgba(0,0,0,.45))}
+.hero .tree .star{position:absolute;top:-6%;width:22%;left:39%}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.cta a{font:800 14px var(--fd);text-decoration:none;border-radius:12px;padding:11px 16px;background:#FFD45A;color:#3A2600}
+.cta a.g{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.cta a:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:-26px;position:relative}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.fact b{display:block;font:900 26px var(--fd);font-variant-numeric:tabular-nums}
+.fact span{color:var(--mute);font-size:14px}
+section{padding-block:34px 6px}
+h2{font:900 24px var(--fd);margin:0 0 6px;text-wrap:balance}
+.lead{color:var(--mute);margin:0 0 16px;max-width:70ch}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+.step .n{font:900 13px var(--fd);color:var(--red)}
+.step h3{font:800 16px var(--fd);margin:4px 0 4px}
+.step p{margin:0;font-size:14.5px;color:var(--mute)}
+.step img{width:64px;height:64px;object-fit:contain;display:block;margin-bottom:6px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;min-width:0}
+.box h3{font:800 17px var(--fd);margin:0 0 8px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:800 12px var(--fd);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:800}
+.tw{overflow-x:auto}
+/* шкала подарков: 31 лампочка */
+.wire{display:grid;grid-template-columns:repeat(31,1fr);gap:3px;margin:10px 0 6px}
+.wire i{aspect-ratio:1;border-radius:50%;background:var(--line);position:relative}
+.wire i.c{background:var(--gold)}.wire i.r{background:var(--r)}.wire i.cert{background:var(--red)}
+.wleg{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;color:var(--mute)}
+.wleg i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+/* подарки по датам */
+.gifts{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.gift{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center}
+.gift .d{font:900 30px var(--fd);color:var(--red);line-height:1;font-variant-numeric:tabular-nums}
+.gift .d small{font-size:12px;color:var(--mute);display:block;font-weight:800}
+.gift .ic{font-size:28px;margin:6px 0 2px}
+.gift b{display:block;font:800 14px var(--fd);line-height:1.25}
+.gift span{font-size:13px;color:var(--mute)}
+/* редкость */
+.rar{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.rr{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:center}
+.rr img{width:72px;height:72px;object-fit:contain}
+.rr h3{font:800 16px var(--fd);margin:0}
+.rr.r h3{color:var(--r)}.rr.e h3{color:var(--e)}.rr.l h3{color:var(--l)}
+.rr p{margin:2px 0 0;font-size:14px;color:var(--mute)}
+ul.clean{margin:0;padding-left:18px}ul.clean li{margin:3px 0}
+.who{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.links a{font:800 14px var(--fd);color:var(--ink);text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.links a:hover{border-color:var(--gold)}
+.links a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.q{border-left:4px solid var(--red);padding:2px 0 2px 12px;list-style:none;margin-left:-18px}
+footer{padding-block:30px 40px;color:var(--mute);font-size:14px}
+@media (max-width:820px){
+  .hero .wrap,.cols,.who{grid-template-columns:1fr}
+  .hero .tree{order:-1}.hero .tree img{width:180px}
+  .facts,.steps{grid-template-columns:repeat(2,1fr)}
+  .gifts{grid-template-columns:repeat(2,1fr)}
+  .rar{grid-template-columns:1fr}
+  .wire{gap:2px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eb">1–31 декабря · кабинет ученика · 7–9 лет · новый день — в полночь ученика</div>
+      <h1>Адвент-календарь WowSpeak</h1>
+      <p>Каждый день ребёнок открывает окошко: в нём ёлочная игрушка и новое английское слово. Игрушки он сам вешает на свою ёлку, а ёлка стоит в общем лесу школы.</p>
+      <div class="cta">
+        <a href="https://claude.ai/artifact/CzYEWhfycoHdbXRKwftZxy">Открыть макет кабинета</a>
+        <a class="g" href="https://claude.ai/artifact/XPFwKWQ9iva2gthQd539Zp">Лес ёлок</a>
+      </div>
+    </div>
+    <div class="tree"><img src="img/tree_pine.webp" alt="Ёлка"><img class="star" src="img/top_star.webp" alt=""></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="facts">
+    <div class="fact"><b>31</b><span>окошко — 31 слово</span></div>
+    <div class="fact"><b>41</b><span>игрушка: 23 обычных и 18 особых</span></div>
+    <div class="fact"><b>5</b><span>настоящих подарков от школы</span></div>
+    <div class="fact"><b>🪙 52</b><span>монеток по шкале за все окошки</span></div>
+  </div>
+
+  <section>
+    <h2>Как проходит день ребёнка</h2>
+    <p class="lead">Всё занимает две-три минуты, а возвращаться хочется каждый день: впереди лампочки шкалы и сюрпризы в окошках.</p>
+    <div class="steps">
+      <div class="step"><img src="img/gift3.webp" alt=""><div class="n">Шаг 1</div><h3>Открыть окошко</h3><p>Сегодня и вчера — бесплатно. Пропущенное раньше — за 🪙 5. Коробка трясётся и раскрывается с конфетти.</p></div>
+      <div class="step"><img src="img/bell.webp" alt=""><div class="n">Шаг 2</div><h3>Услышать слово</h3><p>«gold bell — золотой колокольчик». Повторил за голосом — 🪙 1, один раз в день.</p></div>
+      <div class="step"><img src="img/red_ball.webp" alt=""><div class="n">Шаг 3</div><h3>Нарядить ёлку</h3><p>Игрушка ложится на полку Мастерской эльфов. С полки — на ёлку: двигать, увеличивать, перекрашивать.</p></div>
+      <div class="step"><img src="img/tree_snowy.webp" alt=""><div class="n">Шаг 4</div><h3>Заглянуть в лес</h3><p>Ёлки всех учеников подряд, подписаны «Имя Ф.». Идёт снег, пробегают зверьки.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Монетки: цены и заработок</h2>
+    <p class="lead">Адвент тратит и пополняет тот же кошелёк, что колесо удачи и сундучок-сюрприз.</p>
+    <div class="cols">
+      <div class="box"><h3>Тратить</h3>
+        <table><tbody>
+          <tr><td>окошко раньше вчерашнего</td><td class="num">🪙 5</td></tr>
+          <tr><td>новый цвет игрушки (навсегда)</td><td class="num">🪙 1</td></tr>
+          <tr><td>ещё один экземпляр игрушки</td><td class="num">🪙 3</td></tr>
+          <tr><td>сегодняшнее и вчерашнее окошко</td><td class="num">бесплатно</td></tr>
+        </tbody></table>
+      </div>
+      <div class="box"><h3>Заработать</h3>
+        <table><tbody>
+          <tr><td>урок (в среднем по базе)</td><td class="num">≈ 🪙 5</td></tr>
+          <tr><td>вводный урок, новым ученикам</td><td class="num">🪙 30</td></tr>
+          <tr><td>покупка абонемента</td><td class="num">🪙 100</td></tr>
+          <tr><td>вход по ссылке друга</td><td class="num">🪙 20</td></tr>
+          <tr><td>«Повтори за мной»</td><td class="num">🪙 1 в день</td></tr>
+          <tr><td>пришёл позже 1 декабря</td><td class="num">🪙 5 × пропуски</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Гирлянда подарков</h2>
+    <p class="lead">Награды за число открытых окошек, а не за даты. Будущие подарки — закрытые коробки без подписи. Награда не выскакивает сама: на гирлянде загорается лампочка, коробка светится «Нажми!», и ребёнок забирает её сам.</p>
+    <div class="box">
+      <div class="wire" id="wire" aria-label="31 лампочка шкалы"></div>
+      <div class="wleg"><span><i style="background:var(--gold)"></i>монетки: 3 · 7 · 12 · 18 · 23 · 28</span><span><i style="background:var(--r)"></i>редкая игрушка: 5 · 10 · 15 · 20 · 25</span><span><i style="background:var(--red)"></i>31 — 🪙 15 и грамота со всеми словами</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Пять подарков от школы</h2>
+    <p class="lead">Подарок лежит в окошке своего числа. Открыл это окошко позже, даже купив его, — подарок всё равно твой.</p>
+    <div class="gifts">
+      <div class="gift"><div class="d">5<small>декабря</small></div><div class="ic">🍪</div><b>Рецепт имбирного печенья</b><span>на английском, с картинками</span></div>
+      <div class="gift"><div class="d">10<small>декабря</small></div><div class="ic">🗣</div><b>Разговорный клуб WowSpace</b><span>одно занятие</span></div>
+      <div class="gift"><div class="d">15<small>декабря</small></div><div class="ic">🎨</div><b>Мастер-класс WowSpace</b><span>один мастер-класс</span></div>
+      <div class="gift"><div class="d">22<small>декабря</small></div><div class="ic">🎲</div><b>Christmas Bingo</b><span>игра из слов ребёнка</span></div>
+      <div class="gift"><div class="d">28<small>декабря</small></div><div class="ic">🏷</div><b>−50 % на WowSpace</b><span>промокод на месяц</span></div>
+    </div>
+    <div class="links" style="margin-top:12px"><a href="https://claude.ai/artifact/VdBtLbtCD6SjDjghfeLkdb">🍪 Рецепт</a><a href="https://claude.ai/artifact/PWMWBAaQqamCiyTbNEVn8p">🎲 Bingo</a></div>
+  </section>
+
+  <section>
+    <h2>Особые игрушки</h2>
+    <p class="lead">Ненайденные стоят в мастерской закрытыми коробками своего цвета. Подсказка на коробке говорит, как их получить.</p>
+    <div class="rar">
+      <div class="rr r"><img src="img/box_rare.webp" alt=""><div><h3>Редкие · 5</h3><p>Только за шкалу подарков. Снежный шар, Щелкунчик, фонарик, белый медведь, лошадка-качалка.</p></div></div>
+      <div class="rr e"><img src="img/box_epic.webp" alt=""><div><h3>Эпические · 10</h3><p>«Позови друга»: друг засчитывается, когда откроет своё первое окошко. Один друг — одна игрушка.</p></div></div>
+      <div class="rr l"><img src="img/box_legend.webp" alt=""><div><h3>Легендарные · 3</h3><p>Пост или сторис с ёлкой и отметкой школы, скриншот на проверку куратору. До трёх раз.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Новые клиенты</h2>
+    <div class="cols">
+      <div class="box"><h3>Путь по ссылке друга</h3>
+        <ul class="clean">
+          <li>Страница «Маша П. зовёт тебя!» с регистрацией.</li>
+          <li>Школе приходит заявка с пометкой, кто пригласил.</li>
+          <li>Новичку сразу 🪙 20, дальше он ведёт календарь как все.</li>
+          <li>Открыл первое окошко — у пригласившего эпическая игрушка.</li>
+        </ul>
+      </div>
+      <div class="box"><h3>Что видно снаружи</h3>
+        <ul class="clean">
+          <li>Картинка «📸 Сохранить ёлку» для постов в соцсетях.</li>
+          <li>Лес ёлок видит вся школа и учителя, подписи «Имя Ф.».</li>
+          <li>Ни лайков, ни звёздочек, ни комментариев в лесу.</li>
+          <li>Сообщений родителям не отправляем.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Кто что делает</h2>
+    <div class="who">
+      <div class="box"><h3>Команда платформы</h3><ul class="clean"><li>раздел «Адвент» в кабинете ученика</li><li>серверная логика окошек и монеток</li><li>лес, учительский вид, страница гостя</li><li>генерация PDF рецепта и Bingo</li></ul></div>
+      <div class="box"><h3>Куратор</h3><ul class="clean"><li>проверка скриншотов из соцсетей</li><li>записи на клуб и мастер-класс по купонам</li><li>вопросы родителей</li></ul></div>
+      <div class="box"><h3>Продажи и учителя</h3><ul class="clean"><li>заявки «адвент, пригласил…»</li><li>промокод −50 % на WowSpace</li><li>учителя показывают карточку на уроке 1 декабря</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Осталось решить до запуска</h2>
+    <div class="box">
+      <ul class="clean">
+        <li class="q">Промокод −50 %: общий или личный, срок действия.</li>
+        <li class="q">Сколько держать раздел в январе.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Материалы</h2>
+    <div class="links">
+      <a href="https://claude.ai/artifact/CzYEWhfycoHdbXRKwftZxy">Макет кабинета</a>
+      <a href="https://claude.ai/artifact/XPFwKWQ9iva2gthQd539Zp">Лес ёлок</a>
+      <a href="https://claude.ai/artifact/VdBtLbtCD6SjDjghfeLkdb">Рецепт</a>
+      <a href="https://claude.ai/artifact/PWMWBAaQqamCiyTbNEVn8p">Christmas Bingo</a>
+    </div>
+    <p class="lead" style="margin-top:12px">Полное ТЗ «как это работает» — документ «Адвент — ТЗ для команды» (репозиторий classroom, builds/advent/). Музыка леса: Bruni AFX.</p>
+  </section>
+  <footer>Макет принят руководством 24.11.2026. Все правила утверждены Анной 23–24.11.2026.</footer>
+</div>
+<script>
+(function(){var w=document.getElementById('wire');if(!w)return;var C={3:'c',7:'c',12:'c',18:'c',23:'c',28:'c',5:'r',10:'r',15:'r',20:'r',25:'r',31:'cert'};
+for(var i=1;i<=31;i++){var e=document.createElement('i');if(C[i])e.className=C[i];e.title=i+' окошек';w.appendChild(e);}})();
+</script>
