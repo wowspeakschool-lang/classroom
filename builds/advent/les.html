@@ -26,7 +26,11 @@ body{background:#0B1236;color:#fff;font-family:var(--fb);margin:0;overflow:hidde
 .t:hover .art{transform:scale(1.05)}
 .t .art>img.tr{display:block;width:100%;filter:drop-shadow(0 10px 10px rgba(0,0,0,.35))}
 .t .art img.o{position:absolute;transform:translate(-50%,-50%)}
-.drift{position:absolute;left:50%;bottom:-6%;width:150%;height:22%;transform:translateX(-50%);background:radial-gradient(ellipse at 50% 70%,#FFFFFF 0 38%,#E3EBFF 52%,transparent 70%);pointer-events:none;z-index:2;filter:drop-shadow(0 -2px 3px rgba(150,170,230,.5))}
+.drift{position:absolute;left:50%;bottom:-3%;width:115%;transform:translateX(-50%);pointer-events:none;z-index:2}
+.prop{position:absolute;bottom:11%;transform:translateX(-50%);pointer-events:none;z-index:4;filter:drop-shadow(0 6px 5px rgba(0,0,0,.25))}
+.prop.lamp::after{content:"";position:absolute;left:50%;top:14%;width:240%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,220,130,.45),transparent 65%);animation:lg 3s ease-in-out infinite}
+@keyframes lg{50%{opacity:.6}}
+.prop img{display:block;width:100%}
 .t .lab{position:absolute;top:calc(100% + 6px);display:flex;flex-direction:column;align-items:center;gap:2px;z-index:3}
 .t .nm{font-family:var(--fh);font-weight:800;font-size:13px;white-space:nowrap;background:rgba(10,16,52,.65);border-radius:999px;padding:2px 10px;color:#fff}
 .t .st{font-size:11px;font-weight:800;color:var(--gold);background:rgba(10,16,52,.5);border-radius:999px;padding:0 7px}
@@ -89,14 +93,18 @@ function tree(kid,x,sz){var me=kid.me,tr=me?'tree_pine':TR[rnd()<.6?0:(rnd()<.6?
  for(var k=0;k<n;k++){var s=sp[k];o+='<img class="o" src="img/'+OR[Math.floor(rnd()*OR.length)]+'.webp" style="left:'+s[0]+'%;top:'+s[1]+'%;width:'+(13+rnd()*5)+'%" alt="">';}
  if(me||kid.open>=3)o+='<img class="o" src="img/top_star.webp" style="left:50%;top:6%;width:20%" alt="">';
  var w=sz*(.86+rnd()*.28);
- return '<div class="t'+(me?' me':'')+'" data-n="'+kid.nm+'" style="left:'+x.toFixed(0)+'px;width:'+w.toFixed(0)+'px">'+(me?'<span class="you">Это ты!</span>':'')+'<div class="art"><img class="tr" src="img/'+tr+'.webp" alt=""><span class="drift"></span>'+o+'</div><div class="lab"><span class="nm">'+kid.nm+'</span></div></div>';}
+ return '<div class="t'+(me?' me':'')+'" data-n="'+kid.nm+'" style="left:'+x.toFixed(0)+'px;width:'+w.toFixed(0)+'px">'+(me?'<span class="you">Это ты!</span>':'')+'<div class="art"><img class="tr" src="img/'+tr+'.webp" alt=""><img class="drift" src="img/drift2.webp" alt="">'+o+'</div><div class="lab"><span class="nm">'+kid.nm+'</span></div></div>';}
 function build(){
  seed=11;var world=document.getElementById('world');H=sc.clientHeight;
  var sz=Math.min(H*.36,260),gap=sz*1.15,start=Math.max(sc.clientWidth*.55,sz*2.4);
  W=start+kids.length*gap+sz;world.style.width=W+'px';
  var h='<div class="main" style="left:'+(start*.4)+'px;width:'+(sz*1.9)+'px"><img src="img/tree_pine.webp" alt=""><img src="img/top_star.webp" alt="" style="position:absolute;left:50%;top:-2%;width:22%;transform:translateX(-50%)"></div>'+
    '<div class="sign" style="left:'+(start*.82)+'px"><div class="b">Лес WowSpeak</div><div class="p"></div></div>';
- kids.forEach(function(kid,j){h+=tree(kid,start+gap*(j+.5)+(rnd()-.5)*gap*.15,sz);});
+ var PROPS=['snowman','drift1','sledge','lamp','drift3','snowman','lamp','drift1','sledge'],pk=0;
+ kids.forEach(function(kid,j){h+=tree(kid,start+gap*(j+.5)+(rnd()-.5)*gap*.15,sz);
+  /* между ёлками иногда снеговик, санки, фонарь — чтобы аллея не была однообразной */
+  if(j%5===2){var pr=PROPS[pk++%PROPS.length],pw={snowman:.42,sledge:.5,lamp:.22,drift3:.45,drift1:.55}[pr]*sz;
+   h+='<div class="prop'+(pr==='lamp'?' lamp':'')+'" style="left:'+(start+gap*(j+1)).toFixed(0)+'px;width:'+pw.toFixed(0)+'px'+(pr==='lamp'?';bottom:12%':'')+'"><img src="img/'+pr+'.webp" alt=""></div>';}});
  world.innerHTML=h;document.getElementById('n').textContent=kids.length;
  var dd='';world.querySelectorAll('.t').forEach(function(t){dd+='<i style="left:'+(parseFloat(t.style.left)/W*100)+'%"></i>';});
  document.getElementById('dots').innerHTML=dd;
@@ -117,7 +125,7 @@ document.getElementById('q').oninput=function(){var v=this.value.trim().toLowerC
 var starred={};
 document.getElementById('world').addEventListener('click',function(e){if(moved){moved=false;return;}var t=e.target.closest('.t');if(!t)return;var nm=t.dataset.n,me=t.classList.contains('me');
  var m=document.createElement('div');m.className='modal';
- m.innerHTML='<div class="mc">'+t.querySelector('.art').outerHTML.replace('<span class="drift"></span>','')+'<h3>'+(me?'Твоя ёлка':'Ёлка: '+nm)+'</h3><p>'+(me?'Её видят все в лесу.':'Ёлка из леса WowSpeak')+'</p><div class="row2">'+(me?'<button class="go" type="button">🎄 Продолжить украшать</button>':'')+'<button class="x" type="button">Закрыть</button></div></div>';
+ m.innerHTML='<div class="mc">'+t.querySelector('.art').outerHTML.replace(/<img class="drift"[^>]*>/,'')+'<h3>'+(me?'Твоя ёлка':'Ёлка: '+nm)+'</h3><p>'+(me?'Её видят все в лесу.':'Ёлка из леса WowSpeak')+'</p><div class="row2">'+(me?'<button class="go" type="button">🎄 Продолжить украшать</button>':'')+'<button class="x" type="button">Закрыть</button></div></div>';
  m.onclick=function(ev){if(ev.target===m||ev.target.classList.contains('x'))m.remove();if(ev.target.classList.contains('go')){ev.target.textContent='→ открывается твоя ёлка…';}};
  document.body.appendChild(m);});
 // снег в три слоя: дальний мелкий и медленный, средний, ближний крупный и размытый
