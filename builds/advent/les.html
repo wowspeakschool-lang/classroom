@@ -47,7 +47,8 @@ body{background:#0B1236;color:#fff;font-family:var(--fb);margin:0;overflow:hidde
 .sign .b{background:linear-gradient(180deg,#D69A62,#A9683A);border:3px solid #7A4425;border-radius:12px;padding:6px 14px;font-family:var(--fs);font-size:20px;color:#FFF4DC;text-shadow:0 2px 0 #7A4425;white-space:nowrap;box-shadow:0 5px 0 #6A3A1F}
 .sign .p{width:8px;height:50px;background:#6A3A1F;margin:0 auto}
 .anim{position:absolute;pointer-events:none;width:0;height:0}
-.anim img{position:absolute;bottom:0;left:0;transform:translateX(-50%);display:block;filter:drop-shadow(0 6px 4px rgba(0,0,0,.25))}
+/* max-width:none — обёртка страницы задаёт img{max-width:100%}, а у .anim ширина 0: без этого зверьки сжимались в ноль */
+.anim img{max-width:none;position:absolute;bottom:0;left:0;transform:translateX(-50%);display:block;filter:drop-shadow(0 6px 4px rgba(0,0,0,.25))}
 #moon{position:absolute;right:9%;top:5%;width:min(120px,14vw);z-index:1;pointer-events:none}
 canvas.snow{position:absolute;inset:0;pointer-events:none;z-index:10}
 .nav{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:46px;height:46px;border-radius:50%;border:0;background:rgba(10,16,52,.6);color:#fff;font-size:20px;cursor:pointer;backdrop-filter:blur(4px)}
