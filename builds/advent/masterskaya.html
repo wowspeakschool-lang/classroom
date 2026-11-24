@@ -1,136 +1,198 @@
 <title>Мастерская эльфов</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Nunito:wght@600;700;800&family=Pacifico&display=swap">
 <style>
-/* Три варианта сундука «Мастерская эльфов» друг под другом; ниже — общие вкладки «Друзья» и «Задания» */
-:root{--bg:#FFF6EE;--card:#FFFFFF;--ink:#2A2350;--muted:#6B6590;--line:#EADFD3;--violet:#6C4CF1;--green:#1F9D5B;--green-soft:#E2F6EA;
---wood:#B9784A;--wood-d:#8A5330;--wood-l:#E8C39E;--rare:#3B82F6;--epic:#9B4DE8;--leg:#E8A317;--night:#1C2456;
---fh:'Montserrat',system-ui,sans-serif;--fb:'Nunito',system-ui,sans-serif}
+/* Мастерская эльфов: тёплая деревянная комната с гирляндой, полки по редкости; ниже — два варианта шкалы подарков */
+:root{--bg:#FFF6EE;--ink:#2A2350;--muted:#6B6590;--violet:#6C4CF1;--green:#22B573;
+--wall1:#5B3420;--wall2:#4A2A19;--plank:#6A3D25;--shelf1:#C98B55;--shelf2:#8C5530;--brass:#E9C46A;--brass-d:#9A7425;
+--rare:#4C9BFF;--epic:#B26BFF;--leg:#FFC23D;--night:#18204D;
+--fh:'Montserrat',system-ui,sans-serif;--fb:'Nunito',system-ui,sans-serif;--fs:'Pacifico',cursive}
 body{background:var(--bg);color:var(--ink);font-family:var(--fb);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 60px}
 .wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
 h1{font-family:var(--fh);font-weight:900;font-size:clamp(24px,3vw,34px);margin:0}
 h2{font-family:var(--fh);font-weight:900;font-size:22px;margin:0}
-.lead{color:var(--muted);margin:4px 0 0;max-width:70ch;line-height:1.5}
+.lead{color:var(--muted);margin:4px 0 0;max-width:72ch;line-height:1.5}
+
+/* ===== комната ===== */
+.room{position:relative;border-radius:30px;overflow:hidden;color:#fff;
+ background:repeating-linear-gradient(90deg,var(--wall1) 0 86px,var(--wall2) 86px 90px);box-shadow:0 18px 40px rgba(60,30,10,.25)}
+.room::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,200,120,.28),transparent 60%);pointer-events:none}
+/* гирлянда под потолком */
+.lights{position:relative;height:46px}
+.lights svg{position:absolute;inset:0;width:100%;height:100%}
+.bulb{position:absolute;top:0;width:12px;height:18px;border-radius:50% 50% 45% 45%;transform:translateX(-50%);animation:tw 2.4s ease-in-out infinite}
+.bulb::before{content:"";position:absolute;left:3px;top:-5px;width:6px;height:6px;border-radius:2px;background:#2b3a2a}
+@keyframes tw{0%,100%{opacity:1;filter:drop-shadow(0 0 6px currentColor)}50%{opacity:.55;filter:none}}
+/* вывеска */
+.sign{position:relative;margin:-6px auto 6px;width:max-content;max-width:90%;text-align:center}
+.sign .ropes{display:flex;justify-content:space-between;padding:0 40px;height:16px}
+.sign .ropes i{width:2px;background:#C8A27A}
+.sign .board{background:linear-gradient(180deg,#D69A62,#A9683A);border:3px solid #7A4425;border-radius:14px;padding:8px 26px 10px;box-shadow:0 6px 0 #6A3A1F,0 10px 18px rgba(0,0,0,.35)}
+.sign b{font-family:var(--fs);font-weight:400;font-size:clamp(24px,3.4vw,34px);color:#FFF4DC;text-shadow:0 2px 0 #7A4425}
+.sign small{display:block;font-family:var(--fh);font-weight:800;font-size:12px;color:#FFE9C7;letter-spacing:.05em}
+/* верхняя строка */
+.top{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:6px 22px 14px;flex-wrap:wrap;position:relative}
+.coll{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.25);border-radius:999px;padding:6px 14px 6px 8px}
+.coll .jar{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff7,transparent 40%),var(--green);display:grid;place-items:center;font-size:15px}
+.coll span{font-family:var(--fh);font-weight:800;font-size:14px}
+.coins{font-family:var(--fh);font-weight:900;background:linear-gradient(180deg,#FFE07A,#F5B82E);color:#6E4A00;border-radius:999px;padding:7px 14px;box-shadow:0 3px 0 #B9861A}
+.tabs{display:flex;gap:6px}
+.tabs b{font-family:var(--fh);font-size:13px;color:#F5DCC4;padding:7px 14px;border-radius:999px;background:rgba(0,0,0,.2)}
+.tabs b.on{background:#FFF4DC;color:#7A4425}
+/* окно со снегом */
+.win{position:absolute;right:34px;top:46px;width:66px;height:84px;border-radius:45px 45px 8px 8px;border:6px solid #8C5530;background:linear-gradient(180deg,#1B2A6B,#4058A8);overflow:hidden;opacity:.9}
+.win::after{content:"";position:absolute;inset:0;background:radial-gradient(2px 2px at 20% 30%,#fff,transparent),radial-gradient(2px 2px at 60% 20%,#fff,transparent),radial-gradient(2px 2px at 80% 60%,#fff,transparent),radial-gradient(2px 2px at 40% 70%,#fff,transparent),radial-gradient(2px 2px at 30% 50%,#fff,transparent);animation:sn 4s linear infinite}
+@keyframes sn{from{transform:translateY(-30px)}to{transform:translateY(30px)}}
+.win i{position:absolute;left:50%;top:0;bottom:0;width:5px;background:#8C5530;transform:translateX(-50%)}
+.win i+i{left:0;right:0;top:50%;bottom:auto;height:5px;width:auto;transform:none}
+
+/* ===== полки ===== */
+.shelves{padding:4px 22px 26px;display:flex;flex-direction:column;gap:30px;position:relative}
+.sh{position:relative}
+.plate{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,var(--brass),#C99A3A);color:#4A3208;font-family:var(--fh);font-weight:900;font-size:13px;border-radius:8px;padding:5px 12px;box-shadow:0 2px 0 var(--brass-d),inset 0 1px 0 #fff8;margin:0 0 8px 6px}
+.plate small{font-family:var(--fb);font-weight:800;opacity:.8}
+.row{position:relative;display:flex;flex-wrap:wrap;gap:6px 4px;align-items:flex-end;padding:8px 14px 0;min-height:92px}
+.row::after{content:"";position:absolute;left:0;right:0;bottom:-16px;height:18px;background:linear-gradient(180deg,var(--shelf1),var(--shelf2));border-radius:4px;box-shadow:0 8px 12px rgba(0,0,0,.35),inset 0 2px 0 #E6B27F}
+.br{position:absolute;bottom:-34px;width:12px;height:22px;background:#3D2314;border-radius:0 0 6px 6px}
+.toy{position:relative;width:78px;height:84px;display:flex;align-items:flex-end;justify-content:center;z-index:1}
+.toy img{max-width:72px;max-height:80px;object-fit:contain;filter:drop-shadow(0 6px 4px rgba(0,0,0,.45));transition:transform .2s}
+.toy:hover img{transform:translateY(-4px) scale(1.06)}
+.toy.no img{filter:brightness(0) opacity(.35)}
+.toy .ok{position:absolute;right:4px;top:4px;width:18px;height:18px;border-radius:50%;background:var(--green);font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:0 0 0 2px #fff6}
+.toy .nm{position:absolute;bottom:-34px;left:-6px;right:-6px;text-align:center;font-size:10px;font-weight:800;color:#FFE9C7;opacity:0;transition:opacity .2s;z-index:3}
+.toy:hover .nm{opacity:1}
+/* полки особых игрушек — свои материалы */
+.sh.rare .row{background:linear-gradient(180deg,rgba(76,155,255,.0),rgba(76,155,255,.18));border-radius:14px 14px 0 0}
+.sh.rare .row::after{background:linear-gradient(180deg,#9CC8FF,#3F7BD0);box-shadow:0 0 18px #4C9BFF88,inset 0 2px 0 #E4F0FF}
+.sh.epic .row{background:radial-gradient(ellipse at 50% 100%,rgba(178,107,255,.35),transparent 70%);border-radius:14px 14px 0 0}
+.sh.epic .row::after{background:linear-gradient(180deg,#8E3FD6,#5A1E99);box-shadow:0 0 20px #B26BFF88,inset 0 2px 0 #D9B5FF}
+.sh.leg .case{position:relative;border:3px solid #E9C46A;border-radius:18px 18px 6px 6px;background:linear-gradient(180deg,rgba(255,230,160,.18),rgba(255,194,61,.08));box-shadow:0 0 30px rgba(255,194,61,.35),inset 0 0 30px rgba(255,220,140,.15);padding:6px 0 0}
+.sh.leg .case::before{content:"";position:absolute;left:50%;top:-30px;width:70%;height:60px;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(255,240,190,.35),transparent 70%)}
+.sh.leg .row::after{background:linear-gradient(180deg,#FFD36B,#C9921E);box-shadow:0 0 24px #FFC23Daa,inset 0 2px 0 #FFF2C8}
+.myst{width:62px;height:62px;border-radius:14px;display:grid;place-items:center;font-family:var(--fh);font-weight:900;font-size:26px;color:#fff;margin-bottom:4px;animation:bob 2.6s ease-in-out infinite;position:relative}
+.myst::before{content:"";position:absolute;left:50%;top:-4px;bottom:-4px;width:10px;transform:translateX(-50%);background:rgba(255,255,255,.75);border-radius:3px}
+.myst::after{content:"";position:absolute;top:50%;left:-4px;right:-4px;height:10px;transform:translateY(-50%);background:rgba(255,255,255,.75);border-radius:3px}
+.myst span{position:relative;z-index:1;text-shadow:0 2px 4px rgba(0,0,0,.35)}
+.myst.r{background:linear-gradient(160deg,#7DB8FF,#2E6FD6);box-shadow:0 0 16px #4C9BFF99}
+.myst.e{background:linear-gradient(160deg,#C994FF,#7A2FD0);box-shadow:0 0 16px #B26BFF99}
+.myst.l{background:linear-gradient(160deg,#FFE08A,#E39A10);box-shadow:0 0 20px #FFC23Dcc}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
+.toy .emo{font-size:52px;line-height:1;filter:drop-shadow(0 6px 4px rgba(0,0,0,.45))}
+.hint{font-size:12px;color:#F3D7B6;margin:0 0 0 8px;font-weight:700}
+
+/* ===== шкалы ===== */
 .var{display:flex;flex-direction:column;gap:10px}
 .vhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
 .vhead .n{font-family:var(--fh);font-weight:900;background:var(--violet);color:#fff;border-radius:999px;padding:4px 12px;font-size:14px}
 .vhead p{margin:0;color:var(--muted);flex:1;min-width:240px}
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
-.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:5px;vertical-align:-1px}
-
-/* общая шапка мастерской */
-.ws{border-radius:26px;overflow:hidden;box-shadow:0 10px 30px rgba(60,30,10,.12)}
-.wshead{background:linear-gradient(180deg,#9C5E36,#7A4425);color:#fff;padding:16px 20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-.wshead .t{font-family:var(--fh);font-weight:900;font-size:20px;flex:1;min-width:180px}
-.wshead .t small{display:block;font-family:var(--fb);font-weight:700;font-size:13px;opacity:.85}
-.prog{min-width:220px;flex:1;max-width:340px}
-.prog .bar{height:12px;border-radius:999px;background:#ffffff33;overflow:hidden}
-.prog .bar b{display:block;height:100%;background:linear-gradient(90deg,#FFD25E,#FFB020);border-radius:999px}
-.prog span{font-size:12px;font-weight:800;opacity:.95}
-.tabs{display:flex;gap:6px;background:#6A3A1F;padding:8px 14px}
-.tabs b{font-family:var(--fh);font-size:13px;color:#F5DCC4;padding:7px 14px;border-radius:999px}
-.tabs b.on{background:#fff;color:var(--wood-d)}
-.wsbody{background:#FBEBDC;padding:16px}
-
-/* карточка игрушки */
-.toy{position:relative;aspect-ratio:1;border-radius:16px;background:#fff;border:3px solid #E9DCCD;display:grid;place-items:center;padding:12%}
-.toy img{position:absolute;left:12%;top:12%;width:76%;height:76%;object-fit:contain;display:block}
-.toy.no img{filter:brightness(0) opacity(.18)}
-.toy.no{background:#F4EBE2}
-.toy.own{border-color:var(--green);box-shadow:0 0 0 3px var(--green-soft)}
-.toy.own::after{content:"✓";position:absolute;right:-7px;top:-7px;background:var(--green);color:#fff;font-weight:900;font-size:12px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center}
-.toy.r{border-color:var(--rare)} .toy.e{border-color:var(--epic)} .toy.l{border-color:var(--leg)}
-.toy.r.own{box-shadow:0 0 14px #3B82F680} .toy.e.own{box-shadow:0 0 16px #9B4DE880} .toy.l.own{box-shadow:0 0 18px #E8A317aa}
-.toy .q{font-family:var(--fh);font-weight:900;font-size:26px;color:#C9B8A6}
-.toy .emo{font-size:clamp(26px,4vw,40px)}
-.toy .cnt{position:absolute;left:6px;bottom:4px;font-size:10px;font-weight:800;color:var(--muted)}
-.toy .nm{position:absolute;left:0;right:0;bottom:-18px;text-align:center;font-size:11px;font-weight:800;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:24px 12px;padding-bottom:16px}
-
-/* вариант Б: полки */
-.shelf{margin-bottom:14px}
-.shelf h3{font-family:var(--fh);font-size:14px;margin:0 0 6px;display:flex;gap:8px;align-items:center}
-.shelf h3 span{font-family:var(--fb);color:var(--muted);font-weight:800;font-size:12px}
-.board{background:linear-gradient(180deg,#F6DDC4,#F0CFAF);border-radius:12px 12px 4px 4px;padding:12px 12px 26px;position:relative;display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:22px 10px}
-.board::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-8px;height:14px;background:linear-gradient(180deg,var(--wood),var(--wood-d));border-radius:4px;box-shadow:0 4px 6px rgba(0,0,0,.18)}
-
-/* вариант В: ящики */
-.bench{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px}
-.drawers{display:flex;flex-direction:column;gap:8px}
-.drw{background:linear-gradient(180deg,#C98A5B,#A8693E);color:#fff;border-radius:12px;padding:10px 12px;font-family:var(--fh);font-weight:800;font-size:13px;display:flex;align-items:center;gap:8px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
-.drw .k{width:14px;height:6px;border-radius:3px;background:#F3D7B6;flex:none}
-.drw span{margin-left:auto;font-family:var(--fb);font-size:12px;opacity:.9}
-.drw.on{background:linear-gradient(180deg,#FFE3B8,#F5C98E);color:var(--wood-d)}
-.drw.on .k{background:var(--wood-d)}
-.opened{background:#fff;border-radius:16px;padding:14px;border:3px dashed var(--wood-l)}
-.opened h3{font-family:var(--fh);font-size:15px;margin:0 0 10px}
-
-/* общие вкладки */
-.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.pane{background:var(--card);border-radius:22px;padding:18px;border:1px solid var(--line);display:flex;flex-direction:column;gap:10px;min-width:0}
-.pane h3{font-family:var(--fh);margin:0;font-size:17px}
-.boxes{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.box{aspect-ratio:1;border-radius:12px;background:linear-gradient(160deg,#B36BFF,#7A3BE0);display:grid;place-items:center;color:#fff;font-family:var(--fh);font-weight:900;font-size:22px;box-shadow:0 0 12px #9B4DE855;position:relative}
-.box.got{background:#fff;border:3px solid var(--epic);color:var(--epic);font-size:28px}
-.box small{position:absolute;bottom:3px;font-size:9px;font-family:var(--fb);opacity:.9}
-.btn{font-family:var(--fh);font-weight:800;border:0;border-radius:14px;padding:11px 16px;background:var(--violet);color:#fff;font-size:14px;align-self:flex-start}
-.link{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#F2EEFF;border-radius:10px;padding:8px 10px;color:var(--violet);word-break:break-all}
-.task{display:flex;gap:10px;align-items:center;background:#FFF8E6;border-radius:14px;padding:10px 12px}
-.task .ic{font-size:26px}
-.task div{flex:1;min-width:0;font-size:14px}
-.task b{font-family:var(--fh)}
-.steps{margin:0;padding-left:18px;font-size:14px;line-height:1.5;color:var(--ink)}
-.scale{display:flex;gap:6px;align-items:flex-end}
-.scale .pt{flex:1;text-align:center;font-size:11px;font-weight:800;color:var(--muted)}
-.scale .pt i{display:block;height:10px;border-radius:5px;background:#EEE6DC;margin-bottom:4px}
-.scale .pt.done i{background:var(--green)}
-.scale .pt.next i{background:linear-gradient(90deg,var(--green) 60%,#EEE6DC 60%)}
-@media (max-width:720px){.bench{grid-template-columns:1fr}.drawers{flex-direction:row;overflow-x:auto}.drw{flex:none}.two{grid-template-columns:1fr}}
+.card{border-radius:26px;padding:20px;color:#fff;position:relative;overflow:hidden}
+/* А: гирлянда-шкала */
+.gs{background:linear-gradient(180deg,#1E2A66,#2C1F5C)}
+.gs h3,.sr h3{font-family:var(--fh);margin:0 0 4px;font-size:18px}
+.gs p,.sr p{margin:0 0 10px;color:#D8DCFF;font-size:14px}
+.wire{position:relative;height:150px;margin-top:6px;overflow-x:auto}
+.wire .in{position:relative;min-width:760px;height:100%}
+.wire svg{position:absolute;left:0;top:0;width:100%;height:60px}
+.gb{position:absolute;top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
+.gb .l{width:13px;height:20px;border-radius:50% 50% 45% 45%;background:#4A4F78;margin-top:var(--y);position:relative}
+.gb .l::before{content:"";position:absolute;left:3px;top:-5px;width:7px;height:6px;border-radius:2px;background:#20263F}
+.gb.on .l{background:var(--c);box-shadow:0 0 10px var(--c),0 0 20px var(--c)}
+.gb .d{font-size:10px;font-weight:800;color:#AEB4E6;margin-top:3px}
+.gb.on .d{color:#fff}
+.gb.today .l{animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.35)}}
+.gb .gift{margin-top:6px;width:44px;height:44px;border-radius:10px;display:grid;place-items:center;font-size:22px;position:relative}
+.gb .gift.r{background:linear-gradient(160deg,#7DB8FF,#2E6FD6);box-shadow:0 0 14px #4C9BFF}
+.gb .gift.c{background:linear-gradient(160deg,#FFE07A,#F5B82E);color:#6E4A00;font-family:var(--fh);font-weight:900;font-size:13px}
+.gb .gift.g{background:linear-gradient(160deg,#FFE08A,#E39A10);box-shadow:0 0 18px #FFC23D}
+.gb .gift.done{opacity:.5;filter:grayscale(.4)}
+.gb .gift.done::after{content:"✓";position:absolute;right:-6px;top:-6px;width:18px;height:18px;border-radius:50%;background:var(--green);font-size:11px;font-weight:900;display:grid;place-items:center}
+.gb .gift.next{animation:shake 1.6s ease-in-out infinite}
+@keyframes shake{0%,70%,100%{transform:rotate(0)}75%{transform:rotate(-10deg)}80%{transform:rotate(10deg)}85%{transform:rotate(-8deg)}90%{transform:rotate(6deg)}}
+.leg2{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#D8DCFF;margin-top:8px}
+/* Б: сани Санты по дороге */
+.sr{background:linear-gradient(180deg,#14285E 0%,#2C4C9C 55%,#DDE7FF 56%,#F4F7FF 100%)}
+.road{position:relative;height:170px;margin-top:6px;overflow-x:auto}
+.road .in{position:relative;min-width:760px;height:100%}
+.road svg{position:absolute;inset:0;width:100%;height:100%}
+.stop{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:2px}
+.stop .h{font-size:34px;filter:drop-shadow(0 4px 3px rgba(0,0,0,.3))}
+.stop .tag{font-family:var(--fh);font-weight:900;font-size:11px;background:#fff;color:var(--night);border-radius:999px;padding:2px 8px;white-space:nowrap}
+.stop.done .tag{background:var(--green);color:#fff}
+.stop .what{font-size:11px;font-weight:800;color:var(--night);background:#ffffffd0;border-radius:8px;padding:2px 6px;white-space:nowrap}
+.sleigh{position:absolute;transform:translate(-50%,-90%);font-size:42px;animation:ride 2.4s ease-in-out infinite;filter:drop-shadow(0 4px 3px rgba(0,0,0,.35))}
+@keyframes ride{50%{transform:translate(-50%,-100%) rotate(-4deg)}}
+.bubble{position:absolute;transform:translate(-50%,-100%);background:#fff;color:var(--night);font-weight:800;font-size:12px;border-radius:12px;padding:5px 10px;white-space:nowrap;box-shadow:0 4px 10px rgba(0,0,0,.2)}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);border:6px solid transparent;border-top-color:#fff;border-bottom:0}
+.tbl{width:100%;border-collapse:collapse;font-size:14px;background:#fff;border-radius:16px;overflow:hidden}
+.tbl th,.tbl td{padding:8px 12px;text-align:left;border-bottom:1px solid #EFE6DC}
+.tbl th{font-family:var(--fh);font-size:13px;background:#FBEBDC}
+@media (max-width:640px){.win{display:none}.toy{width:62px;height:70px}.toy img{max-width:58px;max-height:66px}.myst{width:50px;height:50px;font-size:20px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 
 <div class="wrap">
-<div><h1>🧝 Мастерская эльфов</h1>
-<p class="lead">Три варианта, как может выглядеть сундук. Во всех трёх «Мои игрушки» и «Альбом» объединены, как вы предложили: видны все игрушки сразу, свои — цветные с зелёной рамкой и ✓, ещё не найденные — серым силуэтом. Новых игрушек (редких, эпических, легендарных) пока нет картинок, поэтому они показаны знаком «?» или значком.</p></div>
-<div class="legend"><span><i style="background:var(--green)"></i>есть у ребёнка</span><span><i style="background:#D6C6B6"></i>обычная</span><span><i style="background:var(--rare)"></i>редкая — за шкалу</span><span><i style="background:var(--epic)"></i>эпическая — за друзей</span><span><i style="background:var(--leg)"></i>легендарная — за соцсети</span></div>
+<div><h1>🧝 Мастерская эльфов — полки</h1>
+<p class="lead">Вариант «Полки мастерской», сделанный красивее: тёплая деревянная комната, гирлянда под потолком, вывеска, окно со снегом. Игрушки стоят прямо на полках, без карточек. Свои — цветные с зелёной точкой ✓, ещё не найденные — тёмным силуэтом. У особых игрушек свои полки: редкие на голубом стекле, эпические на фиолетовом бархате, легендарные в золотой витрине с подсветкой. Наведите на игрушку — появится название. Новых игрушек пока нет картинок, на их месте коробки-сюрпризы.</p></div>
 
-<section class="var"><div class="vhead"><span class="n">Вариант 1</span><h2>Альбом-сетка</h2><p>Одна общая сетка: сначала обычные, потом редкие, эпические, легендарные. Просто и привычно, как коллекция в игре.</p></div><div class="ws" id="v1"></div></section>
-<section class="var"><div class="vhead"><span class="n">Вариант 2</span><h2>Полки мастерской</h2><p>Игрушки стоят на деревянных полках, у каждой редкости своя полка со счётчиком. Сразу видно, сколько осталось собрать на каждой.</p></div><div class="ws" id="v2"></div></section>
-<section class="var"><div class="vhead"><span class="n">Вариант 3</span><h2>Верстак с ящичками</h2><p>Слева ящички по видам (шары, сладости, гирлянды, особые), справа содержимое открытого ящичка. Меньше игрушек на экране — удобнее на телефоне.</p></div><div class="ws" id="v3"></div></section>
+<div class="room" id="room">
+ <div class="lights" id="lights"></div>
+ <div class="win"><i></i><i></i></div><div class="win" style="right:auto;left:34px"><i></i><i></i></div>
+ <div class="sign"><div class="ropes"><i></i><i></i></div><div class="board"><b>Мастерская эльфов</b><small>Elf's Workshop</small></div></div>
+ <div class="top"><div class="coll"><span class="jar">🎄</span><span>Собрано 15 из 44</span></div><div class="tabs"><b class="on">🎄 Игрушки</b><b>👫 Друзья</b><b>⭐ Задания</b></div><span class="coins">🪙 25</span></div>
+ 
+ <div class="shelves" id="shelves"></div>
+</div>
 
-<section class="var"><div class="vhead"><span class="n">Во всех вариантах</span><h2>Вкладки «Друзья» и «Задания»</h2><p>Эти две вкладки одинаковые в любом варианте.</p></div>
-<div class="two">
- <div class="pane"><h3>👫 Друзья</h3><p style="margin:0;font-size:14px">Позови друга — когда он откроет своё первое окошко, у тебя откроется эпическая игрушка-сюрприз. Всего 10 сюрпризов.</p>
-  <div class="link">app.wowteach.ru/advent?friend=masha-p</div><button class="btn" type="button">📨 Позвать друга</button>
-  <div class="boxes" id="boxes"></div></div>
- <div class="pane"><h3>⭐ Задания</h3>
-  <div><b style="font-family:var(--fh);font-size:14px">Шкала подарков</b><div style="font-size:13px;color:var(--muted);margin:2px 0 8px">Открыто 13 окошек · до редкой игрушки ещё 2</div>
-  <div class="scale" id="scale"></div></div>
-  <div class="task"><span class="ic">📸</span><div><b>Отметь нас в соцсетях</b><br>Выложи свою ёлку и отметь школу — получишь легендарную игрушку. Можно 3 раза.</div></div>
-  <ol class="steps"><li>Нажми «📸 Сохранить мою ёлку».</li><li>Выложи картинку в пост или сторис и отметь @wowspeak.</li><li>Сделай скриншот поста и прикрепи его здесь.</li><li>Мы проверим и откроем легендарную игрушку.</li></ol>
-  <button class="btn" type="button" style="background:var(--leg)">📎 Прикрепить скриншот · 1 из 3</button></div>
-</div></section>
+<section class="var"><div class="vhead"><span class="n">Шкала, вариант А</span><h2>Гирлянда дней</h2><p>Через весь экран тянется гирлянда из 31 лампочки. Каждое открытое окошко зажигает лампочку. На некоторых лампочках висят подарки — трясутся, когда до них осталось 1–2 окошка.</p></div>
+<div class="card gs"><h3>✨ Гирлянда подарков</h3><p>Открыто 13 окошек · следующая лампочка с подарком — через 2</p><div class="wire"><div class="in" id="wire"></div></div>
+<div class="leg2"><span>🔵 редкая игрушка-сюрприз</span><span>🪙 монетки</span><span>🎓 грамота и золотая звезда</span></div></div></section>
+
+<section class="var"><div class="vhead"><span class="n">Шкала, вариант Б</span><h2>Сани Санты</h2><p>Сани едут по снежной дороге от домика к домику. Каждое окошко — шаг вперёд. В каждом домике ждёт подарок, в конце — Северный полюс.</p></div>
+<div class="card sr"><h3>🛷 Путь к Северному полюсу</h3><p>Ещё 2 окошка — и сани доедут до следующего домика</p><div class="road"><div class="in" id="road"></div></div></div></section>
+
+<section class="var"><div class="vhead"><span class="n">Что на шкале</span><h2>Подарки по дням</h2><p>Одинаково для обоих вариантов. Больше остановок, чем раньше: каждые 2–4 окошка что-то есть, крупное — раз в пять.</p></div>
+<table class="tbl"><thead><tr><th>открыто окошек</th><th>что получает</th></tr></thead><tbody>
+<tr><td>3</td><td>🪙 3</td></tr><tr><td>5</td><td>🔵 редкая игрушка-сюрприз</td></tr><tr><td>7</td><td>🪙 5</td></tr>
+<tr><td>10</td><td>🔵 редкая игрушка-сюрприз</td></tr><tr><td>12</td><td>🪙 5</td></tr><tr><td>15</td><td>🔵 редкая игрушка-сюрприз</td></tr>
+<tr><td>18</td><td>🪙 7</td></tr><tr><td>20</td><td>🔵 редкая игрушка-сюрприз</td></tr><tr><td>23</td><td>🪙 7</td></tr>
+<tr><td>25</td><td>🔵 редкая игрушка-сюрприз</td></tr><tr><td>28</td><td>🪙 10</td></tr><tr><td>31</td><td>🎓 грамота со всеми словами + 🌟 золотая звезда на ёлку + 🪙 15</td></tr>
+</tbody></table></section>
 </div>
 
 <script>
-var C=[['tree_pine','Christmas tree'],['red_ball','ball'],['star','star'],['bell','bell'],['ic_garland','garland'],['candy_cane','candy cane'],['snowflake','snowflake'],['gingerbread','gingerbread man'],['bow','bow'],['ic_fairy_lights','fairy lights'],['pine_cone','pine cone'],['stocking','stocking'],['gift6','present'],['tree_snowy','snowy tree'],['ic_tinsel','tinsel'],['heart','heart'],['snowman','snowman'],['icicle','icicle'],['reindeer','reindeer'],['sweet','sweet'],['mitten','mitten'],['angel','angel'],['tree_gold','golden tree'],['cracker','cracker'],['clock','clock'],['top_star','tree topper']];
+var IMG=['tree_pine','red_ball','star','bell','ic_garland','candy_cane','snowflake','gingerbread','bow','ic_fairy_lights','pine_cone','stocking','gift6','tree_snowy','ic_tinsel','heart','snowman','icicle','reindeer','sweet','mitten','angel','tree_gold','cracker','clock','top_star'];
+var NM=['Christmas tree','ball','star','bell','garland','candy cane','snowflake','gingerbread man','bow','fairy lights','pine cone','stocking','present','snowy tree','tinsel','heart','snowman','icicle','reindeer','sweet','mitten','angel','golden tree','cracker','clock','tree topper'];
 var OWN=13;
-var R=[['🔮','snow globe',1],['🎖️','nutcracker',0],['🛷','sleigh',0],['🏮','lantern',0],['🐻‍❄️','polar bear',0]];
-var E=[];for(var i=0;i<10;i++)E.push(['?','сюрприз',i<1]);
-var L=[['?','легенда',0],['?','легенда',0],['?','легенда',0]];
-function toy(img,nm,own,cls){var inner=img.length>3&&img.indexOf('_')>=0||/^[a-z]/.test(img)?'<img src="img/'+img+'.webp" alt="">':(img==='?'?'<span class="q">?</span>':'<span class="emo">'+img+'</span>');
- return '<div class="toy '+(cls||'')+' '+(own?'own':'no')+'" title="'+nm+'">'+inner+'<span class="nm">'+(own?nm:'???')+'</span></div>';}
-function common(){return C.map(function(c,i){return toy(c[0],c[1],i<OWN);}).join('');}
-function rare(){return R.map(function(r){return toy(r[2]?r[0]:'?',r[1],r[2],'r');}).join('');}
-function epic(){return E.map(function(r){return toy(r[2]?'🧸':'?',r[2]?'teddy':'сюрприз',r[2],'e');}).join('');}
-function leg(){return L.map(function(r){return toy('?',r[1],0,'l');}).join('');}
-var got=OWN+1+1, all=C.length+R.length+E.length+L.length;
-function head(){return '<div class="wshead"><div class="t">🧝 Мастерская эльфов<small>Маша П. · твоя коллекция</small></div><div class="prog"><div class="bar"><b style="width:'+Math.round(got/all*100)+'%"></b></div><span>Собрано '+got+' из '+all+'</span></div><div style="font-family:var(--fh);font-weight:900;background:#FFD25E;color:#6E4A00;border-radius:999px;padding:6px 12px">🪙 25</div></div><div class="tabs"><b class="on">🎄 Игрушки</b><b>👫 Друзья</b><b>⭐ Задания</b></div>';}
-document.getElementById('v1').innerHTML=head()+'<div class="wsbody"><div class="grid">'+common()+rare()+epic()+leg()+'</div></div>';
-function shelf(t,c,n,h){return '<div class="shelf"><h3>'+t+' <span>'+c+'</span></h3><div class="board">'+h+'</div></div>';}
-document.getElementById('v2').innerHTML=head()+'<div class="wsbody">'+shelf('Обычные','13 из 26','',common())+shelf('<span style="color:var(--rare);font-size:14px">● </span>Редкие — за шкалу подарков','1 из 5','',rare())+shelf('<span style="color:var(--epic);font-size:14px">● </span>Эпические — за друзей','1 из 10','',epic())+shelf('<span style="color:var(--leg);font-size:14px">● </span>Легендарные — за соцсети','0 из 3','',leg())+'</div>';
-var D=[['Шары и звёзды','3/5',1],['Ёлки','2/3',0],['Сладости','2/4',0],['Гирлянды','2/3',0],['Зимние друзья','1/4',0],['Редкие','1/5',0],['Эпические','1/10',0],['Легендарные','0/3',0]];
-var sel=[C[1],C[2],C[3],C[25],['gold_ball','gold ball']];
-document.getElementById('v3').innerHTML=head()+'<div class="wsbody"><div class="bench"><div class="drawers">'+D.map(function(d){return '<div class="drw'+(d[2]?' on':'')+'"><i class="k"></i>'+d[0]+'<span>'+d[1]+'</span></div>';}).join('')+'</div><div class="opened"><h3>📂 Шары и звёзды · 3 из 5</h3><div class="grid">'+sel.map(function(c,i){return toy(c[0],c[1],i<3);}).join('')+'</div></div></div></div>';
-document.getElementById('boxes').innerHTML=E.map(function(e,i){return i<1?'<div class="box got">🧸<small>Тимур Б.</small></div>':'<div class="box">?<small>друг '+(i+1)+'</small></div>';}).join('');
-document.getElementById('scale').innerHTML=[[5,'🔵'],[10,'🔵'],[15,'🔵'],[20,'🔵'],[25,'🔵'],[31,'🎓']].map(function(p){var c=p[0]<=13?'done':(p[0]===15?'next':'');return '<div class="pt '+c+'"><i></i>'+p[1]+' '+p[0]+'</div>';}).join('');
+function toy(i){var o=i<OWN;return '<div class="toy '+(o?'':'no')+'"><img src="img/'+IMG[i]+'.webp" alt="">'+(o?'<span class="ok">✓</span>':'')+'<span class="nm">'+(o?NM[i]:'пока секрет')+'</span></div>';}
+function myst(c,own,emo){return '<div class="toy">'+(own?'<span class="emo">'+emo+'</span><span class="ok">✓</span>':'<div class="myst '+c+'"><span>?</span></div>')+'<span class="nm">'+(own?'snow globe':'сюрприз')+'</span></div>';}
+function row(h){return '<div class="row">'+h+'<i class="br" style="left:8%"></i><i class="br" style="right:8%"></i></div>';}
+var a=[],b=[];for(var i=0;i<13;i++)a.push(toy(i));for(i=13;i<26;i++)b.push(toy(i));
+var r=[myst('r',1,'🔮')];for(i=0;i<4;i++)r.push(myst('r'));
+var e=[myst('e',1,'🧸')];for(i=0;i<9;i++)e.push(myst('e'));
+var l=[];for(i=0;i<3;i++)l.push(myst('l'));
+document.getElementById('shelves').innerHTML=
+ '<div class="sh"><span class="plate">Обычные <small>13 из 26</small></span>'+row(a.join(''))+'</div>'+
+ '<div class="sh">'+row(b.join(''))+'</div>'+
+ '<div class="sh rare"><span class="plate">🔵 Редкие — за шкалу подарков <small>1 из 5</small></span>'+row(r.join(''))+'</div>'+
+ '<div class="sh epic"><span class="plate">🟣 Эпические — за друзей <small>1 из 10</small></span>'+row(e.join(''))+'</div>'+
+ '<div class="sh leg"><span class="plate">🟡 Легендарные — за соцсети <small>0 из 3</small></span><div class="case">'+row(l.join(''))+'</div><p class="hint">Выложи свою ёлку и отметь школу — откроется легендарная игрушка</p></div>';
+// гирлянда под потолком
+var COL=['#FF5A5A','#FFD23F','#4CD97B','#4C9BFF','#C26BFF','#FF8AD8'],L='';
+for(i=0;i<18;i++){var x=3+i*5.5,y=12+Math.sin(i/17*Math.PI)*14;L+='<span class="bulb" style="left:'+x+'%;top:'+y+'px;background:'+COL[i%6]+';color:'+COL[i%6]+';animation-delay:'+(i%5*.4)+'s"></span>';}
+document.getElementById('lights').innerHTML='<svg viewBox="0 0 100 46" preserveAspectRatio="none"><path d="M0 8 Q50 40 100 8" stroke="#2b3a2a" stroke-width=".5" fill="none"/></svg>'+L;
+// шкала А
+var REW={3:['c','🪙3'],5:['r','?'],7:['c','🪙5'],10:['r','?'],12:['c','🪙5'],15:['r','?'],18:['c','🪙7'],20:['r','?'],23:['c','🪙7'],25:['r','?'],28:['c','🪙10'],31:['g','🎓']};
+var W='<svg viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M0 6 Q12.5 30 25 6 Q37.5 30 50 6 Q62.5 30 75 6 Q87.5 30 100 6" stroke="#0E1433" stroke-width=".6" fill="none"/></svg>',OPEN=13;
+for(var d=1;d<=31;d++){var x=1.6+(d-1)*(96.8/30),ph=((x)%25)/25,y=4+Math.sin(ph*Math.PI)*16;var on=d<=OPEN,g=REW[d];
+ var cls=g?(d<=OPEN?'done':(d-OPEN<=2?'next':'')):'';
+ W+='<div class="gb'+(on?' on':'')+(d===OPEN+1?' today':'')+'" style="left:'+x+'%;--y:'+y+'px;--c:'+COL[d%6]+'"><span class="l"></span><span class="d">'+d+'</span>'+(g?'<span class="gift '+g[0]+' '+cls+'">'+g[1]+'</span>':'')+'</div>';}
+document.getElementById('wire').innerHTML=W;
+// шкала Б
+var stops=[[5,'🏠','редкая'],[10,'🏡','редкая'],[15,'🏠','редкая'],[20,'🏡','редкая'],[25,'🏠','редкая'],[31,'🏰','грамота']];
+var R='<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 80 C15 60 25 95 40 78 S65 60 80 80 S95 90 100 70" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M0 80 C15 60 25 95 40 78 S65 60 80 80 S95 90 100 70" stroke="#C9D6F5" stroke-width="1.2" stroke-dasharray="2 2" fill="none"/></svg>';
+function ry(x){return 80-Math.sin(x/100*Math.PI*2.2)*10;}
+stops.forEach(function(s){var x=s[0]/31*96+2;R+='<div class="stop'+(s[0]<=OPEN?' done':'')+'" style="left:'+x+'%;top:'+(ry(x)-6)+'%"><span class="h">'+s[1]+'</span><span class="tag">'+s[0]+(s[0]<=OPEN?' ✓':'')+'</span></div>';});
+var sx=OPEN/31*96+2;R+='<div class="bubble" style="left:'+sx+'%;top:'+(ry(sx)-40)+'%">ещё 2 окошка!</div><div class="sleigh" style="left:'+sx+'%;top:'+(ry(sx)+4)+'%">🛷</div>';
+document.getElementById('road').innerHTML=R;
 </script>
