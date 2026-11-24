@@ -14,11 +14,13 @@ S={
  'mood_adv':'Rate your day from 1 to 5 — then say one reason.',
  'moods_beg':[('5️⃣','Great'),('4️⃣','Good'),('3️⃣','OK'),('2️⃣','Not great'),('1️⃣','Bad')],
  'moods_adv':[('5️⃣','Great'),('4️⃣','Good'),('3️⃣','OK'),('2️⃣','Not my day'),('1️⃣','Bad')],
- 'lead':[('a newspaper','📰'),('a photo on the internet','📸'),
-         ('a video of an animal','🐾'),('a very big number','🔢'),
+ # Лид-ин идёт ДО слайда слов, поэтому целевых слов в нём быть не должно:
+ # встретив слово раньше, ученик обесценивает его презентацию (Аня, 23.11.2026).
+ 'lead':[('a newspaper','📰'),('a picture on the internet','📸'),
+         ('a clip of an animal','🐾'),('a very big number','🔢'),
          ('a story your friend told you','💬'),('something you did not believe','❌')],
- 'lead_adv':[('a headline in capital letters','🔠'),('a screenshot with no date','📸'),
-             ('a story that is too good to be true','✨'),('a news site you have never heard of','🌐'),
+ 'lead_adv':[('a title in capital letters','🔠'),('a picture of a post with no date','📸'),
+             ('a story that sounds perfect','✨'),('a news site you have never heard of','🌐'),
              ('a photo of something impossible','🦖'),('a post that made you angry fast','😤')],
  'vq':[('Sound off — what do you think the story is about?','🔇'),
        ('Is it real or fake? Say how you decided.','⚖️'),

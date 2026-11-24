@@ -15,8 +15,14 @@ S={
  'mood_adv':'What is your weather today? Say why in one sentence.',
  'moods_beg':[('☀️','Sunny'),('⛅','Bright'),('☁️','Cloudy'),('🌧️','Rainy'),('🌪️','Windy')],
  'moods_adv':[('☀️','Sunny'),('⛅','Bright'),('☁️','Cloudy'),('🌧️','Rainy'),('🌪️','All over the place')],
- 'lead':[('a present','🎁'),('a birthday','🎂'),('a card','💌'),
-         ('a surprise','🎉'),('wrapping paper','📦'),('thank you','🙏')],
+ # Лид-ин идёт ДО слайда слов, поэтому целевых слов в нём быть не должно:
+ # встретив слово раньше, ученик обесценивает его презентацию (Аня, 23.11.2026).
+ 'lead':[('the last birthday you went to','🎂'),
+         ('something somebody made for you','🛠️'),
+         ('opening something in front of everyone','👀'),
+         ('a shop two days before New Year','🏪'),
+         ('something you were given and still use','💛'),
+         ('saying the right thing when you do not like it','😬')],
  'lead_adv':[('the best present you ever got','🏅'),
              ('a present you did not like','😬'),
              ('wrapping something badly','📦'),

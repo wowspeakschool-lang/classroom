@@ -13,6 +13,8 @@ S={
  'mood_beg':'One word about today — then tell us why that word.','mood_adv':'One word about today — then tell us why that word.',
  'moods_beg':[('⚡','Energetic'),('🌤️','Calm'),('💬','Chatty'),('🌀','Confused'),('😴','Tired')],
  'moods_adv':[('⚡','Switched on'),('🌤️','Calm'),('💬','Chatty'),('🌀','Scattered'),('😴','Tired')],
+ # Лид-ин идёт ДО слайда слов, поэтому целевых слов в нём быть не должно:
+ # встретив слово раньше, ученик обесценивает его презентацию (Аня, 23.11.2026).
  'lead':[('My best friend is ___ .','🧑‍🤝‍🧑'),
          ('We always ___ together.','🤝'),
          ('Boys and girls both like to ___ .','⚽'),
@@ -21,9 +23,9 @@ S={
          ('A friend is somebody who ___ .','💛')],
  'lead_adv':[('People think boys and girls cannot ___ .','💭'),
              ('In my class, boys and girls ___ together.','🏫'),
-             ('It feels awkward when ___ .','😬'),
-             ('People start gossip when ___ .','🗣️'),
-             ('It is normal for friends to ___ .','✅'),
+             ('It feels strange when ___ .','😬'),
+             ('People start talking about you when ___ .','🗣️'),
+             ('Nobody is surprised when friends ___ .','✅'),
              ('A friendship works when ___ .','🔧')],
  'vq':[('How many reasons do they give for YES?','🔢'),
        ('How many reasons do they give for NO?','🔢'),
