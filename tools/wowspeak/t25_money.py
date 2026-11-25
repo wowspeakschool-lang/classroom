@@ -31,6 +31,11 @@ S={
        ('Now watch: were you right?','✅')],
  'w1012':['money','pocket money','save','spend','buy','piggy bank'],
  'w13':['pocket money','save','spend','price','sale','bank card'],
+
+ 'odd_rounds':[(['cheap','on sale','save up','expensive'],2),          # три про цену, одно про тебя
+               (['save up','budget','treat yourself','plan ahead'],2),  # три осторожно, одно нет
+               (['expensive','cheap','budget','free'],2),               # три цены, одно план
+               (['spend','buy','pay','save up'],3)],
  'mini_title':'🔗 Word chain','mini_frame':'Repeat the list — then add what you would buy.',
  'it1012':[('I am saving for ___ .','🎯'),('It costs about ___ .','🏷️'),
            ('I get my money from ___ .','💰'),('I save ___ every week.','📆'),

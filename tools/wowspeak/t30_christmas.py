@@ -31,6 +31,11 @@ S={
        ('Now watch: were you right?','✅')],
  'w1012':['Christmas tree','Santa','present','stocking','snowman','Christmas dinner'],
  'w13':['Christmas tree','decorations','present','Christmas lights','Christmas dinner','Christmas market'],
+
+ 'odd_rounds':[(['decorate','wrap','leftovers','bake'],2),       # три до праздника, одно после
+               (['invite','get together','wrap','catch up'],2),   # три про людей, одно про подарок
+               (['bake','cook','decorate','eat'],2),              # три про еду, одно нет
+               (['overrated','boring','too long','the best part'],3)],
  'mini_title':'🔗 Word chain','mini_frame':'Repeat the list — then add one thing from your Christmas.',
  'it1012':[('We put up ___ .','🎄'),('We eat ___ .','🍽️'),
            ('I get ___ .','🎁'),('We go to ___ .','📍'),

@@ -210,6 +210,19 @@ def check_before_vocab(S, bad):
             for w, t in leaked:
                 bad(f'{lvl}: «{w}» встречается до слайда слов - «{t}»')
 
+# ------------------------------------------- 2г. «лишнее слово» без раундов
+# Аня, 25.11.2026: «что лишнее - иногда прям очень понятно, аж странно, будто
+# ученики прям супер тупые». Автонабор ставит постороннее слово, и выбрать
+# можно не думая. Раунды надо писать руками: лишнее из того же круга, но с
+# одним называемым отличием.
+
+def check_odd(S, bad):
+    from make_theme import plan
+    games = S.get('games_adv') or plan(S['rot'])['adv']
+    if 'odd' in games and not S.get('odd_rounds'):
+        bad('игра «лишнее слово» без своих odd_rounds - автонабор ставит '
+            'постороннее слово, выбрать можно не думая')
+
 # ----------------------------------------------------------- 3. повтор темы
 def words_of(S):
     out = set()
@@ -264,6 +277,7 @@ def main(paths):
         check_template(S,bad)
         check_word_form(S,bad)
         check_before_vocab(S,bad)
+        check_odd(S,bad)
         if found:
             print(f'=== {name}')
             for f in found: print('  '+f)

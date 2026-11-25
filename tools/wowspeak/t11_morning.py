@@ -30,6 +30,12 @@ S={
        ('Which of those things do you do too?','🙋')],
  'w1012':['wake up','brush teeth','get dressed','have breakfast','pack the bag','catch the bus'],
  'w13':['wake up','shower','get dressed','have breakfast','check the phone','catch the bus'],
+
+ # Лишнее из того же круга: объяснить, почему оно лишнее, можно словами.
+ 'odd_rounds':[(['early','on time','sleepy','late'],2),        # три про время, одно про самочувствие
+               (['make the bed','in a hurry','rush','run'],0),  # три про скорость, одно про дело
+               (['oversleep','snooze','be late','wake up'],3),  # три про опоздание, одно нейтральное
+               (['get dressed','brush your teeth','be late','make the bed'],2)],
  'mini_title':'✍️ Finish the sentence!','mini_frame':'Finish every line about YOUR morning.',
  'it1012':[('First I ___ .','1️⃣'),('Then I ___ .','2️⃣'),('After that I ___ .','3️⃣'),
            ('I always ___ in a hurry.','🏃'),('I never ___ before school.','🚫'),

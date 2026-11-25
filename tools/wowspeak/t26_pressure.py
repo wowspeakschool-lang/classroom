@@ -35,6 +35,11 @@ S={
        ('Which one would never work for you? Say why.','🚫')],
  'w1012':['test','homework','timetable','study','break','sleep'],
  'w13':['test','deadline','revision','timetable','break','sleep'],
+
+ 'odd_rounds':[(['plan','revise','put off','catch up'],2),       # три помогают, одно мешает
+               (['busy','deadline','tired','worried'],1),         # три чувства, одно дата
+               (['deadline','timetable','panic','calendar'],2),    # три на бумаге, одно внутри
+               (['take a break','rest','sleep','finish on time'],3)],
  'mini_title':'🔮 Guess who','mini_frame':'Teacher reads a week — guess whose it is, then check.',
  'it1012':[('On Monday I ___ .','1️⃣'),('My hardest day is ___ .','😤'),
            ('I study for ___ minutes.','⏱️'),('I take a break when ___ .','☕'),

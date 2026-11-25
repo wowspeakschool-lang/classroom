@@ -33,6 +33,11 @@ S={
        ('Use your three words to retell one moment.','🗣️')],
  'w1012':['dragon','giant','hero','castle','sword','monster'],
  'w13':['dragon','hero','monster','sword','island','king'],
+
+ 'odd_rounds':[(['legend','myth','creature','story'],2),      # три вида рассказа, одно герой
+               (['hero','king','curse','creature'],2),         # три персонажа, одно событие
+               (['brave','strong','magic','kind'],2),          # три про человека, одно про силу
+               (['believe','prove','curse','check'],2)],
  'mini_title':'🔎 Find someone who','mini_frame':'Walk around and ask — find a name for every line.',
  'it1012':[('…knows a story about a dragon.','🐉'),('…would fight a giant.','💪'),
            ('…was in a castle once.','🏰'),('…is afraid of one monster.','👹'),

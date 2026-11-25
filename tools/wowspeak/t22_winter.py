@@ -31,6 +31,11 @@ S={
        ('Use your three words in one sentence each.','🗣️')],
  'w1012':['warm socks','hat','gloves','hot tea','blanket','hot water bottle'],
  'w13':['thermos','hand warmer','layers','lip balm','hoodie','warm boots'],
+
+ 'odd_rounds':[(['freezing','windy','layer up','slippery'],2),   # три про погоду, одно про тебя
+               (['warm up','layer up','stay dry','freezing'],3),  # три действия, одно состояние
+               (['scarf','hack','trick','tip'],0),                # три идеи, одно вещь
+               (['slippery','icy','keep warm','wet'],2)],
  'mini_title':'🔎 Find someone who','mini_frame':'Walk around and ask — find a name for every line.',
  'it1012':[('…wears a hat every day.','🎩'),('…hates gloves.','🧤'),
            ('…drinks hot tea at school.','☕'),('…sleeps under two blankets.','🛏️'),

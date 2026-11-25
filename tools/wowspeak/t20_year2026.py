@@ -33,6 +33,11 @@ S={
        ('Now watch: how close were you?','✅')],
  'w1012':['birthday','new school','holiday','new friend','football match','school trip'],
  'w13':['birthday','concert','exam','new friend','trip','new phone'],
+
+ 'odd_rounds':[(['best day','highlight','worst day','lucky'],2),      # три хорошие, одна плохая
+               (['lucky','difficult','hardest part','hard work'],0),  # три про усилие, одно про везение
+               (['proud of','got better at','worked hard','turned out well'],3),
+               (['low point','worst day','best day','hardest part'],2)],
  'mini_title':'🔗 Word chain','mini_frame':'Repeat the year so far — then add your month.',
  'it1012':[('In January I ___ .','❄️'),('In the spring I ___ .','🌱'),
            ('In the summer I ___ .','☀️'),('In September I ___ .','🍂'),

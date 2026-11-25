@@ -27,6 +27,11 @@ S={
        ('Now with sound: were you right?','🔊')],
  'w1012':['news','photo','video','true','false','check'],
  'w13':['headline','photo','video','source','true','false'],
+
+ 'odd_rounds':[(['check','check the date','share','proof'],2),       # три проверки, одно передать дальше
+               (['headline','clickbait','source','photo'],2),        # три видно в посте, одно кто за ним
+               (['prove','believe','trust','agree'],0),              # три чувства, одно доказательство
+               (['screenshot','photo','video','source'],3)],
  'mini_title':'⚖️ This or that?','mini_frame':'Pick one — and say why you trust it more.',
  'it1012':[('A photo or a video?','📸'),('A friend or the news?','💬'),
            ('A big number or a small one?','🔢'),('A story or a picture?','🖼️'),

@@ -224,8 +224,19 @@ def auto_taboo(vocab,extra=(),n=3):
     return out
 
 def odd_rounds(words,foreign,rounds=4):
-    """«Лишнее слово»: три слова нашей темы и одно из чужой. Ответ проверяемый,
-    а объяснять, почему лишнее, они будут словами — ради этого игра и нужна."""
+    """«Лишнее слово»: три слова нашей темы и одно постороннее.
+
+    Аня, 25.11.2026: «что лишнее — иногда прям очень понятно, аж странно, будто
+    ученики прям супер тупые». Так и есть: автонабор подставлял слово из списка
+    FOREIGN — vulkan, penguin, saxophone, — и среди трёх зимних слов оно видно
+    не глядя. Объяснять, почему лишнее, при этом нечего, а ради объяснения игра
+    и существует.
+
+    Нормальные раунды пишутся руками в спеке темы (`odd_rounds`): лишнее слово
+    должно быть из того же круга, но отличаться по одному называемому признаку —
+    skates · helmet · gloves · ticket (три надеваешь, четвёртое покупаешь).
+    Эта функция осталась страховкой; lint ругается, если тема её использует.
+    """
     out=[]
     n=len(words)
     for k in range(rounds):
@@ -234,9 +245,10 @@ def odd_rounds(words,foreign,rounds=4):
         out.append(([*trio[:pos],foreign[k%len(foreign)],*trio[pos:]][:4],pos))
     return out
 
-# Чужие слова для «лишнего» — из тем, которых в этой деке точно нет.
-FOREIGN=['helicopter','toothbrush','volcano','saxophone','penguin','glacier',
-         'lighthouse','hedgehog','skateboard','pineapple']
+# Страховочные «чужие» слова. Не экзотика: обычные школьные предметы, которые
+# в теме не встречаются, но и не выглядят как шутка посреди словаря.
+FOREIGN=['a bus stop','a pencil case','a window','a shopping list','a toothbrush',
+         'a bicycle','a plate','a doorbell','a shoelace','a paper clip']
 
 GAME_RU={
  'quiz':'«Point & Race» - слово названо, ищем картинку',
