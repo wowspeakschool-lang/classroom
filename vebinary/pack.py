@@ -10,12 +10,8 @@ NAMES = {'03.12': '03.12 A-an', '07.12': '07.12 Is there - Are there', '10.12': 
          '22.12': '22.12 Comparatives', '25.12': '25.12 Can - requests', '29.12': '29.12 Countable - Uncountable'}
 CHK = sys.argv[1]
 for g, label in [('7-9', '7–9'), ('10plus', '10+')]:
-    for d in glob.glob(f'vyhod/{g}/*/'):
-        d = d.rstrip('/'); new = os.path.join(f'vyhod/{g}', NAMES[os.path.basename(d)[:5]])
-        if d != new:
-            if os.path.exists(new): shutil.rmtree(new)
-            os.rename(d, new)
-    dirs = sorted([d for d in glob.glob(f'vyhod/{g}/*') if os.path.isdir(d)], key=lambda p: os.path.basename(p)[:2])
+    # папки уже названы по теме, без даты (решение Анны 25.11) — не переименовываем
+    dirs = sorted([d for d in glob.glob(f'vyhod/{g}/*') if os.path.isdir(d)], key=lambda p: os.path.basename(p))
     lines = [f'WOW Speak — вебинары Spotlight, декабрь 2026, группа {label}', '']
     for d in dirs:
         lines.append(os.path.basename(d) + '/')

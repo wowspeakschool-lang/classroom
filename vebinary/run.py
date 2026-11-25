@@ -12,7 +12,9 @@ CHK = os.environ.get('CHK', '/tmp/chk')
 for sp in mod.S:
     if dates and sp['date'] not in dates:
         continue
-    folder = os.path.join(OUT, f'{sp["date"]} {sp["topic"].replace("/", "-")}')
+    import re as _re
+    name = _re.sub(r'\s+', ' ', _re.sub(r'[:?…/\\*"<>|]', '', sp.get('file_topic', sp['topic']))).strip()
+    folder = os.path.join(OUT, name)   # без даты (решение Анны 25.11)
     les, selfp, L, n = build_all(sp, folder)
     subprocess.run(['soffice', '--headless', '--convert-to', 'pdf', '--outdir', folder, selfp], capture_output=True)
     subprocess.run(['soffice', '--headless', '--convert-to', 'pdf', '--outdir', CHK, les], capture_output=True)
