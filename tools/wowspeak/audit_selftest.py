@@ -10,6 +10,12 @@ from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE
 
 SRC=sys.argv[1] if len(sys.argv)>1 else 'new7/Speaking Clubs 10-12 Beginners My morning routine.pptx'
+# подкладывать дефекты надо в деку Beginners: половина случаев портит картинки,
+# а у Advanced на слайде слов их нет - раньше тут падал IndexError
+_p=Presentation(SRC)
+if not [sh for sh in _p.slides[4].shapes if getattr(sh,'image',None) is not None]:
+    sys.exit('нужна дека Beginners: на слайде 5 должны быть картинки словаря, '
+             'иначе половину дефектов некуда подложить.\nфайл: '+os.path.basename(SRC))
 TMP=tempfile.mkdtemp(prefix='selftest_')
 
 def save(prs,name):

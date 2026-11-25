@@ -17,7 +17,7 @@ Public helpers (wowspeak_games.py builds on them):
     PASTELS, BLOB, DARK/HOTPINK/GOLD/WHITE/INK/RED/TEAL, TF/BF
     C, set_bg, blob, shadow, card, text, lnk, fit, logo, band, new_slide
 """
-import os
+import os, re
 from pptx import Presentation
 from pptx.util import Inches, Pt, Emu
 from pptx.dml.color import RGBColor
@@ -400,9 +400,8 @@ def build(cfg,out):
         for k,sl in enumerate(fresh):
             if k==0: speaker(sl,note)
             else:
-                head=(note or 'GAME').split('\n')[0].rstrip('.')
-                speaker(sl,f'{head} — round {k+1} of {len(fresh)}. Same rules, see the '
-                           f'first screen of this game.')
+                head=re.split(r'[.?]',(note or 'GAME').split('\n')[0])[0].strip()
+                speaker(sl,f'{head} — round {k+1} of {len(fresh)}. Same rules.')
     hid={sl.slide_id for sl in helpers}
     game_slides=[sl for sl in prs.slides if sl.slide_id not in before and sl.slide_id not in hid]
 
