@@ -62,7 +62,12 @@ case('незаменённый токен в заметках','остался �
 case('карточка цвета фона','карточка цвета фона',c_bgcard)
 case('кнопка без действия','мёртвая кнопка',c_deadbtn)
 case('мелкая картинка','мелкая картинка',c_tinypic)
+def c_nonotes(prs):
+    # заметка преподавателю пропала с одного слайда - Аня просила их на каждом
+    sl=prs.slides[4]
+    sl.notes_slide.notes_text_frame.text=''
 case('текст не влезает в рамку','не влезть',c_overflow)
+case('пропала заметка преподавателю','нет заметки преподавателю',c_nonotes)
 
 def run_audit(path):
     out=subprocess.run([sys.executable,'-I','wowspeak_audit.py',path],

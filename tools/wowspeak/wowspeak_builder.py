@@ -281,9 +281,17 @@ def prop_slide(prs,cfg):
     logo(s)
     return s
 
+def speaker(sl,txt):
+    """Заметка в поле «Заметки к слайду» - преподаватель видит её под слайдом
+    и в режиме докладчика. Аня, 25.11.2026: инструкции нужны на каждый слайд."""
+    if not txt: return
+    sl.notes_slide.notes_text_frame.text=txt
+
 def build(cfg,out):
     """Render one deck. cfg schema: see HANDOFF.md §6."""
     import wowspeak_games as G
+    import wowspeak_notes as N
+    K=cfg.get('kinds') or {}
     lvl=cfg['level']  # 'beg' or 'adv'
     prs=new_presentation()
     def ns(bg): return new_slide(prs,bg)
@@ -300,11 +308,11 @@ def build(cfg,out):
     card(s,3.9,4.45,5.53,0.9,fill=WHITE,rad=0.5)
     text(s,4.0,4.45,5.33,0.9,[[('🗣️ ',20,INK,False,BF),(cfg['subtitle'],22,'7A5C9E',True,TF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
     text(s,1.5,5.6,10.3,0.8,[[(' '.join(EM[3]),34,INK,False,BF)]],align=PP_ALIGN.CENTER)
-    logo(s)
+    logo(s); speaker(s,N.TITLE)
 
     # S2 teacher notes - the slide is reserved here, the text is written at the
     # very end, when the real slide numbers are known (rule 9).
-    s_notes=ns(DARK)
+    s_notes=ns(DARK); speaker(s_notes,N.NOTES_SLIDE)
 
     # S3 mood
     s=ns(PASTELS['blue'])
@@ -317,7 +325,7 @@ def build(cfg,out):
         x=gx+i*(cw+gap); card(s,x,gy,cw,ch,fill=WHITE,rad=0.2)
         text(s,x,gy+0.2,cw,1.1,[[(e,46,INK,False,BF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
         text(s,x,gy+1.4,cw,0.6,[[(l,16,HOTPINK,True,TF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
-    logo(s)
+    logo(s); speaker(s,N.MOOD.get(K.get('mood'),N.MOOD['emoji']))
 
     # S4 LEAD-IN
     s=ns(PASTELS['yellow'])
@@ -328,6 +336,7 @@ def build(cfg,out):
     for q,e in cfg['lead_in']:
         runs.append([(e+'  ',15.5,INK,False,BF),(q,15.5,INK,False,BF)])
     text(s,1.6,2.05,10.1,4.4,runs,align=PP_ALIGN.LEFT,sa=8,ls=1.05)
+    speaker(s,N.LEAD.get(K.get('lead'),N.LEAD['questions']))
     logo(s)
 
     # S5 NEW WORDS - the ONLY slide where the pictures carry captions
@@ -349,7 +358,7 @@ def build(cfg,out):
             card(s,x,y,cw,ch,fill=WHITE,rad=0.1)
             text(s,x+0.1,y+0.2,cw-0.2,0.55,[[(word,18,HOTPINK,True,TF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
             text(s,x+0.16,y+0.82,cw-0.32,ch-1.0,[[(defn,14,INK,False,BF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.TOP,ls=1.02)
-    logo(s)
+    logo(s); speaker(s,N.VOCAB_BEG if lvl=='beg' else N.VOCAB_ADV)
 
     # S6 TALK WITH THE WORDS
     if lvl=='beg':
@@ -365,7 +374,7 @@ def build(cfg,out):
         r2=[[(e+'  ',16,HOTPINK,True,BF),(t,16,INK,False,BF)] for t,e in items[half:]]
         text(s,1.9,2.9,4.9,3.5,r1,align=PP_ALIGN.LEFT,sa=13,ls=1.05)
         text(s,7.0,2.9,4.7,3.5,r2,align=PP_ALIGN.LEFT,sa=13,ls=1.05)
-        logo(s)
+        logo(s); speaker(s,N.MINI.get(K.get('mini'),N.MINI['finish']))
     else:
         s=ns(PASTELS['peach'])
         blob(s,0.4,0.5,3.0,BLOB[3]); blob(s,13.0,7.1,3.0,BLOB[5])
@@ -376,12 +385,24 @@ def build(cfg,out):
             card(s,x,y,cw,ch,fill=WHITE,rad=0.1)
             text(s,x+0.25,y+0.2,cw-0.5,0.6,[[(hd,18,HOTPINK,True,TF)]],align=PP_ALIGN.LEFT,anchor=MSO_ANCHOR.MIDDLE)
             text(s,x+0.3,y+0.85,cw-0.6,ch-1.0,[[(ph,15,INK,False,BF)]],align=PP_ALIGN.LEFT,anchor=MSO_ANCHOR.TOP,ls=1.1)
-        logo(s)
+        logo(s); speaker(s,N.USEFUL)
 
     # GAMES (built into the deck; no Wordwall)
     before={sl.slide_id for sl in prs.slides}
     for spec in cfg.get('games',[]):
+        was={sl.slide_id for sl in prs.slides}
         helpers+=G.play(prs,spec,cfg)
+        note=N.GAMES.get(spec.get('type',''))
+        hid_now={sl.slide_id for sl in helpers}
+        fresh=[sl for sl in prs.slides if sl.slide_id not in was and sl.slide_id not in hid_now]
+        # полная инструкция на первом экране игры, дальше короткая пометка:
+        # семь одинаковых абзацев подряд преподаватель просто перестаёт читать
+        for k,sl in enumerate(fresh):
+            if k==0: speaker(sl,note)
+            else:
+                head=(note or 'GAME').split('\n')[0].rstrip('.')
+                speaker(sl,f'{head} — round {k+1} of {len(fresh)}. Same rules, see the '
+                           f'first screen of this game.')
     hid={sl.slide_id for sl in helpers}
     game_slides=[sl for sl in prs.slides if sl.slide_id not in before and sl.slide_id not in hid]
 
@@ -407,10 +428,11 @@ def build(cfg,out):
     for q,e in cfg['video_qs']:
         runs.append([(e+'  ',14.5,'F2ECFF',False,BF),(q,14.5,'F2ECFF',False,BF)])
     text(s,2.3,5.5,8.73,1.5,runs,align=PP_ALIGN.LEFT,sa=6,ls=1.03)
-    logo(s,dark=True)
+    logo(s,dark=True); speaker(s,N.VIDEO.get(K.get('video'),N.VIDEO['after']))
 
     # слайд-реквизит: то, на что ссылается финальное задание
     s_prop=prop_slide(prs,cfg)
+    if s_prop is not None: speaker(s_prop,cfg.get('prop_note_en') or N.PROP)
 
     # MAIN SPEAKING
     if lvl=='beg':
@@ -421,7 +443,7 @@ def build(cfg,out):
         text(s,1.8,2.0,9.8,0.5,[[('💡 ',15,'C2722A',True,BF),(cfg['frame_hint'],15,'C2722A',True,BF)]],align=PP_ALIGN.LEFT)
         runs=[[('• ',18,HOTPINK,True,BF),(fr,18,INK,False,BF)] for fr in cfg['frames']]
         text(s,2.0,2.7,9.4,3.9,runs,align=PP_ALIGN.LEFT,sa=14,ls=1.05)
-        logo(s)
+        logo(s); speaker(s,cfg.get('speak_note_en') or N.SPEAK_BEG)
     else:
         s=s_speak=ns(PASTELS['lavender'])
         blob(s,0.3,0.4,2.8,BLOB[4]); blob(s,13.1,7.2,3.0,BLOB[1])
@@ -441,7 +463,7 @@ def build(cfg,out):
         for i,tk in enumerate(d['tasks']):
             runs.append([(f'{i+1}. ',16,HOTPINK,True,BF),(tk,16,INK,False,BF)])
         text(s,1.95,yy+0.2,9.4,6.35-yy,runs,align=PP_ALIGN.LEFT,sa=10,ls=1.04)
-        logo(s)
+        logo(s); speaker(s,cfg.get('speak_note_en') or N.SPEAK_ADV)
 
     # thank you
     s=ns(PASTELS['pink'])
@@ -450,9 +472,10 @@ def build(cfg,out):
     text(s,2.8,2.6,7.73,1.5,[[('🎉 ',48,HOTPINK,True,BF),('Thank you!',52,HOTPINK,True,TF),(' '+EM[1],48,HOTPINK,True,BF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
     text(s,2.8,3.95,7.73,0.7,[[(cfg['bye'],22,'7A5C9E',True,TF)]],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
     text(s,1.5,5.1,10.3,0.8,[[(' '.join(EM[3])+' ✨',40,INK,False,BF)]],align=PP_ALIGN.CENTER)
-    logo(s)
+    logo(s); speaker(s,N.BYE)
 
     G.finish(prs,helpers)          # service screens go to the very end of the file
+    for sl in helpers: speaker(sl,N.SERVICE)
     def pos(sl): return prs.slides.index(sl)+1
     nums=[pos(sl) for sl in game_slides]
     games_txt=(f'{min(nums)}-{max(nums)}' if len(nums)>1 else (str(nums[0]) if nums else '-'))

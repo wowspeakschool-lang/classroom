@@ -368,6 +368,9 @@ def run(s,outdir):
     ga1=ga2=s.get('games_adv') or pl['adv']          # у Advanced их три
     stage={'mood_band':MOOD_BAND[pl['mood']],'lead_band':LEAD_BAND[pl['lead']],
            'lead_hint':LEAD_HINT[pl['lead']],'video_hint':VIDEO_HINT[pl['video']]}
+    # какие именно варианты достались теме - по ним билдер подбирает заметку
+    # преподавателю на каждый слайд (wowspeak_notes)
+    kinds={k:pl[k] for k in ('mood','lead','video','mini')}
     for k in stage:                                   # тема может переопределить
         if s.get(k): stage[k]=s[k]
     mini13=None
@@ -389,7 +392,9 @@ def run(s,outdir):
        _prop(s,'adv13',ICO,'13')),S5_ADV,S6_ADV,s['s9_adv13'],ga2),
     ]
     for grp,cfg,s5,s6,s9,games in versions:
-        cfg.update(stage)
+        cfg.update(stage); cfg['kinds']=kinds
+        for k in ('speak_note_en','prop_note_en'):
+            if s.get(k): cfg[k]=s[k]
         cfg['notes']=notes(s.get('video'),s5,s6,s9,red,games,pl['mood'],pl['lead'],pl['video'],
                            s.get('prop_note') if cfg.get('prop') else None)
         build(cfg,f"{outdir}/{safe_name(f'Speaking Clubs {grp} ' + s['theme'])}.pptx")

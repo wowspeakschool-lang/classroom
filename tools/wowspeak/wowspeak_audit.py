@@ -193,6 +193,15 @@ def audit(path):
     else:
         P.append('не нашёл слайд с заметками учителю')
 
+    # ---- заметка преподавателю на каждом слайде
+    # Аня, 25.11.2026: инструкции нужны по слайдам, а не одним списком.
+    # Молча пропавшая заметка выглядит как «так и было задумано».
+    empty=[i for i,sl in enumerate(prs.slides,1)
+           if not (sl.has_notes_slide and sl.notes_slide.notes_text_frame.text.strip())]
+    if empty:
+        P.append('нет заметки преподавателю на слайдах: '+', '.join(map(str,empty[:8]))
+                 + (' …' if len(empty)>8 else ''))
+
     # ---- орфография и уровень
     # заметки учителю пишутся по-русски и в проверку языка не идут
     alltext=' '.join(t for sl in prs.slides for _,t in texts(sl)
