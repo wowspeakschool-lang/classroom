@@ -30,6 +30,19 @@ for s in small:
     if d(b) < (im.width * 0.06) ** 2:
         b[0] = min(b[0], s[0].start); b[1] = max(b[1], s[0].stop)
         b[2] = min(b[2], s[1].start); b[3] = max(b[3], s[1].stop)
+GAP = int(os.environ.get('GAP', '0'))  # склеить крупные части ближе GAP px (мальчик и мяч)
+merged = True
+while GAP and merged:
+    merged = False
+    for i in range(len(box)):
+        for j in range(i + 1, len(box)):
+            a_, b_ = box[i], box[j]
+            gy = max(a_[0] - b_[1], b_[0] - a_[1], 0); gx = max(a_[2] - b_[3], b_[2] - a_[3], 0)
+            ar = lambda q: (q[1] - q[0]) * (q[3] - q[2])
+            if max(gx, gy) < GAP and min(ar(a_), ar(b_)) < 0.35 * max(ar(a_), ar(b_)):
+                box[i] = [min(a_[0], b_[0]), max(a_[1], b_[1]), min(a_[2], b_[2]), max(a_[3], b_[3])]
+                del box[j]; merged = True; break
+        if merged: break
 objs = [(slice(b[0], b[1]), slice(b[2], b[3])) for b in box]
 if len(objs) != len(names):
     sys.exit(f'нашлось {len(objs)} предметов, а имён {len(names)}')
