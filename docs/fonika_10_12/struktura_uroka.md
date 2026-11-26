@@ -91,6 +91,6 @@
   `media/reading10/cipher/<буква>.svg` (Twemoji, CC BY 4.0), список — `cipher/slova.txt`.
   a apple · b banana · c cat · d dog · e egg · f fish · g guitar · h hat ·
   i insect · j jeans · k kid · l lemon · m moon · n nut · o octopus · p pizza ·
-  q question · r rocket · s star · t tiger · u umbrella · v volcano · w watch ·
+  q queen · r rocket · s star · t tiger · u umbrella · v volcano · w watch ·
   x fox · y yo-yo · z zebra. Значок = слово-якорь буквы на экране «New code».
   Сочетания — склейка двух значков.
