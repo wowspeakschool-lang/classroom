@@ -128,13 +128,16 @@
   "10+": "Food Quantifiers, countables-uncountables"
  },
  "a/an/some/any: some — в утверждениях (неисчисляемые и мн. ч.)": {
-  "10+": "Food Quantifiers, countables-uncountables"
+  "10+": "Food Quantifiers, countables-uncountables",
+  "7–9": "Some, any+Can I have some food.22.10.2026"
  },
  "a/an/some/any: any — в отрицаниях": {
-  "10+": "Food Quantifiers, countables-uncountables"
+  "10+": "Food Quantifiers, countables-uncountables",
+  "7–9": "Some, any+Can I have some food.22.10.2026"
  },
  "a/an/some/any: any — в вопросах": {
-  "10+": "Food Quantifiers, countables-uncountables"
+  "10+": "Food Quantifiers, countables-uncountables",
+  "7–9": "Some, any+Can I have some food.22.10.2026"
  },
  "much/many/a lot of: a lot of / lots of — в утверждениях (исчисляемые и неисчисляемые)": {
   "10+": "Food Quantifiers, countables-uncountables",
@@ -229,10 +232,12 @@
   "10+": "Movies+Irregular verbs"
  },
  "must/mustn't: must — обязанность, необходимость": {
-  "10+": "Mustn't have to do+rules about animals (по названию)\nRules must-mustnt"
+  "10+": "Mustn't have to do+rules about animals (по названию)\nRules must-mustnt",
+  "7–9": "Must mustn't + school rules"
  },
  "must/mustn't: mustn't — запрет": {
-  "10+": "Mustn't have to do+rules about animals (по названию)\nRules must-mustnt"
+  "10+": "Mustn't have to do+rules about animals (по названию)\nRules must-mustnt",
+  "7–9": "Must mustn't + school rules"
  },
  "Object pronouns: формы me, you, him, her, it, us, them": {
   "10+": "Object Pronounce+describing relashiionship (по названию)"
@@ -379,7 +384,7 @@
   "10+": "Shopping .Articles.\nShopping. Articles.\nArticles review + travel and holidays"
  },
  "Articles: the — известный, упомянутый ранее предмет": {
-  "10+": "Shopping .Articles.\nShopping. Articles.\nArticles review + travel and holidays"
+  "10+": "Shopping .Articles.\nShopping. Articles.\nArticles review + travel and holidays\nZero article,the.20.10.2026"
  },
  "Articles: нулевой артикль — мн. ч. и неисчисляемые в общем значении": {
   "10+": "Shopping .Articles.\nArticles review + travel and holidays"
@@ -437,7 +442,7 @@
   "10+": "Articles review + travel and holidays"
  },
  "Articles: нулевой артикль — имена, спорт, дни, месяцы, праздники, цвета, напитки, еда, языки": {
-  "10+": "Articles review + travel and holidays"
+  "10+": "Articles review + travel and holidays\nZero article,the.20.10.2026"
  },
  "Plurals (irregular): man — men, child — children, tooth — teeth, foot — feet, mouse — mice": {
   "10+": "Farm animals+irregular plurals (по названию)",
@@ -676,7 +681,8 @@
   "7–9": "Possesive adjectives+extended Family\nPossesive adjectives+extened"
  },
  "Possessive case ('s): 's в ед. ч. — принадлежность": {
-  "7–9": "Possessive case ('s) + Whose is this + toys"
+  "7–9": "Possessive case ('s) + Whose is this + toys",
+  "10+": "Possessive 's vs of"
  },
  "Possessive case ('s): вопрос Whose?": {
   "7–9": "Possessive case ('s) + Whose is this + toys"
@@ -721,9 +727,130 @@
   "7–9": "Was, were+your week\nWas,were+Feelings"
  },
  "Future Simple (will): утверждение (will/'ll + V)": {
-  "7–9": "Will(Future Simple)+weather,holiday items"
+  "7–9": "Will(Future Simple)+weather,holiday items",
+  "10+": "Will (Future Simple) формы и значения"
  },
  "have got: значение — принадлежность (иметь)": {
   "7–9": "have got has got pets"
+ },
+ "a/an/some/any: some в вопросах — просьба и предложение": {
+  "7–9": "Some, any+Can I have some food.22.10.2026"
+ },
+ "to be (Present): отрицание — am not / isn't / aren't": {
+  "7–9": "To_be_Negatives_Questions"
+ },
+ "to be (Present): вопросы и краткие ответы": {
+  "7–9": "To_be_Negatives_Questions"
+ },
+ "Present Simple: общие вопросы (Do/Does …?)": {
+  "7–9": "Present Simple вопросы и краткие ответы"
+ },
+ "Present Simple: краткие ответы (Yes, I do / No, he doesn't)": {
+  "7–9": "Present Simple вопросы и краткие ответы"
+ },
+ "Present Simple: орфография окончания -s/-es (3 л. ед. ч.)": {
+  "7–9": "Present Simple вопросы и краткие ответы"
+ },
+ "to be (Past): отрицание — wasn't / weren't": {
+  "7–9": "Was were отрицание и вопросы"
+ },
+ "to be (Past): вопросы и краткие ответы": {
+  "7–9": "Was were отрицание и вопросы"
+ },
+ "Indirect questions: Could you tell me…? / Do you know…? — прямой порядок слов": {
+  "10+": "Indirect Questions+Neighbours"
+ },
+ "Indirect questions: I wonder / I want to know / I doubt — без вопросительного знака": {
+  "10+": "Indirect Questions+Neighbours"
+ },
+ "Indirect questions: общий вопрос → if/whether": {
+  "10+": "Indirect Questions+Neighbours"
+ },
+ "Time clauses: Present Simple вместо будущего после when/before/after/until/as soon as…": {
+  "10+": "Time Clauses about future 13.10.26"
+ },
+ "Time clauses: Present Perfect в придаточном времени": {
+  "10+": "Time Clauses about future 13.10.26"
+ },
+ "Relative clauses: who(m) / which / that — люди и предметы": {
+  "10+": "Relative Pronounce and Adverbs.16.10.2026"
+ },
+ "Relative clauses: whose — принадлежность": {
+  "10+": "Relative Pronounce and Adverbs.16.10.2026"
+ },
+ "Relative clauses: опущение who/which/that (дополнение vs подлежащее)": {
+  "10+": "Relative Pronounce and Adverbs.16.10.2026"
+ },
+ "Relative clauses: относительные наречия when / where / why": {
+  "10+": "Relative Pronounce and Adverbs.16.10.2026"
+ },
+ "Relative adverbs: where — место": {
+  "10+": "Relative Pronounce and Adverbs.16.10.2026"
+ },
+ "Relative adverbs: why — причина (the reason why)": {
+  "10+": "Relative Pronounce and Adverbs.16.10.2026"
+ },
+ "Articles: нулевой артикль — school, hospital, church, bed по назначению": {
+  "10+": "Zero article,the.20.10.2026"
+ },
+ "Possessive case ('s): мн. ч. — s' (the boys') и исключения 's (the children's)": {
+  "10+": "Possessive 's vs of"
+ },
+ "Possessive case ('s): of для неодушевлённых (the windows of the house)": {
+  "10+": "Possessive 's vs of"
+ },
+ "Future Simple (will): отрицание (will not/won't)": {
+  "10+": "Will (Future Simple) формы и значения"
+ },
+ "Future Simple (will): вопросы и краткие ответы": {
+  "10+": "Will (Future Simple) формы и значения"
+ },
+ "Future Simple (will): значение — обещания": {
+  "10+": "Will (Future Simple) формы и значения"
+ },
+ "Future Simple (will): значение — просьбы (Will you…?)": {
+  "10+": "Will (Future Simple) формы и значения"
+ },
+ "Future Simple (will): значение — угрозы и предупреждения": {
+  "10+": "Will (Future Simple) формы и значения"
+ },
+ "Future Simple (will): значение — ещё не решили/не уверены (Maybe I'll…)": {
+  "10+": "Will (Future Simple) формы и значения"
+ },
+ "Future Simple (will): Shall I/we? — предложение, просьба о совете": {
+  "10+": "Will (Future Simple) формы и значения"
+ },
+ "Question tags: there is → is there?": {
+  "10+": "Question Tags особые случаи 13.11"
+ },
+ "Question tags: never/hardly/seldom/rarely → утвердительный хвост": {
+  "10+": "Question Tags особые случаи 13.11"
+ },
+ "Question tags: I am → aren't I?": {
+  "10+": "Question Tags особые случаи 13.11"
+ },
+ "Question tags: Let's → shall we? / Let me → will you?": {
+  "10+": "Question Tags особые случаи 13.11"
+ },
+ "Question tags: повелительное наклонение → will you?": {
+  "10+": "Question Tags особые случаи 13.11"
+ },
+ "should/shouldn't: ought to (= should)": {
+  "10+": "Should ought to had better"
+ },
+ "should/shouldn't: значение — обязательство, долг (слабая обязанность)": {
+  "10+": "Should ought to had better"
+ },
+ "should/shouldn't: значение — критика (should / should have V3)": {
+  "10+": "Should ought to had better"
+ },
+ "should/shouldn't: Shall I…? — просьба о совете": {
+  "10+": "Should ought to had better"
+ },
+ "should/shouldn't: Shall I…? — предложение помощи": {
+  "10+": "Should ought to had better"
+ },
+ "should/shouldn't: had better (= should)": {
+  "10+": "Should ought to had better"
  }
 }

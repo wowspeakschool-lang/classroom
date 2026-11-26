@@ -80,6 +80,16 @@ def main():
                 if s not in valid[g]:
                     raise SystemExit(f'нет такой подтемы в группе {g}: {s}')
                 add(planned, s, g, f"вебинар {d[8:10]}.{d[5:7]} ({when}): {x['title']}")
+    # видео, найденные позже (data/videos_added_*.json): подтемы берём у вебинара из расписания, по которому записано видео
+    import glob as _g
+    for fn in sorted(_g.glob(os.path.join(D, 'data', 'videos_added_*.json'))):
+        for v in json.load(open(fn)):
+            g = '7–9' if v['group'] == '7-9' else '10+'
+            subs = [s for s, x in planned.items() if any(l.endswith(': ' + v['webinar']) for l in x.get(g, '').split('\n'))]
+            if not subs:
+                print(f"  {v['video']}: подтемы вебинара «{v['webinar']}» уже закрыты прежним видео по этой папке")
+            for s in subs:
+                add(videos, s, g, v['video'])
     json.dump(videos, open(os.path.join(D, 'data', 'videos.json'), 'w'), ensure_ascii=False, indent=1)
     json.dump(planned, open(os.path.join(D, 'data', 'planned.json'), 'w'), ensure_ascii=False, indent=1)
 
