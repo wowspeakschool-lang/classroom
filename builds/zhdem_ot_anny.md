@@ -112,9 +112,9 @@
 
 **Что ждём от Анны**
 
-21. Посмотреть урок 3 после переделки: https://classroom.wowteach.ru/lessons/reading10/u3.html
+21. Посмотреть урок 3: https://classroom.wowteach.ru/lessons/reading10/u3.html
 23. В SQL Editor удалить временную политику загрузки: drop policy tmp_reading10_zvuki_insert on storage.objects;
-25. Нажать «Озвучить» у Homework 3 · The Red Cup (6 мест: «впиши букву» и образец скороговорки).
+28. Значки шифра (26 штук, реалистичное фото) — ок?
 
 ## Сделано
 - 19.10 сняты пороги у всех домашек (355 уроков, `pass_threshold = null`);
