@@ -1,26 +1,28 @@
-# New Year — сюжеты и слова к ним (26.11.2026)
+# New Year — сюжеты и слова к ним (26.11.2026, правка по Анне)
 
-Слова «нулевые» — для beginners (6–8 для 4–6 и 7–9, 8–10 для 10–12 и 13+); «+ adv» — что добавляем advanced.
+Правило Анны 26.11.2026: beginners 4–6, 7–9, 10–12 — **6 слов**; advanced — **8 слов**;
+13+ beginners — не больше 8 слов, без Stop! Run! Look!; 13+ advanced — 8 слов плюс
+грамматика или фразы под сюжет.
 
-## 4–6 (одна группа, не читают, герой — дракон)
-- А. Дракон растопил снеговика — snow, snowman, hat, scarf, carrot, button.
-- Б. Дракон-почтальон в зимнем лесу — rabbit, fox, bear, owl, present, box (+ big, small).
-- В. Кто съел мандарины? — tangerine, cookie, cake, mouse, cat, dog.
-- Г. Дракон учится зимним забавам — sledge, skates, snowball, snowman, gloves, hat.
+## 4–6 (одна группа)
+- А. Дракон растопил снеговика — snow, snowman, hat, scarf, carrot, button
+- Б. Дракон-почтальон — rabbit, fox, bear, owl, present, box
+- В. Кто съел мандарины? — tangerine, cookie, cake, mouse, cat, dog
+- Г. Зимние забавы дракона — sledge, skates, snowball, snowman, gloves, hat
 
 ## 7–9
-- А. Щелкунчик — toy, doll, ball, drum, mouse, king, soldier, tree. + adv: on / under / in / behind, Where is…?
-- Б. Внутри снежного шара — house, tree, snowman, bridge, star, bell, lights, snow. + adv: There is / There are, числа.
-- В. Снежная фабрика — snow, snowflake, cloud, wind, ice, cold, machine, button. + adv: can / can't, Push! Pull!
-- Г. Зимний зоопарк — penguin, polar bear, seal, fox, owl, deer. + adv: has got, can.
+- А. Щелкунчик — beg: doll, ball, drum, mouse, king, soldier · adv: + toy, tree, грамматика on / under / in / behind, Where is…?
+- Б. Внутри снежного шара — beg: house, tree, snowman, star, bell, snow · adv: + bridge, lights, There is / There are
+- В. Снежная фабрика — beg: snow, snowflake, cloud, wind, ice, cold · adv: + machine, button, can / can't
+- Г. Зимний зоопарк — beg: penguin, polar bear, seal, fox, owl, deer · adv: + reindeer, rabbit, has got, can
 
 ## 10–12
-- А. Operation: Save New Year — present, sleigh, map, snow, fireworks, cake, card, cold, hot. + adv: going to, colder / hotter.
-- Б. Детектив «Кто унёс подарки?» — hat, coat, scarf, boots, glasses, bag + цвета. + adv: Present Continuous, was wearing.
-- В. Готовим новогодний стол — cake, pizza, salad, juice, chocolate, tangerine, plate, cup. + adv: some / any, How many / How much.
+- А. Save New Year — beg: present, sleigh, map, snow, fireworks, card · adv: + cold, hot, going to, colder / hotter
+- Б. Кто унёс подарки? — beg: hat, coat, scarf, boots, glasses, bag · adv: + gloves, jumper, Present Continuous, was wearing
+- В. Новогодний стол — beg: cake, salad, juice, chocolate, tangerine, pizza · adv: + plate, cup, some / any, How many / How much
 
 ## 13+
-- А. Свой «Один дома» — house, door, window, stairs, kitchen, phone, ice, snow + Stop! Run! Look! + adv: Present Continuous, команды, предлоги.
-- Б. Countdown по часовым поясам — midnight, clock, fireworks, countdown, wish, party, celebrate, New Year. + adv: will / going to, resolutions.
-- В. Квест-побег из торгового центра — shop, lift, exit, key, code, stairs, light, door. + adv: must / have to, дорога (turn left…).
-- Г. Готовим вечеринку 31-го — music, food, guests, invitation, decorations, playlist, cake, games. + adv: going to, предложения (Let's…, Shall we…?).
+- А. Свой «Один дома» — beg: house, door, window, stairs, kitchen, phone, key, light · adv: те же 8 + Present Continuous («They're coming!»), предлоги места
+- Б. Countdown — beg: midnight, clock, fireworks, countdown, wish, party, celebrate, tradition · adv: те же 8 + will / going to, resolutions (I'm going to…)
+- В. Побег из торгового центра — beg: shop, lift, exit, key, code, stairs, door, light · adv: те же 8 + must / have to, дорога (turn left, go straight)
+- Г. Вечеринка 31-го — beg: music, food, guests, invitation, decorations, playlist, cake, games · adv: те же 8 + going to, Let's… / Shall we…?
