@@ -14,9 +14,9 @@ SLOVA=[("chore_make_the_bed","make the bed · застилать кровать"
  ("chore_tidy_my_room","tidy my room · убираться в комнате",0),
  ("chore_cook_lunch","cook lunch · готовить обед",0),
  ("chore_load_the_washing_machine","load the washing machine · загрузить стирку",0),
- ("chore_take_out_the_rubbish","take out the rubbish · выносить мусор",1),
- ("chore_water_the_plants","water the plants · поливать цветы",1),
- ("chore_feed_my_pet","feed my pet · кормить питомца",1)]
+ ("chore_take_out_the_rubbish","take out the rubbish · выносить мусор",0),
+ ("chore_water_the_plants","water the plants · поливать цветы",0),
+ ("chore_feed_my_pet","feed my pet · кормить питомца",0)]
 KL=520; POLE=16; PODPIS=56
 try:
     F=ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",19)
