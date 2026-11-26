@@ -1630,6 +1630,30 @@ all four sides, the character small in the middle of a large white square
 image». И после нарезки класть картинку на **белый квадрат с полем 9 %** —
 тогда карточки в блоке одного размера и ничего не упирается в край.
 
+## Go Getter «постарше» — это не «серо и бесцветно» (решение Анны 26.11.2026)
+
+«Если взрослые, не значит, серые и бесцветные. Можно цвета добавлять-то, сделать
+как-то покрасивее». Строка стиля `restrained natural colours`, закреплённая
+03.11, давала подростковые, но блёклые карточки. **В строке стиля Go Getter
+вместо неё — `bright cheerful colours, colourful clothes and interior, warm
+sunny lighting`**, остальное без изменений (полуреалистичный 3D, натуральные
+пропорции, не мультяшные глаза). Подростковость даёт пропорция и сюжет, а не
+приглушённая палитра.
+
+Полная строка для промпта:
+
+```
+semi-realistic 3D render, natural proportions, detailed fabric and hair,
+bright cheerful colours, colourful clothes and interior, warm sunny lighting,
+realistic teenage proportions, natural small eyes, not a cartoon,
+no exaggerated features
+```
+
+Пять карточек GG3 ДЗ 1 (`make the bed`, `load the dishwasher`, `empty the
+dishwasher`, `wash the dishes`, `vacuum the living room`), сгенерированные Анной
+по прежней строке, **оставлены как есть** («пусть уже такими остаются») —
+перегенерируются только остальные десять.
+
 ## Картинки GG2 проверены все (24.11.2026)
 
 Вопрос Анны «в GG2 все картинки на месте?»: в курсе 384 разных ссылки на

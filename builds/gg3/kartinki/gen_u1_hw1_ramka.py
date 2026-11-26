@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""GG3 юнит 1 ДЗ 1 — 15 карточек «дела по дому», второй круг: рамка задана прямо
+"""GG3 юнит 1 ДЗ 1 — 15 карточек «дела по дому», второй круг: рамка задана прямо и цвет ярче
 (26.11.2026, «227 плохо обрезаны» — модель резала фигуру краем кадра). Стиль Go Getter: полуреалистичный 3D,
 подросток, никаких малышей. Ключ к Cloudflare подставляет прокси (сетевой секрет),
 поэтому в заголовке — заглушка."""
@@ -11,8 +11,8 @@ OUT = sys.argv[1] if len(sys.argv) > 1 else "/tmp/claude-0/-home-user-classroom/
 os.makedirs(OUT, exist_ok=True)
 
 STYLE = ("semi-realistic 3D render, natural proportions, detailed fabric and hair, "
-         "soft cinematic lighting, restrained natural colours, realistic teenage proportions, "
-         "natural small eyes, not a cartoon, no exaggerated features, "
+         "bright cheerful colours, colourful clothes and interior, warm sunny lighting, "
+         "realistic teenage proportions, natural small eyes, not a cartoon, no exaggerated features, "
          "plain flat pure white background, full figure from head to feet completely inside the frame, "
          "nothing cropped, wide empty white margin on all four sides, the character small in the "
          "middle of a large white square image, "
