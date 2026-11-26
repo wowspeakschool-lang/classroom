@@ -104,5 +104,6 @@
 Новые слова-значки: a apple · b basketball · c cat · d drone · e egg · f fire ·
 g guitar · h headphones · i igloo · j jeans · k key · l laptop · m moon · n nut ·
 o octopus · p pizza · q queen (шахматная фигура) · r rocket · s star · t tiger ·
-u umbrella · v volcano · w watch · x fox · y yacht · z zebra. Пока листы не
-пришли, в уроке стоят значки Twemoji.
+u umbrella · v volcano · w watch · x fox · y yacht · z zebra. 26.11 листы пришли, нарезаны в `media/reading10/cipher/<буква>.webp`
+(прозрачный фон), Twemoji убраны. Значок = слово-якорь буквы, отдельное фото-якорь
+на экране «New code» больше не показываем.
