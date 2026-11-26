@@ -14,7 +14,7 @@ m moon
 n nut
 o octopus
 p pizza
-q question
+q queen
 r rocket
 s star
 t tiger
