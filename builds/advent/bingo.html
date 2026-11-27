@@ -38,8 +38,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui
 .call b{display:block;font:800 13px Montserrat,sans-serif}.call small{color:var(--mute);font-size:12px}
 
 /* логотип школы на распечатках (Анна, 27.11.2026): надпись wowSpeak с розовой «o», как на платформе */
-.wlogo{font:900 22px Montserrat,system-ui,sans-serif;letter-spacing:.5px;color:#2d2d3f;line-height:1}
-.wlogo i{font-style:normal;color:#e91e8c}
+.wlogo{height:44px;width:auto;display:block} /* логотип с сайта школы, прислала Анна 27.11.2026 */
 .hdl{position:absolute;left:30px;top:56px;z-index:2}
 .cut{color:var(--mute);font-size:13px;margin-top:10px;text-align:center}
 .note{width:min(794px,100% - 32px);margin:0 auto 10px;color:var(--mute);font-size:14px}
@@ -52,7 +51,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui
   .sheet{width:auto;margin:0;box-shadow:none;border-radius:0;padding:0;page-break-after:always;overflow:visible}
   .garl{position:static;height:40px;background-size:auto 40px}
   .hd{margin-top:6px}.cards{gap:12mm 8mm}
-  .hdl{left:0;top:44px}.wlogo{font-size:26px}
+  .hdl{left:0;top:40px}.wlogo{height:15mm}
   .rules{font-size:15px;line-height:1.6;margin-top:10mm}
   .calls{margin-top:4mm}.call{padding:2mm 1mm;height:31mm;display:flex;flex-direction:column;align-items:center;justify-content:center}.call img{width:15mm;height:15mm}.call b{font-size:11px;line-height:1.15}.call small{font-size:9.5px;line-height:1.1}
   .cards.one{grid-template-columns:172mm;margin-top:8mm}.cards.one .cell b{font-size:17px}.cards.one .grid{gap:3mm}
@@ -81,7 +80,7 @@ var cards=[];for(var k=0;k<4;k++){var r=rnd(seed0+k*977+1);var pick=shuf(W,r).sl
 var PL=['Игрок 1','Игрок 2','Игрок 3','Игрок 4'];
 function cardHtml(c,k){return '<div class="card"><div class="who">'+PL[k]+'</div><div class="grid">'+c.map(function(x){
   return x?'<div class="cell"><img src="'+esc(x.img)+'" alt=""><b>'+esc(x.w)+'</b></div>':'<div class="cell free"><span class="fr">★</span><b>FREE</b></div>';}).join('')+'</div></div>';}
-function head(sub){return '<div class="garl"></div><div class="hdl"><span class="wlogo">w<i>o</i>wSpeak</span></div><div class="hd"><h1>Christmas Bingo</h1><p>'+sub+'</p></div>';}
+function head(sub){return '<div class="garl"></div><div class="hdl"><img class="wlogo" src="img/logo_wowspeak.png" alt="WowSpeak"></div><div class="hd"><h1>Christmas Bingo</h1><p>'+sub+'</p></div>';}
 var by=name?'Слова из адвент-календаря · '+esc(name):'Слова из адвент-календаря';
 /* 27.11 Анна попросила документом — карточка на весь лист A4: крупно, удобно закрывать клетки */
 var h=cards.map(function(c,k){return '<section class="sheet">'+head(by)+'<div class="cards one">'+cardHtml(c,k)+'</div></section>';}).join('')+

@@ -22,7 +22,7 @@ def add(path):
     ext = path.rsplit('.', 1)[1]
     mime = {'webp': 'image/webp', 'png': 'image/png', 'mp3': 'audio/mpeg'}[ext]
     assets[path] = 'data:%s;base64,%s' % (mime, base64.b64encode(open(full, 'rb').read()).decode())
-for p in sorted(glob.glob(os.path.join(D, 'img', '**', '*.webp'), recursive=True)) + \
+for p in sorted(glob.glob(os.path.join(D, 'img', '**', '*.webp'), recursive=True)) + sorted(glob.glob(os.path.join(D, 'img', '*.png'))) + \
          sorted(glob.glob(os.path.join(D, 'recept', '*.webp'))):
     rel = os.path.relpath(p, D)
     if not SKIP.search(rel): add(rel)
