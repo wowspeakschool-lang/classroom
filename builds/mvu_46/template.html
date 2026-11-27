@@ -199,7 +199,8 @@ function flyTo(from, toRect, then) {
 }
 function confetti() { const c = $('#fx'); const g = c.getContext('2d'); c.width = c.clientWidth; c.height = c.clientHeight; const ps = [...Array(160)].map(() => ({ x: Math.random() * c.width, y: -20 - Math.random() * c.height, v: 2 + Math.random() * 3, s: 5 + Math.random() * 7, c: ['#ffc93c', '#a77cf0', '#3fbf6a', '#e25555', '#6aa8ff'][Math.floor(Math.random() * 5)], r: Math.random() * 6 })); let f = 0; (function step() { g.clearRect(0, 0, c.width, c.height); ps.forEach(p => { p.y += p.v; p.r += .1; g.fillStyle = p.c; g.save(); g.translate(p.x, p.y); g.rotate(p.r); g.fillRect(-p.s / 2, -p.s / 2, p.s, p.s * .6); g.restore(); }); if (++f < 260) requestAnimationFrame(step); else g.clearRect(0, 0, c.width, c.height); })(); }
 // шаги сцены для кнопки Next: список функций, каждая — один шаг; кончились — Next ведёт дальше
-function steps(list) { let i = 0; SCREENS[cur].step = () => { while (i < list.length) { const r = list[i++](); if (r !== false) return true; } return false; }; }
+// шаги сцены для Next: каждый шаг сам проверяет, не сделан ли он уже кликом (тогда возвращает false и Next идёт к следующему)
+function steps(list) { SCREENS[cur].step = () => { for (const f of list) if (f() !== false) return true; return false; }; }
 const title = (node, t, st = '') => node.append(el('div', { cls: 'title', style: st }, t));
 
 /* ───────── сцены ───────── */
@@ -214,11 +215,12 @@ function build() {
   add({ id: 'dragon', bg: 'bg/forest', next: 'map', render(n) {
     title(n, 'Hello, Dragon!');
     let sad = false;
-    const d = put(n, 'hero/dragon_wave1', 38, 92, 62, 'glow', () => { sad = !sad; swap(d, sad ? 'hero/dragon_sad' : 'hero/dragon_wave1'); SND.pop(); });
+    let taps = 0, mapT = false;
+    const d = put(n, 'hero/dragon_wave1', 38, 92, 62, 'glow', () => { taps++; sad = !sad; swap(d, sad ? 'hero/dragon_sad' : 'hero/dragon_wave1'); SND.pop(); });
     const m = el('div', { cls: 'it glow', style: 'left:72%;top:80%;height:36%' }, el('img', { src: img('bg/map'), style: 'border-radius:1em;box-shadow:0 .4em 1.4em rgba(0,0,0,.4)' }));
-    m.onclick = () => { m.classList.add('pulse'); SND.ok(); setTimeout(() => m.classList.remove('pulse'), 2200); };
+    m.onclick = () => { mapT = true; m.classList.add('pulse'); SND.ok(); setTimeout(() => m.classList.remove('pulse'), 2200); };
     n.append(m);
-    steps([() => d.onclick(), () => d.onclick(), () => m.onclick()]);
+    steps([() => taps >= 1 ? false : d.onclick(), () => taps >= 2 ? false : d.onclick(), () => mapT ? false : m.onclick()]);
   } });
   // 2. Карта: дом → парк → лес → космос → джунгли, светится следующее место
   const PL = { house: [46.7, 76, 26], forest: [16.5, 57, 24], park: [73, 44, 26], jungle: [32, 20, 24], space: [85, 78, 15] };
@@ -270,11 +272,11 @@ function build() {
   const TED = [['on the bed', 22, 53, 18], ['under the bed', 23, 76, 14], ['under the table', 86, 75, 16], ['in the box', 50, 70, 12, true], ['next to the chair', 58, 76, 15], ['on the chair', 68.5, 58.5, 13]];
   add({ id: 'teddy', bg: 'bg/room', keysBar: true, mapBtn: true, next: 'missing', render(n) {
     title(n, "Where's the teddy?", 'left:27%;top:11%;white-space:nowrap');
-    let i = 0, d = null, box = null;
+    let i = 0, d = null, box = null, moves = 0;
     // «в коробке» — одной картинкой мишка внутри открытой коробки (если она уже есть), иначе мишка над коробкой
-    const place = () => { if (d) d.remove(); if (box) box.remove(); const [, x, y, h, inBox] = TED[i]; const tb = inBox && D.teddybox; d = put(n, tb ? 'obj/teddy_box' : 'obj/teddy', x, tb ? y + 10 : y, tb ? 26 : h, 'glow', () => { i = (i + 1) % TED.length; SND.pop(); place(); }); if (inBox && !tb) box = put(n, 'obj/toybox', x, y + 12, 18, ''); S.teddyAt = TED[i][0]; MW.refresh(); };
+    const place = () => { if (d) d.remove(); if (box) box.remove(); const [, x, y, h, inBox] = TED[i]; const tb = inBox && D.teddybox; d = put(n, tb ? 'obj/teddy_box' : 'obj/teddy', x, tb ? y + 10 : y, tb ? 26 : h, 'glow', () => { i = (i + 1) % TED.length; moves++; SND.pop(); place(); }); if (inBox && !tb) box = put(n, 'obj/toybox', x, y + 12, 18, ''); S.teddyAt = TED[i][0]; MW.refresh(); };
     place();
-    steps(TED.slice(1).map(() => () => d.onclick()));
+    steps([() => moves >= TED.length - 1 ? false : d.onclick()]);
   } });
   // А. Что пропало?
   add({ id: 'missing', bg: 'bg/room', keysBar: true, mapBtn: true, next: 'key_red', render(n) {
@@ -286,12 +288,12 @@ function build() {
     const card = el('div', { cls: 'card', style: 'position:relative;min-width:60%' }, row);
     const curt = el('div', { cls: 'curtain', style: 'display:none' }, '🙈 Close your eyes!');
     card.append(curt);
-    let hidden = -1;
+    let hidden = -1, rounds = 0, shown = true, busyH = false;
     const bHide = el('button', { cls: 'btn pur' }, '🙈 Close your eyes'), bShow = el('button', { cls: 'btn ghost' }, '👀 Show');
-    bHide.onclick = async () => { slots.forEach(s => { s.style.opacity = 1; s.classList.remove('hl'); }); curt.style.display = 'flex'; SND.whoosh(); await wait(1500); hidden = Math.floor(Math.random() * slots.length); slots[hidden].style.opacity = 0; curt.style.display = 'none'; S.missing = set[hidden]; MW.refresh(); };
-    bShow.onclick = () => { if (hidden < 0) return; slots[hidden].style.opacity = 1; slots[hidden].classList.add('hl'); SND.ok(); };
+    bHide.onclick = async () => { if (busyH) return; busyH = true; shown = false; slots.forEach(s => { s.style.opacity = 1; s.classList.remove('hl'); }); curt.style.display = 'flex'; SND.whoosh(); await wait(1500); hidden = Math.floor(Math.random() * slots.length); slots[hidden].style.opacity = 0; curt.style.display = 'none'; S.missing = set[hidden]; busyH = false; MW.refresh(); };
+    bShow.onclick = () => { if (hidden < 0 || busyH) return; if (!shown) { shown = true; rounds++; } slots[hidden].style.opacity = 1; slots[hidden].classList.add('hl'); SND.ok(); };
     n.append(el('div', { style: 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2em' }, card, el('div', { style: 'display:flex;gap:1em' }, bHide, bShow)));
-    steps([() => bHide.onclick(), () => bShow.onclick(), () => bHide.onclick(), () => bShow.onclick()]);
+    steps([() => busyH ? true : false, () => !shown ? bShow.onclick() : false, () => rounds < 2 ? bHide.onclick() : false]);
   } });
 
   // экран ключа
@@ -311,7 +313,7 @@ const keyScreen = (c, bg, jump) => add({ id: 'key_' + c, bg, keysBar: true, next
   add({ id: 'forest', bg: 'bg/forest', keysBar: true, mapBtn: true, next: 'bushes', render(n) {
     title(n, 'In the forest');
     forestBase(n, true);
-    steps([...n.querySelectorAll('.it.glow')].map(d => () => tap(d)));
+    steps([...n.querySelectorAll('.it.glow')].map(d => () => d.dataset.tapped ? false : tap(d)));
   } });
   function forestBase(n, glow) {
     const g = glow ? 'glow' : '';
@@ -327,7 +329,7 @@ const keyScreen = (c, bg, jump) => add({ id: 'key_' + c, bg, keysBar: true, next
     put(n, 'obj/butterfly', 27, 42, 11, g, d => tap(d));
     put(n, 'obj/hedgehog', 66, 98, 19, g, d => tap(d));
   }
-  function tap(d) { d.classList.remove('pulse'); void d.offsetWidth; d.classList.add('pulse'); SND.pop(); }
+  function tap(d) { d.dataset.tapped = 1; d.classList.remove('pulse'); void d.offsetWidth; d.classList.add('pulse'); SND.pop(); }
   // В. Кто прячется в кустах
   add({ id: 'bushes', bg: 'bg/forest', keysBar: true, mapBtn: true, next: 'riddle', render(n) {
     title(n, "Who's behind the bush?");
@@ -362,7 +364,7 @@ const keyScreen = (c, bg, jump) => add({ id: 'key_' + c, bg, keysBar: true, next
       if (!solved) return; tree.classList.remove('shake'); void tree.offsetWidth; tree.classList.add('shake'); SND.whoosh();
       if (++shakes >= 3) { rope.style.display = 'none'; key.style.top = '95%'; setTimeout(() => show('key_blue'), 1300); }
     };
-    steps([() => { if (solved) return false; right.onclick(); }, () => tree.onclick(), () => tree.onclick(), () => tree.onclick()]);
+    steps([() => solved ? false : right.onclick(), () => shakes < 3 ? tree.onclick() : false]);
   } });
   keyScreen('blue', 'bg/forest', 'hero/dragon_jump');
 
@@ -376,7 +378,7 @@ const keyScreen = (c, bg, jump) => add({ id: 'key_' + c, bg, keysBar: true, next
     put(n, 'obj/kid_skip', 58, 62, 22, 'glow', d => tap(d));
     put(n, 'obj/kid_football', 88, 99, 28, 'glow', d => tap(d));
     put(n, 'obj/kid_icecream', 92, 60, 22, 'glow', d => tap(d));
-    steps([...n.querySelectorAll('.it.glow')].map(d => () => tap(d)));
+    steps([...n.querySelectorAll('.it.glow')].map(d => () => d.dataset.tapped ? false : tap(d)));
     n.append(el('div', { cls: 'flyer' + (D.bird === 'obj/bird' ? '' : ' right'), style: 'top:14%;height:' + (D.bird === 'obj/bird' ? 9 : 12) + '%' }, el('img', { src: img(D.bird) })));   // птица летит клювом вперёд, плавно вверх-вниз
   } });
   // Ж. Дракоша говорит
@@ -386,7 +388,7 @@ const keyScreen = (c, bg, jump) => add({ id: 'key_' + c, bg, keysBar: true, next
     let i = 0;
     const d = put(n, SAYS[0][1], 50, 92, 62, 'glow bounce', () => { i = (i + 1) % SAYS.length; swap(d, SAYS[i][1]); S.says = SAYS[i][0]; SND.pop(); MW.refresh(); });
     S.says = SAYS[0][0];
-    steps(SAYS.slice(1).map(() => () => d.onclick()));
+    steps([() => i < SAYS.length - 1 ? d.onclick() : false]);
   } });
   // Е. Покорми бабушку
   const FOOD = ['pizza', 'broccoli', 'icecream', 'fish', 'cake', 'apple', 'banana', 'carrot'];
@@ -397,7 +399,7 @@ const keyScreen = (c, bg, jump) => add({ id: 'key_' + c, bg, keysBar: true, next
     const plate = put(n, 'obj/plate', 22, 98, 14, '');
     const rounds = shuffle(FOOD).slice(0, 4); let r = 0, tries = 0, busy = false;
     const play = el('button', { cls: 'btn pur', style: 'position:absolute;left:22%;top:18%;transform:translateX(-50%);z-index:31;font-size:2.2em' }, '🔊 Listen');
-    play.onclick = () => { stopCry(); say(rounds[r]); };
+    play.onclick = () => { stopCry(); heard = r; say(rounds[r]); };
     n.append(play);
     const FD = {};
     let heard = -1;
@@ -444,17 +446,18 @@ const keyScreen = (c, bg, jump) => add({ id: 'key_' + c, bg, keysBar: true, next
     SP.slice(0, S.stars).forEach(([x, y], i) => { const s = put(n, 'obj/star', x, y, 8, 'glow', d => tap(d)); s.style.animationDelay = (i * .3) + 's'; });
     put(n, 'obj/planet_ring', 90, 22, 13, '');
     const d = put(n, 'hero/dragon_astro_float', 28, 86, 40, 'float');
+    const opened = new Set();
     const PD = PLAN.map(([k, p, x, y, h, inside]) => put(n, p, x, y, h, 'glow', () => {
-      SND.whoosh();
+      opened.add(k); SND.whoosh();
       const ov = el('div', { cls: 'ov' }); const ph = el('div', { cls: 'porthole' }, el('img', { cls: 'pf', src: img('obj/porthole_' + k) }));
       if (inside) { const i = el('img', { cls: 'in', src: img(inside) }); ph.append(i); if (k === 'earth') { i.style.cursor = 'pointer'; i.style.animation = 'glow 1.5s infinite'; i.onclick = e => { e.stopPropagation(); show('key_yellow'); }; } }
       ov.append(ph); ov.onclick = () => ov.remove(); n.append(ov);
     }));
-    let pi = 0;
     SCREENS[cur].step = () => {
       const ov = n.querySelector('.ov');
-      if (ov) { if (pi >= PLAN.length) { show('key_yellow'); return true; } ov.remove(); return true; }
-      if (pi < PLAN.length) { PD[pi++].onclick(); return true; }
+      if (ov) { if (opened.has('earth')) { show('key_yellow'); return true; } ov.remove(); return true; }
+      const k = PLAN.findIndex(([kk]) => !opened.has(kk));
+      if (k >= 0) { PD[k].onclick(); return true; }
       show('key_yellow'); return true;
     };
   } });
