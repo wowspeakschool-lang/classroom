@@ -109,6 +109,7 @@
 
 21. Посмотреть урок 3: https://classroom.wowteach.ru/lessons/reading10/u3.html
 23. В SQL Editor удалить временную политику загрузки: drop policy tmp_reading10_zvuki_insert on storage.objects;
+30. Нажать «Озвучить» в «Homework 3 · The Red Cup»: 3 новых образца (слова, фразы, история вслух).
 
 ## Сделано
 - 19.10 сняты пороги у всех домашек (355 уроков, `pass_threshold = null`);
