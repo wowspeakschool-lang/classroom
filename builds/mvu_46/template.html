@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wow Dragon — Treasure Quest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2a1a3a;--pur:#7b4bd6;--pur2:#a77cf0;--gold:#ffc93c;--ok:#3fbf6a;--bad:#e25555;--panel:rgba(255,255,255,.92)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#1c1230;color:var(--ink);font-family:'Baloo 2',Arial,sans-serif;overflow:hidden}
+button{font-family:inherit;cursor:pointer}
+#app{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{position:relative;width:min(100vw,calc(100vh*16/9));height:min(100vh,calc(100vw*9/16));overflow:hidden;border-radius:8px;background:#000;font-size:min(2.2vh,1.24vw)}
+.screen{position:absolute;inset:0}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.dim{position:absolute;inset:0;background:rgba(30,15,60,.35)}
+.it{position:absolute;transform:translate(-50%,-100%);cursor:pointer;transition:transform .25s}
+.it img{height:100%;width:auto;display:block;pointer-events:none}
+.it.glow img{animation:glow 2s ease-in-out infinite}
+.it:hover{transform:translate(-50%,-100%) scale(1.08)}
+.it.off{pointer-events:none}
+.it.flip img{transform:scaleX(-1)}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 .2em rgba(255,230,120,.4))}50%{filter:drop-shadow(0 0 1.1em rgba(255,230,120,1)) brightness(1.08)}}
+.pulse{animation:pulse .7s ease-in-out 3}
+@keyframes pulse{50%{transform:translate(-50%,-100%) scale(1.25)}}
+.shake{animation:shake .5s}
+@keyframes shake{0%,100%{transform:translate(-50%,-100%) rotate(0)}25%{transform:translate(-50%,-100%) rotate(-6deg)}75%{transform:translate(-50%,-100%) rotate(6deg)}}
+.bounce{animation:bounce 1.2s ease-in-out infinite}
+@keyframes bounce{50%{transform:translate(-50%,-108%)}}
+.float{animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translate(-50%,-106%) rotate(4deg)}}
+.title{position:absolute;left:50%;top:3%;transform:translateX(-50%);background:var(--panel);border-radius:1em;padding:.3em 1.2em;font-weight:800;font-size:2.2em;color:var(--pur);white-space:nowrap;box-shadow:0 .3em 1em rgba(0,0,0,.25);z-index:30;pointer-events:none}
+.big{font-size:4.2em;font-weight:800;color:#fff;text-shadow:0 .08em .2em rgba(0,0,0,.5)}
+.btn{background:linear-gradient(180deg,#ffe07a,var(--gold));color:var(--ink);border:0;border-radius:1em;padding:.35em 1.1em;font-size:1.6em;font-weight:800;box-shadow:0 .2em 0 #c98d00}
+.btn:active{transform:translateY(.1em);box-shadow:0 .1em 0 #c98d00}
+.btn.pur{background:linear-gradient(180deg,var(--pur2),var(--pur));color:#fff;box-shadow:0 .2em 0 #4f2a9a}
+.btn.ghost{background:rgba(255,255,255,.85);box-shadow:none;border:2px solid var(--pur2)}
+.ctr{position:absolute;left:50%;transform:translateX(-50%);z-index:30;display:flex;gap:.8em;align-items:center}
+/* верх и низ */
+#topbar{position:absolute;right:1%;top:1.5%;z-index:60;display:flex;gap:.5em}
+.tb{background:linear-gradient(180deg,#ffe07a,var(--gold));border:0;border-radius:.8em;padding:.15em .6em;font-size:1.7em}
+#nav{position:absolute;right:1%;bottom:2%;z-index:60;display:flex;gap:.5em}
+#nav .btn{font-size:1.5em}
+#mapBtn{position:absolute;left:1%;bottom:2%;z-index:60;display:none}
+#keys{position:absolute;left:1%;top:1.5%;z-index:60;display:flex;gap:.35em;background:rgba(255,255,255,.85);border-radius:1em;padding:.25em .5em}
+#keys span{width:4.4em;height:3em;display:flex;align-items:center;justify-content:center;border-radius:.6em;border:2px dashed #c9b6ea}
+#keys span img{width:100%;height:100%;object-fit:contain}
+#keys span.got{border:2px solid transparent;animation:pop .5s}
+@keyframes pop{50%{transform:scale(1.4)}}
+/* карта */
+.place{position:absolute;transform:translate(-50%,-50%);border-radius:50%;border:0;background:transparent}
+.place.lit{box-shadow:0 0 0 .25em rgba(255,255,255,.0);animation:ring 2s ease-in-out infinite}
+@keyframes ring{50%{box-shadow:0 0 0 .3em rgba(255,215,90,.9),0 0 2em rgba(255,215,90,.8)}}
+.place .vk{position:absolute;right:0;top:0;width:45%;filter:drop-shadow(0 .2em .3em rgba(0,0,0,.4))}
+.walker{position:absolute;transform:translate(-50%,-100%);z-index:20;pointer-events:none}
+.walker img{height:100%;display:block}
+/* окна-поверх */
+.ov{position:absolute;inset:0;background:rgba(20,10,40,.55);z-index:40;display:flex;align-items:center;justify-content:center}
+.card{background:var(--panel);border-radius:1.4em;padding:1em 1.6em;text-align:center;box-shadow:0 .5em 2em rgba(0,0,0,.4)}
+.bag{position:absolute;left:2%;bottom:2%;z-index:25;width:13%;}
+.bag img{width:100%;display:block}
+.bagn{position:absolute;right:-.4em;top:-.4em;background:var(--pur);color:#fff;border-radius:1em;font-weight:800;padding:0 .5em;font-size:1.6em}
+.fly{position:absolute;z-index:50;transition:all .8s cubic-bezier(.5,-.3,.6,1);pointer-events:none}
+.fly img{height:100%;display:block}
+.row{display:flex;gap:1.6em;align-items:flex-end;justify-content:center}
+.row img{height:12em;max-width:12em;object-fit:contain}
+.slot{width:12em;height:12em;display:flex;align-items:flex-end;justify-content:center;transition:opacity .3s}
+.curtain{position:absolute;inset:0;background:var(--pur);border-radius:1.4em;display:flex;align-items:center;justify-content:center;color:#fff;font-size:3em;font-weight:800}
+.rope{position:absolute;width:.25em;background:#8a5a2b;transform-origin:top;z-index:21;transition:height 1s}
+.porthole{position:relative;height:72%;aspect-ratio:1}
+.porthole>img{width:100%;height:100%}
+.porthole .in{position:absolute;left:50%;top:60%;transform:translate(-50%,-50%);max-height:32%;max-width:50%}
+.count{font-size:12em;font-weight:800;color:#fff;text-shadow:0 .05em .2em rgba(0,0,0,.6);cursor:pointer;user-select:none}
+#fx{position:absolute;inset:0;pointer-events:none;z-index:70;width:100%;height:100%}
+#loader{position:fixed;inset:0;background:#1c1230;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1em;z-index:99;font-size:22px}
+#loader .b{width:40vw;height:12px;background:#3b2a5c;border-radius:6px;overflow:hidden}#loader i{display:block;height:100%;width:0;background:var(--gold)}
+.hl{outline:.25em solid var(--gold);border-radius:1em}
+</style>
+</head>
+<body>
+<div id="loader"><div>Loading…</div><div class="b"><i id="lbar"></i></div></div>
+<div id="app"><div id="stage">
+  <div id="screens"></div>
+  <div id="keys"></div>
+  <div id="topbar"><button class="tb" id="checkBtn" title="Чек-лист (для преподавателя)">✅</button><button class="tb" id="planBtn" title="План урока (для преподавателя)">📋</button></div>
+  <button class="btn ghost" id="mapBtn">🗺 Map</button>
+  <div id="nav"><button class="btn ghost" id="restartBtn" title="Начать урок заново">↻</button><button class="btn ghost" id="backBtn">←</button><button class="btn" id="nextBtn">Next ➜</button></div>
+  <canvas id="fx"></canvas>
+</div></div>
+<script>
+const D = /*DATA*/null;
+const img = n => D.media + n + '.webp';
+const $ = s => document.querySelector(s);
+const el = (t, a = {}, ...kids) => { const e = document.createElement(t); for (const k in a) { if (k === 'cls') e.className = a[k]; else if (k === 'html') e.innerHTML = a[k]; else if (k === 'style') e.style.cssText = a[k]; else if (k.startsWith('on')) e[k] = a[k]; else e.setAttribute(k, a[k]); } kids.flat().forEach(c => c != null && e.append(c)); return e; };
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const KEYS = ['red', 'blue', 'green', 'yellow'];
+
+/* ───────── состояние ───────── */
+const S0 = () => ({ student: { name: '', gender: 'm', age: '' }, auto: {}, oral: {}, override: {}, keys: {}, visited: {}, stars: 5 + Math.floor(Math.random() * 4), comment: '', repEdit: null, at: 'house' });
+let S = S0();
+let RESETTING = false;
+function save() { if (RESETTING) return; try { localStorage.setItem('mvu46', JSON.stringify(S)); } catch (e) {} }
+function load() { try { const s = JSON.parse(localStorage.getItem('mvu46')); if (s && s.student) Object.assign(S, s); } catch (e) {} }
+function hardReset() { RESETTING = true; try { localStorage.removeItem('mvu46'); } catch (e) {} try { if (MW.w && !MW.w.closed) MW.w.close(); } catch (e) {} location.reload(); }
+
+/* ───────── оценка ───────── */
+function autoMark(t, ok) { const a = S.auto[t] || (S.auto[t] = { ok: 0, n: 0 }); a.n++; if (ok) a.ok++; save(); MW.refresh(); }
+function oralMark(key, topics, v) { if (v === null) delete S.oral[key]; else S.oral[key] = { topics, v }; save(); MW.refresh(); }
+function topicScore(t) {
+  if (t in S.override) return { v: S.override[t], src: 'manual', from: [] };
+  const vals = [], from = new Set();
+  const a = S.auto[t]; if (a && a.n) { vals.push(a.ok === a.n ? 2 : a.ok * 2 >= a.n ? 1 : 0); from.add('из игры'); }
+  for (const k in S.oral) if (S.oral[k].topics.includes(t)) { vals.push(S.oral[k].v); from.add('устно'); }
+  if (!vals.length) return { v: null, src: '', from: [] };
+  return { v: Math.round(vals.reduce((x, y) => x + y, 0) / vals.length), src: 'auto', from: [...from] };
+}
+
+/* ───────── звук ───────── */
+let AC = null;
+function tone(seq) { try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); let t = AC.currentTime; seq.forEach(([f, d, type]) => { const o = AC.createOscillator(), g = AC.createGain(); o.type = type || 'sine'; o.frequency.value = f; g.gain.setValueAtTime(.18, t); g.gain.exponentialRampToValueAtTime(.001, t + d); o.connect(g).connect(AC.destination); o.start(t); o.stop(t + d); t += d * .8; }); } catch (e) {} }
+const SND = { key: () => tone([[784, .15], [988, .15], [1319, .35]]), ok: () => tone([[660, .12], [880, .25]]), bad: () => tone([[220, .3, 'triangle']]), pop: () => tone([[520, .08], [780, .1]]), whoosh: () => tone([[300, .1, 'sawtooth'], [500, .1, 'sawtooth'], [800, .2, 'sawtooth']]) };
+function say(name) { const a = new Audio(D.audio[name]); a.play().catch(() => {}); }
+
+/* ───────── экраны ───────── */
+const SCREENS = [], SID = {};
+let cur = 0, hist = [];
+function add(s) { s.idx = SCREENS.length; SCREENS.push(s); SID[s.id] = s.idx; return s; }
+function show(i, push = true) {
+  if (typeof i === 'string') i = SID[i];
+  if (push && cur !== i) hist.push(cur);
+  cur = i; const s = SCREENS[i];
+  const box = $('#screens'); box.innerHTML = '';
+  const node = el('div', { cls: 'screen' }); box.append(node);
+  if (s.bg) node.append(el('img', { cls: 'bg', src: img(s.bg) }));
+  s.render(node);
+  $('#nextBtn').style.display = s.next ? '' : 'none';
+  $('#mapBtn').style.display = s.mapBtn ? '' : 'none';
+  renderKeys(); MW.refresh();
+}
+function next() { const s = SCREENS[cur]; if (s.next) show(typeof s.next === 'function' ? s.next() : s.next); }
+$('#nextBtn').onclick = () => next();
+$('#backBtn').onclick = () => { if (hist.length) show(hist.pop(), false); };
+$('#mapBtn').onclick = () => show('map');
+$('#restartBtn').onclick = () => { if (confirm('Начать урок заново? Ключи и баллы чек-листа будут сброшены. Окно чек-листа закроется — откройте его снова кнопкой ✅.')) hardReset(); };
+document.addEventListener('keydown', e => { if (e.target.tagName === 'INPUT') return; if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') $('#backBtn').click(); });
+
+function renderKeys() {
+  const k = $('#keys'); k.innerHTML = '';
+  const s = SCREENS[cur]; k.style.display = s && s.keysBar ? 'flex' : 'none';
+  KEYS.forEach(c => k.append(el('span', { cls: S.keys[c] ? 'got' : '' }, S.keys[c] ? el('img', { src: img('obj/key_' + c) }) : null)));
+}
+// предмет на сцене: x — центр, y — низ (в % сцены), h — высота в % сцены
+function put(node, name, x, y, h, cls = '', onclick) {
+  const d = el('div', { cls: 'it ' + cls, style: `left:${x}%;top:${y}%;height:${h}%` }, el('img', { src: img(name) }));
+  if (onclick) d.onclick = () => onclick(d); else d.style.pointerEvents = 'none';
+  node.append(d); return d;
+}
+// анимация из кадров: ['hero/dragon_wave1','hero/dragon_wave2']
+function anim(d, frames, ms = 450) { let i = 0; const im = d.querySelector('img'); const t = setInterval(() => { if (!document.body.contains(im)) return clearInterval(t); i = (i + 1) % frames.length; im.src = img(frames[i]); }, ms); return t; }
+function flyTo(from, toRect, then) {
+  const st = $('#stage').getBoundingClientRect(), r = from.getBoundingClientRect();
+  const f = el('div', { cls: 'fly', style: `left:${r.left - st.left}px;top:${r.top - st.top}px;height:${r.height}px` }, el('img', { src: from.querySelector('img').src }));
+  $('#stage').append(f); from.style.visibility = 'hidden'; from.classList.remove('glow'); from.style.pointerEvents = 'none';
+  requestAnimationFrame(() => requestAnimationFrame(() => { f.style.left = (toRect.left - st.left + toRect.width * .3) + 'px'; f.style.top = (toRect.top - st.top + toRect.height * .2) + 'px'; f.style.height = (toRect.height * .4) + 'px'; f.style.opacity = '.2'; }));
+  setTimeout(() => { f.remove(); then && then(); }, 850);
+}
+function confetti() { const c = $('#fx'); const g = c.getContext('2d'); c.width = c.clientWidth; c.height = c.clientHeight; const ps = [...Array(160)].map(() => ({ x: Math.random() * c.width, y: -20 - Math.random() * c.height, v: 2 + Math.random() * 3, s: 5 + Math.random() * 7, c: ['#ffc93c', '#a77cf0', '#3fbf6a', '#e25555', '#6aa8ff'][Math.floor(Math.random() * 5)], r: Math.random() * 6 })); let f = 0; (function step() { g.clearRect(0, 0, c.width, c.height); ps.forEach(p => { p.y += p.v; p.r += .1; g.fillStyle = p.c; g.save(); g.translate(p.x, p.y); g.rotate(p.r); g.fillRect(-p.s / 2, -p.s / 2, p.s, p.s * .6); g.restore(); }); if (++f < 260) requestAnimationFrame(step); else g.clearRect(0, 0, c.width, c.height); })(); }
+const title = (node, t, st = '') => node.append(el('div', { cls: 'title', style: st }, t));
+
+/* ───────── сцены ───────── */
+function build() {
+  // 0. Привет
+  add({ id: 'hello', bg: 'bg/map', next: 'dragon', render(n) {
+    n.append(el('div', { cls: 'dim' }));
+    title(n, 'Wow Dragon · Treasure Quest');
+    anim(put(n, 'hero/dragon_wave1', 74, 96, 66, 'bounce'), ['hero/dragon_wave1', 'hero/dragon_wave2']);
+  } });
+  // 1. Дракоша: happy / sad, свиток-карта
+  add({ id: 'dragon', bg: 'bg/forest', next: 'map', render(n) {
+    title(n, 'Hello, Dragon!');
+    let sad = false;
+    const d = put(n, 'hero/dragon_wave1', 38, 92, 62, 'glow', () => { sad = !sad; d.querySelector('img').src = img(sad ? 'hero/dragon_sad' : 'hero/dragon_wave1'); SND.pop(); });
+    const m = el('div', { cls: 'it glow', style: 'left:72%;top:80%;height:36%' }, el('img', { src: img('bg/map'), style: 'border-radius:1em;box-shadow:0 .4em 1.4em rgba(0,0,0,.4)' }));
+    m.onclick = () => { m.classList.add('pulse'); SND.ok(); setTimeout(() => m.classList.remove('pulse'), 2200); };
+    n.append(m);
+  } });
+  // 2. Карта: места в любом порядке, планета незаметная
+  const PL = { house: [46.7, 76, 26], forest: [16.5, 57, 24], park: [73, 44, 26], jungle: [32, 20, 24], space: [86, 80, 12] };
+  const KEYOF = { house: 'red', forest: 'blue', park: 'green', space: 'yellow' };
+  add({ id: 'map', bg: 'bg/map', keysBar: true, render(n) {
+    const [sx, sy] = PL[S.at] || PL.house;
+    const w = put(n, 'hero/dragon_walk1', sx, sy + 6, 22, '');
+    w.classList.add('walker'); w.style.transition = 'left 1.4s linear, top 1.4s linear';
+    Object.entries(PL).forEach(([k, [x, y, r]]) => {
+      const b = el('button', { cls: 'place' + (k === 'space' ? '' : ' lit'), style: `left:${x}%;top:${y}%;width:${r}%;height:${r * 1.6}%`, title: k });
+      if (KEYOF[k] && S.keys[KEYOF[k]]) b.append(el('img', { cls: 'vk', src: img('obj/key_' + KEYOF[k]) }));
+      b.onclick = () => go(k, x, y);
+      n.append(b);
+    });
+    let busy = false;
+    function go(k, x, y) {
+      if (busy) return; busy = true; SND.whoosh();
+      const t = anim(w, ['hero/dragon_walk1', 'hero/dragon_walk2'], 220);
+      w.style.left = x + '%'; w.style.top = (y + 6) + '%';
+      setTimeout(() => { clearInterval(t); S.at = k; S.visited[k] = true; save(); show({ house: 'room', forest: 'forest', park: 'park', jungle: 'jungle', space: 'launch' }[k]); }, 1500);
+    }
+  } });
+
+  // 3. Дом: собрать рюкзак
+  const ROOM = [ // [картинка, x, низ y, высота, тема]
+    ['obj/teddy', 31, 55, 22, 'toys'], ['obj/plane', 13, 54, 12, 'toys'], ['obj/doll', 80, 21, 17, 'toys'], ['obj/robot', 92, 21, 18, 'toys'],
+    ['obj/ball', 48, 72, 13, 'toys'], ['obj/car', 58, 95, 13, 'toys'],
+    ['obj/pencil', 78, 47, 12, 'school'], ['obj/schoolbook', 87, 47, 10, 'school'], ['obj/ruler', 96, 47, 9, 'school'],
+    ['obj/tshirt', 82, 63, 14, 'clothes'], ['obj/hat', 64, 9, 12, 'clothes'], ['obj/sneakers', 93, 75, 11, 'clothes'], ['obj/socks', 71, 94, 12, 'clothes'],
+  ];
+  add({ id: 'room', bg: 'bg/room', keysBar: true, mapBtn: true, next: 'teddy', render(n) {
+    title(n, "Pack Dragon's bag!", 'left:42%');
+    const bag = el('div', { cls: 'bag' }, el('img', { src: img('obj/backpack') }), el('span', { cls: 'bagn' }, '0'));
+    n.append(bag); let k = 0;
+    put(n, 'hero/dragon_point', 23, 99, 32, 'flip');
+    ROOM.forEach(([nm, x, y, h]) => put(n, nm, x, y, h, 'glow', d => { SND.pop(); flyTo(d, bag.getBoundingClientRect(), () => { bag.querySelector('.bagn').textContent = ++k; S.bag = (S.bag || []); if (!S.bag.includes(nm)) S.bag.push(nm); save(); }); }));
+  } });
+  // Б. Где мишка?
+  const TED = [['on the bed', 31, 55, 22], ['under the table', 92, 76, 16], ['in the box', 44, 80, 16, true], ['next to the wardrobe', 49, 72, 20], ['on the chair', 82, 63, 16]];
+  add({ id: 'teddy', bg: 'bg/room', keysBar: true, mapBtn: true, next: 'missing', render(n) {
+    title(n, "Where's the teddy?", 'left:42%');
+    let i = 0, d = null, box = null;
+    const place = () => { if (d) d.remove(); if (box) box.remove(); const [, x, y, h, inBox] = TED[i]; d = put(n, 'obj/teddy', x, y, h, 'glow', () => { i = (i + 1) % TED.length; SND.pop(); place(); }); if (inBox) box = put(n, 'obj/toybox', x, y + 12, 18, ''); S.teddyAt = TED[i][0]; MW.refresh(); };
+    place();
+  } });
+  // А. Что пропало?
+  add({ id: 'missing', bg: 'bg/room', keysBar: true, mapBtn: true, next: 'key_red', render(n) {
+    n.append(el('div', { cls: 'dim' })); title(n, "What's missing?");
+    const pool = (S.bag && S.bag.length >= 5 ? S.bag : ROOM.map(r => r[0])).slice();
+    const set = shuffle(pool).slice(0, 5);
+    const row = el('div', { cls: 'row' }), slots = set.map(nm => el('div', { cls: 'slot' }, el('img', { src: img(nm) })));
+    row.append(...slots);
+    const card = el('div', { cls: 'card', style: 'position:relative;min-width:60%' }, row);
+    const curt = el('div', { cls: 'curtain', style: 'display:none' }, '🙈 Close your eyes!');
+    card.append(curt);
+    let hidden = -1;
+    const bHide = el('button', { cls: 'btn pur' }, '🙈 Close your eyes'), bShow = el('button', { cls: 'btn ghost' }, '👀 Show');
+    bHide.onclick = async () => { slots.forEach(s => { s.style.opacity = 1; s.classList.remove('hl'); }); curt.style.display = 'flex'; SND.whoosh(); await wait(1500); hidden = Math.floor(Math.random() * slots.length); slots[hidden].style.opacity = 0; curt.style.display = 'none'; S.missing = set[hidden]; MW.refresh(); };
+    bShow.onclick = () => { if (hidden < 0) return; slots[hidden].style.opacity = 1; slots[hidden].classList.add('hl'); SND.ok(); };
+    n.append(el('div', { style: 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2em' }, card, el('div', { style: 'display:flex;gap:1em' }, bHide, bShow)));
+  } });
+
+  // экран ключа
+  const keyScreen = (c, bg, jump) => add({ id: 'key_' + c, bg, keysBar: true, next: 'map', render(n) {
+    n.append(el('div', { cls: 'dim' })); title(n, "It's a key! What colour is it?");
+    const d = put(n, jump, 32, 92, 56, 'bounce');
+    const k = put(n, 'obj/key_' + c, 66, 70, 26, 'glow bounce', () => {
+      if (S.keys[c]) return; S.keys[c] = true; save(); SND.key(); confetti();
+      flyTo(k, $('#keys').children[KEYS.indexOf(c)].getBoundingClientRect(), renderKeys);
+    });
+  } });
+  keyScreen('red', 'bg/room', 'hero/dragon_jump');
+
+  // 4. Лес
+  add({ id: 'forest', bg: 'bg/forest', keysBar: true, mapBtn: true, next: 'bushes', render(n) {
+    title(n, 'In the forest');
+    forestBase(n, true);
+  } });
+  function forestBase(n, glow) {
+    const g = glow ? 'glow' : '';
+    put(n, 'obj/tree', 80, 88, 82, '');
+    put(n, 'obj/owl', 86, 33, 17, g, d => tap(d));
+    put(n, 'obj/squirrel', 70, 51, 15, g, d => tap(d));
+    put(n, 'obj/bird', 62, 37, 11, g, d => tap(d));
+    put(n, 'obj/bear', 46, 53, 15, g, d => tap(d));        // далеко — that
+    put(n, 'obj/pair_ducks', 12, 74, 16, g, d => tap(d));
+    put(n, 'obj/pair_frogs', 24, 88, 14, g, d => tap(d));
+    put(n, 'obj/pair_kittens', 47, 96, 28, g, d => tap(d));  // близко — these
+    put(n, 'obj/pair_rabbits', 33, 66, 15, g, d => tap(d));
+    put(n, 'obj/butterfly', 27, 42, 11, g, d => tap(d));
+    put(n, 'obj/hedgehog', 66, 98, 19, g, d => tap(d));
+  }
+  function tap(d) { d.classList.remove('pulse'); void d.offsetWidth; d.classList.add('pulse'); SND.pop(); }
+  // В. Кто прячется в кустах
+  add({ id: 'bushes', bg: 'bg/forest', keysBar: true, mapBtn: true, next: 'riddle', render(n) {
+    title(n, "Who's behind the bush?");
+    put(n, 'obj/tree', 80, 88, 82, '');
+    [['obj/fox', 20], ['obj/rabbit', 48], ['obj/hedgehog', 75]].forEach(([a, x]) => {
+      const an = put(n, a, x, 86, 26, '');
+      an.style.transition = 'top .6s'; an.style.zIndex = 4;
+      const b = put(n, 'obj/bush' + (1 + [20, 48, 75].indexOf(x)), x, 100, 34, 'glow', () => { an.style.top = '66%'; b.classList.remove('glow'); SND.ok(); });
+      b.style.zIndex = 5;
+    });
+  } });
+  // загадка + ключ на верёвке + потряси дерево (Д)
+  add({ id: 'riddle', bg: 'bg/forest', keysBar: true, mapBtn: true, next: null, render(n) {
+    title(n, "I'm small. I'm blue. I can fly. Who am I?");
+    const tree = put(n, 'obj/tree', 80, 88, 82, '');
+    const rope = el('div', { cls: 'rope', style: 'left:58.6%;top:41%;height:4%' }); n.append(rope);
+    const key = put(n, 'obj/key_blue', 58.6, 51, 9, ''); key.style.transition = 'top 1s'; key.style.zIndex = 22;
+    let solved = false, shakes = 0;
+    const cands = [['obj/butterfly', 16, 48, 17, true], ['obj/bird', 34, 42, 15], ['obj/owl', 22, 84, 22], ['obj/pair_frogs', 42, 90, 17]];
+    cands.forEach(([a, x, y, h, ok]) => put(n, a, x, y, h, 'glow', d => {
+      if (solved) return; if (!ok) { d.classList.add('shake'); SND.bad(); setTimeout(() => d.classList.remove('shake'), 500); return; }
+      solved = true; SND.ok(); confetti(); rope.style.height = '22%'; key.style.top = '69%';
+      $('.title').textContent = 'Shake the tree! 🌳';
+      tree.classList.add('glow'); tree.style.pointerEvents = 'auto';
+    }));
+    tree.onclick = () => {
+      if (!solved) return; tree.classList.remove('shake'); void tree.offsetWidth; tree.classList.add('shake'); SND.whoosh();
+      if (++shakes >= 3) { rope.style.display = 'none'; key.style.top = '95%'; setTimeout(() => show('key_blue'), 1300); }
+    };
+  } });
+  keyScreen('blue', 'bg/forest', 'hero/dragon_jump');
+
+  // 5. Парк
+  add({ id: 'park', bg: 'bg/park', keysBar: true, mapBtn: true, next: 'says', render(n) {
+    title(n, 'In the park');
+    const g = put(n, 'hero/granny_sad', 17, 82, 36, 'glow', d => tap(d));
+    put(n, 'obj/kid_run', 48, 90, 28, 'glow', d => tap(d));
+    put(n, 'obj/kid_bike', 70, 84, 26, 'glow', d => tap(d));
+    put(n, 'obj/kid_swing', 40, 47, 20, 'glow', d => tap(d));
+    put(n, 'obj/kid_skip', 58, 62, 22, 'glow', d => tap(d));
+    put(n, 'obj/kid_football', 88, 99, 28, 'glow', d => tap(d));
+    put(n, 'obj/kid_icecream', 92, 60, 22, 'glow', d => tap(d));
+    const b = put(n, 'obj/bird', 20, 22, 9, 'glow', d => tap(d)); b.style.transition = 'left 6s linear'; setTimeout(() => b.style.left = '75%', 300);
+  } });
+  // Ж. Дракоша говорит
+  const SAYS = [['jump', 'hero/dragon_jump'], ['swim', 'hero/dragon_swim'], ['fly', 'hero/dragon_fly'], ['run', 'hero/dragon_run'], ['dance', 'hero/dragon_dance'], ['clap', 'hero/dragon_clap']];
+  add({ id: 'says', bg: 'bg/park', keysBar: true, mapBtn: true, next: 'feed', render(n) {
+    n.append(el('div', { cls: 'dim' })); title(n, 'Dragon says…');
+    let i = 0;
+    const d = put(n, SAYS[0][1], 50, 92, 62, 'glow bounce', () => { i = (i + 1) % SAYS.length; d.querySelector('img').src = img(SAYS[i][1]); S.says = SAYS[i][0]; SND.pop(); MW.refresh(); });
+    S.says = SAYS[0][0];
+  } });
+  // Е. Покорми бабушку
+  const FOOD = ['pizza', 'broccoli', 'icecream', 'fish', 'cake', 'apple', 'banana', 'carrot'];
+  add({ id: 'feed', bg: 'bg/park', keysBar: true, mapBtn: true, next: null, render(n) {
+    n.append(el('div', { cls: 'dim' })); title(n, 'Listen and feed Granny!');
+    const g = put(n, 'hero/granny_sad', 22, 88, 52, '');
+    const crying = anim(g, ['hero/granny_sad', 'hero/granny_cry'], 900);
+    let stopCry = () => clearInterval(crying);
+    const plate = put(n, 'obj/plate', 22, 98, 14, '');
+    const rounds = shuffle(FOOD).slice(0, 4); let r = 0, tries = 0;
+    const play = el('button', { cls: 'btn pur', style: 'position:absolute;left:22%;top:18%;transform:translateX(-50%);z-index:31;font-size:2.2em' }, '🔊 Listen');
+    play.onclick = () => { stopCry(); say(rounds[r]); };
+    n.append(play);
+    FOOD.forEach((f, k) => {
+      const x = 48 + (k % 4) * 13, y = k < 4 ? 50 : 82;
+      put(n, 'obj/' + f, x, y, 19, 'glow', d => {
+        if (r >= rounds.length) return; stopCry();
+        if (f === rounds[r]) {
+          autoMark('food', tries === 0); tries = 0; SND.ok();
+          flyTo(d, plate.getBoundingClientRect(), async () => {
+            g.querySelector('img').src = img('hero/granny_eat'); await wait(1600);
+            r++; if (r < rounds.length) { g.querySelector('img').src = img('hero/granny_sad'); }
+            else { g.querySelector('img').src = img('hero/granny_key'); g.classList.add('glow'); play.remove(); $('.title').textContent = 'Thank you! Here is a key!'; g.style.pointerEvents = 'auto'; g.onclick = () => show('key_green'); confetti(); SND.key(); }
+          });
+        } else { tries++; g.querySelector('img').src = img('hero/granny_yuck'); SND.bad(); setTimeout(() => { if (r < rounds.length) g.querySelector('img').src = img('hero/granny_sad'); }, 1300); }
+      });
+    });
+  } });
+  keyScreen('green', 'bg/park', 'hero/dragon_jump');
+
+  // 6. Космос: И отсчёт
+  add({ id: 'launch', bg: 'bg/launch', keysBar: true, mapBtn: true, next: null, render(n) {
+    title(n, "Let's count: 10 … 1!");
+    const rocket = put(n, 'obj/rocket', 50, 72, 42, ''); rocket.style.transition = 'top 2.2s ease-in';
+    const d = put(n, 'hero/dragon_astro_wave', 30, 82, 32, 'bounce');
+    let k = 10;
+    const c = el('div', { cls: 'count', style: 'position:absolute;right:3%;top:30%;z-index:30' }, String(k)); n.append(c);
+    c.onclick = () => {
+      if (k <= 0) return; k--; SND.pop(); c.textContent = k ? String(k) : '🚀';
+      if (!k) { d.style.transition = 'opacity .5s'; d.style.opacity = 0; SND.whoosh(); rocket.style.top = '-40%'; setTimeout(() => show('space'), 2300); }
+    };
+  } });
+  const PLAN = [['red', 'obj/planet_red', 18, 42, 26, 'obj/postcard'], ['ice', 'obj/planet_blue', 42, 88, 24, null], ['moon', 'obj/planet_moon', 63, 34, 18, 'obj/rocket'], ['earth', 'obj/planet_earth', 80, 82, 28, 'obj/key_yellow']];
+  add({ id: 'space', bg: 'bg/space', keysBar: true, mapBtn: true, next: null, render(n) {
+    title(n, 'In space! How many stars?');
+    // звёзды: число держим в S, чтобы пересчёт совпадал
+    const SP = [[8, 18], [30, 12], [52, 20], [92, 40], [6, 70], [58, 60], [95, 75], [36, 62], [74, 14]];
+    SP.slice(0, S.stars).forEach(([x, y], i) => { const s = put(n, 'obj/star', x, y, 8, 'glow', d => tap(d)); s.style.animationDelay = (i * .3) + 's'; });
+    put(n, 'obj/planet_ring', 90, 22, 13, '');
+    const d = put(n, 'hero/dragon_astro_float', 30, 82, 30, 'float');
+    PLAN.forEach(([k, p, x, y, h, inside]) => put(n, p, x, y, h, 'glow', () => {
+      SND.whoosh();
+      const ov = el('div', { cls: 'ov' }); const ph = el('div', { cls: 'porthole' }, el('img', { src: img('obj/porthole_' + k) }));
+      if (inside) { const i = el('img', { cls: 'in', src: img(inside) }); ph.append(i); if (k === 'earth') { i.style.cursor = 'pointer'; i.style.animation = 'glow 1.5s infinite'; i.onclick = e => { e.stopPropagation(); show('key_yellow'); }; } }
+      ov.append(ph); ov.onclick = () => ov.remove(); n.append(ov);
+    }));
+  } });
+  keyScreen('yellow', 'bg/space', 'hero/dragon_jumpkey');
+
+  // 7. Джунгли: К ключи по цвету
+  add({ id: 'jungle', bg: 'bg/jungle', keysBar: true, mapBtn: true, next: null, render(n) {
+    const all = KEYS.every(c => S.keys[c]);
+    title(n, all ? 'Open the chest! Which key?' : 'We need four keys!');
+    const chest = put(n, 'obj/chest_closed', 50, 90, 50, '');
+    const dr = put(n, 'hero/dragon_think', 20, 92, 36, '');
+    if (!all) { const b = el('button', { cls: 'btn pur', style: 'position:absolute;left:50%;top:90%;transform:translateX(-50%);z-index:31' }, '🗺 Back to the map'); b.onclick = () => show('map'); n.append(b); return; }
+    // скважины на сундуке: доли ширины картинки (по листу 9)
+    const HOLE = { red: .245, blue: .405, green: .565, yellow: .735 };
+    let left = 4;
+    KEYS.forEach((c, i) => {
+      const k = put(n, 'obj/key_' + c, 78 + (i % 2) * 13, 42 + Math.floor(i / 2) * 26, 15, 'glow', () => {
+        const r = chest.getBoundingClientRect(), st = $('#stage').getBoundingClientRect();
+        const tgt = { left: r.left + r.width * HOLE[c] - r.width * .12, top: r.top + r.height * .55, width: r.width * .24, height: r.height * .25 };
+        SND.pop(); flyTo(k, tgt, () => { n.append(el('img', { src: img('obj/key_' + c), style: `position:absolute;z-index:7;left:${tgt.left - st.left + tgt.width * .3}px;top:${tgt.top - st.top + tgt.height * .2}px;height:${tgt.height * .4}px;transform:rotate(90deg)` })); if (--left === 0) open(); });
+      });
+    });
+    async function open() {
+      SND.key(); await wait(300);
+      chest.querySelector('img').src = img('obj/chest_open'); confetti();
+      const book = put(n, 'obj/book', 50, 66, 4, ''); book.style.transition = 'height 1.2s, top 1.2s'; book.style.zIndex = 6;
+      requestAnimationFrame(() => { book.style.height = '30%'; book.style.top = '52%'; });
+      dr.querySelector('img').src = img('hero/dragon_book'); dr.classList.add('bounce');
+      $('.title').textContent = "What is it? It's a magic book!";
+      $('#nextBtn').style.display = ''; SCREENS[cur].next = 'bye';
+    }
+  } });
+  // 8. Финал
+  add({ id: 'bye', bg: 'bg/jungle', render(n) {
+    n.append(el('div', { cls: 'dim' })); title(n, 'Well done! Bye-bye!');
+    anim(put(n, 'hero/dragon_wave1', 40, 94, 60, 'bounce'), ['hero/dragon_wave1', 'hero/dragon_wave2']);
+    put(n, 'obj/book', 66, 80, 34, 'glow');
+    const b = el('button', { cls: 'btn pur', style: 'position:absolute;left:2%;bottom:3%;z-index:61' }, '📝 Отчёт'); b.onclick = () => MW.open('report'); n.append(b);
+    confetti();
+  } });
+}
+
+/* ───────── окно преподавателя ───────── */
+const MW = {
+  w: null,
+  open(go) {
+    const W = Math.min(1100, screen.availWidth - 80), H = Math.min(900, screen.availHeight - 80);
+    const w = window.open('', 'wowspeak_mvu46', `popup=yes,width=${W},height=${H},left=${screen.availWidth - W - 20},top=30,resizable=yes,scrollbars=yes`);
+    if (!w) { alert('Разрешите всплывающие окна, чтобы открыть чек-лист и план.'); return; }
+    this.w = w;
+    w.APP = { S, D, topicScore, img, oralMark, save, report, where, go: id => { show(id); w.focus(); }, screen: () => SCREENS[cur], setOverride: (t, v) => { if (v === null) delete S.override[t]; else S.override[t] = v; save(); MW.refresh(); }, reset: hardReset };
+    w.document.open(); w.document.write(D.mw_html); w.document.close();
+    setTimeout(() => { this.refresh(); if (go && w.goReport) w.goReport(); }, 150);
+  },
+  refresh() { if (this.w && !this.w.closed && this.w.render) this.w.render(); },
+};
+$('#checkBtn').onclick = () => MW.open();
+$('#planBtn').onclick = () => {
+  const W = Math.min(1100, screen.availWidth - 80), H = Math.min(900, screen.availHeight - 80);
+  const w = window.open('', 'wowspeak_mvu46_plan', `popup=yes,width=${W},height=${H},left=30,top=30,resizable=yes,scrollbars=yes`);
+  if (!w) { alert('Разрешите всплывающие окна, чтобы открыть план урока.'); return; }
+  w.document.open(); w.document.write(D.plan_html); w.document.close();
+};
+// где проверяется тема: экраны, в чьих устных вопросах она есть
+function where(t) { const r = []; Object.entries(D.prompts).forEach(([sid, ps]) => { if (ps.some(p => (p.topics || []).includes(t)) && !r.some(x => x.id === sid)) r.push({ id: sid, name: D.screen_ru[sid] || sid }); }); return r; }
+function report() {
+  const RU = D.topic_ru, by = { 2: [], 1: [], 0: [] }, mods = [];
+  D.checklist.forEach(m => { let sum = 0, filled = 0; m.topics.forEach(([id]) => { const v = topicScore(id).v; if (v !== null) { by[v].push(RU[id]); sum += v; filled++; } }); mods.push({ name: m.title, sum, filled }); });
+  const first = mods.find(m => m.sum < D.pass);
+  const list = a => a.length ? a.join(', ') : '—';
+  const st = S.student || {}, f = st.gender === 'f';
+  const age = String(st.age || '').trim(), yrs = n => { n = +n; const d = n % 10, h = n % 100; return d === 1 && h !== 11 ? 'год' : d >= 2 && d <= 4 && (h < 12 || h > 14) ? 'года' : 'лет'; };
+  const who = [(st.name || '').trim(), age ? (/^\d+$/.test(age) ? `${age} ${yrs(age)}` : age) : ''].filter(Boolean).join(', ');
+  const lines = [
+    ...(who ? [`${f ? 'Ученица' : 'Ученик'}: ${who}.`] : []),
+    `Уверенно знает темы: ${list(by[2])}. ${f ? 'Знакома' : 'Знаком'} с темами: ${list(by[1])}. Пока не знает: ${list(by[0])}.`,
+    `Рекомендованная программа: ${first ? first.name : 'Wow Dragon 2 пройден целиком — следующая ступень'}.`,
+  ];
+  if ((S.comment || '').trim()) lines.push(`Комментарий преподавателя: ${S.comment.trim()}`);
+  return lines.join('\n');
+}
+
+/* ───────── загрузка ───────── */
+const CACHE = [];
+function preload(urls, done) { let k = 0; if (!urls.length) return done(); urls.forEach(u => { const i = new Image(); CACHE.push(i); const fin = () => { k++; $('#lbar').style.width = (k / urls.length * 100) + '%'; if (k === urls.length) done(); }; i.onload = fin; i.onerror = fin; i.src = u; }); }
+load();
+preload(D.preload.map(img), () => { build(); show(0, false); $('#loader').style.display = 'none'; });
+</script>
+</body>
+</html>
