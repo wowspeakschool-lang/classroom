@@ -190,7 +190,7 @@ add({ t: 'Blending', html: () => `${lab('Blending')}<h1>Tap. Blend. Read.</h1>
  <div class="row"><button class="btn ok" id="blr">✔ I can read it!</button><button class="btn soft" id="bln">Next word →</button></div><div class="fb" id="blc"></div></div>`,
  after: () => { let n = 0; const show = () => { document.getElementById('bl').innerHTML = [...BW[n]].map(l => `<button class="sbtn" onclick="this.classList.add('hit');sound('${l}')">${l}</button>`).join(''); document.getElementById('blp').innerHTML = ''; document.getElementById('blc').textContent = `${n + 1} / ${BW.length}`; };
   document.getElementById('blr').onclick = () => { document.getElementById('blp').innerHTML = pic(BW[n], 'max-width:180px'); say(BW[n]); };
-  document.getElementById('bln').onclick = () => { n = (n + 1) % BW.length; show(); }; show(); } });
+  document.getElementById('bln').onclick = () => { if (n === BW.length - 1) { go(i + 1); return; } n++; show(); if (n === BW.length - 1) document.getElementById('bln').textContent = '✔ Done →'; }; show(); } });
 add({ t: 'Real or fake?', plus: true, html: () => `${lab('+ Real or fake?', 'plus')}<h1>Read. Real or fake?</h1>
  <div class="tile" style="max-width:520px;margin:0 auto;padding:24px"><div class="big" id="rf">—</div>
  <div class="row" style="margin-top:16px"><button class="btn ok" onclick="rfAns(1)">✔ Real</button><button class="btn no" onclick="rfAns(0)">✘ Fake</button></div><div class="fb" id="rff"></div></div>`,
@@ -207,7 +207,7 @@ add({ t: 'Word building', html: () => `${lab('Word building')}<h1>Make the word.
   const upd = () => { const w = W[n]; document.getElementById('wbs').innerHTML = [...w].map((_, k) => `<div class="slot" data-k="${k}">${got[k] || ''}</div>`).join('');
    document.querySelectorAll('#wbs .slot').forEach(s => s.onclick = () => { const k = +s.dataset.k; if (k !== got.length - 1) return; got.pop(); const t = [...document.querySelectorAll('#wbt .mag')].find(t => t.dataset.used == k); if (t) { t.style.visibility = 'visible'; delete t.dataset.used; } upd(); });
    const f = document.getElementById('wbf'); if (got.length === w.length) f.innerHTML = got.join('') === w ? `<span class="good">✔ ${w}!</span>` : '<span class="bad">Try again ↺</span>'; else f.textContent = ''; if (got.join('') === w) say(w); };
-  document.getElementById('wbn').onclick = () => { n = (n + 1) % W.length; draw(); }; draw(); } });
+  document.getElementById('wbn').onclick = () => { if (n === W.length - 1) { go(i + 1); return; } n++; draw(); if (n === W.length - 1) document.getElementById('wbn').textContent = '✔ Done →'; }; draw(); } });
 // 16–17
 add({ t: 'Tricky words', html: () => `${lab('New tricky words')}<h1>Remember!</h1>
  <div class="row" style="gap:20px">${['said', 'are', 'you'].map(w => `<button class="tile word" style="min-width:190px;padding:26px;color:var(--pur-d)" onclick="say('${w}')">${w}</button>`).join('')}</div>` });
@@ -232,8 +232,17 @@ add({ t: 'True or false?', html: () => `${lab('Story')}<h1>True or false?</h1><d
  ${[['The cup is red.', 1], ['The cup sits on a pen.', 0], ['In the cup — a map.', 1]].map(([q, y]) => `<div class="tf"><span>${q}</span><button class="btn ok" onclick="tfAns(this,${y},1)">True</button><button class="btn no" onclick="tfAns(this,${y},0)">False</button></div>`).join('')}</div>` });
 // 23–24
 add({ t: 'Chant', html: () => `${lab('Chant')}<h1>Read. Slow… then fast!</h1><div class="chant" id="ch3">Run, run, run in the sun!<br>Get a cup, get a nut!</div>${chantBtns('ch3')}` });
-add({ t: 'Mission complete', html: () => `${lab('✔ Mission complete', 'ok')}<h1>Mission 3 complete!</h1>
- <div class="row" style="gap:26px;align-items:flex-end"><img src="${IMG}sam_wave.webp" alt="" style="height:290px"><div class="tile" style="padding:26px 34px"><div style="font-weight:700;color:var(--mute)">Now you can read</div><div class="big" style="color:var(--pur)">70+</div><div style="font-weight:700;color:var(--mute)">words</div><div class="row" style="margin-top:12px;gap:6px">${NEW.map(l => glyph(l, 40)).join('')}</div></div><img src="${IMG}dan_wave.webp" alt="" style="height:290px"></div>` });
+add({ t: 'Now I can', html: () => `${lab('✔ Mission complete', 'ok')}<h1>Now I can…</h1>
+ <div class="row" style="gap:26px;align-items:center">
+  <div style="max-width:560px;width:100%">${['read c, k, e, u, r', 'read cat, sun, red, cup…', 'write new letters and words', 'decode a secret message'].map(t => `<button class="tile" style="display:flex;align-items:center;gap:14px;width:100%;margin:8px 0;text-align:left;font-size:24px;font-weight:700" onclick="this.querySelector('.ck').textContent='✅'"><span class="ck" style="font-size:30px">⬜</span>I can ${t}</button>`).join('')}</div>
+  <div class="tile" style="padding:22px 30px;text-align:center"><div style="font-weight:700;color:var(--mute)">Now you can read</div><div class="big" style="color:var(--pur)">70+</div><div style="font-weight:700;color:var(--mute)">words</div><div class="row" style="margin-top:12px;gap:6px">${NEW.map(l => glyph(l, 40)).join('')}</div></div>
+ </div>` });
+add({ t: 'Homework', html: () => `${lab('Homework')}<h1>Your homework</h1>
+ <div class="row" style="gap:26px"><div style="font-size:130px">📲</div><div class="tile" style="padding:24px 30px;text-align:left;font-size:24px;font-weight:700;line-height:1.7">Mission 3 · The Red Cup<br><span style="color:var(--mute);font-weight:500">8 tasks · new code · read · write</span></div></div>` });
+add({ t: 'Feedback', html: () => `${lab('Feedback')}<h1>How was the mission?</h1>
+ <div class="row" style="gap:12px;margin-bottom:22px" id="stars">${[1, 2, 3, 4, 5].map(k => `<button style="font-size:64px;filter:grayscale(1);opacity:.45" onclick="[...this.parentElement.children].forEach((b,j)=>{b.style.filter=j<${k}?'none':'grayscale(1)';b.style.opacity=j<${k}?1:.45})">⭐</button>`).join('')}</div>
+ <div class="row" style="gap:16px">${[['😎', 'Easy'], ['🙂', 'OK'], ['🤯', 'Hard']].map(([e, t]) => `<button class="tile" style="width:150px;font-size:56px" onclick="[...this.parentElement.children].forEach(b=>b.style.borderColor='');this.style.borderColor='var(--pur)'">${e}<div style="font-size:20px;font-weight:800">${t}</div></button>`).join('')}</div>
+ <div class="row" style="gap:20px;margin-top:20px;align-items:flex-end"><img src="${IMG}sam_wave.webp" alt="" style="height:150px"><div class="word" style="color:var(--pur)">Bye, agent!</div><img src="${IMG}dan_wave.webp" alt="" style="height:150px"></div>` });
 
 const X = [];
 X.push({ t: 'Code breaker', html: () => `${lab('⭐ Extra', 'x')}<h1>Code breaker!</h1>
