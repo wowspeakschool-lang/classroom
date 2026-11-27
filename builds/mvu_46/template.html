@@ -67,9 +67,9 @@ button{font-family:inherit;cursor:pointer}
 .place{position:absolute;transform:translate(-50%,-50%);border-radius:50%;border:0;background:transparent}
 .place.lit{box-shadow:0 0 0 .25em rgba(255,255,255,.0);animation:ring 2s ease-in-out infinite}
 @keyframes ring{50%{box-shadow:0 0 0 .3em rgba(255,215,90,.9),0 0 2em rgba(255,215,90,.8)}}
-.place .ok{position:absolute;left:4%;top:4%;width:2.2em;height:2.2em;border-radius:50%;background:var(--ok);color:#fff;font-weight:800;font-size:1.4em;display:flex;align-items:center;justify-content:center;box-shadow:0 .1em .3em rgba(0,0,0,.4)}
+.place .ok{position:absolute;right:12%;top:16%;z-index:2;width:2.2em;height:2.2em;border-radius:50%;background:var(--ok);color:#fff;font-weight:800;font-size:1.4em;display:flex;align-items:center;justify-content:center;box-shadow:0 .1em .3em rgba(0,0,0,.4)}
 .place .pi{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.place .vk{position:absolute;right:0;top:0;width:45%;filter:drop-shadow(0 .2em .3em rgba(0,0,0,.4))}
+.place .vk{position:absolute;right:18%;top:2%;width:45%;filter:drop-shadow(0 .2em .3em rgba(0,0,0,.4))}
 .walker{position:absolute;transform:translate(-50%,-100%);z-index:20;pointer-events:none}
 .walker img{height:100%;display:block}
 /* окна-поверх */
@@ -115,7 +115,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const KEYS = ['red', 'blue', 'green', 'yellow'];
 
 /* ───────── состояние ───────── */
-const S0 = () => ({ student: { name: '', gender: 'm', age: '' }, auto: {}, oral: {}, override: {}, keys: {}, visited: {}, stars: 5 + Math.floor(Math.random() * 4), comment: '', repEdit: null, at: 'house' });
+const S0 = () => ({ student: { name: '', gender: 'm', age: '' }, auto: {}, oral: {}, override: {}, keys: {}, visited: {}, stars: 5 + Math.floor(Math.random() * 4), comment: '', repEdit: null, at: 'start' });
 let S = S0();
 let RESETTING = false;
 function save() { if (RESETTING) return; try { localStorage.setItem('mvu46', JSON.stringify(S)); } catch (e) {} }
@@ -204,8 +204,8 @@ function build() {
   // 0. Привет
   add({ id: 'hello', bg: 'bg/map', next: 'dragon', render(n) {
     n.append(el('div', { cls: 'dim' }));
-    title(n, 'Wow Dragon · Treasure Quest');
-    put(n, 'hero/dragon_wave2', 74, 96, 66, 'sway');
+    title(n, 'Wow Dragon · Treasure Quest', 'font-size:1.8em');
+    put(n, 'hero/dragon_wave2', 82, 95, 46, 'sway');
   } });
   // 1. Дракоша: happy / sad, свиток-карта
   add({ id: 'dragon', bg: 'bg/forest', next: 'map', render(n) {
@@ -217,16 +217,19 @@ function build() {
     n.append(m);
     steps([() => d.onclick(), () => d.onclick(), () => m.onclick()]);
   } });
-  // 2. Карта: места в любом порядке, пройденные — с галочкой
+  // 2. Карта: дом → парк → лес → космос → джунгли, светится следующее место
   const PL = { house: [46.7, 76, 26], forest: [16.5, 57, 24], park: [73, 44, 26], jungle: [32, 20, 24], space: [85, 78, 15] };
-  const START = [6, 93];   // Дракоша в начале стоит в левом нижнем углу карты, ни в одном месте
+  const START = [6, 93];
+  // порядок мест (решение Анны 27.11): светится только следующее, Next ведёт туда же
+  const ORDER = ['house', 'park', 'forest', 'space', 'jungle'];
+  const NEXTP = () => ORDER.find(p => p === 'jungle' || !S.visited[p]);   // Дракоша в начале стоит в левом нижнем углу карты, ни в одном месте
   const KEYOF = { house: 'red', forest: 'blue', park: 'green', space: 'yellow' };
   add({ id: 'map', bg: 'bg/map', keysBar: true, render(n) {
     const [sx, sy] = PL[S.at] ? [PL[S.at][0], PL[S.at][1] + 6] : START;
     const w = put(n, 'hero/dragon_walk1', sx, sy, 22, '');
     w.classList.add('walker'); w.style.transition = 'left 1.4s linear, top 1.4s linear';
     Object.entries(PL).forEach(([k, [x, y, r]]) => {
-      const b = el('button', { cls: 'place lit', style: `left:${x}%;top:${y}%;width:${r}%;height:${r * 1.6}%`, title: k });
+      const b = el('button', { cls: 'place' + (k === NEXTP() ? ' lit' : ''), style: `left:${x}%;top:${y}%;width:${r}%;height:${r * 1.6}%`, title: k });
       if (k === 'space') b.append(el('img', { cls: 'pi', src: img('obj/planet_ring') }));   // планета на карте теперь яркая — космос обычное место
       if (S.visited[k]) b.append(el('span', { cls: 'ok' }, '✓'));
       if (KEYOF[k] && S.keys[KEYOF[k]]) b.append(el('img', { cls: 'vk', src: img('obj/key_' + KEYOF[k]) }));
@@ -241,7 +244,7 @@ function build() {
       setTimeout(() => { w.classList.remove('walkbob'); S.at = k; S.visited[k] = true; save(); show({ house: 'room', forest: 'forest', park: 'park', jungle: 'jungle', space: 'launch' }[k]); }, 1500);
     }
     // Next на карте — в следующее непройденное место, сундук последним
-    SCREENS[cur].step = () => { const k = ['house', 'forest', 'park', 'space', 'jungle'].find(p => p === 'jungle' || !S.visited[p]); go(k, PL[k][0], PL[k][1]); return true; };
+    SCREENS[cur].step = () => { const k = NEXTP(); go(k, PL[k][0], PL[k][1]); return true; };
   } });
 
   // 3. Дом: собрать рюкзак
@@ -490,7 +493,6 @@ const keyScreen = (c, bg, jump) => add({ id: 'key_' + c, bg, keysBar: true, next
     n.append(el('div', { cls: 'dim' })); title(n, 'Well done! Bye-bye!');
     put(n, 'hero/dragon_wave2', 40, 94, 60, 'sway');
     put(n, 'obj/book', 66, 80, 34, 'glow');
-    const b = el('button', { cls: 'btn pur', style: 'position:absolute;left:2%;bottom:3%;z-index:61' }, '📝 Отчёт'); b.onclick = () => MW.open('report'); n.append(b);
     confetti();
   } });
 }
