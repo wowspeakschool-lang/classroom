@@ -3,6 +3,14 @@
 <title>Gingerbread Men</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Nunito:wght@600;700;800&family=Pacifico&display=swap">
 <style>
+/* логотип школы на распечатках (Анна, 27.11.2026): надпись wowSpeak с розовой «o», как на платформе */
+.wlogo{font:900 22px Montserrat,system-ui,sans-serif;letter-spacing:.5px;color:#2d2d3f;line-height:1}
+.wlogo i{font-style:normal;color:#e91e8c}
+
+.rlogo{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:-6px 0 12px;padding-bottom:10px;border-bottom:2px dashed var(--line)}
+.rlogo small{color:var(--mute);font-weight:700;font-size:13px}
+@media print{.rlogo{margin:0 0 6mm}.rlogo .wlogo{font-size:26px}}
+
 /* Рецепт имбирного печенья — подарок 5-го окошка (Анна, 24.11.2026).
    Текст по-английски; перевод без озвучки: на компьютере — при наведении, на телефоне и планшете — по нажатию;
    при печати перевода нет — только английский (Анна, «220 при печати без перевода»). Картинки — по промптам, сгенерировала Анна. */
@@ -63,6 +71,7 @@ h2{font:900 22px Montserrat,sans-serif;color:var(--green);margin:26px 0 10px;dis
 </style></head><body>
 <div class="bar"><b>🍪 Gingerbread Men</b><span id="bh"></span><button type="button" id="pr">🖨 Распечатать</button></div>
 <main class="page">
+  <div class="rlogo"><span class="wlogo">w<i>o</i>wSpeak</span><small>Подарок адвент-календаря</small></div>
   <div class="hero">
     <div>
       <h1>Gingerbread Men</h1>
