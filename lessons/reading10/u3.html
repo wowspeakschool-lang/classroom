@@ -178,9 +178,8 @@ add({ t: 'Hear it', html: () => { const W = [['pen', 1], ['pin', 0], ['ten', 1],
  <div class="row">${W.map(([w, y], k) => `<div class="tile" style="width:150px"><button class="btn soft" onclick="say('${w}')">🔊 ${k + 1}</button>
   <div class="row" style="margin-top:10px;gap:8px"><button class="btn ok" style="padding:10px 14px" onclick="hearAns(this,${y},1,'${w}')">✔</button><button class="btn no" style="padding:10px 14px" onclick="hearAns(this,${y},0,'${w}')">✘</button></div><div class="fb"></div></div>`).join('')}</div>`; } });
 // 12
-add({ t: 'Write it', html: () => `${lab('Write it')}<h1>Watch. Write.</h1>
- <div class="row">${NEW.map(l => `<div class="tile" style="width:150px"><svg viewBox="0 0 100 120" width="116" height="140" class="wr" data-l="${l}"></svg><button class="btn soft" style="padding:6px 14px" onclick="drawL(this.previousElementSibling)">↻</button></div>`).join('')}</div>`,
- after: () => document.querySelectorAll('.wr').forEach(drawL) });
+add({ t: 'Write it', html: () => `${lab('Write it')}<h1>Look. Write.</h1>
+ <div class="row" style="gap:12px">${NEW.map(l => `<div class="tile" style="padding:8px;width:min(300px,46%)"><img src="../../media/reading10/write/${l}.svg" alt="" style="width:100%;border-radius:12px"></div>`).join('')}</div>` });
 // 13
 add({ t: 'Copy', html: () => `${lab('Write it')}<h1>Copy.</h1><div class="row" style="gap:26px">${['cat', 'red'].map(w => `<div class="tile" style="width:260px">${pic(w)}<div class="word">${w}</div></div>`).join('')}</div>` });
 add({ t: 'Copy more', plus: true, html: () => `${lab('+ Write it', 'plus')}<h1>Copy. Check.</h1><div class="row" style="gap:20px">${['sun', 'kid', 'pen'].map(w => `<div class="tile" style="width:220px">${pic(w)}<div class="word">${w}</div></div>`).join('')}</div>` });
@@ -259,9 +258,7 @@ function wsInit() { const G = ['catpo', 'mupen', 'cupso', 'sunig', 'redmt']; con
   for (let k = 0; k <= n; k++) { const c = cell(first[0] + dx * k, first[1] + dy * k); s += c.textContent; cs.push(c); } first = null;
   const w = ['cat', 'pen', 'sun', 'red', 'cup'].find(w => w === s || w === [...s].reverse().join(''));
   if (w && !found.has(w)) { found.add(w); cs.forEach(c => c.classList.add('found')); say(w); document.getElementById('wsl').innerHTML = ['cat', 'sun', 'red', 'cup', 'pen'].map(x => found.has(x) ? `<s style="color:var(--ok)">${x}</s>` : x).join('<br>'); document.getElementById('wsf').innerHTML = `<span class="good">${found.size} / 5</span>`; } }); }
-const STROKES = { c: ['M72 52 C60 38 30 40 28 70 C28 98 60 104 74 88'], k: ['M30 10 L30 110', 'M72 50 L30 84', 'M44 74 L76 110'], e: ['M28 74 L74 74 C74 46 30 42 28 72 C28 100 62 106 76 92'], u: ['M28 46 L28 88 C28 108 70 108 72 84', 'M72 46 L72 110'], r: ['M32 46 L32 110', 'M32 70 C36 50 56 44 72 50'] };
-function drawL(svg) { const l = svg.dataset.l; svg.innerHTML = `<line x1="0" y1="46" x2="100" y2="46" stroke="#E4DFF0" stroke-dasharray="4 4"/><line x1="0" y1="110" x2="100" y2="110" stroke="#E4DFF0"/>` + STROKES[l].map((d, k) => `<path d="${d}" fill="none" stroke="#6A4DF4" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" style="stroke-dasharray:400;stroke-dashoffset:400;animation:dr 1.1s ${k * 1.1}s forwards"/>`).join(''); }
-document.head.insertAdjacentHTML('beforeend', '<style>@keyframes dr{to{stroke-dashoffset:0}}</style>');
+
 
 const list = () => extra ? X : S.filter(s => mode === 40 || !s.plus);
 function go(n) {
