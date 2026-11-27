@@ -81,7 +81,6 @@
 
 Концепция New Year — `builds/newyear/koncepciya.md`, решения — `builds/newyear/resheniya.md`.
 
-🔴 **28.** 10–12 «Один дома» без кадров фильма: чем заменить видео (варианты — `builds/newyear/resheniya.md`)?
 
 
 ## Чат «SM1 — Super Minds 1»
