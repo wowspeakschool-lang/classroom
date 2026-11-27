@@ -1,4 +1,5 @@
-"""Spotlight 9 через Cloudflare Workers AI (FLUX.1 schnell) — по картинке на слово.
+"""Сцена пишется по русскому переводу из плана (g9_plan.tsv), а не по английскому слову: final = «завершающий», не «финал».
+Spotlight 9 через Cloudflare Workers AI (FLUX.1 schnell) — по картинке на слово.
 python3 cf_gen.py jobs.json            jobs: {"term": "English scene description", ...}
 Ключ подставляет прокси (сетевой секрет окружения для api.cloudflare.com), в скрипте заглушка.
 Выход: raw/<term>.jpg (исходник 1024), out512/<term>.png (512×512, прозрачный фон).
@@ -22,6 +23,7 @@ jobs = json.load(open(sys.argv[1]))
 OUT = os.environ.get('OUT', 'real')
 os.makedirs(f'{here}/{OUT}/raw', exist_ok=True); os.makedirs(f'{here}/{OUT}/out512', exist_ok=True); os.makedirs(f'{here}/out512', exist_ok=True)
 for term, desc in jobs.items():
+    if isinstance(desc, dict): desc = desc["desc"]  # {"ru": перевод из плана, "desc": сцена по этому значению}
     stem = fname(term)[:-4]
     if os.path.exists(f'{here}/{OUT}/raw/{stem}.jpg'):
         print('уже есть', term); continue
