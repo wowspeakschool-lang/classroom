@@ -51,6 +51,8 @@ h1{font-family:Montserrat;font-weight:900;font-size:clamp(28px,3.6vw,44px);line-
 .gl{display:inline-flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
 .gl .lt{font-family:Montserrat;font-weight:900;font-size:22px;height:26px;color:var(--pur)}
 .gl.dim img{opacity:.25;filter:grayscale(1)}
+.gl.kn .lt{color:#B7B0CC}.gl.nw{outline:3px dashed #FFC2D4;outline-offset:4px;border-radius:12px}.gl.nw.done{outline-color:transparent}
+.ac{width:120px;padding:10px 6px 8px;border-radius:22px;background:#FAF8FE;border:3px solid var(--line);text-align:center}.ac.ok{border-color:var(--ok);background:var(--ok-s)}.ac.err{border-color:var(--red);background:var(--red-s)}.ac .lt{font-family:Montserrat;font-weight:900;font-size:40px;height:46px;color:var(--pur)}
 .p{font-family:Montserrat;font-weight:900;font-size:34px}
 .chant{font-family:Montserrat;font-weight:900;font-size:clamp(28px,4vw,50px);line-height:1.4;text-align:center}
 .chant span{transition:color .12s}.chant span.hl{color:var(--pink)}
@@ -116,9 +118,10 @@ let mode = 40, extra = false, i = 0, opened = new Set(OLD);
 try { mode = +(localStorage.getItem('rc10_mode') || 40); } catch (e) {}
 
 const glyph = (ch, s = 44) => `<img src="${CIP}${ch.toLowerCase()}.webp" alt="" style="width:${s}px;height:${s}px;object-fit:contain">`;
-function coded(text, id, size = 46) {
-  return `<div class="coded" id="${id}">` + text.split(' ').map(w => `<span class="w">` + [...w].map(ch => /[a-z]/i.test(ch)
-    ? `<span class="gl" data-l="${ch.toLowerCase()}"><span class="lt"></span>${glyph(ch, size)}</span>` : `<span class="p">${ch}</span>`).join('') + `</span>`).join('') + `</div>`;
+const TRICKY = ['i', 'the', 'a', 'said', 'are', 'you'];
+function coded(text, id, size = 46, known = []) {
+  return `<div class="coded" id="${id}">` + text.split(' ').map(w => TRICKY.includes(w.toLowerCase().replace(/[^a-z]/g, '')) ? `<span class="w"><span class="tw" style="font-family:Montserrat;font-weight:900;font-size:${Math.round(size * .62)}px;background:#fff;border-radius:10px;padding:2px 10px;color:var(--pur-d)">${w}</span></span>` : `<span class="w">` + [...w].map(ch => /[a-z]/i.test(ch)
+    ? `<span class="gl ${known.includes(ch.toLowerCase()) ? 'kn' : 'nw'}" data-l="${ch.toLowerCase()}" data-c="${ch}"><span class="lt">${known.includes(ch.toLowerCase()) ? ch : ''}</span>${glyph(ch, size)}</span>` : `<span class="p">${ch}</span>`).join('') + `</span>`).join('') + `</div>`;
 }
 function renderKey(fresh = []) {
   document.getElementById('key').innerHTML = ALPHA.map(ch => opened.has(ch)
@@ -139,11 +142,14 @@ const S = [], add = o => S.push(o);
 add({ t: 'Mission', html: () => `${lab('🔐 Mission 3')}<h1>New message from Agent X!</h1>
  <div class="row" style="gap:26px;align-items:center">
   <img src="${IMG}scene_phone.webp" alt="" style="width:min(460px,100%);border-radius:24px;box-shadow:var(--sh)">
-  <div class="phone"><div class="from">Agent X · now</div><div class="bub">${coded('Run! Get the red cup.', 'brief', 34)}</div></div>
- </div>`, after: () => document.querySelectorAll('#brief .gl').forEach(g => { if (!OLD.includes(g.dataset.l)) g.classList.add('dim'); }) });
+  <div class="phone"><div class="from">Agent X · now</div><div class="bub">${coded('Run! Get the red cup.', 'brief', 34, OLD)}</div></div>
+ </div>`, after: () => document.querySelectorAll('#brief .gl').forEach(g => { if (!OLD.includes(g.dataset.l)) { g.classList.add('dim'); g.classList.remove('nw'); } }) });
 // 2
-add({ t: 'Code check', html: () => `${lab('Code check')}<h1>Look. Say the sound.</h1>
- <div class="row">${OLD.map(l => `<button class="tile" style="width:104px" onclick="this.querySelector('.lt').textContent='${l}';sound('${l}')">${glyph(l, 56)}<div class="lt big" style="font-size:40px;height:46px;color:var(--pur)"></div></button>`).join('')}</div>` });
+add({ t: 'Agent check', html: () => `${lab('⏱ Agent check')}<h1>Say the sounds!</h1>
+ <div class="row" style="gap:14px">${OLD.map(l => `<button class="ac" data-l="${l}">${glyph(l, 84)}<div class="lt"></div></button>`).join('')}</div>
+ <div class="fb" id="acf"></div>`,
+ after: () => { const upd = () => { const all = [...document.querySelectorAll('.ac')]; const ok = all.filter(b => b.classList.contains('ok')).length, er = all.filter(b => b.classList.contains('err')).length; document.getElementById('acf').innerHTML = ok + er ? `<span class="good">✔ ${ok}</span> &nbsp; <span class="bad">✘ ${er}</span>` : ''; };
+  document.querySelectorAll('.ac').forEach(b => b.onclick = () => { const l = b.dataset.l; if (!b.classList.contains('ok') && !b.classList.contains('err')) { b.classList.add('ok'); b.querySelector('.lt').textContent = l; sound(l); } else if (b.classList.contains('ok')) { b.classList.replace('ok', 'err'); } else { b.classList.remove('err'); b.querySelector('.lt').textContent = ''; } upd(); }); } });
 // 3
 add({ t: 'Tricky words', html: () => `${lab('Tricky words')}<h1>Read.</h1>
  <div class="row" style="gap:20px">${['I', 'the', 'a'].map(w => `<button class="tile word" style="min-width:170px;padding:26px" onclick="say('${w}')">${w}</button>`).join('')}</div>` });
@@ -191,6 +197,12 @@ add({ t: 'Blending', html: () => `${lab('Blending')}<h1>Tap. Blend. Read.</h1>
  after: () => { let n = 0; const show = () => { document.getElementById('bl').innerHTML = [...BW[n]].map(l => `<button class="sbtn" onclick="this.classList.add('hit');sound('${l}')">${l}</button>`).join(''); document.getElementById('blp').innerHTML = ''; document.getElementById('blc').textContent = `${n + 1} / ${BW.length}`; };
   document.getElementById('blr').onclick = () => { document.getElementById('blp').innerHTML = pic(BW[n], 'max-width:180px'); say(BW[n]); };
   document.getElementById('bln').onclick = () => { if (n === BW.length - 1) { go(i + 1); return; } n++; show(); if (n === BW.length - 1) document.getElementById('bln').textContent = '✔ Done →'; }; show(); } });
+const CH = ['rat', 'cat', 'cut', 'cup', 'pup', 'pop', 'pot', 'pet', 'pen', 'ten'];
+add({ t: 'Word chain', html: () => `${lab('Word chain')}<h1>Change one letter. Read!</h1>
+ <div class="tile" style="max-width:620px;margin:0 auto;padding:26px"><div class="big" id="wc" style="letter-spacing:.06em"></div><div class="fb" id="wcf"></div>
+ <div class="row" style="margin-top:8px"><button class="btn" id="wcn">Next →</button></div></div>`,
+ after: () => { let n = 0; const show = () => { const w = CH[n], pr = CH[n - 1]; document.getElementById('wc').innerHTML = [...w].map((c, k) => `<span style="color:${pr && pr[k] !== c ? 'var(--pink)' : 'var(--ink)'}">${c}</span>`).join(''); document.getElementById('wcf').textContent = `${n + 1} / ${CH.length}`; };
+  document.getElementById('wcn').onclick = () => { if (n === CH.length - 1) { go(i + 1); return; } n++; show(); if (n === CH.length - 1) document.getElementById('wcn').textContent = '✔ Done →'; }; show(); } });
 add({ t: 'Real or fake?', plus: true, html: () => `${lab('+ Real or fake?', 'plus')}<h1>Read. Real or fake?</h1>
  <div class="tile" style="max-width:520px;margin:0 auto;padding:24px"><div class="big" id="rf">—</div>
  <div class="row" style="margin-top:16px"><button class="btn ok" onclick="rfAns(1)">✔ Real</button><button class="btn no" onclick="rfAns(0)">✘ Fake</button></div><div class="fb" id="rff"></div></div>`,
@@ -221,10 +233,10 @@ add({ t: 'Dictation +', plus: true, html: () => `${lab('+ Dictation', 'plus')}<h
 // 19–22
 add({ t: 'Phrases', html: () => `${lab('Reading')}<h1>Read.</h1>
  <div class="row" style="gap:18px">${[['a red cup', 'cup'], ['a pet rat', 'rat'], ['Sam and Dan', null]].map(([p, im]) => `<div class="tile" style="width:290px">${im ? pic(im, 'max-width:170px') : `<div style="display:flex;justify-content:center;gap:4px"><img src="${IMG}sam_stand.webp" alt="" style="height:170px"><img src="${IMG}dan_stand.webp" alt="" style="height:170px"></div>`}<div class="word" style="font-size:36px">${p}</div></div>`).join('')}</div>` });
-add({ t: 'Decode', html: () => `${lab('🔐 Decode')}<h1>Decode the message!</h1>
- <div class="tile" style="padding:30px;background:var(--pur-s);border-color:#DCD3FF">${coded('Run! Get the red cup.', 'msg', 58)}</div>
- <div class="row" style="margin-top:16px"><button class="btn soft" onclick="document.querySelectorAll('#msg .gl').forEach(g=>g.querySelector('.lt').textContent=g.dataset.l)">Show all</button></div>`,
- after: () => document.querySelectorAll('#msg .gl').forEach(g => g.onclick = () => { g.querySelector('.lt').textContent = g.dataset.l; sound(g.dataset.l); }) });
+add({ t: 'Decode', html: () => `${lab('🔐 Decode')}<h1>Tap the new code. Read!</h1>
+ <div class="tile" style="padding:30px;background:var(--pur-s);border-color:#DCD3FF">${coded('Run! Get the red cup.', 'msg', 58, OLD)}</div><div class="fb" id="msgf"></div>`,
+ after: () => { const left = () => document.querySelectorAll('#msg .gl.nw:not(.done)').length;
+  document.querySelectorAll('#msg .gl.nw').forEach(g => g.onclick = () => { g.querySelector('.lt').textContent = g.dataset.c; g.classList.add('done'); sound(g.dataset.l); if (!left()) document.getElementById('msgf').innerHTML = '<span class="good" style="font-size:26px">🔓 Read the message!</span>'; }); } });
 add({ t: 'Story', html: () => `${lab('Story')}<h1>Read the story.</h1>
  <div class="row" style="gap:28px;align-items:center"><img src="${IMG}scene_cup.webp" alt="" style="width:min(420px,100%);border-radius:22px;box-shadow:var(--sh)">
  <div class="story" style="flex:1;min-width:280px">“Run! Get the red cup!” said Sam.<br>The red cup sits on a mat.<br>Dan gets it. In the cup — a map!<br>Sam and Dan run.</div></div>` });
@@ -242,7 +254,7 @@ add({ t: 'Homework', html: () => `${lab('Homework')}<h1>Your homework</h1>
 add({ t: 'Feedback', html: () => `${lab('Feedback')}<h1>How was the mission?</h1>
  <div class="row" style="gap:12px;margin-bottom:22px" id="stars">${[1, 2, 3, 4, 5].map(k => `<button style="font-size:64px;filter:grayscale(1);opacity:.45" onclick="[...this.parentElement.children].forEach((b,j)=>{b.style.filter=j<${k}?'none':'grayscale(1)';b.style.opacity=j<${k}?1:.45})">⭐</button>`).join('')}</div>
  <div class="row" style="gap:16px">${[['😎', 'Easy'], ['🙂', 'OK'], ['🤯', 'Hard']].map(([e, t]) => `<button class="tile" style="width:150px;font-size:56px" onclick="[...this.parentElement.children].forEach(b=>b.style.borderColor='');this.style.borderColor='var(--pur)'">${e}<div style="font-size:20px;font-weight:800">${t}</div></button>`).join('')}</div>
- <div class="row" style="gap:20px;margin-top:20px;align-items:flex-end"><img src="${IMG}sam_wave.webp" alt="" style="height:150px"><div class="word" style="color:var(--pur)">Bye, agent!</div><img src="${IMG}dan_wave.webp" alt="" style="height:150px"></div>` });
+ <div class="row" style="gap:20px;margin-top:20px;align-items:flex-end"><img src="${IMG}sam_wave.webp" alt="" style="height:150px"><div style="text-align:center"><div class="word" style="color:var(--pur)">Bye, agent!</div><div style="font-weight:700;color:var(--mute);font-size:18px;margin-top:4px">🗺️ Next mission: where does the map go?</div></div><img src="${IMG}dan_wave.webp" alt="" style="height:150px"></div>` });
 
 const X = [];
 X.push({ t: 'Code breaker', html: () => `${lab('⭐ Extra', 'x')}<h1>Code breaker!</h1>
