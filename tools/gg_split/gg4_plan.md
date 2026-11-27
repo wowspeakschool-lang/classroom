@@ -21,3 +21,6 @@
 ## Starter Unit (добавлено 19.11.2026, Анна: «добавить»)
 Папка «Starter Unit» ("order" 100, первой): Free-time activities 10 · Adjectives 12 · Weather 8.
 Слова новые, переводы мои, картинок пока нет.
+Картинки 27.11.2026 (превью ок от Анны): 30 шт, app.wowteach.ru/trainer/media/gogetter4/
+(cold/hot погоды — cold_weather, hot_weather). Нарезка — tools/vocab-images/gg4s, адреса — gg4s/sql_urls.sql.
+Снимок до правки: words_backup_20261127_gg4s.
