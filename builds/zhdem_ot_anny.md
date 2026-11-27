@@ -79,6 +79,10 @@
 
 ## Чат «Halloween (курс Holidays)» — теперь и New Year
 
+🔴 **29.** Слова 4–6: вариант 1 (star, snowman, present, Santa, elf, carrot) или 2 (star, snowflake, snowman, present, Santa, elf)?
+🔴 **31.** Игра у Санты: тени (А), мешок (Б) или сани с кубиком (В)?
+🔴 **32.** Какие игры «если есть время» берём из четырёх новых?
+
 Концепция New Year — `builds/newyear/koncepciya.md`, решения — `builds/newyear/resheniya.md`.
 
 
