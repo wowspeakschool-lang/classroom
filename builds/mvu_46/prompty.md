@@ -167,3 +167,17 @@ Two pictures are attached: the purple dragon (use it as the STYLE reference) and
 ```
 Draw in EXACTLY the same art style as the attached picture of the purple dragon (use it only as a style reference, do not draw the dragon). One small yellow bird flying, side view, facing right, both wings spread wide in flight, friendly face, no branch, nothing else in the picture. TRANSPARENT BACKGROUND: output a PNG with a fully transparent background — no background colour, no white, no floor, no ground, no shadow under the objects. The bird does not touch the edges. Style: the same as the attached picture — cute 2D cartoon illustration for children aged 4–6, soft rounded shapes, clean smooth dark outlines, bright cheerful flat colours with gentle soft shading, friendly and warm. No text, no letters, no numbers, no logos, no watermark.
 ```
+
+## Доборные 2 (27.11.2026)
+
+### 27 · комната заново: место под кроватью и под столом → `room2` · приложить: комната + дракоша
+
+```
+Two pictures are attached: a child's bedroom (use it as the LAYOUT and STYLE reference) and the purple dragon (STYLE reference only, do not draw it). Redraw the attached bedroom in exactly the same art style, colours and layout — the bed on the left, the window with yellow curtains, the cream wardrobe in the middle, the shelf on the right wall, the desk on the right, the round purple-and-yellow rug — with these changes: the bed stands on tall legs, so there is a big clearly visible empty space on the floor UNDER the bed; the desk also has a big clearly visible empty space UNDER it, and the yellow chair stands next to the desk on its left side, NOT under it; the floor in front of the wardrobe is empty. The room is tidy and has NO toys, NO clothes and NO school things anywhere — the floor, bed, desk and shelf are empty. This is a full-screen background picture: wide landscape 16:9, filling the whole frame. Nobody in it: no people, no animals, no dragon (characters will be added separately). Style: the same as the attached picture — cute 2D cartoon illustration for children aged 4–6, soft rounded shapes, clean smooth dark outlines, bright cheerful flat colours with gentle soft shading, friendly and warm. No text, no letters, no numbers, no logos, no watermark.
+```
+
+### 28 · мишка сидит в открытой коробке → `teddy_box` · приложить: мишка + дракоша
+
+```
+Two pictures are attached: a brown teddy bear with a red bow tie (draw EXACTLY this teddy) and the purple dragon (STYLE reference only, do not draw it). One open wooden toy box seen from the front, slightly from above, the lid open behind; the teddy bear sits INSIDE the box — its head, shoulders and paws stick out over the front edge, the lower half of its body is hidden inside the box. Nothing else in the picture. TRANSPARENT BACKGROUND: output a PNG with a fully transparent background — no background colour, no white, no floor, no ground, no shadow under the objects. The picture does not touch the edges. Style: the same as the attached picture — cute 2D cartoon illustration for children aged 4–6, soft rounded shapes, clean smooth dark outlines, bright cheerful flat colours with gentle soft shading, friendly and warm. No text, no letters, no numbers, no logos, no watermark.
+```
