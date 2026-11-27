@@ -179,12 +179,15 @@ function put(node, name, x, y, h, cls = '', onclick) {
 }
 // анимация из кадров: ['hero/dragon_wave1','hero/dragon_wave2']
 // смена картинки героя — плавно, через затухание (без резкого скачка кадра)
+// смена картинки — наплыв: новая проявляется, старая гаснет одновременно. Кадры героя одного размера (tools/norm.py), поэтому без скачка
 function swap(d, name) {
-  const base = d.querySelector('img'); d.querySelectorAll('img.xf').forEach(x => x.remove());
-  const fl = d.classList.contains('flip') ? ' scaleX(-1)' : '';
-  const top = el('img', { cls: 'xf', src: img(name), style: `position:absolute;left:50%;bottom:0;height:100%;width:auto;opacity:0;transform:translateX(-50%)${fl};transition:opacity .3s ease` });
-  d.append(top); requestAnimationFrame(() => requestAnimationFrame(() => { top.style.opacity = 1; }));
-  setTimeout(() => { base.src = img(name); setTimeout(() => top.remove(), 60); }, 330);
+  const base = d.querySelector('img:not(.xf)'); d.querySelectorAll('img.xf').forEach(x => x.remove());
+  const fl = d.classList.contains('flip') ? 'transform:scaleX(-1);' : '';
+  const top = el('img', { cls: 'xf', src: img(name), style: `position:absolute;left:0;top:0;width:100%;height:100%;${fl}opacity:0;transition:opacity .45s ease` });
+  base.style.transition = 'opacity .45s ease';
+  d.append(top);
+  requestAnimationFrame(() => requestAnimationFrame(() => { top.style.opacity = 1; base.style.opacity = 0; }));
+  setTimeout(() => { base.style.transition = 'none'; base.src = img(name); const fin = () => { base.style.opacity = 1; requestAnimationFrame(() => { top.remove(); base.style.transition = ''; }); }; (base.decode ? base.decode() : Promise.resolve()).then(fin, fin); }, 480);
 }
 function anim(d, frames, ms = 450) { let i = 0; const im = d.querySelector('img'); const t = setInterval(() => { if (!document.body.contains(im)) return clearInterval(t); i = (i + 1) % frames.length; im.src = img(frames[i]); }, ms); return t; }
 function flyTo(from, toRect, then) {
@@ -465,7 +468,7 @@ const keyScreen = (c, bg, jump) => add({ id: 'key_' + c, bg, keysBar: true, next
     const dr = put(n, 'hero/dragon_think', 20, 96, 48, '');
     if (!all) { const b = el('button', { cls: 'btn pur', style: 'position:absolute;left:50%;top:90%;transform:translateX(-50%);z-index:31' }, '🗺 Back to the map'); b.onclick = () => show('map'); n.append(b); return; }
     // скважины на сундуке: доли ширины картинки (по листу 9)
-    const HOLE = { red: .245, blue: .405, green: .565, yellow: .735 };
+    const HOLE = { red: .25, blue: .414, green: .582, yellow: .751 }, HOLE_Y = .71;   // центры скважин в chest_closed (после выравнивания кадров)
     let left = 4;
     const KD = [];
     SCREENS[cur].step = () => { const k = KD.find(x => !x.dataset.done); if (k) { k.onclick(); return true; } return false; };
@@ -473,7 +476,8 @@ const keyScreen = (c, bg, jump) => add({ id: 'key_' + c, bg, keysBar: true, next
       const k = KD[i] = put(n, 'obj/key_' + c, 78 + (i % 2) * 13, 42 + Math.floor(i / 2) * 26, 15, 'glow', () => {
         if (k.dataset.done) return; k.dataset.done = 1;
         const r = chest.getBoundingClientRect(), st = $('#stage').getBoundingClientRect();
-        const tgt = { left: r.left + r.width * HOLE[c] - r.width * .12, top: r.top + r.height * .55, width: r.width * .24, height: r.height * .25 };
+        const kh = r.height * .1, kw = kh * 1.45, cx = r.left + r.width * HOLE[c], cy = r.top + r.height * HOLE_Y;   // ключ ложится центром на скважину
+        const tgt = { left: cx - kw / 2 - kw * .75, top: cy - kh / 2 - kh * .5, width: kw * 2.5, height: kh / .4 };
         SND.pop(); flyTo(k, tgt, () => { n.append(el('img', { src: img('obj/key_' + c), style: `position:absolute;z-index:7;left:${tgt.left - st.left + tgt.width * .3}px;top:${tgt.top - st.top + tgt.height * .2}px;height:${tgt.height * .4}px;transform:rotate(90deg)` })); if (--left === 0) open(); });
       });
     });
