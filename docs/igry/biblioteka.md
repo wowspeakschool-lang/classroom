@@ -5,9 +5,9 @@
 (шаблон + данные), картинки — по ссылкам `classroom.wowteach.ru/media/…`.
 
 Где код:
-- Halloween 4–6, 7–9: шаблоны `template.html` / `template7.html`, сборка `builds/halloween/build.py`
-  (копия сборщика; шаблоны в скретчпаде сессии Halloween — **при следующей работе скопировать
-  шаблоны в `builds/halloween/`**), готовые уроки `lessons/halloween/4-6.html`, `7-9_*.html`.
+- Halloween 4–6, 7–9: готовые уроки `lessons/halloween/4-6.html`, `7-9_*.html`. Исходные шаблоны
+  (`template.html`, `template7.html`) жили в скретчпаде и потеряны вместе с контейнером — код игр
+  берём из готовых уроков. **Шаблоны и сборщики новых уроков сразу коммитим в `builds/newyear/`.**
 - Halloween 10–12: `build10.py` → `lessons/halloween/10-12_*.html`.
 - Halloween 13+: `build13.py` → `lessons/halloween/13plus_*.html`.
 - Внешние ресурсы, предзагрузка, кнопки скачивания плана — `builds/halloween/externalize.py`.
