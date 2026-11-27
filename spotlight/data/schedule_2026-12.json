@@ -1,0 +1,279 @@
+[
+ {
+  "date": "2026-12-01",
+  "group": "10+",
+  "title": "Plurals: орфография и произношение -(e)s",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Лепкова Инна",
+  "subtopics": [
+   "Plurals (regular): основное правило — + -s",
+   "Plurals (regular): орфография — + -es после -s, -ss, -sh, -ch, -x, -o",
+   "Plurals (regular): орфография — -y → -ies (но гласная + y → -s)",
+   "Plurals (regular): орфография — -f/-fe → -ves",
+   "Plurals (regular): исключения на -o — только -s (photos, videos)",
+   "Plurals (regular): произношение окончания -(e)s"
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-03",
+  "group": "7-9",
+  "title": "A / an: только с исчисляемыми в ед. ч.",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Лепкова Инна",
+  "subtopics": [
+   "a/an: неопределённый артикль — только с исчисляемыми в ед. ч."
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-04",
+  "group": "10+",
+  "title": "Prepositions of place: in / on / at, opposite, between, near",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Сирацкая Евгения",
+  "subtopics": [
+   "Prepositions of place: in, on, under",
+   "Prepositions of place: next to, in front of, behind",
+   "Prepositions of place: opposite, between",
+   "Prepositions of place: near, beside",
+   "Prepositions of place: at — at school/work/home, в адресах",
+   "Prepositions of place: in — устойчивые выражения (in bed, in hospital, in the sky, in a picture)",
+   "Prepositions of place: in — города, страны, континенты",
+   "Prepositions of place: on — on the left/right, on the first floor"
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-07",
+  "group": "7-9",
+  "title": "There is / There are: вопросы",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Губенко Алёна",
+  "subtopics": [
+   "There is / There are: вопросы — Is there…? / Are there…?"
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-08",
+  "group": "10+",
+  "title": "Prepositions of time: at / on / in — даты, праздники, in = через",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Лепкова Инна",
+  "subtopics": [
+   "Prepositions of time: at — время, праздники, at night/at noon/at the weekend",
+   "Prepositions of time: on — дни недели и праздничные дни",
+   "Prepositions of time: on — даты, день недели + часть дня, on a hot day",
+   "Prepositions of time: in — части суток (in the morning/afternoon/evening)",
+   "Prepositions of time: in — месяцы, времена года, годы, века",
+   "Prepositions of time: in = «через» (in an hour, in a week)"
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-10",
+  "group": "7-9",
+  "title": "Present Simple: произношение окончания -s/-es",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Лепкова Инна",
+  "subtopics": [
+   "Present Simple: произношение окончания -s/-es (/s/, /z/, /ɪz/)"
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-11",
+  "group": "10+",
+  "title": "Present Simple: формы и значения",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Сирацкая Евгения",
+  "subtopics": [
+   "Present Simple: утверждение (I/you/we/they V, he/she/it V-s)",
+   "Present Simple: отрицание (don't/doesn't)",
+   "Present Simple: общие вопросы (Do/Does …?)",
+   "Present Simple: краткие ответы (Yes, I do / No, he doesn't)",
+   "Present Simple: орфография окончания -s/-es (3 л. ед. ч.)",
+   "Present Simple: значение — непреложные истины и законы природы",
+   "Present Simple: значение — чувства и эмоции",
+   "Present Simple: значение — обзоры, спортивные комментарии, повествование",
+   "Present Simple: значение — последовательные действия в настоящем",
+   "Present Simple: значение — восклицания (Here comes …!)"
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-14",
+  "group": "7-9",
+  "title": "Prepositions of place: opposite, between",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Губенко Алёна",
+  "subtopics": [
+   "Prepositions of place: opposite, between"
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-15",
+  "group": "10+",
+  "title": "Present Continuous: формы, -ing и особые значения",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Лепкова Инна",
+  "subtopics": [
+   "Present Continuous: утверждение (am/is/are + V-ing)",
+   "Present Continuous: отрицание (I'm not / isn't / aren't)",
+   "Present Continuous: общие вопросы (Am/Is/Are …?)",
+   "Present Continuous: краткие ответы (Yes, I am / No, he isn't)",
+   "Present Continuous: орфография -ing",
+   "Present Continuous: значение — меняющиеся и развивающиеся ситуации",
+   "Present Continuous: значение — always + раздражение"
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-17",
+  "group": "7-9",
+  "title": "Have to: вопросы и краткие ответы",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Лепкова Инна",
+  "subtopics": [
+   "have to: вопросы и краткие ответы — Do you have to…?"
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-18",
+  "group": "10+",
+  "title": "Present Simple vs Present Continuous",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Сирацкая Евгения",
+  "subtopics": [
+   "Present Simple vs Present Continuous: постоянное состояние vs временная ситуация",
+   "Present Simple vs Present Continuous: повторяющиеся действия vs настоящий период (these days)",
+   "Present Simple vs Present Continuous: будущее — расписание vs договорённость"
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-21",
+  "group": "7-9",
+  "title": "Ordinal numbers: the + даты",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Губенко Алёна",
+  "subtopics": [
+   "Ordinal numbers: с артиклем the и даты"
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-22",
+  "group": "10+",
+  "title": "Comparatives & Superlatives: орфография, исключения, два способа",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Лепкова Инна",
+  "subtopics": [
+   "Comparatives & Superlatives: орфография -er/-est (удвоение, -e, y → i)",
+   "Comparatives & Superlatives: двусложные на -y/-er/-ow — -er/-est",
+   "Comparatives & Superlatives: неправильные прилагательные (good, bad, many/much, little)",
+   "Comparatives & Superlatives: прилагательные с двумя способами (clever, quiet, friendly…)",
+   "Comparatives & Superlatives: far — farther/further, old — elder/eldest"
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-24",
+  "group": "7-9",
+  "title": "Comparatives & Superlatives: двусложные на -y и the most",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Лепкова Инна",
+  "subtopics": [
+   "Comparatives & Superlatives: двусложные на -y/-er/-ow — -er/-est",
+   "Comparatives & Superlatives: превосходная степень — the most"
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-25",
+  "group": "10+",
+  "title": "Can: просьбы, предложения помощи, разрешение (can vs may)",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Сирацкая Евгения",
+  "subtopics": [
+   "can (permission/request): просьба — Can you…? / Can I have…?",
+   "can (permission/request): предложение помощи — Can I…?",
+   "can (permission/request): can vs may — разрешение (may формальнее)",
+   "can (permission/request): предложения (offers/suggestions) — can, could, would, shall"
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-28",
+  "group": "7-9",
+  "title": "Imperative + Let's: инструкции и предложения",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Губенко Алёна",
+  "subtopics": [],
+  "color": "красный",
+  "spec": "",
+  "comment": "в плане уроков 3–4 кл. такой подтемы нет (тема 2 и 5 кл.)"
+ },
+ {
+  "date": "2026-12-29",
+  "group": "10+",
+  "title": "Countable / Uncountable: ловушки и особые группы",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Лепкова Инна",
+  "subtopics": [
+   "Countable / Uncountable: исключения с a/an (a help, a pity, a shame)",
+   "Countable / Uncountable: группы неисчисляемых — предметы, языки, игры, болезни, явления природы",
+   "Countable / Uncountable: «ловушки» — advice, information, news, furniture, luggage, money",
+   "Countable / Uncountable: длительность, расстояние, деньги как целое — глагол в ед. ч."
+  ],
+  "color": "красный",
+  "spec": ""
+ },
+ {
+  "date": "2026-12-31",
+  "group": "7-9",
+  "title": "Would like: I'd like… / Would you like…?",
+  "folder": "",
+  "status": "запланирован",
+  "teacher": "Лепкова Инна",
+  "subtopics": [],
+  "color": "красный",
+  "spec": "",
+  "comment": "в плане уроков 3–4 кл. такой подтемы нет (тема 2 и 5 кл.)"
+ }
+]
