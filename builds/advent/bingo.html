@@ -20,6 +20,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui
 .hd h1{font-family:Pacifico,cursive;font-weight:400;color:var(--red);font-size:40px;margin:0;line-height:1.1}
 .hd p{margin:2px 0 0;color:var(--mute);font-weight:700}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px}
+.cards.one{grid-template-columns:minmax(0,560px);justify-content:center}
+.cards.one .cell b{font-size:15px}.cards.one .who{font-size:18px}
 .card{border:3px solid var(--green);border-radius:18px;padding:10px 10px 12px;background:#fff}
 .card .who{font:900 15px Montserrat,sans-serif;color:var(--green);text-align:center;margin-bottom:6px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
@@ -45,6 +47,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui
   .sheet{width:auto;margin:0;box-shadow:none;border-radius:0;padding:0;page-break-after:always;overflow:visible}
   .garl{position:static;height:40px;background-size:auto 40px}
   .hd{margin-top:6px}.cards{gap:12mm 8mm}
+  .cards.one{grid-template-columns:172mm;margin-top:8mm}.cards.one .cell b{font-size:17px}.cards.one .grid{gap:3mm}
   .cell b{font-size:11px}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
@@ -72,8 +75,8 @@ function cardHtml(c,k){return '<div class="card"><div class="who">'+PL[k]+'</div
   return x?'<div class="cell"><img src="'+esc(x.img)+'" alt=""><b>'+esc(x.w)+'</b></div>':'<div class="cell free"><span class="fr">★</span><b>FREE</b></div>';}).join('')+'</div></div>';}
 function head(sub){return '<div class="garl"></div><div class="hd"><h1>Christmas Bingo</h1><p>'+sub+'</p></div>';}
 var by=name?'Слова из адвент-календаря · '+esc(name):'Слова из адвент-календаря';
-var h='<section class="sheet">'+head(by)+'<div class="cards">'+cardHtml(cards[0],0)+cardHtml(cards[1],1)+'</div></section>'+
-  '<section class="sheet">'+head(by)+'<div class="cards">'+cardHtml(cards[2],2)+cardHtml(cards[3],3)+'</div></section>'+
+/* 27.11 Анна попросила документом — карточка на весь лист A4: крупно, удобно закрывать клетки */
+var h=cards.map(function(c,k){return '<section class="sheet">'+head(by)+'<div class="cards one">'+cardHtml(c,k)+'</div></section>';}).join('')+
   '<section class="sheet">'+head('Лист ведущего')+
   '<div class="rules"><h2>Как играть</h2><ol>'+
   '<li>Каждый берёт карточку. Клетка <b>FREE</b> в центре уже закрыта.</li>'+
@@ -85,7 +88,7 @@ var h='<section class="sheet">'+head(by)+'<div class="cards">'+cardHtml(cards[0]
   '<div class="cut">✂ Разрежь по пунктиру</div></section>';
 document.getElementById('out').innerHTML=h;
 document.getElementById('sub').textContent=W.length+' слов · 4 карточки · лист ведущего';
-document.getElementById('note').textContent='Три листа A4: две страницы с карточками игроков и лист ведущего. Распечатай и играй всей семьёй.';
+document.getElementById('note').textContent='Листы A4: по карточке игрока на листе и лист ведущего. Распечатай и играй всей семьёй.';
 document.getElementById('pr').onclick=function(){try{window.print();}catch(e){}};
 })();
 </script>
