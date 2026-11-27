@@ -369,8 +369,7 @@ const keyScreen = (c, bg, jump) => add({ id: 'key_' + c, bg, keysBar: true, next
     const g = put(n, 'hero/granny_sad', 17, 82, 36, 'glow', d => tap(d));
     put(n, 'obj/kid_run', 48, 90, 28, 'glow', d => tap(d));
     put(n, 'obj/kid_bike', 70, 84, 26, 'glow', d => tap(d));
-    // качели: девочку ставим только вместе со своими качелями поверх нарисованных в фоне — отдельно она висела мимо рамы
-    if (D.swingset) put(n, 'obj/kid_swingset', 40.4, 45.5, 18, 'glow', d => tap(d));
+    // девочки на качелях нет — решение Анны 27.11 («60 убираем»)
     put(n, 'obj/kid_skip', 58, 62, 22, 'glow', d => tap(d));
     put(n, 'obj/kid_football', 88, 99, 28, 'glow', d => tap(d));
     put(n, 'obj/kid_icecream', 92, 60, 22, 'glow', d => tap(d));

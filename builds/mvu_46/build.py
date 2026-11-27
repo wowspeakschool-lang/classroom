@@ -87,7 +87,7 @@ tpl = open(os.path.join(HERE, 'template.html')).read()
 names = set(re.findall(r"'((?:bg|obj|hero)/[a-z0-9_]+)'", tpl))
 names |= {'obj/' + f for f in ['pizza', 'broccoli', 'icecream', 'fish', 'cake', 'apple', 'banana', 'carrot']}
 names |= {'obj/key_' + c for c in ['red', 'blue', 'green', 'yellow']} | {'obj/porthole_' + k for k in ['red', 'ice', 'moon', 'earth']} | {'obj/bush' + str(i) for i in (1, 2, 3)}
-names = {n for n in names if not n.endswith('_') and n not in ('obj/bush', 'obj/kid_swingset', 'obj/teddy_box')}
+names = {n for n in names if not n.endswith('_') and n not in ('obj/bush', 'obj/teddy_box')}
 missing = sorted(n for n in names if not os.path.exists(os.path.join(REPO, 'media', 'mvu_46', n + '.webp')))
 if missing: sys.exit('!! нет картинок: ' + str(missing))
 
@@ -183,11 +183,9 @@ EAT = [f for f in ['pizza', 'broccoli', 'icecream', 'fish', 'cake', 'apple', 'ba
 names |= {'hero/granny_eat_' + f for f in EAT}
 BIRD = 'obj/bird_fly' if os.path.exists(os.path.join(REPO, 'media', 'mvu_46', 'obj', 'bird_fly.webp')) else 'obj/bird'
 names.add(BIRD)
-SWING = os.path.exists(os.path.join(REPO, 'media', 'mvu_46', 'obj', 'kid_swingset.webp'))
-if SWING: names.add('obj/kid_swingset')
 TBOX = os.path.exists(os.path.join(REPO, 'media', 'mvu_46', 'obj', 'teddy_box.webp'))
 if TBOX: names.add('obj/teddy_box')
-D = dict(media=MEDIA, audio=audio, eat=EAT, bird=BIRD, swingset=SWING, teddybox=TBOX, pass_=PASS,
+D = dict(media=MEDIA, audio=audio, eat=EAT, bird=BIRD, teddybox=TBOX, pass_=PASS,
          checklist=[dict(title=t, topics=[[i, n] for i, n in ts]) for t, ts in CHECKLIST],
          topic_ru=TOPIC_RU, prompts=PROMPTS, screen_ru=SCREEN_RU, note=NOTE, preload=sorted(names))
 D['pass'] = D.pop('pass_')
