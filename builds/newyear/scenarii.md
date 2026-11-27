@@ -72,3 +72,48 @@
 Страны: Kiribati (первые) → New Zealand → Japan → Russia → Scotland (Hogmanay) → USA (Times Square).
 Слова: midnight, clock, fireworks, countdown, wish, party, celebrate, tradition.
 Advanced: will / going to, resolutions — в финале ученик пишет свои 3 обещания на год и скачивает открытку «My year».
+
+---
+# Правка 27.11.2026 (по Анне)
+
+## 4–6 — выбран Б, переписан: «Звёздочка для ёлки дракона»
+Каждый Новый год с неба прилетает одна звёздочка, чтобы украсить ёлку дракона. Без неё праздник не начнётся.
+В этом году звёздочка упала где-то в зимнем лесу — дракон идёт её искать. Животных нет, никого не будим.
+Слова (6): snow, snowflake, hat, scarf, snowman, carrot. «star» звучит в истории как имя героини, отдельно не учим.
+1. **snow** — дракон выглядывает: всё белое! Стираем снег с экрана — под ним картинки.
+2. **snowflake** — снежинки летят, ловим названную учителем; одна снежинка показывает, куда упала звезда.
+3. **hat** — в лесу холодно, у дракона мёрзнут уши — выбираем шапку (не кастрюлю, не корзинку — смешно).
+4. **scarf** — дует ветер, нужен шарф; одеваем дракона «Give me the scarf!».
+5. **snowman** — на поляне грустный снеговик: он нашёл звёздочку, но потерял нос.
+6. **carrot** — ищем морковку под фонариком в сугробах; снеговик отдаёт звёздочку.
+Финал: дракон летит домой, звёздочка на верхушке, ёлка загорается, все: «Happy New Year!»
+
+## 7–9 Б — «Внутри снежного шара», слова
+beginners (6): house, tree, snowman, star, bell, snow.
+advanced (8): + bridge, lights; There is / There are, числа 1–10.
+
+## 10–12 и 13+ — перестановка
+«Save New Year» (страны и традиции) больше подходит 13+ — соединяем его с «Countdown»:
+13+ «Around the World at Midnight».
+10–12 нужен новый сюжет — варианты ниже.
+
+## 10–12 — новые идеи (beginners 6 / advanced 8)
+- А. **Застрял в видеоигре** — ученик попадает в зимний уровень игры, проходит 5 уровней до «босса».
+  beg: ice, snow, key, coin, door, level · adv: + map, bridge; can / can't, must.
+- Б. **Новый год на космической станции** — космонавт встречает Новый год над Землёй (16 рассветов в сутки).
+  beg: rocket, planet, star, moon, Earth, astronaut · adv: + window, space suit; will, comparatives.
+- В. **Зимний лагерь в горах** — команда соревнуется в зимних забавах за кубок.
+  beg: ski, sledge, skates, snowball, hill, ice · adv: + snowboard, cup; can, like + -ing.
+- Г. **Кто унёс подарки?** (детектив) — описываем подозреваемых по одежде.
+  beg: hat, coat, scarf, boots, glasses, bag · adv: + gloves, jumper; Present Continuous, was wearing.
+
+## 13+ — идеи (не больше 8 слов)
+- А. **Around the World at Midnight** — Save New Year + Countdown: летим по часовым поясам за полночью,
+  в каждой стране традиция и задание. Слова: midnight, fireworks, tradition, wish, celebrate, countdown, grapes, bell.
+  adv: will / going to, resolutions.
+- Б. **Свой «Один дома»** — house, door, window, stairs, kitchen, phone, key, light · adv: Present Continuous, предлоги.
+- В. **Странные традиции: правда или выдумка?** — как «мифы и факты» в Halloween 13+.
+  Слова: tradition, luck, wish, midnight, custom, believe, throw, burn · adv: people + Present Simple, used to.
+- Г. **24 часа до Нового года (переписка)** — история в чате друзей: планируем вечеринку, всё идёт не так.
+  Слова: party, invitation, music, guests, snacks, playlist, late, plan · adv: going to, Let's / Shall we…?
+- Д. **Побег из торгового центра** — shop, lift, exit, key, code, stairs, door, light · adv: must / have to, дорога.
