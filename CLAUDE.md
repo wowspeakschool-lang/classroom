@@ -3028,6 +3028,11 @@ sofa.», «The doll is under the table.», «The robot is in the fridge.»
 ключа картинку перерисовываем цветной один в один, промпт — Анне в чат, она
 генерирует), — в `docs/plan_novye_programmy.md`.
 
+## Библиотека игр интерактивных уроков (27.11.2026)
+
+Все режимы игр (Halloween и задуманные для New Year), где их код и как собирать —
+`docs/igry/biblioteka.md`. Пополнять после каждого нового урока.
+
 ## Курс Holidays — Halloween (19.10.2026)
 
 Курс `holidays`, юнит `Halloween`: 7 планов уроков (`kind='lesson'`, sort 0–6) и
