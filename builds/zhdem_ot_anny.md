@@ -107,7 +107,6 @@
 
 21. Посмотреть урок 3: https://classroom.wowteach.ru/lessons/reading10/u3.html
 23. В SQL Editor удалить временную политику загрузки: drop policy tmp_reading10_zvuki_insert on storage.objects;
-28. Значки шифра (26 штук, реалистичное фото) — ок?
 
 ## Сделано
 - 19.10 сняты пороги у всех домашек (355 уроков, `pass_threshold = null`);
