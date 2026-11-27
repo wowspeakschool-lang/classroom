@@ -29,3 +29,7 @@ print(json.dumps(rows, ensure_ascii=False))
 # Ждут PDF меньше 10 МБ: GG2 Unit 6–8 (часть 3), весь GG4.
 # 11.11.2026, Анна: «надо под колоды, как в Prepare» — юнит стал папкой (Go Getter N / Unit K: …, "order" = 100 − K),
 # колоды внутри — по названию блока («Clothes», «Adjectives»). Снимок до этого: word_decks_backup_20261111_gg2.
+# 27.11.2026: GG2 Unit 6–8 по PDF части 3 — Unit 6: Jobs 15 · Jobs at home 7; Unit 7: Transport nouns 10 ·
+# Transport verbs 5 · Travel equipment 8 · Things to do on holiday 7; Unit 8: Events 10 · Types of music 6.
+# Снимок: word_decks_backup_20261127_gg2, words_deckid_backup_20261127_gg2. Нет в тренажёре: wash the car
+# (Jobs at home), Ordinal numbers (Unit 8) — спросить Анну.
