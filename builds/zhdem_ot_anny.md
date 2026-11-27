@@ -79,7 +79,8 @@
 
 ## Чат «Halloween (курс Holidays)» — теперь и New Year
 
-🔴 **31.** Игра у Санты: А тени, Б мешок, В сани с кубиком, Г Санта рисует, Д конвейер, Е Санта уснул, Ж толкаем сани?
+
+🔴 **33.** Сгенерировать картинки для урока 4–6 по промптам из чата (копия — `builds/newyear/4-6/prompty.md`).
 
 Концепция New Year — `builds/newyear/koncepciya.md`, решения — `builds/newyear/resheniya.md`.
 
