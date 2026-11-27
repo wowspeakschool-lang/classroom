@@ -27,8 +27,21 @@ button{font-family:inherit;cursor:pointer}
 @keyframes pulse{50%{transform:translate(-50%,-100%) scale(1.25)}}
 .shake{animation:shake .5s}
 @keyframes shake{0%,100%{transform:translate(-50%,-100%) rotate(0)}25%{transform:translate(-50%,-100%) rotate(-6deg)}75%{transform:translate(-50%,-100%) rotate(6deg)}}
-.bounce{animation:bounce 1.2s ease-in-out infinite}
-@keyframes bounce{50%{transform:translate(-50%,-108%)}}
+.bounce{animation:bounce 2.4s ease-in-out infinite}
+@keyframes bounce{50%{transform:translate(-50%,-102.5%)}}
+.sway{transform-origin:50% 100%;animation:sway 3s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:translate(-50%,-100%) rotate(-2.5deg)}50%{transform:translate(-50%,-101.5%) rotate(2.5deg)}}
+.breathe{transform-origin:50% 100%;animation:breathe 3.2s ease-in-out infinite}
+@keyframes breathe{50%{transform:translate(-50%,-100%) scale(1.02,.985)}}
+.walkbob{transform-origin:50% 100%;animation:walkbob .5s ease-in-out infinite}
+@keyframes walkbob{0%,100%{transform:translate(-50%,-100%) rotate(-3deg)}50%{transform:translate(-50%,-104%) rotate(3deg)}}
+.it img{transition:opacity .2s ease}
+.flyer{position:absolute;z-index:3;pointer-events:none;animation:across 11s linear infinite}
+@keyframes across{0%{left:-12%}100%{left:108%}}
+.flyer img{height:100%;display:block;transform:scaleX(-1);animation:flap 1.6s ease-in-out infinite}
+.flyer.right img{animation-name:flapr}
+@keyframes flapr{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-35%) rotate(4deg)}}
+@keyframes flap{0%,100%{transform:scaleX(-1) translateY(0) rotate(-4deg)}50%{transform:scaleX(-1) translateY(-35%) rotate(4deg)}}
 .float{animation:float 3s ease-in-out infinite}
 @keyframes float{50%{transform:translate(-50%,-106%) rotate(4deg)}}
 .title{position:absolute;left:50%;top:3%;transform:translateX(-50%);background:var(--panel);border-radius:1em;padding:.3em 1.2em;font-weight:800;font-size:2.2em;color:var(--pur);white-space:nowrap;box-shadow:0 .3em 1em rgba(0,0,0,.25);z-index:30;pointer-events:none}
@@ -62,7 +75,7 @@ button{font-family:inherit;cursor:pointer}
 .bag{position:absolute;left:2%;bottom:2%;z-index:25;width:13%;}
 .bag img{width:100%;display:block}
 .bagn{position:absolute;right:-.4em;top:-.4em;background:var(--pur);color:#fff;border-radius:1em;font-weight:800;padding:0 .5em;font-size:1.6em}
-.fly{position:absolute;z-index:50;transition:all .8s cubic-bezier(.5,-.3,.6,1);pointer-events:none}
+.fly{position:absolute;z-index:50;transition:all .8s ease-in-out;pointer-events:none}
 .fly img{height:100%;display:block}
 .row{display:flex;gap:1.6em;align-items:flex-end;justify-content:center}
 .row img{height:12em;max-width:12em;object-fit:contain}
@@ -159,6 +172,8 @@ function put(node, name, x, y, h, cls = '', onclick) {
   node.append(d); return d;
 }
 // анимация из кадров: ['hero/dragon_wave1','hero/dragon_wave2']
+// смена картинки героя — плавно, через затухание (без резкого скачка кадра)
+function swap(d, name) { const im = d.querySelector('img'); im.style.opacity = 0; setTimeout(() => { im.src = img(name); im.onload = () => { im.style.opacity = 1; }; setTimeout(() => { im.style.opacity = 1; }, 250); }, 180); }
 function anim(d, frames, ms = 450) { let i = 0; const im = d.querySelector('img'); const t = setInterval(() => { if (!document.body.contains(im)) return clearInterval(t); i = (i + 1) % frames.length; im.src = img(frames[i]); }, ms); return t; }
 function flyTo(from, toRect, then) {
   const st = $('#stage').getBoundingClientRect(), r = from.getBoundingClientRect();
@@ -176,13 +191,13 @@ function build() {
   add({ id: 'hello', bg: 'bg/map', next: 'dragon', render(n) {
     n.append(el('div', { cls: 'dim' }));
     title(n, 'Wow Dragon · Treasure Quest');
-    anim(put(n, 'hero/dragon_wave1', 74, 96, 66, 'bounce'), ['hero/dragon_wave1', 'hero/dragon_wave2']);
+    put(n, 'hero/dragon_wave2', 74, 96, 66, 'sway');
   } });
   // 1. Дракоша: happy / sad, свиток-карта
   add({ id: 'dragon', bg: 'bg/forest', next: 'map', render(n) {
     title(n, 'Hello, Dragon!');
     let sad = false;
-    const d = put(n, 'hero/dragon_wave1', 38, 92, 62, 'glow', () => { sad = !sad; d.querySelector('img').src = img(sad ? 'hero/dragon_sad' : 'hero/dragon_wave1'); SND.pop(); });
+    const d = put(n, 'hero/dragon_wave1', 38, 92, 62, 'glow', () => { sad = !sad; swap(d, sad ? 'hero/dragon_sad' : 'hero/dragon_wave1'); SND.pop(); });
     const m = el('div', { cls: 'it glow', style: 'left:72%;top:80%;height:36%' }, el('img', { src: img('bg/map'), style: 'border-radius:1em;box-shadow:0 .4em 1.4em rgba(0,0,0,.4)' }));
     m.onclick = () => { m.classList.add('pulse'); SND.ok(); setTimeout(() => m.classList.remove('pulse'), 2200); };
     n.append(m);
@@ -203,9 +218,9 @@ function build() {
     let busy = false;
     function go(k, x, y) {
       if (busy) return; busy = true; SND.whoosh();
-      const t = anim(w, ['hero/dragon_walk1', 'hero/dragon_walk2'], 220);
+      w.classList.toggle('flip', x > parseFloat(w.style.left)); w.classList.add('walkbob');
       w.style.left = x + '%'; w.style.top = (y + 6) + '%';
-      setTimeout(() => { clearInterval(t); S.at = k; S.visited[k] = true; save(); show({ house: 'room', forest: 'forest', park: 'park', jungle: 'jungle', space: 'launch' }[k]); }, 1500);
+      setTimeout(() => { w.classList.remove('walkbob'); S.at = k; S.visited[k] = true; save(); show({ house: 'room', forest: 'forest', park: 'park', jungle: 'jungle', space: 'launch' }[k]); }, 1500);
     }
   } });
 
@@ -249,7 +264,8 @@ function build() {
   } });
 
   // экран ключа
-  const keyScreen = (c, bg, jump) => add({ id: 'key_' + c, bg, keysBar: true, next: 'map', render(n) {
+  // Next на экране ключа забирает ключ сам, даже если на него не нажали — иначе сундук потом не откроется
+const keyScreen = (c, bg, jump) => add({ id: 'key_' + c, bg, keysBar: true, next: () => { if (!S.keys[c]) { S.keys[c] = true; save(); SND.key(); } return 'map'; }, render(n) {
     n.append(el('div', { cls: 'dim' })); title(n, "It's a key! What colour is it?");
     const d = put(n, jump, 32, 92, 56, 'bounce');
     const k = put(n, 'obj/key_' + c, 66, 70, 26, 'glow bounce', () => {
@@ -321,23 +337,22 @@ function build() {
     put(n, 'obj/kid_skip', 58, 62, 22, 'glow', d => tap(d));
     put(n, 'obj/kid_football', 88, 99, 28, 'glow', d => tap(d));
     put(n, 'obj/kid_icecream', 92, 60, 22, 'glow', d => tap(d));
-    const b = put(n, 'obj/bird', 20, 22, 9, 'glow', d => tap(d)); b.style.transition = 'left 6s linear'; setTimeout(() => b.style.left = '75%', 300);
+    n.append(el('div', { cls: 'flyer' + (D.bird === 'obj/bird' ? '' : ' right'), style: 'top:14%;height:' + (D.bird === 'obj/bird' ? 9 : 12) + '%' }, el('img', { src: img(D.bird) })));   // птица летит клювом вперёд, плавно вверх-вниз
   } });
   // Ж. Дракоша говорит
   const SAYS = [['jump', 'hero/dragon_jump'], ['swim', 'hero/dragon_swim'], ['fly', 'hero/dragon_fly'], ['run', 'hero/dragon_run'], ['dance', 'hero/dragon_dance'], ['clap', 'hero/dragon_clap']];
   add({ id: 'says', bg: 'bg/park', keysBar: true, mapBtn: true, next: 'feed', render(n) {
     n.append(el('div', { cls: 'dim' })); title(n, 'Dragon says…');
     let i = 0;
-    const d = put(n, SAYS[0][1], 50, 92, 62, 'glow bounce', () => { i = (i + 1) % SAYS.length; d.querySelector('img').src = img(SAYS[i][1]); S.says = SAYS[i][0]; SND.pop(); MW.refresh(); });
+    const d = put(n, SAYS[0][1], 50, 92, 62, 'glow bounce', () => { i = (i + 1) % SAYS.length; swap(d, SAYS[i][1]); S.says = SAYS[i][0]; SND.pop(); MW.refresh(); });
     S.says = SAYS[0][0];
   } });
   // Е. Покорми бабушку
   const FOOD = ['pizza', 'broccoli', 'icecream', 'fish', 'cake', 'apple', 'banana', 'carrot'];
   add({ id: 'feed', bg: 'bg/park', keysBar: true, mapBtn: true, next: null, render(n) {
     n.append(el('div', { cls: 'dim' })); title(n, 'Listen and feed Granny!');
-    const g = put(n, 'hero/granny_sad', 22, 88, 52, '');
-    const crying = anim(g, ['hero/granny_sad', 'hero/granny_cry'], 900);
-    let stopCry = () => clearInterval(crying);
+    const g = put(n, 'hero/granny_cry', 22, 88, 52, 'breathe');
+    let stopCry = () => {};
     const plate = put(n, 'obj/plate', 22, 98, 14, '');
     const rounds = shuffle(FOOD).slice(0, 4); let r = 0, tries = 0;
     const play = el('button', { cls: 'btn pur', style: 'position:absolute;left:22%;top:18%;transform:translateX(-50%);z-index:31;font-size:2.2em' }, '🔊 Listen');
@@ -350,11 +365,11 @@ function build() {
         if (f === rounds[r]) {
           autoMark('food', tries === 0); tries = 0; SND.ok();
           flyTo(d, plate.getBoundingClientRect(), async () => {
-            g.querySelector('img').src = img('hero/granny_eat'); await wait(1600);
-            r++; if (r < rounds.length) { g.querySelector('img').src = img('hero/granny_sad'); }
-            else { g.querySelector('img').src = img('hero/granny_key'); g.classList.add('glow'); play.remove(); $('.title').textContent = 'Thank you! Here is a key!'; g.style.pointerEvents = 'auto'; g.onclick = () => show('key_green'); confetti(); SND.key(); }
+            swap(g, D.eat.includes(f) ? 'hero/granny_eat_' + f : 'hero/granny_eat'); await wait(1800);
+            r++; if (r < rounds.length) { swap(g, 'hero/granny_sad'); }
+            else { swap(g, 'hero/granny_key'); g.classList.add('glow'); play.remove(); $('.title').textContent = 'Thank you! Here is a key!'; g.style.pointerEvents = 'auto'; g.onclick = () => show('key_green'); confetti(); SND.key(); }
           });
-        } else { tries++; g.querySelector('img').src = img('hero/granny_yuck'); SND.bad(); setTimeout(() => { if (r < rounds.length) g.querySelector('img').src = img('hero/granny_sad'); }, 1300); }
+        } else { tries++; swap(g, 'hero/granny_yuck'); SND.bad(); setTimeout(() => { if (r < rounds.length) swap(g, 'hero/granny_sad'); }, 1500); }
       });
     });
   } });
@@ -408,10 +423,10 @@ function build() {
     });
     async function open() {
       SND.key(); await wait(300);
-      chest.querySelector('img').src = img('obj/chest_open'); confetti();
+      swap(chest, 'obj/chest_open'); confetti();
       const book = put(n, 'obj/book', 50, 66, 4, ''); book.style.transition = 'height 1.2s, top 1.2s'; book.style.zIndex = 6;
       requestAnimationFrame(() => { book.style.height = '30%'; book.style.top = '52%'; });
-      dr.querySelector('img').src = img('hero/dragon_book'); dr.classList.add('bounce');
+      swap(dr, 'hero/dragon_book'); dr.classList.add('bounce');
       $('.title').textContent = "What is it? It's a magic book!";
       $('#nextBtn').style.display = ''; SCREENS[cur].next = 'bye';
     }
@@ -419,7 +434,7 @@ function build() {
   // 8. Финал
   add({ id: 'bye', bg: 'bg/jungle', render(n) {
     n.append(el('div', { cls: 'dim' })); title(n, 'Well done! Bye-bye!');
-    anim(put(n, 'hero/dragon_wave1', 40, 94, 60, 'bounce'), ['hero/dragon_wave1', 'hero/dragon_wave2']);
+    put(n, 'hero/dragon_wave2', 40, 94, 60, 'sway');
     put(n, 'obj/book', 66, 80, 34, 'glow');
     const b = el('button', { cls: 'btn pur', style: 'position:absolute;left:2%;bottom:3%;z-index:61' }, '📝 Отчёт'); b.onclick = () => MW.open('report'); n.append(b);
     confetti();

@@ -57,6 +57,14 @@ add(H, 'dragon_says', 'Дракоша показывает действия', DR
 add(H, 'dragon_moods', 'Дракоша: настроения и космонавт — 6 поз', DRAGON + " A sheet of 6 poses in a 3×2 grid, full body, all the same size. Row 1, left to right: sad with a little frown; thinking with a finger on his chin; pointing to the side with one hand. Row 2, left to right: happily holding up a thick open book glowing with golden sparkles; dressed as a little astronaut in a white space suit and a round clear glass helmet (his horns and face visible inside), standing and waving; the same astronaut floating in the air with arms spread happily. " + NOBG + " " + SHEET + " " + STYLE)
 add(H, 'granny', 'бабушка — 5 поз', GRANNY + " A sheet of 5 poses, all sitting (as if on a bench, but draw no bench), all the same size. Row 1, left to right: sad and hungry, holding her tummy with one hand, a small tear in the corner of her eye; exactly the same pose, but the tear has rolled down her cheek; happily eating with a fork, eyes closed with pleasure. Row 2, left to right: frowning and turning her head away with a 'yuck' face; smiling and holding out a green key with both hands. " + NOBG + " " + SHEET + " " + STYLE, ref='дракоша + бабушка')
 
+# ── добавка 27.11: бабушка ест именно ту еду, которую выбрал ребёнок; птица в полёте
+D2 = 'Доборные (27.11.2026)'
+EATP = (" A sheet of 4 poses in a 2×2 grid, all the same size, sitting (as if on a bench, but draw no bench), the same body position in every pose "
+        "— only the food in her hand changes. In every pose she is happily eating, eyes closed with pleasure, the food clearly visible right at her mouth. ")
+add(D2, 'granny_eat_1', 'бабушка ест: пицца, брокколи, мороженое, рыба', GRANNY + EATP + "Row 1, left to right: biting a slice of pizza; eating a piece of broccoli. Row 2, left to right: licking a pink ice cream cone; eating a fish from a fork. " + NOBG + " " + SHEET + " " + STYLE, ref='дракоша + бабушка')
+add(D2, 'granny_eat_2', 'бабушка ест: торт, яблоко, банан, морковка', GRANNY + EATP + "Row 1, left to right: eating a slice of birthday cake from a small plate; biting a red apple. Row 2, left to right: eating a peeled yellow banana; biting an orange carrot. " + NOBG + " " + SHEET + " " + STYLE, ref='дракоша + бабушка')
+add(D2, 'bird_fly', 'птица летит', STYLE_REF + " One small yellow bird flying, side view, facing right, both wings spread wide in flight, friendly face, no branch, nothing else in the picture. " + NOBG + " The bird does not touch the edges. " + STYLE)
+
 out = ['# ВУ 4–6 · Wow Dragon — промпты для ChatGPT (26.11.2026)', '',
        'Игры (решение Анны 24.11, «51»): А «Что пропало?», Б «Где мишка?», В «Кто прячется в кустах?», Д «Потряси дерево», '
        'Е «Покорми бабушку», Ж «Дракоша говорит», И отсчёт и звёзды (космос проходят все: слабые считают звёзды, сильные ещё и разбирают планеты), К ключи по цвету.', '',

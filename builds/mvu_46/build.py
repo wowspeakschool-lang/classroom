@@ -172,7 +172,11 @@ PLAN_HEAD = ("body{font-family:'Segoe UI',Arial,sans-serif;background:#f4effb;co
              'table{border-collapse:collapse;width:100%;background:#fff}th,td{border:1px solid #d8cbee;padding:5px 8px;vertical-align:top}th{background:#7b4bd6;color:#fff;text-align:left}'
              '.dl a{display:inline-block;margin:0 8px 10px 0;padding:8px 16px;border-radius:10px;background:#7b4bd6;color:#fff;font-weight:700;text-decoration:none}.dl a.pdf{background:#e8631a}')
 
-D = dict(media=MEDIA, audio=audio, pass_=PASS,
+EAT = [f for f in ['pizza', 'broccoli', 'icecream', 'fish', 'cake', 'apple', 'banana', 'carrot'] if os.path.exists(os.path.join(REPO, 'media', 'mvu_46', 'hero', 'granny_eat_' + f + '.webp'))]
+names |= {'hero/granny_eat_' + f for f in EAT}
+BIRD = 'obj/bird_fly' if os.path.exists(os.path.join(REPO, 'media', 'mvu_46', 'obj', 'bird_fly.webp')) else 'obj/bird'
+names.add(BIRD)
+D = dict(media=MEDIA, audio=audio, eat=EAT, bird=BIRD, pass_=PASS,
          checklist=[dict(title=t, topics=[[i, n] for i, n in ts]) for t, ts in CHECKLIST],
          topic_ru=TOPIC_RU, prompts=PROMPTS, screen_ru=SCREEN_RU, note=NOTE, preload=sorted(names))
 D['pass'] = D.pop('pass_')
