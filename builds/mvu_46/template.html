@@ -249,24 +249,24 @@ function build() {
 
   // 3. Дом: собрать рюкзак
   const ROOM = [ // [картинка, x, низ y, высота, тема]
-    // всё лежит на поверхности: кровать, подушка, полка, стол, шкаф, ковёр, пол
-    ['obj/teddy', 33, 57, 20, 'toys'], ['obj/plane', 11, 50, 10, 'toys'], ['obj/doll', 80, 20, 16, 'toys'], ['obj/robot', 92, 20, 17, 'toys'],
-    ['obj/ball', 44, 90, 13, 'toys'], ['obj/car', 62, 92, 12, 'toys'],
-    ['obj/pencil', 77, 45, 10, 'school'], ['obj/schoolbook', 86, 45, 9, 'school'], ['obj/ruler', 95, 45, 8, 'school'],
-    ['obj/tshirt', 19, 62, 12, 'clothes'], ['obj/hat', 63, 8, 11, 'clothes'], ['obj/sneakers', 48.5, 77, 9, 'clothes'], ['obj/socks', 76, 96, 11, 'clothes'],
+    // новая комната (27.11): под кроватью и под столом пусто, стул сбоку от стола
+    ['obj/teddy', 22, 53, 18, 'toys'], ['obj/plane', 10, 46.5, 9, 'toys'], ['obj/doll', 79, 20.5, 15, 'toys'], ['obj/robot', 91, 20.5, 16, 'toys'],
+    ['obj/ball', 40, 91, 12, 'toys'], ['obj/car', 57, 93, 11, 'toys'],
+    ['obj/pencil', 78, 47.5, 11, 'school'], ['obj/schoolbook', 86.5, 47.5, 10, 'school'], ['obj/ruler', 94.5, 47.5, 9, 'school'],
+    ['obj/tshirt', 33, 56, 10, 'clothes'], ['obj/hat', 50, 7, 10, 'clothes'], ['obj/sneakers', 23, 76, 9, 'clothes'], ['obj/socks', 68.5, 58.5, 8, 'clothes'],
   ];
   add({ id: 'room', bg: 'bg/room', keysBar: true, mapBtn: true, next: 'teddy', render(n) {
-    title(n, "Pack Dragon's bag!", 'left:42%');
+    title(n, "Pack Dragon's bag!", 'left:27%;top:11%;white-space:nowrap');
     const bag = el('div', { cls: 'bag' }, el('img', { src: img('obj/backpack') }), el('span', { cls: 'bagn' }, '0'));
     n.append(bag); let k = 0;
-    put(n, 'hero/dragon_point', 25, 100, 50, 'flip');
+    put(n, 'hero/dragon_point', 68, 100, 40, 'flip');
     const its = ROOM.map(([nm, x, y, h]) => put(n, nm, x, y, h, 'glow', d => { if (d.dataset.done) return; d.dataset.done = 1; SND.pop(); flyTo(d, bag.getBoundingClientRect(), () => { bag.querySelector('.bagn').textContent = ++k; S.bag = (S.bag || []); if (!S.bag.includes(nm)) S.bag.push(nm); save(); }); }));
     steps(its.map(d => () => { if (d.dataset.done) return false; d.onclick(); }));
   } });
   // Б. Где мишка?
-  const TED = [['on the bed', 31, 55, 22], ['under the table', 92, 76, 16], ['in the box', 44, 80, 16, true], ['next to the wardrobe', 49, 72, 20], ['on the chair', 82, 63, 16]];
+  const TED = [['on the bed', 22, 53, 18], ['under the bed', 23, 76, 14], ['under the table', 86, 75, 16], ['in the box', 50, 70, 12, true], ['next to the chair', 58, 76, 15], ['on the chair', 68.5, 58.5, 13]];
   add({ id: 'teddy', bg: 'bg/room', keysBar: true, mapBtn: true, next: 'missing', render(n) {
-    title(n, "Where's the teddy?", 'left:42%');
+    title(n, "Where's the teddy?", 'left:27%;top:11%;white-space:nowrap');
     let i = 0, d = null, box = null;
     // «в коробке» — одной картинкой мишка внутри открытой коробки (если она уже есть), иначе мишка над коробкой
     const place = () => { if (d) d.remove(); if (box) box.remove(); const [, x, y, h, inBox] = TED[i]; const tb = inBox && D.teddybox; d = put(n, tb ? 'obj/teddy_box' : 'obj/teddy', x, tb ? y + 10 : y, tb ? 26 : h, 'glow', () => { i = (i + 1) % TED.length; SND.pop(); place(); }); if (inBox && !tb) box = put(n, 'obj/toybox', x, y + 12, 18, ''); S.teddyAt = TED[i][0]; MW.refresh(); };
