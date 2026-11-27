@@ -29,3 +29,8 @@
 
 Видео, которые методист решила не засчитывать, — в `EXCLUDE` в `videos_build.py`.
 Пересборка: `python3 spotlight/videos_build.py && python3 spotlight/matrix.py && python3 spotlight/webinars.py`.
+
+## Правило общения с методистом
+
+В конце КАЖДОГО ответа — блок «Ваши задачи» (дубль `spotlight/trainer/ZADACHI.md`): невыполненные — 🔴,
+выполненные — ✅. Новые задачи сразу вносить в ZADACHI.md.
