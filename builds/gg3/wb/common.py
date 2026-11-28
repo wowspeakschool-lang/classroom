@@ -120,3 +120,11 @@ begin
                    f"  values (v_lesson, '{tip}', $blk${j}$blk$::jsonb, {i});")
     out.append("end $$;")
     return '\n'.join(out)
+
+
+def posledovatelnost(zagolovok, stroki, audio=None):
+    """Расставь реплики по порядку: stroki — в правильном порядке."""
+    p = {'title': zagolovok, 'items': [{'text': s} for s in stroki]}
+    if audio:
+        p['audio'] = audio
+    return ('sequence', p)
