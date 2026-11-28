@@ -80,8 +80,7 @@
 ## Чат «Halloween (курс Holidays)» — теперь и New Year
 
 
-🔴 **35.** Снеговик: четыре сочетания шапки, шарфа и пуговиц — так ли собирается (`builds/newyear/4-6/snegovik_prevyu.png`).
-🔴 **36.** Все экраны урока 4–6 на скриншотах — что поправить (`builds/newyear/4-6/ekrany_1.png`, `ekrany_2.png`).
+🔴 **37.** Сгенерировать промпт 14 — три звёздочки с настроением для «How are you?» (текст — в чате и в `builds/newyear/4-6/prompty.md`).
 
 Концепция New Year — `builds/newyear/koncepciya.md`, решения — `builds/newyear/resheniya.md`.
 

@@ -77,3 +77,9 @@ Row 1, left to right: an open yellow umbrella; a warm red knitted scarf lying fo
 Row 2, left to right: a red knitted winter hat with a white pompom; a silver cooking pot with a lid; a wicker basket.
 Transparent background, no background at all, cut-out PNG with alpha channel, no shadow. No text, no letters, no labels, no numbers.
 ```
+
+## 14. Звёздочки с настроением — для «How are you?» (вместо тыкв Halloween)
+
+```
+Use the attached dragon picture only as a STYLE reference: the same cute 3D cartoon look, soft rounded shapes, bright friendly colours, clean studio lighting. Draw a sheet of three cute golden five-pointed stars with faces, in one row, left to right: 1) a very happy star with a big open smile and rosy cheeks; 2) a sad star with a down-turned mouth and one small tear; 3) an angry star with frowning eyebrows and a pouting mouth, cheeks slightly red. All three the same size, same golden colour and same shape, only the face differs. Transparent background, no background at all, cut-out PNG with alpha channel, no floor, no shadow on the ground. Wide empty gaps between the stars, every star complete and not touching any other star or the edge. No text, no letters, no labels, no numbers.
+```
