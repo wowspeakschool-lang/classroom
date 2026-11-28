@@ -15,8 +15,8 @@
 
 **Что ждём от Анны**
 
-🔴 **236.** Вычитать юнит 2 Go Getter 3 — семь домашек по рабочей тетради, все
-   черновики (публикую только после вашего слова):
+🔴 **236.** Вычитать залитые юниты Go Getter 3 — всё черновиками, публикую только после вашего слова.
+   **Юнит 2 · Shopping:**
    · ДЗ 1 — https://app.wowteach.ru/?run=afc7b8bb-18a8-440f-9533-301d3b4c5bed&preview=1
    · ДЗ 2 — https://app.wowteach.ru/?run=151f58d2-3a64-40e3-aeb2-007cfd4b5ccc&preview=1
    · ДЗ 3 — https://app.wowteach.ru/?run=e5d38360-04c5-4ec6-8052-c890343bb6d3&preview=1
@@ -24,9 +24,25 @@
    · ДЗ 5 — https://app.wowteach.ru/?run=07ce714e-3f10-4ff6-896d-f902106e5403&preview=1
    · ДЗ 6 — https://app.wowteach.ru/?run=1150560b-3a50-4fff-b7cb-d117964d0bcc&preview=1
    · ДЗ 7 — https://app.wowteach.ru/?run=5009a28c-4777-427b-9db6-fa60fd370a09&preview=1
+   **Юнит 3 · Going on holiday:**
+   · ДЗ 1 — https://app.wowteach.ru/?run=d88cc619-2537-4d69-9905-63ec13bafdde&preview=1
+   · ДЗ 2 — https://app.wowteach.ru/?run=fb19d402-d6e8-4ce0-891d-6ec34a192545&preview=1
+   · ДЗ 3 — https://app.wowteach.ru/?run=93cfcc6f-5c08-4172-b52d-a20a25955054&preview=1
+   · ДЗ 4 — https://app.wowteach.ru/?run=c0285263-a1bb-41f8-8d5f-088cb284505b&preview=1
+   · ДЗ 5 — https://app.wowteach.ru/?run=19e53a1d-64ae-4c86-8710-6ac42133b6d1&preview=1
+   · ДЗ 6 — https://app.wowteach.ru/?run=6a2cf173-dcd4-4d92-98e8-c9e97c5ca84f&preview=1
+   · ДЗ 7 — https://app.wowteach.ru/?run=bd86be8f-4539-4c54-9929-391e6a3e63c0&preview=1
+   **Юнит 4 · Useful things:**
+   · ДЗ 1 — https://app.wowteach.ru/?run=d6e26328-0234-4f38-be05-cc72e7731830&preview=1
+   · ДЗ 2 — https://app.wowteach.ru/?run=5fb7546c-35db-439c-bfbc-b5284dabc502&preview=1
+   · ДЗ 3 — https://app.wowteach.ru/?run=2c068ce3-6a53-49e7-b35f-592f717414d3&preview=1
+   · ДЗ 4 — https://app.wowteach.ru/?run=6d6e6f45-e300-408c-83ba-c21ffa601136&preview=1
+   · ДЗ 5 — https://app.wowteach.ru/?run=7f27cd27-5f2f-40ce-b98d-4525e587087e&preview=1
+   · ДЗ 6 — https://app.wowteach.ru/?run=a6cf561f-0f94-4d66-a455-14ca70995276&preview=1
+   · ДЗ 7 — https://app.wowteach.ru/?run=9fdbbe82-dfa0-4250-9a00-e88938693862&preview=1
 
-🔴 **237.** **Нажать «Озвучить пачкой» по юниту 2 GG3** — карточки и образцы
-   говорения размечены, но пока молчат.
+🔴 **237.** **Нажать «Озвучить пачкой» по Go Getter 3** — в залитых юнитах карточки
+   и образцы говорения размечены, но пока молчат.
 
 **Что за мной**
 
@@ -34,8 +50,8 @@
    превосходная степень, ДЗ 3 — too / enough / as … as, ДЗ 4 — фразы в магазине),
    показать превью на согласование и только потом залить.
 
-🔴 **239.** Выставить домашки остальных юнитов GG3 — юниты 3, 4, 5, 6, 7, 8,
-   по тому же порядку: тетрадь → сборка → проверка → заливка черновиками.
+🔴 **239.** Выставить домашки остальных юнитов GG3: юниты 2, 3 и 4 залиты,
+   юниты 5–8 собираются (четыре параллельных агента), заливаю по мере готовности.
 
 🔴 **44.** После каждой «Озвучить пачкой» сверять правки того же дня и прогонять
    `classroom__zvuk_iz_zhivogo`.
