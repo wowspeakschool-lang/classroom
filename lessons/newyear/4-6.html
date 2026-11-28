@@ -364,15 +364,15 @@ $('stage').addEventListener('pointerdown',e=>{if(ORDER[cur]==='torch'){tMouse=pt
 /* snowman builder: coordinates in base-image pixels (975x1508), box scale s */
 const SM_W=975,SM_H=1508,SMS=420/975;
 const PARTS={nose:{k:['sm_nose'],w:195,x:476,cy:365,ax:0,z:6},
- hat:{k:['sm_tophat','sm_beanie','sm_elfhat','sm_bucket'],w:{sm_tophat:600,sm_beanie:580,sm_elfhat:640,sm_bucket:590},bottom:{sm_tophat:250,sm_beanie:275,sm_elfhat:262,sm_bucket:265},z:7},
- scarf:{k:['sm_scarf_red','sm_scarf_blue','sm_scarf_green'],w:500,top:430,z:5},
+ hat:{k:['sm_tophat','sm_beanie','sm_elfhat','sm_bucket'],w:{sm_tophat:600,sm_beanie:570,sm_elfhat:650,sm_bucket:590},apex:{sm_tophat:.73,sm_beanie:.79,sm_elfhat:.776,sm_bucket:.655},cx:{sm_tophat:.501,sm_beanie:.5,sm_elfhat:.436,sm_bucket:.501},apexY:{sm_tophat:98,sm_beanie:103,sm_elfhat:96,sm_bucket:100},z:7},
+ scarf:{k:['sm_scarf_red','sm_scarf_blue','sm_scarf_green'],w:520,top:445,cx:.485,z:5},
  buttons:{k:['sm_buttons_black','sm_buttons_red'],h:270,cx:486,top:930,z:6},
  arm_l:{k:['sm_arm_left'],w:330,right:215,top:600,z:0},arm_r:{k:['sm_arm_right'],w:330,left:760,top:600,z:0}};
 const NAT={};
 function slotRect(type,k){const P=PARTS[type],n=NAT[k];const ar=n.h/n.w;let w,h,l,t;
  if(type==='nose'){w=P.w;h=w*ar;l=P.x;t=P.cy-h/2}
- else if(type==='hat'){w=P.w[k];h=w*ar;l=486-w/2;t=P.bottom[k]-h}
- else if(type==='scarf'){w=P.w;h=w*ar;l=486-w/2;t=P.top}
+ else if(type==='hat'){w=P.w[k];h=w*ar;l=486-P.cx[k]*w;t=P.apexY[k]-P.apex[k]*h}
+ else if(type==='scarf'){w=P.w;h=w*ar;l=486-P.cx*w;t=P.top}
  else if(type==='buttons'){h=P.h;w=h/ar;l=P.cx-w/2;t=P.top}
  else if(type==='arm_l'){w=P.w;h=w*ar;l=P.right-w;t=P.top}
  else {w=P.w;h=w*ar;l=P.left;t=P.top}
@@ -388,7 +388,7 @@ INIT.builder=()=>{SMPLACED={};const box=$('smBox');box.innerHTML='';box.appendCh
 function home(el){const tray=$('smTray');tray.appendChild(el);el.style.cssText=`position:absolute;left:${el.dataset.hx}px;top:${el.dataset.hy}px;width:115px;height:150px;object-fit:contain;z-index:20`}
 function place(el){const k=el.dataset.k,type=typeOf(k);if(!NAT[k])NAT[k]={w:el.naturalWidth,h:el.naturalHeight};
  if(SMPLACED[type]&&SMPLACED[type]!==el)home(SMPLACED[type]);SMPLACED[type]=el;const r=slotRect(type,k);
- $('smBox').appendChild(el);el.style.cssText=`position:absolute;left:${r.l}px;top:${r.t}px;width:${r.w}px;height:${r.h}px;z-index:${PARTS[type].z===0?1:PARTS[type].z}`;el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');
+ $('smBox').appendChild(el);el.style.cssText=`position:absolute;left:${r.l}px;top:${r.t}px;width:${r.w}px;height:${r.h}px;z-index:${PARTS[type].z===0?1:PARTS[type].z}`;if(type==='scarf'){const cx=486*SMS-r.l,cy=292*SMS-r.t,rr=252*SMS;const m=`radial-gradient(circle ${rr}px at ${cx}px ${cy}px, transparent ${rr}px, #000 ${rr+1}px)`;el.style.webkitMaskImage=m;el.style.maskImage=m}el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');
  if(SMPLACED.nose&&Object.keys(SMPLACED).length>=3&&$('bPresent').style.display==='none'){$('bPresent').style.display='';$('bPresent').classList.add('pop');show($('bDone'),1)}}
 function bindDrag(el){let sx,sy,moved,st;el.onpointerdown=e=>{e.preventDefault();el.setPointerCapture(e.pointerId);moved=false;const p=pt(e);sx=p.x;sy=p.y;const r=el.getBoundingClientRect(),s=$('stage').getBoundingClientRect();
   st={l:(r.left-s.left)/SC,t:(r.top-s.top)/SC,w:r.width/SC,h:r.height/SC};$('stage').appendChild(el);el.style.cssText=`position:absolute;left:${st.l}px;top:${st.t}px;width:${st.w}px;height:${st.h}px;object-fit:contain;z-index:50`};
