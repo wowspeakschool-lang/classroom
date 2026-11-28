@@ -89,7 +89,6 @@
 ## Чат «Halloween (курс Holidays)» — теперь и New Year
 
 
-🔴 **44.** Шапка и колпак шире, чуть ниже и правее (`builds/newyear/4-6/snegovik_shapki_krupno.png`) — ок?
 
 🔴 **45.** Снеговик с новыми шарфами (`builds/newyear/4-6/snegovik_prevyu.png`, `snegovik_krupno.png`) — ок?
 
