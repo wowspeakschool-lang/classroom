@@ -87,7 +87,7 @@ hw2 = [
         ('Bob and Sam can cook very well.', "They'll open a restaurant one day."),
     ]),
     kviz('Прочитай предсказания Эммы и выбери правильную форму', [
-        ("I love going abroad, so when I'm older, I ___ travel a lot.", ["'ll", "won't"], 0),
+        ("I love going abroad, so when I'm older, I ___ travel a lot.", ['will', "won't"], 0),
         ('I only speak English and a bit of German, so I think I ___ learn another foreign language.',
          ['will', "won't"], 0),
         ('My dream is to visit the Amazon rainforest. My cousin George says he hopes that he ___ '
@@ -419,7 +419,7 @@ hw7 = [
     ]),
     propuski('Прочитай ответы и перетащи вопросительные слова в пропуски',
              "A: __What__ is your favourite hobby?\nB: My favourite hobby is chess.\n"
-             "A: __Which__ did you eat in the UK?\nB: I ate fish and chips in the UK.\n"
+             "A: __What__ did you eat in the UK?\nB: I ate fish and chips in the UK.\n"
              "A: __Where__ are you going to fly for your next holiday?\n"
              "B: We're going to fly to France for our next holiday.\n"
              "A: __Who__ made this cake?\nB: Mum made this cake.\n"
