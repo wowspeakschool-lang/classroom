@@ -78,8 +78,8 @@ Row 2, left to right: a red knitted winter hat with a white pompom; a silver coo
 Transparent background, no background at all, cut-out PNG with alpha channel, no shadow. No text, no letters, no labels, no numbers.
 ```
 
-## 14. Звёздочки с настроением — для «How are you?» (вместо тыкв Halloween)
+## 14. Снеговики с настроением — «How are you?» («Какой ты снеговичок?»)
 
 ```
-Use the attached dragon picture only as a STYLE reference: the same cute 3D cartoon look, soft rounded shapes, bright friendly colours, clean studio lighting. Draw a sheet of three cute golden five-pointed stars with faces, in one row, left to right: 1) a very happy star with a big open smile and rosy cheeks; 2) a sad star with a down-turned mouth and one small tear; 3) an angry star with frowning eyebrows and a pouting mouth, cheeks slightly red. All three the same size, same golden colour and same shape, only the face differs. Transparent background, no background at all, cut-out PNG with alpha channel, no floor, no shadow on the ground. Wide empty gaps between the stars, every star complete and not touching any other star or the edge. No text, no letters, no labels, no numbers.
+Use the attached dragon picture only as a STYLE reference: the same cute 3D cartoon look, soft rounded shapes, bright friendly colours, clean studio lighting. Draw a sheet of three cute small snowmen standing in one row, left to right: 1) a very happy snowman with a big open smile, rosy cheeks and both stick arms raised up; 2) a sad snowman with a down-turned mouth, one small tear and stick arms hanging down; 3) an angry snowman with frowning eyebrows, a pouting mouth, red cheeks and stick arms on his sides. All three the same size and shape: two snowballs, coal eyes, orange carrot nose, no hat, no scarf, only the face and arms differ. Transparent background, no background at all, cut-out PNG with alpha channel, no floor, no shadow on the ground. Wide empty gaps between the snowmen, every snowman complete and not touching any other snowman or the edge. No text, no letters, no labels, no numbers.
 ```
