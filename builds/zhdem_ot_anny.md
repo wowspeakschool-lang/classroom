@@ -80,8 +80,7 @@
 ## Чат «Halloween (курс Holidays)» — теперь и New Year
 
 
-🔴 **40.** Снеговик с новыми шапками и шарфами (`builds/newyear/4-6/snegovik_prevyu.png`) — ок?
-🔴 **39.** Экран «How are you?» со снеговиками — ок?
+🔴 **41.** Снеговик после выравнивания (`builds/newyear/4-6/snegovik_prevyu.png`, `snegovik_krupno.png`) — ок?
 
 Концепция New Year — `builds/newyear/koncepciya.md`, решения — `builds/newyear/resheniya.md`.
 
