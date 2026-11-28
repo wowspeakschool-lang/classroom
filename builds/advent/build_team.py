@@ -22,7 +22,7 @@ def add(path):
     ext = path.rsplit('.', 1)[1]
     mime = {'webp': 'image/webp', 'png': 'image/png', 'mp3': 'audio/mpeg'}[ext]
     assets[path] = 'data:%s;base64,%s' % (mime, base64.b64encode(open(full, 'rb').read()).decode())
-for p in sorted(glob.glob(os.path.join(D, 'img', '**', '*.webp'), recursive=True)) + \
+for p in sorted(glob.glob(os.path.join(D, 'img', '**', '*.webp'), recursive=True)) + sorted(glob.glob(os.path.join(D, 'img', '*.png'))) + \
          sorted(glob.glob(os.path.join(D, 'recept', '*.webp'))):
     rel = os.path.relpath(p, D)
     if not SKIP.search(rel): add(rel)
@@ -104,8 +104,8 @@ t = R(t, """var d=btoa(unescape(encodeURIComponent(JSON.stringify({name:'Маш�
       """window.__bingoData={name:'Маша',words:ws};""")
 t = R(t, """<iframe class="bingof" src="bingo.html#d='+encodeURIComponent(d)+'" title="Christmas Bingo"></iframe>""",
       """<iframe class="bingof" title="Christmas Bingo"></iframe>""")
-t = R(t, """На платформе здесь скачается PDF: две страницы карточек и лист ведущего.</p><div class="btns"><button type="button" class="btn ghost" data-close>Закрыть</button></div></div>');}""",
-      """На платформе здесь скачается PDF: две страницы карточек и лист ведущего.</p><div class="btns"><button type="button" class="btn ghost" data-close>Закрыть</button></div></div>').querySelector('iframe').srcdoc=BINGO_HTML;}""")
+t = R(t, """На платформе здесь скачается PDF: четыре листа с карточками и лист ведущего.</p><div class="btns"><button type="button" class="btn ghost" data-close>Закрыть</button></div></div>');}""",
+      """На платформе здесь скачается PDF: четыре листа с карточками и лист ведущего.</p><div class="btns"><button type="button" class="btn ghost" data-close>Закрыть</button></div></div>').querySelector('iframe').srcdoc=BINGO_HTML;}""")
 # мастерская на телефоне — до нижнего края экрана (нижнего меню кабинета тут нет)
 t = R(t, "  if(!bn||getComputedStyle(bn).display==='none'){room.style.height='';return;}",
       "  if(!bn||getComputedStyle(bn).display==='none'){if(window.innerWidth>860){room.style.height='';return;}var dm=document.getElementById('demo');bn={getBoundingClientRect:function(){return {top:dm&&getComputedStyle(dm).display!=='none'?dm.getBoundingClientRect().top:window.innerHeight};}};}")

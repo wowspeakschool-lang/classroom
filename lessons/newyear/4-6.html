@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Star for the Dragon — New Year 4–6</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2b1d55;--gold:#ffc83d;--red:#e8403b;--green:#2f9e57}
+*{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:#0d1433;overflow:hidden;font-family:'Baloo 2','Comic Sans MS',sans-serif;color:var(--ink)}
+#wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{position:relative;width:1600px;height:900px;transform-origin:center center;overflow:hidden;background:#1b2550;border-radius:18px}
+.screen{position:absolute;inset:0;display:none;background-size:cover;background-position:center}
+.screen.active{display:block}
+.bub{position:absolute;left:50%;top:22px;transform:translateX(-50%);background:#fff;border-radius:28px;padding:10px 34px;font-size:44px;font-weight:800;box-shadow:0 6px 0 rgba(0,0,0,.15);white-space:nowrap;z-index:20}
+.btn{position:absolute;border:0;border-radius:40px;background:var(--gold);color:var(--ink);font:800 44px 'Baloo 2',sans-serif;padding:10px 40px;box-shadow:0 7px 0 #c48a10;cursor:pointer;z-index:30}
+.btn:active{transform:translateY(4px);box-shadow:0 3px 0 #c48a10}
+.btn.next{right:40px;bottom:40px}
+.btn.hidden{display:none}
+.sm{font-size:32px;padding:6px 26px}
+#nav{position:absolute;right:14px;top:12px;z-index:60;display:flex;gap:8px}
+#nav button{width:54px;height:54px;border-radius:50%;border:0;background:rgba(255,255,255,.85);font-size:26px;cursor:pointer}
+.char{position:absolute;pointer-events:none}
+.circles{position:absolute;left:50%;transform:translateX(-50%);bottom:26px;display:flex;gap:12px;z-index:25}
+.circles span{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.55);border:4px solid #fff}
+.circles span.on{background:var(--gold);box-shadow:0 0 14px var(--gold)}
+.pick{position:absolute;width:230px;height:230px;border-radius:30px;background:#fff;box-shadow:0 8px 0 rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.pick img{max-width:82%;max-height:82%}
+.shake{animation:shake .5s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-18px)}40%,80%{transform:translateX(18px)}}
+.pop{animation:pop .5s}
+@keyframes pop{0%{transform:scale(.3)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+.shiver{animation:shiver .25s infinite}
+@keyframes shiver{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+.glow{filter:drop-shadow(0 0 18px #fff6a8) drop-shadow(0 0 30px #ffd84d)}
+.card{position:absolute;background:#fff;border-radius:34px;box-shadow:0 10px 0 rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center}
+.card img{max-width:84%;max-height:84%}
+.hint{position:absolute;left:50%;transform:translateX(-50%);bottom:110px;background:rgba(255,255,255,.92);border-radius:22px;padding:6px 24px;font-size:30px;white-space:nowrap}
+#loader{position:fixed;inset:0;background:#0d1433;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font:800 40px 'Baloo 2',sans-serif;z-index:100}
+#loader .bar{width:420px;height:22px;border-radius:12px;background:#2c3a7a;margin-top:18px;overflow:hidden}
+#loader .bar i{display:block;height:100%;width:0;background:var(--gold)}
+.drag{position:absolute;cursor:grab;touch-action:none}
+.tray{position:absolute;right:30px;top:120px;width:560px;height:680px;background:rgba(255,255,255,.75);border-radius:30px}
+.snowfall{position:absolute;inset:0;pointer-events:none;z-index:15}
+.flake{position:absolute;top:-30px;color:#fff;animation:fall linear infinite;font-size:28px;opacity:.9}
+@keyframes fall{to{transform:translateY(960px)}}
+.light{position:absolute;width:18px;height:18px;border-radius:50%;animation:tw 1.2s infinite alternate}
+@keyframes tw{from{opacity:.25;transform:scale(.7)}to{opacity:1;transform:scale(1.2)}}
+.mcard{position:absolute;width:170px;height:200px;perspective:800px;cursor:pointer}
+.mcard .in{position:absolute;inset:0;transition:transform .45s;transform-style:preserve-3d}
+.mcard.open .in{transform:rotateY(180deg)}
+.mcard .f,.mcard .b{position:absolute;inset:0;border-radius:24px;backface-visibility:hidden;display:flex;align-items:center;justify-content:center}
+.mcard .b{background:linear-gradient(160deg,#5a8dff,#2c3fb8);border:5px solid #fff;font-size:80px}
+.mcard .f{background:#fff;transform:rotateY(180deg);border:5px solid #ffe28a}
+.mcard .f img{max-width:80%;max-height:80%}
+.mcard.done{opacity:.35;pointer-events:none}
+.mark{position:absolute;width:110px;height:110px;border:7px solid #ff3b3b;border-radius:50%;pointer-events:none;z-index:9}
+.menu{position:absolute;width:330px;height:300px;border-radius:30px;background:#fff;box-shadow:0 10px 0 rgba(0,0,0,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-size:34px;font-weight:800}
+.menu .ic{font-size:110px;line-height:1.1}
+input.name{position:absolute;left:50%;transform:translateX(-50%);top:120px;width:620px;font:800 46px 'Baloo 2',sans-serif;text-align:center;border-radius:24px;border:5px solid var(--gold);padding:6px;z-index:30}
+</style>
+</head>
+<body>
+<div id="loader">Loading… ⭐<div class="bar"><i id="lbar"></i></div></div>
+<div id="wrap"><div id="stage">
+ <div id="nav"><button id="navPrev" title="Back">◀</button><button id="navNext" title="Skip">▶</button></div>
+
+ <!-- 0 start -->
+ <div class="screen" data-s="start" data-bg="room">
+  <div class="bub">⭐ A Star for the Dragon ⭐</div>
+  <img class="char" data-src="dragon" style="left:640px;top:250px;height:560px">
+  <button class="btn" style="left:50%;transform:translateX(-50%);bottom:50px" data-go="next">Start! ▶</button>
+ </div>
+
+ <!-- 1 story -->
+ <div class="screen" data-s="story" data-bg="room">
+  <div class="bub">Oh no! Where is my star? 😢</div>
+  <div id="qmark" style="position:absolute;left:196px;top:10px;font-size:110px;font-weight:800;color:#fff;text-shadow:0 0 20px #000">?</div>
+  <img class="char" data-src="dragon" style="left:700px;top:300px;height:520px;transform:rotate(-6deg)">
+  <button class="btn next" data-go="next">▶</button>
+ </div>
+
+ <!-- 2 hello -->
+ <div class="screen" data-s="hello" data-bg="room">
+  <div class="bub">Hello! How are you?</div>
+  <div class="pick" style="left:270px;top:220px;width:320px;height:380px" data-emo><img data-src="emo_sm_happy"></div>
+  <div class="pick" style="left:640px;top:220px;width:320px;height:380px" data-emo><img data-src="emo_sm_sad"></div>
+  <div class="pick" style="left:1010px;top:220px;width:320px;height:380px" data-emo><img data-src="emo_sm_angry"></div>
+  <button class="btn next" data-go="next">▶</button>
+ </div>
+
+ <!-- 3 wind -->
+ <div class="screen" data-s="wind" data-bg="forest_day">
+  <div class="bub" id="windQ">Brrr! It's windy! What helps? 🌬️</div>
+  <img class="char shiver" id="windDragon" data-src="dragon" style="left:110px;top:300px;height:520px">
+  <div id="windOpts"></div>
+  <button class="btn next hidden" id="windNext" data-go="next">▶</button>
+ </div>
+
+ <!-- 4 words -->
+ <div class="screen" data-s="words" data-bg="forest_day">
+  <div class="card" id="wCard" style="left:530px;top:110px;width:540px;height:540px"><img id="wImg"></div>
+  <div class="hint" id="wHint"></div>
+  <button class="btn sm" style="left:360px;top:340px" id="wPrev">◀</button>
+  <button class="btn sm" style="left:1140px;top:340px" id="wNext">▶</button>
+  <div class="circles" id="wDots"></div>
+  <button class="btn next hidden" id="wDone" data-go="next">Show me! ▶</button>
+ </div>
+
+ <!-- 5 show me -->
+ <div class="screen" data-s="showme" data-bg="forest_day">
+  <div class="bub">Show me! 🙌</div>
+  <div id="smGrid"></div>
+  <button class="btn sm" style="left:50%;transform:translateX(-50%);bottom:40px" id="smRnd">🎲</button>
+  <button class="btn next" data-go="next">▶</button>
+ </div>
+
+ <!-- 6 wipe -->
+ <div class="screen" data-s="wipe" data-bg="forest_day">
+  <div class="bub">❄️ What's under the snow?</div>
+  <div class="card" style="left:520px;top:130px;width:560px;height:560px"><img id="wpImg"></div>
+  <canvas id="wpCan" width="560" height="560" style="position:absolute;left:520px;top:130px;border-radius:34px;touch-action:none;cursor:crosshair"></canvas>
+  <div class="circles" id="wpDots"></div>
+  <button class="btn sm hidden" style="right:40px;top:400px" id="wpMore">Next ❄️</button>
+  <button class="btn next hidden" id="wpDone" data-go="next">▶</button>
+ </div>
+
+ <!-- 7 snowman meets -->
+ <div class="screen" data-s="smmeet" data-bg="forest_night">
+  <div class="bub">"My nose! Where is my nose?" 😢</div>
+  <img class="char" data-src="snowman_base" style="left:640px;top:170px;height:660px;transform:rotate(-4deg)">
+  <img class="char" data-src="dragon_winter" style="left:150px;top:380px;height:440px">
+  <button class="btn next" data-go="next">🔦 ▶</button>
+ </div>
+
+ <!-- 8 torch -->
+ <div class="screen" data-s="torch" data-bg="forest_night">
+  <div class="bub">🔦 Find the carrot!</div>
+  <div id="tItems"></div>
+  <canvas id="tDark" width="1600" height="900" style="position:absolute;inset:0;z-index:10;pointer-events:none"></canvas>
+  <div class="circles" id="tDots" style="z-index:12"></div>
+  <button class="btn next hidden" id="tDone" data-go="next">▶</button>
+ </div>
+
+ <!-- 9 builder -->
+ <div class="screen" data-s="builder" data-bg="forest_day">
+  <div class="bub" style="left:560px">⛄ Make your snowman!</div>
+  <div id="smBox" style="position:absolute;left:330px;top:235px;width:420px;height:650px"></div>
+  <div class="tray" id="smTray"></div>
+  <img class="char hidden" id="bPresent" data-src="present" style="left:60px;top:560px;height:220px;display:none">
+  <button class="btn next hidden" id="bDone" data-go="next">🎁 ▶</button>
+ </div>
+
+ <!-- 10 elf meets -->
+ <div class="screen" data-s="elfmeet" data-bg="forest_day">
+  <div class="bub">"Oh no! My presents! Help me!"</div>
+  <img class="char" data-src="elf" style="left:620px;top:200px;height:640px">
+  <button class="btn next" data-go="next">▶</button>
+ </div>
+
+ <!-- 11 catch -->
+ <div class="screen" data-s="catch" data-bg="forest_day">
+  <div class="bub" style="display:flex;align-items:center;gap:16px">Catch: <img id="cTarget" style="height:80px"></div>
+  <div id="cField" style="position:absolute;inset:0"></div>
+  <img class="char" id="cElf" data-src="elf" style="height:300px;bottom:10px;left:700px;z-index:8">
+  <div class="circles" id="cDots" style="left:auto;right:40px;transform:none;bottom:auto;top:120px;flex-direction:column"></div>
+  <button class="btn next hidden" id="cDone" data-go="next">🎁 ▶</button>
+ </div>
+
+ <!-- 12 draw -->
+ <div class="screen" data-s="draw" data-bg="room">
+  <div style="position:absolute;inset:0;background:rgba(255,255,255,.35)"></div>
+  <img class="char" data-src="santa" style="left:20px;top:330px;height:540px;z-index:3">
+  <div style="position:absolute;left:330px;top:40px;width:1000px;height:750px">
+   <div style="position:absolute;left:8%;top:10%;width:84%;height:80%;background:#fff;border-radius:10px"></div>
+   <canvas id="dCan" width="840" height="600" style="position:absolute;left:8%;top:10%;width:84%;height:80%;touch-action:none;cursor:crosshair"></canvas>
+   <img data-src="frame" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
+  </div>
+  <div id="dPal" style="position:absolute;right:26px;top:120px;display:flex;flex-direction:column;gap:12px"></div>
+  <button class="btn sm" id="dWho" style="left:540px;bottom:24px">✏️ Teacher</button>
+  <button class="btn sm" id="dWord" style="left:880px;bottom:24px">👁 Secret</button>
+  <div class="card hidden" id="dSecret" style="left:600px;top:250px;width:400px;height:400px;display:none;z-index:40"><img id="dSecretImg"></div>
+  <button class="btn next" data-go="next">▶</button>
+ </div>
+
+ <!-- 13 sleigh -->
+ <div class="screen" data-s="sleigh" data-bg="road">
+  <div class="card" id="slCard" style="left:640px;top:40px;width:300px;height:300px"><img id="slImg"></div>
+  <div id="slGroup" style="position:absolute;left:40px;top:540px;width:330px;height:250px;transition:left 1s ease-in-out;z-index:5">
+   <img data-src="dragon_winter" style="position:absolute;left:105px;top:-40px;height:190px">
+   <img data-src="sleigh" style="position:absolute;left:0;top:70px;width:330px">
+  </div>
+  <img class="char" id="slSanta" data-src="santa" style="left:1300px;top:330px;height:420px;display:none;z-index:6">
+  <img class="char" id="slPresent" data-src="present_green" style="left:1180px;top:640px;height:150px;display:none;z-index:7">
+  <div class="bub" id="slBub" style="display:none">"Ho-ho-ho! Your star is in the forest!"</div>
+  <button class="btn" id="slPush" style="left:1000px;top:150px">✓ Push!</button>
+  <div class="circles" id="slDots"></div>
+  <button class="btn next hidden" id="slDone" data-go="next">▶</button>
+ </div>
+
+ <!-- 14 pairs -->
+ <div class="screen" data-s="pairs" data-bg="forest_night">
+  <div class="bub">⭐ Find the pairs!</div>
+  <div id="pBox"></div>
+  <img class="char glow" id="pHero" data-src="star_face" style="left:650px;top:220px;height:420px;display:none;z-index:30">
+  <button class="btn next hidden" id="pDone" data-go="next">▶</button>
+ </div>
+
+ <!-- 15 finale -->
+ <div class="screen" data-s="finale" data-bg="room">
+  <div id="fLights"></div>
+  <div class="snowfall hidden" id="fSnow" style="display:none"></div>
+  <div class="bub" id="fBub">Put the presents under the tree! 🎁</div>
+  <img class="char" data-src="dragon_winter" style="left:1100px;top:420px;height:420px;z-index:4">
+  <div id="fTray" style="position:absolute;left:620px;top:620px;width:440px;height:240px;background:rgba(255,255,255,.6);border-radius:30px"></div>
+  <div id="fItems"></div>
+  <button class="btn next hidden" id="fDone" data-go="next">🏆 ▶</button>
+ </div>
+
+ <!-- 16 certificate -->
+ <div class="screen" data-s="cert" data-bg="room">
+  <input class="name" id="cName" placeholder="Name ✏️">
+  <canvas id="certCan" width="1448" height="1086" style="position:absolute;left:530px;top:220px;width:540px;height:405px;border-radius:12px;box-shadow:0 8px 0 rgba(0,0,0,.2)"></canvas>
+  <button class="btn sm" id="certSave" style="left:50%;transform:translateX(-50%);bottom:110px">💾 Save</button>
+  <button class="btn next" data-go="next">🎮 ▶</button>
+ </div>
+
+ <!-- 17 bonus menu -->
+ <div class="screen" data-s="bonus" data-bg="room">
+  <div class="bub">🎮 Bonus games!</div>
+  <div class="menu" style="left:130px;top:250px" data-goto="diff"><div class="ic">🔍</div>Differences</div>
+  <div class="menu" style="left:480px;top:250px" data-goto="balls"><div class="ic">❄️</div>Snowballs</div>
+  <div class="menu" style="left:830px;top:250px" data-goto="baubles"><div class="ic">🎄</div>Magic balls</div>
+  <div class="menu" style="left:1180px;top:250px" data-goto="fog"><div class="ic">🌫️</div>What is it?</div>
+ </div>
+
+ <!-- 18 diff -->
+ <div class="screen" data-s="diff" style="background:#20306e">
+  <div class="bub">🔍 Find 4 differences!</div>
+  <div id="dfL" style="position:absolute;left:12px;top:180px;width:784px;height:441px;overflow:hidden;border-radius:16px"></div>
+  <div id="dfR" style="position:absolute;left:804px;top:180px;width:784px;height:441px;overflow:hidden;border-radius:16px"></div>
+  <div class="circles" id="dfDots"></div>
+  <button class="btn sm" style="left:40px;bottom:30px" data-goto="bonus">🎮</button>
+ </div>
+
+ <!-- 19 snowballs -->
+ <div class="screen" data-s="balls" data-bg="forest_day">
+  <div class="bub" style="display:flex;align-items:center;gap:16px">Hit: <img id="bTarget" style="height:80px"></div>
+  <div id="bField" style="position:absolute;inset:0"></div>
+  <div class="circles" id="bDots"></div>
+  <button class="btn sm" style="left:40px;bottom:30px" data-goto="bonus">🎮</button>
+ </div>
+
+ <!-- 20 baubles -->
+ <div class="screen" data-s="baubles" data-bg="room">
+  <div class="bub">🎄 Open a magic ball!</div>
+  <div id="mbBox"></div>
+  <div class="card" id="mbCard" style="left:600px;top:200px;width:460px;height:460px;display:none;z-index:30"><img id="mbImg"></div>
+  <div class="circles" id="mbDots"></div>
+  <button class="btn sm" style="left:40px;bottom:30px" data-goto="bonus">🎮</button>
+ </div>
+
+ <!-- 21 fog -->
+ <div class="screen" data-s="fog" data-bg="forest_night">
+  <div class="bub">🌫️ What is it?</div>
+  <div class="card" style="left:550px;top:150px;width:500px;height:500px"><img id="fgImg" style="transition:filter 9s linear"></div>
+  <button class="btn sm" id="fgNext" style="left:50%;transform:translateX(-50%);bottom:60px">Next 🌫️</button>
+  <button class="btn sm" style="left:40px;bottom:30px" data-goto="bonus">🎮</button>
+ </div>
+
+ <!-- 22 finish -->
+ <div class="screen" data-s="finish" data-bg="room">
+  <div class="bub">🎄 Happy New Year! 🎄</div>
+  <img class="char glow" data-src="star_face" style="left:690px;top:150px;height:220px">
+  <img class="char" data-src="dragon_winter" style="left:640px;top:380px;height:470px">
+  <button class="btn sm" style="left:40px;bottom:30px" data-goto="bonus">🎮</button>
+ </div>
+</div></div>
+
+<script>
+const BASE='https://classroom.wowteach.ru/media/';
+const A={room:'newyear/4-6/room',forest_day:'newyear/4-6/forest_day',forest_night:'newyear/4-6/forest_night',road:'newyear/4-6/road',frame:'newyear/4-6/frame',
+ santa:'newyear/4-6/santa',elf:'newyear/4-6/elf',star_face:'newyear/4-6/star_face',dragon_winter:'newyear/4-6/dragon_winter',dragon:'halloween/4-6/dragon',
+ snowman_base:'newyear/4-6/snowman_base',present:'newyear/4-6/present',present_blue:'newyear/4-6/present_blue',present_green:'newyear/4-6/present_green',present_purple:'newyear/4-6/present_purple',
+ carrot:'newyear/4-6/carrot',snowflake:'newyear/4-6/snowflake',star:'newyear/4-6/star',sleigh:'newyear/4-6/sleigh',snowball:'newyear/4-6/snowball',snowdrift:'newyear/4-6/snowdrift',
+ bauble:'newyear/4-6/bauble',snowman:'newyear/4-6/snowman',
+ emo_sm_happy:'newyear/4-6/emo_sm_happy',emo_sm_sad:'newyear/4-6/emo_sm_sad',emo_sm_angry:'newyear/4-6/emo_sm_angry',
+ wu_umbrella:'newyear/4-6/wu_umbrella',wu_scarf:'newyear/4-6/wu_scarf',wu_pan:'newyear/4-6/wu_pan',wu_hat:'newyear/4-6/wu_hat',wu_pot:'newyear/4-6/wu_pot',wu_basket:'newyear/4-6/wu_basket'};
+['pink','blue','green','purple','silver'].forEach(c=>A['star_'+c]='newyear/4-6/star_'+c);
+['blue','green','purple','gold','pink'].forEach(c=>A['bauble_'+c]='newyear/4-6/bauble_'+c);
+['nose','tophat','beanie','elfhat','bucket','scarf_red','scarf_blue','scarf_green','buttons_black','buttons_red','arm_left','arm_right'].forEach(k=>A['sm_'+k]='newyear/4-6/sm_'+k);
+const U=k=>BASE+A[k]+'.webp';
+const $=id=>document.getElementById(id);
+const WORDS=[{k:'star',w:'a star',g:'✨ twinkle, twinkle'},{k:'snowman',w:'a snowman',g:'⛄ draw three circles'},{k:'present',w:'a present',g:'🎁 make a box'},
+ {k:'santa',w:'Santa',g:'🎅 "Ho-ho-ho!" hands on tummy'},{k:'elf',w:'an elf',g:'🧝 pointy ears'},{k:'carrot',w:'a carrot',g:'🥕 fist on your nose'}];
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function dots(el,n,on){el.innerHTML='';for(let i=0;i<n;i++){const s=document.createElement('span');if(i<on)s.className='on';el.appendChild(s)}}
+function img(k,style,cls){const i=new Image();i.crossOrigin='anonymous';i.src=U(k);if(style)i.style.cssText=style;if(cls)i.className=cls;i.draggable=false;return i}
+function show(el,v){el.style.display=v?'':'none';el.classList.toggle('hidden',!v)}
+
+/* scale */
+function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);$('stage').style.transform='scale('+s+')';window.SC=s}
+addEventListener('resize',fit);fit();
+function pt(e,el){const r=(el||$('stage')).getBoundingClientRect();return{x:(e.clientX-r.left)/SC,y:(e.clientY-r.top)/SC}}
+
+/* screens */
+const SCR=[...document.querySelectorAll('.screen')];const ORDER=SCR.map(s=>s.dataset.s);let cur=-1;
+const INIT={};
+function go(name){const i=typeof name==='number'?name:ORDER.indexOf(name);if(i<0||i>=SCR.length)return;
+ SCR.forEach(s=>s.classList.remove('active'));SCR[i].classList.add('active');cur=i;const f=INIT[ORDER[i]];if(f)f();}
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){go(cur+1);return}const t=e.target.closest('[data-goto]');if(t)go(t.dataset.goto)});
+$('navNext').onclick=()=>go(Math.min(cur+1,SCR.length-1));$('navPrev').onclick=()=>go(Math.max(cur-1,0));
+
+/* preload */
+(function(){const keys=Object.keys(A);let n=0;keys.forEach(k=>{const i=new Image();i.onload=i.onerror=()=>{n++;$('lbar').style.width=(n/keys.length*100)+'%';if(n===keys.length){$('loader').remove();go(0)}};i.src=U(k)});
+ document.querySelectorAll('[data-src]').forEach(el=>{el.crossOrigin='anonymous';el.src=U(el.dataset.src);el.draggable=false});
+ SCR.forEach(s=>{if(s.dataset.bg)s.style.backgroundImage='url('+U(s.dataset.bg)+')'});})();
+
+/* hello */
+document.querySelectorAll('[data-emo]').forEach(p=>p.onclick=()=>{p.classList.remove('pop');void p.offsetWidth;p.classList.add('pop')});
+
+/* wind */
+INIT.wind=()=>{const steps=[[['wu_umbrella',0],['wu_scarf',1],['wu_pan',0]],[['wu_pot',0],['wu_basket',0],['wu_hat',1]]];let st=0;
+ const d=$('windDragon');d.src=U('dragon');d.classList.add('shiver');show($('windNext'),0);$('windQ').textContent="Brrr! It's windy! What helps? 🌬️";
+ function draw(){const box=$('windOpts');box.innerHTML='';shuffle(steps[st]).forEach((o,i)=>{const p=document.createElement('div');p.className='pick';p.style.left=(620+i*310)+'px';p.style.top='330px';p.appendChild(img(o[0]));
+  p.onclick=()=>{if(!o[1]){p.classList.remove('shake');void p.offsetWidth;p.classList.add('shake');return}
+   p.classList.add('pop');if(st===0){$('windQ').textContent='Yes! A scarf! 🧣 Brrr… my ears!';st=1;setTimeout(draw,900)}
+   else{$('windQ').textContent='A hat! Now I am warm! 😊';d.src=U('dragon_winter');d.classList.remove('shiver');setTimeout(()=>{box.innerHTML='';show($('windNext'),1)},700)}};box.appendChild(p)})}
+ draw()};
+
+/* words */
+let wi=0;function wDraw(){$('wImg').src=U(WORDS[wi].k);$('wHint').textContent=WORDS[wi].w+'  ·  '+WORDS[wi].g;dots($('wDots'),6,wi+1);const c=$('wCard');c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop');show($('wDone'),wi===5)}
+INIT.words=()=>{wi=0;wDraw()};$('wNext').onclick=()=>{if(wi<5){wi++;wDraw()}};$('wPrev').onclick=()=>{if(wi>0){wi--;wDraw()}};
+
+/* show me */
+INIT.showme=()=>{const g=$('smGrid');g.innerHTML='';WORDS.forEach((w,i)=>{const c=document.createElement('div');c.className='card';c.style.cssText=`left:${190+(i%3)*420}px;top:${140+Math.floor(i/3)*330}px;width:380px;height:300px`;c.appendChild(img(w.k));c.dataset.i=i;g.appendChild(c)})};
+$('smRnd').onclick=()=>{const cs=[...$('smGrid').children];cs.forEach(c=>c.style.outline='');const c=rnd(cs);c.style.outline='12px solid #ffc83d';c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop')};
+
+/* wipe */
+let wpOrder=[],wpN=0,wpDrawing=false;
+function wpReset(){const k=wpOrder[wpN];$('wpImg').src=U(k);const c=$('wpCan'),x=c.getContext('2d');x.globalCompositeOperation='source-over';
+ const gr=x.createLinearGradient(0,0,0,560);gr.addColorStop(0,'#ffffff');gr.addColorStop(1,'#dbe8ff');x.fillStyle=gr;x.fillRect(0,0,560,560);
+ x.fillStyle='rgba(170,200,255,.6)';for(let i=0;i<60;i++){x.beginPath();x.arc(Math.random()*560,Math.random()*560,4+Math.random()*10,0,7);x.fill()}
+ x.font='90px serif';x.textAlign='center';x.fillStyle='rgba(120,160,230,.55)';x.fillText('❄',280,300);c.style.opacity=1;c.style.pointerEvents='';show($('wpMore'),0)}
+INIT.wipe=()=>{wpOrder=shuffle(WORDS.map(w=>w.k));wpN=0;dots($('wpDots'),6,0);show($('wpDone'),0);wpReset()};
+(function(){const c=$('wpCan'),x=c.getContext('2d');function rub(e){const p=pt(e,c);x.globalCompositeOperation='destination-out';x.beginPath();x.arc(p.x,p.y,48,0,7);x.fill()}
+ c.onpointerdown=e=>{wpDrawing=true;rub(e)};c.onpointermove=e=>{if(wpDrawing)rub(e)};
+ c.onpointerup=c.onpointerleave=()=>{if(!wpDrawing)return;wpDrawing=false;const d=x.getImageData(0,0,560,560).data;let clear=0;for(let i=3;i<d.length;i+=40)if(d[i]<20)clear++;
+  if(clear/(d.length/40)>0.5&&c.style.opacity!=='0'){c.style.opacity=0;c.style.pointerEvents='none';dots($('wpDots'),6,wpN+1);if(wpN<5)show($('wpMore'),1);else show($('wpDone'),1)}}})();
+$('wpMore').onclick=()=>{wpN++;wpReset()};
+
+/* torch */
+const T_POS=[[240,640],[560,520],[880,700],[1180,560],[1420,700],[400,800]];let tFound=0,tCarrot=false,tMouse={x:-500,y:-500};
+function tDark(){const c=$('tDark'),x=c.getContext('2d');x.clearRect(0,0,1600,900);x.fillStyle='rgba(5,8,30,.93)';x.fillRect(0,0,1600,900);
+ x.globalCompositeOperation='destination-out';const g=x.createRadialGradient(tMouse.x,tMouse.y,60,tMouse.x,tMouse.y,170);g.addColorStop(0,'rgba(0,0,0,1)');g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(tMouse.x,tMouse.y,170,0,7);x.fill();x.globalCompositeOperation='source-over'}
+INIT.torch=()=>{tFound=0;tCarrot=false;const box=$('tItems');box.innerHTML='';dots($('tDots'),6,0);show($('tDone'),0);tMouse={x:-500,y:-500};tDark();
+ shuffle(T_POS).forEach((p,i)=>{const w=WORDS[i];const el=img(w.k,`position:absolute;left:${p[0]-70}px;top:${p[1]-70}px;width:140px;height:140px;object-fit:contain;cursor:pointer;z-index:5`);
+  el.onclick=()=>{if(el.dataset.f)return;el.dataset.f=1;el.classList.add('pop','glow');tFound++;dots($('tDots'),6,tFound);if(w.k==='carrot'){tCarrot=true}if(tCarrot)show($('tDone'),1)};box.appendChild(el)})};
+$('stage').addEventListener('pointermove',e=>{if(ORDER[cur]==='torch'){tMouse=pt(e);tDark()}});
+$('stage').addEventListener('pointerdown',e=>{if(ORDER[cur]==='torch'){tMouse=pt(e);tDark();const els=[...$('tItems').children];els.forEach(el=>{const r=el.getBoundingClientRect();if(e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom)el.click()})}});
+
+/* snowman builder: coordinates in base-image pixels (975x1508), box scale s */
+const SM_W=975,SM_H=1508,SMS=420/975;
+const PARTS={nose:{k:['sm_nose'],w:195,x:476,cy:365,ax:0,z:6},
+ hat:{k:['sm_tophat','sm_beanie','sm_elfhat','sm_bucket'],w:{sm_tophat:600,sm_beanie:580,sm_elfhat:640,sm_bucket:590},bottom:{sm_tophat:250,sm_beanie:275,sm_elfhat:262,sm_bucket:265},z:7},
+ scarf:{k:['sm_scarf_red','sm_scarf_blue','sm_scarf_green'],w:500,top:430,z:5},
+ buttons:{k:['sm_buttons_black','sm_buttons_red'],h:270,cx:486,top:930,z:6},
+ arm_l:{k:['sm_arm_left'],w:330,right:215,top:600,z:0},arm_r:{k:['sm_arm_right'],w:330,left:760,top:600,z:0}};
+const NAT={};
+function slotRect(type,k){const P=PARTS[type],n=NAT[k];const ar=n.h/n.w;let w,h,l,t;
+ if(type==='nose'){w=P.w;h=w*ar;l=P.x;t=P.cy-h/2}
+ else if(type==='hat'){w=P.w[k];h=w*ar;l=486-w/2;t=P.bottom[k]-h}
+ else if(type==='scarf'){w=P.w;h=w*ar;l=486-w/2;t=P.top}
+ else if(type==='buttons'){h=P.h;w=h/ar;l=P.cx-w/2;t=P.top}
+ else if(type==='arm_l'){w=P.w;h=w*ar;l=P.right-w;t=P.top}
+ else {w=P.w;h=w*ar;l=P.left;t=P.top}
+ return{l:l*SMS,t:t*SMS,w:w*SMS,h:h*SMS}}
+let SMPLACED={};
+function typeOf(k){return Object.keys(PARTS).find(t=>PARTS[t].k.includes(k))}
+INIT.builder=()=>{SMPLACED={};const box=$('smBox');box.innerHTML='';box.appendChild(img('snowman_base','position:absolute;left:0;top:0;width:100%;height:100%;z-index:2'));
+ show($('bDone'),0);$('bPresent').style.display='none';
+ const tray=$('smTray');tray.innerHTML='';const list=['sm_nose','sm_tophat','sm_beanie','sm_elfhat','sm_bucket','sm_scarf_red','sm_scarf_blue','sm_scarf_green','sm_buttons_black','sm_buttons_red','sm_arm_left','sm_arm_right'];
+ list.forEach((k,i)=>{const el=img(k,'',"drag");const col=i%4,row=Math.floor(i/4);const cx=30+col*135,cy=30+row*215;el.dataset.k=k;el.dataset.hx=cx;el.dataset.hy=cy;
+  el.onload=()=>{NAT[k]={w:el.naturalWidth,h:el.naturalHeight}};
+  el.style.cssText=`position:absolute;left:${cx}px;top:${cy}px;width:115px;height:150px;object-fit:contain;z-index:20`;tray.appendChild(el);bindDrag(el)})};
+function home(el){const tray=$('smTray');tray.appendChild(el);el.style.cssText=`position:absolute;left:${el.dataset.hx}px;top:${el.dataset.hy}px;width:115px;height:150px;object-fit:contain;z-index:20`}
+function place(el){const k=el.dataset.k,type=typeOf(k);if(!NAT[k])NAT[k]={w:el.naturalWidth,h:el.naturalHeight};
+ if(SMPLACED[type]&&SMPLACED[type]!==el)home(SMPLACED[type]);SMPLACED[type]=el;const r=slotRect(type,k);
+ $('smBox').appendChild(el);el.style.cssText=`position:absolute;left:${r.l}px;top:${r.t}px;width:${r.w}px;height:${r.h}px;z-index:${PARTS[type].z===0?1:PARTS[type].z}`;el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');
+ if(SMPLACED.nose&&Object.keys(SMPLACED).length>=3&&$('bPresent').style.display==='none'){$('bPresent').style.display='';$('bPresent').classList.add('pop');show($('bDone'),1)}}
+function bindDrag(el){let sx,sy,moved,st;el.onpointerdown=e=>{e.preventDefault();el.setPointerCapture(e.pointerId);moved=false;const p=pt(e);sx=p.x;sy=p.y;const r=el.getBoundingClientRect(),s=$('stage').getBoundingClientRect();
+  st={l:(r.left-s.left)/SC,t:(r.top-s.top)/SC,w:r.width/SC,h:r.height/SC};$('stage').appendChild(el);el.style.cssText=`position:absolute;left:${st.l}px;top:${st.t}px;width:${st.w}px;height:${st.h}px;object-fit:contain;z-index:50`};
+ el.onpointermove=e=>{if(!st)return;const p=pt(e);if(Math.abs(p.x-sx)+Math.abs(p.y-sy)>8)moved=true;el.style.left=(st.l+p.x-sx)+'px';el.style.top=(st.t+p.y-sy)+'px'};
+ el.onpointerup=e=>{if(!st)return;const p=pt(e);st=null;const b=$('smBox').getBoundingClientRect();
+  const inBox=e.clientX>b.left-60*SC&&e.clientX<b.right+60*SC&&e.clientY>b.top&&e.clientY<b.bottom;
+  if(!moved||inBox)place(el);else{const t=typeOf(el.dataset.k);if(SMPLACED[t]===el)delete SMPLACED[t];home(el)}}}
+
+/* catch */
+let cRun=false,cItems=[],cGot=0,cTgt='present',cX=800,cLast=0;
+const C_POOL=['star','present','carrot','snowman','snowflake','snowball','bauble'];
+INIT.catch=()=>{cGot=0;cItems.forEach(i=>i.el.remove());cItems=[];dots($('cDots'),8,0);show($('cDone'),0);cNewTarget();if(!cRun){cRun=true;requestAnimationFrame(cLoop)}};
+function cNewTarget(){cTgt=rnd(['star','present','carrot','snowman']);$('cTarget').src=U(cTgt)}
+$('stage').addEventListener('pointermove',e=>{if(ORDER[cur]==='catch'){cX=Math.max(110,Math.min(1490,pt(e).x))}});
+addEventListener('keydown',e=>{if(ORDER[cur]==='catch'){if(e.key==='ArrowLeft')cX=Math.max(110,cX-60);if(e.key==='ArrowRight')cX=Math.min(1490,cX+60)}});
+function cLoop(t){if(ORDER[cur]!=='catch'){cRun=false;return}const elf=$('cElf');elf.style.left=(cX-elf.offsetWidth/2)+'px';
+ if(cGot<8&&t-cLast>1000){cLast=t;const k=Math.random()<.45?cTgt:rnd(C_POOL);const el=img(k,'position:absolute;width:110px;height:110px;object-fit:contain;z-index:6');const it={el,k,x:120+Math.random()*1360,y:-120};el.style.left=it.x-55+'px';$('cField').appendChild(el);cItems.push(it)}
+ const ex=cX,sackY=900-300*0.52,sackL=ex-60,sackR=ex+120;
+ cItems=cItems.filter(it=>{it.y+=2.6;it.el.style.top=it.y-55+'px';
+  if(it.y>sackY-20&&it.y<sackY+40&&it.x>sackL&&it.x<sackR){it.el.remove();if(it.k===cTgt){cGot++;dots($('cDots'),8,cGot);const b=$('cTarget');b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop');if(cGot>=8){show($('cDone'),1)}else if(cGot%2===0)cNewTarget()}else{elf.classList.remove('shake');void elf.offsetWidth;elf.classList.add('shake')}return false}
+  if(it.y>960){it.el.remove();return false}return true});
+ requestAnimationFrame(cLoop)}
+
+/* draw */
+(function(){const c=$('dCan'),x=c.getContext('2d');let col='#e8403b',size=10,er=false,dn=false,lp;
+ const pal=$('dPal');['#e8403b','#2f9e57','#2c6bed','#ffc83d','#8a4fd8','#222222'].forEach(cl=>{const b=document.createElement('button');b.style.cssText=`width:70px;height:70px;border-radius:50%;border:6px solid #fff;background:${cl};cursor:pointer`;b.onclick=()=>{col=cl;er=false};pal.appendChild(b)});
+ [['🧽',()=>{er=true}],['🗑️',()=>x.clearRect(0,0,840,600)]].forEach(([t,f])=>{const b=document.createElement('button');b.textContent=t;b.style.cssText='width:70px;height:70px;border-radius:50%;border:0;background:#fff;font-size:34px;cursor:pointer';b.onclick=f;pal.appendChild(b)});
+ function p(e){const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*840,y:(e.clientY-r.top)/r.height*600}}
+ c.onpointerdown=e=>{dn=true;lp=p(e);c.setPointerCapture(e.pointerId)};c.onpointerup=()=>dn=false;
+ c.onpointermove=e=>{if(!dn)return;const q=p(e);x.globalCompositeOperation=er?'destination-out':'source-over';x.strokeStyle=col;x.lineWidth=er?40:size;x.lineCap='round';x.beginPath();x.moveTo(lp.x,lp.y);x.lineTo(q.x,q.y);x.stroke();lp=q};
+ let who=0;$('dWho').onclick=()=>{who=1-who;$('dWho').textContent=who?'✏️ Student':'✏️ Teacher';x.clearRect(0,0,840,600)};
+ const sec=$('dSecret');const showSec=v=>{if(v)$('dSecretImg').src=U(rnd(WORDS).k);sec.style.display=v?'':'none'};
+ $('dWord').onpointerdown=()=>showSec(1);$('dWord').onpointerup=$('dWord').onpointerleave=()=>showSec(0);})();
+
+/* sleigh */
+let slStep=0,slOrder=[];
+INIT.sleigh=()=>{slStep=0;slOrder=shuffle(WORDS.map(w=>w.k).concat(['star']));$('slGroup').style.left='40px';$('slImg').src=U(slOrder[0]);dots($('slDots'),7,0);
+ $('slSanta').style.display='none';$('slPresent').style.display='none';$('slBub').style.display='none';show($('slDone'),0);show($('slPush'),1);$('slCard').style.display=''};
+$('slPush').onclick=()=>{slStep++;dots($('slDots'),7,slStep);$('slGroup').style.left=(40+slStep*130)+'px';
+ if(slStep>=7){show($('slPush'),0);$('slCard').style.display='none';setTimeout(()=>{$('slSanta').style.display='';$('slSanta').classList.add('pop');$('slBub').style.display='';
+  setTimeout(()=>{$('slPresent').style.display='';$('slPresent').classList.add('pop');show($('slDone'),1)},800)},1000)}
+ else{$('slImg').src=U(slOrder[slStep]);const c=$('slCard');c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop')}};
+
+/* pairs */
+let pOpen=[],pLock=false,pDone=0;
+INIT.pairs=()=>{const box=$('pBox');box.innerHTML='';pOpen=[];pLock=false;pDone=0;show($('pDone'),0);$('pHero').style.display='none';
+ const cols=['star_pink','star_blue','star_green','star_purple','star_silver'];const deck=shuffle(cols.concat(cols).concat(['star']));
+ deck.forEach((k,i)=>{const r=Math.floor(i/6),c=i%6;const n=r===0?6:5;const left=(1600-n*200)/2+c*200+15;const el=document.createElement('div');el.className='mcard';el.style.left=left+'px';el.style.top=(170+r*250)+'px';el.dataset.k=k;
+  el.innerHTML='<div class="in"><div class="b">❄️</div><div class="f"></div></div>';el.querySelector('.f').appendChild(img(k));
+  el.onclick=()=>{if(pLock||el.classList.contains('open')||el.classList.contains('done'))return;el.classList.add('open');pOpen.push(el);
+   if(k==='star'&&pDone<5){setTimeout(()=>{if(pDone<5){el.classList.remove('open');pOpen=pOpen.filter(o=>o!==el)}},900);return}
+   if(pOpen.length===2){pLock=true;const[a,b]=pOpen;if(a.dataset.k===b.dataset.k){setTimeout(()=>{a.classList.add('done');b.classList.add('done');pOpen=[];pLock=false;pDone++;if(pDone===5)pWin()},500)}
+    else setTimeout(()=>{a.classList.remove('open');b.classList.remove('open');pOpen=[];pLock=false},900)}};box.appendChild(el)})};
+function pWin(){const last=[...$('pBox').children].find(e=>e.dataset.k==='star');last.classList.add('open');setTimeout(()=>{last.style.opacity=0;$('pHero').style.display='';$('pHero').classList.add('pop');show($('pDone'),1)},700)}
+
+/* finale */
+const F_SLOTS=[{k:'present',x:110,y:600,w:150},{k:'present_blue',x:280,y:620,w:140},{k:'present_green',x:190,y:690,w:130},{k:'star_face',x:178,y:-6,w:120}];
+let fPlaced=0;
+INIT.finale=()=>{fPlaced=0;$('fTray').style.display='';const box=$('fItems');box.innerHTML='';$('fLights').innerHTML='';$('fSnow').style.display='none';$('fBub').textContent='Put the presents under the tree! 🎁';show($('fDone'),0);
+ F_SLOTS.forEach((s,i)=>{const el=img(s.k,'','drag');el.style.cssText=`position:absolute;left:${650+i*100}px;top:${650}px;width:${s.k==='star_face'?110:100}px;z-index:20;touch-action:none;cursor:grab`;box.appendChild(el);
+  let st,sx,sy,mv;el.onpointerdown=e=>{e.preventDefault();el.setPointerCapture(e.pointerId);const p=pt(e);sx=p.x;sy=p.y;mv=false;st={l:parseFloat(el.style.left),t:parseFloat(el.style.top)}};
+  el.onpointermove=e=>{if(!st)return;const p=pt(e);if(Math.abs(p.x-sx)+Math.abs(p.y-sy)>8)mv=true;el.style.left=st.l+p.x-sx+'px';el.style.top=st.t+p.y-sy+'px'};
+  el.onpointerup=e=>{if(!st)return;st=null;const p=pt(e);const ok=!mv||(s.k==='star_face'?(p.y<260&&p.x<520):(p.x<560&&p.y>420));
+   if(ok&&!el.dataset.done){el.dataset.done=1;el.style.left=s.x+'px';el.style.top=s.y+'px';el.style.width=s.w+'px';el.style.cursor='default';el.style.pointerEvents='none';el.classList.add('pop');if(s.k==='star_face')el.classList.add('glow');fPlaced++;if(fPlaced===4)fWin()}
+   else if(!el.dataset.done){el.style.left=(650+i*100)+'px';el.style.top='650px'}}})};
+function fWin(){$('fTray').style.display='none';$('fBub').textContent='🎄 Happy New Year! 🎄';const L=$('fLights');const cols=['#ff4d4d','#ffd84d','#4dd2ff','#7dff6b','#ff7ae6'];
+ for(let i=0;i<46;i++){const t=Math.random(),y=70+t*500,half=20+t*215,x=240+(Math.random()*2-1)*half*0.85;const d=document.createElement('div');d.className='light';d.style.cssText=`left:${x}px;top:${y}px;background:${cols[i%5]};box-shadow:0 0 14px ${cols[i%5]};animation-delay:${Math.random()}s;z-index:3`;L.appendChild(d)}
+ const S=$('fSnow');S.innerHTML='';for(let i=0;i<40;i++){const f=document.createElement('div');f.className='flake';f.textContent='❄';f.style.left=Math.random()*1600+'px';f.style.animationDuration=(5+Math.random()*6)+'s';f.style.animationDelay=(-Math.random()*8)+'s';S.appendChild(f)}S.style.display='';show($('fDone'),1)}
+
+/* certificate */
+function certDraw(){const c=$('certCan'),x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,1448,1086);
+ const ld=k=>new Promise(r=>{const i=new Image();i.crossOrigin='anonymous';i.onload=()=>r(i);i.onerror=()=>r(null);i.src=U(k)});
+ Promise.all([ld('frame'),ld('dragon_winter'),ld('star_face')]).then(([f,d,s])=>{x.fillStyle='#fff';x.fillRect(0,0,1448,1086);if(f)x.drawImage(f,0,0,1448,1086);
+  if(d)x.drawImage(d,1060,470,d.width*440/d.height,440);if(s)x.drawImage(s,240,230,200,200*s.height/s.width);
+  x.fillStyle='#2b1d55';x.textAlign='center';x.font='800 110px "Baloo 2",sans-serif';x.fillText('Happy New Year!',724,500);
+  x.font='800 96px "Baloo 2",sans-serif';x.fillStyle='#e8403b';x.fillText($('cName').value||'',640,700);
+  x.font='600 52px "Baloo 2",sans-serif';x.fillStyle='#2b1d55';x.fillText('You found the star! ⭐',640,840)})}
+INIT.cert=()=>certDraw();$('cName').oninput=certDraw;
+$('certSave').onclick=()=>{const a=document.createElement('a');a.download='happy_new_year.png';a.href=$('certCan').toDataURL('image/png');a.click()};
+
+/* differences: items in 1600x900 room space, shown at half size */
+const DF=[{k:'star_face',x:178,y:-6,w:120,miss:1},{k:'present',x:300,y:610,w:150,miss:1},{k:'snowman',x:1040,y:520,w:130,miss:0},{k:'carrot',x:720,y:690,w:130,miss:1},{k:'elf',x:1210,y:470,w:120,miss:1},{k:'bauble_gold',x:1400,y:210,w:70,miss:0}];
+let dfFound=0;
+INIT.diff=()=>{dfFound=0;dots($('dfDots'),4,0);['dfL','dfR'].forEach((id,side)=>{const b=$(id);b.innerHTML='';b.appendChild(img('room','position:absolute;left:0;top:0;width:100%;height:100%'));
+  DF.forEach(d=>{if(side===1&&d.miss)return;b.appendChild(img(d.k,`position:absolute;left:${d.x/2}px;top:${d.y/2}px;width:${d.w/2}px`))});
+  b.onclick=e=>{const p=pt(e,b);const hit=DF.find(d=>d.miss&&!d.found&&p.x>d.x/2-30&&p.x<(d.x+d.w)/2+30&&p.y>d.y/2-30&&p.y<(d.y+d.w)/2+40);if(!hit)return;hit.found=1;dfFound++;dots($('dfDots'),4,dfFound);
+   ['dfL','dfR'].forEach(id2=>{const m=document.createElement('div');m.className='mark pop';m.style.left=(hit.x+hit.w/2)/2-55+'px';m.style.top=(hit.y+hit.w/2)/2-55+'px';$(id2).appendChild(m)})}});
+ DF.forEach(d=>delete d.found)};
+
+/* snowballs */
+const B_POS=[[180,560],[480,640],[800,560],[1100,650],[1380,570],[640,760]];let bGot=0,bTgt,bTimer;
+INIT.balls=()=>{bGot=0;dots($('bDots'),6,0);const f=$('bField');f.innerHTML='';B_POS.forEach((p,i)=>{const w=document.createElement('div');w.style.cssText=`position:absolute;left:${p[0]-120}px;top:${p[1]-150}px;width:240px;height:240px;overflow:hidden`;w.dataset.i=i;
+  const it=img('star','position:absolute;left:50px;top:240px;width:140px;height:140px;object-fit:contain;transition:top .35s;cursor:pointer');w.appendChild(it);f.appendChild(w);
+  f.appendChild(img('snowdrift',`position:absolute;left:${p[0]-150}px;top:${p[1]+30}px;width:300px;z-index:3;pointer-events:none`));
+  it.onclick=()=>{if(it.dataset.k===bTgt&&it.style.top==='60px'){bThrow(p,it)}else{it.classList.remove('shake');void it.offsetWidth;it.classList.add('shake')}}});
+ bNew();clearInterval(bTimer);bTimer=setInterval(()=>{if(ORDER[cur]!=='balls'){clearInterval(bTimer);return}bPop()},1300)};
+function bNew(){bTgt=rnd(WORDS).k;$('bTarget').src=U(bTgt)}
+function bPop(){const ws=[...$('bField').children].filter(e=>e.dataset.i);ws.forEach(w=>{const it=w.firstChild;if(it.style.top==='60px'&&Math.random()<.5)it.style.top='240px'});
+ const free=ws.filter(w=>w.firstChild.style.top!=='60px');if(!free.length)return;const w=rnd(free),it=w.firstChild;const k=Math.random()<.5?bTgt:rnd(WORDS).k;it.dataset.k=k;it.src=U(k);it.style.top='60px'}
+function bThrow(p,it){const b=img('snowball','position:absolute;left:770px;top:880px;width:80px;z-index:40;transition:all .4s ease-out');$('bField').appendChild(b);requestAnimationFrame(()=>{b.style.left=p[0]-40+'px';b.style.top=p[1]-80+'px'});
+ setTimeout(()=>{b.remove();it.style.top='240px';bGot++;dots($('bDots'),6,bGot);if(bGot<6)bNew()},420)}
+
+/* magic baubles */
+const MB_POS=[[230,140],[150,290],[310,300],[90,440],[240,450],[390,450]];let mbOpen=0;
+INIT.baubles=()=>{mbOpen=0;dots($('mbDots'),6,0);$('mbCard').style.display='none';const box=$('mbBox');box.innerHTML='';const ks=shuffle(WORDS.map(w=>w.k));
+ ['bauble','bauble_blue','bauble_green','bauble_purple','bauble_gold','bauble_pink'].forEach((b,i)=>{const el=img(b,`position:absolute;left:${MB_POS[i][0]}px;top:${MB_POS[i][1]}px;width:95px;cursor:pointer;z-index:5;filter:drop-shadow(0 0 10px #fff)`);
+  el.onclick=()=>{if(el.dataset.o)return;el.dataset.o=1;el.style.opacity=.35;mbOpen++;dots($('mbDots'),6,mbOpen);$('mbImg').src=U(ks[i]);const c=$('mbCard');c.style.display='';c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop')};box.appendChild(el)})};
+$('mbCard').onclick=()=>$('mbCard').style.display='none';
+
+/* fog */
+let fgOrder=[],fgN=0;function fgShow(){const i=$('fgImg');i.style.transition='none';i.style.filter='blur(40px)';i.src=U(fgOrder[fgN%6]);void i.offsetWidth;i.style.transition='filter 9s linear';requestAnimationFrame(()=>i.style.filter='blur(0px)')}
+INIT.fog=()=>{fgOrder=shuffle(WORDS.map(w=>w.k));fgN=0;fgShow()};$('fgNext').onclick=()=>{fgN++;fgShow()};
+</script>
+</body>
+</html>

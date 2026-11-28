@@ -900,7 +900,7 @@ function openBingo(){var ws=bingoWords();
   if(ws.length<8){var k=8-ws.length;modal('<div class="mcard"><h3>🎲 Christmas Bingo</h3><p class="hint" style="margin:0">Bingo собирается из твоих слов. Сейчас их '+ws.length+', а для карточки нужно 8. Открой ещё '+k+' '+(k===1?'окошко':k<5?'окошка':'окошек')+' — и игра готова!</p><div class="btns"><button type="button" class="btn pink" data-close>Хорошо</button></div></div>');return;}
   var d=btoa(unescape(encodeURIComponent(JSON.stringify({name:'Маша',words:ws}))));
   modal('<div class="mcard wide bingom"><h3>🎲 Christmas Bingo из твоих слов</h3><iframe class="bingof" src="bingo.html#d='+encodeURIComponent(d)+'" title="Christmas Bingo"></iframe>'+
-    '<p class="hint" style="margin:0">В макете — страница для печати. На платформе здесь скачается PDF: две страницы карточек и лист ведущего.</p><div class="btns"><button type="button" class="btn ghost" data-close>Закрыть</button></div></div>');}
+    '<p class="hint" style="margin:0">В макете — страница для печати. На платформе здесь скачается PDF: четыре листа с карточками и лист ведущего.</p><div class="btns"><button type="button" class="btn ghost" data-close>Закрыть</button></div></div>');}
 function giftModal(g){sfx('gift');
   var m=modal('<div class="mcard rev g"><span class="rib">Подарок от школы</span><div class="art">'+pic('img/gift3.webp').replace('class="pic"','class="pic giftbox"')+'</div><h3 style="color:#fff">'+g.ic+' '+esc(g.t)+'</h3><div class="trn">'+esc(g.s)+'</div>'+
     (g.promo?'<div class="promo">'+g.promo+'</div><div class="hint">Покажи промокод маме или папе — он действует на первый месяц подписки WowSpace.</div>':'<div class="hint">Подарок лежит в блоке «Мои подарки» под календарём.</div>')+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8"><title>Чек-лист — Wow Dragon 4–6</title>
+<style>
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f4effb;color:#2a1a3a;margin:0;font-size:14px}
+header{position:sticky;top:0;background:#4f2a9a;color:#fff;padding:10px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;z-index:5}
+header input,header select{padding:5px 8px;border-radius:6px;border:0;font-size:14px}
+main{padding:14px 18px;max-width:1100px;margin:0 auto}
+.now{background:#fff;border:2px solid #ffc93c;border-radius:12px;padding:10px 14px;margin-bottom:14px}
+.now h3{margin:0 0 6px;font-size:15px}
+.oral{display:flex;align-items:center;gap:8px;margin:6px 0;flex-wrap:wrap}
+.oral .lab{flex:1;min-width:280px}
+.oral .exp{color:#1f7a3a;font-style:italic}
+.oral .tp{color:#7b4bd6;font-size:12px}
+.mk button{border:1px solid #bbb;background:#fafafa;border-radius:6px;padding:3px 10px;font-weight:700;cursor:pointer;margin-left:3px}
+.mk button.on2{background:#3fbf6a;color:#fff;border-color:#3fbf6a}.mk button.on1{background:#ffc93c;border-color:#ffc93c}.mk button.on0{background:#e25555;color:#fff;border-color:#e25555}
+.mk button.f2{background:#c9efd5;border-color:#3fbf6a}.mk button.f1{background:#fde7b8;border-color:#ffc93c}.mk button.f0{background:#f7c9c9;border-color:#e25555}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px}
+table{border-collapse:collapse;width:100%;background:#fff;table-layout:fixed}
+th,td{border:1px solid #d8cbee;padding:4px 8px;vertical-align:middle}
+th{background:#7b4bd6;color:#fff;text-align:left}th:last-child{width:190px}
+tr.cur td{background:#fff3cf}
+.auto{font-size:11px;color:#8a7a99;margin-left:4px}
+button.go{margin-left:6px;border:1px solid #e0d3f3;background:#f8f4ff;color:#6a4aa6;border-radius:10px;padding:1px 8px;font-size:12px;cursor:pointer}
+.sum{font-weight:700}.pass{color:#1f7a3a}.fail{color:#b03030}
+h2{margin:14px 0 4px;color:#4f2a9a;font-size:17px}
+.legend{background:#fffaf0;border-left:4px solid #ffc93c;padding:8px 12px;margin:8px 0;font-size:13px}
+textarea{width:100%;height:170px;font-family:Consolas,monospace;font-size:13px}
+#cm{height:60px;font-family:inherit;font-size:14px}
+.act button{background:#7b4bd6;color:#fff;border:0;border-radius:8px;padding:7px 14px;font-weight:700;cursor:pointer;margin-right:8px}
+.act button.gray{background:#888}
+</style></head><body>
+<header>
+  <b>✅ Чек-лист · Wow Dragon 4–6</b>
+  <label>Имя ученика <input id="nm" placeholder="Имя по-русски"></label>
+  <label>Пол <select id="gd"><option value="m">мальчик</option><option value="f">девочка</option></select></label>
+  <label>Возраст <input id="ag" size="3"></label>
+</header>
+<main>
+  <div class="now" id="now"></div>
+  <div class="legend"><b>0 · 1 · 2.</b> 2 — сам и верно (словом или фразой); 1 — после подсказки, с ошибкой, исправил себя; 0 — не смог и с подсказкой, ответил по-русски, не понял.
+  Устные ответы оцениваете вы — в рамке «Сейчас на экране». Еду в игре «Покорми бабушку» урок считает сам. <b>Бледная</b> кнопка в таблице — посчитанный балл, <b>яркая</b> — ваш; нажатие в таблице заменяет посчитанный, повторное — снимает.
+  Метка 🔎 у темы открывает в уроке место, где эту тему проверяют. Модуль пройден, если в нём <b>4 из 6</b> или больше; отчёт рекомендует первый непройденный модуль.</div>
+  <div class="grid" id="tables"></div>
+  <h2 id="repH">Отчёт</h2><div class="legend">Отчёт собирается сам. Его можно править прямо здесь — удалить лишнее, дописать своё. После правки он больше не обновляется сам; «↺ Собрать отчёт заново» вернёт автоматический.</div>
+  <label><b>Комментарий преподавателя</b> (попадёт в отчёт)<textarea id="cm" placeholder="Например: стеснялся, но всё понимал; любит животных."></textarea></label>
+  <textarea id="rep"></textarea>
+  <div class="act"><button id="cp">📋 Скопировать отчёт</button><button class="gray" id="rb">↺ Собрать отчёт заново</button><button class="gray" id="rs">Новый ученик (сбросить всё)</button></div>
+</main>
+<script>
+const A = window.APP;
+function $(s){return document.querySelector(s)}
+const st=A.S.student; $('#nm').value=st.name; $('#gd').value=st.gender; $('#ag').value=st.age;
+$('#nm').oninput=e=>{st.name=e.target.value;A.save();render()}; $('#gd').onchange=e=>{st.gender=e.target.value;A.save();render()}; $('#ag').oninput=e=>{st.age=e.target.value;A.save();render()};
+$('#cm').value=A.S.comment||'';$('#cm').oninput=e=>{A.S.comment=e.target.value;A.save();if(A.S.repEdit==null)$('#rep').value=A.report()};
+$('#rep').oninput=e=>{A.S.repEdit=e.target.value;A.save()};
+$('#rb').onclick=()=>{if(A.S.repEdit==null||confirm('Ваши правки в отчёте пропадут. Собрать заново?')){A.S.repEdit=null;A.save();$('#rep').value=A.report()}};
+window.goReport=()=>{$('#repH').scrollIntoView({behavior:'smooth'});$('#cm').focus()};
+$('#cp').onclick=()=>{const ok=()=>{$('#cp').textContent='✔ Скопировано';setTimeout(()=>$('#cp').textContent='📋 Скопировать отчёт',1500)};const old=()=>{const r=$('#rep');r.focus();r.select();try{document.execCommand('copy');ok()}catch(e){alert('Не получилось скопировать — выделите текст отчёта и нажмите Ctrl+C')}};if(navigator.clipboard)navigator.clipboard.writeText($('#rep').value).then(ok,old);else old()};
+$('#rs').onclick=()=>{if(confirm('Сбросить все баллы и начать с новым учеником? Урок начнётся сначала, это окно закроется — откройте чек-лист снова кнопкой ✅.'))A.reset()};
+function mk(cur,fn,faint){const d=document.createElement('span');d.className='mk';[2,1,0].forEach(v=>{const b=document.createElement('button');b.textContent=v===2?'✓ 2':v===1?'~ 1':'✗ 0';if(cur===v)b.className='on'+v;else if(faint===v)b.className='f'+v;b.onclick=()=>fn(cur===v?null:v);d.append(b)});return d}
+function dyn(t){const S=A.S;return t.replace('{teddy}',S.teddyAt||'…').replace('{missing}',(S.missing||'…').replace('obj/','').replace('schoolbook','book').replace('tshirt','T-shirt')).replace('{says}',S.says||'…').replace('{stars}',S.stars)}
+function render(){
+  const S=A.S,D=A.D,s=A.screen();
+  const ps=(s&&D.prompts[s.id])||[];
+  const now=$('#now');now.innerHTML='';const h=document.createElement('h3');h.textContent='Сейчас на экране: '+(s?(D.screen_ru[s.id]||s.id):'—');now.append(h);
+  const curT=new Set();
+  ps.forEach((o,k)=>{const key=s.id+':'+k;(o.topics||[]).forEach(t=>curT.add(t));const r=document.createElement('div');r.className='oral';const l=document.createElement('div');l.className='lab';l.innerHTML=dyn(o.q)+(o.a?' <span class="exp">→ '+dyn(o.a)+'</span>':'')+((o.topics||[]).length?' <span class="tp">('+o.topics.map(t=>D.topic_ru[t]).join(', ')+')</span>':'');r.append(l);
+    if((o.topics||[]).length){const cur=S.oral[key]?S.oral[key].v:null;r.append(mk(cur,v=>{A.oralMark(key,o.topics,v);render()}))}else{const i=document.createElement('i');i.textContent='без балла';r.append(i)}now.append(r)});
+  if(s&&D.note[s.id]){const p=document.createElement('div');p.style.color='#6a5a80';p.textContent=D.note[s.id];now.append(p)}
+  const box=$('#tables');box.innerHTML='';
+  D.checklist.forEach(m=>{const t=document.createElement('table');const th=document.createElement('tr');th.innerHTML='<th>'+m.title+'</th><th>балл</th>';t.append(th);let sum=0,filled=0;
+    m.topics.forEach(([id,name])=>{const sc=A.topicScore(id);if(sc.v!==null){sum+=sc.v;filled++}
+      const tr=document.createElement('tr');if(curT.has(id))tr.className='cur';const td=document.createElement('td');td.textContent=name;
+      A.where(id).forEach(w=>{const b=document.createElement('button');b.className='go';b.title='Открыть это место в уроке';b.textContent='🔎 '+w.name;b.onclick=()=>A.go(w.id);td.append(b)});
+      const td2=document.createElement('td');td2.append(mk(S.override[id]!==undefined?S.override[id]:null,v=>A.setOverride(id,v),sc.src==='auto'?sc.v:null));const a=document.createElement('span');a.className='auto';a.textContent=sc.src==='auto'?sc.from.join(' + '):'';td2.append(a);
+      tr.append(td,td2);t.append(tr)});
+    const tf=document.createElement('tr');tf.innerHTML='<td class="sum">Сумма модуля</td><td class="sum '+(filled===3?(sum>=D.pass?'pass':'fail'):'')+'">'+(filled?sum+' из 6 '+(sum>=D.pass?'✔':'')+(filled<3?' <span class="auto">(оценено '+filled+' из 3)</span>':''):'—')+'</td>';t.append(tf);box.append(t)});
+  if(A.S.repEdit==null)$('#rep').value=A.report();else if(document.activeElement!==$('#rep'))$('#rep').value=A.S.repEdit;
+  const sid=s?s.id:'';if(sid!==window._last){window._last=sid;const r=box.querySelector('tr.cur');if(r&&document.activeElement!==$('#cm'))r.scrollIntoView({block:'center',behavior:'smooth'})}
+}
+window.render=render;render();
+</script></body></html>

@@ -20,6 +20,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui
 .hd h1{font-family:Pacifico,cursive;font-weight:400;color:var(--red);font-size:40px;margin:0;line-height:1.1}
 .hd p{margin:2px 0 0;color:var(--mute);font-weight:700}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px}
+.cards.one{grid-template-columns:minmax(0,560px);justify-content:center}
+.cards.one .cell b{font-size:15px}.cards.one .who{font-size:18px}
 .card{border:3px solid var(--green);border-radius:18px;padding:10px 10px 12px;background:#fff}
 .card .who{font:900 15px Montserrat,sans-serif;color:var(--green);text-align:center;margin-bottom:6px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
@@ -30,21 +32,29 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui
 .rules{margin-top:20px;padding:14px 18px;border-radius:14px;background:#F4FAF6;border:2px dashed var(--green)}
 .rules h2{font:900 18px Montserrat,sans-serif;margin:0 0 6px;color:var(--green)}
 .rules ol{margin:0;padding-left:20px}.rules li{margin:3px 0}
-.calls{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:16px;border-top:2px dashed #C9CED8;border-left:2px dashed #C9CED8}
+.calls{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:16px;border-top:2px dashed #C9CED8;border-left:2px dashed #C9CED8}
 .call{border-right:2px dashed #C9CED8;border-bottom:2px dashed #C9CED8;padding:8px 4px;text-align:center}
 .call img{width:58px;height:58px;object-fit:contain}
 .call b{display:block;font:800 13px Montserrat,sans-serif}.call small{color:var(--mute);font-size:12px}
+
+/* логотип школы на распечатках (Анна, 27.11.2026): надпись wowSpeak с розовой «o», как на платформе */
+.wlogo{height:44px;width:auto;display:block} /* логотип с сайта школы, прислала Анна 27.11.2026 */
+.hdl{position:absolute;left:30px;top:56px;z-index:2}
 .cut{color:var(--mute);font-size:13px;margin-top:10px;text-align:center}
 .note{width:min(794px,100% - 32px);margin:0 auto 10px;color:var(--mute);font-size:14px}
 :root[data-theme="dark"] .note{color:#B9C3E6}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .note{color:#B9C3E6}}
-@media (max-width:620px){.cards{grid-template-columns:1fr}.calls{grid-template-columns:repeat(3,1fr)}.sheet{padding:22px 14px}.hd h1{font-size:32px}}
+@media (max-width:620px){.hdl{position:static;text-align:center;margin-top:52px}.hd{margin-top:6px}.cards{grid-template-columns:1fr}.calls{grid-template-columns:repeat(3,1fr)}.sheet{padding:22px 14px}.hd h1{font-size:32px}}
 @media print{
   @page{size:A4;margin:10mm}
   body{background:#fff}.bar,.note{display:none}
   .sheet{width:auto;margin:0;box-shadow:none;border-radius:0;padding:0;page-break-after:always;overflow:visible}
   .garl{position:static;height:40px;background-size:auto 40px}
   .hd{margin-top:6px}.cards{gap:12mm 8mm}
+  .hdl{left:0;top:40px}.wlogo{height:15mm}
+  .rules{font-size:15px;line-height:1.6;margin-top:10mm}
+  .calls{margin-top:4mm}.call{padding:2mm 1mm;height:31mm;display:flex;flex-direction:column;align-items:center;justify-content:center}.call img{width:15mm;height:15mm}.call b{font-size:11px;line-height:1.15}.call small{font-size:9.5px;line-height:1.1}
+  .cards.one{grid-template-columns:172mm;margin-top:8mm}.cards.one .cell b{font-size:17px}.cards.one .grid{gap:3mm}
   .cell b{font-size:11px}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
@@ -70,22 +80,24 @@ var cards=[];for(var k=0;k<4;k++){var r=rnd(seed0+k*977+1);var pick=shuf(W,r).sl
 var PL=['Игрок 1','Игрок 2','Игрок 3','Игрок 4'];
 function cardHtml(c,k){return '<div class="card"><div class="who">'+PL[k]+'</div><div class="grid">'+c.map(function(x){
   return x?'<div class="cell"><img src="'+esc(x.img)+'" alt=""><b>'+esc(x.w)+'</b></div>':'<div class="cell free"><span class="fr">★</span><b>FREE</b></div>';}).join('')+'</div></div>';}
-function head(sub){return '<div class="garl"></div><div class="hd"><h1>Christmas Bingo</h1><p>'+sub+'</p></div>';}
+function head(sub){return '<div class="garl"></div><div class="hdl"><img class="wlogo" src="img/logo_wowspeak.png" alt="WowSpeak"></div><div class="hd"><h1>Christmas Bingo</h1><p>'+sub+'</p></div>';}
 var by=name?'Слова из адвент-календаря · '+esc(name):'Слова из адвент-календаря';
-var h='<section class="sheet">'+head(by)+'<div class="cards">'+cardHtml(cards[0],0)+cardHtml(cards[1],1)+'</div></section>'+
-  '<section class="sheet">'+head(by)+'<div class="cards">'+cardHtml(cards[2],2)+cardHtml(cards[3],3)+'</div></section>'+
-  '<section class="sheet">'+head('Лист ведущего')+
+/* 27.11 Анна попросила документом — карточка на весь лист A4: крупно, удобно закрывать клетки */
+var h=cards.map(function(c,k){return '<section class="sheet">'+head(by)+'<div class="cards one">'+cardHtml(c,k)+'</div></section>';}).join('')+
+  '<section class="sheet">'+head('Лист ведущего · правила')+
   '<div class="rules"><h2>Как играть</h2><ol>'+
   '<li>Каждый берёт карточку. Клетка <b>FREE</b> в центре уже закрыта.</li>'+
   '<li>Ведущий разрезает карточки ниже, кладёт в шапку и вытягивает по одной. Называет слово <b>по-английски</b> и не показывает картинку.</li>'+
   '<li>У кого на карточке это слово — закрывает клетку пуговицей, монеткой или конфетой.</li>'+
   '<li>Закрыл ряд — по горизонтали, вертикали или диагонали — кричи <b>«Bingo!»</b> и прочитай свои слова вслух.</li>'+
   '<li>Сыграть ещё раз: играем до полной карточки.</li></ol></div>'+
+  '</section>'+
+  '<section class="sheet">'+head('Лист ведущего · карточки для вырезания')+
   '<div class="calls">'+W.map(function(x){return '<div class="call"><img src="'+esc(x.img)+'" alt=""><b>'+esc(x.w)+'</b><small>'+esc(x.ru)+'</small></div>';}).join('')+'</div>'+
   '<div class="cut">✂ Разрежь по пунктиру</div></section>';
 document.getElementById('out').innerHTML=h;
 document.getElementById('sub').textContent=W.length+' слов · 4 карточки · лист ведущего';
-document.getElementById('note').textContent='Три листа A4: две страницы с карточками игроков и лист ведущего. Распечатай и играй всей семьёй.';
+document.getElementById('note').textContent='Листы A4: по карточке игрока на листе и лист ведущего. Распечатай и играй всей семьёй.';
 document.getElementById('pr').onclick=function(){try{window.print();}catch(e){}};
 })();
 </script>

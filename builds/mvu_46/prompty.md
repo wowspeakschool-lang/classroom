@@ -147,3 +147,37 @@ The attached picture is our hero, the purple dragon. Draw EXACTLY this character
 ```
 Two pictures are attached: the purple dragon (use it as the STYLE reference) and the old dragon granny (yellow headscarf, red coat, walking stick) — draw EXACTLY this granny, the same character, colours, face and clothes, in the same art style. Do not redesign her and do not draw the young dragon. A sheet of 5 poses, all sitting (as if on a bench, but draw no bench), all the same size. Row 1, left to right: sad and hungry, holding her tummy with one hand, a small tear in the corner of her eye; exactly the same pose, but the tear has rolled down her cheek; happily eating with a fork, eyes closed with pleasure. Row 2, left to right: frowning and turning her head away with a 'yuck' face; smiling and holding out a green key with both hands. TRANSPARENT BACKGROUND: output a PNG with a fully transparent background — no background colour, no white, no floor, no ground, no shadow under the objects. Wide empty gaps between the items; every item complete, centred in its own cell and not touching any other item or the edge. Style: the same as the attached picture — cute 2D cartoon illustration for children aged 4–6, soft rounded shapes, clean smooth dark outlines, bright cheerful flat colours with gentle soft shading, friendly and warm. No text, no letters, no numbers, no logos, no watermark.
 ```
+
+## Доборные (27.11.2026)
+
+### 24 · бабушка ест: пицца, брокколи, мороженое, рыба → `granny_eat_1` · приложить: дракоша + бабушка
+
+```
+Two pictures are attached: the purple dragon (use it as the STYLE reference) and the old dragon granny (yellow headscarf, red coat, walking stick) — draw EXACTLY this granny, the same character, colours, face and clothes, in the same art style. Do not redesign her and do not draw the young dragon. A sheet of 4 poses in a 2×2 grid, all the same size, sitting (as if on a bench, but draw no bench), the same body position in every pose — only the food in her hand changes. In every pose she is happily eating, eyes closed with pleasure, the food clearly visible right at her mouth. Row 1, left to right: biting a slice of pizza; eating a piece of broccoli. Row 2, left to right: licking a pink ice cream cone; eating a fish from a fork. TRANSPARENT BACKGROUND: output a PNG with a fully transparent background — no background colour, no white, no floor, no ground, no shadow under the objects. Wide empty gaps between the items; every item complete, centred in its own cell and not touching any other item or the edge. Style: the same as the attached picture — cute 2D cartoon illustration for children aged 4–6, soft rounded shapes, clean smooth dark outlines, bright cheerful flat colours with gentle soft shading, friendly and warm. No text, no letters, no numbers, no logos, no watermark.
+```
+
+### 25 · бабушка ест: торт, яблоко, банан, морковка → `granny_eat_2` · приложить: дракоша + бабушка
+
+```
+Two pictures are attached: the purple dragon (use it as the STYLE reference) and the old dragon granny (yellow headscarf, red coat, walking stick) — draw EXACTLY this granny, the same character, colours, face and clothes, in the same art style. Do not redesign her and do not draw the young dragon. A sheet of 4 poses in a 2×2 grid, all the same size, sitting (as if on a bench, but draw no bench), the same body position in every pose — only the food in her hand changes. In every pose she is happily eating, eyes closed with pleasure, the food clearly visible right at her mouth. Row 1, left to right: eating a slice of birthday cake from a small plate; biting a red apple. Row 2, left to right: eating a peeled yellow banana; biting an orange carrot. TRANSPARENT BACKGROUND: output a PNG with a fully transparent background — no background colour, no white, no floor, no ground, no shadow under the objects. Wide empty gaps between the items; every item complete, centred in its own cell and not touching any other item or the edge. Style: the same as the attached picture — cute 2D cartoon illustration for children aged 4–6, soft rounded shapes, clean smooth dark outlines, bright cheerful flat colours with gentle soft shading, friendly and warm. No text, no letters, no numbers, no logos, no watermark.
+```
+
+### 26 · птица летит → `bird_fly` · приложить: дракоша
+
+```
+Draw in EXACTLY the same art style as the attached picture of the purple dragon (use it only as a style reference, do not draw the dragon). One small yellow bird flying, side view, facing right, both wings spread wide in flight, friendly face, no branch, nothing else in the picture. TRANSPARENT BACKGROUND: output a PNG with a fully transparent background — no background colour, no white, no floor, no ground, no shadow under the objects. The bird does not touch the edges. Style: the same as the attached picture — cute 2D cartoon illustration for children aged 4–6, soft rounded shapes, clean smooth dark outlines, bright cheerful flat colours with gentle soft shading, friendly and warm. No text, no letters, no numbers, no logos, no watermark.
+```
+
+## Доборные 2 (27.11.2026)
+
+### 27 · комната заново: место под кроватью и под столом → `room2` · приложить: комната + дракоша
+
+```
+Two pictures are attached: a child's bedroom (use it as the LAYOUT and STYLE reference) and the purple dragon (STYLE reference only, do not draw it). Redraw the attached bedroom in exactly the same art style, colours and layout — the bed on the left, the window with yellow curtains, the cream wardrobe in the middle, the shelf on the right wall, the desk on the right, the round purple-and-yellow rug — with these changes: the bed stands on tall legs, so there is a big clearly visible empty space on the floor UNDER the bed; the desk also has a big clearly visible empty space UNDER it, and the yellow chair stands next to the desk on its left side, NOT under it; the floor in front of the wardrobe is empty. The room is tidy and has NO toys, NO clothes and NO school things anywhere — the floor, bed, desk and shelf are empty. This is a full-screen background picture: wide landscape 16:9, filling the whole frame. Nobody in it: no people, no animals, no dragon (characters will be added separately). Style: the same as the attached picture — cute 2D cartoon illustration for children aged 4–6, soft rounded shapes, clean smooth dark outlines, bright cheerful flat colours with gentle soft shading, friendly and warm. No text, no letters, no numbers, no logos, no watermark.
+```
+
+### 28 · мишка сидит в открытой коробке → `teddy_box` · приложить: мишка + дракоша
+
+```
+Two pictures are attached: a brown teddy bear with a red bow tie (draw EXACTLY this teddy) and the purple dragon (STYLE reference only, do not draw it). One open wooden toy box seen from the front, slightly from above, the lid open behind; the teddy bear sits INSIDE the box — its head, shoulders and paws stick out over the front edge, the lower half of its body is hidden inside the box. Nothing else in the picture. TRANSPARENT BACKGROUND: output a PNG with a fully transparent background — no background colour, no white, no floor, no ground, no shadow under the objects. The picture does not touch the edges. Style: the same as the attached picture — cute 2D cartoon illustration for children aged 4–6, soft rounded shapes, clean smooth dark outlines, bright cheerful flat colours with gentle soft shading, friendly and warm. No text, no letters, no numbers, no logos, no watermark.
+```
