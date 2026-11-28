@@ -80,7 +80,7 @@
 ## Чат «Halloween (курс Holidays)» — теперь и New Year
 
 
-🔴 **38.** Сгенерировать промпты 15 (шапки «как надеты») и 16 (шарфы «как надеты»), приложить дракошу и `builds/newyear/4-6/obrazec_snegovik.png`.
+🔴 **40.** Снеговик с новыми шапками и шарфами (`builds/newyear/4-6/snegovik_prevyu.png`) — ок?
 🔴 **39.** Экран «How are you?» со снеговиками — ок?
 
 Концепция New Year — `builds/newyear/koncepciya.md`, решения — `builds/newyear/resheniya.md`.
