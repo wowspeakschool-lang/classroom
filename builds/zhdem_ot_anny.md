@@ -80,7 +80,8 @@
 ## Чат «Halloween (курс Holidays)» — теперь и New Year
 
 
-🔴 **37.** Сгенерировать промпт 14 — три снеговика с настроением для «How are you?» (текст — в чате и в `builds/newyear/4-6/prompty.md`).
+🔴 **38.** Сгенерировать промпты 15 (шапки «как надеты») и 16 (шарфы «как надеты»), приложить дракошу и `builds/newyear/4-6/obrazec_snegovik.png`.
+🔴 **39.** Экран «How are you?» со снеговиками — ок?
 
 Концепция New Year — `builds/newyear/koncepciya.md`, решения — `builds/newyear/resheniya.md`.
 
